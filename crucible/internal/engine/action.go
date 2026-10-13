@@ -1135,6 +1135,8 @@ func enchantSpecFromLines(lines []string) (valid.Spec, bool) {
 // action pass moves a permanent a control effect re-homed there; a
 // refresh for an entering permanent (refreshLayers) has nothing to move.
 func applyContinuousLayers(g *Game, afterControl func()) {
+	g.layering++
+	defer func() { g.layering-- }()
 	g.layerAffected = nil
 	for i := 1; i < len(g.cards); i++ {
 		g.cards[i].abilityRemoval = removalNone

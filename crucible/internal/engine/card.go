@@ -58,8 +58,11 @@ type Card struct {
 	// ReplaceGraveyard$ Exile: leaving the stack for a graveyard it is exiled
 	// instead. Cleared when it leaves the stack.
 	graveyardToExile bool
-	// castFrom is the zone the card was last cast from (castrecord.go).
+	// castFrom is the zone the card was last cast from (castrecord.go), and
+	// castBy who cast it (getCastSA().getActivatingPlayer(), read by
+	// Count$wasCastFrom...ByYou); both meaningful only while wasCast holds.
 	castFrom ZoneType
+	castBy   PlayerID
 	// wasCast is Card.wasCast (castFrom != null): the card was cast and has not
 	// changed zones since, except from the stack onto the battlefield. A cast
 	// that failed clears it; Game.Move clears it on every other zone change
@@ -76,6 +79,10 @@ type Card struct {
 	// by Count$TotalDamageDoneByThisTurn); cleared with every card's turn counters.
 	damageDealtThisTurn int
 	castManaSpent       int
+	// castPaid is the colored mana that cast spent, white to green
+	// (SpellAbility.getPayingMana by color), read by Count$Converge and
+	// Count$Adamant; meaningful while wasCast holds.
+	castPaid [5]int
 	// foretold marks a card exiled by the Foretell special action, and
 	// foretoldTurn the turn it happened (foretell.go).
 	foretold     bool

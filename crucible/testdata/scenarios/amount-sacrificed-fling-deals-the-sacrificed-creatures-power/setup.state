@@ -1,0 +1,4 @@
+humanlife=20
+ailife=20
+humanhand=Fling|Id:1
+humanbattlefield=Mountain|Id:2;Mountain|Id:3;Hill Giant|Id:4

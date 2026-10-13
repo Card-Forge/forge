@@ -444,6 +444,7 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	// (Card.kicker) from the stack onto the battlefield, and a cast that fails
 	// forgets it.
 	g.Card(card).castFrom = g.Card(card).Zone
+	g.Card(card).castBy = pid
 	g.Card(card).wasCast = true
 	// The OptionalCost statics come first in Java's list, the keyword costs
 	// after (GameActionUtil.java:442-523); Teamwork is one of those, Kicker is
@@ -628,7 +629,7 @@ func xIsPaid(c *Card) bool {
 func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, opts castOpts) (xAnnounced, bool) {
 	// The X is announced here, so from the return on Count$xPaid reads it.
 	defer func() { g.castPending = NoCard }()
-	c.castManaSpent = 0
+	c.castManaSpent, c.castPaid = 0, [5]int{}
 	if opts.paysNoMana() {
 		return xAnnounced{}, true
 	}
@@ -647,6 +648,9 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 		// SpellAbility.getTotalManaSpent: one per mana paid. Phyrexian shards
 		// paid with life are counted too, a small overcount no card reads.
 		c.castManaSpent = len(total.Shards()) + total.Generic() + x.value*total.CountX()
+		// The mana another player paid (assist) is not in x.paid: Converge
+		// and Adamant read only the caster's.
+		c.castPaid = x.paid
 	}
 	return x, paid
 }
@@ -870,8 +874,11 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 		x = xAnnounced{value: g.preX, announced: true}
 	}
 	if hasExtra {
-		g.payUnlessParts(controller, &a, pid, extra)
+		// The spell's additional cost is its own paid list: Sacrificed$ and
+		// Discarded$ read it as the spell resolves (SpellAbility.getPaidList).
+		g.payUnlessPartsInto(controller, &a, pid, extra, &a.paid)
 	}
+	a.paid.recorded = true
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
 		return false
 	}

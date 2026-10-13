@@ -1,0 +1,9 @@
+# Count$Metalcraft.<then>.<else> (AbilityUtils.java:2259-2261): Galvanic
+# Blast's `X:Count$Metalcraft.4.2`. The caster controls three artifacts (the
+# Ornithopters), so Player.hasMetalcraft holds and the blast deals 4, not 2.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets ai
+castspell human 1
+resolvestack

@@ -1,0 +1,9 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanhand=Grizzly Bears
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped
+humangraveyard=Gaze of Adamaro
+ailife=17
+aihand=Grizzly Bears;Grizzly Bears;Hill Giant

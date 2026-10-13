@@ -173,6 +173,27 @@ func TestParseCount(t *testing.T) {
 	}
 }
 
+// TestParseCountCompare proves Count$Compare is split the way xCount splits it
+// (AbilityUtils.java:1608-1614): on `.` first, then the first part on spaces,
+// the operator kept with its right-hand side; a body missing a part is nil.
+func TestParseCountCompare(t *testing.T) {
+	t.Parallel()
+
+	got := expr.ParseCount("Compare Opp GEMePlus.3.2").Compare
+	want := expr.Comparison{LHS: "Opp", Comparator: "GEMePlus", RHS: "MePlus", Then: "3", Else: "2"}
+	if got == nil || *got != want {
+		t.Errorf("Compare = %+v, want %+v", got, want)
+	}
+	for _, body := range []string{"Compare Y GE1", "Compare Y.1.2", "Compare Y G.1.2"} {
+		if c := expr.ParseCount(body).Compare; c != nil {
+			t.Errorf("%q: Compare = %+v, want nil", body, c)
+		}
+	}
+	if c := expr.ParseCount("Valid Creature").Compare; c != nil {
+		t.Errorf("a Valid head carries Compare %+v", c)
+	}
+}
+
 // TestParseCountDistinctProperty proves a Valid family argument carrying a
 // `$`-suffixed distinct-value operator (Tarmogoyf's own
 // `ValidGraveyard Card$CardTypes`) splits Valid and DistinctProperty apart

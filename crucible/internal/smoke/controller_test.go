@@ -41,6 +41,12 @@ func TestControllerAnswersEveryDecisionLegally(t *testing.T) {
 	if got := c.ChooseAttackTarget(g, p, a, []engine.EntityID{engine.PlayerEntity(o)}); got != engine.PlayerEntity(o) {
 		t.Errorf("attack target = %v", got)
 	}
+	if got := c.DivideAmongTargets(g, p, a, []engine.EntityID{engine.CardEntity(b), engine.PlayerEntity(o)}, 5); len(got) != 2 || got[0] != 4 || got[1] != 1 {
+		t.Errorf("division = %v, want [4 1]: one each, the rest to the first", got)
+	}
+	if got := c.DivideAmongTargets(g, p, a, nil, 3); len(got) != 0 {
+		t.Errorf("division over no targets = %v, want none", got)
+	}
 	if got := c.AssignCombatDamage(g, p, a, hand); len(got) != 2 || got[0].Amount != 1 {
 		t.Errorf("damage assignment = %v", got)
 	}

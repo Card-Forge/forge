@@ -188,34 +188,75 @@ func TestSelfSacrificeCostIsRecordedForSacrificedAmount(t *testing.T) {
 	}
 }
 
-// A paid list nothing recorded (a spell's additional cost) is unresolved, not
-// an empty list that reads as 0: the ability fails rather than doing nothing.
-func TestPaidListNobodyRecordedIsUnresolved(t *testing.T) {
+// flingerDef is an instant dealing X damage to a target player, X its own
+// Sacrificed$ amount, with cost as its A:SP$ Cost$ (empty for none).
+func flingerDef(t *testing.T, cost, x string) *compile.Card {
+	t.Helper()
+	raw := &carddb.Card{Filename: "test-flinger"}
+	raw.Faces[0].Present = true
+	raw.Faces[0].Name = "Test Flinger"
+	raw.Faces[0].Type = cardtype.Parse(attachmentTypeRegistry(t), "Instant")
+	line := "SP$ DealDamage | ValidTgts$ Player | NumDmg$ X"
+	if cost != "" {
+		raw.Faces[0].ManaCost = mana.MustParse("R")
+		line = "SP$ DealDamage | Cost$ " + cost + " | ValidTgts$ Player | NumDmg$ X"
+	}
+	raw.Faces[0].Abilities = []string{line}
+	raw.Faces[0].SVars.Set("X", x)
+	def, err := compile.Compile(raw)
+	if err != nil {
+		t.Fatalf("compile: %v", err)
+	}
+	return def
+}
+
+// A spell whose cost sacrificed nothing has Java's null paid list
+// (SpellAbility.getPaidList): the amount reads 0 and the operator is not
+// applied (AbilityUtils.java:715-729).
+func TestSpellPaidListWithNothingSacrificedReadsZero(t *testing.T) {
 	t.Parallel()
 
 	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(other).Life = 20
-	raw := &carddb.Card{Filename: "unrecorded-flinger"}
-	raw.Faces[0].Present = true
-	raw.Faces[0].Name = "Unrecorded Flinger"
-	raw.Faces[0].Type = cardtype.Parse(attachmentTypeRegistry(t), "Instant")
-	raw.Faces[0].Abilities = []string{"SP$ DealDamage | ValidTgts$ Player | NumDmg$ X"}
-	raw.Faces[0].SVars.Set("X", "Sacrificed$CardPower")
-	def, err := compile.Compile(raw)
-	if err != nil {
-		t.Fatalf("compile: %v", err)
-	}
-	spell := g.NewCard(def, p, engine.Hand)
+	spell := g.NewCard(flingerDef(t, "", "Sacrificed$Amount/Plus.3"), p, engine.Hand)
 	c := engine.NewScriptedController()
 	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
 	if !g.CastSpell(p, spell, c) {
 		t.Fatal("cast failed")
 	}
-	if err := g.ResolveStack(engine.NewRegistry(), c); err == nil {
-		t.Error("resolved a Sacrificed$ amount no cost recorded")
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
 	}
 	if got := g.Player(other).Life; got != 20 {
-		t.Errorf("opponent life = %d, want 20", got)
+		t.Errorf("opponent life = %d, want 20: nothing was sacrificed", got)
+	}
+}
+
+// Fling's shape: the creature a spell's additional cost sacrificed is that
+// spell's Sacrificed$ list, its power read from last-known information.
+func TestSpellAdditionalCostSacrificeIsItsPaidList(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
+	g.SetTurnState(1, p, engine.Main1)
+	g.Player(other).Life = 20
+	bears := g.NewCard(corpusCard(t, "Grizzly Bears"), p, engine.Battlefield)
+	spell := g.NewCard(flingerDef(t, "R Sac<1/Creature>", "Sacrificed$CardPower/Plus.1"), p, engine.Hand)
+	g.Player(p).ManaPool.Add(mana.Red, 1)
+	c := engine.NewScriptedController()
+	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
+	c.QueueSacrificeChoice([]engine.CardID{bears})
+	if !g.CastSpell(p, spell, c) {
+		t.Fatal("cast failed")
+	}
+	if z := g.Card(bears).Zone; z != engine.Graveyard {
+		t.Fatalf("Bears in %v, want Graveyard: the cost sacrifices it", z)
+	}
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if got := g.Player(other).Life; got != 17 {
+		t.Errorf("opponent life = %d, want 17: the Bears' power 2, plus 1", got)
 	}
 }

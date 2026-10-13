@@ -399,7 +399,7 @@ func (c *faceCompiler) expandKeywords(out *Face) error {
 //
 // Limited to the four Layer 7 keys (SetPower$, SetToughness$, AddPower$,
 // AddToughness$) a Mode$ Continuous line's own amount resolution reads;
-// every other key keeps reading an SVar name only.
+// addInlineChecks covers every other param of every trait.
 func addInlineAmounts(amounts map[string]expr.Amount, statics []*Ability) map[string]expr.Amount {
 	for _, s := range statics {
 		for _, key := range [...]string{"SetPower", "SetToughness", "AddPower", "AddToughness"} {
@@ -420,14 +420,16 @@ func addInlineAmounts(amounts map[string]expr.Amount, statics []*Ability) map[st
 	return amounts
 }
 
-// addInlineChecks does for CheckSVar$, ConditionCheckSVar$ and CheckSecondSVar$
-// what addInlineAmounts does for the Layer 7 keys: a value written inline as an
-// expression (`CheckSVar$ Count$Presence_Dragon.1.0`, `CastSA>Count$...`) rather
-// than as an SVar name. Java's calculateAmount reads such a value as a raw
-// expression because `amount.indexOf('$') > 0`; the engine looks the param value
-// up in amounts by its folded text, so without an entry the condition read as
-// unmet and the trait silently never fired (PORT-2). It walks every trait and
-// every sub-ability they reach, once each.
+// addInlineChecks does for every param of every trait what addInlineAmounts
+// does for the Layer 7 keys: a value written inline as an expression
+// (`CheckSVar$ Count$Presence_Dragon.1.0`, `CharmNum$ Count$Compare Y GE1.2.1`,
+// `NumCards$ Count$Valid Artifact.YouCtrl`, `CastSA>Count$...`) rather than as
+// an SVar name. Java's calculateAmount reads such a value as a raw expression
+// because `amount.indexOf('$') > 0`, whichever param holds it; the engine looks
+// the param value up in amounts by its folded text, so without an entry a
+// condition read as unmet and an amount as unresolvable (PORT-2). It walks every
+// trait and every sub-ability they reach, once each. Description text is
+// skipped: it is never an amount, and a `$` in prose would only bloat the map.
 func addInlineChecks(amounts map[string]expr.Amount, roots ...[]*Ability) map[string]expr.Amount {
 	seen := map[*Ability]bool{}
 	var walk func(a *Ability)
@@ -436,9 +438,9 @@ func addInlineChecks(amounts map[string]expr.Amount, roots ...[]*Ability) map[st
 			return
 		}
 		seen[a] = true
-		for _, key := range [...]string{"CheckSVar", "ConditionCheckSVar", "CheckSecondSVar"} {
-			v, ok := a.Param(key)
-			if !ok || strings.Index(v, "$") <= 0 {
+		for _, p := range a.Params {
+			v := p.Value
+			if strings.HasSuffix(p.Key, "Description") || strings.Index(v, "$") <= 0 {
 				continue
 			}
 			amt := expr.Parse(v)

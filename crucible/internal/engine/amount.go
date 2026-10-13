@@ -3,13 +3,14 @@
 // AbilityUtils.calculateAmount/xCount this port can evaluate against state it
 // already models. What resolves: plain and SVar-referenced numbers, doXMath's
 // arithmetic suffixes, the Number$/SVar$ heads, the Count$Valid family
-// (CardLists.getValidCardCount, reusing Matches from valid.go) with the
-// handlePaid distinct-value subset in amountpaid.go, and the host-, player- and
-// zone-measuring Count$ heads in amountheads.go.
+// (CardLists.getValidCardCount, reusing Matches from valid.go) with handlePaid
+// in amountpaid.go, the host-, player- and zone-measuring Count$ heads in
+// amountheads.go, the branch heads (Count$Compare, Hellbent, Morbid, ...) in
+// amountbranches.go, and the card and player list heads in amountplayers.go.
 //
 // Ported from forge-game/src/main/java/forge/game/ability/AbilityUtils.java's
-// calculateAmount (:367), xCount (:1566), doXMath (:3206), playerXCount
-// (:3288) and handlePaid (:3675).
+// calculateAmount (:370), xCount (:1569), doXMath (:3273), playerXCount
+// (:3355) and handlePaid (:3742).
 
 package engine
 
@@ -79,6 +80,17 @@ func resolveAmountDepth(g *Game, amounts map[string]expr.Amount, sourceControlle
 		var ok bool
 		switch amt.Context {
 		case "":
+			// The list and player heads apply their operator where Java does,
+			// inside handlePaid/playerXCount (opAwareValue), not after.
+			if n, ok, handled := opAwareValue(g, amounts, sourceController, source, amt, depth); handled {
+				if !ok {
+					return 0, false
+				}
+				if amt.Negative {
+					n = -n
+				}
+				return n, true
+			}
 			n, ok = expressionValue(g, amounts, sourceController, source, amt, depth)
 		case "CastSA>":
 			var cast bool
@@ -127,14 +139,16 @@ func namedAmount(g *Game, amounts map[string]expr.Amount, sourceController Playe
 	return resolveAmountDepth(g, amounts, sourceController, source, next, depth+1)
 }
 
-// expressionValue is calculateAmount's own head dispatch, before any
-// operator: `Count$` (xCount, countValue in amountheads.go), `Number$N` (a
+// expressionValue is calculateAmount's own head dispatch for the heads whose
+// operator applies after the measurement: `Count$` (xCount: the branch heads
+// in amountbranches.go, then countValue in amountheads.go), `Number$N` (a
 // plain number, the one head carrying no measurement at all), `SVar$Name`
 // (the named SVar, resolved -- calculateAmount's own
-// `calculateAmount(card, l[0], ability)`) and `PlayerCount<Players>$`
-// (playerCountValue, amountheads.go). Head is matched as written: Java tests
-// calcX[0].startsWith for each, and no corpus head extends one of these four
-// names into another.
+// `calculateAmount(card, l[0], ability)`) and `TriggerCount$`. The card and
+// player list heads (PlayerCount, Remembered, Targeted, ...) apply their
+// operator inside the measurement and are opAwareValue's (amountplayers.go).
+// Head is matched as written: Java tests calcX[0].startsWith for each, and no
+// corpus head extends one of these names into another.
 func expressionValue(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, amt expr.Amount, depth int) (int, bool) {
 	switch {
 	case amt.Count != nil && amt.Count.Head == "Kicked" && len(amt.Count.Parameters) == 2 && source != NoCard:
@@ -150,35 +164,16 @@ func expressionValue(g *Game, amounts map[string]expr.Amount, sourceController P
 		}
 		return namedAmount(g, amounts, sourceController, source, branch, depth)
 	case amt.Count != nil:
+		if n, ok, handled := branchCountValue(g, amounts, sourceController, source, *amt.Count, depth); handled {
+			return n, ok
+		}
 		return countValue(g, sourceController, source, *amt.Count)
 	case amt.Head == "Number":
 		return amt.Value, amt.Numeric
 	case amt.Head == "SVar":
 		return namedAmount(g, amounts, sourceController, source, amt.Body, depth)
-	case amt.Head == "ExiledWith":
-		return exiledWithValue(g, source, amt.Body)
-	case amt.Head == "DungeonsCompleted":
-		return dungeonsCompletedValue(g, sourceController, source, amt.Body)
-	case amt.Head == "Imprinted":
-		return imprintedValue(g, sourceController, source, amt.Body)
-	case amt.Head == "Remembered":
-		return rememberedValue(g, source, amt.Body)
-	case contextHeads[amt.Head]:
-		return g.contextValue(source, amt.Head, amt.Body)
 	case amt.Head == "TriggerCount":
 		return g.triggerCount(source, amt.Body)
-	case strings.HasPrefix(amt.Head, "PlayerCount"):
-		// playerXCount's own Highest/Lowest branch hands the whole
-		// "HighestX/Op" string down to playerXProperty, which applies the
-		// operator per player, then applies it again to the result -- a
-		// double application no corpus line exercises. Refused rather than
-		// guessed at either way (GO-7). Amount and HasProperty take the
-		// operator once, as every other head does (Aurelia's Fury's
-		// Amount/Plus.MaxPermanents).
-		if amt.Op != nil && (strings.HasPrefix(amt.Body, "Highest") || strings.HasPrefix(amt.Body, "Lowest")) {
-			return 0, false
-		}
-		return playerCountValue(g, sourceController, source, strings.TrimPrefix(amt.Head, "PlayerCount"), amt.Body)
 	}
 	return 0, false
 }
@@ -206,6 +201,11 @@ func applyOperator(g *Game, amounts map[string]expr.Amount, sourceController Pla
 			return op.Value, true
 		case op.Operand == "" || strings.Contains(op.Operand, "."):
 			return 0, true
+		case op.Expr != nil:
+			if depth >= maxAmountDepth {
+				return 0, false
+			}
+			return resolveAmountDepth(g, amounts, sourceController, source, *op.Expr, depth+1)
 		}
 		return namedAmount(g, amounts, sourceController, source, op.Operand, depth)
 	}

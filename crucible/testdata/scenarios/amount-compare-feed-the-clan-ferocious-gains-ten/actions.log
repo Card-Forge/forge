@@ -1,0 +1,11 @@
+# Count$Compare (AbilityUtils.java:1608-1614): Feed the Clan's
+# `X:Count$Compare Y GE1.10.5` over `Y:Count$Valid Creature.powerGE4+YouCtrl`.
+# The caster controls a 6/4 Craw Wurm, so Y is 1, the comparison holds and the
+# then branch, 10, is the life gained (Ferocious).
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+queue paygeneric G
+castspell human 1
+resolvestack

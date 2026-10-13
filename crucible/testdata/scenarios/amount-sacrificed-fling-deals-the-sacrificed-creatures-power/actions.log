@@ -1,0 +1,13 @@
+# A spell's additional cost is its own paid list (SpellAbility.getPaidList,
+# AbilityUtils.java:713): Fling's Cost$ sacrifices the Hill Giant as it is
+# cast, and `X:Sacrificed$CardPower` reads that creature's power from its
+# last-known information when Fling resolves -- 3 damage to the opponent.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+queue paygeneric R
+queue targets ai
+queue sacrificechoice 4
+castspell human 1
+resolvestack

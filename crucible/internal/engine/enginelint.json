@@ -50,7 +50,14 @@
     "dependency": ["dependency.go"],
     "saspec": ["saspec.go"],
     "triggerscan": ["triggerscan.go"],
-    "amount": ["amount.go", "amountheads.go", "amountpaid.go", "amountcontext.go"],
+    "amount": [
+      "amount.go",
+      "amountheads.go",
+      "amountpaid.go",
+      "amountcontext.go",
+      "amountbranches.go",
+      "amountplayers.go"
+    ],
     "replacement": [
       "replacement.go",
       "replacementchoice.go",
@@ -398,7 +405,21 @@
       "control",
       "statictrigger"
     ],
-    "amount": ["id", "zone", "card", "game", "valid", "parts", "player", "ability"],
+    "amount": [
+      "id",
+      "zone",
+      "card",
+      "game",
+      "valid",
+      "parts",
+      "player",
+      "ability",
+      "phase",
+      "playerstate",
+      "daytimeeffect",
+      "defined",
+      "effecthelpers"
+    ],
     "replacement": [
       "id",
       "zone",

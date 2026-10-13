@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=30
+humanbattlefield=Forest|Tapped;Forest|Tapped;Craw Wurm
+humangraveyard=Feed the Clan
+ailife=20

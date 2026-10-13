@@ -370,7 +370,8 @@ func TestAmountOperatorsMatchDoXMath(t *testing.T) {
 }
 
 // Shapes that must stay unresolved rather than produce a number: Mod by zero
-// (Java throws), a head no evaluator exists for, a context prefix, a Mode$
+// (Java throws), a head no evaluator exists for, a player property the
+// engine keeps no state for, a context prefix, a Mode$
 // Devotion line carrying a condition this does not evaluate, and an
 // unrecognized distinct property.
 func TestAmountUnresolvableShapesStaySkipped(t *testing.T) {
@@ -383,8 +384,8 @@ func TestAmountUnresolvableShapesStaySkipped(t *testing.T) {
 	}{
 		{name: "Mod by zero", body: "Number$7/Mod.0"},
 		{name: "context prefix", body: "CastSA>Count$YourLifeTotal"},
-		{name: "Remembered LKI", body: "Remembered$CardManaCostLKI"},
-		{name: "remembered players, other property", body: "PlayerCountRemembered$CardsInHand"},
+		{name: "player property with no state", body: "PlayerCountPlayers$StartingLibrarySize"},
+		{name: "commander casts", body: "Count$TotalCommanderCastFromCommandZone"},
 		{name: "Greatest CardPower", body: "Count$Valid Creature$GreatestCardPower"},
 		{name: "colorless devotion", body: "Count$Devotion.Colorless"},
 		{

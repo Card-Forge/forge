@@ -165,7 +165,12 @@ func (r *Registry) payTriggeredCost(g *Game, a *Ability, controller PlayerContro
 	if !a.Optional && !uc.mandatory && !controller.ConfirmOptionalTrigger(g, a.Controller, a.Source) {
 		return false, nil
 	}
-	return g.payUnlessCost(controller, a, a.Controller, uc), nil
+	// The cost is the ability's own: what it sacrificed or discarded is the
+	// paid list its Sacrificed$/Discarded$ amounts read (Disciple of
+	// Freyalise's "X is that creature's power").
+	paid = g.payUnlessCostInto(controller, a, a.Controller, uc, &a.paid)
+	a.paid.recorded = paid
+	return paid, nil
 }
 
 // resolveUnlessCost is CR's own "unless a cost is paid" gate --

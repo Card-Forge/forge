@@ -94,6 +94,12 @@ type Op struct {
 	// an integer is an SVar name the evaluator looks up instead.
 	Value   int
 	Numeric bool
+	// Expr is Operand read as an amount expression when it is one
+	// (`Minus.Remembered$Amount`, Aclazotz): doXMath's calculateAmount
+	// fallback evaluates a raw `Head$Body` operand. Nil for a number, an SVar
+	// name, and an operand holding a `.`, which Java's `s.length == 2` test
+	// never parses at all (its operand reads 0).
+	Expr *Amount
 }
 
 // Parse reads an amount.
@@ -172,6 +178,9 @@ func cutOperator(body string) (string, *Op) {
 	op := &Op{Name: name, Operand: operand}
 	if n, err := strconv.Atoi(operand); err == nil {
 		op.Value, op.Numeric = n, true
+	} else if strings.Index(operand, "$") > 0 && !strings.Contains(operand, ".") {
+		inner := Parse(operand)
+		op.Expr = &inner
 	}
 	return head, op
 }

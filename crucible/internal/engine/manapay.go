@@ -36,6 +36,10 @@ func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerCo
 type xAnnounced struct {
 	value     int
 	announced bool
+	// paid is the colored mana the payment spent, white to green
+	// (SpellAbility.getPayingMana by color): what Count$Converge and
+	// Count$Adamant read off a cast.
+	paid [5]int
 }
 
 // payManaCostX is PayManaCost that also reports the X it announced, for the
@@ -149,6 +153,15 @@ func (g *Game) payManaCostX(decider PlayerID, cost mana.Cost, controller PlayerC
 	}
 	if !g.Player(decider).ManaPool.payWithSnow(mana.FromShards(resolved, 0), snow, g.snowAnyColor) {
 		return xAnnounced{}, false
+	}
+	// Every shard is pure by now (a hybrid's choice, a generic's chosen mana),
+	// so its color is the color of the mana that paid it.
+	for _, s := range append(resolved, snow...) {
+		for i, col := range [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green} {
+			if s.Colors().HasAny(col) {
+				x.paid[i]++
+			}
+		}
 	}
 	if life > 0 {
 		g.Player(decider).Life -= life

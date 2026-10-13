@@ -632,11 +632,13 @@ Forge writes the printed mana cost into it beside the extra parts, so it is the 
 the extra part. They now read `Cost$` through `spellAdditionalCost`, which uses `parseUnlessCost` (the part vocabulary
 an unless cost pays: PayLife, PayEnergy, Discard, Sac, Return, DamageYou, Draw, Reveal), refuses the cast when a part is
 unpayable (`unlessPayable`) or the shape is not read, lets the card's mana be paid as usual, and then pays the non-mana
-parts (`payUnlessParts`; the controller chooses what to sacrifice or discard). A card in hand is never its own discard
-(`handWithout`). A `Cost$` whose mana differs from the card's printed cost (an alternative or cleave cost, 61 lines) is
-refused rather than guessed, and `Play`'s `playCastGap` no longer rejects the shapes that now resolve. Not read:
-`K:AlternateAdditionalCost`, `S:Mode$ OptionalCost`, Aura spells' `Cost$`, `X`, and `ExileFromGrave`/`tapXType` parts.
-Tests: `TestSpellAdditionalCostIsPaid`, `TestPermanentSpellAdditionalCostIsPaid`.
+parts (`payUnlessParts`; the controller chooses what to sacrifice or discard; an instant or sorcery pays through
+`payUnlessPartsInto`, which records what it sacrificed and discarded as the spell's paid list for `Sacrificed$`, see
+[`m6-r9-amounts.md`](m6-r9-amounts.md)). A card in hand is never its own discard (`handWithout`). A `Cost$` whose mana
+differs from the card's printed cost (an alternative or cleave cost, 61 lines) is refused rather than guessed, and
+`Play`'s `playCastGap` no longer rejects the shapes that now resolve. Not read: `K:AlternateAdditionalCost`,
+`S:Mode$ OptionalCost`, Aura spells' `Cost$`, `X`, and `ExileFromGrave`/`tapXType` parts. Tests:
+`TestSpellAdditionalCostIsPaid`, `TestPermanentSpellAdditionalCostIsPaid`.
 
 ## Beam me up
 

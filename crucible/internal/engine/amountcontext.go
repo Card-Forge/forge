@@ -24,11 +24,90 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
-// contextHeads are the amount heads that name a list of cards.
+// contextHeads are the ability-context amount heads that name a list of cards
+// (AbilityUtils.java:672-719), read only while that ability resolves.
 var contextHeads = map[string]bool{
 	"Targeted": true, "ParentTargeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
-	"Remembered": true, "Imprinted": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
+	"TriggeredSource": true, "TriggerRemembered": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
 	"Collected": true, "Revealed": true,
+}
+
+// listHeadCards is the card list an amount head names, in calculateAmount's
+// own order (AbilityUtils.java:503-719): the host's lists first --
+// ExiledWith, DungeonsCompleted, ChosenCard, Remembered/RememberedLKI,
+// Imprinted/ImprintedLKI, Enchanted/Equipped -- then the resolving ability's
+// (contextHeads). handled is false for a head that names no list; ok is false
+// for a list this port does not keep (Convoked, Emerged, Crewed) or cannot
+// read here.
+//
+// A Remembered or Imprinted card is read as it is now (game.getCardState);
+// the LKI spellings read the remembered object itself, which for a card that
+// has since left the battlefield is its last-known information.
+func (g *Game) listHeadCards(sourceController PlayerID, source CardID, head string) (cards []*Card, ok, handled bool) {
+	switch {
+	case strings.HasPrefix(head, "ExiledWith"):
+		if source == NoCard {
+			return nil, false, true
+		}
+		return g.cardsOf(g.exiledWithCards(source), false), true, true
+	case head == "DungeonsCompleted":
+		if sourceController == NoPlayer {
+			return nil, false, true
+		}
+		return g.cardsOf(g.Player(sourceController).completedDungeons, false), true, true
+	case strings.HasPrefix(head, "Convoked"), strings.HasPrefix(head, "Emerged"), strings.HasPrefix(head, "Crewed"):
+		return nil, false, true
+	case strings.HasPrefix(head, "ChosenCard"):
+		if source == NoCard {
+			return nil, false, true
+		}
+		return g.cardsOf(g.Card(source).Memory.Chosen(), false), true, true
+	case strings.HasPrefix(head, "Remembered"):
+		if source == NoCard {
+			return nil, false, true
+		}
+		var ids []CardID
+		for _, e := range g.Card(source).Memory.Remembered() {
+			if id, isCard := e.AsCard(); isCard {
+				ids = append(ids, id)
+			}
+		}
+		return g.cardsOf(ids, strings.HasSuffix(head, "LKI")), true, true
+	case strings.HasPrefix(head, "Imprinted"):
+		if source == NoCard {
+			return nil, false, true
+		}
+		return g.cardsOf(g.Card(source).Memory.Imprinted(), strings.HasSuffix(head, "LKI")), true, true
+	case head == "Enchanted", head == "Equipped":
+		// Java tests isEnchanting (isAttachedToEntity) for both spellings.
+		if source == NoCard {
+			return nil, false, true
+		}
+		if id, attached := g.Card(source).AttachedTo(); attached {
+			return []*Card{g.Card(id)}, true, true
+		}
+		return nil, true, true
+	case contextHeads[head]:
+		cards, ok := g.contextCards(source, head)
+		return cards, ok, true
+	}
+	return nil, false, false
+}
+
+// cardsOf is ids as cards; lki reads a card that has left the battlefield from
+// its last-known information when the engine kept one.
+func (g *Game) cardsOf(ids []CardID, lki bool) []*Card {
+	cards := make([]*Card, 0, len(ids))
+	for _, id := range ids {
+		c := g.Card(id)
+		if lki && c.Zone != Battlefield {
+			if snap := g.LKI(id); snap != nil {
+				c = snap
+			}
+		}
+		cards = append(cards, c)
+	}
+	return cards
 }
 
 // contextCards is the cards head names for the ability resolving now. A card
@@ -37,20 +116,6 @@ var contextHeads = map[string]bool{
 func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 	var ids []CardID
 	switch head {
-	case "Remembered":
-		if source == NoCard {
-			return nil, false
-		}
-		for _, e := range g.Card(source).Memory.Remembered() {
-			if id, ok := e.AsCard(); ok {
-				ids = append(ids, id)
-			}
-		}
-	case "Imprinted":
-		if source == NoCard {
-			return nil, false
-		}
-		ids = g.Card(source).Memory.Imprinted()
 	case "Collected", "Revealed":
 		// The cast spell's paid lists (CostCollectEvidence, CostReveal), read
 		// while source is that spell (spellOptional).
@@ -64,17 +129,8 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 			return nil, false
 		}
 	}
-	cards := make([]*Card, 0, len(ids))
-	for _, id := range ids {
-		c := g.Card(id)
-		if c.Zone != Battlefield {
-			if snap := g.LKI(id); snap != nil && (head == "Sacrificed" || head == "Exiled" || head == "TriggeredCard") {
-				c = snap
-			}
-		}
-		cards = append(cards, c)
-	}
-	return cards, true
+	lki := head == "Sacrificed" || head == "Exiled" || head == "TriggeredCard" || head == "TriggerRemembered"
+	return g.cardsOf(ids, lki), true
 }
 
 // abilityListIDs is the cards of the list head names that the resolving
@@ -115,6 +171,22 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 		ids = nonNone(a.triggered.attacker)
 	case "TriggeredBlocker":
 		ids = nonNone(a.triggered.blocker)
+	case "TriggeredSource":
+		// AbilityKey.Source as a card; a player source is no card, and an
+		// unrecorded source is not Java's empty list (GO-7).
+		if a.triggered.source == NoEntity {
+			return nil, false
+		}
+		if id, isCard := a.triggered.source.AsCard(); isCard {
+			ids = []CardID{id}
+		}
+	case "TriggerRemembered":
+		// SpellAbility.getTriggerRemembered, its cards only.
+		for _, e := range a.TriggerRemembered {
+			if id, isCard := e.AsCard(); isCard {
+				ids = append(ids, id)
+			}
+		}
 	case "Sacrificed", "Exiled", "Discarded":
 		if !a.paid.recorded {
 			return nil, false
@@ -140,74 +212,22 @@ func nonNone(id CardID) []CardID {
 	return []CardID{id}
 }
 
-// contextValue is handlePaid over the cards head names: how many (`Amount`), how
-// many match a valid string (`Valid <spec>`), or a per-card measure summed
-// (`CardPower`), or its greatest, least or distinct values. false for a
-// measure this port does not read, never a guess (GO-7).
-func (g *Game) contextValue(source CardID, head, body string) (int, bool) {
-	cards, ok := g.contextCards(source, head)
-	if !ok {
-		return 0, false
-	}
-	return g.measureCards(source, cards, body)
-}
-
-// measureCards is handlePaid over cards for an amount evaluated for source.
-func (g *Game) measureCards(source CardID, cards []*Card, body string) (int, bool) {
-	switch {
-	case strings.HasPrefix(body, "Amount"):
-		return len(cards), true
-	case strings.HasPrefix(body, "Valid "):
-		if source == NoCard {
-			return 0, false
-		}
-		host := g.Card(source)
-		spec := valid.Parse(strings.TrimPrefix(body, "Valid "))
-		n := 0
-		for _, c := range cards {
-			if Matches(g, c, spec, host.Controller(), source) {
-				n++
-			}
-		}
-		return n, true
-	}
-	fold, perCard := sumFold, body
-	switch {
-	case strings.HasPrefix(body, "Least"):
-		fold, perCard = minFold, strings.TrimPrefix(body, "Least")
-	case strings.HasPrefix(body, "Greatest"):
-		fold, perCard = maxFold, strings.TrimPrefix(body, "Greatest")
-	case strings.HasPrefix(body, "Different"):
-		fold, perCard = distinctFold, strings.TrimPrefix(body, "Different")
-	}
-	measure, ok := liveCardMeasure(perCard)
-	if !ok {
-		return 0, false
-	}
-	if len(cards) == 0 {
-		return 0, true // handlePaid's own first line
-	}
-	values := make([]int, len(cards))
-	for i, c := range cards {
-		v, ok := measure(c)
-		if !ok {
-			return 0, false
-		}
-		values[i] = v
-	}
-	return fold(values), true
-}
-
-// liveCardMeasure is the per-card xCount of a card read while an ability
-// resolves: power and toughness too (perCardMeasure refuses them, for it runs
-// while Layer 7 is being rebuilt), mana value, a counter count, the number of
-// colors.
+// liveCardMeasure is the per-card xCount of a card read outside a layer pass
+// (handlePaid, amountpaid.go): power and toughness too (perCardMeasure refuses
+// them, for it serves the layer pass, where Layer 7 is being rebuilt), mana
+// value, a counter count, the number of colors.
 func liveCardMeasure(head string) (func(*Card) (int, bool), bool) {
 	switch head {
 	case "CardPower":
 		return func(c *Card) (int, bool) { return c.Power() }, true
 	case "CardToughness":
 		return func(c *Card) (int, bool) { return c.Toughness() }, true
+	case "CardSumPT":
+		return func(c *Card) (int, bool) {
+			p, okP := c.Power()
+			t, okT := c.Toughness()
+			return p + t, okP && okT
+		}, true
 	case "CardNumColors":
 		return func(c *Card) (int, bool) { return c.Colors().Count(), true }, true
 	}
@@ -274,12 +294,9 @@ func (g *Game) castSAValue(source CardID, amt expr.Amount) (n int, ok, cast bool
 		n, ok = optionalBranch(rec, *amt.Count)
 		return n, ok, true
 	}
-	ids := optionalList(rec, amt.Head)
-	cards := make([]*Card, 0, len(ids))
-	for _, id := range ids {
-		cards = append(cards, g.Card(id))
-	}
-	n, ok = g.measureCards(source, cards, amt.Body)
+	// The operator is applied after, by the caller; for the Amount and Valid
+	// measures this reads that is where handlePaid applies it too.
+	n, ok = handlePaid(g, nil, g.Card(source).Controller(), source, g.cardsOf(optionalList(rec, amt.Head), false), amt.Body, nil, 0)
 	return n, ok, true
 }
 

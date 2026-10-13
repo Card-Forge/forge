@@ -1,11 +1,12 @@
-// Count$Valid family amounts: how many cards a valid string matches across
-// one or more zones, or -- when the valid string carries a `$`-suffixed
-// property (Tarmogoyf's own `Count$ValidGraveyard Card$CardTypes`) -- a
-// measurement over the matched cards instead of their count: the handlePaid
-// subset this port can evaluate.
+// Count$Valid family amounts and handlePaid: how many cards a valid string
+// matches across one or more zones, or -- when the valid string carries a
+// `$`-suffixed property (Tarmogoyf's own `Count$ValidGraveyard Card$CardTypes`)
+// -- a measurement over the matched cards instead of their count; and the same
+// measurement over any other card list an amount names (Remembered$,
+// Sacrificed$, Targeted$, ...).
 //
 // Ported from forge-game/src/main/java/forge/game/ability/AbilityUtils.java's
-// xCount Valid branch (:1942, :2869) and handlePaid (:3675).
+// xCount Valid branch (:1951-1979, :2884-2894) and handlePaid (:3742-3851).
 
 package engine
 
@@ -15,98 +16,147 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/expr"
 	"github.com/jczastkiewicz/crucible/internal/mana"
+	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
 // validFamilyValue is xCount's own Valid branch: the cards count.Valid
-// matches in the zones count.Head names (validCountZones, amount.go), then
-// either their number or, when count.DistinctProperty is set, handlePaid
-// over them (paidMeasure). The zone list is every player's own zone of that
-// type, the identical game.getCardsIn(zones) Java walks; the valid string's
-// own YouCtrl/YouOwn/OppOwn properties do the narrowing.
+// matches in the zones count.Head names (validCountZones, amount.go), or the
+// source alone for ValidSelf (`lparts[0].endsWith("Self")`), then either their
+// number or, when count.DistinctProperty is set, handlePaid over them. The
+// zone list is every player's own zone of that type, the identical
+// game.getCardsIn(zones) Java walks; the valid string's own YouCtrl/YouOwn/
+// OppOwn properties do the narrowing. The operator is the caller's: xCount
+// applies it once, to handlePaid's result.
 func validFamilyValue(g *Game, sourceController PlayerID, source CardID, count expr.Count) (int, bool) {
-	zones, ok := validCountZones(count.Head)
-	if !ok {
-		return 0, false
-	}
-	if count.DistinctProperty == "" {
-		return countValid(g, zones, count.Valid, sourceController, source), true
-	}
-	measure, ok := paidMeasure(count.DistinctProperty)
-	if !ok {
-		return 0, false
-	}
-	var cards []CardID
-	for _, z := range zones {
-		for _, pid := range g.Players() {
-			for _, id := range g.Zone(z, pid).Cards() {
-				if Matches(g, g.Card(id), count.Valid, sourceController, source) {
-					cards = append(cards, id)
-				}
+	var pool []CardID
+	if strings.HasSuffix(count.Head, "Self") && !strings.Contains(count.Head, "All") {
+		if source == NoCard {
+			return 0, false
+		}
+		pool = []CardID{source}
+	} else {
+		zones, ok := validCountZones(count.Head)
+		if !ok {
+			return 0, false
+		}
+		if count.DistinctProperty == "" {
+			return countValid(g, zones, count.Valid, sourceController, source), true
+		}
+		for _, z := range zones {
+			for _, pid := range g.Players() {
+				pool = append(pool, g.Zone(z, pid).Cards()...)
 			}
 		}
 	}
-	// handlePaid's own first line: an empty list is 0 whatever the
-	// property -- before any property-specific branch runs.
-	if len(cards) == 0 {
-		return 0, true
+	var cards []*Card
+	for _, id := range pool {
+		if Matches(g, g.Card(id), count.Valid, sourceController, source) {
+			cards = append(cards, g.Card(id))
+		}
 	}
-	return measure(g, cards), true
+	if count.DistinctProperty == "" {
+		return len(cards), true
+	}
+	return handlePaid(g, nil, sourceController, source, cards, count.DistinctProperty, nil, 0)
 }
 
-// paidMeasure is handlePaid's own dispatch on def, for the properties this
-// port can measure, checked in handlePaid's own order so a name one earlier
-// branch would catch never reaches a later one:
+// handlePaid is AbilityUtils.handlePaid over cards: def the property, op the
+// operator written after it (nil for none), applied where Java applies it --
+// to the count for an empty list, Amount, a Valid filter's count, CardTypes and
+// DifferentCardNames; to each card's own value for the per-card measures, so
+// `Sacrificed$CardPower/Plus.1` over two cards adds two; and nowhere for the
+// properties Java matches with equals, which an operator would therefore turn
+// into a different property (refused). Checked in handlePaid's own order so a
+// name one earlier branch would catch never reaches a later one.
 //
-//   - Amount...: how many cards.
-//   - Colors: how many colors among the cards, together
-//     (CardUtil.getColorsFromCards).
-//   - CardTypes/CardTypesPermanent...: distinct core types among the cards
-//     (countCardTypesFromList), permanent types only for the second.
-//   - Greatest/Least/Different<per-card>, or a bare <per-card>: the max, min,
-//     distinct-value count or sum of a per-card xCount (perCardMeasure).
-//
-// false for everything else: DifferentCardNames (CardLists.
-// getDifferentNamesCount's own Spy Kit and no-name rules, not ported),
-// CreatureType/PlaneswalkerType/LandType/AllTypes (each needs the subtype
-// vocabulary -- a *cardtype.Registry -- to tell a creature type from any
-// other subtype), DifferentColorPair, TapPowerValue and a Valid-filtered
-// sub-list. A property this does not recognize must not fall back to a
-// plain match count: that would be a real but wrong number (GO-7).
-func paidMeasure(def string) (func(*Game, []CardID) int, bool) {
+// Not measured, each false (GO-7): TapPowerValue (CardLists.getTotalPower's
+// tap-for-power replacements), Sticker*, AllTypes, and CreatureType/
+// PlaneswalkerType/LandType (each needs the subtype vocabulary to tell a
+// creature type from any other subtype). A property this does not recognize
+// must not fall back to a plain match count: that would be a real but wrong
+// number. CardPower and CardToughness are read only outside a layer pass
+// (Game.layering): inside one another permanent's power is itself mid-rebuild.
+func handlePaid(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, cards []*Card, def string, op *expr.Op, depth int) (int, bool) {
+	math := func(n int) (int, bool) {
+		if op == nil {
+			return n, true
+		}
+		return applyOperator(g, amounts, sourceController, source, n, op, depth)
+	}
+	if len(cards) == 0 {
+		return math(0)
+	}
 	switch {
 	case strings.HasPrefix(def, "Amount"):
-		return func(_ *Game, cards []CardID) int { return len(cards) }, true
-	case strings.HasPrefix(def, "TapPowerValue"),
-		def == "DifferentColorPair", strings.HasPrefix(def, "Valid"), strings.HasPrefix(def, "AllTypes"):
-		return nil, false
-	case strings.HasPrefix(def, "DifferentCardNames"):
-		return differentNamesCount, true
+		return math(len(cards))
+	case strings.HasPrefix(def, "TapPowerValue"):
+		return 0, false
 	case def == "Colors":
-		return func(g *Game, cards []CardID) int {
-			var colors mana.Colors
-			for _, id := range cards {
-				colors |= g.Card(id).Colors()
+		if op != nil {
+			return 0, false
+		}
+		var colors mana.Colors
+		for _, c := range cards {
+			colors |= c.Colors()
+		}
+		return colors.Count(), true
+	case strings.HasPrefix(def, "DifferentCardNames"):
+		ids := make([]CardID, len(cards))
+		for i, c := range cards {
+			ids[i] = c.ID
+		}
+		return math(differentNamesCount(g, ids))
+	case def == "DifferentColorPair":
+		if op != nil {
+			return 0, false
+		}
+		var pairs []mana.Colors
+		for _, c := range cards {
+			if col := c.Colors(); col.Count() == 2 && !containsColors(pairs, col) {
+				pairs = append(pairs, col)
 			}
-			return colors.Count()
-		}, true
+		}
+		return len(pairs), true
+	case strings.HasPrefix(def, "Valid"):
+		// The shortcut filter (AbilityUtils.java:3773-3782): the cards the
+		// valid string matches, "You" being the source's controller, then
+		// either a nested property over them or their number.
+		spec, nested, hasNested := strings.Cut(def, "$")
+		restriction, isValid := strings.CutPrefix(spec, "Valid ")
+		if !isValid || source == NoCard {
+			return 0, false
+		}
+		parsed := valid.Parse(restriction)
+		host := g.Card(source)
+		var filtered []*Card
+		for _, c := range cards {
+			if Matches(g, c, parsed, host.Controller(), source) {
+				filtered = append(filtered, c)
+			}
+		}
+		if hasNested {
+			return handlePaid(g, amounts, sourceController, source, filtered, nested, op, depth)
+		}
+		return math(len(filtered))
+	case strings.HasPrefix(def, "StickerPower"), strings.HasPrefix(def, "StickerToughness"),
+		strings.HasPrefix(def, "AllTypes"):
+		return 0, false
 	case strings.HasPrefix(def, "CardTypes"):
 		permanent := strings.HasPrefix(def, "CardTypesPermanent")
-		return func(g *Game, cards []CardID) int {
-			var seen cardtype.Line
-			for _, id := range cards {
-				seen = seen.Union(g.Card(id).Type())
+		var seen cardtype.Line
+		for _, c := range cards {
+			seen = seen.Union(c.Type())
+		}
+		n := 0
+		for _, t := range seen.CoreTypes() {
+			if !permanent || t.IsPermanent() {
+				n++
 			}
-			n := 0
-			for _, t := range seen.CoreTypes() {
-				if !permanent || t.IsPermanent() {
-					n++
-				}
-			}
-			return n
-		}, true
+		}
+		return math(n)
 	case strings.HasPrefix(def, "CreatureType"), strings.HasPrefix(def, "PlaneswalkerType"),
 		strings.HasPrefix(def, "LandType"):
-		return nil, false
+		return 0, false
 	}
 
 	fold, perCard := sumFold, def
@@ -118,17 +168,51 @@ func paidMeasure(def string) (func(*Game, []CardID) int, bool) {
 	case strings.HasPrefix(def, "Different"):
 		fold, perCard = distinctFold, strings.TrimPrefix(def, "Different")
 	}
-	measure, ok := perCardMeasure(perCard)
+	measure, ok := cardMeasure(g, perCard)
 	if !ok {
-		return nil, false
+		return 0, false
 	}
-	return func(g *Game, cards []CardID) int {
-		values := make([]int, len(cards))
-		for i, id := range cards {
-			values[i] = measure(g.Card(id))
+	values := make([]int, len(cards))
+	for i, c := range cards {
+		v, ok := measure(c)
+		if !ok {
+			return 0, false
 		}
-		return fold(values)
+		if values[i], ok = math(v); !ok {
+			return 0, false
+		}
+	}
+	return fold(values), true
+}
+
+// cardMeasure is the per-card xCount handlePaid's own fallthrough calls:
+// liveCardMeasure outside a layer pass. Inside one a battlefield permanent's
+// power and toughness are mid-rebuild and unresolved; a card elsewhere (an
+// exiled card a CDA measures) changes only by its own characteristic-defining
+// ability, and is read.
+func cardMeasure(g *Game, head string) (func(*Card) (int, bool), bool) {
+	live, ok := liveCardMeasure(head)
+	if !ok || g.layering == 0 {
+		return live, ok
+	}
+	if m, fixed := perCardMeasure(head); fixed {
+		return func(c *Card) (int, bool) { return m(c), true }, true
+	}
+	return func(c *Card) (int, bool) {
+		if c.Zone == Battlefield {
+			return 0, false
+		}
+		return live(c)
 	}, true
+}
+
+func containsColors(list []mana.Colors, c mana.Colors) bool {
+	for _, v := range list {
+		if v == c {
+			return true
+		}
+	}
+	return false
 }
 
 // differentNamesCount is CardLists.getDifferentNamesCount (CardLists.java:498-518):

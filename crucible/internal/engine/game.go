@@ -91,6 +91,12 @@ type Game struct {
 	// that name its targets, triggering objects and paid cards read
 	// (amountcontext.go); nil outside a resolution.
 	resolving *Ability
+	// layering counts the continuous-effect passes running now
+	// (applyContinuousLayers, which a refresh can enter again): while it is
+	// non-zero a permanent's power is mid-rebuild, so handlePaid
+	// (amountpaid.go) does not read power or toughness. Always zero between
+	// calls, so Game.Clone leaves it zero rather than copying it.
+	layering int
 	// castPending is the spell whose cast is in progress and whose X has not
 	// been announced yet, NoCard otherwise: Count$xPaid is unresolved for it.
 	castPending CardID

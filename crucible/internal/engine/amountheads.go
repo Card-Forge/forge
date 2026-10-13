@@ -171,6 +171,45 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 			return 0, false
 		}
 		return chromaCount([]CardID{source}, g, count.Parameters)
+	case "RememberedSize", "ImprintedSize", "ChosenSize":
+		// Card.getRememberedCount and the two list sizes (AbilityUtils.java:
+		// 1981-1989): every remembered object, players included.
+		if source == NoCard {
+			return 0, false
+		}
+		m := &g.Card(source).Memory
+		switch count.Head {
+		case "RememberedSize":
+			return len(m.Remembered()), true
+		case "ImprintedSize":
+			return len(m.Imprinted()), true
+		}
+		return len(m.Chosen()), true
+	case "Converge":
+		// AbilityUtils.java:2134-2137: the colors of mana spent casting the
+		// card, 0 for a card that was not cast.
+		if source == NoCard {
+			return 0, false
+		}
+		c := g.Card(source)
+		n := 0
+		for _, spent := range c.castPaid {
+			if c.wasCast && spent > 0 {
+				n++
+			}
+		}
+		return n, true
+	case "CastTotalManaSpent":
+		// AbilityUtils.java:1896-1898: the cast SpellAbility's total mana
+		// spent, 0 for a card that was not cast. The `<valid>` form counts
+		// mana by its source, which the cast record does not keep.
+		if source == NoCard || count.Argument != "" {
+			return 0, false
+		}
+		if !g.Card(source).wasCast {
+			return 0, true
+		}
+		return g.Card(source).castManaSpent, true
 	}
 	if sourceController == NoPlayer {
 		return 0, false
@@ -178,7 +217,48 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 	if which, ok := strings.CutPrefix(count.Head, "ManaPool:"); ok {
 		return manaPoolCount(g.Player(sourceController), which)
 	}
+	if kind, ok := strings.CutPrefix(count.Head, "YourCounters"); ok && kind != "" {
+		// Count$YourCounters<Type> (AbilityUtils.java:2390-2394).
+		return g.Player(sourceController).Counters.Count(CounterType(strings.ToUpper(kind))), true
+	}
 	switch count.Head {
+	case "CardsInYourHand":
+		// No xCount branch catches it, so getCardListForXCount's InYourHand
+		// qualifier counts the hand (AbilityUtils.java:3875-3877).
+		return len(g.Zone(Hand, sourceController).Cards()), true
+	case "TotalOppPoisonCounters":
+		// Player.getOpponentsTotalPoisonCounters (Player.java:346).
+		n := 0
+		for _, pid := range g.Players() {
+			if pid != sourceController && !g.Player(pid).Lost {
+				n += g.Player(pid).Counters.Count(Poison)
+			}
+		}
+		return n, true
+	case "LifeOppsLostThisTurn":
+		// Player.getOpponentLostLifeThisTurn (Player.java:2140): the
+		// registered opponents, those who have left the game included.
+		n := 0
+		for _, pid := range g.Players() {
+			if pid != sourceController {
+				n += g.Player(pid).LifeLostThisTurn
+			}
+		}
+		return n, true
+	case "LifeYouLostThisTurn":
+		return g.Player(sourceController).LifeLostThisTurn, true
+	case "YourStartingLife":
+		return startingLife, true
+	case "YourSpeed":
+		return g.Player(sourceController).Speed, true
+	case "TopOfLibraryCMC":
+		// AbilityUtils.java:2505-2509: the top card's mana value, 0 for an
+		// empty library.
+		lib := g.Zone(Library, sourceController).Cards()
+		if len(lib) == 0 {
+			return 0, true
+		}
+		return g.Card(lib[0]).CMC(), true
 	case "LastStateBattlefieldWithFallback", "LastStateGraveyardWithFallback":
 		return g.lastStateCount(sourceController, source, count)
 	case "TotalDamageDoneByThisTurn":
@@ -518,17 +598,11 @@ func partyCount(g *Game, pid PlayerID) int {
 	return min(len(chosen)+wildcard, 4)
 }
 
-// exiledWithValue is calculateAmount's `ExiledWith$<property>` head
-// (AbilityUtils.java:502-503): handlePaid over source's own exiled cards
+// exiledWithCards is the list calculateAmount's `ExiledWith$<property>` head
+// measures (AbilityUtils.java:505-506): source's own exiled cards
 // (Card.getExiledCards, the cards markExiledWith listed on this host object),
-// tokens excluded (Card.retainPaidList). An empty list is 0 whatever the
-// property. CardPower/CardToughness sum each card's net value (handlePaid's
-// generic tail); the exiled cards are not being rebuilt by Layer 7 the way
-// another permanent is, so the value is safe to read here.
-func exiledWithValue(g *Game, source CardID, property string) (int, bool) {
-	if source == NoCard {
-		return 0, false
-	}
+// tokens excluded (Card.retainPaidList).
+func (g *Game) exiledWithCards(source CardID) []CardID {
 	stamp, _ := g.hostObjectStamp(source)
 	var cards []CardID
 	for i := 1; i < len(g.cards); i++ {
@@ -538,47 +612,7 @@ func exiledWithValue(g *Game, source CardID, property string) (int, bool) {
 			cards = append(cards, c.ID)
 		}
 	}
-	return measureListed(g, cards, property)
-}
-
-// rememberedValue is calculateAmount's `Remembered$<property>` head
-// (AbilityUtils.java:512-536): handlePaid over the cards source remembers.
-// A remembered player is skipped. The LKI forms read last-known copies and are
-// not resolved.
-func rememberedValue(g *Game, source CardID, property string) (int, bool) {
-	if source == NoCard || strings.Contains(property, "LKI") {
-		return 0, false
-	}
-	var cards []CardID
-	for _, e := range g.Card(source).Memory.Remembered() {
-		if id, ok := e.AsCard(); ok {
-			cards = append(cards, id)
-		}
-	}
-	return measureListed(g, cards, property)
-}
-
-// imprintedValue is calculateAmount's `Imprinted$<property>` head: handlePaid
-// over the cards source imprinted. `Valid <spec>` (handlePaid's own Valid
-// branch) counts those matching the spec; any other property is measured as
-// for an exiled list.
-func imprintedValue(g *Game, controller PlayerID, source CardID, property string) (int, bool) {
-	if source == NoCard {
-		return 0, false
-	}
-	imprinted := g.Card(source).Memory.Imprinted()
-	spec, isValid := strings.CutPrefix(property, "Valid ")
-	if !isValid {
-		return measureListed(g, imprinted, property)
-	}
-	parsed := valid.Parse(spec)
-	n := 0
-	for _, id := range imprinted {
-		if Matches(g, g.Card(id), parsed, controller, source) {
-			n++
-		}
-	}
-	return n, true
+	return cards
 }
 
 // manaPoolCount is Count$ManaPool:<All|color> (AbilityUtils.java:2544-2553):
@@ -612,171 +646,6 @@ func startingIntensity(c *Card) int {
 		}
 	}
 	return total
-}
-
-// dungeonsCompletedValue is calculateAmount's `DungeonsCompleted$<property>`
-// head (AbilityUtils.java:500-501): handlePaid over the dungeons the source
-// controller has completed. `Valid <spec>` counts those matching the spec
-// (read from the controller's point of view); an empty list is 0 whatever
-// the property.
-func dungeonsCompletedValue(g *Game, controller PlayerID, source CardID, property string) (int, bool) {
-	if controller == NoPlayer {
-		return 0, false
-	}
-	done := g.Player(controller).completedDungeons
-	spec, isValid := strings.CutPrefix(property, "Valid ")
-	if !isValid {
-		return measureListed(g, done, property)
-	}
-	parsed := valid.Parse(spec)
-	n := 0
-	for _, id := range done {
-		if Matches(g, g.Card(id), parsed, controller, source) {
-			n++
-		}
-	}
-	return n, true
-}
-
-// rememberedPlayersLife is PlayerCountRemembered$LifeTotal: the sum of the
-// life totals of the players source remembers (playerXCount's addPlayer takes
-// each remembered Player directly, then playerXProperty sums LifeTotal). Any
-// other property is unresolved.
-func rememberedPlayersLife(g *Game, source CardID, property string) (int, bool) {
-	if source == NoCard || property != "LifeTotal" {
-		return 0, false
-	}
-	total := 0
-	for _, e := range g.Card(source).Memory.Remembered() {
-		if pid, ok := e.AsPlayer(); ok {
-			total += g.Player(pid).Life
-		}
-	}
-	return total, true
-}
-
-// measureListed is handlePaid over an already collected list: 0 for an empty
-// one, else paidMeasure's property, with CardPower and CardToughness (the
-// generic tail's xCount per card) read as the sum of the cards' net values.
-func measureListed(g *Game, cards []CardID, property string) (int, bool) {
-	if len(cards) == 0 {
-		return 0, true
-	}
-	if property == "CardPower" || property == "CardToughness" {
-		total := 0
-		for _, id := range cards {
-			v, ok := g.Card(id).Power()
-			if property == "CardToughness" {
-				v, ok = g.Card(id).Toughness()
-			}
-			if !ok {
-				return 0, false
-			}
-			total += v
-		}
-		return total, true
-	}
-	measure, ok := paidMeasure(property)
-	if !ok {
-		return 0, false
-	}
-	return measure(g, cards), true
-}
-
-// playerCountValue is calculateAmount's own PlayerCount<hType>$ dispatch
-// into playerXCount, for the one shape a real CDA writes (Adamaro, First to
-// Desire's `PlayerCountOpponents$HighestCardsInHand`) and its immediate
-// siblings: hType Opponents or Players (the empty hType is Players too),
-// body Highest<Property> or Lowest<Property>, Property CardsInHand or
-// LifeTotal (playerXProperty's own `value.contains` checks, reached by these
-// two names before any other branch). Highest starts from 0 and Lowest from
-// 99999, Java's own seeds; no players at all is 0. Players who have left the
-// game are not counted (Game.getPlayers holds only players still in it).
-func playerCountValue(g *Game, sourceController PlayerID, source CardID, hType, body string) (int, bool) {
-	if hType == "Remembered" {
-		return rememberedPlayersLife(g, source, body)
-	}
-	if hType == "PropertyYou" && body == "AttractionsVisitedThisTurn" {
-		// AbilityUtils.java:3683: Player.getAttractionsVisitedThisTurn. The
-		// engine never visits Attractions (RollDice's ToVisitYourAttractions
-		// is refused), so no visit has been counted: always 0.
-		return 0, true
-	}
-	var players []PlayerID
-	for _, pid := range g.Players() {
-		if g.Player(pid).Lost {
-			continue
-		}
-		switch hType {
-		case "", "Players":
-		case "Opponents":
-			if pid == sourceController {
-				continue
-			}
-		default:
-			return 0, false
-		}
-		players = append(players, pid)
-	}
-	// PlayerCount<hType>$Amount: how many players there are
-	// (AbilityUtils.java:3431-3434), Welcome to . . .'s "for each opponent"
-	// TargetMax$.
-	if body == "Amount" {
-		return len(players), true
-	}
-	// PlayerCount<hType>$HasProperty<property>: how many of those players have
-	// the player property (playerXCount's own "HasProperty" branch). A property
-	// matchesPlayerProperty does not know makes the whole amount unresolved.
-	if prop, ok := strings.CutPrefix(body, "HasProperty"); ok {
-		n := 0
-		for _, pid := range players {
-			matched, known := matchesPlayerProperty(g, pid, sourceController, NoCard, prop)
-			if !known {
-				return 0, false
-			}
-			if matched {
-				n++
-			}
-		}
-		return n, true
-	}
-	var highest bool
-	var property string
-	switch {
-	case strings.HasPrefix(body, "Highest"):
-		highest, property = true, strings.TrimPrefix(body, "Highest")
-	case strings.HasPrefix(body, "Lowest"):
-		property = strings.TrimPrefix(body, "Lowest")
-	default:
-		return 0, false
-	}
-	var value func(PlayerID) int
-	switch property {
-	case "CardsInHand":
-		value = func(pid PlayerID) int { return len(g.Zone(Hand, pid).Cards()) }
-	case "LifeTotal":
-		value = func(pid PlayerID) int { return g.Player(pid).Life }
-	case "CardsInGraveyard":
-		value = func(pid PlayerID) int { return len(g.Zone(Graveyard, pid).Cards()) }
-	case "Counters.Poison":
-		value = func(pid PlayerID) int { return g.Player(pid).Counters.Count(Poison) }
-	default:
-		return 0, false
-	}
-	if len(players) == 0 {
-		return 0, true
-	}
-	n := 99999
-	if highest {
-		n = 0
-	}
-	for _, pid := range players {
-		v := value(pid)
-		if highest && v > n || !highest && v < n {
-			n = v
-		}
-	}
-	return n, true
 }
 
 // lastStateCount is Count$LastStateBattlefieldWithFallback <valid> and

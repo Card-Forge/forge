@@ -1,0 +1,15 @@
+# TargetedPlayer$<property> (AbilityUtils.java:574-580, playerXProperty
+# :3559-3561): Gaze of Adamaro's `X:TargetedPlayer$CardsInHand` counts the
+# hand of the player the spell targets (SpellAbility.getSATargetingPlayer) --
+# the opponent's three cards, not the caster's one -- so it deals 3.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+queue paygeneric R
+queue paygeneric R
+queue targets ai
+castspell human 1
+resolvestack

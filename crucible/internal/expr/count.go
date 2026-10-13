@@ -45,6 +45,36 @@ type Count struct {
 	// other property unresolved (GO-7) rather than silently measuring
 	// Valid's own match count instead.
 	DistinctProperty string
+
+	// Compare is `Count$Compare <lhs> <op><rhs>.<then>.<else>` read at load
+	// (xCount, AbilityUtils.java:1608-1614), nil for every other head and for
+	// a Compare body missing a part.
+	Compare *Comparison
+}
+
+// Comparison is a Count$Compare body. Java splits the body on `.` first and
+// the first part on single spaces, so LHS is an SVar name or number, Comparator
+// keeps the operator and the right-hand side together as written (`GE1`,
+// `GEMePlus`: Expressions.compare matches the operator by containment), RHS is
+// the part after the two-letter operator, and Then/Else are the branches. Each
+// of LHS, RHS, Then and Else is itself a calculateAmount input: a number or an
+// SVar name.
+type Comparison struct {
+	LHS, Comparator, RHS, Then, Else string
+}
+
+// parseComparison reads a Count$Compare body, or nil when a part is missing
+// (Java would throw ArrayIndexOutOfBoundsException there).
+func parseComparison(body string) *Comparison {
+	sq := strings.Split(body, ".")
+	if len(sq) < 3 {
+		return nil
+	}
+	parts := strings.Split(sq[0], " ")
+	if len(parts) < 3 || len(parts[2]) < 2 {
+		return nil
+	}
+	return &Comparison{LHS: parts[1], Comparator: parts[2], RHS: parts[2][2:], Then: sq[1], Else: sq[2]}
 }
 
 // ParseCount reads the body of a `Count$` expression, which is what is left
@@ -68,6 +98,9 @@ func ParseCount(body string) Count {
 				c.DistinctProperty = distinct
 			}
 			return c
+		}
+		if head == "Compare" {
+			return Count{Head: head, Argument: argument, Compare: parseComparison(body)}
 		}
 		return Count{Head: head, Argument: argument}
 	}

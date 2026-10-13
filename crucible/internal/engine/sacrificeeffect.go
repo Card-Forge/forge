@@ -200,8 +200,9 @@ func sacrificeCards(g *Game, controller PlayerController, a *Ability, ids []Card
 
 // sacrificeCardsFor is sacrificeCards for a sacrifice paid as a cost (effect
 // false) or done by an effect (true): a card a CantSacrifice static covers is
-// not sacrificed (Card.canBeSacrificedBy).
-func sacrificeCardsFor(g *Game, controller PlayerController, a *Ability, ids []CardID, effect bool) {
+// not sacrificed (Card.canBeSacrificedBy). It answers the cards it did
+// sacrifice.
+func sacrificeCardsFor(g *Game, controller PlayerController, a *Ability, ids []CardID, effect bool) []CardID {
 	remember := false
 	if a.Params != nil { // a state-based sacrifice (a Saga's) has no ability behind it
 		_, remember = a.Params.Param("RememberSacrificed")
@@ -225,4 +226,5 @@ func sacrificeCardsFor(g *Game, controller PlayerController, a *Ability, ids []C
 		}
 	}
 	g.checkChangesZoneAllTriggers(controller, sacrificed, Battlefield, Graveyard)
+	return sacrificed
 }

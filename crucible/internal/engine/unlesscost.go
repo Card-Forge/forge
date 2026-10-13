@@ -307,6 +307,12 @@ func (g *Game) unlessRevealable(pid PlayerID, source CardID, uc unlessCost) bool
 // loseLifeEffect emits), the controller chooses the discards and the
 // sacrifices.
 func (g *Game) payUnlessCost(controller PlayerController, a *Ability, pid PlayerID, uc unlessCost) bool {
+	return g.payUnlessCostInto(controller, a, pid, uc, nil)
+}
+
+// payUnlessCostInto is payUnlessCost recording the cards its parts used up
+// into rec when rec is not nil (payUnlessPartsInto).
+func (g *Game) payUnlessCostInto(controller PlayerController, a *Ability, pid PlayerID, uc unlessCost, rec *paidLists) bool {
 	if !g.unlessPayable(pid, a.Source, uc) {
 		return false
 	}
@@ -318,7 +324,7 @@ func (g *Game) payUnlessCost(controller PlayerController, a *Ability, pid Player
 		return false
 	}
 	tapChosenPermanents(g, controller, taps)
-	g.payUnlessParts(controller, a, pid, uc)
+	g.payUnlessPartsInto(controller, a, pid, uc, rec)
 	return true
 }
 
@@ -549,6 +555,14 @@ func graveyardManaValue(g *Game, ids []CardID) int {
 // be: life (the LifeChanged event loseLifeEffect emits), energy, the controller's
 // discards and sacrifices, returns, damage to the payer and draws.
 func (g *Game) payUnlessParts(controller PlayerController, a *Ability, pid PlayerID, uc unlessCost) {
+	g.payUnlessPartsInto(controller, a, pid, uc, nil)
+}
+
+// payUnlessPartsInto is payUnlessParts recording what the cost sacrificed and
+// discarded into rec, when rec is not nil: a spell's additional cost is that
+// spell's own paid list (SpellAbility.getPaidList, read by Sacrificed$ and
+// Discarded$), where an unless cost's payment is not.
+func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid PlayerID, uc unlessCost, rec *paidLists) {
 	hand := handWithout(g.Zone(Hand, pid).Cards(), a.Source)
 	candidates := g.unlessSacCandidates(pid, a.Source, uc)
 	returnable := g.unlessReturnCandidates(pid, a.Source, uc)
@@ -561,7 +575,15 @@ func (g *Game) payUnlessParts(controller PlayerController, a *Ability, pid Playe
 		emitCounterChanged(g, a.Source, PlayerEntity(pid), Energy, -uc.energyN)
 	}
 	if uc.discardN > 0 {
-		discardCards(g, controller, controller.ChooseCardsToDiscard(g, pid, hand, uc.discardN), pid)
+		chosen := controller.ChooseCardsToDiscard(g, pid, hand, uc.discardN)
+		discardCards(g, controller, chosen, pid)
+		if rec != nil {
+			for _, id := range chosen {
+				if g.Card(id).Zone != Hand {
+					rec.discarded = append(rec.discarded, id)
+				}
+			}
+		}
 	}
 	if uc.discardHand {
 		// Discard<N/Hand> (CostDiscard's "Hand" type): the payer discards the
@@ -569,7 +591,10 @@ func (g *Game) payUnlessParts(controller PlayerController, a *Ability, pid Playe
 		discardCards(g, controller, slices.Clone(g.Zone(Hand, pid).Cards()), pid)
 	}
 	if uc.sacN > 0 {
-		sacrificeCardsFor(g, controller, a, controller.ChoosePermanentsToSacrifice(g, pid, candidates, uc.sacN), false)
+		sacrificed := sacrificeCardsFor(g, controller, a, controller.ChoosePermanentsToSacrifice(g, pid, candidates, uc.sacN), false)
+		if rec != nil {
+			rec.sacrificed = append(rec.sacrificed, sacrificed...)
+		}
 	}
 	if uc.returnN > 0 {
 		returnCards(g, controller, controller.ChoosePermanentsToReturn(g, pid, returnable, uc.returnN))

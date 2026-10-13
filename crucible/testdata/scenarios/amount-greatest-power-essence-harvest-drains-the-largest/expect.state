@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=23
+humanbattlefield=Swamp|Tapped;Swamp|Tapped;Swamp|Tapped;Grizzly Bears;Hill Giant
+humangraveyard=Essence Harvest
+ailife=17
+aibattlefield=Colossal Dreadmaw

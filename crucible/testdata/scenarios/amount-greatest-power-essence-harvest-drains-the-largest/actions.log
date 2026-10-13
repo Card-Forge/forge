@@ -1,0 +1,16 @@
+# handlePaid's Greatest<measure> over a Count$Valid list (AbilityUtils.java:
+# 3835-3850): Essence Harvest's `X:Count$Valid Creature.YouCtrl$GreatestCardPower`
+# is the greatest power among the caster's own creatures -- the Hill Giant's 3,
+# not the Bears' 2 and not the opponent's 6/6 Dreadmaw. Read as the spell
+# resolves, outside a layer pass, so live power is measured. The target loses
+# 3 and the caster gains 3.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+tapformana human 4 B
+queue paygeneric B
+queue paygeneric B
+queue targets ai
+castspell human 1
+resolvestack

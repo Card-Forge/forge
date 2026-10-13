@@ -59,7 +59,7 @@ each reads the host, its controller, or a zone — and one evaluator is one plac
 | `addInlineAmounts` (compile.go)                | Static P/T value written as a raw expression, keyed by its own text in `Face.Amounts` | `nethergoyf.txt` writes `SetPower$ Count$...` inline; `calculateAmount` reads it as raw (`indexOf('$') > 0`). An SVar name has no `$` |
 | `applyOperator`                                | doXMath, all 18 operators, containment in Java's order                                | HalfUp/HalfDown on a negative use `math.Ceil`/`Floor`, not Go's truncating division                                                   |
 | `namedAmount`                                  | Runtime SVar (`Card.svars`) first, then `amounts`, at every hop                       | Java's `getSVar` sees StoreSVar values at every level, not only the outermost name                                                    |
-| `paidMeasure` (amountpaid.go)                  | handlePaid in its own branch order                                                    | A name an earlier branch catches never reaches a later one; unknown property → unresolved, never a plain match count                  |
+| `handlePaid` (amountpaid.go)                   | handlePaid in its own branch order                                                    | A name an earlier branch catches never reaches a later one; unknown property → unresolved, never a plain match count                  |
 
 No new `Game` state, no new controller decision: `Game.Clone` and `TestCloneAllocationsStayBounded` are untouched.
 
@@ -76,15 +76,15 @@ No new `Game` state, no new controller decision: `Game.Clone` and `TestCloneAllo
 
 ### Refused rather than guessed (GO-7)
 
-| Shape                                             | Reason                                                                                                         |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Context prefix (`CastSA>`, `Spawner>`, ...)       | `adjustTriggerContext` switches the measuring ability; a static has none. No CDA writes one                    |
-| `Mod.0`                                           | Java throws `ArithmeticException`                                                                              |
-| `PlayerCount...` with an operator                 | `playerXCount` hands `Highest<X>/<op>` down to `playerXProperty`, applying the operator twice. 0 corpus lines  |
-| Per-card `CardPower`/`CardToughness` (Greatest\*) | Another permanent's power is mid-rebuild while `applyContinuousPT` runs; 143 real lines corpus-wide wait on it |
-| Devotion to `Chosen...` or colorless              | Host's chosen color / a mana type with no `mana.Colors` bit; 0 CDA lines                                       |
-| `Mode$ Devotion` line with any other param        | `checkConditions`' Condition$ family is not evaluated for this mode                                            |
-| An operand SVar that does not resolve             | Java prints to stderr and uses 0; a wrong P/T is worse than an unresolved one                                  |
+| Shape                                             | Reason                                                                                                                                              |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Context prefix (`CastSA>`, `Spawner>`, ...)       | `adjustTriggerContext` switches the measuring ability; a static has none. No CDA writes one                                                         |
+| `Mod.0`                                           | Java throws `ArithmeticException`                                                                                                                   |
+| `PlayerCount...` with an operator                 | `playerXCount` hands `Highest<X>/<op>` down to `playerXProperty`, applying the operator twice. 0 corpus lines                                       |
+| Per-card `CardPower`/`CardToughness` (Greatest\*) | A battlefield permanent's power is mid-rebuild while the layer pass runs (`Game.layering`); read outside it, [`m6-r9-amounts.md`](m6-r9-amounts.md) |
+| Devotion to `Chosen...` or colorless              | Host's chosen color / a mana type with no `mana.Colors` bit; 0 CDA lines                                                                            |
+| `Mode$ Devotion` line with any other param        | `checkConditions`' Condition$ family is not evaluated for this mode                                                                                 |
+| An operand SVar that does not resolve             | Java prints to stderr and uses 0; a wrong P/T is worse than an unresolved one                                                                       |
 
 ### Latent Forge defects (PORT-8)
 
@@ -105,7 +105,6 @@ rather than reproduced.
 | `$CreatureType`/`LandType`/`PlaneswalkerType`/`AllTypes` | `*cardtype.Registry` to tell a creature type from any other subtype (`CardType.getCreatureTypes`)                               |
 | `$DifferentCardNames`                                    | `CardLists.getDifferentNamesCount`: Spy Kit's non-legendary names and no-name cards; no `sharesNameWith` in the engine          |
 | `ExiledWith$...`                                         | `Card.getExiledCards` tracking, written by the effects that exile "with" a card                                                 |
-| `Remembered$...`, `PlayerCountRemembered$...`            | Remembered-list heads over `Memory.Remembered`, per `handlePaid`/`playerXCount`                                                 |
 | `Count$YourTurns`                                        | `Player.Turn` incremented at each turn start (turn.go); today nothing writes it                                                 |
 
 ### Known limits (not new, now load-bearing)
@@ -116,7 +115,7 @@ rather than reproduced.
   applies below seven loyalty.
 - **Printed mana value only.** `CardManaCost`, Devotion and Chroma read `Def.Faces[0].ManaCost` (`Card.CMC`'s own
   limit).
-- **Runtime string dispatch (PORT-2).** `paidMeasure` (amountpaid.go) and `manaAtomColor`/`devotionMod` (amountheads.go)
+- **Runtime string dispatch (PORT-2).** `handlePaid` (amountpaid.go) and `manaAtomColor`/`devotionMod` (amountheads.go)
   switch on `count.DistinctProperty`/`count.Parameters` text on every evaluation instead of resolving to a typed
   `expr.Measure`/`mana.Colors` once at compile (`internal/expr`/`internal/carddb/compile`); `expr.Operator(op.Name)`
   (amount.go) does the same for `doXMath`'s own operator. Correctness holds today -- each dispatch is total and
