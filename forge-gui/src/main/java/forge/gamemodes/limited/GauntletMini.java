@@ -40,7 +40,13 @@ import forge.util.Aggregates;
  * @since 1.2.xx
  */
 public class GauntletMini {
+    /** Starts the match for one round and returns it. */
+    public interface RoundStarter {
+        HostedMatch start(GameType type, Set<GameType> variants, List<RegisteredPlayer> players, RegisteredPlayer human);
+    }
+
     private HostedMatch hostedMatch = null;
+    private RoundStarter roundStarter;
     private int rounds;
     private Deck humanDeck;
     private int currentRound;
@@ -56,6 +62,11 @@ public class GauntletMini {
         wins = 0;
         losses = 0;
         gauntletType = GameType.Sealed; // Assignable in launch();
+    }
+
+    /** Replaces GuiBase.hostMatch() as the way each round's match starts. Null restores it. */
+    public void setRoundStarter(final RoundStarter starter) {
+        roundStarter = starter;
     }
 
     /**
@@ -148,12 +159,16 @@ public class GauntletMini {
             pl.assignConspiracies();
         }
 
-        hostedMatch = GuiBase.getInterface().hostMatch();
-
         Set<GameType> gameTypes = null;
         if (gauntletType == GameType.CommanderDraft) {
             gameTypes = java.util.EnumSet.of(GameType.Commander);
         }
+
+        if (roundStarter != null) {
+            hostedMatch = roundStarter.start(gauntletType, gameTypes, starter, human);
+            return;
+        }
+        hostedMatch = GuiBase.getInterface().hostMatch();
 
         hostedMatch.startMatch(gauntletType, gameTypes, starter, human, GuiBase.getInterface().getNewGuiGame());
     }
