@@ -200,6 +200,20 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
             int pickTimerSeconds, int disconnectGraceSeconds) {
         NetworkEvent event = getCurrentEvent();
         if (event == null) return false;
+        final SealedCardPoolGenerator sealed = event.getFormat() == EventFormat.SEALED ? new SealedCardPoolGenerator(poolType) : null;
+        return configure(event, poolType, draft, sealed, pickTimerSeconds, disconnectGraceSeconds);
+    }
+
+    /** Configures a sealed event with a pool generator the caller already built, so no dialog opens. */
+    public synchronized boolean configureEvent(LimitedPoolType poolType, SealedCardPoolGenerator sealed,
+            int pickTimerSeconds, int disconnectGraceSeconds) {
+        NetworkEvent event = getCurrentEvent();
+        if (event == null) return false;
+        return configure(event, poolType, null, sealed, pickTimerSeconds, disconnectGraceSeconds);
+    }
+
+    private boolean configure(NetworkEvent event, LimitedPoolType poolType, BoosterDraft draft, SealedCardPoolGenerator sealed,
+            int pickTimerSeconds, int disconnectGraceSeconds) {
 
         event.setPoolType(poolType);
         event.setProductDescription(poolType.toString());
@@ -207,8 +221,8 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         event.setDisconnectGraceSeconds(disconnectGraceSeconds);
 
         if (event.getFormat() == EventFormat.SEALED) {
-            SealedCardPoolGenerator gen = new SealedCardPoolGenerator(poolType);
-            if (gen.isEmpty()) return false;
+            SealedCardPoolGenerator gen = sealed;
+            if (gen == null || gen.isEmpty()) return false;
             event.setSealedGenerator(gen);
             if (gen.getProductName() != null) {
                 event.setProductDescription(poolType + ": " + gen.getProductName());
