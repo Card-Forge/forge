@@ -16,6 +16,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.server.DeltaSyncManager;
+import forge.trackable.TrackableObject;
 import forge.util.IHasForgeLog;
 import forge.gui.control.GameEventForwarder;
 import forge.gui.interfaces.IGuiGame;
@@ -453,9 +454,9 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         return syncAndSendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean value) {
-        super.setHighlighted(entities, value);
-        syncAndSend(ProtocolMethod.setHighlighted, entities, value);
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean value) {
+        super.setHighlighted(objects, value);
+        syncAndSend(ProtocolMethod.setHighlighted, objects, value);
     }
 
     @Override
@@ -466,6 +467,16 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         syncAndSend(ProtocolMethod.setSelectables, cards, min, max);
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true;
+    }
+
+    @Override
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        syncAndSend(ProtocolMethod.setSelectableTargets, targets);
     }
 
     @Override

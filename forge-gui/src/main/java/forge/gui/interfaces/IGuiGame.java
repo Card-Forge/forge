@@ -26,6 +26,7 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -265,7 +266,7 @@ public interface IGuiGame {
 
     default void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players) {}
 
-    void setHighlighted(Iterable<GameEntityView> entities, boolean b);
+    void setHighlighted(Iterable<? extends TrackableObject> objects, boolean b);
 
     /**
      * Mark {@code cards} as selectable and publish the active selection's
@@ -273,6 +274,17 @@ public interface IGuiGame {
      * select-min hotkeys). A maximum of {@code 0} marks display-only highlighting, for which the GUI opens no zones.
      */
     void setSelectables(Iterable<CardView> cards, int min, int max);
+    /**
+     * Marks players and stack items as valid targets of the active prompt, replacing earlier marks (cards go through
+     * {@link #setSelectables}); {@link #clearSelectables()} removes them.
+     */
+    default void setSelectableTargets(Iterable<? extends TrackableObject> targets) {}
+    /**
+     * Whether this GUI lets the player pick stack items as targets by tapping or clicking them in its stack view (and
+     * implements the two methods above). Otherwise targets on the stack are chosen in a dialog. A GUI that forwards
+     * these calls to a remote client returns true only if that client can handle them.
+     */
+    default boolean canPickStackTargets() { return false; }
     void clearSelectables();
     boolean isSelecting();
 

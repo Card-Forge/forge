@@ -22,6 +22,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -92,6 +93,8 @@ public class VField implements IVDoc<CField> {
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
     private final Border borderAvatarHighlighted = new LineBorder(Color.red, 2);
+    // dashed while the player can be picked as a target, solid red once picked
+    private final Border borderAvatarSelectable = BorderFactory.createDashedBorder(new Color(255, 215, 0), 2f, 5f, 3f, false);
 
     private final TabDiffTracker tabDiff = new TabDiffTracker();
 
@@ -147,7 +150,7 @@ public class VField implements IVDoc<CField> {
             public void mouseExited(final MouseEvent e) {
                 avatarArea.setOpaque(false);
                 if (!isHighlighted()) {
-                    avatarArea.setBorder(borderAvatarSimple);
+                    avatarArea.setBorder(control.getMatchUI().isSelectable(player) ? borderAvatarSelectable : borderAvatarSimple);
                 }
             }
         });
@@ -214,6 +217,14 @@ public class VField implements IVDoc<CField> {
 
     private boolean isHighlighted() {
         return control.getMatchUI().isHighlighted(player);
+    }
+
+    /** Solid red frame once the player is picked, dashed frame while the player can be picked, none otherwise. */
+    public void updateAvatarBorder() {
+        final boolean highlighted = isHighlighted();
+        avatarArea.setBorder(highlighted ? borderAvatarHighlighted
+                : control.getMatchUI().isSelectable(player) ? borderAvatarSelectable : borderAvatarSimple);
+        avatarArea.setOpaque(highlighted);
     }
 
     public void setAvatar(final SkinImage avatar) {
@@ -410,9 +421,7 @@ public class VField implements IVDoc<CField> {
             removeLblTicket();
         }
 
-        final boolean highlighted = isHighlighted();
-        this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple);
-        this.avatarArea.setOpaque(highlighted);
+        updateAvatarBorder();
         this.avatarArea.setToolTipText(getPlayerDetailsHtml());
     }
 

@@ -42,6 +42,7 @@ import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
+import forge.trackable.TrackableObject;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
@@ -440,6 +441,29 @@ public class MatchController extends NetworkGuiGame {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);
         }
+    }
+
+    @Override
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean highlighted) {
+        super.setHighlighted(objects, highlighted);
+        Gdx.graphics.requestRendering();
+    }
+
+    @Override
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        super.setSelectableTargets(targets);
+        FThreads.invokeInEdtLater(() -> {
+            if (isSelectingStackItems()) { // stack items are picked in the stack view, so bring it up
+                if (!view.getStack().isVisible()) { view.getStack().show(); }
+                view.getStack().update();
+            }
+            Gdx.graphics.requestRendering();
+        });
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true; // stack entries are tapped in the stack view (VStack)
     }
 
     @Override
