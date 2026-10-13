@@ -864,7 +864,7 @@
     "rewards": [
       { "type": "item","count":1, "itemName": "Rainbow Armor"  },
       { "type": "item","count":1, "itemName": "Adventurer's Outfit"  },
-      { "type": "item","count":1, "itemName": "Robes of Serra"  },
+      { "type": "item","count":1, "itemName": "Armor of Serra"  },
       { "type": "item","count":1, "itemName": "Unholy Armor"},
       { "type": "item","count":1, "itemName": "Seafarer's Outfit"  },
       { "type": "item","count":1, "itemName": "Stronghold Armor"  }
