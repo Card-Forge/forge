@@ -25,6 +25,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.EnumMap;
 import java.util.Iterator;
+import java.util.concurrent.Executor;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasForgeLog {
 
@@ -65,6 +66,17 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
             return false;
         }
         return super.shouldDispatchToGuiThread(protocolMethod);
+    }
+
+    @Override
+    protected void dispatch(final ProtocolMethod protocolMethod, final Runnable toRun) {
+        final Executor executor = client.getDispatchExecutor();
+        if (executor == null) {
+            super.dispatch(protocolMethod, toRun);
+            return;
+        }
+        // The server blocks the GUI thread while it waits for this client's reply, so a client in the same process must not run there
+        executor.execute(toRun);
     }
 
     @SuppressWarnings("unchecked")

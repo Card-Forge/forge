@@ -40,8 +40,9 @@ import forge.localinstance.properties.ForgeNetPreferences;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
+import io.netty.channel.local.LocalAddress;
+import io.netty.channel.local.LocalServerChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
@@ -143,6 +144,10 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         }, deadline, TimeUnit.SECONDS);
     }
 
+    /** The address of a server started by {@link #startLoopbackServer()}. Only a client in this process can connect to it. */
+    public static final LocalAddress LOOPBACK = new LocalAddress("forge");
+
+    private volatile boolean loopbackOnly;
     // Created by startServer: an offline game reaches getInstance() but never needs the selectors
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
@@ -228,18 +233,28 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
+        bind(new InetSocketAddress(port), startUPnP);
+    }
+
+    /** Starts a server at {@link #LOOPBACK} with no socket, no UPnP and no AFK timeout. Its clients are in this process. */
+    public void startLoopbackServer() {
+        bind(LOOPBACK, false);
+    }
+
+    private void bind(final SocketAddress address, final boolean startUPnP) {
         netLog.info("Starting Multiplayer Server");
-        bossGroup = new NioEventLoopGroup(1);
-        workerGroup = new NioEventLoopGroup();
+        final boolean inProcess = address instanceof LocalAddress;
+        loopbackOnly = inProcess;
+        bossGroup = inProcess ? new DefaultEventLoopGroup(1) : new NioEventLoopGroup(1);
+        workerGroup = inProcess ? new DefaultEventLoopGroup() : new NioEventLoopGroup();
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_REUSEADDR, true)  // Allow quick port reuse after server shutdown
+                    .channel(inProcess ? LocalServerChannel.class : NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                    .childHandler(new ChannelInitializer<Channel>() {
                         @Override
-                        public void initChannel(final SocketChannel ch) throws Exception {
+                        public void initChannel(final Channel ch) throws Exception {
                             ch.config().setWriteBufferWaterMark(
                                     new WriteBufferWaterMark(OUTBOUND_BUFFER_LOW_WATER, OUTBOUND_BUFFER_HIGH_WATER));
                             final ChannelPipeline p = ch.pipeline();
@@ -255,8 +270,12 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                         }
                     });
 
+            if (!inProcess) {
+                b.option(ChannelOption.SO_REUSEADDR, true);  // Allow quick port reuse after server shutdown
+            }
+
             // Bind and start to accept incoming connections.
-            final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
+            final ChannelFuture ch = b.bind(address).sync().channel().closeFuture();
             new Thread(() -> {
                 try {
                     ch.sync();
@@ -318,8 +337,14 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
         try {
             if (bossGroup != null) {
-                bossGroup.shutdownGracefully().sync();
-                workerGroup.shutdownGracefully().sync();
+                if (loopbackOnly) {
+                    // A loopback server has no sockets to drain, so it skips Netty's default quiet period
+                    bossGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                    workerGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                } else {
+                    bossGroup.shutdownGracefully().sync();
+                    workerGroup.shutdownGracefully().sync();
+                }
             }
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -367,7 +392,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
     public String formatAfkTimeoutMessage() {
         final int minutes = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
-        if (minutes <= 0) {
+        if (loopbackOnly || minutes <= 0) {
             return Localizer.getInstance().getMessage("lblAfkTimeoutDisabled");
         }
         return Localizer.getInstance().getMessage("lblAfkTimeoutChat", minutes + ":00");
@@ -396,7 +421,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
      */
     @Override
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!HostingServer.isHosting() || localLobby == null) {
+        if (!HostingServer.isHosting() || localLobby == null || loopbackOnly) {
             return AfkTimeout.NOOP;
         }
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
