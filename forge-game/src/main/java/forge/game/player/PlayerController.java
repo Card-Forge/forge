@@ -88,8 +88,9 @@ public abstract class PlayerController {
         return false;
     }
 
-    /** Shows this player a draw offer that the game itself has made. */
-    public void showDrawOffer(final DrawOffer offer) {
+    /** Puts a draw to every player because the game may be in an endless loop, and returns whether they all accept. */
+    public boolean offerLoopDraw(final String reason) {
+        return true;
     }
 
     public Game getGame() { return gameView.getGame(); }

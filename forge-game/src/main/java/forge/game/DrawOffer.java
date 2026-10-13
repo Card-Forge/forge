@@ -1,6 +1,5 @@
 package forge.game;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,8 +7,9 @@ import forge.game.player.Player;
 
 /**
  * Transient state of an in-flight draw offer: the offerer (who accepts implicitly),
- * or a reason when the game itself offers, and each responder's vote. No GUI or
- * network references. Votes arrive from other threads, so access is synchronized.
+ * or a reason when the game itself offers,
+ * and each responder's vote. Pure data — no GUI or network references. Orchestration
+ * lives in forge-gui's DrawOfferCoordinator.
  */
 public class DrawOffer {
     public enum Vote { PENDING, ACCEPTED, DECLINED }
@@ -33,34 +33,19 @@ public class DrawOffer {
 
     public Player getOfferer() { return offerer; }
     public String getReason() { return reason; }
-    public synchronized Map<Player, Vote> getVotes() { return new LinkedHashMap<>(votes); }
+    public Map<Player, Vote> getVotes() { return votes; }
 
-    public synchronized void record(final Player responder, final boolean accepted) {
+    public void record(final Player responder, final boolean accepted) {
         if (votes.containsKey(responder)) {
             votes.put(responder, accepted ? Vote.ACCEPTED : Vote.DECLINED);
         }
-        notifyAll();
     }
 
-    /** Waits up to {@code millis} for the last vote and returns whether the offer is settled. */
-    public synchronized boolean awaitSettled(final long millis) throws InterruptedException {
-        if (!isSettled()) {
-            wait(millis);
-        }
-        return isSettled();
-    }
-
-    /** Drops the vote of anyone not in {@code present}. */
-    public synchronized void retainResponders(final Collection<Player> present) {
-        votes.keySet().retainAll(present);
-        notifyAll();
-    }
-
-    public synchronized boolean isDeclined() {
+    public boolean isDeclined() {
         return votes.containsValue(Vote.DECLINED);
     }
 
-    public synchronized boolean isUnanimousAccept() {
+    public boolean isUnanimousAccept() {
         if (votes.isEmpty()) {
             return false;
         }
@@ -72,7 +57,7 @@ public class DrawOffer {
         return true;
     }
 
-    public synchronized boolean isSettled() {
+    public boolean isSettled() {
         return isDeclined() || isUnanimousAccept();
     }
 }

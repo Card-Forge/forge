@@ -17,6 +17,7 @@
  */
 package forge.game.zone;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -530,32 +531,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     /** The engine cannot tell an endless loop from a long finite one, so the humans vote on a draw. AI players go along. */
     private boolean playersAcceptLoopDraw(final SpellAbility sp, final boolean stackFull) {
+        final Player human = Iterables.find(game.getPlayers(), p -> !p.getController().isAI(), null);
+        if (human == null) {
+            return true;
+        }
         final Localizer localizer = Localizer.getInstance();
         final String reason = stackFull ? localizer.getMessage("lblStackFullOfferDraw", MAX_STACK_SIZE)
                 : localizer.getMessage("lblRepeatingTriggerOfferDraw", sp.getHostCard().getName(), MAX_TRIGGER_REPEATS);
-        final DrawOffer offer = new DrawOffer(null, reason, game.getPlayers());
-        for (final Player p : game.getPlayers()) {
-            if (p.getController().isAI()) {
-                offer.record(p, true);
-            }
-        }
-        if (offer.isSettled()) {
-            return true;
-        }
-        game.setDrawOffer(offer);
-        for (final Player p : game.getPlayers()) {
-            p.getController().showDrawOffer(offer);
-        }
-        try {
-            while (!offer.awaitSettled(250) && !game.isGameOver()) {
-                // a player who leaves the game no longer has a vote
-                offer.retainResponders(game.getPlayers());
-            }
-        } catch (final InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        game.setDrawOffer(null);
-        return !game.isGameOver() && offer.isUnanimousAccept();
+        return human.getController().offerLoopDraw(reason);
     }
 
     private void recordUndoableActions(SpellAbility sa) {

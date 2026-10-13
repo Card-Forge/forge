@@ -56,6 +56,51 @@ public final class DrawOfferCoordinator {
         }
     }
 
+    /**
+     * Called on the game thread when the game may be in an endless loop. Every player votes and AI players accept.
+     * Returns whether they all accepted, and leaves ending the game to the caller.
+     */
+    public static boolean offerForLoop(final Game game, final String reason) {
+        final DrawOffer offer = new DrawOffer(null, reason, game.getPlayers());
+        synchronized (DrawOfferCoordinator.class) {
+            if (game.isGameOver() || game.getDrawOffer() != null) {
+                return false;
+            }
+            game.setDrawOffer(offer);
+            acceptForAi(offer);
+            broadcast(game, offer);
+        }
+        try {
+            while (game.getDrawOffer() == offer) {
+                Thread.sleep(250);
+                synchronized (DrawOfferCoordinator.class) {
+                    // no vote arrives from a player who has left the game or whose seat the AI has taken over
+                    dropAbsentResponders(game, offer);
+                    acceptForAi(offer);
+                    if (game.getDrawOffer() == offer && (game.isGameOver() || offer.isSettled())) {
+                        resolve(game, offer);
+                    }
+                }
+            }
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+            game.setDrawOffer(null);
+        }
+        return !game.isGameOver() && offer.isUnanimousAccept();
+    }
+
+    private static void acceptForAi(final DrawOffer offer) {
+        for (final Player p : offer.getVotes().keySet()) {
+            if (p.getController().isAI()) {
+                offer.record(p, true);
+            }
+        }
+    }
+
+    private static void dropAbsentResponders(final Game game, final DrawOffer offer) {
+        offer.getVotes().keySet().removeIf(p -> !game.getPlayers().contains(p));
+    }
+
     /** Called when a human responder votes. */
     public static synchronized void respond(final Game game, final Player responder, final boolean accept) {
         final DrawOffer offer = game.getDrawOffer();
@@ -74,9 +119,13 @@ public final class DrawOfferCoordinator {
     }
     private static void broadcast(final Game game, final DrawOffer offer, final DrawOfferMessage.Result result) {
         // Drop any responder who has left the game since the offer was made.
-        offer.retainResponders(game.getPlayers());
+        dropAbsentResponders(game, offer);
 
-        final DrawOfferMessage.Status update = status(offer, result);
+        final List<DrawOfferMessage.Entry> entries = new ArrayList<>();
+        for (final Map.Entry<Player, DrawOffer.Vote> e : offer.getVotes().entrySet()) {
+            entries.add(new DrawOfferMessage.Entry(e.getKey().getView(), e.getValue()));
+        }
+        final DrawOfferMessage.Status update = new DrawOfferMessage.Status(PlayerView.get(offer.getOfferer()), offer.getReason(), entries, result);
         for (final Player p : game.getRegisteredPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman pch) {
                 final IGuiGame gui = pch.getGui();
@@ -87,15 +136,6 @@ public final class DrawOfferCoordinator {
         }
     }
 
-    /** The snapshot of {@code offer} that a GUI shows. */
-    public static DrawOfferMessage.Status status(final DrawOffer offer, final DrawOfferMessage.Result result) {
-        final List<DrawOfferMessage.Entry> entries = new ArrayList<>();
-        for (final Map.Entry<Player, DrawOffer.Vote> e : offer.getVotes().entrySet()) {
-            entries.add(new DrawOfferMessage.Entry(e.getKey().getView(), e.getValue()));
-        }
-        return new DrawOfferMessage.Status(PlayerView.get(offer.getOfferer()), offer.getReason(), entries, result);
-    }
-
     private static void resolve(final Game game, final DrawOffer offer) {
         if (game.isGameOver()) {
             game.setDrawOffer(null);
@@ -103,12 +143,9 @@ public final class DrawOfferCoordinator {
         }
         final boolean accepted = offer.isUnanimousAccept();
         broadcast(game, offer, accepted ? DrawOfferMessage.Result.ACCEPTED : DrawOfferMessage.Result.DECLINED);
-        if (offer.getOfferer() == null) {
-            // the game thread made this offer and is waiting to act on the result itself
-            return;
-        }
         game.setDrawOffer(null);
-        if (!accepted) {
+        if (!accepted || offer.getOfferer() == null) {
+            // the game thread ends a game that it offered to draw itself
             return;
         }
         // Atomic: only now do we touch outcomes. Apply to every alive player, then end directly.
