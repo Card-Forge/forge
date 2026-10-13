@@ -368,6 +368,10 @@ public final class ForgeConstants {
     public static final String GRAVEYARD_ORDERING_OWN_CARDS = "With Relevant Cards";
     public static final String GRAVEYARD_ORDERING_ALWAYS = "Always";
 
+    public static final String UNDO_MODE_OFF = "Off";
+    public static final String UNDO_MODE_SINGLE = "Single step";
+    public static final String UNDO_MODE_FREE = "Free";
+
     // Constants for Stack effect addition notification policy
     public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";
     public static final String STACK_EFFECT_NOTIFICATION_ALWAYS = "Always";

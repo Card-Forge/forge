@@ -277,6 +277,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS
             }), 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_UNDO_MODE,
+            Forge.getLocalizer().getMessage("cbUndoMode"),
+            Forge.getLocalizer().getMessage("nlUndoMode"),
+            new String[] {
+                ForgeConstants.UNDO_MODE_OFF, ForgeConstants.UNDO_MODE_SINGLE, ForgeConstants.UNDO_MODE_FREE
+            }), 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
             Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
             Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
