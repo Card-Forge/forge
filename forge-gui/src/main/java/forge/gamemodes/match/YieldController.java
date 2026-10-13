@@ -21,6 +21,7 @@ import forge.player.PlayerControllerHuman;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class YieldController {
 
     /** Yield FPrefs synced per-PCH; enumerated here so the client snapshot includes every value, not just touched overrides.
      * Stored String-typed (see {@link forge.localinstance.properties.IPreferences}); consumers parse via {@link #getBoolPref}/{@link #getStringPref} according to the pref's expected type. */
-    private static final EnumSet<FPref> SYNCED_PREFS = EnumSet.of(
+    public static final Set<FPref> SYNCED_PREFS = Collections.unmodifiableSet(EnumSet.of(
             FPref.YIELD_INTERRUPT_ON_ATTACKERS,
             FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL,
             FPref.YIELD_INTERRUPT_ON_TARGETING,
@@ -64,7 +65,7 @@ public class YieldController {
             // Not yield prefs, but seeded the same way: the host runs preview scans on
             // the remote player's behalf and must use that client's highlight settings, not its own.
             FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
-            FPref.UI_SHOW_AUTOTAP_PREVIEW);
+            FPref.UI_SHOW_AUTOTAP_PREVIEW));
 
     private final PlayerControllerHuman owner;
 
@@ -82,7 +83,8 @@ public class YieldController {
     private final AutoYieldStore localStore = new AutoYieldStore();
     private final Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
 
-    /** Populated only on the host's proxy of a remote player (via {@link #applyClientSeed} and {@link YieldUpdate.SetYieldPref} envelopes); local controllers always defer to FModel. Override wins, FModel is fallback. */
+    /** Populated on the host's proxy of a remote player (via {@link #applyClientSeed} and {@link YieldUpdate.SetYieldPref} envelopes), and by a client
+     * whose player's settings are not the ones in FModel. Override wins, FModel is fallback. */
     private final EnumMap<FPref, String> prefOverrides = new EnumMap<>(FPref.class);
 
     public YieldController(PlayerControllerHuman owner) {
@@ -215,7 +217,7 @@ public class YieldController {
 
     /** True when the active auto-decision scope is per-ability (any tier above per-card/per-game). */
     public boolean isAbilityScope() {
-        return !ForgeConstants.AUTO_DECISION_PER_CARD.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE));
+        return !ForgeConstants.AUTO_DECISION_PER_CARD.equals(getStringPref(FPref.UI_AUTO_DECISION_MODE));
     }
 
     /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
@@ -245,12 +247,12 @@ public class YieldController {
         return owner == null || !owner.isRemoteClient();
     }
 
-    private static boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE));
+    private boolean activeModeIsInstall() {
+        return ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL.equals(getStringPref(FPref.UI_AUTO_DECISION_MODE));
     }
 
-    private static AutoYieldStore.Tier activeTier() {
-        String mode = FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE);
+    private AutoYieldStore.Tier activeTier() {
+        String mode = getStringPref(FPref.UI_AUTO_DECISION_MODE);
         if (ForgeConstants.AUTO_DECISION_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
         if (ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
         return AutoYieldStore.Tier.MATCH;
