@@ -950,6 +950,21 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         broadcast(MessageEvent.warning(String.format("%s did not reconnect in time. AI has taken over.", username)));
     }
 
+    /**
+     * Converts a connected player's seat in the running match to AI now. A dropped connection waits for a reconnect first.
+     * The caller must close the player's connection afterwards.
+     */
+    public void replaceWithAI(final int slotIndex) {
+        final RemoteClient client = getClientBySlotIndex(slotIndex);
+        // The client is deregistered first. Otherwise closing its connection would park the seat for a reconnect
+        if (client == null || !isMatchActive() || !clients.values().remove(client)) { return; }
+        client.getReplyPool().cancelAll();
+        pauseRemoteClientGuiGame(client);
+        convertToAI(client);
+        localLobby.disconnectPlayer(slotIndex);
+        broadcast(new MessageEvent(String.format("Host forced AI takeover for %s.", client.getUsername())));
+    }
+
     public void convertToAI(final RemoteClient client) {
         final int slotIndex = client.getIndex();
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
