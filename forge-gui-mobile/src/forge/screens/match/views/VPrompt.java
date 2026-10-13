@@ -101,6 +101,25 @@ public class VPrompt extends FContainer {
 
     /** Small round undo button that sits beside the End Turn button. */
     private class UndoButton extends FDisplayObject {
+        boolean pressed;
+        @Override
+        public boolean press(float x, float y) {
+            if (isVisible() && isEnabled()) {
+                pressed = true;
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean release(float x, float y) {
+            if (pressed) {
+                pressed = false;
+                return true;
+            }
+            return false;
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             MatchController.instance.getGameController().undoLastAction();
@@ -112,9 +131,10 @@ public class VPrompt extends FContainer {
             float cx = getWidth() / 2, cy = getHeight() / 2;
             float r = Math.min(getWidth(), getHeight()) / 2f * (isHovered() ? 1f : 0.9f);
             boolean adv = Forge.isMobileAdventureMode;
-            FSkinColor fill = FSkinColor.get(isHovered()
-                    ? (adv ? Colors.ADV_CLR_PHASE_ACTIVE_ENABLED : Colors.CLR_PHASE_ACTIVE_ENABLED)
-                    : (adv ? Colors.ADV_CLR_INACTIVE : Colors.CLR_INACTIVE));
+            FSkinColor fill = FSkinColor.get(isHovered() && !pressed
+                ? (adv ? Colors.ADV_CLR_PHASE_INACTIVE_ENABLED : Colors.CLR_PHASE_INACTIVE_ENABLED)
+                : isHovered() && pressed ? (adv ? Colors.ADV_CLR_PHASE_ACTIVE_ENABLED : Colors.CLR_PHASE_ACTIVE_ENABLED)
+                : (adv ? Colors.ADV_CLR_INACTIVE : Colors.CLR_INACTIVE));
             FSkinColor fore = getForeColor();
             float line = Utils.scale(1.5f);
             g.fillCircle(fill, cx, cy, r);
