@@ -3729,6 +3729,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void showDrawOffer(final DrawOffer offer) {
+        getGui().updateDrawOffer(DrawOfferCoordinator.status(offer, null));
+    }
+
+    @Override
     public void drawOfferAction(final DrawOfferMessage.Action action) {
         switch (action) {
             case OFFER -> DrawOfferCoordinator.offer(getGame(), player);

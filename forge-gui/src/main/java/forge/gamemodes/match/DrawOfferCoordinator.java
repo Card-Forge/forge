@@ -9,6 +9,7 @@ import forge.game.DrawOffer;
 import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.gui.interfaces.IGuiGame;
 import forge.player.PlayerControllerHuman;
 
@@ -23,6 +24,9 @@ public final class DrawOfferCoordinator {
         }
         final DrawOffer existing = game.getDrawOffer();
         if (existing != null) {
+            if (existing.getOfferer() == null) {
+                return;
+            }
             final boolean offererPresent = game.getPlayers().contains(existing.getOfferer());
             final boolean anyResponderPresent = existing.getVotes().keySet().stream().anyMatch(game.getPlayers()::contains);
             if (offererPresent && anyResponderPresent) {
@@ -70,13 +74,9 @@ public final class DrawOfferCoordinator {
     }
     private static void broadcast(final Game game, final DrawOffer offer, final DrawOfferMessage.Result result) {
         // Drop any responder who has left the game since the offer was made.
-        offer.getVotes().keySet().removeIf(p -> !game.getPlayers().contains(p));
+        offer.retainResponders(game.getPlayers());
 
-        final List<DrawOfferMessage.Entry> entries = new ArrayList<>();
-        for (final Map.Entry<Player, DrawOffer.Vote> e : offer.getVotes().entrySet()) {
-            entries.add(new DrawOfferMessage.Entry(e.getKey().getView(), e.getValue()));
-        }
-        final DrawOfferMessage.Status update = new DrawOfferMessage.Status(offer.getOfferer().getView(), entries, result);
+        final DrawOfferMessage.Status update = status(offer, result);
         for (final Player p : game.getRegisteredPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman pch) {
                 final IGuiGame gui = pch.getGui();
@@ -87,6 +87,15 @@ public final class DrawOfferCoordinator {
         }
     }
 
+    /** The snapshot of {@code offer} that a GUI shows. */
+    public static DrawOfferMessage.Status status(final DrawOffer offer, final DrawOfferMessage.Result result) {
+        final List<DrawOfferMessage.Entry> entries = new ArrayList<>();
+        for (final Map.Entry<Player, DrawOffer.Vote> e : offer.getVotes().entrySet()) {
+            entries.add(new DrawOfferMessage.Entry(e.getKey().getView(), e.getValue()));
+        }
+        return new DrawOfferMessage.Status(PlayerView.get(offer.getOfferer()), offer.getReason(), entries, result);
+    }
+
     private static void resolve(final Game game, final DrawOffer offer) {
         if (game.isGameOver()) {
             game.setDrawOffer(null);
@@ -94,6 +103,10 @@ public final class DrawOfferCoordinator {
         }
         final boolean accepted = offer.isUnanimousAccept();
         broadcast(game, offer, accepted ? DrawOfferMessage.Result.ACCEPTED : DrawOfferMessage.Result.DECLINED);
+        if (offer.getOfferer() == null) {
+            // the game thread made this offer and is waiting to act on the result itself
+            return;
+        }
         game.setDrawOffer(null);
         if (!accepted) {
             return;

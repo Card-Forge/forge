@@ -41,6 +41,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -59,6 +60,7 @@ import java.util.stream.Collectors;
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private static final int MAX_TRIGGER_REPEATS = 50;
+    private static final int MAX_STACK_SIZE = 999;
 
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
     private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
@@ -79,6 +81,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private Card curResolvingCard = null;
     private final Map<Integer, Integer> triggerRepeats = new HashMap<>();
+    private boolean loopDrawDeclined;
 
     private final Game game;
 
@@ -106,7 +109,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         thisTurnCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
-        triggerRepeats.clear();
+        clearTriggerRepeats();
         frozenStack.clear();
         clearUndoStack();
         game.updateStackForView();
@@ -212,14 +215,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         Player activator = sp.getActivatingPlayer();
 
-        // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
+        // Possible infinite loop, so offer a draw. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
         // CR 104.4b the same goes for a mandatory trigger that keeps coming back before the stack clears
-        if (game.getStack().size() > 999 || (si == null && isRepeatingTrigger(sp))) {
-            for (Player p : game.getPlayers()) {
-                p.intentionalDraw();
+        final boolean stackFull = game.getStack().size() > MAX_STACK_SIZE;
+        if ((stackFull || (si == null && isRepeatingTrigger(sp))) && !loopDrawDeclined && game.getDrawOffer() == null) {
+            if (playersAcceptLoopDraw(sp, stackFull)) {
+                for (Player p : game.getPlayers()) {
+                    p.intentionalDraw();
+                }
+                game.setGameOver(GameEndReason.Draw);
+                return;
             }
-            game.setGameOver(GameEndReason.Draw);
-            return;
+            loopDrawDeclined = true;
         }
 
         recordUndoableActions(sp);
@@ -502,7 +509,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private boolean isRepeatingTrigger(final SpellAbility sp) {
         if (!sp.isTrigger()) {
             // a player did something
-            triggerRepeats.clear();
+            clearTriggerRepeats();
         }
         if (!sp.isMandatory() || sp.usesTargeting()) {
             return false;
@@ -518,6 +525,37 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final void clearTriggerRepeats() {
         triggerRepeats.clear();
+        loopDrawDeclined = false;
+    }
+
+    /** The engine cannot tell an endless loop from a long finite one, so the humans vote on a draw. AI players go along. */
+    private boolean playersAcceptLoopDraw(final SpellAbility sp, final boolean stackFull) {
+        final Localizer localizer = Localizer.getInstance();
+        final String reason = stackFull ? localizer.getMessage("lblStackFullOfferDraw", MAX_STACK_SIZE)
+                : localizer.getMessage("lblRepeatingTriggerOfferDraw", sp.getHostCard().getName(), MAX_TRIGGER_REPEATS);
+        final DrawOffer offer = new DrawOffer(null, reason, game.getPlayers());
+        for (final Player p : game.getPlayers()) {
+            if (p.getController().isAI()) {
+                offer.record(p, true);
+            }
+        }
+        if (offer.isSettled()) {
+            return true;
+        }
+        game.setDrawOffer(offer);
+        for (final Player p : game.getPlayers()) {
+            p.getController().showDrawOffer(offer);
+        }
+        try {
+            while (!offer.awaitSettled(250) && !game.isGameOver()) {
+                // a player who leaves the game no longer has a vote
+                offer.retainResponders(game.getPlayers());
+            }
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        game.setDrawOffer(null);
+        return !game.isGameOver() && offer.isUnanimousAccept();
     }
 
     private void recordUndoableActions(SpellAbility sa) {

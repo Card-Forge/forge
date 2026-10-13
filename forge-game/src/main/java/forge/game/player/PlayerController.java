@@ -88,6 +88,10 @@ public abstract class PlayerController {
         return false;
     }
 
+    /** Shows this player a draw offer that the game itself has made. */
+    public void showDrawOffer(final DrawOffer offer) {
+    }
+
     public Game getGame() { return gameView.getGame(); }
     public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
