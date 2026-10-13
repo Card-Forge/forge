@@ -1,0 +1,17 @@
+# Defend the Celestus: "Distribute three +1/+1 counters among one, two, or
+# three target creatures" (DividedAsYouChoose$ 3). CR 601.2d: two targets
+# for three counters is a real division, announced right after the targets
+# as the spell is cast (PlayerControllerHuman.java:2486-2527); each target
+# gets its own share at resolution (CountersPutEffect.java:460-461).
+startturn ai
+advance 3
+tapformana ai 5 G
+tapformana ai 6 G
+tapformana ai 7 G
+tapformana ai 8 G
+queue targets 1,2
+queue divide 2,1
+queue paygeneric G
+queue paygeneric G
+queue action ai cast 3
+passpriority

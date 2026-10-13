@@ -1,0 +1,9 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humanbattlefield=Mountain|Tapped
+humangraveyard=Lightning Bolt
+ailife=20
+aibattlefield=Grizzly Bears|Counters:P1P1=1;Forest|Tapped;Forest|Tapped;Forest|Tapped;Forest|Tapped
+aigraveyard=Savannah Lions;Defend the Celestus

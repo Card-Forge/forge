@@ -74,8 +74,10 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 		return false
 	}
 	a.targeter = decider
-	if len(choice.candidates) == 0 {
-		// TargetMin$ 0 and no candidate: nothing to ask (TargetSelection.java:117-120).
+	if len(choice.candidates) == 0 || choice.max <= 0 && choice.min <= 0 {
+		// TargetMin$ 0 and no candidate, or no target allowed at all (a
+		// DividedAsYouChoose$ total of 0, capDividedChoice): nothing to ask
+		// (TargetSelection.java:84, 117-120).
 		return true
 	}
 	chosen := controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
@@ -87,6 +89,13 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 		a.Targets = nil
 		return false
 	}
+	// CR 601.2d: the division is announced right after the targets.
+	divided, err := g.divideAmongTargets(controller, decider, a, a.Targets)
+	if err != nil {
+		a.targetsErr = err
+		return true
+	}
+	a.divided = divided
 	return true
 }
 
@@ -528,7 +537,7 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	// TargetSelection.chooseTargets cancels only when there are neither enough
 	// candidates nor enough targets (TargetSelection.java:82, 113-120), and a
 	// minimum of 0 is always enough (Gaea's Blessing over an empty graveyard).
-	return targetChoice{candidates: candidates, min: targetMin, max: targetMax}, true, true
+	return g.capDividedChoice(a, targetChoice{candidates: candidates, min: targetMin, max: targetMax}), true, true
 }
 
 // specCanTargetPlayer is TargetRestrictions.canTgtPlayer for a ValidTgts$
@@ -1094,6 +1103,9 @@ func clonedChainTargets(cts []chainTarget) []chainTarget {
 			Params:  ct.Params,
 			Targets: append([]EntityID(nil), ct.Targets...),
 			Stamps:  append([]targetStamp(nil), ct.Stamps...),
+			// Never written in place (Ability.divided), so shared as is.
+			Divided: ct.Divided,
+			Err:     ct.Err,
 		}
 	}
 	return out

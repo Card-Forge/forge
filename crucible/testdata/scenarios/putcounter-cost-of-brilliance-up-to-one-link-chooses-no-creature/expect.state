@@ -1,0 +1,8 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=18
+humanhand=Forest;Forest
+ailife=20
+aibattlefield=Grizzly Bears;Swamp|Tapped;Swamp|Tapped;Swamp|Tapped
+aigraveyard=Cost of Brilliance

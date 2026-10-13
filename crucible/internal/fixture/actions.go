@@ -59,6 +59,8 @@ import (
 //	queue discard <id>[,...]      ScriptedController.QueueDiscard, ids from CardByFixtureID
 //	queue cardchoice <id>[,...]   ScriptedController.QueueCardChoice, an effect's ChooseCardsForEffect pick, ids from CardByFixtureID
 //	queue battleprotector <p>     ScriptedController.QueueBattleProtector, a seated player's name
+//	queue divide <n>[,<n>...]     ScriptedController.QueueDivision, a DividedAsYouChoose$ share per target, in target order
+//	queue targets <t>[,...]|none  ScriptedController.QueueTargets, cards by CardByFixtureID or player names; none chooses no target
 //	queue sector <alpha|beta|gamma>  ScriptedController.QueueSector, a ChooseSector answer (also CR 704.5u's per-creature assignment)
 //	paymanacost <player> <cost>          Game.PayManaCost(player, cost, controller) -- cost is mana.Parse's own text
 //	tapformana <player> <id> <color>     Game.TapLandForMana(player, id, color), id from CardByFixtureID
@@ -425,12 +427,30 @@ func runQueue(args []string, l *Loaded, c *engine.ScriptedController) error {
 		// CardByFixtureID or a seated player's name, per entry
 		// (resolveAttackTarget's own either/or, reused per comma-separated
 		// value here since ChooseTargets can return more than one entity,
-		// unlike ChooseAttackTarget's own single answer).
+		// unlike ChooseAttackTarget's own single answer). "none" is an
+		// explicit empty answer, an "up to N" choice of no target.
+		if value == "none" {
+			c.QueueTargets(nil)
+			break
+		}
 		chosen, err := resolveTargetEntities(l, value)
 		if err != nil {
 			return fmt.Errorf("queue targets: %w", err)
 		}
 		c.QueueTargets(chosen)
+
+	case "divide":
+		// A DividedAsYouChoose$ division (DivideAmongTargets): one share per
+		// target, comma-separated, in the order the targets were queued.
+		var shares []int
+		for _, s := range strings.Split(value, ",") {
+			n, err := strconv.Atoi(s)
+			if err != nil {
+				return fmt.Errorf("queue divide %q: %w", value, err)
+			}
+			shares = append(shares, n)
+		}
+		c.QueueDivision(shares)
 
 	case "attackers":
 		// "none" is written explicitly, not an empty value, because every

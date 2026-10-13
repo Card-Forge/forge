@@ -54,7 +54,11 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 			return false
 		}
 		if choice.err != nil {
+			// Recorded on the link too: resolving, it reads its own error
+			// rather than its parent's targets, under a root that never reads
+			// targetsErr.
 			a.targetsErr = choice.err
+			a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Err: choice.err})
 			return true
 		}
 		// TargetingPlayer$ on the link names who chooses (Magus of the Arena).
@@ -63,11 +67,21 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 			return false
 		}
 		var chosen []EntityID
-		if len(choice.candidates) > 0 {
-			// TargetMin$ 0 with no candidate asks nothing (resolveTargets).
+		if len(choice.candidates) > 0 && (choice.max > 0 || choice.min > 0) {
+			// TargetMin$ 0 with no candidate, or no target allowed at all,
+			// asks nothing (resolveTargets).
 			chosen = controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
 		}
-		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen})
+		// CR 601.2d: the link's division is announced right after its targets.
+		divided, err := g.divideAmongTargets(controller, decider, &link, chosen)
+		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen, Divided: divided, Err: err})
+		if err != nil {
+			// The link keeps its targets with no division and its own error,
+			// so it fails when it resolves even under a root that never reads
+			// targetsErr.
+			a.targetsErr = err
+			return true
+		}
 		if len(chosen) > 0 {
 			parents = chosen
 			unique = append(append([]EntityID(nil), unique...), chosen...)
@@ -98,15 +112,16 @@ func (g *Game) chooseAbilityTargets(controller PlayerController, a *Ability) boo
 	return true
 }
 
-// chainTargetsFor is the targets chosen for the sub-ability link params, and
-// whether any were. A Charm mode carries its own links' (chooseCharmModes), a
-// copy its original's (copySpell); a link no one chose targets for (one
-// naming no ValidTgts$) keeps its parent's.
-func (a *Ability) chainTargetsFor(link *compile.Ability) ([]EntityID, bool) {
+// chainTargetsFor is what was chosen for the sub-ability link params -- its
+// targets, their DividedAsYouChoose$ division, the error that kept them from
+// being asked -- and whether any was. A Charm mode carries its own links'
+// (chooseCharmModes), a copy its original's (copySpell); a link no one chose
+// targets for (one naming no ValidTgts$) keeps its parent's.
+func (a *Ability) chainTargetsFor(link *compile.Ability) (chainTarget, bool) {
 	for _, c := range a.chainTargets {
 		if c.Params == link {
-			return c.Targets, true
+			return c, true
 		}
 	}
-	return nil, false
+	return chainTarget{}, false
 }

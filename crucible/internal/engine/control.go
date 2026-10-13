@@ -255,6 +255,16 @@ type PlayerController interface {
 	// trust the controller's answer, the same as ChooseLegendaryToKeep.
 	ChooseTargets(g *Game, decider PlayerID, valid []EntityID, targetMin, targetMax int) []EntityID
 
+	// DivideAmongTargets announces how decider divides amount among targets
+	// (CR 601.2d), the targets a DividedAsYouChoose$ ability from source just
+	// chose -- Java's assignGenericAmount with atLeastOne
+	// (PlayerControllerHuman.java:2507-2526). The answer is one share per
+	// target, in targets' order, each at least one, adding up to amount; the
+	// caller checks it (divideAmongTargets, dividedtargets.go, GO-7). Asked
+	// only when the division is a real choice: never for one target, nor for
+	// as many targets as the amount.
+	DivideAmongTargets(g *Game, decider PlayerID, source CardID, targets []EntityID, amount int) []int
+
 	// ChooseBattleProtector decides which opponent defends decider's Battle
 	// (CR 704.5w/704.5x, assignBattleProtector, action.go). eligible is
 	// never empty. The return value should be one of eligible's elements,
@@ -596,6 +606,7 @@ type ScriptedController struct {
 	scryDecisions      []scryDecision
 	surveilDecisions   []scryDecision
 	targets            [][]EntityID
+	divisions          [][]int
 	optionalTrigger    []bool
 	sacrificeChoices   [][]CardID
 	payCost            []bool
@@ -938,6 +949,15 @@ func (c *ScriptedController) ChooseTargets(_ *Game, _ PlayerID, _ []EntityID, _,
 	v := c.targets[0]
 	c.targets = c.targets[1:]
 	return v
+}
+
+// QueueDivision appends the answer to the next DivideAmongTargets call: one
+// share per target, in the order the targets were chosen.
+func (c *ScriptedController) QueueDivision(shares []int) { c.divisions = append(c.divisions, shares) }
+
+// DivideAmongTargets returns the next answer QueueDivision queued.
+func (c *ScriptedController) DivideAmongTargets(_ *Game, _ PlayerID, _ CardID, _ []EntityID, _ int) []int {
+	return popQueue(&c.divisions, "division")
 }
 
 // ChooseBattleProtector returns the next answer QueueBattleProtector queued.

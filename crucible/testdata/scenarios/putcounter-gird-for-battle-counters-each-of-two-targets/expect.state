@@ -1,0 +1,8 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humanbattlefield=Savannah Lions|Counters:P1P1=1
+ailife=20
+aibattlefield=Grizzly Bears|Counters:P1P1=1;Plains|Tapped
+aigraveyard=Gird for Battle

@@ -1,0 +1,9 @@
+# Gird for Battle: "Put a +1/+1 counter on each of up to two target
+# creatures" (TargetMin$ 0 | TargetMax$ 2). Both chosen targets, one of each
+# player's, get CounterNum$ 1 apiece (CountersPutEffect.java:279-570).
+startturn ai
+advance 3
+tapformana ai 5 W
+queue targets 1,2
+queue action ai cast 3
+passpriority

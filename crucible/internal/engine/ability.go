@@ -144,6 +144,13 @@ type Ability struct {
 	// chainTargets are the targets chosen for the sub-abilities of this
 	// ability that name their own ValidTgts$ (resolveChainTargets).
 	chainTargets []chainTarget
+	// divided is the DividedAsYouChoose$ division announced with Targets
+	// (CR 601.2d, divideAmongTargets, dividedtargets.go): Java's
+	// TargetChoices.dividedMap. Looked up by target, never by position --
+	// dropIllegalTargets rebuilds Targets, and a dropped target's share is
+	// simply never read. Replaced, never written in place: a stack item
+	// copied by value (copySpell, Game.Clone) shares it.
+	divided []dividedShare
 	// evolve is the creature that entered for a trigger naming Condition$
 	// Evolve: WrappedAbility.resolve checks CR 702.100c again as the
 	// ability resolves, against the creatures' values by then. NoCard for
@@ -273,6 +280,18 @@ type chainTarget struct {
 	// Stamps are the zoneStamps of the card targets as the ability went on the
 	// stack (stampTargets), for the CR 608.2b re-check.
 	Stamps []targetStamp
+	// Divided is the link's own DividedAsYouChoose$ division, Ability.divided's
+	// twin.
+	Divided []dividedShare
+	// Err is why the link's targets or division could not be asked for
+	// (Ability.targetsErr's twin): the link fails with it when it resolves.
+	Err error
+}
+
+// dividedShare is one target's part of a DividedAsYouChoose$ amount.
+type dividedShare struct {
+	target EntityID
+	amount int
 }
 
 // allTargetsOf is SpellAbility.getAllTargetChoices (MagicStack.java:410):

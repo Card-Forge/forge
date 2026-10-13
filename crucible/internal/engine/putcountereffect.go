@@ -30,15 +30,17 @@ import (
 
 // putCounterUnresolvedParams names CountersPutEffect's own params past
 // CounterType$/CounterNum$/Defined$ this port does not evaluate. Every one
-// fails the whole line loudly: TargetMin$/TargetMax$ (162 each) -- a target
-// count other than exactly one, this port's own targeting gap; ETB$
+// fails the whole line loudly. TargetMin$/TargetMax$ are not among them:
+// resolveTargets (targeting.go) already asks for that many targets, and
+// each one chosen gets CounterNum$ counters. ETB$
 // (154) -- CR 614's own counters-added-simultaneously replacement table
 // (GameEntityCounterTable), the identical batching risk ChangesZoneAll's
 // own gap already documents (Not ported yet); Choices$ and its own
 // ChoiceTitle$/ChoiceAmount$/MinChoiceAmount$/ChoicesDesc$/ChoiceZone$/
 // ChoiceOptional$ (46 combined) -- an interactive multi-card choice this
-// port's own PlayerController has no hook for; DividedAsYouChoose$/
-// DividedRandomly$/SplitAmount$ -- each its own distribution mechanic;
+// port's own PlayerController has no hook for; DividedRandomly$/SplitAmount$
+// -- each its own distribution mechanic (DividedAsYouChoose$ over the
+// line's own targets resolves: divideAmongTargets, dividedtargets.go);
 // Monstrosity$/Adapt$/Bolster$/Support$/PowerUp$/Exhaust$ -- each its own
 // further keyword-ability mechanic buildSpellAbility itself rewrites into
 // this shape from a simpler keyword line; EachFromSource$/PutOnEachOther$/
@@ -65,9 +67,9 @@ import (
 // naming SubAbility$ chain to an already-built leaf ability and resolve
 // end to end.
 var putCounterUnresolvedParams = [...]string{
-	"TargetMin", "TargetMax", "ETB",
+	"ETB",
 	"Choices", "ChoiceTitle", "ChoiceAmount", "MinChoiceAmount", "ChoicesDesc", "ChoiceZone", "ChoiceOptional",
-	"DividedAsYouChoose", "DividedRandomly", "SplitAmount",
+	"DividedRandomly", "SplitAmount",
 	"Monstrosity", "Adapt", "Bolster", "Support", "PowerUp", "Exhaust",
 	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
 	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "SkipReceiveCounters", "RandomType",
@@ -123,8 +125,27 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 
 	var cards []CardID
 	var players []PlayerID
-	if _, targeted := a.Params.Param("ValidTgts"); targeted {
-		// getDefinedOrTargeted: the chosen targets, a card or a player each.
+	defined, hasDefined := a.Params.Param("Defined")
+	_, targeted := a.Params.Param("ValidTgts")
+	divided := a.isDivided()
+	if divided && (!targeted || hasDefined) {
+		// Untargeted, the division is asked card by card as the effect
+		// resolves (CountersPutEffect.java:470-483, Choices$-chosen cards);
+		// with Defined$ the cards read are not the targets the division was
+		// announced over.
+		return fmt.Errorf("engine: PutCounter: DividedAsYouChoose$ without its own targets not resolvable yet")
+	}
+	if a.targetsErr != nil {
+		// The targets, or their division, could not be asked for as the
+		// ability went on the stack (resolveTargets).
+		return fmt.Errorf("engine: PutCounter: %w", a.targetsErr)
+	}
+	if targeted && !hasDefined {
+		// getDefinedEntitiesOrTargeted (SpellAbilityEffect.java:376-383):
+		// the chosen targets, a card or a player each -- every one of them,
+		// "each of up to N target creatures" (TargetMin$/TargetMax$) getting
+		// CounterNum$ apiece (CountersPutEffect.java:279-570). An "up to"
+		// choice of none puts nothing and the SubAbility$ chain still runs.
 		for _, e := range a.Targets {
 			if id, ok := e.AsCard(); ok {
 				cards = append(cards, id)
@@ -133,21 +154,43 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 			}
 		}
 	} else {
+		// Defined$ wins over the targets when both are named (definedFirst,
+		// SpellAbilityEffect.java:379): Drillworks Mole's "Self & Targeted".
 		// No Defined$ is the host (AbilityUtils.getDefinedEntities' "default
 		// to Self", AbilityUtils.java:1220): Murktide Regent's "put a +1/+1
 		// counter on CARDNAME".
-		defined, ok := a.Params.Param("Defined")
-		if !ok {
+		if !hasDefined {
 			defined = "Self"
 		}
-		cards, players, err = definedCounterTargets(g, a.Controller, source, defined, a.refs())
-		if err != nil {
-			return fmt.Errorf("engine: PutCounter: %w", err)
+		for _, part := range strings.Split(defined, " & ") {
+			c, p, err := definedCounterTargets(g, a.Controller, source, part, a.refs())
+			if err != nil {
+				return fmt.Errorf("engine: PutCounter: %w", err)
+			}
+			cards = append(cards, c...)
+			players = append(players, p...)
 		}
 	}
 
-	for _, cid := range cards {
-		n := g.countersReplaced(controller, a.Controller, CardEntity(cid), counterType, amount)
+	// Each card's amount, worked out before any counter is placed so a
+	// missing share fails the line before it acts (GO-7).
+	amounts := make([]int, len(cards))
+	for i, cid := range cards {
+		amounts[i] = amount
+		if !divided {
+			continue
+		}
+		// A targeted DividedAsYouChoose$ line puts on each target the share
+		// announced as it was chosen, CounterNum$ unread
+		// (CountersPutEffect.java:460-461).
+		share, ok := a.dividedShareOf(CardEntity(cid))
+		if !ok {
+			return fmt.Errorf("engine: PutCounter: DividedAsYouChoose$: no division was announced for target %d", cid)
+		}
+		amounts[i] = share
+	}
+	for i, cid := range cards {
+		n := g.countersReplaced(controller, a.Controller, CardEntity(cid), counterType, amounts[i])
 		if n <= 0 {
 			continue
 		}

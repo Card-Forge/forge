@@ -343,7 +343,14 @@ func (g *Game) chooseCopyTargets(controller PlayerController, m *Ability) error 
 		return choice.err
 	}
 	if !named || !ok || len(choice.candidates) == 0 || !controller.ConfirmEffect(g, m.Controller, m.Source) {
+		// Kept targets keep their division too (copySpell copies it).
 		return nil
+	}
+	if m.isDivided() {
+		// New targets for a divided part keep the original's division values,
+		// reassigned to them (PlayerControllerHuman.java:2549, chooseTargets
+		// with divisionValues): a decision this port does not ask.
+		return fmt.Errorf("engine: CopySpellAbility: new targets for a DividedAsYouChoose$ part not resolvable yet")
 	}
 	decider, err := g.targetingPlayerOf(m)
 	if err != nil {

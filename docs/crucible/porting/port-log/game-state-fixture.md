@@ -137,7 +137,8 @@ queue startingplayer <p>      ScriptedController.QueueStartingPlayer
 queue startinghand <n>        ScriptedController.QueueStartingHand
 queue legendarykeep <id>      ScriptedController.QueueLegendaryToKeep, id from Loaded.CardByFixtureID
 queue enchanttarget <id>      ScriptedController.QueueEnchantTarget, id from Loaded.CardByFixtureID
-queue targets <t>[,<t>...]    ScriptedController.QueueTargets, a triggered ability's/cast spell's/activated ability's targets -- each <t> a card's Loaded.CardByFixtureID or a seated player's name (resolveTargetEntities)
+queue targets <t>[,<t>...]|none  ScriptedController.QueueTargets, a triggered ability's/cast spell's/activated ability's targets -- each <t> a card's Loaded.CardByFixtureID or a seated player's name (resolveTargetEntities); none is an "up to N" choice of no target
+queue divide <n>[,<n>...]     ScriptedController.QueueDivision, a DividedAsYouChoose$ division (CR 601.2d, DivideAmongTargets): one share per target, in the order the targets were queued
 queue attackers [<id>,...]    ScriptedController.QueueAttackers, ids from Loaded.CardByFixtureID (no ids declines)
 queue exertattackers [<id>,...]  ScriptedController.QueueExertAttackers, ids from Loaded.CardByFixtureID (no ids/"none" declines)
 queue attacktarget <p>|<id>   ScriptedController.QueueAttackTarget, a player name or a planeswalker/battle's Loaded.CardByFixtureID

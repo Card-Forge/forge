@@ -1,0 +1,8 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humanbattlefield=Savannah Lions
+ailife=20
+aibattlefield=Grizzly Bears|Counters:P1P1=2;Plains|Tapped;Swamp|Tapped;Forest|Tapped
+aigraveyard=Abzan Charm

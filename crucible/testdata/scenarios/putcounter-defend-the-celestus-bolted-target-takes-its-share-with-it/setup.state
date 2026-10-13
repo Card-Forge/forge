@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Lightning Bolt|Id:9
+humanbattlefield=Mountain|Id:10
+aihand=Defend the Celestus|Id:3
+aibattlefield=Grizzly Bears|Id:1;Savannah Lions|Id:2;Forest|Id:5;Forest|Id:6;Forest|Id:7;Forest|Id:8

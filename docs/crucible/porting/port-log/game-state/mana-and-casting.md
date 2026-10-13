@@ -366,10 +366,11 @@ between targeting and resolution -- `DamageDealEffect.java`'s own per-target liv
 effect on top of the shared CR 608.2b check -- while every other target in the same resolution still takes its damage.
 No such check exists for a player target in Java's own loop, so none was added here.
 
-`DividedAsYouChoose$` (Forked Bolt's own uneven-split shape, 74 real lines) is explicitly not ported: Java records the
-allocation at target-choosing time (`SpellAbility.addDividedAllocation`), a decision this port's own
-`resolveTargets`/`ChooseTargets` has nowhere to carry, so a line naming it fails loudly rather than dealing the
-ability's own full `NumDmg$` to every target chosen.
+`DividedAsYouChoose$` (Forked Bolt's own uneven-split shape, 74 real lines) is not ported for `DealDamage`: Java records
+the allocation at target-choosing time (`SpellAbility.addDividedAllocation`); `resolveTargets` now announces and carries
+it (`divideAmongTargets`, [`m6-r9-putcounter-targetmin.md`](m6-r9-putcounter-targetmin.md)), but `DealDamage` does not
+read the shares yet, so a line naming it fails loudly rather than dealing the ability's own full `NumDmg$` to every
+target chosen.
 
 `fixture/actions.go`'s own `queue targets` verb gained player-name support (`resolveTargetEntities`,
 `resolveAttackTarget`'s own comma-separated-list sibling) -- a real target list can now name a seated player, not just a

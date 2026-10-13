@@ -498,6 +498,36 @@ func TestRunActionsQueueDamageResolvesFixtureIDs(t *testing.T) {
 	}
 }
 
+func TestRunActionsQueueDivideQueuesOneSharePerTarget(t *testing.T) {
+	t.Parallel()
+
+	l := load(t, testDB(t), "humanlife=20\n")
+	c := engine.NewScriptedController()
+	if err := runActions(t, l, c, "queue divide 2,1\n"); err != nil {
+		t.Fatalf("RunActions: %v", err)
+	}
+	got := c.DivideAmongTargets(l.Game, l.Game.Players()[0], engine.NoCard, nil, 3)
+	if len(got) != 2 || got[0] != 2 || got[1] != 1 {
+		t.Errorf("division %v, want [2 1]", got)
+	}
+	if err := runActions(t, l, c, "queue divide 2,x\n"); err == nil {
+		t.Error("a non-numeric share did not error")
+	}
+}
+
+func TestRunActionsQueueTargetsNoneQueuesAnEmptyChoice(t *testing.T) {
+	t.Parallel()
+
+	l := load(t, testDB(t), "humanlife=20\n")
+	c := engine.NewScriptedController()
+	if err := runActions(t, l, c, "queue targets none\n"); err != nil {
+		t.Fatalf("RunActions: %v", err)
+	}
+	if got := c.ChooseTargets(l.Game, l.Game.Players()[0], nil, 0, 1); len(got) != 0 {
+		t.Errorf("targets %v, want none", got)
+	}
+}
+
 func TestRunActionsQueueDamageBadIDErrors(t *testing.T) {
 	t.Parallel()
 

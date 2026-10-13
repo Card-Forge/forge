@@ -1,0 +1,14 @@
+# Abzan Charm's third mode: "Distribute two +1/+1 counters among one or two
+# target creatures" (a Charm mode with DividedAsYouChoose$ 2). No creature
+# has power 3 or greater, so the exile mode cannot be chosen and the modes
+# offered are draw (0) and counters (1). One target takes the whole amount
+# without a division being asked (PlayerControllerHuman.java:2495-2496).
+startturn ai
+advance 3
+tapformana ai 5 W
+tapformana ai 6 B
+tapformana ai 7 G
+queue modechoice 1
+queue targets 1
+queue action ai cast 3
+passpriority

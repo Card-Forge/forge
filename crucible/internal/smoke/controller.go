@@ -177,6 +177,18 @@ func (*Controller) ChooseTargets(_ *engine.Game, _ engine.PlayerID, valid []engi
 	return valid[:pick(lo, hi, len(valid))]
 }
 
+// DivideAmongTargets gives every target one and the rest to the first.
+func (*Controller) DivideAmongTargets(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, targets []engine.EntityID, amount int) []int {
+	shares := make([]int, len(targets))
+	for i := range shares {
+		shares[i] = 1
+	}
+	if len(shares) > 0 {
+		shares[0] += amount - len(shares)
+	}
+	return shares
+}
+
 // ChooseBattleProtector picks the first eligible player.
 func (*Controller) ChooseBattleProtector(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, eligible []engine.PlayerID) engine.PlayerID {
 	return eligible[0]

@@ -94,9 +94,9 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		replacing: parent.replacing,
 	}
 	child.chainTargets = parent.chainTargets
-	if ts, ok := parent.chainTargetsFor(sub.Ability); ok {
-		child.Targets, child.Target = ts, NoCard
-		for _, e := range ts {
+	if ct, ok := parent.chainTargetsFor(sub.Ability); ok {
+		child.Targets, child.Target, child.divided, child.targetsErr = ct.Targets, NoCard, ct.Divided, ct.Err
+		for _, e := range ct.Targets {
 			if id, ok := e.AsCard(); ok {
 				child.Target = id
 				break

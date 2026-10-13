@@ -396,13 +396,14 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     named constants (`ENERGY`, ...) still gets the counter but emits no `CounterChanged` event, `counterDetail`'s own
     closed set unable to encode it. `SubAbility$` no longer blocks ("SubAbility chaining itself landed," above): 56 of
     623 real SVar-defined `PutCounter` lines naming it chain to an already-built leaf ability and resolve end to end.
-    Not resolved, each failing loudly by name rather than guessing (PORT-8/GO-7): `ValidTgts$`/`TargetMin$`/`TargetMax$`
-    (807/162/162) — a real target; targeting itself now exists (targeting's own paragraph, above), `PutCounter` just has
-    not been extended to read `Targeted` back yet; `ETB$` (154) — CR 614's own counters-added-simultaneously replacement
-    table (`GameEntityCounterTable`), the identical batching risk `ChangesZoneAll`'s own gap already documents;
-    `Choices$` and its own six further params (46 combined) — an interactive multi-card choice this port's own
-    `PlayerController` has no hook for; `Monstrosity$`/`Adapt$`/`Bolster$`/`Support$`/`PowerUp$`/`Exhaust$` and a dozen
-    more per-target params — each its own further mechanic.
+    `ValidTgts$`/`TargetMin$`/`TargetMax$` (807/162/162) resolve: each chosen target gets `CounterNum$`, and
+    `DividedAsYouChoose$` puts each target's share, announced with the targets (CR 601.2d,
+    `porting/port-log/game-state/m6-r9-putcounter-targetmin.md`). Not resolved, each failing loudly by name rather than
+    guessing (PORT-8/GO-7): `ETB$` (154) — CR 614's own counters-added-simultaneously replacement table
+    (`GameEntityCounterTable`), the identical batching risk `ChangesZoneAll`'s own gap already documents; `Choices$` and
+    its own six further params (46 combined) — an interactive multi-card choice this port's own `PlayerController` has
+    no hook for; `Monstrosity$`/`Adapt$`/`Bolster$`/`Support$`/`PowerUp$`/`Exhaust$` and a dozen more per-target params
+    — each its own further mechanic.
 
     **`discardEffect` (`discardeffect.go`) is M6's eighth script-driven effect, and the first that has to ask the
     resolving player anything mid-resolution rather than reading game state outright** — 285 of the corpus's 942 real
