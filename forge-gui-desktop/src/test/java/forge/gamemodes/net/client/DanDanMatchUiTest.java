@@ -419,6 +419,7 @@ public class DanDanMatchUiTest extends AITest {
                 FPref.YIELD_AUTO_PASS_NO_ACTIONS
         };
         final Map<FPref, String> previousPreferences = new EnumMap<>(FPref.class);
+        previousPreferences.put(FPref.PLAYER_NAME, preferences.getPref(FPref.PLAYER_NAME));
         for (final FPref preference : phasePreferences) {
             previousPreferences.put(preference, preferences.getPref(preference));
             preferences.setPref(preference, Boolean.toString(preference != FPref.YIELD_AUTO_PASS_NO_ACTIONS
@@ -570,6 +571,7 @@ public class DanDanMatchUiTest extends AITest {
         Throwable primaryFailure = null;
         InputAttack acceptedAttackInput = null;
         try {
+            preferences.setPref(FPref.PLAYER_NAME, "DanDan test player");
             FThreads.invokeInEdtAndWait(() -> {
                 try {
                     hosted.startMatch(rules, null, List.of(humanRegistered, aiRegistered), Map.of(humanRegistered, matchUI), null);

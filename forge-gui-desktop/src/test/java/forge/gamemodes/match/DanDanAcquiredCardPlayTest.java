@@ -101,6 +101,7 @@ public class DanDanAcquiredCardPlayTest {
                 FPref.UI_LANGUAGE,
                 FPref.ENFORCE_DECK_LEGALITY,
                 FPref.UI_ENABLE_MUSIC,
+                FPref.PLAYER_NAME,
                 FPref.UI_UNDO_MODE,
                 FPref.YIELD_AUTO_PASS_NO_ACTIONS,
                 FPref.YIELD_DECLINE_SCOPE_STACK_YIELD,
@@ -119,6 +120,7 @@ public class DanDanAcquiredCardPlayTest {
             }
             preferences.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
             preferences.setPref(FPref.UI_ENABLE_MUSIC, false);
+            preferences.setPref(FPref.PLAYER_NAME, "DanDan test player");
             // This fixture asserts that one completed undo exhausts the available history.
             preferences.setPref(FPref.UI_UNDO_MODE, ForgeConstants.UNDO_MODE_SINGLE);
             preferences.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, false);
