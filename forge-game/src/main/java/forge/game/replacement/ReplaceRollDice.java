@@ -43,5 +43,6 @@ public class ReplaceRollDice extends ReplacementEffect {
         sa.setReplacingObject(AbilityKey.Ignore, runParams.get(AbilityKey.Ignore));
         sa.setReplacingObject(AbilityKey.IgnoreChosen, runParams.get(AbilityKey.IgnoreChosen));
         sa.setReplacingObject(AbilityKey.DicePTExchanges, runParams.get(AbilityKey.DicePTExchanges));
+        sa.setReplacingObject(AbilityKey.DiceResultModifier, runParams.get(AbilityKey.DiceResultModifier));
     }
 }
