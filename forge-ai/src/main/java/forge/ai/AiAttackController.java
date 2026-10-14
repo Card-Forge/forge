@@ -267,6 +267,7 @@ public class AiAttackController {
      * @return a boolean.
      */
     public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat, final GameEntity defender) {
+        AITimeoutTracker.check();
         // if the attacker will die when attacking don't attack
         if (attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true) <= 0) {
             return false;
@@ -337,6 +338,7 @@ public class AiAttackController {
 
     // this checks to make sure that the computer player doesn't lose when the human player attacks
     public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
+        AITimeoutTracker.check();
         // check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return potentialAttackers;
@@ -499,6 +501,7 @@ public class AiAttackController {
         reinforceWithBanding(combat, null);
     }
     public void reinforceWithBanding(final Combat combat, final Card test) {
+        AITimeoutTracker.check();
         CardCollection attackers = combat.getAttackers();
         if (attackers.isEmpty()) {
             return;
@@ -805,548 +808,561 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
-        // something prevents attacking, try another
-        if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
-            final PlayerCollection opps = ai.getOpponents();
-            opps.remove(defendingOpponent);
-            defendingOpponent = Aggregates.random(opps);
-            refreshCombatants(defendingOpponent);
-        }
-
-        // TODO ideally requirements and attackMax are calculated first. so AI knows which attackers can't contribute
-        final boolean bAssault = doAssault();
-
-        // Determine who will be attacked
-        GameEntity defender = chooseDefender(combat, bAssault);
-
-        // decided to attack another defender so related lists need to be updated
-        // (though usually rather try to avoid this situation for performance reasons)
-        if (defender != defendingOpponent) {
-            if (defender instanceof Player p) {
-                defendingOpponent = p;
-            } else if (defender instanceof Card defCard) {
-                if (defCard.isBattle()) {
-                    defendingOpponent = defCard.getProtectingPlayer();
-                } else {
-                    // TODO: assume Planeswalker for now, may need to be updated later if more unique mechanics appear like Battle
-                    defendingOpponent = defCard.getController();
-                }
+        final int id = ai.getId();
+        final long timeoutNanos = TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
+        AITimeoutTracker.begin(id, timeoutNanos);
+        try {
+            // something prevents attacking, try another
+            if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
+                final PlayerCollection opps = ai.getOpponents();
+                opps.remove(defendingOpponent);
+                defendingOpponent = Aggregates.random(opps);
+                refreshCombatants(defendingOpponent);
             }
-            refreshCombatants(defender);
-        }
-        if (this.attackers.isEmpty()) {
-            return aiAggression;
-        }
 
-        GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
-        // check with the local limitations vs. the chosen defender
-        // could still be null
-        Integer attackMax = ObjectUtils.firstNonNull(restrict.getMax(), restrict.getDefenderMax().get(defender));
-        if (attackMax != null && attackMax == 0) {
-            // can't attack anymore
-            return aiAggression;
-        }
+            // TODO ideally requirements and attackMax are calculated first. so AI knows which attackers can't contribute
+            final boolean bAssault = doAssault();
 
-        // Aggro options
-        boolean playAggro = false;
-        int chanceToAttackToTrade = 0;
-        boolean tradeIfTappedOut = false;
-        int extraChanceIfOppHasMana = 0;
-        boolean tradeIfLowerLifePressure = false;
-        boolean predictEvasion = false;
-        boolean simAI = false;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            simAI = aic.usesFullSimulation();
-            if (!simAI) {
-                playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
-                chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
-                tradeIfTappedOut = aic.getBoolProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
-                extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
-                tradeIfLowerLifePressure = aic.getBoolProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
-                predictEvasion = aic.getBoolProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
-            }
-        }
+            // Determine who will be attacked
+            GameEntity defender = chooseDefender(combat, bAssault);
 
-        // TODO: detect Lightmine Field by presence of a card with a specific trigger
-        final boolean lightmineField = ai.getGame().isCardInPlay("Lightmine Field");
-        // TODO: detect Season of the Witch by presence of a card with a specific trigger
-        final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
-
-        final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
-
-        // Attackers that don't really have a choice
-        final AtomicInteger numForcedAttackers = new AtomicInteger(0);
-        // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
-        // because creatures not chosen can't attack.
-        if (!nextTurn) {
-            ExecutorService executor = Executors.newFixedThreadPool(
-                Runtime.getRuntime().availableProcessors(), r -> {
-                    Thread t = Executors.defaultThreadFactory().newThread(r);
-                    t.setDaemon(true);
-                    return t;
-                }
-            );
-            List<Callable<Integer>> tasks = new ArrayList<>();
-
-            for (final Card attacker : this.attackers) {
-                final GameEntity finalDefender = defender;
-                tasks.add(() -> {
-                    GameEntity mustAttackDef = null;
-                    if (attacker.getSVar("MustAttack").equals("True")) {
-                        mustAttackDef = finalDefender;
-                    } else if (attacker.hasSVar("EndOfTurnLeavePlay")
-                            && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
-                        mustAttackDef = finalDefender;
-                    } else if (seasonOfTheWitch) {
-                        //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                        mustAttackDef = finalDefender;
+            // decided to attack another defender so related lists need to be updated
+            // (though usually rather try to avoid this situation for performance reasons)
+            if (defender != defendingOpponent) {
+                if (defender instanceof Player p) {
+                    defendingOpponent = p;
+                } else if (defender instanceof Card defCard) {
+                    if (defCard.isBattle()) {
+                        defendingOpponent = defCard.getProtectingPlayer();
                     } else {
-                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
-                        // check defenders in order of maximum requirements
-                        List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                        final GameEntity def = finalDefender;
-                        reqs.sort((r1, r2) -> {
-                            if (r1.getValue() == r2.getValue()) {
-                                // try to attack the designated defender
-                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
-                                    return -1;
-                                }
-                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
-                                    return 1;
-                                }
-                                // otherwise PW
-                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                    return -1;
-                                }
-                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                    return 1;
-                                }
-                                // or weakest player
-                                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
-                                    return p1.getLife() - p2.getLife();
-                                }
-                            }
-                            return r2.getValue() - r1.getValue();
-                        });
-                        for (Pair<GameEntity, Integer> e : reqs) {
-                            if (e.getRight() == 0) continue;
-                            GameEntity mustAttackDefMaybe = e.getLeft();
-                            if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
-                                mustAttackDef = mustAttackDefMaybe;
-                                break;
-                            }
-                        }
+                        // TODO: assume Planeswalker for now, may need to be updated later if more unique mechanics appear like Battle
+                        defendingOpponent = defCard.getController();
                     }
-                    if (mustAttackDef != null) {
-                        // combat is shared across these parallel futures and its attacker
-                        // multimap is not thread-safe; unsynchronized addAttacker calls
-                        // collide (ConcurrentModificationException, dropped attackers)
-                        synchronized (combat) {
-                            combat.addAttacker(attacker, mustAttackDef);
-                        }
-                        attackersLeft.remove(attacker);
-                        numForcedAttackers.incrementAndGet();
-                    }
-                    return 0;
-                });
+                }
+                refreshCombatants(defender);
             }
-
-            try {
-                executor.invokeAll(tasks, ai.getGame().getAITimeout(), TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            } finally {
-                executor.shutdownNow();
-            }
-
-            if (attackersLeft.isEmpty()) {
+            if (this.attackers.isEmpty()) {
                 return aiAggression;
             }
-        }
 
-        // Lightmine Field: make sure the AI doesn't wipe out its own creatures
-        if (lightmineField) {
-            doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers.get(), playAggro);
-        }
-        // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
-        if (!doRevengeOfRavensAttackLogic(defender, attackersLeft, numForcedAttackers.get(), attackMax)) {
-            return aiAggression;
-        }
+            GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
+            // check with the local limitations vs. the chosen defender
+            // could still be null
+            Integer attackMax = ObjectUtils.firstNonNull(restrict.getMax(), restrict.getDefenderMax().get(defender));
+            if (attackMax != null && attackMax == 0) {
+                // can't attack anymore
+                return aiAggression;
+            }
 
-        // Only do decisive attacks against token-generating players
-        if (!bAssault && defender instanceof Player opp &&
-                CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
-                        - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
-                        - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
-            return aiAggression;
-        }
-
-        if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
-            if (LOG_AI_ATTACKS)
-                System.out.println("Assault");
-            List<Card> left = new ArrayList<>(attackersLeft);
-            CardLists.sortByPowerDesc(left);
-            for (Card attacker : left) {
-                if (attackMax != null && combat.getAttackers().size() >= attackMax)
-                    return aiAggression;
-
-                // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
-                if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
-                    combat.addAttacker(attacker, defender);
+            // Aggro options
+            boolean playAggro = false;
+            int chanceToAttackToTrade = 0;
+            boolean tradeIfTappedOut = false;
+            int extraChanceIfOppHasMana = 0;
+            boolean tradeIfLowerLifePressure = false;
+            boolean predictEvasion = false;
+            boolean simAI = false;
+            if (ai.getController().isAI()) {
+                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                simAI = aic.usesFullSimulation();
+                if (!simAI) {
+                    playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
+                    chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
+                    tradeIfTappedOut = aic.getBoolProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
+                    extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
+                    tradeIfLowerLifePressure = aic.getBoolProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
+                    predictEvasion = aic.getBoolProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
                 }
             }
-            // no more creatures to attack
-            return aiAggression;
-        }
 
-        // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
-        if (ai.getController().isAI()) {
-            // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
-            for (Card attacker : this.attackers) {
-                if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
-                    combat.addAttacker(attacker, defender);
-                    attackersLeft.remove(attacker);
-                }
-            }
-        }
+            // TODO: detect Lightmine Field by presence of a card with a specific trigger
+            final boolean lightmineField = ai.getGame().isCardInPlay("Lightmine Field");
+            // TODO: detect Season of the Witch by presence of a card with a specific trigger
+            final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
-        // Exalted
-        if (combat.getAttackers().isEmpty()) {
-            boolean exalted = countExaltedBonus(ai) > 2;
+            final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
 
-            if (!exalted) {
-                for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-                    if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
-                        exalted = true;
-                        break;
+            // Attackers that don't really have a choice
+            final AtomicInteger numForcedAttackers = new AtomicInteger(0);
+            // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
+            // because creatures not chosen can't attack.
+            if (!nextTurn) {
+                ExecutorService executor = Executors.newFixedThreadPool(
+                    Runtime.getRuntime().availableProcessors(), r -> {
+                        Thread t = Executors.defaultThreadFactory().newThread(r);
+                        t.setDaemon(true);
+                        return t;
                     }
-                    if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
-                        exalted = true;
-                        break;
-                    }
-                }
-            }
-            if (exalted) {
-                CardLists.sortByPowerDesc(this.attackers);
-                if (LOG_AI_ATTACKS)
-                    System.out.println("Exalted");
-                aiAggression = 6;
-                for (Card attacker : this.attackers) {
-                    if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
-                        combat.addAttacker(attacker, defender);
-                        return aiAggression;
-                    }
-                }
-            }
-        }
+                );
+                List<Callable<Integer>> tasks = new ArrayList<>();
 
-        if (attackMax != null) {
-            // should attack with only max if able.
-            CardLists.sortByPowerDesc(this.attackers);
-            aiAggression = 6;
-            for (Card attacker : this.attackers) {
-                // reached max, breakup
-                if (combat.getAttackers().size() >= attackMax)
-                    break;
-                if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
-                    combat.addAttacker(attacker, defender);
-                }
-            }
-            // no more creatures to attack
-            return aiAggression;
-        }
-
-        // TODO move this lower so it can also switch defender
-        if (simAI && ComputerUtilCard.isNonDisabledCardInPlay(ai, "Reconnaissance")) {
-            for (Card attacker : attackersLeft) {
-                if (canAttackWrapper(attacker, defender)) {
-                    // simulation will decide if attacker stays in combat based on blocks
-                    combat.addAttacker(attacker, defender);
-                }
-            }
-            // safe to exert
-            aiAggression = 6;
-            return aiAggression;
-        }
-
-        // *******************
-        // Evaluate the creature forces
-        // *******************
-
-        int computerForces = 0;
-        int humanForces = 0;
-        int humanForcesForAttritionalAttack = 0;
-
-        // examine the potential forces
-        final List<Card> nextTurnAttackers = new ArrayList<>();
-        int candidateCounterAttackDamage = 0;
-
-        // get the potential damage and strength of the AI forces
-        final List<Card> candidateAttackers = new ArrayList<>();
-        int candidateUnblockedDamage = 0;
-        for (final Card pCard : myList) {
-            // if the creature can attack then it's a potential attacker this
-            // turn, assume summoning sickness creatures will be able to
-            // TODO: Account for triggered power boosts.
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && (pCard.getNetCombatDamage() > 0 || "TRUE".equals(pCard.getSVar("HasAttackEffect")))) {
-                candidateAttackers.add(pCard);
-                candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
-                computerForces++;
-            }
-        }
-
-        CardCollection categorizedOppList = new CardCollection();
-        if (predictEvasion) {
-            // If predicting evasion, make sure that attackers with evasion are considered first
-            // (to avoid situations where the AI would predict his non-flyers to be blocked with
-            // flying creatures and then believe that flyers will necessarily be left unblocked)
-            categorizedOppList.addAll(ComputerUtilCombat.categorizeAttackersByEvasion(this.oppList));
-        } else {
-            categorizedOppList.addAll(this.oppList);
-        }
-
-        for (final Card pCard : categorizedOppList) {
-            // if the creature can attack next turn add it to counter attackers list
-            if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
-                nextTurnAttackers.add(pCard);
-                candidateCounterAttackDamage += pCard.getNetCombatDamage();
-                humanForces++; // player forces they might use to attack
-            }
-            // increment player forces that are relevant to an attritional attack - includes walls
-
-            Card potentialOppBlocker = getCardCanBlockAnAttacker(pCard, candidateAttackers, true);
-            if (potentialOppBlocker != null) {
-                humanForcesForAttritionalAttack++;
-                if (predictEvasion) {
-                    candidateAttackers.remove(potentialOppBlocker);
-                }
-            }
-        }
-
-        // find the potential counter attacking damage compared to AI life total
-        double aiLifeToPlayerDamageRatio = 1000000;
-        if (candidateCounterAttackDamage > 0) {
-            aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
-        }
-
-        // find the potential damage ratio the AI can cause
-        double humanLifeToDamageRatio = 1000000;
-        if (candidateUnblockedDamage > 0) {
-            humanLifeToDamageRatio = (double) (defendingOpponent.getLife() - ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent)) / candidateUnblockedDamage;
-        }
-
-        // determine if the ai outnumbers the player
-        final int outNumber = computerForces - humanForces;
-
-        for (Card blocker : this.blockers) {
-            if (blocker.canBlockAny()) {
-                aiLifeToPlayerDamageRatio--;
-            }
-        }
-
-        // compare the ratios, higher = better for ai
-        final double ratioDiff = aiLifeToPlayerDamageRatio - humanLifeToDamageRatio;
-
-        // *********************
-        // if outnumber and superior ratio work out whether attritional all out
-        // attacking will work  attritional attack will expect some creatures to die but to achieve
-        // victory by sheer weight of numbers attacking turn after turn. It's not calculate very
-        // carefully, the accuracy can probably be improved
-        // *********************
-        boolean doAttritionalAttack = false;
-        // get list of attackers ordered from low power to high
-        CardLists.sortByPowerAsc(this.attackers);
-        // get player life total
-        int humanLife = defendingOpponent.getLife();
-        // get the list of attackers up to the first blocked one
-        final List<Card> attritionalAttackers = new ArrayList<>();
-        for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
-            attritionalAttackers.add(this.attackers.get(x));
-        }
-        // until the attackers are used up or the player would run out of life
-        int attackRounds = 1;
-        while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
-            // sum attacker damage
-            int damageThisRound = 0;
-            for (Card attritionalAttacker : attritionalAttackers) {
-                damageThisRound += attritionalAttacker.getNetCombatDamage();
-            }
-            // remove from player life
-            humanLife -= damageThisRound;
-            // shorten attacker list by the length of the blockers - assuming
-            // all blocked are killed for convenience
-            for (int z = 0; z < humanForcesForAttritionalAttack; z++) {
-                if (!attritionalAttackers.isEmpty()) {
-                    attritionalAttackers.remove(attritionalAttackers.size() - 1);
-                }
-            }
-            attackRounds++;
-            doAttritionalAttack = humanLife <= 0;
-        }
-        // *********************
-        // end attritional attack calculation
-        // *********************
-
-        // *********************
-        // see how long until unblockable attackers will be fatal
-        // *********************
-        double unblockableDamage = 0;
-        double nextUnblockableDamage = 0;
-        double turnsUntilDeathByUnblockable = 0;
-        boolean doUnblockableAttack = false;
-        for (final Card attacker : this.attackers) {
-            boolean isUnblockableCreature = true;
-            // check blockers individually, as the bulk canBeBlocked doesn't
-            // check all circumstances
-            for (final Card blocker : this.blockers) {
-                if (CombatUtil.canBlock(attacker, blocker)) {
-                    isUnblockableCreature = false;
-                    break;
-                }
-            }
-            if (isUnblockableCreature) {
-                unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, defendingOpponent, combat, false);
-            }
-        }
-        for (final Card attacker : nextTurnAttackers) {
-            boolean isUnblockableCreature = true;
-            // check blockers individually, as the bulk canBeBlocked doesn't
-            // check all circumstances
-            for (final Card blocker : myList) {
-                if (CombatUtil.canBlock(attacker, blocker, true)) {
-                    isUnblockableCreature = false;
-                    break;
-                }
-            }
-            if (isUnblockableCreature) {
-                nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, defendingOpponent, null, false);
-            }
-        }
-        if (unblockableDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
-            turnsUntilDeathByUnblockable = 1 + (defendingOpponent.getLife() - unblockableDamage) / nextUnblockableDamage;
-        }
-        if (defendingOpponent.canLoseLife()) {
-            doUnblockableAttack = true;
-        }
-        // *****************
-        // end see how long until unblockable attackers will be fatal
-        // *****************
-
-        // decide on attack aggression based on a comparison of forces, life
-        // totals and other considerations some bad "magic numbers" here
-        // TODO replace with nice descriptive variable names
-        if (ratioDiff > 0 && doAttritionalAttack) {
-            aiAggression = 5; // attack at all costs
-        } else if ((ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0))
-                || (playAggro && MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1)) {
-            aiAggression = 4; // attack expecting to trade or damage player.
-        } else if (MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1
-                && defendingOpponent != null
-                && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
-                && ai.getLife() > defendingOpponent.getLife()
-                && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
-                // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
-                // otherwise we want mana open so we can bluff or use a trick
-                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0 || tradeIfTappedOut)
-                // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
-                // for the risk of walking into a trick
-                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
-                        || MyRandom.percentTrue(extraChanceIfOppHasMana))
-                && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
-                defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
-            aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
-        } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
-            aiAggression = 3; // attack expecting to make good trades or damage player.
-        } else if (ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
-                || ratioDiff * -1 < turnsUntilDeathByUnblockable) {
-            // at 0 ratio expect to potentially gain an advantage by attacking first
-            // if the ai has a slight advantage
-            // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
-            aiAggression = 2; // attack expecting to destroy creatures/be unblockable
-        } else if (doUnblockableAttack) {
-            aiAggression = 1;
-            // look for unblockable creatures that might be
-            // able to attack for a bit of fatal damage even if the player is significantly better
-        } else {
-            aiAggression = 0;
-        } // stay at home to block
-
-        if ( LOG_AI_ATTACKS )
-            System.out.println(aiAggression + " = ai aggression");
-
-        // ****************
-        // Evaluation the end
-        // ****************
-
-        if ( LOG_AI_ATTACKS )
-            System.out.println("Normal attack");
-
-        List<Card> left = new ArrayList<>(attackersLeft);
-        left = notNeededAsBlockers(combat.getAttackers(), left);
-        left = sortAttackers(left);
-
-        if ( LOG_AI_ATTACKS )
-            System.out.println("attackersLeft = " + left);
-
-        FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
-        possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
-
-        while (!left.isEmpty()) {
-            CardCollection attackersAssigned = new CardCollection();
-            for (int i = 0; i < left.size(); i++) {
-                final Card attacker = left.get(i);
-                if (aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
-                        && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, defendingOpponent)
-                        >= ComputerUtilCombat.getDamageToKill(attacker, false)) {
-                    continue;
-                }
-
-                // TODO logic for Questing Beast to prefer players
-
-                if (shouldAttack(attacker, this.blockers, combat, defender) && canAttackWrapper(attacker, defender)) {
-                    combat.addAttacker(attacker, defender);
-                    attackersAssigned.add(attacker);
-
-                    // check if attackers are enough to finish the attacked planeswalker
-                    if (i < left.size() - 1 && defender instanceof Card card) {
-                        final int blockNum = this.blockers.size();
-                        int attackNum = 0;
-                        int damage = 0;
-                        List<Card> attacking = combat.getAttackersOf(defender);
-                        CardLists.sortByPowerDesc(attacking);
-                        for (Card atta : attacking) {
-                            if (attackNum >= blockNum || !CombatUtil.canBeBlocked(atta, this.blockers, combat)) {
-                                damage += ComputerUtilCombat.damageIfUnblocked(atta, defender, null, false);
-                            } else {
-                                attackNum++;
+                for (final Card attacker : this.attackers) {
+                    final GameEntity finalDefender = defender;
+                    tasks.add(() -> {
+                        GameEntity mustAttackDef = null;
+                        if (attacker.getSVar("MustAttack").equals("True")) {
+                            mustAttackDef = finalDefender;
+                        } else if (attacker.hasSVar("EndOfTurnLeavePlay")
+                                && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
+                            mustAttackDef = finalDefender;
+                        } else if (seasonOfTheWitch) {
+                            //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                            mustAttackDef = finalDefender;
+                        } else {
+                            if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
+                            // check defenders in order of maximum requirements
+                            List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                            final GameEntity def = finalDefender;
+                            reqs.sort((r1, r2) -> {
+                                if (r1.getValue() == r2.getValue()) {
+                                    // try to attack the designated defender
+                                    if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
+                                        return -1;
+                                    }
+                                    if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
+                                        return 1;
+                                    }
+                                    // otherwise PW
+                                    if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                                        return -1;
+                                    }
+                                    if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                                        return 1;
+                                    }
+                                    // or weakest player
+                                    if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                                        return p1.getLife() - p2.getLife();
+                                    }
+                                }
+                                return r2.getValue() - r1.getValue();
+                            });
+                            for (Pair<GameEntity, Integer> e : reqs) {
+                                if (e.getRight() == 0) continue;
+                                GameEntity mustAttackDefMaybe = e.getLeft();
+                                if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                                    mustAttackDef = mustAttackDefMaybe;
+                                    break;
+                                }
                             }
                         }
-                        // if enough damage: switch to next planeswalker
-                        if (damage >= ComputerUtilCombat.getDamageToKill(card, true)) {
+                        if (mustAttackDef != null) {
+                            // combat is shared across these parallel futures and its attacker
+                            // multimap is not thread-safe; unsynchronized addAttacker calls
+                            // collide (ConcurrentModificationException, dropped attackers)
+                            synchronized (combat) {
+                                combat.addAttacker(attacker, mustAttackDef);
+                            }
+                            attackersLeft.remove(attacker);
+                            numForcedAttackers.incrementAndGet();
+                        }
+                        return 0;
+                    });
+                }
+
+                try {
+                    executor.invokeAll(tasks, Math.max(1L, AITimeoutTracker.remainingNanos()), TimeUnit.NANOSECONDS);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    executor.shutdownNow();
+                }
+
+                if (attackersLeft.isEmpty()) {
+                    return aiAggression;
+                }
+            }
+
+            // Lightmine Field: make sure the AI doesn't wipe out its own creatures
+            if (lightmineField) {
+                doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers.get(), playAggro);
+            }
+            // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
+            if (!doRevengeOfRavensAttackLogic(defender, attackersLeft, numForcedAttackers.get(), attackMax)) {
+                return aiAggression;
+            }
+
+            // Only do decisive attacks against token-generating players
+            if (!bAssault && defender instanceof Player opp &&
+                    CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
+                            - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
+                            - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
+                return aiAggression;
+            }
+
+            if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
+                if (LOG_AI_ATTACKS)
+                    System.out.println("Assault");
+                List<Card> left = new ArrayList<>(attackersLeft);
+                CardLists.sortByPowerDesc(left);
+                for (Card attacker : left) {
+                    if (attackMax != null && combat.getAttackers().size() >= attackMax)
+                        return aiAggression;
+
+                    // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
+                    if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
+                        combat.addAttacker(attacker, defender);
+                    }
+                }
+                // no more creatures to attack
+                return aiAggression;
+            }
+
+            // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
+            if (ai.getController().isAI()) {
+                // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
+                for (Card attacker : this.attackers) {
+                    if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
+                        combat.addAttacker(attacker, defender);
+                        attackersLeft.remove(attacker);
+                    }
+                }
+            }
+
+            // Exalted
+            if (combat.getAttackers().isEmpty()) {
+                boolean exalted = countExaltedBonus(ai) > 2;
+
+                if (!exalted) {
+                    for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                        if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
+                            exalted = true;
+                            break;
+                        }
+                        if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
+                            exalted = true;
                             break;
                         }
                     }
                 }
+                if (exalted) {
+                    CardLists.sortByPowerDesc(this.attackers);
+                    if (LOG_AI_ATTACKS)
+                        System.out.println("Exalted");
+                    aiAggression = 6;
+                    for (Card attacker : this.attackers) {
+                        if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
+                            combat.addAttacker(attacker, defender);
+                            return aiAggression;
+                        }
+                    }
+                }
             }
 
-            left.removeAll(attackersAssigned);
-            possibleDefenders.remove(defender);
-            if (left.isEmpty() || possibleDefenders.isEmpty()) {
-                break;
+            if (attackMax != null) {
+                // should attack with only max if able.
+                CardLists.sortByPowerDesc(this.attackers);
+                aiAggression = 6;
+                for (Card attacker : this.attackers) {
+                    // reached max, breakup
+                    if (combat.getAttackers().size() >= attackMax)
+                        break;
+                    if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
+                        combat.addAttacker(attacker, defender);
+                    }
+                }
+                // no more creatures to attack
+                return aiAggression;
             }
-            CardCollection pwDefending = new CardCollection(IterableUtil.filter(possibleDefenders, Card.class));
-            if (pwDefending.isEmpty()) {
-                // TODO for now only looks at same player as we'd have to check the others from start too
-                //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());
-                defender = defendingOpponent;
+
+            // TODO move this lower so it can also switch defender
+            if (simAI && ComputerUtilCard.isNonDisabledCardInPlay(ai, "Reconnaissance")) {
+                for (Card attacker : attackersLeft) {
+                    if (canAttackWrapper(attacker, defender)) {
+                        // simulation will decide if attacker stays in combat based on blocks
+                        combat.addAttacker(attacker, defender);
+                    }
+                }
+                // safe to exert
+                aiAggression = 6;
+                return aiAggression;
+            }
+
+            // *******************
+            // Evaluate the creature forces
+            // *******************
+
+            int computerForces = 0;
+            int humanForces = 0;
+            int humanForcesForAttritionalAttack = 0;
+
+            // examine the potential forces
+            final List<Card> nextTurnAttackers = new ArrayList<>();
+            int candidateCounterAttackDamage = 0;
+
+            // get the potential damage and strength of the AI forces
+            final List<Card> candidateAttackers = new ArrayList<>();
+            int candidateUnblockedDamage = 0;
+            for (final Card pCard : myList) {
+                AITimeoutTracker.check();
+                // if the creature can attack then it's a potential attacker this
+                // turn, assume summoning sickness creatures will be able to
+                // TODO: Account for triggered power boosts.
+                if (ComputerUtilCombat.canAttackNextTurn(pCard) && (pCard.getNetCombatDamage() > 0 || "TRUE".equals(pCard.getSVar("HasAttackEffect")))) {
+                    candidateAttackers.add(pCard);
+                    candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
+                    computerForces++;
+                }
+            }
+
+            CardCollection categorizedOppList = new CardCollection();
+            if (predictEvasion) {
+                // If predicting evasion, make sure that attackers with evasion are considered first
+                // (to avoid situations where the AI would predict his non-flyers to be blocked with
+                // flying creatures and then believe that flyers will necessarily be left unblocked)
+                categorizedOppList.addAll(ComputerUtilCombat.categorizeAttackersByEvasion(this.oppList));
             } else {
-                final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
-                defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
+                categorizedOppList.addAll(this.oppList);
             }
-        }
 
-        return aiAggression;
+            for (final Card pCard : categorizedOppList) {
+                AITimeoutTracker.check();
+                // if the creature can attack next turn add it to counter attackers list
+                if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
+                    nextTurnAttackers.add(pCard);
+                    candidateCounterAttackDamage += pCard.getNetCombatDamage();
+                    humanForces++; // player forces they might use to attack
+                }
+                // increment player forces that are relevant to an attritional attack - includes walls
+
+                Card potentialOppBlocker = getCardCanBlockAnAttacker(pCard, candidateAttackers, true);
+                if (potentialOppBlocker != null) {
+                    humanForcesForAttritionalAttack++;
+                    if (predictEvasion) {
+                        candidateAttackers.remove(potentialOppBlocker);
+                    }
+                }
+            }
+
+            // find the potential counter attacking damage compared to AI life total
+            double aiLifeToPlayerDamageRatio = 1000000;
+            if (candidateCounterAttackDamage > 0) {
+                aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
+            }
+
+            // find the potential damage ratio the AI can cause
+            double humanLifeToDamageRatio = 1000000;
+            if (candidateUnblockedDamage > 0) {
+                humanLifeToDamageRatio = (double) (defendingOpponent.getLife() - ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent)) / candidateUnblockedDamage;
+            }
+
+            // determine if the ai outnumbers the player
+            final int outNumber = computerForces - humanForces;
+
+            for (Card blocker : this.blockers) {
+                if (blocker.canBlockAny()) {
+                    aiLifeToPlayerDamageRatio--;
+                }
+            }
+
+            // compare the ratios, higher = better for ai
+            final double ratioDiff = aiLifeToPlayerDamageRatio - humanLifeToDamageRatio;
+
+            // *********************
+            // if outnumber and superior ratio work out whether attritional all out
+            // attacking will work  attritional attack will expect some creatures to die but to achieve
+            // victory by sheer weight of numbers attacking turn after turn. It's not calculate very
+            // carefully, the accuracy can probably be improved
+            // *********************
+            boolean doAttritionalAttack = false;
+            // get list of attackers ordered from low power to high
+            CardLists.sortByPowerAsc(this.attackers);
+            // get player life total
+            int humanLife = defendingOpponent.getLife();
+            // get the list of attackers up to the first blocked one
+            final List<Card> attritionalAttackers = new ArrayList<>();
+            for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
+                attritionalAttackers.add(this.attackers.get(x));
+            }
+            // until the attackers are used up or the player would run out of life
+            int attackRounds = 1;
+            while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
+                // sum attacker damage
+                int damageThisRound = 0;
+                for (Card attritionalAttacker : attritionalAttackers) {
+                    damageThisRound += attritionalAttacker.getNetCombatDamage();
+                }
+                // remove from player life
+                humanLife -= damageThisRound;
+                // shorten attacker list by the length of the blockers - assuming
+                // all blocked are killed for convenience
+                for (int z = 0; z < humanForcesForAttritionalAttack; z++) {
+                    if (!attritionalAttackers.isEmpty()) {
+                        attritionalAttackers.remove(attritionalAttackers.size() - 1);
+                    }
+                }
+                attackRounds++;
+                doAttritionalAttack = humanLife <= 0;
+            }
+            // *********************
+            // end attritional attack calculation
+            // *********************
+
+            // *********************
+            // see how long until unblockable attackers will be fatal
+            // *********************
+            double unblockableDamage = 0;
+            double nextUnblockableDamage = 0;
+            double turnsUntilDeathByUnblockable = 0;
+            boolean doUnblockableAttack = false;
+            for (final Card attacker : this.attackers) {
+                AITimeoutTracker.check();
+                boolean isUnblockableCreature = true;
+                // check blockers individually, as the bulk canBeBlocked doesn't
+                // check all circumstances
+                for (final Card blocker : this.blockers) {
+                    if (CombatUtil.canBlock(attacker, blocker)) {
+                        isUnblockableCreature = false;
+                        break;
+                    }
+                }
+                if (isUnblockableCreature) {
+                    unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, defendingOpponent, combat, false);
+                }
+            }
+            for (final Card attacker : nextTurnAttackers) {
+                AITimeoutTracker.check();
+                boolean isUnblockableCreature = true;
+                // check blockers individually, as the bulk canBeBlocked doesn't
+                // check all circumstances
+                for (final Card blocker : myList) {
+                    if (CombatUtil.canBlock(attacker, blocker, true)) {
+                        isUnblockableCreature = false;
+                        break;
+                    }
+                }
+                if (isUnblockableCreature) {
+                    nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, defendingOpponent, null, false);
+                }
+            }
+            if (unblockableDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
+                turnsUntilDeathByUnblockable = 1 + (defendingOpponent.getLife() - unblockableDamage) / nextUnblockableDamage;
+            }
+            if (defendingOpponent.canLoseLife()) {
+                doUnblockableAttack = true;
+            }
+            // *****************
+            // end see how long until unblockable attackers will be fatal
+            // *****************
+
+            // decide on attack aggression based on a comparison of forces, life
+            // totals and other considerations some bad "magic numbers" here
+            // TODO replace with nice descriptive variable names
+            if (ratioDiff > 0 && doAttritionalAttack) {
+                aiAggression = 5; // attack at all costs
+            } else if ((ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0))
+                    || (playAggro && MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1)) {
+                aiAggression = 4; // attack expecting to trade or damage player.
+            } else if (MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1
+                    && defendingOpponent != null
+                    && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
+                    && ai.getLife() > defendingOpponent.getLife()
+                    && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
+                    // our own mana: ATTACK_INTO_TRADE_WHEN_TAPPED_OUT lets us swing while tapped out,
+                    // otherwise we want mana open so we can bluff or use a trick
+                    && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0 || tradeIfTappedOut)
+                    // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
+                    // for the risk of walking into a trick
+                    && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
+                    || MyRandom.percentTrue(extraChanceIfOppHasMana))
+                    && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
+                    defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
+                aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
+            } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
+                aiAggression = 3; // attack expecting to make good trades or damage player.
+            } else if (ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
+                    || ratioDiff * -1 < turnsUntilDeathByUnblockable) {
+                // at 0 ratio expect to potentially gain an advantage by attacking first
+                // if the ai has a slight advantage
+                // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
+                aiAggression = 2; // attack expecting to destroy creatures/be unblockable
+            } else if (doUnblockableAttack) {
+                aiAggression = 1;
+                // look for unblockable creatures that might be
+                // able to attack for a bit of fatal damage even if the player is significantly better
+            } else {
+                aiAggression = 0;
+            } // stay at home to block
+
+            if ( LOG_AI_ATTACKS )
+                System.out.println(aiAggression + " = ai aggression");
+
+            // ****************
+            // Evaluation the end
+            // ****************
+
+            if ( LOG_AI_ATTACKS )
+                System.out.println("Normal attack");
+
+            List<Card> left = new ArrayList<>(attackersLeft);
+            left = notNeededAsBlockers(combat.getAttackers(), left);
+            left = sortAttackers(left);
+
+            if ( LOG_AI_ATTACKS )
+                System.out.println("attackersLeft = " + left);
+
+            FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
+            possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
+
+            while (!left.isEmpty()) {
+                AITimeoutTracker.check();
+                CardCollection attackersAssigned = new CardCollection();
+                for (int i = 0; i < left.size(); i++) {
+                    AITimeoutTracker.check();
+                    final Card attacker = left.get(i);
+                    if (aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
+                            && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, defendingOpponent)
+                            >= ComputerUtilCombat.getDamageToKill(attacker, false)) {
+                        continue;
+                    }
+
+                    // TODO logic for Questing Beast to prefer players
+
+                    if (shouldAttack(attacker, this.blockers, combat, defender) && canAttackWrapper(attacker, defender)) {
+                        combat.addAttacker(attacker, defender);
+                        attackersAssigned.add(attacker);
+
+                        // check if attackers are enough to finish the attacked planeswalker
+                        if (i < left.size() - 1 && defender instanceof Card card) {
+                            final int blockNum = this.blockers.size();
+                            int attackNum = 0;
+                            int damage = 0;
+                            List<Card> attacking = combat.getAttackersOf(defender);
+                            CardLists.sortByPowerDesc(attacking);
+                            for (Card atta : attacking) {
+                                if (attackNum >= blockNum || !CombatUtil.canBeBlocked(atta, this.blockers, combat)) {
+                                    damage += ComputerUtilCombat.damageIfUnblocked(atta, defender, null, false);
+                                } else {
+                                    attackNum++;
+                                }
+                            }
+                            // if enough damage: switch to next planeswalker
+                            if (damage >= ComputerUtilCombat.getDamageToKill(card, true)) {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                left.removeAll(attackersAssigned);
+                possibleDefenders.remove(defender);
+                if (left.isEmpty() || possibleDefenders.isEmpty()) {
+                    break;
+                }
+                CardCollection pwDefending = new CardCollection(IterableUtil.filter(possibleDefenders, Card.class));
+                if (pwDefending.isEmpty()) {
+                    // TODO for now only looks at same player as we'd have to check the others from start too
+                    //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());
+                    defender = defendingOpponent;
+                } else {
+                    final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
+                    defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
+                }
+            }
+
+            return aiAggression;
+        } finally {
+            AITimeoutTracker.end(id);
+        }
     }
 
     private class SpellAbilityFactors {
@@ -1470,6 +1486,7 @@ public class AiAttackController {
      * @return a boolean.
      */
     public final boolean shouldAttack(final Card attacker, final List<Card> defenders, final Combat combat, final GameEntity defender) {
+        AITimeoutTracker.check();
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
         if (attacker.hasSVar("NonCombatPriority") && !attacker.hasKeyword(Keyword.VIGILANCE)) {
             // For each level of priority, enemy has to have life as much as the creature's power
