@@ -25,6 +25,8 @@ import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VPhaseIndicator;
+import forge.screens.match.views.VPlayerPanel;
+import forge.screens.match.views.VPrompt;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -257,6 +259,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
             Forge.getLocalizer().getMessage("cbShowStormCount"),
             Forge.getLocalizer().getMessage("nlShowStormCount")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_TARGET_BOX,
+            Forge.getLocalizer().getMessage("lblShowTargetBox"),
+            Forge.getLocalizer().getMessage("nlShowTargetBox")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
@@ -283,6 +288,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             new String[] {
                 ForgeConstants.UNDO_MODE_OFF, ForgeConstants.UNDO_MODE_SINGLE, ForgeConstants.UNDO_MODE_FREE
             }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SEPARATE_UNDO_BUTTON,
+            Forge.getLocalizer().getMessage("lblSeparateUndo"),
+            Forge.getLocalizer().getMessage("nlSeparateUndo")) {
+                @Override
+                public void select() {
+                    super.select();
+                    VPrompt.reloadSeparateUndo();
+                }
+            }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
             Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
             Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
@@ -305,6 +319,18 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
                     if (MatchController.instance != null)
                         MatchController.instance.resetPlayerPanels();
+                }
+            }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERZONETABS,
+            Forge.getLocalizer().getMessageorUseDefault("lblAltZoneTabs", "Alternate Zone Layout (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlAltZoneTabs", "Shows the open zone (hand, graveyard...) as a wide bottom row instead of a side panel.")) {
+                @Override
+                public void select() {
+                    super.select();
+                    VPlayerPanel.reloadAltZoneLayout();
+                    if (MatchController.instance != null) {
+                        MatchController.instance.resetPlayerPanels();
+                    }
                 }
             }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
