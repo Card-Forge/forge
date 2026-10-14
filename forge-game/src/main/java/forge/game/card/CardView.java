@@ -348,7 +348,6 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         super.updateCounters(c);
-        updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
@@ -1431,6 +1430,8 @@ public class CardView extends GameEntityView {
                 num = num - c.getBasePower() + c.getAlternateState().getBasePower();
             }
             set(TrackableProperty.Power, num);
+            // isLethalDamageByPower() cards use power. so this needs update too for VAssignCombatDamage dialog -> auto
+            CardView.this.updateLethalDamage(c);
         }
         void updatePower(CardState c) {
             Card card = c.getCard();
@@ -1456,6 +1457,7 @@ public class CardView extends GameEntityView {
                 num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
             set(TrackableProperty.Toughness, num);
+            CardView.this.updateLethalDamage(c);
         }
         void updateToughness(CardState c) {
             Card card = c.getCard();

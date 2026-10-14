@@ -2,8 +2,10 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+//import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import forge.assets.FSkinFont;
@@ -33,20 +35,23 @@ public class FrameRate {
     private int lastAllocT = 0;
     private float gcFlashTimer = 0f;
     public static volatile int hideFPSCountdown = 0;
+    //private GLProfiler glProfiler;
+    //private long lastGlFrame;
     public static FrameRate getInstance() {
         return instance == null ? instance = new FrameRate() : instance;
     }
 
     private FrameRate() {
         float size = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 64 : Forge.getScreenHeight() / 64;
-        font = FSkinFont.forHeight(size);
-        lastTimeCounted = TimeUtils.millis();
-        sinceChange = 0;
-        frameRate = Gdx.graphics.getFramesPerSecond();
-
+        this.font = FSkinFont.forHeight(size);
+        this.lastTimeCounted = TimeUtils.millis();
+        this.sinceChange = 0;
+        this.frameRate = Gdx.graphics.getFramesPerSecond();
         this.displayBuilder = new StringBuilder(128);
         this.cachedDisplayString = "";
         this.hudColor = new Color(Color.WHITE);
+        //this.glProfiler = new GLProfiler(Gdx.graphics);
+        //this.glProfiler.enable();
     }
 
     public void update(int loadedCardSize, float toAlloc) {
@@ -111,6 +116,19 @@ public class FrameRate {
         displayBuilder.append(" | ")
             .append(maxClassicSpritesThisFrame).append(" Classic Sprites | ")
             .append(maxAdventureSpritesThisFrame).append(" Adventure Sprites ");
+
+        /*if (glProfiler == null) {
+            glProfiler = new GLProfiler(Gdx.graphics);
+            glProfiler.enable();
+            lastGlFrame = Gdx.graphics.getFrameId();
+        }
+        long frames = Math.max(1, Gdx.graphics.getFrameId() - lastGlFrame);
+        displayBuilder.append("| GL ").append(glProfiler.getDrawCalls() / frames).append(" draws ")
+            .append(glProfiler.getTextureBindings() / frames).append(" tex ")
+            .append(glProfiler.getShaderSwitches() / frames).append(" shaders ");
+        displayBuilder.append(" | ").append(Texture.getNumManagedTextures()).append(" textures");
+        glProfiler.reset();
+        lastGlFrame = Gdx.graphics.getFrameId();*/
 
         cachedDisplayString = displayBuilder.toString();
     }

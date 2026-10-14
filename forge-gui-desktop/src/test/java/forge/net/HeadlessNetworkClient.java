@@ -484,6 +484,20 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
             }
         }
 
+        @Override
+        public void setSelectableTargets(Iterable<? extends forge.trackable.TrackableObject> targets) {
+            super.setSelectableTargets(targets);
+            // stack targets (counterspells and the like): pick the first one offered, as setSelectables does for cards
+            if (gameController != null && targets != null) {
+                for (forge.trackable.TrackableObject target : targets) {
+                    if (target instanceof forge.game.spellability.StackItemView item && !isHighlighted(item)) {
+                        scheduleAutoResponse(() -> gameController.selectStackItem(item), 100, "select stack item " + item);
+                        break;
+                    }
+                }
+            }
+        }
+
         /**
          * Select the next card from the pending list.
          * Uses the serialized auto-response executor to prevent race conditions.

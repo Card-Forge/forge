@@ -74,8 +74,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final QuestController questData;
 
     private ItemPool<InventoryItem> cardsForSale;
-    private final ItemPool<InventoryItem> fullCatalogCards
-            = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), InventoryItem.class);
+    private ItemPool<InventoryItem> fullCatalogCards;
     private boolean showingFullCatalog = false;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
@@ -100,6 +99,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         super(FScreen.QUEST_CARD_SHOP, cDetailPicture0, GameType.Quest);
 
         this.questData = qd;
+        this.fullCatalogCards = ItemPool.createFrom(this.questData.getAllAllowedCards().toList(), InventoryItem.class);
 
         final SpellShopManager catalogManager = new SpellShopManager(cDetailPicture0, false);
         final SpellShopManager deckManager = new SpellShopManager(cDetailPicture0, false);

@@ -24,6 +24,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.screens.match.views.VPhaseIndicator;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -232,9 +233,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(newValue));
                 }
             }, 1);
-        lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
+        /*lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
             Forge.getLocalizer().getMessage("cbExperimentalRestore"),
-            Forge.getLocalizer().getMessage("nlExperimentalRestore")), 1);
+            Forge.getLocalizer().getMessage("nlExperimentalRestore")), 1);*/
         lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
             Forge.getLocalizer().getMessage("nlAITimeout"),
             Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")), 1);
@@ -276,6 +277,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS
             }), 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_UNDO_MODE,
+            Forge.getLocalizer().getMessage("cbUndoMode"),
+            Forge.getLocalizer().getMessage("nlUndoMode"),
+            new String[] {
+                ForgeConstants.UNDO_MODE_OFF, ForgeConstants.UNDO_MODE_SINGLE, ForgeConstants.UNDO_MODE_FREE
+            }), 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
             Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
             Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
@@ -300,19 +307,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         MatchController.instance.resetPlayerPanels();
                 }
             }, 1);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALT_PLAYERZONETABS,
-            Forge.getLocalizer().getMessage("lblAltZoneTabs"),
-            Forge.getLocalizer().getMessage("nlAltZoneTabs"),
-            Lists.newArrayList("Off", "Vertical", "Horizontal")) {
-                @Override
-                public void valueChanged(String newValue) {
-                    super.valueChanged(newValue);
-                    //update
-                    Forge.setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
-                    if (MatchController.instance != null)
-                        MatchController.instance.resetPlayerPanels();
-                }
-            }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
+            Forge.getLocalizer().getMessageorUseDefault("lblHidePhaseStop", "Hide Phase stop (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlHidePhaseStop", "When enabled, Phase stop is covered by Phase name label. Tap the label to access Phase stop.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPhaseIndicator.HIDE_PHASESTOP = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_PHASESTOP);
+            }
+        }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
             Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"),
             Forge.getLocalizer().getMessage("nlAnimatedCardTapUntap")) {
@@ -323,6 +326,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
                 }
             }, 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_PLAY_ANIMATION_STYLE,
+            Forge.getLocalizer().getMessageorUseDefault("lblCardPlayOption", "Card Play Animation Style"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCardPlayOption", "How cards animate when entering the battlefield."),
+            new String[] { "Rotate", "Slide", "Popup", "Off" }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COIN_DICE_ANIMATION,
+            Forge.getLocalizer().getMessageorUseDefault("lblCoinDiceAnimation", "Coin/Dice Animation"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCoinDiceAnimation", "Enables Coin and Dice Animation.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
             Forge.getLocalizer().getMessage("cbStackCreatures"),
             Forge.getLocalizer().getMessage("nlStackCreatures")), 1);
@@ -589,12 +599,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
                 ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                 ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-            Forge.getLocalizer().getMessage("lblRotateZoomSplit"),
-            Forge.getLocalizer().getMessage("nlRotateZoomSplit")), 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-            Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
-            Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")), 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
             Forge.getLocalizer().getMessage("lblDisableCardEffect"),
             Forge.getLocalizer().getMessage("nlDisableCardEffect")), 4);

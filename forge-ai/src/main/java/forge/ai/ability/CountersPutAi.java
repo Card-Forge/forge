@@ -673,9 +673,6 @@ public class CountersPutAi extends CountersAi {
         final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
-        final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger())
-                || (sa.getRootAbility().isTrigger() && !sa.getRootAbility().isOptionalTrigger());
-
         if (sa.usesTargeting()) {
             CardCollection list;
             if (sa.isCurse()) {
@@ -685,17 +682,16 @@ public class CountersPutAi extends CountersAi {
             }
             list = CardLists.getTargetableCards(list, sa);
 
-            if (list.isEmpty() && isMandatoryTrigger) {
+            if (list.isEmpty() && sa.isTrigger() && !sa.getRootAbility().isOptionalTrigger()) {
                 // broaden the scope of possible targets if we are resolving a mandatory trigger
                 list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
             }
 
             sa.resetTargets();
-            // target loop
+
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if (!sa.isTargetNumberValid()
-                            || sa.getTargets().isEmpty()) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }

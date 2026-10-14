@@ -124,6 +124,7 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -701,6 +702,7 @@ public final class CMatchUI
             selectionZonesShown.clear();
             FloatingZone.refreshAll();
             FloatingZone.clearAllHotkeyAffordance();
+            refreshStackTargetMarks();
         });
     }
 
@@ -728,11 +730,40 @@ public final class CMatchUI
     }
 
     @Override
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
-        super.setHighlighted(entities, b);
-        if (isSelecting()) {
-            FThreads.invokeInEdtNowOrLater(FloatingZone::refreshSelectionPrompts);
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
+        super.setHighlighted(objects, b);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            refreshStackTargetMarks();
+            if (isSelecting()) {
+                FloatingZone.refreshSelectionPrompts();
+            }
+        });
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true; // stack entries are clicked in the stack panel (VStack)
+    }
+
+    @Override
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        super.setSelectableTargets(targets);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (isSelectingStackItems()) { // stack entries are picked in the stack panel, so bring it up
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+            }
+            refreshStackTargetMarks();
+        });
+    }
+
+    /** Repaints what shows the marks of players and stack entries: the avatar borders and the stack panel. */
+    private void refreshStackTargetMarks() {
+        if (getFieldViews() != null) {
+            for (final VField f : getFieldViews()) {
+                f.updateAvatarBorder();
+            }
         }
+        getCStack().getView().repaintSelection();
     }
 
     @Override
@@ -1143,7 +1174,7 @@ public final class CMatchUI
 
     @Override
     public void showPromptMessage(PlayerView playerView, String message, CardView card) {
-        cancelWaitingTimer();
+        cancelAwaitNextInput();
         cPrompt.setMessage(message, card);
         notePromptMessage(message);
     }

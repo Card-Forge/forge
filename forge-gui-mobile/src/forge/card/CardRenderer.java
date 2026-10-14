@@ -12,20 +12,13 @@ import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Multiset;
 
 import forge.CachedCardImage;
@@ -48,7 +41,6 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
-import forge.gui.FThreads;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.IPaperCard;
@@ -59,6 +51,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
+import forge.toolbox.FSelectionBox;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
 
@@ -150,14 +143,6 @@ public class CardRenderer {
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.7f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
     private static final GlyphLayout glyphLayout = new GlyphLayout();
-
-    static {
-        try {
-            for (int fontSize = 8; fontSize <= 22; fontSize++) {
-                generateFontForCounters(fontSize);
-            }
-        } catch (Exception ignored) {}
-    }
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -676,10 +661,10 @@ public class CardRenderer {
         };
     }
 
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        drawCard(g, card, x, y, w, h, pos, rotate, false, false, false);
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+        drawCard(g, card, x, y, w, h, pos, false, false, false);
     }
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList, boolean magnify) {
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean showAltState, boolean isChoiceList, boolean magnify) {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage(showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
@@ -688,7 +673,6 @@ public class CardRenderer {
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
         float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
-        boolean needsRotation = rotate && !Forge.enableUIMask.equals("Art") && CardRendererUtils.needsRotation(card, showAltState);
         if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
             croppedArea = 0.975f;
             minusxy = 0.135f * radius;
@@ -702,7 +686,7 @@ public class CardRenderer {
                 else
                     g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.getFoilIndex(card));
             } else {
-                if (card.isFlipped() || needsRotation) {
+                if (card.isFlipped()) {
                     float rotation = card.isFlipped() ? 180 
                         : CardRendererUtils.hasAftermath(card) ? 90 : -90;
                     if (Forge.enableUIMask.equals("Full")) {
@@ -745,7 +729,7 @@ public class CardRenderer {
         cy = y;
         cw = w;
         ch = h;
-        drawCard(g, card, x, y, w, h, pos, false, showAltState, isChoiceList, false);
+        drawCard(g, card, x, y, w, h, pos, showAltState, isChoiceList, false);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;
@@ -835,10 +819,13 @@ public class CardRenderer {
         if (unselectable) {
             g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.6f), cx, cy, cw, ch);
         }
-        //Magenta outline when card is chosen
+        //Solid outline when card is chosen, moving dashes when it can be chosen
         if (MatchController.instance.isHighlighted(card)) {
-            g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+            FSelectionBox.drawChosen(g, BORDER_THICKNESS, cx, cy, cw, ch);
         } else {
+            if (MatchController.instance.isSelectable(card)) {
+                FSelectionBox.draw(g, cx, cy, cw, ch);
+            }
             if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
                     && MatchController.instance.isWeaklySelectable(card)) {
                 g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
@@ -951,7 +938,9 @@ public class CardRenderer {
 
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
         int fontSize = Math.max(11, Math.min(22, (int) (h * 0.08)));
-        BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
+        BitmapFont font = Forge.getAssets().getCounterFont(fontSize);
+        if (font == null)
+            return;
 
         final float additionalXOffset = 3f * ((fontSize - 11) / 11f);
         final float variableWidth = ((fontSize - 11) / 11f) * 44f;
@@ -1089,7 +1078,9 @@ public class CardRenderer {
         }
 
         int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
-        BitmapFont font = Forge.getAssets().counterFonts().get(fontSize);
+        BitmapFont font = Forge.getAssets().getCounterFont(fontSize);
+        if (font == null)
+            return;
 
         final float additionalXOffset = 3f * ((fontSize - 8) / 8f);
 
@@ -1188,59 +1179,5 @@ public class CardRenderer {
             manaSymbolSize = w / cost.getGlyphCount();
         }
         CardFaceSymbols.drawManaCost(g, cost, x + (w - manaCostWidth) / 2, y + (h - manaSymbolSize) / 2, manaSymbolSize);
-    }
-
-    //TODO Make FSkinFont accept more than one kind of font and merge this with it
-    private static void generateFontForCounters(final int fontSize) {
-        FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.COMMON_FONTS_DIR).child("Roboto-Bold.ttf");
-
-        if (!ttfFile.exists()) {
-            return;
-        }
-
-        final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
-
-        //approximate optimal page size
-        int pageSize = 128;
-
-        //only generate images for characters that could be used by Forge
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
-
-        final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
-        final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.characters = chars;
-        parameter.size = fontSize;
-        parameter.packer = packer;
-        final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(parameter);
-        final Array<PixmapPacker.Page> pages = packer.getPages();
-
-        //TODO Cache this
-        //finish generating font on UI thread
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-
-                //TextureRegion[] textureRegions = new TextureRegion[pages.size];
-                Array<TextureRegion> textureRegions = new Array<>();
-                for (int i = 0; i < pages.size; i++) {
-                    PixmapPacker.Page p = pages.get(i);
-                    Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
-                        @Override
-                        public void dispose() {
-                            super.dispose();
-                            getTextureData().consumePixmap().dispose();
-                        }
-                    };
-                    texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-                    //textureRegions[i] = new TextureRegion(texture);
-                    textureRegions.add(new TextureRegion(texture));
-                }
-
-                Forge.getAssets().counterFonts().put(fontSize, new BitmapFont(fontData, textureRegions, true));
-
-                generator.dispose();
-                packer.dispose();
-            }
-        });
     }
 }

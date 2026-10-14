@@ -3,11 +3,11 @@ package forge.gamemodes.match;
 import com.google.common.collect.*;
 
 import forge.deck.Deck;
-import forge.game.GameEntityView;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.spellability.StackItemView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.phase.PhaseType;
@@ -26,6 +26,7 @@ import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.Localizer;
@@ -241,6 +242,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         originalGameControllers.clear();
         spectator = null;
         currentPlayer = null;
+        selectablePlayers.clear();
+        selectableStackItems.clear();
+        highlighted.clear();
     }
 
     @Override
@@ -303,27 +307,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<GameEntityView> highlighted = Sets.newHashSet();
+    private final Set<TrackableObject> highlighted = Sets.newHashSet();
 
     @Override
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
         // updateSingleCard reaches the widgets directly, and callers include the game thread
         FThreads.invokeInEdtNowOrLater(() -> {
-            for (final GameEntityView gv : entities) {
-                final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+            for (final TrackableObject object : objects) {
+                final boolean hasChanged = b ? highlighted.add(object) : highlighted.remove(object);
                 if (!hasChanged) continue;
-                if (gv instanceof PlayerView pv) {
+                if (object instanceof PlayerView pv) {
                     updateLives(Collections.singleton(pv));
-                }
-                if (gv instanceof CardView cv) {
+                } else if (object instanceof CardView cv) {
                     updateCard(cv);
                 }
             }
         });
     }
 
-    public boolean isHighlighted(final GameEntityView ge) {
-        return highlighted.contains(ge);
+    public boolean isHighlighted(final TrackableObject object) {
+        return highlighted.contains(object);
     }
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
@@ -338,8 +341,51 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectionMax = max;
     }
 
+    private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
+    private final Set<Integer> selectableStackItems = Sets.newConcurrentHashSet();
+
+    /**
+     * Marks the players and stack items the active prompt can pick (cards go through {@link #setSelectables}), replacing
+     * earlier marks. {@link #clearSelectables()} removes them.
+     */
+    @Override
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        selectablePlayers.clear();
+        selectableStackItems.clear();
+        for (final TrackableObject t : targets) {
+            if (t instanceof PlayerView pv) {
+                selectablePlayers.add(pv);
+            } else if (t instanceof StackItemView si) {
+                selectableStackItems.add(si.getId());
+            }
+        }
+    }
+
+    public boolean isSelectable(final PlayerView player) {
+        return player != null && selectablePlayers.contains(player);
+    }
+
+    public boolean isSelectable(final StackItemView item) {
+        return item != null && !selectableStackItems.isEmpty() && selectableStackItems.contains(item.getId());
+    }
+
+    public boolean isSelectingStackItems() {
+        return !selectableStackItems.isEmpty();
+    }
+
+    /** A stack entry was picked in this GUI's stack view while stack targets are being chosen. */
+    public void pickStackItem(final StackItemView item) {
+        final IGameController controller = getGameController();
+        if (controller != null && item != null) {
+            controller.selectStackItem(item);
+        }
+    }
+
+    @Override
     public void clearSelectables() {
         selectableCards.clear();
+        selectablePlayers.clear();
+        selectableStackItems.clear();
         selectionMin = 0;
         selectionMax = 0;
     }
@@ -530,7 +576,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private TimerTask awaitNextInputTask;
 
     @Override
-    public final void awaitNextInput() {
+    public void awaitNextInput() {
         checkAwaitNextInputTimer();
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
@@ -581,7 +627,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return waitingForName;
     }
 
-    private String currentYieldMessage() {
+    protected String currentYieldMessage() {
         YieldController yielding = null;
         for (IGameController c : gameControllers.values()) {
             YieldController yc = c.getYieldController();
@@ -605,8 +651,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return null;
     }
 
-    @Override
-    public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
+    private void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
         cancelWaitingTimer();
         if (waitingForPlayerName == null) {
             return;
@@ -682,6 +727,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void cancelAwaitNextInput() {
+        cancelWaitingTimer();
         if (awaitNextInputTimer == null) {
             return;
         }
@@ -694,11 +740,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 awaitNextInputTask = null;
             }
         }
-        cancelWaitingTimer();
     }
 
     @Override
-    public final void updateAutoPassPrompt() {
+    public void updateAutoPassPrompt() {
         String message = currentYieldMessage();
         if (message == null) return;
         cancelAwaitNextInput();
@@ -715,6 +760,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
         else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
         else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) pv = u.player();
+        // SetMarker carries the phase owner, not who is yielding. It only reaches a client, for its own player
+        else if (update instanceof YieldUpdate.SetMarker) pv = getCurrentPlayer();
         else return;
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
@@ -916,6 +963,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void afterGameEnd() {
+        cancelWaitingTimer();
         if (awaitNextInputTimer != null) {
             awaitNextInputTimer.cancel();
             awaitNextInputTimer = null;

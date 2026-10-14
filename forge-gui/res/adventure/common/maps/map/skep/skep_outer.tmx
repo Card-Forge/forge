@@ -459,19 +459,15 @@
       {
         &quot;name&quot;: &quot;(Continue)&quot;,
         &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;action&quot;: [
-                { &quot;deleteMapObject&quot;: -1 },
-                { &quot;deleteMapObject&quot;: 98 },
-                { &quot;deleteMapObject&quot;: 99 },
-                { &quot;deleteMapObject&quot;: 100 },
-                { &quot;deleteMapObject&quot;: 238 },
-                { &quot;deleteMapObject&quot;: 239 },
-                { &quot;deleteMapObject&quot;: 240 },
-                { &quot;addItem&quot;: &quot;Armor of the Hivelord&quot; }
-            ]
-          }
+        &quot;action&quot;: [
+          { &quot;deleteMapObject&quot;: -1 },
+          { &quot;deleteMapObject&quot;: 98 },
+          { &quot;deleteMapObject&quot;: 99 },
+          { &quot;deleteMapObject&quot;: 100 },
+          { &quot;deleteMapObject&quot;: 238 },
+          { &quot;deleteMapObject&quot;: 239 },
+          { &quot;deleteMapObject&quot;: 240 },
+          { &quot;addItem&quot;: &quot;Armor of the Hivelord&quot; }
         ]
       }
     ]

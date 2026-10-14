@@ -3,11 +3,13 @@ package forge;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -43,6 +45,7 @@ public class Graphics implements Disposable {
     private Rectangle bounds = new Rectangle();
     private Rectangle visibleBounds = new Rectangle();
     private int failedClipCount;
+    private boolean clipImbalanceReported;
     private float alphaComposite = 1;
     private int transformCount = 0;
     private boolean isDisposed = false;
@@ -130,6 +133,29 @@ public class Graphics implements Disposable {
         if (shapeRenderer.getCurrentType() != null) {
             shapeRenderer.end();
         }
+        resetClipState();
+    }
+
+    // A frame must not leave a clip behind. If an exception skipped an endClip, whatever is left would otherwise stay on
+    // libGDX's static scissor stack and keep the depth counter (and the pool) growing frame after frame.
+    private void resetClipState() {
+        if (clipDepth == 0 && failedClipCount == 0) {
+            return;
+        }
+        if (!clipImbalanceReported) {
+            clipImbalanceReported = true;
+            System.err.println("Graphics: unbalanced startClip/endClip at the end of a frame (depth=" + clipDepth + ", failed=" + failedClipCount + "), resetting");
+        }
+        while (clipDepth > 0) {
+            try {
+                ScissorStack.popScissors();
+            } catch (RuntimeException e) {
+                break; // nothing left to pop
+            }
+            clipDepth--;
+        }
+        clipDepth = 0;
+        failedClipCount = 0;
     }
 
     @Override
@@ -227,13 +253,12 @@ public class Graphics implements Disposable {
 
     public void endClip() {
         if (failedClipCount == 0) {
+            if (clipDepth == 0) {
+                return; // nothing open (e.g. the frame was reset mid-clip), don't touch ScissorStack
+            }
             batch.flush(); // must flush batch to ensure stuff rendered during clip respects that clip
             ScissorStack.popScissors();
-
-            // Retract depth tracking downward as layout loops exit
-            if (clipDepth > 0) {
-                clipDepth--;
-            }
+            clipDepth--;
         } else {
             failedClipCount--;
         }
@@ -547,13 +572,21 @@ public class Graphics implements Disposable {
     }
 
     public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer) {
+        drawCurvedArrow(thickness, fillColor, strokeColor, x1, y1, x2, y2, drawPointer, 0f);
+    }
+
+    /**
+     * @param bulge if non-zero, always draws a curve (even between close points) whose control point sits this far
+     *              to the side of the midpoint; positive bulges to the left of the direction of travel on screen
+     */
+    public void drawCurvedArrow(float thickness, Color fillColor, Color strokeColor, float x1, float y1, float x2, float y2, boolean drawPointer, float bulge) {
         if (alphaComposite < 1) {
             fillColor = fade(fillColor, fadeA);
             strokeColor = fade(strokeColor, fadeB);
         }
         float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        prepCurved(thickness, x1, y1, x2, y2, !drawPointer);
+        prepCurved(thickness, x1, y1, x2, y2, !drawPointer, bulge);
 
         if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
             if (arrowPhase == 0) {
@@ -617,7 +650,7 @@ public class Graphics implements Disposable {
         }
         float lt = thickness / 3;
         boolean needSmoothing = (x1 != x2 && y1 != y2);
-        prepCurved(thickness, x1, y1, x2, y2, false);
+        prepCurved(thickness, x1, y1, x2, y2, false, 0f);
 
         if (arrowBatchActive) { // inside drawArrowBatch: emit only this pass's part
             if (arrowPhase == 0) {
@@ -766,7 +799,7 @@ public class Graphics implements Disposable {
     }
 
     //geometry of a curved arrow/pointer (straight when short), computed once into the ca* fields and curvePts
-    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead) {
+    private void prepCurved(float thickness, float x1, float y1, float x2, float y2, boolean wantHead, float bulge) {
         caSx1 = adjustX(x1);
         caSy1 = adjustY(y1, 0);
         caSx2 = adjustX(x2);
@@ -779,7 +812,7 @@ public class Graphics implements Disposable {
         // Point just before the tip for direction
         float beforeTipX = x1, beforeTipY = y1;
 
-        if (length < 120f) {
+        if (length < 120f && bulge == 0f) {
             // Straight line
             caCurved = false;
             float backScale = Math.max(0.1f, 10f / length);
@@ -791,7 +824,7 @@ public class Graphics implements Disposable {
             float midX = (x1 + x2) / 2f;
             float midY = (y1 + y2) / 2f;
             float px = -dy / length, py = dx / length;
-            float curveStrength = 50f;
+            float curveStrength = bulge != 0f ? bulge : 50f;
             float cx = midX + px * curveStrength;
             float cy = midY + py * curveStrength;
 
@@ -984,11 +1017,64 @@ public class Graphics implements Disposable {
         }
     }
 
+    // ---- rectangles through the SpriteBatch -------------------------------------------------------------------------
+    // fillRect / fillGradientRect / drawRect / drawRectLines used to go through ShapeRenderer, which has to pause the batch for
+    // every single call (flush, shader switch, shape pass, shader switch). A card frame drawn in code makes around ten of them
+    // per card. They are now solid quads drawn through the batch with a 1x1 white texture: draw order is preserved, nothing
+    // is paused, and consecutive rects merge into one draw call. Fills and gradients cover exactly the same pixels as before.
+    // Outlines used to be GL lines (smoothed, centered on the edge); the quads cover the same footprint with hard edges.
+    // FORCED ON by default. -Dforge.batchedRects=true turns it on; -Dforge.batchedOutlines=false then keeps outlines on ShapeRenderer.
+    private static final boolean BATCHED_RECTS = true;// Boolean.parseBoolean(System.getProperty("forge.batchedRects", "false"));
+    private static final boolean BATCHED_RECT_OUTLINES = true;// BATCHED_RECTS && !"false".equalsIgnoreCase(System.getProperty("forge.batchedOutlines"));
+    // ONE shared 1x1 texture for the whole app instead of one per Graphics instance, so it can never pile up
+    private static Pixmap whitePixmap;
+    private static Texture whiteTexture;
+    private final float[] quadVerts = new float[20];
+
+    private Texture getWhiteTexture() {
+        if (whiteTexture == null) {
+            whitePixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            whitePixmap.setColor(1f, 1f, 1f, 1f);
+            whitePixmap.fill();
+            // managed, so it is restored if the GL context is ever lost
+            whiteTexture = new Texture(new PixmapTextureData(whitePixmap, null, false, false, true));
+            whiteTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        }
+        return whiteTexture;
+    }
+
+    // One solid quad. (l, b) is the bottom-left corner in screen space; colors are packed floats per corner in the order
+    // bottom-left, top-left, top-right, bottom-right. Vertex colors are used as they are (the batch color is not applied).
+    private void batchQuad(float l, float b, float w, float h, float cBL, float cTL, float cTR, float cBR) {
+        final float[] v = quadVerts;
+        final float r = l + w, t = b + h;
+        v[0] = l;  v[1] = b;  v[2] = cBL;  v[3] = 0.5f;  v[4] = 0.5f;
+        v[5] = l;  v[6] = t;  v[7] = cTL;  v[8] = 0.5f;  v[9] = 0.5f;
+        v[10] = r; v[11] = t; v[12] = cTR; v[13] = 0.5f; v[14] = 0.5f;
+        v[15] = r; v[16] = b; v[17] = cBR; v[18] = 0.5f; v[19] = 0.5f;
+        batch.draw(getWhiteTexture(), v, 0, 20);
+    }
+
     public void drawRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h) {
         drawRect(thickness, skinColor.getColor(), x, y, w, h);
     }
 
     public void drawRect(float thickness, Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECT_OUTLINES && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float t = Math.max(thickness, 1f); // GL lines were never thinner than 1
+            final float half = t / 2f;
+            final float c = color.toFloatBits();
+            final float l = adjustX(x), b = adjustY(y, h);
+            // the four edges, each centered on the rectangle's edge like the GL lines were
+            batchQuad(l, b - half, w, t, c, c, c, c);
+            batchQuad(l, b + h - half, w, t, c, c, c, c);
+            batchQuad(l - half, b, t, h, c, c, c, c);
+            batchQuad(l + w - half, b, t, h, c, c, c, c);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (thickness > 1) {
@@ -1014,7 +1100,92 @@ public class Graphics implements Disposable {
         batch.begin();
     }
 
+    /**
+     * Rectangle outline made of dashes, drawn inside the given rectangle. Changing {@code phase} (same units as the
+     * other lengths) slides the dashes along the outline, which gives "marching ants" when it grows over time.
+     * Built from filled rects, so it batches like every other rect and follows active transforms.
+     */
+    public void drawDashedRect(float thickness, Color color, float x, float y, float w, float h, float dash, float gap, float phase) {
+        final float period = dash + gap;
+        if (dash <= 0 || period <= 0 || w <= 0 || h <= 0) {
+            return;
+        }
+        final float t = Math.min(Math.max(thickness, 1f), Math.min(w, h) / 2f);
+        final float perimeter = 2 * (w + h);
+        // start one period early so a dash that straddles the starting corner is still drawn
+        final float offset = ((phase % period) + period) % period;
+        for (float s = offset - period; s < perimeter; s += period) {
+            final float a = Math.max(s, 0f), b = Math.min(s + dash, perimeter);
+            if (b > a) {
+                dashSegment(color, t, x, y, w, h, a, b);
+            }
+        }
+    }
+
+    /**
+     * Outline of equal dashes that alternate between two colours: the same picture as two {@link #drawDashedRect} calls
+     * half a pattern apart. When opaque, the first colour is drawn as one solid frame and only the second colour's dashes
+     * go over it, which halves the rects drawn (this runs for every selectable card, every frame). Translucent drawing
+     * keeps the two passes so the colours do not blend where they would overlap.
+     */
+    public void drawAlternatingDashedRect(float thickness, Color colorA, Color colorB, float x, float y, float w, float h, float dash, float phase) {
+        if (alphaComposite < 1) {
+            drawDashedRect(thickness, colorA, x, y, w, h, dash, dash, phase);
+            drawDashedRect(thickness, colorB, x, y, w, h, dash, dash, phase + dash);
+            return;
+        }
+        if (dash <= 0 || w <= 0 || h <= 0) {
+            return;
+        }
+        final float t = Math.min(Math.max(thickness, 1f), Math.min(w, h) / 2f);
+        fillRect(colorA, x, y, w, t); // top
+        fillRect(colorA, x, y + h - t, w, t); // bottom
+        fillRect(colorA, x, y + t, t, h - 2 * t); // left
+        fillRect(colorA, x + w - t, y + t, t, h - 2 * t); // right
+        drawDashedRect(thickness, colorB, x, y, w, h, dash, dash, phase + dash);
+    }
+
+    // draws the part of an outline (clockwise from the top left corner) between distances a and b, split per edge
+    private void dashSegment(Color color, float t, float x, float y, float w, float h, float a, float b) {
+        float edgeStart = 0;
+        for (int edge = 0; edge < 4; edge++) {
+            if (edgeStart >= b) {
+                break; // the rest of the outline lies beyond this dash
+            }
+            final float len = edge % 2 == 0 ? w : h;
+            final float lo = Math.max(a, edgeStart), hi = Math.min(b, edgeStart + len);
+            if (hi > lo) {
+                final float u0 = lo - edgeStart, u1 = hi - edgeStart;
+                switch (edge) {
+                    case 0 -> fillRect(color, x + u0, y, u1 - u0, t); // top, left to right
+                    case 1 -> fillRect(color, x + w - t, y + u0, t, u1 - u0); // right, downwards
+                    case 2 -> fillRect(color, x + w - u1, y + h - t, u1 - u0, t); // bottom, right to left
+                    default -> fillRect(color, x, y + h - u1, t, u1 - u0); // left, upwards
+                }
+            }
+            edgeStart += len;
+        }
+    }
+
     public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECT_OUTLINES && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float t = Math.max(thickness, 1f);
+            final float half = thickness / 2f; // the edges were inset by thickness / 2, as in the line version below
+            final float qh = t / 2f;
+            final float c = color.toFloatBits();
+            final float x0 = adjustX(x), x1 = adjustX(x + w);
+            final float yTop = adjustY(y, 0), yBottom = adjustY(y + h, 0);
+            batchQuad(x0, yTop - qh, x1 - x0, t, c, c, c, c);
+            batchQuad(x0, yBottom - qh, x1 - x0, t, c, c, c, c);
+            final float lx = adjustX(x + half), rx = adjustX(x + w - half);
+            final float yv0 = adjustY(y + h - half, 0), yv1 = adjustY(y + half, 0);
+            batchQuad(lx - qh, yv0, t, yv1 - yv0, c, c, c, c);
+            batchQuad(rx - qh, yv0, t, yv1 - yv0, c, c, c, c);
+            return;
+        }
         // all four edges are axis aligned (no smoothing needed) so they share one batch pause and one shape pass
         batch.end(); //must pause batch while rendering shapes
 
@@ -1052,6 +1223,14 @@ public class Graphics implements Disposable {
     }
 
     public void fillRect(Color color, float x, float y, float w, float h) {
+        if (BATCHED_RECTS && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color = fade(color, fadeA);
+            }
+            final float c = color.toFloatBits();
+            batchQuad(adjustX(x), adjustY(y, h), w, h, c, c, c, c);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -1168,6 +1347,16 @@ public class Graphics implements Disposable {
     }
 
     public void fillGradientRect(Color color1, Color color2, boolean vertical, float x, float y, float w, float h) {
+        if (BATCHED_RECTS && batch.isDrawing()) {
+            if (alphaComposite < 1) {
+                color1 = fade(color1, fadeA);
+                color2 = fade(color2, fadeB);
+            }
+            final float c1 = color1.toFloatBits(), c2 = color2.toFloatBits();
+            // same corner colors as the ShapeRenderer version below: bottom-left, top-left, top-right, bottom-right
+            batchQuad(adjustX(x), adjustY(y, h), w, h, vertical ? c2 : c1, c1, vertical ? c1 : c2, c2);
+            return;
+        }
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
