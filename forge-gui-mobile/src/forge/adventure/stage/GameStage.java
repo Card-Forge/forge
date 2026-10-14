@@ -212,7 +212,6 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
         FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        // Todo: Check if this is correct - Bram Archipelago
         if (cardArt != null && cardArt.getTextureRegion() != null) {
             TextureRegion textureRegion = cardArt.getTextureRegion();
             if (CardImageRenderer.forgeArt == cardArt)
