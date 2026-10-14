@@ -260,8 +260,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("cbShowStormCount"),
             Forge.getLocalizer().getMessage("nlShowStormCount")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_TARGET_BOX,
-            Forge.getLocalizer().getMessageorUseDefault("lblShowTargetBox", "Show Target Box"),
-            Forge.getLocalizer().getMessageorUseDefault("nlShowTargetBox", "Draws a box around selectable or targetable game entity.")), 1);
+            Forge.getLocalizer().getMessage("lblShowTargetBox"),
+            Forge.getLocalizer().getMessage("nlShowTargetBox")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
@@ -289,8 +289,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.UNDO_MODE_OFF, ForgeConstants.UNDO_MODE_SINGLE, ForgeConstants.UNDO_MODE_FREE
             }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SEPARATE_UNDO_BUTTON,
-            Forge.getLocalizer().getMessageorUseDefault("lblSeparateUndo", "Separate Undo Button"),
-            Forge.getLocalizer().getMessageorUseDefault("nlSeparateUndo", "Shows undo as a round button beside End Turn. When off, End Turn turns into Undo while an undo is possible (old look).")) {
+            Forge.getLocalizer().getMessage("lblSeparateUndo"),
+            Forge.getLocalizer().getMessage("nlSeparateUndo")) {
                 @Override
                 public void select() {
                     super.select();
