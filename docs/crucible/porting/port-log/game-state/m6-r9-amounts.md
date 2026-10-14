@@ -41,7 +41,6 @@ their head below.
 | Cost paid lists (`Sacrificed$`, `Discarded$`, `Exiled$`, `Tapped$`)      | 43     | 4     | A spell's additional cost and a triggered `AB$` cost recorded none |
 | Other card lists (`Targeted$`, `TriggerRemembered$`, `TriggeredSource$`) | 23     | 1     | Missing heads and measures (`CardSumPT`)                           |
 | `TriggerCount$`, `ReplaceCount$`, `TriggerObjects...$`                   | 16     | 13    | Trigger and replacement records                                    |
-| `Count$TotalCommanderCastFromCommandZone`                                | 11     | 11    | No Commander setup                                                 |
 | `Count$Valid <spec>` count (inline, `ValidGraveyard,Exile`)              | 8      | 0     | Inline value not compiled                                          |
 | Total                                                                    | 581    | 125   |                                                                    |
 
@@ -111,8 +110,6 @@ No new `PlayerController` decision.
 
 | Shape                                                                                                                                                                     | Cards | Reason                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | -------------------------------------------------------------------------------------------------------------- |
-| `Count$TotalCommanderCastFromCommandZone`, `TargetedPlayer$TotalCommander...`                                                                                             | 12    | No Commander game setup: no commander is ever cast from a Command zone, not "counted none"                     |
-| `TriggerObjectsAttackers$Amount`                                                                                                                                          | 7     | `triggeredObjects` keeps no attacker list                                                                      |
 | `TriggeredPlayersTargets$Amount`                                                                                                                                          | 1     | `Defined$ TriggeredTargets` is not a recorded key                                                              |
 | `Count$CastTotalManaSpent <valid>`                                                                                                                                        | 6     | Counts mana by its source; the cast record keeps no sources                                                    |
 | `ReplaceCount$DamageAmount`                                                                                                                                               | 6     | Replacement context (`getReplacingObject`), not carried to the ability                                         |
