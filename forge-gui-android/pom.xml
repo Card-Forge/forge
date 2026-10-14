@@ -1,11 +1,5 @@
-<!--TODO: UPDATE THE POM ON DISCORD IN HOW TO BUILD INSTRUCTIONS.-->
+<!--Todo: NEVER COMMIT THIS FILE TO THE UPSTREAM REPO-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </pluginRepository>
-    </pluginRepositories>
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
@@ -349,9 +343,6 @@
                                 <goals>
                                     <goal>manifest-merger</goal>
                                 </goals>
-                                <configuration>
-                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -417,7 +408,7 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>com.simpligility.maven.plugins</groupId>
+                        <groupId>com.github.cardforge.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
                         <dependencies>
                             <dependency>
@@ -438,7 +429,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.3</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -632,7 +623,7 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>com.simpligility.maven.plugins</groupId>
+                        <groupId>com.github.cardforge.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
                         <dependencies>
                             <dependency>
@@ -653,7 +644,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.3</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -764,7 +755,7 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>com.simpligility.maven.plugins</groupId>
+                        <groupId>com.github.cardforge.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
                         <dependencies>
                             <dependency>
@@ -785,7 +776,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.3</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
