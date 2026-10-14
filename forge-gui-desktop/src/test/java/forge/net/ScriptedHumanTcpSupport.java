@@ -1104,6 +1104,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private volatile Game disconnectAiNextGameOrigin;
         private volatile DisconnectAiNextGamePreparationReceipt disconnectAiNextGamePreparationReceipt;
         private volatile DisconnectAiNextGameHeldPriority disconnectAiNextGameHeldPriority;
+        private volatile DisconnectAiNextGameHeldPriority disconnectAiGameNPriority;
         private volatile boolean reconnectPostureReached;
         private volatile boolean metamorphoseScenario;
         private volatile boolean metamorphoseOpeningDiagnostic;
@@ -4043,6 +4044,51 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         void configureReconnectScenario() { reconnectScenario = true; }
         boolean reconnectScenario() { return reconnectScenario; }
         void configureDisconnectAiScenario() { disconnectAiScenario = true; }
+        void armDisconnectAiGameNPriority(Game game, PlayerControllerHuman controller, ScriptedGui endpoint) {
+            disconnectAiGameNPriority = new DisconnectAiNextGameHeldPriority(game, controller, null,
+                    controller, endpoint, controller.getPlayer().getId(), game.getView().getId());
+        }
+        synchronized boolean holdDisconnectAiGameNPriority(GameView view, int seat, int chooserViewId,
+                long callbackOrdinal, ScriptedGui endpoint, IGameController endpointController) {
+            DisconnectAiNextGameHeldPriority held = disconnectAiGameNPriority;
+            if (held == null || view == null || view.getGame() != held.game()
+                    || view.getId() != held.gameViewId() || seat != 0 || chooserViewId != held.ownerViewId()
+                    || view.getTurn() < 3 || view.getPhase() != PhaseType.MAIN1) return false;
+            PlayerControllerHuman controller = held.controller();
+            Input proxy = controller.getInputProxy().getInput();
+            if (endpoint != held.endpoint() || endpointController != held.endpointController()
+                    || callbackOrdinal <= 0 || !(proxy instanceof InputPassPriority input)
+                    || proxy != controller.getInputQueue().getInput()
+                    || input.getOwner() == null || input.getOwner().getId() != held.ownerViewId()) {
+                fail(new AssertionError("Game N takeover priority lost its exact host input binding"));
+                return true;
+            }
+            if (held.input() == null) {
+                disconnectAiGameNPriority = new DisconnectAiNextGameHeldPriority(held.game(), controller,
+                        input, endpointController, endpoint, chooserViewId, view.getId());
+            }
+            if (!isSameDisconnectAiGameNPriority(held.game(), controller, endpoint)) {
+                fail(new AssertionError("Game N takeover priority changed before concession"));
+            }
+            return true;
+        }
+        synchronized boolean isSameDisconnectAiGameNPriority(Game game,
+                PlayerControllerHuman controller, ScriptedGui endpoint) {
+            DisconnectAiNextGameHeldPriority held = disconnectAiGameNPriority;
+            if (held == null || held.input() == null || held.game() != game || held.controller() != controller
+                    || held.endpoint() != endpoint || controller.getGame() != game || controller.getGui() != endpoint
+                    || game.isGameOver() || game.getOutcome() != null || game.getPlayers().size() != 2
+                    || game.getCardsInGame().size() != 80 || !game.getStack().isEmpty()
+                    || game.getPhaseHandler().getTurn() < 3 || game.getPhaseHandler().getPhase() != PhaseType.MAIN1
+                    || game.getPhaseHandler().getPlayerTurn() != controller.getPlayer()
+                    || game.getPhaseHandler().getPriorityPlayer() != controller.getPlayer()) return false;
+            GameView view = endpoint.getGameView();
+            PlayerView owner = ScriptedGui.findPlayerView(view, held.ownerViewId());
+            return view != null && view.getGame() == game && view.getId() == held.gameViewId()
+                    && owner != null && endpoint.getGameController(owner) == held.endpointController()
+                    && controller.getInputProxy().getInput() == held.input()
+                    && controller.getInputQueue().getInput() == held.input();
+        }
         boolean disconnectAiScenario() { return disconnectAiScenario; }
         synchronized void armDisconnectAiNextGamePreparation(Game oldGame) {
             if (!disconnectAiScenario || disconnectAiNextGameOrigin != null) {
@@ -7508,6 +7554,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 scenario.recordDisconnectAiPriority(game.getId(), seat, ownPlayerViewId,
                         promptCapture.callbackOrdinal(), game.getTurn(), game.getPhase(),
                         turnPlayer == null ? -1 : turnPlayer.getId());
+                if (scenario.holdDisconnectAiGameNPriority(game, seat, ownPlayerViewId,
+                        promptCapture.callbackOrdinal(), this, controller)) return;
                 if (scenario.holdDisconnectAiNextGamePriority(game, seat, ownPlayerViewId,
                         promptCapture.callbackOrdinal(), this, controller)) return;
                 if (scenario.retainPositiveRemoteOwnManaUndoPriority(game.getId(), seat, ownPlayerViewId,

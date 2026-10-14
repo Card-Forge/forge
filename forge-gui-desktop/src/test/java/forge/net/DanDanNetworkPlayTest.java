@@ -25,6 +25,7 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.match.input.InputPassPriority;
 import forge.game.event.GameEventGameOutcome;
@@ -924,6 +925,7 @@ public class DanDanNetworkPlayTest {
         final String oldLegality = FModel.getPreferences().getPref(FPref.ENFORCE_DECK_LEGALITY);
         final String oldPlayerName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
         final String oldMusic = FModel.getPreferences().getPref(FPref.UI_ENABLE_MUSIC);
+        final String oldUndoMode = FModel.getPreferences().getPref(FPref.UI_UNDO_MODE);
         final String oldAutoPassNoActions = FModel.getPreferences().getPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
         final String oldRandomFoil = FModel.getPreferences().getPref(FPref.UI_RANDOM_FOIL);
         final String oldSelectFromCardDisplays = FModel.getPreferences().getPref(FPref.UI_SELECT_FROM_CARD_DISPLAYS);
@@ -1006,6 +1008,9 @@ public class DanDanNetworkPlayTest {
         try {
             // Prevent the headless start path from consuming the strict deck-shuffle RNG for music selection.
             FModel.getPreferences().setPref(FPref.UI_ENABLE_MUSIC, "false");
+            if (tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) {
+                FModel.getPreferences().setPref(FPref.UI_UNDO_MODE, forge.localinstance.properties.ForgeConstants.UNDO_MODE_SINGLE);
+            }
             if (metamorphoseAccept != null || privacyScenario || lifecycleScenario) {
                 FModel.getPreferences().setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, "false");
             }
@@ -1506,6 +1511,8 @@ public class DanDanNetworkPlayTest {
             try { FModel.getPreferences().setPref(FPref.UI_RANDOM_FOIL, oldRandomFoil); }
             catch (Throwable failure) { cleanupFailure = combine(cleanupFailure, failure); }
             try { FModel.getPreferences().setPref(FPref.UI_ENABLE_MUSIC, oldMusic); }
+            catch (Throwable failure) { cleanupFailure = combine(cleanupFailure, failure); }
+            try { FModel.getPreferences().setPref(FPref.UI_UNDO_MODE, oldUndoMode); }
             catch (Throwable failure) { cleanupFailure = combine(cleanupFailure, failure); }
             try { FModel.getPreferences().setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, oldAutoPassNoActions); }
             catch (Throwable failure) { cleanupFailure = combine(cleanupFailure, failure); }
@@ -2272,10 +2279,21 @@ public class DanDanNetworkPlayTest {
             long beforeUndoOrdinal = afterActivation == null ? 0 : afterActivation.callbackOrdinal();
             beforeUndoOrdinal = Math.max(beforeUndoOrdinal,
                     latestOwnManaUndoAppliedOrdinal(scenario, setup.gameViewId()));
+            final CountDownLatch undoRestored = new CountDownLatch(1);
+            final java.util.concurrent.atomic.AtomicBoolean undoRestoreStarted =
+                    new java.util.concurrent.atomic.AtomicBoolean();
+            game.subscribeToEvents(new Object() {
+                @Subscribe public void onSnapshotRestored(forge.game.event.GameEventSnapshotRestored event) {
+                    if (event.start()) undoRestoreStarted.set(true);
+                    else if (undoRestoreStarted.compareAndSet(true, false)) undoRestored.countDown();
+                }
+            });
             serverTap.arm(ProtocolMethod.undoLastAction);
             FThreads.invokeInEdtAndWait(() -> {
                 assertOwnManaUndoDispatchStillBound(game, remotePlayer, serverController,
                         activationInput, remote.gui(), remoteController, setup.gameViewId(), setup.remoteViewId());
+                Assert.assertSame(requireOwnManaPriority(game, remotePlayer, serverController), activationInput,
+                        "the undo request uses the exact current priority input at dispatch");
                 remoteController.undoLastAction();
             });
             Assert.assertTrue(serverTap.awaitReceipt(15, TimeUnit.SECONDS),
@@ -2287,9 +2305,18 @@ public class DanDanNetworkPlayTest {
             Assert.assertEquals(undoReceipt.gameViewId(), Integer.valueOf(setup.gameViewId()));
             Assert.assertSame(undoReceipt.channel(), serverChannel);
             Assert.assertNull(serverTap.failure(), "undo server receive observation remained healthy");
+            Assert.assertTrue(undoRestored.await(15, TimeUnit.SECONDS),
+                    "the captured Game completed its typed snapshot restoration after the TCP undo request");
+            awaitLifecycleCondition(scenario, () -> {
+                Input current = serverController.getInputQueue().getInput();
+                return current instanceof InputPassPriority && current != activationInput
+                        && serverController.getInputProxy().getInput() == current
+                        && current.getOwner() == remotePlayer.getView();
+            }, 15, "snapshot restoration rebuilt a fresh current remote priority input");
+            InputPassPriority restoredInput = requireOwnManaPriority(game, remotePlayer, serverController);
+            Assert.assertNotSame(restoredInput, activationInput,
+                    "the completed undo replaces the old priority input rather than retaining a stale input");
             awaitOwnIslandState(game, remotePlayer, serverIsland, serverController, false, 0, 15, scenario);
-            Assert.assertSame(requireOwnManaPriority(game, remotePlayer, serverController), activationInput,
-                    "the undo refresh preserves the exact current priority input per tryUndoLastAction source");
             Assert.assertFalse(serverController.canUndoLastAction(),
                     "the remote-owned undo has restored the action history to its pre-ability state");
             Assert.assertTrue(host.getZone(ZoneType.Library).getCards().stream().map(Card::getId).toList()
@@ -2317,7 +2344,7 @@ public class DanDanNetworkPlayTest {
             Assert.assertSame(terminalRemoteController, heldClientController);
             FThreads.invokeInEdtAndWait(() -> {
                 assertOwnManaUndoDispatchStillBound(game, remotePlayer, serverController,
-                        activationInput, remote.gui(), terminalRemoteController,
+                        restoredInput, remote.gui(), terminalRemoteController,
                         setup.gameViewId(), setup.remoteViewId());
                 terminalRemoteController.concede();
             });
@@ -2605,6 +2632,7 @@ public class DanDanNetworkPlayTest {
         Assert.assertSame(disconnectedClients(server).get(retainedRemote.getUsername()), retainedRemote,
                 "the actual server parked the same RemoteClient after the TCP close");
         // The old remote PCH is no longer driven by this fixture; let later connected-host callbacks auto-pass.
+        scenario.armDisconnectAiGameNPriority(oldGame, hostController, desktop.hostGui);
         scenario.releasePostKeepPriority();
         Assert.assertTrue(server.handleCommand("/skipreconnect " + retainedRemote.getUsername()),
                 "the supported public command accepted the parked remote username");
@@ -2651,6 +2679,19 @@ public class DanDanNetworkPlayTest {
         Assert.assertTrue(draw.cardInHostHand() && draw.cardRemovedFromLibrary(),
                 "the synchronously observed shared-library card entered only the host's hand");
 
+        final long takeoverPriorityDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30);
+        while (!scenario.isSameDisconnectAiGameNPriority(oldGame, hostController, desktop.hostGui)
+                && System.nanoTime() < takeoverPriorityDeadline) {
+            assertNoFailure(scenario);
+            TimeUnit.MILLISECONDS.sleep(10);
+        }
+        assertNoFailure(scenario);
+        Assert.assertTrue(scenario.isSameDisconnectAiGameNPriority(oldGame, hostController, desktop.hostGui),
+                "Game N is waiting on its exact host priority input before concession");
+        Assert.assertTrue(desktop.hostGui.priorityPrompts().stream().anyMatch(prompt ->
+                prompt.seat() == 0 && prompt.chooserViewId() == host.getId() && prompt.turn() == draw.turn()
+                        && prompt.phase() == PhaseType.MAIN1 && prompt.turnPlayerViewId() == host.getId()),
+                "the held host priority follows the observed takeover draw in the same turn");
         scenario.armDisconnectAiNextGamePreparation(oldGame);
         hostController.concede();
         Assert.assertTrue(oldTrace.awaitOutcome(30, TimeUnit.SECONDS), "Game N emitted its actual outcome");
@@ -8200,6 +8241,20 @@ public class DanDanNetworkPlayTest {
                         "the setup retained the complete physical 80-card DanDan collection");
 
                 scenario.attachPositiveRemoteOwnManaUndoSetup(game, acquiredIsland.getId(), remote.getView().getId());
+                game.subscribeToEvents(new Object() {
+                    private boolean prepared;
+
+                    @Subscribe public void onPriority(forge.game.event.GameEventPlayerPriority event) {
+                        Card island = game.findById(acquiredIsland.getId());
+                        if (!prepared && game.getPhaseHandler().getTurn() == 2
+                                && event.phase() == PhaseType.MAIN1 && event.priority().equals(remote.getView())
+                                && island != null && island.getZone() == remote.getZone(ZoneType.Battlefield)) {
+                            prepared = true;
+                            // Drop the setup land play before the normal game-thread priority checkpoint.
+                            game.getUndoManager().barrier("Mana undo fixture setup complete");
+                        }
+                    }
+                });
                 return new TcpOwnManaUndoSetup(game, game.getView().getId(), remote.getView().getId(),
                         acquiredIsland.getId(), host.getView().getId(), acquiredIsland.getOwner().getView().getId(),
                         physicalAfter);
