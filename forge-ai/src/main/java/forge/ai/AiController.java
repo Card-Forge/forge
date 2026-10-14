@@ -70,8 +70,6 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
-//import java.util.concurrent.locks.LockSupport;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -701,25 +699,31 @@ public class AiController {
 
     // if return true, go to next phase
     private SpellAbility chooseCounterSpell(final List<SpellAbility> possibleCounters) {
-        if (possibleCounters == null || possibleCounters.isEmpty()) return null;
-        final AtomicReference<SpellAbility> best = new AtomicReference<>();
-        return callWithAITimeout(() -> {
-            int bestRestriction = Integer.MIN_VALUE;
-            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
-                ThreadUtil.checkInterrupt();
-                sa.setActivatingPlayer(player);
-                if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
-                    final int level = ComputerUtil.counterSpellRestriction(player, sa);
-                    if (best.get() == null || level > bestRestriction) {
-                        bestRestriction = level;
-                        best.set(sa);               // timeout now returns this
-                    }
+        if (possibleCounters == null || possibleCounters.isEmpty()) {
+            return null;
+        }
+        SpellAbility bestSA = null;
+        int bestRestriction = Integer.MIN_VALUE;
+
+        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
+            sa.setActivatingPlayer(player);
+            // check everything necessary
+
+            AiPlayDecision opinion = canPlayAndPayFor(sa);
+            //PhaseHandler ph = game.getPhaseHandler();
+            // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
+            if (opinion == AiPlayDecision.WillPlay) {
+                final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
+                if (bestSA == null || restrictionLevel > bestRestriction) {
+                    bestRestriction = restrictionLevel;
+                    bestSA = sa;
                 }
             }
-            // TODO - "Look" at Targeted SA and "calculate" the threshold
-            // if (bestRestriction < targetedThreshold) return false;
-            return best.get();
-        }, best::get);
+        }
+
+        // TODO - "Look" at Targeted SA and "calculate" the threshold
+        // if (bestRestriction < targetedThreshold) return false;
+        return bestSA;
     }
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
@@ -744,25 +748,22 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        return callWithAITimeout(() -> {
-            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                ThreadUtil.checkInterrupt();
-                ApiType saApi = sa.getApi();
+        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+            ApiType saApi = sa.getApi();
 
-                if (saApi == ApiType.Counter || saApi == exceptSA) {
-                    continue;
-                }
-                sa.setActivatingPlayer(player);
-                // TODO: this currently only works as a limited prediction of permanent spells.
-                // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
-                // but that is currently difficult to implement due to various side effects leading to stack overflow.
-                Card host = sa.getHostCard();
-                if (sa instanceof SpellPermanent && host != null && !host.isLand() && !ComputerUtil.castPermanentInMain1(player, sa) && ComputerUtilCost.canPayCost(sa, player, false)) {
-                    return sa;
-                }
+            if (saApi == ApiType.Counter || saApi == exceptSA) {
+                continue;
             }
-            return null;
-        });
+            sa.setActivatingPlayer(player);
+            // TODO: this currently only works as a limited prediction of permanent spells.
+            // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
+            // but that is currently difficult to implement due to various side effects leading to stack overflow.
+            Card host = sa.getHostCard();
+            if (sa instanceof SpellPermanent && host != null && !host.isLand() && !ComputerUtil.castPermanentInMain1(player, sa) && ComputerUtilCost.canPayCost(sa, player, false)) {
+                return sa;
+            }
+        }
+        return null;
     }
 
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
