@@ -65,8 +65,10 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;brg_3_3_cat_dragon_flying&quot;]}"/>
     <property name="enemy" value="Wasitora"/>
-    <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -86,14 +88,14 @@ Your manasight stone glows, sensing the power of the legend here.&quot;,
 ]</property>
    </properties>
   </object>
-  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="368" y="237">
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="369.091" y="238.818">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;brg_3_3_cat_dragon_flying&quot;, &quot;Crucible of Fire&quot;]}"/>
     <property name="enemy" value="Wasitora"/>
-    <property name="spawn.Easy" type="bool" value="true"/>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Insane" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
