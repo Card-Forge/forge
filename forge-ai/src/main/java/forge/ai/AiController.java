@@ -73,6 +73,7 @@ import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
 import static java.lang.Math.max;
@@ -96,14 +97,12 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
-    private List<SpellAbility> scratchList;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(player);
-        scratchList = new ArrayList<>();
     }
 
     public boolean usesHybridSimulation() {
@@ -436,20 +435,22 @@ public class AiController {
 
         landList = ComputerUtilCard.dedupeCards(landList);
 
-        // these don't depend on the candidate land, so compute them once instead of once per land
-        final CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
-        final int landsOwned = CardLists.count(battlefield, CardPredicates.LANDS) + CardLists.count(hand, CardPredicates.LANDS);
-        final int landCap = Math.max(Aggregates.max(hand, Card::getCMC), 6);
-
         landList = CardLists.filter(landList, c -> {
             String name = c.getName();
+            CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
             if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
                 if (battlefield.anyMatch(CardPredicates.nameEquals(name))) {
                     return false;
                 }
             }
 
-            if (landsOwned >= landCap) {
+            final CardCollectionView hand1 = player.getCardsIn(ZoneType.Hand);
+            CardCollection lands = new CardCollection(battlefield);
+            lands.addAll(hand1);
+            lands = CardLists.filter(lands, CardPredicates.LANDS);
+            int maxCmcInHand = Aggregates.max(hand1, Card::getCMC);
+
+            if (lands.size() >= Math.max(maxCmcInHand, 6)) {
                 // don't play MDFC land if other side is spell and enough lands are available
                 if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Backside).getType().isLand())) {
                     return false;
@@ -460,12 +461,9 @@ public class AiController {
                     return false;
                 }
             }
-            for (SpellAbility la : c.getAllPossibleAbilities(player, true)) {
-                if (la.isLandAbility() && saSideEffects(c, la).willingToPlay()) {
-                    return true;
-                }
-            }
-            return false;
+            return c.getAllPossibleAbilities(player, true).stream().anyMatch(
+                    la -> la.isLandAbility() && saSideEffects(c, la).willingToPlay()
+            );
         });
         return landList;
     }
@@ -636,20 +634,9 @@ public class AiController {
 
         // what types can I go get?
         for (final String name : MagicColor.Constant.BASIC_LANDS) {
-            boolean b = false;
-            for (Card card : landList) {
-                if (card.getType().hasSubtype(name)) {
-                    b = true;
-                    break;
-                }
-            }
-            if (b) {
-                for (Card c : landsInBattlefield) {
-                    if (c.getType().hasSubtype(name)) {
-                        basics.add(name);
-                        break;
-                    }
-                }
+            if (landList.stream().anyMatch(c -> c.getType().hasSubtype(name)) &&
+                    landsInBattlefield.stream().anyMatch(c -> c.getType().hasSubtype(name))) {
+                basics.add(name);
             }
         }
 
@@ -1585,13 +1572,7 @@ public class AiController {
             return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
         //removed skipped SA
-        scratchList.clear();
-        for (SpellAbility spellAbility : saList) {
-            if (spellAbility.isSkip()) {
-                scratchList.add(spellAbility);
-            }
-        }
-        skipped = scratchList;
+        skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
         //update LivingEndPlayer

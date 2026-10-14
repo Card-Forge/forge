@@ -735,12 +735,7 @@ public class AiAttackController {
         }
 
         if (defendingOpponent.getLife() > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
-            Integer acc = 0;
-            for (Card c : tramplers) {
-                Integer orDefault = trampleDmg.getOrDefault(c, 0);
-                acc = acc + orDefault;
-            }
-            int totalCombatDamage = acc;
+            int totalCombatDamage = tramplers.stream().map(c -> trampleDmg.getOrDefault(c, 0)).reduce(0, Integer::sum);
             if (totalCombatDamage >= defendingOpponent.getLife()) {
                 return true;
             }
@@ -1050,18 +1045,16 @@ public class AiAttackController {
                 }
             } else {
                 final CountDownLatch cdl = new CountDownLatch(1);
-                final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[1];
-
-                tasksArray[0] = new ConcurrentAttackerEvaluator(
-                        arr, new AtomicInteger(),  finalDefender, combat, attackersLeft, numForcedAttackers,
-                        cdl, requirementsComparator, seasonOfTheWitch);
-                ThreadUtil.AIExecutor.execute(tasksArray[0]);
+                final ConcurrentAttackerEvaluator tasksArray = new ConcurrentAttackerEvaluator(
+                    arr, new AtomicInteger(),  finalDefender, combat, attackersLeft, numForcedAttackers,
+                    cdl, requirementsComparator, seasonOfTheWitch);
+                ThreadUtil.AIExecutor.execute(tasksArray);
 
                 try {
                     long remainingNanos = deadlineNanos - System.nanoTime();
                     boolean completedInTime = remainingNanos > 0 && cdl.await(remainingNanos, TimeUnit.NANOSECONDS);
                     if (!completedInTime) {
-                        tasksArray[0].cancelTask();
+                        tasksArray.cancelTask();
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
