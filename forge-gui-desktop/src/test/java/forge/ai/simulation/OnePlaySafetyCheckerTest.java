@@ -10,6 +10,7 @@ import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -145,6 +146,131 @@ public class OnePlaySafetyCheckerTest extends SimulationTest {
         List<SpellAbility> choices = ai(ritualAi).chooseSpellAbilityToPlay();
         AssertJUnit.assertNotNull("The safety check should allow a useful mana ritual", choices);
         AssertJUnit.assertEquals("Dark Ritual", choices.get(0).getHostCard().getName());
+    }
+
+    @Test
+    public void testAllowsExplicitDiscardCost() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Swamp", 3, ai);
+        Card phantasmagorian = addCardToZone("Phantasmagorian", ai, ZoneType.Graveyard);
+        addCardToZone("Griselbrand", ai, ZoneType.Hand);
+        addCardToZone("Jin-Gitaxias, Core Augur", ai, ZoneType.Hand);
+        addCardToZone("Elesh Norn, Grand Cenobite", ai, ZoneType.Hand);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = phantasmagorian.getSpellAbilities().stream()
+                .filter(SpellAbility::isActivatedAbility).findFirst().orElseThrow();
+        ability.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("The safety check should evaluate the play from its post-cost state",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testAllowsScheduledGraveyardReturn() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Swamp", 3, ai);
+        Card familiar = addCard("Nine-Lives Familiar", ai);
+        familiar.setCounters(CounterEnumType.REVIVAL, 1);
+        Card murder = addCardToZone("Murder", ai, ZoneType.Hand);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = murder.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        ability.getTargets().add(familiar);
+        AssertJUnit.assertTrue("The Familiar is scheduled to return from the graveyard",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testAllowsDelayedHandReturn() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Mountain", 2, ai);
+        Card bliss = addCardToZone("Ignorant Bliss", ai, ZoneType.Hand);
+        addCardToZone("Shivan Dragon", ai, ZoneType.Hand);
+        addCardToZone("Serra Angel", ai, ZoneType.Hand);
+        fillLibrary(ai, 1);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = bliss.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Cards exiled by Ignorant Bliss return before its delayed draw",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testAllowsMemoryJarTemporaryHands() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        Card jar = addCard("Memory Jar", ai);
+        addCardToZone("Shivan Dragon", ai, ZoneType.Hand);
+        addCardToZone("Serra Angel", ai, ZoneType.Hand);
+        addCardToZone("Forest", opponent, ZoneType.Hand);
+        addCardToZone("Island", opponent, ZoneType.Hand);
+        fillLibrary(ai, 10);
+        fillLibrary(opponent, 10);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = jar.getSpellAbilities().stream()
+                .filter(SpellAbility::isActivatedAbility).findFirst().orElseThrow();
+        ability.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Restoring the original hands should not make the activation unsafe",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testAllowsNextTurnDelayedDraw() {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+
+        addCards("Island", 2, ai);
+        Card legacy = addCardToZone("Lat-Nam's Legacy", ai, ZoneType.Hand);
+        addCardToZone("Runeclaw Bear", ai, ZoneType.Hand);
+        fillLibrary(ai, 2);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = legacy.getFirstSpellAbility();
+        ability.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("The shuffled card is repaid by the next-turn draw",
+                OnePlaySafetyChecker.isAcceptable(ai, ability));
+    }
+
+    @Test
+    public void testDelayedDrawDoesNotExcuseImmediateLethalTrigger() {
+        AssertJUnit.assertFalse("A next-turn draw must not excuse an immediate loss",
+                evaluateBaubleAtOneLife("Disciple of the Vault"));
+    }
+
+    @Test
+    public void testRejectsLethalNextTurnDelayedDraw() {
+        AssertJUnit.assertFalse("The scheduled draw is lethal while Nekusar remains in play",
+                evaluateBaubleAtOneLife("Nekusar, the Mindrazer"));
+    }
+
+    private boolean evaluateBaubleAtOneLife(String opponentPermanent) {
+        Game game = initAndCreateGame(true);
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        ai.setLife(1, null);
+
+        Card bauble = addCard("Urza's Bauble", ai);
+        addCard(opponentPermanent, opponent);
+        addCardToZone("Forest", opponent, ZoneType.Hand);
+        fillLibrary(ai, 1);
+        moveToMain2(game, ai);
+
+        SpellAbility ability = bauble.getSpellAbilities().stream()
+                .filter(SpellAbility::isActivatedAbility).findFirst().orElseThrow();
+        ability.setActivatingPlayer(ai);
+        ability.getTargets().add(opponent);
+        return OnePlaySafetyChecker.isAcceptable(ai, ability);
     }
 
     @Test
