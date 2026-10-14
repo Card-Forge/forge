@@ -6534,6 +6534,18 @@
       ]
     }
   },
+  {
+    "name": "Decayed Pants",
+    "description": "Two 2/2 zombie tokens that can't block and die after attacking.",
+    "equipmentSlot": "Boots",
+    "iconName": "DecayedPants",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "b_2_2_zombie_decayed", "b_2_2_zombie_decayed"
+      ]
+    }
+  },
     {
     "name": "Pilgrim's Cloak",
     "description": "Sac for a tapped basic",

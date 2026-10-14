@@ -218,6 +218,9 @@ FulcrumGauntlet
 PantsoftheFattestButt
   xy: 32, 480
   size: 16, 16
+DecayedPants
+  xy: 128, 480
+  size: 16, 16
 Cragflame
   xy: 288, 656
   size: 16, 16

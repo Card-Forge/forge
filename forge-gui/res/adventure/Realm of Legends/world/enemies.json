@@ -66339,6 +66339,3164 @@
     "spawnRate": 0
   },
   {
+    "name": "Alhammarret",
+    "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
+    "deck": [
+      "decks/legends/alhammarret.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Sphinx Helm"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Alhammarret, High Arbiter"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Sphinx's Tutelage"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "U",
+    "spawnRate": 0
+  },
+  {
+    "name": "Torsten Von Ursus",
+    "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
+    "deck": [
+      "decks/legends/torsten.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Soldier's Helm"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Torsten, Founder of Benalia"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Torsten Von Ursus"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Assemble the Legion"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "Axelrod Gunnarson",
+    "sprite": "sprites/enemy/giant/gravetitan.atlas",
+    "deck": [
+      "decks/legends/axelrod_gunnarson.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Armor of Horrors"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Axelrod Gunnarson"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Baneful Omen"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
+    "name": "Kurbis",
+    "sprite": "sprites/enemy/plant/treant_large.atlas",
+    "deck": [
+      "decks/legends/kurbis.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Brushwagg Boots"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Kurbis, Harvest Celebrant"
+      },
+      {
+        "type": "card",
+        "count": 3,
+        "cardName": "Brushwagg"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Almighty Brushwagg"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Temperamental Oozewagg"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ornery Tumblewagg"
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
+    "name": "Vogar",
+    "sprite": "sprites/enemy/giant/gravetitan.atlas",
+    "deck": [
+      "decks/legends/vogar.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Decayed Pants"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Vogar, Necropolis Tyrant"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Endless Ranks of the Dead"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
+    "name": "Memnarch",
+    "sprite": "sprites/enemy/construct/golem_2.atlas",
+    "deck": [
+      "decks/legends/memnarch.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Brute Shield"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Memnarch, the Warden"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Darksteel Reactor"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Darksteel Juggernaut"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Coretapper"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Energy Chamber"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "C",
+    "spawnRate": 0
+  },
+  {
+    "name": "Hellion",
+    "sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
+    "deck": [
+      "decks/legends/tuknir_deathlock.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 2,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Scoria Anklet"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tuknir Deathlock"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Killer Instinct"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "RG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Horrible Spirit",
+    "sprite": "sprites/enemy/construct/gargoyle_2.atlas",
+    "deck": [
+      "decks/legends/page.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Page, Loose Leaf"
+      },
+      {
+        "type": "card",
+        "count": 11,
+        "cardName": "Horrible Hordes"
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "C",
+    "spawnRate": 0
+  },
+  {
+    "name": "Sandwurm",
+    "sprite": "sprites/enemy/monstrosity/sandwurm2.atlas",
+    "deck": [
+      "decks/legends/johan.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 3,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Armor of Sands"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Johan"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Sandwurm Convergence"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
+    "name": "Balefang",
+    "sprite": "sprites/enemy/dragon/firedragon.atlas",
+    "deck": [
+      "decks/legends/balefang.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 2,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Balefang the Unslayable"
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "R",
+    "spawnRate": 0
+  },
+  {
+    "name": "Skeleton Shipmate",
+    "sprite": "sprites/enemy/undead/skeleton_2.atlas",
+    "deck": [
+      "decks/legends/skeleton_ship.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Skeleton Ship"
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "UB",
+    "spawnRate": 0
+  },
+  {
+    "name": "Gwendlyn Di Corci",
+    "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
+    "deck": [
+      "decks/legends/gwendlyn_di_corci.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Thief's Hat"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Gwendlyn Di Corci"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Triumphant Getaway"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Stolen Strategy"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Thieving Varmint"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Cunning Rhetoric"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Thieving Aven"
+      },
+      {
+        "type": "randomCard",
+        "count": 4,
+        "addMaxCount": 8,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "UBR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Edgar",
+    "sprite": "sprites/enemy/humanoid/werewolf/werewolf.atlas",
+    "deck": [
+      "decks/legends/echo_edgar.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Edgar, Moonlit Sovereign"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Ghalta",
+    "sprite": "sprites/enemy/beast/dinosaur/dinosaur_triceratops.atlas",
+    "deck": [
+      "decks/legends/echo_ghalta.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 2,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ghalta the Immovable"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "Titanbones",
+    "sprite": "sprites/enemy/undead/skeleton.atlas",
+    "deck": [
+      "decks/legends/titanbones.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 4,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Titanbones, Towering Heart"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Karn",
+    "sprite": "sprites/enemy/construct/artifactsoldier.atlas",
+    "deck": [
+      "decks/legends/echo_karn.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Fulcrum Gauntlet"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Karn, Gilded Guardian"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 2,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "WUBRG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Kiora",
+    "sprite": "sprites/enemy/humanoid/merfolk/kiora.atlas",
+    "deck": [
+      "decks/legends/echo_kiora.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Kiora of Fire and Ashes"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "R",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Lyra",
+    "sprite": "sprites/enemy/celestial/angel_2.atlas",
+    "deck": [
+      "decks/legends/echo_lyra.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Lyra, Tolarian Archangel"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "U",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Ruric Thar",
+    "sprite": "sprites/enemy/monstrosity/homarid.atlas",
+    "deck": [
+      "decks/legends/echo_ruric_thar.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ruric Thar, Biomagus"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "U",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Tamiyo",
+    "sprite": "sprites/enemy/humanoid/kor/kor_blue.atlas",
+    "deck": [
+      "decks/legends/echo_tamiyo.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tamiyo, Upriser Crowned"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "RW",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Yuriko",
+    "sprite": "sprites/enemy/humanoid/paladin_2.atlas",
+    "deck": [
+      "decks/legends/echo_yuriko.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Yuriko, Blade of the Mighty"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Yargle",
+    "sprite": "sprites/enemy/aberration/froghemoth.atlas",
+    "deck": [
+      "decks/legends/echo_yargle.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Pants of the Fattest Butt"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Yargle, Goliath of Otaria"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 2,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "U",
+    "spawnRate": 0
+  },
+  {
+    "name": "The Ur-Sphinx",
+    "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
+    "deck": [
+      "decks/legends/the_ur_sphinx.dck"
+    ],
+    "ai": "",
+    "flying": true,
+    "speed": 45,
+    "scale": 2,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Vexing Boots"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "The Ur-Sphinx"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "WUB",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Myrel",
+    "sprite": "sprites/enemy/humanoid/swordsman_2.atlas",
+    "deck": [
+      "decks/legends/myrel.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Veteran's Blade"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Myrel, Shield of Argive"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "W",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Blor",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
+    "deck": [
+      "decks/legends/blor.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Blor's Bow"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Blor's Shield"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Blor the Impervious"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "G",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Providence of Night",
+    "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
+    "deck": [
+      "decks/legends/providence_of_night.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 4,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Sneakling Shoes"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Providence of Night"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "The Madcap Jester",
+    "sprite": "sprites/enemy/humanoid/human/wizard/corrupted_blue_wiz.atlas",
+    "deck": [
+      "decks/legends/the_madcap_jester.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jester's Cap"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "The Madcap Jester"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "UBR",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Wasitora",
+    "sprite": "sprites/enemy/monstrosity/heartpiercer_manticore.atlas",
+    "deck": [
+      "decks/legends/wasitora.dck"
+    ],
+    "ai": "",
+    "flying": true,
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Mostly Kitten-Proof Pants"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Wasitora, Nekoru Queen"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "BRG",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Tam the Possibility",
+    "sprite": "sprites/enemy/monstrosity/gorgone.atlas",
+    "deck": [
+      "decks/legends/tam_the_possibility.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Necklace of the Paradox"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tam, the Possibility"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Lord of Tresserhorn",
+    "sprite": "sprites/enemy/undead/lich_3.atlas",
+    "deck": [
+      "decks/legends/tresserhorns_lord.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 40,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Spiteful Helm"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tresserhorn's Lord, Returned"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Lord of Tresserhorn"
+      },
+      {
+        "type": "deckCard",
+        "count": 4,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 3,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 500,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
+      }
+    ],
+    "colors": "UBR",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "The Theorist",
+    "sprite": "sprites/enemy/humanoid/human/wizard/jace.atlas",
+    "deck": [
+      "decks/legends/the_theorist.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Necklace of the Mind Sculptor"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Necklace of the Deathbringer"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Necklace of the Healer"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Necklace of the Warlord"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Jace, Multiverse Architect"
+      },
+      {
+        "type": "deckCard",
+        "count": 6,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 2000,
+        "addMaxCount": 6000
+      },
+      {
+        "type": "shards",
+        "count": 20,
+        "addMaxCount": 80
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "addMaxCount": 2,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "WUBR",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Lyna",
+    "sprite": "sprites/enemy/humanoid/kor/kor_blue.atlas",
+    "deck": [
+      "decks/legends/lyna.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Soltari Shoes"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Lyna, Veil of Vengeance"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "WUB",
+    "spawnRate": 0
+  },
+  {
+    "name": "Eron",
+    "sprite": "sprites/enemy/humanoid/human/wizard/mage_2.atlas",
+    "deck": [
+      "decks/legends/eron.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Koskun Armor"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Eron the Relentless"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "spawnRate": 0
+  },
+  {
+    "name": "Jandor",
+    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+    "deck": [
+      "decks/legends/jandor.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jandor's Saddlebags"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Jandor, Fortuned Traveler"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "WRG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Homer",
+    "sprite": "sprites/enemy/beast/ocean/hermitcrab.atlas",
+    "deck": [
+      "decks/legends/homer.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 2,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Crab Hat"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Homer, the Hermit"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "UBG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Codie",
+    "sprite": "sprites/enemy/aberration/eye.atlas",
+    "deck": [
+      "decks/legends/echo_codie.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Codie, Ravenous Codex"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "WUBRG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Kwia Vigorbloom",
+    "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
+    "deck": [
+      "decks/legends/kwia_vigorbloom.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Kwia Vigorbloom"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "WG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Ingris Stingerquill",
+    "sprite": "sprites/enemy/fey/faerie_dragon.atlas",
+    "deck": [
+      "decks/legends/ingris_stingerquill.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ingris Stingerquill"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "BR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Denzilore Fatehold",
+    "sprite": "sprites/enemy/monstrosity/androsphinx.atlas",
+    "deck": [
+      "decks/legends/denzilore_fatehold.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Denzilore Fatehold"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "WU",
+    "spawnRate": 0
+  },
+  {
+    "name": "Uldaros Theorix",
+    "sprite": "sprites/enemy/monstrosity/shardsoul_slayer.atlas",
+    "deck": [
+      "decks/legends/uldaros_theorix.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Uldaros Theorix"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "UB",
+    "spawnRate": 0
+  },
+  {
+    "name": "Aerid Konstrari",
+    "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
+    "deck": [
+      "decks/legends/aerid_konstrari.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Aerid Konstrari"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "RG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Liliana",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
+    "deck": [
+      "decks/legends/echo_liliana.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Liliana the Fautless"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Vraska",
+    "sprite": "sprites/enemy/monstrosity/gorgonen.atlas",
+    "deck": [
+      "decks/legends/echo_vraska.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Vraska, Soul of Stone"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "WUR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Nissa",
+    "sprite": "sprites/enemy/humanoid/human/elf/druid.atlas",
+    "deck": [
+      "decks/legends/echo_nissa.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Nissa, Leyline Tamer"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "WUBR",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Gideon",
+    "sprite": "sprites/enemy/humanoid/human/knight/death_knight_2.atlas",
+    "deck": [
+      "decks/legends/echo_gideon.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Gideon the Oathless"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Ob Nixilis",
+    "sprite": "sprites/enemy/celestial/peerlesssolar.atlas",
+    "deck": [
+      "decks/legends/echo_ob_nixilis.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ob Nixilis, the Ascended"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "W",
+    "spawnRate": 0
+  },
+  {
+    "name": "Echo Avacyn",
+    "sprite": "sprites/enemy/celestial/fallen_angel.atlas",
+    "deck": [
+      "decks/legends/echo_avacyn.dck"
+    ],
+    "ai": "",
+    "speed": 60,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Avacyn, Angel of Horror"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      }
+    ],
+    "colors": "B",
+    "spawnRate": 0
+  },
+  {
     "name": "Zo-Zu the Punisher",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
@@ -66671,6 +69829,126 @@
   {
     "name": "Chevill",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Auntie Blyte",
+    "sprite": "sprites/enemy/humanoid/fiend/implarge.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Taigam",
+    "sprite": "sprites/enemy/humanoid/human/warlock/false_monk.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Domri Rade",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditslingshot.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Extus",
+    "sprite": "sprites/enemy/humanoid/human/cleric/monk_2.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Elspeth",
+    "sprite": "sprites/enemy/humanoid/paladin_2.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Rashida Scalebane",
+    "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Gwenna",
+    "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "King Macar",
+    "sprite": "sprites/enemy/humanoid/human/knight/king_large.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],
