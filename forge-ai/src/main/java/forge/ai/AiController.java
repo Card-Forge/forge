@@ -1707,7 +1707,14 @@ public class AiController {
         AITimeoutTracker.begin(id, timeoutNanos);              // shows the bar after 2s, shared with nested calls
         try {
             final long deadline = AITimeoutTracker.deadlineNanos(id, timeoutNanos);
-            final Future<T> future = ThreadUtil.AIExecutor.submit(task);
+            final Future<T> future = ThreadUtil.AIExecutor.submit(() -> {
+                try {
+                    return task.call();
+                } catch (ThreadDeath td) {
+                    // thread was force-stopped after an AI timeout; this task is abandoned anyway
+                    return null;   // don't rethrow, so the pool thread keeps going
+                }
+            });
             try {
                 return future.get(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS);
             } catch (TimeoutException e) {
@@ -1735,7 +1742,11 @@ public class AiController {
             ThreadUtil.delay(200, () -> {
                 Thread runner = task.getRunnerThread();
                 if (runner != null && runner.isAlive()) {
-                    try { runner.stop(); } catch (UnsupportedOperationException | NoSuchMethodError ignored) { }
+                    try {
+                        runner.stop();
+                    } catch (UnsupportedOperationException | NoSuchMethodError ignored) {
+
+                    }
                 }
             });
         }
