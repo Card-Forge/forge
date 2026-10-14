@@ -56,28 +56,8 @@ public class SEditorIO {
 
         if (performSave) {
             controller.saveAs(name);
-            switch (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getGameType()){
-                case Brawl:
-                    CBrawlDecks.SINGLETON_INSTANCE.refresh();
-                    VBrawlDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
-                    break;
-                case Commander:
-                    CCommanderDecks.SINGLETON_INSTANCE.refresh();
-                    VCommanderDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
-                    break;
-                case TinyLeaders:
-                    CTinyLeadersDecks.SINGLETON_INSTANCE.refresh();
-                    VTinyLeadersDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
-                    break;
-                case Oathbreaker:
-                    COathbreakerDecks.SINGLETON_INSTANCE.refresh();
-                    VOathbreakerDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
-                    break;
-                default:
-                    CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
-                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
-                    break;
-            }
+            CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
+            VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
             // Set current quest deck to selected
             if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_QUEST) {
                 FModel.getQuest().setCurrentDeck(name);
