@@ -54,9 +54,9 @@ public class Console extends Window {
                             if (!commands.isEmpty()) {
                                 index--;
                                 if (index < 0) {
-                                    index = commands.size - 1;
+                                    index = 0;
                                 }
-                                if (index >= 0 && index < commands.size) {
+                                if (index < commands.size) {
                                     textField.setText(commands.get(index));
                                     console.last = textField.getText();
                                     textField.setCursorPosition(Integer.MAX_VALUE);
@@ -67,7 +67,7 @@ public class Console extends Window {
                             if (!commands.isEmpty()) {
                                 index++;
                                 if (index >= commands.size) {
-                                    index = 0;
+                                    index = commands.size;
                                     textField.setText("");
                                 } else {
                                     textField.setText(commands.get(index));
