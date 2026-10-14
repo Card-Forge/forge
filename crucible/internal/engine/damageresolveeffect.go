@@ -1,16 +1,21 @@
 package engine
 
-//enginelint:allow ability control game effecthelpers trigger card zone id
+//enginelint:allow ability control game effecthelpers trigger card zone id replacedying
 
 // damageResolveEffect is DamageResolveEffect.java: the damage a DamageMap$
 // ability recorded (pendingDamage) is dealt all at once -- GameAction.
-// dealDamage over the whole map -- then the damage-done-once triggers
-// check the batch. Without a map it does nothing, as in Java.
-// ReplaceDyingDefined$ is not resolved.
+// dealDamage over the whole map, with this ability as the cause, so its own
+// RememberDamaged$ has the host remember what the host's damage reached
+// (GameAction.java:2787-2794) -- then the damage-done-once triggers check the
+// batch, then ReplaceDyingDefined$ makes its effect (replaceDying,
+// DamageResolveEffect.java:30). Without a map it does nothing, as in Java.
 type damageResolveEffect struct{}
 
 func (damageResolveEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "DamageResolve", "Condition", "ReplaceDyingDefined"); err != nil {
+	if err := rejectParams(a, "DamageResolve", "Condition"); err != nil {
+		return err
+	}
+	if err := checkReplaceDying(g, a, "DamageResolve"); err != nil {
 		return err
 	}
 	if a.damageMap == nil {
@@ -19,8 +24,25 @@ func (damageResolveEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	entries := a.damageMap.entries
 	a.damageMap.entries = nil
 	table := g.dealPendingDamage(controller, entries)
+	if hasParam(a, "RememberDamaged") {
+		rememberDamaged(g, a.Source, table)
+	}
 	g.checkDamageTableTriggers(controller, table, false)
-	return nil
+	return g.replaceDying(a, "DamageResolve")
+}
+
+// rememberDamaged is GameAction.dealDamage's RememberDamaged$
+// (GameAction.java:2790-2794): the host remembers every entity its own
+// damage reached in the batch, in the order dealt. A recorded entry is
+// damage actually dealt, so an entity whose damage was prevented in full is
+// not remembered, as Java's runReplaceDamage removes it from the table
+// (ReplacementHandler.java:526-527).
+func rememberDamaged(g *Game, host CardID, table damageTable) {
+	for _, e := range table {
+		if e.Source == host && e.Amount > 0 {
+			g.Card(host).Memory.Remember(e.Target)
+		}
+	}
 }
 
 // dealPendingDamage deals each recorded entry in order -- the loop of

@@ -76,18 +76,18 @@ place), and `targetChoiceFor` drops those candidates. A root has no ancestors: n
 
 Unblocking 104 cards exposed params no Go code read. Each is ported or refused by name now (PORT-8/GO-7):
 
-| Param                                                            | Lines  | Status                                                                                     |
-| ---------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| `ExcessDamage$`/`ExcessDamageCondition$`                         | 6/1    | Ported: lethal to the card, the rest to the first entity named (`internalDamageDeal`)      |
-| `RememberDamaged$`                                               | 34     | Ported: the host remembers what its own damage reached; refused under `DamageMap$`         |
-| `OptionalDecider$`                                               | 5      | Ported: `ConfirmEffect` by the first player named (`:180-185`)                             |
-| `ReplaceDyingDefined$`/`ReplaceDyingCondition$`                  | 44/1   | Refused: needs `replaceDying`'s effect card with a compile-time Moved replacement (PORT-2) |
-| `ExcessSVar$`/`ExcessSVarCondition$`                             | 22/7   | Refused: an SVar set on the cause for a later link (`CardDamageTable.java:136-155`)        |
-| `RelativeTarget$`                                                | 2      | Refused: `Defined$` re-read per source (`:243-245`)                                        |
-| `DivideEvenly$`, `DividerOnResolution$`                          | 1/1    | Refused: an allocation this port does not carry                                            |
-| `CardChoices$`/`PlayerChoices$`/`Random$`                        | 4/4/3  | Refused: a choice outside targets (`:150-176`)                                             |
-| `RememberAmount$`, `RememberRedirectedExcess$`, `NoRedirection$` | 1 each | Refused                                                                                    |
-| `ValidTgts$` naming `NotDefined<X>`                              | 1      | Refused: `Matches` has no ability context and would read false (Special Move)              |
+| Param                                                            | Lines  | Status                                                                                |
+| ---------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |
+| `ExcessDamage$`/`ExcessDamageCondition$`                         | 6/1    | Ported: lethal to the card, the rest to the first entity named (`internalDamageDeal`) |
+| `RememberDamaged$`                                               | 34     | Ported: the host remembers what its own damage reached; refused under `DamageMap$`    |
+| `OptionalDecider$`                                               | 5      | Ported: `ConfirmEffect` by the first player named (`:180-185`)                        |
+| `ReplaceDyingDefined$`/`ReplaceDyingCondition$`                  | 44/1   | Ported (R9e, [`m6-r9e-replace-dying-excess.md`](m6-r9e-replace-dying-excess.md))      |
+| `ExcessSVar$`/`ExcessSVarCondition$`                             | 22/7   | Ported (R9e); refused under `DamageMap$`                                              |
+| `RelativeTarget$`                                                | 2      | Refused: `Defined$` re-read per source (`:243-245`)                                   |
+| `DivideEvenly$`, `DividerOnResolution$`                          | 1/1    | Refused: an allocation this port does not carry                                       |
+| `CardChoices$`/`PlayerChoices$`/`Random$`                        | 4/4/3  | Refused: a choice outside targets (`:150-176`)                                        |
+| `RememberAmount$`, `RememberRedirectedExcess$`, `NoRedirection$` | 1 each | Refused                                                                               |
+| `ValidTgts$` naming `NotDefined<X>`                              | 1      | Refused: `Matches` has no ability context and would read false (Special Move)         |
 
 A fully prevented entity is not remembered: Java's `runReplaceDamage` removes it from the table
 (`ReplacementHandler.java:526-527`). One reduced to 0 by an `Updated` replacement stays in Java's table and is not

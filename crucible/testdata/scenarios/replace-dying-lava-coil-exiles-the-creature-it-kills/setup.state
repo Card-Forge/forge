@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Lava Coil|Id:1
+humanbattlefield=Mountain|Id:2;Mountain|Id:3
+aibattlefield=Grizzly Bears|Id:4

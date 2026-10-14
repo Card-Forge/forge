@@ -1,0 +1,10 @@
+turn=2
+activeplayer=ai
+activephase=Upkeep
+humanlife=20
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped
+humangraveyard=Anger of the Gods
+humanexile=Llanowar Elves
+ailife=20
+aibattlefield=Darksteel Myr
+aiexile=Grizzly Bears

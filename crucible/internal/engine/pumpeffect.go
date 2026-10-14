@@ -121,6 +121,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			return fmt.Errorf("engine: Pump: %s$ not resolvable yet", key)
 		}
 	}
+	if err := checkReplaceDying(g, a, "Pump"); err != nil {
+		return err
+	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
@@ -193,7 +196,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	}
 
 	if power == 0 && toughness == 0 && grant.empty() {
-		return nil
+		// Java has no such return: replaceDying (PumpEffect.java:506) still
+		// runs, so an X=0 Necrotic Wound still exiles a creature dying this turn.
+		return g.replaceDying(a, "Pump")
 	}
 
 	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
@@ -236,7 +241,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			g.registerHostBoundEnd(source, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}, hostBound)
 		}
 	}
-	return nil
+	// PumpEffect.java:506: Bleed Dry's "if that creature would die this turn,
+	// exile it instead" (replacedying.go).
+	return g.replaceDying(a, "Pump")
 }
 
 // pumpPlayers is the players a keyword pump reaches: PumpEffect.java's

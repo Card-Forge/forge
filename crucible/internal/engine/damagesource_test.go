@@ -515,8 +515,10 @@ func TestDealDamageRejectsUnportedParams(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ extra, want string }{
-		{"ExcessSVar$ Excess", "ExcessSVar$"},
-		{"ReplaceDyingDefined$ Targeted", "ReplaceDyingDefined$"},
+		{"DamageMap$ True | ExcessSVar$ Excess", "ExcessSVar$"},
+		{"ReplaceDyingDefined$ Targeted | ReplaceDyingExiledWith$ True", "ReplaceDyingExiledWith$"},
+		{"ReplaceDyingDefined$ Targeted | ReplaceDyingCondition$ Foretold", "ReplaceDyingCondition$"},
+		{"ReplaceDyingDefined$ Bogus", "ReplaceDyingDefined$"},
 		{"RelativeTarget$ True", "RelativeTarget$"},
 		{"DividerOnResolution$ You", "DividerOnResolution$"},
 		{"DivideEvenly$ RoundedDown", "DivideEvenly$"},

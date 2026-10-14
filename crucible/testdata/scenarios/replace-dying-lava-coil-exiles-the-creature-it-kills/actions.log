@@ -1,0 +1,15 @@
+# Lava Coil: 4 damage to Grizzly Bears (2/2), "if that creature would die
+# this turn, exile it instead" (ReplaceDyingDefined$ Targeted). replaceDying
+# (SpellAbilityEffect.java:691-756) makes an effect card remembering the
+# Bears with an Event$ Moved Battlefield -> Graveyard replacement; the
+# lethal-damage SBA (CR 704.5g) would put them into the graveyard, and the
+# replacement exiles them instead (CR 614.1a). The effect then remembers no
+# card and leaves the game (addForgetOnMovedTrigger).
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+queue paygeneric R
+queue targets 4
+queue action human cast 1
+passpriority

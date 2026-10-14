@@ -11,14 +11,12 @@
 
 package engine
 
-//enginelint:allow id card game player ability combatdamage defined amount condition control trigger effecthelpers damageresolveeffect zone valid parts
+//enginelint:allow id card game player ability combatdamage defined amount condition control trigger effecthelpers damageresolveeffect zone valid parts excessdamage replacedying
 
 import (
 	"fmt"
-	"slices"
 	"strings"
 
-	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -77,21 +75,22 @@ type dealDamageEffect struct{}
 //   - CardChoices$/PlayerChoices$/Random$ -- a choice outside Defined$/
 //     targets (:150-176);
 //   - RelativeTarget$ -- Defined$ re-read relative to each source (:243-245);
-//   - ReplaceDyingDefined$/ReplaceDyingCondition$ -- replaceDying's "if it
-//     would die this turn, exile it instead" effect card
-//     (SpellAbilityEffect.java:691-756);
-//   - ExcessSVar$/ExcessSVarCondition$ -- the excess stored as an SVar for a
-//     later link (CardDamageTable.java:136-155);
 //   - RememberAmount$/RememberRedirectedExcess$ -- the dealt total or the
 //     redirected excess remembered on the host.
+//
+// ReplaceDyingDefined$/ReplaceDyingCondition$ resolve through replaceDying
+// (replacedying.go), after the damage (:272) -- or, under DamageMap$, before
+// the later DamageResolve deals it, as Java's own order has it.
+// ExcessSVar$/ExcessSVarCondition$ resolve through bindExcessSVar
+// (excessdamage.go); under DamageMap$ they are refused, since the SVar would
+// be set on the DamageResolve that deals the batch (GameAction.dealDamage's
+// cause), not on this ability.
 var dealDamageUnresolvedParams = [...]string{
 	"Condition", "TriggeredSpellAbility", "CounterNum", "Optional",
 	"NoPrevention", "NoRedirection",
 	"DivideEvenly", "DividerOnResolution",
 	"CardChoices", "PlayerChoices", "Random",
 	"RelativeTarget",
-	"ReplaceDyingDefined", "ReplaceDyingCondition",
-	"ExcessSVar", "ExcessSVarCondition",
 	"RememberAmount", "RememberRedirectedExcess",
 }
 
@@ -105,6 +104,13 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		// no access to: it would read false for every card (GO-7).
 		return fmt.Errorf("engine: DealDamage: ValidTgts$ %q: NotDefined property not resolvable yet", tgts)
 	}
+	if err := checkReplaceDying(g, a, "DealDamage"); err != nil {
+		return err
+	}
+	if err := checkExcessSVar(a, "DealDamage"); err != nil {
+		return err
+	}
+	defaultExcessSVar(a)
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
@@ -193,15 +199,17 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		}
 	}
 	if a.damageMap != nil {
-		// DamageMap$: dealt all at once by a later DamageResolve.
-		return nil
+		// DamageMap$: dealt all at once by a later DamageResolve; the
+		// ReplaceDying effect is made now (DamageDealEffect.java:269-272).
+		return g.replaceDying(a, "DealDamage")
 	}
 	table := g.dealPendingDamage(controller, batch.entries)
 	if hasParam(a, "RememberDamaged") {
 		rememberDamaged(g, a.Source, table)
 	}
+	bindExcessSVar(g, a, table)
 	g.checkDamageTableTriggers(controller, table, false)
-	return nil
+	return g.replaceDying(a, "DealDamage")
 }
 
 // damageTargetInPlay is DamageDealEffect's per-card check (:253-256): on the
@@ -304,47 +312,4 @@ func recordCardDamage(g *Game, a *Ability, batch *pendingDamage, src, cid CardID
 		batch.add(src, rest[0], dmg-toTarget)
 	}
 	return nil
-}
-
-// excessDamageValue is Card.getExcessDamageValue (Card.java:6127-6151, CR
-// 120.10): the least of what is lethal to c as a creature (1 from a
-// deathtouch source while any is lethal), its loyalty as a planeswalker and
-// its defense as a battle; 0 for none of the three.
-func excessDamageValue(c *Card, deathtouch bool) int {
-	values := make([]int, 0, 3)
-	t := c.Type()
-	if t.Has(cardtype.Creature) {
-		lethal := 0
-		if tough, ok := c.Toughness(); ok {
-			lethal = tough - c.Damage.Marked
-		}
-		if deathtouch && lethal > 0 {
-			lethal = 1
-		}
-		values = append(values, max(0, lethal))
-	}
-	if t.Has(cardtype.Planeswalker) {
-		values = append(values, c.Counters.Count(Loyalty))
-	}
-	if t.Has(cardtype.Battle) {
-		values = append(values, c.Counters.Count(Defense))
-	}
-	if len(values) == 0 {
-		return 0
-	}
-	return slices.Min(values)
-}
-
-// rememberDamaged is GameAction.dealDamage's RememberDamaged$
-// (GameAction.java:2790-2794): the host remembers every entity its own
-// damage reached in the batch, in the order dealt. A recorded entry is
-// damage actually dealt, so an entity whose damage was prevented in full is
-// not remembered, as Java's runReplaceDamage removes it from the table
-// (ReplacementHandler.java:526-527).
-func rememberDamaged(g *Game, host CardID, table damageTable) {
-	for _, e := range table {
-		if e.Source == host && e.Amount > 0 {
-			g.Card(host).Memory.Remember(e.Target)
-		}
-	}
 }

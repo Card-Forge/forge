@@ -1016,6 +1016,11 @@ type damageEntry struct {
 	Source CardID
 	Target EntityID
 	Amount int
+	// Lethal is a permanent target's excess-damage threshold just before this
+	// entry's damage was marked (Card.getExcessDamageValue(false),
+	// GameAction.java:2750-2752): what bindExcessSVar subtracts. 0 for a
+	// player target.
+	Lethal int
 }
 
 type damageTable []damageEntry

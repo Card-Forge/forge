@@ -1,0 +1,17 @@
+# Lava Coil on Darksteel Myr (0/1 indestructible): the 4 damage is lethal,
+# but CR 702.12b keeps an indestructible permanent out of the lethal-damage
+# SBA, so it never would die and the exile-instead replacement never
+# applies. The effect card replaceDying made stays in the Command zone until
+# the cleanup step ends it (game.getEndOfTurn().addUntil,
+# SpellAbilityEffect.java:752); cleanup also removes the damage (CR 514.2).
+# By the ai's upkeep both are gone and the Myr is still on the battlefield.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+queue paygeneric R
+queue targets 4
+queue action human cast 1
+passpriority
+advance 11
+passpriority

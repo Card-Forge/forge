@@ -281,7 +281,8 @@
       "attack",
       "trigger",
       "valid",
-      "staticability"
+      "staticability",
+      "excessdamage"
     ],
     "manapay": ["id", "game", "player", "control", "event"],
     "manaability": [
@@ -464,7 +465,8 @@
       "valid",
       "control",
       "controlcommands",
-      "continuouslayers"
+      "continuouslayers",
+      "replacedying"
     ],
     "sacrificeeffect": [
       "id",

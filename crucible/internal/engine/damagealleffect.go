@@ -25,7 +25,7 @@
 
 package engine
 
-//enginelint:allow id card game ability defined condition control zone valid trigger amount
+//enginelint:allow id card game ability defined condition control zone valid trigger amount effecthelpers damageresolveeffect replacedying
 
 import (
 	"fmt"
@@ -53,7 +53,9 @@ var damageAllUnresolvedParams = [...]string{
 // damageAllEffect resolves Mode$/DB$/AB$ DamageAll. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
 // through subAbilityConditionMet (condition.go), the identical way every
-// other M6 effect's own does.
+// other M6 effect's own does. RememberDamaged$ has the host remember what
+// its own damage reached (rememberDamaged) and ReplaceDyingDefined$ makes
+// its exile-instead effect afterwards (replaceDying, replacedying.go).
 type damageAllEffect struct{}
 
 func (damageAllEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -61,6 +63,9 @@ func (damageAllEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: DamageAll: %s$ not resolvable yet", key)
 		}
+	}
+	if err := checkReplaceDying(g, a, "DamageAll"); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
@@ -76,7 +81,9 @@ func (damageAllEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 		return fmt.Errorf("engine: DamageAll: NumDmg$ %q is not resolvable", numDmg)
 	}
 	if dmg <= 0 {
-		return nil
+		// Nothing is dealt and nothing remembered; replaceDying still runs,
+		// as DamageAllEffect.resolve reaches it whatever the amount.
+		return g.replaceDying(a, "DamageAll")
 	}
 
 	damageSource, ok := a.Params.Param("DamageSource")
@@ -112,6 +119,12 @@ func (damageAllEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 			g.dealPlayerDamage(controller, from, pid, dmg, false, &table)
 		}
 	}
+	// GameAction.dealDamage's RememberDamaged$ (GameAction.java:2787-2794),
+	// then replaceDying (DamageAllEffect.java:106): Anger of the Gods' "if a
+	// creature dealt damage this way would die this turn, exile it instead".
+	if hasParam(a, "RememberDamaged") {
+		rememberDamaged(g, a.Source, table)
+	}
 	g.checkDamageTableTriggers(controller, table, false)
-	return nil
+	return g.replaceDying(a, "DamageAll")
 }

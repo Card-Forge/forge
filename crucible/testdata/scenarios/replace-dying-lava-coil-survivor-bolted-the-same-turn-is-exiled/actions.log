@@ -1,0 +1,18 @@
+# Lava Coil's 4 damage does not kill Siege Mastodon (3/5), but its effect
+# lasts the turn: "if that creature would die this turn, exile it instead"
+# (replaceDying's effect card, until end of turn, SpellAbilityEffect.java:752).
+# Lightning Bolt's 3 more makes the damage lethal; the SBA (CR 704.5g) would
+# put the Mastodon into the graveyard, and the effect's Moved replacement
+# exiles it instead.
+startturn human
+advance 3
+tapformana human 3 R
+tapformana human 4 R
+queue paygeneric R
+queue targets 6
+queue action human cast 1
+passpriority
+tapformana human 5 R
+queue targets 6
+queue action human cast 2
+passpriority

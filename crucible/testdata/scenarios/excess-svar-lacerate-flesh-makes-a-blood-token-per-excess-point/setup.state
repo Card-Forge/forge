@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Lacerate Flesh|Id:1
+humanbattlefield=Mountain|Id:2;Mountain|Id:3;Mountain|Id:4;Mountain|Id:5;Mountain|Id:6
+aibattlefield=Llanowar Elves|Id:7

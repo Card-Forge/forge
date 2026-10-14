@@ -1,0 +1,18 @@
+# Anger of the Gods: DamageAll 3 to each creature, RememberDamaged$ True
+# (GameAction.java:2787-2794: the host remembers every creature its damage
+# reached), ReplaceDyingDefined$ Remembered (DamageAllEffect.java:106: one
+# effect card remembering all three), then DBCleanup clears the host's list.
+# The lethal-damage SBA exiles Llanowar Elves and Grizzly Bears instead of
+# putting them into graveyards; indestructible Darksteel Myr does not die.
+# The effect, still remembering the Myr, ends at cleanup; the run stops at
+# the ai's upkeep, past it.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+queue paygeneric R
+queue action human cast 1
+passpriority
+advance 11
+passpriority

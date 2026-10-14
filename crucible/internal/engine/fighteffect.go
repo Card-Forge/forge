@@ -14,7 +14,7 @@
 
 package engine
 
-//enginelint:allow id card game ability defined condition control zone combatdamage trigger
+//enginelint:allow id card game ability defined condition control zone combatdamage trigger excessdamage replacedying
 
 import (
 	"fmt"
@@ -25,12 +25,9 @@ import (
 
 // fightUnresolvedParams names FightEffect's own params this port does not
 // evaluate. Every one fails the whole line loudly (PORT-8/GO-7):
-// ReplaceDyingDefined$/ReplaceDyingExiledWith$ (4/1) -- replaceDying's own
-// "if it would die this turn, exile instead" effect-scoped replacement, a
-// further mechanic; Optional$ (2) -- an interactive "would you like to
+// Optional$ (2) -- an interactive "would you like to
 // fight" confirm, the identical gap Sacrifice's/Discard's/Pump's own
-// Optional$ already document; ExcessSVarCondition$/ExcessSVar$ (2/2) --
-// unclear semantics, not worth guessing at from four real lines;
+// Optional$ already document;
 // TargetsAtRandom$ (1) -- Aggregates.random, a randomized choice this
 // port's own ChooseTargets contract does not carry; SorcerySpeed$ (1) -- a
 // cost-restriction flag with no cost-payment site to attach to,
@@ -39,14 +36,18 @@ import (
 // silently no-op a card naming either, dealDamageEffect's own identical
 // reasoning.
 var fightUnresolvedParams = [...]string{
-	"ReplaceDyingDefined", "ReplaceDyingExiledWith", "Optional",
-	"ExcessSVarCondition", "ExcessSVar", "TargetsAtRandom", "SorcerySpeed",
+	"Optional", "TargetsAtRandom", "SorcerySpeed",
 	"Condition"}
 
 // fightEffect resolves Mode$/DB$/AB$ Fight. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
 // through subAbilityConditionMet (condition.go), the identical way every
-// other M6 effect's own does.
+// other M6 effect's own does. Once the fight's damage is dealt, ExcessSVar$
+// binds the excess the ExcessSVarCondition$ fighters took (bindExcessSVar,
+// excessdamage.go: Rhino's Rampage, The Last Agni Kai) and
+// ReplaceDyingDefined$ makes its exile-instead effect (replaceDying,
+// FightEffect.java:177: Mawloc, Unnatural Aggression). A fight with fewer
+// than two fighters deals nothing and makes no effect (:60-62).
 type fightEffect struct{}
 
 func (fightEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -55,6 +56,13 @@ func (fightEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 			return fmt.Errorf("engine: Fight: %s$ not resolvable yet", key)
 		}
 	}
+	if err := checkReplaceDying(g, a, "Fight"); err != nil {
+		return err
+	}
+	if err := checkExcessSVar(a, "Fight"); err != nil {
+		return err
+	}
+	defaultExcessSVar(a)
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
@@ -77,17 +85,17 @@ func (fightEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 	// twice its power, dealDamage's own `fighterA.equals(fighterB)` branch.
 	if fighterA.ID == fighterB.ID {
 		g.dealPermanentDamage(controller, fighterA.ID, fighterA.ID, powerA*2, fighterA.HasKeyword("Deathtouch"), false, &table)
-		g.checkDamageTableTriggers(controller, table, false)
-		return nil
+	} else {
+		powerB, ok := fighterB.Power()
+		if !ok {
+			return fmt.Errorf("engine: Fight: %s's own power is not resolvable", fighterB.Def.Name)
+		}
+		g.dealPermanentDamage(controller, fighterA.ID, fighterB.ID, powerA, fighterA.HasKeyword("Deathtouch"), false, &table)
+		g.dealPermanentDamage(controller, fighterB.ID, fighterA.ID, powerB, fighterB.HasKeyword("Deathtouch"), false, &table)
 	}
-	powerB, ok := fighterB.Power()
-	if !ok {
-		return fmt.Errorf("engine: Fight: %s's own power is not resolvable", fighterB.Def.Name)
-	}
-	g.dealPermanentDamage(controller, fighterA.ID, fighterB.ID, powerA, fighterA.HasKeyword("Deathtouch"), false, &table)
-	g.dealPermanentDamage(controller, fighterB.ID, fighterA.ID, powerB, fighterB.HasKeyword("Deathtouch"), false, &table)
+	bindExcessSVar(g, a, table)
 	g.checkDamageTableTriggers(controller, table, false)
-	return nil
+	return g.replaceDying(a, "Fight")
 }
 
 // fightFighters is getFighters's own real corpus shape: at most one card

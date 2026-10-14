@@ -320,6 +320,9 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 	}
 	g.Card(source).damageDealtThisTurn += amount
 	c := g.Card(target)
+	// GameAction.java:2750-2752: what was lethal before this damage, for the
+	// batch's excess (bindExcessSVar).
+	lethal := excessDamageValue(c, false)
 	t := c.Type()
 	c.Damage.Sources = append(c.Damage.Sources, source)
 	if t.Has(cardtype.Planeswalker) {
@@ -356,7 +359,7 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 	g.sink.Emit(Event{Kind: DamageDealt, Source: source, Target: CardEntity(target), Amount: int32(amount), Flags: flags})
 	g.checkDamageDoneTriggersToCard(controller, source, target, amount, isCombat)
 	if table != nil {
-		*table = append(*table, damageEntry{Source: source, Target: CardEntity(target), Amount: amount})
+		*table = append(*table, damageEntry{Source: source, Target: CardEntity(target), Amount: amount, Lethal: lethal})
 	}
 }
 

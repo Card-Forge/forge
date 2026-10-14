@@ -1,0 +1,21 @@
+# Lacerate Flesh: 4 damage to Llanowar Elves (1/1). Lethal before the
+# damage is 1 (GameAction.java:2750-2752, Card.getExcessDamageValue), so 3
+# is excess (CR 120.10). The Elves are the spell's target, so
+# ExcessSVarCondition$ Card.targetedBy holds (CardProperty.java:271-277) and
+# CardDamageTable.triggerExcessDamage stores 3 as the spell's SVar X
+# (CardDamageTable.java:136-155); the Token link reads TokenAmount$ X and
+# makes three Blood tokens.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+tapformana human 6 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue targets 7
+queue action human cast 1
+passpriority
