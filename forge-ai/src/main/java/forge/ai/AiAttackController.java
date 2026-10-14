@@ -849,22 +849,22 @@ public class AiAttackController {
 
     // Allocation free ConcurrentAttackerEvaluator runnable
     public class ConcurrentAttackerEvaluator implements Runnable {
-        // Shared parameters
-        private final Card attacker;
+        private final Card[] attackerArr;
+        private final AtomicInteger nextIndex;       // shared by all workers
         private final GameEntity targetDefender;
         private final Combat combat;
         private final Queue<Card> attackersLeft;
         private final AtomicInteger numForcedAttackers;
-        private final CountDownLatch latch;
+        private final CountDownLatch latch;          // null when used inline
         private final AttackRequirementsComparator comparator;
-
+        private final boolean seasonOfTheWitch;
         private final AtomicReference<Object> runnerThread = new AtomicReference<>();
-        private final Object CANCELLED_MARKER = new Object();
-        private boolean seasonOfTheWitch;
+        private static final Object CANCELLED_MARKER = new Object();
 
-        public ConcurrentAttackerEvaluator(Card attacker, GameEntity targetDefender, Combat combat, Queue<Card> attackersLeft,
+        public ConcurrentAttackerEvaluator(Card[] attacker, AtomicInteger next, GameEntity targetDefender, Combat combat, Queue<Card> attackersLeft,
             AtomicInteger numForcedAttackers, CountDownLatch latch, AttackRequirementsComparator comparator, boolean seasonOfTheWitch) {
-            this.attacker = attacker;
+            this.attackerArr = attacker;
+            this.nextIndex = next;
             this.targetDefender = targetDefender;
             this.combat = combat;
             this.attackersLeft = attackersLeft;
@@ -883,22 +883,19 @@ public class AiAttackController {
 
         @Override
         public void run() {
-            // Enforce state check before beginning execution
-            if (!runnerThread.compareAndSet(null, Thread.currentThread())) {
-                latch.countDown();
-                return;
-            }
-
+            if (!runnerThread.compareAndSet(null, Thread.currentThread())) { latch.countDown(); return; }
             try {
-                // Instantly drop out if the timeout already hit before we woke up
-                ThreadUtil.checkInterrupt();
-                evaluate(attacker);
-            } catch (InterruptedException e) {
-                // cooperative exit, flag already cleared by ThreadUtil.checkInterrupt();
+                int i;
+                while ((i = nextIndex.getAndIncrement()) < attackerArr.length) {
+                    if (System.nanoTime() >= deadlineNanos) break;
+                    ThreadUtil.checkInterrupt();
+                    evaluate(attackerArr[i]);        // evaluate() unchanged
+                }
+            } catch (InterruptedException ignored) {
             } finally {
                 runnerThread.compareAndSet(Thread.currentThread(), null);
                 latch.countDown();
-                Thread.interrupted(); // always clear
+                Thread.interrupted();
             }
         }
 
@@ -953,7 +950,17 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
-        deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
+        final int id = ai.getId();
+        final long timeoutNanos = TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
+        AITimeoutTracker.begin(id, timeoutNanos);
+        try {
+            deadlineNanos = AITimeoutTracker.deadlineNanos(id, timeoutNanos);   // same instant as the caller's
+            return declareAttackersInternal(combat);
+        } finally {
+            AITimeoutTracker.end(id);
+        }
+    }
+    private final int declareAttackersInternal(final Combat combat) {
         // something prevents attacking, try another
         if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
             final PlayerCollection opps = ai.getOpponents();
@@ -1034,47 +1041,28 @@ public class AiAttackController {
                 final GameEntity finalDefender = defender;
                 // don't allocate a lambda comparator inside loop or it will consume heap for each attackers or android easily hits OOM
                 final AttackRequirementsComparator requirementsComparator = new AttackRequirementsComparator(finalDefender);
-                if (taskCount < PARALLEL_ATTACKER_THRESHOLD || ThreadUtil.isAIThread()) {
-                    final ConcurrentAttackerEvaluator evaluator = new ConcurrentAttackerEvaluator(
-                            null, finalDefender, combat, attackersLeft, numForcedAttackers,
-                            null, requirementsComparator, seasonOfTheWitch
-                    );
-                    for (final Card attacker : this.attackers) {
-                        if (System.nanoTime() > deadlineNanos || Thread.currentThread().isInterrupted())
-                            break;
-                        evaluator.evaluate(attacker);
+                final Card[] arr = this.attackers.toArray(new Card[0]);
+                if (arr.length < PARALLEL_ATTACKER_THRESHOLD || ThreadUtil.isAIThread()) {
+                    final ConcurrentAttackerEvaluator inline = new ConcurrentAttackerEvaluator(arr, new AtomicInteger(),
+                            finalDefender, combat, attackersLeft, numForcedAttackers, null, requirementsComparator, seasonOfTheWitch);
+                    for (final Card a : arr) {
+                        if (System.nanoTime() >= deadlineNanos || Thread.currentThread().isInterrupted()) break;
+                        inline.evaluate(a);              // never calls run(), so the null latch is fine
                     }
                 } else {
-                    final CountDownLatch cdl = new CountDownLatch(taskCount);
-                    // Create a raw primitive array to store the tasks instead of an ArrayList of Futures
-                    final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[taskCount];
+                    final CountDownLatch cdl = new CountDownLatch(1);
+                    final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[1];
 
-                    int index = 0;
-                    for (final Card attacker : this.attackers) {
-                        if (System.nanoTime() > deadlineNanos)
-                            break;
-                        tasksArray[index] = new ConcurrentAttackerEvaluator(
-                                attacker, finalDefender, combat, attackersLeft, numForcedAttackers,
-                                cdl, requirementsComparator, seasonOfTheWitch
-                        );
-
-                        // bypasses inner FutureTask heap wrappers entirely!
-                        ThreadUtil.AIExecutor.execute(tasksArray[index]);
-                        index++;
-                    }
-                    // Tasks that were never submitted (deadline hit) would otherwise keep the latch from ever reaching zero
-                    for (int i = index; i < taskCount; i++) {
-                        cdl.countDown();
-                    }
+                    tasksArray[0] = new ConcurrentAttackerEvaluator(
+                            arr, new AtomicInteger(),  finalDefender, combat, attackersLeft, numForcedAttackers,
+                            cdl, requirementsComparator, seasonOfTheWitch);
+                    ThreadUtil.AIExecutor.execute(tasksArray[0]);
 
                     try {
                         long remainingNanos = deadlineNanos - System.nanoTime();
                         boolean completedInTime = remainingNanos > 0 && cdl.await(remainingNanos, TimeUnit.NANOSECONDS);
                         if (!completedInTime) {
-                            for (int i = 0; i < index; i++) {
-                                tasksArray[i].cancelTask();
-                            }
-                            //cdl.await(100, TimeUnit.MILLISECONDS);
+                            tasksArray[0].cancelTask();
                         }
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();

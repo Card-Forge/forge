@@ -32,6 +32,8 @@ public class ThreadUtil {
         }
     }
 
+    public static int getAIThreadCount() { return AI_THREADS; }
+
     /** True when called from an AI pool worker. */
     public static boolean isAIThread() {
         return Thread.currentThread() instanceof AIWorkerThread;
@@ -39,12 +41,16 @@ public class ThreadUtil {
 
     // Reusable ThreadPool for AI Timeout.
     public static final ThreadPoolExecutor AIExecutor = new ThreadPoolExecutor(
-            AI_THREADS, AI_THREADS,
-            IDLE_KEEPALIVE_MILLISECONDS, TimeUnit.MILLISECONDS,
-            new SynchronousQueue<>(), // using LinkedBlockingQueue produces more garbage than intended
-            AIWorkerThread::new,
-            new ThreadPoolExecutor.DiscardPolicy()
-    ) {
+        AI_THREADS, AI_THREADS, IDLE_KEEPALIVE_MILLISECONDS, TimeUnit.MILLISECONDS,
+        new SynchronousQueue<>(),
+        AIWorkerThread::new,
+        (r, ex) -> {
+            if (r instanceof Future<?> f) {
+                f.cancel(false);
+            } else {
+                r.run();
+            }
+        }) {
         // This hooks into .submit() or .execute() automatically
         @Override
         protected <T> RunnableFuture<T> newTaskFor(Callable<T> callable) {
@@ -69,6 +75,12 @@ public class ThreadUtil {
         }
 
     };
+
+    /** Cheap deadline check for hot loops deep in AI code. */
+    public static void checkDeadline(long deadlineNanos) throws InterruptedException {
+        if (System.nanoTime() >= deadlineNanos) throw new InterruptedException("AI deadline reached");
+        checkInterrupt();
+    }
 
     public static class TrackableFutureTask<V> extends FutureTask<V> {
         private volatile Thread runnerThread;

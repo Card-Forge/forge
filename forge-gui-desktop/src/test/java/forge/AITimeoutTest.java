@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.util.AITimeoutTracker;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -44,7 +45,9 @@ public class AITimeoutTest extends SimulationTest {
         System.out.printf("AI Predicted Combat Attacker Size: %d\n", attackingCreatures);
 
         // Do not add seconds to the configured timeout to hide a timeout regression.
-        AssertJUnit.assertTrue("AI call exceeded timeout budget: " + duration + "s", duration <= game.getAITimeout() + 0.5);
+        AssertJUnit.assertTrue("exceeded timeout: " + duration, duration <= game.getAITimeout() + 0.15);
+        // bar hidden afterwards
+        AssertJUnit.assertEquals(-1f, AITimeoutTracker.getRemainingFraction(attacker.getId()), 0f);
         // This scenario intentionally exercises the deadline; a partial attack decision is valid.
         AssertJUnit.assertTrue("Invalid attacker count: " + attackingCreatures, attackingCreatures > 0 && attackingCreatures <= 50);
         // Worker retirement is asynchronous; pool size is not the timeout contract.

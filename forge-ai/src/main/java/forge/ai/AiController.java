@@ -71,8 +71,10 @@ import io.sentry.Sentry;
 import java.util.*;
 import java.util.concurrent.*;
 //import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
 import static java.lang.Math.max;
@@ -699,35 +701,25 @@ public class AiController {
 
     // if return true, go to next phase
     private SpellAbility chooseCounterSpell(final List<SpellAbility> possibleCounters) {
-        if (possibleCounters == null || possibleCounters.isEmpty()) {
-            return null;
-        }
-        // guarded like the normal evaluation path, so a slow counterspell check can't hang the game thread
+        if (possibleCounters == null || possibleCounters.isEmpty()) return null;
+        final AtomicReference<SpellAbility> best = new AtomicReference<>();
         return callWithAITimeout(() -> {
-            SpellAbility bestSA = null;
             int bestRestriction = Integer.MIN_VALUE;
-
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
                 ThreadUtil.checkInterrupt();
                 sa.setActivatingPlayer(player);
-                // check everything necessary
-
-                AiPlayDecision opinion = canPlayAndPayFor(sa);
-                //PhaseHandler ph = game.getPhaseHandler();
-                // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-                if (opinion == AiPlayDecision.WillPlay) {
-                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
-                    if (bestSA == null || restrictionLevel > bestRestriction) {
-                        bestRestriction = restrictionLevel;
-                        bestSA = sa;
+                if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                    final int level = ComputerUtil.counterSpellRestriction(player, sa);
+                    if (best.get() == null || level > bestRestriction) {
+                        bestRestriction = level;
+                        best.set(sa);               // timeout now returns this
                     }
                 }
             }
-
             // TODO - "Look" at Targeted SA and "calculate" the threshold
             // if (bestRestriction < targetedThreshold) return false;
-            return bestSA;
-        });
+            return best.get();
+        }, best::get);
     }
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
@@ -1713,77 +1705,68 @@ public class AiController {
      * Runs an AI evaluation under the game's AI timeout; returns its result, or null on timeout/failure.
      * Requires ThreadUtil.isAIThread().
      */
-    private <T> T callWithAITimeout(final Callable<T> task) {
+    private <T> T callWithAITimeout(final Callable<T> task) { return callWithAITimeout(task, null); }
+
+    /** @param partial best-so-far supplier returned on timeout (null = no partial result, returns null) */
+    private <T> T callWithAITimeout(final Callable<T> task, final Supplier<T> partial) {
         if (ThreadUtil.isAIThread()) {
             try {
                 return task.call();
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt(); // let the outer evaluation see the timeout at its next checkInterrupt()
-                return null;
+                Thread.currentThread().interrupt();
+                return partial != null ? partial.get() : null;
             } catch (Exception e) {
                 return null;
             }
         }
 
-        final Future<T> future = ThreadUtil.AIExecutor.submit(task);
+        final int id = player.getId();
+        final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
+        AITimeoutTracker.begin(id, timeoutNanos);              // shows the bar after 2s, shared with nested calls
         try {
-            return future.get(game.getAITimeout(), TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-
-            // Log stack traces for profiling
-            if (future instanceof ThreadUtil.TrackableFutureTask) {
-                Thread executionThread = ((ThreadUtil.TrackableFutureTask<?>) future).getRunnerThread();
-
-                if (executionThread != null) {
-                    StringBuilder sb = new StringBuilder("[" + executionThread.getName() + " Timeout]:");
-                    int sbInitLength = sb.length();
-                    StackTraceElement[] evalStack = executionThread.getStackTrace();
-
-                    for (int i = 0; i < Math.min(30, evalStack.length); i++) {
-                        sb.append("\n\tat ").append(evalStack[i]);
-                    }
-                    if (sb.length() > sbInitLength)
-                        System.out.println(sb);
-                }
-            }
-
-            cancelorKill(future);
-            return null;
-
-        } catch (ExecutionException | InterruptedException ie) {
-            // Preserve interrupt status
-            if (ie instanceof InterruptedException)
+            final long deadline = AITimeoutTracker.deadlineNanos(id, timeoutNanos);
+            final Future<T> future = ThreadUtil.AIExecutor.submit(task);
+            try {
+                return future.get(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS);
+            } catch (TimeoutException e) {
+                logTimeoutStack(future);
+                abandon(future);                                // cancel + async reaper, NO join on this thread
+                return partial != null ? partial.get() : null;  // hand over what we have, right now
+            } catch (CancellationException e) {                 // pool rejected the task
+                return partial != null ? partial.get() : null;
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-            cancelorKill(future);
-            return null;
-
+                abandon(future);
+                return partial != null ? partial.get() : null;
+            } catch (ExecutionException e) {
+                return null;
+            }
+        } finally {
+            AITimeoutTracker.end(id);                           // hides the bar on success, failure and timeout
         }
     }
 
-    /**
-     * Cancels a timed-out evaluation, if alive kill it.
-     */
-    private static void cancelorKill(final Future<?> future) {
-        future.cancel(true);
+    private static void abandon(final Future<?> future) {
+        future.cancel(true);                                    // cooperative: checkInterrupt()/checkDeadline() exits
         if (future instanceof ThreadUtil.TrackableFutureTask<?> task) {
-            // This isn't necessary but as requested will keep it here
-            Thread runner = task.getRunnerThread();
-            if (runner != null && runner.isAlive()) {
-                try {
-                    runner.join(100);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
+            // last resort only, and never on the game thread (stop() is a no-op on Java 20+ anyway)
+            ThreadUtil.delay(200, () -> {
+                Thread runner = task.getRunnerThread();
+                if (runner != null && runner.isAlive()) {
+                    try { runner.stop(); } catch (UnsupportedOperationException | NoSuchMethodError ignored) { }
                 }
-                if (runner.isAlive()) {
-                    // last resort, see #8302: the eval thread may be stuck inside a single
-                    // evaluation or an infinite loop and never reach the cooperative exit
-                    try {
-                        runner.stop();
-                    } catch (UnsupportedOperationException | NoSuchMethodError ex) {
-                        // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
-                    }
-                }
+            });
+        }
+    }
+
+    private void logTimeoutStack(final Future<?> future) {
+        if (future instanceof ThreadUtil.TrackableFutureTask<?> task) {
+            Thread t = task.getRunnerThread();
+            if (t != null) {
+                StringBuilder sb = new StringBuilder("[" + t.getName() + " Timeout]:");
+                StackTraceElement[] st = t.getStackTrace();
+                for (int i = 0; i < Math.min(30, st.length); i++) sb.append("\n\tat ").append(st[i]);
+                System.out.println(sb);
             }
         }
     }
