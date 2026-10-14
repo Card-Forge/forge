@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -43,8 +42,6 @@ import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
-
-import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class CardZoom extends FOverlay {
     private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;
