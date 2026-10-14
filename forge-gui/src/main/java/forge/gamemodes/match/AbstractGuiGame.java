@@ -391,7 +391,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     /** Sets the current selection marks and highlights again, for a GUI that passes them on to a view that has lost them. */
-    protected void reapplyMarks() {
+    public void reapplyMarks() {
         if (!selectableCards.isEmpty()) {
             setSelectables(new ArrayList<>(selectableCards), selectionMin, selectionMax);
         }

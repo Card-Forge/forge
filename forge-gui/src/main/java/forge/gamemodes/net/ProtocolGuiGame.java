@@ -293,8 +293,6 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         updateGameView();
         // Initialize delta sync by sending the initial full state
         sendFullState();
-        // a peer that opens its view during a prompt has none of the marks sent before
-        reapplyMarks();
     }
 
     @Override
