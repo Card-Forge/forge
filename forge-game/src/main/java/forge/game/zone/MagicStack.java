@@ -82,6 +82,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private Card curResolvingCard = null;
     private final Map<Integer, Integer> triggerRepeats = new HashMap<>();
+    private final Map<Integer, Integer> triggerStackSizes = new HashMap<>();
     private boolean loopDrawDeclined;
 
     private final Game game;
@@ -521,11 +522,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 return false;
             }
         }
+        final int size = stack.size();
+        final Integer last = triggerStackSizes.put(id, size);
+        // a pile that drains is finite, so it is not a loop
+        if (last != null && size < last) {
+            triggerRepeats.remove(id);
+        }
         return triggerRepeats.merge(id, 1, Integer::sum) > MAX_TRIGGER_REPEATS;
     }
 
     public final void clearTriggerRepeats() {
         triggerRepeats.clear();
+        triggerStackSizes.clear();
         loopDrawDeclined = false;
     }
 
