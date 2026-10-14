@@ -1276,13 +1276,16 @@ public class ComputerUtil {
         } // BuffedBy
 
         // there's a good chance AI will attack weak target
-        final CardCollectionView antibuffed = ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield);
-        for (Card buffedcard : antibuffed) {
-            if (buffedcard.hasSVar("AntiBuffedBy")) {
-                final String buffedby = buffedcard.getSVar("AntiBuffedBy");
-                final String[] bffdby = buffedby.split(",");
-                if (card.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
-                    return true;
+        final Player weakestOpponent = ai.getWeakestOpponent();
+        if (weakestOpponent != null) {
+            final CardCollectionView antibuffed = weakestOpponent.getCardsIn(ZoneType.Battlefield);
+            for (Card buffedcard : antibuffed) {
+                if (buffedcard.hasSVar("AntiBuffedBy")) {
+                    final String buffedby = buffedcard.getSVar("AntiBuffedBy");
+                    final String[] bffdby = buffedby.split(",");
+                    if (card.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
+                        return true;
+                    }
                 }
             }
         } // AntiBuffedBy
@@ -1349,13 +1352,16 @@ public class ComputerUtil {
         }
 
         // there's a good chance AI will attack weak target
-        final CardCollectionView antibuffed = ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield);
-        for (Card buffedcard : antibuffed) {
-            if (buffedcard.hasSVar("AntiBuffedBy")) {
-                final String buffedby = buffedcard.getSVar("AntiBuffedBy");
-                final String[] bffdby = buffedby.split(",");
-                if (source.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
-                    return true;
+        final Player weakestOpponent = ai.getWeakestOpponent();
+        if (weakestOpponent != null) {
+            final CardCollectionView antibuffed = weakestOpponent.getCardsIn(ZoneType.Battlefield);
+            for (Card buffedcard : antibuffed) {
+                if (buffedcard.hasSVar("AntiBuffedBy")) {
+                    final String buffedby = buffedcard.getSVar("AntiBuffedBy");
+                    final String[] bffdby = buffedby.split(",");
+                    if (source.isValid(bffdby, buffedcard.getController(), buffedcard, sa)) {
+                        return true;
+                    }
                 }
             }
         } // AntiBuffedBy
