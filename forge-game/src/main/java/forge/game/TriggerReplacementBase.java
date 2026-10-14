@@ -1,9 +1,9 @@
 package forge.game;
 
 import java.util.EnumSet;
-import java.util.Map;
 import java.util.Set;
 
+import forge.card.ITextChanges;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.keyword.KeywordInterface;
@@ -104,17 +104,14 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.CardTraitBase#changeTextIntrinsic(java.util.Map, java.util.Map)
-     */
     @Override
-    public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
-        super.changeTextIntrinsic(colorMap, typeMap);
+    public void changeTextIntrinsic(ITextChanges textChanges) {
+        super.changeTextIntrinsic(textChanges);
 
         SpellAbility sa = ensureAbility();
 
         if (sa != null) {
-            sa.changeTextIntrinsic(colorMap, typeMap);
+            sa.changeTextIntrinsic(textChanges);
         }
     }
 }
