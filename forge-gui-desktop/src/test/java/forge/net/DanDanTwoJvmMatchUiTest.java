@@ -878,6 +878,8 @@ public final class DanDanTwoJvmMatchUiTest {
         private static final AtomicReference<String> LAST_N1_UI_PROGRESS = new AtomicReference<>();
         private static final AtomicReference<String> LAST_N1_UI_BINDING_PROGRESS = new AtomicReference<>();
         private static final AtomicReference<String> LAST_UI_GATE = new AtomicReference<>();
+        private static final AtomicReference<String> LAST_INVERSE_HOST_PRIORITY_GATE = new AtomicReference<>();
+        private static final AtomicReference<String> LAST_REMOTE_STACK_PRIORITY_GATE = new AtomicReference<>();
         private static final AtomicReference<String> LAST_OPENING_PRIORITY_DIAGNOSTIC = new AtomicReference<>();
         private static final AtomicReference<String> FIRST_OPENING_PRIORITY_REJECTION = new AtomicReference<>();
         private static final AtomicInteger OPENING_PRIORITY_DISPATCHES = new AtomicInteger();
@@ -1161,6 +1163,10 @@ public final class DanDanTwoJvmMatchUiTest {
                         .append(LAST_OPENING_PRIORITY_DIAGNOSTIC.get() == null
                                 ? "unrecorded" : LAST_OPENING_PRIORITY_DIAGNOSTIC.get());
             }
+            final String inverseHostGate = LAST_INVERSE_HOST_PRIORITY_GATE.get();
+            if (inverseHostGate != null) receipt.append("|INVERSE_HOST_PRIORITY_GATE|").append(inverseHostGate);
+            final String remoteStackGate = LAST_REMOTE_STACK_PRIORITY_GATE.get();
+            if (remoteStackGate != null) receipt.append("|REMOTE_STACK_PRIORITY_GATE|").append(remoteStackGate);
             return receipt.toString();
         }
 
@@ -3850,6 +3856,7 @@ public final class DanDanTwoJvmMatchUiTest {
             final Player remote = setup.remote();
             Assert.assertSame(setup.tellingTime().getOwner(), remote,
                     "the inverse fixture assigns the actual spell to the remote chooser");
+            LAST_INVERSE_HOST_PRIORITY_GATE.set("NOT_SAMPLED");
             final long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(85);
             boolean passedHostPriority = false;
             boolean resolved = false;
@@ -3863,6 +3870,29 @@ public final class DanDanTwoJvmMatchUiTest {
                         final GameView view = ui.getGameView();
                         final Input input = setup.controller().getInputProxy().getInput();
                         final AbstractButton ok = openingPriorityOkButton(ui);
+                        final Input queued = setup.controller().getInputQueue().getInput();
+                        final VPrompt prompt = openingPriorityPrompt(ui);
+                        // Retain only scalar gate facts; emit them only in the failure receipt.
+                        LAST_INVERSE_HOST_PRIORITY_GATE.set(
+                                "VIEW=" + (view != null && view.getId() == expectedGameViewId)
+                                + "|TRACKER=" + (view != null && view.getTracker() == expectedGameTracker)
+                                + "|CONTROLLER=" + (ui.getGameController(host.getView()) == setup.controller())
+                                + "|TURN1=" + (game.getPhaseHandler().getTurn() == 1)
+                                + "|MAIN1=" + (game.getPhaseHandler().getPhase() == PhaseType.MAIN1)
+                                + "|HOST_PRIORITY=" + (game.getPhaseHandler().getPriorityPlayer() == host)
+                                + "|PROXY=" + (input == null ? "NONE" : input.getClass().getSimpleName())
+                                + "|QUEUE=" + (queued == null ? "NONE" : queued.getClass().getSimpleName())
+                                + "|PRIORITY_INPUT=" + (input instanceof InputPassPriority)
+                                + "|OWNER=" + (input != null && input.getOwner() != null
+                                        && input.getOwner().equals(host.getView()))
+                                + "|QUEUE_MATCH=" + (input == queued)
+                                + "|PROMPT_BOUND=" + (prompt != null)
+                                + "|OK_SHOWING=" + (prompt != null && prompt.getBtnOK().isShowing())
+                                + "|OK_ENABLED=" + (prompt != null && prompt.getBtnOK().isEnabled())
+                                + "|OK_LABEL=" + (prompt != null && Localizer.getInstance().getMessage("lblOK")
+                                        .equals(prompt.getBtnOK().getText()))
+                                + "|OK_READY=" + (ok != null)
+                                + "|STACK_EMPTY=" + game.getStack().isEmpty());
                         if (view == null || view.getId() != expectedGameViewId
                                 || view.getTracker() != expectedGameTracker || ui.getGameController(host.getView())
                                         != setup.controller()
@@ -5422,16 +5452,22 @@ public final class DanDanTwoJvmMatchUiTest {
                     final Input currentInput = setup.controller().getInputProxy().getInput();
                     if (currentInput instanceof InputPayMana) {
                         for (Card source : setup.manaSources()) {
-                            if (!source.isTapped() && activatedManaSources.add(source)) {
+                            if (!source.isTapped() && !activatedManaSources.contains(source)) {
                                 final AtomicReference<Boolean> selected = new AtomicReference<>(false);
                                 FThreads.invokeInEdtAndWait(() -> {
-                                    if (setup.controller().getInputProxy().getInput() == currentInput
-                                            && currentInput instanceof InputPayMana) {
-                                        setup.controller().selectCard(source.getView(), null, null);
-                                        selected.set(true);
-                                    }
+                                    Assert.assertSame(setup.controller().getInputProxy().getInput(), currentInput,
+                                            "host payment input remains live before source selection");
+                                    Assert.assertSame(setup.controller().getInputQueue().getInput(), currentInput,
+                                            "host payment input remains queued before source selection");
+                                    Assert.assertEquals(currentInput.getOwner(), host.getView());
+                                    Assert.assertSame(source.getController(), host);
+                                    Assert.assertTrue(source.getZone().is(ZoneType.Battlefield));
+                                    selected.set(setup.controller().selectCard(source.getView(), null, null));
                                 });
-                                if (!selected.get()) throw new AssertionError("host payment input changed before source selection");
+                                // A tapped first source can precede InputPayMana's asynchronous unlock.
+                                // Retry a rejected click within the existing resolution deadline.
+                                if (!selected.get()) break;
+                                activatedManaSources.add(source);
                                 final long paymentDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
                                 while (System.nanoTime() < paymentDeadline && !source.isTapped()) Thread.sleep(10);
                                 if (source.isTapped()) manaSourcesActivated.incrementAndGet();
@@ -5670,7 +5706,8 @@ public final class DanDanTwoJvmMatchUiTest {
 
         private static boolean passActualRemoteStackPriority(final CMatchUI ui, final int expectedGameViewId)
                 throws InterruptedException {
-            final AtomicReference<String> lastGate = new AtomicReference<>("NOT_SAMPLED");
+            final AtomicReference<String> lastGate = LAST_REMOTE_STACK_PRIORITY_GATE;
+            lastGate.set("NOT_SAMPLED");
             final long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(55);
             while (System.nanoTime() < deadline) {
                 final AtomicReference<Boolean> passed = new AtomicReference<>(false);
