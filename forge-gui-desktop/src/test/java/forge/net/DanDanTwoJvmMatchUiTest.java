@@ -150,7 +150,7 @@ public final class DanDanTwoJvmMatchUiTest {
 
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"));
             Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|",
-                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA");
+                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA", workerPairDiagnostic(remote, host));
             final String hostChooser = assertWorkerSucceeded(host, remote,
                     "CHOOSER|HOST|", "APPLIED|HOST|MAIN1|");
             final String remoteChooser = assertWorkerSucceeded(remote, host,
@@ -209,7 +209,7 @@ public final class DanDanTwoJvmMatchUiTest {
             Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), host.failureDiagnostic());
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"), false, true);
             Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|",
-                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA");
+                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA", workerPairDiagnostic(remote, host));
 
             final String hostChooser = assertWorkerSucceeded(host, remote,
                     "CHOOSER|HOST|", "APPLIED|HOST|MAIN1|");
@@ -236,9 +236,9 @@ public final class DanDanTwoJvmMatchUiTest {
             host.command("CAST_TELLING_TIME");
             remote.command("PASS_TELLING_TIME_STACK");
             final String remotePass = remote.awaitPrefix("TT_PASS|REMOTE|", Duration.ofSeconds(60));
-            Assert.assertNotNull(remotePass, "remote passed the actual spell stack input; " + remote.failureDiagnostic());
+            Assert.assertNotNull(remotePass, "remote passed the actual spell stack input; " + workerPairDiagnostic(remote, host));
             Assert.assertTrue(remotePass.endsWith("|STACK_PASS=1"),
-                    "remote passed the actual spell stack input; " + remote.failureDiagnostic());
+                    "remote passed the actual spell stack input; " + workerPairDiagnostic(remote, host));
             final String hostCast = host.awaitPrefix("TT_CAST|HOST|", Duration.ofSeconds(60));
             Assert.assertNotNull(hostCast, "host completed the real cast and both Telling Time choices; "
                     + host.failureDiagnostic());
@@ -533,7 +533,7 @@ public final class DanDanTwoJvmMatchUiTest {
             assertModuleOpenReceipt(host, "HOST");
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"), true);
             Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|",
-                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA");
+                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA", workerPairDiagnostic(remote, host));
 
             final String hostChooser = assertWorkerSucceeded(host, remote,
                     "CHOOSER|HOST|", "APPLIED|HOST|MAIN1|");
@@ -703,6 +703,7 @@ public final class DanDanTwoJvmMatchUiTest {
         private volatile String privateTellingTimeRoles;
         private volatile String openingPriorityReceipt;
         private volatile String tellingTimeArmStage;
+        private volatile String startupStage;
         private volatile String tellingTimeCastStage;
         private volatile String tellingTimeResolutionDiagnostic;
         private volatile String inverseTellingTimeProgress;
@@ -724,6 +725,7 @@ public final class DanDanTwoJvmMatchUiTest {
                         if (line.startsWith("N1STEP|")) n1Progress = line;
                         if (line.startsWith("OPENING_PRIORITY|")) openingPriorityReceipt = line;
                         if (line.startsWith("ARM_STAGE|")) tellingTimeArmStage = line;
+                        if (line.startsWith("STARTUP_STAGE|")) startupStage = line;
                         if (line.startsWith("TT_CAST_STAGE|")) tellingTimeCastStage = line;
                         if (line.startsWith("TT_RESOLUTION_DIAG|")) tellingTimeResolutionDiagnostic = line;
                         if (line.startsWith("TT_INVERSE_PROGRESS|")) inverseTellingTimeProgress = line;
@@ -844,7 +846,7 @@ public final class DanDanTwoJvmMatchUiTest {
             final String state = (failure != null ? failure : process.isAlive()
                     ? "no-failure-record;child-alive" : "no-failure-record;child-exit-" + process.exitValue())
                     + (uiProgress == null ? "" : ";" + uiProgress);
-            return state + (n1Progress == null ? "" : ";" + n1Progress)
+            return state + (startupStage == null ? "" : ";" + startupStage) + (n1Progress == null ? "" : ";" + n1Progress)
                     + (tellingTimeArmStage == null ? "" : ";" + tellingTimeArmStage)
                     + (tellingTimeCastStage == null ? "" : ";" + tellingTimeCastStage)
                     + (tellingTimeResolutionDiagnostic == null ? "" : ";" + tellingTimeResolutionDiagnostic)
@@ -1550,6 +1552,8 @@ public final class DanDanTwoJvmMatchUiTest {
         }
 
         private static void initializeDesktop() {
+            RESULT.println("STARTUP_STAGE|MODEL");
+            RESULT.flush();
             final UiDesktop desktop = new UiDesktop();
             GuiBase.setInterface(desktop);
             CdnUuidCache.markBulkSyncPromptAnswered();
@@ -1563,9 +1567,13 @@ public final class DanDanTwoJvmMatchUiTest {
                 FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
                 return null;
             });
+            RESULT.println("STARTUP_STAGE|SINGLETONS");
+            RESULT.flush();
             captureEdtFailures();
             RemoteClientGuiGame.useDeltaSync = !fullSyncMode;
             Singletons.initializeOnce(true);
+            RESULT.println("STARTUP_STAGE|CONTROL");
+            RESULT.flush();
             Singletons.getControl().initialize();
             FThreads.invokeInEdtAndWait(() -> {
                 final String state = bootstrapState();
@@ -2762,8 +2770,8 @@ public final class DanDanTwoJvmMatchUiTest {
                 final TellingTimeSetup setup = TELLING_TIME_SETUP.get();
                 final DayShuffleObserver observer = new DayShuffleObserver(
                         setup.game(), setup.host().getView().getId(), setup.remote().getView().getId(),
-                        setup.daysUndoing().getId());
-                // Game subscriptions are add-only; this Game N observer stores counts only and is disarmed before continuation.
+                        setup.daysUndoing().getId(), setup.historySentinelName());
+                // Game subscriptions are add-only; disarm this Game N observer and restore its RNG before continuation.
                 TELLING_TIME_SETUP.get().game().subscribeToEvents(observer);
                 try {
                     Assert.assertEquals(commands.readLine(), "DRIVE_DAY_UNDOING");
@@ -3246,6 +3254,8 @@ public final class DanDanTwoJvmMatchUiTest {
             Assert.assertTrue(resolvedAtHostT3,
                     "Day's Undoing ended the remote turn and returned priority at host T3 MAIN1");
             Assert.assertNotNull(paidSourceIds);
+            Assert.assertNull(observer.witnessFailure.get(), "deterministic Day witness setup remained valid");
+            Assert.assertNotNull(observer.expectedSecondShuffle, "the second real shuffle was planned");
             Assert.assertEquals(observer.total(), 2,
                     "the bounded Game N observer saw exactly two shuffle callbacks during Day's Undoing");
             Assert.assertEquals(observer.hostShuffles.get(), 1);
@@ -5182,6 +5192,20 @@ public final class DanDanTwoJvmMatchUiTest {
                             .noneMatch(chooserCard -> chooserCard.getName().equals(card.getName())))
                     .findFirst().orElseThrow(() -> new AssertionError("nonchooser opening hand contains a sentinel candidate"));
 
+            if (inverse) {
+                // Reserve a never-remote-seen name for the later Day's Undoing witness.
+                // The intervening remote T2 draw takes a Telling Time role, not this name.
+                Assert.assertFalse(initialChooserHandNames.contains(handSentinel.getName()));
+                Assert.assertFalse(privateNames.contains(handSentinel.getName()));
+                Assert.assertFalse(publicZoneNames.contains(handSentinel.getName()));
+                Assert.assertTrue(chooser.getCardsIn(ZoneType.Hand).stream()
+                        .noneMatch(card -> handSentinel.getName().equals(card.getName())));
+                for (Card copy : new ArrayList<>(chooser.getCardsIn(ZoneType.Library))) {
+                    if (handSentinel.getName().equals(copy.getName())) {
+                        game.getAction().moveToLibrary(copy, -1, null);
+                    }
+                }
+            }
             for (int index = privateCards.size() - 1; index >= 0; index--) {
                 game.getAction().moveToLibrary(privateCards.get(index), 0, null);
             }
@@ -5646,6 +5670,7 @@ public final class DanDanTwoJvmMatchUiTest {
 
         private static boolean passActualRemoteStackPriority(final CMatchUI ui, final int expectedGameViewId)
                 throws InterruptedException {
+            final AtomicReference<String> lastGate = new AtomicReference<>("NOT_SAMPLED");
             final long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(55);
             while (System.nanoTime() < deadline) {
                 final AtomicReference<Boolean> passed = new AtomicReference<>(false);
@@ -5654,6 +5679,11 @@ public final class DanDanTwoJvmMatchUiTest {
                     final GameView view = ui.getGameView();
                     final IGameController candidate = local == null ? null : ui.getGameController(local);
                     final IVDoc<?> promptDoc = EDocID.REPORT_MESSAGE.getDoc();
+                    lastGate.set("LOCAL=" + (local != null) + "|CONTROLLER=" + (candidate != null)
+                            + "|VIEW=" + (view != null && view.getId() == expectedGameViewId)
+                            + "|PRIORITY=" + (local != null && local.getHasPriority())
+                            + "|STACK=" + (view != null && !view.getStack().isEmpty())
+                            + "|PROMPT=" + (promptDoc instanceof VPrompt));
                     if (local == null || candidate == null || view == null || view.getId() != expectedGameViewId
                             || !local.getHasPriority() || view.getStack().isEmpty()
                             || view.peekStack() == null || !(promptDoc instanceof VPrompt prompt)) return;
@@ -5663,6 +5693,13 @@ public final class DanDanTwoJvmMatchUiTest {
                             .equals(prompt.getBtnOK().getText())
                             && (prompt.getBtnCancel().getText().startsWith(undo)
                                     || endTurn.equals(prompt.getBtnCancel().getText()));
+                    lastGate.set(lastGate.get() + "|PRIORITY_BUTTONS=" + actualPriorityButtons
+                            + "|OK_SHOWING=" + prompt.getBtnOK().isShowing()
+                            + "|OK_ENABLED=" + prompt.getBtnOK().isEnabled()
+                            + "|CANCEL_SHOWING=" + prompt.getBtnCancel().isShowing()
+                            + "|CANCEL_ENABLED=" + prompt.getBtnCancel().isEnabled()
+                            + "|MESSAGE=" + !ui.getPromptMessage().isBlank()
+                            + "|PROMPT_BOUND=" + (prompt.getLayoutControl().getMatchUI() == ui));
                     if (!actualPriorityButtons || !prompt.getBtnOK().isShowing() || !prompt.getBtnOK().isEnabled()
                             || !prompt.getBtnCancel().isShowing() || !prompt.getBtnCancel().isEnabled()
                             || ui.getPromptMessage().isBlank()) return;
@@ -5676,7 +5713,7 @@ public final class DanDanTwoJvmMatchUiTest {
                 if (passed.get()) return true;
                 Thread.sleep(20);
             }
-            return false;
+            throw new AssertionError("remote stack priority deadline: " + lastGate.get());
         }
 
         private static boolean passInverseRemoteStackPriorityOnce(final CMatchUI ui,
@@ -6064,6 +6101,10 @@ public final class DanDanTwoJvmMatchUiTest {
             private final int hostViewId;
             private final int remoteViewId;
             private final int daysUndoingId;
+            private final String witnessName;
+            private java.util.Random originalRandom;
+            private volatile List<Integer> expectedSecondShuffle;
+            private final AtomicReference<Throwable> witnessFailure = new AtomicReference<>();
             private final AtomicBoolean armed = new AtomicBoolean();
             private final AtomicInteger hostShuffles = new AtomicInteger();
             private final AtomicInteger remoteShuffles = new AtomicInteger();
@@ -6074,15 +6115,27 @@ public final class DanDanTwoJvmMatchUiTest {
             private final AtomicInteger unassignedDayDraws = new AtomicInteger();
 
             private DayShuffleObserver(final Game game, final int hostViewId, final int remoteViewId,
-                    final int daysUndoingId) {
+                    final int daysUndoingId, final String witnessName) {
                 Assert.assertNotEquals(hostViewId, remoteViewId);
                 this.game = game;
                 this.hostViewId = hostViewId;
                 this.remoteViewId = remoteViewId;
                 this.daysUndoingId = daysUndoingId;
+                this.witnessName = witnessName;
             }
 
-            private void arm() { Assert.assertTrue(armed.compareAndSet(false, true)); }
+            private synchronized void arm() {
+                final Player remote = game.getPlayers().stream()
+                        .filter(player -> player.getId() == remoteViewId).findFirst().orElseThrow();
+                Assert.assertTrue(remote.getCardsIn(ZoneType.Hand).stream()
+                        .noneMatch(card -> witnessName.equals(card.getName())),
+                        "the remote did not acquire the reserved name before Day's Undoing");
+                for (ZoneType zone : List.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile)) {
+                    Assert.assertTrue(game.getCardsIn(zone).stream()
+                            .noneMatch(card -> witnessName.equals(card.getName())));
+                }
+                Assert.assertTrue(armed.compareAndSet(false, true));
+            }
 
             private boolean isDayResolution() {
                 if (game.getPhaseHandler().getTurn() != 2 || game.getPhaseHandler().getPhase() != PhaseType.MAIN1
@@ -6095,7 +6148,7 @@ public final class DanDanTwoJvmMatchUiTest {
             }
 
             @Subscribe
-            public void onGameShuffle(final GameEventShuffle event) {
+            public synchronized void onGameShuffle(final GameEventShuffle event) {
                 if (!armed.get()) return;
                 if (!isDayResolution()) {
                     unassignedShuffles.incrementAndGet();
@@ -6106,6 +6159,51 @@ public final class DanDanTwoJvmMatchUiTest {
                 else if (player.getId() == hostViewId) hostShuffles.incrementAndGet();
                 else if (player.getId() == remoteViewId) remoteShuffles.incrementAndGet();
                 else unassignedShuffles.incrementAndGet();
+                try {
+                    if (total() == 1) {
+                        Assert.assertEquals(hostShuffles.get(), 1);
+                        // The first real shuffle has installed its list. ChangeZoneAllEffect
+                        // next shuffles this same shared library for the remote player.
+                        final List<Card> initial = new ArrayList<>(game.getPlayers().get(0)
+                                .getCardsIn(ZoneType.Library));
+                        Assert.assertTrue(initial.size() > 14);
+                        long chosenSeed = -1;
+                        for (long seed = 0; seed < 100000; seed++) {
+                            final java.util.Random delegate = new java.util.Random(seed);
+                            // Match MyRandom.CountingRandom, not Random.nextInt(bound).
+                            final java.util.Random counted = new java.util.Random(0) {
+                                @Override protected int next(int bits) {
+                                    return delegate.nextInt() >>> (32 - bits);
+                                }
+                            };
+                            final List<Card> trial = new ArrayList<>(initial);
+                            java.util.Collections.shuffle(trial, counted);
+                            // Both seven-card hands precede the host's separate T3 draw.
+                            if (witnessName.equals(trial.get(14).getName())
+                                    && trial.subList(0, 14).stream()
+                                            .noneMatch(card -> witnessName.equals(card.getName()))) {
+                                chosenSeed = seed;
+                                expectedSecondShuffle = trial.stream().map(Card::getId).toList();
+                                break;
+                            }
+                        }
+                        Assert.assertTrue(chosenSeed >= 0, "bounded search found a valid Day shuffle witness");
+                        originalRandom = forge.util.MyRandom.getRandom();
+                        forge.util.MyRandom.setRandom(new java.util.Random(chosenSeed));
+                    } else if (total() == 2) {
+                        Assert.assertEquals(hostShuffles.get(), 1);
+                        Assert.assertEquals(remoteShuffles.get(), 1);
+                        Assert.assertNotNull(expectedSecondShuffle);
+                        Assert.assertEquals(game.getPlayers().get(0).getCardsIn(ZoneType.Library)
+                                .stream().map(Card::getId).toList(), expectedSecondShuffle,
+                                "the actual second shuffle consumed the planned RNG sequence");
+                        restoreRandom();
+                    }
+                } catch (Throwable failure) {
+                    // EventBus may swallow subscriber failures; retain one for the test.
+                    witnessFailure.compareAndSet(null, failure);
+                    restoreRandom();
+                }
             }
 
             @Subscribe
@@ -6131,7 +6229,13 @@ public final class DanDanTwoJvmMatchUiTest {
                 }
             }
 
-            private void disarm() { armed.set(false); }
+            private synchronized void restoreRandom() {
+                if (originalRandom != null) {
+                    forge.util.MyRandom.setRandom(originalRandom);
+                    originalRandom = null;
+                }
+            }
+            private synchronized void disarm() { armed.set(false); restoreRandom(); }
             private int total() { return hostShuffles.get() + remoteShuffles.get() + unassignedShuffles.get(); }
         }
 
