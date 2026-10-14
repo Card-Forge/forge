@@ -933,10 +933,14 @@ public class AiAttackController {
 
             if (mustAttackDef != null) {
                 synchronized (combat) {
+                    // A timed-out evaluator must not mutate live combat after its caller returns.
+                    if (System.nanoTime() >= deadlineNanos || Thread.currentThread().isInterrupted()) {
+                        return;
+                    }
                     combat.addAttacker(attacker, mustAttackDef);
                     attackersLeft.remove(attacker);
+                    numForcedAttackers.incrementAndGet();
                 }
-                numForcedAttackers.incrementAndGet();
             }
         }
     }
@@ -1070,7 +1074,7 @@ public class AiAttackController {
                             for (int i = 0; i < index; i++) {
                                 tasksArray[i].cancelTask();
                             }
-                            cdl.await(100, TimeUnit.MILLISECONDS);
+                            //cdl.await(100, TimeUnit.MILLISECONDS);
                         }
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();

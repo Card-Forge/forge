@@ -70,7 +70,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.locks.LockSupport;
+//import java.util.concurrent.locks.LockSupport;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -1748,35 +1748,30 @@ public class AiController {
                 }
             }
 
-            cancelAndWait(future);
+            cancelorKill(future);
             return null;
 
         } catch (ExecutionException | InterruptedException ie) {
             // Preserve interrupt status
             if (ie instanceof InterruptedException)
                 Thread.currentThread().interrupt();
-            cancelAndWait(future);
+            cancelorKill(future);
             return null;
 
         }
     }
 
     /**
-     * Cancels a timed-out evaluation, then gives the worker a short grace period to unwind.
+     * Cancels a timed-out evaluation, if alive kill it.
      */
-    private static void cancelAndWait(final Future<?> future) {
+    private static void cancelorKill(final Future<?> future) {
         future.cancel(true);
         if (future instanceof ThreadUtil.TrackableFutureTask<?> task) {
-            final long end = System.nanoTime() + 100_000_000L; // 100ms
-            Thread runner;
-            while ((runner = task.getRunnerThread()) != null && System.nanoTime() < end && !Thread.currentThread().isInterrupted()) {
-                LockSupport.parkNanos(1_000_000L);
-            }
             // This isn't necessary but as requested will keep it here
-            runner = task.getRunnerThread();
+            Thread runner = task.getRunnerThread();
             if (runner != null && runner.isAlive()) {
                 try {
-                    runner.join(2000); //2 second wait
+                    runner.join(100);
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();
                 }
