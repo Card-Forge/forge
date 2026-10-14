@@ -29,7 +29,7 @@ import (
 var contextHeads = map[string]bool{
 	"Targeted": true, "ParentTargeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
 	"TriggeredSource": true, "TriggerRemembered": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
-	"Collected": true, "Revealed": true,
+	"Collected": true, "Revealed": true, "TriggerObjectsAttackers": true,
 }
 
 // listHeadCards is the card list an amount head names, in calculateAmount's
@@ -129,7 +129,11 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 			return nil, false
 		}
 	}
-	lki := head == "Sacrificed" || head == "Exiled" || head == "TriggeredCard" || head == "TriggerRemembered"
+	// A recorded attacker that has since died is read as it last was: Java's
+	// list holds the battlefield Card object, which the move to the graveyard
+	// replaced with a copy (GameAction.java:207).
+	lki := head == "Sacrificed" || head == "Exiled" || head == "TriggeredCard" || head == "TriggerRemembered" ||
+		head == "TriggerObjectsAttackers"
 	return g.cardsOf(ids, lki), true
 }
 
@@ -171,6 +175,14 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 		ids = nonNone(a.triggered.attacker)
 	case "TriggeredBlocker":
 		ids = nonNone(a.triggered.blocker)
+	case "TriggerObjectsAttackers":
+		// AbilityUtils.java:697-701: the trigger's AbilityKey.Attackers list.
+		// Java reads a key the mode never set as an empty list; here that is
+		// unresolved, a recorded empty list 0 (triggeredObjects.attackersRecorded).
+		if !a.triggered.attackersRecorded {
+			return nil, false
+		}
+		ids = a.triggered.attackers
 	case "TriggeredSource":
 		// AbilityKey.Source as a card; a player source is no card, and an
 		// unrecorded source is not Java's empty list (GO-7).

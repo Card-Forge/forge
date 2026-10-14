@@ -1,0 +1,13 @@
+# Jirina Kudro's ETB makes a token per Count$TotalCommanderCastFromCommandZone
+# (Player.getTotalCommanderCast). No card in this game is a commander -- there is
+# no Commander setup -- so the count is 0, Java's own answer for a game without
+# commanders, and the trigger resolves making no token rather than refusing.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 W
+tapformana human 4 B
+tapformana human 5 B
+queue paygeneric B
+castspell human 1
+resolvestack

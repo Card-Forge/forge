@@ -259,9 +259,13 @@ func playerXCount(g *Game, amounts map[string]expr.Amount, controller PlayerID, 
 	}
 	switch {
 	case strings.HasPrefix(body, "TotalCommanderCastFromCommandZone"):
-		// No commander is ever cast from a Command zone here (no Commander
-		// game setup), which is not the same as having counted none.
-		return 0, false
+		// AbilityUtils.java:3366-3372: every player's total, summed, the
+		// operator applied to the sum (commanderCasts: 0 for every player).
+		n := 0
+		for range players {
+			n += g.commanderCasts()
+		}
+		return math(n)
 	case strings.HasPrefix(body, "Highest"), strings.HasPrefix(body, "Lowest"):
 		if op != nil {
 			return 0, false

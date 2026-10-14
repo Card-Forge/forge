@@ -1,0 +1,10 @@
+# Vrestin, Menoptra Leader, T:Mode$ AttackersDeclared | ValidAttackers$
+# Insect.YouCtrl -> DB$ PutCounter | Defined$ TriggeredAttackers. The recorded
+# attacker list is narrowed by ValidAttackers$ (TriggerAttackersDeclared.java:
+# 83-84): Vrestin (an Insect) and a Silvercoat Lion attack, and only Vrestin
+# gets the +1/+1 counter.
+startturn human
+advance 5
+queue attackers 1,2
+declareattackers
+resolvestack

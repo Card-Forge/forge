@@ -288,6 +288,21 @@ func TestLoadUnappliedAnnotationsAreRecorded(t *testing.T) {
 	}
 }
 
+// TestLoadReportsIsCommanderUnapplied pins what the engine's commander-cast
+// count rests on (engine.Game.commanderCasts): |IsCommander
+// (GameState.java:1377, Player.addCommander) designates no commander here --
+// no Commander setup is ported -- so it is reported, never silently taken.
+// Supporting it means porting the Commander Effect and the cast record with it.
+func TestLoadReportsIsCommanderUnapplied(t *testing.T) {
+	t.Parallel()
+
+	db := testDB(t, "Grizzly Bears")
+	l := load(t, db, "humancommand=Grizzly Bears|IsCommander\n")
+	if len(l.Unapplied) != 1 || !strings.Contains(l.Unapplied[0], "IsCommander") {
+		t.Errorf("Unapplied %v, want the one IsCommander annotation", l.Unapplied)
+	}
+}
+
 // manapool= applies to engine.Player.ManaPool for real -- GameState.java's
 // own space-separated-letters shape, not a mana cost's "2W" shorthand.
 func TestLoadAppliesManaPool(t *testing.T) {

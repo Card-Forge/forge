@@ -449,7 +449,6 @@ func TestPlayerCountRefusesWhatItCannotRead(t *testing.T) {
 		"PlayerCountPlayers$StartingLibrarySize",
 		"PlayerCountPlayers$Bogus",
 		"PlayerCountPlayers$SacrificedPermanentTypesThisTurn",
-		"PlayerCountPlayers$TotalCommanderCastFromCommandZone",
 		"PlayerCountPlayers$HighestCardsInHand/Twice",
 		"PlayerCountPlayers$Counters",
 		"PlayerCountPlayers$ConditionGE",

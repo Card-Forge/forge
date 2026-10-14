@@ -494,6 +494,13 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return []CardID{id}, nil
 		}
 		return nil, nil
+	case "TriggeredAttackers":
+		// AbilityKey.Attackers (Mode$ AttackersDeclared, AttackersDeclaredOneTarget,
+		// Blocks: triggeredObjects.attackers). A recorded empty list is no cards.
+		if !refs.triggered.attackersRecorded {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attackers", defined)
+		}
+		return slices.Clone(refs.triggered.attackers), nil
 	case "TriggeredCards", "TriggeredCardsLKICopy":
 		if len(refs.triggered.cards) == 0 {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no cards", defined)

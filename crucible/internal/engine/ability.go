@@ -454,6 +454,21 @@ type triggeredObjects struct {
 	// cards is AbilityKey.Cards: the batch a Mode$ DiscardedAll or
 	// ChangesZoneAll trigger fired for, read by Defined$ TriggeredCards.
 	cards []CardID
+	// attackers is AbilityKey.Attackers: the attackers a Mode$
+	// AttackersDeclared/AttackersDeclaredOneTarget trigger fired for, narrowed
+	// by its ValidAttackers$ (TriggerAttackersDeclared.java:82-91), or the
+	// attacker a Mode$ Blocks blocker blocks (TriggerBlocks.java:71). Read by
+	// Defined$ TriggeredAttackers and the TriggerObjectsAttackers$ amount
+	// head. Its own slice, never combat's: the list is fixed as the trigger
+	// fires and is never edited in place, so a stacked Ability and a Clone
+	// share it safely.
+	attackers []CardID
+	// attackersRecorded is whether the mode recorded attackers: a recorded
+	// list can be empty (no attacker matched ValidAttackers$ under an EQ0
+	// amount), which reads 0, while an unrecorded one is unresolved (GO-7) --
+	// Java's TriggerObjects reader defaults a missing key to an empty list
+	// (AbilityUtils.java:697-700), which this port does not guess at.
+	attackersRecorded bool
 	// target is AbilityKey.Target: what the attachment became attached to
 	// (Mode$ Attached, TriggerAttached.setTriggeringObjects), the damaged
 	// card or player (DamageDone, DamageDoneOnce), or what became the target

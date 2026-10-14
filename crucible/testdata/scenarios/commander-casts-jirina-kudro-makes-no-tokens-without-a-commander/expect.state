@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Mountain|Tapped;Plains|Tapped;Swamp|Tapped;Swamp|Tapped;Jirina Kudro|SummonSick
+ailife=20

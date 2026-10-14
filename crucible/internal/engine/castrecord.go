@@ -17,6 +17,20 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
+// commanderCasts is Player.getTotalCommanderCast (Player.java:2894-2900) for
+// any player, and Player.getCommanderCast(card) (:2875-2877) for any card: how
+// many times the player cast a commander of theirs from the Command zone, the
+// record MagicStack.java:346-349 keeps as the spell is cast and commander tax
+// reads (CostAdjustment.java:57-61). The increment needs Card.isCommander,
+// which only Player.addCommander sets -- the Commander game setup and the
+// GameState |IsCommander card option (GameState.java:1377), neither ported:
+// the fixture loader reports |IsCommander unapplied. So no card here is a
+// commander, every player's record is empty, and the answer is 0 -- Java's
+// own for a game without commanders, not a guess. A Commander setup (the
+// designation, the Commander Effect's cast permission, replacement and tax,
+// Player.createCommanderEffect) must replace this with the record it keeps.
+func (*Game) commanderCasts() int { return 0 }
+
 // recordSpellCast counts card as cast by pid and adds it to the turn's
 // history. Called with the card already on the stack: from is where the cast
 // started, kept by the cast path in Card.castFrom.

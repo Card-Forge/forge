@@ -651,10 +651,13 @@ func (g *Game) checkBlocksTriggers(controller PlayerController, blk Block) {
 						!Matches(g, g.Card(blk.Attacker), valid.Parse(validBlocked), h.Controller(), host) {
 						continue
 					}
-					// TriggerBlocks.java:71: AbilityKey.Blocker; AbilityKey.Attackers
-					// (a list) is not recorded.
+					// TriggerBlocks.java:71: AbilityKey.Blocker and
+					// AbilityKey.Attackers, combat.getAttackersBlockedBy(blocker)
+					// (PhaseHandler.java:771) -- the one attacker blk names, as
+					// every blocker here blocks one (above).
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{blocker: blk.Blocker}), staticTrigger: isStaticTrigger(t)})
+						objs := triggeredObjects{blocker: blk.Blocker, attackers: []CardID{blk.Attacker}, attackersRecorded: true}
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objs), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -2829,7 +2832,7 @@ func (g *Game) checkAttackersDeclaredTrigger(controller PlayerController) {
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{attackingPlayer: g.activePlayer}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(attackersDeclaredObjects(g, h, t, g.combat.Attackers)), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -2888,7 +2891,7 @@ func (g *Game) checkAttackersDeclaredOneTargetTrigger(controller PlayerControlle
 								continue
 							}
 							if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{attackingPlayer: g.activePlayer}), staticTrigger: isStaticTrigger(t)})
+								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(attackersDeclaredObjects(g, h, t, attackers)), staticTrigger: isStaticTrigger(t)})
 							}
 						}
 					}
@@ -2925,6 +2928,31 @@ func attackersDeclaredParamsMatch(g *Game, h *Card, t *compile.Ability, attacker
 		return false
 	}
 	return true
+}
+
+// attackersDeclaredObjects is TriggerAttackersDeclared.setTriggeringObjects
+// (TriggerAttackersDeclared.java:79-98) for one matched trigger t on h:
+// AbilityKey.AttackingPlayer, the active player, and AbilityKey.Attackers,
+// the attackers the caller passed (every declared attacker, or one
+// defender's) narrowed by ValidAttackers$ when t names it -- the same
+// Matches call validAttackersCountMatches counts with, in declaration order
+// (Combat.Attackers, CardLists.getValidCards keeps its input's order). A
+// fresh slice, so the recorded list never aliases combat's.
+//
+// AbilityKey.AttackedTarget (the defenders, narrowed the same way) is not
+// recorded: no ported reader names it.
+func attackersDeclaredObjects(g *Game, h *Card, t *compile.Ability, attackers []CardID) triggeredObjects {
+	kept := slices.Clone(attackers)
+	if spec, ok := t.Param("ValidAttackers"); ok {
+		parsed := valid.Parse(spec)
+		kept = kept[:0]
+		for _, id := range attackers {
+			if Matches(g, g.Card(id), parsed, h.Controller(), h.ID) {
+				kept = append(kept, id)
+			}
+		}
+	}
+	return triggeredObjects{attackingPlayer: g.activePlayer, attackers: kept, attackersRecorded: true}
 }
 
 // attackersTargeting is combat.getAttackersOf(ge) (PhaseHandler.java): the

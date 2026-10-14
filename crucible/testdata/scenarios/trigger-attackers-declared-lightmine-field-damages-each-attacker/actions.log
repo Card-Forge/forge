@@ -1,0 +1,10 @@
+# Lightmine Field, T:Mode$ AttackersDeclared -> DB$ DealDamage | Defined$
+# TriggeredAttackers | NumDmg$ X (X = Count$Valid Creature.attacking). The
+# trigger records the declared attackers (AbilityKey.Attackers,
+# TriggerAttackersDeclared.java:91), so each of the two attacking lions takes 2
+# and dies; the lion that stayed home is untouched.
+startturn human
+advance 5
+queue attackers 1,2
+declareattackers
+resolvestack

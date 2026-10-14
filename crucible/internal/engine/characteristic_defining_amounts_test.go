@@ -385,7 +385,6 @@ func TestAmountUnresolvableShapesStaySkipped(t *testing.T) {
 		{name: "Mod by zero", body: "Number$7/Mod.0"},
 		{name: "context prefix", body: "CastSA>Count$YourLifeTotal"},
 		{name: "player property with no state", body: "PlayerCountPlayers$StartingLibrarySize"},
-		{name: "commander casts", body: "Count$TotalCommanderCastFromCommandZone"},
 		{name: "Greatest CardPower", body: "Count$Valid Creature$GreatestCardPower"},
 		{name: "colorless devotion", body: "Count$Devotion.Colorless"},
 		{
