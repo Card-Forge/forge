@@ -1036,42 +1036,40 @@ public class AiAttackController {
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
-            int taskCount = this.attackers.size();
-            if (taskCount > 0) {
-                final GameEntity finalDefender = defender;
-                // don't allocate a lambda comparator inside loop or it will consume heap for each attackers or android easily hits OOM
-                final AttackRequirementsComparator requirementsComparator = new AttackRequirementsComparator(finalDefender);
-                final Card[] arr = this.attackers.toArray(new Card[0]);
-                if (arr.length < PARALLEL_ATTACKER_THRESHOLD || ThreadUtil.isAIThread()) {
-                    final ConcurrentAttackerEvaluator inline = new ConcurrentAttackerEvaluator(arr, new AtomicInteger(),
-                            finalDefender, combat, attackersLeft, numForcedAttackers, null, requirementsComparator, seasonOfTheWitch);
-                    for (final Card a : arr) {
-                        if (System.nanoTime() >= deadlineNanos || Thread.currentThread().isInterrupted()) break;
-                        inline.evaluate(a);              // never calls run(), so the null latch is fine
-                    }
-                } else {
-                    final CountDownLatch cdl = new CountDownLatch(1);
-                    final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[1];
-
-                    tasksArray[0] = new ConcurrentAttackerEvaluator(
-                            arr, new AtomicInteger(),  finalDefender, combat, attackersLeft, numForcedAttackers,
-                            cdl, requirementsComparator, seasonOfTheWitch);
-                    ThreadUtil.AIExecutor.execute(tasksArray[0]);
-
-                    try {
-                        long remainingNanos = deadlineNanos - System.nanoTime();
-                        boolean completedInTime = remainingNanos > 0 && cdl.await(remainingNanos, TimeUnit.NANOSECONDS);
-                        if (!completedInTime) {
-                            tasksArray[0].cancelTask();
-                        }
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    }
+            final GameEntity finalDefender = defender;
+            // don't allocate a lambda comparator inside loop or it will consume heap for each attackers or android easily hits OOM
+            final AttackRequirementsComparator requirementsComparator = new AttackRequirementsComparator(finalDefender);
+            final Card[] arr = this.attackers.toArray(new Card[0]);
+            // inline
+            if (arr.length < PARALLEL_ATTACKER_THRESHOLD || ThreadUtil.isAIThread()) {
+                final ConcurrentAttackerEvaluator inline = new ConcurrentAttackerEvaluator(arr, new AtomicInteger(),
+                    finalDefender, combat, attackersLeft, numForcedAttackers, null, requirementsComparator, seasonOfTheWitch);
+                for (final Card a : arr) {
+                    if (System.nanoTime() >= deadlineNanos || Thread.currentThread().isInterrupted()) break;
+                    inline.evaluate(a);              // never calls run(), so the null latch is fine
                 }
+            } else {
+                final CountDownLatch cdl = new CountDownLatch(1);
+                final ConcurrentAttackerEvaluator[] tasksArray = new ConcurrentAttackerEvaluator[1];
 
-                if (attackersLeft.isEmpty()) {
-                    return aiAggression;
+                tasksArray[0] = new ConcurrentAttackerEvaluator(
+                        arr, new AtomicInteger(),  finalDefender, combat, attackersLeft, numForcedAttackers,
+                        cdl, requirementsComparator, seasonOfTheWitch);
+                ThreadUtil.AIExecutor.execute(tasksArray[0]);
+
+                try {
+                    long remainingNanos = deadlineNanos - System.nanoTime();
+                    boolean completedInTime = remainingNanos > 0 && cdl.await(remainingNanos, TimeUnit.NANOSECONDS);
+                    if (!completedInTime) {
+                        tasksArray[0].cancelTask();
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
+            }
+
+            if (attackersLeft.isEmpty()) {
+                return aiAggression;
             }
         }
 
@@ -1735,21 +1733,11 @@ public class AiAttackController {
                     if (validTargets.isEmpty()) {
                         missTarget = true;
                         break;
-                    }
-                    if (sa.isCurse()) {
-                        Predicate<Card> predicate = CardPredicates.isControlledByAnyOf(c.getController().getOpponents());
-                        boolean b = true;
-                        for (Card validTarget : validTargets) {
-                            if (predicate.test(validTarget)) {
-                                b = false;
-                                break;
-                            }
-                        }
-                        if (b) {
-                            // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
-                            missTarget = true;
-                            break;
-                        }
+                    } else if (sa.isCurse() && validTargets.stream().noneMatch(
+                            CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
+                        // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
+                        missTarget = true;
+                        break;
                     }
                 }
             }
