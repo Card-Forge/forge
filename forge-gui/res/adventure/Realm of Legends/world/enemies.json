@@ -12569,7 +12569,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 0.25,
+    "scale": 0.5,
     "life": 30,
     "rewards": [
       {
@@ -12657,7 +12657,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 0.25,
+    "scale": 0.5,
     "life": 30,
     "rewards": [
       {
@@ -12745,7 +12745,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 0.25,
+    "scale": 0.5,
     "life": 30,
     "rewards": [
       {
@@ -12833,7 +12833,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 0.25,
+    "scale": 0.5,
     "life": 30,
     "rewards": [
       {
@@ -66467,7 +66467,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 1,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -66486,7 +66486,7 @@
         "cardName": "Baneful Omen"
       },
       {
-        "type": "randomCard",
+        "type": "deckCard",
         "count": 2,
         "addMaxCount": 6,
         "rarity": [
@@ -66495,9 +66495,9 @@
         ]
       },
       {
-        "type": "randomCard",
+        "type": "deckCard",
         "count": 4,
-        "addMaxCount": 8,
+        "addMaxCount": 4,
         "rarity": [
           "common",
           "uncommon"
@@ -66580,7 +66580,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 1,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -66638,7 +66638,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 1,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -66954,29 +66954,13 @@
         "cardName": "Gwendlyn Di Corci"
       },
       {
-        "type": "card",
-        "count": 1,
-        "cardName": "Triumphant Getaway"
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Stolen Strategy"
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Thieving Varmint"
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Cunning Rhetoric"
-      },
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Thieving Aven"
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 6,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
       },
       {
         "type": "randomCard",
@@ -67993,7 +67977,7 @@
   },
   {
     "name": "The Madcap Jester",
-    "sprite": "sprites/enemy/humanoid/human/wizard/corrupted_blue_wiz.atlas",
+    "sprite": "sprites/enemy/humanoid/human/wizard/corrupted_bluewiz.atlas",
     "deck": [
       "decks/legends/the_madcap_jester.dck"
     ],
@@ -68070,7 +68054,7 @@
     "ai": "",
     "flying": true,
     "speed": 45,
-    "scale": 1,
+    "scale": 2,
     "life": 40,
     "rewards": [
       {
@@ -68146,7 +68130,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Necklace of the Paradox"
+        "itemName": "Paradox Necklace"
       },
       {
         "type": "card",
@@ -68291,22 +68275,22 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Necklace of the Mind Sculptor"
+        "itemName": "Mind Sculptor Necklace"
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Necklace of the Deathbringer"
+        "itemName": "Deathbringer Necklace"
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Necklace of the Healer"
+        "itemName": "Healer Necklace"
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Necklace of the Warlord"
+        "itemName": "Warlord Necklace"
       },
       {
         "type": "card",
@@ -69114,7 +69098,7 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Liliana the Fautless"
+        "cardName": "Liliana the Faultless"
       },
       {
         "type": "deckCard",
@@ -69234,7 +69218,7 @@
   },
   {
     "name": "Echo Nissa",
-    "sprite": "sprites/enemy/humanoid/human/elf/druid.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
       "decks/legends/echo_nissa.dck"
     ],
@@ -69843,7 +69827,7 @@
   },
   {
     "name": "Auntie Blyte",
-    "sprite": "sprites/enemy/humanoid/fiend/implarge.atlas",
+    "sprite": "sprites/enemy/fiend/implarge.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],

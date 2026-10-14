@@ -2010,7 +2010,7 @@
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building6",
-		"map": "../Realm of Legends/maps/map/evilgrove_Oriq_Inner_Sanctum.tmx",
+		"map": "../Realm of Legends/maps/map/evilgrove/Oriq_Inner_Sanctum.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story"]

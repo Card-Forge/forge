@@ -58,7 +58,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;'The forbidden spell I'm selling is Acadmy Rector. It can search any enchantment and put it onto your battlefield for free.'&quot;,
+    &quot;text&quot;: &quot;'The forbidden spell I'm selling is Academy Rector. It can search any enchantment and put it onto your battlefield for free.'&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,

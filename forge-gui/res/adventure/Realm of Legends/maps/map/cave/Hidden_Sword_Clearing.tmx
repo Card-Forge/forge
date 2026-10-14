@@ -505,7 +505,7 @@
           {
             &quot;addShards&quot;: -50,
             &quot;grantRewards&quot;: [
-              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Dungeons and Dragons&quot;, &quot;count&quot;: 1 }
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardText&quot;: &quot;gold Dragon&quot;, &quot;subTypes&quot;: [ &quot;Equipment&quot; ], &quot;count&quot;: 1 }
             ],
 		&quot;deleteMapObject&quot;:-1
           }

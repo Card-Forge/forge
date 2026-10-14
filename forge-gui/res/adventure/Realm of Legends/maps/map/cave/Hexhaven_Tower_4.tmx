@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="75">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgaQJqHgaE3n4GhD4j7gXhCPu3tVGWE0LwFDAx8QMwPxAIFtLcXBnqBdvUBcT8QT6CDvfQOXxgYKeE7WIA4H265T+z0cwetAbb0/NaK9vaOxPQ8EOUzzN6BCG+wf4dw+QEAczMqsA==
+   eJxjYBgaQJqHgaE3n4GhD4j7gXhCPu3tVGWE0LwFDAx8QMwPxAIFtLcXBnqBdvUBcT8QT6CDvfjC9xM77ewdKeE7WIA4H265Ql76uYPWAFt6fmtFe3tHYnoeiPIZZu9AhDfYv0O4/AAAOjorLg==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -45,19 +45,19 @@
   </object>
   <object id="60" template="../../../../common/maps/obj/gold.tx" x="177" y="240.25"/>
   <object id="61" template="../../../../common/maps/obj/gold.tx" x="148.5" y="228.75"/>
-  <object id="62" template="../../../../common/maps/obj/entry_up.tx" x="319.25" y="143.942"/>
+  <object id="62" template="../../../../common/maps/obj/entry_up.tx" x="288.612" y="80.5153"/>
   <object id="63" template="../../../../common/maps/obj/door_left.tx" x="176.5" y="49">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/cave/Hexhaven_Tower_3.tmx"/>
     <property name="teleportObjectId" value="58"/>
    </properties>
   </object>
-  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="296.8" y="90.996"/>
-  <object id="68" template="../../../../common/maps/obj/manashards.tx" x="292" y="206.5"/>
+  <object id="67" template="../../../../common/maps/obj/manashards.tx" x="303.25" y="190.436"/>
+  <object id="68" template="../../../../common/maps/obj/manashards.tx" x="276.95" y="223.7"/>
   <object id="69" template="../../../../common/maps/obj/gold.tx" x="127" y="207"/>
   <object id="70" template="../../../../common/maps/obj/gold.tx" x="108" y="186.5"/>
   <object id="71" template="../../../../common/maps/obj/gold.tx" x="95.5" y="161.5"/>
-  <object id="72" template="../../obj/treasure.tx" x="271.75" y="146.25">
+  <object id="72" template="../../obj/treasure.tx" x="247" y="149.25">
    <properties>
     <property name="reward">[
   {
@@ -82,7 +82,7 @@
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="74" template="../../obj/treasure.tx" x="223" y="147">
+  <object id="74" template="../../obj/treasure.tx" x="279.032" y="149.492">
    <properties>
     <property name="reward">[
   {
@@ -93,6 +93,28 @@
 ]
 </property>
     <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/dialog.tx" x="83.1702" y="113.452" width="46.5152" height="10.6762" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;At long last, you reach the top of the tower, where a truly massive final sphinx lies in wait.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="304.088" y="115.065" width="46.5152" height="10.6762" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The swirling portal ahead seems to lead out of the tower.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
    </properties>
   </object>
  </objectgroup>

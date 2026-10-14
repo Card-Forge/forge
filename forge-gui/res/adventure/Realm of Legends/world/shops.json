@@ -832,7 +832,7 @@
     "rewards": [
       { "type": "item","count":1, "itemName": "Vectis Boots"  },
       { "type": "item","count":1, "itemName": "Bane Alley Boots"  },
-      { "type": "item","count":1, "itemName": "Swindler's Shoes"  },
+      { "type": "item","count":1, "itemName": "Swindler Shoes"  },
       { "type": "item","count":1, "itemName": "High Merchant's Shirt"},
       { "type": "item","count":1, "itemName": "Throwing Knife"  },
       { "type": "item","count":1, "itemName": "Whispersteel Dagger"  },

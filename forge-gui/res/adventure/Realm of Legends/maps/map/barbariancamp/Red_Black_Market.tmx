@@ -58,7 +58,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;'The forbidden spell I'm selling is the Magus of the Moon. Their forbidden power can shut down all the nonbasic lands your fiercest foes rely on.'&quot;,
+    &quot;text&quot;: &quot;'The forbidden spell I'm selling is Blood Moon. Its forbidden power can shut down all the nonbasic lands your fiercest foes rely on.'&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
@@ -70,7 +70,7 @@
           {
             &quot;addGold&quot;: -100000,
             &quot;grantRewards&quot;: [
-              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Magus of the Moon&quot;, &quot;count&quot;: 1 }
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blood Moon&quot;, &quot;count&quot;: 1 }
             ],
 		&quot;deleteMapObject&quot;:-1
           }

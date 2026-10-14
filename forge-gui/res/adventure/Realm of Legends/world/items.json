@@ -6179,7 +6179,7 @@
   },
   {
     "name": "Veteran's Blade",
-    "description": "Equip 2. Auto-equips to soldiers. Gives +1/+1 for each of your attacking/blocking creatures.",
+    "description": "Equip 2. Auto-equips to soldiers. Gives +1/+1 for each of your attacking or blocking creatures.",
     "equipmentSlot": "Right",
     "iconName": "Veteran'sBlade",
     "effect": {

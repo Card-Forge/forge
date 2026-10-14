@@ -10,12 +10,12 @@
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="8" name="Tilelaag 4" width="50" height="27">
   <data encoding="base64" compression="zlib">
-   eJztkzEKwCAMRV0cHHuUXqL3v5DQqbRKEAyBJPQNb4iCvk/4/SilAwAAAADAr7jay1nH2dtNm+OZv+fefposc66sWaQ9ZMsyu6/uIyN1JCNSR7yddt0l7wxd3/WLmEXrFGk3Fh4Rslj9b/HODaH4ZAI=
+   eJztk0EKACEIRdvOskvN/S8URIuYCAkSQWVe8BYa1PuIrZbSAAAAAADgV7zPxzhr7e2mzTHrte/tp8my58qaRZpDtiy7++k+MtKOZETaEW+nW3fJO8Ou3/pFzKJ1ijQbC48IWaz+t3inA7sHY8w=
   </data>
  </layer>
  <layer id="7" name="Background" width="50" height="27">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwkAMBdCASBFXnsF79TguexZP07UXEUSkNIQx85lmmkQsfIRS7H9Nis5HormS+4DlefFLzSAdnl2tHN5dtzq8O/4d+RyIxfp+t9OavRwW368dlpZWx/tAn7vmaLXI+/dwcAPisJoL7926U7L70l+z9HpXWoM+f8u96tkfcUyF6yMauEPbsygOzfKgNdqsojikZTl3PRONh8+nvC7ye14KN2S2lBxyfhH3C3VwD3d499UciCWyAZ1JlvyKI8POaN2/xbvblu5ZLLX/TqVMwTy13+e9ZvMCZoDnmA==
+   eJzt1kEKg0AMBdDZSCldeYbe1aVn6WlcexGhiIghTDOfMWOSovApiNT/TKSdupSmQj4PLEtvl5KBOyy7ajmsu551WHe8HfEciEX7fsPzyFUOje+XDk1LrWM90OcuOWot/P4tHNSAOLTmQnvX7hTvvveXLK3eldqgz19zr1r2Rxxj5nqPBuqQ9syLQ7LM6Yg0Ky8ObtnPvV+bYf3k13l+z3OhhsiWnIPPz+N+oQ7qoQ7rvpIDsXg2oDOJkn9xRNgZqfuvWHc70z2KpfTfKZfRmaf0+3zVbL7fu+gX
   </data>
  </layer>
  <layer id="2" name="Ground" width="50" height="27">

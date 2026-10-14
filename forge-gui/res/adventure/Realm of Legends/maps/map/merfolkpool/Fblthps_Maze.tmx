@@ -77,7 +77,7 @@ BE WARNED: THIS MAZE IS VERY BIG AND DOES NOT HAVE CHECKPOINTS. ENTER AT YOUR OW
    <properties>
     <property name="defeatDialog">[
 	{
-	   &quot;text&quot;: &quot;Finally, you have defeated Fblthp for the last time! But somehow once again, just before you strike him down, he scurries off. At first, you think he's doomed, trapped in a dead-end chamber as he is. But he finds a tiny hole and squeezes through it, finding himself back at the beginning of the mage. Through the magical window in the wall, you see him run back into the wider world, surely bound to become totally lost once more.&quot;,
+	   &quot;text&quot;: &quot;Finally, you have defeated Fblthp for the last time! But somehow once again, just before you strike him down, he scurries off. At first, you think he's doomed, trapped in a dead-end chamber as he is. But he finds a tiny hole and squeezes through it, finding himself back at the beginning of the maze. Through the magical window in the wall, you see him run back into the wider world, surely bound to become totally lost once more.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
@@ -97,8 +97,8 @@ BE WARNED: THIS MAZE IS VERY BIG AND DOES NOT HAVE CHECKPOINTS. ENTER AT YOUR OW
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Borborygmos&quot;]}"/>
-    <property name="enemy" value="Fblthp and Borborygmos"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Rampaging Cyclops&quot;]}"/>
+    <property name="enemy" value="Borborygmos and Fblthp"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
