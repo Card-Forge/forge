@@ -1,0 +1,12 @@
+# CR 603.7: Searing Blood's delayed "when that creature dies this turn" is a
+# Mode$ ChangesZone line. TriggerChangesZone.java:192-194 records
+# AbilityKey.Card, the creature that died, so Defined$ TriggeredCardController
+# is ai, who controlled the Grizzly Bears, and takes the 3 damage.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+queue targets 1
+queue action human cast 4
+passpriority
+resolvestack

@@ -13,8 +13,7 @@ import (
 // ChangesZoneAll trigger naming extraParams, Execute$ chaining into a
 // GainLife of 5 -- a fixed, distinctive amount so a test can tell "fired
 // once" (25) apart from "fired once per card" (30 for a two-card batch)
-// without needing Amount$ (AbilityKey.Amount, not resolved by this port)
-// at all.
+// without reading the AbilityKey.Amount the trigger records.
 func changesZoneAllWatcherDef(t *testing.T, name, extraParams string) *compile.Card {
 	t.Helper()
 

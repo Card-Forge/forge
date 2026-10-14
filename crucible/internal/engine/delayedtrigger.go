@@ -99,9 +99,12 @@ func (g *Game) delayedPhaseTriggerMatches() []Ability {
 			kept = append(kept, d)
 			continue
 		}
+		// TriggerPhase's AbilityKey.Player, the turn's player
+		// (PhaseHandler.java:438), as for a card's own Mode$ Phase line.
 		matches = append(matches, Ability{
 			API: api, Source: d.Host, Controller: d.Controller, Params: sub,
 			Amounts: d.Amounts, Optional: optional, TriggerRemembered: d.Remembered,
+			triggered:      triggeredObjects{player: g.activePlayer},
 			hostTransforms: d.HostTransforms, hasHostTransforms: true,
 		})
 	}
@@ -221,9 +224,15 @@ func (g *Game) delayedLeftBattlefieldMatches(left CardID, dest ZoneType) []Abili
 			kept = append(kept, d)
 			continue
 		}
+		// TriggerChangesZone.java:192-196 (Origin$ Battlefield: Card is the
+		// pre-move LKI) and TriggerExiled.java:103 record AbilityKey.Card, the
+		// card that moved -- one CardID here, the one a card's own Dies trigger
+		// records too (checkDiesTriggers), so Defined$ TriggeredCard/
+		// TriggeredCardController read it the same way.
 		matches = append(matches, Ability{
 			API: api, Source: d.Host, Controller: d.Controller, Params: sub,
 			Amounts: d.Amounts, Optional: optional, TriggerRemembered: d.Remembered,
+			triggered:      triggeredObjects{card: left},
 			hostTransforms: d.HostTransforms, hasHostTransforms: true,
 		})
 	}

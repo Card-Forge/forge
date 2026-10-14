@@ -1,0 +1,8 @@
+turn=2
+activeplayer=ai
+activephase=Draw
+humanlife=20
+humanbattlefield=Underworld Dreams|Id:1
+ailife=19
+aihand=Mountain|Id:2
+ailibrary=Grizzly Bears|Id:3

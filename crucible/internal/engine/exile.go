@@ -94,8 +94,10 @@ func (g *Game) checkExiledTriggers(controller PlayerController, left CardID) {
 				if !Matches(g, c, valid.Parse(validCard), c.Controller(), left) {
 					continue
 				}
+				// TriggerChangesZone.java:192-194: AbilityKey.Card (the pre-move
+				// LKI) and NewCard (the exiled object) -- one CardID here.
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: left}), staticTrigger: isStaticTrigger(t)})
 				}
 			}
 		}
@@ -134,8 +136,10 @@ func (g *Game) otherExiledTriggerMatches(left CardID) []Ability {
 					if !Matches(g, leaving, valid.Parse(validCard), w.Controller(), watcher) {
 						continue
 					}
+					// TriggerChangesZone.java:192-194: AbilityKey.Card, the card
+					// that left.
 					if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: left}), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}

@@ -272,8 +272,7 @@ item 26 had the identical figure in the identical place, fixed the same way.
 Eight new tests, all in `triggerphases_test.go`: `TestAdvancePhaseFiresPhaseTriggerWhenEnchantedControllerMatches`/
 `TestAdvancePhaseSkipsPhaseTriggerWhenEnchantedControllerDoesNotMatch` (an Aura's own controller and the enchanted
 creature's controller deliberately different players, so the test isolates "did the trigger fire" from "who the Aura's
-own `Execute$` benefits" -- this port does not thread a `checkPhaseTriggers`-set `TriggeredPlayer` back through
-`Defined$` yet); `TestMoveSetsDescendedThisTurnForPermanentCardToGraveyard`/
+own `Execute$` benefits"); `TestMoveSetsDescendedThisTurnForPermanentCardToGraveyard`/
 `TestMoveDoesNotSetDescendedThisTurnForNonPermanentCardToGraveyard` (the `isPermanent` branch, an Instant proving the
 negative);
 `TestAdvancePhaseFiresPhaseTriggerWhenDescendedThisTurn`/`TestAdvancePhaseSkipsPhaseTriggerWhenNotDescendedThisTurn`;

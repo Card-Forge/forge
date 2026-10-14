@@ -1,0 +1,8 @@
+# CR 503.1 / 603.2: "at the beginning of each player's upkeep, ... deals 2
+# damage to that player". TriggerPhase.setTriggeringObjects records
+# AbilityKey.Player, which PhaseHandler.java:438 sets to the turn's player, so
+# Defined$ TriggeredPlayer is the active player (ai), not the controller of
+# Sulfuric Vortex (human).
+startturn ai
+advance 2
+resolvestack

@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Cleanup
+humanlife=20
+ailife=20
+humanbattlefield=Underworld Dreams|Id:1
+ailibrary=Mountain|Id:2;Grizzly Bears|Id:3

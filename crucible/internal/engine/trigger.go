@@ -651,8 +651,10 @@ func (g *Game) checkBlocksTriggers(controller PlayerController, blk Block) {
 						!Matches(g, g.Card(blk.Attacker), valid.Parse(validBlocked), h.Controller(), host) {
 						continue
 					}
+					// TriggerBlocks.java:71: AbilityKey.Blocker; AbilityKey.Attackers
+					// (a list) is not recorded.
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{blocker: blk.Blocker}), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -1105,7 +1107,7 @@ func (g *Game) checkDamageDoneOnceTriggers(controller PlayerController, table da
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{counts: triggerCounts{damage: amount, set: countDamage}}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(damageDoneOnceObjects(g, target, entries, amount)), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -1114,6 +1116,30 @@ func (g *Game) checkDamageDoneOnceTriggers(controller PlayerController, table da
 	}
 	matches = append(matches, g.delayedPhaseTriggerMatches()...)
 	g.pushTriggeredAbilities(controller, matches)
+}
+
+// damageDoneOnceObjects is TriggerDamageDoneOnce.setTriggeringObjects
+// (TriggerDamageDoneOnce.java:57-71): AbilityKey.Target is the damaged card or
+// player, AbilityKey.AttackingPlayer the controller of the first source in the
+// damage map. Java's map is a HashMap (CardDamageTable.java:90,
+// Maps.newHashMap), so "first" is hash order: when the sources have more than
+// one controller Forge's answer is not determined by the game, and the key
+// stays unrecorded here (Defined$ TriggeredAttackingPlayer then errors, GO-7).
+// With one controller -- every combat-damage shape, whose sources are the
+// attacking player's creatures -- the answer is that controller. The source
+// card list (AbilityKey.Sources) is not recorded.
+func damageDoneOnceObjects(g *Game, target EntityID, entries []damageEntry, amount int) triggeredObjects {
+	objs := triggeredObjects{target: target, counts: triggerCounts{damage: amount, set: countDamage}}
+	for i, e := range entries {
+		ctrl := g.Card(e.Source).Controller()
+		if i == 0 {
+			objs.attackingPlayer = ctrl
+		} else if ctrl != objs.attackingPlayer {
+			objs.attackingPlayer = NoPlayer
+			break
+		}
+	}
+	return objs
 }
 
 // damageDoneOnceAmount sums entries whose own Source matches validSource
@@ -1213,8 +1239,14 @@ func (g *Game) checkDamageDealtOnceTriggers(controller PlayerController, table d
 						if hasValidTarget && amount <= 0 {
 							continue
 						}
+						// TriggerDamageDealtOnce.java:98: AbilityKey.Source, the
+						// damage source; its controller is read as the trigger fires,
+						// damageSourceObjects' reasoning. AbilityKey.Targets is not
+						// recorded.
+						objs := triggeredObjects{source: CardEntity(source), sourceController: g.Card(source).Controller(),
+							counts: triggerCounts{damage: amount, set: countDamage}}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{counts: triggerCounts{damage: amount, set: countDamage}}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objs), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -1453,8 +1485,9 @@ func (g *Game) checkSacrificedTriggers(controller PlayerController, card CardID,
 					if !sacrificedTriggerMatches(g, t, c, h.Controller(), host, player) {
 						continue
 					}
+					// TriggerSacrificed.java:76: AbilityKey.Card, the sacrificed card.
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: card}), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -1630,11 +1663,16 @@ func (g *Game) checkChangesZoneAllTriggers(controller PlayerController, cards []
 					if !hasZoneOrAny(t, "Destination", destination) || !hasZoneOrAny(t, "Origin", origin) {
 						continue
 					}
-					if len(changesZoneAllMatchingCards(g, t, cards, h.Controller(), host)) == 0 {
+					matching := changesZoneAllMatchingCards(g, t, cards, h.Controller(), host)
+					if len(matching) == 0 {
 						continue
 					}
+					// TriggerChangesZoneAll.java:57-63: AbilityKey.Cards, the
+					// cards of the batch the trigger's own filter kept, and
+					// AbilityKey.Amount, their count.
+					objs := triggeredObjects{cards: matching, counts: triggerCounts{amount: len(matching), set: countAmount}}
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objs), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -1725,8 +1763,9 @@ func (g *Game) checkTapsTriggers(controller PlayerController, card CardID, playe
 							continue
 						}
 					}
+					// TriggerTaps.java:94: AbilityKey.Card, the tapped card.
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: card}), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -1850,8 +1889,9 @@ func (g *Game) checkUntapsTriggers(controller PlayerController, card CardID) {
 					if validCard, ok := t.Param("ValidCard"); ok && !Matches(g, c, valid.Parse(validCard), h.Controller(), host) {
 						continue
 					}
+					// TriggerUntaps.java:67: AbilityKey.Card, the untapped card.
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: card}), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -2015,8 +2055,12 @@ func (g *Game) checkPhaseTriggers(controller PlayerController) {
 								continue
 							}
 						}
+						// TriggerPhase.setTriggeringObjects records AbilityKey.Player,
+						// which PhaseHandler.java:438 sets to the turn's player
+						// (mapFromPlayer(playerTurn)): Defined$ TriggeredPlayer is the
+						// active player, not the trigger's controller.
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{player: g.activePlayer}), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -3077,8 +3121,10 @@ func (g *Game) checkDrawnTriggers(controller PlayerController, drawer PlayerID, 
 								continue
 							}
 						}
+						// TriggerDrawn.java:113: AbilityKey.Card (the drawn card) and
+						// AbilityKey.Player (who drew it).
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: drawn, player: drawer}), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -3254,8 +3300,9 @@ func (g *Game) checkLandPlayedTriggers(controller PlayerController, card CardID,
 						if _, ok := t.Param("NotFirstLand"); ok && g.Player(player).LandsPlayed < 1 {
 							continue
 						}
+						// TriggerLandPlayed.java:58: AbilityKey.Card, the land played.
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: card}), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -3383,8 +3430,11 @@ func (g *Game) checkBecomesTargetTriggers(targets []EntityID, isSpellSource bool
 						if _, ok := t.Param("FirstTime"); ok && !firstTime {
 							continue
 						}
+						// TriggerBecomesTarget.java:84-85 records AbilityKey.Target,
+						// the targeted card or player; Source (the targeting spell's
+						// host) and SourceSA are not recorded here.
 						if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{target: tgt}), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}

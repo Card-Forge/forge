@@ -187,7 +187,10 @@ func (g *Game) checkUnblockedTriggers(controller PlayerController) {
 		if spec, ok := t.Param("ValidDefenders"); ok && !attackedTargetMatches(g, h, defenders, spec) {
 			return triggeredObjects{}, false
 		}
-		return triggeredObjects{}, true
+		// TriggerAttackerUnblockedOnce.java:69: AbilityKey.AttackingPlayer,
+		// the combat's attacking player (Combat.java:699), the active player;
+		// AbilityKey.Defenders is not recorded.
+		return triggeredObjects{attackingPlayer: g.activePlayer}, true
 	})...)
 	g.pushTriggeredAbilities(controller, matches)
 }

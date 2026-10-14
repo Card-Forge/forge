@@ -1,10 +1,9 @@
 // Defined$ resolution shared across M6's own script-driven effects --
 // AbilityUtils.getDefinedPlayers's/getDefinedCards's own real corpus shapes
 // this port can resolve. Of the ability-context Triggered* vocabulary only
-// the keys a ported trigger mode records resolve (Ability.triggered:
-// TriggeredPlayer, TriggeredSource, TriggeredSourceController,
-// TriggeredCardController, TriggeredActivator); the rest (TriggeredCard,
-// TriggeredController, ...) stay in game-state.md's "Not ported yet". The host-Memory references -- Remembered, Imprinted,
+// the keys a ported trigger mode records resolve (Ability.triggered, whose
+// field comments name the modes recording each key); a key the trigger did
+// not record is an error. The host-Memory references -- Remembered, Imprinted,
 // ChosenCard, ChosenPlayer -- read memory.go. No single effect owns this
 // outright, the identical "shared, so neither" reason amount.go's own
 // resolveAmount lives apart from its first two callers.
@@ -38,7 +37,7 @@ import (
 // "DelayTriggerRemembered"/"DelayTriggerRememberedController", the same
 // reading applied to what a delayed trigger remembered (Ability.
 // TriggerRemembered), and "TriggeredPlayer"/"TriggeredSource"/
-// "TriggeredSourceController"/"TriggeredCardController"/
+// "TriggeredSourceController"/"TriggeredCardController"/"TriggeredCardOwner"/
 // "TriggeredActivator", what the trigger that made the ability recorded
 // (Ability.triggered) -- an error, "the trigger recorded no ...",
 // when it recorded no such key, so a trigger mode that never learned to
@@ -227,6 +226,14 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
 		}
 		candidates = []PlayerID{g.Card(refs.triggered.card).Controller()}
+	case "TriggeredCardOwner":
+		// The "...Owner" branch over AbilityKey.Card (AbilityUtils.java:1053-1059):
+		// the triggering card's owner. Java answers no player for an unset key;
+		// here that is an error, as for every Triggered key (GO-7).
+		if refs.triggered.card == NoCard {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
+		}
+		candidates = []PlayerID{g.Card(refs.triggered.card).Owner}
 	case "TriggeredDefendingPlayer":
 		// AbilityKey.DefendingPlayer of Mode$ Attacks: the player defending
 		// against the attacker the trigger recorded (defenderOf).
@@ -477,8 +484,9 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 		}
 		return []CardID{refs.triggered.attacker}, nil
 	case "TriggeredTarget", "TriggeredTargetLKICopy":
-		// AbilityKey.Target of Mode$ Attached: what the attachment became
-		// attached to. A player host is not a card, so it yields none here.
+		// AbilityKey.Target (Mode$ Attached, DamageDone, DamageDoneOnce,
+		// BecomesTarget: triggeredObjects.target). A player is not a card, so
+		// it yields none here.
 		if refs.triggered.target == NoEntity {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no target", defined)
 		}

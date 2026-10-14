@@ -1,0 +1,10 @@
+# CR 120.3 / 603.2: "whenever an opponent draws a card, ... deals 1 damage to
+# that player". TriggerDrawn.java:113 records AbilityKey.Player, the player who
+# drew, read by Defined$ TriggeredPlayer.
+# human's Cleanup wraps to ai's turn 2, Untap.
+advance
+# Untap -> Upkeep.
+advance
+# Upkeep -> Draw: ai draws its turn-2 card, Underworld Dreams triggers.
+advance
+resolvestack

@@ -361,7 +361,7 @@ func (a *Ability) replacedCard() CardID {
 // to set a key fails loudly instead of acting on nobody.
 type triggeredObjects struct {
 	// source is AbilityKey.Source: the card that dealt the damage
-	// (TriggerDamageDone) or the player whose creatures did
+	// (TriggerDamageDone, TriggerDamageDealtOnce) or the player whose creatures did
 	// (TriggerDamageDoneOnceByController). NoEntity when unset.
 	source EntityID
 	// sourceController is source's controller as the trigger fired --
@@ -370,13 +370,16 @@ type triggeredObjects struct {
 	// dies before the trigger resolves still answers its controller at
 	// damage time. For a player source it is that player.
 	sourceController PlayerID
-	// player is AbilityKey.Player: who became the monarch (Mode$
-	// BecomeMonarch), took the initiative (TakesInitiative) or completed a
-	// dungeon (DungeonCompleted), whom the Ring tempted (RingTemptsYou), or
-	// for whom chaos ensued (ChaosEnsues). NoPlayer when unset.
+	// player is AbilityKey.Player: the turn's player for Mode$ Phase (card
+	// and delayed lines alike, PhaseHandler.java:438), who drew (Drawn), who
+	// became the monarch (BecomeMonarch), took the initiative
+	// (TakesInitiative) or completed a dungeon (DungeonCompleted), whom the
+	// Ring tempted (RingTemptsYou), or for whom chaos ensued (ChaosEnsues).
+	// NoPlayer when unset.
 	player PlayerID
 	// blocker is AbilityKey.Blocker for Mode$ AttackerBlockedByCreature
-	// (TriggerAttackerBlockedByCreature.setTriggeringObjects), read by
+	// (TriggerAttackerBlockedByCreature.setTriggeringObjects) and Blocks
+	// (TriggerBlocks.java:71), read by
 	// Defined$ TriggeredBlocker/TriggeredBlockerLKICopy (definedCards). A
 	// CardID is stable across zone changes, so the LKI spelling names the
 	// same card. NoCard when unset.
@@ -394,10 +397,13 @@ type triggeredObjects struct {
 	// trigger and its resolution, and the stack is the one place to ask.
 	// NoStackItem when unset.
 	spellAbility StackItemID
-	// card is AbilityKey.Card for Mode$ TapsForMana (the permanent tapped
-	// for mana, TriggerTapsForMana.java:88) and Mode$ Discarded (the card
-	// discarded, TriggerDiscarded.java:72-74), read by Defined$
-	// TriggeredCardController. NoCard when unset.
+	// card is AbilityKey.Card: the permanent tapped for mana (Mode$
+	// TapsForMana, TriggerTapsForMana.java:88), the card discarded
+	// (Discarded, TriggerDiscarded.java:72-74), drawn (Drawn), tapped (Taps),
+	// untapped (Untaps), sacrificed (Sacrificed) or played as a land
+	// (LandPlayed), and the card a ChangesZone line -- a card's own, a
+	// watcher's or a delayed one -- saw move. Read by Defined$ TriggeredCard
+	// and TriggeredCardController. NoCard when unset.
 	card CardID
 	// cardStamp is card's zoneStamp as a "this card is put into a graveyard"
 	// trigger fired (checkDiesTriggers' own card, checkHaunterSpellTriggers):
@@ -424,8 +430,10 @@ type triggeredObjects struct {
 	originalController PlayerID
 	// attackingPlayer is AbilityKey.AttackingPlayer for Mode$
 	// AttackersDeclared/AttackersDeclaredOneTarget
-	// (TriggerAttackersDeclared.java:98): the player whose creatures attack,
-	// read by Defined$ TriggeredAttackingPlayer. NoPlayer when unset.
+	// (TriggerAttackersDeclared.java:98) and AttackerUnblockedOnce: the
+	// player whose creatures attack; for DamageDoneOnce the one controller of
+	// the damage sources (damageDoneOnceObjects). Read by Defined$
+	// TriggeredAttackingPlayer. NoPlayer when unset.
 	attackingPlayer PlayerID
 	// scheme is AbilityKey.Scheme for Mode$ SetInMotion
 	// (TriggerSetInMotion.setTriggeringObjects): the scheme just set in
@@ -443,12 +451,13 @@ type triggeredObjects struct {
 	// counts are the integers the trigger mode recorded, read by
 	// TriggerCount$<Key> (AbilityUtils.java:638).
 	counts triggerCounts
-	// cards is AbilityKey.Cards: the batch a Mode$ DiscardedAll trigger
-	// fired for, read by Defined$ TriggeredCards.
+	// cards is AbilityKey.Cards: the batch a Mode$ DiscardedAll or
+	// ChangesZoneAll trigger fired for, read by Defined$ TriggeredCards.
 	cards []CardID
-	// target is AbilityKey.Target for Mode$ Attached
-	// (TriggerAttached.setTriggeringObjects): what the attachment became
-	// attached to, read by Defined$ TriggeredTarget/TriggeredTargetLKICopy.
+	// target is AbilityKey.Target: what the attachment became attached to
+	// (Mode$ Attached, TriggerAttached.setTriggeringObjects), the damaged
+	// card or player (DamageDone, DamageDoneOnce), or what became the target
+	// (BecomesTarget). Read by Defined$ TriggeredTarget/TriggeredTargetLKICopy.
 	// NoEntity when unset.
 	target EntityID
 }
