@@ -22,6 +22,7 @@ import forge.gui.util.SOptionPane;
 import forge.util.FileUtil;
 
 import static forge.localinstance.properties.ForgeConstants.ADV_TEXTURE_BG_FILE;
+import static forge.localinstance.properties.ForgeConstants.ARCHIPELAGO_ASSETS_URL;
 import static forge.localinstance.properties.ForgeConstants.ASSETS_DIR;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_SNAPSHOT_URL;
 import static forge.localinstance.properties.ForgeConstants.DEFAULT_SKINS_DIR;
@@ -51,7 +52,7 @@ public class AssetsDownloader {
         final String apkSize = "12MB";
 
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
-        final String snapsURL = GITHUB_SNAPSHOT_URL;
+        final String snapsURL = GuiBase.isAndroid() ? ARCHIPELAGO_ASSETS_URL : GITHUB_SNAPSHOT_URL;
         // desktop and mobile-dev share the same package
         final String guiChannel = GuiBase.isAndroid() ? "forge/forge-gui-android/" : "forge/forge-gui-desktop/";
         final String releaseURL = RELEASE_URL +  guiChannel;

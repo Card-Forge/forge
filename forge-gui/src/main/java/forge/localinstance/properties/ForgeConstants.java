@@ -31,6 +31,8 @@ public final class ForgeConstants {
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
     public static final String GITHUB_COMMITS_ATOM              = GITHUB_FORGE_URL + "commits/master.atom";
     public static final String GITHUB_SNAPSHOT_URL              = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
+    // Android assets (assets.zip) for Archipelago come from the fork's latest release instead of upstream's daily snapshots
+    public static final String ARCHIPELAGO_ASSETS_URL           = "https://github.com/BramTeurlings/forge-archipelago/releases/latest/download/";
     public static final String NETWORK_PLAY_WIKI_URL            = GITHUB_FORGE_URL + "wiki/network-play";
     public static final String RELEASE_URL                      = "https://releases.cardforge.org/";
     public static final String PATH_SEPARATOR                   = File.separator;
