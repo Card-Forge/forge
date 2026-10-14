@@ -402,6 +402,7 @@ func (g *Game) dealPlayerDamage(controller PlayerController, source CardID, targ
 		kind = 1
 	}
 	g.Player(target).damageThisTurn[kind] += amount
+	g.recordPlayerDamage(source, target, amount, isCombat)
 	var flags EventFlags
 	if isCombat {
 		flags = FlagCombat

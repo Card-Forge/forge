@@ -30,7 +30,7 @@ func opAwareValue(g *Game, amounts map[string]expr.Amount, sourceController Play
 	}
 	head := amt.Head
 	if hType, isPlayerCount := strings.CutPrefix(head, "PlayerCount"); isPlayerCount {
-		players, ok := g.playerCountPlayers(sourceController, source, hType)
+		players, ok := g.playerCountPlayers(amounts, sourceController, source, hType, depth)
 		if !ok {
 			return 0, false, true
 		}
@@ -162,8 +162,9 @@ func playersIn(entities []EntityID) []PlayerID {
 // (AbilityUtils.java:456-500). Players and Opponents are the players still in
 // the game (Game.getPlayers); RegisteredOpponents counts those who have left
 // too; YourTeam is the player alone, this port seating no teams. An hType Java
-// answers 0 for is unresolved here, never a silent 0 (GO-7).
-func (g *Game) playerCountPlayers(controller PlayerID, source CardID, hType string) ([]PlayerID, bool) {
+// answers 0 for is unresolved here, never a silent 0 (GO-7). amounts and depth
+// resolve a Property<p> operand naming an SVar (playerPropertyOperand).
+func (g *Game) playerCountPlayers(amounts map[string]expr.Amount, controller PlayerID, source CardID, hType string, depth int) ([]PlayerID, bool) {
 	inGame := func(keep func(PlayerID) bool) []PlayerID {
 		var out []PlayerID
 		for _, pid := range g.Players() {
@@ -221,7 +222,7 @@ func (g *Game) playerCountPlayers(controller PlayerID, source CardID, hType stri
 		prop := strings.TrimPrefix(hType, "Property")
 		var out []PlayerID
 		for _, pid := range g.playersInTurnOrder() {
-			matched, known := matchesPlayerProperty(g, pid, controller, source, prop)
+			matched, known := matchesPlayerPropertyIn(g, pid, controller, source, prop, amounts, depth)
 			if !known {
 				return nil, false
 			}
@@ -302,7 +303,7 @@ func playerXCount(g *Game, amounts map[string]expr.Amount, controller PlayerID, 
 		prop := strings.TrimPrefix(body, "HasProperty")
 		n := 0
 		for _, pid := range players {
-			matched, known := matchesPlayerProperty(g, pid, controller, source, prop)
+			matched, known := matchesPlayerPropertyIn(g, pid, controller, source, prop, amounts, depth)
 			if !known {
 				return 0, false
 			}
@@ -384,7 +385,7 @@ var playerPropertyNames = [...]string{
 
 // playerPropertyMeasure is the measure of the first playerPropertyNames entry
 // value contains, found false when none does. ok is false for a property this
-// port keeps no state for: NumPowerSurgeLands, StartingLibrarySize,
+// port keeps no state for: StartingLibrarySize,
 // LifeLostLastTurn, LifeGainedByTeamThisTurn, LifeStartedThisTurnWith,
 // SVarAmount, ExploredThisTurn, DamageToOppsThisTurn.
 func playerPropertyMeasure(g *Game, pid PlayerID, value string, sq []string) (n int, ok, found bool) {
@@ -399,6 +400,8 @@ func playerPropertyMeasure(g *Game, pid PlayerID, value string, sq []string) (n 
 	switch name {
 	case "":
 		return 0, false, false
+	case "NumPowerSurgeLands":
+		return p.numPowerSurgeLands, true, true
 	case "DomainPlayer":
 		return domainCount(g, pid), true, true
 	case "CardsInHand":
@@ -487,7 +490,11 @@ func playerXProperty(g *Game, amounts map[string]expr.Amount, controller PlayerI
 		return math(n)
 	}
 	if strings.HasPrefix(body, "Sacrificed") {
-		return 0, false
+		n, ok := g.sacrificedThisTurnCount(pid, source, body)
+		if !ok {
+			return 0, false
+		}
+		return math(n)
 	}
 	sq := strings.Split(body, ".")
 	value := sq[0]
@@ -500,6 +507,11 @@ func playerXProperty(g *Game, amounts map[string]expr.Amount, controller PlayerI
 	switch value {
 	case "RingTemptedYou":
 		return math(g.Player(pid).ringTempted)
+	case "OpponentsAttackedThisTurn":
+		// AbilityUtils.java:3665-3668: Player.getAttackedPlayersMyTurn.
+		return math(len(g.Player(pid).attackedPlayersThisTurn))
+	case "OpponentsAttackedThisCombat":
+		return math(g.attackedOpponentsThisCombat(pid))
 	case "AttractionsVisitedThisTurn":
 		// AbilityUtils.java:3683: Player.getAttractionsVisitedThisTurn. The
 		// engine never visits Attractions (RollDice's ToVisitYourAttractions

@@ -268,11 +268,14 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		candidates = []PlayerID{pid}
 	default:
 		// getDefinedPlayers' fallthrough (AbilityUtils.java:1186-1198):
-		// every player, filtered by the dotted restriction. Only a single
-		// property matchesPlayerProperty recognizes resolves; a comma list
-		// or an unrecognized property stays an error.
-		prop, ok := strings.CutPrefix(defined, "Player.")
-		if !ok || strings.Contains(prop, ",") {
+		// every player, filtered by the dotted restriction; "You.<p>" and
+		// "Opponent.<p>" are the You and Opponent players filtered the same
+		// way (:1173-1176, :1194-1200), which matchesPlayerSpec's own base
+		// check gives. Only a single property matchesPlayerProperty
+		// recognizes resolves; a comma list or an unrecognized property stays
+		// an error.
+		base, prop, dotted := strings.Cut(defined, ".")
+		if !dotted || base != "Player" && base != "You" && base != "Opponent" || strings.Contains(prop, ",") {
 			return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
 		}
 		for _, pid := range g.playersInTurnOrder() {

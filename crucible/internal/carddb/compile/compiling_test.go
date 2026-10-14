@@ -130,6 +130,27 @@ func TestAmountsParsesNonAbilitySVars(t *testing.T) {
 	}
 }
 
+// A PlayerCount amount's life<op> operand written as an expression (Great
+// Unclean One's `HasPropertylifeLTCount$YourLifeTotal`) is compiled too, keyed
+// by its own folded text; a number or SVar operand, or another property, adds
+// nothing.
+func TestAmountsCompileALifePropertyExpressionOperand(t *testing.T) {
+	t.Parallel()
+
+	card := compileScript(t, "Name:X\nManaCost:R\nTypes:Instant\nA:SP$ Draw | NumCards$ X\n"+
+		"SVar:X:PlayerCountOpponents$HasPropertylifeLTCount$YourLifeTotal\n"+
+		"SVar:Y:PlayerCountOpponents$HasPropertylifeLTZ\n"+
+		"SVar:Z:PlayerCountOpponents$HasPropertyLostLifeThisTurn\n")
+	amounts := card.Faces[0].Amounts
+	amt, ok := amounts["count$yourlifetotal"]
+	if !ok || amt.Kind != expr.Expression || amt.Head != "Count" {
+		t.Errorf("Amounts[%q] = %+v, %v, want the compiled Count$ expression", "count$yourlifetotal", amt, ok)
+	}
+	if len(amounts) != 4 {
+		t.Errorf("Amounts has %d entries, want 4: X, Y, Z and X's operand", len(amounts))
+	}
+}
+
 // An SVar that IS an ability -- referenced through Execute$/SubAbility$ and
 // compiled into a Sub above -- is not duplicated into Amounts: its own body
 // starts with a recognized record key (DB$ here), not a Count$/Number$/

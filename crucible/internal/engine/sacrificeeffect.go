@@ -214,6 +214,7 @@ func sacrificeCardsFor(g *Game, controller PlayerController, a *Ability, ids []C
 			continue
 		}
 		pid := c.Controller()
+		g.recordSacrificed(pid, id)
 		g.checkSacrificedTriggers(controller, id, pid)
 		if remember {
 			g.Card(a.Source).Memory.Remember(CardEntity(id))

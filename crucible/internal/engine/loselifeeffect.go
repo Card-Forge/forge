@@ -49,10 +49,9 @@ import "fmt"
 // subAbilityConditionMet does not cover, the identical GainLife-shaped
 // gap). ValidTgts$ itself no longer blocks: resolveTargets (targeting.go)
 // resolves the two real player-shaped bases (Opponent/Player, 74 of 76
-// real ValidTgts$ lines) -- the other 2, qualified
-// Player.wasDealtDamageThisTurnBySource/Player.LostLifeThisTurn, still do
-// not resolve, matchesPlayerProperty's own unrecognized-property contract
-// (valid.go) leaving them with zero legal targets rather than a wrong one.
+// real ValidTgts$ lines) and the other 2, qualified
+// Player.wasDealtDamageThisTurnBySource/Player.LostLifeThisTurn, through
+// matchesPlayerProperty's turn-record properties (playerproperty.go).
 //
 // ConditionPresent$/ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$
 // are resolved through subAbilityConditionMet (condition.go) the identical

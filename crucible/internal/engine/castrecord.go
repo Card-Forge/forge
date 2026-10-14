@@ -11,6 +11,7 @@
 package engine
 
 import (
+	"slices"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/valid"
@@ -59,10 +60,15 @@ func (g *Game) recordEntered(c, before *Card, from, to ZoneType) {
 }
 
 // recordAttacked adds attacker to its controller's attackers of the turn
-// (Player.addCreaturesAttackedThisTurn).
+// (Player.addCreaturesAttackedThisTurn), and the player it attacks directly,
+// once, to the players attacked this turn (the map's Player keys). Called
+// after the declaration's targets are set.
 func (g *Game) recordAttacked(attacker CardID) {
 	p := g.Player(g.Card(attacker).Controller())
 	p.attackedThisTurn = append(p.attackedThisTurn, attacker)
+	if pid, ok := g.combat.AttackTargets[attacker].AsPlayer(); ok && !slices.Contains(p.attackedPlayersThisTurn, pid) {
+		p.attackedPlayersThisTurn = append(p.attackedPlayersThisTurn, pid)
+	}
 }
 
 // recordCountersAdded logs a placement (Game.addCounterAddedThisTurn,

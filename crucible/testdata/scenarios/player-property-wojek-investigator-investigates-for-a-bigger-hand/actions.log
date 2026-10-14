@@ -1,0 +1,8 @@
+# PlayerProperty.java:311-318: Wojek Investigator's
+# `X:PlayerCountOpponents$HasPropertyHasCardsInHand_Card_GTY` with
+# `Y:Count$CardsInYourHand` counts the opponents holding more cards than you.
+# The ai's three cards beat the human's one, so the upkeep trigger investigates
+# once: one Clue.
+startturn human
+advance
+passpriority

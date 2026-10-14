@@ -1,0 +1,21 @@
+# PlayerProperty.java:185-188: Pack Attack's
+# `X:PlayerCountPlayers$HasPropertyDefending` counts the players some attacker
+# attacks directly. Cast after Grizzly Bears attacks the ai, X is 1: the Bears
+# get +1/+0 and deal 3 combat damage, and the caster draws a card.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+queue paygeneric R
+queue paygeneric R
+castspell human 6
+resolvestack
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage

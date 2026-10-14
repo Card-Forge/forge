@@ -44,6 +44,7 @@ import (
 
 	"github.com/jczastkiewicz/crucible/internal/carddb"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
+	"github.com/jczastkiewicz/crucible/internal/expr"
 	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
@@ -1027,12 +1028,29 @@ func controlsMatches(g *Game, candidate, host PlayerID, source CardID, property 
 //
 // EnchantedBy (the source is among the candidate's own attachments -- an Aura
 // enchanting a player directly, CR 303.4h -- distinct from Matches' own
-// *card*-side EnchantedBy) is resolved from Player.Attachments. Every other
-// real property (Chosen, a ChosenPlayer memory slot) needs state this port
-// does not track at all yet, and is left unrecognized here, ok=false, the same
-// "skip rather than guess" contract every other unresolved param in this port
-// already has (GO-7).
+// *card*-side EnchantedBy) is resolved from Player.Attachments. The turn-record
+// and comparison properties (LostLifeThisTurn, wasDealt...ThisTurn[By],
+// Defending, HasCardsIn..., withMore..., ...) are playerProperty's
+// (playerproperty.go). Every other real property (Chosen, a ChosenPlayer
+// memory slot) needs state this port does not track at all yet, and is left
+// unrecognized here, ok=false, the same "skip rather than guess" contract
+// every other unresolved param in this port already has (GO-7).
 func matchesPlayerProperty(g *Game, candidate, host PlayerID, source CardID, property string) (matched, ok bool) {
+	return matchesPlayerPropertyIn(g, candidate, host, source, property, nil, 0)
+}
+
+// matchesPlayerPropertyIn is matchesPlayerProperty with the amounts table an
+// SVar operand ("HasCardsInHand_Card_GTY", "LostLifeThisTurn GEX") resolves
+// in, and the SVar depth already reached: the PlayerCount amounts pass their
+// own (amountplayers.go), every valid-spec caller none, which falls back to
+// the source card's own SVars (playerPropertyOperand). A leading "!" negates
+// the property (Player.hasProperty, Player.java:2203-2205: Mindstorm Crown's
+// You.!CardsInHandAtBeginningOfTurn).
+func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, property string, amounts map[string]expr.Amount, depth int) (matched, ok bool) {
+	if rest, negated := strings.CutPrefix(property, "!"); negated {
+		m, known := matchesPlayerPropertyIn(g, candidate, host, source, rest, amounts, depth)
+		return !m && known, known
+	}
 	if matched, ok := matchesPlayerBase(candidate, host, property); ok {
 		return matched, true
 	}
@@ -1042,8 +1060,8 @@ func matchesPlayerProperty(g *Game, candidate, host PlayerID, source CardID, pro
 	// PlayerProperty.java:140-175 for the "LastTurn" forms: wasDealtDamageLastTurn,
 	// wasDealtCombatDamageLastTurn and wasDealtNonCombatDamageLastTurn compare
 	// the damage dealt to the player last turn (all, combat or noncombat) with
-	// the default GE1. The "ThisTurn" and "By" forms count damage events a Game
-	// does not keep, and stay unrecognized.
+	// the default GE1. The "ThisTurn" and "By" forms are wasDealtThisTurn's
+	// (playerproperty.go).
 	if strings.HasPrefix(property, "wasDealt") && strings.HasSuffix(property, "LastTurn") {
 		d := g.Player(candidate).damageLastTurn
 		switch {
@@ -1120,14 +1138,14 @@ func matchesPlayerProperty(g *Game, candidate, host PlayerID, source CardID, pro
 		return ok && containsEntity(sc.Memory.Remembered(), PlayerEntity(candidate)), true
 	}
 	// PlayerProperty.java's life<op><n> ("lifeGE1": at least 1 life, Worship's
-	// ValidPlayer$ You.lifeGE1). Only a literal n resolves; an SVar n is
-	// left unrecognized (GO-7).
+	// ValidPlayer$ You.lifeGE1). A literal n resolves here; an SVar n is
+	// playerProperty's (playerproperty.go).
 	if len(property) > 6 && strings.HasPrefix(property, "life") {
 		if n, err := strconv.Atoi(property[6:]); err == nil {
 			return compareOp(g.Player(candidate).Life, property[4:6], n), true
 		}
 	}
-	return false, false
+	return playerProperty(g, candidate, host, source, property, amounts, depth)
 }
 
 // sourceCard resolves source to its own *Card, for the properties that read

@@ -448,7 +448,7 @@ func TestPlayerCountRefusesWhatItCannotRead(t *testing.T) {
 	for _, x := range []string{
 		"PlayerCountPlayers$StartingLibrarySize",
 		"PlayerCountPlayers$Bogus",
-		"PlayerCountPlayers$SacrificedThisTurn",
+		"PlayerCountPlayers$SacrificedPermanentTypesThisTurn",
 		"PlayerCountPlayers$TotalCommanderCastFromCommandZone",
 		"PlayerCountPlayers$HighestCardsInHand/Twice",
 		"PlayerCountPlayers$Counters",

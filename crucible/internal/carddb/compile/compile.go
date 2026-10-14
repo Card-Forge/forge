@@ -624,8 +624,29 @@ func compileAmounts(face *carddb.Face) map[string]expr.Amount {
 			}
 		}
 		out[strings.ToLower(name)] = amt
+		if operand, ok := lifePropertyOperand(amt); ok {
+			out[strings.ToLower(operand)] = expr.Parse(operand)
+		}
 	}
 	return out
+}
+
+// lifePropertyOperand is the operand of a PlayerCount amount's
+// HasPropertylife<op><operand> written as an expression rather than a number
+// or SVar name -- Great Unclean One's `PlayerCountOpponents$HasProperty
+// lifeLTCount$YourLifeTotal`, which PlayerProperty.java:266-272 hands to
+// calculateAmount as `property.substring(6)`, read as an expression because
+// it holds a `$`. The engine looks the operand up in amounts by its folded
+// text, as addInlineChecks' entries are, so it is compiled here, once (PORT-2).
+func lifePropertyOperand(amt expr.Amount) (string, bool) {
+	if amt.Kind != expr.Expression || !strings.HasPrefix(amt.Head, "PlayerCount") {
+		return "", false
+	}
+	prop, ok := strings.CutPrefix(amt.Body, "HasPropertylife")
+	if !ok || len(prop) < 3 || strings.Index(prop[2:], "$") <= 0 {
+		return "", false
+	}
+	return prop[2:], true
 }
 
 // faceCompiler holds the SVar namespace one face's references resolve in, and

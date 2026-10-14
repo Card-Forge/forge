@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Upkeep
+humanlife=20
+humanhand=Grizzly Bears
+humanbattlefield=Wojek Investigator;T:c_a_clue_draw|SummonSick
+ailife=20
+aihand=Grizzly Bears;Grizzly Bears;Hill Giant

@@ -81,6 +81,7 @@
     "gameloss": ["gameloss.go"],
     "castoptions": ["castoptions.go"],
     "castrecord": ["castrecord.go"],
+    "playerproperty": ["playerproperty.go"],
     "foretell": ["foretell.go"],
     "lifelost": ["lifelost.go"],
     "targeting": ["targeting.go"],
@@ -190,7 +191,7 @@
     "stack": ["id", "ability", "game", "effect", "event", "action", "control", "card", "zone"],
     "priority": ["id", "card", "game", "phase", "control", "effect", "action", "player", "room"],
     "driver": ["id", "game", "phase", "control", "effect", "mulligan"],
-    "valid": ["id", "zone", "card", "parts", "game", "combat", "player", "effecthelpers", "amount"],
+    "valid": ["id", "zone", "card", "parts", "game", "combat", "player", "effecthelpers", "amount", "playerproperty"],
     "attack": [
       "id",
       "zone",
@@ -488,6 +489,7 @@
     "gameloss": ["id", "zone", "card", "game", "player", "valid", "replacement", "parts", "effecthelpers"],
     "castoptions": ["id", "zone", "card", "game", "control", "parts", "airbendeffect", "rulesmod"],
     "castrecord": ["id", "zone", "card", "game", "valid", "parts"],
+    "playerproperty": ["id", "zone", "card", "game", "player", "valid", "amount", "combat", "castrecord"],
     "foretell": ["id", "zone", "card", "game", "control", "parts", "mana"],
     "lifelost": [
       "id",

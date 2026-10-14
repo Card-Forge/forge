@@ -1,0 +1,24 @@
+# PlayerProperty.java:140-172: Moonshae Pixie's
+# `X:PlayerCountOpponents$HasPropertywasDealtCombatDamageThisTurn` counts the
+# opponents dealt combat damage this turn. An unblocked Grizzly Bears deals the
+# ai 2 combat damage, so the Pixie cast in the second main phase draws one card.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage
+advance 2
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+castspell human 6
+resolvestack

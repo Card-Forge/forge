@@ -432,6 +432,7 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	g.addProducedMana(pid, made)
 
 	if shape.Tap {
+		g.noteTapsForMana(card, pid)
 		g.checkTapsForManaTriggers(controller, card, pid, made)
 	}
 	return true

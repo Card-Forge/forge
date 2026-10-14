@@ -48,6 +48,7 @@ func (g *Game) StartTurn(active PlayerID, controller PlayerController) {
 	g.activePlayer = active
 	g.activePhase = Untap
 	g.Player(active).Turn++
+	g.notePowerSurgeLands(active)
 	g.sink.Emit(Event{Kind: TurnBegan, Active: active, Turn: uint16(g.turn)})
 	g.beginPhase(controller)
 }
@@ -105,6 +106,7 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 			// PhaseHandler.java:188: Player.incrementTurn, once the turn's active
 			// player is known (Count$YourTurns counts this turn from its start).
 			g.Player(g.activePlayer).Turn++
+			g.notePowerSurgeLands(g.activePlayer)
 			g.endDetains(g.activePlayer)
 			g.endGoads(g.activePlayer)
 			g.endPumpsUntilTurnOf(g.activePlayer)
@@ -620,11 +622,14 @@ func (g *Game) cleanupStep(controller PlayerController) {
 		p.attackedThisTurn = nil
 		p.CyclingThisTurn = 0
 		p.discardedThisTurn = nil
+		g.cleanupPlayerRecords(pid)
 	}
-	// Zone.resetCardsAddedThisTurn (Player.onCleanupPhase) and
-	// Game.clearCountersThisTurn (Game.onCleanupPhase).
+	// Zone.resetCardsAddedThisTurn (Player.onCleanupPhase),
+	// Game.clearCountersThisTurn and Game.clearGlobalDamageHistory
+	// (Game.onCleanupPhase).
 	g.enteredThisTurn = nil
 	g.countersAddedThisTurn = nil
+	g.playerDamageThisTurn = nil
 
 	g.combatDamagePrevented = false
 	g.preventShields = nil

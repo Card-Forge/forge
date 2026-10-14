@@ -153,6 +153,27 @@ type Player struct {
 	// player attacked with this turn, once per declaration (Count$
 	// CreaturesAttackedThisTurn counts a creature that attacked twice twice).
 	attackedThisTurn []CardID
+	// attackedPlayersThisTurn is Player.getAttackedPlayersMyTurn: each player
+	// this player attacked directly this turn, once, in first-attack order (the
+	// Player keys of Java's attackedThisTurn map; a planeswalker or battle
+	// attacked is a Card key and is not one). attackedPlayersLastTurn is the
+	// list as this player's own last turn ended (setAttackedPlayersMyLastTurn).
+	// Both are rotated at the cleanup of this player's own turn
+	// (playerproperty.go, rotateAttackedPlayers).
+	attackedPlayersThisTurn, attackedPlayersLastTurn []PlayerID
+	// numPowerSurgeLands is Player.numPowerSurgeLands: the untapped lands this
+	// player controlled as their latest turn began (PhaseHandler.java:190-191),
+	// before the untap step. Never reset, as in Java.
+	numPowerSurgeLands int
+	// cardsInHandStartedTurn is Player.numCardsInHandStartedThisTurnWith: the
+	// hand size at the end of the last cleanup step (Player.onCleanupPhase).
+	// Zero during the game's first turn, as in Java (GameAction.java:2399 sets
+	// it only after the game loop has returned).
+	cardsInHandStartedTurn int
+	// tappedLandForManaThisTurn is Player.tappedLandForManaThisTurn: this
+	// player activated a land's tap mana ability this turn
+	// (AbilityManaPart.tapsForMana). Cleared at cleanup.
+	tappedLandForManaThisTurn bool
 	// CyclingThisTurn is how many Cycling or TypeCycling abilities the player
 	// has activated this turn (FirstTime$ of Mode$ Cycled).
 	CyclingThisTurn int

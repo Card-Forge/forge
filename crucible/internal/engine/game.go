@@ -168,6 +168,18 @@ type Game struct {
 	// cleared at cleanup.
 	enteredThisTurn       []zoneEntry
 	countersAddedThisTurn []counterAddition
+	// playerDamageThisTurn is every instance of damage dealt to a player this
+	// turn, in order, with a last-known copy of its source (the player-target
+	// half of Game.globalDamageHistory/damageThisTurnLKI, Game.java:1357-1360);
+	// the wasDealt...ThisTurnBy player properties read it (playerproperty.go).
+	// Cleared at cleanup (Game.clearGlobalDamageHistory).
+	playerDamageThisTurn []playerDamage
+	// sacrificedThisTurn is every player's Player.sacrificedThisTurn in one
+	// list: a last-known copy of each permanent sacrificed this turn, in
+	// order, as it stood on the battlefield (GameAction.sacrifice's
+	// LastStateBattlefield copy), with the player who sacrificed it. Read by
+	// the SacrificedThisTurn player measure; cleared at cleanup.
+	sacrificedThisTurn []sacrificeRecord
 	// snowAnyColor is set while a cast through MayPlaySnowIgnoreColor$ pays
 	// its mana cost: snow mana pays a colored pip of any color
 	// (ManaConversionMatrix.snowForColor, PlaySpellAbility.java:648-649).
@@ -1367,6 +1379,8 @@ func (g *Game) Clone() *Game {
 		castThisTurn:          append([]castRecord(nil), g.castThisTurn...),
 		enteredThisTurn:       append([]zoneEntry(nil), g.enteredThisTurn...),
 		countersAddedThisTurn: append([]counterAddition(nil), g.countersAddedThisTurn...),
+		playerDamageThisTurn:  append([]playerDamage(nil), g.playerDamageThisTurn...),
+		sacrificedThisTurn:    append([]sacrificeRecord(nil), g.sacrificedThisTurn...),
 		snowAnyColor:          g.snowAnyColor,
 		dayTime:               g.dayTime,
 		previousPlayer:        g.previousPlayer,
@@ -1399,6 +1413,8 @@ func (g *Game) Clone() *Game {
 		}
 		out.players[i].controlledBy = append([]controlGrant(nil), g.players[i].controlledBy...)
 		out.players[i].attackedThisTurn = append([]CardID(nil), g.players[i].attackedThisTurn...)
+		out.players[i].attackedPlayersThisTurn = append([]PlayerID(nil), g.players[i].attackedPlayersThisTurn...)
+		out.players[i].attackedPlayersLastTurn = append([]PlayerID(nil), g.players[i].attackedPlayersLastTurn...)
 	}
 
 	copy(out.cards, g.cards)
@@ -1487,6 +1503,24 @@ type castRecord struct {
 type zoneEntry struct {
 	card     Card
 	from, to ZoneType
+}
+
+// playerDamage is one instance of damage dealt to a player
+// (CardDamageHistory.registerDamage's Pair plus Game.damageThisTurnLKI's
+// source copy): the source as it stood when it dealt the damage, the player
+// dealt it, how much and whether it was combat damage.
+type playerDamage struct {
+	source Card
+	target PlayerID
+	amount int
+	combat bool
+}
+
+// sacrificeRecord is one entry of Game.sacrificedThisTurn: who sacrificed
+// the permanent and the permanent as last known on the battlefield.
+type sacrificeRecord struct {
+	player PlayerID
+	card   Card
 }
 
 // counterAddition is one placement in Game.countersAddedThisTurn: who put how

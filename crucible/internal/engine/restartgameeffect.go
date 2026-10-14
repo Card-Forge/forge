@@ -236,6 +236,7 @@ func (g *Game) resetPlayerForRestart(pid PlayerID) {
 	p.LifeGainedTimesThisTurn = 0
 	p.LifeGainedThisTurn = 0
 	p.attackedThisTurn = nil
+	g.cleanupPlayerRecords(pid)
 	p.TurnsToSkip = 0
 	p.completedDungeons = nil
 	p.ringTempted = 0

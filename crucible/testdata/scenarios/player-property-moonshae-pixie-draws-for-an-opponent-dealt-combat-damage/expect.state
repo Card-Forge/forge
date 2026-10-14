@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main2
+humanlife=20
+humanhand=Island
+humanlibrary=Plains
+humanbattlefield=Grizzly Bears|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Island|Tapped;Moonshae Pixie|SummonSick
+ailife=18
