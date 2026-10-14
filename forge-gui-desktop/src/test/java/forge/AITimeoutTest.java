@@ -44,8 +44,8 @@ public class AITimeoutTest extends SimulationTest {
         System.out.printf("AI Predicted Combat Duration: %.1f seconds\n", duration);
         System.out.printf("AI Predicted Combat Attacker Size: %d\n", attackingCreatures);
 
-        // Do not add seconds to the configured timeout to hide a timeout regression.
-        AssertJUnit.assertTrue("exceeded timeout: " + duration, duration <= game.getAITimeout() + 0.15);
+        // Do not add nano/milli/seconds to the configured timeout to hide a timeout regression.
+        AssertJUnit.assertTrue("Exceeded timeout: " + duration, duration <= game.getAITimeout());
         // bar hidden afterwards
         AssertJUnit.assertEquals(-1f, AITimeoutTracker.getRemainingFraction(attacker.getId()), 0f);
         // This scenario intentionally exercises the deadline; a partial attack decision is valid.
