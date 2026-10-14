@@ -7109,6 +7109,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         @Override public void showPromptMessage(PlayerView player, String message, CardView card) {
+            // Match CMatchUI: a current prompt supersedes any pending waiting timer.
+            cancelAwaitNextInput();
             Capture prompt = capture("showPromptMessage", -1, player == null ? -1 : player.getId(), message,
                     card == null ? -1 : card.getId());
             super.showPromptMessage(player, message, card);
