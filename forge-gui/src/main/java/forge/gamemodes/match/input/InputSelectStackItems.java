@@ -48,12 +48,6 @@ public class InputSelectStackItems extends InputSyncronizedBase {
 
     @Override
     protected void showMessage() {
-        // Refreshing the offered stack items also lets headless clients respond to each step of a multi-target prompt.
-        final List<StackItemView> selectable = new ArrayList<>();
-        for (final SpellAbilityStackInstance si : choices) {
-            selectable.add(si.getView());
-        }
-        getController().getGui().setSelectableTargets(selectable);
         final String text = message.contains("%d") ? String.format(message, max - selected.size()) : message;
         showMessage(text, sa == null ? (forge.game.card.CardView) null : sa.getView().getHostCard());
         getController().getGui().updateButtons(getOwner(), selected.size() >= min, allowCancel, true);
