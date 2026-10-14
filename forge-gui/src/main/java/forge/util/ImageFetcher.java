@@ -4,11 +4,13 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.gui.FThreads;
+import forge.gui.download.CdnUuidCache;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
@@ -20,7 +22,6 @@ public abstract class ImageFetcher {
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
     protected static final boolean disableHostedDownload = true;
-    protected static Date scryfallCooldownTime = null;
     private static final HashSet<String> fetching = new HashSet<>();
 
     static {
@@ -71,16 +72,22 @@ public abstract class ImageFetcher {
 
     private void addScryfallUrl(PaperCard card, String face, boolean useArtCrop, ArrayList<String> downloadUrls) {
         CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
-        if (edition == null) {
-            return;
-        }
+        if (edition == null) return;
 
         String setCode = edition.getScryfallCode();
-        String langCode = edition.getCardsLangCode();
-        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
-        if (!downloadUrls.contains(primaryUrl)) {
-            downloadUrls.add(primaryUrl);
+        String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, setCode, card.getCollectorNumber(), edition.getCardsLangCode());
+
+        // Prefer CDN (no rate limit) if this set was already synced; read-only, see getCdnUrlIfCached().
+        if (!StringUtils.isBlank(setCode)) {
+            String size = useArtCrop ? "art_crop" : "normal";
+            String cdnUrl = forge.gui.download.CdnUuidCache.getCdnUrlIfCached(
+                    setCode, card.getCollectorNumber(), langCode, face, size);
+            if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
         }
+
+        String primaryUrl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(card, face, setCode, langCode, useArtCrop);
+        if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
     }
 
     protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
@@ -150,7 +157,8 @@ public abstract class ImageFetcher {
                 CardEdition ed = StaticData.instance().getEditions().get(pc.getEdition());
                 if (ed != null) {
                     String setCode = ed.getScryfallCode();
-                    String langCode = ed.getCardsLangCode();
+                    String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+                    String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, setCode, pc.getCollectorNumber(), ed.getCardsLangCode());
                     downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
                     File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
@@ -325,7 +333,8 @@ public abstract class ImageFetcher {
 
             if (tempdata.length > 2) {
                 String tokenCode = edition.getTokensCode();
-                String langCode = edition.getCardsLangCode();
+                String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+                String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tempdata[2], edition.getCardsLangCode());
                 // Just assume the CNr from the token image is valid
                 downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
             } else if (!allTokens.isEmpty()) {
@@ -340,10 +349,11 @@ public abstract class ImageFetcher {
                 while (it.hasNext()) {
                     tis = it.next();
                     String tokenCode = edition.getTokensCode();
-                    String langCode = edition.getCardsLangCode();
                     if (tis.collectorNumber() == null || tis.collectorNumber().isEmpty()) {
                         continue;
                     }
+                    String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+                    String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tis.collectorNumber(), edition.getCardsLangCode());
 
                     downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face));
                 }
@@ -374,7 +384,49 @@ public abstract class ImageFetcher {
         setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
     }
 
+    /**
+     * Fetch the Scryfall art-crop image for a card image key and cache it as the player's deck
+     * sleeve. Forces art_crop regardless of the user's UI_CARD_ART_FORMAT preference and caches
+     * under CACHE_SLEEVE_PICS_DIR keyed by a hash of the image key.
+     */
+    public void fetchSleeveArt(final String sleeveArtKey, final Callback callback) {
+        FThreads.assertExecutedByEdt(true);
+
+        if (sleeveArtKey == null || sleeveArtKey.length() < 2 || !sleeveArtKey.startsWith(ImageKeys.CARD_PREFIX)) {
+            return;
+        }
+        // Not gated on UI_ENABLE_ONLINE_IMAGE_FETCHER: that suppresses passive auto-download of card
+        // art, but choosing a card-art sleeve is an explicit request, so fetch even when it's off
+        final PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(sleeveArtKey);
+        if (paperCard == null || paperCard.getRules().isCustom() || paperCard.getArtist().isEmpty()) {
+            return;
+        }
+        if (paperCard.getCollectorNumber().equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            return;
+        }
+        final File destFile = new File(ForgeConstants.CACHE_SLEEVE_PICS_DIR, SleeveArt.cacheFileName(sleeveArtKey));
+        if (destFile.exists()) {
+            return;
+        }
+        final ArrayList<String> downloadUrls = new ArrayList<>();
+        final String imagePath = ImageUtil.getImageRelativePath(paperCard, "", true, false);
+        final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
+        getScryfallDownloadURL(paperCard, "", true, hasSetLookup, null, downloadUrls);
+        if (downloadUrls.isEmpty()) {
+            return;
+        }
+        FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_SLEEVE_PICS_DIR);
+        setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+    }
+
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
+        // Skip before registering rather than inside the download task: nothing removes a path from
+        // the in-flight set below, so a fetch registered during the cooldown would never be retried
+        // once the cooldown lifts. Only when every candidate is Scryfall - otherwise another source
+        // may still serve it.
+        if (ScryfallRateLimiter.isCoolingDown() && downloadUrls.stream().allMatch(ScryfallRateLimiter::isApiUrl)) {
+            return;
+        }
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
         HashSet<Callback> observers = currentFetches.get(destPath);

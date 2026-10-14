@@ -1,0 +1,8 @@
+Name:Maular, the Next Evolution
+ManaCost:5 G G
+Types:Legendary Creature Dinosaur Mutant
+PT:10/10
+DeckRule:ColorIdentity:Exempt$ Creature.cmcGE7,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have creature cards with mana value 7 or greater of any color identity and any basic land cards.
+T:Mode$ Attacks | ValidCard$ Creature.cmcGE7+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control with mana value 7 or greater attacks, double its power and toughness until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ Double | NumDef$ Double
+Oracle:Rulebreaker — A deck with this commander can have creature cards with mana value 7 or greater of any color identity and any basic land cards.\nWhenever a creature you control with mana value 7 or greater attacks, double its power and toughness until end of turn.

@@ -25,72 +25,86 @@ for filename in os.listdir(EDITIONS_FOLDER):
         set_map[scryfall_code] = forge_code
         
 # Note: currently only loads the first json file found in the folder!
-metadata_file = None
+metadata_filename = None
 files = os.listdir(".")
 for filename in files:
-    if filename.endswith(".json"):
+    if filename.endswith(".jsonl"):
         metadata_filename = filename
         break
 
 if metadata_filename is None:
-    print("Please download the Default Cards bulk data json file from https://scryfall.com/docs/api/bulk-data and place it in the script folder.")
+    print("Please download the Default Cards bulk data jsonl file from https://scryfall.com/docs/api/bulk-data and place it in the script folder.")
     exit(1)
     
 print(f"Loading {metadata_filename}...")
-metadata_file = open(metadata_filename, "r")
-metadata = json.load(metadata_file)
-metadata_file.close()
 
 prices = {}
 art_indexes = {}
 always_with_artindex = ["Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes", "Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest", "Snow-Covered Wastes"]
 
-for object in metadata:
-    obj_type = object["object"]
-    if obj_type == "card":
-        card_name = object["name"]
-        # split cards use //, other cards with two sides (e.g. DFC) use the front face in Forge
-        if card_name.find("//") != -1 and object["layout"] != "split":
-            card_name = card_name.split("//")[0].strip()
-        card_set = object["set"].upper()
-        card_cn = object["collector_number"]
-        card_foil_only = object["foil"] and not object["nonfoil"]
-        card_price = None
-        if object["prices"]["usd"] == None and object["prices"]["usd_foil"] == None and object["prices"]["usd_etched"] == None and object["prices"]["eur"] == None and object["prices"]["eur_foil"] == None and object["prices"]["tix"] == None:
+with open(metadata_filename, "r") as metadata_file:
+    for line in metadata_file:
+        # Skip empty lines
+        if not line.strip():
             continue
-        if not card_foil_only and object["prices"]["usd"] != None:
-            card_price = object["prices"]["usd"].replace(".", "")
-        elif object["prices"]["usd_foil"] != None:
-            card_price = object["prices"]["usd_foil"].replace(".", "")
-        elif object["prices"]["usd_etched"] != None:
-            card_price = object["prices"]["usd_etched"].replace(".", "")
-        elif object["prices"]["eur"] != None:
-            card_price = object["prices"]["eur"].replace(".", "")
-        elif object["prices"]["eur_foil"] != None:
-            card_price = object["prices"]["eur_foil"].replace(".", "")
-        elif object["prices"]["tix"] != None:
-            card_price = object["prices"]["tix"].replace(".", "")
-        if card_price == None:
+            
+        try:
+            object = json.loads(line.strip())
+        except json.JSONDecodeError:
+            print(f"Warning: Could not parse line: {line[:100]}...")
             continue
-        elif card_price.startswith("00"):
-            card_price = card_price[2:]
-        elif card_price.startswith("0"):
-            card_price = card_price[1:]
-    # tweak the card set to the Forge notation
-    if card_set in set_map:
-        card_set = set_map[card_set]
-    # add a key to the prices dictionary, per set
-    if not card_set in prices:
-        prices[card_set] = {}
-    if not card_set in art_indexes:
-        art_indexes[card_set] = {}
-    if card_name not in art_indexes[card_set]:
-        art_indexes[card_set][card_name] = 1
-    else:
-        art_indexes[card_set][card_name] += 1
-    if card_name in prices[card_set] or card_name in always_with_artindex:
-        card_name += f" ({art_indexes[card_set][card_name]})"
-    prices[card_set][card_name] = card_price
+            
+        obj_type = object["object"]
+        if obj_type == "card":
+            card_name = object["name"]
+            # split cards use //, other cards with two sides (e.g. DFC) use the front face in Forge
+            if card_name.find("//") != -1 and object["layout"] != "split":
+                card_name = card_name.split("//")[0].strip()
+            card_set = object["set"].upper()
+            card_cn = object["collector_number"]
+            card_foil_only = object["foil"] and not object["nonfoil"]
+            if "promo_types" in object:
+                # Ignore the serialized (collector number ends in -z) cards for now, not included in Forge and cause pricing issues.
+                card_promo_types = object["promo_types"]
+                if "serialized" in card_promo_types:
+                    # print("-- Serialized: " + card_cn + " -- " + card_name + " | " + card_set + ", ignoring.")
+                    continue
+            card_price = None
+            if object["prices"]["usd"] == None and object["prices"]["usd_foil"] == None and object["prices"]["usd_etched"] == None and object["prices"]["eur"] == None and object["prices"]["eur_foil"] == None and object["prices"]["tix"] == None:
+                continue
+            if not card_foil_only and object["prices"]["usd"] != None:
+                card_price = object["prices"]["usd"].replace(".", "")
+            elif object["prices"]["usd_foil"] != None:
+                card_price = object["prices"]["usd_foil"].replace(".", "")
+            elif object["prices"]["usd_etched"] != None:
+                card_price = object["prices"]["usd_etched"].replace(".", "")
+            elif object["prices"]["eur"] != None:
+                card_price = object["prices"]["eur"].replace(".", "")
+            elif object["prices"]["eur_foil"] != None:
+                card_price = object["prices"]["eur_foil"].replace(".", "")
+            elif object["prices"]["tix"] != None:
+                card_price = object["prices"]["tix"].replace(".", "")
+            if card_price == None:
+                continue
+            elif card_price.startswith("00"):
+                card_price = card_price[2:]
+            elif card_price.startswith("0"):
+                card_price = card_price[1:]
+        # tweak the card set to the Forge notation
+        if card_set in set_map:
+            card_set = set_map[card_set]
+        # add a key to the prices dictionary, per set
+        if not card_set in prices:
+            prices[card_set] = {}
+        if not card_set in art_indexes:
+            art_indexes[card_set] = {}
+        if card_name not in art_indexes[card_set]:
+            art_indexes[card_set][card_name] = 1
+        else:
+            art_indexes[card_set][card_name] += 1
+        if card_name in prices[card_set] or card_name in always_with_artindex:
+            card_name += f" ({art_indexes[card_set][card_name]})"
+        prices[card_set][card_name] = card_price
 
 # Merge with the previous price list if appropriate
 if os.path.exists("all-prices.prev"):
@@ -123,4 +137,4 @@ for set in sorted_prices.keys():
             qualified_name += " (1)"
         print(qualified_name + "|" + set + "=" + sorted_cards[name])
         output.write(f"{qualified_name}|{set}={sorted_cards[name]}\n")
-output.close() 
+output.close()

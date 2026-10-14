@@ -39,7 +39,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(mindstone.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -69,7 +69,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(dragon.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -103,7 +103,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(bears.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -135,7 +135,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertTrue(sa.getHostCard().isCreature());
 

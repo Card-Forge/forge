@@ -83,13 +83,12 @@ public class TokenAi extends SpellAbilityAi {
 
         // X-cost spells
         if (tokenHasX) {
-            int x = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
+            int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
             if (source.getSVar("X").equals("Count$Converge")) {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
             }
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
                 if ("RandomPT".equals(sa.getParam("AILogic"))) {
@@ -151,9 +150,8 @@ public class TokenAi extends SpellAbilityAi {
             if (actualToken.getType().hasSubtype("Role")) {
                 if (tgtRoleAura(ai, sa, actualToken, false)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {

@@ -10,6 +10,7 @@ Chance Encounter|The Accident|This victory was brought to you by a series of for
 Chance for Glory|The Big-Time|Sorry, you used it up.
 Coalition Victory|The Teamwork|Let's all be friends!
 Darksteel Reactor|The Machine|What are you going to do with all this power? Whatever you want!
+Doctor Doom, Unrivaled|No More Rivals|Finally... finally!
 Door to Nothingness|The Door|And behind door #2 is...
 Enduring Angel|Unknown Error|What? How did you even...?
 Epic Struggle|The Army|Let's just trample them into the ground already!

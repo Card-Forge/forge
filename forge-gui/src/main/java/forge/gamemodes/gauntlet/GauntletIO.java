@@ -55,6 +55,7 @@ public class GauntletIO {
         xStream.allowTypeHierarchy(SortedSet.class);
         xStream.allowTypeHierarchy(Deck.class);
         xStream.allowTypeHierarchy(TreeMap.class);
+        xStream.allowTypeHierarchy(LinkedHashMap.class);
         xStream.allowTypeHierarchy(List.class);
         xStream.allowTypeHierarchy(DeckSection.class);
         //bypass invalid reference to allow loading earlier saves of xstream

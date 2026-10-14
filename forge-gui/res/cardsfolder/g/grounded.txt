@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAITgts:Creature.withFlying
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 Oracle:Enchant creature\nEnchanted creature loses flying.

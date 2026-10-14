@@ -1,0 +1,11 @@
+Name:Autumn Willow, Harmony
+ManaCost:3 G G
+Types:Legendary Creature Avatar
+PT:3/3
+K:Hexproof
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 green Forest Dryad land creature token. (It's affected by summoning sickness.)
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_forest_dryad | TokenOwner$ You
+T:Mode$ TapsForMana | ValidCard$ Land.Creature | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land creature for mana, add an additional {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G
+DeckHas:Ability$Token
+Oracle:Hexproof\nWhen Autumn Willow enters, create a 1/1 green Forest Dryad land creature token. (It's affected by summoning sickness.)\nWhenever you tap a land creature for mana, add an additional {G}.

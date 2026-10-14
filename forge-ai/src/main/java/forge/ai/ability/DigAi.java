@@ -76,7 +76,6 @@ public class DigAi extends SpellAbilityAi {
                 if (numCards <= 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                root.setXManaCostPaid(numCards);
             }
         }
 

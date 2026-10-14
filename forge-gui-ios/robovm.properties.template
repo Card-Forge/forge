@@ -1,0 +1,11 @@
+# Marketing version (CFBundleShortVersionString) — keep in sync with the pom.xml versionCode.
+app.version=2.0.14
+app.id=@APP_ID@
+app.mainclass=forge.ios.Main
+app.executable=forge.ios.Main
+app.build=1
+app.name=Forge
+
+# Set timezone before JVM initialization to avoid iOS sandbox violations.
+# Placeholder only: Main.java replaces it with the device timezone at startup.
+robovm.jvmArgs=-Duser.timezone=UTC

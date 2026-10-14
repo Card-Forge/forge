@@ -38,7 +38,7 @@ public abstract class RarityParser {
         } else {
             predicate = new PredicateRarityCheck(ComparableOp.EQUALS, rarity);
         }
-        
+
         return predicate;
     }
 
@@ -60,7 +60,7 @@ public abstract class RarityParser {
         } else {
             predicate = new PredicateRarityCheck(ComparableOp.GREATER_THAN, rarity);
         }
-        
+
         return predicate;
     }
 
@@ -75,7 +75,7 @@ public abstract class RarityParser {
         if (rarity == null || rarity.equals(CardRarity.Special)) {
             return null;
         }
-        
+
         return new PredicateRarityCheck(ComparableOp.GT_OR_EQUAL, rarity);
     }
 
@@ -97,7 +97,7 @@ public abstract class RarityParser {
         } else {
             predicate = new PredicateRarityCheck(ComparableOp.LESS_THAN, rarity);
         }
-        
+
         return predicate;
     }
 
@@ -160,36 +160,12 @@ public abstract class RarityParser {
 
         @Override
         public boolean test(final PaperCard card) {
-            return doCheck(RARITY_RANK.get(card.getRarity()), RARITY_RANK.get(rarity));
+            return op.apply(RARITY_RANK.get(card.getRarity()), RARITY_RANK.get(rarity));
         }
 
         private PredicateRarityCheck(final ComparableOp op, final CardRarity rarity) {
             this.op = op;
             this.rarity = rarity;
-            
-        }
-
-        private boolean doCheck(final Integer op1, final Integer op2) {
-            if (op1 == null || op2 == null) {
-                return false;
-            }
-
-            switch (this.op) {
-                case EQUALS:
-                    return op1 == op2;
-                case GREATER_THAN:
-                    return op1 > op2;
-                case GT_OR_EQUAL:
-                    return op1 >= op2;
-                case LESS_THAN:
-                    return op1 < op2;
-                case LT_OR_EQUAL:
-                    return op1 <= op2;
-                case NOT_EQUALS:
-                    return op1 != op2;
-                default:
-                    return false;
-                }
         }
     }
 }

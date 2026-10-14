@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Phyrexian Wizard
 PT:1/3
 K:Flying
-S:Mode$ Continuous | Affected$ Incubator.token+YouCtrl | AddType$ Food,Blood,Clue,Treasure,Powerstone | AddAbility$ FoodSac & BloodSac & ClueSac & TreasureSac & PowerstoneTap | Description$ All Incubator tokens you control become Food, Blood, Clue, Treasure, and Powerstone in addition to their other types, and have the respective abilities of those tokens. (Once they transform, they're no longer Incubator tokens.)
+S:Mode$ Continuous | Affected$ Incubator.token+YouCtrl | AddType$ Food,Blood,Clue,Treasure,Powerstone | AddAbility$ FoodSac & BloodSac & ClueSac & TreasureSac & PowerstoneTap | Description$ All Incubator tokens you control are Food, Blood, Clue, Treasure, and Powerstone in addition to their other types, and have the respective abilities of those tokens. (Once they transform, they're no longer Incubator tokens.)
 SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:BloodSac:AB$ Draw | Cost$ 1 T Discard<1/Card> Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:ClueSac:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.

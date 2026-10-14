@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,13 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
 public class PlayEffect extends SpellAbilityEffect {
+
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        // cards are played from hand unless ValidZone says otherwise
+        return zoneParamIsLibrary(sa, "ValidZone");
+    }
+
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -116,9 +124,11 @@ public class PlayEffect extends SpellAbilityEffect {
                         .map(name -> name.replace(";", ","))
                         .map(cardDb::getUniqueByName);
             } else if (valid.equalsIgnoreCase("sorcery")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 cards = cardDb.streamUniqueCards()
                         .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY));
             } else if (valid.equalsIgnoreCase("instant")) {
+                StaticData.instance().ensureAllCardsLoaded();
                 cards = cardDb.streamUniqueCards()
                         .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT));
             } else {
@@ -182,14 +192,15 @@ public class PlayEffect extends SpellAbilityEffect {
             return;
         }
 
+        Predicate<SpellAbility> validSA;
         if (sa.hasParam("ValidSA")) {
-            final String valid[] = sa.getParam("ValidSA").split(",");
-            final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, source, sa))).collect(Collectors.toList());
-            if (!invalid.isEmpty())
-                tgtCards.removeAll(invalid);
+            validSA = SpellAbilityPredicates.isValid(sa.getParam("ValidSA").split(","), controller, source, sa);
+            tgtCards.removeIf(c -> AbilityUtils.getSpellsFromPlayEffect(c, controller, CardStateName.Original, false, validSA).isEmpty());
             if (tgtCards.isEmpty()) {
                 return;
             }
+        } else {
+            validSA = null;
         }
 
         int amount = 1;
@@ -283,11 +294,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 state = CardStateName.Backside;
             }
 
-            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost);
-            if (sa.hasParam("ValidSA")) {
-                final String valid[] = sa.getParam("ValidSA").split(",");
-                sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
-            }
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost, validSA);
 
             if (altCostManaCost) {
                 sas.removeIf(sp -> sp.getPayCosts().getCostMana().getMana().isNoCost());

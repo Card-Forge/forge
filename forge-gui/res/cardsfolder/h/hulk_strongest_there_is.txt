@@ -1,5 +1,5 @@
 Name:Hulk, Strongest There Is
-ManaCost:3 G G
+ManaCost:2 G G
 Types:Legendary Creature Gamma Berserker Hero
 PT:3/3
 K:Trample

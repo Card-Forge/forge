@@ -349,6 +349,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         this.name  = name;
         this.date = parseDate(date);
         this.foilType = foil;
+        // Only the file-parsing path assigned these, so the hardcoded UNKNOWN edition
+        // built through this constructor left them null and getScryfallCode() threw an
+        // NPE on any pass over all editions. Cards land in UNKNOWN whenever they are not
+        // assigned to a set, which happens in practice. Defaults mirror the parser's.
+        this.scryfallCode = code;
+        this.tokensCode = "T" + code;
+        this.cardsLanguage = "en";
     }
 
     private static Date parseDate(String date) {

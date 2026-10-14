@@ -114,7 +114,6 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
         btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
         btnSelectFormat.setVisible(newVal == StartingPoolType.Casual);
 
-
         final boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
         lblCustomDeck.setVisible(usesDeckList);
         cbxCustomDeck.setVisible(usesDeckList);
@@ -164,12 +163,8 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
         }
     }
 
-    /**
-     * Constructor.
-     */
     @SuppressWarnings("unchecked")
     VSubmenuQuestStart() {
-
         lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         final JXButtonPanel difficultyPanel = new JXButtonPanel();

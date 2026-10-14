@@ -144,7 +144,7 @@ public class CardFactory {
         }
 
         copySA.setCopied(true);
-        // 707.10b
+        // CR 707.10b
         if (targetSA.isAbility()) {
             copySA.setOriginalAbility(targetSA);
         }
@@ -596,9 +596,8 @@ public class CardFactory {
             }
 
             // CR 208.3 A noncreature object not on the battlefield has power or toughness only if it has a power and toughness printed on it.
-            // currently only LKI can be trusted?
             if ((cause.hasParam("SetPower") || cause.hasParam("SetToughness")) &&
-                (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).getBasePowerString() != null))) {
+                    (state.getType().isCreature() || (originalState != null && in.getOriginalState(originalState.getStateName()).hasPrintedPT()))) {
                 if (cause.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(host, cause.getParam("SetPower"), cause));
                 }

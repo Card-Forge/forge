@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -108,7 +109,7 @@ public class AdventureQuestData implements Serializable {
     public AdventureQuestData()
     {
         declinedDialog = new DialogData();
-        declinedDialog.text = "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.";
+        declinedDialog.text = Forge.getLocalizer().getMessage("advDefaultDeclinedDialog");
         DialogData dismiss = new DialogData();
         dismiss.name = "(Catching the not so subtle hint, you leave.)";
         declinedDialog.options = new DialogData[1];

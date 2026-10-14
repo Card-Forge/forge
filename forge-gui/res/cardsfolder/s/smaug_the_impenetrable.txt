@@ -1,0 +1,11 @@
+Name:Smaug the Impenetrable
+ManaCost:5 B R
+Types:Legendary Creature Dragon
+PT:8/7
+K:Flying
+K:Indestructible
+K:Haste
+T:Mode$ DamageDoneOnce | ValidSource$ Card | CombatDamage$ False | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME is dealt noncombat damage, create that many Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying, indestructible, haste\nWhenever Smaug is dealt noncombat damage, create that many Treasure tokens.

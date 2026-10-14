@@ -8,7 +8,7 @@ public interface KeywordWithCostInterface extends KeywordInterface {
 
     String getCostString();
 
-    default public String getTitle() {
+    default String getTitle() {
         StringBuilder sb = new StringBuilder();
         sb.append(getTitleWithoutCost());
         if (isComplexCost()) {
@@ -20,7 +20,7 @@ public interface KeywordWithCostInterface extends KeywordInterface {
         return sb.toString();
     }
 
-    default public String getTitleWithoutCost() {
+    default String getTitleWithoutCost() {
         return getKeyword().toString();
     }
 

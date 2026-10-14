@@ -259,6 +259,12 @@ public class FOptionPane extends FDialog {
         }
     }
 
+    public void setMessage(final String message) {
+        if (prompt != null) {
+            prompt.setText(message);
+        }
+    }
+
     protected boolean padAboveAndBelow() {
         return true;
     }

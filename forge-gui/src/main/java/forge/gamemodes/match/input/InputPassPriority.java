@@ -86,7 +86,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        if (!isAlreadyYielding()) {
+        if (!getController().isMacroActive() && !isAlreadyYielding()) {
             // Suppress one prompt after a yield ends — avoids "yielded → ended → yield again?" loop
             if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_AFTER_END)
                     && getController().getYieldController().didYieldJustEnd()) {
@@ -262,6 +262,12 @@ public class InputPassPriority extends InputSyncronizedBase {
             return;
         }
 
+        passPriority();
+    }
+
+    /** Distinct from clicking OK, which accepts a yield suggestion when one is on screen. */
+    public void passPriority() {
+        if (isFinished()) return;
         passPriority(() -> {
             getController().macros().addRememberedAction(new PassPriorityAction(
                     getController().getGame().getStack().isEmpty(),

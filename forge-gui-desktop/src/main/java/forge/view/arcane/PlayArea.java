@@ -805,7 +805,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             splitCardIds.add(panel.getCard().getId());
         }
         doLayout();
-        if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+        if (panel.getTappedAngle() != 0 && panel.getTappedAngle() != CardPanel.TAPPED_ANGLE) {
             return;
         }
         super.mouseLeftClicked(panel, evt);

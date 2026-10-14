@@ -13,7 +13,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
-import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
@@ -27,14 +26,11 @@ import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.trackable.Tracker;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -64,7 +60,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
-    private boolean codecTrackerSet = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private volatile boolean resyncPending;
@@ -153,7 +148,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private void syncAndSend(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
         updateGameView();
-        sender.send(method, args);
+        // if this gets provided with new object views while more updates got chained (e.g. revealing what got bounced):
+        // the client may not be quick enough to replace it in the EDT before this passes IO lookup, so we take the safer route
+        sender.send(method, getForwarder().hasPendingZoneChange(args), args);
     }
 
     /**
@@ -295,12 +292,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
-        // Set codec tracker before any client protocol messages arrive.
-        // setGameView is called before openView, and the client can't respond
-        // until after openView — so the encoder/decoder are ready in time.
-        if (!codecTrackerSet && gameView != null && gameView.getTracker() != null) {
+        // Each game owns a Tracker and restarts card ids at 1, so client IdRefs must resolve
+        // against the current game's. A null view is a transient clear between games — leave
+        // the codec on the outgoing game so its in-flight messages still resolve.
+        if (gameView != null) {
             client.setCodecTracker(gameView.getTracker(), syncManager.getConsumerId());
-            codecTrackerSet = true;
         }
         updateGameView();
     }
@@ -355,7 +351,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void alertUser() { send(ProtocolMethod.alertUser); }
+    public void alertUser() {
+        send(ProtocolMethod.alertUser);
+    }
 
     @Override
     public void enableOverlay() {
@@ -380,21 +378,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void hideManaPool(final PlayerView player) {
         send(ProtocolMethod.hideManaPool, player);
-    }
-
-    @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        return syncAndSendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
-    }
-
-    @Override
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        syncAndSend(ProtocolMethod.hideZones, controller, zonesToUpdate);
-    }
-
-    @Override
-    public void updateShards(Iterable<PlayerView> shardsUpdate) {
-        //mobile adventure local game only..
     }
 
     @Override
@@ -506,6 +489,17 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
+    public void showRevealedCards(final Iterable<CardView> cards) {
+        // the sync carries the temporary visibility granted by tempShowCards, so the client sees card faces
+        syncAndSend(ProtocolMethod.showRevealedCards, cards);
+    }
+
+    @Override
+    public void hideRevealedCards() {
+        send(ProtocolMethod.hideRevealedCards);
+    }
+
+    @Override
     public void setWeaklySelectable(final Iterable<CardView> cards) {
         updateGameView();
         send(ProtocolMethod.setWeaklySelectable, cards);
@@ -520,16 +514,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
         // TODO Auto-generated method stub
-    }
-
-    @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players, boolean backupLastZones) {
-        return syncAndSendAndWait(ProtocolMethod.openZones, controller, zones, players, backupLastZones);
-    }
-
-    @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        syncAndSend(ProtocolMethod.restoreOldZones, playerView, playerZoneUpdates);
     }
 
     @Override

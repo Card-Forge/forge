@@ -4,4 +4,4 @@ Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell you don't control. | ValidTgts$ Card.YouDontCtrl | SpellDescription$ Counter target spell you don't control.
 K:Overload:1 U U R
-Oracle:This spell can't be countered.\nCounter target spell you don't control.\nOverload {1}{U}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:This spell can't be countered.\nCounter target spell you don't control.\nOverload {1}{U}{U}{R} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

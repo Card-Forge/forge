@@ -71,6 +71,6 @@ public class AudioMusic implements IAudioMusic {
 
     @Override
     public boolean isPlaying() {
-        return music.isPlaying();
+        return music != null && music.isPlaying();
     }
 }

@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -78,6 +79,7 @@ public class DeckSelectScene extends UIScene {
         for (int i = count; i >= 0; i--){
             clearDeckButton(i);
         }
+        clearSelectable();
         layout.clearChildren();
         buttons.clear();
         labels.clear();
@@ -197,8 +199,9 @@ public class DeckSelectScene extends UIScene {
 
         button.setText(Current.player().getDeck(i).getName());
         Label label = Controls.newLabel(name);
-        layout.add(Controls.newLabel(name)).pad(2);
+        layout.add(label).pad(2);
         layout.add(button).fill(true, false).expand(true, false).align(Align.left).expandX().pad(2);
+
         buttons.put(i, button);
         labels.put(i, label);
         addToSelectable(new Selectable(button));
@@ -210,9 +213,15 @@ public class DeckSelectScene extends UIScene {
     public boolean select(int slot) {
         currentSlot = slot;
 
-        for (IntMap.Entry<TextraButton> butt : new IntMap.Entries<TextraButton>(buttons)) {
-            butt.value.setColor(defColor);
+        IntMap.Keys keys = buttons.keys();
+        while (keys.hasNext) {
+            int key = keys.next();
+            TextraButton button = buttons.get(key);
+            if (button != null) {
+                button.setColor(defColor);
+            }
         }
+
         if (buttons.containsKey(slot)) {
             TextraButton button = buttons.get(slot);
             button.setColor(Color.RED);
@@ -264,7 +273,12 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        DeckEditScene editScene = DeckEditScene.getInstance();
+        TextureRegion textureRegion;
+        if (Forge.lastPreview != null)
+            textureRegion = new TextureRegion(Forge.lastPreview);
+        else
+            textureRegion = getUIBackground();
+        DeckEditScene editScene = DeckEditScene.getInstance(textureRegion);
         editScene.loadEvent(null);
         Forge.switchScene(editScene);
     }

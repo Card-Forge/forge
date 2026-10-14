@@ -25,7 +25,11 @@ public class StaticAbilityAdditionalActivations {
                     continue;
                 }
                 if (stAb.hasParam("MinLimit")) {
-                    result = Math.max(result, AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("MinLimit"), stAb));
+                    int min = AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("MinLimit"), stAb);
+                    if (min == -1) {
+                        return Integer.MAX_VALUE;
+                    }
+                    result = Math.max(result, min);
                 }
                 if (stAb.hasParam("Additional")) {
                     additional += AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("Additional"), stAb);

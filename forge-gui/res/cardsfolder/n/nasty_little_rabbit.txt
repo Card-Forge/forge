@@ -1,0 +1,8 @@
+Name:Nasty Little Rabbit
+ManaCost:G
+Types:Creature Rabbit
+PT:1/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Creature.YouCtrl+powerGE4 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Ferocious — At the beginning of combat on your turn, if you control a creature with power 4 or greater, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Ferocious — At the beginning of combat on your turn, if you control a creature with power 4 or greater, put a +1/+1 counter on this creature.

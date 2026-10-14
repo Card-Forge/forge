@@ -1,0 +1,11 @@
+Name:Ajani Resolute
+ManaCost:1 W
+Types:Legendary Planeswalker Ajani
+Loyalty:2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a loyalty counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1
+A:AB$ GainLife | Cost$ SubCounter<0/LOYALTY> | LifeAmount$ 1 | Planeswalker$ True | SpellDescription$ You gain 1 life.
+A:AB$ Token | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | TokenScript$ ajanis_pridemate | SpellDescription$ Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with "Whenever you gain life, put a +1/+1 counter on this token."
+A:AB$ Effect | Cost$ SubCounter<10/LOYALTY> | Name$ Emblem — Ajani Resolute | StaticAbilities$ STPump | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ NeedCreatures:3 | SpellDescription$ You get an emblem with "Creatures you control get +2/+2."
+SVar:STPump:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control get +2/+2.
+Oracle:Whenever you gain life, put a loyalty counter on Ajani.\n[0]: You gain 1 life.\n[-4]: Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with "Whenever you gain life, put a +1/+1 counter on this token."\n[-10]: You get an emblem with "Creatures you control get +2/+2."

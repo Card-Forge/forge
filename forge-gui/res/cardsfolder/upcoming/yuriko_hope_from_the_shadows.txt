@@ -1,0 +1,11 @@
+Name:Yuriko, Hope from the Shadows
+ManaCost:U
+Types:Legendary Creature Human Ninja
+PT:1/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBSurveil
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -X | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of cards in your graveyard.
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:X:Count$ValidGraveyard Card.YouOwn
+Oracle:Flash\nWhen Yuriko enters, choose one —\n• Target creature gets -X/-0 until end of turn, where X is the number of cards in your graveyard.\n• Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

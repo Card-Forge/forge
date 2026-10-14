@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted creature has indestructible.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Indestructible | Description$ Enchanted creature has indestructible.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters, you may attach CARDNAME to that creature.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
 AI:RemoveDeck:All

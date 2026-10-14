@@ -5,10 +5,10 @@ K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Temur,Sultai | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Temur or Sultai.
 SVar:Temur:DB$ Pump | SpellDescription$ Temur
 SVar:Sultai:DB$ Pump | SpellDescription$ Sultai
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeTemur | AddTrigger$ TemurTrigger | Description$ • Temur — Whenever you cast an instant or sorcery spell, target player mills four cards.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeTemur | AddTrigger$ TemurTrigger | Description$ • Temur — Whenever you cast an instant or sorcery spell, target player mills four cards.
 SVar:TemurTrigger:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you cast an instant or sorcery spell, target player mills four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeSultai | AddStaticAbility$ SultaiStatic | Description$ • Sultai — You may play lands from your graveyard.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeSultai | AddStaticAbility$ SultaiStatic | Description$ • Sultai — You may play lands from your graveyard.
 SVar:SultaiStatic:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
 DeckHas:Ability$Graveyard
 DeckHints:Type$Instant|Sorcery

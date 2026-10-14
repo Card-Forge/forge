@@ -2,7 +2,7 @@ Name:Sand Strangler
 ManaCost:3 R
 Types:Creature Beast
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | Desert$ True | TriggerDescription$ When CARDNAME enters, if you control a Desert or there is a Desert card in your graveyard, you may have CARDNAME deal 3 damage to target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | PresentZone$ Battlefield,Graveyard | IsPresent$ Desert | PresentPlayer$ You | TriggerDescription$ When CARDNAME enters, if you control a Desert or there is a Desert card in your graveyard, you may have CARDNAME deal 3 damage to target creature.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 3
 SVar:PlayMain1:TRUE
 DeckHints:Type$Desert

@@ -1,5 +1,6 @@
 package forge.gui.card;
 
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
@@ -364,11 +365,11 @@ public class CardDetailUtil {
 
         // counter text
         if (card.getCounters() != null) {
-            for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {
-                if (c.getValue() != 0) {
+            for (final Multiset.Entry<CounterType> c : card.getCounters().entrySet()) {
+                if (c.getCount() != 0) {
                     area.append("\n");
-                    area.append(c.getKey().getName()).append(" counters: ");
-                    area.append(c.getValue());
+                    area.append(c.getElement().getName()).append(" counters: ");
+                    area.append(c.getCount());
                 }
             }
         }
@@ -655,6 +656,31 @@ public class CardDetailUtil {
             area.append("\n\n");
             area.append("Owner: ").append(card.getOwner().toString());
         }
+
+        if (card.hasAlternateState() && state.getState() == CardStateName.Original) {
+            if (card.getAlternateState().getType().hasSubtype("Adventure")) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblAdventure") + " — " + getAlternateStateDesc(card));
+            }
+
+            if (card.getAlternateState().getType().hasSubtype("Omen")) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblOmen") + " — " + getAlternateStateDesc(card));
+            }
+
+            if (card.hasPreparedSpell()) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblPrepared") + " — " + getAlternateStateDesc(card));
+            }
+        }
+
         return area.toString().trim();
+    }
+
+    protected static String getAlternateStateDesc(CardView card) {
+        CardStateView state = card.getAlternateState();
+        return state.getName() + " "
+                + state.getManaCost().toString() + ": "
+                + (card.getId() > 0 ? state.getAbilityText() : state.getOracleText());
     }
 }

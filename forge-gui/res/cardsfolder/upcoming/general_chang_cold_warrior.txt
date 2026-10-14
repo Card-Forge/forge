@@ -1,0 +1,8 @@
+Name:General Chang, Cold Warrior
+ManaCost:B
+Types:Legendary Creature Klingon Warrior Officer
+PT:1/2
+A:AB$ PutCounterAll | Cost$ 1 Sac<1/Creature> | ValidCards$ Klingon.YouCtrl | ValidCardsDesc$ Klingon you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each Klingon you control.
+DeckHas:Ability$Counters
+DeckHints:Type$Klingon
+Oracle:{1}, Sacrifice a creature: Put a +1/+1 counter on each Klingon you control.

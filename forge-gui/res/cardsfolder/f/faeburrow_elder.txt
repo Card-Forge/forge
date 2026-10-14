@@ -3,7 +3,7 @@ ManaCost:1 G W
 Types:Creature Treefolk Druid
 PT:0/0
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each color among permanents you control.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each color among permanents you control.
 SVar:X:Count$Valid Permanent.YouCtrl$Colors
 A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmong_Valid Permanent.YouCtrl | SpellDescription$ For each color among permanents you control, add one mana of that color.
 SVar:NoZeroToughnessAI:True

@@ -13,6 +13,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.Collections;
@@ -52,7 +53,7 @@ public class CharmAi extends SpellAbilityAi {
         } else {
             // only randomize if not all possible together
             if (num < choices.size()) {
-                Collections.shuffle(choices);
+                Collections.shuffle(choices, MyRandom.getRandom());
             }
 
             /*
@@ -119,8 +120,8 @@ public class CharmAi extends SpellAbilityAi {
         for (AbilitySub sub : choices) {
             handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
-            // TODO refactor to obtain the AiAbilityDecision instead, then we can check all to sort by value
-            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
+            // TODO instead of shuffling check all to sort by AiAbilityDecision rating
+            if (SpellApiToAi.Converter.get(sub).canPlayWithSubs(ai, sub).willingToPlay() && canPayForAdditionalMode(sa, chosen, sub, ai)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
                     if (pawprintAmount + curPawprintAmount > pawprintLimit) {
@@ -282,7 +283,7 @@ public class CharmAi extends SpellAbilityAi {
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
-            } else if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+            } else if (SpellApiToAi.Converter.get(sub).canPlayWithSubs(ai, sub).willingToPlay()) {
                 chosen.add(sub);
                 if (chosen.size() == min) {
                     break; // enough choices

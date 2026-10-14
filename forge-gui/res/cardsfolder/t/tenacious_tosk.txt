@@ -1,0 +1,8 @@
+Name:Tenacious Tosk
+ManaCost:3 G
+Types:Creature Tosk Rogue
+PT:4/4
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:This creature can't be blocked by more than one creature.\nWhenever this creature deals combat damage to a player, put a +1/+1 counter on it.

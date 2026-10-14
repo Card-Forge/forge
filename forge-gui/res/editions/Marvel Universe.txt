@@ -33,7 +33,7 @@ ScryfallCode=MAR
 25 M Relentless Assault @Federico Vicentini & Alejandro Sánchez
 26 M Savage Beating @Todd McFarlane
 27 M Shock @John Romita Sr.
-28 M Thrill of Possibility @Dave Rapoza
+28 M Thrill of Possibility @David Rapoza
 29 M Unexpected Windfall @John Romita Sr.
 30 M Winds of Change @Ron Frenz & Klaus Janson
 31 M Arachnogenesis @Todd McFarlane
@@ -46,7 +46,7 @@ ScryfallCode=MAR
 38 M Tangle @Humberto Ramos & Edgar Delgado
 39 M Alibou, Ancient Witness @Michael Turner & Mark Roslan ${"flavorName": "Iron Spider, Civil Warrior"}
 40 M Terminate @Mark Bagley & Randy Emberlin
-41 M Archangel of Thune @Jamie McKelvie & Jordie Bellair ${"flavorName": "Heaven-Sent Marvel"}
+41 M Archangel of Thune @Jamie McKelvie & Jordie Bellaire ${"flavorName": "Heaven-Sent Marvel"}
 42 M Concerted Effort @Jack Kirby
 43 M Don't Move @John Byrne
 44 M Ephemerate @Mateus Manhanini

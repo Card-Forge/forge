@@ -51,6 +51,9 @@ public class Config {
 
     private final FolderDeckCatalog preconDeckCatalog = new FolderDeckCatalog("decks/starter/precon/");
     private final FolderDeckCatalog commanderPreconDeckCatalog = new FolderDeckCatalog("decks/starter/commanderprecon/");
+    private static final StringBuilder stringBuilder = new StringBuilder(256);
+    private static final HashMap<String, String> langPathsMap = new HashMap<>(512);
+
 
     static public Config instance() {
         if (currentConfig == null)
@@ -60,12 +63,11 @@ public class Config {
 
     private Config() {
         String path = resPath();
-        FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName));
+        FilenameFilter planesFilter = (file, s) -> !s.contains(".") && !s.equals(commonDirectoryName);
 
-        adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
+        adventures = new File(GuiBase.isMobile() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
         try {
             settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_ADVENTURE_DIR + "settings.json"));
-
         } catch (Exception e) {
             settingsData = new SettingData();
         }
@@ -102,7 +104,6 @@ public class Config {
         if (settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
             settingsData.cardTooltipAdjLandscape = 1f;
 
-
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
         commonPrefix = resPath() + "/res/adventure/" + commonDirectoryName + "/";
@@ -120,12 +121,15 @@ public class Config {
             e.printStackTrace();
             configData = new ConfigData();
         }
-
     }
 
     private String resPath() {
-
-        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";
+        // Android/iOS: resources live at ASSETS_DIR (extracted storage / app bundle);
+        // the desktop-relative "./res" probes below never match there
+        if (GuiBase.isMobile()) {
+            return ForgeConstants.ASSETS_DIR;
+        }
+        return Files.exists(Paths.get("./res")) ? "./" : Files.exists(Paths.get("./forge-gui/")) ? "./forge-gui/" : "../forge-gui";
     }
 
     public String getPlanePath(String plane) {
@@ -194,12 +198,50 @@ public class Config {
         return prefix;
     }
 
+    public String getLang() {
+        return Lang;
+    }
+
     public String getFilePath(String path) {
         return prefix + path;
     }
 
     public String getCommonFilePath(String path) {
         return commonPrefix + path;
+    }
+
+    private String langFilePath(String fullPath, String rootPrefix) {
+        if (fullPath == null || rootPrefix == null) return "";
+
+        // return compiled path locations if available
+        stringBuilder.setLength(0);
+        String cacheKey = stringBuilder.append(rootPrefix).append("|").append(fullPath).toString();
+
+        String cachedPath = langPathsMap.get(cacheKey);
+        if (cachedPath != null) {
+            return cachedPath;
+        }
+
+        // before it uses regex parsing that continually allocate short-lived character arrays so we use this and cache the result
+        int lastSlash = fullPath.lastIndexOf('/');
+        String baseName = lastSlash != -1 ? fullPath.substring(lastSlash + 1) : fullPath;
+
+        int lastDot = baseName.lastIndexOf('.');
+        String nameNoExt = lastDot != -1 ? baseName.substring(0, lastDot) : baseName;
+        String ext = lastDot != -1 ? baseName.substring(lastDot) : "";
+
+        stringBuilder.setLength(0);
+        String compiledPath = stringBuilder.append(rootPrefix)
+            .append("languages/")
+            .append(nameNoExt)
+            .append("-")
+            .append(Lang)
+            .append(ext)
+            .toString()
+            .replace("//", "/");
+
+        langPathsMap.put(cacheKey, compiledPath);
+        return compiledPath;
     }
 
     public FileHandle getFile(String path) {
@@ -210,12 +252,9 @@ public class Config {
         //not cached, look for resource
         System.out.print("Looking for resource " + path + "... ");
         String fullPath = (prefix + path).replace("//", "/");
-        String fileName = fullPath.replaceFirst("[.][^.]+$", "");
-        String ext = fullPath.substring(fullPath.lastIndexOf('.'));
-        String langFile = fileName + "-" + Lang + ext;
+        String langFile = langFilePath(fullPath, prefix);
 
         for (int iter = 1; iter <= 2; iter++) {
-
             if (Files.exists(Paths.get(langFile))) {
                 System.out.println("Found!");
                 Cache.put(path, new FileHandle(langFile));
@@ -227,8 +266,7 @@ public class Config {
             }
             //no local resource, check common resources
             fullPath = (commonPrefix + path).replace("//", "/");
-            fileName = fullPath.replaceFirst("[.][^.]+$", "");
-            langFile = fileName + "-" + Lang + ext;
+            langFile = langFilePath(fullPath, commonPrefix);
         }
         return Cache.get(path);
     }
@@ -238,17 +276,14 @@ public class Config {
     }
 
     public String[] colorIdNames() {
-
         return configData.colorIdNames;
     }
 
     public String[] colorIds() {
-
         return configData.colorIds;
     }
 
     public String[] starterEditionNames() {
-
         return configData.starterEditionNames;
     }
 
@@ -403,11 +438,9 @@ public class Config {
     }
 
     public void saveSettings() {
-
         Json json = new Json(JsonWriter.OutputType.json);
         FileHandle handle = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/settings.json");
         handle.writeString(json.prettyPrint(json.toJson(settingsData, SettingData.class)), false);
-
     }
 
     // --- Folder-backed starter deck support ---
@@ -466,8 +499,10 @@ public class Config {
                 } else {
                     deckName = nameNoExt;
                 }
+                stringBuilder.setLength(0);
+                String deckValuePath = stringBuilder.append(folderPath).append(filename).toString();
                 setMap.computeIfAbsent(setDisplayName, k -> new ArrayList<>())
-                        .add(new String[]{deckName, folderPath + filename});
+                    .add(new String[]{deckName, deckValuePath});
             }
             for (List<String[]> decks : setMap.values()) {
                 decks.sort(Comparator.comparing(a -> a[0]));

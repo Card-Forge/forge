@@ -39,7 +39,6 @@ public class LifeLoseAi extends SpellAbilityAi {
             } else if (root.getPayCosts() != null && root.getPayCosts().hasXInAnyCostPart()) {
                 // Set PayX here to maximum value.
                 amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(amount);
             }
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);

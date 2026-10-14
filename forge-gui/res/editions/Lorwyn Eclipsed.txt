@@ -54,7 +54,7 @@ Replace=0.004F Rare:fromSheet("ECL reversible shocklands")
 
 [Land]
 Base=BasicLand:fromSheet("ECL cards")
-Repalce=.1F BasicLand:fromSheet("ECL cards")+
+Replace=.1F BasicLand:fromSheet("ECL cards")+
 Replace=.4F fromSheet("ECL full art")
 Replace=.1F fromSheet("ECL full art")+
 

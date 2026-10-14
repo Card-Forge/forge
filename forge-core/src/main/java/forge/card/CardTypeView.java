@@ -17,6 +17,7 @@ public interface CardTypeView extends Serializable {
 
     Set<String> getCreatureTypes();
     Set<String> getLandTypes();
+    Set<String> getPlaneswalkerTypes();
     Set<String> getBattleTypes();
 
     boolean hasStringType(String t);

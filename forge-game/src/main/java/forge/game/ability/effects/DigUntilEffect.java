@@ -29,6 +29,11 @@ import com.google.common.collect.Maps;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 
+    @Override
+    public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */

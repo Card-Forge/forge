@@ -29,6 +29,8 @@ public class PlayerSprite extends CharacterSprite {
     private String lastBlockedRegionName = null;
     GameStage gameStage;
 
+    private final Vector2 prevDirection = new Vector2();
+
     public PlayerSprite(GameStage gameStage) {
         super(AdventurePlayer.current().spriteName());
         this.gameStage = gameStage;
@@ -101,12 +103,12 @@ public class PlayerSprite extends CharacterSprite {
         if (Forge.advFreezePlayerControls)
             return;
         direction.setLength(playerSpeed * delta * playerSpeedModifier * (playerSpeedEquipmentModifier + playerSpeedArchipelagoAdjustment));
-        Vector2 previousDirection = getMovementDirection().cpy();
+        prevDirection.set(direction);
         Scene previousScene = forge.Forge.getCurrentScene();
 
         if(!direction.isZero()) {
-            gameStage.prepareCollision(pos(),direction,boundingRect);
-            direction.set(gameStage.adjustMovement(direction,boundingRect));
+            gameStage.prepareCollision(pos(), direction, boundingRect);
+            direction.set(gameStage.adjustMovement(direction, boundingRect));
             moveBy(direction.x, direction.y);
 
             // Archipelago: Check if it's a legal biome for the player to be in, if not, refuse to update their position.
@@ -121,7 +123,7 @@ public class PlayerSprite extends CharacterSprite {
             // If the player is blocked by an obstacle, and they haven't changed scenes,
             // they will keep trying to move in that direction
             if (previousScene == forge.Forge.getCurrentScene()) {
-                direction.set(previousDirection.cpy());
+                direction.set(prevDirection);
             }
         }
     }

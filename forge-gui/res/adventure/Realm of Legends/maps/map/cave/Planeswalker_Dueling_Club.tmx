@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="103">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Interplanar Beacon&quot;, &quot;Onakke Oathkeeper&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlksKwlAMRUsnUpw4EdyAW+gSukTHLlWkhIZwk9z3Qwc9cJHS+k7T5FWn6cRjW/KM8jH34TFfjzA8L0fssU0G63zfufT2fvHWbKlX+oF6g2qKamW8ApqLqH8lvZaguYu8Xk062fkab5bXkofxIjJX6VxZF+ONfKXuiKjWWm9Ur16/N7q/6LN0P7LOHvPMhvkd+xdvC5nXPm/9nR5ejfeusF5Ue8kzbr1nvYdlvVFOu7bd0yN8yG3fI7/yIncr+r+fTc11NcjsP2778Tr7e3MEyHvC8QFjWGeX
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzllu0NwiAQhit+1OofExfwjxsYR3Cbdge/dQF/dhwXcAMn8YheuBCu5cjZmPgmT0KA8hRKCWaaZaZDNkW3vl/12npEw+GPFeO1eRiHze1Tb9tpG0Kfl8zB9/q5MfV+pF6LRpa5K8d+Fw1nindt+DHtOret9bPnyiuj40V3196Y+dJwXhvJ9+Wc+D4hNPZVyNu2Blpe6qHl+9xRF2+kXjoGJbSOoX6pXkkWs3C91Nu0n60jBOfV+I9ifTTf8MZE4m2KxIlJ8W7LLNsBe+AAHIETcAYuwLXkfSn7GZ/pVVAH9IEBMARGQA6MgaLS99bMGYRtXB+/PcYZc9/g3seP5j0H3d/0ThhwvnVDn0nC/aoNeo/RGE/qlZwJ/84LmyVuCw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9VztOAzEQ9S5FRDYSKdiFpAlIhBMgJArgWAnRNsAdAl0UcQ6ggBMABYRPwT2Q8Mj75KeJHQgBRhrtx573PGN7PG41jJnUjWnbZz9zemRV5Knu2p6t9qq2F/te2L5v9rle2cJe2tbsM82cllX/17rrD/xB5t+BJyq2IjnhY1wypic1TtjDDpIHsICB8Uj7MDHmjPQ8cf1lLBgzxgA7PVZICKukeHL/ndSYk47X3dT9R9zyiv814JuWEFZPzWOs72Nh+fKf6aQI82I+ZM3EeLdrxnStJm3Xjme3+g+R/4gN2rZq07wS5/WKc0A+39m2e6sfq8bcWLtbhT9cnlaI5hUswRAswXxI/foWf4W/VSl8H+Xennn1e4z3PfHjHOe+Ty/zfvK+wnyPqO8sCfEKZ4yX44y5fqOYz8MLbvCCO8aLvCF7UZ4cg+/yAlvzsug4Y37BX1Kc08j8ajkowgq5r9Yp88K3fuZzEHi3a1+vq5h0la3294h4dX6N8Wr8eXiR05k3lNOPV+x+X1BPVzxvj9aUCHI95y3xt9M0ZmNB3Wx6XpxH8LfMwrl6Fq/IvLyIM/zFOap9DvF+l0/zgpPnk+sHztW/GWfElH3jeoDX82/ycq0xUPPJ8h/rCnP+1+tZx5TXGWqiPZvrLq3N1YJ63XRYqK9Y+CyO1RtavspjsXpD82KuNW8IH98xbs6RP+WN1XVLuedM5qjrWDiHoL6CPlBfXnt8Po8jZ/UsLBG9nwW/RfcP/Oezc9/6cpE7PSy83YQUNRswgAu8PuWSVmP6/oExlTP2POdB3C1idwzsI5yDyCf6HXcD3ntacJcJtaNNt38CFcEZyg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFV71OAkEQHg4VTYBKjp9oBwgWNlqTaHwTbeERNILKT4wm1kYrX0R4Ea3Vil5n41xubti5O379ki+7s7fMd7O7s8wB6KhlAfazIROmxGca4Av5nfZtr78MjKkdZAB6GT8WL66LPMC76/MyP7uWzZe2fqdu0D5xg+87DTRfceeeF32eFYM25882wP0BwAPy8TC+7ljRdUo+E6WgzfmSA/hI+IzS5WdqpwDwmvO5W9DXRkLqRvkKy5VqGaCMrBANKsyusvFjN6jrUSJO7ozQ5xtySDQYMnvExk28BmG6RnMPY7zLhOtWRKzaHBO31PX6UpPnr4ahiFWbM2K6Gsx+9jPBWOX99YQ+HAsb7h8d0vDshiVHvN88s/eRZ8nYdTYW9e6LBD9nq9QdsLXnuldNgDbyBnlN7S0bM22HnrWJXWQP2W9G69aUdU60cJ+Q68g1ajfYmGmT9MwhppCbyK3WpA6/62Uur2qdB+J8L0NX5oyBPN+2/e2I/e1Sv0tsR+yvLX8lbPubFPubon6K6MTY36i6aZV59J+6y66vNExTE0Vh3vpKQ+9oMbpafTUrNF/eHcXzeJ76SsLmi9cb1ezkPTIrbHcSB/+/rdM9EqYf9zumxnzFnV8X//3yedzvM1lDaN8av3bNwoU=
+  </data>
+ </layer>
+ <layer id="8" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztyTENAAAIA7B5wSrC8UACV/s2AeBC9e4AAL4MUQkBTw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="218" y="436.917" width="48" height="20.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="174.75" y="113.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Interplanar Beacon&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Onakke Oathkeeper&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Sparkshaper Visionary&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Gatewatch Beacon&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/waypoint.tx" x="107.5" y="218"/>
+  <object id="66" template="../../../../common/maps/obj/waypoint.tx" x="357.75" y="217.25"/>
+  <object id="67" template="../../../../common/maps/obj/waypoint.tx" x="360" y="282.5"/>
+  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="108.5" y="282.5"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="130" y="296.628" width="236.8" height="23.144"/>
+  <object id="72" template="../../../../common/maps/obj/collision.tx" x="128.8" y="232.228" width="236.8" height="13.144"/>
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="219.5" y="217"/>
+  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="244.5" y="217"/>
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="220.5" y="279.5"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="245.5" y="280"/>
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="358.25" y="347.917"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="106.75" y="347.917"/>
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="218.75" y="344.917"/>
+  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="243.75" y="345.417"/>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="325" y="218.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venser's Journal&quot;, &quot;Venser, Corpse Puppet&quot;, &quot;Well of Ideas&quot;, &quot;Venser's Sliver&quot;]}"/>
+    <property name="enemy" value="Venser"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="76,66"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" x="199" y="399.25" width="80" height="11" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Three pairs of powerful mages clash in the halls ahead. Though their battles look fiercely lethal at first glance, furhter observation reveals that they are merely sparring. However, while not trying to kill each other, they are not treating each other lightly either, each seeming to be bitter rivals. As you head inside, it seems they may put aside their current grudges to try new opponents...
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="332" y="118.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come to participate in the thrill of battle against some of the multiverse's finest?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I have defeated all challengers.&quot;,
+					&quot;text&quot;: &quot;'Excellent work! A reward fit for a champion, then!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Zo-zu the Punisher&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;item&quot;, &quot;itemName&quot;: &quot;Cloud Keeper Armor&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;item&quot;, &quot;itemName&quot;: &quot;Interplanar Armor&quot;, &quot;count&quot;: 1 }       
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What's the deal with this place?&quot;,
+					&quot;text&quot;: &quot;'A group of planeswalkers have come here to hone their dueling skills with the hopes of escaping this forsaken realm. I'm not a planeswalker myself, I just like watching people fight! If you defeat them all, I've got a fine reward waiting for you!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Some other time.&quot;,
+					&quot;text&quot;: &quot;'We'll always have opponents eager for a challenge!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Zo-Zu the Punisher"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="140" y="216">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Circle of Flame&quot;, &quot;Blood Reckoning&quot;, &quot;Triumphant Getaway&quot;, &quot;Bloodchief Ascension&quot;]}"/>
+    <property name="enemy" value="Sifa Grent"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="75,65"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="140.5" y="280.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Freyalise's Charm&quot;, &quot;Freyalise's Winds&quot;, &quot;Song of Freyalise&quot;, &quot;The Mending of Dominaria&quot;, &quot;Llanowar Loamspeaker&quot;]}"/>
+    <property name="enemy" value="Freyalise"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="77,68"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="327" y="280.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sivitri Scarzam|LEG&quot;, &quot;Corroding Dragonstorm&quot;, &quot;Roiling Dragonstorm&quot;, &quot;Silumgar's Monument&quot;]}"/>
+    <property name="enemy" value="Sivitri"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="78,67"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="325.5" y="349">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Baird, Steward of Argive&quot;, &quot;Arena Rector&quot;, &quot;Castle|LEA&quot;, &quot;Kismet|LEG&quot;]}"/>
+    <property name="enemy" value="Worzel"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="84,81"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="136.5" y="346.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bad Moon|LEA&quot;, &quot;Bitterblossom|MOR&quot;, &quot;Drudge Spell&quot;, &quot;Dreadhorde Invasion&quot;]}"/>
+    <property name="enemy" value="Thomil"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="83,82"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="327" y="348">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Baird, Steward of Argive&quot;, &quot;Arena Rector&quot;, &quot;Castle|LEA&quot;]}"/>
+    <property name="enemy" value="Worzel"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="84,81"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="138" y="346">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bad Moon|LEA&quot;, &quot;Bitterblossom|MOR&quot;, &quot;Drudge Spell&quot;]}"/>
+    <property name="enemy" value="Thomil"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="83,82"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="141.5" y="280.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Freyalise's Charm&quot;, &quot;Freyalise's Winds&quot;, &quot;Song of Freyalise&quot;, &quot;The Mending of Dominaria&quot;]}"/>
+    <property name="enemy" value="Freyalise"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="77,68"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="327.5" y="280.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sivitri Scarzam|LEG&quot;, &quot;Corroding Dragonstorm&quot;, &quot;Roiling Dragonstorm&quot;]}"/>
+    <property name="enemy" value="Sivitri"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="78,67"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="324" y="218.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venser's Journal&quot;, &quot;Venser, Corpse Puppet&quot;, &quot;Well of Ideas&quot;]}"/>
+    <property name="enemy" value="Venser"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="76,66"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="140.5" y="217">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Circle of Flame&quot;, &quot;Blood Reckoning&quot;, &quot;Triumphant Getaway&quot;]}"/>
+    <property name="enemy" value="Sifa Grent"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="75,65"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
