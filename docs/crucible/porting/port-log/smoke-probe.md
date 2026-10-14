@@ -47,16 +47,16 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 30,572 |
-| refused      |  2,941 |
+| plays        | 30,630 |
+| refused      |  2,883 |
 | panicked     |      0 |
 | hung         |      0 |
 | placed       |    372 |
 | inconclusive |    193 |
 
-91.2% of the 33,513 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+91.4% of the 33,513 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 93.5% of 8,640 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 93.7% of 8,640 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
@@ -65,7 +65,6 @@ Largest refusal causes over the full corpus (cards blocked):
 |    49 | triggered `AB$`: `Cost$` not resolvable                |
 |    48 | sticker sheets are not ported                          |
 |    40 | `Animate`: `Triggers$` not resolvable                  |
-|    39 | `DealDamage`: `ReplaceDyingDefined$` not resolvable    |
 |    36 | `ChangeZone`: `DestinationAlternative$` not resolvable |
 |    36 | `Token`: `TokenAttacking$` not resolvable              |
 
