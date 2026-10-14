@@ -93,6 +93,7 @@ public final class CardFacePredicates {
             } else if (!input.getType().hasStringType(k[0])) {
                 return false;
             }
+
             if (k.length > 1) {
                 for (final String m : k[1].split("\\+")) {
                     if (m.contains("ManaCost")) {
@@ -102,7 +103,9 @@ public final class CardFacePredicates {
                         }
                     } else if (m.contains("cmcEQ")) {
                         int i = Integer.parseInt(m.substring(5));
-                        if (!hasCMC(input, i)) return false;
+                        if (!hasCMC(input, i)) {
+                            return false;
+                        }
                     } else if (!hasProperty(input, m)) {
                         return false;
                     }
@@ -113,9 +116,23 @@ public final class CardFacePredicates {
         }
 
         static protected boolean hasProperty(ICardFace input, final String v) {
-            if (v.startsWith("non")) {
-                return !hasProperty(input, v.substring(3));
-            } else return input.getType().hasStringType(v);
+            final boolean non = v.startsWith("non");
+            final String property = non ? v.substring(3) : v;
+
+            ColorSet colors = input.getColor();
+
+            if (property.equals("White") || property.equals("Blue") || property.equals("Black")
+                    || property.equals("Red") || property.equals("Green")) {
+                return non != colors.hasAnyColor(MagicColor.fromName(property));
+            }
+            if (property.equals("Colorless")) {
+                return non != colors.isColorless();
+            }
+            if (property.equals("MultiColor")) {
+                return non != colors.isMulticolor();
+            }
+
+            return non != input.getType().hasStringType(property);
         }
 
         static protected boolean hasManaCost(ICardFace input, final String mC) {
@@ -126,7 +143,6 @@ public final class CardFacePredicates {
             ManaCost cost = input.getManaCost();
             return cost != null && cost.getCMC() == value;
         }
-
     }
 
     public static Predicate<ICardFace> valid(final String val) {
