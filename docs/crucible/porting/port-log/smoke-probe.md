@@ -47,28 +47,27 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 30,347 |
-| refused      |  3,168 |
+| plays        | 30,513 |
+| refused      |  2,999 |
 | panicked     |      0 |
 | hung         |      0 |
-| placed       |    369 |
+| placed       |    372 |
 | inconclusive |    194 |
 
-90.5% of the 33,515 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+91.1% of the 33,512 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 92.9% of 8,640 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 93.4% of 8,640 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
-| Cards | Refusal                                                       |
-| ----: | ------------------------------------------------------------- |
-|    49 | triggered `AB$`: `Cost$` not resolvable                       |
-|    48 | sticker sheets are not ported                                 |
-|    40 | `Animate`: `Triggers$` not resolvable                         |
-|    39 | `DealDamage`: `ReplaceDyingDefined$` not resolvable           |
-|    38 | `DealDamage`: `Defined$` where the trigger recorded no player |
-|    36 | `ChangeZone`: `DestinationAlternative$` not resolvable        |
-|    36 | `Token`: `TokenAttacking$` not resolvable                     |
+| Cards | Refusal                                                |
+| ----: | ------------------------------------------------------ |
+|    49 | triggered `AB$`: `Cost$` not resolvable                |
+|    48 | sticker sheets are not ported                          |
+|    40 | `Animate`: `Triggers$` not resolvable                  |
+|    39 | `DealDamage`: `ReplaceDyingDefined$` not resolvable    |
+|    36 | `ChangeZone`: `DestinationAlternative$` not resolvable |
+|    36 | `Token`: `TokenAttacking$` not resolvable              |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 
