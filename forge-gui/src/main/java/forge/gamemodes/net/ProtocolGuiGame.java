@@ -265,6 +265,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         long seq = syncManager.getCurrentSequence();
         send(ProtocolMethod.setGameView, gameView, seq);
         initialSyncSent = true;
+        resendSelectionMarks();
 
         // Consumer registration is deferred — it happens on the first collectDeltas()
         // call (see updateGameView). This ensures that all objects created during game
@@ -464,8 +465,10 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         syncAndSend(ProtocolMethod.setCard, card);
     }
 
+    // The super calls keep the record of what the client was told, see resendSelectionMarks
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
         syncAndSend(ProtocolMethod.setSelectables, cards, min, max);
     }
 
@@ -476,12 +479,35 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     @Override
     public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        super.setSelectableTargets(targets);
         syncAndSend(ProtocolMethod.setSelectableTargets, targets);
     }
 
     @Override
     public void clearSelectables() {
+        super.clearSelectables();
         syncAndSend(ProtocolMethod.clearSelectables);
+    }
+
+    /**
+     * Sends again what the waiting prompt marks (selectable cards and targets, chosen items) to a client that comes in
+     * the middle of it. The inputs send these marks once, when they are created, and a reconnect only replays their
+     * message, so this happens whenever the full state goes out. Marks are idempotent on the client. No graph walk
+     * needed: the full state was just sent.
+     */
+    private void resendSelectionMarks() {
+        final List<CardView> cards = snapshotSelectableCards();
+        if (!cards.isEmpty()) {
+            send(ProtocolMethod.setSelectables, cards, getSelectionMin(), getSelectionMax());
+        }
+        final List<TrackableObject> targets = snapshotSelectableTargets();
+        if (!targets.isEmpty()) {
+            send(ProtocolMethod.setSelectableTargets, targets);
+        }
+        final List<TrackableObject> chosen = snapshotHighlighted();
+        if (!chosen.isEmpty()) {
+            send(ProtocolMethod.setHighlighted, chosen, true);
+        }
     }
 
     @Override

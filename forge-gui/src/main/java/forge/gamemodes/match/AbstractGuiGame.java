@@ -242,8 +242,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         originalGameControllers.clear();
         spectator = null;
         currentPlayer = null;
-        selectablePlayers.clear();
-        selectableStackItems.clear();
+        selectableTargets.clear();
         highlighted.clear();
     }
 
@@ -307,7 +306,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<TrackableObject> highlighted = Sets.newHashSet();
+    // synchronized: a host proxy copies these for a reconnecting client from another thread than the one changing them
+    private final Set<TrackableObject> highlighted = Collections.synchronizedSet(Sets.newHashSet());
 
     @Override
     public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
@@ -329,7 +329,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return highlighted.contains(object);
     }
 
-    private final Set<CardView> selectableCards = Sets.newHashSet();
+    private final Set<CardView> selectableCards = Collections.synchronizedSet(Sets.newHashSet());
     private int selectionMin = 0;
     private int selectionMax = 0;
 
@@ -341,8 +341,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         selectionMax = max;
     }
 
-    private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
-    private final Set<Integer> selectableStackItems = Sets.newConcurrentHashSet();
+    private final Set<TrackableObject> selectableTargets = Sets.newConcurrentHashSet(); // players and stack items
 
     /**
      * Marks the players and stack items the active prompt can pick (cards go through {@link #setSelectables}), replacing
@@ -350,27 +349,29 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      */
     @Override
     public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
-        selectablePlayers.clear();
-        selectableStackItems.clear();
+        selectableTargets.clear();
         for (final TrackableObject t : targets) {
-            if (t instanceof PlayerView pv) {
-                selectablePlayers.add(pv);
-            } else if (t instanceof StackItemView si) {
-                selectableStackItems.add(si.getId());
+            if (t instanceof PlayerView || t instanceof StackItemView) { // also drops the nulls of unresolved references
+                selectableTargets.add(t);
             }
         }
     }
 
     public boolean isSelectable(final PlayerView player) {
-        return player != null && selectablePlayers.contains(player);
+        return player != null && selectableTargets.contains(player);
     }
 
     public boolean isSelectable(final StackItemView item) {
-        return item != null && !selectableStackItems.isEmpty() && selectableStackItems.contains(item.getId());
+        return item != null && selectableTargets.contains(item);
     }
 
     public boolean isSelectingStackItems() {
-        return !selectableStackItems.isEmpty();
+        for (final TrackableObject t : selectableTargets) {
+            if (t instanceof StackItemView) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** A stack entry was picked in this GUI's stack view while stack targets are being chosen. */
@@ -384,10 +385,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void clearSelectables() {
         selectableCards.clear();
-        selectablePlayers.clear();
-        selectableStackItems.clear();
+        selectableTargets.clear();
         selectionMin = 0;
         selectionMax = 0;
+    }
+
+    // What the prompt currently marks, copied for a host proxy that sends it again to a client joining mid-prompt.
+    protected final List<CardView> snapshotSelectableCards() {
+        synchronized (selectableCards) {
+            return new ArrayList<>(selectableCards);
+        }
+    }
+
+    protected final List<TrackableObject> snapshotSelectableTargets() {
+        return new ArrayList<>(selectableTargets);
+    }
+
+    protected final List<TrackableObject> snapshotHighlighted() {
+        synchronized (highlighted) {
+            return new ArrayList<>(highlighted);
+        }
     }
 
     protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
