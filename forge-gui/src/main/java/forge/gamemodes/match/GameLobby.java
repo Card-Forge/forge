@@ -453,6 +453,7 @@ public abstract class GameLobby implements IHasGameType {
             }
         }
 
+        final GameType baseGameType = data.isLimitedMode() ? data.getLimitedType() : GameType.Constructed;
         final List<RegisteredPlayer> players = new ArrayList<>();
         final Map<RegisteredPlayer, IGuiGame> guis = Maps.newHashMap();
         final Map<RegisteredPlayer, LobbySlot> playerToSlot = Maps.newHashMap();
@@ -505,7 +506,8 @@ public abstract class GameLobby implements IHasGameType {
                             isOathbreakerMatch ? GameType.Oathbreaker :
                                 isTinyLeadersMatch ? GameType.TinyLeaders :
                                     isBrawlMatch ? GameType.Brawl :
-                                        GameType.Commander;
+                                        baseGameType == GameType.CommanderDraft ? GameType.CommanderDraft :
+                                            GameType.Commander;
                     if (checkLegality) {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
@@ -566,7 +568,6 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
-        final GameType baseGameType = data.isLimitedMode() ? data.getLimitedType() : GameType.Constructed;
         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.setOnMatchOver(this::onMatchOver);
