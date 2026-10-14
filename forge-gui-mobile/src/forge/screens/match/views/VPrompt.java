@@ -230,13 +230,25 @@ public class VPrompt extends FContainer {
             super(text, command);
         }
 
+        private static String msg(String key) {
+            try {
+                return Forge.getLocalizer().getMessage(key);
+            } catch (NullPointerException e) { // localizer not ready (startup / teardown)
+                return null;
+            }
+        }
+
         @Override
         public void setText(String text0) {
-            boolean undo = text0 != null && isSeparateUndo()
-                    && !ForgeConstants.UNDO_MODE_OFF.equals(FModel.getPreferences().getPref(FPref.UI_UNDO_MODE))
-                    && text0.startsWith(Forge.getLocalizer().getMessage("lblUndo"));
+            String undoLabel = null;
+            if (text0 != null && isSeparateUndo()
+                    && !ForgeConstants.UNDO_MODE_OFF.equals(FModel.getPreferences().getPref(FPref.UI_UNDO_MODE))) {
+                undoLabel = msg("lblUndo");
+            }
+            boolean undo = undoLabel != null && text0.startsWith(undoLabel);
             if (undo) {
-                text0 = Forge.getLocalizer().getMessage("lblEndTurn");
+                String endTurn = msg("lblEndTurn");
+                text0 = endTurn != null ? endTurn : text0;
             }
             super.setText(text0);
             if (undoRequested != undo) {
