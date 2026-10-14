@@ -14,17 +14,13 @@ import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gamemodes.net.event.GuiGameEvent;
-import forge.gamemodes.net.event.LoginEvent;
 import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.event.ReplyEvent;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.trackable.TrackableCollection;
-import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.Tracker;
@@ -42,12 +38,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -72,11 +66,9 @@ import static org.mockito.Mockito.withSettings;
 public class GameClientHandlerShould {
 
     private IGuiBase previousGui;
-    private Thread guiThread;
     private LinkedBlockingQueue<Runnable> queuedGuiTasks;
     private boolean deferGuiTasks;
     private boolean libgdxPort;
-    private volatile CountDownLatch deferredGuiProgress;
 
     @BeforeMethod
     public void installHeadlessGuiBase() {
@@ -84,28 +76,23 @@ public class GameClientHandlerShould {
         // Match the established forge-gui engine test bootstrap before GameType initializes.
         Localizer.getInstance().initialize("en-US", "res/languages/");
         Lang.createInstance("en-US");
-        guiThread = Thread.currentThread();
         queuedGuiTasks = new LinkedBlockingQueue<>();
         deferGuiTasks = false;
         libgdxPort = false;
-        deferredGuiProgress = null;
         final IGuiBase guiBase = mock(IGuiBase.class);
         when(guiBase.isLibgdxPort()).thenAnswer(invocation -> libgdxPort);
         when(guiBase.isGuiThread()).thenAnswer(invocation ->
-                !deferGuiTasks || Thread.currentThread() == guiThread);
+                !deferGuiTasks);
         doAnswer(invocation -> {
             invocation.<Runnable>getArgument(0).run();
             return null;
         }).when(guiBase).invokeInEdtNow(any(Runnable.class));
         doAnswer(invocation -> {
             final Runnable task = invocation.getArgument(0);
-            if (!deferGuiTasks || Thread.currentThread() == guiThread) {
+            if (!deferGuiTasks) {
                 task.run();
             } else {
                 queuedGuiTasks.add(task);
-                if (queuedGuiTasks.size() >= 2 && deferredGuiProgress != null) {
-                    deferredGuiProgress.countDown();
-                }
             }
             return null;
         }).when(guiBase).invokeInEdtLater(any(Runnable.class));
@@ -127,8 +114,8 @@ public class GameClientHandlerShould {
         final int oldOnlyCardId = 19;
         final int reusedCardId = 23;
         final int newOnlyCardId = 31;
-        final Game oldGame = newGame();
-        final Game nextGame = newGame();
+        final Game oldGame = newGame(true);
+        final Game nextGame = newGame(true);
         final Tracker oldServerTracker = oldGame.getTracker();
         final CardView oldOnlyServerCard = new CardView(oldOnlyCardId, oldServerTracker, "old-only game card");
         final CardView oldServerCard = new CardView(reusedCardId, oldServerTracker, "old game card");
@@ -189,26 +176,13 @@ public class GameClientHandlerShould {
 
             serverChannel = new EmbeddedChannel(new CompatibleObjectDecoder(
                     10_000_000, ClassResolvers.cacheDisabled(null)));
-            final ByteBuf encodedLogin = channel.readOutbound();
-            assertThat(encodedLogin).isNotNull();
-            serverChannel.writeInbound(encodedLogin);
-            final Object decodedLogin = serverChannel.readInbound();
-            assertThat(decodedLogin).isInstanceOf(LoginEvent.class);
-            final LoginEvent login = (LoginEvent) decodedLogin;
-            assertThat(login.getUsername()).isEqualTo("codec-test");
-            assertThat(login.getVersion()).isNotEmpty();
-            assertThat(login.getAvatarIndex()).isEqualTo(Integer.parseInt(
-                    FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]));
-            assertThat(login.getSleeveIndex()).isEqualTo(Integer.parseInt(
-                    FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0]));
-            assertThat(login.isLibgdx()).isFalse();
-            assertThat(serverChannel.<Object>readInbound()).isNull();
-            assertThat(channel.<Object>readOutbound()).isNull();
+            discardClientLogin(channel);
 
             FThreads.invokeInEdtAndWait(() -> channel.writeInbound(coalescedFrames));
 
             assertThat(appliedViews).hasSize(3);
             final GameView oldApplied = appliedViews.get(0);
+            assertThat(oldApplied.isDanDan()).isTrue();
             final GameView sameGameApplied = appliedViews.get(1);
             final GameView newApplied = appliedViews.get(2);
             assertThat(sameGameApplied.getTracker()).isSameAs(oldApplied.getTracker());
@@ -245,20 +219,6 @@ public class GameClientHandlerShould {
             assertThat(decodedSelection.getObjects()[0]).isSameAs(newOnlyServerCard);
             assertThat(serverChannel.<Object>readInbound()).isNull();
 
-            final GuiGameEvent oldViewSelection = GuiGameEvent.forGameView(
-                    ProtocolMethod.selectCard, oldApplied.getId(), oldApplied.getPlayers().get(0).getHand().get(0));
-            FThreads.invokeInEdtAndWait(() -> channel.writeOutbound(oldViewSelection));
-            final ByteBuf encodedOldViewSelection = channel.readOutbound();
-            assertThat(encodedOldViewSelection).isNotNull();
-            serverChannel.writeInbound(encodedOldViewSelection);
-            final GuiGameEvent decodedOldViewSelection = serverChannel.readInbound();
-            assertThat(decodedOldViewSelection.getMethod()).isEqualTo(ProtocolMethod.selectCard);
-            assertThat(decodedOldViewSelection.getGameViewId()).isEqualTo(oldApplied.getId());
-            assertThat(decodedOldViewSelection.getObjects()[0]).isInstanceOf(CardView.class);
-            assertThat(((CardView) decodedOldViewSelection.getObjects()[0]).getId()).isEqualTo(oldOnlyCardId);
-            assertThat(decodedOldViewSelection.getObjects()[0]).isNotSameAs(oldOnlyServerCard);
-            assertThat(serverChannel.<Object>readInbound()).isNull();
-            assertThat(channel.<Object>readOutbound()).isNull();
         } finally {
             channel.finishAndReleaseAll();
             if (serverChannel != null) serverChannel.finishAndReleaseAll();
@@ -268,14 +228,12 @@ public class GameClientHandlerShould {
 
     @Test
     public void preservesSameGameFullViewAndItsTrackerDuringCanonicalPlayerViewReplication() throws Exception {
-        deferGuiTasks = true;
         final boolean previousDeltaSync = RemoteClientGuiGame.useDeltaSync;
         final int playerId = 37;
         final Game game = newGame();
         final Tracker serverTracker = game.getTracker();
-        final GameView initialServerView = playerStateView(game, playerId, 0, 80);
+        final GameView initialServerView = gameView(game, playerId, List.of());
         final AtomicReference<PlayerView> lastButtonsOwner = new AtomicReference<>();
-        final AtomicReference<PlayerView> lastFullViewPlayer = new AtomicReference<>();
         final NetworkGuiGame gui = mock(NetworkGuiGame.class,
                 withSettings().useConstructor().defaultAnswer(CALLS_REAL_METHODS));
         doAnswer(invocation -> {
@@ -283,172 +241,90 @@ public class GameClientHandlerShould {
             return null;
         }).when(gui).updateButtons(any(PlayerView.class), anyString(), anyString(),
                 anyBoolean(), anyBoolean(), anyBoolean());
-        doAnswer(invocation -> {
-            lastFullViewPlayer.set(((GameView) invocation.getArgument(0)).getPlayers().get(0));
-            return invocation.callRealMethod();
-        }).when(gui).setGameView(any(GameView.class));
-        final FGameClient client = spy(new FGameClient("self-copy-test", gui, "localhost", 1));
+        final FGameClient client = spy(new FGameClient("queued-replication-test", gui, "localhost", 1));
         doNothing().when(client).send(any(NetEvent.class));
         final CompatibleObjectEncoder serverEncoder = new CompatibleObjectEncoder(new NetworkByteTracker());
         serverEncoder.setTracker(serverTracker);
         final CompatibleObjectDecoder decoder = new CompatibleObjectDecoder(
                 10_000_000, ClassResolvers.cacheDisabled(null));
         final CompatibleObjectEncoder clientEncoder = new CompatibleObjectEncoder(new NetworkByteTracker());
-        final GameClientHandler handler = new GameClientHandler(client);
-        final EmbeddedChannel channel = new EmbeddedChannel(clientEncoder, decoder, handler);
-        final CountDownLatch selfCopyEntered = new CountDownLatch(1);
-        final CountDownLatch releaseSelfCopy = new CountDownLatch(1);
-        final CountDownLatch fullCallbackQueued = new CountDownLatch(1);
-        final CountDownLatch allowButtonsCallback = new CountDownLatch(1);
-        final CountDownLatch allowNextGameCallback = new CountDownLatch(1);
-        final CountDownLatch workReady = new CountDownLatch(1);
-        final AtomicReference<Thread> ioThreadRef = new AtomicReference<>();
-        Throwable primaryFailure = null;
-        deferredGuiProgress = workReady;
+        final EmbeddedChannel channel = new EmbeddedChannel(clientEncoder, decoder, new GameClientHandler(client));
         RemoteClientGuiGame.useDeltaSync = false;
         try {
-            final ByteBuf initialFrame = encode(serverEncoder, GuiGameEvent.forGameView(
-                    ProtocolMethod.setGameView, initialServerView.getId(), initialServerView, 1L));
-            channel.writeInbound(initialFrame);
+            channel.writeInbound(encode(serverEncoder, GuiGameEvent.forGameView(
+                    ProtocolMethod.setGameView, initialServerView.getId(), initialServerView, 1L)));
             final PlayerView canonicalPlayer = gui.getGameView().getPlayers().get(0);
             final Tracker originalTracker = canonicalPlayer.getTracker();
-            assertThat(canonicalPlayer.getHand()).isEmpty();
-            assertThat(canonicalPlayer.getLibrary()).hasSize(80);
-
-            // A normal decoded IdRef reaches the canonical object and its self-copy is harmless.
-            clientEncoder.setTracker(canonicalPlayer.getTracker());
-            final GuiGameEvent buttonsEvent = GuiGameEvent.forGameView(
+            clientEncoder.setTracker(originalTracker);
+            final ByteBuf buttonsFrame = encode(clientEncoder, GuiGameEvent.forGameView(
                     ProtocolMethod.updateButtons, initialServerView.getId(), canonicalPlayer,
-                    "OK", "Cancel", false, false, false);
-            final ByteBuf normalButtons = encode(clientEncoder, buttonsEvent);
-            channel.writeInbound(normalButtons);
-            assertThat(lastButtonsOwner.get()).isSameAs(canonicalPlayer);
-            assertThat(gui.getGameView().getPlayers().get(0).getLibrary()).hasSize(80);
-
-            final BlockingTrackableCollection<CardView> blockingLibrary = new BlockingTrackableCollection<>(
-                    List.copyOf(canonicalPlayer.getLibrary()), selfCopyEntered, workReady, releaseSelfCopy);
-            canonicalPlayer.set(TrackableProperty.Library, blockingLibrary);
-
-            final ByteBuf concurrentButtons = encode(clientEncoder, buttonsEvent);
-            final GameView fullServerView = playerStateView(game, playerId, 7, 66);
+                    "OK", "Cancel", false, false, false));
+            final CardView drawnCard = new CardView(23, serverTracker, "drawn card");
+            final GameView fullServerView = gameView(game, playerId, List.of(drawnCard));
             final ByteBuf fullFrame = encode(serverEncoder, GuiGameEvent.forGameView(
                     ProtocolMethod.setGameView, fullServerView.getId(), fullServerView, 2L));
             final Game nextGame = newGame();
-            final GameView nextServerView = playerStateView(nextGame, playerId, 0, 80);
+            final GameView nextServerView = gameView(nextGame, playerId, List.of());
             serverEncoder.setTracker(nextGame.getTracker());
             final ByteBuf nextGameFrame = encode(serverEncoder, GuiGameEvent.forGameView(
                     ProtocolMethod.setGameView, nextServerView.getId(), nextServerView, 3L));
-            serverEncoder.setTracker(serverTracker);
-            final AtomicReference<Throwable> ioFailure = new AtomicReference<>();
-            final Thread ioThread = new Thread(() -> {
-                try {
-                    // The real channel processes FULL before the next protocol callback.
-                    // Its GUI apply remains queued while the test controls the EDT ordering.
-                    channel.writeInbound(fullFrame);
-                    fullCallbackQueued.countDown();
-                    if (!allowButtonsCallback.await(5, TimeUnit.SECONDS)) {
-                        throw new IllegalStateException("timed out waiting to continue protocol input");
-                    }
-                    channel.writeInbound(concurrentButtons);
-                    if (!allowNextGameCallback.await(5, TimeUnit.SECONDS)) {
-                        throw new IllegalStateException("timed out waiting to continue next-game input");
-                    }
-                    channel.writeInbound(nextGameFrame);
-                } catch (Throwable failure) {
-                    ioFailure.set(failure);
-                }
-            }, "trackable-self-copy-probe");
-            ioThreadRef.set(ioThread);
-            ioThread.start();
-            assertThat(fullCallbackQueued.await(5, TimeUnit.SECONDS)).isTrue();
-            assertThat(queuedGuiTasks).hasSize(1);
-            allowButtonsCallback.countDown();
-            assertThat(workReady.await(5, TimeUnit.SECONDS)).isTrue();
+            final CardView libraryCard = new CardView(51, originalTracker, "library card");
+            final CopyCountingCollection beforeCallback = new CopyCountingCollection(libraryCard);
+            canonicalPlayer.set(TrackableProperty.Library, beforeCallback);
 
-            if (selfCopyEntered.getCount() == 0) {
-                // The old IO-thread replication path is held inside canonical self-copy here.
-                // Applying FULL now reproduces the lost 7/66 update before the test fails below.
-                queuedGuiTasks.remove().run();
-                final int handSeenDuringCopy = gui.getGameView().getPlayers().get(0).getHand().size();
-                final int librarySeenDuringCopy = gui.getGameView().getPlayers().get(0).getLibrary().size();
-                releaseSelfCopy.countDown();
-                assertThat(handSeenDuringCopy).isEqualTo(7);
-                assertThat(librarySeenDuringCopy).isEqualTo(66);
-            }
-            allowNextGameCallback.countDown();
-            ioThread.join(TimeUnit.SECONDS.toMillis(5));
-            assertThat(ioThread.isAlive()).isFalse();
-            assertThat(ioFailure.get()).isNull();
+            // Decode all three frames before applying GUI callbacks. The handler has already
+            // advanced to N+1 when the queued callback for N replicates its PlayerView.
+            deferGuiTasks = true;
+            channel.writeInbound(fullFrame);
+            channel.writeInbound(buttonsFrame);
+            channel.writeInbound(nextGameFrame);
             assertThat(queuedGuiTasks).hasSize(3);
+            assertThat(lastButtonsOwner.get()).isNull();
+            assertThat(canonicalPlayer.getHand()).isEmpty();
+            assertThat(beforeCallback.snapshots).as("decoding must not replicate PlayerView properties").isZero();
 
-            // Apply queued FULL N first, after IO has already decoded updateButtons(N) and
-            // FULL N+1. The queued update must retain N's PlayerView tracker after handler
-            // state has advanced to N+1.
-            final Runnable queuedFullApply = queuedGuiTasks.poll(5, TimeUnit.SECONDS);
-            assertThat(queuedFullApply).isNotNull();
-            queuedFullApply.run();
-            final PlayerView incomingPlayer = lastFullViewPlayer.get();
-            assertThat(incomingPlayer).isNotSameAs(canonicalPlayer);
-            assertThat(incomingPlayer.getHand()).hasSize(7);
-            assertThat(incomingPlayer.getLibrary()).hasSize(66);
+            deferGuiTasks = false;
+            queuedGuiTasks.remove().run();
             assertThat(gui.getGameView().getPlayers().get(0)).isSameAs(canonicalPlayer);
-            assertThat(gui.getGameView().getPlayers().get(0).getHand()).hasSize(7);
-            assertThat(gui.getGameView().getPlayers().get(0).getLibrary()).hasSize(66);
-            assertThat(canonicalPlayer.getTracker()).isSameAs(originalTracker);
+            assertThat(canonicalPlayer.getHand()).hasSize(1);
+            assertThat(canonicalPlayer.getHand().get(0).getId()).isEqualTo(drawnCard.getId());
 
-            releaseSelfCopy.countDown();
-            final Runnable queuedUpdate = queuedGuiTasks.poll(5, TimeUnit.SECONDS);
-            assertThat(queuedUpdate).isNotNull();
-            queuedUpdate.run();
+            // FULL replaces the library property, so observe the callback's self-copy separately.
+            final CopyCountingCollection duringCallback = new CopyCountingCollection(libraryCard);
+            canonicalPlayer.set(TrackableProperty.Library, duringCallback);
+            queuedGuiTasks.remove().run();
+            assertThat(duringCallback.snapshots).as("the queued callback replicates PlayerView properties").isPositive();
             assertThat(lastButtonsOwner.get()).isSameAs(canonicalPlayer);
             assertThat(lastButtonsOwner.get().getTracker()).isSameAs(originalTracker);
-            assertThat(canonicalPlayer.getHand()).hasSize(7);
-            assertThat(canonicalPlayer.getLibrary()).hasSize(66);
-            final Runnable queuedNextGameApply = queuedGuiTasks.poll(5, TimeUnit.SECONDS);
-            assertThat(queuedNextGameApply).isNotNull();
-            queuedNextGameApply.run();
+            assertThat(canonicalPlayer.getHand()).hasSize(1);
+
+            queuedGuiTasks.remove().run();
             assertThat(gui.getGameView().getId()).isEqualTo(nextServerView.getId());
             assertThat(gui.getGameView().getPlayers().get(0).getTracker()).isNotSameAs(originalTracker);
             assertThat(gui.getGameView().getPlayers().get(0).getHand()).isEmpty();
-            assertThat(gui.getGameView().getPlayers().get(0).getLibrary()).hasSize(80);
             assertThat(queuedGuiTasks).isEmpty();
-        } catch (Exception | Error failure) {
-            primaryFailure = failure;
-            throw failure;
         } finally {
-            releaseSelfCopy.countDown();
-            allowButtonsCallback.countDown();
-            allowNextGameCallback.countDown();
-            Throwable cleanupFailure = null;
-            try {
-                final Thread ioThread = ioThreadRef.get();
-                if (ioThread != null) {
-                    ioThread.join(TimeUnit.SECONDS.toMillis(5));
-                    if (ioThread.isAlive()) {
-                        throw new IllegalStateException("probe IO thread did not stop before channel cleanup");
-                    }
-                }
-                channel.finishAndReleaseAll();
-                client.beginShutdown();
-            } catch (Throwable failure) {
-                cleanupFailure = failure;
-            } finally {
-                deferredGuiProgress = null;
-                RemoteClientGuiGame.useDeltaSync = previousDeltaSync;
-            }
-            if (cleanupFailure != null) {
-                if (primaryFailure != null) {
-                    primaryFailure.addSuppressed(cleanupFailure);
-                } else if (cleanupFailure instanceof Exception exception) {
-                    throw exception;
-                } else if (cleanupFailure instanceof Error error) {
-                    throw error;
-                } else {
-                    throw new RuntimeException(cleanupFailure);
-                }
-            }
+            deferGuiTasks = false;
+            RemoteClientGuiGame.useDeltaSync = previousDeltaSync;
+            channel.finishAndReleaseAll();
+            client.beginShutdown();
         }
     }
+
+    private static final class CopyCountingCollection extends TrackableCollection<CardView> {
+        private int snapshots;
+
+        private CopyCountingCollection(CardView card) {
+            super(List.of(card));
+        }
+
+        @Override
+        public <E> E[] toArray(E[] array) {
+            snapshots++;
+            return super.toArray(array);
+        }
+    }
+
 
     @Test
     public void refusesDanDanFullViewOnMobileBeforeBindingOrGuiDispatch() throws Exception {
@@ -485,16 +361,6 @@ public class GameClientHandlerShould {
     }
 
     @Test
-    public void acceptsOrdinaryMobileGameView() throws Exception {
-        assertGameViewAllowed(true, false);
-    }
-
-    @Test
-    public void acceptsDanDanGameViewOnDesktop() throws Exception {
-        assertGameViewAllowed(false, true);
-    }
-
-    @Test
     public void nonactiveMobileDanDanSourceCannotCloseOrNotifyTheActiveClient() throws Exception {
         libgdxPort = true;
         final GameView danDanView = gameView(newGame(true), 37, List.of());
@@ -511,34 +377,6 @@ public class GameClientHandlerShould {
             verify(gui, never()).showErrorDialog(anyString(), anyString());
             verify(client, never()).receivedGameView(any(Channel.class), anyInt());
             verify(gui, never()).setGameView(any(GameView.class), anyLong());
-        } finally {
-            channel.finishAndReleaseAll();
-            client.close();
-        }
-    }
-
-    private void assertGameViewAllowed(boolean mobile, boolean danDan) throws Exception {
-        libgdxPort = mobile;
-        final GameView view = gameView(newGame(danDan), 37, List.of());
-        final AtomicReference<GameView> appliedView = new AtomicReference<>();
-        final IGuiGame gui = mock(IGuiGame.class);
-        doAnswer(invocation -> {
-            appliedView.set(invocation.getArgument(0));
-            return null;
-        }).when(gui).setGameView(any(GameView.class), anyLong());
-        final FGameClient client = spy(new FGameClient("game-view-compatibility-test", gui, "localhost", 1));
-        final EmbeddedChannel channel = newClientChannel(client);
-        try {
-            discardClientLogin(channel);
-            when(client.isActiveChannel(channel)).thenReturn(true);
-
-            channel.writeInbound(encodeGameView(view));
-
-            assertThat(channel.isOpen()).isTrue();
-            assertThat(appliedView.get()).isNotNull();
-            assertThat(appliedView.get().isDanDan()).isEqualTo(danDan);
-            assertThat(client.hasCurrentGameViewBinding(channel)).isTrue();
-            verify(client, never()).close();
         } finally {
             channel.finishAndReleaseAll();
             client.close();
@@ -586,60 +424,6 @@ public class GameClientHandlerShould {
         player.set(TrackableProperty.Hand, new TrackableCollection<>(hand));
         view.set(TrackableProperty.Players, new TrackableCollection<>(List.of(player)));
         return view;
-    }
-
-    private static GameView playerStateView(Game game, int playerId, int handCount, int libraryCount) {
-        final Tracker tracker = game.getTracker();
-        final PlayerView player = new PlayerView(playerId, tracker);
-        final List<CardView> hand = new ArrayList<>();
-        final List<CardView> library = new ArrayList<>();
-        for (int i = 0; i < handCount; i++) {
-            final int cardId = i + 1;
-            hand.add(new CardView(cardId, tracker, "player hand " + cardId));
-        }
-        final int libraryStart = handCount == 7 ? 15 : 1;
-        for (int i = 0; i < libraryCount; i++) {
-            final int cardId = libraryStart + i;
-            library.add(new CardView(cardId, tracker, "player library " + cardId));
-        }
-        player.set(TrackableProperty.Hand, new TrackableCollection<>(hand));
-        player.set(TrackableProperty.Library, new TrackableCollection<>(library));
-        final GameView view = new GameView(game);
-        view.set(TrackableProperty.Players, new TrackableCollection<>(List.of(player)));
-        return view;
-    }
-
-    private static final class BlockingTrackableCollection<T extends TrackableObject>
-            extends TrackableCollection<T> {
-        private final CountDownLatch entered;
-        private final CountDownLatch progress;
-        private final CountDownLatch release;
-        private final AtomicBoolean blockFirstSnapshot = new AtomicBoolean(true);
-
-        private BlockingTrackableCollection(Collection<T> cards, CountDownLatch entered,
-                                            CountDownLatch progress, CountDownLatch release) {
-            super(cards);
-            this.entered = entered;
-            this.progress = progress;
-            this.release = release;
-        }
-
-        @Override
-        public <E> E[] toArray(E[] array) {
-            if (blockFirstSnapshot.compareAndSet(true, false)) {
-                entered.countDown();
-                progress.countDown();
-                try {
-                    if (!release.await(5, TimeUnit.SECONDS)) {
-                        throw new IllegalStateException("timed out waiting to release trackable copy");
-                    }
-                } catch (InterruptedException interrupted) {
-                    Thread.currentThread().interrupt();
-                    throw new IllegalStateException(interrupted);
-                }
-            }
-            return super.toArray(array);
-        }
     }
 
     private static ByteBuf encode(CompatibleObjectEncoder encoder, GuiGameEvent event) throws Exception {

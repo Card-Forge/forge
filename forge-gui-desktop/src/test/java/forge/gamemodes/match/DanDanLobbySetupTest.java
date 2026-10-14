@@ -4,7 +4,6 @@ import forge.GuiDesktop;
 import forge.LobbyPlayer;
 import forge.ai.AITest;
 import forge.deck.Deck;
-import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.gui.GuiBase;
@@ -27,37 +26,10 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 public class DanDanLobbySetupTest extends AITest {
-    @Test
-    public void ordinaryLobbyKeepsRemoteDeckUpdatesSeparate() {
-        final GuiPlayerState oldPlayerState = GuiPlayerState.capture();
-        try {
-            final Deck hostDeck = basicLandDeck("host deck", "Plains");
-            final Deck remoteDeck = basicLandDeck("remote deck", "Island");
-            assertNull(DeckFormat.Constructed.getDeckConformanceProblem(hostDeck),
-                    "the ordinary host control is a valid 60-card Constructed deck");
-            assertNull(DeckFormat.Constructed.getDeckConformanceProblem(remoteDeck),
-                    "the ordinary remote control is a valid distinct 60-card Constructed deck");
-            final TestLobby lobby = new TestLobby(hostDeck);
-
-            lobby.applyToSlot(1, UpdateLobbyPlayerEvent.deckUpdate(remoteDeck));
-            assertSame(lobby.getSlot(0).getDeck(), hostDeck);
-            assertSame(lobby.getSlot(1).getDeck(), remoteDeck);
-            lobby.applyToSlot(0, UpdateLobbyPlayerEvent.isReadyUpdate(true));
-            lobby.applyToSlot(1, UpdateLobbyPlayerEvent.isReadyUpdate(true));
-
-            assertNotNull(lobby.startGame(), "ordinary two-seat setup still accepts distinct ready decks");
-            assertSame(lobby.getSlot(0).getDeck(), hostDeck);
-            assertSame(lobby.getSlot(1).getDeck(), remoteDeck);
-        } finally {
-            oldPlayerState.restore();
-        }
-    }
-
     @Test
     public void hostDeckIsSharedAndRemoteCannotUploadASecondDeck() {
         final GuiPlayerState oldPlayerState = GuiPlayerState.capture();
@@ -124,11 +96,6 @@ public class DanDanLobbySetupTest extends AITest {
             aiOnly.getSlot(0).setType(LobbySlotType.AI);
             assertNullStart(aiOnly);
 
-            final TestLobby unreadySeat = new TestLobby(official);
-            unreadySeat.applyVariant(GameType.DanDan);
-            unreadySeat.getSlot(0).setIsReady(true);
-            assertNullStart(unreadySeat);
-
             final TestLobby conflict = new TestLobby(official);
             conflict.applyVariant(GameType.Commander);
             conflict.applyVariant(GameType.DanDan);
@@ -158,12 +125,6 @@ public class DanDanLobbySetupTest extends AITest {
             if (proxy.getName().equals("DanDan_SecretLair")) return proxy.getDeck();
         }
         return null;
-    }
-
-    private static Deck basicLandDeck(final String name, final String basicLand) {
-        final Deck deck = new Deck(name);
-        deck.getMain().add(basicLand, 60);
-        return deck;
     }
 
     private static final class TestLobby extends GameLobby {

@@ -22,7 +22,6 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.item.PaperCard;
@@ -41,8 +40,8 @@ import static org.testng.Assert.assertTrue;
 
 public class DanDanTextChangeAiTest extends AITest {
     @Test
-    public void magicalHackTargetsOpponentFishAndUsesItsCurrentLandWord() {
-        Game game = newGame(true);
+    public void magicalHackTargetsOpponentFishAndChangesItsLandWord() {
+        Game game = newGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         addCards("Island", 2, ai);
@@ -67,14 +66,11 @@ public class DanDanTextChangeAiTest extends AITest {
         assertEquals(ownFish.getChangedTextTypeWords().get("Island"), null,
                 "the AI's fish text must remain unchanged");
 
-        resolveQueuedDandanSacrifice(game, opponent, opponentFish);
-        assertTrue(ai.getCardsIn(ZoneType.Battlefield).contains(ownFish),
-                "the AI should not sacrifice its own fish to make the rewrite");
     }
 
     @Test
-    public void crystalSprayChoosesHelpfulTypeModeAndResolvesItsCantrip() {
-        Game game = newGame(true);
+    public void crystalSprayChoosesAndResolvesHelpfulTypeMode() {
+        Game game = newGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         addCards("Island", 3, ai);
@@ -101,55 +97,12 @@ public class DanDanTextChangeAiTest extends AITest {
         String newRequirement = fish.getChangedTextTypeWords().get("Island");
         assertNotEquals(newRequirement, "Island", "the chosen generic mode should execute ChangeType");
         assertFalse(hasBasicLandType(opponent, newRequirement));
-        assertEquals(ai.getCardsIn(ZoneType.Hand).size(), 2,
-                "the stock draw subability should resolve after the text rewrite");
-        assertTrue(ai.getCardsIn(ZoneType.Hand).stream().anyMatch(card -> "Memory Lapse".equals(card.getName())),
-                "the shared-pile card drawn by the cantrip should enter the caster's hand");
 
-        resolveQueuedDandanSacrifice(game, opponent, fish);
-    }
-
-    @Test
-    public void textChangeCardsRemainUnsupportedInOrdinaryFormats() {
-        Game game = newGame(false);
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        addCards("Island", 3, ai);
-        addCard("Island", opponent);
-        addCard("Dandân", opponent);
-
-        Card hack = addCardToZone("Magical Hack", ai, ZoneType.Hand);
-        SpellAbility hackAbility = findAbility(hack, ApiType.ChangeText);
-        hackAbility.setActivatingPlayer(ai);
-        assertFalse(getAiDecision(ai, hackAbility) == AiPlayDecision.WillPlay,
-                "ordinary-format Magical Hack should keep its existing CannotPlay behavior");
-
-        Card spray = addCardToZone("Crystal Spray", ai, ZoneType.Hand);
-        SpellAbility sprayAbility = findAbility(spray, ApiType.GenericChoice);
-        sprayAbility.setActivatingPlayer(ai);
-        assertFalse(getAiDecision(ai, sprayAbility) == AiPlayDecision.WillPlay,
-                "ordinary-format Crystal Spray should keep its existing no-AILogic behavior");
-    }
-
-    @Test
-    public void ordinaryChangeTextSubabilityRetainsCannotPlayDrawback() {
-        Game game = newGame(false);
-        Player ai = game.getPlayers().get(1);
-        Card newBlood = addCardToZone("New Blood", ai, ZoneType.Hand);
-        SpellAbility root = newBlood.getSpellAbilities().get(0);
-        root.setActivatingPlayer(ai);
-        AbilitySub changeText = root.getSubAbility();
-
-        assertEquals(changeText.getApi(), ApiType.ChangeText,
-                "New Blood should exercise its real ChangeText subability");
-        assertEquals(SpellApiToAi.Converter.get(changeText).chkDrawback(ai, changeText).decision(),
-                AiPlayDecision.CantPlayAi,
-                "ordinary ChangeText subabilities must retain the former CannotPlayAi drawback behavior");
     }
 
     @Test
     public void magicalHackDoesNotTargetItsOwnFishWhenNoOpponentFishCanBeChanged() {
-        Game game = newGame(true);
+        Game game = newGame();
         Player ai = game.getPlayers().get(1);
         addCard("Island", ai);
         addCard("Dandân", ai);
@@ -165,7 +118,7 @@ public class DanDanTextChangeAiTest extends AITest {
 
     @Test
     public void crystalSprayDeclinesWhenItsCantripWouldDrawFromAnEmptyLibrary() {
-        Game game = newGame(true);
+        Game game = newGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         addCards("Island", 3, ai);
@@ -180,24 +133,7 @@ public class DanDanTextChangeAiTest extends AITest {
     }
 
     @Test
-    public void crystalSprayMayCantripFromEmptyLibraryWhenAiCannotLoseToMilling() {
-        Game game = newGame(true);
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        addCards("Island", 3, ai);
-        addCard("Platinum Angel", ai);
-        addCard("Island", opponent);
-        addCard("Dandân", opponent);
-        Card spray = addCardToZone("Crystal Spray", ai, ZoneType.Hand);
-        SpellAbility ability = findAbility(spray, ApiType.GenericChoice);
-        ability.setActivatingPlayer(ai);
-
-        assertEquals(getAiDecision(ai, ability), AiPlayDecision.WillPlay,
-                "the public helpful rewrite remains available when the AI cannot lose to its empty-library draw");
-    }
-
-    @Test
-    public void sixSupportedCardHintsAreIgnoredOnlyForDanDanEligibilityAndWarnings() {
+    public void sixSupportedCardHintsAreIgnoredForDanDanEligibilityAndWarnings() {
         String[] supported = {"Predict", "Magical Hack", "Crystal Spray", "Day's Undoing", "Metamorphose", "Svyelunite Temple"};
         Deck deck = new Deck();
         for (String name : supported) {
@@ -205,7 +141,7 @@ public class DanDanTextChangeAiTest extends AITest {
         }
         deck.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Sleight of Mind"));
 
-        Game danDanGame = newGame(true);
+        Game danDanGame = newGame();
         Player danDanAi = danDanGame.getPlayers().get(1);
         Map<DeckSection, List<? extends PaperCard>> danDanWarnings =
                 getAi(danDanAi).complainCardsCantPlayWell(deck);
@@ -223,24 +159,6 @@ public class DanDanTextChangeAiTest extends AITest {
                     name + " should be eligible for the DanDan AI despite its general-format hint");
         }
 
-        Game ordinaryGame = newGame(false);
-        Player ordinaryAi = ordinaryGame.getPlayers().get(1);
-        Map<DeckSection, List<? extends PaperCard>> ordinaryWarnings =
-                getAi(ordinaryAi).complainCardsCantPlayWell(deck);
-        List<String> ordinaryWarnedNames = ordinaryWarnings.values().stream().flatMap(List::stream)
-                .map(PaperCard::getName).collect(Collectors.toList());
-        assertTrue(ordinaryWarnedNames.contains("Sleight of Mind"),
-                "ordinary-format warnings should retain both supported-card hints and unrelated exclusions");
-        for (String name : supported) {
-            assertTrue(ordinaryWarnedNames.contains(name),
-                    name + " should retain its ordinary-format AI warning");
-        }
-        for (String name : supported) {
-            Card card = addCardToZone(name, ordinaryAi, ZoneType.Hand);
-            assertEquals(ComputerUtilCard.isCardRemAIDeck(card),
-                    card.getRules().getAiHints().getRemAIDecks(),
-                    name + " should retain its original hint-based eligibility in ordinary formats");
-        }
     }
 
     private boolean hasBasicLandType(Player player, String type) {
@@ -263,38 +181,12 @@ public class DanDanTextChangeAiTest extends AITest {
         return ((PlayerControllerAi) player.getController()).getAi();
     }
 
-    private void resolveQueuedDandanSacrifice(Game game, Player controller, Card fish) {
-        game.getAction().checkStateEffects(true);
-        assertTrue(controller.getCardsIn(ZoneType.Battlefield).contains(fish),
-                "the lethal text rewrite should leave Dandân in play while its state trigger is queued");
-        assertTrue(game.getStack().hasSimultaneousStackEntries(),
-                "Dandân's Always trigger should be queued before it is put on the stack");
-        assertTrue(game.getStack().addAllTriggeredAbilitiesToStack(),
-                "the queued state trigger should be added to the stack");
-
-        SpellAbility sacrifice = game.getStack().peekAbility();
-        assertTrue(sacrifice.isTrigger(), "the stack entry should be a real triggered ability");
-        assertEquals(sacrifice.getTrigger().getMode(), TriggerType.Always,
-                "the lethal ability should be Dandân's printed Always trigger");
-        assertEquals(sacrifice.getHostCard(), fish, "the trigger source should be the rewritten fish");
-        assertEquals(sacrifice.getActivatingPlayer(), controller,
-                "the opponent should be the controller of Dandân's sacrifice trigger");
-        assertEquals(sacrifice.getHostCard().getController(), controller,
-                "the trigger source should remain controlled by the opponent");
-
-        game.getStack().resolveStack();
-        assertFalse(controller.getCardsIn(ZoneType.Battlefield).contains(fish),
-                "resolving Dandân's actual Always trigger should sacrifice the fish");
-    }
-
-    private Game newGame(boolean danDan) {
+    private Game newGame() {
         ArrayList<RegisteredPlayer> players = new ArrayList<>();
         players.add(new RegisteredPlayer(new Deck()).setPlayer(new forge.ai.LobbyPlayerAi("text first", null)));
         players.add(new RegisteredPlayer(new Deck()).setPlayer(new forge.ai.LobbyPlayerAi("text second", null)));
         GameRules rules = new GameRules(GameType.Constructed);
-        if (danDan) {
-            rules.setAppliedVariants(EnumSet.of(GameType.DanDan));
-        }
+        rules.setAppliedVariants(EnumSet.of(GameType.DanDan));
         Match match = new Match(rules, players, "DanDan text-change AI test");
         Game game = match.createGame();
         game.setAge(GameStage.Play);

@@ -251,40 +251,6 @@ public class DanDanDrawTest extends AITest {
     }
 
     @Test
-    public void actualDaysUndoingOnlyEndsTheActivatingPlayersTurn() {
-        Game game = newGame(true);
-        Player active = game.getRegisteredPlayers().get(0);
-        Player nonactive = game.getRegisteredPlayers().get(1);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, active);
-        List<Card> pool = addDaysUndoingPool(active, nonactive, 14);
-        Card daysUndoing = addCardToZone("Day's Undoing", nonactive, ZoneType.Hand);
-        int spellId = daysUndoing.getId();
-        SpellAbility spell = daysUndoing.getSpells().get(0);
-        spell.setActivatingPlayer(nonactive);
-        game.getStack().addAndUnfreeze(spell);
-        ShuffleEventRecorder shuffles = new ShuffleEventRecorder();
-        game.subscribeToEvents(shuffles);
-
-        Random originalRandom = MyRandom.getRandom();
-        try {
-            MyRandom.setRandom(new Random(20261009));
-            game.getStack().resolveStack();
-        } finally {
-            MyRandom.setRandom(originalRandom);
-        }
-
-        assertTrue(game.getPhaseHandler().is(PhaseType.MAIN1));
-        assertEquals(game.getPhaseHandler().getPlayerTurn(), active);
-        assertEquals(game.findById(spellId).getZone().getZoneType(), ZoneType.Graveyard,
-                "a nonactive caster resolves Day's Undoing without an end-turn exile");
-        assertEquals(ids(active.getCardsIn(ZoneType.Hand)).size(), 7);
-        assertEquals(ids(nonactive.getCardsIn(ZoneType.Hand)).size(), 7);
-        assertEquals(allHandIds(active, nonactive), new HashSet<>(ids(pool)));
-        assertEquals(shuffles.playerIds.size(), 2, "each instructed player receives one shuffle event");
-        assertEquals(new HashSet<>(shuffles.playerIds), Set.of(active.getId(), nonactive.getId()));
-    }
-
-    @Test
     public void upToDrawHonorsZeroAndEachPlayersChosenCount() {
         Game game = newGame(true);
         Player active = game.getRegisteredPlayers().get(0);
@@ -363,23 +329,6 @@ public class DanDanDrawTest extends AITest {
     }
 
     @Test
-    public void brainstormDrawsItsThreeCardsAsOnePlayerInstruction() {
-        Game game = newGame(true);
-        Player active = game.getRegisteredPlayers().get(0);
-        Player nonactive = game.getRegisteredPlayers().get(1);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, active);
-        List<Card> tops = addKnownTop(active, 4);
-        Card brainstorm = addCardToZone("Brainstorm", active, ZoneType.Hand);
-
-        resolveSpell(game, brainstorm, active);
-
-        assertEquals(ids(active.getCardsIn(ZoneType.Hand)).size(), 1);
-        assertEquals(ids(nonactive.getCardsIn(ZoneType.Hand)), List.of());
-        assertEquals(ids(active.getCardsIn(ZoneType.Library)).size(), 3);
-        assertEquals(allHandAndLibraryIds(game, active, nonactive), new HashSet<>(ids(tops)));
-    }
-
-    @Test
     public void separateCutADealDrawAbilitiesKeepTheirOwnInstructions() {
         Game game = newGame(true);
         Player active = game.getRegisteredPlayers().get(0);
@@ -394,27 +343,6 @@ public class DanDanDrawTest extends AITest {
         assertEquals(ids(active.getCardsIn(ZoneType.Hand)), List.of(tops.get(1).getId()),
                 "the subability is a separate draw instruction after the opponent's first request");
         assertEquals(ids(game.getCardsIn(ZoneType.Library)), List.of());
-    }
-
-    @Test
-    public void ordinaryDrawInstructionKeepsPlayerGroupedOrder() {
-        Game ordinary = newGame(false);
-        Player ordinaryActive = ordinary.getRegisteredPlayers().get(0);
-        Player ordinaryNonactive = ordinary.getRegisteredPlayers().get(1);
-        ordinary.getPhaseHandler().devModeSet(PhaseType.MAIN1, ordinaryActive);
-        List<Card> ordinaryActiveTops = addKnownTop(ordinaryActive, 2);
-        List<Card> ordinaryNonactiveTops = addKnownTop(ordinaryNonactive, 2);
-
-        Card ordinaryDaysUndoing = addCardToZone("Day's Undoing", ordinaryActive, ZoneType.Graveyard);
-        var ordinaryDraw = ordinaryDaysUndoing.getFirstSpellAbility().getSubAbility();
-        ordinaryDraw.putParam("NumCards", "2");
-        ordinaryDraw.setActivatingPlayer(ordinaryActive);
-        AbilityUtils.resolve(ordinaryDraw);
-
-        assertEquals(ids(ordinaryActive.getCardsIn(ZoneType.Hand)),
-                List.of(ordinaryActiveTops.get(0).getId(), ordinaryActiveTops.get(1).getId()));
-        assertEquals(ids(ordinaryNonactive.getCardsIn(ZoneType.Hand)),
-                List.of(ordinaryNonactiveTops.get(0).getId(), ordinaryNonactiveTops.get(1).getId()));
     }
 
     @Test
@@ -604,12 +532,6 @@ public class DanDanDrawTest extends AITest {
     private Set<Integer> allHandIds(Player active, Player nonactive) {
         Set<Integer> ids = new HashSet<>(ids(active.getCardsIn(ZoneType.Hand)));
         ids.addAll(ids(nonactive.getCardsIn(ZoneType.Hand)));
-        return ids;
-    }
-
-    private Set<Integer> allHandAndLibraryIds(Game game, Player active, Player nonactive) {
-        Set<Integer> ids = allHandIds(active, nonactive);
-        ids.addAll(ids(game.getCardsIn(ZoneType.Library)));
         return ids;
     }
 

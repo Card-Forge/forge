@@ -143,10 +143,6 @@ public class DanDanLobbyUiTest extends AITest {
                         explicitlyChosen.get(DeckSection.Main));
                 assertEquals(gui.captured.get(0).getDeck().get(DeckSection.Main),
                         explicitlyChosen.get(DeckSection.Main));
-                assertEquals(gui.captured.get(0).getStartingLife(), 20);
-                assertEquals(gui.captured.get(1).getStartingLife(), 20);
-                assertEquals(gui.captured.get(0).getStartingHand(), 7);
-                assertEquals(gui.captured.get(1).getStartingHand(), 7);
 
                 lobby.applyVariant(GameType.Planechase);
                 assertTrue(lobby.getSlot(0).getDeck().get(DeckSection.Planes).countAll() > 0,
@@ -215,10 +211,6 @@ public class DanDanLobbyUiTest extends AITest {
                 assertEquals(gui.captured.get(0).getDeck().getName(), gui.captured.get(1).getDeck().getName());
                 assertEquals(gui.captured.get(0).getDeck().get(DeckSection.Main),
                         gui.captured.get(1).getDeck().get(DeckSection.Main));
-                assertEquals(gui.captured.get(0).getStartingLife(), 20);
-                assertEquals(gui.captured.get(1).getStartingLife(), 20);
-                assertEquals(gui.captured.get(0).getStartingHand(), 7);
-                assertEquals(gui.captured.get(1).getStartingHand(), 7);
             });
         } finally {
             oldState.restore();

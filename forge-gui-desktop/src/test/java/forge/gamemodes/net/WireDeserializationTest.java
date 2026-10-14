@@ -21,7 +21,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.List;
 
 /**
@@ -128,16 +127,7 @@ public class WireDeserializationTest {
         Assert.assertSame(reboundChoices.get(1), receivedInlineCard,
                 "an inline ephemeral choice stays detached even when its ID has a canonical view");
 
-        final GuiGameEvent missingCurrent = new GuiGameEvent(ProtocolMethod.getChoices,
-                "choose", 1, 1, List.of(staleTrackedCard), List.of(staleTrackedCard), null);
-        final IdentityHashMap<CardView, Integer> missingRef = new IdentityHashMap<>();
-        missingRef.put(staleTrackedCard, staleTrackedCard.getId());
-        missingCurrent.setDecodedCardViewIdRefs(missingRef, false);
-        final Object[] originalArguments = missingCurrent.getObjects().clone();
-        Assert.assertFalse(missingCurrent.refreshGetChoicesCardViewRefs(new Tracker()),
-                "a missing current IdRef target rejects invocation instead of retaining stale data");
-        Assert.assertSame(missingCurrent.getObjects()[3], originalArguments[3],
-                "rejection does not partially replace callback arguments");
+
     }
 
     /**

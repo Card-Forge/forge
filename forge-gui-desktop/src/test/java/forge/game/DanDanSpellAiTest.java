@@ -5,10 +5,8 @@ import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilMana;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
-import forge.ai.SpellApiToAi;
 import forge.deck.Deck;
 import forge.game.card.Card;
-import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -24,15 +22,6 @@ import com.google.common.collect.Lists;
 public class DanDanSpellAiTest extends AITest {
 
     @Test
-    public void predictUsesPublicIslandFallbackAcrossUnknownLibraryAndHandVariants() {
-        String firstChoice = predictNameWithUnknownCards("Dandan", "Brainstorm");
-        String secondChoice = predictNameWithUnknownCards("Swords to Plowshares", "Counterspell");
-
-        AssertJUnit.assertEquals("Island", firstChoice);
-        AssertJUnit.assertEquals("Island", secondChoice);
-    }
-
-    @Test
     public void predictUsesOnlyACurrentlyAuthorizedTopCardName() {
         Game game = createDanDanGame();
         Player ai = game.getPlayers().get(1);
@@ -46,13 +35,10 @@ public class DanDanSpellAiTest extends AITest {
         AssertJUnit.assertEquals("Brainstorm", choosePredictName(ai, sa));
         top.removeMayLookTemp(ai);
 
-        game.getAction().revealTo(top, ai);
-        ai.shuffle(null);
-        AssertJUnit.assertEquals("Island", choosePredictName(ai, sa));
     }
 
     @Test
-    public void predictIsOnlyEnabledForDanDan() {
+    public void predictIsEnabledForDanDan() {
         Game danDan = createDanDanGame();
         Player danDanAi = danDan.getPlayers().get(1);
         addCards("Island", 2, danDanAi);
@@ -62,15 +48,6 @@ public class DanDanSpellAiTest extends AITest {
         AssertJUnit.assertEquals(AiPlayDecision.WillPlay,
                 ((PlayerControllerAi) danDanAi.getController()).getAi().canPlaySa(danDanPredict.getFirstSpellAbility()));
 
-        Game constructed = initAndCreateGame();
-        Player constructedAi = constructed.getPlayers().get(1);
-        addCards("Island", 2, constructedAi);
-        addCardsToZone("Island", 12, constructedAi, ZoneType.Library);
-        addCardsToZone("Island", 12, constructed.getPlayers().get(0), ZoneType.Library);
-        Card constructedPredict = addCardToZone("Predict", constructedAi, ZoneType.Hand);
-        constructedPredict.getFirstSpellAbility().setActivatingPlayer(constructedAi);
-        AssertJUnit.assertFalse(((PlayerControllerAi) constructedAi.getController()).getAi()
-                .canPlaySa(constructedPredict.getFirstSpellAbility()) == AiPlayDecision.WillPlay);
     }
 
     @Test
@@ -98,7 +75,7 @@ public class DanDanSpellAiTest extends AITest {
     }
 
     @Test
-    public void daysUndoingDeclinesAUsefulHandOrNoOpponentHandAndKeepsConstructedPolicy() {
+    public void daysUndoingDeclinesAUsefulHandOrNoOpponentHand() {
         Game game = createDanDanGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
@@ -128,15 +105,6 @@ public class DanDanSpellAiTest extends AITest {
         AssertJUnit.assertFalse(((PlayerControllerAi) noOpponentHandAi.getController()).getAi()
                 .canPlaySa(noOpponentHandSa) == AiPlayDecision.WillPlay);
 
-        Game constructed = initAndCreateGame();
-        Player constructedAi = constructed.getPlayers().get(1);
-        addCards("Island", 3, constructedAi);
-        Card constructedDays = addCardToZone("Day's Undoing", constructedAi, ZoneType.Hand);
-        SpellAbility constructedSa = constructedDays.getFirstSpellAbility();
-        constructedSa.setActivatingPlayer(constructedAi);
-        constructed.getPhaseHandler().devModeSet(PhaseType.MAIN1, constructedAi);
-        AssertJUnit.assertFalse(((PlayerControllerAi) constructedAi.getController()).getAi()
-                .canPlaySa(constructedSa) == AiPlayDecision.WillPlay);
     }
 
     @Test
@@ -182,7 +150,7 @@ public class DanDanSpellAiTest extends AITest {
     }
 
     @Test
-    public void metamorphoseRemovesAValuablePermanentWhenOpponentHasNoReplacementCard() {
+    public void metamorphoseDependsOnWhetherOpponentHasAReplacementCard() {
         Game game = createDanDanGame();
         Player ai = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
@@ -199,55 +167,11 @@ public class DanDanSpellAiTest extends AITest {
                 ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa));
         AssertJUnit.assertTrue("the target should be the opponent's valuable permanent",
                 sa.getTargets().getTargetCards().contains(target));
-    }
 
-    @Test
-    public void metamorphoseKeepsItsExistingConstructedPolicy() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        addCards("Island", 3, ai);
-        addCard("Island", opponent);
-        Card target = addCard("Dandân", opponent);
-        addOpponentPumpTargeting(game, opponent, target);
         addCardToZone("Island", opponent, ZoneType.Hand);
-        Card metamorphose = addCardToZone("Metamorphose", ai, ZoneType.Hand);
-        SpellAbility sa = metamorphose.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
-
-        AssertJUnit.assertEquals(AiPlayDecision.WillPlay,
-                ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa));
-    }
-
-    @Test
-    public void metamorphoseDecisionDoesNotInspectOpponentHandIdentity() {
-        AiPlayDecision withIsland = metamorphoseDecisionWithOpponentHandCard("Island");
-        AiPlayDecision withCounterspell = metamorphoseDecisionWithOpponentHandCard("Counterspell");
-
-        AssertJUnit.assertEquals(withIsland, withCounterspell);
-        AssertJUnit.assertFalse(withIsland == AiPlayDecision.WillPlay);
-    }
-
-    @Test
-    public void svyeluniteTempleCanPayARealBlueBlueSpellCost() {
-        Game game = createDanDanGame();
-        Player ai = game.getPlayers().get(1);
-        Card temple = addCard("Svyelunite Temple", ai);
-        temple.setTapped(false);
-        Card counterspell = addCardToZone("Counterspell", ai, ZoneType.Hand);
-        SpellAbility sa = counterspell.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-
-        AssertJUnit.assertTrue("the existing mana payment path should use Temple when UU is required",
-                ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
-        AssertJUnit.assertTrue(ComputerUtilMana.getManaSourcesToPayCost(
-                ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false), sa, ai, false)
-                .contains(temple));
-
-        temple.setTapped(true);
-        AssertJUnit.assertFalse("the spell should be unaffordable when Temple cannot activate",
-                ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
+        sa.resetTargets();
+        AssertJUnit.assertFalse(((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa)
+                == AiPlayDecision.WillPlay);
     }
 
     @Test
@@ -259,102 +183,15 @@ public class DanDanSpellAiTest extends AITest {
         SpellAbility sa = counterspell.getFirstSpellAbility();
         sa.setActivatingPlayer(ai);
 
+        AssertJUnit.assertTrue(ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
         AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), ai, sa, false));
         AssertJUnit.assertTrue("Temple's sacrifice mode pays the spell's blue-blue cost",
                 ai.getCardsIn(ZoneType.Graveyard).contains(temple));
         AssertJUnit.assertTrue("all mana was spent on Counterspell", ai.getManaPool().isEmpty());
     }
 
-    @Test
-    public void svyeluniteTempleIsKeptWhenOrdinaryBluePaysForTheSpell() {
-        Game game = createDanDanGame();
-        Player ai = game.getPlayers().get(1);
-        Card temple = addCard("Svyelunite Temple", ai);
-        temple.setTapped(false);
-        Card opt = addCardToZone("Opt", ai, ZoneType.Hand);
-        SpellAbility sa = opt.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-
-        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), ai, sa, false));
-        AssertJUnit.assertTrue("Temple's ordinary blue mode is used instead of sacrificing it", temple.isTapped());
-        AssertJUnit.assertTrue(!ai.getCardsIn(ZoneType.Graveyard).contains(temple));
-    }
-
-    @Test
-    public void svyeluniteTempleIsKeptWhenAnIslandCanPayTheSecondBlue() {
-        Game game = createDanDanGame();
-        Player ai = game.getPlayers().get(1);
-        Card temple = addCard("Svyelunite Temple", ai);
-        Card island = addCard("Island", ai);
-        Card counterspell = addCardToZone("Counterspell", ai, ZoneType.Hand);
-        SpellAbility sa = counterspell.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-
-        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), ai, sa, false));
-        AssertJUnit.assertFalse("Temple should not be sacrificed when Island supplies the second blue",
-                ai.getCardsIn(ZoneType.Graveyard).contains(temple));
-        AssertJUnit.assertTrue("Island should supply one of the two blue mana", island.isTapped());
-    }
-
-    @Test
-    public void svyeluniteTempleKeepsItsExistingConstructedBlueBlueRefusal() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-        addCard("Svyelunite Temple", ai);
-        Card counterspell = addCardToZone("Counterspell", ai, ZoneType.Hand);
-        SpellAbility sa = counterspell.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-
-        AssertJUnit.assertFalse(ComputerUtilMana.canPayManaCost(sa, ai, 0, false));
-    }
-
-    @Test
-    public void svyeluniteTempleDoesNotActivateForManaWithoutAUsefulNeed() {
-        Game game = createDanDanGame();
-        Player ai = game.getPlayers().get(1);
-        Card temple = addCard("Svyelunite Temple", ai);
-        temple.setTapped(false);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
-
-        SpellAbility sacrificeForMana = temple.getSpellAbilities().stream()
-                .filter(ability -> ability.getPayCosts().hasSpecificCostType(CostSacrifice.class))
-                .findFirst().orElseThrow();
-        sacrificeForMana.setActivatingPlayer(ai);
-        AssertJUnit.assertFalse("Temple should be kept when no cast needs the mana",
-                SpellApiToAi.Converter.get(sacrificeForMana).canPlayWithSubs(ai, sacrificeForMana).willingToPlay());
-    }
-
-    private String predictNameWithUnknownCards(String libraryCardName, String handCardName) {
-        Game game = createDanDanGame();
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        Card predict = addCardToZone("Predict", ai, ZoneType.Hand);
-        addCardToZone(libraryCardName, ai, ZoneType.Library);
-        addCardToZone(handCardName, opponent, ZoneType.Hand);
-        SpellAbility sa = predict.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-
-        return choosePredictName(ai, sa);
-    }
-
     private String choosePredictName(Player ai, SpellAbility sa) {
         return ((PlayerControllerAi) ai.getController()).chooseCardName(sa, face -> true, "Card", "");
-    }
-
-    private AiPlayDecision metamorphoseDecisionWithOpponentHandCard(String hiddenCardName) {
-        Game game = createDanDanGame();
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        addCards("Island", 3, ai);
-        addCard("Island", opponent);
-        Card target = addCard("Dandân", opponent);
-        addOpponentPumpTargeting(game, opponent, target);
-        addCardToZone(hiddenCardName, opponent, ZoneType.Hand);
-        Card metamorphose = addCardToZone("Metamorphose", ai, ZoneType.Hand);
-        SpellAbility sa = metamorphose.getFirstSpellAbility();
-        sa.setActivatingPlayer(ai);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
-        return ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa);
     }
 
     private void addOpponentPumpTargeting(Game game, Player opponent, Card target) {

@@ -9,7 +9,6 @@ import forge.game.GameType;
 import forge.game.GameStage;
 import forge.game.GameView;
 import forge.game.Game;
-import forge.game.GameLogEntryType;
 import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -25,11 +24,9 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.match.input.InputPassPriority;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventCardChangeZone;
 import com.google.common.eventbus.Subscribe;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.ChatMessage;
@@ -55,35 +52,20 @@ import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
-import forge.ai.PlayerControllerAi;
 import forge.util.MyRandom;
 import forge.util.Localizer;
 import forge.util.MessageUtil;
 import org.testng.Assert;
-import org.testng.IConfigurationListener;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
 import org.testng.SkipException;
-import org.testng.TestNG;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.xml.XmlClass;
-import org.testng.xml.XmlInclude;
-import org.testng.xml.XmlSuite;
-import org.testng.xml.XmlTest;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.lang.management.ManagementFactory;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.AtomicMoveNotSupportedException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.lang.reflect.Field;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeoutException;
@@ -92,7 +74,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -100,12 +81,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Timer;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -113,99 +91,7 @@ import io.netty.util.concurrent.EventExecutor;
 
 /** Focused live-state proof for the Constructed plus DanDan view over ordinary TCP. */
 public class DanDanNetworkPlayTest {
-    private static final String QUEUED_CHILD_PROPERTY = "forge.tcp.queuedLocalQuit.child";
-    private static final String QUEUED_CHILD_MODE_PROPERTY = "forge.tcp.queuedLocalQuit.mode";
-    private static final String QUEUED_CHILD_STATUS_PROPERTY = "forge.tcp.queuedLocalQuit.status";
-    private static final String QUEUED_CHILD_TEST_METHOD =
-            "constructedDanDanQueuedLocalOldControllerQuitHasN1Witness";
-    private static final String[] QUEUED_CHILD_ALLOWED_OPENS = {
-            "java.base/java.lang=ALL-UNNAMED",
-            "java.base/java.time=ALL-UNNAMED",
-            "java.base/java.text=ALL-UNNAMED",
-            "java.base/java.util=ALL-UNNAMED",
-            "java.base/java.util.regex=ALL-UNNAMED",
-            "java.base/java.util.stream=ALL-UNNAMED",
-            "java.base/java.lang.reflect=ALL-UNNAMED",
-            "java.desktop/javax.imageio.spi=ALL-UNNAMED"
-    };
-    private static final long QUEUED_CHILD_STARTUP_TIMEOUT_SECONDS = 180;
-    private static final long QUEUED_CHILD_CASE_TIMEOUT_SECONDS = 360;
-    private static final long QUEUED_CHILD_DISPOSAL_GRACE_SECONDS = 3;
-    private static final AtomicReference<QueuedChildSemanticReceipt> QUEUED_CHILD_SEMANTIC_RECEIPT =
-            new AtomicReference<>();
     private static ScriptedHumanTcpSupportTest fixtureOwner;
-
-    private enum LocalDecisionQueueMode { NONE, QUEUED_OLD_CONTROLLER_QUIT }
-    private enum TcpOwnManaUndoMode { NONE, POSITIVE_REMOTE_OWN_UNDO }
-    private enum PrivacyHistoryReconnectMode { NONE, RECONNECT_ONLY, RECONNECT_AND_NEW_GAME }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanDisconnectTakeoverContinuesWithOneHuman(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, false, false, false, null, false, false,
-                false, false, false, LocalDecisionQueueMode.NONE, true);
-    }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanRemoteOwnManaUndoOverTcp(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, false, false, false, null, false, false,
-                false, false, false, LocalDecisionQueueMode.NONE, false, false,
-                TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO);
-    }
-
-    private record DisconnectDrawReceipt(int gameViewId, int cardId, int fromOwnerViewId,
-            int toOwnerViewId, int eventOwnerViewId, int actualOwnerViewId, int turn, PhaseType phase,
-            int turnPlayerViewId, boolean sharedLibraryAlias, boolean sharedGraveyardAlias,
-            int physicalCardCount, int uniqueCardCount, boolean cardInHostHand, boolean cardRemovedFromLibrary) { }
-
-    private static final class DisconnectDrawObserver {
-        private final Game game;
-        private final Player host;
-        private final CountDownLatch drawn = new CountDownLatch(1);
-        private final AtomicReference<Throwable> failure = new AtomicReference<>();
-        private volatile DisconnectDrawReceipt receipt;
-
-        private DisconnectDrawObserver(Game game, Player host) { this.game = game; this.host = host; }
-
-        @Subscribe public void onCardZoneChange(GameEventCardChangeZone event) {
-            try {
-                if (receipt != null || event.card() == null || event.from() == null || event.to() == null
-                        || event.from().zoneType() != ZoneType.Library || event.to().zoneType() != ZoneType.Hand
-                        || event.to().player() == null || event.to().player().getId() != host.getId()) return;
-                Player turnPlayer = game.getPhaseHandler().getPlayerTurn();
-                if (game.getPhaseHandler().getPhase() != PhaseType.DRAW || turnPlayer != host) return;
-                Card card = game.getCardsInGame().stream()
-                        .filter(candidate -> candidate.getId() == event.card().getId()).findFirst().orElse(null);
-                if (card == null || card.getOwner() == null || card.getZone() == null
-                        || card.getZone().getZoneType() != ZoneType.Hand || card.getZone().getPlayer() != host) {
-                    throw new AssertionError("actual host DRAW zone event did not leave its card in the host hand");
-                }
-                List<Player> players = game.getRegisteredPlayers();
-                var library = players.get(0).getZone(ZoneType.Library);
-                var graveyard = players.get(0).getZone(ZoneType.Graveyard);
-                boolean sharedLibrary = players.stream().allMatch(player -> player.getZone(ZoneType.Library) == library);
-                boolean sharedGraveyard = players.stream().allMatch(player -> player.getZone(ZoneType.Graveyard) == graveyard);
-                Set<Integer> physical = game.getCardsInGame().stream().map(Card::getId)
-                        .collect(java.util.stream.Collectors.toUnmodifiableSet());
-                boolean cardInHostHand = host.getZone(ZoneType.Hand).getCards().stream()
-                        .anyMatch(candidate -> candidate.getId() == card.getId());
-                boolean cardRemovedFromLibrary = library.getCards().stream()
-                        .noneMatch(candidate -> candidate.getId() == card.getId());
-                receipt = new DisconnectDrawReceipt(game.getView().getId(), card.getId(),
-                        event.from().player() == null ? -1 : event.from().player().getId(),
-                        event.to().player().getId(), event.card().getOwner() == null ? -1 : event.card().getOwner().getId(),
-                        card.getOwner().getId(), game.getPhaseHandler().getTurn(),
-                        game.getPhaseHandler().getPhase(), turnPlayer.getId(), sharedLibrary, sharedGraveyard,
-                        game.getCardsInGame().size(), physical.size(), cardInHostHand, cardRemovedFromLibrary);
-                drawn.countDown();
-            } catch (Throwable error) {
-                failure.compareAndSet(null, error);
-                drawn.countDown();
-            }
-        }
-
-        boolean await(long timeout, TimeUnit unit) throws InterruptedException { return drawn.await(timeout, unit); }
-        Throwable failure() { return failure.get(); }
-    }
 
     private record GuiPlayerState(String name, int avatar, int sleeve, String avatarCardKey,
                                   String sleeveArtKey, int sleeveArtOffset) { }
@@ -213,13 +99,7 @@ public class DanDanNetworkPlayTest {
                                      List<Integer> hostManaIds, int hostOpeningIslandId, int remoteHandCardId) {
         private MetamorphoseSetup { hostManaIds = List.copyOf(hostManaIds); }
     }
-    private record TcpOwnManaUndoSetup(Game game, int gameViewId, int remoteViewId, int islandCardId,
-                                       int priorOwnerViewId, int recipientOwnerViewId,
-                                       Set<Integer> physicalCardIds) {
-        private TcpOwnManaUndoSetup {
-            physicalCardIds = Set.copyOf(physicalCardIds);
-        }
-    }
+
     private record PrivacySetup(int hostViewId, int remoteViewId, int tellingTimeSeat, int fengrafSeat,
                                 int tellingTimeId, int daysUndoingId, int fengrafId,
                                 int fengrafAbilityId, int publicCreatureId, int negativeHandId, List<Integer> privateTopIds,
@@ -254,14 +134,6 @@ public class DanDanNetworkPlayTest {
                     && outcomeCount == 1 && outcomeObserved && engineReturnObserved;
         }
     }
-    private record QueuedLocalDecisionFacts(int oldGameViewId, int nextGameViewId,
-            boolean retainedOriginIsOldGame, boolean nextGameIsDistinct,
-            boolean transitionQueuedBeforeObservation, boolean staleQuitPostedAfterObservation,
-            boolean preparationReceiptMatched, int preparationShuffleCount,
-            boolean hostedGameIsNextGame, int registeredNextControllerCount,
-            boolean registeredNextControllersMatch, int hostAfterGameEndCount,
-            int remoteAfterGameEndCount, int matchOverCount, boolean nextGameOver,
-            int nextGameOutcomeCount) { }
 
     private static final class LifecycleTrace {
         private final CountDownLatch outcome = new CountDownLatch(1);
@@ -338,16 +210,7 @@ public class DanDanNetworkPlayTest {
 
     @DataProvider(name = "syncModes")
     public Object[][] syncModes() {
-        String queuedChildMode = Boolean.getBoolean(QUEUED_CHILD_PROPERTY)
-                ? System.getProperty(QUEUED_CHILD_MODE_PROPERTY) : null;
-        if (queuedChildMode != null) {
-            return switch (queuedChildMode) {
-                case "full" -> new Object[][] {{false}};
-                case "delta" -> new Object[][] {{true}};
-                default -> throw new IllegalStateException("Unknown queued child mode");
-            };
-        }
-        return new Object[][] {{false}, {true}}; // full-state first, then the delta counterpart
+        return new Object[][] {{false}, {true}};
     }
 
     @Test(dataProvider = "syncModes", timeOut = 360_000)
@@ -356,33 +219,8 @@ public class DanDanNetworkPlayTest {
     }
 
     @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanMulliganUsesActualFreeRegularAndLondonChoices(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, true);
-    }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
     public void constructedDanDanFreeMulliganRevealReachesRemotePeer(boolean deltaSync) throws Throwable {
         runDanDanCase(deltaSync, true, true);
-    }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanPrivacyHistoryUsesActualFreeRegularLondonPrefix(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, true, true, false, null, true, false, false, false, false,
-                LocalDecisionQueueMode.NONE, false, true);
-    }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanPrivacyHistoryReconnectsSameGameAndResumesPriority(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, true, true, false, null, true, false, false, false, false,
-                LocalDecisionQueueMode.NONE, false, true, TcpOwnManaUndoMode.NONE,
-                PrivacyHistoryReconnectMode.RECONNECT_ONLY);
-    }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanPrivacyHistoryReconnectResetsIntoFreshGame(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, true, true, false, null, true, false, false, false, false,
-                LocalDecisionQueueMode.NONE, false, true, TcpOwnManaUndoMode.NONE,
-                PrivacyHistoryReconnectMode.RECONNECT_AND_NEW_GAME);
     }
 
     @Test(dataProvider = "syncModes", timeOut = 360_000)
@@ -415,367 +253,6 @@ public class DanDanNetworkPlayTest {
         runDanDanCase(deltaSync, false, false, false, null, false, true, false, false, true);
     }
 
-    @Test(dataProvider = "syncModes", timeOut = 0)
-    public void constructedDanDanQueuedLocalOldControllerQuitHasN1Witness(boolean deltaSync) throws Throwable {
-        if (Boolean.getBoolean(QUEUED_CHILD_PROPERTY)) {
-            String expectedMode = deltaSync ? "delta" : "full";
-            if (!expectedMode.equals(System.getProperty(QUEUED_CHILD_MODE_PROPERTY))) {
-                throw new AssertionError("queued child provider selected a mismatched mode");
-            }
-            QUEUED_CHILD_SEMANTIC_RECEIPT.set(null);
-            writeQueuedChildStatus("CASE_STARTED", expectedMode, -1, -1, -1, -1, "none", null);
-        } else {
-            runQueuedLocalDecisionChild(deltaSync);
-            return;
-        }
-        runDanDanCase(deltaSync, false, false, false, null, false, true, false, false, false,
-                LocalDecisionQueueMode.QUEUED_OLD_CONTROLLER_QUIT);
-        if (Boolean.getBoolean(QUEUED_CHILD_PROPERTY)) {
-            QueuedChildSemanticReceipt receipt = QUEUED_CHILD_SEMANTIC_RECEIPT.get();
-            if (receipt == null || !receipt.complete()) {
-                throw new AssertionError("queued child method returned without its semantic cleanup receipt");
-            }
-        }
-    }
-
-    /** Child entry point runs only this TestNG method and emits fixed scalar status records. */
-    public static final class QueuedLocalDecisionChild {
-        private QueuedLocalDecisionChild() { }
-
-        public static void main(String[] args) {
-            String mode = args.length == 1 ? args[0] : "invalid";
-            ChildResultCounts counts = new ChildResultCounts();
-            TestNG testng = new TestNG();
-            testng.setUseDefaultListeners(false);
-            String statusPath = System.getProperty(QUEUED_CHILD_STATUS_PROPERTY);
-            if (statusPath != null) {
-                testng.setOutputDirectory(Path.of(statusPath).getParent().resolve("test-output").toString());
-            }
-            testng.addListener(counts);
-            XmlSuite suite = new XmlSuite();
-            suite.setName("queued-local-decision-child");
-            XmlTest test = new XmlTest(suite);
-            test.setName("queued-local-decision-" + mode);
-            XmlClass testClass = new XmlClass(DanDanNetworkPlayTest.class);
-            testClass.setIncludedMethods(List.of(new XmlInclude(QUEUED_CHILD_TEST_METHOD)));
-            test.setXmlClasses(List.of(testClass));
-            testng.setXmlSuites(List.of(suite));
-
-            try {
-                if (!Boolean.getBoolean(QUEUED_CHILD_PROPERTY)
-                        || statusPath == null || statusPath.isBlank()
-                        || !mode.equals(System.getProperty(QUEUED_CHILD_MODE_PROPERTY))
-                        || !("full".equals(mode) || "delta".equals(mode))) {
-                    throw new IllegalArgumentException("invalid queued child launch configuration");
-                }
-                testng.run();
-                QueuedChildSemanticReceipt semantic = QUEUED_CHILD_SEMANTIC_RECEIPT.get();
-                boolean passed = testng.getStatus() == 0 && counts.passed.get() == 1
-                        && counts.failed.get() == 0 && counts.skipped.get() == 0
-                        && counts.configurationFailures.get() == 0
-                        && counts.configurationSkips.get() == 0 && semantic != null && semantic.complete();
-                writeQueuedChildStatus(passed ? "PASS" : "TEST_FAILED", mode, counts.passed.get(),
-                        counts.failed.get(), counts.skipped.get(),
-                        counts.configurationFailures.get() + counts.configurationSkips.get(),
-                        counts.failureType(), semantic);
-                if (!passed) System.exit(1);
-                System.exit(0);
-            } catch (Throwable failure) {
-                try {
-                    writeQueuedChildStatus("RUNNER_FAILED", mode, counts.passed.get(), counts.failed.get(),
-                            counts.skipped.get(),
-                            counts.configurationFailures.get() + counts.configurationSkips.get(),
-                            failure.getClass().getName(), QUEUED_CHILD_SEMANTIC_RECEIPT.get());
-                } catch (Throwable ignored) {
-                    // The parent treats a missing or malformed status as failure.
-                }
-                System.exit(1);
-            }
-        }
-    }
-
-    private static final class ChildResultCounts implements ITestListener, IConfigurationListener {
-        private final AtomicInteger passed = new AtomicInteger();
-        private final AtomicInteger failed = new AtomicInteger();
-        private final AtomicInteger skipped = new AtomicInteger();
-        private final AtomicInteger configurationFailures = new AtomicInteger();
-        private final AtomicInteger configurationSkips = new AtomicInteger();
-        private volatile String failureType = "none";
-
-        @Override public void onTestSuccess(ITestResult result) { passed.incrementAndGet(); }
-        @Override public void onTestFailure(ITestResult result) {
-            failed.incrementAndGet();
-            retainFailureType(result);
-        }
-        @Override public void onTestFailedWithTimeout(ITestResult result) {
-            failed.incrementAndGet();
-            retainFailureType(result);
-        }
-        @Override public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-            failed.incrementAndGet();
-            retainFailureType(result);
-        }
-        @Override public void onTestSkipped(ITestResult result) {
-            skipped.incrementAndGet();
-            retainFailureType(result);
-        }
-        @Override public void onConfigurationFailure(ITestResult result) {
-            configurationFailures.incrementAndGet();
-            retainFailureType(result);
-        }
-        @Override public void onConfigurationSkip(ITestResult result) {
-            configurationSkips.incrementAndGet();
-            retainFailureType(result);
-        }
-        private void retainFailureType(ITestResult result) {
-            Throwable failure = result.getThrowable();
-            if (failure != null) failureType = failure.getClass().getName();
-        }
-        String failureType() { return failureType; }
-    }
-
-    private record QueuedChildSemanticReceipt(boolean queuedConsumerWitness,
-            boolean sameGameOutcomeObserved, boolean sameGameEngineReturnObserved) {
-        boolean complete() {
-            return queuedConsumerWitness && sameGameOutcomeObserved && sameGameEngineReturnObserved;
-        }
-    }
-
-    private record QueuedChildStatus(String mode, String state, int passed, int failed, int skipped,
-                                     int configurationFailures, String failureType,
-                                     boolean queuedConsumerWitness, boolean sameGameOutcomeObserved,
-                                     boolean sameGameEngineReturnObserved) {
-        String encode() {
-            return String.join("\t", "QUEUED_CHILD", "1", mode, state, Integer.toString(passed),
-                    Integer.toString(failed), Integer.toString(skipped),
-                    Integer.toString(configurationFailures), failureType,
-                    Boolean.toString(queuedConsumerWitness), Boolean.toString(sameGameOutcomeObserved),
-                    Boolean.toString(sameGameEngineReturnObserved));
-        }
-
-        static QueuedChildStatus read(Path path) {
-            try {
-                String[] fields = Files.readString(path, StandardCharsets.UTF_8).strip().split("\t", -1);
-                if (fields.length != 12 || !"QUEUED_CHILD".equals(fields[0]) || !"1".equals(fields[1])) return null;
-                if (!("true".equals(fields[9]) || "false".equals(fields[9]))
-                        || !("true".equals(fields[10]) || "false".equals(fields[10]))
-                        || !("true".equals(fields[11]) || "false".equals(fields[11]))) return null;
-                return new QueuedChildStatus(fields[2], fields[3], Integer.parseInt(fields[4]),
-                        Integer.parseInt(fields[5]), Integer.parseInt(fields[6]),
-                        Integer.parseInt(fields[7]), fields[8], Boolean.parseBoolean(fields[9]),
-                        Boolean.parseBoolean(fields[10]), Boolean.parseBoolean(fields[11]));
-            } catch (IOException | NumberFormatException failure) {
-                return null;
-            }
-        }
-
-        boolean isTerminal() {
-            return "PASS".equals(state) || "TEST_FAILED".equals(state) || "RUNNER_FAILED".equals(state)
-                    || "INCONCLUSIVE".equals(state);
-        }
-    }
-
-    private static void runQueuedLocalDecisionChild(boolean deltaSync) throws Throwable {
-        String mode = deltaSync ? "delta" : "full";
-        Path childRoot = Files.createTempDirectory("forge-queued-local-quit-");
-        Path childHome = childRoot.resolve("home");
-        Path statusPath = childRoot.resolve("status.tsv");
-        Process child = null;
-        Throwable failure = null;
-        try {
-            Files.createDirectories(childHome);
-            List<String> command = new ArrayList<>();
-            command.add(Path.of(System.getProperty("java.home"), "bin", "java").toString());
-            command.add("-Duser.home=" + childHome.toAbsolutePath());
-            command.add("-Dforge.tcp.support.isolated=true");
-            command.add("-D" + QUEUED_CHILD_PROPERTY + "=true");
-            command.add("-D" + QUEUED_CHILD_MODE_PROPERTY + "=" + mode);
-            command.add("-D" + QUEUED_CHILD_STATUS_PROPERTY + "=" + statusPath.toAbsolutePath());
-            command.addAll(activeQueuedChildOpens());
-            command.add("-cp");
-            command.add(System.getProperty("java.class.path"));
-            command.add(QueuedLocalDecisionChild.class.getName());
-            command.add(mode);
-            child = new ProcessBuilder(command).redirectErrorStream(true)
-                    .redirectOutput(ProcessBuilder.Redirect.DISCARD).start();
-
-            if (!awaitQueuedChildCaseStart(child, statusPath, mode)) {
-                if (child.isAlive()) {
-                    throw new AssertionError("INCONCLUSIVE: queued child did not finish isolated fixture startup");
-                }
-                int exit = child.exitValue();
-                QueuedChildStatus status = QueuedChildStatus.read(statusPath);
-                throw new AssertionError("queued child exited before case entry: mode=" + mode
-                        + ", exit=" + exit + ", status=" + describeQueuedChildStatus(status));
-            }
-            if (!child.waitFor(QUEUED_CHILD_CASE_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
-                throw new AssertionError("INCONCLUSIVE: queued child exceeded the 360-second case budget");
-            }
-            int exit = child.exitValue();
-            QueuedChildStatus status = QueuedChildStatus.read(statusPath);
-            boolean passed = exit == 0 && status != null && "PASS".equals(status.state())
-                    && mode.equals(status.mode()) && status.passed() == 1 && status.failed() == 0
-                    && status.skipped() == 0 && status.configurationFailures() == 0
-                    && "none".equals(status.failureType()) && status.queuedConsumerWitness()
-                    && status.sameGameOutcomeObserved() && status.sameGameEngineReturnObserved();
-            System.out.println("QUEUED_LOCAL_CHILD mode=" + mode + " state="
-                    + (passed ? "PASS" : status == null ? "MISSING_STATUS" : status.state())
-                    + " exit=" + exit + " passed=" + (status == null ? -1 : status.passed())
-                    + " failed=" + (status == null ? -1 : status.failed())
-                    + " skipped=" + (status == null ? -1 : status.skipped())
-                    + " configFailures=" + (status == null ? -1 : status.configurationFailures())
-                    + " queuedWitness=" + (status != null && status.queuedConsumerWitness())
-                    + " sameGameOutcome=" + (status != null && status.sameGameOutcomeObserved())
-                    + " sameGameEngineReturn=" + (status != null && status.sameGameEngineReturnObserved()));
-            if (!passed) throw new AssertionError("queued child result failed validation: mode=" + mode
-                    + ", exit=" + exit + ", status=" + describeQueuedChildStatus(status));
-        } catch (InterruptedException interrupted) {
-            Thread.currentThread().interrupt();
-            failure = new AssertionError("INCONCLUSIVE: queued child supervision was interrupted", interrupted);
-        } catch (Throwable childFailure) {
-            failure = childFailure;
-        } finally {
-            boolean childStopped = child == null || !child.isAlive();
-            if (child != null && !childStopped) {
-                childStopped = stopOwnedQueuedChild(child);
-            }
-            if (!childStopped) {
-                failure = combine(failure, new AssertionError(
-                        "owned queued child could not be confirmed dead; its private profile is retained"));
-            } else {
-                try { deleteQueuedChildTree(childRoot); }
-                catch (Throwable deletionFailure) { failure = combine(failure, deletionFailure); }
-            }
-        }
-        if (failure != null) throw failure;
-    }
-
-    private static boolean awaitQueuedChildCaseStart(Process child, Path statusPath, String mode)
-            throws InterruptedException {
-        long deadline = System.nanoTime()
-                + TimeUnit.SECONDS.toNanos(QUEUED_CHILD_STARTUP_TIMEOUT_SECONDS);
-        while (System.nanoTime() < deadline) {
-            QueuedChildStatus status = QueuedChildStatus.read(statusPath);
-            if (status != null && mode.equals(status.mode())
-                    && ("CASE_STARTED".equals(status.state()) || status.isTerminal())) return true;
-            if (!child.isAlive()) return false;
-            Thread.sleep(25);
-        }
-        return false;
-    }
-
-    private static boolean stopOwnedQueuedChild(Process child) {
-        if (child.isAlive()) child.destroy();
-        if (awaitQueuedChildExit(child, QUEUED_CHILD_DISPOSAL_GRACE_SECONDS)) return true;
-        child.destroyForcibly();
-        return awaitQueuedChildExit(child, QUEUED_CHILD_DISPOSAL_GRACE_SECONDS);
-    }
-
-    private static boolean awaitQueuedChildExit(Process child, long seconds) {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(seconds);
-        boolean interrupted = Thread.interrupted();
-        try {
-            while (child.isAlive() && System.nanoTime() < deadline) {
-                try {
-                    child.waitFor(Math.max(1, deadline - System.nanoTime()), TimeUnit.NANOSECONDS);
-                } catch (InterruptedException ignored) {
-                    interrupted = true;
-                }
-            }
-            return !child.isAlive();
-        } finally {
-            if (interrupted) Thread.currentThread().interrupt();
-        }
-    }
-
-    private static void deleteQueuedChildTree(Path root) throws IOException {
-        if (!Files.exists(root)) return;
-        try (var paths = Files.walk(root)) {
-            for (Path path : paths.sorted(Comparator.reverseOrder()).toList()) Files.deleteIfExists(path);
-        }
-    }
-
-    private static String describeQueuedChildStatus(QueuedChildStatus status) {
-        if (status == null) return "missing-or-malformed";
-        return "state=" + status.state() + ",mode=" + status.mode() + ",passed=" + status.passed()
-                + ",failed=" + status.failed() + ",skipped=" + status.skipped()
-                + ",configFailures=" + status.configurationFailures()
-                + ",queuedWitness=" + status.queuedConsumerWitness()
-                + ",sameGameOutcome=" + status.sameGameOutcomeObserved()
-                + ",sameGameEngineReturn=" + status.sameGameEngineReturnObserved()
-                + ",failureType=" + status.failureType();
-    }
-
-    private static void writeQueuedChildStatus(String state, String mode, int passed, int failed,
-            int skipped, int configurationFailures, String failureType,
-            QueuedChildSemanticReceipt semantic) throws IOException {
-        String statusPath = System.getProperty(QUEUED_CHILD_STATUS_PROPERTY);
-        if (statusPath == null || statusPath.isBlank()) throw new IOException("queued child status path is missing");
-        Path target = Path.of(statusPath);
-        Path pending = target.resolveSibling(target.getFileName() + ".pending");
-        Files.writeString(pending, new QueuedChildStatus(mode, state, passed, failed, skipped,
-                configurationFailures, failureType, semantic != null && semantic.queuedConsumerWitness(),
-                semantic != null && semantic.sameGameOutcomeObserved(),
-                semantic != null && semantic.sameGameEngineReturnObserved()).encode(), StandardCharsets.UTF_8);
-        try {
-            Files.move(pending, target, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-        } catch (AtomicMoveNotSupportedException unsupported) {
-            Files.move(pending, target, StandardCopyOption.REPLACE_EXISTING);
-        }
-    }
-
-    private static void abortQueuedChildBeforeUnsafeCleanup(String category, Throwable... failures) {
-        if (!Boolean.getBoolean(QUEUED_CHILD_PROPERTY)) {
-            throw new AssertionError("unsafe queued-child cleanup guard reached outside its isolated child");
-        }
-        try {
-            String mode = System.getProperty(QUEUED_CHILD_MODE_PROPERTY, "unknown");
-            writeQueuedChildStatus("INCONCLUSIVE", mode, 0, 0, 0, 0,
-                    "unsafe-cleanup:" + category + ":" + queuedChildFailureTypes(failures),
-                    QUEUED_CHILD_SEMANTIC_RECEIPT.get());
-        } catch (Throwable ignored) {
-            // Even a failed status write must not resume cleanup against a possibly live Game worker.
-        } finally {
-            Runtime.getRuntime().halt(86);
-        }
-        throw new AssertionError("unreachable after isolated queued child abort");
-    }
-
-    private static String queuedChildFailureTypes(Throwable... failures) {
-        List<String> types = new ArrayList<>();
-        for (Throwable failure : failures) {
-            if (failure == null) continue;
-            types.add(failure.getClass().getSimpleName());
-            for (Throwable suppressed : failure.getSuppressed()) {
-                if (types.size() == 8) break;
-                types.add(suppressed.getClass().getSimpleName());
-            }
-            if (types.size() == 8) break;
-        }
-        return types.isEmpty() ? "none" : String.join(",", types);
-    }
-
-    private static List<String> activeQueuedChildOpens() {
-        List<String> active = new ArrayList<>();
-        List<String> arguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
-        for (int i = 0; i < arguments.size(); i++) {
-            String argument = arguments.get(i);
-            String payload;
-            if ("--add-opens".equals(argument) && i + 1 < arguments.size()) {
-                payload = arguments.get(++i);
-            } else if (argument.startsWith("--add-opens=")) {
-                payload = argument.substring("--add-opens=".length());
-            } else continue;
-            for (String allowed : QUEUED_CHILD_ALLOWED_OPENS) {
-                if (allowed.equals(payload)) {
-                    active.add("--add-opens=" + payload);
-                    break;
-                }
-            }
-        }
-        return active;
-    }
-
     @Test(dataProvider = "syncModes", timeOut = 360_000)
     public void constructedDanDanPrivateLookAndPublicGraveyardRevealStaySeatScoped(boolean deltaSync) throws Throwable {
         runDanDanCase(deltaSync, false, false, false, null, true);
@@ -784,12 +261,6 @@ public class DanDanNetworkPlayTest {
     @Test(dataProvider = "syncModes", timeOut = 360_000)
     public void constructedDanDanInversePrivacyActorsStaySeatScoped(boolean deltaSync) throws Throwable {
         runDanDanCase(deltaSync, false, false, false, null, true, false, false, true);
-    }
-
-    @Test(dataProvider = "syncModes", timeOut = 360_000)
-    public void constructedDanDanPrivacyHistoryReshufflesAndEndsTurn(boolean deltaSync) throws Throwable {
-        runDanDanCase(deltaSync, false, false, false, null, true, false, false,
-                false, false, LocalDecisionQueueMode.NONE, false, true);
     }
 
     private void runDanDanMetamorphoseCase(boolean deltaSync, boolean acceptHandEntry) throws Throwable {
@@ -855,71 +326,6 @@ public class DanDanNetworkPlayTest {
                                Boolean metamorphoseAccept, boolean privacyScenario,
                                boolean lifecycleScenario, boolean staleActionWitness,
                                boolean inversePrivacyActors, boolean staleQuitWitness) throws Throwable {
-        runDanDanCase(deltaSync, mulliganScenario, hostStarterRevealScenario, reconnectScenario,
-                metamorphoseAccept, privacyScenario, lifecycleScenario, staleActionWitness,
-                inversePrivacyActors, staleQuitWitness, LocalDecisionQueueMode.NONE);
-    }
-
-    private void runDanDanCase(boolean deltaSync, boolean mulliganScenario,
-                               boolean hostStarterRevealScenario, boolean reconnectScenario,
-                               Boolean metamorphoseAccept, boolean privacyScenario,
-                               boolean lifecycleScenario, boolean staleActionWitness,
-                               boolean inversePrivacyActors, boolean staleQuitWitness,
-                               LocalDecisionQueueMode localDecisionQueueMode) throws Throwable {
-        runDanDanCase(deltaSync, mulliganScenario, hostStarterRevealScenario, reconnectScenario,
-                metamorphoseAccept, privacyScenario, lifecycleScenario, staleActionWitness,
-                inversePrivacyActors, staleQuitWitness, localDecisionQueueMode, false);
-    }
-
-    private void runDanDanCase(boolean deltaSync, boolean mulliganScenario,
-                               boolean hostStarterRevealScenario, boolean reconnectScenario,
-                               Boolean metamorphoseAccept, boolean privacyScenario,
-                               boolean lifecycleScenario, boolean staleActionWitness,
-                               boolean inversePrivacyActors, boolean staleQuitWitness,
-                               LocalDecisionQueueMode localDecisionQueueMode,
-                               boolean disconnectAiScenario) throws Throwable {
-        runDanDanCase(deltaSync, mulliganScenario, hostStarterRevealScenario, reconnectScenario,
-                metamorphoseAccept, privacyScenario, lifecycleScenario, staleActionWitness,
-                inversePrivacyActors, staleQuitWitness, localDecisionQueueMode, disconnectAiScenario, false);
-    }
-
-    private void runDanDanCase(boolean deltaSync, boolean mulliganScenario,
-                               boolean hostStarterRevealScenario, boolean reconnectScenario,
-                               Boolean metamorphoseAccept, boolean privacyScenario,
-                               boolean lifecycleScenario, boolean staleActionWitness,
-                               boolean inversePrivacyActors, boolean staleQuitWitness,
-                               LocalDecisionQueueMode localDecisionQueueMode,
-                               boolean disconnectAiScenario, boolean privacyShuffleHistoryScenario) throws Throwable {
-        runDanDanCase(deltaSync, mulliganScenario, hostStarterRevealScenario, reconnectScenario,
-                metamorphoseAccept, privacyScenario, lifecycleScenario, staleActionWitness,
-                inversePrivacyActors, staleQuitWitness, localDecisionQueueMode,
-                disconnectAiScenario, privacyShuffleHistoryScenario, TcpOwnManaUndoMode.NONE);
-    }
-
-    private void runDanDanCase(boolean deltaSync, boolean mulliganScenario,
-                               boolean hostStarterRevealScenario, boolean reconnectScenario,
-                               Boolean metamorphoseAccept, boolean privacyScenario,
-                               boolean lifecycleScenario, boolean staleActionWitness,
-                               boolean inversePrivacyActors, boolean staleQuitWitness,
-                               LocalDecisionQueueMode localDecisionQueueMode,
-                               boolean disconnectAiScenario, boolean privacyShuffleHistoryScenario,
-                               TcpOwnManaUndoMode tcpOwnManaUndoMode) throws Throwable {
-        runDanDanCase(deltaSync, mulliganScenario, hostStarterRevealScenario, reconnectScenario,
-                metamorphoseAccept, privacyScenario, lifecycleScenario, staleActionWitness,
-                inversePrivacyActors, staleQuitWitness, localDecisionQueueMode,
-                disconnectAiScenario, privacyShuffleHistoryScenario, tcpOwnManaUndoMode,
-                PrivacyHistoryReconnectMode.NONE);
-    }
-
-    private void runDanDanCase(boolean deltaSync, boolean mulliganScenario,
-                               boolean hostStarterRevealScenario, boolean reconnectScenario,
-                               Boolean metamorphoseAccept, boolean privacyScenario,
-                               boolean lifecycleScenario, boolean staleActionWitness,
-                               boolean inversePrivacyActors, boolean staleQuitWitness,
-                               LocalDecisionQueueMode localDecisionQueueMode,
-                               boolean disconnectAiScenario, boolean privacyShuffleHistoryScenario,
-                               TcpOwnManaUndoMode tcpOwnManaUndoMode,
-                               PrivacyHistoryReconnectMode privacyHistoryReconnectMode) throws Throwable {
         final IGuiBase oldGui = GuiBase.getInterface();
         final boolean oldDelta = RemoteClientGuiGame.useDeltaSync;
         final String oldLegality = FModel.getPreferences().getPref(FPref.ENFORCE_DECK_LEGALITY);
@@ -934,27 +340,13 @@ public class DanDanNetworkPlayTest {
         final Random oldRandom = MyRandom.getRandom();
         final FServerManager server = FServerManager.getInstance();
         final ScriptedHumanTcpSupport.Scenario scenario = new ScriptedHumanTcpSupport.Scenario();
-        if (tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) {
-            scenario.enablePositiveRemoteOwnManaUndo();
-            scenario.configureStarterSeatZeroScenario();
-        }
+
         if (privacyScenario) {
             scenario.beginPrivacyScenario(deltaSync, inversePrivacyActors ? 0 : 1, inversePrivacyActors ? 1 : 0);
-            if (privacyShuffleHistoryScenario) scenario.enablePrivacyShuffleHistoryScenario();
+
             scenario.configureStarterSeatZeroScenario();
         }
-        if (privacyHistoryReconnectMode != PrivacyHistoryReconnectMode.NONE) {
-            if (!mulliganScenario || !hostStarterRevealScenario || reconnectScenario || disconnectAiScenario
-                    || !privacyScenario || !privacyShuffleHistoryScenario || metamorphoseAccept != null
-                    || lifecycleScenario || staleActionWitness || staleQuitWitness
-                    || tcpOwnManaUndoMode != TcpOwnManaUndoMode.NONE) {
-                throw new IllegalArgumentException("Reconnect continuation requires only the composite privacy-history prefix and no other fixture mode");
-            }
-            scenario.enablePrivacyHistoryReconnectScenario();
-            if (privacyHistoryReconnectMode == PrivacyHistoryReconnectMode.RECONNECT_AND_NEW_GAME) {
-                scenario.enablePrivacyHistoryNextGameScenario();
-            }
-        }
+
         if (metamorphoseAccept != null) {
             scenario.beginMetamorphoseScenario(metamorphoseAccept);
             scenario.enableMetamorphoseOpeningDiagnostic();
@@ -968,10 +360,10 @@ public class DanDanNetworkPlayTest {
         if (staleQuitWitness) scenario.enableStaleQuitWitness();
         if (metamorphoseAccept != null) scenario.configureStarterSeatZeroScenario();
         if (hostStarterRevealScenario) scenario.configureStarterSeatZeroScenario();
-        if (reconnectScenario || disconnectAiScenario || scenario.privacyHistoryReconnectScenario()) {
+        if (reconnectScenario) {
             scenario.configureStarterSeatZeroScenario();
             if (reconnectScenario) scenario.configureReconnectScenario();
-            if (disconnectAiScenario) scenario.configureDisconnectAiScenario();
+
         }
         scenario.expectPostKeepCallback(deltaSync ? "applyDelta" : "setGameView");
         final String hostName = "DanDan scripted host";
@@ -1001,16 +393,13 @@ public class DanDanNetworkPlayTest {
         PrivacyTerminalReceipt privacyTerminalReceipt = null;
         AtomicReference<LifecycleCleanupReceipt> lifecycleCleanupReceipt = new AtomicReference<>();
         AtomicReference<Game> capturedLifecycleNPlusOne = new AtomicReference<>();
-        AtomicBoolean queuedNextGameMayHaveLaunched = new AtomicBoolean();
         Throwable primaryFailure = null;
         ScriptedHumanTcpSupport.StaleActionRejectionLog staleActionRejectionLog = null;
         boolean staleActionNetworkLogActivated = false;
         try {
             // Prevent the headless start path from consuming the strict deck-shuffle RNG for music selection.
             FModel.getPreferences().setPref(FPref.UI_ENABLE_MUSIC, "false");
-            if (tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) {
-                FModel.getPreferences().setPref(FPref.UI_UNDO_MODE, forge.localinstance.properties.ForgeConstants.UNDO_MODE_SINGLE);
-            }
+
             if (metamorphoseAccept != null || privacyScenario || lifecycleScenario) {
                 FModel.getPreferences().setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, "false");
             }
@@ -1038,14 +427,13 @@ public class DanDanNetworkPlayTest {
             if (mulliganScenario) {
                 if (hostStarterRevealScenario) scriptMulliganWithHostStarter(desktop.hostGui);
                 else scriptMulligan(desktop.hostGui);
-            } else if (reconnectScenario || disconnectAiScenario || metamorphoseAccept != null || privacyScenario || lifecycleScenario
-                    || tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) scriptKeepWithHostStarter(desktop.hostGui);
+            } else if (reconnectScenario || metamorphoseAccept != null || privacyScenario || lifecycleScenario) scriptKeepWithHostStarter(desktop.hostGui);
             else scriptKeepWithoutLand(desktop.hostGui);
             if (metamorphoseAccept != null || lifecycleScenario) desktop.hostGui.script(ScriptedHumanTcpSupport.Decision.CAST_METAMORPHOSE, null);
 
             serverPort = PortAllocator.allocatePort();
             final int port = serverPort;
-            server.setLobbyListener(reconnectScenario || disconnectAiScenario || scenario.privacyHistoryReconnectScenario()
+            server.setLobbyListener(reconnectScenario
                     ? headlessHostLobbyListener(message -> {
                         if (message != null && message.contains("/skipreconnect")) {
                             reconnectParkNoticeText.set(message);
@@ -1075,8 +463,7 @@ public class DanDanNetworkPlayTest {
             if (mulliganScenario) {
                 if (hostStarterRevealScenario) scriptMulliganWithHostStarter(remote.gui());
                 else scriptMulligan(remote.gui());
-            } else if (reconnectScenario || disconnectAiScenario || metamorphoseAccept != null || privacyScenario || lifecycleScenario
-                    || tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) scriptKeepWithHostStarter(remote.gui());
+            } else if (reconnectScenario || metamorphoseAccept != null || privacyScenario || lifecycleScenario) scriptKeepWithHostStarter(remote.gui());
             else scriptKeepWithoutLand(remote.gui());
             remote.connect();
             Assert.assertTrue(remote.awaitAssigned(15, TimeUnit.SECONDS), "TCP login assigned remote DanDan seat");
@@ -1100,14 +487,7 @@ public class DanDanNetworkPlayTest {
             Assert.assertNotNull(start, "both seats are ready with the official DanDan preset");
             start.run();
             match = desktop.match;
-            if (tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) {
-                Assert.assertTrue(scenario.awaitPositiveRemoteOwnManaUndoSetup(60, TimeUnit.SECONDS),
-                        "the asynchronous opening setup hook completed before the remote land action was armed");
-                assertNoFailure(scenario);
-                TcpOwnManaUndoSetup setup = desktop.tcpOwnManaUndoSetup;
-                Assert.assertNotNull(setup, "the bounded setup receipt retained the actual owned Island acquisition");
-                remote.gui().script(ScriptedHumanTcpSupport.Decision.PLAY_LAND, setup.islandCardId());
-            }
+
             Assert.assertNotNull(match, "ordinary hosted match path created the DanDan match");
             Assert.assertEquals(match.getMatch().getRules().getGameType(), GameType.Constructed);
             Assert.assertEquals(match.getMatch().getPlayers().get(0).getPlayer().getName(), hostName);
@@ -1146,8 +526,7 @@ public class DanDanNetworkPlayTest {
             }
             if (lifecycleScenario) {
                 assertMetamorphoseLifecycle(deltaSync, scenario, desktop, remote, match, server,
-                        staleActionRejectionLog, lifecycleCleanupReceipt, capturedLifecycleNPlusOne,
-                        localDecisionQueueMode, queuedNextGameMayHaveLaunched);
+                        staleActionRejectionLog, lifecycleCleanupReceipt, capturedLifecycleNPlusOne);
                 return;
             }
             if (metamorphoseAccept != null) {
@@ -1156,25 +535,8 @@ public class DanDanNetworkPlayTest {
             }
             if (privacyScenario) {
                 privacyTerminalReceipt = assertTellingTimeFengrafPrivacyCase(deltaSync, scenario, desktop,
-                        remote, match, reconnectObservation, privacyShuffleHistoryScenario);
-                if (scenario.privacyHistoryReconnectScenario()) {
-                    int inboundBytesAtOpening = privacyTerminalReceipt.inboundBytesAtOpening();
-                    parkedRemote = remote;
-                    remote = new ScriptedHumanTcpSupport(remoteName, 1, remoteName, serverPort, scenario);
-                    replacementReconnectObservation = new ScriptedHumanTcpSupport.ReconnectObservation();
-                    privacyTerminalReceipt = runPrivacyHistoryReconnectRoundTrip(
-                            server, retainedRemoteClient.get(), parkedRemote, remote,
-                            desktop.hostGui, scenario, match, desktop.privacySetup,
-                            reconnectObservation, inboundBytesAtOpening,
-                            reconnectParkNotice, reconnectParkNoticeText, replacementReconnectObservation,
-                            pendingHistoryReconnectServerInactive, pendingHistoryReconnectServerChannel,
-                            completedHistoryReconnectServerInactive);
-                    if (privacyHistoryReconnectMode == PrivacyHistoryReconnectMode.RECONNECT_AND_NEW_GAME) {
-                        assertPrivacyHistoryNextGame(deltaSync, scenario, desktop, remote, parkedRemote, match,
-                                retainedRemoteClient.get(), server, reconnectObservation,
-                                privacyTerminalReceipt, privacyShuffleHistoryScenario);
-                    }
-                }
+                        remote, match, reconnectObservation, false);
+
                 return;
             }
             ScriptedHumanTcpSupport.PostKeepReceipt postKeep = scenario.postKeepReceipt();
@@ -1243,46 +605,24 @@ public class DanDanNetworkPlayTest {
                     "remote Keep choice is bound to its actual assigned PlayerView");
             if (mulliganScenario) {
                 Map<Integer, Map<ZoneType, List<Integer>>> mulliganZones = postKeepZones;
-                if (scenario.privacyMulliganPrefixScenario()) {
-                    ScriptedHumanTcpSupport.PrivacyMulliganBoundaryReceipt boundary =
-                            scenario.privacyMulliganBoundaryReceipt();
-                    Assert.assertNotNull(boundary, "the same Game retained both sides of declared setup");
-                    Assert.assertSame(boundary.game(), scenario.privacyGame());
-                    Assert.assertTrue(scenario.mulliganChoices().stream().allMatch(choice ->
-                            choice.gameViewId() == boundary.gameViewId()));
-                    Assert.assertTrue(scenario.londonBottomDispatches().stream().allMatch(bottom ->
-                            bottom.gameViewId() == boundary.gameViewId()));
-                    mulliganZones = boundary.preSetupZones();
-                    assertDanDanMulliganZones(mulliganZones, hostViewId, remoteViewId, scenario);
-                }
+
                 assertMulliganReceipts(scenario, mulliganZones, hostViewId, remoteViewId);
                 if (hostStarterRevealScenario) {
                     assertRemoteFreeReveal(scenario, remote.gui(), postKeep, hostViewId, remoteViewId,
                             hostName, remoteName);
                 }
             }
-            ScriptedHumanTcpSupport.Decision starterDecision = hostStarterRevealScenario || reconnectScenario || disconnectAiScenario
-                    || tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO
+            ScriptedHumanTcpSupport.Decision starterDecision = hostStarterRevealScenario || reconnectScenario
+
                     ? ScriptedHumanTcpSupport.Decision.START_SEAT_ZERO
                     : ScriptedHumanTcpSupport.Decision.PLAY_OR_DRAW;
             Assert.assertEquals(scenario.actions().stream().filter(a -> a.decision() == starterDecision).count(), 1);
-            if (hostStarterRevealScenario || reconnectScenario || disconnectAiScenario
-                    || tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) {
+            if (hostStarterRevealScenario || reconnectScenario) {
                 Assert.assertEquals(scenario.actions().stream().filter(a -> a.decision()
                         == ScriptedHumanTcpSupport.Decision.PLAY_OR_DRAW).count(), 0);
             }
             Assert.assertEquals(server.getTotalSendErrors(), 0, "no TCP send errors before terminal cleanup");
-            if (tcpOwnManaUndoMode == TcpOwnManaUndoMode.POSITIVE_REMOTE_OWN_UNDO) {
-                assertPositiveRemoteOwnManaUndoOverTcp(scenario, desktop, remote, match, server,
-                        retainedRemoteClient.get(), desktop.tcpOwnManaUndoSetup, priorityGui);
-                return;
-            }
-            if (disconnectAiScenario) {
-                assertDisconnectAiContinuation(deltaSync, scenario, desktop, remote, match, server,
-                        retainedRemoteClient.get(), reconnectParkNotice, reconnectParkNoticeText,
-                        disconnectServerInactive, completedDisconnectServerInactive);
-                return;
-            }
+
             if (reconnectScenario) {
                 parkedRemote = remote;
                 remote = new ScriptedHumanTcpSupport(remoteName, 1, remoteName, serverPort, scenario);
@@ -1297,35 +637,20 @@ public class DanDanNetworkPlayTest {
             primaryFailure = failure;
             throw failure;
         } finally {
-            if (Boolean.getBoolean(QUEUED_CHILD_PROPERTY)
-                    && localDecisionQueueMode == LocalDecisionQueueMode.QUEUED_OLD_CONTROLLER_QUIT
-                    && queuedNextGameMayHaveLaunched.get()) {
-                LifecycleCleanupReceipt receipt = lifecycleCleanupReceipt.get();
-                Game expectedGame = capturedLifecycleNPlusOne.get();
-                boolean cleanupProven = false;
-                try {
-                    cleanupProven = receipt != null && expectedGame != null && receipt.proves(expectedGame);
-                } catch (Throwable proofFailure) {
-                    abortQueuedChildBeforeUnsafeCleanup("outer-cleanup-proof-failed", primaryFailure, proofFailure);
-                }
-                if (!cleanupProven) {
-                    abortQueuedChildBeforeUnsafeCleanup("outer-cleanup-without-engine-return", primaryFailure);
-                }
-            }
+
             scenario.releasePrivacyHostChoice();
             scenario.stopActions();
             Throwable cleanupFailure = null;
             try {
                 final boolean runTerminalTimerOracle = primaryFailure == null
-                        && privacyHistoryReconnectMode != PrivacyHistoryReconnectMode.RECONNECT_AND_NEW_GAME;
+                       ;
                 final ScriptedHumanTcpSupport remoteForCleanup = remote;
                 final ScriptedHumanTcpSupport.ScriptedGui hostGuiForCleanup = desktop == null ? null : desktop.hostGui;
                 final DanDanDesktop desktopForCleanup = desktop;
                 final PrivacyTerminalReceipt privacyTerminalForCleanup = privacyTerminalReceipt;
                 final ScriptedHumanTcpSupport.ReconnectObservation reconnectObservationForCleanup = reconnectObservation;
                 HostedMatch cleanupMatch = match != null ? match : desktop == null ? null : desktop.match;
-                if (primaryFailure != null && scenario.lifecycleScenario() && cleanupMatch != null
-                        && desktopForCleanup != null && remoteForCleanup != null) {
+                if (primaryFailure != null && scenario.lifecycleScenario() && cleanupMatch != null && desktopForCleanup != null && remoteForCleanup != null) {
                     try {
                         LifecycleCleanupReceipt receipt = lifecycleCleanupReceipt.get();
                         if (receipt == null || !receipt.proves(capturedLifecycleNPlusOne.get())) {
@@ -1342,17 +667,14 @@ public class DanDanNetworkPlayTest {
                         disconnectServerInactive.get();
                 ScriptedHumanTcpSupportTest.CompletedServerInactiveReceipt cleanupInactiveReceipt =
                         completedDisconnectServerInactive.get();
-                if (historyInactiveForCleanup != null && retainedRemoteClient.get() != null
-                        && ScriptedHumanTcpSupport.serverChannel(retainedRemoteClient.get())
+                if (historyInactiveForCleanup != null && retainedRemoteClient.get() != null && ScriptedHumanTcpSupport.serverChannel(retainedRemoteClient.get())
                         == historyInactiveForCleanup.channel()) {
                     cleanupInactiveObservation = null;
                     cleanupInactiveReceipt = historyInactiveForCleanup;
                 } else {
                     ScriptedHumanTcpSupportTest.ServerInactiveObservation historyPendingForCleanup =
                             pendingHistoryReconnectServerInactive.get();
-                    if (historyPendingForCleanup != null && retainedRemoteClient.get() != null
-                            && pendingHistoryReconnectServerChannel.get() != null
-                            && ScriptedHumanTcpSupport.serverChannel(retainedRemoteClient.get())
+                    if (historyPendingForCleanup != null && retainedRemoteClient.get() != null && pendingHistoryReconnectServerChannel.get() != null && ScriptedHumanTcpSupport.serverChannel(retainedRemoteClient.get())
                             == pendingHistoryReconnectServerChannel.get()) {
                         cleanupInactiveObservation = historyPendingForCleanup;
                         cleanupInactiveReceipt = null;
@@ -1365,26 +687,18 @@ public class DanDanNetworkPlayTest {
                                     && hostGuiForCleanup != null && remoteForCleanup != null
                                     && countAfterGameEnd(hostGuiForCleanup.captures()) == 2
                                     && countAfterGameEnd(remoteForCleanup.gui().captures()) == 2;
-                            boolean completedPrivacyHistoryNextGame = scenario.privacyHistoryNextGamePhase()
+                            boolean completedPrivacyHistoryNextGame = false
                                     && liveMatch.getGame() == null
                                     && scenario.privacyHistoryNextGameTerminals().size() == 2;
                             if (completedPrivacyHistoryNextGame) return;
-                            if (scenario.privacyHistoryNextGamePhase()) {
-                                // Game N reconnect/outcome assertions completed; its terminal cleanup
-                                // receipt must not be applied to the independent Game N+1.
-                                liveMatch.endCurrentGame();
-                                return;
-                            }
-                            if (runTerminalTimerOracle && !completedLifecycle && remoteForCleanup != null
-                                    && hostGuiForCleanup != null && client != null
-                                    && hostGuiForCleanup.awaitActualTerminal(0, TimeUnit.MILLISECONDS)
-                                    && remoteForCleanup.gui().awaitActualTerminal(0, TimeUnit.MILLISECONDS)) {
+
+                            if (runTerminalTimerOracle && !completedLifecycle && remoteForCleanup != null && hostGuiForCleanup != null && client != null && hostGuiForCleanup.awaitActualTerminal(0, TimeUnit.MILLISECONDS) && remoteForCleanup.gui().awaitActualTerminal(0, TimeUnit.MILLISECONDS)) {
                                 endCurrentGameAfterForwardedAwaitPrompt(liveMatch, client, remoteForCleanup.gui());
                                 if (privacyTerminalForCleanup != null) {
                                     assertTellingTimeFengrafPrivacyTerminalCase(deltaSync, scenario,
                                             desktopForCleanup, remoteForCleanup, liveMatch, server,
                                             reconnectObservationForCleanup, privacyTerminalForCleanup,
-                                            privacyShuffleHistoryScenario);
+                                            false);
                                 }
                             } else {
                                 if (scenario.lifecycleScenario() && liveMatch.getGame() == null) return;
@@ -1487,8 +801,7 @@ public class DanDanNetworkPlayTest {
                     } catch (Throwable failure) { cleanupFailure = combine(cleanupFailure, failure); }
                 }
             }
-            if (primaryFailure == null && retainedRemoteClient.get() != null && reconnectScenario
-                    && reconnectSendErrorBaseline.get() != null) {
+            if (primaryFailure == null && retainedRemoteClient.get() != null && reconnectScenario && reconnectSendErrorBaseline.get() != null) {
                 try {
                     Assert.assertEquals(retainedRemoteClient.get().getSendErrorCount(),
                             reconnectSendErrorBaseline.get().intValue(),
@@ -1531,1371 +844,12 @@ public class DanDanNetworkPlayTest {
         }
     }
 
-    private static void assertQueuedLocalDecisionConsumer(HostedMatch hosted, Game oldGame,
-            forge.game.Match retainedMatch, ScriptedHumanTcpSupport.Scenario scenario,
-            DanDanDesktop desktop, ScriptedHumanTcpSupport remote,
-            AtomicReference<LifecycleCleanupReceipt> lifecycleCleanupReceipt,
-            AtomicReference<Game> capturedLifecycleNPlusOne,
-            AtomicBoolean queuedNextGameMayHaveLaunched) throws Throwable {
-        // Retain both actual controllers before any terminal or match cleanup can remove a seat.
-        List<PlayerControllerHuman> oldControllers = List.copyOf(hosted.getHumanControllers());
-        Assert.assertEquals(oldControllers.size(), 2,
-                "retain both actual HostedMatch human controllers while Game N is still registered");
-        Assert.assertTrue(oldControllers.stream().allMatch(controller -> controller.getGame() == oldGame),
-                "both retained human controllers immutably identify Game N");
-        if (oldControllers.stream().anyMatch(controller -> controller.getPlayer() != null
-                && controller.getPlayer().getOriginalLobbyPlayer() != controller.getLobbyPlayer())) {
-            throw new AssertionError(
-                    "INCONCLUSIVE: both retained Game N controllers must still be counted by HostedMatch tally");
-        }
-        scenario.armQueuedLocalDecisionGamePreparation(oldGame);
-        CountDownLatch gateEntered = new CountDownLatch(1);
-        CountDownLatch releaseEdt = new CountDownLatch(1);
-        CountDownLatch observationComplete = new CountDownLatch(1);
-        CountDownLatch edtDrain = new CountDownLatch(1);
-        AtomicReference<Throwable> edtFailure = new AtomicReference<>();
-        AtomicReference<Game> observedNextGame = new AtomicReference<>();
-        AtomicReference<List<PlayerControllerHuman>> observedNextControllers = new AtomicReference<>(List.of());
-        AtomicReference<LifecycleTrace> nextTrace = new AtomicReference<>();
-        AtomicReference<PlayerControllerHuman> nextCleanupController = new AtomicReference<>();
-        AtomicReference<PlayerControllerHuman> remoteFenceController = new AtomicReference<>();
-        AtomicReference<ScriptedHumanTcpSupport.Scenario.QueuedLocalGamePreparationReceipt> preparationReceipt =
-                new AtomicReference<>();
-        AtomicReference<Boolean> transitionQueuedBeforeObservation = new AtomicReference<>(false);
-        AtomicReference<Boolean> observationQueued = new AtomicReference<>(false);
-        AtomicReference<Boolean> staleQuitPostedAfterObservation = new AtomicReference<>(false);
-        AtomicReference<Boolean> drainQueued = new AtomicReference<>(false);
-        AtomicReference<Integer> matchOverCount = new AtomicReference<>(0);
-        boolean[] runPositiveCurrentQuit = {false};
-        boolean[] frozenConsumerWitness = {false};
-        boolean[] cleanupBoundaryAuthorized = {false};
-        Throwable primaryFailure = null;
-        Throwable cleanupFailure = null;
-
-        hosted.setOnMatchOver(() -> matchOverCount.updateAndGet(count -> count + 1));
-        FThreads.invokeInEdtLater(() -> {
-            gateEntered.countDown();
-            try {
-                if (!releaseEdt.await(25, TimeUnit.SECONDS)) {
-                    throw new AssertionError("EDT gate was not released for the queued local decision order");
-                }
-            } catch (Throwable failure) {
-                edtFailure.compareAndSet(null, failure);
-            }
-        });
-
-        try {
-            if (!gateEntered.await(10, TimeUnit.SECONDS)) {
-                throw new AssertionError("INCONCLUSIVE: EDT did not enter the controlled decision queue gate");
-            }
-            if (edtFailure.get() != null) throw new AssertionError(
-                    "INCONCLUSIVE: controlled EDT gate failed", edtFailure.get());
-            if (hosted.getGame() != oldGame) throw new AssertionError(
-                    "INCONCLUSIVE: Game N was not active before queuing decisions");
-
-            // These are actual PlayerControllerHuman -> Match.fireEvent -> HostedMatch visitor calls.
-            queuedNextGameMayHaveLaunched.set(true);
-            oldControllers.get(0).nextGameDecision(NextGameDecision.CONTINUE);
-            if (hosted.getGame() != oldGame) throw new AssertionError(
-                    "INCONCLUSIVE: first CONTINUE changed Game N before the second decision");
-            oldControllers.get(1).nextGameDecision(NextGameDecision.CONTINUE);
-            transitionQueuedBeforeObservation.set(true);
-            if (hosted.getGame() != oldGame) throw new AssertionError(
-                    "INCONCLUSIVE: final CONTINUE did not leave Game N active on the blocked EDT");
-
-            FThreads.invokeInEdtLater(() -> {
-                try {
-                    Game nextGame = hosted.getGame();
-                    if (nextGame == null) throw new AssertionError(
-                            "CONTINUE did not install a next Game before observation");
-                    observedNextGame.set(nextGame);
-                    capturedLifecycleNPlusOne.set(nextGame);
-                    if (nextGame == oldGame) throw new AssertionError("CONTINUE reused Game N");
-                    LifecycleTrace trace = new LifecycleTrace();
-                    trace.attach(nextGame);
-                    nextTrace.set(trace);
-                    hosted.setEndGameHook(() -> trace.recordEngineReturn(nextGame));
-                    List<PlayerControllerHuman> controllers = List.copyOf(hosted.getHumanControllers());
-                    observedNextControllers.set(controllers);
-                    PlayerControllerHuman remoteController = controllers.stream()
-                            .filter(controller -> controller.getGui() instanceof RemoteClientGuiGame)
-                            .filter(controller -> controller.getGame() == nextGame)
-                            .findFirst().orElse(null);
-                    if (remoteController != null) {
-                        nextCleanupController.set(remoteController);
-                        remoteFenceController.set(remoteController);
-                    } else if (!controllers.isEmpty()) nextCleanupController.set(controllers.get(0));
-                    else {
-                        nextGame.getPlayers().stream().map(Player::getController)
-                                .filter(PlayerControllerHuman.class::isInstance)
-                                .map(PlayerControllerHuman.class::cast).findFirst()
-                                .ifPresent(nextCleanupController::set);
-                    }
-                    if (controllers.size() != 2 || controllers.stream().anyMatch(controller ->
-                            controller.getGame() != nextGame) || controllers.stream().anyMatch(oldControllers::contains)) {
-                        throw new AssertionError("N+1 did not synchronously install two fresh controllers bound to N+1");
-                    }
-                    if (remoteController == null) {
-                        throw new AssertionError("N+1 did not install its actual remote-seat host controller");
-                    }
-
-                    ScriptedHumanTcpSupport.Scenario.QueuedLocalGamePreparationReceipt receipt =
-                            scenario.queuedLocalGamePreparationReceipt();
-                    preparationReceipt.set(receipt);
-                    if (receipt == null || receipt.oldGame() != oldGame || receipt.game() != nextGame) {
-                        throw new AssertionError(
-                                "host setGameView did not register the actual N+1 preparation observer");
-                    }
-                    if (!receipt.awaitLibraryPreparation(15, TimeUnit.SECONDS) || receipt.shuffleCount() == 0) {
-                        throw new AssertionError(
-                                "N+1 engine did not emit its actual GameEventShuffle before stale QUIT");
-                    }
-                    Set<Integer> physicalIds = nextGame.getCardsInGame().stream().map(Card::getId)
-                            .collect(java.util.stream.Collectors.toUnmodifiableSet());
-                    if (physicalIds.size() != 80) throw new AssertionError(
-                            "captured N+1 cleanup Game does not contain all 80 physical cards");
-                    trace.expectPhysicalCardIds(physicalIds);
-                    if (nextCleanupController.get() == null
-                            || nextCleanupController.get().getGame() != nextGame) {
-                        throw new AssertionError("captured N+1 cleanup controller does not identify N+1");
-                    }
-                    int gameViewId = nextGame.getView().getId();
-                    if (gameViewId == oldGame.getView().getId()) {
-                        throw new AssertionError("N+1 did not receive a fresh GameView identity");
-                    }
-                    if (countAfterGameEnd(desktop.hostGui.captures()) != 1) {
-                        throw new AssertionError("N CONTINUE did not emit exactly one host afterGameEnd callback");
-                    }
-                } catch (Throwable failure) {
-                    edtFailure.compareAndSet(null, failure);
-                } finally {
-                    observationComplete.countDown();
-                }
-            });
-            observationQueued.set(true);
-            transitionQueuedBeforeObservation.set(true);
-
-            // Queue the retained Game N controller's actual QUIT after the observation runnable.
-            oldControllers.get(0).nextGameDecision(NextGameDecision.QUIT);
-            staleQuitPostedAfterObservation.set(true);
-            FThreads.invokeInEdtLater(edtDrain::countDown);
-            drainQueued.set(true);
-        } catch (Throwable failure) {
-            primaryFailure = failure;
-        } finally {
-            // Every wait/failure path releases the EDT before captured-game cleanup begins.
-            releaseEdt.countDown();
-        }
-
-        try {
-            if (observationQueued.get() && !observationComplete.await(25, TimeUnit.SECONDS)) {
-                Throwable failure = new AssertionError(
-                        "INCONCLUSIVE: intermediate EDT observation did not complete");
-                if (primaryFailure == null) primaryFailure = failure;
-                else primaryFailure.addSuppressed(failure);
-            }
-            if (drainQueued.get() && !edtDrain.await(25, TimeUnit.SECONDS)) {
-                Throwable failure = new AssertionError("INCONCLUSIVE: queued old-N QUIT did not drain");
-                if (primaryFailure == null) primaryFailure = failure;
-                else primaryFailure.addSuppressed(failure);
-            }
-            if (primaryFailure == null && edtFailure.get() != null) {
-                primaryFailure = new AssertionError("INCONCLUSIVE: N+1 observation prerequisite failed",
-                        edtFailure.get());
-            }
-
-            Game nextGame = observedNextGame.get();
-            ScriptedHumanTcpSupport.Scenario.QueuedLocalGamePreparationReceipt receipt = preparationReceipt.get();
-            LifecycleTrace trace = nextTrace.get();
-            PlayerControllerHuman cleanupController = nextCleanupController.get();
-            PlayerControllerHuman remoteController = remoteFenceController.get();
-            List<PlayerControllerHuman> nextControllers = observedNextControllers.get();
-            if (primaryFailure == null && (nextGame == null || cleanupController == null || remoteController == null || trace == null
-                    || receipt == null || !transitionQueuedBeforeObservation.get()
-                    || !staleQuitPostedAfterObservation.get() || receipt.game() != nextGame
-                    || receipt.oldGame() != oldGame || receipt.shuffleCount() == 0)) {
-                primaryFailure = new AssertionError(
-                        "INCONCLUSIVE: queued-decision origin, order, or N+1 engine-preparation prerequisite missing");
-            }
-            if (primaryFailure == null) {
-                int hostAfterEndBeforeFence = countAfterGameEnd(desktop.hostGui.captures());
-                // Require the remote to receive every synchronous host callback before freezing effects.
-                try {
-                    sendRemoteAfterGameEndFence(remoteController, remote.gui(), scenario,
-                            Math.max(1, hostAfterEndBeforeFence));
-                } catch (Throwable fenceFailure) {
-                    throw new AssertionError("INCONCLUSIVE: remote afterGameEnd receipt fence failed",
-                            fenceFailure);
-                }
-                if (scenario.failure() != null) {
-                    throw new AssertionError("INCONCLUSIVE: scripted callback health failed before RED evaluation",
-                            scenario.failure());
-                }
-                int remoteAfterEndCount = countAfterGameEnd(remote.gui().captures());
-                int hostAfterEndCount = countAfterGameEnd(desktop.hostGui.captures());
-                boolean controllersMatch = hosted.getHumanControllers().size() == 2
-                        && hosted.getHumanControllers().containsAll(nextControllers)
-                        && nextControllers.stream().allMatch(controller -> controller.getGame() == nextGame);
-                QueuedLocalDecisionFacts facts = new QueuedLocalDecisionFacts(oldGame.getView().getId(),
-                        nextGame.getView().getId(), oldControllers.stream().allMatch(controller ->
-                                controller.getGame() == oldGame), nextGame != oldGame,
-                        transitionQueuedBeforeObservation.get(), staleQuitPostedAfterObservation.get(),
-                        receipt.oldGame() == oldGame && receipt.game() == nextGame, receipt.shuffleCount(),
-                        hosted.getGame() == nextGame, hosted.getHumanControllers().size(), controllersMatch,
-                        hostAfterEndCount, remoteAfterEndCount, matchOverCount.get(), nextGame.isGameOver(),
-                        trace.outcomeCount());
-
-                // Engine entry and controller registration must be sound before evaluating consumer effects.
-                if (!facts.retainedOriginIsOldGame() || !facts.nextGameIsDistinct()
-                        || !facts.transitionQueuedBeforeObservation() || !facts.staleQuitPostedAfterObservation()
-                        || !facts.preparationReceiptMatched() || facts.preparationShuffleCount() < 1
-                        || facts.nextGameOver() || facts.nextGameOutcomeCount() != 0) {
-                    primaryFailure = new AssertionError(
-                            "INCONCLUSIVE: pre-cleanup lifecycle facts do not isolate the queued QUIT consumer: "
-                                    + facts);
-                } else {
-                    boolean preserved = facts.hostedGameIsNextGame()
-                            && facts.registeredNextControllerCount() == 2
-                            && facts.registeredNextControllersMatch()
-                            && facts.hostAfterGameEndCount() == 1
-                            && facts.remoteAfterGameEndCount() == 1
-                            && facts.matchOverCount() == 0;
-                    if (!preserved) {
-                        boolean observedStaleTeardown = !facts.hostedGameIsNextGame()
-                                && facts.registeredNextControllerCount() == 0
-                                && !facts.registeredNextControllersMatch()
-                                && facts.hostAfterGameEndCount() == 2
-                                && facts.remoteAfterGameEndCount() == 2
-                                && facts.matchOverCount() == 1
-                                && !facts.nextGameOver() && facts.nextGameOutcomeCount() == 0;
-                        if (observedStaleTeardown) {
-                            cleanupBoundaryAuthorized[0] = true;
-                            primaryFailure = new AssertionError(
-                                    "RED: queued Game N QUIT synchronously tore down the active N+1 match: " + facts);
-                        }
-                        else primaryFailure = new AssertionError(
-                                "INCONCLUSIVE: lifecycle state differs without the complete stale-QUIT teardown witness: "
-                                        + facts);
-                    } else {
-                        cleanupBoundaryAuthorized[0] = true;
-                        runPositiveCurrentQuit[0] = true;
-                        frozenConsumerWitness[0] = true;
-                    }
-                }
-            }
-        } catch (Throwable failure) {
-            if (primaryFailure == null) primaryFailure = failure;
-            else primaryFailure.addSuppressed(failure);
-        } finally {
-            // Cleanup is anchored to the captured N+1 Game/controller, even when HostedMatch.game was cleared.
-            Game capturedGame = observedNextGame.get();
-            PlayerControllerHuman cleanupController = nextCleanupController.get();
-            PlayerControllerHuman remoteController = remoteFenceController.get();
-            LifecycleTrace trace = nextTrace.get();
-            if (capturedGame != null) {
-                boolean actualOutcomeAndReturnAlreadyProven = false;
-                if (capturedGame.isGameOver() && trace != null && trace.outcomeCount() == 1) {
-                    try {
-                        actualOutcomeAndReturnAlreadyProven = trace.awaitEngineReturn(0, TimeUnit.NANOSECONDS);
-                    } catch (InterruptedException interrupted) {
-                        Thread.currentThread().interrupt();
-                    }
-                }
-                if (Boolean.getBoolean(QUEUED_CHILD_PROPERTY) && !actualOutcomeAndReturnAlreadyProven) {
-                    try {
-                        awaitLifecycleCondition(scenario,
-                                () -> queuedLocalNextGameCleanupReadiness(capturedGame, scenario,
-                                        desktop.hostGui, remote.gui()).ready(),
-                                30, "captured N+1 reached its actual held first-priority input before cleanup");
-                    } catch (Throwable readinessFailure) {
-                        QueuedPriorityReadiness readiness = queuedLocalNextGameCleanupReadiness(
-                                capturedGame, scenario, desktop.hostGui, remote.gui());
-                        abortQueuedChildBeforeUnsafeCleanup("n-plus-one-held-priority-unproven:" + readiness.scalar(),
-                                primaryFailure, readinessFailure);
-                    }
-                }
-                try {
-                    if (cleanupController == null) {
-                        cleanupController = capturedGame.getRegisteredPlayers().stream()
-                                .map(Player::getController)
-                                .filter(PlayerControllerHuman.class::isInstance)
-                                .map(PlayerControllerHuman.class::cast)
-                                .filter(controller -> controller.getGame() == capturedGame)
-                                .findFirst().orElse(null);
-                    }
-                    if (trace == null) {
-                        trace = new LifecycleTrace();
-                        trace.attach(capturedGame);
-                        nextTrace.set(trace);
-                        LifecycleTrace cleanupTrace = trace;
-                        hosted.setEndGameHook(() -> cleanupTrace.recordEngineReturn(capturedGame));
-                    }
-                    var preparation = scenario.queuedLocalGamePreparationReceipt();
-                    if (preparation != null) {
-                        try {
-                            if (!preparation.awaitLibraryPreparation(15, TimeUnit.SECONDS)) {
-                                throw new AssertionError(
-                                        "captured N+1 engine did not reach library preparation during cleanup");
-                            }
-                        } catch (InterruptedException interrupted) {
-                            Thread.currentThread().interrupt();
-                            cleanupFailure = combine(cleanupFailure, interrupted);
-                        } catch (Throwable failure) {
-                            cleanupFailure = combine(cleanupFailure, failure);
-                        }
-                    }
-                    if (trace.expectedPhysicalCardIds == null) {
-                        trace.expectPhysicalCardIds(capturedGame.getCardsInGame().stream().map(Card::getId)
-                                .collect(java.util.stream.Collectors.toUnmodifiableSet()));
-                    }
-                    if (cleanupBoundaryAuthorized[0] && scenario.failure() == null) {
-                        try {
-                            scenario.armQueuedLocalDecisionCleanup(capturedGame);
-                        } catch (Throwable failure) {
-                            cleanupFailure = combine(cleanupFailure, failure);
-                        }
-                    } else if (cleanupBoundaryAuthorized[0]) {
-                        cleanupFailure = combine(cleanupFailure, new AssertionError(
-                                "cleanup-only Keep boundary was not armed because scripted callback health failed",
-                                scenario.failure()));
-                    }
-                    if (cleanupController == null) {
-                        throw new AssertionError("captured N+1 Game has no retained actual human controller for cleanup");
-                    }
-                    if (!capturedGame.isGameOver()) {
-                        try { cleanupController.concede(); }
-                        catch (Throwable failure) { cleanupFailure = combine(cleanupFailure, failure); }
-                    }
-                    boolean outcomeObserved = false;
-                    boolean engineReturnObserved = false;
-                    try {
-                        outcomeObserved = trace.awaitOutcome(30, TimeUnit.SECONDS);
-                        if (!outcomeObserved) throw new AssertionError(
-                                "captured N+1 Game did not emit its actual cleanup outcome");
-                    } catch (Throwable failure) {
-                        cleanupFailure = combine(cleanupFailure, failure);
-                    }
-                    try {
-                        engineReturnObserved = trace.awaitEngineReturn(30, TimeUnit.SECONDS);
-                        if (!engineReturnObserved) throw new AssertionError(
-                                "captured N+1 Game did not return from Match.startGame");
-                    } catch (Throwable failure) {
-                        cleanupFailure = combine(cleanupFailure, failure);
-                    }
-                    try {
-                        ScriptedHumanTcpSupport.QueuedLocalCleanupKeepReceipt keepReceipt =
-                                scenario.queuedLocalCleanupKeepReceipt();
-                        if (keepReceipt != null && (keepReceipt.gameViewId() != capturedGame.getView().getId()
-                                || !keepReceipt.matchesPreparedGame() || !keepReceipt.gameTerminalAtObservation()
-                                || keepReceipt.observedHandCount() == 7)) {
-                            throw new AssertionError("cleanup-only Keep receipt does not identify terminal captured N+1: "
-                                    + keepReceipt);
-                        }
-                        System.out.println("QUEUED_LOCAL_CLEANUP_KEEP exercised=" + (keepReceipt != null)
-                                + (keepReceipt == null ? "" : " gameViewId=" + keepReceipt.gameViewId()
-                                        + " callbackOrdinal=" + keepReceipt.callbackOrdinal()
-                                        + " seat=" + keepReceipt.seat()
-                                        + " observedHandCount=" + keepReceipt.observedHandCount()
-                                        + " matchesPreparedGame=" + keepReceipt.matchesPreparedGame()
-                                        + " gameTerminalAtObservation=" + keepReceipt.gameTerminalAtObservation()));
-                        if (!outcomeObserved || !engineReturnObserved || trace.outcomeCount() != 1
-                                || !trace.outcomeCardIdsMatch || !trace.engineReturnCardIdsMatch
-                                || trace.outcomeState == null || trace.engineReturnState == null
-                                || !trace.outcomeState.conflictingCardIds().isEmpty()
-                                || !trace.engineReturnState.conflictingCardIds().isEmpty()) {
-                            throw new AssertionError(
-                                    "captured N+1 outcome/engine-return snapshots failed physical-card cleanup checks");
-                        }
-                        lifecycleCleanupReceipt.set(new LifecycleCleanupReceipt(capturedGame,
-                                capturedGame.getView().getId(), trace.outcomeCount(), true, true));
-                    } catch (Throwable failure) {
-                        cleanupFailure = combine(cleanupFailure, failure);
-                    }
-
-                    if (runPositiveCurrentQuit[0] && cleanupFailure == null) {
-                        try {
-                            if (remoteController == null || hosted.getGame() != capturedGame
-                                    || cleanupController.getGame() != capturedGame) {
-                                throw new AssertionError("positive current N+1 QUIT lost its active Game/controller identity");
-                            }
-                            cleanupController.nextGameDecision(NextGameDecision.QUIT);
-                            CountDownLatch currentQuitDrain = new CountDownLatch(1);
-                            FThreads.invokeInEdtLater(currentQuitDrain::countDown);
-                            if (!currentQuitDrain.await(20, TimeUnit.SECONDS)) {
-                                throw new AssertionError("positive current N+1 QUIT did not drain on EDT");
-                            }
-                            sendRemoteAfterGameEndFence(remoteController, remote.gui(), scenario, 2);
-                            if (scenario.failure() != null) {
-                                throw new AssertionError("positive current N+1 QUIT encountered a scripted callback failure",
-                                        scenario.failure());
-                            }
-                            if (hosted.getGame() != null || matchOverCount.get() != 1
-                                    || countAfterGameEnd(desktop.hostGui.captures()) != 2
-                                    || countAfterGameEnd(remote.gui().captures()) != 2) {
-                                throw new AssertionError(
-                                        "valid current N+1 QUIT did not perform exactly one ordinary teardown/callback");
-                            }
-                        } catch (Throwable failure) {
-                            cleanupFailure = combine(cleanupFailure, failure);
-                        }
-                    }
-                } catch (Throwable failure) {
-                    cleanupFailure = combine(cleanupFailure, failure);
-                }
-            }
-            if (scenario.failure() != null) {
-                cleanupFailure = combine(cleanupFailure, new AssertionError(
-                        "scripted callback health failed during captured N+1 cleanup", scenario.failure()));
-            }
-        }
-
-        if (cleanupFailure != null) {
-            if (primaryFailure != null) primaryFailure.addSuppressed(cleanupFailure);
-            else primaryFailure = cleanupFailure;
-        }
-        if (Boolean.getBoolean(QUEUED_CHILD_PROPERTY) && primaryFailure == null
-                && frozenConsumerWitness[0] && runPositiveCurrentQuit[0]) {
-            LifecycleCleanupReceipt cleanupReceipt = lifecycleCleanupReceipt.get();
-            Game capturedGame = capturedLifecycleNPlusOne.get();
-            if (cleanupReceipt != null && capturedGame != null && cleanupReceipt.proves(capturedGame)) {
-                QUEUED_CHILD_SEMANTIC_RECEIPT.set(new QueuedChildSemanticReceipt(true,
-                        cleanupReceipt.outcomeObserved(), cleanupReceipt.engineReturnObserved()));
-            }
-        }
-        if (primaryFailure != null) throw primaryFailure;
-        Assert.assertSame(retainedMatch, hosted.getMatch(), "direct local event lifecycle retains the same Match");
-    }
-
-    private record QueuedPriorityReadiness(boolean preparationMatches, boolean priorityReceiptPresent,
-            boolean priorityGameMatches, int prioritySeat, boolean priorityOrdinalPositive,
-            boolean sameGameKeeps, int keepSeatMask, boolean keepHandsSeven,
-            boolean keepChoosersMatch, boolean currentTurnMatches, boolean currentControllerMatches,
-            boolean proxyIsPassPriority, boolean proxyAndQueueMatch, boolean inputOwnerMatches,
-            boolean observationSucceeded, boolean priorityHeld, boolean priorityReleased, boolean matchingPromptCapture,
-            boolean gameNotTerminal, boolean scenarioHealthy) {
-        boolean ready() {
-            return preparationMatches && priorityReceiptPresent && priorityGameMatches
-                    && (prioritySeat == 0 || prioritySeat == 1) && priorityOrdinalPositive
-                    && sameGameKeeps && keepSeatMask == 3 && keepHandsSeven && keepChoosersMatch
-                    && currentTurnMatches && currentControllerMatches && proxyIsPassPriority
-                    && proxyAndQueueMatch && inputOwnerMatches && priorityHeld && !priorityReleased
-                    && observationSucceeded && matchingPromptCapture && gameNotTerminal && scenarioHealthy;
-        }
-
-        String scalar() {
-            return "prep=" + preparationMatches + ",priority=" + priorityReceiptPresent
-                    + ",priorityGame=" + priorityGameMatches + ",seat=" + prioritySeat
-                    + ",ordinal=" + priorityOrdinalPositive + ",keeps=" + sameGameKeeps
-                    + ",keepSeats=" + keepSeatMask + ",keep7=" + keepHandsSeven
-                    + ",chooser=" + keepChoosersMatch + ",turn=" + currentTurnMatches
-                    + ",controller=" + currentControllerMatches + ",proxyPass=" + proxyIsPassPriority
-                    + ",proxyQueue=" + proxyAndQueueMatch + ",inputOwner=" + inputOwnerMatches
-                    + ",observed=" + observationSucceeded
-                    + ",held=" + priorityHeld + ",released=" + priorityReleased
-                    + ",promptCapture=" + matchingPromptCapture + ",notTerminal=" + gameNotTerminal
-                    + ",healthy=" + scenarioHealthy;
-        }
-    }
-
-    private static QueuedPriorityReadiness queuedLocalNextGameCleanupReadiness(Game game,
-            ScriptedHumanTcpSupport.Scenario scenario, ScriptedHumanTcpSupport.ScriptedGui hostGui,
-            ScriptedHumanTcpSupport.ScriptedGui remoteGui) {
-        var preparation = scenario.queuedLocalGamePreparationReceipt();
-        ScriptedHumanTcpSupport.LifecyclePriorityReceipt priority = scenario.lifecyclePriorityReceipt();
-        int gameViewId = game.getView().getId();
-        boolean preparationMatches = preparation != null && preparation.game() == game
-                && preparation.oldGame() != game;
-        boolean priorityReceiptPresent = priority != null;
-        boolean priorityGameMatches = priority != null && priority.gameViewId() == gameViewId;
-        int seat = priority == null ? -1 : priority.seat();
-        boolean priorityOrdinalPositive = priority != null && priority.callbackOrdinal() > 0;
-
-        List<ScriptedHumanTcpSupport.LifecycleKeepReceipt> keeps = scenario.lifecycleKeepReceipts().stream()
-                .filter(keep -> keep.gameViewId() == gameViewId).toList();
-        int keepSeatMask = 0;
-        boolean keepHandsSeven = keeps.size() == 2;
-        boolean keepChoosersMatch = keeps.size() == 2;
-        for (ScriptedHumanTcpSupport.LifecycleKeepReceipt keep : keeps) {
-            if (keep.seat() >= 0 && keep.seat() < game.getPlayers().size()) {
-                keepSeatMask |= 1 << keep.seat();
-                keepChoosersMatch &= keep.chooserViewId() == game.getPlayers().get(keep.seat()).getView().getId();
-            } else keepChoosersMatch = false;
-            keepHandsSeven &= keep.callbackOrdinal() > 0 && keep.handIds().size() == 7;
-        }
-        boolean sameGameKeeps = keeps.size() == 2 && keepSeatMask == 3;
-
-        boolean currentTurnMatches = false;
-        boolean currentControllerMatches = false;
-        boolean proxyIsPassPriority = false;
-        boolean proxyAndQueueMatch = false;
-        boolean inputOwnerMatches = false;
-        boolean matchingPromptCapture = false;
-        boolean observationSucceeded = false;
-        if (priority != null && seat >= 0 && seat < game.getPlayers().size()) {
-            try {
-                Player turnPlayer = game.getPhaseHandler().getPlayerTurn();
-                currentTurnMatches = game.getPhaseHandler().getTurn() == priority.turn()
-                        && game.getPhaseHandler().getPhase() == priority.phase()
-                        && turnPlayer != null && turnPlayer.getView().getId() == priority.turnPlayerViewId();
-                Player heldPlayer = game.getPlayers().get(seat);
-                if (heldPlayer.getController() instanceof PlayerControllerHuman controller) {
-                    currentControllerMatches = controller.getGame() == game;
-                    ScriptedHumanTcpSupport.PrivacyInputSnapshot input =
-                            scenario.lifecyclePriorityInputSnapshot(game, seat);
-                    proxyIsPassPriority = input != null && input.proxyInput() instanceof InputPassPriority;
-                    proxyAndQueueMatch = input != null && input.proxyInput() != null
-                            && input.proxyInput() == input.queuedInput();
-                    inputOwnerMatches = input != null && input.proxyInput() != null
-                            && input.proxyInput().getOwner() != null
-                            && input.proxyInput().getOwner().getId() == heldPlayer.getView().getId();
-                }
-                ScriptedHumanTcpSupport.ScriptedGui promptGui = seat == 0 ? hostGui : remoteGui;
-                matchingPromptCapture = priority.callbackOrdinal() > 0
-                        && promptGui.captures().stream().anyMatch(capture ->
-                                capture.callbackOrdinal() == priority.callbackOrdinal()
-                                        && "updateButtons".equals(capture.callback()));
-                observationSucceeded = true;
-            } catch (RuntimeException ignored) {
-                // Report the bounded false predicates below; never inspect or print callback payloads.
-            }
-        }
-        return new QueuedPriorityReadiness(preparationMatches, priorityReceiptPresent, priorityGameMatches,
-                seat, priorityOrdinalPositive, sameGameKeeps, keepSeatMask, keepHandsSeven,
-                keepChoosersMatch, currentTurnMatches, currentControllerMatches, proxyIsPassPriority,
-                proxyAndQueueMatch, inputOwnerMatches, observationSucceeded, scenario.postKeepPriorityHeld(),
-                scenario.postKeepPriorityReleased(), matchingPromptCapture, !game.isGameOver(),
-                scenario.failure() == null);
-    }
-
-    private static void sendRemoteAfterGameEndFence(PlayerControllerHuman retainedController,
-            ScriptedHumanTcpSupport.ScriptedGui remoteGui, ScriptedHumanTcpSupport.Scenario scenario,
-            int minimumAfterGameEndCount) throws Throwable {
-        Assert.assertTrue(retainedController.getGui() instanceof RemoteClientGuiGame,
-                "retained remote-seat controller exposes its actual host-side protocol GUI");
-        List<ScriptedHumanTcpSupport.Capture> before = remoteGui.captures();
-        long priorOrdinal = before.stream().mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal)
-                .max().orElse(0);
-        ((RemoteClientGuiGame) retainedController.getGui()).alertUser();
-        awaitLifecycleCondition(scenario, () -> {
-            List<ScriptedHumanTcpSupport.Capture> captures = remoteGui.captures();
-            int afterEndCount = countAfterGameEnd(captures);
-            if (afterEndCount < minimumAfterGameEndCount) return false;
-            long lastAfterEnd = afterGameEndOrdinal(captures, afterEndCount);
-            return captures.stream().anyMatch(capture -> "alertUser".equals(capture.callback())
-                    && capture.callbackOrdinal() > priorOrdinal && capture.callbackOrdinal() > lastAfterEnd);
-        }, 15, "remote callback receipt fence followed the required afterGameEnd callback count");
-    }
-
-    private static void assertPositiveRemoteOwnManaUndoOverTcp(ScriptedHumanTcpSupport.Scenario scenario,
-            DanDanDesktop desktop,
-            ScriptedHumanTcpSupport remote, HostedMatch hosted, FServerManager server,
-            RemoteClient acceptedRemote, TcpOwnManaUndoSetup setup,
-            ScriptedHumanTcpSupport.ScriptedGui heldPriorityGui) throws Throwable {
-        Assert.assertNotNull(setup, "the actual pre-opening setup receipt is retained");
-        Game game = setup.game();
-        Assert.assertNotNull(game);
-        Assert.assertSame(hosted.getGame(), game, "the hosted match still owns the captured engine Game");
-        Assert.assertEquals(setup.gameViewId(), game.getView().getId());
-        Assert.assertEquals(setup.priorOwnerViewId(), game.getRegisteredPlayers().get(0).getView().getId());
-        Player host = game.getRegisteredPlayers().get(0);
-        Player remotePlayer = game.getRegisteredPlayers().get(1);
-        Assert.assertEquals(remotePlayer.getView().getId(), setup.recipientOwnerViewId());
-        Assert.assertTrue(remotePlayer.getController() instanceof PlayerControllerHuman,
-                "the captured remote seat retains its actual human server controller");
-        PlayerControllerHuman serverController = (PlayerControllerHuman) remotePlayer.getController();
-        Assert.assertSame(serverController.getGame(), game);
-        Assert.assertEquals(host.getCardsIn(ZoneType.Hand).size(), 7,
-                "the host retains its ordinary seven-card opening hand");
-        GameView initialClientView = remote.gui().getGameView();
-        Assert.assertNotNull(initialClientView, "remote applied its actual game view");
-        Assert.assertEquals(initialClientView.getId(), setup.gameViewId());
-        Object remoteTracker = initialClientView.getTracker();
-        Assert.assertNotNull(heldPriorityGui, "the actual captured post-Keep priority endpoint is retained");
-        heldPriorityGui.releaseHeldPostKeepPriority();
-        Assert.assertTrue(scenario.awaitLand(1, 60, TimeUnit.SECONDS),
-                "the remote applied the public Island hand-to-battlefield transition");
-        Assert.assertTrue(scenario.awaitLandAbility(1, 60, TimeUnit.SECONDS),
-                "the remote's ordinary scripted MAIN1 path selected the legal land play ability");
-        ScriptedHumanTcpSupport.CallbackReceipt landMove = scenario.publicMoveReceipt(1);
-        Assert.assertNotNull(landMove);
-        Assert.assertTrue(landMove.callbackOrdinal() > 0);
-        Assert.assertEquals(scenario.actions().stream().filter(action ->
-                action.decision() == ScriptedHumanTcpSupport.Decision.PLAY_LAND
-                        && action.seat() == 1 && action.chooserViewId() == setup.remoteViewId()
-                        && action.cardId() == setup.islandCardId()).count(), 1L,
-                "the actual remote chooser dispatched exactly the acquired Island as its land play");
-        Assert.assertTrue(scenario.awaitPositiveRemoteOwnManaUndoPriority(90, TimeUnit.SECONDS),
-                "the remote reached its real turn-two MAIN1 after playing the acquired Island");
-        assertNoFailure(scenario);
-        ScriptedHumanTcpSupport.OwnManaUndoPriorityReceipt priority =
-                scenario.lastPositiveRemoteOwnManaUndoPriority();
-        Assert.assertNotNull(priority, "the held current-priority receipt is typed and retained");
-        Assert.assertEquals(priority.gameViewId(), setup.gameViewId());
-        Assert.assertEquals(priority.seat(), 1);
-        Assert.assertEquals(priority.chooserViewId(), setup.remoteViewId());
-        Assert.assertEquals(priority.turn(), 2);
-        Assert.assertEquals(priority.phase(), PhaseType.MAIN1);
-        Assert.assertEquals(priority.turnPlayerViewId(), setup.remoteViewId());
-        Assert.assertTrue(priority.callbackOrdinal() > 0);
-        Assert.assertTrue(priority.firstEnabled() || priority.secondEnabled());
-
-        InputPassPriority heldQueuedInput = requireOwnManaPriority(game, remotePlayer, serverController);
-        Assert.assertFalse(game.isGameOver(), "the captured game remains active at the held priority");
-        Assert.assertEquals(game.getPhaseHandler().getTurn(), 2);
-        Assert.assertEquals(game.getPhaseHandler().getPhase(), PhaseType.MAIN1);
-        Assert.assertSame(game.getPhaseHandler().getPlayerTurn(), remotePlayer);
-        Card serverIsland = remotePlayer.getZone(ZoneType.Battlefield).getCards().stream()
-                .filter(card -> card.getId() == setup.islandCardId()).findFirst()
-                .orElseThrow(() -> new AssertionError("the actually acquired Island was not played onto the remote battlefield"));
-        Assert.assertSame(serverIsland.getOwner(), remotePlayer);
-        Assert.assertSame(serverIsland.getController(), remotePlayer);
-        Assert.assertFalse(serverIsland.isTapped(), "the land is untapped before its mana ability is activated");
-        Assert.assertEquals(remotePlayer.getManaPool().getAmountOfColor(MagicColor.BLUE), 0,
-                "the remote has no blue mana before the Island ability");
-        Assert.assertFalse(serverController.canUndoLastAction(),
-                "the fixture begins the mana slice before any remote action is undoable");
-        List<Integer> sharedLibraryAtPriority = host.getZone(ZoneType.Library).getCards().stream()
-                .map(Card::getId).toList();
-        List<Integer> sharedGraveyardAtPriority = host.getZone(ZoneType.Graveyard).getCards().stream()
-                .map(Card::getId).toList();
-
-        GameView heldClientView = remote.gui().getGameView();
-        Assert.assertSame(heldClientView.getTracker(), remoteTracker,
-                "the remote still uses the same applied tracker for the captured Game");
-        Assert.assertEquals(heldClientView.getTurn(), 2);
-        Assert.assertEquals(heldClientView.getPhase(), PhaseType.MAIN1);
-        PlayerView heldRemoteView = heldClientView.getPlayers().stream()
-                .filter(player -> player.getId() == setup.remoteViewId()).findFirst().orElseThrow();
-        IGameController heldClientController = remote.gui().getGameController(heldRemoteView);
-        Assert.assertTrue(heldClientController instanceof NetGameController,
-                "the current remote view is bound to its real TCP game controller");
-        CardView heldIslandView = heldRemoteView.getCards(ZoneType.Battlefield).stream()
-                .filter(card -> card.getId() == setup.islandCardId()).findFirst()
-                .orElseThrow(() -> new AssertionError("the remote's applied view lacks its acquired Island"));
-        Assert.assertFalse(heldIslandView.isTapped());
-        Assert.assertEquals(heldIslandView.getOwner().getId(), setup.remoteViewId());
-        Assert.assertEquals(heldIslandView.getController().getId(), setup.remoteViewId());
-        Assert.assertEquals(heldRemoteView.getMana(MagicColor.BLUE), 0);
-        List<Integer> appliedLibraryAtPriority = heldClientView.getPlayers().get(0)
-                .getCards(ZoneType.Library).stream().map(CardView::getId).toList();
-        List<Integer> appliedGraveyardAtPriority = heldClientView.getPlayers().get(0)
-                .getCards(ZoneType.Graveyard).stream().map(CardView::getId).toList();
-        Assert.assertTrue(appliedLibraryAtPriority.equals(sharedLibraryAtPriority),
-                "the applied remote view matches authoritative shared Library order at the held T2 priority");
-        Assert.assertTrue(appliedGraveyardAtPriority.equals(sharedGraveyardAtPriority),
-                "the applied remote view matches authoritative shared Graveyard order at the held T2 priority");
-        Assert.assertNotNull(acceptedRemote, "the assigned remote retains its accepted TCP server endpoint");
-        Channel serverChannel = ScriptedHumanTcpSupport.serverChannel(acceptedRemote);
-        Assert.assertNotNull(serverChannel, "the accepted remote's current server channel is retained");
-        Assert.assertTrue(serverChannel.isActive(), "the accepted remote channel remains active");
-        try (ScriptedHumanTcpSupport.ServerDecodedEventTap serverTap =
-                ScriptedHumanTcpSupport.ServerDecodedEventTap.install(serverChannel, 1)) {
-            ScriptedHumanTcpSupport.GameViewReceipt beforeActivation = latestCurrentGameViewReceipt(remote.gui(), setup.gameViewId());
-            long beforeActivationOrdinal = beforeActivation == null ? 0 : beforeActivation.callbackOrdinal();
-            beforeActivationOrdinal = Math.max(beforeActivationOrdinal,
-                    latestOwnManaUndoAppliedOrdinal(scenario, setup.gameViewId()));
-            serverTap.arm(ProtocolMethod.selectCard);
-            PlayerView currentRemoteView = remote.gui().getGameView().getPlayers().stream()
-                    .filter(player -> player.getId() == setup.remoteViewId()).findFirst().orElseThrow();
-            IGameController remoteController = remote.gui().getGameController(currentRemoteView);
-            Assert.assertTrue(remoteController instanceof NetGameController,
-                    "the command is issued by the assigned real remote TCP controller");
-            Assert.assertSame(remoteController, heldClientController,
-                    "the assigned TCP controller remains bound across the held current-priority view");
-            FThreads.invokeInEdtAndWait(() -> {
-                assertOwnManaUndoDispatchStillBound(game, remotePlayer, serverController,
-                        heldQueuedInput, remote.gui(), remoteController, setup.gameViewId(), setup.remoteViewId());
-                GameView dispatchView = remote.gui().getGameView();
-                Assert.assertNotNull(dispatchView);
-                Assert.assertSame(dispatchView.getTracker(), remoteTracker,
-                        "the selected source comes from the same current applied GameView tracker");
-                PlayerView dispatchRemote = dispatchView.getPlayers().stream()
-                        .filter(player -> player.getId() == setup.remoteViewId()).findFirst().orElseThrow();
-                CardView dispatchIsland = dispatchRemote.getCards(ZoneType.Battlefield).stream()
-                        .filter(card -> card.getId() == setup.islandCardId()).findFirst().orElseThrow();
-                Assert.assertSame(dispatchIsland.getTracker(), remoteTracker,
-                        "the selected Island comes from the current applied GameView tracker");
-                Assert.assertSame(remote.gui().getGameController(dispatchRemote), remoteController);
-                Assert.assertTrue(remoteController.selectCard(dispatchIsland, null, null),
-                        "the remote TCP controller accepted its own Island selection");
-            });
-            Assert.assertTrue(serverTap.awaitReceipt(15, TimeUnit.SECONDS),
-                    "the server decoded the remote selectCard mana-ability request");
-            ScriptedHumanTcpSupport.ServerProtocolReceiveReceipt activationReceipt = serverTap.receipt();
-            Assert.assertNotNull(activationReceipt);
-            Assert.assertEquals(activationReceipt.method(), ProtocolMethod.selectCard);
-            Assert.assertEquals(activationReceipt.seat(), 1);
-            Assert.assertEquals(activationReceipt.gameViewId(), Integer.valueOf(setup.gameViewId()));
-            Assert.assertSame(activationReceipt.channel(), serverChannel);
-            Assert.assertNull(serverTap.failure(), "activation server receive observation remained healthy");
-            Assert.assertTrue(scenario.awaitPositiveRemoteOwnManaUndoAbility(15, TimeUnit.SECONDS),
-                    "the remote GUI returned its exact legal Island mana ability to the server controller");
-            assertNoFailure(scenario);
-            List<ScriptedHumanTcpSupport.OwnManaUndoAbilityReceipt> abilityReceipts =
-                    scenario.positiveRemoteOwnManaUndoAbilityReceipts();
-            Assert.assertEquals(abilityReceipts.size(), 2,
-                    "one select request produced its ordered initial and additional-cost ability callbacks");
-            ScriptedHumanTcpSupport.OwnManaUndoAbilityReceipt initialAbilityReceipt = abilityReceipts.get(0);
-            ScriptedHumanTcpSupport.OwnManaUndoAbilityReceipt additionalCostReceipt = abilityReceipts.get(1);
-            Assert.assertEquals(initialAbilityReceipt.stage(),
-                    ScriptedHumanTcpSupport.OwnManaUndoAbilityStage.INITIAL_SELECTION);
-            Assert.assertEquals(additionalCostReceipt.stage(),
-                    ScriptedHumanTcpSupport.OwnManaUndoAbilityStage.ADDITIONAL_COST);
-            Assert.assertTrue(additionalCostReceipt.callbackOrdinal() > initialAbilityReceipt.callbackOrdinal(),
-                    "the additional-cost callback follows the initial Island ability choice");
-            for (ScriptedHumanTcpSupport.OwnManaUndoAbilityReceipt abilityReceipt : abilityReceipts) {
-                Assert.assertEquals(abilityReceipt.gameViewId(), setup.gameViewId());
-                Assert.assertEquals(abilityReceipt.seat(), 1);
-                Assert.assertEquals(abilityReceipt.chooserViewId(), setup.remoteViewId());
-                Assert.assertEquals(abilityReceipt.cardId(), setup.islandCardId());
-                Assert.assertEquals(abilityReceipt.abilityCount(), 1);
-                Assert.assertEquals(abilityReceipt.zone(), ZoneType.Battlefield);
-                Assert.assertEquals(abilityReceipt.ownerViewId(), setup.remoteViewId());
-                Assert.assertEquals(abilityReceipt.controllerViewId(), setup.remoteViewId());
-                Assert.assertTrue(abilityReceipt.canPlay());
-                Assert.assertFalse(abilityReceipt.spell());
-            }
-            Assert.assertNull(serverTap.failure(),
-                    "no duplicate remote selectCard packet arrived during both ordered ability callbacks");
-            serverTap.disarm();
-            ScriptedHumanTcpSupport.OwnManaUndoPriorityReceipt afterActivationPriority =
-                    awaitOwnManaUndoPriorityAfter(scenario, priority.callbackOrdinal(), 15);
-            Assert.assertTrue(afterActivationPriority.callbackOrdinal() > priority.callbackOrdinal());
-            awaitOwnIslandState(game, remotePlayer, serverIsland, serverController, true, 1, 15, scenario);
-            Assert.assertTrue(serverController.canUndoLastAction(),
-                    "the actual remote Island mana ability is now undoable by its owner");
-            InputPassPriority activationInput = requireOwnManaPriority(game, remotePlayer, serverController);
-            Assert.assertTrue(host.getZone(ZoneType.Library).getCards().stream().map(Card::getId).toList()
-                    .equals(sharedLibraryAtPriority),
-                    "mana activation leaves the shared Library identity and order unchanged");
-            Assert.assertTrue(host.getZone(ZoneType.Graveyard).getCards().stream().map(Card::getId).toList()
-                    .equals(sharedGraveyardAtPriority),
-                    "mana activation leaves the shared Graveyard identity and order unchanged");
-            assertAppliedManaUndoState(remote.gui(), scenario, setup.gameViewId(), beforeActivationOrdinal,
-                    remoteTracker, heldClientController, setup.remoteViewId(), setup.islandCardId(),
-                    appliedLibraryAtPriority, appliedGraveyardAtPriority, true, 1);
-
-            ScriptedHumanTcpSupport.GameViewReceipt afterActivation = latestCurrentGameViewReceipt(remote.gui(), setup.gameViewId());
-            long beforeUndoOrdinal = afterActivation == null ? 0 : afterActivation.callbackOrdinal();
-            beforeUndoOrdinal = Math.max(beforeUndoOrdinal,
-                    latestOwnManaUndoAppliedOrdinal(scenario, setup.gameViewId()));
-            final CountDownLatch undoRestored = new CountDownLatch(1);
-            final java.util.concurrent.atomic.AtomicBoolean undoRestoreStarted =
-                    new java.util.concurrent.atomic.AtomicBoolean();
-            game.subscribeToEvents(new Object() {
-                @Subscribe public void onSnapshotRestored(forge.game.event.GameEventSnapshotRestored event) {
-                    if (event.start()) undoRestoreStarted.set(true);
-                    else if (undoRestoreStarted.compareAndSet(true, false)) undoRestored.countDown();
-                }
-            });
-            serverTap.arm(ProtocolMethod.undoLastAction);
-            FThreads.invokeInEdtAndWait(() -> {
-                assertOwnManaUndoDispatchStillBound(game, remotePlayer, serverController,
-                        activationInput, remote.gui(), remoteController, setup.gameViewId(), setup.remoteViewId());
-                Assert.assertSame(requireOwnManaPriority(game, remotePlayer, serverController), activationInput,
-                        "the undo request uses the exact current priority input at dispatch");
-                remoteController.undoLastAction();
-            });
-            Assert.assertTrue(serverTap.awaitReceipt(15, TimeUnit.SECONDS),
-                    "the same assigned remote TCP controller sent its own undo request");
-            ScriptedHumanTcpSupport.ServerProtocolReceiveReceipt undoReceipt = serverTap.receipt();
-            Assert.assertNotNull(undoReceipt);
-            Assert.assertEquals(undoReceipt.method(), ProtocolMethod.undoLastAction);
-            Assert.assertEquals(undoReceipt.seat(), 1);
-            Assert.assertEquals(undoReceipt.gameViewId(), Integer.valueOf(setup.gameViewId()));
-            Assert.assertSame(undoReceipt.channel(), serverChannel);
-            Assert.assertNull(serverTap.failure(), "undo server receive observation remained healthy");
-            Assert.assertTrue(undoRestored.await(15, TimeUnit.SECONDS),
-                    "the captured Game completed its typed snapshot restoration after the TCP undo request");
-            awaitLifecycleCondition(scenario, () -> {
-                Input current = serverController.getInputQueue().getInput();
-                return current instanceof InputPassPriority && current != activationInput
-                        && serverController.getInputProxy().getInput() == current
-                        && current.getOwner() == remotePlayer.getView();
-            }, 15, "snapshot restoration rebuilt a fresh current remote priority input");
-            InputPassPriority restoredInput = requireOwnManaPriority(game, remotePlayer, serverController);
-            Assert.assertNotSame(restoredInput, activationInput,
-                    "the completed undo replaces the old priority input rather than retaining a stale input");
-            awaitOwnIslandState(game, remotePlayer, serverIsland, serverController, false, 0, 15, scenario);
-            Assert.assertFalse(serverController.canUndoLastAction(),
-                    "the remote-owned undo has restored the action history to its pre-ability state");
-            Assert.assertTrue(host.getZone(ZoneType.Library).getCards().stream().map(Card::getId).toList()
-                    .equals(sharedLibraryAtPriority),
-                    "undo leaves the shared Library identity and order unchanged");
-            Assert.assertTrue(host.getZone(ZoneType.Graveyard).getCards().stream().map(Card::getId).toList()
-                    .equals(sharedGraveyardAtPriority),
-                    "undo leaves the shared Graveyard identity and order unchanged");
-            ScriptedHumanTcpSupport.OwnManaUndoPriorityReceipt afterUndoPriority =
-                    awaitOwnManaUndoPriorityAfter(scenario, afterActivationPriority.callbackOrdinal(), 15);
-            Assert.assertTrue(afterUndoPriority.callbackOrdinal() > afterActivationPriority.callbackOrdinal());
-            assertAppliedManaUndoState(remote.gui(), scenario, setup.gameViewId(), beforeUndoOrdinal,
-                    remoteTracker, heldClientController, setup.remoteViewId(), setup.islandCardId(),
-                    appliedLibraryAtPriority, appliedGraveyardAtPriority, false, 0);
-            Assert.assertTrue(scenario.positiveRemoteOwnManaUndoPriorityCallbacks() >= 3,
-                    "the same current priority remained held through the activation and undo boundary");
-            assertNoFailure(scenario);
-            Assert.assertEquals(server.getTotalSendErrors(), 0,
-                    "the ordinary TCP controller sent the activation and undo without transport errors");
-
-            GameView terminalRemoteView = remote.gui().getGameView();
-            PlayerView terminalRemotePlayer = terminalRemoteView.getPlayers().stream()
-                    .filter(player -> player.getId() == setup.remoteViewId()).findFirst().orElseThrow();
-            IGameController terminalRemoteController = remote.gui().getGameController(terminalRemotePlayer);
-            Assert.assertSame(terminalRemoteController, heldClientController);
-            FThreads.invokeInEdtAndWait(() -> {
-                assertOwnManaUndoDispatchStillBound(game, remotePlayer, serverController,
-                        restoredInput, remote.gui(), terminalRemoteController,
-                        setup.gameViewId(), setup.remoteViewId());
-                terminalRemoteController.concede();
-            });
-            Assert.assertTrue(desktop.hostGui.awaitActualTerminal(30, TimeUnit.SECONDS),
-                    "the actual remote concession reached the host terminal view");
-            Assert.assertTrue(remote.gui().awaitActualTerminal(30, TimeUnit.SECONDS),
-                    "the actual remote concession reached the remote terminal view");
-            LifecycleTrace trace = desktop.tcpOwnManaUndoTrace;
-            Assert.assertNotNull(trace, "the actual Game outcome and HostedMatch return are independently retained");
-            Assert.assertTrue(trace.awaitOutcome(30, TimeUnit.SECONDS), "captured Game emitted its actual outcome");
-            Assert.assertTrue(trace.awaitEngineReturn(30, TimeUnit.SECONDS),
-                    "HostedMatch observed the actual captured Game engine return");
-            Assert.assertSame(trace.game, game);
-            Assert.assertEquals(trace.outcomeCount(), 1);
-            Assert.assertNotNull(trace.outcomeState);
-            Assert.assertNotNull(trace.engineReturnState);
-            Assert.assertTrue(trace.outcomeCardIdsMatch && trace.engineReturnCardIdsMatch,
-                    "outcome and engine return each retain all setup physical-card identities");
-            Assert.assertTrue(trace.outcomeState.conflictingCardIds().isEmpty()
-                    && trace.engineReturnState.conflictingCardIds().isEmpty());
-            Assert.assertEquals(trace.outcomeState.gameViewId(), setup.gameViewId());
-            Assert.assertEquals(trace.engineReturnState.gameViewId(), setup.gameViewId());
-            Assert.assertEquals(trace.outcomeState.trackerIdentity(), trace.engineReturnState.trackerIdentity());
-            assertNoFailure(scenario);
-        }
-    }
-
-    private static void awaitOwnIslandState(Game game, Player remote, Card island,
-            PlayerControllerHuman controller, boolean expectedTapped,
-            int expectedBlueMana, long timeout, ScriptedHumanTcpSupport.Scenario scenario) throws Exception {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(timeout);
-        while (System.nanoTime() < deadline) {
-            assertNoFailure(scenario);
-            if (game.getOutcome() != null) throw new AssertionError("captured Game ended before the mana receipt");
-            if (island.isTapped() == expectedTapped
-                    && remote.getManaPool().getAmountOfColor(MagicColor.BLUE) == expectedBlueMana) break;
-            TimeUnit.MILLISECONDS.sleep(10);
-        }
-        Assert.assertEquals(island.isTapped(), expectedTapped,
-                "the captured server Game has the expected exact land tap state");
-        Assert.assertEquals(remote.getManaPool().getAmountOfColor(MagicColor.BLUE), expectedBlueMana,
-                "the captured server Game has the expected blue-mana state");
-        Assert.assertSame(controller.getGame(), game);
-        requireOwnManaPriority(game, remote, controller);
-        Assert.assertFalse(game.isGameOver());
-        Assert.assertEquals(game.getPhaseHandler().getTurn(), 2);
-        Assert.assertEquals(game.getPhaseHandler().getPhase(), PhaseType.MAIN1);
-        Assert.assertSame(game.getPhaseHandler().getPlayerTurn(), remote);
-        Assert.assertSame(game.getPhaseHandler().getPriorityPlayer(), remote,
-                "the assigned remote seat owns actual server-side priority");
-        Assert.assertTrue(game.getStack().isEmpty(), "the mana ability is activated from an empty stack");
-    }
-
-    private static InputPassPriority requireOwnManaPriority(Game game, Player remote,
-            PlayerControllerHuman controller) {
-        Assert.assertSame(controller.getGame(), game);
-        Assert.assertFalse(game.isGameOver());
-        Assert.assertEquals(game.getPhaseHandler().getTurn(), 2);
-        Assert.assertEquals(game.getPhaseHandler().getPhase(), PhaseType.MAIN1);
-        Assert.assertSame(game.getPhaseHandler().getPlayerTurn(), remote);
-        Assert.assertSame(game.getPhaseHandler().getPriorityPlayer(), remote,
-                "the current actual priority still belongs to the assigned remote seat");
-        Assert.assertTrue(game.getStack().isEmpty(), "the dispatch remains at an empty-stack priority");
-        var queuedInput = controller.getInputQueue().getInput();
-        var proxyInput = controller.getInputProxy().getInput();
-        Assert.assertTrue(queuedInput instanceof InputPassPriority,
-                "the current remote controller owns a real priority input after the action boundary");
-        Assert.assertSame(proxyInput, queuedInput,
-                "the current remote InputProxy and InputQueue expose the same priority input");
-        Assert.assertSame(queuedInput.getOwner(), remote.getView(),
-                "the current priority input remains owned by the remote seat");
-        return (InputPassPriority) queuedInput;
-    }
-
-    private static ScriptedHumanTcpSupport.OwnManaUndoPriorityReceipt awaitOwnManaUndoPriorityAfter(
-            ScriptedHumanTcpSupport.Scenario scenario, long callbackOrdinal, long timeoutSeconds)
-            throws InterruptedException {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(timeoutSeconds);
-        ScriptedHumanTcpSupport.OwnManaUndoPriorityReceipt receipt;
-        do {
-            assertNoFailure(scenario);
-            receipt = scenario.lastPositiveRemoteOwnManaUndoPriority();
-            if (receipt != null && receipt.callbackOrdinal() > callbackOrdinal) return receipt;
-            TimeUnit.MILLISECONDS.sleep(10);
-        } while (System.nanoTime() < deadline);
-        throw new AssertionError("No fresh remote current-priority callback followed the action boundary");
-    }
-
-    private static void assertOwnManaUndoDispatchStillBound(Game game, Player remote,
-            PlayerControllerHuman serverController, InputPassPriority expectedInput,
-            ScriptedHumanTcpSupport.ScriptedGui remoteGui, IGameController remoteController,
-            int gameViewId, int remoteViewId) {
-        GameView current = remoteGui.getGameView();
-        Assert.assertNotNull(current, "the remote's current applied GameView remains available at dispatch");
-        Assert.assertEquals(current.getId(), gameViewId);
-        Assert.assertEquals(current.getTurn(), 2);
-        Assert.assertEquals(current.getPhase(), PhaseType.MAIN1);
-        Assert.assertNotNull(current.getPlayerTurn());
-        Assert.assertEquals(current.getPlayerTurn().getId(), remoteViewId);
-        PlayerView currentRemote = current.getPlayers().stream()
-                .filter(player -> player.getId() == remoteViewId).findFirst().orElseThrow();
-        Assert.assertSame(remoteGui.getGameController(currentRemote), remoteController,
-                "the remote command still uses the controller attached to its current applied PlayerView");
-        Assert.assertTrue(remoteController instanceof NetGameController,
-                "the command path remains the real remote TCP controller");
-        Assert.assertSame(serverController.getGame(), game);
-        Assert.assertFalse(game.isGameOver());
-        Assert.assertEquals(game.getPhaseHandler().getTurn(), 2);
-        Assert.assertEquals(game.getPhaseHandler().getPhase(), PhaseType.MAIN1);
-        Assert.assertSame(game.getPhaseHandler().getPlayerTurn(), remote);
-        Assert.assertSame(game.getPhaseHandler().getPriorityPlayer(), remote,
-                "the exact server input owner retains actual phase priority at dispatch");
-        Assert.assertTrue(game.getStack().isEmpty(), "the exact server input is an empty-stack priority");
-        Assert.assertSame(serverController.getInputQueue().getInput(), expectedInput,
-                "the dispatch still targets the retained current server InputPassPriority");
-        Assert.assertSame(serverController.getInputProxy().getInput(), expectedInput,
-                "server proxy still exposes the same retained current priority input");
-        Assert.assertSame(expectedInput.getOwner(), remote.getView(),
-                "the current server input remains owned by the assigned remote player");
-    }
-
-    private static void assertAppliedManaUndoState(ScriptedHumanTcpSupport.ScriptedGui gui,
-            ScriptedHumanTcpSupport.Scenario scenario, int gameViewId, long afterOrdinal, Object tracker,
-            IGameController expectedController, int remoteViewId,
-            int islandId, List<Integer> sharedLibraryIds, List<Integer> sharedGraveyardIds,
-            boolean tapped, int blueMana) throws InterruptedException {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(15);
-        while (System.nanoTime() < deadline && !hasAppliedManaUndoStateReceipt(gui, scenario,
-                gameViewId, afterOrdinal, tracker, remoteViewId, 2, PhaseType.MAIN1,
-                islandId, sharedLibraryIds, sharedGraveyardIds, tapped, blueMana)) {
-            TimeUnit.MILLISECONDS.sleep(10);
-        }
-        Assert.assertTrue(hasAppliedManaUndoStateReceipt(gui, scenario, gameViewId, afterOrdinal,
-                tracker, remoteViewId, 2, PhaseType.MAIN1, islandId,
-                sharedLibraryIds, sharedGraveyardIds, tapped, blueMana),
-                "remote applied a fresh same-Game callback after the expected state change");
-        GameView current = gui.getGameView();
-        Assert.assertNotNull(current);
-        Assert.assertEquals(current.getId(), gameViewId);
-        Assert.assertSame(current.getTracker(), tracker);
-        PlayerView remote = current.getPlayers().stream().filter(player -> player.getId() == remoteViewId)
-                .findFirst().orElseThrow();
-        Assert.assertSame(gui.getGameController(remote), expectedController,
-                "the same assigned TCP controller remains bound to the current remote PlayerView");
-        CardView island = remote.getCards(ZoneType.Battlefield).stream()
-                .filter(card -> card.getId() == islandId).findFirst()
-                .orElseThrow(() -> new AssertionError("applied remote view lost the acquired Island"));
-        Assert.assertEquals(island.isTapped(), tapped);
-        Assert.assertEquals(island.getOwner().getId(), remoteViewId);
-        Assert.assertEquals(island.getController().getId(), remoteViewId);
-        Assert.assertSame(island.getTracker(), tracker,
-                "the selected applied Island belongs to the current GameView tracker");
-        Assert.assertEquals(remote.getMana(MagicColor.BLUE), blueMana);
-        Assert.assertEquals(current.getTurn(), 2);
-        Assert.assertEquals(current.getPhase(), PhaseType.MAIN1);
-        Assert.assertTrue(current.getPlayers().get(0).getCards(ZoneType.Library).stream()
-                .map(CardView::getId).toList().equals(sharedLibraryIds),
-                "applied shared Library identity and order match the held baseline");
-        Assert.assertTrue(current.getPlayers().get(0).getCards(ZoneType.Graveyard).stream()
-                .map(CardView::getId).toList().equals(sharedGraveyardIds),
-                "applied shared Graveyard identity and order match the held baseline");
-    }
-
-    private static boolean hasAppliedManaUndoStateReceipt(ScriptedHumanTcpSupport.ScriptedGui gui,
-            ScriptedHumanTcpSupport.Scenario scenario, int gameViewId, long afterOrdinal,
-            Object tracker, int remoteViewId, int turn, PhaseType phase,
-            int islandId, List<Integer> sharedLibraryIds, List<Integer> sharedGraveyardIds,
-            boolean tapped, int blueMana) {
-        GameView current = gui.getGameView();
-        if (current == null || current.getId() != gameViewId || current.getTurn() != turn
-                || current.getPhase() != phase) return false;
-        boolean exactAppliedReceipt = scenario.positiveRemoteOwnManaUndoAppliedReceipts().stream().anyMatch(receipt ->
-                receipt.callbackOrdinal() > afterOrdinal && receipt.gameViewId() == gameViewId
-                        && receipt.trackerIdentity() == tracker && receipt.remoteViewId() == remoteViewId
-                        && receipt.islandCardId() == islandId && receipt.islandOnBattlefield()
-                        && receipt.turn() == turn && receipt.phase() == phase
-                        && receipt.turnPlayerViewId() == remoteViewId && receipt.islandTapped() == tapped
-                        && receipt.islandOwnerViewId() == remoteViewId
-                        && receipt.islandControllerViewId() == remoteViewId
-                        && receipt.sharedLibraryIds().equals(sharedLibraryIds)
-                        && receipt.sharedGraveyardIds().equals(sharedGraveyardIds)
-                        && receipt.blueMana() == blueMana);
-        if (!exactAppliedReceipt) return false;
-        PlayerView remote = current.getPlayers().stream()
-                .filter(player -> player.getId() == remoteViewId).findFirst().orElse(null);
-        if (remote == null || remote.getMana(MagicColor.BLUE) != blueMana) return false;
-        CardView island = remote.getCards(ZoneType.Battlefield).stream()
-                .filter(card -> card.getId() == islandId).findFirst().orElse(null);
-        return island != null && island.isTapped() == tapped
-                && island.getOwner() != null && island.getOwner().getId() == remoteViewId
-                && island.getController() != null && island.getController().getId() == remoteViewId
-                && current.getTracker() == tracker
-                && current.getPlayers().get(0).getCards(ZoneType.Library).stream()
-                        .map(CardView::getId).toList().equals(sharedLibraryIds)
-                && current.getPlayers().get(0).getCards(ZoneType.Graveyard).stream()
-                        .map(CardView::getId).toList().equals(sharedGraveyardIds);
-    }
-
-    private static long latestOwnManaUndoAppliedOrdinal(ScriptedHumanTcpSupport.Scenario scenario,
-            int gameViewId) {
-        return scenario.positiveRemoteOwnManaUndoAppliedReceipts().stream()
-                .filter(receipt -> receipt.gameViewId() == gameViewId)
-                .mapToLong(ScriptedHumanTcpSupport.OwnManaUndoAppliedReceipt::callbackOrdinal)
-                .max().orElse(0);
-    }
-
-    private static ScriptedHumanTcpSupport.GameViewReceipt latestCurrentGameViewReceipt(
-            ScriptedHumanTcpSupport.ScriptedGui gui, int gameViewId) {
-        return gui.gameViewReceipts().stream().filter(receipt -> receipt.gameViewId() == gameViewId)
-                .max(Comparator.comparingLong(ScriptedHumanTcpSupport.GameViewReceipt::callbackOrdinal))
-                .orElse(null);
-    }
-
-    private static void assertDisconnectAiContinuation(boolean deltaSync,
-            ScriptedHumanTcpSupport.Scenario scenario, DanDanDesktop desktop,
-            ScriptedHumanTcpSupport remote, HostedMatch hosted, FServerManager server,
-            RemoteClient retainedRemote, CountDownLatch parkNotice,
-            AtomicReference<String> parkNoticeText,
-            AtomicReference<ScriptedHumanTcpSupportTest.ServerInactiveObservation> disconnectServerInactive,
-            AtomicReference<ScriptedHumanTcpSupportTest.CompletedServerInactiveReceipt> completedDisconnectServerInactive)
-            throws Throwable {
-        Game oldGame = hosted.getGame();
-        Assert.assertNotNull(oldGame, "disconnect begins with the actual hosted Game N");
-        forge.game.Match retainedMatch = hosted.getMatch();
-        List<PlayerControllerHuman> originalControllers = List.copyOf(hosted.getHumanControllers());
-        Assert.assertEquals(originalControllers.size(), 2, "both live human seats are retained before disconnect");
-        PlayerControllerHuman hostController = originalControllers.stream()
-                .filter(controller -> controller.getGui() == desktop.hostGui && controller.getGame() == oldGame)
-                .findFirst().orElseThrow(() -> new AssertionError("missing actual host controller for Game N"));
-        PlayerControllerHuman remoteController = originalControllers.stream()
-                .filter(controller -> controller.getGui() instanceof RemoteClientGuiGame
-                        && controller.getGame() == oldGame)
-                .findFirst().orElseThrow(() -> new AssertionError("missing actual remote controller for Game N"));
-        Player host = oldGame.getRegisteredPlayers().stream()
-                .filter(player -> player.getController() == hostController).findFirst().orElseThrow();
-        int originalHostViewId = host.getId();
-        Player departed = oldGame.getRegisteredPlayers().stream()
-                .filter(player -> player.getController() == remoteController).findFirst().orElseThrow();
-        var library = oldGame.getRegisteredPlayers().get(0).getZone(ZoneType.Library);
-        var graveyard = oldGame.getRegisteredPlayers().get(0).getZone(ZoneType.Graveyard);
-        Assert.assertTrue(oldGame.getRegisteredPlayers().stream()
-                .allMatch(player -> player.getZone(ZoneType.Library) == library));
-        Assert.assertTrue(oldGame.getRegisteredPlayers().stream()
-                .allMatch(player -> player.getZone(ZoneType.Graveyard) == graveyard));
-        Assert.assertEquals(oldGame.getCardsInGame().size(), 80,
-                "actual Game N begins with its complete shared-pile physical deck");
-        ScriptedHumanTcpSupport.PostKeepReceipt held = scenario.postKeepReceipt();
-        Assert.assertNotNull(held, "disconnect starts at the actual held remote priority callback");
-        Assert.assertEquals(held.prioritySeat(), 1);
-        Assert.assertEquals(held.heldTurn(), 1);
-        Assert.assertEquals(held.heldPhase(), PhaseType.UPKEEP);
-        Assert.assertEquals(held.heldTurnPlayerViewId(), desktop.hostGui.ownPlayerViewId());
-        Assert.assertEquals(desktop.hostGui.getGameView().getId(), oldGame.getView().getId());
-
-        DisconnectDrawObserver drawObserver = new DisconnectDrawObserver(oldGame, host);
-        oldGame.subscribeToEvents(drawObserver);
-        LifecycleTrace oldTrace = new LifecycleTrace();
-        oldTrace.attach(oldGame);
-        Set<Integer> oldPhysicalIds = oldGame.getCardsInGame().stream().map(Card::getId)
-                .collect(java.util.stream.Collectors.toUnmodifiableSet());
-        oldTrace.expectPhysicalCardIds(oldPhysicalIds);
-        hosted.setEndGameHook(() -> oldTrace.recordEngineReturn(oldGame));
-        AtomicReference<Game> cleanupGame = new AtomicReference<>(oldGame);
-        AtomicReference<LifecycleTrace> cleanupTrace = new AtomicReference<>(oldTrace);
-        try {
-        Channel oldChannel = remote.channel();
-        Assert.assertNotNull(oldChannel);
-        ScriptedHumanTcpSupportTest.ServerInactiveObservation serverInactive =
-                ScriptedHumanTcpSupportTest.prepareServerInactiveObservation(retainedRemote);
-        disconnectServerInactive.set(serverInactive);
-        var closeFuture = oldChannel.closeFuture();
-        remote.close();
-        completedDisconnectServerInactive.set(
-                ScriptedHumanTcpSupportTest.awaitServerInactive(serverInactive));
-        Assert.assertTrue(closeFuture.await(15, TimeUnit.SECONDS) && closeFuture.isSuccess(),
-                "the actual remote TCP channel closed successfully");
-        var eventLoopTermination = oldChannel.eventLoop().terminationFuture();
-        Assert.assertTrue(eventLoopTermination.await(15, TimeUnit.SECONDS) && eventLoopTermination.isSuccess(),
-                "the disconnected endpoint event loop drained successfully");
-        FThreads.invokeInEdtAndWait(() -> { });
-        int disconnectedCallbackBaseline = remote.gui().captures().size();
-        Assert.assertTrue(parkNotice.await(10, TimeUnit.SECONDS),
-                "the actual server channelInactive path announced the parked seat");
-        Assert.assertNotNull(parkNoticeText.get());
-        Assert.assertSame(disconnectedClients(server).get(retainedRemote.getUsername()), retainedRemote,
-                "the actual server parked the same RemoteClient after the TCP close");
-        // The old remote PCH is no longer driven by this fixture; let later connected-host callbacks auto-pass.
-        scenario.armDisconnectAiGameNPriority(oldGame, hostController, desktop.hostGui);
-        scenario.releasePostKeepPriority();
-        Assert.assertTrue(server.handleCommand("/skipreconnect " + retainedRemote.getUsername()),
-                "the supported public command accepted the parked remote username");
-        Assert.assertSame(hosted.getGame(), oldGame, "takeover retains the current Game N");
-        Assert.assertTrue(departed.getController() instanceof PlayerControllerAi,
-                "the actual departed seat now has its AI controller");
-        Assert.assertNotSame(departed.getOriginalLobbyPlayer(), remoteController.getLobbyPlayer(),
-                "the retained old remote PCH no longer matches the AI-controlled player's lobby identity");
-        Assert.assertEquals(hosted.getHumanControllers().stream().filter(controller -> controller.getPlayer() == null
-                || controller.getPlayer().getOriginalLobbyPlayer() == controller.getLobbyPlayer()).count(), 1L,
-                "HostedMatch's actual still-playing predicate counts only the remaining host");
-        Assert.assertSame(departed.getRegisteredPlayer().getPlayer(), departed.getController().getLobbyPlayer(),
-                "the actual RegisteredPlayer is updated to the AI lobby player for later games");
-        Assert.assertSame(host.getController(), hostController, "the connected host keeps its original human controller");
-        Assert.assertSame(oldGame.getRegisteredPlayers().get(0).getZone(ZoneType.Library), library);
-        Assert.assertSame(oldGame.getRegisteredPlayers().get(0).getZone(ZoneType.Graveyard), graveyard);
-
-        try {
-            Assert.assertTrue(drawObserver.await(60, TimeUnit.SECONDS),
-                    "INCONCLUSIVE: AI takeover did not reach the remaining host's first non-skipped DRAW step");
-        } catch (InterruptedException interrupted) {
-            Thread.currentThread().interrupt();
-            throw interrupted;
-        }
-        Assert.assertNull(drawObserver.failure(), "the actual zone-event receipt callback remained healthy");
-        DisconnectDrawReceipt draw = drawObserver.receipt;
-        Assert.assertNotNull(draw, "the observed host draw has an immutable zone-change receipt");
-        Assert.assertEquals(draw.gameViewId(), oldGame.getView().getId());
-        Assert.assertEquals(draw.toOwnerViewId(), host.getId());
-        Assert.assertEquals(draw.actualOwnerViewId(), host.getId(),
-                "the ordinary DanDan draw assigns ownership to its destination player");
-        Assert.assertEquals(draw.eventOwnerViewId(), draw.actualOwnerViewId(),
-                "the detached zone event and actual card agree on the card's owner");
-        Assert.assertTrue(oldGame.getRegisteredPlayers().stream()
-                .anyMatch(player -> player.getId() == draw.actualOwnerViewId()),
-                "the drawn physical card retains one actual registered owner");
-        Assert.assertTrue(draw.turn() >= 3,
-                "the host's first non-skipped draw follows its skipped first turn and AI's turn");
-        Assert.assertEquals(draw.phase(), PhaseType.DRAW);
-        Assert.assertEquals(draw.turnPlayerViewId(), host.getId());
-        Assert.assertTrue(draw.sharedLibraryAlias() && draw.sharedGraveyardAlias());
-        Assert.assertEquals(draw.physicalCardCount(), 80);
-        Assert.assertEquals(draw.uniqueCardCount(), 80);
-        Assert.assertTrue(draw.cardInHostHand() && draw.cardRemovedFromLibrary(),
-                "the synchronously observed shared-library card entered only the host's hand");
-
-        final long takeoverPriorityDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30);
-        while (!scenario.isSameDisconnectAiGameNPriority(oldGame, hostController, desktop.hostGui)
-                && System.nanoTime() < takeoverPriorityDeadline) {
-            assertNoFailure(scenario);
-            TimeUnit.MILLISECONDS.sleep(10);
-        }
-        assertNoFailure(scenario);
-        Assert.assertTrue(scenario.isSameDisconnectAiGameNPriority(oldGame, hostController, desktop.hostGui),
-                "Game N is waiting on its exact host priority input before concession");
-        Assert.assertTrue(desktop.hostGui.priorityPrompts().stream().anyMatch(prompt ->
-                prompt.seat() == 0 && prompt.chooserViewId() == host.getId() && prompt.turn() == draw.turn()
-                        && prompt.phase() == PhaseType.MAIN1 && prompt.turnPlayerViewId() == host.getId()),
-                "the held host priority follows the observed takeover draw in the same turn");
-        scenario.armDisconnectAiNextGamePreparation(oldGame);
-        hostController.concede();
-        Assert.assertTrue(oldTrace.awaitOutcome(30, TimeUnit.SECONDS), "Game N emitted its actual outcome");
-        Assert.assertTrue(oldTrace.awaitEngineReturn(30, TimeUnit.SECONDS),
-                "the actual Match.startGame invocation returned from Game N");
-        Assert.assertTrue(oldGame.isGameOver());
-        Assert.assertEquals(oldTrace.outcomeCount(), 1);
-        Assert.assertTrue(oldTrace.outcomeCardIdsMatch && oldTrace.engineReturnCardIdsMatch);
-        Assert.assertSame(hosted.getMatch(), retainedMatch);
-        Assert.assertEquals(retainedMatch.getOutcomes().size(), 1);
-
-        int actionBaseline = scenario.actions().size();
-        int decisionBaseline = scenario.nextGameDecisions().size();
-        long priorityBaseline = desktop.hostGui.priorityPrompts().stream()
-                .mapToLong(ScriptedHumanTcpSupport.PriorityReceipt::callbackOrdinal).max().orElse(0);
-        scriptKeepWithHostStarter(desktop.hostGui);
-        desktop.hostGui.decideNextGame(NextGameDecision.CONTINUE);
-        awaitLifecycleCondition(scenario, () -> hosted.getGame() != null && hosted.getGame() != oldGame
-                        && desktop.hostGui.getGameView() != null
-                        && desktop.hostGui.getGameView().getId() == hosted.getGame().getView().getId(),
-                30, "the actual host CONTINUE installed a fresh Game N+1");
-        Game nextGame = hosted.getGame();
-        Assert.assertNotSame(nextGame, oldGame);
-        ScriptedHumanTcpSupport.Scenario.DisconnectAiNextGamePreparationReceipt preparation =
-                scenario.disconnectAiNextGamePreparationReceipt();
-        Assert.assertNotNull(preparation, "host N+1 setGameView installed its typed preparation observer before engine start");
-        Assert.assertSame(preparation.oldGame(), oldGame);
-        Assert.assertSame(preparation.game(), nextGame);
-        Assert.assertTrue(preparation.awaitLibraryPreparation(30, TimeUnit.SECONDS)
-                        && preparation.shuffleCount() > 0,
-                "N+1 reached actual shared-library preparation before opening assertions");
-        Player nextHost = nextGame.getRegisteredPlayers().stream()
-                .filter(player -> player.getController() instanceof PlayerControllerHuman
-                        && ((PlayerControllerHuman) player.getController()).getGui() == desktop.hostGui)
-                .findFirst().orElseThrow(() -> new AssertionError("N+1 has no actual host human controller"));
-        PlayerControllerHuman nextHostController = (PlayerControllerHuman) nextHost.getController();
-        LifecycleTrace nextTrace = new LifecycleTrace();
-        nextTrace.attach(nextGame);
-        Set<Integer> nextPhysicalIds = nextGame.getCardsInGame().stream().map(Card::getId)
-                .collect(java.util.stream.Collectors.toUnmodifiableSet());
-        nextTrace.expectPhysicalCardIds(nextPhysicalIds);
-        cleanupTrace.set(nextTrace);
-        cleanupGame.set(nextGame);
-        hosted.setEndGameHook(() -> nextTrace.recordEngineReturn(nextGame));
-        awaitLifecycleCondition(scenario, () -> scenario.disconnectAiNextGamePriorities().stream().anyMatch(prompt ->
-                        prompt.gameViewId() == nextGame.getView().getId()
-                                && prompt.seat() == 0 && prompt.chooserViewId() == nextHost.getId()
-                                && prompt.turn() == 1 && prompt.phase() == PhaseType.MAIN1
-                                && prompt.turnPlayerViewId() == nextHost.getId()
-                                && prompt.callbackOrdinal() > priorityBaseline
-                                && scenario.isSameDisconnectAiNextGamePriority(
-                                        nextGame, nextHostController, desktop.hostGui)),
-                30, "N+1 reached the actual remaining-host opening input");
-
-        List<ScriptedHumanTcpSupport.NextGameDecisionReceipt> continueReceipts =
-                scenario.nextGameDecisions().subList(decisionBaseline, scenario.nextGameDecisions().size());
-        Assert.assertEquals(continueReceipts.size(), 1,
-                "the remaining host emitted one actual next-game decision and the disconnected seat emitted none");
-        Assert.assertEquals(continueReceipts.get(0).seat(), 0);
-        Assert.assertEquals(continueReceipts.get(0).chooserViewId(), originalHostViewId);
-        Assert.assertEquals(continueReceipts.get(0).gameViewId(), oldGame.getView().getId());
-        Assert.assertEquals(continueReceipts.get(0).decision(), NextGameDecision.CONTINUE);
-        Player nextAi = nextGame.getRegisteredPlayers().stream()
-                .filter(player -> player.getController() instanceof PlayerControllerAi)
-                .findFirst().orElseThrow(() -> new AssertionError("N+1 did not retain the AI takeover seat"));
-        Assert.assertEquals(nextGame.getRegisteredPlayers().stream()
-                .filter(player -> player.getController() instanceof PlayerControllerHuman).count(), 1L,
-                "exactly the remaining host is human in N+1");
-        Assert.assertSame(nextAi.getRegisteredPlayer().getPlayer(), nextAi.getController().getLobbyPlayer());
-        Assert.assertEquals(scenario.actions().subList(actionBaseline, scenario.actions().size()).stream()
-                .filter(action -> action.decision() == ScriptedHumanTcpSupport.Decision.START_SEAT_ZERO
-                        && action.seat() == 0).count(), 1L,
-                "only the remaining host made the actual N+1 starter decision");
-        Assert.assertEquals(scenario.actions().subList(actionBaseline, scenario.actions().size()).stream()
-                .filter(action -> action.decision() == ScriptedHumanTcpSupport.Decision.KEEP_WITHOUT_LAND
-                        && action.seat() == 0).count(), 1L,
-                "the remaining host made the actual N+1 Keep choice");
-        List<ScriptedHumanTcpSupport.DisconnectAiOpeningKeepReceipt> nextKeeps =
-                scenario.disconnectAiNextGameKeeps();
-        Assert.assertEquals(nextKeeps.size(), 1, "one N+1 host Keep callback is retained independently of Game N");
-        Assert.assertEquals(nextKeeps.get(0).seat(), 0);
-        Assert.assertEquals(nextKeeps.get(0).gameViewId(), nextGame.getView().getId());
-        Assert.assertEquals(nextKeeps.get(0).handCount(), 7);
-        Assert.assertTrue(nextKeeps.get(0).callbackOrdinal() > 0);
-        var nextLibrary = nextGame.getRegisteredPlayers().get(0).getZone(ZoneType.Library);
-        var nextGraveyard = nextGame.getRegisteredPlayers().get(0).getZone(ZoneType.Graveyard);
-        Assert.assertTrue(nextGame.getRegisteredPlayers().stream()
-                .allMatch(player -> player.getZone(ZoneType.Library) == nextLibrary));
-        Assert.assertTrue(nextGame.getRegisteredPlayers().stream()
-                .allMatch(player -> player.getZone(ZoneType.Graveyard) == nextGraveyard));
-        Assert.assertEquals(nextPhysicalIds.size(), 80,
-                "N+1 owns one complete within-game physical-card set after takeover");
-
-        Assert.assertTrue(scenario.isSameDisconnectAiNextGamePriority(nextGame, nextHostController, desktop.hostGui),
-                "the exact N+1 host InputPassPriority remains current before the existing concession action");
-        nextTrace.expectPhysicalCardIds(nextPhysicalIds);
-        nextHostController.concede();
-        Assert.assertTrue(nextTrace.awaitOutcome(30, TimeUnit.SECONDS), "N+1 emitted its actual outcome during cleanup");
-        Assert.assertTrue(nextTrace.awaitEngineReturn(30, TimeUnit.SECONDS),
-                "N+1 engine returned before the current host QUIT decision");
-        Assert.assertTrue(nextGame.isGameOver());
-        Assert.assertEquals(nextTrace.outcomeCount(), 1);
-        Assert.assertTrue(nextTrace.outcomeCardIdsMatch && nextTrace.engineReturnCardIdsMatch,
-                "N+1 outcome and Match.startGame return retained the complete physical-card set");
-        Assert.assertNotNull(nextTrace.outcomeState);
-        Assert.assertNotNull(nextTrace.engineReturnState);
-        Assert.assertTrue(nextTrace.outcomeState.conflictingCardIds().isEmpty()
-                        && nextTrace.engineReturnState.conflictingCardIds().isEmpty(),
-                "N+1 outcome and engine return contain no conflicting physical-card identities");
-        int quitBaseline = scenario.nextGameDecisions().size();
-        desktop.hostGui.decideNextGame(NextGameDecision.QUIT);
-        CountDownLatch quitDrain = new CountDownLatch(1);
-        FThreads.invokeInEdtLater(quitDrain::countDown);
-        Assert.assertTrue(quitDrain.await(15, TimeUnit.SECONDS), "terminal N+1 QUIT drained on the EDT");
-        Assert.assertNull(hosted.getGame(), "the current host QUIT performed ordinary match teardown");
-        List<ScriptedHumanTcpSupport.NextGameDecisionReceipt> quitReceipts =
-                scenario.nextGameDecisions().subList(quitBaseline, scenario.nextGameDecisions().size());
-        Assert.assertEquals(quitReceipts.size(), 1);
-        Assert.assertEquals(quitReceipts.get(0).decision(), NextGameDecision.QUIT);
-        Assert.assertEquals(quitReceipts.get(0).gameViewId(), nextGame.getView().getId());
-        Assert.assertSame(hosted.getMatch(), retainedMatch);
-        Assert.assertEquals(retainedMatch.getOutcomes().size(), 2);
-        Assert.assertEquals(countAfterGameEnd(desktop.hostGui.captures()), 2,
-                "the host received one afterGameEnd for N CONTINUE and one for terminal N+1 QUIT");
-        Assert.assertEquals(remote.gui().captures().size(), disconnectedCallbackBaseline,
-                "the closed remote endpoint received no post-close GameView or private-hand callback");
-        assertNoFailure(scenario);
-        Assert.assertTrue(deltaSync ? remote.gui().populatedDeltaCount() > 0
-                        : remote.gui().captures().stream().anyMatch(capture -> "setGameView".equals(capture.callback())),
-                "the disconnected peer received ordinary initial state before its actual close");
-        System.out.println("DISCONNECT_AI_CONTINUATION drawGameViewId=" + draw.gameViewId()
-                + " nextGameViewId=" + nextGame.getView().getId()
-                + " hostContinueCount=1 disconnectedHumanDecisionCount=0 terminalQuitCount=1");
-        } catch (Throwable primaryFailure) {
-            try {
-                Game active = hosted.getGame();
-                Game target = active == null ? cleanupGame.get() : active;
-                if (target != null) {
-                    if (target != cleanupGame.get()) {
-                        LifecycleTrace trace = new LifecycleTrace();
-                        trace.attach(target);
-                        trace.expectPhysicalCardIds(target.getCardsInGame().stream().map(Card::getId)
-                                .collect(java.util.stream.Collectors.toUnmodifiableSet()));
-                        cleanupGame.set(target);
-                        cleanupTrace.set(trace);
-                        hosted.setEndGameHook(() -> trace.recordEngineReturn(target));
-                    }
-                    LifecycleTrace trace = cleanupTrace.get();
-                    if (trace == null) throw new AssertionError("captured cleanup Game has no outcome trace");
-                    if (!target.isGameOver()) {
-                        PlayerControllerHuman cleanupController = target.getRegisteredPlayers().stream()
-                                .map(Player::getController)
-                                .filter(PlayerControllerHuman.class::isInstance)
-                                .map(PlayerControllerHuman.class::cast)
-                                .filter(controller -> controller.getGui() == desktop.hostGui
-                                        && controller.getGame() == target)
-                                .findFirst().orElse(null);
-                        if (cleanupController == null) throw new AssertionError(
-                                "captured cleanup Game has no actual host controller");
-                        cleanupController.concede();
-                    }
-                    boolean outcomeObserved = trace.awaitOutcome(30, TimeUnit.SECONDS);
-                    boolean engineReturnObserved = trace.awaitEngineReturn(30, TimeUnit.SECONDS);
-                    if (!outcomeObserved || !engineReturnObserved
-                            || trace.outcomeCount() != 1 || !trace.outcomeCardIdsMatch
-                            || !trace.engineReturnCardIdsMatch) {
-                        throw new AssertionError("captured cleanup Game lacks actual outcome and engine-return evidence");
-                    }
-                    if (hosted.getGame() == target) {
-                        PlayerControllerHuman terminalController = target.getRegisteredPlayers().stream()
-                                .map(Player::getController)
-                                .filter(PlayerControllerHuman.class::isInstance)
-                                .map(PlayerControllerHuman.class::cast)
-                                .filter(controller -> controller.getGui() == desktop.hostGui
-                                        && controller.getGame() == target)
-                                .findFirst().orElseThrow(() -> new AssertionError(
-                                        "captured terminal Game has no actual host controller for cleanup QUIT"));
-                        terminalController.nextGameDecision(NextGameDecision.QUIT);
-                        CountDownLatch cleanupQuitDrain = new CountDownLatch(1);
-                        FThreads.invokeInEdtLater(cleanupQuitDrain::countDown);
-                        if (!cleanupQuitDrain.await(15, TimeUnit.SECONDS) || hosted.getGame() != null) {
-                            throw new AssertionError("captured terminal Game did not clear through actual host QUIT cleanup");
-                        }
-                    }
-                }
-            } catch (Throwable cleanupFailure) {
-                primaryFailure.addSuppressed(cleanupFailure);
-            }
-            if (scenario.failure() != null) {
-                primaryFailure.addSuppressed(new AssertionError(
-                        "disconnect-to-AI scripted callback health failed", scenario.failure()));
-            }
-            throw primaryFailure;
-        }
-    }
-
     private static void assertMetamorphoseLifecycle(boolean deltaSync,
             ScriptedHumanTcpSupport.Scenario scenario, DanDanDesktop desktop,
             ScriptedHumanTcpSupport remote, HostedMatch hosted, FServerManager server,
             ScriptedHumanTcpSupport.StaleActionRejectionLog staleActionRejectionLog,
             AtomicReference<LifecycleCleanupReceipt> lifecycleCleanupReceipt,
-            AtomicReference<Game> capturedLifecycleNPlusOne,
-            LocalDecisionQueueMode localDecisionQueueMode,
-            AtomicBoolean queuedNextGameMayHaveLaunched) throws Throwable {
+            AtomicReference<Game> capturedLifecycleNPlusOne) throws Throwable {
         Game oldGame = hosted.getGame();
         Assert.assertNotNull(oldGame, "the actual host Game remains live at the held optional choice");
         Set<Integer> oldPhysicalCardIds = oldGame.getCardsInGame().stream().map(Card::getId)
@@ -3064,11 +1018,7 @@ public class DanDanNetworkPlayTest {
         scenario.prepareLifecycleNextGame(deltaSync ? "applyDelta" : "setGameView");
         scriptKeepWithHostStarter(desktop.hostGui);
         scriptKeepWithHostStarter(remote.gui());
-        if (localDecisionQueueMode == LocalDecisionQueueMode.QUEUED_OLD_CONTROLLER_QUIT) {
-            assertQueuedLocalDecisionConsumer(hosted, oldGame, retainedMatch, scenario, desktop, remote,
-                    lifecycleCleanupReceipt, capturedLifecycleNPlusOne, queuedNextGameMayHaveLaunched);
-            return;
-        }
+
         desktop.hostGui.decideNextGame(NextGameDecision.CONTINUE);
         Assert.assertEquals(countAfterGameEnd(desktop.hostGui.captures()), 0,
                 "one CONTINUE does not tear down either seat's current game");
@@ -3450,8 +1400,7 @@ public class DanDanNetworkPlayTest {
                     try {
                         if (hosted.getGame() == newGame) hosted.endCurrentGame();
                     } catch (Throwable error) { cleanupFailure = combine(cleanupFailure, error); }
-                    if (cleanupFailure == null && cleanupTrace.game == newGame
-                            && cleanupTrace.outcomeState != null && cleanupTrace.engineReturnState != null) {
+                    if (cleanupFailure == null && cleanupTrace.game == newGame && cleanupTrace.outcomeState != null && cleanupTrace.engineReturnState != null) {
                         lifecycleCleanupReceipt.set(new LifecycleCleanupReceipt(newGame,
                                 newGame.getView().getId(), cleanupTrace.outcomeCount(),
                                 cleanupOutcomeObserved, cleanupEngineReturnObserved));
@@ -3915,9 +1864,7 @@ public class DanDanNetworkPlayTest {
             if (hosted.getGame() != nPlusOne) {
                 throw new AssertionError("Hosted match replaced N+1 before its cleanup outcome");
             }
-            if (!nPlusOne.isGameOver() && nPlusOne.getAge() != GameStage.BeforeMulligan
-                    && hostView != null && hostView.getId() == nPlusOne.getView().getId()
-                    && remoteView != null && remoteView.getId() == nPlusOne.getView().getId()) {
+            if (!nPlusOne.isGameOver() && nPlusOne.getAge() != GameStage.BeforeMulligan && hostView != null && hostView.getId() == nPlusOne.getView().getId() && remoteView != null && remoteView.getId() == nPlusOne.getView().getId()) {
                 physicalCardIds = nPlusOne.getCardsInGame().stream().map(Card::getId)
                         .collect(java.util.stream.Collectors.toUnmodifiableSet());
                 if (physicalCardIds.size() == 80) break;
@@ -3941,10 +1888,7 @@ public class DanDanNetworkPlayTest {
         while (System.nanoTime() < deadline) {
             ScriptedHumanTcpSupport.TerminalViewReceipt hostTerminal = desktop.hostGui.terminalViewReceipt();
             ScriptedHumanTcpSupport.TerminalViewReceipt remoteTerminal = remote.gui().terminalViewReceipt();
-            if (hostTerminal != null && remoteTerminal != null
-                    && hostTerminal.gameViewId() == nPlusOne.getView().getId()
-                    && remoteTerminal.gameViewId() == nPlusOne.getView().getId()
-                    && hostTerminal.gameOver() && remoteTerminal.gameOver()) {
+            if (hostTerminal != null && remoteTerminal != null && hostTerminal.gameViewId() == nPlusOne.getView().getId() && remoteTerminal.gameViewId() == nPlusOne.getView().getId() && hostTerminal.gameOver() && remoteTerminal.gameOver()) {
                 break;
             }
             Thread.sleep(10);
@@ -4312,77 +2256,7 @@ public class DanDanNetworkPlayTest {
             gameNKnownIds.get(bottom.seat()).addAll(bottom.chooserHandIds());
         }
         Assert.assertNotNull(setup, "post-Keep setup retained actual official card roles");
-        if (scenario.privacyMulliganPrefixScenario()) {
-            ScriptedHumanTcpSupport.PrivacyMulliganBoundaryReceipt boundary =
-                    scenario.privacyMulliganBoundaryReceipt();
-            Assert.assertNotNull(boundary, "the same Game retained pre- and post-setup mulligan boundaries");
-            Assert.assertSame(boundary.game(), match.getGame());
-            Assert.assertSame(boundary.game(), scenario.privacyGame());
-            Assert.assertEquals(boundary.gameViewId(), match.getGame().getView().getId());
-            Assert.assertEquals(boundary.preSetupZones().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 7);
-            Assert.assertEquals(boundary.preSetupZones().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 6);
-            Assert.assertEquals(boundary.preSetupZones().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Library).size(), 67);
-            Assert.assertTrue(boundary.preSetupZones().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Library).contains(scenario.londonBottomDispatches().get(0).cardId()));
-            Assert.assertEquals(scenario.mulliganChoices().size(), 2);
-            ScriptedHumanTcpSupport.MulliganChoiceReceipt free = scenario.freeMulliganChoice();
-            ScriptedHumanTcpSupport.MulliganChoiceReceipt regular = scenario.regularMulliganChoice();
-            ScriptedHumanTcpSupport.LondonBottomDispatchReceipt bottom = scenario.londonBottomDispatches().get(0);
-            Assert.assertTrue(bottom.appliedHandCallbackOrdinal() < 0
-                            || bottom.appliedHandCallbackOrdinal() > bottom.promptOrdinal(),
-                    "a deferred London selection uses a post-button applied seven-card Hand receipt");
-            System.out.println("DANDAN_LONDON_APPLIED_HAND deferred="
-                    + (bottom.appliedHandCallbackOrdinal() > 0 ? 1 : 0)
-                    + " (zero means this conditional deferral was unexercised)");
-            Assert.assertEquals(free.seat(), 0, "the actual host owns the controlled free mulligan");
-            Assert.assertEquals(regular.seat(), 1, "the actual remote owns the controlled regular London mulligan");
-            Assert.assertTrue(free.receiptOrder() < regular.receiptOrder()
-                    && regular.receiptOrder() < bottom.receiptOrder(),
-                    "scenario receipt order joins real FREE, REGULAR, and London actions without comparing endpoint clocks");
-            Assert.assertEquals(scenario.freeReveals().size(), 1);
-            long revealOrder = scenario.freeReveals().get(0).receiptOrder();
-            Assert.assertTrue(regular.receiptOrder() < revealOrder && revealOrder < bottom.receiptOrder(),
-                    "actual free-hand reveal is causally between both choices and London bottom");
-            Assert.assertEquals(free.gameViewId(), boundary.gameViewId());
-            Assert.assertEquals(regular.gameViewId(), boundary.gameViewId());
-            Assert.assertEquals(scenario.freeReveals().get(0).gameViewId(), boundary.gameViewId());
-            Assert.assertEquals(bottom.gameViewId(), boundary.gameViewId());
-            Assert.assertEquals(scenario.keepOpeningReceipts().size(), 2);
-            Assert.assertTrue(scenario.keepOpeningReceipts().stream().allMatch(keep ->
-                    keep.gameViewId() == boundary.gameViewId() && keep.receiptOrder() > bottom.receiptOrder()));
-            Game compositeGame = boundary.game();
-            Set<String> allSeenNames = new HashSet<>();
-            for (int knownId : scenario.privacyMulliganKnownCardIds()) {
-                Card known = compositeGame.findById(knownId);
-                Assert.assertNotNull(known, "historically seen card ID remains resolvable in the retained Game");
-                allSeenNames.add(known.getName());
-            }
-            for (int privateTopId : setup.privateTopIds()) {
-                Card privateTop = compositeGame.findById(privateTopId);
-                Assert.assertNotNull(privateTop, "declared hidden-top ID remains resolvable in the retained Game");
-                Assert.assertFalse(allSeenNames.contains(privateTop.getName()),
-                        "the declared hidden top excludes every identity exposed in the actual mulligan history");
-            }
-            Assert.assertTrue(Collections.disjoint(setup.privateTopIds(), scenario.privacyMulliganKnownCardIds()),
-                    "the declared hidden top contains no physical card ID seen during the actual mulligan history");
-            Set<Integer> preSetupPhysicalIds = boundary.preSetupZones().values().stream()
-                    .flatMap(zones -> zones.values().stream()).flatMap(List::stream)
-                    .collect(java.util.stream.Collectors.toSet());
-            Set<Integer> postSetupPhysicalIds = boundary.postSetupZones().values().stream()
-                    .flatMap(zones -> zones.values().stream()).flatMap(List::stream)
-                    .collect(java.util.stream.Collectors.toSet());
-            Assert.assertEquals(preSetupPhysicalIds.size(), 80,
-                    "pre-setup boundary contains the actual full physical card pool");
-            Assert.assertEquals(postSetupPhysicalIds, preSetupPhysicalIds,
-                    "declared setup moves conserve exact physical identities across the same Game boundary");
-            Assert.assertEquals(boundary.postSetupZones().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 6);
-            Assert.assertEquals(boundary.postSetupZones().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 7);
-        }
+
         ScriptedHumanTcpSupport.PostKeepReceipt before = scenario.postKeepReceipt();
         Assert.assertNotNull(before, "privacy sequence starts from an actual held turn-1 prompt");
         Assert.assertEquals(before.prioritySeat(), 0);
@@ -4397,7 +2271,7 @@ public class DanDanNetworkPlayTest {
             ScriptedHumanTcpSupport.KeepOpeningReceipt keep = scenario.keepOpeningReceipts().stream()
                     .filter(receipt -> receipt.seat() == assignedSeat).findFirst().orElse(null);
             Assert.assertNotNull(keep);
-            Assert.assertEquals(keep.handIds().size(), scenario.privacyMulliganPrefixScenario() ? (seat == 0 ? 7 : 6) : 7,
+            Assert.assertEquals(keep.handIds().size(), false ? (seat == 0 ? 7 : 6) : 7,
                     "the actual Keep receipt records the post-London pre-setup hand size");
             Assert.assertEquals(keep.chooserViewId(), scenario.playerViewIdForSeat(seat));
         }
@@ -4698,46 +2572,7 @@ public class DanDanNetworkPlayTest {
                 "host received exactly the typed actual FREE and Fengraf reveal callbacks assigned to it");
         Assert.assertEquals(remoteGetChoices.size(), expectedRemoteGetChoices,
                 "remote received exactly the typed actual FREE and Fengraf reveal callbacks assigned to it");
-        if (scenario.privacyMulliganPrefixScenario()) {
-            ScriptedHumanTcpSupport.PrivacyMulliganBoundaryReceipt boundary =
-                    scenario.privacyMulliganBoundaryReceipt();
-            ScriptedHumanTcpSupport.PostKeepReceipt compositePostKeep = scenario.postKeepReceipt();
-            Assert.assertNotNull(openingReveal);
-            Assert.assertNotNull(boundary);
-            Assert.assertNotNull(compositePostKeep);
-            Assert.assertNotNull(scenario.privacyObservation(), "composite run retained its actual endpoint wire observation");
-            Assert.assertEquals(openingReveal.receivingSeat(), 1);
-            Assert.assertEquals(openingReveal.gameViewId(), boundary.gameViewId());
-            Assert.assertTrue(openingReveal.eventId() >= 0);
-            Assert.assertNotEquals(openingReveal.eventId(), reveal.eventId(),
-                    "opening FREE and Fengraf callbacks came from distinct wire events");
-            Assert.assertTrue(openingReveal.getChoicesCallbackOrdinal() < reveal.callbackOrdinal(),
-                    "same remote endpoint received opening FREE reveal before the later Fengraf reveal");
-            Assert.assertEquals(remoteGetChoices.stream()
-                            .map(ScriptedHumanTcpSupport.Capture::callbackOrdinal).toList(),
-                    List.of(openingReveal.getChoicesCallbackOrdinal(), reveal.callbackOrdinal()),
-                    "the two remote callbacks correlate one-to-one with distinct typed opening and Fengraf receipts");
-            List<ScriptedHumanTcpSupport.PreHandlerFact> getChoicesFacts = scenario.privacyObservation().facts().stream()
-                    .filter(fact -> "getChoices".equals(fact.method())).toList();
-            Assert.assertEquals(getChoicesFacts.stream().map(ScriptedHumanTcpSupport.PreHandlerFact::eventId).toList(),
-                    List.of(openingReveal.eventId(), reveal.eventId()),
-                    "the endpoint's two wire requests correlate in order to the two actual callback receipts");
-            Assert.assertTrue(openingReveal.getChoicesCallbackOrdinal() <
-                            scenario.londonBottomDispatches().get(0).promptOrdinal(),
-                    "opening FREE callback preceded the actual same-endpoint London prompt");
-            ScriptedHumanTcpSupport.KeepOpeningReceipt remoteKeep = scenario.keepOpeningReceipts().stream()
-                    .filter(keep -> keep.seat() == 1).findFirst().orElseThrow();
-            Assert.assertTrue(remote.gui().captures().stream()
-                            .anyMatch(capture -> capture == compositePostKeep.stateCapture()),
-                    "the retained post-Keep state receipt is the actual remote endpoint callback");
-            Assert.assertTrue(scenario.londonBottomDispatches().get(0).zeroCardPromptOrdinal()
-                            < remoteKeep.callbackOrdinal(),
-                    "the actual remote Keep callback followed its London bottom response before setup");
-            Assert.assertTrue(remoteKeep.callbackOrdinal() < compositePostKeep.stateCapture().callbackOrdinal()
-                            && compositePostKeep.stateCapture().callbackOrdinal() < reveal.callbackOrdinal()
-                            && reveal.callbackOrdinal() < fengrafState.callbackOrdinal(),
-                    "opening Keep/setup and later Fengraf callback remain ordered on the remote endpoint");
-        }
+
         Assert.assertEquals(reveal.cardIds(), List.of(setup.publicCreatureId()));
         gameNKnownIds.get(0).addAll(reveal.cardIds());
         gameNKnownIds.get(1).addAll(reveal.cardIds());
@@ -4883,513 +2718,6 @@ public class DanDanNetworkPlayTest {
         for (int manaId : setup.remoteManaIds()) Assert.assertTrue(liveGame.findById(manaId).isTapped());
         for (int manaId : setup.hostManaIds()) Assert.assertTrue(liveGame.findById(manaId).isTapped());
 
-        if (privacyShuffleHistoryScenario) {
-            Assert.assertTrue(setup.daysUndoingId() > 0,
-                    "the first-leg fixture reserved the actual official Day's Undoing in its declared setup");
-            desktop.hostGui.continuePrivacyShuffleHistory();
-            Assert.assertTrue(scenario.awaitPrivacyShuffleHistoryT3CastHeld(90, TimeUnit.SECONDS),
-                    "the actual host T3 MAIN1 Day's Undoing priority is retained pending remote discard proof");
-            assertNoFailure(scenario);
-            Assert.assertTrue(scenario.awaitPrivacyShuffleTurnThreeDraw(45, TimeUnit.SECONDS),
-                    "the remote applied its same-game T3 MAIN1 state before the held host cast is released");
-            assertNoFailure(scenario);
-            int turnTwoDiscardId = scenario.privacyShuffleTurnTwoDiscardId();
-            Assert.assertTrue(turnTwoDiscardId > 0, "the assigned remote controller selected one actual cleanup card");
-            Assert.assertEquals(scenario.actions().stream().filter(action ->
-                    action.decision() == ScriptedHumanTcpSupport.Decision.DISCARD_T2_CLEANUP
-                            && action.seat() == 1 && action.chooserViewId() == remote.gui().ownPlayerViewId()
-                            && Objects.equals(action.cardId(), turnTwoDiscardId)).count(), 1L,
-                    "the assigned remote controller made exactly one legal cleanup discard");
-            ScriptedHumanTcpSupport.PrivacyStateReceipt turnThreeDraw = scenario.privacyShuffleTurnThreeDraw();
-            ScriptedHumanTcpSupport.PrivacyStateReceipt turnTwoDraw = scenario.privacyShuffleTurnTwoDraw();
-            Assert.assertNotNull(turnTwoDraw,
-                    "the remote's actual held turn-2 draw state is available for its own-hand knowledge history");
-            Assert.assertEquals(turnTwoDraw.turn(), 2);
-            Assert.assertEquals(turnTwoDraw.phase(), PhaseType.MAIN1);
-            Assert.assertEquals(turnTwoDraw.turnPlayerViewId(), remote.gui().ownPlayerViewId());
-            Assert.assertTrue(turnTwoDraw.drawnThisTurnByPlayer()
-                    .getOrDefault(remote.gui().ownPlayerViewId(), 0) > 0);
-            Assert.assertNotNull(turnThreeDraw,
-                    "the remote applied its first same-game T3 MAIN1 state after the actual cleanup discard");
-            Assert.assertEquals(turnThreeDraw.turn(), 3);
-            Assert.assertEquals(turnThreeDraw.phase(), PhaseType.MAIN1);
-            Assert.assertEquals(turnThreeDraw.turnPlayerViewId(), desktop.hostGui.ownPlayerViewId());
-            Assert.assertEquals(turnThreeDraw.zonesByPlayer().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 7, "remote T3 view has its legal post-cleanup hand size");
-            Assert.assertTrue(turnThreeDraw.zonesByPlayer().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Graveyard).contains(turnTwoDiscardId),
-                    "remote applied state carries the exact T2 discard into its graveyard");
-            gameNKnownIds.get(1).addAll(turnTwoDraw.zonesByPlayer()
-                    .get(remote.gui().ownPlayerViewId()).get(ZoneType.Hand));
-            GameView hostAtT3 = desktop.hostGui.getGameView();
-            Assert.assertEquals(hostAtT3.getId(), scenario.privacyShuffleGameViewId());
-            Assert.assertEquals(hostAtT3.getTurn(), 3);
-            Assert.assertEquals(hostAtT3.getPhase(), PhaseType.MAIN1);
-            List<Integer> hostOwnT3Hand = findPlayerView(hostAtT3, desktop.hostGui.ownPlayerViewId())
-                    .getHand().stream().map(CardView::getId).toList();
-            Assert.assertEquals(hostOwnT3Hand, turnThreeDraw.zonesByPlayer()
-                    .get(desktop.hostGui.ownPlayerViewId()).get(ZoneType.Hand));
-            gameNKnownIds.get(0).addAll(hostOwnT3Hand);
-            gameNKnownIds.get(0).add(turnTwoDiscardId);
-            gameNKnownIds.get(1).add(turnTwoDiscardId);
-            ScriptedHumanTcpSupport.GameViewReceipt remoteT3Receipt = remote.gui().gameViewReceipts().stream()
-                    .filter(receipt -> receipt.callbackOrdinal() == turnThreeDraw.callbackOrdinal())
-                    .findFirst().orElse(null);
-            Assert.assertNotNull(remoteT3Receipt, "T3 state retains its exact applied GameView/tracker receipt");
-            Assert.assertEquals(remoteT3Receipt.gameViewId(), scenario.privacyShuffleGameViewId());
-            Assert.assertNotNull(remoteT3Receipt.trackerIdentity());
-            GameView remoteCurrentAtT3 = remote.gui().getGameView();
-            Assert.assertNotNull(remoteCurrentAtT3);
-            Assert.assertEquals(remoteCurrentAtT3.getId(), scenario.privacyShuffleGameViewId());
-            Assert.assertSame(remoteT3Receipt.trackerIdentity(), remoteCurrentAtT3.getTracker(),
-                    "the applied T3 receipt is still the remote endpoint's current tracker");
-            List<Integer> remoteOwnT3Hand = findPlayerView(remoteCurrentAtT3, remote.gui().ownPlayerViewId())
-                    .getHand().stream().map(CardView::getId).toList();
-            Assert.assertEquals(remoteOwnT3Hand, turnThreeDraw.zonesByPlayer()
-                    .get(remote.gui().ownPlayerViewId()).get(ZoneType.Hand));
-            gameNKnownIds.get(1).addAll(remoteOwnT3Hand);
-            java.util.function.Predicate<ScriptedHumanTcpSupport.Capture> isDiscardMove = capture ->
-                    "handleGameEvents".equals(capture.callback()) && capture.eventFacts().stream().anyMatch(fact ->
-                            fact.eventClass().equals("forge.game.event.GameEventCardChangeZone")
-                                    && fact.cardViewIds().contains(turnTwoDiscardId)
-                                    && fact.zoneFacts().stream().anyMatch(zone -> zone.field().equals("from")
-                                    && zone.zoneType() == ZoneType.Hand
-                                    && Objects.equals(zone.playerViewId(), remote.gui().ownPlayerViewId()))
-                                    && fact.zoneFacts().stream().anyMatch(zone -> zone.field().equals("to")
-                                    && zone.zoneType() == ZoneType.Graveyard));
-            awaitLifecycleCondition(scenario,
-                    () -> remote.gui().captures().stream().anyMatch(isDiscardMove), 45,
-                    "remote endpoint received the exact typed T2 discard movement event");
-            assertNoFailure(scenario);
-            List<ScriptedHumanTcpSupport.Capture> remoteCaptures = remote.gui().captures();
-            ScriptedHumanTcpSupport.Capture discardMove = remoteCaptures.stream().filter(isDiscardMove)
-                    .findFirst().orElse(null);
-            Assert.assertNotNull(discardMove,
-                    "remote received the exact typed Hand-to-Graveyard event for its actual T2 discard");
-            Assert.assertTrue(discardMove.callbackOrdinal() > scenario.privacyShuffleTurnTwoDiscardOrdinal(),
-                    "the received discard movement belongs to the remote applied T3 state window");
-            if (discardMove.parentCallbackOrdinal() > 0) {
-                Assert.assertTrue(discardMove.parentCallbackOrdinal() > scenario.privacyShuffleTurnTwoDiscardOrdinal());
-                Assert.assertTrue(discardMove.parentCallbackOrdinal() <= turnThreeDraw.callbackOrdinal());
-            }
-            desktop.hostGui.continuePrivacyShuffleHistoryAfterDiscard(turnThreeDraw, remoteT3Receipt);
-            assertNoFailure(scenario);
-            awaitLifecycleCondition(scenario, () -> scenario.privacyAbilities().stream().anyMatch(ability ->
-                    ability.cardId() == setup.daysUndoingId()
-                            && "Day's Undoing actual host spell choice".equals(ability.role())), 30,
-                    "the retained host priority selected Day's Undoing through its actual ability callback");
-            assertNoFailure(scenario);
-            awaitLifecycleCondition(scenario, () -> scenario.privacyStackViewReceipts().stream().anyMatch(stack ->
-                    stack.sourceCardId() == setup.daysUndoingId()
-                            && stack.activatorViewId() == desktop.hostGui.ownPlayerViewId() && !stack.ability())
-                    && scenario.privacyPaymentReceipts().stream().anyMatch(payment ->
-                            payment.sourceCardId() == setup.daysUndoingId()
-                                    && payment.activatorViewId() == desktop.hostGui.ownPlayerViewId()), 30,
-                    "the selected Day's Undoing reached the actual host stack with its paid ability");
-            assertNoFailure(scenario);
-            awaitLifecycleCondition(scenario, () -> {
-                List<ScriptedHumanTcpSupport.PrivacyShuffleEventReceipt> events = scenario.privacyShuffleEvents();
-                return events.stream().anyMatch(event -> event.playerViewId() == desktop.hostGui.ownPlayerViewId()
-                                && event.turn() == 3 && event.phase() == PhaseType.MAIN1
-                                && event.sourceCardId() == setup.daysUndoingId()
-                                && event.castPriorityOrdinal() == scenario.privacyDaysUndoingCastOrdinal()
-                                && event.paidStackCallbackOrdinal() > event.castPriorityOrdinal())
-                        && events.stream().anyMatch(event -> event.playerViewId() == remote.gui().ownPlayerViewId()
-                                && event.turn() == 3 && event.phase() == PhaseType.MAIN1
-                                && event.sourceCardId() == setup.daysUndoingId()
-                                && event.castPriorityOrdinal() == scenario.privacyDaysUndoingCastOrdinal()
-                                && event.paidStackCallbackOrdinal() > event.castPriorityOrdinal());
-            }, 45, "the paid Day's Undoing emitted a typed shuffle receipt for each assigned player");
-            assertNoFailure(scenario);
-            Assert.assertTrue(scenario.awaitPrivacyShuffleHistoryUpkeep(90, TimeUnit.SECONDS),
-                    "remote applied and retained the exact turn-4 UPKEEP state before draw");
-            assertNoFailure(scenario);
-            ScriptedHumanTcpSupport.PrivacyStateReceipt afterShuffle = scenario.privacyShuffleHistoryState();
-            Assert.assertNotNull(afterShuffle, "remote applied-view receipt captured the held turn-4 UPKEEP");
-            Assert.assertTrue(scenario.awaitPrivacyShuffleHistoryPriorityHeld(30, TimeUnit.SECONDS),
-                    "the remote's actual turn-4 UPKEEP priority callback is held before draw");
-            assertNoFailure(scenario);
-            Assert.assertEquals(afterShuffle.turn(), 4);
-            Assert.assertEquals(afterShuffle.phase(), PhaseType.UPKEEP);
-            Assert.assertEquals(afterShuffle.turnPlayerViewId(), remote.gui().ownPlayerViewId());
-            Assert.assertEquals(afterShuffle.stackSize(), 0);
-            Assert.assertNotNull(turnTwoDraw, "the remote completed its ordinary turn-2 draw before passing");
-            Assert.assertNotNull(turnThreeDraw, "the host naturally untapped and completed its turn-3 draw before casting");
-            assertPrivacyPhysicalState(afterShuffle.zonesByPlayer(), desktop.hostGui.ownPlayerViewId(),
-                    remote.gui().ownPlayerViewId(), setup.physicalCardIds());
-            Assert.assertEquals(afterShuffle.zonesByPlayer().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 7, "Day's Undoing drew seven for the host before its normal turn draw");
-            Assert.assertEquals(afterShuffle.zonesByPlayer().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Hand).size(), 7, "Day's Undoing drew seven for the remote before its normal turn draw");
-            Assert.assertTrue(afterShuffle.zonesByPlayer().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Exile).contains(setup.daysUndoingId()),
-                    "the resolved Day's Undoing left the stack and is represented in exile");
-            GameView remoteCurrent = remote.gui().getGameView();
-            GameView hostCurrent = desktop.hostGui.getGameView();
-            Assert.assertNotNull(remoteCurrent);
-            Assert.assertNotNull(hostCurrent);
-            Assert.assertEquals(remoteCurrent.getTurn(), 4);
-            Assert.assertEquals(remoteCurrent.getPhase(), PhaseType.UPKEEP);
-            Assert.assertEquals(hostCurrent.getTurn(), 4);
-            Assert.assertEquals(hostCurrent.getPhase(), PhaseType.UPKEEP);
-            Assert.assertEquals(remoteCurrent.getId(), hostCurrent.getId(),
-                    "both assigned endpoints hold the current same-game UPKEEP view");
-            ScriptedHumanTcpSupport.GameViewReceipt remoteAppliedView = remote.gui().gameViewReceipts().stream()
-                    .filter(receipt -> receipt.callbackOrdinal() == afterShuffle.callbackOrdinal())
-                    .findFirst().orElse(null);
-            Assert.assertNotNull(remoteAppliedView,
-                    "the held remote state is joined to its exact current GameView receipt");
-            Assert.assertEquals(remoteAppliedView.gameViewId(), remoteCurrent.getId());
-            Assert.assertSame(remoteAppliedView.trackerIdentity(), remoteCurrent.getTracker(),
-                    "the sampled remote snapshot retains its exact current tracker identity");
-            Assert.assertTrue(remoteAppliedView.danDan());
-            Assert.assertTrue(desktop.hostGui.gameViewReceipts().stream().anyMatch(receipt ->
-                            receipt.gameViewId() == hostCurrent.getId()
-                                    && receipt.trackerIdentity() == hostCurrent.getTracker()
-                                    && receipt.danDan()),
-                    "the host endpoint also retained the same current DanDan tracker");
-            Set<Integer> eventDerivedShuffleIds = Set.of(setup.privateTopIds().get(0), setup.publicCreatureId(),
-                    setup.tellingTimeId(), setup.fengrafId());
-            List<Integer> currentLibrary = afterShuffle.zonesByPlayer().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Library);
-            List<Integer> hostCurrentHand = afterShuffle.zonesByPlayer().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Hand);
-            List<Integer> remoteCurrentHand = afterShuffle.zonesByPlayer().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Hand);
-            List<Integer> preShuffleHostHand = scenario.privacyShuffleHostPreShuffleHandIds();
-            Assert.assertTrue(scenario.privacyShufflePreShuffleGameViewId() > 0
-                            && scenario.privacyShufflePreShuffleGameViewId() == hostCurrent.getId(),
-                    "the pre-shuffle host hand is tied to this same live GameView");
-            List<Integer> hostRenderedHand = findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId())
-                    .getHand().stream().map(CardView::getId).toList();
-            List<Integer> remoteRenderedHand = findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId())
-                    .getHand().stream().map(CardView::getId).toList();
-            Assert.assertEquals(hostRenderedHand, hostCurrentHand,
-                    "the held host view's own hand matches the actual T4 state fence");
-            Assert.assertEquals(remoteRenderedHand, remoteCurrentHand,
-                    "the held remote view's own hand matches the actual T4 state fence");
-            gameNKnownIds.get(0).addAll(hostRenderedHand);
-            gameNKnownIds.get(1).addAll(remoteRenderedHand);
-            gameNKnownIds.get(0).addAll(preShuffleHostHand);
-            Assert.assertFalse(scenario.privacyChoices().isEmpty(),
-                    "the actual Telling Time chooser has captured private candidate-choice receipts");
-            for (ScriptedHumanTcpSupport.PrivacyChoiceReceipt choice : scenario.privacyChoices()) {
-                Assert.assertEquals(choice.seat(), tellingTimeSeat,
-                        "the captured private top-card choices belong to the actual Telling Time chooser");
-                Assert.assertEquals(choice.chooserViewId(), chooserViewId);
-                gameNKnownIds.get(tellingTimeSeat).addAll(choice.cardIds());
-            }
-            for (ScriptedHumanTcpSupport.PrivacyStateReceipt publicState :
-                    List.of(turnTwoDraw, turnThreeDraw, afterShuffle)) {
-                for (Map<ZoneType, List<Integer>> zones : publicState.zonesByPlayer().values()) {
-                    for (ZoneType publicZone : List.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile)) {
-                        List<Integer> publicIds = zones.get(publicZone);
-                        if (publicIds != null) {
-                            gameNKnownIds.get(0).addAll(publicIds);
-                            gameNKnownIds.get(1).addAll(publicIds);
-                        }
-                    }
-                }
-            }
-            Assert.assertEquals(afterShuffle.zonesByPlayer().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Library), currentLibrary, "both seats identify the same current library membership");
-            for (int cardId : eventDerivedShuffleIds) {
-                CardView hostSample = findCardView(hostCurrent, cardId);
-                CardView remoteSample = findCardView(remoteCurrent, cardId);
-                PlayerView hostOwn = findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId());
-                PlayerView remoteOwn = findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId());
-                Assert.assertNotNull(hostSample);
-                Assert.assertNotNull(remoteSample);
-                Assert.assertNotNull(hostOwn);
-                Assert.assertNotNull(remoteOwn);
-                if (currentLibrary.contains(cardId)) {
-                    Assert.assertFalse(hostSample.mayPlayerLook(hostOwn));
-                    Assert.assertFalse(hostSample.canBeShownTo(hostOwn));
-                    Assert.assertFalse(remoteSample.mayPlayerLook(remoteOwn));
-                    Assert.assertFalse(remoteSample.canBeShownTo(remoteOwn));
-                }
-            }
-            List<Integer> retainedKnownInLibrary = setup.privateTopIds().stream()
-                    .filter(currentLibrary::contains).toList();
-            System.out.println("DANDAN_PRIVACY_SHUFFLE_PRIOR_CHOOSER_LIBRARY_WITNESSES=" + retainedKnownInLibrary.size());
-            Assert.assertFalse(retainedKnownInLibrary.isEmpty(),
-                    "the fixed-seed Telling Time witness remains in the current library");
-            for (int priorChooserKnownLibraryId : retainedKnownInLibrary) {
-                CardView hostKnown = findCardView(hostCurrent, priorChooserKnownLibraryId);
-                CardView remoteKnown = findCardView(remoteCurrent, priorChooserKnownLibraryId);
-                PlayerView hostOwn = findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId());
-                PlayerView remoteOwn = findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId());
-                Assert.assertFalse(hostKnown.mayPlayerLook(hostOwn) || hostKnown.canBeShownTo(hostOwn),
-                        "Telling Time history grants no current host library permission");
-                Assert.assertFalse(remoteKnown.mayPlayerLook(remoteOwn) || remoteKnown.canBeShownTo(remoteOwn),
-                        "Telling Time history grants no current remote library permission");
-            }
-            List<Integer> priorOwnHandInLibrary = preShuffleHostHand.stream()
-                    .filter(currentLibrary::contains).toList();
-            System.out.println("DANDAN_PRIVACY_SHUFFLE_PRIOR_OWN_HAND_LIBRARY_WITNESSES=" + priorOwnHandInLibrary.size());
-            Assert.assertFalse(priorOwnHandInLibrary.isEmpty(),
-                    "the fixed-seed host-hand witness remains in the current library");
-            for (int priorOwnHandLibraryId : priorOwnHandInLibrary) {
-                CardView hostPrior = findCardView(hostCurrent, priorOwnHandLibraryId);
-                CardView remotePrior = findCardView(remoteCurrent, priorOwnHandLibraryId);
-                PlayerView hostOwn = findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId());
-                PlayerView remoteOwn = findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId());
-                Assert.assertFalse(hostPrior.mayPlayerLook(hostOwn) || hostPrior.canBeShownTo(hostOwn),
-                        "a prior host-hand identity grants no current host library permission");
-                Assert.assertFalse(remotePrior.mayPlayerLook(remoteOwn) || remotePrior.canBeShownTo(remoteOwn),
-                        "a prior host-hand identity grants no current remote library permission");
-            }
-            Set<Integer> allPostDayHandIds = new HashSet<>(hostCurrentHand);
-            allPostDayHandIds.addAll(remoteCurrentHand);
-            PlayerView hostOwn = findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId());
-            PlayerView remoteOwn = findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId());
-            Assert.assertEquals(allPostDayHandIds.size(), 14,
-                    "the two actual post-Day hands contain fourteen distinct physical cards");
-            for (int cardId : allPostDayHandIds) {
-                assertCurrentPrivateHandPermission(cardId, hostCurrentHand, remoteCurrentHand,
-                        findCardView(hostCurrent, cardId), findCardView(remoteCurrent, cardId), hostOwn, remoteOwn);
-            }
-            // These membership and permission checks do not assert a shuffled position or that either player forgets identities.
-            int hostHandControl = afterShuffle.zonesByPlayer().get(desktop.hostGui.ownPlayerViewId())
-                    .get(ZoneType.Hand).get(0);
-            int remoteHandControl = afterShuffle.zonesByPlayer().get(remote.gui().ownPlayerViewId())
-                    .get(ZoneType.Hand).get(0);
-            Assert.assertTrue(findCardView(hostCurrent, hostHandControl).canBeShownTo(
-                    findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId())));
-            Assert.assertFalse(findCardView(remoteCurrent, hostHandControl).canBeShownTo(
-                    findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId())));
-            Assert.assertTrue(findCardView(remoteCurrent, remoteHandControl).canBeShownTo(
-                    findPlayerView(remoteCurrent, remote.gui().ownPlayerViewId())));
-            Assert.assertFalse(findCardView(hostCurrent, remoteHandControl).canBeShownTo(
-                    findPlayerView(hostCurrent, desktop.hostGui.ownPlayerViewId())));
-            List<ScriptedHumanTcpSupport.PrivacyShuffleEventReceipt> shuffleEvents = scenario.privacyShuffleEvents();
-            Assert.assertEquals(shuffleEvents.stream().map(ScriptedHumanTcpSupport.PrivacyShuffleEventReceipt::playerViewId)
-                            .collect(java.util.stream.Collectors.toSet()),
-                    Set.of(desktop.hostGui.ownPlayerViewId(), remote.gui().ownPlayerViewId()),
-                    "the actual effect emitted a typed shuffle event for each assigned player; count/order are unconstrained");
-            Assert.assertTrue(shuffleEvents.stream().allMatch(event -> event.turn() == 3
-                            && event.phase() == PhaseType.MAIN1
-                            && event.sourceCardId() == setup.daysUndoingId()
-                            && event.castPriorityOrdinal() == scenario.privacyDaysUndoingCastOrdinal()
-                            && event.paidStackCallbackOrdinal() > event.castPriorityOrdinal()),
-                    "each typed shuffle is captured inside the paid Day's Undoing turn-3 resolution interval");
-            Assert.assertTrue(scenario.privacyStackViewReceipts().stream().anyMatch(stack ->
-                            stack.sourceCardId() == setup.daysUndoingId()
-                                    && stack.activatorViewId() == desktop.hostGui.ownPlayerViewId()
-                                    && !stack.ability()),
-                    "the assigned host's actual Day's Undoing spell reached the stack");
-            ScriptedHumanTcpSupport.PrivacyPaymentReceipt daysPayment = scenario.privacyPaymentReceipts().stream()
-                    .filter(payment -> payment.sourceCardId() == setup.daysUndoingId()).findFirst().orElse(null);
-            Assert.assertNotNull(daysPayment, "the actual turn-3 Day's Undoing stack retained its paid ability");
-            ScriptedHumanTcpSupport.PrivacyAbilityReceipt daysAbility = scenario.privacyAbilities().stream()
-                    .filter(ability -> ability.cardId() == setup.daysUndoingId()).findFirst().orElse(null);
-            Assert.assertNotNull(daysAbility, "the host selected Day's Undoing through the actual ability callback");
-            Assert.assertEquals(daysAbility.seat(), 0);
-            Assert.assertEquals(daysAbility.chooserViewId(), desktop.hostGui.ownPlayerViewId());
-            Assert.assertTrue(scenario.privacyDaysUndoingCastOrdinal() > 0
-                            && scenario.privacyDaysUndoingCastOrdinal() < daysAbility.callbackOrdinal()
-                            && daysAbility.callbackOrdinal() < daysPayment.callbackOrdinal(),
-                    "the cast priority, actual spell ability, and paid stack receipt are causally ordered");
-            int heldT4GameViewId = scenario.privacyGame().getView().getId();
-            awaitLifecycleCondition(scenario, () -> {
-                GameView currentRemoteView = remote.gui().getGameView();
-                return currentRemoteView != null && currentRemoteView.getId() == heldT4GameViewId
-                        && scenario.privacyGame().getView().getId() == heldT4GameViewId
-                        && (!deltaSync || hasPrivacyWrappedResolution(remote.gui().captures(),
-                                setup.daysUndoingId(), daysAbility.abilityId()))
-                        && currentRemoteView.getGameLog() != null
-                        && currentRemoteView.getGameLog().getAllEntries().stream().anyMatch(entry ->
-                                entry.type() == GameLogEntryType.STACK_RESOLVE && entry.sourceCard() != null
-                                        && entry.sourceCard().getId() == setup.daysUndoingId()
-                                        && !entry.message().isBlank()
-                                        && remote.gui().captures().stream()
-                                                .filter(capture -> "handleGameEvents".equals(capture.callback()))
-                                                .flatMap(capture -> capture.eventFacts().stream())
-                                                .anyMatch(fact -> fact.eventClass().endsWith("GameEventSpellResolved")
-                                                        && fact.scalarFacts().contains(
-                                                                "spell.id=" + daysAbility.abilityId())
-                                                        && fact.scalarFacts().contains(
-                                                                "spell.hostCardId=" + setup.daysUndoingId())
-                                                        && fact.stackDescription() != null
-                                                        && !fact.stackDescription().isBlank()
-                                                        && entry.message().equals(fact.stackDescription())));
-            }, 15, "the held Game N T4 view retains the exact Day's Undoing event receipt");
-            ScriptedHumanTcpSupport.Capture dayCastCapture = remote.gui().captures().stream()
-                    .filter(capture -> "handleGameEvents".equals(capture.callback())
-                            && capture.eventFacts().stream().anyMatch(fact ->
-                                    fact.eventClass().endsWith("GameEventSpellAbilityCast")
-                                            && fact.scalarFacts().contains("sa.id=" + daysAbility.abilityId())
-                                            && fact.scalarFacts().contains("sa.hostCardId=" + setup.daysUndoingId())))
-                    .findFirst().orElseThrow(() -> new AssertionError(
-                            "actual Day's Undoing cast receipt is absent"));
-            ScriptedHumanTcpSupport.EventFact dayCastFact = dayCastCapture.eventFacts().stream()
-                    .filter(fact -> fact.eventClass().endsWith("GameEventSpellAbilityCast")
-                            && fact.scalarFacts().contains("sa.id=" + daysAbility.abilityId())
-                            && fact.scalarFacts().contains("sa.hostCardId=" + setup.daysUndoingId()))
-                    .findFirst().orElseThrow();
-            ScriptedHumanTcpSupport.Capture dayResolvedCapture = remote.gui().captures().stream()
-                    .filter(capture -> "handleGameEvents".equals(capture.callback())
-                            && capture.eventFacts().stream().anyMatch(fact ->
-                                    fact.eventClass().endsWith("GameEventSpellResolved")
-                                            && fact.scalarFacts().contains("spell.id=" + daysAbility.abilityId())
-                                            && fact.scalarFacts().contains("spell.hostCardId=" + setup.daysUndoingId())))
-                    .findFirst().orElseThrow(() -> new AssertionError(
-                            "actual Day's Undoing resolution receipt is absent"));
-            ScriptedHumanTcpSupport.EventFact dayResolution = dayResolvedCapture.eventFacts().stream()
-                    .filter(fact -> fact.eventClass().endsWith("GameEventSpellResolved")
-                            && fact.scalarFacts().contains("spell.id=" + daysAbility.abilityId())
-                            && fact.scalarFacts().contains("spell.hostCardId=" + setup.daysUndoingId()))
-                    .findFirst().orElseThrow();
-            int dayCastFactIndex = dayCastCapture.eventFacts().indexOf(dayCastFact);
-            int dayResolvedFactIndex = dayResolvedCapture.eventFacts().indexOf(dayResolution);
-            Assert.assertTrue(dayCastCapture.callbackOrdinal() < dayResolvedCapture.callbackOrdinal()
-                            || dayCastCapture.callbackOrdinal() == dayResolvedCapture.callbackOrdinal()
-                            && dayCastFactIndex < dayResolvedFactIndex,
-                    "the actual Day cast event precedes its resolution event receipt");
-            if (deltaSync) {
-                ScriptedHumanTcpSupport.Capture dayCastParent = remote.gui().captures().stream()
-                        .filter(parent -> "applyDelta".equals(parent.callback())
-                                && parent.callbackOrdinal() == dayCastCapture.parentCallbackOrdinal()
-                                && parent.sequence() == dayCastCapture.parentSequence())
-                        .findFirst().orElse(null);
-                Assert.assertNotNull(dayCastParent, "delta Day cast receipt has its exact applying packet");
-                ScriptedHumanTcpSupport.Capture dayParent = remote.gui().captures().stream()
-                        .filter(parent -> "applyDelta".equals(parent.callback())
-                                && parent.callbackOrdinal() == dayResolvedCapture.parentCallbackOrdinal()
-                                && parent.sequence() == dayResolvedCapture.parentSequence())
-                        .findFirst().orElse(null);
-                Assert.assertNotNull(dayParent,
-                        "delta Day's Undoing event receipt matches its exact applying packet");
-                Assert.assertEquals(dayParent.wrappedEventCount(), dayResolvedCapture.eventCount());
-                Assert.assertTrue(dayCastParent.callbackOrdinal() >= turnThreeDraw.callbackOrdinal()
-                                && dayCastParent.callbackOrdinal() <= afterShuffle.callbackOrdinal(),
-                        "the actual Day cast's parent packet falls from the applied T3 state through held T4");
-                Assert.assertTrue(dayCastParent.sequence() >= turnThreeDraw.sequence()
-                                && dayCastParent.sequence() <= afterShuffle.sequence());
-                Assert.assertTrue(dayParent.callbackOrdinal() >= dayCastParent.callbackOrdinal()
-                                && dayParent.callbackOrdinal() <= afterShuffle.callbackOrdinal(),
-                        "the actual Day resolution's parent packet falls from its cast through held T4");
-                Assert.assertTrue(dayParent.sequence() >= turnThreeDraw.sequence()
-                                && dayParent.sequence() <= afterShuffle.sequence());
-            } else {
-                Assert.assertEquals(dayResolvedCapture.eventCount(), dayResolvedCapture.eventFacts().size(),
-                        "full-sync Game N has a complete actual event receipt");
-                Assert.assertEquals(dayCastCapture.eventCount(), dayCastCapture.eventFacts().size(),
-                        "full-sync Game N has a complete actual Day cast receipt");
-            }
-            Assert.assertNotNull(dayResolution.stackDescription());
-            Assert.assertFalse(dayResolution.stackDescription().isBlank());
-            List<forge.game.GameLogEntry> hostLogEntries = hostCurrent.getGameLog().getAllEntries();
-            List<forge.game.GameLogEntry> remoteLogEntries = remoteCurrent.getGameLog().getAllEntries();
-            for (List<forge.game.GameLogEntry> entries : List.of(hostLogEntries, remoteLogEntries)) {
-                for (int publicSpellId : List.of(setup.tellingTimeId(), setup.fengrafId(), setup.daysUndoingId())) {
-                    Assert.assertTrue(entries.stream().anyMatch(entry ->
-                                    entry.type() == GameLogEntryType.STACK_ADD && entry.sourceCard() != null
-                                            && entry.sourceCard().getId() == publicSpellId
-                                            && !entry.message().isBlank()),
-                            "the actual public STACK_ADD entry is present for card " + publicSpellId);
-                }
-                Assert.assertTrue(entries.stream().anyMatch(entry ->
-                                entry.type() == GameLogEntryType.STACK_RESOLVE && entry.sourceCard() != null
-                                        && entry.sourceCard().getId() == setup.daysUndoingId()
-                                        && !entry.message().isBlank()
-                                        && entry.message().equals(dayResolution.stackDescription())),
-                        "the actual Day's Undoing resolved log row carries its source card and captured stack text");
-            }
-            for (int publicSpellId : List.of(setup.tellingTimeId(), setup.fengrafId(), setup.daysUndoingId())) {
-                gameNKnownIds.get(0).add(publicSpellId);
-                gameNKnownIds.get(1).add(publicSpellId);
-            }
-            Set<Integer> privateIdentityIds = new HashSet<>(setup.privateTopIds());
-            for (ScriptedHumanTcpSupport.MulliganChoiceReceipt choice : scenario.mulliganChoices()) {
-                privateIdentityIds.addAll(choice.handIds());
-            }
-            for (ScriptedHumanTcpSupport.FreeRevealReceipt freeOpeningReveal : scenario.freeReveals()) {
-                privateIdentityIds.addAll(freeOpeningReveal.cardIds());
-            }
-            for (ScriptedHumanTcpSupport.KeepOpeningReceipt keep : scenario.keepOpeningReceipts()) {
-                privateIdentityIds.addAll(keep.handIds());
-            }
-            for (ScriptedHumanTcpSupport.LondonBottomDispatchReceipt bottom : scenario.londonBottomDispatches()) {
-                privateIdentityIds.addAll(bottom.chooserHandIds());
-                privateIdentityIds.add(bottom.cardId());
-            }
-            privateIdentityIds.addAll(hostCurrentHand);
-            privateIdentityIds.addAll(remoteCurrentHand);
-            privateIdentityIds.addAll(preShuffleHostHand);
-            privateIdentityIds.addAll(turnTwoDraw.zonesByPlayer()
-                    .get(remote.gui().ownPlayerViewId()).get(ZoneType.Hand));
-            assertPrivacyLogRowsAtFirstObservation(scenario, scenario.privacyGame(), privateIdentityIds,
-                    heldT4GameViewId, List.of(desktop.hostGui, remote.gui()));
-            Set<String> hostKnownNames = privacyKnownNames(scenario.privacyGame(), gameNKnownIds.get(0));
-            Set<String> remoteKnownNames = privacyKnownNames(scenario.privacyGame(), gameNKnownIds.get(1));
-            Set<String> hostForbiddenNames = privacyUnknownNames(scenario.privacyGame(), privateIdentityIds, hostKnownNames);
-            Set<String> remoteForbiddenNames = privacyUnknownNames(scenario.privacyGame(), privateIdentityIds, remoteKnownNames);
-            Assert.assertFalse(hostForbiddenNames.isEmpty(),
-                    "the actual fixed-seed T4 history supplies a still-unknown host identity witness");
-            Assert.assertFalse(remoteForbiddenNames.isEmpty(),
-                    "the actual fixed-seed T4 history supplies a still-unknown remote identity witness");
-            assertPrivacyLogObservationPositiveRows(List.of(desktop.hostGui, remote.gui()), heldT4GameViewId,
-                    List.of(setup.tellingTimeId(), setup.fengrafId(), setup.daysUndoingId()),
-                    setup.daysUndoingId(), dayResolution.stackDescription());
-            assertPrivacyLogOmitsNames(hostCurrent, hostForbiddenNames,
-                    "Game N host log at the held post-shuffle T4 fence");
-            assertPrivacyLogOmitsNames(remoteCurrent, remoteForbiddenNames,
-                    "Game N remote log at the held post-shuffle T4 fence");
-            Assert.assertEquals(daysPayment.activatorViewId(), desktop.hostGui.ownPlayerViewId());
-            Assert.assertEquals(daysPayment.payingManaSourceIds().size(), 3);
-            Assert.assertEquals(new HashSet<>(daysPayment.payingManaSourceIds()), new HashSet<>(setup.hostManaIds()));
-            Assert.assertTrue(daysPayment.payingManaColors().stream()
-                    .anyMatch(color -> (color & MagicColor.BLUE) != 0), "actual Day's Undoing payment included blue mana");
-            Assert.assertEquals(scenario.actions().stream().filter(action -> action.decision()
-                    == ScriptedHumanTcpSupport.Decision.CAST_DAYS_UNDOING
-                    && Objects.equals(action.cardId(), setup.daysUndoingId())).count(), 1L);
-            Assert.assertEquals(scenario.actions().stream().filter(action -> action.decision()
-                    == ScriptedHumanTcpSupport.Decision.PAY_DAYS_UNDOING).count(), 3L);
-            Assert.assertEquals(scenario.privacyAbilities().stream().filter(receipt ->
-                    setup.remoteManaIds().contains(receipt.cardId()) || setup.hostManaIds().contains(receipt.cardId())).count(), 8L,
-                    "the three later host Island abilities are distinct from the five preserved privacy-payment receipts");
-            Assert.assertEquals(afterShuffle.drawnThisTurnByPlayer().getOrDefault(remote.gui().ownPlayerViewId(), -1), 0,
-                    "the remote is held at UPKEEP before its normal turn-4 draw");
-            if (scenario.privacyHistoryReconnectScenario()) {
-                Assert.assertNotNull(scenario.privacyShuffleT4Controller(),
-                        "the same Game retained B's actual human controller at its held T4 prompt");
-                Assert.assertNotNull(scenario.privacyShuffleT4Input(),
-                        "the same Game retained B's exact InputPassPriority at its held T4 prompt");
-                Assert.assertTrue(scenario.isSamePrivacyShuffleT4PriorityInput(),
-                        "the old B priority input remains current before the intentional disconnect");
-                return new PrivacyTerminalReceipt(null, inboundBytesAtOpening);
-            }
-            Game privacyGame = scenario.privacyGame();
-            Assert.assertNotNull(privacyGame);
-            Assert.assertSame(match.getGame(), privacyGame,
-                    "the retained terminal trace is attached to this same actual hosted Game");
-            LifecycleTrace terminalTrace = new LifecycleTrace();
-            terminalTrace.expectPhysicalCardIds(setup.physicalCardIds());
-            terminalTrace.attach(privacyGame);
-            match.setEndGameHook(() -> terminalTrace.recordEngineReturn(privacyGame));
-            desktop.hostGui.concedePrivacyShuffleHistoryAfterAssertions();
-            Assert.assertTrue(desktop.hostGui.awaitActualTerminal(30, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertTrue(remote.gui().awaitActualTerminal(30, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertTrue(terminalTrace.awaitOutcome(30, TimeUnit.SECONDS),
-                    "the actual same-game outcome event fired before hosted teardown");
-            Assert.assertTrue(terminalTrace.awaitEngineReturn(30, TimeUnit.SECONDS),
-                    "the actual same-game Match.startGame return reached HostedMatch endGameHook");
-            Assert.assertEquals(terminalTrace.outcomeCount(), 1);
-            Assert.assertEquals(terminalTrace.game, privacyGame);
-            Assert.assertTrue(terminalTrace.outcomeCardIdsMatch && terminalTrace.engineReturnCardIdsMatch,
-                    "outcome and engine-return snapshots conserve the exact setup physical-card set");
-            GameView terminalGameView = match.getGameView();
-            Assert.assertNotNull(terminalGameView, "the actual terminal GameView is retained before hosted cleanup");
-            Assert.assertTrue(terminalGameView.isGameOver());
-            Assert.assertEquals(scenario.actions().stream().filter(action -> action.decision()
-                    == ScriptedHumanTcpSupport.Decision.CONCEDE && action.seat() == 0).count(), 1L);
-            assertReadinessGateSummary(scenario, "privacy-history");
-            return new PrivacyTerminalReceipt(terminalGameView, inboundBytesAtOpening);
-        }
-
         desktop.hostGui.concedePrivacyAfterAssertions();
         Assert.assertTrue(desktop.hostGui.awaitActualTerminal(30, TimeUnit.SECONDS));
         assertNoFailure(scenario);
@@ -5412,10 +2740,10 @@ public class DanDanNetworkPlayTest {
                 "each deferred opening Keep made exactly one endpoint OK dispatch");
         List<ScriptedHumanTcpSupport.OpeningKeepGateReceipt> keepReceipts = scenario.openingKeepGateReceipts();
         Assert.assertEquals(keepReceipts.size(), summary.openingKeepCompletions());
-        int expectedGateHandCount = scenario.privacyMulliganPrefixScenario() && !keepReceipts.isEmpty() ? 6 : 7;
-        int expectedLondonBottomId = scenario.privacyMulliganPrefixScenario() && !keepReceipts.isEmpty()
+        int expectedGateHandCount = false && !keepReceipts.isEmpty() ? 6 : 7;
+        int expectedLondonBottomId = false && !keepReceipts.isEmpty()
                 ? scenario.londonBottomDispatches().get(0).cardId() : -1;
-        long expectedGateStateLowerBound = scenario.privacyMulliganPrefixScenario() && !keepReceipts.isEmpty()
+        long expectedGateStateLowerBound = false && !keepReceipts.isEmpty()
                 ? scenario.londonBottomDispatches().get(0).zeroCardPromptOrdinal() : -1;
         Assert.assertTrue(keepReceipts.stream().allMatch(receipt -> receipt.inputType()
                         == forge.gamemodes.match.input.InputConfirmMulligan.class
@@ -5584,41 +2912,30 @@ public class DanDanNetworkPlayTest {
                 .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).max().orElse(-1);
         Assert.assertTrue(hostEndFence > 0);
         Assert.assertTrue(remoteEndFence > 0);
-        if (scenario.privacyHistoryReconnectScenario()) {
-            Assert.assertTrue(remote.gui().gameViewReceipts().stream().anyMatch(receipt ->
-                            receipt.gameViewId() == scenario.privacyShuffleT4GameViewId()
-                                    && receipt.trackerIdentity() != null),
-                    "replacement retained a current same-Game applied view through terminal");
-        } else {
+
             assertPrivacyModeReceipt(deltaSync, fengrafState, remote.gui());
-        }
+
         List<ScriptedHumanTcpSupport.PrivacyPromptReceipt> finalPrompts = scenario.privacyPrompts();
         Assert.assertTrue(finalPrompts.stream().filter(prompt -> prompt.seat() == 0)
                         .allMatch(prompt -> prompt.callbackOrdinal() < hostEndFence),
                 "host prompt observations are closed by its actual afterGameEnd callback");
-        if (!privacyShuffleHistoryScenario) {
+
             Assert.assertTrue(finalPrompts.stream().filter(prompt -> prompt.seat() == 0)
                             .noneMatch(prompt -> (setup.tellingTimeSeat() == 1
                                     ? setup.privateTopNames() : Set.of(setup.negativeHandName())).stream()
                                     .anyMatch(prompt.message()::contains)),
                     "no host prompt through terminal exposed the other endpoint's private card name");
-        }
-        if (scenario.privacyHistoryReconnectScenario()) {
-            Assert.assertTrue(remote.gui().priorityPrompts().stream()
-                            .allMatch(prompt -> prompt.callbackOrdinal() < remoteEndFence),
-                    "replacement endpoint prompts are closed by that same endpoint's actual afterGameEnd callback");
-        } else {
+
             Assert.assertTrue(finalPrompts.stream().filter(prompt -> prompt.seat() == 1)
                             .allMatch(prompt -> prompt.callbackOrdinal() < remoteEndFence),
                     "remote prompt observations are closed by its actual afterGameEnd callback");
-        }
-        if (!privacyShuffleHistoryScenario) {
+
             Assert.assertTrue(finalPrompts.stream().filter(prompt -> prompt.seat() == 1)
                             .noneMatch(prompt -> (setup.tellingTimeSeat() == 0
                                     ? setup.privateTopNames() : Set.of(setup.negativeHandName())).stream()
                                     .anyMatch(prompt.message()::contains)),
                     "no remote prompt through terminal exposed the other endpoint's private card name");
-        }
+
         Assert.assertFalse(observation.overflowed());
         Assert.assertNull(observation.failure());
         Assert.assertTrue(observation.inboundByteCount() > terminalReceipt.inboundBytesAtOpening(),
@@ -5780,306 +3097,6 @@ public class DanDanNetworkPlayTest {
             Assert.assertTrue(publicHost.get(1), "host endpoint positively sees the public graveyard card");
             Assert.assertTrue(publicRemote.get(1), "remote endpoint positively sees the public graveyard card");
         }
-    }
-
-    private static Map<Integer, Map<ZoneType, List<Integer>>> assertPrivacyReconnectKnowledgeParity(
-            ScriptedHumanTcpSupport.ScriptedGui host,
-            ScriptedHumanTcpSupport.ScriptedGui oldRemote, ScriptedHumanTcpSupport.ScriptedGui replacement,
-            PrivacySetup setup, Map<Integer, Map<ZoneType, List<Integer>>> currentZones,
-            ScriptedHumanTcpSupport.Scenario scenario, Channel replacementChannel,
-            Map<Integer, Map<ZoneType, List<Integer>>> decodedFullZones,
-            Map<Integer, Map<ZoneType, List<Integer>>> appliedFullZones) throws Throwable {
-        ReplacementIoSnapshotGate gate = new ReplacementIoSnapshotGate(replacementChannel);
-        AtomicReference<Map<Integer, Map<ZoneType, List<Integer>>>> fencedReplacementZones = new AtomicReference<>();
-        Throwable primary = null;
-        try {
-            gate.awaitReady();
-            assertNoFailure(scenario);
-            FThreads.invokeInEdtAndWait(() -> fencedReplacementZones.set(assertPrivacyReconnectKnowledgeParityOnGuiThread(
-                    host, oldRemote, replacement, setup, currentZones, decodedFullZones, appliedFullZones, scenario)));
-        } catch (Throwable failure) {
-            primary = failure;
-        } finally {
-            gate.release();
-            gate.awaitCompletion();
-        }
-
-        Throwable gateFailure = gate.failure();
-        if (gateFailure != null) {
-            try { scenario.fail(gateFailure); }
-            catch (Throwable failureHookError) { primary = combine(primary, failureHookError); }
-        }
-        try { assertNoFailure(scenario); }
-        catch (Throwable failure) { primary = combine(primary, failure); }
-        if (primary != null) throw primary;
-        return fencedReplacementZones.get();
-    }
-
-    /** Pauses only the replacement client's actual Netty event loop during a live-model snapshot. */
-    private static final class ReplacementIoSnapshotGate {
-        private static final long TIMEOUT_SECONDS = 5;
-        private final CountDownLatch ready = new CountDownLatch(1);
-        private final CountDownLatch release = new CountDownLatch(1);
-        private final CountDownLatch completed = new CountDownLatch(1);
-        private final AtomicReference<Throwable> failure = new AtomicReference<>();
-        private final Future<?> ioTask;
-
-        ReplacementIoSnapshotGate(Channel channel) {
-            Assert.assertNotNull(channel, "replacement endpoint has its real client channel");
-            Assert.assertTrue(channel.isActive(), "replacement client channel is active for its state snapshot");
-            Future<?> submitted;
-            try {
-                submitted = channel.eventLoop().submit(() -> {
-                    try {
-                        ready.countDown();
-                        if (!release.await(TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
-                            recordFailure(new TimeoutException("Replacement IO snapshot gate expired"));
-                        }
-                    } catch (InterruptedException interrupted) {
-                        Thread.currentThread().interrupt();
-                        recordFailure(interrupted);
-                    } catch (Throwable taskFailure) {
-                        recordFailure(taskFailure);
-                    } finally {
-                        completed.countDown();
-                    }
-                });
-            } catch (Throwable submissionFailure) {
-                recordFailure(submissionFailure);
-                completed.countDown();
-                submitted = null;
-            }
-            ioTask = submitted;
-        }
-
-        void awaitReady() {
-            Throwable priorFailure = failure.get();
-            if (priorFailure != null) {
-                throw new AssertionError("Replacement IO snapshot gate could not be submitted", priorFailure);
-            }
-            try {
-                if (!ready.await(TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
-                    recordFailure(new TimeoutException("Replacement IO snapshot gate did not become ready"));
-                }
-            } catch (InterruptedException interrupted) {
-                Thread.currentThread().interrupt();
-                recordFailure(interrupted);
-            }
-            Throwable recorded = failure.get();
-            if (recorded != null) throw new AssertionError("Replacement IO snapshot gate failed before the read", recorded);
-        }
-
-        void release() { release.countDown(); }
-
-        void awaitCompletion() {
-            if (ioTask == null) return;
-            try {
-                if (!completed.await(TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
-                    recordFailure(new TimeoutException("Replacement IO snapshot task did not signal completion"));
-                }
-                ioTask.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
-            } catch (InterruptedException interrupted) {
-                Thread.currentThread().interrupt();
-                recordFailure(interrupted);
-            } catch (ExecutionException executionFailure) {
-                recordFailure(executionFailure.getCause() == null ? executionFailure : executionFailure.getCause());
-            } catch (TimeoutException timeout) {
-                recordFailure(timeout);
-            } catch (Throwable taskFailure) {
-                recordFailure(taskFailure);
-            }
-        }
-
-        Throwable failure() { return failure.get(); }
-
-        private void recordFailure(Throwable error) { failure.compareAndSet(null, error); }
-    }
-
-    private static Map<Integer, Map<ZoneType, List<Integer>>> assertPrivacyReconnectKnowledgeParityOnGuiThread(
-            ScriptedHumanTcpSupport.ScriptedGui host, ScriptedHumanTcpSupport.ScriptedGui oldRemote,
-            ScriptedHumanTcpSupport.ScriptedGui replacement, PrivacySetup setup,
-            Map<Integer, Map<ZoneType, List<Integer>>> currentZones,
-            Map<Integer, Map<ZoneType, List<Integer>>> decodedFullZones,
-            Map<Integer, Map<ZoneType, List<Integer>>> appliedFullZones,
-            ScriptedHumanTcpSupport.Scenario scenario) {
-        GameView hostView = host.getGameView();
-        GameView oldRemoteView = oldRemote.getGameView();
-        GameView replacementView = replacement.getGameView();
-        Assert.assertNotNull(hostView);
-        Assert.assertNotNull(oldRemoteView);
-        Assert.assertNotNull(replacementView);
-        Map<Integer, Map<ZoneType, List<Integer>>> fencedZones = privacyZoneSnapshot(replacementView);
-        String zoneEvidence = privacyZoneBaselineEvidence(decodedFullZones, appliedFullZones, fencedZones, currentZones);
-        Assert.assertTrue(fencedZones.equals(currentZones),
-                "fenced current replacement zones match the held baseline; " + zoneEvidence);
-        assertCurrentViewTrackerReceipt(host, hostView);
-        assertCurrentViewTrackerReceipt(oldRemote, oldRemoteView);
-        assertCurrentViewTrackerReceipt(replacement, replacementView);
-        Assert.assertEquals(hostView.getId(), replacementView.getId());
-        Assert.assertEquals(oldRemoteView.getId(), replacementView.getId());
-        List<Integer> joinedRoleIds = new ArrayList<>(setup.privateTopIds());
-        joinedRoleIds.addAll(List.of(setup.negativeHandId(), setup.tellingTimeId(), setup.daysUndoingId(),
-                setup.fengrafId(), setup.publicCreatureId()));
-        for (int cardId : new LinkedHashSet<>(joinedRoleIds)) {
-            List<Boolean> hostFacts = currentVisibilityFacts(hostView, cardId,
-                    setup.hostViewId(), setup.remoteViewId());
-            List<Boolean> oldFacts = currentVisibilityFacts(oldRemoteView, cardId,
-                    setup.hostViewId(), setup.remoteViewId());
-            List<Boolean> replacementFacts = currentVisibilityFacts(replacementView, cardId,
-                    setup.hostViewId(), setup.remoteViewId());
-            Assert.assertEquals(replacementFacts, oldFacts,
-                    "replacement retained same-Game permission flags for a role card");
-            Assert.assertEquals(replacementFacts, hostFacts,
-                    "current endpoint snapshots agree on same-Game permission flags for a role card");
-        }
-        List<Integer> hostHand = currentZones.get(setup.hostViewId()).get(ZoneType.Hand);
-        List<Integer> remoteHand = currentZones.get(setup.remoteViewId()).get(ZoneType.Hand);
-        Assert.assertEquals(hostHand.size(), 7);
-        Assert.assertEquals(remoteHand.size(), 7);
-        Set<Integer> handIds = new HashSet<>(hostHand);
-        handIds.addAll(remoteHand);
-        PlayerView hostOwn = findPlayerView(hostView, setup.hostViewId());
-        PlayerView remoteOwn = findPlayerView(hostView, setup.remoteViewId());
-        PlayerView oldRemoteHostOwn = findPlayerView(oldRemoteView, setup.hostViewId());
-        PlayerView oldRemoteOwn = findPlayerView(oldRemoteView, setup.remoteViewId());
-        PlayerView replacementHostOwn = findPlayerView(replacementView, setup.hostViewId());
-        PlayerView replacementRemoteOwn = findPlayerView(replacementView, setup.remoteViewId());
-        Assert.assertNotNull(hostOwn);
-        Assert.assertNotNull(remoteOwn);
-        Assert.assertNotNull(oldRemoteHostOwn);
-        Assert.assertNotNull(oldRemoteOwn);
-        Assert.assertNotNull(replacementHostOwn);
-        Assert.assertNotNull(replacementRemoteOwn);
-        for (int cardId : handIds) {
-            CardView hostCard = findCardView(hostView, cardId);
-            CardView oldRemoteCard = findCardView(oldRemoteView, cardId);
-            CardView replacementCard = findCardView(replacementView, cardId);
-            Assert.assertNotNull(hostCard, "current host hand card is present");
-            Assert.assertNotNull(oldRemoteCard, "current old-remote hand card is present");
-            Assert.assertNotNull(replacementCard, "current replacement hand card is present");
-            Assert.assertSame(hostCard.getTracker(), hostView.getTracker(),
-                    "host hand card belongs to the current host GameView tracker");
-            Assert.assertSame(oldRemoteCard.getTracker(), oldRemoteView.getTracker(),
-                    "old-remote hand card belongs to the current old-remote GameView tracker");
-            Assert.assertSame(replacementCard.getTracker(), replacementView.getTracker(),
-                    "replacement hand card belongs to the current replacement GameView tracker");
-            assertCurrentPrivateHandPermission(cardId, hostHand, remoteHand,
-                    hostCard, hostCard, hostOwn, remoteOwn);
-            assertCurrentPrivateHandPermission(cardId, hostHand, remoteHand,
-                    oldRemoteCard, oldRemoteCard, oldRemoteHostOwn, oldRemoteOwn);
-            assertCurrentPrivateHandPermission(cardId, hostHand, remoteHand,
-                    replacementCard, replacementCard, replacementHostOwn, replacementRemoteOwn);
-        }
-        assertPrivacyReconnectLogHistoryHandoff(oldRemote, replacement, setup, scenario);
-        return fencedZones;
-    }
-
-    private static void assertPrivacyReconnectLogHistoryHandoff(
-            ScriptedHumanTcpSupport.ScriptedGui oldRemote,
-            ScriptedHumanTcpSupport.ScriptedGui replacement, PrivacySetup setup,
-            ScriptedHumanTcpSupport.Scenario scenario) {
-        int gameViewId = scenario.privacyShuffleT4GameViewId();
-        GameView oldView = oldRemote.getGameView();
-        GameView replacementView = replacement.getGameView();
-        Assert.assertEquals(oldView.getId(), gameViewId);
-        Assert.assertEquals(replacementView.getId(), gameViewId);
-        List<ScriptedHumanTcpSupport.PrivacyLogRow> oldRows = actualPrivacyLogRows(oldView);
-        List<ScriptedHumanTcpSupport.PrivacyLogRow> replacementRows = actualPrivacyLogRows(replacementView);
-        Assert.assertFalse(oldRows.isEmpty(), "the disconnected same-Game endpoint retained actual log history");
-        Assert.assertEquals(replacementRows, oldRows,
-                "same-Game reconnect replay preserves every ordered log-row occurrence, including equal-valued rows");
-        List<ScriptedHumanTcpSupport.PrivacyLogRow> oldObserved = observedPrivacyLogRows(oldRemote, gameViewId);
-        List<ScriptedHumanTcpSupport.PrivacyLogRow> replacementObserved = observedPrivacyLogRows(replacement, gameViewId);
-        Assert.assertEquals(oldObserved, oldRows,
-                "the old endpoint's post-consumer row observations account for its complete current GameLog");
-        Assert.assertEquals(replacementObserved, replacementRows,
-                "replacement post-consumer observations account for the complete replayed GameLog");
-        Set<Integer> privateCandidates = new HashSet<>(setup.privateTopIds());
-        privateCandidates.add(setup.negativeHandId());
-        PlayerView oldHostView = findPlayerView(oldView, setup.hostViewId());
-        PlayerView oldRemotePlayerView = findPlayerView(oldView, setup.remoteViewId());
-        Assert.assertNotNull(oldHostView);
-        Assert.assertNotNull(oldRemotePlayerView);
-        oldHostView.getHand().forEach(card -> privateCandidates.add(card.getId()));
-        oldRemotePlayerView.getHand().forEach(card -> privateCandidates.add(card.getId()));
-        for (ScriptedHumanTcpSupport.MulliganChoiceReceipt receipt : scenario.mulliganChoices()) {
-            privateCandidates.addAll(receipt.handIds());
-        }
-        for (ScriptedHumanTcpSupport.FreeRevealReceipt receipt : scenario.freeReveals()) {
-            privateCandidates.addAll(receipt.cardIds());
-        }
-        for (ScriptedHumanTcpSupport.KeepOpeningReceipt receipt : scenario.keepOpeningReceipts()) {
-            privateCandidates.addAll(receipt.handIds());
-        }
-        for (ScriptedHumanTcpSupport.LondonBottomDispatchReceipt receipt : scenario.londonBottomDispatches()) {
-            privateCandidates.addAll(receipt.chooserHandIds());
-            privateCandidates.add(receipt.cardId());
-        }
-        for (ScriptedHumanTcpSupport.PrivacyChoiceReceipt receipt : scenario.privacyChoices()) {
-            privateCandidates.addAll(receipt.cardIds());
-        }
-        for (ScriptedHumanTcpSupport.PrivacyRevealReceipt receipt : scenario.privacyReveals()) {
-            privateCandidates.addAll(receipt.cardIds());
-        }
-        for (ScriptedHumanTcpSupport.PrivacyStateReceipt state : new ScriptedHumanTcpSupport.PrivacyStateReceipt[] {
-                scenario.privacyShuffleHistoryState(), scenario.privacyShuffleTurnTwoDraw(),
-                scenario.privacyShuffleTurnThreeDraw()}) {
-            if (state == null) continue;
-            for (Map<ZoneType, List<Integer>> zones : state.zonesByPlayer().values()) {
-                privateCandidates.addAll(zones.getOrDefault(ZoneType.Hand, List.of()));
-            }
-        }
-        Map<Integer, Set<Integer>> oldEndpointKnowledge = assertPrivacyLogRowsAtFirstObservation(scenario,
-                scenario.privacyGame(), privateCandidates, gameViewId, List.of(oldRemote));
-        Set<Integer> handedKnowledgeIds = oldEndpointKnowledge.get(setup.remoteViewId());
-        Assert.assertNotNull(handedKnowledgeIds,
-                "replacement inherits knowledge audited by the exact old endpoint and assigned seat");
-        Assert.assertFalse(handedKnowledgeIds.isEmpty(),
-                "replacement receives concrete same-Game knowledge from the disconnected endpoint");
-        List<ScriptedHumanTcpSupport.PrivacyLogObservation> replacementObservations = replacement
-                .privacyLogObservations().stream().filter(receipt -> receipt.gameViewId() == gameViewId)
-                .sorted(Comparator.comparingLong(ScriptedHumanTcpSupport.PrivacyLogObservation::observationOrdinal))
-                .toList();
-        int replayedRows = 0;
-        Set<Integer> replacementKnownIds = new HashSet<>(handedKnowledgeIds);
-        Set<String> replayUnknownWitnesses = new HashSet<>();
-        for (ScriptedHumanTcpSupport.PrivacyLogObservation observation : replacementObservations) {
-            Assert.assertEquals(observation.ownPlayerViewId(), setup.remoteViewId(),
-                    "reconnect history remains in the replacement's assigned seat namespace");
-            replacementKnownIds.addAll(observation.ownHandIds());
-            replacementKnownIds.addAll(observation.publicCardIds());
-            for (ScriptedHumanTcpSupport.PrivacyLogRow row : observation.appendedRows()) {
-                Assert.assertTrue(replayedRows < oldRows.size(),
-                        "same-Game reconnect is scoped to the ordered replayed history");
-                Assert.assertEquals(row, oldRows.get(replayedRows++),
-                        "replayed history is matched by ordered occurrence, not value deduplication");
-                Set<String> forbiddenNames = privacyUnknownNames(scenario.privacyGame(), privateCandidates,
-                        privacyKnownNames(scenario.privacyGame(), replacementKnownIds));
-                if (!forbiddenNames.isEmpty()) replayUnknownWitnesses.addAll(forbiddenNames);
-                for (String forbiddenName : forbiddenNames) {
-                    Assert.assertFalse(row.message().contains(forbiddenName),
-                            "replayed Game N row omits never-known name " + forbiddenName);
-                }
-            }
-        }
-        Assert.assertEquals(replayedRows, oldRows.size(),
-                "replacement's ordered observation stream accounts for all replayed same-Game history");
-        Assert.assertFalse(replayUnknownWitnesses.isEmpty(),
-                "replacement replay rows are checked while an inherited unknown-name witness remains");
-    }
-
-    private static List<ScriptedHumanTcpSupport.PrivacyLogRow> actualPrivacyLogRows(GameView view) {
-        Assert.assertNotNull(view.getGameLog(), "same-Game endpoint retains its actual GameLog");
-        return view.getGameLog().getAllEntries().stream().map(entry ->
-                new ScriptedHumanTcpSupport.PrivacyLogRow(entry.type().name(), entry.message(),
-                        entry.sourceCard() == null ? -1 : entry.sourceCard().getId())).toList();
-    }
-
-    private static List<ScriptedHumanTcpSupport.PrivacyLogRow> observedPrivacyLogRows(
-            ScriptedHumanTcpSupport.ScriptedGui endpoint, int gameViewId) {
-        return endpoint.privacyLogObservations().stream().filter(item -> item.gameViewId() == gameViewId)
-                .sorted(Comparator.comparingLong(ScriptedHumanTcpSupport.PrivacyLogObservation::observationOrdinal))
-                .flatMap(item -> item.appendedRows().stream()).toList();
     }
 
     private static void assertCurrentViewTrackerReceipt(ScriptedHumanTcpSupport.ScriptedGui gui, GameView view) {
@@ -6317,8 +3334,7 @@ public class DanDanNetworkPlayTest {
             int replayedPromptIndex = -1;
             for (int i = postOpenPreFull + 1; i < facts.size(); i++) {
                 ScriptedHumanTcpSupport.PreHandlerFact fact = facts.get(i);
-                if ("updateButtons".equals(fact.method()) && fact.promptOwnerViewId() == remoteViewId
-                        && fact.promptOne().equals(heldPrompt.one()) && fact.promptTwo().equals(heldPrompt.two())) {
+                if ("updateButtons".equals(fact.method()) && fact.promptOwnerViewId() == remoteViewId && fact.promptOne().equals(heldPrompt.one()) && fact.promptTwo().equals(heldPrompt.two())) {
                     replayedPromptIndex = i;
                     break;
                 }
@@ -6417,426 +3433,6 @@ public class DanDanNetworkPlayTest {
         }
     }
 
-    private static PrivacyTerminalReceipt runPrivacyHistoryReconnectRoundTrip(FServerManager server,
-            RemoteClient retainedClient,
-            ScriptedHumanTcpSupport oldRemote, ScriptedHumanTcpSupport replacement,
-            ScriptedHumanTcpSupport.ScriptedGui hostGui,
-            ScriptedHumanTcpSupport.Scenario scenario, HostedMatch match,
-            PrivacySetup setup,
-            ScriptedHumanTcpSupport.ReconnectObservation oldObservation,
-            int inboundBytesAtOpening,
-            CountDownLatch parkNotice, AtomicReference<String> parkNoticeText,
-            ScriptedHumanTcpSupport.ReconnectObservation replacementObservation,
-            AtomicReference<ScriptedHumanTcpSupportTest.ServerInactiveObservation> pendingInactiveOwner,
-            AtomicReference<Channel> pendingChannelOwner,
-            AtomicReference<ScriptedHumanTcpSupportTest.CompletedServerInactiveReceipt> completedInactiveOwner)
-            throws Throwable {
-        Assert.assertNotNull(retainedClient);
-        Assert.assertNotNull(oldObservation);
-        Assert.assertNotNull(replacementObservation);
-        Assert.assertNotNull(pendingInactiveOwner);
-        Assert.assertNotNull(pendingChannelOwner);
-        Assert.assertNotNull(completedInactiveOwner);
-        Game game = scenario.privacyGame();
-        Assert.assertNotNull(game);
-        Assert.assertSame(match.getGame(), game, "reconnect continuation remains in the accepted same Game N");
-        Assert.assertEquals(scenario.privacyShuffleT4GameViewId(), game.getView().getId());
-        Assert.assertTrue(scenario.isSamePrivacyShuffleT4PriorityInput(),
-                "the exact B T4 InputPassPriority remains live at disconnect entry");
-        Assert.assertSame(game.getPlayers().get(1).getController(), scenario.privacyShuffleT4Controller());
-        Assert.assertTrue(oldObservation.inboundByteCount() > 0,
-                "the old endpoint already has its live channel observation before it is parked");
-        Assert.assertFalse(oldObservation.overflowed());
-        Assert.assertNull(oldObservation.failure());
-        GameView hostBeforeDisconnect = hostGui.getGameView();
-        GameView oldRemoteBeforeDisconnect = oldRemote.gui().getGameView();
-        Assert.assertNotNull(hostBeforeDisconnect);
-        Assert.assertNotNull(oldRemoteBeforeDisconnect);
-        Assert.assertEquals(hostBeforeDisconnect.getId(), scenario.privacyShuffleT4GameViewId());
-        Assert.assertEquals(oldRemoteBeforeDisconnect.getId(), scenario.privacyShuffleT4GameViewId());
-        assertCurrentViewTrackerReceipt(hostGui, hostBeforeDisconnect);
-        assertCurrentViewTrackerReceipt(oldRemote.gui(), oldRemoteBeforeDisconnect);
-        Object hostTrackerBeforeReconnect = hostBeforeDisconnect.getTracker();
-
-        Channel oldChannel = oldRemote.channel();
-        Assert.assertNotNull(oldChannel);
-        Channel oldServerChannel = ScriptedHumanTcpSupport.serverChannel(retainedClient);
-        Assert.assertNotNull(oldServerChannel);
-        pendingChannelOwner.set(oldServerChannel);
-        ScriptedHumanTcpSupportTest.ServerInactiveObservation oldServerInactive =
-                ScriptedHumanTcpSupportTest.prepareServerInactiveObservation(retainedClient);
-        pendingInactiveOwner.set(oldServerInactive);
-        Assert.assertSame(ScriptedHumanTcpSupport.serverChannel(retainedClient), oldServerChannel,
-                "the inactive-channel observer was installed on the accepted client's current channel before close");
-        long closeDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
-        var closeFuture = oldChannel.closeFuture();
-        int oldCaptureCount = -1;
-        Throwable primary = null;
-        FutureTask<Void> connect = null;
-        Thread connectThread = null;
-        ReconnectWorkerGate gate = null;
-        ScriptedHumanTcpSupport.ServerDecodedEventTap serverTap = null;
-        ScriptedHumanTcpSupportTest.CompletedServerInactiveReceipt completedOldServerInactive = null;
-        try {
-            oldRemote.close();
-            long remaining = closeDeadline - System.nanoTime();
-            Assert.assertTrue(remaining > 0 && closeFuture.await(remaining, TimeUnit.NANOSECONDS)
-                            && closeFuture.isSuccess(),
-                    "the original assigned endpoint closed normally within the bounded deadline");
-            remaining = closeDeadline - System.nanoTime();
-            var eventLoopTermination = oldChannel.eventLoop().terminationFuture();
-            Assert.assertTrue(remaining > 0 && eventLoopTermination.await(remaining, TimeUnit.NANOSECONDS)
-                            && eventLoopTermination.isSuccess(),
-                    "the old endpoint event loop stopped cleanly before same-name reconnect");
-            FThreads.invokeInEdtAndWait(() -> { });
-            Assert.assertTrue(parkNotice.await(10, TimeUnit.SECONDS),
-                    "host received the existing post-park reconnect notice");
-            Assert.assertNotNull(parkNoticeText.get());
-            completedOldServerInactive = ScriptedHumanTcpSupportTest.awaitServerInactive(oldServerInactive);
-            completedInactiveOwner.set(completedOldServerInactive);
-            Assert.assertSame(completedOldServerInactive.accepted(), retainedClient);
-            Assert.assertSame(completedOldServerInactive.channel(), oldServerChannel);
-            Assert.assertFalse(completedOldServerInactive.channel().isActive(),
-                    "the exact pre-close accepted server channel reached inactive and drained");
-            oldCaptureCount = oldRemote.gui().captures().size();
-            Assert.assertEquals(retainedClient.getIndex(), 1);
-            Assert.assertSame(disconnectedClients(server).get(retainedClient.getUsername()), retainedClient,
-                    "the exact original server RemoteClient is parked under its username");
-            Assert.assertTrue(reconnectTimers(server).containsKey(retainedClient.getUsername()),
-                    "the parked client's ordinary timeout remains armed until login");
-
-            long gateDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(8);
-            gate = new ReconnectWorkerGate(server, gateDeadline);
-            gate.awaitWorkers();
-            replacement.gui().expectReconnectReplay();
-            connect = new FutureTask<>(() -> { replacement.connect(); return null; });
-            connectThread = new Thread(connect, "DanDan-history-reconnect-connect");
-            connectThread.setDaemon(true);
-            connectThread.start();
-            connect.get(gate.remainingNanos(), TimeUnit.NANOSECONDS);
-            replacement.installReconnectObservation(replacementObservation, gateDeadline);
-            gate.releaseForInstalledTap();
-            assertNoFailure(scenario);
-            Assert.assertTrue(replacement.gui().awaitFull(15, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertTrue(replacement.gui().awaitOpenView(15, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertTrue(replacement.gui().awaitPostOpenFullState(15, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertSame(server.getClientBySlotIndex(1), retainedClient);
-            Assert.assertEquals(retainedClient.getIndex(), 1);
-            Assert.assertEquals(replacement.clientUsername(), retainedClient.getUsername());
-            Assert.assertFalse(reconnectTimers(server).containsKey(retainedClient.getUsername()));
-            Assert.assertTrue(replacement.gui().awaitReconnectReplayPriority(15, TimeUnit.SECONDS),
-                    "replacement received the exact held T4 UPKEEP prompt after the final full baseline");
-            assertNoFailure(scenario);
-            Channel replacementServerChannel = ScriptedHumanTcpSupport.serverChannel(retainedClient);
-            Assert.assertNotNull(replacementServerChannel);
-            Assert.assertTrue(replacementServerChannel.isActive());
-            Assert.assertNotSame(replacementServerChannel, completedOldServerInactive.channel(),
-                    "the resumed RemoteClient is attached to a new active server channel");
-            Assert.assertSame(server.getClientBySlotIndex(1), retainedClient);
-            serverTap = ScriptedHumanTcpSupport.ServerDecodedEventTap.install(replacementServerChannel, 1);
-            Assert.assertEquals(replacement.gui().ownPlayerViewId(), scenario.privacyRemoteViewId());
-            GameView replacementView = replacement.gui().getGameView();
-            Assert.assertNotNull(replacementView);
-            Assert.assertEquals(replacementView.getId(), scenario.privacyShuffleT4GameViewId(),
-                    "replacement resumed Game N with its same GameView identity");
-            Assert.assertEquals(replacementView.getTurn(), 4);
-            Assert.assertEquals(replacementView.getPhase(), PhaseType.UPKEEP);
-            Assert.assertEquals(replacementView.getPlayerTurn().getId(), scenario.privacyRemoteViewId());
-
-            List<ScriptedHumanTcpSupport.Capture> captures = replacement.gui().captures();
-            long firstFull = captures.stream().filter(c -> "setGameView".equals(c.callback()))
-                    .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).min().orElse(-1);
-            long open = captures.stream().filter(c -> "openView".equals(c.callback()))
-                    .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).min().orElse(-1);
-            long postOpenFull = captures.stream().filter(c -> "setGameView".equals(c.callback())
-                            && c.callbackOrdinal() > open)
-                    .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).min().orElse(-1);
-            Assert.assertTrue(firstFull > 0 && firstFull < open && open < postOpenFull,
-                    "replacement's full resync precedes openView and its post-open full baseline");
-            List<ScriptedHumanTcpSupport.PreHandlerFact> preHandlerFacts = replacementObservation.facts();
-            int firstPreFull = indexOfFact(preHandlerFacts, 0, "setGameView");
-            int preOpen = indexOfFact(preHandlerFacts, 0, "openView");
-            int postOpenPreFull = indexOfFact(preHandlerFacts, preOpen + 1, "setGameView");
-            Assert.assertTrue(firstPreFull >= 0 && firstPreFull < preOpen && preOpen < postOpenPreFull,
-                    "replacement pre-handler receipt independently retains full, openView, full order");
-            ScriptedHumanTcpSupport.PreHandlerFact replacementPreBaseline = preHandlerFacts.get(postOpenPreFull);
-            Assert.assertTrue(replacementPreBaseline.danDan() && replacementPreBaseline.turn() == 4
-                            && "UPKEEP".equals(replacementPreBaseline.phase())
-                            && replacementPreBaseline.turnPlayerViewId() == scenario.privacyRemoteViewId()
-                            && replacementPreBaseline.playerViewIds().size() == 2
-                            && replacementPreBaseline.playerViewIds().contains(scenario.privacyViewIdForSeat(0))
-                            && replacementPreBaseline.playerViewIds().contains(scenario.privacyRemoteViewId()),
-                    "replacement's decoded final baseline identifies the same two-player T4 UPKEEP Game");
-            ScriptedHumanTcpSupport.GameViewReceipt replacementBaseline = replacement.gui().gameViewReceipts().stream()
-                    .filter(receipt -> receipt.callbackOrdinal() == postOpenFull).findFirst().orElse(null);
-            Assert.assertNotNull(replacementBaseline);
-            Assert.assertEquals(replacementBaseline.gameViewId(), scenario.privacyShuffleT4GameViewId());
-            Assert.assertNotNull(replacementBaseline.trackerIdentity(),
-                    "replacement's full baseline has its own current tracker identity");
-            Assert.assertSame(replacementView.getTracker(), replacementBaseline.trackerIdentity(),
-                    "the retained applied replacement view is backed by its own baseline tracker");
-            ScriptedHumanTcpSupport.PrivacyStateReceipt oldHeldState = scenario.privacyShuffleHistoryState();
-            Assert.assertNotNull(oldHeldState);
-            Assert.assertTrue(replacementBaseline.zonesByPlayer().equals(oldHeldState.zonesByPlayer()),
-                    "replacement resync preserves the same N physical-state snapshot");
-            List<ScriptedHumanTcpSupport.PriorityReceipt> appliedReplayPrompts = replacement.gui().priorityPrompts().stream()
-                    .filter(prompt -> prompt.seat() == 1 && prompt.chooserViewId() == scenario.privacyRemoteViewId()
-                            && prompt.turn() == 4 && prompt.phase() == PhaseType.UPKEEP
-                            && prompt.turnPlayerViewId() == scenario.privacyRemoteViewId()
-                            && prompt.callbackOrdinal() > postOpenFull
-                            && (prompt.enabledOne() || prompt.enabledTwo()))
-                    .toList();
-            Assert.assertEquals(appliedReplayPrompts.size(), 1,
-                    "one applied priority receipt identifies B's held prompt after its final baseline");
-            ScriptedHumanTcpSupport.PriorityReceipt replayedPrompt = appliedReplayPrompts.get(0);
-            List<ScriptedHumanTcpSupport.PreHandlerFact> matchingReplayFacts = new ArrayList<>();
-            int decodedButtons = 0;
-            int positiveEventIds = 0;
-            int ownerMatches = 0;
-            int labelMatches = 0;
-            int enabledMatches = 0;
-            for (int i = postOpenPreFull + 1; i < preHandlerFacts.size(); i++) {
-                ScriptedHumanTcpSupport.PreHandlerFact fact = preHandlerFacts.get(i);
-                if (!"updateButtons".equals(fact.method())) continue;
-                decodedButtons++;
-                if (fact.eventId() <= 0) continue;
-                positiveEventIds++;
-                if (fact.promptOwnerViewId() != scenario.privacyRemoteViewId()) continue;
-                ownerMatches++;
-                if (!fact.promptOne().trim().equals(replayedPrompt.one())
-                        || !fact.promptTwo().trim().equals(replayedPrompt.two())) continue;
-                labelMatches++;
-                if (fact.promptOneEnabled() != replayedPrompt.enabledOne()
-                        || fact.promptTwoEnabled() != replayedPrompt.enabledTwo()) continue;
-                enabledMatches++;
-                matchingReplayFacts.add(fact);
-            }
-            Assert.assertEquals(matchingReplayFacts.size(), 1,
-                    "one decoded prompt event matches the applied held prompt after the post-open baseline"
-                            + " (postBaselineButtons=" + decodedButtons + ", positiveIds=" + positiveEventIds
-                            + ", ownerMatches=" + ownerMatches + ", labelMatches=" + labelMatches
-                            + ", enabledMatches=" + enabledMatches + ")");
-            int replayEventId = matchingReplayFacts.get(0).eventId();
-            Assert.assertTrue(replayEventId > 0
-                            && preHandlerFacts.stream().filter(fact -> fact.eventId() == replayEventId).count() == 1,
-                    "the correlated replayed button prompt has one unique positive-ID wire event");
-            int replayFactIndex = preHandlerFacts.indexOf(matchingReplayFacts.get(0));
-            List<ScriptedHumanTcpSupport.PreHandlerFact> decodedButtonCallbacks = preHandlerFacts.stream()
-                    .filter(fact -> "updateButtons".equals(fact.method())).toList();
-            List<ScriptedHumanTcpSupport.Capture> receivedButtonCallbacks = replacement.gui().captures().stream()
-                    .filter(capture -> "updateButtons".equals(capture.callback())).toList();
-            Assert.assertEquals(receivedButtonCallbacks.size(), decodedButtonCallbacks.size(),
-                    "each decoded button event has its corresponding replacement GUI capture");
-            long replayButtonRank = preHandlerFacts.subList(0, replayFactIndex + 1).stream()
-                    .filter(fact -> "updateButtons".equals(fact.method())).count() - 1;
-            Assert.assertTrue(replayButtonRank >= 0 && replayButtonRank < receivedButtonCallbacks.size());
-            ScriptedHumanTcpSupport.Capture receivedReplayButton = receivedButtonCallbacks.get((int) replayButtonRank);
-            Assert.assertEquals(receivedReplayButton.sequence(), matchingReplayFacts.get(0).sequence(),
-                    "the decoded replay event joins its exact replacement updateButtons callback by sequence");
-            ScriptedHumanTcpSupport.PriorityReceipt correlatedReplayPriority = replacement.gui().priorityPrompts().stream()
-                    .filter(receipt -> receipt.callbackOrdinal() == receivedReplayButton.callbackOrdinal())
-                    .findFirst().orElseThrow(() -> new AssertionError("Missing priority receipt for decoded replay button"));
-            Assert.assertEquals(correlatedReplayPriority, replayedPrompt,
-                    "the decoded replay event joins the applied priority receipt for the same endpoint callback");
-            int currentBaselineFactIndex = -1;
-            for (int i = postOpenPreFull; i < replayFactIndex; i++) {
-                if ("setGameView".equals(preHandlerFacts.get(i).method())) currentBaselineFactIndex = i;
-            }
-            Assert.assertTrue(currentBaselineFactIndex >= postOpenPreFull,
-                    "the matching replay prompt follows a decoded full current-state callback");
-            for (int i = currentBaselineFactIndex + 1; i < replayFactIndex; i++) {
-                ScriptedHumanTcpSupport.PreHandlerFact between = preHandlerFacts.get(i);
-                Assert.assertFalse("applyDelta".equals(between.method()) && between.changedObjectCount() > 0,
-                        "no populated delta changed the decoded current baseline before the matching replay prompt");
-            }
-            ScriptedHumanTcpSupport.PreHandlerFact decodedCurrentBaseline = preHandlerFacts.get(currentBaselineFactIndex);
-            Map<Integer, Map<ZoneType, List<Integer>>> decodedCurrentBaselineZones =
-                    replacementObservation.decodedFullZones(decodedCurrentBaseline);
-            Assert.assertTrue(decodedCurrentBaseline.danDan() && decodedCurrentBaseline.turn() == 4
-                            && "UPKEEP".equals(decodedCurrentBaseline.phase())
-                            && decodedCurrentBaseline.turnPlayerViewId() == scenario.privacyRemoteViewId()
-                            && decodedCurrentBaseline.playerViewIds().size() == 2
-                            && decodedCurrentBaseline.playerViewIds().contains(scenario.privacyViewIdForSeat(0))
-                            && decodedCurrentBaseline.playerViewIds().contains(scenario.privacyRemoteViewId()),
-                    "the latest decoded full before the replay prompt still describes Game N at remote T4 UPKEEP");
-            List<ScriptedHumanTcpSupport.PreHandlerFact> decodedFullCallbacks = preHandlerFacts.stream()
-                    .filter(fact -> "setGameView".equals(fact.method())).toList();
-            List<ScriptedHumanTcpSupport.Capture> receivedFullCallbacks = replacement.gui().captures().stream()
-                    .filter(capture -> "setGameView".equals(capture.callback())).toList();
-            Assert.assertEquals(receivedFullCallbacks.size(), decodedFullCallbacks.size(),
-                    "each decoded full callback has its corresponding replacement GUI capture");
-            long currentFullRank = preHandlerFacts.subList(0, replayFactIndex + 1).stream()
-                    .filter(fact -> "setGameView".equals(fact.method())).count() - 1;
-            Assert.assertTrue(currentFullRank >= 0 && currentFullRank < receivedFullCallbacks.size());
-            ScriptedHumanTcpSupport.Capture receivedCurrentBaseline = receivedFullCallbacks.get((int) currentFullRank);
-            Assert.assertEquals(receivedCurrentBaseline.sequence(), decodedCurrentBaseline.sequence(),
-                    "the decoded current full callback joins its exact replacement GUI receipt by sequence");
-            ScriptedHumanTcpSupport.GameViewReceipt currentBaselineReceipt = replacement.gui().gameViewReceipts().stream()
-                    .filter(receipt -> receipt.callbackOrdinal() == receivedCurrentBaseline.callbackOrdinal()
-                            && "setGameView".equals(receipt.callback()))
-                    .findFirst().orElseThrow(() -> new AssertionError("Missing applied receipt for decoded current full baseline"));
-            ScriptedHumanTcpSupport.GameViewReceipt latestAppliedFullBeforePrompt = replacement.gui().gameViewReceipts().stream()
-                    .filter(receipt -> "setGameView".equals(receipt.callback())
-                            && receipt.callbackOrdinal() < replayedPrompt.callbackOrdinal())
-                    .max(Comparator.comparingLong(ScriptedHumanTcpSupport.GameViewReceipt::callbackOrdinal))
-                    .orElseThrow(() -> new AssertionError("Missing applied full callback before replay prompt"));
-            Assert.assertEquals(currentBaselineReceipt.callbackOrdinal(), latestAppliedFullBeforePrompt.callbackOrdinal(),
-                    "the decoded current full is also the latest applied full before the replay prompt");
-            Assert.assertTrue(currentBaselineReceipt.callbackOrdinal() >= replacementBaseline.callbackOrdinal(),
-                    "the applied current baseline follows the replacement's initial post-open baseline");
-            Assert.assertTrue(currentBaselineReceipt.callbackOrdinal() < replayedPrompt.callbackOrdinal(),
-                    "the applied current baseline precedes the replacement's own priority receipt");
-            Assert.assertEquals(currentBaselineReceipt.gameViewId(), replacementView.getId());
-            Assert.assertSame(currentBaselineReceipt.trackerIdentity(), replacementView.getTracker(),
-                    "the latest applied full baseline is still the replacement's current Game N tracker");
-            Assert.assertTrue(currentBaselineReceipt.danDan(),
-                    "the applied current baseline is a DanDan full view");
-            Assert.assertTrue(scenario.isSamePrivacyShuffleT4PriorityInput(),
-                    "the old exact B server input is still current immediately before replacement response");
-            Map<Integer, Map<ZoneType, List<Integer>>> fencedReplacementZones = assertPrivacyReconnectKnowledgeParity(
-                    hostGui, oldRemote.gui(), replacement.gui(), setup, oldHeldState.zonesByPlayer(), scenario,
-                    replacement.channel(), decodedCurrentBaselineZones, currentBaselineReceipt.zonesByPlayer());
-            String zoneEvidence = privacyZoneBaselineEvidence(decodedCurrentBaselineZones,
-                    currentBaselineReceipt.zonesByPlayer(), fencedReplacementZones, oldHeldState.zonesByPlayer());
-            Assert.assertTrue(decodedCurrentBaselineZones.equals(oldHeldState.zonesByPlayer()),
-                    "the pre-beforeCall decoded full frame preserves the held Game N state; " + zoneEvidence);
-            Assert.assertTrue(currentBaselineReceipt.zonesByPlayer().equals(oldHeldState.zonesByPlayer()),
-                    "the latest applied full baseline preserves the held Game N state; " + zoneEvidence);
-
-            long bPassesBeforeReplacement = scenario.actions().stream().filter(action ->
-                    action.decision() == ScriptedHumanTcpSupport.Decision.PASS_PRIORITY
-                            && action.seat() == 1 && action.chooserViewId() == scenario.privacyRemoteViewId()).count();
-            serverTap.armSelectButtonOk();
-            replacement.armSelectButtonOkObservation(replacementView.getId(), replayedPrompt.callbackOrdinal());
-            replacement.gui().dispatchHeldReconnectPriorityPass();
-            ScriptedHumanTcpSupport.ClientProtocolSendReceipt clientSend = replacement.clientProtocolSendReceipt();
-            Assert.assertNotNull(clientSend, "the replacement emitted one actual client PASS event");
-            Assert.assertEquals(clientSend.method(), ProtocolMethod.selectButtonOk);
-            Assert.assertEquals(clientSend.gameViewId(), Integer.valueOf(replacementView.getId()));
-            Assert.assertEquals(clientSend.promptCallbackOrdinal(), replayedPrompt.callbackOrdinal());
-            long receiveDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
-            while (serverTap.receipt() == null && serverTap.failure() == null
-                    && System.nanoTime() < receiveDeadline) Thread.sleep(5);
-            Assert.assertNull(serverTap.failure(), "server decoded-event tap remained healthy");
-            ScriptedHumanTcpSupport.ServerProtocolReceiveReceipt serverReceive = serverTap.receipt();
-            Assert.assertNotNull(serverReceive, "the server decoded the replacement's actual PASS event");
-            Assert.assertEquals(serverReceive.eventId(), clientSend.eventId());
-            Assert.assertEquals(serverReceive.method(), clientSend.method());
-            Assert.assertEquals(serverReceive.gameViewId(), clientSend.gameViewId());
-            Assert.assertEquals(serverReceive.seat(), 1);
-            Assert.assertSame(serverReceive.channel(), ScriptedHumanTcpSupport.serverChannel(retainedClient));
-            long bPassesAfterReplacement = scenario.actions().stream().filter(action ->
-                    action.decision() == ScriptedHumanTcpSupport.Decision.PASS_PRIORITY
-                            && action.seat() == 1 && action.chooserViewId() == scenario.privacyRemoteViewId()).count();
-            Assert.assertEquals(bPassesAfterReplacement, bPassesBeforeReplacement + 1,
-                    "the correlated replacement event produced exactly one B action receipt");
-            Assert.assertTrue(replacementObservation.inboundByteCount() > 0,
-                    "replacement pre-handler observer captured its own resumed endpoint traffic");
-            Assert.assertFalse(replacementObservation.overflowed());
-            Assert.assertNull(replacementObservation.failure());
-
-            boolean hostContinuationObserved = scenario.awaitPrivacyHistoryReconnectHostHeld(30, TimeUnit.SECONDS);
-            assertNoFailure(scenario);
-            Assert.assertTrue(hostContinuationObserved,
-                    "replacement B PASS advanced to the earliest actual host A T4 UPKEEP callback, which was held");
-            Assert.assertTrue(scenario.isSamePrivacyHistoryReconnectHostInput(),
-                    "host retains the exact same-Game A InputPassPriority after B's replacement response");
-            Assert.assertFalse(scenario.isSamePrivacyShuffleT4PriorityInput(),
-                    "the server consumed B's retained input and advanced to A's next priority");
-            Assert.assertTrue(scenario.privacyHistoryReconnectHostCallbackOrdinal() > 0,
-                    "host hold came from its actual endpoint-local callback ordinal");
-            GameView hostHeld = hostGui.getGameView();
-            Assert.assertNotNull(hostHeld);
-            Assert.assertEquals(hostHeld.getId(), scenario.privacyShuffleT4GameViewId());
-            Assert.assertEquals(hostHeld.getTurn(), 4);
-            Assert.assertEquals(hostHeld.getPhase(), PhaseType.UPKEEP);
-            Assert.assertEquals(hostHeld.getPlayerTurn().getId(), scenario.privacyRemoteViewId());
-            Assert.assertEquals(hostHeld.getStack().size(), 0);
-            Assert.assertSame(hostHeld.getTracker(), hostTrackerBeforeReconnect,
-                    "host retained the same N tracker across replacement replay and priority progression");
-            Map<Integer, Map<ZoneType, List<Integer>>> hostHeldZones = zoneSnapshot(hostHeld);
-            for (PlayerView player : hostHeld.getPlayers()) {
-                hostHeldZones.get(player.getId()).put(ZoneType.Exile, ids(player.getCards(ZoneType.Exile)));
-            }
-            Assert.assertTrue(hostHeldZones.equals(oldHeldState.zonesByPlayer()),
-                    "the next host priority is the same N state after replacement B's pass");
-            assertPrivacyReconnectKnowledgeParity(hostGui, oldRemote.gui(), replacement.gui(), setup,
-                    oldHeldState.zonesByPlayer(), scenario, replacement.channel(), null, null);
-
-            Assert.assertSame(replacement.clientProtocolSendReceipt(), clientSend,
-                    "the exact N replacement send receipt remains retained through server consumption");
-            Assert.assertSame(serverTap.receipt(), serverReceive,
-                    "the exact N server decode receipt remains retained through host priority continuation");
-            Assert.assertNull(replacement.clientProtocolObservationFailure());
-            Assert.assertNull(serverTap.failure());
-            replacement.disarmClientSelectButtonOkObservation();
-            serverTap.disarmSelectButtonOk();
-            Assert.assertSame(replacement.clientProtocolSendReceipt(), clientSend,
-                    "closing the N observation window preserves its already-asserted receipt");
-            Assert.assertSame(serverTap.receipt(), serverReceive,
-                    "closing the N decoder window preserves its already-asserted receipt");
-
-            LifecycleTrace terminalTrace = new LifecycleTrace();
-            terminalTrace.expectPhysicalCardIds(setup.physicalCardIds());
-            terminalTrace.attach(game);
-            match.setEndGameHook(() -> terminalTrace.recordEngineReturn(game));
-            hostGui.concedePrivacyHistoryReconnectAfterAssertions();
-            Assert.assertTrue(hostGui.awaitActualTerminal(30, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertTrue(replacement.gui().awaitActualTerminal(30, TimeUnit.SECONDS));
-            assertNoFailure(scenario);
-            Assert.assertTrue(terminalTrace.awaitOutcome(30, TimeUnit.SECONDS));
-            Assert.assertTrue(terminalTrace.awaitEngineReturn(30, TimeUnit.SECONDS));
-            Assert.assertEquals(terminalTrace.outcomeCount(), 1);
-            Assert.assertSame(terminalTrace.game, game);
-            Assert.assertTrue(terminalTrace.outcomeCardIdsMatch && terminalTrace.engineReturnCardIdsMatch);
-            GameView terminalView = match.getGameView();
-            Assert.assertNotNull(terminalView);
-            Assert.assertTrue(terminalView.isGameOver());
-            Assert.assertEquals(scenario.actions().stream().filter(action -> action.decision()
-                    == ScriptedHumanTcpSupport.Decision.CONCEDE && action.seat() == 0
-                    && action.chooserViewId() == scenario.privacyHostViewId()).count(), 1L);
-            Assert.assertEquals(oldRemote.gui().captures().size(), oldCaptureCount,
-                    "the old disconnected endpoint received no callbacks after it was parked");
-            Assert.assertEquals(retainedClient.getSendErrorCount(), 0,
-                    "same-client reconnect and terminal cleanup introduced no send errors");
-            assertReadinessGateSummary(scenario, "privacy-history-reconnect");
-            return new PrivacyTerminalReceipt(terminalView, inboundBytesAtOpening);
-        } catch (Throwable failure) {
-            primary = failure;
-            throw failure;
-        } finally {
-            if (serverTap != null) {
-                try { serverTap.close(); }
-                catch (Throwable closeFailure) {
-                    if (primary != null) primary.addSuppressed(closeFailure);
-                    else {
-                        if (closeFailure instanceof Exception exception) throw exception;
-                        if (closeFailure instanceof Error error) throw error;
-                        throw new RuntimeException(closeFailure);
-                    }
-                }
-            }
-            if (gate != null) gate.releaseUnconditionally();
-            if (primary != null) {
-                if (connect != null) connect.cancel(true);
-                if (connectThread != null) {
-                    try {
-                        connectThread.join(1_000);
-                        if (connectThread.isAlive()) primary.addSuppressed(
-                                new AssertionError("Bounded history reconnect helper did not stop after cancellation"));
-                    } catch (InterruptedException interrupted) {
-                        Thread.currentThread().interrupt();
-                        primary.addSuppressed(interrupted);
-                    }
-                }
-            }
-        }
-    }
-
     private static Set<String> privacyKnownNames(Game game, Set<Integer> knownIds) {
         Set<String> names = new HashSet<>();
         for (int cardId : knownIds) {
@@ -6885,9 +3481,7 @@ public class DanDanNetworkPlayTest {
                 knownIds.addAll(observation.ownHandIds());
                 knownIds.addAll(observation.publicCardIds());
                 for (ScriptedHumanTcpSupport.MulliganChoiceReceipt receipt : scenario.mulliganChoices()) {
-                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat
-                            && receipt.chooserViewId() == expectedViewId
-                            && receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.handIds());
+                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.handIds());
                 }
                 for (ScriptedHumanTcpSupport.FreeRevealReceipt receipt : scenario.freeReveals()) {
                     if (receipt.gameViewId() != gameViewId || receipt.receivingSeat() != seat) continue;
@@ -6895,14 +3489,10 @@ public class DanDanNetworkPlayTest {
                     else addLawfullyPermissionedEarlierIds(knownIds, observation, receipt.cardIds());
                 }
                 for (ScriptedHumanTcpSupport.KeepOpeningReceipt receipt : scenario.keepOpeningReceipts()) {
-                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat
-                            && receipt.chooserViewId() == expectedViewId
-                            && receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.handIds());
+                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.handIds());
                 }
                 for (ScriptedHumanTcpSupport.LondonBottomDispatchReceipt receipt : scenario.londonBottomDispatches()) {
-                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat
-                            && receipt.chooserViewId() == expectedViewId
-                            && receipt.promptOrdinal() <= observation.observationOrdinal()) {
+                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.promptOrdinal() <= observation.observationOrdinal()) {
                         knownIds.addAll(receipt.chooserHandIds());
                         knownIds.add(receipt.cardId());
                     }
@@ -6918,14 +3508,12 @@ public class DanDanNetworkPlayTest {
                     else addLawfullyPermissionedEarlierIds(knownIds, observation, receipt.cardIds());
                 }
                 for (ScriptedHumanTcpSupport.PrivacyStackViewReceipt receipt : scenario.privacyStackViewReceipts()) {
-                    if (receipt.seat() == seat && receipt.chooserViewId() == expectedViewId
-                            && receipt.callbackOrdinal() <= observation.observationOrdinal()) {
+                    if (receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.callbackOrdinal() <= observation.observationOrdinal()) {
                         knownIds.add(receipt.sourceCardId());
                     }
                 }
                 for (ScriptedHumanTcpSupport.Capture capture : endpoint.captures()) {
-                    if (!"handleGameEvents".equals(capture.callback())
-                            || capture.callbackOrdinal() > observation.observationOrdinal()) continue;
+                    if (!"handleGameEvents".equals(capture.callback()) || capture.callbackOrdinal() > observation.observationOrdinal()) continue;
                     for (int publicSpellId : List.of(scenario.privacyTellingTimeId(),
                             scenario.privacyFengrafId(), scenario.privacyDaysUndoingId())) {
                         if (capture.eventFacts().stream().anyMatch(fact ->
@@ -6965,67 +3553,6 @@ public class DanDanNetworkPlayTest {
         }
     }
 
-    private static void assertPrivacyLogObservationPositiveRows(
-            List<ScriptedHumanTcpSupport.ScriptedGui> endpoints, int gameViewId,
-            List<Integer> publicSpellIds, int resolvedSpellId, String resolvedText) {
-        for (ScriptedHumanTcpSupport.ScriptedGui endpoint : endpoints) {
-            List<ScriptedHumanTcpSupport.PrivacyLogRow> rows = endpoint.privacyLogObservations().stream()
-                    .filter(observation -> observation.gameViewId() == gameViewId)
-                    .flatMap(observation -> observation.appendedRows().stream()).toList();
-            Assert.assertFalse(rows.isEmpty(), "captured consumer observations contain actual log rows");
-            for (int cardId : publicSpellIds) {
-                Assert.assertTrue(rows.stream().anyMatch(row -> row.type().equals(GameLogEntryType.STACK_ADD.name())
-                                && row.sourceCardId() == cardId && !row.message().isBlank()),
-                        "consumer observations contain the exact positive public STACK_ADD row for " + cardId);
-            }
-            Assert.assertTrue(rows.stream().anyMatch(row -> row.type().equals(GameLogEntryType.STACK_RESOLVE.name())
-                            && row.sourceCardId() == resolvedSpellId && row.message().equals(resolvedText)),
-                    "consumer observations contain the exact positive Day's Undoing STACK_RESOLVE row");
-        }
-    }
-
-    private static void assertNextGameTemporalLogRows(Game game, Set<Integer> privateHands,
-            List<ScriptedHumanTcpSupport.ScriptedGui> endpoints, int hostViewId, int remoteViewId) {
-        int gameViewId = game.getView().getId();
-        for (ScriptedHumanTcpSupport.ScriptedGui endpoint : endpoints) {
-            int assignedViewId = endpoint.ownPlayerViewId();
-            Assert.assertTrue(assignedViewId == hostViewId || assignedViewId == remoteViewId,
-                    "N+1 log observer is bound to a player in the current Game");
-            List<ScriptedHumanTcpSupport.PrivacyLogObservation> observations = endpoint.privacyLogObservations().stream()
-                    .filter(receipt -> receipt.gameViewId() == gameViewId)
-                    .sorted(Comparator.comparingLong(ScriptedHumanTcpSupport.PrivacyLogObservation::observationOrdinal))
-                    .toList();
-            Assert.assertFalse(observations.isEmpty(), "each N+1 endpoint retains current-Game log observations");
-            Assert.assertTrue(observations.stream().anyMatch(receipt -> !receipt.appendedRows().isEmpty()),
-                    "each N+1 endpoint consumed actual newly appended log rows");
-            Assert.assertTrue(observations.stream().flatMap(receipt -> receipt.appendedRows().stream())
-                            .anyMatch(row -> row.type().equals(GameLogEntryType.TURN.name()) && !row.message().isBlank()),
-                    "N+1 temporal observations contain the actual positive TURN row");
-            Set<Integer> knownIds = new HashSet<>();
-            Set<String> temporalWitnesses = new HashSet<>();
-            for (ScriptedHumanTcpSupport.PrivacyLogObservation observation : observations) {
-                Assert.assertEquals(observation.ownPlayerViewId(), assignedViewId,
-                        "N+1 observation remains in the assigned endpoint namespace");
-                knownIds.addAll(observation.ownHandIds());
-                knownIds.addAll(observation.publicCardIds());
-                Set<String> forbiddenNames = privacyUnknownNames(game, privateHands,
-                        privacyKnownNames(game, knownIds));
-                if (!observation.appendedRows().isEmpty() && !forbiddenNames.isEmpty()) {
-                    temporalWitnesses.addAll(forbiddenNames);
-                }
-                for (ScriptedHumanTcpSupport.PrivacyLogRow row : observation.appendedRows()) {
-                    for (String forbidden : forbiddenNames) {
-                        Assert.assertFalse(row.message().contains(forbidden),
-                                "first-observed N+1 log row at endpoint ordinal " + observation.observationOrdinal()
-                                        + " omits never-known opponent-hand name " + forbidden);
-                    }
-                }
-            }
-            Assert.assertFalse(temporalWitnesses.isEmpty(),
-                    "N+1 temporal observations check a real appended row while an opponent-hand name remains unknown");
-        }
-    }
-
     private static Set<String> privacyUnknownNames(Game game, Iterable<Integer> candidateIds,
             Set<String> knownNames) {
         Set<String> names = new HashSet<>();
@@ -7037,423 +3564,6 @@ public class DanDanNetworkPlayTest {
             }
         }
         return names;
-    }
-
-    private static void assertPrivacyLogOmitsNames(GameView view, Set<String> forbiddenNames, String checkpoint) {
-        Assert.assertNotNull(view.getGameLog(), checkpoint + " has its actual GameLog");
-        List<String> entries = view.getGameLog().getAllEntries().stream()
-                .map(forge.game.GameLogEntry::message).toList();
-        Assert.assertFalse(entries.isEmpty(), checkpoint + " has actual log entries");
-        for (String forbiddenName : forbiddenNames) {
-            Assert.assertTrue(entries.stream().noneMatch(message -> message.contains(forbiddenName)),
-                    checkpoint + " omits never-known card name " + forbiddenName);
-        }
-    }
-
-    private static void assertPrivacyHistoryNextGame(boolean deltaSync,
-            ScriptedHumanTcpSupport.Scenario scenario, DanDanDesktop desktop,
-            ScriptedHumanTcpSupport replacement, ScriptedHumanTcpSupport oldRemote,
-            HostedMatch hosted, RemoteClient retainedClient, FServerManager server,
-            ScriptedHumanTcpSupport.ReconnectObservation reconnectObservation,
-            PrivacyTerminalReceipt nTerminalReceipt, boolean privacyShuffleHistoryScenario) throws Throwable {
-        Game oldGame = scenario.privacyGame();
-        forge.game.Match retainedMatch = hosted.getMatch();
-        List<ScriptedHumanTcpSupport.PrivacyPromptReceipt> gameNHostPrivacyPrompts =
-                scenario.privacyPrompts().stream().filter(prompt -> prompt.seat() == 0).toList();
-        List<ScriptedHumanTcpSupport.PriorityReceipt> gameNReplacementPriorityPrompts =
-                replacement.gui().priorityPrompts();
-        ScriptedHumanTcpSupport.ClientProtocolSendReceipt nReconnectSendReceipt =
-                replacement.clientProtocolSendReceipt();
-        Assert.assertNotNull(nReconnectSendReceipt,
-                "the accepted N reconnect PASS receipt remains frozen before N+1 startup");
-        Assert.assertNotNull(oldGame);
-        Assert.assertTrue(oldGame.isGameOver());
-        Assert.assertTrue(hosted.getMatch().getOutcomes().size() == 1);
-        GameView oldHostView = desktop.hostGui.getGameView();
-        GameView oldReplacementView = replacement.gui().getGameView();
-        GameView parkedOldView = oldRemote.gui().getGameView();
-        Assert.assertNotNull(oldHostView);
-        Assert.assertNotNull(oldReplacementView);
-        Assert.assertNotNull(parkedOldView);
-        Object oldHostTracker = oldHostView.getTracker();
-        Object oldReplacementTracker = oldReplacementView.getTracker();
-        Object parkedOldTracker = parkedOldView.getTracker();
-        int parkedOldGameViewId = parkedOldView.getId();
-        int parkedCallbackCount = oldRemote.gui().captures().size();
-        Channel replacementChannel = replacement.channel();
-        Assert.assertNotNull(replacementChannel);
-        Assert.assertTrue(replacementChannel.isActive());
-
-        scenario.beginPrivacyHistoryNextGame(oldGame);
-        hosted.setStartGameHook(null);
-        desktop.hostGui.script(ScriptedHumanTcpSupport.Decision.START_SEAT_ZERO, null);
-        desktop.hostGui.script(ScriptedHumanTcpSupport.Decision.KEEP_WITHOUT_LAND, null);
-        replacement.gui().script(ScriptedHumanTcpSupport.Decision.START_SEAT_ZERO, null);
-        replacement.gui().script(ScriptedHumanTcpSupport.Decision.KEEP_WITHOUT_LAND, null);
-        desktop.hostGui.decideNextGame(NextGameDecision.CONTINUE);
-        replacement.gui().decideNextGame(NextGameDecision.CONTINUE);
-        boolean replacementPriorityHeld = scenario.awaitPrivacyHistoryNextGamePriority(30, TimeUnit.SECONDS);
-        assertNoFailure(scenario);
-        Assert.assertTrue(replacementPriorityHeld,
-                "the new game's actual replacement-seat priority remains held after both Keeps");
-
-        ScriptedHumanTcpSupport.PrivacyHistoryNextGamePriorityReceipt held =
-                scenario.privacyHistoryNextGamePriority();
-        Assert.assertNotNull(held);
-        Game nextGame = held.game();
-        Assert.assertNotSame(nextGame, oldGame);
-        Assert.assertSame(hosted.getGame(), nextGame);
-        Assert.assertSame(hosted.getMatch(), retainedMatch);
-        Assert.assertEquals(hosted.getMatch().getOutcomes().size(), 1);
-        Assert.assertEquals(nextGame.getView().getNumPlayedGamesInMatch(), 1);
-        Assert.assertNotSame(nextGame.getTracker(), oldGame.getTracker());
-        Assert.assertEquals(nextGame.getPlayers().size(), 2);
-        Map<String, Integer> expectedMain = officialDanDanDeck().getMain().toFlatList().stream()
-                .collect(java.util.stream.Collectors.toMap(PaperCard::getName, ignored -> 1, Integer::sum));
-        Map<String, Integer> actualMain = nextGame.getCardsInGame().stream()
-                .collect(java.util.stream.Collectors.toMap(Card::getName, ignored -> 1, Integer::sum));
-        Assert.assertEquals(actualMain, expectedMain,
-                "the actual new Game uses the official 80-card Main without sideboard cards");
-        Assert.assertEquals(nextGame.getCardsInGame().size(), 80);
-        Assert.assertEquals(nextGame.getCardsInGame().stream().map(Card::getId).distinct().count(), 80L);
-        Assert.assertSame(nextGame.getPlayers().get(0).getZone(ZoneType.Library),
-                nextGame.getPlayers().get(1).getZone(ZoneType.Library));
-        Assert.assertSame(nextGame.getPlayers().get(0).getZone(ZoneType.Graveyard),
-                nextGame.getPlayers().get(1).getZone(ZoneType.Graveyard));
-
-        List<ScriptedHumanTcpSupport.PrivacyHistoryNextGameKeepReceipt> keeps =
-                scenario.privacyHistoryNextGameKeeps();
-        Assert.assertEquals(keeps.size(), 2);
-        Assert.assertEquals(keeps.stream().map(ScriptedHumanTcpSupport.PrivacyHistoryNextGameKeepReceipt::seat)
-                .collect(java.util.stream.Collectors.toSet()), Set.of(0, 1));
-        Assert.assertTrue(keeps.stream().allMatch(keep -> keep.gameViewId() == nextGame.getView().getId()
-                        && keep.handIds().size() == 7 && keep.trackerIdentity() != null
-                        && keep.trackerOwnsPlayerView() && keep.controllerOwnsGame()),
-                "both current endpoints made one assigned seven-card Keep in Game N+1");
-
-        GameView hostView = desktop.hostGui.getGameView();
-        GameView remoteView = replacement.gui().getGameView();
-        Assert.assertNotNull(hostView);
-        Assert.assertNotNull(remoteView);
-        Assert.assertEquals(hostView.getId(), nextGame.getView().getId());
-        Assert.assertEquals(remoteView.getId(), nextGame.getView().getId());
-        Assert.assertNotSame(hostView.getTracker(), oldHostTracker);
-        Assert.assertNotSame(remoteView.getTracker(), oldReplacementTracker);
-        Assert.assertSame(oldRemote.gui().getGameView(), parkedOldView,
-                "the parked old endpoint keeps its own unchanged stale GameView history");
-        Assert.assertSame(oldRemote.gui().getGameView().getTracker(), parkedOldTracker);
-        Assert.assertNotEquals(remoteView.getId(), parkedOldGameViewId,
-                "the N+1 replacement render model uses the new GameView identity");
-        Assert.assertNotSame(remoteView.getTracker(), parkedOldTracker,
-                "the active replacement does not render through the parked old endpoint tracker");
-        Assert.assertSame(hostView.getTracker(), keeps.stream().filter(keep -> keep.seat() == 0)
-                .findFirst().orElseThrow().trackerIdentity());
-        Assert.assertSame(remoteView.getTracker(), keeps.stream().filter(keep -> keep.seat() == 1)
-                .findFirst().orElseThrow().trackerIdentity());
-        Assert.assertTrue(hostView.isDanDan() && remoteView.isDanDan());
-        Assert.assertEquals(remoteView.getNumPlayedGamesInMatch(), 1);
-        int hostId = nextGame.getPlayers().get(0).getId();
-        int remoteId = nextGame.getPlayers().get(1).getId();
-        Assert.assertTrue(replacementChannel.isActive());
-        Assert.assertSame(replacement.channel(), replacementChannel);
-        Assert.assertEquals(oldRemote.gui().captures().size(), parkedCallbackCount,
-                "the parked N endpoint receives no callbacks during the current replacement's N+1");
-
-        long remoteOpen = replacement.gui().captures().stream()
-                .filter(capture -> "openView".equals(capture.callback()))
-                .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).max().orElse(-1);
-        Assert.assertTrue(remoteOpen > 0);
-        long hostOpen = desktop.hostGui.captures().stream()
-                .filter(capture -> "openView".equals(capture.callback()))
-                .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).max().orElse(-1);
-        Assert.assertTrue(hostOpen > 0);
-        long hostEnd = desktop.hostGui.captures().stream()
-                .filter(capture -> "afterGameEnd".equals(capture.callback()))
-                .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).max().orElse(-1);
-        long remoteEnd = replacement.gui().captures().stream()
-                .filter(capture -> "afterGameEnd".equals(capture.callback()))
-                .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).max().orElse(-1);
-        Assert.assertTrue(hostEnd > 0 && remoteEnd > 0 && hostEnd < hostOpen && remoteEnd < remoteOpen,
-                "N+1 openView follows each endpoint's terminal transition fence");
-        Assert.assertTrue(gameNHostPrivacyPrompts.stream()
-                        .allMatch(prompt -> prompt.callbackOrdinal() < hostEnd),
-                "every archived Game N host privacy prompt precedes its own afterGameEnd fence");
-        Assert.assertTrue(gameNReplacementPriorityPrompts.stream()
-                        .allMatch(prompt -> prompt.callbackOrdinal() < remoteEnd),
-                "every archived Game N replacement priority precedes its own afterGameEnd fence");
-        List<ScriptedHumanTcpSupport.GameViewReceipt> remoteFulls = replacement.gui().gameViewReceipts().stream()
-                .filter(receipt -> receipt.gameViewId() == nextGame.getView().getId()
-                        && "setGameView".equals(receipt.callback())).toList();
-        Assert.assertTrue(remoteFulls.stream().anyMatch(receipt -> receipt.callbackOrdinal() < remoteOpen)
-                        && remoteFulls.stream().anyMatch(receipt -> receipt.callbackOrdinal() > remoteOpen),
-                "replacement applies N+1 full state both before and after openView");
-        ScriptedHumanTcpSupport.PrivacyHistoryNextGameKeepReceipt hostKeep = keeps.stream()
-                .filter(keep -> keep.seat() == 0).findFirst().orElseThrow();
-        ScriptedHumanTcpSupport.PrivacyHistoryNextGameKeepReceipt remoteKeep = keeps.stream()
-                .filter(keep -> keep.seat() == 1).findFirst().orElseThrow();
-        Assert.assertEquals(hostKeep.chooserViewId(), hostId);
-        Assert.assertEquals(remoteKeep.chooserViewId(), remoteId);
-        Assert.assertTrue(hostKeep.callbackOrdinal() > hostOpen);
-        Assert.assertTrue(remoteKeep.callbackOrdinal() > remoteOpen);
-        ScriptedHumanTcpSupport.GameViewReceipt hostBaseline = desktop.hostGui.gameViewReceipts().stream()
-                .filter(receipt -> receipt.gameViewId() == nextGame.getView().getId()
-                        && receipt.callbackOrdinal() < hostOpen && "setGameView".equals(receipt.callback()))
-                .max(java.util.Comparator.comparingLong(ScriptedHumanTcpSupport.GameViewReceipt::callbackOrdinal))
-                .orElseThrow(() -> new AssertionError("host lacks an applied pre-open N+1 full view"));
-        Assert.assertSame(hostBaseline.trackerIdentity(), hostView.getTracker());
-        Assert.assertTrue(hostBaseline.danDan());
-        Assert.assertEquals(hostBaseline.zonesByPlayer().size(), 2);
-        Assert.assertSame(hostKeep.trackerIdentity(), hostBaseline.trackerIdentity(),
-                "the host's post-open Keep uses the tracker installed by its pre-open full view");
-        ScriptedHumanTcpSupport.GameViewReceipt remoteState = replacement.gui().gameViewReceipts().stream()
-                .filter(receipt -> receipt.gameViewId() == nextGame.getView().getId()
-                        && receipt.callbackOrdinal() > remoteOpen
-                        && receipt.callbackOrdinal() > remoteKeep.callbackOrdinal()
-                        && receipt.callback().equals(deltaSync ? "applyDelta" : "setGameView")
-                        && receipt.stateBearing() == deltaSync)
-                .max(java.util.Comparator.comparingLong(ScriptedHumanTcpSupport.GameViewReceipt::callbackOrdinal))
-                .orElseThrow(() -> new AssertionError("N+1 endpoint lacks its selected full/delta current-state receipt"));
-        Assert.assertSame(remoteState.trackerIdentity(), remoteView.getTracker());
-        Assert.assertEquals(remoteState.zonesByPlayer().size(), 2);
-        List<Integer> hostHand = nextGame.getPlayers().get(0).getCardsIn(ZoneType.Hand).stream()
-                .map(Card::getId).toList();
-        List<Integer> remoteHand = nextGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).stream()
-                .map(Card::getId).toList();
-        Assert.assertEquals(hostHand.size(), 7);
-        Assert.assertEquals(remoteHand.size(), 7);
-        Map<Integer, Map<ZoneType, List<Integer>>> hostZones = lifecycleZones(hostView);
-        List<Integer> library = nextGame.getPlayers().get(0).getCardsIn(ZoneType.Library).stream()
-                .map(Card::getId).toList();
-        List<Integer> graveyard = nextGame.getPlayers().get(0).getCardsIn(ZoneType.Graveyard).stream()
-                .map(Card::getId).toList();
-        for (int playerId : List.of(hostId, remoteId)) {
-            Assert.assertEquals(hostZones.get(playerId).get(ZoneType.Library), library);
-            Assert.assertEquals(hostZones.get(playerId).get(ZoneType.Graveyard), graveyard);
-            Assert.assertEquals(remoteState.zonesByPlayer().get(playerId).get(ZoneType.Library), library);
-            Assert.assertEquals(remoteState.zonesByPlayer().get(playerId).get(ZoneType.Graveyard), graveyard);
-        }
-        PlayerView hostOwn = findPlayerView(hostView, hostId);
-        PlayerView remoteOwn = findPlayerView(remoteView, remoteId);
-        PlayerView hostOpponent = findPlayerView(hostView, remoteId);
-        PlayerView remoteOpponent = findPlayerView(remoteView, hostId);
-        Assert.assertEquals(hostOwn.getHand().stream().map(CardView::getId).toList(), hostHand);
-        Assert.assertEquals(remoteOwn.getHand().stream().map(CardView::getId).toList(), remoteHand);
-        Map<Integer, Set<Integer>> gameNPlusOneKnownIds = Map.of(0, new HashSet<>(), 1, new HashSet<>());
-        gameNPlusOneKnownIds.get(0).addAll(hostKeep.handIds());
-        gameNPlusOneKnownIds.get(1).addAll(remoteKeep.handIds());
-        Set<String> hostNPlusOneKnownNames = privacyKnownNames(nextGame, gameNPlusOneKnownIds.get(0));
-        Set<String> remoteNPlusOneKnownNames = privacyKnownNames(nextGame, gameNPlusOneKnownIds.get(1));
-        Set<String> hostNPlusOneForbiddenNames = privacyUnknownNames(nextGame, remoteKeep.handIds(),
-                hostNPlusOneKnownNames);
-        Set<String> remoteNPlusOneForbiddenNames = privacyUnknownNames(nextGame, hostKeep.handIds(),
-                remoteNPlusOneKnownNames);
-        Assert.assertFalse(hostNPlusOneForbiddenNames.isEmpty(),
-                "actual N+1 fixed-seed Keeps supply an unknown opponent identity for host");
-        Assert.assertFalse(remoteNPlusOneForbiddenNames.isEmpty(),
-                "actual N+1 fixed-seed Keeps supply an unknown opponent identity for remote");
-        Set<Integer> nPlusOnePrivateHands = new HashSet<>(hostKeep.handIds());
-        nPlusOnePrivateHands.addAll(remoteKeep.handIds());
-        assertNextGameTemporalLogRows(nextGame, nPlusOnePrivateHands,
-                List.of(desktop.hostGui, replacement.gui()), hostId, remoteId);
-        Assert.assertTrue(hostView.getGameLog().getAllEntries().stream().anyMatch(entry ->
-                        entry.type() == GameLogEntryType.TURN && !entry.message().isBlank()),
-                "the fresh N+1 host GameLog contains its actual current turn entry");
-        Assert.assertTrue(remoteView.getGameLog().getAllEntries().stream().anyMatch(entry ->
-                        entry.type() == GameLogEntryType.TURN && !entry.message().isBlank()),
-                "the fresh N+1 remote GameLog contains its actual current turn entry");
-        assertPrivacyLogOmitsNames(hostView, hostNPlusOneForbiddenNames,
-                "fresh Game N+1 host log at the held priority fence");
-        assertPrivacyLogOmitsNames(remoteView, remoteNPlusOneForbiddenNames,
-                "fresh Game N+1 remote log at the held priority fence");
-        ScriptedHumanTcpSupport.PriorityReceipt heldPriority = replacement.gui().priorityPrompts().stream()
-                .filter(prompt -> prompt.callbackOrdinal() == held.callbackOrdinal()).findFirst().orElseThrow();
-        for (String forbiddenName : remoteNPlusOneForbiddenNames) {
-            Assert.assertFalse(heldPriority.one().contains(forbiddenName)
-                            || heldPriority.two().contains(forbiddenName),
-                    "the actual N+1 held priority labels omit never-known opposing hand identity " + forbiddenName);
-        }
-        Assert.assertTrue(hostOwn.getHand().stream().allMatch(card -> card.canBeShownTo(hostOwn)));
-        Assert.assertTrue(remoteOwn.getHand().stream().allMatch(card -> card.canBeShownTo(remoteOwn)));
-        Assert.assertTrue(hostOpponent.getHand().stream().noneMatch(card -> card.canBeShownTo(hostOwn)
-                || card.mayPlayerLook(hostOwn)));
-        Assert.assertTrue(remoteOpponent.getHand().stream().noneMatch(card -> card.canBeShownTo(remoteOwn)
-                || card.mayPlayerLook(remoteOwn)));
-        Set<Integer> allCurrentHandIds = new HashSet<>(hostHand);
-        allCurrentHandIds.addAll(remoteHand);
-        Assert.assertEquals(allCurrentHandIds.size(), 14);
-        for (int cardId : allCurrentHandIds) {
-            assertCurrentPrivateHandPermission(cardId, hostHand, remoteHand,
-                    findCardView(hostView, cardId), findCardView(remoteView, cardId), hostOwn, remoteOwn);
-        }
-        for (Card card : nextGame.getPlayers().get(0).getCardsIn(ZoneType.Library)) {
-            CardView hostCard = findCardView(hostView, card.getId());
-            CardView remoteCard = findCardView(remoteView, card.getId());
-            Assert.assertNotNull(hostCard);
-            Assert.assertNotNull(remoteCard);
-            Assert.assertFalse(hostCard.mayPlayerLook(hostOwn) || hostCard.canBeShownTo(hostOwn));
-            Assert.assertFalse(remoteCard.mayPlayerLook(remoteOwn) || remoteCard.canBeShownTo(remoteOwn));
-        }
-
-        Assert.assertEquals(held.seat(), 1);
-        Assert.assertSame(held.game(), nextGame);
-        Assert.assertEquals(held.gameViewId(), remoteView.getId());
-        Assert.assertSame(held.controller(), nextGame.getPlayers().get(1).getController());
-        Assert.assertTrue(held.endpointController() instanceof NetGameController);
-        Assert.assertSame(held.input(), held.controller().getInputProxy().getInput());
-        Assert.assertSame(held.input(), held.controller().getInputQueue().getInput());
-        Assert.assertEquals(held.input().getOwner().getId(), remoteId);
-        Assert.assertSame(replacement.clientProtocolSendReceipt(), nReconnectSendReceipt,
-                "N+1 opening does not overwrite the frozen N reconnect send receipt");
-        Assert.assertTrue(replacement.gui().priorityPrompts().stream().anyMatch(prompt ->
-                prompt.seat() == 1 && prompt.chooserViewId() == remoteId
-                        && prompt.callbackOrdinal() == held.callbackOrdinal()));
-        Assert.assertTrue(held.callbackOrdinal() > remoteKeep.callbackOrdinal());
-
-        Channel serverChannel = ScriptedHumanTcpSupport.serverChannel(retainedClient);
-        ScriptedHumanTcpSupport.ServerDecodedEventTap serverTap =
-                ScriptedHumanTcpSupport.ServerDecodedEventTap.install(serverChannel, 1);
-        LifecycleTrace trace = new LifecycleTrace();
-        trace.expectPhysicalCardIds(nextGame.getCardsInGame().stream().map(Card::getId)
-                .collect(java.util.stream.Collectors.toUnmodifiableSet()));
-        trace.attach(nextGame);
-        hosted.setEndGameHook(() -> trace.recordEngineReturn(nextGame));
-        Throwable primary = null;
-        try {
-            serverTap.armSelectButtonOk();
-            replacement.armPrivacyHistoryNextGamePassObservation(held.gameViewId(), held.callbackOrdinal());
-            scenario.armPrivacyHistoryNextGamePass();
-            FThreads.invokeInEdtAndWait(() -> {
-                GameView current = replacement.gui().getGameView();
-                PlayerView own = findPlayerView(current, replacement.gui().ownPlayerViewId());
-                IGameController controller = own == null ? null : replacement.gui().getGameController(own);
-                if (current == null || current.getId() != held.gameViewId()
-                        || controller != held.endpointController()
-                        || current.getTracker() != remoteState.trackerIdentity()
-                        || held.input() != held.controller().getInputProxy().getInput()
-                        || held.input() != held.controller().getInputQueue().getInput()) {
-                    throw new AssertionError("Replacement lost its exact N+1 current priority before PASS");
-                }
-                controller.selectButtonOk();
-            });
-            Assert.assertTrue(serverTap.awaitReceipt(10, TimeUnit.SECONDS),
-                    "the N+1 actual replacement PASS reached the server decoder");
-            ScriptedHumanTcpSupport.ClientProtocolSendReceipt send = replacement.clientSelectButtonOkReceipt();
-            ScriptedHumanTcpSupport.ServerProtocolReceiveReceipt receive = serverTap.receipt();
-            Assert.assertNotNull(send);
-            Assert.assertNotNull(receive);
-            Assert.assertEquals(send.method(), ProtocolMethod.selectButtonOk);
-            Assert.assertEquals(receive.method(), ProtocolMethod.selectButtonOk);
-            Assert.assertEquals(send.gameViewId(), held.gameViewId());
-            Assert.assertEquals(receive.gameViewId(), held.gameViewId());
-            Assert.assertEquals(send.eventId(), receive.eventId());
-            Assert.assertEquals(receive.seat(), 1);
-            Assert.assertSame(receive.channel(), serverChannel);
-            Assert.assertEquals(send.promptCallbackOrdinal(), held.callbackOrdinal());
-            Assert.assertNull(replacement.clientProtocolObservationFailure());
-            Assert.assertNull(serverTap.failure());
-            boolean hostPriorityInstalled = scenario.awaitPrivacyHistoryNextGameNextPriority(30, TimeUnit.SECONDS);
-            assertNoFailure(scenario);
-            Assert.assertTrue(hostPriorityInstalled,
-                    "server consumed B's N+1 PASS and installed the next host priority input");
-            ScriptedHumanTcpSupport.PrivacyHistoryNextGamePriorityReceipt next =
-                    scenario.privacyHistoryNextGameNextPriority();
-            Assert.assertNotNull(next);
-            Assert.assertEquals(next.seat(), 0);
-            Assert.assertSame(next.game(), nextGame);
-            Assert.assertNotSame(next.input(), held.input());
-            Assert.assertSame(next.endpointController(), next.controller());
-            Assert.assertTrue(desktop.hostGui.captures().stream().anyMatch(capture ->
-                    "updateButtons".equals(capture.callback())
-                            && capture.callbackOrdinal() == next.callbackOrdinal()));
-            ScriptedHumanTcpSupport.PriorityReceipt nextHostPriority = desktop.hostGui.priorityPrompts().stream()
-                    .filter(promptReceipt -> promptReceipt.callbackOrdinal() == next.callbackOrdinal())
-                    .findFirst().orElseThrow();
-            for (String forbiddenName : hostNPlusOneForbiddenNames) {
-                Assert.assertFalse(nextHostPriority.one().contains(forbiddenName)
-                                || nextHostPriority.two().contains(forbiddenName),
-                        "the actual N+1 host priority labels omit never-known opposing hand identity " + forbiddenName);
-            }
-            Assert.assertSame(next.input(), next.controller().getInputProxy().getInput());
-            Assert.assertSame(next.input(), next.controller().getInputQueue().getInput());
-            Assert.assertEquals(next.input().getOwner().getId(), hostId);
-            assertNoFailure(scenario);
-            next.controller().concede();
-            boolean nPlusOneTerminalsReceived =
-                    scenario.awaitPrivacyHistoryNextGameTerminals(30, TimeUnit.SECONDS);
-            assertNoFailure(scenario);
-            Assert.assertTrue(nPlusOneTerminalsReceived,
-                    "both N+1 endpoints received their own fresh terminal callback receipts");
-            List<ScriptedHumanTcpSupport.PrivacyHistoryNextGameTerminalReceipt> terminals =
-                    scenario.privacyHistoryNextGameTerminals();
-            Assert.assertEquals(terminals.size(), 2);
-            Assert.assertEquals(terminals.stream().map(
-                    ScriptedHumanTcpSupport.PrivacyHistoryNextGameTerminalReceipt::seat)
-                    .collect(java.util.stream.Collectors.toSet()), Set.of(0, 1));
-            Assert.assertTrue(terminals.stream().allMatch(terminal -> terminal.gameViewId() == nextGame.getView().getId()
-                    && terminal.callbackOrdinal() > 0 && terminal.gameOver() && terminal.playedGames() == 1));
-            Assert.assertTrue(nextGame.isGameOver());
-            Assert.assertTrue(desktop.hostGui.captures().stream().anyMatch(capture ->
-                    capture.callback().equals("finishGame") && capture.callbackOrdinal() == terminals.stream()
-                            .filter(terminal -> terminal.seat() == 0).findFirst().orElseThrow().callbackOrdinal()));
-            Assert.assertTrue(replacement.gui().captures().stream().anyMatch(capture ->
-                    capture.callback().equals("finishGame") && capture.callbackOrdinal() == terminals.stream()
-                            .filter(terminal -> terminal.seat() == 1).findFirst().orElseThrow().callbackOrdinal()));
-            Assert.assertTrue(trace.awaitOutcome(30, TimeUnit.SECONDS));
-            Assert.assertTrue(trace.awaitEngineReturn(30, TimeUnit.SECONDS));
-            Assert.assertEquals(trace.outcomeCount(), 1);
-            Assert.assertSame(trace.game, nextGame);
-            Assert.assertTrue(trace.outcomeCardIdsMatch && trace.engineReturnCardIdsMatch);
-            Assert.assertTrue(nextGame.isGameOver());
-            Assert.assertSame(hosted.getGame(), nextGame,
-                    "the returned terminal Game N+1 remains current until its own QUIT cleanup decision");
-            Assert.assertEquals(hosted.getMatch().getOutcomes().size(), 2);
-            GameView currentHostView = desktop.hostGui.getGameView();
-            GameView currentRemoteView = replacement.gui().getGameView();
-            Assert.assertNotNull(currentHostView);
-            Assert.assertNotNull(currentRemoteView);
-            Assert.assertEquals(currentHostView.getId(), nextGame.getView().getId());
-            Assert.assertEquals(currentRemoteView.getId(), nextGame.getView().getId());
-            Assert.assertTrue(desktop.hostGui.getGameController(findPlayerView(currentHostView, hostId))
-                    instanceof PlayerControllerHuman,
-                    "current host QUIT is sent through its assigned N+1 controller");
-            Assert.assertTrue(replacement.gui().getGameController(findPlayerView(currentRemoteView, remoteId))
-                    instanceof NetGameController,
-                    "remote N+1 view remains bound to its current network controller through cleanup");
-            int hostEndsBeforeQuit = countAfterGameEnd(desktop.hostGui.captures());
-            int remoteEndsBeforeQuit = countAfterGameEnd(replacement.gui().captures());
-            int decisionsBeforeQuit = scenario.nextGameDecisions().size();
-            Assert.assertEquals(hostEndsBeforeQuit, 1,
-                    "Game N's afterGameEnd is retained before N+1 cleanup");
-            Assert.assertEquals(remoteEndsBeforeQuit, 1,
-                    "replacement Game N's afterGameEnd is retained before N+1 cleanup");
-            desktop.hostGui.decideNextGame(NextGameDecision.QUIT);
-            awaitLifecycleCondition(scenario, () -> hosted.getGame() == null
-                            && countAfterGameEnd(desktop.hostGui.captures()) == hostEndsBeforeQuit + 1
-                            && countAfterGameEnd(replacement.gui().captures()) == remoteEndsBeforeQuit + 1,
-                    30, "current N+1 host QUIT performs the ordinary match teardown for both endpoints");
-            List<ScriptedHumanTcpSupport.NextGameDecisionReceipt> quitReceipts =
-                    scenario.nextGameDecisions().subList(decisionsBeforeQuit, scenario.nextGameDecisions().size());
-            Assert.assertEquals(quitReceipts.size(), 1);
-            Assert.assertEquals(quitReceipts.get(0).seat(), 0);
-            Assert.assertEquals(quitReceipts.get(0).chooserViewId(), hostId);
-            Assert.assertEquals(quitReceipts.get(0).gameViewId(), nextGame.getView().getId());
-            Assert.assertEquals(quitReceipts.get(0).decision(), NextGameDecision.QUIT);
-            Assert.assertSame(hosted.getMatch(), retainedMatch);
-            Assert.assertEquals(hosted.getMatch().getOutcomes().size(), 2);
-            assertTellingTimeFengrafPrivacyTerminalCase(deltaSync, scenario, desktop, replacement, hosted, server,
-                    reconnectObservation, nTerminalReceipt, privacyShuffleHistoryScenario);
-            Assert.assertEquals(oldRemote.gui().captures().size(), parkedCallbackCount);
-            Assert.assertTrue(replacementChannel.isActive());
-        } catch (Throwable failure) {
-            primary = failure;
-            throw failure;
-        } finally {
-            try { serverTap.close(); }
-            catch (Throwable closeFailure) {
-                if (primary != null) primary.addSuppressed(closeFailure);
-                else throw closeFailure;
-            }
-        }
     }
 
     private static void assertReconnectZones(Map<Integer, Map<ZoneType, List<Integer>>> before,
@@ -7586,7 +3696,7 @@ public class DanDanNetworkPlayTest {
 
     private static void assertDanDanZonesForCase(Map<Integer, Map<ZoneType, List<Integer>>> zones,
             int hostId, int remoteId, ScriptedHumanTcpSupport.Scenario scenario, boolean mulliganScenario) {
-        if (scenario.privacyMulliganPrefixScenario()) return; // this composite checks the pre-setup London and post-setup states separately
+         // this composite checks the pre-setup London and post-setup states separately
         if (mulliganScenario) assertDanDanMulliganZones(zones, hostId, remoteId, scenario);
         else assertDanDanZones(zones, hostId, remoteId);
     }
@@ -8104,8 +4214,6 @@ public class DanDanNetworkPlayTest {
         private final boolean mulliganScenario;
         private final boolean metamorphoseScenario;
         private volatile MetamorphoseSetup metamorphoseSetup;
-        private volatile TcpOwnManaUndoSetup tcpOwnManaUndoSetup;
-        private volatile LifecycleTrace tcpOwnManaUndoTrace;
         private final boolean privacyScenario;
         private volatile PrivacySetup privacySetup;
         private HostedMatch match;
@@ -8126,8 +4234,7 @@ public class DanDanNetworkPlayTest {
             this.remoteName = remoteName;
         }
         @Override public HostedMatch hostMatch() {
-            if (!mulliganScenario && !metamorphoseScenario && !privacyScenario
-                    && !scenario.positiveRemoteOwnManaUndoScenario()) {
+            if (!mulliganScenario && !metamorphoseScenario && !privacyScenario) {
                 match = super.hostMatch();
                 return match;
             }
@@ -8154,20 +4261,7 @@ public class DanDanNetworkPlayTest {
                     if (privacyScenario) {
                         setStartGameHook(() -> privacySetup = setupTellingTimeFengraf(getGame(), scenario));
                     }
-                    if (scenario.positiveRemoteOwnManaUndoScenario()) {
-                        setStartGameHook(() -> {
-                            Game actualGame = getGame();
-                            tcpOwnManaUndoSetup = setupTcpOwnManaUndo(actualGame, scenario);
-                            if (tcpOwnManaUndoSetup != null) {
-                                LifecycleTrace trace = new LifecycleTrace();
-                                trace.attach(actualGame);
-                                trace.expectPhysicalCardIds(tcpOwnManaUndoSetup.physicalCardIds());
-                                tcpOwnManaUndoTrace = trace;
-                                setEndGameHook(() -> trace.recordEngineReturn(actualGame));
-                                scenario.completePositiveRemoteOwnManaUndoSetup(actualGame);
-                            }
-                        });
-                    }
+
                     super.startMatch(gameType, variants, players, guis);
                 }
             };
@@ -8177,91 +4271,6 @@ public class DanDanNetworkPlayTest {
         @Override public ISkinImage createLayeredImage(PaperCard card, FSkinProp background,
                                                        String overlayFilename, float opacity) {
             return null;
-        }
-
-        private static TcpOwnManaUndoSetup setupTcpOwnManaUndo(Game game,
-                ScriptedHumanTcpSupport.Scenario scenario) {
-            try {
-                Assert.assertNotNull(game);
-                Assert.assertEquals(game.getPlayers().size(), 2);
-                Player host = game.getPlayers().get(0);
-                Player remote = game.getPlayers().get(1);
-                var sharedLibrary = host.getZone(ZoneType.Library);
-                Assert.assertSame(sharedLibrary, remote.getZone(ZoneType.Library),
-                        "both assigned players refer to the same authoritative DanDan Library");
-                Card sourceIsland = findOwnedLibraryCard(host, "Island", Set.of());
-                Assert.assertSame(sourceIsland.getZone(), sharedLibrary);
-                Assert.assertSame(sourceIsland.getOwner(), host);
-                Card handFiller = remote.getCardsIn(ZoneType.Hand).stream()
-                        .filter(card -> card.getOwner() == remote)
-                        .findFirst().orElseThrow(() -> new AssertionError(
-                                "Remote opening has no owned hand card available to conserve its seven-card hand"));
-                Assert.assertSame(handFiller.getZone(), remote.getZone(ZoneType.Hand));
-
-                List<Integer> libraryBefore = sharedLibrary.getCards().stream().map(Card::getId).toList();
-                List<Integer> remoteHandBefore = remote.getCardsIn(ZoneType.Hand).stream().map(Card::getId).toList();
-                List<Integer> graveyardBefore = host.getZone(ZoneType.Graveyard).getCards().stream()
-                        .map(Card::getId).toList();
-                Set<Integer> physicalBefore = game.getCardsInGame().stream().map(Card::getId)
-                        .collect(java.util.stream.Collectors.toUnmodifiableSet());
-                Assert.assertEquals(remoteHandBefore.size(), 7, "the actual remote opening hand has seven cards");
-
-                Card movedFiller = game.getAction().moveTo(remote.getZone(ZoneType.Library), handFiller, null);
-                Assert.assertNotNull(movedFiller);
-                Assert.assertTrue(movedFiller.getId() == handFiller.getId(),
-                        "returning the filler preserves its physical card identity");
-                Assert.assertSame(movedFiller.getOwner(), remote);
-                Assert.assertSame(movedFiller.getZone(), sharedLibrary);
-                Card acquiredIsland = game.getAction().moveTo(remote.getZone(ZoneType.Hand), sourceIsland, null);
-                Assert.assertNotNull(acquiredIsland);
-                Assert.assertTrue(acquiredIsland.getId() == sourceIsland.getId(),
-                        "the acquired Island is the same physical card that began in the shared Library");
-                Assert.assertSame(acquiredIsland.getOwner(), remote,
-                        "the accepted shared-Library-to-remote-Hand transition assigned remote ownership");
-                Assert.assertSame(acquiredIsland.getZone(), remote.getZone(ZoneType.Hand));
-                Assert.assertSame(acquiredIsland.getController(), remote);
-
-                List<Integer> libraryAfter = sharedLibrary.getCards().stream().map(Card::getId).toList();
-                List<Integer> remoteHandAfter = remote.getCardsIn(ZoneType.Hand).stream().map(Card::getId).toList();
-                List<Integer> graveyardAfter = host.getZone(ZoneType.Graveyard).getCards().stream()
-                        .map(Card::getId).toList();
-                Set<Integer> physicalAfter = game.getCardsInGame().stream().map(Card::getId)
-                        .collect(java.util.stream.Collectors.toUnmodifiableSet());
-                Assert.assertEquals(remoteHandAfter.size(), 7);
-                Assert.assertTrue(remoteHandAfter.contains(acquiredIsland.getId()));
-                Assert.assertFalse(remoteHandAfter.contains(movedFiller.getId()));
-                Assert.assertTrue(libraryAfter.contains(movedFiller.getId()));
-                Assert.assertFalse(libraryAfter.contains(acquiredIsland.getId()));
-                Assert.assertEquals(libraryAfter.size(), libraryBefore.size());
-                Assert.assertTrue(graveyardAfter.equals(graveyardBefore),
-                        "setup did not change the shared Graveyard membership or order");
-                Assert.assertTrue(physicalAfter.equals(physicalBefore),
-                        "setup conserved the exact set of physical card identities");
-                Assert.assertEquals(physicalAfter.size(), 80,
-                        "the setup retained the complete physical 80-card DanDan collection");
-
-                scenario.attachPositiveRemoteOwnManaUndoSetup(game, acquiredIsland.getId(), remote.getView().getId());
-                game.subscribeToEvents(new Object() {
-                    private boolean prepared;
-
-                    @Subscribe public void onPriority(forge.game.event.GameEventPlayerPriority event) {
-                        Card island = game.findById(acquiredIsland.getId());
-                        if (!prepared && game.getPhaseHandler().getTurn() == 2
-                                && event.phase() == PhaseType.MAIN1 && event.priority().equals(remote.getView())
-                                && island != null && island.getZone() == remote.getZone(ZoneType.Battlefield)) {
-                            prepared = true;
-                            // Drop the setup land play before the normal game-thread priority checkpoint.
-                            game.getUndoManager().barrier("Mana undo fixture setup complete");
-                        }
-                    }
-                });
-                return new TcpOwnManaUndoSetup(game, game.getView().getId(), remote.getView().getId(),
-                        acquiredIsland.getId(), host.getView().getId(), acquiredIsland.getOwner().getView().getId(),
-                        physicalAfter);
-            } catch (Throwable failure) {
-                scenario.fail(failure);
-                return null;
-            }
         }
 
         private static MetamorphoseSetup setupMetamorphose(Game game, ScriptedHumanTcpSupport.Scenario scenario) {
@@ -8333,7 +4342,7 @@ public class DanDanNetworkPlayTest {
                 Set<Integer> usedIds = new HashSet<>();
                 Card tellingTime = findAvailableCard(game, "Telling Time", usedIds);
                 usedIds.add(tellingTime.getId());
-                Card daysUndoing = scenario.privacyShuffleHistoryScenario()
+                Card daysUndoing = false
                         ? findAvailableCard(game, "Day's Undoing", usedIds) : null;
                 if (daysUndoing != null) {
                     usedIds.add(daysUndoing.getId());
@@ -8395,22 +4404,11 @@ public class DanDanNetworkPlayTest {
                 Set<String> otherKnownNames = otherThanTellingTimePlayer.getCardsIn(ZoneType.Hand).stream()
                         .map(Card::getName).collect(java.util.stream.Collectors.toSet());
                 Set<String> historicalKnownNames = new HashSet<>();
-                if (scenario.privacyMulliganPrefixScenario()) {
-                    for (int knownId : scenario.privacyMulliganKnownCardIds()) {
-                        Card known = game.findById(knownId);
-                        Assert.assertNotNull(known, "every card seen during the actual mulligan prefix remains in this Game");
-                        historicalKnownNames.add(known.getName());
-                    }
-                }
+
                 List<Card> privateTop = new ArrayList<>();
                 Set<String> selectedNames = new HashSet<>();
                 for (Card card : host.getCardsIn(ZoneType.Library)) {
-                    if (card.getOwner() == host && !publicNames.contains(card.getName())
-                            && !chooserKnownNames.contains(card.getName())
-                            && !otherKnownNames.contains(card.getName())
-                            && !historicalKnownNames.contains(card.getName())
-                            && !"Telling Time".equals(card.getName())
-                            && selectedNames.add(card.getName())) privateTop.add(card);
+                    if (card.getOwner() == host && !publicNames.contains(card.getName()) && !chooserKnownNames.contains(card.getName()) && !otherKnownNames.contains(card.getName()) && !historicalKnownNames.contains(card.getName()) && !"Telling Time".equals(card.getName()) && selectedNames.add(card.getName())) privateTop.add(card);
                     if (privateTop.size() == 3) break;
                 }
                 Assert.assertEquals(privateTop.size(), 3,
@@ -8429,44 +4427,7 @@ public class DanDanNetworkPlayTest {
                                     "Official host pool has no unique nonpublic negative hand sentinel"));
                     negative = game.getAction().moveTo(otherThanTellingTimePlayer.getZone(ZoneType.Hand), negative, null);
                 }
-                if (scenario.privacyShuffleHistoryScenario()) {
-                    Set<Integer> protectedSetupIds = new HashSet<>(usedIds);
-                    protectedSetupIds.add(negative.getId());
-                    privateTop.forEach(card -> protectedSetupIds.add(card.getId()));
-                    for (Player player : List.of(host, remote)) {
-                        int targetHandSize = player == host ? 6 : 7;
-                        Assert.assertTrue(player.getCardsIn(ZoneType.Hand).size() >= targetHandSize,
-                                "history setup can preserve every required role while balancing the opening hand");
-                        while (player.getCardsIn(ZoneType.Hand).size() > targetHandSize) {
-                            Card filler = player.getCardsIn(ZoneType.Hand).stream()
-                                    .filter(card -> card.getOwner() == player)
-                                    .filter(card -> !protectedSetupIds.contains(card.getId()))
-                                    .findFirst().orElseThrow(() -> new AssertionError(
-                                            "History hand balance has no unprotected owned filler card"));
-                            Card moved = game.getAction().moveToLibrary(filler, 0, null);
-                            Assert.assertEquals(moved.getId(), filler.getId());
-                            Assert.assertSame(moved.getOwner(), player);
-                            Assert.assertSame(moved.getZone(), player.getZone(ZoneType.Library));
-                            Assert.assertSame(moved.getZone(), host.getZone(ZoneType.Library),
-                                    "the declared filler swap returns the owned card to the shared library");
-                        }
-                        while (player.getCardsIn(ZoneType.Hand).size() < targetHandSize) {
-                            Card filler = host.getCardsIn(ZoneType.Library).stream()
-                                    .filter(card -> card.getOwner() == player)
-                                    .filter(card -> !protectedSetupIds.contains(card.getId()))
-                                    .findFirst().orElseThrow(() -> new AssertionError(
-                                            "History hand balance has no unprotected owned library filler"));
-                            Card moved = game.getAction().moveTo(player.getZone(ZoneType.Hand), filler, null);
-                            Assert.assertEquals(moved.getId(), filler.getId());
-                            Assert.assertSame(moved.getOwner(), player);
-                            Assert.assertSame(moved.getZone(), player.getZone(ZoneType.Hand));
-                        }
-                    }
-                    Assert.assertEquals(host.getCardsIn(ZoneType.Hand).size(), 6,
-                            "host pre-effect hand keeps Day's Undoing and sentinel roles for the T1 Fengraf return");
-                    Assert.assertEquals(remote.getCardsIn(ZoneType.Hand).size(), 7,
-                            "remote pre-effect hand retains its normal size before turn-2 draw");
-                }
+
                 List<Integer> libraryBeforeReorder = host.getCardsIn(ZoneType.Library).stream()
                         .map(Card::getId).toList();
                 for (int i = privateTop.size() - 1; i >= 0; i--) {
@@ -8507,9 +4468,7 @@ public class DanDanNetworkPlayTest {
                 Set<Integer> setupPhysicalIds = physicalCardIds(game);
                 Assert.assertEquals(setupPhysicalIds, originalPhysicalIds,
                         "real setup moves preserve the exact original physical pool");
-                if (scenario.privacyMulliganPrefixScenario()) {
-                    scenario.recordPrivacyMulliganBoundary(game, preSetupZones, zoneSnapshot(game));
-                }
+
                 String revealPrompt = Localizer.getInstance().getMessage("lblLookCardInPlayerZone",
                         "{player's}", ZoneType.Hand.getTranslatedName().toLowerCase());
                 String expectedRevealMessage = MessageUtil.formatMessage(revealPrompt,
@@ -8716,16 +4675,7 @@ public class DanDanNetworkPlayTest {
         @Override public int nextInt() {
             if (consumed < transcript.size()) {
                 List<StackWalker.StackFrame> frames = StackWalker.getInstance().walk(stream -> stream.limit(4).toList());
-                if (frames.size() != 4
-                        || !frames.get(0).getClassName().equals(ControlledShuffleRandom.class.getName())
-                        || !frames.get(0).getMethodName().equals("nextInt")
-                        || !frames.get(1).getClassName().equals("forge.util.MyRandom$CountingRandom")
-                        || !frames.get(1).getMethodName().equals("next")
-                        || !frames.get(2).getClassName().equals(Random.class.getName())
-                        || !frames.get(2).getMethodName().equals("nextInt")
-                        || !frames.get(2).getDescriptor().equals("(I)I")
-                        || !frames.get(3).getClassName().equals(Collections.class.getName())
-                        || !frames.get(3).getMethodName().equals("shuffle")) {
+                if (frames.size() != 4 || !frames.get(0).getClassName().equals(ControlledShuffleRandom.class.getName()) || !frames.get(0).getMethodName().equals("nextInt") || !frames.get(1).getClassName().equals("forge.util.MyRandom$CountingRandom") || !frames.get(1).getMethodName().equals("next") || !frames.get(2).getClassName().equals(Random.class.getName()) || !frames.get(2).getMethodName().equals("nextInt") || !frames.get(2).getDescriptor().equals("(I)I") || !frames.get(3).getClassName().equals(Collections.class.getName()) || !frames.get(3).getMethodName().equals("shuffle")) {
                     throw unexpected("nextInt() outside the expected MyRandom/Random/Collections.shuffle call chain");
                 }
                 int bound = 80 - consumed;

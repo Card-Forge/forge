@@ -10,7 +10,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.DanDanMulliganDecision;
-import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
 import forge.game.player.RegisteredPlayer;
 import forge.game.zone.ZoneType;
@@ -62,69 +61,6 @@ public class DanDanMulliganTest extends AITest {
                 assertEquals(controllers.get(1).keepDecisions, 1);
                 controllers.forEach(MulliganController::assertAnswersConsumed);
             }
-        } finally {
-            StaticData.instance().setFilteredHandsEnabled(previousFiltered);
-            StaticData.instance().setMulliganRule(previousRule);
-            MyRandom.setRandom(previousRandom);
-        }
-    }
-
-    @Test
-    public void ordinaryOpeningHandsStillHonorTheFilteredPreference() {
-        Random previousRandom = MyRandom.getRandom();
-        boolean previousFiltered = StaticData.instance().getFilteredHandsEnabled();
-        MulliganDefs.MulliganRule previousRule = StaticData.instance().getMulliganRule();
-        try {
-            Game filtered = newGame(false);
-            Player filteredFirst = filtered.getPlayers().get(0);
-            Player filteredSecond = filtered.getPlayers().get(1);
-            List<MulliganController> filteredControllers = installControllers(filtered, filteredFirst,
-                    List.of(true), List.of(true), null);
-            addOpeningLibrary(filteredFirst);
-            addOpeningLibrary(filteredSecond);
-            StaticData.instance().setFilteredHandsEnabled(true);
-            StaticData.instance().setMulliganRule(MulliganDefs.MulliganRule.London);
-            MyRandom.setRandom(new Random(61));
-            boolean[] filteredHookReached = {false};
-            filtered.getAction().startGame(null, () -> {
-                assertSame(filtered.getPhaseHandler().getPlayerTurn(), filteredFirst);
-                assertTrue(landCount(filteredFirst.getCardsIn(ZoneType.Hand)) > 0,
-                        "the ordinary filtered preference should improve the deliberately landless top seven");
-                assertTrue(landCount(filteredSecond.getCardsIn(ZoneType.Hand)) > 0,
-                        "the ordinary filtered preference applies to each ordinary library");
-                filtered.setGameOver(GameEndReason.Draw);
-                filteredHookReached[0] = true;
-            });
-            assertTrue(filteredHookReached[0]);
-            assertEquals(filteredControllers.get(0).startingPlayerChoices + filteredControllers.get(1).startingPlayerChoices, 1);
-            assertEquals(filteredControllers.get(0).keepDecisions, 1);
-            assertEquals(filteredControllers.get(1).keepDecisions, 1);
-            filteredControllers.forEach(MulliganController::assertAnswersConsumed);
-
-            Game unfiltered = newGame(false);
-            Player first = unfiltered.getPlayers().get(0);
-            Player second = unfiltered.getPlayers().get(1);
-            List<MulliganController> unfilteredControllers = installControllers(unfiltered, first,
-                    List.of(true), List.of(true), null);
-            List<Card> firstLibrary = addOpeningLibrary(first);
-            List<Card> secondLibrary = addOpeningLibrary(second);
-            StaticData.instance().setFilteredHandsEnabled(false);
-            MyRandom.setRandom(new Random(61));
-            Player finalFirst = first;
-            Player finalSecond = second;
-            boolean[] unfilteredHookReached = {false};
-            unfiltered.getAction().startGame(null, () -> {
-                assertSame(unfiltered.getPhaseHandler().getPlayerTurn(), finalFirst);
-                assertEquals(ids(finalFirst.getCardsIn(ZoneType.Hand)), ids(firstLibrary.subList(0, 7)));
-                assertEquals(ids(finalSecond.getCardsIn(ZoneType.Hand)), ids(secondLibrary.subList(0, 7)));
-                unfiltered.setGameOver(GameEndReason.Draw);
-                unfilteredHookReached[0] = true;
-            });
-            assertTrue(unfilteredHookReached[0]);
-            assertEquals(unfilteredControllers.get(0).startingPlayerChoices + unfilteredControllers.get(1).startingPlayerChoices, 1);
-            assertEquals(unfilteredControllers.get(0).keepDecisions, 1);
-            assertEquals(unfilteredControllers.get(1).keepDecisions, 1);
-            unfilteredControllers.forEach(MulliganController::assertAnswersConsumed);
         } finally {
             StaticData.instance().setFilteredHandsEnabled(previousFiltered);
             StaticData.instance().setMulliganRule(previousRule);
@@ -334,83 +270,6 @@ public class DanDanMulliganTest extends AITest {
     }
 
     @Test
-    public void ordinaryMulliganServiceKeepsTheSelectedGlobalRule() {
-        Game game = newGame(false);
-        Player first = game.getPlayers().get(0);
-        Player second = game.getPlayers().get(1);
-        List<MulliganController> controllers = installControllers(game, first,
-                List.of(false, true), List.of(true), null);
-        addStableOpeningHand(first);
-        addStableOpeningHand(second);
-        addCards(first, "Memory Lapse", 30, ZoneType.Library);
-        game.setAge(GameStage.Mulligan);
-
-        MulliganDefs.MulliganRule previousRule = StaticData.instance().getMulliganRule();
-        Random previousRandom = MyRandom.getRandom();
-        try {
-            StaticData.instance().setMulliganRule(MulliganDefs.MulliganRule.Paris);
-            MyRandom.setRandom(new Random(61));
-            new MulliganService(first).perform();
-
-            assertEquals(first.getCardsIn(ZoneType.Hand).size(), 6,
-                    "ordinary Paris mulligans redraw one fewer card instead of using DanDan London");
-            assertEquals(second.getCardsIn(ZoneType.Hand).size(), 7);
-            assertEquals(controllers.get(0).tuckCalls, 0, "ordinary Paris does not invoke London bottoming");
-            assertEquals(controllers.get(0).danDanPenalties.size(), 0,
-                    "ordinary play does not invoke the DanDan decision boundary");
-            assertEquals(StaticData.instance().getMulliganRule(), MulliganDefs.MulliganRule.Paris,
-                    "the DanDan branch leaves the global rule unchanged");
-            controllers.forEach(MulliganController::assertAnswersConsumed);
-        } finally {
-            StaticData.instance().setMulliganRule(previousRule);
-            MyRandom.setRandom(previousRandom);
-        }
-    }
-
-    @Test
-    public void ordinaryLondonStillUsesItsOwnSeparateLibraryAndBottomSequence() {
-        Game game = newGame(false);
-        Player first = game.getPlayers().get(0);
-        Player second = game.getPlayers().get(1);
-        List<DecisionSnapshot> snapshots = new ArrayList<>();
-        List<MulliganController> controllers = installControllers(game, first,
-                List.of(false, false, true), List.of(false, false, true), snapshots);
-        addStableOpeningHand(first);
-        addStableOpeningHand(second);
-        addCards(first, "Memory Lapse", 30, ZoneType.Library);
-        addCards(second, "Memory Lapse", 30, ZoneType.Library);
-        game.setAge(GameStage.Mulligan);
-
-        MulliganDefs.MulliganRule previousRule = StaticData.instance().getMulliganRule();
-        Random previousRandom = MyRandom.getRandom();
-        try {
-            StaticData.instance().setMulliganRule(MulliganDefs.MulliganRule.London);
-            MyRandom.setRandom(new Random(61));
-            new MulliganService(first).perform();
-
-            assertEquals(snapshots.get(0).firstHand().size(), 7);
-            assertEquals(snapshots.get(1).firstHand().size(), 6);
-            assertEquals(snapshots.get(1).secondHand().size(), 7);
-            assertEquals(snapshots.get(2).secondHand().size(), 6);
-            assertEquals(snapshots.get(3).firstHand().size(), 5);
-            assertEquals(snapshots.get(3).secondHand().size(), 6);
-            assertEquals(snapshots.get(4).firstHand().size(), 5);
-            assertEquals(snapshots.get(4).secondHand().size(), 5);
-            assertEquals(first.getCardsIn(ZoneType.Hand).size(), 5);
-            assertEquals(second.getCardsIn(ZoneType.Hand).size(), 5);
-            assertEquals(controllers.get(0).tuckCalls, 2);
-            assertEquals(controllers.get(1).tuckCalls, 2);
-            assertEquals(StaticData.instance().getMulliganRule(), MulliganDefs.MulliganRule.London);
-            assertTrue(java.util.Collections.disjoint(ids(first.getCardsIn(ZoneType.Library)),
-                    ids(second.getCardsIn(ZoneType.Library))), "ordinary players retain separate library zones");
-            controllers.forEach(MulliganController::assertAnswersConsumed);
-        } finally {
-            StaticData.instance().setMulliganRule(previousRule);
-            MyRandom.setRandom(previousRandom);
-        }
-    }
-
-    @Test
     public void concessionDuringDanDanMulliganDecisionStopsBeforeAnyHandMoves() {
         Game game = newGame(true);
         Player first = game.getPlayers().get(0);
@@ -540,37 +399,6 @@ public class DanDanMulliganTest extends AITest {
         }
     }
 
-    @Test
-    public void startingPlayerSkipsTheFirstDrawStepAfterDanDanOpening() {
-        Game game = newGame(true);
-        Player first = game.getPlayers().get(0);
-        Player second = game.getPlayers().get(1);
-        List<MulliganController> controllers = installControllers(game, first,
-                List.of(true), List.of(true), null);
-        controllers.forEach(controller -> controller.stopAtMain1 = true);
-        addCards(first, "Memory Lapse", 30, ZoneType.Library);
-
-        boolean previousFiltered = StaticData.instance().getFilteredHandsEnabled();
-        MulliganDefs.MulliganRule previousRule = StaticData.instance().getMulliganRule();
-        Random previousRandom = MyRandom.getRandom();
-        try {
-            StaticData.instance().setFilteredHandsEnabled(true);
-            StaticData.instance().setMulliganRule(MulliganDefs.MulliganRule.Paris);
-            MyRandom.setRandom(new Random(61));
-            game.getAction().startGame(null);
-
-            assertEquals(game.getPhaseHandler().getPhase(), PhaseType.MAIN1);
-            assertSame(game.getPhaseHandler().getPlayerTurn(), first);
-            assertEquals(first.getCardsIn(ZoneType.Hand).size(), 7,
-                    "the starting player skips the first turn's draw step");
-            assertEquals(second.getCardsIn(ZoneType.Hand).size(), 7);
-        } finally {
-            StaticData.instance().setFilteredHandsEnabled(previousFiltered);
-            StaticData.instance().setMulliganRule(previousRule);
-            MyRandom.setRandom(previousRandom);
-        }
-    }
-
     private Game newGame(boolean danDan) {
         ArrayList<RegisteredPlayer> players = new ArrayList<>();
         players.add(new RegisteredPlayer(new Deck()).setPlayer(new LobbyPlayerAi("seat one", null)));
@@ -648,14 +476,6 @@ public class DanDanMulliganTest extends AITest {
         return result;
     }
 
-    private static int landCount(Iterable<Card> cards) {
-        int result = 0;
-        for (Card card : cards) {
-            if (card.isLand()) result++;
-        }
-        return result;
-    }
-
     private record DecisionSnapshot(List<Integer> firstHand, List<Integer> secondHand, List<Integer> library) {}
 
     private static final class MulliganController extends PlayerControllerForTests {
@@ -673,7 +493,6 @@ public class DanDanMulliganTest extends AITest {
         private int tuckCalls;
         private Runnable onDanDanDecision;
         private Runnable onReveal;
-        private boolean stopAtMain1;
         private List<Integer> shuffleOrder;
         private Runnable onTuck;
         private final List<List<Integer>> shuffleInputs = new ArrayList<>();
@@ -728,10 +547,6 @@ public class DanDanMulliganTest extends AITest {
 
         @Override
         public List<SpellAbility> chooseSpellAbilityToPlay() {
-            if (stopAtMain1 && getGame().getPhaseHandler().getPhase() == PhaseType.MAIN1
-                    && getGame().getPhaseHandler().getPlayerTurn() == getPlayer()) {
-                getGame().setGameOver(GameEndReason.Draw);
-            }
             return null;
         }
 

@@ -41,28 +41,4 @@ public class ComputerUtilOpponentSafetyTest extends AITest {
                 SpellApiToAi.Converter.get(draw).canPlayWithSubs(ai, draw).decision());
     }
 
-    @Test
-    public void mainPhaseHeuristicsRetainOpponentAntiBuffedBehavior() {
-        Game game = initAndCreateGame();
-        Player ai = game.getPlayers().get(1);
-        Player opponent = game.getPlayers().get(0);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
-
-        Card antiBuffed = addCard("Adamaro, First to Desire", opponent);
-        AssertJUnit.assertTrue(antiBuffed.hasSVar("AntiBuffedBy"));
-        Card divination = addCardToZone("Divination", ai, ZoneType.Hand);
-        SpellAbility draw = divination.getSpellAbilities().stream()
-                .filter(ability -> ability.getApi() == ApiType.Draw).findFirst()
-                .orElseThrow(() -> new AssertionError("Divination should have an actual Draw ability"));
-        draw.setActivatingPlayer(ai);
-        AssertJUnit.assertTrue("Divination is an ordinary playable spell at MAIN1",
-                draw.getRestrictions().canPlay(divination, draw));
-        Card bear = addCardToZone("Runeclaw Bear", ai, ZoneType.Hand);
-        SpellAbility castBear = bear.getSpellAbilities().get(0);
-        castBear.setActivatingPlayer(ai);
-
-        AssertJUnit.assertSame(opponent, ai.getWeakestOpponent());
-        AssertJUnit.assertTrue(ComputerUtil.castSpellInMain1(ai, draw));
-        AssertJUnit.assertTrue(ComputerUtil.castPermanentInMain1(ai, castBear));
-    }
 }

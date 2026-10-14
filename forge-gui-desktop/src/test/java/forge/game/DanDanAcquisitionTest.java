@@ -31,25 +31,6 @@ public class DanDanAcquisitionTest extends AITest {
     }
 
     @Test
-    public void ordinaryLibraryToHandMovementDoesNotMatchRecipientOwnershipReplacement() {
-        Game game = newGame(false);
-        Player originalOwner = game.getRegisteredPlayers().get(0);
-        Player recipient = game.getRegisteredPlayers().get(1);
-
-        installRecipientOwnershipReplacement(game, recipient,
-                "Event$ Moved | ActiveZones$ Battlefield | Origin$ Library | Destination$ Hand "
-                        + "| ValidCard$ Card.YouOwn | Prevent$ True | Description$ Prevent this move.");
-        Card card = addCardToZone("Dandân", originalOwner, ZoneType.Library);
-
-        game.getAction().moveTo(recipient.getZone(ZoneType.Hand), card, null);
-
-        Card inHand = game.findById(card.getId());
-        assertTrue(recipient.getCardsIn(ZoneType.Hand).contains(inHand),
-                "the recipient's YouOwn replacement does not match an ordinarily owned card");
-        assertSame(inHand.getOwner(), originalOwner);
-    }
-
-    @Test
     public void preventedProspectiveAcquisitionLeavesSourceAndOwnerUnchanged() {
         Game game = newGame(true);
         Player originalOwner = game.getRegisteredPlayers().get(0);

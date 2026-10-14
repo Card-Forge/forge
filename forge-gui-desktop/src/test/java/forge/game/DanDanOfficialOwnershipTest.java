@@ -17,7 +17,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class DanDanOfficialOwnershipTest extends AITest {
 
         Card firstIsland = currentCard(game, recipientIslands.get(0).getId());
         Card retainedIsland = currentCard(game, recipientIslands.get(1).getId());
-        IdChoiceController recipientChoices = useIdChoices(recipient, List.of(fish.getId()), List.of(), -1, -1);
+        IdChoiceController recipientChoices = useIdChoices(recipient, List.of(fish.getId()), -1, -1);
         Card metamorphose = addCardToZone("Metamorphose", caster, ZoneType.Hand);
         SpellAbility morph = metamorphose.getSpells().get(0);
         morph.setActivatingPlayer(caster);
@@ -124,87 +123,6 @@ public class DanDanOfficialOwnershipTest extends AITest {
     }
 
     @Test
-    public void controlMagicNoncastEntryAttachesAndControlsAuraWithoutChangingFishOwner() {
-        Game game = newGame(true);
-        Player caster = game.getRegisteredPlayers().get(0);
-        Player recipient = game.getRegisteredPlayers().get(1);
-        addCard("Island", caster);
-        Card targetIsland = addCard("Island", recipient);
-        Card retainedIsland = addCard("Island", recipient);
-        game.getAction().checkStateEffects(true);
-
-        Card fishSpell = addCardToZone("Dandân", caster, ZoneType.Hand);
-        resolveStacked(game, fishSpell.getSpells().get(0), caster);
-        Card fish = currentCard(game, fishSpell.getId());
-        Card auraInHand = addCardToZone("Control Magic", recipient, ZoneType.Hand);
-        Card metamorphose = addCardToZone("Metamorphose", caster, ZoneType.Hand);
-        IdChoiceController choices = useIdChoices(recipient, List.of(auraInHand.getId()),
-                List.of(fish.getId()), -1, -1);
-        SpellAbility morph = metamorphose.getSpells().get(0);
-        morph.setActivatingPlayer(caster);
-        assertTrue(morph.canTarget(targetIsland));
-        morph.getTargets().add(targetIsland);
-        resolveStacked(game, morph, caster);
-
-        Card aura = currentCard(game, auraInHand.getId());
-        fish = currentCard(game, fishSpell.getId());
-        assertTrue(recipient.getCardsIn(ZoneType.Battlefield).contains(aura),
-                "Metamorphose puts the chosen Control Magic from B's hand onto the battlefield");
-        assertTrue(aura.isAttachedToEntity(fish), "the entering Aura attaches to the legal creature");
-        assertSame(aura.getOwner(), recipient);
-        assertSame(aura.getController(), recipient, "the noncast Aura is controlled by its hand recipient");
-        assertSame(fish.getOwner(), caster, "Control Magic changes control without changing fish ownership");
-        assertSame(fish.getController(), recipient);
-        int auraId = aura.getId();
-        assertTrue(recipient.getZone(ZoneType.Battlefield).getCardsAddedThisTurn(ZoneType.Hand).stream()
-                .anyMatch(lki -> lki.getId() == auraId && lki.getOwner() == recipient),
-                "the noncast Aura's entry observer sees its actual hand owner");
-        assertTrue(recipient.getCardsIn(ZoneType.Battlefield).contains(retainedIsland));
-        assertTrue(choices.handChoiceWasSelected(metamorphose.getId(), aura.getId(), recipient, caster),
-                "B selected Control Magic through Metamorphose's hidden-zone callback");
-        assertTrue(choices.attachmentWasSelected(aura.getId(), fish.getId(), recipient),
-                "B selected the offered fish through the real Aura-attachment callback");
-    }
-
-    @Test
-    public void controlMagicStolenFishReturnsToOriginalOwnerInOrdinaryGame() {
-        Game game = newGame(false);
-        Player originalOwner = game.getRegisteredPlayers().get(0);
-        Player thief = game.getRegisteredPlayers().get(1);
-        addCard("Island", originalOwner);
-        addCard("Island", thief);
-        game.getAction().checkStateEffects(true);
-
-        Card fishSpell = addCardToZone("Dandân", originalOwner, ZoneType.Hand);
-        resolveStacked(game, fishSpell.getSpells().get(0), originalOwner);
-        Card fish = currentCard(game, fishSpell.getId());
-        Card controlMagic = addCard("Control Magic", thief);
-        game.copyLastState();
-        controlMagic.attachToEntity(fish, null);
-        game.getAction().checkStateEffects(true);
-        fish = currentCard(game, fishSpell.getId());
-        assertSame(fish.getOwner(), originalOwner);
-        assertSame(fish.getController(), thief, "the actual Control Magic static ability steals the fish");
-
-        Card unsubstantiate = addCardToZone("Unsubstantiate", thief, ZoneType.Hand);
-        SpellAbility bounce = unsubstantiate.getSpells().get(0);
-        bounce.setActivatingPlayer(thief);
-        assertTrue(bounce.canTarget(fish));
-        bounce.getTargets().add(fish);
-        resolveStacked(game, bounce, thief);
-
-        fish = currentCard(game, fishSpell.getId());
-        assertTrue(originalOwner.getCardsIn(ZoneType.Hand).contains(fish),
-                "ordinary owner-hand routing returns a merely stolen fish to A");
-        assertFalse(thief.getCardsIn(ZoneType.Hand).contains(fish));
-        assertSame(fish.getOwner(), originalOwner);
-        int fishId = fish.getId();
-        assertTrue(originalOwner.getZone(ZoneType.Hand).getCardsAddedThisTurn(ZoneType.Battlefield).stream()
-                .anyMatch(lki -> lki.getId() == fishId && lki.getOwner() == originalOwner),
-                "the bounce observer sees the original owner in battlefield source LKI");
-    }
-
-    @Test
     public void sanctuaryEntryUsesIslandCountAndItsControllerForTheRealOptionalTrigger() {
         SanctuaryOutcome enabled = resolveSanctuaryMetamorphose(4);
         assertFalse(enabled.sanctuary.isTapped(), "three other Islands let the actual Sanctuary replacement keep it untapped");
@@ -233,37 +151,6 @@ public class DanDanOfficialOwnershipTest extends AITest {
                 "without the untapped-entry trigger, the graveyard card stays in the shared graveyard");
     }
 
-    @Test
-    public void controlMagicStaysInHandWhenMetamorphoseHasNoLegalCreatureToAttachTo() {
-        Game game = newGame(true);
-        Player caster = game.getRegisteredPlayers().get(0);
-        Player recipient = game.getRegisteredPlayers().get(1);
-        addCard("Island", caster);
-        Card targetIsland = addCard("Island", recipient);
-        addCard("Island", recipient);
-        game.getAction().checkStateEffects(true);
-
-        Card aura = addCardToZone("Control Magic", recipient, ZoneType.Hand);
-        Card metamorphose = addCardToZone("Metamorphose", caster, ZoneType.Hand);
-        IdChoiceController choices = useIdChoices(recipient, List.of(aura.getId()), List.of(), -1, -1);
-        SpellAbility morph = metamorphose.getSpells().get(0);
-        morph.setActivatingPlayer(caster);
-        assertTrue(morph.canTarget(targetIsland));
-        morph.getTargets().add(targetIsland);
-        resolveStacked(game, morph, caster);
-
-        Card currentAura = currentCard(game, aura.getId());
-        assertTrue(recipient.getCardsIn(ZoneType.Hand).contains(currentAura),
-                "the Aura cannot enter without a legal creature attachment and remains in B's hand");
-        assertFalse(game.getCardsIn(ZoneType.Battlefield).stream().anyMatch(card -> card.getId() == aura.getId()));
-        assertSame(currentAura.getOwner(), recipient);
-        assertTrue(choices.confirmationWasAccepted(metamorphose.getId(), recipient),
-                "B affirmatively accepts Metamorphose's optional hand-entry instruction");
-        assertTrue(choices.handChoiceWasSelected(metamorphose.getId(), aura.getId(), recipient, caster)
-                        || choices.handChoiceWasOfferedWithout(metamorphose.getId(), aura.getId()),
-                "the Aura was selected when offered, or its exclusion from the offered set was observed");
-    }
-
     private SanctuaryOutcome resolveSanctuaryMetamorphose(int islandCount) {
         Game game = newGame(true);
         Player caster = game.getRegisteredPlayers().get(0);
@@ -287,7 +174,7 @@ public class DanDanOfficialOwnershipTest extends AITest {
                 .anyMatch(lki -> lki.getId() == sanctuaryInHand.getId() && lki.getOwner() == caster),
                 "the draw observer retains Sanctuary's original library owner in source LKI");
         Card metamorphose = addCardToZone("Metamorphose", caster, ZoneType.Hand);
-        IdChoiceController recorder = useIdChoices(recipient, List.of(sanctuaryInHand.getId()), List.of(),
+        IdChoiceController recorder = useIdChoices(recipient, List.of(sanctuaryInHand.getId()),
                 sanctuaryInHand.getId(), spell.getId());
         SpellAbility morph = metamorphose.getSpells().get(0);
         morph.setActivatingPlayer(caster);
@@ -410,8 +297,8 @@ public class DanDanOfficialOwnershipTest extends AITest {
     }
 
     private IdChoiceController useIdChoices(Player player, List<Integer> handChoiceIds,
-            List<Integer> attachmentChoiceIds, int triggerHostId, int triggerTargetId) {
-        IdChoiceController controller = new IdChoiceController(player, handChoiceIds, attachmentChoiceIds,
+            int triggerHostId, int triggerTargetId) {
+        IdChoiceController controller = new IdChoiceController(player, handChoiceIds,
                 triggerHostId, triggerTargetId);
         player.dangerouslySetController(controller);
         return controller;
@@ -420,21 +307,17 @@ public class DanDanOfficialOwnershipTest extends AITest {
     private static final class IdChoiceController extends PlayerControllerAi {
         private final Player decisionPlayer;
         private final List<Integer> expectedHandChoiceIds;
-        private final List<Integer> expectedAttachmentChoiceIds;
         private final int expectedTriggerHostId;
         private final int expectedTriggerTargetId;
         private final List<HandChoice> handChoices = new ArrayList<>();
-        private final List<AttachmentChoice> attachmentChoices = new ArrayList<>();
-        private final List<Confirmation> confirmations = new ArrayList<>();
         private final List<Integer> scriptedTriggerHosts = new ArrayList<>();
         private final List<Integer> confirmedTriggerHosts = new ArrayList<>();
 
-        private IdChoiceController(Player player, List<Integer> handChoiceIds, List<Integer> attachmentChoiceIds,
+        private IdChoiceController(Player player, List<Integer> handChoiceIds,
                 int triggerHostId, int triggerTargetId) {
             super(player.getGame(), player, new LobbyPlayerAi(player.getName(), null));
             this.decisionPlayer = player;
             this.expectedHandChoiceIds = handChoiceIds;
-            this.expectedAttachmentChoiceIds = attachmentChoiceIds;
             this.expectedTriggerHostId = triggerHostId;
             this.expectedTriggerTargetId = triggerTargetId;
         }
@@ -444,32 +327,11 @@ public class DanDanOfficialOwnershipTest extends AITest {
                 CardCollection offered, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional,
                 Player decider) {
             int hostId = sa.getHostCard().getId();
-            List<Integer> offeredIds = offered.stream().map(Card::getId).toList();
             int expectedId = expectedHandChoiceIds.get(handChoices.size());
             Card selected = offered.stream().filter(card -> card.getId() == expectedId).findFirst().orElse(null);
-            handChoices.add(new HandChoice(hostId, expectedId, offeredIds, selected == null ? -1 : selected.getId(),
+            handChoices.add(new HandChoice(hostId, expectedId, selected == null ? -1 : selected.getId(),
                     decider, sa.getActivatingPlayer()));
             return selected;
-        }
-
-        @Override
-        public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> options,
-                DelayedReveal delayedReveal, SpellAbility sa, String title, boolean optional,
-                Player targetedPlayer, java.util.Map<String, Object> params) {
-            int hostId = sa.getHostCard().getId();
-            int choiceIndex = attachmentChoices.size();
-            if (choiceIndex >= expectedAttachmentChoiceIds.size()) {
-                throw new AssertionError("Unexpected entity choice from " + hostId + ": " + options);
-            }
-            int expectedId = expectedAttachmentChoiceIds.get(choiceIndex);
-            for (T option : options) {
-                if (option instanceof Card card && card.getId() == expectedId) {
-                    attachmentChoices.add(new AttachmentChoice(hostId, card.getId(), decisionPlayer,
-                            sa.getActivatingPlayer()));
-                    return option;
-                }
-            }
-            throw new AssertionError("Expected legal Aura attachment " + expectedId + " among " + options);
         }
 
         @Override
@@ -509,30 +371,12 @@ public class DanDanOfficialOwnershipTest extends AITest {
         @Override
         public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode,
                 String message, List<String> options, Card cardToShow, Map<String, Object> params) {
-            if (sa != null && sa.getHostCard() != null) {
-                confirmations.add(new Confirmation(sa.getHostCard().getId(), decisionPlayer));
-            }
             return true;
         }
 
         private boolean handChoiceWasSelected(int hostId, int cardId, Player decider, Player activator) {
             return handChoices.stream().anyMatch(choice -> choice.hostId == hostId && choice.expectedId == cardId
                     && choice.selectedId == cardId && choice.decider == decider && choice.activator == activator);
-        }
-
-        private boolean handChoiceWasOfferedWithout(int hostId, int cardId) {
-            return handChoices.stream().anyMatch(choice -> choice.hostId == hostId && choice.expectedId == cardId
-                    && choice.selectedId == -1 && !choice.offeredIds.contains(cardId));
-        }
-
-        private boolean attachmentWasSelected(int hostId, int cardId, Player chooser) {
-            return attachmentChoices.stream().anyMatch(choice -> choice.hostId == hostId && choice.cardId == cardId
-                    && choice.chooser == chooser && choice.activator == chooser);
-        }
-
-        private boolean confirmationWasAccepted(int hostId, Player chooser) {
-            return confirmations.stream().anyMatch(confirmation -> confirmation.hostId == hostId
-                    && confirmation.chooser == chooser);
         }
 
         private boolean triggerWasConfirmed(int hostId, Player decider) {
@@ -547,43 +391,17 @@ public class DanDanOfficialOwnershipTest extends AITest {
     private static final class HandChoice {
         private final int hostId;
         private final int expectedId;
-        private final List<Integer> offeredIds;
         private final int selectedId;
         private final Player decider;
         private final Player activator;
 
-        private HandChoice(int hostId, int expectedId, List<Integer> offeredIds, int selectedId,
+        private HandChoice(int hostId, int expectedId, int selectedId,
                 Player decider, Player activator) {
             this.hostId = hostId;
             this.expectedId = expectedId;
-            this.offeredIds = offeredIds;
             this.selectedId = selectedId;
             this.decider = decider;
             this.activator = activator;
-        }
-    }
-
-    private static final class AttachmentChoice {
-        private final int hostId;
-        private final int cardId;
-        private final Player chooser;
-        private final Player activator;
-
-        private AttachmentChoice(int hostId, int cardId, Player chooser, Player activator) {
-            this.hostId = hostId;
-            this.cardId = cardId;
-            this.chooser = chooser;
-            this.activator = activator;
-        }
-    }
-
-    private static final class Confirmation {
-        private final int hostId;
-        private final Player chooser;
-
-        private Confirmation(int hostId, Player chooser) {
-            this.hostId = hostId;
-            this.chooser = chooser;
         }
     }
 

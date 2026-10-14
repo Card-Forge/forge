@@ -1,6 +1,5 @@
 package forge.net;
 
-import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.Game;
@@ -10,7 +9,6 @@ import forge.game.GameView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventShuffle;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
@@ -30,7 +28,6 @@ import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.match.input.InputConfirmMulligan;
 import forge.gamemodes.match.input.InputLondonMulligan;
 import forge.gamemodes.match.input.InputPassPriority;
-import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -95,7 +92,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
-import com.google.common.eventbus.Subscribe;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -124,16 +120,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             InputPassPriority input, int seat, int viewId, long callbackOrdinal, int turn,
             PhaseType phase, int turnPlayerViewId, SpellAbility ability, PrivacyPaymentReceipt payment) { }
     private record PrivacyPaymentBinding(SpellAbility ability, PrivacyPaymentReceipt receipt) { }
-    private record PrivacyShuffleT3PriorityInput(Game game, PlayerControllerHuman controller,
-            InputPassPriority input, int ownerViewId) { }
+
     private record PrivacyShuffleT4PriorityInput(Game game, PlayerControllerHuman controller,
             InputPassPriority input, int ownerViewId, int gameViewId, long callbackOrdinal,
             ScriptedGui endpoint) { }
-    private record PrivacyHistoryReconnectHostInput(Game game, PlayerControllerHuman controller,
-            InputPassPriority input, int ownerViewId, int gameViewId, long callbackOrdinal) { }
-    private record DisconnectAiNextGameHeldPriority(Game game, PlayerControllerHuman controller,
-            InputPassPriority input, IGameController endpointController, ScriptedGui endpoint,
-            int ownerViewId, int gameViewId) { }
+
     record OpeningKeepGateReceipt(int seat, int gameViewId, long promptOrdinal,
             long appliedStateLowerBoundOrdinal, long appliedCallbackOrdinal, long appliedSequence,
             Class<?> inputType, int handCount, int londonBottomCardId, boolean bottomInSharedLibrary,
@@ -176,30 +167,6 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
     record PriorityReceipt(int seat, int chooserViewId, long callbackOrdinal, int turn,
                            PhaseType phase, int turnPlayerViewId, String one, String two,
                            boolean enabledOne, boolean enabledTwo) { }
-    record DisconnectAiPriorityReceipt(int gameViewId, int seat, int chooserViewId,
-                                       long callbackOrdinal, int turn, PhaseType phase,
-                                       int turnPlayerViewId) { }
-    record OwnManaUndoPriorityReceipt(int gameViewId, int seat, int chooserViewId,
-                                      long callbackOrdinal, int turn, PhaseType phase,
-                                      int turnPlayerViewId, String secondButton,
-                                      boolean firstEnabled, boolean secondEnabled) { }
-    enum OwnManaUndoAbilityStage { INITIAL_SELECTION, ADDITIONAL_COST }
-    record OwnManaUndoAbilityReceipt(OwnManaUndoAbilityStage stage, int gameViewId, int seat, int chooserViewId,
-                                     long callbackOrdinal, int cardId, int abilityId,
-                                     int abilityCount, ZoneType zone, int ownerViewId,
-                                     int controllerViewId, boolean canPlay, boolean spell) { }
-    record OwnManaUndoAppliedReceipt(String callback, long sequence, long callbackOrdinal,
-                                      int gameViewId, Object trackerIdentity, int remoteViewId,
-                                      int islandCardId, int turn, PhaseType phase,
-                                      int turnPlayerViewId, boolean islandOnBattlefield,
-                                      int islandOwnerViewId, int islandControllerViewId,
-                                      List<Integer> sharedLibraryIds, List<Integer> sharedGraveyardIds,
-                                      boolean islandTapped, int blueMana) {
-        OwnManaUndoAppliedReceipt {
-            sharedLibraryIds = List.copyOf(sharedLibraryIds);
-            sharedGraveyardIds = List.copyOf(sharedGraveyardIds);
-        }
-    }
 
     record ClientProtocolSendReceipt(long sendOrdinal, int eventId, ProtocolMethod method,
                                      Integer gameViewId, long promptCallbackOrdinal,
@@ -275,8 +242,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                             return line;
                         }
                     }
-                    if (pendingLine.indexOf("REJECTED_STALE_GAME_ACTION ") >= 0
-                            && pendingLine.indexOf(expected) >= 0) {
+                    if (pendingLine.indexOf("REJECTED_STALE_GAME_ACTION ") >= 0 && pendingLine.indexOf(expected) >= 0) {
                         return pendingLine.toString();
                     }
                 }
@@ -307,8 +273,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             this.metamorphoseDiagnosticOnly = metamorphoseDiagnosticOnly;
         }
 
-        boolean privacyConfirmationOnly() { return privacyConfirmationOnly; }
-        boolean metamorphoseDiagnosticOnly() { return metamorphoseDiagnosticOnly; }
+        boolean privacyConfirmationOnly() { return privacyConfirmationOnly;
+        }
+        boolean metamorphoseDiagnosticOnly() { return metamorphoseDiagnosticOnly;
+        }
 
         synchronized void arm(ProtocolMethod method, NextGameDecision nextGameDecision,
                               int gameViewId, long promptCallbackOrdinal) {
@@ -327,20 +295,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             arm(ProtocolMethod.selectButtonOk, null, gameViewId, promptCallbackOrdinal);
         }
 
-        synchronized void armPrivacyHistoryNextGameAction(int gameViewId, long promptCallbackOrdinal) {
-            if (armed != null || gameViewId < 0 || promptCallbackOrdinal <= 0) {
-                throw new AssertionError("N+1 action observation cannot be armed for this callback");
-            }
-            receipt = null;
-            armed = new ArmedClientSend(gameViewId, promptCallbackOrdinal, ProtocolMethod.selectButtonOk, null);
-            privacyHistoryNextGameActionArmed = true;
-        }
-
         synchronized boolean armMetamorphoseResponse(ProtocolMethod method, int gameViewId,
                                                        long promptCallbackOrdinal) {
-            if (!metamorphoseDiagnosticOnly || armed != null || gameViewId < 0 || promptCallbackOrdinal <= 0
-                    || method != ProtocolMethod.selectButtonOk && method != ProtocolMethod.selectButtonCancel
-                    && method != ProtocolMethod.selectCard) return false;
+            if (!metamorphoseDiagnosticOnly || armed != null || gameViewId < 0 || promptCallbackOrdinal <= 0 || method != ProtocolMethod.selectButtonOk && method != ProtocolMethod.selectButtonCancel && method != ProtocolMethod.selectCard) return false;
             receipt = null;
             armed = new ArmedClientSend(gameViewId, promptCallbackOrdinal, method, null);
             metamorphoseResponseArmed = true;
@@ -349,8 +306,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         synchronized void observe(NetEvent networkEvent) {
             ArmedClientSend expected = armed;
-            if (expected == null || !(networkEvent instanceof GuiGameEvent event)
-                    || event.getMethod() != expected.method()) return;
+            if (expected == null || !(networkEvent instanceof GuiGameEvent event) || event.getMethod() != expected.method()) return;
             if (privacyHistoryNextGameActionArmed) {
                 receipt = new ClientProtocolSendReceipt(observedSendOrdinal.incrementAndGet(), event.getId(),
                         event.getMethod(), event.getGameViewId(), expected.promptCallbackOrdinal(), null);
@@ -392,8 +348,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
         }
 
-        ClientProtocolSendReceipt receipt() { return receipt; }
-        Throwable failure() { return failure; }
+        ClientProtocolSendReceipt receipt() { return receipt;
+        }
+        Throwable failure() { return failure;
+        }
         synchronized void disarm() {
             armed = null;
             metamorphoseResponseArmed = false;
@@ -440,8 +398,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                                         NextGameDecision nextGameDecision = null;
                                         if (expectedMethod == ProtocolMethod.nextGameDecision) {
                                             Object[] arguments = event.getObjects();
-                                            if (arguments.length != 1
-                                                    || !(arguments[0] instanceof NextGameDecision decision)) {
+                                            if (arguments.length != 1 || !(arguments[0] instanceof NextGameDecision decision)) {
                                                 throw new AssertionError("Decoded nextGameDecision event lacked one enum argument");
                                             }
                                             nextGameDecision = decision;
@@ -483,11 +440,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         synchronized void arm(ProtocolMethod method) {
-            if (armedMethod != null || method != ProtocolMethod.selectButtonOk
-                    && method != ProtocolMethod.selectStackItem
-                    && method != ProtocolMethod.nextGameDecision
-                    && method != ProtocolMethod.selectCard
-                    && method != ProtocolMethod.undoLastAction) {
+            if (armedMethod != null || method != ProtocolMethod.selectButtonOk && method != ProtocolMethod.selectStackItem && method != ProtocolMethod.nextGameDecision && method != ProtocolMethod.selectCard && method != ProtocolMethod.undoLastAction) {
                 throw new AssertionError("Server protocol tap cannot be armed for this lifecycle event");
             }
             receipt = null;
@@ -503,11 +456,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             armedMethod = null;
         }
 
-        ServerProtocolReceiveReceipt receipt() { return receipt; }
-        boolean awaitReceipt(long timeout, TimeUnit unit) throws InterruptedException {
-            return receiptArrived.await(timeout, unit);
+        ServerProtocolReceiveReceipt receipt() { return receipt;
         }
-        Throwable failure() { return failure; }
+
+        Throwable failure() { return failure;
+        }
         private volatile Throwable failure;
 
         private synchronized void recordFailure(Throwable error) {
@@ -588,20 +541,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                                 List<Integer> handIds) {
         LifecycleKeepReceipt { handIds = List.copyOf(handIds); }
     }
-    record PrivacyHistoryNextGameKeepReceipt(int gameViewId, long callbackOrdinal, long sequence,
-            int seat, int chooserViewId, List<Integer> handIds, Object trackerIdentity,
-            boolean trackerOwnsPlayerView, boolean controllerOwnsGame) {
-        PrivacyHistoryNextGameKeepReceipt { handIds = List.copyOf(handIds); }
-    }
-    record PrivacyHistoryNextGamePriorityReceipt(Game game, int gameViewId, int seat, int chooserViewId,
-            long callbackOrdinal, int turn, PhaseType phase, int turnPlayerViewId,
-            PlayerControllerHuman controller, IGameController endpointController,
-            InputPassPriority input) { }
+
     record PrivacyHistoryNextGameTerminalReceipt(int gameViewId, long callbackOrdinal,
             int seat, boolean gameOver, int playedGames) { }
-    record QueuedLocalCleanupKeepReceipt(int gameViewId, long callbackOrdinal, int seat,
-                                         int observedHandCount, boolean matchesPreparedGame,
-                                         boolean gameTerminalAtObservation) { }
+
     record BufferedMetaSelectableReceipt(int gameViewId, int seat, long callbackOrdinal,
                                          int minimum, int maximum, List<Integer> cardIds,
                                          int actionCountAtCapture) {
@@ -668,13 +611,20 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private boolean overflowed;
         private Throwable failure;
 
-        synchronized int inboundByteCount() { return inboundByteCount; }
-        synchronized int rawOwnedByteCount() { return rawOwnedByteCount; }
-        synchronized int wrappedOwnedByteCount() { return wrappedOwnedByteCount; }
-        synchronized int wrappedOwnedEventCount() { return wrappedOwnedEventCount; }
-        synchronized boolean overflowed() { return overflowed; }
-        synchronized Throwable failure() { return failure; }
-        synchronized List<PreHandlerFact> facts() { return List.copyOf(facts); }
+        synchronized int inboundByteCount() { return inboundByteCount;
+        }
+        synchronized int rawOwnedByteCount() { return rawOwnedByteCount;
+        }
+        synchronized int wrappedOwnedByteCount() { return wrappedOwnedByteCount;
+        }
+        synchronized int wrappedOwnedEventCount() { return wrappedOwnedEventCount;
+        }
+        synchronized boolean overflowed() { return overflowed;
+        }
+        synchronized Throwable failure() { return failure;
+        }
+        synchronized List<PreHandlerFact> facts() { return List.copyOf(facts);
+        }
         synchronized Map<Integer, Map<ZoneType, List<Integer>>> decodedFullZones(PreHandlerFact fact) {
             return decodedFullZones.getOrDefault(fact, Map.of());
         }
@@ -844,8 +794,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
     record ActionReceipt(Decision decision, int seat, int chooserViewId, Integer cardId, boolean abilityChosen) { }
     record NextGameDecisionReceipt(int seat, int chooserViewId, int gameViewId, NextGameDecision decision) { }
-    record DisconnectAiOpeningKeepReceipt(int seat, int gameViewId, long callbackOrdinal,
-                                          String callback, int handCount) { }
+
     record MetamorphoseStackPriorityReceipt(int seat, int chooserViewId, long callbackOrdinal,
             Game game, int gameViewId, int turn, PhaseType phase, int turnPlayerViewId, int stackSize,
             InputPassPriority priorityInput, int stackItemId, int sourceCardId, int activatorViewId,
@@ -962,8 +911,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             sacrificedCardIds = List.copyOf(sacrificedCardIds);
         }
     }
-    record PrivacyShuffleEventReceipt(int playerViewId, int turn, PhaseType phase,
-            int sourceCardId, long castPriorityOrdinal, long paidStackCallbackOrdinal) { }
+
     enum PrivacyPriorityAction { PASS, CAST_TELLING_TIME, HOLD_T3_SHUFFLE_CAST, HOLD_TELLING_TIME, PASS_STACK, HOLD_FENGRAF, HOLD_SHUFFLE_HISTORY, HOLD_HISTORY_RECONNECT_HOST }
     record CallbackReceipt(long wireSequence, long callbackOrdinal) { }
     record MulliganChoiceReceipt(Decision decision, int seat, int chooserViewId, int gameViewId,
@@ -1012,9 +960,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                                        String zeroCardPrompt) {
         LondonBottomDispatchReceipt { chooserHandIds = List.copyOf(chooserHandIds); }
     }
-    record PrivacyMulliganBoundaryReceipt(Game game, int gameViewId,
-            Map<Integer, Map<ZoneType, List<Integer>>> preSetupZones,
-            Map<Integer, Map<ZoneType, List<Integer>>> postSetupZones) { }
+
     private record HandFacts(List<Integer> ids, int landCount) {
         private HandFacts { ids = List.copyOf(ids); }
     }
@@ -1054,10 +1000,6 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private final Set<Integer> observedLandIds = Collections.synchronizedSet(new LinkedHashSet<>());
         private final List<ActionReceipt> actions = Collections.synchronizedList(new ArrayList<>());
         private final List<NextGameDecisionReceipt> nextGameDecisions = Collections.synchronizedList(new ArrayList<>());
-        private final List<DisconnectAiOpeningKeepReceipt> disconnectAiNextGameKeeps =
-                Collections.synchronizedList(new ArrayList<>());
-        private final List<DisconnectAiPriorityReceipt> disconnectAiNextGamePriorities =
-                Collections.synchronizedList(new ArrayList<>());
         private final List<MulliganChoiceReceipt> mulliganChoices = Collections.synchronizedList(new ArrayList<>());
         private final List<FreeRevealReceipt> freeReveals = Collections.synchronizedList(new ArrayList<>());
         private final List<StarterButtonReceipt> starterButtonReceipts = Collections.synchronizedList(new ArrayList<>());
@@ -1080,7 +1022,6 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private boolean privacyStackPriorityDispatchInvoked;
         private final List<LondonBottomDispatchReceipt> londonBottomDispatches = Collections.synchronizedList(new ArrayList<>());
         private long mulliganReceiptOrder;
-        private volatile PrivacyMulliganBoundaryReceipt privacyMulliganBoundaryReceipt;
         private final List<Runnable> failureHooks = Collections.synchronizedList(new ArrayList<>());
         private final AtomicBoolean concessionQueued = new AtomicBoolean();
         private final CountDownLatch postKeepState = new CountDownLatch(1);
@@ -1100,11 +1041,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private volatile boolean starterSeatZeroScenario;
         private volatile BooleanSupplier initialShuffleConsumed;
         private volatile boolean reconnectScenario;
-        private volatile boolean disconnectAiScenario;
         private volatile Game disconnectAiNextGameOrigin;
-        private volatile DisconnectAiNextGamePreparationReceipt disconnectAiNextGamePreparationReceipt;
-        private volatile DisconnectAiNextGameHeldPriority disconnectAiNextGameHeldPriority;
-        private volatile DisconnectAiNextGameHeldPriority disconnectAiGameNPriority;
         private volatile boolean reconnectPostureReached;
         private volatile boolean metamorphoseScenario;
         private volatile boolean metamorphoseOpeningDiagnostic;
@@ -1114,26 +1051,6 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private volatile boolean lifecycleScenario;
         private volatile boolean staleActionWitness;
         private volatile boolean staleQuitWitness;
-        private volatile Game queuedLocalDecisionOldGame;
-        private volatile boolean positiveRemoteOwnManaUndoScenario;
-        private volatile Game positiveRemoteOwnManaUndoGame;
-        private volatile int positiveRemoteOwnManaUndoGameViewId = -1;
-        private volatile int positiveRemoteOwnManaUndoRemoteViewId = -1;
-        private volatile int positiveRemoteOwnManaUndoIslandId = -1;
-        private final CountDownLatch positiveRemoteOwnManaUndoSetupReady = new CountDownLatch(1);
-        private final CountDownLatch positiveRemoteOwnManaUndoPriority = new CountDownLatch(1);
-        private final AtomicInteger positiveRemoteOwnManaUndoPriorityCallbacks = new AtomicInteger();
-        private volatile OwnManaUndoPriorityReceipt lastPositiveRemoteOwnManaUndoPriority;
-        private final CountDownLatch positiveRemoteOwnManaUndoAbilityArrived = new CountDownLatch(1);
-        private final AtomicReference<OwnManaUndoAbilityReceipt> positiveRemoteOwnManaUndoInitialAbility =
-                new AtomicReference<>();
-        private final AtomicReference<OwnManaUndoAbilityReceipt> positiveRemoteOwnManaUndoAdditionalCostAbility =
-                new AtomicReference<>();
-        private final List<OwnManaUndoAppliedReceipt> positiveRemoteOwnManaUndoApplied =
-                Collections.synchronizedList(new ArrayList<>());
-        private volatile QueuedLocalGamePreparationReceipt queuedLocalGamePreparationReceipt;
-        private volatile Game queuedLocalDecisionCleanupGame;
-        private volatile QueuedLocalCleanupKeepReceipt queuedLocalCleanupKeepReceipt;
         private volatile boolean lifecycleCheckpointArmed;
         private volatile LifecyclePriorityReceipt lifecyclePriorityReceipt;
         private int lifecycleHostPriorityAutoPassCount;
@@ -1163,66 +1080,6 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private volatile int metamorphoseAssignedConcessionGameViewId = -1;
         private volatile boolean metamorphoseLifecycleConcessionPending;
 
-        void armQueuedLocalDecisionGamePreparation(Game oldGame) {
-            if (queuedLocalDecisionOldGame != null) throw new AssertionError("queued local decision witness armed twice");
-            queuedLocalDecisionOldGame = Objects.requireNonNull(oldGame);
-            queuedLocalGamePreparationReceipt = null;
-        }
-
-        void observeQueuedLocalDecisionGameView(GameView view, boolean hostView) {
-            Game oldGame = queuedLocalDecisionOldGame;
-            if (!hostView || oldGame == null || view == null || view.getGame() == oldGame) return;
-            synchronized (this) {
-                if (queuedLocalGamePreparationReceipt != null) return;
-                Game nextGame = Objects.requireNonNull(view.getGame(), "host N+1 GameView retains its actual Game");
-                if (nextGame == oldGame) throw new AssertionError("queued local decision observed the old GameView again");
-                QueuedLocalGamePreparationReceipt receipt = new QueuedLocalGamePreparationReceipt(oldGame, nextGame);
-                queuedLocalGamePreparationReceipt = receipt;
-                nextGame.subscribeToEvents(receipt);
-            }
-        }
-
-        QueuedLocalGamePreparationReceipt queuedLocalGamePreparationReceipt() {
-            return queuedLocalGamePreparationReceipt;
-        }
-
-        synchronized void armQueuedLocalDecisionCleanup(Game capturedGame) {
-            QueuedLocalGamePreparationReceipt preparation = queuedLocalGamePreparationReceipt;
-            if (queuedLocalDecisionCleanupGame != null || preparation == null
-                    || preparation.game() != capturedGame || capturedGame == preparation.oldGame()) {
-                throw new AssertionError("queued local cleanup must be armed once for the prepared exact N+1 Game");
-            }
-            queuedLocalDecisionCleanupGame = capturedGame;
-        }
-
-        QueuedLocalCleanupKeepReceipt queuedLocalCleanupKeepReceipt() {
-            return queuedLocalCleanupKeepReceipt;
-        }
-
-        static final class QueuedLocalGamePreparationReceipt {
-            private final Game oldGame;
-            private final Game game;
-            private final CountDownLatch shuffled = new CountDownLatch(1);
-            private volatile int shuffleCount;
-
-            private QueuedLocalGamePreparationReceipt(Game oldGame, Game game) {
-                this.oldGame = oldGame;
-                this.game = game;
-            }
-
-            @Subscribe public void onGameShuffle(GameEventShuffle ignored) {
-                if (game == oldGame) throw new AssertionError("N+1 shuffle receipt attached to Game N");
-                shuffleCount++;
-                shuffled.countDown();
-            }
-
-            Game oldGame() { return oldGame; }
-            Game game() { return game; }
-            int shuffleCount() { return shuffleCount; }
-            boolean awaitLibraryPreparation(long timeout, TimeUnit unit) throws InterruptedException {
-                return shuffled.await(timeout, unit);
-            }
-        }
         private volatile BufferedMetaSelectableReceipt bufferedMetaSelectableReceipt;
         private int metamorphoseUntapPasses;
         private int metamorphoseExpectedUntapSeat = -1;
@@ -1249,21 +1106,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private final CountDownLatch metamorphosePostResolutionPrompt = new CountDownLatch(1);
         private volatile boolean privacyScenario;
         private volatile boolean privacyShuffleHistoryScenario;
-        private volatile boolean privacyHistoryReconnectScenario;
-        private volatile boolean privacyHistoryNextGameEnabled;
-        private volatile boolean privacyHistoryNextGamePhase;
-        private volatile Game privacyHistoryNextGameOrigin;
         private volatile Game privacyHistoryNextGame;
-        private final List<PrivacyHistoryNextGameKeepReceipt> privacyHistoryNextGameKeeps =
-                Collections.synchronizedList(new ArrayList<>());
-        private volatile PrivacyHistoryNextGamePriorityReceipt privacyHistoryNextGamePriority;
-        private volatile boolean privacyHistoryNextGamePassArmed;
-        private volatile PrivacyHistoryNextGamePriorityReceipt privacyHistoryNextGameNextPriority;
-        private final CountDownLatch privacyHistoryNextGamePriorityHeld = new CountDownLatch(1);
-        private final CountDownLatch privacyHistoryNextGameNextPriorityHeld = new CountDownLatch(1);
         private final List<PrivacyHistoryNextGameTerminalReceipt> privacyHistoryNextGameTerminals =
                 Collections.synchronizedList(new ArrayList<>());
-        private final CountDownLatch privacyHistoryNextGameTerminalCallbacks = new CountDownLatch(2);
         private volatile boolean privacyDeltaSync;
         private volatile Game privacyGame;
         private volatile Game openingKeepEngineGame;
@@ -1291,28 +1136,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private volatile int privacyPostSendRepaintStage;
         private volatile ReconnectObservation privacyObservation;
         private volatile int privacyPriorityStage;
-        private int privacyHistoryStackPasses;
         private final CountDownLatch privacyShuffleHistoryUpkeep = new CountDownLatch(1);
         private final CountDownLatch privacyShuffleHistoryPriorityHeld = new CountDownLatch(1);
-        private final CountDownLatch privacyShuffleHistoryT3CastHeld = new CountDownLatch(1);
-        private final CountDownLatch privacyShuffleTurnThreeDrawArrived = new CountDownLatch(1);
         private final AtomicReference<PrivacyStateReceipt> privacyShuffleHistoryState = new AtomicReference<>();
-        private final AtomicReference<PrivacyStateReceipt> privacyShuffleTurnTwoDraw = new AtomicReference<>();
-        private final AtomicReference<PrivacyStateReceipt> privacyShuffleTurnThreeDraw = new AtomicReference<>();
-        private volatile int privacyShuffleTurnTwoDiscardId = -1;
-        private volatile InputSelectCardsFromList privacyShuffleTurnTwoDiscardInput;
-        private volatile int privacyShuffleTurnTwoDiscardGameViewId = -1;
-        private volatile long privacyShuffleTurnTwoDiscardOrdinal = -1;
-        private volatile long privacyShuffleHistoryT3CastOrdinal = -1;
-        private volatile PrivacyShuffleT3PriorityInput privacyShuffleT3PriorityInput;
         private volatile PrivacyShuffleT4PriorityInput privacyShuffleT4PriorityInput;
-        private volatile PrivacyHistoryReconnectHostInput privacyHistoryReconnectHostInput;
-        private final CountDownLatch privacyHistoryReconnectHostHeld = new CountDownLatch(1);
         private volatile int privacyShuffleT4RepeatedPriorityCallbacks;
-        private volatile int privacyShufflePreShuffleGameViewId = -1;
-        private volatile int privacyShuffleGameViewId = -1;
-        private volatile List<Integer> privacyShuffleHostPreShuffleHandIds = List.of();
-        private final List<PrivacyShuffleEventReceipt> privacyShuffleEvents = Collections.synchronizedList(new ArrayList<>());
         private volatile long privacyDaysUndoingCastOrdinal = -1;
         private int privacyTellingStackPasses;
         private int privacyFengrafStackPasses;
@@ -1363,9 +1191,6 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 for (CountDownLatch latch : publicLandMoves) latch.countDown();
                 for (CountDownLatch latch : landAbilities) latch.countDown();
                 postKeepState.countDown();
-                positiveRemoteOwnManaUndoSetupReady.countDown();
-                positiveRemoteOwnManaUndoAbilityArrived.countDown();
-                positiveRemoteOwnManaUndoPriority.countDown();
                 metamorphoseResolved.countDown();
                 metamorphoseFirstStackPriority.countDown();
                 metamorphosePostResolutionPrompt.countDown();
@@ -1376,22 +1201,22 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 privacyFengrafReveal.countDown();
                 privacyShuffleHistoryUpkeep.countDown();
                 privacyShuffleHistoryPriorityHeld.countDown();
-                privacyHistoryNextGamePriorityHeld.countDown();
-                privacyHistoryNextGameNextPriorityHeld.countDown();
-                privacyHistoryNextGameTerminalCallbacks.countDown();
                 synchronized (failureHooks) { failureHooks.forEach(Runnable::run); }
             }
         }
-        Throwable failure() { return failure.get(); }
-        boolean stopped() { return stopped; }
+        Throwable failure() { return failure.get();
+        }
+        boolean stopped() { return stopped;
+        }
         void expectLand(int seat, int cardId) {
             synchronized (expectedLandIds) {
                 if (expectedLandIds.putIfAbsent(seat, cardId) != null) fail(new AssertionError("A land was already queued for seat " + seat));
             }
         }
         void registerView(int seat, int viewId) { seatByViewId.put(viewId, seat); }
-        int seatForView(int viewId) { return seatByViewId.getOrDefault(viewId, -1); }
-        CallbackReceipt publicMoveReceipt(int seat) { synchronized (publicMoveReceipts) { return publicMoveReceipts.get(seat); } }
+        int seatForView(int viewId) { return seatByViewId.getOrDefault(viewId, -1);
+        }
+
         void recordAction(ActionReceipt receipt) { actions.add(receipt); }
         List<ActionReceipt> actions() { synchronized (actions) { return List.copyOf(actions); } }
         void recordNextGameDecision(NextGameDecisionReceipt receipt) { nextGameDecisions.add(receipt); }
@@ -1403,188 +1228,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             initialShuffleConsumed = shuffleConsumed;
         }
         void configureStarterSeatZeroScenario() { starterSeatZeroScenario = true; }
-        void enablePositiveRemoteOwnManaUndo() {
-            if (positiveRemoteOwnManaUndoScenario) {
-                throw new AssertionError("Positive remote own-mana undo scenario is already enabled");
-            }
-            positiveRemoteOwnManaUndoScenario = true;
-            addFailureHook(positiveRemoteOwnManaUndoPriority::countDown);
-        }
-        boolean positiveRemoteOwnManaUndoScenario() { return positiveRemoteOwnManaUndoScenario; }
-        synchronized void attachPositiveRemoteOwnManaUndoSetup(Game game, int islandId, int remoteViewId) {
-            if (!positiveRemoteOwnManaUndoScenario || positiveRemoteOwnManaUndoGame != null || game == null
-                    || islandId <= 0 || remoteViewId < 0 || game.getPlayers().size() != 2) {
-                throw new AssertionError("Positive remote own-mana undo setup must bind one actual two-seat Game");
-            }
-            positiveRemoteOwnManaUndoGame = game;
-            positiveRemoteOwnManaUndoGameViewId = game.getView().getId();
-            positiveRemoteOwnManaUndoIslandId = islandId;
-            positiveRemoteOwnManaUndoRemoteViewId = remoteViewId;
-        }
-        synchronized void completePositiveRemoteOwnManaUndoSetup(Game game) {
-            if (!positiveRemoteOwnManaUndoScenario || game == null
-                    || positiveRemoteOwnManaUndoGame != game || positiveRemoteOwnManaUndoIslandId < 0
-                    || positiveRemoteOwnManaUndoRemoteViewId < 0) {
-                fail(new AssertionError("Positive remote own-mana setup completion did not match its captured Game"));
-                return;
-            }
-            positiveRemoteOwnManaUndoSetupReady.countDown();
-        }
-        boolean awaitPositiveRemoteOwnManaUndoSetup(long timeout, TimeUnit unit) throws InterruptedException {
-            return positiveRemoteOwnManaUndoSetupReady.await(timeout, unit);
-        }
-        int positiveRemoteOwnManaUndoGameViewId() { return positiveRemoteOwnManaUndoGameViewId; }
-        int positiveRemoteOwnManaUndoRemoteViewId() { return positiveRemoteOwnManaUndoRemoteViewId; }
-        int positiveRemoteOwnManaUndoIslandId() { return positiveRemoteOwnManaUndoIslandId; }
-        boolean awaitPositiveRemoteOwnManaUndoPriority(long timeout, TimeUnit unit) throws InterruptedException {
-            return positiveRemoteOwnManaUndoPriority.await(timeout, unit);
-        }
-        int positiveRemoteOwnManaUndoPriorityCallbacks() { return positiveRemoteOwnManaUndoPriorityCallbacks.get(); }
-        OwnManaUndoPriorityReceipt lastPositiveRemoteOwnManaUndoPriority() {
-            return lastPositiveRemoteOwnManaUndoPriority;
-        }
-        List<OwnManaUndoAppliedReceipt> positiveRemoteOwnManaUndoAppliedReceipts() {
-            synchronized (positiveRemoteOwnManaUndoApplied) {
-                return List.copyOf(positiveRemoteOwnManaUndoApplied);
-            }
-        }
-        boolean awaitPositiveRemoteOwnManaUndoAbility(long timeout, TimeUnit unit) throws InterruptedException {
-            return positiveRemoteOwnManaUndoAbilityArrived.await(timeout, unit);
-        }
-        List<OwnManaUndoAbilityReceipt> positiveRemoteOwnManaUndoAbilityReceipts() {
-            OwnManaUndoAbilityReceipt initial = positiveRemoteOwnManaUndoInitialAbility.get();
-            OwnManaUndoAbilityReceipt additionalCost = positiveRemoteOwnManaUndoAdditionalCostAbility.get();
-            if (initial == null) return List.of();
-            return additionalCost == null ? List.of(initial) : List.of(initial, additionalCost);
-        }
-        synchronized void recordPositiveRemoteOwnManaUndoAbility(int gameViewId, int seat, int chooserViewId,
-                long callbackOrdinal, int cardId, int abilityId, int abilityCount, ZoneType zone,
-                int ownerViewId, int controllerViewId, boolean canPlay, boolean spell) {
-            if (!positiveRemoteOwnManaUndoScenario || gameViewId != positiveRemoteOwnManaUndoGameViewId
-                    || seat != 1 || chooserViewId != positiveRemoteOwnManaUndoRemoteViewId
-                    || callbackOrdinal <= 0 || cardId != positiveRemoteOwnManaUndoIslandId
-                    || abilityCount != 1 || zone != ZoneType.Battlefield
-                    || ownerViewId != positiveRemoteOwnManaUndoRemoteViewId
-                    || controllerViewId != positiveRemoteOwnManaUndoRemoteViewId || !canPlay || spell) {
-                fail(new AssertionError("Remote own-mana selection did not match its exact assigned Island ability"));
-                return;
-            }
-            OwnManaUndoAbilityReceipt initial = positiveRemoteOwnManaUndoInitialAbility.get();
-            OwnManaUndoAbilityStage stage = initial == null
-                    ? OwnManaUndoAbilityStage.INITIAL_SELECTION : OwnManaUndoAbilityStage.ADDITIONAL_COST;
-            OwnManaUndoAbilityReceipt receipt = new OwnManaUndoAbilityReceipt(stage, gameViewId, seat,
-                    chooserViewId, callbackOrdinal, cardId, abilityId, abilityCount,
-                    zone, ownerViewId, controllerViewId, canPlay, spell);
-            if (initial == null) {
-                positiveRemoteOwnManaUndoInitialAbility.set(receipt);
-                return;
-            }
-            if (positiveRemoteOwnManaUndoAdditionalCostAbility.get() != null
-                    || callbackOrdinal <= initial.callbackOrdinal()
-                    || gameViewId != initial.gameViewId() || seat != initial.seat()
-                    || chooserViewId != initial.chooserViewId() || cardId != initial.cardId()
-                    || abilityId != initial.abilityId() || abilityCount != initial.abilityCount()
-                    || zone != initial.zone() || ownerViewId != initial.ownerViewId()
-                    || controllerViewId != initial.controllerViewId() || canPlay != initial.canPlay()
-                    || spell != initial.spell()) {
-                fail(new AssertionError("Additional-cost ability callback did not match the preceding Island selection"));
-                return;
-            }
-            positiveRemoteOwnManaUndoAdditionalCostAbility.set(receipt);
-            positiveRemoteOwnManaUndoAbilityArrived.countDown();
-        }
-        void recordPositiveRemoteOwnManaUndoApplied(boolean remoteEndpoint, String callback,
-                Capture source, GameView view) {
-            Game expected = positiveRemoteOwnManaUndoGame;
-            boolean completeFullState = "setGameView".equals(callback);
-            boolean populatedDelta = "applyDelta".equals(callback) && source != null && source.stateBearing();
-            if (!remoteEndpoint || !positiveRemoteOwnManaUndoScenario || source == null
-                    || (!completeFullState && !populatedDelta) || view == null
-                    || expected == null || view.getId() != positiveRemoteOwnManaUndoGameViewId
-                    || view.getTracker() == null || view.getPlayers() == null) return;
-            PlayerView remotePlayer = null;
-            for (PlayerView player : view.getPlayers()) {
-                if (player.getId() == positiveRemoteOwnManaUndoRemoteViewId) {
-                    remotePlayer = player;
-                    break;
-                }
-            }
-            if (remotePlayer == null) return;
-            CardView island = remotePlayer.getCards(ZoneType.Battlefield).stream()
-                    .filter(card -> card.getId() == positiveRemoteOwnManaUndoIslandId)
-                    .findFirst().orElse(null);
-            if (island == null) return;
-            if (island.getTracker() != view.getTracker()) {
-                fail(new AssertionError("Applied remote Island does not belong to its captured GameView tracker"));
-                return;
-            }
-            PlayerView sharedZones = view.getPlayers().get(0);
-            OwnManaUndoAppliedReceipt receipt = new OwnManaUndoAppliedReceipt(callback, source.sequence(),
-                    source.callbackOrdinal(), view.getId(), view.getTracker(),
-                    positiveRemoteOwnManaUndoRemoteViewId, positiveRemoteOwnManaUndoIslandId,
-                    view.getTurn(), view.getPhase(), view.getPlayerTurn() == null ? -1 : view.getPlayerTurn().getId(),
-                    true, island.getOwner() == null ? -1 : island.getOwner().getId(),
-                    island.getController() == null ? -1 : island.getController().getId(),
-                    sharedZones.getCards(ZoneType.Library).stream().map(CardView::getId).toList(),
-                    sharedZones.getCards(ZoneType.Graveyard).stream().map(CardView::getId).toList(),
-                    island.isTapped(), remotePlayer.getMana(MagicColor.BLUE));
-            synchronized (positiveRemoteOwnManaUndoApplied) {
-                OwnManaUndoAppliedReceipt previous = positiveRemoteOwnManaUndoApplied.isEmpty() ? null
-                        : positiveRemoteOwnManaUndoApplied.get(positiveRemoteOwnManaUndoApplied.size() - 1);
-                if (previous != null && previous.gameViewId() == receipt.gameViewId()
-                        && previous.trackerIdentity() == receipt.trackerIdentity()
-                        && previous.islandOnBattlefield() == receipt.islandOnBattlefield()
-                        && previous.islandTapped() == receipt.islandTapped()
-                        && previous.islandOwnerViewId() == receipt.islandOwnerViewId()
-                        && previous.islandControllerViewId() == receipt.islandControllerViewId()
-                        && previous.sharedLibraryIds().equals(receipt.sharedLibraryIds())
-                        && previous.sharedGraveyardIds().equals(receipt.sharedGraveyardIds())
-                        && previous.blueMana() == receipt.blueMana()
-                        && previous.turn() == receipt.turn() && previous.phase() == receipt.phase()
-                        && previous.turnPlayerViewId() == receipt.turnPlayerViewId()) return;
-                if (positiveRemoteOwnManaUndoApplied.size() >= 8) {
-                    fail(new AssertionError("Positive remote own-mana applied-view receipts exceeded their small bound"));
-                    return;
-                }
-                positiveRemoteOwnManaUndoApplied.add(receipt);
-            }
-        }
-        boolean retainPositiveRemoteOwnManaUndoPriority(int gameViewId, int seat, int chooserViewId,
-                long callbackOrdinal, GameView view, String secondButton,
-                boolean firstEnabled, boolean secondEnabled) {
-            Game expectedGame = positiveRemoteOwnManaUndoGame;
-            int remoteViewId = positiveRemoteOwnManaUndoRemoteViewId;
-            int islandId = positiveRemoteOwnManaUndoIslandId;
-            if (!positiveRemoteOwnManaUndoScenario || expectedGame == null || view == null
-                    || expectedGame.getView().getId() != positiveRemoteOwnManaUndoGameViewId
-                    || gameViewId != positiveRemoteOwnManaUndoGameViewId || view.getId() != gameViewId
-                    || seat != 1 || chooserViewId != remoteViewId || callbackOrdinal <= 0) return false;
-            Player remotePlayer = expectedGame.getRegisteredPlayers().stream()
-                    .filter(player -> player.getView().getId() == remoteViewId).findFirst().orElse(null);
-            if (remotePlayer == null || !(remotePlayer.getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != expectedGame || expectedGame.isGameOver()
-                    || expectedGame.getPhaseHandler().getTurn() != 2
-                    || expectedGame.getPhaseHandler().getPhase() != PhaseType.MAIN1
-                    || expectedGame.getPhaseHandler().getPlayerTurn() != remotePlayer
-                    || expectedGame.getPhaseHandler().getPriorityPlayer() != remotePlayer
-                    || !expectedGame.getStack().isEmpty()) return false;
-            var queuedInput = controller.getInputQueue().getInput();
-            if (!(queuedInput instanceof InputPassPriority priorityInput)
-                    || controller.getInputProxy().getInput() != queuedInput
-                    || priorityInput.getOwner() != remotePlayer.getView()) return false;
-            Card serverIsland = remotePlayer.getZone(ZoneType.Battlefield).getCards().stream()
-                    .filter(card -> card.getId() == islandId).findFirst().orElse(null);
-            if (serverIsland == null || serverIsland.getOwner() != remotePlayer
-                    || serverIsland.getController() != remotePlayer) return false;
-            OwnManaUndoPriorityReceipt receipt = new OwnManaUndoPriorityReceipt(gameViewId, seat,
-                    chooserViewId, callbackOrdinal, expectedGame.getPhaseHandler().getTurn(),
-                    expectedGame.getPhaseHandler().getPhase(), remotePlayer.getView().getId(),
-                    secondButton, firstEnabled, secondEnabled);
-            lastPositiveRemoteOwnManaUndoPriority = receipt;
-            positiveRemoteOwnManaUndoPriorityCallbacks.incrementAndGet();
-            positiveRemoteOwnManaUndoPriority.countDown();
-            return true;
-        }
+
         void beginMetamorphoseScenario(boolean accept) {
             metamorphoseScenario = true;
             metamorphoseAccept = accept;
@@ -1605,25 +1249,27 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             staleActionWitness = true;
             staleQuitWitness = true;
         }
-        boolean staleActionWitness() { return staleActionWitness; }
-        boolean staleQuitWitness() { return staleQuitWitness; }
-        boolean holdMetamorphoseOptional() { return holdMetamorphoseOptional; }
+        boolean staleActionWitness() { return staleActionWitness;
+        }
+        boolean staleQuitWitness() { return staleQuitWitness;
+        }
+        boolean holdMetamorphoseOptional() { return holdMetamorphoseOptional;
+        }
         boolean heldMetamorphoseOptionalBeforeLifecycleConcession() {
             return holdMetamorphoseOptional && lifecycleScenario && metamorphoseAssignedConcessionGameViewId < 0;
         }
-        boolean lifecycleScenario() { return lifecycleScenario; }
+        boolean lifecycleScenario() { return lifecycleScenario;
+        }
         boolean awaitMetamorphoseOptionalHeld(long timeout, TimeUnit unit) throws InterruptedException {
             return metamorphoseOptionalHeld.await(timeout, unit);
         }
         void markMetamorphoseOptionalHeld() { metamorphoseOptionalHeld.countDown(); }
         PrivacyInputSnapshot metamorphoseRemoteInputSnapshot(Game game) {
-            if (!metamorphoseScenario || game == null || game.getPlayers().size() < 2
-                    || !(game.getPlayers().get(1).getController() instanceof PlayerControllerHuman controller)) return null;
+            if (!metamorphoseScenario || game == null || game.getPlayers().size() < 2 || !(game.getPlayers().get(1).getController() instanceof PlayerControllerHuman controller)) return null;
             return new PrivacyInputSnapshot(controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
         }
         PrivacyInputSnapshot lifecyclePriorityInputSnapshot(Game game, int seat) {
-            if (!lifecycleScenario || game == null || seat < 0 || seat >= game.getPlayers().size()
-                    || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)) return null;
+            if (!lifecycleScenario || game == null || seat < 0 || seat >= game.getPlayers().size() || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)) return null;
             return new PrivacyInputSnapshot(controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
         }
         synchronized void prepareLifecycleNextGame(String expectedCallback) {
@@ -1643,11 +1289,15 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             keepPromptOrdinals[0] = -1;
             keepPromptOrdinals[1] = -1;
         }
-        LifecyclePriorityReceipt lifecyclePriorityReceipt() { return lifecyclePriorityReceipt; }
-        synchronized int lifecycleHostPriorityAutoPassCount() { return lifecycleHostPriorityAutoPassCount; }
-        boolean lifecycleCheckpointArmed() { return lifecycleCheckpointArmed; }
-        boolean postKeepPriorityHeld() { return postKeepPriorityHeld; }
-        synchronized boolean postKeepPriorityReleased() { return postKeepPriorityReleased; }
+        LifecyclePriorityReceipt lifecyclePriorityReceipt() { return lifecyclePriorityReceipt;
+        }
+        synchronized int lifecycleHostPriorityAutoPassCount() { return lifecycleHostPriorityAutoPassCount;
+        }
+        boolean lifecycleCheckpointArmed() { return lifecycleCheckpointArmed;
+        }
+        boolean postKeepPriorityHeld() { return postKeepPriorityHeld;
+        }
+
         List<LifecycleKeepReceipt> lifecycleKeepReceipts() {
             synchronized (lifecycleKeepReceipts) { return List.copyOf(lifecycleKeepReceipts); }
         }
@@ -1657,18 +1307,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                                  int latestIncomingGameViewId, int latestAppliedGameViewId,
                                  long latestViewCallbackOrdinal) {
             if (!lifecycleCheckpointArmed) return; // the held Meta game has ordinary opening Keeps too
-            Game preparedGame = queuedLocalDecisionCleanupGame;
-            QueuedLocalGamePreparationReceipt preparation = queuedLocalGamePreparationReceipt;
-            boolean matchesPreparedGame = preparedGame != null && preparation != null
-                    && preparedGame == preparation.game() && gameViewId == preparedGame.getView().getId();
-            boolean validKeepMetadata = callbackOrdinal > 0 && seat >= 0 && seat <= 1 && chooserViewId >= 0;
-            if (gameViewId < 0 || callbackOrdinal <= 0 || seat < 0 || seat > 1
-                    || chooserViewId < 0 || handIds.size() != 7) {
-                if (matchesPreparedGame && validKeepMetadata && handIds.size() != 7 && preparedGame.isGameOver()) {
-                    queuedLocalCleanupKeepReceipt = new QueuedLocalCleanupKeepReceipt(gameViewId,
-                            callbackOrdinal, seat, handIds.size(), true, true);
-                    return; // cleanup-only: terminal N+1 may cancel its in-flight ordinary Keep checkpoint
-                }
+            if (gameViewId < 0 || callbackOrdinal <= 0 || seat < 0 || seat > 1 || chooserViewId < 0 || handIds.size() != 7) {
+
                 fail(new AssertionError("N+1 Keep receipt invalid: gameViewId=" + gameViewId
                         + ",seat=" + seat + ",chooserViewId=" + chooserViewId + ",callback=" + callback
                         + ",callbackSequence=" + callbackSequence + ",callbackOrdinal=" + callbackOrdinal
@@ -1694,8 +1334,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             metamorphoseOptionalMessage = expectedOptionalMessage;
         }
         synchronized void beginPrivacyScenario(boolean deltaSync, int tellingTimeSeat, int fengrafSeat) {
-            if (tellingTimeSeat < 0 || tellingTimeSeat > 1 || fengrafSeat < 0 || fengrafSeat > 1
-                    || tellingTimeSeat == fengrafSeat) {
+            if (tellingTimeSeat < 0 || tellingTimeSeat > 1 || fengrafSeat < 0 || fengrafSeat > 1 || tellingTimeSeat == fengrafSeat) {
                 throw new IllegalArgumentException("Privacy actors must be the two distinct assigned seats");
             }
             privacyScenario = true;
@@ -1703,175 +1342,25 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             privacyTellingTimeSeat = tellingTimeSeat;
             privacyFengrafSeat = fengrafSeat;
         }
-        void enablePrivacyShuffleHistoryScenario() {
-            if (!privacyScenario || privacyTellingTimeSeat != 1 || privacyFengrafSeat != 0) {
-                fail(new AssertionError("Shuffle-history first leg requires the existing default privacy roles"));
-                return;
-            }
-            privacyShuffleHistoryScenario = true;
+
+        Game privacyHistoryNextGame() { return privacyHistoryNextGame;
         }
-        synchronized void enablePrivacyHistoryReconnectScenario() {
-            if (!privacyShuffleHistoryScenario || privacyHistoryReconnectScenario || reconnectScenario) {
-                fail(new AssertionError("Reconnect continuation requires the existing shuffle-history scenario exactly once"));
-                return;
-            }
-            privacyHistoryReconnectScenario = true;
-        }
-        synchronized void enablePrivacyHistoryNextGameScenario() {
-            if (!privacyHistoryReconnectScenario || privacyHistoryNextGameEnabled) {
-                fail(new AssertionError("N+1 reset requires the reconnect scenario exactly once"));
-                return;
-            }
-            privacyHistoryNextGameEnabled = true;
-        }
-        boolean privacyHistoryReconnectScenario() { return privacyHistoryReconnectScenario; }
-        boolean privacyHistoryNextGameEnabled() { return privacyHistoryNextGameEnabled; }
-        synchronized void beginPrivacyHistoryNextGame(Game oldGame) {
-            if (!privacyHistoryReconnectScenario || !privacyScenario || privacyHistoryNextGamePhase
-                    || oldGame == null || !oldGame.isGameOver()) {
-                throw new AssertionError("N+1 reset requires the completed accepted reconnect Game N");
-            }
-            privacyHistoryNextGameOrigin = oldGame;
-            privacyHistoryNextGamePhase = true;
-            privacyScenario = false; // stop N-only privacy routing after its terminal proof
-            expectedPostKeepCallback = null; // N's one-shot opening latch is not reused
-        }
-        boolean privacyHistoryNextGamePhase() { return privacyHistoryNextGamePhase; }
-        synchronized void observePrivacyHistoryNextGameView(GameView view, boolean hostView) {
-            if (!privacyHistoryNextGamePhase || !hostView || view == null || view.getGame() == null
-                    || view.getGame() == privacyHistoryNextGameOrigin) return;
-            if (privacyHistoryNextGame != null && privacyHistoryNextGame != view.getGame()) {
-                fail(new AssertionError("N+1 host view changed its retained authoritative Game"));
-                return;
-            }
-            privacyHistoryNextGame = view.getGame();
-        }
-        Game privacyHistoryNextGame() { return privacyHistoryNextGame; }
         synchronized void recordPrivacyHistoryNextGameKeep(int gameViewId, long callbackOrdinal,
                 long sequence, int seat, int chooserViewId, List<Integer> handIds,
                 Object trackerIdentity, boolean trackerOwnsPlayerView, boolean controllerOwnsGame) {
-            if (!privacyHistoryNextGamePhase || privacyHistoryNextGameOrigin == null
-                    || privacyHistoryNextGame == null
-                    || gameViewId <= 0 || gameViewId == privacyHistoryNextGameOrigin.getView().getId()
-                    || privacyHistoryNextGame.getView() == null
-                    || gameViewId != privacyHistoryNextGame.getView().getId()
-                    || callbackOrdinal <= 0 || seat < 0 || seat > 1 || handIds.size() != 7
-                    || trackerIdentity == null || !trackerOwnsPlayerView || !controllerOwnsGame
-                    || privacyHistoryNextGameKeeps.stream().anyMatch(keep -> keep.seat() == seat
-                            && keep.gameViewId() == gameViewId)) {
+
                 fail(new AssertionError("N+1 opening Keep lacks one fresh current endpoint receipt"));
                 return;
-            }
-            privacyHistoryNextGameKeeps.add(new PrivacyHistoryNextGameKeepReceipt(gameViewId,
-                    callbackOrdinal, sequence, seat, chooserViewId, handIds, trackerIdentity,
-                    trackerOwnsPlayerView, controllerOwnsGame));
         }
-        List<PrivacyHistoryNextGameKeepReceipt> privacyHistoryNextGameKeeps() {
-            synchronized (privacyHistoryNextGameKeeps) { return List.copyOf(privacyHistoryNextGameKeeps); }
-        }
-        synchronized boolean holdPrivacyHistoryNextGamePriority(int seat, int gameViewId,
-                long callbackOrdinal, int turn, PhaseType phase, int turnPlayerViewId,
-                PlayerControllerHuman controller, IGameController endpointController,
-                InputPassPriority input) {
-            if (!privacyHistoryNextGamePhase || privacyHistoryNextGameOrigin == null
-                    || privacyHistoryNextGameKeeps.size() < 2) return false;
-            Game game = privacyHistoryNextGame;
-            PrivacyHistoryNextGamePriorityReceipt heldB = privacyHistoryNextGamePriority;
-            PrivacyHistoryNextGamePriorityReceipt heldA = privacyHistoryNextGameNextPriority;
-            boolean targetSeat = heldB == null ? seat == 1
-                    : heldA == null ? seat == 0 || seat == heldB.seat()
-                    : seat == heldB.seat() || seat == heldA.seat();
-            if (!targetSeat) return false;
-            boolean validCurrentInput = game != null && game != privacyHistoryNextGameOrigin
-                    && game.getView() != null && game.getView().getId() == gameViewId
-                    && game.getPlayers().size() == 2 && seat >= 0 && seat < game.getPlayers().size()
-                    && callbackOrdinal > 0
-                    && game.getTracker() != privacyHistoryNextGameOrigin.getTracker()
-                    && controller != null && endpointController != null && input != null
-                    && game.getPlayers().get(seat).getController() == controller
-                    && controller.getInputProxy().getInput() == input && controller.getInputQueue().getInput() == input
-                    && input.getOwner() != null && input.getOwner().getId() == game.getPlayers().get(seat).getId()
-                    && game.getPhaseHandler().getTurn() == turn && game.getPhaseHandler().getPhase() == phase
-                    && game.getPhaseHandler().getPlayerTurn() != null
-                    && game.getPhaseHandler().getPlayerTurn().getId() == turnPlayerViewId
-                    && game.getPhaseHandler().getPriorityPlayer() != null
-                    && game.getPhaseHandler().getPriorityPlayer().getId() == game.getPlayers().get(seat).getId()
-                    && !game.isGameOver() && game.getOutcome() == null
-                    && game.getStack() != null && game.getStack().isEmpty();
-            if (!validCurrentInput) {
-                fail(new AssertionError("N+1 held priority changed its current endpoint, owner, or server input"));
-                return true;
-            }
-            PrivacyHistoryNextGamePriorityReceipt receipt = new PrivacyHistoryNextGamePriorityReceipt(
-                    game, gameViewId, seat, game.getPlayers().get(seat).getId(), callbackOrdinal,
-                    turn, phase, turnPlayerViewId, controller, endpointController, input);
-            if (privacyHistoryNextGamePriority == null) {
-                if (seat != 1) return false; // let A's actual opening priority pass to B
-                privacyHistoryNextGamePriority = receipt;
-                privacyHistoryNextGamePriorityHeld.countDown();
-                return true;
-            }
-            if (seat == privacyHistoryNextGamePriority.seat()) {
-                if (samePrivacyHistoryNextGamePriority(privacyHistoryNextGamePriority,
-                        game, input, controller, endpointController)) return true;
-                fail(new AssertionError("N+1 repeated held B callback changed its current server input"));
-                return true;
-            }
-            if (!privacyHistoryNextGamePassArmed) {
-                fail(new AssertionError("N+1 unexpected priority changed seats before the approved PASS"));
-                return true;
-            }
-            if (privacyHistoryNextGameNextPriority == null && seat == 0) {
-                privacyHistoryNextGameNextPriority = receipt;
-                privacyHistoryNextGameNextPriorityHeld.countDown();
-                return true;
-            }
-            if (heldA != null && seat == heldA.seat()
-                    && samePrivacyHistoryNextGamePriority(heldA, game, input, controller, endpointController)) return true;
-            fail(new AssertionError("N+1 repeated held A callback changed its current server input"));
-            return true;
-        }
-        private static boolean samePrivacyHistoryNextGamePriority(PrivacyHistoryNextGamePriorityReceipt held,
-                Game game, InputPassPriority input, PlayerControllerHuman controller,
-                IGameController endpointController) {
-            return held.game() == game && held.input() == input && held.controller() == controller
-                    && held.endpointController() == endpointController;
-        }
-        PrivacyHistoryNextGamePriorityReceipt privacyHistoryNextGamePriority() {
-            return privacyHistoryNextGamePriority;
-        }
-        void armPrivacyHistoryNextGamePass() { privacyHistoryNextGamePassArmed = true; }
-        PrivacyHistoryNextGamePriorityReceipt privacyHistoryNextGameNextPriority() {
-            return privacyHistoryNextGameNextPriority;
-        }
-        boolean awaitPrivacyHistoryNextGamePriority(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyHistoryNextGamePriorityHeld.await(timeout, unit);
-        }
-        boolean awaitPrivacyHistoryNextGameNextPriority(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyHistoryNextGameNextPriorityHeld.await(timeout, unit);
-        }
-        synchronized void recordPrivacyHistoryNextGameTerminal(int gameViewId, long callbackOrdinal,
-                int seat, boolean gameOver, int playedGames) {
-            if (!privacyHistoryNextGamePhase || privacyHistoryNextGame == null
-                    || privacyHistoryNextGame.getView() == null
-                    || gameViewId != privacyHistoryNextGame.getView().getId()
-                    || callbackOrdinal <= 0 || seat < 0 || seat > 1 || !gameOver || playedGames != 1
-                    || privacyHistoryNextGameTerminals.stream().anyMatch(receipt -> receipt.seat() == seat)) {
-                fail(new AssertionError("N+1 terminal callback lacks its fresh current GameView receipt"));
-                return;
-            }
-            privacyHistoryNextGameTerminals.add(new PrivacyHistoryNextGameTerminalReceipt(
-                    gameViewId, callbackOrdinal, seat, gameOver, playedGames));
-            privacyHistoryNextGameTerminalCallbacks.countDown();
-        }
+
         List<PrivacyHistoryNextGameTerminalReceipt> privacyHistoryNextGameTerminals() {
             synchronized (privacyHistoryNextGameTerminals) { return List.copyOf(privacyHistoryNextGameTerminals); }
         }
-        boolean awaitPrivacyHistoryNextGameTerminals(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyHistoryNextGameTerminalCallbacks.await(timeout, unit);
+
+        int privacyTellingTimeSeat() { return privacyTellingTimeSeat;
         }
-        int privacyTellingTimeSeat() { return privacyTellingTimeSeat; }
-        int privacyFengrafSeat() { return privacyFengrafSeat; }
+        int privacyFengrafSeat() { return privacyFengrafSeat;
+        }
         int privacyViewIdForSeat(int seat) {
             if (seat == 0) return privacyHostViewId;
             if (seat == 1) return privacyRemoteViewId;
@@ -1883,37 +1372,18 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 return;
             }
             privacyGame = game;
-            if (privacyShuffleHistoryScenario) {
-                game.subscribeToEvents(new Object() {
-                    @Subscribe public void onGameShuffle(GameEventShuffle event) {
-                        completePrivacyDayStackPassAtShuffle(game);
-                        if (stopped) return;
-                        PlayerView player = event.player();
-                        PrivacyPaymentReceipt payment = privacyPaymentReceipts().stream()
-                                .filter(receipt -> receipt.sourceCardId() == privacyDaysUndoingId)
-                                .findFirst().orElse(null);
-                        if (player == null || player.getId() != privacyHostViewId
-                                && player.getId() != privacyRemoteViewId
-                                || privacyDaysUndoingCastOrdinal <= 0 || payment == null
-                                || privacyPriorityStage != 16) {
-                            fail(new AssertionError("Day's Undoing emitted a shuffle without an assigned player identity"));
-                            return;
-                        }
-                        privacyShuffleEvents.add(new PrivacyShuffleEventReceipt(player.getId(),
-                                game.getPhaseHandler().getTurn(), game.getPhaseHandler().getPhase(),
-                                privacyDaysUndoingId, privacyDaysUndoingCastOrdinal, payment.callbackOrdinal()));
-                    }
-                });
-            }
+
         }
-        Game privacyGame() { return privacyGame; }
+        Game privacyGame() { return privacyGame;
+        }
         void retainOpeningKeepEngineGame(Game game) {
             if (game == null || !(metamorphoseScenario || privacyScenario || lifecycleScenario)) return;
             synchronized (this) {
                 if (openingKeepEngineGame == null) openingKeepEngineGame = game;
             }
         }
-        Game openingKeepEngineGame() { return openingKeepEngineGame; }
+        Game openingKeepEngineGame() { return openingKeepEngineGame;
+        }
         synchronized void recordOpeningKeepDeferred(int seat, int gameViewId, long promptOrdinal) {
             if (seat != 1 || gameViewId <= 0 || promptOrdinal <= 0 || openingKeepDeferralCount != 0) {
                 fail(new AssertionError("Opening Keep readiness gate was not one bounded remote callback"));
@@ -1924,20 +1394,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         synchronized void recordOpeningKeepGateDispatch(OpeningKeepGateReceipt receipt) {
             int expectedHandCount = privacyMulliganPrefixScenario() && receipt != null && receipt.seat() == 1 ? 6 : 7;
             boolean compositeBottom = receipt != null && receipt.londonBottomCardId() > 0;
-            if (receipt == null || openingKeepGateReceipts.size() >= openingKeepDeferralCount
-                    || receipt.seat() != 1 || receipt.gameViewId() <= 0
-                    || receipt.appliedStateLowerBoundOrdinal() <= 0
-                    || receipt.appliedCallbackOrdinal() <= receipt.appliedStateLowerBoundOrdinal()
-                    || receipt.inputType() != InputConfirmMulligan.class || receipt.handCount() != expectedHandCount
-                    || (privacyMulliganPrefixScenario() && receipt.seat() == 1) != compositeBottom
-                    || (compositeBottom && !receipt.bottomInSharedLibrary())
-                    || !receipt.sameGame() || !receipt.sameTracker() || receipt.okDispatchCount() != 1) {
+            if (receipt == null || openingKeepGateReceipts.size() >= openingKeepDeferralCount || receipt.seat() != 1 || receipt.gameViewId() <= 0 || receipt.appliedStateLowerBoundOrdinal() <= 0 || receipt.appliedCallbackOrdinal() <= receipt.appliedStateLowerBoundOrdinal() || receipt.inputType() != InputConfirmMulligan.class || receipt.handCount() != expectedHandCount || (privacyMulliganPrefixScenario() && receipt.seat() == 1) != compositeBottom || (compositeBottom && !receipt.bottomInSharedLibrary()) || !receipt.sameGame() || !receipt.sameTracker() || receipt.okDispatchCount() != 1) {
                 fail(new AssertionError("Deferred opening Keep lacks one typed same-Game applied-hand OK receipt"));
                 return;
             }
             openingKeepGateReceipts.add(receipt);
         }
-        synchronized int openingKeepDeferralCount() { return openingKeepDeferralCount; }
+
         synchronized List<OpeningKeepGateReceipt> openingKeepGateReceipts() {
             return List.copyOf(openingKeepGateReceipts);
         }
@@ -1946,66 +1409,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     openingKeepGateReceipts.stream().mapToInt(OpeningKeepGateReceipt::okDispatchCount).sum(),
                     privacyPreSendRepaintOrdinal > 0 ? 1 : 0, privacyShuffleT4RepeatedPriorityCallbacks);
         }
-        synchronized void recordPrivacyShufflePreShuffleHostHand(int seat, int viewId, int gameViewId,
-                List<Integer> handIds) {
-            if (!privacyShuffleHistoryScenario || seat != 0 || viewId != privacyHostViewId
-                    || gameViewId <= 0 || handIds == null || !handIds.contains(privacyDaysUndoingId)
-                    || privacyShufflePreShuffleGameViewId != -1) {
-                throw new AssertionError("Day's Undoing pre-shuffle hand lacks its actual assigned host priority");
-            }
-            privacyShufflePreShuffleGameViewId = gameViewId;
-            privacyShuffleHostPreShuffleHandIds = List.copyOf(handIds);
+
+        Game metamorphoseGame() { return metamorphoseGame;
         }
-        synchronized void recordPrivacyShuffleGameViewId(int seat, int viewId, int gameViewId) {
-            if (!privacyShuffleHistoryScenario || seat != 0 || viewId != privacyHostViewId
-                    || gameViewId <= 0 || privacyShuffleGameViewId != -1) {
-                throw new AssertionError("Shuffle-history scenario lacks its initial actual host GameView identity");
-            }
-            privacyShuffleGameViewId = gameViewId;
-        }
-        int privacyShuffleGameViewId() { return privacyShuffleGameViewId; }
-        synchronized void recordPrivacyShuffleTurnTwoDiscard(int seat, int viewId, int gameViewId,
-                long callbackOrdinal, InputSelectCardsFromList input, int turn,
-                PhaseType phase, int turnPlayerViewId, int stackSize, int handSize,
-                int maxHandSize, int cardId, boolean enabledOne, boolean enabledTwo) {
-            if (!privacyShuffleHistoryScenario || seat != 1 || viewId != privacyRemoteViewId
-                    || gameViewId <= 0 || gameViewId != privacyGame.getView().getId()
-                    || callbackOrdinal <= 0 || input == null
-                    || turn != 2 || phase != PhaseType.CLEANUP || turnPlayerViewId != privacyRemoteViewId
-                    || stackSize != 0 || handSize != maxHandSize + 1 || maxHandSize != 7
-                    || cardId <= 0 || privacyShuffleTurnTwoDiscardId > 0 || enabledOne || enabledTwo) {
-                throw new AssertionError("T2 cleanup discard lacks its exact actual remote hand-size boundary");
-            }
-            privacyShuffleTurnTwoDiscardId = cardId;
-            privacyShuffleTurnTwoDiscardInput = input;
-            privacyShuffleTurnTwoDiscardGameViewId = gameViewId;
-            privacyShuffleTurnTwoDiscardOrdinal = callbackOrdinal;
-            actions.add(new ActionReceipt(Decision.DISCARD_T2_CLEANUP, seat, viewId, cardId, true));
-        }
-        boolean isSamePrivacyShuffleTurnTwoDiscardPrompt(PrivacyInputSnapshot current, int gameViewId,
-                int viewId, String one, String two, boolean enabledOne, boolean enabledTwo) {
-            return current != null && current.proxyInput() == privacyShuffleTurnTwoDiscardInput
-                    && current.queuedInput() == privacyShuffleTurnTwoDiscardInput
-                    && gameViewId == privacyShuffleTurnTwoDiscardGameViewId
-                    && viewId == privacyRemoteViewId && one != null && two != null
-                    && one.equalsIgnoreCase(Localizer.getInstance().getMessage("lblOK"))
-                    && two.equalsIgnoreCase(Localizer.getInstance().getMessage("lblCancel"))
-                    && !enabledOne && !enabledTwo;
-        }
-        boolean isPrivacyShuffleTurnTwoDiscardInputGone(PrivacyInputSnapshot current, int gameViewId) {
-            return privacyShuffleTurnTwoDiscardInput != null && current != null
-                    && gameViewId == privacyShuffleTurnTwoDiscardGameViewId
-                    && current.proxyInput() != null
-                    && current.proxyInput() != privacyShuffleTurnTwoDiscardInput
-                    && !(current.proxyInput() instanceof InputSelectCardsFromList)
-                    && current.queuedInput() != privacyShuffleTurnTwoDiscardInput
-                    && !(current.queuedInput() instanceof InputSelectCardsFromList);
-        }
-        int privacyShuffleTurnTwoDiscardId() { return privacyShuffleTurnTwoDiscardId; }
-        long privacyShuffleTurnTwoDiscardOrdinal() { return privacyShuffleTurnTwoDiscardOrdinal; }
-        int privacyShufflePreShuffleGameViewId() { return privacyShufflePreShuffleGameViewId; }
-        List<Integer> privacyShuffleHostPreShuffleHandIds() { return privacyShuffleHostPreShuffleHandIds; }
-        Game metamorphoseGame() { return metamorphoseGame; }
         void enableMetamorphoseOpeningDiagnostic() { metamorphoseOpeningDiagnostic = true; }
         void retainMetamorphoseOpeningEngineGame(Game game) {
             if (!metamorphoseOpeningDiagnostic || game == null) return;
@@ -2013,113 +1419,22 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 if (metamorphoseOpeningEngineGame == null) metamorphoseOpeningEngineGame = game;
             }
         }
-        Game metamorphoseOpeningEngineGame() { return metamorphoseOpeningEngineGame; }
+        Game metamorphoseOpeningEngineGame() { return metamorphoseOpeningEngineGame;
+        }
         PrivacyInputSnapshot privacyInputSnapshotForSeat(int seat) {
             Game game = privacyGame;
-            if (game == null || seat < 0 || seat >= game.getPlayers().size()
-                    || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)) {
+            if (game == null || seat < 0 || seat >= game.getPlayers().size() || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)) {
                 return null;
             }
             return new PrivacyInputSnapshot(controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
         }
-        synchronized boolean retainPrivacyShuffleT3PriorityInput(int seat, int viewId) {
-            Game game = privacyGame;
-            if (!privacyShuffleHistoryScenario || seat != 0 || viewId != privacyHostViewId
-                    || game == null || seat >= game.getPlayers().size()
-                    || game.getPlayers().get(seat).getId() != viewId
-                    || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != game) {
-                fail(new AssertionError("T3 Day's Undoing hold lacks its assigned live host controller/Game"));
-                return false;
-            }
-            PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
-                    controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
-            if (inputs.proxyInput() == null || inputs.proxyInput() != inputs.queuedInput()
-                    || !(inputs.proxyInput() instanceof InputPassPriority input)
-                    || input.getOwner() == null || input.getOwner().getId() != viewId
-                    || privacyShuffleT3PriorityInput != null) {
-                fail(new AssertionError("T3 Day's Undoing hold lacks one exact live host InputPassPriority"));
-                return false;
-            }
-            privacyShuffleT3PriorityInput = new PrivacyShuffleT3PriorityInput(game, controller, input, viewId);
-            return true;
-        }
-        void assertSamePrivacyShuffleT3PriorityInput(int seat, int viewId, IGameController selectedController) {
-            PrivacyShuffleT3PriorityInput held = privacyShuffleT3PriorityInput;
-            if (held == null || seat != 0 || viewId != privacyHostViewId || held.ownerViewId() != viewId
-                    || !(selectedController instanceof PlayerControllerHuman controller)
-                    || controller != held.controller() || controller.getGame() != held.game()
-                    || privacyGame != held.game() || seat >= held.game().getPlayers().size()
-                    || held.game().getPlayers().get(seat).getController() != controller
-                    || held.game().getPlayers().get(seat).getId() != viewId) {
-                throw new AssertionError("Day's Undoing dispatch lost its retained host controller/Game identity");
-            }
-            PrivacyInputSnapshot current = new PrivacyInputSnapshot(
-                    controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
-            if (current.proxyInput() != held.input() || current.queuedInput() != held.input()
-                    || held.input().getOwner() == null || held.input().getOwner().getId() != viewId) {
-                throw new AssertionError("Day's Undoing dispatch lost its exact retained host InputPassPriority");
-            }
-        }
-        private boolean retainPrivacyShuffleT4PriorityInput(int seat, int viewId, int gameViewId, long ordinal,
-                ScriptedGui endpoint) {
-            Game game = privacyGame;
-            if (!privacyShuffleHistoryScenario || seat != 1 || viewId != privacyRemoteViewId
-                    || gameViewId != privacyShuffleGameViewId || ordinal <= 0
-                    || game == null || seat >= game.getPlayers().size()
-                    || game.getPlayers().get(seat).getId() != viewId
-                    || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != game || game.getView() == null
-                    || game.getView().getId() != gameViewId
-                    || game.getPhaseHandler().getTurn() != 4
-                    || game.getPhaseHandler().getPhase() != PhaseType.UPKEEP
-                    || game.getPhaseHandler().getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != privacyRemoteViewId
-                    || game.getPhaseHandler().getPriorityPlayer() == null
-                    || game.getPhaseHandler().getPriorityPlayer().getId() != privacyRemoteViewId
-                    || game.getStack() == null || !game.getStack().isEmpty()
-                    || game.isGameOver()
-                    || game.getOutcome() != null
-                    || game.getPlayers().stream().anyMatch(Player::conceded)) {
-                fail(new AssertionError("T4 held priority lacks its assigned live remote controller/GameView"));
-                return false;
-            }
-            PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
-                    controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
-            if (inputs.proxyInput() == null || inputs.proxyInput() != inputs.queuedInput()
-                    || !(inputs.proxyInput() instanceof InputPassPriority input)
-                    || input.getOwner() == null || input.getOwner().getId() != viewId
-                    || privacyShuffleT4PriorityInput != null) {
-                fail(new AssertionError("T4 held priority lacks one exact live remote InputPassPriority: "
-                        + inputs.evidence()));
-                return false;
-            }
-            privacyShuffleT4PriorityInput = new PrivacyShuffleT4PriorityInput(
-                    game, controller, input, viewId, gameViewId, ordinal, endpoint);
-            return true;
-        }
+
         private boolean isSamePrivacyShuffleT4PriorityInput(int seat, int viewId, int gameViewId,
                 long ordinal, int turn, PhaseType phase, int turnPlayerViewId, int stackSize,
                 ScriptedGui endpoint) {
             PrivacyShuffleT4PriorityInput held = privacyShuffleT4PriorityInput;
             Game game = privacyGame;
-            if (held == null || game == null || seat != 1 || viewId != privacyRemoteViewId || gameViewId != held.gameViewId()
-                    || turn != 4 || phase != PhaseType.UPKEEP || turnPlayerViewId != privacyRemoteViewId
-                    || stackSize != 0 || game != held.game() || seat >= game.getPlayers().size()
-                    || game.getPlayers().get(seat).getId() != viewId
-                    || game.getPlayers().get(seat).getController() != held.controller()
-                    || held.controller().getGame() != game || game.getView() == null
-                    || game.getView().getId() != held.gameViewId()
-                    || game.getPhaseHandler().getTurn() != 4
-                    || game.getPhaseHandler().getPhase() != PhaseType.UPKEEP
-                    || game.getPhaseHandler().getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != privacyRemoteViewId
-                    || game.getPhaseHandler().getPriorityPlayer() == null
-                    || game.getPhaseHandler().getPriorityPlayer().getId() != privacyRemoteViewId
-                    || game.getStack() == null || !game.getStack().isEmpty()
-                    || game.isGameOver()
-                    || game.getOutcome() != null
-                    || game.getPlayers().stream().anyMatch(Player::conceded)) return false;
+            if (held == null || game == null || seat != 1 || viewId != privacyRemoteViewId || gameViewId != held.gameViewId() || turn != 4 || phase != PhaseType.UPKEEP || turnPlayerViewId != privacyRemoteViewId || stackSize != 0 || game != held.game() || seat >= game.getPlayers().size() || game.getPlayers().get(seat).getId() != viewId || game.getPlayers().get(seat).getController() != held.controller() || held.controller().getGame() != game || game.getView() == null || game.getView().getId() != held.gameViewId() || game.getPhaseHandler().getTurn() != 4 || game.getPhaseHandler().getPhase() != PhaseType.UPKEEP || game.getPhaseHandler().getPlayerTurn() == null || game.getPhaseHandler().getPlayerTurn().getId() != privacyRemoteViewId || game.getPhaseHandler().getPriorityPlayer() == null || game.getPhaseHandler().getPriorityPlayer().getId() != privacyRemoteViewId || game.getStack() == null || !game.getStack().isEmpty() || game.isGameOver() || game.getOutcome() != null || game.getPlayers().stream().anyMatch(Player::conceded)) return false;
             PrivacyInputSnapshot current = new PrivacyInputSnapshot(
                     held.controller().getInputProxy().getInput(), held.controller().getInputQueue().getInput());
             boolean laterOnHeldEndpoint = endpoint == held.endpoint() && ordinal > held.callbackOrdinal();
@@ -2133,36 +1448,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     && held.input().getOwner() != null && held.input().getOwner().getId() == viewId
                     && (laterOnHeldEndpoint || replacementReplay);
         }
-        private boolean retainPrivacyHistoryReconnectHostInput(int seat, int viewId, int gameViewId, long ordinal) {
-            Game game = privacyGame;
-            if (!privacyHistoryReconnectScenario || privacyPriorityStage != 17 || seat != 0
-                    || viewId != privacyHostViewId || gameViewId != privacyShuffleGameViewId || ordinal <= 0
-                    || game == null || game.getView() == null || game.getView().getId() != gameViewId
-                    || game.getPhaseHandler().getTurn() != 4 || game.getPhaseHandler().getPhase() != PhaseType.UPKEEP
-                    || game.getPhaseHandler().getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != privacyRemoteViewId
-                    || game.getPhaseHandler().getPriorityPlayer() == null
-                    || game.getPhaseHandler().getPriorityPlayer().getId() != privacyHostViewId
-                    || game.getStack() == null || !game.getStack().isEmpty() || game.isGameOver()
-                    || game.getOutcome() != null || game.getPlayers().get(0).getId() != viewId
-                    || !(game.getPlayers().get(0).getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != game || privacyHistoryReconnectHostInput != null) {
-                fail(new AssertionError("Reconnect continuation did not reach exact live host T4 UPKEEP priority"));
-                return false;
-            }
-            PrivacyInputSnapshot current = new PrivacyInputSnapshot(
-                    controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
-            if (current.proxyInput() == null || current.proxyInput() != current.queuedInput()
-                    || !(current.proxyInput() instanceof InputPassPriority input)
-                    || input.getOwner() == null || input.getOwner().getId() != viewId) {
-                fail(new AssertionError("Host reconnect boundary lacks exact current InputPassPriority: " + current.evidence()));
-                return false;
-            }
-            privacyHistoryReconnectHostInput = new PrivacyHistoryReconnectHostInput(
-                    game, controller, input, viewId, gameViewId, ordinal);
-            return true;
-        }
-        int privacyShuffleT4RepeatedPriorityCallbacks() { return privacyShuffleT4RepeatedPriorityCallbacks; }
+
         long privacyShuffleT4FirstPriorityOrdinal() {
             PrivacyShuffleT4PriorityInput held = privacyShuffleT4PriorityInput;
             return held == null ? -1 : held.callbackOrdinal();
@@ -2172,10 +1458,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 List<Integer> privateTopIds, List<Integer> initialLibraryIds,
                 List<Integer> remoteManaIds, List<Integer> hostManaIds,
                 String expectedRevealMessage, String expectedSacrificeMessage) {
-            if (!privacyScenario || hostViewId < 0 || remoteViewId < 0 || hostViewId == remoteViewId
-                    || privateTopIds.size() != 3 || remoteManaIds.size() != 2 || hostManaIds.size() != 3
-                    || initialLibraryIds.size() <= 3
-                    || new LinkedHashSet<>(privateTopIds).size() != 3) {
+            if (!privacyScenario || hostViewId < 0 || remoteViewId < 0 || hostViewId == remoteViewId || privateTopIds.size() != 3 || remoteManaIds.size() != 2 || hostManaIds.size() != 3 || initialLibraryIds.size() <= 3 || new LinkedHashSet<>(privateTopIds).size() != 3) {
                 fail(new AssertionError("Privacy setup did not retain its finite two-seat card roles"));
                 return;
             }
@@ -2223,45 +1506,35 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             privacyObservation = observation;
         }
         synchronized void recordPrivacyAbility(PrivacyAbilityReceipt receipt) {
-            if (!privacyScenario || receipt.callbackOrdinal() <= 0
-                    || receipt.seat() == 1 && receipt.eventId() < 0
-                    || receipt.seat() == 0 && receipt.eventId() != -1) {
+            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.seat() == 1 && receipt.eventId() < 0 || receipt.seat() == 0 && receipt.eventId() != -1) {
                 fail(new AssertionError("Privacy ability callback lacks its real received-event provenance"));
                 return;
             }
             if (receipt.cardId() == privacyTellingTimeId) {
                 String expectedRole = privacyTellingTimeAbilityChoices == 0
                         ? "Telling Time initial spell choice" : "Telling Time additional-cost choice";
-                if (receipt.seat() != privacyTellingTimeSeat || receipt.abilityId() < 0
-                        || privacyPriorityStage != 6 && privacyPriorityStage != 7
-                        || privacyTellingTimeAbilityChoices >= 2 || !expectedRole.equals(receipt.role())) {
+                if (receipt.seat() != privacyTellingTimeSeat || receipt.abilityId() < 0 || privacyPriorityStage != 6 && privacyPriorityStage != 7 || privacyTellingTimeAbilityChoices >= 2 || !expectedRole.equals(receipt.role())) {
                     fail(new AssertionError("Telling Time did not receive its two finite actual ability-choice callbacks"));
                     return;
                 }
                 privacyTellingTimeAbilityChoices++;
-            } else if (privacyShuffleHistoryScenario && receipt.cardId() == privacyDaysUndoingId) {
-                if (receipt.seat() != 0 || receipt.abilityId() < 0 || privacyPriorityStage != 14
-                        || !"Day's Undoing actual host spell choice".equals(receipt.role())) {
+            } else if (false && receipt.cardId() == privacyDaysUndoingId) {
+                if (receipt.seat() != 0 || receipt.abilityId() < 0 || privacyPriorityStage != 14 || !"Day's Undoing actual host spell choice".equals(receipt.role())) {
                     fail(new AssertionError("Day's Undoing ability callback was not the actual turn-3 host spell"));
                     return;
                 }
             } else if (receipt.cardId() == privacyFengrafId) {
                 String expectedRole = privacyFengrafAbilityChoices == 0
                         ? "Haunted Fengraf activation ability" : "Haunted Fengraf additional-cost choice";
-                if (receipt.seat() != privacyFengrafSeat || receipt.abilityId() != privacyFengrafAbilityId
-                        || privacyPriorityStage != 10 || privacyFengrafAbilityChoices >= 2
-                        || !expectedRole.equals(receipt.role())) {
+                if (receipt.seat() != privacyFengrafSeat || receipt.abilityId() != privacyFengrafAbilityId || privacyPriorityStage != 10 || privacyFengrafAbilityChoices >= 2 || !expectedRole.equals(receipt.role())) {
                     fail(new AssertionError("Haunted Fengraf did not receive its two finite actual ability-choice callbacks"));
                     return;
                 }
                 privacyFengrafAbilityChoices++;
-            } else if (privacyShuffleHistoryScenario && privacyDaysUndoingCastOrdinal > 0
+            } else if (false && privacyDaysUndoingCastOrdinal > 0
                     && privacyPriorityStage == 14 && privacyHostManaIds.contains(receipt.cardId())
                     && receipt.callbackOrdinal() > privacyDaysUndoingCastOrdinal) {
-                if (receipt.seat() != 0 || receipt.abilityId() < 0 || privacyPriorityStage != 14
-                        || !"selected Island mana source".equals(receipt.role())
-                        || !privacyHistoryManaAbilityChoices.add(receipt.cardId())
-                        || !actions.stream().anyMatch(action -> action.decision() == Decision.PAY_DAYS_UNDOING
+                if (receipt.seat() != 0 || receipt.abilityId() < 0 || privacyPriorityStage != 14 || !"selected Island mana source".equals(receipt.role()) || !privacyHistoryManaAbilityChoices.add(receipt.cardId()) || !actions.stream().anyMatch(action -> action.decision() == Decision.PAY_DAYS_UNDOING
                                 && Objects.equals(action.cardId(), receipt.cardId()))) {
                     fail(new AssertionError("Day's Undoing did not use its three actual distinct host Island abilities"));
                     return;
@@ -2269,10 +1542,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             } else if (privacyRemoteManaIds.contains(receipt.cardId()) || privacyHostManaIds.contains(receipt.cardId())) {
                 int expectedSeat = privacyRemoteManaIds.contains(receipt.cardId())
                         ? privacyTellingTimeSeat : privacyFengrafSeat;
-                if (receipt.seat() != expectedSeat || receipt.abilityId() < 0
-                        || !"selected Island mana source".equals(receipt.role())
-                        || !privacyManaAbilityChoices.add(receipt.cardId())
-                        || !privacyManaSourceSelected(receipt.cardId())) {
+                if (receipt.seat() != expectedSeat || receipt.abilityId() < 0 || !"selected Island mana source".equals(receipt.role()) || !privacyManaAbilityChoices.add(receipt.cardId()) || !privacyManaSourceSelected(receipt.cardId())) {
                     fail(new AssertionError("Island mana ability did not match one distinct scripted payment source"));
                     return;
                 }
@@ -2281,19 +1551,15 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 return;
             }
             privacyAbilities.add(receipt);
-            if (receipt.cardId() == privacyTellingTimeId && receipt.seat() == privacyTellingTimeSeat
-                    && privacyPriorityStage == 6) {
+            if (receipt.cardId() == privacyTellingTimeId && receipt.seat() == privacyTellingTimeSeat && privacyPriorityStage == 6) {
                 privacyPriorityStage = 7;
             }
-            if (receipt.cardId() == privacyFengrafId && receipt.seat() == privacyFengrafSeat
-                    && privacyPriorityStage == 10) {
+            if (receipt.cardId() == privacyFengrafId && receipt.seat() == privacyFengrafSeat && privacyPriorityStage == 10) {
                 privacyFengrafAbilityChosen = true;
             }
         }
         synchronized void recordPrivacyChoice(PrivacyChoiceReceipt receipt) {
-            if (!privacyScenario || receipt.callbackOrdinal() <= 0
-                    || (receipt.seat() == 1 && receipt.eventId() < 0)
-                    || (receipt.seat() == 0 && receipt.eventId() != -1) || receipt.cardIds().isEmpty()) {
+            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || (receipt.seat() == 1 && receipt.eventId() < 0) || (receipt.seat() == 0 && receipt.eventId() != -1) || receipt.cardIds().isEmpty()) {
                 fail(new AssertionError("Private choice callback lacks its real received-event provenance"));
                 return;
             }
@@ -2321,9 +1587,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         void clearPrivacyHostChoiceActive() { privacyHostChoiceActive = false; }
         void releasePrivacyHostChoice() { privacyHostChoiceReleased.countDown(); }
         synchronized void recordPrivacyReveal(PrivacyRevealReceipt receipt) {
-            if (!privacyScenario || receipt.callbackOrdinal() <= 0
-                    || (receipt.seat() == 1 && receipt.eventId() < 0)
-                    || (receipt.seat() == 0 && receipt.eventId() != -1) || receipt.cardIds().isEmpty()) {
+            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || (receipt.seat() == 1 && receipt.eventId() < 0) || (receipt.seat() == 0 && receipt.eventId() != -1) || receipt.cardIds().isEmpty()) {
                 fail(new AssertionError("Public reveal callback lacks its real received-event provenance"));
                 return;
             }
@@ -2332,42 +1596,21 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             privacyFengrafReveal.countDown();
         }
         synchronized void recordPrivacyPrompt(PrivacyPromptReceipt receipt) {
-            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.chooserViewId() < 0
-                    || receipt.message() == null) {
+            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.chooserViewId() < 0 || receipt.message() == null) {
                 fail(new AssertionError("Privacy prompt lacked detached assigned-recipient facts"));
                 return;
             }
             privacyPrompts.add(receipt);
         }
         synchronized void observePrivacyState(PrivacyStateReceipt receipt) {
-            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.seat() != 1
-                    || privacyTopIds.size() != 3 || privacyInitialLibraryIds.size() <= 3
-                    || privacyHostViewId < 0 || privacyRemoteViewId < 0) return;
+            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.seat() != 1 || privacyTopIds.size() != 3 || privacyInitialLibraryIds.size() <= 3 || privacyHostViewId < 0 || privacyRemoteViewId < 0) return;
             if (privacyDeltaSync && (!"applyDelta".equals(receipt.callback()) || !receipt.stateBearing()
                     || receipt.sequence() < 0)) return;
             if (!privacyDeltaSync && !"setGameView".equals(receipt.callback())) return;
             Map<ZoneType, List<Integer>> host = receipt.zonesByPlayer().get(privacyHostViewId);
             Map<ZoneType, List<Integer>> remote = receipt.zonesByPlayer().get(privacyRemoteViewId);
             if (host == null || remote == null) return;
-            if (privacyShuffleHistoryScenario && receipt.turn() == 2 && receipt.phase() == PhaseType.MAIN1
-                    && receipt.turnPlayerViewId() == privacyRemoteViewId
-                    && receipt.drawnThisTurnByPlayer().getOrDefault(privacyRemoteViewId, 0) > 0) {
-                privacyShuffleTurnTwoDraw.compareAndSet(null, receipt);
-            }
-            if (privacyShuffleHistoryScenario && receipt.turn() == 3 && receipt.phase() == PhaseType.MAIN1
-                    && receipt.turnPlayerViewId() == privacyHostViewId
-                    && receipt.drawnThisTurnByPlayer().getOrDefault(privacyHostViewId, 0) > 0) {
-                if (privacyShuffleTurnThreeDraw.compareAndSet(null, receipt)) {
-                    privacyShuffleTurnThreeDrawArrived.countDown();
-                }
-            }
-            if (privacyShuffleHistoryScenario && receipt.turn() == 4 && receipt.phase() == PhaseType.UPKEEP
-                    && receipt.turnPlayerViewId() == privacyRemoteViewId && receipt.stackSize() == 0
-                    && host.get(ZoneType.Hand) != null && host.get(ZoneType.Hand).size() == 7
-                    && remote.get(ZoneType.Hand) != null && remote.get(ZoneType.Hand).size() == 7) {
-                privacyShuffleHistoryState.compareAndSet(null, receipt);
-                privacyShuffleHistoryUpkeep.countDown();
-            }
+
             List<Integer> library = host.get(ZoneType.Library);
             List<Integer> remoteLibrary = remote.get(ZoneType.Library);
             Map<ZoneType, List<Integer>> tellingTimeActor = receipt.zonesByPlayer()
@@ -2376,9 +1619,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             expectedLibrary.add(privacyTopIds.get(1));
             expectedLibrary.addAll(privacyInitialLibraryIds.subList(3, privacyInitialLibraryIds.size()));
             expectedLibrary.add(privacyTopIds.get(2));
-            if (library != null && library.equals(remoteLibrary) && library.equals(expectedLibrary)
-                    && tellingTimeActor != null && tellingTimeActor.get(ZoneType.Hand) != null
-                    && tellingTimeActor.get(ZoneType.Hand).contains(privacyTopIds.get(0))) {
+            if (library != null && library.equals(remoteLibrary) && library.equals(expectedLibrary) && tellingTimeActor != null && tellingTimeActor.get(ZoneType.Hand) != null && tellingTimeActor.get(ZoneType.Hand).contains(privacyTopIds.get(0))) {
                 privacyTellingTimeState.compareAndSet(null, receipt);
                 privacyTellingTimeResolved.countDown();
             }
@@ -2387,36 +1628,56 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             List<Integer> hand = fengrafActor == null ? null : fengrafActor.get(ZoneType.Hand);
             List<Integer> graveyard = host.get(ZoneType.Graveyard);
             long revealOrdinal = privacyRevealOrdinal;
-            if (revealOrdinal > 0 && receipt.stackSize() == 0
-                    && hand != null && hand.contains(privacyPublicCreatureId)
-                    && graveyard != null && !graveyard.contains(privacyPublicCreatureId)) {
+            if (revealOrdinal > 0 && receipt.stackSize() == 0 && hand != null && hand.contains(privacyPublicCreatureId) && graveyard != null && !graveyard.contains(privacyPublicCreatureId)) {
                 if (privacyFengrafState.compareAndSet(null, receipt)) privacyFengrafStateArrived.countDown();
             }
         }
-        boolean privacyScenario() { return privacyScenario; }
-        boolean privacyShuffleHistoryScenario() { return privacyShuffleHistoryScenario; }
-        int privacyDaysUndoingId() { return privacyDaysUndoingId; }
-        long privacyDaysUndoingCastOrdinal() { return privacyDaysUndoingCastOrdinal; }
-        int privacyHostViewId() { return privacyHostViewId; }
-        int privacyRemoteViewId() { return privacyRemoteViewId; }
-        int privacyTellingTimeId() { return privacyTellingTimeId; }
-        int privacyFengrafId() { return privacyFengrafId; }
-        int privacyFengrafAbilityId() { return privacyFengrafAbilityId; }
-        int privacyPublicCreatureId() { return privacyPublicCreatureId; }
-        int privacyTellingTimeChoiceCount() { return privacyTellingTimeChoiceCount; }
-        int privacyTellingTimeAbilityChoices() { return privacyTellingTimeAbilityChoices; }
-        int privacyFengrafAbilityChoices() { return privacyFengrafAbilityChoices; }
-        int privacyPriorityStage() { return privacyPriorityStage; }
-        int privacyExpectedManaCount() { return privacyExpectedManaCount; }
-        List<Integer> privacyTopIds() { return privacyTopIds; }
-        List<Integer> privacyInitialLibraryIds() { return privacyInitialLibraryIds; }
-        List<Integer> privacyRemoteManaIds() { return privacyRemoteManaIds; }
-        List<Integer> privacyHostManaIds() { return privacyHostManaIds; }
-        String privacyExpectedRevealMessage() { return privacyExpectedRevealMessage; }
-        String privacyExpectedSacrificeMessage() { return privacyExpectedSacrificeMessage; }
-        long privacyConfirmRepaintOrdinal() { return privacyConfirmRepaintOrdinal; }
-        boolean privacyConfirmationRepaintPending() { return privacyConfirmationRepaintPending; }
-        ReconnectObservation privacyObservation() { return privacyObservation; }
+        boolean privacyScenario() { return privacyScenario;
+        }
+
+        int privacyDaysUndoingId() { return privacyDaysUndoingId;
+        }
+
+        int privacyHostViewId() { return privacyHostViewId;
+        }
+        int privacyRemoteViewId() { return privacyRemoteViewId;
+        }
+        int privacyTellingTimeId() { return privacyTellingTimeId;
+        }
+        int privacyFengrafId() { return privacyFengrafId;
+        }
+        int privacyFengrafAbilityId() { return privacyFengrafAbilityId;
+        }
+        int privacyPublicCreatureId() { return privacyPublicCreatureId;
+        }
+        int privacyTellingTimeChoiceCount() { return privacyTellingTimeChoiceCount;
+        }
+        int privacyTellingTimeAbilityChoices() { return privacyTellingTimeAbilityChoices;
+        }
+        int privacyFengrafAbilityChoices() { return privacyFengrafAbilityChoices;
+        }
+        int privacyPriorityStage() { return privacyPriorityStage;
+        }
+        int privacyExpectedManaCount() { return privacyExpectedManaCount;
+        }
+        List<Integer> privacyTopIds() { return privacyTopIds;
+        }
+        List<Integer> privacyInitialLibraryIds() { return privacyInitialLibraryIds;
+        }
+        List<Integer> privacyRemoteManaIds() { return privacyRemoteManaIds;
+        }
+        List<Integer> privacyHostManaIds() { return privacyHostManaIds;
+        }
+        String privacyExpectedRevealMessage() { return privacyExpectedRevealMessage;
+        }
+        String privacyExpectedSacrificeMessage() { return privacyExpectedSacrificeMessage;
+        }
+        long privacyConfirmRepaintOrdinal() { return privacyConfirmRepaintOrdinal;
+        }
+        boolean privacyConfirmationRepaintPending() { return privacyConfirmationRepaintPending;
+        }
+        ReconnectObservation privacyObservation() { return privacyObservation;
+        }
         List<PrivacyChoiceReceipt> privacyChoices() { synchronized (privacyChoices) { return List.copyOf(privacyChoices); } }
         List<PrivacyAbilityReceipt> privacyAbilities() { synchronized (privacyAbilities) { return List.copyOf(privacyAbilities); } }
         List<PrivacyRevealReceipt> privacyReveals() { synchronized (privacyReveals) { return List.copyOf(privacyReveals); } }
@@ -2428,31 +1689,29 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             synchronized (privacyPaymentReceipts) { return List.copyOf(privacyPaymentReceipts); }
         }
         Map<Integer, Integer> privacyTellingTimeStartDrawCounts() { return privacyTellingTimeStartDrawCounts; }
-        long privacyTellingTimeStartDrawOrdinal() { return privacyTellingTimeStartDrawOrdinal; }
-        long privacyTellingTimeFenceOrdinal() { return privacyTellingTimeFenceOrdinal; }
-        long privacyFengrafFenceOrdinal() { return privacyFengrafFenceOrdinal; }
-        long privacyRevealOrdinal() { return privacyRevealOrdinal; }
+        long privacyTellingTimeStartDrawOrdinal() { return privacyTellingTimeStartDrawOrdinal;
+        }
+        long privacyTellingTimeFenceOrdinal() { return privacyTellingTimeFenceOrdinal;
+        }
+        long privacyFengrafFenceOrdinal() { return privacyFengrafFenceOrdinal;
+        }
+        long privacyRevealOrdinal() { return privacyRevealOrdinal;
+        }
         synchronized void recordPrivacyTellingTimeStartDrawCounts(int seat, int viewId, long ordinal,
                 int turn, PhaseType phase, Map<Integer, Integer> drawCounts) {
-            if (!privacyScenario || seat != privacyTellingTimeSeat
-                    || viewId != privacyViewIdForSeat(privacyTellingTimeSeat) || turn != 1
-                    || phase != PhaseType.MAIN1 || ordinal <= 0
-                    || drawCounts.getOrDefault(privacyHostViewId, -1) < 0
-                    || drawCounts.getOrDefault(privacyRemoteViewId, -1) < 0
-                    || privacyPriorityStage != 6 || !privacyTellingTimeCastDispatched
-                    || !privacyTellingTimeStartDrawCounts.isEmpty()) {
+            if (!privacyScenario || seat != privacyTellingTimeSeat || viewId != privacyViewIdForSeat(privacyTellingTimeSeat) || turn != 1 || phase != PhaseType.MAIN1 || ordinal <= 0 || drawCounts.getOrDefault(privacyHostViewId, -1) < 0 || drawCounts.getOrDefault(privacyRemoteViewId, -1) < 0 || privacyPriorityStage != 6 || !privacyTellingTimeCastDispatched || !privacyTellingTimeStartDrawCounts.isEmpty()) {
                 fail(new AssertionError("Telling Time draw baseline was not captured at the actual remote MAIN1 callback"));
                 return;
             }
             privacyTellingTimeStartDrawCounts = Map.copyOf(drawCounts);
             privacyTellingTimeStartDrawOrdinal = ordinal;
         }
-        PrivacyStateReceipt privacyTellingTimeState() { return privacyTellingTimeState.get(); }
-        PrivacyStateReceipt privacyFengrafState() { return privacyFengrafState.get(); }
+        PrivacyStateReceipt privacyTellingTimeState() { return privacyTellingTimeState.get();
+        }
+        PrivacyStateReceipt privacyFengrafState() { return privacyFengrafState.get();
+        }
         synchronized void recordPrivacyStackView(PrivacyStackViewReceipt receipt) {
-            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.seat() < 0 || receipt.seat() > 1
-                    || receipt.sourceCardId() < 0
-                    || receipt.activatorViewId() != privacyViewIdForSeat(receipt.sourceCardId() == privacyTellingTimeId
+            if (!privacyScenario || receipt.callbackOrdinal() <= 0 || receipt.seat() < 0 || receipt.seat() > 1 || receipt.sourceCardId() < 0 || receipt.activatorViewId() != privacyViewIdForSeat(receipt.sourceCardId() == privacyTellingTimeId
                             ? privacyTellingTimeSeat : receipt.sourceCardId() == privacyDaysUndoingId
                                     ? 0 : privacyFengrafSeat)) {
                 fail(new AssertionError("Privacy stack view receipt did not retain the assigned source and activator"));
@@ -2466,45 +1725,18 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 PrivacyPaymentReceipt payment) {
             Game game = privacyGame;
             PlayerView endpointOwner = view == null ? null : ScriptedGui.findPlayerView(view, viewId);
-            if (endpoint == null || endpoint.seat != seat || endpoint.remote != (seat == 1)
-                    || endpointController == null || endpointOwner == null || view == null || ordinal <= 0 || game == null
-                    || game.isGameOver() || game.getOutcome() != null
-                    || game.getPlayers().stream().anyMatch(Player::conceded)
-                    || seat < 0 || seat >= game.getPlayers().size()
-                    || game.getPlayers().get(seat).getId() != viewId
-                    || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != game || game.getView() == null
-                    || game.getView().getId() != view.getId()
-                    || (seat == 0 && view.getGame() != game)
-                    || endpoint.getGameView() != view || view.getTracker() == null
-                    || endpoint.getGameController(endpointOwner) != endpointController
-                    || (seat == 0 && endpointController != controller)
-                    || (seat == 1 && !(endpointController instanceof NetGameController))
-                    || game.getPhaseHandler().getTurn() != turn || game.getPhaseHandler().getPhase() != phase
-                    || game.getPhaseHandler().getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != turnPlayerViewId
-                    || game.getPhaseHandler().getPriorityPlayer() == null
-                    || game.getPhaseHandler().getPriorityPlayer().getId() != viewId
-                    || game.getStack() == null || game.getStack().size() != 1
-                    || game.getStack().peekAbility() != ability || ability == null
-                    || view.getTurn() != turn || view.getPhase() != phase
-                    || view.getPlayerTurn() == null || view.getPlayerTurn().getId() != turnPlayerViewId
-                    || view.getStack() == null || view.getStack().size() != 1) {
+            if (endpoint == null || endpoint.seat != seat || endpoint.remote != (seat == 1) || endpointController == null || endpointOwner == null || view == null || ordinal <= 0 || game == null || game.isGameOver() || game.getOutcome() != null || game.getPlayers().stream().anyMatch(Player::conceded) || seat < 0 || seat >= game.getPlayers().size() || game.getPlayers().get(seat).getId() != viewId || !(game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller) || controller.getGame() != game || game.getView() == null || game.getView().getId() != view.getId() || (seat == 0 && view.getGame() != game) || endpoint.getGameView() != view || view.getTracker() == null || endpoint.getGameController(endpointOwner) != endpointController || (seat == 0 && endpointController != controller) || (seat == 1 && !(endpointController instanceof NetGameController)) || game.getPhaseHandler().getTurn() != turn || game.getPhaseHandler().getPhase() != phase || game.getPhaseHandler().getPlayerTurn() == null || game.getPhaseHandler().getPlayerTurn().getId() != turnPlayerViewId || game.getPhaseHandler().getPriorityPlayer() == null || game.getPhaseHandler().getPriorityPlayer().getId() != viewId || game.getStack() == null || game.getStack().size() != 1 || game.getStack().peekAbility() != ability || ability == null || view.getTurn() != turn || view.getPhase() != phase || view.getPlayerTurn() == null || view.getPlayerTurn().getId() != turnPlayerViewId || view.getStack() == null || view.getStack().size() != 1) {
                 fail(new AssertionError("Privacy stack prompt lost its current Game, endpoint, owner, or paid ability"));
                 return null;
             }
             StackItemView item = view.getStack().get(0);
-            if (item == null || item.getSourceCard() == null || item.getActivatingPlayer() == null
-                    || item.getSourceCard().getId() != ability.getHostCard().getId()
-                    || item.getActivatingPlayer().getId() != ability.getActivatingPlayer().getId()) {
+            if (item == null || item.getSourceCard() == null || item.getActivatingPlayer() == null || item.getSourceCard().getId() != ability.getHostCard().getId() || item.getActivatingPlayer().getId() != ability.getActivatingPlayer().getId()) {
                 fail(new AssertionError("Privacy stack prompt did not match its live ability source and activator"));
                 return null;
             }
             PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
                     controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
-            if (!(inputs.proxyInput() instanceof InputPassPriority input)
-                    || inputs.proxyInput() != inputs.queuedInput() || input.getOwner() == null
-                    || input.getOwner().getId() != viewId) {
+            if (!(inputs.proxyInput() instanceof InputPassPriority input) || inputs.proxyInput() != inputs.queuedInput() || input.getOwner() == null || input.getOwner().getId() != viewId) {
                 fail(new AssertionError("Privacy stack prompt lacks its exact current priority input"));
                 return null;
             }
@@ -2521,9 +1753,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         synchronized PrivacyPaymentReceipt snapshotPrivacyPayment(SpellAbility ability, long ordinal,
                 int sourceId, int activatorViewId) {
-            if (ability == null || ability.getHostCard() == null || ability.getActivatingPlayer() == null
-                    || ability.getHostCard().getId() != sourceId
-                    || ability.getActivatingPlayer().getId() != activatorViewId) {
+            if (ability == null || ability.getHostCard() == null || ability.getActivatingPlayer() == null || ability.getHostCard().getId() != sourceId || ability.getActivatingPlayer().getId() != activatorViewId) {
                 fail(new AssertionError("Host stack prompt did not match its live paid ability"));
                 return null;
             }
@@ -2548,15 +1778,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
                     previous.controller().getInputProxy().getInput(), previous.controller().getInputQueue().getInput());
             if (inputs.proxyInput() != previous.input() || inputs.queuedInput() != previous.input()) return false;
-            if (current.input() != previous.input() || current.game() != previous.game()
-                    || current.endpoint() != previous.endpoint() || current.view() != previous.view()
-                    || current.tracker() != previous.tracker() || current.controller() != previous.controller()
-                    || current.endpointController() != previous.endpointController()
-                    || current.seat() != previous.seat() || current.viewId() != previous.viewId()
-                    || current.turn() != previous.turn() || current.phase() != previous.phase()
-                    || current.turnPlayerViewId() != previous.turnPlayerViewId()
-                    || current.ability() != previous.ability()
-                    || !samePrivacyPaymentFacts(current.payment(), previous.payment())) {
+            if (current.input() != previous.input() || current.game() != previous.game() || current.endpoint() != previous.endpoint() || current.view() != previous.view() || current.tracker() != previous.tracker() || current.controller() != previous.controller() || current.endpointController() != previous.endpointController() || current.seat() != previous.seat() || current.viewId() != previous.viewId() || current.turn() != previous.turn() || current.phase() != previous.phase() || current.turnPlayerViewId() != previous.turnPlayerViewId() || current.ability() != previous.ability() || !samePrivacyPaymentFacts(current.payment(), previous.payment())) {
                 fail(new AssertionError("Repeated privacy stack callback changed its retained current input context"));
                 return true;
             }
@@ -2570,16 +1792,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (previous != null) {
                 PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
                         previous.controller().getInputProxy().getInput(), previous.controller().getInputQueue().getInput());
-                if (inputs.proxyInput() == previous.input() || inputs.queuedInput() == previous.input()
-                        || !privacyStackPriorityDispatchInvoked || !isPrivacyStackLifecycleBound(previous)) {
+                if (inputs.proxyInput() == previous.input() || inputs.queuedInput() == previous.input() || !privacyStackPriorityDispatchInvoked || !isPrivacyStackLifecycleBound(previous)) {
                     fail(new AssertionError("Privacy stack advanced before its exact input was consumed and dispatched"));
                     return false;
                 }
-                if (privacyShuffleHistoryScenario && previous.ability().getHostCard().getId() == privacyDaysUndoingId
-                        && privacyHistoryStackPasses >= 1) {
-                    fail(new AssertionError("Day's Undoing stack passed without its actual shuffle completion callback"));
-                    return false;
-                }
+
                 completePrivacyStackPass(previous);
                 if (stopped) return false;
             }
@@ -2592,11 +1809,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (previous == null) return true;
             PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
                     previous.controller().getInputProxy().getInput(), previous.controller().getInputQueue().getInput());
-            if (inputs.proxyInput() == previous.input() || inputs.queuedInput() == previous.input()
-                    || !privacyStackPriorityDispatchInvoked
-                    || !isPrivacyStackLifecycleBound(previous)
-                    || privacyShuffleHistoryScenario
-                            && previous.ability().getHostCard().getId() == privacyDaysUndoingId) {
+            if (inputs.proxyInput() == previous.input() || inputs.queuedInput() == previous.input() || !privacyStackPriorityDispatchInvoked || !isPrivacyStackLifecycleBound(previous)) {
                 fail(new AssertionError("Next privacy priority arrived before the retained stack action was consumed"));
                 return false;
             }
@@ -2607,8 +1820,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         synchronized void reserveAndDispatchPrivacyStackPass(PrivacyStackPriorityCheckpoint checkpoint,
                 Runnable action) {
-            if (privacyStackPriorityCheckpoint != checkpoint || privacyStackPriorityDispatchInvoked
-                    || !isCurrentPrivacyStackPriority(checkpoint)) {
+            if (privacyStackPriorityCheckpoint != checkpoint || privacyStackPriorityDispatchInvoked || !isCurrentPrivacyStackPriority(checkpoint)) {
                 fail(new AssertionError("Privacy stack pass lost its exact reserved current input"));
                 return;
             }
@@ -2623,32 +1835,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private boolean isCurrentPrivacyStackPriority(PrivacyStackPriorityCheckpoint checkpoint) {
             Game game = checkpoint.game();
             PlayerView endpointOwner = ScriptedGui.findPlayerView(checkpoint.view(), checkpoint.viewId());
-            if (privacyGame != game || game.isGameOver() || game.getOutcome() != null
-                    || game.getPlayers().stream().anyMatch(Player::conceded)
-                    || game.getView() == null || game.getView().getId() != checkpoint.view().getId()
-                    || game.getPhaseHandler().getTurn() != checkpoint.turn()
-                    || game.getPhaseHandler().getPhase() != checkpoint.phase()
-                    || game.getPhaseHandler().getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != checkpoint.turnPlayerViewId()
-                    || game.getPhaseHandler().getPriorityPlayer() == null
-                    || game.getPhaseHandler().getPriorityPlayer().getId() != checkpoint.viewId()
-                    || game.getStack() == null || game.getStack().size() != 1
-                    || game.getStack().peekAbility() != checkpoint.ability()
-                    || game.getPlayers().get(checkpoint.seat()).getController() != checkpoint.controller()
-                    || checkpoint.controller().getGame() != game
-                    || endpointOwner == null
-                    || checkpoint.endpoint().getGameView() != checkpoint.view()
-                    || checkpoint.view().getTracker() != checkpoint.tracker()
-                    || checkpoint.view().getTurn() != checkpoint.turn()
-                    || checkpoint.view().getPhase() != checkpoint.phase()
-                    || checkpoint.view().getPlayerTurn() == null
-                    || checkpoint.view().getPlayerTurn().getId() != checkpoint.turnPlayerViewId()
-                    || checkpoint.view().getStack() == null || checkpoint.view().getStack().size() != 1
-                    || checkpoint.endpoint().getGameController(endpointOwner) != checkpoint.endpointController()) return false;
+            if (privacyGame != game || game.isGameOver() || game.getOutcome() != null || game.getPlayers().stream().anyMatch(Player::conceded) || game.getView() == null || game.getView().getId() != checkpoint.view().getId() || game.getPhaseHandler().getTurn() != checkpoint.turn() || game.getPhaseHandler().getPhase() != checkpoint.phase() || game.getPhaseHandler().getPlayerTurn() == null || game.getPhaseHandler().getPlayerTurn().getId() != checkpoint.turnPlayerViewId() || game.getPhaseHandler().getPriorityPlayer() == null || game.getPhaseHandler().getPriorityPlayer().getId() != checkpoint.viewId() || game.getStack() == null || game.getStack().size() != 1 || game.getStack().peekAbility() != checkpoint.ability() || game.getPlayers().get(checkpoint.seat()).getController() != checkpoint.controller() || checkpoint.controller().getGame() != game || endpointOwner == null || checkpoint.endpoint().getGameView() != checkpoint.view() || checkpoint.view().getTracker() != checkpoint.tracker() || checkpoint.view().getTurn() != checkpoint.turn() || checkpoint.view().getPhase() != checkpoint.phase() || checkpoint.view().getPlayerTurn() == null || checkpoint.view().getPlayerTurn().getId() != checkpoint.turnPlayerViewId() || checkpoint.view().getStack() == null || checkpoint.view().getStack().size() != 1 || checkpoint.endpoint().getGameController(endpointOwner) != checkpoint.endpointController()) return false;
             StackItemView item = checkpoint.view().getStack().get(0);
-            if (item == null || item.getSourceCard() == null || item.getActivatingPlayer() == null
-                    || item.getSourceCard().getId() != checkpoint.ability().getHostCard().getId()
-                    || item.getActivatingPlayer().getId() != checkpoint.ability().getActivatingPlayer().getId()) return false;
+            if (item == null || item.getSourceCard() == null || item.getActivatingPlayer() == null || item.getSourceCard().getId() != checkpoint.ability().getHostCard().getId() || item.getActivatingPlayer().getId() != checkpoint.ability().getActivatingPlayer().getId()) return false;
             if (checkpoint.payment() != null) {
                 PrivacyPaymentReceipt currentPayment = snapshotPrivacyPayment(checkpoint.ability(),
                         checkpoint.payment().callbackOrdinal(), checkpoint.payment().sourceCardId(),
@@ -2677,32 +1866,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     && owner != null
                     && checkpoint.endpoint().getGameController(owner) == checkpoint.endpointController();
         }
-        synchronized void completePrivacyDayStackPassAtShuffle(Game game) {
-            PrivacyStackPriorityCheckpoint previous = privacyStackPriorityCheckpoint;
-            if (previous == null) {
-                if (privacyPriorityStage == 16 && privacyHistoryStackPasses == 2) return;
-                fail(new AssertionError("Day's Undoing shuffle lacked its retained final stack input"));
-                return;
-            }
-            PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
-                    previous.controller().getInputProxy().getInput(), previous.controller().getInputQueue().getInput());
-            boolean paidAbilityRetained = privacyPaymentBindings.stream().anyMatch(binding ->
-                    binding.ability() == previous.ability()
-                            && binding.receipt().sourceCardId() == privacyDaysUndoingId);
-            if (game != privacyGame || previous.game() != game
-                    || previous.ability().getHostCard().getId() != privacyDaysUndoingId
-                    || privacyPriorityStage != 15 || privacyHistoryStackPasses != 1
-                    || !privacyStackPriorityDispatchInvoked || !paidAbilityRetained
-                    || !isPrivacyStackLifecycleBound(previous)
-                    || inputs.proxyInput() == previous.input() || inputs.queuedInput() == previous.input()) {
-                fail(new AssertionError("Day's Undoing shuffle did not follow its consumed paid priority input"));
-                return;
-            }
-            privacyHistoryStackPasses++;
-            privacyPriorityStage = 16;
-            privacyStackPriorityCheckpoint = null;
-            privacyStackPriorityDispatchInvoked = false;
-        }
+
         private void completePrivacyStackPass(PrivacyStackPriorityCheckpoint checkpoint) {
             int sourceId = checkpoint.ability().getHostCard().getId();
             if (sourceId == privacyTellingTimeId) {
@@ -2711,11 +1875,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             } else if (sourceId == privacyFengrafId) {
                 privacyFengrafStackPasses++;
                 if (privacyFengrafStackPasses == 2) privacyPriorityStage = 12;
-            } else if (privacyShuffleHistoryScenario && sourceId == privacyDaysUndoingId) {
-                privacyHistoryStackPasses++;
-            } else {
+            } else
                 fail(new AssertionError("Consumed privacy stack pass lost its paid ability identity"));
-            }
+
         }
         private static boolean samePrivacyPaymentFacts(PrivacyPaymentReceipt first, PrivacyPaymentReceipt second) {
             if (first == null || second == null) return first == second;
@@ -2737,34 +1899,19 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 fail(new AssertionError("Privacy payment receipt changed its retained paid ability or immutable facts"));
                 return;
             }
-            if (!privacyScenario || receipt.seat() != 0 || receipt.chooserViewId() != privacyHostViewId
-                    || receipt.callbackOrdinal() <= 0 || receipt.abilityId() < 0
-                    || ability == null || ability.getId() != receipt.abilityId()
-                    || (receipt.sourceCardId() != privacyTellingTimeId && receipt.sourceCardId() != privacyFengrafId
-                            && (!privacyShuffleHistoryScenario || receipt.sourceCardId() != privacyDaysUndoingId))
-                    || receipt.activatorViewId() != privacyViewIdForSeat(receipt.sourceCardId() == privacyTellingTimeId
-                            ? privacyTellingTimeSeat : privacyFengrafSeat)
-                    || privacyPaymentReceipts.stream().anyMatch(existing -> existing.sourceCardId() == receipt.sourceCardId())) {
+            if (!privacyScenario || receipt.seat() != 0 || receipt.chooserViewId() != privacyHostViewId || receipt.callbackOrdinal() <= 0 || receipt.abilityId() < 0 || ability == null || ability.getId() != receipt.abilityId() || (receipt.sourceCardId() != privacyTellingTimeId && receipt.sourceCardId() != privacyFengrafId
+                            && (!false || receipt.sourceCardId() != privacyDaysUndoingId)) || receipt.activatorViewId() != privacyViewIdForSeat(receipt.sourceCardId() == privacyTellingTimeId
+                            ? privacyTellingTimeSeat : privacyFengrafSeat) || privacyPaymentReceipts.stream().anyMatch(existing -> existing.sourceCardId() == receipt.sourceCardId())) {
                 fail(new AssertionError("Privacy payment receipt was not one unique actual host stack checkpoint"));
                 return;
             }
             privacyPaymentReceipts.add(receipt);
             privacyPaymentBindings.add(new PrivacyPaymentBinding(ability, receipt));
-            if (privacyShuffleHistoryScenario && receipt.sourceCardId() == privacyDaysUndoingId) {
-                if (privacyPriorityStage != 14 || receipt.activatorViewId() != privacyHostViewId
-                        || receipt.payingManaSourceIds().size() != 3
-                        || !new HashSet<>(privacyHostManaIds).containsAll(receipt.payingManaSourceIds())) {
-                    fail(new AssertionError("Day's Undoing stack did not retain its actual host controller and 2U Island payment"));
-                    return;
-                }
-                privacyPriorityStage = 15;
-            }
+
         }
         synchronized void releasePrivacyInitialPriority() {
             PostKeepReceipt held = postKeepReceipt;
-            if (!privacyScenario || privacyPriorityStage != 0 || held == null || held.prioritySeat() != 0
-                    || held.heldTurn() != 1 || held.heldPhase() != PhaseType.UNTAP
-                    || held.heldTurnPlayerViewId() != privacyHostViewId) {
+            if (!privacyScenario || privacyPriorityStage != 0 || held == null || held.prioritySeat() != 0 || held.heldTurn() != 1 || held.heldPhase() != PhaseType.UNTAP || held.heldTurnPlayerViewId() != privacyHostViewId) {
                 fail(new AssertionError("Privacy scenario did not start at the actual host turn-1 UNTAP priority"));
                 return;
             }
@@ -2772,73 +1919,42 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             actions.add(new ActionReceipt(Decision.PASS_PRIORITY, 0, privacyHostViewId, null, true));
             releasePostKeepPriority();
         }
-        synchronized void releasePrivacyShuffleHistoryPriority() {
-            if (!privacyShuffleHistoryScenario || privacyPriorityStage != 12) {
-                fail(new AssertionError("Shuffle-history continuation requires its retained post-Fengraf priority"));
-                return;
-            }
-            privacyPriorityStage = 13;
-            actions.add(new ActionReceipt(Decision.PASS_PRIORITY, 0, privacyHostViewId, null, true));
-        }
-        synchronized void releasePrivacyShuffleHistoryT3Cast(long remoteAppliedOrdinal, int remoteGameViewId,
-                Object remoteTracker, int discardedCardId) {
-            if (!privacyShuffleHistoryScenario || privacyPriorityStage != 13
-                    || privacyShuffleHistoryT3CastOrdinal <= 0 || remoteAppliedOrdinal <= privacyShuffleTurnTwoDiscardOrdinal
-                    || remoteGameViewId != privacyShuffleGameViewId || remoteTracker == null
-                    || discardedCardId != privacyShuffleTurnTwoDiscardId) {
-                fail(new AssertionError("Day's Undoing release lacks the exact applied remote T3 discard boundary"));
-                return;
-            }
-            privacyPriorityStage = 14;
-            privacyDaysUndoingCastOrdinal = privacyShuffleHistoryT3CastOrdinal;
-            privacyExpectedManaCount = 3;
-            privacyManaSelections = 0;
-            actions.add(new ActionReceipt(Decision.CAST_DAYS_UNDOING, 0, privacyHostViewId,
-                    privacyDaysUndoingId, true));
-        }
+
         synchronized PrivacyPriorityAction routePrivacyPriority(int seat, int viewId, long ordinal,
                 int gameViewId, int turn, PhaseType phase, int turnPlayerViewId, int stackSize,
                 ScriptedGui endpoint) {
-            if (privacyShuffleHistoryScenario && privacyPriorityStage >= 13) {
-                return routePrivacyShuffleHistoryPriority(seat, viewId, ordinal, gameViewId, turn, phase,
-                        turnPlayerViewId, stackSize, endpoint);
-            }
+
             if (!privacyScenario || ordinal <= 0 || turn != 1 || phase == null || stackSize < 0) {
                 if (privacyScenario) fail(new AssertionError("Invalid privacy priority callback"));
                 return null;
             }
             if (privacyPriorityStage == 1) {
-                if (seat != 1 || viewId != privacyRemoteViewId || phase != PhaseType.UNTAP
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("remote UNTAP");
+                if (seat != 1 || viewId != privacyRemoteViewId || phase != PhaseType.UNTAP || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("remote UNTAP");
                 privacyPriorityStage = 2;
                 actions.add(new ActionReceipt(Decision.PASS_PRIORITY, seat, viewId, null, true));
                 return PrivacyPriorityAction.PASS;
             }
             if (privacyPriorityStage == 2) {
-                if (seat != 0 || viewId != privacyHostViewId || phase != PhaseType.UPKEEP
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("host UPKEEP");
+                if (seat != 0 || viewId != privacyHostViewId || phase != PhaseType.UPKEEP || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("host UPKEEP");
                 privacyPriorityStage = 3;
                 actions.add(new ActionReceipt(Decision.PASS_PRIORITY, seat, viewId, null, true));
                 return PrivacyPriorityAction.PASS;
             }
             if (privacyPriorityStage == 3) {
-                if (seat != 1 || viewId != privacyRemoteViewId || phase != PhaseType.UPKEEP
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("remote UPKEEP");
+                if (seat != 1 || viewId != privacyRemoteViewId || phase != PhaseType.UPKEEP || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("remote UPKEEP");
                 privacyPriorityStage = 4;
                 actions.add(new ActionReceipt(Decision.PASS_PRIORITY, seat, viewId, null, true));
                 return PrivacyPriorityAction.PASS;
             }
             if (privacyPriorityStage == 4) {
-                if (seat != 0 || viewId != privacyHostViewId || phase != PhaseType.MAIN1
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("host MAIN1");
+                if (seat != 0 || viewId != privacyHostViewId || phase != PhaseType.MAIN1 || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("host MAIN1");
                 if (privacyTellingTimeSeat == 0) return dispatchPrivacyTellingTime(seat, viewId);
                 privacyPriorityStage = 5;
                 actions.add(new ActionReceipt(Decision.PASS_PRIORITY, seat, viewId, null, true));
                 return PrivacyPriorityAction.PASS;
             }
             if (privacyPriorityStage == 5) {
-                if (seat != privacyTellingTimeSeat || viewId != privacyViewIdForSeat(privacyTellingTimeSeat) || phase != PhaseType.MAIN1
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 0 || privacyTellingTimeCastDispatched) {
+                if (seat != privacyTellingTimeSeat || viewId != privacyViewIdForSeat(privacyTellingTimeSeat) || phase != PhaseType.MAIN1 || turnPlayerViewId != privacyHostViewId || stackSize != 0 || privacyTellingTimeCastDispatched) {
                     return privacyPriorityFailure("remote Telling Time cast");
                 }
                 return dispatchPrivacyTellingTime(seat, viewId);
@@ -2846,8 +1962,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (privacyPriorityStage == 7) {
                 int expectedSeat = privacyTellingStackPasses == 0
                         ? privacyTellingTimeSeat : 1 - privacyTellingTimeSeat;
-                if (seat != expectedSeat || viewId != playerViewIdForSeat(seat) || phase != PhaseType.MAIN1
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 1 || privacyTellingStackPasses >= 2) {
+                if (seat != expectedSeat || viewId != playerViewIdForSeat(seat) || phase != PhaseType.MAIN1 || turnPlayerViewId != privacyHostViewId || stackSize != 1 || privacyTellingStackPasses >= 2) {
                     return privacyPriorityFailure("Telling Time stack");
                 }
                 actions.add(new ActionReceipt(Decision.PASS_PRIVACY_STACK, seat, viewId, null, true));
@@ -2885,97 +2000,23 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (privacyPriorityStage == 11) {
                 int expectedSeat = privacyFengrafStackPasses == 0
                         ? privacyFengrafSeat : 1 - privacyFengrafSeat;
-                if (seat != expectedSeat || viewId != playerViewIdForSeat(seat) || phase != PhaseType.MAIN1
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 1 || privacyFengrafStackPasses >= 2) {
+                if (seat != expectedSeat || viewId != playerViewIdForSeat(seat) || phase != PhaseType.MAIN1 || turnPlayerViewId != privacyHostViewId || stackSize != 1 || privacyFengrafStackPasses >= 2) {
                     return privacyPriorityFailure("Fengraf stack");
                 }
                 actions.add(new ActionReceipt(Decision.PASS_PRIVACY_STACK, seat, viewId, null, true));
                 return PrivacyPriorityAction.PASS_STACK;
             }
             if (privacyPriorityStage == 12) {
-                if (seat != 0 || viewId != privacyHostViewId || phase != PhaseType.MAIN1
-                        || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("post-Fengraf host priority");
+                if (seat != 0 || viewId != privacyHostViewId || phase != PhaseType.MAIN1 || turnPlayerViewId != privacyHostViewId || stackSize != 0) return privacyPriorityFailure("post-Fengraf host priority");
                 privacyFengrafFenceOrdinal = ordinal;
                 privacyFengrafResolved.countDown();
                 return PrivacyPriorityAction.HOLD_FENGRAF;
             }
             return privacyPriorityFailure("unexpected priority stage " + privacyPriorityStage);
         }
-        private PrivacyPriorityAction routePrivacyShuffleHistoryPriority(int seat, int viewId, long ordinal,
-                int gameViewId, int turn, PhaseType phase, int turnPlayerViewId, int stackSize,
-                ScriptedGui endpoint) {
-            if (ordinal <= 0 || phase == null || stackSize < 0
-                    || (seat != 0 && seat != 1) || viewId != playerViewIdForSeat(seat)) {
-                return privacyPriorityFailure("invalid shuffle-history priority");
-            }
-            if (turn == 3 && stackSize == 0 && phase == PhaseType.MAIN1
-                    && seat == 0 && turnPlayerViewId == privacyHostViewId) {
-                if (privacyPriorityStage != 13) return privacyPriorityFailure("Day's Undoing MAIN1 cast");
-                if (privacyShuffleTurnTwoDiscardId <= 0 || privacyShuffleTurnTwoDiscardOrdinal <= 0) {
-                    return privacyPriorityFailure("Day's Undoing before the actual T2 discard");
-                }
-                if (!retainPrivacyShuffleT3PriorityInput(seat, viewId) || stopped) return null;
-                privacyShuffleHistoryT3CastOrdinal = ordinal;
-                privacyShuffleHistoryT3CastHeld.countDown();
-                return PrivacyPriorityAction.HOLD_T3_SHUFFLE_CAST;
-            }
-            if (turn == 3 && stackSize == 1 && phase == PhaseType.MAIN1) {
-                if (privacyPriorityStage != 15 || privacyHistoryStackPasses >= 2) {
-                    return privacyPriorityFailure("Day's Undoing stack priority");
-                }
-                actions.add(new ActionReceipt(Decision.PASS_PRIVACY_STACK, seat, viewId, null, true));
-                return PrivacyPriorityAction.PASS_STACK;
-            }
-            if (turn == 4 && phase == PhaseType.UPKEEP && stackSize == 0
-                    && seat == 1 && turnPlayerViewId == privacyRemoteViewId) {
-                if (privacyPriorityStage == 17) {
-                    if (!isSamePrivacyShuffleT4PriorityInput(seat, viewId, gameViewId, ordinal,
-                            turn, phase, turnPlayerViewId, stackSize, endpoint)) {
-                        Game game = privacyGame;
-                        return privacyPriorityFailure("post-shuffle remote turn-4 UPKEEP changed held input/state"
-                                + ": stage=" + privacyPriorityStage + ", firstOrdinal="
-                                + privacyShuffleT4FirstPriorityOrdinal() + ", callbackOrdinal=" + ordinal
-                                + ", repeatedCallbacks=" + privacyShuffleT4RepeatedPriorityCallbacks
-                                + ", authoritativeTurn=" + (game == null ? -1 : game.getPhaseHandler().getTurn())
-                                + ", authoritativePhase=" + (game == null ? null : game.getPhaseHandler().getPhase())
-                                + ", outcomePresent=" + (game != null && game.getOutcome() != null));
-                    }
-                    privacyShuffleT4RepeatedPriorityCallbacks++;
-                    return PrivacyPriorityAction.HOLD_SHUFFLE_HISTORY;
-                }
-                if (privacyPriorityStage != 16) {
-                    return privacyPriorityFailure("post-shuffle remote turn-4 UPKEEP stage="
-                            + privacyPriorityStage + ", stackPasses=" + privacyHistoryStackPasses
-                            + ", t4FirstOrdinal=" + privacyShuffleT4FirstPriorityOrdinal()
-                            + ", t4RepeatedCallbacks=" + privacyShuffleT4RepeatedPriorityCallbacks
-                            + ", terminal=" + (privacyGame == null || privacyGame.getOutcome() != null));
-                }
-                if (!retainPrivacyShuffleT4PriorityInput(seat, viewId, gameViewId, ordinal, endpoint) || stopped) return null;
-                privacyPriorityStage = 17;
-                privacyShuffleHistoryPriorityHeld.countDown();
-                return PrivacyPriorityAction.HOLD_SHUFFLE_HISTORY;
-            }
-            if (turn == 4 && phase == PhaseType.UPKEEP && stackSize == 0 && seat == 0
-                    && turnPlayerViewId == privacyRemoteViewId) {
-                if (privacyHistoryReconnectScenario && privacyPriorityStage == 17) {
-                    if (!retainPrivacyHistoryReconnectHostInput(seat, viewId, gameViewId, ordinal) || stopped) return null;
-                    privacyHistoryReconnectHostHeld.countDown();
-                    return PrivacyPriorityAction.HOLD_HISTORY_RECONNECT_HOST;
-                }
-                actions.add(new ActionReceipt(Decision.PASS_PRIORITY, seat, viewId, null, true));
-                return PrivacyPriorityAction.PASS;
-            }
-            if (turn < 3 || turn == 3 || turn == 4
-                    && (phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP)) {
-                if (stackSize != 0) return privacyPriorityFailure("unexpected shuffle-history stack");
-                actions.add(new ActionReceipt(Decision.PASS_PRIORITY, seat, viewId, null, true));
-                return PrivacyPriorityAction.PASS;
-            }
-            return privacyPriorityFailure("unexpected shuffle-history turn/phase " + turn + "/" + phase);
-        }
+
         private PrivacyPriorityAction dispatchPrivacyTellingTime(int seat, int viewId) {
-            if (seat != privacyTellingTimeSeat || viewId != privacyViewIdForSeat(privacyTellingTimeSeat)
-                    || privacyTellingTimeCastDispatched) return privacyPriorityFailure("Telling Time actor");
+            if (seat != privacyTellingTimeSeat || viewId != privacyViewIdForSeat(privacyTellingTimeSeat) || privacyTellingTimeCastDispatched) return privacyPriorityFailure("Telling Time actor");
             privacyTellingTimeCastDispatched = true;
             privacyPriorityStage = 6;
             privacyExpectedManaCount = 2;
@@ -2996,79 +2037,16 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         boolean awaitPrivacyFengrafResolved(long timeout, TimeUnit unit) throws InterruptedException {
             return privacyFengrafResolved.await(timeout, unit);
         }
-        boolean awaitPrivacyShuffleHistoryUpkeep(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyShuffleHistoryUpkeep.await(timeout, unit);
-        }
-        boolean awaitPrivacyShuffleHistoryPriorityHeld(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyShuffleHistoryPriorityHeld.await(timeout, unit);
-        }
-        boolean awaitPrivacyHistoryReconnectHostHeld(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyHistoryReconnectHostHeld.await(timeout, unit);
-        }
-        PlayerControllerHuman privacyShuffleT4Controller() {
-            PrivacyShuffleT4PriorityInput held = privacyShuffleT4PriorityInput;
-            return held == null ? null : held.controller();
-        }
-        InputPassPriority privacyShuffleT4Input() {
-            PrivacyShuffleT4PriorityInput held = privacyShuffleT4PriorityInput;
-            return held == null ? null : held.input();
-        }
-        int privacyShuffleT4GameViewId() {
-            PrivacyShuffleT4PriorityInput held = privacyShuffleT4PriorityInput;
-            return held == null ? -1 : held.gameViewId();
-        }
-        long privacyHistoryReconnectHostCallbackOrdinal() {
-            PrivacyHistoryReconnectHostInput held = privacyHistoryReconnectHostInput;
-            return held == null ? -1 : held.callbackOrdinal();
-        }
+
         synchronized boolean isSamePrivacyShuffleT4PriorityInput() {
             PrivacyShuffleT4PriorityInput held = privacyShuffleT4PriorityInput;
-            if (held == null || privacyGame != held.game() || held.game().getPlayers().get(1).getController() != held.controller()
-                    || held.controller().getGame() != held.game() || held.game().getView() == null
-                    || held.game().getView().getId() != held.gameViewId()
-                    || held.game().getPhaseHandler().getTurn() != 4
-                    || held.game().getPhaseHandler().getPhase() != PhaseType.UPKEEP
-                    || held.game().getPhaseHandler().getPlayerTurn() == null
-                    || held.game().getPhaseHandler().getPlayerTurn().getId() != held.ownerViewId()
-                    || held.game().getPhaseHandler().getPriorityPlayer() == null
-                    || held.game().getPhaseHandler().getPriorityPlayer().getId() != held.ownerViewId()
-                    || held.game().getStack() == null || !held.game().getStack().isEmpty()
-                    || held.game().isGameOver() || held.game().getOutcome() != null) return false;
+            if (held == null || privacyGame != held.game() || held.game().getPlayers().get(1).getController() != held.controller() || held.controller().getGame() != held.game() || held.game().getView() == null || held.game().getView().getId() != held.gameViewId() || held.game().getPhaseHandler().getTurn() != 4 || held.game().getPhaseHandler().getPhase() != PhaseType.UPKEEP || held.game().getPhaseHandler().getPlayerTurn() == null || held.game().getPhaseHandler().getPlayerTurn().getId() != held.ownerViewId() || held.game().getPhaseHandler().getPriorityPlayer() == null || held.game().getPhaseHandler().getPriorityPlayer().getId() != held.ownerViewId() || held.game().getStack() == null || !held.game().getStack().isEmpty() || held.game().isGameOver() || held.game().getOutcome() != null) return false;
             PrivacyInputSnapshot current = new PrivacyInputSnapshot(
                     held.controller().getInputProxy().getInput(), held.controller().getInputQueue().getInput());
             return current.proxyInput() == held.input() && current.queuedInput() == held.input()
                     && held.input().getOwner() != null && held.input().getOwner().getId() == held.ownerViewId();
         }
-        synchronized boolean isSamePrivacyHistoryReconnectHostInput() {
-            PrivacyHistoryReconnectHostInput held = privacyHistoryReconnectHostInput;
-            if (held == null || privacyGame != held.game() || held.game().getPlayers().get(0).getController() != held.controller()
-                    || held.controller().getGame() != held.game() || held.game().getView() == null
-                    || held.game().getView().getId() != held.gameViewId()
-                    || held.game().getPhaseHandler().getTurn() != 4
-                    || held.game().getPhaseHandler().getPhase() != PhaseType.UPKEEP
-                    || held.game().getPhaseHandler().getPriorityPlayer() == null
-                    || held.game().getPhaseHandler().getPriorityPlayer().getId() != held.ownerViewId()
-                    || held.game().getPhaseHandler().getPlayerTurn() == null
-                    || held.game().getPhaseHandler().getPlayerTurn().getId() != privacyRemoteViewId
-                    || held.game().getStack() == null || !held.game().getStack().isEmpty()
-                    || held.game().isGameOver() || held.game().getOutcome() != null) return false;
-            PrivacyInputSnapshot current = new PrivacyInputSnapshot(
-                    held.controller().getInputProxy().getInput(), held.controller().getInputQueue().getInput());
-            return current.proxyInput() == held.input() && current.queuedInput() == held.input()
-                    && held.input().getOwner() != null && held.input().getOwner().getId() == held.ownerViewId();
-        }
-        boolean awaitPrivacyShuffleHistoryT3CastHeld(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyShuffleHistoryT3CastHeld.await(timeout, unit);
-        }
-        boolean awaitPrivacyShuffleTurnThreeDraw(long timeout, TimeUnit unit) throws InterruptedException {
-            return privacyShuffleTurnThreeDrawArrived.await(timeout, unit);
-        }
-        PrivacyStateReceipt privacyShuffleHistoryState() { return privacyShuffleHistoryState.get(); }
-        PrivacyStateReceipt privacyShuffleTurnTwoDraw() { return privacyShuffleTurnTwoDraw.get(); }
-        PrivacyStateReceipt privacyShuffleTurnThreeDraw() { return privacyShuffleTurnThreeDraw.get(); }
-        List<PrivacyShuffleEventReceipt> privacyShuffleEvents() {
-            synchronized (privacyShuffleEvents) { return List.copyOf(privacyShuffleEvents); }
-        }
+
         boolean awaitPrivacyFengrafState(long timeout, TimeUnit unit) throws InterruptedException {
             return privacyFengrafStateArrived.await(timeout, unit);
         }
@@ -3076,28 +2054,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             return privacyFengrafReveal.await(timeout, unit);
         }
         synchronized int nextPrivacyManaSource(int seat, int chooserViewId) {
-            if (privacyShuffleHistoryScenario && privacyPriorityStage == 14) {
-                if (seat != 0 || chooserViewId != privacyHostViewId || privacyManaSelections >= 3) {
-                    fail(new AssertionError("Day's Undoing payment exceeded its three actual host sources"));
-                    return -1;
-                }
-                for (Integer id : privacyHostManaIds) {
-                    boolean alreadySelected = actions.stream().anyMatch(action -> action.decision() == Decision.PAY_DAYS_UNDOING
-                            && Objects.equals(action.cardId(), id));
-                    if (!alreadySelected) {
-                        privacyManaSelections++;
-                        actions.add(new ActionReceipt(Decision.PAY_DAYS_UNDOING, seat, chooserViewId, id, false));
-                        return id;
-                    }
-                }
-                fail(new AssertionError("All host Islands were already selected for Day's Undoing"));
-                return -1;
-            }
+
             boolean tellingTimePayment = privacyPriorityStage < 10;
             int expectedSeat = tellingTimePayment ? privacyTellingTimeSeat : privacyFengrafSeat;
             List<Integer> ids = tellingTimePayment ? privacyRemoteManaIds : privacyHostManaIds;
-            if (!privacyScenario || seat != expectedSeat || chooserViewId != privacyViewIdForSeat(expectedSeat)
-                    || privacyExpectedManaCount <= 0 || privacyManaSelections >= privacyExpectedManaCount) {
+            if (!privacyScenario || seat != expectedSeat || chooserViewId != privacyViewIdForSeat(expectedSeat) || privacyExpectedManaCount <= 0 || privacyManaSelections >= privacyExpectedManaCount) {
                 fail(new AssertionError("Mana prompt exceeded its configured finite privacy action"));
                 return -1;
             }
@@ -3119,8 +2080,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
         }
         synchronized void beginPrivacyFengraf() {
-            if (!privacyScenario || privacyPriorityStage != 9 || !privacyFengrafActorPriorityHeld
-                    || privacyTellingTimeState.get() == null || privacyFengrafDispatchPending) {
+            if (!privacyScenario || privacyPriorityStage != 9 || !privacyFengrafActorPriorityHeld || privacyTellingTimeState.get() == null || privacyFengrafDispatchPending) {
                 fail(new AssertionError("Fengraf activation did not begin from the retained post-Telling Time priority"));
                 return;
             }
@@ -3130,8 +2090,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             privacyFengrafDispatchPending = true;
         }
         synchronized void recordPrivacyFengrafDispatch(int seat, int viewId) {
-            if (!privacyScenario || !privacyFengrafDispatchPending || seat != privacyFengrafSeat
-                    || viewId != privacyViewIdForSeat(privacyFengrafSeat)) {
+            if (!privacyScenario || !privacyFengrafDispatchPending || seat != privacyFengrafSeat || viewId != privacyViewIdForSeat(privacyFengrafSeat)) {
                 fail(new AssertionError("Fengraf was not activated by its assigned actor"));
                 return;
             }
@@ -3143,11 +2102,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (privacyFirstSacrificeInput == null && inputSnapshot != null) {
                 privacyFirstSacrificeInput = inputSnapshot.proxyInput();
             }
-            if (!privacyScenario || privacyPriorityStage != 10 || !privacyFengrafAbilityChosen
-                    || seat != privacyFengrafSeat || viewId != privacyViewIdForSeat(privacyFengrafSeat) || buttonsOrdinal <= 0
-                    || promptOrdinal <= buttonsOrdinal || !privacyExpectedSacrificeMessage.equals(message)
-                    || privacyFengrafConfirmOrdinal > 0 || !privacyConfirmationPending
-                    || !isCurrentPrivacySacrificeInput(inputSnapshot)) {
+            if (!privacyScenario || privacyPriorityStage != 10 || !privacyFengrafAbilityChosen || seat != privacyFengrafSeat || viewId != privacyViewIdForSeat(privacyFengrafSeat) || buttonsOrdinal <= 0 || promptOrdinal <= buttonsOrdinal || !privacyExpectedSacrificeMessage.equals(message) || privacyFengrafConfirmOrdinal > 0 || !privacyConfirmationPending || !isCurrentPrivacySacrificeInput(inputSnapshot)) {
                 fail(new AssertionError("Fengraf confirmation predicate failed: stage=" + privacyPriorityStage
                         + ", abilityChosen=" + privacyFengrafAbilityChosen + ", seat=" + seat
                         + ", view=" + viewId + "/" + privacyHostViewId + ", buttonsOrdinal=" + buttonsOrdinal
@@ -3175,9 +2130,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         synchronized void recordPrivacySacrificeButtons(int seat, int viewId, long ordinal,
                 String yes, String no, boolean yesEnabled, boolean noEnabled,
                 PrivacyInputSnapshot inputSnapshot) {
-            if (privacyFirstSacrificeInput == null && inputSnapshot != null
-                    && inputSnapshot.proxyInput() instanceof InputConfirm
-                    && inputSnapshot.proxyInput() == inputSnapshot.queuedInput()) {
+            if (privacyFirstSacrificeInput == null && inputSnapshot != null && inputSnapshot.proxyInput() instanceof InputConfirm && inputSnapshot.proxyInput() == inputSnapshot.queuedInput()) {
                 privacyFirstSacrificeInput = inputSnapshot.proxyInput();
             }
             boolean exactButtons = Localizer.getInstance().getMessage("lblYes").equalsIgnoreCase(yes)
@@ -3200,11 +2153,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         + (inputSnapshot == null ? "inputSnapshot=null" : inputSnapshot.evidence())));
                 return;
             }
-            if (privacyFengrafConfirmOrdinal > privacyConfirmButtonsOrdinal
-                    && !privacyConfirmationOkDispatched && privacyConfirmationOkSentNanos == 0
-                    && privacyConfirmRepaintOrdinal <= 0) {
-                if (privacyConfirmButtonsOrdinal <= 0 || ordinal <= privacyFengrafConfirmOrdinal
-                        || !privacyExpectedSacrificeMessage.equals(privacyFengrafConfirmMessage)) {
+            if (privacyFengrafConfirmOrdinal > privacyConfirmButtonsOrdinal && !privacyConfirmationOkDispatched && privacyConfirmationOkSentNanos == 0 && privacyConfirmRepaintOrdinal <= 0) {
+                if (privacyConfirmButtonsOrdinal <= 0 || ordinal <= privacyFengrafConfirmOrdinal || !privacyExpectedSacrificeMessage.equals(privacyFengrafConfirmMessage)) {
                     fail(new AssertionError("Fengraf pre-send repaint did not follow the retained exact confirmation: "
                             + "firstButtons=" + privacyConfirmButtonsOrdinal + ", confirmOrdinal="
                             + privacyFengrafConfirmOrdinal + ", repaintOrdinal=" + ordinal
@@ -3227,10 +2177,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 boolean exactPostSendInverseWindow = privacyFengrafSeat == 1
                         && privacyConfirmationOkDispatched && privacyConfirmationOkSentNanos > 0
                         && callbackNanos > privacyConfirmationOkSentNanos;
-                if (privacyConfirmationPending || privacyFengrafConfirmOrdinal <= privacyConfirmButtonsOrdinal
-                        || !privacyExpectedSacrificeMessage.equals(privacyFengrafConfirmMessage)
-                        || ordinal <= privacyFengrafConfirmOrdinal || privacyConfirmRepaintOrdinal > 0
-                        || privacyConfirmationOkDispatched && !exactPostSendInverseWindow) {
+                if (privacyConfirmationPending || privacyFengrafConfirmOrdinal <= privacyConfirmButtonsOrdinal || !privacyExpectedSacrificeMessage.equals(privacyFengrafConfirmMessage) || ordinal <= privacyFengrafConfirmOrdinal || privacyConfirmRepaintOrdinal > 0 || privacyConfirmationOkDispatched && !exactPostSendInverseWindow) {
                     fail(new AssertionError("Fengraf repeated buttons were not a single post-confirmation repaint: stage="
                             + privacyPriorityStage + ", ordinal=" + ordinal + ", firstButtons="
                             + privacyConfirmButtonsOrdinal + ", repaintOrdinal=" + privacyConfirmRepaintOrdinal
@@ -3274,19 +2221,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             return true;
         }
         synchronized void attachPrivacyClientSendObservation(ClientProtocolObservation observation) {
-            if (!privacyScenario || privacyFengrafSeat != 1 || privacyOkClientObservation != null
-                    || observation == null || !observation.privacyConfirmationOnly()) {
+            if (!privacyScenario || privacyFengrafSeat != 1 || privacyOkClientObservation != null || observation == null || !observation.privacyConfirmationOnly()) {
                 fail(new AssertionError("Invalid remote Fengraf client-send observer attachment"));
                 return;
             }
             privacyOkClientObservation = observation;
         }
         synchronized void recordPrivacySacrificeClientSend(ClientProtocolSendReceipt receipt) {
-            if (!privacyScenario || privacyFengrafSeat != 1 || !privacyConfirmationOkDispatched
-                    || privacyGame == null || receipt == null || receipt.method() != ProtocolMethod.selectButtonOk
-                    || receipt.gameViewId() == null || receipt.gameViewId() != privacyGame.getView().getId()
-                    || receipt.promptCallbackOrdinal() != privacyFengrafConfirmOrdinal
-                    || privacyConfirmationOkSentNanos != 0) {
+            if (!privacyScenario || privacyFengrafSeat != 1 || !privacyConfirmationOkDispatched || privacyGame == null || receipt == null || receipt.method() != ProtocolMethod.selectButtonOk || receipt.gameViewId() == null || receipt.gameViewId() != privacyGame.getView().getId() || receipt.promptCallbackOrdinal() != privacyFengrafConfirmOrdinal || privacyConfirmationOkSentNanos != 0) {
                 fail(new AssertionError("Remote Fengraf OK send did not match its unique live confirmation"));
                 return;
             }
@@ -3298,12 +2240,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             boolean exactPostSendInverseWindow = privacyFengrafSeat == 1
                     && privacyConfirmationOkDispatched && privacyConfirmationOkSentNanos > 0
                     && callbackNanos > privacyConfirmationOkSentNanos && privacyPostSendRepaintStage == 1;
-            if (!privacyScenario || privacyPriorityStage != 10 || !privacyFengrafAbilityChosen
-                    || !privacyConfirmationRepaintPending || promptOrdinal <= privacyConfirmRepaintOrdinal
-                    || cardId >= 0 && cardId != privacyFengrafId
-                    || !privacyExpectedSacrificeMessage.equals(message)
-                    || privacyConfirmationOkDispatched && !exactPostSendInverseWindow
-                    || !isCurrentPrivacySacrificeInput(inputSnapshot)) {
+            if (!privacyScenario || privacyPriorityStage != 10 || !privacyFengrafAbilityChosen || !privacyConfirmationRepaintPending || promptOrdinal <= privacyConfirmRepaintOrdinal || cardId >= 0 && cardId != privacyFengrafId || !privacyExpectedSacrificeMessage.equals(message) || privacyConfirmationOkDispatched && !exactPostSendInverseWindow || !isCurrentPrivacySacrificeInput(inputSnapshot)) {
                 fail(new AssertionError("Fengraf repaint did not retain the exact live confirmation: stage="
                         + privacyPriorityStage + ", promptOrdinal=" + promptOrdinal + ", repaintButtons="
                         + privacyConfirmRepaintOrdinal + ", card=" + cardId + "/" + privacyFengrafId
@@ -3317,37 +2254,53 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             privacyPostSendRepaintStage = exactPostSendInverseWindow ? 2 : 0;
         }
         synchronized void recordPrivacyConcession(int seat, int viewId) {
-            if (!privacyScenario || seat != 0 || viewId != privacyHostViewId || privacyConcessionSent
-                    || privacyFengrafState.get() == null) {
+            if (!privacyScenario || seat != 0 || viewId != privacyHostViewId || privacyConcessionSent || privacyFengrafState.get() == null) {
                 fail(new AssertionError("Privacy test terminal action lacked its real host result"));
                 return;
             }
             privacyConcessionSent = true;
             actions.add(new ActionReceipt(Decision.CONCEDE, seat, viewId, null, true));
         }
-        long privacyConfirmButtonsOrdinal() { return privacyConfirmButtonsOrdinal; }
-        long privacyPreSendRepaintOrdinal() { return privacyPreSendRepaintOrdinal; }
-        boolean privacyConfirmationPending() { return privacyConfirmationPending; }
-        String privacyFengrafConfirmMessage() { return privacyFengrafConfirmMessage; }
-        int privacyFengrafConfirmOrdinal() { return privacyFengrafConfirmOrdinal; }
-        long privacyConfirmRepaintPromptOrdinal() { return privacyConfirmRepaintPromptOrdinal; }
-        boolean privacyPostSendRepaintButtonsAccepted() { return privacyPostSendRepaintStage >= 1; }
-        boolean privacyPostSendRepaintAccepted() { return privacyPostSendRepaintStage == 2; }
-        boolean metamorphoseScenario() { return metamorphoseScenario; }
-        boolean metamorphoseAccept() { return metamorphoseAccept; }
-        int metamorphoseHostCardId() { return metamorphoseHostCardId; }
-        int metamorphoseTargetCardId() { return metamorphoseTargetCardId; }
-        int metamorphoseHandCardId() { return metamorphoseHandCardId; }
-        int metamorphoseHostViewId() { return metamorphoseHostViewId; }
-        int metamorphoseRemoteViewId() { return metamorphoseRemoteViewId; }
-        List<Integer> metamorphoseManaCardIds() { return metamorphoseManaCardIds; }
-        synchronized int metamorphoseStage() { return metamorphoseStage; }
-        int metamorphoseAssignedConcessionGameViewId() { return metamorphoseAssignedConcessionGameViewId; }
-        BufferedMetaSelectableReceipt bufferedMetaSelectableReceipt() { return bufferedMetaSelectableReceipt; }
+        long privacyConfirmButtonsOrdinal() { return privacyConfirmButtonsOrdinal;
+        }
+        long privacyPreSendRepaintOrdinal() { return privacyPreSendRepaintOrdinal;
+        }
+        boolean privacyConfirmationPending() { return privacyConfirmationPending;
+        }
+        String privacyFengrafConfirmMessage() { return privacyFengrafConfirmMessage;
+        }
+        int privacyFengrafConfirmOrdinal() { return privacyFengrafConfirmOrdinal;
+        }
+        long privacyConfirmRepaintPromptOrdinal() { return privacyConfirmRepaintPromptOrdinal;
+        }
+        boolean privacyPostSendRepaintButtonsAccepted() { return privacyPostSendRepaintStage >= 1;
+        }
+        boolean privacyPostSendRepaintAccepted() { return privacyPostSendRepaintStage == 2;
+        }
+        boolean metamorphoseScenario() { return metamorphoseScenario;
+        }
+        boolean metamorphoseAccept() { return metamorphoseAccept;
+        }
+        int metamorphoseHostCardId() { return metamorphoseHostCardId;
+        }
+        int metamorphoseTargetCardId() { return metamorphoseTargetCardId;
+        }
+        int metamorphoseHandCardId() { return metamorphoseHandCardId;
+        }
+        int metamorphoseHostViewId() { return metamorphoseHostViewId;
+        }
+        int metamorphoseRemoteViewId() { return metamorphoseRemoteViewId;
+        }
+        List<Integer> metamorphoseManaCardIds() { return metamorphoseManaCardIds;
+        }
+        synchronized int metamorphoseStage() { return metamorphoseStage;
+        }
+        int metamorphoseAssignedConcessionGameViewId() { return metamorphoseAssignedConcessionGameViewId;
+        }
+        BufferedMetaSelectableReceipt bufferedMetaSelectableReceipt() { return bufferedMetaSelectableReceipt;
+        }
         synchronized boolean recordMetamorphoseAssignedConcession(int seat, int chooserViewId, int gameViewId) {
-            if (!lifecycleScenario || !holdMetamorphoseOptional || !metamorphoseScenario
-                    || metamorphoseStage != 3 || seat != 1 || chooserViewId != metamorphoseRemoteViewId
-                    || gameViewId < 0 || metamorphoseAssignedConcessionGameViewId >= 0) {
+            if (!lifecycleScenario || !holdMetamorphoseOptional || !metamorphoseScenario || metamorphoseStage != 3 || seat != 1 || chooserViewId != metamorphoseRemoteViewId || gameViewId < 0 || metamorphoseAssignedConcessionGameViewId >= 0) {
                 fail(new AssertionError("Assigned-seat concession did not identify the held Meta game view"));
                 return false;
             }
@@ -3356,8 +2309,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             return true;
         }
         synchronized void completeMetamorphoseTerminalPresentation(int seat, int gameViewId) {
-            if (lifecycleScenario && metamorphoseLifecycleConcessionPending && seat == 1
-                    && gameViewId == metamorphoseAssignedConcessionGameViewId) {
+            if (lifecycleScenario && metamorphoseLifecycleConcessionPending && seat == 1 && gameViewId == metamorphoseAssignedConcessionGameViewId) {
                 metamorphoseLifecycleConcessionPending = false;
             }
         }
@@ -3365,12 +2317,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 int minimum, int maximum, List<Integer> cardIds, List<Integer> privateHandIds) {
             int observedViewId = view == null ? -1 : view.getId();
             boolean gameOver = view != null && view.isGameOver();
-            if (!lifecycleScenario || !metamorphoseLifecycleConcessionPending || metamorphoseStage != 3 || seat != 1
-                    || metamorphoseAssignedConcessionGameViewId < 0
-                    || observedViewId != metamorphoseAssignedConcessionGameViewId || !gameOver
-                    || callbackOrdinal <= 0 || bufferedMetaSelectableReceipt != null
-                    || minimum != 1 || maximum != 1 || !cardIds.contains(metamorphoseHandCardId)
-                    || !new LinkedHashSet<>(cardIds).equals(new LinkedHashSet<>(privateHandIds))) {
+            if (!lifecycleScenario || !metamorphoseLifecycleConcessionPending || metamorphoseStage != 3 || seat != 1 || metamorphoseAssignedConcessionGameViewId < 0 || observedViewId != metamorphoseAssignedConcessionGameViewId || !gameOver || callbackOrdinal <= 0 || bufferedMetaSelectableReceipt != null || minimum != 1 || maximum != 1 || !cardIds.contains(metamorphoseHandCardId) || !new LinkedHashSet<>(cardIds).equals(new LinkedHashSet<>(privateHandIds))) {
                 fail(new AssertionError("Buffered Meta selector lacks the actual assigned concession's terminal view: "
                         + "seat=" + seat + ",stage=" + metamorphoseStage + ",viewId=" + observedViewId
                         + ",gameOver=" + gameOver + ",concessionViewId="
@@ -3400,13 +2347,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         synchronized void recordMetamorphoseCast(int seat, int chooserViewId, int cardId, long ordinal,
                                                   List<String> abilityFacts) {
             List<MetamorphoseAbilityReceipt> prior = metamorphoseAbilityReceipts();
-            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId
-                    || cardId != metamorphoseHostCardId || ordinal <= 0
-                    || metamorphosePreCastPasses != 2
-                    || (prior.isEmpty() && (metamorphoseStage != 0 || !metamorphoseCastDispatchPending))
-                    || (prior.size() == 1 && (metamorphoseStage != 1 || metamorphoseCastDispatchPending
-                            || ordinal <= prior.get(0).callbackOrdinal()))
-                    || prior.size() > 1) {
+            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId || cardId != metamorphoseHostCardId || ordinal <= 0 || metamorphosePreCastPasses != 2 || (prior.isEmpty() && (metamorphoseStage != 0 || !metamorphoseCastDispatchPending)) || (prior.size() == 1 && (metamorphoseStage != 1 || metamorphoseCastDispatchPending
+                            || ordinal <= prior.get(0).callbackOrdinal())) || prior.size() > 1) {
                 fail(new AssertionError("Unexpected Metamorphose cast ability callback"));
                 return;
             }
@@ -3445,11 +2387,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         && metamorphoseStage == 4 && metamorphoseAccept;
                 default -> false;
             };
-            if (!metamorphoseScenario || !validPrompt || receipt.promptOrdinal() <= 0
-                    || receipt.buttonsOrdinal() <= receipt.promptOrdinal()
-                    || !Localizer.getInstance().getMessage("lblOK").equalsIgnoreCase(receipt.okLabel())
-                    || !Localizer.getInstance().getMessage("lblCancel").equalsIgnoreCase(receipt.cancelLabel())
-                    || receipt.okEnabled() || !receipt.cancelEnabled()) {
+            if (!metamorphoseScenario || !validPrompt || receipt.promptOrdinal() <= 0 || receipt.buttonsOrdinal() <= receipt.promptOrdinal() || !Localizer.getInstance().getMessage("lblOK").equalsIgnoreCase(receipt.okLabel()) || !Localizer.getInstance().getMessage("lblCancel").equalsIgnoreCase(receipt.cancelLabel()) || receipt.okEnabled() || !receipt.cancelEnabled()) {
                 fail(new AssertionError("Unexpected initial Metamorphose input buttons: " + receipt));
                 return;
             }
@@ -3461,10 +2399,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         synchronized boolean dispatchMetamorphoseCast(int seat, int chooserViewId, int turn,
                 PhaseType phase, int turnPlayerViewId, int stackSize) {
             if (metamorphoseCastDispatchPending) return false;
-            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId
-                    || turn != 1 || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId
-                    || stackSize != 0 || metamorphoseStage != 0 || metamorphoseUntapPasses != 2
-                    || metamorphosePreCastPasses != 2) {
+            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId || turn != 1 || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0 || metamorphoseStage != 0 || metamorphoseUntapPasses != 2 || metamorphosePreCastPasses != 2) {
                 fail(new AssertionError("Metamorphose was not dispatched from the assigned host's turn 1 MAIN1 empty-stack priority"));
                 return false;
             }
@@ -3479,9 +2414,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 if (seat != metamorphoseExpectedUntapSeat) return false;
                 metamorphoseUntapPassPending = false;
             }
-            if (!metamorphoseScenario || metamorphoseStage != 0 || !metamorphosePostKeepReleased
-                    || metamorphoseUntapPasses != 1 || seat != 1 || turn != 1 || phase != PhaseType.UNTAP
-                    || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0) {
+            if (!metamorphoseScenario || metamorphoseStage != 0 || !metamorphosePostKeepReleased || metamorphoseUntapPasses != 1 || seat != 1 || turn != 1 || phase != PhaseType.UNTAP || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0) {
                 fail(new AssertionError("Unexpected priority before host turn 1 UPKEEP: seat=" + seat
                         + " turn=" + turn + " phase=" + phase + " turnPlayer=" + turnPlayerViewId
                         + " stack=" + stackSize + " untapPasses=" + metamorphoseUntapPasses));
@@ -3494,7 +2427,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     playerViewIdForSeat(seat), null, true));
             return true;
         }
-        synchronized int metamorphoseUntapPasses() { return metamorphoseUntapPasses; }
+        synchronized int metamorphoseUntapPasses() { return metamorphoseUntapPasses;
+        }
         synchronized boolean recordMetamorphosePreCastPass(int seat, int turn, PhaseType phase,
                 int turnPlayerViewId, int stackSize) {
             if (metamorphoseUpkeepPassPending) {
@@ -3502,10 +2436,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 metamorphoseUpkeepPassPending = false;
             }
             int expectedSeat = metamorphosePreCastPasses;
-            if (!metamorphoseScenario || metamorphoseStage != 0 || !metamorphosePostKeepReleased
-                    || turn != 1 || phase != PhaseType.UPKEEP || turnPlayerViewId != metamorphoseHostViewId
-                    || stackSize != 0 || seat != expectedSeat || metamorphosePreCastPasses >= 2
-                    || metamorphoseUntapPasses != 2) {
+            if (!metamorphoseScenario || metamorphoseStage != 0 || !metamorphosePostKeepReleased || turn != 1 || phase != PhaseType.UPKEEP || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0 || seat != expectedSeat || metamorphosePreCastPasses >= 2 || metamorphoseUntapPasses != 2) {
                 fail(new AssertionError("Unexpected priority before the host's turn 1 MAIN1 Metamorphose cast: seat="
                         + seat + " turn=" + turn + " phase=" + phase + " turnPlayer=" + turnPlayerViewId
                         + " stack=" + stackSize + " passCount=" + metamorphosePreCastPasses));
@@ -3529,27 +2460,15 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             Game game = metamorphoseGame;
             PlayerControllerHuman controller = null;
             InputPassPriority priorityInput = null;
-            if (game != null && seat >= 0 && seat < game.getPlayers().size()
-                    && game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman human) {
+            if (game != null && seat >= 0 && seat < game.getPlayers().size() && game.getPlayers().get(seat).getController() instanceof PlayerControllerHuman human) {
                 controller = human;
                 Input proxyInput = controller.getInputProxy().getInput();
                 Input queuedInput = controller.getInputQueue().getInput();
-                if (proxyInput instanceof InputPassPriority pass && proxyInput == queuedInput
-                        && pass.getOwner() != null
-                        && pass.getOwner().getId() == game.getPlayers().get(seat).getId()) {
+                if (proxyInput instanceof InputPassPriority pass && proxyInput == queuedInput && pass.getOwner() != null && pass.getOwner().getId() == game.getPlayers().get(seat).getId()) {
                     priorityInput = pass;
                 }
             }
-            if (!metamorphoseScenario || game == null || game.getView().getId() != gameViewId
-                    || controller == null || controller.getGame() != game || priorityInput == null
-                    || game.getPlayers().get(seat).getId() != chooserViewId
-                    || metamorphoseStage < 2 || metamorphoseStage >= 7
-                    || metamorphoseStackPasses >= 2 || seat != metamorphoseStackPasses
-                    || chooserViewId != playerViewIdForSeat(seat) || ordinal <= 0 || turn != 1
-                    || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId
-                    || stackSize != 1 || stackItemId <= 0 || sourceCardId != metamorphoseHostCardId
-                    || activatorViewId != metamorphoseHostViewId || stackItemIsAbility
-                    || !targetCardIds.equals(List.of(metamorphoseTargetCardId))) {
+            if (!metamorphoseScenario || game == null || game.getView().getId() != gameViewId || controller == null || controller.getGame() != game || priorityInput == null || game.getPlayers().get(seat).getId() != chooserViewId || metamorphoseStage < 2 || metamorphoseStage >= 7 || metamorphoseStackPasses >= 2 || seat != metamorphoseStackPasses || chooserViewId != playerViewIdForSeat(seat) || ordinal <= 0 || turn != 1 || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId || stackSize != 1 || stackItemId <= 0 || sourceCardId != metamorphoseHostCardId || activatorViewId != metamorphoseHostViewId || stackItemIsAbility || !targetCardIds.equals(List.of(metamorphoseTargetCardId))) {
                 fail(new AssertionError("Priority was not for the one actual Metamorphose spell and its host-controlled target"));
                 return false;
             }
@@ -3573,8 +2492,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             return metamorphoseScenario && metamorphoseStackPasses == 1;
         }
         synchronized void recordMetamorphoseFirstStackPass(int seat, int chooserViewId) {
-            if (!holdMetamorphoseFirstStackPriority() || metamorphoseFirstStackPriorityReleased
-                    || seat != 0 || chooserViewId != metamorphoseHostViewId) {
+            if (!holdMetamorphoseFirstStackPriority() || metamorphoseFirstStackPriorityReleased || seat != 0 || chooserViewId != metamorphoseHostViewId) {
                 fail(new AssertionError("The held first Metamorphose stack priority was not answered by its host"));
                 return;
             }
@@ -3582,8 +2500,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             actions.add(new ActionReceipt(Decision.PASS_METAMORPHOSE_STACK, seat, chooserViewId, null, true));
         }
         synchronized void recordMetamorphoseManaSelection(int seat, int chooserViewId, int sourceCardId) {
-            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId
-                    || !metamorphoseManaCardIds.contains(sourceCardId)) {
+            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId || !metamorphoseManaCardIds.contains(sourceCardId)) {
                 fail(new AssertionError("Metamorphose mana selection was not an assigned host Island"));
                 return;
             }
@@ -3593,11 +2510,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 long ordinal, List<String> abilityFacts) {
             List<MetamorphoseManaAbilityReceipt> prior = metamorphoseManaAbilityReceipts();
             int expectedIndex = prior.size();
-            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId
-                    || metamorphoseStage != 2 || expectedIndex >= metamorphoseManaCardIds.size()
-                    || metamorphoseManaCardIds.get(expectedIndex) != sourceCardId || ordinal <= 0
-                    || prior.stream().anyMatch(receipt -> receipt.callbackOrdinal() >= ordinal)
-                    || abilityFacts == null || abilityFacts.size() != 1) {
+            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId || metamorphoseStage != 2 || expectedIndex >= metamorphoseManaCardIds.size() || metamorphoseManaCardIds.get(expectedIndex) != sourceCardId || ordinal <= 0 || prior.stream().anyMatch(receipt -> receipt.callbackOrdinal() >= ordinal) || abilityFacts == null || abilityFacts.size() != 1) {
                 fail(new AssertionError("Unexpected Metamorphose sole Island mana-ability callback for " + sourceCardId));
                 return;
             }
@@ -3605,11 +2518,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     sourceCardId, ordinal, abilityFacts));
         }
         synchronized void recordMetamorphoseHeldPriorityPass(int seat, int chooserViewId) {
-            if (!metamorphoseScenario || metamorphoseUntapPasses != 0 || metamorphosePreCastPasses != 0 || seat != 0
-                    || chooserViewId != metamorphoseHostViewId || postKeepReceipt == null
-                    || postKeepReceipt.prioritySeat() != seat || postKeepReceipt.heldTurn() != 1
-                    || postKeepReceipt.heldPhase() != PhaseType.UNTAP
-                    || postKeepReceipt.heldTurnPlayerViewId() != chooserViewId) {
+            if (!metamorphoseScenario || metamorphoseUntapPasses != 0 || metamorphosePreCastPasses != 0 || seat != 0 || chooserViewId != metamorphoseHostViewId || postKeepReceipt == null || postKeepReceipt.prioritySeat() != seat || postKeepReceipt.heldTurn() != 1 || postKeepReceipt.heldPhase() != PhaseType.UNTAP || postKeepReceipt.heldTurnPlayerViewId() != chooserViewId) {
                 fail(new AssertionError("Held host turn 1 untap was not the first actual Metamorphose priority"));
                 return;
             }
@@ -3622,10 +2531,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         synchronized boolean recordMetamorphoseTerminalConcession(int seat, int chooserViewId, int turn,
                 PhaseType phase, int turnPlayerViewId, int stackSize) {
             if (metamorphoseConcessionSent) return false;
-            if (!metamorphoseScenario || metamorphoseResolution.get() == null || metamorphoseStage != 7
-                    || seat != 0 || chooserViewId != metamorphoseHostViewId || turn != 1
-                    || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId
-                    || stackSize != 0) {
+            if (!metamorphoseScenario || metamorphoseResolution.get() == null || metamorphoseStage != 7 || seat != 0 || chooserViewId != metamorphoseHostViewId || turn != 1 || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0) {
                 fail(new AssertionError("Host concession was not dispatched from the actual postresolution empty-stack prompt"));
                 return false;
             }
@@ -3636,13 +2542,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         void recordMetamorphosePostResolutionPriority(long ordinal, int turn, PhaseType phase,
                 int turnPlayerViewId, int stackSize,
                 Map<Integer, Map<ZoneType, List<Integer>>> zonesByPlayer) {
-            if (!metamorphoseScenario || ordinal <= 0 || turn != 1 || phase != PhaseType.MAIN1
-                    || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0
-                    || metamorphoseStage < 6) return;
+            if (!metamorphoseScenario || ordinal <= 0 || turn != 1 || phase != PhaseType.MAIN1 || turnPlayerViewId != metamorphoseHostViewId || stackSize != 0 || metamorphoseStage < 6) return;
             Map<ZoneType, List<Integer>> host = zonesByPlayer.get(metamorphoseHostViewId);
-            if (host == null || host.get(ZoneType.Library).isEmpty()
-                    || host.get(ZoneType.Library).get(0) != metamorphoseTargetCardId
-                    || !host.get(ZoneType.Graveyard).contains(metamorphoseHostCardId)) return;
+            if (host == null || host.get(ZoneType.Library).isEmpty() || host.get(ZoneType.Library).get(0) != metamorphoseTargetCardId || !host.get(ZoneType.Graveyard).contains(metamorphoseHostCardId)) return;
             if (metamorphosePostResolutionPriority.compareAndSet(null,
                     new MetamorphosePostResolutionPriority(ordinal, zonesByPlayer))) {
                 metamorphosePostResolutionPrompt.countDown();
@@ -3655,8 +2557,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             return metamorphosePostResolutionPriority.get();
         }
         synchronized void recordMetamorphoseTargetSelected(int seat, int chooserViewId, long ordinal) {
-            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId
-                    || metamorphoseStage != 1 || ordinal <= metamorphoseTargetCallbackOrdinal) {
+            if (!metamorphoseScenario || seat != 0 || chooserViewId != metamorphoseHostViewId || metamorphoseStage != 1 || ordinal <= metamorphoseTargetCallbackOrdinal) {
                 fail(new AssertionError("Metamorphose target selection did not follow its offered target list"));
                 return;
             }
@@ -3664,9 +2565,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         synchronized void recordMetamorphoseOptional(int chooserSeat, int chooserViewId, String message, long ordinal,
                 int gameViewId, PrivacyInputSnapshot inputSnapshot) {
-            if (!metamorphoseScenario || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId
-                    || ordinal <= metamorphoseOptionalButtonsOrdinal || metamorphoseOptionalButtonsOrdinal <= 0
-                    || message == null || message.isBlank() || metamorphoseStage != 2) {
+            if (!metamorphoseScenario || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId || ordinal <= metamorphoseOptionalButtonsOrdinal || metamorphoseOptionalButtonsOrdinal <= 0 || message == null || message.isBlank() || metamorphoseStage != 2) {
                 fail(new AssertionError("Unexpected Metamorphose optional choice callback: " + chooserSeat + "/" + chooserViewId + "/" + message));
                 return;
             }
@@ -3683,10 +2582,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         synchronized void recordMetamorphoseOptionalButtons(int chooserSeat, int chooserViewId,
                 long ordinal, String yes, String no, boolean yesEnabled, boolean noEnabled) {
-            if (!metamorphoseScenario || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId
-                    || metamorphoseStage != 2 || ordinal <= 0 || !yesEnabled || !noEnabled
-                    || !Localizer.getInstance().getMessage("lblYes").equalsIgnoreCase(yes)
-                    || !Localizer.getInstance().getMessage("lblNo").equalsIgnoreCase(no)) {
+            if (!metamorphoseScenario || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 2 || ordinal <= 0 || !yesEnabled || !noEnabled || !Localizer.getInstance().getMessage("lblYes").equalsIgnoreCase(yes) || !Localizer.getInstance().getMessage("lblNo").equalsIgnoreCase(no)) {
                 fail(new AssertionError("Metamorphose optional buttons were absent or did not match actual enabled Yes/No"));
                 return;
             }
@@ -3784,16 +2680,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     "showPromptMessage", gameViewId, ordinal, chooserSeat, chooserViewId,
                     ++metamorphoseHeldOptionalRepaintCount);
         }
-        int metamorphoseHeldOptionalRepaintCount() { return metamorphoseHeldOptionalRepaintCount; }
+        int metamorphoseHeldOptionalRepaintCount() { return metamorphoseHeldOptionalRepaintCount;
+        }
         MetamorphoseHeldOptionalRepaintReceipt lastMetamorphoseHeldOptionalRepaint() {
             return lastMetamorphoseHeldOptionalRepaint;
         }
         synchronized void recordMetamorphoseTarget(int chooserSeat, int chooserViewId, long ordinal,
                                                     int minimum, int maximum, List<Integer> ids) {
-            if (!metamorphoseScenario || chooserSeat != 0 || chooserViewId != metamorphoseHostViewId
-                    || metamorphoseStage != 1 || metamorphoseAbilityReceipts().size() != 2 || minimum != 1 || maximum != 1
-                    || !ids.equals(List.of(metamorphoseTargetCardId)) || ordinal <= 0
-                    || ordinal <= metamorphoseAbilityReceipts().get(1).callbackOrdinal()) {
+            if (!metamorphoseScenario || chooserSeat != 0 || chooserViewId != metamorphoseHostViewId || metamorphoseStage != 1 || metamorphoseAbilityReceipts().size() != 2 || minimum != 1 || maximum != 1 || !ids.equals(List.of(metamorphoseTargetCardId)) || ordinal <= 0 || ordinal <= metamorphoseAbilityReceipts().get(1).callbackOrdinal()) {
                 fail(new AssertionError("Unexpected Metamorphose target selection callback: " + ids + " min=" + minimum + " max=" + maximum));
                 return;
             }
@@ -3804,10 +2698,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         synchronized void recordMetamorphoseHandChoices(int chooserSeat, int chooserViewId, long ordinal,
                                                          int minimum, int maximum, List<Integer> ids,
                                                          List<Integer> privateHandIds) {
-            if (!metamorphoseScenario || !metamorphoseAccept || chooserSeat != 1
-                    || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 4
-                    || minimum != 1 || maximum != 1 || !ids.contains(metamorphoseHandCardId)
-                    || !new LinkedHashSet<>(ids).equals(new LinkedHashSet<>(privateHandIds)) || ordinal <= 0) {
+            if (!metamorphoseScenario || !metamorphoseAccept || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 4 || minimum != 1 || maximum != 1 || !ids.contains(metamorphoseHandCardId) || !new LinkedHashSet<>(ids).equals(new LinkedHashSet<>(privateHandIds)) || ordinal <= 0) {
                 fail(new AssertionError("Unexpected Metamorphose B-hand choice list: " + ids));
                 return;
             }
@@ -3821,10 +2712,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     .filter(receipt -> receipt.stage().equals("Metamorphose private hand")
                             && receipt.seat() == chooserSeat && receipt.chooserViewId() == chooserViewId)
                     .mapToLong(SelectablesReceipt::callbackOrdinal).findFirst().orElse(-1);
-            if (!metamorphoseScenario || !metamorphoseAccept || chooserSeat != 1
-                    || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 4
-                    || ordinal <= selectableOrdinal || selectableOrdinal <= 0
-                    || offeredIds.isEmpty() || !offeredIds.contains(metamorphoseHandCardId)) {
+            if (!metamorphoseScenario || !metamorphoseAccept || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 4 || ordinal <= selectableOrdinal || selectableOrdinal <= 0 || offeredIds.isEmpty() || !offeredIds.contains(metamorphoseHandCardId)) {
                 fail(new AssertionError("Unexpected Metamorphose private hand prompt for seat " + chooserSeat));
                 return;
             }
@@ -3839,16 +2727,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         synchronized void captureMetamorphoseHandPrompt(int chooserSeat, int chooserViewId, long ordinal,
                 int gameViewId, PrivacyInputSnapshot inputSnapshot) {
-            if (metamorphoseScenario && metamorphoseAccept && chooserSeat == 1
-                    && chooserViewId == metamorphoseRemoteViewId && metamorphoseStage == 4
-                    && ordinal > 0 && metamorphoseHandAcceptedPrompt == null) {
+            if (metamorphoseScenario && metamorphoseAccept && chooserSeat == 1 && chooserViewId == metamorphoseRemoteViewId && metamorphoseStage == 4 && ordinal > 0 && metamorphoseHandAcceptedPrompt == null) {
                 metamorphoseHandAcceptedPrompt = new MetamorphoseAcceptedPrompt("private hand", chooserSeat,
                         gameViewId, ordinal, -1, inputSnapshot);
             }
         }
         synchronized void attachMetamorphoseClientSendObservation(ClientProtocolObservation observation) {
-            if (!metamorphoseScenario || metamorphoseClientSendObservation != null || observation == null
-                    || !observation.metamorphoseDiagnosticOnly()) return;
+            if (!metamorphoseScenario || metamorphoseClientSendObservation != null || observation == null || !observation.metamorphoseDiagnosticOnly()) return;
             metamorphoseClientSendObservation = observation;
         }
         synchronized void queueMetamorphoseResponse(String stage, int gameViewId, long promptOrdinal,
@@ -3939,9 +2824,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     && snapshot.proxyInput() == snapshot.queuedInput();
         }
         synchronized void recordMetamorphoseHandDispatch(int chooserSeat, int chooserViewId, long promptOrdinal) {
-            if (!metamorphoseScenario || !metamorphoseAccept || chooserSeat != 1
-                    || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 5
-                    || promptOrdinal != metamorphoseChooserCallbackOrdinal) {
+            if (!metamorphoseScenario || !metamorphoseAccept || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId || metamorphoseStage != 5 || promptOrdinal != metamorphoseChooserCallbackOrdinal) {
                 fail(new AssertionError("Metamorphose hand selection was not dispatched from the actual B chooser prompt"));
                 return;
             }
@@ -3950,8 +2833,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             metamorphoseStage = 6;
         }
         synchronized void recordMetamorphoseDecision(boolean accepted, int chooserSeat, int chooserViewId, long ordinal) {
-            if (!metamorphoseScenario || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId
-                    || accepted != metamorphoseAccept || metamorphoseStage != 3 || ordinal != metamorphoseChoiceCallbackOrdinal) {
+            if (!metamorphoseScenario || chooserSeat != 1 || chooserViewId != metamorphoseRemoteViewId || accepted != metamorphoseAccept || metamorphoseStage != 3 || ordinal != metamorphoseChoiceCallbackOrdinal) {
                 fail(new AssertionError("Metamorphose optional choice did not match the scripted decision"));
                 return;
             }
@@ -3961,10 +2843,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             metamorphoseStage = accepted ? 4 : 6;
         }
         synchronized void observeMetamorphoseState(GameView view, Capture capture, int receivingSeat) {
-            if (!metamorphoseScenario || view == null || capture == null || receivingSeat != 1
-                    || metamorphoseStage < 6 || metamorphoseResolution.get() != null) return;
-            if (!"setGameView".equals(capture.callback())
-                    && !("applyDelta".equals(capture.callback()) && capture.stateBearing())) return;
+            if (!metamorphoseScenario || view == null || capture == null || receivingSeat != 1 || metamorphoseStage < 6 || metamorphoseResolution.get() != null) return;
+            if (!"setGameView".equals(capture.callback()) && !("applyDelta".equals(capture.callback()) && capture.stateBearing())) return;
             PlayerView host = null;
             PlayerView recipient = null;
             for (PlayerView player : view.getPlayers()) {
@@ -3979,8 +2859,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             boolean expectedChoiceZone = metamorphoseAccept
                     ? recipientBattlefield.contains(metamorphoseHandCardId)
                     : recipientHand.contains(metamorphoseHandCardId);
-            if (!view.isDanDan() || library.isEmpty() || library.get(0) != metamorphoseTargetCardId
-                    || !hostGraveyard.contains(metamorphoseHostCardId) || !expectedChoiceZone) return;
+            if (!view.isDanDan() || library.isEmpty() || library.get(0) != metamorphoseTargetCardId || !hostGraveyard.contains(metamorphoseHostCardId) || !expectedChoiceZone) return;
             MetamorphoseResolutionReceipt receipt = new MetamorphoseResolutionReceipt(capture.callback(),
                     capture.sequence(), capture.callbackOrdinal(), receivingSeat, metamorphoseHostCardId,
                     metamorphoseTargetCardId, metamorphoseHandCardId, library, hostGraveyard,
@@ -4017,14 +2896,15 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         boolean awaitMetamorphoseResolved(long timeout, TimeUnit unit) throws InterruptedException {
             return metamorphoseResolved.await(timeout, unit);
         }
-        MetamorphoseResolutionReceipt metamorphoseResolution() { return metamorphoseResolution.get(); }
-        String metamorphoseOptionalMessage() { return metamorphoseOptionalMessage; }
+        MetamorphoseResolutionReceipt metamorphoseResolution() { return metamorphoseResolution.get();
+        }
+        String metamorphoseOptionalMessage() { return metamorphoseOptionalMessage;
+        }
         List<SelectablesReceipt> selectablesReceipts() { synchronized (selectablesReceipts) { return List.copyOf(selectablesReceipts); } }
         List<HumanChoiceReceipt> humanChoiceReceipts() { synchronized (humanChoiceReceipts) { return List.copyOf(humanChoiceReceipts); } }
         synchronized void recordOpeningKeep(int seat, int viewId, long ordinal, int gameViewId,
                                String callback, String scriptStep, List<Integer> handIds, String snapshotDiagnostic) {
-            if ((metamorphoseScenario || privacyScenario)
-                    && (handIds.size() != (privacyMulliganPrefixScenario() ? (seat == 0 ? 7 : 6) : 7)
+            if ((metamorphoseScenario || privacyScenario) && (handIds.size() != (privacyMulliganPrefixScenario() ? (seat == 0 ? 7 : 6) : 7)
                     || ordinal <= 0 || seat < 0 || seat > 1)) {
                 boolean opening;
                 synchronized (keepOpeningReceipts) {
@@ -4042,205 +2922,17 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         List<KeepOpeningReceipt> keepOpeningReceipts() { synchronized (keepOpeningReceipts) { return List.copyOf(keepOpeningReceipts); } }
         void configureReconnectScenario() { reconnectScenario = true; }
-        boolean reconnectScenario() { return reconnectScenario; }
-        void configureDisconnectAiScenario() { disconnectAiScenario = true; }
-        void armDisconnectAiGameNPriority(Game game, PlayerControllerHuman controller, ScriptedGui endpoint) {
-            disconnectAiGameNPriority = new DisconnectAiNextGameHeldPriority(game, controller, null,
-                    controller, endpoint, controller.getPlayer().getId(), game.getView().getId());
+        boolean reconnectScenario() { return reconnectScenario;
         }
-        synchronized boolean holdDisconnectAiGameNPriority(GameView view, int seat, int chooserViewId,
-                long callbackOrdinal, ScriptedGui endpoint, IGameController endpointController) {
-            DisconnectAiNextGameHeldPriority held = disconnectAiGameNPriority;
-            if (held == null || view == null || view.getGame() != held.game()
-                    || view.getId() != held.gameViewId() || seat != 0 || chooserViewId != held.ownerViewId()
-                    || view.getTurn() < 3 || view.getPhase() != PhaseType.MAIN1) return false;
-            PlayerControllerHuman controller = held.controller();
-            Input proxy = controller.getInputProxy().getInput();
-            if (endpoint != held.endpoint() || endpointController != held.endpointController()
-                    || callbackOrdinal <= 0 || !(proxy instanceof InputPassPriority input)
-                    || proxy != controller.getInputQueue().getInput()
-                    || input.getOwner() == null || input.getOwner().getId() != held.ownerViewId()) {
-                fail(new AssertionError("Game N takeover priority lost its exact host input binding"));
-                return true;
-            }
-            if (held.input() == null) {
-                disconnectAiGameNPriority = new DisconnectAiNextGameHeldPriority(held.game(), controller,
-                        input, endpointController, endpoint, chooserViewId, view.getId());
-            }
-            if (!isSameDisconnectAiGameNPriority(held.game(), controller, endpoint)) {
-                fail(new AssertionError("Game N takeover priority changed before concession"));
-            }
-            return true;
-        }
-        synchronized boolean isSameDisconnectAiGameNPriority(Game game,
-                PlayerControllerHuman controller, ScriptedGui endpoint) {
-            DisconnectAiNextGameHeldPriority held = disconnectAiGameNPriority;
-            if (held == null || held.input() == null || held.game() != game || held.controller() != controller
-                    || held.endpoint() != endpoint || controller.getGame() != game || controller.getGui() != endpoint
-                    || game.isGameOver() || game.getOutcome() != null || game.getPlayers().size() != 2
-                    || game.getCardsInGame().size() != 80 || !game.getStack().isEmpty()
-                    || game.getPhaseHandler().getTurn() < 3 || game.getPhaseHandler().getPhase() != PhaseType.MAIN1
-                    || game.getPhaseHandler().getPlayerTurn() != controller.getPlayer()
-                    || game.getPhaseHandler().getPriorityPlayer() != controller.getPlayer()) return false;
-            GameView view = endpoint.getGameView();
-            PlayerView owner = ScriptedGui.findPlayerView(view, held.ownerViewId());
-            return view != null && view.getGame() == game && view.getId() == held.gameViewId()
-                    && owner != null && endpoint.getGameController(owner) == held.endpointController()
-                    && controller.getInputProxy().getInput() == held.input()
-                    && controller.getInputQueue().getInput() == held.input();
-        }
-        boolean disconnectAiScenario() { return disconnectAiScenario; }
-        synchronized void armDisconnectAiNextGamePreparation(Game oldGame) {
-            if (!disconnectAiScenario || disconnectAiNextGameOrigin != null) {
-                throw new AssertionError("disconnect-to-AI next-game preparation may be armed once in its fixture");
-            }
-            disconnectAiNextGameOrigin = Objects.requireNonNull(oldGame);
-        }
-        void observeDisconnectAiNextGameView(GameView view, boolean hostView) {
-            Game oldGame = disconnectAiNextGameOrigin;
-            if (!hostView || oldGame == null || view == null || view.getGame() == oldGame) return;
-            synchronized (this) {
-                if (disconnectAiNextGamePreparationReceipt != null) return;
-                Game nextGame = Objects.requireNonNull(view.getGame(), "N+1 GameView retains its actual Game");
-                if (nextGame == oldGame) throw new AssertionError("disconnect-to-AI N+1 reused Game N");
-                disconnectAiNextGamePreparationReceipt =
-                        new DisconnectAiNextGamePreparationReceipt(oldGame, nextGame);
-                nextGame.subscribeToEvents(disconnectAiNextGamePreparationReceipt);
-            }
-        }
-        DisconnectAiNextGamePreparationReceipt disconnectAiNextGamePreparationReceipt() {
-            return disconnectAiNextGamePreparationReceipt;
-        }
-        void recordDisconnectAiPriority(int gameViewId, int seat, int chooserViewId,
-                long callbackOrdinal, int turn, PhaseType phase, int turnPlayerViewId) {
-            DisconnectAiNextGamePreparationReceipt preparation = disconnectAiNextGamePreparationReceipt;
-            if (disconnectAiScenario && preparation != null
-                    && preparation.game().getView().getId() == gameViewId) {
-                disconnectAiNextGamePriorities.add(new DisconnectAiPriorityReceipt(gameViewId, seat,
-                        chooserViewId, callbackOrdinal, turn, phase, turnPlayerViewId));
-            }
-        }
-        synchronized boolean holdDisconnectAiNextGamePriority(GameView view, int seat, int chooserViewId,
-                long callbackOrdinal, ScriptedGui endpoint, IGameController endpointController) {
-            DisconnectAiNextGamePreparationReceipt preparation = disconnectAiNextGamePreparationReceipt;
-            if (!disconnectAiScenario || preparation == null || view == null) return false;
-            Game game = preparation.game();
-            if (game.getView() == null || view.getId() != game.getView().getId()
-                    || view.getGame() != game) return false;
-            DisconnectAiNextGameHeldPriority held = disconnectAiNextGameHeldPriority;
-            if (held == null && (seat != 0 || game.getPhaseHandler().getTurn() != 1
-                    || game.getPhaseHandler().getPhase() != PhaseType.MAIN1
-                    || game.getPhaseHandler().getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != chooserViewId)) return false;
-            if (seat != 0 || endpoint == null || endpoint.remote || chooserViewId != endpoint.ownPlayerViewId
-                    || game.getPlayers().size() != 2 || game.getPlayers().get(0).getId() != chooserViewId
-                    || view.getId() != game.getView().getId()
-                    || game.getCardsInGame().size() != 80 || game.isGameOver() || game.getOutcome() != null
-                    || game.getStack() == null || !game.getStack().isEmpty()
-                    || game.getPhaseHandler().getTurn() != 1 || game.getPhaseHandler().getPhase() != PhaseType.MAIN1
-                    || view.getTurn() != 1 || view.getPhase() != PhaseType.MAIN1
-                    || game.getPhaseHandler().getPriorityPlayer() != game.getPlayers().get(0)
-                    || game.getPhaseHandler().getPlayerTurn() == null || view.getPlayerTurn() == null
-                    || game.getPhaseHandler().getPlayerTurn().getId() != view.getPlayerTurn().getId()) {
-                fail(new AssertionError("N+1 held host priority did not match the current two-player Game, view, and empty-stack state"));
-                return true;
-            }
-            if (!(game.getPlayers().get(0).getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != game || controller.getGui() != endpoint
-                    || endpointController != controller) {
-                fail(new AssertionError("N+1 held host priority lost its assigned live Game/controller binding"));
-                return true;
-            }
-            PlayerView endpointOwner = ScriptedGui.findPlayerView(view, chooserViewId);
-            if (endpointOwner == null || endpoint.getGameController(endpointOwner) != endpointController) {
-                fail(new AssertionError("N+1 held host priority lost its current endpoint controller binding"));
-                return true;
-            }
-            Input proxy = controller.getInputProxy().getInput();
-            Input queued = controller.getInputQueue().getInput();
-            if (!(proxy instanceof InputPassPriority input) || proxy != queued
-                    || input.getOwner() == null || input.getOwner().getId() != chooserViewId
-                    || callbackOrdinal <= 0) {
-                fail(new AssertionError("N+1 host priority lacks one exact current InputPassPriority"));
-                return true;
-            }
-            if (held == null) {
-                disconnectAiNextGameHeldPriority = new DisconnectAiNextGameHeldPriority(game,
-                        controller, input, endpointController, endpoint, chooserViewId,
-                        view.getId());
-                return true;
-            }
-            if (held.game() == game && held.controller() == controller && held.input() == input
-                    && held.endpointController() == endpointController && held.endpoint() == endpoint
-                    && held.ownerViewId() == chooserViewId && held.gameViewId() == view.getId()) return true;
-            fail(new AssertionError("Repeated N+1 host priority changed its retained Game/controller/input"));
-            return true;
-        }
-        synchronized boolean isSameDisconnectAiNextGamePriority(Game game,
-                PlayerControllerHuman controller, ScriptedGui endpoint) {
-            DisconnectAiNextGameHeldPriority held = disconnectAiNextGameHeldPriority;
-            if (held == null || held.game() != game || held.controller() != controller
-                    || held.endpoint() != endpoint || game.getView() == null
-                    || game.getView().getId() != held.gameViewId()
-                    || game.getCardsInGame().size() != 80
-                    || game.getPlayers().size() != 2 || game.getPlayers().get(0).getController() != controller
-                    || controller.getGame() != game || controller.getGui() != endpoint
-                    || game.isGameOver() || game.getOutcome() != null || !game.getStack().isEmpty()
-                    || game.getPhaseHandler().getTurn() != 1 || game.getPhaseHandler().getPhase() != PhaseType.MAIN1
-                    || game.getPhaseHandler().getPriorityPlayer() != game.getPlayers().get(0)) return false;
-            GameView currentView = endpoint.getGameView();
-            PlayerView currentOwner = ScriptedGui.findPlayerView(currentView, held.ownerViewId());
-            return currentView != null && currentView.getGame() == game
-                    && currentView.getId() == held.gameViewId() && currentOwner != null
-                    && endpoint.getGameController(currentOwner) == held.endpointController()
-                    && controller.getInputProxy().getInput() == held.input()
-                    && controller.getInputQueue().getInput() == held.input()
-                    && held.input().getOwner() != null && held.input().getOwner().getId() == held.ownerViewId();
-        }
-        List<DisconnectAiPriorityReceipt> disconnectAiNextGamePriorities() {
-            synchronized (disconnectAiNextGamePriorities) {
-                return List.copyOf(disconnectAiNextGamePriorities);
-            }
-        }
-        static final class DisconnectAiNextGamePreparationReceipt {
-            private final Game oldGame;
-            private final Game game;
-            private final CountDownLatch shuffled = new CountDownLatch(1);
-            private volatile int shuffleCount;
 
-            private DisconnectAiNextGamePreparationReceipt(Game oldGame, Game game) {
-                this.oldGame = oldGame;
-                this.game = game;
-            }
-            @Subscribe public void onGameShuffle(GameEventShuffle ignored) {
-                if (game == oldGame) throw new AssertionError("N+1 shuffle receipt attached to Game N");
-                shuffleCount++;
-                shuffled.countDown();
-            }
-            Game oldGame() { return oldGame; }
-            Game game() { return game; }
-            int shuffleCount() { return shuffleCount; }
-            boolean awaitLibraryPreparation(long timeout, TimeUnit unit) throws InterruptedException {
-                return shuffled.await(timeout, unit);
-            }
+        boolean mulliganScenario() { return mulliganScenario;
         }
-        boolean mulliganScenario() { return mulliganScenario; }
-        boolean starterSeatZeroScenario() { return starterSeatZeroScenario; }
+        boolean starterSeatZeroScenario() { return starterSeatZeroScenario;
+        }
         List<MulliganChoiceReceipt> mulliganChoices() {
             synchronized (mulliganChoices) { return List.copyOf(mulliganChoices); }
         }
-        Set<Integer> privacyMulliganKnownCardIds() {
-            if (!privacyMulliganPrefixScenario()) return Set.of();
-            Set<Integer> ids = new LinkedHashSet<>();
-            for (MulliganChoiceReceipt choice : mulliganChoices()) ids.addAll(choice.handIds());
-            for (FreeRevealReceipt reveal : freeReveals()) ids.addAll(reveal.cardIds());
-            for (KeepOpeningReceipt keep : keepOpeningReceipts()) ids.addAll(keep.handIds());
-            for (LondonBottomDispatchReceipt bottom : londonBottomDispatches()) {
-                ids.addAll(bottom.chooserHandIds());
-                ids.add(bottom.cardId());
-            }
-            return Collections.unmodifiableSet(ids);
-        }
+
         List<FreeRevealReceipt> freeReveals() {
             synchronized (freeReveals) { return List.copyOf(freeReveals); }
         }
@@ -4287,9 +2979,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                               String message, long getChoicesOrdinal,
                               List<Integer> cardIds, String expectedMessage) {
             int ownerSeat = freeMulliganSeat.get();
-            if (!mulliganScenario || ownerSeat < 0 || receivingSeat != 1 - ownerSeat
-                    || !expectedMessage.equals(message)
-                    || cardIds.size() != 7 || getChoicesOrdinal <= 0) {
+            if (!mulliganScenario || ownerSeat < 0 || receivingSeat != 1 - ownerSeat || !expectedMessage.equals(message) || cardIds.size() != 7 || getChoicesOrdinal <= 0) {
                 fail(new AssertionError("Unexpected DanDan free-hand reveal receipt for receiver seat " + receivingSeat
                         + ": " + message + " / " + cardIds + " at getChoices callback " + getChoicesOrdinal));
                 return;
@@ -4303,9 +2993,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         void recordStarterButton(StarterButtonReceipt receipt) {
             starterButtonReceipts.add(receipt);
-            if (!starterSeatZeroScenario || receipt.seat() < 0 || receipt.seat() > 1
-                    || !receipt.playEnabled() || !receipt.drawEnabled()
-                    || receipt.chosePlay() != (receipt.seat() == 0)) {
+            if (!starterSeatZeroScenario || receipt.seat() < 0 || receipt.seat() > 1 || !receipt.playEnabled() || !receipt.drawEnabled() || receipt.chosePlay() != (receipt.seat() == 0)) {
                 fail(new AssertionError("Unexpected Play/Draw action for host starter: " + receipt));
             }
         }
@@ -4329,19 +3017,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     receipt.zeroCardPrompt()));
             return true;
         }
-        synchronized void recordPrivacyMulliganBoundary(Game game,
-                Map<Integer, Map<ZoneType, List<Integer>>> preSetupZones,
-                Map<Integer, Map<ZoneType, List<Integer>>> postSetupZones) {
-            if (!privacyMulliganPrefixScenario() || game == null || game != privacyGame
-                    || privacyMulliganBoundaryReceipt != null || preSetupZones == null || postSetupZones == null) {
-                fail(new AssertionError("Composite setup boundary did not capture its actual privacy Game exactly once"));
-                return;
-            }
-            privacyMulliganBoundaryReceipt = new PrivacyMulliganBoundaryReceipt(game, game.getView().getId(),
-                    immutableZones(preSetupZones), immutableZones(postSetupZones));
+
+        boolean privacyMulliganPrefixScenario() { return mulliganScenario && false;
         }
-        PrivacyMulliganBoundaryReceipt privacyMulliganBoundaryReceipt() { return privacyMulliganBoundaryReceipt; }
-        boolean privacyMulliganPrefixScenario() { return mulliganScenario && privacyShuffleHistoryScenario; }
         private static Map<Integer, Map<ZoneType, List<Integer>>> immutableZones(
                 Map<Integer, Map<ZoneType, List<Integer>>> zones) {
             Map<Integer, Map<ZoneType, List<Integer>>> copy = new LinkedHashMap<>();
@@ -4364,33 +3042,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         .findFirst().orElse(null);
             }
         }
-        boolean hasLondonBottom() { return londonsBottomed.get(); }
-        synchronized void recordKeepPrompt(int seat, long callbackOrdinal) {
-            if (seat < 0 || seat >= keepPromptOrdinals.length || keepPromptOrdinals[seat] >= 0) {
-                fail(new AssertionError("Unexpected repeated scripted Keep prompt for seat " + seat));
-                return;
-            }
-            keepPromptOrdinals[seat] = callbackOrdinal;
+        boolean hasLondonBottom() { return londonsBottomed.get();
         }
-        synchronized void recordDisconnectAiKeepPrompt(int seat, long callbackOrdinal,
-                int gameViewId, String callback, int handCount) {
-            if (privacyHistoryNextGamePhase) return; // Game N+1 uses its own exact GameView-scoped Keep receipt below.
-            DisconnectAiNextGamePreparationReceipt preparation = disconnectAiNextGamePreparationReceipt;
-            if (!disconnectAiScenario || preparation == null || gameViewId != preparation.game().getView().getId()) {
-                recordKeepPrompt(seat, callbackOrdinal);
-                return;
-            }
-            if (seat < 0 || seat > 1 || callbackOrdinal <= 0 || handCount != 7
-                    || disconnectAiNextGameKeeps.stream().anyMatch(receipt -> receipt.seat() == seat)) {
-                fail(new AssertionError("N+1 Keep did not retain one actual seven-card assigned-host receipt"));
-                return;
-            }
-            disconnectAiNextGameKeeps.add(new DisconnectAiOpeningKeepReceipt(
-                    seat, gameViewId, callbackOrdinal, callback, handCount));
-        }
-        List<DisconnectAiOpeningKeepReceipt> disconnectAiNextGameKeeps() {
-            synchronized (disconnectAiNextGameKeeps) { return List.copyOf(disconnectAiNextGameKeeps); }
-        }
+
         void expectPostKeepCallback(String callback) {
             if (!"setGameView".equals(callback) && !"applyDelta".equals(callback)) {
                 throw new IllegalArgumentException("Unsupported post-Keep callback: " + callback);
@@ -4411,7 +3065,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 }
                 return false; // let the existing scripted A controller pass its actual priority
             }
-            if ((reconnectScenario || disconnectAiScenario) && !reconnectPostureReached) {
+            if ((reconnectScenario || false) && !reconnectPostureReached) {
                 int hostViewId = playerViewIdsBySeat().getOrDefault(0, -1);
                 if (turn != 1 || phase != PhaseType.UPKEEP || turnPlayerViewId != hostViewId) {
                     fail(new AssertionError("Reconnect fixture expected host turn 1 UPKEEP before its held remote prompt; saw turn "
@@ -4450,10 +3104,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         synchronized void observePostKeepState(Capture source,
                 Supplier<Map<Integer, Map<ZoneType, List<Integer>>>> zoneSnapshot, int receivingSeat) {
-            if (expectedPostKeepCallback == null || receivingSeat != 1 || source == null
-                    || !bothKeepPromptsSeen() || !bothKeepActionsRecorded()) return;
-            if (source.callbackOrdinal() <= keepPromptOrdinals[receivingSeat]
-                    || !source.callback().equals(expectedPostKeepCallback)) return;
+            if (expectedPostKeepCallback == null || receivingSeat != 1 || source == null || !bothKeepPromptsSeen() || !bothKeepActionsRecorded()) return;
+            if (source.callbackOrdinal() <= keepPromptOrdinals[receivingSeat] || !source.callback().equals(expectedPostKeepCallback)) return;
             if ("applyDelta".equals(source.callback()) && !source.stateBearing()) return;
             Map<Integer, Map<ZoneType, List<Integer>>> appliedZones = zoneSnapshot.get();
             if (!hasDealtPrivateZones(appliedZones)) return;
@@ -4469,8 +3121,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             int[] keepActionsBySeat = new int[2];
             synchronized (actions) {
                 for (ActionReceipt action : actions) {
-                    if (action.decision() == Decision.KEEP_WITHOUT_LAND
-                            && action.seat() >= 0 && action.seat() < keepActionsBySeat.length) {
+                    if (action.decision() == Decision.KEEP_WITHOUT_LAND && action.seat() >= 0 && action.seat() < keepActionsBySeat.length) {
                         keepActionsBySeat[action.seat()]++;
                     }
                 }
@@ -4487,8 +3138,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     + ",receipt=" + (postKeepReceipt != null)
                     + ",failurePresent=" + (failure.get() != null) + "}";
         }
-        PostKeepReceipt postKeepReceipt() { return postKeepReceipt; }
-        private boolean bothKeepPromptsSeen() { return keepPromptOrdinals[0] > 0 && keepPromptOrdinals[1] > 0; }
+        PostKeepReceipt postKeepReceipt() { return postKeepReceipt;
+        }
+        private boolean bothKeepPromptsSeen() { return keepPromptOrdinals[0] > 0 && keepPromptOrdinals[1] > 0;
+        }
         private boolean bothKeepActionsRecorded() {
             if (lifecycleScenario && lifecycleCheckpointArmed) {
                 boolean[] seats = new boolean[2];
@@ -4515,8 +3168,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private boolean hasDealtPrivateZones(Map<Integer, Map<ZoneType, List<Integer>>> zones) {
             if (zones.size() < 2) return false;
             for (Map<ZoneType, List<Integer>> byZone : zones.values()) {
-                if (byZone.getOrDefault(ZoneType.Hand, List.of()).isEmpty()
-                        || byZone.getOrDefault(ZoneType.Library, List.of()).isEmpty()) return false;
+                if (byZone.getOrDefault(ZoneType.Hand, List.of()).isEmpty() || byZone.getOrDefault(ZoneType.Library, List.of()).isEmpty()) return false;
             }
             return true;
         }
@@ -4527,7 +3179,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
             return result;
         }
-        int playerViewIdForSeat(int seat) { return playerViewIdsBySeat().getOrDefault(seat, -1); }
+        int playerViewIdForSeat(int seat) { return playerViewIdsBySeat().getOrDefault(seat, -1);
+        }
         private void publishPostKeepStateIfReady() {
             if (!postKeepPriorityHeld || postKeepCandidate == null || postKeepReceipt != null) return;
             postKeepReceipt = new PostKeepReceipt(postKeepCandidate.stateCapture(), postKeepCandidate.appliedZonesByPlayer(),
@@ -4536,13 +3189,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     heldPriorityTurnPlayerViewId, heldPriorityZones);
             postKeepState.countDown();
         }
-        boolean bothLandsObserved() { return observedLandIds.size() == 2; }
-        boolean awaitLand(int seat, long timeout, TimeUnit unit) throws InterruptedException {
-            return publicLandMoves[seat].await(timeout, unit);
+        boolean bothLandsObserved() { return observedLandIds.size() == 2;
         }
-        boolean awaitLandAbility(int seat, long timeout, TimeUnit unit) throws InterruptedException {
-            return landAbilities[seat].await(timeout, unit);
-        }
+
         void markLandAbility(int seat) { landAbilities[seat].countDown(); }
         void addFailureHook(Runnable hook) { failureHooks.add(hook); }
 
@@ -4558,8 +3207,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     Integer landId = expectedLandIds.get(ownerSeat);
                     if (landId == null) continue;
                     for (ZoneType zone : List.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile)) {
-                        if (player.getCards(zone) != null && player.getCards(zone).stream().anyMatch(card -> card.getId() == landId)
-                                && observedLandIds.add(landId)) {
+                        if (player.getCards(zone) != null && player.getCards(zone).stream().anyMatch(card -> card.getId() == landId) && observedLandIds.add(landId)) {
                             publicMoveReceipts.put(ownerSeat, new CallbackReceipt(receipt.sequence(), receipt.callbackOrdinal()));
                             publicLandMoves[ownerSeat].countDown();
                         }
@@ -4578,15 +3226,16 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         void markTerminated(int gameViewId) {
             Game origin = disconnectAiNextGameOrigin;
-            boolean disconnectGameN = disconnectAiScenario && origin != null
+            boolean disconnectGameN = false && origin != null
                     && origin.getView().getId() == gameViewId;
-            Game reconnectGameN = privacyHistoryNextGameEnabled ? privacyGame : null;
+            Game reconnectGameN = false ? privacyGame : null;
             boolean expectedPrivacyReconnectGameN = reconnectGameN != null && reconnectGameN.getView() != null
                     && reconnectGameN.getView().getId() == gameViewId;
             if (!lifecycleScenario && !disconnectGameN && !expectedPrivacyReconnectGameN) stopped = true;
         }
         void stopActions() { stopped = true; }
-        boolean tryQueueConcession() { return concessionQueued.compareAndSet(false, true); }
+        boolean tryQueueConcession() { return concessionQueued.compareAndSet(false, true);
+        }
     }
 
     static final class ScriptedGui extends HeadlessNetworkGuiGame {
@@ -4675,9 +3324,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             scenario.addFailureHook(this::detachPrivacyLogObservers);
         }
 
-        int ownPlayerViewId() { return ownPlayerViewId; }
-        int populatedDeltaCount() { return populatedDeltaCount.get(); }
-        CallbackReceipt dealtReceipt() { return dealtReceipt.get(); }
+        int ownPlayerViewId() { return ownPlayerViewId;
+        }
+        int populatedDeltaCount() { return populatedDeltaCount.get();
+        }
+
         List<Capture> captures() { synchronized (captures) { return List.copyOf(captures); } }
         List<GameViewReceipt> gameViewReceipts() {
             synchronized (gameViewReceipts) { return List.copyOf(gameViewReceipts); }
@@ -4687,7 +3338,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         private boolean privacyLogObservationEnabled() {
-            return scenario.privacyScenario() || scenario.privacyHistoryNextGamePhase();
+            return scenario.privacyScenario() || false;
         }
 
         private synchronized void observeHostPrivacyLog(GameView view) {
@@ -4885,22 +3536,30 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 return "openingKeep{diagnosticFailed=" + diagnosticFailure.getClass().getSimpleName() + "}";
             }
         }
-        TerminalViewReceipt terminalViewReceipt() { return terminalViewReceipt; }
+        TerminalViewReceipt terminalViewReceipt() { return terminalViewReceipt;
+        }
         List<PriorityReceipt> priorityPrompts() { synchronized (priorityPrompts) { return List.copyOf(priorityPrompts); } }
         List<AppliedViewReceipt> appliedViews() { synchronized (appliedViews) { return List.copyOf(appliedViews); } }
-        boolean awaitFull(long timeout, TimeUnit unit) throws InterruptedException { return fullState.await(timeout, unit); }
-        boolean awaitOpenView(long timeout, TimeUnit unit) throws InterruptedException { return openView.await(timeout, unit); }
-        boolean awaitPostOpenFullState(long timeout, TimeUnit unit) throws InterruptedException { return postOpenFullState.await(timeout, unit); }
-        boolean awaitDealtState(long timeout, TimeUnit unit) throws InterruptedException { return dealtState.await(timeout, unit); }
-        boolean awaitPopulatedDelta(long timeout, TimeUnit unit) throws InterruptedException { return populatedDelta.await(timeout, unit); }
-        boolean awaitNonemptyEvents(long timeout, TimeUnit unit) throws InterruptedException { return nonemptyEvents.await(timeout, unit); }
-        boolean awaitAfterGameEnd(long timeout, TimeUnit unit) throws InterruptedException { return afterGameEnd.await(timeout, unit); }
-        boolean awaitAlertUser(long timeout, TimeUnit unit) throws InterruptedException { return alertUserReceived.await(timeout, unit); }
-        boolean awaitTerminalOrFailure(long timeout, TimeUnit unit) throws InterruptedException { return terminalOrFailure.await(timeout, unit); }
-        boolean awaitActualTerminal(long timeout, TimeUnit unit) throws InterruptedException { return terminal.await(timeout, unit); }
-        boolean awaitTurnOneMainOnePriority(long timeout, TimeUnit unit) throws InterruptedException { return turnOneMainOnePriority.await(timeout, unit); }
-        boolean awaitTurnOneMainOneView(long timeout, TimeUnit unit) throws InterruptedException { return turnOneMainOneView.await(timeout, unit); }
-        boolean awaitReconnectReplayPriority(long timeout, TimeUnit unit) throws InterruptedException { return reconnectReplayPriority.await(timeout, unit); }
+        boolean awaitFull(long timeout, TimeUnit unit) throws InterruptedException { return fullState.await(timeout, unit);
+        }
+        boolean awaitOpenView(long timeout, TimeUnit unit) throws InterruptedException { return openView.await(timeout, unit);
+        }
+        boolean awaitPostOpenFullState(long timeout, TimeUnit unit) throws InterruptedException { return postOpenFullState.await(timeout, unit);
+        }
+
+        boolean awaitAfterGameEnd(long timeout, TimeUnit unit) throws InterruptedException { return afterGameEnd.await(timeout, unit);
+        }
+        boolean awaitAlertUser(long timeout, TimeUnit unit) throws InterruptedException { return alertUserReceived.await(timeout, unit);
+        }
+
+        boolean awaitActualTerminal(long timeout, TimeUnit unit) throws InterruptedException { return terminal.await(timeout, unit);
+        }
+        boolean awaitTurnOneMainOnePriority(long timeout, TimeUnit unit) throws InterruptedException { return turnOneMainOnePriority.await(timeout, unit);
+        }
+        boolean awaitTurnOneMainOneView(long timeout, TimeUnit unit) throws InterruptedException { return turnOneMainOneView.await(timeout, unit);
+        }
+        boolean awaitReconnectReplayPriority(long timeout, TimeUnit unit) throws InterruptedException { return reconnectReplayPriority.await(timeout, unit);
+        }
         void expectReconnectReplay() { expectReconnectReplay = true; }
         private GameViewReceipt privacyReconnectReplayFullReceipt(long promptOrdinal) {
             long openOrdinal = captures().stream().filter(capture -> "openView".equals(capture.callback()))
@@ -4913,9 +3572,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         boolean hasCurrentPrivacyReconnectReplay(int expectedSeat, int expectedViewId, int expectedGameViewId,
                 long promptOrdinal, int turn, PhaseType phase, int turnPlayerViewId, int stackSize) {
-            if (!expectReconnectReplay || !remote || seat != expectedSeat || expectedSeat != 1
-                    || ownPlayerViewId != expectedViewId || promptOrdinal <= 0 || turn != 4
-                    || phase != PhaseType.UPKEEP || turnPlayerViewId != expectedViewId || stackSize != 0) return false;
+            if (!expectReconnectReplay || !remote || seat != expectedSeat || expectedSeat != 1 || ownPlayerViewId != expectedViewId || promptOrdinal <= 0 || turn != 4 || phase != PhaseType.UPKEEP || turnPlayerViewId != expectedViewId || stackSize != 0) return false;
             GameViewReceipt baseline = privacyReconnectReplayFullReceipt(promptOrdinal);
             GameView current = getGameView();
             boolean hasOwnPriorityReceipt = priorityPrompts().stream().anyMatch(receipt ->
@@ -4966,9 +3623,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             GameView current = getGameView();
             PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
             IGameController controller = own == null ? null : getGameController(own);
-            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.UNTAP
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId
-                    || current.getStack() == null || !current.getStack().isEmpty() || controller == null) {
+            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.UNTAP || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId || current.getStack() == null || !current.getStack().isEmpty() || controller == null) {
                 throw new AssertionError("Initial privacy action no longer has the real host turn-1 UNTAP prompt");
             }
             scenario.releasePrivacyInitialPriority();
@@ -4985,125 +3640,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
             CardView fengraf = findVisibleCard(current, scenario.privacyFengrafId());
             IGameController controller = own == null ? null : getGameController(own);
-            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1
-                    || current.getPlayerTurn() == null
-                    || current.getStack() == null || !current.getStack().isEmpty() || fengraf == null
-                    || fengraf.isTapped() || controller == null) {
+            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1 || current.getPlayerTurn() == null || current.getStack() == null || !current.getStack().isEmpty() || fengraf == null || fengraf.isTapped() || controller == null) {
                 throw new AssertionError("Assigned Fengraf actor no longer has the held post-Telling Time priority state");
             }
             scenario.beginPrivacyFengraf();
             scenario.recordPrivacyFengrafDispatch(seat, ownPlayerViewId);
             FThreads.invokeInEdtAndWait(() -> {
                 if (!controller.selectCard(fengraf, null, null)) fail("Assigned actor controller rejected Haunted Fengraf");
-            });
-        }
-
-        void continuePrivacyShuffleHistory() {
-            if (!scenario.privacyShuffleHistoryScenario() || seat != 0
-                    || ownPlayerViewId != scenario.privacyHostViewId()) {
-                throw new AssertionError("Only the assigned host may continue the bounded shuffle-history scenario");
-            }
-            GameView current = getGameView();
-            PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
-            IGameController controller = own == null ? null : getGameController(own);
-            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId
-                    || current.getStack() == null || !current.getStack().isEmpty() || controller == null) {
-                throw new AssertionError("Host lacks the actual empty-stack post-Fengraf priority");
-            }
-            scenario.recordPrivacyShuffleGameViewId(seat, ownPlayerViewId, current.getId());
-            scenario.releasePrivacyShuffleHistoryPriority();
-            FThreads.invokeInEdtAndWait(controller::selectButtonOk);
-        }
-
-        void continuePrivacyShuffleHistoryAfterDiscard(PrivacyStateReceipt appliedT3, GameViewReceipt remoteView) {
-            if (!scenario.privacyShuffleHistoryScenario() || seat != 0
-                    || ownPlayerViewId != scenario.privacyHostViewId() || appliedT3 == null || remoteView == null) {
-                throw new AssertionError("Only the assigned host may continue after the applied T2 discard");
-            }
-            GameView current = getGameView();
-            PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
-            IGameController controller = own == null ? null : getGameController(own);
-            CardView days = findVisibleCard(current, scenario.privacyDaysUndoingId());
-            boolean threeIslandsUntapped = scenario.privacyHostManaIds().stream().allMatch(id -> {
-                CardView source = findVisibleCard(current, id);
-                return source != null && !source.isTapped();
-            });
-            if (current == null || current.getId() != scenario.privacyShuffleGameViewId()
-                    || current.getTurn() != 3 || current.getPhase() != PhaseType.MAIN1
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId
-                    || current.getStack() == null || !current.getStack().isEmpty() || controller == null || days == null
-                    || own.getHand() == null || !cardIds(own.getHand()).contains(scenario.privacyDaysUndoingId())
-                    || !threeIslandsUntapped
-                    || appliedT3.turn() != 3 || appliedT3.phase() != PhaseType.MAIN1
-                    || appliedT3.turnPlayerViewId() != scenario.privacyHostViewId()) {
-                throw new AssertionError("The actual host T3 MAIN1 or applied remote discard boundary changed");
-            }
-            if (remoteView.callbackOrdinal() != appliedT3.callbackOrdinal()
-                    || remoteView.gameViewId() <= 0 || remoteView.trackerIdentity() == null) {
-                throw new AssertionError("Remote applied discard state lacks its same-Game tracker receipt");
-            }
-            scenario.releasePrivacyShuffleHistoryT3Cast(appliedT3.callbackOrdinal(),
-                    remoteView.gameViewId(), remoteView.trackerIdentity(),
-                    scenario.privacyShuffleTurnTwoDiscardId());
-            if (scenario.stopped()) throw new AssertionError("Scenario rejected the applied T2 discard boundary");
-            scenario.recordPrivacyShufflePreShuffleHostHand(seat, ownPlayerViewId, current.getId(),
-                    cardIds(own.getHand()));
-            FThreads.invokeInEdtAndWait(() -> {
-                scenario.assertSamePrivacyShuffleT3PriorityInput(seat, ownPlayerViewId, controller);
-                if (!controller.selectCard(days, null, null)) fail("Host controller rejected Day's Undoing after T2 discard proof");
-            });
-        }
-
-        void concedePrivacyShuffleHistoryAfterAssertions() {
-            if (!scenario.privacyShuffleHistoryScenario() || seat != 0
-                    || ownPlayerViewId != scenario.privacyHostViewId()) {
-                throw new AssertionError("Only the assigned host may end the bounded shuffle-history game");
-            }
-            GameView current = getGameView();
-            PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
-            IGameController controller = own == null ? null : getGameController(own);
-            if (current == null || current.getTurn() != 4 || current.getPhase() != PhaseType.UPKEEP
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != scenario.privacyRemoteViewId()
-                    || current.getStack() == null || !current.getStack().isEmpty() || controller == null) {
-                throw new AssertionError("Host cannot finish until the actual remote turn-4 UPKEEP hold");
-            }
-            scenario.recordPrivacyConcession(seat, ownPlayerViewId);
-            FThreads.invokeInEdtAndWait(controller::concede);
-        }
-
-        void concedePrivacyHistoryReconnectAfterAssertions() {
-            if (!scenario.privacyHistoryReconnectScenario() || seat != 0
-                    || ownPlayerViewId != scenario.privacyHostViewId()) {
-                throw new AssertionError("Only the assigned host may end the reconnect-history checkpoint");
-            }
-            GameView current = getGameView();
-            PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
-            IGameController controller = own == null ? null : getGameController(own);
-            Game engineGame = scenario.privacyGame();
-            if (current == null || current.getId() != scenario.privacyShuffleGameViewId()
-                    || current.getTurn() != 4 || current.getPhase() != PhaseType.UPKEEP
-                    || current.getPlayerTurn() == null
-                    || current.getPlayerTurn().getId() != scenario.privacyRemoteViewId()
-                    || current.getStack() == null || !current.getStack().isEmpty() || controller == null
-                    || !(controller instanceof PlayerControllerHuman) || engineGame == null
-                    || engineGame.getPlayers().get(0).getController() != controller
-                    || !scenario.isSamePrivacyHistoryReconnectHostInput()) {
-                throw new AssertionError("Host cannot concede until its exact retained T4 UPKEEP InputPassPriority is still current");
-            }
-            scenario.recordPrivacyConcession(seat, ownPlayerViewId);
-            FThreads.invokeInEdtAndWait(() -> {
-                GameView onEdt = getGameView();
-                PlayerView onEdtOwn = onEdt == null ? null : findPlayerView(onEdt, ownPlayerViewId);
-                IGameController onEdtController = onEdtOwn == null ? null : getGameController(onEdtOwn);
-                if (onEdt == null || onEdt.getId() != current.getId()
-                        || onEdt.getTurn() != 4 || onEdt.getPhase() != PhaseType.UPKEEP
-                        || onEdtOwn == null || onEdtOwn.getId() != ownPlayerViewId
-                        || onEdtController != controller
-                        || !scenario.isSamePrivacyHistoryReconnectHostInput()) {
-                    throw new AssertionError("Host reconnect concession lost its exact current input before dispatch");
-                }
-                controller.concede();
             });
         }
 
@@ -5114,9 +3657,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             GameView current = getGameView();
             PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
             IGameController controller = own == null ? null : getGameController(own);
-            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId
-                    || current.getStack() == null || !current.getStack().isEmpty() || controller == null) {
+            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1 || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId || current.getStack() == null || !current.getStack().isEmpty() || controller == null) {
                 throw new AssertionError("Host lacks the real empty-stack post-Fengraf priority");
             }
             scenario.recordPrivacyConcession(seat, ownPlayerViewId);
@@ -5124,15 +3665,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         void concedeMetamorphoseAfterAssertions() {
-            if (!scenario.metamorphoseScenario() || seat != 0 || ownPlayerViewId != scenario.metamorphoseHostViewId()
-                    || scenario.metamorphoseResolution() == null
-                    || scenario.metamorphosePostResolutionPriority() == null) {
+            if (!scenario.metamorphoseScenario() || seat != 0 || ownPlayerViewId != scenario.metamorphoseHostViewId() || scenario.metamorphoseResolution() == null || scenario.metamorphosePostResolutionPriority() == null) {
                 throw new AssertionError("Metamorphose terminal action requires the host after an actual received resolution");
             }
             GameView current = getGameView();
-            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId
-                    || current.getStack() == null || !current.getStack().isEmpty()) {
+            if (current == null || current.getTurn() != 1 || current.getPhase() != PhaseType.MAIN1 || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != ownPlayerViewId || current.getStack() == null || !current.getStack().isEmpty()) {
                 throw new AssertionError("Host has no actual empty-stack postresolution priority to concede from");
             }
             PlayerView own = findPlayerView(current, ownPlayerViewId);
@@ -5150,14 +3687,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             PlayerView own = current == null ? null : findPlayerView(current, ownPlayerViewId);
             IGameController controller = own == null ? null : getGameController(own);
             LifecyclePriorityReceipt lifecycleCheckpoint = scenario.lifecyclePriorityReceipt();
-            if (current == null || own == null || controller == null || seat != 1 || !remote
-                    || !scenario.holdMetamorphoseOptional() || !(controller instanceof NetGameController)
-                    || lifecycleCheckpoint != null && lifecycleCheckpoint.gameViewId() != current.getId()) {
+            if (current == null || own == null || controller == null || seat != 1 || !remote || !scenario.holdMetamorphoseOptional() || !(controller instanceof NetGameController) || lifecycleCheckpoint != null && lifecycleCheckpoint.gameViewId() != current.getId()) {
                 throw new AssertionError("Held Meta prompt has no assigned remote controller to concede");
             }
             scenario.recordAction(new ActionReceipt(Decision.CONCEDE, seat, ownPlayerViewId, null, true));
-            if (scenario.lifecycleScenario() && scenario.metamorphoseScenario()
-                    && !scenario.recordMetamorphoseAssignedConcession(
+            if (scenario.lifecycleScenario() && scenario.metamorphoseScenario() && !scenario.recordMetamorphoseAssignedConcession(
                     seat, ownPlayerViewId, current.getId())) {
                 throw new AssertionError("Actual assigned-seat concession did not identify the held Meta game");
             }
@@ -5185,52 +3719,20 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             IGameController controller = own == null ? null : getGameController(own);
             Game game = scenario.metamorphoseGame();
             List<MetamorphoseStackPriorityReceipt> receipts = scenario.metamorphoseStackPriorities();
-            if (receipt == null || receipts.size() != 1 || receipts.get(0) != receipt
-                    || game == null || game.getPlayers().size() != 2) {
+            if (receipt == null || receipts.size() != 1 || receipts.get(0) != receipt || game == null || game.getPlayers().size() != 2) {
                 throw new AssertionError("The retained Metamorphose Game no longer has its two assigned players");
             }
             Player host = game.getPlayers().get(0);
-            if (!(host.getController() instanceof PlayerControllerHuman hostController)
-                    || controller != hostController || hostController.getGame() != game
-                    || receipt.priorityInput() == null
-                    || hostController.getInputProxy().getInput() != receipt.priorityInput()
-                    || hostController.getInputQueue().getInput() != receipt.priorityInput()
-                    || receipt.priorityInput().getOwner() == null
-                    || receipt.priorityInput().getOwner().getId() != host.getId()) {
+            if (!(host.getController() instanceof PlayerControllerHuman hostController) || controller != hostController || hostController.getGame() != game || receipt.priorityInput() == null || hostController.getInputProxy().getInput() != receipt.priorityInput() || hostController.getInputQueue().getInput() != receipt.priorityInput() || receipt.priorityInput().getOwner() == null || receipt.priorityInput().getOwner().getId() != host.getId()) {
                 throw new AssertionError("The captured host no longer holds the exact live InputPassPriority");
             }
-            if (receipt.game() != game || receipt.gameViewId() != game.getView().getId()
-                    || current == null || current.getId() != receipt.gameViewId()
-                    || receipt.seat() != 0 || receipt.chooserViewId() != ownPlayerViewId
-                    || receipt.callbackOrdinal() <= 0 || receipt.turn() != 1
-                    || receipt.phase() != PhaseType.MAIN1 || receipt.turnPlayerViewId() != ownPlayerViewId
-                    || receipt.stackSize() != 1 || current.getTurn() != receipt.turn()
-                    || current.getPhase() != receipt.phase()
-                    || current.getPlayerTurn() == null
-                    || current.getPlayerTurn().getId() != receipt.turnPlayerViewId()
-                    || current.getStack() == null || current.getStack().size() != 1
-                    || current.getStack().get(0).getId() != receipt.stackItemId()
-                    || current.getStack().get(0).getSourceCard() == null
-                    || current.getStack().get(0).getSourceCard().getId() != receipt.sourceCardId()
-                    || current.getStack().get(0).getActivatingPlayer() == null
-                    || current.getStack().get(0).getActivatingPlayer().getId() != receipt.activatorViewId()
-                    || current.getStack().get(0).getTargetCards() == null
-                    || !current.getStack().get(0).getTargetCards().stream().map(CardView::getId).toList()
-                            .equals(receipt.targetCardIds())
-                    ) {
+            if (receipt.game() != game || receipt.gameViewId() != game.getView().getId() || current == null || current.getId() != receipt.gameViewId() || receipt.seat() != 0 || receipt.chooserViewId() != ownPlayerViewId || receipt.callbackOrdinal() <= 0 || receipt.turn() != 1 || receipt.phase() != PhaseType.MAIN1 || receipt.turnPlayerViewId() != ownPlayerViewId || receipt.stackSize() != 1 || current.getTurn() != receipt.turn() || current.getPhase() != receipt.phase() || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != receipt.turnPlayerViewId() || current.getStack() == null || current.getStack().size() != 1 || current.getStack().get(0).getId() != receipt.stackItemId() || current.getStack().get(0).getSourceCard() == null || current.getStack().get(0).getSourceCard().getId() != receipt.sourceCardId() || current.getStack().get(0).getActivatingPlayer() == null || current.getStack().get(0).getActivatingPlayer().getId() != receipt.activatorViewId() || current.getStack().get(0).getTargetCards() == null || !current.getStack().get(0).getTargetCards().stream().map(CardView::getId).toList()
+                            .equals(receipt.targetCardIds())) {
                 throw new AssertionError("Host no longer has the retained actual Metamorphose stack prompt");
             }
             FThreads.invokeInEdtAndWait(() -> {
                 GameView held = getGameView();
-                if (scenario.failure() != null || held == null || held.getId() != receipt.gameViewId()
-                        || held.getTurn() != receipt.turn() || held.getPhase() != receipt.phase()
-                        || held.getStack() == null || held.getStack().size() != receipt.stackSize()
-                        || held.getStack().get(0).getId() != receipt.stackItemId()
-                        || hostController.getGame() != game
-                        || hostController.getInputProxy().getInput() != receipt.priorityInput()
-                        || hostController.getInputQueue().getInput() != receipt.priorityInput()
-                        || receipt.priorityInput().getOwner() == null
-                        || receipt.priorityInput().getOwner().getId() != host.getId()) {
+                if (scenario.failure() != null || held == null || held.getId() != receipt.gameViewId() || held.getTurn() != receipt.turn() || held.getPhase() != receipt.phase() || held.getStack() == null || held.getStack().size() != receipt.stackSize() || held.getStack().get(0).getId() != receipt.stackItemId() || hostController.getGame() != game || hostController.getInputProxy().getInput() != receipt.priorityInput() || hostController.getInputQueue().getInput() != receipt.priorityInput() || receipt.priorityInput().getOwner() == null || receipt.priorityInput().getOwner().getId() != host.getId()) {
                     throw new AssertionError("The exact held Metamorphose priority changed before release",
                             scenario.failure());
                 }
@@ -5248,11 +3750,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (current != null) for (PlayerView player : current.getPlayers()) {
                 if (player.getId() == ownPlayerViewId) { own = player; break; }
             }
-            int expectedTurn = scenario.privacyHistoryReconnectScenario() ? 4 : 1;
-            int expectedTurnPlayer = scenario.privacyHistoryReconnectScenario()
+            int expectedTurn = false ? 4 : 1;
+            int expectedTurnPlayer = false
                     ? scenario.privacyViewIdForSeat(1) : scenario.playerViewIdForSeat(0);
-            if (current == null || own == null || current.getTurn() != expectedTurn || current.getPhase() != PhaseType.UPKEEP
-                    || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != expectedTurnPlayer) {
+            if (current == null || own == null || current.getTurn() != expectedTurn || current.getPhase() != PhaseType.UPKEEP || current.getPlayerTurn() == null || current.getPlayerTurn().getId() != expectedTurnPlayer) {
                 throw new AssertionError("Replacement no longer has the exact held reconnect UPKEEP priority");
             }
             PriorityReceipt prompt;
@@ -5266,25 +3767,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
             IGameController controller = getGameController(own);
             if (controller == null) throw new AssertionError("Replacement's assigned PlayerView has no live controller");
-            if (scenario.privacyHistoryReconnectScenario()
-                    && (!(controller instanceof NetGameController)
-                    || !scenario.isSamePrivacyShuffleT4PriorityInput())) {
-                throw new AssertionError("Replacement response lacks its current endpoint controller and exact original B input");
-            }
+
             FThreads.invokeInEdtAndWait(() -> {
-                if (scenario.privacyHistoryReconnectScenario()) {
-                    GameView onEdt = getGameView();
-                    PlayerView onEdtOwn = onEdt == null ? null : findPlayerView(onEdt, ownPlayerViewId);
-                    if (onEdt == null || onEdt.getId() != current.getId()
-                            || onEdt.getTracker() != current.getTracker()
-                            || onEdt.getTurn() != expectedTurn || onEdt.getPhase() != PhaseType.UPKEEP
-                            || onEdt.getPlayerTurn() == null || onEdt.getPlayerTurn().getId() != expectedTurnPlayer
-                            || onEdt.getStack() == null || !onEdt.getStack().isEmpty()
-                            || onEdtOwn == null || getGameController(onEdtOwn) != controller
-                            || !scenario.isSamePrivacyShuffleT4PriorityInput()) {
-                        throw new AssertionError("Replacement response lost its exact current tracker, controller, prompt, or server input before dispatch");
-                    }
-                }
+
                 if (!scenario.recordPriorityPass(seat)) return;
                 scenario.recordAction(new ActionReceipt(Decision.PASS_PRIORITY, seat, ownPlayerViewId, null, true));
                 controller.selectButtonOk();
@@ -5302,9 +3787,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     incomingGameViewId,
                     view.getId(), view.getTracker(), view.isDanDan(), source.stateBearing(),
                     snapshotZones(new Object[] {view}, snapshotSource)));
-            scenario.recordPositiveRemoteOwnManaUndoApplied(remote, callback, source, view);
-            if (!scenario.reconnectScenario() && !scenario.disconnectAiScenario()
-                    && !scenario.privacyHistoryReconnectScenario()) return;
+
+            if (!scenario.reconnectScenario()) return;
             PlayerView turnPlayer = view.getPlayerTurn();
             appliedViews.add(new AppliedViewReceipt(callback, source.sequence(), source.callbackOrdinal(),
                     source.stateBearing(), view.isDanDan(), view.getTurn(), view.getPhase(),
@@ -5316,9 +3800,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private void recordPrivacyState(String callback, Capture source, GameView view,
                                         int incomingGameViewId, int preAppliedGameViewId) {
             if (!remote || !scenario.privacyScenario() || source == null || view == null) return;
-            if (scenario.privacyHostViewId() < 0 || scenario.privacyRemoteViewId() < 0
-                    || scenario.privacyTopIds().size() != 3 || scenario.privacyInitialLibraryIds().size() <= 3
-                    || scenario.privacyPublicCreatureId() < 0) return;
+            if (scenario.privacyHostViewId() < 0 || scenario.privacyRemoteViewId() < 0 || scenario.privacyTopIds().size() != 3 || scenario.privacyInitialLibraryIds().size() <= 3 || scenario.privacyPublicCreatureId() < 0) return;
             try {
                 PlayerView turnPlayer = view.getPlayerTurn();
                 Map<Integer, Integer> drawCounts = new LinkedHashMap<>();
@@ -5495,24 +3977,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             GameView view = getGameView();
             IGameController endpointController = owner == null ? null : getGameController(owner);
             Game engine = scenario.openingKeepEngineGame();
-            if (prompt == null || owner == null || owner.getId() != ownPlayerViewId
-                    || !Localizer.getInstance().getMessage("lblKeep").equalsIgnoreCase(one)
-                    || !Localizer.getInstance().getMessage("lblMulligan").equalsIgnoreCase(two)
-                    || !enabledOne || !enabledTwo || view == null
-                    || !(endpointController instanceof NetGameController)
-                    || engine == null || seat < 0 || seat >= engine.getPlayers().size()
-                    || engine.getPlayers().get(seat).getId() != ownPlayerViewId
-                    || !(engine.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller)
-                    || controller.getGame() != engine || engine.getView() == null
-                    || engine.getView().getId() != view.getId()) {
+            if (prompt == null || owner == null || owner.getId() != ownPlayerViewId || !Localizer.getInstance().getMessage("lblKeep").equalsIgnoreCase(one) || !Localizer.getInstance().getMessage("lblMulligan").equalsIgnoreCase(two) || !enabledOne || !enabledTwo || view == null || !(endpointController instanceof NetGameController) || engine == null || seat < 0 || seat >= engine.getPlayers().size() || engine.getPlayers().get(seat).getId() != ownPlayerViewId || !(engine.getPlayers().get(seat).getController() instanceof PlayerControllerHuman controller) || controller.getGame() != engine || engine.getView() == null || engine.getView().getId() != view.getId()) {
                 fail("Remote opening Keep callback lacks its assigned NetGameController and same authoritative Game");
                 return null;
             }
             PrivacyInputSnapshot inputs = new PrivacyInputSnapshot(
                     controller.getInputProxy().getInput(), controller.getInputQueue().getInput());
-            if (inputs.proxyInput() == null || inputs.proxyInput() != inputs.queuedInput()
-                    || !(inputs.proxyInput() instanceof InputConfirmMulligan input)
-                    || input.getOwner() == null || input.getOwner().getId() != ownPlayerViewId) {
+            if (inputs.proxyInput() == null || inputs.proxyInput() != inputs.queuedInput() || !(inputs.proxyInput() instanceof InputConfirmMulligan input) || input.getOwner() == null || input.getOwner().getId() != ownPlayerViewId) {
                 fail("Opening Keep callback lacks its exact current InputConfirmMulligan: "
                         + inputs.evidence());
                 return null;
@@ -5582,10 +4053,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private OpeningKeepAppliedWitness currentOpeningKeepWitness(PendingOpeningKeep pending,
                 long maximumOrdinal) {
             GameView current = getGameView();
-            if (current == null || current.getId() != pending.gameViewId()
-                    || pending.controller().getGame() != pending.game()
-                    || pending.game().getView() == null
-                    || pending.game().getView().getId() != pending.gameViewId()) return null;
+            if (current == null || current.getId() != pending.gameViewId() || pending.controller().getGame() != pending.game() || pending.game().getView() == null || pending.game().getView().getId() != pending.gameViewId()) return null;
             GameViewReceipt receipt = gameViewReceipts().stream()
                     .filter(item -> item.gameViewId() == pending.gameViewId()
                             && item.trackerIdentity() == current.getTracker()
@@ -5604,8 +4072,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     .max(Comparator.comparingLong(GameViewReceipt::callbackOrdinal)).orElse(null);
             if (receipt == null) return null;
             PlayerView own = findPlayerView(current, pending.chooserViewId());
-            if (own == null || own.getHand() == null
-                    || getGameController(own) != pending.endpointController()) return null;
+            if (own == null || own.getHand() == null || getGameController(own) != pending.endpointController()) return null;
             List<Integer> handIds = cardIds(own.getHand());
             List<Integer> receiptHand = receipt.zonesByPlayer().getOrDefault(pending.chooserViewId(), Map.of())
                     .getOrDefault(ZoneType.Hand, List.of());
@@ -5622,23 +4089,15 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         private void observePendingOpeningKeep(Capture appliedCapture, GameView appliedView) {
             PendingOpeningKeep pending = pendingOpeningKeep;
-            if (pending == null || pending.dispatched().get() || scenario.stopped()
-                    || appliedCapture == null || appliedView == null
-                    || appliedCapture.callbackOrdinal() <= pending.appliedStateLowerBoundOrdinal()
-                    || !(appliedCapture.callback().equals("setGameView")
+            if (pending == null || pending.dispatched().get() || scenario.stopped() || appliedCapture == null || appliedView == null || appliedCapture.callbackOrdinal() <= pending.appliedStateLowerBoundOrdinal() || !(appliedCapture.callback().equals("setGameView")
                             || appliedCapture.callback().equals("applyDelta") && appliedCapture.stateBearing())) return;
-            if (appliedView.getId() != pending.gameViewId() || getGameView() != appliedView
-                    || pending.controller().getGame() != pending.game()
-                    || pending.game().getView() == null
-                    || pending.game().getView().getId() != pending.gameViewId()) {
+            if (appliedView.getId() != pending.gameViewId() || getGameView() != appliedView || pending.controller().getGame() != pending.game() || pending.game().getView() == null || pending.game().getView().getId() != pending.gameViewId()) {
                 fail("Applied opening Keep state changed the retained same-Game/GameView identity");
                 return;
             }
             PrivacyInputSnapshot currentInput = new PrivacyInputSnapshot(
                     pending.controller().getInputProxy().getInput(), pending.controller().getInputQueue().getInput());
-            if (currentInput.proxyInput() != pending.input() || currentInput.queuedInput() != pending.input()
-                    || pending.input().getOwner() == null
-                    || pending.input().getOwner().getId() != pending.chooserViewId()) {
+            if (currentInput.proxyInput() != pending.input() || currentInput.queuedInput() != pending.input() || pending.input().getOwner() == null || pending.input().getOwner().getId() != pending.chooserViewId()) {
                 fail("Applied opening Keep state no longer has its retained InputConfirmMulligan: "
                         + currentInput.evidence());
                 return;
@@ -5650,31 +4109,17 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         private void completeOpeningKeep(PendingOpeningKeep pending, OpeningKeepAppliedWitness witness) {
-            if (pendingOpeningKeep != pending || !pending.dispatched().compareAndSet(false, true)
-                    || witness == null || witness.gameViewId() != pending.gameViewId()
-                    || witness.handIds().size() != pending.expectedHandCount() || scenario.stopped()) return;
+            if (pendingOpeningKeep != pending || !pending.dispatched().compareAndSet(false, true) || witness == null || witness.gameViewId() != pending.gameViewId() || witness.handIds().size() != pending.expectedHandCount() || scenario.stopped()) return;
             GameView current = getGameView();
             PlayerView owner = current == null ? null : findPlayerView(current, pending.chooserViewId());
             IGameController currentEndpoint = owner == null ? null : getGameController(owner);
             PrivacyInputSnapshot currentInput = new PrivacyInputSnapshot(
                     pending.controller().getInputProxy().getInput(), pending.controller().getInputQueue().getInput());
-            if (current == null || current.getId() != pending.gameViewId()
-                    || current.getTracker() != witness.trackerIdentity()
-                    || owner == null || owner.getHand() == null
-                    || cardIds(owner.getHand()).size() != pending.expectedHandCount()
-                    || pending.controller().getGame() != pending.game()
-                    || pending.game().getView() == null || pending.game().getView().getId() != pending.gameViewId()
-                    || !openingKeepServerZonesMatch(pending)
-                    || currentEndpoint != pending.endpointController()
-                    || currentInput.proxyInput() != pending.input()
-                    || currentInput.queuedInput() != pending.input()
-                    || pending.input().getOwner() == null
-                    || pending.input().getOwner().getId() != pending.chooserViewId()) {
+            if (current == null || current.getId() != pending.gameViewId() || current.getTracker() != witness.trackerIdentity() || owner == null || owner.getHand() == null || cardIds(owner.getHand()).size() != pending.expectedHandCount() || pending.controller().getGame() != pending.game() || pending.game().getView() == null || pending.game().getView().getId() != pending.gameViewId() || !openingKeepServerZonesMatch(pending) || currentEndpoint != pending.endpointController() || currentInput.proxyInput() != pending.input() || currentInput.queuedInput() != pending.input() || pending.input().getOwner() == null || pending.input().getOwner().getId() != pending.chooserViewId()) {
                 fail("Opening Keep dispatch lost the applied seven-card hand or exact live input");
                 return;
             }
-            if (script.peekFirst() == null || script.peekFirst().decision() != pending.decision()
-                    || script.peekFirst().seat() != pending.seat()) {
+            if (script.peekFirst() == null || script.peekFirst().decision() != pending.decision() || script.peekFirst().seat() != pending.seat()) {
                 fail("Opening Keep dispatch no longer matches its retained scripted decision");
                 return;
             }
@@ -5703,16 +4148,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 PrivacyInputSnapshot dispatchInput = new PrivacyInputSnapshot(
                         pending.controller().getInputProxy().getInput(), pending.controller().getInputQueue().getInput());
                 if (scenario.stopped()) return;
-                if (dispatchView == null || dispatchView.getId() != pending.gameViewId()
-                        || dispatchView.getTracker() != witness.trackerIdentity()
-                        || dispatchOwner == null || dispatchOwner.getHand() == null
-                        || dispatchHandIds.size() != pending.expectedHandCount()
-                        || !dispatchHandIds.equals(witness.handIds()) || !dispatchBottomInLibrary
-                        || pending.controller().getGame() != pending.game()
-                        || !openingKeepServerZonesMatch(pending)
-                        || dispatchEndpoint != pending.endpointController()
-                        || dispatchInput.proxyInput() != pending.input()
-                        || dispatchInput.queuedInput() != pending.input()) {
+                if (dispatchView == null || dispatchView.getId() != pending.gameViewId() || dispatchView.getTracker() != witness.trackerIdentity() || dispatchOwner == null || dispatchOwner.getHand() == null || dispatchHandIds.size() != pending.expectedHandCount() || !dispatchHandIds.equals(witness.handIds()) || !dispatchBottomInLibrary || pending.controller().getGame() != pending.game() || !openingKeepServerZonesMatch(pending) || dispatchEndpoint != pending.endpointController() || dispatchInput.proxyInput() != pending.input() || dispatchInput.queuedInput() != pending.input()) {
                     fail("Opening Keep's single OK lost the same Game, applied hand, or InputConfirmMulligan");
                     return;
                 }
@@ -5732,8 +4168,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 String one, String two, boolean enabledOne, boolean enabledTwo, ExpectedAction expected) {
             boolean openingKeepScenario = scenario.metamorphoseScenario() || scenario.privacyScenario()
                     || scenario.lifecycleScenario();
-            if (!openingKeepScenario || !remote || expected == null
-                    || expected.decision() != Decision.KEEP_WITHOUT_LAND) return false;
+            if (!openingKeepScenario || !remote || expected == null || expected.decision() != Decision.KEEP_WITHOUT_LAND) return false;
             if (owner == null || owner.getId() != ownPlayerViewId) {
                 fail("Remote opening Keep callback did not belong to its assigned PlayerView");
                 return true;
@@ -5750,12 +4185,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 List<LondonBottomDispatchReceipt> bottoms = scenario.londonBottomDispatches();
                 String zeroPrompt = String.format(Localizer.getInstance().getMessage("lblReturnForLondon"), 0);
                 LondonBottomDispatchReceipt bottom = bottoms.size() == 1 ? bottoms.get(0) : null;
-                if (bottom == null || bottom.seat() != 1 || bottom.chooserViewId() != ownPlayerViewId
-                        || prompt == null || currentView == null || bottom.gameViewId() != currentView.getId()
-                        || bottom.chooserHandIds().size() != 7
-                        || !bottom.chooserHandIds().contains(bottom.cardId())
-                        || bottom.zeroCardPromptOrdinal() <= bottom.promptOrdinal()
-                        || !zeroPrompt.equals(bottom.zeroCardPrompt())) {
+                if (bottom == null || bottom.seat() != 1 || bottom.chooserViewId() != ownPlayerViewId || prompt == null || currentView == null || bottom.gameViewId() != currentView.getId() || bottom.chooserHandIds().size() != 7 || !bottom.chooserHandIds().contains(bottom.cardId()) || bottom.zeroCardPromptOrdinal() <= bottom.promptOrdinal() || !zeroPrompt.equals(bottom.zeroCardPrompt())) {
                     fail("Composite regular Keep lacks its exact completed London selection/zero-card prompt receipt");
                     return true;
                 }
@@ -5764,8 +4194,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 appliedStateLowerBoundOrdinal = bottom.zeroCardPromptOrdinal();
             }
             Game retainedOpeningGame = scenario.openingKeepEngineGame();
-            if (retainedOpeningGame == null || currentView == null || retainedOpeningGame.getView() == null
-                    || retainedOpeningGame.getView().getId() != currentView.getId()) {
+            if (retainedOpeningGame == null || currentView == null || retainedOpeningGame.getView() == null || retainedOpeningGame.getView().getId() != currentView.getId()) {
                 if (scenario.privacyMulliganPrefixScenario()) {
                     fail("Composite regular Keep lacks its retained authoritative same-Game identity");
                     return true;
@@ -6109,9 +4538,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         /** One-argument callback is the host's lifecycle path and the delegated remote callback. */
         @Override public void setGameView(GameView view) {
-            scenario.observePrivacyHistoryNextGameView(view, !remote && seat == 0);
-            scenario.observeDisconnectAiNextGameView(view, !remote && seat == 0);
-            scenario.observeQueuedLocalDecisionGameView(view, !remote && seat == 0);
+
             if (!remote && seat == 0 && view != null) {
                 scenario.retainOpeningKeepEngineGame(view.getGame());
                 scenario.retainMetamorphoseOpeningEngineGame(view.getGame());
@@ -6237,11 +4664,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     terminalView.getNumPlayedGamesInMatch());
             super.finishGame();
             detachPrivacyLogObservers();
-            if (scenario.privacyHistoryNextGamePhase() && terminalCapture != null && terminalView != null) {
-                scenario.recordPrivacyHistoryNextGameTerminal(terminalView.getId(),
-                        terminalCapture.callbackOrdinal(), seat, terminalView.isGameOver(),
-                        terminalView.getNumPlayedGamesInMatch());
-            }
+
             scenario.markTerminated(terminalView == null ? -1 : terminalView.getId());
             terminal.countDown();
             terminalOrFailure.countDown();
@@ -6259,8 +4682,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         @Override public void alertUser() {
             Capture receipt = capture("alertUser", -1);
             long ended = afterGameEndOrdinal.get();
-            if (expectingAlertUserFence && ended > 0 && receipt != null
-                    && receipt.callbackOrdinal() > ended) alertUserReceived.countDown();
+            if (expectingAlertUserFence && ended > 0 && receipt != null && receipt.callbackOrdinal() > ended) alertUserReceived.countDown();
         }
 
         @Override public void awaitNextInput() {
@@ -6280,8 +4702,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         private static int controllerGameViewId(IGameController controller) {
-            if (!(controller instanceof PlayerControllerHuman humanController)
-                    || humanController.getGame() == null) return -1;
+            if (!(controller instanceof PlayerControllerHuman humanController) || humanController.getGame() == null) return -1;
             return humanController.getGame().getView().getId();
         }
 
@@ -6344,8 +4765,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         /** Joins a real enabled payment-buttons callback to the later applied tap receipt. */
         private synchronized void resumePrivacyManaPaymentAfterAppliedState(GameView applied) {
-            if (!remote || !scenario.privacyScenario() || scenario.stopped()
-                    || pendingPrivacyManaPromptOrdinal <= 0 || pendingPrivacyManaCardId <= 0) return;
+            if (!remote || !scenario.privacyScenario() || scenario.stopped() || pendingPrivacyManaPromptOrdinal <= 0 || pendingPrivacyManaCardId <= 0) return;
             CardView paidSource = findVisibleCard(applied, pendingPrivacyManaCardId);
             if (paidSource == null || !paidSource.isTapped()) return;
             int ownerId = pendingPrivacyManaPromptOwnerId;
@@ -6383,8 +4803,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         private PreHandlerFact claimPrivacyFact(String method, Capture callback) {
             ReconnectObservation observation = scenario.privacyObservation();
             PreHandlerFact fact = observation == null ? null : observation.claimNext(method);
-            if (callback == null || callback.callbackOrdinal() <= 0 || fact == null
-                    || !method.equals(fact.method()) || fact.eventId() < 0) {
+            if (callback == null || callback.callbackOrdinal() <= 0 || fact == null || !method.equals(fact.method()) || fact.eventId() < 0) {
                 throw unexpected("missing correlated pre-handler " + method + " event", callback, fact);
             }
             return fact;
@@ -6474,34 +4893,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         @Override public SpellAbilityView getAbilityToPlay(CardView card, List<SpellAbilityView> abilities, ITriggerEvent trigger) {
             Capture abilityReceipt;
-            if (scenario.positiveRemoteOwnManaUndoScenario() && card != null
-                    && card.getId() == scenario.positiveRemoteOwnManaUndoIslandId()
-                    && card.getZone() == ZoneType.Battlefield) {
-                GameView currentView = getGameView();
-                if (seat != 1 || ownPlayerViewId != scenario.positiveRemoteOwnManaUndoRemoteViewId()
-                        || currentView == null || currentView.getId() != scenario.positiveRemoteOwnManaUndoGameViewId()
-                        || currentView.getTurn() != 2 || currentView.getPhase() != PhaseType.MAIN1
-                        || currentView.getPlayerTurn() == null
-                        || currentView.getPlayerTurn().getId() != ownPlayerViewId
-                        || card.getOwner() == null || card.getOwner().getId() != ownPlayerViewId
-                        || card.getController() == null || card.getController().getId() != ownPlayerViewId
-                        || card.getTracker() != currentView.getTracker()
-                        || abilities == null || abilities.size() != 1 || !abilities.get(0).canPlay()
-                        || abilities.get(0).isSpell() || abilities.get(0).getHostCard() == null
-                        || abilities.get(0).getHostCard().getId() != card.getId()) {
-                    throw unexpected("invalid remote own-Island mana ability", card, abilities);
-                }
-                abilityReceipt = capture("getAbilityToPlay", -1, card.getId(), abilities.size(),
-                        abilities.get(0).getId(), abilities.get(0).canPlay(), abilities.get(0).isSpell());
-                if (abilityReceipt == null) {
-                    throw new AssertionError("Could not retain the assigned remote Island mana ability callback");
-                }
-                scenario.recordPositiveRemoteOwnManaUndoAbility(currentView.getId(), seat, ownPlayerViewId,
-                        abilityReceipt.callbackOrdinal(), card.getId(), abilities.get(0).getId(), abilities.size(),
-                        card.getZone(), card.getOwner().getId(), card.getController().getId(),
-                        abilities.get(0).canPlay(), abilities.get(0).isSpell());
-                return abilities.get(0);
-            }
+
             if (scenario.privacyScenario()) {
                 List<String> facts = abilities == null ? List.of() : abilities.stream()
                         .map(ability -> ability.getId() + ":" + ability.canPlay() + ":" + ability.isSpell()
@@ -6512,7 +4904,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 PreHandlerFact wire = seat == 1 ? claimPrivacyFact("getAbilityToPlay", abilityReceipt) : null;
                 SpellAbilityView chosen;
                 String role;
-                if (scenario.privacyShuffleHistoryScenario() && seat == 0
+                if (false && seat == 0
                         && cardId == scenario.privacyDaysUndoingId()) {
                     chosen = abilities != null && abilities.size() == 1 && abilities.get(0).canPlay()
                             && abilities.get(0).isSpell() && abilities.get(0).getHostCard() != null
@@ -6526,13 +4918,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                             ? "Telling Time initial spell choice" : "Telling Time additional-cost choice";
                 } else if (seat == scenario.privacyFengrafSeat() && cardId == scenario.privacyFengrafId()) {
                     int choiceNumber = scenario.privacyFengrafAbilityChoices();
-                    if (abilities == null || choiceNumber == 0 && abilities.size() != 2
-                            || choiceNumber == 1 && abilities.size() != 1
-                            || abilities.stream().anyMatch(ability -> !ability.canPlay()
-                                    || ability.getHostCard() == null || ability.getHostCard().getId() != cardId)
-                            || abilities.stream().filter(ability -> ability.getId()
-                                    == scenario.privacyFengrafAbilityId()).count() != 1
-                            || choiceNumber == 1 && abilities.get(0).getId() != scenario.privacyFengrafAbilityId()) {
+                    if (abilities == null || choiceNumber == 0 && abilities.size() != 2 || choiceNumber == 1 && abilities.size() != 1 || abilities.stream().anyMatch(ability -> !ability.canPlay()
+                                    || ability.getHostCard() == null || ability.getHostCard().getId() != cardId) || abilities.stream().filter(ability -> ability.getId()
+                                    == scenario.privacyFengrafAbilityId()).count() != 1 || choiceNumber == 1 && abilities.get(0).getId() != scenario.privacyFengrafAbilityId()) {
                         throw unexpected("invalid Fengraf ability candidate role", choiceNumber, facts);
                     }
                     chosen = abilities == null ? null : abilities.stream()
@@ -6542,8 +4930,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                             .findFirst().orElse(null);
                     role = scenario.privacyFengrafAbilityChoices() == 0
                             ? "Haunted Fengraf activation ability" : "Haunted Fengraf additional-cost choice";
-                } else if ((seat == scenario.privacyTellingTimeSeat() && scenario.privacyRemoteManaIds().contains(cardId))
-                        || (seat == scenario.privacyFengrafSeat() && scenario.privacyHostManaIds().contains(cardId))) {
+                } else if ((seat == scenario.privacyTellingTimeSeat() && scenario.privacyRemoteManaIds().contains(cardId)) || (seat == scenario.privacyFengrafSeat() && scenario.privacyHostManaIds().contains(cardId))) {
                     chosen = abilities != null && abilities.size() == 1 && abilities.get(0).canPlay()
                             && !abilities.get(0).isSpell() && abilities.get(0).getHostCard() != null
                             && abilities.get(0).getHostCard().getId() == cardId ? abilities.get(0) : null;
@@ -6568,9 +4955,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 abilityReceipt = capture("getAbilityToPlay", -1,
                         card == null ? -1 : card.getId(), abilityFacts);
                 if (card != null && card.getId() == scenario.metamorphoseHostCardId()) {
-                    if (seat != 0 || abilities == null || abilities.size() != 1 || !abilities.get(0).canPlay()
-                            || !abilities.get(0).isSpell() || abilities.get(0).getHostCard() == null
-                            || abilities.get(0).getHostCard().getId() != card.getId()) {
+                    if (seat != 0 || abilities == null || abilities.size() != 1 || !abilities.get(0).canPlay() || !abilities.get(0).isSpell() || abilities.get(0).getHostCard() == null || abilities.get(0).getHostCard().getId() != card.getId()) {
                         throw unexpected("invalid Metamorphose cast ability", card == null ? -1 : card.getId(), abilityFacts);
                     }
                     scenario.recordMetamorphoseCast(seat, ownPlayerViewId, card.getId(),
@@ -6578,9 +4963,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     return abilities.get(0);
                 }
                 if (card != null && card.getId() == pendingMetamorphoseManaCardId) {
-                    if (seat != 0 || abilities == null || abilities.size() != 1 || !abilities.get(0).canPlay()
-                            || abilities.get(0).isSpell() || abilities.get(0).getHostCard() == null
-                            || abilities.get(0).getHostCard().getId() != card.getId()) {
+                    if (seat != 0 || abilities == null || abilities.size() != 1 || !abilities.get(0).canPlay() || abilities.get(0).isSpell() || abilities.get(0).getHostCard() == null || abilities.get(0).getHostCard().getId() != card.getId()) {
                         throw unexpected("invalid Metamorphose Island mana ability", card.getId(), abilityFacts);
                     }
                     scenario.recordMetamorphoseManaAbility(seat, ownPlayerViewId, card.getId(),
@@ -6592,11 +4975,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
             final int selectedCardId = pendingLandCardId;
             ExpectedAction queued = script.peekFirst();
-            if (ownPlayerViewId < 0 || pendingLandCardId <= 0 || card.getId() != pendingLandCardId
-                    || card.getCurrentState().getType() == null || !card.getCurrentState().getType().isLand()
-                    || abilities == null || abilities.size() != 1 || abilities.get(0).getHostCard() == null
-                    || abilities.get(0).getHostCard().getId() != pendingLandCardId || !abilities.get(0).canPlay()
-                    || queued == null || queued.decision() != Decision.PLAY_LAND || queued.cardId() != pendingLandCardId) {
+            if (ownPlayerViewId < 0 || pendingLandCardId <= 0 || card.getId() != pendingLandCardId || card.getCurrentState().getType() == null || !card.getCurrentState().getType().isLand() || abilities == null || abilities.size() != 1 || abilities.get(0).getHostCard() == null || abilities.get(0).getHostCard().getId() != pendingLandCardId || !abilities.get(0).canPlay() || queued == null || queued.decision() != Decision.PLAY_LAND || queued.cardId() != pendingLandCardId) {
                 throw unexpected("unmatched getAbilityToPlay", card, abilities);
             }
             consume(queued);
@@ -6615,12 +4994,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (cards != null) for (CardView card : cards) ids.add(card.getId());
             String stage = "unexpected";
             List<Integer> ownPermanentHandIds = List.of();
-            if (seat == 1 && scenario.metamorphoseStage() == 3
-                    && scenario.metamorphoseLifecycleConcessionPending
-                    && scenario.metamorphoseAssignedConcessionGameViewId() >= 0) {
+            if (seat == 1 && scenario.metamorphoseStage() == 3 && scenario.metamorphoseLifecycleConcessionPending && scenario.metamorphoseAssignedConcessionGameViewId() >= 0) {
                 GameView current = getGameView();
-                if (current == null || current.getId() != scenario.metamorphoseAssignedConcessionGameViewId()
-                        || !current.isGameOver()) {
+                if (current == null || current.getId() != scenario.metamorphoseAssignedConcessionGameViewId() || !current.isGameOver()) {
                     fail("Buffered Meta selector arrived before its actual conceded game's terminal view: seat="
                             + seat + ",stage=" + scenario.metamorphoseStage() + ",viewId="
                             + (current == null ? -1 : current.getId()) + ",gameOver="
@@ -6707,19 +5083,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 GameView currentView = getGameView();
                 Set<Integer> actualIds = new HashSet<>(ids);
                 Set<Integer> expectedIds = new HashSet<>(freeChoice.handIds());
-                if (freeChoice.seat() != 0 || regularChoice == null || regularChoice.seat() != 1
-                        || regularChoice.receiptOrder() <= freeChoice.receiptOrder()
-                        || seat != 1 - freeChoice.seat() || ownPlayerViewId != regularChoice.chooserViewId()
-                        || receipt == null || currentView == null || currentView.getId() != freeChoice.gameViewId()
-                        || currentView.getId() != regularChoice.gameViewId() || wire == null || wire.eventId() < 0) {
+                if (freeChoice.seat() != 0 || regularChoice == null || regularChoice.seat() != 1 || regularChoice.receiptOrder() <= freeChoice.receiptOrder() || seat != 1 - freeChoice.seat() || ownPlayerViewId != regularChoice.chooserViewId() || receipt == null || currentView == null || currentView.getId() != freeChoice.gameViewId() || currentView.getId() != regularChoice.gameViewId() || wire == null || wire.eventId() < 0) {
                     throw unexpected("invalid actual composite free-mulligan reveal stage", seat, ownPlayerViewId,
                             min, max, ids, message, currentView == null ? -1 : currentView.getId(),
                             freeChoice.gameViewId(), regularChoice, wire);
                 }
                 String expectedMessage = expectedFreeRevealMessage(message);
-                if (min != -1 || max != -1 || choices == null || ids.size() != 7
-                        || actualIds.size() != 7 || !actualIds.equals(expectedIds)
-                        || !message.equals(expectedMessage)) {
+                if (min != -1 || max != -1 || choices == null || ids.size() != 7 || actualIds.size() != 7 || !actualIds.equals(expectedIds) || !message.equals(expectedMessage)) {
                     throw unexpected("invalid actual composite free-mulligan reveal stage", seat, ownPlayerViewId,
                             min, max, ids, message, currentView == null ? -1 : currentView.getId(),
                             freeChoice.gameViewId(), regularChoice, wire);
@@ -6746,9 +5116,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     canShow.add(card.canBeShownTo(chooser));
                 }
                 int expectedChooserSeat = 1 - scenario.privacyFengrafSeat();
-                if (seat != expectedChooserSeat || ownPlayerViewId != scenario.privacyViewIdForSeat(expectedChooserSeat)
-                        || min != -1 || max != -1 || !ids.equals(List.of(scenario.privacyPublicCreatureId()))
-                        || !scenario.privacyExpectedRevealMessage().equals(message) || chooser == null) {
+                if (seat != expectedChooserSeat || ownPlayerViewId != scenario.privacyViewIdForSeat(expectedChooserSeat) || min != -1 || max != -1 || !ids.equals(List.of(scenario.privacyPublicCreatureId())) || !scenario.privacyExpectedRevealMessage().equals(message) || chooser == null) {
                     throw unexpected("unexpected Fengraf public getChoices", message, min, max, ids);
                 }
                 String diagnostic = privacyRevealDiagnostic((CardView) choices.get(0),
@@ -6788,14 +5156,12 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
         @Override public int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption) {
             Localizer localizer = Localizer.getInstance();
-            if (ownPlayerViewId < 0 || expectedPlayerName == null
-                    || !localizer.getMessage("lblDanDanMulliganChoice", expectedPlayerName, 0).equals(message)) {
+            if (ownPlayerViewId < 0 || expectedPlayerName == null || !localizer.getMessage("lblDanDanMulliganChoice", expectedPlayerName, 0).equals(message)) {
                 throw unexpected("showOptionDialog chooser", message, title, icon, options, defaultOption);
             }
             List<String> expectedOptions = List.of(localizer.getMessage("lblKeep"),
                     localizer.getMessage("lblDanDanFreeMulligan"), localizer.getMessage("lblDanDanRegularMulligan"));
-            if (!localizer.getMessage("lblDanDanMulligan").equals(title)
-                    || !FSkinProp.ICO_QUESTION.equals(icon) || !expectedOptions.equals(options)) {
+            if (!localizer.getMessage("lblDanDanMulligan").equals(title) || !FSkinProp.ICO_QUESTION.equals(icon) || !expectedOptions.equals(options)) {
                 throw unexpected("showOptionDialog options", message, title, icon, options, defaultOption);
             }
             ExpectedAction expected = script.peekFirst();
@@ -6832,10 +5198,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             if (receipt == null) throw new AssertionError("Could not retain DanDan mulligan choice callback for seat " + seat);
             if (expected.decision() == Decision.KEEP_WITHOUT_LAND) {
                 GameView disconnectAiSourceView = getGameView();
-                int handCount = scenario.disconnectAiScenario() ? snapshotOwnHand().ids().size() : -1;
-                scenario.recordDisconnectAiKeepPrompt(seat, receipt.callbackOrdinal(),
-                        disconnectAiSourceView == null ? -1 : disconnectAiSourceView.getId(),
-                        "showOptionDialog", handCount);
+                int handCount = false ? snapshotOwnHand().ids().size() : -1;
+
                 if (scenario.metamorphoseScenario() || scenario.privacyScenario() || scenario.lifecycleScenario()) {
                     HandFacts hand = snapshotOwnHand();
                     GameView sourceView = getGameView();
@@ -6846,17 +5210,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         recordLifecycleKeep(receipt, hand);
                     }
                 }
-                if (scenario.privacyHistoryNextGamePhase()) {
-                    recordPrivacyHistoryNextGameKeep(receipt, snapshotOwnHand());
-                    if (scenario.stopped()) {
-                        throw new AssertionError("N+1 Keep receipt failed before its scripted action was consumed",
-                                scenario.failure());
-                    }
-                }
+
             }
             consume(expected);
             scenario.recordAction(new ActionReceipt(Decision.KEEP_WITHOUT_LAND, seat, ownPlayerViewId, null, true));
-            return keepIndex; // choose Keep explicitly; never use the dialog's default
+            return keepIndex;
         }
         @Override public String showInputDialog(String message, String title, FSkinProp icon, String initial, List<String> options, boolean numeric) {
             throw unexpected("showInputDialog", message, title, icon, initial, options, numeric);
@@ -6886,10 +5244,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 PreHandlerFact wire = seat == 1 ? claimPrivacyFact("chooseEntitiesForEffect", receipt) : null;
                 PlayerView chooser = findPlayerView(getGameView(), ownPlayerViewId);
                 PlayerView other = findPlayerView(getGameView(), scenario.privacyViewIdForSeat(1 - scenario.privacyTellingTimeSeat()));
-                if (seat != scenario.privacyTellingTimeSeat()
-                        || ownPlayerViewId != scenario.privacyViewIdForSeat(scenario.privacyTellingTimeSeat())
-                        || chooser == null || other == null
-                        || min != 1 || max != 1 || ids.isEmpty()) {
+                if (seat != scenario.privacyTellingTimeSeat() || ownPlayerViewId != scenario.privacyViewIdForSeat(scenario.privacyTellingTimeSeat()) || chooser == null || other == null || min != 1 || max != 1 || ids.isEmpty()) {
                     throw unexpected("invalid Telling Time private choice", title, min, max, ids);
                 }
                 int index = scenario.privacyTellingTimeChoiceCount();
@@ -6958,27 +5313,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         private boolean retainLondonForAppliedHand(Capture buttons, PlayerView owner,
                 String one, String two, boolean enabledOne, boolean enabledTwo) {
-            if (!scenario.privacyMulliganPrefixScenario() || !remote || seat != 1
-                    || owner == null || owner.getId() != ownPlayerViewId
-                    || !Localizer.getInstance().getMessage("lblOK").equalsIgnoreCase(one)
-                    || !Localizer.getInstance().getMessage("lblAuto").equalsIgnoreCase(two)
-                    || enabledOne || !enabledTwo || buttons == null || buttons.callbackOrdinal() <= 0) return false;
+            if (!scenario.privacyMulliganPrefixScenario() || !remote || seat != 1 || owner == null || owner.getId() != ownPlayerViewId || !Localizer.getInstance().getMessage("lblOK").equalsIgnoreCase(one) || !Localizer.getInstance().getMessage("lblAuto").equalsIgnoreCase(two) || enabledOne || !enabledTwo || buttons == null || buttons.callbackOrdinal() <= 0) return false;
             MulliganChoiceReceipt regular = scenario.regularMulliganChoice();
             Game engine = scenario.openingKeepEngineGame();
             GameView current = getGameView();
-            if (regular == null || regular.decision() != Decision.REGULAR_MULLIGAN || regular.seat() != seat
-                    || regular.chooserViewId() != ownPlayerViewId || engine == null || current == null
-                    || engine.getView() == null || current.getId() != engine.getView().getId()
-                    || regular.gameViewId() != current.getId()
-                    || seat >= engine.getPlayers().size()
-                    || engine.getPlayers().get(seat).getId() != ownPlayerViewId
-                    || !(engine.getPlayers().get(seat).getController() instanceof PlayerControllerHuman serverController)
-                    || serverController.getGame() != engine) return false;
+            if (regular == null || regular.decision() != Decision.REGULAR_MULLIGAN || regular.seat() != seat || regular.chooserViewId() != ownPlayerViewId || engine == null || current == null || engine.getView() == null || current.getId() != engine.getView().getId() || regular.gameViewId() != current.getId() || seat >= engine.getPlayers().size() || engine.getPlayers().get(seat).getId() != ownPlayerViewId || !(engine.getPlayers().get(seat).getController() instanceof PlayerControllerHuman serverController) || serverController.getGame() != engine) return false;
             PrivacyInputSnapshot input = new PrivacyInputSnapshot(
                     serverController.getInputProxy().getInput(), serverController.getInputQueue().getInput());
-            if (input.proxyInput() == null || input.proxyInput() != input.queuedInput()
-                    || !(input.proxyInput() instanceof InputLondonMulligan londonInput)
-                    || londonInput.getOwner() == null || londonInput.getOwner().getId() != ownPlayerViewId) return false;
+            if (input.proxyInput() == null || input.proxyInput() != input.queuedInput() || !(input.proxyInput() instanceof InputLondonMulligan londonInput) || londonInput.getOwner() == null || londonInput.getOwner().getId() != ownPlayerViewId) return false;
             IGameController endpoint = getGameController(owner);
             if (endpoint == null || scenario.stopped()) return false;
             if (pendingLondonPromptOrdinal >= 0) {
@@ -7002,9 +5344,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
         private void dispatchLondonSelectedCard(Capture prompt, String message) {
             String expectedOne = String.format(Localizer.getInstance().getMessage("lblReturnForLondon"), 1);
-            if (prompt == null || prompt.callbackOrdinal() <= pendingLondonPromptOrdinal
-                    || !expectedOne.equals(message) || londonSelectedCard == null || londonController == null
-                    || !londonSelectionClaimed.compareAndSet(false, true)) {
+            if (prompt == null || prompt.callbackOrdinal() <= pendingLondonPromptOrdinal || !expectedOne.equals(message) || londonSelectedCard == null || londonController == null || !londonSelectionClaimed.compareAndSet(false, true)) {
                 fail("London one-card prompt lacked one retained applied-hand selection");
                 return;
             }
@@ -7052,10 +5392,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         }
 
         private void observeLondonAppliedHand(Capture appliedCapture, GameView appliedView) {
-            if (!londonAwaitingAppliedHand || appliedCapture == null || appliedView == null
-                    || !appliedCapture.stateBearing()
-                    || appliedCapture.callbackOrdinal() <= londonButtonsCallbackOrdinal
-                    || scenario.stopped()) return;
+            if (!londonAwaitingAppliedHand || appliedCapture == null || appliedView == null || !appliedCapture.stateBearing() || appliedCapture.callbackOrdinal() <= londonButtonsCallbackOrdinal || scenario.stopped()) return;
             if (appliedView.getId() != londonGameViewId || getGameView() != appliedView) {
                 fail("London post-button state changed the retained current GameView identity");
                 return;
@@ -7063,10 +5400,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             Game engine = londonEngineGame;
             PlayerControllerHuman controller = londonEngineController;
             InputLondonMulligan input = londonEngineInput;
-            if (engine == null || controller == null || input == null || engine != scenario.openingKeepEngineGame()
-                    || controller.getGame() != engine || engine.getView() == null
-                    || engine.getView().getId() != londonGameViewId || seat >= engine.getPlayers().size()
-                    || engine.getPlayers().get(seat).getId() != ownPlayerViewId) {
+            if (engine == null || controller == null || input == null || engine != scenario.openingKeepEngineGame() || controller.getGame() != engine || engine.getView() == null || engine.getView().getId() != londonGameViewId || seat >= engine.getPlayers().size() || engine.getPlayers().get(seat).getId() != ownPlayerViewId) {
                 fail("London applied-hand gate lost its retained same-Game controller identity");
                 return;
             }
@@ -7084,10 +5418,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             List<Integer> handIds = own == null || own.getHand() == null ? List.of() : cardIds(own.getHand());
             List<Integer> receiptHand = receipt.zonesByPlayer().getOrDefault(ownPlayerViewId, Map.of())
                     .getOrDefault(ZoneType.Hand, List.of());
-            if (appliedView.getTracker() != receipt.trackerIdentity() || handIds.size() != 7
-                    || !handIds.equals(receiptHand) || own == null || endpoint != londonController
-                    || currentInput.proxyInput() != input || currentInput.queuedInput() != input
-                    || input.getOwner() == null || input.getOwner().getId() != ownPlayerViewId) {
+            if (appliedView.getTracker() != receipt.trackerIdentity() || handIds.size() != 7 || !handIds.equals(receiptHand) || own == null || endpoint != londonController || currentInput.proxyInput() != input || currentInput.queuedInput() != input || input.getOwner() == null || input.getOwner().getId() != ownPlayerViewId) {
                 fail("London post-button applied Hand did not retain its seven-card same-input witness");
                 return;
             }
@@ -7118,13 +5449,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 scenario.recordPrivacyPrompt(new PrivacyPromptReceipt(seat, player.getId(),
                         prompt.callbackOrdinal(), message));
             }
-            if (scenario.privacyScenario() && seat == scenario.privacyFengrafSeat() && player != null
-                    && player.getId() == scenario.privacyViewIdForSeat(scenario.privacyFengrafSeat())
-                    && scenario.privacyConfirmationRepaintPending()) {
+            if (scenario.privacyScenario() && seat == scenario.privacyFengrafSeat() && player != null && player.getId() == scenario.privacyViewIdForSeat(scenario.privacyFengrafSeat()) && scenario.privacyConfirmationRepaintPending()) {
                 PrivacyInputSnapshot inputSnapshot = scenario.privacyInputSnapshotForSeat(scenario.privacyFengrafSeat());
-                if (prompt == null || prompt.callbackOrdinal() <= scenario.privacyConfirmRepaintOrdinal()
-                        || card != null && card.getId() != scenario.privacyFengrafId()
-                        || !scenario.privacyExpectedSacrificeMessage().equals(message)) {
+                if (prompt == null || prompt.callbackOrdinal() <= scenario.privacyConfirmRepaintOrdinal() || card != null && card.getId() != scenario.privacyFengrafId() || !scenario.privacyExpectedSacrificeMessage().equals(message)) {
                     fail("Fengraf repaint message did not retain its exact source and prompt: prompt="
                             + (prompt == null ? "null" : prompt.callbackOrdinal()) + ", buttons="
                             + scenario.privacyConfirmRepaintOrdinal() + ", card="
@@ -7137,12 +5464,9 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         card == null ? -1 : card.getId(), inputSnapshot);
                 return;
             }
-            if (scenario.privacyScenario() && seat == scenario.privacyFengrafSeat() && player != null
-                    && player.getId() == scenario.privacyViewIdForSeat(scenario.privacyFengrafSeat())
-                    && scenario.privacyConfirmationPending()) {
+            if (scenario.privacyScenario() && seat == scenario.privacyFengrafSeat() && player != null && player.getId() == scenario.privacyViewIdForSeat(scenario.privacyFengrafSeat()) && scenario.privacyConfirmationPending()) {
                 PrivacyInputSnapshot inputSnapshot = scenario.privacyInputSnapshotForSeat(scenario.privacyFengrafSeat());
-                if (prompt == null || prompt.callbackOrdinal() <= scenario.privacyConfirmButtonsOrdinal()
-                        || card != null && card.getId() != scenario.privacyFengrafId()) {
+                if (prompt == null || prompt.callbackOrdinal() <= scenario.privacyConfirmButtonsOrdinal() || card != null && card.getId() != scenario.privacyFengrafId()) {
                     fail("Fengraf message predicate failed: prompt=" + (prompt == null ? "null" : prompt.callbackOrdinal())
                             + ", buttons=" + scenario.privacyConfirmButtonsOrdinal() + ", card="
                             + (card == null ? -1 : card.getId()) + "/" + scenario.privacyFengrafId()
@@ -7173,10 +5497,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 int promptViewId = player == null ? -1 : player.getId();
                 if (seat == 0 && scenario.metamorphoseStage() == 1 && !pendingMetamorphoseTargetIds.isEmpty()) {
                     CardView selected = findVisibleCard(getGameView(), scenario.metamorphoseTargetCardId());
-                    if (prompt == null || prompt.callbackOrdinal() <= 0 || promptViewId != ownPlayerViewId || card == null
-                            || card.getId() != scenario.metamorphoseHostCardId()
-                            || selected == null || !pendingMetamorphoseTargetIds.contains(selected.getId())
-                            || pendingMetamorphoseTargetPromptOrdinal > 0) {
+                    if (prompt == null || prompt.callbackOrdinal() <= 0 || promptViewId != ownPlayerViewId || card == null || card.getId() != scenario.metamorphoseHostCardId() || selected == null || !pendingMetamorphoseTargetIds.contains(selected.getId()) || pendingMetamorphoseTargetPromptOrdinal > 0) {
                         fail("Metamorphose's actual target prompt did not expose the assigned target Island");
                     } else {
                         pendingMetamorphoseTargetPromptOrdinal = prompt == null ? -1 : prompt.callbackOrdinal();
@@ -7210,20 +5531,15 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     }
                     return;
                 }
-                if (seat == 1 && scenario.heldMetamorphoseOptionalBeforeLifecycleConcession()
-                        && scenario.metamorphoseStage() == 3) {
+                if (seat == 1 && scenario.heldMetamorphoseOptionalBeforeLifecycleConcession() && scenario.metamorphoseStage() == 3) {
                     scenario.recordMetamorphoseHeldOptionalPromptRepaint(seat, promptViewId,
                             gameViewId(getGameView()), prompt == null ? -1 : prompt.callbackOrdinal(), message,
                             scenario.metamorphoseRemoteInputSnapshot(scenario.metamorphoseGame()));
                     return;
                 }
-                if (seat == 1 && scenario.metamorphoseAccept() && scenario.metamorphoseStage() == 4
-                        && !pendingMetamorphoseHandIds.isEmpty()) {
+                if (seat == 1 && scenario.metamorphoseAccept() && scenario.metamorphoseStage() == 4 && !pendingMetamorphoseHandIds.isEmpty()) {
                     CardView selected = findVisibleCard(getGameView(), scenario.metamorphoseHandCardId());
-                    if (selected == null || !pendingMetamorphoseHandIds.contains(selected.getId())
-                            || player == null || player.getId() != ownPlayerViewId
-                            || prompt == null || prompt.callbackOrdinal() <= 0
-                            || pendingMetamorphoseHandPromptOrdinal > 0) {
+                    if (selected == null || !pendingMetamorphoseHandIds.contains(selected.getId()) || player == null || player.getId() != ownPlayerViewId || prompt == null || prompt.callbackOrdinal() <= 0 || pendingMetamorphoseHandPromptOrdinal > 0) {
                         fail("Metamorphose private-hand prompt did not expose its exact assigned B chooser and selected card");
                     } else {
                         pendingMetamorphoseHandPromptOrdinal = prompt == null ? -1 : prompt.callbackOrdinal();
@@ -7248,8 +5564,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             String expectedZero = String.format(Localizer.getInstance().getMessage("lblReturnForLondon"), 0);
             if (!scenario.mulliganScenario()) return;
             if (expectedOne.equals(message) && londonAwaitingAppliedHand) {
-                if (prompt == null || prompt.callbackOrdinal() <= londonButtonsCallbackOrdinal
-                        || londonOneCardPromptCapture != null) {
+                if (prompt == null || prompt.callbackOrdinal() <= londonButtonsCallbackOrdinal || londonOneCardPromptCapture != null) {
                     fail("London one-card message did not uniquely follow its retained button callback");
                     return;
                 }
@@ -7274,16 +5589,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     fail("London one-card message did not follow its actual button callback");
                     return;
                 }
-                if (londonAppliedHandCallbackOrdinal > 0
-                        && londonAppliedHandCallbackOrdinal <= pendingLondonPromptOrdinal) {
+                if (londonAppliedHandCallbackOrdinal > 0 && londonAppliedHandCallbackOrdinal <= pendingLondonPromptOrdinal) {
                     fail("London applied-hand witness did not follow its button callback");
                     return;
                 }
                 dispatchLondonSelectedCard(prompt, message);
                 return;
             }
-            if (expectedZero.equals(message) && pendingLondonBottomCardId > 0 && londonEnabledOkCallbackSeen
-                    && londonZeroPromptOrdinal < 0) {
+            if (expectedZero.equals(message) && pendingLondonBottomCardId > 0 && londonEnabledOkCallbackSeen && londonZeroPromptOrdinal < 0) {
                 londonZeroPromptOrdinal = prompt.callbackOrdinal();
                 londonZeroCardPrompt = message;
                 final IGameController controller = londonController;
@@ -7315,26 +5628,19 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             Localizer localizer = Localizer.getInstance();
             String oneText = one == null ? "" : one.trim();
             String twoText = two == null ? "" : two.trim();
-            if (scenario.privacyScenario() && owner != null && seat == scenario.privacyFengrafSeat()
-                    && owner.getId() == scenario.privacyViewIdForSeat(scenario.privacyFengrafSeat())
-                    && localizer.getMessage("lblYes").equalsIgnoreCase(oneText)
-                    && localizer.getMessage("lblNo").equalsIgnoreCase(twoText)) {
+            if (scenario.privacyScenario() && owner != null && seat == scenario.privacyFengrafSeat() && owner.getId() == scenario.privacyViewIdForSeat(scenario.privacyFengrafSeat()) && localizer.getMessage("lblYes").equalsIgnoreCase(oneText) && localizer.getMessage("lblNo").equalsIgnoreCase(twoText)) {
                 PrivacyInputSnapshot inputSnapshot = scenario.privacyInputSnapshotForSeat(scenario.privacyFengrafSeat());
                 scenario.recordPrivacySacrificeButtons(seat, ownPlayerViewId,
                         promptCapture == null ? -1 : promptCapture.callbackOrdinal(), oneText, twoText,
                         enabledOne, enabledTwo, inputSnapshot);
                 return;
             }
-            if (scenario.privacyScenario() && owner != null && owner.getId() == ownPlayerViewId
-                    && localizer.getMessage("lblAuto").equalsIgnoreCase(oneText)
-                    && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
-                if (promptCapture != null && promptCapture.callbackOrdinal() > 0
-                        && promptCapture.callbackOrdinal() <= lastPrivacyManaContinuationOrdinal) return;
+            if (scenario.privacyScenario() && owner != null && owner.getId() == ownPlayerViewId && localizer.getMessage("lblAuto").equalsIgnoreCase(oneText) && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
+                if (promptCapture != null && promptCapture.callbackOrdinal() > 0 && promptCapture.callbackOrdinal() <= lastPrivacyManaContinuationOrdinal) return;
                 if (pendingPrivacyManaCardId > 0) {
                     CardView pending = findVisibleCard(getGameView(), pendingPrivacyManaCardId);
                     if (pending == null || !pending.isTapped()) {
-                        if (enabledOne && enabledTwo && promptCapture != null
-                                && promptCapture.callbackOrdinal() > 0) {
+                        if (enabledOne && enabledTwo && promptCapture != null && promptCapture.callbackOrdinal() > 0) {
                             pendingPrivacyManaPromptOrdinal = promptCapture.callbackOrdinal();
                             pendingPrivacyManaPromptOwnerId = owner.getId();
                             pendingPrivacyManaPromptController = getGameController(owner);
@@ -7356,73 +5662,16 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 dispatchPrivacyManaSource(ownPlayerViewId, paymentController);
                 return;
             }
-            if (scenario.privacyShuffleHistoryScenario() && remote && seat == 1 && owner != null
-                    && owner.getId() == scenario.privacyRemoteViewId()) {
-                GameView cleanupView = getGameView();
-                PlayerView turnPlayer = cleanupView == null ? null : cleanupView.getPlayerTurn();
-                if (cleanupView != null && cleanupView.getTurn() == 2
-                        && cleanupView.getPhase() == PhaseType.CLEANUP
-                        && turnPlayer != null && turnPlayer.getId() == scenario.privacyRemoteViewId()
-                        && owner.getHand() != null && owner.getHand().size() == owner.getMaxHandSize() + 1) {
-                    PrivacyInputSnapshot input = scenario.privacyInputSnapshotForSeat(1);
-                    boolean actualDiscardInput = input != null && input.proxyInput() != null
-                            && input.proxyInput() == input.queuedInput()
-                            && input.proxyInput() instanceof InputSelectCardsFromList;
-                    IGameController discardController = getGameController(owner);
-                    int gameViewId = cleanupView.getId();
-                    if (scenario.privacyShuffleTurnTwoDiscardId() > 0) {
-                        if (scenario.isSamePrivacyShuffleTurnTwoDiscardPrompt(input, gameViewId,
-                                ownPlayerViewId, oneText, twoText, enabledOne, enabledTwo)) return;
-                        if (scenario.isPrivacyShuffleTurnTwoDiscardInputGone(input, gameViewId)
-                                && isPrivacyShuffleAwaitRefresh(promptCapture, owner, oneText, twoText,
-                                        enabledOne, enabledTwo)) {
-                            return;
-                        }
-                        fail("T2 cleanup repeated callback did not match its retained exact input");
-                        return;
-                    }
-                    if (!actualDiscardInput || discardController == null || cleanupView.getStack() == null
-                            || !cleanupView.getStack().isEmpty() || owner.getMaxHandSize() != 7
-                            || owner.getHand().size() != 8
-                            || gameViewId != scenario.privacyGame().getView().getId()
-                            || !localizer.getMessage("lblOK").equalsIgnoreCase(oneText)
-                            || !localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)
-                            || enabledOne || enabledTwo || promptCapture == null) {
-                        fail("remote T2 cleanup did not expose its exact one-card InputSelectCardsFromList");
-                        return;
-                    }
-                    CardView discarded = owner.getHand().get(0);
-                    try {
-                        scenario.recordPrivacyShuffleTurnTwoDiscard(seat, ownPlayerViewId, gameViewId,
-                                promptCapture.callbackOrdinal(), (InputSelectCardsFromList) input.proxyInput(),
-                                cleanupView.getTurn(), cleanupView.getPhase(), turnPlayer.getId(), cleanupView.getStack().size(),
-                                owner.getHand().size(), owner.getMaxHandSize(), discarded.getId(), enabledOne, enabledTwo);
-                    } catch (Throwable error) {
-                        scenario.fail(error);
-                        return;
-                    }
-                    queueAction(() -> {
-                        if (!discardController.selectCard(discarded, null, null)) {
-                            fail("remote controller rejected its legal T2 maximum-hand-size discard");
-                        }
-                    });
-                    return;
-                }
-            }
+
             if (scenario.metamorphoseScenario() && pendingMetamorphoseTargetPromptOrdinal > 0) {
-                if (seat != 0 || owner == null || owner.getId() != ownPlayerViewId
-                        || promptCapture == null || promptCapture.callbackOrdinal() <= pendingMetamorphoseTargetPromptOrdinal
-                        || !localizer.getMessage("lblOK").equalsIgnoreCase(oneText)
-                        || !localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)
-                        || enabledOne || !enabledTwo) {
+                if (seat != 0 || owner == null || owner.getId() != ownPlayerViewId || promptCapture == null || promptCapture.callbackOrdinal() <= pendingMetamorphoseTargetPromptOrdinal || !localizer.getMessage("lblOK").equalsIgnoreCase(oneText) || !localizer.getMessage("lblCancel").equalsIgnoreCase(twoText) || enabledOne || !enabledTwo) {
                     fail("Metamorphose target prompt did not receive its matching initial OK-disabled/Cancel-enabled buttons");
                     return;
                 }
                 GameView current = getGameView();
                 CardView selected = findVisibleCard(current, scenario.metamorphoseTargetCardId());
                 IGameController targetController = getGameController(owner);
-                if (selected == null || !pendingMetamorphoseTargetIds.contains(selected.getId())
-                        || targetController == null) {
+                if (selected == null || !pendingMetamorphoseTargetIds.contains(selected.getId()) || targetController == null) {
                     fail("Metamorphose target buttons arrived without the assigned visible target and controller");
                     return;
                 }
@@ -7459,11 +5708,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 return;
             }
             if (scenario.metamorphoseScenario() && pendingMetamorphoseHandPromptOrdinal > 0) {
-                if (seat != 1 || owner == null || owner.getId() != ownPlayerViewId
-                        || promptCapture == null || promptCapture.callbackOrdinal() <= pendingMetamorphoseHandPromptOrdinal
-                        || !localizer.getMessage("lblOK").equalsIgnoreCase(oneText)
-                        || !localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)
-                        || enabledOne || !enabledTwo) {
+                if (seat != 1 || owner == null || owner.getId() != ownPlayerViewId || promptCapture == null || promptCapture.callbackOrdinal() <= pendingMetamorphoseHandPromptOrdinal || !localizer.getMessage("lblOK").equalsIgnoreCase(oneText) || !localizer.getMessage("lblCancel").equalsIgnoreCase(twoText) || enabledOne || !enabledTwo) {
                     fail("Metamorphose private-hand prompt did not receive its matching initial OK-disabled/Cancel-enabled buttons");
                     return;
                 }
@@ -7538,12 +5783,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 if (stackCheckpoint == null) return;
                 if (scenario.isRepeatedPrivacyStackPriority(stackCheckpoint)) return;
                 if (!scenario.beginPrivacyStackPriority(stackCheckpoint)) return;
-            } else if (privacyPriorityPrompt && stackSize == 0
-                    && !scenario.reconcilePrivacyStackPassBeforePriority()) {
+            } else if (privacyPriorityPrompt && stackSize == 0 && !scenario.reconcilePrivacyStackPassBeforePriority()) {
                 return;
             }
-            if (scenario.privacyScenario() && seat == 0 && promptCapture != null
-                    && isPriorityPrompt(oneText, twoText)) {
+            if (scenario.privacyScenario() && seat == 0 && promptCapture != null && isPriorityPrompt(oneText, twoText)) {
                 recordAppliedView("privacyPriority", promptCapture, game.getId(), game);
             }
             if (isPriorityPrompt(oneText, twoText) && promptCapture != null) {
@@ -7553,28 +5796,18 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         turnPlayer == null ? -1 : turnPlayer.getId(), oneText, twoText,
                         enabledOne, enabledTwo);
                 priorityPrompts.add(receipt);
-                scenario.recordDisconnectAiPriority(game.getId(), seat, ownPlayerViewId,
-                        promptCapture.callbackOrdinal(), game.getTurn(), game.getPhase(),
-                        turnPlayer == null ? -1 : turnPlayer.getId());
-                if (scenario.holdDisconnectAiGameNPriority(game, seat, ownPlayerViewId,
-                        promptCapture.callbackOrdinal(), this, controller)) return;
-                if (scenario.holdDisconnectAiNextGamePriority(game, seat, ownPlayerViewId,
-                        promptCapture.callbackOrdinal(), this, controller)) return;
-                if (scenario.retainPositiveRemoteOwnManaUndoPriority(game.getId(), seat, ownPlayerViewId,
-                        promptCapture.callbackOrdinal(), game, twoText, enabledOne, enabledTwo)) return;
+
                 if (seat == 0 && receipt.turn() == 1 && receipt.phase() == PhaseType.MAIN1) {
                     turnOneMainOnePriority.countDown();
                 }
-                int replayTurn = scenario.privacyHistoryReconnectScenario() ? 4 : 1;
-                int replayTurnPlayer = scenario.privacyHistoryReconnectScenario()
+                int replayTurn = false ? 4 : 1;
+                int replayTurnPlayer = false
                         ? scenario.privacyViewIdForSeat(1) : scenario.playerViewIdForSeat(0);
-                if (expectReconnectReplay && seat == 1 && receipt.turn() == replayTurn
-                        && receipt.phase() == PhaseType.UPKEEP && receipt.turnPlayerViewId() == replayTurnPlayer) {
+                if (expectReconnectReplay && seat == 1 && receipt.turn() == replayTurn && receipt.phase() == PhaseType.UPKEEP && receipt.turnPlayerViewId() == replayTurnPlayer) {
                     reconnectReplayPriority.countDown();
                 }
             }
-            if (scenario.privacyScenario() && game.getStack() != null && game.getStack().size() == 1
-                    && isPriorityPrompt(oneText, twoText) && promptCapture != null) {
+            if (scenario.privacyScenario() && game.getStack() != null && game.getStack().size() == 1 && isPriorityPrompt(oneText, twoText) && promptCapture != null) {
                 StackItemView item = game.getStack().get(0);
                 CardView source = item == null ? null : item.getSourceCard();
                 PlayerView activator = item == null ? null : item.getActivatingPlayer();
@@ -7592,8 +5825,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     }
                     scenario.recordPrivacyPayment(paymentReceipt, stackCheckpoint.ability());
                     if (scenario.stopped()) return;
-                    if (!remote && activator.getId() == ownPlayerViewId && pendingPrivacyManaCardId > 0
-                            && paymentReceipt.payingManaSourceIds().contains(pendingPrivacyManaCardId)) {
+                    if (!remote && activator.getId() == ownPlayerViewId && pendingPrivacyManaCardId > 0 && paymentReceipt.payingManaSourceIds().contains(pendingPrivacyManaCardId)) {
                         pendingPrivacyManaCardId = -1;
                         pendingPrivacyManaPromptOrdinal = -1;
                         pendingPrivacyManaPromptOwnerId = -1;
@@ -7610,16 +5842,11 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         this);
                 if (action == null || scenario.stopped()) return;
                 final PrivacyStackPriorityCheckpoint acceptedStackCheckpoint = stackCheckpoint;
-                if (action == PrivacyPriorityAction.HOLD_TELLING_TIME
-                        || action == PrivacyPriorityAction.HOLD_FENGRAF
-                        || action == PrivacyPriorityAction.HOLD_SHUFFLE_HISTORY
-                        || action == PrivacyPriorityAction.HOLD_HISTORY_RECONNECT_HOST
-                        || action == PrivacyPriorityAction.HOLD_T3_SHUFFLE_CAST) return;
+                if (action == PrivacyPriorityAction.HOLD_TELLING_TIME || action == PrivacyPriorityAction.HOLD_FENGRAF || action == PrivacyPriorityAction.HOLD_SHUFFLE_HISTORY || action == PrivacyPriorityAction.HOLD_HISTORY_RECONNECT_HOST || action == PrivacyPriorityAction.HOLD_T3_SHUFFLE_CAST) return;
                 if (action == PrivacyPriorityAction.CAST_TELLING_TIME) {
                     CardView tellingTime = findVisibleCard(game, scenario.privacyTellingTimeId());
                     PlayerView own = findPlayerView(game, ownPlayerViewId);
-                    if (tellingTime == null || own == null || own.getHand() == null
-                            || !cardIds(own.getHand()).contains(scenario.privacyTellingTimeId())) {
+                    if (tellingTime == null || own == null || own.getHand() == null || !cardIds(own.getHand()).contains(scenario.privacyTellingTimeId())) {
                         fail("Remote assigned hand did not contain the actual Telling Time at MAIN1 priority");
                         return;
                     }
@@ -7656,9 +5883,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
             ExpectedAction expected = script.peekFirst();
 
-            if (scenario.mulliganScenario()
-                    && localizer.getMessage("lblOK").equalsIgnoreCase(oneText)
-                    && localizer.getMessage("lblAuto").equalsIgnoreCase(twoText)) {
+            if (scenario.mulliganScenario() && localizer.getMessage("lblOK").equalsIgnoreCase(oneText) && localizer.getMessage("lblAuto").equalsIgnoreCase(twoText)) {
                 if (scenario.hasLondonBottom()) {
                     fail("Received an additional London bottom prompt after the scripted selection");
                     return;
@@ -7671,17 +5896,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     }
                     return;
                 }
-                if (pendingLondonPromptOrdinal > 0
-                        && (londonAwaitingAppliedHand || londonSelectedCard != null)) {
+                if (pendingLondonPromptOrdinal > 0 && (londonAwaitingAppliedHand || londonSelectedCard != null)) {
                     if (retainLondonForAppliedHand(promptCapture, owner, oneText, twoText,
                             enabledOne, enabledTwo)) return;
                     fail("Repeated London readiness buttons changed the retained same-input prompt");
                     return;
                 }
                 MulliganChoiceReceipt regularChoice = scenario.regularMulliganChoice();
-                if (regularChoice == null || regularChoice.seat() != seat
-                        || regularChoice.chooserViewId() != ownPlayerViewId
-                        || enabledOne || !enabledTwo || pendingLondonBottomCardId > 0 || londonController != null) {
+                if (regularChoice == null || regularChoice.seat() != seat || regularChoice.chooserViewId() != ownPlayerViewId || enabledOne || !enabledTwo || pendingLondonBottomCardId > 0 || londonController != null) {
                     fail("Unexpected repeated or already-complete London bottom prompt for seat " + seat);
                     return;
                 }
@@ -7704,17 +5926,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 return;
             }
 
-            if (scenario.metamorphoseScenario() && owner.getId() == scenario.metamorphoseRemoteViewId()
-                    && localizer.getMessage("lblYes").equalsIgnoreCase(oneText)
-                    && localizer.getMessage("lblNo").equalsIgnoreCase(twoText)) {
+            if (scenario.metamorphoseScenario() && owner.getId() == scenario.metamorphoseRemoteViewId() && localizer.getMessage("lblYes").equalsIgnoreCase(oneText) && localizer.getMessage("lblNo").equalsIgnoreCase(twoText)) {
                 if (scenario.metamorphoseStage() == 2) {
                     scenario.recordMetamorphoseOptionalButtons(seat, ownPlayerViewId,
                             promptCapture == null ? -1 : promptCapture.callbackOrdinal(), oneText, twoText,
                             enabledOne, enabledTwo);
                     return;
                 }
-                if (scenario.heldMetamorphoseOptionalBeforeLifecycleConcession()
-                        && scenario.metamorphoseStage() == 3) {
+                if (scenario.heldMetamorphoseOptionalBeforeLifecycleConcession() && scenario.metamorphoseStage() == 3) {
                     scenario.recordMetamorphoseHeldOptionalButtonRepaint(seat, ownPlayerViewId,
                             gameViewId(getGameView()), promptCapture == null ? -1 : promptCapture.callbackOrdinal(),
                             oneText, twoText, enabledOne, enabledTwo,
@@ -7729,10 +5948,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     return;
                 }
             }
-            if (scenario.metamorphoseScenario() && owner.getId() == ownPlayerViewId
-                    && scenario.metamorphoseStage() == 2
-                    && localizer.getMessage("lblAuto").equalsIgnoreCase(oneText)
-                    && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
+            if (scenario.metamorphoseScenario() && owner.getId() == ownPlayerViewId && scenario.metamorphoseStage() == 2 && localizer.getMessage("lblAuto").equalsIgnoreCase(oneText) && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
                 if (pendingMetamorphoseManaCardId > 0) {
                     CardView pending = findVisibleCard(game, pendingMetamorphoseManaCardId);
                     if (pending == null || !pending.isTapped()) return;
@@ -7768,8 +5984,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 queueAction(controller::selectButtonOk); // explicit Play choice
                 return;
             }
-            if (expected != null && expected.decision() == Decision.START_SEAT_ZERO
-                    && isLocalizedPlayDrawPrompt(oneText, twoText)) {
+            if (expected != null && expected.decision() == Decision.START_SEAT_ZERO && isLocalizedPlayDrawPrompt(oneText, twoText)) {
                 if (!scenario.starterSeatZeroScenario()) {
                     fail("START_SEAT_ZERO was queued outside its named scenario");
                     return;
@@ -7789,8 +6004,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     consume(expected); // this seat was not chosen for the match's single Play/Draw question
                     expected = script.peekFirst();
                 }
-                if (scenario.mulliganScenario() && expected != null
-                        && expected.decision() == Decision.MULLIGAN_ANY) {
+                if (scenario.mulliganScenario() && expected != null && expected.decision() == Decision.MULLIGAN_ANY) {
                     scenario.assertInitialShuffleConsumed();
                     Decision choice = scenario.chooseInitialMulligan(seat);
                     if (choice != Decision.REGULAR_MULLIGAN) {
@@ -7809,15 +6023,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     queueAction(controller::selectButtonCancel); // explicit Regular London mulligan
                     return;
                 }
-                if (expected == null || expected.decision() != Decision.KEEP
-                        && expected.decision() != Decision.KEEP_WITHOUT_LAND) {
+                if (expected == null || expected.decision() != Decision.KEEP && expected.decision() != Decision.KEEP_WITHOUT_LAND) {
                     fail("Unexpected Keep/Mulligan prompt for seat " + seat);
                     return;
                 }
                 if (expected.decision() == Decision.KEEP_WITHOUT_LAND && promptCapture != null) {
-                    HandFacts disconnectAiHand = scenario.disconnectAiScenario() ? snapshotOwnHand() : null;
-                    scenario.recordDisconnectAiKeepPrompt(seat, promptCapture.callbackOrdinal(), game.getId(),
-                            "updateButtons", disconnectAiHand == null ? -1 : disconnectAiHand.ids().size());
+                    HandFacts disconnectAiHand = false ? snapshotOwnHand() : null;
+
                     if (routeOpeningKeepAfterAppliedHand(promptCapture, owner, oneText, twoText,
                             enabledOne, enabledTwo, expected)) return;
                     if (scenario.metamorphoseScenario() || scenario.privacyScenario() || scenario.lifecycleScenario()) {
@@ -7832,10 +6044,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                             recordLifecycleKeep(promptCapture, hand);
                         }
                     }
-                    if (scenario.privacyHistoryNextGamePhase()) {
-                        recordPrivacyHistoryNextGameKeep(promptCapture, snapshotOwnHand());
-                        if (scenario.stopped()) return;
-                    }
+
                 }
                 consume(expected);
                 scenario.recordAction(new ActionReceipt(expected.decision(), seat, ownPlayerViewId, null, true));
@@ -7847,11 +6056,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 queueAction(controller::selectButtonCancel); // explicitly decline optional auto-yield suggestion
                 return;
             }
-            if (scenario.metamorphoseScenario() && seat == 0 && owner != null
-                    && owner.getId() == scenario.metamorphoseHostViewId()
-                    && scenario.metamorphoseStage() == 2
-                    && localizer.getMessage("lblOK").equalsIgnoreCase(oneText)
-                    && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
+            if (scenario.metamorphoseScenario() && seat == 0 && owner != null && owner.getId() == scenario.metamorphoseHostViewId() && scenario.metamorphoseStage() == 2 && localizer.getMessage("lblOK").equalsIgnoreCase(oneText) && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
                 SelectablesReceipt target = scenario.selectablesReceipts().stream()
                         .filter(receipt -> receipt.stage().equals("Metamorphose target")
                                 && receipt.seat() == seat && receipt.chooserViewId() == ownPlayerViewId)
@@ -7913,25 +6118,17 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 if (promptCapture != null && scenario.holdAtFirstPriority(seat, game.getId(), promptCapture,
                         game.getTurn(), game.getPhase(), game.getPlayerTurn() == null ? -1 : game.getPlayerTurn().getId(),
                         () -> snapshotZones(new Object[] {game}))) return;
-                if (scenario.metamorphoseUpkeepActive() && game.getTurn() == 1
-                        && game.getPhase() == PhaseType.UNTAP && game.getStack().isEmpty()
-                        && game.getPlayerTurn() != null
-                        && game.getPlayerTurn().getId() == scenario.metamorphoseHostViewId()) {
+                if (scenario.metamorphoseUpkeepActive() && game.getTurn() == 1 && game.getPhase() == PhaseType.UNTAP && game.getStack().isEmpty() && game.getPlayerTurn() != null && game.getPlayerTurn().getId() == scenario.metamorphoseHostViewId()) {
                     if (!scenario.recordMetamorphoseUntapPass(seat, game.getTurn(), game.getPhase(),
                             game.getPlayerTurn().getId(), game.getStack().size())) return;
                     queueAction(controller::selectButtonOk);
                     return;
                 }
-                if (expected != null && expected.decision() == Decision.CAST_METAMORPHOSE
-                        && seat == 0 && scenario.metamorphoseStage() == 0
-                        && game.getTurn() == 1 && game.getPhase() == PhaseType.MAIN1
-                        && game.getStack().isEmpty() && game.getPlayerTurn() != null
-                        && game.getPlayerTurn().getId() == ownPlayerViewId) {
+                if (expected != null && expected.decision() == Decision.CAST_METAMORPHOSE && seat == 0 && scenario.metamorphoseStage() == 0 && game.getTurn() == 1 && game.getPhase() == PhaseType.MAIN1 && game.getStack().isEmpty() && game.getPlayerTurn() != null && game.getPlayerTurn().getId() == ownPlayerViewId) {
                     consume(expected);
                     CardView spell = findVisibleCard(game, scenario.metamorphoseHostCardId());
                     PlayerView own = findPlayerView(game, ownPlayerViewId);
-                    if (spell == null || own == null || own.getHand() == null
-                            || own.getHand().stream().noneMatch(card -> card.getId() == spell.getId())) {
+                    if (spell == null || own == null || own.getHand() == null || own.getHand().stream().noneMatch(card -> card.getId() == spell.getId())) {
                         fail("The actual Metamorphose card is not in host's assigned hand at turn 1 MAIN1");
                         return;
                     }
@@ -7942,10 +6139,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     });
                     return;
                 }
-                if (scenario.metamorphoseUpkeepActive()
-                        && game.getTurn() == 1 && game.getPhase() == PhaseType.UPKEEP
-                        && game.getStack().isEmpty() && game.getPlayerTurn() != null
-                        && game.getPlayerTurn().getId() == scenario.metamorphoseHostViewId()) {
+                if (scenario.metamorphoseUpkeepActive() && game.getTurn() == 1 && game.getPhase() == PhaseType.UPKEEP && game.getStack().isEmpty() && game.getPlayerTurn() != null && game.getPlayerTurn().getId() == scenario.metamorphoseHostViewId()) {
                     if (!scenario.recordMetamorphosePreCastPass(seat, game.getTurn(), game.getPhase(),
                             game.getPlayerTurn().getId(), game.getStack().size())) return;
                     queueAction(controller::selectButtonOk);
@@ -7956,8 +6150,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                             + game.getTurn() + " phase=" + game.getPhase());
                     return;
                 }
-                if (!game.getStack().isEmpty() && scenario.metamorphoseStage() >= 2
-                        && scenario.metamorphoseStage() < 7) {
+                if (!game.getStack().isEmpty() && scenario.metamorphoseStage() >= 2 && scenario.metamorphoseStage() < 7) {
                     StackItemView item = game.getStack().size() == 1 ? game.getStack().get(0) : null;
                     CardView source = item == null ? null : item.getSourceCard();
                     PlayerView activator = item == null ? null : item.getActivatingPlayer();
@@ -7974,33 +6167,19 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     queueAction(controller::selectButtonOk);
                     return;
                 }
-                if (scenario.metamorphoseStage() >= 6 && game.getStack().isEmpty()
-                        && game.getTurn() == 1 && game.getPhase() == PhaseType.MAIN1
-                        && game.getPlayerTurn() != null && game.getPlayerTurn().getId() == ownPlayerViewId
-                        && promptCapture != null) {
+                if (scenario.metamorphoseStage() >= 6 && game.getStack().isEmpty() && game.getTurn() == 1 && game.getPhase() == PhaseType.MAIN1 && game.getPlayerTurn() != null && game.getPlayerTurn().getId() == ownPlayerViewId && promptCapture != null) {
                     scenario.recordMetamorphosePostResolutionPriority(promptCapture.callbackOrdinal(),
                             game.getTurn(), game.getPhase(), game.getPlayerTurn().getId(), game.getStack().size(),
                             snapshotZones(new Object[] {game}));
                 }
                 if (scenario.metamorphoseStage() >= 6 && game.getStack().isEmpty()) return;
-                if (scenario.metamorphoseStage() > 0 && scenario.metamorphoseStage() < 6
-                        && game.getStack().isEmpty()) {
+                if (scenario.metamorphoseStage() > 0 && scenario.metamorphoseStage() < 6 && game.getStack().isEmpty()) {
                     fail("Metamorphose priority had an empty stack before its resolution receipt");
                     return;
                 }
             }
             if (expected == null) {
-                Game engineGame = scenario.privacyHistoryNextGame();
-                Player enginePlayer = engineGame != null && seat >= 0 && seat < engineGame.getPlayers().size()
-                        ? engineGame.getPlayers().get(seat) : null;
-                if (promptCapture != null && enginePlayer != null
-                        && enginePlayer.getController() instanceof PlayerControllerHuman engineController
-                        && scenario.holdPrivacyHistoryNextGamePriority(seat, game.getId(),
-                                promptCapture.callbackOrdinal(), game.getTurn(), game.getPhase(),
-                                game.getPlayerTurn() == null ? -1 : game.getPlayerTurn().getId(),
-                                engineController, controller,
-                                engineController.getInputProxy().getInput() instanceof InputPassPriority input
-                                        ? input : null)) return;
+
                 // The first normal priority callback follows both accepted Keeps. Leave that prompt
                 // unresolved until the test finishes inspecting the retained post-Keep receipt.
                 if (promptCapture != null && scenario.holdAtFirstPriority(seat, game.getId(), promptCapture, game.getTurn(), game.getPhase(),
@@ -8025,8 +6204,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 }
                 return;
             }
-            if (expected.decision() == Decision.PLAY_LAND && game.getPlayerTurn() != null
-                    && game.getPlayerTurn().getId() == ownPlayerViewId && game.getPhase() == PhaseType.MAIN1) {
+            if (expected.decision() == Decision.PLAY_LAND && game.getPlayerTurn() != null && game.getPlayerTurn().getId() == ownPlayerViewId && game.getPhase() == PhaseType.MAIN1) {
                 PlayerView ownPlayer = null;
                 for (PlayerView player : game.getPlayers()) {
                     if (player.getId() == ownPlayerViewId) {
@@ -8067,8 +6245,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             CardView chosen = null;
             if (owner.getHand() != null) {
                 for (CardView card : owner.getHand()) {
-                    if (card.getCurrentState().getType() != null && card.getCurrentState().getType().isLand()
-                            && (chosen == null || card.getId() < chosen.getId())) chosen = card;
+                    if (card.getCurrentState().getType() != null && card.getCurrentState().getType().isLand() && (chosen == null || card.getId() < chosen.getId())) chosen = card;
                 }
             }
             if (chosen == null) { fail("No legal land card available to queue for seat " + seat); return false; }
@@ -8082,33 +6259,10 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             return true;
         }
 
-        private boolean isPrivacyShuffleAwaitRefresh(Capture buttons, PlayerView owner, String one, String two,
-                boolean enabledOne, boolean enabledTwo) {
-            if (buttons == null || buttons.callbackOrdinal() <= 1 || owner == null
-                    || owner.getId() != scenario.privacyRemoteViewId()
-                    || enabledOne || enabledTwo
-                    || !Localizer.getInstance().getMessage("lblOK").equalsIgnoreCase(one)
-                    || !Localizer.getInstance().getMessage("lblCancel").equalsIgnoreCase(two)) {
-                return false;
-            }
-            long waitingPromptOrdinal = buttons.callbackOrdinal() - 1;
-            PrivacyPromptReceipt waitingPrompt = scenario.privacyPrompts().stream()
-                    .filter(prompt -> prompt.seat() == seat && prompt.chooserViewId() == owner.getId()
-                            && prompt.callbackOrdinal() == waitingPromptOrdinal)
-                    .findFirst().orElse(null);
-            if (waitingPrompt == null) return false;
-            Localizer localizer = Localizer.getInstance();
-            if (localizer.getMessage("lblWaitingForOpponent").equals(waitingPrompt.message())) return true;
-            PlayerView host = findPlayerView(getGameView(), scenario.privacyHostViewId());
-            return host != null && localizer.getMessage("lblWaitingForPlayer", host.getName())
-                    .equals(waitingPrompt.message());
-        }
-
         private CardView findQueuedHandCard(PlayerView owner, Integer expectedId) {
             if (owner.getHand() == null) return null;
             for (CardView card : owner.getHand()) {
-                if (card.getCurrentState().getType() != null && card.getCurrentState().getType().isLand()
-                        && (expectedId == null || card.getId() == expectedId)) return card;
+                if (card.getCurrentState().getType() != null && card.getCurrentState().getType().isLand() && (expectedId == null || card.getId() == expectedId)) return card;
             }
             return null;
         }
@@ -8153,8 +6307,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                 && expectedSeat == 1;
         boolean metamorphoseDiagnosticObservation = scenario.metamorphoseScenario() && expectedSeat == 1;
         clientProtocolObservation = scenario.staleActionWitness() || privacyConfirmationObservation
-                || scenario.privacyHistoryReconnectScenario()
-                || scenario.privacyHistoryNextGameEnabled()
+                || false
+                || false
                 || metamorphoseDiagnosticObservation
                 ? new ClientProtocolObservation(scenario, privacyConfirmationObservation,
                         metamorphoseDiagnosticObservation) : null;
@@ -8180,7 +6334,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             }
             @Override public void message(String source, String message, ChatMessage.MessageType type) { }
             @Override public void close() { }
-            @Override public ClientGameLobby getLobby() { return lobby; }
+            @Override public ClientGameLobby getLobby() { return lobby;
+        }
         });
     }
 
@@ -8189,23 +6344,16 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         Field field = FGameClient.class.getDeclaredField("channel");
         field.setAccessible(true);
         return (Channel) field.get(client);
-    }
+        }
 
-    String clientUsername() { return client.getUsername(); }
+    String clientUsername() { return client.getUsername();
+        }
 
     void armSelectButtonOkObservation(int gameViewId, long promptCallbackOrdinal) {
         if (expectedSeat != 1 || clientProtocolObservation == null) {
             throw new AssertionError("Only remote B in the stale-action fixture can arm this observation");
         }
         clientProtocolObservation.armSelectButtonOk(gameViewId, promptCallbackOrdinal);
-    }
-
-    void armPrivacyHistoryNextGamePassObservation(int gameViewId, long promptCallbackOrdinal) {
-        if (expectedSeat != 1 || !gui.scenario.privacyHistoryNextGamePhase()
-                || clientProtocolObservation == null) {
-            throw new AssertionError("N+1 pass observation requires the current replacement client");
-        }
-        clientProtocolObservation.armPrivacyHistoryNextGameAction(gameViewId, promptCallbackOrdinal);
     }
 
     void armClientProtocolObservation(ProtocolMethod method, NextGameDecision decision,
@@ -8218,14 +6366,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
 
     ClientProtocolSendReceipt clientProtocolSendReceipt() {
         return clientProtocolObservation == null ? null : clientProtocolObservation.receipt();
-    }
+        }
 
     ClientProtocolSendReceipt clientSelectButtonOkReceipt() {
         return clientProtocolSendReceipt();
-    }
+        }
     Throwable clientProtocolObservationFailure() {
         return clientProtocolObservation == null ? null : clientProtocolObservation.failure();
-    }
+        }
     void disarmClientSelectButtonOkObservation() {
         disarmClientProtocolObservation();
     }
@@ -8237,7 +6385,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         Field field = RemoteClient.class.getDeclaredField("channel");
         field.setAccessible(true);
         return (Channel) field.get(client);
-    }
+        }
 
     private static final class ObservedFGameClient extends FGameClient {
         private final ClientProtocolObservation observation;
@@ -8261,11 +6409,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         if (remaining <= 0) throw new TimeoutException("Reconnect tap deadline expired before installation");
         connected.eventLoop().submit(() -> observation.install(connected)).get(remaining, TimeUnit.NANOSECONDS);
     }
-    boolean awaitAssigned(long timeout, TimeUnit unit) throws InterruptedException { return assigned.await(timeout, unit); }
-    boolean awaitReadyAcknowledged(long timeout, TimeUnit unit) throws InterruptedException { return readyAcknowledged.await(timeout, unit); }
-    ScriptedGui gui() { return gui; }
-    int assignedSlot() { return slot; }
-    ClientGameLobby lobby() { return lobby; }
+    boolean awaitAssigned(long timeout, TimeUnit unit) throws InterruptedException { return assigned.await(timeout, unit);
+        }
+    boolean awaitReadyAcknowledged(long timeout, TimeUnit unit) throws InterruptedException { return readyAcknowledged.await(timeout, unit);
+        }
+    ScriptedGui gui() { return gui;
+        }
+    int assignedSlot() { return slot;
+        }
 
     void ready() {
         if (slot != expectedSeat) throw new IllegalStateException(name + " has no expected assigned seat");

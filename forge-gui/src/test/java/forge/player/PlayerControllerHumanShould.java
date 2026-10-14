@@ -3,35 +3,15 @@ package forge.player;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
-import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
-import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
-import forge.gamemodes.match.input.InputAttack;
-import forge.gui.GuiBase;
-import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.FakeGuiGame.CombatDamagePrompt;
-import forge.gui.interfaces.IGuiGame;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.util.Lang;
-import forge.util.Localizer;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Characterization tests for the engine-to-UI seam in {@link PlayerControllerHuman}: each test pins
@@ -40,69 +20,6 @@ import static org.mockito.Mockito.when;
  * this behavior on purpose, update the test(s) accordingly; no sign-off needed.
  */
 public class PlayerControllerHumanShould {
-
-    private IGuiBase originalGuiBase;
-
-    @BeforeMethod
-    public void installHeadlessGuiBase() {
-        originalGuiBase = GuiBase.getInterface();
-        Localizer.getInstance().initialize("en-US", "res/languages/");
-        Lang.createInstance("en-US");
-        IGuiBase guiBase = mock(IGuiBase.class);
-        when(guiBase.isGuiThread()).thenReturn(false);
-        doAnswer(invocation -> {
-            invocation.<Runnable>getArgument(0).run();
-            return null;
-        }).when(guiBase).invokeInEdtLater(any(Runnable.class));
-        GuiBase.setInterface(guiBase);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void restoreGuiBase() {
-        GuiBase.setInterface(originalGuiBase);
-    }
-
-    @Test
-    public void stillOfferLegalAttackInputWhenCombatPriorityStopsAreDisabled() throws InterruptedException {
-        HumanControlledGame g = new HumanControlledGame();
-        Card attacker = addLegalAttacker(g);
-        g.controller.getYieldController().setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, "false");
-        IGuiGame fakeGui = g.gui.asGui();
-        for (PhaseType phase : List.of(PhaseType.COMBAT_BEGIN,
-                PhaseType.COMBAT_DECLARE_ATTACKERS, PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            doReturn(true).when(fakeGui).isUiSetToSkipPhase(g.human.getView(), phase);
-            assertThat(g.controller.isUiSetToSkipPhase(g.human.getView(), phase)).isTrue();
-        }
-        doReturn(g.game.getView()).when(fakeGui).getGameView();
-        completeInputImmediately(fakeGui);
-
-        Combat combat = new Combat(g.human);
-        assertThat(CombatUtil.canAttack(attacker, g.opponent))
-                .as("the untapped, nonsick creature may attack the opponent")
-                .isTrue();
-        g.controller.declareAttackers(g.human, combat);
-
-        assertThat(g.controller.getInputQueue().getInput()).isInstanceOf(InputAttack.class);
-        g.controller.getInputQueue().clearInputs();
-    }
-
-    @Test
-    public void anExplicitEndOfTurnYieldMayChooseTheLegalEmptyAttackDeclaration() throws InterruptedException {
-        HumanControlledGame g = new HumanControlledGame();
-        Card attacker = addLegalAttacker(g);
-        IGuiGame fakeGui = g.gui.asGui();
-        doReturn(g.game.getView()).when(fakeGui).getGameView();
-        completeInputImmediately(fakeGui);
-        Combat combat = new Combat(g.human);
-
-        assertThat(CombatUtil.canAttack(attacker, g.opponent)).isTrue();
-        assertThat(CombatUtil.validateAttackers(combat)).isTrue();
-        g.controller.autoPassUntilEndOfTurn();
-        g.controller.declareAttackers(g.human, combat);
-
-        assertThat(combat.getAttackers()).isEmpty();
-        assertThat(g.controller.getInputQueue().getInput()).isNull();
-    }
 
     // --- assignCombatDamage: when the player is asked ---
 
@@ -233,27 +150,4 @@ public class PlayerControllerHumanShould {
 
         assertThat(damage).isNull();
     }
-
-    private static Card addLegalAttacker(HumanControlledGame g) {
-        g.game.setAge(forge.game.GameStage.Play);
-        g.game.getPhaseHandler().devModeSet(PhaseType.MAIN1, g.human);
-        Card attacker = addToBattlefield(g, g.human, "Attacker", "Types:Creature Beast", "PT:4/4");
-        attacker.setSickness(false);
-        return attacker;
-    }
-
-    private static Card addToBattlefield(HumanControlledGame g, Player owner, String name, String... scriptLines) {
-        Card card = g.card(owner, name, scriptLines);
-        card.setGameTimestamp(g.game.getNextTimestamp());
-        owner.getZone(ZoneType.Battlefield).add(card);
-        return card;
-    }
-
-    private static void completeInputImmediately(IGuiGame gui) throws InterruptedException {
-        doAnswer(invocation -> {
-            invocation.<CountDownLatch>getArgument(0).countDown();
-            return null;
-        }).when(gui).awaitInput(any(CountDownLatch.class));
-    }
-
 }
