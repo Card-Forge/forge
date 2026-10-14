@@ -138,7 +138,12 @@ public class CardStorageReader {
         for (int i = from; i < to; i++) {
             final ZipEntry ze = files.get(i);
             // if (ze.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))  // already filtered!
-            result.add(this.loadCard(rulesReader, ze));
+            try {
+                result.add(this.loadCard(rulesReader, ze));
+            } catch (RuntimeException e) {
+                // Skip scripts this build cannot parse (e.g. newer downloaded assets) instead of failing the whole part.
+                System.err.printf("Skipping card script \"%s\": %s%n", ze.getName(), e);
+            }
         }
         return result;
     }
@@ -350,10 +355,13 @@ public class CardStorageReader {
             final int from = iPart * filesPerPart;
             final int till = iPart == maxParts - 1 ? totalFiles : from + filesPerPart;
             tasks.add(() -> {
-                final List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
-                cdl.countDown();
-                progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
-                return res;
+                try {
+                    return loadCardsInRangeFromZip(entries, from, till);
+                } finally {
+                    // make sure to continue loading when using multiple threads
+                    cdl.countDown();
+                    progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
+                }
             });
         }
         return tasks;
