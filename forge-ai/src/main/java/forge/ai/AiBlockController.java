@@ -965,7 +965,6 @@ public class AiBlockController {
     }
 
     private void makeRequiredBlocks(Combat combat) {
-        AITimeoutTracker.check();
         // assign blockers that have to block
         final CardCollection chumpBlockers = new CardCollection();
         // if an attacker with lure attacks - all that can block
@@ -1013,6 +1012,26 @@ public class AiBlockController {
     /** Assigns blockers for the provided combat instance (in favor of player passes to ctor) */
     public void assignBlockersForCombat(final Combat combat) {
         assignBlockersForCombat(combat, null);
+    }
+
+    /**
+     * Fallback used when the AI ran out of time mid-assignment: make sure creatures that MUST block
+     * (lure effects, "blocks each combat if able", must-block-this-creature) still do, using whatever
+     * blockers are not already blocking. Cheap and deliberately not subject to the AI deadline.
+     */
+    public void completeRequiredBlocks(final Combat combat) {
+        attackers = sortPotentialAttackers(combat);
+        if (attackers.isEmpty()) {
+            return;
+        }
+        final CardCollectionView alreadyBlocking = combat.getAllBlockers();
+        blockersLeft = new ArrayList<>();
+        for (final Card b : ai.getCreaturesInPlay()) {
+            if (!alreadyBlocking.contains(b) && CombatUtil.canBlock(b, combat)) {
+                blockersLeft.add(b);
+            }
+        }
+        makeRequiredBlocks(combat);
     }
     public void assignBlockersForCombat(final Combat combat, final CardCollection excludedBlockers) {
         List<Card> possibleBlockers = ai.getCreaturesInPlay();

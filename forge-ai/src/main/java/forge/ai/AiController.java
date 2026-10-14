@@ -1304,12 +1304,18 @@ public class AiController {
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(id, timeoutNanos);
         final Object limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
+        final AiBlockController block = new AiBlockController(defender, defender != player);
         try {
-            AiBlockController block = new AiBlockController(defender, defender != player);
             // When player != defender, AI should declare blockers for its benefit.
             block.assignBlockersForCombat(combat);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: keep the blocks decided so far (each block is added atomically, so combat stays consistent)
+            AITimeoutTracker.disarm(limit); // the fallback below must not be cut short again
+            try {
+                block.completeRequiredBlocks(combat); // creatures that must block still do
+            } catch (AITimeoutTracker.Expired ignored) {
+                // not armed any more, cannot happen; kept for safety
+            }
         } finally {
             AITimeoutTracker.disarm(limit);
             AITimeoutTracker.end(id);
