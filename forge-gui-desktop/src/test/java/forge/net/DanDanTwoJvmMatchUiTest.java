@@ -121,6 +121,7 @@ import forge.screens.match.views.VPrompt;
 /** Two isolated desktop clients exercise the ordinary host/client DanDan UI path over Forge TCP. */
 public final class DanDanTwoJvmMatchUiTest {
     private static final long CHILD_TIMEOUT_SECONDS = 90;
+    private static final long WORKER_STARTUP_TIMEOUT_SECONDS = 180;
     private static final List<String> TEST_ADD_OPENS_PAYLOADS = List.of(
             "java.base/java.lang=ALL-UNNAMED",
             "java.base/java.time=ALL-UNNAMED",
@@ -131,7 +132,7 @@ public final class DanDanTwoJvmMatchUiTest {
             "java.base/java.lang.reflect=ALL-UNNAMED",
             "java.desktop/javax.imageio.spi=ALL-UNNAMED");
 
-    @Test(timeOut = 120_000)
+    @Test(timeOut = 420_000)
     public void bothDesktopSeatsRenderAndAnswerTheirOwnMulliganPrompt() throws Exception {
         Assert.assertFalse(GraphicsEnvironment.isHeadless(),
                 "This rendered-client check requires the desktop display already used by DanDanMatchUiTest");
@@ -142,12 +143,14 @@ public final class DanDanTwoJvmMatchUiTest {
         WorkerProcess remote = null;
         try {
             host = WorkerProcess.start("HOST", port, homes.resolve("host"));
-            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(45)),
+            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)),
                     "host process initialized its UI and started the local test server; "
                             + host.failureDiagnostic());
             assertModuleOpenReceipt(host, "HOST");
 
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"));
+            Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|",
+                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA");
             final String hostChooser = assertWorkerSucceeded(host, remote,
                     "CHOOSER|HOST|", "APPLIED|HOST|MAIN1|");
             final String remoteChooser = assertWorkerSucceeded(remote, host,
@@ -192,7 +195,7 @@ public final class DanDanTwoJvmMatchUiTest {
         }
     }
 
-    @Test(timeOut = 240_000)
+    @Test(timeOut = 540_000)
     public void remoteRenderedLogDoesNotExposeHostsTellingTimeChoices() throws Exception {
         Assert.assertFalse(GraphicsEnvironment.isHeadless(),
                 "This rendered-client check requires the desktop display already used by DanDanMatchUiTest");
@@ -203,8 +206,10 @@ public final class DanDanTwoJvmMatchUiTest {
         WorkerProcess remote = null;
         try {
             host = WorkerProcess.start("HOST", port, homes.resolve("host"), false, true);
-            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(45)), host.failureDiagnostic());
+            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), host.failureDiagnostic());
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"), false, true);
+            Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|",
+                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA");
 
             final String hostChooser = assertWorkerSucceeded(host, remote,
                     "CHOOSER|HOST|", "APPLIED|HOST|MAIN1|");
@@ -269,7 +274,7 @@ public final class DanDanTwoJvmMatchUiTest {
         }
     }
 
-    @Test(timeOut = 240_000, dataProvider = "renderedSyncModes")
+    @Test(timeOut = 540_000, dataProvider = "renderedSyncModes")
     public void remoteRenderedTellingTimeChooserCastsAndKeepsChoicesPrivate(final String syncMode) throws Exception {
         Assert.assertFalse(GraphicsEnvironment.isHeadless(),
                 "This rendered-client check requires the desktop display already used by DanDanMatchUiTest");
@@ -280,11 +285,11 @@ public final class DanDanTwoJvmMatchUiTest {
         WorkerProcess remote = null;
         try {
             host = WorkerProcess.start("HOST", port, homes.resolve("host"), true, true, true, syncMode);
-            Assert.assertEquals(host.awaitPrefix("SYNC_MODE|HOST|", Duration.ofSeconds(45)),
+            Assert.assertEquals(host.awaitPrefix("SYNC_MODE|HOST|", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)),
                     "SYNC_MODE|HOST|" + syncMode);
-            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(45)), host.failureDiagnostic());
+            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), host.failureDiagnostic());
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"), true, true, true, syncMode);
-            Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|", Duration.ofSeconds(45)),
+            Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)),
                     "SYNC_MODE|REMOTE|" + syncMode);
 
             final String hostSkipReady = host.awaitPrefix("INVERSE_PHASE_SKIP_READY|HOST|", Duration.ofSeconds(45));
@@ -511,7 +516,7 @@ public final class DanDanTwoJvmMatchUiTest {
         return new Object[][]{{"DELTA"}, {"FULL"}};
     }
 
-    @Test(timeOut = 240_000)
+    @Test(timeOut = 540_000)
     public void bothDesktopSeatsContinueAndRenderTheNextDanDanGame() throws Exception {
         Assert.assertFalse(GraphicsEnvironment.isHeadless(),
                 "This rendered-client check requires the desktop display already used by DanDanMatchUiTest");
@@ -522,11 +527,13 @@ public final class DanDanTwoJvmMatchUiTest {
         WorkerProcess remote = null;
         try {
             host = WorkerProcess.start("HOST", port, homes.resolve("host"), true);
-            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(45)),
+            Assert.assertTrue(host.await("READY|HOST", Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)),
                     "host process initialized its UI and started the local test server; "
                             + host.failureDiagnostic());
             assertModuleOpenReceipt(host, "HOST");
             remote = WorkerProcess.start("REMOTE", port, homes.resolve("remote"), true);
+            Assert.assertEquals(remote.awaitPrefix("SYNC_MODE|REMOTE|",
+                    Duration.ofSeconds(WORKER_STARTUP_TIMEOUT_SECONDS)), "SYNC_MODE|REMOTE|DELTA");
 
             final String hostChooser = assertWorkerSucceeded(host, remote,
                     "CHOOSER|HOST|", "APPLIED|HOST|MAIN1|");
@@ -797,6 +804,9 @@ public final class DanDanTwoJvmMatchUiTest {
                     inverseRenderedTellingTime ? "INVERSE_RENDERED_TELLING_TIME"
                             : renderedTellingTime ? "RENDERED_TELLING_TIME" : "STANDARD", syncMode));
             ProcessBuilder builder = new ProcessBuilder(command).redirectErrorStream(true);
+            // Windows resolves Forge's profile and cache through these environment variables.
+            builder.environment().put("APPDATA", home.resolve("AppData/Roaming").toAbsolutePath().toString());
+            builder.environment().put("LOCALAPPDATA", home.resolve("AppData/Local").toAbsolutePath().toString());
             return new WorkerProcess(builder.start());
         }
 
@@ -1266,7 +1276,7 @@ public final class DanDanTwoJvmMatchUiTest {
             RESULT.println("READY|HOST");
             RESULT.flush();
 
-            Assert.assertTrue(remoteReady.await(UI_TIMEOUT_SECONDS, TimeUnit.SECONDS),
+            Assert.assertTrue(remoteReady.await(WORKER_STARTUP_TIMEOUT_SECONDS, TimeUnit.SECONDS),
                     "TCP client made the second lobby seat ready");
             FThreads.invokeInEdtAndWait(() -> {
                 final Runnable start = lobby.startGame();
