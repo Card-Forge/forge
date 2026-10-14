@@ -1443,7 +1443,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 else {
-                    movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
+                    if (destination == ZoneType.Hand && isDanDanSharedZone(game, originZone, ZoneType.Graveyard)) {
+                        movedCard = game.getAction().moveTo(player.getZone(ZoneType.Hand), c, sa, moveParams);
+                    } else {
+                        movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
+                    }
                 }
 
                 movedCards.add(movedCard);
@@ -1559,6 +1563,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             //some kind of reset here?
         }
         decider.getController().endTempShowCards();
+    }
+
+    private boolean isDanDanSharedZone(Game game, Zone zone, ZoneType zoneType) {
+        if (!game.getRules().isDanDan() || zone == null || !zone.is(zoneType) || zone.getPlayer() == null) {
+            return false;
+        }
+        for (Player player : game.getRegisteredPlayers()) {
+            if (player != zone.getPlayer() && player.getZone(zoneType) == zone) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static class HiddenOriginChoices {

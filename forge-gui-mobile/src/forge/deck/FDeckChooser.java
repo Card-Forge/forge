@@ -213,7 +213,8 @@ public class FDeckChooser extends FScreen {
             initialize(null, DeckType.CUSTOM_DECK);
             break;
         case DeckManager:
-            initialize(null, DeckPreferences.getSelectedDeckType());
+            DeckType deckType = DeckPreferences.getSelectedDeckType();
+            initialize(null, deckType == DeckType.DAN_DAN_DECK ? DeckType.CONSTRUCTED_DECK : deckType);
             break;
         default:
             initialize(null, DeckType.RANDOM_DECK);
@@ -1333,6 +1334,9 @@ public class FDeckChooser extends FScreen {
             }
             else {
                 String deckType = savedState.split(";")[0];
+                if (DeckType.DAN_DAN_DECK.name().equals(deckType)) {
+                    return selectedDeckType;
+                }
                 if (deckType.startsWith(NetDeckCategory.PREFIX)) {
                     netDeckCategory = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckCategory.PREFIX.length()));
                     return DeckType.NET_DECK;

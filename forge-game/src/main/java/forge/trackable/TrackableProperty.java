@@ -241,6 +241,7 @@ public enum TrackableProperty {
     //Game
     Players(TrackableTypes.PlayerViewCollectionType),
     GameType(TrackableTypes.EnumType(GameType.class)),
+    IsDanDan(TrackableTypes.BooleanType),
     Title(TrackableTypes.StringType),
     Turn(TrackableTypes.IntegerType),
     WinningPlayerName(TrackableTypes.StringType),

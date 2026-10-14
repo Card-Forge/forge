@@ -1,5 +1,12 @@
 package forge.gamemodes.net;
 
+import forge.game.card.CardView;
+import forge.trackable.TrackableTypes;
+import forge.trackable.Tracker;
+import forge.gamemodes.net.event.GuiGameEvent;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.UnpooledByteBufAllocator;
+import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,6 +21,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.List;
 
 /**
  * F-01, at the stream rather than at the predicate.
@@ -60,6 +69,23 @@ public class WireDeserializationTest {
         }
     }
 
+    private static GuiGameEvent roundTripGuiEvent(final GuiGameEvent event,
+            final Tracker sendingTracker, final Tracker receivingTracker) throws Exception {
+        final CompatibleObjectEncoder encoder = new CompatibleObjectEncoder(null);
+        encoder.setTracker(sendingTracker);
+        final ByteBuf frame = encoder.encodeToBuf(event, UnpooledByteBufAllocator.DEFAULT);
+        final CompatibleObjectDecoder decoder = new CompatibleObjectDecoder(
+                10 * 1024 * 1024, ClassResolvers.cacheDisabled(null));
+        decoder.setTracker(receivingTracker);
+        final EmbeddedChannel channel = new EmbeddedChannel(decoder);
+        try {
+            channel.writeInbound(frame);
+            return channel.readInbound();
+        } finally {
+            channel.finishAndReleaseAll();
+        }
+    }
+
     @Test
     public void testAllowedTrafficStillRoundTrips() throws Exception {
         final HashMap<String, Object> graph = new HashMap<>();
@@ -68,6 +94,50 @@ public class WireDeserializationTest {
 
         final Object decoded = decode(encode(graph));
         Assert.assertEquals(decoded, graph, "Allowlisted traffic must still round-trip");
+    }
+
+    @Test
+    public void getChoicesLateBindingRefreshesOnlyWireIdRefs() throws Exception {
+        final Tracker sendingTracker = new Tracker();
+        final CardView sentTrackedCard = new CardView(71, sendingTracker, "tracked-at-send");
+        sendingTracker.putObj(TrackableTypes.CardViewType, sentTrackedCard.getId(), sentTrackedCard);
+        final CardView sentInlineCard = new CardView(72, new Tracker(), "inline-choice");
+        final GuiGameEvent sent = new GuiGameEvent(ProtocolMethod.getChoices,
+                "choose", 1, 1, List.of(sentTrackedCard, sentInlineCard), List.of(sentTrackedCard), null);
+
+        final Tracker receivingTracker = new Tracker();
+        final CardView staleTrackedCard = new CardView(71, receivingTracker, "before-delta");
+        receivingTracker.putObj(TrackableTypes.CardViewType, staleTrackedCard.getId(), staleTrackedCard);
+        final GuiGameEvent decoded = roundTripGuiEvent(sent, sendingTracker, receivingTracker);
+        final List<?> receivedChoices = (List<?>) decoded.getObjects()[3];
+        final CardView receivedInlineCard = (CardView) receivedChoices.get(1);
+        Assert.assertSame(receivedChoices.get(0), staleTrackedCard,
+                "IdRef resolves against the tracker state present during IO decoding");
+
+        final CardView afterDeltaCard = new CardView(71, receivingTracker, "after-delta");
+        receivingTracker.putObj(TrackableTypes.CardViewType, afterDeltaCard.getId(), afterDeltaCard);
+        final CardView sameIdCanonicalForInline = new CardView(72, receivingTracker, "canonical-for-inline");
+        receivingTracker.putObj(TrackableTypes.CardViewType, sameIdCanonicalForInline.getId(), sameIdCanonicalForInline);
+        Assert.assertTrue(decoded.refreshGetChoicesCardViewRefs(receivingTracker),
+                "the real getChoices arguments rebind after the applied state update");
+
+        final List<?> reboundChoices = (List<?>) decoded.getObjects()[3];
+        final List<?> reboundSelected = (List<?>) decoded.getObjects()[4];
+        Assert.assertSame(reboundChoices.get(0), afterDeltaCard);
+        Assert.assertSame(reboundSelected.get(0), afterDeltaCard);
+        Assert.assertSame(reboundChoices.get(1), receivedInlineCard,
+                "an inline ephemeral choice stays detached even when its ID has a canonical view");
+
+        final GuiGameEvent missingCurrent = new GuiGameEvent(ProtocolMethod.getChoices,
+                "choose", 1, 1, List.of(staleTrackedCard), List.of(staleTrackedCard), null);
+        final IdentityHashMap<CardView, Integer> missingRef = new IdentityHashMap<>();
+        missingRef.put(staleTrackedCard, staleTrackedCard.getId());
+        missingCurrent.setDecodedCardViewIdRefs(missingRef, false);
+        final Object[] originalArguments = missingCurrent.getObjects().clone();
+        Assert.assertFalse(missingCurrent.refreshGetChoicesCardViewRefs(new Tracker()),
+                "a missing current IdRef target rejects invocation instead of retaining stale data");
+        Assert.assertSame(missingCurrent.getObjects()[3], originalArguments[3],
+                "rejection does not partially replace callback arguments");
     }
 
     /**

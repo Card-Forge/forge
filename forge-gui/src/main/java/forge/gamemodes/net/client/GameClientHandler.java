@@ -6,11 +6,14 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.GameProtocolHandler;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.util.IHasForgeLog;
+import forge.util.Localizer;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
+import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gamemodes.net.event.LoginEvent;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gui.interfaces.IGuiGame;
@@ -30,7 +33,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
 
     private final FGameClient client;
     private final IGuiGame gui;
-    private Tracker tracker;
+    private volatile Tracker tracker;
+    private Integer trackerGameViewId;
 
     public GameClientHandler(final FGameClient client) {
         super(true);
@@ -55,6 +59,49 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     }
 
     @Override
+    protected boolean beforeDispatch(final ChannelHandlerContext ctx, final GuiGameEvent event) {
+        if (!GuiBase.getInterface().isLibgdxPort()
+                || event.getMethod() != ProtocolMethod.setGameView
+                || event.getObjects().length == 0
+                || !(event.getObjects()[0] instanceof GameView gameView)
+                || !gameView.isDanDan()) {
+            return true;
+        }
+
+        if (client.isActiveChannel(ctx.channel())) {
+            client.close();
+            ctx.close();
+            FThreads.invokeInBackgroundThread(() -> gui.showErrorDialog(
+                    Localizer.getInstance().getMessage("lblDanDanNotSupportedOnMobile"),
+                    Localizer.getInstance().getMessage("lblDanDan")));
+        } else {
+            // A late frame from a replaced channel must not close or notify for the active client.
+            ctx.close();
+        }
+        return false;
+    }
+
+    @Override
+    protected boolean beforeInvoke(final ChannelHandlerContext ctx, final GuiGameEvent event) {
+        if (event.getMethod() == ProtocolMethod.openView && !client.hasCurrentGameViewBinding(ctx.channel())) {
+            netLog.warn("Ignoring openView without a GameView received on the active client channel");
+            return false;
+        }
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return true;
+        }
+        if (!event.refreshGetChoicesCardViewRefs(tracker)) {
+            return false;
+        }
+        if (tracker != null) {
+            // The handler tracker can advance while this callback waits for the EDT.
+            // Replication resolves through each decoded PlayerView's own tracker.
+            replicateProps(event.getObjects());
+        }
+        return true;
+    }
+
+    @Override
     protected boolean shouldDispatchToGuiThread(final ProtocolMethod protocolMethod) {
         // Libgdx modal prompts block via WaitCallback and deadlock on the GL thread. Return-value
         // methods always block; message/showErrorDialog return void but still open a blocking modal.
@@ -73,7 +120,13 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
         switch (protocolMethod) {
             case setGameView:
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
-                    if (this.tracker == null) {
+                    client.receivedGameView(ctx.channel(), gameView.getId());
+                    if (gameView.getGameLog() == null) {
+                        gameView.initGameLog();
+                    }
+                    // A same-GameView replay (including reconnect full state) keeps its known-object
+                    // tracker. A distinct GameView starts a new game's ID space and needs a fresh index.
+                    if (this.tracker == null || !Integer.valueOf(gameView.getId()).equals(trackerGameViewId)) {
                         this.tracker = new Tracker();
                         // Encoder uses the tracker to emit IdRef for client→server CardView args
                         // (presence check only — stale detection is server-only).
@@ -86,10 +139,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                         if (decoder != null) {
                             decoder.setTracker(this.tracker);
                         }
-                        if (gameView.getGameLog() == null) {
-                            gameView.initGameLog();
-                        }
                     }
+                    trackerGameViewId = gameView.getId();
                     if (gameView.getTracker() == null) {
                         updateTrackers(new Object[]{gameView});
                     }
@@ -100,6 +151,10 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 }
                 break;
             case openView:
+                if (!client.hasCurrentGameViewBinding(ctx.channel())) {
+                    netLog.warn("Ignoring controller creation for openView without the active channel's GameView");
+                    break;
+                }
                 gui.setNetGame();
                 final TrackableCollection<PlayerView> myPlayers = (TrackableCollection<PlayerView>) args[0];
                 for (PlayerView myPlayer : myPlayers) {
@@ -107,7 +162,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                         myPlayer.setTracker(this.tracker);
                     }
                 }
-                client.setGameControllers(myPlayers);
+                client.setGameControllers(myPlayers, ctx.channel());
                 break;
             default:
                 break;
@@ -126,7 +181,9 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 // IdRef resolution in handleGameEvents gets current state.
                 refreshTrackerCardViews(gv);
             }
-            replicateProps(args);
+            if (GuiBase.getInterface().isLibgdxPort()) {
+                replicateProps(args);
+            }
         }
     }
 
@@ -175,7 +232,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
         if (RemoteClientGuiGame.useDeltaSync) {
             return; // Delta sync manages state — don't overwrite from protocol snapshots
         }
-        PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
+        final Tracker playerTracker = newPlayerView.getTracker();
+        PlayerView existingPlayerView = playerTracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
         existingPlayerView.copyChangedProps(newPlayerView);
         netLog.trace("replicated PlayerView properties - {}", existingPlayerView.toString());
     }

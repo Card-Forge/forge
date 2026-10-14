@@ -121,6 +121,10 @@ public class GameRules {
         return appliedVariants.contains(variant);
     }
 
+    public boolean isDanDan() {
+        return gameType == GameType.DanDan || hasAppliedVariant(GameType.DanDan);
+    }
+
     public boolean hasCommander() {
         return appliedVariants.contains(GameType.Commander)
                 || appliedVariants.contains(GameType.Oathbreaker)

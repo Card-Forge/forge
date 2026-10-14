@@ -18,6 +18,8 @@ import java.util.Collections;
 import java.util.Map;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
+    static final int DAN_DAN_DAYS_UNDOING_MIN_POOL = 14;
+
     @Override
     protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
@@ -28,6 +30,10 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final String aiLogic = sa.getParamOrDefault("AILogic" ,"");
+
+        if ("Day's Undoing".equals(source.getName()) && game.getRules().isDanDan()) {
+            return considerDanDanDaysUndoing(ai, sa);
+        }
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -251,6 +257,47 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // make sure this will actually do something:
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    private static AiAbilityDecision considerDanDanDaysUndoing(Player ai, SpellAbility sa) {
+        if (!ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)
+                || ai.getCardsIn(ZoneType.Hand).size() != 1
+                || !ai.getCardsIn(ZoneType.Hand).contains(sa.getHostCard())) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        if (getDanDanDaysUndoingPostShufflePool(ai, sa) < DAN_DAN_DAYS_UNDOING_MIN_POOL) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        int maxOpponentHandSize = 0;
+        for (Player opponent : ai.getOpponents()) {
+            maxOpponentHandSize = Math.max(maxOpponentHandSize, opponent.getCardsIn(ZoneType.Hand).size());
+        }
+
+        // The spell ends this turn on resolution, so only trade an otherwise empty hand for a refill
+        // after combat when the opponent will also lose at least one card from their public hand.
+        boolean noHandAdvantage = maxOpponentHandSize == 0;
+        return noHandAdvantage ? new AiAbilityDecision(0, AiPlayDecision.CantPlayAi)
+                : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    static boolean isDanDanDaysUndoing(SpellAbility sa) {
+        return "Day's Undoing".equals(sa.getHostCard().getName())
+                && sa.getHostCard().getGame().getRules().isDanDan();
+    }
+
+    static int getDanDanDaysUndoingPostShufflePool(Player ai, SpellAbility sa) {
+        int poolSize = ai.getCardsIn(ZoneType.Library).size()
+                + ai.getCardsIn(ZoneType.Graveyard).size();
+        for (Player player : ai.getGame().getPlayers()) {
+            poolSize += player.getCardsIn(ZoneType.Hand).size();
+        }
+        // The resolving Day's Undoing is on the stack and will not be shuffled back.
+        if (sa.getHostCard().isInZone(ZoneType.Hand)) {
+            poolSize--;
+        }
+        return poolSize;
     }
 
     /* (non-Javadoc)

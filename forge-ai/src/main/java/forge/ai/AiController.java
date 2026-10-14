@@ -2109,6 +2109,18 @@ public class AiController {
         if (!usesFullSimulation()) {
             complaints = myDeck.getUnplayableAICards().unplayable;
         }
+        if (game.getRules().isDanDan() && !complaints.isEmpty()) {
+            Map<DeckSection, List<? extends PaperCard>> filtered = new HashMap<>();
+            for (Map.Entry<DeckSection, List<? extends PaperCard>> entry : complaints.entrySet()) {
+                List<PaperCard> unsupported = entry.getValue().stream()
+                        .filter(card -> !ComputerUtilCard.isDanDanSupportedCard(card.getName()))
+                        .collect(Collectors.toList());
+                if (!unsupported.isEmpty()) {
+                    filtered.put(entry.getKey(), unsupported);
+                }
+            }
+            complaints = filtered;
+        }
         return complaints;
     }
 

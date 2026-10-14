@@ -9,11 +9,14 @@ import com.google.common.collect.Sets;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.GameAction;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityCantDraw;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -71,6 +74,11 @@ public class DrawEffect extends SpellAbilityEffect {
 
         final List<Player> tgts = getTargetPlayersWithDuplicates(true, "Defined", sa);
 
+        if (sa.getHostCard().getGame().getRules().isDanDan()) {
+            resolveDanDanDrawInstruction(sa, source, tgts, numCards, optional, upto, moveParams);
+            return;
+        }
+
         for (final Player p : Sets.newLinkedHashSet(tgts)) {
             if (!p.isInGame()) {
                 continue;
@@ -104,6 +112,67 @@ public class DrawEffect extends SpellAbilityEffect {
             if (sa.hasParam("RememberDrawn")) {
                 source.addRemembered(drawn);
             }
+        }
+    }
+
+    private void resolveDanDanDrawInstruction(SpellAbility sa, Card source, List<Player> targets, int numCards,
+            boolean optional, boolean upto, Map<AbilityKey, Object> moveParams) {
+        final GameAction action = source.getGame().getAction();
+        GameAction.DrawInstruction instruction = source.getGame().getReplacementHandler()
+                .getCapturedDrawInstruction(sa);
+        final boolean captured = instruction != null;
+        if (!captured) {
+            instruction = action.newDanDanDrawInstruction();
+        }
+
+        for (final Player player : Sets.newLinkedHashSet(targets)) {
+            if (!player.isInGame()) {
+                continue;
+            }
+
+            int actualNum = numCards * Collections.frequency(targets, player);
+            if (optional && !upto && !player.canDraw(actualNum)) {
+                continue;
+            }
+            if (optional && !player.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(actualNum, " card")), null)) {
+                continue;
+            }
+
+            if (upto) {
+                actualNum = StaticAbilityCantDraw.canDrawAmount(player, actualNum);
+            }
+            if (actualNum <= 0) {
+                continue;
+            }
+            if (upto) {
+                actualNum = player.getController().chooseNumber(sa,
+                        Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"), 0, actualNum);
+            }
+            if (actualNum <= 0) {
+                continue;
+            }
+
+            Player.DrawBatch batch = player.prepareDanDanDrawBatch(actualNum, sa, moveParams,
+                    player.getZone(ZoneType.Hand), instruction);
+            if (batch == null) {
+                applyDrawResult(sa, source, player, new CardCollection());
+            } else {
+                batch.setCompletionAction(() -> applyDrawResult(sa, source, player, batch.getDrawnCards()));
+            }
+        }
+
+        if (!captured) {
+            action.resolveDanDanDrawInstruction(instruction);
+        }
+    }
+
+    private void applyDrawResult(SpellAbility sa, Card source, Player player, CardCollectionView drawn) {
+        if (sa.hasParam("Reveal")) {
+            player.getGame().getAction().reveal(drawn, player, !sa.getParam("Reveal").equals("All"));
+        }
+        if (sa.hasParam("RememberDrawn")) {
+            source.addRemembered(drawn);
         }
     }
 }

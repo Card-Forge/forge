@@ -15,11 +15,17 @@ import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+        if (isDanDanPredict(ai, sa)) {
+            // Predict's NameCard root is Defined You; its Mill child chooses the legal target.
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
         if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
             if (ComputerUtil.waitForBlocking(sa)) {
@@ -87,6 +93,10 @@ public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
     public String chooseCardName(Player ai, SpellAbility sa, List<ICardFace> faces) {
+        if (isDanDanPredict(ai, sa)) {
+            return chooseDanDanPredictName(ai, sa, faces::contains);
+        }
+
         // this function is only for "Alhammarret, High Arbiter"
 
         if (faces.isEmpty()) {
@@ -123,5 +133,31 @@ public class ChooseCardNameAi extends SpellAbilityAi {
         }
 
         return ComputerUtilCard.getBestAI(cards).getName();
+    }
+
+    private static boolean isDanDanPredict(Player ai, SpellAbility sa) {
+        return "Predict".equals(sa.getHostCard().getName()) && ai.getGame().getRules().isDanDan();
+    }
+
+    public static String chooseDanDanPredictName(Player ai, SpellAbility sa, Predicate<ICardFace> isLegal) {
+        if (!isDanDanPredict(ai, sa)) {
+            return null;
+        }
+
+        CardCollectionView library = ai.getCardsIn(ZoneType.Library, 1);
+        if (!library.isEmpty() && library.getFirst().mayPlayerLook(ai)) {
+            ICardFace knownTop = StaticData.instance().getCommonCards().getFaceByName(library.getFirst().getName());
+            if (knownTop != null && isLegal.test(knownTop)) {
+                return knownTop.getName();
+            }
+        }
+
+        ICardFace island = StaticData.instance().getCommonCards().getFaceByName("Island");
+        if (island != null && isLegal.test(island)) {
+            return island.getName();
+        }
+
+        return StaticData.instance().getCommonCards().streamAllFaces()
+                .filter(isLegal).sorted().map(ICardFace::getName).findFirst().orElse("");
     }
 }

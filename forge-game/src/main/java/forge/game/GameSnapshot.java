@@ -314,6 +314,7 @@ public class GameSnapshot {
         for(Card fromCard : getCardsToCopy(fromGame)) {
             Card newCard = findCardById(toGame, fromCard.getId());
             Player toPlayer = findBy(toGame, fromCard.getController());
+            Player toOwner = findBy(toGame, fromCard.getOwner());
             ZoneType fromType = fromCard.getZone().getZoneType();
 
             int zonePosition = 0;
@@ -325,16 +326,18 @@ public class GameSnapshot {
 
             if (newCard == null) {
                 // Storing a game uses this path...
-                newCard = createCardCopy(toGame, toPlayer, fromCard);
+                newCard = createCardCopy(toGame, toOwner, fromCard);
             } else {
-                ZoneType type = newCard.getZone().getZoneType();
-                if (type != fromType) {
-                    if (type.equals(ZoneType.Stack)) {
-                        toGame.getStackZone().remove(newCard);
-                    } else {
-                        toPlayer.getZone(type).remove(newCard);
-                    }
-                }
+                Zone destination = fromType == ZoneType.Stack
+                        ? toGame.getStackZone() : toPlayer.getZone(fromType);
+                removeFromCurrentLocation(newCard, destination, isMelded(fromCard));
+            }
+
+            newCard.setOwner(toOwner);
+            if (fromType == ZoneType.Battlefield || fromType == ZoneType.Stack) {
+                newCard.setController(toPlayer, 0);
+            } else {
+                newCard.clearControllers();
             }
 
             if (!fromType.isOrdered()) {
@@ -504,6 +507,22 @@ public class GameSnapshot {
     private static boolean isMelded(Card c) {
         return c.getZone() instanceof PlayerZoneBattlefield battlefield
                 && battlefield.getMeldedCards().contains(c);
+    }
+
+    private static void removeFromCurrentLocation(Card card, Zone destination, boolean destinationIsMelded) {
+        Zone current = card.getZone();
+        if (current == null) {
+            return;
+        }
+
+        boolean currentlyMelded = isMelded(card);
+        if (currentlyMelded) {
+            if (!destinationIsMelded || current != destination) {
+                ((PlayerZoneBattlefield) current).removeFromMelded(card);
+            }
+        } else if (current != destination || destinationIsMelded) {
+            current.remove(card);
+        }
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {

@@ -5,6 +5,7 @@ import forge.util.Localizer;
 
 public enum DeckType {
     CUSTOM_DECK("lblCustomUserDecks"),
+    DAN_DAN_DECK("lblDanDanDecks"),
     CONSTRUCTED_DECK("lblConstructedDecks"),
     COMMANDER_DECK("lblCommanderDecks"),
     RANDOM_COMMANDER_DECK("lblRandomCommanderDecks"),
@@ -45,6 +46,7 @@ public enum DeckType {
     PROVIDED_DECK_URL("lblProvideDeckUrl");
 
     public static DeckType[] ConstructedOptions;
+    public static DeckType[] DanDanOptions;
     public static DeckType[] CommanderOptions;
 
     static {
@@ -100,6 +102,9 @@ public enum DeckType {
                     DeckType.PROVIDED_DECK_URL
             };
         }
+        DanDanOptions = new DeckType[ConstructedOptions.length + 1];
+        DanDanOptions[0] = DAN_DAN_DECK;
+        System.arraycopy(ConstructedOptions, 0, DanDanOptions, 1, ConstructedOptions.length);
     }
     static {
         if (FModel.isdeckGenMatrixLoaded()) {

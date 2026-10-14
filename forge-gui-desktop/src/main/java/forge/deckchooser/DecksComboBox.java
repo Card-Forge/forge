@@ -24,8 +24,10 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         addActionListener(getDeckTypeComboListener());
     }
 
-    public void refresh(final DeckType deckType, final boolean isForCommander) {
-        if(isForCommander){
+    public void refresh(final DeckType deckType, final boolean isForCommander, final boolean isForDanDan) {
+        if (isForDanDan) {
+            setModel(new DefaultComboBoxModel<>(DeckType.DanDanOptions));
+        } else if(isForCommander){
             setModel(new DefaultComboBoxModel<>(DeckType.CommanderOptions));
         }else {
             setModel(new DefaultComboBoxModel<>(DeckType.ConstructedOptions));

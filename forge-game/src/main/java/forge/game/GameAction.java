@@ -86,6 +86,64 @@ public class GameAction {
         game = game0;
     }
 
+    public static final class DrawInstruction {
+        private final GameAction action;
+        private final Player startingPlayer;
+        private final List<Player.DrawBatch> batches = new ArrayList<>();
+        private boolean resolved;
+
+        private DrawInstruction(GameAction action, Player startingPlayer) {
+            this.action = action;
+            this.startingPlayer = startingPlayer;
+        }
+
+        public void addBatch(Player.DrawBatch batch) {
+            batches.add(batch);
+        }
+    }
+
+    public DrawInstruction newDanDanDrawInstruction() {
+        return newDanDanDrawInstruction(null);
+    }
+
+    public DrawInstruction newDanDanDrawInstruction(Player startingPlayer) {
+        return new DrawInstruction(this, startingPlayer);
+    }
+
+    public void resolveDanDanDrawInstruction(DrawInstruction instruction) {
+        if (instruction.action != this || instruction.resolved) {
+            throw new IllegalArgumentException("Invalid or already-resolved DanDan draw instruction");
+        }
+        instruction.resolved = true;
+
+        List<Player> order = new ArrayList<>(game.getPlayersInTurnOrder());
+        Player active = instruction.startingPlayer != null
+                ? instruction.startingPlayer : game.getPhaseHandler().getPlayerTurn();
+        if (active != null && order.remove(active)) {
+            order.add(0, active);
+        }
+
+        boolean progressed;
+        do {
+            progressed = false;
+            for (Player.DrawBatch batch : instruction.batches) {
+                if (!batch.isFinished() && !batch.getPlayer().isInGame()) {
+                    batch.drawOne();
+                    progressed = true;
+                }
+            }
+            for (Player player : order) {
+                for (Player.DrawBatch batch : instruction.batches) {
+                    if (batch.getPlayer() == player && !batch.isFinished()) {
+                        batch.drawOne();
+                        progressed = true;
+                        break;
+                    }
+                }
+            }
+        } while (progressed);
+    }
+
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause) {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
@@ -300,6 +358,13 @@ public class GameAction {
                 cleanStaticEffect(staticEff, copied);
                 return c;
             }
+        }
+
+        // DanDan acquisition is based on the accepted zone transition. Use the
+        // recipient as the prospective owner while replacements inspect the
+        // incoming card; the source LKI above deliberately keeps its old owner.
+        if (isDanDanSharedPool(zoneFrom) && zoneTo.is(ZoneType.Hand) && zoneTo.getPlayer() != null) {
+            copied.setOwner(zoneTo.getPlayer());
         }
 
         GameEntityCounterTable table;
@@ -674,6 +739,19 @@ public class GameAction {
         }
 
         return copied;
+    }
+
+    private boolean isDanDanSharedPool(Zone zone) {
+        if (!game.getRules().isDanDan() || zone == null
+                || !(zone.is(ZoneType.Library) || zone.is(ZoneType.Graveyard)) || zone.getPlayer() == null) {
+            return false;
+        }
+        for (Player player : game.getRegisteredPlayers()) {
+            if (player != zone.getPlayer() && player.getZone(zone.getZoneType()) == zone) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Card setupStaticEffect(Card copied, SpellAbility cause) {
@@ -2356,17 +2434,33 @@ public class GameAction {
             runPreOpeningHandActions(first);
 
             game.setAge(GameStage.Mulligan);
-            for (final Player p1 : game.getPlayers()) {
-                // Choose starting hand for each player with multiple hands
-                if (StaticData.instance().getFilteredHandsEnabled() ) {
-                    drawStartingHand(p1);
-                } else {
-                    p1.drawCards(p1.getStartingHandSize());
+            boolean danDan = game.getRules().hasAppliedVariant(GameType.DanDan);
+            if (danDan) {
+                DrawInstruction instruction = newDanDanDrawInstruction(first);
+                for (final Player p1 : game.getPlayers()) {
+                    p1.prepareDanDanDrawBatch(p1.getStartingHandSize(), null, AbilityKey.newMap(),
+                            p1.getZone(ZoneType.Hand), instruction);
                 }
+                resolveDanDanDrawInstruction(instruction);
+                for (final Player p1 : game.getPlayers()) {
+                    BackupPlanService backupPlans = new BackupPlanService(p1);
+                    if (backupPlans.initializeExtraHands()) {
+                        backupPlans.chooseHand();
+                    }
+                }
+            } else {
+                for (final Player p1 : game.getPlayers()) {
+                    // Choose starting hand for each player with multiple hands
+                    if (StaticData.instance().getFilteredHandsEnabled() ) {
+                        drawStartingHand(p1);
+                    } else {
+                        p1.drawCards(p1.getStartingHandSize());
+                    }
 
-                BackupPlanService backupPlans = new BackupPlanService(p1);
-                if (backupPlans.initializeExtraHands()) {
-                    backupPlans.chooseHand();
+                    BackupPlanService backupPlans = new BackupPlanService(p1);
+                    if (backupPlans.initializeExtraHands()) {
+                        backupPlans.chooseHand();
+                    }
                 }
             }
 

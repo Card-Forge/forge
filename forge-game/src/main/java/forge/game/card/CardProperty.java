@@ -287,6 +287,10 @@ public class CardProperty {
             if (!card.getOwner().equals(sourceController)) {
                 return false;
             }
+        } else if (property.equals("InYourGraveyard")) {
+            if (sourceController == null || !sourceController.getCardsIn(ZoneType.Graveyard).contains(card)) {
+                return false;
+            }
         } else if (property.startsWith("YouDontOwn")) {
             if (card.getOwner().equals(sourceController)) {
                 return false;

@@ -229,9 +229,10 @@ public class Match {
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
+        final boolean isDanDan = rules.isDanDan();
 
         boolean isFirstGame = gameOutcomes.isEmpty();
-        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
+        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed() && !isDanDan;
         // Only allow this if feature flag is on AND for certain match types
         boolean sideboardForAIs = rules.getSideboardForAI() &&
             rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
@@ -313,7 +314,9 @@ public class Match {
                 }
             }
 
-            preparePlayerZone(player, ZoneType.Library, myDeck.getLeft().getMain(), psc.useRandomFoil());
+            if (!isDanDan || i == 0) {
+                preparePlayerZone(player, ZoneType.Library, myDeck.getLeft().getMain(), psc.useRandomFoil());
+            }
             if (myDeck.getLeft().has(DeckSection.Sideboard)) {
                 preparePlayerZone(player, ZoneType.Sideboard, myDeck.getLeft().get(DeckSection.Sideboard), psc.useRandomFoil());
 
@@ -322,7 +325,9 @@ public class Match {
 
             player.initVariantsZones(psc);
 
-            player.shuffle(null);
+            if (!isDanDan || i == 0) {
+                player.shuffle(null);
+            }
 
             if (isFirstGame) {
                 Map<DeckSection, List<? extends PaperCard>> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck.getLeft());

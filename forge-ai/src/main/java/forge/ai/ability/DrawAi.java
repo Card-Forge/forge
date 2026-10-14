@@ -259,7 +259,14 @@ public class DrawAi extends SpellAbilityAi {
         boolean assumeSafeX = false; // if true, the AI will assume that the X value has been set to a value that is safe to draw
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
-        final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
+        int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
+        if (ChangeZoneAllAi.isDanDanDaysUndoing(sa)) {
+            // Day's Undoing shuffles the Dan Dan shared hands and graveyard back before its draw.
+            computerLibrarySize = ChangeZoneAllAi.getDanDanDaysUndoingPostShufflePool(ai, sa);
+            if (computerLibrarySize < ChangeZoneAllAi.DAN_DAN_DAYS_UNDOING_MIN_POOL) {
+                return false;
+            }
+        }
         final int computerMaxHandSize = ai.getMaxHandSize();
 
         final SpellAbility root = sa.getRootAbility();

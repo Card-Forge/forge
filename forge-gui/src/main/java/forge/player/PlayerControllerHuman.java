@@ -85,6 +85,7 @@ import forge.token.TokenDb;
 import forge.localinstance.achievements.AchievementCollection;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.trackable.TrackableCollection;
 import forge.util.*;
@@ -1547,6 +1548,28 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
         inp.showAndWait();
         return inp.isKeepHand();
+    }
+
+    @Override
+    public DanDanMulliganDecision chooseDanDanMulligan(Player firstPlayer, int cardsToReturn,
+            boolean canChooseFree) {
+        if (!canChooseFree) {
+            return mulliganKeepHand(firstPlayer, cardsToReturn)
+                    ? DanDanMulliganDecision.KEEP : DanDanMulliganDecision.REGULAR;
+        }
+        Localizer localizer = Localizer.getInstance();
+        int choice = getGui().showOptionDialog(
+                localizer.getMessage("lblDanDanMulliganChoice", player.getName(), cardsToReturn),
+                localizer.getMessage("lblDanDanMulligan"), FSkinProp.ICO_QUESTION,
+                Arrays.asList(localizer.getMessage("lblKeep"), localizer.getMessage("lblDanDanFreeMulligan"),
+                        localizer.getMessage("lblDanDanRegularMulligan")), 0);
+        if (choice == 1) {
+            return DanDanMulliganDecision.FREE;
+        }
+        if (choice == 2) {
+            return DanDanMulliganDecision.REGULAR;
+        }
+        return DanDanMulliganDecision.KEEP;
     }
 
     @Override

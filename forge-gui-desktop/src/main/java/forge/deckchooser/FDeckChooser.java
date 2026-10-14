@@ -50,6 +50,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private boolean refreshingDeckType;
     private boolean isForCommander;
+    private boolean isForDanDan;
 
     private final DeckManager lstDecks;
     final Localizer localizer = Localizer.getInstance();
@@ -98,6 +99,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         setOpaque(false);
         isAi = forAi;
         isForCommander = forCommander;
+        isForDanDan = gameType == GameType.DanDan;
         final UiCommand cmdViewDeck = () -> {
             if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                 FDeckViewer.show(getDeck(), gameType.getDeckFormat() == DeckFormat.Commander);
@@ -664,12 +666,15 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         if (ev == null) {
             refreshingDeckType = true;
-            decksComboBox.refresh(deckType, isForCommander);
+            decksComboBox.refresh(deckType, isForCommander, isForDanDan);
             refreshingDeckType = false;
         }
         lstDecks.setCaption(deckType.toString());
 
         switch (deckType) {
+            case DAN_DAN_DECK:
+                updateDecks(DeckProxy.getAllDanDanDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
+                break;
             case CUSTOM_DECK:
                 updateCustom();
                 break;

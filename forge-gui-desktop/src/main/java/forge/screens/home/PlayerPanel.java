@@ -657,9 +657,14 @@ public class PlayerPanel extends FPanel {
 
     private void addHandlersDeckSelector() {
         deckBtn.setCommand((Runnable) () -> {
-            lobby.setCurrentGameMode(GameType.Constructed);
+            if (lobby.hasVariant(GameType.DanDan)) {
+                if (index != lobby.getDanDanDeckOwnerSlot()) return;
+                lobby.setCurrentGameMode(GameType.DanDan);
+            } else {
+                lobby.setCurrentGameMode(GameType.Constructed);
+            }
             deckBtn.requestFocusInWindow();
-            lobby.changePlayerFocus(index, GameType.Constructed);
+            lobby.changePlayerFocus(index, lobby.hasVariant(GameType.DanDan) ? GameType.DanDan : GameType.Constructed);
         });
     }
 

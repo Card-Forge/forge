@@ -12,6 +12,7 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
+import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
@@ -77,6 +78,10 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
     private final FCheckBox cbDeckConformance;
 
     private boolean isHost;
+    private boolean unsupportedDanDanLobbyClosed;
+    private FGameClient pendingLobbyClient;
+    private FGameClient lobbyClient;
+    private GameLobby lobbyClientBinding;
     private boolean activeConformance = true;
     // "Constructed" or "Limited" — matches the localised string
     private String currentMode;
@@ -529,17 +534,8 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
         // A dropped connection invokes this on a Netty thread; the lobby/draft-screen state
         // is EDT-owned, so reset it and tear down the screen on the EDT.
         FThreads.invokeInEdtNowOrLater(() -> {
-            NetworkDraftingProcessScreen draftScreen = activeDraftScreen;
-            activeDraftScreen = null;
-            currentEvent = null;
-            activeEventId = null;
-            activeConformance = true;
-            eventDrafted = false;
-            lastEventView = null;
             clearGameLobby();
-            if (draftScreen != null) {
-                draftScreen.onDraftCompleted(); // connection gone — close silently, like a finished draft
-            }
+            resetLobbyScreen();
             Forge.back();
         });
         if (msg.length() > 0) {
@@ -555,8 +551,25 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
         }
     }
 
+    private void resetLobbyScreen() {
+        NetworkDraftingProcessScreen draftScreen = activeDraftScreen;
+        activeDraftScreen = null;
+        currentEvent = null;
+        activeEventId = null;
+        activeConformance = true;
+        eventDrafted = false;
+        lastEventView = null;
+        if (draftScreen != null) {
+            draftScreen.onDraftCompleted(); // connection gone — close silently, like a finished draft
+        }
+    }
+
     @Override
     public ILobbyView setLobby(GameLobby lobby0) {
+        unsupportedDanDanLobbyClosed = false;
+        lobbyClientBinding = lobby0;
+        lobbyClient = pendingLobbyClient;
+        pendingLobbyClient = null;
         initLobby(lobby0);
         return this;
     }
@@ -564,13 +577,52 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
     @Override
     public void setClient(FGameClient client) {
         fGameClient = client;
+        pendingLobbyClient = client;
     }
 
     @Override
     public void update(boolean fullUpdate) {
+        // The base constructor calls this override before our fields initialize.
+        if (cmbMode == null) {
+            super.update(fullUpdate);
+            return;
+        }
+        if (unsupportedDanDanLobbyClosed) {
+            return;
+        }
+        final GameLobby lobby = getLobby();
+        if (lobby != null && lobby.hasVariant(GameType.DanDan)) {
+            unsupportedDanDanLobbyClosed = true;
+            final FGameClient rejectedClient = lobbyClientBinding == lobby ? lobbyClient : null;
+            if (!isHost && rejectedClient != null && fGameClient == rejectedClient) {
+                rejectedClient.setDraftHandler(null);
+                rejectedClient.close();
+                fGameClient = null;
+            }
+            final String notice = Forge.getLocalizer().getMessage("lblDanDanNotSupportedOnMobile");
+            FThreads.invokeInEdtNowOrLater(() -> {
+                if (getLobby() != lobby) {
+                    return;
+                }
+                final Object currentScreen = Forge.getCurrentScreen();
+                final NetworkDraftingProcessScreen retainedDraftScreen = activeDraftScreen;
+                final boolean currentLobbyScreen = currentScreen == this
+                        || (retainedDraftScreen != null && currentScreen == retainedDraftScreen);
+                if (getGameLobby() == lobby) {
+                    clearGameLobby();
+                }
+                resetLobbyScreen();
+                if (currentLobbyScreen && Forge.getCurrentScreen() == currentScreen) {
+                    Forge.back();
+                    FThreads.invokeInBackgroundThread(() -> SOptionPane.showOptionDialog(notice,
+                            Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING,
+                            List.of(Forge.getLocalizer().getMessage("lblOK")), 1));
+                }
+            });
+            return;
+        }
         super.update(fullUpdate);
-        // The base constructor calls update() before our fields initialize; skip until ready
-        if (cmbMode == null || !cmbMode.isVisible()) {
+        if (!cmbMode.isVisible()) {
             return;
         }
         if (!isHost && getLobby() != null && getLobby().getData() != null) {
@@ -604,6 +656,15 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
                 revalidate();
             }
         }
+    }
+
+    @Override
+    protected void startMatch() {
+        final GameLobby lobby = getLobby();
+        if (unsupportedDanDanLobbyClosed || (lobby != null && lobby.hasVariant(GameType.DanDan))) {
+            return;
+        }
+        super.startMatch();
     }
 
     @Override

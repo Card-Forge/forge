@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.game.zone.Zone;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -404,7 +405,12 @@ public class DigEffect extends SpellAbilityEffect {
                                 moveParams.put(AbilityKey.CounterTable, table);
                             }
                         }
-                        c = game.getAction().moveTo(c.getController().getZone(destZone1), c, sa, moveParams);
+                        Zone destination = c.getController().getZone(destZone1);
+                        if (destZone1 == ZoneType.Hand
+                                && isDanDanSharedZone(game, game.getZoneOf(c), srcZone)) {
+                            destination = p.getZone(ZoneType.Hand);
+                        }
+                        c = game.getAction().moveTo(destination, c, sa, moveParams);
                         if (destZone1.equals(ZoneType.Battlefield)) {
                             if (addToCombat(c, sa, "Attacking", "Blocking")) {
                                 combatChanged = true;
@@ -488,6 +494,18 @@ public class DigEffect extends SpellAbilityEffect {
 
         zoneMovements.triggerChangesZoneAll(game, sa);
         counterTable.replaceCounterEffect(game, sa);
+    }
+
+    private boolean isDanDanSharedZone(Game game, Zone zone, ZoneType zoneType) {
+        if (!game.getRules().isDanDan() || zone == null || !zone.is(zoneType) || zone.getPlayer() == null) {
+            return false;
+        }
+        for (Player player : game.getRegisteredPlayers()) {
+            if (player != zone.getPlayer() && player.getZone(zoneType) == zone) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

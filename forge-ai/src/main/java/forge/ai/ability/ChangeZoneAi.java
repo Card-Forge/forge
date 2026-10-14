@@ -686,6 +686,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            if ("Metamorphose".equals(sa.getHostCard().getName()) && ai.getGame().getRules().isDanDan()
+                    && sa.getTargets().getTargetCards().stream()
+                    .anyMatch(target -> !target.getController().getCardsIn(ZoneType.Hand).isEmpty())) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else {
             // non-targeted retrieval
             final List<Card> retrieval = sa.knownDetermineDefined(sa.getParam("Defined"));

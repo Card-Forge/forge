@@ -534,8 +534,12 @@ public class HostedMatch {
     }
 
     private synchronized void addNextGameDecision(final PlayerControllerHuman controller, final NextGameDecision decision) {
+        final Game originGame = controller == null ? null : controller.getGame();
+        if (controller != null && game != originGame) return;
+
         if (decision == NextGameDecision.QUIT) {
             FThreads.invokeInEdtNowOrLater(() -> {
+                if (controller != null && game != originGame) return;
                 endCurrentGame();
                 isMatchOver = true;
                 if (onMatchOver != null) {

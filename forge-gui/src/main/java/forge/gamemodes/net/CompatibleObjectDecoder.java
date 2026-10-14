@@ -1,6 +1,8 @@
 package forge.gamemodes.net;
 
 import com.google.common.io.ByteStreams;
+import forge.game.card.CardView;
+import forge.gamemodes.net.event.GuiGameEvent;
 import forge.trackable.Tracker;
 import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
@@ -12,8 +14,8 @@ import net.jpountz.lz4.LZ4BlockInputStream;
 
 import java.io.EOFException;
 import java.io.InvalidClassException;
-import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
+import java.util.IdentityHashMap;
 
 /**
  * Netty inbound handler that reads the 4-byte length frame and deserializes
@@ -61,7 +63,7 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
         int frameSize = frame.readableBytes();
         long startMs = System.currentTimeMillis();
 
-        ObjectInputStream objectIn = new CObjectInputStream(
+        CObjectInputStream objectIn = new CObjectInputStream(
                 ByteStreams.limit(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)),
                         MAX_DECOMPRESSED_BYTES),
                 this.classResolver, tracker);
@@ -83,6 +85,14 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
                     MAX_DECOMPRESSED_BYTES);
         } finally {
             objectIn.close();
+        }
+
+        if (result instanceof GuiGameEvent event && event.getMethod() == ProtocolMethod.getChoices) {
+            final boolean conflictingRefs = objectIn.hasConflictingCardViewIdRefs();
+            final IdentityHashMap<CardView, Integer> resolvedRefs = objectIn.getResolvedCardViewIdRefs();
+            if (conflictingRefs || !resolvedRefs.isEmpty()) {
+                event.setDecodedCardViewIdRefs(resolvedRefs, conflictingRefs);
+            }
         }
 
         long elapsed = System.currentTimeMillis() - startMs;

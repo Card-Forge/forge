@@ -656,7 +656,7 @@ public class FloatingZone extends FloatingCardArea {
                     ? Localizer.getInstance().getMessage("lblRightClickToUnSort")
                     : Localizer.getInstance().getMessage("lblRightClickToSort");
             getWindow().setTitle(Localizer.getInstance().getMessage("lblPlayerZoneNOfMCardSortStatus",
-                    player.getName(), zone.getTranslatedName(), shown, total, sortDetail));
+                    player.getName(), displayedZoneName(), shown, total, sortDetail));
         } else {
             getWindow().setTitle(String.format(title, shown));
         }
@@ -702,7 +702,17 @@ public class FloatingZone extends FloatingCardArea {
 
     private void setTitle() {
         final String sort_detail = sortedByName ? Localizer.getInstance().getMessage("lblRightClickToUnSort") : Localizer.getInstance().getMessage("lblRightClickToSort");
-        title = Localizer.getInstance().getMessage("lblPlayerZoneNCardSortStatus", player.getName(), zone.getTranslatedName(), "%d" , sort_detail);
+        title = Localizer.getInstance().getMessage("lblPlayerZoneNCardSortStatus",
+                player.getName(), displayedZoneName(), "%d", sort_detail);
+    }
+
+    private String displayedZoneName() {
+        if (getMatchUI().getGameView() != null && getMatchUI().getGameView().isDanDan()
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+            return Localizer.getInstance().getMessage(zone == ZoneType.Library
+                    ? "lblDanDanSharedLibrary" : "lblDanDanSharedGraveyard");
+        }
+        return zone.getTranslatedName();
     }
 
     private void setPlayer(PlayerView player0) {
