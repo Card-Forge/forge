@@ -81,8 +81,11 @@ type Card struct {
 	castManaSpent       int
 	// castPaid is the colored mana that cast spent, white to green
 	// (SpellAbility.getPayingMana by color), read by Count$Converge and
-	// Count$Adamant; meaningful while wasCast holds.
+	// Count$Adamant; meaningful while wasCast holds. castSnow is how much of
+	// that cast's mana was snow mana (xAnnounced.snow), read by
+	// Count$CastTotalManaSpent Snow; cleared with castManaSpent.
 	castPaid [5]int
+	castSnow int
 	// foretold marks a card exiled by the Foretell special action, and
 	// foretoldTurn the turn it happened (foretell.go).
 	foretold     bool
@@ -1202,28 +1205,40 @@ const (
 
 // optionalKinds is the slice of Java's OptionalCost enum a cast records past
 // Kicker1/Kicker2 (SpellAbility.optionalCosts, an EnumSet): Generic for a
-// Mode$ OptionalCost static without ReduceColor$, Teamwork for the keyword.
-// A set, so two Generic costs paid read the same as one.
+// Mode$ OptionalCost static without ReduceColor$, Teamwork and Bargain for
+// the keywords. A set, so two Generic costs paid read the same as one.
 type optionalKinds uint8
 
 const (
 	optGeneric optionalKinds = 1 << iota
 	optTeamwork
+	optBargain
 )
 
 // castOptional is a card's record of its cast's optional costs: Java keeps
 // them on Card.getCastSA, read by isOptionalCostPaid and the paid lists
 // (SpellAbility.getPaidList). collected is "Collected" (CostCollectEvidence),
 // revealed is "Revealed" (CostReveal and CostBehold). The lists are replaced,
-// never appended to in place, so a copied Card may share them.
+// never appended to in place, so a copied Card may share them. foretold is
+// getCastSA().isForetold() (SpellAbility.java:743-745): the card was cast for
+// its foretell cost from exile (castFromHand's foretellCost way); escaped is
+// getCastSA().isEscape() (SpellAbility.isEscape): cast from the graveyard for
+// its Escape cost (escapeCost).
 type castOptional struct {
 	kinds     optionalKinds
 	collected []CardID
 	revealed  []CardID
+	foretold  bool
+	escaped   bool
 }
 
 // has reports whether the cast paid an optional cost of kind k.
 func (o castOptional) has(k optionalKinds) bool { return o.kinds&k != 0 }
+
+// castEscaped is getCastSA() != null && getCastSA().isEscape(): c was cast
+// for its Escape cost and still carries that cast (on the stack, or the
+// permanent it became).
+func (c *Card) castEscaped() bool { return c.wasCast && c.castOpt.escaped }
 
 // spellCollected is the evidence c's cast collected while c is that spell on
 // the stack, nil anywhere else (Defined$ Collected).

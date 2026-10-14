@@ -13,8 +13,10 @@
 // names) but never their own vocabulary: Condition$ itself (Threshold,
 // Metalcraft, Delirium, Hellbent, Revolt, Kicked, Surge, Bargain, ...) is
 // SpellAbilityCondition's OWN separate switch (setConditions,
-// SpellAbilityCondition.java), not built here -- a card naming it skips via
-// subAbilityUnresolvedParams below, the identical GO-7 contract.
+// SpellAbilityCondition.java), built here only for the values
+// conditionValueRead names (Kicked, OptionalCost, Bargain, Foretold) -- any
+// other skips via subAbilityUnresolvedParams below, the identical GO-7
+// contract.
 
 package engine
 
@@ -111,12 +113,20 @@ func subAbilityConditionMet(g *Game, host *Card, amounts map[string]expr.Amount,
 // 118-128, :283-284; the flag defaults to true and parses as
 // Boolean.parseBoolean). Any other value is false here (GO-7).
 func conditionValueMet(g *Game, host *Card, a *compile.Ability, value string) bool {
-	if value == "OptionalCost" {
+	switch value {
+	case "OptionalCost":
 		want := true
 		if v, ok := a.Param("ConditionOptionalPaid"); ok {
 			want = strings.EqualFold(v, "true")
 		}
 		return g.spellOptional(host.ID).has(optGeneric) == want
+	case "Bargain":
+		// SpellAbilityCondition.java:109-110, :279: the spell was bargained.
+		return g.spellOptional(host.ID).has(optBargain)
+	case "Foretold":
+		// SpellAbilityCondition.java:122-123, :280: the spell was cast for its
+		// foretell cost.
+		return g.spellOptional(host.ID).foretold
 	}
 	return kickedConditionMet(host, value)
 }
@@ -124,7 +134,7 @@ func conditionValueMet(g *Game, host *Card, a *compile.Ability, value string) bo
 // conditionValueRead reports whether conditionValueMet evaluates value.
 func conditionValueRead(value string) bool {
 	switch value {
-	case "Kicked", "Kicked 1", "Kicked 2", "OptionalCost":
+	case "Kicked", "Kicked 1", "Kicked 2", "OptionalCost", "Bargain", "Foretold":
 		return true
 	}
 	return false

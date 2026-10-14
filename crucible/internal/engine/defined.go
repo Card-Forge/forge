@@ -273,6 +273,17 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement that records it", defined)
 		}
 		candidates = []PlayerID{pid}
+	case "ReplacedTarget":
+		// The same "Replaced" branch over AbilityKey.Target: a DamageDone
+		// replacement's damaged object, which is a player only when a player was
+		// dealt the damage (Java adds only a Player object, AbilityUtils.java:
+		// 1104-1106): Angel of Suffering's "you mill twice that many cards".
+		if refs.replacedTarget == NoEntity {
+			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement that records it", defined)
+		}
+		if pid, ok := refs.replacedTarget.AsPlayer(); ok {
+			candidates = []PlayerID{pid}
+		}
 	default:
 		// getDefinedPlayers' fallthrough (AbilityUtils.java:1186-1198):
 		// every player, filtered by the dotted restriction; "You.<p>" and

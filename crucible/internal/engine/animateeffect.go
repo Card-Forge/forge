@@ -13,6 +13,9 @@ import "fmt"
 type animateEffect struct{}
 
 func (animateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, "Animate"); err != nil {
+		return err
+	}
 	template, grants, err := buildAnimate(g, a, "Animate")
 	if err != nil {
 		return err

@@ -1,0 +1,14 @@
+# Bargain is an optional additional cost (GameActionUtil.java:479-481,
+# OptionalCost.Bargain): Ornithopter is sacrificed as Candy Grapple is cast,
+# so `X:Count$Bargained.5.3` (AbilityUtils.java:1708-1710) reads 5 and the
+# 6/4 Craw Wurm gets -5/-5 and dies; unbargained it would get -3/-3 and live.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+queue confirmpaycost true
+queue sacrificechoice 4
+queue targets 5
+castspell human 1
+resolvestack

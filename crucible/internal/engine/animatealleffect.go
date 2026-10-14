@@ -11,6 +11,9 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if err := rejectParams(a, "AnimateAll", "Zone", "ValidTgts", "Defined", "RememberAnimated"); err != nil {
 		return err
 	}
+	if err := rejectUnreadCondition(a, "AnimateAll"); err != nil {
+		return err
+	}
 	template, grants, err := buildAnimate(g, a, "AnimateAll")
 	if err != nil {
 		return err

@@ -1,0 +1,17 @@
+# Count$LeftBattlefieldThisTurn <valid> (AbilityUtils.java:2537-2542) counts
+# the turn's departures from the battlefield as last known there: Shock kills
+# the human's own Grizzly Bears, so That's Rough Buddy's
+# `Y:Count$LeftBattlefieldThisTurn Creature.YouCtrl` reads 1 and its
+# `Count$Compare Y GE1.2.1` puts two +1/+1 counters on Hill Giant, then draws.
+startturn human
+advance 3
+tapformana human 3 R
+queue targets 6
+castspell human 1
+resolvestack
+tapformana human 4 W
+tapformana human 5 W
+queue paygeneric W
+queue targets 7
+castspell human 2
+resolvestack

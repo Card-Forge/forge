@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Candy Grapple|Id:1
+humanbattlefield=Swamp|Id:2;Swamp|Id:3;Ornithopter|Id:4
+aibattlefield=Craw Wurm|Id:5

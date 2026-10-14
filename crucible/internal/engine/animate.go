@@ -216,13 +216,14 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 // "can't have" keywords, removing abilities, all creature types, a
 // renaming, mana-cost changes, a revert cost, a leave-the-battlefield
 // replacement, what the animated card remembers or imprints, an Optional$
-// confirmation, and the end-of-turn delayed trigger (AtEOT$).
+// confirmation, and the end-of-turn delayed trigger (AtEOT$). Condition$ is
+// the two effects' own (rejectUnreadCondition, then subAbilityConditionMet).
 var animateUnresolvedParams = [...]string{
 	"staticAbilities", "sVars", "HiddenKeywords", "TransferActivator",
 	"CantHaveKeyword", "RemoveAllAbilities", "RemoveNonManaAbilities", "RemoveThisAbility",
 	"AddAllCreatureTypes", "Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
 	"RememberObjects", "ImprintCards", "Optional", "OptionQuestion", "AtEOT", "TgtZone",
-	"Condition", "ConditionDefined",
+	"ConditionDefined",
 }
 
 // animateDuration reads Duration$: absent is until end of turn, Permanent

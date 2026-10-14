@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Swamp|Tapped;Swamp|Tapped;Swamp|Tapped;Swamp|Tapped;Dimension X Pizzasaur|SummonSick|Counters:P1P1=2
+ailife=20
+aigraveyard=Grizzly Bears

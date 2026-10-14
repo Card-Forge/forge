@@ -1,0 +1,11 @@
+# A damage replacement whose ReplaceWith$ is an ordinary effect reads the
+# replacing object (AbilityUtils.java:663-671, ReplaceDamage.java:143-146):
+# Angel of Suffering prevents Shock's 2 damage to its controller and mills
+# `X:ReplaceCount$DamageAmount/Twice` = 4 cards from `Defined$ ReplacedTarget`,
+# the damaged player.
+startturn human
+advance 3
+tapformana human 3 R
+queue targets human
+castspell human 1
+resolvestack

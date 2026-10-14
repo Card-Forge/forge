@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanlibrary=Island
+humanbattlefield=Angel of Suffering;Mountain|Tapped
+humangraveyard=Island;Island;Island;Island;Shock
+ailife=20

@@ -50,6 +50,19 @@ func (g *Game) Foretell(pid PlayerID, card CardID, controller PlayerController) 
 	return true
 }
 
+// cardIsForetold is Card.isForetold (Card.java:6717-6727): in exile, whether
+// the card lies there foretold; anywhere else, whether its cast was for its
+// foretell cost (getCastSA().isForetold), which a spell keeps onto the
+// battlefield (Lupine Harbingers' "if it was foretold") and loses with its
+// cast record on any other move.
+func (g *Game) cardIsForetold(id CardID) bool {
+	c := g.Card(id)
+	if c.Zone == Exile {
+		return c.foretold
+	}
+	return c.wasCast && c.castOpt.foretold
+}
+
 // foretellCost is the mana cost c is cast for from exile, when pid may: they
 // own it, it was foretold on an earlier turn and is still there, and its
 // K:Foretell:<cost> is a plain mana cost (anything else is not offered, GO-7).

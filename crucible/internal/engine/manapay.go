@@ -40,6 +40,11 @@ type xAnnounced struct {
 	// (SpellAbility.getPayingMana by color): what Count$Converge and
 	// Count$Adamant read off a cast.
 	paid [5]int
+	// snow is how many of the units spent were snow mana: mana a snow
+	// permanent produced (Pool's snow buckets, CR 106.3a), what
+	// Count$CastTotalManaSpent Snow reads off a cast (the cast's paying mana
+	// whose source card is snow, AbilityUtils.java:1899-1907).
+	snow int
 }
 
 // payManaCostX is PayManaCost that also reports the X it announced, for the
@@ -151,8 +156,15 @@ func (g *Game) payManaCostX(decider PlayerID, cost mana.Cost, controller PlayerC
 	if life > 0 && g.cantPayLife(decider, false, cause) {
 		return xAnnounced{}, false
 	}
+	snowBefore := g.Player(decider).ManaPool.SnowBreakdown()
 	if !g.Player(decider).ManaPool.payWithSnow(mana.FromShards(resolved, 0), snow, g.snowAnyColor) {
 		return xAnnounced{}, false
+	}
+	// Which bucket paid a plain pip or a generic unit is payWithSnow's own
+	// order (plain before snow), so this is the snow mana that order spent.
+	snowAfter := g.Player(decider).ManaPool.SnowBreakdown()
+	for i := range snowBefore {
+		x.snow += snowBefore[i] - snowAfter[i]
 	}
 	// Every shard is pure by now (a hybrid's choice, a generic's chosen mana),
 	// so its color is the color of the mana that paid it.

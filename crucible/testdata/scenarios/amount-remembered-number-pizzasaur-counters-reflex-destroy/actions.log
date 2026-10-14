@@ -1,0 +1,20 @@
+# PutCounter's RememberAmount$ remembers the counters put as an integer
+# (GameEntityCounterTable.java:181-184); the reflexive "when you do" reads it
+# back as `TriggerAmount$ Count$RememberedNumber/DivideEvenlyDown.2`
+# (AbilityUtils.java:1991-1999). Dimension X Pizzasaur puts two +1/+1
+# counters on itself, so the reflexive trigger fires once and destroys the
+# opponent's Grizzly Bears (mana value 2, two counters among the human's
+# permanents).
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+tapformana human 4 B
+tapformana human 5 B
+queue paygeneric B
+queue paygeneric B
+queue paygeneric B
+castspell human 1
+queue targets 1
+queue targets 6
+resolvestack

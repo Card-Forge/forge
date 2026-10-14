@@ -231,7 +231,8 @@ func (g *Game) resetPlayerForRestart(pid PlayerID) {
 	p.LandsPlayed, p.LandsPlayedLastTurn = 0, 0
 	p.CardsDrawnThisTurn = 0
 	p.DrawnThisDrawStep = 0
-	p.DescendedThisTurn = false
+	p.DescendedThisTurn, p.descended = false, 0
+	p.committedCrimes = 0
 	p.VenturedThisTurn = 0
 	p.LifeGainedTimesThisTurn = 0
 	p.LifeGainedThisTurn = 0

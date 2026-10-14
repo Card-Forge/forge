@@ -117,6 +117,17 @@ type Player struct {
 	// Graveyard, reset for every player at cleanup (cleanupStep, turn.go) the
 	// identical way LandsPlayed/CardsDrawnThisTurn already are.
 	DescendedThisTurn bool
+	// descended is that count itself (Player.descended, Player.java:119,
+	// :2102-2104), what Count$YouDescendedThisTurn reads (AbilityUtils.java:
+	// 2336-2338). It moves with DescendedThisTurn, which stays its "> 0", in
+	// Game.Move, and resets with it at cleanup (Player.onCleanupPhase, :2491).
+	descended int
+	// committedCrimes is Player.committedCrimeThisTurn (Player.java:111,
+	// :3962-3968): how many abilities this player put on the stack targeting an
+	// opponent or what an opponent controls (noteCrime, stack.go), read by
+	// Count$CommittedCrimeThisTurn and the committedCrimeThisTurn player
+	// property, reset at cleanup (Player.onCleanupPhase, :2501).
+	committedCrimes int
 	// DrawnThisDrawStep is how many cards this player has drawn while the
 	// game's current phase is Draw (Java's own numDrawnThisDrawStep,
 	// Player.java) -- distinct from CardsDrawnThisTurn's whole-turn count:

@@ -332,6 +332,10 @@ type abilityRefs struct {
 	// Defined$ ReplacedDefendingPlayer); NoPlayer otherwise.
 	replacedPlayer          PlayerID
 	replacedDefendingPlayer PlayerID
+	// replacedTarget is a DamageDone replacement's Target, the damaged object
+	// (ReplaceDamage.setReplacingObjects, ReplaceDamage.java:145: AbilityKey.
+	// Target from Affected; Defined$ ReplacedTarget); NoEntity otherwise.
+	replacedTarget EntityID
 }
 
 // refs is a's own abilityRefs.
@@ -340,6 +344,9 @@ func (a *Ability) refs() abilityRefs {
 		triggerRemembered: a.TriggerRemembered, triggered: a.triggered, paid: a.paid, replaced: a.replacedCard()}
 	if a.replacing != nil {
 		r.replacedPlayer, r.replacedDefendingPlayer = a.replacing.player, a.replacing.defendingPlayer
+		if a.replacing.amountName == "DamageAmount" {
+			r.replacedTarget = a.replacing.affected
+		}
 	}
 	return r
 }

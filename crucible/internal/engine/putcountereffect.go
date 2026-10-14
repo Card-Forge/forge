@@ -101,6 +101,12 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 			return fmt.Errorf("engine: PutCounter: %s$ not resolvable yet", key)
 		}
 	}
+	_, rememberAmount := a.Params.Param("RememberAmount")
+	if enter && rememberAmount {
+		// The entry's counters are put by applyEnterCounters with the rest of
+		// its table, past the point this ability could remember their total.
+		return fmt.Errorf("engine: PutCounter: RememberAmount$ with ETB$ not resolvable yet")
+	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
@@ -189,11 +195,16 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		}
 		amounts[i] = share
 	}
+	// total is GameEntityCounterTable.totalValues once the AddCounter
+	// replacements have edited the table in place (ReplaceCounterEffect's
+	// setCount): the counters each object was to get, summed.
+	total := 0
 	for i, cid := range cards {
 		n := g.countersReplaced(controller, a.Controller, CardEntity(cid), counterType, amounts[i])
 		if n <= 0 {
 			continue
 		}
+		total += n
 		g.addCardCounters(controller, a.Source, cid, counterType, n)
 	}
 	if keyword.Parse(a.Params.Keyword).Name == "Renown" {
@@ -207,8 +218,15 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		if n <= 0 {
 			continue
 		}
+		total += n
 		g.Player(pid).Counters.Add(counterType, n)
 		emitCounterChanged(g, a.Source, PlayerEntity(pid), counterType, n)
+	}
+	if rememberAmount && total > 0 {
+		// GameEntityCounterTable.java:181-184: the host remembers the total as
+		// an Integer, once the counters are on (Etched Slith's "when you do",
+		// read back by Count$RememberedNumber).
+		g.Card(a.Source).Memory.RememberNumber(total)
 	}
 	return nil
 }

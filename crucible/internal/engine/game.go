@@ -832,7 +832,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.foretold = false
 	}
 	if kind != Stack && kind != Battlefield {
-		c.wasCast, c.castManaSpent = false, 0
+		c.wasCast, c.castManaSpent, c.castSnow = false, 0, 0
 	}
 	if from == Stack && c.flashbackCast {
 		// CR 702.34a, Flashback's replacement (CardFactoryUtil.java:2252:
@@ -964,6 +964,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 	// Java's own check also excludes a token.
 	if kind == Graveyard && isPermanent && !c.IsToken {
 		g.Player(owner).DescendedThisTurn = true
+		g.Player(owner).descended++
 	}
 	g.recordEntered(c, &before, from, kind)
 

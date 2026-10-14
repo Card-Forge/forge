@@ -32,6 +32,56 @@ func (g *Game) PushAbility(a Ability) {
 	g.stampTargets(&a)
 	g.stack = append(g.stack, a)
 	g.sink.Emit(Event{Kind: AbilityActivated, Phase: g.activePhase, Active: g.activePlayer, Actor: a.Controller, Turn: uint16(g.turn), Source: a.Source})
+	g.noteCrime(a)
+}
+
+// noteCrime is MagicStack.add's crime check (MagicStack.java:449-451,
+// commitCrimeCheck :1034-1054) for a, just put on the stack: its controller
+// commits a crime (Player.commitCrime, Player.java:3962-3968) when any target
+// of the whole ability -- its own, a mode's or a chained sub-ability's -- is an
+// opponent, or a card an opponent controls on the battlefield or the stack, or
+// owns in a graveyard (a graveyard card's controller is its owner). A spell on
+// the stack is targeted as its card, whose controller is the player who cast
+// it: the spell's activating player Java tests. Every ability reaches the stack
+// through here, copies included, as every SpellAbility reaches MagicStack.add,
+// which runs the check for a copy too. The Mode$ CommitCrime trigger Java runs
+// after is not ported (no such trigger mode here).
+func (g *Game) noteCrime(a Ability) {
+	if a.Controller == NoPlayer {
+		return
+	}
+	targets := allTargetsOf(a)
+	if a.Target != NoCard {
+		// An Aura spell carries its one target here (castAura), not in Targets.
+		targets = append(targets, CardEntity(a.Target))
+	}
+	for _, e := range targets {
+		if pid, ok := e.AsPlayer(); ok {
+			if pid != a.Controller {
+				g.Player(a.Controller).committedCrimes++
+				return
+			}
+			continue
+		}
+		id, ok := e.AsCard()
+		if !ok {
+			continue
+		}
+		c := g.Card(id)
+		var who PlayerID
+		switch c.Zone {
+		case Battlefield, Stack:
+			who = c.Controller()
+		case Graveyard:
+			who = c.Owner
+		default:
+			continue
+		}
+		if who != a.Controller {
+			g.Player(a.Controller).committedCrimes++
+			return
+		}
+	}
 }
 
 // StackLen is how many abilities are waiting to resolve.

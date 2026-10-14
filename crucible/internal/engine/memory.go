@@ -20,8 +20,17 @@ import (
 // puts a player in the same list as a card.
 type Memory struct {
 	remembered *collect.OrderedSet[EntityID]
-	imprinted  *collect.OrderedSet[CardID]
-	chosen     *collect.OrderedSet[CardID]
+	// rememberedNumbers are the integers in Java's remembered set
+	// (Card.rememberedObjects, a LinkedHashSet<Object>, Card.java:194): what
+	// PutCounter's RememberAmount$ adds (GameEntityCounterTable.java:181-184)
+	// and Count$RememberedNumber sums (AbilityUtils.java:1991-1999). A set, as
+	// Java's is: remembering 1 twice holds one 1. Kept apart from the entities
+	// because an EntityID cannot carry a number; nothing reads the order between
+	// the two kinds, every reader of Remembered filters by type the way Java's
+	// instanceof checks do.
+	rememberedNumbers *collect.OrderedSet[int]
+	imprinted         *collect.OrderedSet[CardID]
+	chosen            *collect.OrderedSet[CardID]
 
 	// chosenPlayer, chosenColors and chosenNumber are Java Card's own
 	// setChosenPlayer/setChosenColors/setChosenNumber: single values, each
@@ -67,9 +76,36 @@ func (m *Memory) Remembered() []EntityID {
 	return m.remembered.All()
 }
 
-// ClearRemembered empties the remembered list, which is what
-// `ClearRemembered$ True` does.
-func (m *Memory) ClearRemembered() { m.remembered = nil }
+// RememberNumber adds an integer to the remembered set (Card.addRemembered of
+// an Integer), and reports whether it was new.
+func (m *Memory) RememberNumber(n int) bool {
+	if m.rememberedNumbers == nil {
+		m.rememberedNumbers = collect.NewOrderedSet[int](1)
+	}
+	return m.rememberedNumbers.Add(n)
+}
+
+// RememberedNumbers returns the integers the card remembers, in order.
+func (m *Memory) RememberedNumbers() []int {
+	if m.rememberedNumbers == nil {
+		return nil
+	}
+	return m.rememberedNumbers.All()
+}
+
+// RememberedCount is Card.getRememberedCount (Card.java:1239-1241): every
+// remembered object, entities and integers alike.
+func (m *Memory) RememberedCount() int {
+	n := len(m.Remembered())
+	if m.rememberedNumbers != nil {
+		n += m.rememberedNumbers.Len()
+	}
+	return n
+}
+
+// ClearRemembered empties the remembered list, integers included, which is
+// what `ClearRemembered$ True` does (Card.clearRemembered).
+func (m *Memory) ClearRemembered() { m.remembered, m.rememberedNumbers = nil, nil }
 
 // Imprint adds a card to the imprinted list.
 func (m *Memory) Imprint(id CardID) bool {
@@ -238,6 +274,9 @@ func (m Memory) clone() Memory {
 	}
 	if m.remembered != nil {
 		out.remembered = m.remembered.Clone()
+	}
+	if m.rememberedNumbers != nil {
+		out.rememberedNumbers = m.rememberedNumbers.Clone()
 	}
 	if m.imprinted != nil {
 		out.imprinted = m.imprinted.Clone()

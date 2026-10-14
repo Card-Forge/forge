@@ -26,11 +26,13 @@ import (
 //
 // The player is the source controller (xCount's own `player`), and every flag
 // reads state the engine already keeps for the same flag's Condition$ use
-// (continuousConditionMet, continuous.go); Adamant reads the spell's own paid
-// mana (adamantValue). Not resolved: Bargain, Madness, Escaped, Emerged,
-// Foretold, Freerunning, AltCost, PromisedGift (none of those cast records is
-// kept), CommittedCrimeThisTurn, Revolt and Void (no per-turn record),
-// StartingPlayer, and Random (an amount read twice must not roll twice).
+// (continuousConditionMet, continuous.go) or the turn's history
+// (castrecord.go: Void, Revolt; Player.committedCrimes); Adamant reads the
+// spell's own paid mana (adamantValue). Not resolved: Madness, Escaped,
+// Emerged, Freerunning, AltCost, PromisedGift (the card's own keyword or
+// static is a cast this port does not make, so the branch would only hide
+// that), StartingPlayer, and Random (Java rolls on every read, the AI's
+// included, so no read count here can match the oracle's draws).
 func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, count expr.Count, depth int) (n int, ok, handled bool) {
 	branch := func(yes bool) (int, bool, bool) {
 		if len(count.Parameters) < 2 {
@@ -86,6 +88,28 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		n, ok := g.adamantValue(amounts, sourceController, source, count, depth)
 		return n, ok, true
 	}
+	switch {
+	case strings.HasPrefix(count.Head, "Bargain"):
+		// AbilityUtils.java:1708-1710: the ability's own cast was bargained
+		// (SpellAbility.isBargained), which only the spell itself carries.
+		if source == NoCard {
+			return 0, false, true
+		}
+		return branch(g.spellOptional(source).has(optBargain))
+	case strings.HasPrefix(count.Head, "Foretold"):
+		// AbilityUtils.java:2044-2047: Card.isForetold (Card.java:6717-6727).
+		if source == NoCard {
+			return 0, false, true
+		}
+		return branch(g.cardIsForetold(source))
+	case strings.HasPrefix(count.Head, "Escaped"):
+		// AbilityUtils.java:2058-2060: getCastSA().isEscape(), the card's cast
+		// record (Polukranos' twelve counters instead of six).
+		if source == NoCard {
+			return 0, false, true
+		}
+		return branch(g.Card(source).castEscaped())
+	}
 	var flag func(PlayerID) bool
 	switch count.Head {
 	case "Hellbent":
@@ -109,6 +133,15 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		flag = func(p PlayerID) bool { return g.Player(p).Speed == 4 }
 	case "Night":
 		flag = func(PlayerID) bool { return g.DayTime() == Night }
+	case "Void":
+		// AbilityUtils.java:2698-2701: Game.isVoid, a game-wide flag.
+		flag = func(PlayerID) bool { return g.isVoid() }
+	case "Revolt":
+		// AbilityUtils.java:2268-2270: Player.hasRevolt.
+		flag = g.hasRevolt
+	case "CommittedCrimeThisTurn":
+		// AbilityUtils.java:2289-2291: Player.getCommittedCrimeThisTurn > 0.
+		flag = func(p PlayerID) bool { return g.Player(p).committedCrimes > 0 }
 	case "Landfall":
 		// Player.hasLandfall (Player.java:2113): a land was added to the
 		// player's battlefield this turn.

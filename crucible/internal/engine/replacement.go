@@ -929,11 +929,16 @@ func (g *Game) damageReplacement(controller PlayerController, decider PlayerID, 
 					// the replaced one. A Replace* effect this port cannot run errors
 					// the same way, recorded rather than skipped (GO-7). A Replace*
 					// ability that ran and changed nothing (its own condition failed)
-					// is left alone: runReplaceWith already answered for it.
+					// is left alone: runReplaceWith already answered for it. The
+					// chain reads "the damage that would have been dealt" through
+					// ReplaceCount$DamageAmount (AbilityUtils.java:663-671, the
+					// replacing object), the way playerAmountReplaced's own
+					// chains read ReplaceCount$Number: Angel of Suffering's mill,
+					// Awe Strike's life gain.
 					api, known := APIByName(sub.Ability.Name)
 					if _, replaceAPI := replaceEffectFor(api); known && !replaceAPI {
 						ev := replacementEvent{result: replacementReplaced, amountName: "DamageAmount", amount: amount, affected: affected}
-						if err := g.runReplacementChain(controller, h, amounts, sub.Ability, &ev); err != nil {
+						if err := g.runReplacementChain(controller, h, replaceCountAmounts(g, amounts, h, sub.Ability, &ev), sub.Ability, &ev); err != nil {
 							g.recordPendingError(err)
 							return replacementNotReplaced
 						}

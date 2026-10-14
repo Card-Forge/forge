@@ -614,7 +614,8 @@ func (g *Game) cleanupStep(controller PlayerController) {
 		p.LandsPlayedLastTurn = p.LandsPlayed
 		p.LandsPlayed = 0
 		p.CardsDrawnThisTurn = 0
-		p.DescendedThisTurn = false
+		p.DescendedThisTurn, p.descended = false, 0
+		p.committedCrimes = 0
 		p.VenturedThisTurn = 0
 		p.LifeGainedTimesThisTurn = 0
 		p.LifeLostThisTurn = 0

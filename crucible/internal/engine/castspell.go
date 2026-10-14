@@ -129,6 +129,14 @@ func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller Player
 		opts.fromKeyword = ok // Flashback and Beam me up exile the spell as it leaves the stack
 		if !ok {
 			cost, ok = g.foretellCost(pid, c)
+			opts.foretold = ok
+		}
+		if !ok {
+			// Escape (CR 702.138): its mana instead of the mana cost, its other
+			// parts (exiling other graveyard cards) on top; the spell is not
+			// exiled as it leaves the stack.
+			cost, opts.extra, ok = g.escapeCost(pid, c)
+			opts.hasExtra, opts.escape = ok, ok
 		}
 		if !ok {
 			cost, opts.extra, ok = g.beamMeUpCost(pid, c)
@@ -343,6 +351,36 @@ func (g *Game) beamMeUpCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool)
 	return mana.Cost{}, unlessCost{}, false
 }
 
+// escapeCost is c's Escape keyword when pid may cast it from the graveyard
+// (GameActionUtil.java:145-169, CR 702.138a): pid owns c and it is there. The
+// keyword's cost replaces the mana cost (copyWithManaCostReplaced): its mana
+// is what is paid instead, its other parts -- exiling other cards from the
+// graveyard -- are paid with it. A cost parseUnlessCost does not read
+// (Nethergoyf's ExileFromGrave<X/...>, Lunar Hatchling's Exile<1/Land>) or
+// one whose parts pid cannot pay is not offered (GO-7).
+func (g *Game) escapeCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool) {
+	if c.Zone != Graveyard || c.Owner != pid || c.Def == nil {
+		return mana.Cost{}, unlessCost{}, false
+	}
+	for _, line := range c.KeywordLines() {
+		k := keyword.Parse(line)
+		if k.Name != "Escape" || k.Details == "" {
+			continue
+		}
+		uc, ok := parseUnlessCost(k.Details)
+		if !ok || !uc.hasMana {
+			return mana.Cost{}, unlessCost{}, false
+		}
+		mc := uc.mana
+		uc.hasMana, uc.mana, uc.manaTokens = false, mana.Cost{}, nil
+		if !g.unlessPayable(pid, c.ID, uc) {
+			return mana.Cost{}, unlessCost{}, false
+		}
+		return mc, uc, true
+	}
+	return mana.Cost{}, unlessCost{}, false
+}
+
 // flashbackCost is the mana cost of c's Flashback keyword when pid may cast it
 // from the graveyard: pid owns it and it is there. A Flashback whose cost is
 // not a plain mana cost (Sac<..>, PayLife<..>, a non-mana part) is not offered
@@ -427,6 +465,15 @@ type castOpts struct {
 	// sneak is a cast for the Sneak cost (sneak.go): altCost is its mana, and
 	// an unblocked attacker returns to hand once the mana is paid.
 	sneak bool
+	// foretold is a cast from exile for the card's Foretell cost
+	// (AlternativeCost.Foretold, GameActionUtil.java:205-225): altCost is that
+	// cost, and the cast records it (castOptional.foretold).
+	foretold bool
+	// escape is a cast from the graveyard for the card's Escape cost
+	// (AlternativeCost.Escape, GameActionUtil.java:145-169): altCost is its
+	// mana, extra its other parts, and the cast records it
+	// (castOptional.escaped).
+	escape bool
 }
 
 // castSpell is CastSpell past its timing and hand gates: the three spell
@@ -456,7 +503,7 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 		return false
 	}
 	opts.optional = optional
-	g.Card(card).castOpt = castOptional{kinds: optional.kinds}
+	g.Card(card).castOpt = castOptional{kinds: optional.kinds, foretold: opts.foretold, escaped: opts.escape}
 	opts.kickers = g.chooseKicker(controller, pid, g.Card(card))
 	g.Card(card).kicker = opts.kickers
 	g.Card(card).sneaked = opts.sneak
@@ -629,7 +676,7 @@ func xIsPaid(c *Card) bool {
 func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, opts castOpts) (xAnnounced, bool) {
 	// The X is announced here, so from the return on Count$xPaid reads it.
 	defer func() { g.castPending = NoCard }()
-	c.castManaSpent, c.castPaid = 0, [5]int{}
+	c.castManaSpent, c.castPaid, c.castSnow = 0, [5]int{}, 0
 	if opts.paysNoMana() {
 		return xAnnounced{}, true
 	}
@@ -650,7 +697,7 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 		c.castManaSpent = len(total.Shards()) + total.Generic() + x.value*total.CountX()
 		// The mana another player paid (assist) is not in x.paid: Converge
 		// and Adamant read only the caster's.
-		c.castPaid = x.paid
+		c.castPaid, c.castSnow = x.paid, x.snow
 	}
 	return x, paid
 }

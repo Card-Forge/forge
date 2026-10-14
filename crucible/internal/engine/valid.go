@@ -328,6 +328,11 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 			return c.kicker&kicker2 != 0
 		}
 		return c.kickerMagnitude() > 0
+	case name == "escaped":
+		// CardProperty.java:1751-1755: the card's cast was for its Escape
+		// cost ("CARDNAME escapes with ..." counters, Kroxa's "unless it
+		// escaped").
+		return c.castEscaped()
 	case name == "IsRemembered":
 		sc, ok := sourceCard(g, source)
 		return ok && containsEntity(sc.Memory.Remembered(), CardEntity(c.ID))
@@ -1123,6 +1128,9 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 		return true, true
 	case "descended":
 		return g.Player(candidate).DescendedThisTurn, true
+	case "committedCrimeThisTurn":
+		// PlayerProperty.java:83-84: at least one crime this turn.
+		return g.Player(candidate).committedCrimes > 0, true
 	case "VenturedThisTurn":
 		return g.Player(candidate).VenturedThisTurn > 0, true
 	case "IsPoisoned":

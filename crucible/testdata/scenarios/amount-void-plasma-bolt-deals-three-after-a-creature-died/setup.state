@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Shock|Id:1;Plasma Bolt|Id:2
+humanbattlefield=Mountain|Id:3;Mountain|Id:4
+aibattlefield=Grizzly Bears|Id:5

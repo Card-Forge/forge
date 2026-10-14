@@ -180,11 +180,22 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		m := &g.Card(source).Memory
 		switch count.Head {
 		case "RememberedSize":
-			return len(m.Remembered()), true
+			return m.RememberedCount(), true
 		case "ImprintedSize":
 			return len(m.Imprinted()), true
 		}
 		return len(m.Chosen()), true
+	case "RememberedNumber":
+		// AbilityUtils.java:1991-1999: the sum of the integers the host
+		// remembers (PutCounter's RememberAmount$), 0 when it remembers none.
+		if source == NoCard {
+			return 0, false
+		}
+		n := 0
+		for _, v := range g.Card(source).Memory.RememberedNumbers() {
+			n += v
+		}
+		return n, true
 	case "Converge":
 		// AbilityUtils.java:2134-2137: the colors of mana spent casting the
 		// card, 0 for a card that was not cast.
@@ -200,16 +211,24 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		}
 		return n, true
 	case "CastTotalManaSpent":
-		// AbilityUtils.java:1896-1898: the cast SpellAbility's total mana
-		// spent, 0 for a card that was not cast. The `<valid>` form counts
-		// mana by its source, which the cast record does not keep.
-		if source == NoCard || count.Argument != "" {
+		// AbilityUtils.java:1896-1908: the cast SpellAbility's total mana
+		// spent, 0 for a card that was not cast; `CastTotalManaSpent <valid>`
+		// counts the paying mana whose source card matches. The pool keeps no
+		// source card, only whether a snow permanent made the mana (CR
+		// 106.3a), so `Snow` -- the source is a snow permanent -- is the one
+		// restriction it can answer; Cave, Desert, Treasure and the rest stay
+		// unresolved (GO-7).
+		if source == NoCard || (count.Argument != "" && count.Argument != "Snow") {
 			return 0, false
 		}
-		if !g.Card(source).wasCast {
+		c := g.Card(source)
+		if !c.wasCast {
 			return 0, true
 		}
-		return g.Card(source).castManaSpent, true
+		if count.Argument == "Snow" {
+			return c.castSnow, true
+		}
+		return c.castManaSpent, true
 	}
 	if sourceController == NoPlayer {
 		return 0, false
@@ -275,6 +294,11 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return g.Player(sourceController).LifeGainedThisTurn, true
 	case "CreaturesAttackedThisTurn":
 		return g.creaturesAttackedCount(sourceController, source, count.Argument)
+	case "LeftBattlefieldThisTurn":
+		return g.leftBattlefieldCount(sourceController, source, count.Argument)
+	case "YouDescendedThisTurn":
+		// AbilityUtils.java:2336-2338: Player.getDescended, a count.
+		return g.Player(sourceController).descended, true
 	case "CountersAddedThisTurn":
 		return g.countersAddedCount(sourceController, source, count.Argument)
 	case "UnlockedDoors":

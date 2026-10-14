@@ -5,7 +5,9 @@
 // it was when cast (MagicStack.getSpellsCastThisTurn, an LKI list).
 // Count$ThisTurnEntered_<zone>[_from_<zone>]_<valid>, Count$CountersAddedThisTurn,
 // Count$CreaturesAttackedThisTurn and Count$LifeYouGainedThisTurn read the
-// others (AbilityUtils.java:2805, :2819, :2517, :2360). All live on the Game
+// others (AbilityUtils.java:2805, :2819, :2517, :2360); the zone changes out of
+// the battlefield are also Game.leftBattlefieldThisTurn, which
+// Count$LeftBattlefieldThisTurn, Void and Revolt read (:2537, :2698, :2268). All live on the Game
 // or its players, are copied by Game.Clone and end at cleanup (GO-2).
 
 package engine
@@ -14,6 +16,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -144,6 +147,67 @@ func (g *Game) thisTurnEnteredCount(sourceController PlayerID, source CardID, te
 		}
 	}
 	return n, true
+}
+
+// leftBattlefieldThisTurn calls each with every card that left the battlefield
+// this turn, as last known there, in the order it left: Game.getLeftBattlefieldThisTurn
+// (Game.java:295-303, filled by GameAction.changeZone with the LKI copy,
+// GameAction.java:539-540, cleared at cleanup, Game.java:1228). The turn's zone
+// changes already hold that copy (recordEntered), so the list is read off them
+// rather than kept twice. each returns false to stop.
+func (g *Game) leftBattlefieldThisTurn(each func(lki *Card) bool) {
+	for i := range g.enteredThisTurn {
+		e := &g.enteredThisTurn[i]
+		if e.from == Battlefield && !each(&e.card) {
+			return
+		}
+	}
+}
+
+// leftBattlefieldCount is Count$LeftBattlefieldThisTurn <valid>
+// (AbilityUtils.java:2537-2542): the cards that left the battlefield this turn
+// matching the valid string from the source controller's point of view, each
+// judged as it last was there ("creatures that left the battlefield under
+// your control": Creature.YouCtrl reads the LKI's controller).
+func (g *Game) leftBattlefieldCount(sourceController PlayerID, source CardID, spec string) (int, bool) {
+	if spec == "" {
+		return 0, false
+	}
+	parsed := valid.Parse(spec)
+	n := 0
+	g.leftBattlefieldThisTurn(func(lki *Card) bool {
+		if Matches(g, lki, parsed, sourceController, source) {
+			n++
+		}
+		return true
+	})
+	return n, true
+}
+
+// isVoid is Game.isVoid (Game.java:1432-1435): a nonland permanent left the
+// battlefield this turn, or a spell was warped this turn. This port casts no
+// spell for its Warp cost (castspell.go's permanentEffect: no Warp cast mode;
+// continuous.go reads a Spell.Warp grant as never used), so the second half
+// is false for every spell this game cast -- what the cast record says, not a
+// guess about one.
+func (g *Game) isVoid() bool {
+	found := false
+	g.leftBattlefieldThisTurn(func(lki *Card) bool {
+		found = !lki.Type().Has(cardtype.Land)
+		return !found
+	})
+	return found
+}
+
+// hasRevolt is Player.hasRevolt (Player.java:2095-2097): a permanent pid
+// controlled left the battlefield this turn.
+func (g *Game) hasRevolt(pid PlayerID) bool {
+	found := false
+	g.leftBattlefieldThisTurn(func(lki *Card) bool {
+		found = lki.Controller() == pid
+		return !found
+	})
+	return found
 }
 
 // creaturesAttackedCount is Count$CreaturesAttackedThisTurn <valid>

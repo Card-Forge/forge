@@ -119,6 +119,16 @@ func (g *Game) optionalCostOptions(pid PlayerID, card CardID) ([]optionalCostOpt
 		}
 	}
 	for _, line := range c.KeywordLines() {
+		if line == "Bargain" {
+			// GameActionUtil.java:479-481: sacrifice an artifact, an enchantment
+			// or a token as the spell is cast (OptionalCost.Bargain, CR 702.166).
+			uc, ok := parseUnlessCost(bargainCost)
+			if !ok {
+				return nil, fmt.Errorf("engine: %q: Bargain cost %q not resolvable yet", c.Def.Name, bargainCost)
+			}
+			out = append(out, optionalCostOption{text: bargainCost, uc: uc, kind: optBargain})
+			continue
+		}
 		k := keyword.Parse(line)
 		if k.Name != "Teamwork" {
 			continue
@@ -131,6 +141,10 @@ func (g *Game) optionalCostOptions(pid PlayerID, card CardID) ([]optionalCostOpt
 	}
 	return out, nil
 }
+
+// bargainCost is the Bargain keyword's optional cost, as GameActionUtil.java:480
+// writes it.
+const bargainCost = "Sac<1/Artifact;Enchantment;Card.token/artifact, enchantment or token>"
 
 // optionalStaticOption reads one applying line's Cost$ and ReduceColor$. ok is
 // false for a ReduceColor$ other than the five colors, which Java's if-chain

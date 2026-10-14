@@ -1,0 +1,14 @@
+# Void (Game.isVoid, Game.java:1432-1435): a nonland permanent left the
+# battlefield this turn. Shock kills the Grizzly Bears first, so Plasma Bolt's
+# `X:Count$Void.3.2` reads the turn's departures (Game.leftBattlefieldThisTurn,
+# GameAction.java:539-540) and deals 3 to the opponent instead of 2.
+startturn human
+advance 3
+tapformana human 3 R
+queue targets 5
+castspell human 1
+resolvestack
+tapformana human 4 R
+queue targets ai
+castspell human 2
+resolvestack
