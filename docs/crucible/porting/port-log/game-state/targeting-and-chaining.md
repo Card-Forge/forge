@@ -84,10 +84,11 @@ through, whether or not that particular effect's own real corpus lines ever reac
 list, bypassing `Defined$` resolution outright; only when it is absent does `Defined$` get read at all. 300 of the
 corpus's 445 real `(AB|DB)$ LoseLife` lines resolve now (226 by `Defined$` alone, 74 more via
 `ValidTgts$ Opponent`/`Player`) -- the other 2 real `ValidTgts$` lines name a qualified base
-(`Player.wasDealtDamageThisTurnBySource`/`Player.LostLifeThisTurn`) `matchesPlayerProperty` does not recognize, so
-`matchesPlayerSpec`'s own trial call reports `ok=false` for them, `targetCandidates` falls through to the card-shaped
-branch, finds no card matching a `Player`-rooted spec, and the ability lands on CR 603.3c's own "no legal targets"
-outcome -- the identical bucket a genuinely unresolvable shape already shares, not a wrong answer.
+(`Player.wasDealtDamageThisTurnBySource`/`Player.LostLifeThisTurn`) `matchesPlayerProperty` now recognizes
+([`m6-r9a-player-properties.md`](m6-r9a-player-properties.md)); before that, `matchesPlayerSpec`'s own trial call
+reports `ok=false` for them, `targetCandidates` falls through to the card-shaped branch, finds no card matching a
+`Player`-rooted spec, and the ability lands on CR 603.3c's own "no legal targets" outcome -- the identical bucket a
+genuinely unresolvable shape already shares, not a wrong answer.
 
 Building this surfaced two real regressions in already-shipped tests, both from the same root cause: five
 "`RejectsValidTgts`" tests (`pumpalleffect_test.go`, `putcountereffect_test.go`, `discardeffect_test.go`,
