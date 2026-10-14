@@ -259,6 +259,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
             Forge.getLocalizer().getMessage("cbShowStormCount"),
             Forge.getLocalizer().getMessage("nlShowStormCount")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_TARGET_BOX,
+            Forge.getLocalizer().getMessageorUseDefault("lblShowTargetBox", "Show Target Box"),
+            Forge.getLocalizer().getMessageorUseDefault("nlShowTargetBox", "Draws a box around selectable or targetable game entity.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);

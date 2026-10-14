@@ -27,6 +27,11 @@ import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.gamemodes.match.YieldController;
 import forge.toolbox.FEvent;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import forge.assets.FImage;
+import forge.assets.FTextureRegionImage;
 
 public class VPrompt extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
@@ -54,6 +59,30 @@ public class VPrompt extends FContainer {
     private final UndoButton btnUndo;
     private boolean undoShown;      //whether the undo button is currently part of the layout
     private boolean undoRequested;  //the game labelled Cancel as Undo, so there is something to undo
+
+    private static final boolean UNDO_ICON_MIRRORED = false; //flip this if the arrow points the wrong way
+    private static TextureAtlas undoAtlas;
+    private static FImage undoIcon;
+
+    private static FImage getUndoIcon() {
+        TextureAtlas atlas = null;
+        try {
+            atlas = Forge.getAssets().getTransformAtlas(); //kept by the asset manager, so a reloaded atlas is noticed
+        } catch (Exception ignored) { }
+        if (atlas != undoAtlas) { //first use, or the atlas was reloaded
+            undoAtlas = atlas;
+            undoIcon = null;
+            TextureRegion region = atlas == null ? null : atlas.findRegion("rotate");
+            if (region != null) {
+                if (UNDO_ICON_MIRRORED) {
+                    region = new TextureRegion(region);
+                    region.flip(true, false);
+                }
+                undoIcon = new FTextureRegionImage(region);
+            }
+        }
+        return undoIcon;
+    }
 
     public void setCardView(final CardView card) {
         this.card = card;
@@ -129,6 +158,21 @@ public class VPrompt extends FContainer {
         @Override
         public void draw(Graphics g) {
             float cx = getWidth() / 2, cy = getHeight() / 2;
+            FImage icon = getUndoIcon();
+            if (icon != null) { //round art from the zoom atlas: dim at rest, bright on hover, blue tint while pressed
+                float d = Math.min(getWidth(), getHeight()) * (isHovered() || pressed ? 1f : 0.9f);
+                Batch b = g.getBatch();
+                float oldColor = b.getPackedColor();
+                float a = g.getfloatAlphaComposite();
+                if (pressed) {
+                    b.setColor(0.45f, 0.7f, 1f, a);
+                } else {
+                    b.setColor(1f, 1f, 1f, a * (isHovered() ? 1f : 0.75f));
+                }
+                g.drawImage(icon, cx - d / 2, cy - d / 2, d, d);
+                b.setPackedColor(oldColor);
+                return;
+            }
             float r = Math.min(getWidth(), getHeight()) / 2f * (isHovered() ? 1f : 0.9f);
             boolean adv = Forge.isMobileAdventureMode;
             FSkinColor fill = FSkinColor.get(isHovered() && !pressed

@@ -243,9 +243,11 @@ public class CardZoom extends FOverlay {
     private static void loadTransformIcons() {
         if (transformAtlas != null || transformLoadFailed) return;
         try {
-            transformAtlas = new TextureAtlas(getDefaultSkinFile("sprite_transform.atlas"));
-            for (Texture t : transformAtlas.getTextures())
-                t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            transformAtlas = Forge.getAssets().getTransformAtlas();
+            if (transformAtlas == null) {
+                transformLoadFailed = true;
+                return;
+            }
             imgFlip = new FTextureRegionImage(transformAtlas.findRegion("flip"));
             imgMutate = new FTextureRegionImage(transformAtlas.findRegion("mutate"));
             TextureRegion sp = transformAtlas.findRegion("specialize");
