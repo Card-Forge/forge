@@ -3045,6 +3045,14 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
         boolean hasLondonBottom() { return londonsBottomed.get();
         }
 
+        synchronized void recordKeepPrompt(int seat, long callbackOrdinal) {
+            if (seat < 0 || seat >= keepPromptOrdinals.length || keepPromptOrdinals[seat] >= 0) {
+                fail(new AssertionError("Unexpected repeated scripted Keep prompt for seat " + seat));
+                return;
+            }
+            keepPromptOrdinals[seat] = callbackOrdinal;
+        }
+
         void expectPostKeepCallback(String callback) {
             if (!"setGameView".equals(callback) && !"applyDelta".equals(callback)) {
                 throw new IllegalArgumentException("Unsupported post-Keep callback: " + callback);
@@ -5197,8 +5205,8 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
             Capture receipt = capture("showOptionDialog", -1, message, title, icon, options, defaultOption);
             if (receipt == null) throw new AssertionError("Could not retain DanDan mulligan choice callback for seat " + seat);
             if (expected.decision() == Decision.KEEP_WITHOUT_LAND) {
-                GameView disconnectAiSourceView = getGameView();
-                int handCount = false ? snapshotOwnHand().ids().size() : -1;
+                scenario.recordKeepPrompt(seat, receipt.callbackOrdinal());
+
 
                 if (scenario.metamorphoseScenario() || scenario.privacyScenario() || scenario.lifecycleScenario()) {
                     HandFacts hand = snapshotOwnHand();
@@ -6028,7 +6036,7 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                     return;
                 }
                 if (expected.decision() == Decision.KEEP_WITHOUT_LAND && promptCapture != null) {
-                    HandFacts disconnectAiHand = false ? snapshotOwnHand() : null;
+                    scenario.recordKeepPrompt(seat, promptCapture.callbackOrdinal());
 
                     if (routeOpeningKeepAfterAppliedHand(promptCapture, owner, oneText, twoText,
                             enabledOne, enabledTwo, expected)) return;
