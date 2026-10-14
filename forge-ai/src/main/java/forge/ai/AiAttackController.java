@@ -1366,7 +1366,7 @@ public class AiAttackController {
                 // the opponent's mana: safe when they're tapped out, otherwise take the extra roll
                 // for the risk of walking into a trick
                 && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0
-                || MyRandom.percentTrue(extraChanceIfOppHasMana))
+                        || MyRandom.percentTrue(extraChanceIfOppHasMana))
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
                 defendingOpponent.getLifeLostLastTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
@@ -1726,7 +1726,8 @@ public class AiAttackController {
                     if (validTargets.isEmpty()) {
                         missTarget = true;
                         break;
-                    } else if (sa.isCurse() && validTargets.stream().noneMatch(
+                    }
+                    if (sa.isCurse() && validTargets.stream().noneMatch(
                             CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
                         // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
                         missTarget = true;
