@@ -24,6 +24,9 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
     public KeywordCollection() {
         super();
     }
+    public KeywordCollection(KeywordCollection other) {
+        this.map.putAll(other.map);
+    }
 
     public boolean contains(Keyword keyword) {
         return map.containsKey(keyword);
