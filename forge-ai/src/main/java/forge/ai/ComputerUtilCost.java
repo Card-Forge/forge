@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import forge.card.MagicColor;
 import forge.game.GameObject;
+import forge.game.ability.ApiType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -685,6 +686,10 @@ public class ComputerUtilCost {
         // check that X is really free choice
         if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
+        }
+        // another mode already decided
+        if (root.getApi() == ApiType.Charm && root.getXManaCostPaid() != null) {
+            return root.getXManaCostPaid();
         }
 
         Integer val = null;

@@ -321,6 +321,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(sp.equals(source.getCastSA()) ? source.getCastSA() : sp.copy(lki, true));
             sp.getActivatingPlayer().addSpellCastThisTurn();
+            // The view's storm count was taken when the spell was pushed, before this cast was counted
+            game.updateStackForView();
 
             // Add expend mana
             Map<Player, Long> expendPlayers = sp.getPayingMana().stream().collect(Collectors.groupingBy(Mana::getPlayer, Collectors.counting()));
@@ -522,10 +524,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private void recordUndoableActions(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        // either push onto or clear undo stack based on whether spell/ability is undoable
+        // either push onto or clear undo stack based on whether SA is undoable
         if (sa.isUndoable()) {
             if (!canUndo(activator)) {
-                clearUndoStack(); //clear if undo stack owner changes
+                //clear if undo stack owner changes
+                clearUndoStack();
                 undoStackOwner = activator;
             }
             undoStack.push(sa);
@@ -542,14 +545,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return undoStackOwner == player;
     }
     public final boolean undo() {
-        if (undoStack.isEmpty()) { return false; }
+        if (undoStack.isEmpty()) {
+            return false;
+        }
 
         SpellAbility sa = undoStack.peek();
+        clearUndoStack(sa);
         if (sa.undo()) {
-            clearUndoStack(sa);
             new ManaRefundService(sa).refundManaPaid();
         } else {
-            clearUndoStack(sa);
             for (Mana pay : sa.getPayingMana()) {
                 clearUndoStack(pay.getManaAbility().getSourceSA());
             }

@@ -19,7 +19,6 @@ package forge.game;
 
 import com.google.common.collect.Lists;
 import forge.StaticData;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.EditionEntry;
 import forge.card.CardRarity;
@@ -223,13 +222,12 @@ public class GameFormat implements Comparable<GameFormat> {
     public List<PaperCard> getAllCards() {
         StaticData.instance().ensureAllCardsLoaded();
         List<PaperCard> cards = new ArrayList<>();
-        CardDb commonCards = StaticData.instance().getCommonCards();
         for (String setCode : allowedSetCodes_ro) {
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
             if (edition != null) {
                 for (EditionEntry card : edition.getObtainableCards()) {
                     if (!bannedCardNames_ro.contains(card.name())) {
-                        PaperCard pc = commonCards.getCard(card.name(), setCode, card.collectorNumber());
+                        PaperCard pc = StaticData.instance().fetchCard(card.name(), setCode, card.collectorNumber());
                         if (pc != null) {
                             cards.add(pc);
                         }

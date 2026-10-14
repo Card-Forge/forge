@@ -23,6 +23,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import forge.StaticData;
 import forge.card.*;
 import forge.item.*;
 import forge.util.*;
@@ -115,6 +116,7 @@ public final class BoosterUtils {
             filter = filter.and(formatStartingPool.getFilterPrinted());
         }
 
+        //only use main deck cards
         final List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().streamAllCards()
                 .filter(filter).collect(Collectors.toList());
 
@@ -279,12 +281,15 @@ public final class BoosterUtils {
 
         int usedMulticolor = 0, usedPhyrexian = 0;
 
+        // at least one pass even when every color is selected (otherColors empty)
+        final int preferredReps = Math.max(1, otherColors.size());
+
         for (int i = 0; i < MAX_BIAS; i++) {
 
             if (i < colorBias) {
 
                 int index = (int) ((double) i / preferredBias);
-                for (@SuppressWarnings("unused") Byte ignored : otherColors) {
+                for (int rep = 0; rep < preferredReps; rep++) {
 
                     //Add artifacts here if there's no colorless selection
                     if (i % 8 == 0 && !preferredColors.contains(MagicColor.COLORLESS) && includeArtifacts) {
@@ -484,8 +489,7 @@ public final class BoosterUtils {
 
             PrintSheet ps = new PrintSheet("Quest rewards");
             Predicate<PaperCard> predicate = IterableUtil.and(preds);
-            FModel.getMagicDb().getCommonCards().streamAllCards()
-                    .filter(predicate).forEach(ps::add);
+            FModel.getQuest().getAllAllowedCards().filter(predicate).forEach(ps::add);
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
@@ -504,7 +508,7 @@ public final class BoosterUtils {
         }
         else if (temp.length > 0) {
             // default: assume we are asking for a single copy of a specific card
-            final PaperCard specific = FModel.getMagicDb().getCommonCards().getCard(s);
+            final PaperCard specific = StaticData.instance().fetchCard(s);
             if (specific != null) {
                 rewards.add(specific);
             }

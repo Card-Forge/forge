@@ -183,9 +183,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             image = replacement;
             loaded = true;
             if (toolTipImage != null) {
-                if (toolTipImage.getDrawable() instanceof TextureRegionDrawable) {
-                    ((TextureRegionDrawable) toolTipImage.getDrawable()).getRegion().getTexture().dispose();
-                }
                 toolTipImage.remove();
                 toolTipImage = new RewardImage(processDrawable(image));
                 tooltip.setActor(new ComplexTooltip(toolTipImage));
@@ -899,6 +896,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         if (tooltip != null) {
             removeListener(tooltip);
+            hideTooltip(tooltip);
             tooltip = null;
         }
         if (toolTipImage != null) {
@@ -1000,11 +998,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return (clicked && flipProcess >= 1);
     }
 
+    private void hideTooltip(ImageToolTip t) {
+        if (t == null)
+            return;
+        RewardTooltipManager.getInstance().hide(t);
+        if (t.getContainer() != null)
+            t.getContainer().remove();
+    }
+
     public void removeTooltip() {
-        if (tooltip != null) {
-            if (tooltip.getActor() != null)
-                tooltip.getActor().remove();
-        }
+        hideTooltip(tooltip);
         dispose();
     }
 
@@ -1067,6 +1070,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (tooltip != null && !hover && tooltip.getContainer() != null && tooltip.getContainer().hasParent())
+            hideTooltip(tooltip);
         if (Forge.getAssets() != null && Forge.getAssets().manager() != null) {
             Forge.getAssets().manager().update(16);
         }
