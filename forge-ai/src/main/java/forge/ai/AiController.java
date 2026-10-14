@@ -1707,14 +1707,7 @@ public class AiController {
         AITimeoutTracker.begin(id, timeoutNanos);              // shows the bar after 2s, shared with nested calls
         try {
             final long deadline = AITimeoutTracker.deadlineNanos(id, timeoutNanos);
-            final Future<T> future = ThreadUtil.AIExecutor.submit(() -> {
-                try {
-                    return task.call();
-                } catch (ThreadDeath td) {
-                    // thread was force-stopped after an AI timeout; this task is abandoned anyway
-                    return null;   // don't rethrow, so the pool thread keeps going
-                }
-            });
+            final Future<T> future = ThreadUtil.AIExecutor.submit(task);
             try {
                 return future.get(Math.max(0, deadline - System.nanoTime()), TimeUnit.NANOSECONDS);
             } catch (TimeoutException e) {
@@ -1738,17 +1731,22 @@ public class AiController {
     private static void abandon(final Future<?> future) {
         future.cancel(true);                                    // cooperative: checkInterrupt()/checkDeadline() exits
         if (future instanceof ThreadUtil.TrackableFutureTask<?> task) {
-            // last resort only, and never on the game thread (stop() is a no-op on Java 20+ anyway)
-            ThreadUtil.delay(200, () -> {
-                Thread runner = task.getRunnerThread();
-                if (runner != null && runner.isAlive()) {
-                    try {
-                        runner.stop();
-                    } catch (UnsupportedOperationException | NoSuchMethodError ignored) {
-
-                    }
+            Thread runner = task.getRunnerThread();
+            try {
+                if (runner != null)
+                    runner.join(400);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            if (runner != null && runner.isAlive()) {
+                // last resort, see #8302: the eval thread may be stuck inside a single
+                // evaluation or an infinite loop and never reach the cooperative exit
+                try {
+                    runner.stop();
+                } catch (UnsupportedOperationException | NoSuchMethodError ex) {
+                    // Stop support: dropped by Android and Java 20 / 26 removed it completely - so sadly thread will keep running
                 }
-            });
+            }
         }
     }
 
