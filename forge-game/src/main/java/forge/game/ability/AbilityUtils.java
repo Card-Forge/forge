@@ -2066,7 +2066,9 @@ public class AbilityUtils {
         }
 
         if (sq[0].equals("CardNameUniqueVowels")) {
-            return doXMath(Sticker.countUniqueVowels(c.getName()), expr, c, ctb);
+            // Spy Kit: its names between them have every vowel
+            final String name = c.hasNonLegendaryCreatureNames() ? Sticker.VOWELS : c.getName();
+            return doXMath(Sticker.countUniqueVowels(name), expr, c, ctb);
         }
         if (sq[0].equals("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);

@@ -9,7 +9,7 @@ import forge.game.card.Card;
  */
 public class Sticker {
     // the Un-cards that count vowels count Y
-    private static final String VOWELS = "AEIOUY";
+    public static final String VOWELS = "AEIOUY";
 
     private final Card sheet;
     private final String slot;

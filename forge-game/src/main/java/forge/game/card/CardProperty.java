@@ -68,6 +68,10 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NameStartsWithChosenLetter") || property.equals("NameContainsChosenLetter")) {
+            // Spy Kit: one of its names has any letter
+            if (card.hasNonLegendaryCreatureNames()) {
+                return true;
+            }
             final String letters = (source.getChosenType() + source.getChosenType2()).toUpperCase();
             final String name = card.getName().toUpperCase().replaceAll("[^\\p{L}\\p{N}]", "");
             if (property.startsWith("NameStartsWith")) {

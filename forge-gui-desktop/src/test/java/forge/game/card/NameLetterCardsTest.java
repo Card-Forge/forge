@@ -82,6 +82,31 @@ public class NameLetterCardsTest extends AITest {
         AssertJUnit.assertEquals(16, opp.getLife());
     }
 
+    @Test
+    public void spyKitGivesEveryLetter() {
+        newGame();
+        Card bears = addCard("Grizzly Bears", me);
+        addCard("Spy Kit", me).attachToEntity(bears, null);
+        game.getAction().checkStateEffects(true);
+
+        resolve("Leading Performance", null);
+
+        AssertJUnit.assertEquals(1, bears.getCounters(CounterEnumType.P1P1));
+    }
+
+    @Test
+    public void spyKitGivesEveryVowel() {
+        newGame();
+        Card bears = addCard("Grizzly Bears", opp);
+        addCard("Spy Kit", opp).attachToEntity(bears, null);
+        game.getAction().checkStateEffects(true);
+
+        resolve("Disemvowel", bears);
+
+        AssertJUnit.assertFalse(bears.isInPlay());
+        AssertJUnit.assertEquals(14, opp.getLife());
+    }
+
     private void newGame() {
         game = initAndCreateGame();
         me = game.getPlayers().get(1);
