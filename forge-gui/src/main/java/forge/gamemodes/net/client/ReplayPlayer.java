@@ -1,5 +1,6 @@
 package forge.gamemodes.net.client;
 
+import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -69,6 +70,9 @@ public final class ReplayPlayer implements Runnable, IHasForgeLog {
         channel.pipeline().addLast(new GameClientHandler(client));
         if (gui0 instanceof AbstractGuiGame g) {
             g.setReplay(true); // so the screens know this is a recording: no new match, a smaller menu
+            // a shared GUI (mobile) still holds the last match's view; merging into it would bind the
+            // screen to the old trackers. The cast ((GameView) null) is only there to avoid an ambiguous overload.
+            g.setGameView((GameView) null);
         }
     }
 

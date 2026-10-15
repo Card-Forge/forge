@@ -25,6 +25,12 @@ public final class ReplayLauncher implements IHasForgeLog {
             return;
         }
         FThreads.invokeInBackgroundThread(() -> {
+            // check for Mobile since Desktop creates its own CMatchUI and has no limitations
+            if (GuiBase.getInterface().isMatchInProgress()) {
+                SOptionPane.showMessageDialog("Finish or leave your current match before watching a replay.",
+                        "Replays", FSkinProp.ICO_INFORMATION);
+                return;
+            }
             final List<ReplayStore.Info> replays = ReplayStore.list();
             if (replays.isEmpty()) {
                 SOptionPane.showMessageDialog("No replays yet. Games you play are recorded automatically "
