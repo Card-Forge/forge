@@ -188,6 +188,10 @@ public class CloneEffect extends SpellAbilityEffect {
                             cloneCard.addImprintedCards(IterableUtil.filter(clonedImprinted, CardPredicates.ownerLives()));
                             cloneCard.addRemembered(IterableUtil.filter(clonedRemembered, Player.class));
                             cloneCard.addRemembered(IterableUtil.filter(IterableUtil.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
+                            if (cloneCard.isMutated()) {
+                                cloneCard.removeMutatedStates();
+                                cloneCard.rebuildMutatedStates(sa);
+                            }
                             cloneCard.updateStateForView();
                             game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                         }

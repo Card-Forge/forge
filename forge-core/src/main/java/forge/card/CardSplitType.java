@@ -13,7 +13,8 @@ public enum CardSplitType
     Omen(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Secondary),
     Modal(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Backside),
     Prepare(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.PreparedSpell),
-    Specialize(FaceSelectionMethod.USE_ACTIVE_FACE, null);
+    Specialize(FaceSelectionMethod.USE_ACTIVE_FACE, null),
+    Augmented(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Augmented);
 
     public static final EnumSet<CardSplitType> DUAL_FACED_CARDS = EnumSet.of(
             CardSplitType.Transform, CardSplitType.Meld, CardSplitType.Modal);

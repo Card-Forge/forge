@@ -288,6 +288,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Meld:
             case Backside:
                 return true;
+            case Augmented:
             case Secondary:
                 if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());

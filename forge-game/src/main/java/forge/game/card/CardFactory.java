@@ -29,7 +29,9 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Augment;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInstance;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -231,6 +233,9 @@ public class CardFactory {
                 c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_G);
                 c.setSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
+            } else if (c.hasState(CardStateName.Augmented)) {
+                c.setState(CardStateName.Augmented, false);
+                c.setImageKey(originalPicture);
             }
 
             c.setSetCode(cp.getEdition());
@@ -779,4 +784,31 @@ public class CardFactory {
         return result;
     }
 
+    public static CardCloneStates getAugmentedCloneState(final Card host, final CardTraitBase sa) {
+        final Card augment = host.getAugmentedWith();
+        if (augment == null || !host.hasState(CardStateName.Augmented)) {
+            return null;
+        }
+        final CardState state = host.getState(CardStateName.Augmented).copy(host, sa);
+        final CardState augmentState = augment.getCurrentState();
+        state.addAbilitiesFrom(augmentState, false);
+        Augment augmentKeyword = null;
+        for (KeywordInterface k: augment.getKeywords(Keyword.AUGMENT)) {
+            augmentKeyword = (Augment) k;
+            break;
+        };
+        if (augmentKeyword == null) {
+            return null;
+        }
+        state.setBasePower(state.getBasePower() + Integer.parseInt(augmentKeyword.getPowerModifier()));
+        state.setBaseToughness(state.getBasePower() + Integer.parseInt(augmentKeyword.getToughnessModifier()));
+        state.setName(augmentState.getName() + state.getName());
+        state.addColor(augmentState.getColor());
+        state.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getUntranslatedName).collect(Collectors.toList()));
+        state.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getUntranslatedName).collect(Collectors.toList()));
+        state.addType(augmentState.getType().getSubtypes());
+        final CardCloneStates result = new CardCloneStates(host, sa);
+        result.put(CardStateName.Original, state);
+        return result;
+    }
 }

@@ -112,6 +112,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             exiledCards, encodedCards;
     private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
+    private Card augmentedWith;
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
@@ -121,6 +122,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
     private Card mergedTo;
+    private Card augmenting;
 
     private SpellAbility effectSourceAbility;
     private SpellAbility tokenSpawningAbility;
@@ -275,6 +277,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private long prototypeTimestamp = -1;
     private long mutatedTimestamp = -1;
     private int timesMutated = 0;
+    private long augmentedTimeStamp = -1;
 
     private long gameTimestamp = -1; // permanents on the battlefield
     private long layerTimestamp = -1; // order for Static Abilities
@@ -1504,6 +1507,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             final CardCloneStates mutatedStates = CardFactory.getMutatedCloneStates(this, sa);
             addCloneState(mutatedStates, getMutatedTimestamp());
         }
+    }
+
+    public final boolean attachAugment(Card augment) {
+        if (this.augmentedWith != null || augment.augmenting != null) {
+            return false;
+        }
+        this.augmentedWith = augment;
+        augment.augmenting = this;
+        return true;
+    }
+    public final Card getAugmentedWith() { return augmentedWith; }
+    public final Card getAugmenting() { return augmenting; }
+    public final long getAugmentedTimestamp() {
+        return augmentedTimeStamp;
+    }
+    public final void setAugmentedTimeStamp(long ts) {
+        augmentedTimeStamp = ts;
     }
 
     /**

@@ -6,4 +6,17 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBLife
 SVar:DBLife:DB$ GainLife | LifeAmount$ Result
 DeckHas:Ability$LifeGain
+AlternateMode:Augmented
+Oracle:When this creature enters, roll a six-sided die. You gain life equal to the result.
+
+ALTERNATE
+
+Name:Kitten
+ManaCost:W
+Types:Creature Cat
+PT:1/1
+SVar:RightSide:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBLife
+SVar:DBLife:DB$ GainLife | LifeAmount$ Result | SpellDescription$ roll a six-sided die. You gain life equal to the result.
+DeckHas:Ability$LifeGain
+AlternateMode:Augmented
 Oracle:When this creature enters, roll a six-sided die. You gain life equal to the result.
