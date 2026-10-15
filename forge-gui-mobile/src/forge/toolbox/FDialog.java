@@ -45,12 +45,6 @@ public abstract class FDialog extends FOverlay {
     }
     private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
 
-    private static int openDialogCount = 0;
-
-    public static boolean isDialogOpen() {
-        return openDialogCount > 0;
-    }
-
     private final VPrompt prompt;
     private final FButton btnMiddle;
     private final String title;
@@ -111,19 +105,6 @@ public abstract class FDialog extends FOverlay {
         for (FDisplayObject child : getChildren()) {
             child.setTop(child.getTop() + dy);
         }
-    }
-
-    @Override
-    public void setVisible(boolean visible0) {
-        if (this.isVisible() == visible0) { return; }
-
-        if (visible0) {
-            openDialogCount++;
-        }
-        else if (openDialogCount > 0) {
-            openDialogCount--;
-        }
-        super.setVisible(visible0);
     }
 
     protected abstract float layoutAndGetHeight(float width, float maxHeight);
