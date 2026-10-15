@@ -51,10 +51,13 @@ Create these with *Run > Edit Configurations > + > Maven*. Settings that apply t
 
   | Name | Value |
   |---|---|
-  | `JDK_JAVA_OPTIONS` | `--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED --add-exports=java.base/sun.security.x509=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED` |
+  | `JDK_JAVA_OPTIONS` | `--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED --add-exports=java.base/sun.security.x509=ALL-UNNAMED --add-exports=java.base/sun.security.util=ALL-UNNAMED -Dfile.encoding=UTF-8` |
 
-  (Needed on JDK 17 for the plugin's APK signing code.) Add `ANDROID_HOME` here too only if you did
-  not set it system-wide.
+  The `--add-exports` options are needed on JDK 17 for the plugin's APK signing code.
+  `-Dfile.encoding=UTF-8` keeps file names with special characters (for example `Chandra’s Tome`)
+  intact when the release builds pack `res`; IntelliJ may otherwise run Maven with the console code page
+  (`Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=IBM437`), and the desktop installer build then fails.
+  Add `ANDROID_HOME` here too only if you did not set it system-wide.
 - Do **not** add `-f ../pom.xml`. If IntelliJ ever adds a POM file setting by itself, it must be `pom.xml`.
 
 | Name | Command line (*Run* field) | Extra settings |
@@ -169,4 +172,5 @@ java forge-gui-android/tools/PushResToDevice.java [package]
 | `Could not find artifact forge:forge:pom:${revision}` | Build from the project root with `-pl forge-gui-android -am` instead of building the module on its own. |
 | App freezes or crashes looking for a `ui/....json` / sprite file | The device's assets are older than your code: run **forge-android-push-res** (or ship a new `assets.zip`). |
 | `forge-gui-desktop/target/CHANGES.txt` not found while building `assets.zip` | Run **forge-desktop-release** first. |
+| izpack fails with `...\Chandra?s Tome.fullborder.jpg (The filename, directory name, or volume label syntax is incorrect)` | `-Dfile.encoding=UTF-8` is missing from `JDK_JAVA_OPTIONS`. |
 | `Failed to delete ...\target\...jar` during `clean` | Another build (or a running IntelliJ debug session) still has the file open. |
