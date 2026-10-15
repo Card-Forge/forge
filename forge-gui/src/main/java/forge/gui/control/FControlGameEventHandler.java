@@ -38,7 +38,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
 
     private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate, showExileUpdate;
-    private boolean gameOver, gameFinished;
+    private boolean gameOver, gameFinished, undoRestored;
     private boolean needSaveState = false;
     private PlayerView turnUpdate, activatingPlayer;
 
@@ -56,6 +56,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             processEventsQueued = false;
+            if (undoRestored) { // before any refresh below, so rows rebuild from a clean slate
+                undoRestored = false;
+                matchController.onSnapshotRestored();
+            }
 
             synchronized (cardsUpdate) {
                 if (!cardsUpdate.isEmpty()) {
@@ -139,10 +143,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (gameFinished) {
                 gameFinished = false;
+                matchController.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLose
                 if (humanController != null) {
                     humanController.macros().cancelCurrentMacro();
                     final PlayerView localPlayer = humanController.getLocalPlayerView();
-                    humanController.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
                     matchController.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay
                     matchController.updateButtons(localPlayer, "", "", false, false, false);
                     humanController.updateAchievements();
@@ -332,6 +336,32 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 return;
             }
         }
+    }
+
+    /** Undo rewinds the game in place without emitting the individual events the GUI normally reacts to; resync everything. */
+    @Override
+    public Void visit(final GameEventSnapshotRestored event) {
+        if (event.start()) { return null; }
+        final GameView gv = matchController.getGameView();
+        if (gv != null) {
+            for (final PlayerView p : gv.getPlayers()) {
+                synchronized (livesUpdate) { livesUpdate.add(p); }
+                synchronized (shardsUpdate) { shardsUpdate.add(p); }
+                synchronized (manaPoolUpdate) { manaPoolUpdate.add(p); }
+                for (final ZoneType z : ZoneType.values()) {
+                    synchronized (zonesUpdate) { zonesUpdate.add(new PlayerZoneUpdate(p, z)); }
+                }
+            }
+        }
+        if (gv != null && gv.getPlayerTurn() != null) { turnUpdate = gv.getPlayerTurn(); }
+        undoRestored = true;
+        needPhaseUpdate = true;
+        needSaveState = false;
+        needCombatUpdate = true;
+        needStackUpdate = true;
+        needPlayerControlUpdate = true;
+        refreshFieldUpdate = true;
+        return processEvent();
     }
 
     @Override

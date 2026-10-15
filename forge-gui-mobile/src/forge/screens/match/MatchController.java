@@ -42,6 +42,7 @@ import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
+import forge.trackable.TrackableObject;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
@@ -68,6 +69,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VPhaseIndicator;
@@ -96,10 +98,6 @@ public class MatchController extends NetworkGuiGame {
     private static MatchScreen view;
     private static GameState phaseGameState;
     private static boolean introShowing;      // EDT only
-
-    private GameState getPhaseGameState() {
-        return phaseGameState;
-    }
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
     private Map<PlayerView, Object> selectionZonesBackup;
@@ -208,11 +206,6 @@ public class MatchController extends NetworkGuiGame {
         refreshCardDetails(null);
     }
 
-    @Override
-    public GameState getGamestate() {
-        return getPhaseGameState();
-    }
-
     public boolean hotSeatMode() {
         return FModel.getPreferences().getPrefBoolean(FPref.MATCH_HOT_SEAT_MODE);
     }
@@ -277,7 +270,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
-        cancelWaitingTimer();
+        cancelAwaitNextInput();
         view.getPrompt(player).setMessage(message, card);
     }
 
@@ -439,6 +432,34 @@ public class MatchController extends NetworkGuiGame {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);
         }
+    }
+
+    @Override
+    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean highlighted) {
+        super.setHighlighted(objects, highlighted);
+        Gdx.graphics.requestRendering();
+    }
+
+    @Override
+    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
+        super.setSelectableTargets(targets);
+        FThreads.invokeInEdtLater(() -> {
+            if (isSelectingStackItems()) { // stack items are picked in the stack view, so bring it up
+                if (!view.getStack().isVisible()) { view.getStack().show(); }
+                view.getStack().update();
+            }
+            Gdx.graphics.requestRendering();
+        });
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true; // stack entries are tapped in the stack view (VStack)
+    }
+
+    @Override
+    public void onSnapshotRestored() {
+        VCardDisplayArea.CardAreaPanel.resetForUndo();
     }
 
     @Override

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;High Ground&quot;, &quot;Uphill Battle&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="7" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyEDBDBWTKk+pfcjm4pKj1H5C5pEqTq5d5GJK/UhLe4ebn+kZx+hmDVb/ErIfG9g3QPbi00cpINfN9AYDYedgBwB5gkMj
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lU1KQzEQxwdeingGbcUjvMLLGeoH7xoV3LvTakEUPZCuuteFeIr6hXcwQzJkMmSSZxcdGMpLMvOb+SdpRjsAoy34xW7qpTnymw5g6fy6S9ctwviSzefyDq2J5zttAL6cPxiAZ5ty9t03tz2b8ks955iY787EfMh+B8+/6iBrs8b/vrQ+Vvau6bxQeuB9rJv8/C+raz4FOHN+b9K+Ne75NNa8iZEmPyzHodV75lzaSzLSbKitRd2ok9YzcQ9srBvZx0yzWThXmxj1rHHHbv619azecT5D7d9BvxM2Jg11wdijUN+jibXznrXzjFpzuzWe11f2HWvD2I8m7jOvk+9zbr8ll3TmdulqX1nveKeQiQy+rhffNe7Y6veTeBObrn9rdd0pbqJwa2w809iX9j8qY+bh/uJY7VxJ9op5iamx8Tw9MX0ko/ZulN4R6ZzN9c3l/w93yNtCWuWYJe623uA/tTGecQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VcFOwzAM9QEOPexj2gw2ISH2N/sKVARft92aduXCx1ALP+XhhnXtxpOiJLbjVzuOKzLG+yqtm2FE0j1k7NdmE2ydQ1WIbGit6IbRDmNr8kh8DfkG1G6X4fZnNuZb4+hNVltMZZHORjrvuS4FctM4ucb16GQ92eKboyyH+jiWv2PfOpsnm4OkeJegpfW+Gvva2ay5r6l+lvKBJydD/v7yfQ3nOUQ3ay092xox35L7UP7cL4A7PpGN3svXhJ/ThH4uuD/8J5BLvGdw93J5nkPG3xy0blb4t87gd4GeiDq+tjbAG5w8kpw51jM5fY/U/oV+Eowf3A3N5/pKPVErWpu9jPtWR3rmx1o538z3i8l1j3/MHOAM7rgnnf/+j1XiPdwlXkVVSBbwj//Bp9Mj356rdXrw7O/TXr8Hdp2M4X2+2v4bleFTiw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="174.71" y="39.7698"/>
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="219.362" y="104.732">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Short Bow&quot;, &quot;Hidden Grotto&quot;, &quot;Assault Suit&quot; ]
+}</property>
+    <property name="enemy" value="Blor"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="90"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/manashards.tx" x="253.533" y="35.696"/>
+  <object id="56" template="../../../../common/maps/obj/dialog.tx" x="182.552" y="224.242" width="69.8947" height="14.406" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A swampy pond ahead has a lone frog standing in its center, magical energy swirling around him. A few  other frogs stand nearby, almost hiding and watching as if in reverence. As the main frog sees you, he calls out in a jolly voice.
+
+'Ho, traveler! Care to face me? I warn you, Blor's defenses are impervious!'
+
+Your manasight stone glows, sensing the power of the legend here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/scroll.tx" x="209.231" y="31.6916">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overprotect&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="217.813" y="102.493">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Short Bow&quot;, &quot;Assault Suit&quot; ]
+}</property>
+    <property name="enemy" value="Blor"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="90"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

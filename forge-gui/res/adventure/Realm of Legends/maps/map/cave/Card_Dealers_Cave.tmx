@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr42RgaBvFo3gUj+JRPIpH8YjAAIblHPI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAxrOOhvrwcQP+akr90gvz4F0iAAsns1jf0Osm811E5RBgRgY6Ct3z04EXbV8ULoKCT7vWjk32dA/ByIV3IwYAW0shfZfpDdy6H21QD9vhzIf0GHtAWzGwToZScMu0Pj25WOdiKnM1rHK63sBQB/oaSI
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0BOEGTAwhANxhAF97S0C2lcMxCV0trcPaF8/EE+gs72rgPatBuI1dLZ3FIyCwQ4AwwoITQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/dialog.tx" x="187.67" y="238.583" width="59.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You scurry down into this small, sandy cave. A giant stands before you, ancient-looking spell scrolls tucked into his large coat. 
+
+'Got something real special for sale, small one.' he calls out.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/dialog.tx" x="178.532" y="183.25" width="43.6023" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'I happen to have come across some extremely rare items. Spell packs of a most ancient kind - Beta. Contained within are many spells the smiths of today can't make - sixteen of them in total. This is the only place to find most of them, and those you can get elsewhere are fiercely guarded indeed. There are also many other powerful spells within. Who knows what treasures you'll find? Care to test your luck?'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Come back soon - I have more for sale!'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;cardPackShop&quot;, &quot;count&quot;: 1, &quot;editions&quot;: [&quot;LEB&quot;] }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'Afraid power like this is out of your price range for now.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;Doesn't seem worth it.&quot;,
+					&quot;text&quot;: &quot;'Suit yourself. Someone else will come looking for a Black Lotus if you're too poor or foolish to want one.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

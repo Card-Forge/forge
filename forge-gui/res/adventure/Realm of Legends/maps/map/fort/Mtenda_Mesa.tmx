@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="166">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="23809" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="27905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJxr42RgaBsA3IeGB8IN+PBUU/yYFna6QTGbBQLDxKltDzFi1LbbjUzzPAbI3mc0CGd62U0JpofdazgGzn8jze4XnNTNxwMVfiB7B9LuZwNgLwwPpN2jeBSP4lE8ikfxKB7F5GAA5llLsQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzlVl0OgjAM3pPAbfQS+oQaLuOx8Idb4Q9HcAss1mbr2o6QGJssKKz91q79WmPi0lfGdKUx+2pcT7vO9v+lJJQC0tr9w2Tjan8/Kv5+uI4JPcoGR9f5ewc+7zbj+619Fmsebg0wOb5i/E4YW6zrcA8CTKyv1XVxk/iK9bW6vySn1fw2X1NNuqe0LnME88JS2JiTqLp2HBDjq1bBYz7PU7leE3FpMniUkhTHXotxzX1fkGNDdkM9JBe7Lb/7QoxnMXaI23yOcDBxT6K4smGeLSXYh1RP8fupumjAN6oOYD/k9IUUj/fVB3Ng9OS5+4K/kyX5ygm8Qw22hqu8nmTuCulK5wFcJ1J/IXdKehr008Va4m+otrnnhrGV5GtsxuWe+ya8zxCmj5V2ZuQKzH8YK40PGuyc2fTfRcs9OXiu7jXcQ9mkfMjhyZTNGI/k8iS2dQZxk8xjOdghW7EYvgFCa7sG
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9Vr1Ow0AMPgnUUIl2IYUiGHkHeASkdkNKx05sjBUNZQdeAGZegIWi8hjlHVAGeAJGzkqtOo6d+MLPJ1mk5u4++7uz75z7e8SRcz1vu1HRf93J/w6EOehbtsvjOa4U/7Pnm3t7ieT/Ay5bzk2Zpa3cz5EKPi0eNMBUiC8WYlp436vit3CnnbVJvEOXa7JPODInayCZFoMlX8e4YcweieOtXR4/W63Dz81MWV8D5Ed1lbSXYNV9WMOJ+kp7S0F1s3IjsF5iJU9tj4GD1h/UWCg3cmWrHLi+mTAeOSZsL3GvP4Q5dXUUR/q4SY22yHsq8EqgvLymLrZzk8C5+dmW4tV4KffgKDfkxd+Ax03nzjfWfbBPeuJSqDsJ2EvnJNc4KvJQXuDkfXdhqDva4w8S5w6T/Bt6C+bK9aYAPVOmHc3XgmPPeZIUfZR7Lpi0vra3HDdj524Vuxuvufn9B/2kT7QAzc+2qnP9DOAFSL0S9ay6X6X6bcrbN9zjGrDvWXlRa35mpDtHe49g/L3IzovcTXIE4N2LexLCG3qf1sHK2wTvvxOiCVZdCn1q5OeNyn4r6Hz6LYH2qXs/7mFU9lsA9yWdj9/SmwxQt798nlYnIeckCxxfhdB1fsr7leRWtw7XycrL35/4nrPy8nP6Xzrzc2rhld4rO91w3Whth+SrnWWIq6lulj6jvdOq7qAmoG9n0BWMc0AsT92y7gj6/sL3xjfuhB8c
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="-61.6505" y="561" width="577.301" height="16"/>
+  <object id="126" template="../../../../common/maps/obj/collision.tx" x="75.85" y="46" width="8.301" height="171"/>
+  <object id="128" template="../../../../common/maps/obj/collision.tx" x="85.849" y="203.75" width="22.301" height="13.5"/>
+  <object id="129" template="../../../../common/maps/obj/collision.tx" x="106.349" y="206.75" width="22.301" height="13.5"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="159.349" y="270.25" width="22.301" height="44.5"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="168.849" y="304.75" width="47.301" height="23"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="204.849" y="289.75" width="48.301" height="13.5"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="244.349" y="256.75" width="69.301" height="31"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="350.017" y="133.25" width="22.301" height="110.5"/>
+  <object id="139" template="../../../../common/maps/obj/collision.tx" x="175.849" y="242.75" width="84.801" height="5.5"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="258.849" y="206.25" width="17.801" height="13.5"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="122.349" y="124.75" width="6.301" height="59.5"/>
+  <object id="142" template="../../../../common/maps/obj/collision.tx" x="123.349" y="176.75" width="22.301" height="13.5"/>
+  <object id="143" template="../../../../common/maps/obj/collision.tx" x="136.349" y="186.75" width="7.801" height="13.5"/>
+  <object id="144" template="../../../../common/maps/obj/collision.tx" x="142.349" y="193.75" width="15.801" height="11"/>
+  <object id="145" template="../../../../common/maps/obj/collision.tx" x="153.849" y="201.75" width="4.801" height="26.5"/>
+  <object id="146" template="../../../../common/maps/obj/collision.tx" x="160.849" y="228.75" width="14.801" height="13.5"/>
+  <object id="147" template="../../../../common/maps/obj/collision.tx" x="152.35" y="79.75" width="6.301" height="43.5"/>
+  <object id="148" template="../../../../common/maps/obj/collision.tx" x="73.849" y="39.75" width="70.301" height="4"/>
+  <object id="149" template="../../../../common/maps/obj/collision.tx" x="159.516" y="73.75" width="146.301" height="7"/>
+  <object id="151" template="../../../../common/maps/obj/collision.tx" x="175.599" y="138.25" width="84.801" height="5.5"/>
+  <object id="152" template="../../../../common/maps/obj/collision.tx" x="-60.6505" y="-15" width="577.301" height="16"/>
+  <object id="153" template="../../../../common/maps/obj/collision.tx" x="-9.1505" y="-9.5" width="8.301" height="589"/>
+  <object id="154" template="../../../../common/maps/obj/collision.tx" x="478.85" y="-9.5" width="8.301" height="589"/>
+  <object id="156" template="../../../../common/maps/obj/dialog.tx" x="208.5" y="528.25" width="77.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An arid land sprawls ahead. Farmers struggling to eke out a life in the harsh environment bustle about, fearful looks in their eyes. A tall mesa looms over the farms, the distant silhouettes of dragons perched atop. A woman with a large sword and a fierce look in her eyes stands ahead, preparing for battle. She waves over to you, clearly wanting to speak.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="157" template="../../../../common/maps/obj/entry_up.tx" x="222.667" y="559.939" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="158" template="../../../../common/maps/obj/enemy.tx" x="205.167" y="198" width="16" height="16" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Rite of the Dragoncaller&quot;, &quot;Dragon Typhoon&quot;, &quot;Awaken the Sky Tyrant&quot;, &quot;Dragonmaster Outcast&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Rashida Scalebane&quot;, &quot;Dragon Hunter&quot;, &quot;Mtenda Hunter&quot;, &quot;Mtenda Hunter&quot;, &quot;Mtenda Hunter&quot; ]}
+}</property>
+    <property name="enemy" value="Balefang"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/scroll.tx" x="26.1667" y="252.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Farmstead&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="160" template="../../../../common/maps/obj/scroll.tx" x="451" y="29">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bristlebud Farmer&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="161" template="../../../../common/maps/obj/scroll.tx" x="432.5" y="515.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Diligent Farmhand&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="162" template="../../../../common/maps/obj/scroll.tx" x="71" y="478.833">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Remote Farm&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/enemy.tx" gid="23323" x="190" y="452.667">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Are you a warrior? Or better, a mage? I need help defending my people.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The dragons are slain. The people are safe.&quot;,
+					&quot;text&quot;: &quot;'I can't thank you enough. This blade belonged to a dear friend who fell in the dragon's initial raid. Wield it with honor.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rashida Scalebane&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;item&quot;, &quot;itemName&quot;: &quot;Forebear's Blade&quot;, &quot;count&quot;: 1 }       
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 1
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What do your people need defending from?&quot;,
+					&quot;text&quot;: &quot;'My people live a hard but honest life. But a few days ago, a whole flock of dragons swooped in, demanded tribute. We couldn't come close to paying. They took 'mercy' by not burning ALL our farms and people. But they'll be back soon, and they'll kill us all. Well, I'm planning to kill them first. If we work together, we can slay them.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Your people will have to defend themselves.&quot;,
+					&quot;text&quot;: &quot;'They won't be alone. They'll have me.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Rashida Scalebane"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/dialog.tx" x="296.167" y="256.25" width="50" height="9.83333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you begin to scale the mesa to reach the top where the dragons rest, Rashida Scalebane and a small group of allied warriors and determined herders.
+
+'We're with you. Whatever it takes.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/scroll.tx" x="257" y="189.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Arid Mesa&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
