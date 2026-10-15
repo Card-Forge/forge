@@ -98,7 +98,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public void resetMaxDistinctSources() { maxDistinctSources = 0; }
 
     public final void reset() {
-        clear();
         simultaneousStackEntryList.clear();
         frozen = false;
         primaryAbility = null;
@@ -109,7 +108,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         triggerRepeats.clear();
         frozenStack.clear();
         clearUndoStack();
-        game.updateStackForView();
+        clear();
     }
 
     public final boolean isSplitSecondOnStack() {
@@ -310,8 +309,39 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             addAbilityActivatedThisTurn(sp);
         }
 
-        // The ability is added to stack HERE
-        push(sp, si, id);
+        if (null == sp.getActivatingPlayer()) {
+            sp.setActivatingPlayer(sp.getHostCard().getController());
+            System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
+        }
+
+        if (sp.isSpell() && sp.getMayPlay() != null && sp.getMayPlay().hasParam("ReplaceGraveyard")) {
+            PlayEffect.addReplaceGraveyardEffect(sp.getHostCard(), sp.getMayPlay().getHostCard(), sp, sp, sp.getMayPlay().getParam("ReplaceGraveyard"));
+        }
+        si = si == null ? new SpellAbilityStackInstance(sp, id) : si;
+
+        stack.addFirst(si);
+
+        int distinctSources = 0;
+        Set<Integer> sources = new TreeSet<>();
+        for (SpellAbilityStackInstance s : stack) {
+            if (s.isSpell()) {
+                distinctSources++;
+            } else {
+                sources.add(s.getSourceCard().getId());
+            }
+        }
+        distinctSources += sources.size();
+        if (distinctSources > maxDistinctSources) maxDistinctSources = distinctSources;
+
+        // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
+        // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
+        if (!(sp.isTrigger() || (sp instanceof AbilityStatic))) {
+            // when something is added we need to setPriority
+            game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
+        }
+
+        sp.getHostCard().getGame().getAction().checkStaticAbilities(false);
+        sp.getHostCard().getGame().getTriggerHandler().resetActiveTriggers();
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -321,8 +351,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(sp.equals(source.getCastSA()) ? source.getCastSA() : sp.copy(lki, true));
             sp.getActivatingPlayer().addSpellCastThisTurn();
-            // The view's storm count was taken when the spell was pushed, before this cast was counted
-            game.updateStackForView();
 
             // Add expend mana
             Map<Player, Long> expendPlayers = sp.getPayingMana().stream().collect(Collectors.groupingBy(Mana::getPlayer, Collectors.counting()));
@@ -336,6 +364,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.SpellAbility, sp);
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, getSpellCardsCastThisTurn());
+
+        game.updateStackForView();
+        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stack.size() - 1));
 
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
@@ -460,47 +491,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    // Push should only be used by add.
-    private void push(final SpellAbility sp, SpellAbilityStackInstance si, int id) {
-        if (null == sp.getActivatingPlayer()) {
-            sp.setActivatingPlayer(sp.getHostCard().getController());
-            System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
-        }
-
-        if (sp.isSpell() && sp.getMayPlay() != null && sp.getMayPlay().hasParam("ReplaceGraveyard")) {
-            PlayEffect.addReplaceGraveyardEffect(sp.getHostCard(), sp.getMayPlay().getHostCard(), sp, sp, sp.getMayPlay().getParam("ReplaceGraveyard"));
-        }
-        si = si == null ? new SpellAbilityStackInstance(sp, id) : si;
-
-        stack.addFirst(si);
-        int stackIndex = stack.size() - 1;
-
-        int distinctSources = 0;
-        Set<Integer> sources = new TreeSet<>();
-        for (SpellAbilityStackInstance s : stack) {
-            if (s.isSpell()) {
-                distinctSources++;
-            } else {
-                sources.add(s.getSourceCard().getId());
-            }
-        }
-        distinctSources += sources.size();
-        if (distinctSources > maxDistinctSources) maxDistinctSources = distinctSources;
-
-        // 2012-07-21 the following comparison needs to move below the pushes but somehow screws up priority
-        // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
-        if (!(sp.isTrigger() || (sp instanceof AbilityStatic))) {
-            // when something is added we need to setPriority
-            game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
-        }
-
-        sp.getHostCard().getGame().getAction().checkStaticAbilities(false);
-        sp.getHostCard().getGame().getTriggerHandler().resetActiveTriggers();
-
-        game.updateStackForView();
-        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
-    }
-
     private boolean isRepeatingTrigger(final SpellAbility sp) {
         if (!sp.isTrigger()) {
             // a player did something
@@ -550,10 +540,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         SpellAbility sa = undoStack.peek();
-        clearUndoStack(sa);
         if (sa.undo()) {
+            clearUndoStack(sa);
             new ManaRefundService(sa).refundManaPaid();
         } else {
+            clearUndoStack(sa);
             for (Mana pay : sa.getPayingMana()) {
                 clearUndoStack(pay.getManaAbility().getSourceSA());
             }

@@ -99,10 +99,6 @@ public class MatchController extends NetworkGuiGame {
     private static GameState phaseGameState;
     private static boolean introShowing;      // EDT only
 
-    private GameState getPhaseGameState() {
-        return phaseGameState;
-    }
-
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
     private Map<PlayerView, Object> selectionZonesBackup;
     // a panel with no tab selected backs up as this, so a restore can tell it from an entry openZones never touched
@@ -208,11 +204,6 @@ public class MatchController extends NetworkGuiGame {
         if(!GuiBase.isNetPlay(this))
             return;
         refreshCardDetails(null);
-    }
-
-    @Override
-    public GameState getGamestate() {
-        return getPhaseGameState();
     }
 
     public boolean hotSeatMode() {

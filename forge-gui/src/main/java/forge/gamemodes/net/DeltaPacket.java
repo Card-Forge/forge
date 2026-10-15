@@ -150,7 +150,6 @@ public final class DeltaPacket implements NetEvent {
     public void setEvents(List<Object> events) {
         this.events = events;
     }
-
     public List<Object> getEvents() {
         return events;
     }
