@@ -87,9 +87,11 @@ type Game struct {
 	// ability's xManaCostPaid that Count$xPaid reads first
 	// (AbilityUtils.java:1631); hasX false reads the source card's castX.
 	xctx xContext
-	// resolving is the ability Registry.resolve is running, which the amounts
-	// that name its targets, triggering objects and paid cards read
-	// (amountcontext.go); nil outside a resolution.
+	// resolving is the ability in context: the one Registry.resolve is
+	// running, or the one whose targets are being chosen
+	// (inAbilityContext, targeting.go). The amounts and valid properties
+	// that name its targets, triggering objects and paid cards read it
+	// (amountcontext.go, valid.go); nil outside both.
 	resolving *Ability
 	// layering counts the continuous-effect passes running now
 	// (applyContinuousLayers, which a refresh can enter again): while it is

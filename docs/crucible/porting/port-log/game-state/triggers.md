@@ -713,8 +713,8 @@ power comparison rather than a valid-string (Skulk's own hardcoded-`X` shape, `s
 different pairing), explicitly refused in both `checkAttackerBlockedTriggers`/`checkAttackerBlockedByCreatureTriggers`
 rather than left to fall through to a bare-word valid-string parse that would silently match no card and never fire —
 the identical observable result, but for the wrong reason, PORT-8's own concern regardless of whether it happens to look
-harmless here. `Mode$ AttackerBlockedOnce` (3 real lines, its own once-per-turn Java class,
-`TriggerAttackerBlockedOnce.java`) is not built.
+harmless here. `Mode$ AttackerBlockedOnce` (3 real lines, its own once-per-declaration Java class,
+`TriggerAttackerBlockedOnce.java`) is [`m6-r9g-attack-triggers.md`](m6-r9g-attack-triggers.md)'s.
 
 `TestDeclareCombatBlockersFiresAttackerBlockedTrigger`/
 `TestDeclareCombatBlockersFiresOtherPermanentsWatchingAttackerBlockedTrigger`/

@@ -1029,7 +1029,8 @@ the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the
     real line each) — a hardcoded power comparison rather than a valid-string, Skulk's own hardcoded-`X` shape
     (`skulkBlocks`, staticability.go) for a different pairing; explicitly refused rather than left to a bare-word
     valid-string parse that would silently match no card and never fire, for a reason unrelated to the actual gap.
-    `Mode$ AttackerBlockedOnce` (3 real lines, a once-per-turn variant neither Java class above is) is not built at all.
+    `Mode$ AttackerBlockedOnce` (3 real lines, a once-per-declaration variant neither Java class above is) and
+    `BlockersDeclared` fire from `blockerstriggers.go` (`port-log/game-state/m6-r9g-attack-triggers.md`).
 
     **`CardTraitBase.meetsCommonRequirements` — the one gate Java checks before ANY trigger mode's own `performTest`
     runs — is real now too.** Every check-triggers function in this file used to ignore it entirely: a real card naming

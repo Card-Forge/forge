@@ -1,0 +1,21 @@
+# Ordruun Mentor's "whenever you attack a player, target creature that's
+# attacking that player gains first strike": Mode$ AttackersDeclaredOneTarget
+# records the attacked player (AbilityKey.AttackedTarget,
+# TriggerAttackersDeclared.java:93-96), and the target restriction
+# Creature.attacking TriggeredAttackedTarget reads it while the target is
+# chosen, before the trigger resolves (CardProperty.java:1543-1549). The human
+# Bears attack alone and are the target; with first strike they kill the
+# blocking Bears before those deal damage back.
+startturn human
+advance 5
+queue attackers 2
+queue targets 2
+declareattackers
+resolvestack
+advance
+queue blocks 3=2
+declareblockers
+advance
+firststrikedamage
+advance
+combatdamage

@@ -1,0 +1,20 @@
+# Mode$ AttackerBlockedOnce (PhaseHandler.java:816-820): Hezrou's "whenever
+# one or more creatures you control become blocked, each blocking creature
+# gets -1/-1" fires once for the whole declaration, not once per blocked
+# attacker. Hezrou (6/6) and Grizzly Bears (2/2) attack; Hill Giant (3/3)
+# blocks Hezrou and Silvercoat Lion (2/2) blocks the Bears. One trigger makes
+# them 2/2 and 1/1: the Giant deals Hezrou 2, the Lion deals the Bears 1, and
+# both blockers die. Fired twice, the Lion would die before damage and the
+# Bears would take none.
+startturn human
+advance 5
+queue attackers 1,2
+declareattackers
+advance
+queue blocks 3=1,4=2
+declareblockers
+resolvestack
+advance
+advance
+combatdamage
+advance

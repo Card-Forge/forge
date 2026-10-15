@@ -476,12 +476,14 @@ type triggeredObjects struct {
 	cards []CardID
 	// attackers is AbilityKey.Attackers: the attackers a Mode$
 	// AttackersDeclared/AttackersDeclaredOneTarget trigger fired for, narrowed
-	// by its ValidAttackers$ (TriggerAttackersDeclared.java:82-91), or the
-	// attacker a Mode$ Blocks blocker blocks (TriggerBlocks.java:71). Read by
-	// Defined$ TriggeredAttackers and the TriggerObjectsAttackers$ amount
-	// head. Its own slice, never combat's: the list is fixed as the trigger
-	// fires and is never edited in place, so a stacked Ability and a Clone
-	// share it safely.
+	// by its ValidAttackers$ (TriggerAttackersDeclared.java:82-91), the
+	// attacker a Mode$ Blocks blocker blocks (TriggerBlocks.java:71), the
+	// blocked attackers of Mode$ BlockersDeclared (PhaseHandler.java:750-760)
+	// or AttackerBlockedOnce (PhaseHandler.java:778-820). Read by Defined$
+	// TriggeredAttackers, the TriggeredAttackers valid property and the
+	// TriggerObjectsAttackers$ amount head. Its own slice, never combat's: the
+	// list is fixed as the trigger fires and is never edited in place, so a
+	// stacked Ability and a Clone share it safely.
 	attackers []CardID
 	// attackersRecorded is whether the mode recorded attackers: a recorded
 	// list can be empty (no attacker matched ValidAttackers$ under an EQ0
@@ -489,6 +491,24 @@ type triggeredObjects struct {
 	// Java's TriggerObjects reader defaults a missing key to an empty list
 	// (AbilityUtils.java:697-700), which this port does not guess at.
 	attackersRecorded bool
+	// blockers is AbilityKey.Blockers of Mode$ BlockersDeclared: every
+	// declared blocker (combat.getAllBlockers, PhaseHandler.java:748-761).
+	// Read by Defined$ TriggeredBlockers. nil when unset; the mode fires only
+	// for a non-empty list, so nil is never a recorded value. Shared like
+	// attackers.
+	blockers []CardID
+	// attackedTargets is AbilityKey.AttackedTarget of Mode$ AttackersDeclared/
+	// AttackersDeclaredOneTarget (TriggerAttackersDeclared.java:80-96): the
+	// defenders attacked, or the defenders of the ValidAttackers$ attackers,
+	// kept to those AttackedTarget$ names. Players and cards (planeswalkers,
+	// battles) in one list. Read by Defined$ TriggeredAttackedTarget and the
+	// "attacking TriggeredAttackedTarget" valid property. Shared like
+	// attackers.
+	attackedTargets []EntityID
+	// attackedTargetsRecorded is whether the mode recorded attackedTargets: a
+	// recorded list can be empty (AttackedTarget$ kept none of the
+	// ValidAttackers$ defenders), an unrecorded one is unresolved (GO-7).
+	attackedTargetsRecorded bool
 	// target is AbilityKey.Target: what the attachment became attached to
 	// (Mode$ Attached, TriggerAttached.setTriggeringObjects), the damaged
 	// card or player (DamageDone, DamageDoneOnce), or what became the target

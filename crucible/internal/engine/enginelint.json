@@ -44,7 +44,7 @@
     "manaability": ["manaability.go", "activatemanaability.go"],
     "land": ["land.go"],
     "castspell": ["castspell.go", "activateability.go"],
-    "trigger": ["trigger.go"],
+    "trigger": ["trigger.go", "blockerstriggers.go"],
     "statictrigger": ["statictrigger.go"],
     "continuous": ["continuous.go"],
     "dependency": ["dependency.go"],

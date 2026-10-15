@@ -261,6 +261,19 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no activator", defined)
 		}
 		candidates = []PlayerID{refs.triggered.activator}
+	case "TriggeredAttackedTarget":
+		// AbilityUtils.java:1065-1075: the players in the recorded
+		// AbilityKey.AttackedTarget list (a planeswalker or battle in it is a
+		// card, definedCards' half). A recorded list naming no player is no
+		// players; an unrecorded one is an error.
+		if !refs.triggered.attackedTargetsRecorded {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attacked target", defined)
+		}
+		for _, e := range refs.triggered.attackedTargets {
+			if pid, ok := e.AsPlayer(); ok {
+				candidates = append(candidates, pid)
+			}
+		}
 	case "ReplacedPlayer", "ReplacedDefendingPlayer":
 		// AbilityUtils.getDefinedPlayers' "Replaced" branch
 		// (AbilityUtils.java:1097-1103): the replacing object of that key.
@@ -421,7 +434,10 @@ func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse b
 // AttackerBlockedByCreature recorded, and "TriggeredAttacker"/
 // "TriggeredAttackerLKICopy", what Mode$ Attacks recorded (an error when
 // the trigger recorded none), "TriggeredSource"/"TriggeredSourceLKICopy",
-// a DamageDone trigger's card source (none for a player source), and
+// a DamageDone trigger's card source (none for a player source),
+// "TriggeredBlockers" (Mode$ BlockersDeclared), the cards of
+// "TriggeredAttackedTarget" (Mode$ AttackersDeclared's planeswalkers and
+// battles; definedPlayers answers its players), and
 // "ReplacedCard", the card whose entry a
 // Moved replacement is replacing (an error anywhere else). A CardID is stable across zone changes, so each pair of spellings
 // names the same card; Java's LKI form differs only in which snapshot it
@@ -533,6 +549,26 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attackers", defined)
 		}
 		return slices.Clone(refs.triggered.attackers), nil
+	case "TriggeredBlockers":
+		// AbilityKey.Blockers of Mode$ BlockersDeclared, every declared
+		// blocker (AbilityUtils.java:186-198's Iterable branch).
+		if len(refs.triggered.blockers) == 0 {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no blockers", defined)
+		}
+		return slices.Clone(refs.triggered.blockers), nil
+	case "TriggeredAttackedTarget":
+		// The cards (planeswalkers, battles) in AbilityKey.AttackedTarget, the
+		// same Iterable branch; its players are definedPlayers' half.
+		if !refs.triggered.attackedTargetsRecorded {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attacked target", defined)
+		}
+		var cards []CardID
+		for _, e := range refs.triggered.attackedTargets {
+			if id, ok := e.AsCard(); ok {
+				cards = append(cards, id)
+			}
+		}
+		return cards, nil
 	case "TriggeredCards", "TriggeredCardsLKICopy":
 		if len(refs.triggered.cards) == 0 {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no cards", defined)

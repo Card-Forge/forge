@@ -36,6 +36,7 @@ func (g *Game) dividedTotal(a *Ability) (int, bool, error) {
 	if !ok {
 		return 0, false, nil
 	}
+	defer g.inAbilityContext(a)()
 	n, ok := resolveNamedAmount(g, a.Amounts, g.Card(a.Source), raw)
 	if !ok {
 		return 0, true, fmt.Errorf("engine: DividedAsYouChoose$ %q is not resolvable", raw)

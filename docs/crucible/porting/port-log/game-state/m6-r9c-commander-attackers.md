@@ -57,19 +57,17 @@ which is Java's own answer in a game without commanders, not a guess.
 | `attackersRecorded` flag beside the list                | A recorded list may be empty (`ValidAttackersAmount$ EQ0`) and reads 0; an unrecorded key stays the loud "the trigger recorded no attackers" / unresolved amount (GO-7). Java's `TriggerObjects` reader defaults a missing key to an empty list, which this port does not guess at |
 | A fresh slice per trigger                               | `slices.Clone` of combat's list: the recorded list never aliases `Combat.Attackers`, and is never edited in place, so `Game.Clone`'s shallow copy of a stacked `Ability` stays safe                                                                                                |
 | `TriggerObjectsAttackers$` reads last-known information | Java's list holds the battlefield `Card` object, which a move off the battlefield replaces with a copy (`GameAction.java:207`), so a dead attacker's `CardPower` is its last power                                                                                                 |
-| `AttackedTarget` not recorded                           | No ported reader names it (Jin Sakai's `TriggeredAttackedTarget` is inside a valid-property string the engine does not evaluate, below)                                                                                                                                            |
+| `AttackedTarget` recorded beside it                     | [`m6-r9g-attack-triggers.md`](m6-r9g-attack-triggers.md)                                                                                                                                                                                                                           |
 
 No new `Game`/`Player` state, no `PlayerController` method, no `Game.Clone` change: `attackers`/`attackersRecorded` are
 `triggeredObjects` fields, copied by value with the `Ability`.
 
-## Engine findings, not changed
+## Related
 
-| Where                                           | Finding                                                                                                                                                                                                                                                                   |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Mode$ BlockersDeclared`, `AttackerBlockedOnce` | No trigger check exists for either mode (`trigger.go`), so Tide of War's `Defined$ TriggeredAttackers` "plays" only because its trigger never fires. Both set `Attackers` in Java (`PhaseHandler.java:758-761`, `:816-819`)                                               |
-| Jin Sakai, Ghost of Tsushima                    | Its Charm gate `Count$Valid Creature.NotDefinedTriggeredAttackers+attacking TriggeredAttackedTarget` uses valid properties the engine has no case for; the count reads 0, which with its `ValidAttackersAmount$ EQ1` matches Java in two-player games only by coincidence |
-| Squall, Gunblade Duelist                        | `Count$Valid Creature.TriggeredAttackers+powerEQChosen,...`: a `TriggeredAttackers` valid property, not handled (an unknown property never matches); the probe reports Squall as playing                                                                                  |
-| Case of the Market Melee                        | `TargetMax$`/`DividedAsYouChoose$ TriggerObjectsAttackers$Amount` are read while targets are chosen, before the ability resolves; the reader needs `Game.resolving` (set only by `Registry.resolve`, `effect.go:100`), so the amount stays unresolved there               |
+`Mode$ BlockersDeclared`/`AttackerBlockedOnce`, the
+`TriggeredAttackers`/`NotDefinedTriggeredAttackers`/`attacking TriggeredAttackedTarget` valid properties and amounts
+read while targets are chosen (Tide of War, Jin Sakai, Squall, Case of the Market Melee):
+[`m6-r9g-attack-triggers.md`](m6-r9g-attack-triggers.md).
 
 ## Smoke probe
 

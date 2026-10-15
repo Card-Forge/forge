@@ -2865,7 +2865,7 @@ func (g *Game) checkAttackersDeclaredTrigger(controller PlayerController) {
 							continue
 						}
 						if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(attackersDeclaredObjects(g, h, t, g.combat.Attackers)), staticTrigger: isStaticTrigger(t)})
+							matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(attackersDeclaredObjects(g, h, t, g.combat.Attackers, targets)), staticTrigger: isStaticTrigger(t)})
 						}
 					}
 				}
@@ -2924,7 +2924,7 @@ func (g *Game) checkAttackersDeclaredOneTargetTrigger(controller PlayerControlle
 								continue
 							}
 							if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(attackersDeclaredObjects(g, h, t, attackers)), staticTrigger: isStaticTrigger(t)})
+								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(attackersDeclaredObjects(g, h, t, attackers, targets)), staticTrigger: isStaticTrigger(t)})
 							}
 						}
 					}
@@ -2972,20 +2972,43 @@ func attackersDeclaredParamsMatch(g *Game, h *Card, t *compile.Ability, attacker
 // (Combat.Attackers, CardLists.getValidCards keeps its input's order). A
 // fresh slice, so the recorded list never aliases combat's.
 //
-// AbilityKey.AttackedTarget (the defenders, narrowed the same way) is not
-// recorded: no ported reader names it.
-func attackersDeclaredObjects(g *Game, h *Card, t *compile.Ability, attackers []CardID) triggeredObjects {
+// AbilityKey.AttackedTarget starts as targets, the defenders the caller
+// passed (every attacked defender, or the one). Under ValidAttackers$ it is
+// instead each kept attacker's own defender, once each, in attacker order
+// (an FCollection, TriggerAttackersDeclared.java:85-89); under AttackedTarget$
+// it keeps the entities that spec names, each tried on its own (:93-95).
+// Java's filter is a lazy Iterable, re-run on every read; here it is run once
+// as the trigger fires. The two differ only for a spec whose answer changes
+// before the ability resolves, which no real AttackedTarget$ value
+// (Player, Opponent, You, Planeswalker.YouCtrl, Player.EnchantedBy) reaches
+// within one declare-attackers step but EnchantedBy after an Aura moves.
+func attackersDeclaredObjects(g *Game, h *Card, t *compile.Ability, attackers []CardID, targets []EntityID) triggeredObjects {
 	kept := slices.Clone(attackers)
+	attacked := slices.Clone(targets)
 	if spec, ok := t.Param("ValidAttackers"); ok {
 		parsed := valid.Parse(spec)
 		kept = kept[:0]
+		attacked = nil
 		for _, id := range attackers {
 			if Matches(g, g.Card(id), parsed, h.Controller(), h.ID) {
 				kept = append(kept, id)
+				if d := g.combat.AttackTargets[id]; !slices.Contains(attacked, d) {
+					attacked = append(attacked, d)
+				}
 			}
 		}
 	}
-	return triggeredObjects{attackingPlayer: g.activePlayer, attackers: kept, attackersRecorded: true}
+	if spec, ok := t.Param("AttackedTarget"); ok {
+		var named []EntityID
+		for _, e := range attacked {
+			if attackedTargetMatches(g, h, []EntityID{e}, spec) {
+				named = append(named, e)
+			}
+		}
+		attacked = named
+	}
+	return triggeredObjects{attackingPlayer: g.activePlayer, attackers: kept, attackersRecorded: true,
+		attackedTargets: attacked, attackedTargetsRecorded: true}
 }
 
 // attackersTargeting is combat.getAttackersOf(ge) (PhaseHandler.java): the

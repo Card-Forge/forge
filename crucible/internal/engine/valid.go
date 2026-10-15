@@ -445,13 +445,20 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		// names. Only a player defender against a player spec is read here
 		// (a "Player.EnchantedBy" or "You", all the real lines): this group
 		// cannot reach definedEntities without a cycle, and no real line
-		// names a card there.
+		// names a card there. TriggeredAttackedTarget (Jin Sakai) is the one
+		// Defined form read: the recorded list off the ability in context.
 		if !containsCard(g.combat.Attackers, c.ID) {
 			return false
 		}
 		target, ok := g.combat.AttackTargets[c.ID]
 		if !ok {
 			return false
+		}
+		if strings.TrimPrefix(name, "attacking ") == "TriggeredAttackedTarget" {
+			// getDefinedEntities over AbilityKey.AttackedTarget: players and
+			// cards alike, so a planeswalker defender is compared as itself.
+			attacked, _ := g.resolvingAttackedTargets(source, name)
+			return containsEntity(attacked, target)
 		}
 		defender, isPlayer := target.AsPlayer()
 		if !isPlayer {
@@ -575,6 +582,18 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 	// canBeBeamedUp: no CantBeBeamedUp static covers c (Marooned).
 	case name == "canBeBeamedUp":
 		return !g.cantBeBeamedUp(c)
+	case name == "TriggeredAttackers":
+		// CardProperty.java:2045-2063: c is in the root ability's
+		// AbilityKey.Attackers; false with no ability of source's in context
+		// (Java's non-SpellAbility branch).
+		attackers, _ := g.resolvingAttackers(source, name)
+		return containsCard(attackers, c.ID)
+	case name == "NotDefinedTriggeredAttackers":
+		// CardProperty.java:2064-2068: getDefinedCards(source,
+		// "TriggeredAttackers", sa) does not contain c -- true with no ability
+		// in context, Java's empty list.
+		attackers, _ := g.resolvingAttackers(source, name)
+		return !containsCard(attackers, c.ID)
 	case name == "TargetedPlayerCtrl":
 		return g.targetsPlayer(source, c.Controller())
 	case name == "TargetedPlayerOwn":
@@ -1303,12 +1322,20 @@ func compareMatches(g *Game, c *Card, cmp valid.Compare, sourceController Player
 }
 
 // compareOperand resolves a Compare operand: an integer literal, or an SVar
-// name read from the source card's live faces. Chosen numbers ("Chosen") and
-// the other calculateAmount shapes that are not a card's own SVar are not
-// resolved.
+// name read from the source card's live faces, or "Chosen", the number the
+// source chose (CardProperty.java:1465-1469; no choice fails the property, as
+// Java's does). The other calculateAmount shapes that are not a card's own
+// SVar are not resolved.
 func compareOperand(g *Game, operand string, sourceController PlayerID, source CardID) (int, bool) {
 	if n, err := strconv.Atoi(operand); err == nil {
 		return n, true
+	}
+	if operand == "Chosen" {
+		sc, ok := sourceCard(g, source)
+		if !ok {
+			return 0, false
+		}
+		return sc.Memory.ChosenNumber()
 	}
 	key := strings.ToLower(operand)
 	if f := g.relativeFace; f != nil {
@@ -1559,6 +1586,38 @@ func (g *Game) targetsPlayer(source CardID, pid PlayerID) bool {
 		return false
 	}
 	return containsEntity(a.Targets, PlayerEntity(pid))
+}
+
+// resolvingAttackers is AbilityKey.Attackers as the ability of source in
+// context (Game.resolving) recorded it, for the valid property prop. inContext
+// is false with no ability of source's in context, where Java's spellAbility
+// is no SpellAbility and its Triggered*/NotDefined* reads find nothing. A
+// trigger that recorded no attackers leaves a pending error naming prop and
+// reads as none (GO-7): Java reads a missing key as an empty list
+// (AbilityUtils.java:697-700), which this port does not guess at.
+func (g *Game) resolvingAttackers(source CardID, prop string) (attackers []CardID, inContext bool) {
+	a := g.resolving
+	if a == nil || source == NoCard || a.Source != source {
+		return nil, false
+	}
+	if !a.triggered.attackersRecorded {
+		g.recordPendingError(fmt.Errorf("engine: valid property %q: the trigger recorded no attackers", prop))
+		return nil, true
+	}
+	return a.triggered.attackers, true
+}
+
+// resolvingAttackedTargets is resolvingAttackers for AbilityKey.AttackedTarget.
+func (g *Game) resolvingAttackedTargets(source CardID, prop string) (attacked []EntityID, inContext bool) {
+	a := g.resolving
+	if a == nil || source == NoCard || a.Source != source {
+		return nil, false
+	}
+	if !a.triggered.attackedTargetsRecorded {
+		g.recordPendingError(fmt.Errorf("engine: valid property %q: the trigger recorded no attacked target", prop))
+		return nil, true
+	}
+	return a.triggered.attackedTargets, true
 }
 
 // cantBeBeamedUp is StaticAbilityCantBeBeamedUp.cantBeBeamedUp: a battlefield

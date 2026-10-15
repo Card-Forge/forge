@@ -1,0 +1,13 @@
+# Mode$ AttackerBlockedOnce with ValidCard$ Creature.YouCtrl
+# (TriggerAttackerBlockedOnce.performTest matches it against the whole list of
+# blocked attackers): Big Spender and Grizzly Bears attack, both are blocked,
+# and Big Spender's "whenever one or more creatures you control become
+# blocked, create a Treasure token" makes exactly one Treasure.
+startturn human
+advance 5
+queue attackers 1,2
+declareattackers
+advance
+queue blocks 3=1,4=2
+declareblockers
+resolvestack

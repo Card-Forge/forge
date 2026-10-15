@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=EndCombat
+humanlife=20
+humanbattlefield=Hezrou|Tapped|Damage:2;Grizzly Bears|Tapped|Damage:1
+ailife=20
+aigraveyard=Hill Giant;Silvercoat Lion

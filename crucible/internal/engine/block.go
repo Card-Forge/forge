@@ -70,7 +70,11 @@ func (g *Game) Blocks() []Block { return g.combat.Blocks }
 // creature" fire only for a legally declared block.
 // checkAttackerBlockedTriggers (CR 509.2's own "becomes blocked," the whole
 // blocker group rather than one at a time) runs once per distinct attacker
-// afterward, once every Block naming it is known.
+// afterward, once every Block naming it is known. The two once-per-step modes
+// bracket them in Java's order (blockerstriggers.go): BlockersDeclared before
+// the first Blocks trigger, AttackerBlockedOnce after the last AttackerBlocked.
+// The unblocked-attacker triggers still run last here, where Java runs them
+// first (Combat.fireTriggersForUnblockedAttackers, PhaseHandler.java:746).
 func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, error) {
 	attackers := g.combat.Attackers
 	if len(attackers) == 0 {
@@ -127,6 +131,9 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 	g.combat.blockDecided = append(g.combat.blockDecided, attackers...)
 	blockersByAttacker := map[CardID][]CardID{}
 	var blockedAttackers []CardID
+	// PhaseHandler.java:748-762: BlockersDeclared runs before every Blocks
+	// trigger.
+	g.checkBlockersDeclaredTriggers(controller, blocks)
 	for _, blk := range blocks {
 		g.recordBlockedBy(blk)
 		g.checkBlocksTriggers(controller, blk)
@@ -139,6 +146,9 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 	for _, attacker := range blockedAttackers {
 		g.checkAttackerBlockedTriggers(controller, attacker, blockersByAttacker[attacker])
 	}
+	// PhaseHandler.java:816-820: AttackerBlockedOnce after every per-attacker
+	// AttackerBlocked trigger.
+	g.checkAttackerBlockedOnceTriggers(controller, blocks)
 	g.checkUnblockedTriggers(controller)
 	return blocks, nil
 }

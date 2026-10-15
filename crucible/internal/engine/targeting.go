@@ -97,6 +97,20 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 	return true
 }
 
+// inAbilityContext makes a the ability in context (Game.resolving) until the
+// returned func restores the previous one. Java hands the SpellAbility being
+// put on the stack to every amount and valid string read while its targets are
+// chosen (TargetSelection, SpellAbility.getMaxTargets/getMinTargets and
+// dividedValue all pass sa to AbilityUtils.calculateAmount), so its triggering
+// objects, paid lists and targets so far are readable then, not only while it
+// resolves: Case of the Market Melee's TargetMax$ TriggerObjectsAttackers$Amount.
+// A SubAbility$ link is its own context, as Java's sa is the link.
+func (g *Game) inAbilityContext(a *Ability) func() {
+	prev := g.resolving
+	g.resolving = a
+	return func() { g.resolving = prev }
+}
+
 // hasSameControllerRestriction reports whether a names
 // TargetsWithSameController$ (TargetRestrictions.java:184-185). Two halves
 // of SpellAbility.canTarget's pairwise check are ported: the candidate
@@ -128,6 +142,7 @@ func (g *Game) trimTargetSet(a *Ability, chosen []EntityID) []EntityID {
 	if p == nil {
 		return chosen
 	}
+	defer g.inAbilityContext(a)()
 	has := func(key string) bool { _, ok := p.Param(key); return ok }
 	diffCtl, diffCMC, diffNames := has("TargetsWithDifferentControllers") || has("TargetsForEachPlayer"), has("TargetsWithDifferentCMC"), has("TargetsWithDifferentNames")
 	eqTough, sameType := has("TargetsWithEqualToughness"), has("TargetsWithSameCardType")
@@ -369,6 +384,7 @@ type targetChoice struct {
 // is above 0, or a shape this port cannot offer -- resolveTargets' own two
 // outcomes. TargetMin$ 0 with no candidate is ok with an empty pool.
 func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool) {
+	defer g.inAbilityContext(a)()
 	validTgts, named := a.Params.Param("ValidTgts")
 	if !named && a.API == APIEarthbend {
 		// EarthbendEffect.buildSpellAbility sets the target restriction
@@ -921,7 +937,10 @@ func (g *Game) dropIllegalChainTargets(owner *Ability, chosen, kept *int) bool {
 	owner.chainTargets = clonedChainTargets(owner.chainTargets)
 	for i := range owner.chainTargets {
 		ct := &owner.chainTargets[i]
-		link := Ability{Source: owner.Source, Controller: owner.Controller, Params: ct.Params, targetStamps: ct.Stamps}
+		// The link reads its root's triggering objects, as Java's sub-ability
+		// does through getRootAbility (resolveChainTargets' own link).
+		link := Ability{Source: owner.Source, Controller: owner.Controller, Params: ct.Params, targetStamps: ct.Stamps,
+			Amounts: owner.Amounts, TriggerRemembered: owner.TriggerRemembered, triggered: owner.triggered}
 		if api, ok := APIByName(ct.Params.Name); ok {
 			link.API = api
 		}
@@ -989,6 +1008,10 @@ func (g *Game) withoutIllegal(owner *Ability, targets []EntityID, chosen, kept *
 // chosen rather than filtering candidates (checkWardTriggers, trigger.go,
 // ADR-0028), so it has no place in this function.
 func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
+	// canTarget runs with owner as its sa, the ability in context
+	// (inAbilityContext): Ordruun Mentor's Creature.attacking
+	// TriggeredAttackedTarget is re-read off the trigger it was chosen under.
+	defer g.inAbilityContext(owner)()
 	spec, hasSpec := targetSpec(owner)
 	if pid, ok := e.AsPlayer(); ok {
 		if g.Player(pid).Lost {
