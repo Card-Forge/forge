@@ -623,6 +623,9 @@ public class DanDanNetworkPlayTest {
             }
             Assert.assertEquals(server.getTotalSendErrors(), 0, "no TCP send errors before terminal cleanup");
 
+            if (!mulliganScenario && !reconnectScenario) {
+                assertOwnershipTransitions(deltaSync, match.getGame(), scenario, desktop.hostGui, remote.gui());
+            }
             if (reconnectScenario) {
                 parkedRemote = remote;
                 remote = new ScriptedHumanTcpSupport(remoteName, 1, remoteName, serverPort, scenario);
@@ -3099,6 +3102,65 @@ public class DanDanNetworkPlayTest {
         }
     }
 
+    private static void assertOwnershipTransitions(boolean deltaSync, Game game,
+            ScriptedHumanTcpSupport.Scenario scenario, ScriptedHumanTcpSupport.ScriptedGui hostGui,
+            ScriptedHumanTcpSupport.ScriptedGui remoteGui) throws Exception {
+        Player first = game.getPlayers().get(0);
+        Player second = game.getPlayers().get(1);
+        Card source = game.getCardsIn(ZoneType.Library).stream()
+                .filter(card -> card.getName().equals("Island")).findFirst().orElseThrow();
+        int cardId = source.getId();
+        int initialOwnerId = source.getOwner().getId();
+        List<ScriptedHumanTcpSupport.ScriptedGui> endpoints = List.of(hostGui, remoteGui);
+        for (ZoneType destination : List.of(ZoneType.Library, ZoneType.Hand, ZoneType.Graveyard)) {
+            if (destination != ZoneType.Library) {
+                long before = remoteGui.captures().stream()
+                        .mapToLong(ScriptedHumanTcpSupport.Capture::callbackOrdinal).max().orElse(-1);
+                FutureTask<Void> move = new FutureTask<>(() -> {
+                    game.getAction().moveTo(second.getZone(destination), game.findById(cardId), null);
+                    for (Player player : game.getPlayers()) {
+                        var gui = ((PlayerControllerHuman) player.getController()).getGui();
+                        if (gui instanceof forge.gamemodes.net.ProtocolGuiGame protocol) {
+                            protocol.updateGameView();
+                        }
+                    }
+                    return null;
+                });
+                game.getAction().invoke(move);
+                move.get(30, TimeUnit.SECONDS);
+                awaitLifecycleCondition(scenario, () -> remoteGui.gameViewReceipts().stream().anyMatch(receipt ->
+                        receipt.callbackOrdinal() > before
+                                && receipt.gameViewId() == game.getView().getId()
+                                && (deltaSync ? "applyDelta" : "setGameView").equals(receipt.callback())
+                                && (!deltaSync || receipt.stateBearing())
+                                && receipt.zonesByPlayer().get(second.getId()).get(destination).contains(cardId)),
+                        30, "the remote received the ownership transition to " + destination);
+            }
+            FThreads.invokeInEdtAndWait(() -> {
+                for (var endpoint : endpoints) {
+                    GameView view = endpoint.getGameView();
+                    if (endpoint == remoteGui) {
+                        Assert.assertNull(view.getGame(), "ownership assertions inspect the received remote state");
+                    }
+                    CardView card = findCardView(view, cardId);
+                    PlayerView receivedFirst = findPlayerView(view, first.getId());
+                    PlayerView receivedSecond = findPlayerView(view, second.getId());
+                    Set<PlayerView> expectedPlayers = destination == ZoneType.Hand
+                            ? Set.of(receivedSecond) : Set.of(receivedFirst, receivedSecond);
+                    int expectedOwnerId = destination == ZoneType.Library ? initialOwnerId : second.getId();
+                    Assert.assertNotNull(card);
+                    Assert.assertEquals(card.getZone(), destination);
+                    Assert.assertEquals(Set.copyOf(card.getOwners()), expectedPlayers);
+                    Assert.assertEquals(card.getOwner().getId(), expectedOwnerId);
+                    Assert.assertEquals(card.getController().getId(), expectedOwnerId);
+                    Assert.assertEquals(Set.copyOf(card.getZonePlayers()), expectedPlayers);
+                    Assert.assertEquals(card.canBeShownTo(receivedFirst), destination == ZoneType.Graveyard);
+                    Assert.assertEquals(card.canBeShownTo(receivedSecond), destination != ZoneType.Library);
+                }
+            });
+        }
+    }
+
     private static void assertCurrentViewTrackerReceipt(ScriptedHumanTcpSupport.ScriptedGui gui, GameView view) {
         Assert.assertNotNull(view.getTracker(), "the current endpoint GameView retains its tracker");
         Assert.assertTrue(gui.gameViewReceipts().stream().anyMatch(receipt ->
@@ -4278,9 +4340,9 @@ public class DanDanNetworkPlayTest {
                 final Player host = game.getPlayers().get(0);
                 final Player remote = game.getPlayers().get(1);
                 final Card spell = findOwnedLibraryCard(host, "Metamorphose", Set.of());
-                final Card target = findOwnedLibraryCard(host, "Island", Set.of(spell.getId()));
-                final Card hostManaOne = findOwnedLibraryCard(host, "Island", Set.of(spell.getId(), target.getId()));
-                final Card hostManaTwo = findOwnedLibraryCard(host, "Island", Set.of(spell.getId(), target.getId(), hostManaOne.getId()));
+                Card target = findOwnedLibraryCard(host, "Island", Set.of(spell.getId()));
+                Card hostManaOne = findOwnedLibraryCard(host, "Island", Set.of(spell.getId(), target.getId()));
+                Card hostManaTwo = findOwnedLibraryCard(host, "Island", Set.of(spell.getId(), target.getId(), hostManaOne.getId()));
                 final Card remoteHand = remote.getCardsIn(ZoneType.Hand).stream()
                         .filter(card -> card.getName().equals("Island") && card.getOwner() == remote)
                         .findFirst().orElseThrow(() -> new AssertionError(
@@ -4296,9 +4358,9 @@ public class DanDanNetworkPlayTest {
                 Assert.assertSame(remoteHand.getOwner(), remote);
 
                 final Card movedSpell = game.getAction().moveTo(host.getZone(ZoneType.Hand), spell, null);
-                game.getAction().moveTo(host.getZone(ZoneType.Battlefield), hostManaOne, null);
-                game.getAction().moveTo(host.getZone(ZoneType.Battlefield), hostManaTwo, null);
-                game.getAction().moveTo(host.getZone(ZoneType.Battlefield), target, null);
+                hostManaOne = game.getAction().moveTo(host.getZone(ZoneType.Battlefield), hostManaOne, null);
+                hostManaTwo = game.getAction().moveTo(host.getZone(ZoneType.Battlefield), hostManaTwo, null);
+                target = game.getAction().moveTo(host.getZone(ZoneType.Battlefield), target, null);
                 target.setController(remote, game.getNextTimestamp());
                 game.getAction().controllerChangeZoneCorrection(target);
                 game.getAction().checkStateEffects(true);

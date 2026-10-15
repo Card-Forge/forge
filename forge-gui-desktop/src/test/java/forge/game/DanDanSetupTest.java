@@ -111,6 +111,15 @@ public class DanDanSetupTest extends AITest {
                 final Player second = game.getPlayers().get(1);
                 assertSame(first.getZone(ZoneType.Library), second.getZone(ZoneType.Library));
                 assertSame(first.getZone(ZoneType.Graveyard), second.getZone(ZoneType.Graveyard));
+                for (Card card : first.getCardsIn(ZoneType.Library)) {
+                    assertEquals(card.getOwners(), Set.of(first, second), "bulk match setup establishes joint ownership");
+                    assertEquals(card.getExplicitController(), null);
+                }
+                for (Player player : game.getPlayers()) {
+                    for (Card card : player.getCardsIn(ZoneType.Hand)) {
+                        assertEquals(card.getOwners(), Set.of(player), "opening draws acquire their actual recipient");
+                    }
+                }
                 assertEquals(first.getStartingLife(), 20);
                 assertEquals(second.getStartingLife(), 20);
                 assertEquals(first.getStartingHandSize(), 7);

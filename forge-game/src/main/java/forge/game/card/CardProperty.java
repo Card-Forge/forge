@@ -40,6 +40,11 @@ import java.util.*;
 
 public class CardProperty {
 
+    private static Set<Player> controllersOrOwners(Card card) {
+        Player controller = card.getExplicitController();
+        return controller == null ? card.getOwners() : Collections.singleton(controller);
+    }
+
     public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         final Game game = card.getGame();
         final Combat combat = game.getCombat();
@@ -176,7 +181,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
-            if (!controller.equals(sourceController)) {
+            if (!controllersOrOwners(lki).contains(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("YourTeamCtrl")) {
@@ -184,11 +189,11 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouDontCtrl")) {
-            if (controller.equals(sourceController)) {
+            if (controllersOrOwners(lki).contains(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("OppCtrl")) {
-            if (!controller.getOpponents().contains(sourceController)) {
+            if (controllersOrOwners(lki).stream().noneMatch(player -> player.isOpponentOf(sourceController))) {
                 return false;
             }
         } else if (property.startsWith("ChosenCtrl")) {
@@ -229,43 +234,43 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("DefendingPlayer")) {
-            Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
+            Set<Player> players = property.endsWith("Ctrl") ? Collections.singleton(controller) : card.getOwners();
             if (!game.getPhaseHandler().inCombat()) {
                 return false;
             }
-            if (!combat.isPlayerAttacked(p)) {
+            if (players.stream().noneMatch(combat::isPlayerAttacked)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayer")) {
-            Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
+            Set<Player> players = property.endsWith("Ctrl") ? Collections.singleton(controller) : card.getOwners();
             final Object o = source.getEntityAttachedTo();
             if (o instanceof Player) {
-                if (!p.equals(o)) {
+                if (!players.contains(o)) {
                     return false;
                 }
             } else { // source not enchanting a player
                 return false;
             }
         } else if (property.startsWith("EnchantedController")) {
-            Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
+            Set<Player> players = property.endsWith("Ctrl") ? Collections.singleton(controller) : card.getOwners();
             final Object o = source.getEntityAttachedTo();
             if (o instanceof Card) {
-                if (!p.equals(((Card) o).getController())) {
+                if (!players.contains(((Card) o).getController())) {
                     return false;
                 }
             } else { // source not enchanting a card
                 return false;
             }
         } else if (property.startsWith("RememberedPlayer")) {
-            Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
+            Set<Player> players = property.endsWith("Ctrl") ? Collections.singleton(controller) : card.getOwners();
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
-                if (!newCard.isRemembered(p)) {
+                if (players.stream().noneMatch(newCard::isRemembered)) {
                     return false;
                 }
             }
 
-            if (!source.isRemembered(p)) {
+            if (players.stream().noneMatch(source::isRemembered)) {
                 return false;
             }
         } else if (property.equals("targetedBy")) {
@@ -284,7 +289,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
-            if (!card.getOwner().equals(sourceController)) {
+            if (!card.isOwnedBy(sourceController)) {
                 return false;
             }
         } else if (property.equals("InYourGraveyard")) {
@@ -292,35 +297,35 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouDontOwn")) {
-            if (card.getOwner().equals(sourceController)) {
+            if (card.isOwnedBy(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("OppOwn")) {
-            if (!card.getOwner().getOpponents().contains(sourceController)) {
+            if (card.getOwners().stream().noneMatch(player -> player.isOpponentOf(sourceController))) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerOwn")) {
-            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(card.getOwner())) {
+            if (Collections.disjoint(AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility), card.getOwners())) {
                 return false;
             }
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
-            if (!card.getOwner().isValid(valid, sourceController, source, spellAbility)) {
+            if (card.getOwners().stream().noneMatch(player -> player.isValid(valid, sourceController, source, spellAbility))) {
                 final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
-                if (!lp.contains(card.getOwner())) {
+                if (Collections.disjoint(lp, card.getOwners())) {
                     return false;
                 }
             }
         } else if (property.startsWith("ControlledBy")) {
             final String valid = property.substring(13);
-            if (!controller.isValid(valid, sourceController, source, spellAbility)) {
+            if (controllersOrOwners(lki).stream().noneMatch(player -> player.isValid(valid, sourceController, source, spellAbility))) {
                 final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
-                if (!lp.contains(controller)) {
+                if (Collections.disjoint(lp, controllersOrOwners(lki))) {
                     return false;
                 }
             }
         } else if (property.startsWith("OwnerDoesntControl")) {
-            if (card.getOwner().equals(controller)) {
+            if (card.isOwnedBy(controller)) {
                 return false;
             }
         } else if (property.startsWith("ControllerControls")) {
@@ -915,13 +920,13 @@ public class CardProperty {
             }
         } else if (property.startsWith("sharesOwnerWith")) {
             if (property.equals("sharesOwnerWith")) {
-                if (!card.getOwner().equals(source.getOwner())) {
+                if (Collections.disjoint(card.getOwners(), source.getOwners())) {
                     return false;
                 }
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
                 CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                if (!def.allMatch(CardPredicates.isOwner(card.getOwner()))) {
+                if (!def.allMatch(other -> !Collections.disjoint(card.getOwners(), other.getOwners()))) {
                     return false;
                 }
             }
@@ -983,7 +988,7 @@ public class CardProperty {
                     return false;
                 }
                 if (your) { // for corner cases of controlling other player
-                    if (!card.getOwner().equals(sourceController)) {
+                    if (!card.isOwnedBy(sourceController)) {
                         return false;
                     }
                 }

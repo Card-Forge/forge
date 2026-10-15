@@ -72,14 +72,14 @@ public class DanDanEffectsTest extends AITest {
         assertFalse(sanctuary.isTapped(), "three other Islands enable the real untapped-entry trigger condition");
         assertTrue(ability.canTarget(spell),
                 "the official 'your graveyard' target refers to the actual common graveyard in DanDan");
-        assertFalse(spell.isValid("Instant.YouOwn", caster, sanctuary, ability),
-                "common-zone eligibility does not make literal ownership predicates true");
+        assertTrue(spell.isValid("Instant.YouOwn", caster, sanctuary, ability),
+                "each shared graveyard participant owns the card");
         ability.getTargets().add(spell);
         AbilityUtils.resolve(ability);
         assertEquals(danDan.getCardsIn(ZoneType.Library).get(0), spell,
                 "Sanctuary puts the chosen common-graveyard card on the shared library top");
-        assertEquals(spell.getOwner(), formerOwner,
-                "moving from a common graveyard to a library does not acquire ownership");
+        assertEquals(danDan.getCardState(spell).getOwners(), Set.of(caster, formerOwner),
+                "movement between shared pools preserves joint ownership");
 
         Game ordinary = newGame(false);
         Player ordinaryCaster = ordinary.getPlayers().get(0);
@@ -260,6 +260,195 @@ public class DanDanEffectsTest extends AITest {
                 "the targeted controller may decline the optional hand entry");
         assertFalse(declineController.getCardsIn(ZoneType.Battlefield).contains(declinedCard));
         assertEquals(declined.getCardsIn(ZoneType.Library).get(0), declineFish);
+    }
+
+    @Test
+    public void regrowthAndMerchantScrollGiveSharedSelectionToCaster() {
+        for (String name : List.of("Regrowth", "Merchant Scroll")) {
+            Game game = newGame(true);
+            Player first = game.getPlayers().get(0);
+            Player caster = game.getPlayers().get(1);
+            Card selected = addCardToZone("Memory Lapse", first,
+                    name.equals("Regrowth") ? ZoneType.Graveyard : ZoneType.Library);
+            SpellAbility ability = addCardToZone(name, caster, ZoneType.Hand).getFirstSpellAbility();
+            ability.setActivatingPlayer(caster);
+            if (ability.usesTargeting()) {
+                assertTrue(ability.canTarget(selected));
+                ability.getTargets().add(selected);
+            }
+            AbilityUtils.resolve(ability);
+            assertTrue(caster.getCardsIn(ZoneType.Hand).contains(selected), name + " gives its caster the selected card");
+            assertEquals(game.getCardState(selected).getOwner(), caster);
+            assertFalse(first.getCardsIn(ZoneType.Hand).contains(selected));
+        }
+    }
+
+    @Test
+    public void stolenExpanseSearchEntersTappedUnderActivatingPlayer() {
+        Game game = newGame(true);
+        Player owner = game.getPlayers().get(0);
+        Player activator = game.getPlayers().get(1);
+        Card land = addCardToZone("Island", owner, ZoneType.Library);
+        Card expanse = addCard("Terramorphic Expanse", owner);
+        expanse.setController(activator, game.getNextTimestamp());
+        SpellAbility ability = findChangeZoneAbility(expanse);
+        ability.setActivatingPlayer(activator);
+        AbilityUtils.resolve(ability);
+
+        Card entered = game.getCardState(land);
+        assertEquals(expanse.getOwner(), owner, "the activation does not change the Expanse's owner");
+        assertTrue(activator.getCardsIn(ZoneType.Battlefield).contains(entered));
+        assertEquals(entered.getController(), activator);
+        assertEquals(entered.getOwner(), activator);
+        assertTrue(entered.isTapped());
+        assertFalse(land.isTapped(), "entry preparation does not mutate the source object");
+    }
+
+    @Test
+    public void polymorphGivesFoundCreatureToTheTargetController() {
+        Game game = newGame(true);
+        Player caster = game.getPlayers().get(0);
+        Player recipient = game.getPlayers().get(1);
+        Card selected = addCardToZone("Colossal Dreadmaw", caster, ZoneType.Library);
+        Card target = addCard("Grizzly Bears", recipient);
+        SpellAbility ability = addCardToZone("Polymorph", caster, ZoneType.Hand).getFirstSpellAbility();
+        ability.setActivatingPlayer(caster);
+        ability.getTargets().add(target);
+        game.getStack().addAndUnfreeze(ability);
+        game.getStack().resolveStack();
+        Card entered = game.getCardState(selected);
+        assertTrue(recipient.getCardsIn(ZoneType.Battlefield).contains(entered));
+        assertEquals(entered.getOwners(), Set.of(recipient));
+        assertEquals(entered.getController(), recipient);
+        assertEquals(selected.getOwners(), Set.of(caster, recipient), "the shared source snapshot keeps both owners");
+        assertEquals(selected.getExplicitController(), null, "the source gains no actual controller");
+    }
+
+    @Test
+    public void dackGoadsTheAcceptedCreatureBeforeGivingItToTheOpponent() {
+        Game game = newGame(true);
+        Player opponent = game.getPlayers().get(0);
+        Player caster = game.getPlayers().get(1);
+        Card selected = addCardToZone("Colossal Dreadmaw", opponent, ZoneType.Library);
+        Card dack = addCard("Dack Fayden, Helping Hand", caster);
+        SpellAbility ability = dack.getTriggers().get(0).ensureAbility();
+        ability.setActivatingPlayer(caster);
+        AbilityUtils.resolve(ability);
+        Card entered = game.getCardState(selected);
+        assertTrue(entered.isGoadedBy(caster), "the follow-up ability uses the accepted incoming card");
+        assertEquals(entered.getOwners(), Set.of(caster));
+        assertEquals(entered.getController(), opponent);
+    }
+
+    @Test
+    public void relentlessPursuitGivesBothSelectedTypesToItsCaster() {
+        Game game = newGame(true);
+        Player first = game.getPlayers().get(0);
+        Player caster = game.getPlayers().get(1);
+        Card creature = addCardToZone("Grizzly Bears", first, ZoneType.Library);
+        Card land = addCardToZone("Island", first, ZoneType.Library);
+        Card rest = addCardToZone("Memory Lapse", first, ZoneType.Library);
+        SpellAbility ability = addCardToZone("Relentless Pursuit", caster, ZoneType.Hand).getFirstSpellAbility();
+        ability.setActivatingPlayer(caster);
+        AbilityUtils.resolve(ability);
+        for (Card selected : List.of(creature, land)) {
+            assertTrue(caster.getCardsIn(ZoneType.Hand).contains(selected));
+            assertEquals(game.getCardState(selected).getOwners(), Set.of(caster));
+            assertFalse(first.getCardsIn(ZoneType.Hand).contains(selected));
+        }
+        assertTrue(game.getCardsIn(ZoneType.Graveyard).contains(rest));
+    }
+
+    @Test
+    public void digAndMassReturnPrepareTappedCardsForTheirRecipient() {
+        for (String name : List.of("Expand the Sphere", "Splendid Reclamation")) {
+            Game game = newGame(true);
+            Player first = game.getPlayers().get(0);
+            Player caster = game.getPlayers().get(1);
+            ZoneType origin = name.equals("Expand the Sphere") ? ZoneType.Library : ZoneType.Graveyard;
+            Card island = addCardToZone("Island", first, origin);
+            Card forest = addCardToZone("Forest", first, origin);
+            SpellAbility ability = addCardToZone(name, caster, ZoneType.Hand).getFirstSpellAbility();
+            ability.setActivatingPlayer(caster);
+            AbilityUtils.resolve(ability);
+            for (Card source : List.of(island, forest)) {
+                Card entered = game.getCardState(source);
+                assertTrue(caster.getCardsIn(ZoneType.Battlefield).contains(entered), name);
+                assertEquals(entered.getOwners(), Set.of(caster));
+                assertEquals(entered.getController(), caster);
+                assertTrue(entered.isTapped());
+                assertFalse(source.isTapped(), "tapped preparation leaves the live source snapshot unchanged");
+            }
+        }
+    }
+
+    @Test
+    public void endlessDetourUsesCasterForJointOwnerChoiceAndMovesOnce() {
+        Game game = newGame(true);
+        Player first = game.getPlayers().get(0);
+        Player caster = game.getPlayers().get(1);
+        Card selected = addCardToZone("Dandân", first, ZoneType.Graveyard);
+        Card top = addCardToZone("Island", first, ZoneType.Library);
+        List<Player> choices = new ArrayList<>();
+        for (Player player : game.getPlayers()) {
+            player.dangerouslySetController(new PlayerControllerAi(game, player,
+                    new LobbyPlayerAi(player.getName(), null)) {
+                @Override
+                public boolean confirmAction(SpellAbility sa, forge.game.player.PlayerActionConfirmMode mode,
+                        String message, List<String> options, Card cardToShow, java.util.Map<String, Object> params) {
+                    if (mode == forge.game.player.PlayerActionConfirmMode.ChangeZoneToAltDestination) {
+                        choices.add(player);
+                        return false;
+                    }
+                    return super.confirmAction(sa, mode, message, options, cardToShow, params);
+                }
+            });
+        }
+        SpellAbility ability = addCardToZone("Endless Detour", caster, ZoneType.Hand).getFirstSpellAbility();
+        ability.setActivatingPlayer(caster);
+        ability.getTargets().add(selected);
+        AbilityUtils.resolve(ability);
+        assertEquals(choices, List.of(caster));
+        assertEquals(cardIds(game.getCardsIn(ZoneType.Library)), List.of(top.getId(), selected.getId()));
+    }
+
+    @Test
+    public void carrionLocustMakesOnlyTheOpponentLoseLife() {
+        Game game = newGame(true);
+        Player caster = game.getPlayers().get(0);
+        Player opponent = game.getPlayers().get(1);
+        Card selected = addCardToZone("Dandân", caster, ZoneType.Graveyard);
+        Card locust = addCard("Carrion Locust", caster);
+        SpellAbility ability = locust.getTriggers().get(0).ensureAbility();
+        ability.setActivatingPlayer(caster);
+        assertTrue(ability.canTarget(selected), "the joint card is in the opponent's graveyard");
+        ability.getTargets().add(selected);
+        int casterLife = caster.getLife();
+        int opponentLife = opponent.getLife();
+        AbilityUtils.resolve(ability);
+        assertEquals(game.getCardState(selected).getZone().getZoneType(), ZoneType.Exile);
+        assertEquals(caster.getLife(), casterLife);
+        assertEquals(opponent.getLife(), opponentLife - 1);
+    }
+
+    @Test
+    public void reanimatePreventionAndRedirectionPreserveUnpreparedSource() {
+        for (boolean redirect : List.of(false, true)) {
+            Game game = newGame(true);
+            Player first = game.getPlayers().get(0);
+            Player caster = game.getPlayers().get(1);
+            Card selected = addCardToZone("Grizzly Bears", first, ZoneType.Graveyard);
+            addCard(redirect ? "Containment Priest" : "Grafdigger's Cage", first);
+            SpellAbility ability = addCardToZone("Reanimate", caster, ZoneType.Hand).getFirstSpellAbility();
+            ability.setActivatingPlayer(caster);
+            ability.getTargets().add(selected);
+            Player sourceController = selected.getController();
+            game.getStack().addAndUnfreeze(ability);
+            game.getStack().resolveStack();
+            assertEquals(selected.getController(), sourceController, "Reanimate must not prepare control on the live source");
+            assertEquals(game.getCardState(selected).getZone().getZoneType(), redirect ? ZoneType.Exile : ZoneType.Graveyard);
+            assertFalse(caster.getCardsIn(ZoneType.Battlefield).contains(selected));
+        }
     }
 
     private Game newGame(boolean danDan) {

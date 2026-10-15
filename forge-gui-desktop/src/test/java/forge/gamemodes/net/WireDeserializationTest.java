@@ -1,6 +1,9 @@
 package forge.gamemodes.net;
 
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.Tracker;
 import forge.gamemodes.net.event.GuiGameEvent;
@@ -100,23 +103,33 @@ public class WireDeserializationTest {
         final Tracker sendingTracker = new Tracker();
         final CardView sentTrackedCard = new CardView(71, sendingTracker, "tracked-at-send");
         sendingTracker.putObj(TrackableTypes.CardViewType, sentTrackedCard.getId(), sentTrackedCard);
-        final CardView sentInlineCard = new CardView(72, new Tracker(), "inline-choice");
+        final CardView sentInlineCard = new CardView(71, new Tracker(), "inline-choice");
+        final PlayerView proposedOwner = new PlayerView(12, sendingTracker);
+        sentInlineCard.set(TrackableProperty.Owners, new TrackableCollection<>(proposedOwner));
+        sentInlineCard.set(TrackableProperty.Owner, proposedOwner);
+        sentInlineCard.set(TrackableProperty.Controller, proposedOwner);
         final GuiGameEvent sent = new GuiGameEvent(ProtocolMethod.getChoices,
                 "choose", 1, 1, List.of(sentTrackedCard, sentInlineCard), List.of(sentTrackedCard), null);
 
         final Tracker receivingTracker = new Tracker();
+        final PlayerView receivedOwner = new PlayerView(12, receivingTracker);
+        receivingTracker.putObj(TrackableTypes.PlayerViewType, receivedOwner.getId(), receivedOwner);
         final CardView staleTrackedCard = new CardView(71, receivingTracker, "before-delta");
         receivingTracker.putObj(TrackableTypes.CardViewType, staleTrackedCard.getId(), staleTrackedCard);
         final GuiGameEvent decoded = roundTripGuiEvent(sent, sendingTracker, receivingTracker);
         final List<?> receivedChoices = (List<?>) decoded.getObjects()[3];
         final CardView receivedInlineCard = (CardView) receivedChoices.get(1);
+        Assert.assertNotSame(receivedInlineCard, staleTrackedCard,
+                "a detached replacement candidate can share its live source ID");
+        Assert.assertEquals(receivedInlineCard.getName(), "inline-choice");
+        Assert.assertEquals(List.copyOf(receivedInlineCard.getOwners()), List.of(receivedOwner));
+        Assert.assertSame(receivedInlineCard.getOwner(), receivedOwner);
+        Assert.assertSame(receivedInlineCard.getController(), receivedOwner);
         Assert.assertSame(receivedChoices.get(0), staleTrackedCard,
                 "IdRef resolves against the tracker state present during IO decoding");
 
         final CardView afterDeltaCard = new CardView(71, receivingTracker, "after-delta");
         receivingTracker.putObj(TrackableTypes.CardViewType, afterDeltaCard.getId(), afterDeltaCard);
-        final CardView sameIdCanonicalForInline = new CardView(72, receivingTracker, "canonical-for-inline");
-        receivingTracker.putObj(TrackableTypes.CardViewType, sameIdCanonicalForInline.getId(), sameIdCanonicalForInline);
         Assert.assertTrue(decoded.refreshGetChoicesCardViewRefs(receivingTracker),
                 "the real getChoices arguments rebind after the applied state update");
 
@@ -126,6 +139,9 @@ public class WireDeserializationTest {
         Assert.assertSame(reboundSelected.get(0), afterDeltaCard);
         Assert.assertSame(reboundChoices.get(1), receivedInlineCard,
                 "an inline ephemeral choice stays detached even when its ID has a canonical view");
+        Assert.assertEquals(List.copyOf(receivedInlineCard.getOwners()), List.of(receivedOwner));
+        Assert.assertSame(receivedInlineCard.getOwner(), receivedOwner);
+        Assert.assertSame(receivedInlineCard.getController(), receivedOwner);
 
 
     }

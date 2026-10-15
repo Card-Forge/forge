@@ -399,10 +399,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final CardView c : cards) {
             // an IdRef the tracker cannot resolve arrives as a null view, and PlayerZoneUpdate rejects a null player
-            if (c == null || c.getOwner() == null) { continue; }
+            if (c == null) { continue; }
             final ZoneType zone = c.getZone();
             if (zone != null && zone != ZoneType.Battlefield) {
-                zones.add(new PlayerZoneUpdate(c.getOwner(), zone));
+                for (PlayerView player : c.getZonePlayers()) {
+                    zones.add(new PlayerZoneUpdate(player, zone));
+                }
             }
         }
         return zones;

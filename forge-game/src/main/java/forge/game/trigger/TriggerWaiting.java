@@ -43,7 +43,7 @@ public class TriggerWaiting {
         // keySet() drives simultaneous-trigger stacking, so preserve collection order
         this.triggers = Maps.newLinkedHashMap();
         for (Trigger t : trigs) {
-            triggers.put(t, t.getHostCard().getController());
+            triggers.put(t, TriggerHandler.getTriggerController(t, params));
         }
     }
 

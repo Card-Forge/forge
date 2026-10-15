@@ -10,6 +10,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
@@ -229,13 +230,19 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     if (sequential) {
                         tableSeq = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());
                     }
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    Map<AbilityKey, Object> moveParams = AbilityKey.mapFromPlayer(p);
                     AbilityKey.addCardZoneTableParams(moveParams, tableSeq);
 
                     if (foundDest.equals(ZoneType.Battlefield)) {
                         moveParams.put(AbilityKey.SimultaneousETB, found);
-                        if (sa.hasParam("GainControl")) {
-                            c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                        final boolean sharedSource = c.getOwners().size() > 1;
+                        final Player recipient = sa.hasParam("GainControl") ? sa.getActivatingPlayer() : p;
+                        if (sharedSource) {
+                            moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
+                            c = new CardCopyService(c).copyCard(false);
+                        }
+                        if (sharedSource || sa.hasParam("GainControl")) {
+                            c.setController(recipient, game.getNextTimestamp());
                         }
                         if (sa.hasParam("AttachedTo")) {
                             CardCollection list = AbilityUtils.getDefinedCards(c, sa.getParam("AttachedTo"), sa);
@@ -249,7 +256,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                                 Map<String, Object> params = Maps.newHashMap();
                                 params.put("Attach", c);
                                 Card attachedTo = p.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", c.toString()), params);
-                                c.attachToEntity(game.getCardState(attachedTo), sa, true);
+                                if (sharedSource) {
+                                    moveParams.put(AbilityKey.AttachTarget, game.getCardState(attachedTo));
+                                } else {
+                                    c.attachToEntity(game.getCardState(attachedTo), sa, true);
+                                }
                             } else if (c.isAura()) { 
                                 continue;
                             }
@@ -257,14 +268,28 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         if (sa.hasParam("Tapped")) {
                             c.setTapped(true);
                         }
-                        game.getAction().moveTo(foundDest, c, sa, moveParams);
-                        if (addToCombat(c, sa, "Attacking", "Blocking")) {
+                        c = game.getAction().moveToPlay(c, sharedSource ? recipient : c.getController(), sa, moveParams);
+                        if (sharedSource && c.isInPlay()) {
+                            if (remember) {
+                                host.removeRemembered(c);
+                                host.addRemembered(c);
+                            }
+                            if (imprint) {
+                                host.removeImprintedCard(c);
+                                host.addImprintedCard(c);
+                            }
+                        }
+                        if (c.isInPlay() && addToCombat(c, sa, "Attacking", "Blocking")) {
                             combatChanged = true;
                         }
                     } else if (sa.hasParam("NoMoveFound")) {
                         //Don't do anything
                     } else {
-                        c = game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
+                        if (foundDest == ZoneType.Hand && c.getOwners().size() > 1) {
+                            c = game.getAction().moveTo(p.getZone(foundDest), c, sa, moveParams);
+                        } else {
+                            c = game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
+                        }
                         moved.add(c);
                         if (foundDest == ZoneType.Exile) {
                             handleExiledWith(c, sa);
@@ -304,11 +329,15 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, finalDest, sa);
                 }
 
-                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                Map<AbilityKey, Object> moveParams = AbilityKey.mapFromPlayer(p);
                 AbilityKey.addCardZoneTableParams(moveParams, table);
 
                 for (Card c : revealed) {
-                    c = game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
+                    if (c.getOwners().size() > 1 && (finalDest == ZoneType.Hand || finalDest == ZoneType.Battlefield)) {
+                        c = game.getAction().moveTo(p.getZone(finalDest), c, sa, moveParams);
+                    } else {
+                        c = game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
+                    }
                     if (finalDest == ZoneType.Exile) {
                         handleExiledWith(c, sa);
                     }

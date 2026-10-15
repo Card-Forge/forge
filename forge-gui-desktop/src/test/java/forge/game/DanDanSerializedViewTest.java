@@ -18,6 +18,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -41,6 +42,11 @@ public class DanDanSerializedViewTest extends AITest {
         first.getZone(ZoneType.Graveyard).add(graveyardCard);
         first.getZone(ZoneType.Hand).add(firstHandCard);
         second.getZone(ZoneType.Hand).add(secondHandCard);
+        Card exiled = createCard("Think Twice", first);
+        exiled.setOwners(List.of(first, second));
+        second.getZone(ZoneType.Exile).add(exiled);
+        exiled.turnFaceDown(true);
+        exiled.addMayLookAt(game.getNextTimestamp(), List.of(second));
 
         GameView snapshot = roundTrip(game.getView());
 
@@ -50,6 +56,14 @@ public class DanDanSerializedViewTest extends AITest {
 
         List<PlayerView> players = new ArrayList<>(snapshot.getPlayers());
         assertEquals(players.size(), 2);
+        CardView sharedTop = players.get(0).getCards(ZoneType.Library).iterator().next();
+        assertEquals(Set.copyOf(sharedTop.getOwners()), Set.copyOf(players));
+        assertEquals(Set.copyOf(sharedTop.getZonePlayers()), Set.copyOf(players));
+        CardView receivedExile = players.get(1).getCards(ZoneType.Exile).iterator().next();
+        assertEquals(Set.copyOf(receivedExile.getOwners()), Set.copyOf(players));
+        assertEquals(List.copyOf(receivedExile.getZonePlayers()), List.of(players.get(1)));
+        assertFalse(receivedExile.canBeShownTo(players.get(0)), "joint ownership does not reveal face-down exile");
+        assertTrue(receivedExile.canBeShownTo(players.get(1)), "explicit look grants survive serialization");
         assertEquals(ids(players.get(0).getCards(ZoneType.Library)),
                 List.of(libraryTop.getId(), libraryNext.getId()));
         assertEquals(ids(players.get(1).getCards(ZoneType.Library)),
@@ -86,6 +100,28 @@ public class DanDanSerializedViewTest extends AITest {
         List<PlayerView> players = new ArrayList<>(snapshot.getPlayers());
         assertEquals(ids(players.get(0).getCards(ZoneType.Library)), List.of(firstLibraryCard.getId()));
         assertEquals(ids(players.get(1).getCards(ZoneType.Library)), List.of(secondLibraryCard.getId()));
+    }
+
+    @Test
+    public void explicitLibraryLookGrantFollowsDecisionControlWithoutRevealingOtherCards() throws Exception {
+        Game game = newGame(true);
+        Player first = game.getRegisteredPlayers().get(0);
+        Player second = game.getRegisteredPlayers().get(1);
+        Card granted = createCard("Island", first);
+        Card hidden = createCard("Memory Lapse", first);
+        first.getZone(ZoneType.Library).add(granted);
+        first.getZone(ZoneType.Library).add(hidden);
+        granted.addMayLookAt(game.getNextTimestamp(), List.of(second));
+        second.addController(game.getNextTimestamp(), first, second.getController(), false);
+
+        GameView received = roundTrip(game.getView());
+        List<PlayerView> players = new ArrayList<>(received.getPlayers());
+        List<CardView> library = new ArrayList<>(players.get(0).getCards(ZoneType.Library));
+        assertTrue(library.get(0).canBeShownTo(players.get(1)));
+        assertTrue(library.get(0).canBeShownTo(players.get(0)),
+                "the player controlling a granted decision can inspect that choice");
+        assertFalse(library.get(1).canBeShownTo(players.get(0)));
+        assertFalse(library.get(1).canBeShownTo(players.get(1)));
     }
 
     private Game newGame(boolean danDan) {

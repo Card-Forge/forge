@@ -292,7 +292,23 @@ public class ReplacementHandler {
         if (affected instanceof Player) {
             decider = (Player) affected;
         } else {
-            decider = ((Card) affected).getController();
+            Card card = (Card) affected;
+            decider = card.getController();
+            // Leaving play clears the incoming copy's control; the source controller still chooses.
+            // An entering card's explicit recipient takes priority over that source snapshot.
+            if (card.getExplicitController() == null && event == ReplacementType.Moved
+                    && runParams.get(AbilityKey.CardLKI) instanceof Card source
+                    && source.getExplicitController() != null) {
+                decider = source.getExplicitController();
+            } else if (card.getOwners().size() > 1 && card.getExplicitController() == null) {
+                if (runParams.get(AbilityKey.Player) instanceof Player actionPlayer) {
+                    decider = actionPlayer;
+                } else if (runParams.get(AbilityKey.Cause) instanceof SpellAbility cause && cause.getActivatingPlayer() != null) {
+                    decider = cause.getActivatingPlayer();
+                } else {
+                    decider = game.getPhaseHandler().getPlayerTurn();
+                }
+            }
         }
 
         // try out all layer
@@ -401,6 +417,8 @@ public class ReplacementHandler {
 
         // TODO: the source of replacement effect should be the source of the original effect
         SpellAbility effectSA = replacementEffect.ensureAbility();
+        Player player = host.getOwners().size() > 1 && host.getExplicitController() == null
+                ? decider : host.getController();
         boolean captureDraw = instruction != null
                 && replacementEffect.getMode() == ReplacementType.DrawCards
                 && effectSA != null
@@ -411,12 +429,13 @@ public class ReplacementHandler {
             effectSA = effectSA.copy(host, false);
         }
         if (effectSA != null) {
+            effectSA.setActivatingPlayer(player);
             SpellAbility tailend = effectSA;
             do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB);
+                tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB, AbilityKey.Player);
                 tailend = tailend.getSubAbility();
             } while (tailend != null);
 
@@ -468,13 +487,11 @@ public class ReplacementHandler {
         if ("True".equals(replacementEffect.getParam("Skip"))) {
             return ReplacementResult.Skipped;
         }
-        Player player = host.getController();
-
         if (effectSA != null) {
             ApiType apiType = effectSA.getApi();
             if (replacementEffect.getMode() != ReplacementType.DamageDone ||
                 (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect)) {
-                effectSA.setActivatingPlayer(host.getController());
+                effectSA.setActivatingPlayer(player);
                 if (captureDraw) {
                     DrawEffectCapture capture = new DrawEffectCapture(effectSA, instruction);
                     drawEffectCaptures.push(capture);

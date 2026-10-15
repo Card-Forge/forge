@@ -1675,6 +1675,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView mill(int n, final ZoneType destination, SpellAbility sa, Map<AbilityKey, Object> params) {
+        params = params == null ? AbilityKey.newMap() : AbilityKey.newMap(params);
+        params.put(AbilityKey.Player, this);
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
         repRunParams.put(AbilityKey.Number, n);
@@ -1762,19 +1764,27 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Card playLand(final Card land, SpellAbility cause) {
-        land.setController(this, 0);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        Card incoming = land;
+        if (land.getOwners().size() > 1) {
+            moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(land));
+            incoming = new CardCopyService(land).copyCard(false);
+            incoming.setMayPlay(land.getMayPlay());
+        }
+        incoming.setController(this, 0);
         if (land.isFaceDown()) {
-            land.turnFaceUp(null);
+            incoming.turnFaceUp(null);
             if (cause.isLandAbility()) {
-                land.changeToState(cause.getCardStateName());
+                incoming.changeToState(cause.getCardStateName());
             }
         }
 
-        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(incoming);
+        runParams.put(AbilityKey.Player, this);
         runParams.put(AbilityKey.Origin, land.getZone().getZoneType().name());
 
         game.copyLastState();
-        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
+        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), incoming, cause, moveParams);
         game.updateLastStateForCard(c);
 
         // Run triggers

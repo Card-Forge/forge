@@ -142,8 +142,16 @@ public class CardView extends GameEntityView {
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }
-    void updateOwner(Card c) {
+    public FCollectionView<PlayerView> getOwners() {
+        return Objects.requireNonNullElse(get(TrackableProperty.Owners), FCollection.getEmpty());
+    }
+    public boolean isOwnedBy(PlayerView player) {
+        return player != null && getOwners().indexOf(player) != -1;
+    }
+    void updateOwners(Card c) {
+        set(TrackableProperty.Owners, PlayerView.getCollection(c.getOwners()));
         set(TrackableProperty.Owner, PlayerView.get(c.getOwner()));
+        updateController(c);
     }
 
     public PlayerView getController() {
@@ -156,8 +164,13 @@ public class CardView extends GameEntityView {
     public ZoneType getZone() {
         return get(TrackableProperty.Zone);
     }
+    public FCollectionView<PlayerView> getZonePlayers() {
+        return Objects.requireNonNullElse(get(TrackableProperty.ZonePlayers), FCollection.getEmpty());
+    }
     void updateZone(Card c) {
         set(TrackableProperty.Zone, c.getZone() == null ? null : c.getZone().getZoneType());
+        set(TrackableProperty.ZonePlayers, c.getZone() == null ? null
+                : PlayerView.getCollection(c.getGame().getZoneParticipants(c.getZone())));
     }
     public boolean isInZone(final Iterable<ZoneType> zones) {
         return Iterables.contains(zones, getZone());
@@ -609,7 +622,13 @@ public class CardView extends GameEntityView {
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
-        return col != null && col.indexOf(pv) != -1;
+        if (col == null || pv == null) { return false; }
+        for (PlayerView allowed : col) {
+            if (allowed.equals(pv) || pv.equals(allowed.getMindSlaveMaster())) {
+                return true;
+            }
+        }
+        return false;
     }
     void setPlayerMayLook(Iterable<Player> list) {
         if (Iterables.isEmpty(list)) {
@@ -631,7 +650,7 @@ public class CardView extends GameEntityView {
         ZoneType zone = getZone();
         if (zone == null) { return true; } //cards outside any zone are visible to all
 
-        final PlayerView controller = getController();
+        final PlayerView controller = Iterables.getFirst(getZonePlayers(), getController());
         switch (zone) {
         case Ante:
         case Command:
@@ -650,13 +669,13 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller.equals(viewer)) {
+            if (viewer.equals(controller)) {
                 return true;
             }
             break;
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
-            if (controller.isOpponentOf(viewer) && !mayPlayerLook(viewer)) {
+            if (controller != null && controller.isOpponentOf(viewer) && !mayPlayerLook(viewer)) {
                 break;
             }
             return true;
@@ -682,7 +701,7 @@ public class CardView extends GameEntityView {
         }
 
         //if viewer is controlled by another player, also check if card can be shown to that player
-        PlayerView mindSlaveMaster = controller.getMindSlaveMaster();
+        PlayerView mindSlaveMaster = controller == null ? null : controller.getMindSlaveMaster();
         if (mindSlaveMaster != null && mindSlaveMaster != controller && mindSlaveMaster == viewer) {
             return canBeShownTo(controller);
         }
@@ -704,12 +723,15 @@ public class CardView extends GameEntityView {
             return true;
         }
         //if viewer is controlled by another player, also check if face can be shown to that player
-        final PlayerView mindSlaveMaster = getController().getMindSlaveMaster();
-        if (mindSlaveMaster != null && mindSlaveMaster != getController() && mindSlaveMaster == viewer) {
-            return canFaceDownBeShownTo(getController());
+        final PlayerView controller = getZone() == ZoneType.Sideboard
+                ? Iterables.getFirst(getZonePlayers(), getController()) : getController();
+        final PlayerView mindSlaveMaster = controller == null ? null : controller.getMindSlaveMaster();
+        if (mindSlaveMaster != null && mindSlaveMaster != controller && mindSlaveMaster == viewer) {
+            return canFaceDownBeShownTo(controller);
         }
 
-        return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
+        return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard))
+                && viewer != null && viewer.equals(controller);
     }
 
     public FCollectionView<CardView> getEncodedCards() {

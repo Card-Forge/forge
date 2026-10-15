@@ -550,7 +550,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sa.removeSVar("StaticEffectTimestamp");
             }
 
-            final Card gameCard = game.getCardState(tgtC, null);
+            Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
@@ -592,6 +592,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
+                final boolean sharedSource = gameCard.getOwners().size() > 1;
+                if (sharedSource) {
+                    moveParams.putIfAbsent(AbilityKey.CardLKI, CardCopyService.getLKICopy(gameCard));
+                    gameCard = new CardCopyService(gameCard).copyCard(false);
+                }
+                Player recipient = gameCard.getOwners().size() > 1 ? activator : gameCard.getController();
+                if (sa.hasParam("GainControl")) {
+                    String gainControl = sa.getParam("GainControl");
+                    recipient = gainControl.equals("True") ? activator :
+                            AbilityUtils.getDefinedPlayers(hostCard, gainControl, sa).get(0);
+                }
+                if (sharedSource) {
+                    gameCard.setController(recipient, game.getNextTimestamp());
+                }
+
                 if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                     gameCard.setTapped(true);
                 }
@@ -623,7 +638,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     Player newController = g.equals("True") ? activator :
                         AbilityUtils.getDefinedPlayers(hostCard, g, sa).get(0);
                     if (newController != null) {
-                        if (newController != gameCard.getController()) {
+                        if (!sharedSource && newController != gameCard.getController()) {
                             gameCard.runChangeControllerCommands();
                         }
                         gameCard.setController(newController, game.getNextTimestamp());
@@ -645,9 +660,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         params.put("Attach", gameCard);
                         Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
 
-                        // TODO can't attach later or moveToPlay would attach indirectly
-                        // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
-                        gameCard.attachToEntity(game.getCardState(attachedTo), sa, true);
+                        // Shared-card attachments are applied only after the move is accepted.
+                        // Bypass protection checks for simultaneous aura entries.
+                        if (sharedSource) {
+                            moveParams.put(AbilityKey.AttachTarget, game.getCardState(attachedTo));
+                        } else {
+                            gameCard.attachToEntity(game.getCardState(attachedTo), sa, true);
+                        }
                     } else if (gameCard.isAura()) { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;
                     }
@@ -659,7 +678,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Attach", gameCard);
                         Player attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", gameCard.toString()), params);
-                        gameCard.attachToEntity(attachedTo, sa);
+                        if (sharedSource) {
+                            moveParams.put(AbilityKey.AttachTarget, attachedTo);
+                        } else {
+                            gameCard.attachToEntity(attachedTo, sa);
+                        }
                     }
                     else { // When it should enter the battlefield attached to an illegal player it fails
                         continue;
@@ -672,7 +695,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     CardFactoryUtil.setFaceDownState(gameCard, sa);
                 }
 
-                movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
+                movedCard = game.getAction().moveTo(recipient.getZone(destination), gameCard, sa, moveParams);
                 // below stuff only if it changed zones
                 if (movedCard.getZone().equals(originZone)) {
                     continue;
@@ -700,10 +723,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("LeaveBattlefield")) {
                     addLeaveBattlefieldReplacement(movedCard, sa, sa.getParam("LeaveBattlefield"));
                 }
-                if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
+                if (movedCard.isInPlay() && addToCombat(movedCard, sa, "Attacking", "Blocking")) {
                     combatChanged = true;
                 }
-                if (sa.isNinjutsu()) {
+                if (sa.isNinjutsu() && movedCard.isInPlay()) {
                     // Ninjutsu need to get the Defender of the Returned Creature
                     final Card returned = sa.getPaidList("Returned", true).getFirst();
                     final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
@@ -712,7 +735,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     combatChanged = true;
                 }
 
-                if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
+                if (sa.hasParam("AttachAfter") && movedCard.isAttachment() && movedCard.isInPlay()) {
                     CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachAfter"), sa);
                     if (list.isEmpty()) {
                         list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), hostCard.getController(), hostCard, sa);
@@ -734,7 +757,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     handleExiledWith(gameCard, sa);
                 }
 
-                movedCard = game.getAction().moveTo(destination, gameCard, libPos, sa, moveParams);
+                if (destination == ZoneType.Hand && gameCard.getOwners().size() > 1) {
+                    movedCard = game.getAction().moveTo(activator.getZone(destination), gameCard, sa, moveParams);
+                } else {
+                    movedCard = game.getAction().moveTo(destination, gameCard, libPos, sa, moveParams);
+                }
 
                 if (destination.equals(ZoneType.Exile) && lastStateBattlefield.contains(gameCard) && hostCard.equals(gameCard)) {
                     // support Parallax Wave returning itself
@@ -769,7 +796,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.isTrigger() && sa.getTrigger().isKeyword(Keyword.WARP)) {
-                    Card eff = createEffect(sa, sa.getHostCard().getOwner(), "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
+                    Card eff = createEffect(sa, GameActionUtil.getOwnerForEffect(sa.getHostCard(), activator), "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
                     StringBuilder sbPlay = new StringBuilder();
                     sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
                     sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
@@ -832,7 +859,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         // For Duplicant
                         if (sa.hasParam("ImprintLast")) {
                             Card lastCard = null;
-                            for (final Card c : movedCard.getOwner().getCardsIn(destination)) {
+                            for (final Card c : movedCard.getZone().getCards()) {
                                 if (hostCard.hasImprintedCard(c)) {
                                     hostCard.removeImprintedCard(c);
                                     lastCard = c;
@@ -878,7 +905,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 for (final Card tgtC : tgtCards) {
                     // FCollection already does use set.
-                    pl.add(tgtC.getOwner());
+                    pl.add(GameActionUtil.getOwnerForEffect(tgtC, activator));
                 }
                 if (pl.isEmpty()) {
                     pl.add(activator);
@@ -1301,7 +1328,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             CardCollection movedCards = new CardCollection();
             Player decider = Objects.requireNonNullElse(chooser, player);
 
-            for (final Card c : chosenCards) {
+            for (Card c : chosenCards) {
                 Card movedCard;
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -1316,6 +1343,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 else if (destination.equals(ZoneType.Battlefield)) {
                     moveParams.put(AbilityKey.SimultaneousETB, chosenCards);
+                    final boolean sharedSource = c.getOwners().size() > 1;
+                    if (sharedSource) {
+                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
+                        c = new CardCopyService(c).copyCard(false);
+                        c.setController(player, game.getNextTimestamp());
+                    }
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
                     }
@@ -1323,7 +1356,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         final String g = sa.getParam("GainControl");
                         Player newController = g.equals("True") ? sa.getActivatingPlayer() :
                                 AbilityUtils.getDefinedPlayers(source, g, sa).get(0);
-                        if (newController != c.getController()) {
+                        if (!sharedSource && newController != c.getController()) {
                             c.runChangeControllerCommands();
                         }
                         c.setController(newController, game.getNextTimestamp());
@@ -1365,9 +1398,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             params.put("Attach", c);
                             Card attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
 
-                            // TODO can't attach later or moveToPlay would attach indirectly
-                            // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
-                            c.attachToEntity(game.getCardState(attachedTo), sa, true);
+                            // Shared-card attachments are applied only after the move is accepted.
+                            // Bypass protection checks for simultaneous aura entries.
+                            if (sharedSource) {
+                                moveParams.put(AbilityKey.AttachTarget, game.getCardState(attachedTo));
+                            } else {
+                                c.attachToEntity(game.getCardState(attachedTo), sa, true);
+                            }
                         }
                         else if (c.isAura()) { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
@@ -1381,15 +1418,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", c);
                             Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                            c.attachToEntity(attachedTo, sa);
+                            if (sharedSource) {
+                                moveParams.put(AbilityKey.AttachTarget, attachedTo);
+                            } else {
+                                c.attachToEntity(attachedTo, sa);
+                            }
                         }
                         else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
-                    }
-
-                    if (addToCombat(c, sa, "Attacking", "Blocking")) {
-                        combatChanged = true;
                     }
 
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
@@ -1398,6 +1435,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         CardFactoryUtil.setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
+                    if (movedCard.isInPlay() && addToCombat(movedCard, sa, "Attacking", "Blocking")) {
+                        combatChanged = true;
+                    }
 
                     if (sa.hasParam("AttachAfter") && movedCard.isAttachment() && movedCard.isInPlay()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachAfter"), sa);
@@ -1443,7 +1483,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 else {
-                    if (destination == ZoneType.Hand && isDanDanSharedZone(game, originZone, ZoneType.Graveyard)) {
+                    if (destination == ZoneType.Hand && c.getOwners().size() > 1) {
                         movedCard = game.getAction().moveTo(player.getZone(ZoneType.Hand), c, sa, moveParams);
                     } else {
                         movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
@@ -1565,17 +1605,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         decider.getController().endTempShowCards();
     }
 
-    private boolean isDanDanSharedZone(Game game, Zone zone, ZoneType zoneType) {
-        if (!game.getRules().isDanDan() || zone == null || !zone.is(zoneType) || zone.getPlayer() == null) {
-            return false;
-        }
-        for (Player player : game.getRegisteredPlayers()) {
-            if (player != zone.getPlayer() && player.getZone(zoneType) == zone) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     private static class HiddenOriginChoices {
         boolean shuffleMandatory;
@@ -1641,7 +1670,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (destination == ZoneType.Library) {
                 movedCard = game.getAction().moveToLibrary(tgtHost, libPos, srcSA, params);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
-                    tgtHost.getOwner().shuffle(srcSA);
+                    GameActionUtil.getOwnerForEffect(tgtHost, srcSA.getActivatingPlayer()).shuffle(srcSA);
                 }
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "

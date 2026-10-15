@@ -205,7 +205,7 @@ public final class GameActionUtil {
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
                         if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.enteredThisTurn() ||
-                                !activator.equals(source.getOwner())) {
+                                !source.isOwnedBy(activator)) {
                             continue;
                         }
                         // skip this part for foretell by external source
@@ -226,7 +226,7 @@ public final class GameActionUtil {
                 }
 
                 // foretell by external source
-                if (source.isForetoldCostByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
+                if (source.isForetoldCostByEffect() && source.isInZone(ZoneType.Exile) && source.isOwnedBy(activator)
                         && source.isForetold() && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
@@ -238,7 +238,7 @@ public final class GameActionUtil {
                     alternatives.add(foretold);
                 }
 
-                if (activator.canCastSorcery() && source.isPlotted() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner()) && !source.enteredThisTurn()) {
+                if (activator.canCastSorcery() && source.isPlotted() && source.isInZone(ZoneType.Exile) && source.isOwnedBy(activator) && !source.enteredThisTurn()) {
                     final SpellAbility plotted = sa.copyWithNoManaCost(activator);
                     plotted.setAlternativeCost(AlternativeCost.Plotted);
                     plotted.getRestrictions().setZone(ZoneType.Exile);
@@ -904,6 +904,11 @@ public final class GameActionUtil {
         return sb.toString();
     }
 
+    /** Resolves a singular owner instruction, using the instructed player for joint ownership. */
+    public static Player getOwnerForEffect(Card card, Player instructedPlayer) {
+        return card.getOwners().size() == 1 || instructedPlayer == null ? card.getOwner() : instructedPlayer;
+    }
+
     public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest, SpellAbility sa) {
         if (list.size() <= 1 &&
                 (sa == null || !sa.getActivatingPlayer().getController().isFullControl(FullControlFlag.LayerTimestampOrder))) {
@@ -916,10 +921,13 @@ public final class GameActionUtil {
         for (Player p : players) {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
-                Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                Player actionPlayer = sa == null ? game.getPhaseHandler().getPlayerTurn() : sa.getActivatingPlayer();
+                Player decider = dest == ZoneType.Battlefield && c.getExplicitController() != null
+                        ? c.getExplicitController() : getOwnerForEffect(c, actionPlayer);
                 if (sa != null && sa.hasParam("GainControl")) {
                     // TODO this doesn't account for changes from e.g. Gather Specimens yet
-                    decider = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("GainControl"), sa).get(0);
+                    decider = sa.getParam("GainControl").equals("True") ? sa.getActivatingPlayer()
+                            : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("GainControl"), sa).get(0);
                 }
                 if (decider.equals(p)) {
                     subList.add(c);

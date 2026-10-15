@@ -12,6 +12,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
@@ -105,10 +106,12 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
                     for (Card c : extraChosen) {
                         final ZoneType origin = c.getZone().getZoneType();
-                        final PlayerZone zone = c.getOwner().getZone(chosenZone);
+                        final Player recipient = c.getOwners().size() > 1
+                                && (chosenZone == ZoneType.Hand || chosenZone == ZoneType.Battlefield) ? chooser : c.getOwner();
+                        final PlayerZone zone = recipient.getZone(chosenZone);
                         chosen.remove(c);
                         rest.remove(c);
-                        c = game.getAction().moveTo(zone, c, sa);
+                        c = game.getAction().moveTo(zone, c, sa, AbilityKey.mapFromPlayer(chooser));
                         if (!origin.equals(c.getZone().getZoneType())) {
                             table.put(origin, c.getZone().getZoneType(), c);
                         }
@@ -117,18 +120,26 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
                 for (Card c : chosen) {
                     final ZoneType origin = c.getZone().getZoneType();
-                    final PlayerZone zone = c.getOwner().getZone(destZone1);
+                    final Player recipient = c.getOwners().size() > 1
+                            && (destZone1 == ZoneType.Hand || destZone1 == ZoneType.Battlefield) ? chooser : c.getOwner();
+                    final PlayerZone zone = recipient.getZone(destZone1);
 
                     if (!sa.hasParam("ChangeLater")) {
                         if (zone.getZoneType().isDeck()) {
-                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
+                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.mapFromPlayer(chooser));
                         } else {
+                            Map<AbilityKey, Object> moveParams = AbilityKey.mapFromPlayer(chooser);
                             if (destZone1.equals(ZoneType.Battlefield)) {
+                                if (c.getOwners().size() > 1) {
+                                    moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
+                                    c = new CardCopyService(c).copyCard(false);
+                                    c.setController(recipient, game.getNextTimestamp());
+                                }
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
                                 }
                             }
-                            c = game.getAction().moveTo(zone, c, sa);
+                            c = game.getAction().moveTo(zone, c, sa, moveParams);
                         }
                         if (!origin.equals(c.getZone().getZoneType())) {
                             table.put(origin, c.getZone().getZoneType(), c);
@@ -164,7 +175,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     }
                     for (final Card c : afterOrder) {
                         final ZoneType origin = c.getZone().getZoneType();
-                        Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa, AbilityKey.newMap());
+                        Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa, AbilityKey.mapFromPlayer(chooser));
                         if (m != null && !origin.equals(m.getZone().getZoneType())) {
                             table.put(origin, m.getZone().getZoneType(), m);
                         }
@@ -173,8 +184,10 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     // just move them randomly
                     for (Card c : rest) {
                         final ZoneType origin = c.getZone().getZoneType();
-                        final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                        c = game.getAction().moveTo(toZone, c, sa);
+                        final Player recipient = c.getOwners().size() > 1
+                                && (destZone2 == ZoneType.Hand || destZone2 == ZoneType.Battlefield) ? chooser : c.getOwner();
+                        final PlayerZone toZone = recipient.getZone(destZone2);
+                        c = game.getAction().moveTo(toZone, c, sa, AbilityKey.mapFromPlayer(chooser));
                         if (!origin.equals(c.getZone().getZoneType())) {
                             table.put(origin, c.getZone().getZoneType(), c);
                         }

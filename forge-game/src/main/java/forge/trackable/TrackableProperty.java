@@ -20,8 +20,10 @@ public enum TrackableProperty {
 
     //Card
     Owner(TrackableTypes.PlayerViewType),
+    Owners(TrackableTypes.PlayerViewCollectionType),
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
+    ZonePlayers(TrackableTypes.PlayerViewCollectionType),
 
     GamePieceType(TrackableTypes.EnumType(GamePieceType.class)),
 

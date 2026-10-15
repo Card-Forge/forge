@@ -313,7 +313,8 @@ public class GameSnapshot {
 
         for(Card fromCard : getCardsToCopy(fromGame)) {
             Card newCard = findCardById(toGame, fromCard.getId());
-            Player toPlayer = findBy(toGame, fromCard.getController());
+            Player toPlayer = findBy(toGame, fromCard.getZone().getPlayer() == null
+                    ? fromCard.getController() : fromCard.getZone().getPlayer());
             Player toOwner = findBy(toGame, fromCard.getOwner());
             ZoneType fromType = fromCard.getZone().getZoneType();
 
@@ -334,11 +335,8 @@ public class GameSnapshot {
             }
 
             newCard.setOwner(toOwner);
-            if (fromType == ZoneType.Battlefield || fromType == ZoneType.Stack) {
-                newCard.setController(toPlayer, 0);
-            } else {
-                newCard.clearControllers();
-            }
+            newCard.setOwners(fromCard.getOwners().stream().map(p -> findBy(toGame, p)).toList());
+            newCard.setController(findBy(toGame, fromCard.getExplicitController()), 0);
 
             if (!fromType.isOrdered()) {
                 setCardInCopiedGame(toGame, toPlayer, fromCard, newCard, fromType, zonePosition);
@@ -450,6 +448,8 @@ public class GameSnapshot {
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         Card newCard = new CardCopyService(c, newGame).copyCard(false, newOwner);
         newCard.dangerouslySetGame(newGame);
+        newCard.setOwners(c.getOwners().stream().map(p -> findBy(newGame, p)).toList());
+        newCard.setController(findBy(newGame, c.getExplicitController()), 0);
         return newCard;
     }
 
@@ -588,7 +588,7 @@ public class GameSnapshot {
     }
 
     private Player findBy(Game toGame, Player fromPlayer) {
-        return toGame.getPlayer(fromPlayer.getId());
+        return fromPlayer == null ? null : toGame.getPlayer(fromPlayer.getId());
     }
 
     public GameObject find(GameObject o) {

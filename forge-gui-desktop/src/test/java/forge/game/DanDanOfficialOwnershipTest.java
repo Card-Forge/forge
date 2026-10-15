@@ -5,7 +5,11 @@ import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.ability.ApiType;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCopyService;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardProperty;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -13,6 +17,8 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.RegisteredPlayer;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.WrappedAbility;
@@ -27,11 +33,238 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNotSame;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 /** Official-card ownership lifecycle checks across Item 3 recipients and Item 4 zone transitions. */
 public class DanDanOfficialOwnershipTest extends AITest {
+    @Test
+    public void sharedLandPlayPermissionsPrepareIncomingWithoutChangingLiveSource() {
+        for (ZoneType origin : List.of(ZoneType.Library, ZoneType.Graveyard)) {
+            for (boolean prevent : List.of(true, false)) {
+                Game game = newGame(true);
+                Player first = game.getRegisteredPlayers().get(0);
+                Player recipient = game.getRegisteredPlayers().get(1);
+                game.getPhaseHandler().devModeSet(PhaseType.MAIN1, recipient);
+                Card land = addCardToZone("Island", first, origin);
+                Card permission = addCard(origin == ZoneType.Library ? "Courser of Kruphix" : "Crucible of Worlds", recipient);
+                Card opponentsBurgeoning = addCard("Burgeoning", first);
+                Card ownBurgeoning = addCard("Burgeoning", recipient);
+                game.getTriggerHandler().registerActiveTrigger(opponentsBurgeoning, false);
+                game.getTriggerHandler().registerActiveTrigger(ownBurgeoning, false);
+                boolean[] inspected = {false};
+                recipient.dangerouslySetController(new PlayerControllerAi(game, recipient,
+                        new LobbyPlayerAi(recipient.getName(), null)) {
+                    @Override
+                    public boolean confirmReplacementEffect(ReplacementEffect replacement, SpellAbility effect,
+                            GameEntity affected, String question) {
+                        assertSame(game.getCardState(land), land);
+                        assertTrue(first.getCardsIn(origin).contains(land));
+                        assertEquals(land.getOwners(), game.getZoneParticipants(land.getZone()));
+                        assertNull(land.getExplicitController(), "the held land play leaves source control unchanged");
+                        assertFalse(land.isFaceDown());
+                        assertFalse(land.mayPlay(recipient).isEmpty(), "the live source retains its real play permission");
+                        Card incoming = (Card) affected;
+                        assertNotSame(incoming, land);
+                        assertSame(incoming.getOwner(), recipient);
+                        assertSame(incoming.getExplicitController(), recipient);
+                        assertFalse(incoming.mayPlay(recipient).isEmpty(), "the incoming candidate retains the granted play option");
+                        Card sourceLki = (Card) effect.getReplacingObject(AbilityKey.CardLKI);
+                        assertTrue(sourceLki.isOwnedBy(first) && sourceLki.isOwnedBy(recipient));
+                        assertNull(sourceLki.getExplicitController(), "entry replacements receive the original source LKI");
+                        inspected[0] = true;
+                        return prevent;
+                    }
+                });
+                permission.setSVar("HoldEntry", "DB$ Cleanup");
+                permission.addReplacementEffect(ReplacementHandler.parseReplacement(
+                        "Event$ Moved | ActiveZones$ Battlefield | Origin$ " + origin
+                                + " | Destination$ Battlefield | ValidCard$ Land.YouOwn | Optional$ True | Prevent$ True"
+                                + " | ReplaceWith$ HoldEntry"
+                                + " | Description$ Hold this land entry.", permission, false));
+                game.getAction().checkStaticAbilities();
+                SpellAbility play = land.getAllPossibleAbilities(recipient, true).stream()
+                        .filter(SpellAbility::isLandAbility).filter(sa -> sa.getMayPlay() != null).findFirst().orElseThrow();
+                assertTrue(play.canPlay(), "the real permanent grants B permission to play the shared land");
+                play.resolve();
+                game.getTriggerHandler().runWaitingTriggers();
+                assertTrue(inspected[0], "the real play reached the held entry replacement");
+                assertTrue(game.getStack().hasSourceOnStack(opponentsBurgeoning, SpellAbility::isTrigger),
+                        "A's real Burgeoning sees B play a land");
+                assertFalse(game.getStack().hasSourceOnStack(ownBurgeoning, SpellAbility::isTrigger),
+                        "B's real Burgeoning does not treat B's own land play as an opponent's");
+                assertNull(land.getExplicitController());
+                assertTrue(land.isOwnedBy(first) && land.isOwnedBy(recipient));
+                Card result = game.getCardState(land);
+                assertSame(result.getZone(), recipient.getZone(prevent ? origin : ZoneType.Battlefield));
+                if (!prevent) {
+                    assertSame(result.getOwner(), recipient);
+                    assertSame(result.getExplicitController(), recipient);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void sharedManifestAndCloakPrepareFaceDownIncomingWithoutChangingLiveSource() {
+        for (boolean cloak : List.of(false, true)) {
+            for (boolean prevent : List.of(true, false)) {
+                Game game = newGame(true);
+                Player first = game.getRegisteredPlayers().get(0);
+                Player recipient = game.getRegisteredPlayers().get(1);
+                Card selected = addCardToZone(cloak ? "Think Twice" : "Mulldrifter", first, ZoneType.Library);
+                Card gate = addCardToZone("Veteran Ghoulcaller", recipient, ZoneType.Command);
+                boolean[] inspected = {false};
+                recipient.dangerouslySetController(new PlayerControllerAi(game, recipient,
+                        new LobbyPlayerAi(recipient.getName(), null)) {
+                    @Override
+                    public boolean confirmReplacementEffect(ReplacementEffect replacement, SpellAbility effect,
+                            GameEntity affected, String question) {
+                        assertSame(game.getCardState(selected), selected);
+                        assertTrue(first.getCardsIn(ZoneType.Library).contains(selected));
+                        assertTrue(selected.isOwnedBy(first) && selected.isOwnedBy(recipient));
+                        assertNull(selected.getExplicitController());
+                        assertFalse(selected.isFaceDown(), "a held face-down entry preserves the face-up library source");
+                        assertFalse(selected.isManifested());
+                        assertFalse(selected.isCloaked());
+                        Card incoming = (Card) affected;
+                        assertNotSame(incoming, selected);
+                        assertTrue(incoming.isFaceDown());
+                        assertTrue(incoming.isCreature());
+                        assertEquals(incoming.getNetPower(), 2);
+                        assertEquals(incoming.getNetToughness(), 2);
+                        assertEquals(incoming.isManifested(), !cloak);
+                        assertEquals(incoming.isCloaked(), cloak);
+                        assertSame(incoming.getOwner(), recipient);
+                        assertSame(incoming.getExplicitController(), recipient);
+                        Card sourceLki = (Card) effect.getReplacingObject(AbilityKey.CardLKI);
+                        assertTrue(sourceLki.isOwnedBy(first) && sourceLki.isOwnedBy(recipient));
+                        assertFalse(sourceLki.isFaceDown());
+                        assertNull(sourceLki.getExplicitController());
+                        if (cloak) assertTrue(incoming.hasKeyword("Ward:2"));
+                        inspected[0] = true;
+                        return prevent;
+                    }
+                });
+                gate.setSVar("HoldEntry", "DB$ Cleanup");
+                gate.addReplacementEffect(ReplacementHandler.parseReplacement(
+                        "Event$ Moved | ActiveZones$ Command | Origin$ Library | Destination$ Battlefield"
+                                + " | ValidCard$ Card.YouOwn | Optional$ True | Prevent$ True"
+                                + " | ReplaceWith$ HoldEntry"
+                                + " | Description$ Hold this face-down entry.", gate, false));
+                if (cloak) {
+                    Card coat = addCard("Cryptic Coat", recipient);
+                    SpellAbility ability = coat.getTriggers().get(0).ensureAbility();
+                    ability.setActivatingPlayer(recipient);
+                    AbilityUtils.resolve(ability);
+                } else {
+                    Card summons = addCardToZone("Soul Summons", recipient, ZoneType.Hand);
+                    resolveStacked(game, summons.getSpells().get(0), recipient);
+                }
+                assertTrue(inspected[0], "the real manifest/cloak script reached the held replacement; cloak=" + cloak
+                        + ", prevent=" + prevent + ", actual=" + game.getCardState(selected).getZone()
+                        + ", faceDown=" + game.getCardState(selected).isFaceDown());
+                assertFalse(selected.isFaceDown());
+                assertFalse(selected.isManifested());
+                assertFalse(selected.isCloaked());
+                assertNull(selected.getExplicitController());
+                Card result = game.getCardState(selected);
+                assertSame(result.getZone(), recipient.getZone(prevent ? ZoneType.Library : ZoneType.Battlefield));
+                if (!prevent) {
+                    assertTrue(result.isFaceDown());
+                    assertEquals(result.isManifested(), !cloak);
+                    assertEquals(result.isCloaked(), cloak);
+                    if (cloak) assertTrue(result.hasKeyword("Ward:2"));
+                    assertFalse(game.getStack().hasSimultaneousStackEntries(), "face-down Mulldrifter creates no draw trigger");
+                }
+            }
+        }
+    }
+
+    @Test
+    public void eitherSharedGraveyardOwnerCanEnumerateAndPlayThinkTwiceFlashback() {
+        Game game = newGame(true);
+        Player first = game.getRegisteredPlayers().get(0);
+        Player second = game.getRegisteredPlayers().get(1);
+        Card thinkTwice = addCardToZone("Think Twice", first, ZoneType.Graveyard);
+        thinkTwice.setOwners(List.of(first, second));
+
+        for (Player player : List.of(first, second)) {
+            game.getPhaseHandler().devModeSet(PhaseType.MAIN1, player);
+            boolean offered = false;
+            for (Card card : player.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(player)) {
+                offered |= card == thinkTwice;
+            }
+            assertTrue(offered, player + " can select shared Think Twice for flashback");
+            SpellAbility flashback = thinkTwice.getAllPossibleAbilities(player, false).stream()
+                    .filter(SpellAbility::isFlashback).findFirst().orElseThrow();
+            assertTrue(flashback.canPlay(true), player + " can actually play the generated flashback ability");
+        }
+
+        Game ordinary = newGame(false);
+        Player owner = ordinary.getRegisteredPlayers().get(0);
+        Player opponent = ordinary.getRegisteredPlayers().get(1);
+        Card privateThinkTwice = addCardToZone("Think Twice", owner, ZoneType.Graveyard);
+        for (Player player : List.of(owner, opponent)) {
+            ordinary.getPhaseHandler().devModeSet(PhaseType.MAIN1, player);
+            SpellAbility flashback = GameActionUtil.getAlternativeCosts(privateThinkTwice.getSpells().get(0), player, false).stream()
+                    .filter(SpellAbility::isFlashback).findFirst().orElseThrow();
+            assertEquals(flashback.canPlay(true), player == owner,
+                    "ordinary flashback remains restricted to its sole owner");
+        }
+        Card stolenIsland = addCard("Island", owner);
+        stolenIsland.setController(opponent, ordinary.getNextTimestamp());
+        SpellAbility mana = stolenIsland.getManaAbilities().get(0);
+        mana.setActivatingPlayer(owner);
+        assertFalse(mana.canPlay(true), "the owner cannot activate an Island controlled by the opponent");
+        mana.setActivatingPlayer(opponent);
+        assertTrue(mana.canPlay(true), "the actual controller can activate the stolen Island");
+    }
+
+    @Test
+    public void ownerPropertiesUseMembershipAndControlPropertiesKeepTheirSourceSnapshot() {
+        Game game = newGame(true);
+        Player first = game.getRegisteredPlayers().get(0);
+        Player second = game.getRegisteredPlayers().get(1);
+        Card shared = addCardToZone("Think Twice", first, ZoneType.Exile);
+        shared.setOwners(List.of(first, second));
+        Card source = addCardToZone("Thought Scour", first, ZoneType.Hand);
+        SpellAbility ability = source.getSpells().get(0);
+        ability.setActivatingPlayer(first);
+        ability.getTargets().add(second);
+        source.addRemembered(second);
+        for (Player player : List.of(first, second)) {
+            assertTrue(CardPredicates.isOwner(player).test(shared));
+            assertTrue(CardProperty.cardHasProperty(shared, "YouOwn", player, source, ability));
+            assertFalse(CardProperty.cardHasProperty(shared, "YouDontOwn", player, source, ability));
+            assertTrue(CardProperty.cardHasProperty(shared, "OppOwn", player, source, ability));
+            assertTrue(CardProperty.cardHasProperty(shared, "YouCtrl", player, source, ability));
+            assertFalse(CardProperty.cardHasProperty(shared, "YouDontCtrl", player, source, ability));
+            assertTrue(CardProperty.cardHasProperty(shared, "OppCtrl", player, source, ability));
+            assertTrue(CardProperty.cardHasProperty(shared, "ControlledBy You", player, source, ability));
+        }
+        assertTrue(CardProperty.cardHasProperty(shared, "TargetedPlayerOwn", first, source, ability));
+        assertTrue(CardProperty.cardHasProperty(shared, "RememberedPlayerOwn", first, source, ability));
+        shared.setController(first, game.getNextTimestamp());
+        Card snapshot = CardCopyService.getLKICopy(shared);
+        shared.setOwner(second);
+        shared.setController(second, game.getNextTimestamp());
+        game.addChangeZoneLKIInfo(snapshot);
+        assertTrue(CardProperty.cardHasProperty(shared, "YouOwn", second, source, ability),
+                "ownership properties use the current object");
+        assertFalse(CardProperty.cardHasProperty(shared, "YouOwn", first, source, ability));
+        assertTrue(CardProperty.cardHasProperty(shared, "YouCtrl", first, source, ability),
+                "control properties still use the registered source snapshot");
+        assertFalse(CardProperty.cardHasProperty(shared, "YouCtrl", second, source, ability));
+        assertTrue(CardProperty.cardHasProperty(shared, "OwnerDoesntControl", first, source, ability),
+                "the current sole owner differs from the controller in the source snapshot");
+        assertTrue(CardProperty.cardHasProperty(snapshot, "YouOwn", first, source, ability));
+        assertTrue(CardProperty.cardHasProperty(snapshot, "YouOwn", second, source, ability));
+        assertTrue(CardPredicates.ownerLives().test(snapshot));
+    }
+
     @Test
     public void fengrafAcquisitionSurvivesMetamorphoseAndUnsubstantiate() {
         Game game = newGame(true);

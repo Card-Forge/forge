@@ -6,12 +6,14 @@ package forge.game.card;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameAction;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
+import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -19,10 +21,12 @@ import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 
 import java.util.Map;
+import java.util.HashMap;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist
     private Table<ZoneType, ZoneType, CardCollection> dataMap = HashBasedTable.create();
+    private final Map<Card, ImmutableSet<Player>> destinationPlayers = new HashMap<>();
 
     private CardCollection createdTokens = new CardCollection();
     private PlayerCollection firstTimeTokenCreators = new PlayerCollection();
@@ -41,6 +45,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public CardZoneTable(CardZoneTable cardZoneTable) {
         this.putAll(cardZoneTable);
+        destinationPlayers.putAll(cardZoneTable.destinationPlayers);
         lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
         lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
     }
@@ -75,6 +80,11 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
      * special put logic, add Card to Card Collection
      */
     public CardCollection put(ZoneType rowKey, ZoneType columnKey, Card value) {
+        return put(rowKey, columnKey, value, value.getGame().getZoneParticipants(value.getZone()));
+    }
+
+    public CardCollection put(ZoneType rowKey, ZoneType columnKey, Card value, Iterable<Player> participants) {
+        destinationPlayers.put(value, ImmutableSet.copyOf(participants));
         if (rowKey == null) {
             rowKey = ZoneType.None;
         }
@@ -90,6 +100,16 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             delegate().put(rowKey, columnKey, old);
         }
         return old;
+    }
+
+    public ImmutableSet<Player> getDestinationPlayers(Card card) {
+        return destinationPlayers.getOrDefault(card, ImmutableSet.of());
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        destinationPlayers.clear();
     }
 
     @Override
@@ -162,7 +182,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                     if (z == ZoneType.Battlefield) {
                         lkiLookup = lastStateBattlefield;
                     }
-                    if (z == ZoneType.Graveyard && destination == null) {
+                    if (z == ZoneType.Graveyard && (destination == null || !Iterables.contains(destination, ZoneType.Battlefield))) {
                         lkiLookup = lastStateGraveyard;
                     }
                     if (destination != null) {

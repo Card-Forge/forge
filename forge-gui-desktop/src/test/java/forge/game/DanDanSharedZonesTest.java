@@ -8,6 +8,7 @@ import forge.deck.Deck;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -22,10 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNotSame;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
@@ -160,10 +163,26 @@ public class DanDanSharedZonesTest extends AITest {
         assertEquals(controlled.getController(), first);
         assertSame(controlled.getZone(), first.getZone(ZoneType.Battlefield));
 
+        Card exiled = createCard("Think Twice", first);
+        exiled.setOwners(List.of(first, second));
+        second.getZone(ZoneType.Exile).add(exiled);
+        Card detached = new CardCopyService(exiled).copyCard(false);
+        Card lki = new CardCopyService(exiled).getLKICopy();
+        assertEquals(detached.getOwners(), Set.of(first, second));
+        assertNull(detached.getExplicitController());
+        assertEquals(lki.getOwners(), Set.of(first, second));
+        assertNull(lki.getExplicitController());
+
         Game copied = new GameSnapshot(game).makeCopy();
         Player copiedFirst = copied.getRegisteredPlayers().get(0);
         Player copiedSecond = copied.getRegisteredPlayers().get(1);
         Card copiedAcquired = copied.findById(acquired.getId());
+        assertEquals(copied.findById(libraryTop.getId()).getOwners(), Set.of(copiedFirst, copiedSecond));
+        assertEquals(copied.findById(grave.getId()).getOwners(), Set.of(copiedFirst, copiedSecond));
+        Card copiedExiled = copied.findById(exiled.getId());
+        assertEquals(copiedExiled.getOwners(), Set.of(copiedFirst, copiedSecond));
+        assertNull(copiedExiled.getExplicitController());
+        assertSame(copiedExiled.getZone(), copiedSecond.getZone(ZoneType.Exile));
 
         assertSame(copiedFirst.getZone(ZoneType.Library), copiedSecond.getZone(ZoneType.Library));
         assertSame(copiedFirst.getZone(ZoneType.Graveyard), copiedSecond.getZone(ZoneType.Graveyard));
@@ -221,6 +240,10 @@ public class DanDanSharedZonesTest extends AITest {
         second.getZone(ZoneType.Hand).add(acquired);
         assertTrue(second.getZone(ZoneType.Hand).getCards().contains(acquired));
 
+        Card exiled = createCard("Think Twice", first);
+        exiled.setOwners(List.of(first, second));
+        second.getZone(ZoneType.Exile).add(exiled);
+
         Game copied = new GameCopier(game).makeCopy();
         Player copiedFirst = copied.getRegisteredPlayers().get(0);
         Player copiedSecond = copied.getRegisteredPlayers().get(1);
@@ -229,8 +252,13 @@ public class DanDanSharedZonesTest extends AITest {
         assertSame(copiedFirst.getZone(ZoneType.Library), copiedSecond.getZone(ZoneType.Library));
         assertEquals(ids(copied.getCardsIn(ZoneType.Library)), List.of(firstCard.getId(), secondCard.getId()));
         assertEquals(copied.findById(acquired.getId()).getOwner(), copiedSecond);
+        assertEquals(copied.findById(firstCard.getId()).getOwners(), Set.of(copiedFirst, copiedSecond));
+        Card copiedExiled = copied.findById(exiled.getId());
+        assertEquals(copiedExiled.getOwners(), Set.of(copiedFirst, copiedSecond));
+        assertNull(copiedExiled.getExplicitController());
+        assertSame(copiedExiled.getZone(), copiedSecond.getZone(ZoneType.Exile));
         assertEquals(visitCounts(copied), Map.of(firstCard.getId(), 1, secondCard.getId(), 1,
-                acquired.getId(), 1));
+                acquired.getId(), 1, exiled.getId(), 1));
     }
 
     @Test
@@ -252,6 +280,10 @@ public class DanDanSharedZonesTest extends AITest {
         second.getZone(ZoneType.Hand).add(acquired);
         first.getZone(ZoneType.Battlefield).add(controlled);
 
+        Card exiled = createCard("Think Twice", first);
+        exiled.setOwners(List.of(first, second));
+        second.getZone(ZoneType.Exile).add(exiled);
+
         GameSnapshot snapshot = new GameSnapshot(game);
         snapshot.makeCopy();
         game.getAction().moveTo(second.getZone(ZoneType.Hand), next, null);
@@ -260,6 +292,7 @@ public class DanDanSharedZonesTest extends AITest {
         controlled.setOwner(first);
         controlled.setController(second, game.getNextTimestamp());
 
+        exiled.setOwner(second);
         snapshot.restoreGameState(game);
 
         assertSame(first.getZone(ZoneType.Library), second.getZone(ZoneType.Library));
@@ -271,6 +304,10 @@ public class DanDanSharedZonesTest extends AITest {
         assertEquals(game.findById(controlled.getId()).getOwner(), second);
         assertEquals(game.findById(controlled.getId()).getController(), first);
         assertEquals(visitCounts(game).get(next.getId()), Integer.valueOf(1));
+        assertEquals(game.findById(exiled.getId()).getOwners(), Set.of(first, second));
+        assertSame(game.findById(exiled.getId()).getOwner(), first);
+        assertNull(game.findById(exiled.getId()).getExplicitController());
+        assertSame(game.findById(exiled.getId()).getZone(), second.getZone(ZoneType.Exile));
     }
 
     @Test

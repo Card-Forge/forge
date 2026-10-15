@@ -651,10 +651,10 @@ public class CardDetailUtil {
             }
         }
 
-        //show owner if being controlled by a different player
-        if (card.getOwner() != card.getController()) {
-            area.append("\n\n");
-            area.append("Owner: ").append(card.getOwner().toString());
+        if (card.getOwners().size() > 1) {
+            area.append("\n\nOwners: ").append(StringUtils.join(card.getOwners(), ", "));
+        } else if (card.getOwner() != null && card.getOwner() != card.getController()) {
+            area.append("\n\nOwner: ").append(card.getOwner());
         }
 
         if (card.hasAlternateState() && state.getState() == CardStateName.Original) {

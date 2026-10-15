@@ -44,13 +44,19 @@ public class PlayerZone extends Zone {
     }
 
     private final class OwnCardsActivationFilter implements Predicate<Card> {
+        private final Player who;
+
+        private OwnCardsActivationFilter(Player who) {
+            this.who = who;
+        }
+
         @Override
         public boolean test(final Card c) {
-            if (c.mayPlayerLook(c.getController())) {
+            if (c.mayPlayerLook(who)) {
                 return true;
             }
 
-            if (!c.mayPlay(c.getController()).isEmpty()) {
+            if (!c.mayPlay(who).isEmpty()) {
                 return true;
             }
 
@@ -111,7 +117,11 @@ public class PlayerZone extends Zone {
             cl = Iterables.limit(cl, 1);
         }
 
-        final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : alienCardsActivationFilter(who);
+        final Predicate<Card> ownFilter = new OwnCardsActivationFilter(who);
+        final Predicate<Card> alienFilter = alienCardsActivationFilter(who);
+        final Predicate<Card> filterPredicate = c -> (checkingForOwner
+                || (!is(ZoneType.Battlefield) && c.isOwnedBy(who)))
+                ? ownFilter.test(c) : alienFilter.test(c);
         return CardLists.filter(cl, filterPredicate);
     }
 }

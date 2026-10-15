@@ -438,9 +438,28 @@ public class TriggerHandler {
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
         runSingleTrigger(regtrig, runParams, null);
     }
+
+    static Player getTriggerController(final Trigger trigger, final Map<AbilityKey, Object> runParams) {
+        Card host = trigger.getHostCard();
+        // Battlefield sources (including death LKI) retain their actual controller.
+        if (host.getOwners().size() < 2 || host.getExplicitController() != null) {
+            return host.getController();
+        }
+        if (runParams.get(AbilityKey.Affected) instanceof Player affected) {
+            return affected;
+        }
+        if (runParams.get(AbilityKey.Player) instanceof Player player) {
+            return player;
+        }
+        if (runParams.get(AbilityKey.Cause) instanceof SpellAbility cause && cause.getActivatingPlayer() != null) {
+            return cause.getActivatingPlayer();
+        }
+        return host.getGame().getPhaseHandler().getPlayerTurn();
+    }
+
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
         if (controller == null) {
-            controller = regtrig.getHostCard().getController();
+            controller = getTriggerController(regtrig, runParams);
         }
         // If the runParams contains MergedCards, it is called from GameAction.changeZone()
         if (runParams.get(AbilityKey.MergedCards) != null) {

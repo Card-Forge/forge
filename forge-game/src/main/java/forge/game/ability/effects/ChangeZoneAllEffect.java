@@ -116,7 +116,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
 
-        for (final Card c : cards) {
+        for (Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
             // Fizzle spells so that they are removed from stack (e.g. Summary Dismissal)
@@ -132,6 +132,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
             if (destination == ZoneType.Battlefield) {
+                if (c.getOwners().size() > 1) {
+                    moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
+                    c = new CardCopyService(c).copyCard(false);
+                    c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                }
                 moveParams.put(AbilityKey.SimultaneousETB, cards);
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
@@ -156,7 +161,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (destination == ZoneType.Exile && !c.canExiledBy(sa, true)) {
                     continue;
                 }
-                movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
+                if ((destination == ZoneType.Hand || destination == ZoneType.Battlefield) && c.getOwners().size() > 1) {
+                    movedCard = game.getAction().moveTo(sa.getActivatingPlayer().getZone(destination), c, sa, moveParams);
+                } else {
+                    movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
+                }
                 if (destination == ZoneType.Exile) {
                     handleExiledWith(movedCard, sa);
                 }

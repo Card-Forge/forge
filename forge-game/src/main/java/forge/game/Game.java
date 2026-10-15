@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -458,6 +459,18 @@ public class Game {
      */
     public final PlayerCollection getRegisteredPlayers() {
         return allPlayers;
+    }
+
+    public final ImmutableSet<Player> getZoneParticipants(final Zone zone) {
+        ImmutableSet.Builder<Player> participants = ImmutableSet.builder();
+        if (zone != null) {
+            for (Player player : getRegisteredPlayers()) {
+                if (player.getZone(zone.getZoneType()) == zone) {
+                    participants.add(player);
+                }
+            }
+        }
+        return participants.build();
     }
 
     public final Untap getUntap() {
