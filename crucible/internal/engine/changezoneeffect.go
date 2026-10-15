@@ -290,7 +290,8 @@ func changeZoneEnter(g *Game, a *Ability, dest ZoneType) ([]enterCounters, error
 		if kind == "" || strings.EqualFold(kind, "Any") {
 			return nil, fmt.Errorf("engine: ChangeZone: WithCountersType$ %q not resolvable yet", raw)
 		}
-		out = append(out, enterCounters{kind: CounterType(strings.ToUpper(kind)), n: n})
+		// The activator places them (ChangeZoneEffect.java:617, table.put(activator, ...)).
+		out = append(out, enterCounters{kind: CounterType(strings.ToUpper(kind)), n: n, placer: a.Controller})
 	}
 	return out, nil
 }
@@ -382,8 +383,12 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 			return fmt.Errorf("engine: ChangeZone: %w", err)
 		}
 	}
+	_, targeted := a.Params.Param("ValidTgts")
 	for _, id := range cards {
-		if c := g.Card(id); c.Zone == Stack && zoneIn(Stack, origin) && id != a.Source && (a.replacing == nil || a.replacing.card != id) {
+		// A targeted spell is removed from the stack before it moves
+		// (ChangeZoneEffect.java:577-579), below. A Defined$ one other than
+		// the host or the replaced card is not audited yet.
+		if c := g.Card(id); c.Zone == Stack && zoneIn(Stack, origin) && !targeted && id != a.Source && (a.replacing == nil || a.replacing.card != id) {
 			return fmt.Errorf("engine: ChangeZone: Origin$ Stack for a spell other than its own host not resolvable yet")
 		}
 		if c := g.Card(id); c.Zone == Command && zoneIn(Command, origin) && !c.IsEffect {
@@ -415,6 +420,12 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 			continue
 		}
 		from := c.Zone
+		if from == Stack && targeted {
+			// MagicStack.remove(Card) (MagicStack.java:799-805): the spell
+			// leaves the stack, then its card moves -- a copy ceasing to
+			// exist and a flashback card going to exile inside Move.
+			g.removeSpellFromStack(id)
+		}
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 		if dest == Exile {
 			g.markExiledWith(id, a.Source)

@@ -95,7 +95,7 @@ func TestTokenAnimateTriggerPackFailsClosed(t *testing.T) {
 	t.Parallel()
 
 	for _, line := range []string{
-		"DB$ Token | TokenScript$ w_1_1_soldier | TokenAttacking$ True",
+		"DB$ Token | TokenScript$ w_1_1_soldier | TokenBlocking$ TriggeredAttacker",
 		"DB$ Token | TokenScript$ w_1_1_soldier | PumpKeywords$ Haste | PumpDuration$ UntilYourNextTurn",
 		"DB$ Token | TokenScript$ w_1_1_soldier | TokenOwner$ TriggeredPlayer",
 		"DB$ Token",

@@ -1,0 +1,18 @@
+# Unsubstantiate: "Return target spell or creature to its owner's hand"
+# (Origin$ Battlefield,Stack). AbilityFactory.adjustChangeZoneTarget makes the
+# Origin$ zones the target zones, so the Grizzly Bears spell on the stack is a
+# legal target as its card (Card.inZoneStack). ChangeZoneEffect.java:577-579
+# removes the spell from the stack (MagicStack.remove(Card)) and moves its card
+# to its owner's hand: the Bears never resolve, and the stack ends empty.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+queue paygeneric G
+castspell human 1
+tapformana ai 7 U
+tapformana ai 8 U
+queue paygeneric U
+queue targets 1
+castspell ai 9
+resolvestack

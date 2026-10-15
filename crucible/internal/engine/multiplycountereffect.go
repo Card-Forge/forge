@@ -26,7 +26,7 @@
 
 package engine
 
-//enginelint:allow id card game ability defined condition control parts event
+//enginelint:allow id card game ability defined condition control parts event replacement
 
 import (
 	"fmt"
@@ -88,21 +88,33 @@ func (multiplyCounterEffect) Resolve(g *Game, a *Ability, controller PlayerContr
 	for _, cid := range cards {
 		c := g.Card(cid)
 		if allKinds {
-			for _, kind := range c.Counters.Kinds() {
-				n := c.Counters.Count(kind) * factor
-				if n <= 0 {
-					continue
-				}
-				// The activator places (CountersMultiplyEffect.java:43, :65).
-				g.addCardCounters(controller, a.Controller, a.Source, cid, kind, n)
+			// Every amount is read before any is placed: Java fills one
+			// counter table and places it at the end (CountersMultiplyEffect.
+			// java:63-69).
+			kinds := c.Counters.Kinds()
+			amounts := make([]int, len(kinds))
+			for i, kind := range kinds {
+				amounts[i] = c.Counters.Count(kind) * factor
+			}
+			for i, kind := range kinds {
+				g.multiplyPlace(controller, a, cid, kind, amounts[i])
 			}
 			continue
 		}
-		n := c.Counters.Count(counterType) * factor
-		if n <= 0 {
-			continue
-		}
-		g.addCardCounters(controller, a.Controller, a.Source, cid, counterType, n)
+		g.multiplyPlace(controller, a, cid, counterType, c.Counters.Count(counterType)*factor)
 	}
 	return nil
+}
+
+// multiplyPlace puts n more ct counters on cid for a: the activator places
+// them (CountersMultiplyEffect.java:43, :62-65), and the counter table's
+// replaceCounterEffect (:69) runs the AddCounter replacements (Hardened Scales)
+// and Mode$ CantPutCounter first.
+func (g *Game) multiplyPlace(controller PlayerController, a *Ability, cid CardID, ct CounterType, n int) {
+	if n <= 0 {
+		return
+	}
+	if n = g.countersReplaced(controller, a.Controller, CardEntity(cid), ct, n); n > 0 {
+		g.addCardCounters(controller, a.Controller, a.Source, cid, ct, n)
+	}
 }

@@ -54,7 +54,7 @@ func (g *Game) createToken(controller PlayerController, spec tokenSpec) CardID {
 	// table's replaceCounterEffect).
 	var enter []enterCounters
 	if spec.P1P1 > 0 {
-		enter = append(enter, enterCounters{kind: P1P1, n: spec.P1P1})
+		enter = append(enter, enterCounters{kind: P1P1, n: spec.P1P1, placer: spec.Owner})
 	}
 	g.moveByEffect(controller, id, Battlefield, 0, NoPlayer, spec.Tapped, enter...)
 	return id

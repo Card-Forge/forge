@@ -1,0 +1,10 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Mountain|Id:3|Tapped;Swamp|Id:4|Tapped
+humanmanapool=B
+humanhand=Raise Dead
+humangraveyard=Lightning Bolt;Control Magic
+ailife=20
+aigraveyard=Grizzly Bears

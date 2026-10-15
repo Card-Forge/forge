@@ -132,20 +132,14 @@ func (g *Game) modeHasLegalTargets(mode *Ability) bool {
 	if !ok {
 		minStr = "1"
 	}
-	targetMin, ok := resolveNamedAmount(g, mode.Amounts, g.Card(mode.Source), minStr)
-	if !ok || targetMin == 0 {
-		return ok
+	if targetMin, ok := resolveNamedAmount(g, mode.Amounts, g.Card(mode.Source), minStr); ok && targetMin == 0 {
+		return true
 	}
-	if _, stack := mode.Params.Param("TargetType"); stack || mode.API == APICopySpellAbility {
-		// A mode targeting the stack (Insidious Will's ChangeTargets and
-		// Counter modes) is judged by the stack scan casting itself uses;
-		// the battlefield scan below would offer it over an empty stack and
-		// the Charm would then fail to be put on the stack at all. A
-		// targetChoice.err keeps the mode, so the error surfaces when it
-		// resolves.
-		_, _, ok := g.targetChoiceFor(mode)
-		return ok
-	}
+	// The scan casting itself uses (targetChoiceFor): a mode targeting the
+	// stack (Insidious Will's ChangeTargets and Counter modes) is judged over
+	// the stack, a ChangeZone mode over its Origin$ zones. A targetChoice.err
+	// (an unresolvable TargetMin$ among them) keeps the mode, so the error
+	// surfaces when it resolves instead of the mode silently vanishing.
 	_, _, ok = g.targetChoiceFor(mode)
 	return ok
 }

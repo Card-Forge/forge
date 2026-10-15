@@ -286,6 +286,11 @@ type chainTarget struct {
 	// Err is why the link's targets or division could not be asked for
 	// (Ability.targetsErr's twin): the link fails with it when it resolves.
 	Err error
+	// Targeter is who chose the link's targets (Ability.targeter's twin):
+	// Java stores the targeting player on each link as setupTargets walks
+	// the chain (SpellAbility.java:2158-2161) and reads it at fizzle time
+	// for TargetingPlayerControls$ (:1474-1476). NoPlayer when not chosen.
+	Targeter PlayerID
 }
 
 // dividedShare is one target's part of a DividedAsYouChoose$ amount.
@@ -430,6 +435,11 @@ type triggeredObjects struct {
 	// own reading of a live object.
 	cardLKIController PlayerID
 	cardLKIOwner      PlayerID
+	// exploited is AbilityKey.Exploited of Mode$ Exploited: the creature the
+	// exploiter (card) sacrificed, read from its last-known information
+	// (SacrificeEffect.java:171-173). Read by the TriggeredExploited amount
+	// head. NoCard when unset.
+	exploited CardID
 	// activator is AbilityKey.Activator for Mode$ TapsForMana: the player
 	// who activated the mana ability, read by Defined$ TriggeredActivator.
 	// NoPlayer when unset.

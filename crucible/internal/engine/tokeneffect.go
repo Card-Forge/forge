@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow ability action animate card condition control defined effecthelpers game id parts player token valid zone
+//enginelint:allow ability action animate card condition control defined effecthelpers game id parts player token valid zone changecombatantseffect
 
 import (
 	"fmt"
@@ -10,15 +10,15 @@ import (
 )
 
 // tokenUnresolvedParams are TokenEffect/TokenEffectBase params this port
-// does not model: putting the token into combat (TokenAttacking$/
-// TokenBlocking$), a counter
+// does not model: putting the token into combat as a blocker
+// (TokenBlocking$; TokenAttacking$ resolves, addToCombatAttacking), a counter
 // table on entry (WithCountersType$), copied triggers (AddTriggersFrom$),
 // chosen-type/-color prototypes (TokenTypes$/TokenColors$), what the token
 // remembers (TokenRemembered$/CleanupForEach$/RememberOriginalTokens$), a
 // shared zone table (ChangeZoneTable$) and the end-of-turn delayed
 // sacrifice/exile (AtEOT$/AtEOTTrig$).
 var tokenUnresolvedParams = [...]string{
-	"TokenAttacking", "TokenBlocking", "WithCountersType",
+	"TokenBlocking", "WithCountersType",
 	"WithCountersAmount", "AddTriggersFrom", "TokenTypes", "TokenColors", "TokenRemembered",
 	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable", "AtEOT", "AtEOTTrig",
 	"Condition"}
@@ -109,6 +109,11 @@ func (tokenEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 			g.addAnimate(animateRecord{
 				Card: id, Timestamp: g.timestamp, Permanent: pump.permanent, AddKeywords: pump.keywords,
 			})
+		}
+		// TokenEffectBase.java:188: tapped and attacking (CR 506.3b), each
+		// token as it is made.
+		if err := g.addToCombatAttacking(controller, a, id, "TokenAttacking"); err != nil {
+			return fmt.Errorf("engine: Token: %w", err)
 		}
 		if hasParam(a, "RememberTokens") {
 			source.Memory.Remember(CardEntity(id))

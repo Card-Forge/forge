@@ -234,6 +234,21 @@ func (g *Game) moveResolvedSpellToGraveyard(controller PlayerController, a Abili
 	}
 }
 
+// removeSpellFromStack is MagicStack.remove(Card) (MagicStack.java:799-805):
+// every spell item whose card is card leaves the stack. An activated or
+// triggered ability of that card (a cast trigger, whose source is the spell's
+// card) stays, as Java's si.isSpell() guard keeps it.
+func (g *Game) removeSpellFromStack(card CardID) {
+	kept := g.stack[:0]
+	for _, s := range g.stack {
+		if !s.spell || s.Source != card {
+			kept = append(kept, s)
+		}
+	}
+	clear(g.stack[len(kept):])
+	g.stack = kept
+}
+
 // stackItem is the item on the stack whose ID is id, and whether one is --
 // MagicStack.getInstanceMatchingSpellAbilityID. Anything that resolved,
 // fizzled or was countered is gone.

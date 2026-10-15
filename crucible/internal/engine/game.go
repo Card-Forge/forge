@@ -922,6 +922,12 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.ProtectingPlayer = NoPlayer
 		c.controller = c.Owner
 		c.tempControllers = nil
+		// A static's Layer 2 control row too (GameAction.java:671-673,
+		// Card.clearControllers): Java keeps a Control Magic's control in the
+		// same tempControllers map, cleared for a card leaving for a zone with
+		// no controller. applyContinuousControl rebuilds rows for battlefield
+		// cards only, so a row left here would outlive the move for good.
+		c.ControlMod.Clear()
 		c.RegenShields = 0
 		c.detainedBy = nil
 		c.goadedBy = nil
@@ -1050,6 +1056,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 		c.ProtectingPlayer = NoPlayer
 		c.controller = c.Owner
 		c.tempControllers = nil
+		c.ControlMod.Clear() // Move's own reason
 		c.RegenShields = 0
 		c.detainedBy = nil
 		c.goadedBy = nil

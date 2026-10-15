@@ -14,6 +14,10 @@ const libraryBottom = -1
 type enterCounters struct {
 	kind CounterType
 	n    int
+	// placer is the counter table's player key: ChangeZone's activator
+	// (ChangeZoneEffect.java:617), a token's creator, MakeCard's player.
+	// NoPlayer reads as the player the permanent enters under.
+	placer PlayerID
 }
 
 // moveByEffect is GameAction.moveTo as an effect resolution drives it: id
@@ -62,12 +66,18 @@ func (g *Game) moveByEffectOnly(controller PlayerController, id CardID, dest Zon
 			c.Tapped = true
 		}
 		// WithCountersType$: the permanent enters with the counters, before its
-		// own enter replacements and triggers see it.
+		// own enter replacements and triggers see it. They join the entry's
+		// counter table (Card.pendingEnter), which applyEnterCounters runs the
+		// AddCounter replacements over once and places through
+		// addCardCounters, CounterAdded included: Java passes them in the same
+		// AbilityKey.CounterTable as the ETB$ counters (ChangeZoneEffect.java:
+		// 614-620, TokenEffectBase.java:140-145, MakeCardEffect.java:179-183).
 		for _, e := range enter {
-			if n := g.countersReplaced(controller, newController, CardEntity(id), e.kind, e.n); n > 0 {
-				c.Counters.Add(e.kind, n)
-				emitCounterChanged(g, id, CardEntity(id), e.kind, n)
+			placer := e.placer
+			if placer == NoPlayer {
+				placer = newController
 			}
+			c.pendingEnter = append(append([]enterPile(nil), c.pendingEnter...), enterPile{ct: e.kind, n: e.n, source: id, placer: placer})
 		}
 		g.enterBattlefieldReplacements(controller, id, origin)
 		g.checkETBTriggers(controller, id, origin)

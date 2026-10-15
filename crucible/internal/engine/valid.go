@@ -1116,7 +1116,11 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 	// PlayerProperty.java:38-49: "OpponentOf <defined>" holds when candidate
 	// is an opponent of every player the Defined (the word after the space,
 	// Java's split(" ")[1]) names; "PlayerUID_<n>" when candidate is player n.
-	// Only the You and PlayerUID_<n> Defineds are evaluated.
+	// Any other Defined is read through definedPlayers with the refs of the
+	// ability in context (Game.resolving), as Java passes its spellAbility to
+	// getDefinedPlayers: Power Struggle's "Player.OpponentOf TriggeredPlayer".
+	// Outside that ability's context, or a Defined it cannot read, stays
+	// unrecognized (GO-7).
 	if rest, ok := strings.CutPrefix(property, "OpponentOf "); ok {
 		word, _, _ := strings.Cut(rest, " ")
 		switch {
@@ -1126,7 +1130,20 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 			n, err := strconv.Atoi(strings.TrimPrefix(word, "PlayerUID_"))
 			return err == nil && candidate != PlayerID(n), err == nil
 		}
-		return false, false
+		a := g.resolving
+		if a == nil || source == NoCard || a.Source != source {
+			return false, false
+		}
+		named, err := definedPlayers(g, host, source, word, a.refs())
+		if err != nil {
+			return false, false
+		}
+		for _, p := range named {
+			if candidate == p {
+				return false, true
+			}
+		}
+		return true, true
 	}
 	if rest, ok := strings.CutPrefix(property, "PlayerUID_"); ok {
 		n, err := strconv.Atoi(rest)

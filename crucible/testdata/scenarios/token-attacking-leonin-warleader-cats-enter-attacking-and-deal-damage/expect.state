@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=22
+humanbattlefield=Leonin Warleader|Tapped;T:w_1_1_cat_lifelink|Tapped|SummonSick;T:w_1_1_cat_lifelink|Tapped|SummonSick
+ailife=14

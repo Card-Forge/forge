@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanbattlefield=Control Magic|Id:1|AttachedTo:2;Mountain|Id:3;Swamp|Id:4
+humanhand=Lightning Bolt|Id:5;Raise Dead|Id:6
+aibattlefield=Grizzly Bears|Id:2

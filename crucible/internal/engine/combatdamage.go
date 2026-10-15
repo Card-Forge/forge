@@ -333,15 +333,15 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 		c.Counters.Add(Defense, -amount)
 		emitCounterChanged(g, source, CardEntity(target), Defense, -amount)
 	}
+	witherCounters := 0
 	if t.Has(cardtype.Creature) {
 		if g.witherDamage(source) {
 			// CR 120.3d: damage from a source with wither or infect is
 			// dealt as -1/-1 counters, not marked damage; the deathtouch flag
-			// is set either way (Card.addDamageAfterPrevention).
-			if n := g.countersReplaced(controller, g.Card(source).Controller(), CardEntity(target), M1M1, amount); n > 0 {
-				c.Counters.Add(M1M1, n)
-				emitCounterChanged(g, source, CardEntity(target), M1M1, n)
-			}
+			// is set either way (Card.addDamageAfterPrevention). The source's
+			// controller places them (Card.java:6354); they are put after the
+			// DamageDone trigger runs (:6343), below.
+			witherCounters = g.countersReplaced(controller, g.Card(source).Controller(), CardEntity(target), M1M1, amount)
 			if deathtouch {
 				c.Damage.Deathtouch = true
 			}
@@ -363,6 +363,9 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 	}
 	g.sink.Emit(Event{Kind: DamageDealt, Source: source, Target: CardEntity(target), Amount: int32(amount), Flags: flags})
 	g.checkDamageDoneTriggersToCard(controller, source, target, amount, isCombat)
+	// Through addCardCounters, so the -1/-1 counters fire CounterAdded and
+	// enter the turn's counter record like any other placement.
+	g.addCardCounters(controller, g.Card(source).Controller(), source, target, M1M1, witherCounters)
 	if table != nil {
 		*table = append(*table, damageEntry{Source: source, Target: CardEntity(target), Amount: amount, Lethal: lethal})
 	}

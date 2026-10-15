@@ -228,6 +228,20 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
 		}
 		candidates = []PlayerID{refs.triggered.cardController(g)}
+	case "TriggeredCardOpponent":
+		// The "...Opponent" branch over AbilityKey.Card (AbilityUtils.java:
+		// 1038-1050): the opponents of the stored object's controller, the
+		// LKI's for a card that left the battlefield (cardController) --
+		// Necrotic Plague's "one of their opponents".
+		if refs.triggered.card == NoCard {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
+		}
+		ctl := refs.triggered.cardController(g)
+		for _, pid := range g.playersInTurnOrder() {
+			if pid != ctl {
+				candidates = append(candidates, pid)
+			}
+		}
 	case "TriggeredCardOwner":
 		// The "...Owner" branch over AbilityKey.Card (AbilityUtils.java:1053-1059):
 		// the stored object's owner, the LKI's like the controller above. Java

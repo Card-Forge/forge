@@ -27,7 +27,13 @@ func (counterEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	if tt, _ := a.Params.Param("TargetType"); tt != "Spell" {
+	// A targeted Counter resolves under any TargetType$: targeting offers a
+	// spell as its card and fails the ability before it gets here when an
+	// activated or triggered ability would be a legal target
+	// (stackAbilityCandidates), so every target is a spell -- countered the
+	// same way under "Spell" or "Spell,Activated". An untargeted one must
+	// name Spell: it has no other way to its spell.
+	if tt, ok := a.Params.Param("TargetType"); !ok || tt != "Spell" && !hasParam(a, "ValidTgts") {
 		return fmt.Errorf("engine: Counter: TargetType$ %q not resolvable yet", tt)
 	}
 	if battlefieldStaticMode(g, "CantBeCountered") {

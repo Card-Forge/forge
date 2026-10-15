@@ -1,0 +1,20 @@
+# CR 506.3b: Leonin Warleader's attack trigger makes two 1/1 lifelink Cats
+# "tapped and attacking" (TokenAttacking$ True). TokenEffectBase.java:188 runs
+# SpellAbilityEffect.addToCombat for each token: the activator picks the
+# defender among combat.getDefenders() and the token attacks it, never having
+# been declared (so no Attacks trigger of its own). Both Cats are unblocked
+# attackers in the damage step: ai takes 4 + 1 + 1, and human gains 2 from
+# lifelink.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+queue attacktarget ai
+queue attacktarget ai
+resolvestack
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage

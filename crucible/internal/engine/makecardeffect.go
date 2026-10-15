@@ -95,13 +95,15 @@ func (makeCardEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 			// on the card where it landed anywhere else.
 			var enter []enterCounters
 			if withCounter && zone == Battlefield {
-				enter = append(enter, enterCounters{kind: counterType, n: counterNum})
+				enter = append(enter, enterCounters{kind: counterType, n: counterNum, placer: p})
 			}
 			g.moveByEffect(controller, id, zone, libPos, NoPlayer, g.Card(id).Tapped, enter...)
 			if withCounter && zone != Battlefield {
+				// made.addCounter(..., player, counterTable), placed by
+				// replaceCounterEffect (MakeCardEffect.java:203-206, :211):
+				// CounterAdded fires for them too.
 				if n := g.countersReplaced(controller, p, CardEntity(id), counterType, counterNum); n > 0 {
-					g.Card(id).Counters.Add(counterType, n)
-					emitCounterChanged(g, id, CardEntity(id), counterType, n)
+					g.addCardCounters(controller, p, id, id, counterType, n)
 				}
 			}
 			if hasParam(a, "RememberMade") {

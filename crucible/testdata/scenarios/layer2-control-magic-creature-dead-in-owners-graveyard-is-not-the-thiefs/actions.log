@@ -1,0 +1,18 @@
+# Control Magic gives the human the AI's Grizzly Bears (Layer 2). Lightning
+# Bolt kills them: they go to the AI's graveyard, and a card leaving for a zone
+# without a controller loses every controller but its owner
+# (GameAction.java:671-673, Card.clearControllers). Java keeps a static's
+# control in the same tempControllers it clears, so the Bears are no longer
+# "YouCtrl" for the human: Raise Dead (Origin$ Graveyard | ValidTgts$
+# Creature.YouCtrl) has no legal target and cannot be cast. With the static's
+# control row left on the dead card, the human would raise the AI's Bears
+# into the AI's hand.
+startturn human
+advance 3
+tapformana human 3 R
+queue targets 2
+castspell human 5
+resolvestack
+tapformana human 4 B
+queue targets 2
+castspell human 6

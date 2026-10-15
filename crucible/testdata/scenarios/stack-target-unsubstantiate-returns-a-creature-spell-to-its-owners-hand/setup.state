@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanbattlefield=Forest|Id:2;Forest|Id:3
+humanhand=Grizzly Bears|Id:1
+aibattlefield=Island|Id:7;Island|Id:8
+aihand=Unsubstantiate|Id:9

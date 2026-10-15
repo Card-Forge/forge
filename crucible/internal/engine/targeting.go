@@ -39,11 +39,10 @@ import (
 // no ValidTgts$ named, or TargetMin$ 0 with no candidate (asked nothing).
 // false means CR 603.3c's own real rule ("if the
 // ability requires a target and there are no legal targets, it doesn't go on
-// the stack") or a target shape this port cannot offer (TargetType$ other
-// than Spell, an unresolvable TargetMin$) -- the two are folded into the same
-// outcome rather than given an error return, because a caller cannot act on
-// "an ability the game decided not to put on the stack" any differently than
-// "an ability this port cannot parse the targeting for."
+// the stack"). A target shape this port cannot offer (a TargetType$ other
+// than Spell, an unresolvable TargetMin$/TargetMax$, a Defined$ it cannot
+// read) is not that: the ability is pushed with no targets and fails when it
+// resolves (Ability.targetsErr), so the refusal is seen (GO-7).
 //
 // TargetMin$/TargetMax$ (1/1 when neither is named, TargetRestrictions.
 // java's own getOrDefault) resolve through resolveNamedAmount exactly as
@@ -381,8 +380,8 @@ type targetChoice struct {
 // and a copy's new targets are chosen from (CR 707.10c, copySpell,
 // copyspellabilityeffect.go). named is false when a names no ValidTgts$ at
 // all; ok is false when it does but has no legal candidate while TargetMin$
-// is above 0, or a shape this port cannot offer -- resolveTargets' own two
-// outcomes. TargetMin$ 0 with no candidate is ok with an empty pool.
+// is above 0. A shape this port cannot offer is ok with choice.err set.
+// TargetMin$ 0 with no candidate is ok with an empty pool.
 func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool) {
 	defer g.inAbilityContext(a)()
 	validTgts, named := a.Params.Param("ValidTgts")
@@ -403,24 +402,29 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	if !ok {
 		maxStr = "1"
 	}
+	// An amount this port cannot resolve is not "no legal target": the ability
+	// is pushed and fails when it resolves, naming the param (GO-7). Java
+	// always has an answer here (calculateAmount).
 	targetMin, ok := resolveNamedAmount(g, a.Amounts, source, minStr)
 	if !ok {
-		return targetChoice{}, true, false
+		return targetChoice{err: fmt.Errorf("TargetMin$ %q not resolvable yet", minStr)}, true, true
 	}
 	targetMax, ok := resolveNamedAmount(g, a.Amounts, source, maxStr)
 	if !ok {
-		return targetChoice{}, true, false
+		return targetChoice{min: targetMin, err: fmt.Errorf("TargetMax$ %q not resolvable yet", maxStr)}, true, true
 	}
 
 	var candidates []EntityID
 	targetType, hasTargetType := a.Params.Param("TargetType")
 	switch {
-	case hasTargetType && a.API == APIChangeTargets:
-		// ChangeTargets alone reads TargetType$ as SpellAbility.isValid's
-		// full restriction (stackAbilityCandidates): 23 of its 44 corpus
-		// lines name a shape past the literal "Spell". Every other API keeps
-		// the literal-only branch below, since its own Resolve was vetted
-		// against spell targets only.
+	case hasTargetType && (a.API == APIChangeTargets || targetType != "Spell"):
+		// TargetType$ read as SpellAbility.isValid's full restriction over
+		// every stack item (stackAbilityCandidates): ChangeTargets (23 of its
+		// 44 corpus lines name a shape past "Spell"), and any API naming more
+		// than the literal Spell (Stifle's Activated,Triggered). An activated
+		// or triggered ability that would be a legal target is an error, so
+		// the ability fails when it resolves; a stack holding no such item
+		// asks the plain question (no legal target: CR 603.3c), as Java does.
 		var err error
 		candidates, err = g.stackAbilityCandidates(a, targetType, validTgts)
 		if err != nil {
@@ -428,11 +432,7 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		}
 	case hasTargetType:
 		// TargetType$ Spell names spells on the stack (CR 115.1a); a spell
-		// here is a card in the Stack zone. Activated/Triggered abilities
-		// on the stack are not targetable objects in this port.
-		if targetType != "Spell" {
-			return targetChoice{}, true, false
-		}
+		// here is a card in the Stack zone.
 		candidates = g.stackSpellCandidates(a.Controller, a.Source, validTgts)
 	case a.API == APICopySpellAbility:
 		// CopySpellAbilityEffect.buildSpellAbility sets the target zone to
@@ -463,12 +463,10 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 					return targetChoice{min: targetMin, max: targetMax, err: fmt.Errorf("TgtZone$: %w", err)}, true, true
 				}
 				if zoneIn(Stack, parsed) {
-					// Zone(Stack, pid) is never the real Stack zone (kept
-					// under Zone(Stack, NoPlayer), game.go): scanning it
-					// per player would silently find nothing, and
-					// allocating an empty per-player Stack zone as a side
-					// effect (Game.Zone's own lazy-create) besides. No real
-					// Play line names it -- fail closed rather than guess.
+					// No real Play line names the stack, and Play's Resolve
+					// is unaudited against a spell target: fail closed
+					// rather than guess. (ChangeZone's Origin$ Stack is
+					// scanned below, zoneListCandidates.)
 					return targetChoice{min: targetMin, max: targetMax,
 						err: fmt.Errorf("TgtZone$ %q: Stack not resolvable through this path yet", raw)}, true, true
 				}
@@ -486,7 +484,10 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 					return targetChoice{min: targetMin, max: targetMax, err: fmt.Errorf("ChangeZone Origin$: %w", err)}, true, true
 				}
 				for _, z := range parsed {
-					if z != Battlefield && z != Graveyard && z != Exile {
+					// Stack for ChangeZone alone: changeZoneKnown removes a
+					// targeted spell from the stack (ChangeZoneEffect.java:
+					// 577-579); ChangeZoneAll's Resolve does not.
+					if z != Battlefield && z != Graveyard && z != Exile && (z != Stack || a.API != APIChangeZone) {
 						return targetChoice{min: targetMin, max: targetMax,
 							err: fmt.Errorf("ChangeZone Origin$ %q: targeting a card in %v not resolvable yet", raw, z)}, true, true
 					}
@@ -494,7 +495,14 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 				zones = parsed
 			}
 		}
-		candidates = g.targetCandidatesInZones(a.Controller, a.Source, validTgts, zones, askOf(a))
+		if zoneIn(Stack, zones) {
+			// A ChangeZone over Origin$ Stack (Unsubstantiate, Venser): a spell
+			// is targeted as its card on the stack (changeZoneKnown removes the
+			// spell), the zones scanned in Origin$ order (Game.getCardsIn).
+			candidates = g.zoneListCandidates(a, validTgts, zones)
+		} else {
+			candidates = g.targetCandidatesInZones(a.Controller, a.Source, validTgts, zones, askOf(a))
+		}
 	}
 	if def, ok := a.Params.Param("TargetsWithDefinedController"); ok {
 		// SpellAbility.canTarget (SpellAbility.java:1410-1416): a card
@@ -615,6 +623,19 @@ func (g *Game) targetCandidates(controller PlayerID, source CardID, spec string,
 // where a card candidate may sit, never a player-shaped alternative's own
 // scope, so naming two zones does not double the player half.
 func (g *Game) targetCandidatesInZones(controller PlayerID, source CardID, spec string, zones []ZoneType, ask targetAsk) []EntityID {
+	candidates := g.playerCandidates(controller, source, spec, ask)
+	parsed := valid.Parse(spec)
+	for _, zone := range zones {
+		for _, pid := range g.Players() {
+			candidates = g.appendCardCandidates(candidates, g.Zone(zone, pid).Cards(), parsed, controller, source, ask)
+		}
+	}
+	return candidates
+}
+
+// playerCandidates is getAllCandidates' player half: every player still in
+// the game spec matches and who can be targeted.
+func (g *Game) playerCandidates(controller PlayerID, source CardID, spec string, ask targetAsk) []EntityID {
 	var candidates []EntityID
 	for _, pid := range g.Players() {
 		if g.Player(pid).Lost {
@@ -624,19 +645,68 @@ func (g *Game) targetCandidatesInZones(controller PlayerID, source CardID, spec 
 			candidates = append(candidates, PlayerEntity(pid))
 		}
 	}
+	return candidates
+}
 
-	parsed := valid.Parse(spec)
-	for _, zone := range zones {
-		for _, pid := range g.Players() {
-			for _, id := range g.Zone(zone, pid).Cards() {
-				c := g.Card(id)
-				if Matches(g, c, parsed, controller, source) && !cardCantBeTargetedBy(g, c, controller, source, ask) {
-					candidates = append(candidates, CardEntity(id))
-				}
-			}
+// appendCardCandidates appends every card of ids that matches parsed and can
+// be targeted (getAllCandidates' sa.canTarget(c) over one zone's cards).
+func (g *Game) appendCardCandidates(candidates []EntityID, ids []CardID, parsed valid.Spec, controller PlayerID, source CardID, ask targetAsk) []EntityID {
+	for _, id := range ids {
+		c := g.Card(id)
+		if Matches(g, c, parsed, controller, source) && !cardCantBeTargetedBy(g, c, controller, source, ask) {
+			candidates = append(candidates, CardEntity(id))
 		}
 	}
 	return candidates
+}
+
+// zoneListCandidates is TargetRestrictions.getAllCandidates for a ChangeZone
+// whose Origin$ zones include the stack (AbilityFactory.adjustChangeZoneTarget
+// sets the target zones to Origin$): the players first, then each zone's cards
+// in Origin$ order (Game.getCardsIn(List<ZoneType>)), the stack's being the
+// card of every spell on it (stackSpellCards). A spell is never its own target
+// (CR 115.5, SpellAbility.java:1391-1395): the one being cast is not on the
+// stack yet while its targets are chosen.
+func (g *Game) zoneListCandidates(a *Ability, spec string, zones []ZoneType) []EntityID {
+	ask := askOf(a)
+	candidates := g.playerCandidates(a.Controller, a.Source, spec, ask)
+	parsed := valid.Parse(spec)
+	for _, zone := range zones {
+		if zone == Stack {
+			// Stack alone is TargetSelection.chooseCardFromStack, which walks
+			// the stack top first (TargetSelection.java:97-101, :298); in a
+			// list it is the Stack zone's cards, oldest first (Zone.add
+			// appends, Zone.java:141-146).
+			cards := g.stackSpellCards(len(zones) == 1)
+			if a.spell {
+				cards = slices.DeleteFunc(cards, func(id CardID) bool { return id == a.Source })
+			}
+			candidates = g.appendCardCandidates(candidates, cards, parsed, a.Controller, a.Source, ask)
+			continue
+		}
+		for _, pid := range g.Players() {
+			candidates = g.appendCardCandidates(candidates, g.Zone(zone, pid).Cards(), parsed, a.Controller, a.Source, ask)
+		}
+	}
+	return candidates
+}
+
+// stackSpellCards is the card of every spell on the stack still in the Stack
+// zone, top first or oldest first. Each card appears once.
+func (g *Game) stackSpellCards(topFirst bool) []CardID {
+	var out []CardID
+	n := len(g.stack)
+	for i := 0; i < n; i++ {
+		item := &g.stack[i]
+		if topFirst {
+			item = &g.stack[n-1-i]
+		}
+		if !item.spell || item.Source == NoCard || int(item.Source) >= len(g.cards) || g.Card(item.Source).Zone != Stack || slices.Contains(out, item.Source) {
+			continue
+		}
+		out = append(out, item.Source)
+	}
+	return out
 }
 
 // stackSpellCandidates is every spell on the stack -- a card in the Stack
@@ -658,8 +728,9 @@ func (g *Game) stackSpellCandidates(controller PlayerID, source CardID, spec str
 }
 
 // stackAbilityCandidates is SpellAbility.canTargetSpellAbility
-// (SpellAbility.java:2059-2122) run over every stack item, top first, for a
-// ChangeTargets ability a: the item matches one of TargetType$'s
+// (SpellAbility.java:2059-2122) run over every stack item, top first, for an
+// ability a naming TargetType$ (ChangeTargets, or a TargetType$ past the
+// literal Spell): the item matches one of TargetType$'s
 // comma-separated alternatives (stackItemMatches), one of its targets
 // matches TargetValidTargeting$ when a names one, and its host card matches
 // ValidTgts$. A spell is offered as its card on the stack (CardEntity), the
@@ -703,7 +774,7 @@ func (g *Game) stackAbilityCandidates(a *Ability, targetType, validTgts string) 
 			}
 		}
 		if !item.spell {
-			return nil, fmt.Errorf("engine: ChangeTargets: TargetType$ %q: targeting an ability on the stack not resolvable yet", targetType)
+			return nil, fmt.Errorf("TargetType$ %q: targeting an ability on the stack not resolvable yet", targetType)
 		}
 		candidates = append(candidates, CardEntity(item.Source))
 	}
@@ -732,7 +803,7 @@ func (g *Game) stackItemMatches(item *Ability, restriction string, a *Ability) (
 		case "Sorcery":
 			kind = g.Card(item.Source).Type().Has(cardtype.Sorcery)
 		default:
-			return false, fmt.Errorf("engine: ChangeTargets: TargetType$ %q not resolvable yet", alt)
+			return false, fmt.Errorf("TargetType$ %q not resolvable yet", alt)
 		}
 		if !kind {
 			continue
@@ -786,11 +857,11 @@ func (g *Game) stackItemHasProperty(item *Ability, prop string, a *Ability) (boo
 			}
 		}
 		if len(arg) < 3 {
-			return false, fmt.Errorf("engine: ChangeTargets: TargetType$ property %q not resolvable yet", prop)
+			return false, fmt.Errorf("TargetType$ property %q not resolvable yet", prop)
 		}
 		n, err := strconv.Atoi(arg[2:])
 		if err != nil {
-			return false, fmt.Errorf("engine: ChangeTargets: TargetType$ property %q not resolvable yet", prop)
+			return false, fmt.Errorf("TargetType$ property %q not resolvable yet", prop)
 		}
 		return compareOp(len(distinct), arg[:2], n), nil
 	case "IsTargeting":
@@ -801,12 +872,12 @@ func (g *Game) stackItemHasProperty(item *Ability, prop string, a *Ability) (boo
 		case "You":
 			want = PlayerEntity(a.Controller)
 		default:
-			return false, fmt.Errorf("engine: ChangeTargets: TargetType$ property %q not resolvable yet", prop)
+			return false, fmt.Errorf("TargetType$ property %q not resolvable yet", prop)
 		}
 		targets, err := stackItemTargets(item)
 		return containsEntity(targets, want), err
 	}
-	return false, fmt.Errorf("engine: ChangeTargets: TargetType$ property %q not resolvable yet", prop)
+	return false, fmt.Errorf("TargetType$ property %q not resolvable yet", prop)
 }
 
 // stackItemTargetsMatch is canTargetSpellAbility's TargetValidTargeting$
@@ -846,7 +917,7 @@ func (g *Game) entityMatches(e EntityID, spec string, parsed valid.Spec, control
 // such an item is an error.
 func stackItemTargets(item *Ability) ([]EntityID, error) {
 	if subChainTargets(item.Params) {
-		return nil, fmt.Errorf("engine: ChangeTargets: targets of a spell whose SubAbility$ targets not resolvable yet")
+		return nil, fmt.Errorf("TargetType$: targets of a spell whose SubAbility$ targets not resolvable yet")
 	}
 	var targets []EntityID
 	if item.Target != NoCard {
@@ -855,7 +926,7 @@ func stackItemTargets(item *Ability) ([]EntityID, error) {
 	targets = append(targets, item.Targets...)
 	for _, m := range item.Modes {
 		if subChainTargets(m.Params) {
-			return nil, fmt.Errorf("engine: ChangeTargets: targets of a spell whose SubAbility$ targets not resolvable yet")
+			return nil, fmt.Errorf("TargetType$: targets of a spell whose SubAbility$ targets not resolvable yet")
 		}
 		targets = append(targets, m.Targets...)
 	}
@@ -910,8 +981,12 @@ func (g *Game) targetsStillLegal(a *Ability) bool {
 func (g *Game) dropIllegalTargets(a *Ability) bool {
 	chosen, kept := 0, 0
 	cantFizzle := hasCantFizzle(a)
+	// Java removes a part's illegal targets only after its sub-abilities were
+	// checked (MagicStack.java:773-779), so a link's ParentTarget reads the
+	// full chosen list.
+	parents := parentTargetsOf(a)
 	a.Targets = g.withoutIllegal(a, a.Targets, &chosen, &kept)
-	cantFizzle = g.dropIllegalChainTargets(a, &chosen, &kept) || cantFizzle
+	cantFizzle = g.dropIllegalChainTargets(a, parents, &chosen, &kept) || cantFizzle
 	// A chosen mode is its own sub-ability chain in Java (CharmEffect's
 	// chainAbilities), links included, so hasFizzled walks into it too. The
 	// slice is copied before it is written: a stack item copied by value
@@ -921,8 +996,9 @@ func (g *Game) dropIllegalTargets(a *Ability) bool {
 	}
 	for i := range a.Modes {
 		m := &a.Modes[i]
+		modeParents := parentTargetsOf(m)
 		m.Targets = g.withoutIllegal(m, m.Targets, &chosen, &kept)
-		cantFizzle = g.dropIllegalChainTargets(m, &chosen, &kept) || hasCantFizzle(m) || cantFizzle
+		cantFizzle = g.dropIllegalChainTargets(m, modeParents, &chosen, &kept) || hasCantFizzle(m) || cantFizzle
 	}
 	return chosen == 0 || kept > 0 || cantFizzle
 }
@@ -930,23 +1006,35 @@ func (g *Game) dropIllegalTargets(a *Ability) bool {
 // dropIllegalChainTargets is CR 608.2b over owner's SubAbility$ chain:
 // hasFizzled recurses into sa.getSubAbility() with the one running fizzle
 // flag, so a link's legal target keeps the whole ability from fizzling, and
-// its illegal ones are removed (MagicStack.java:745-751). It reports whether
-// a link carries CantFizzle$.
-func (g *Game) dropIllegalChainTargets(owner *Ability, chosen, kept *int) bool {
+// its illegal ones are removed (MagicStack.java:745-751). parents are what
+// Defined$ ParentTarget names for the first link (owner's targets as chosen);
+// each later link reads the nearest earlier one that chose targets, as
+// resolveChainTargets asked them. It reports whether a link carries
+// CantFizzle$.
+func (g *Game) dropIllegalChainTargets(owner *Ability, parents []EntityID, chosen, kept *int) bool {
 	cantFizzle := false
 	owner.chainTargets = clonedChainTargets(owner.chainTargets)
+	ancestorTargeting := owner.ancestorTargeting || linkUsesTargeting(owner.Params)
 	for i := range owner.chainTargets {
 		ct := &owner.chainTargets[i]
 		// The link reads its root's triggering objects, as Java's sub-ability
-		// does through getRootAbility (resolveChainTargets' own link).
+		// does through getRootAbility (resolveChainTargets' own link), and its
+		// parent's targets for TargetsWithSharedCardType$ ParentTarget and the
+		// like (Legerdemain, Power Struggle).
 		link := Ability{Source: owner.Source, Controller: owner.Controller, Params: ct.Params, targetStamps: ct.Stamps,
-			Amounts: owner.Amounts, TriggerRemembered: owner.TriggerRemembered, triggered: owner.triggered}
+			Amounts: owner.Amounts, TriggerRemembered: owner.TriggerRemembered, triggered: owner.triggered, targeter: ct.Targeter,
+			parentTargets: parents, ancestorTargeting: ancestorTargeting}
 		if api, ok := APIByName(ct.Params.Name); ok {
 			link.API = api
 		}
 		link.Targets = ct.Targets
+		chosenHere := ct.Targets
 		ct.Targets = g.withoutIllegal(&link, ct.Targets, chosen, kept)
 		cantFizzle = cantFizzle || hasCantFizzle(&link)
+		if len(chosenHere) > 0 {
+			parents = chosenHere
+		}
+		ancestorTargeting = ancestorTargeting || linkUsesTargeting(ct.Params)
 	}
 	return cantFizzle
 }
@@ -1058,14 +1146,24 @@ func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 		// controller since it was chosen (TargetChoices.forEachControllerChanged).
 		targeter := owner.targeter
 		if targeter == NoPlayer {
-			// A chain link or a copy never recorded one: the player its
-			// TargetingPlayer$ names, else the controller.
+			// Recorded as the targets were chosen (resolveTargets,
+			// chainTarget.Targeter); an ability that never went through that
+			// (a test resolving one directly) asks its TargetingPlayer$ now.
+			// One that no longer names a player makes the target illegal and
+			// says why, never the controller's guess (GO-7): Java's stored
+			// targeting player has no such gap.
 			var err error
 			if targeter, err = g.targetingPlayerOf(owner); err != nil {
-				targeter = owner.Controller
+				g.recordPendingError(err)
+				return false
 			}
 		}
-		if met, err := g.candidateRestrictionsMet(owner, c, targeter); err != nil || !met {
+		met, err := g.candidateRestrictionsMet(owner, c, targeter)
+		if err != nil {
+			g.recordPendingError(err)
+			return false
+		}
+		if !met {
 			return false
 		}
 		if was, recorded := owner.forEachControllers[id]; recorded && was != c.Controller() {
@@ -1132,8 +1230,9 @@ func clonedChainTargets(cts []chainTarget) []chainTarget {
 			Targets: append([]EntityID(nil), ct.Targets...),
 			Stamps:  append([]targetStamp(nil), ct.Stamps...),
 			// Never written in place (Ability.divided), so shared as is.
-			Divided: ct.Divided,
-			Err:     ct.Err,
+			Divided:  ct.Divided,
+			Err:      ct.Err,
+			Targeter: ct.Targeter,
 		}
 	}
 	return out

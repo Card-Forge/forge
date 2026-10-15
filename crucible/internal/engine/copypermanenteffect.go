@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount
+//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect
 
 import (
 	"fmt"
@@ -22,13 +22,14 @@ import (
 // definition and any power/toughness its creating effect set, since this
 // port has no other copy effects to fold in. SetPower$/SetToughness$ change
 // the copy's own base values (CR 707.9b), TokenTapped$ taps it and
-// RememberTokens$ remembers it on the host; the other copy exceptions,
-// end-of-turn cleanup and attacking copies are not resolved.
+// RememberTokens$ remembers it on the host and TokenAttacking$ puts it into
+// combat attacking (addToCombatAttacking); the other copy exceptions and
+// end-of-turn cleanup are not resolved.
 type copyPermanentEffect struct{}
 
 func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectParams(a, "CopyPermanent", "Condition", "AtEOT", "AtEOTTrig", "AddTypes", "PumpKeywords",
-		"AddKeywords", "NonLegendary", "TokenAttacking", "Populate", "SetColor", "SetCreatureTypes",
+		"AddKeywords", "NonLegendary", "Populate", "SetColor", "SetCreatureTypes",
 		"PumpDuration", "AddSVars", "RemoveCardTypes", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
 		"RemoveSubTypes", "RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
 		"ChangeZoneTable", "AddAbilities", "AddStaticAbilities", "AddColors", "ChosenMapIndex",
@@ -96,6 +97,11 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 			for i := 0; i < num; i++ {
 				id := g.createToken(controller, spec)
 				created = append(created, id)
+				// TokenEffectBase.makeTokenTable's addToCombat (TokenEffectBase.java:188),
+				// which CopyPermanentEffect inherits.
+				if err := g.addToCombatAttacking(controller, a, id, "TokenAttacking"); err != nil {
+					return fmt.Errorf("engine: CopyPermanent: %w", err)
+				}
 				if hasParam(a, "RememberTokens") {
 					source.Memory.Remember(CardEntity(id))
 				}

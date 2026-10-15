@@ -76,7 +76,7 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		}
 		// CR 601.2d: the link's division is announced right after its targets.
 		divided, err := g.divideAmongTargets(controller, decider, &link, chosen)
-		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen, Divided: divided, Err: err})
+		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen, Divided: divided, Err: err, Targeter: decider})
 		if err != nil {
 			// The link keeps its targets with no division and its own error;
 			// the root fails with it before acting (Registry.resolve).

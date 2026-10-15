@@ -17,7 +17,7 @@
 
 package engine
 
-//enginelint:allow id card game player ability defined condition control zone valid amount event parts
+//enginelint:allow id card game player ability defined condition control zone valid amount event parts replacement
 
 import (
 	"fmt"
@@ -114,7 +114,13 @@ func (putCounterAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 			if !Matches(g, c, spec, a.Controller, a.Source) {
 				continue
 			}
-			g.addCardCounters(controller, placerOf(c), a.Source, cid, counterType, amount)
+			// The counter table's replaceCounterEffect runs the AddCounter
+			// replacements (Hardened Scales) and Mode$ CantPutCounter first
+			// (CountersPutAllEffect.java:92, :118).
+			placer := placerOf(c)
+			if n := g.countersReplaced(controller, placer, CardEntity(cid), counterType, amount); n > 0 {
+				g.addCardCounters(controller, placer, a.Source, cid, counterType, n)
+			}
 		}
 	}
 	return nil
