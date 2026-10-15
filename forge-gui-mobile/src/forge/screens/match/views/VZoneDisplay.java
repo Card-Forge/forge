@@ -57,9 +57,9 @@ public class VZoneDisplay extends VCardDisplayArea {
         if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
             return super.pan(x, y, deltaX, deltaY, moreVertical); //base class tracks the card under the finger
         }
-        if (Forge.isLandscapeMode()) {
+        /*if (Forge.isLandscapeMode()) {
             updateDragPanel(x, y);
-        }
+        }*/
         int idx = cardPanels.get().size() - 1;
         for (int i = idx - 1; i >= 0; i--) {
             if (cardPanels.get().get(i).contains(x, y)) {
@@ -78,7 +78,7 @@ public class VZoneDisplay extends VCardDisplayArea {
             return;
 
         clearChildren();
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && layoutVerticallyForLandscapeMode()) {
             //for landscape mode, just show revealed card on top
             for (CardAreaPanel cardPanel : cardPanels.get()) {
                 if (cardPanel != revealedPanel) {
@@ -119,7 +119,12 @@ public class VZoneDisplay extends VCardDisplayArea {
     }
 
     protected boolean layoutVerticallyForLandscapeMode() {
-        return true;
+        return !VPlayerPanel.isAltZoneLayout();
+    }
+
+    @Override
+    protected boolean isHorizontalStrip() {
+        return Forge.isLandscapeMode() && !layoutVerticallyForLandscapeMode();
     }
 
     @Override

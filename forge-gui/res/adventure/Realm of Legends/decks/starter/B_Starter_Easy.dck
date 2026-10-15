@@ -1,77 +1,73 @@
 [metadata]
-Name=Sworn to Darkness
-Set=C14
+Name=Wretched Ranks [FDC] [2026]
 [Commander]
-1 Ob Nixilis of the Black Oath|C14
+1 Ghoulcaller Gisa|FDC
 [Main]
-1 Abyssal Persecutor|C14
-1 Aether Snap|C14
-1 Annihilate|C14
-1 Arcane Lighthouse|C14
-1 Bad Moon|C14
-1 Barren Moor|C14
-1 Black Sun's Zenith|C14
-1 Bloodgift Demon|C14
-1 Bojuka Bog|C14
-1 Burnished Hart|C14
-1 Butcher of Malakir|C14
-1 Charcoal Diamond|C14
-1 Commander's Sphere|C14
-1 Crypt Ghast|C14
-1 Crypt of Agadeem|C14
-1 Demon of Wailing Agonies|C14
-1 Disciple of Bolas|C14
-1 Drana, Kalastria Bloodchief|C14
-1 Dread Return|C14
-1 Dregs of Sorrow|C14
-1 Everglades|C14
-1 Evernight Shade|C14
-1 Flesh Carver|C14
-1 Ghost Quarter|C14
-1 Ghoulcaller Gisa|C14
-1 Grave Titan|C14
-1 Gray Merchant of Asphodel|C14
-1 Infernal Offering|C14
-1 Jet Medallion|C14
-1 Lashwrithe|C14
-1 Liliana's Reaver|C14
-1 Magus of the Coffers|C14
-1 Malicious Affliction|C14
-1 Mind Stone|C14
-1 Morkrut Banshee|C14
-1 Mutilate|C14
-1 Myriad Landscape|C14
-1 Nantuko Shade|C14
-1 Necromantic Selection|C14
-1 Nekrataal|C14
-1 Overseer of the Damned|C14
-1 Pestilence Demon|C14
-1 Phyrexian Gargantua|C14
-1 Polluted Mire|C14
-1 Pontiff of Blight|C14
-1 Profane Command|C14
-1 Promise of Power|C14
-1 Raving Dead|C14
-1 Read the Bones|C14
-1 Reaper from the Abyss|C14
-1 Shriekmaw|C14
-1 Sign in Blood|C14
-1 Skeletal Scrying|C14
-1 Skirsdag High Priest|C14
-1 Sol Ring|C14
-1 Spoils of Blood|C14
-1 Sudden Spoiling|C14
-8 Swamp|C14|[326]
-8 Swamp|C14|[327]
-8 Swamp|C14|[328]
-8 Swamp|C14|[329]
-1 Swiftfoot Boots|C14
-1 Syphon Mind|C14
-1 Tendrils of Corruption|C14
-1 Tragic Slip|C14
-1 Unstable Obelisk|C14
-1 Vampire Hexmage|C14
-1 Victimize|C14
-1 Wake the Dead|C14
-1 Worn Powerstone|C14
-1 Xathrid Demon|C14
+1 Ayara, First of Locthwain|FDC
+1 Cemetery Reaper|FDC
+1 Champion of the Perished|FDC
+1 Cryptbreaker|FDC
+1 Death Baron|FDC
+1 Diregraf Colossus|FDC
+1 God-Eternal Bontu|FDC
+1 Grave Titan|FDC
+1 Graveborn Muse|FDC
+1 Gravecrawler|FDC
+1 Headless Rider|FDC
+1 Josu Vess, Lich Knight|FDC
+1 Kalitas, Traitor of Ghet|FDC
+1 Liliana's Reaver|FDC
+1 Lord of the Undead|FDC
+1 Midnight Reaper|FDC
+1 Razorlash Transmogrant|FDC
+1 Zul Ashur, Lich Lord|FDC
+1 Carrion Feeder|FDC
+1 Eternal Taskmaster|FDC
+1 Fleshbag Marauder|FDC
+1 Gray Merchant of Asphodel|FDC
+1 Lord of the Accursed|FDC
+1 Mire Triton|FDC
+1 Noxious Ghoul|FDC
+1 Soulless One|FDC
+1 Undead Augur|FDC
+1 Undead Butler|FDC
+1 Undead Warchief|FDC
+1 Vengeful Dead|FDC
+1 Wight of Precinct Six|FDC
+1 Bad Moon|FDC
+1 Endless Ranks of the Dead|FDC
+1 Liliana's Mastery|FDC
+1 Open the Graves|FDC
+1 Oversold Cemetery|FDC
+1 Phyrexian Arena|FDC
+1 Marchesa's Decree|FDC
+1 Arcane Signet|FDC|[245]
+1 Bontu's Monument|FDC
+1 Charcoal Diamond|FDC
+1 Commander's Sphere|FDC
+1 Infernal Idol|FDC
+1 Mind Stone|FDC
+1 Patchwork Banner|FDC
+1 Sol Ring|FDC|[286]
+1 Consumed by Greed|FDC
+1 Consuming Corruption|FDC
+1 Go for the Throat|FDC
+1 Tendrils of Corruption|FDC
+1 Withering Torment|FDC
+1 Army of the Damned|FDC
+1 Mutilate|FDC
+1 Necrotic Hex|FDC
+1 Ambition's Cost|FDC
+1 Cemetery Recruitment|FDC
+1 Moan of the Unhallowed|FDC
+1 Night's Whisper|FDC
+1 Sign in Blood|FDC
+1 Syphon Flesh|FDC
+1 Castle Locthwain|FDC
+1 Geier Reach Sanitarium|FDC
+1 Barren Moor|FDC
+1 Bojuka Bog|FDC
+1 Memorial to Folly|FDC
+1 Witch's Cottage|FDC
+17 Swamp|FDN|[276]
+16 Swamp|FDN|[277]

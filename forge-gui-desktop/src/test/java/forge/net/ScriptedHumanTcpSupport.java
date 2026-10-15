@@ -29,6 +29,7 @@ import forge.gamemodes.match.input.InputConfirmMulligan;
 import forge.gamemodes.match.input.InputLondonMulligan;
 import forge.gamemodes.match.input.InputPassPriority;
 import forge.gamemodes.match.input.InputSelectTargets;
+import forge.gamemodes.match.input.InputSelectEntitiesFromList;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.ChatMessage;
@@ -2651,6 +2652,38 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                         + "Yes/No pair, current InputConfirm, or single Cancel response: seat=" + chooserSeat
                         + ",view=" + chooserViewId + ",gameView=" + gameViewId + ",ordinal=" + ordinal));
             }
+        }
+        synchronized boolean isDispatchedMetamorphoseHandRepaint(int chooserSeat, int chooserViewId,
+                int gameViewId, long ordinal, boolean okEnabled, boolean cancelEnabled) {
+            MetamorphoseAcceptedPrompt accepted = metamorphoseHandAcceptedPrompt;
+            PrivacyInputSnapshot original = accepted == null ? null : accepted.inputSnapshot();
+            PrivacyInputSnapshot current = metamorphoseRemoteInputSnapshot(metamorphoseGame);
+            MetamorphoseInputButtonsReceipt buttons = metamorphoseInputButtons().stream()
+                    .filter(receipt -> "private hand".equals(receipt.prompt()) && accepted != null
+                            && receipt.seat() == chooserSeat && receipt.chooserViewId() == chooserViewId
+                            && receipt.promptOrdinal() == accepted.promptOrdinal())
+                    .findFirst().orElse(null);
+            List<MetamorphoseClientSendReceipt> sends;
+            synchronized (metamorphoseClientSendReceipts) {
+                sends = List.copyOf(metamorphoseClientSendReceipts);
+            }
+            return metamorphoseScenario && metamorphoseAccept && metamorphoseStage == 6
+                    && chooserSeat == 1 && chooserViewId == metamorphoseRemoteViewId
+                    && accepted != null && accepted.seat() == chooserSeat && accepted.gameViewId() == gameViewId
+                    && buttons != null && buttons.buttonsOrdinal() > accepted.promptOrdinal()
+                    && ordinal > buttons.buttonsOrdinal() && !okEnabled && cancelEnabled
+                    && !buttons.okEnabled() && buttons.cancelEnabled()
+                    && original != null && original.proxyInput() instanceof InputSelectEntitiesFromList<?> selection
+                    && selection.getSelected().isEmpty() && proxyEqualsQueue(original)
+                    && sameInput(original, current, true) && sameInput(original, current, false)
+                    && metamorphoseOptionalResponseQueued == 1 && metamorphoseOptionalResponseDispatched == 1
+                    && metamorphoseHandResponseQueued == 1 && metamorphoseHandResponseDispatched == 1
+                    && metamorphoseOptionalResponseArmed && metamorphoseHandResponseArmed && sends.size() == 2
+                    && metamorphoseOptionalAcceptedPrompt != null
+                    && sends.get(0).method() == ProtocolMethod.selectButtonOk && sends.get(0).gameViewMatches()
+                    && sends.get(0).promptOrdinal() == metamorphoseOptionalAcceptedPrompt.promptOrdinal()
+                    && sends.get(1).method() == ProtocolMethod.selectCard && sends.get(1).gameViewMatches()
+                    && sends.get(1).promptOrdinal() == accepted.promptOrdinal();
         }
         synchronized void recordMetamorphoseHeldOptionalPromptRepaint(int chooserSeat, int chooserViewId,
                 int gameViewId, long ordinal, String message, PrivacyInputSnapshot currentInput) {
@@ -5955,6 +5988,13 @@ final class ScriptedHumanTcpSupport implements AutoCloseable {
                             scenario.metamorphoseRemoteInputSnapshot(scenario.metamorphoseGame()));
                     return;
                 }
+            }
+            if (scenario.metamorphoseScenario() && scenario.metamorphoseStage() == 6
+                    && scenario.metamorphoseAccept() && localizer.getMessage("lblOK").equalsIgnoreCase(oneText)
+                    && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)
+                    && scenario.isDispatchedMetamorphoseHandRepaint(seat, owner.getId(), gameViewId(getGameView()),
+                            promptCapture == null ? -1 : promptCapture.callbackOrdinal(), enabledOne, enabledTwo)) {
+                return; // The same hand input is still waiting for the one selection already sent.
             }
             if (scenario.metamorphoseScenario() && owner.getId() == ownPlayerViewId && scenario.metamorphoseStage() == 2 && localizer.getMessage("lblAuto").equalsIgnoreCase(oneText) && localizer.getMessage("lblCancel").equalsIgnoreCase(twoText)) {
                 if (pendingMetamorphoseManaCardId > 0) {

@@ -1,77 +1,72 @@
 [metadata]
-Name=Peer Through Time
+Name=Keen Engineering [FDC] [2026]
 [Commander]
-1 Teferi, Temporal Archmage|C14
+1 Sai, Master Thopterist|FDC
 [Main]
-1 Aether Gale|C14
-1 Artisan of Kozilek|C14
-1 Assault Suit|C14
-1 Azure Mage|C14
-1 Breaching Leviathan|C14
-1 Brine Elemental|C14
-1 Cackling Counterpart|C14
-1 Call to Mind|C14
-1 Commander's Sphere|C14
-1 Compulsive Research|C14
-1 Concentrate|C14
-1 Coral Atoll|C14
-1 Crown of Doom|C14
-1 Cyclonic Rift|C14
-1 Deep-Sea Kraken|C14
-1 Dismiss|C14
-1 Distorting Wake|C14
-1 Domineering Will|C14
-1 Dreamstone Hedron|C14
-1 Dulcet Sirens|C14
-1 Everflowing Chalice|C14
-1 Exclude|C14
-1 Fathom Seer|C14
-1 Fog Bank|C14
-1 Fool's Demise|C14
-1 Frost Titan|C14
-1 Ghost Quarter|C14
-1 Hoverguard Sweepers|C14
-1 Infinite Reflection|C14
-1 Intellectual Offering|C14
-1 Into the Roil|C14
-8 Island|C14|[322]
-8 Island|C14|[323]
-8 Island|C14|[324]
-7 Island|C14|[325]
-1 Ixidron|C14
-1 Lonely Sandbar|C14
-1 Lorthos, the Tidemaker|C14
-1 Mind Stone|C14
-1 Mulldrifter|C14
-1 Myriad Landscape|C14
-1 Nevinyrral's Disk|C14
-1 Phyrexian Ingester|C14
-1 Pongify|C14
-1 Reef Worm|C14
-1 Remote Isle|C14
-1 Riptide Survivor|C14
-1 Rite of Replication|C14
-1 Rush of Knowledge|C14
-1 Sapphire Medallion|C14
-1 Sea Gate Oracle|C14
-1 Shaper Parasite|C14
-1 Sky Diamond|C14
-1 Sol Ring|C14
-1 Sphinx of Jwar Isle|C14
-1 Sphinx of Magosi|C14
-1 Sphinx of Uthuun|C14
-1 Steel Hellkite|C14
-1 Stitcher Geralf|C14
-1 Stormsurge Kraken|C14
-1 Stroke of Genius|C14
-1 Swiftfoot Boots|C14
-1 Tectonic Edge|C14
-1 Thran Dynamo|C14
-1 Tormod's Crypt|C14
-1 Turn to Frog|C14
-1 Unstable Obelisk|C14
-1 Ur-Golem's Eye|C14
-1 Well of Ideas|C14
-1 Willbender|C14
-1 Worn Powerstone|C14
-1 Zoetic Cavern|C14
+1 Broodstar|FDC
+1 Kappa Cannoneer|FDC
+1 Master of Etherium|FDC
+1 Master Transmuter|FDC
+1 Research Thief|FDC
+1 Shimmer Dragon|FDC
+1 Thought Monitor|FDC
+1 Vedalken Archmage|FDC
+1 Darksteel Juggernaut|FDC
+1 Duplicant|FDC
+1 Graaz, Unstoppable Juggernaut|FDC
+1 Myr Battlesphere|FDC
+1 Psychosis Crawler|FDC
+1 Scrawling Crawler|FDC
+1 Steel Hellkite|FDC
+1 Steel Overseer|FDC
+1 Etherium Sculptor|FDC
+1 Memory Guardian|FDC
+1 Padeem, Consul of Innovation|FDC
+1 Whirler Rogue|FDC
+1 Chief of the Foundry|FDC
+1 Foundry Inspector|FDC
+1 Meteor Golem|FDC
+1 Myr Retriever|FDC
+1 Ornithopter of Paradise|FDC
+1 Palladium Myr|FDC
+1 Shimmer Myr|FDC
+1 Silver Myr|FDC
+1 Spire Golem|FDC
+1 Thopter Spy Network|FDC
+1 Fall from Favor|FDC
+1 Propaganda|FDC
+1 Misleading Signpost|FDC
+1 Thopter Fabricator|FDC
+1 Adaptive Omnitool|FDC
+1 Cultivator's Caravan|FDC
+1 Forsaken Monument|FDC
+1 Mazemind Tome|FDC
+1 Mind's Eye|FDC
+1 Nettlecyst|FDC
+1 Nevinyrral's Disk|FDC
+1 Skysovereign, Consul Flagship|FDC
+1 Tamiyo's Logbook|FDC
+1 Aether Spellbomb|FDC
+1 Arcane Signet|FDC|[245]
+1 Hedron Archive|FDC
+1 Ichor Wellspring|FDC
+1 Mind Stone|FDC
+1 Sol Ring|FDC|[286]
+1 Soul-Guide Lantern|FDC
+1 Thought Vessel|FDC
+1 Pull from Tomorrow|FDC
+1 Aetherize|FDC
+1 Counterspell|FDC
+1 Launch Mishap|FDC
+1 Negate|FDC
+1 Thirst for Knowledge|FDC
+1 All Is Dust|FDC
+1 Thoughtcast|FDC
+1 War Room|FDC
+1 Buried Ruin|FDC
+1 Darksteel Citadel|FDC
+1 Foundry of the Consuls|FDC
+1 Lonely Sandbar|FDC
+1 Remote Isle|FDC
+17 Island|FDN|[274]
+17 Island|FDN|[275]

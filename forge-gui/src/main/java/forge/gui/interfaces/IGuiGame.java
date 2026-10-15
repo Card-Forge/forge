@@ -1,7 +1,6 @@
 package forge.gui.interfaces;
 
 import forge.LobbyPlayer;
-import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -137,8 +136,6 @@ public interface IGuiGame {
 
     default void refreshCardDetails(Iterable<CardView> cards) {}
     default void refreshField() {}
-
-    GameState getGamestate();
 
     default void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {}
     default void updateLives(Iterable<PlayerView> livesUpdate) {}
