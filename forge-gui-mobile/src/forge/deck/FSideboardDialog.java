@@ -3,29 +3,68 @@ package forge.deck;
 import java.util.List;
 import java.util.function.Consumer;
 
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
+import forge.Graphics;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.assets.FImage;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.menu.FDropDownMenu;
+import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
+import forge.screens.match.views.VPrompt;
 import forge.toolbox.FDialog;
+import forge.toolbox.FLabel;
 import forge.toolbox.GuiChoose;
 
 public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;
     private final Consumer<List<PaperCard>> callback;
 
-    public FSideboardDialog(CardPool sideboard, CardPool main, final Consumer<List<PaperCard>> callback0, String message) {
+    private final String playerName;
+    private final FMenuBar menuBar; //match screen menu bar the "..." button is placed over, if available
+    private final FLabel btnMoreOptions;
+    private final FDeckEditor.DeckHeader deckHeader; //fallback when the menu bar isn't along the top
+    private CardEdition landSet;
+
+    public FSideboardDialog(CardPool sideboard, CardPool main, final Consumer<List<PaperCard>> callback0, String message, boolean allowAddBasicLands) {
         super(String.format(Forge.getLocalizer().getMessage("lblUpdateMainFromSideboard"), message), 1);
 
         callback = callback0;
+        playerName = message;
+        FScreen.Header screenHeader = Forge.getCurrentScreen() == null ? null : Forge.getCurrentScreen().getHeader();
+        if (!allowAddBasicLands) {
+            menuBar = null;
+            btnMoreOptions = null;
+            deckHeader = null;
+        } else if (screenHeader instanceof FMenuBar bar && !bar.getRotate90()) {
+            //limited formats have unlimited basic lands available while sideboarding;
+            //offer them from a "..." button in the top right, where the deck editor has it
+            menuBar = bar;
+            btnMoreOptions = add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center)
+                    .pressedColor(FScreen.Header.getBtnPressedColor()).build());
+            btnMoreOptions.setCommand(e -> showMoreOptionsMenu(btnMoreOptions));
+            deckHeader = null;
+        } else {
+            menuBar = null;
+            btnMoreOptions = null;
+            deckHeader = add(new FDeckEditor.DeckHeader());
+            deckHeader.lblName.setText(message);
+            deckHeader.btnSave.setVisible(false);
+            deckHeader.btnMoreOptions.setCommand(e -> showMoreOptionsMenu(deckHeader.btnMoreOptions));
+        }
         tabs = add(new SideboardTabs(sideboard, main));
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> hide());
         if (sideboard.isEmpty()) { //show main deck by default if sideboard is empty
@@ -33,17 +72,61 @@ public class FSideboardDialog extends FDialog {
         }
     }
 
+    private void showMoreOptionsMenu(FLabel button) {
+        new FPopupMenu() {
+            @Override
+            protected void buildMenu() {
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e -> showAddBasicLandsDialog()));
+            }
+        }.show(button, 0, button.getHeight());
+    }
+
+    private void showAddBasicLandsDialog() {
+        Deck deck = new Deck(playerName);
+        deck.getMain().addAll(tabs.getMainDeckPage().cardManager.getPool());
+        deck.getOrCreate(DeckSection.Sideboard).addAll(tabs.getSideboardPage().cardManager.getPool());
+        if (landSet == null) { //keep the same land set for the rest of this sideboarding session
+            landSet = DeckProxy.getDefaultLandSet(deck);
+        }
+        tabs.setSelectedPage(tabs.getMainDeckPage());
+        new AddBasicLandsDialog(deck, landSet, lands -> tabs.getMainDeckPage().addCards(lands), List.of(landSet)).show();
+    }
+
     @Override
     public void setVisible(boolean visible0) {
         super.setVisible(visible0);
+        if (menuBar != null) { //make room on the menu bar for the "..." button only while this is open
+            menuBar.setTrailingWidth(visible0 ? FDeckEditor.HEADER_HEIGHT : 0);
+        }
         if (!visible0) { //do callback when hidden to ensure you don't get stuck if Back pressed
             callback.accept(tabs.getMainDeckPage().cardManager.getPool().toFlatList());
         }
     }
 
     @Override
+    protected void drawBackground(Graphics g) {
+        super.drawBackground(g);
+        if (btnMoreOptions != null) { //match the menu bar behind the button rather than the dimmed overlay
+            g.fillRect(FScreen.Header.getBackColor(), btnMoreOptions.getLeft(), btnMoreOptions.getTop(), btnMoreOptions.getWidth(), btnMoreOptions.getHeight());
+        }
+    }
+
+    @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
-        tabs.setBounds(0, 0, width, maxHeight);
+        if (btnMoreOptions != null) {
+            //content is laid out from the dialog's top edge and then shifted down by the space left above it,
+            //so offset by that space to line the button up with the menu bar on screen
+            float shift = getHeight() - maxHeight - VPrompt.HEIGHT;
+            Rectangle barPos = menuBar.screenPos;
+            float buttonWidth = FDeckEditor.HEADER_HEIGHT;
+            btnMoreOptions.setBounds(barPos.x + barPos.width - buttonWidth - screenPos.x, barPos.y - screenPos.y - shift, buttonWidth, barPos.height);
+        }
+        float y = 0;
+        if (deckHeader != null) {
+            deckHeader.setBounds(0, 0, width, FDeckEditor.HEADER_HEIGHT);
+            y = FDeckEditor.HEADER_HEIGHT;
+        }
+        tabs.setBounds(0, y, width, maxHeight - y);
         return maxHeight;
     }
 
@@ -96,6 +179,11 @@ public class FSideboardDialog extends FDialog {
 
             protected void addCard(PaperCard card, int qty) {
                 cardManager.addItem(card, qty);
+                updateCaption();
+            }
+
+            protected void addCards(CardPool cards) {
+                cardManager.addItems(cards);
                 updateCaption();
             }
 
