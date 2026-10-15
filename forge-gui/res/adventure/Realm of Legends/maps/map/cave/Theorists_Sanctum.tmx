@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="74">
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Avatar of Burgeoning Echoes&quot;, &quot;Theorist's Sanctum&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <tileset firstgid="20865" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="22657" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B1CGAbQxQbaXaN4FI/iUTyKR/EoHsUwDADG93lF
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuEAzELcAcSsBMWoDRUYGBiUgVmbEL0YJwOaP/UCzDwDxQSBu5Aeq4UcVw6WPFEDIH/ICQDUCpOsjBND9gQxAflUB2qksAPEzsfooBSC/KkAxNj+TAqJtBsZeUgCt7RXxpa69IdZ45HwI6yfV3utA+27gsZNYQMtwnoLH3/RKV6Fo8UwLe6/QIH4pBWG+DA0DYS8MDJS92yVQ8VACAJZ0J3k=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBmB2ByIL9EYm2Gx1xSI8YEPLhC82xO7/F4c4sjAmAx7ke0nF9DCXlh44HMXOfbCzMNnLqGwoMS/5ICL1vjtjbYhDsfaIMyMJFIPDFPi3zgke+NtcKtDB5SGMzZ7rwLDUhQanhetGBhCoOwr1gwNlNgrbo3b3m18qOoEoWovQ+lwXwaGCF/S7A33I86/6OCKNaYYLcIZBq75MCTg0kcre9H9OMkaVYwceyWQ0gc+/0pgCV9K7EUG1MxHM3kZGKYRidHtJVbfDF7K6mp0MNBtB1IwAKkHkFc=
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztVEEKhDAM7G2f4Kc8b4X+Qn2H60vFJ2xAhKFm0mjdkzsQaKNJmMzQEP5geKcQokSX7Nzd6KX3IDEmO1cDjcck54/EbORq+V/lUctf4/bLuqcBfYHnpt2+r69jzQK5/T/WkwF9gefonBuVuR6voS80j7C5FqeS1/JarRebi5yYVgz5PvBe0hc5Ma0Y8n3g3atv15a1Qnjf/DP6Xtkxy3n0tepzeN58a663/qn4AqzviOM=
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="36" template="../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="37" template="../../../../common/maps/obj/collision.tx" x="272" y="145.5" width="176" height="142.5"/>
+  <object id="38" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="39" template="../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="41" template="../../../../common/maps/obj/collision.tx" x="-35" y="305" width="544" height="32"/>
+  <object id="42" template="../../../../common/maps/obj/collision.tx" x="32" y="144" width="176" height="144"/>
+  <object id="43" template="../../../../common/maps/obj/dialog.tx" x="198.485" y="272.904" width="80.697" height="13.858" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A chamber full of menacing opponents lies ahead, blocking your path to a duel between two incredibly powerful telepaths. The shimmering shapes of a new multiverse in the process of being born swirl about, and the very air is thick with twisting and fracturing magic.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="44" template="../../../../common/maps/obj/enemy.tx" x="232.667" y="237.667">
+   <properties>
+    <property name="enemy" value="Echo Liliana"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="45" template="../../../../common/maps/obj/enemy.tx" x="232.167" y="142.833">
+   <properties>
+    <property name="enemy" value="Echo Nissa"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../common/maps/obj/enemy.tx" x="231.333" y="175.667">
+   <properties>
+    <property name="enemy" value="Echo Vraska"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/enemy.tx" x="231.833" y="206.833">
+   <properties>
+    <property name="enemy" value="Echo Gideon"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/enemy.tx" x="230.515" y="61.2273">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The shimmering shapes of another multiverse rapidly begin to fade. Fractures in reality begin to heal. The man before you lets out a final lament. 
+
+'Vraska... Tam... everyone... forgive me.'
+
+With that, he is finally dead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arena Rector&quot;, &quot;Sanctum Lurker&quot;, &quot;Plan for All Outcomes&quot;, &quot;Way of the Mind Sculptor&quot; ]}"/>
+    <property name="enemy" value="The Theorist"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="231.167" y="94">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Way of the Paradox&quot;, &quot;Tam, Observant Sequencer&quot;, &quot;Hover Barrier&quot;]}"/>
+    <property name="enemy" value="Tam the Possibility"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../common/maps/obj/enemy.tx" x="178" y="121.5">
+   <properties>
+    <property name="enemy" value="Echo Ob Nixilis"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/enemy.tx" x="287.5" y="122.667">
+   <properties>
+    <property name="enemy" value="Echo Avacyn"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/entry_up.tx" x="208" y="302.5" width="65" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/manashards.tx" x="413" y="64.5"/>
+  <object id="55" template="../../../../common/maps/obj/manashards.tx" x="414" y="87.5"/>
+  <object id="56" template="../../../../common/maps/obj/manashards.tx" x="414" y="107.5"/>
+  <object id="57" template="../../../../common/maps/obj/manashards.tx" x="414" y="129"/>
+  <object id="58" template="../../../../common/maps/obj/manashards.tx" x="42" y="64.25"/>
+  <object id="59" template="../../../../common/maps/obj/manashards.tx" x="43" y="87.25"/>
+  <object id="60" template="../../../../common/maps/obj/manashards.tx" x="43" y="107.25"/>
+  <object id="61" template="../../../../common/maps/obj/manashards.tx" x="43" y="128.75"/>
+  <object id="62" template="../../../../common/maps/obj/collision.tx" x="96" y="64.25" width="49.5" height="47.5"/>
+  <object id="63" template="../../../../common/maps/obj/collision.tx" x="175.75" y="36.75" width="47.5" height="43"/>
+  <object id="64" template="../../../../common/maps/obj/collision.tx" x="257.75" y="36.25" width="47" height="42"/>
+  <object id="65" template="../../../../common/maps/obj/collision.tx" x="319.25" y="64.75" width="49.5" height="47.5"/>
+  <object id="67" template="../../../../common/maps/obj/scroll.tx" x="67" y="74.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Loyal Tutor&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/scroll.tx" x="381" y="109">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Vraska's Final Mercy&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/scroll.tx" x="67.5" y="107.25">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Entrust the Spark&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/scroll.tx" x="379" y="79">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overwrite the Multiverse&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="231" y="60">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The shimmering shapes of another multiverse rapidly begin to fade. Fractures in reality begin to heal. The man before you lets out a final lament. 
+
+'Vraska... Tam... everyone... forgive me.'
+
+With that, he is finally dead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Fog Bank&quot;, &quot;Sanctum Lurker&quot;, &quot;Plan for All Outcomes&quot;, &quot;Way of the Mind Sculptor&quot; ]}"/>
+    <property name="enemy" value="The Theorist"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="231.818" y="92.1818">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Way of the Paradox&quot;, &quot;Tam, Observant Sequencer&quot;]}"/>
+    <property name="enemy" value="Tam the Possibility"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints"/>
+</map>
