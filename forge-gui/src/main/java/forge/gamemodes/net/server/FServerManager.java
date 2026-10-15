@@ -1117,7 +1117,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                     clients.put(ctx.channel(), disconnected);
                     netLog.info("[Reconnect] Channel swapped for {} (slot {})", username, disconnected.getIndex());
 
-                    // Resume and resync
                     resumeAndResync(disconnected);
 
                     // Draft-side resync: re-send the current pack and clear grace state.
