@@ -72,6 +72,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
@@ -968,7 +969,9 @@ public class AiController {
         }
 
         int damage = 0;
-        if (!sa.isLandAbility() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+        Supplier<Boolean> loseCheck = () -> !player.cantLoseForZeroOrLessLife() && player.canLoseLife();
+        if (!sa.isLandAbility() && loseCheck.get()) {
+            loseCheck = () -> true;
             damage = ComputerUtil.getDamageForPlaying(player, sa);
             if (damage >= player.getLife()) {
                 // TODO even if it doesn't kill AI lower the score
@@ -976,14 +979,16 @@ public class AiController {
             }
         }
 
-        if (!sa.isSpell() && !sa.isLandAbility()) {
+        if (!sa.isLandAbility() && !sa.isSpell()) {
             return AiPlayDecision.WillPlay;
         }
 
         if (card.isPermanent() && !sa.isMutate()) {
-            damage += ComputerUtil.getDamageFromETB(player, card);
-            if (damage >= player.getLife()) {
-                return AiPlayDecision.BadEtbEffects;
+            if (loseCheck.get()) {
+                damage += ComputerUtil.getDamageFromETB(player, card);
+                if (damage >= player.getLife()) {
+                    return AiPlayDecision.BadEtbEffects;
+                }
             }
             if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
                 return AiPlayDecision.BadEtbEffects;
