@@ -19,7 +19,7 @@ public class ArchipelagoSettingsScene extends UIScene {
     private TextField passwordTextField;
 
     private ArchipelagoSettingsScene() {
-        super("ui/apsettings.json");
+        super(Forge.isLandscapeMode() ? "ui/apsettings.json" : "ui/apsettings_portrait.json");
 
         backButton = ui.findActor("return");
         ipTextField = ui.findActor("apIP");

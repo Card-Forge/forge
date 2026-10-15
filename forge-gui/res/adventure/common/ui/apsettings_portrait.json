@@ -1,0 +1,122 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Scroll",
+      "name": "settings",
+      "x": 10,
+      "y": 10,
+      "width": 250,
+      "height": 420
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 250,
+      "height": 32,
+      "x": 10,
+      "y": 432
+    },
+    {
+      "type": "Label",
+      "name": "ipLabel",
+      "text": "Server IP",
+      "font": "default",
+      "width": 60,
+      "height": 30,
+      "x": 19,
+      "y": 22
+    },
+    {
+      "type": "TextField",
+      "name": "apIP",
+      "width": 171,
+      "height": 30,
+      "x": 79,
+      "y": 20
+    },
+    {
+      "type": "Label",
+      "name": "portLabel",
+      "text": "Port",
+      "font": "default",
+      "width": 60,
+      "height": 30,
+      "x": 19,
+      "y": 52
+    },
+    {
+      "type": "TextField",
+      "name": "apPort",
+      "width": 171,
+      "height": 30,
+      "x": 79,
+      "y": 50
+    },
+    {
+      "type": "Label",
+      "name": "slotNameLabel",
+      "text": "Slot Name",
+      "font": "default",
+      "width": 60,
+      "height": 30,
+      "x": 19,
+      "y": 82
+    },
+    {
+      "type": "TextField",
+      "name": "apSlotName",
+      "width": 171,
+      "height": 30,
+      "x": 79,
+      "y": 80
+    },
+    {
+      "type": "Label",
+      "name": "passwordLabel",
+      "text": "Password",
+      "font": "default",
+      "width": 60,
+      "height": 30,
+      "x": 19,
+      "y": 112
+    },
+    {
+      "type": "TextField",
+      "name": "apPassword",
+      "width": 171,
+      "height": 30,
+      "x": 79,
+      "y": 110
+    },
+    {
+      "type": "TypingLabel",
+      "name": "connectStatusLabel",
+      "text": "Not Connected...",
+      "font": "default",
+      "width": 100,
+      "height": 25,
+      "x": 105,
+      "y": 145
+    },
+    {
+      "type": "TextButton",
+      "name": "connect",
+      "text": "Connect",
+      "width": 45,
+      "height": 25,
+      "x": 205,
+      "y": 145
+    }
+  ]
+}
