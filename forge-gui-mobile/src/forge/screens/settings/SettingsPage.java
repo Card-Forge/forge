@@ -11,6 +11,7 @@ import forge.ai.AiProfileUtil;
 import forge.assets.*;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
+import forge.gamemodes.replay.ReplayLauncher;
 import forge.gui.GuiBase;
 import forge.gui.download.CdnUuidCache;
 import forge.localinstance.properties.ForgeConstants;
@@ -204,6 +205,22 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_INCLUDE_BASIC_LANDS,
             Forge.getLocalizer().getMessage("cbAnteIncludeBasicLands"),
             Forge.getLocalizer().getMessage("nlAnteIncludeBasicLands")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_RECORD_REPLAYS,
+            "Record replays",
+            "Save each game you play so it can be watched again later. Only the last 20 are kept."), 1);
+        lstSettings.addItem(new Setting(FPref.UI_RECORD_REPLAYS,
+            "Watch a replay",
+            "Pick a recorded game and watch it. Pause and speed are on the prompt buttons.") {
+                @Override
+                public void select() {
+                    ReplayLauncher.chooseAndPlay();
+                }
+                @Override
+                public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color,
+                                          float x, float y, float w, float h) {
+                    g.drawText(">", font, color, x, y, w, h, false, Align.right, false);
+                }
+            }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
             Forge.getLocalizer().getMessage("lblHotSeatMode"),
             Forge.getLocalizer().getMessage("nlHotSeatMode")), 1);

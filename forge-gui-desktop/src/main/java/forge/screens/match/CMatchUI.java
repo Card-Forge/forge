@@ -1340,6 +1340,9 @@ public final class CMatchUI
         super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(() -> {
+            if (isReplay()) {
+                SOverlayUtils.hideOverlay(); // the end-of-game screen would otherwise stay over the whole window
+            }
             Singletons.getView().getNavigationBar().closeTab(screen);
             LinkHandler.clearWeakReferencesNow();
         });
