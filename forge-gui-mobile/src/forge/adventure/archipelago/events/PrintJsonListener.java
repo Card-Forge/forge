@@ -5,6 +5,7 @@ import forge.adventure.archipelago.ArchipelagoColors;
 import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.ArchipelagoRandomizer;
 import io.github.archipelagomw.Print.APPrintPart;
+import io.github.archipelagomw.Print.APPrintType;
 import io.github.archipelagomw.events.ArchipelagoEventListener;
 import io.github.archipelagomw.events.PrintJSONEvent;
 
@@ -26,6 +27,7 @@ public class PrintJsonListener {
                 } else {
                     // Todo: parse chat message
                 }
+                break;
             case ItemSend:
                 StringBuilder messageString = new StringBuilder();
                 String itemColor = ArchipelagoColors.Cyan;
@@ -42,7 +44,9 @@ public class PrintJsonListener {
                 }
 
                 for (APPrintPart part : event.apPrint.parts) {
-                        switch (part.type) {
+                        // "type" is optional in the protocol, defaulting to "text" as switching on null would throw.
+                        APPrintType partType = part.type != null ? part.type : APPrintType.text;
+                        switch (partType) {
                             case playerID -> {
                                 if (APClient != null && part.text.equals(APClient.getMyName())) {
                                     messageString.append(ArchipelagoColors.Magenta).append(part.text).append("{RESET}");
