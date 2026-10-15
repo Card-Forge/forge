@@ -49,9 +49,8 @@ Where each effect calls it, matching Java's position relative to its early retur
 | `Pump`          | At the end; also on Go's "nothing to pump" return, which Java does not have                           | 4            |
 
 `ReplaceDyingDefined$` is checked before the effect acts (`checkReplaceDying`): the base spelling must be one
-`definedCards` reads. `ReplaceDyingExiledWith$` (Gut, Fanatical Priestess: `ExiledWithEffectSource$` on the ChangeZone,
-outside `movedGraveyardDestination`'s allow-list), `ReplaceDyingValid$` and `ReplaceDyingZone$` (no corpus line) are
-refused by name.
+`definedCards` reads. `ReplaceDyingValid$` and `ReplaceDyingZone$` (no corpus line) are refused by name.
+`ReplaceDyingExiledWith$` (Gut, Fanatical Priestess) resolves: [`m6-r9h-pump-chain-gut.md`](m6-r9h-pump-chain-gut.md).
 
 ## Silent misses closed on the way
 
@@ -134,18 +133,15 @@ for `targetedBy`; no `ExcessSVarCondition$` line sits under two targeting ancest
 
 ## Not ported
 
-| Shape                                                                   | Reason                                                       |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `ReplaceDyingExiledWith$` (Gut, Fanatical Priestess)                    | `ExiledWithEffectSource$` on the replacing ChangeZone        |
-| `ReplaceDyingCondition$` other than `Kicked`                            | Java ignores the value and installs the effect; no such line |
-| `ExcessSVar$` under `DamageMap$`                                        | The SVar belongs to the later `DamageResolve`                |
-| `ExcessSVarCondition$` naming `!targetedBy`                             | No corpus line                                               |
-| `ExcessDamage`/`ExcessDamageAll` trigger modes, `Damage.ExcessThisTurn` | Not this batch's; `ExcessThisTurn` is still never set        |
+| Shape                                        | Reason                                                        |
+| -------------------------------------------- | ------------------------------------------------------------- |
+| `ReplaceDyingCondition$` other than `Kicked` | Java ignores the value and installs the effect; no such line  |
+| `ExcessSVar$` under `DamageMap$`             | The SVar belongs to the later `DamageResolve`; no corpus line |
+| `ExcessSVarCondition$` naming `!targetedBy`  | No corpus line                                                |
 
-Found while testing, not this batch's: a `Pump`'s P/T change is not visible to a later link of the same chain until the
-layers next run (`applyContinuousLayers` runs at state-based checks, not between links). Rhino's Rampage, among the
-cards that now play, therefore fights with the unpumped power: a 5/1 pumped to 6/1 dealt a 4/2 5 damage (3 excess) where
-Java's `getNetPower`, reading the pump at once, deals 6 (4 excess). A silent wrong answer, not a refusal.
+`ReplaceDyingExiledWith$`, the ExcessDamage/ExcessDamageAll trigger modes with `Damage.ExcessThisTurn`, and a Pump's P/T
+change being visible to the next link of its chain (Rhino's Rampage) are in
+[`m6-r9h-pump-chain-gut.md`](m6-r9h-pump-chain-gut.md).
 
 ## Tests
 

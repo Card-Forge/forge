@@ -1,0 +1,15 @@
+# Rhino's Rampage: Grizzly Bears (2/2) gets +1/+0, then fights Hill Giant
+# (3/3). The statics are rechecked before each sub-ability
+# (AbilityUtils.java:1366-1367), so the Fight link reads the pumped power
+# (Java's Pump writes the boost onto the card, PumpEffect.java:61): 3 damage
+# kills the Giant. Unpumped, 2 would leave it alive. No excess (3 is exactly
+# lethal), so the ImmediateTrigger's ConditionCheckSVar$ Excess is unmet and
+# asks nothing. The Giant's 3 kills the Bears.
+startturn human
+advance 3
+tapformana human 2 R
+queue hybridmanacolor R
+queue targets 3
+queue targets 4
+queue action human cast 1
+passpriority

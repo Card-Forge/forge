@@ -262,6 +262,12 @@ func (g *Game) moveToGraveyard(controller PlayerController, id CardID) (ZoneType
 		if post.shuffle {
 			g.Shuffle(Library, owner)
 		}
+		if post.exiledWith != NoCard {
+			g.markExiledWith(id, post.exiledWith)
+			if melded != NoCard {
+				g.markExiledWith(melded, post.exiledWith)
+			}
+		}
 		g.runMovedChain(controller, post)
 	}
 	return dest, melded
@@ -276,6 +282,9 @@ type movedPost struct {
 	host    *Card
 	amounts map[string]expr.Amount
 	chain   *compile.Ability
+	// exiledWith is the card an exiled card is marked as exiled with
+	// (ExiledWithEffectSource$), NoCard for none.
+	exiledWith CardID
 }
 
 // runMovedChain resolves post's SubAbility$ chain (nil for none) from the
@@ -335,7 +344,7 @@ func (g *Game) movedGraveyardDestination(id CardID) (ZoneType, *movedPost) {
 		}
 		sub := replaceWithSub(r)
 		if sub == nil || !strings.EqualFold(sub.Name, "ChangeZone") ||
-			!onlyKeys(sub, "DB", "Hidden", "Origin", "Destination", "Defined", "LibraryPosition", "Shuffle", "Reveal", "SubAbility") {
+			!onlyKeys(sub, "DB", "Hidden", "Origin", "Destination", "Defined", "LibraryPosition", "Shuffle", "Reveal", "SubAbility", "ExiledWithEffectSource") {
 			g.recordPendingError(fmt.Errorf("engine: %q: Event$ Moved to the graveyard: ReplaceWith$ shape not resolvable yet", h.Def.Name))
 			return false
 		}
@@ -360,6 +369,18 @@ func (g *Game) movedGraveyardDestination(id CardID) (ZoneType, *movedPost) {
 		}
 		if v, ok := sub.Param("Shuffle"); ok {
 			p.shuffle = strings.EqualFold(v, "True") && z == Library
+		}
+		if _, ok := sub.Param("ExiledWithEffectSource"); ok {
+			// SpellAbilityEffect.handleExiledWith (:1092-1094): the card is
+			// exiled with the effect's source, Card.getEffectSource
+			// (Card.java:7233-7237) -- the host of the ability that made the
+			// effect. Only replaceDying writes the key, on an effect card;
+			// a host without a source would be Java's null dereference.
+			if !h.IsEffect || h.effectLife.host == NoCard {
+				g.recordPendingError(fmt.Errorf("engine: %q: Event$ Moved to the graveyard: ExiledWithEffectSource$ on a card with no effect source", h.Def.Name))
+				return false
+			}
+			p.exiledWith = h.effectLife.host
 		}
 		for _, s := range sub.Subs {
 			if strings.EqualFold(s.Key, "SubAbility") {

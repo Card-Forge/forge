@@ -349,6 +349,11 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 			c.Damage.Mark(amount, deathtouch)
 		}
 	}
+	// CardDamageTable.java:141, set before this exchange's DamageDone check
+	// below (excessSoFar's doc comment has why).
+	if excessSoFar(c, table, amount, lethal) > 0 {
+		c.Damage.ExcessThisTurn = true
+	}
 	var flags EventFlags
 	if isCombat {
 		flags |= FlagCombat

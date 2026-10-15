@@ -99,6 +99,13 @@ type Game struct {
 	// (amountpaid.go) does not read power or toughness. Always zero between
 	// calls, so Game.Clone leaves it zero rather than copying it.
 	layering int
+	// staticsHeld counts the state-based-action passes running now
+	// (checkStateBasedActionsPass): while it is non-zero a sub-ability that a
+	// replacement chain reaches mid-pass does not refresh the layers, Java's
+	// setHoldCheckingStaticAbilities around the SBA's destruction
+	// (GameAction.java:1588-1618, checked at :1100). Always zero between calls,
+	// so Game.Clone leaves it zero rather than copying it.
+	staticsHeld int
 	// castPending is the spell whose cast is in progress and whose X has not
 	// been announced yet, NoCard otherwise: Count$xPaid is unresolved for it.
 	castPending CardID

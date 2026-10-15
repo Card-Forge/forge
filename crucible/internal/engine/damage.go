@@ -14,7 +14,10 @@ type Damage struct {
 	// is what the state-based action checks rather than the amount.
 	Deathtouch bool
 	// ExcessThisTurn records that the card was dealt more damage than was
-	// lethal, which several cards care about.
+	// lethal this turn (Card.hasBeenDealtExcessDamageThisTurn, CR 120.10):
+	// the wasDealtExcessDamageThisTurn valid property reads it. Set as the
+	// damage is marked (dealPermanentDamage), so a DamageDone trigger of the
+	// same batch already sees it.
 	ExcessThisTurn bool
 	// Sources are the cards that dealt damage to this one this turn, in
 	// order (Card.getDamageReceivedThisTurn's source half): the "DamagedBy"
@@ -37,3 +40,10 @@ func (d *Damage) Mark(amount int, deathtouch bool) {
 // Clear wipes marked damage, which is what the cleanup step does. The
 // deathtouch and excess flags go with it, because both are scoped to the turn.
 func (d *Damage) Clear() { *d = Damage{} }
+
+// Heal is Clear for a heal or a regeneration (Card.healDamage,
+// Card.java:6181-6185): the excess flag stays for the rest of the turn,
+// since only the cleanup step resets it (Card.resetExcessDamage, :7285).
+func (d *Damage) Heal() {
+	*d = Damage{ExcessThisTurn: d.ExcessThisTurn}
+}

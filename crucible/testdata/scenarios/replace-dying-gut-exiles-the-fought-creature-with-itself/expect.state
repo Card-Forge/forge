@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Grizzly Bears|Damage:1|Id:8;Gut, Fanatical Priestess|SummonSick|Id:1
+ailife=20
+aiexile=Llanowar Elves|ExiledWith:1

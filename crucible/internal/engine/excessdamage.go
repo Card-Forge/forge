@@ -1,21 +1,24 @@
 // Excess damage (CR 120.10): how much of a batch's damage to a permanent was
-// more than lethal, and the ExcessSVar$ that hands it to the rest of the
-// ability chain.
+// more than lethal, the ExcessSVar$ that hands it to the rest of the ability
+// chain, the per-turn excess record and the ExcessDamage/ExcessDamageAll
+// trigger modes.
 //
 // Ported from forge-game/src/main/java/forge/game/card/Card.java's
 // getExcessDamageValue (:6127-6151), GameAction.dealDamage's lethal-damage
-// snapshot (GameAction.java:2738-2752) and CardDamageTable.triggerExcessDamage's
-// storedExcess (CardDamageTable.java:113-155).
+// snapshot (GameAction.java:2738-2752) and CardDamageTable.triggerExcessDamage
+// (CardDamageTable.java:113-163), TriggerExcessDamage.java and
+// TriggerExcessDamageAll.java.
 
 package engine
 
-//enginelint:allow id card parts game ability valid trigger effecthelpers
+//enginelint:allow id card parts game ability valid trigger effecthelpers control
 
 import (
 	"fmt"
 	"slices"
 	"strings"
 
+	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
@@ -102,6 +105,36 @@ func bindExcessSVar(g *Game, a *Ability, table damageTable) {
 		parsed := valid.Parse(spec)
 		cond = &parsed
 	}
+	stored := 0
+	for _, d := range batchExcess(g, table) {
+		if d.excess <= 0 {
+			continue
+		}
+		if cond != nil && !matchesWithTargetedBy(g, a, g.Card(d.card), *cond) {
+			continue
+		}
+		stored += d.excess
+	}
+	a.Amounts = withAmount(a.Amounts, name, stored)
+}
+
+// damagedExcess is one permanent a damage batch dealt damage to and how much
+// of it was past lethal (0 or less for none).
+type damagedExcess struct {
+	card   CardID
+	excess int
+}
+
+// batchExcess is CardDamageTable.triggerExcessDamage's per-permanent sum
+// (CardDamageTable.java:117-126): for every permanent table dealt damage, the
+// damage it was dealt across every source of the batch minus what was lethal
+// to it before any of it (damageEntry.Lethal, GameAction.java:2750-2752), 1
+// instead when deathtouch damage has been dealt to it. In first-damaged
+// order; Java iterates the lethal-damage snapshot as a HashMap
+// (GameAction.java:2738), whose order no game rule fixes. A card none of
+// creature, planeswalker, battle is left out: Java's addDamageAfterPrevention
+// deals it 0 (Card.java:6325-6327).
+func batchExcess(g *Game, table damageTable) []damagedExcess {
 	type damaged struct {
 		card        CardID
 		sum, lethal int
@@ -119,27 +152,108 @@ func bindExcessSVar(g *Game, a *Ability, table damageTable) {
 		}
 		order[i].sum += e.Amount
 	}
-	stored := 0
+	out := make([]damagedExcess, 0, len(order))
 	for _, d := range order {
 		c := g.Card(d.card)
 		if !damageable(c) {
-			// Java's addDamageAfterPrevention deals such a card 0 (Card.java:6325).
 			continue
 		}
 		threshold := d.lethal
 		if c.Damage.Deathtouch {
 			threshold = 1
 		}
-		excess := d.sum - threshold
-		if excess <= 0 {
-			continue
-		}
-		if cond != nil && !matchesWithTargetedBy(g, a, c, *cond) {
-			continue
-		}
-		stored += excess
+		out = append(out, damagedExcess{card: d.card, excess: d.sum - threshold})
 	}
-	a.Amounts = withAmount(a.Amounts, name, stored)
+	return out
+}
+
+// excessSoFar is the excess damage c has been dealt in the batch table is
+// recording, amount -- dealt now, with lethal the threshold before it --
+// included: batchExcess for one card while the batch is still being dealt.
+// dealPermanentDamage sets Damage.ExcessThisTurn from it before checking the
+// DamageDone triggers of this exchange: Java tests those only after the whole
+// batch (runWaitingTriggers after triggerExcessDamage, GameAction.java:2766-2779),
+// so Zangief's ValidTarget$ Creature.wasDealtExcessDamageThisTurn already sees
+// the excess the same damage dealt.
+func excessSoFar(c *Card, table *damageTable, amount, lethal int) int {
+	if !damageable(c) {
+		return 0
+	}
+	sum, threshold, seen := amount, lethal, false
+	if table != nil {
+		for _, e := range *table {
+			if e.Target != CardEntity(c.ID) || e.Amount <= 0 {
+				continue
+			}
+			if !seen {
+				threshold, seen = e.Lethal, true
+			}
+			sum += e.Amount
+		}
+	}
+	if c.Damage.Deathtouch {
+		threshold = 1
+	}
+	return sum - threshold
+}
+
+// triggerExcessDamage is CardDamageTable.triggerExcessDamage's record and
+// trigger half (CardDamageTable.java:126-162), run once per damage batch
+// (checkDamageTableTriggers): every permanent dealt excess damage is marked
+// (setHasBeenDealtExcessDamageThisTurn), Mode$ ExcessDamage fires once for
+// it, and Mode$ ExcessDamageAll fires once for the batch when any permanent
+// was. Card.logExcessDamage's running total is not kept: its one reader,
+// Count$ExcessDamageReceivedThisTurn, is read only through Overclocked
+// Electromancer's CardTriggeredTarget$ head, which this port does not
+// resolve.
+//
+// ExcessDamage (TriggerExcessDamage.performTest, :50-62) matches ValidTarget$
+// against the damaged permanent and CombatDamage$ against isCombat, and
+// records AbilityKey.Target and DamageAmount, the excess (:66-69): Defined$
+// TriggeredTarget and TriggerCount$DamageAmount (Fall of Cair Andros, Toralf,
+// God of Fury). ExcessDamageAll (TriggerExcessDamageAll.performTest, :18-29)
+// keeps the permanents ValidTarget$ matches, needs one, and matches
+// CombatDamage$ (Magmatic Galleon); its AbilityKey.Targets list is not
+// recorded, since no corpus line reads it.
+func (g *Game) triggerExcessDamage(controller PlayerController, table damageTable, isCombat bool) {
+	var damaged []CardID
+	var matches []Ability
+	for _, d := range batchExcess(g, table) {
+		if d.excess <= 0 {
+			continue
+		}
+		c := g.Card(d.card)
+		c.Damage.ExcessThisTurn = true
+		damaged = append(damaged, d.card)
+		objs := triggeredObjects{target: CardEntity(d.card), counts: triggerCounts{damage: d.excess, set: countDamage}}
+		matches = append(matches, g.onceTriggerMatches("ExcessDamage", func(h *Card, t *compile.Ability) bool {
+			return combatDamageMatches(t, isCombat) && validTargetMatches(g, h, t, c)
+		}, objs)...)
+	}
+	g.pushTriggeredAbilities(controller, matches)
+	if len(damaged) == 0 {
+		return
+	}
+	g.pushTriggeredAbilities(controller, g.onceTriggerMatches("ExcessDamageAll", func(h *Card, t *compile.Ability) bool {
+		if !combatDamageMatches(t, isCombat) {
+			return false
+		}
+		return slices.ContainsFunc(damaged, func(id CardID) bool { return validTargetMatches(g, h, t, g.Card(id)) })
+	}, triggeredObjects{}))
+}
+
+// combatDamageMatches is a damage trigger's CombatDamage$ check: absent
+// passes, otherwise "True" must agree with isCombat.
+func combatDamageMatches(t *compile.Ability, isCombat bool) bool {
+	v, ok := t.Param("CombatDamage")
+	return !ok || strings.EqualFold(v, "True") == isCombat
+}
+
+// validTargetMatches is a trigger's ValidTarget$ against card c, from the
+// trigger host h (Trigger.matchesValidParam); absent passes.
+func validTargetMatches(g *Game, h *Card, t *compile.Ability, c *Card) bool {
+	spec, ok := t.Param("ValidTarget")
+	return !ok || Matches(g, c, valid.Parse(spec), h.Controller(), h.ID)
 }
 
 // checkExcessSVar refuses, before the effect acts, an ExcessSVar$ shape

@@ -103,6 +103,11 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 			}
 		}
 	}
+	// AbilityUtils.java:1366-1367: the statics are rechecked before each
+	// sub-ability, so the link reads what the previous one changed.
+	if g != nil {
+		g.refreshLayersBetweenLinks()
+	}
 	return r.Resolve(g, &child, controller)
 }
 

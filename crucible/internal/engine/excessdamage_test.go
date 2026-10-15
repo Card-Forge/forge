@@ -202,23 +202,23 @@ func TestExcessSVarConditionMatchesTheDamagedCard(t *testing.T) {
 
 // TestRhinosRampageCountsOnlyTheOpponentsCreature is the Fight shape:
 // Creature.targetedBy+OppCtrl -- both fighters are targeted by the chain, the
-// controller's own is excluded by OppCtrl.
+// controller's own is excluded by OppCtrl. The root's +1/+0 is on the 5/1
+// when the fight reads its power: the layers are rebuilt before each
+// sub-ability (AbilityUtils.java:1366-1367), so it deals 6, not 5.
 func TestRhinosRampageCountsOnlyTheOpponentsCreature(t *testing.T) {
 	t.Parallel()
 
 	g, p, other := newTwoPlayerGame(t)
-	mine := g.NewCard(creatureDefPT(t, "6", "1"), p, engine.Battlefield)
+	mine := g.NewCard(creatureDefPT(t, "5", "1"), p, engine.Battlefield)
 	theirs := g.NewCard(creatureDefPT(t, "4", "2"), other, engine.Battlefield)
 	c := engine.NewScriptedController()
 	c.QueueTargets([]engine.EntityID{engine.CardEntity(mine)})
 	c.QueueTargets([]engine.EntityID{engine.CardEntity(theirs)})
-	// Rhino's Rampage's root also gives +1/+0; left out here, since a Pump's
-	// P/T change is not visible to a later link of the same chain until the
-	// layers next run (reported, not this batch's).
-	resolveLine(t, g, p, c, "DB$ Pump | ValidTgts$ Creature.YouCtrl | SubAbility$ DBFight",
+	resolveLine(t, g, p, c, "DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +1 | SubAbility$ DBFight",
 		"DBFight", "DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | ExcessSVar$ Excess | ExcessSVarCondition$ Creature.targetedBy+OppCtrl | SubAbility$ DBGain",
 		gainExcess[0], gainExcess[1])
-	// 6 damage to the 4/2 is 4 excess; 4 to the 5/1 (3 excess) is not counted.
+	// 6 damage to the 4/2 is 4 excess (unpumped, 5 would be 3); 4 to the 6/1
+	// (3 excess) is not counted.
 	if got := g.Player(p).Life; got != 24 {
 		t.Errorf("life = %d, want 24", got)
 	}

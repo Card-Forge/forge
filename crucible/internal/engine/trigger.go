@@ -1020,7 +1020,7 @@ type damageEntry struct {
 	Amount int
 	// Lethal is a permanent target's excess-damage threshold just before this
 	// entry's damage was marked (Card.getExcessDamageValue(false),
-	// GameAction.java:2750-2752): what bindExcessSVar subtracts. 0 for a
+	// GameAction.java:2750-2752): what batchExcess subtracts. 0 for a
 	// player target.
 	Lethal int
 }
@@ -1028,7 +1028,8 @@ type damageEntry struct {
 type damageTable []damageEntry
 
 // checkDamageTableTriggers checks every Mode$ this port builds on top of
-// one shared damageTable -- DamageDoneOnce (below),
+// one shared damageTable -- ExcessDamage/ExcessDamageAll
+// (triggerExcessDamage, excessdamage.go), DamageDoneOnce (below),
 // DamageDoneOnceByController (takeinitiativeeffect.go; 0 corpus lines, The
 // Initiative's own trigger), DamageDealtOnce and DamageAll (both further
 // below) -- once each, CardDamageTable's own real shape: Java's own
@@ -1039,6 +1040,9 @@ type damageTable []damageEntry
 // one call site to add, not every damage-dealing action's own caller.
 func (g *Game) checkDamageTableTriggers(controller PlayerController, table damageTable, isCombat bool) {
 	g.applyLifelink(controller, table)
+	// GameAction.java:2766-2767: the excess record and its triggers come
+	// before the DamageDoneOnce family (:2803).
+	g.triggerExcessDamage(controller, table, isCombat)
 	g.checkDamageDoneOnceTriggers(controller, table, isCombat)
 	g.checkDamageDoneOnceByControllerTriggers(controller, table, isCombat)
 	g.checkDamageDealtOnceTriggers(controller, table, isCombat)

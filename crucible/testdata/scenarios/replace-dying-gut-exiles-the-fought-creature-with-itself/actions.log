@@ -1,0 +1,25 @@
+# Gut, Fanatical Priestess enters: Grizzly Bears fights Llanowar Elves, and
+# the Elves are exiled instead of dying (ReplaceDyingDefined$
+# ThisTargetedCard). ReplaceDyingExiledWith$ adds ExiledWithEffectSource$ to
+# the replacing ChangeZone (SpellAbilityEffect.java:732-734), so the Elves are
+# exiled with Gut, the effect's source (SpellAbilityEffect.java:1092-1094,
+# Card.getEffectSource) -- what the specialized faces' Defined$ ExiledWith
+# copies. The Bears take 1 and survive.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+tapformana human 6 R
+tapformana human 7 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue targets 8
+queue targets 9
+queue action human cast 1
+passpriority
+passpriority
+passpriority

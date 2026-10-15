@@ -24,11 +24,8 @@ import (
 
 // replaceDyingUnresolvedParams are replaceDying's params this port does not
 // build, each refused by name before the effect acts (GO-7):
-// ReplaceDyingExiledWith$ adds ExiledWithEffectSource$ to the replacing
-// ChangeZone, which the Moved dispatch (movedGraveyardDestination) does not
-// resolve (Gut, Fanatical Priestess, its one corpus line); ReplaceDyingValid$
-// and ReplaceDyingZone$ have no corpus line.
-var replaceDyingUnresolvedParams = [...]string{"ReplaceDyingExiledWith", "ReplaceDyingValid", "ReplaceDyingZone"}
+// ReplaceDyingValid$ and ReplaceDyingZone$ have no corpus line.
+var replaceDyingUnresolvedParams = [...]string{"ReplaceDyingValid", "ReplaceDyingZone"}
 
 // checkReplaceDying refuses, before the effect acts, a ReplaceDying shape
 // replaceDying cannot build: an unported param, a ReplaceDyingCondition$
@@ -129,12 +126,20 @@ func filterDefinedCards(g *Game, a *Ability, cards []CardID, filter string) []Ca
 //	  -> DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 //
 // Java's re.setLayer(ReplacementLayer.Other) is not a param; the Moved
-// dispatch reads no layer for this event.
+// dispatch reads no layer for this event. ReplaceDyingExiledWith$ adds
+// ExiledWithEffectSource$ True to the ChangeZone (:732-734): the exiled card
+// is exiled with the card whose ability made the effect, not with the effect
+// (Gut, Fanatical Priestess, whose specialized faces copy "a creature card
+// exiled with this creature"); the Moved dispatch reads it
+// (movedGraveyardDestination).
 func replaceDyingDef(name string, a *Ability) *compile.Card {
 	exile := &compile.Ability{Record: compile.SubAbility, Name: "ChangeZone", Params: []vocab.Param{
 		{Key: "DB", Value: "ChangeZone"}, {Key: "Defined", Value: "ReplacedCard"},
 		{Key: "Origin", Value: "Battlefield"}, {Key: "Destination", Value: "Exile"},
 	}}
+	if hasParam(a, "ReplaceDyingExiledWith") {
+		exile.Params = append(exile.Params, vocab.Param{Key: "ExiledWithEffectSource", Value: "True"})
+	}
 	moved := &compile.Ability{Record: compile.Replacement, Name: "Moved", Params: []vocab.Param{
 		{Key: "Event", Value: "Moved"}, {Key: "ValidLKI", Value: "Card.IsRemembered"},
 		{Key: "Origin", Value: "Battlefield"}, {Key: "Destination", Value: "Graveyard"},

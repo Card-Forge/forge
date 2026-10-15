@@ -264,8 +264,25 @@ func compareZoneCards(t *testing.T, playerName string, zone engine.ZoneType, got
 		if g, w := gcard.UnlockedDoors(), wcard.UnlockedDoors(); !slices.Equal(g, w) {
 			t.Errorf("%s unlocked doors = %v, want %v", label, g, w)
 		}
+		// ExiledWith: by the host's printed name, for the CardID reason above
+		// (GameState.java:407-410 writes it for an exiled card only). Checked
+		// when expect.state names one: older scenarios leave it out.
+		if zone == engine.Exile && wcard.ExiledWith() != engine.NoCard {
+			if g, w := exiledWithName(got, gcard), exiledWithName(want, wcard); g != w {
+				t.Errorf("%s exiled with %q, want %q", label, g, w)
+			}
+		}
 		compareCounters(t, label, gcard.Counters, wcard.Counters)
 	}
+}
+
+// exiledWithName is the printed name of the card c is exiled with, empty for
+// none.
+func exiledWithName(g *engine.Game, c *engine.Card) string {
+	if host := c.ExiledWith(); host != engine.NoCard {
+		return g.Card(host).PrintedDef().Name
+	}
+	return ""
 }
 
 func compareCounters(t *testing.T, label string, got, want engine.Counters) {

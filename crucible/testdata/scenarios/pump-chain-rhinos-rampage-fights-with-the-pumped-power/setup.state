@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Rhino's Rampage|Id:1
+humanbattlefield=Mountain|Id:2;Grizzly Bears|Id:3
+aibattlefield=Hill Giant|Id:4

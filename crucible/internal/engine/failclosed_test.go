@@ -210,7 +210,7 @@ func TestFiftyPackFailsClosed(t *testing.T) {
 		"DB$ Goad | Defined$ Self | Duration$ UntilHostLeavesPlay",
 		"DB$ ActivateAbility | Defined$ You | Type$ Land",
 		"DB$ MultiplePiles | Defined$ Player | Piles$ Bogus",
-		"DB$ DamageResolve | ReplaceDyingDefined$ Self | ReplaceDyingExiledWith$ True",
+		"DB$ DamageResolve | ReplaceDyingDefined$ Self | ReplaceDyingZone$ Hand",
 	} {
 		g, p, _ := newPackGame(t)
 		libraryCards(t, g, p, 3)

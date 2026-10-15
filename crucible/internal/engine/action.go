@@ -148,6 +148,8 @@ func checkStateBasedActionsPass(g *Game, controller PlayerController) (over, per
 	if g.over {
 		return true, false
 	}
+	g.staticsHeld++
+	defer func() { g.staticsHeld-- }()
 
 	winner, wins := NoPlayer, 0
 	for _, id := range g.Players() {
@@ -1166,4 +1168,30 @@ func applyContinuousLayers(g *Game, afterControl func()) {
 // with the card already in place).
 func (g *Game) refreshLayers() {
 	applyContinuousLayers(g, func() {})
+}
+
+// refreshLayersBetweenLinks is the checkStaticAbilities call
+// AbilityUtils.resolveSubAbilities makes before each sub-ability
+// (AbilityUtils.java:1366-1367, "Equip an untapped creature with Sword of the
+// Paruns then cast Deadshot on it"): the layers are rebuilt, so a Pump's P/T
+// change is on the card when the next link of the same chain reads it
+// (Rhino's Rampage's fight). Java's Pump writes its boost straight onto the
+// card (PumpEffect.java:61, addPTBoost); this port applies a pumpRecord in
+// Layer 7c, so the rebuild is what puts the boost on the card in between.
+//
+// Skipped while a layer pass or a state-based-action pass is running: the
+// first is a re-entry, the second Java's hold (staticsHeld). The rebuild
+// runs outside the parent's resolution context, since statics evaluate their
+// own amounts rather than the resolving ability's. Java's checkStaticAbilities
+// also corrects control zones, runs static commands, unpairs and fires
+// Always triggers (GameAction.java:1203-1248); those stay with the next
+// state-based-action pass here.
+func (g *Game) refreshLayersBetweenLinks() {
+	if g.layering > 0 || g.staticsHeld > 0 {
+		return
+	}
+	prevX, prevResolving := g.xctx, g.resolving
+	g.xctx, g.resolving = xContext{}, nil
+	g.refreshLayers()
+	g.xctx, g.resolving = prevX, prevResolving
 }

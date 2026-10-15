@@ -1,0 +1,22 @@
+# Magmatic Galleon enters and deals 5 damage to Llanowar Elves (1/1): 4 of
+# it is excess (CR 120.10, Card.getExcessDamageValue). The batch's
+# CardDamageTable.triggerExcessDamage marks the Elves and runs Mode$
+# ExcessDamageAll once (CardDamageTable.java:126-162); Galleon's own
+# "whenever one or more creatures your opponents control are dealt excess
+# noncombat damage" matches ValidTarget$ Creature.OppCtrl and CombatDamage$
+# False (TriggerExcessDamageAll.java:18-29) and makes a Treasure.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+tapformana human 6 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue targets 7
+queue action human cast 1
+passpriority
+passpriority
+passpriority

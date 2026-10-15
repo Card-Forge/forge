@@ -582,6 +582,22 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 	// canBeBeamedUp: no CantBeBeamedUp static covers c (Marooned).
 	case name == "canBeBeamedUp":
 		return !g.cantBeBeamedUp(c)
+	case strings.HasPrefix(name, "wasDealtExcessDamageThisTurn"):
+		// CardProperty.java:1164-1167: Card.hasBeenDealtExcessDamageThisTurn.
+		return c.Damage.ExcessThisTurn
+	case name == "TriggeredTarget":
+		// CardProperty.java:2045-2063: c is the root ability's
+		// AbilityKey.Target triggering object, read off the ability of source
+		// in context -- Toralf, God of Fury's "any target other than that
+		// permanent", Blade of Shared Souls' "another target creature". False
+		// with no ability of source's in context or no card target recorded,
+		// as Java's non-SpellAbility branch and null object are.
+		a := g.resolving
+		if a == nil || source == NoCard || a.Source != source {
+			return false
+		}
+		id, ok := a.triggered.target.AsCard()
+		return ok && id == c.ID
 	case name == "TriggeredAttackers":
 		// CardProperty.java:2045-2063: c is in the root ability's
 		// AbilityKey.Attackers; false with no ability of source's in context

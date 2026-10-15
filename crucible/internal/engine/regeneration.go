@@ -94,7 +94,7 @@ func cardCantRegenerate(g *Game, id CardID) bool {
 // (regenerationeffect.go), which the static replacement below runs.
 func (g *Game) regenerateBody(controller PlayerController, id CardID) {
 	c := g.Card(id)
-	c.Damage.Clear()
+	c.Damage.Heal()
 	if !c.Tapped {
 		c.Tapped = true
 		g.checkTapsTriggers(controller, id, c.Controller(), false)

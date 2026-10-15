@@ -23,7 +23,7 @@ func (healDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return fmt.Errorf("engine: HealDamage: %w", err)
 	}
 	for _, id := range cards {
-		g.Card(id).Damage.Clear()
+		g.Card(id).Damage.Heal()
 	}
 	return nil
 }

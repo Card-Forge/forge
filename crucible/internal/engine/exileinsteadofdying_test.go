@@ -364,7 +364,7 @@ func TestReplaceDyingRefusedShapes(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ line, want string }{
-		{"DB$ Fight | Defined$ Self | ValidTgts$ Creature | ReplaceDyingDefined$ ThisTargetedCard | ReplaceDyingExiledWith$ True", "ReplaceDyingExiledWith$"},
+		{"DB$ Fight | Defined$ Self | ValidTgts$ Creature | ReplaceDyingDefined$ ThisTargetedCard | ReplaceDyingZone$ Hand", "ReplaceDyingZone$"},
 		{"DB$ Pump | ValidTgts$ Creature | NumAtt$ -1 | NumDef$ -1 | ReplaceDyingDefined$ Bogus", "ReplaceDyingDefined$"},
 		{"DB$ DamageAll | ValidCards$ Creature | NumDmg$ 1 | ReplaceDyingDefined$ Bogus", "ReplaceDyingDefined$"},
 		{"DB$ Fight | Defined$ Self | ValidTgts$ Creature | ReplaceDyingDefined$ Targeted | ReplaceDyingCondition$ Bargain", "ReplaceDyingCondition$"},
