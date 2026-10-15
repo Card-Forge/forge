@@ -52,6 +52,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -810,7 +811,11 @@ public class AiAttackController {
     public final int declareAttackers(final Combat combat) {
         final int id = ai.getId();
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(ai.getGame().getAITimeout());
-        AITimeoutTracker.begin(id, timeoutNanos);
+        // predicting a HUMAN player's attack must not light up that player's timer bar
+        final boolean trackTimer = ai.getController().isAI();
+        if (trackTimer) {
+            AITimeoutTracker.begin(id, timeoutNanos);
+        }
         try {
             // something prevents attacking, try another
             if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
@@ -895,10 +900,12 @@ public class AiAttackController {
                     }
                 );
                 List<Callable<Integer>> tasks = new ArrayList<>();
+                final long deadline = AITimeoutTracker.deadlineNanos(id, timeoutNanos);
+                final AtomicBoolean combatClosed = new AtomicBoolean(false);
 
                 for (final Card attacker : this.attackers) {
                     final GameEntity finalDefender = defender;
-                    tasks.add(() -> {
+                    tasks.add(withDeadline(deadline, () -> {
                         GameEntity mustAttackDef = null;
                         if (attacker.getSVar("MustAttack").equals("True")) {
                             mustAttackDef = finalDefender;
@@ -950,20 +957,26 @@ public class AiAttackController {
                             // multimap is not thread-safe; unsynchronized addAttacker calls
                             // collide (ConcurrentModificationException, dropped attackers)
                             synchronized (combat) {
+                                if (combatClosed.get()) {
+                                    return 0; // timed out: the caller already moved on, never touch combat after that
+                                }
                                 combat.addAttacker(attacker, mustAttackDef);
+                                attackersLeft.remove(attacker);
+                                numForcedAttackers.incrementAndGet();
                             }
-                            attackersLeft.remove(attacker);
-                            numForcedAttackers.incrementAndGet();
                         }
                         return 0;
-                    });
+                    }));
                 }
 
                 try {
-                    executor.invokeAll(tasks, Math.max(1L, AITimeoutTracker.remainingNanos()), TimeUnit.NANOSECONDS);
+                    executor.invokeAll(tasks, Math.max(1L, AITimeoutTracker.remainingNanos(id, timeoutNanos)), TimeUnit.NANOSECONDS);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } finally {
+                    synchronized (combat) {
+                        combatClosed.set(true); // late workers must not add attackers after we move on
+                    }
                     executor.shutdownNow();
                 }
 
@@ -1361,8 +1374,24 @@ public class AiAttackController {
 
             return aiAggression;
         } finally {
-            AITimeoutTracker.end(id);
+            if (trackTimer) {
+                AITimeoutTracker.end(id);
+            }
         }
+    }
+
+    /** Runs a worker task armed with the AI deadline (and interrupt), so pool threads stop instead of running on as zombies. */
+    private static Callable<Integer> withDeadline(final long deadlineNanos, final Callable<Integer> task) {
+        return () -> {
+            final Object limit = AITimeoutTracker.arm(deadlineNanos, true);
+            try {
+                return task.call();
+            } catch (AITimeoutTracker.Expired e) {
+                return 0;
+            } finally {
+                AITimeoutTracker.disarm(limit); // pooled threads must not inherit the limit
+            }
+        };
     }
 
     private class SpellAbilityFactors {

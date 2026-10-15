@@ -1303,46 +1303,53 @@ public class AiController {
         final int id = player.getId();
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(id, timeoutNanos);
-        final Object limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
-        final AiBlockController block = new AiBlockController(defender, defender != player);
+        Object limit = null;
         try {
-            // When player != defender, AI should declare blockers for its benefit.
-            block.assignBlockersForCombat(combat);
-        } catch (AITimeoutTracker.Expired e) {
-            // out of time: keep the blocks decided so far (each block is added atomically, so combat stays consistent)
-            AITimeoutTracker.disarm(limit); // the fallback below must not be cut short again
+            // constructed before arming and inside the try: a throwing constructor can no longer leak begin()/arm()
+            final AiBlockController block = new AiBlockController(defender, defender != player);
+            limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
             try {
+                // When player != defender, AI should declare blockers for its benefit.
+                block.assignBlockersForCombat(combat);
+            } catch (AITimeoutTracker.Expired e) {
+                // out of time: keep the blocks decided so far (each block is added atomically, so combat stays consistent)
+                AITimeoutTracker.disarm(limit); // the fallback below must not be cut short again
+                limit = null;
                 block.completeRequiredBlocks(combat); // creatures that must block still do
-            } catch (AITimeoutTracker.Expired ignored) {
-                // not armed any more, cannot happen; kept for safety
             }
         } finally {
-            AITimeoutTracker.disarm(limit);
+            if (limit != null) {
+                AITimeoutTracker.disarm(limit);
+            }
             AITimeoutTracker.end(id);
         }
     }
 
     public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        AiAttackController aiAtk = new AiAttackController(attacker);
+        final AiAttackController aiAtk = new AiAttackController(attacker);
         final int id = player.getId();
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(id, timeoutNanos);
-        final Object limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
+        Object limit = null;
         try {
+            limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
             lastAttackAggression = aiAtk.declareAttackers(combat);
 
             aiAtk.reinforceWithBanding(combat);
-
-            // Per CR 508.1d, the decision to pay attack costs (e.g. Propaganda)
-            // is made at declaration time. Remove attackers the AI can't pay for.
-            removeUnpayableAttackers(combat);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: attack with what was decided so far; the validity check below repairs an illegal declaration
         } finally {
-            AITimeoutTracker.disarm(limit);
+            if (limit != null) {
+                AITimeoutTracker.disarm(limit);
+            }
             AITimeoutTracker.end(id);
         }
+
+        // Per CR 508.1d, the decision to pay attack costs (e.g. Propaganda)
+        // is made at declaration time. Remove attackers the AI can't pay for.
+        // Correctness-critical and cheap, so it also runs when the deadline fired (outside the armed region).
+        removeUnpayableAttackers(combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
@@ -1653,7 +1660,7 @@ public class AiController {
         final long deadlineNanos = AITimeoutTracker.deadlineNanos(aiId, timeoutNanos);
         FutureTask<SpellAbility> future = new FutureTask<>(() -> {
             // the eval thread aborts itself at the shared deadline (or when cancelled) instead of running on as a zombie
-            AITimeoutTracker.arm(deadlineNanos, true);
+            final Object evalLimit = AITimeoutTracker.arm(deadlineNanos, true);
             try {
                 //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
                 boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
@@ -1718,10 +1725,13 @@ public class AiController {
                         sa.setLastStateGraveyard(game.getLastStateGraveyard());
                     }
                     //override decision for living end player
-                    AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
-
-                    // reset LastStateBattlefield
-                    sa.clearLastState();
+                    final AiPlayDecision opinion;
+                    try {
+                        opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
+                    } finally {
+                        // reset LastStateBattlefield - also when the deadline fired inside canPlayAndPayFor
+                        sa.clearLastState();
+                    }
                     // PhaseHandler ph = game.getPhaseHandler();
                     // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
@@ -1734,8 +1744,10 @@ public class AiController {
                 }
 
                 return null;
-                    } catch (AITimeoutTracker.Expired e) {
+            } catch (AITimeoutTracker.Expired e) {
                 return null;
+            } finally {
+                AITimeoutTracker.disarm(evalLimit); // matters as soon as this runs on a pooled thread
             }
         });
         Thread t = new Thread(future, "Game AI Eval");

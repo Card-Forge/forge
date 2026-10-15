@@ -1024,6 +1024,8 @@ public class AiBlockController {
         if (attackers.isEmpty()) {
             return;
         }
+        // makeRequiredBlocks/makeChumpBlocks iterate attackersLeft, which assignBlockersForCombat has not (fully) set up
+        attackersLeft = new ArrayList<>(attackers);
         final CardCollectionView alreadyBlocking = combat.getAllBlockers();
         blockersLeft = new ArrayList<>();
         for (final Card b : ai.getCreaturesInPlay()) {
@@ -1032,6 +1034,20 @@ public class AiBlockController {
             }
         }
         makeRequiredBlocks(combat);
+
+        // Out of time while still facing lethal damage: at least chump the unblocked attackers greedily.
+        // Cheap, and deliberately runs outside the AI deadline (the caller disarmed it).
+        final List<Card> unblocked = new ArrayList<>();
+        for (final Card a : attackers) {
+            if (!combat.isBlocked(a)) {
+                unblocked.add(a);
+            }
+        }
+        attackersLeft = unblocked;
+        lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
+        if (lifeInDanger && !unblocked.isEmpty()) {
+            makeChumpBlocks(combat, new ArrayList<>(unblocked));
+        }
     }
     public void assignBlockersForCombat(final Combat combat, final CardCollection excludedBlockers) {
         List<Card> possibleBlockers = ai.getCreaturesInPlay();
