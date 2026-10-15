@@ -518,7 +518,7 @@ public class CardRenderer {
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardView card = CardView.getCardForUi(pc);
         final CardStateView state = card.getCurrentState();
-        boolean isUnlocked = archipelagoData.checkCardUnlocked((PaperCard) pc);
+        boolean isUnlocked = isCardUnlocked(pc);
         drawLockAwareCardListItem(g, font, foreColor, getCardArt(pc), card, pc.getEdition(),
                 pc.getRarity(), state.getPower(), state.getToughness(),
                 state.getLoyalty(), count, suffix, x, y, w, h, compactMode, isUnlocked);
@@ -651,9 +651,14 @@ public class CardRenderer {
 
     private static void drawCardLock(Graphics g, float x, float y, float w, float h, IPaperCard pc) {
         // Draw the lock overtop of the card if the card is locked here.
-        if (!archipelagoData.checkCardUnlocked((PaperCard) pc)) {
+        if (!isCardUnlocked(pc)) {
             ArchipelagoUtil.drawLockedCardOverlay(g, x, y, w, h);
         }
+    }
+
+    private static boolean isCardUnlocked(IPaperCard pc) {
+        // Archipelago/Randomizer locks only apply in adventure mode.
+        return !Forge.isMobileAdventureMode || archipelagoData.checkCardUnlocked((PaperCard) pc);
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
