@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="66">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Hexhaven Dueling Arena&quot;, &quot;Repurposed Enforcer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9RGrHiQPw5SYQ469pKijpr308O9Axi890jMpZpMjPgpGBgAAySsKzg==
+  </data>
+ </layer>
+ <layer id="7" name="Lava" width="30" height="17" tintcolor="#ff5500">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0BuEeSDwqL2jYBSMAnoCAFTyBY8=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17" tintcolor="#8a3440">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj+IRiNvYGBjakXAHG33sVWFnYNhig8Bq7KP20gIfAtpzGAkfoZO9o3gUD3YMAMHiTJ4=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91G0KgzAMBuD8bz2BHwdzZ3HzWFr1brOMQhb68aaKgSBa4mNM6WKJlgeyE4nUvBoiZ9M5Nve5Yd2b23nNxQrYmn4RE7VRl5uTIRoS/3g+1z6mbCNuzEz1vYI24vagmbLbyn6D2wImtzdWd9VFY7q5X43L6664cm45k++DWvew//szZ0vT3++VbgfYYZ4xM/ZezTkpbSdm70BTe05K20dsz5VMrcvtt/kld8Ozklnjyhruar+f5xdMsOuI
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAdRBqSoYlMsEIUgUH2IvPpBejp34G0F1s408NOGED2LzXtRjcLnY8ezoTUk2MvjF3HS55+Su0lVz8t7QWFxU4e6to7EPrRASlxTEtQyz3QLqAtUGEcaBcMXQAAjN4ayQ==
+  </data>
+ </layer>
+ <layer id="8" name="Over Sprites" width="30" height="17" tintcolor="#ffaa00">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAdRBqSoYkKYNTeUXuHk703mUaWvaNgFIyCwQEATRYFfQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="55" template="../../../../common/maps/obj/door_left.tx" x="176.5" y="241">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Hexhaven_Tower_2.tmx"/>
+    <property name="teleportObjectId" value="58"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="264.546" y="138.771">
+   <properties>
+    <property name="enemy" value="Ingris Stingerquill"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="187" y="51">
+   <properties>
+    <property name="enemy" value="Denzilore Fatehold"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="152" y="144">
+   <properties>
+    <property name="enemy" value="Echo Codie"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/entry_up.tx" x="197" y="268" width="37" height="16"/>
+  <object id="64" template="../../../../common/maps/obj/dialog.tx" x="191.561" y="216.753" width="46.5152" height="10.6762" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You find yourself at the bottom of a massive tower, its geometry not quite right. Through the central open area, you see several intimidating sphinxes flying about, each swirling with different combinations of powerful mana. You have heard rumors of a twisted echo of the mage school Strixhaven - Hexhaven, it was called. You assume this place must have been pulled from there.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/treasure.tx" x="259.5" y="238.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Fatehold Charm&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Fatehold Annex&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Prudent Fateseer&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Theorix Charm&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Theorix Annex&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Paradox Shaper&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Vigorbloom Charm&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Vigorbloom Annex&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Vigorbloom Vanguard&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Konstrari Charm&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Konstrari Annex&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Woodwork Prodigy&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Stingerquill Charm&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Stingerquill Annex&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Stingerquill Voxmancer&quot;
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

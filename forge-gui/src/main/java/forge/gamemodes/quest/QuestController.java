@@ -19,12 +19,14 @@ package forge.gamemodes.quest;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 
 import forge.card.CardEdition;
+import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.Game;
@@ -44,6 +46,8 @@ import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.data.StarRating;
 import forge.gamemodes.quest.io.QuestChallengeReader;
+import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.item.PreconDeck;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
@@ -101,6 +105,15 @@ public class QuestController {
     public static final int MAX_PET_SLOTS = 2;
 
     public QuestController() {
+    }
+
+    public Predicate<PaperCard> isVariantAllowed = PaperCardPredicates.fromRules(CardRulesPredicates.IS_ATTRACTION
+            .or(CardRulesPredicates.IS_STICKER_SHEET).or(CardRulesPredicates.IS_CONTRAPTION));
+
+    public Stream<PaperCard> getAllAllowedCards() {
+        Stream<PaperCard> common = FModel.getMagicDb().getCommonCards().streamAllCards();
+        Stream<PaperCard> variantCards = FModel.getMagicDb().getVariantCards().streamAllCards().filter(isVariantAllowed);;
+        return Stream.concat(common, variantCards);
     }
 
     /**
@@ -629,7 +642,7 @@ public class QuestController {
     }
 
     public List<CardEdition> getAvailableLandSets() {
-        List<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
+        Collection<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : FModel.getMagicDb().getEditions().getItemNames();
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
         return availableEditionCodes.stream()
                 .map(editions::get)

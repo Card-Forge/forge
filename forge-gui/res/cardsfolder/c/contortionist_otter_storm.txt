@@ -1,0 +1,16 @@
+Name:Contortionist Otter Storm
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Contortionist
+SVar:STK2:Kind$ Name | Word$ Otter
+SVar:STK3:Kind$ Name | Word$ Storm
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {T}: Target creature gains haste until end of turn. | Ability$ STK7Haste
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Deathtouch, lifelink | Keywords$ Deathtouch,Lifelink
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 5 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 3 | Toughness$ 5
+SVar:STK7Haste:AB$ Pump | Cost$ T | ValidTgts$ Creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+Oracle:{TK}{TK} — {T}: Target creature gains haste until end of turn.\n{TK}{TK}{TK}{TK} — Deathtouch, lifelink\n{TK}{TK} — 5/1\n{TK}{TK}{TK} — 3/5

@@ -72,6 +72,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
@@ -960,12 +961,38 @@ public class AiController {
     }
 
     private AiPlayDecision saSideEffects(final Card card, final SpellAbility sa) {
+        if (usesFullSimulation()) {
+            return AiPlayDecision.WillPlay;
+        }
         if (usesHybridSimulation()) {
             return OnePlaySafetyChecker.isAcceptable(player, sa) ? AiPlayDecision.WillPlay : AiPlayDecision.HybridSimRejected;
         }
 
-        if ((!sa.isSpell() && !sa.isLandAbility()) || usesFullSimulation()) {
+        int damage = 0;
+        Supplier<Boolean> loseCheck = () -> !player.cantLoseForZeroOrLessLife() && player.canLoseLife();
+        if (!sa.isLandAbility() && loseCheck.get()) {
+            loseCheck = () -> true;
+            damage = ComputerUtil.getDamageForPlaying(player, sa);
+            if (damage >= player.getLife()) {
+                // TODO even if it doesn't kill AI lower the score
+                return AiPlayDecision.CurseEffects;
+            }
+        }
+
+        if (!sa.isLandAbility() && !sa.isSpell()) {
             return AiPlayDecision.WillPlay;
+        }
+
+        if (card.isPermanent() && !sa.isMutate()) {
+            if (loseCheck.get()) {
+                damage += ComputerUtil.getDamageFromETB(player, card);
+                if (damage >= player.getLife()) {
+                    return AiPlayDecision.BadEtbEffects;
+                }
+            }
+            if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
+                return AiPlayDecision.BadEtbEffects;
+            }
         }
 
         if ("True".equals(card.getSVar("NonStackingEffect")) && ComputerUtilCard.isNonDisabledCardInPlay(player, card.getName())) {
@@ -974,24 +1001,6 @@ public class AiController {
 
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
-        }
-
-        int damage = 0;
-        if (!sa.isLandAbility() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
-            damage = ComputerUtil.getDamageForPlaying(player, sa);
-            if (damage >= player.getLife()) {
-                // TODO even if it doesn't kill AI lower the score
-                return AiPlayDecision.CurseEffects;
-            }
-        }
-        if (card.isPermanent() && !sa.isMutate()) {
-            damage += ComputerUtil.getDamageFromETB(player, card);
-            if (damage >= player.getLife()) {
-                return AiPlayDecision.BadEtbEffects;
-            }
-            if (!sa.isLandAbility() && !checkETBEffects(card, sa, null)) {
-                return AiPlayDecision.BadEtbEffects;
-            }
         }
 
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
@@ -1886,7 +1895,15 @@ public class AiController {
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
         } else if ("HighestLoseLife".equals(logic)) {
-            return Math.min(player.getLife() - 1, MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1);
+            // nobody to outbid
+            if (AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).size() < 2) {
+                return min;
+            }
+            int random = MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, 0) + 1);
+            if (player.getLife() < random + 5) {
+                return min;
+            }
+            return random;
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (sa.hasSVar("EnergyToPay")) {

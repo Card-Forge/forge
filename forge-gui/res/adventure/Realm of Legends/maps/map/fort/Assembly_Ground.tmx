@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="281">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="17793" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="6" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSgYGODGiYnpZe9A6ifVLnqHDzY3UFMdNcFAhMtAx8coGAXUBADs7wWP
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzTERAAAIBKBfLW5uS7h4QgESAAC4qevXC9sGcRsBHw==
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztziENAAAIADAsHchLEJISg7Fd3L8zogEA4KGp+wN8th6Z9vs=
+  </data>
+ </layer>
+ <layer id="8" name="ForegroundBis" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4A8cIhp1O5RMApGwSgYBZQDVhkGBjYoZgdizQEqZ0Hl+2GmgbcfHbMihc0oGBwAFB9tnAPtilEwCqgDAJyfCmg=
+  </data>
+ </layer>
+ <layer id="1" name="Walls" width="30" height="30" offsetx="0" offsety="-0.666667">
+  <data encoding="base64" compression="zlib">
+   eJztVsttwzAMlXRo0AEC9NKbUdibdKJOECjdqHc3iOfooZ2jJqSHvLCSLSn9HfIAwbJN8ZEiRcqYgM4Zc7cx5uDC+zQ/t/P7cX7urTHPNsg8xP+C0Z3kZT7QP5ZjPN0Y87IJc28DD2RFfz+P1zhEn/BP8Sk2pNBFW7ekl2WZM+Vryq+BdOZ8GcnWQ0Kmo2/aV+aVf/s4prgHg8vz5sA6mKMn+2AH9rVXPowZX7AWHMCQkdV7qmOb42AexJDj6+f5oz1xs04ZSzm6BsQduYb4Ihc+yG+tU/PWgrl1LuwW9Hbu/Iy2crOffcGe8Rq2ucUO6CqNE6/hUbP+v8BX7Bvqmj4fLZxcI5ZqqwA5xj2hlltzCtbyTMeYz2YpajlzdrRw52woAWJ9KXcNH2oO6lgLN+ezHqyD+VDDOS4jzdfOh7fnfVPjmOlDpXmQqm/Mib6Z4uYedkl/ELC9eq80N+4V+s7x3dDc77df7xw/yY3agPe/6AFv97/PecUVpfCxXpXgE8/li9s=
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlUsKwjAQhqfVnXTR6gUKoqkKegXP4vMMulcX3kJPItqqp3JCCcaQpGmLqUh/GJLQJN+fx6QA/6WeWw135wAkrn3+BXkRRlzRumvVUonmxJ6Lg2OH2xVygeaGDTbLRZFtY+0yNpWN90hkE6xfLb1HjG2TybNNmKb9flU2/i2nRjXsafO786t0bqVlmwB0SP7xqv3KYh6jtBwjc1KAy/aL+S+r0P9sy+bl+1D/OpXdF10flScq1T3qYz+CEfnFzzqPmM8b8mKMxM9/1gMcM8QY+e85s/aGfZ8FAHOMRWDG2ngAWy+t35H3wHhyXJ2y7oLom56ZbC1L9LrCWCs8h4Z+dGzWzvIs3qu8kq1P5kWlF4ATOuw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="-17.7197" y="480" width="497.47" height="16"/>
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="480" y="-56.6364" width="17" height="558.636"/>
+  <object id="267" template="../../../../common/maps/obj/collision.tx" x="-18.5" y="-38.6513" width="17" height="558.636"/>
+  <object id="268" template="../../../../common/maps/obj/collision.tx" x="-8.06833" y="-16.6667" width="497.47" height="16"/>
+  <object id="270" template="../../../../common/maps/obj/entry_up.tx" x="257.333" y="478.333" width="38" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="271" template="../../../../common/maps/obj/dialog.tx" x="209.5" y="435.917" width="107" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A legion of soldiers gathers ahead, in the process of breaking camp to begin marching. As they spot you, they seem to decide you're an intruder.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="272" template="../../../../common/maps/obj/enemy.tx" x="256.667" y="405.667">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Assemble the Legion|GTC&quot;, &quot;Mobilization|ONS&quot; ] }"/>
+    <property name="enemy" value="Torsten Von Ursus"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="275" template="../../../../common/maps/obj/scroll.tx" x="92.5" y="376">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Enlistment Officer&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="277" template="../../../../common/maps/obj/scroll.tx" x="98.5" y="465.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Daru Warchief&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="278" template="../../../../common/maps/obj/scroll.tx" x="359" y="375">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Aven Brigadier&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="279" template="../../../../common/maps/obj/scroll.tx" x="390.5" y="466">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Catapult Master&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="280" template="../../../../common/maps/obj/scroll.tx" x="254" y="349.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Legion Leadership&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

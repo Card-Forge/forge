@@ -197,6 +197,8 @@ public enum TrackableProperty {
     AttractionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     ContraptionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Junkyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    StickerSheets(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Stickers(TrackableTypes.StringType),
 
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
 
@@ -221,6 +223,7 @@ public enum TrackableProperty {
     ActivatingPlayer(TrackableTypes.PlayerViewType),
     TargetCards(TrackableTypes.CardViewCollectionType),
     TargetPlayers(TrackableTypes.PlayerViewCollectionType),
+    TargetStackItems(TrackableTypes.StackItemViewListType),
     SubInstance(TrackableTypes.StackItemViewType),
     Ability(TrackableTypes.BooleanType),
     OptionalTrigger(TrackableTypes.BooleanType),

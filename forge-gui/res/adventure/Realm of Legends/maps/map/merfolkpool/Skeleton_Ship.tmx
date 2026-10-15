@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="140">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztl+0JgDAMRJ2g6C7uP49jSPGPlJ7NxxVDyYOAoF6fhJK6bUkSm7PMKaYfm5pZ9n5F8euRfvrM6P21OKEsFunHy0w/XybDTzKnrPPN6zdy712PeDut5mftk+as0vppZgh7P4z8NPdQnodZftfxPOs9fyI/1FOtnwXtvkF+X98exQ+xul99vxbLj/W/0uZKkPrNOAtIkPr9BVo7ih/iBmaML4w=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJw7xsrAcGwUj+JRTBH+LE5dPBTc52aCiUfdR7r7Bnv8jrpv1H2j7qOt+/Bhcu0Zdd+o+wjppQYmx47h4j56x/uo+6jvPkrSwXBwHynm4HMfJW7BheeyQPBgcx/MXdjwQLsP5o4MbkyMz624xGnhPmxuw+dOXOEMAG2OsgU=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0FEKgkAQxvEPCsLHHkIP4hm8Qlr36T2iF0/YBSIKghx0qJYdonY3J5o/fAiK+lPAsqzQljlQR1qTx/cdIz7zZL6gzBeW+cL6R9+uALbCOOm6u30hvydF6/q77/skzUbNNk6zkW3SUUO/YHTTbOM0GzXbOM3Gw7xfVQKrydiae01naafApTsuZv3OwznamFayPbp881npPvrPtJTfcH1hk6zuN9H5FEafb5M97x37DRDvS1c=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztl0sOgjAQhucC3kzFsqhPNGxIXIjRhafEIJj4wsP4E2OCWGOrrTaxXzKbpqVfBzpkiBwOebwZUQfBZr82EZPCa4PIJPxYSOSH5p2qeDHyh2Dx67kZ3HJDfouIaBk9jqfw2iCy+PXcKgUnGvZwrgA5Dcy5enPkD8Hmas8o3UZ9nAtu+Qd+Mrl4Z64JVPf/tW+JDfVFlIfbWL2+2JCzKir1RTcyuRDVF9m130C1vqy//P9wOHSQTsTjydjcnomGu9J84v0OLXd3/46m4J3ngm8+M3gPVPEF3zzTeA+86TVsxXY/VdrTa9wYoi8p0J/00Jf0EQPN/RNHb9bl8vO3/N6v6BKd4XeA1xFx0uy3w377mt+qIbf2ApSJWjA=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-14.6667" y="-8.70817" width="16" height="516.083"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="637.333" y="-11.3748" width="16" height="516.083"/>
+  <object id="86" template="../../../../common/maps/obj/collision.tx" x="-23.7121" y="480.303" width="703.667" height="16"/>
+  <object id="87" template="../../../../common/maps/obj/collision.tx" x="-45.1668" y="-17.3333" width="703.667" height="16"/>
+  <object id="88" template="../../../../common/maps/obj/entry_up.tx" x="350.458" y="477.833" width="51.25" height="12.9167">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="334.333" y="457.6" width="77.3333" height="11.8002" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Floating in the water ahead is a large ship with its hull reinforced by giant rib bones, its mast also formed from massive bones. Skeletons jump about the waters on the backs of turtles and dolphins. 
+
+There is no obvious way to reach the ship, but the natural blue mana surging from the water means if you can find calm enough spots on the sea, you should be able to use magic to water walk there.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="271.333" y="220.833">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="111, 112"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="402.833" y="454.667" width="27.0003" height="26"/>
+  <object id="93" template="../../obj/treasure.tx" x="25.3333" y="472">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;EXP&quot; ],
+    &quot;cardName&quot;: &quot;Sunken Ruins&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;cardName&quot;: &quot;Shipwreck Marsh&quot;
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;M3C&quot; ],
+    &quot;cardName&quot;: &quot;Sunken Palace&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/treasure.tx" x="449.333" y="218.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Time Bomb&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="327.167" y="168.333" width="27.0003" height="61.3333"/>
+  <object id="96" template="../../../../common/maps/obj/collision.tx" x="327.833" y="52.6667" width="27.0003" height="61.3333"/>
+  <object id="97" template="../../obj/treasure.tx" x="169.333" y="108">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 500
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;cardName&quot;: &quot;Skeleton Crew&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/collision.tx" x="403" y="95.8333" width="27.0003" height="15.8333"/>
+  <object id="99" template="../../../../common/maps/obj/collision.tx" x="434.5" y="143.083" width="27.0003" height="15.8333"/>
+  <object id="100" template="../../../../common/maps/obj/collision.tx" x="418.5" y="207.583" width="27.0003" height="15.8333"/>
+  <object id="101" template="../../../../common/maps/obj/collision.tx" x="386.5" y="176.083" width="24.0003" height="15.8333"/>
+  <object id="102" template="../../../../common/maps/obj/collision.tx" x="370.5" y="129.083" width="27.0003" height="15.8333"/>
+  <object id="103" template="../../../../common/maps/obj/collision.tx" x="274.5" y="112.583" width="27.0003" height="15.8333"/>
+  <object id="104" template="../../../../common/maps/obj/collision.tx" x="228" y="97.0833" width="27.0003" height="15.8333"/>
+  <object id="105" template="../../../../common/maps/obj/collision.tx" x="194.5" y="128.583" width="27.0003" height="15.8333"/>
+  <object id="106" template="../../../../common/maps/obj/collision.tx" x="242" y="144.083" width="27.0003" height="15.8333"/>
+  <object id="107" template="../../../../common/maps/obj/collision.tx" x="291.5" y="175.083" width="27.0003" height="15.8333"/>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="209.5" y="175.583" width="27.0003" height="15.8333"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="177.167" y="207.583" width="27.0003" height="15.8333"/>
+  <object id="111" template="../../../../common/maps/obj/waypoint.tx" x="303.333" y="221.333"/>
+  <object id="112" template="../../../../common/maps/obj/waypoint.tx" x="239.667" y="221.667"/>
+  <object id="113" template="../../../../common/maps/obj/waypoint.tx" x="295.667" y="169.667"/>
+  <object id="114" template="../../../../common/maps/obj/waypoint.tx" x="368.667" y="114.333"/>
+  <object id="115" template="../../../../common/maps/obj/waypoint.tx" x="365.333" y="167.667"/>
+  <object id="116" template="../../../../common/maps/obj/waypoint.tx" x="364.333" y="226.333"/>
+  <object id="117" template="../../../../common/maps/obj/waypoint.tx" x="393" y="168.667"/>
+  <object id="118" template="../../../../common/maps/obj/waypoint.tx" x="436.333" y="122.333"/>
+  <object id="119" template="../../../../common/maps/obj/waypoint.tx" x="389.333" y="226.667"/>
+  <object id="120" template="../../../../common/maps/obj/waypoint.tx" x="455" y="175"/>
+  <object id="123" template="../../../../common/maps/obj/waypoint.tx" x="161.667" y="161"/>
+  <object id="124" template="../../../../common/maps/obj/waypoint.tx" x="205.333" y="103.667"/>
+  <object id="125" template="../../../../common/maps/obj/waypoint.tx" x="222.667" y="160.667"/>
+  <object id="126" template="../../../../common/maps/obj/waypoint.tx" x="263" y="106"/>
+  <object id="127" template="../../../../common/maps/obj/enemy.tx" x="331" y="144.667">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="113, 114"/>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/enemy.tx" x="242.667" y="132.667">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="125, 126"/>
+   </properties>
+  </object>
+  <object id="131" template="../../../../common/maps/obj/enemy.tx" x="175.667" y="131">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="123, 124"/>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/enemy.tx" x="365" y="194">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="115, 116"/>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/enemy.tx" x="433.667" y="190.667">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="119, 120"/>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="415.667" y="142">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The skeleton crumbles before you, but you sense its same mana from all the others onboard. Best to avoid the others if possible.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Submerged Boneyard&quot;, &quot;Island|ICE&quot;, &quot;Island|ICE&quot;, &quot;Inexorable Tide&quot;, &quot;Skeleton Ship&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Island|ICE&quot; ]}
+}</property>
+    <property name="enemy" value="Skeleton Shipmate"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value="117, 118"/>
+   </properties>
+  </object>
+  <object id="136" template="../../obj/treasure.tx" x="1079.5" y="-229.666">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;subTypes&quot;: [ &quot;Sphinx&quot; ],
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="138" template="../../obj/treasure.tx" x="553" y="120">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;cardName&quot;: &quot;Treasure Map&quot;
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 500
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/dialog.tx" x="248" y="249.433" width="77.3333" height="11.8002" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You've reached the ship. Unlike almost everyone else in this realm, the skeletons on this ship seem strangely identical, even down to the magic they wield.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

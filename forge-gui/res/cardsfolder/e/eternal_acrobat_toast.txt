@@ -1,0 +1,20 @@
+Name:Eternal Acrobat Toast
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Eternal
+SVar:STK2:Kind$ Name | Word$ Acrobat
+SVar:STK3:Kind$ Name | Word$ Toast
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever this creature deals combat damage to a player, exile target creature you control, then return it to the battlefield under its owner's control. | Triggers$ STK7Damage
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ {T}: Untap another target permanent. | Ability$ STK8Untap
+SVar:STK9:Kind$ PT | Tickets$ 3 | Power$ 4 | Toughness$ 4
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 7 | Toughness$ 8
+SVar:STK7Damage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ STK7Blink | TriggerDescription$ Whenever this creature deals combat damage to a player, exile target creature you control, then return it to the battlefield under its owner's control.
+SVar:STK7Blink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberChanged$ True | SubAbility$ STK7Return
+SVar:STK7Return:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ STK7Cleanup
+SVar:STK7Cleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STK8Untap:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent | SpellDescription$ Untap another target permanent.
+Oracle:{TK}{TK} — Whenever this creature deals combat damage to a player, exile target creature you control, then return it to the battlefield under its owner's control.\n{TK}{TK}{TK} — {T}: Untap another target permanent.\n{TK}{TK}{TK} — 4/4\n{TK}{TK}{TK}{TK}{TK} — 7/8

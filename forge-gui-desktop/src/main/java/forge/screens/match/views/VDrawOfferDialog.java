@@ -111,8 +111,9 @@ public class VDrawOfferDialog extends FDialog {
     }
 
     private void respond(final boolean accept) {
-        matchUI.getGameController(localResponder).drawOfferAction(accept ? DrawOfferMessage.Action.ACCEPT : DrawOfferMessage.Action.DECLINE);
+        // Hide first: a local vote is tallied before this returns and can show the dialog again for the next player
         setVisible(false);
+        matchUI.getGameController(localResponder).drawOfferAction(accept ? DrawOfferMessage.Action.ACCEPT : DrawOfferMessage.Action.DECLINE);
     }
 
     private String voteText(final DrawOffer.Vote vote, final Localizer localizer) {

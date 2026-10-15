@@ -60,6 +60,15 @@ public enum DeckFormat {
         }
 
         @Override
+        public String getStickerSheetConformanceProblem(Deck deck) {
+            //CR 123.2b
+            if (deck.get(DeckSection.Stickers).countAll() > CHOSEN_STICKER_SHEETS)
+                return TextUtil.concatWithSpace("must contain no more than",
+                        String.valueOf(CHOSEN_STICKER_SHEETS), "sticker sheets");
+            return null;
+        }
+
+        @Override
         public int getExtraSectionMaxCopies(DeckSection section) {
             if(section == DeckSection.Attractions || section == DeckSection.Contraptions)
                 return Integer.MAX_VALUE;
@@ -69,6 +78,7 @@ public enum DeckFormat {
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
+    CommanderDraft ( Range.of(59, 99),                     Range.of(0, 15), Integer.MAX_VALUE),
     Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
@@ -125,6 +135,9 @@ public enum DeckFormat {
     Archenemy      ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
     Puzzle         ( Range.of(0, Integer.MAX_VALUE), Range.is(0), 4);
 
+    // CR 123.2a
+    public static final int CHOSEN_STICKER_SHEETS = 3;
+
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
@@ -158,7 +171,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == CommanderDraft || this == Oathbreaker || this == TinyLeaders || this == Brawl;
     }
 
     public boolean hasSignatureSpell() {
@@ -228,7 +241,7 @@ public enum DeckFormat {
 
     public int getExtraSectionMaxCopies(DeckSection section) {
         return switch (section) {
-            case Avatar, Commander, Planes, Dungeon, Attractions, Contraptions -> 1;
+            case Avatar, Commander, Planes, Dungeon, Attractions, Contraptions, Stickers -> 1;
             case Schemes -> 2;
             case Conspiracy -> Integer.MAX_VALUE;
             default -> maxCardCopies;
@@ -339,6 +352,12 @@ public enum DeckFormat {
             String attractionError = getAttractionDeckConformanceProblem(deck);
             if (attractionError != null)
                 return attractionError;
+        }
+
+        if (deck.has(DeckSection.Stickers)) {
+            String stickerError = getStickerSheetConformanceProblem(deck);
+            if (stickerError != null)
+                return stickerError;
         }
 
         if (deck.has(DeckSection.Contraptions)) {
@@ -540,6 +559,19 @@ public enum DeckFormat {
             // Constructed Attraction deck must be singleton
             if (attractionDeck.countByName(cp.getKey()) > 1)
                 return TextUtil.concatWithSpace("contains more than 1 copy of the attraction", cp.getKey().getName());
+        }
+        return null;
+    }
+
+    public String getStickerSheetConformanceProblem(Deck deck) {
+        CardPool stickerSheets = deck.get(DeckSection.Stickers);
+        //CR 123.2a
+        if (stickerSheets.countAll() < 10)
+            return "must contain at least 10 sticker sheets, or none at all";
+        for (Entry<PaperCard, Integer> cp : stickerSheets) {
+            if (stickerSheets.countByName(cp.getKey()) > 1)
+                return TextUtil.concatWithSpace("contains more than 1 copy of the sticker sheet",
+                        cp.getKey().getName());
         }
         return null;
     }

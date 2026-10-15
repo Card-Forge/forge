@@ -1,0 +1,42 @@
+[metadata]
+Name=Svyelunite Priest
+[Main]
+36 Island|3ED
+4 Svyelunite Temple|FEM
+4 Coral Atoll|VIS
+4 Lonely Sandbar|ONS
+4 Remote Isle|USG
+4 Svyelunite Priest|FEM
+4 Sea Scryer|MIR
+4 Merfolk Seer|MIR
+2 Benthic Explorers|ALL|[24a]
+2 Benthic Explorers|ALL|[24b]
+4 Wall of Tears|STH
+4 Stinging Barrier|MMQ
+4 Conch Horn|FEM
+2 Memory Lapse|HML|[32a]
+2 Memory Lapse|HML|[32b]
+4 Lilting Refrain|USG
+4 Grip of Amnesia|JUD
+8 Worry Beads|MMQ
+4 Aether Burst|ODY
+4 Accumulated Knowledge|NMS
+4 Repel|ODY
+3 Submerge|NMS
+2 Persuasion|ODY
+2 Confiscate|7ED
+1 Ring of Renewal|FEM
+2 Ray of Command|ICE
+2 Scrivener|ODY
+2 Bubble Matrix|WTH
+2 Pedantic Learning|ODY
+4 Metamorphose|SCG
+1 Buoyancy|MMQ
+1 Lifetap|5ED
+1 Suffocation|ALL
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Svyelunite Priest|FEM
+1 Squeeze|MMQ
+1 Worry Beads|MMQ
+1 Pedantic Learning|ODY

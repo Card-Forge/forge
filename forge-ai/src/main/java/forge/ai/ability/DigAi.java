@@ -61,21 +61,16 @@ public class DigAi extends SpellAbilityAi {
 
         final String num = sa.getParam("DigNum");
         final boolean payXLogic = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayX");
-        if (num != null && (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) || payXLogic) {
-            // By default, set PayX here to maximum value.
-            SpellAbility root = sa.getRootAbility();
-            if (root.getXManaCostPaid() == null) {
-                int manaToSave = 0;
+        if (("X".equals(num) && sa.getSVar(num).equals("Count$xPaid")) || payXLogic) {
+            int manaToSave = 0;
+            // Special logic that asks the AI to conserve a certain amount of mana when paying X
+            if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
+                manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
+            }
 
-                // Special logic that asks the AI to conserve a certain amount of mana when paying X
-                if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
-                    manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
-                }
-
-                int numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
-                if (numCards <= 0) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+            int numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
+            if (numCards <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -136,7 +131,9 @@ public class DigAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer, Map<String, Object> params) {
-        if ("DigForCreature".equals(sa.getParam("AILogic"))) {
+        String logic = sa.getParamOrDefault("AILogic", "");
+
+        if ("DigForCreature".equals(logic)) {
             Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
             if (bestChoice == null) {
                 // no creatures, but maybe there's a morphable card that can be played as a creature?
@@ -148,7 +145,7 @@ public class DigAi extends SpellAbilityAi {
 
             // still nothing, so return the worst card since it'll be unplayable from exile (e.g. Vivien, Champion of the Wilds)
             return bestChoice != null ? bestChoice : ComputerUtilCard.getWorstAI(valid);
-        } else if ("EmulateScry".equals(sa.getParam("AILogic"))) {
+        } else if ("EmulateScry".equals(logic)) {
             for (Card choice : valid) {
                 if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(ai, choice)) {
                     return choice;
@@ -157,7 +154,7 @@ public class DigAi extends SpellAbilityAi {
             return null;
         }
 
-        if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
+        if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai) && !"ChooseBestForOpponent".equals(logic)) {
             return ComputerUtilCard.getWorstPermanentAI(valid, false, true, false, false);
         }
         return ComputerUtilCard.getBestAI(valid);

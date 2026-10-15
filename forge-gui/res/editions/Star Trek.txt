@@ -81,6 +81,7 @@ ScryfallCode=TRK
 252 U Seven of Nine @Bastien L. Deharme
 261 M Crystalline Entity @David Álvarez
 262 C Cybernetic Specialist @Joan Piqué Llorens
+270 C Tricorder @Tony Foti
 273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
 278 R Blood Crypt @Jonas De Ro
 279 R Breeding Pool @Cliff Nielsen

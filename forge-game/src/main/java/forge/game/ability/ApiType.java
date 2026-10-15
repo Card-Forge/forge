@@ -152,6 +152,7 @@ public enum ApiType {
     PumpAll (PumpAllEffect.class),
     PutCounter (CountersPutEffect.class),
     PutCounterAll (CountersPutAllEffect.class),
+    PutSticker (PutStickerEffect.class),
     Radiation (RadiationEffect.class),
     Recruit (RecruitEffect.class),
     RearrangeTopOfLibrary (RearrangeTopOfLibraryEffect.class),
