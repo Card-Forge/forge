@@ -14,6 +14,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.CounterEnumType;
+import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
@@ -43,7 +44,9 @@ public class VAvatar extends FDisplayObject {
     }
 
     private void drawAITimeoutBar(Graphics g, float w, float h) {
-        final float f = AITimeoutTracker.getRemainingFraction(player.getId());
+        final GameView gv = MatchController.instance.getGameView();
+        if (gv == null) return;
+        final float f = AITimeoutTracker.getRemainingFraction(AITimeoutTracker.key(gv.getId(), player.getId()));
         if (f < 0f) return;                                   // hidden: <2s, finished, or timed out
         final float barH = Math.max(Utils.scale(3), h / 10f);
         final float y = h - barH;

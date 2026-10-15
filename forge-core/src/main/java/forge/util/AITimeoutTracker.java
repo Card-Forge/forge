@@ -9,10 +9,10 @@ import java.util.concurrent.TimeUnit;
  *  - the UI can draw a shrinking timer bar without touching AI internals.
  *
  * Writers: AI code (begin/end, always in try/finally).  Readers: UI (getRemainingFraction).
- * Nested begin() calls for the same player are counted; the first one fixes the deadline.
+ * Nested begin() calls for the same key (see {@link #key}) are counted; the first one fixes the deadline.
  * A session that is still open well past its own timeout is considered leaked (a begin() without end())
  * and is replaced by the next begin(), so one bug can never leave a player with an expired deadline forever.
- * Allocation: one tiny Slot per player, ever. Reads are lock free.
+ * Allocation: one tiny Slot per (game, player), purged once idle slots pile up. Reads are lock free.
  */
 public final class AITimeoutTracker {
     /** The bar becomes visible once this much time has elapsed. */
@@ -25,9 +25,34 @@ public final class AITimeoutTracker {
         volatile long startNanos;
         volatile long timeoutNanos;
         volatile int depth;
+        /** Set (under the slot's lock) once purged from SLOTS; a racing begin() must then fetch a fresh slot. */
+        boolean removed;
     }
 
-    private static final ConcurrentHashMap<Integer, Slot> SLOTS = new ConcurrentHashMap<>();
+    /** Idle slots are purged once the map grows past this, so finished games do not leave slots behind forever. */
+    private static final int PURGE_THRESHOLD = 64;
+
+    /**
+     * Key of one AI player's session. Player ids restart at 0 in every game while game ids are unique per JVM,
+     * so two matches running side by side (or a sim and a real game) never share a deadline or a timer bar.
+     */
+    public static long key(final int gameId, final int playerId) {
+        return ((long) gameId << 32) | (playerId & 0xFFFFFFFFL);
+    }
+
+    private static void purgeIdle() {
+        for (final java.util.Map.Entry<Long, Slot> e : SLOTS.entrySet()) {
+            final Slot s = e.getValue();
+            synchronized (s) {
+                if (s.depth == 0 && !s.removed) {
+                    s.removed = true;
+                    SLOTS.remove(e.getKey(), s);
+                }
+            }
+        }
+    }
+
+    private static final ConcurrentHashMap<Long, Slot> SLOTS = new ConcurrentHashMap<>();
     private static volatile Runnable repaintHook;
 
     private AITimeoutTracker() { }
@@ -41,45 +66,57 @@ public final class AITimeoutTracker {
         return s.depth > 0 && now - s.startNanos - s.timeoutNanos > staleGraceNanos;
     }
 
-    public static void begin(final int playerId, final long timeoutNanos) {
-        Slot found = SLOTS.get(playerId);
-        if (found == null) {
-            found = new Slot();
-            final Slot prev = SLOTS.putIfAbsent(playerId, found);
-            if (prev != null) {
-                found = prev;
-            }
-        }
-        final Slot s = found;
+    public static void begin(final long key, final long timeoutNanos) {
         boolean outermost = false;
-        long sessionStart;
-        synchronized (s) {
-            final long now = System.nanoTime();
-            if (isStale(s, now)) {
-                s.depth = 0; // leaked session: start over
+        long sessionStart = 0;
+        Slot s;
+        while (true) {
+            Slot found = SLOTS.get(key);
+            if (found == null) {
+                if (SLOTS.size() > PURGE_THRESHOLD) {
+                    purgeIdle();
+                }
+                found = new Slot();
+                final Slot prev = SLOTS.putIfAbsent(key, found);
+                if (prev != null) {
+                    found = prev;
+                }
             }
-            if (s.depth == 0) {
-                // publish start/timeout BEFORE depth so lock free readers never pair a live depth with old times
-                s.startNanos = now;
-                s.timeoutNanos = timeoutNanos;
-                outermost = true;
+            s = found;
+            synchronized (s) {
+                if (s.removed) {
+                    continue; // purged between lookup and lock: fetch (or create) a live slot
+                }
+                final long now = System.nanoTime();
+                if (isStale(s, now)) {
+                    s.depth = 0; // leaked session: start over
+                }
+                if (s.depth == 0) {
+                    // publish start/timeout BEFORE depth so lock free readers never pair a live depth with old times
+                    s.startNanos = now;
+                    s.timeoutNanos = timeoutNanos;
+                    outermost = true;
+                }
+                sessionStart = s.startNanos;
+                s.depth++;
             }
-            sessionStart = s.startNanos;
-            s.depth++;
+            break;
         }
         final Runnable hook = repaintHook;
         if (outermost && hook != null && timeoutNanos > SHOW_AFTER_NANOS) {
+            final Slot slot = s;
+            final long started = sessionStart;
             // wake the renderer exactly when the bar should show up, but only if this very session is still running then
             ThreadUtil.delay((int) TimeUnit.NANOSECONDS.toMillis(SHOW_AFTER_NANOS), () -> {
-                if (s.depth > 0 && s.startNanos == sessionStart) {
+                if (slot.depth > 0 && slot.startNanos == started) {
                     hook.run();
                 }
             });
         }
     }
 
-    public static void end(final int playerId) {
-        final Slot s = SLOTS.get(playerId);
+    public static void end(final long key) {
+        final Slot s = SLOTS.get(key);
         if (s == null) {
             return;
         }
@@ -95,15 +132,15 @@ public final class AITimeoutTracker {
         }
     }
 
-    public static boolean isActive(final int playerId) {
-        final Slot s = SLOTS.get(playerId);
+    public static boolean isActive(final long key) {
+        final Slot s = SLOTS.get(key);
         return s != null && s.depth > 0 && !isStale(s, System.nanoTime());
     }
 
     /** Absolute System.nanoTime() deadline of the active session, or fallbackNanos from now when none is active. */
-    public static long deadlineNanos(final int playerId, final long fallbackTimeoutNanos) {
+    public static long deadlineNanos(final long key, final long fallbackTimeoutNanos) {
         final long now = System.nanoTime();
-        final Slot s = SLOTS.get(playerId);
+        final Slot s = SLOTS.get(key);
         if (s != null && s.depth > 0 && !isStale(s, now)) {
             return s.startNanos + s.timeoutNanos;
         }
@@ -114,8 +151,8 @@ public final class AITimeoutTracker {
      * 1.0 when the bar first appears (SHOW_AFTER elapsed) shrinking to 0.0 at the timeout.
      * Returns -1 when the bar must be hidden (no session, too early, finished or timed out).
      */
-    public static float getRemainingFraction(final int playerId) {
-        final Slot s = SLOTS.get(playerId);
+    public static float getRemainingFraction(final long key) {
+        final Slot s = SLOTS.get(key);
         if (s == null || s.depth == 0) {
             return -1f;
         }
@@ -189,7 +226,7 @@ public final class AITimeoutTracker {
      * and the player's session deadline (or a fresh fallback timeout when there is no session).
      * Use this instead of {@link #remainingNanos()} for waits - an unarmed caller must not wait "forever".
      */
-    public static long remainingNanos(final int playerId, final long fallbackTimeoutNanos) {
-        return Math.min(remainingNanos(), deadlineNanos(playerId, fallbackTimeoutNanos) - System.nanoTime());
+    public static long remainingNanos(final long key, final long fallbackTimeoutNanos) {
+        return Math.min(remainingNanos(), deadlineNanos(key, fallbackTimeoutNanos) - System.nanoTime());
     }
 }

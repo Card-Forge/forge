@@ -62,7 +62,7 @@ public class AITimeoutTrackerTest {
 
     @Test
     public void unarmedCallerGetsABoundedWait() {
-        Assert.assertTrue(AITimeoutTracker.remainingNanos(910, 5 * SEC) <= 5 * SEC);
+        Assert.assertTrue(AITimeoutTracker.remainingNanos(910L, 5 * SEC) <= 5 * SEC);
     }
 
     @Test
@@ -109,5 +109,38 @@ public class AITimeoutTrackerTest {
         w.start();
         w.join(2000);
         Assert.assertTrue(stopped[0], "busy loop with check() must abort at the deadline");
+    }
+
+    @Test
+    public void sessionsOfDifferentGamesDoNotShareDeadlinesOrBars() {
+        // every game numbers its players from 0: same player id, different game
+        final long a = AITimeoutTracker.key(7001, 0);
+        final long b = AITimeoutTracker.key(7002, 0);
+        Assert.assertNotEquals(a, b);
+        AITimeoutTracker.begin(a, 10 * SEC);
+        try {
+            Assert.assertTrue(AITimeoutTracker.isActive(a));
+            Assert.assertFalse(AITimeoutTracker.isActive(b), "a session in game 1 must not be visible in game 2");
+            Assert.assertTrue(AITimeoutTracker.deadlineNanos(b, 1 * SEC) - System.nanoTime() <= 1 * SEC,
+                    "game 2 must get its own fallback deadline, not game 1's");
+        } finally {
+            AITimeoutTracker.end(a);
+        }
+    }
+
+    @Test
+    public void idleSlotsArePurgedAndKeysStayUsable() {
+        for (int g = 0; g < 500; g++) { // many finished games
+            final long k = AITimeoutTracker.key(8000 + g, 1);
+            AITimeoutTracker.begin(k, 5 * SEC);
+            AITimeoutTracker.end(k);
+        }
+        final long live = AITimeoutTracker.key(9000, 1);
+        AITimeoutTracker.begin(live, 5 * SEC);
+        try {
+            Assert.assertTrue(AITimeoutTracker.isActive(live));
+        } finally {
+            AITimeoutTracker.end(live);
+        }
     }
 }

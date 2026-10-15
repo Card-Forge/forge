@@ -41,6 +41,7 @@ import forge.deck.CommanderBracketCalculator;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
+import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -109,9 +110,15 @@ public class VField implements IVDoc<CField> {
     private final Timer aiTimeoutTimer = new Timer(50, e -> refreshAITimeoutBar());
     private boolean aiTimeoutBarShown;
 
+    /** (game, player) key of this field's player; the tracker is shared by every game in the JVM. */
+    private long aiTimeoutKey() {
+        final GameView gv = matchUI == null ? null : matchUI.getGameView();
+        return gv == null ? Long.MIN_VALUE : AITimeoutTracker.key(gv.getId(), player.getId()); // MIN_VALUE: no session
+    }
+
     private void refreshAITimeoutBar() {
         if (player == null) { return; }
-        final boolean show = AITimeoutTracker.getRemainingFraction(player.getId()) >= 0f;
+        final boolean show = AITimeoutTracker.getRemainingFraction(aiTimeoutKey()) >= 0f;
         if (show) {
             if (!aiTimeoutTimer.isRunning()) { aiTimeoutTimer.start(); }
             avatarArea.repaint();
@@ -124,7 +131,7 @@ public class VField implements IVDoc<CField> {
 
     private void paintAITimeoutBar(final Graphics g) {
         if (player == null) { return; }
-        final float f = AITimeoutTracker.getRemainingFraction(player.getId());
+        final float f = AITimeoutTracker.getRemainingFraction(aiTimeoutKey());
         if (f < 0f) { return; }
         final Rectangle r = lblAvatar.getBounds();
         final int barH = Math.max(4, r.height / 10);

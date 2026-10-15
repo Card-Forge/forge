@@ -207,17 +207,19 @@ public class AITimeoutScenarioTest extends SimulationTest {
         startCombatStep(game, human, PhaseType.COMBAT_DECLARE_ATTACKERS);
 
         final Map<?, ?> slots = trackerSlots();
-        slots.remove(human.getId());
-        slots.remove(ai.getId());
+        final long humanKey = AITimeoutTracker.key(game.getId(), human.getId());
+        final long aiKey = AITimeoutTracker.key(game.getId(), ai.getId());
+        slots.remove(humanKey);
+        slots.remove(aiKey);
 
         // what AI code does when it predicts the opponent's attack (e.g. while evaluating a spell)
         new AiAttackController(human).declareAttackers(new Combat(human));
-        Assert.assertFalse(slots.containsKey(human.getId()), "a human's predicted attack must not open a timer session");
+        Assert.assertFalse(slots.containsKey(humanKey), "a human's predicted attack must not open a timer session");
 
         // control: a real AI attack does open (and close) a session
         new AiAttackController(ai).declareAttackers(newCombat(game, ai));
-        Assert.assertTrue(slots.containsKey(ai.getId()), "control: AI attack tracks its timer");
-        Assert.assertFalse(AITimeoutTracker.isActive(ai.getId()), "session must be closed again");
+        Assert.assertTrue(slots.containsKey(aiKey), "control: AI attack tracks its timer");
+        Assert.assertFalse(AITimeoutTracker.isActive(aiKey), "session must be closed again");
     }
 
     // ---------------------------------------------------------------------------------------------
