@@ -68,11 +68,9 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 		a.targetsErr = choice.err
 		return true
 	}
-	// TargetingPlayer$ names who picks the targets (SpellAbility.setupTargets).
-	decider, err := g.targetingPlayerOf(a)
-	if err != nil {
-		return false
-	}
+	// TargetingPlayer$ names who picks the targets (SpellAbility.setupTargets);
+	// targetChoiceFor resolved it, and one it could not resolve is choice.err.
+	decider := choice.targeter
 	a.targeter = decider
 	if len(choice.candidates) == 0 || choice.max <= 0 && choice.min <= 0 {
 		// TargetMin$ 0 and no candidate, or no target allowed at all (a
@@ -358,6 +356,9 @@ type targetChoice struct {
 	candidates []EntityID
 	min, max   int
 	err        error
+	// targeter is who chooses (targetingPlayerOf), resolved once while the
+	// candidates were filtered; NoPlayer alongside err.
+	targeter PlayerID
 }
 
 // targetChoiceFor builds a's targetChoice from its ValidTgts$/TargetType$/
@@ -484,7 +485,10 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		// target's controller must be one of the players Defined names.
 		players, err := definedPlayers(g, a.Controller, a.Source, def, a.refs())
 		if err != nil {
-			return targetChoice{}, true, false
+			// Java has no failure here (getDefinedPlayers answers a list); an
+			// answer this port cannot give fails the ability when it resolves
+			// rather than leaving it off the stack unseen (GO-7).
+			return targetChoice{min: targetMin, max: targetMax, err: fmt.Errorf("TargetsWithDefinedController$: %w", err)}, true, true
 		}
 		kept := candidates[:0:0]
 		for _, e := range candidates {
@@ -509,9 +513,10 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	}
 	targeter, err := g.targetingPlayerOf(a)
 	if err != nil {
-		// Nobody to choose: no legal target set, the ability is not put on the
-		// stack (the same outcome as an unreadable shape).
-		return targetChoice{}, true, false
+		// A TargetingPlayer$ this port cannot name one player for: the ability
+		// is pushed with no targets and fails when it resolves (GO-7), never
+		// left off the stack as if it had no legal target.
+		return targetChoice{min: targetMin, max: targetMax, err: err}, true, true
 	}
 	kept := candidates[:0:0]
 	for _, e := range candidates {
@@ -537,7 +542,7 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	// TargetSelection.chooseTargets cancels only when there are neither enough
 	// candidates nor enough targets (TargetSelection.java:82, 113-120), and a
 	// minimum of 0 is always enough (Gaea's Blessing over an empty graveyard).
-	return g.capDividedChoice(a, targetChoice{candidates: candidates, min: targetMin, max: targetMax}), true, true
+	return g.capDividedChoice(a, targetChoice{candidates: candidates, min: targetMin, max: targetMax, targeter: targeter}), true, true
 }
 
 // specCanTargetPlayer is TargetRestrictions.canTgtPlayer for a ValidTgts$

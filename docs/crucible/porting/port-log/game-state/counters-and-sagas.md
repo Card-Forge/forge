@@ -16,11 +16,12 @@ Fabricate's and Cumulative upkeep's. Not wired, so they fire nothing: loyalty an
 battle enters with (`Game.Move`), the `AddCounter<N/Type>` activation cost, `MakeCard`, token creation counters,
 `Proliferate` and `TimeTravel` (`Counters.Add` directly).
 
-A trigger fires for hosts on the battlefield (`traitHosts`). Params read: `ValidCard$`, `ValidSource$` (a card source
-only), `CounterType$`, and on `CounterAdded` `CounterAmount$ <op><n>` (`Expressions.compare` against the new total); the
-general gates (`TriggerZones$`, `IsPresent$`, `OptionalDecider$`, phase params). A trigger naming any other param
-(`ValidPlayer$`, `FirstTime$`, `ActivationLimit$`, `ValidSpellAbility$`, `ValidMode$`, `ValidEntity$`) is skipped, not
-fired without its condition (GO-7). `Defined$ TriggeredCard` reads the card the counters went on.
+A trigger fires for hosts on the battlefield (`traitHosts`). Params read: `ValidCard$`, `ValidSource$` (the placing
+player, `AbilityKey.Source`, `Card.java:1805`; [R9f](m6-r9f-trigger-findings.md)), `CounterType$`, and on `CounterAdded`
+`CounterAmount$ <op><n>` (`Expressions.compare` against the new total); the general gates (`TriggerZones$`,
+`IsPresent$`, `OptionalDecider$`, phase params). A trigger naming any other param (`ValidPlayer$`, `FirstTime$`,
+`ActivationLimit$`, `ValidSpellAbility$`, `ValidMode$`, `ValidEntity$`) is skipped, not fired without its condition
+(GO-7). `Defined$ TriggeredCard` reads the card the counters went on.
 
 ## Sagas (CR 714)
 

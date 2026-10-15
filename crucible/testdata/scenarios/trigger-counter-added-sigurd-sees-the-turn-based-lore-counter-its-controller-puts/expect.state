@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=22
+humanbattlefield=Sigurd, Jarl of Ravensthorpe|Id:1;Grizzly Bears|Id:3|Counters:P1P1=1
+humangraveyard=The Birth of Meletis
+ailife=20

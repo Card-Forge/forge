@@ -417,6 +417,19 @@ type triggeredObjects struct {
 	// the graveyard object AbilityKey.NewCard names. Haunt reads it for
 	// HauntEffect.java:25's equalsWithGameTimestamp. Zero when unset.
 	cardStamp uint64
+	// cardLKIController and cardLKIOwner are card's controller and owner as
+	// the trigger fired, for the modes whose AbilityKey.Card is a frozen copy
+	// rather than the live card: ChangesZone with Origin$ Battlefield (the
+	// CardLKI, TriggerChangesZone.java:192-194), Exiled from the battlefield
+	// (the pre-move object, GameAction.java:933-942) and Sacrificed (the LKI
+	// copy, Player.java:2276-2280). Defined$ TriggeredCardController/Owner
+	// read them (AbilityUtils.java:1029-1030, :1057-1058), so a creature that
+	// died under a borrowed controller answers the borrower, as Java does.
+	// NoPlayer when the mode passes the live card (Taps, Drawn, Discarded,
+	// CounterAdded, ...): the reader then asks the card as it is now, Java's
+	// own reading of a live object.
+	cardLKIController PlayerID
+	cardLKIOwner      PlayerID
 	// activator is AbilityKey.Activator for Mode$ TapsForMana: the player
 	// who activated the mana ability, read by Defined$ TriggeredActivator.
 	// NoPlayer when unset.

@@ -112,7 +112,7 @@ func (moveCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControlle
 		if dest == src {
 			continue
 		}
-		moveCounters(g, controller, a.Source, src, dest, counterType, allKinds, allAmount, amount)
+		moveCounters(g, controller, a.Controller, a.Source, src, dest, counterType, allKinds, allAmount, amount)
 	}
 	return nil
 }
@@ -120,19 +120,20 @@ func (moveCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControlle
 // moveCounters is CountersMoveEffect.resolve's own per-destination body:
 // allKinds moves every kind src currently carries (each capped at its own
 // count, CountersRemoveEffect's own identical per-kind independence);
-// otherwise only counterType moves.
-func moveCounters(g *Game, controller PlayerController, source, src, dest CardID, counterType CounterType, allKinds, allAmount bool, amount int) {
+// otherwise only counterType moves. placer, the activator, puts them on dest
+// (CountersMoveEffect.java:86, :160).
+func moveCounters(g *Game, controller PlayerController, placer PlayerID, source, src, dest CardID, counterType CounterType, allKinds, allAmount bool, amount int) {
 	srcCounters := &g.Card(src).Counters
 	if allKinds {
 		for _, kind := range srcCounters.Kinds() {
-			moveOneCounterKind(g, controller, source, src, dest, srcCounters, kind, allAmount, amount)
+			moveOneCounterKind(g, controller, placer, source, src, dest, srcCounters, kind, allAmount, amount)
 		}
 		return
 	}
-	moveOneCounterKind(g, controller, source, src, dest, srcCounters, counterType, allAmount, amount)
+	moveOneCounterKind(g, controller, placer, source, src, dest, srcCounters, counterType, allAmount, amount)
 }
 
-func moveOneCounterKind(g *Game, controller PlayerController, source, src, dest CardID, srcCounters *Counters, kind CounterType, allAmount bool, amount int) {
+func moveOneCounterKind(g *Game, controller PlayerController, placer PlayerID, source, src, dest CardID, srcCounters *Counters, kind CounterType, allAmount bool, amount int) {
 	cmax := srcCounters.Count(kind)
 	if cmax <= 0 {
 		return
@@ -146,5 +147,5 @@ func moveOneCounterKind(g *Game, controller PlayerController, source, src, dest 
 	}
 	srcCounters.Add(kind, -n)
 	emitCounterChanged(g, source, CardEntity(src), kind, -n)
-	g.addCardCounters(controller, source, dest, kind, n)
+	g.addCardCounters(controller, placer, source, dest, kind, n)
 }

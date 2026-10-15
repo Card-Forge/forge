@@ -54,9 +54,6 @@ type namedSpell struct {
 }
 
 func (controlSpellEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if a.targetsErr != nil {
-		return a.targetsErr
-	}
 	if err := rejectParams(a, "ControlSpell", controlSpellUnresolvedParams[:]...); err != nil {
 		return err
 	}

@@ -1,0 +1,9 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=18
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped
+humangraveyard=Act of Treason;Shock
+ailife=20
+aibattlefield=Massacre Wurm|Id:8
+aigraveyard=Grizzly Bears

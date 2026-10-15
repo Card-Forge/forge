@@ -89,15 +89,15 @@ func (g *Game) recordAttacked(attacker CardID) {
 }
 
 // recordCountersAdded logs a placement (Game.addCounterAddedThisTurn,
-// Game.java:1244-1253): putter is the controller of the source that put the
-// counters, and a placement with no source (a turn-based action) or none
-// counters is ignored, as Java ignores a null putter.
-func (g *Game) recordCountersAdded(source, id CardID, ct CounterType, n int) {
-	if source == NoCard || n <= 0 {
+// Game.java:1244-1253): putter is the player who placed the counters
+// (addCardCounters' placer), and a placement with no placer or no counters is
+// ignored, as Java ignores a null putter.
+func (g *Game) recordCountersAdded(putter PlayerID, id CardID, ct CounterType, n int) {
+	if putter == NoPlayer || n <= 0 {
 		return
 	}
 	g.countersAddedThisTurn = append(g.countersAddedThisTurn, counterAddition{
-		counter: ct, putter: g.Card(source).Controller(), card: *g.Card(id), n: n,
+		counter: ct, putter: putter, card: *g.Card(id), n: n,
 	})
 }
 

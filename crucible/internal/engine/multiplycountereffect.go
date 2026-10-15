@@ -93,7 +93,8 @@ func (multiplyCounterEffect) Resolve(g *Game, a *Ability, controller PlayerContr
 				if n <= 0 {
 					continue
 				}
-				g.addCardCounters(controller, a.Source, cid, kind, n)
+				// The activator places (CountersMultiplyEffect.java:43, :65).
+				g.addCardCounters(controller, a.Controller, a.Source, cid, kind, n)
 			}
 			continue
 		}
@@ -101,7 +102,7 @@ func (multiplyCounterEffect) Resolve(g *Game, a *Ability, controller PlayerContr
 		if n <= 0 {
 			continue
 		}
-		g.addCardCounters(controller, a.Source, cid, counterType, n)
+		g.addCardCounters(controller, a.Controller, a.Source, cid, counterType, n)
 	}
 	return nil
 }

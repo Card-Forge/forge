@@ -43,8 +43,10 @@ func (g *Game) applySagaCounter(controller PlayerController, moved CardID) {
 	if !c.isSaga() || c.HasKeyword("Read ahead") {
 		return
 	}
+	// The etbCounter's PutCounter is placed by its activator, the Saga's
+	// controller (CardFactoryUtil.makeEtbCounter, CardFactoryUtil.java:564).
 	if n := g.countersReplaced(controller, c.Controller(), CardEntity(moved), Lore, 1); n > 0 {
-		g.addCardCounters(controller, NoCard, moved, Lore, n)
+		g.addCardCounters(controller, c.Controller(), NoCard, moved, Lore, n)
 	}
 }
 
@@ -57,8 +59,9 @@ func (g *Game) sagaLoreCounters(controller PlayerController) {
 		if !c.isSaga() || c.finalChapter() == 0 {
 			continue
 		}
+		// Placed by the turn's player (PhaseHandler.java:286, playerTurn).
 		if n := g.countersReplaced(controller, g.activePlayer, CardEntity(id), Lore, 1); n > 0 {
-			g.addCardCounters(controller, NoCard, id, Lore, n)
+			g.addCardCounters(controller, g.activePlayer, NoCard, id, Lore, n)
 		}
 	}
 }

@@ -70,9 +70,6 @@ type retargeted struct {
 }
 
 func (changeTargetsEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if a.targetsErr != nil {
-		return a.targetsErr
-	}
 	if err := rejectParams(a, "ChangeTargets", changeTargetsUnresolvedParams[:]...); err != nil {
 		return err
 	}

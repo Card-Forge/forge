@@ -1,0 +1,9 @@
+# Alexios, Deimos of Kosmos: "At the beginning of each player's upkeep, that
+# player gains control of Alexios, untaps it, and puts a +1/+1 counter on it."
+# The PutCounter names Placer$ TriggeredPlayer (CountersPutEffect.java:583-586):
+# on the ai's upkeep the ai places the counter, so the ai's Stocking the Pantry
+# ("Whenever you put one or more +1/+1 counters on a creature you control",
+# ValidSource$ You against the placer, Card.java:1805) gets a supply counter.
+startturn ai
+advance 1
+resolvestack

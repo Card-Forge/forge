@@ -9,7 +9,11 @@ package engine
 
 //enginelint:allow id game ability control subability targeting
 
-import "github.com/jczastkiewicz/crucible/internal/carddb/compile"
+import (
+	"fmt"
+
+	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
+)
 
 // resolveChainTargets chooses the targets of every sub-ability of a that
 // names its own ValidTgts$ (Stolen Uniform's "target Equipment"), in chain
@@ -55,17 +59,15 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		}
 		if choice.err != nil {
 			// Recorded on the link too: resolving, it reads its own error
-			// rather than its parent's targets, under a root that never reads
-			// targetsErr.
-			a.targetsErr = choice.err
+			// rather than its parent's targets. The root fails first
+			// (Registry.resolve), before its own body acts.
+			a.failLinkTargets(sub, api, choice.err)
 			a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Err: choice.err})
 			return true
 		}
-		// TargetingPlayer$ on the link names who chooses (Magus of the Arena).
-		decider, err := g.targetingPlayerOf(&link)
-		if err != nil {
-			return false
-		}
+		// TargetingPlayer$ on the link names who chooses (Magus of the Arena);
+		// targetChoiceFor resolved it, one it could not is choice.err above.
+		decider := choice.targeter
 		var chosen []EntityID
 		if len(choice.candidates) > 0 && (choice.max > 0 || choice.min > 0) {
 			// TargetMin$ 0 with no candidate, or no target allowed at all,
@@ -76,10 +78,9 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		divided, err := g.divideAmongTargets(controller, decider, &link, chosen)
 		a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Targets: chosen, Divided: divided, Err: err})
 		if err != nil {
-			// The link keeps its targets with no division and its own error,
-			// so it fails when it resolves even under a root that never reads
-			// targetsErr.
-			a.targetsErr = err
+			// The link keeps its targets with no division and its own error;
+			// the root fails with it before acting (Registry.resolve).
+			a.failLinkTargets(sub, api, err)
 			return true
 		}
 		if len(chosen) > 0 {
@@ -88,6 +89,15 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		}
 	}
 	return true
+}
+
+// failLinkTargets records on the root a that the targets of its SubAbility$
+// link sub (api) could not be asked for, naming the link, unless an earlier
+// part already failed: the first failure is the one that explains the rest.
+func (a *Ability) failLinkTargets(sub compile.SubRef, api APIType, err error) {
+	if a.targetsErr == nil {
+		a.targetsErr = fmt.Errorf("SubAbility$ %s (%s): %w", sub.SVar, api, err)
+	}
 }
 
 // chooseAbilityTargets is the "choose modes and targets" step of putting a on

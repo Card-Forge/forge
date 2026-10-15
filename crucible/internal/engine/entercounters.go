@@ -121,7 +121,7 @@ func (g *Game) applyEnterCounters(controller PlayerController, moved CardID, ori
 	movedCard.pendingEnter = nil
 	for _, p := range piles {
 		if n := g.countersReplaced(controller, p.placer, CardEntity(moved), p.ct, p.n); n > 0 {
-			g.addCardCounters(controller, p.source, moved, p.ct, n)
+			g.addCardCounters(controller, p.placer, p.source, moved, p.ct, n)
 		}
 	}
 }
@@ -164,8 +164,9 @@ func (g *Game) runEnterChain(controller PlayerController, moved CardID, host *Ca
 //
 // CounterType$ EachFromSource with EachFromSource$ is "the same number and
 // kinds of counters as" the named cards (Dominion Saboteur): one pile per
-// kind each of them has, CounterNum$ overriding the count.
-func (g *Game) putEnterCounters(a *Ability, source *Card) error {
+// kind each of them has, CounterNum$ overriding the count. placer is the
+// PutCounter's placer (putCounterPlacer), each pile's table key.
+func (g *Game) putEnterCounters(a *Ability, source *Card, placer PlayerID) error {
 	moved := a.replacedCard()
 	defined := "Self"
 	if d, ok := a.Params.Param("Defined"); ok {
@@ -190,7 +191,7 @@ func (g *Game) putEnterCounters(a *Ability, source *Card) error {
 			return
 		}
 		card.pendingEnter = append(append([]enterPile(nil), card.pendingEnter...),
-			enterPile{ct: ct, n: n, source: a.Source, placer: a.Controller})
+			enterPile{ct: ct, n: n, source: a.Source, placer: placer})
 	}
 	counterNum, hasNum := a.Params.Param("CounterNum")
 	n := 0

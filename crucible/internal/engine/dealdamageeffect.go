@@ -115,12 +115,6 @@ func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	if a.targetsErr != nil {
-		// The targets, or their DividedAsYouChoose$ division, could not be
-		// asked for as the ability went on the stack (resolveTargets): it
-		// would otherwise deal its damage to no target, silently.
-		return fmt.Errorf("engine: DealDamage: %w", a.targetsErr)
-	}
 	sources, err := damageSources(g, a)
 	if err != nil {
 		return err

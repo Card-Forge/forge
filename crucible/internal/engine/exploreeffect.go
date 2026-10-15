@@ -67,7 +67,8 @@ func (exploreEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 				}
 			}
 			if !revealedLand && c.Zone == Battlefield {
-				g.addCardCounters(controller, a.Source, id, P1P1, 1)
+				// The explorer's controller places (ExploreEffect.java:63, :98).
+				g.addCardCounters(controller, pl, a.Source, id, P1P1, 1)
 			}
 		}
 	}

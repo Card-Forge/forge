@@ -18,9 +18,14 @@ import (
 // addCardCounters puts n counters of ct on card id, emits the event, then
 // fires the triggers: Mode$ CounterAdded once per counter, with the new total
 // as CounterAmount, and Mode$ CounterAddedOnce once for the whole placement.
-// source is the card the counters came from (NoCard for a turn-based action).
-// n <= 0 does nothing.
-func (g *Game) addCardCounters(controller PlayerController, source CardID, id CardID, ct CounterType, n int) {
+// placer is the player putting them, Card.addCounterInternal's own
+// `Player source` (Card.java:1761): what the triggers' ValidSource$ and the
+// turn's counter record read (AbilityKey.Source, Card.java:1805;
+// Game.addCounterAddedThisTurn, Card.java:1792). A caller that runs the
+// AddCounter replacements first (countersReplaced) gives them the same
+// player, so the replacement and the trigger agree on who placed. source is the card the counters came from, for
+// the event (NoCard for a turn-based action). n <= 0 does nothing.
+func (g *Game) addCardCounters(controller PlayerController, placer PlayerID, source CardID, id CardID, ct CounterType, n int) {
 	if n <= 0 {
 		return
 	}
@@ -35,13 +40,13 @@ func (g *Game) addCardCounters(controller PlayerController, source CardID, id Ca
 		}
 	}
 	c.Counters.Add(ct, n)
-	g.recordCountersAdded(source, id, ct, n)
+	g.recordCountersAdded(placer, id, ct, n)
 	emitCounterChanged(g, source, CardEntity(id), ct, n)
 	var matches []Ability
 	for i := 1; i <= n; i++ {
-		matches = g.counterAddedMatches(matches, "CounterAdded", source, id, ct, old+i)
+		matches = g.counterAddedMatches(matches, "CounterAdded", placer, id, ct, old+i)
 	}
-	matches = g.counterAddedMatches(matches, "CounterAddedOnce", source, id, ct, n)
+	matches = g.counterAddedMatches(matches, "CounterAddedOnce", placer, id, ct, n)
 	g.pushTriggeredAbilities(controller, matches)
 }
 
@@ -55,9 +60,11 @@ var counterAddedParams = map[string][]string{
 }
 
 // counterAddedMatches appends every CounterAdded or CounterAddedOnce trigger
-// (mode) that the placement of amount counters (the new total for
-// CounterAdded) on card id fires.
-func (g *Game) counterAddedMatches(matches []Ability, mode string, source, id CardID, ct CounterType, amount int) []Ability {
+// (mode) that placer's placement of amount counters (the new total for
+// CounterAdded) on card id fires. The placer is matched, never recorded:
+// TriggerCounterAdded.java:97-98 and TriggerCounterAddedOnce.java:92-94 keep
+// only Card and Player (and Amount) as triggering objects.
+func (g *Game) counterAddedMatches(matches []Ability, mode string, placer PlayerID, id CardID, ct CounterType, amount int) []Ability {
 	for _, pid := range g.Players() {
 		for _, host := range g.traitHosts(pid) {
 			h := g.Card(host)
@@ -69,7 +76,7 @@ func (g *Game) counterAddedMatches(matches []Ability, mode string, source, id Ca
 					if !strings.EqualFold(t.Name, mode) || !counterAddedTriggerReadable(t, mode) {
 						continue
 					}
-					if !g.counterAddedTriggerMatches(t, h, host, source, id, ct, amount) {
+					if !g.counterAddedTriggerMatches(t, h, host, placer, id, ct, amount) {
 						continue
 					}
 					objects := triggeredObjects{card: id}
@@ -108,12 +115,23 @@ func counterAddedTriggerReadable(t *compile.Ability, mode string) bool {
 	return true
 }
 
-func (g *Game) counterAddedTriggerMatches(t *compile.Ability, h *Card, host, source, id CardID, ct CounterType, amount int) bool {
+// counterAddedTriggerMatches is TriggerCounterAdded.performTest
+// (TriggerCounterAdded.java:57-90) and TriggerCounterAddedOnce's
+// (TriggerCounterAddedOnce.java:58-89) over the params counterAddedParams
+// lists. ValidSource$ is matched against the placer, AbilityKey.Source, a
+// Player (Card.java:1805): every corpus value is "You". No placer (Java's
+// null source) matches nothing, as matchesValidParam fails on null; a player
+// spec matchesPlayerSpec cannot read leaves the trigger unfired rather than
+// guessed.
+func (g *Game) counterAddedTriggerMatches(t *compile.Ability, h *Card, host CardID, placer PlayerID, id CardID, ct CounterType, amount int) bool {
 	if vc, ok := t.Param("ValidCard"); ok && !Matches(g, g.Card(id), valid.Parse(vc), h.Controller(), host) {
 		return false
 	}
 	if vs, ok := t.Param("ValidSource"); ok {
-		if source == NoCard || !Matches(g, g.Card(source), valid.Parse(vs), h.Controller(), host) {
+		if placer == NoPlayer {
+			return false
+		}
+		if matched, recognized := matchesPlayerSpec(g, placer, h.Controller(), host, vs); !recognized || !matched {
 			return false
 		}
 	}

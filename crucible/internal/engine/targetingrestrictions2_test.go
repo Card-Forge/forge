@@ -2,6 +2,7 @@ package engine_test
 
 import (
 	"slices"
+	"strings"
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
@@ -167,17 +168,28 @@ func TestTargetingPlayerChoosesAmongTheirOwnPermanents(t *testing.T) {
 	}
 }
 
-// A TargetingPlayer$ naming no player leaves nobody to choose: the spell is not
-// cast, never a pick by the activator.
-func TestTargetingPlayerNamingNobodyIsNotCast(t *testing.T) {
+// A TargetingPlayer$ naming no player leaves nobody to choose: the spell goes
+// on the stack with no targets and fails loudly when it resolves, never a pick
+// by the activator and never a silent "no legal target" (GO-7). Java has no
+// answer either: chooseSingleEntityForEffect returns null for an empty list
+// and setupTargets dereferences it (SpellAbility.java:2153-2161).
+func TestTargetingPlayerNamingNobodyFailsWhenItResolves(t *testing.T) {
 	t.Parallel()
 
 	g, p, _ := restrictionGame(t)
-	g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	mine := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
 	spell := g.NewCard(scriptDef(t, "Nobody Picks", "Sorcery",
 		"A:SP$ Pump | ValidTgts$ Creature | TargetingPlayer$ Player.Bogus | NumAtt$ 1"), p, engine.Hand)
-	if g.CastSpell(p, spell, engine.NewScriptedController()) {
-		t.Error("CastSpell = true, want false: no player chooses the targets")
+	c := engine.NewScriptedController()
+	if !g.CastSpell(p, spell, c) {
+		t.Fatal("CastSpell = false, want true: the spell goes on the stack and fails when it resolves")
+	}
+	err := g.ResolveStack(engine.NewRegistry(), c)
+	if err == nil || !strings.Contains(err.Error(), "TargetingPlayer$") {
+		t.Fatalf("ResolveStack = %v, want the TargetingPlayer$ error", err)
+	}
+	if got, _ := g.Card(mine).Power(); got != 1 {
+		t.Errorf("power = %d, want 1: nothing was pumped", got)
 	}
 }
 

@@ -228,7 +228,9 @@ func (g *Game) checkDiesTriggers(controller PlayerController, left CardID) {
 					continue
 				}
 				if sub, api, optional, ok := triggerEffectAPI(g, c, face.Amounts, t); ok {
-					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: left, cardStamp: g.Card(left).zoneStamp}), staticTrigger: isStaticTrigger(t)})
+					objs := changesZoneCardObjects(t, left, c)
+					objs.cardStamp = g.Card(left).zoneStamp
+					matches = append(matches, Ability{API: api, Source: left, Controller: c.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objs), staticTrigger: isStaticTrigger(t)})
 				}
 			}
 		}
@@ -292,7 +294,7 @@ func (g *Game) otherDiesTriggerMatches(left CardID) []Ability {
 						continue
 					}
 					if sub, api, optional, ok := triggerEffectAPI(g, w, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: left}), staticTrigger: isStaticTrigger(t)})
+						matches = append(matches, Ability{API: api, Source: watcher, Controller: w.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(changesZoneCardObjects(t, left, dying)), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -1493,9 +1495,11 @@ func (g *Game) checkSacrificedTriggers(controller PlayerController, card CardID,
 					if !sacrificedTriggerMatches(g, t, c, h.Controller(), host, player) {
 						continue
 					}
-					// TriggerSacrificed.java:76: AbilityKey.Card, the sacrificed card.
+					// TriggerSacrificed.java:76: AbilityKey.Card, the sacrificed card's
+					// LKI copy (Player.java:2276-2280), controlled by its sacrificer.
 					if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{card: card}), staticTrigger: isStaticTrigger(t)})
+						objs := triggeredObjects{card: card, cardLKIController: player, cardLKIOwner: c.Owner}
+						matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objs), staticTrigger: isStaticTrigger(t)})
 					}
 				}
 			}
@@ -2643,6 +2647,30 @@ type triggerFace struct {
 // which grant fired (triggeredObjects.grant).
 func (f triggerFace) objects(o triggeredObjects) triggeredObjects {
 	o.grant = f.grant
+	return o
+}
+
+// withCardLKI records lki -- the triggering card as it last was on the
+// battlefield -- as the frozen controller and owner Defined$
+// TriggeredCardController/TriggeredCardOwner answer
+// (triggeredObjects.cardLKIController).
+func (o triggeredObjects) withCardLKI(lki *Card) triggeredObjects {
+	o.cardLKIController, o.cardLKIOwner = lki.Controller(), lki.Owner
+	return o
+}
+
+// changesZoneCardObjects is TriggerChangesZone.setTriggeringObjects
+// (TriggerChangesZone.java:190-198) for the card left that a Mode$
+// ChangesZone line t saw leave the battlefield: an Origin$ of exactly
+// "Battlefield" (Java's String.equals) stores the CardLKI as AbilityKey.Card;
+// any other (absent, "Any", a list) stores the moved card itself
+// (GameAction.java:602), read live. lki is left as it last was on the
+// battlefield (g.LKI, or the card itself).
+func changesZoneCardObjects(t *compile.Ability, left CardID, lki *Card) triggeredObjects {
+	o := triggeredObjects{card: left}
+	if origin, ok := t.Param("Origin"); ok && origin == "Battlefield" {
+		o = o.withCardLKI(lki)
+	}
 	return o
 }
 

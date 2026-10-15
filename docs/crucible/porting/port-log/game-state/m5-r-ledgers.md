@@ -38,10 +38,11 @@ Choices, each a Java rule kept:
 - **Zone split.** `ThisTurnEntered_` splits at the first five underscores (`AbilityUtils.java:2806`), so a valid string
   holding an underscore is cut short; zone names go through `ZoneType.smartValueOf` (one name, any case). A name no zone
   has, `from` with nothing after it, and a `$` in the head are unresolved, never zero (GO-7).
-- **Putter.** `CountersAddedThisTurn`'s player string is matched against the controller of the source that put the
-  counters. A placement with no source card (a Saga's turn-based lore counter) is not logged, as Java ignores a null
-  putter. Counters placed by paths that do not go through `addCardCounters` (loyalty on entry, `MoveCounter` removals,
-  replacement-modified placements in `replacement.go`) are not logged.
+- **Putter.** `CountersAddedThisTurn`'s player string is matched against the player who placed the counters
+  (`addCardCounters`' placer, [R9f](m6-r9f-trigger-findings.md)); a Saga's turn-based lore counter is logged under the
+  turn's player. A placement with no placer is not logged, as Java ignores a null putter. Counters placed by paths that
+  do not go through `addCardCounters` (loyalty on entry, `MoveCounter` removals, replacement-modified placements in
+  `replacement.go`) are not logged.
 - **`CreaturesAttackedThisTurn`** counts the attacking player's own list, live cards (not copies), per declaration.
 - **`Intensity`** has no `CardIntensity` head in Java; the corpus writes `Count$Intensity` and `Card.getIntensity(true)`
   adds `Starting intensity`.

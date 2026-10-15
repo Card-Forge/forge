@@ -139,8 +139,8 @@ func TestPutCounterAllEffectRejectsUnresolvedParam(t *testing.T) {
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 
 	c := engine.NewScriptedController()
-	_, err := castETBPutCounterAll(t, g, p, etbPutCounterAllTriggerDefParams(t, "Test PutCounterAll Placer", "ValidCards$ Creature | CounterType$ P1P1 | Placer$ Controller"), c)
+	_, err := castETBPutCounterAll(t, g, p, etbPutCounterAllTriggerDefParams(t, "Test PutCounterAll ValidZone", "ValidCards$ Creature | CounterType$ P1P1 | ValidZone$ Graveyard"), c)
 	if err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved Placer$")
+		t.Fatal("ResolveStack succeeded, want an error for unresolved ValidZone$")
 	}
 }

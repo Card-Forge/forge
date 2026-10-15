@@ -27,11 +27,6 @@ func (preventDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	if a.targetsErr != nil {
-		// The targets, or their division, could not be asked for as the
-		// ability went on the stack (resolveTargets).
-		return fmt.Errorf("engine: PreventDamage: %w", a.targetsErr)
-	}
 	raw, ok := a.Params.Param("Amount")
 	if !ok {
 		return fmt.Errorf("engine: PreventDamage: Amount$ missing")

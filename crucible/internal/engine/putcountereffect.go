@@ -50,8 +50,9 @@ import (
 // mechanic; CounterTypes$ (17, plural) -- a different multi-type shape,
 // not this one; ForColor$/SharedKeywords$/SharedKeywordsDefined$/
 // SharedKeywordsZone$/SharedRestrictions$/TriggeredCounterMap$/
-// CounterMapValues$/SpecifyCounter$/Placer$/RememberCards$/RemovePhase$/
-// Optional$/UpTo$/UpToMin$ -- each its own further mechanic.
+// CounterMapValues$/SpecifyCounter$/RememberCards$/RemovePhase$/
+// Optional$/UpTo$/UpToMin$ -- each its own further mechanic. Placer$ resolves
+// (putCounterPlacer).
 //
 // Condition$ itself and ConditionDefined$/ConditionZone$/
 // ConditionPlayerTurn$/ConditionActivationLimit$/ConditionPresent2$/
@@ -74,7 +75,7 @@ var putCounterUnresolvedParams = [...]string{
 	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
 	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "SkipReceiveCounters", "RandomType",
 	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
-	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter", "Placer",
+	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
 	"RememberCards", "RemovePhase", "Optional", "UpTo", "UpToMin",
 	"Condition", "ConditionZone", "ConditionPlayerTurn", "ConditionActivationLimit",
 	"ConditionPresent2", "ConditionCompare2",
@@ -111,8 +112,12 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
+	placer, err := putCounterPlacer(g, a)
+	if err != nil {
+		return err
+	}
 	if enter {
-		return g.putEnterCounters(a, source)
+		return g.putEnterCounters(a, source, placer)
 	}
 
 	counterType, err := putCounterType(a.Params)
@@ -140,11 +145,6 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		// with Defined$ the cards read are not the targets the division was
 		// announced over.
 		return fmt.Errorf("engine: PutCounter: DividedAsYouChoose$ without its own targets not resolvable yet")
-	}
-	if a.targetsErr != nil {
-		// The targets, or their division, could not be asked for as the
-		// ability went on the stack (resolveTargets).
-		return fmt.Errorf("engine: PutCounter: %w", a.targetsErr)
 	}
 	if targeted && !hasDefined {
 		// getDefinedEntitiesOrTargeted (SpellAbilityEffect.java:376-383):
@@ -200,12 +200,12 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	// setCount): the counters each object was to get, summed.
 	total := 0
 	for i, cid := range cards {
-		n := g.countersReplaced(controller, a.Controller, CardEntity(cid), counterType, amounts[i])
+		n := g.countersReplaced(controller, placer, CardEntity(cid), counterType, amounts[i])
 		if n <= 0 {
 			continue
 		}
 		total += n
-		g.addCardCounters(controller, a.Source, cid, counterType, n)
+		g.addCardCounters(controller, placer, a.Source, cid, counterType, n)
 	}
 	if keyword.Parse(a.Params.Keyword).Name == "Renown" {
 		// CountersPutEffect.java:553: whatever the counters did.
@@ -214,7 +214,7 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		}
 	}
 	for _, pid := range players {
-		n := g.countersReplaced(controller, a.Controller, PlayerEntity(pid), counterType, amount)
+		n := g.countersReplaced(controller, placer, PlayerEntity(pid), counterType, amount)
 		if n <= 0 {
 			continue
 		}
@@ -229,6 +229,26 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		g.Card(a.Source).Memory.RememberNumber(total)
 	}
 	return nil
+}
+
+// putCounterPlacer is who puts the counters (CountersPutEffect.java:583-586):
+// the activator, or the first player Placer$ names. Java's `.get(0)` throws on
+// an empty list; here that is an error before anything is placed (GO-7). The
+// placer is what an AddCounter replacement's and a CounterAdded trigger's
+// ValidSource$ read (Quicksilver Fountain, Alexios: "that player puts").
+func putCounterPlacer(g *Game, a *Ability) (PlayerID, error) {
+	spec, ok := a.Params.Param("Placer")
+	if !ok {
+		return a.Controller, nil
+	}
+	players, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+	if err != nil {
+		return NoPlayer, fmt.Errorf("engine: PutCounter: Placer$: %w", err)
+	}
+	if len(players) == 0 {
+		return NoPlayer, fmt.Errorf("engine: PutCounter: Placer$ %q names no player", spec)
+	}
+	return players[0], nil
 }
 
 // putCounterType reads CounterType$ as a single literal counter type name,

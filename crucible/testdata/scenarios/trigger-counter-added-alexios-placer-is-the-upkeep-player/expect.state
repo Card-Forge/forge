@@ -1,0 +1,6 @@
+turn=1
+activeplayer=ai
+activephase=Upkeep
+humanlife=20
+ailife=20
+aibattlefield=Stocking the Pantry|Id:2|Counters:SUPPLY=1;Alexios, Deimos of Kosmos|Id:1|Owner:human|SummonSick|Counters:P1P1=1

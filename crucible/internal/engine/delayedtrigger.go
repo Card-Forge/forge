@@ -225,14 +225,23 @@ func (g *Game) delayedLeftBattlefieldMatches(left CardID, dest ZoneType) []Abili
 			continue
 		}
 		// TriggerChangesZone.java:192-196 (Origin$ Battlefield: Card is the
-		// pre-move LKI) and TriggerExiled.java:103 record AbilityKey.Card, the
-		// card that moved -- one CardID here, the one a card's own Dies trigger
-		// records too (checkDiesTriggers), so Defined$ TriggeredCard/
-		// TriggeredCardController read it the same way.
+		// pre-move LKI) and TriggerExiled.java:103 (the pre-move object,
+		// GameAction.java:933-942) record AbilityKey.Card, the card that moved
+		// -- one CardID here, the one a card's own Dies trigger records too
+		// (checkDiesTriggers), with its battlefield controller and owner frozen
+		// the same way for Defined$ TriggeredCardController/Owner.
+		lki := g.Card(left)
+		if snap := g.LKI(left); snap != nil {
+			lki = snap
+		}
+		objs := changesZoneCardObjects(d.Trigger, left, lki)
+		if strings.EqualFold(d.Trigger.Name, "Exiled") {
+			objs = objs.withCardLKI(lki)
+		}
 		matches = append(matches, Ability{
 			API: api, Source: d.Host, Controller: d.Controller, Params: sub,
 			Amounts: d.Amounts, Optional: optional, TriggerRemembered: d.Remembered,
-			triggered:      triggeredObjects{card: left},
+			triggered:      objs,
 			hostTransforms: d.HostTransforms, hasHostTransforms: true,
 		})
 	}

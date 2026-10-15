@@ -219,21 +219,24 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		candidates = []PlayerID{refs.triggered.sourceController}
 	case "TriggeredCardController":
 		// AbilityUtils.getDefinedPlayers' "...Controller" branch over
-		// AbilityKey.Card (AbilityUtils.java:1017-1027): the triggering
-		// card's controller now, which for a static trigger is the moment
-		// it was tapped (ADR-0020).
+		// AbilityKey.Card (AbilityUtils.java:1020-1030): getController() of
+		// the object the mode stored -- the LKI copy's for a card that left
+		// the battlefield (triggeredObjects.cardLKIController), the live
+		// card's otherwise, which for a static trigger is the moment it was
+		// tapped (ADR-0020).
 		if refs.triggered.card == NoCard {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
 		}
-		candidates = []PlayerID{g.Card(refs.triggered.card).Controller()}
+		candidates = []PlayerID{refs.triggered.cardController(g)}
 	case "TriggeredCardOwner":
 		// The "...Owner" branch over AbilityKey.Card (AbilityUtils.java:1053-1059):
-		// the triggering card's owner. Java answers no player for an unset key;
-		// here that is an error, as for every Triggered key (GO-7).
+		// the stored object's owner, the LKI's like the controller above. Java
+		// answers no player for an unset key; here that is an error, as for
+		// every Triggered key (GO-7).
 		if refs.triggered.card == NoCard {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no card", defined)
 		}
-		candidates = []PlayerID{g.Card(refs.triggered.card).Owner}
+		candidates = []PlayerID{refs.triggered.cardOwner(g)}
 	case "TriggeredDefendingPlayer":
 		// AbilityKey.DefendingPlayer of Mode$ Attacks: the player defending
 		// against the attacker the trigger recorded (defenderOf).
@@ -348,6 +351,24 @@ func triggeredPlayersFiltered(g *Game, controller PlayerID, host CardID, base, f
 		}
 	}
 	return out, nil
+}
+
+// cardController is Defined$ TriggeredCardController's player: the frozen
+// controller when the mode recorded one (triggeredObjects.cardLKIController),
+// else the card's controller now.
+func (o triggeredObjects) cardController(g *Game) PlayerID {
+	if o.cardLKIController != NoPlayer {
+		return o.cardLKIController
+	}
+	return g.Card(o.card).Controller()
+}
+
+// cardOwner is Defined$ TriggeredCardOwner's player, cardController's twin.
+func (o triggeredObjects) cardOwner(g *Game) PlayerID {
+	if o.cardLKIOwner != NoPlayer {
+		return o.cardLKIOwner
+	}
+	return g.Card(o.card).Owner
 }
 
 // rememberedPlayers is AbilityUtils.addPlayer for the three "Remembered"

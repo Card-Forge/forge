@@ -106,6 +106,13 @@ func (r *Registry) resolve(g *Game, a *Ability, controller PlayerController) err
 	if a.Optional && !controller.ConfirmOptionalTrigger(g, a.Controller, a.Source) {
 		return nil
 	}
+	if a.targetsErr != nil {
+		// The targets (or their division, or who chooses them) could not be
+		// asked for as the ability went on the stack (resolveTargets,
+		// resolveChainTargets): it fails here, before any cost is paid or any
+		// effect acts on a target set nobody chose (GO-7).
+		return fmt.Errorf("engine: %s: %w", a.API, a.targetsErr)
+	}
 	if paid, err := r.payTriggeredCost(g, a, controller); err != nil || !paid {
 		return err
 	}

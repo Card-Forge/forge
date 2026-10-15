@@ -9,8 +9,7 @@
 // Ported from
 // forge-game/src/main/java/forge/game/ability/effects/CountersPutAllEffect.java's
 // resolve, trimmed the identical way putcountereffect.go's own is: that
-// file also handles Placer$'s own per-card controller/owner override,
-// AmountByChosenMap$'s own ChosenMap-indexed amount, and a second
+// file also handles AmountByChosenMap$'s own ChosenMap-indexed amount, and a second
 // ValidCards2$/CounterType2$/CounterNum2$ pass -- each its own further
 // mechanic this port has nowhere to route through yet, so each fails the
 // whole line loudly (PORT-8/GO-7) rather than resolving the first pass and
@@ -32,8 +31,7 @@ import (
 // evaluate. Every one fails the whole line loudly: ValidZone$ (2) -- this
 // file's own sweep is Battlefield-only, CountersPutAllEffect.java's own
 // default too, but a card naming a different zone explicitly must not
-// silently sweep the wrong one; Placer$ (7) -- a per-card controller/owner
-// override on who places the counter, its own further mechanic; ValidCards2$/
+// silently sweep the wrong one; ValidCards2$/
 // CounterType2$/CounterNum2$ (7/13/6) -- the second ValidCards$/CounterType$/
 // CounterNum$ pass, above; AmountByChosenMap$ (1) -- a ChosenMap-indexed
 // amount, this port's own Card.ChosenMap gap; TargetUnique$ (2) -- an extra
@@ -47,7 +45,7 @@ import (
 // identical putCounterEffect gap, SpellAbilityCondition shapes
 // subAbilityConditionMet does not cover.
 var putCounterAllUnresolvedParams = [...]string{
-	"ValidZone", "Placer", "ValidCards2", "CounterType2", "CounterNum2",
+	"ValidZone", "ValidCards2", "CounterType2", "CounterNum2",
 	"AmountByChosenMap", "TargetUnique", "IsCurse",
 	"Ultimate", "ModeCost",
 	"Condition", "ConditionPlayerTurn", "ConditionPhases",
@@ -106,14 +104,43 @@ func (putCounterAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		}
 	}
 
+	placerOf, err := putCounterAllPlacer(g, a)
+	if err != nil {
+		return err
+	}
 	for _, pid := range players {
 		for _, cid := range g.Zone(Battlefield, pid).Cards() {
 			c := g.Card(cid)
 			if !Matches(g, c, spec, a.Controller, a.Source) {
 				continue
 			}
-			g.addCardCounters(controller, a.Source, cid, counterType, amount)
+			g.addCardCounters(controller, placerOf(c), a.Source, cid, counterType, amount)
 		}
 	}
 	return nil
+}
+
+// putCounterAllPlacer is who puts the counters on each card
+// (CountersPutAllEffect.java:65-84): the activator, each card's own controller
+// or owner for Placer$ Controller/Owner (Agitator Ant's "each player may put"),
+// or the first player any other Placer$ names -- Java's `.get(0)`, which throws
+// on an empty list; here that is an error before anything is placed (GO-7).
+func putCounterAllPlacer(g *Game, a *Ability) (func(*Card) PlayerID, error) {
+	spec, ok := a.Params.Param("Placer")
+	switch {
+	case !ok:
+		return func(*Card) PlayerID { return a.Controller }, nil
+	case spec == "Controller":
+		return func(c *Card) PlayerID { return c.Controller() }, nil
+	case spec == "Owner":
+		return func(c *Card) PlayerID { return c.Owner }, nil
+	}
+	players, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+	if err != nil {
+		return nil, fmt.Errorf("engine: PutCounterAll: Placer$: %w", err)
+	}
+	if len(players) == 0 {
+		return nil, fmt.Errorf("engine: PutCounterAll: Placer$ %q names no player", spec)
+	}
+	return func(*Card) PlayerID { return players[0] }, nil
 }

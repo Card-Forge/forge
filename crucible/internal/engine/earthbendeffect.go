@@ -57,7 +57,8 @@ func (earthbendEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 			AddKeywords: []string{"Haste"},
 			HasPower:    true, HasToughness: true,
 		})
-		g.addCardCounters(controller, a.Source, id, P1P1, num)
+		// The activator places (EarthbendEffect.java:50, :66).
+		g.addCardCounters(controller, a.Controller, a.Source, id, P1P1, num)
 		for _, zone := range [...]ZoneType{Graveyard, Exile} {
 			g.delayed = append(g.delayed, delayedTrigger{
 				Trigger: earthbendReturnTrigger(zone), Host: a.Source, Controller: a.Controller,

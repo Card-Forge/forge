@@ -641,7 +641,8 @@ func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid P
 			target = g.chosenUnlessCards(controller, pid, a.Source, g.unlessCounterTargets(pid, a.Source, uc), 1, 1)[0]
 		}
 		if n := g.countersReplaced(controller, pid, CardEntity(target), uc.addCounterType, uc.addCounterN); n > 0 {
-			g.addCardCounters(controller, a.Source, target, uc.addCounterType, n)
+			// The payer places (CostPutCounter.java:182).
+			g.addCardCounters(controller, pid, a.Source, target, uc.addCounterType, n)
 		}
 	}
 }
@@ -748,7 +749,8 @@ func (g *Game) upkeepCostPaid(controller PlayerController, a *Ability, source *C
 		// One more AGE counter, through any AddCounter replacement, before
 		// the cost is built from how many there are.
 		if added := g.countersReplaced(controller, a.Controller, CardEntity(source.ID), Age, 1); added > 0 {
-			g.addCardCounters(controller, source.ID, source.ID, Age, added)
+			// The activator places (SacrificeEffect.java:54).
+			g.addCardCounters(controller, a.Controller, source.ID, source.ID, Age, added)
 		}
 		n = source.Counters.Count(Age)
 		if n == 0 {

@@ -1,0 +1,21 @@
+# Massacre Wurm: "Whenever a creature an opponent controls dies, that player
+# loses 2 life" (Defined$ TriggeredCardController). The human takes the ai's
+# Grizzly Bears with Act of Treason, then Shocks them, so the Bears die under
+# the human. TriggerChangesZone.java:192-194 stores the CardLKI as
+# AbilityKey.Card for an Origin$ Battlefield line, and AbilityUtils.java:1029-
+# 1030 asks that copy for its controller: the human loses 2, not the Bears'
+# owner (in the graveyard the card itself answers its owner, the ai).
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+queue paygeneric R
+queue paygeneric R
+queue targets 5
+castspell human 1
+resolvestack
+tapformana human 7 R
+queue targets 5
+castspell human 6
+resolvestack

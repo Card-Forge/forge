@@ -40,7 +40,8 @@ func (endureEffect) Resolve(g *Game, a *Ability, controller PlayerController) er
 		c := g.Card(id)
 		pl := c.Controller()
 		if c.Zone == Battlefield && controller.ConfirmEffect(g, pl, a.Source) {
-			g.addCardCounters(controller, a.Source, id, P1P1, n)
+			// The enduring permanent's controller places (EndureEffect.java:63, :74).
+			g.addCardCounters(controller, pl, a.Source, id, P1P1, n)
 			continue
 		}
 		def, err := tokenScript(g, "w_x_x_spirit")

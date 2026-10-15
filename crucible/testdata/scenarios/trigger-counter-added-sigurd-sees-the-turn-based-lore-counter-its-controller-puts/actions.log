@@ -1,0 +1,10 @@
+# Sigurd, Jarl of Ravensthorpe: "Whenever you put a lore counter on a Saga you
+# control" is Mode$ CounterAdded | ValidSource$ You. AbilityKey.Source is the
+# player placing the counter (Card.java:1805), and the precombat-main lore
+# counter of CR 714.3b is placed by the turn's player (PhaseHandler.java:286):
+# the human. Sigurd's trigger puts a +1/+1 counter on the Bears beside chapter
+# III's 2 life, and the Saga is sacrificed once its last chapter has resolved.
+startturn human
+queue targets 3
+advance 3
+resolvestack
