@@ -115,6 +115,16 @@
             <artifactId>Java-Client</artifactId>
             <version>0.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <version>5.3.4</version>
+        </dependency>
     </dependencies>
 
 </project>
