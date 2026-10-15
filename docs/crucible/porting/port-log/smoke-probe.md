@@ -47,27 +47,27 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 30,626 |
-| refused      |  2,887 |
+| plays        | 30,670 |
+| refused      |  2,864 |
 | panicked     |      0 |
 | hung         |      0 |
-| placed       |    372 |
-| inconclusive |    193 |
+| placed       |    373 |
+| inconclusive |    171 |
 
-91.4% of the 33,513 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+91.5% of the 33,534 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 93.7% of 8,640 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 93.7% of 8,641 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
-| Cards | Refusal                                         |
-| ----: | ----------------------------------------------- |
-|    49 | `triggered AB$ Cost$ not resolvable`            |
-|    48 | `sticker sheets are not ported (open plan R15)` |
-|    40 | `Animate: Triggers$ not resolvable`             |
-|    36 | `Token: TokenAttacking$ not resolvable`         |
-|    35 | `ChangeZone: SorcerySpeed$ not resolvable`      |
-|    34 | `PutCounter: Monstrosity$ not resolvable`       |
+| Cards | Refusal                                              |
+| ----: | ---------------------------------------------------- |
+|    49 | `triggered AB$ Cost$ not resolvable`                 |
+|    48 | `sticker sheets are not ported (open plan R15)`      |
+|    40 | `Animate: Triggers$ not resolvable`                  |
+|    36 | `ChangeZone: DestinationAlternative$ not resolvable` |
+|    35 | `ChangeZone: SorcerySpeed$ not resolvable`           |
+|    34 | `PutCounter: Monstrosity$ not resolvable`            |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 
