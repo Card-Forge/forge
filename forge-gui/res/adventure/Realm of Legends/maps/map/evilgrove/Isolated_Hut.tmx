@@ -3,9 +3,6 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Homicidal Seclusion&quot; ]}"/>
- </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
@@ -39,7 +36,7 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="98.5129" y="55.8932"/>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="118.937" y="81.2363">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Murderer's Axe|SOI&quot;, &quot;Lake of the Dead|ALL&quot;, &quot;Season of the Witch|DRK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Murderer's Axe|SOI&quot;, &quot;Lake of the Dead|ALL&quot;, &quot;Homicidal Seclusion&quot;, &quot;Season of the Witch|DRK&quot;]}"/>
     <property name="enemy" value="Istvan"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="10"/>

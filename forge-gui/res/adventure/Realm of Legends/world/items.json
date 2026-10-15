@@ -12,20 +12,17 @@
   {
     "name": "Landscape Sketchbook - Mirage",
     "description": "Gives access to Mirage land arts in the add basic lands menu of the deckbuilder's upper right corner.",
-    "iconName": "LandscapeSketchbook",
-    "questItem": true
+    "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
     "description": "Gives access to Urza's Saga land arts in the add basic lands menu of the deckbuilder's upper right corner.",
-    "iconName": "LandscapeSketchbook",
-    "questItem": true
+    "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Coldsnap",
     "description": "Gives access to Coldsnap land arts in the add basic lands menu of the deckbuilder's upper right corner.",
-    "iconName": "LandscapeSketchbook",
-    "questItem": true
+    "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Zendikar",
@@ -240,8 +237,7 @@
   {
     "name": "Landscape Sketchbook - Seventh Edition",
     "description": "Gives access to 7th Ed land arts in the add basic lands menu of the deckbuilder's upper right corner.",
-    "iconName": "LandscapeSketchbook",
-    "questItem": true
+    "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Alpha",
@@ -326,6 +322,16 @@
   {
     "name": "Landscape Sketchbook - Tarkir: Dragonstorm",
     "description": "Gives access to Tarkir Dragonstorm land arts in the add basic lands menu of the deckbuilder's upper right corner.",
+    "iconName": "LandscapeSketchbook"
+  },
+  {
+    "name": "Landscape Sketchbook - Secrets of Strixhaven",
+    "description": "Gives access to Secrets of Strixhaven land arts in the add basic lands menu of the deckbuilder's upper right corner.",
+    "iconName": "LandscapeSketchbook"
+  },
+  {
+    "name": "Landscape Sketchbook - Reality Fracture",
+    "description": "Gives access to Reality Fracture land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook"
   },
   {
@@ -2061,7 +2067,7 @@
     "equipmentSlot": "Left",
     "iconName": "Fblthp'sLostBauble",
     "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Wayfarer's Bauble|PF26"
      ]
@@ -3917,16 +3923,17 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -10
+        "lifeModifier": -6
     }
   },
     {
       "name": "Flaming Armor",
-      "description": "Lowers foe's starting health.",
+      "description": "Lowers foe's starting health, ups your a bit.",
       "equipmentSlot": "Body",
       "iconName": "FlamingArmor",
       "cost": 3000,
       "effect": {
+        "lifeModifier": 4,
         "opponent": {
           "lifeModifier": -8
         }
@@ -3963,7 +3970,7 @@
       "iconName": "DivinelyBlessedArmor",
       "cost": 3000,
       "effect": {
-        "lifeModifier": 15,
+        "lifeModifier": 18,
         "opponent": {
           "lifeModifier": 5
         }
@@ -3983,12 +3990,12 @@
   },
     {
       "name": "Forbidden Robes",
-      "description": "Two extra cards at the cost of life",
+      "description": "Three extra cards at the cost of life",
       "equipmentSlot": "Body",
       "iconName": "RestrictedRobes",
       "cost": 3000,
       "effect": {
-        "changeStartCards": 2,
+        "changeStartCards": 3,
         "lifeModifier": -7
     }
   },
@@ -4085,7 +4092,7 @@
     "iconName": "SteelArmor",
     "cost": 1000,
     "effect": {
-        "lifeModifier": 4
+        "lifeModifier": 5
     }
   },
     {
@@ -4102,17 +4109,12 @@
   },
   {
     "name": "Heavy Armor",
-    "description": "An amazing life boost but opponent's permanents enter untapped.",
+    "description": "A massive life boost.",
     "equipmentSlot": "Body",
     "iconName": "UltraHeavyArmor",
     "cost": 3000,
     "effect": {
-      "lifeModifier": 15,
-      "opponent": {
-        "startBattleWithCard": [
-          "Amulet of Vigor|WWK"
-        ]
-      }
+      "lifeModifier": 15
     }
   },
   {
@@ -4232,7 +4234,7 @@
     "iconName": "MithrilArmor",
     "cost": 1500,
     "effect": {
-        "lifeModifier": 8
+        "lifeModifier": 10
     }
   },
   {
@@ -4335,7 +4337,7 @@
     "description": "Grants a token in a special slot with 2, sac: Draw a card.",
     "equipmentSlot": "Token",
     "iconName": "TokenofInvestigation",
-    "cost": 70000,
+    "cost": 50000,
     "effect": {
       "startBattleWithCard": [
         "c_a_clue_draw"
@@ -4347,7 +4349,7 @@
     "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
     "equipmentSlot": "Token",
     "iconName": "TokenofBlood",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
       "startBattleWithCard": [
         "c_a_blood_draw"
@@ -4371,7 +4373,7 @@
     "description": "Grants a token in a special slot with 1, T, sac: Explore.",
     "equipmentSlot": "Token",
     "iconName": "TokenofExploration",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
       "startBattleWithCard": [
         "c_a_map_sac_explore"
@@ -4380,11 +4382,11 @@
   },
   {
     "name": "Phelddagrif Plate",
-    "description": "Opponent gets a 2/2 hippo; you get a card and some life",
+    "description": "Opponent gets a 2/2 hippo; you get two cards and some life",
     "equipmentSlot": "Body",
     "iconName": "PhelddagrifPlate",
     "effect": {
-      "changeStartCards": 1,
+      "changeStartCards": 2,
         "lifeModifier": 8,
         "opponent": {
           "startBattleWithCard": [
@@ -4658,12 +4660,12 @@
   },
     {
       "name": "Sage's Robes",
-      "description": "An extra card and some life.",
+      "description": "Two extra cards and some life.",
       "equipmentSlot": "Body",
       "iconName": "GrandSage'sRobes",
       "cost": 3000,
       "effect": {
-        "changeStartCards": 1,
+        "changeStartCards": 2,
         "lifeModifier": 3
     }
   },
@@ -4686,6 +4688,7 @@
     "equipmentSlot": "Body",
     "iconName": "DiamondBelt",
     "effect": {
+        "changeStartCards": 1,
         "startBattleWithCard": [
         "Diamond Valley|ARN"
      ]
@@ -4730,11 +4733,11 @@
   },
   {
     "name": "Infernal Armor",
-    "description": "Three extra cards, but you are stalked by a 5/5 flying demon.",
+    "description": "Four extra cards, but you are stalked by a 5/5 flying demon.",
     "equipmentSlot": "Body",
     "iconName": "InfernalArmor",
     "effect": {
-      "changeStartCards": 3,
+      "changeStartCards": 4,
         "opponent": {
           "startBattleWithCard": [
             "Tombstalker|TSR"
@@ -5377,7 +5380,7 @@
     "description": "Grants a token in a special slot with 2, sac: Scry 1 then draw.",
     "equipmentSlot": "Token",
     "iconName": "TokenofInsight",
-    "cost": 90000,
+    "cost": 70000,
     "effect": {
       "lifeModifier": -3,
       "startBattleWithCard": [
@@ -5402,8 +5405,9 @@
     "description": "Grants a token in a special slot with 2, T, sac: get a tapped basic.",
     "equipmentSlot": "Token",
     "iconName": "TokenofLanding",
-    "cost": 50000,
+    "cost": 70000,
     "effect": {
+      "lifeModifier": -3,
       "changeStartCards": -1,
       "startBattleWithCard": [
         "c_a_lander_sac_search"
@@ -5427,7 +5431,7 @@
     "description": "Grants a 1/1 white/black spirit token with flying in a special slot.",
     "equipmentSlot": "Token",
     "iconName": "TokenofSoaringSpirit",
-    "cost": 80000,
+    "cost": 75000,
     "effect": {
       "startBattleWithCard": [
         "wb_1_1_spirit_flying"
@@ -5723,6 +5727,823 @@
       "opponent": {
         "lifeModifier": 6
       }
+    }
+  },
+  {
+    "name": "Commander's Sphere",
+    "description": "Taps for any of your colors or sacrifice for a card. Uses its own special slot.",
+    "equipmentSlot": "Special",
+    "iconName": "CommandersSphere",
+    "questItem": true,
+    "effect": {
+      "startBattleWithCard": [
+        "Commander's Sphere|C14"
+      ]
+    }
+  },
+  {
+    "name": "Armor of Wak-Wak",
+    "description": "T: Target flier's power is 0 this turn. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "ArmorofWak-Wak",
+    "cost": 2500,
+    "effect": {
+      "lifeModifier": 10,
+      "startBattleWithCard": [
+        "Island of Wak-Wak|ARN"
+      ]
+    }
+  },
+  {
+    "name": "Gladiator Armor",
+    "description": "3, T: One of your creatures and opponent's of their choice fight. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "GladiatorArmor",
+    "cost": 2500,
+    "effect": {
+      "opponent": {
+        "lifeModifier": -5
+      },
+      "startBattleWithCard": [
+        "Arena|PHPR"
+      ]
+    }
+  },
+  {
+    "name": "Armor of Safety",
+    "description": "2, T: Exile one of your creatures. Sac in upkeep to bring all back. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "ArmorofSafety",
+    "cost": 2500,
+    "effect": {
+      "lifeModifier": 7,
+      "startBattleWithCard": [
+        "Safe Haven|TSB"
+      ]
+    }
+  },
+  {
+    "name": "Armor of Sorrow",
+    "description": "T: Switch two blockers, then take 2 to self and your creatures. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "ArmorofSorrow",
+    "cost": 2500,
+    "effect": {
+      "changeStartCards": 2,
+      "startBattleWithCard": [
+        "Sorrow's Path|DRK"
+      ]
+    }
+  },
+  {
+    "name": "Icy Armor",
+    "description": "T: Stop a nonflying attacker from untapping by keeping tapped. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "IcyArmor",
+    "cost": 2500,
+    "effect": {
+      "changeStartCards": 1,
+      "startBattleWithCard": [
+        "Ice Floe|ICE"
+      ]
+    }
+  },
+  {
+    "name": "Oasis Outfit",
+    "description": "T: Prevent 1 damage to a creature. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "OasisOutfit",
+    "cost": 2500,
+    "effect": {
+      "lifeModifier": 7,
+      "startBattleWithCard": [
+        "Oasis|ARN"
+      ]
+    }
+  },
+  {
+    "name": "Rainbow Armor",
+    "description": "Taps for any color, then give it to your opponent.",
+    "equipmentSlot": "Body",
+    "iconName": "RainbowArmor",
+    "cost": 6000,
+    "effect": {
+      "startBattleWithCard": [
+        "Rainbow Vale|FEM"
+      ]
+    }
+  },
+  {
+    "name": "Adventurer's Outfit",
+    "description": "Your green legends band with other legends. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "Adventurer'sOutfit",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": 1,
+      "lifeModifier": 7,
+      "startBattleWithCard": [
+        "Adventurers' Guildhouse"
+      ]
+    }
+  },
+  {
+    "name": "Armor of Serra",
+    "description": "Your white legends band with other legends. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "ArmorofSerra",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": 1,
+      "lifeModifier": 7,
+      "startBattleWithCard": [
+        "Cathedral of Serra"
+      ]
+    }
+  },
+  {
+    "name": "Unholy Armor",
+    "description": "Your black legends band with other legends. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "UnholyArmor",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": 3,
+      "lifeModifier": -10,
+      "startBattleWithCard": [
+        "Unholy Citadel"
+      ]
+    }
+  },
+  {
+    "name": "Seafarer's Outfit",
+    "description": "Your blue legends band with other legends. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "Seafarer'sOutfit",
+    "cost": 3000,
+    "effect": {
+      "changeStartCards": 2,
+      "startBattleWithCard": [
+        "Seafarer's Quay"
+      ]
+    }
+  },
+  {
+    "name": "Stronghold Armor",
+    "description": "Your red legends band with other legends. Doesn't give mana.",
+    "equipmentSlot": "Body",
+    "iconName": "StrongholdArmor",
+    "cost": 3000,
+    "effect": {
+      "opponent": {
+        "lifeModifier": -5
+      },
+      "changeStartCards": 1,
+      "startBattleWithCard": [
+        "Mountain Stronghold"
+      ]
+    }
+  },
+  {
+    "name": "Horrible Pants",
+    "description": "Two weird-looking 2/2 artifact spirit creatures with rampage 1.",
+    "equipmentSlot": "Boots",
+    "iconName": "HorriblePants",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Horrible Hordes", "Horrible Hordes"
+      ]
+    }
+  },
+  {
+    "name": "Aysen Armor",
+    "description": "T: Add C. 1, T: Add W. 2, T: Add U or G.",
+    "equipmentSlot": "Body",
+    "iconName": "AysenArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Aysen Abbey"
+      ]
+    }
+  },
+  {
+    "name": "An-Havva Armor",
+    "description": "T: Add C. 1, T: Add G. 2, T: Add W or R.",
+    "equipmentSlot": "Body",
+    "iconName": "An-HavvaArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "An-Havva Township"
+      ]
+    }
+  },
+  {
+    "name": "Sengir Cloak",
+    "description": "T: Add C. 1, T: Add B. 2, T: Add U or R.",
+    "equipmentSlot": "Body",
+    "iconName": "SengirCloak",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Castle Sengir"
+      ]
+    }
+  },
+  {
+    "name": "Wizard's Armor",
+    "description": "T: Add C. 1, T: Add U. 2, T: Add W or B.",
+    "equipmentSlot": "Body",
+    "iconName": "Wizard'sArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Wizards' School"
+      ]
+    }
+  },
+  {
+    "name": "Koskun Armor",
+    "description": "T: Add C. 1, T: Add R. 2, T: Add G or B.",
+    "equipmentSlot": "Body",
+    "iconName": "KoskunArmor",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Koskun Keep"
+      ]
+    }
+  },
+  {
+    "name": "Token of the Devil",
+    "description": "1/1 creature token that deals 1 to any target when it dies.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenoftheDevil",
+    "effect": {
+      "startBattleWithCard": [
+        "r_1_1_devil_burn"
+      ]
+    }
+  },
+  {
+    "name": "Token of Munitions",
+    "description": "Artifact token that deals 2 to any target when it leaves.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofMunitions",
+    "effect": {
+      "startBattleWithCard": [
+        "munitions"
+      ]
+    }
+  },
+  {
+    "name": "Token of Change",
+    "description": "Colorless 1/1 creature token that's every creature type.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofChange",
+    "effect": {
+      "startBattleWithCard": [
+        "c_1_1_shapeshifter_changeling"
+      ]
+    }
+  },
+  {
+    "name": "Token of Ninjutsu",
+    "description": "Blue 1/1 ninja creature token that can't be blocked.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofNinjutsu",
+    "effect": {
+      "startBattleWithCard": [
+        "u_1_1_ninja_unblockable"
+      ]
+    }
+  },
+  {
+    "name": "Token of Gold",
+    "description": "Artifact token that can be sacrificed for any color of mana.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofGold",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "c_a_gold_sac"
+      ]
+    }
+  },
+  {
+    "name": "Didgeridoo",
+    "description": "3: Put a minotaur from your hand onto the field. Repeatable.",
+    "equipmentSlot": "Left",
+    "iconName": "Didgeridoo",
+    "effect": {
+      "startBattleWithCard": [
+        "Didgeridoo"
+      ]
+    }
+  },
+  {
+    "name": "Crab Hat",
+    "description": "1, Discard a card: Make a 0/3 crab. Delirium - Crabs get +1/+1.",
+    "equipmentSlot": "Neck",
+    "iconName": "CrabHat",
+    "effect": {
+      "startBattleWithCard": [
+        "Scuttletide"
+      ]
+    }
+  },
+  {
+    "name": "Vectis Boots",
+    "description": "4/3 artifact rogue creature with UB: Unblockable and -2/-0.",
+    "equipmentSlot": "Boots",
+    "iconName": "VectisBoots",
+    "cost": 9999,
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Vectis Agents"
+      ]
+    }
+  },
+  {
+    "name": "Bane Alley Boots",
+    "description": "0/3 rogue. T: Draw, then put a card into exile. UB, T: Draw back a card she exiled.",
+    "equipmentSlot": "Boots",
+    "iconName": "BaneAlleyBoots",
+    "cost": 24999,
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "Bane Alley Broker"
+      ]
+    }
+  },
+  {
+    "name": "Swindler Shoes",
+    "description": "2/2 rogue. T: Bet 3 life double or nothing on a coin flip.",
+    "equipmentSlot": "Boots",
+    "iconName": "SwindlerShoes",
+    "cost": 4999,
+    "effect": {
+      "startBattleWithCard": [
+        "Tavern Swindler"
+      ]
+    }
+  },
+  {
+    "name": "High Merchant's Shirt",
+    "description": "T: Add C. T, Sacrifice a creature: Gain 1 life.",
+    "equipmentSlot": "Body",
+    "iconName": "HighMerchant'sShirt",
+    "cost": 19999,
+    "effect": {
+      "changeStartCards": -1,
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "High Market|MMQ"
+      ]
+    }
+  },
+  {
+    "name": "Throwing Knife",
+    "description": "Equip 2. +2/+0 and you can sac the dagger on attack to ping for 2.",
+    "equipmentSlot": "Right",
+    "iconName": "ThrowingKnife",
+    "cost": 2999,
+    "effect": {
+      "startBattleWithCard": [
+        "Throwing Knife"
+      ]
+    }
+  },
+  {
+    "name": "Whispersteel Dagger",
+    "description": "Equip 3. +2/+0 and on hit, you can cast a creature from opp's GY with any mana.",
+    "equipmentSlot": "Right",
+    "iconName": "WhispersteelDagger",
+    "cost": 5999,
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "Whispersteel Dagger"
+      ]
+    }
+  },
+  {
+    "name": "Thought Dissector",
+    "description": "X, T: Opp reveals X cards from deck. If they hit an artifact, steal it and sac this.",
+    "equipmentSlot": "Left",
+    "iconName": "ThoughtDissector",
+    "cost": 3999,
+    "effect": {
+      "startBattleWithCard": [
+        "Thought Dissector"
+      ]
+    }
+  },
+  {
+    "name": "Skulker's Hood",
+    "description": "Your creatures have skulk. 4W: Your creatures get +1/+1 this turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "Skulker'sHood",
+    "cost": 29999,
+    "effect": {
+      "startBattleWithCard": [
+        "Behind the Scenes"
+      ]
+    }
+  },
+  {
+    "name": "Vexing Boots",
+    "description": "4/4 flier w/ cumulative upkeep: discard a card, but when it dies, draw=age.",
+    "equipmentSlot": "Boots",
+    "iconName": "VexingBoots",
+    "effect": {
+      "startBattleWithCard": [
+        "Vexing Sphinx"
+      ]
+    }
+  },
+  {
+    "name": "Sphinx Helm",
+    "description": "When you draw, mill opp two, and again if they match colors. 5U: Loot.",
+    "equipmentSlot": "Neck",
+    "iconName": "SphinxHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Sphinx's Tutelage"
+      ]
+    }
+  },
+  {
+    "name": "Veteran's Blade",
+    "description": "Equip 2. Auto-equips to soldiers. Gives +1/+1 for each of your attacking or blocking creatures.",
+    "equipmentSlot": "Right",
+    "iconName": "Veteran'sBlade",
+    "effect": {
+      "startBattleWithCard": [
+        "Veteran's Armaments"
+      ]
+    }
+  },
+  {
+    "name": "Soldier's Helm",
+    "description": "Soldiers have vigilance. 2W: Create a 1/1 soldier token.",
+    "equipmentSlot": "Neck",
+    "iconName": "Soldier'sHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Mobilization"
+      ]
+    }
+  },
+  {
+    "name": "Armor of Horrors",
+    "description": "Three extra cards AND a 7/7... but it dies on upkeep and you take 7.",
+    "equipmentSlot": "Body",
+    "iconName": "ArmorofHorrors",
+    "effect": {
+      "changeStartCards": 3,
+      "startBattleWithCard": [
+        "Cosmic Horror"
+      ]
+    }
+  },
+  {
+    "name": "Blor's Bow",
+    "description": "Equip 1. Gives +1/+1, vigilance, and reach.",
+    "equipmentSlot": "Right",
+    "iconName": "Blor'sBow",
+    "effect": {
+      "startBattleWithCard": [
+        "Short Bow"
+      ]
+    }
+  },
+  {
+    "name": "Blor's Shield",
+    "description": "Equip 3. +2/+2, haste, can't be sacrificed, can give to opponent.",
+    "equipmentSlot": "Right",
+    "iconName": "Blor'sShield",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Assault Suit|C14"
+      ]
+    }
+  },
+  {
+    "name": "Brushwagg Boots",
+    "description": "A silly-looking 3/2, -2/+2 when it blocks or becomes blocked.",
+    "equipmentSlot": "Boots",
+    "iconName": "BrushwaggBoots",
+    "effect": {
+      "startBattleWithCard": [
+        "Brushwagg"
+      ]
+    }
+  },
+  {
+    "name": "Brute Shield",
+    "description": "Indestructible. 3: Becomes a 2/2 until EOT. Repeatable.",
+    "equipmentSlot": "Left",
+    "iconName": "BruteShield",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Brute"
+      ]
+    }
+  },
+  {
+    "name": "Sneakling Shoes",
+    "description": "A 2/2 that's every creature type.",
+    "equipmentSlot": "Boots",
+    "iconName": "SneaklingShoes",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Mischievous Sneakling"
+      ]
+    }
+  },
+  {
+    "name": "Necklace of Flourishing",
+    "description": "Both players draw an extra card and can play another land each turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "NecklaceofFlourishing",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Rites of Flourishing|FUT"
+      ]
+    }
+  },
+  {
+    "name": "Scoria Anklet",
+    "description": "A 7/7, but you have to win a flip each upkeep or it bounces, costs 4R to replay.",
+    "equipmentSlot": "Boots",
+    "iconName": "ScoriaAnklet",
+    "effect": {
+      "startBattleWithCard": [
+        "Scoria Wurm"
+      ]
+    }
+  },
+  {
+    "name": "Armor of Sands",
+    "description": "T: Add C. 2, T: Exile one of your creatures. 4, T, sac: Bring them all back.",
+    "equipmentSlot": "Body",
+    "iconName": "ArmorofSands",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Endless Sands|HOU"
+      ]
+    }
+  },
+  {
+    "name": "Jandor's Saddlebags",
+    "description": "3, T: Untap target creature. Not an equipment.",
+    "equipmentSlot": "Right",
+    "iconName": "Jandor'sSaddlebags",
+    "effect": {
+      "startBattleWithCard": [
+        "Jandor's Saddlebags"
+      ]
+    }
+  },
+  {
+    "name": "Jester's Cap",
+    "description": "2, T, sac: Exile three cards from a library.",
+    "equipmentSlot": "Left",
+    "iconName": "Jester'sCap",
+    "effect": {
+      "changeStartCards": 1,
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Jester's Cap"
+      ]
+    }
+  },
+  {
+    "name": "Forebear's Blade",
+    "description": "Equip 3. +3/+0, vigilance, and trample. When equipped dies, move to another creature.",
+    "equipmentSlot": "Right",
+    "iconName": "Forebear'sBlade",
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "Forebear's Blade"
+      ]
+    }
+  },
+  {
+    "name": "Mostly Kitten-Proof Pants",
+    "description": "An extremely cute 3/3 flying cat dragon token.",
+    "equipmentSlot": "Boots",
+    "iconName": "MostlyKitten-ProofPants",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "brg_3_3_cat_dragon_flying"
+      ]
+    }
+  },
+  {
+    "name": "Hero's Heirloom",
+    "description": "Equip 2. +2/+1. If legendary, gives trample and haste.",
+    "equipmentSlot": "Right",
+    "iconName": "Hero'sHeirloom",
+    "effect": {
+      "startBattleWithCard": [
+        "Hero's Heirloom"
+      ]
+    }
+  },
+  {
+    "name": "Graduation Cap",
+    "description": "When you cast an instant/sorcery that targets a creature, put a +1/+1 counter.",
+    "equipmentSlot": "Neck",
+    "iconName": "GraduationCap",
+    "effect": {
+      "startBattleWithCard": [
+        "Graduation Day"
+      ]
+    }
+  },
+  {
+    "name": "Soltari Skirt",
+    "description": "A 1/1 soldier with shadow (can't block/be blocked except for shadow).",
+    "equipmentSlot": "Boots",
+    "iconName": "SoltariSkirt",
+    "effect": {
+      "startBattleWithCard": [
+        "Soltari Foot Soldier"
+      ]
+    }
+  },
+  {
+    "name": "Gate Smasher",
+    "description": "Equip 3, only to toughness 4+. +3/+0 and trample.",
+    "equipmentSlot": "Right",
+    "iconName": "GateSmasher",
+    "effect": {
+      "startBattleWithCard": [
+        "Gate Smasher"
+      ]
+    }
+  },
+  {
+    "name": "Riot Helm",
+    "description": "During your turn, your creatures get +1/+0 and trample.",
+    "equipmentSlot": "Neck",
+    "iconName": "RiotHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Street Riot"
+      ]
+    }
+  },
+  {
+    "name": "Scroll of the Masters",
+    "description": "When you cast a noncreature, get lore. 3, T: Give +X/+X=lore until EOT.",
+    "equipmentSlot": "Right",
+    "iconName": "ScrolloftheMasters",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "Scroll of the Masters"
+      ]
+    }
+  },
+  {
+    "name": "Time Bomb",
+    "description": "Counter on upkeep. 1, T, sac: Damage=counters to each creature/player.",
+    "equipmentSlot": "Left",
+    "iconName": "TimeBomb",
+    "effect": {
+      "startBattleWithCard": [
+        "Time Bomb"
+      ]
+    }
+  },
+  {
+    "name": "Mind Sculptor Necklace",
+    "description": "When you activate a loyalty ability that takes 2+ loyalty, draw.",
+    "equipmentSlot": "Neck",
+    "iconName": "MindSculptorNecklace",
+    "effect": {
+      "lifeModifier": -10,
+      "startBattleWithCard": [
+        "Way of the Mind Sculptor"
+      ]
+    }
+  },
+  {
+    "name": "Deathbringer Necklace",
+    "description": "Your planeswalkers have -2: Sac a creature, make a 4/4 trample.",
+    "equipmentSlot": "Neck",
+    "iconName": "DeathbringerNecklace",
+    "effect": {
+      "startBattleWithCard": [
+        "Way of the Deathbringer"
+      ]
+    }
+  },
+  {
+    "name": "Healer Necklace",
+    "description": "Your planeswalkers have -2: Make a 2/2 and surveil 1.",
+    "equipmentSlot": "Neck",
+    "iconName": "HealerNecklace",
+    "effect": {
+      "startBattleWithCard": [
+        "Way of the Healer"
+      ]
+    }
+  },
+  {
+    "name": "Warlord Necklace",
+    "description": "Your planeswalkers have -4: Burn creature/walker and a player for 2.",
+    "equipmentSlot": "Neck",
+    "iconName": "WarlordNecklace",
+    "effect": {
+      "startBattleWithCard": [
+        "Way of the Warlord"
+      ]
+    }
+  },
+  {
+    "name": "Paradox Necklace",
+    "description": "When you activate a loyalty ability, gain 1 life and you can play another land.",
+    "equipmentSlot": "Neck",
+    "iconName": "ParadoxNecklace",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Way of the Paradox"
+      ]
+    }
+  },
+  {
+    "name": "Thief's Hat",
+    "description": "When you cast a spell you don't own, drain opp 2 life.",
+    "equipmentSlot": "Neck",
+    "iconName": "Thief'sHat",
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "Triumphant Getaway"
+      ]
+    }
+  },
+  {
+    "name": "Spiteful Helm",
+    "description": "Players draw an extra card each turn, take 1 damage per draw.",
+    "equipmentSlot": "Neck",
+    "iconName": "SpitefulHelm",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Spiteful Visions"
+      ]
+    }
+  },
+  {
+    "name": "Fulcrum Gauntlet",
+    "description": "5, T, exile this: Destroy all creatures at sorcery speed.",
+    "equipmentSlot": "Left",
+    "iconName": "FulcrumGauntlet",
+    "effect": {
+      "lifeModifier": -5,
+      "startBattleWithCard": [
+        "The Echoverse Fulcrum"
+      ]
+    }
+  },
+  {
+    "name": "Pants of the Fattest Butt",
+    "description": "A legendary 3/9 with many gigantic thighs.",
+    "equipmentSlot": "Boots",
+    "iconName": "PantsoftheFattestButt",
+    "effect": {
+      "lifeModifier": -9,
+      "startBattleWithCard": [
+        "Yargle, Goliath of Otaria"
+      ]
+    }
+  },
+  {
+    "name": "Decayed Pants",
+    "description": "Two 2/2 zombie tokens that can't block and die after attacking.",
+    "equipmentSlot": "Boots",
+    "iconName": "DecayedPants",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "b_2_2_zombie_decayed", "b_2_2_zombie_decayed"
+      ]
     }
   },
     {
