@@ -14,12 +14,12 @@ public class LocalRandomizer {
     private static final LocalRandomizer localRandomizerInstance = new LocalRandomizer();
     private final ArchipelagoData archipelagoDataInstance;
 
-    protected final Set<String> colorlessEquipmentShopList = new HashSet<>();
-    protected final Set<String> whiteEquipmentShopList = new HashSet<>();
-    protected final Set<String> blueEquipmentShopList = new HashSet<>();
-    protected final Set<String> blackEquipmentShopList = new HashSet<>();
-    protected final Set<String> redEquipmentShopList = new HashSet<>();
-    protected final Set<String> greenEquipmentShopList = new HashSet<>();
+    protected final Set<String> colorlessEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<String> whiteEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<String> blueEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<String> blackEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<String> redEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<String> greenEquipmentShopList = new LinkedHashSet<>();
     protected final Set<String> whiteItemShopList = new HashSet<>();
     protected final Set<String> blueItemShopList = new HashSet<>();
     protected final Set<String> blackItemShopList = new HashSet<>();

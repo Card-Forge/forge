@@ -9,12 +9,12 @@ import java.util.*;
 public class ArchipelagoRandomizer {
     private static final ArchipelagoRandomizer archipelagoRandomizerInstance = new ArchipelagoRandomizer();
     private final ArchipelagoData archipelagoDataInstance;
-    protected final Set<ItemData> colorlessEquipmentShopList = new HashSet<>();
-    protected final Set<ItemData> whiteEquipmentShopList = new HashSet<>();
-    protected final Set<ItemData> blueEquipmentShopList = new HashSet<>();
-    protected final Set<ItemData> blackEquipmentShopList = new HashSet<>();
-    protected final Set<ItemData> redEquipmentShopList = new HashSet<>();
-    protected final Set<ItemData> greenEquipmentShopList = new HashSet<>();
+    protected final Set<ItemData> colorlessEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<ItemData> whiteEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<ItemData> blueEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<ItemData> blackEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<ItemData> redEquipmentShopList = new LinkedHashSet<>();
+    protected final Set<ItemData> greenEquipmentShopList = new LinkedHashSet<>();
     protected final Set<ItemData> whiteItemShopList = new HashSet<>();
     protected final Set<ItemData> blueItemShopList = new HashSet<>();
     protected final Set<ItemData> blackItemShopList = new HashSet<>();
