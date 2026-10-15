@@ -1022,6 +1022,7 @@ public class AiBlockController {
     public void completeRequiredBlocks(final Combat combat) {
         attackers = sortPotentialAttackers(combat);
         if (attackers.isEmpty()) {
+            removeIllegalBlocks(combat);
             return;
         }
         // makeRequiredBlocks/makeChumpBlocks iterate attackersLeft, which assignBlockersForCombat has not (fully) set up
@@ -1047,6 +1048,27 @@ public class AiBlockController {
         lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
         if (lifeInDanger && !unblocked.isEmpty()) {
             makeChumpBlocks(combat, new ArrayList<>(unblocked));
+        }
+
+        // makeRequiredBlocks, makeChumpBlocksToSavePW and the trample attacker switch add single blockers without looking at the
+        // attacker's block restrictions; master repairs that at the end of assignBlockers, but an Expired thrown earlier skips it
+        // and the engine does not validate AI blocks for blocker count.
+        removeIllegalBlocks(combat);
+    }
+
+    /** Same repair as the "Check for validity of blocks" loop at the end of assignBlockers (menace, "no more than N blockers" ...). */
+    private void removeIllegalBlocks(final Combat combat) {
+        for (final Card attacker : combat.getAttackers()) {
+            final List<Card> mine = CardLists.filterControlledBy(combat.getBlockers(attacker), ai);
+            if (mine.isEmpty()) {
+                continue;
+            }
+            if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
+                for (final Card blocker : mine) {
+                    // don't touch other player's blockers
+                    combat.removeFromCombat(blocker);
+                }
+            }
         }
     }
     public void assignBlockersForCombat(final Combat combat, final CardCollection excludedBlockers) {

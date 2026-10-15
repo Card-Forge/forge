@@ -138,7 +138,15 @@ public class AiController {
         if (predictedCombat == null) {
             AiAttackController aiAtk = new AiAttackController(player);
             predictedCombat = new Combat(player);
-            aiAtk.declareAttackers(predictedCombat);
+            boolean predicted = false;
+            try {
+                aiAtk.declareAttackers(predictedCombat);
+                predicted = true;
+            } finally {
+                if (!predicted) {
+                    predictedCombat = null; // cut short (AITimeoutTracker.Expired): do not serve a partial combat to trigger decisions
+                }
+            }
             // ignoring attack costs for performance
         }
         return predictedCombat;
@@ -148,7 +156,15 @@ public class AiController {
         if (predictedCombatNextTurn == null) {
             AiAttackController aiAtk = new AiAttackController(player, true);
             predictedCombatNextTurn = new Combat(player);
-            aiAtk.declareAttackers(predictedCombatNextTurn);
+            boolean predicted = false;
+            try {
+                aiAtk.declareAttackers(predictedCombatNextTurn);
+                predicted = true;
+            } finally {
+                if (!predicted) {
+                    predictedCombatNextTurn = null; // cut short: do not keep a partial combat
+                }
+            }
         }
         return predictedCombatNextTurn;
     }
@@ -217,11 +233,14 @@ public class AiController {
             card.setCastSA(sa);
             reset = true;
         }
-        boolean result = checkETBEffectsPreparedCard(card, sa, api);
-        if (reset) {
-            card.setCastSA(null);
+        try {
+            return checkETBEffectsPreparedCard(card, sa, api);
+        } finally {
+            // also when AITimeoutTracker.Expired is thrown from a nested check(): a real card must never keep a hypothetical castSA
+            if (reset) {
+                card.setCastSA(null);
+            }
         }
-        return result;
     }
 
     private boolean checkETBEffectsPreparedCard(final Card card, final SpellAbility sa, final ApiType api) {
@@ -1772,9 +1791,11 @@ public class AiController {
             // Thread.stop() mid-evaluation can leave partially mutated shared state behind
             future.cancel(true);
             try {
-                // the eval thread checks the deadline/interrupt itself, so it normally exits right away;
-                // never make the player wait for it (was 2 seconds)
-                t.join(100);
+                // join returns as soon as the eval thread exits, so the common case costs nothing. The full 2 s only matters
+                // for a thread inside code without check() (mana payment, threat prediction, simulation): giving up earlier
+                // just starts the stop() fallback sooner, and on Java 20+/Android stop() throws, so the thread would keep
+                // running next to the game thread
+                t.join(2000); // 2 seconds wait
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
