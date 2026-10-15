@@ -66,8 +66,9 @@ names and boss intros/insults (`enemies.json`), and point-of-interest names
 (`points_of_interest.json`, plus the town names picked at random from
 `town_names_*.txt`) are translated through keys in the same `adventure-<lang>.properties` file as
 NPC dialog — no copy of the JSON files, no tooling needed. Keys are derived
-from the English name, which is never modified (it stays the internal
-identifier the game matches on):
+from the English name, keeping only letters and digits ("Sir Donovan's
+Amulet" -> `SirDonovansAmulet`); the name itself is never modified (it stays
+the internal identifier the game matches on):
 
 ```
 adv.item.SilverChallengeCoin.displayName=...
@@ -76,12 +77,12 @@ adv.shop.Black1.description=...
 adv.enemy.GoblinWarrior.displayName=...
 adv.enemy.Akroma.bossIntro=...
 adv.poi.BarbarianCamp.displayName=...
-adv.poi.Spirit'sVale.displayName=...
+adv.poi.SpiritsVale.displayName=...
 ```
 
 For enemies and points of interest the key is built from the English name
 shown in game (`nameOverride` if set, else `name`; `displayName` for points
-of interest) with the spaces removed. Town names are plain lines in the
+of interest). Town names are plain lines in the
 `town_names_*.txt` lists, never combined at runtime, so each possible line
 needs its own key. Languages with grammatical gender will want to generate
 them rather than write ~2200 lines by hand: the same adjective needs a

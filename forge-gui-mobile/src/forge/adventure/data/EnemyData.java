@@ -116,19 +116,20 @@ public class EnemyData implements Serializable {
         return "(Unnamed Enemy)";
     }
     public static String getDisplayName(String enemyName){
-        return forge.Forge.getLocalizer().getMessageorUseDefault(
-            "adv.enemy." + enemyName.replace(" ", "") + ".displayName", enemyName);
+        return translate(enemyName, "displayName", enemyName);
     }
     public String getDisplayName(){
         return getDisplayName(getName());
     }
     public String getBossInsult(){
-        return forge.Forge.getLocalizer().getMessageorUseDefault(
-            "adv.enemy." + getName().replace(" ", "") + ".bossInsult", bossInsult);
+        return translate(getName(), "bossInsult", bossInsult);
     }
     public String getBossIntro(){
+        return translate(getName(), "bossIntro", bossIntro);
+    }
+    private static String translate(String enemyName, String field, String defaultValue){
         return forge.Forge.getLocalizer().getMessageorUseDefault(
-            "adv.enemy." + getName().replace(" ", "") + ".bossIntro", bossIntro);
+            "adv.enemy." + enemyName.replaceAll("[^A-Za-z0-9]", "") + "." + field, defaultValue);
     }
 
     public boolean match(EnemyData other) {
