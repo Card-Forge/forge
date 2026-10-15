@@ -117,6 +117,9 @@ public class TriggerChangesZone extends Trigger {
         }
 
         Card moved = (Card) runParams.get(AbilityKey.Card);
+        if (!matchesValidParam("ValidDestinationPlayer", runParams.get(AbilityKey.DestinationPlayers))) {
+            return false;
+        }
         if (hasParam("ValidCard")) {
             // CR 603.10a leaves battlefield or GY look back in time
             if ("Battlefield".equals(getParam("Origin"))
@@ -195,6 +198,7 @@ public class TriggerChangesZone extends Trigger {
         } else {
             sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.CardLKI);
         }
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.DestinationPlayers);
     }
 
     @Override

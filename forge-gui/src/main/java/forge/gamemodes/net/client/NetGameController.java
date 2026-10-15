@@ -34,6 +34,10 @@ public class NetGameController implements IGameController {
         sender = new GameProtocolSender(server);
     }
 
+    public NetGameController(final IToServer server, final int gameViewId) {
+        sender = new GameProtocolSender(server, gameViewId);
+    }
+
     @Override
     public YieldController getYieldController() {
         return yieldController;

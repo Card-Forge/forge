@@ -51,11 +51,11 @@ public final class CardPredicates {
         return c -> pList.contains(c.getController());
     }
     public static Predicate<Card> isOwner(final Player p) {
-        return c -> p.equals(c.getOwner());
+        return c -> c.isOwnedBy(p);
     }
 
     public static Predicate<Card> ownerLives() {
-        return c -> c.getOwner().isInGame();
+        return c -> c.getOwners().stream().anyMatch(Player::isInGame);
     }
 
     public static Predicate<Card> isType(final String cardType) {

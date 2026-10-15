@@ -1,7 +1,9 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
 
@@ -38,25 +40,46 @@ public class SubgameEffect extends SpellAbilityEffect {
         return new Game(players, maingame.getRules(), maingame.getMatch(), maingame, startingLife);
     }
 
-    private void setCardsInZone(Player player, final ZoneType zoneType, final CardCollectionView oldCards, boolean addMapping) {
+    private Card createSubgameCard(final Card original, final Player player, final Map<Player, Player> playerMapping) {
+        Card card = Card.fromPaperCard(original.getPaperCard(), player);
+        List<Player> owners = Lists.newArrayList();
+        for (Player owner : original.getOwners()) {
+            Player subgameOwner = playerMapping.get(owner);
+            if (subgameOwner != null) {
+                owners.add(subgameOwner);
+            }
+        }
+        card.setOwners(owners.isEmpty() ? List.of(player) : owners);
+        return card;
+    }
+
+    private void setCardsInZone(Player player, final ZoneType zoneType, final CardCollectionView oldCards,
+            boolean addMapping, final Map<Card, Card> cards, final Map<Player, Player> playerMapping) {
         PlayerZone zone = player.getZone(zoneType);
-        List<Card> newCards = Lists.newArrayList();
+        List<Card> newCards = Lists.newArrayList(zone.getCards());
         for (final Card card : oldCards) {
             if (card.isToken() || card.isCopiedSpell()) continue;
-            Card newCard = Card.fromPaperCard(card.getPaperCard(), player);
-            newCards.add(newCard);
+            Card newCard = cards.get(card);
+            if (newCard == null) {
+                newCard = createSubgameCard(card, player, playerMapping);
+                cards.put(card, newCard);
+                newCards.add(newCard);
+            }
             if (addMapping) {
                 // Build mapping between maingame cards and subgame cards,
                 // so when subgame pick a card from maingame (like Wish effects),
                 // The maingame card will also be moved.
                 // (Will be move to Subgame zone, which will be added back to library after subgame ends.)
-                player.addMaingameCardMapping(newCard, card);
+                for (Player owner : newCard.getOwners()) {
+                    owner.addMaingameCardMapping(newCard, card);
+                }
             }
         }
         zone.setCards(newCards);
     }
 
-    private void initVariantsZonesSubgame(final Game subgame, final Player maingamePlayer, final Player player) {
+    private void initVariantsZonesSubgame(final Game subgame, final Player maingamePlayer, final Player player,
+            final Map<Card, Card> cards, final Map<Player, Player> playerMapping) {
         PlayerZone com = player.getZone(ZoneType.Command);
         RegisteredPlayer registeredPlayer = player.getRegisteredPlayer();
 
@@ -71,7 +94,12 @@ public class SubgameEffect extends SpellAbilityEffect {
         final CardCollectionView commandCards = maingamePlayer.getCardsIn(ZoneType.Command);
         for (final Card card : commandCards) {
             if (card.isCommander()) {
-                Card cmd = Card.fromPaperCard(card.getPaperCard(), player);
+                Card cmd = cards.get(card);
+                if (cmd != null) {
+                    continue;
+                }
+                cmd = createSubgameCard(card, player, playerMapping);
+                cards.put(card, cmd);
                 player.initCommanderColor(cmd);
                 com.add(cmd);
                 player.addCommander(cmd);
@@ -85,6 +113,11 @@ public class SubgameEffect extends SpellAbilityEffect {
     private void prepareAllZonesSubgame(final Game maingame, final Game subgame) {
         final FCollectionView<Player> players = subgame.getPlayers();
         final FCollectionView<Player> maingamePlayers = maingame.getPlayers();
+        final Map<Card, Card> cards = new IdentityHashMap<>();
+        final Map<Player, Player> playerMapping = new IdentityHashMap<>();
+        for (int i = 0; i < players.size(); i++) {
+            playerMapping.put(maingamePlayers.get(i), players.get(i));
+        }
         final List<ZoneType> outsideZones = Arrays.asList(ZoneType.Hand, ZoneType.Battlefield,
                 ZoneType.Graveyard, ZoneType.Exile, ZoneType.Stack, ZoneType.Sideboard, ZoneType.Ante, ZoneType.Merged);
 
@@ -93,13 +126,13 @@ public class SubgameEffect extends SpellAbilityEffect {
             final Player maingamePlayer = maingamePlayers.get(i);
 
             // Library
-            setCardsInZone(player, ZoneType.Library, maingamePlayer.getCardsIn(ZoneType.Library), false);
+            setCardsInZone(player, ZoneType.Library, maingamePlayer.getCardsIn(ZoneType.Library), false, cards, playerMapping);
 
             // Sideboard
             // 720.4
             final CardCollectionView outsideCards = maingame.getCardsInOwnedBy(outsideZones, maingamePlayer);
             if (!outsideCards.isEmpty()) {
-                setCardsInZone(player, ZoneType.Sideboard, outsideCards, true);
+                setCardsInZone(player, ZoneType.Sideboard, outsideCards, true, cards, playerMapping);
                 // Update card view so it shows the origin zone in text.
                 for (Card c : player.getCardsIn(ZoneType.Sideboard)) {
                     c.updateStateForView();
@@ -109,19 +142,19 @@ public class SubgameEffect extends SpellAbilityEffect {
             }
 
             // Schemes
-            setCardsInZone(player, ZoneType.SchemeDeck, maingamePlayer.getCardsIn(ZoneType.SchemeDeck), false);
+            setCardsInZone(player, ZoneType.SchemeDeck, maingamePlayer.getCardsIn(ZoneType.SchemeDeck), false, cards, playerMapping);
 
             // Planes
-            setCardsInZone(player, ZoneType.PlanarDeck, maingamePlayer.getCardsIn(ZoneType.PlanarDeck), false);
+            setCardsInZone(player, ZoneType.PlanarDeck, maingamePlayer.getCardsIn(ZoneType.PlanarDeck), false, cards, playerMapping);
 
             // Attractions
-            setCardsInZone(player, ZoneType.AttractionDeck, maingamePlayer.getCardsIn(ZoneType.AttractionDeck), false);
+            setCardsInZone(player, ZoneType.AttractionDeck, maingamePlayer.getCardsIn(ZoneType.AttractionDeck), false, cards, playerMapping);
 
             // Contraptions
-            setCardsInZone(player, ZoneType.ContraptionDeck, maingamePlayer.getCardsIn(ZoneType.ContraptionDeck), false);
+            setCardsInZone(player, ZoneType.ContraptionDeck, maingamePlayer.getCardsIn(ZoneType.ContraptionDeck), false, cards, playerMapping);
 
             // Vanguard and Commanders
-            initVariantsZonesSubgame(subgame, maingamePlayer, player);
+            initVariantsZonesSubgame(subgame, maingamePlayer, player, cards, playerMapping);
 
             player.shuffle(null);
             player.getZone(ZoneType.SchemeDeck).shuffle();

@@ -2300,7 +2300,18 @@ public class ComputerUtilCard {
     // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.
     // Includes a NPE guard on getRules() which might otherwise be tripped on some cards (e.g. tokens).
     public static boolean isCardRemAIDeck(final Card card) {
+        if (card.getGame() != null && card.getGame().getRules().isDanDan()
+                && isDanDanSupportedCard(card.getName())) {
+            return false;
+        }
         return card.getRules() != null && card.getRules().getAiHints().getRemAIDecks();
+    }
+
+    /** Cards with bounded DanDan AI support may ignore their general-format removal hint in that format. */
+    public static boolean isDanDanSupportedCard(final String cardName) {
+        return "Predict".equals(cardName) || "Magical Hack".equals(cardName)
+                || "Crystal Spray".equals(cardName) || "Day's Undoing".equals(cardName)
+                || "Metamorphose".equals(cardName) || "Svyelunite Temple".equals(cardName);
     }
 
     public static boolean isCardRemRandomDeck(final Card card) {

@@ -35,6 +35,9 @@ import java.util.*;
 
 public abstract class GameLobby implements IHasGameType {
     private final static int MAX_PLAYERS = 8;
+    private final static Set<GameType> EXCLUSIVE_GAME_FORMATS = EnumSet.of(
+            GameType.DanDan, GameType.Commander, GameType.Oathbreaker, GameType.Brawl,
+            GameType.TinyLeaders, GameType.MomirBasic, GameType.MoJhoSto);
 
     private GameLobbyData data = new GameLobbyData();
     private GameType currentGameType = GameType.Constructed;
@@ -66,7 +69,17 @@ public abstract class GameLobby implements IHasGameType {
     }
     public void setData(final GameLobbyData data) {
         this.data = data;
+        currentGameType = currentGameTypeFor(data.appliedVariants);
         updateView(true);
+    }
+
+    private static GameType currentGameTypeFor(final Set<GameType> variants) {
+        if (variants.contains(GameType.DanDan)) return GameType.DanDan;
+        if (variants.contains(GameType.Commander)) return GameType.Commander;
+        if (variants.contains(GameType.Oathbreaker)) return GameType.Oathbreaker;
+        if (variants.contains(GameType.TinyLeaders)) return GameType.TinyLeaders;
+        if (variants.contains(GameType.Brawl)) return GameType.Brawl;
+        return GameType.Constructed;
     }
 
     public GameType getGameType() {
@@ -123,7 +136,35 @@ public abstract class GameLobby implements IHasGameType {
         final boolean archenemyRemoved = triesToChangeArchenemy && !event.getArchenemy();
         final boolean hasArchenemyChanged = triesToChangeArchenemy && slot.isArchenemy() != event.getArchenemy();
 
-        final boolean changed = slot.apply(event) || hasArchenemyChanged;
+        final boolean dandan = hasVariant(GameType.DanDan);
+        final boolean authoritativeDeckSeat = dandan && index == firstLocalSlotIndex();
+        final boolean deckSelectionUpdate = event.getDeck() != null || event.getSection() != null || event.getDeckName() != null;
+        final boolean remoteDeckUpdate = dandan && !authoritativeDeckSeat
+                && deckSelectionUpdate;
+        boolean changed = slot.apply(event, !remoteDeckUpdate) || hasArchenemyChanged;
+
+        if (hasVariant(GameType.DanDan) && event.getReady() == null
+                && !isAllowNetworking() && slot.getType() == LobbySlotType.LOCAL && !slot.isReady()) {
+            slot.setIsReady(true);
+            changed = true;
+        }
+
+        if (authoritativeDeckSeat && deckSelectionUpdate) {
+            final Deck sharedDeck = slot.getDeck();
+            final String sharedDeckName = sharedDeck == null ? slot.getDeckName() : sharedDeck.getName();
+            for (int otherIndex = 0; otherIndex < nSlots; otherIndex++) {
+                if (otherIndex == index) continue;
+                final LobbySlot other = getSlot(otherIndex);
+                if (other.getDeck() != sharedDeck || !Objects.equals(other.getDeckName(), sharedDeckName) || other.isReady()) {
+                    other.setDeck(sharedDeck);
+                    other.setDeckName(sharedDeckName);
+                    setReadyAfterDanDanDeckChange(other);
+                    changed = true;
+                }
+            }
+            setReadyAfterDanDanDeckChange(slot);
+            changed = true;
+        }
 
         // Change archenemy teams
         if (hasVariant(GameType.Archenemy) && hasArchenemyChanged) {
@@ -150,6 +191,17 @@ public abstract class GameLobby implements IHasGameType {
         if (changed) {
             updateView(false);
         }
+    }
+
+    private int firstLocalSlotIndex() {
+        for (int i = 0; i < getNumberOfSlots(); i++) {
+            if (getSlot(i).getType() == LobbySlotType.LOCAL) return i;
+        }
+        return -1;
+    }
+
+    public int getDanDanDeckOwnerSlot() {
+        return hasVariant(GameType.DanDan) ? firstLocalSlotIndex() : -1;
     }
 
     public IGameController getController(final int index) {
@@ -242,9 +294,48 @@ public abstract class GameLobby implements IHasGameType {
         updateView(false);
     }
 
+    /** Replace the dropdown's exclusive format after checking retained variant overlays. */
+    public void replaceGameFormat(final GameType variant) {
+        if (!EXCLUSIVE_GAME_FORMATS.contains(variant)) {
+            throw new IllegalArgumentException("Not an exclusive game format: " + variant);
+        }
+        if (variant == GameType.DanDan) {
+            for (final GameType applied : data.appliedVariants) {
+                if (!EXCLUSIVE_GAME_FORMATS.contains(applied) && isIncompatibleWithDanDan(applied)) {
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage(
+                            "lblDanDanIncompatibleVariant", applied.toString()));
+                    return;
+                }
+            }
+        }
+        data.appliedVariants.removeAll(EXCLUSIVE_GAME_FORMATS);
+        applyVariant(variant);
+    }
+
     public void applyVariant(final GameType variant) {
+        if (variant == GameType.DanDan && incompatibleDanDanVariant() != null) {
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage(
+                    "lblDanDanIncompatibleVariant", incompatibleDanDanVariant().toString()));
+            return;
+        }
+        if (variant != GameType.DanDan && hasVariant(GameType.DanDan) && isIncompatibleWithDanDan(variant)) {
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage(
+                    "lblDanDanIncompatibleVariant", variant.toString()));
+            return;
+        }
         setGameType(variant);
         data.appliedVariants.add(variant);
+
+        if (variant == GameType.DanDan) {
+            final int hostSeat = firstLocalSlotIndex();
+            final Deck selectedDeck = hostSeat < 0 ? null : getSlot(hostSeat).getDeck();
+            final String selectedDeckName = selectedDeck == null ? null : selectedDeck.getName();
+            for (final LobbySlot slot : data.slots) {
+                slot.setDeck(selectedDeck);
+                slot.setDeckName(selectedDeckName);
+                setReadyAfterDanDanDeckChange(slot);
+            }
+        }
 
         //ensure other necessary variants are unchecked
         switch (variant) {
@@ -309,6 +400,24 @@ public abstract class GameLobby implements IHasGameType {
         updateView(true);
     }
 
+    private static boolean isIncompatibleWithDanDan(final GameType variant) {
+        return variant.isAutoGenerated() || variant == GameType.Archenemy
+                || variant == GameType.ArchenemyRumble || variant == GameType.Vanguard
+                || variant == GameType.Commander || variant == GameType.Oathbreaker
+                || variant == GameType.TinyLeaders || variant == GameType.Brawl;
+    }
+
+    private void setReadyAfterDanDanDeckChange(final LobbySlot slot) {
+        slot.setIsReady(!isAllowNetworking() && slot.getType() == LobbySlotType.LOCAL);
+    }
+
+    private GameType incompatibleDanDanVariant() {
+        for (final GameType variant : data.appliedVariants) {
+            if (variant != GameType.DanDan && isIncompatibleWithDanDan(variant)) return variant;
+        }
+        return null;
+    }
+
     public void removeVariant(final GameType variant) {
         final boolean changed = data.appliedVariants.remove(variant);
         if (!changed) {
@@ -316,17 +425,7 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         if (variant == currentGameType) {
-            if (hasVariant(GameType.Commander)) {
-                currentGameType = GameType.Commander;
-            } else if (hasVariant(GameType.Oathbreaker)) {
-                currentGameType = GameType.Oathbreaker;
-            } else if (hasVariant(GameType.TinyLeaders)) {
-                currentGameType = GameType.TinyLeaders;
-            } else if (hasVariant(GameType.Brawl)) {
-                currentGameType = GameType.Brawl;
-            } else {
-                currentGameType = GameType.Constructed;
-            }
+            currentGameType = currentGameTypeFor(data.appliedVariants);
         }
         updateView(true);
     }
@@ -394,6 +493,27 @@ public abstract class GameLobby implements IHasGameType {
             }
         }
 
+        final boolean isDanDan = hasVariant(GameType.DanDan);
+        if (isDanDan) {
+            final long localSeats = activeSlots.stream().filter(slot -> slot.getType() == LobbySlotType.LOCAL).count();
+            final long remoteSeats = activeSlots.stream().filter(slot -> slot.getType() == LobbySlotType.REMOTE).count();
+            final long aiSeats = activeSlots.stream().filter(slot -> slot.getType() == LobbySlotType.AI).count();
+            final boolean supportedSeats = getNumberOfSlots() == 2 && activeSlots.size() == 2
+                    && (localSeats == 2 && remoteSeats == 0 || localSeats == 1 && remoteSeats == 1
+                    || this instanceof LocalLobby && !isAllowNetworking() && !GuiBase.isMobile()
+                    && localSeats == 1 && aiSeats == 1 && remoteSeats == 0);
+            if (!supportedSeats) {
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblDanDanRequiresSupportedSeats"));
+                return null;
+            }
+            final GameType incompatible = incompatibleDanDanVariant();
+            if (incompatible != null) {
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage(
+                        "lblDanDanIncompatibleVariant", incompatible.toString()));
+                return null;
+            }
+        }
+
         if (activeSlots.size() < 2) {
             SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRequiredLeastTwoPlayerStartGame"));
             return null;
@@ -405,6 +525,11 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         final Set<GameType> variantTypes = data.appliedVariants;
+        final Deck sharedDeck = isDanDan ? getSlot(firstLocalSlotIndex()).getDeck() : null;
+        if (isDanDan && sharedDeck == null) {
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblDanDanChooseSharedDeck"));
+            return null;
+        }
 
         GameType autoGenerateVariant = null;
         boolean isCommanderMatch = false;
@@ -443,10 +568,12 @@ public abstract class GameLobby implements IHasGameType {
         //Auto-generated decks don't need to be checked here
         //Commander deck replaces regular deck and is checked later
         if (checkLegality && autoGenerateVariant == null && !isCommanderMatch) {
-            final DeckFormat deckFormat = data.isLimitedMode() ? DeckFormat.Limited : GameType.Constructed.getDeckFormat();
+            final DeckFormat deckFormat = isDanDan ? GameType.DanDan.getDeckFormat() :
+                    data.isLimitedMode() ? DeckFormat.Limited : GameType.Constructed.getDeckFormat();
             for (final LobbySlot slot : activeSlots) {
+                if (isDanDan && slot != getSlot(firstLocalSlotIndex())) continue;
                 final String name = slot.getName();
-                final String errMsg = deckFormat.getDeckConformanceProblem(slot.getDeck());
+                final String errMsg = deckFormat.getDeckConformanceProblem(isDanDan ? sharedDeck : slot.getDeck());
                 if (null != errMsg) {
                     legalityProblems.add(legalityProblemEntry(name, errMsg));
                 }
@@ -566,7 +693,7 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
-        final GameType baseGameType = data.isLimitedMode() ? GameType.Draft : GameType.Constructed;
+        final GameType baseGameType = !isDanDan && data.isLimitedMode() ? GameType.Draft : GameType.Constructed;
         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.setOnMatchOver(this::onMatchOver);

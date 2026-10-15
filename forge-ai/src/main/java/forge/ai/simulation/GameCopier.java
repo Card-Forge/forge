@@ -346,17 +346,16 @@ public class GameCopier {
     private void addCard(Game newGame, ZoneType zone, Card c, Player aiPlayer) {
         final Player owner = playerMap.get(c.getOwner());
         final Card newCard = createCardCopy(newGame, owner, c, aiPlayer);
+        newCard.setOwners(c.getOwners().stream().map(playerMap::get).toList());
+        newCard.setController(playerMap.get(c.getExplicitController()), 0);
         cardMap.put(c, newCard);
 
         // TODO ExiledWith
 
-        Player zoneOwner = owner;
+        Player zoneOwner = c.getZone().getPlayer() == null ? owner : playerMap.get(c.getZone().getPlayer());
         // everything the CreatureEvaluator checks must be set here
         if (zone == ZoneType.Battlefield) {
             // TODO: Controllers' list with timestamps should be copied.
-            zoneOwner = playerMap.get(c.getController());
-            newCard.setController(zoneOwner, 0);
-
             if (c.isBattle()) {
                 newCard.setProtectingPlayer(playerMap.get(c.getProtectingPlayer()));
             }

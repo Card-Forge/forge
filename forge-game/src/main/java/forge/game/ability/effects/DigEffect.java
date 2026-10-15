@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.game.zone.Zone;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -373,16 +374,21 @@ public class DigEffect extends SpellAbilityEffect {
                 }
 
                 for (Card c : movedCards) {
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    Map<AbilityKey, Object> moveParams = AbilityKey.mapFromPlayer(p);
                     AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                     if (destZone1.isDeck()) {
-                        c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
+                        c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, moveParams);
                     } else {
                         if (destZone1.equals(ZoneType.Exile) && !c.canExiledBy(sa, true)) {
                             continue;
                         }
 
+                        final boolean sharedSource = c.getOwners().size() > 1;
+                        if (sharedSource) {
+                            moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
+                            c = new CardCopyService(c).copyCard(false);
+                        }
                         if (sa.hasParam("Tapped")) {
                             c.setTapped(true);
                         }
@@ -392,8 +398,8 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         if (destZone1.equals(ZoneType.Battlefield)) {
                             moveParams.put(AbilityKey.SimultaneousETB, movedCards);
-                            if (sa.hasParam("GainControl")) {
-                                c.setController(activator, game.getNextTimestamp());
+                            if (sa.hasParam("GainControl") || sharedSource) {
+                                c.setController(sa.hasParam("GainControl") ? activator : p, game.getNextTimestamp());
                             }
                             if (sa.hasParam("WithCounters")) {
                                 final int numCtr = AbilityUtils.calculateAmount(host,
@@ -404,8 +410,13 @@ public class DigEffect extends SpellAbilityEffect {
                                 moveParams.put(AbilityKey.CounterTable, table);
                             }
                         }
-                        c = game.getAction().moveTo(c.getController().getZone(destZone1), c, sa, moveParams);
-                        if (destZone1.equals(ZoneType.Battlefield)) {
+                        Zone destination = c.getController().getZone(destZone1);
+                        if (destZone1 == ZoneType.Hand
+                                && c.getOwners().size() > 1) {
+                            destination = p.getZone(ZoneType.Hand);
+                        }
+                        c = game.getAction().moveTo(destination, c, sa, moveParams);
+                        if (destZone1.equals(ZoneType.Battlefield) && c.isInPlay()) {
                             if (addToCombat(c, sa, "Attacking", "Blocking")) {
                                 combatChanged = true;
                             }
@@ -449,7 +460,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
 
                         for (final Card c : afterOrder) {
-                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                            Map<AbilityKey, Object> moveParams = AbilityKey.mapFromPlayer(p);
                             AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                             Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa, moveParams);
@@ -460,7 +471,7 @@ public class DigEffect extends SpellAbilityEffect {
                     } else {
                         // just move them randomly
                         for (Card c : rest) {
-                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                            Map<AbilityKey, Object> moveParams = AbilityKey.mapFromPlayer(p);
                             AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                             if (destZone2 == ZoneType.Exile && !c.canExiledBy(sa, true)) {
@@ -489,5 +500,6 @@ public class DigEffect extends SpellAbilityEffect {
         zoneMovements.triggerChangesZoneAll(game, sa);
         counterTable.replaceCounterEffect(game, sa);
     }
+
 
 }

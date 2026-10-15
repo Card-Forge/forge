@@ -56,6 +56,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         game.setHasInitiative(null);
         game.setDayTime(null);
         GameAction action = game.getAction();
+        CardCollection restartedCards = new CardCollection();
 
         for (Player p: players) {
             p.setStartingLife(p.getStartingLife());
@@ -88,6 +89,9 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.getZone(ZoneType.Command).removeAllCards(true);
 
             for (Card c : newLibrary) {
+                if (!restartedCards.add(c)) {
+                    continue;
+                }
                 if (c.getIntensity(false) > 0) {
                     c.setIntensity(0);
                 }

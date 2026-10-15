@@ -1,8 +1,11 @@
 package forge.net.embedded;
 
 import forge.deck.Deck;
+import forge.game.Game;
+import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.GameView;
+import forge.game.Match;
 import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.phase.PhaseType;
@@ -20,6 +23,7 @@ import forge.gamemodes.net.event.NetEvent;
 import forge.gui.FThreads;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.trackable.TrackableProperty;
 import forge.model.FModel;
 import forge.net.TestUtils;
 import forge.player.GamePlayerUtil;
@@ -27,11 +31,13 @@ import forge.player.LobbyPlayerHuman;
 import forge.trackable.TrackableCollection;
 import forge.util.MyRandom;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -132,6 +138,83 @@ public class ProtocolGuiGameInProcessTest {
         final Deck d = new Deck(name);
         d.getMain().add(card, 40);
         return d;
+    }
+
+    @DataProvider(name = "protocolSyncModes")
+    public Object[][] protocolSyncModes() {
+        return new Object[][] {{true}, {false}};
+    }
+
+    @Test(dataProvider = "protocolSyncModes")
+    public void pausedClearWeaklySelectablePreservesDirtyStateUntilResume(boolean deltaSync) {
+        TestUtils.ensureFModelInitialized();
+        final boolean oldDeltaSync = ProtocolGuiGame.useDeltaSync;
+        final RecordingRemote remote = new RecordingRemote();
+        final ProtocolGuiGame gui = new ProtocolGuiGame(remote);
+        final RegisteredPlayer first = new RegisteredPlayer(new Deck())
+                .setPlayer(new LobbyPlayerHuman("Paused embedded"));
+        final RegisteredPlayer second = new RegisteredPlayer(new Deck())
+                .setPlayer(new LobbyPlayerHuman("Paused opponent"));
+        final GameRules rules = new GameRules(GameType.Constructed);
+        final Game game = new Match(rules, List.of(first, second), "Paused delta fixture").createGame();
+        final GameView gameView = game.getView();
+        final PlayerView trackedOwner = gameView.getPlayers().get(0);
+        final int changedViewId = trackedOwner.getId();
+        final int originalValue = trackedOwner.getAvatarLifeDifference();
+        final int sentinel = originalValue == 7319 ? -7319 : 7319;
+        boolean pausedOutboundEvent = false;
+        boolean resumedStateContainsMutation = false;
+        try {
+            ProtocolGuiGame.useDeltaSync = deltaSync;
+            gui.setGameView(gameView);
+            gui.sendFullState();
+            gui.updateGameView(); // establish the delta consumer before changing the tracked property
+            final boolean initialStateSent = remote.log.stream()
+                    .anyMatch(event -> event.getMethod() == ProtocolMethod.setGameView);
+            assertTrue(initialStateSent, "the remote receives an initial full game state before the pause probe");
+            trackedOwner.setAvatarLifeDifference(sentinel);
+
+            gui.pause();
+            final int eventCountBeforePauseCallback = remote.log.size();
+            gui.clearWeaklySelectable();
+            final int eventCountAfterPauseCallback = remote.log.size();
+            pausedOutboundEvent = eventCountAfterPauseCallback != eventCountBeforePauseCallback;
+
+            gui.resume();
+            final int eventCountBeforeResumeFlush = remote.log.size();
+            gui.updateGameView();
+            final List<GuiGameEvent> eventsAfterResume = new ArrayList<>(remote.log.subList(
+                    eventCountBeforeResumeFlush, remote.log.size()));
+            resumedStateContainsMutation = eventsAfterResume.stream()
+                    .anyMatch(event -> carriesAvatarLifeDifference(event, changedViewId, sentinel));
+            assertEquals(trackedOwner.getAvatarLifeDifference(), sentinel,
+                    "the paused callback leaves the actual GameView mutation intact");
+        } finally {
+            gui.resume();
+            trackedOwner.setAvatarLifeDifference(originalValue);
+            ProtocolGuiGame.useDeltaSync = oldDeltaSync;
+        }
+
+        assertFalse(pausedOutboundEvent, "clearWeaklySelectable must not send a dirty full state or delta while paused");
+        assertTrue(resumedStateContainsMutation,
+                "resuming must send the current GameView mutation that was withheld while paused");
+    }
+
+    private static boolean carriesAvatarLifeDifference(GuiGameEvent event, int playerViewId, int expectedValue) {
+        if (event.getMethod() == ProtocolMethod.applyDelta) {
+            final DeltaPacket packet = (DeltaPacket) event.getObjects()[0];
+            final int key = DeltaPacket.makeDeltaKey(DeltaPacket.TYPE_PLAYER_VIEW, playerViewId);
+            final Map<TrackableProperty, Object> properties = packet.getObjectDeltas().getOrDefault(key,
+                    packet.getNewObjects().get(key));
+            return properties != null && Objects.equals(properties.get(TrackableProperty.AvatarLifeDifference), expectedValue);
+        }
+        if (event.getMethod() == ProtocolMethod.setGameView) {
+            final GameView view = (GameView) event.getObjects()[0];
+            for (final PlayerView player : view.getPlayers()) {
+                if (player.getId() == playerViewId) return player.getAvatarLifeDifference() == expectedValue;
+            }
+        }
+        return false;
     }
 
     private static final List<String> TRANSPORT_CLASSES = List.of(

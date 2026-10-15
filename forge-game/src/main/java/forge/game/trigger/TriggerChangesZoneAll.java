@@ -85,6 +85,10 @@ public class TriggerChangesZoneAll extends Trigger {
 
         final String valid = this.getParam("ValidCards");
 
-        return table.filterCards(origin, destination, valid, getHostCard(), this);
+        CardCollection cards = table.filterCards(origin, destination, valid, getHostCard(), this);
+        if (hasParam("ValidDestinationPlayer")) {
+            cards.removeIf(card -> !matchesValidParam("ValidDestinationPlayer", table.getDestinationPlayers(card)));
+        }
+        return cards;
     }
 }

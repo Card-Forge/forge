@@ -3,6 +3,8 @@ package forge.ai;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.ability.ChangeTextAi;
+import forge.ai.ability.ChooseCardNameAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.PutStickerAi;
 import forge.card.CardStateName;
@@ -707,6 +709,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional) {
+        if ("basic land".equals(kindOfType) && sa != null && sa.getHostCard() != null
+                && ("Magical Hack".equals(sa.getHostCard().getName())
+                        || "Crystal Spray".equals(sa.getHostCard().getName()))
+                && player.getGame().getRules().isDanDan()) {
+            return ChangeTextAi.chooseBasicLandTypeWord(player, sa, validTypes);
+        }
         String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa, validTypes);
         if (StringUtils.isBlank(chosen) && !validTypes.isEmpty()) {
             chosen = validTypes.iterator().next();
@@ -1523,6 +1531,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
+        String danDanPredictName = ChooseCardNameAi.chooseDanDanPredictName(player, sa, cpp);
+        if (danDanPredictName != null) {
+            return danDanPredictName;
+        }
+
         if (sa.hasParam("AILogic")) {
             CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
             CardCollectionView oppLibrary = player.getStrongestOpponent().getCardsIn(ZoneType.Library);

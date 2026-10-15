@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -227,17 +228,28 @@ public class Game {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
+        Set<PlayerZone> visited = Collections.newSetFromMap(new IdentityHashMap<>());
         for (final Player p : getPlayers()) {
-            lastStateBattlefield.addAll(p.getZone(ZoneType.Battlefield).getLKICopy(cachedMap));
-            lastStateGraveyard.addAll(p.getZone(ZoneType.Graveyard).getLKICopy(cachedMap));
+            PlayerZone battlefield = p.getZone(ZoneType.Battlefield);
+            if (visited.add(battlefield)) {
+                lastStateBattlefield.addAll(battlefield.getLKICopy(cachedMap));
+            }
+            PlayerZone graveyard = p.getZone(ZoneType.Graveyard);
+            if (visited.add(graveyard)) {
+                lastStateGraveyard.addAll(graveyard.getLKICopy(cachedMap));
+            }
         }
     }
 
     public CardCollectionView copyLastState(ZoneType type) {
         CardCollection result = new CardCollection();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
+        Set<PlayerZone> visited = Collections.newSetFromMap(new IdentityHashMap<>());
         for (final Player p : getPlayers()) {
-            result.addAll(p.getZone(type).getLKICopy(cachedMap));
+            PlayerZone zone = p.getZone(type);
+            if (visited.add(zone)) {
+                result.addAll(zone.getLKICopy(cachedMap));
+            }
         }
         return result;
     }
@@ -371,6 +383,15 @@ public class Game {
             pl.setTeam(teamNum);
         }
 
+        if (rules.isDanDan() && !allPlayers.isEmpty()) {
+            Player sharedPlayer = allPlayers.get(0);
+            for (int i = 1; i < allPlayers.size(); i++) {
+                Player player = allPlayers.get(i);
+                player.useSharedZoneFrom(sharedPlayer, ZoneType.Library);
+                player.useSharedZoneFrom(sharedPlayer, ZoneType.Graveyard);
+            }
+        }
+
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
@@ -438,6 +459,18 @@ public class Game {
      */
     public final PlayerCollection getRegisteredPlayers() {
         return allPlayers;
+    }
+
+    public final ImmutableSet<Player> getZoneParticipants(final Zone zone) {
+        ImmutableSet.Builder<Player> participants = ImmutableSet.builder();
+        if (zone != null) {
+            for (Player player : getRegisteredPlayers()) {
+                if (player.getZone(zone.getZoneType()) == zone) {
+                    participants.add(player);
+                }
+            }
+        }
+        return participants.build();
     }
 
     public final Untap getUntap() {
@@ -618,7 +651,17 @@ public class Game {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
-        return getPlayers().getCardsIn(zone);
+        CardCollection cards = new CardCollection();
+        Set<PlayerZone> visited = Collections.newSetFromMap(new IdentityHashMap<>());
+        for (Player player : getPlayers()) {
+            PlayerZone playerZone = player.getZone(zone);
+            if (playerZone != null && visited.add(playerZone)) {
+                cards.addAll(player.getCardsIn(zone));
+            } else if (playerZone == null) {
+                cards.addAll(player.getCardsIn(zone));
+            }
+        }
+        return cards;
     }
 
     public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
@@ -627,22 +670,33 @@ public class Game {
         }
 
         CardCollection cards = new CardCollection();
+        Set<PlayerZone> visited = Collections.newSetFromMap(new IdentityHashMap<>());
         for (final Player p : getPlayers()) {
-            cards.addAll(p.getCardsIn(zone, false));
+            PlayerZone playerZone = p.getZone(zone);
+            if (playerZone != null && visited.add(playerZone)) {
+                cards.addAll(p.getCardsIn(zone, false));
+            } else if (playerZone == null) {
+                cards.addAll(p.getCardsIn(zone, false));
+            }
         }
         return cards;
     }
 
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
         CardCollection cards = new CardCollection();
+        Set<PlayerZone> visited = Collections.newSetFromMap(new IdentityHashMap<>());
         for (final ZoneType z : zones) {
             if (z == ZoneType.Stack) {
                 cards.addAll(getStackZone().getCards());
                 continue;
             }
-            // adding each player's zone to the result directly avoids building a collection per zone
             for (final Player p : getPlayers()) {
-                cards.addAll(p.getCardsIn(z));
+                PlayerZone playerZone = p.getZone(z);
+                if (playerZone != null && visited.add(playerZone)) {
+                    cards.addAll(p.getCardsIn(z));
+                } else if (playerZone == null) {
+                    cards.addAll(p.getCardsIn(z));
+                }
             }
         }
         return cards;
@@ -765,26 +819,36 @@ public class Game {
     }
     // Allows visiting cards in game without allocating a temporary list.
     public void forEachCardInGame(Visitor<Card> visitor, boolean withSideboard) {
+        Set<PlayerZone> visited = Collections.newSetFromMap(new IdentityHashMap<>());
         for (final Player player : getPlayers()) {
-            if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
+            if (visited.add(player.getZone(ZoneType.Graveyard))
+                    && !visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.Hand).getCards())) {
+            if (visited.add(player.getZone(ZoneType.Hand))
+                    && !visitor.visitAll(player.getZone(ZoneType.Hand).getCards())) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.Library).getCards())) {
+            if (visited.add(player.getZone(ZoneType.Library))
+                    && !visitor.visitAll(player.getZone(ZoneType.Library).getCards())) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
+            if (visited.add(player.getZone(ZoneType.Battlefield))
+                    && !visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
+            if (visited.add(player.getZone(ZoneType.Exile))
+                    && !visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
                 return;
             }
-            if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
-                return;
+            for (ZoneType commandZone : ZoneType.PART_OF_COMMAND_ZONE) {
+                PlayerZone zone = player.getZone(commandZone);
+                if (zone != null && visited.add(zone) && !visitor.visitAll(zone.getCards())) {
+                    return;
+                }
             }
-            if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
+            if (withSideboard && visited.add(player.getZone(ZoneType.Sideboard))
+                    && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getInboundTokens())) {

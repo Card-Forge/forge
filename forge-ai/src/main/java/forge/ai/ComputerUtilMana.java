@@ -304,6 +304,27 @@ public class ComputerUtilMana {
         } else if (sa.hasParam("AIManaPref")) {
             manaSourceType = sa.getParam("AIManaPref");
         }
+
+        if (ai.getGame().getRules().isDanDan() && toPay == ManaCostShard.BLUE
+                && cost.getUnpaidShards(ManaCostShard.BLUE) >= 2) {
+            Set<Card> blueSourceCards = maList.stream().map(SpellAbility::getHostCard).collect(Collectors.toSet());
+            if (blueSourceCards.size() == 1) {
+                Card onlyBlueSource = blueSourceCards.iterator().next();
+                if ("Svyelunite Temple".equals(onlyBlueSource.getName())) {
+                    List<SpellAbility> templeModes = new ArrayList<>(maList);
+                    SpellAbility sacrificeForBlueBlue = templeModes.stream()
+                            .filter(m -> m.getPayCosts().hasSpecificCostType(CostSacrifice.class))
+                            .filter(m -> "U".equals(m.getManaPart().mana(m)) && m.amountOfManaGenerated(true) == 2)
+                            .findFirst().orElse(null);
+                    if (sacrificeForBlueBlue != null) {
+                        templeModes.remove(sacrificeForBlueBlue);
+                        templeModes.add(0, sacrificeForBlueBlue);
+                        maList = templeModes;
+                    }
+                }
+            }
+        }
+
         if (manaSourceType != "") {
             List<SpellAbility> filteredList = Lists.newArrayList(maList);
             switch (manaSourceType) {

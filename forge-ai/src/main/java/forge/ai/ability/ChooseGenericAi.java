@@ -39,6 +39,16 @@ public class ChooseGenericAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        if ("Crystal Spray".equals(sa.getHostCard().getName())) {
+            if (!ai.getGame().getRules().isDanDan()) {
+                return sa.hasParam("AILogic")
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            return ChangeTextAi.canCastCrystalSpray(ai, sa) && ChangeTextAi.chooseHelpfulTarget(ai, sa)
+                    ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                    : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
         if (sa.hasParam("AILogic")) {
             // This is equivalent to what was here before but feels bad
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -85,6 +95,14 @@ public class ChooseGenericAi extends SpellAbilityAi {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String logic = sa.getParam("AILogic");
+        if ("Crystal Spray".equals(host.getName()) && game.getRules().isDanDan()
+                && ChangeTextAi.canCastCrystalSpray(player, sa) && ChangeTextAi.hasHelpfulTarget(player, sa)) {
+            for (SpellAbility spell : spells) {
+                if (spell.hasParam("ChangeTypeWord")) {
+                    return spell;
+                }
+            }
+        }
         if (logic == null) {
             return spells.get(0);
         } else if ("Random".equals(logic)) {

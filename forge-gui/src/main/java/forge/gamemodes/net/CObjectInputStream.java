@@ -1,10 +1,12 @@
 package forge.gamemodes.net;
 
 import forge.trackable.Tracker;
+import forge.game.card.CardView;
 import forge.util.IHasForgeLog;
 import io.netty.handler.codec.serialization.ClassResolver;
 
 import java.io.*;
+import java.util.IdentityHashMap;
 
 /**
  * {@link ObjectInputStream} subclass used by {@link CompatibleObjectDecoder}
@@ -25,6 +27,8 @@ import java.io.*;
 public class CObjectInputStream extends ObjectInputStream implements IHasForgeLog {
     private final ClassResolver classResolver;
     private final Tracker tracker;
+    private final IdentityHashMap<CardView, Integer> resolvedCardViewIdRefs = new IdentityHashMap<>();
+    private boolean conflictingCardViewIdRefs;
 
     /**
      * Resolution is enabled whenever a tracker is present. The encoder's
@@ -90,6 +94,24 @@ public class CObjectInputStream extends ObjectInputStream implements IHasForgeLo
 
     @Override
     protected Object resolveObject(Object obj) throws IOException {
+        if (obj instanceof TrackableSerializer.IdRef ref) {
+            Object resolved = TrackableSerializer.resolve(obj, tracker);
+            if (ref.typeTag() == TrackableSerializer.TYPE_CARD_VIEW && resolved instanceof CardView card) {
+                Integer previousId = resolvedCardViewIdRefs.putIfAbsent(card, ref.id());
+                if (card.getId() != ref.id() || previousId != null && previousId != ref.id()) {
+                    conflictingCardViewIdRefs = true;
+                }
+            }
+            return resolved;
+        }
         return TrackableSerializer.resolve(obj, tracker);
+    }
+
+    IdentityHashMap<CardView, Integer> getResolvedCardViewIdRefs() {
+        return new IdentityHashMap<>(resolvedCardViewIdRefs);
+    }
+
+    boolean hasConflictingCardViewIdRefs() {
+        return conflictingCardViewIdRefs;
     }
 }

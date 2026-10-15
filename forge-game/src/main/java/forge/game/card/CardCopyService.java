@@ -36,7 +36,16 @@ public class CardCopyService {
     }
 
     public final Card copyCard(boolean assignNewId) {
-        return copyCard(assignNewId, copyFrom.getOwner());
+        final Player owner = copyFrom.getOwner();
+        final Card out = copyCard(assignNewId, owner == null || toGame == copyFrom.getGame()
+                ? owner : toGame.getPlayer(owner.getId()));
+        out.setOwners(copyFrom.getOwners().stream()
+                .map(p -> toGame == copyFrom.getGame() ? p : toGame.getPlayer(p.getId())).toList());
+        final Player controller = copyFrom.getExplicitController();
+        if (controller != null) {
+            out.setController(toGame == copyFrom.getGame() ? controller : toGame.getPlayer(controller.getId()), 0);
+        }
+        return out;
     }
 
     // Straight copying for things like moving a card to a different zone or using GameCopier
@@ -120,9 +129,9 @@ public class CardCopyService {
         }
         final Card c;
         if(in instanceof DetachedCardEffect)
-            c = new DetachedCardEffect((DetachedCardEffect) in, assignNewId);
+            c = new DetachedCardEffect((DetachedCardEffect) in, newOwner == null ? in.getGame() : newOwner.getGame(), assignNewId);
         else
-            c = new Card(id, in.getPaperCard(), in.getGame());
+            c = new Card(id, in.getPaperCard(), newOwner == null ? in.getGame() : newOwner.getGame());
 
         c.setOwner(newOwner);
         c.setSetCode(in.getSetCode());
@@ -242,7 +251,8 @@ public class CardCopyService {
         cachedMap.put(copyFrom.getId(), newCopy);
         newCopy.setSetCode(copyFrom.getSetCode());
         newCopy.setOwner(copyFrom.getOwner());
-        newCopy.setController(copyFrom.getController(), 0);
+        newCopy.setOwners(copyFrom.getOwners());
+        newCopy.setController(copyFrom.getExplicitController(), 0);
         newCopy.setCommander(copyFrom.isCommander());
         newCopy.setCollectible(copyFrom.isCollectible());
 

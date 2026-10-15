@@ -1131,6 +1131,117 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params) {
         return drawCards(n, cause, params, this.getZone(ZoneType.Hand));
     }
+
+    /** A single player's part of one DanDan draw instruction. */
+    public final class DrawBatch {
+        private final int count;
+        private final SpellAbility cause;
+        private final Map<AbilityKey, Object> params;
+        private final PlayerZone hand;
+        private final boolean gameStarted;
+        private final ReplacementHandler.DrawAncestry ancestry;
+        private final CardCollection drawn = new CardCollection();
+        private final Map<Player, CardCollection> revealed = Maps.newHashMap();
+        private Runnable completionAction;
+        private int completedDraws;
+        private boolean finished;
+
+        private DrawBatch(int count, SpellAbility cause, Map<AbilityKey, Object> params, PlayerZone hand,
+                boolean gameStarted, ReplacementHandler.DrawAncestry ancestry) {
+            this.count = count;
+            this.cause = cause;
+            this.params = params;
+            this.hand = hand;
+            this.gameStarted = gameStarted;
+            this.ancestry = ancestry;
+        }
+
+        public Player getPlayer() {
+            return Player.this;
+        }
+
+        public CardCollectionView getDrawnCards() {
+            return drawn;
+        }
+
+        public boolean isFinished() {
+            return finished;
+        }
+
+        public void setCompletionAction(Runnable action) {
+            completionAction = action;
+            if (finished) {
+                action.run();
+            }
+        }
+
+        public void drawOne() {
+            if (finished) {
+                return;
+            }
+            if (!isInGame() || completedDraws >= count || (gameStarted && !canDraw())) {
+                finish();
+                return;
+            }
+
+            final CardCollectionView[] result = new CardCollectionView[1];
+            game.getReplacementHandler().withDrawAncestry(ancestry,
+                    () -> result[0] = doDraw(revealed, cause, params, hand));
+            completedDraws++;
+            if (result[0] == null) {
+                finish();
+                return;
+            }
+            drawn.addAll(result[0]);
+            if (completedDraws >= count) {
+                finish();
+            }
+        }
+
+        private void finish() {
+            if (finished) {
+                return;
+            }
+            finished = true;
+            for (Map.Entry<Player, CardCollection> entry : revealed.entrySet()) {
+                if (entry.getValue().size() > 1) {
+                    game.getAction().revealTo(entry.getValue(), entry.getKey(), "Revealing cards drawn from ");
+                }
+            }
+            if (completionAction != null) {
+                completionAction.run();
+            }
+        }
+    }
+
+    public final DrawBatch prepareDanDanDrawBatch(int n, SpellAbility cause, Map<AbilityKey, Object> params,
+            PlayerZone zone, GameAction.DrawInstruction instruction) {
+        if (n <= 0) {
+            return null;
+        }
+
+        // Match ordinary draws: once a draw instruction can reveal a hidden library card, prior undo is unsafe.
+        game.getUndoManager().barrier("Card drawn");
+
+        final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+        if (gameStarted) {
+            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+            repRunParams.put(AbilityKey.Number, n);
+            if (params != null) {
+                repRunParams.putAll(params);
+            }
+            ReplacementResult replacement = game.getReplacementHandler().runDrawCards(repRunParams, instruction);
+            if (replacement != ReplacementResult.NotReplaced) {
+                return null;
+            }
+        }
+
+        DrawBatch batch = new DrawBatch(n, cause, params, zone, gameStarted,
+                game.getReplacementHandler().captureDrawAncestry());
+        instruction.addBatch(batch);
+        return batch;
+    }
+
     public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params, PlayerZone zone) {
         final CardCollection drawn = new CardCollection();
         if (n <= 0) {
@@ -1300,8 +1411,20 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerZone getZone(final ZoneType zone) {
         return zones.get(zone);
     }
+
+    public final void useSharedZoneFrom(final Player player, final ZoneType zone) {
+        if (player == null || zone == null || player == this) {
+            return;
+        }
+        zones.put(zone, player.getZone(zone));
+    }
+
     public void updateZoneForView(PlayerZone zone) {
-        view.updateZone(zone);
+        for (Player player : game.getRegisteredPlayers()) {
+            if (player.getZone(zone.getZoneType()) == zone) {
+                player.view.updateZone(zone, player);
+            }
+        }
     }
 
     public void updateAllZonesForView() {
@@ -1552,6 +1675,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView mill(int n, final ZoneType destination, SpellAbility sa, Map<AbilityKey, Object> params) {
+        params = params == null ? AbilityKey.newMap() : AbilityKey.newMap(params);
+        params.put(AbilityKey.Player, this);
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
         repRunParams.put(AbilityKey.Number, n);
@@ -1583,7 +1708,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         CardCollectionView milled = new CardCollection(Iterables.limit(milledView, n));
 
-        if (destination == ZoneType.Graveyard) {
+        if (destination == ZoneType.Graveyard && !game.getRules().isDanDan()) {
             milled = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
         }
 
@@ -1639,19 +1764,27 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Card playLand(final Card land, SpellAbility cause) {
-        land.setController(this, 0);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        Card incoming = land;
+        if (land.getOwners().size() > 1) {
+            moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(land));
+            incoming = new CardCopyService(land).copyCard(false);
+            incoming.setMayPlay(land.getMayPlay());
+        }
+        incoming.setController(this, 0);
         if (land.isFaceDown()) {
-            land.turnFaceUp(null);
+            incoming.turnFaceUp(null);
             if (cause.isLandAbility()) {
-                land.changeToState(cause.getCardStateName());
+                incoming.changeToState(cause.getCardStateName());
             }
         }
 
-        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(incoming);
+        runParams.put(AbilityKey.Player, this);
         runParams.put(AbilityKey.Origin, land.getZone().getZoneType().name());
 
         game.copyLastState();
-        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
+        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), incoming, cause, moveParams);
         game.updateLastStateForCard(c);
 
         // Run triggers

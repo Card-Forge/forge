@@ -215,7 +215,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
                 if (!gameTypes.isEmpty()) {
                     for (GameType gameType : gameTypes) {
-                        lobby.applyVariant(gameType);
+                        if (gameType != GameType.DanDan) {
+                            lobby.applyVariant(gameType);
+                        }
                     }
                     updateVariantSelection();
                     updateLayoutForVariants();

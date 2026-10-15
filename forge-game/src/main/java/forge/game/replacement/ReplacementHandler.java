@@ -31,6 +31,7 @@ import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameAction;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
@@ -55,6 +56,39 @@ public class ReplacementHandler {
     private final Game game;
 
     private Set<ReplacementEffect> hasRun = Sets.newHashSet();
+
+    private final Deque<DrawEffectCapture> drawEffectCaptures = new ArrayDeque<>();
+
+    private static final class DrawEffectCapture {
+        private final SpellAbility ability;
+        private final GameAction.DrawInstruction instruction;
+
+        private DrawEffectCapture(SpellAbility ability, GameAction.DrawInstruction instruction) {
+            this.ability = ability;
+            this.instruction = instruction;
+        }
+    }
+
+    private static final class ReplacementState {
+        private final boolean hasRun;
+        private final List<ReplacementEffect> otherChoices;
+
+        private ReplacementState(ReplacementEffect effect) {
+            hasRun = effect.hasRun();
+            otherChoices = effect.getOtherChoices() == null ? null : new ArrayList<>(effect.getOtherChoices());
+        }
+    }
+
+    public static final class DrawAncestry {
+        private final Set<ReplacementEffect> activeEffects;
+        private final Map<ReplacementEffect, ReplacementState> states;
+
+        private DrawAncestry(Set<ReplacementEffect> activeEffects,
+                Map<ReplacementEffect, ReplacementState> states) {
+            this.activeEffects = activeEffects;
+            this.states = states;
+        }
+    }
 
     // List of all replacement effect candidates for DamageDone event, in APNAP order
     private final List<Map<ReplacementEffect, List<Map<AbilityKey, Object>>>> replaceDamageList = new ArrayList<>();
@@ -146,8 +180,9 @@ public class ReplacementHandler {
                         && replacementEffect.modeCheck(event, runParams)
                         && !possibleReplacers.contains(replacementEffect)
                         && replacementEffect.zonesCheck(cardZone)
-                        && replacementEffect.requirementsCheck(game)
-                        && replacementEffect.canReplace(runParams)) {
+                        && replacementEffect.testWithController(getReplacementDecider(event, runParams),
+                                () -> replacementEffect.requirementsCheck(game)
+                                        && replacementEffect.canReplace(runParams))) {
                     possibleReplacers.add(replacementEffect);
                     if (layer == ReplacementLayer.CantHappen) {
                         return false;
@@ -192,6 +227,63 @@ public class ReplacementHandler {
      * @return ReplacementResult, an enum that represents what happened to the replacement effect.
      */
     public ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return run(event, runParams, null);
+    }
+
+    public ReplacementResult runDrawCards(final Map<AbilityKey, Object> runParams,
+            GameAction.DrawInstruction instruction) {
+        return run(ReplacementType.DrawCards, runParams, instruction);
+    }
+
+    public GameAction.DrawInstruction getCapturedDrawInstruction(SpellAbility ability) {
+        DrawEffectCapture capture = drawEffectCaptures.peek();
+        return capture != null && capture.ability == ability ? capture.instruction : null;
+    }
+
+    public DrawAncestry captureDrawAncestry() {
+        Set<ReplacementEffect> active = Sets.newHashSet(hasRun);
+        Map<ReplacementEffect, ReplacementState> states = new HashMap<>();
+        for (ReplacementEffect effect : active) {
+            states.put(effect, new ReplacementState(effect));
+        }
+        return new DrawAncestry(active, states);
+    }
+
+    public void withDrawAncestry(DrawAncestry ancestry, Runnable action) {
+        if (ancestry == null || ancestry.activeEffects.isEmpty()) {
+            action.run();
+            return;
+        }
+
+        Set<ReplacementEffect> priorActive = Sets.newHashSet(hasRun);
+        Map<ReplacementEffect, ReplacementState> priorStates = new HashMap<>();
+        for (ReplacementEffect effect : priorActive) {
+            priorStates.put(effect, new ReplacementState(effect));
+        }
+        for (ReplacementEffect effect : ancestry.activeEffects) {
+            priorStates.putIfAbsent(effect, new ReplacementState(effect));
+        }
+
+        try {
+            hasRun.addAll(ancestry.activeEffects);
+            for (Map.Entry<ReplacementEffect, ReplacementState> entry : ancestry.states.entrySet()) {
+                entry.getKey().setHasRun(true);
+                entry.getKey().setOtherChoices(entry.getValue().otherChoices == null
+                        ? null : new ArrayList<>(entry.getValue().otherChoices));
+            }
+            action.run();
+        } finally {
+            hasRun.clear();
+            hasRun.addAll(priorActive);
+            for (Map.Entry<ReplacementEffect, ReplacementState> entry : priorStates.entrySet()) {
+                entry.getKey().setHasRun(entry.getValue().hasRun);
+                entry.getKey().setOtherChoices(entry.getValue().otherChoices == null
+                        ? null : new ArrayList<>(entry.getValue().otherChoices));
+            }
+        }
+    }
+
+    private Player getReplacementDecider(ReplacementType event, final Map<AbilityKey, Object> runParams) {
         final Object affected = runParams.get(AbilityKey.Affected);
         Player decider = null;
 
@@ -200,12 +292,35 @@ public class ReplacementHandler {
         if (affected instanceof Player) {
             decider = (Player) affected;
         } else {
-            decider = ((Card) affected).getController();
+            Card card = (Card) affected;
+            decider = card.getController();
+            // Leaving play clears the incoming copy's control; the source controller still chooses.
+            // An entering card's explicit recipient takes priority over that source snapshot.
+            if (card.getExplicitController() == null && event == ReplacementType.Moved
+                    && runParams.get(AbilityKey.CardLKI) instanceof Card source
+                    && source.getExplicitController() != null) {
+                decider = source.getExplicitController();
+            } else if (card.getOwners().size() > 1 && card.getExplicitController() == null) {
+                if (runParams.get(AbilityKey.Player) instanceof Player actionPlayer) {
+                    decider = actionPlayer;
+                } else if (runParams.get(AbilityKey.Cause) instanceof SpellAbility cause && cause.getActivatingPlayer() != null) {
+                    decider = cause.getActivatingPlayer();
+                } else {
+                    decider = game.getPhaseHandler().getPlayerTurn();
+                }
+            }
         }
+
+        return decider;
+    }
+
+    private ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams,
+            GameAction.DrawInstruction instruction) {
+        final Player decider = getReplacementDecider(event, runParams);
 
         // try out all layer
         for (ReplacementLayer layer : ReplacementLayer.values()) {
-            ReplacementResult res = run(event, runParams, layer, decider);
+            ReplacementResult res = run(event, runParams, layer, decider, instruction);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
@@ -214,7 +329,8 @@ public class ReplacementHandler {
         return ReplacementResult.NotReplaced;
     }
 
-    private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Player decider) {
+    private ReplacementResult run(final ReplacementType event, final Map<AbilityKey, Object> runParams,
+            final ReplacementLayer layer, final Player decider, GameAction.DrawInstruction instruction) {
         final List<ReplacementEffect> possibleReplacers = getReplacementList(event, runParams, layer);
 
         if (possibleReplacers.isEmpty()) {
@@ -234,10 +350,10 @@ public class ReplacementHandler {
         chosenRE.setHasRun(true);
         hasRun.add(chosenRE);
         chosenRE.setOtherChoices(possibleReplacers);
-        ReplacementResult res = executeReplacement(runParams, chosenRE, decider);
+        ReplacementResult res = executeReplacement(runParams, chosenRE, decider, instruction);
         if (res == ReplacementResult.NotReplaced) {
             if (!possibleReplacers.isEmpty()) {
-                res = run(event, runParams);
+                res = run(event, runParams, instruction);
             }
             chosenRE.setHasRun(false);
             hasRun.remove(chosenRE);
@@ -260,7 +376,7 @@ public class ReplacementHandler {
             if (params.containsKey(AbilityKey.EffectOnly)) {
                 params.put(AbilityKey.EffectOnly, true);
             }
-            ReplacementResult result = run(event, params);
+            ReplacementResult result = run(event, params, instruction);
             switch (result) {
             case NotReplaced:
             case Updated: {
@@ -292,7 +408,13 @@ public class ReplacementHandler {
      *            the replacement effect to run
      */
     private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
-        final ReplacementEffect replacementEffect, final Player decider) {
+            final ReplacementEffect replacementEffect, final Player decider) {
+        return executeReplacement(runParams, replacementEffect, decider, null);
+    }
+
+    private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
+            final ReplacementEffect replacementEffect, final Player decider,
+            GameAction.DrawInstruction instruction) {
         Card host = replacementEffect.getHostCard();
         // AlternateState for OriginsPlaneswalker
         // FaceDown for cards like Necropotence
@@ -302,13 +424,25 @@ public class ReplacementHandler {
 
         // TODO: the source of replacement effect should be the source of the original effect
         SpellAbility effectSA = replacementEffect.ensureAbility();
+        Player player = host.getOwners().size() > 1 && host.getExplicitController() == null
+                ? decider : host.getController();
+        boolean captureDraw = instruction != null
+                && replacementEffect.getMode() == ReplacementType.DrawCards
+                && effectSA != null
+                && effectSA.getApi() == ApiType.Draw
+                && effectSA.getSubAbility() == null
+                && !effectSA.isWrapper();
+        if (captureDraw) {
+            effectSA = effectSA.copy(host, false);
+        }
         if (effectSA != null) {
+            effectSA.setActivatingPlayer(player);
             SpellAbility tailend = effectSA;
             do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB);
+                tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB, AbilityKey.Player);
                 tailend = tailend.getSubAbility();
             } while (tailend != null);
 
@@ -360,14 +494,25 @@ public class ReplacementHandler {
         if ("True".equals(replacementEffect.getParam("Skip"))) {
             return ReplacementResult.Skipped;
         }
-        Player player = host.getController();
-
         if (effectSA != null) {
             ApiType apiType = effectSA.getApi();
             if (replacementEffect.getMode() != ReplacementType.DamageDone ||
                 (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect)) {
-                effectSA.setActivatingPlayer(host.getController());
-                player.getController().playSpellAbilityNoStack(effectSA, true);
+                effectSA.setActivatingPlayer(player);
+                if (captureDraw) {
+                    DrawEffectCapture capture = new DrawEffectCapture(effectSA, instruction);
+                    drawEffectCaptures.push(capture);
+                    try {
+                        player.getController().playSpellAbilityNoStack(effectSA, true);
+                    } finally {
+                        if (drawEffectCaptures.peek() != capture) {
+                            throw new IllegalStateException("DanDan draw replacement capture stack was corrupted");
+                        }
+                        drawEffectCaptures.pop();
+                    }
+                } else {
+                    player.getController().playSpellAbilityNoStack(effectSA, true);
+                }
             } else {
                 // The SA if buffered, but replacement result should be set to Replaced
                 runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Replaced);

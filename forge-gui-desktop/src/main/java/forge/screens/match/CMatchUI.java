@@ -538,7 +538,24 @@ public final class CMatchUI
             FThreads.invokeInEdtLater(() -> updateZones(zonesToUpdate));
             return;
         }
-        for (final PlayerZoneUpdate update : zonesToUpdate) {
+        final GameView gameView = getGameView();
+        Iterable<PlayerZoneUpdate> updatesToProcess = zonesToUpdate;
+        if (gameView != null && gameView.isDanDan()) {
+            final PlayerZoneUpdates updates = new PlayerZoneUpdates();
+            for (final PlayerZoneUpdate update : zonesToUpdate) {
+                for (final ZoneType zone : update.getZones()) {
+                    updates.add(new PlayerZoneUpdate(update.getPlayer(), zone));
+                    if (zone != ZoneType.Library && zone != ZoneType.Graveyard) { continue; }
+                    for (final PlayerView player : gameView.getPlayers()) {
+                        if (player.getId() != update.getPlayer().getId()) {
+                            updates.add(new PlayerZoneUpdate(player, zone));
+                        }
+                    }
+                }
+            }
+            updatesToProcess = updates;
+        }
+        for (final PlayerZoneUpdate update : updatesToProcess) {
             final PlayerView owner = update.getPlayer();
 
             if (isNetGame()) {

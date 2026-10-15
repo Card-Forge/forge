@@ -193,6 +193,9 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         updateGameView(true);
     }
     private void updateGameView(boolean flush) {
+        if (paused) {
+            return;
+        }
         GameView gameView = getGameView();
         if (gameView == null) {
             return;
@@ -288,6 +291,9 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
+        // Establish the current GameView identity before the peer creates controllers in openView.
+        // After the first game, updateGameView may otherwise send a delta against the old game's root.
+        sendFullState();
         send(ProtocolMethod.openView, myPlayers);
         updateGameView();
         // Initialize delta sync by sending the initial full state
@@ -296,6 +302,8 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     @Override
     public void afterGameEnd() {
+        cancelAwaitNextInput();
+        super.afterGameEnd();
         syncAndSend(ProtocolMethod.afterGameEnd);
     }
 

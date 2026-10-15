@@ -49,6 +49,9 @@ import java.util.stream.Collectors;
  * Handles phase skips for now.
  */
 public abstract class PlayerController {
+    public enum DanDanMulliganDecision {
+        KEEP, FREE, REGULAR
+    }
 
     public enum BinaryChoiceType {
         HeadsOrTails, // coin
@@ -282,6 +285,18 @@ public abstract class PlayerController {
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
     public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
+    /**
+     * Chooses a DanDan mulligan. Controllers without a dedicated choice preserve
+     * their existing keep/mulligan behavior; a qualifying hand takes the free
+     * option when that legacy choice says to mulligan.
+     */
+    public DanDanMulliganDecision chooseDanDanMulligan(Player firstPlayer, int cardsToReturn,
+            boolean canChooseFree) {
+        if (mulliganKeepHand(firstPlayer, cardsToReturn)) {
+            return DanDanMulliganDecision.KEEP;
+        }
+        return canChooseFree ? DanDanMulliganDecision.FREE : DanDanMulliganDecision.REGULAR;
+    }
     public abstract CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn);
 
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();

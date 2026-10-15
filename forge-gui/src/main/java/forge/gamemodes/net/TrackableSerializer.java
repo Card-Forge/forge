@@ -72,8 +72,8 @@ public final class TrackableSerializer implements IHasForgeLog {
      * means {@code DeltaSyncManager} has registered this consumer on the
      * object (i.e. its properties have been included in a delta for that
      * client); client-side (consumerId &lt; 0) the encoder falls back to
-     * tracker presence, which is sound there because the client's tracker
-     * <em>is</em> exactly what the client knows.
+     * tracker identity, which also keeps detached same-ID replacement choices
+     * distinct from their live source.
      * <p>
      * CardViews that fail the gate pass through unchanged so Java serializes
      * the full object inline (covers Jhoira-style ephemeral choice copies
@@ -89,9 +89,10 @@ public final class TrackableSerializer implements IHasForgeLog {
             }
 
             if (!eventMode) {
-                boolean receiverKnows = consumerId >= 0
-                        ? trackable.hasConsumer(consumerId)
-                        : tracker != null && tracker.getObj(trackableTypeFor(tag), trackable.getId()) != null;
+                boolean isCanonical = tracker != null
+                        && tracker.getObj(trackableTypeFor(tag), trackable.getId()) == trackable;
+                boolean receiverKnows = isCanonical
+                        && (consumerId < 0 || trackable.hasConsumer(consumerId));
                 if (receiverKnows) {
                     return new IdRef(tag, trackable.getId());
                 }

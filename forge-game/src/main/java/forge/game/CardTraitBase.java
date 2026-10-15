@@ -3,6 +3,7 @@ package forge.game;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +17,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -150,6 +152,28 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
      */
     public void setHostCard(final Card c) {
         this.hostCard = c;
+    }
+
+    /** Evaluate a shared source's eligibility in its event controller's context.
+     * The detached LKI preserves identity and characteristics without changing the
+     * live card, its view, or any historical source snapshot. Restore the trait
+     * host before execution; its execution ability is never rebound.
+     */
+    public final boolean testWithController(final Player controller, final BooleanSupplier test) {
+        final Card source = hostCard;
+        if (source.getOwners().size() < 2 || source.getExplicitController() != null
+                || controller == null || controller == source.getController()
+                || this instanceof Trigger trigger && trigger.getSpawningAbility() != null) {
+            return test.getAsBoolean();
+        }
+        final Card context = CardCopyService.getLKICopy(source);
+        context.setController(controller, 0);
+        hostCard = context;
+        try {
+            return test.getAsBoolean();
+        } finally {
+            hostCard = source;
+        }
     }
 
     public boolean isKeyword(Keyword kw) {

@@ -43,6 +43,10 @@ public final class LobbySlot implements Serializable {
     }
 
     boolean apply(final UpdateLobbyPlayerEvent data) {
+        return apply(data, true);
+    }
+
+    boolean apply(final UpdateLobbyPlayerEvent data, final boolean allowDeckUpdate) {
         boolean changed = false;
         changed |= setIfChanged(data.getType(),            this.type,           this::setType);
         changed |= setIfChanged(data.getName(),            this.name,           this::setName);
@@ -56,13 +60,15 @@ public final class LobbySlot implements Serializable {
         changed |= setIfChanged(data.getSchemeDeckName(),  this.SchemeDeckName, this::setSchemeDeckName);
         changed |= setIfChanged(data.getAvatarVanguard(),  this.AvatarVanguard, this::setAvatarVanguard);
         changed |= setIfChanged(data.getPlanarDeckName(),  this.PlanarDeckName, this::setPlanarDeckName);
-        changed |= setIfChanged(data.getDeckName(),        this.DeckName,       this::setDeckName);
 
-        final Deck oldDeck = getDeck();
-        if (data.getDeck() != null) {
-            setDeck(data.getDeck());
-        } else if (oldDeck != null && data.getSection() != null && data.getCards() != null) {
-            oldDeck.putSection(data.getSection(), data.getCards());
+        if (allowDeckUpdate) {
+            changed |= setIfChanged(data.getDeckName(),    this.DeckName,       this::setDeckName);
+            final Deck oldDeck = getDeck();
+            if (data.getDeck() != null) {
+                setDeck(data.getDeck());
+            } else if (oldDeck != null && data.getSection() != null && data.getCards() != null) {
+                oldDeck.putSection(data.getSection(), data.getCards());
+            }
         }
         if (data.getAiProfile() != null) {
             setAiProfile(data.getAiProfile());

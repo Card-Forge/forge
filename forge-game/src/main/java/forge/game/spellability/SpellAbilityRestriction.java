@@ -236,7 +236,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
+                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || !c.isOwnedBy(activator))
                             && !c.mayPlay(activator).stream().anyMatch(opt -> opt.grantsZonePermissions())) {
                         return false;
                     }
@@ -261,7 +261,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         // Reaching here means the card is in a zone of the restricted type, and that has to be
         // the activator's own. CR 109.5: a card outside the battlefield has no controller, so the
         // "you" in "your graveyard" is its owner. Shaman's Trance makes every graveyard theirs.
-        if (sa.isSpell() && activator != c.getOwner()
+        if (sa.isSpell() && !c.isOwnedBy(activator)
                 && !(this.getZone() == ZoneType.Graveyard && activator.hasKeyword("Shaman's Trance"))) {
             return false;
         }
@@ -343,6 +343,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         String validPlayer = this.getActivator();
+        if ("You".equals(validPlayer) && !sa.hasParam("Activator") && c.getExplicitController() == null) {
+            return c.isOwnedBy(activator) || (sa.isSpell() && c.isInZone(ZoneType.Graveyard)
+                    && activator.hasKeyword("Shaman's Trance"));
+        }
         return activator.isValid(validPlayer, c.getController(), c, sa);
     }
 

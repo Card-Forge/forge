@@ -470,7 +470,7 @@ public class PlayerView extends GameEntityView {
         return getZoneTypes(TrackableProperty.Graveyard) >= 4;
     }
 
-    void updateZone(PlayerZone zone) {
+    void updateZone(PlayerZone zone, Player viewedPlayer) {
         TrackableProperty prop = zone.getZoneType().getTrackableProperty();
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
@@ -481,7 +481,7 @@ public class PlayerView extends GameEntityView {
             case Graveyard:
             case Library:
             case Exile:
-                updateFlashback(zone.getPlayer());
+                updateFlashback(viewedPlayer);
                 break;
             default:
                 break;

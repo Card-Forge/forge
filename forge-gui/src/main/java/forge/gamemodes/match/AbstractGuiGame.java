@@ -143,17 +143,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * Called at game lifecycle boundaries (start, restart, recovery) and when a remote
      * client receives a {@code setGameView} protocol message.
      *
-     * <p>Two paths: if either {@code gameView} or {@code gameView0} is null, the field is
-     * reassigned directly. If both are non-null, the incoming view's properties are merged
-     * into the existing view via {@link GameView#copyChangedProps} rather than swapping
-     * the reference.
+     * <p>A missing view or a view for a different immutable game identity is installed
+     * directly. Views for the same game merge incoming properties via
+     * {@link GameView#copyChangedProps} rather than swapping the reference.
      *
      * <p>The merge path preserves object identity of the GameView and every nested
      * {@link forge.trackable.TrackableObject}. GUI components hold direct references to
      * those instances (UI panels store {@code PlayerView}/{@code CardView} fields;
-     * delta-sync consumers also register per-consumer dirty bits on them). Swapping the
-     * GameView reference would leave those references pointing at an orphaned graph;
-     * merging keeps them valid as the data underneath changes.
+     * delta-sync consumers also register per-consumer dirty bits on them). For a
+     * same-game update, merging keeps those references valid as the data changes. A new
+     * game has a distinct object graph and must replace the old view instead.
      */
     @Override
     public void setGameView(final GameView gameView0) {
@@ -161,6 +160,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             if (gameView0 != null) {
                 gameView0.updateObjLookup();
             }
+            gameView = gameView0;
+            return;
+        }
+        if (gameView.getId() != gameView0.getId()) {
+            gameView0.updateObjLookup();
+            gameView0.copyChangedProps(gameView0);
             gameView = gameView0;
             return;
         }
@@ -394,10 +399,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final CardView c : cards) {
             // an IdRef the tracker cannot resolve arrives as a null view, and PlayerZoneUpdate rejects a null player
-            if (c == null || c.getOwner() == null) { continue; }
+            if (c == null) { continue; }
             final ZoneType zone = c.getZone();
             if (zone != null && zone != ZoneType.Battlefield) {
-                zones.add(new PlayerZoneUpdate(c.getOwner(), zone));
+                for (PlayerView player : c.getZonePlayers()) {
+                    zones.add(new PlayerZoneUpdate(player, zone));
+                }
             }
         }
         return zones;

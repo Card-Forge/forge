@@ -138,6 +138,14 @@ public class VZone implements IVDoc<CZone> {
     }
 
     private String capitalizedName() {
+        if (matchUI.getGameView() != null && matchUI.getGameView().isDanDan()) {
+            if (zone == ZoneType.Library) {
+                return Localizer.getInstance().getMessage("lblDanDanSharedLibrary");
+            }
+            if (zone == ZoneType.Graveyard) {
+                return Localizer.getInstance().getMessage("lblDanDanSharedGraveyard");
+            }
+        }
         final String name = zone.getTranslatedName();
         if (name.isEmpty()) return name;
         return Character.toUpperCase(name.charAt(0)) + name.substring(1);

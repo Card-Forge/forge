@@ -303,6 +303,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private Map<String, Integer> xManaCostPaidByColor;
 
+    private ImmutableSet<Player> owners = ImmutableSet.of();
     private Player owner;
     private Player controller;
     private long controllerTimestamp;
@@ -785,20 +786,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public Card manifest(Player p, SpellAbility sa, Map<AbilityKey, Object> params) {
+        Card incoming = this;
+        if (getOwners().size() > 1) {
+            params = params == null ? AbilityKey.newMap() : AbilityKey.newMap(params);
+            params.putIfAbsent(AbilityKey.CardLKI, CardCopyService.getLKICopy(this));
+            incoming = new CardCopyService(this).copyCard(false);
+        }
         // Turn Face Down (even if it's DFC).
         // Sometimes cards are manifested while already being face down
-        if (!turnFaceDown(true) && !isFaceDown()) {
+        if (!incoming.turnFaceDown(true) && !incoming.isFaceDown()) {
             return null;
         }
 
         // Just in case you aren't the controller, now you are!
-        setController(p, game.getNextTimestamp());
+        incoming.setController(p, game.getNextTimestamp());
 
         // Mark this card as "manifested"
-        setManifested(sa);
+        incoming.setManifested(sa);
 
         // Move to p's battlefield
-        Card c = game.getAction().moveToPlay(this, p, sa, params);
+        Card c = game.getAction().moveToPlay(incoming, p, sa, params);
         if (c.isInPlay()) {
             c.setManifested(sa);
             c.turnFaceDown(true);
@@ -809,22 +816,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public Card cloak(Player p, SpellAbility sa, Map<AbilityKey, Object> params) {
+        Card incoming = this;
+        if (getOwners().size() > 1) {
+            params = params == null ? AbilityKey.newMap() : AbilityKey.newMap(params);
+            params.putIfAbsent(AbilityKey.CardLKI, CardCopyService.getLKICopy(this));
+            incoming = new CardCopyService(this).copyCard(false);
+        }
+        if (sa.hasParam("Tapped")) {
+            incoming.setTapped(true);
+        }
         // Turn Face Down (even if it's DFC).
         // Sometimes cards are manifested while already being face down
-        if (!turnFaceDown(true) && !isFaceDown()) {
+        if (!incoming.turnFaceDown(true) && !incoming.isFaceDown()) {
             return null;
         }
 
         // Just in case you aren't the controller, now you are!
-        setController(p, game.getNextTimestamp());
+        incoming.setController(p, game.getNextTimestamp());
 
         // Mark this card as "cloaked"
-        setCloaked(sa);
+        incoming.setCloaked(sa);
         // give it Ward:2
-        getFaceDownState().addIntrinsicKeyword("Ward:2", true);
+        incoming.getFaceDownState().addIntrinsicKeyword("Ward:2", true);
 
         // Move to p's battlefield
-        Card c = game.getAction().moveToPlay(this, p, sa, params);
+        Card c = game.getAction().moveToPlay(incoming, p, sa, params);
         if (c.isInPlay()) {
             c.setCloaked(sa);
             c.turnFaceDown(true);
@@ -3701,18 +3717,38 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Player getOwner() {
         return owner;
     }
+    public final ImmutableSet<Player> getOwners() {
+        return owners;
+    }
+    public final boolean isOwnedBy(final Player player) {
+        return owners.contains(player);
+    }
     public final void setOwner(final Player owner0) {
-        if (owner == owner0) { return; }
-        if (owner != null && owner.getGame() != this.getGame()) {
-            // Sanity check.
-            throw new RuntimeException();
+        setOwners(owner0 == null ? ImmutableSet.of() : ImmutableSet.of(owner0));
+    }
+    public final void setOwners(final Iterable<Player> newOwners) {
+        final ImmutableSet<Player> replacement = ImmutableSet.copyOf(newOwners);
+        for (Player player : replacement) {
+            if (player.getGame() != getGame()) {
+                throw new IllegalArgumentException("Card owners must belong to its game");
+            }
         }
-        owner = owner0;
-        view.updateOwner(this);
-        view.updateController(this);
+        if (owners.equals(replacement)) { return; }
+        owners = replacement;
+        if (owners.isEmpty()) {
+            owner = null;
+        } else if (owners.size() == 1 || owner == null) {
+            owner = owners.iterator().next();
+        }
+        view.updateOwners(this);
     }
 
     public final Player getController() {
+        final Player explicitController = getExplicitController();
+        return explicitController == null ? owner : explicitController;
+    }
+
+    public final Player getExplicitController() {
         Entry<Long, Player> lastEntry = tempControllers.lastEntry();
         if (lastEntry != null) {
             final long lastTimestamp = lastEntry.getKey();
@@ -3723,7 +3759,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (controller != null) {
             return controller;
         }
-        return owner;
+        return null;
     }
 
     public final void setController(final Player player, final long tstamp) {
@@ -6950,7 +6986,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (!getOwner().isInGame()) {
+        if (getOwners().stream().noneMatch(Player::isInGame)) {
             return false;
         }
 

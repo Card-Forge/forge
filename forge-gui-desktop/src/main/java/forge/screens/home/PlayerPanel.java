@@ -657,9 +657,14 @@ public class PlayerPanel extends FPanel {
 
     private void addHandlersDeckSelector() {
         deckBtn.setCommand((Runnable) () -> {
-            lobby.setCurrentGameMode(GameType.Constructed);
+            if (lobby.hasVariant(GameType.DanDan)) {
+                if (index != lobby.getDanDanDeckOwnerSlot()) return;
+                lobby.setCurrentGameMode(GameType.DanDan);
+            } else {
+                lobby.setCurrentGameMode(GameType.Constructed);
+            }
             deckBtn.requestFocusInWindow();
-            lobby.changePlayerFocus(index, GameType.Constructed);
+            lobby.changePlayerFocus(index, lobby.hasVariant(GameType.DanDan) ? GameType.DanDan : GameType.Constructed);
         });
     }
 
@@ -829,6 +834,9 @@ public class PlayerPanel extends FPanel {
 
     // Writes the chosen sleeve onto the currently selected deck and saves it (no-op for read-only decks)
     private void persistSleeveToDeck(final String key, final int offset) {
+        if (!lobby.mayMutateDanDanDeck(index)) {
+            return;
+        }
         final FDeckChooser chooser = getDeckChooser();
         if (chooser == null) {
             return;

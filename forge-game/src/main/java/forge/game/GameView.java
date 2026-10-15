@@ -48,6 +48,7 @@ public class GameView extends TrackableObject {
         GameRules rules = game.getRules();
         set(TrackableProperty.IsCommander, rules.hasCommander());
         set(TrackableProperty.GameType, rules.getGameType());
+        set(TrackableProperty.IsDanDan, rules.isDanDan());
         set(TrackableProperty.PoisonCountersToLose, rules.getPoisonCountersToLose());
         set(TrackableProperty.NumGamesInMatch, rules.getGamesPerMatch());
 
@@ -79,6 +80,10 @@ public class GameView extends TrackableObject {
 
     public GameType getGameType() {
         return get(TrackableProperty.GameType);
+    }
+
+    public boolean isDanDan() {
+        return get(TrackableProperty.IsDanDan);
     }
 
     public int getPoisonCountersToLose() {

@@ -64,6 +64,8 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
     private volatile Channel channel;
+    private volatile Integer receivedGameViewId;
+    private volatile Channel receivedGameViewChannel;
 
     private ReconnectState reconnectState = ReconnectState.CONNECTED;
     private boolean shuttingDown = false;
@@ -264,9 +266,27 @@ public class FGameClient implements IToServer, IHasForgeLog {
         this.draftHandler = handler;
     }
 
-    void setGameControllers(final Iterable<PlayerView> myPlayers) {
+    void receivedGameView(final Channel source, final int gameViewId) {
+        if (!isCurrentGameViewChannel(source)) return;
+        receivedGameViewId = gameViewId;
+        receivedGameViewChannel = source;
+    }
+
+    boolean hasCurrentGameViewBinding(final Channel source) {
+        return isCurrentGameViewChannel(source) && receivedGameViewChannel == source
+                && receivedGameViewId != null;
+    }
+
+    private boolean isCurrentGameViewChannel(final Channel source) {
+        return source != null && (isActiveChannel(source)
+                || channel == null && getReconnectState() == ReconnectState.CONNECTED && source.isActive());
+    }
+
+    void setGameControllers(final Iterable<PlayerView> myPlayers, final Channel source) {
+        if (!hasCurrentGameViewBinding(source)) return;
+        final int boundGameViewId = receivedGameViewId;
         for (final PlayerView p : myPlayers) {
-            NetGameController controller = new NetGameController(this);
+            NetGameController controller = new NetGameController(this, boundGameViewId);
             clientGui.setOriginalGameController(p, controller);
         }
     }

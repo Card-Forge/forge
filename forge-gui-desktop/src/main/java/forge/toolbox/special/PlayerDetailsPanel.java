@@ -38,11 +38,18 @@ public class PlayerDetailsPanel extends JPanel {
     private final DetailLabelExtra extraLabel;
 
     public PlayerDetailsPanel(final PlayerView player, final EnumSet<ZoneType> supportedZones) {
+        this(player, supportedZones, false);
+    }
+
+    public PlayerDetailsPanel(final PlayerView player, final EnumSet<ZoneType> supportedZones, final boolean isDanDan) {
         this.player = player;
 
         zoneLabels.put(ZoneType.Hand, new DetailLabelZone(ZoneType.Hand, "lblHandNOfMax", PlayerView::getMaxHandString));
-        zoneLabels.put(ZoneType.Graveyard, new DetailLabelZone(ZoneType.Graveyard, "lblGraveyardNCardsNTypes", p -> p.getZoneTypes(TrackableProperty.Graveyard)));
-        zoneLabels.put(ZoneType.Library, new DetailLabelZone(ZoneType.Library, "lblLibraryNCards"));
+        zoneLabels.put(ZoneType.Graveyard, new DetailLabelZone(ZoneType.Graveyard,
+                isDanDan ? "lblDanDanSharedGraveyardNCardsNTypes" : "lblGraveyardNCardsNTypes",
+                p -> p.getZoneTypes(TrackableProperty.Graveyard)));
+        zoneLabels.put(ZoneType.Library, new DetailLabelZone(ZoneType.Library,
+                isDanDan ? "lblDanDanSharedLibraryNCards" : "lblLibraryNCards"));
         zoneLabels.put(ZoneType.Exile, new DetailLabelZone(ZoneType.Exile, "lblExileNCards"));
         zoneLabels.put(ZoneType.Flashback, new DetailLabelZone(ZoneType.Flashback, "lblFlashbackNCards"));
         zoneLabels.put(ZoneType.Command, new DetailLabelZone(ZoneType.Command, "lblCommandZoneNCards"));
@@ -259,7 +266,6 @@ public class PlayerDetailsPanel extends JPanel {
 
     private class DetailLabelZone extends DetailLabelNumeric {
         public final ZoneType zone;
-
         public DetailLabelZone(ZoneType zone, String toolTipLabel) {
             this(zone, toolTipLabel, null);
         }

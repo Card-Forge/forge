@@ -313,7 +313,9 @@ public class GameSnapshot {
 
         for(Card fromCard : getCardsToCopy(fromGame)) {
             Card newCard = findCardById(toGame, fromCard.getId());
-            Player toPlayer = findBy(toGame, fromCard.getController());
+            Player toPlayer = findBy(toGame, fromCard.getZone().getPlayer() == null
+                    ? fromCard.getController() : fromCard.getZone().getPlayer());
+            Player toOwner = findBy(toGame, fromCard.getOwner());
             ZoneType fromType = fromCard.getZone().getZoneType();
 
             int zonePosition = 0;
@@ -325,17 +327,16 @@ public class GameSnapshot {
 
             if (newCard == null) {
                 // Storing a game uses this path...
-                newCard = createCardCopy(toGame, toPlayer, fromCard);
+                newCard = createCardCopy(toGame, toOwner, fromCard);
             } else {
-                ZoneType type = newCard.getZone().getZoneType();
-                if (type != fromType) {
-                    if (type.equals(ZoneType.Stack)) {
-                        toGame.getStackZone().remove(newCard);
-                    } else {
-                        toPlayer.getZone(type).remove(newCard);
-                    }
-                }
+                Zone destination = fromType == ZoneType.Stack
+                        ? toGame.getStackZone() : toPlayer.getZone(fromType);
+                removeFromCurrentLocation(newCard, destination, isMelded(fromCard));
             }
+
+            newCard.setOwner(toOwner);
+            newCard.setOwners(fromCard.getOwners().stream().map(p -> findBy(toGame, p)).toList());
+            newCard.setController(findBy(toGame, fromCard.getExplicitController()), 0);
 
             if (!fromType.isOrdered()) {
                 setCardInCopiedGame(toGame, toPlayer, fromCard, newCard, fromType, zonePosition);
@@ -447,6 +448,8 @@ public class GameSnapshot {
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         Card newCard = new CardCopyService(c, newGame).copyCard(false, newOwner);
         newCard.dangerouslySetGame(newGame);
+        newCard.setOwners(c.getOwners().stream().map(p -> findBy(newGame, p)).toList());
+        newCard.setController(findBy(newGame, c.getExplicitController()), 0);
         return newCard;
     }
 
@@ -504,6 +507,22 @@ public class GameSnapshot {
     private static boolean isMelded(Card c) {
         return c.getZone() instanceof PlayerZoneBattlefield battlefield
                 && battlefield.getMeldedCards().contains(c);
+    }
+
+    private static void removeFromCurrentLocation(Card card, Zone destination, boolean destinationIsMelded) {
+        Zone current = card.getZone();
+        if (current == null) {
+            return;
+        }
+
+        boolean currentlyMelded = isMelded(card);
+        if (currentlyMelded) {
+            if (!destinationIsMelded || current != destination) {
+                ((PlayerZoneBattlefield) current).removeFromMelded(card);
+            }
+        } else if (current != destination || destinationIsMelded) {
+            current.remove(card);
+        }
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
@@ -569,7 +588,7 @@ public class GameSnapshot {
     }
 
     private Player findBy(Game toGame, Player fromPlayer) {
-        return toGame.getPlayer(fromPlayer.getId());
+        return fromPlayer == null ? null : toGame.getPlayer(fromPlayer.getId());
     }
 
     public GameObject find(GameObject o) {

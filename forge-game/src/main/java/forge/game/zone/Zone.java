@@ -21,6 +21,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.MultimapBuilder;
@@ -111,6 +112,8 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             }
         }
 
+        assignSharedOwnership(c);
+
         if (!rollback) {
             // Immutable cards are usually emblems and effects
             if (!c.isImmutable()) {
@@ -133,7 +136,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             }
 
             if (zoneType == ZoneType.Graveyard && c.isPermanent() && !c.isToken()) {
-                c.getOwner().descend();
+                for (Player participant : game.getZoneParticipants(this)) {
+                    participant.descend();
+                }
             }
         }
 
@@ -169,11 +174,22 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public final void setCards(final Iterable<Card> cards) {
         cardList.clear();
         for (Card c : cards) {
+            assignSharedOwnership(c);
             c.setZone(this);
             cardList.add(c);
         }
         onChanged();
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
+    }
+
+    private void assignSharedOwnership(Card card) {
+        if (game.getRules().isDanDan() && (zoneType == ZoneType.Library || zoneType == ZoneType.Graveyard)) {
+            ImmutableSet<Player> participants = game.getZoneParticipants(this);
+            if (participants.size() > 1) {
+                card.setOwners(participants);
+                card.clearControllers();
+            }
+        }
     }
 
     public final void removeAllCards(boolean forcedWithoutEvents) {

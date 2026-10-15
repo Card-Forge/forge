@@ -466,6 +466,12 @@ public class DeckProxy implements InventoryItem {
         return result;
     }
 
+    public static Iterable<DeckProxy> getAllDanDanDecks() {
+        final List<DeckProxy> result = new ArrayList<>();
+        addDecksRecursivelly("DanDan", GameType.DanDan, result, "", FModel.getDecks().getDanDan(), null);
+        return result;
+    }
+
     public static Iterable<DeckProxy> getAllCommanderDecks() {
         return getAllCommanderDecks(null);
     }
