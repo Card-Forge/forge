@@ -57,9 +57,9 @@ public class VZoneDisplay extends VCardDisplayArea {
         if (revealedPanel == null) { //if no overlapping panels, just pan scroll as normal
             return super.pan(x, y, deltaX, deltaY, moreVertical); //base class tracks the card under the finger
         }
-        if (Forge.isLandscapeMode()) {
+        /*if (Forge.isLandscapeMode()) {
             updateDragPanel(x, y);
-        }
+        }*/
         int idx = cardPanels.get().size() - 1;
         for (int i = idx - 1; i >= 0; i--) {
             if (cardPanels.get().get(i).contains(x, y)) {

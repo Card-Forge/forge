@@ -125,7 +125,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
-        if (!Forge.isLandscapeMode()) {
+        return super.pan(x, y, deltaX, deltaY, moreVertical);
+        // TODO for touch
+        /*if (!Forge.isLandscapeMode()) {
             return super.pan(x, y, deltaX, deltaY, moreVertical);
         }
         if (!isHorizontalStrip()) { //vertical column layout keeps the old behaviour
@@ -148,7 +150,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             updateDragPanel(x, y); //preview follows the finger, no scrolling
             return true;
         }
-        return scrollRow(deltaX); //scrolling never shows the preview
+        return scrollRow(deltaX); //scrolling never shows the preview*/
     }
 
     @Override
