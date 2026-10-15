@@ -19,6 +19,14 @@ const allOut = `
   91.4% of the 33513 judged cards play (an upper bound)
 `
 
+const causesOut = `
+refusal causes, most cards first:
+     49  turns: engine: triggered AB$ Cost$ "_" not resolvable yet
+         e.g. Ashcoat of the Shadow Swarm
+     36  resolve: engine: Animate: Triggers$ not resolvable yet
+         e.g. Abnormal Endurance
+`
+
 const preOut = `smoke probe of 505 decklists under x (285 card names unknown to the corpus, left out): 8668 cards
   plays          8093
   refused         547
@@ -54,7 +62,8 @@ func tree(t *testing.T) string {
 		smokeDoc: "| plays        | 30,000 |\n| refused      |  2,000 |\n| panicked     |      0 |\n" +
 			"| hung         |      0 |\n| placed       |    300 |\n| inconclusive |    100 |\n\n" +
 			"90.0% of the 33,000 judged cards play. On the 8,000 distinct cards of the 500 quest\n" +
-			"preconstructed decks it is 92.0% of 8,000\njudged.\n",
+			"preconstructed decks it is 92.0% of 8,000\njudged.\n\n" +
+			"| Cards | Refusal |\n| ----: | ------- |\n|     1 | old     |\n\nRun it.\n",
 		claudeMD: "plays: 90.0% of 33,000\njudged, an upper bound.\n",
 		"docs/crucible/00-master-implementation-plan.md":             "86.0% of the\ncorpus's judged cards play\n",
 		"docs/crucible/00-master-implementation-plan-in-progress.md": "90.0%\nof the 33,512 judged corpus cards\n",
@@ -199,5 +208,78 @@ func TestUsageErrors(t *testing.T) {
 		if code := run(args, &out, &errw, f.run); code != 2 {
 			t.Errorf("%v: exit %d", args, code)
 		}
+	}
+}
+
+func TestCausesRewriteTheRefusalTable(t *testing.T) {
+	t.Parallel()
+	root := tree(t)
+	all, _ := ParseSmoke(allOut + causesOut)
+	pre, _ := ParseSmoke(preOut)
+	if _, _, err := Reconcile(root, all, pre); err != nil {
+		t.Fatal(err)
+	}
+	b, _ := os.ReadFile(filepath.Join(root, smokeDoc))
+	for _, want := range []string{"| 49 | `triggered AB$ Cost$ not resolvable` |", "| 36 | `Animate: Triggers$ not resolvable` |"} {
+		if !strings.Contains(string(b), want) {
+			t.Errorf("missing %q:\n%s", want, b)
+		}
+	}
+	if strings.Contains(string(b), "old") {
+		t.Errorf("old row survived:\n%s", b)
+	}
+}
+
+func TestPlanEditsAndBrief(t *testing.T) {
+	t.Parallel()
+	root := tree(t)
+	write := func(rel, s string) {
+		p := filepath.Join(root, rel)
+		if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil {
+			t.Fatal(err)
+		}
+		if err := os.WriteFile(p, []byte(s), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	write(openPlan, "| ID | What | Phase | Size | Needs |\n| R9a | first thing | M6 | S | x |\n| R9b | second\nthing | M6 | S | x |\n")
+	write(runbook, "## Prompt block\n\n```text\nNever run git.\n```\n")
+	if err := planAdd(root, "R9a", "R9c", "third", "M6", "M", "dep"); err != nil {
+		t.Fatal(err)
+	}
+	if err := planAdd(root, "R9a", "R9c", "dup", "M6", "M", "dep"); err == nil {
+		t.Fatal("duplicate id must fail")
+	}
+	if err := planAdd(root, "R0", "R9d", "x", "M6", "M", "dep"); err == nil {
+		t.Fatal("unknown anchor must fail")
+	}
+	if err := planAdd(root, "R9a", "R9d", "a|b", "M6", "M", "dep"); err == nil {
+		t.Fatal("pipe in text must fail")
+	}
+	p, err := brief(root, "R9c", "slug")
+	if err != nil || !strings.Contains(p, "row R9c") || !strings.Contains(p, "third") ||
+		!strings.Contains(p, "m6-r9c-slug.md") || !strings.HasSuffix(p, "Never run git.\n") {
+		t.Fatalf("brief: %v\n%s", err, p)
+	}
+	if err := planRm(root, []string{"R9a", "R9c"}); err != nil {
+		t.Fatal(err)
+	}
+	if err := planRm(root, []string{"R9a"}); err == nil {
+		t.Fatal("removing a missing row must fail")
+	}
+	if _, err := brief(root, "R9a", "s"); err == nil {
+		t.Fatal("brief of a missing row must fail")
+	}
+	if err := planCmd(root, []string{"add", "-after", "R9b", "-id", "R9e", "fresh row"}); err != nil {
+		t.Fatal(err)
+	}
+	for _, bad := range [][]string{{"rm"}, {"add", "-id", "x", "t"}, {"zap", "x"}} {
+		if err := planCmd(root, bad); err == nil {
+			t.Errorf("%v must fail", bad)
+		}
+	}
+	b, _ := os.ReadFile(filepath.Join(root, openPlan))
+	if !strings.Contains(string(b), "| R9e | fresh row | M6 | S | `card-smoke` re-rank |") {
+		t.Fatalf("plan:\n%s", b)
 	}
 }

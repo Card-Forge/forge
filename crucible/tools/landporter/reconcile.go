@@ -28,6 +28,7 @@ var (
 	rowRE   = regexp.MustCompile(`(?m)^(\| (plays|refused|panicked|hung|placed|inconclusive)\s+\|\s*)([\d,]+)( \|)`)
 	allRE   = regexp.MustCompile(`(\d+\.\d)%( of the )([\d,]+)( judged cards play\.)`)
 	preCard = regexp.MustCompile(`(On the )([\d,]+)(\s+distinct\s+cards\s+of\s+the\s+)(\d+)(\s+quest)`)
+	causeTb = regexp.MustCompile(`(?s)(\| Cards \| Refusal[^\n]*\n\|[^\n]*\n)(?:\|[^\n]*\n)+`)
 	prePct  = regexp.MustCompile(`(it\s+is\s+)(\d+\.\d)%(\s+of\s+)([\d,]+)(\s+judged)`)
 )
 
@@ -61,7 +62,7 @@ func Reconcile(root string, all, precon Result) (changed []string, before map[st
 	err = edit(smokeDoc, func(s string) (string, error) {
 		for name, re := range map[string]*regexp.Regexp{
 			"results table": rowRE, "corpus percent sentence": allRE,
-			"precon card sentence": preCard, "precon percent sentence": prePct,
+			"precon card sentence": preCard, "precon percent sentence": prePct, "refusal table": causeTb,
 		} {
 			if !re.MatchString(s) {
 				return "", fmt.Errorf("%s not found", name)
@@ -75,7 +76,7 @@ func Reconcile(root string, all, precon Result) (changed []string, before map[st
 		s = allRE.ReplaceAllString(s, all.Pct+"%${2}"+commas(all.Judged)+"${4}")
 		s = preCard.ReplaceAllString(s, "${1}"+commas(precon.Cards)+"${3}"+strconv.Itoa(precon.Decks)+"${5}")
 		s = prePct.ReplaceAllString(s, "${1}"+precon.Pct+"%${3}"+commas(precon.Judged)+"${5}")
-		return s, nil
+		return causeTb.ReplaceAllString(s, "${1}"+causeRows(all.Causes)), nil
 	})
 	if err != nil {
 		return nil, nil, err
@@ -115,4 +116,29 @@ func Table(before map[string]int, all, precon Result) string {
 	fmt.Fprintf(&b, "judged play: %s%% of %s; precons %s%% of %s\n",
 		all.Pct, commas(all.Judged), precon.Pct, commas(precon.Judged))
 	return b.String()
+}
+
+const topCauses = 6
+
+// causeRows renders the largest refusal causes as table rows (prettier aligns them).
+func causeRows(causes []Cause) string {
+	var b strings.Builder
+	for i, c := range causes {
+		if i == topCauses {
+			break
+		}
+		fmt.Fprintf(&b, "| %d | `%s` |\n", c.Cards, cleanCause(c.Text))
+	}
+	return b.String()
+}
+
+var phasePrefix = regexp.MustCompile(`^(setup|cast|resolve|activate|turns): `)
+
+// cleanCause drops the probe phase, the "engine: " wrappers, quoted blanks and the trailing "yet".
+func cleanCause(t string) string {
+	t = phasePrefix.ReplaceAllString(t, "")
+	t = strings.ReplaceAll(t, "engine: ", "")
+	t = strings.ReplaceAll(t, ` "_"`, "")
+	t = strings.TrimSuffix(t, " yet")
+	return t
 }

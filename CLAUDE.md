@@ -161,6 +161,8 @@ cd crucible && go run ./cmd/crucible card-smoke -all -workers 8     # or -decks 
 # After a worktree porter hands back: commit+merge, remeasure, rewrite the quoted smoke numbers; finish = prettier,
 # markdownlint, docs commit, worktree cleanup (forced only when merged and clean)
 cd crucible && go run ./tools/landporter land BRANCH "msg" && go run ./tools/landporter finish BRANCH "docs: msg"
+# Same tool: agent prompt for an open-plan row; delete or add plan rows; reconcile also rewrites smoke-probe.md's top-refusal table
+cd crucible && go run ./tools/landporter brief R9g slug ; landporter plan rm R9g ; landporter plan add -after R9h -id R9j "text"
 
 # Parallel porters (port-batch skill): list agent worktrees, merge their branches, remove merged ones
 crucible/scripts/merge-porters.sh list|merge|cleanup [BRANCH...]

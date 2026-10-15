@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 // Result is one card-smoke summary.
@@ -13,6 +14,7 @@ type Result struct {
 	Judged                                               int
 	Pct                                                  string // one decimal, "91.4"
 	Decks, Cards                                         int    // -decks runs only
+	Causes                                               []Cause
 }
 
 var (
@@ -20,6 +22,14 @@ var (
 	pctRE   = regexp.MustCompile(`(\d+\.\d)% of the (\d+) judged`)
 	decksRE = regexp.MustCompile(`smoke probe of (\d+) decklists.*: (\d+) cards`)
 )
+
+// Cause is one line of the refusal table: cards blocked and the error text.
+type Cause struct {
+	Cards int
+	Text  string
+}
+
+var causeRE = regexp.MustCompile(`(?m)^\s+(\d+)  (\S.*)$`)
 
 // ParseSmoke reads the summary block `crucible card-smoke` prints.
 func ParseSmoke(out string) (Result, error) {
@@ -46,6 +56,12 @@ func ParseSmoke(out string) (Result, error) {
 	if d := decksRE.FindStringSubmatch(out); d != nil {
 		r.Decks, _ = strconv.Atoi(d[1])
 		r.Cards, _ = strconv.Atoi(d[2])
+	}
+	if _, tbl, ok := strings.Cut(out, "refusal causes"); ok {
+		for _, m := range causeRE.FindAllStringSubmatch(tbl, -1) {
+			n, _ := strconv.Atoi(m[1])
+			r.Causes = append(r.Causes, Cause{n, m[2]})
+		}
 	}
 	return r, nil
 }

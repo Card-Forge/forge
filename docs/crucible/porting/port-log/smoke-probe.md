@@ -60,13 +60,14 @@ Measured on the full corpus (34,078 cards):
 
 Largest refusal causes over the full corpus (cards blocked):
 
-| Cards | Refusal                                                |
-| ----: | ------------------------------------------------------ |
-|    49 | triggered `AB$`: `Cost$` not resolvable                |
-|    48 | sticker sheets are not ported                          |
-|    40 | `Animate`: `Triggers$` not resolvable                  |
-|    36 | `ChangeZone`: `DestinationAlternative$` not resolvable |
-|    36 | `Token`: `TokenAttacking$` not resolvable              |
+| Cards | Refusal                                         |
+| ----: | ----------------------------------------------- |
+|    49 | `triggered AB$ Cost$ not resolvable`            |
+|    48 | `sticker sheets are not ported (open plan R15)` |
+|    40 | `Animate: Triggers$ not resolvable`             |
+|    36 | `Token: TokenAttacking$ not resolvable`         |
+|    35 | `ChangeZone: SorcerySpeed$ not resolvable`      |
+|    34 | `PutCounter: Monstrosity$ not resolvable`       |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 
