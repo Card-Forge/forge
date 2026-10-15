@@ -92,6 +92,11 @@ public class NameLetterCardsTest extends AITest {
         resolve("Leading Performance", null);
 
         AssertJUnit.assertEquals(1, bears.getCounters(CounterEnumType.P1P1));
+
+        // no nonlegendary creature name begins with a letter outside A-Z
+        Card source = addCard("Air Elemental", me);
+        source.setChosenType("É");
+        AssertJUnit.assertFalse(bears.isValid("Creature.NameStartsWithChosenLetter", me, source, null));
     }
 
     @Test
