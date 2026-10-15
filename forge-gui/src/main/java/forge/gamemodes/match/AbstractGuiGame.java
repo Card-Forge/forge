@@ -572,31 +572,49 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Auto-yield and other input-related code
 
+    // Guards awaitNextInputTimer/awaitNextInputTask. awaitNextInput() runs on the game thread while
+    // cancelAwaitNextInput()/afterGameEnd() and the timer callback run on other threads, so every
+    // access to these two fields must hold this lock (the timer itself can be null/replaced).
+    private final Object awaitNextInputLock = new Object();
     private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
     @Override
     public void awaitNextInput() {
-        checkAwaitNextInputTimer();
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
-        awaitNextInputTask = new TimerTask() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(() -> {
-                    checkAwaitNextInputTimer();
-                    synchronized (awaitNextInputTimer) {
-                        if (awaitNextInputTask != null) {
+        synchronized (awaitNextInputLock) {
+            checkAwaitNextInputTimer();
+            // drop any task still pending so only one is ever in flight
+            if (awaitNextInputTask != null) {
+                awaitNextInputTask.cancel();
+                awaitNextInputTask = null;
+            }
+            // use a local so the task being scheduled can't be swapped/cancelled via the shared field
+            final TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    FThreads.invokeInEdtLater(() -> {
+                        synchronized (awaitNextInputLock) {
+                            if (awaitNextInputTask != this) {
+                                return; // cancelled or superseded before it fired
+                            }
+                            awaitNextInputTask = null;
                             String waitingForName = updatePromptForAwait(getCurrentPlayer());
                             if (GuiBase.isNetPlay(AbstractGuiGame.this)) {
                                 showWaitingTimer(getCurrentPlayer(), waitingForName);
                             }
-                            awaitNextInputTask = null;
                         }
-                    }
-                });
+                    });
+                }
+            };
+            awaitNextInputTask = task;
+            try {
+                awaitNextInputTimer.schedule(task, 250);
+            } catch (final IllegalStateException ex) {
+                // timer was cancelled (e.g. game ending); nothing left to wait for
+                awaitNextInputTask = null;
             }
-        };
-        awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+        }
     }
 
     private void checkAwaitNextInputTimer() {
@@ -728,10 +746,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public final void cancelAwaitNextInput() {
         cancelWaitingTimer();
-        if (awaitNextInputTimer == null) {
-            return;
-        }
-        synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
+        synchronized (awaitNextInputLock) { //ensure task doesn't reset awaitNextInputTask during this block
+            if (awaitNextInputTimer == null) {
+                return;
+            }
             if (awaitNextInputTask != null) {
                 try {
                     awaitNextInputTask.cancel(); //cancel timer once next input shown if needed
@@ -964,9 +982,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void afterGameEnd() {
         cancelWaitingTimer();
-        if (awaitNextInputTimer != null) {
-            awaitNextInputTimer.cancel();
-            awaitNextInputTimer = null;
+        synchronized (awaitNextInputLock) {
+            if (awaitNextInputTimer != null) {
+                awaitNextInputTimer.cancel();
+                awaitNextInputTimer = null;
+            }
+            awaitNextInputTask = null;
         }
         daytime = null;
     }
