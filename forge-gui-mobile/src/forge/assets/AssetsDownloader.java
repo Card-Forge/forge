@@ -182,6 +182,11 @@ public class AssetsDownloader {
         }
 
         FileHandle versionFile = assetsDir.child("version.txt");
+        // Archipelago/Randomzer: Remember which APK build the assets were downloaded for and re-download when a different APK is installed.
+        FileHandle apkBuildFile = assetsDir.child("apkbuild.txt");
+        String apkBuild = buildTxtFileHandle.exists() ? buildTxtFileHandle.readString().trim() : "";
+        boolean apkBuildMatches = apkBuild.isEmpty() || (apkBuildFile.exists() && apkBuild.equals(apkBuildFile.readString().trim()));
+        boolean onlyApkBuildChanged = false;
         if (!versionFile.exists()) {
             try {
                 versionFile.file().createNewFile();
@@ -192,12 +197,17 @@ public class AssetsDownloader {
                 return;
             }
         } else if (versionString.equals(FileUtil.readFileToString(versionFile.file())) && FSkin.getSkinDir() != null) {
-            run(runnable);
-            return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
+            if (apkBuildMatches) {
+                run(runnable);
+                return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
+            }
+            onlyApkBuildChanged = true;
+            build += "\nA new app build was installed, its resource files may have changed.\n";
         }
 
         FileHandle resBuildDate = resDir.child("build.txt");
-        if (buildTxtFileHandle.exists() && resBuildDate.exists()) {
+        // The APK and assets.zip are built separately, so their build dates never match: skip the mandatory date check
+        if (!onlyApkBuildChanged && buildTxtFileHandle.exists() && resBuildDate.exists()) {
             String buildString = buildTxtFileHandle.readString();
             String target = resBuildDate.readString();
             try {
@@ -220,6 +230,8 @@ public class AssetsDownloader {
         boolean canIgnoreDownload = resDir.exists() && FSkin.getAllSkins() != null && !FileUtil.readFileToString(versionFile.file()).isEmpty(); //don't allow ignoring download if resource files haven't been previously loaded
         if (mandatory && connectedToInternet)
             canIgnoreDownload = false;
+        if (onlyApkBuildChanged)
+            canIgnoreDownload = true;
 
         if (!connectedToInternet) {
             message = "Updated resource files cannot be downloaded due to lack of internet connection.\n\n";
@@ -264,6 +276,8 @@ public class AssetsDownloader {
                     Forge.exitAnimation(false); //exit if can't ignore download
                     return;
                 } else {
+                    if (!apkBuild.isEmpty())
+                        FileUtil.writeFile(apkBuildFile.file(), apkBuild);
                     run(runnable);
                     return;
                 }
@@ -293,12 +307,16 @@ public class AssetsDownloader {
         if (connectedToInternet) {
             if (versionFile.exists())
                 FileUtil.writeFile(versionFile.file(), versionString);
+            if (!apkBuild.isEmpty())
+                FileUtil.writeFile(apkBuildFile.file(), apkBuild);
         }
         //final check if temp.zip exists then extraction is not complete...
         FileHandle check = assetsDir.child("temp.zip");
         if (check.exists()) {
             if (versionFile.exists())
                 versionFile.delete();
+            if (apkBuildFile.exists())
+                apkBuildFile.delete();
             check.delete();
         }
         // auto restart after update
