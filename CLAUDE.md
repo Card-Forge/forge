@@ -158,6 +158,10 @@ crucible/scripts/unported-apis.sh 30
 # How many cards the engine plays, and why the rest are refused (smoke-probe.md); ~2 min for the whole corpus
 cd crucible && go run ./cmd/crucible card-smoke -all -workers 8     # or -decks <dir> / -cards "A,B"
 
+# After a worktree porter hands back: commit+merge, remeasure, rewrite the quoted smoke numbers; finish = prettier,
+# markdownlint, docs commit, worktree cleanup (forced only when merged and clean)
+cd crucible && go run ./tools/landporter land BRANCH "msg" && go run ./tools/landporter finish BRANCH "docs: msg"
+
 # Parallel porters (port-batch skill): list agent worktrees, merge their branches, remove merged ones
 crucible/scripts/merge-porters.sh list|merge|cleanup [BRANCH...]
 
