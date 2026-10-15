@@ -59,7 +59,7 @@ Create these with *Run > Edit Configurations > + > Maven*. Settings that apply t
 
 | Name | Command line (*Run* field) | Extra settings |
 |---|---|---|
-| **forge-android** | `clean verify -P android-dev-build -pl forge-gui-android -am -DskipTests` | For debugging, add property `android.manifest.debuggable` = `true` (*Modify options > Java options > Properties*) |
+| **forge-android** | `clean verify -P android-dev-build -pl forge-gui-android -am -DskipTests` | For debugging, add property `android.release` = `false` (*Modify options > Java options > Properties*): a debug build keeps the debugging information that the default release-mode build strips, and is debuggable |
 | **forge-android-push-res** | `org.codehaus.mojo:exec-maven-plugin:3.4.1:exec -N -Dexec.executable=java -Dexec.args=forge-gui-android/tools/PushResToDevice.java` | |
 | **forge-android-deploy** | `initialize android:deploy-apk android:run -P android-dev-build -pl forge-gui-android` | Property `android.deployapk.filename` = `${project.build.directory}/${project.build.finalName}-aligned-debugSigned.apk` (type it literally). For debugging, add property `android.run.debug` = `true`. *Before launch*: **forge-android**, then **forge-android-push-res** |
 | **forge-android-assets** | `clean package -P android-release-build -pl forge-gui-android -am -DskipTests` | |
@@ -83,16 +83,21 @@ phone (**forge-android-push-res**), installs the app and starts it.
 
 ## 4. Debugging on a device
 
-1. Add the two debugging properties from the table (`android.manifest.debuggable` on
-   **forge-android**, `android.run.debug` on **forge-android-deploy**) and run **forge-android-deploy**.
+1. Add the two debugging properties from the table (`android.release` = `false` on
+   **forge-android**, `android.run.debug` = `true` on **forge-android-deploy**) and run **forge-android-deploy**.
 2. Allow any permissions the app asks for. It then shows *"Waiting for debugger"*.
 3. In IntelliJ press `Ctrl+Shift+A`, search for **Attach Debugger to Android Process**, pick your device
    and the process **`forge.app.dev`**.
 
-Remove the two properties again when you are not debugging (a debuggable build is slower and should
-not be released).
+Remove the two properties again when you are not debugging: a debug build is slower, and **must not be
+released** (see the check at the start of [Making a release](#5-making-a-release-windowslinux--android)).
 
 ## 5. Making a release (Windows/Linux + Android)
+
+> **Before you build a release: remove the debugging properties.** Open your run configurations and
+> delete `android.release` = `false` from **forge-android** and `android.run.debug` = `true` from
+> **forge-android-deploy** (*Modify options > Java options > Properties*). A release built with them is
+> a slower debug build that waits for a debugger on start-up and must not be shipped to players.
 
 Build in this order, and copy each result to a folder outside `target/` before the next step,
 because every build starts with `clean`.
@@ -100,7 +105,9 @@ because every build starts with `clean`.
 1. **Windows/Linux:** run **forge-desktop-release** (this is the same build upstream's CI uses).
    Upload from `forge-installer/target/`: `forge-installer-<version>.jar` and `forge-installer-<version>.tar.bz2`.
    This also creates `forge-gui-desktop/target/CHANGES.txt`, which step 3 needs.
-2. **Android APK:** run **forge-android** *without* the debugging property. Upload
+2. **Android APK:** run **forge-android** (with the debugging properties removed, see above).
+   **Check the build output** for the line `Generating release apk.`; if it says `Generating debug apk.`,
+   the `android.release` = `false` property is still set: remove it and build again. Then upload
    `forge-gui-android/target/forge-dev-android-<version>-aligned-debugSigned.apk`.
 3. **`assets.zip`:** run **forge-android-assets**. Upload `forge-gui-android/target/assets.zip` (~190 MB).
 4. Create the GitHub release on https://github.com/BramTeurlings/forge-archipelago/releases and attach the files.
