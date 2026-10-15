@@ -27,7 +27,7 @@ public class MulliganService {
     public MulliganService(Player player) {
         firstPlayer = player;
         game = firstPlayer.getGame();
-        danDan = game.getRules().hasAppliedVariant(GameType.DanDan);
+        danDan = game.getRules().isDanDan();
     }
 
     public void perform() {

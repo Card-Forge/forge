@@ -7,6 +7,11 @@ import forge.deck.Deck;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.replacement.ReplacementHandler;
+import org.testng.annotations.DataProvider;
+import java.util.Map;
+import java.util.HashMap;
 import forge.game.card.CardCollectionView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -29,6 +34,106 @@ import static org.testng.Assert.assertTrue;
 
 /** Focused execution tests for the shipped DanDan shared-pile effects. */
 public class DanDanEffectsTest extends AITest {
+    @DataProvider(name = "multiplayerSearches")
+    public Object[][] multiplayerSearches() {
+        return new Object[][] {{true, "Weird Harvest", "Grizzly Bears", ZoneType.Hand},
+                {true, "New Frontiers", "Island", ZoneType.Battlefield},
+                {false, "Weird Harvest", "Grizzly Bears", ZoneType.Hand},
+                {false, "New Frontiers", "Island", ZoneType.Battlefield}};
+    }
+
+    @Test(dataProvider = "multiplayerSearches")
+    public void multiplayerSearchAllocatesDistinctPhysicalCards(boolean shared, String spell,
+            String choice, ZoneType destination) {
+        Game game = newGame(shared);
+        Player first = game.getPlayers().get(0);
+        Player second = game.getPlayers().get(1);
+        Card one = addCardToZone(choice, first, ZoneType.Library);
+        Card two = addCardToZone(choice, shared ? first : second, ZoneType.Library);
+        Map<Player, Integer> selected = new HashMap<>();
+        Map<Player, List<Integer>> revealed = new HashMap<>();
+        installSearchControllers(game, selected, revealed);
+        Card source = addCardToZone(spell, first, ZoneType.Hand);
+        SpellAbility ability = source.getFirstSpellAbility();
+        ability.setActivatingPlayer(first);
+        ability.setXManaCostPaid(1);
+        // Exercise the existing result consumers as well as the stock search path.
+        ability.putParam("RememberChanged", "True");
+        ability.putParam("Reveal", "True");
+        AbilityUtils.resolve(ability);
+        assertEquals(selected.size(), 2);
+        assertEquals(Set.copyOf(selected.values()), Set.of(one.getId(), two.getId()),
+                "each searching player receives a distinct available physical card");
+        for (Player player : game.getPlayers()) {
+            Card received = game.findById(selected.get(player));
+            assertTrue(player.getCardsIn(destination).contains(received));
+            assertEquals(received.getOwners(), Set.of(player));
+            assertEquals(revealed.get(player), List.of(received.getId()),
+                    "the reveal belongs to the player whose instruction actually moved this card");
+            if (destination == ZoneType.Battlefield) {
+                assertEquals(received.getController(), player);
+                assertTrue(received.isTapped());
+            }
+        }
+        assertEquals(java.util.stream.StreamSupport.stream(source.getRemembered().spliterator(), false).filter(Card.class::isInstance)
+                .map(Card.class::cast).map(Card::getId).collect(java.util.stream.Collectors.toSet()),
+                Set.of(one.getId(), two.getId()));
+    }
+
+    @Test
+    public void preventedSearchDoesNotRememberOrRevealAnUnmovedSelection() {
+        Game game = newGame(true);
+        Player first = game.getPlayers().get(0);
+        Card one = addCardToZone("Grizzly Bears", first, ZoneType.Library);
+        Card two = addCardToZone("Grizzly Bears", first, ZoneType.Library);
+        Card blocker = addCard("Island", first);
+        blocker.addReplacementEffect(ReplacementHandler.parseReplacement(
+                "Event$ Moved | ActiveZones$ Battlefield | Origin$ Library | Destination$ Hand | "
+                + "ValidCard$ Creature | Prevent$ True | Description$ Prevent search entry", blocker, true));
+        Map<Player, Integer> selected = new HashMap<>();
+        Map<Player, List<Integer>> revealed = new HashMap<>();
+        installSearchControllers(game, selected, revealed);
+        Card source = addCardToZone("Weird Harvest", first, ZoneType.Hand);
+        SpellAbility ability = source.getFirstSpellAbility();
+        ability.setActivatingPlayer(first);
+        ability.setXManaCostPaid(1);
+        ability.putParam("RememberChanged", "True");
+        AbilityUtils.resolve(ability);
+        assertEquals(Set.copyOf(cardIds(first.getCardsIn(ZoneType.Library))), Set.of(one.getId(), two.getId()));
+        assertTrue(!source.hasRemembered(), "a prevented movement is not a changed card");
+        assertTrue(revealed.values().stream().allMatch(List::isEmpty),
+                "the post-move reveal cannot attribute an unaccepted result to either searcher");
+    }
+
+    private void installSearchControllers(Game game, Map<Player, Integer> selected,
+            Map<Player, List<Integer>> revealed) {
+        for (Player player : game.getPlayers()) {
+            player.dangerouslySetController(new PlayerControllerAi(game, player,
+                    new LobbyPlayerAi(player.getName(), null)) {
+                @Override
+                public boolean confirmAction(SpellAbility sa, forge.game.player.PlayerActionConfirmMode mode,
+                        String message, List<String> options, Card cardToShow, Map<String, Object> params) {
+                    return true;
+                }
+
+                @Override
+                public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin,
+                        SpellAbility sa, CardCollection offered, DelayedReveal delayedReveal,
+                        String prompt, boolean optional, Player decider) {
+                    Card card = offered.getFirst();
+                    selected.put(player, card.getId());
+                    return card;
+                }
+
+                @Override
+                public void reveal(CardCollectionView cards, ZoneType zone, Player owner,
+                        String prefix, boolean suffix) {
+                    revealed.computeIfAbsent(owner, key -> new ArrayList<>()).addAll(cardIds(cards));
+                }
+            });
+        }
+    }
+
     @Test
     public void fengrafFindsCreatureInCommonGraveyardAndReturnsItToActivator() {
         Game game = newGame(true);

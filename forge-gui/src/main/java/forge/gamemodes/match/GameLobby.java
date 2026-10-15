@@ -35,6 +35,9 @@ import java.util.*;
 
 public abstract class GameLobby implements IHasGameType {
     private final static int MAX_PLAYERS = 8;
+    private final static Set<GameType> EXCLUSIVE_GAME_FORMATS = EnumSet.of(
+            GameType.DanDan, GameType.Commander, GameType.Oathbreaker, GameType.Brawl,
+            GameType.TinyLeaders, GameType.MomirBasic, GameType.MoJhoSto);
 
     private GameLobbyData data = new GameLobbyData();
     private GameType currentGameType = GameType.Constructed;
@@ -289,6 +292,24 @@ public abstract class GameLobby implements IHasGameType {
         data.slots.remove(index);
         applyArchenemyTeams();
         updateView(false);
+    }
+
+    /** Replace the dropdown's exclusive format after checking retained variant overlays. */
+    public void replaceGameFormat(final GameType variant) {
+        if (!EXCLUSIVE_GAME_FORMATS.contains(variant)) {
+            throw new IllegalArgumentException("Not an exclusive game format: " + variant);
+        }
+        if (variant == GameType.DanDan) {
+            for (final GameType applied : data.appliedVariants) {
+                if (!EXCLUSIVE_GAME_FORMATS.contains(applied) && isIncompatibleWithDanDan(applied)) {
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage(
+                            "lblDanDanIncompatibleVariant", applied.toString()));
+                    return;
+                }
+            }
+        }
+        data.appliedVariants.removeAll(EXCLUSIVE_GAME_FORMATS);
+        applyVariant(variant);
     }
 
     public void applyVariant(final GameType variant) {

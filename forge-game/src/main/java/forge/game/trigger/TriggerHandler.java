@@ -400,39 +400,39 @@ public class TriggerHandler {
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
         }
-
         if (regtrig.isSuppressed()) {
-            return false; // Trigger removed by effect
+            return false; // Trigger removed by effect.
         }
+        return regtrig.testWithController(getTriggerController(regtrig, runParams), () -> {
+            /* this trigger can only be activated once per turn, verify it hasn't already run */
+            if (regtrig.limitByActivations(1) == 0) {
+                return false;
+            }
 
-        /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (regtrig.limitByActivations(1) == 0) {
-            return false;
-        }
+            if (!regtrig.requirementsCheck(game)) {
+                return false; // Conditions aren't right.
+            }
 
-        if (!regtrig.requirementsCheck(game)) {
-            return false; // Conditions aren't right.
-        }
+            if (!regtrig.meetsRequirementsOnTriggeredObjects(game, runParams)) {
+                return false; // Conditions aren't right.
+            }
 
-        if (!regtrig.meetsRequirementsOnTriggeredObjects(game, runParams)) {
-            return false; // Conditions aren't right.
-        }
+            if (!regtrig.performTest(runParams)) {
+                return false; // Test failed.
+            }
 
-        if (!regtrig.performTest(runParams)) {
-            return false; // Test failed.
-        }
+            if (TriggerType.Always.equals(regtrig.getMode()) && game.getStack().hasStateTrigger(regtrig.getId())) {
+                return false; // State triggers that are already on the stack
+                // don't trigger again.
+            }
 
-        if (TriggerType.Always.equals(regtrig.getMode()) && game.getStack().hasStateTrigger(regtrig.getId())) {
-            return false; // State triggers that are already on the stack
-            // don't trigger again.
-        }
+            // check if any static abilities are disabling the trigger (Torpor Orb and the like)
+            if (!regtrig.isStatic() && StaticAbilityDisableTriggers.disabled(game, regtrig, runParams)) {
+                return false;
+            }
 
-        // check if any static abilities are disabling the trigger (Torpor Orb and the like)
-        if (!regtrig.isStatic() && StaticAbilityDisableTriggers.disabled(game, regtrig, runParams)) {
-            return false;
-        }
-
-        return true;
+            return true;
+        });
     }
 
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {

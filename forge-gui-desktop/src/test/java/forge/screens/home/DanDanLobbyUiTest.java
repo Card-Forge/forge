@@ -32,11 +32,13 @@ import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import org.testng.annotations.Test;
@@ -47,6 +49,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -63,6 +67,177 @@ import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 public class DanDanLobbyUiTest extends AITest {
+    @Test
+    public void swappedHumanSeatSelectsBundledAndCustomSharedDeckAndOnlyOwnerPersistsSleeve() {
+        ensureSkinLoaded();
+        final LobbyTestState oldState = LobbyTestState.capture();
+        final Deck official = getOfficialDeck();
+        final Deck custom = new Deck(official, "DanDan lobby swapped seat regression");
+        FModel.getDecks().getConstructed().add(custom);
+        try {
+            FThreads.invokeInEdtAndWait(() -> {
+                final LocalLobby lobby = new LocalLobby();
+                lobby.getSlot(0).setType(LobbySlotType.AI);
+                lobby.getSlot(1).setType(LobbySlotType.LOCAL);
+                lobby.applyVariant(GameType.DanDan);
+                final VLobby view = new VLobby(lobby);
+                lobby.setListener(view);
+                view.setPlayerChangeListener(lobby::applyToSlot);
+                view.update(true);
+                assertEquals(lobby.getDanDanDeckOwnerSlot(), 1);
+                final FDeckChooser chooser = view.getDeckChoosers().get(1);
+                assertSame(chooser, view.getDeckChoosers().get(0), "both seats show the shared chooser");
+                chooser.setSelectedDeckType(DeckType.CUSTOM_DECK);
+                assertTrue(chooser.getLstDecks().setSelectedString(custom.getName()));
+                chooser.getLstDecks().getSelectCommand().run();
+                assertEquals(lobby.getSlot(1).getDeck().getName(), custom.getName());
+                assertSame(lobby.getSlot(0).getDeck(), lobby.getSlot(1).getDeck());
+
+                final String originalSleeve = custom.getSleeveArtKey();
+                final int originalOffset = custom.getSleeveArtOffset();
+                try {
+                    persistSleeve(view.getPlayerPanels().get(0), "Unauthorized sleeve", 2);
+                    assertEquals(custom.getSleeveArtKey(), originalSleeve,
+                            "the non-owner cannot mutate shared deck metadata before broadcast");
+                    assertEquals(custom.getSleeveArtOffset(), originalOffset);
+                    persistSleeve(view.getPlayerPanels().get(1), "Authorized sleeve", 3);
+                    assertEquals(custom.getSleeveArtKey(), "Authorized sleeve");
+                    assertEquals(FModel.getDecks().getConstructed().get(custom.getName()).getSleeveArtOffset(), 3);
+                } finally {
+                    custom.setSleeveArtKey(originalSleeve);
+                    custom.setSleeveArtOffset(originalOffset);
+                }
+
+                chooser.setSelectedDeckType(DeckType.DAN_DAN_DECK);
+                assertTrue(chooser.getLstDecks().setSelectedString(official.getName()));
+                chooser.getLstDecks().getSelectCommand().run();
+                assertEquals(lobby.getSlot(1).getDeck().getName(), official.getName());
+                assertSame(lobby.getSlot(0).getDeck(), lobby.getSlot(1).getDeck());
+            });
+        } finally {
+            FModel.getDecks().getConstructed().delete(custom.getName());
+            oldState.restore();
+        }
+    }
+
+    @Test
+    public void formatDropdownReplacesExclusiveFormatsButRejectsOverlayConflict() {
+        ensureSkinLoaded();
+        final LobbyTestState oldState = LobbyTestState.capture();
+        final GuiDesktop previousGui = (GuiDesktop) GuiBase.getInterface();
+        GuiBase.setInterface(new DialogCapturingGui());
+        try {
+            FThreads.invokeInEdtAndWait(() -> {
+                final LocalLobby lobby = new LocalLobby();
+                final VLobby view = new VLobby(lobby);
+                lobby.setListener(view);
+                view.setPlayerChangeListener(lobby::applyToSlot);
+                view.update(true);
+                final FComboBoxPanel<GameType> formats = formatCombo(view);
+                formats.setSelectedItem(GameType.Commander);
+                assertTrue(lobby.hasVariant(GameType.Commander));
+                formats.setSelectedItem(GameType.DanDan);
+                assertTrue(lobby.hasVariant(GameType.DanDan));
+                assertFalse(lobby.hasVariant(GameType.Commander));
+                formats.setSelectedItem(GameType.MomirBasic);
+                assertTrue(lobby.hasVariant(GameType.MomirBasic));
+                assertFalse(lobby.hasVariant(GameType.DanDan));
+                formats.setSelectedItem(GameType.DanDan);
+                assertTrue(lobby.hasVariant(GameType.DanDan));
+                assertFalse(lobby.hasVariant(GameType.MomirBasic));
+
+                formats.setSelectedItem(GameType.Commander);
+                lobby.applyVariant(GameType.Archenemy);
+                formats.setSelectedItem(GameType.DanDan);
+                assertTrue(lobby.hasVariant(GameType.Commander), "rejected replacement retains the old format");
+                assertTrue(lobby.hasVariant(GameType.Archenemy));
+                assertFalse(lobby.hasVariant(GameType.DanDan));
+                assertEquals(formats.getSelectedItem(), GameType.Commander);
+            });
+        } finally {
+            oldState.restore();
+            GuiBase.setInterface(previousGui);
+        }
+    }
+
+    private static Deck getOfficialDeck() {
+        for (final DeckProxy proxy : DeckProxy.getAllDanDanDecks()) {
+            if (proxy.getName().equals("DanDan_SecretLair")) return proxy.getDeck();
+        }
+        throw new AssertionError("bundled DanDan deck was absent");
+    }
+
+    @Test
+    public void onlySharedDeckOwnerMayPersistSleeveAndCustomDeckRemainsWritable() {
+        ensureSkinLoaded();
+        final LobbyTestState oldState = LobbyTestState.capture();
+        final Deck custom = new Deck(getOfficialDeck(), "DanDan lobby sleeve authority regression");
+        final Path customFile = Path.of(ForgeConstants.DECK_CONSTRUCTED_DIR, custom.getName() + ".dck");
+        FModel.getDecks().getConstructed().add(custom);
+        try {
+            FThreads.invokeInEdtAndWait(() -> {
+                final TestLobby lobby = new TestLobby(null);
+                lobby.applyVariant(GameType.DanDan);
+                final VLobby view = new VLobby(lobby);
+                lobby.setListener(view);
+                view.setPlayerChangeListener(lobby::applyToSlot);
+                view.update(true);
+                final FDeckChooser chooser = view.getDeckChoosers().get(0);
+                chooser.setSelectedDeckType(DeckType.CUSTOM_DECK);
+                assertTrue(chooser.getLstDecks().setSelectedString(custom.getName()));
+                chooser.getLstDecks().getSelectCommand().run();
+                assertSame(lobby.getSlot(0).getDeck(), custom);
+                assertSame(lobby.getSlot(1).getDeck(), custom);
+
+                final String beforeKey = custom.getSleeveArtKey();
+                final int beforeOffset = custom.getSleeveArtOffset();
+                persistSleeve(view.getPlayerPanels().get(1), "Rejected remote sleeve", 7);
+                assertEquals(custom.getSleeveArtKey(), beforeKey);
+                assertEquals(custom.getSleeveArtOffset(), beforeOffset);
+                persistSleeve(view.getPlayerPanels().get(0), "Saved custom sleeve", 5);
+                assertEquals(custom.getSleeveArtKey(), "Saved custom sleeve");
+                try {
+                    assertTrue(Files.readString(customFile).contains("Saved custom sleeve"),
+                            "an authoritative custom deck sleeve is written to user storage");
+                } catch (final IOException exception) {
+                    throw new AssertionError("could not read the custom deck save", exception);
+                }
+            });
+        } finally {
+            FModel.getDecks().getConstructed().delete(custom.getName());
+            oldState.restore();
+        }
+    }
+
+    private static void persistSleeve(final PlayerPanel panel, final String key, final int offset) {
+        try {
+            final Method method = PlayerPanel.class.getDeclaredMethod("persistSleeveToDeck", String.class, int.class);
+            method.setAccessible(true);
+            method.invoke(panel, key, offset);
+        } catch (final ReflectiveOperationException exception) {
+            throw new AssertionError("could not exercise the sleeve persistence path", exception);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static FComboBoxPanel<GameType> formatCombo(final VLobby view) {
+        try {
+            final Field field = VLobby.class.getDeclaredField("cboFormatPanel");
+            field.setAccessible(true);
+            return (FComboBoxPanel<GameType>) field.get(view);
+        } catch (final ReflectiveOperationException exception) {
+            throw new AssertionError("could not reach the existing format dropdown", exception);
+        }
+    }
+
+    private static final class DialogCapturingGui extends GuiDesktop {
+        @Override
+        public int showOptionDialog(final String message, final String title, final FSkinProp icon,
+                                    final List<String> options, final int defaultOption) {
+            return 0;
+        }
+    }
+
     @Test
     public void actualChooserRemoteReadyAndStartUseOneAuthoritativeDeck() {
         ensureSkinLoaded();

@@ -404,12 +404,12 @@ public class WrappedAbility extends Ability {
 
         if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
             // Most State triggers don't have "Intervening If"
-            if (!regtrig.requirementsCheck(game)) {
-                return;
-            }
             // Since basic requirements check only cares about whether it's "Activated"
             // Also check on triggered object specific requirements on resolution (e.g. evolve)
-            if (!regtrig.meetsRequirementsOnTriggeredObjects(game, getTriggeringObjects())) {
+            // Shared-source conditions use the same captured player as trigger collection.
+            if (!regtrig.testWithController(getActivatingPlayer(),
+                    () -> regtrig.requirementsCheck(game)
+                            && regtrig.meetsRequirementsOnTriggeredObjects(game, getTriggeringObjects()))) {
                 return;
             }
         }

@@ -13,6 +13,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -88,8 +89,13 @@ public class DanDanSetupTest extends AITest {
         assertEquals(danDanPlayer.getStartingHand(), 7);
     }
 
-    @Test
-    public void matchSetupCreatesOneLibraryAndGraveyardForBothPlayers() {
+    @DataProvider(name = "danDanRules")
+    public Object[][] danDanRules() {
+        return new Object[][] {{false}, {true}};
+    }
+
+    @Test(dataProvider = "danDanRules")
+    public void matchSetupCreatesOneLibraryAndGraveyardForBothPlayers(boolean primary) {
         final Deck deck = getOfficialDeckFromChooserSource();
         final Set<GameType> variants = EnumSet.of(GameType.DanDan);
         final ArrayList<RegisteredPlayer> registeredPlayers = new ArrayList<>();
@@ -98,8 +104,10 @@ public class DanDanSetupTest extends AITest {
         registeredPlayers.add(RegisteredPlayer.forVariants(2, variants, deck, null, false, null, null)
                 .setPlayer(new LobbyPlayerAi("Player two", null)));
 
-        final GameRules rules = new GameRules(GameType.Constructed);
-        rules.setAppliedVariants(variants);
+        final GameRules rules = new GameRules(primary ? GameType.DanDan : GameType.Constructed);
+        if (!primary) {
+            rules.setAppliedVariants(variants);
+        }
         final Match match = new Match(rules, registeredPlayers, "DanDan setup test");
         final Game game = match.createGame();
         final boolean[] setupHookReached = {false};

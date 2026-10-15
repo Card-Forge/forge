@@ -517,15 +517,12 @@ public final class DanDanTwoJvmMatchUiTest {
         private static final AtomicReference<CMatchUI> ACTIVE_TELLING_TIME_UI = new AtomicReference<>();
         private static final AtomicReference<FGameClient> ACTIVE_REMOTE_CLIENT = new AtomicReference<>();
         private static volatile boolean renderedTellingTimeMode;
-        private static volatile boolean inverseRenderedTellingTimeMode;
 
         public static void main(final String[] args) {
             final String role = args.length > 0 ? args[0] : "UNKNOWN";
             final int port = args.length > 1 ? Integer.parseInt(args[1]) : -1;
             final boolean continueToNextGame = args.length > 2 && "NPLUS1".equals(args[2]);
             renderedTellingTimeMode = args.length > 3 && "INVERSE_RENDERED_TELLING_TIME".equals(args[3]);
-            inverseRenderedTellingTimeMode = args.length > 3
-                    && "INVERSE_RENDERED_TELLING_TIME".equals(args[3]);
             WORKER_COMMANDS = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
             TELLING_TIME_SETUP.set(null);
             TELLING_TIME_START_HOOK_FAILURE.set(null);
@@ -547,7 +544,7 @@ public final class DanDanTwoJvmMatchUiTest {
                 RESULT.println(session.receipt);
                 RESULT.flush();
                 BufferedReader commands = WORKER_COMMANDS;
-                if (inverseRenderedTellingTimeMode) {
+                if (renderedTellingTimeMode) {
                     runInverseRenderedTellingTimeCommand(role, commands);
                 }
                 final String outcomeCommand = "HOST".equals(role) ? "CONCEDE" : "AWAIT_OUTCOME";
@@ -797,7 +794,7 @@ public final class DanDanTwoJvmMatchUiTest {
             final PlayerControllerHuman controller = state.controller();
             final Cleanup abort = () -> abortHostSession(match, server, desktop);
             final Continuation continuation = gameOrdinal == 1 ? () -> {
-                if (inverseRenderedTellingTimeMode) match.setStartGameHook(null);
+                if (renderedTellingTimeMode) match.setStartGameHook(null);
                 final String clicked = clickNextGame(ui, "HOST", state.gameId());
                 final Game nextGame = awaitNextActualGame(match, game, state.gameId());
                 final UiSnapshot nextState = driveNextGameUi(ui, "HOST", 0, state.gameId(), true, nextGame);
@@ -1109,13 +1106,12 @@ public final class DanDanTwoJvmMatchUiTest {
                 publishUiProgress(role, expectedSeat, state, choiceKind, choiceQueried, startSeen, startClicked,
                         mulliganSeen, answeredMulligan, category, action);
 
-                if (inverseRenderedTellingTimeMode && answeredMulligan && !inverseMain1SkipCoordinated
+                if (renderedTellingTimeMode && answeredMulligan && !inverseMain1SkipCoordinated
                         && state != null && ("REMOTE".equals(role) || TELLING_TIME_SETUP.get() != null)) {
                     coordinateInverseHostMain1Skip(ui, role, expectedSeat, expectedGame, state.gameId());
                     inverseMain1SkipCoordinated = true;
                 }
-                if (renderedTellingTimeMode && answeredMulligan
-                        && (!inverseRenderedTellingTimeMode || inverseMain1SkipCoordinated)) {
+                if (renderedTellingTimeMode && answeredMulligan && inverseMain1SkipCoordinated) {
                     passOpeningPriorityOnEdt(ui, role, expectedSeat, expectedGame,
                             passedHostPhases, passedRemotePhases);
                 }
@@ -1543,7 +1539,7 @@ public final class DanDanTwoJvmMatchUiTest {
                     + "|INPUT_AFTER=" + (action == null ? "NOT_SAMPLED" : action.inputAfter())
                     + "|INPUT_OWNER_AFTER=" + (action == null ? -1 : action.inputOwnerAfter())
                     + "|INPUT_CHANGED=" + (action != null && action.inputChanged() ? 1 : 0)
-                    + (inverseRenderedTellingTimeMode
+                    + (renderedTellingTimeMode
                             ? "|VIEW_ID=" + (state == null ? -1 : state.gameId())
                                     + "|TRACKER=" + (state == null ? -1 : state.trackerToken())
                                     + ("HOST".equals(role) ? "|OPENING_ATTEMPT="
@@ -2965,7 +2961,7 @@ public final class DanDanTwoJvmMatchUiTest {
                     match.setStartGameHook(() -> {
                         try {
                             final TellingTimeSetup setup = prepareRenderedTellingTime(
-                                    match.getGame(), inverseRenderedTellingTimeMode);
+                                    match.getGame(), renderedTellingTimeMode);
                             TELLING_TIME_SETUP.set(setup);
                         } catch (Throwable failure) {
                             TELLING_TIME_START_HOOK_FAILURE.compareAndSet(null, failure);

@@ -19,6 +19,10 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementType;
+import forge.game.trigger.TriggerType;
+import org.testng.annotations.DataProvider;
+import java.util.Set;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.WrappedAbility;
@@ -40,6 +44,250 @@ import static org.testng.Assert.assertTrue;
 
 /** Official-card ownership lifecycle checks across Item 3 recipients and Item 4 zone transitions. */
 public class DanDanOfficialOwnershipTest extends AITest {
+    @DataProvider(name = "sharedAbilitySeats")
+    public Object[][] sharedAbilitySeats() {
+        return new Object[][] {{true, 0}, {true, 1}, {false, 0}, {false, 1}};
+    }
+
+    @Test(dataProvider = "sharedAbilitySeats")
+    public void dredgeEligibilityAndResolutionUseTheDrawingOwner(boolean shared, int seat) {
+        Game game = newGame(shared);
+        Player first = game.getPlayers().get(0);
+        Player drawing = game.getPlayers().get(seat);
+        Card imp = addCardToZone("Stinkweed Imp", first, ZoneType.Graveyard);
+        Set<Player> owners = Set.copyOf(imp.getOwners());
+        Card lki = CardCopyService.getLKICopy(imp);
+        for (int i = 0; i < 10; i++) {
+            addCardToZone("Island", drawing, ZoneType.Library);
+        }
+        boolean[] prompted = {false};
+        drawing.dangerouslySetController(new PlayerControllerAi(game, drawing,
+                new LobbyPlayerAi(drawing.getName(), null)) {
+            @Override
+            public boolean confirmReplacementEffect(ReplacementEffect replacement, SpellAbility effect,
+                    GameEntity affected, String question) {
+                assertSame(replacement.getHostCard(), imp);
+                assertEquals(imp.getOwners(), owners);
+                assertNull(imp.getExplicitController());
+                assertSame(imp.getController(), first);
+                assertEquals(lki.getOwners(), owners);
+                assertNull(lki.getExplicitController());
+                assertSame(effect.getActivatingPlayer(), drawing);
+                prompted[0] = true;
+                return true;
+            }
+        });
+        Map<AbilityKey, Object> params = AbilityKey.mapFromAffected(drawing);
+        boolean eligible = shared || seat == 0;
+        assertEquals(game.getReplacementHandler().getReplacementList(ReplacementType.Draw, params, null)
+                .stream().anyMatch(re -> re.getHostCard().getId() == imp.getId()), eligible);
+        drawing.drawCards(1);
+        assertEquals(prompted[0], eligible);
+        assertEquals(drawing.getCardsIn(ZoneType.Hand).contains(imp), eligible);
+        assertEquals(drawing.getCardsIn(ZoneType.Library).size(), eligible ? 5 : 9);
+        if (eligible) {
+            assertEquals(game.getCardState(imp).getOwners(), Set.of(drawing));
+        } else {
+            assertTrue(first.getCardsIn(ZoneType.Graveyard).contains(imp));
+        }
+        assertEquals(lki.getOwners(), owners);
+        assertNull(lki.getExplicitController());
+    }
+
+    @Test(dataProvider = "sharedAbilitySeats")
+    public void squeeEligibilityAndResolutionUseTheUpkeepOwner(boolean shared, int seat) {
+        Game game = newGame(shared);
+        Player first = game.getPlayers().get(0);
+        Player upkeep = game.getPlayers().get(seat);
+        Card squee = addCardToZone("Squee, Goblin Nabob", first, ZoneType.Graveyard);
+        Set<Player> owners = Set.copyOf(squee.getOwners());
+        Card lki = CardCopyService.getLKICopy(squee);
+        boolean[] prompted = {false};
+        upkeep.dangerouslySetController(new PlayerControllerAi(game, upkeep,
+                new LobbyPlayerAi(upkeep.getName(), null)) {
+            @Override
+            public boolean confirmTrigger(WrappedAbility wrapper) {
+                assertSame(wrapper.getActivatingPlayer(), upkeep);
+                assertSame(wrapper.getDecider(), upkeep);
+                assertEquals(squee.getOwners(), owners);
+                assertNull(squee.getExplicitController());
+                assertSame(squee.getController(), first);
+                prompted[0] = true;
+                return true;
+            }
+        });
+        game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, upkeep);
+        game.getTriggerHandler().registerActiveTrigger(squee, false);
+        Map<AbilityKey, Object> params = AbilityKey.mapFromPlayer(upkeep);
+        params.put(AbilityKey.Phase, PhaseType.UPKEEP);
+        game.getTriggerHandler().runTrigger(TriggerType.Phase, params, true);
+        // Eligibility and D3 control must survive the waiting queue and an active-player change.
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, first);
+        game.getTriggerHandler().runWaitingTriggers();
+        boolean eligible = shared || seat == 0;
+        assertEquals(game.getStack().hasSimultaneousStackEntries(), eligible);
+        if (eligible) {
+            assertTrue(game.getStack().addAllTriggeredAbilitiesToStack());
+            assertSame(game.getStack().peekAbility().getActivatingPlayer(), upkeep);
+            game.getStack().resolveStack();
+        }
+        assertEquals(prompted[0], eligible);
+        assertEquals(upkeep.getCardsIn(ZoneType.Hand).contains(squee), eligible);
+        assertEquals(lki.getOwners(), owners);
+        assertNull(lki.getExplicitController());
+    }
+
+    @DataProvider(name = "ghoulEndSteps")
+    public Object[][] ghoulEndSteps() {
+        return new Object[][] {{true, 0, true, false}, {true, 1, true, false},
+                {true, 0, false, false}, {true, 1, false, false},
+                {false, 0, true, false}, {false, 1, true, false},
+                {false, 0, false, false}, {false, 1, false, false},
+                {true, 0, true, true}, {true, 1, true, true},
+                {false, 0, true, true}, {false, 1, true, true}};
+    }
+
+    @Test(dataProvider = "ghoulEndSteps")
+    public void silversmoteGhoulRechecksLifeGainForItsCapturedController(boolean shared, int seat,
+            boolean gainedLife, boolean resetBeforeResolution) {
+        Game game = newGame(shared);
+        Player endStep = game.getPlayers().get(seat);
+        Player other = game.getPlayers().get(1 - seat);
+        Player sourceOwner = shared ? game.getPlayers().get(0) : endStep;
+        Card ghoul = addCardToZone("Silversmote Ghoul", sourceOwner, ZoneType.Graveyard);
+        Set<Player> owners = Set.copyOf(ghoul.getOwners());
+        Card lki = CardCopyService.getLKICopy(ghoul);
+        (gainedLife ? endStep : other).gainLife(3, ghoul, null);
+        assertEquals(endStep.getLifeGainedThisTurn(), gainedLife ? 3 : 0);
+        assertEquals(other.getLifeGainedThisTurn(), gainedLife ? 0 : 3);
+        boolean[] executed = {false};
+        endStep.dangerouslySetController(new PlayerControllerAi(game, endStep,
+                new LobbyPlayerAi(endStep.getName(), null)) {
+            @Override
+            public void playSpellAbilityNoStack(SpellAbility ability, boolean canSetupTargets) {
+                assertSame(ability.getHostCard(), ghoul);
+                assertSame(ability.getTrigger().getHostCard(), ghoul,
+                        "the resolution check restores the trigger before running its ability");
+                assertSame(ability.getActivatingPlayer(), endStep);
+                assertSame(game.getCardState(ghoul), ghoul);
+                assertSame(ghoul.getZone(), sourceOwner.getZone(ZoneType.Graveyard));
+                assertEquals(ghoul.getOwners(), owners);
+                assertNull(ghoul.getExplicitController());
+                assertSame(ghoul.getController(), sourceOwner);
+                assertSame(ghoul.getView().getController(), sourceOwner.getView());
+                executed[0] = true;
+                super.playSpellAbilityNoStack(ability, canSetupTargets);
+            }
+        });
+        game.getPhaseHandler().devModeSet(PhaseType.END_OF_TURN, endStep);
+        game.getTriggerHandler().registerActiveTrigger(ghoul, false);
+        Map<AbilityKey, Object> params = AbilityKey.mapFromPlayer(endStep);
+        params.put(AbilityKey.Phase, PhaseType.END_OF_TURN);
+        game.getTriggerHandler().runTrigger(TriggerType.Phase, params, true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, other);
+        game.getTriggerHandler().runWaitingTriggers();
+        assertEquals(game.getStack().hasSimultaneousStackEntries(), gainedLife,
+                "only the end-step player's life gain satisfies the intervening condition");
+        if (gainedLife) {
+            assertTrue(game.getStack().addAllTriggeredAbilitiesToStack());
+            assertSame(game.getStack().peekAbility().getActivatingPlayer(), endStep);
+            if (resetBeforeResolution) {
+                // Change the calculated condition after collection to prove it is
+                // rechecked, rather than reusing the earlier eligibility result.
+                endStep.setLifeGainedThisTurn(0);
+            }
+            game.getStack().resolveStack();
+        }
+        boolean shouldResolve = gainedLife && !resetBeforeResolution;
+        assertEquals(executed[0], shouldResolve, "the queued condition uses the captured player again at resolution");
+        Card result = game.getCardState(ghoul);
+        if (shouldResolve) {
+            assertTrue(endStep.getCardsIn(ZoneType.Battlefield).contains(result));
+            assertEquals(result.getOwners(), Set.of(endStep));
+            assertSame(result.getController(), endStep);
+            if (shared) {
+                assertSame(result.getExplicitController(), endStep);
+            }
+            assertTrue(result.isTapped());
+        } else {
+            assertSame(result, ghoul);
+            assertSame(result.getZone(), sourceOwner.getZone(ZoneType.Graveyard));
+            assertEquals(result.getOwners(), owners);
+            assertNull(result.getExplicitController());
+        }
+        assertEquals(lki.getOwners(), owners);
+        assertNull(lki.getExplicitController());
+        assertSame(lki.getLastKnownZone(), sourceOwner.getZone(ZoneType.Graveyard));
+    }
+
+    @Test
+    public void sharedSourceRequirementsUseTheEventPlayerAndRestoreTheSourceAfterRejection() {
+        Game game = newGame(true);
+        Player first = game.getPlayers().get(0);
+        Player second = game.getPlayers().get(1);
+        Card imp = addCardToZone("Stinkweed Imp", first, ZoneType.Graveyard);
+        for (int i = 0; i < 5; i++) {
+            addCardToZone("Island", first, ZoneType.Library);
+        }
+        ReplacementEffect dredge = imp.getReplacementEffects().stream()
+                .filter(re -> re.getMode() == ReplacementType.Draw).findFirst().orElseThrow();
+        dredge.putParam("FatefulHour", "True");
+        second.setLife(4, null);
+        assertTrue(game.getReplacementHandler().getReplacementList(ReplacementType.Draw,
+                AbilityKey.mapFromAffected(second), null).contains(dredge),
+                "common requirements must use the same event player as ValidPlayer");
+        second.setLife(20, null);
+        assertFalse(game.getReplacementHandler().getReplacementList(ReplacementType.Draw,
+                AbilityKey.mapFromAffected(second), null).contains(dredge));
+        assertSame(dredge.getHostCard(), imp);
+        assertSame(imp.getZone(), first.getZone(ZoneType.Graveyard));
+        assertEquals(imp.getOwners(), Set.of(first, second));
+        assertNull(imp.getExplicitController());
+        assertSame(imp.getController(), first);
+        assertSame(imp.getView().getController(), first.getView());
+    }
+
+    @Test
+    public void stolenBattlefieldTriggersAndReplacementsRetainTheirActualController() {
+        for (boolean shared : List.of(false, true)) {
+            Game game = newGame(shared);
+            Player owner = game.getPlayers().get(0);
+            Player controller = game.getPlayers().get(1);
+            Card reflection = addCard("Thought Reflection", owner);
+            Card arena = addCard("Phyrexian Arena", owner);
+            reflection.setController(controller, game.getNextTimestamp());
+            arena.setController(controller, game.getNextTimestamp());
+            game.getAction().controllerChangeZoneCorrection(reflection);
+            game.getAction().controllerChangeZoneCorrection(arena);
+            for (int i = 0; i < 5; i++) {
+                addCardToZone("Island", controller, ZoneType.Library);
+                if (!shared) {
+                    addCardToZone("Island", owner, ZoneType.Library);
+                }
+            }
+            game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, owner);
+            game.getTriggerHandler().registerActiveTrigger(arena, false);
+            for (Player upkeep : List.of(owner, controller)) {
+                game.getPhaseHandler().devModeSet(PhaseType.UPKEEP, upkeep);
+                Map<AbilityKey, Object> params = AbilityKey.mapFromPlayer(upkeep);
+                params.put(AbilityKey.Phase, PhaseType.UPKEEP);
+                game.getTriggerHandler().runTrigger(TriggerType.Phase, params, false);
+                assertEquals(game.getStack().hasSimultaneousStackEntries(), upkeep == controller);
+            }
+            assertTrue(game.getStack().addAllTriggeredAbilitiesToStack());
+            assertSame(game.getStack().peekAbility().getActivatingPlayer(), controller);
+            game.getStack().resolveStack();
+            assertEquals(controller.getCardsIn(ZoneType.Hand).size(), 2,
+                    "the actual controller's Arena draw receives their Reflection replacement");
+            owner.drawCards(1);
+            assertEquals(owner.getCardsIn(ZoneType.Hand).size(), 1);
+            for (Card source : List.of(reflection, arena)) {
+                assertEquals(source.getOwners(), Set.of(owner));
+                assertSame(source.getExplicitController(), controller);
+            }
+        }
+    }
+
     @Test
     public void sharedLandPlayPermissionsPrepareIncomingWithoutChangingLiveSource() {
         for (ZoneType origin : List.of(ZoneType.Library, ZoneType.Graveyard)) {

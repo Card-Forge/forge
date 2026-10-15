@@ -180,8 +180,9 @@ public class ReplacementHandler {
                         && replacementEffect.modeCheck(event, runParams)
                         && !possibleReplacers.contains(replacementEffect)
                         && replacementEffect.zonesCheck(cardZone)
-                        && replacementEffect.requirementsCheck(game)
-                        && replacementEffect.canReplace(runParams)) {
+                        && replacementEffect.testWithController(getReplacementDecider(event, runParams),
+                                () -> replacementEffect.requirementsCheck(game)
+                                        && replacementEffect.canReplace(runParams))) {
                     possibleReplacers.add(replacementEffect);
                     if (layer == ReplacementLayer.CantHappen) {
                         return false;
@@ -282,8 +283,7 @@ public class ReplacementHandler {
         }
     }
 
-    private ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams,
-            GameAction.DrawInstruction instruction) {
+    private Player getReplacementDecider(ReplacementType event, final Map<AbilityKey, Object> runParams) {
         final Object affected = runParams.get(AbilityKey.Affected);
         Player decider = null;
 
@@ -310,6 +310,13 @@ public class ReplacementHandler {
                 }
             }
         }
+
+        return decider;
+    }
+
+    private ReplacementResult run(ReplacementType event, final Map<AbilityKey, Object> runParams,
+            GameAction.DrawInstruction instruction) {
+        final Player decider = getReplacementDecider(event, runParams);
 
         // try out all layer
         for (ReplacementLayer layer : ReplacementLayer.values()) {

@@ -932,7 +932,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean defined = sa.hasParam("Defined") || chooseFromDef;
         final String changeType = sa.getParamOrDefault("ChangeType", "");
         boolean mandatory = sa.hasParam("Mandatory");
-        Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newHashMap();
+        // Choices and movements follow the same player order. A physical card in
+        // a shared source may be allocated to only one of these instructions.
+        Map<Player, HiddenOriginChoices> hiddenChoices = Maps.newLinkedHashMap();
+        CardCollection reservedCards = new CardCollection();
 
         List<Player> fetchers = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
         Player chooser = null;
@@ -1065,6 +1068,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
+
+            fetchList.removeAll(reservedCards);
 
             //determine list of all cards to reveal to player in addition to those that can be chosen
             DelayedReveal delayedReveal = null;
@@ -1308,6 +1313,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             choices.origin = origin;
             choices.destination = destination;
             hiddenChoices.put(player, choices);
+            reservedCards.addAll(chosenCards);
         }
 
         final boolean remember = sa.hasParam("RememberChanged");
@@ -1329,6 +1335,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Player decider = Objects.requireNonNullElse(chooser, player);
 
             for (Card c : chosenCards) {
+                // A preceding instruction or replacement may already have moved
+                // this selection. Do not report its result as this player's move.
+                Card current = game.getCardState(c);
+                if (current == null || !c.equalsWithGameTimestamp(current) || current.getZone() != c.getZone()) {
+                    continue;
+                }
                 Card movedCard;
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -1490,6 +1502,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
+                if (destination != null && (movedCard == null
+                        || movedCard.getZone() == originZone && originZone != null && !originZone.is(destination))) {
+                    continue;
+                }
                 movedCards.add(movedCard);
 
                 if (originZone != null) {

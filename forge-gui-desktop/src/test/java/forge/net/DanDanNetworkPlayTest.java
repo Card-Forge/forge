@@ -71,7 +71,6 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeoutException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -535,7 +534,7 @@ public class DanDanNetworkPlayTest {
             }
             if (privacyScenario) {
                 privacyTerminalReceipt = assertTellingTimeFengrafPrivacyCase(deltaSync, scenario, desktop,
-                        remote, match, reconnectObservation, false);
+                        remote, match, reconnectObservation);
 
                 return;
             }
@@ -700,8 +699,7 @@ public class DanDanNetworkPlayTest {
                                 if (privacyTerminalForCleanup != null) {
                                     assertTellingTimeFengrafPrivacyTerminalCase(deltaSync, scenario,
                                             desktopForCleanup, remoteForCleanup, liveMatch, server,
-                                            reconnectObservationForCleanup, privacyTerminalForCleanup,
-                                            false);
+                                            reconnectObservationForCleanup, privacyTerminalForCleanup);
                                 }
                             } else {
                                 if (scenario.lifecycleScenario() && liveMatch.getGame() == null) return;
@@ -1542,13 +1540,25 @@ public class DanDanNetworkPlayTest {
                 "N+1 emitted its actual game outcome event");
         Assert.assertTrue(nextTrace.awaitEngineReturn(30, TimeUnit.SECONDS),
                 "N+1 returned from Match.startGame through the HostedMatch end hook");
-        awaitLifecycleCondition(scenario, () -> countCallback(desktop.hostGui.captures(), "finishGame") == 2
-                        && countCallback(remote.gui().captures(), "finishGame") == 2
-                        && desktop.hostGui.terminalViewReceipt() != null
-                        && remote.gui().terminalViewReceipt() != null
-                        && desktop.hostGui.terminalViewReceipt().gameViewId() == newGame.getView().getId()
-                        && remote.gui().terminalViewReceipt().gameViewId() == newGame.getView().getId(),
-                30, "both finishGame terminal GameViews identify the completed N+1 game");
+        try {
+            awaitLifecycleCondition(scenario, () -> countCallback(desktop.hostGui.captures(), "finishGame") == 2
+                            && countCallback(remote.gui().captures(), "finishGame") == 2
+                            && desktop.hostGui.terminalViewReceipt() != null
+                            && remote.gui().terminalViewReceipt() != null
+                            && desktop.hostGui.terminalViewReceipt().gameViewId() == newGame.getView().getId()
+                            && remote.gui().terminalViewReceipt().gameViewId() == newGame.getView().getId(),
+                    30, "both finishGame terminal GameViews identify the completed N+1 game");
+        } catch (AssertionError failure) {
+            throw new AssertionError("N+1 terminal receipt diagnostic: expectedGame=" + newGame.getView().getId()
+                    + ", hostFinishCount=" + countCallback(desktop.hostGui.captures(), "finishGame")
+                    + ", remoteFinishCount=" + countCallback(remote.gui().captures(), "finishGame")
+                    + ", hostTerminal=" + desktop.hostGui.terminalViewReceipt()
+                    + ", remoteTerminal=" + remote.gui().terminalViewReceipt()
+                    + ", hostCurrentView=" + (desktop.hostGui.getGameView() == null
+                            ? -1 : desktop.hostGui.getGameView().getId())
+                    + ", remoteCurrentView=" + (remote.gui().getGameView() == null
+                            ? -1 : remote.gui().getGameView().getId()), failure);
+        }
         Assert.assertEquals(scenario.actions().stream().filter(action -> action.decision()
                 == ScriptedHumanTcpSupport.Decision.CONCEDE && action.seat() == 1
                 && action.chooserViewId() == remote.gui().ownPlayerViewId()).count(), 2L,
@@ -2237,27 +2247,13 @@ public class DanDanNetworkPlayTest {
     private static PrivacyTerminalReceipt assertTellingTimeFengrafPrivacyCase(boolean deltaSync,
             ScriptedHumanTcpSupport.Scenario scenario, DanDanDesktop desktop,
             ScriptedHumanTcpSupport remote, HostedMatch match,
-            ScriptedHumanTcpSupport.ReconnectObservation observation,
-            boolean privacyShuffleHistoryScenario) throws Exception {
+            ScriptedHumanTcpSupport.ReconnectObservation observation) throws Exception {
         PrivacySetup setup = desktop.privacySetup;
         int tellingTimeSeat = scenario.privacyTellingTimeSeat();
         int fengrafSeat = scenario.privacyFengrafSeat();
         int chooserViewId = scenario.privacyViewIdForSeat(tellingTimeSeat);
         int otherViewId = scenario.privacyViewIdForSeat(1 - tellingTimeSeat);
         int fengrafActorViewId = scenario.privacyViewIdForSeat(fengrafSeat);
-        Map<Integer, Set<Integer>> gameNKnownIds = Map.of(0, new HashSet<>(), 1, new HashSet<>());
-        for (ScriptedHumanTcpSupport.MulliganChoiceReceipt choice : scenario.mulliganChoices()) {
-            gameNKnownIds.get(choice.seat()).addAll(choice.handIds());
-        }
-        for (ScriptedHumanTcpSupport.FreeRevealReceipt reveal : scenario.freeReveals()) {
-            gameNKnownIds.get(reveal.receivingSeat()).addAll(reveal.cardIds());
-        }
-        for (ScriptedHumanTcpSupport.KeepOpeningReceipt keep : scenario.keepOpeningReceipts()) {
-            gameNKnownIds.get(keep.seat()).addAll(keep.handIds());
-        }
-        for (ScriptedHumanTcpSupport.LondonBottomDispatchReceipt bottom : scenario.londonBottomDispatches()) {
-            gameNKnownIds.get(bottom.seat()).addAll(bottom.chooserHandIds());
-        }
         Assert.assertNotNull(setup, "post-Keep setup retained actual official card roles");
 
         ScriptedHumanTcpSupport.PostKeepReceipt before = scenario.postKeepReceipt();
@@ -2303,17 +2299,6 @@ public class DanDanNetworkPlayTest {
                 opening.get(desktop.hostGui.ownPlayerViewId()).get(ZoneType.Hand));
         Assert.assertEquals(remotePostKeepOwnHand,
                 opening.get(remote.gui().ownPlayerViewId()).get(ZoneType.Hand));
-        gameNKnownIds.get(0).addAll(hostPostKeepOwnHand);
-        gameNKnownIds.get(1).addAll(remotePostKeepOwnHand);
-        for (Map<ZoneType, List<Integer>> zones : opening.values()) {
-            for (ZoneType publicZone : List.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile)) {
-                List<Integer> publicIds = zones.get(publicZone);
-                if (publicIds != null) {
-                    gameNKnownIds.get(0).addAll(publicIds);
-                    gameNKnownIds.get(1).addAll(publicIds);
-                }
-            }
-        }
         assertPrivacyEndpointVisibility(desktop.hostGui, remote.gui(), setup, false);
         assertPrivacyModeReceipt(deltaSync, before.stateCapture(), remote.gui());
 
@@ -2577,8 +2562,6 @@ public class DanDanNetworkPlayTest {
                 "remote received exactly the typed actual FREE and Fengraf reveal callbacks assigned to it");
 
         Assert.assertEquals(reveal.cardIds(), List.of(setup.publicCreatureId()));
-        gameNKnownIds.get(0).addAll(reveal.cardIds());
-        gameNKnownIds.get(1).addAll(reveal.cardIds());
         Assert.assertEquals(reveal.message(), scenario.privacyExpectedRevealMessage());
         Assert.assertEquals(reveal.minimum(), -1);
         Assert.assertEquals(reveal.maximum(), -1);
@@ -2743,11 +2726,9 @@ public class DanDanNetworkPlayTest {
                 "each deferred opening Keep made exactly one endpoint OK dispatch");
         List<ScriptedHumanTcpSupport.OpeningKeepGateReceipt> keepReceipts = scenario.openingKeepGateReceipts();
         Assert.assertEquals(keepReceipts.size(), summary.openingKeepCompletions());
-        int expectedGateHandCount = false && !keepReceipts.isEmpty() ? 6 : 7;
-        int expectedLondonBottomId = false && !keepReceipts.isEmpty()
-                ? scenario.londonBottomDispatches().get(0).cardId() : -1;
-        long expectedGateStateLowerBound = false && !keepReceipts.isEmpty()
-                ? scenario.londonBottomDispatches().get(0).zeroCardPromptOrdinal() : -1;
+        int expectedGateHandCount = 7;
+        int expectedLondonBottomId = -1;
+        long expectedGateStateLowerBound = -1;
         Assert.assertTrue(keepReceipts.stream().allMatch(receipt -> receipt.inputType()
                         == forge.gamemodes.match.input.InputConfirmMulligan.class
                         && receipt.handCount() == expectedGateHandCount
@@ -2780,48 +2761,6 @@ public class DanDanNetworkPlayTest {
                 caseName, summary.openingKeepDeferrals(), summary.openingKeepCompletions(),
                 summary.openingKeepOkDispatches(), summary.fengrafPreSendRepaints(),
                 summary.t4RepeatedPriorityCallbacks());
-    }
-
-    private static void assertCurrentPrivateHandPermission(int cardId, List<Integer> hostHand,
-            List<Integer> remoteHand, CardView hostCard, CardView remoteCard,
-            PlayerView hostPlayer, PlayerView remotePlayer) {
-        Assert.assertNotNull(hostCard);
-        Assert.assertNotNull(remoteCard);
-        Assert.assertNotNull(hostPlayer);
-        Assert.assertNotNull(remotePlayer);
-        Assert.assertNotNull(hostCard.getOwner());
-        Assert.assertNotNull(remoteCard.getOwner());
-        Assert.assertNotNull(hostCard.getController());
-        Assert.assertNotNull(remoteCard.getController());
-        Assert.assertEquals(hostCard.getOwner().getId(), remoteCard.getOwner().getId(),
-                "both endpoints retain the same current owner for this physical card");
-        Assert.assertEquals(hostCard.getZone(), remoteCard.getZone(),
-                "both endpoints retain the same current zone for this physical card");
-        if (hostHand.contains(cardId)) {
-            Assert.assertEquals(hostCard.getOwner().getId(), hostPlayer.getId(),
-                    "the current host-hand holder owns this physical card");
-            Assert.assertEquals(remoteCard.getOwner().getId(), hostPlayer.getId(),
-                    "the remote endpoint agrees that the host-hand holder owns this physical card");
-            Assert.assertEquals(hostCard.getZone(), ZoneType.Hand);
-            Assert.assertEquals(remoteCard.getZone(), ZoneType.Hand);
-            Assert.assertEquals(hostCard.getController().getId(), hostPlayer.getId());
-            Assert.assertEquals(remoteCard.getController().getId(), hostPlayer.getId());
-            Assert.assertTrue(hostCard.canBeShownTo(hostPlayer));
-            Assert.assertFalse(remoteCard.mayPlayerLook(remotePlayer));
-            Assert.assertFalse(remoteCard.canBeShownTo(remotePlayer));
-        } else if (remoteHand.contains(cardId)) {
-            Assert.assertEquals(remoteCard.getOwner().getId(), remotePlayer.getId(),
-                    "the current remote-hand holder owns this physical card");
-            Assert.assertEquals(hostCard.getOwner().getId(), remotePlayer.getId(),
-                    "the host endpoint agrees that the remote-hand holder owns this physical card");
-            Assert.assertEquals(remoteCard.getZone(), ZoneType.Hand);
-            Assert.assertEquals(hostCard.getZone(), ZoneType.Hand);
-            Assert.assertEquals(remoteCard.getController().getId(), remotePlayer.getId());
-            Assert.assertEquals(hostCard.getController().getId(), remotePlayer.getId());
-            Assert.assertTrue(remoteCard.canBeShownTo(remotePlayer));
-            Assert.assertFalse(hostCard.mayPlayerLook(hostPlayer));
-            Assert.assertFalse(hostCard.canBeShownTo(hostPlayer));
-        }
     }
 
     private static void assertHeldLocalTellingTimePrivacySnapshot(
@@ -2898,7 +2837,7 @@ public class DanDanNetworkPlayTest {
             ScriptedHumanTcpSupport.Scenario scenario, DanDanDesktop desktop,
             ScriptedHumanTcpSupport remote, HostedMatch match, FServerManager server,
             ScriptedHumanTcpSupport.ReconnectObservation observation,
-            PrivacyTerminalReceipt terminalReceipt, boolean privacyShuffleHistoryScenario) {
+            PrivacyTerminalReceipt terminalReceipt) {
         PrivacySetup setup = desktop.privacySetup;
         ScriptedHumanTcpSupport.PrivacyStateReceipt fengrafState = scenario.privacyFengrafState();
         Assert.assertNotNull(setup);
@@ -3161,25 +3100,6 @@ public class DanDanNetworkPlayTest {
         }
     }
 
-    private static void assertCurrentViewTrackerReceipt(ScriptedHumanTcpSupport.ScriptedGui gui, GameView view) {
-        Assert.assertNotNull(view.getTracker(), "the current endpoint GameView retains its tracker");
-        Assert.assertTrue(gui.gameViewReceipts().stream().anyMatch(receipt ->
-                        receipt.gameViewId() == view.getId() && receipt.trackerIdentity() == view.getTracker()),
-                "the endpoint retained a receipt for its current same-Game tracker");
-    }
-
-    private static List<Boolean> currentVisibilityFacts(GameView view, int cardId, int hostViewId, int remoteViewId) {
-        CardView card = findCardView(view, cardId);
-        PlayerView host = findPlayerView(view, hostViewId);
-        PlayerView remote = findPlayerView(view, remoteViewId);
-        Assert.assertNotNull(card, "same-Game role card remains represented in current view");
-        Assert.assertSame(card.getTracker(), view.getTracker(),
-                "role CardView belongs to the endpoint's current GameView tracker");
-        Assert.assertNotNull(host);
-        Assert.assertNotNull(remote);
-        return List.of(card.mayPlayerLook(host), card.canBeShownTo(host),
-                card.mayPlayerLook(remote), card.canBeShownTo(remote));
-    }
 
     private static void assertMetamorphosePhysicalZones(
             Map<Integer, Map<ZoneType, List<Integer>>> zonesByPlayer, int hostId, int remoteId,
@@ -3495,138 +3415,8 @@ public class DanDanNetworkPlayTest {
         }
     }
 
-    private static Set<String> privacyKnownNames(Game game, Set<Integer> knownIds) {
-        Set<String> names = new HashSet<>();
-        for (int cardId : knownIds) {
-            Card card = game.findById(cardId);
-            Assert.assertNotNull(card, "receipt-backed physical card identity belongs to this Game");
-            names.add(card.getName());
-        }
-        return names;
-    }
 
-    private static Map<Integer, Set<Integer>> assertPrivacyLogRowsAtFirstObservation(ScriptedHumanTcpSupport.Scenario scenario,
-            Game game, Set<Integer> privateIdentityIds, int gameViewId,
-            List<ScriptedHumanTcpSupport.ScriptedGui> endpoints) {
-        Map<Integer, Set<Integer>> earnedIdsByView = new LinkedHashMap<>();
-        for (ScriptedHumanTcpSupport.ScriptedGui endpoint : endpoints) {
-            int seat = endpoint.ownPlayerViewId() == scenario.privacyViewIdForSeat(0) ? 0
-                    : endpoint.ownPlayerViewId() == scenario.privacyViewIdForSeat(1) ? 1 : -1;
-            Assert.assertTrue(seat >= 0, "log observer belongs to its assigned privacy seat");
-            List<ScriptedHumanTcpSupport.PrivacyLogObservation> observations = endpoint.privacyLogObservations().stream()
-                    .filter(item -> item.gameViewId() == gameViewId)
-                    .sorted(Comparator.comparingLong(ScriptedHumanTcpSupport.PrivacyLogObservation::observationOrdinal))
-                    .toList();
-            Assert.assertFalse(observations.isEmpty(), "each assigned endpoint has post-consumer Game N log observations");
-            Assert.assertTrue(observations.stream().anyMatch(item -> !item.appendedRows().isEmpty()),
-                    "each assigned endpoint consumed at least one actual Game N log row");
-            Set<Integer> knownIds = new HashSet<>();
-            Set<String> checkedTemporalForbiddenWitnesses = new HashSet<>();
-            int expectedViewId = scenario.privacyViewIdForSeat(seat);
-            for (ScriptedHumanTcpSupport.PrivacyLogObservation observation : observations) {
-                Assert.assertEquals(observation.ownPlayerViewId(), expectedViewId,
-                        "temporal knowledge is joined only within its assigned seat namespace");
-                Assert.assertEquals(observation.gameViewId(), gameViewId,
-                        "temporal knowledge is joined only within its exact GameView namespace");
-                Assert.assertTrue(endpoint.captures().stream().anyMatch(capture ->
-                                capture.callback().equals(observation.callback())
-                                        && capture.callbackOrdinal() == observation.sourceCallbackOrdinal()
-                                        && capture.sequence() == observation.sourceSequence()),
-                        "post-consumer observation retains its exact source callback correlation");
-                if (observation.parentCallbackOrdinal() > 0) {
-                    Assert.assertTrue(endpoint.captures().stream().anyMatch(parent ->
-                                    "applyDelta".equals(parent.callback())
-                                            && parent.callbackOrdinal() == observation.parentCallbackOrdinal()
-                                            && parent.sequence() == observation.parentSequence()),
-                            "nested event observation retains its exact applying packet correlation");
-                }
-                knownIds.addAll(observation.ownHandIds());
-                knownIds.addAll(observation.publicCardIds());
-                for (ScriptedHumanTcpSupport.MulliganChoiceReceipt receipt : scenario.mulliganChoices()) {
-                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.handIds());
-                }
-                for (ScriptedHumanTcpSupport.FreeRevealReceipt receipt : scenario.freeReveals()) {
-                    if (receipt.gameViewId() != gameViewId || receipt.receivingSeat() != seat) continue;
-                    if (receipt.getChoicesCallbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.cardIds());
-                    else addLawfullyPermissionedEarlierIds(knownIds, observation, receipt.cardIds());
-                }
-                for (ScriptedHumanTcpSupport.KeepOpeningReceipt receipt : scenario.keepOpeningReceipts()) {
-                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.handIds());
-                }
-                for (ScriptedHumanTcpSupport.LondonBottomDispatchReceipt receipt : scenario.londonBottomDispatches()) {
-                    if (receipt.gameViewId() == gameViewId && receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.promptOrdinal() <= observation.observationOrdinal()) {
-                        knownIds.addAll(receipt.chooserHandIds());
-                        knownIds.add(receipt.cardId());
-                    }
-                }
-                for (ScriptedHumanTcpSupport.PrivacyChoiceReceipt receipt : scenario.privacyChoices()) {
-                    if (receipt.seat() != seat || receipt.chooserViewId() != expectedViewId) continue;
-                    if (receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.cardIds());
-                    else addLawfullyPermissionedEarlierIds(knownIds, observation, receipt.cardIds());
-                }
-                for (ScriptedHumanTcpSupport.PrivacyRevealReceipt receipt : scenario.privacyReveals()) {
-                    if (receipt.seat() != seat || receipt.chooserViewId() != expectedViewId) continue;
-                    if (receipt.callbackOrdinal() <= observation.observationOrdinal()) knownIds.addAll(receipt.cardIds());
-                    else addLawfullyPermissionedEarlierIds(knownIds, observation, receipt.cardIds());
-                }
-                for (ScriptedHumanTcpSupport.PrivacyStackViewReceipt receipt : scenario.privacyStackViewReceipts()) {
-                    if (receipt.seat() == seat && receipt.chooserViewId() == expectedViewId && receipt.callbackOrdinal() <= observation.observationOrdinal()) {
-                        knownIds.add(receipt.sourceCardId());
-                    }
-                }
-                for (ScriptedHumanTcpSupport.Capture capture : endpoint.captures()) {
-                    if (!"handleGameEvents".equals(capture.callback()) || capture.callbackOrdinal() > observation.observationOrdinal()) continue;
-                    for (int publicSpellId : List.of(scenario.privacyTellingTimeId(),
-                            scenario.privacyFengrafId(), scenario.privacyDaysUndoingId())) {
-                        if (capture.eventFacts().stream().anyMatch(fact ->
-                                (fact.eventClass().endsWith("GameEventSpellAbilityCast")
-                                        && fact.scalarFacts().contains("sa.hostCardId=" + publicSpellId))
-                                        || (fact.eventClass().endsWith("GameEventSpellResolved")
-                                        && fact.scalarFacts().contains("spell.hostCardId=" + publicSpellId)))) {
-                            knownIds.add(publicSpellId);
-                        }
-                    }
-                }
-                Set<String> forbiddenNames = privacyUnknownNames(game, privateIdentityIds,
-                        privacyKnownNames(game, knownIds));
-                if (!observation.appendedRows().isEmpty() && !forbiddenNames.isEmpty()) {
-                    checkedTemporalForbiddenWitnesses.addAll(forbiddenNames);
-                }
-                for (ScriptedHumanTcpSupport.PrivacyLogRow row : observation.appendedRows()) {
-                    for (String forbidden : forbiddenNames) {
-                        Assert.assertFalse(row.message().contains(forbidden),
-                                "first-observed log row at endpoint ordinal " + observation.observationOrdinal()
-                                        + " does not reveal never-yet-known name " + forbidden
-                                        + " (" + observation.callback() + ")");
-                    }
-                }
-            }
-            Assert.assertFalse(checkedTemporalForbiddenWitnesses.isEmpty(),
-                    "the Game N temporal interval checked actual appended rows while unknown-name witnesses remained");
-            earnedIdsByView.put(expectedViewId, Set.copyOf(knownIds));
-        }
-        return earnedIdsByView;
-    }
 
-    private static void addLawfullyPermissionedEarlierIds(Set<Integer> knownIds,
-            ScriptedHumanTcpSupport.PrivacyLogObservation observation, List<Integer> exactReceiptIds) {
-        for (int id : exactReceiptIds) {
-            if (observation.permissionedPrivateCardIds().contains(id)) knownIds.add(id);
-        }
-    }
-
-    private static Set<String> privacyUnknownNames(Game game, Iterable<Integer> candidateIds,
-            Set<String> knownNames) {
-        Set<String> names = new HashSet<>();
-        for (int cardId : candidateIds) {
-            Card card = game.findById(cardId);
-            Assert.assertNotNull(card, "the actual hidden-zone witness belongs to this Game");
-            if (!knownNames.contains(card.getName())) {
-                names.add(card.getName());
-            }
-        }
-        return names;
-    }
 
     private static void assertReconnectZones(Map<Integer, Map<ZoneType, List<Integer>>> before,
             Map<Integer, Map<ZoneType, List<Integer>>> after, int hostId, int remoteId, String label) {
@@ -4084,60 +3874,9 @@ public class DanDanNetworkPlayTest {
         return result;
     }
 
-    private static Map<Integer, Map<ZoneType, List<Integer>>> privacyZoneSnapshot(GameView view) {
-        Map<Integer, Map<ZoneType, List<Integer>>> result = new java.util.LinkedHashMap<>();
-        for (PlayerView player : view.getPlayers()) {
-            Map<ZoneType, List<Integer>> zones = new java.util.EnumMap<>(ZoneType.class);
-            zones.put(ZoneType.Hand, ids(player.getHand()));
-            zones.put(ZoneType.Library, ids(player.getCards(ZoneType.Library)));
-            zones.put(ZoneType.Battlefield, ids(player.getCards(ZoneType.Battlefield)));
-            zones.put(ZoneType.Graveyard, ids(player.getCards(ZoneType.Graveyard)));
-            zones.put(ZoneType.Exile, ids(player.getCards(ZoneType.Exile)));
-            Map<ZoneType, List<Integer>> copiedZones = new java.util.EnumMap<>(ZoneType.class);
-            zones.forEach((zone, ids) -> copiedZones.put(zone, List.copyOf(ids)));
-            result.put(player.getId(), java.util.Collections.unmodifiableMap(copiedZones));
-        }
-        return java.util.Collections.unmodifiableMap(result);
-    }
 
-    private static String privacyZoneBaselineEvidence(
-            Map<Integer, Map<ZoneType, List<Integer>>> decoded,
-            Map<Integer, Map<ZoneType, List<Integer>>> applied,
-            Map<Integer, Map<ZoneType, List<Integer>>> fenced,
-            Map<Integer, Map<ZoneType, List<Integer>>> held) {
-        return "zoneBaseline{decodedEqualsHeld=" + zoneMapsEqual(decoded, held)
-                + ",appliedEqualsHeld=" + zoneMapsEqual(applied, held)
-                + ",fencedEqualsHeld=" + zoneMapsEqual(fenced, held)
-                + ",decodedEqualsApplied=" + zoneMapsEqual(decoded, applied)
-                + ",appliedEqualsFenced=" + zoneMapsEqual(applied, fenced)
-                + ",counts={decoded:" + privacyZoneCounts(decoded)
-                + ",applied:" + privacyZoneCounts(applied)
-                + ",fenced:" + privacyZoneCounts(fenced)
-                + ",held:" + privacyZoneCounts(held) + "}}";
-    }
 
-    private static boolean zoneMapsEqual(Map<Integer, Map<ZoneType, List<Integer>>> left,
-            Map<Integer, Map<ZoneType, List<Integer>>> right) {
-        return left != null && right != null && left.equals(right);
-    }
 
-    private static String privacyZoneCounts(Map<Integer, Map<ZoneType, List<Integer>>> zonesByPlayer) {
-        if (zonesByPlayer == null) return "unavailable";
-        List<String> playerCounts = new ArrayList<>();
-        for (Map<ZoneType, List<Integer>> zones : zonesByPlayer.values()) {
-            playerCounts.add("[hand=" + privacyZoneCount(zones, ZoneType.Hand)
-                    + ",library=" + privacyZoneCount(zones, ZoneType.Library)
-                    + ",battlefield=" + privacyZoneCount(zones, ZoneType.Battlefield)
-                    + ",graveyard=" + privacyZoneCount(zones, ZoneType.Graveyard)
-                    + ",exile=" + privacyZoneCount(zones, ZoneType.Exile) + "]");
-        }
-        return "players=" + zonesByPlayer.size() + ",perPlayer=" + playerCounts;
-    }
-
-    private static int privacyZoneCount(Map<ZoneType, List<Integer>> zones, ZoneType zone) {
-        List<Integer> ids = zones.get(zone);
-        return ids == null ? -1 : ids.size();
-    }
 
     private static Map<Integer, Map<ZoneType, List<Integer>>> zoneSnapshot(Game game) {
         Map<Integer, Map<ZoneType, List<Integer>>> result = new java.util.LinkedHashMap<>();

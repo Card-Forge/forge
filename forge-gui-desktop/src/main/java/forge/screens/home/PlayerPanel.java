@@ -834,6 +834,9 @@ public class PlayerPanel extends FPanel {
 
     // Writes the chosen sleeve onto the currently selected deck and saves it (no-op for read-only decks)
     private void persistSleeveToDeck(final String key, final int offset) {
+        if (!lobby.mayMutateDanDanDeck(index)) {
+            return;
+        }
         final FDeckChooser chooser = getDeckChooser();
         if (chooser == null) {
             return;

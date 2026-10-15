@@ -31,6 +31,34 @@ import static org.testng.Assert.assertTrue;
 
 public class DanDanLobbySetupTest extends AITest {
     @Test
+    public void bundledDeckSleeveSaveDoesNotWritePackagedResource() throws IOException {
+        final Path bundledFile = Path.of(ForgeConstants.DECK_DANDAN_DIR, "DanDan_SecretLair.dck");
+        final byte[] before = Files.readAllBytes(bundledFile);
+        final DeckProxy proxy = findOfficialProxy();
+        final Deck deck = proxy.getDeck();
+        final String oldKey = deck.getSleeveArtKey();
+        final int oldOffset = deck.getSleeveArtOffset();
+        try {
+            deck.setSleeveArtKey("Storage regression sleeve");
+            deck.setSleeveArtOffset(4);
+            assertFalse(proxy.saveDeck(), "bundled catalog must refuse persistence");
+            assertEquals(Files.readAllBytes(bundledFile), before,
+                    "the shipped deck file must remain byte-for-byte unchanged");
+        } finally {
+            deck.setSleeveArtKey(oldKey);
+            deck.setSleeveArtOffset(oldOffset);
+            Files.write(bundledFile, before);
+        }
+    }
+
+    private static DeckProxy findOfficialProxy() {
+        for (final DeckProxy proxy : DeckProxy.getAllDanDanDecks()) {
+            if (proxy.getName().equals("DanDan_SecretLair")) return proxy;
+        }
+        throw new AssertionError("bundled DanDan deck was absent");
+    }
+
+    @Test
     public void hostDeckIsSharedAndRemoteCannotUploadASecondDeck() {
         final GuiPlayerState oldPlayerState = GuiPlayerState.capture();
         try {

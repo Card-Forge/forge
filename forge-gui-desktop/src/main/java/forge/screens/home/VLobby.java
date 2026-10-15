@@ -596,7 +596,7 @@ public class VLobby implements ILobbyView {
         }
     }
 
-    private boolean mayMutateDanDanDeck(final int index) {
+    boolean mayMutateDanDanDeck(final int index) {
         return !lobby.hasVariant(GameType.DanDan)
                 || index == lobby.getDanDanDeckOwnerSlot() && lobby.mayEdit(index);
     }
@@ -1270,9 +1270,8 @@ public class VLobby implements ILobbyView {
     /////////////////////////////////////////////
 
     /**
-     * Write the chosen format into the lobby. applyVariant's own exclusion switch
-     * clears the other game formats, so this only has to handle Constructed, which
-     * is the absence of all of them rather than a variant of its own.
+     * Replace the selected game format. Constructed is the absence of an exclusive
+     * variant; the lobby replaces other formats after validating retained overlays.
      */
     private void onGameFormatChanged() {
         if (suppressFormatListener) { return; }
@@ -1293,7 +1292,7 @@ public class VLobby implements ILobbyView {
                 }
             }
         } else {
-            lobby.applyVariant(selected);
+            lobby.replaceGameFormat(selected);
         }
 
         update(false);
@@ -1382,9 +1381,13 @@ public class VLobby implements ILobbyView {
         }
         return cachedDeckChoosers.computeIfAbsent(type, ignored -> new HashMap<>()).computeIfAbsent(prefKey, (key) -> {
             final GameType gameType = forCommander ? type : type == GameType.DanDan ? GameType.DanDan : GameType.Constructed;
-            final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
+            final FDeckChooser fdc = new FDeckChooser(null, type == GameType.DanDan ? false : ai,
+                    gameType, forCommander);
             fdc.initialize(prefKey, deckType);
-            fdc.setDeckSelectionCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
+            fdc.setDeckSelectionCommand(() -> {
+                final int deckSeat = type == GameType.DanDan ? lobby.getDanDanDeckOwnerSlot() : iSlot;
+                if (deckSeat >= 0) selectMainDeck(fdc, deckSeat, forCommander);
+            });
             return fdc;
         });
     }

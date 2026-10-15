@@ -3,17 +3,13 @@ package forge.net;
 import forge.LobbyPlayer;
 import forge.game.GameStage;
 import forge.game.player.PlayerView;
-import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
-import forge.gamemodes.net.ChatMessage;
-import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.HostingServer;
 import forge.gamemodes.net.server.RemoteClient;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiBase;
-import forge.interfaces.ILobbyListener;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 import io.netty.channel.Channel;
@@ -147,14 +143,6 @@ public class ScriptedHumanTcpSupportTest {
         player.setSleeveArtOffset(state.sleeveArtOffset());
     }
 
-    private static ILobbyListener headlessHostLobbyListener() {
-        return new ILobbyListener() {
-            @Override public void update(GameLobbyData state, int slot) { }
-            @Override public void message(String source, String message, ChatMessage.MessageType type) { }
-            @Override public void close() { }
-            @Override public ClientGameLobby getLobby() { return null; }
-        };
-    }
 
     @FunctionalInterface
     interface EndCurrentGameStrategy {
@@ -324,9 +312,6 @@ public class ScriptedHumanTcpSupportTest {
         return null;
     }
 
-    private static void assertNoFailure(ScriptedHumanTcpSupport.Scenario scenario) {
-        if (scenario.failure() != null) throw new AssertionError("scripted TCP fixture failed", scenario.failure());
-    }
 
     private static Throwable combine(Throwable current, Throwable addition) {
         if (current == null) return addition;

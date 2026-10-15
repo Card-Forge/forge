@@ -2510,7 +2510,7 @@ public class GameAction {
             runPreOpeningHandActions(first);
 
             game.setAge(GameStage.Mulligan);
-            boolean danDan = game.getRules().hasAppliedVariant(GameType.DanDan);
+            boolean danDan = game.getRules().isDanDan();
             if (danDan) {
                 DrawInstruction instruction = newDanDanDrawInstruction(first);
                 for (final Player p1 : game.getPlayers()) {

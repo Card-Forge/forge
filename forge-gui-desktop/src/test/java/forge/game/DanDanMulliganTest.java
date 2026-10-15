@@ -16,6 +16,7 @@ import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.PlayerControllerForTests;
 import forge.util.MyRandom;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -29,8 +30,13 @@ import static org.testng.Assert.assertTrue;
 
 /** Behavioral witnesses for the existing public opening and mulligan entry points. */
 public class DanDanMulliganTest extends AITest {
-    @Test
-    public void dandanOpeningDealAlternatesFromChosenFirstDespiteFilteredPreference() {
+    @DataProvider(name = "danDanRules")
+    public Object[][] danDanRules() {
+        return new Object[][] {{false}, {true}};
+    }
+
+    @Test(dataProvider = "danDanRules")
+    public void dandanOpeningDealAlternatesFromChosenFirstDespiteFilteredPreference(boolean primary) {
         boolean previousFiltered = StaticData.instance().getFilteredHandsEnabled();
         MulliganDefs.MulliganRule previousRule = StaticData.instance().getMulliganRule();
         Random previousRandom = MyRandom.getRandom();
@@ -38,7 +44,7 @@ public class DanDanMulliganTest extends AITest {
             StaticData.instance().setFilteredHandsEnabled(true);
             StaticData.instance().setMulliganRule(MulliganDefs.MulliganRule.London);
             for (int starterIndex = 0; starterIndex < 2; starterIndex++) {
-                Game game = newGame(true);
+                Game game = newGame(true, primary);
                 Player seatOne = game.getPlayers().get(0);
                 Player seatTwo = game.getPlayers().get(1);
                 Player chosenFirst = game.getPlayers().get(starterIndex);
@@ -68,9 +74,9 @@ public class DanDanMulliganTest extends AITest {
         }
     }
 
-    @Test
-    public void dandanMulliganServiceCollectsDecisionsBeforeChangingTheSharedPile() {
-        Game game = newGame(true);
+    @Test(dataProvider = "danDanRules")
+    public void dandanMulliganServiceCollectsDecisionsBeforeChangingTheSharedPile(boolean primary) {
+        Game game = newGame(true, primary);
         Player first = game.getPlayers().get(0);
         Player second = game.getPlayers().get(1);
         List<DecisionSnapshot> snapshots = new ArrayList<>();
@@ -400,11 +406,15 @@ public class DanDanMulliganTest extends AITest {
     }
 
     private Game newGame(boolean danDan) {
+        return newGame(danDan, false);
+    }
+
+    private Game newGame(boolean danDan, boolean primary) {
         ArrayList<RegisteredPlayer> players = new ArrayList<>();
         players.add(new RegisteredPlayer(new Deck()).setPlayer(new LobbyPlayerAi("seat one", null)));
         players.add(new RegisteredPlayer(new Deck()).setPlayer(new LobbyPlayerAi("seat two", null)));
-        GameRules rules = new GameRules(GameType.Constructed);
-        if (danDan) {
+        GameRules rules = new GameRules(primary ? GameType.DanDan : GameType.Constructed);
+        if (danDan && !primary) {
             rules.setAppliedVariants(EnumSet.of(GameType.DanDan));
         }
         Match match = new Match(rules, players, "DanDan mulligan behavior test");
