@@ -11,6 +11,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IGuiGame.OrderResult;
@@ -62,12 +63,9 @@ public enum ProtocolMethod implements IHasForgeLog {
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
-    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
-    clearSelectables    (Mode.SERVER, Void.TYPE),
+    setSelection        (Mode.SERVER, Void.TYPE, Selection.class),
     showRevealedCards   (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     hideRevealedCards   (Mode.SERVER, Void.TYPE),
-    setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*TrackableObject*/.class, Boolean.TYPE),
-    setSelectableTargets(Mode.SERVER, Void.TYPE, Iterable/*PlayerView, StackItemView*/.class),
     setWeaklySelectable (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearWeaklySelectable(Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":

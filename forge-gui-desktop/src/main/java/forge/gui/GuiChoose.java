@@ -13,6 +13,8 @@ import javax.swing.WindowConstants;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.gui.interfaces.IGuiGame.OrderResult;
@@ -20,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.gamemodes.match.Selection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -273,7 +276,8 @@ public class GuiChoose {
 
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	gui.setSelectables(manipulable, 0, 0);
+	final Selection before = gui.getSelection();
+	gui.setSelection(new Selection(Lists.newArrayList(manipulable), 0, 0, before.targets(), before.chosen()));
 	@SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
     final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
         @Override
@@ -287,7 +291,7 @@ public class GuiChoose {
     };
 	final FutureTask<List<CardView>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
-	gui.clearSelectables();
+	gui.setSelection(before);
         try {
             List<CardView> result = ft.get();
             return result;
