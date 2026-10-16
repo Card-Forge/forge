@@ -1,0 +1,8 @@
+Name:Rosewater's Nemesis
+ManaCost:3 W W
+Types:Creature Monkey Cleric
+PT:4/6
+K:Vigilance
+K:Protection:Phyrexian
+K:Poison Tolerance:3
+Oracle:Vigilance, protection from Phyrexians\nPoison Tolerance +3 (It takes three additional poison counters for you to lose the game to poison.)
