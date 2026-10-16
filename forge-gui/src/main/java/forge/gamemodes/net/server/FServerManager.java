@@ -271,14 +271,13 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
     private void bind(final SocketAddress address, final boolean startUPnP) {
         netLog.info("Starting Multiplayer Server");
-        final boolean inProcess = address instanceof LocalAddress;
-        loopbackOnly = inProcess;
-        bossGroup = inProcess ? new DefaultEventLoopGroup(1) : new NioEventLoopGroup(1);
-        workerGroup = inProcess ? new DefaultEventLoopGroup() : new NioEventLoopGroup();
+        loopbackOnly = address instanceof LocalAddress;
+        bossGroup = loopbackOnly ? new DefaultEventLoopGroup(1) : new NioEventLoopGroup(1);
+        workerGroup = loopbackOnly ? new DefaultEventLoopGroup() : new NioEventLoopGroup();
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
-                    .channel(inProcess ? LocalServerChannel.class : NioServerSocketChannel.class)
+                    .channel(loopbackOnly ? LocalServerChannel.class : NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<Channel>() {
                         @Override
@@ -287,7 +286,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                         }
                     });
 
-            if (!inProcess) {
+            if (!loopbackOnly) {
                 b.option(ChannelOption.SO_REUSEADDR, true);  // Allow quick port reuse after server shutdown
             }
 
