@@ -193,6 +193,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         updateGameView(true);
     }
     private void updateGameView(boolean flush) {
+        if (paused) { return; }
         GameView gameView = getGameView();
         if (gameView == null) {
             return;
