@@ -1,5 +1,6 @@
 package forge.screens.match.views;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,10 +14,12 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.CounterEnumType;
+import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FSelectionBox;
+import forge.util.AITimeoutTracker;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -30,6 +33,27 @@ public class VAvatar extends FDisplayObject {
     private final FImage image;
     private final AvatarAnimation avatarAnimation;
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
+    private static final Color BAR_BG    = new Color(0f, 0f, 0f, 0.65f);
+    private static final Color BAR_GREEN = Color.LIME;
+    private static final Color BAR_AMBER = Color.ORANGE;
+    private static final Color BAR_RED   = Color.RED;
+
+    static {
+        // wakes the renderer when the bar is due (needed if continuous rendering is off)
+        AITimeoutTracker.setRepaintHook(() -> Gdx.graphics.requestRendering());
+    }
+
+    private void drawAITimeoutBar(Graphics g, float w, float h) {
+        final GameView gv = MatchController.instance.getGameView();
+        if (gv == null) return;
+        final float f = AITimeoutTracker.getRemainingFraction(AITimeoutTracker.key(gv.getId(), player.getId()));
+        if (f < 0f) return;                                   // hidden: <2s, finished, or timed out
+        final float barH = Math.max(Utils.scale(3), h / 10f);
+        final float y = h - barH;
+        g.fillRect(BAR_BG, 0, y, w, barH);
+        g.fillRect(f > 0.5f ? BAR_GREEN : f > 0.25f ? BAR_AMBER : BAR_RED, 0, y, w * f, barH);
+        Gdx.graphics.requestRendering();                      // keep animating while visible
+    }
 
     public VAvatar(PlayerView player0) {
         player = player0;
@@ -136,6 +160,7 @@ public class VAvatar extends FDisplayObject {
             g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost(), 0);
         }
 
+        drawAITimeoutBar(g, w, h);
         if (Forge.altPlayerLayout && Forge.isLandscapeMode())
             return;
 
