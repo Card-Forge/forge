@@ -42,7 +42,6 @@ import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.StaticData;
-import forge.game.GameState;
 import forge.card.CardStateName;
 import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
@@ -778,11 +777,6 @@ public final class CMatchUI
     }
 
     @Override
-    public GameState getGamestate() {
-        return null;
-    }
-
-    @Override
     public List<JMenu> getMenus() {
         return menus.getMenus();
     }
@@ -1317,6 +1311,9 @@ public final class CMatchUI
         super.afterGameEnd();
         Singletons.getView().getLpnDocument().remove(targetingOverlay.getPanel());
         FThreads.invokeInEdtNowOrLater(() -> {
+            if (isReplay()) {
+                SOverlayUtils.hideOverlay(); // the end-of-game screen would otherwise stay over the whole window
+            }
             Singletons.getView().getNavigationBar().closeTab(screen);
             LinkHandler.clearWeakReferencesNow();
         });

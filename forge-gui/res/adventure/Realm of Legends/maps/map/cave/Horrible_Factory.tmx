@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytVNsNwjAMzGdRkgla1mGIdpbQD7ZBLFAo6yDGIBGylDpnkwCWTmpU+y5+ZXDGTN6Yq5Mxxv+DK6HF5THkx+P3EZr1gtYt4rB7g4zOPeCXdJ/R/7ErvxEH1+HnxW3vlyzVYPIl16Uz5tyV34lj9luOX6yvrLNmUr7JjnaLOSJErJV1Tr7EM9t6XdRP1DOpzlp/JetdqZt6tGSz3jLP5BtsWcccKF/Od3c6xwp0UT4SktFst8ZKujVvB89rBbyIZwQ7R/up7VVLXqjX6A2oNZQLendr5zVYvFdIl3OiOiDdwHY/j9XuqfWC66LZ1ub50y7kd6X6It3Wef5mZv6xRzU4+RIvLBuBEA==
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVEEOwjAM6zjvCX3GxFMHT+EdwIPYDpai4KRuhIQla9XWxGsSt6+tvS5jPtZvqjHsWz/eX49nhi3Iocb4/FtBd7QXeJr/exd1sxwVqLoV7EtrN0fgXCu6Nsd9yfcCtjcgcK7V/nZxL9P1czgzz16X1dFzNM+jePTD6rI6Rox0Z+h1lbsjOwcYxXtdeCvzVVaT6DwWVf9mNVF0GXbBV9BV+st0mX+jnBZRL5ju7DwrXvA1+cU8/8tHClkNPqeiocM=
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgMGNiwAtMcMjj04esB10dLvPwAWQzrpChfxTQHsxgZGCYxkhe/FICQGmDnnbC0iIoHV6isd3EmE1u/h1IQEzZQUy5gc0ckDoZHvLdNlCAGuXkcAOkxi+hvDASAbZ0BQA3HQoF
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhYEEeiOAz81GBg+KWBm48MnmoyMDzTxG8GPv3IQBRojpgmbj4yYNRiYGDSwm8GPv0DBZDDnpRwxgVoHc7EmEGq/gh2CCYVkJKeCaVxbOChOgPDI3UyNFII/gLt/DcA9lIDoIdzngiqeBg7BJMKtBkZGKKh7Fgy3UYJ+ENn+35B6WBgWMVgkUcP5yB27OLo4COwPPhEYplCDcALLA/46Fz2wsoVcsoWagIA9QgqGw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/gold.tx" x="25.5" y="133.583"/>
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="112.667" y="206">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="88,79,80,79"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="268.333" y="64.5"/>
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="129.333" y="80.6667"/>
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="194" y="83.3333"/>
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="159.833" y="213.833"/>
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="208.667" y="212.667"/>
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="210" y="120.667"/>
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="304.167" y="227.833"/>
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="307.333" y="176.667"/>
+  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="352.333" y="226.833"/>
+  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="295.333" y="67.3333"/>
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="411.333" y="70.6667"/>
+  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="410.667" y="32.6667"/>
+  <object id="88" template="../../../../common/maps/obj/waypoint.tx" x="82.1667" y="211"/>
+  <object id="91" template="../../../../common/maps/obj/waypoint.tx" x="103.5" y="82"/>
+  <object id="92" template="../../../../common/maps/obj/waypoint.tx" x="22.5" y="83"/>
+  <object id="95" template="../../../../common/maps/obj/dialog.tx" x="183.706" y="238.25" width="62.5876" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;As you enter the factory, a horrible cacophony of grinding, clanking, and scraping echoes all around you. Hundreds of weird little things scurry about - windmills, lamp posts, pots, wheels, and much more walking about, each with a devious little face.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="411" y="235">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Nexus of Becoming&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/scroll.tx" x="27" y="30">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Blinkmoth Urn&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/scroll.tx" x="72.5" y="191">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Power Depot&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="99" template="../../obj/treasure.tx" x="452.5" y="140">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Horrible Pants&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="76" y="82">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="92,91"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="160" y="82">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,81,78,77"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="226" y="57">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,85"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="354" y="65">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="85,86,87,86"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="320.5" y="200.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,82,84"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="439" y="96.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You have broken up this group of spirits, but the others are equally strong. You see nothing to gain from fighting more. Well, unless you just enjoy smashing stuff.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Nexus of Becoming&quot;, &quot;Blinkmoth Urn&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;, &quot;Power Depot&quot;]}"/>
+    <property name="enemy" value="Horrible Spirit"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

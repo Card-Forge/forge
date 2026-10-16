@@ -1,7 +1,6 @@
 package forge.gamemodes.net;
 
 import forge.LobbyPlayer;
-import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
@@ -196,6 +195,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
         updateGameView(true);
     }
     private void updateGameView(boolean flush) {
+        if (paused) { return; }
         GameView gameView = getGameView();
         if (gameView == null) {
             return;
@@ -371,11 +371,6 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     @Override
     public void setPanelSelection(final CardView hostCard) {
         syncAndSend(ProtocolMethod.setPanelSelection, hostCard);
-    }
-
-    @Override
-    public GameState getGamestate() {
-        return null;
     }
 
     @Override

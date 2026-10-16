@@ -177,6 +177,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameControllers.get(player);
     }
 
+    private boolean replay;
+
+    /** True while this GUI is showing a recorded game rather than a live one. */
+    public final boolean isReplay() {
+        return replay;
+    }
+    public final void setReplay(final boolean replay0) {
+        replay = replay0;
+    }
+
     public final Collection<IGameController> getOriginalGameControllers() {
         return originalGameControllers.values();
     }
@@ -238,6 +248,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * {@link #mayView}.
      */
     public void resetForNewMatch() {
+        replay = false;
         gameControllers.clear();
         originalGameControllers.clear();
         spectator = null;
@@ -437,6 +448,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * Concede game, bring up WinLose UI.
      */
     public boolean concede() {
+        if (replay) {
+            // nothing to concede in a recording: leaving is just closing it, and the caller closes the screen
+            forge.gamemodes.net.client.ReplayPlayer.stopFor(this, false);
+            return true;
+        }
         if (gameView.isGameOver()) {
             return true;
         }
