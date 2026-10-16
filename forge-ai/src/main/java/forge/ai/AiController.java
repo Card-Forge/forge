@@ -1549,7 +1549,8 @@ public class AiController {
             // in a scripted timed fashion.
 
             if (!mustRespond) {
-                saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
+                // Get the playable list early to check for copy SAs.
+                saList = ComputerUtilAbility.getSpellAbilities(cards, player, true);
                 if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
                     // Nothing to copy the spell with, so do nothing.
                     return null;
@@ -1567,7 +1568,7 @@ public class AiController {
         }
 
         if (saList.isEmpty()) {
-            saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+            saList = ComputerUtilAbility.getSpellAbilities(cards, player, true);
         }
 
         saList.removeIf(spellAbility -> {

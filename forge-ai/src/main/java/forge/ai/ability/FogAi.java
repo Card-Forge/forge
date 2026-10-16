@@ -100,15 +100,27 @@ public class FogAi extends SpellAbilityAi {
             }
         }
 
-        // Reserve mana to cast this card if it will be likely needed
-        if ((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
-                || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
-                && AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)
-                && ComputerUtil.aiLifeInDanger(ai, false, 0)) {
-            boolean reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
-            if (reserved) {
-                AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
-            }
+        // Reserve mana to cast this card if it will be likely needed.
+        boolean canConsiderReservation = game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
+                || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS);
+        if (!canConsiderReservation || !game.getStack().isEmpty()
+                || !AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+            return false;
+        }
+
+        // Combat forecasting can be expensive on wide boards. Check the full
+        // cost first; reserveManaSources below performs only a simplified mana check.
+        if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
+            return false;
+        }
+        if (!ComputerUtil.aiLifeInDanger(ai, false, 0)) {
+            return false;
+        }
+
+        boolean reserved = ((PlayerControllerAi) ai.getController()).getAi()
+                .reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
+        if (reserved) {
+            AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
         }
         return false;
     }
