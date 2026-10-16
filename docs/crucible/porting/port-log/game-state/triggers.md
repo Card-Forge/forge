@@ -789,11 +789,11 @@ shared function belongs to just one caller, so neither stayed in either caller's
 `OpponentSmallest`/`OpponentGreatest` carry none and stay unresolved.
 
 Not resolved, each skipped whole rather than treated as met (GO-7, the identical "cannot evaluate, so do not fire" rule
-an unresolved `Affected$`/`Condition$` value already has elsewhere in this port): `Revolt$` (25) -- no
-`Game.leftBattlefieldThisTurn`-equivalent tracked anywhere; `WerewolfTransformCondition$`/
-`WerewolfUntransformCondition$` (65) -- Innistrad's own day/night mechanic, keyed off a "spells cast last turn" list
-this port tracks nowhere; `CheckDefinedPlayer$` (20) -- every real line qualifies it with `isMonarch`, `hasInitiative`,
-`withMostLife` or `withMostType`, mechanics this port has none of, not a shape a general
+an unresolved `Affected$`/`Condition$` value already has elsewhere in this port): (`Revolt$` is resolved since R9d,
+[`m6-r9d-cast-leftovers.md`](m6-r9d-cast-leftovers.md)); `WerewolfTransformCondition$`/ `WerewolfUntransformCondition$`
+(65) -- Innistrad's own day/night mechanic, keyed off a "spells cast last turn" list this port tracks nowhere;
+`CheckDefinedPlayer$` (20) -- every real line qualifies it with `isMonarch`, `hasInitiative`, `withMostLife` or
+`withMostType`, mechanics this port has none of, not a shape a general
 Defined$-to-players resolver
 could close on its own even if one existed (`Player.withMostLife` as a valid string resolves now, in `matchesPlayerProperty`,
 but `CheckDefinedPlayer$`

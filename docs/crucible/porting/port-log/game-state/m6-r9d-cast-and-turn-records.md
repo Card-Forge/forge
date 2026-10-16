@@ -55,24 +55,22 @@ Polukranos needs both its first and second row: 38 distinct cards.
 
 ## Design decisions
 
-| Decision                                                             | Why                                                                                                                                                                                                                              |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No new left-battlefield list                                         | `recordEntered` already logs every zone change with the card as it last was; a second list would be the same data kept twice                                                                                                     |
-| Void's warp clause reads false                                       | No Warp cast exists here (`continuous.go` already reads a `Spell.Warp` grant as never used), so no spell this game cast was warped: the record, not a guess                                                                      |
-| `Madness`, `Emerged`, `AltCost`, `Devoured`, `Convoked` stay refused | Each asks about the card's own keyword (Madness, Emerge, `Mode$ AlternativeCost`, Devour, Convoke), which this port does not perform. Reading "not cast that way" would turn the card to `plays` while its own text is dead      |
-| Bargain and Escape ported as casts, not only as reads                | Both fit an existing seam (an optional cost; Beam me up's alternative cost plus extra parts), so the record is written by the path Java writes it on. Before, Bargain was never offered and Escape never castable, both silently |
-| `Count$Random` stays refused                                         | Java rolls on every `calculateAmount`, the AI's and the stack description's included; no read count here can match the oracle's draws                                                                                            |
-| `CastTotalManaSpent <valid>` only for `Snow`                         | `Pool` counts mana by color and snow-ness, never by source card. Cave, Desert, Treasure need a per-unit source the pool does not keep (a Pool redesign, out of scope)                                                            |
-| Crimes counted in `PushAbility`                                      | Every spell, activated, triggered ability and copy reaches the stack there, as every one reaches `MagicStack.add`, which runs the check for copies too                                                                           |
+| Decision                                              | Why                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No new left-battlefield list                          | `recordEntered` already logs every zone change with the card as it last was; a second list would be the same data kept twice                                                                                                                                                                                                   |
+| Void's warp clause reads false                        | No Warp cast exists here (`continuous.go` already reads a `Spell.Warp` grant as never used), so no spell this game cast was warped: the record, not a guess                                                                                                                                                                    |
+| `Madness`, `Convoked` stay refused                    | Each asks about the card's own keyword (Madness, Convoke), which this port does not perform. Reading "not cast that way" would turn the card to `plays` while its own text is dead. Emerge, Devour and `Mode$ AlternativeCost` are performed since R9d's second batch ([`m6-r9d-cast-leftovers.md`](m6-r9d-cast-leftovers.md)) |
+| Bargain and Escape ported as casts, not only as reads | Both fit an existing seam (an optional cost; Beam me up's alternative cost plus extra parts), so the record is written by the path Java writes it on. Before, Bargain was never offered and Escape never castable, both silently                                                                                               |
+| `CastTotalManaSpent <valid>` only for `Snow`          | `Pool` counts mana by color and snow-ness, never by source card. Cave, Desert, Treasure need a per-unit source the pool does not keep (a Pool redesign, out of scope)                                                                                                                                                          |
+| Crimes counted in `PushAbility`                       | Every spell, activated, triggered ability and copy reaches the stack there, as every one reaches `MagicStack.add`, which runs the check for copies too                                                                                                                                                                         |
 
 ## Limits
 
-| Limit                                                                                                                                          | Effect                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `payWithSnow` spends plain mana before snow mana for a plain pip or a generic unit                                                             | `CastTotalManaSpent Snow` sees the engine's payment order, not a player's choice to spend snow mana first |
-| `RememberAmount$` sums the counters after replacement; Java's `totalValues()` also counts a placement an AddCounter replacement fully replaced | Differs only for a `Replaced` AddCounter replacement; no R9d card meets one                               |
-| The Mode$ CommitCrime trigger (`Player.java:3967`) is not a trigger mode here                                                                  | The count is kept; a card triggering on a crime is refused elsewhere as before                            |
-| Escape with an X in its exile count (Nethergoyf) or a second exile part (Lunar Hatchling) is not offered                                       | `parseUnlessCost` does not read the cost; the card stays uncastable from the graveyard, never half-paid   |
+| Limit                                                                                                                                          | Effect                                                                                                         |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `payWithSnow` spends plain mana before snow mana for a plain pip or a generic unit                                                             | `CastTotalManaSpent Snow` sees the engine's payment order, not a player's choice to spend snow mana first      |
+| `RememberAmount$` sums the counters after replacement; Java's `totalValues()` also counts a placement an AddCounter replacement fully replaced | Differs only for a `Replaced` AddCounter replacement; no R9d card meets one                                    |
+| Escape with an X in its exile count (Nethergoyf) is not offered                                                                                | the X of a non-mana exile part is not announced; the card stays uncastable from the graveyard, never half-paid |
 
 ## New engine state
 
@@ -91,13 +89,10 @@ No new `PlayerController` decision: Bargain asks `ConfirmPayCost` and `ChoosePer
 
 ## Not resolved, by name
 
-| Shape                                           | Cards | Reason                                                                                                    |
-| ----------------------------------------------- | ----- | --------------------------------------------------------------------------------------------------------- |
-| `Count$Devoured <valid>`                        | 4     | The Devour keyword (`CardFactoryUtil.java:2211-2238`) is not expanded: no ETB sacrifice, no devoured list |
-| `Count$Madness`                                 | 2     | No Madness discard-to-exile cast                                                                          |
-| `Count$Emerged`, `Count$AltCost`                | 2     | No Emerge cast, no `Mode$ AlternativeCost` static                                                         |
-| `Count$Random.<min>.<max>`                      | 2     | Read count cannot match the oracle's RNG draws                                                            |
-| `Count$CastTotalManaSpent Cave/Desert/Treasure` | 3     | The pool keeps no mana source                                                                             |
+| Shape                                           | Cards | Reason                           |
+| ----------------------------------------------- | ----- | -------------------------------- |
+| `Count$Madness`                                 | 2     | No Madness discard-to-exile cast |
+| `Count$CastTotalManaSpent Cave/Desert/Treasure` | 3     | The pool keeps no mana source    |
 
 ## Smoke probe
 
