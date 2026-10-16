@@ -470,16 +470,36 @@ public class YieldController {
      * yield state or APINA on), clears everything. Otherwise turns APINA on. So one
      * key acts as both "stop any yielding" and "start auto-passing" depending on state.
      */
-    public static void toggleAutoPassOrStopAll(IGameController ctrl) {
+    public static void toggleAutoPassOrStopAll(IGameController ctrl, PlayerView local, IGuiGame gui) {
         if (ctrl == null) return;
         YieldController yc = ctrl.getYieldController();
         boolean apinaOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
         if (yc.isYieldActive() || apinaOn) {
-            yc.clearActiveYieldAndDispatch();
+            stopYielding(ctrl, local, gui);
             if (apinaOn) toggleAutoPassNoActions(ctrl);
         } else {
             toggleAutoPassNoActions(ctrl);
         }
+    }
+
+    /**
+     * Ends every running yield. On a local seat the controller's owner clears its own. A netplay client's controller
+     * has no owner, so the yields of {@code local} are cleared through the update path, which reaches the host, and
+     * {@code gui} shows the change.
+     */
+    public static void stopYielding(IGameController ctrl, PlayerView local, IGuiGame gui) {
+        if (ctrl == null) return;
+        YieldController yc = ctrl.getYieldController();
+        if (yc.owner != null) {
+            yc.clearActiveYieldAndDispatch();
+            return;
+        }
+        if (local == null) return;
+        if (yc.getAutoPassUntilMarker() != null) ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        if (yc.autoPassUntilStackEmpty()) ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false, false));
+        if (yc.autoPassUntilEndOfTurn()) ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+        gui.refreshYieldUi(local);
+        gui.updateAutoPassPrompt();
     }
 
     /** Activate auto-pass-until-end-of-turn for {@code local} via the unified envelope path. */
