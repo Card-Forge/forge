@@ -894,6 +894,7 @@ public class StaticData {
         }
         if (best == null)
             return null;
+        best = commonCards.getTraditionalFramePrint(best);  // not the borderless / extended art / showcase print
         return card.isFoil() ? best.getFoiled() : best;
     }
 
@@ -915,8 +916,11 @@ public class StaticData {
                                                                                 preferModernFrame, allowedSetCodes);
         // Refinements must never move the print away from the pivot on the wrong side of the timeline
         // (e.g. a far-newer print only because of its frame), otherwise it would not match the deck anymore.
+        // With the Black Border preference a refinement may never trade an original Core/Expansion print for a
+        // Commander, Duel Deck or compilation one just to get another frame.
         if (refinedAltCandidate != null && isOnPreferredSideOfDate(refinedAltCandidate, searchReferenceDate,
-                                                                    isCardArtPreferenceLatestArt))
+                                                                    isCardArtPreferenceLatestArt)
+                && !hasWorseEditionRank(refinedAltCandidate, altCard))
             altCard = refinedAltCandidate;
 
         if (cardArtPreferenceHasFilter && preferCandidatesFromExpansionSets){
@@ -926,10 +930,19 @@ public class StaticData {
             refinedAltCandidate = this.tryToGetCardPrintFromExpansionSet(altCard, isCardArtPreferenceLatestArt,
                                                                             preferModernFrame, allowedSetCodes);
             if (refinedAltCandidate != null && isOnPreferredSideOfDate(refinedAltCandidate, searchReferenceDate,
-                                                                        isCardArtPreferenceLatestArt))
+                                                                        isCardArtPreferenceLatestArt)
+                    && !hasWorseEditionRank(refinedAltCandidate, altCard))
                 altCard = refinedAltCandidate;
         }
         return altCard;
+    }
+
+    /* True if the edition of the candidate ranks lower than the edition of the reference card for the current
+       Card Art Preference (only the Black Border preferences rank editions, see CardArtPreference.getEditionRank) */
+    private boolean hasWorseEditionRank(PaperCard candidate, PaperCard reference) {
+        CardDb.CardArtPreference preference = this.commonCards.getCardArtPreference();
+        return preference.getEditionRank(editions.get(candidate.getEdition()))
+                > preference.getEditionRank(editions.get(reference.getEdition()));
     }
 
     /* Latest Art: print must be released on/after the reference date. Original Art: on/before it. */

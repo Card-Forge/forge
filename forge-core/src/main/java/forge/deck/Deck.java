@@ -538,19 +538,37 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (card.getArtIndex() != IPaperCard.NO_ART_INDEX && card.getArtIndex() != IPaperCard.DEFAULT_ART_INDEX)
             pool.add(isFoil ? card.getFoiled() : card, totalToAdd);  // art index requested, keep that way!
         else {
-            int artCount = data.getCardArtCount(card);
-            if (artCount > 1)
-                addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artCount);
-            else
-                pool.add(isFoil ? card.getFoiled() : card, totalToAdd);
+            /* Only the traditional frame arts are used (not the borderless, extended art, showcase, etched...
+               ones), so that e.g. 4 copies of a card are not spread over special versions of it. When the card
+               has no traditional print in the edition all of its arts are used, as before. */
+            List<PaperCard> traditionalArts = data.getCommonCards().getTraditionalFramePrints(card);
+            if (traditionalArts.size() > 1) {
+                List<Integer> artIndices = new ArrayList<>();
+                for (PaperCard art : traditionalArts)
+                    artIndices.add(art.getArtIndex());
+                addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artIndices);
+            } else if (traditionalArts.size() == 1) {
+                PaperCard art = traditionalArts.get(0);
+                pool.add(isFoil ? art.getFoiled() : art, totalToAdd);
+            } else {
+                int artCount = data.getCardArtCount(card);
+                if (artCount > 1) {
+                    List<Integer> artIndices = new ArrayList<>();
+                    for (int artIndex = 1; artIndex <= artCount; artIndex++)
+                        artIndices.add(artIndex);
+                    addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artIndices);
+                } else
+                    pool.add(isFoil ? card.getFoiled() : card, totalToAdd);
+            }
         }
     }
 
     private void addAlternativeCardPrintInPoolWithMultipleArt(PaperCard alternativeCardPrint, CardPool pool,
-                                                              int totalNrToAdd, int nrOfAvailableArts) {
+                                                              int totalNrToAdd, List<Integer> availableArtIndices) {
         StaticData data = StaticData.instance();
 
         // distribute available card art
+        int nrOfAvailableArts = availableArtIndices.size();
         String cardName = alternativeCardPrint.getName();
         String setCode = alternativeCardPrint.getEdition();
         boolean isFoil = alternativeCardPrint.isFoil();
@@ -559,7 +577,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         cardsPerArtIndex = Math.max(1, cardsPerArtIndex);  // make sure is never zero
         int cardsAdded = 0;
         PaperCard alternativeCardArt = null;
-        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++) {
+        for (int artIndex : availableArtIndices) {
             alternativeCardArt = data.getOrLoadCommonCard(cardName, setCode, artIndex, isFoil);
             cardsAdded += cardsPerArtIndex;
             pool.add(alternativeCardArt, cardsPerArtIndex);

@@ -756,11 +756,85 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
+    /**
+     * Card art chosen by preference should have the traditional frame. If the given print is a special version
+     * (borderless, extended art, showcase, etched, promo...) and the same card also has a print in the main
+     * "cards" section of the same edition, that print is returned instead. When there are several traditional
+     * arts (e.g. basic lands) the one at the same position as the art index is used, so the variety is kept.
+     */
+    public PaperCard getTraditionalFramePrint(PaperCard pc) {
+        if (pc == null || isTraditionalFramePrint(pc))
+            return pc;
+        List<PaperCard> traditional = getTraditionalFramePrints(pc);
+        if (traditional.isEmpty())
+            return pc;  // the card has no traditional print in this edition
+        PaperCard result = traditional.get((Math.max(pc.getArtIndex(), 1) - 1) % traditional.size());
+        return pc.isFoil() ? result.getFoiled() : result;
+    }
+
+    /**
+     * All the traditional frame prints of the same card (and functional variant) in the edition of the given
+     * print, ordered by art index. It is empty when the card has no print in the main "cards" section of
+     * its edition, for example when the whole edition is made of special prints.
+     */
+    public List<PaperCard> getTraditionalFramePrints(PaperCard pc) {
+        if (pc == null)
+            return Collections.emptyList();
+        CardEdition ed = editions.get(pc.getEdition());
+        if (ed == null)
+            return Collections.emptyList();
+        List<PaperCard> traditional = new ArrayList<>();
+        for (PaperCard other : allCardsByRules.get(pc.getRules())) {
+            if (other.getEdition().equals(pc.getEdition()) && ed.isTraditionalFrame(other.getCollectorNumber())
+                    && Objects.equals(other.getFunctionalVariant(), pc.getFunctionalVariant()))
+                traditional.add(other);
+        }
+        if (!pc.getRules().getType().isBasicLand()) {
+            /* Some products (Universes Beyond, Secret Lair, Commander decks...) list the special versions of a card
+               in the main section too, with much higher collector numbers (e.g. 79 / 171 / 265). The standard
+               print is the lowest one. Letter variants of the same number (38a, 38b...) are different arts of the
+               same frame and are kept, and so are all the arts of basic lands. */
+            int lowest = Integer.MAX_VALUE;
+            for (PaperCard other : traditional)
+                lowest = Math.min(lowest, collectorNumberBase(other.getCollectorNumber()));
+            final int standardNumber = lowest;
+            traditional.removeIf(other -> {
+                int number = collectorNumberBase(other.getCollectorNumber());
+                return number != Integer.MAX_VALUE && number != standardNumber;
+            });
+        }
+        traditional.sort(Comparator.comparingInt(PaperCard::getArtIndex));
+        return traditional;
+    }
+
+    /* The number at the start of a collector number ("38b" -> 38), or MAX_VALUE if it does not start with digits. */
+    private static int collectorNumberBase(String collectorNumber) {
+        if (collectorNumber == null)
+            return Integer.MAX_VALUE;
+        int end = 0;
+        while (end < collectorNumber.length() && end < 9 && Character.isDigit(collectorNumber.charAt(end)))
+            end++;
+        return end == 0 ? Integer.MAX_VALUE : Integer.parseInt(collectorNumber.substring(0, end));
+    }
+
+    public boolean isTraditionalFramePrint(PaperCard pc) {
+        CardEdition ed = editions.get(pc.getEdition());
+        if (ed == null || !ed.isTraditionalFrame(pc.getCollectorNumber()))
+            return false;
+        if (pc.getRules().getType().isBasicLand())
+            return true;
+        for (PaperCard traditional : getTraditionalFramePrints(pc))
+            if (traditional.getCollectorNumber().equalsIgnoreCase(pc.getCollectorNumber()))
+                return true;
+        return false;
+    }
+
     private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
         return cards.stream()
                 .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
                 .min(Comparator.comparing((PaperCard pc) -> isPreferredLanguagePrint(pc) ? 0 : 1)
                         .thenComparing((PaperCard pc) -> editions.get(pc.getEdition()), defaultCardArtPreference)
+                        .thenComparing((PaperCard pc) -> isTraditionalFramePrint(pc) ? 0 : 1)
                         .thenComparing(PaperCard::getCollectorNumber))
                 .orElseGet(() -> cards.iterator().next());
     }
@@ -1065,7 +1139,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (cards.isEmpty())
             return null;
         if (cards.size() == 1)  // if only one candidate, there's not much else we should do
-            return cr.isFoil ? cards.get(0).getFoiled() : cards.get(0);
+            return preferTraditionalFrame(cards.get(0), cr);
 
         if (flavorNameMappings.containsKey(cr.cardName)) {
             Collection<PaperCard> matchingNames = cards.stream().filter(c -> c.getDisplayName().equals(cr.cardName)).collect(Collectors.toSet());
@@ -1120,7 +1194,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // is not on disk yet (images are downloaded on demand). Walking back to an older edition just because
         // it happens to have a local image made the preference look ignored.
         PaperCard candidate = candidatesCard.get(acceptedEditions.get(0).getCode());
-        return cr.isFoil ? candidate.getFoiled() : candidate;
+        return preferTraditionalFrame(candidate, cr);
+    }
+
+    /* Picks by Card Art Preference give the traditional frame, unless a specific print was requested. */
+    private PaperCard preferTraditionalFrame(PaperCard candidate, CardRequest cr) {
+        boolean specificPrintRequested = cr.collectorNumber != null && !cr.collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER);
+        PaperCard result = specificPrintRequested ? candidate : getTraditionalFramePrint(candidate);
+        return cr.isFoil ? result.getFoiled() : result;
     }
 
     @Override

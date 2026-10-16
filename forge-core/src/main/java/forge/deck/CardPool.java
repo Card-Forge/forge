@@ -132,12 +132,18 @@ public class CardPool extends ItemPool<PaperCard> {
         // Determine Art Index
         setCode = paperCard.getEdition();
         cardName = paperCard.getName();
-        int artCount = cardDb.getArtCount(cardName, setCode);
         boolean artIndexExplicitlySet = (artIndex > IPaperCard.DEFAULT_ART_INDEX) ||
                 (CardDb.CardRequest.fromString(cardName).artIndex > IPaperCard.NO_ART_INDEX);
+        // When the art is not specified only the traditional frame arts are used (not the borderless, extended
+        // art, showcase, etched... ones). Editions with no traditional print for the card keep all of their arts.
+        List<PaperCard> traditionalArts = artIndexExplicitlySet ? Collections.emptyList()
+                : cardDb.getTraditionalFramePrints(paperCard);
+        int artCount = traditionalArts.isEmpty() ? cardDb.getArtCount(cardName, setCode) : traditionalArts.size();
 
         if ((artIndexExplicitlySet || artCount == 1) && !addAny) {
             // either a specific art index is specified, or there is only one art, so just add the card
+            if (traditionalArts.size() == 1 && !cardDb.isTraditionalFramePrint(paperCard))
+                paperCard = cardDb.getCard(cardName, setCode, traditionalArts.get(0).getArtIndex(), flags);
             this.add(paperCard, amount);
         } else {
             // random art index specified, make sure we get different groups of cards with different art
@@ -146,7 +152,8 @@ public class CardPool extends ItemPool<PaperCard> {
                 int cnt = artGroups[i - 1];
                 if (cnt <= 0)
                     continue;
-                PaperCard randomCard = cardDb.getCard(cardName, setCode, i, flags);
+                int artIndexToAdd = traditionalArts.isEmpty() ? i : traditionalArts.get(i - 1).getArtIndex();
+                PaperCard randomCard = cardDb.getCard(cardName, setCode, artIndexToAdd, flags);
                 this.add(randomCard, cnt);
             }
         }
