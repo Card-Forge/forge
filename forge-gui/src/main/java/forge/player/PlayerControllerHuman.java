@@ -1606,7 +1606,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 && yieldController.getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW);
 
         if (!showActionable && !showAutoTap) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
 
@@ -1657,7 +1657,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push undeclared, legal attacker candidates. */
     public void pushAttackerCandidates(final Player attackingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
@@ -1673,7 +1673,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push defenders that could block at least one current attacker. */
     public void pushBlockerCandidates(final Player defendingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
