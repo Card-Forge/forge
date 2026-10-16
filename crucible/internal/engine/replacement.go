@@ -1030,7 +1030,9 @@ func damageReplacementMatches(g *Game, r *compile.Ability, source CardID, hostCo
 		switch strings.ToLower(p.Key) {
 		case "event", "replacewith", "description", "validtarget", "activezones", "validsource", "iscombat", "secondary",
 			"playerturn", "checksvar", "svarcompare", "ispresent", "preventioneffect", "damageamount",
-			"alwaysreplace", "executemode", "damagetarget":
+			"alwaysreplace", "executemode", "damagetarget",
+			// replacementRequirementsCheck reads it (revoltMatches).
+			"revolt":
 		default:
 			return false
 		}

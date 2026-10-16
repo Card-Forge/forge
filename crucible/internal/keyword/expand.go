@@ -319,6 +319,8 @@ func Expand(k Keyword) (Expansion, bool) {
 		}
 		exp.SVars = []SVarDef{{"KWBloodthirst" + Slot, "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ " + n}}
 		return exp, true
+	case "Devour":
+		return expandDevour(k)
 	case "Modular":
 		// CardFactoryUtil.java:1490 and :2377: enters with N +1/+1 counters, and
 		// when it dies you may put a +1/+1 counter on target artifact creature for
@@ -444,6 +446,38 @@ func expandEquip(k Keyword) (Expansion, bool) {
 		line += " | " + extra
 	}
 	return Expansion{Abilities: []string{line}}, true
+}
+
+// expandDevour is CardFactoryUtil.java:2211-2238's Devour branch,
+// "Devour:<N|X>[:<type>[:<extra description>]]" (Devour.java:32-51): as the
+// permanent enters, its controller may sacrifice any number of other
+// permanents of the type (Creature by default), then it enters with N +1/+1
+// counters for each, and the remembered sacrifices are cleared. Java scopes
+// DevourSacX and DevourX to the two abilities; here they are slotted face
+// amounts. SacMessage$ is display only and dropped. An X amount reads the
+// card's own SVar X (Thromok the Insatiable); any other non-number is not
+// translated.
+func expandDevour(k Keyword) (Expansion, bool) {
+	args := k.Args()
+	if len(args) < 1 || args[0] == "" || (args[0] != "X" && strings.Trim(args[0], "0123456789") != "") {
+		return Expansion{}, false
+	}
+	valid := "Creature"
+	if len(args) > 1 && args[1] != "" {
+		valid = args[1]
+	}
+	return Expansion{
+		Replacements: []string{"Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ KWDevour" + Slot},
+		SVars: []SVarDef{
+			{"KWDevour" + Slot, "DB$ Sacrifice | Defined$ You | Amount$ KWDevourSacX" + Slot + " | RememberSacrificed$ True | Optional$ True | SacValid$ " + valid + ".Other | SubAbility$ KWDevourCounters" + Slot},
+			{"KWDevourCounters" + Slot, "DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ KWDevourX" + Slot + " | SubAbility$ KWDevourCleanup" + Slot},
+			{"KWDevourCleanup" + Slot, "DB$ Cleanup | ClearRemembered$ True"},
+		},
+		Amounts: []SVarDef{
+			{"KWDevourSacX" + Slot, "Count$Valid " + valid + ".YouCtrl+Other"},
+			{"KWDevourX" + Slot, "Count$RememberedSize/Times." + args[0]},
+		},
+	}, true
 }
 
 // expandCycling is CardFactoryUtil.java:3717's Cycling branch: pay the cost and

@@ -65,7 +65,7 @@ func (g *Game) entryReplaced(controller PlayerController, moved CardID, origin Z
 		if len(card.copies) > 0 {
 			card.setCopies(nil)
 		}
-		card.pendingEnter = nil
+		card.pendingEnter, card.devoured = nil, nil
 	}
 	if replaced && card.Zone != Battlefield {
 		// A card the chain left outside the battlefield is not under the
@@ -261,13 +261,14 @@ func chainNext(a *compile.Ability) *compile.Ability {
 }
 
 // entryUpdatedShape is the set of "as it enters" abilities that run before
-// the move: a plain life loss (Lich), and the StoreSVar that remembers the
-// life paid as the card enters (Phyrexian Processor, Minion of the Wastes,
-// Nameless Race: payReplacementLifeX pays its Cost$).
+// the move: a plain life loss (Lich), the StoreSVar that remembers the life
+// paid as the card enters (Phyrexian Processor, Minion of the Wastes, Nameless
+// Race: payReplacementLifeX pays its Cost$), and Devour's sacrifice, whose
+// chain's ETB$ counters wait on the card for applyEnterCounters (devour.go).
 func entryUpdatedShape(sub *compile.Ability) bool {
 	if strings.EqualFold(sub.Name, "StoreSVar") {
 		cost, _ := sub.Param("Cost")
 		return cost == replacementPayLifeX
 	}
-	return strings.EqualFold(sub.Name, "LoseLife")
+	return strings.EqualFold(sub.Name, "LoseLife") || isDevourChain(sub)
 }

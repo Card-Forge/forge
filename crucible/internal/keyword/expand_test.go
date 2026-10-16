@@ -103,6 +103,33 @@ func TestExpand(t *testing.T) {
 	}
 }
 
+// Devour's type and multiplier land in the sacrifice and the counter amount
+// (CardFactoryUtil.java:2211-2238).
+func TestExpandDevourTypeAndMultiplier(t *testing.T) {
+	t.Parallel()
+
+	exp, ok := keyword.Expand(keyword.Parse("Devour:3:Land"))
+	if !ok {
+		t.Fatal("Devour:3:Land did not expand")
+	}
+	if len(exp.SVars) != 3 || !strings.Contains(exp.SVars[0].Value, "SacValid$ Land.Other") ||
+		!strings.Contains(exp.SVars[0].Value, "Optional$ True") {
+		t.Errorf("SVars %v: want a Sacrifice of Land.Other, optional", exp.SVars)
+	}
+	want := map[string]string{
+		"KWDevourSacX{n}": "Count$Valid Land.YouCtrl+Other",
+		"KWDevourX{n}":    "Count$RememberedSize/Times.3",
+	}
+	for _, a := range exp.Amounts {
+		if want[a.Name] != a.Value {
+			t.Errorf("amount %s = %q, want %q", a.Name, a.Value, want[a.Name])
+		}
+	}
+	if len(exp.Amounts) != len(want) {
+		t.Errorf("amounts %v, want %v", exp.Amounts, want)
+	}
+}
+
 func TestExpandReplacements(t *testing.T) {
 	t.Parallel()
 
@@ -120,6 +147,11 @@ func TestExpandReplacements(t *testing.T) {
 		{"Bloodthirst:y", false, ""},
 		{"Bloodthirst", false, ""},
 		{"etbCounter:P1P1", false, ""},
+		{"Devour:2", true, "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ KWDevour{n}"},
+		{"Devour:3:Land", true, "ReplaceWith$ KWDevour{n}"},
+		{"Devour:X::, where X is the number of creatures devoured this way", true, "ReplaceWith$ KWDevour{n}"},
+		{"Devour:y", false, ""},
+		{"Devour", false, ""},
 	} {
 		t.Run(tc.line, func(t *testing.T) {
 			t.Parallel()

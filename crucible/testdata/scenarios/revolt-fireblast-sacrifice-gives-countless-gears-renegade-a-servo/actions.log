@@ -1,0 +1,18 @@
+# Fireblast's own Mode$ AlternativeCost static (StaticAbilityAlternativeCost,
+# CR 118.9): option 1 casts it by sacrificing two Mountains instead of its
+# mana cost; it deals 4 to the opponent. The two Mountains left the
+# battlefield under the human's control, so Countless Gears Renegade's
+# Revolt$ True ETB trigger (CardTraitBase.java:323-330, Player.hasRevolt)
+# fires and creates a Servo.
+startturn human
+advance 3
+queue option 1
+queue targets ai
+queue sacrificechoice 3,4
+castspell human 1
+resolvestack
+tapformana human 5 W
+tapformana human 6 W
+queue paygeneric W
+castspell human 2
+resolvestack

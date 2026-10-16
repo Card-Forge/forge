@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow ability action amount card castspell condition control defined effecthelpers game id parts player stack targeting trigger zone
+//enginelint:allow ability action amount card castspell condition control defined effecthelpers game id parts player stack targeting trigger triggerpack zone
 
 import (
 	"fmt"
@@ -116,6 +116,8 @@ func (copySpellAbilityEffect) Resolve(g *Game, a *Ability, controller PlayerCont
 		// under a spell source).
 		matches := g.checkBecomesTargetTriggers(tg.targets, tg.aura, tg.copier)
 		matches = append(matches, g.checkWardTriggers(tg.targets, tg.host, tg.copier)...)
+		// The copy's targets are all a crime check reads (isCrime).
+		matches = append(matches, g.crimeTriggers(Ability{Controller: tg.copier, Targets: tg.targets})...)
 		g.pushTriggeredAbilities(controller, matches)
 	}
 	return nil

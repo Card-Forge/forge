@@ -4,7 +4,7 @@
 
 package engine
 
-//enginelint:allow id card ability trigger staticability triggerscan game control valid
+//enginelint:allow id card ability trigger staticability triggerscan game control valid stack
 
 import (
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -83,6 +83,25 @@ var collectEvidenceParams = effectEventParams("validplayer")
 // against the player who paid the cost; the player is TriggeredPlayer.
 func (g *Game) checkCollectEvidenceTriggers(controller PlayerController, pid PlayerID) {
 	g.pushTriggeredAbilities(controller, g.playerEventMatches("CollectEvidence", collectEvidenceParams, pid))
+}
+
+// commitCrimeParams are the params a Mode$ CommitCrime trigger may carry
+// (TriggerCommitCrime.performTest reads ValidPlayer$ only; the 21 corpus
+// lines add ActivationLimit$ and PlayerTurn$, read by triggerEffectAPI).
+var commitCrimeParams = effectEventParams("validplayer")
+
+// crimeTriggers is the Mode$ CommitCrime run of Player.commitCrime
+// (Player.java:3962-3968, TriggerCommitCrime.java:17-28) for pushed, the
+// stack item just added: none when pushing it was no crime (isCrime, the
+// check noteCrime counted), else every trigger whose ValidPlayer$ admits its
+// controller, who is TriggeredPlayer. A caller appends these to the push's
+// BecomesTarget batch, after it, as MagicStack.add runs the crime check after
+// the BecomesTarget triggers (MagicStack.java:408-451).
+func (g *Game) crimeTriggers(pushed Ability) []Ability {
+	if !g.isCrime(pushed) {
+		return nil
+	}
+	return g.playerEventMatches("CommitCrime", commitCrimeParams, pushed.Controller)
 }
 
 func (g *Game) playerEventMatches(mode string, params map[string]bool, pid PlayerID) []Ability {

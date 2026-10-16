@@ -1,0 +1,9 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanhand=Island;Island
+humanlibrary=Island
+humanbattlefield=Forest|Tapped;Forest|Tapped;Forest|Tapped;Forest|Tapped;Forest|Tapped;Llanowar Elves;Skullmulcher|Counters:P1P1=2|SummonSick
+humangraveyard=Grizzly Bears;Grizzly Bears
+ailife=20

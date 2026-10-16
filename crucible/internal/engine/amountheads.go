@@ -296,6 +296,10 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return g.creaturesAttackedCount(sourceController, source, count.Argument)
 	case "LeftBattlefieldThisTurn":
 		return g.leftBattlefieldCount(sourceController, source, count.Argument)
+	case "Devoured":
+		// AbilityUtils.java:2194-2197: the host's devoured permanents
+		// (Card.getDevouredCards) matching the valid string.
+		return g.devouredCount(sourceController, source, count.Argument)
 	case "YouDescendedThisTurn":
 		// AbilityUtils.java:2336-2338: Player.getDescended, a count.
 		return g.Player(sourceController).descended, true

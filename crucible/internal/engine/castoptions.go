@@ -43,6 +43,18 @@ type castOption struct {
 	// sneak is the Sneak alternative cost (sneak.go): alt is its mana, an
 	// unblocked attacker returns to hand, and the spell has instant speed.
 	sneak bool
+	// emerge, when not "", is the Emerge alternative cost (emerge.go): alt is
+	// its mana, and a permanent of this valid type is sacrificed, its mana
+	// value off the generic part.
+	emerge string
+	// altStatic is the card's own Mode$ AlternativeCost static (altcost.go):
+	// alt is its cost's mana (or {0}), altExtra, when hasAltExtra, the rest
+	// of it, and the cast records OptionalCost.AltCost. altText is the
+	// static's Cost$, the label's.
+	altStatic   bool
+	altExtra    unlessCost
+	hasAltExtra bool
+	altText     string
 }
 
 // sameWay reports whether two options differ only in flash and limits, which
@@ -50,7 +62,7 @@ type castOption struct {
 func (o castOption) sameWay(p castOption) bool {
 	return o.withoutMana == p.withoutMana && o.hasAlt == p.hasAlt && o.alt.Equal(p.alt) && o.anyType == p.anyType &&
 		o.anyColor == p.anyColor && o.snowAnyColor == p.snowAnyColor && o.raise == p.raise && o.replaceExile == p.replaceExile && o.sacAtCleanup == p.sacAtCleanup &&
-		o.sneak == p.sneak
+		o.sneak == p.sneak && o.emerge == p.emerge && o.altStatic == p.altStatic && o.altText == p.altText
 }
 
 // castOptions is every way pid may cast card now from its zone: the normal
@@ -102,6 +114,13 @@ func (g *Game) castOptions(pid PlayerID, card CardID, fromHand bool) []castOptio
 		if mc, ok := g.sneakAvailable(pid, c); ok {
 			out = append(out, castOption{hasAlt: true, alt: mc, flash: true, sneak: true})
 		}
+		// Emerge's own spell (CardFactoryUtil.java:2808-2821), offered while
+		// something can be sacrificed for it.
+		if o, ok := g.emergeOption(pid, c); ok {
+			out = append(out, o)
+		}
+		// The card's own Mode$ AlternativeCost statics (altcost.go).
+		out = append(out, g.altCostOptions(pid, c)...)
 	}
 	for _, o := range grants {
 		merged := false
@@ -133,6 +152,10 @@ func (o castOption) describe(name string) string {
 		return "Cast " + name + " for its sneak cost " + o.alt.String() + ", returning an unblocked attacker you control to hand"
 	case o.sacAtCleanup:
 		return "Cast " + name + " with flash, sacrificing it at the next cleanup step"
+	case o.emerge != "":
+		return emergeLabel(name, o.alt, o.emerge)
+	case o.altStatic:
+		return "Cast " + name + " for its alternative cost " + o.altText
 	case o.withoutMana:
 		base = "Cast " + name + " without paying its mana cost"
 	case o.hasAlt:

@@ -451,6 +451,13 @@ type Card struct {
 	// snapshot shares it.
 	pendingEnter []enterPile
 
+	// devoured are the permanents this one's Devour sacrificed as it entered
+	// (Card.devouredCards, Card.java:1186-1194), in the order sacrificed,
+	// each read from its last-known information. Ends when the permanent
+	// leaves the battlefield (Java's next zone's object is a new Card). The
+	// slice is replaced, never appended in place.
+	devoured []CardID
+
 	// goadedBy are this creature's goads (CR 701.15).
 	goadedBy []goad
 
@@ -1213,6 +1220,9 @@ const (
 	optGeneric optionalKinds = 1 << iota
 	optTeamwork
 	optBargain
+	// optAltCost is OptionalCost.AltCost: the card's own Mode$ AlternativeCost
+	// static paid the cast (StaticAbilityAlternativeCost.java:84-86).
+	optAltCost
 )
 
 // castOptional is a card's record of its cast's optional costs: Java keeps
@@ -1230,6 +1240,10 @@ type castOptional struct {
 	revealed  []CardID
 	foretold  bool
 	escaped   bool
+	// emerged is getSacrificedAsEmerge (SpellAbility, PlaySpellAbility.java:
+	// 553): the permanent sacrificed for the Emerge cost, read as it last was
+	// (emerge.go); NoCard for a cast that did not emerge.
+	emerged CardID
 }
 
 // has reports whether the cast paid an optional cost of kind k.

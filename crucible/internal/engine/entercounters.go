@@ -85,7 +85,7 @@ func (g *Game) applyEnterCounters(controller PlayerController, moved CardID, ori
 		}
 		if !onlyParams(r, "validcard", "destination", "origin", "replacementresult", "layer",
 			// the flags triggerCommonRequirementsMet evaluates
-			"bloodthirst", "metalcraft", "delirium", "threshold", "hellbent", "fatefulhour", "lifetotal", "lifeamount",
+			"bloodthirst", "metalcraft", "delirium", "threshold", "hellbent", "fatefulhour", "lifetotal", "lifeamount", "revolt",
 			"ispresent2", "presentcompare2", "presentzone2", "presentplayer2", "presentdefined2") {
 			// Optional$ and the like: counters it may decline are not put
 			// unconditionally.

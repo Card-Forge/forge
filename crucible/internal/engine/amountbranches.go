@@ -28,11 +28,10 @@ import (
 // reads state the engine already keeps for the same flag's Condition$ use
 // (continuousConditionMet, continuous.go) or the turn's history
 // (castrecord.go: Void, Revolt; Player.committedCrimes); Adamant reads the
-// spell's own paid mana (adamantValue). Not resolved: Madness, Escaped,
-// Emerged, Freerunning, AltCost, PromisedGift (the card's own keyword or
+// spell's own paid mana (adamantValue). Not resolved: Madness,
+// Freerunning, PromisedGift (the card's own keyword or
 // static is a cast this port does not make, so the branch would only hide
-// that), StartingPlayer, and Random (Java rolls on every read, the AI's
-// included, so no read count here can match the oracle's draws).
+// that) and StartingPlayer. Random is randomCountValue's, a draw per read.
 func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, count expr.Count, depth int) (n int, ok, handled bool) {
 	branch := func(yes bool) (int, bool, bool) {
 		if len(count.Parameters) < 2 {
@@ -88,6 +87,10 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		n, ok := g.adamantValue(amounts, sourceController, source, count, depth)
 		return n, ok, true
 	}
+	if count.Head == "Random" {
+		n, ok := g.randomCountValue(amounts, sourceController, source, count, depth)
+		return n, ok, true
+	}
 	switch {
 	case strings.HasPrefix(count.Head, "Bargain"):
 		// AbilityUtils.java:1708-1710: the ability's own cast was bargained
@@ -109,6 +112,24 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 			return 0, false, true
 		}
 		return branch(g.Card(source).castEscaped())
+	case strings.HasPrefix(count.Head, "Emerged"):
+		// AbilityUtils.java:2061-2063: getCastSA().isEmerge(), the card's cast
+		// record (Adipose Offspring's tokens). Java also asks that the
+		// ability not be unlinked from the cast (isUnlinkedFromCastSA); the
+		// record ends with the object, which is the same line here.
+		if source == NoCard {
+			return 0, false, true
+		}
+		return branch(g.Card(source).castEmerged())
+	case strings.HasPrefix(count.Head, "AltCost"):
+		// AbilityUtils.java:2064-2066: Card.isOptionalCostPaid(OptionalCost.
+		// AltCost), set by the card's own AlternativeCost static (altcost.go;
+		// Bringer of Green Zenith's Twilight's "X is 5").
+		if source == NoCard {
+			return 0, false, true
+		}
+		c := g.Card(source)
+		return branch(c.wasCast && c.castOpt.has(optAltCost))
 	}
 	var flag func(PlayerID) bool
 	switch count.Head {
@@ -199,6 +220,26 @@ func (g *Game) adamantValue(amounts map[string]expr.Amount, sourceController Pla
 		pick = count.Parameters[1]
 	}
 	return branchAmount(g, amounts, sourceController, source, pick, depth)
+}
+
+// randomCountValue is Count$Random.<min>.<max> (AbilityUtils.java:2782-2787):
+// both bounds are calculateAmount inputs, and every read draws
+// MyRandom.nextInt(1+max-min)+min afresh from the game's Java-compatible
+// generator. Each effect here reads its amount once per resolution, so a
+// resolution draws once per read, as Java's resolve does; Java also reads it
+// for the AI's decisions and a stack description, which this engine never
+// does, so a seeded game's stream leaves the oracle's at the first such read.
+// A max below min (nextInt's IllegalArgumentException) is unresolved (GO-7).
+func (g *Game) randomCountValue(amounts map[string]expr.Amount, sourceController PlayerID, source CardID, count expr.Count, depth int) (int, bool) {
+	if len(count.Parameters) != 2 {
+		return 0, false
+	}
+	lo, okLo := branchAmount(g, amounts, sourceController, source, count.Parameters[0], depth)
+	hi, okHi := branchAmount(g, amounts, sourceController, source, count.Parameters[1], depth)
+	if !okLo || !okHi || hi < lo {
+		return 0, false
+	}
+	return int(g.rand.Int32n(int32(1+hi-lo))) + lo, true
 }
 
 // castFromMatches is Count$wasCastFrom[Your]<Zone>[ByYou]'s own test

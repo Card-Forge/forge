@@ -440,6 +440,11 @@ type triggeredObjects struct {
 	// (SacrificeEffect.java:171-173). Read by the TriggeredExploited amount
 	// head. NoCard when unset.
 	exploited CardID
+	// devoured is AbilityKey.Devoured of Mode$ Devoured: the permanent a
+	// Devour sacrifice devoured, read from its last-known information
+	// (SacrificeEffect.java:164-168). Read by the TriggeredDevoured amount
+	// head. NoCard when unset.
+	devoured CardID
 	// activator is AbilityKey.Activator for Mode$ TapsForMana: the player
 	// who activated the mana ability, read by Defined$ TriggeredActivator.
 	// NoPlayer when unset.

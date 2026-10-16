@@ -351,22 +351,56 @@ func TestPlayLandSkipsETBTriggerWhenLifeTotalConditionNotMet(t *testing.T) {
 	}
 }
 
-// TestPlayLandSkipsETBTriggerWhenRevoltIsPresent proves an unresolved
-// common-requirements param (Revolt$ -- no leftBattlefieldThisTurn tracking)
-// skips the whole line rather than treating it as met (GO-7).
-func TestPlayLandSkipsETBTriggerWhenRevoltIsPresent(t *testing.T) {
+// Revolt$ (CardTraitBase.java:323-330) reads the turn's departures from the
+// battlefield: True needs a permanent the host's controller controlled to have
+// left, False needs none of theirs to have, and None needs no player's
+// permanent to have left at all (Sarevok, Deathbringer).
+func TestPlayLandRevoltFlagReadsTheTurnsDepartures(t *testing.T) {
 	t.Parallel()
 
-	g := newGame(t, "a")
-	p := g.Players()[0]
-	g.SetTurnState(1, p, engine.Main1)
-	land := g.NewCard(commonReqTriggerLandDef(t, "Test Land", "Revolt$ True"), p, engine.Hand)
-	top := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Library)
+	for _, tc := range []struct {
+		name, flag string
+		left       func(g *engine.Game, p, other engine.PlayerID)
+		fires      bool
+	}{
+		{"true after your permanent left", "Revolt$ True", leftUnder(t, true), true},
+		{"true on a quiet turn", "Revolt$ True", nil, false},
+		{"true after only the opponent's left", "Revolt$ True", leftUnder(t, false), false},
+		{"false on a quiet turn", "Revolt$ False", nil, true},
+		{"false after your permanent left", "Revolt$ False", leftUnder(t, true), false},
+		{"none on a quiet turn", "Revolt$ None", nil, true},
+		{"none after the opponent's left", "Revolt$ None", leftUnder(t, false), false},
+		{"none after yours left", "Revolt$ None", leftUnder(t, true), false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			g, p, other := newTwoPlayerGame(t)
+			g.SetTurnState(1, p, engine.Main1)
+			if tc.left != nil {
+				tc.left(g, p, other)
+			}
+			land := g.NewCard(commonReqTriggerLandDef(t, "Test Land", tc.flag), p, engine.Hand)
+			top := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Library)
+			g.PlayLand(p, land, engine.NewScriptedController())
+			if err := g.ResolveStack(engine.NewRegistry(), engine.NewScriptedController()); err != nil {
+				t.Fatalf("ResolveStack: %v", err)
+			}
+			if fired := g.Card(top).Zone == engine.Hand; fired != tc.fires {
+				t.Errorf("%s fired = %v, want %v", tc.flag, fired, tc.fires)
+			}
+		})
+	}
+}
 
-	g.PlayLand(p, land, engine.NewScriptedController())
-
-	if g.Card(top).Zone != engine.Library {
-		t.Errorf("library card zone = %v, want Library -- Revolt$ is not resolvable, so the line must not fire", g.Card(top).Zone)
+// leftUnder returns a setup moving a permanent of p's (mine) or of the
+// opponent's from the battlefield to its owner's graveyard.
+func leftUnder(t *testing.T, mine bool) func(g *engine.Game, p, other engine.PlayerID) {
+	return func(g *engine.Game, p, other engine.PlayerID) {
+		who := other
+		if mine {
+			who = p
+		}
+		g.Move(addN(t, g, who, engine.Battlefield, 1, "Artifact")[0], engine.Graveyard, who)
 	}
 }
 

@@ -30,6 +30,7 @@ var contextHeads = map[string]bool{
 	"Targeted": true, "ParentTargeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
 	"TriggeredSource": true, "TriggerRemembered": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
 	"Collected": true, "Revealed": true, "TriggerObjectsAttackers": true, "TriggeredExploited": true,
+	"TriggeredDevoured": true,
 }
 
 // listHeadCards is the card list an amount head names, in calculateAmount's
@@ -37,8 +38,7 @@ var contextHeads = map[string]bool{
 // ExiledWith, DungeonsCompleted, ChosenCard, Remembered/RememberedLKI,
 // Imprinted/ImprintedLKI, Enchanted/Equipped -- then the resolving ability's
 // (contextHeads). handled is false for a head that names no list; ok is false
-// for a list this port does not keep (Convoked, Emerged, Crewed) or cannot
-// read here.
+// for a list this port does not keep (Convoked, Crewed) or cannot read here.
 //
 // A Remembered or Imprinted card is read as it is now (game.getCardState);
 // the LKI spellings read the remembered object itself, which for a card that
@@ -55,7 +55,14 @@ func (g *Game) listHeadCards(sourceController PlayerID, source CardID, head stri
 			return nil, false, true
 		}
 		return g.cardsOf(g.Player(sourceController).completedDungeons, false), true, true
-	case strings.HasPrefix(head, "Convoked"), strings.HasPrefix(head, "Emerged"), strings.HasPrefix(head, "Crewed"):
+	case strings.HasPrefix(head, "Emerged"):
+		// AbilityUtils.java:509-510: Card.getEmerged, the permanent its cast
+		// sacrificed for Emerge, as it last was.
+		if source == NoCard {
+			return nil, false, true
+		}
+		return g.emergedCards(g.Card(source)), true, true
+	case strings.HasPrefix(head, "Convoked"), strings.HasPrefix(head, "Crewed"):
 		return nil, false, true
 	case strings.HasPrefix(head, "ChosenCard"):
 		if source == NoCard {
@@ -133,7 +140,7 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 	// list holds the battlefield Card object, which the move to the graveyard
 	// replaced with a copy (GameAction.java:207).
 	lki := head == "Sacrificed" || head == "Exiled" || head == "TriggeredCard" || head == "TriggerRemembered" ||
-		head == "TriggerObjectsAttackers" || head == "TriggeredExploited"
+		head == "TriggerObjectsAttackers" || head == "TriggeredExploited" || head == "TriggeredDevoured"
 	return g.cardsOf(ids, lki), true
 }
 
@@ -182,6 +189,12 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 			return nil, false
 		}
 		ids = []CardID{a.triggered.exploited}
+	case "TriggeredDevoured":
+		// AbilityKey.Devoured of Mode$ Devoured (TriggerDevoured.java:67).
+		if a.triggered.devoured == NoCard {
+			return nil, false
+		}
+		ids = []CardID{a.triggered.devoured}
 	case "TriggerObjectsAttackers":
 		// AbilityUtils.java:697-701: the trigger's AbilityKey.Attackers list.
 		// Java reads a key the mode never set as an empty list; here that is

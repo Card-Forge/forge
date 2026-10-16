@@ -4,7 +4,7 @@
 // beside mana tokens are the shapes that need no mid-payment decision beyond
 // which cards.
 
-//enginelint:allow id zone card game player ability control event manapay discardeffect sacrificeeffect valid parts returncost combatdamage turn trigger taptype chosencosts exilefromgrave amount zonemove removecountereffect defined
+//enginelint:allow id zone card game player ability control event manapay discardeffect sacrificeeffect valid parts returncost combatdamage turn trigger taptype chosencosts exilefromgrave amount zonemove removecountereffect defined exile
 
 package engine
 
@@ -64,6 +64,16 @@ type unlessCost struct {
 	// type exiled from the payer's graveyard (CostExile).
 	exileGraveN    int
 	exileGraveSpec string
+	// exileHandN/exileHandSpec are ExileFromHand<N/Type>: N cards of the type
+	// exiled from the payer's hand, the source itself never among them
+	// (CostExile from the hand; Allosaurus Rider's "do not count it",
+	// CostExile.java:265-269). exileFieldN/exileFieldSpec are Exile<N/Type>:
+	// N permanents of the type the payer controls, exiled (CostExile's
+	// battlefield default). Both are the cost's "Exiled" paid list.
+	exileHandN     int
+	exileHandSpec  string
+	exileFieldN    int
+	exileFieldSpec string
 	// tapN/tapSpec are tapXType<N/Type>: N untapped permanents of the type the
 	// payer controls (CostTapType).
 	tapN    int
@@ -107,8 +117,10 @@ type unlessCost struct {
 
 // parseUnlessCost reads text into an unlessCost, false for a shape past
 // mana, PayLife, PayEnergy, DamageYou<N>, Draw<N/You>, Discard<N/Card>,
-// AddCounter<N/Type> on the source and one Sac, Return or Reveal part (Tap, an
-// X, ...), each its own further mechanic (GO-7).
+// AddCounter<N/Type> on the source, one Sac, Return or Reveal part and the
+// chosen-card parts below (ExileFromGrave, ExileFromHand, Exile from the
+// battlefield, tapXType, ...); a Tap, an unannounced X or another part is
+// its own further mechanic (GO-7).
 func parseUnlessCost(text string) (unlessCost, bool) {
 	return parseUnlessCostX(text, 0, false)
 }
@@ -164,6 +176,10 @@ func parseUnlessCostX(text string, x int, hasX bool) (unlessCost, bool) {
 			uc.addCounterN, uc.addCounterType, uc.addCounterSpec = n, M1M1, "Creature.YouCtrl"
 		case p.Name == "ExileFromGrave" && uc.exileGraveN == 0 && chosenCardSpecResolvable(p.Field(1)):
 			uc.exileGraveN, uc.exileGraveSpec = n, p.Field(1)
+		case p.Name == "ExileFromHand" && uc.exileHandN == 0 && chosenCardSpecResolvable(p.Field(1)):
+			uc.exileHandN, uc.exileHandSpec = n, p.Field(1)
+		case p.Name == "Exile" && uc.exileFieldN == 0 && chosenCardSpecResolvable(p.Field(1)):
+			uc.exileFieldN, uc.exileFieldSpec = n, p.Field(1)
 		case p.Name == "tapXType" && uc.tapN == 0 && p.Field(0) != "Any" && p.Field(1) != "" && tapTypeResolvable(p.Field(1)):
 			uc.tapN, uc.tapSpec = n, p.Field(1)
 		case p.Name == "Waterbend" && uc.waterbendN == 0:
@@ -450,6 +466,12 @@ func (g *Game) unlessCardsPayable(pid PlayerID, source CardID, uc unlessCost) bo
 	if uc.exileGraveN > 0 && len(g.costCandidates(pid, source, false, Graveyard, uc.exileGraveSpec)) < uc.exileGraveN {
 		return false
 	}
+	if uc.exileHandN > 0 && len(g.costCandidates(pid, source, false, Hand, uc.exileHandSpec)) < uc.exileHandN {
+		return false
+	}
+	if uc.exileFieldN > 0 && len(g.costCandidates(pid, source, false, Battlefield, uc.exileFieldSpec)) < uc.exileFieldN {
+		return false
+	}
 	if uc.tapN > 0 && len(tapTypeCandidates(g, pid, source, false, uc.tapSpec)) < uc.tapN {
 		return false
 	}
@@ -614,6 +636,22 @@ func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid P
 			exileFromGraveyard(g, controller, id)
 		}
 	}
+	if uc.exileHandN > 0 {
+		picks := g.chosenUnlessCards(controller, pid, a.Source, g.costCandidates(pid, a.Source, false, Hand, uc.exileHandSpec), uc.exileHandN, uc.exileHandN)
+		for _, id := range picks {
+			exileFromHand(g, id)
+		}
+		if rec != nil {
+			rec.exiled = append(rec.exiled, picks...)
+		}
+	}
+	if uc.exileFieldN > 0 {
+		picks := g.chosenUnlessCards(controller, pid, a.Source, g.costCandidates(pid, a.Source, false, Battlefield, uc.exileFieldSpec), uc.exileFieldN, uc.exileFieldN)
+		exileCards(g, controller, picks)
+		if rec != nil {
+			rec.exiled = append(rec.exiled, picks...)
+		}
+	}
 	if uc.libN > 0 {
 		options := g.costCandidates(pid, a.Source, false, Graveyard, uc.libSpec)
 		for _, id := range g.chosenUnlessCards(controller, pid, a.Source, options, uc.libN, uc.libN) {
@@ -703,6 +741,8 @@ func (uc unlessCost) times(n int) (unlessCost, bool) {
 	uc.revealN *= n
 	uc.addCounterN *= n
 	uc.exileGraveN *= n
+	uc.exileHandN *= n
+	uc.exileFieldN *= n
 	uc.tapN *= n
 	uc.waterbendN *= n
 	uc.evidenceN *= n

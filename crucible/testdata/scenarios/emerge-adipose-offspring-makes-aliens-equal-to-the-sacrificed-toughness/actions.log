@@ -1,0 +1,17 @@
+# Emerge (CR 702.119, CardFactoryUtil.java:2808-2821): option 1 casts
+# Adipose Offspring for its emerge cost {5}{W}, sacrificing Horned Turtle,
+# whose mana value 3 comes off the generic part (CostAdjustment.java:404-422),
+# so three Plains pay {2}{W}. Its ETB trigger reads Count$Emerged.T.1 and
+# Emerged$CardToughness (AbilityUtils.java:509-510, :2061-2063): four Aliens,
+# the Turtle's toughness.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+tapformana human 4 W
+queue option 1
+queue sacrificechoice 5
+queue paygeneric W
+queue paygeneric W
+castspell human 1
+resolvestack

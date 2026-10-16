@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Plains|Tapped;Plains|Tapped;Countless Gears Renegade|SummonSick;T:c_1_1_a_servo|SummonSick
+humangraveyard=Mountain;Mountain;Fireblast
+ailife=16

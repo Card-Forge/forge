@@ -45,10 +45,22 @@ func (g *Game) PushAbility(a Ability) {
 // it: the spell's activating player Java tests. Every ability reaches the stack
 // through here, copies included, as every SpellAbility reaches MagicStack.add,
 // which runs the check for a copy too. The Mode$ CommitCrime trigger Java runs
-// after is not ported (no such trigger mode here).
+// with the count (Player.java:3966-3967) is crimeTriggers': it goes to the
+// stack with the push's BecomesTarget batch, which MagicStack.add runs just
+// before the crime check (MagicStack.java:408-451).
 func (g *Game) noteCrime(a Ability) {
+	if g.isCrime(a) {
+		g.Player(a.Controller).committedCrimes++
+	}
+}
+
+// isCrime is MagicStack.commitCrimeCheck (MagicStack.java:1034-1054) for a,
+// as it stands on the stack: a target of the whole ability is an opponent of
+// its controller, a card an opponent controls on the battlefield or the stack,
+// or one an opponent owns in a graveyard.
+func (g *Game) isCrime(a Ability) bool {
 	if a.Controller == NoPlayer {
-		return
+		return false
 	}
 	targets := allTargetsOf(a)
 	if a.Target != NoCard {
@@ -58,8 +70,7 @@ func (g *Game) noteCrime(a Ability) {
 	for _, e := range targets {
 		if pid, ok := e.AsPlayer(); ok {
 			if pid != a.Controller {
-				g.Player(a.Controller).committedCrimes++
-				return
+				return true
 			}
 			continue
 		}
@@ -78,10 +89,10 @@ func (g *Game) noteCrime(a Ability) {
 			continue
 		}
 		if who != a.Controller {
-			g.Player(a.Controller).committedCrimes++
-			return
+			return true
 		}
 	}
+	return false
 }
 
 // StackLen is how many abilities are waiting to resolve.

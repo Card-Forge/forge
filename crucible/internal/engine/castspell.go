@@ -168,6 +168,13 @@ func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller Player
 		opts.withoutManaCost, opts.anyType, opts.anyColor = way.withoutMana, way.anyType, way.anyColor
 		opts.snowAnyColor = way.snowAnyColor
 		opts.sneak = way.sneak
+		opts.emerge = way.emerge
+		if way.altStatic {
+			// The static's cost past its mana is paid as Escape's other parts
+			// are (altcost.go).
+			opts.altStatic = true
+			opts.extra, opts.hasExtra = way.altExtra, way.hasAltExtra
+		}
 		if way.hasAlt {
 			opts.altCost, opts.hasAltCost = way.alt, true
 		}
@@ -355,9 +362,10 @@ func (g *Game) beamMeUpCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool)
 // (GameActionUtil.java:145-169, CR 702.138a): pid owns c and it is there. The
 // keyword's cost replaces the mana cost (copyWithManaCostReplaced): its mana
 // is what is paid instead, its other parts -- exiling other cards from the
-// graveyard -- are paid with it. A cost parseUnlessCost does not read
-// (Nethergoyf's ExileFromGrave<X/...>, Lunar Hatchling's Exile<1/Land>) or
-// one whose parts pid cannot pay is not offered (GO-7).
+// graveyard, Lunar Hatchling's land exiled from the battlefield -- are paid
+// with it. A cost parseUnlessCost does not read (Nethergoyf's
+// ExileFromGrave<X/...+withTypesGE4>: an announced X and a test on the chosen
+// set as a whole) or one whose parts pid cannot pay is not offered (GO-7).
 func (g *Game) escapeCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool) {
 	if c.Zone != Graveyard || c.Owner != pid || c.Def == nil {
 		return mana.Cost{}, unlessCost{}, false
@@ -474,6 +482,15 @@ type castOpts struct {
 	// mana, extra its other parts, and the cast records it
 	// (castOptional.escaped).
 	escape bool
+	// emerge, when not "", is a cast for the card's Emerge cost
+	// (AlternativeCost.Emerge, emerge.go): altCost is that cost, and
+	// payCastCost has the caster sacrifice a permanent of this valid type,
+	// its mana value off the generic part, recorded in castOptional.emerged.
+	emerge string
+	// altStatic is a cast for the card's own Mode$ AlternativeCost static
+	// (altcost.go): altCost is its mana, extra the rest, and the cast records
+	// OptionalCost.AltCost (optAltCost).
+	altStatic bool
 }
 
 // castSpell is CastSpell past its timing and hand gates: the three spell
@@ -503,7 +520,11 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 		return false
 	}
 	opts.optional = optional
-	g.Card(card).castOpt = castOptional{kinds: optional.kinds, foretold: opts.foretold, escaped: opts.escape}
+	kinds := optional.kinds
+	if opts.altStatic {
+		kinds |= optAltCost
+	}
+	g.Card(card).castOpt = castOptional{kinds: kinds, foretold: opts.foretold, escaped: opts.escape}
 	opts.kickers = g.chooseKicker(controller, pid, g.Card(card))
 	g.Card(card).kicker = opts.kickers
 	g.Card(card).sneaked = opts.sneak
@@ -684,6 +705,16 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 	if !ok {
 		return xAnnounced{}, false
 	}
+	emerged := NoCard
+	if opts.emerge != "" {
+		// CostAdjustment.adjustCostByEmerge: the permanent is picked as the
+		// cost is worked out, after the cost statics, and taken off its
+		// generic part; it is sacrificed once the mana is paid.
+		if emerged, ok = g.chooseEmergeSacrifice(controller, pid, c.ID, opts.emerge); !ok {
+			return xAnnounced{}, false
+		}
+		total = reducedByEmerge(g, total, emerged)
+	}
 	total, assist := g.assistCost(controller, pid, c, total)
 	total, waterbent := g.waterbendCast(controller, pid, c.ID, total, opts.optional.waterbendN)
 	g.snowAnyColor = opts.snowAnyColor
@@ -698,6 +729,9 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 		// The mana another player paid (assist) is not in x.paid: Converge
 		// and Adamant read only the caster's.
 		c.castPaid, c.castSnow = x.paid, x.snow
+		if emerged != NoCard {
+			g.payEmergeSacrifice(controller, pid, c.ID, emerged)
+		}
 	}
 	return x, paid
 }
@@ -789,6 +823,7 @@ func (g *Game) castAura(pid PlayerID, card CardID, c *Card, controller PlayerCon
 	tgts := []EntityID{CardEntity(target)}
 	matches := g.checkBecomesTargetTriggers(tgts, true, pid)
 	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
+	matches = append(matches, g.crimeTriggers(cast)...)
 	g.pushTriggeredAbilities(controller, matches)
 	return true
 }
@@ -852,6 +887,7 @@ func (g *Game) castPlayerAura(pid PlayerID, card CardID, c *Card, controller Pla
 	tgts := []EntityID{target}
 	matches := g.checkBecomesTargetTriggers(tgts, true, pid)
 	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
+	matches = append(matches, g.crimeTriggers(cast)...)
 	g.pushTriggeredAbilities(controller, matches)
 	return true
 }
@@ -942,6 +978,7 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 	tgts := allTargetsOf(a)
 	matches := g.checkBecomesTargetTriggers(tgts, false, pid)
 	matches = append(matches, g.checkWardTriggers(tgts, card, pid)...)
+	matches = append(matches, g.crimeTriggers(a)...)
 	g.pushTriggeredAbilities(controller, matches)
 	return true
 }

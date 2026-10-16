@@ -2234,6 +2234,7 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 			tgts := allTargetsOf(matches[i])
 			batch := g.checkBecomesTargetTriggers(tgts, false, matches[i].Controller)
 			batch = append(batch, g.checkWardTriggersForAbility(tgts, pushed.ID, pushed.Source, pushed.Controller)...)
+			batch = append(batch, g.crimeTriggers(pushed)...)
 			g.pushTriggeredAbilities(controller, batch)
 		}
 	}
@@ -2399,6 +2400,7 @@ func changesZoneResolvable(t *compile.Ability) bool {
 // since S:/A: lines carry some of the identical param names for a different
 // switch -- StaticAbility.checkConditions' own Condition$, SpellAbilityCondition's
 // own Condition$/ConditionPresent$, neither this function's concern):
+//
 //   - IsPresent$/PresentCompare$/PresentZone$/PresentPlayer$ and the
 //     identical IsPresent2$/PresentCompare2$/PresentZone2$/PresentPlayer2$
 //     pair (624) -- isPresentMatches, below, ports the zone-scan branch of
@@ -2407,24 +2409,29 @@ func changesZoneResolvable(t *compile.Ability) bool {
 //     this port yet, drawDefinedPlayers' own narrow You/Opponent form being
 //     the only Defined$ evaluator built so far, and it resolves players, not
 //     cards).
+//
 //   - CheckSVar$/SVarCompare$ (474) -- checkSVarMatches, below, resolving
 //     both sides through resolveAmount the identical way ptParam already
 //     does for a continuous effect's own numeric params; a line also naming
 //     CheckSecondSVar$ (0 real T: lines today) skips, since Java ORs a
 //     second check against the first and this file has no need to guess at
 //     that shape blind.
+//
 //   - Metalcraft$/Delirium$/Threshold$/Hellbent$/FatefulHour$ as a
 //     True/False flag (38) -- boolFlagMatches, below, reusing
 //     continuousConditionMet's own underlying predicates (item 27's own
 //     Condition$ paragraph): the identical player-state question, asked as
 //     a flag here rather than as the whole condition.
+//
 //   - LifeTotal$ You/ActivePlayer with LifeAmount$ (12) -- lifeTotalMatches,
 //     below; OpponentSmallest/OpponentGreatest (0 real T: lines) skip, no
 //     multi-opponent life-total query built for triggers.
 //
+//   - Revolt$ True/False/None (25) -- revoltMatches, below, over the turn's
+//     left-the-battlefield record (castrecord.go's hasRevolt).
+//
 // Not resolved, each skipped whole rather than treated as met (GO-7):
-// Revolt$ (25, Game.leftBattlefieldThisTurn tracks nothing for triggers to
-// read); WerewolfTransformCondition$/WerewolfUntransformCondition$ (65,
+// WerewolfTransformCondition$/WerewolfUntransformCondition$ (65,
 // Innistrad's own day/night mechanic, a "spells cast last turn" list this
 // port tracks nowhere); CheckDefinedPlayer$ (20, every real line qualifies
 // it with isMonarch/hasInitiative/withMostLife/withMostType -- a mechanic
@@ -2436,7 +2443,7 @@ func changesZoneResolvable(t *compile.Ability) bool {
 // Archon of Coronation's.
 func triggerCommonRequirementsMet(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability) bool {
 	for _, key := range [...]string{
-		"Revolt", "WerewolfTransformCondition", "WerewolfUntransformCondition",
+		"WerewolfTransformCondition", "WerewolfUntransformCondition",
 		"CheckDefinedPlayer", "ManaSpent", "ManaNotSpent", "Adamant",
 		"EnduringStory", "ClassLevel",
 	} {
@@ -2484,6 +2491,30 @@ func triggerCommonRequirementsMet(g *Game, host *Card, amounts map[string]expr.A
 	}
 	if !lifeTotalMatches(g, host, amounts, t) {
 		return false
+	}
+	return revoltMatches(g, host, t)
+}
+
+// revoltMatches is CardTraitBase.meetsCommonRequirements' Revolt$
+// (CardTraitBase.java:323-330): True needs the host's controller to have
+// revolt (Player.hasRevolt, a permanent they controlled left the battlefield
+// this turn), False needs them not to, and None needs no player at all to
+// have it (Sarevok, Deathbringer's "if no permanents left the battlefield this
+// turn"). Absent is a pass.
+func revoltMatches(g *Game, host *Card, t *compile.Ability) bool {
+	v, ok := t.Param("Revolt")
+	if !ok {
+		return true
+	}
+	if strings.EqualFold(v, "True") != g.hasRevolt(host.Controller()) {
+		return false
+	}
+	if strings.EqualFold(v, "None") {
+		for _, pid := range g.Players() {
+			if g.hasRevolt(pid) {
+				return false
+			}
+		}
 	}
 	return true
 }

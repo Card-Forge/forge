@@ -168,7 +168,18 @@ func (sacrificeEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 		if n == 0 {
 			continue
 		}
-		chosen := controller.ChoosePermanentsToSacrifice(g, pid, candidates, n)
+		if !isDevourAbility(a) {
+			sacrificeCards(g, controller, a, controller.ChoosePermanentsToSacrifice(g, pid, candidates, n))
+			continue
+		}
+		// Devour's "any number": Optional$ without StrictAmount$ lets the
+		// player choose from none up to Amount$ (SacrificeEffect.java:138,
+		// choosePermanentsToSacrifice(sa, 0, amount, ...)). The answer is
+		// checked, a wrong one an error (GO-7).
+		chosen := controller.ChooseCardsForEffect(g, pid, a.Source, candidates, 0, n)
+		if !isSubset(chosen, candidates) || hasDuplicate(chosen) || len(chosen) > n {
+			return fmt.Errorf("engine: Sacrifice: devour answer %v is not up to %d of the %d offered", chosen, n, len(candidates))
+		}
 		sacrificeCards(g, controller, a, chosen)
 	}
 	return nil
@@ -222,6 +233,9 @@ func sacrificeCardsFor(g *Game, controller PlayerController, a *Ability, ids []C
 		g.moveToGraveyard(controller, id)
 		g.checkDiesTriggers(controller, id)
 		sacrificed = append(sacrificed, id)
+		if isDevourAbility(a) {
+			g.noteDevoured(controller, a.Source, id)
+		}
 		if isExploitAbility(a) {
 			g.checkExploitedTriggers(controller, a.Source, id)
 		}

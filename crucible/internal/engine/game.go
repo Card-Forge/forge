@@ -933,6 +933,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.goadedBy = nil
 		c.mustBlock = nil
 		c.blockedByThisTurn = nil
+		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
 		c.renowned = false
 		// Layer 3's text change ends with the object (CR 400.7), before the
@@ -1062,6 +1063,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 		c.goadedBy = nil
 		c.mustBlock = nil
 		c.blockedByThisTurn = nil
+		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
 		// Layer 3's text change ends with the object (CR 400.7), before the
 		// copy and face-down restores below read or replace Def.
@@ -1444,6 +1446,7 @@ func (g *Game) Clone() *Game {
 		c.mustBlock = append([]mustBlockReq(nil), g.cards[i].mustBlock...)
 		c.hiddenKeywords = append([]string(nil), g.cards[i].hiddenKeywords...)
 		c.blockedByThisTurn = append([]CardID(nil), g.cards[i].blockedByThisTurn...)
+		c.devoured = append([]CardID(nil), g.cards[i].devoured...)
 		c.activations = g.cards[i].activations.clone()
 		c.trigActs = g.cards[i].trigActs.clone()
 		c.trigResolved = g.cards[i].trigResolved.clone()

@@ -352,7 +352,9 @@
       "playerstate",
       "castoptions",
       "delayedtrigger",
-      "leftto"
+      "leftto",
+      "triggerpack",
+      "emerge"
     ],
     "trigger": [
       "daytimeeffect",
@@ -377,7 +379,8 @@
       "unlesscost",
       "lifelink",
       "defined",
-      "triggerscan"
+      "triggerscan",
+      "triggerpack"
     ],
     "statictrigger": ["id", "game", "card", "ability", "control", "effect"],
     "continuous": [
@@ -432,7 +435,9 @@
       "playerstate",
       "daytimeeffect",
       "defined",
-      "effecthelpers"
+      "effecthelpers",
+      "devour",
+      "emerge"
     ],
     "replacement": [
       "id",
@@ -457,7 +462,8 @@
       "unlesscost",
       "staticability",
       "lifelost",
-      "manapay"
+      "manapay",
+      "devour"
     ],
     "playerstate": ["id", "zone", "card", "game"],
     "defined": ["id", "game", "player", "card", "ability", "parts", "valid"],
@@ -492,7 +498,10 @@
       "zone",
       "valid",
       "parts",
-      "exploit"
+      "exploit",
+      "devour",
+      "taptype",
+      "chosencosts"
     ],
     "exile": ["id", "zone", "card", "game", "control", "valid", "trigger", "ability", "statictrigger"],
     "exilefromgrave": ["id", "zone", "card", "game", "control", "leftto"],
@@ -501,7 +510,19 @@
     "exertcost": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger", "statictrigger"],
     "exploit": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger", "statictrigger"],
     "gameloss": ["id", "zone", "card", "game", "player", "valid", "replacement", "parts", "effecthelpers"],
-    "castoptions": ["id", "zone", "card", "game", "control", "parts", "airbendeffect", "rulesmod"],
+    "castoptions": [
+      "id",
+      "zone",
+      "card",
+      "game",
+      "control",
+      "parts",
+      "airbendeffect",
+      "rulesmod",
+      "emerge",
+      "altcost",
+      "unlesscost"
+    ],
     "castrecord": ["id", "zone", "card", "game", "valid", "parts"],
     "playerproperty": ["id", "zone", "card", "game", "player", "valid", "amount", "combat", "castrecord"],
     "foretell": ["id", "zone", "card", "game", "control", "parts", "mana"],

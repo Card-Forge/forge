@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Plains|Tapped;Plains|Tapped;Plains|Tapped;Adipose Offspring|SummonSick;T:w_2_2_alien|SummonSick;T:w_2_2_alien|SummonSick;T:w_2_2_alien|SummonSick;T:w_2_2_alien|SummonSick
+humangraveyard=Horned Turtle
+ailife=20

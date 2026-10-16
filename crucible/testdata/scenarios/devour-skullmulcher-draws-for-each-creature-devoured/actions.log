@@ -1,0 +1,21 @@
+# Devour 1 (CR 702.82, CardFactoryUtil.java:2211-2238): as Skullmulcher
+# enters, its controller may sacrifice any number of other creatures -- here
+# both Grizzly Bears, keeping Llanowar Elves (SacrificeEffect.java:138: the
+# minimum is 0 under Optional$) -- and it enters with a +1/+1 counter for each.
+# Its ETB trigger then draws Count$Devoured Card (AbilityUtils.java:2194-2197),
+# two cards.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+tapformana human 5 G
+tapformana human 6 G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+queue confirmeffect true
+queue cardchoice 7,8
+castspell human 1
+resolvestack
