@@ -366,6 +366,14 @@ public class CardPool extends ItemPool<PaperCard> {
     public CardEdition getPivotCardEdition(boolean isLatestCardArtPreference) {
         Map<CardEdition, Integer> editionsFrequencyMap = this.getCardEditionStatistics(false);
         CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+        if (artPreference.filterSets) {
+            /* Core/Expansion preferences: promos, Masters sets, Commander decks... are not eligible prints, so
+               they must not become the pivot (base) edition of the deck, unless the deck has nothing else. */
+            Map<CardEdition, Integer> eligibleEditions = new HashMap<>(editionsFrequencyMap);
+            eligibleEditions.keySet().removeIf(ed -> !artPreference.acceptsSetType(ed));
+            if (!eligibleEditions.isEmpty())
+                editionsFrequencyMap = eligibleEditions;
+        }
         if (artPreference.blackBorderOnly) {
             /* Promos and compilation sets (The List, Masters sets, MTGO promos...) are not original releases:
                they must not define the era of the deck, unless the deck has nothing else. */

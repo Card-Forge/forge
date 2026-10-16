@@ -103,6 +103,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return ed.getBorderColor() == CardEdition.BorderColor.BLACK;
         }
 
+        /** Whether the set type of the edition is allowed by this preference (Core, Expansion and Reprint sets only for the filtered ones). */
+        public boolean acceptsSetType(CardEdition ed) {
+            return ed != null && (!filterSets || ALLOWED_SET_TYPES.contains(ed.getType()));
+        }
+
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
             if (blackBorderOnly && !isBlackBordered(ed)) return false;
@@ -832,11 +837,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
         return cards.stream()
                 .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
-                .min(Comparator.comparing((PaperCard pc) -> isPreferredLanguagePrint(pc) ? 0 : 1)
+                // A Black Border preference is a hard requirement: a translated white-bordered print must not
+                // beat a black-bordered one. The preferred language only decides among equally acceptable borders.
+                .min(Comparator.comparing((PaperCard pc) -> isBorderMismatch(pc) ? 1 : 0)
+                        .thenComparing((PaperCard pc) -> isPreferredLanguagePrint(pc) ? 0 : 1)
                         .thenComparing((PaperCard pc) -> editions.get(pc.getEdition()), defaultCardArtPreference)
                         .thenComparing((PaperCard pc) -> isTraditionalFramePrint(pc) ? 0 : 1)
                         .thenComparing(PaperCard::getCollectorNumber))
                 .orElseGet(() -> cards.iterator().next());
+    }
+
+    private boolean isBorderMismatch(PaperCard pc) {
+        if (defaultCardArtPreference == null || !defaultCardArtPreference.blackBorderOnly)
+            return false;
+        CardEdition edition = editions.get(pc.getEdition());
+        return edition != null && edition.getBorderColor() != CardEdition.BorderColor.BLACK;
     }
 
     private boolean isPreferredLanguagePrint(PaperCard pc) {
