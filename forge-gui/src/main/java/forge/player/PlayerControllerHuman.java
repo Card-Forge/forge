@@ -2373,6 +2373,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             for (final int index : savedOrder) {
                 orderedSAs.add(activePlayerSAs.get(index));
             }
+            macros().addRememberedAction(new StackOrderAction(describeAbilityOrder(orderedSAs)));
             return orderedSAs;
         }
 

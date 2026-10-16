@@ -191,11 +191,12 @@ public class KeyboardShortcuts {
             }
         };
 
-        final Action actMacroRecord = macroAction(matchUI, ui -> ui.getGameController().macros().setRememberedActions());
+        final Action actMacroRecord = macroAction(matchUI, ui -> ui.getCDock().toggleMacroRecording());
         
-        final Action actMacroNextAction = macroAction(matchUI, ui -> ui.getGameController().macros().nextRememberedAction());
+        final Action actMacroNextAction = macroActionAndRefreshControls(matchUI,
+                ui -> ui.getGameController().macros().nextRememberedAction());
 
-        final Action actMacroRepeatActions = macroAction(matchUI,
+        final Action actMacroRepeatActions = macroActionAndRefreshControls(matchUI,
                 ui -> ui.getGameController().macros().repeatRememberedActions());
 
         final Action actZoomCard = new AbstractAction() {
@@ -303,9 +304,16 @@ public class KeyboardShortcuts {
                     return;
                 }
                 command.accept(matchUI);
-                matchUI.getCDock().refreshMacroButtons();
             }
         };
+    }
+
+    private static Action macroActionAndRefreshControls(final CMatchUI matchUI, final Consumer<CMatchUI> command) {
+        return macroAction(matchUI, ui -> {
+            command.accept(ui);
+            ui.getCDock().refreshMacroButtons();
+            ui.getCMacro().update();
+        });
     }
 
     /**
