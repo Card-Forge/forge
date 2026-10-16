@@ -158,7 +158,9 @@ public class MatchScreen extends FScreen {
             if (chat != null) {
                 menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
             }
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
+            if (!MatchController.instance.isReplay()) {
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
+            }
             menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
         } else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
@@ -1260,6 +1262,10 @@ public class MatchScreen extends FScreen {
     }
 
     private void confirmUserConcedes() {
+        if (MatchController.instance.isReplay()) {
+            forge.gamemodes.net.client.ReplayPlayer.stopFor(MatchController.instance, true); // just leave a recording
+            return;
+        }
         final Consumer<Boolean> callback = result -> {
             if (result) {
                 getGameController().concede();
