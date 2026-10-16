@@ -152,6 +152,8 @@ public class SimulateMatch {
 
                 if (type.equals(GameType.Commander)) {
                     rp = RegisteredPlayer.forCommander(d);
+                } else if (type.equals(GameType.PauperCommander)) {
+                    rp = RegisteredPlayer.forVariants(params.get("d").size(), EnumSet.of(type), d, null, false, null, null);
                 } else {
                     rp = new RegisteredPlayer(d);
                 }
@@ -383,8 +385,16 @@ public class SimulateMatch {
     private static Deck deckFromCommandLineParameter(String deckname, GameType type, String deckDir) {
         int dotpos = deckname.lastIndexOf('.');
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
-            String baseDir = deckDir != null ? deckDir : (type.equals(GameType.Commander) ?
-                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR);
+            String baseDir;
+            if (deckDir != null) {
+                baseDir = deckDir;
+            } else if (type.equals(GameType.Commander)) {
+                baseDir = ForgeConstants.DECK_COMMANDER_DIR;
+            } else if (type.equals(GameType.PauperCommander)) {
+                baseDir = ForgeConstants.DECK_PAUPER_COMMANDER_DIR;
+            } else {
+                baseDir = ForgeConstants.DECK_CONSTRUCTED_DIR;
+            }
 
             if (!baseDir.endsWith(File.separator)) {
                 baseDir += File.separator;
@@ -403,6 +413,8 @@ public class SimulateMatch {
         // Add other game types here...
         if (type.equals(GameType.Commander)) {
             deckStore = FModel.getDecks().getCommander();
+        } else if (type.equals(GameType.PauperCommander)) {
+            deckStore = FModel.getDecks().getPauperCommander();
         } else {
             deckStore = FModel.getDecks().getConstructed();
         }
