@@ -96,6 +96,10 @@ public class InputSelectStackItems extends InputSyncronizedBase {
 
     @Override
     protected void onOk() {
+        // The button is disabled until enough is chosen, but a remote client can still send the press
+        if (selected.size() < min) {
+            return;
+        }
         stop();
     }
 
