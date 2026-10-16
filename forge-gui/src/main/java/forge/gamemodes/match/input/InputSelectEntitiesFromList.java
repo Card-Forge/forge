@@ -10,7 +10,6 @@ import forge.game.cost.CostExile;
 import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -45,18 +44,12 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             System.out.printf("Trying to choose at least %d things from a list with only %d things!%n", min, validChoices.size());
         }
         ArrayList<CardView> vCards = new ArrayList<>();
-        ArrayList<PlayerView> vPlayers = new ArrayList<>();
         for (T v : validChoices0) {
             if (v instanceof Card c) {
                 vCards.add(c.getView());
-            } else if (v instanceof Player p) {
-                vPlayers.add(p.getView());
             }
         }
         getController().getGui().setSelectables(vCards, this.min, this.max);
-        if (!vPlayers.isEmpty()) {
-            getController().getGui().setSelectableTargets(vPlayers);
-        }
     }
 
     @Override
