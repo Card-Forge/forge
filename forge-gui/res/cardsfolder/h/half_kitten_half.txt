@@ -2,4 +2,7 @@ Name:Half-Kitten, Half-
 ManaCost:no cost
 Types:Creature Cat
 Colors:white
-K:Augment:2 W:+1/+2
+PTModifier:+1/+2
+K:Augment:2 W:LeftSide
+SVar:LeftSide:T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you're dealt damage,
+Oracle:Whenever you’re dealt damage,\nAugment {2}{W} ({2}{W}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

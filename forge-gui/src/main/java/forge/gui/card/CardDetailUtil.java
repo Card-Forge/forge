@@ -175,7 +175,11 @@ public class CardDetailUtil {
         }
 
         if (card.isCreature() || card.hasPrintedPT()) {
-            ptText.append(card.getPower()).append(" / ").append(card.getToughness());
+            if (card.isAugment()) {
+                ptText.append(card.getPowerModifier()).append(" / ").append(card.getToughnessModifier());
+            } else {
+                ptText.append(card.getPower()).append(" / ").append(card.getToughness());
+            }
         }
 
         if (card.hasPrintedPT() && !card.isCreature()) {

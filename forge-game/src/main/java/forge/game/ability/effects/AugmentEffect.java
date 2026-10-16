@@ -2,13 +2,10 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -45,6 +42,10 @@ public class AugmentEffect  extends SpellAbilityEffect {
         } else {
             augmentCreature = source;
         }
+        if (!augmentCreature.hasKeyword(Keyword.AUGMENT)) {
+            return;
+        }
+
         FCollection<Card> targets = new FCollection<>(getDefinedCardsOrTargeted(sa, "Defined"));
         if (targets.isEmpty()) {
             return;
@@ -54,7 +55,7 @@ public class AugmentEffect  extends SpellAbilityEffect {
         params.put("Attachments", augmentCreature);
         Card hostCreature = activator.getController().chooseSingleEntityForEffect(targets, sa, title, params);
 
-        if (hostCreature == null || !hostCreature.hasState(CardStateName.Augmented)) {
+        if (hostCreature == null || !hostCreature.hasKeyword(Keyword.AUGMENT_HOST)) {
             return;
         }
 
@@ -69,14 +70,17 @@ public class AugmentEffect  extends SpellAbilityEffect {
         if (!hostCreature.attachAugment(augmentCreature)) {
             return;
         };
-        hostCreature.setState(CardStateName.Augmented, false);
         final long ts = game.getNextTimestamp();
         hostCreature.setAugmentedTimeStamp(ts);
         hostCreature.addCloneState(CardFactory.getAugmentedCloneState(hostCreature, sa), ts);
 
+        // Re-register triggers for target card
+        game.getTriggerHandler().clearActiveTriggers(hostCreature, null);
+        game.getTriggerHandler().registerActiveTrigger(hostCreature, false);
+
         game.getAction().moveTo(hostCreature.getOwner().getZone(ZoneType.Merged), augmentCreature, sa);
 
-
         hostCreature.updateStateForView();
+        augmentCreature.updateStateForView();
     }
 }

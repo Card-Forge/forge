@@ -17,7 +17,6 @@ public enum CardStateName {
     SpecializeB,
     SpecializeR,
     SpecializeG,
-    Augmented
 
     ;
 

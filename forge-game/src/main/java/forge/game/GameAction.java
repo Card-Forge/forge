@@ -399,6 +399,16 @@ public class GameAction {
         CardCollection mergedCards = null;
         if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
             mergedCards = new CardCollection(c.getMergedCards());
+        }
+        if (fromBattlefield && !toBattlefield && c.getAugmentedWith() != null) {
+            if(mergedCards == null) {
+                mergedCards = new CardCollection(c);
+            } else {
+                mergedCards.add(c);
+            }
+            mergedCards.add(c.getAugmentedWith());
+        }
+        if (mergedCards != null) {
             // replace top card with copied card for correct name for human to choose
             mergedCards.set(mergedCards.indexOf(c), copied);
             // CR 725.3b
@@ -526,6 +536,7 @@ public class GameAction {
                 card.setZone(zoneTo);
             }
             copied.clearMergedCards();
+            c.attachAugment(null);
         } else {
             if (!suppress) {
                 storeChangesZoneAll(copied, zoneFrom, zoneTo, params);

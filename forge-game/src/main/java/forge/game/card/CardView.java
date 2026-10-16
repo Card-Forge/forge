@@ -762,6 +762,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.PreparedSpell, CardView.get(c.getPreparedSpell()));
     }
 
+    public CardView getAugment() {
+        return get(TrackableProperty.Augment);
+    }
+    void updateAugment(Card c) {
+        set(TrackableProperty.Augment, CardView.get(c.getAugmentedWith()));
+    }
+
     public FCollectionView<CardView> getImprintedCards() {
         return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
@@ -1120,10 +1127,6 @@ public class CardView extends GameEntityView {
         // because it only checks original states. Fall back to the Secondary clone state.
         if (alternateState == null && c.hasState(CardStateName.Secondary)) {
             alternateState = c.getState(CardStateName.Secondary);
-        }
-
-        if (alternateState == null && c.hasState(CardStateName.Augmented)) {
-            alternateState = c.getState(CardStateName.Augmented);
         }
 
         if (alternateState == null) {
@@ -1546,6 +1549,15 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.AttractionLights, c.getAttractionLights());
         }
 
+        public String getPowerModifier() { return get(TrackableProperty.PowerModifier); }
+        void updatePowerModifier(CardState c) {
+            set(TrackableProperty.PowerModifier, c.getPowerModifier());
+        }
+        public String getToughnessModifier() { return get(TrackableProperty.ToughnessModifier); }
+        void updateToughnessModifier(CardState c) {
+            set(TrackableProperty.ToughnessModifier, c.getToughnessModifier());
+        }
+
         public boolean hasPrintedPT() {
             return get(TrackableProperty.HasPrintedPT);
         }
@@ -1723,6 +1735,7 @@ public class CardView extends GameEntityView {
         public boolean isSorcery() {
             return getType().isSorcery();
         }
+        public boolean isAugment() {return hasKeyword(Keyword.AUGMENT) && !hasKeyword(Keyword.AUGMENT_HOST); }
 
         @Override
         public String getTranslationKey() {

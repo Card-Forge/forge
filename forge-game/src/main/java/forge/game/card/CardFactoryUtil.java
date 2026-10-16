@@ -2624,10 +2624,13 @@ public class CardFactoryUtil {
             // The Exile part is done by the System itself
         } else if (keyword.startsWith("Augment")) {
             final String[] k = keyword.split(":");
+            if (!k[0].equals("Augment")) {
+                return;
+            }
             final String manacost = k[1];
 
             final String effect = "AB$ Augment | Cost$ " + manacost + " Reveal<1/CARDNAME> | ValidTgts$ Host | ActivationZone$ Hand"
-                    + "| PrecostDesc$ Augment | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + "| SorcerySpeed$ True | PrecostDesc$ Augment | CostDesc$ " + ManaCostParser.parse(manacost)
                     + " | StackDescription$ SpellDescription | SpellDescription$ (" + inst.getReminderText() + ")";;
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);

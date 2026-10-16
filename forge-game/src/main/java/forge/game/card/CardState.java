@@ -79,6 +79,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String baseDefense = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
     private Set<Integer> attractionLights = null;
+    private String powerModifier = "";
+    private String toughnessModifier = "";
 
     private final FCollection<SpellAbility> abilities = new FCollection<>();
     private FCollection<Trigger> triggers = new FCollection<>();
@@ -374,6 +376,21 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public final void setAttractionLights(Set<Integer> attractionLights) {
         this.attractionLights = attractionLights;
         view.updateAttractionLights(this);
+    }
+
+    public String getPowerModifier() {
+        return this.powerModifier;
+    }
+    public void setPowerModifier(String powerModifier) {
+        this.powerModifier = powerModifier;
+        view.updatePowerModifier(this);
+    }
+    public String getToughnessModifier() {
+        return toughnessModifier;
+    }
+    public void setToughnessModifier(String toughnessModifier) {
+        this.toughnessModifier = toughnessModifier;
+        view.updateToughnessModifier(this);
     }
 
     public final KeywordCollection getCachedKeywords() {
@@ -871,6 +888,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
+        setPowerModifier(source.getPowerModifier());
+        setToughnessModifier(source.getToughnessModifier());
         setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 

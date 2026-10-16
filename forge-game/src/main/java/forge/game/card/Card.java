@@ -1467,7 +1467,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         mergedCards.remove(c);
     }
     public final void clearMergedCards() {
-        mergedCards.clear();
+        if (mergedCards != null) {
+            mergedCards.clear();
+        }
     }
 
     public final Card getMergedToCard() {
@@ -1510,11 +1512,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean attachAugment(Card augment) {
+        if (augment == null) {
+            if (this.augmentedWith != null) {
+                this.augmentedWith.augmenting = null;
+            } else {
+                this.augmentedWith = null;
+            }
+            view.updateAugment(this);
+            return true;
+        }
         if (this.augmentedWith != null || augment.augmenting != null) {
             return false;
         }
         this.augmentedWith = augment;
         augment.augmenting = this;
+        view.updateAugment(this);
         return true;
     }
     public final Card getAugmentedWith() { return augmentedWith; }
@@ -1541,6 +1553,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             out.addAll(mergedTo.getAllComponentCards(true));
         if(this.hasMergedCard())
             out.addAll(mergedCards);
+        if (this.augmentedWith != null) {
+            out.addAll(this.augmentedWith.getAllComponentCards(true));
+        }
         if(!includeSelf) //mergedCards includes self.
             out.remove(this);
         return out;
@@ -2734,7 +2749,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
                         || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
-                        || keyword.startsWith("Affinity")) {
+                        || keyword.startsWith("Affinity") || keyword.startsWith("Augment")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));

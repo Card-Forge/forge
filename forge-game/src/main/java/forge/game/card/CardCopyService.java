@@ -388,6 +388,8 @@ public class CardCopyService {
 
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
 
+        newCopy.attachAugment(getLKICopy(copyFrom.getAugmentedWith(), cachedMap));
+
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
             newCopy.updateKeywordsCache(newCopy.getState(s));
