@@ -309,7 +309,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         Map<String, List<String>> referenceDeckLoadingMap;
         if (deferredSections != null) {
-            this.normalizeDeferredSections();
+            this.normalizeDeferredSections(getNamesToKeepWithNoEdition(this.deferredSections));
             referenceDeckLoadingMap = new HashMap<>(this.deferredSections);
         } else
             referenceDeckLoadingMap = new HashMap<>(loadedSections);
@@ -343,7 +343,31 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
     }
 
-    private void normalizeDeferredSections() {
+    /**
+     * Collect the names of cards that were requested ONLY without a specified edition (in any section).
+     * These must stay edition-less after normalisation, otherwise the normalisation would pin them to
+     * the edition resolved at that very moment, and neither the Card Art Preference nor the Smart Card Art
+     * Selection would ever be applied to them (nor re-applied when the preference changes).
+     */
+    private Set<String> getNamesToKeepWithNoEdition(Map<String, List<String>> sections) {
+        Set<String> noEdition = new HashSet<>();
+        Set<String> withEdition = new HashSet<>();
+        for (Entry<String, List<String>> s : sections.entrySet()) {
+            if (DeckSection.smartValueOf(s.getKey()) == null)
+                continue;
+            for (Pair<String, Integer> pair : CardPool.processCardList(s.getValue())) {
+                CardDb.CardRequest request = CardDb.CardRequest.fromString(pair.getLeft());
+                if (request.edition == null)
+                    noEdition.add(request.cardName);
+                else
+                    withEdition.add(request.cardName);
+            }
+        }
+        noEdition.removeAll(withEdition);
+        return noEdition;
+    }
+
+    private void normalizeDeferredSections(Set<String> namesToKeepWithNoEdition) {
         /*
          Construct a temporary (DeckSection, CardPool) Maps, to be sanitised and finalised
          before copying into `this.parts`. This sanitization is applied because of the
@@ -365,7 +389,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             List<String> validatedSection = validatedSections.computeIfAbsent(s.getKey(), (k) -> new ArrayList<>());
             for (Entry<PaperCard, Integer> entry : pool) {
                 PaperCard card = entry.getKey();
-                String normalizedRequest = getPoolRequest(entry);
+                String normalizedRequest = getPoolRequest(entry, namesToKeepWithNoEdition);
                 if(deckSection.validate(card))
                     validatedSection.add(normalizedRequest);
                 else {
@@ -382,9 +406,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         this.deferredSections = validatedSections;
     }
 
-    private String getPoolRequest(Entry<PaperCard, Integer> entry) {
+    private String getPoolRequest(Entry<PaperCard, Integer> entry, Set<String> namesToKeepWithNoEdition) {
         int amount = entry.getValue();
-        String poolCardRequest = CardDb.CardRequest.compose(entry.getKey());
+        PaperCard card = entry.getKey();
+        if (namesToKeepWithNoEdition.contains(card.getName()) && card.getMarkedFlags().toMap().isEmpty())
+            return String.format("%d %s", amount, CardDb.CardRequest.compose(card.getName(), card.isFoil()));
+        String poolCardRequest = CardDb.CardRequest.compose(card);
         return String.format("%d %s", amount, poolCardRequest);
     }
 
@@ -400,11 +427,43 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return cardNamesWithNoEdition;
     }
 
+    /**
+     * Harmonise the card art of a deck whose cards already carry (arbitrary) editions, e.g. a generated deck,
+     * following the Card Art Preference and the Smart Card Art Selection (if enabled): all cards of a section
+     * are brought close to the same era and card border.
+     *
+     * @param allowedSetCodes  if not null/empty, only prints from these sets are used (e.g. the format's sets)
+     */
+    public void optimiseCardArt(List<String> allowedSetCodes) {
+        if (!StaticData.instance().isEnabledCardArtSmartSelection()) {
+            //System.out.println("[CardArt] optimiseCardArt skipped: smart card art selection is OFF");
+            return;
+        }
+        Map<DeckSection, ArrayList<String>> allNames = new EnumMap<>(DeckSection.class);
+        for (Entry<DeckSection, CardPool> part : parts.entrySet()) {
+            ArrayList<String> names = new ArrayList<>();
+            for (Entry<PaperCard, Integer> cp : part.getValue())
+                names.add(cp.getKey().getName());
+            if (!names.isEmpty())
+                allNames.put(part.getKey(), names);
+        }
+        optimiseCardArtSelectionInDeckSections(allNames, allowedSetCodes);
+    }
+
     private void optimiseCardArtSelectionInDeckSections(Map<DeckSection, ArrayList<String>> cardsWithNoEdition) {
+        optimiseCardArtSelectionInDeckSections(cardsWithNoEdition, null);
+    }
+
+    private void optimiseCardArtSelectionInDeckSections(Map<DeckSection, ArrayList<String>> cardsWithNoEdition,
+                                                        List<String> allowedSetCodes) {
         StaticData data = StaticData.instance();
         // Get current Card Art Preference Settings
         boolean isCardArtPreferenceLatestArt = data.cardArtPreferenceIsLatest();
         boolean cardArtPreferenceHasFilter = data.isCoreExpansionOnlyFilterSet();
+
+        // Snapshot taken before any section is updated: the Main deck is the reference for the other sections,
+        // so that e.g. the Sideboard (or the Commander) doesn't end up in a different era than the Main deck.
+        final CardPool mainReference = parts.get(DeckSection.Main) != null ? new CardPool(parts.get(DeckSection.Main)) : null;
 
         for (Entry<DeckSection, CardPool> part : parts.entrySet()) {
             DeckSection deckSection = part.getKey();
@@ -417,18 +476,29 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue; // nothing to do here
 
             CardPool pool = part.getValue();
+            // The statistics (pivot edition, frame, border) come from the Main deck when there is one
+            CardPool referencePool = pool;
+            if (deckSection != DeckSection.Main && mainReference != null
+                    && mainReference.getPivotCardEdition(isCardArtPreferenceLatestArt) != null)
+                referencePool = mainReference;
             // Set options for the alternative card print search
-            boolean isExpansionTheMajorityInThePool = (pool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
-            boolean isPoolModernFramed = pool.isModern();
+            boolean isExpansionTheMajorityInThePool = (referencePool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
+            boolean isPoolModernFramed = referencePool.isModern();
+            // A Black Border Card Art Preference is explicit: enforce it rather than following the deck's majority
+            CardEdition.BorderColor poolBorder = data.cardArtPreferenceIsBlackBorder()
+                    ? CardEdition.BorderColor.BLACK : referencePool.getDominantBorderColor();
 
             // == Get the most representative (Pivot) Edition in the Pool
             // Note: Card Art Updates (if any) will be determined based on the Pivot Edition.
-            CardEdition pivotEdition = pool.getPivotCardEdition(isCardArtPreferenceLatestArt);
+            CardEdition pivotEdition = referencePool.getPivotCardEdition(isCardArtPreferenceLatestArt);
             if (pivotEdition == null)
                 continue;
 
             // == Inspect and Update the Pool
             Date releaseDatePivotEdition = pivotEdition.getDate();
+            //System.out.println("[CardArt] section=" + deckSection + " pref=" + data.getCardArtPreferenceName()
+                    //+ " pivot=" + pivotEdition.getCode() + " (" + releaseDatePivotEdition + ") border=" + poolBorder
+                    //+ " modern=" + isPoolModernFramed + " allowedSets=" + (allowedSetCodes == null ? "any" : allowedSetCodes.size()));
             CardPool newPool = new CardPool();
             for (Entry<PaperCard, Integer> cp : pool) {
                 PaperCard card = cp.getKey();
@@ -439,7 +509,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                     continue;
                 }
                 // B. Determine if current card requires update
-                boolean cardArtNeedsOptimisation = this.isCardArtUpdateRequired(card, releaseDatePivotEdition);
+                boolean cardArtNeedsOptimisation = this.isCardArtUpdateRequired(card, releaseDatePivotEdition)
+                        || (!card.getRules().isVariant() && (data.hasBorderMismatch(card, poolBorder)
+                                || card.getRules().getType().isBasicLand()));  // basics always follow the pivot
                 if (!cardArtNeedsOptimisation) {
                     addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
                     continue;
@@ -448,11 +520,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                                                                               isCardArtPreferenceLatestArt,
                                                                               cardArtPreferenceHasFilter,
                                                                               isExpansionTheMajorityInThePool,
-                                                                              isPoolModernFramed);
-                if (alternativeCardPrint == null)  // no alternative found, add original card in Pool
+                                                                              isPoolModernFramed, allowedSetCodes, poolBorder);
+                if (alternativeCardPrint == null) {  // no alternative found, add original card in Pool
+                    //System.out.println("[CardArt]   " + card.getName() + " " + card.getEdition() + " -> (no alternative)");
                     addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
-                else
+                } else {
+                    //System.out.println("[CardArt]   " + card.getName() + " " + card.getEdition() + " -> " + alternativeCardPrint.getEdition());
                     addCardToPool(newPool, alternativeCardPrint, totalToAddToPool, card.isFoil());
+                }
             }
             parts.put(deckSection, newPool);
         }

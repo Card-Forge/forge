@@ -71,24 +71,68 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
     public enum CardArtPreference implements Comparator<CardEdition> {
-        LATEST_ART_ALL_EDITIONS(false, true),
-        LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, true),
-        ORIGINAL_ART_ALL_EDITIONS(false, false),
-        ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, false);
+        LATEST_ART_ALL_EDITIONS(false, true, false),
+        LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, true, false),
+        ORIGINAL_ART_ALL_EDITIONS(false, false, false),
+        ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, false, false),
+        /** Oldest print that is not white-bordered (falls back to any print if a card only exists with another border). */
+        ORIGINAL_ART_BLACK_BORDER_ALL_EDITIONS(false, false, true),
+        ORIGINAL_ART_BLACK_BORDER_CORE_EXPANSIONS_REPRINT_ONLY(true, false, true);
 
         public final boolean filterSets;
         public final boolean latestFirst;
+        public final boolean blackBorderOnly;
 
-        CardArtPreference(boolean filterIrregularSets, boolean latestSetFirst) {
+        CardArtPreference(boolean filterIrregularSets, boolean latestSetFirst, boolean blackBorder) {
             filterSets = filterIrregularSets;
             latestFirst = latestSetFirst;
+            blackBorderOnly = blackBorder;
         }
 
         private static final EnumSet<Type> ALLOWED_SET_TYPES = EnumSet.of(Type.CORE, Type.EXPANSION, Type.REPRINT);
 
+        public static CardArtPreference of(boolean latest, boolean coreExpansionOnly, boolean blackBorder) {
+            if (latest)
+                return coreExpansionOnly ? LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : LATEST_ART_ALL_EDITIONS;
+            if (blackBorder)
+                return coreExpansionOnly ? ORIGINAL_ART_BLACK_BORDER_CORE_EXPANSIONS_REPRINT_ONLY : ORIGINAL_ART_BLACK_BORDER_ALL_EDITIONS;
+            return coreExpansionOnly ? ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY : ORIGINAL_ART_ALL_EDITIONS;
+        }
+
+        private boolean isBlackBordered(CardEdition ed) {
+            return ed.getBorderColor() == CardEdition.BorderColor.BLACK;
+        }
+
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
+            if (blackBorderOnly && !isBlackBordered(ed)) return false;
             return !filterSets || ALLOWED_SET_TYPES.contains(ed.getType());
+        }
+
+        /** Edition rank (see {@link #getEditionRank}): the original Core and Expansion releases. */
+        public static final int RANK_ORIGINAL = 0;
+        /** Edition rank: any other regular product (Draft sets, Commander decks, Starter sets, ...). */
+        public static final int RANK_OTHER = 1;
+        /** Edition rank: promos and compilation sets, only used when nothing better exists. */
+        public static final int RANK_COMPILATION = 2;
+
+        /** Set types that are promos or compilations of cards printed elsewhere, rather than original releases. */
+        private static final EnumSet<Type> COMPILATION_SET_TYPES = EnumSet.of(Type.REPRINT, Type.PROMO,
+                Type.COLLECTOR_EDITION, Type.ONLINE, Type.BOXED_SET, Type.DUEL_DECK);
+
+        /**
+         * How "original" an edition is, used by the Original Art (Black Border) preferences, where a lower rank
+         * always wins over the release date: Core and Expansion sets first, then any other regular product,
+         * and promos and compilation sets (The List, Masters sets, MTGO promos, Secret Lair...) last.
+         * Other preferences do not rank editions: every edition gets <code>RANK_ORIGINAL</code>.
+         */
+        public int getEditionRank(CardEdition ed) {
+            if (!blackBorderOnly || ed == null)
+                return RANK_ORIGINAL;
+            Type type = ed.getType();
+            if (type == Type.CORE || type == Type.EXPANSION)
+                return RANK_ORIGINAL;
+            return COMPILATION_SET_TYPES.contains(type) ? RANK_COMPILATION : RANK_OTHER;
         }
 
         @Override
@@ -97,6 +141,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return 0;
             if(filterSets && (ALLOWED_SET_TYPES.contains(o1.getType()) != ALLOWED_SET_TYPES.contains(o2.getType())))
                 return ALLOWED_SET_TYPES.contains(o1.getType()) ? -1 : 1;
+            if (blackBorderOnly && isBlackBordered(o1) != isBlackBordered(o2))
+                return isBlackBordered(o1) ? -1 : 1;
+            int rankDiff = Integer.compare(getEditionRank(o1), getEditionRank(o2));
+            if (rankDiff != 0)
+                return rankDiff;
             return (latestFirst ? -1 : 1) * o1.getDate().compareTo(o2.getDate());
         }
     }
@@ -509,7 +558,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private void reIndex(CardRules cr) {
         List<PaperCard> prints = allCardsByRules.get(cr);
         if (!prints.isEmpty()) {
-            uniqueCardsByRules.put(cr, getBestUniquePrint(prints));
+            PaperCard best = getBestUniquePrint(prints);
+            String preferredRequest = artPrefs.get(cr.getName());
+            if (preferredRequest != null) {
+                PaperCard preferred = this.getCard(preferredRequest);
+                if (preferred != null && preferred.getRules().equals(cr))
+                    best = preferred;
+            }
+            uniqueCardsByRules.put(cr, best);
         }
         if (!cr.hasFunctionalVariants() || cr.getSupportedFunctionalVariants() == null) {
             return;
@@ -683,6 +739,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             PaperCard pc = getBestUniquePrint(allCardsByName.get(flavorName));
             uniqueCardsByFlavorName.put(flavorName, pc);
         }
+        restorePreferredArts();
+    }
+
+    /**
+     * Re-apply the per-card preferred art (chosen by the user) on top of the unique prints index,
+     * so that it always wins over the default Card Art Preference after the index is rebuilt.
+     */
+    private void restorePreferredArts() {
+        for (String preferredRequest : new ArrayList<>(artPrefs.values())) {
+            if (preferredRequest == null)
+                continue;
+            PaperCard pc = this.getCard(preferredRequest);
+            if (pc != null && allCardsByRules.containsKey(pc.getRules()))
+                uniqueCardsByRules.put(pc.getRules(), pc);
+        }
     }
 
     private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
@@ -723,10 +794,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
     public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
-        if (coreExpansionOnly){
-            this.defaultCardArtPreference = latestArt ? CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-        } else {
-            this.defaultCardArtPreference = latestArt ? CardArtPreference.LATEST_ART_ALL_EDITIONS : CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+        setCardArtPreference(latestArt, coreExpansionOnly, false);
+    }
+    public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly, boolean blackBorder){
+        CardArtPreference newPreference = CardArtPreference.of(latestArt, coreExpansionOnly, blackBorder);
+        boolean changed = newPreference != this.defaultCardArtPreference;
+        this.defaultCardArtPreference = newPreference;
+        // The unique prints index depends on the preference: rebuild it when changed at runtime.
+        if (changed && initialized) {
+            reIndex();
         }
     }
 
@@ -779,7 +855,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (!artPreference.contains("original") && !artPreference.contains("earliest"))
             isLatest = true;  // this must be default
         boolean hasFilter = artPreference.contains("core");
-        this.setCardArtPreference(isLatest, hasFilter);
+        this.setCardArtPreference(isLatest, hasFilter, artPreference.contains("black"));
     }
 
     /*
@@ -1034,18 +1110,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             Collections.sort(acceptedEditions);  // CardEdition correctly sort by (release) date
             if (artPref.latestFirst)
                 Collections.reverse(acceptedEditions);  // newest editions first
+            // Black Border: original Core/Expansion releases first, promos and compilations last. The sort is
+            // stable, so editions of the same rank stay in release-date order.
+            if (artPref.blackBorderOnly)
+                acceptedEditions.sort(Comparator.comparingInt(artPref::getEditionRank));
         }
 
-        final Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
-        CardEdition ed = editionIterator.next();
-        PaperCard candidate = candidatesCard.get(ed.getCode());
-        PaperCard firstCandidate = candidate;
-        while (!candidate.hasImage() && editionIterator.hasNext()) {
-            ed = editionIterator.next();
-            candidate = candidatesCard.get(ed.getCode());
-        }
-        candidate = candidate.hasImage() ? candidate : firstCandidate;
-        //If any, we're sure that at least one candidate is always returned despite it having any image
+        // The Card Art Preference is always enforced: the first accepted edition wins, even when its image
+        // is not on disk yet (images are downloaded on demand). Walking back to an older edition just because
+        // it happens to have a local image made the preference look ignored.
+        PaperCard candidate = candidatesCard.get(acceptedEditions.get(0).getCode());
         return cr.isFoil ? candidate.getFoiled() : candidate;
     }
 

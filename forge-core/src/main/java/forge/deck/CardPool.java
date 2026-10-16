@@ -309,6 +309,26 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     /**
+     * Determines the dominant card border (Black or White) among the (non-basic land) cards in the Pool.
+     *
+     * @return <code>BLACK</code> or <code>WHITE</code> if that border is on at least half of the cards
+     * having either of the two, or null when the pool has no such cards. A tie resolves to BLACK.
+     */
+    public CardEdition.BorderColor getDominantBorderColor() {
+        int black = 0, white = 0;
+        for (Map.Entry<CardEdition, Integer> entry : this.getCardEditionStatistics(false).entrySet()) {
+            CardEdition.BorderColor border = entry.getKey().getBorderColor();
+            if (border == CardEdition.BorderColor.BLACK)
+                black += entry.getValue();
+            else if (border == CardEdition.BorderColor.WHITE)
+                white += entry.getValue();
+        }
+        if (black == 0 && white == 0)
+            return null;
+        return black >= white ? CardEdition.BorderColor.BLACK : CardEdition.BorderColor.WHITE;
+    }
+
+    /**
      * Determines the Pivot Edition for cards in the Pool.
      * <p>
      * The Pivot Edition refers to the <code>CardEdition</code> for cards in the pool that sets the
@@ -337,7 +357,19 @@ public class CardPool extends ItemPool<PaperCard> {
      * @see #isModern()
      */
     public CardEdition getPivotCardEdition(boolean isLatestCardArtPreference) {
-        ListMultimap<Integer, CardEdition> editionsStatistics = this.getCardEditionsGroupedByNumberOfCards(false);
+        Map<CardEdition, Integer> editionsFrequencyMap = this.getCardEditionStatistics(false);
+        CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+        if (artPreference.blackBorderOnly) {
+            /* Promos and compilation sets (The List, Masters sets, MTGO promos...) are not original releases:
+               they must not define the era of the deck, unless the deck has nothing else. */
+            Map<CardEdition, Integer> regularEditions = new HashMap<>(editionsFrequencyMap);
+            regularEditions.keySet().removeIf(ed -> artPreference.getEditionRank(ed) == CardDb.CardArtPreference.RANK_COMPILATION);
+            if (!regularEditions.isEmpty())
+                editionsFrequencyMap = regularEditions;
+        }
+        ListMultimap<Integer, CardEdition> editionsStatistics = Multimaps.newListMultimap(new HashMap<>(), Lists::newArrayList);
+        for (Map.Entry<CardEdition, Integer> entry : editionsFrequencyMap.entrySet())
+            editionsStatistics.put(entry.getValue(), entry.getKey());
         List<Integer> frequencyValues = new ArrayList<>(editionsStatistics.keySet());
         // Sort in descending order
         frequencyValues.sort(Comparator.reverseOrder());
@@ -358,12 +390,16 @@ public class CardPool extends ItemPool<PaperCard> {
 
         int topFrequency = frequencyValues.get(0);
         float ratio = ((float) topFrequency) / totalNoCards;
+        if (ratio < 0.33) {
+            /* No edition stands out: the cards are scattered across many editions (this is typical
+               of Net Decks resolved with Original Art, and of decks with no edition at all).
+               Picking by frequency would be arbitrary (most editions tie at 1 card), and used to
+               drag the whole deck towards the newest tied edition. Use the (weighted) median
+               edition along the timeline instead, so the pivot sits in the middle of the deck. */
+            return getMedianEditionByDate(editionsFrequencyMap);
+        }
         // determine the Pivot Frequency
-        int pivotFrequency;
-        if (ratio >= 0.33)  // 1 over 3 cards are from the most frequent edition(s)
-            pivotFrequency = topFrequency;
-        else
-            pivotFrequency = getMedianFrequency(frequencyValues, weightedMean);
+        int pivotFrequency = topFrequency;
 
         // Now Get editions corresponding to pivot frequency
         List<CardEdition> pivotCandidates = new ArrayList<>(editionsStatistics.get(pivotFrequency));
@@ -373,6 +409,25 @@ public class CardPool extends ItemPool<PaperCard> {
         if (!searchPolicyAndPoolAreCompliant)
             Collections.reverse(pivotCandidates);  // reverse to have latest-first.
         return pivotCandidates.get(0);
+    }
+
+    /* Utility (static) method to return the edition at the (card-count weighted) median of the timeline. */
+    private static CardEdition getMedianEditionByDate(Map<CardEdition, Integer> editionStats) {
+        if (editionStats.isEmpty())
+            return null;
+        List<Map.Entry<CardEdition, Integer>> sorted = new ArrayList<>(editionStats.entrySet());
+        sorted.sort(Map.Entry.comparingByKey(CardEdition::compareTo));
+        int total = 0;
+        for (Map.Entry<CardEdition, Integer> e : sorted)
+            total += e.getValue();
+        int half = (total + 1) / 2;
+        int cumulative = 0;
+        for (Map.Entry<CardEdition, Integer> e : sorted) {
+            cumulative += e.getValue();
+            if (cumulative >= half)
+                return e.getKey();
+        }
+        return sorted.get(sorted.size() - 1).getKey();
     }
 
     /* Utility (static) method to return the median value given a target mean.  */
