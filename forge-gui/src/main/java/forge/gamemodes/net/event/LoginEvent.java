@@ -1,5 +1,7 @@
 package forge.gamemodes.net.event;
 
+import forge.util.LogSafe;
+
 public class LoginEvent implements NetEvent {
     private static final long serialVersionUID = -8865183377417377938L;
 
@@ -33,5 +35,10 @@ public class LoginEvent implements NetEvent {
 
     public boolean isLibgdx() {
         return libgdx;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Login: %s, version %s%s", LogSafe.forLog(username), LogSafe.forLog(version), libgdx ? ", mobile" : "");
     }
 }

@@ -11,7 +11,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.screens.FScreen;
-import forge.screens.match.MatchController;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FEvent.FEventHandler;
@@ -45,12 +44,6 @@ public abstract class FDialog extends FOverlay {
         return FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
     }
     private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
-
-    private static int openDialogCount = 0;
-
-    public static boolean isDialogOpen() {
-        return openDialogCount > 0;
-    }
 
     private final VPrompt prompt;
     private final FButton btnMiddle;
@@ -112,20 +105,6 @@ public abstract class FDialog extends FOverlay {
         for (FDisplayObject child : getChildren()) {
             child.setTop(child.getTop() + dy);
         }
-    }
-
-    @Override
-    public void setVisible(boolean visible0) {
-        if (this.isVisible() == visible0) { return; }
-
-        if (visible0) {
-            openDialogCount++;
-            MatchController.instance.cancelAwaitNextInput(); //ensure "Waiting for opponent..." prompt doesn't appear while dialog awaiting input
-        }
-        else if (openDialogCount > 0) {
-            openDialogCount--;
-        }
-        super.setVisible(visible0);
     }
 
     protected abstract float layoutAndGetHeight(float width, float maxHeight);

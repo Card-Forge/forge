@@ -232,7 +232,8 @@ public class DeckgenUtil {
         PaperCard card = null;
         for(Pair<String, Double> pair : preSelectedCardNames){
             card = StaticData.instance().getCommonCards().getUniqueByName(pair.getLeft());
-            if(card != null &&!card.getRules().getType().isLand()){
+            // The archetype data can predate a ban, so a key card the format no longer allows is passed over
+            if(card != null &&!card.getRules().getType().isLand() && format.getFilterRules().test(card)){
                 break;
             }
         }
@@ -407,9 +408,7 @@ public class DeckgenUtil {
         final IStorage<Deck> allDecks = FModel.getDecks().getConstructed();
         // in case user has not created any yet
         if (allDecks.size() == 0) { return null; }
-        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
-        final String name = allDecks.getItemNames().toArray(new String[0])[rand];
-        return allDecks.get(name);
+        return Aggregates.random(allDecks);
     }
 
     /** @return {@link forge.deck.Deck} */
@@ -417,9 +416,7 @@ public class DeckgenUtil {
         final IStorage<Deck> allDecks = FModel.getDecks().getCommander();
         // in case user has not created any yet
         if (allDecks.size() == 0) { return null; }
-        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
-        final String name = allDecks.getItemNames().toArray(new String[0])[rand];
-        return allDecks.get(name);
+        return Aggregates.random(allDecks);
     }
 
     /** @return {@link forge.deck.Deck} */

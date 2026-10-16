@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="59">
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B3Fo3gUj+JRPIpH8SgexVTDAA08eeE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYA8zBI8Ue+UFGBgUBahj1kGgOYeIxO38DAmqAgwJxKo/TCU3UtO/A2VvIz8DQxORWAVop7IA8eqb+fH7QYFGGF/Y7AXK7SMStwHd38pPvPr9o+kKDkbzL33sHQ1n7IBXHWEviE0vsF0CFQ8lAAD6WmkA
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBmB2ByILwGxsgoDg6oKhAbhS3zEYWUV3FgVao4ZFntNgRgEDqrgxyDgyckABzA2MfqM8dhLS4DPXlC4KKGFEzofHaDLo8eVEhH+BYXJAbQwQuejA3R5dHx4EIczixpCHS42LkBI72D0L3paUoWwG/ClKxx5FkMPPnsZpfBjJilMe4nVMxjDeaDsxZX/8OVfXHn9sMrgLycJgUZxTLFmLGLE2juTl4FhGpEYHRCrbwYvZXU1OhjotgMpGADHFZBF
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyEBFhYFBGQkPFuDJOdAuGAWjYBSMVKCsQhjj06MExMmSELbqICxfRwF+0CxOnNgoQAUABccH2A==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="44" template="../../../../common/maps/obj/enemy.tx" x="232" y="143">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Propaganda|C13&quot;, &quot;Sphinx's Tutelage&quot;, &quot;Sphinx's Tutelage&quot;, &quot;Sphinx's Tutelage&quot;]}"/>
+    <property name="enemy" value="Alhammaret"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="1" template="../../../../common/maps/obj/collision.tx" x="-32" y="-12" width="32" height="338"/>
+  <object id="2" template="../../../../common/maps/obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../../../common/maps/obj/collision.tx" x="481.333" y="-12.6667" width="32" height="336.667"/>
+  <object id="4" template="../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="45" template="../../../../common/maps/obj/dialog.tx" x="196.167" y="256.333" width="86" height="16">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A vast archive sprawls before you, though many of its books, tomes, and documents seem to be contained elsewhere. A massive sphinx eyes you as you enter, and you hear his voice in your mind.
+
+'Leave now or you will discover just how fragile your mind is.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="46" template="../../../../common/maps/obj/scroll.tx" x="79.3333" y="72.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Spellbook&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/scroll.tx" x="353.333" y="120.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jace's Archivist&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../common/maps/obj/scroll.tx" x="397.333" y="120.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Meticulous Archive&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="49" template="../../../../common/maps/obj/scroll.tx" x="367.333" y="249.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hedron Archive&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/scroll.tx" x="399.939" y="206.788">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Archival Whorl&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../common/maps/obj/scroll.tx" x="350.909" y="206.182">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Archive Trap&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/scroll.tx" x="142.909" y="247.455">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Waterlogged Teachings&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../common/maps/obj/scroll.tx" x="192" y="206.727">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Investigator's Journal&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../common/maps/obj/scroll.tx" x="127.818" y="206.545">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Geth's Grimoire&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../common/maps/obj/scroll.tx" x="399.333" y="73.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Walking Archive&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/scroll.tx" x="127.333" y="72">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Archivist&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/scroll.tx" x="230.5" y="62.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Alhammaret's Archvive&quot;, &quot;count&quot;: 1 } ] "/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="206.467" y="302.807" width="66.4742" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints"/>
+</map>

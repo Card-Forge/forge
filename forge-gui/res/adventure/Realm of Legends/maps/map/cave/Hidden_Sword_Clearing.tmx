@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="107">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVVFuwjAM9QQraYHCNfjhVgg0aQxxDDbgWBSE1A24B9sNZquxarw0pDBNs2QJJ/V7sfNiAP6fbQzA1vxdHudOY4AoAcgURo5xD9f76GP85im+3G8kZW6oSUzKZZ8J7DbunUy5l2L8jvGHON/e7ofUzXznCOAzKvK+7O+X2H8u5qc95ud1zb1R8c4U51y3AF7RF+hv6ANT1uTi0869oX4/Jj85p+peJhiP0JfINTSlr1rXuaruxMWpeUkHDwH1+PyA2N0KPcleSSOtEDflSt38Bif33cXLRrmk2Q76scYZfP1lbRH33qFxrbU8QEtU57GiVr5TrS/XN/K981t19Z7WqCdVvQ3hJBsJTM1N2PMad8lYu4C50VD9TC2u6+2mdj7kHtxmjTkpuQ8K01Xvc1z0M7NzLFPzso61rY6vmfHo7db/o3s4Q7i/AdXleTk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyNVV1uwjAMjibtYUt3CkppAXViDzvBTsM9BoMWth2J340B99njYtVWPkwCs/TJSZ3ksx3HnVpjssSYnsPCYebmy8R/K3lMtjfbYMp7xFbxN1rfctg5pLDng0HjTwcSOR95eoqzjMwz5klZ5+A7+YHrZB/Z5zbMV7DPB9bryJz0xmHl8MN6DTgwcuAm/47gR8l8Bz6LZGlO5W5gzKtttMz7xs+11NbHLvFVnGuZF8AXk+ngstayh7suIeYO5PhRcbYuu3AmaxhvlG3FeRT+CuLVvCGhfN4/x7WWHMZjfie6hqnOJvZ0X8809ycyG5zrhdMPT6f73m1zFuVs5zBy4zbkWWqq4BxUvH4M74xky5piigHlm2uFzpnzOZqX6v0r8b1CekAF7118wDoOacnnjP3vBnqRQPJeQt6lB8i3ThLPs2iKueazCn6je85jFoBwYm8hH+XNZYGa0/UquW5DL8Gc5wFe7FEpzFvQb47/qPXQPZNQTV3ipvvcArfktubaqFWtLVi/3DS2ScAmdoKuKwRxrbjHUIxS/1JrHRX3yPo77SeeQ2x0H7+3fk2MV/4VGAeup7O3ilfiqDgvQ4hzaK5zIrf8Z/V6jDc1/i1ov0f2OucfzmykHw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
+  <object id="88" template="../../../../common/maps/obj/dialog.tx" x="181.532" y="242.188" width="67.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You come across a clearing nestled into a grove. A dozen swords are lined up, each stuck into a stone. Each sword's blade shimmers with a different color of mana on each edge. If you have enough mana shards, you can break the enchantments keeping them stuck and take them for yourself.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/manashards.tx" x="356.673" y="196.152"/>
+  <object id="90" template="../../../../common/maps/obj/manashards.tx" x="356.673" y="218.237"/>
+  <object id="91" template="../../../../common/maps/obj/manashards.tx" x="374.449" y="111.044"/>
+  <object id="92" template="../../../../common/maps/obj/manashards.tx" x="81.9562" y="127.204"/>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="173.927" y="180.704" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Fire and Ice stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Fire and Ice&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/dialog.tx" x="206.041" y="181.32" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Light and Shadow stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Light and Shadow&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/dialog.tx" x="238.899" y="180.242" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Body and Mind stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Body and Mind&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="270.757" y="179.909" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Feast and Famine stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Feast and Famine&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/dialog.tx" x="175.449" y="132.583" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of War and Peace stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of War and Peace&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="208.115" y="132.25" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Sinew and Steel stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Sinew and Steel&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/dialog.tx" x="238.449" y="132.583" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Truth and Justice stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Truth and Justice&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="270.449" y="132.917" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Hearth and Home stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Hearth and Home&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/dialog.tx" x="174.782" y="84.9167" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Forge and Frontier stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Forge and Frontier&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/dialog.tx" x="207.115" y="84.5833" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Once and Future stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Once and Future&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/dialog.tx" x="239.782" y="85.25" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Wealth and Power stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sword of Wealth and Power&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="271.115" y="85.5833" width="17.769" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see the sword of Dungeons and Dragons stuck into the stone here.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50 }
+        ],
+        &quot;text&quot;: &quot;'You pull the sword free, raising it into the air with a smile.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addShards&quot;: -50,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardText&quot;: &quot;gold Dragon&quot;, &quot;subTypes&quot;: [ &quot;Equipment&quot; ], &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Pull it forth. (Spend 50 mana shards)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasShards&quot;: 50, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;You lack the magical strength to pull out the sword.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;(Step away from the sword)&quot;,
+					&quot;text&quot;: &quot;You step away from this sword for now.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

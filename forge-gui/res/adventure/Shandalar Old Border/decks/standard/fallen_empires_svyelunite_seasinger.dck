@@ -1,0 +1,35 @@
+[metadata]
+Name=Seasinger
+[Main]
+12 Island|3ED
+4 Svyelunite Temple|FEM
+1 Reflecting Pool|TMP
+2 Underground River|ICE
+4 Underground Sea|3ED
+4 Seasinger|FEM
+1 Overtaker|MMQ
+2 Vodalian Hypnotist|INV
+4 Wall of Souls|STH
+4 Wall of Tears|STH
+2 Conch Horn|FEM
+1 Ancestral Memories|7ED
+1 Blue Elemental Blast|3ED
+2 Lilting Refrain|USG
+3 Lingering Mirage|USG
+3 Siren's Call|3ED
+1 Spirit Shield|FEM
+1 Helm of Obedience|ALL
+1 Mystic Veil|VIS
+1 Desertion|VIS
+1 Mind Harness|MIR
+1 Control Magic|3ED
+1 Treachery|UDS
+1 Bribery|MMQ
+1 Abduction|WTH
+1 Confiscate|7ED
+[StartInBattle_Reference]
+1 Svyelunite Temple|FEM
+1 Island|3ED
+1 Mystic Decree|HML
+1 Lilting Refrain|USG
+1 Seasinger|FEM
