@@ -17,6 +17,7 @@
  */
 package forge.game.zone;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -41,6 +42,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -59,6 +61,7 @@ import java.util.stream.Collectors;
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private static final int MAX_TRIGGER_REPEATS = 50;
+    private static final int MAX_STACK_SIZE = 999;
 
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
     private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
@@ -79,6 +82,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private Card curResolvingCard = null;
     private final Map<Integer, Integer> triggerRepeats = new HashMap<>();
+    private final Map<Integer, Integer> triggerStackSizes = new HashMap<>();
+    private boolean loopDrawDeclined;
 
     private final Game game;
 
@@ -105,7 +110,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         thisTurnCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
-        triggerRepeats.clear();
+        clearTriggerRepeats();
         frozenStack.clear();
         clearUndoStack();
         clear();
@@ -211,14 +216,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         Player activator = sp.getActivatingPlayer();
 
-        // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
+        // Possible infinite loop, so offer a draw. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
         // CR 104.4b the same goes for a mandatory trigger that keeps coming back before the stack clears
-        if (game.getStack().size() > 999 || (si == null && isRepeatingTrigger(sp))) {
-            for (Player p : game.getPlayers()) {
-                p.intentionalDraw();
+        final boolean stackFull = game.getStack().size() > MAX_STACK_SIZE;
+        if ((stackFull || (si == null && isRepeatingTrigger(sp))) && !loopDrawDeclined && game.getDrawOffer() == null) {
+            if (playersAcceptLoopDraw(sp, stackFull)) {
+                for (Player p : game.getPlayers()) {
+                    p.intentionalDraw();
+                }
+                game.setGameOver(GameEndReason.Draw);
+                return;
             }
-            game.setGameOver(GameEndReason.Draw);
-            return;
+            loopDrawDeclined = true;
         }
 
         recordUndoableActions(sp);
@@ -494,7 +503,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private boolean isRepeatingTrigger(final SpellAbility sp) {
         if (!sp.isTrigger()) {
             // a player did something
-            triggerRepeats.clear();
+            clearTriggerRepeats();
         }
         if (!sp.isMandatory() || sp.usesTargeting()) {
             return false;
@@ -505,11 +514,31 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 return false;
             }
         }
+        final int size = stack.size();
+        final Integer last = triggerStackSizes.put(id, size);
+        // a pile that drains is finite, so it is not a loop
+        if (last != null && size < last) {
+            triggerRepeats.remove(id);
+        }
         return triggerRepeats.merge(id, 1, Integer::sum) > MAX_TRIGGER_REPEATS;
     }
 
     public final void clearTriggerRepeats() {
         triggerRepeats.clear();
+        triggerStackSizes.clear();
+        loopDrawDeclined = false;
+    }
+
+    /** The engine cannot tell an endless loop from a long finite one, so the humans vote on a draw. AI players go along. */
+    private boolean playersAcceptLoopDraw(final SpellAbility sp, final boolean stackFull) {
+        final Player human = Iterables.find(game.getPlayers(), p -> !p.getController().isAI(), null);
+        if (human == null) {
+            return true;
+        }
+        final Localizer localizer = Localizer.getInstance();
+        final String reason = stackFull ? localizer.getMessage("lblStackFullOfferDraw", MAX_STACK_SIZE)
+                : localizer.getMessage("lblRepeatingTriggerOfferDraw", sp.getHostCard().getName(), MAX_TRIGGER_REPEATS);
+        return human.getController().offerLoopDraw(reason);
     }
 
     private void recordUndoableActions(SpellAbility sa) {

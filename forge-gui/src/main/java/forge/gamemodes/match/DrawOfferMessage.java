@@ -18,8 +18,8 @@ public final class DrawOfferMessage {
 
     public record Entry(PlayerView player, DrawOffer.Vote vote) implements Serializable {}
 
-    /** Server -> client snapshot of the offer: offerer, every responder's vote, and the result once settled. */
-    public record Status(PlayerView offerer, List<Entry> entries, Result result) implements Serializable {
+    /** Server -> client snapshot of the offer: offerer, or the reason when the game offers, every responder's vote, and the result once settled. */
+    public record Status(PlayerView offerer, String reason, List<Entry> entries, Result result) implements Serializable {
         public boolean isPending(final PlayerView player) {
             return player != null && entries.stream()
                     .anyMatch(e -> player.equals(e.player()) && e.vote() == DrawOffer.Vote.PENDING);

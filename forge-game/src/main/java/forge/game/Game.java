@@ -139,7 +139,7 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
-    private DrawOffer drawOffer;
+    private volatile DrawOffer drawOffer;
 
     private final Game maingame;
     private final GameView view;
