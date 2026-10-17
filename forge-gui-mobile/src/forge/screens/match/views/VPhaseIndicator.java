@@ -18,6 +18,7 @@ import forge.game.player.PlayerView;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
@@ -65,6 +66,83 @@ public class VPhaseIndicator extends FContainer {
 
     private boolean isCollapsedMode() { return Forge.isLandscapeMode() && !expandTarget; }
 
+    //compact landscape layout: nothing is drawn until the phase button opens the stops column
+    private java.util.function.BooleanSupplier onRight;
+
+    /** @param onRight tells whether the panel's controls are on the right, so the stops open to their left */
+    public void setOnRight(java.util.function.BooleanSupplier onRight) {
+        this.onRight = onRight;
+    }
+
+    private static boolean isCompact() { return VPlayerPanel.isCompactLayout(); }
+
+    /** Compact layout: opens the phase stops if they are hidden, hides them if they are showing. */
+    public void toggleStops() {
+        setExpanded(!expandTarget);
+    }
+
+    private Runnable onOpenWidthChanged;
+
+    /** Compact layout: called whenever the open width of the stops column changes, so the panel can make room for it. */
+    public void setOnOpenWidthChanged(Runnable onOpenWidthChanged0) {
+        onOpenWidthChanged = onOpenWidthChanged0;
+    }
+
+    /** Compact layout: how much of the stops column is open right now. */
+    public float getOpenWidth() {
+        return isCompact() ? getWidth() * expand : 0f;
+    }
+
+    private void notifyOpenWidthChanged() {
+        if (isCompact() && onOpenWidthChanged != null) { onOpenWidthChanged.run(); }
+    }
+
+    /** The stops column only takes touches while it is open, so it never blocks the field underneath. */
+    public void syncCompactVisibility() {
+        setVisible(!isCompact() || expand > 0f || expandTarget);
+    }
+
+    //the colours a phase stop label uses: whether it is the current phase, and whether the game stops at it
+    private static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
+        final boolean adv = Forge.isMobileAdventureMode;
+        if (active) {
+            return FSkinColor.get(stopAtPhase ? (adv ? Colors.ADV_CLR_PHASE_ACTIVE_ENABLED : Colors.CLR_PHASE_ACTIVE_ENABLED)
+                    : (adv ? Colors.ADV_CLR_PHASE_ACTIVE_DISABLED : Colors.CLR_PHASE_ACTIVE_DISABLED));
+        }
+        return FSkinColor.get(stopAtPhase ? (adv ? Colors.ADV_CLR_PHASE_INACTIVE_ENABLED : Colors.CLR_PHASE_INACTIVE_ENABLED)
+                : (adv ? Colors.ADV_CLR_PHASE_INACTIVE_DISABLED : Colors.CLR_PHASE_INACTIVE_DISABLED));
+    }
+
+    private String getPhaseCaption(PhaseType phase) {
+        final PhaseLabel label = phaseLabels.get(phase);
+        if (label != null) { return label.caption; }
+        return phase == PhaseType.UNTAP ? "UT" : "--";
+    }
+
+    /** Compact layout: draws the button that names the current phase and opens the phase stops when pressed. */
+    public void drawPhaseButton(Graphics g, float w, float h) {
+        final GameView gv = MatchController.instance == null ? null : MatchController.instance.getGameView();
+        final PhaseType phase = gv == null ? null : gv.getPhase();
+        final boolean myTurn = gv != null && phase != null && gv.getPlayerTurn() != null && gv.getPlayerTurn().equals(player);
+
+        final String text;
+        final Color textColor;
+        if (myTurn) { //same colour the stop of the current phase has
+            final PhaseLabel label = phaseLabels.get(phase);
+            g.fillRect(getPhaseColor(true, label != null && label.stopAtPhase), 0, 0, w, h);
+            text = getPhaseCaption(phase);
+            textColor = Color.BLACK;
+        } else {
+            g.fillRect(getPhaseColor(false, false), 0, 0, w, h);
+            text = "--";
+            textColor = player.getHasPriority() ? getPhaseColor(false, true).getColor() : IDLE_NAME_COLOR;
+        }
+        g.drawText(text, NAME_FONT, textColor, 0, 0, w, h, false, Align.center, true);
+        if (expandTarget) { //stops are open: outline the button so it reads as pressed
+            g.drawRect(Math.max(1f, Utils.scale(1.5f)), FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_TEXT : Colors.CLR_TEXT).getColor(), 0, 0, w, h);
+        }
+    }
+
     //reused colour so the tint doesn't allocate a new FSkinColor every frame
     private Color tint(FSkinColor color, float alpha) {
         final Color c = color.getColor();
@@ -74,6 +152,7 @@ public class VPhaseIndicator extends FContainer {
     private void setExpanded(boolean open) {
         expandTarget = open;
         idleTime = 0;
+        if (open && isCompact()) { setVisible(true); }
         if (expandAnimation == null) {
             expandAnimation = new ExpandAnimation();
             expandAnimation.start();
@@ -85,6 +164,10 @@ public class VPhaseIndicator extends FContainer {
     @Override
     public boolean tap(float x, float y, int count) { //only reached when no stop label took the tap
         if (!Forge.isLandscapeMode()) { return false; }
+        if (isCompact()) { //a stray touch on the open column only keeps it open, the phase button toggles it
+            keepExpanded();
+            return true;
+        }
         setExpanded(!expandTarget);
         return true;
     }
@@ -119,8 +202,29 @@ public class VPhaseIndicator extends FContainer {
         }
     }
 
+    //compact layout: the stops column slides open over the left edge of the field, then folds away again
+    private void drawCompactStops(Graphics g) {
+        if (expand <= 0f) { return; }
+        final float w = getWidth(), h = getHeight();
+        final FSkinColor backdrop = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2);
+        final float revealW = w * expand;
+        final boolean right = onRight != null && onRight.getAsBoolean(); //opens towards the left of a right hand control column
+        g.startClip(right ? w - revealW : 0, 0, revealW, h);
+        try {
+            g.fillRect(tint(backdrop, 0.92f), 0, 0, w, h);
+            super.draw(g);
+            g.drawLine(1, MatchScreen.getBorderColor(), right ? 0 : w, 0, right ? 0 : w, h);
+        } finally {
+            g.endClip();
+        }
+    }
+
     @Override
     public void draw(Graphics g) {
+        if (isCompact()) {
+            drawCompactStops(g);
+            return;
+        }
         if (!Forge.isLandscapeMode() || !HIDE_PHASESTOP) { // TODO: Add better design or recreate a new widget
             super.draw(g);
             return;
@@ -196,22 +300,32 @@ public class VPhaseIndicator extends FContainer {
         @Override
         protected boolean advance(float dt) {
             final float step = dt / EXPAND_DURATION;
+            final float before = expand;
+            final boolean more;
             if (expandTarget) {
                 expand = Math.min(1f, expand + step);
                 if (expand >= 1f) {
                     idleTime += dt;
                     if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
                 }
-                return true;
+                more = true;
+            } else {
+                expand = Math.max(0f, expand - step);
+                if (expand <= 0f && isCompact()) { setVisible(false); }
+                more = expand > 0f;
             }
-            expand = Math.max(0f, expand - step);
-            return expand > 0f;
+            if (expand != before) { notifyOpenWidthChanged(); }
+            return more;
         }
 
         @Override
         protected void onEnd(boolean endingAll) {
             if (endingAll) { expand = expandTarget ? 1f : 0f; }
             expandAnimation = null;
+            if (isCompact()) {
+                syncCompactVisibility();
+                notifyOpenWidthChanged();
+            }
         }
     }
 

@@ -481,7 +481,20 @@ public class MatchScreen extends FScreen {
 
             Rectangle a = anchor.screenPos;
             float x, y;
-            if (sideDisplay != null) {
+            if (sideDisplay != null && VPlayerPanel.isCompactLayout()) {
+                //compact layout: zones are boxes along the panel's outer edge, so the preview goes on the field side of the box,
+                //over the card being inspected (or over the middle of the box while scrubbing, so it doesn't jump)
+                Rectangle d = sideDisplay.screenPos;
+                float cardCenter = d.x + d.width / 2;
+                if (!dragging && anchor instanceof FCardPanel) {
+                    cardCenter = a.x + a.width / 2;
+                } else if (sideDisplay instanceof VCardDisplayArea cardArea && cardArea.getDragPanel() != null) {
+                    cardCenter = cardArea.getDragPanel().screenPos.x + cardArea.getDragPanel().screenPos.width / 2;
+                }
+                x = Math.max(left, Math.min(cardCenter - w / 2, right - w));
+                boolean outerEdgeAtTop = owner != null && owner.isFlipped();
+                y = outerEdgeAtTop ? d.y + d.height + PREVIEW_GAP : d.y - h - PREVIEW_GAP;
+            } else if (sideDisplay != null) {
                 Rectangle d = sideDisplay.screenPos;
                 x = Math.max(left, d.x - w - PREVIEW_GAP); //may cover other open displays while previewing
                 y = d.y + d.height / 2 - h / 2;            //centered on the display so it doesn't jump while scrubbing
@@ -894,7 +907,7 @@ public class MatchScreen extends FScreen {
     }
 
     private float getPlayerBgHeight(float midField, float y) {
-        return (midField + liveBottom().getField().getHeight() * liveMultiplier()) - y;
+        return (midField + liveBottom().getBackgroundHeight() * liveMultiplier()) - y;
     }
 
     private class BGAnimation extends ForgeAnimation {
@@ -952,9 +965,9 @@ public class MatchScreen extends FScreen {
                         if (!recomputed) {
                             float midField = liveTop().getBottom();
                             float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-                            float xx = liveTop().getField().getLeft();
-                            float yy = midField - liveTop().getField().getHeight() - promptHeight;
-                            float ww = getWidth() - xx;
+                            float xx = liveTop().getBackgroundLeft();
+                            float yy = midField - liveTop().getBackgroundHeight() - promptHeight;
+                            float ww = getWidth() - xx - liveTop().getBackgroundRightInset();
                             float bgFullWidth, scaledbgHeight;
                             int multiplier = liveMultiplier();
                             float bgHeight = getPlayerBgHeight(midField, yy);
@@ -1013,9 +1026,9 @@ public class MatchScreen extends FScreen {
             }
             final float midField = liveTop().getBottom();
             final float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-            float x = liveTop().getField().getLeft();
-            float y = midField - liveTop().getField().getHeight() - promptHeight;
-            float w = getWidth() - x;
+            float x = liveTop().getBackgroundLeft();
+            float y = midField - liveTop().getBackgroundHeight() - promptHeight;
+            float w = getWidth() - x - liveTop().getBackgroundRightInset();
             float bgFullWidth, scaledbgHeight;
             final int multiplier = liveMultiplier();
             float bgHeight = getPlayerBgHeight(midField, y);

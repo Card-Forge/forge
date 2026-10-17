@@ -17,6 +17,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.CardFlightOverlay;
+import forge.screens.match.views.VPlayerPanel;
 import forge.sound.SoundSystem;
 import forge.util.Localizer;
 
@@ -341,6 +342,19 @@ public class SettingsScene extends UIScene {
                     });
         }
 
+        VPlayerPanel.reloadCompactLayout(); //also converts the old on/off value of this setting
+        SelectBox<String> compactLayout = Controls.newComboBox(new String[]{"Off", "Left", "Right", "Alternate"},
+                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_COMPACT_LANDSCAPE_LAYOUT), o -> {
+            String mode = (String) o;
+            if (mode != null && !mode.equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_COMPACT_LANDSCAPE_LAYOUT))) {
+                FModel.getPreferences().setPref(ForgePreferences.FPref.UI_COMPACT_LANDSCAPE_LAYOUT, mode);
+                FModel.getPreferences().save();
+                VPlayerPanel.reloadCompactLayout();
+            }
+            return null;
+        });
+        addLabel(localizer.getMessageorUseDefault("lblCompactLayout", "Use Compact Layout (Landscape Mode)"));
+        settingGroup.add(compactLayout).align(Align.right).pad(2);
         addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         String currentAnim;
         switch (CardFlightOverlay.style()) { // maps legacy "true"/"false" values too
