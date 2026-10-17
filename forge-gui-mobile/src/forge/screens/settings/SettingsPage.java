@@ -336,6 +336,20 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }
             }, 1);
+        VPlayerPanel.reloadCompactLayout(); //also converts the old on/off value of this setting
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_COMPACT_LANDSCAPE_LAYOUT,
+            Forge.getLocalizer().getMessage("lblCompactLayout"),
+            Forge.getLocalizer().getMessage("nlCompactLayout"),
+            new String[] { "Off", "Left", "Right", "Alternate" }) {
+                @Override
+                public void valueChanged(String newValue) {
+                    super.valueChanged(newValue);
+                    VPlayerPanel.reloadCompactLayout();
+                    if (MatchController.instance != null) {
+                        MatchController.instance.resetPlayerPanels();
+                    }
+                }
+            }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
             Forge.getLocalizer().getMessageorUseDefault("lblHidePhaseStop", "Hide Phase stop (Landscape Mode)"),
             Forge.getLocalizer().getMessageorUseDefault("nlHidePhaseStop", "When enabled, Phase stop is covered by Phase name label. Tap the label to access Phase stop.")) {

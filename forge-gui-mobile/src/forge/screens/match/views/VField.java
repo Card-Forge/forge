@@ -22,6 +22,7 @@ public class VField extends FContainer {
     private boolean flipped;
     private float commandZoneWidth;
     private float fieldModifier;
+    private float contentAlignment; //0 cards start on the left, 0.5 they are centered, 1 they end on the right
     private final boolean stackNonTokenCreatures;
     private final List<CardView> creatures = new ArrayList<>();
     private final List<CardView> lands = new ArrayList<>();
@@ -230,6 +231,13 @@ public class VField extends FContainer {
         commandZoneWidth = commandZoneWidth0;
     }
 
+    void setContentAlignment(float alignment) {
+        if (contentAlignment == alignment) { return; }
+        contentAlignment = alignment;
+        row1.revalidate(true);
+        row2.revalidate(true);
+    }
+
     void setFieldModifier(float fieldModifierWidth) {
         fieldModifier = fieldModifierWidth;
     }
@@ -265,6 +273,11 @@ public class VField extends FContainer {
 
         @Override
         protected boolean animateEntry() { return true; }
+
+        @Override
+        protected float getContentAlignment() {
+            return contentAlignment;
+        }
 
         @Override
         protected float getCardWidth(float cardHeight) {

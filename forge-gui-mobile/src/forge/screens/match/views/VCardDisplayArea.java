@@ -385,10 +385,26 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        float x = layoutCards(0f, visibleHeight);
+        final float align = getContentAlignment();
+        if (align > 0f && x > 0f && x < visibleWidth) { //fewer cards than fit: place them again, shifted
+            x = layoutCards(Math.round((visibleWidth - x) * align), visibleHeight);
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+        return new ScrollBounds(x, visibleHeight);
+    }
+
+    //@return how far to the right (0 = left, 0.5 = centered, 1 = right) cards are placed when they don't fill the area
+    protected float getContentAlignment() {
+        return 0f;
+    }
+
+    //lays the cards out from startX, returns the x the last one ends at
+    private float layoutCards(float startX, float visibleHeight) {
         orderedCards.get().clear();
         infoGhostCardIds.get().clear();
 
-        float x = 0;
+        float x = startX;
         float y = 0;
         float cardHeight = visibleHeight;
         float cardWidth = getCardWidth(cardHeight);
@@ -399,8 +415,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 x += cardWidth + (count - 1) * cardWidth * getCardStackOffset();
             }
         }
-
-        return new ScrollBounds(x, visibleHeight);
+        return x;
     }
 
     @Override
