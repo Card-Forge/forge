@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Sizzling Barrage|Id:2
+humanbattlefield=Grizzly Bears|Id:1;Mountain|Id:3;Mountain|Id:4
+aibattlefield=Wall of Wood|Id:5;Grizzly Bears|Id:6

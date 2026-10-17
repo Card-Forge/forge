@@ -36,6 +36,10 @@ type Controller struct {
 	// blockAll makes the controller block each attacker with a creature of its
 	// own, which a combat variant of the probe needs (a blocking creature to target).
 	blockAll bool
+	// blockEvery makes every creature the controller can block with block,
+	// the attackers taken in turn, so that a Wall, a Zombie or a legendary
+	// creature a staged variant placed blocks too (staged.go).
+	blockEvery bool
 }
 
 // maxYes is how many optional questions a Controller answers yes to.
@@ -114,12 +118,20 @@ func (*Controller) ChooseAttackTarget(_ *engine.Game, _ engine.PlayerID, _ engin
 }
 
 // DeclareCombatBlockers never blocks, unless the probe set blockAll: then each
-// attacker is blocked by the next eligible creature.
+// attacker is blocked by the next eligible creature; or blockEvery: then each
+// eligible creature blocks, the first the first attacker, the second the
+// second, wrapping round.
 func (c *Controller) DeclareCombatBlockers(_ *engine.Game, _ engine.PlayerID, attackers []engine.CardID, eligible []engine.CardID) []engine.Block {
+	var out []engine.Block
+	if c.blockEvery && len(attackers) > 0 {
+		for i, b := range eligible {
+			out = append(out, engine.Block{Blocker: b, Attacker: attackers[i%len(attackers)]})
+		}
+		return out
+	}
 	if !c.blockAll {
 		return nil
 	}
-	var out []engine.Block
 	for i, a := range attackers {
 		if i < len(eligible) {
 			out = append(out, engine.Block{Blocker: eligible[i], Attacker: a})

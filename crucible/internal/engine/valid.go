@@ -748,6 +748,9 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		sc, ok := sourceCard(g, source)
 		return ok && c.Colors().HasAny(sc.Colors())
 	}
+	if matched, handled := turnHistoryMatches(g, c, name, sourceController, source); handled {
+		return matched
+	}
 	if rest, ok := strings.CutPrefix(name, "without"); ok {
 		return !c.HasKeyword(rest)
 	}

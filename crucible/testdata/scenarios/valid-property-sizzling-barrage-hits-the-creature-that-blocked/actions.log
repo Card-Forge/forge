@@ -1,0 +1,24 @@
+# CardProperty.java:1199-1202: "blockedThisTurn" is a creature that blocked
+# this turn (Card.getBlockedThisTurn, written as blockers are declared,
+# PhaseHandler.java:804). Grizzly Bears attacks, ai blocks with Wall of Wood
+# (0/3) and leaves its own Grizzly Bears home; the Wall takes 2. In the combat
+# damage step human casts Sizzling Barrage ("4 damage to target creature that
+# blocked this turn") at the Wall: the only creature that blocked, so the
+# only legal target. The 4 damage kills it (CR 704.5g); ai's Grizzly Bears,
+# which did not block, is untouched.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks 5=1
+declareblockers
+advance
+advance
+combatdamage
+tapformana human 3 R
+tapformana human 4 R
+queue targets 5
+queue paygeneric R
+castspell human 2
+resolvestack

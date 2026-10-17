@@ -30,7 +30,7 @@
     "stack": ["stack.go"],
     "priority": ["priority.go"],
     "driver": ["driver.go"],
-    "valid": ["valid.go"],
+    "valid": ["valid.go", "validhistory.go"],
     "combat": ["combat.go"],
     "attack": ["attack.go"],
     "block": ["block.go"],

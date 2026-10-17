@@ -43,7 +43,10 @@ func (d *Damage) Clear() { *d = Damage{} }
 
 // Heal is Clear for a heal or a regeneration (Card.healDamage,
 // Card.java:6181-6185): the excess flag stays for the rest of the turn,
-// since only the cleanup step resets it (Card.resetExcessDamage, :7285).
+// since only the cleanup step resets it (Card.resetExcessDamage, :7285), and
+// so do the sources: healDamage clears the marked damage and the assigned
+// damage map, never damageReceivedThisTurn (GameEntity.java:56), which
+// DamagedBy and wasDealtDamageThisTurn read.
 func (d *Damage) Heal() {
-	*d = Damage{ExcessThisTurn: d.ExcessThisTurn}
+	*d = Damage{ExcessThisTurn: d.ExcessThisTurn, Sources: d.Sources}
 }

@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanmanapool=R R
+humangraveyard=Lightning Bolt
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Coal Stoker|SummonSick
+ailife=17

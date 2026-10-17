@@ -549,15 +549,16 @@ func cloneDefinedCards(g *Game, a *Ability, source *Card, raw string) ([]CardID,
 var cloneUnportedProperties = [...]string{"token", "NotDefinedTargeted", "TriggeredCards"}
 
 // cloneSpec parses a Choices$/Valid spec, rejecting the properties
-// Matches cannot answer: cloneUnportedProperties, ThisTurnEntered*, and a
-// comparison against anything but a literal number.
+// Matches cannot answer: cloneUnportedProperties, a ThisTurnEntered* name
+// naming no zone, and a comparison against anything but a literal number.
 func cloneSpec(raw string) (valid.Spec, error) {
 	spec := valid.Parse(raw)
 	for _, alt := range spec.Alternatives {
 		for _, p := range alt.Properties {
-			// ThisTurnEnteredFrom_<Zone> is answered (valid.go); any other
-			// ThisTurnEntered* spelling is not.
-			unported := strings.HasPrefix(p.Name, "ThisTurnEntered") && !strings.HasPrefix(p.Name, "ThisTurnEnteredFrom_")
+			// ThisTurnEntered, ThisTurnEntered[Your]<Zone> and
+			// ThisTurnEnteredFrom_<Zone> are answered (validhistory.go,
+			// valid.go); a spelling naming no zone is not.
+			unported := strings.HasPrefix(p.Name, "ThisTurnEntered") && !thisTurnEnteredKnown(p.Name)
 			for _, name := range cloneUnportedProperties {
 				unported = unported || p.Name == name
 			}

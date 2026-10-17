@@ -620,6 +620,7 @@ func (g *Game) cleanupStep(controller PlayerController) {
 			g.Card(id).AttacksThisTurn = 0
 			g.Card(id).BecameTargetThisTurn = false
 			g.Card(id).blockedByThisTurn = nil
+			g.Card(id).blockedThisTurn = nil
 			g.Card(id).attackedThisTurn = nil
 			g.Card(id).LoyaltyAbilityActivated = false
 			g.Card(id).RegenShields = 0

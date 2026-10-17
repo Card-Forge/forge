@@ -77,12 +77,12 @@ definition keeps its own amount (CR 707.2). Test: `textamounts_test.go`.
 
 ## Clone params
 
-| Param                                 | Landing                                                                                                                                                       |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PumpKeywords$` / `PumpDuration$`     | `tokenPumpKeywords(a, "Clone")` shared with `Token`; an `animateRecord` at the copy's timestamp, permanent without `PumpDuration$`, until end of turn with it |
-| `Embalm$`                             | `cloneDef` returns the plain copy while the card becoming a copy is not `Card.embalmed` (`CardFactory.java:555`); nothing sets the flag, Embalm is not ported |
-| `RemoveCost$`                         | `mana.NoCost()` on every copied face, the color frozen first (Java stores a state's color apart from its cost)                                                |
-| `Choices$ ...ThisTurnEnteredFrom_<Z>` | `cloneSpec` accepts it (`valid.go` answers it); any other `ThisTurnEntered*` spelling stays rejected                                                          |
+| Param                             | Landing                                                                                                                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PumpKeywords$` / `PumpDuration$` | `tokenPumpKeywords(a, "Clone")` shared with `Token`; an `animateRecord` at the copy's timestamp, permanent without `PumpDuration$`, until end of turn with it           |
+| `Embalm$`                         | `cloneDef` returns the plain copy while the card becoming a copy is not `Card.embalmed` (`CardFactory.java:555`); nothing sets the flag, Embalm is not ported           |
+| `RemoveCost$`                     | `mana.NoCost()` on every copied face, the color frozen first (Java stores a state's color apart from its cost)                                                          |
+| `Choices$ ...ThisTurnEntered*`    | `cloneSpec` accepts `ThisTurnEnteredFrom_<Z>`, bare `ThisTurnEntered` and `ThisTurnEntered[Your]<Z>` (`valid.go`, `validhistory.go`); one naming no zone stays rejected |
 
 Vizier of Many Faces' reachable behavior is the plain copy, since the embalmed token cannot exist yet. The Fourteenth
 Doctor resolves. Loose in the Park still needs `Draft` and `Defined$ ExiledWith`.

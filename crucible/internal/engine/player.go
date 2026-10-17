@@ -172,6 +172,11 @@ type Player struct {
 	// Both are rotated at the cleanup of this player's own turn
 	// (playerproperty.go, rotateAttackedPlayers).
 	attackedPlayersThisTurn, attackedPlayersLastTurn []PlayerID
+	// lastTurnNr is Player.getLastTurnNr (Player.java:130, :2514-2519): the
+	// game turn number of this player's own most recent turn, set as its
+	// cleanup ends it (cleanupPlayerRecords), 0 before the first. Read by the
+	// EnteredSinceYourLastTurn property (validhistory.go).
+	lastTurnNr int
 	// attackedPlayersThisCombat is Player.getAttackedPlayersMyCombat
 	// (Player.java:1858): each player this player's creatures were declared
 	// attacking directly this combat, once, in declaration order

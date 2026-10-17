@@ -962,6 +962,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.goadedBy = nil
 		c.mustBlock = nil
 		c.blockedByThisTurn = nil
+		c.blockedThisTurn = nil
 		c.attackedThisTurn = nil
 		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
@@ -1093,6 +1094,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 		c.goadedBy = nil
 		c.mustBlock = nil
 		c.blockedByThisTurn = nil
+		c.blockedThisTurn = nil
 		c.attackedThisTurn = nil
 		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
@@ -1479,6 +1481,7 @@ func (g *Game) Clone() *Game {
 		c.mustBlock = append([]mustBlockReq(nil), g.cards[i].mustBlock...)
 		c.hiddenKeywords = append([]string(nil), g.cards[i].hiddenKeywords...)
 		c.blockedByThisTurn = append([]CardID(nil), g.cards[i].blockedByThisTurn...)
+		c.blockedThisTurn = append([]CardID(nil), g.cards[i].blockedThisTurn...)
 		c.attackedThisTurn = append([]EntityID(nil), g.cards[i].attackedThisTurn...)
 		c.devoured = append([]CardID(nil), g.cards[i].devoured...)
 		c.activations = g.cards[i].activations.clone()
@@ -1543,11 +1546,14 @@ type xContext struct {
 }
 
 // castRecord is one spell cast: the card, its caster (who controlled it on
-// the stack) and the zone it was cast from.
+// the stack) and the zone it was cast from. stamp is the card's zoneStamp on
+// the stack, the object identity Java's equalsWithGameTimestamp compares
+// (SecondSpellCastThisTurn, CardProperty.java:924-931).
 type castRecord struct {
 	card       CardID
 	controller PlayerID
 	from       ZoneType
+	stamp      uint64
 }
 
 // zoneEntry is one card's zone change this turn (Zone.cardsAddedThisTurn): the

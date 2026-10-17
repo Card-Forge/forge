@@ -39,7 +39,8 @@ func (*Game) commanderCasts() int { return 0 }
 // started, kept by the cast path in Card.castFrom.
 func (g *Game) recordSpellCast(pid PlayerID, card CardID) {
 	g.Player(pid).SpellsCastThisTurn++
-	g.castThisTurn = append(g.castThisTurn, castRecord{card: card, controller: pid, from: g.Card(card).castFrom})
+	c := g.Card(card)
+	g.castThisTurn = append(g.castThisTurn, castRecord{card: card, controller: pid, from: c.castFrom, stamp: c.zoneStamp})
 }
 
 // thisTurnCastCount is Count$ThisTurnCast_<spec>: the spells cast so far this

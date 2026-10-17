@@ -740,7 +740,7 @@ func TestCloneRejectsUnportedShapes(t *testing.T) {
 		{"Clone | ValidTgts$ Creature | Duration$ UntilUnattached", `Duration$ "UntilUnattached" not resolvable yet`},
 		{"Clone | Choices$ Card.token+YouCtrl", `valid property "token"`},
 		{"Clone | Choices$ Creature.cmcLEX", `valid property "cmcLEX"`},
-		{"Clone | Choices$ Creature.ThisTurnEntered", `valid property "ThisTurnEntered"`},
+		{"Clone | Choices$ Creature.ThisTurnEnteredNowhere", `valid property "ThisTurnEnteredNowhere"`},
 		{"Clone | ValidTgts$ Creature | CloneTarget$ Valid Creature.NotDefinedTargeted", `"NotDefinedTargeted"`},
 		{"Clone | ValidTgts$ Creature | AddColors$ Blue & Black", `AddColors$ "Blue & Black" names no color`},
 		{"Clone | ValidTgts$ Creature | SetColor$ Plaid", `SetColor$ "Plaid" names no color`},

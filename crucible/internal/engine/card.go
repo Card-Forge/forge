@@ -286,6 +286,12 @@ type Card struct {
 	// Java's card becomes a new object. Read by SwitchBlock's
 	// `blockedByValidThisTurn Targeted` (switchblockeffect.go).
 	blockedByThisTurn []CardID
+	// blockedThisTurn is its mirror, Card.getBlockedThisTurn (Card.java:116,
+	// 1657-1665): every attacker this card blocked this turn, written by the
+	// same two calls (PhaseHandler.java:804, BlockEffect.java:60) and cleared
+	// with it. Read by the blockedThisTurn and blockedValidThisTurn properties
+	// (validhistory.go).
+	blockedThisTurn []CardID
 
 	// LoyaltyAbilityActivated is CR 606.3's own once-per-turn marker
 	// (Card.planeswalkerAbilityActivated in Java, collapsed from an int to a

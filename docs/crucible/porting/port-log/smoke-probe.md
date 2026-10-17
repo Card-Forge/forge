@@ -24,6 +24,12 @@ the plain, rich and tailored boards, the game is played with `Game.Step` from th
    is cast there; which step the restriction accepts is the engine's answer, not the probe's. The first variant that
    casts the card decides the outcome.
 
+Any card still not cast is then tried on staged boards (`internal/smoke/staged.go`), whose game state is played through
+the engine first: an Aura cast, a creature killed and another cast, two spells or a flashback spell left on the stack, a
+creature dealt 1 damage, tokens, a +1/+1 counter, an opponent's face-down creature, and six combat moments with the
+defender blocking with everything or not at all
+([`m6-r25f-probe-game-state.md`](game-state/m6-r25f-probe-game-state.md)).
+
 | Outcome        | Meaning                                                                                                                                                                                                                                                         |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `plays`        | No error surfaced on that path                                                                                                                                                                                                                                  |
@@ -94,9 +100,9 @@ LandPlayed are gone).
 - The inconclusive cards. Past the variants (plain board, a spell on the stack, the rich board, combat) the probe builds
   a tailored one: for each `ValidTgts$` alternative the card names it places a corpus card the spec accepts
   (`internal/smoke/tailor.go`, fewest abilities first; judged with the card in hand, so a spec that reads game state
-  finds none), or casts one for `TargetType$ Spell`. What remains is engine work that fails silently today, grouped in
-  open plan R25d-R25k. The probe's mana pool holds 20 of each colour: the controller pays generic mana with the colour
-  floating most, so a cost of twelve generic needs twelve of one.
+  finds none until a staged board plays it), or casts one for `TargetType$ Spell`. What remains is engine work that
+  fails silently today, grouped in open plan R25d-R25k. The probe's mana pool holds 20 of each colour: the controller
+  pays generic mana with the colour floating most, so a cost of twelve generic needs twelve of one.
 - Command-zone cards are counted as `placed`, which proves nothing about their one-shot abilities. A sticker sheet is
   refused by the probe itself (open plan R15), not by the engine, and that line goes when stickers are ported.
 - The replay-parity harness (ADR-0010 L3): `RecordingPlayerController` over the 110 `PlayerController` methods in

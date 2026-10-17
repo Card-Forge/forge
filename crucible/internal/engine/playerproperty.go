@@ -68,7 +68,7 @@ func (g *Game) notePowerSurgeLands(pid PlayerID) {
 // need (Player.java:2481-2489, :2514-2517): the hand size the next turn
 // starts with, the player's sacrifices and land-for-mana flag cleared, and,
 // for the player whose turn is ending, the attacked players rotated into last
-// turn's. Called once per player after the cleanup discard, and by
+// turn's and the turn number kept as its last. Called once per player after the cleanup discard, and by
 // RestartGame.
 func (g *Game) cleanupPlayerRecords(pid PlayerID) {
 	p := g.Player(pid)
@@ -84,6 +84,7 @@ func (g *Game) cleanupPlayerRecords(pid PlayerID) {
 	if pid == g.activePlayer {
 		p.attackedPlayersLastTurn = p.attackedPlayersThisTurn
 		p.attackedPlayersThisTurn = nil
+		p.lastTurnNr = g.turn
 	}
 }
 

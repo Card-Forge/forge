@@ -215,13 +215,16 @@ func (g *Game) repairReplacedBlocks(defender PlayerID, blocks []Block) ([]Block,
 	}
 }
 
-// recordBlockedBy is Card.addBlockedByThisTurn for blk: its attacker was
-// blocked by its blocker this turn (PhaseHandler.java:805,
-// BlockEffect.java:61). Java stores an LKI copy and compares by id; the
-// CardID is that id.
+// recordBlockedBy is Card.addBlockedByThisTurn and Card.addBlockedThisTurn
+// for blk: its attacker was blocked by its blocker this turn, and its
+// blocker blocked its attacker (PhaseHandler.java:804-805,
+// BlockEffect.java:60-61, always written as a pair). Java stores an LKI copy
+// and compares by id; the CardID is that id.
 func (g *Game) recordBlockedBy(blk Block) {
 	a := g.Card(blk.Attacker)
 	a.blockedByThisTurn = append(a.blockedByThisTurn, blk.Blocker)
+	b := g.Card(blk.Blocker)
+	b.blockedThisTurn = append(b.blockedThisTurn, blk.Attacker)
 }
 
 // checkBlockPairing is DeclareCombatBlockers' per-pair pass (its doc

@@ -1,0 +1,20 @@
+# CardProperty.java:1929-1949: "wasCastFromYourHandByYou" holds for a card
+# its controller cast from their own hand, and the cast record stays on the
+# permanent the spell becomes. Coal Stoker's ETB trigger ("if you cast it from
+# your hand, add {R}{R}{R}", ValidCard$ Card.wasCastFromYourHandByYou+Self)
+# fires: four Mountains pay for it, and of the {R}{R}{R} it adds one pays for
+# the Lightning Bolt that follows with no land left untapped; {R}{R} floats.
+startturn human
+advance 3
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+tapformana human 6 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+castspell human 1
+resolvestack
+queue targets ai
+castspell human 2
+resolvestack

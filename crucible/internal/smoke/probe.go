@@ -105,12 +105,22 @@ type variant struct {
 	// card is put in hand and cast (timing.go).
 	timed bool
 	at    moment
+	// blocks makes the defender of a timed walk block with every creature it
+	// can (Controller.blockEvery).
+	blocks bool
+	// stateTailor adds, for each target spec naming game state, a corpus
+	// card the spec accepts with that state stripped (staged.go).
+	stateTailor bool
+	// stage is game state played into being before the card is cast
+	// (staged.go).
+	stage staging
 }
 
 // variants is tried in order for a card the previous ones could not cast: the
 // plain board, a spell on the stack, the rich board, then combat. A card whose
 // spell carries a timing restriction is then tried at each moment of a turn
-// (timedVariants, timing.go).
+// (timedVariants, timing.go), and any card still not cast on the staged
+// boards, whose game state is played into being (stagedVariants, staged.go).
 var variants = [...]variant{
 	{},
 	{opposing: bolt},
@@ -160,6 +170,7 @@ func (p *Prober) probe(name string, where *atomic.Value) Result {
 	if def, ok := p.db.Card(name); ok {
 		rest = append(rest, timedVariants(def)...)
 	}
+	rest = append(rest, stagedVariants[:]...)
 	for _, v := range rest {
 		if res.Outcome != Inconclusive {
 			break
@@ -212,6 +223,9 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 	if v.tailor {
 		p.addTailored(g, pid, opp, def)
 	}
+	if v.stateTailor {
+		p.addStateTailored(g, pid, opp, def)
+	}
 	fill := func() {
 		pool := &g.Player(pid).ManaPool
 		for _, c := range [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green} {
@@ -242,7 +256,15 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 		}
 	}
 	if v.timed {
+		ctl.blockEvery = v.blocks
 		if err := p.walk(g, ctl, pid, opp, v.at); err != nil {
+			res.Outcome, res.Detail = Inconclusive, err.Error()
+			return res
+		}
+		fill()
+	}
+	if v.stage != stageNone {
+		if err := p.playStage(g, ctl, v.stage); err != nil {
 			res.Outcome, res.Detail = Inconclusive, err.Error()
 			return res
 		}

@@ -156,7 +156,8 @@ The 3 watchers share Essence of the Wild's shape, tested with a synthetic card; 
 
 Since measured: the chained `PutCounter ETB$` rows (3 cards) and the `SubAbility$ Effect` rows (2) resolve, as do
 `RemoveCardTypes$` Imposter Mech and Machine God's Effigy, as do Vizier of Many Faces (`Embalm$`/`RemoveCost$`) and
-`ThisTurnEnteredFrom_<Zone>` in a `Choices$` (The Fourteenth Doctor) ([`layers-n-copy.md`](layers-n-copy.md)).
+`ThisTurnEnteredFrom_<Zone>` in a `Choices$` (The Fourteenth Doctor) ([`layers-n-copy.md`](layers-n-copy.md)), and bare
+`ThisTurnEntered` (Sakashima's Protégé, [`m6-r25f-probe-game-state.md`](m6-r25f-probe-game-state.md)).
 
 The last two copy first and fail in the chain, as any Registry chain can: the game stops at the error either way.
 
