@@ -10,6 +10,8 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Reward;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
+import forge.card.CardEdition;
+import forge.model.CardBlock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -120,6 +122,19 @@ public class ArchipelagoUtil {
             return replacedAPReward.get(0);
         }
         return null;
+    }
+
+    // Marker shown after an inn event's block when every set in that block is still locked, "" otherwise.
+    // returnColor restores the label's text color after the red marker (e.g. "[BLACK]" for event descriptions).
+    public static String lockedBlockMarker(CardBlock block, String returnColor) {
+        ArchipelagoData data = ArchipelagoData.getInstance();
+        if (block == null || data.getArchipelagoMode() == ArchipelagoMode.disabled) return "";
+        List<CardEdition> sets = block.getSets();
+        if (sets.isEmpty()) return "";
+        for (CardEdition set : sets) {
+            if (data.isSetUnlocked(set.getCode())) return "";
+        }
+        return " [RED](Locked)" + returnColor;
     }
 
     /// We depend on these POI names to have these exact names.

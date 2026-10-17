@@ -11,6 +11,7 @@ import forge.adventure.util.AdventureOverrides;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
+import forge.adventure.archipelago.ArchipelagoUtil;
 import forge.card.CardEdition;
 import forge.card.PrintSheet;
 import forge.deck.CardPool;
@@ -857,7 +858,7 @@ public class AdventureEventData implements Serializable {
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         if (format == AdventureEventController.EventFormat.Draft) {
             description = localizer.getMessage("advEventTypeBoosterDraft");
-            description += "Block: " + getCardBlock() + "\n";
+            description += "Block: " + getCardBlock() + ArchipelagoUtil.lockedBlockMarker(getCardBlock(), "[BLACK]") + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (eventRules.getPairingDescription()) + "\n\n";
 
@@ -876,7 +877,7 @@ public class AdventureEventData implements Serializable {
             description += String.format("Prizes\nChampion: Keep drafted deck\n2+ round wins: Challenge Coin \n1+ round wins: %s Booster, %s Booster\n0 round wins: %s Booster", rewardPacks[0].getComment(), rewardPacks[1].getComment(), rewardPacks[2].getComment());
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
             description = "Event Type: Jumpstart\n";
-            description += "Block: " + getCardBlock() + "\n";
+            description += "Block: " + getCardBlock() + ArchipelagoUtil.lockedBlockMarker(getCardBlock(), "[BLACK]") + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (eventRules.getPairingDescription()) + "\n\n";
             description += String.format("Pay 1 Entry Fee\n- Gold %d[][+Gold][BLACK]\n- Mana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
             if (eventRules.acceptsBronzeChallengeCoin) {
@@ -892,7 +893,7 @@ public class AdventureEventData implements Serializable {
             description += localizer.getMessage("advJumpstartParticipationPrize");
         } else if (format == AdventureEventController.EventFormat.Sealed) {
             description = "Event Type: Sealed Deck\n";
-            description += "Block: " + getCardBlock() + "\n";
+            description += "Block: " + getCardBlock() + ArchipelagoUtil.lockedBlockMarker(getCardBlock(), "[BLACK]") + "\n";
             description += "Boosters: " + packConfiguration.length + " Packs (" +
                     String.join(", ", packConfiguration) + ")\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " +

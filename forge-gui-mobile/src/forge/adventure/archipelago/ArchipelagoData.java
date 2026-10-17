@@ -82,7 +82,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     // This must be updated to reset any sets/maps/variables otherwise things persist between loads of different save files!
     public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
-        GameHUD.getInstance().setApButtonVisibility(/*archipelagoMode == ArchipelagoMode.networked_archipelago*/false); // Todo: Revert to the commented block once the screen is implemented
+        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         cardsUnlockedByName.clear();
         this.addCardUnlockedByName("Plains");
         this.addCardUnlockedByName("Forest");
@@ -307,7 +307,7 @@ public class ArchipelagoData implements SaveFileContent {
             case "grolnok" -> updatePlayerChecks(ArchipelagoCheckTypes.GROLNOK_DEFEATED, notificationMessage);
             case "guardian angel" -> updatePlayerChecks(ArchipelagoCheckTypes.GUARDIAN_ANGEL_DEFEATED, notificationMessage);
             case "liliana" -> updatePlayerChecks(ArchipelagoCheckTypes.LILIANA_DEFEATED, notificationMessage);
-            case "slimefoot" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED, notificationMessage);
+            case "slimefoot", "fungus of slimefoot" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED, notificationMessage);
             case "sorin" -> updatePlayerChecks(ArchipelagoCheckTypes.SORIN_DEFEATED, notificationMessage);
             case "chandra" -> updatePlayerChecks(ArchipelagoCheckTypes.CHANDRA_DEFEATED, notificationMessage);
             case "tibalt's torturer" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALTS_TORTURER_DEFEATED, notificationMessage);
@@ -704,7 +704,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
         lastArchipelagoRewardIndex = data.containsKey("lastArchipelagoRewardIndex") ? data.readInt("lastArchipelagoRewardIndex") : 0;
         setTotalAmountOfSetUnlockChecks(data.containsKey("totalSetUnlockChecks") ? data.readInt("totalSetUnlockChecks") : 100);
-        GameHUD.getInstance().setApButtonVisibility(/*archipelagoMode == ArchipelagoMode.networked_archipelago*/false); // Todo: Revert to the commented block once the screen is implemented
+        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         if (archipelagoMode == ArchipelagoMode.networked_archipelago && Archipelago.getInstance().isConnected()) {
             Archipelago.getInstance().disconnect();
         }

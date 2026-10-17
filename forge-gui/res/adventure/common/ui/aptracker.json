@@ -11,11 +11,21 @@
     },
     {
       "type": "Scroll",
-      "name": "settings",
+      "name": "content",
       "x": 15,
-      "y": 18,
+      "y": 12,
       "width": 382,
-      "height": 235
+      "height": 212
+    },
+    {
+      "type": "Label",
+      "name": "details",
+      "text": "",
+      "font": "default",
+      "x": 15,
+      "y": 228,
+      "width": 382,
+      "height": 32
     },
     {
       "type": "TextButton",
