@@ -465,31 +465,25 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void setSelectables(Iterable<forge.game.card.CardView> cards, int min, int max) {
-            super.setSelectables(cards, min, max);
-            synchronized (pendingSelectables) {
-                // Track selectable cards for multi-selection prompts
-                pendingSelectables.clear();
-                selectableIndex = 0;
-                if (cards != null) {
-                    for (forge.game.card.CardView card : cards) {
-                        pendingSelectables.add(card);
+        public void setSelection(forge.gamemodes.match.Selection selection) {
+            final boolean cardsChanged = !getSelection().cards().equals(selection.cards());
+            super.setSelection(selection);
+            if (cardsChanged) {
+                synchronized (pendingSelectables) {
+                    // Track selectable cards for multi-selection prompts
+                    pendingSelectables.clear();
+                    selectableIndex = 0;
+                    pendingSelectables.addAll(selection.cards());
+
+                    // Auto-select the first selectable card when cards become selectable
+                    if (gameController != null && !pendingSelectables.isEmpty()) {
+                        selectNextCard();
                     }
                 }
-
-                // Auto-select the first selectable card when cards become selectable
-                if (gameController != null && !pendingSelectables.isEmpty()) {
-                    selectNextCard();
-                }
             }
-        }
-
-        @Override
-        public void setSelectableTargets(Iterable<? extends forge.trackable.TrackableObject> targets) {
-            super.setSelectableTargets(targets);
-            // stack targets (counterspells and the like): pick the first one offered, as setSelectables does for cards
-            if (gameController != null && targets != null) {
-                for (forge.trackable.TrackableObject target : targets) {
+            // stack targets (counterspells and the like): pick the first one not picked yet, as for cards
+            if (gameController != null) {
+                for (forge.trackable.TrackableObject target : selection.targets()) {
                     if (target instanceof forge.game.spellability.StackItemView item && !isHighlighted(item)) {
                         scheduleAutoResponse(() -> gameController.selectStackItem(item), 100, "select stack item " + item);
                         break;

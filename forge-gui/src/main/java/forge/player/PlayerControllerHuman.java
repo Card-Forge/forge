@@ -65,6 +65,7 @@ import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.DrawOfferCoordinator;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.*;
@@ -1605,7 +1606,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 && yieldController.getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW);
 
         if (!showActionable && !showAutoTap) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
 
@@ -1656,7 +1657,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push undeclared, legal attacker candidates. */
     public void pushAttackerCandidates(final Player attackingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
@@ -1672,7 +1673,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push defenders that could block at least one current attacker. */
     public void pushBlockerCandidates(final Player defendingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
@@ -1785,11 +1786,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
         } finally {
             keepTargetsMarked = false;
-            // Copies: the GUI applies the change later, and this list is reused.
             if (!keptMarks.isEmpty()) {
-                getGui().setHighlighted(new ArrayList<>(keptMarks), false);
+                keptMarks.clear();
+                getGui().setSelection(Selection.NONE);
             }
-            keptMarks.clear();
         }
     }
 
@@ -2492,12 +2492,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final boolean result = chooseTargetsForStep(currentAbility);
         // what was chosen stays marked while later targeting steps follow, and goes away after the last one or a failure;
         // for a spell being cast it stays up through paying the cost instead (see playChosenSpellAbility)
-        if (result && keepTargetsMarked) {
-            if (!TargetingProgress.hasLaterTargetingStep(currentAbility)) {
-                keptMarks.addAll(TargetingProgress.chosenTargets(currentAbility));
-            }
-        } else if (!result || !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
-            TargetingProgress.clearChosen(getGui(), currentAbility);
+        if (result && keepTargetsMarked && !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
+            keptMarks.addAll(TargetingProgress.chosenTargets(currentAbility));
+            // the targeting input cleared its marks when it stopped, before they were kept
+            getGui().setSelection(Selection.ofChosen(keptMarks));
         }
         return result;
     }
@@ -2506,8 +2504,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean keepTargetsMarked;
     private final List<TrackableObject> keptMarks = new ArrayList<>();
 
-    public boolean isKeepingTargetsMarked() {
-        return keepTargetsMarked;
+    public List<TrackableObject> getKeptMarks() {
+        return keptMarks;
     }
 
     private boolean chooseTargetsForStep(final SpellAbility currentAbility) {
