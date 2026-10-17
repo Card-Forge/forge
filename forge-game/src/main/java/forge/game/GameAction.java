@@ -280,20 +280,25 @@ public class GameAction {
         // need to check before it enters
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
-                found = true;
-            }
-
-            if (!found) {
-                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+            final Set<Card> outerEntering = game.setEnteringTogether(enteringWith(copied, toBattlefield, params));
+            try {
+                if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-            }
 
-            if (!found) {
-                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
-                    found = true;
+                if (!found) {
+                    if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                        found = true;
+                    }
                 }
+
+                if (!found) {
+                    if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                        found = true;
+                    }
+                }
+            } finally {
+                game.setEnteringTogether(outerEntering);
             }
             if (!found) {
                 c.clearControllers();
@@ -335,7 +340,13 @@ public class GameAction {
             if (zoneFrom == null || zoneFrom.is(ZoneType.None)) {
                 copied.getOwner().addInboundToken(copied);
             }
-            ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
+            final Set<Card> outerEntering = game.setEnteringTogether(enteringWith(copied, toBattlefield, params));
+            ReplacementResult repres;
+            try {
+                repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
+            } finally {
+                game.setEnteringTogether(outerEntering);
+            }
             copied.getOwner().removeInboundToken(copied);
 
             if (repres != ReplacementResult.NotReplaced && repres != ReplacementResult.Updated) {
@@ -392,7 +403,12 @@ public class GameAction {
                     return moveToGraveyard(copied, cause, params);
                 }
             }
-            attachAuraOnIndirectETB(copied, params);
+            final Set<Card> outerEntering = game.setEnteringTogether(enteringWith(copied, toBattlefield, params));
+            try {
+                attachAuraOnIndirectETB(copied, params);
+            } finally {
+                game.setEnteringTogether(outerEntering);
+            }
         }
 
         // Handle merged permanent here so all replacement effects are already applied.
@@ -568,7 +584,12 @@ public class GameAction {
         }
 
         // do ETB counters after zone add
-        table.replaceCounterEffect(game, null, true, true, params);
+        final Set<Card> outerEntering = game.setEnteringTogether(enteringWith(copied, toBattlefield, params));
+        try {
+            table.replaceCounterEffect(game, null, true, true, params);
+        } finally {
+            game.setEnteringTogether(outerEntering);
+        }
 
         game.getTriggerHandler().clearSuppression(TriggerType.Always);
 
@@ -735,6 +756,13 @@ public class GameAction {
                 exileEffect(eff);
             }
         }
+    }
+
+    private static Set<Card> enteringWith(final Card c, final boolean toBattlefield, final Map<AbilityKey, Object> params) {
+        if (!toBattlefield || params == null || !(params.get(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table)) {
+            return null;
+        }
+        return table.enteredWith(c);
     }
 
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {

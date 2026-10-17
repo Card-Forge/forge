@@ -111,7 +111,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     String [] msgArray = msg.split(" & ");
                     List<CardCollection> validTargetsList = new ArrayList<>(validArray.length);
                     for (String subValid : validArray) {
-                        CardCollection validTargets = CardLists.filter(AbilityUtils.filterListByType(battlefield, subValid, sa), CardPredicates.canBeSacrificedBy(sa, true));
+                        CardCollection validTargets = CardLists.filter(filterValid(battlefield, subValid, sa, zoneMovements), CardPredicates.canBeSacrificedBy(sa, true));
                         validTargetsList.add(validTargets);
                     }
                     CardCollection chosenCards = new CardCollection();
@@ -129,7 +129,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
                     choosenToSacrifice = chosenCards;
                 } else {
-                    CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, valid, sa);
+                    CardCollectionView validTargets = filterValid(battlefield, valid, sa, zoneMovements);
                     if (!destroy) {
                         validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
                     }
@@ -182,6 +182,16 @@ public class SacrificeEffect extends SpellAbilityEffect {
         }
 
         zoneMovements.triggerChangesZoneAll(game, sa);
+    }
+
+    private static CardCollectionView filterValid(CardCollection battlefield, String valid, SpellAbility sa, CardZoneTable zoneMovements) {
+        if (!sa.isReplacementAbility()) {
+            return AbilityUtils.filterListByType(battlefield, valid, sa);
+        }
+        // CR 614.12a what can be sacrificed is decided by how they looked before the event
+        CardCollection result = new CardCollection(battlefield);
+        result.retainAll(AbilityUtils.filterListByType(zoneMovements.getLastStateBattlefield(), valid, sa));
+        return result;
     }
 
     @Override

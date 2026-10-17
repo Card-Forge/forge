@@ -26,6 +26,7 @@ public class StaticAbilityFlipCoinMod {
         return flipper.getGame()
                 .getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)
                 .stream()
+                .filter(card -> !flipper.getGame().isEnteringTogether(card))
                 .flatMap(card -> card.getStaticAbilities().stream())
                 .filter(stAb -> stAb.checkConditions(mode) && stAb.matchesValidParam("ValidPlayer", flipper));
     }

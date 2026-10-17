@@ -52,7 +52,8 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         final List<CardView> cards = new ArrayList<>();
         for (T v : validChoices) {
             if (v instanceof Card c) {
-                cards.add(c.getView());
+                // a last-state copy is shown where the card is now
+                cards.add(c.getGame().getCardState(c).getView());
             }
         }
         return new Selection(cards, min, max, List.of(), new ArrayList<>(GameEntityView.getEntityCollection(selected)));

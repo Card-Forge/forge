@@ -107,6 +107,7 @@ public class Game {
     // If this merges with LKI In the future, it will need to change forms
     private GameSnapshot previousGameState = null;
     private CardCollection lastStateBattlefield = new CardCollection();
+    private Set<Card> enteringTogether;
     private CardCollection lastStateGraveyard = new CardCollection();
 
     private CardZoneTable untilHostLeavesPlayTriggerList = new CardZoneTable();
@@ -192,6 +193,16 @@ public class Game {
 
     public CardZoneTable getUntilHostLeavesPlayTriggerList() {
         return untilHostLeavesPlayTriggerList;
+    }
+
+    // CR 614.12 the other permanents entering in the event now being decided, their abilities don't exist yet
+    public boolean isEnteringTogether(final Card c) {
+        return enteringTogether != null && enteringTogether.contains(c);
+    }
+    public Set<Card> setEnteringTogether(final Set<Card> entering) {
+        Set<Card> old = enteringTogether;
+        enteringTogether = entering;
+        return old;
     }
 
     public CardCollectionView getLastStateBattlefield() {

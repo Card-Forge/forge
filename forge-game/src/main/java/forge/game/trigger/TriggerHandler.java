@@ -598,6 +598,10 @@ public class TriggerHandler {
     public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
         List<Trigger> trigger = Lists.newArrayList();
         for (final Trigger t : activeTriggers) {
+            // CR 603.10a a permanent still entering wasn't there to see what left before it
+            if (game.isEnteringTogether(t.getHostCard()) && t.looksBackInTime()) {
+                continue;
+            }
             if (canRunTrigger(t, mode, runParams)) {
                 trigger.add(t);
             }

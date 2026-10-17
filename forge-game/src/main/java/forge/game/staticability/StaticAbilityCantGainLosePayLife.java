@@ -11,6 +11,9 @@ public class StaticAbilityCantGainLosePayLife {
     public static boolean anyCantGainLife(final Player player) {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (game.isEnteringTogether(ca)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!(stAb.checkMode(StaticAbilityMode.CantGainLife) || stAb.checkMode(StaticAbilityMode.CantChangeLife))) {
                     continue;
@@ -31,6 +34,9 @@ public class StaticAbilityCantGainLosePayLife {
     public static boolean anyCantLoseLife(final Player player)  {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (game.isEnteringTogether(ca)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!(stAb.checkMode(StaticAbilityMode.CantLoseLife) || stAb.checkMode(StaticAbilityMode.CantChangeLife))) {
                     continue;
@@ -52,6 +58,9 @@ public class StaticAbilityCantGainLosePayLife {
     public static boolean anyCantPayLife(final Player player, final boolean effect, final SpellAbility cause)  {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (game.isEnteringTogether(ca)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!(stAb.checkMode(StaticAbilityMode.CantPayLife) || stAb.checkMode(StaticAbilityMode.CantLoseLife) || stAb.checkMode(StaticAbilityMode.CantChangeLife))) {
                     continue;
