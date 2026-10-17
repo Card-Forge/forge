@@ -105,7 +105,7 @@ public class SealedCardPoolGenerator {
         final DeckGroup sealed = sd.buildDeckGroup(sDeckName, humanPool, addBasicLands);
         if (sealed == null) { return null; }
 
-        FModel.getDecks().getSealed().add(sealed);
+        sealedDecks.add(sealed);
         return sealed;
     }
 
