@@ -338,8 +338,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }, 1);
         VPlayerPanel.reloadCompactLayout(); //also converts the old on/off value of this setting
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_COMPACT_LANDSCAPE_LAYOUT,
-            Forge.getLocalizer().getMessageorUseDefault("lblCompactLayout", "Use Compact Layout (Landscape Mode)"),
-            Forge.getLocalizer().getMessageorUseDefault("nlCompactLayout", "Compact player panels for touch screens. Left or Right puts the player controls (avatar, zone tabs and phase button) on that side of the screen and keeps the battlefield cards against them. Alternate puts your controls on the right and the opponents' on the left, with the battlefield centered. Off turns the compact layout off. Zones slide up from the screen edge, the command zone slides in beside them and the phase stops open from the phase button. Overrides the alternate zone layout."),
+            Forge.getLocalizer().getMessage("lblCompactLayout"),
+            Forge.getLocalizer().getMessage("nlCompactLayout"),
             new String[] { "Off", "Left", "Right", "Alternate" }) {
                 @Override
                 public void valueChanged(String newValue) {

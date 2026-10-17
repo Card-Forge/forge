@@ -353,7 +353,7 @@ public class SettingsScene extends UIScene {
             }
             return null;
         });
-        addLabel(localizer.getMessageorUseDefault("lblCompactLayout", "Use Compact Layout (Landscape Mode)"));
+        addLabel(localizer.getMessage("lblCompactLayout"));
         settingGroup.add(compactLayout).align(Align.right).pad(2);
         addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         String currentAnim;
