@@ -51,6 +51,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
+import forge.toolbox.FSelectionBox;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
 
@@ -818,10 +819,13 @@ public class CardRenderer {
         if (unselectable) {
             g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.6f), cx, cy, cw, ch);
         }
-        //Magenta outline when card is chosen
+        //Solid outline when card is chosen, moving dashes when it can be chosen
         if (MatchController.instance.isHighlighted(card)) {
-            g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+            FSelectionBox.drawChosen(g, BORDER_THICKNESS, cx, cy, cw, ch);
         } else {
+            if (MatchController.instance.isSelectable(card)) {
+                FSelectionBox.draw(g, cx, cy, cw, ch);
+            }
             if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
                     && MatchController.instance.isWeaklySelectable(card)) {
                 g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);

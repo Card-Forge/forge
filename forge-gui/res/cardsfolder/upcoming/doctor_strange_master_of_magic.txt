@@ -1,0 +1,10 @@
+Name:Doctor Strange, Master of Magic
+ManaCost:2 U U
+Types:Legendary Creature Human Sorcerer Hero
+PT:2/3
+K:Flying
+K:Vigilance
+K:Prowess
+A:AB$ Draw | Cost$ T | CheckSVar$ X | SpellDescription$ Draw a card. Activate only if you've cast a noncreature spell this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+nonCreature
+Oracle:Flying, vigilance, prowess\n{T}: Draw a card. Activate only if you've cast a noncreature spell this turn.

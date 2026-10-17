@@ -23,6 +23,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.BasicStroke;
+import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -75,6 +77,9 @@ public class VStack implements IVDoc<CStack> {
 
     // Other fields
     private final AbilityMenu abilityMenu = new AbilityMenu();
+
+    // dashed outline of a stack entry that can be picked as a target; a picked entry gets a solid red one
+    private static final Color SELECTABLE_COLOR = new Color(255, 215, 0);
 
     private StackInstanceTextArea hoveredItem;
 
@@ -153,6 +158,11 @@ public class VStack implements IVDoc<CStack> {
         scroller.repaint();
 
         SwingUtilities.invokeLater(scroller::scrollToTop);
+    }
+
+    /** Repaints the entries, for when a stack target was marked, picked or unmarked (the outline is painted per entry). */
+    public void repaintSelection() {
+        scroller.repaint();
     }
 
     @SuppressWarnings("serial")
@@ -242,6 +252,10 @@ public class VStack implements IVDoc<CStack> {
             addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftClick(final MouseEvent e) {
+                    if (controller.getMatchUI().isSelectable(item)) { // a stack target is being chosen: a click picks (or unpicks) it
+                        controller.getMatchUI().pickStackItem(item);
+                        return;
+                    }
                     onClick(e);
                 }
                 @Override
@@ -289,6 +303,17 @@ public class VStack implements IVDoc<CStack> {
             final BufferedImage img = cachedImage.getImage();
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
+            }
+
+            //outline the entry while it can be picked as a target, and once it is picked
+            final boolean picked = controller.getMatchUI().isHighlighted(item);
+            if (picked || controller.getMatchUI().isSelectable(item)) {
+                final Stroke oldStroke = g2d.getStroke();
+                g2d.setColor(picked ? Color.RED : SELECTABLE_COLOR);
+                g2d.setStroke(picked ? new BasicStroke(3f)
+                        : new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10f, new float[] {8f, 6f}, 0f));
+                g2d.drawRect(1, 1, getWidth() - 3, getHeight() - 3);
+                g2d.setStroke(oldStroke);
             }
         }
     }

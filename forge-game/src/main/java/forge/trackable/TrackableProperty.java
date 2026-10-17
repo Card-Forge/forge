@@ -223,6 +223,7 @@ public enum TrackableProperty {
     ActivatingPlayer(TrackableTypes.PlayerViewType),
     TargetCards(TrackableTypes.CardViewCollectionType),
     TargetPlayers(TrackableTypes.PlayerViewCollectionType),
+    TargetStackItems(TrackableTypes.StackItemViewListType),
     SubInstance(TrackableTypes.StackItemViewType),
     Ability(TrackableTypes.BooleanType),
     OptionalTrigger(TrackableTypes.BooleanType),

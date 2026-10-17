@@ -16,7 +16,7 @@ Name=Liliana
 1 Crypt Ghast|RVR
 1 Cryptbreaker|EMN
 1 Curse of the Restless Dead|MIC
-1 Dark Ritual|MMQ
+1 Dark Ritual|SLD|[2678]
 1 Death Baron|M19
 1 Dread Summons|NCC
 1 Duress|MID
@@ -25,7 +25,7 @@ Name=Liliana
 1 Finale of Eternity|WAR
 1 Fleshbag Marauder|MIC
 1 From Under the Floorboards|C19
-1 Geth's Grimoire|PLST
+1 Geth's Grimoire|DST
 1 Ghoulcaller Gisa|CC2
 1 God-Eternal Bontu|WAR
 1 Grave Titan|PLST
@@ -61,15 +61,14 @@ Name=Liliana
 1 Settle the Score|DOM
 1 Snuff Out|GVL
 1 Sol Ring|C15
-30 Swamp|AKH
+31 Swamp|AKH
 1 Tergrid, God of Fright|KHM
 1 The Chain Veil|CMM
-1 The Eldest Reborn|PLST
+1 The Eldest Reborn|DOM
 1 Undead Augur|MH1
 1 Undead Warchief|HOP
 1 Victimize|NCC
-1 Village Rites|KHM
+1 Liliana, the Repentant|FRA
 1 War Room|CMR
 1 Waste Not|C16
-1 Witch's Cottage|ELD
 1 Withering Torment|DSK
