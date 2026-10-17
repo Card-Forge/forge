@@ -69,6 +69,10 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
     private boolean useAiForRemotePlayers = true;
     private boolean commander = false;
     private List<Deck> decks = null;
+    // When >= 0, the first remote client simulates a disconnect once the host game reaches this turn, and the game
+    // loop waits for its reconnect instead of aborting
+    private int disconnectAtTurn = -1;
+    private forge.gamemodes.net.client.FGameClient.DisconnectMode disconnectMode;
 
     // Runtime state
     private FServerManager server;
@@ -92,6 +96,16 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
      */
     public UnifiedNetworkHarness remoteClients(int count) {
         this.remoteClientCount = count;
+        return this;
+    }
+
+    /**
+     * Have the first remote client simulate a disconnect ({@link forge.gamemodes.net.client.FGameClient#simulateDisconnect})
+     * once the host game reaches {@code turn}; the game loop then waits for the automatic reconnect instead of aborting.
+     */
+    public UnifiedNetworkHarness disconnectAtTurn(int turn, forge.gamemodes.net.client.FGameClient.DisconnectMode mode) {
+        this.disconnectAtTurn = turn;
+        this.disconnectMode = mode;
         return this;
     }
 
@@ -583,6 +597,8 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
         if (hostedMatch == null) return;
 
         long endTime = System.currentTimeMillis() + gameTimeoutMs;
+        long disconnectIssuedAt = -1;
+        final long reconnectGraceMs = 180_000; // the server waits 300 s for a reconnect; the client retries for about 2 min
         while (System.currentTimeMillis() < endTime) {
             Game game = hostedMatch.getGame();
             if (game != null && game.isGameOver()) {
@@ -594,14 +610,36 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
                 break;
             }
 
-            // Fail fast if any remote client has disconnected unexpectedly
+            // A scripted disconnect of the first remote client, once the game reaches the asked turn
+            if (disconnectAtTurn >= 0 && disconnectIssuedAt < 0 && game != null
+                    && game.getPhaseHandler().getTurn() >= disconnectAtTurn) {
+                synchronized (remoteClients) {
+                    if (!remoteClients.isEmpty()) {
+                        HeadlessNetworkClient first = remoteClients.get(0);
+                        netLog.info("Simulating a {} disconnect of '{}' at turn {}", disconnectMode, first.getUsername(),
+                                game.getPhaseHandler().getTurn());
+                        first.getClient().simulateDisconnect(disconnectMode);
+                        disconnectIssuedAt = System.currentTimeMillis();
+                        result.clientDisconnectedAtTurn = game.getPhaseHandler().getTurn();
+                    }
+                }
+            }
+
+            // Fail fast if any remote client has disconnected unexpectedly; a scripted disconnect gets the grace period
             synchronized (remoteClients) {
                 for (HeadlessNetworkClient client : remoteClients) {
                     if (!client.isConnected()) {
+                        boolean scripted = disconnectIssuedAt >= 0 && client == remoteClients.get(0)
+                                && System.currentTimeMillis() - disconnectIssuedAt < reconnectGraceMs;
+                        if (scripted) {
+                            continue;
+                        }
                         netLog.error("Remote client '{}' disconnected — aborting game",
                                 client.getMetricsSummary());
                         result.errorMessage = "Remote client disconnected unexpectedly";
                         return;
+                    } else if (disconnectIssuedAt >= 0 && client == remoteClients.get(0) && client.hasReconnected()) {
+                        result.clientReconnected = true;
                     }
                 }
             }
@@ -643,6 +681,14 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
                 result.clientGameView = first.getGameView();
                 result.clientOpenViewCalled = first.isOpenViewCalled();
                 result.clientSetGameViewCount = first.getSetGameViewCount();
+                result.clientMaxNamedLibraryCards = first.getMaxNamedLibraryCards();
+                result.clientMaxLibraryCards = first.getMaxLibraryCards();
+                result.clientNamedLibraryCardsAfterFullState = first.getNamedLibraryCardsAfterFullState();
+                result.clientMaxNamedLibraryCardsAfterReconnect = first.getMaxNamedLibraryCardsAfterReconnect();
+                result.clientMaxLibraryCardsAfterReconnect = first.getMaxLibraryCardsAfterReconnect();
+                if (first.hasReconnected()) {
+                    result.clientReconnected = true;
+                }
             }
         }
         // Collect send errors from server
@@ -770,6 +816,16 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
         public boolean clientOpenViewCalled;
         public int clientSetGameViewCount;
         public GameView clientGameView;
+        // The most library cards the first remote client ever held with a name it may not see, and held at all, while
+        // the game was on; with a scripted disconnect, the same two counted only over the deltas applied after the
+        // reconnect's full state, and the count right after that full state arrived
+        public int clientMaxNamedLibraryCards;
+        public int clientMaxLibraryCards;
+        public int clientDisconnectedAtTurn = -1;
+        public boolean clientReconnected;
+        public int clientNamedLibraryCardsAfterFullState = -1;
+        public int clientMaxNamedLibraryCardsAfterReconnect;
+        public int clientMaxLibraryCardsAfterReconnect;
 
         // Deck information
         public List<String> deckNames = new ArrayList<>();

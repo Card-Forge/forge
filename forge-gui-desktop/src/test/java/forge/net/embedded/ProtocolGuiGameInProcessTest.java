@@ -5,10 +5,12 @@ import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.event.GameEvent;
+import forge.game.event.GameEventGameFinished;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.IRemote;
@@ -25,18 +27,24 @@ import forge.net.TestUtils;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableProperty;
 import forge.util.MyRandom;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.testng.Assert.assertEquals;
@@ -163,7 +171,14 @@ public class ProtocolGuiGameInProcessTest {
 
         final List<String> loadedBefore = loadedTransportClasses();
         final RecordingRemote remote = new RecordingRemote();
-        final ProtocolGuiGame gui = new ProtocolGuiGame(remote);
+        // isLibgdxPort answers from a flag the test sets after the game, to see a desktop peer and then a mobile one
+        final AtomicBoolean mobile = new AtomicBoolean(false);
+        final ProtocolGuiGame gui = new ProtocolGuiGame(remote) {
+            @Override
+            public boolean isLibgdxPort() {
+                return mobile.get();
+            }
+        };
 
         final RegisteredPlayer human = new RegisteredPlayer(deck("Embedded", "Drifting Meadow"))
                 .setPlayer(new LobbyPlayerHuman("Embedded"));
@@ -247,5 +262,107 @@ public class ProtocolGuiGameInProcessTest {
         assertEquals(remote.wrappedEvents, 0, "no Java-serialized event wrappers on the embedded path");
         assertTrue(remote.rawEvents > 0, "raw GameEvents reach the remote");
         assertFalse(match.getGameView() != null && !match.getGameView().isGameOver(), "game ended after concede");
+
+        // Mid-game, library cards go to this proxy's player as shells. The first packet carrying new objects is the
+        // initial sync, every card a new object: no library card in it says which card it is or carries a state view
+        DeltaPacket initialSync = null;
+        for (final GuiGameEvent ev : new ArrayList<>(remote.log)) {
+            if (ev.getMethod() == ProtocolMethod.applyDelta && !((DeltaPacket) ev.getObjects()[0]).getNewObjects().isEmpty()) {
+                initialSync = (DeltaPacket) ev.getObjects()[0];
+                break;
+            }
+        }
+        assertNotNull(initialSync, "no applyDelta carried new objects");
+        final Set<TrackableProperty> shellKeys = EnumSet.of(TrackableProperty.Owner, TrackableProperty.Controller, TrackableProperty.Zone);
+        final Set<Integer> libraryIds = new HashSet<>();
+        for (final Map.Entry<Integer, Map<TrackableProperty, Object>> e : initialSync.getNewObjects().entrySet()) {
+            final Map<TrackableProperty, Object> props = e.getValue();
+            if (DeltaPacket.getTypeFromDeltaKey(e.getKey()) != DeltaPacket.TYPE_CARD_VIEW || props.get(TrackableProperty.Zone) != ZoneType.Library) {
+                continue;
+            }
+            final int id = DeltaPacket.getIdFromDeltaKey(e.getKey());
+            libraryIds.add(id);
+            assertEquals(props.keySet(), shellKeys, "library card " + id + " not sent as exactly a shell: " + props.keySet());
+        }
+        for (final int key : initialSync.getNewObjects().keySet()) {
+            if (DeltaPacket.getTypeFromDeltaKey(key) == DeltaPacket.TYPE_CSV) {
+                final int cardId = DeltaPacket.getIdFromDeltaKey(key) / 16;
+                assertFalse(libraryIds.contains(cardId), "library card " + cardId + " sent with a state view");
+            }
+        }
+        assertFalse(libraryIds.isEmpty(), "no library card in the initial sync, so none was checked");
+
+        // After the game, by walks from this thread once the packet carrying GameEventGameFinished has arrived and the
+        // log has stopped growing: a desktop peer keeps its placeholders, a mobile one is sent its library cards in full.
+        // The game's own final flush to a mobile peer is not exercised here
+        boolean finished = false;
+        int logSize = -1;
+        final long settle = System.currentTimeMillis() + 30_000;
+        while (!(finished && logSize == remote.log.size()) && System.currentTimeMillis() < settle) {
+            logSize = remote.log.size();
+            for (final GuiGameEvent ev : new ArrayList<>(remote.log)) {
+                if (ev.getMethod() == ProtocolMethod.applyDelta && ((DeltaPacket) ev.getObjects()[0]).hasEvents()) {
+                    finished |= ((DeltaPacket) ev.getObjects()[0]).getEvents().stream().anyMatch(GameEventGameFinished.class::isInstance);
+                }
+            }
+            Thread.sleep(250);
+        }
+        assertTrue(finished, "the game's final events never reached the remote");
+        assertTrue(gui.getGameView() != null && gui.getGameView().isGameOver(), "the proxy's game view is not over");
+
+        // Desktop: one more walk, then what the remote holds of each card, its last new-object map with every later
+        // delta applied in order. No library card in it holds more than a shell or has a state view
+        gui.updateGameView();
+        final Map<Integer, Map<TrackableProperty, Object>> held = new HashMap<>();
+        for (final GuiGameEvent ev : new ArrayList<>(remote.log)) {
+            if (ev.getMethod() == ProtocolMethod.applyDelta) {
+                final DeltaPacket d = (DeltaPacket) ev.getObjects()[0];
+                d.getNewObjects().forEach((k, v) -> held.put(k, new HashMap<>(v)));
+                d.getObjectDeltas().forEach((k, v) -> held.computeIfAbsent(k, x -> new HashMap<>()).putAll(v));
+            }
+        }
+        final Set<Integer> heldLibraryKeys = new HashSet<>();
+        for (final Map.Entry<Integer, Map<TrackableProperty, Object>> e : held.entrySet()) {
+            if (DeltaPacket.getTypeFromDeltaKey(e.getKey()) == DeltaPacket.TYPE_CARD_VIEW && e.getValue().get(TrackableProperty.Zone) == ZoneType.Library) {
+                heldLibraryKeys.add(e.getKey());
+                assertEquals(e.getValue().keySet(), shellKeys, "library card " + DeltaPacket.getIdFromDeltaKey(e.getKey())
+                        + " does not hold exactly a shell on a desktop peer after the game: " + e.getValue().keySet());
+            }
+        }
+        assertFalse(heldLibraryKeys.isEmpty(), "the remote held no library card after the game, so none was checked");
+        for (final int key : held.keySet()) {
+            if (DeltaPacket.getTypeFromDeltaKey(key) == DeltaPacket.TYPE_CSV) {
+                final int cardId = DeltaPacket.getIdFromDeltaKey(key) / 16;
+                assertFalse(heldLibraryKeys.contains(DeltaPacket.makeDeltaKey(DeltaPacket.TYPE_CARD_VIEW, cardId)),
+                        "library card " + cardId + " has a state view on a desktop peer after the game");
+            }
+        }
+
+        // Mobile: the next walk fills every one of them in, on the instance the remote holds, with its state views
+        mobile.set(true);
+        final int before = remote.log.size();
+        gui.updateGameView();
+        final List<GuiGameEvent> after = new ArrayList<>(remote.log);
+        DeltaPacket filled = null;
+        for (final GuiGameEvent ev : after.subList(before, after.size())) {
+            if (ev.getMethod() == ProtocolMethod.applyDelta) {
+                filled = (DeltaPacket) ev.getObjects()[0];
+                break;
+            }
+        }
+        assertNotNull(filled, "no delta for a mobile peer after the game");
+        final Set<Integer> filledStateViews = new HashSet<>();
+        for (final int key : filled.getNewObjects().keySet()) {
+            if (DeltaPacket.getTypeFromDeltaKey(key) == DeltaPacket.TYPE_CSV) {
+                filledStateViews.add(DeltaPacket.getIdFromDeltaKey(key) / 16);
+            }
+        }
+        for (final int key : heldLibraryKeys) {
+            final int id = DeltaPacket.getIdFromDeltaKey(key);
+            final Map<TrackableProperty, Object> props = filled.getObjectDeltas().get(key);
+            assertTrue(props != null && props.get(TrackableProperty.Name) != null && !props.get(TrackableProperty.Name).toString().isEmpty(),
+                    "library card " + id + " not filled in for a mobile peer after the game: " + props);
+            assertTrue(filledStateViews.contains(id), "library card " + id + " filled in without its state view");
+        }
     }
 }
