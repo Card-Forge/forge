@@ -1261,6 +1261,14 @@ public class AiController {
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         ApiType api = sa == null ? null : sa.getApi();
 
+        if (mode == PlayerActionConfirmMode.ChangeZoneToAltDestination && sa != null) {
+            Card card = sa.getHostCard();
+            if (card.isRealCommander()
+                    && card.getGame().getTriggerHandler().isCardScheduledToReturnToBattlefield(card)) {
+                return false;
+            }
+        }
+
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
         if (sa == null || api == null) {
             String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (%s is null).",
