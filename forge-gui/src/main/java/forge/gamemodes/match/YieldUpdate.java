@@ -25,7 +25,9 @@ public sealed interface YieldUpdate extends Serializable
                 YieldUpdate.SkipPhase,
                 YieldUpdate.SetYieldPref,
                 YieldUpdate.SeedFromClient,
-                YieldUpdate.ClearAbilityOrders {
+                YieldUpdate.ClearAbilityOrders,
+                YieldUpdate.Suggest,
+                YieldUpdate.DeclineSuggestion {
 
     /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
     record SetMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) implements YieldUpdate {}
@@ -56,4 +58,8 @@ public sealed interface YieldUpdate extends Serializable
 
     /** Clears the receiving PCH's saved simultaneous-ability and replacement-effect ordering state. */
     record ClearAbilityOrders() implements YieldUpdate {}
+    /** Host to GUI, sent with a priority question: the yield layer suggests a yield the player may accept or decline. */
+    record Suggest(PlayerView player, SuggestionType type) implements YieldUpdate {}
+    /** GUI to host: the player declined a suggestion, so the host does not repeat it within the decline scope. */
+    record DeclineSuggestion(PlayerView player, SuggestionType type) implements YieldUpdate {}
 }

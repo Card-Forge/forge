@@ -137,11 +137,11 @@ public class CPrompt implements ICDoc {
     }
 
     private void selectButtonOk() {
-        matchUI.getGameController().selectButtonOk();
+        matchUI.selectButtonOk();
     }
 
     private void selectButtonCancel() {
-        matchUI.getGameController().selectButtonCancel();
+        matchUI.selectButtonCancel();
     }
 
     public void setMessage(final String s0, final CardView card) {

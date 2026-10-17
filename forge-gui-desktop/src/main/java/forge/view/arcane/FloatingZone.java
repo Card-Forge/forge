@@ -803,7 +803,7 @@ public class FloatingZone extends FloatingCardArea {
                 if (picks.isEmpty()) continue;
                 // Wire-serializable: ArrayList.subList() returns a SubList view that's not Serializable.
                 final List<CardView> others = picks.size() > 1 ? new ArrayList<>(picks.subList(1, picks.size())) : null;
-                fz.getMatchUI().getGameController().selectCard(picks.get(0), others,
+                fz.getMatchUI().selectCard(picks.get(0), others,
                         new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
                 return true;
             }
@@ -813,7 +813,7 @@ public class FloatingZone extends FloatingCardArea {
             if (!fz.isVisible()) continue;
             final CardPanel target = fz.findPanelByHotkeyDigit(digit);
             if (target == null) continue;
-            fz.getMatchUI().getGameController().selectCard(target.getCard(), null,
+            fz.getMatchUI().selectCard(target.getCard(), null,
                     new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
             return true;
         }

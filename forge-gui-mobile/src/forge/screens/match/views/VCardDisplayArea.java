@@ -757,7 +757,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             if (displayArea != null && getCard().getZone() == ZoneType.Hand && screenPos.width > 0) {
                 handStarts.put(getCard().getId(), new Rectangle(screenPos));
             }
-            if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
+            if (MatchController.instance.selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 Gdx.graphics.requestRendering();
                 return true;
             }

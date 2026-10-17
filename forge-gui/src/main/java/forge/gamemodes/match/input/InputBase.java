@@ -20,16 +20,13 @@ package forge.gamemodes.match.input;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardView;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
+import forge.gamemodes.match.PriorityPrompt;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-import forge.util.Localizer;
 
 import java.util.List;
 
@@ -128,53 +125,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     protected String getTurnPhasePriorityMessage(final Game game) {
-        final PhaseHandler ph = game.getPhaseHandler();
-        final StringBuilder sb = new StringBuilder();
-        Localizer localizer = Localizer.getInstance();
-        sb.append(localizer.getMessage("lblPriority")).append(": ").append(ph.getPriorityPlayer()).append("\n");
-        sb.append(localizer.getMessage("lblTurn")).append(": ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")");
-
-        if (!game.isNeitherDayNorNight()) {
-            sb.append("  [");
-
-            String dayLabel = game.isDay() ? "Day" : "Night";
-
-            sb.append(Localizer.getInstance().getMessage("lbl" + dayLabel));
-            sb.append("]");
-        }
-
-        sb.append("\n");
-        sb.append(localizer.getMessage("lblPhase")).append(": ").append(ph.getPhase().nameForUi).append("\n");
-        sb.append(localizer.getMessage("lblStack")).append(": ");
-        if (!game.getStack().isEmpty()) {
-            sb.append(game.getStack().size()).append(" ").append(localizer.getMessage("lbltoResolve"));
-        } else {
-            sb.append(localizer.getMessage("lblEmpty"));
-        }
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_SHOW_STORM_COUNT_IN_PROMPT)) {
-            int stormCount = game.getView().getStormCount();
-            if (stormCount > 0) {
-                sb.append("\n").append(localizer.getMessage("lblStormCount")).append(": ").append(stormCount);
-            }
-        }
-
-        if (controller.macros() != null) {
-            boolean isRecording = controller.macros().isRecording();
-            String pbText = controller.macros().playbackText();
-            if (pbText != null) {
-                sb.append("\n");
-                if (isRecording) {
-                    sb.append("Macro Recording -- ");
-                } else {
-                    sb.append("Macro Playback -- ");
-                }
-
-                sb.append(pbText);
-            } else if (isRecording) {
-                sb.append("\n").append("Macro Recording -- ");
-            }
-        }
-
-        return sb.toString();
+        return PriorityPrompt.turnMessage(game.getView(), PlayerView.get(game.getPhaseHandler().getPriorityPlayer()),
+                controller.getGui().getDayTime(), controller.macros());
     }
 }
