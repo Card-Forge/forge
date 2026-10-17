@@ -96,7 +96,11 @@
       "Bash(golangci-lint run)",
       "Bash(npx markdownlint-cli2 *)",
       "Bash(prettier --check *)",
-      "Bash(prettier --write *)"
+      "Bash(prettier --write *)",
+      "Edit(.claude/**)",
+      "Write(.claude/**)",
+      "Edit(docs/crucible/**)",
+      "Write(docs/crucible/**)"
     ]
   },
   "worktree": {
