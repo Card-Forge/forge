@@ -101,10 +101,16 @@ type variant struct {
 	// tailor adds, for each ValidTgts$ the card names, a corpus card that
 	// accepts it (tailor.go).
 	tailor bool
+	// timed plays the game, through the turn's own steps, up to at before the
+	// card is put in hand and cast (timing.go).
+	timed bool
+	at    moment
 }
 
 // variants is tried in order for a card the previous ones could not cast: the
-// plain board, a spell on the stack, the rich board, then combat.
+// plain board, a spell on the stack, the rich board, then combat. A card whose
+// spell carries a timing restriction is then tried at each moment of a turn
+// (timedVariants, timing.go).
 var variants = [...]variant{
 	{},
 	{opposing: bolt},
@@ -150,7 +156,11 @@ func (p *Prober) Probe(name string) Result {
 // other variants until one casts it.
 func (p *Prober) probe(name string, where *atomic.Value) Result {
 	res := p.run(name, where, variants[0])
-	for _, v := range variants[1:] {
+	rest := append([]variant(nil), variants[1:]...)
+	if def, ok := p.db.Card(name); ok {
+		rest = append(rest, timedVariants(def)...)
+	}
+	for _, v := range rest {
 		if res.Outcome != Inconclusive {
 			break
 		}
@@ -230,6 +240,13 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 			res.Outcome, res.Detail = Inconclusive, "the opposing spell could not be cast"
 			return res
 		}
+	}
+	if v.timed {
+		if err := p.walk(g, ctl, pid, opp, v.at); err != nil {
+			res.Outcome, res.Detail = Inconclusive, err.Error()
+			return res
+		}
+		fill()
 	}
 	if v.tailor {
 		p.stackTailored(g, pid, def, ctl)

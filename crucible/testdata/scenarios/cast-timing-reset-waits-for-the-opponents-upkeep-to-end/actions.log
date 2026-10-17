@@ -1,0 +1,18 @@
+# Reset: "Cast this spell only during an opponent's turn after their upkeep
+# step" -- OpponentTurn$ True and CheckSVar$ Count$FinishedUpkeepsThisTurn,
+# the upkeeps begun this turn less the one in progress (AbilityUtils.java:
+# 2213-2216, PhaseHandler.java:257). In ai's upkeep the count is 0 and the
+# cast is refused with the mana paid for; in ai's draw step it is 1, Reset is
+# cast and untaps every land human controls, the two tapped to pay for it
+# and the two tapped from the start included.
+startturn ai
+advance
+tapformana human 2 U
+tapformana human 3 U
+castspell human 1
+# Draw: the upkeep has finished, and the unspent mana is gone.
+advance
+tapformana human 4 U
+tapformana human 5 U
+castspell human 1
+resolvestack

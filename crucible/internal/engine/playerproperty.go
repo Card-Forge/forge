@@ -178,6 +178,15 @@ func playerProperty(g *Game, candidate, host PlayerID, source CardID, property s
 		return slices.Contains(p.attackedPlayersThisTurn, host), true
 	case "attackedYouTheirLastTurn":
 		return slices.Contains(p.attackedPlayersLastTurn, host), true
+	case "BeenAttackedThisCombat":
+		// :477-483: some registered player's attackedPlayersThisCombat names
+		// candidate -- who was declared attacked, not who is still attacked.
+		for _, pid := range g.Players() {
+			if slices.Contains(g.Player(pid).attackedPlayersThisCombat, candidate) {
+				return true, true
+			}
+		}
+		return false, true
 	case "withLowestLife":
 		// :423-438: nobody in the game has less life; a tie includes all.
 		for _, pid := range g.Players() {

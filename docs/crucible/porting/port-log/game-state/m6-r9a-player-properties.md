@@ -95,13 +95,13 @@ added. No new `PlayerController` decision.
 
 Each stays a loud error naming the value:
 
-| Shape                                                                                                       | Reason                                                                                   |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `wasDealtCombatDamageThisCombatBy`, `wasDealtDamageThisGameBy`                                              | No per-combat or per-game damage record (Glen Elendra, Diseased Vermin)                  |
-| `wasDealt...LastTurn <op><n>`, `wasDealt...` without `ThisTurn`                                             | Java ignores or misreads the comparator; not reproduced blind                            |
-| `withMost<other>`, `withLowest<other>`, `hasMore<other>`                                                    | Java answers true without comparing anything; no corpus line                             |
-| `BeenAttackedThisCombat`, `Attacking`, `attackedBySource...`, `wasAttackedThisTurnBy`, `NotedDefender`, ... | No corpus amount reaches them past an earlier refusal; `valid-strings.md` lists the rest |
-| `SacrificedPermanentTypesThisTurn`                                                                          | Distinct permanent types of the sacrifices; no corpus line reaches it                    |
+| Shape                                                                             | Reason                                                                                   |
+| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `wasDealtCombatDamageThisCombatBy`, `wasDealtDamageThisGameBy`                    | No per-combat or per-game damage record (Glen Elendra, Diseased Vermin)                  |
+| `wasDealt...LastTurn <op><n>`, `wasDealt...` without `ThisTurn`                   | Java ignores or misreads the comparator; not reproduced blind                            |
+| `withMost<other>`, `withLowest<other>`, `hasMore<other>`                          | Java answers true without comparing anything; no corpus line                             |
+| `Attacking`, `attackedBySource...`, `wasAttackedThisTurnBy`, `NotedDefender`, ... | No corpus amount reaches them past an earlier refusal; `valid-strings.md` lists the rest |
+| `SacrificedPermanentTypesThisTurn`                                                | Distinct permanent types of the sacrifices; no corpus line reaches it                    |
 
 Of the 24 amount cards, 21 play and Raiders' Allegiance is placed. Belbe, Corrupted Observer and Power Surge resolve
 their properties but refuse on `TriggeredPlayer` from a `Mode$ Phase` trigger that records no player (open plan R9b):

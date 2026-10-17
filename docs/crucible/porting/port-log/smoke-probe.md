@@ -15,8 +15,14 @@ turns, with `smoke.Controller` answering every decision. A card that cannot be c
 variants, in order: an opposing instant on the stack, an opposing creature spell on the stack, a rich board (an
 artifact, an enchantment, an equipment, a flier, a planeswalker, one land of each basic type, a tapped creature, a
 graveyard of seven cards, a card in exile, a hand of three), the rich board with each of the two spells, and the rich
-board in the declare blockers step with an attacking and a blocking creature. The first variant that casts the card
-decides the outcome.
+board in the declare blockers step with an attacking and a blocking creature. A card whose spell names
+`ActivationPhases$`, `PlayerTurn$`, `OpponentTurn$` or `CheckSVar$` is then tried timed (`internal/smoke/timing.go`): on
+the plain, rich and tailored boards, the game is played with `Game.Step` from the untap step of the opponent's turn
+(turn 2) or its own (turn
+
+1. up to each step that grants priority, the active player attacking with everything and nobody blocking, and the card
+   is cast there; which step the restriction accepts is the engine's answer, not the probe's. The first variant that
+   casts the card decides the outcome.
 
 | Outcome        | Meaning                                                                                                                                                                                                                                                         |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

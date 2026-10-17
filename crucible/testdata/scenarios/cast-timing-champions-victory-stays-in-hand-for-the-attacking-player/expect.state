@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Declare Blockers
+humanlife=20
+humanhand=Champion's Victory
+humanbattlefield=Island|Tapped;Grizzly Bears|Tapped
+ailife=20

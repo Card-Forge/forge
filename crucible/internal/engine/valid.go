@@ -493,6 +493,36 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		}
 		// A comparison form is not read (no corpus line writes one).
 		return false
+	case name == "attackingYou":
+		// CardProperty.java:1506-1514: c is attacking and its defender is the
+		// source's controller itself (Combat.isAttacking(card, player)); a
+		// planeswalker or battle of theirs is a different defender.
+		return containsCard(g.combat.Attackers, c.ID) && g.combat.AttackTargets[c.ID] == PlayerEntity(sourceController)
+	case strings.HasPrefix(name, "attackedYouThisTurn"):
+		// CardProperty.java:1193-1196: CardDamageHistory.hasAttackedThisTurn
+		// (sourceController), the player itself among c's declared defenders
+		// this turn (Card.attackedThisTurn).
+		return containsEntity(c.attackedThisTurn, PlayerEntity(sourceController))
+	case strings.HasPrefix(name, "DefendingPlayer"):
+		// CardProperty.java:231-238: c's controller ("...Ctrl") or owner is
+		// attacked in the combat in progress (Combat.isPlayerAttacked,
+		// Combat.java:956-970): some attacker's defender is that player, or a
+		// planeswalker or battle that player controls or protects. Java's
+		// inCombat check is implied: no combat, no attackers.
+		who := c.Owner
+		if strings.HasSuffix(name, "Ctrl") {
+			who = c.Controller()
+		}
+		for _, a := range g.combat.Attackers {
+			target := g.combat.AttackTargets[a]
+			if pid, ok := target.AsPlayer(); ok && pid == who {
+				return true
+			}
+			if id, ok := target.AsCard(); ok && (g.Card(id).Controller() == who || g.Card(id).ProtectingPlayer == who) {
+				return true
+			}
+		}
+		return false
 	case name == "blockedThisCombat":
 		// CardProperty.java:1548: blocked a creature in the combat in progress.
 		for _, b := range g.combat.Blocks {

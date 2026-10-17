@@ -253,6 +253,16 @@ type Card struct {
 	// after the increment.
 	AttacksThisTurn int
 
+	// attackedThisTurn is CardDamageHistory.attackedThisTurn
+	// (CardDamageHistory.java:28, :59-72): the entity -- player, planeswalker
+	// or battle -- this card was declared attacking, once per declaration
+	// (recordAttacked, castrecord.go). Cleared every cleanup with
+	// AttacksThisTurn (CardDamageHistory.newTurn, :287-288, from
+	// Card.onCleanupPhase) and on leaving the battlefield, where Java builds a
+	// new Card. Read by the attackedYouThisTurn property (CardProperty.java:
+	// 1193-1196, valid.go).
+	attackedThisTurn []EntityID
+
 	// BecameTargetThisTurn is Card.hasBecomeTargetThisTurn's own flag --
 	// AttacksThisTurn's own boolean sibling, since Mode$ BecomesTarget's own
 	// FirstTime$ (trigger.go's checkBecomesTargetTriggers) only ever asks

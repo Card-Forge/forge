@@ -1,0 +1,16 @@
+# Champion's Victory: "Cast this spell only during the declare attackers step
+# and only if you've been attacked this step" -- ActivationPhases$ Declare
+# Attackers and CheckSVar$ X, X being
+# PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
+# (SpellAbilityRestriction.java:294-298, :508-515; PlayerProperty.java:477-483).
+# ai attacks human with Grizzly Bears, so human has been attacked this combat:
+# the cast is allowed and the attacker returns to ai's hand.
+# Untap -> Upkeep -> Draw -> Main1 -> BeginCombat -> Declare Attackers.
+startturn ai
+advance 5
+queue attackers 3
+declareattackers
+tapformana human 2 U
+queue targets 3
+castspell human 1
+resolvestack

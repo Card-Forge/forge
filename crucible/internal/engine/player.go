@@ -172,6 +172,17 @@ type Player struct {
 	// Both are rotated at the cleanup of this player's own turn
 	// (playerproperty.go, rotateAttackedPlayers).
 	attackedPlayersThisTurn, attackedPlayersLastTurn []PlayerID
+	// attackedPlayersThisCombat is Player.getAttackedPlayersMyCombat
+	// (Player.java:1858): each player this player's creatures were declared
+	// attacking directly this combat, once, in declaration order
+	// (addCreaturesAttackedThisTurn, Player.java:1835-1842). It is a record of
+	// the declaration, not of the live combat: an attacker removed from combat
+	// leaves it as it is, and a creature put onto the battlefield attacking never
+	// enters it (only CombatUtil.checkDeclaredAttacker, CombatUtil.java:387,
+	// appends). Cleared for the attacking player as combat ends (Combat.endCombat,
+	// Combat.java:170; endCombat, turn.go). Read by the BeenAttackedThisCombat
+	// player property (PlayerProperty.java:477-483).
+	attackedPlayersThisCombat []PlayerID
 	// numPowerSurgeLands is Player.numPowerSurgeLands: the untapped lands this
 	// player controlled as their latest turn began (PhaseHandler.java:190-191),
 	// before the untap step. Never reset, as in Java.

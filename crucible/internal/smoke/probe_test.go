@@ -85,6 +85,22 @@ func TestProbeClassifiesCards(t *testing.T) {
 		{"Divine Resilience", smoke.Plays},
 		{"Black Hole", smoke.Plays},
 		{"Brightflame", smoke.Plays},
+		// A spell cast only at a moment of a turn: the probe plays a turn up
+		// to it. The opponent's declare attackers step after an attack on the
+		// probe player (Assassin's Blade's CheckSVar$), the probe player's own
+		// (Camouflage's PlayerTurn$), the opponent's upkeep (Festival) and
+		// after it (Reset's Count$FinishedUpkeepsThisTurn), the probe player's
+		// end step (Necrologia), the opponent's second main phase after its
+		// attack (Jabari's Influence's attackedYouThisTurn target).
+		{"Assassin's Blade", smoke.Plays},
+		{"Camouflage", smoke.Plays},
+		{"Festival", smoke.Plays},
+		{"Reset", smoke.Plays},
+		{"Necrologia", smoke.Plays},
+		{"Jabari's Influence", smoke.Plays},
+		// Never castable on any board or moment: the last condition reads a
+		// red spell that dealt damage this turn.
+		{"Suffocation", smoke.Inconclusive},
 		// Command-zone types are placed, not cast; a sticker sheet is refused.
 		{"Akoum", smoke.Placed},
 		{"Backup Plan", smoke.Placed},

@@ -275,6 +275,11 @@ type Game struct {
 	// this turn, counted at CombatBegin and reset as the turn ends -- what
 	// FirstCombat$ reads once AddPhase can add a second combat.
 	combatsThisTurn int
+	// upkeepsThisTurn is PhaseHandler.nUpkeepsThisTurn: upkeep steps begun
+	// this turn, counted as one begins (PhaseHandler.java:257, the non-skipped
+	// branch only) and reset as the turn ends (:415). Count$
+	// FinishedUpkeepsThisTurn reads it (amountheads.go).
+	upkeepsThisTurn int
 	// skipDamageSteps is PhaseHandler.skipDamageSteps: set by a driven
 	// entry into DeclareBlockers when no creature attacked, read by the
 	// damage steps that follow (drivenSkips, turn.go; ADR-0026).
@@ -957,6 +962,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.goadedBy = nil
 		c.mustBlock = nil
 		c.blockedByThisTurn = nil
+		c.attackedThisTurn = nil
 		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
 		c.renowned = false
@@ -1087,6 +1093,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 		c.goadedBy = nil
 		c.mustBlock = nil
 		c.blockedByThisTurn = nil
+		c.attackedThisTurn = nil
 		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
 		// Layer 3's text change ends with the object (CR 400.7), before the
@@ -1413,6 +1420,7 @@ func (g *Game) Clone() *Game {
 		extraTurns:            append([]PlayerID(nil), g.extraTurns...),
 		combatDamagePrevented: g.combatDamagePrevented,
 		combatsThisTurn:       g.combatsThisTurn,
+		upkeepsThisTurn:       g.upkeepsThisTurn,
 		skipDamageSteps:       g.skipDamageSteps,
 		turnOrderReversed:     g.turnOrderReversed,
 		preventShields:        append([]preventShield(nil), g.preventShields...),
@@ -1458,6 +1466,7 @@ func (g *Game) Clone() *Game {
 		out.players[i].attackedThisTurn = append([]CardID(nil), g.players[i].attackedThisTurn...)
 		out.players[i].attackedPlayersThisTurn = append([]PlayerID(nil), g.players[i].attackedPlayersThisTurn...)
 		out.players[i].attackedPlayersLastTurn = append([]PlayerID(nil), g.players[i].attackedPlayersLastTurn...)
+		out.players[i].attackedPlayersThisCombat = append([]PlayerID(nil), g.players[i].attackedPlayersThisCombat...)
 	}
 
 	copy(out.cards, g.cards)
@@ -1470,6 +1479,7 @@ func (g *Game) Clone() *Game {
 		c.mustBlock = append([]mustBlockReq(nil), g.cards[i].mustBlock...)
 		c.hiddenKeywords = append([]string(nil), g.cards[i].hiddenKeywords...)
 		c.blockedByThisTurn = append([]CardID(nil), g.cards[i].blockedByThisTurn...)
+		c.attackedThisTurn = append([]EntityID(nil), g.cards[i].attackedThisTurn...)
 		c.devoured = append([]CardID(nil), g.cards[i].devoured...)
 		c.activations = g.cards[i].activations.clone()
 		c.trigActs = g.cards[i].trigActs.clone()

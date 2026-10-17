@@ -1,0 +1,8 @@
+turn=1
+activeplayer=ai
+activephase=Declare Attackers
+humanlife=20
+humanbattlefield=Island|Tapped
+humangraveyard=Champion's Victory
+ailife=20
+aihand=Grizzly Bears

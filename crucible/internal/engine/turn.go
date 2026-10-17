@@ -102,6 +102,7 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 			}
 			g.extraPhases = [numPhaseTypes][]PhaseType{}
 			g.combatsThisTurn = 0
+			g.upkeepsThisTurn = 0
 			g.activePlayer = g.nextActivePlayer(controller)
 			// PhaseHandler.java:188: Player.incrementTurn, once the turn's active
 			// player is known (Count$YourTurns counts this turn from its start).
@@ -277,6 +278,10 @@ func (g *Game) beginStep(controller PlayerController, driven bool) (bool, error)
 	case Untap:
 		g.untapStep(controller)
 		priority = false // CR 502.4, PhaseHandler.java:251
+	case Upkeep:
+		// PhaseHandler.java:257: nUpkeepsThisTurn++, a begun upkeep only (a
+		// skipped one never reaches beginStep).
+		g.upkeepsThisTurn++
 	case Draw:
 		g.drawStep(controller)
 	case Main1:
@@ -551,6 +556,12 @@ func (g *Game) endCombat() {
 	g.runScheduledActions(boundaryEndCombat, g.activePlayer)
 	g.runEndOfCombatCommands(nil)
 	g.combat = Combat{}
+	// Combat.endCombat's playerWhoAttacks.clearAttackedPlayersMyCombat
+	// (Combat.java:170): the attacking player's list only, as Java clears it.
+	// A game with no turn begun has no attacking player and nothing recorded.
+	if g.activePlayer != NoPlayer {
+		g.Player(g.activePlayer).attackedPlayersThisCombat = nil
+	}
 	g.endEffectsAtEndOfCombat()
 	g.endMustBlocks(true)
 }
@@ -609,6 +620,7 @@ func (g *Game) cleanupStep(controller PlayerController) {
 			g.Card(id).AttacksThisTurn = 0
 			g.Card(id).BecameTargetThisTurn = false
 			g.Card(id).blockedByThisTurn = nil
+			g.Card(id).attackedThisTurn = nil
 			g.Card(id).LoyaltyAbilityActivated = false
 			g.Card(id).RegenShields = 0
 		}

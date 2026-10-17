@@ -78,13 +78,28 @@ func (g *Game) recordEntered(c, before *Card, from, to ZoneType) {
 
 // recordAttacked adds attacker to its controller's attackers of the turn
 // (Player.addCreaturesAttackedThisTurn), and the player it attacks directly,
-// once, to the players attacked this turn (the map's Player keys). Called
-// after the declaration's targets are set.
+// once, to the players attacked this turn (the map's Player keys) and this
+// combat (attackedPlayersThisCombat, Player.java:1839-1841); the entity it
+// attacks goes on the card's own record (CardDamageHistory.
+// setCreatureAttackedThisCombat, CardDamageHistory.java:62-64). Called after
+// the declaration's targets are set.
 func (g *Game) recordAttacked(attacker CardID) {
-	p := g.Player(g.Card(attacker).Controller())
+	c := g.Card(attacker)
+	target, declared := g.combat.AttackTargets[attacker]
+	if declared {
+		c.attackedThisTurn = append(c.attackedThisTurn, target)
+	}
+	p := g.Player(c.Controller())
 	p.attackedThisTurn = append(p.attackedThisTurn, attacker)
-	if pid, ok := g.combat.AttackTargets[attacker].AsPlayer(); ok && !slices.Contains(p.attackedPlayersThisTurn, pid) {
+	pid, ok := target.AsPlayer()
+	if !ok {
+		return
+	}
+	if !slices.Contains(p.attackedPlayersThisTurn, pid) {
 		p.attackedPlayersThisTurn = append(p.attackedPlayersThisTurn, pid)
+	}
+	if !slices.Contains(p.attackedPlayersThisCombat, pid) {
+		p.attackedPlayersThisCombat = append(p.attackedPlayersThisCombat, pid)
 	}
 }
 

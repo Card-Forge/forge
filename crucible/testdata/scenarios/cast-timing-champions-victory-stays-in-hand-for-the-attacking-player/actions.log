@@ -1,0 +1,14 @@
+# Champion's Victory's CheckSVar$ X (PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat,
+# PlayerProperty.java:477-483) asks whether the caster was attacked, not
+# whether anyone attacks: human attacks ai, so in human's own declare attackers
+# step, with an attacking creature to target and the mana paid for, the cast
+# is refused (SpellAbilityRestriction.java:508-515) before any target is
+# chosen -- no "queue targets" line, and the spell stays in hand.
+startturn human
+advance 5
+queue attackers 3
+declareattackers
+tapformana human 2 U
+castspell human 1
+# On to the declare blockers step, which empties the unspent mana.
+advance

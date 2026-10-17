@@ -342,6 +342,14 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return n, true
 	case "Party":
 		return partyCount(g, sourceController), true
+	case "FinishedUpkeepsThisTurn":
+		// AbilityUtils.java:2213-2216: the upkeeps begun this turn, less the one
+		// in progress (Reset's "after their upkeep step").
+		n := g.upkeepsThisTurn
+		if g.activePhase == Upkeep {
+			n--
+		}
+		return n, true
 	case "YourTurns":
 		// Count$YourTurns (AbilityUtils.java:2438): Player.getTurn() of the
 		// host's controller, the turns it has taken, this one included.
