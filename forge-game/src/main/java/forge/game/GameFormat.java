@@ -40,7 +40,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 
-
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     public enum FormatType {
