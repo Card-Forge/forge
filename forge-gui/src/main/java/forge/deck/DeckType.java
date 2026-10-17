@@ -42,6 +42,8 @@ public enum DeckType {
     NET_ARCHIVE_VINTAGE_DECK("lblNetArchiveVintageDecks"),
     NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks"),
     NET_EVENT_DECK("lblNetEventDecks"),
+    /** Bulk online deck library sync (currently Deckbox). Distinct from Net Decks archives. */
+    DECKBOX_DECK("lblOnlineDeckbuilderSync"),
     PROVIDED_DECK_URL("lblProvideDeckUrl");
 
     public static DeckType[] ConstructedOptions;
@@ -75,6 +77,7 @@ public enum DeckType {
                     DeckType.NET_ARCHIVE_LEGACY_DECK,
                     DeckType.NET_ARCHIVE_VINTAGE_DECK,
                     DeckType.NET_ARCHIVE_BLOCK_DECK,
+                    DeckType.DECKBOX_DECK,
                     DeckType.PROVIDED_DECK_URL
             };
         } else {
@@ -97,6 +100,7 @@ public enum DeckType {
                     DeckType.NET_ARCHIVE_LEGACY_DECK,
                     DeckType.NET_ARCHIVE_VINTAGE_DECK,
                     DeckType.NET_ARCHIVE_BLOCK_DECK,
+                    DeckType.DECKBOX_DECK,
                     DeckType.PROVIDED_DECK_URL
             };
         }
@@ -110,6 +114,7 @@ public enum DeckType {
                     DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
                     DeckType.NET_COMMANDER_DECK,
+                    DeckType.DECKBOX_DECK,
                     DeckType.PROVIDED_DECK_URL
             };
         }else{
@@ -119,6 +124,7 @@ public enum DeckType {
                     DeckType.RANDOM_COMMANDER_DECK,
                     DeckType.RANDOM_DECK,
                     DeckType.NET_COMMANDER_DECK,
+                    DeckType.DECKBOX_DECK,
                     DeckType.PROVIDED_DECK_URL
             };
         }
