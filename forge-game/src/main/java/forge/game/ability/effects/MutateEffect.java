@@ -22,17 +22,36 @@ public class MutateEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getHostCard();
+        // "Mutator$" lets an effect merge some other card (e.g. one found in a library)
+        // instead of the resolving spell itself. Used by Unstable Mutations.
+        final boolean otherMutator = sa.hasParam("Mutator");
+        final Card host;
+        if (otherMutator) {
+            final CardCollectionView mutators = getDefinedCardsOrTargeted(sa, "Mutator");
+            if (mutators.isEmpty()) {
+                return;
+            }
+            host = mutators.get(0);
+        } else {
+            host = sa.getHostCard();
+        }
         final Player p = host.getOwner();
         final Game game = host.getGame();
         // 111.11. A copy of a permanent spell becomes a token as it resolves.
         // The token has the characteristics of the spell that became that token.
         // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
-        if (host.isCopiedSpell()) {
+        if (!otherMutator && host.isCopiedSpell()) {
             host.setGamePieceType(GamePieceType.TOKEN);
         }
 
-        final Card target = getDefinedCardsOrTargeted(sa, "Defined").get(0);
+        final CardCollectionView targets = getDefinedCardsOrTargeted(sa, "Defined");
+        if (targets.isEmpty()) {
+            return;
+        }
+        final Card target = targets.get(0);
+        if (target == host || !target.isInPlay()) {
+            return;
+        }
 
         CardCollectionView view = CardCollection.getView(Lists.newArrayList(host, target));
         final Card topCard = host.getController().getController().chooseSingleEntityForEffect(
@@ -45,7 +64,7 @@ public class MutateEffect extends SpellAbilityEffect {
         final boolean putOnTop = (topCard == host);
 
         // There shouldn't be any mutate abilities, but for now.
-        if (sa.isSpell()) {
+        if (otherMutator || sa.isSpell()) {
             host.setController(p, 0);
         }
 

@@ -1,0 +1,9 @@
+Name:Unstable Mutations
+ManaCost:U G
+Types:Instant
+A:SP$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl+nonHuman | ChoiceZone$ Battlefield | Mandatory$ True | ChoiceTitle$ Choose a non-Human creature you control | SubAbility$ DBSearch | SpellDescription$ Choose a non-Human creature you control. Search your library for a non-Human creature card. Put it over or under the chosen creature.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature.nonHuman | ChangeNum$ 1 | RememberChanged$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBMutate
+SVar:DBMutate:DB$ Mutate | Defined$ ChosenCard | Mutator$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+AI:RemoveDeck:All
+Oracle:Choose a non-Human creature you control. Search your library for a non-Human creature card. Put it over or under the chosen creature.
