@@ -66,6 +66,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.client.FGameClient;
@@ -123,7 +124,6 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
-import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -670,38 +670,37 @@ public final class CMatchUI
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        super.setSelectables(cards, min, max);
+    public void setSelection(final Selection selection) {
+        final Selection prev = getSelection();
+        super.setSelection(selection);
+        final boolean cardsChanged = !prev.cards().equals(selection.cards());
+        final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
         // a maximum of 0 marks display-only highlighting, whose caller shows its own window
-        final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
-        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        final PlayerZoneUpdates zones = cardsChanged && selection.max() > 0 ? getZonesHolding(selection.cards()) : new PlayerZoneUpdates();
         FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            if (cardsChanged) {
+                // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+                for (final PlayerView p : getGameView().getPlayers()) {
+                    updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                    updateCardsNetSafe(p.getCards(ZoneType.Hand));
+                }
+                if (selection.cards().isEmpty()) {
+                    hideZones(selectionZonesShown);
+                    selectionZonesShown.clear();
+                    FloatingZone.clearAllHotkeyAffordance();
+                } else if (!zones.isEmpty()) {
+                    updateZones(zones);
+                    selectionZonesShown.addAll(tempShowZones(zones));
+                }
+                FloatingZone.refreshAll();
             }
-            if (!zones.isEmpty()) {
-                updateZones(zones);
-                selectionZonesShown.addAll(tempShowZones(zones));
+            if (stackOffered) { // stack entries are picked in the stack panel, so bring it up
+                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
             }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
-    public void clearSelectables() {
-        super.clearSelectables();
-        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            hideZones(selectionZonesShown);
-            selectionZonesShown.clear();
-            FloatingZone.refreshAll();
-            FloatingZone.clearAllHotkeyAffordance();
             refreshStackTargetMarks();
+            if (isSelecting()) {
+                FloatingZone.refreshSelectionPrompts();
+            }
         });
     }
 
@@ -729,30 +728,8 @@ public final class CMatchUI
     }
 
     @Override
-    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
-        super.setHighlighted(objects, b);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            refreshStackTargetMarks();
-            if (isSelecting()) {
-                FloatingZone.refreshSelectionPrompts();
-            }
-        });
-    }
-
-    @Override
     public boolean canPickStackTargets() {
         return true; // stack entries are clicked in the stack panel (VStack)
-    }
-
-    @Override
-    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
-        super.setSelectableTargets(targets);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            if (isSelectingStackItems()) { // stack entries are picked in the stack panel, so bring it up
-                SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-            }
-            refreshStackTargetMarks();
-        });
     }
 
     /** Repaints what shows the marks of players and stack entries: the avatar borders and the stack panel. */
@@ -1263,7 +1240,7 @@ public final class CMatchUI
             players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0), "ROWS".equals(layout)));
         }
         initMatch(players, myPlayers);
-        clearSelectables(); //fix uncleared selection
+        setSelection(Selection.NONE); //fix uncleared selection
 
         actuateMatchPreferences();
 

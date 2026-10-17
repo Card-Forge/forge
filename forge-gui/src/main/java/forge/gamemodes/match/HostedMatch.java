@@ -220,7 +220,7 @@ public class HostedMatch {
                 gui.setOriginalGameController(p.getView(), humanController);
 
                 if (gui instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                    forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
+                    GameEventForwarder forwarder = new GameEventForwarder(gui);
                     ngg.setForwarder(forwarder);
                     game.subscribeToEvents(forwarder);
                 } else {
@@ -243,7 +243,7 @@ public class HostedMatch {
         // before it blocks for input (e.g. host plays a land and retains priority).
         for (PlayerControllerHuman hc : humanControllers) {
             if (hc.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().addObserver(fwd);
@@ -252,7 +252,6 @@ public class HostedMatch {
             }
         }
 
-        // Record this game for later playback (null when off, or when no human is playing)
         final ReplaySession replay = ReplaySession.begin(game, humanControllers);
 
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
@@ -309,7 +308,7 @@ public class HostedMatch {
             // GameEventGameOutcome and GameEventGameFinished before we proceed.
             for (PlayerControllerHuman hc : humanControllers) {
                 if (hc.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                    forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                    GameEventForwarder fwd = ngg.getForwarder();
                     if (fwd != null) {
                         fwd.flush();
                     }
@@ -383,7 +382,7 @@ public class HostedMatch {
 
         for (final PlayerControllerHuman humanController : humanControllers) {
             if (humanController.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().deleteObserver(fwd);

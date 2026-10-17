@@ -38,7 +38,7 @@ public interface IPreferences<T extends IPreferences.IPref> {
         return Double.parseDouble(getPref(fp0));
     }
 
-    public interface IPref  {
+    interface IPref  {
         String getDefault(); // Common method for getting the default value
     }
 }

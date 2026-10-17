@@ -25,6 +25,7 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventCombatUpdate;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.Selection;
 import forge.gui.FThreads;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.player.PlayerControllerHuman;
@@ -107,7 +108,6 @@ public class InputBlock extends InputSyncronizedBase {
         final String blockErrors = CombatUtil.validateBlocks(combat, defender);
         if (blockErrors == null) {
             // Done blocking
-            setCurrentAttacker(null);
             stop();
         } else {
             //must run in game thread to prevent problems for mobile game
@@ -193,12 +193,12 @@ public class InputBlock extends InputSyncronizedBase {
     }
 
     private void setCurrentAttacker(final Card card) {
-        if (currentAttacker != null) {
-            getController().getGui().setHighlighted(List.of(CardView.get(currentAttacker)), false);
-        }
         currentAttacker = card;
-        if (card != null) {
-            getController().getGui().setHighlighted(List.of(CardView.get(card)), true);
-        }
+        showSelection();
+    }
+
+    @Override
+    protected Selection getSelection() {
+        return currentAttacker == null ? Selection.NONE : Selection.ofChosen(List.of(CardView.get(currentAttacker)));
     }
 }
