@@ -71,6 +71,7 @@ import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.client.FGameClient;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -274,6 +275,12 @@ public final class CMatchUI
                 drawOfferDialog.refresh(update, null);
             }
         });
+    }
+
+    @Override
+    public void applyMacroState(final IMacroSystem.State state) {
+        super.applyMacroState(state);
+        FThreads.invokeInEdtNowOrLater(getCDock()::refreshMacroButtons);
     }
 
     @Override
