@@ -6,6 +6,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StaticAbilityAttackRestrict {
 
     static public Integer globalAttackRestrict(Game game) {
@@ -45,6 +48,26 @@ public class StaticAbilityAttackRestrict {
             }
         }
         return num;
+    }
+
+    /**
+     * @return the AttackRestrict static abilities limiting the number of attackers,
+     *         either overall (defender == null) or against the given defender
+     */
+    static public List<StaticAbility> attackRestrictSources(Game game, GameEntity defender) {
+        final List<StaticAbility> result = new ArrayList<>();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.checkConditions(StaticAbilityMode.AttackRestrict)
+                        || stAb.hasParam("ValidDefender") != (defender != null)) {
+                    continue;
+                }
+                if (defender == null || attackRestrict(stAb, defender)) {
+                    result.add(stAb);
+                }
+            }
+        }
+        return result;
     }
 
     static public boolean attackRestrict(StaticAbility stAb, GameEntity defender) {

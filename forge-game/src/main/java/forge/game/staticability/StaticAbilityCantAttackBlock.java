@@ -35,17 +35,23 @@ import forge.game.zone.ZoneType;
  */
 public class StaticAbilityCantAttackBlock {
 
-    public static boolean cantAttack(final Card attacker, final GameEntity defender) {
-        // Keywords
-        // replace with Static Ability if able
-        if (attacker.hasKeyword("CARDNAME can't attack.") || attacker.hasKeyword("CARDNAME can't attack or block.")) {
-            return true;
+    /**
+     * @return the keyword text preventing attacker from attacking, or null if it doesn't have one
+     */
+    public static String getCantAttackKeyword(final Card attacker) {
+        if (attacker.hasKeyword("CARDNAME can't attack.")) {
+            return "CARDNAME can't attack.";
         }
-
-        if (attacker.isDetained()) {
-            return true;
+        if (attacker.hasKeyword("CARDNAME can't attack or block.")) {
+            return "CARDNAME can't attack or block.";
         }
+        return null;
+    }
 
+    /**
+     * @return the first CantAttack static ability preventing attacker from attacking defender, or null
+     */
+    public static StaticAbility findCantAttackAbility(final Card attacker, final GameEntity defender) {
         for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantAttack)) {
@@ -53,11 +59,11 @@ public class StaticAbilityCantAttackBlock {
                 }
 
                 if (applyCantAttackAbility(stAb, attacker, defender)) {
-                    return true;
+                    return stAb;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /**

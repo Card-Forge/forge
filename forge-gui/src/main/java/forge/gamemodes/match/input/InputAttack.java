@@ -25,6 +25,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatExplainer;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatUpdate;
 import forge.game.keyword.Keyword;
@@ -32,9 +33,11 @@ import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
+import forge.gui.util.SOptionPane;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+import forge.util.ThreadUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
@@ -58,6 +61,8 @@ public class InputAttack extends InputSyncronizedBase {
     private final Player playerAttacks;
     private AttackingBand activeBand = null;
     private boolean potentialBanding;
+    // why the last selected creature(s) couldn't be declared as attacker, shown with the prompt
+    private String rejectionReason = null;
 
     public InputAttack(PlayerControllerHuman controller, Player attacks0, Combat combat0) {
         super(controller);
@@ -103,6 +108,21 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected final void onOk() {
+        final List<String> invalidReasons = CombatExplainer.explainInvalidAttack(combat);
+        if (!invalidReasons.isEmpty()) {
+            final String attackErrors = String.join("\n", invalidReasons);
+            //must run in game thread to prevent problems for mobile game
+            ThreadUtil.invokeInGameThread(() -> {
+                final Localizer localizer = Localizer.getInstance();
+                final String title = localizer.getMessage("lblCombatDeclareAttackersStep");
+                final List<String> options = List.of(localizer.getMessage("lblOK"), localizer.getMessage("lblShowLegalAttacks"));
+                // only suggest legal attacks when asked for, closing the dialog counts as OK
+                if (getController().getGui().showOptionDialog(attackErrors, title, SOptionPane.WARNING_ICON, options, 0) == 1) {
+                    getController().getGui().message(CombatExplainer.suggestLegalAttacks(combat), title);
+                }
+            });
+            return;
+        }
         // Propaganda costs could have been paid here.
         setCurrentDefender(null); // remove highlights
         activateBand(null);
@@ -167,6 +187,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
+        rejectionReason = null;
         if (defenders.contains(selected)) {
             setCurrentDefender(selected);
         } else {
@@ -177,6 +198,7 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         disablePrompt();
+        rejectionReason = null;
         final List<Card> att = combat.getAttackers();
         if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card)) {
             undeclareAttacker(card);
@@ -243,16 +265,26 @@ public class InputAttack extends InputSyncronizedBase {
             }
 
             declareAttacker(card);
+            final List<String> reasons = new ArrayList<>();
             if (otherCardsToSelect != null) {
                 for (Card c : otherCardsToSelect) {
                     if (CombatUtil.canAttack(c, currentDefender)) {
                         declareAttacker(c);
+                    } else if (playerAttacks.getZone(ZoneType.Battlefield).contains(c) && c.isCreature()) {
+                        reasons.add(CombatExplainer.whyCantAttack(c, currentDefender));
                     }
                 }
             }
+            rejectionReason = reasons.isEmpty() ? null : String.join("\n", reasons);
 
             updateMessage();
             return true;
+        }
+
+        if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && card.isCreature()) {
+            rejectionReason = CombatExplainer.whyCantAttack(card, currentDefender);
+            updateMessage();
+            return false;
         }
 
         updatePrompt();
@@ -299,6 +331,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
+        rejectionReason = null;
         // Partition into off/on and emit false-batch first so the to-be-highlighted defender isn't briefly cleared.
         final List<GameEntityView> off = new ArrayList<>(defenders.size());
         final List<GameEntityView> on  = new ArrayList<>(1);
@@ -346,6 +379,9 @@ public class InputAttack extends InputSyncronizedBase {
         String message = localizer.getMessage("lblSelectAttackCreatures") + " " + currentDefender + " " + localizer.getMessage("lblSelectAttackTarget");
         if (potentialBanding) {
             message += localizer.getMessage("lblSelectBandingTarget");
+        }
+        if (rejectionReason != null) {
+            message += "\n\n" + rejectionReason;
         }
         showMessage(message);
 

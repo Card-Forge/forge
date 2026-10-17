@@ -189,53 +189,103 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(final Card attacker, final GameEntity defender) {
-        return canAttack(attacker, defender, false);
+        return getCantAttackReason(attacker, defender, false) == null;
     }
     public static boolean canAttackNextTurn(final Card attacker, final GameEntity defender) {
-        return canAttack(attacker, defender, true);
+        return getCantAttackReason(attacker, defender, true) == null;
     }
 
-    private static boolean canAttack(final Card attacker, final GameEntity defender, final boolean forNextTurn) {
+    public enum CantAttackReason {
+        NOT_CREATURE,
+        TAPPED,
+        PHASED_OUT,
+        SUMMONING_SICK,
+        WRONG_PHASE,
+        GOADED,
+        KEYWORD,
+        DETAINED,
+        STATIC_ABILITY
+    }
+
+    /**
+     * @return the first attacking restriction stopping attacker from attacking defender, or null if it can attack
+     * @see #canAttack(Card, GameEntity)
+     */
+    public static CantAttackReason getCantAttackReason(final Card attacker, final GameEntity defender) {
+        return getCantAttackReason(attacker, defender, false);
+    }
+
+    private static CantAttackReason getCantAttackReason(final Card attacker, final GameEntity defender, final boolean forNextTurn) {
         final Game game = attacker.getGame();
 
         if (attacker.isBattle()) {
-            return false;
+            return CantAttackReason.NOT_CREATURE;
         }
 
         // Basic checks (unless is for next turn)
-        if (!forNextTurn &&
-                (!attacker.isCreature()
-                || attacker.isTapped() || attacker.isPhasedOut()
-                || isAttackerSick(attacker, defender)
-                || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
-            return false;
+        if (!forNextTurn) {
+            if (!attacker.isCreature()) {
+                return CantAttackReason.NOT_CREATURE;
+            }
+            if (attacker.isTapped()) {
+                return CantAttackReason.TAPPED;
+            }
+            if (attacker.isPhasedOut()) {
+                return CantAttackReason.PHASED_OUT;
+            }
+            if (isAttackerSick(attacker, defender)) {
+                return CantAttackReason.SUMMONING_SICK;
+            }
+            if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return CantAttackReason.WRONG_PHASE;
+            }
         }
 
-        // Goad logic
-        // a goaded creature does need to attack a player which does not goaded her
-        // or if not possible a planeswalker or a player which does goaded her
-        if (attacker.isGoaded()) {
-            final boolean goadedByDefender = defender instanceof Player && attacker.isGoadedBy((Player) defender);
-            // attacker got goaded by defender or defender is not player
-            if (goadedByDefender || !(defender instanceof Player)) {
-                for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
-                    if (!ge.equals(defender) && ge instanceof Player) {
-                        // found a player which does not goad that creature
-                        // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
-                            return false;
-                        }
+        if (attacker.isGoaded() && !getGoadedAlternatives(attacker, defender).isEmpty()) {
+            return CantAttackReason.GOADED;
+        }
+
+        // Keywords
+        // replace with Static Ability if able
+        if (StaticAbilityCantAttackBlock.getCantAttackKeyword(attacker) != null) {
+            return CantAttackReason.KEYWORD;
+        }
+
+        if (attacker.isDetained()) {
+            return CantAttackReason.DETAINED;
+        }
+
+        // CantAttack static abilities
+        if (StaticAbilityCantAttackBlock.findCantAttackAbility(attacker, defender) != null) {
+            return CantAttackReason.STATIC_ABILITY;
+        }
+
+        return null;
+    }
+
+    /**
+     * Goad logic:
+     * a goaded creature does need to attack a player which does not goaded her
+     * or if not possible a planeswalker or a player which does goaded her
+     *
+     * @return the players the goaded attacker has to attack rather than defender
+     */
+    public static List<Player> getGoadedAlternatives(final Card attacker, final GameEntity defender) {
+        final List<Player> result = Lists.newArrayList();
+        final boolean goadedByDefender = defender instanceof Player && attacker.isGoadedBy((Player) defender);
+        // attacker got goaded by defender or defender is not player
+        if (goadedByDefender || !(defender instanceof Player)) {
+            for (GameEntity ge : getAllPossibleDefenders(attacker.getController())) {
+                if (!ge.equals(defender) && ge instanceof Player) {
+                    // found a player which does not goad that creature
+                    // and creature can attack this player or planeswalker
+                    if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
+                        result.add((Player) ge);
                     }
                 }
             }
         }
-
-        // CantAttack static abilities
-        if (StaticAbilityCantAttackBlock.cantAttack(attacker, defender)) {
-            return false;
-        }
-
-        return true;
+        return result;
     }
 
     public static boolean isAttackerSick(final Card attacker, final GameEntity defender) {
