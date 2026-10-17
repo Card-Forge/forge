@@ -10,7 +10,8 @@ import forge.util.collect.FCollectionView;
 public class AttackRestriction {
 
     private final Card attacker;
-    private final Set<AttackRestrictionType> restrictions = EnumSet.noneOf(AttackRestrictionType.class);
+    // the keyword causing each restriction
+    private final Map<AttackRestrictionType, String> restrictions = new EnumMap<>(AttackRestrictionType.class);
     private boolean cantAttack;
     private final FCollectionView<GameEntity> cantAttackDefender;
 
@@ -26,13 +27,13 @@ public class AttackRestriction {
         }
         this.cantAttackDefender = cantAttackDefender;
 
-        if ((restrictions.contains(AttackRestrictionType.ONLY_ALONE) && (
-                restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER) ||
-                restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN) ||
-                restrictions.contains(AttackRestrictionType.NOT_ALONE) ||
-                restrictions.contains(AttackRestrictionType.NEED_TWO_OTHERS))
+        if ((restrictions.containsKey(AttackRestrictionType.ONLY_ALONE) && (
+                restrictions.containsKey(AttackRestrictionType.NEED_GREATER_POWER) ||
+                restrictions.containsKey(AttackRestrictionType.NEED_BLACK_OR_GREEN) ||
+                restrictions.containsKey(AttackRestrictionType.NOT_ALONE) ||
+                restrictions.containsKey(AttackRestrictionType.NEED_TWO_OTHERS))
                 ) || (
-                        restrictions.contains(AttackRestrictionType.NEVER)
+                        restrictions.containsKey(AttackRestrictionType.NEVER)
                 ) || (
                         cantAttackDefender.size() == possibleDefenders.size())) {
             cantAttack = true;
@@ -46,21 +47,21 @@ public class AttackRestriction {
     public Set<AttackRestrictionType> getViolation(final Map<Card, GameEntity> attackers) {
         final Set<AttackRestrictionType> violations = EnumSet.noneOf(AttackRestrictionType.class);
         final int nAttackers = attackers.size();
-        if (restrictions.contains(AttackRestrictionType.ONLY_ALONE) && nAttackers > 1) {
+        if (restrictions.containsKey(AttackRestrictionType.ONLY_ALONE) && nAttackers > 1) {
             violations.add(AttackRestrictionType.ONLY_ALONE);
         }
-        if (restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER)
+        if (restrictions.containsKey(AttackRestrictionType.NEED_GREATER_POWER)
                 && attackers.keySet().stream().noneMatch(AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_GREATER_POWER);
         }
-        if (restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)
+        if (restrictions.containsKey(AttackRestrictionType.NEED_BLACK_OR_GREEN)
                 && attackers.keySet().stream().noneMatch(AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
         }
-        if (restrictions.contains(AttackRestrictionType.NOT_ALONE) && nAttackers <= 1) {
+        if (restrictions.containsKey(AttackRestrictionType.NOT_ALONE) && nAttackers <= 1) {
             violations.add(AttackRestrictionType.NOT_ALONE);
         }
-        if (restrictions.contains(AttackRestrictionType.NEED_TWO_OTHERS) && nAttackers <= 2) {
+        if (restrictions.containsKey(AttackRestrictionType.NEED_TWO_OTHERS) && nAttackers <= 2) {
             violations.add(AttackRestrictionType.NEED_TWO_OTHERS);
         }
         return violations;
@@ -75,28 +76,30 @@ public class AttackRestriction {
     }
 
     public Set<AttackRestrictionType> getTypes() {
-        return Collections.unmodifiableSet(restrictions);
+        return Collections.unmodifiableSet(restrictions.keySet());
+    }
+
+    /**
+     * @return the keyword text causing the restriction, or null if the attacker doesn't have it
+     */
+    public String getKeyword(final AttackRestrictionType type) {
+        return restrictions.get(type);
     }
 
     private void setRestrictions() {
-        if (attacker.hasKeyword("CARDNAME can only attack alone.")) {
-            restrictions.add(AttackRestrictionType.ONLY_ALONE);
-        }
+        addRestriction(AttackRestrictionType.ONLY_ALONE, "CARDNAME can only attack alone.");
+        addRestriction(AttackRestrictionType.NEED_GREATER_POWER, "CARDNAME can't attack unless a creature with greater power also attacks.");
+        addRestriction(AttackRestrictionType.NEED_BLACK_OR_GREEN, "CARDNAME can't attack unless a black or green creature also attacks.");
+        addRestriction(AttackRestrictionType.NOT_ALONE, "CARDNAME can't attack or block alone.", "CARDNAME can't attack alone.");
+        addRestriction(AttackRestrictionType.NEED_TWO_OTHERS, "CARDNAME can't attack unless at least two other creatures attack.");
+    }
 
-        if (attacker.hasKeyword("CARDNAME can't attack unless a creature with greater power also attacks.")) {
-            restrictions.add(AttackRestrictionType.NEED_GREATER_POWER);
-        }
-
-        if (attacker.hasKeyword("CARDNAME can't attack unless a black or green creature also attacks.")) {
-            restrictions.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
-        }
-
-        if (attacker.hasKeyword("CARDNAME can't attack or block alone.") || attacker.hasKeyword("CARDNAME can't attack alone.")) {
-            restrictions.add(AttackRestrictionType.NOT_ALONE);
-        }
-
-        if (attacker.hasKeyword("CARDNAME can't attack unless at least two other creatures attack.")) {
-            restrictions.add(AttackRestrictionType.NEED_TWO_OTHERS);
+    private void addRestriction(final AttackRestrictionType type, final String... keywords) {
+        for (final String keyword : keywords) {
+            if (attacker.hasKeyword(keyword)) {
+                restrictions.put(type, keyword);
+                return;
+            }
         }
     }
 

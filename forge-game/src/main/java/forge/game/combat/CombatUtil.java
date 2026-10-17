@@ -35,7 +35,6 @@ import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
@@ -87,6 +86,15 @@ public class CombatUtil {
         }
         final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
         return myViolations <= bestAttack.getRight();
+    }
+
+    /**
+     * @return a human readable explanation why the declared attack is invalid, or null if it is valid
+     * @see CombatExplainer#explainInvalidAttack(Combat)
+     */
+    public static String explainInvalidAttack(final Combat combat) {
+        final List<String> reasons = CombatExplainer.explainInvalidAttack(combat);
+        return reasons.isEmpty() ? null : String.join("\n", reasons);
     }
 
     /**
@@ -635,13 +643,28 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static String validateBlocks(final Combat combat, final Player defending) {
+        final List<String> errors = collectBlockErrors(combat, defending, MAX_BLOCK_ERRORS);
+        return errors.isEmpty() ? null : String.join("\n", errors);
+    }
+
+    private static final int MAX_BLOCK_ERRORS = 3;
+
+    /**
+     * @return why the declared blocks are invalid, at most max reasons; empty if the blocks are valid.
+     *         A creature gets only one reason for the blocks it is required to make, as these overlap.
+     */
+    private static List<String> collectBlockErrors(final Combat combat, final Player defending, final int max) {
+        final List<String> errors = Lists.newArrayList();
         final List<Card> defendersArmy = defending.getCreaturesInPlay();
         final List<Card> attackers = combat.getAttackers();
         final List<Card> blockers = CardLists.filterControlledBy(combat.getAllBlockers(), defending);
         final List<Card> freeBlockers = findFreeBlockers(defendersArmy, combat);
 
         // if a creature does not block but should, return false
-        for (final Card blocker : defendersArmy) {
+        nextBlocker: for (final Card blocker : defendersArmy) {
+            if (errors.size() >= max) {
+                return errors;
+            }
             if (!blocker.getMustBlockCards().isEmpty()) {
                 final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
                 for (Card cardToBeBlocked : blocker.getMustBlockCards()) {
@@ -664,13 +687,15 @@ public class CombatUtil {
                     if (potentialBlockers >= additionalBlockers && !blockedSoFar.contains(cardToBeBlocked)
                             && (canBlockMoreCreatures(blocker, blockedSoFar) || freeBlockers.contains(blocker))
                             && combat.isAttacking(cardToBeBlocked) && canBlock(cardToBeBlocked, blocker)) {
-                        return TextUtil.concatWithSpace(blocker.toString(), "must still block", TextUtil.addSuffix(cardToBeBlocked.toString(),"."));
+                        errors.add(CombatExplainer.explainMustStillBlock(blocker, cardToBeBlocked));
+                        continue nextBlocker;
                     }
                 }
             }
             // lure effects
             if (mustBlockAnAttacker(blocker, combat, freeBlockers)) {
-                return TextUtil.concatWithSpace(blocker.toString(), "must block an attacker, but has not been assigned to block", blockers.contains(blocker) ? "the right ones." : "any.");
+                errors.add(CombatExplainer.explainMustBlockAnAttacker(blocker, combat, freeBlockers));
+                continue;
             }
 
             // "CARDNAME blocks each turn/combat if able."
@@ -690,7 +715,8 @@ public class CombatUtil {
                             }
                         }
                         if (must) {
-                            return TextUtil.concatWithSpace(blocker.toString(), "must block each combat but was not assigned to block any attacker now.");
+                            errors.add(CombatExplainer.explainBlocksEachCombat(blocker, attacker));
+                            continue nextBlocker;
                         }
                     }
                 }
@@ -699,11 +725,15 @@ public class CombatUtil {
 
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
-            boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
-            if (blockers.size() < 2 && cantBlockAlone) {
-                return TextUtil.concatWithSpace(blocker.toString(), "can't block alone.");
+            if (errors.size() >= max) {
+                return errors;
+            }
+            final String cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") ? "CARDNAME can't attack or block alone."
+                    : blocker.hasKeyword("CARDNAME can't block alone.") ? "CARDNAME can't block alone." : null;
+            if (blockers.size() < 2 && cantBlockAlone != null) {
+                errors.add(CombatExplainer.describeKeyword(blocker, cantBlockAlone));
             } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
-                return TextUtil.concatWithSpace(blocker.toString(), "can't block unless at least two other creatures block.");
+                errors.add(CombatExplainer.describeKeyword(blocker, "CARDNAME can't block unless at least two other creatures block."));
             } else if (blocker.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
                 boolean found = false;
                 int power = blocker.getNetPower();
@@ -715,19 +745,22 @@ public class CombatUtil {
                     }
                 }
                 if (!found) {
-                    return TextUtil.concatWithSpace(blocker.toString(), "can't block unless a creature with greater power also blocks.");
+                    errors.add(CombatExplainer.describeKeyword(blocker, "CARDNAME can't block unless a creature with greater power also blocks."));
                 }
             }
         }
 
         for (final Card attacker : attackers) {
+            if (errors.size() >= max) {
+                return errors;
+            }
             int cntBlockers = combat.getBlockers(attacker).size();
             // don't accept blocker amount for attackers with keyword defining valid blockers amount
             if (cntBlockers > 0 && !canAttackerBeBlockedWithAmount(attacker, cntBlockers, combat))
-                return TextUtil.concatWithSpace(attacker.toString(), "cannot be blocked with", String.valueOf(cntBlockers), "creatures you've assigned");
+                errors.add(CombatExplainer.explainBlockerAmount(attacker, cntBlockers, combat.getDefenderPlayerByAttacker(attacker)));
         }
 
-        return null;
+        return errors;
     }
 
     // can the blocker block an attacker with a lure effect?
@@ -747,6 +780,38 @@ public class CombatUtil {
             return false;
         }
 
+        final CardCollectionView attackers = combat.getAttackers();
+        final CardCollection requirementCards = getBlockRequirementAttackers(blocker, combat, freeBlockers);
+
+        if (requirementCards.isEmpty()) {
+            return false;
+        }
+
+        if (combat.getAttackersBlockedBy(blocker).containsAll(requirementCards)) {
+            return false;
+        }
+
+        if (!canBlock(blocker, combat)) {
+            // the blocker can't block more but is he even part of another requirement?
+            for (final Card attacker : attackers) {
+                final boolean requirementSatisfied = attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker));
+                final CardCollection reducedBlockers = combat.getBlockers(attacker);
+                if (requirementSatisfied && reducedBlockers.contains(blocker)) {
+                    reducedBlockers.remove(blocker);
+                    if (!attackerLureSatisfied(attacker, blocker, reducedBlockers)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return Collections.disjoint(combat.getAttackersBlockedBy(blocker), requirementCards);
+    }
+
+    /**
+     * @return the attackers the blocker is required to block if able (lure effects and "must block" effects)
+     */
+    public static CardCollection getBlockRequirementAttackers(final Card blocker, final Combat combat, final List<Card> freeBlockers) {
         final CardCollectionView attackers = combat.getAttackers();
 
         final CardCollection requirementCards = new CardCollection();
@@ -801,29 +866,7 @@ public class CombatUtil {
             }
         }
 
-        if (requirementCards.isEmpty()) {
-            return false;
-        }
-
-        if (combat.getAttackersBlockedBy(blocker).containsAll(requirementCards)) {
-            return false;
-        }
-
-        if (!canBlock(blocker, combat)) {
-            // the blocker can't block more but is he even part of another requirement?
-            for (final Card attacker : attackers) {
-                final boolean requirementSatisfied = attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker));
-                final CardCollection reducedBlockers = combat.getBlockers(attacker);
-                if (requirementSatisfied && reducedBlockers.contains(blocker)) {
-                    reducedBlockers.remove(blocker);
-                    if (!attackerLureSatisfied(attacker, blocker, reducedBlockers)) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return Collections.disjoint(combat.getAttackersBlockedBy(blocker), requirementCards);
+        return requirementCards;
     }
 
     private static boolean attackerLureSatisfied(final Card attacker, final Card blocker, final CardCollection blockers) {
