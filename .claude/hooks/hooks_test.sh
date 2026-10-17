@@ -48,6 +48,8 @@ guard() { # guard PATH -> "ask" or "pass"
 check "guard upstream file" "$(guard "$root/forge-gui/res/cardsfolder/a/zz_not_logged.txt")" ask
 check "guard crucible file" "$(guard "$root/crucible/internal/engine/game.go")" pass
 check "guard docs file" "$(guard "$root/docs/crucible/new-note.md")" pass
+check "guard porter plan" "$(guard "$root/PORTER_PLAN.md")" pass
+check "guard porter plan only at the root" "$(guard "$root/forge-gui/PORTER_PLAN.md")" ask
 check "guard .claude file" "$(guard "$root/.claude/skills/x/SKILL.md")" pass
 check "guard worktree upstream" "$(guard "$root/.claude/worktrees/zz-test/forge-gui/res/cardsfolder/a/x.txt")" ask
 

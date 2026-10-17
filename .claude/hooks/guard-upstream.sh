@@ -14,9 +14,9 @@ root=$(repo_root "$(dirname "$f")")
 case "$f" in "$root"/*) rel=${f#"$root"/} ;; *) exit 0 ;; esac
 
 case "$rel" in
-crucible/* | docs/crucible/* | CLAUDE.md) exit 0 ;;
+crucible/* | docs/crucible/* | CLAUDE.md | PORTER_PLAN.md) exit 0 ;; # PORTER_PLAN.md: a porter's scratch plan, dropped at commit
 .claude/worktrees/*) ;; # another checkout nested in this one; never exempt
-.claude/*) exit 0 ;;
+.claude/**) exit 0 ;;
 esac
 grep -qF "\`$rel\`" "$root/docs/crucible/porting/upstream-patches.md" 2>/dev/null && exit 0
 
