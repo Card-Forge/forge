@@ -244,7 +244,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         recording = true;
         actions.clear();
         playbackActions.clear();
-        playerControllerHuman.getInputQueue().updateObservers();
+        stateChanged();
 
         return true;
     }
@@ -256,7 +256,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
         recording = false;
         flushPendingRecordedManaCombo();
-        playerControllerHuman.getInputQueue().updateObservers();
+        stateChanged();
 
         return true;
     }
@@ -400,7 +400,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         }
         pendingRecordedManaCombo = null;
         cancelPlayback();
-        playerControllerHuman.getInputQueue().updateObservers();
+        stateChanged();
     }
 
     private void startPlayback(final int loops) {
@@ -409,7 +409,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         playbackRetries = 0;
         restartPlaybackActions();
         debug("start loops=" + loops + " actions=" + describeActions(playbackActions));
-        playerControllerHuman.getInputQueue().updateObservers();
+        stateChanged();
         FThreads.delayInEDT(50, this::continuePlayback);
     }
 
@@ -913,6 +913,14 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         repeatIterations = 0;
         playbackRetries = 0;
         playbackActions.clear();
+        stateChanged();
+    }
+
+    /** A netplay client's controller has no macro system of its own, so its buttons show the state sent here. */
+    private void stateChanged() {
+        if (playerControllerHuman.isRemoteClient()) {
+            playerControllerHuman.getGui().applyMacroState(new State(recording, isReplaying(), hasRememberedActions()));
+        }
         playerControllerHuman.getInputQueue().updateObservers();
     }
 
