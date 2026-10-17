@@ -28,8 +28,6 @@ public class ArchipelagoData implements SaveFileContent {
     protected final Set<String> allCardSets = new HashSet<>();
     // List of teleportation runes that we use to gate regions
     protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("white rune", "black rune", "blue rune", "red rune", "green rune"));
-    // List of known main bosses that contribute to APWorld completion
-    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("lorthos", "emrakul", "lathliss", "ghalta", "griselbrand", "akroma"));
 
     // Actual user data we want to store
     protected final Map<String, Long> colorlessCompletedTownInnEvents = new HashMap<>();
@@ -293,32 +291,8 @@ public class ArchipelagoData implements SaveFileContent {
         boolean result = miniBossesDefeatedByName.add(miniBossName.toLowerCase());
         String notificationMessage = String.format("%sRandomizer:{RESET}\nMiniboss Defeated: " + miniBossName, ArchipelagoColors.Plum);
         System.out.println(notificationMessage);
-        switch (miniBossName.toLowerCase()) {
-            case "the mother slime" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIME_MOTHER_DEFEATED, notificationMessage);
-            case "slobad" -> updatePlayerChecks(ArchipelagoCheckTypes.SLOBAD_DEFEATED, notificationMessage);
-            case "xira" -> updatePlayerChecks(ArchipelagoCheckTypes.XIRA_DEFEATED, notificationMessage);
-            case "nahiri" -> updatePlayerChecks(ArchipelagoCheckTypes.NAHIRI_DEFEATED, notificationMessage);
-            case "valyx feaster of torment" -> updatePlayerChecks(ArchipelagoCheckTypes.VALYX_DEFEATED, notificationMessage);
-            case "jace" -> updatePlayerChecks(ArchipelagoCheckTypes.JACE_DEFEATED, notificationMessage);
-            case "kiora" -> updatePlayerChecks(ArchipelagoCheckTypes.KIORA_DEFEATED, notificationMessage);
-            case "myr superion" -> updatePlayerChecks(ArchipelagoCheckTypes.MYR_SUPERION_DEFEATED, notificationMessage);
-            case "sliver queen" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIVER_QUEEN_DEFEATED, notificationMessage);
-            case "teferi" -> updatePlayerChecks(ArchipelagoCheckTypes.TEFERI_DEFEATED, notificationMessage);
-            case "grolnok" -> updatePlayerChecks(ArchipelagoCheckTypes.GROLNOK_DEFEATED, notificationMessage);
-            case "guardian angel" -> updatePlayerChecks(ArchipelagoCheckTypes.GUARDIAN_ANGEL_DEFEATED, notificationMessage);
-            case "liliana" -> updatePlayerChecks(ArchipelagoCheckTypes.LILIANA_DEFEATED, notificationMessage);
-            case "slimefoot", "fungus of slimefoot" -> updatePlayerChecks(ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED, notificationMessage);
-            case "sorin" -> updatePlayerChecks(ArchipelagoCheckTypes.SORIN_DEFEATED, notificationMessage);
-            case "chandra" -> updatePlayerChecks(ArchipelagoCheckTypes.CHANDRA_DEFEATED, notificationMessage);
-            case "tibalt's torturer" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALTS_TORTURER_DEFEATED, notificationMessage);
-            case "tibalt" -> updatePlayerChecks(ArchipelagoCheckTypes.TIBALT_DEFEATED, notificationMessage);
-            case "zedruu's cook" -> updatePlayerChecks(ArchipelagoCheckTypes.ZEDRUUS_COOK_DEFEATED, notificationMessage);
-            case "conjurer" -> updatePlayerChecks(ArchipelagoCheckTypes.CONJURER_DEFEATED, notificationMessage);
-            case "zedruu" -> updatePlayerChecks(ArchipelagoCheckTypes.ZEDRUU_DEFEATED, notificationMessage);
-            case "garruk" -> updatePlayerChecks(ArchipelagoCheckTypes.GARRUK_DEFEATED, notificationMessage);
-            case "the hydra of shandalaar" -> updatePlayerChecks(ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED, notificationMessage);
-            case "scarecrow captain" -> updatePlayerChecks(ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED, notificationMessage);
-        }
+        ArchipelagoUtil.Boss boss = ArchipelagoUtil.findBoss(miniBossName);
+        if (boss != null && !boss.castleBoss) updatePlayerChecks(boss.check, notificationMessage);
         return result;
     }
 
@@ -326,32 +300,50 @@ public class ArchipelagoData implements SaveFileContent {
         boolean result = bossesDefeatedByName.add(bossName.toLowerCase());
         String notificationMessage = String.format("%sRandomizer:{RESET}\nCastle Boss Defeated: " + bossName, ArchipelagoColors.Plum);
         System.out.println(notificationMessage);
-        switch (bossName.toLowerCase()) {
-            case "akroma" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_WHITE_DEFEATED, notificationMessage);
-            }
-            case "lorthos" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_BLUE_DEFEATED, notificationMessage);
-            }
-            case "griselbrand" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_BLACK_DEFEATED, notificationMessage);
-            }
-            case "lathliss" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_RED_DEFEATED, notificationMessage);
-            }
-            case "ghalta" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_GREEN_DEFEATED, notificationMessage);
-            }
-            case "emrakul" -> {
-                updatePlayerChecks(ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED, notificationMessage);
-            }
-        }
+        ArchipelagoUtil.Boss boss = ArchipelagoUtil.findBoss(bossName);
+        if (boss != null && boss.castleBoss) updatePlayerChecks(boss.check, notificationMessage);
         // Win condition is reached if all bosses have been defeated.
         if (isGoalReached()) {
             updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED, notificationMessage);
         }
 
         return result;
+    }
+
+    // Progress per region; region is one of ArchipelagoUtil.REGION_NAMES.
+    public long getCompletedTownQuests(String region) {
+        Map<String, Long> quests = switch (region) {
+            case "white" -> whiteCompletedTownQuests;
+            case "blue" -> blueCompletedTownQuests;
+            case "black" -> blackCompletedTownQuests;
+            case "red" -> redCompletedTownQuests;
+            case "green" -> greenCompletedTownQuests;
+            default -> colorlessCompletedTownQuests;
+        };
+        return quests.values().stream().mapToLong(Long::longValue).sum();
+    }
+
+    public long getCompletedTownInnEvents(String region) {
+        Map<String, Long> events = switch (region) {
+            case "white" -> whiteCompletedTownInnEvents;
+            case "blue" -> blueCompletedTownInnEvents;
+            case "black" -> blackCompletedTownInnEvents;
+            case "red" -> redCompletedTownInnEvents;
+            case "green" -> greenCompletedTownInnEvents;
+            default -> colorlessCompletedTownInnEvents;
+        };
+        return events.values().stream().mapToLong(Long::longValue).sum();
+    }
+
+    public int getBattlesWon(String region) {
+        return switch (region) {
+            case "white" -> totalBattlesWonWhite;
+            case "blue" -> totalBattlesWonBlue;
+            case "black" -> totalBattlesWonBlack;
+            case "red" -> totalBattlesWonRed;
+            case "green" -> totalBattlesWonGreen;
+            default -> totalBattlesWonColorless;
+        };
     }
 
     public boolean isGoalReached() {
