@@ -20,7 +20,7 @@ public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
     public static final int TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS = 100;
     public static final Set<String> COLOR_SET_NAMES =
-            Set.of("White", "Blue", "Black", "Red", "Green");
+            Set.of("white", "blue", "black", "red", "green");
 
     public static final String[] REGION_NAMES =
             Stream.concat(
