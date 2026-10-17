@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.FlipOntoBattlefieldAnimation;
@@ -471,8 +472,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private boolean hasFieldRect;
         private boolean leaveOriginLocked;
         private VCardDisplayArea lastFieldRow;
-        private static final Set<Integer> animatedIds = ConcurrentHashMap.newKeySet();
-        private static final Set<Integer> movedIds = ConcurrentHashMap.newKeySet();
+        private static final Set<Integer> animatedIds = Sets.newConcurrentHashSet();
+        private static final Set<Integer> movedIds = Sets.newConcurrentHashSet();
         public static void markMoved(CardView c) { movedIds.add(c.getId()); }
         public static Rectangle takeHandStart(CardView card) {
             return handStarts.remove(card.getId());
