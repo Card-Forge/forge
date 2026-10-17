@@ -170,17 +170,26 @@ public class NetConnectUtil {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         String hostname;
         int port;
+        final FGameClient client;
 
-        URLValidator.HostPort hostPort = URLValidator.parseURL(url);
-        if (hostPort == null) {
-            return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
+        // An http link with a token is a web server's invite link. It is joined through a WebSocket on the web port
+        final WebSocketTunnel tunnel = WebSocketTunnel.of(url);
+        if (tunnel != null) {
+            hostname = tunnel.uri().getHost();
+            port = tunnel.uri().getPort();
+            client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), gui, tunnel);
+        } else {
+            URLValidator.HostPort hostPort = URLValidator.parseURL(url);
+            if (hostPort == null) {
+                return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
+            }
+
+            hostname = hostPort.host();
+            port = hostPort.port();
+            if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
+
+            client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), gui, hostname, port);
         }
-
-        hostname = hostPort.host();
-        port = hostPort.port();
-        if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
-
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), gui, hostname, port);
         onlineLobby.setClient(client);
         chatInterface.setGameClient(client);
         final ClientGameLobby lobby = new ClientGameLobby();

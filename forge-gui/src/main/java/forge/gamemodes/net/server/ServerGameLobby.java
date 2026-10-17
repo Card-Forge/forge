@@ -3,6 +3,7 @@ package forge.gamemodes.net.server;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
@@ -60,9 +61,9 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         return super.getSlotLimit();
     }
 
-    /** Set the lobby's declared mode (Constructed / Limited) and broadcast to clients. */
-    public void setLimitedMode(boolean limited) {
-        getData().setLimitedMode(limited);
+    /** Set the game type a Limited match starts with, or null for Constructed, and broadcast to clients. */
+    public void setLimitedType(GameType type) {
+        getData().setLimitedType(type);
         updateView(true);
     }
 
@@ -193,18 +194,30 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
             int pickTimerSeconds, int disconnectGraceSeconds) {
         NetworkEvent event = getCurrentEvent();
         if (event == null) return false;
+        final SealedCardPoolGenerator sealed = event.getFormat() == EventFormat.SEALED ? new SealedCardPoolGenerator(poolType) : null;
+        return configure(event, poolType, draft, sealed, pickTimerSeconds, disconnectGraceSeconds);
+    }
 
+    /** Configures a sealed event with a pool generator the caller already built, so no dialog opens. */
+    public synchronized boolean configureEvent(LimitedPoolType poolType, SealedCardPoolGenerator sealed,
+            int pickTimerSeconds, int disconnectGraceSeconds) {
+        NetworkEvent event = getCurrentEvent();
+        if (event == null) return false;
+        return configure(event, poolType, null, sealed, pickTimerSeconds, disconnectGraceSeconds);
+    }
+
+    private boolean configure(NetworkEvent event, LimitedPoolType poolType, BoosterDraft draft, SealedCardPoolGenerator sealed,
+            int pickTimerSeconds, int disconnectGraceSeconds) {
         event.setPoolType(poolType);
         event.setProductDescription(poolType.toString());
         event.setPickTimerSeconds(pickTimerSeconds);
         event.setDisconnectGraceSeconds(disconnectGraceSeconds);
 
         if (event.getFormat() == EventFormat.SEALED) {
-            SealedCardPoolGenerator gen = new SealedCardPoolGenerator(poolType);
-            if (gen.isEmpty()) return false;
-            event.setSealedGenerator(gen);
-            if (gen.getProductName() != null) {
-                event.setProductDescription(poolType + ": " + gen.getProductName());
+            if (sealed == null || sealed.isEmpty()) return false;
+            event.setSealedGenerator(sealed);
+            if (sealed.getProductName() != null) {
+                event.setProductDescription(poolType + ": " + sealed.getProductName());
             }
         } else {
             event.setDraft(draft);
@@ -346,6 +359,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         draftHost = new BoosterDraftHost(draft, event);
         // Broadcast the fully-populated event (with participants and numRounds) so
         // clients can initialize their overlay with pod names before the first pack.
+        event.setPhase(EventPhase.DRAFTING);
         updateView(true);
         draftHost.start();
 

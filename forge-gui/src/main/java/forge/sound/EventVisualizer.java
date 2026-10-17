@@ -223,7 +223,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
             default -> null;
         };
-        if (resultSound == null || state.origProduceAnyMana() || !SoundSystem.instance.hasResource(resultSound)) {
+        if (resultSound == null || state.origProduceAnyMana() || SoundSystem.instance.getSoundResource(resultSound.getResourceFileName()) == null) {
             resultSound = SoundEffectType.OtherLand;
         }
         return resultSound;

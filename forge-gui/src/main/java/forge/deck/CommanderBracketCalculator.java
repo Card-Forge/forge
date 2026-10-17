@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 import java.util.Map.Entry;
 
 public final class CommanderBracketCalculator {
@@ -43,36 +44,7 @@ public final class CommanderBracketCalculator {
         final List<Combo> lateGameCombos = DATA.findCombos(deckCards, LATE_GAME);
         final List<Combo> earlyGameCombos = DATA.findCombos(deckCards, EARLY_GAME);
 
-        int bracket = 1;
-        if (!massLandDenial.isEmpty()) {
-            bracket = Math.max(bracket, 4);
-        }
-        if (!chainedExtraTurns.isEmpty()) {
-            bracket = Math.max(bracket, 4);
-        }
-        if (extraTurns.size() >= 4) {
-            bracket = Math.max(bracket, 4);
-        }
-        else if (extraTurns.size() >= 3) {
-            bracket = Math.max(bracket, 3);
-        }
-        else if (extraTurns.size() >= 2) {
-            bracket = Math.max(bracket, 2);
-        }
-        if (gamechangers.size() >= 4) {
-            bracket = Math.max(bracket, 4);
-        }
-        else if (!gamechangers.isEmpty()) {
-            bracket = Math.max(bracket, 3);
-        }
-        if (!lateGameCombos.isEmpty()) {
-            bracket = Math.max(bracket, 3);
-        }
-        if (!earlyGameCombos.isEmpty()) {
-            bracket = Math.max(bracket, 4);
-        }
-
-        return new Result(bracket, gamechangers, massLandDenial, extraTurns, chainedExtraTurns, lateGameCombos, earlyGameCombos);
+        return new Result(gamechangers, massLandDenial, extraTurns, chainedExtraTurns, lateGameCombos, earlyGameCombos);
     }
 
     public static int getBracket(final Deck deck) {
@@ -205,25 +177,74 @@ public final class CommanderBracketCalculator {
         private final List<Combo> lateGameCombos;
         private final List<Combo> earlyGameCombos;
 
-        private Result(final int bracket, final List<String> gamechangers, final List<String> massLandDenial,
+        private Result(final List<String> gamechangers, final List<String> massLandDenial,
                        final List<String> extraTurns, final List<String> chainedExtraTurns,
                        final List<Combo> lateGameCombos, final List<Combo> earlyGameCombos) {
-            this.bracket = bracket;
             this.gamechangers = gamechangers;
             this.massLandDenial = massLandDenial;
             this.extraTurns = extraTurns;
             this.chainedExtraTurns = chainedExtraTurns;
             this.lateGameCombos = lateGameCombos;
             this.earlyGameCombos = earlyGameCombos;
+            this.bracket = IntStream.of(1, getGamechangersBracket(), getMassLandDenialBracket(), getExtraTurnsBracket(),
+                    getChainedExtraTurnsBracket(), getLateGameCombosBracket(), getEarlyGameCombosBracket()).max().getAsInt();
         }
 
         private static Result empty() {
-            return new Result(1, Collections.emptyList(), Collections.emptyList(), Collections.emptyList(),
+            return new Result(Collections.emptyList(), Collections.emptyList(), Collections.emptyList(),
                     Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
         }
 
         public int getBracket() {
             return bracket;
+        }
+
+        public List<String> getGamechangers() {
+            return gamechangers;
+        }
+
+        public List<String> getMassLandDenial() {
+            return massLandDenial;
+        }
+
+        public List<String> getExtraTurns() {
+            return extraTurns;
+        }
+
+        public List<String> getChainedExtraTurns() {
+            return chainedExtraTurns;
+        }
+
+        public List<Combo> getLateGameCombos() {
+            return lateGameCombos;
+        }
+
+        public List<Combo> getEarlyGameCombos() {
+            return earlyGameCombos;
+        }
+
+        public int getGamechangersBracket() {
+            return gamechangers.size() >= 4 ? 4 : gamechangers.isEmpty() ? 0 : 3;
+        }
+
+        public int getMassLandDenialBracket() {
+            return massLandDenial.isEmpty() ? 0 : 4;
+        }
+
+        public int getExtraTurnsBracket() {
+            return extraTurns.size() >= 4 ? 4 : extraTurns.size() >= 3 ? 3 : extraTurns.size() >= 2 ? 2 : 0;
+        }
+
+        public int getChainedExtraTurnsBracket() {
+            return chainedExtraTurns.isEmpty() ? 0 : 4;
+        }
+
+        public int getLateGameCombosBracket() {
+            return lateGameCombos.isEmpty() ? 0 : 3;
+        }
+
+        public int getEarlyGameCombosBracket() {
+            return earlyGameCombos.isEmpty() ? 0 : 4;
         }
 
         public String toExplanation() {

@@ -2,7 +2,7 @@ package forge.deck;
 
 import java.io.IOException;
 
-interface DeckUrlProvider {
+public interface DeckUrlProvider {
     RemoteDeck load(String normalizedUrl, Iterable<Deck> savedDecks) throws IOException;
 
     static void appendSection(final StringBuilder out, final DeckSection section, final StringBuilder cards) {

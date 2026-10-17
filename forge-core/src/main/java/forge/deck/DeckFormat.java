@@ -78,7 +78,8 @@ public enum DeckFormat {
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
-    CommanderDraft ( Range.of(59, 99),                     Range.of(0, 15), Integer.MAX_VALUE),
+    // the sideboard is the rest of the drafted pool, as it is for Limited
+    CommanderDraft ( Range.of(59, 99),                     null, Integer.MAX_VALUE),
     Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
@@ -504,7 +505,7 @@ public enum DeckFormat {
                 }
             }
         }
-        if (deck.has(DeckSection.Sideboard)) {
+        if (deck.has(DeckSection.Sideboard) && !equals(DeckFormat.CommanderDraft)) {
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
                 if (allowsOffColorIdentity(commanderCIRules, cp.getKey().getRules())) {
                     continue;

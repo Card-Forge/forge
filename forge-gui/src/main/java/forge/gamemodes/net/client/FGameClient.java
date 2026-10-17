@@ -7,15 +7,18 @@ import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
+import forge.gamemodes.net.WebSocketTunnel;
 import forge.gamemodes.net.event.*;
+import forge.gamemodes.net.server.HostingServer;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
+import io.netty.channel.local.LocalAddress;
+import io.netty.channel.local.LocalChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
@@ -24,7 +27,10 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -56,13 +62,14 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private static final int[] BACKOFF_SECONDS = {1, 5, 15, 45, 60};
     private static final int RESUME_WATCH_SECONDS = 5;
     private final IGuiGame clientGui;
-    private final String hostname;
-    private final Integer port;
+    private final SocketAddress address;
+    private final WebSocketTunnel tunnel;
     private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private IDraftEventHandler draftHandler;
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
+    private volatile Executor dispatchExecutor;
     private volatile Channel channel;
 
     private ReconnectState reconnectState = ReconnectState.CONNECTED;
@@ -77,10 +84,23 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private volatile ScheduledFuture<?> pendingAttempt;
 
     public FGameClient(String username, IGuiGame clientGui, String hostname, int port) {
+        this(username, clientGui, InetSocketAddress.createUnresolved(hostname, port));
+    }
+
+    /** Connects to any address. A {@link LocalAddress} is a server in this process, reached without a socket. */
+    public FGameClient(String username, IGuiGame clientGui, SocketAddress address) {
         this.username = username;
         this.clientGui = clientGui;
-        this.hostname = hostname;
-        this.port = port;
+        this.address = address;
+        this.tunnel = null;
+    }
+
+    /** Connects through a WebSocket on a web server's port. */
+    public FGameClient(String username, IGuiGame clientGui, WebSocketTunnel tunnel) {
+        this.username = username;
+        this.clientGui = clientGui;
+        this.address = tunnel.address();
+        this.tunnel = tunnel;
     }
 
     public String getUsername() {
@@ -94,17 +114,30 @@ public class FGameClient implements IToServer, IHasForgeLog {
         return replies;
     }
 
+    /** Runs incoming protocol calls on this executor, in place of the GUI thread and the background pool. Call before connect(). */
+    public void setDispatchExecutor(final Executor executor) {
+        dispatchExecutor = executor;
+    }
+
+    Executor getDispatchExecutor() {
+        return dispatchExecutor;
+    }
+
     public void connect() {
-        final EventLoopGroup group = new NioEventLoopGroup();
+        final boolean inProcess = address instanceof LocalAddress;
+        final EventLoopGroup group = inProcess ? new DefaultEventLoopGroup() : new NioEventLoopGroup();
         boolean attached = false;
         try {
             final Bootstrap b = new Bootstrap()
              .group(group)
-             .channel(NioSocketChannel.class)
-             .handler(new ChannelInitializer<SocketChannel>() {
+             .channel(inProcess ? LocalChannel.class : NioSocketChannel.class)
+             .handler(new ChannelInitializer<Channel>() {
                 @Override
-                public void initChannel(final SocketChannel ch) throws Exception {
+                public void initChannel(final Channel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
+                    if (tunnel != null) {
+                        tunnel.addHandlers(ch);
+                    }
                     pipeline.addLast(
                             new LoggingHandler(LogLevel.INFO),
                             new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
@@ -117,7 +150,10 @@ public class FGameClient implements IToServer, IHasForgeLog {
              });
 
             // Start the connection attempt.
-            final Channel newChannel = b.connect(this.hostname, this.port).sync().channel();
+            final Channel newChannel = b.connect(address).sync().channel();
+            if (tunnel != null) {
+                tunnel.awaitOpen(newChannel);
+            }
             synchronized (reconnectLock) {
                 if (shuttingDown) {
                     newChannel.close();
@@ -156,7 +192,10 @@ public class FGameClient implements IToServer, IHasForgeLog {
         if (channel != null)
             channel.close();
         reconnectScheduler.shutdownNow();
-        NetworkLogConfig.deactivateNetworkLogging();
+        // A server in this process writes to the same network log, so the log stays active until that server stops
+        if (!HostingServer.isHosting()) {
+            NetworkLogConfig.deactivateNetworkLogging();
+        }
     }
 
     @Override
@@ -336,8 +375,9 @@ public class FGameClient implements IToServer, IHasForgeLog {
                 return;
             }
         }
-        netLog.info("[Reconnect] Attempt {}/{} - connecting to {}:{}",
-                attemptIndex + 1, BACKOFF_SECONDS.length, hostname, port);
+        netLog.info("[Reconnect] Attempt {}/{} - connecting to {}",
+                attemptIndex + 1, BACKOFF_SECONDS.length,
+                address instanceof InetSocketAddress inet ? inet.getHostString() + ":" + inet.getPort() : address);
         try {
             connect();
             awaitResumeOrLobby(attemptIndex);

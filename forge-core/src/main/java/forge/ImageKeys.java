@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -51,7 +52,7 @@ public final class ImageKeys {
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
 
     private static Map<String, Set<String>> editionAlias = new HashMap<>();
-    private static Set<String> toFind = new HashSet<>();
+    private static final Set<String> toFind = ConcurrentHashMap.newKeySet();
 
     private static boolean isLibGDXPort = false;
 
@@ -92,8 +93,9 @@ public final class ImageKeys {
         return tokenKey.substring(ImageKeys.TOKEN_PREFIX.length());
     }
 
-    private static final Map<String, File> cachedCards = new HashMap<>(50000);
-    public static HashSet<String> missingCards = new HashSet<>();
+    // Written by every thread that looks a picture up, and by the service pool that finds one by its set
+    private static final Map<String, File> cachedCards = new ConcurrentHashMap<>(50000);
+    public static final Set<String> missingCards = ConcurrentHashMap.newKeySet();
     public static void clearMissingCards() {
         missingCards.clear();
     }

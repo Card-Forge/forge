@@ -96,10 +96,6 @@ public class SoundSystem {
         return clip;
     }
 
-    public boolean hasResource(final SoundEffectType type) {
-        return !fetchResource(type).equals(emptySound);
-    }
-
     /**
      * Play the sound associated with the resource specified by the file name
      * ("synchronized" with other sounds of the same kind means: only one can play at a time).

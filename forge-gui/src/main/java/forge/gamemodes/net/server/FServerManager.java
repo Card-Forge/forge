@@ -40,8 +40,11 @@ import forge.localinstance.properties.ForgeNetPreferences;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.channel.local.LocalAddress;
+import io.netty.channel.local.LocalServerChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
@@ -49,14 +52,7 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
-
-import org.jupnp.UpnpService;
-import org.jupnp.UpnpServiceImpl;
-import org.jupnp.model.meta.Device;
-import org.jupnp.registry.Registry;
-import org.jupnp.support.igd.PortMappingListener;
-import org.jupnp.support.model.PortMapping;
-import org.jupnp.util.SpecificationViolationReporter;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -151,10 +147,15 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         }, deadline, TimeUnit.SECONDS);
     }
 
+    /** The address of a server started by {@link #startLoopbackServer()}. Only a client in this process can connect to it. */
+    public static final LocalAddress LOOPBACK = new LocalAddress("forge");
+
+    private volatile boolean loopbackOnly;
+    private final ChannelGroup adopted = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     // Created by startServer: an offline game reaches getInstance() but never needs the selectors
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
-    private UpnpService upnpService = null;
+    private PortForward portForward;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
     private IDraftEventHandler draftHandler;
@@ -236,35 +237,61 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
+        bind(new InetSocketAddress(port), startUPnP);
+    }
+
+    /** Starts a server at {@link #LOOPBACK} with no socket, no UPnP and no AFK timeout. Its clients are in this process or come through {@link #adopt}. */
+    public void startLoopbackServer() {
+        bind(LOOPBACK, false);
+    }
+
+    /**
+     * Serves a netplay client on a channel that another server accepted, such as a WebSocket on a web server's port.
+     * The channel's pipeline must already deliver the netplay byte stream. It must not have fired channelActive yet,
+     * because the handlers added here register the client on channelActive.
+     */
+    public void adopt(final Channel ch) {
+        adopted.add(ch);
+        addHandlers(ch);
+    }
+
+    private void addHandlers(final Channel ch) {
+        ch.config().setWriteBufferWaterMark(
+                new WriteBufferWaterMark(OUTBOUND_BUFFER_LOW_WATER, OUTBOUND_BUFFER_HIGH_WATER));
+        ch.pipeline().addLast(
+                new CompatibleObjectEncoder(byteTracker),
+                new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
+                new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
+                new MessageHandler(),
+                new SaturationLoggingHandler(),
+                new RegisterClientHandler(),
+                new DeregisterClientHandler(),
+                new GameServerHandler());
+    }
+
+    private void bind(final SocketAddress address, final boolean startUPnP) {
         netLog.info("Starting Multiplayer Server");
-        bossGroup = new NioEventLoopGroup(1);
-        workerGroup = new NioEventLoopGroup();
+        loopbackOnly = address instanceof LocalAddress;
+        bossGroup = loopbackOnly ? new DefaultEventLoopGroup(1) : new NioEventLoopGroup(1);
+        workerGroup = loopbackOnly ? new DefaultEventLoopGroup() : new NioEventLoopGroup();
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_REUSEADDR, true)  // Allow quick port reuse after server shutdown
+                    .channel(loopbackOnly ? LocalServerChannel.class : NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                    .childHandler(new ChannelInitializer<Channel>() {
                         @Override
-                        public void initChannel(final SocketChannel ch) throws Exception {
-                            ch.config().setWriteBufferWaterMark(
-                                    new WriteBufferWaterMark(OUTBOUND_BUFFER_LOW_WATER, OUTBOUND_BUFFER_HIGH_WATER));
-                            final ChannelPipeline p = ch.pipeline();
-                            p.addLast(
-                                    new CompatibleObjectEncoder(byteTracker),
-                                    new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
-                                    new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
-                                    new MessageHandler(),
-                                    new SaturationLoggingHandler(),
-                                    new RegisterClientHandler(),
-                                    new DeregisterClientHandler(),
-                                    new GameServerHandler());
+                        public void initChannel(final Channel ch) throws Exception {
+                            addHandlers(ch);
                         }
                     });
 
+            if (!loopbackOnly) {
+                b.option(ChannelOption.SO_REUSEADDR, true);  // Allow quick port reuse after server shutdown
+            }
+
             // Bind and start to accept incoming connections.
-            final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
+            final ChannelFuture ch = b.bind(address).sync().channel().closeFuture();
             new Thread(() -> {
                 try {
                     ch.sync();
@@ -315,31 +342,29 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         if (!HostingServer.isHosting()) {
             return;
         }
-        // Cancel all reconnect timers
-        for (final Timer timer : reconnectTimers.values()) {
-            timer.cancel();
-        }
-        reconnectTimers.clear();
-        disconnectedClients.clear();
+        forgetDisconnectedClients();
         clients.clear();
         afkSlots.clear();
+        // Adopted channels run on another server's threads, so shutting down this server's threads does not close them
+        adopted.close();
 
         try {
             if (bossGroup != null) {
-                bossGroup.shutdownGracefully().sync();
-                workerGroup.shutdownGracefully().sync();
+                if (loopbackOnly) {
+                    // A loopback server has no sockets to drain, so it skips Netty's default quiet period
+                    bossGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                    workerGroup.shutdownGracefully(0, 15, TimeUnit.SECONDS).sync();
+                } else {
+                    bossGroup.shutdownGracefully().sync();
+                    workerGroup.shutdownGracefully().sync();
+                }
             }
         } catch (final InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        if (upnpService != null) {
-            try {
-                upnpService.shutdown();
-            } catch (Exception | AssertionError e) {
-                // The JDK wraps a failed multicast leave in AssertionError, which jupnp doesn't catch
-                netLog.debug("UPnP shutdown incomplete: {}", e.toString());
-            }
-            upnpService = null;
+        if (portForward != null) {
+            portForward.close();
+            portForward = null;
         }
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
@@ -380,7 +405,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
 
     public String formatAfkTimeoutMessage() {
         final int minutes = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
-        if (minutes <= 0) {
+        if (loopbackOnly || minutes <= 0) {
             return Localizer.getInstance().getMessage("lblAfkTimeoutDisabled");
         }
         return Localizer.getInstance().getMessage("lblAfkTimeoutChat", minutes + ":00");
@@ -409,7 +434,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
      */
     @Override
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!HostingServer.isHosting() || localLobby == null) {
+        if (!HostingServer.isHosting() || localLobby == null || loopbackOnly) {
             return AfkTimeout.NOOP;
         }
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
@@ -482,7 +507,17 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     }
 
     public void setLobby(final ServerGameLobby lobby) {
+        // Seats held for a reconnect belong to the old lobby
+        forgetDisconnectedClients();
         this.localLobby = lobby;
+    }
+
+    private void forgetDisconnectedClients() {
+        for (final Timer timer : reconnectTimers.values()) {
+            timer.cancel();
+        }
+        reconnectTimers.clear();
+        disconnectedClients.clear();
     }
 
     public void unsetReady() {
@@ -760,46 +795,8 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     }
 
     private void mapNatPort() {
-        try {
-            final String localAddress = getLocalAddress();
-            final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
-            // Shutdown existing UPnP service if already running
-            if (upnpService != null) {
-                upnpService.shutdown();
-            }
-
-            // Gateways routinely break the UPnP spec in ways jupnp tolerates; don't log each one
-            SpecificationViolationReporter.disableReporting();
-
-            // Create a new UPnP service instance
-            upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
-            upnpService.startup();
-
-            final ForgePortMappingListener listener = new ForgePortMappingListener(portMapping);
-            upnpService.getRegistry().addListener(listener);
-            // Trigger device discovery
-            upnpService.getControlPoint().search();
-
-            // If no IGD responds within 5 seconds, report failure
-            new Timer("upnp-timeout", true).schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    if (!listener.isCompleted()) {
-                        listener.setCompleted();
-                        netLog.warn("UPnP: no gateway confirmed a mapping for port {} within 5 seconds", port);
-                        onUPnPResult(false);
-                    }
-                }
-            }, 5000);
-        } catch (LinkageError | Exception e) {
-            // UPnP port mapping is optional (it makes the host reachable from the
-            // internet; LAN/direct hosting works without it). jupnp is unavailable
-            // on iOS/MobiVM (provided scope, no platform UPnP service), so the
-            // PortMapping/UpnpService classes fail to load - NoClassDefFoundError
-            // is a LinkageError and degrades gracefully instead of killing hosting,
-            // while fatal Errors (OutOfMemoryError etc.) still propagate.
-            netLog.error(e, "UPnP mapping unavailable");
-        }
+        portForward = new PortForward(port);
+        portForward.open(this::onUPnPResult);
     }
 
     private void onUPnPResult(boolean success) {
@@ -809,40 +806,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         if (lobbyListener != null) {
             broadcast(success ? new MessageEvent(msg) : MessageEvent.warning(msg));
         }
-    }
-
-    /**
-     * Extends jupnp's PortMappingListener to report mapping success or failure.
-     * The superclass runs port mapping actions synchronously inside deviceAdded(),
-     * so by the time super.deviceAdded() returns, the result is known.
-     */
-    private class ForgePortMappingListener extends PortMappingListener {
-        private volatile boolean completed = false;
-
-        ForgePortMappingListener(PortMapping portMapping) {
-            super(portMapping);
-        }
-
-        @Override
-        public synchronized void deviceAdded(Registry registry, Device device) {
-            super.deviceAdded(registry, device);
-            if (!completed && !activePortMappings.isEmpty()) {
-                completed = true;
-                onUPnPResult(true);
-            }
-        }
-
-        @Override
-        protected void handleFailureMessage(String message) {
-            super.handleFailureMessage(message);
-            if (!completed) {
-                completed = true;
-                onUPnPResult(false);
-            }
-        }
-
-        boolean isCompleted() { return completed; }
-        void setCompleted() { completed = true; }
     }
 
     // --- Reconnection helper methods ---
@@ -989,6 +952,21 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         localLobby.disconnectPlayer(client.getIndex());
 
         broadcast(MessageEvent.warning(String.format("%s did not reconnect in time. AI has taken over.", username)));
+    }
+
+    /**
+     * Converts a connected player's seat in the running match to AI now. A dropped connection waits for a reconnect first.
+     * The caller must close the player's connection afterwards.
+     */
+    public void replaceWithAI(final int slotIndex) {
+        final RemoteClient client = getClientBySlotIndex(slotIndex);
+        // The client is deregistered first. Otherwise closing its connection would park the seat for a reconnect
+        if (client == null || !isMatchActive() || !clients.values().remove(client)) { return; }
+        client.getReplyPool().cancelAll();
+        pauseRemoteClientGuiGame(client);
+        convertToAI(client);
+        localLobby.disconnectPlayer(slotIndex);
+        broadcast(new MessageEvent(String.format("Host forced AI takeover for %s.", client.getUsername())));
     }
 
     public void convertToAI(final RemoteClient client) {
