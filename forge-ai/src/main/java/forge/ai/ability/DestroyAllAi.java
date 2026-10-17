@@ -3,7 +3,6 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDamage;
 import forge.game.keyword.Keyword;
@@ -124,21 +123,7 @@ public class DestroyAllAi extends SpellAbilityAi {
                 }
 
                 // test whether the human can kill the ai next turn
-                Combat combat = new Combat(opponent);
-                boolean containsAttacker = false;
-                for (Card att : opponent.getCreaturesInPlay()) {
-                    if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
-                        combat.addAttacker(att, ai);
-                        containsAttacker = containsAttacker || opplist.contains(att);
-                    }
-                }
-                if (!containsAttacker) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-                AiBlockController block = new AiBlockController(ai, false);
-                block.assignBlockersForCombat(combat);
-
-                if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
+                if (ComputerUtil.stopsLethalAttack(ai, opponent, opplist)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
