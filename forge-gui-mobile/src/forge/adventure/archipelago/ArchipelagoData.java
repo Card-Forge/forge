@@ -209,16 +209,27 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
-    private void unlockSetByName(String setToUnlock, String notificationMessage) {
+    // Unlocks the set and gives its booster pack if gift packs apply. Returns true if a booster pack was given.
+    private boolean unlockSetByName(String setToUnlock) {
         addSetUnlockedByCode(setToUnlock);
-        String setUnlockedText = String.format("Set Unlock: %s%s{RESET}", ArchipelagoColors.Cyan, setToUnlock);
         // Some sets don't have booster packs such as full-art land sets (P23).
         if (archipelagoMode == ArchipelagoMode.solo_randomizer || (archipelagoMode == ArchipelagoMode.networked_archipelago && ArchipelagoRandomizer.getInstance().getSlotData() != null && ArchipelagoRandomizer.getInstance().getSlotData().GiftPack == 1)) {
             var booster = StaticData.instance().getBoosters().get(setToUnlock);
             if (booster != null) {
                 Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
-                setUnlockedText += String.format(" + %s%s{RESET}", ArchipelagoColors.Green, "Matching Booster Pack");
+                return true;
             }
+        }
+        return false;
+    }
+
+    // Shows one notification for all sets unlocked by a single check.
+    private void notifySetsUnlocked(List<String> unlockedSets, int boosterPacks, String notificationMessage) {
+        if (unlockedSets.isEmpty()) return;
+        String setUnlockedText = String.format("%s: %s%s{RESET}", unlockedSets.size() == 1 ? "Set Unlock" : "Set Unlocks",
+                ArchipelagoColors.Cyan, String.join(", ", unlockedSets));
+        if (boosterPacks > 0) {
+            setUnlockedText += String.format(" + %s%d Matching Booster Pack%s{RESET}", ArchipelagoColors.Green, boosterPacks, boosterPacks == 1 ? "" : "s");
         }
         // Archipelago does not know what set will be unlocked, this is randomized locally. Therefore, we always wanna show the player a notification.
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
@@ -240,30 +251,32 @@ public class ArchipelagoData implements SaveFileContent {
             return;
         }
 
-        // If we already received all checks, unlock the entire list of locked sets
-        if (receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
-            for (String setToUnlock : lockedSets) {
-                unlockSetByName(setToUnlock, notificationMessage);
-            }
-        }
-
         float amountOfSetsToUnlock = (float) allCardSets.size() / totalAmountOfSetUnlockChecks + setUnlockChecksRestAmount;
         int amountOfSetsToUnlockFloored = (int) Math.floor(amountOfSetsToUnlock);
         setUnlockChecksRestAmount = (amountOfSetsToUnlock - amountOfSetsToUnlockFloored);
         List<String> lockedList = new ArrayList<>(lockedSets);
-        Random random = new Random();
-        String setToUnlock;
+        List<String> setsToUnlock = new ArrayList<>();
 
-        for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
-            setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
-            unlockSetByName(setToUnlock, notificationMessage);
-            lockedSets.remove(setToUnlock);
+        if (receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
+            // If we already received all checks, unlock the entire list of locked sets
+            setsToUnlock.addAll(lockedList);
+        } else {
+            Random random = new Random();
+            for (int i = 0; i < amountOfSetsToUnlockFloored && !lockedList.isEmpty(); i++) {
+                setsToUnlock.add(lockedList.remove(random.nextInt(lockedList.size())));
+            }
         }
+
+        int boosterPacks = 0;
+        for (String setToUnlock : setsToUnlock) {
+            if (unlockSetByName(setToUnlock)) boosterPacks++;
+        }
+        notifySetsUnlocked(setsToUnlock, boosterPacks, notificationMessage);
         receivedAmountOfSetUnlockChecks++;
     }
 
     public void generateGameNotification(String message) {
-        GameHUD.getInstance().addNotification(message, 0.5f, 3f, 0.5f);
+        GameHUD.getInstance().addNotification(message, 0.5f, 3.5f, 0.5f);
     }
     /// --- End ---
 
