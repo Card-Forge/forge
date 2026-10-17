@@ -421,12 +421,12 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		// TargetType$ read as SpellAbility.isValid's full restriction over
 		// every stack item (stackAbilityCandidates): ChangeTargets (23 of its
 		// 44 corpus lines name a shape past "Spell"), and any API naming more
-		// than the literal Spell (Stifle's Activated,Triggered). An activated
-		// or triggered ability that would be a legal target is an error, so
-		// the ability fails when it resolves; a stack holding no such item
-		// asks the plain question (no legal target: CR 603.3c), as Java does.
+		// than the literal Spell (Stifle's Activated,Triggered). A spell is
+		// offered as its card, an activated or triggered ability as its stack
+		// item (ADR-0041); a stack holding no such item asks the plain
+		// question (no legal target: CR 603.3c), as Java does.
 		var err error
-		candidates, err = g.stackAbilityCandidates(a, targetType, validTgts)
+		candidates, err = g.stackAbilityCandidates(a)
 		if err != nil {
 			return targetChoice{min: targetMin, max: targetMax, err: err}, true, true
 		}
@@ -727,66 +727,103 @@ func (g *Game) stackSpellCandidates(controller PlayerID, source CardID, spec str
 	return candidates
 }
 
-// stackAbilityCandidates is SpellAbility.canTargetSpellAbility
-// (SpellAbility.java:2059-2122) run over every stack item, top first, for an
-// ability a naming TargetType$ (ChangeTargets, or a TargetType$ past the
-// literal Spell): the item matches one of TargetType$'s
-// comma-separated alternatives (stackItemMatches), one of its targets
-// matches TargetValidTargeting$ when a names one, and its host card matches
-// ValidTgts$. A spell is offered as its card on the stack (CardEntity), the
-// convention Counter and CopySpellAbility already read back through
-// spellItemOf.
-//
-// An activated or triggered ability on the stack has no EntityID (id.go: a
-// card or a player), so one that would be a legal target is an error rather
-// than a candidate left out: offering the spells alone would be a narrower
-// question than Java asks. Ability has no activated/triggered kind, so
-// "Activated" and "Triggered" each match every non-spell item; the answer
-// they change is only which items raise that error.
-func (g *Game) stackAbilityCandidates(a *Ability, targetType, validTgts string) ([]EntityID, error) {
-	validSpec := valid.Parse(validTgts)
-	tvt, hasTVT := a.Params.Param("TargetValidTargeting")
+// stackAbilityCandidates is TargetSelection.chooseCardFromStack's offer
+// (TargetSelection.java:288-303): every stack item, top first, the targeting
+// ability a can target (canTargetStackItem). A spell is offered as its card on
+// the stack (CardEntity), the convention Counter and CopySpellAbility already
+// read back through spellItemOf; an activated or triggered ability as its
+// stack item (StackItemEntity, ADR-0041).
+func (g *Game) stackAbilityCandidates(a *Ability) ([]EntityID, error) {
 	var candidates []EntityID
 	for i := len(g.stack) - 1; i >= 0; i-- {
 		item := &g.stack[i]
-		if item.Source == NoCard || int(item.Source) >= len(g.cards) {
-			continue
-		}
-		// ValidTgts$ first: a property below can raise an error for an
-		// item this would have ruled out anyway.
-		if !Matches(g, g.Card(item.Source), validSpec, a.Controller, a.Source) {
-			continue
-		}
-		matched, err := g.stackItemMatches(item, targetType, a)
+		ok, err := g.canTargetStackItem(a, item)
 		if err != nil {
 			return nil, err
 		}
-		if !matched {
-			continue
+		if ok {
+			candidates = append(candidates, stackTargetEntity(item))
 		}
-		if hasTVT {
-			matched, err := g.stackItemTargetsMatch(item, tvt, a)
-			if err != nil {
-				return nil, err
-			}
-			if !matched {
-				continue
-			}
-		}
-		if !item.spell {
-			return nil, fmt.Errorf("TargetType$ %q: targeting an ability on the stack not resolvable yet", targetType)
-		}
-		candidates = append(candidates, CardEntity(item.Source))
 	}
 	return candidates, nil
 }
 
-// stackItemMatches is SpellAbility.isValid (SpellAbility.java:2206-2270)
+// stackTargetEntity is how item is named as a target: a spell as its card, an
+// ability as its stack item (ADR-0041).
+func stackTargetEntity(item *Ability) EntityID {
+	if item.spell {
+		return CardEntity(item.Source)
+	}
+	return StackItemEntity(item.ID)
+}
+
+// canTargetStackItem is SpellAbility.canTargetSpellAbility
+// (SpellAbility.java:2046-2110) for the targeting ability a and the stack
+// item it would target, asked both as targets are chosen and at resolution
+// (MagicStack.java:753-755): item is not a itself, matches one of
+// TargetType$'s comma-separated alternatives (stackItemMatches), one of its
+// targets matches TargetValidTargeting$ when a names one, and its host card
+// matches ValidTgts$ (stackItemHostMatches).
+func (g *Game) canTargetStackItem(a, item *Ability) (bool, error) {
+	if item.Source == NoCard || int(item.Source) >= len(g.cards) {
+		return false, nil
+	}
+	if a.ID != NoStackItem && item.ID == a.ID {
+		return false, nil
+	}
+	// ValidTgts$ first: a property below can raise an error for an item this
+	// would have ruled out anyway. An ability naming none was handed its
+	// targets some other way (a test, a Ward stand-in) and has no host
+	// restriction to check.
+	if validTgts, ok := a.Params.Param("ValidTgts"); ok {
+		matched, err := g.stackItemHostMatches(a, item, validTgts)
+		if err != nil || !matched {
+			return false, err
+		}
+	}
+	if targetType, ok := a.Params.Param("TargetType"); ok {
+		matched, err := g.stackItemMatches(item, targetType, a)
+		if err != nil || !matched {
+			return false, err
+		}
+	}
+	if tvt, ok := a.Params.Param("TargetValidTargeting"); ok {
+		matched, err := g.stackItemTargetsMatch(item, tvt, a)
+		if err != nil || !matched {
+			return false, err
+		}
+	}
+	return true, nil
+}
+
+// stackItemHostMatches is canTargetSpellAbility's host check
+// (SpellAbility.java:2098-2109): item's host card matches ValidTgts$. The host
+// of an ability an Effect card carries (a delayed or effect trigger) is that
+// effect's source card in Java, which this port does not record: a ValidTgts$
+// with a bare Card alternative is still answered (any source card matches it),
+// any other is an error rather than a guess about the source.
+func (g *Game) stackItemHostMatches(a, item *Ability, validTgts string) (bool, error) {
+	spec := valid.Parse(validTgts)
+	host := g.Card(item.Source)
+	if host.IsEffect && !item.spell {
+		for _, alt := range spec.Alternatives {
+			if alt.Base.Name == "Card" && !alt.Base.Negated && len(alt.Properties) == 0 {
+				return true, nil
+			}
+		}
+		return false, fmt.Errorf("ValidTgts$ %q: an ability of an effect card, whose effect source is not recorded, not resolvable yet", validTgts)
+	}
+	return Matches(g, host, spec, a.Controller, a.Source), nil
+}
+
+// stackItemMatches is SpellAbility.isValid (SpellAbility.java:2193-2261)
 // over restriction's comma-separated alternatives, for item judged by
-// ChangeTargets ability a: the kind before the first "." (Spell,
-// SpellAbility, Ability/Activated/Triggered, Instant, Sorcery), then every
-// "+"-joined property after it (stackItemHasProperty). A kind or property
-// this port does not read is an error, not a false (GO-7).
+// ability a: the kind before the first "." (Spell, SpellAbility, Ability,
+// Activated, Triggered, Instant, Sorcery), then every "+"-joined property
+// after it (stackItemHasProperty). Activated and Triggered are the item's
+// causeKind (game.go): a trigger pushTriggeredAbilities put on the stack, or
+// any other non-spell item. A kind or property this port does not read is an
+// error, not a false (GO-7).
 func (g *Game) stackItemMatches(item *Ability, restriction string, a *Ability) (bool, error) {
 	for _, alt := range strings.Split(restriction, ",") {
 		head, rest, hasRest := strings.Cut(alt, ".")
@@ -796,8 +833,12 @@ func (g *Game) stackItemMatches(item *Ability, restriction string, a *Ability) (
 			kind = item.spell
 		case "SpellAbility":
 			kind = true
-		case "Ability", "Activated", "Triggered":
+		case "Ability":
 			kind = !item.spell
+		case "Activated":
+			kind = item.causeKind() == causeActivated
+		case "Triggered":
+			kind = item.causeKind() == causeTriggered
 		case "Instant":
 			kind = g.Card(item.Source).Type().Has(cardtype.Instant)
 		case "Sorcery":
@@ -877,7 +918,33 @@ func (g *Game) stackItemHasProperty(item *Ability, prop string, a *Ability) (boo
 		targets, err := stackItemTargets(item)
 		return containsEntity(targets, want), err
 	}
+	if hostCardProperty(prop) {
+		// SpellAbilityProperty.java:319-320: a property the ability itself
+		// does not have is asked of its host card (Consign to Memory's
+		// Spell.Colorless, Tale's End's Spell.Legendary, Nimble
+		// Obstructionist's Activated.YouDontCtrl).
+		return Matches(g, g.Card(item.Source), valid.Parse("Card."+prop), a.Controller, a.Source), nil
+	}
 	return false, fmt.Errorf("TargetType$ property %q not resolvable yet", prop)
+}
+
+// hostCardProperty reports whether prop is a card property propertyMatches
+// (valid.go) answers for the host-card fallback of stackItemHasProperty: a
+// core type or supertype word or a color word, each with its non- form,
+// MultiColor or YouDontCtrl. Any other is left to the caller's error, since a
+// property Matches has no case for reads false for every card, silently.
+func hostCardProperty(prop string) bool {
+	word := strings.TrimPrefix(prop, "non")
+	if _, ok := cardtype.CoreTypeFromName(word); ok {
+		return true
+	}
+	if _, ok := cardtype.SupertypeFromName(word); ok {
+		return true
+	}
+	if _, ok := colorFromName(word); ok || word == "Colorless" {
+		return true
+	}
+	return prop == "MultiColor" || prop == "YouDontCtrl"
 }
 
 // stackItemTargetsMatch is canTargetSpellAbility's TargetValidTargeting$
@@ -967,10 +1034,64 @@ func (g *Game) targetsStillLegal(a *Ability) bool {
 	if !g.dropIllegalTargets(a) {
 		return false
 	}
+	g.recordStackTargets(a)
 	if a.API != APIAttach || a.Target == NoCard {
 		return true
 	}
 	return g.auraTargetStillLegal(a)
+}
+
+// recordStackTargets keeps, on a and each chosen Charm mode, what every
+// ability on the stack it still targets is (Ability.stackTargets), before a
+// resolves and possibly removes one. Modes were copied by dropIllegalTargets,
+// so writing them reaches a alone.
+func (g *Game) recordStackTargets(a *Ability) {
+	a.stackTargets = g.stackTargetRefs(a)
+	for i := range a.Modes {
+		a.Modes[i].stackTargets = g.stackTargetRefs(&a.Modes[i])
+	}
+}
+
+// stackTargetRefs is the stackTargetRef of every stack-item target of a and
+// its SubAbility$ links still on the stack; nil, allocating nothing, when
+// there is none -- it runs before every resolution.
+func (g *Game) stackTargetRefs(a *Ability) []stackTargetRef {
+	out := g.appendStackTargetRefs(nil, a.Targets)
+	for _, ct := range a.chainTargets {
+		out = g.appendStackTargetRefs(out, ct.Targets)
+	}
+	return out
+}
+
+// appendStackTargetRefs appends to out the stackTargetRef of each stack-item
+// entity of targets still on the stack.
+func (g *Game) appendStackTargetRefs(out []stackTargetRef, targets []EntityID) []stackTargetRef {
+	for _, e := range targets {
+		if ref, ok := g.stackTargetOf(e, nil); ok {
+			out = append(out, ref)
+		}
+	}
+	return out
+}
+
+// stackTargetOf is the ability on the stack e names: read off the stack while
+// it is there, else off recorded, the targeting ability's record of it
+// (Ability.stackTargets). false when e is not a stack item or neither knows
+// it.
+func (g *Game) stackTargetOf(e EntityID, recorded []stackTargetRef) (stackTargetRef, bool) {
+	id, ok := e.AsStackItem()
+	if !ok {
+		return stackTargetRef{}, false
+	}
+	if item, ok := g.stackItem(id); ok {
+		return stackTargetRef{item: id, controller: item.Controller, host: item.Source}, true
+	}
+	for _, r := range recorded {
+		if r.item == id {
+			return r, true
+		}
+	}
+	return stackTargetRef{}, false
 }
 
 // dropIllegalTargets removes every target of a, and of each chosen Charm
@@ -1085,7 +1206,9 @@ func (g *Game) withoutIllegal(owner *Ability, targets []EntityID, chosen, kept *
 //     -- shares its controller with every other chosen card target;
 //   - a player target has not left the game (Player.canBeTargetedBy,
 //     Player.java:1033-1043) and still matches owner's ValidTgts$;
-//   - anything else (an ability on the stack, ChangeTargets) is kept.
+//   - an ability on the stack (ADR-0041) is still there and owner can still
+//     target it (MagicStack.java:753-755: canTarget reaches
+//     canTargetSpellAbility through SpellAbility.canBeTargetedBy).
 //
 // Hexproof, shroud and protection (StaticAbilityCantTarget,
 // cardCantBeTargetedBy/playerCantBeTargetedBy) are checked identically to
@@ -1113,6 +1236,18 @@ func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 		}
 		matched, _ := matchesPlayerSpec(g, pid, owner.Controller, owner.Source, spec)
 		return matched
+	}
+	if sid, ok := e.AsStackItem(); ok {
+		item, onStack := g.stackItem(sid)
+		if !onStack || owner.Params == nil {
+			return false
+		}
+		legal, err := g.canTargetStackItem(owner, item)
+		if err != nil {
+			g.recordPendingError(err)
+			return false
+		}
+		return legal
 	}
 	id, ok := e.AsCard()
 	if !ok {
@@ -1168,6 +1303,22 @@ func (g *Game) targetStillLegal(owner *Ability, e EntityID) bool {
 		}
 		if was, recorded := owner.forEachControllers[id]; recorded && was != c.Controller() {
 			return false
+		}
+		if _, stackTargeting := owner.Params.Param("TargetType"); stackTargeting && c.Zone == Stack {
+			// A spell is a SpellAbility target in Java, re-checked by
+			// canTargetSpellAbility like an ability (MagicStack.java:753-755):
+			// TargetValidTargeting$ reads its targets as they are now.
+			if sid, ok := g.spellItemOf(id); ok {
+				item, _ := g.stackItem(sid)
+				legal, err := g.canTargetStackItem(owner, item)
+				if err != nil {
+					g.recordPendingError(err)
+					return false
+				}
+				if !legal {
+					return false
+				}
+			}
 		}
 	}
 	if !hasSpec {

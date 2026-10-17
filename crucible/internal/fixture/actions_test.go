@@ -528,6 +528,28 @@ func TestRunActionsQueueTargetsNoneQueuesAnEmptyChoice(t *testing.T) {
 	}
 }
 
+// "stack:N" names the Nth stack item as a target (ADR-0041); N must be a
+// positive number.
+func TestRunActionsQueueTargetsStackItem(t *testing.T) {
+	t.Parallel()
+
+	l := load(t, testDB(t), "humanlife=20\n")
+	c := engine.NewScriptedController()
+	if err := runActions(t, l, c, "queue targets stack:3,human\n"); err != nil {
+		t.Fatalf("RunActions: %v", err)
+	}
+	got := c.ChooseTargets(l.Game, l.Game.Players()[0], nil, 0, 2)
+	want := []engine.EntityID{engine.StackItemEntity(3), engine.PlayerEntity(l.Game.Players()[0])}
+	if len(got) != 2 || got[0] != want[0] || got[1] != want[1] {
+		t.Errorf("targets %v, want %v", got, want)
+	}
+	for _, bad := range []string{"stack:0", "stack:x"} {
+		if err := runActions(t, l, c, "queue targets "+bad+"\n"); err == nil {
+			t.Errorf("%s did not error", bad)
+		}
+	}
+}
+
 func TestRunActionsQueueDamageBadIDErrors(t *testing.T) {
 	t.Parallel()
 

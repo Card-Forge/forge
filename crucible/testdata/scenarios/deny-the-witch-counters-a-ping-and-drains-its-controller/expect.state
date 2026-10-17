@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=18
+humanbattlefield=Prodigal Pyromancer|Id:1|Tapped
+ailife=20
+aibattlefield=Plains|Id:2|Tapped;Island|Id:4|Tapped;Swamp|Id:5|Tapped;Forest|Id:6|Tapped;Grizzly Bears|Id:7;Grizzly Bears|Id:8
+aigraveyard=Deny the Witch

@@ -931,11 +931,21 @@ func resolveAttackTarget(l *Loaded, value string) (engine.EntityID, error) {
 
 // resolveTargetEntities is resolveAttackTarget's own comma-separated-list
 // sibling: each entry is a card's CardByFixtureID or a seated player's name,
-// resolveAttackTarget's own either/or reused per entry.
+// resolveAttackTarget's own either/or reused per entry, or "stack:N", the
+// activated or triggered ability that was the game's Nth push onto the stack
+// (StackItemID N, assigned in push order from 1; ADR-0041).
 func resolveTargetEntities(l *Loaded, value string) ([]engine.EntityID, error) {
 	parts := strings.Split(value, ",")
 	entities := make([]engine.EntityID, len(parts))
 	for i, p := range parts {
+		if raw, ok := strings.CutPrefix(strings.TrimSpace(p), "stack:"); ok {
+			n, err := strconv.ParseUint(raw, 10, 32)
+			if err != nil || n == 0 {
+				return nil, fmt.Errorf("stack item %q: want stack:N with N >= 1", p)
+			}
+			entities[i] = engine.StackItemEntity(engine.StackItemID(n))
+			continue
+		}
 		e, err := resolveAttackTarget(l, strings.TrimSpace(p))
 		if err != nil {
 			return nil, err

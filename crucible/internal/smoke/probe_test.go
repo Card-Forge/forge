@@ -187,3 +187,23 @@ func TestProbeTailorsTargetsInEveryZone(t *testing.T) {
 		})
 	}
 }
+
+// TestProbeTailorsAnAbilityOnTheStack proves a counter of an activated or
+// triggered ability is judged: the tailored board puts an opponent's activated
+// ability on the stack (Stifle, Bind) or the probe player's own for a YouCtrl
+// form (Strionic Resonator copies "triggered ability you control" and, finding
+// only an activated one, is still cast and judged).
+func TestProbeTailorsAnAbilityOnTheStack(t *testing.T) {
+	t.Parallel()
+
+	p := smoke.NewProber(corpusDB(t))
+	for _, card := range []string{"Stifle", "Bind", "Strionic Resonator"} {
+		t.Run(card, func(t *testing.T) {
+			t.Parallel()
+
+			if got := p.Probe(card); got.Outcome != smoke.Plays {
+				t.Errorf("Probe(%q) = %v (%s: %s), want plays", card, got.Outcome, got.Stage, got.Detail)
+			}
+		})
+	}
+}

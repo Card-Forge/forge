@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanbattlefield=Prodigal Pyromancer|Id:1
+aibattlefield=Forest|Id:2;Forest|Id:4
+aihand=Bind|Id:3
+ailibrary=Island|Id:5

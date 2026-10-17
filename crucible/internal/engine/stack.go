@@ -57,7 +57,8 @@ func (g *Game) noteCrime(a Ability) {
 // isCrime is MagicStack.commitCrimeCheck (MagicStack.java:1034-1054) for a,
 // as it stands on the stack: a target of the whole ability is an opponent of
 // its controller, a card an opponent controls on the battlefield or the stack,
-// or one an opponent owns in a graveyard.
+// one an opponent owns in a graveyard, or an ability on the stack an opponent
+// controls.
 func (g *Game) isCrime(a Ability) bool {
 	if a.Controller == NoPlayer {
 		return false
@@ -70,6 +71,14 @@ func (g *Game) isCrime(a Ability) bool {
 	for _, e := range targets {
 		if pid, ok := e.AsPlayer(); ok {
 			if pid != a.Controller {
+				return true
+			}
+			continue
+		}
+		if ref, ok := g.stackTargetOf(e, a.stackTargets); ok {
+			// A targeted ability an opponent activated (MagicStack.java:
+			// 1041-1044, ADR-0041).
+			if ref.controller != a.Controller {
 				return true
 			}
 			continue

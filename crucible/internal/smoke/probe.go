@@ -249,7 +249,7 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 		fill()
 	}
 	if v.tailor {
-		p.stackTailored(g, pid, def, ctl)
+		p.stackTailored(g, pid, opp, def, ctl)
 	}
 	if v.combat && !p.startCombat(g, ctl, pid) {
 		res.Outcome, res.Detail = Inconclusive, "no combat could be set up"

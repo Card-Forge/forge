@@ -20,6 +20,11 @@ type targetSpec struct {
 	// spell is TargetType$ Spell: the target is a spell on the stack, so the
 	// card is cast rather than placed.
 	spell bool
+	// ability is a TargetType$ naming an activated or triggered ability
+	// (Activated, Triggered, Ability, SpellAbility; ADR-0041): an ability is
+	// put on the stack for it (stackTailored). mine is its YouCtrl form, so the
+	// probe player activates it.
+	ability, mine bool
 }
 
 // tailorKey keys the candidate cache: the spec and zone, and whether the
@@ -53,13 +58,14 @@ func targetSpecs(def *compile.Card) []targetSpec {
 			zone := targetZone(a)
 			tt, _ := a.Param("TargetType")
 			spell := strings.HasPrefix(tt, "Spell")
+			ability, mine := abilityTargetType(tt)
 			for _, alt := range strings.Split(v, ",") {
 				alt = strings.TrimSpace(alt)
 				switch {
 				case alt == "", alt == "Any", alt == "You", strings.HasPrefix(alt, "Player"), strings.HasPrefix(alt, "Opponent"):
 					continue
 				}
-				ts := targetSpec{alt: alt, zone: zone, spell: spell}
+				ts := targetSpec{alt: alt, zone: zone, spell: spell, ability: ability, mine: mine}
 				if !seen[ts] {
 					seen[ts] = true
 					out = append(out, ts)
@@ -162,10 +168,38 @@ func (p *Prober) addWornAura(g *engine.Game, pid, opp engine.PlayerID, def *comp
 	}
 }
 
+// abilityTargetType reports whether a TargetType$ value names an activated or
+// triggered ability among its alternatives, and whether every such
+// alternative is the YouCtrl form.
+func abilityTargetType(tt string) (ability, mine bool) {
+	mine = true
+	for _, alt := range strings.Split(tt, ",") {
+		head, props, _ := strings.Cut(strings.TrimSpace(alt), ".")
+		switch head {
+		case "Activated", "Triggered", "Ability", "SpellAbility":
+			ability = true
+			mine = mine && strings.Contains(props, "YouCtrl")
+		}
+	}
+	return ability, ability && mine
+}
+
+// abilitySource is the artifact whose activated ability ({4}, {T}: draw a
+// card) stackTailored puts on the stack for an ability-targeting card.
+const abilitySource = "Jayemdae Tome"
+
 // stackTailored casts, for each TargetType$ Spell target spec of def, a card
 // the spec accepts, leaving it on the stack. The probe player casts it: a
-// permanent spell can only be cast at sorcery speed.
-func (p *Prober) stackTailored(g *engine.Game, pid engine.PlayerID, def *compile.Card, ctl engine.PlayerController) {
+// permanent spell can only be cast at sorcery speed. A spec naming an
+// activated or triggered ability gets an activated ability on the stack
+// instead, the opponent's (or the probe player's, for a YouCtrl form).
+func (p *Prober) stackTailored(g *engine.Game, pid, opp engine.PlayerID, def *compile.Card, ctl engine.PlayerController) {
+	for _, ts := range targetSpecs(def) {
+		if ts.ability {
+			p.stackAbility(g, pid, opp, ts.mine, ctl)
+			return
+		}
+	}
 	for _, ts := range targetSpecs(def) {
 		if !ts.spell {
 			continue
@@ -178,6 +212,22 @@ func (p *Prober) stackTailored(g *engine.Game, pid engine.PlayerID, def *compile
 		g.CastSpell(pid, g.NewCard(d, pid, engine.Hand), ctl)
 		return
 	}
+}
+
+// stackAbility puts abilitySource on the activator's battlefield and
+// activates it, leaving its ability on the stack.
+func (p *Prober) stackAbility(g *engine.Game, pid, opp engine.PlayerID, mine bool, ctl engine.PlayerController) {
+	d, ok := p.db.Card(abilitySource)
+	if !ok {
+		return
+	}
+	who := opp
+	if mine {
+		who = pid
+	}
+	src := g.NewCard(d, who, engine.Battlefield)
+	g.Player(who).ManaPool.AddColorless(4)
+	g.ActivateAbility(who, src, 0, ctl)
 }
 
 // candidate is the corpus card with the fewest abilities that ts accepts for

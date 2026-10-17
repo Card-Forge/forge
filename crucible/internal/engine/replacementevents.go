@@ -40,10 +40,13 @@ func replacementIsCantHappen(r *compile.Ability) bool {
 }
 
 // counterCantHappen is ReplacementHandler.cantHappenCheck over Event$ Counter
-// for spell, called by CounterEffect.removeFromStack before the spell leaves
-// the stack: a Layer$ CantHappen line whose ValidCard$ matches the spell and
-// whose ValidSA$ matches it as a spell ("Spell", or "Spell.<properties>" read
-// off the spell's card) stops the counter.
+// for the stack item about to be countered, called by
+// CounterEffect.removeFromStack before it leaves the stack: a Layer$
+// CantHappen line whose ValidCard$ matches spell -- the spell's card, or an
+// ability's host (Affected is tgtSA.getHostCard(), CounterEffect.java:250-252)
+// -- and whose ValidSA$ matches the item as kind (causeSpell, causeActivated
+// or causeTriggered; stackValidSA) stops the counter: Spider-Punk's "spells
+// and abilities can't be countered".
 //
 // ActiveZones$ names the zones the host must be in; with none, the line
 // applies from anywhere (TriggerReplacementBase.zonesCheck), which is how a
@@ -52,7 +55,7 @@ func replacementIsCantHappen(r *compile.Ability) bool {
 // A line this cannot resolve (Guile's ReplaceWith$, a ValidCause$) is an
 // error when no resolvable line stopped the counter: the spell could be
 // countered wrongly otherwise.
-func (g *Game) counterCantHappen(spell CardID) (bool, error) {
+func (g *Game) counterCantHappen(spell CardID, kind string) (bool, error) {
 	spellCard := g.Card(spell)
 	hosts := []CardID{spell}
 	for _, pid := range g.Players() {
@@ -89,7 +92,7 @@ func (g *Game) counterCantHappen(spell CardID) (bool, error) {
 					continue
 				}
 				if v, ok := r.Param("ValidSA"); ok {
-					matched, recognized := spellValidSA(g, v, spellCard, h)
+					matched, recognized := stackValidSA(g, v, spellCard, h, kind)
 					if !recognized {
 						unresolved = h.Def.Name
 						continue
@@ -127,8 +130,11 @@ func counterReplaceResolvable(r *compile.Ability) bool {
 // as the replaced card. ValidCause$ is "SpellAbility", optionally with
 // ".YouCtrl" or ".OppCtrl" read against the host's controller; any other form
 // records a pending error and skips the line (GO-7). Reports whether a line
-// replaced the counter.
-func (g *Game) counterReplaced(controller PlayerController, cause *Ability, spell CardID) bool {
+// replaced the counter. kind is the countered item's (counterCantHappen): a
+// line matching an ability records a pending error and replaces nothing, as
+// the replacement's ability acting on an ability's host is not ported (no
+// corpus ReplaceWith$ line's ValidSA$ names an ability).
+func (g *Game) counterReplaced(controller PlayerController, cause *Ability, spell CardID, kind string) bool {
 	spellCard := g.Card(spell)
 	res := g.runReplacements(controller, spellCard.Controller(), func() []replacementCandidate {
 		var out []replacementCandidate
@@ -145,7 +151,7 @@ func (g *Game) counterReplaced(controller PlayerController, cause *Ability, spel
 				return
 			}
 			if v, ok := r.Param("ValidSA"); ok {
-				matched, recognized := spellValidSA(g, v, spellCard, h)
+				matched, recognized := stackValidSA(g, v, spellCard, h, kind)
 				if !recognized {
 					g.recordPendingError(fmt.Errorf("engine: %q: Event$ Counter: ValidSA$ %q is not resolvable yet", h.Def.Name, v))
 					return
@@ -153,6 +159,10 @@ func (g *Game) counterReplaced(controller PlayerController, cause *Ability, spel
 				if !matched {
 					return
 				}
+			}
+			if kind != causeSpell {
+				g.recordPendingError(fmt.Errorf("engine: %q: Event$ Counter: a ReplaceWith$ over a countered ability not resolvable yet", h.Def.Name))
+				return
 			}
 			if v, ok := r.Param("ValidCause"); ok {
 				base, rel, _ := strings.Cut(v, ".")
@@ -186,17 +196,20 @@ func (g *Game) counterReplaced(controller PlayerController, cause *Ability, spel
 	return res == replacementReplaced
 }
 
-// spellValidSA is ValidSA$ matched against the spell on the stack: each
-// comma-separated alternative is "Spell" with optional "+"-joined properties
-// read off the spell's card as a Card valid string, "SpellAbility" (any), or
-// an ability kind ("Activated", "Triggered") that a spell never is.
-func spellValidSA(g *Game, spec string, spell, host *Card) (matched, recognized bool) {
+// stackValidSA is ValidSA$ matched against the stack item about to be
+// countered, of kind (causeSpell, causeActivated, causeTriggered), whose card
+// is spell (an ability's host): each comma-separated alternative is "Spell"
+// with optional "+"-joined properties read off the spell's card as a Card
+// valid string, "SpellAbility" (any), or a bare ability kind ("Activated",
+// "Triggered") matching an ability of that kind. Properties on an ability
+// kind are not read (recognized false).
+func stackValidSA(g *Game, spec string, spell, host *Card, kind string) (matched, recognized bool) {
 	recognized = true
 	for _, alt := range strings.Split(spec, ",") {
 		base, props, _ := strings.Cut(alt, ".")
 		switch base {
 		case "Spell":
-			if props == "" || Matches(g, spell, valid.Parse("Card."+props), host.Controller(), host.ID) {
+			if kind == causeSpell && (props == "" || Matches(g, spell, valid.Parse("Card."+props), host.Controller(), host.ID)) {
 				matched = true
 			}
 		case "SpellAbility":
@@ -205,7 +218,12 @@ func spellValidSA(g *Game, spec string, spell, host *Card) (matched, recognized 
 				continue
 			}
 			matched = true
-		case "Activated", "Triggered":
+		case causeActivated, causeTriggered:
+			if props != "" {
+				recognized = false
+				continue
+			}
+			matched = matched || base == kind
 		default:
 			recognized = false
 		}

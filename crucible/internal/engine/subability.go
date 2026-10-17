@@ -89,6 +89,9 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		xManaCostPaid:    parent.xManaCostPaid,
 		hasXManaCostPaid: parent.hasXManaCostPaid,
 		paid:             parent.paid,
+		// The parent's targeted abilities on the stack as last seen (ADR-0041),
+		// for a link read after the parent countered one.
+		stackTargets: parent.stackTargets,
 		// ReplacementHandler.executeReplacement sets the replacing objects
 		// on every ability of the ReplaceWith$ chain, not the head alone.
 		replacing: parent.replacing,

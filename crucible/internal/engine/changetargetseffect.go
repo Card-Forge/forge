@@ -30,8 +30,9 @@ import (
 // the way the spell's own cast did. BecomesTargetOnce has no trigger mode in
 // this port, at cast time or here.
 //
-// The spells are the ability's own targets (ValidTgts$, TargetType$ read by
-// stackAbilityCandidates, targeting.go), Defined$ Targeted (the same list, a
+// The spells and abilities are the ability's own targets (ValidTgts$,
+// TargetType$ read by stackAbilityCandidates, targeting.go; an ability as its
+// stack item, ADR-0041), Defined$ Targeted (the same list, a
 // sub-ability sharing its parent's targets) or Defined$ TriggeredSpellAbility
 // (the spell a Mode$ SpellCast trigger recorded).
 //
@@ -170,6 +171,12 @@ func changeTargetsSpells(g *Game, a *Ability) ([]StackItemID, error) {
 	}
 	var ids []StackItemID
 	for _, t := range a.Targets {
+		if id, ok := t.AsStackItem(); ok {
+			// An activated or triggered ability (ADR-0041): Willbender, Bolt
+			// Bend, Spellskite, Reroute.
+			ids = append(ids, id)
+			continue
+		}
 		card, ok := t.AsCard()
 		if !ok {
 			continue
@@ -230,8 +237,9 @@ func partUsesTargeting(p *Ability) bool {
 
 // partCandidates is what part could target now (SpellAbility.canTarget,
 // TargetRestrictions.getAllCandidates): targetChoiceFor's scan for the
-// part's own controller and host, less the spell being changed itself (a
-// spell cannot target itself, canTargetSpellAbility's this.equals(topSA)).
+// part's own controller and host, less the spell or ability being changed
+// itself (it cannot target itself, canTargetSpellAbility's
+// this.equals(topSA)).
 func (g *Game) partCandidates(item, part *Ability) ([]EntityID, error) {
 	choice, named, ok := g.targetChoiceFor(part)
 	if choice.err != nil {
@@ -240,9 +248,10 @@ func (g *Game) partCandidates(item, part *Ability) ([]EntityID, error) {
 	if !named || !ok {
 		return nil, nil
 	}
+	self := stackTargetEntity(item)
 	var out []EntityID
 	for _, c := range choice.candidates {
-		if item.spell && c == CardEntity(item.Source) {
+		if c == self {
 			continue
 		}
 		out = append(out, c)

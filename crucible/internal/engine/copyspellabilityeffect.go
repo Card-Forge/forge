@@ -152,6 +152,13 @@ func copySpellTargets(g *Game, a *Ability) ([]Ability, error) {
 			}
 			ids = []StackItemID{a.triggered.spellAbility}
 		case "Targeted":
+			for _, t := range a.Targets {
+				if _, ok := t.AsStackItem(); ok {
+					// copySpell builds a spell copy on a new card; a copied
+					// ability keeps its host (CR 707.10), not built.
+					return nil, fmt.Errorf("engine: CopySpellAbility: copying an activated or triggered ability not resolvable yet")
+				}
+			}
 			ids = spellItemsOf(g, a.Targets)
 		default:
 			// Parent (10 lines) needs the resolving root spell, which a

@@ -36,18 +36,25 @@ type PlayerID uint8
 // NoPlayer is the absent player, on the same reasoning as [NoCard].
 const NoPlayer PlayerID = 0
 
-// EntityID is a card or a player, for the places the rules treat them
-// interchangeably: targeting, damage, and the `Defined$` vocabulary.
+// EntityID is a card, a player or an ability on the stack, for the places the
+// rules treat them interchangeably: targeting, damage, and the `Defined$`
+// vocabulary. An ability on the stack is a target of "counter target
+// activated ability" and its kin (CR 115.1d-e, ADR-0041); a spell is still
+// its card (CardEntity).
 //
-// The tag is the high bit rather than a struct with a kind, because an
+// The tag is the high bits rather than a struct with a kind, because an
 // EntityID is stored in the thousands -- in target lists, remembered lists and
 // LKI snapshots -- and a 4-byte handle that compares with `==` is the point of
 // ADR-0009.
 type EntityID uint32
 
-// entityPlayer tags an EntityID as a player. Cards keep the low range, so a
-// card's EntityID is numerically its CardID.
-const entityPlayer EntityID = 1 << 31
+// entityPlayer tags an EntityID as a player, entityStackItem as an ability on
+// the stack. Cards keep the low range, so a card's EntityID is numerically its
+// CardID.
+const (
+	entityPlayer    EntityID = 1 << 31
+	entityStackItem EntityID = 1 << 30
+)
 
 // NoEntity is the absent entity.
 const NoEntity EntityID = 0
@@ -58,12 +65,25 @@ func CardEntity(id CardID) EntityID { return EntityID(id) }
 // PlayerEntity is the entity handle for a player.
 func PlayerEntity(id PlayerID) EntityID { return entityPlayer | EntityID(id) }
 
+// StackItemEntity is the entity handle for an ability on the stack: the
+// target of Stifle and its kin (ADR-0041). It names that one stack object,
+// which stops existing once it leaves the stack.
+func StackItemEntity(id StackItemID) EntityID { return entityStackItem | EntityID(id) }
+
 // AsCard returns the card this entity is, and whether it is one.
 func (e EntityID) AsCard() (CardID, bool) {
-	if e == NoEntity || e&entityPlayer != 0 {
+	if e == NoEntity || e&(entityPlayer|entityStackItem) != 0 {
 		return NoCard, false
 	}
 	return CardID(e), true
+}
+
+// AsStackItem returns the stack item this entity is, and whether it is one.
+func (e EntityID) AsStackItem() (StackItemID, bool) {
+	if e&entityPlayer != 0 || e&entityStackItem == 0 {
+		return NoStackItem, false
+	}
+	return StackItemID(e &^ entityStackItem), true
 }
 
 // AsPlayer returns the player this entity is, and whether it is one.

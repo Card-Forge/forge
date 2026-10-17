@@ -233,6 +233,15 @@ type Ability struct {
 	// forEachControllers is each card target's controller as it was chosen under
 	// TargetsForEachPlayer$ (TargetChoices.cardControllers).
 	forEachControllers map[CardID]PlayerID
+	// stackTargets is what each ability on the stack this ability targets
+	// (StackItemEntity, ADR-0041) was as the CR 608.2b check found it still
+	// legal, just before resolution (recordStackTargets): Java's target is the
+	// SpellAbility object itself, which keeps its activating player and host
+	// after a Counter removed it, so Deny the Witch's Defined$
+	// TargetedController still names the countered ability's controller.
+	// Sub-abilities inherit it. Replaced, never written in place: a stack item
+	// copied by value (Game.Clone) shares it.
+	stackTargets []stackTargetRef
 	// wardCounters is checkWardTriggers' own answer to Forge's
 	// Defined$ TriggeredSourceSA (trigger.go, ADR-0028): the spell Ward's
 	// built Counter ability counters. Kept off Targets on purpose -- a real
@@ -293,6 +302,14 @@ type chainTarget struct {
 	Targeter PlayerID
 }
 
+// stackTargetRef is one targeted ability on the stack as it last was: its
+// stack item, controller (SpellAbility.getActivatingPlayer) and host card.
+type stackTargetRef struct {
+	item       StackItemID
+	controller PlayerID
+	host       CardID
+}
+
 // dividedShare is one target's part of a DividedAsYouChoose$ amount.
 type dividedShare struct {
 	target EntityID
@@ -329,6 +346,9 @@ type abilityRefs struct {
 	triggerRemembered []EntityID
 	triggered         triggeredObjects
 	paid              paidLists
+	// stackTargets is Ability.stackTargets: the targeted abilities on the
+	// stack as last seen, for a reader that runs after one left the stack.
+	stackTargets []stackTargetRef
 	// replaced is the card a Moved replacement's ReplaceWith$ ability is
 	// replacing the entry of (Defined$ ReplacedCard); NoCard otherwise.
 	replaced CardID
@@ -346,7 +366,8 @@ type abilityRefs struct {
 // refs is a's own abilityRefs.
 func (a *Ability) refs() abilityRefs {
 	r := abilityRefs{targets: a.Targets, parentTargets: a.parentTargets, ancestorTargeting: a.ancestorTargeting,
-		triggerRemembered: a.TriggerRemembered, triggered: a.triggered, paid: a.paid, replaced: a.replacedCard()}
+		triggerRemembered: a.TriggerRemembered, triggered: a.triggered, paid: a.paid, replaced: a.replacedCard(),
+		stackTargets: a.stackTargets}
 	if a.replacing != nil {
 		r.replacedPlayer, r.replacedDefendingPlayer = a.replacing.player, a.replacing.defendingPlayer
 		if a.replacing.amountName == "DamageAmount" {

@@ -49,27 +49,6 @@ func TestCounterSpellOrAbilityCountersASpell(t *testing.T) {
 	}
 }
 
-// With an activated or triggered ability on the stack that would be a legal
-// target, the question is one this port cannot ask: the ability fails.
-func TestCounterTargetingATriggeredAbilityFails(t *testing.T) {
-	t.Parallel()
-	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
-	// A trigger of other's on the stack, under the Stifle-like ETB.
-	trigHost := g.NewCard(creatureDefPT(t, "1", "1"), other, engine.Battlefield)
-	tdef := etbChainDef(t, "Trigger", "DB$ GainLife | Defined$ You | LifeAmount$ 1")
-	g.PushAbility(engine.Ability{API: engine.APIGainLife, Source: trigHost, Controller: other, Params: tdef.Faces[0].Triggers[0].Subs[0].Ability})
-	g.Player(p).ManaPool.Add(mana.Blue, 1)
-	stifle := g.NewCard(corpusCard(t, "Stifle"), p, engine.Hand)
-	c := engine.NewScriptedController()
-	if !g.CastSpell(p, stifle, c) {
-		t.Fatal("could not cast Stifle with a trigger on the stack")
-	}
-	err := g.ResolveStack(engine.NewRegistry(), c)
-	if err == nil || !strings.Contains(err.Error(), "targeting an ability on the stack not resolvable yet") {
-		t.Fatalf("ResolveStack = %v, want the ability-target refusal", err)
-	}
-}
-
 // With nothing on the stack, Stifle has no legal target and cannot be cast
 // (CR 601.2c), the answer Java's candidate scan gives.
 func TestStifleWithAnEmptyStackCannotBeCast(t *testing.T) {

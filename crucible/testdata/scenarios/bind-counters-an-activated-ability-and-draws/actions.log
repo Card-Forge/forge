@@ -1,0 +1,14 @@
+# CR 115.1d, ADR-0041: Bind counters target activated ability, then its
+# SubAbility$ draws a card. human taps Prodigal Pyromancer to ping ai (stack
+# item 1); ai casts Bind targeting stack:1. The ping is countered (no damage),
+# and ai draws the Island.
+startturn human
+advance 3
+tapformana ai 2 G
+tapformana ai 4 G
+queue paygeneric G
+queue targets ai
+queue targets stack:1
+queue action human activate 1 0
+queue action ai cast 3
+passpriority

@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanbattlefield=Prodigal Pyromancer|Id:1
+aibattlefield=Plains|Id:2;Island|Id:4;Swamp|Id:5;Forest|Id:6;Grizzly Bears|Id:7;Grizzly Bears|Id:8
+aihand=Deny the Witch|Id:3

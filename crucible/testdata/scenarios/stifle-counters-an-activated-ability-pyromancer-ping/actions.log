@@ -1,0 +1,14 @@
+# CR 115.1d, ADR-0041: an activated ability on the stack is a target.
+# human taps Prodigal Pyromancer to ping ai (stack item 1); ai responds with
+# Stifle (TargetType$ Activated,Triggered) targeting that ability as stack:1.
+# Stifle counters it (CounterEffect.java:270-272): the ability leaves the
+# stack, no card moves, ai takes no damage, and the Pyromancer stays tapped
+# for its cost.
+startturn human
+advance 3
+tapformana ai 2 U
+queue targets ai
+queue targets stack:1
+queue action human activate 1 0
+queue action ai cast 3
+passpriority

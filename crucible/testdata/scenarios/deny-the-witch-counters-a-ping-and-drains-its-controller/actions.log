@@ -1,0 +1,20 @@
+# CR 115.1d, ADR-0041: Deny the Witch counters target activated ability, then
+# "its controller loses life equal to the number of creatures you control"
+# (DB$ LoseLife | Defined$ TargetedController). The countered ability has left
+# the stack by then; Java still holds the SpellAbility object and reads its
+# activating player (AbilityUtils.java:956-962), which the engine keeps as the
+# ability's last-seen record (Ability.stackTargets). human pings ai with
+# Prodigal Pyromancer (stack item 1); ai's Deny the Witch counters it, and
+# human loses 2 life for ai's two Grizzly Bears.
+startturn human
+advance 3
+tapformana ai 2 W
+tapformana ai 4 U
+tapformana ai 5 B
+tapformana ai 6 G
+queue paygeneric G
+queue targets ai
+queue targets stack:1
+queue action human activate 1 0
+queue action ai cast 3
+passpriority

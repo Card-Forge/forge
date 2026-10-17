@@ -100,10 +100,15 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 	case "TargetedController", "ThisTargetedController":
 		// ThisTargetedController (AbilityUtils.java:976-982) reads
 		// ThisTargetedCard, which definedCards answers from the same
-		// targets as Targeted.
+		// targets as Targeted. TargetedController adds the activating player
+		// of each targeted ability on the stack (AbilityUtils.java:956-962),
+		// Ayesha Tanaka's UnlessPayer$ and Deny the Witch's LoseLife, read off
+		// the ability as last seen once a Counter removed it (ADR-0041).
 		for _, e := range refs.targets {
 			if id, ok := e.AsCard(); ok {
 				candidates = append(candidates, g.Card(id).Controller())
+			} else if ref, ok := g.stackTargetOf(e, refs.stackTargets); ok && defined == "TargetedController" {
+				candidates = append(candidates, ref.controller)
 			}
 		}
 	case "ParentTargetedController":

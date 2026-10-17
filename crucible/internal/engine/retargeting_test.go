@@ -1,6 +1,7 @@
 package engine_test
 
 import (
+	"slices"
 	"strings"
 	"testing"
 
@@ -384,12 +385,12 @@ func TestChangeTargetsRetargetsEachCharmMode(t *testing.T) {
 	}
 }
 
-// TestChangeTargetsRefusesAnAbilityOnTheStack proves the deferred error: a
-// triggered ability with a single target is a legal target for TargetType$
-// SpellAbility.singleTarget, but has no EntityID, so the retargeter fails
-// when it resolves rather than silently offering the spells alone. Spell.
-// singleTarget over the same stack ignores the ability and works.
-func TestChangeTargetsRefusesAnAbilityOnTheStack(t *testing.T) {
+// TestChangeTargetsRetargetsAnAbilityOnTheStack proves a triggered ability
+// with a single target is a candidate for TargetType$
+// SpellAbility.singleTarget, offered as its stack item (ADR-0041) above the
+// Bolt, and retargeting it moves its damage. Spell.singleTarget over the same
+// stack offers the Bolt alone.
+func TestChangeTargetsRetargetsAnAbilityOnTheStack(t *testing.T) {
 	t.Parallel()
 	for _, targetType := range []string{"SpellAbility.singleTarget", "Spell.singleTarget"} {
 		g, p, other := newTwoPlayerGame(t)
@@ -403,23 +404,32 @@ func TestChangeTargetsRefusesAnAbilityOnTheStack(t *testing.T) {
 		c := engine.NewScriptedController()
 		c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
 		c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
+		// Pushes in order: the Bolt (stack item 1), the Pinger trigger (2).
+		pinger := engine.StackItemEntity(2)
 		spellOnly := targetType == "Spell.singleTarget"
 		if spellOnly {
 			c.QueueTargets([]engine.EntityID{engine.CardEntity(bolt)})
-			c.QueueTargets([]engine.EntityID{engine.PlayerEntity(p)})
+		} else {
+			c.QueueTargets([]engine.EntityID{pinger})
 		}
-		err := castW(t, g, p, bolt, c)
-		if !spellOnly {
-			if err == nil || !strings.Contains(err.Error(), "targeting an ability on the stack not resolvable yet") {
-				t.Errorf("%s: err = %v, want the ability-target error", targetType, err)
-			}
-			continue
-		}
-		if err != nil {
+		c.QueueTargets([]engine.EntityID{engine.PlayerEntity(p)})
+		r := &targetOfferRecorder{ScriptedController: c}
+		if err := castW(t, g, p, bolt, r); err != nil {
 			t.Fatalf("%s: %v", targetType, err)
 		}
-		if g.Player(p).Life != 17 || g.Player(other).Life != 19 {
-			t.Errorf("%s: life %d/%d, want 17/19", targetType, g.Player(p).Life, g.Player(other).Life)
+		want := []engine.EntityID{pinger, engine.CardEntity(bolt)}
+		if spellOnly {
+			want = want[1:]
+		}
+		if len(r.offers) < 3 || !slices.Equal(r.offers[2], want) {
+			t.Errorf("%s: retargeter offered %v, want %v", targetType, r.offers, want)
+		}
+		wantP, wantOther := 17, 19
+		if !spellOnly {
+			wantP, wantOther = 19, 17
+		}
+		if g.Player(p).Life != wantP || g.Player(other).Life != wantOther {
+			t.Errorf("%s: life %d/%d, want %d/%d", targetType, g.Player(p).Life, g.Player(other).Life, wantP, wantOther)
 		}
 	}
 }

@@ -1,0 +1,9 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Prodigal Pyromancer|Id:1|Tapped
+ailife=20
+aibattlefield=Forest|Id:2|Tapped;Forest|Id:4|Tapped
+aihand=Island|Id:5
+aigraveyard=Bind
