@@ -48,7 +48,7 @@ the package boundary, not the file).
 ```go
 type CardID uint32
 type PlayerID uint8
-type EntityID uint32   // card or player, for targeting
+type EntityID uint32   // card, player or stack item (ADR-0041), for targeting
 
 type Game struct {
     cards   []Card     // arena; CardID is the index

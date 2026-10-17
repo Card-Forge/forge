@@ -51,14 +51,14 @@ attacker's band unblocked (`setBlocked(false)`, `:791`, `Combat.blockDecided`), 
 
 ## Target questions that were dropped silently
 
-| Was                                                                                     | Now                                                                                                                                                         |
-| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| An unresolvable `TargetMin$`/`TargetMax$` left the ability off the stack                | `choice.err`: pushed, fails at resolution naming the param; a Charm mode with one is offered (`modeHasLegalTargets`) and fails                              |
-| `TargetType$` other than `Spell` (non-ChangeTargets) left it off the stack              | Asked over every stack item (`stackAbilityCandidates`): an ability that would be a legal target is an error; spells are candidates; none is no legal target |
-| Counter refused any `TargetType$` but `Spell`                                           | A targeted Counter resolves under any TargetType$: every target is a spell by then. An untargeted one must still name `Spell`                               |
-| At fizzle time a link's targeting player was re-derived, falling back to the controller | Recorded per link (`chainTarget.Targeter`, `SpellAbility.java:2158-2161`); an unrecorded one that no longer resolves is a pending error, target illegal     |
-| A per-card restriction error at fizzle time made the target illegal silently            | Pending error                                                                                                                                               |
-| A link read no ParentTarget at fizzle time                                              | `dropIllegalChainTargets` passes each link its parent's chosen targets, before removal (`MagicStack.java:773-779`)                                          |
+| Was                                                                                     | Now                                                                                                                                                                                                                                    |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| An unresolvable `TargetMin$`/`TargetMax$` left the ability off the stack                | `choice.err`: pushed, fails at resolution naming the param; a Charm mode with one is offered (`modeHasLegalTargets`) and fails                                                                                                         |
+| `TargetType$` other than `Spell` (non-ChangeTargets) left it off the stack              | Asked over every stack item (`stackAbilityCandidates`): an ability that is a legal target is a candidate since R25e ([`m6-r25e-abilities-on-stack.md`](m6-r25e-abilities-on-stack.md)); spells are candidates; none is no legal target |
+| Counter refused any `TargetType$` but `Spell`                                           | A targeted Counter resolves under any TargetType$: every target is a spell by then. An untargeted one must still name `Spell`                                                                                                          |
+| At fizzle time a link's targeting player was re-derived, falling back to the controller | Recorded per link (`chainTarget.Targeter`, `SpellAbility.java:2158-2161`); an unrecorded one that no longer resolves is a pending error, target illegal                                                                                |
+| A per-card restriction error at fizzle time made the target illegal silently            | Pending error                                                                                                                                                                                                                          |
+| A link read no ParentTarget at fizzle time                                              | `dropIllegalChainTargets` passes each link its parent's chosen targets, before removal (`MagicStack.java:773-779`)                                                                                                                     |
 
 The last row is a real bug the pending error surfaced: Legerdemain and Gauntlets of Chaos lost their link's target at
 every resolution (`TargetsWithSharedCardType$ ParentTarget` read no parent), so ExchangeControl did nothing while the
@@ -139,11 +139,11 @@ its target at fizzle time (not separately tested).
 `stackspelltargets_test.go` (a spell bounced to its owner's hand, battlefield-then-stack candidate order, a target that
 left the stack fizzles, a Defined$ spell and ChangeZoneAll's Origin$ Stack refused), `tokenattacking_test.go` (`True`
 and a Defined$ defender, outside combat, `ForEach$` and an unresolvable value refused), `targetquestions_test.go`
-(unresolvable bounds, Disallow-style Counter of a spell, Stifle over a trigger refused and over an empty stack not
-castable, both `TargetsWithDefinedController$` specs, `OpponentOf` out of context, an unrecorded targeting player at
-fizzle time), `counterplacementpaths_test.go` (wither CounterAdded, entry counters with Hardened Scales, MakeCard off
-the battlefield, PutCounterAll and MultiplyCounter with Hardened Scales), `exploittriggeringobjects_test.go` (Profaner
-of the Dead, `TriggeredCard` is the exploiter), `unblockedtriggerorder_test.go`. Scenarios
+(unresolvable bounds, Disallow-style Counter of a spell, Stifle over an empty stack not castable, both
+`TargetsWithDefinedController$` specs, `OpponentOf` out of context, an unrecorded targeting player at fizzle time),
+`counterplacementpaths_test.go` (wither CounterAdded, entry counters with Hardened Scales, MakeCard off the battlefield,
+PutCounterAll and MultiplyCounter with Hardened Scales), `exploittriggeringobjects_test.go` (Profaner of the Dead,
+`TriggeredCard` is the exploiter), `unblockedtriggerorder_test.go`. Scenarios
 `stack-target-unsubstantiate-returns-a-creature-spell-to-its-owners-hand`,
 `token-attacking-leonin-warleader-cats-enter-attacking-and-deal-damage`,
 `layer2-control-magic-creature-dead-in-owners-graveyard-is-not-the-thiefs`.

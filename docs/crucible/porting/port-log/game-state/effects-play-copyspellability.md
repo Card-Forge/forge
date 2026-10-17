@@ -46,13 +46,13 @@ Java: `CopySpellAbilityEffect.java:65-210` (`resolve`), `CardFactory.java:80-117
 card built from the original), `CardFactory.java:127-167` (`copySpellAbilityAndPossiblyHost`, costs cleared),
 `MagicStack.java:680-681` (copy ceases to exist leaving the stack, CR 707.10a).
 
-| Shape                                                           | Lines | Needs                                                   |
-| --------------------------------------------------------------- | ----- | ------------------------------------------------------- |
-| `MayChooseTarget$`                                              | 207   | New targets for the copy (CR 707.10c)                   |
-| `Defined$ TriggeredSpellAbility`                                | 164   | The `SpellCast` trigger's triggering stack item         |
-| `TargetType$ Spell` / `ValidTgts$ Instant,Sorcery` and variants | 52    | Targeting a stack item                                  |
-| `TargetType$ Activated`/`Triggered`, `ValidStack Ability...`    | 17    | Copy of an ability; same stack-item identity as above   |
-| Copies of permanent spells (`Card.Outlaw`, `Creature.YouCtrl`)  | few   | Token on resolution (CR 707.10f), Layer 1 copiable data |
+| Shape                                                           | Lines | Needs                                                                                            |
+| --------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------ |
+| `MayChooseTarget$`                                              | 207   | New targets for the copy (CR 707.10c)                                                            |
+| `Defined$ TriggeredSpellAbility`                                | 164   | The `SpellCast` trigger's triggering stack item                                                  |
+| `TargetType$ Spell` / `ValidTgts$ Instant,Sorcery` and variants | 52    | Targeting a stack item                                                                           |
+| `TargetType$ Activated`/`Triggered`, `ValidStack Ability...`    | 17    | Copy of an ability; stack-item identity exists since R25e (ADR-0041), the copy itself is unbuilt |
+| Copies of permanent spells (`Card.Outlaw`, `Creature.YouCtrl`)  | few   | Token on resolution (CR 707.10f), Layer 1 copiable data                                          |
 
 The 17 ability-copy lines are not carved out. Reason: they need the same stack-item identity the dominant shape needs,
 and building it for 17 lines would decide that design ahead of it.
