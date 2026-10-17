@@ -563,7 +563,8 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeCardArtPreference() {
         final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
         final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
-        final String [] choices = {latestOpt, originalOpt};
+        final String originalBlackOpt = Localizer.getInstance().getMessage("originalBlackBorderArtOpt");
+        final String [] choices = {latestOpt, originalOpt, originalBlackOpt};
         final FPref uiPreferredArt = FPref.UI_PREFERRED_ART;
 
         final FComboBoxPanel<String> panel = this.view.getCbpCardArtPreference();
@@ -573,13 +574,15 @@ public enum CSubmenuPreferences implements ICDoc {
             if (artPreference == null)
                 artPreference = latestOpt;  // default, just in case
             boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+            boolean blackBorder = artPreference.equalsIgnoreCase(originalBlackOpt);
             boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
-            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter, blackBorder);
             String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
             CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
             CSubmenuPreferences.this.prefs.save();
         });
-        final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
+        final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt
+                : (FModel.getMagicDb().cardArtPreferenceIsBlackBorder() ? originalBlackOpt : originalOpt);
         panel.setComboBox(comboBox, selectedItem);
 
         final JCheckBox coreExpFilter = this.view.getCbCardArtCoreExpansionsOnlyOpt();
@@ -587,8 +590,9 @@ public enum CSubmenuPreferences implements ICDoc {
         coreExpFilter.setSelected(selected);
         coreExpFilter.addItemListener(e -> {
             boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
+            boolean blackBorder = FModel.getMagicDb().cardArtPreferenceIsBlackBorder();
             boolean coreExpFilter1 = e.getStateChange() == ItemEvent.SELECTED;
-            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter1);
+            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter1, blackBorder);
             String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
             CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
             CSubmenuPreferences.this.prefs.save();

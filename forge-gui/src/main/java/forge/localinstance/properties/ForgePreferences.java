@@ -79,7 +79,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_CARD_DOWNLOAD_LANG ("en"),
         UI_PREFER_LANG_FOR_UNIQUE_CARDS ("false"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),
-        UI_SMART_CARD_ART("false"),
+        UI_SMART_CARD_ART("true"),
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
         UI_REVERSE_PROMPT_BUTTON ("false"),
