@@ -25,9 +25,10 @@ public sealed interface Question extends Serializable permits Question.Priority 
     /**
      * Which ability to play, or whether to pass. {@code abilities} lists every ability of every card the player can
      * see and act on, each flagged by whether it passes {@code canPlay}; the flag does not promise the cost can be
-     * paid. {@code undoCount} is how many actions can be undone, and {@code passLosesMana} whether passing now
+     * paid. {@code canUndo} is whether the last action can be undone, with {@code undosLeft} the undos left this phase
+     * when they are limited and 0 when they are not. {@code passLosesMana} is whether passing now
      * empties a mana pool that still holds mana, with {@code passBurns} when that deals mana burn.
      */
     record Priority(int id, PlayerView player, Map<CardView, List<SpellAbilityView>> abilities,
-                    int undoCount, boolean passLosesMana, boolean passBurns) implements Question {}
+                    boolean canUndo, int undosLeft, boolean passLosesMana, boolean passBurns) implements Question {}
 }

@@ -1,0 +1,32 @@
+[metadata]
+Name=Homarid Shaman
+[Main]
+21 Island|3ED
+2 Sand Silos|FEM
+4 Homarid Shaman|FEM
+1 Homarid|FEM|[19b]
+1 Homarid|FEM|[19c]
+1 Homarid|FEM|[19d]
+1 Homarid Warrior|FEM|[22c]
+1 Wave Elemental|MIR
+1 Tidal Wave|MIR
+1 Tidal Kraken|MMQ
+1 King Crab|ULG
+2 Wall of Water|3ED
+2 Wall of Kelp|HML
+3 Unsummon|3ED
+4 Scent of Brine|UDS
+4 Psionic Blast|2ED
+2 High Tide|FEM|[18c]
+1 Homarid Spawning Bed|FEM
+1 Dream Tides|VIS
+1 Tidal Control|ALL
+1 Flood|DRK
+2 Time Ebb|POR
+2 Tangle Kelp|DRK
+[StartInBattle_Reference]
+1 Island|3ED
+1 Sand Silos|FEM
+1 Tidal Influence|FEM
+1 Tidal Flats|FEM|[27b]
+1 Homarid Shaman|FEM

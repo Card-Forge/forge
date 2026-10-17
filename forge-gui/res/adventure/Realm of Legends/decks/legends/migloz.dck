@@ -1,85 +1,94 @@
 [metadata]
 Name=Migloz, Maze Crusher
 [Commander]
-1 Migloz, Maze Crusher|ONE
+1 Migloz, Maze Crusher|one
 [Main]
-1 Abrade|INR
-1 Adaptive Sporesinger|ONE
-1 Agate Assault|BLB
-1 Arcane Signet|DSC
-1 Armored Scrapgorger|ONE
-1 Axiom Engraver|ONE
-1 Blazing Crescendo|ONE
-1 Bloated Contaminator|ONE
-1 Cacophony Scamp|ONE
-1 Cankerbloom|ONE
-1 Carnivorous Canopy|ONE
-1 Churning Reservoir|ONE
-1 Cinder Glade|BLC
-1 Cinderslash Ravager|ONE
-1 Command Tower|DSC
-1 Contagious Vorrac|ONE
-1 Copper Longlegs|ONE
-1 Copperline Gorge|BLC
-1 Cultivate|DSC
-1 Evolution Sage|LCC
-1 Evolving Adaptive|ONE
-1 Expand the Sphere|ONE
-1 Exuberant Fuseling|ONE
-11 Forest|ONE
-1 Forgehammer Centurion|ONE
-1 Free from Flesh|ONE
-1 Furnace Skullbomb|ONE
-1 Furnace Strider|ONE
-1 Gleeful Demolition|ONE
-1 Talisman of Impulse|MRD
-1 Gruul Turf|BLC
-1 Hazardous Blast|ONE
-1 Ichorplate Golem|ONE
-1 Ichorspit Basilisk|ONE
-1 Incubation Sac|ONE
-1 Infectious Bite|ONE
-1 Invigorating Hot Spring|NEO
-1 Labyrinth of Skophos|THB
-1 Mystifying Maze|C17
-1 Koth, Fire of Resistance|ONE
-1 Kuldotha Cackler|ONE
-1 Lattice-Blade Mantis|ONE
-1 Magmatic Sprinter|ONE
-1 Mirrex|ONE
-10 Mountain|ONE
-1 Noxious Assault|ONE
-1 Oil-Gorger Troll|ONE
-1 Paladin of Predation|ONE
-1 Path of Ancestry|BLC
-1 Phyrexian Atlas|ONE
-1 Maze of Ith|DMR
-1 Rebel Salvo|ONE
-1 Rockfall Vale|INR
-1 Rootbound Crag|BLC
-1 Rustvine Cultivator|ONE
-1 Ruthless Predation|ONE
-1 Sawblade Scamp|ONE
-1 Seize the Storm|INR
-1 Shrapnel Slinger|ONE
-1 Skarrg, the Rage Pits|GPT
-1 Smell Fear|MH2
-1 Sol Ring|DSC
-1 Tablet of Compleation|ONE
-1 Temple of Abandon|BLC
-1 The Autonomous Furnace|ONE
-1 The Filigree Sylex|ONE
-1 The Hunter Maze|ONE
-1 The Monumental Facade|ONE
-1 The Mycosynth Gardens|ONE
-1 The Seedcore|ONE
-1 Thirsting Roots|ONE
-1 Titanic Growth|ONE
-1 Unnatural Restoration|ONE
-1 Urabrask's Anointer|ONE
-1 Urabrask's Forge|ONE
-1 Venomous Brutalizer|ONE
-1 Vindictive Flamestoker|ONE
-1 Viral Spawning|ONE
-1 Volt Charge|ONE
-1 Zopandrel, Hunger Dominus|ONE
+1 Abrade|soc
+1 All Will Be One|one
+1 Arcane Signet|soc
+1 Armored Scrapgorger|one
+1 Assault Suit|cmm
+1 Atraxa's Skitterfang|one
+1 Axiom Engraver|one
+1 Beast Within|soc
+1 Blasphemous Act|soc
+1 Bloated Contaminator|one
+1 Brass's Tunnel-Grinder|lci
+1 Cacophony Scamp|one
+1 Cankerbloom|one
+1 Chaos Warp|soc
+1 Churning Reservoir|one
+1 Cinder Glade|tmc
+1 Cinderslash Ravager|one
+1 Cityscape Leveler|bro
+1 Command Tower|soc
+1 Copper Longlegs|one
+1 Copperline Gorge|blc
+1 Cultivate|soc
+1 Disrupt Decorum|mkc
+1 Evolution Sage|ecc
+1 Evolved Spinoderm|one
+1 Evolving Adaptive|one
+1 Evolving Wilds|tmc
+1 Exotic Orchard|soc
+1 Exuberant Fuseling|one
+6 Forest|one
+1 The Hunter Maze|one
+1 Forgehammer Centurion|one
+1 Free from Flesh|one
+1 Furnace Skullbomb|one
+1 Furnace Strider|one
+1 Game Trail|mkc
+1 Garruk's Uprising|ecc
+1 Goblin Anarchomancer|mh2
+1 Goblin Bomb|wth
+1 Gruul Turf|ecc
+1 Haphazard Bombardment|dom
+1 Ichorplate Golem|one
+1 Incubation Sac|one
+1 Jinxed Choker|mrd
+1 Karn's Bastion|eoc
+1 Karplusan Forest|eoc
+1 Kessig Wolf Run|tdc
+1 Kuldotha Cackler|one
+1 Lattice-Blade Mantis|one
+1 Llanowar Elves|fdn
+1 Magmatic Sprinter|one
+1 Maze Skullbomb|one
+1 Mazemind Tome|fdn
+1 Maze of Ith|dmr
+1 Maze Rusher|dgm
+1 Maze Behemoth|dgm
+1 Ral and the Implicit Maze|mh3
+1 Maze's Mantle|one
+6 Mountain|one
+1 Nesting Grounds|ecc
+1 Path of Ancestry|soc
+1 Predation Steward|one
+1 Rampant Growth|10e
+1 Rockfall Vale|tdc
+1 Rootbound Crag|xln
+1 Rugged Highlands|tdm
+1 Rustvine Cultivator|one
+1 Sakura-Tribe Elder|soc
+1 Sawblade Scamp|one
+1 Sheltered Thicket|ecc
+1 Smell Fear|mh2
+1 Sol Ring|soc
+1 Talisman of Impulse|tdc
+1 Temple of Abandon|tdc
+1 Terramorphic Expanse|sos
+1 The Monumental Facade|one
+1 The Ozolith|iko
+1 Thirsting Roots|one
+1 Thornspire Verge|dsk
+1 Unnatural Restoration|one
+1 Urabrask's Anointer|one
+1 Urabrask's Forge|one
+1 Urza's Factory|j22
+1 Urza's Mine|m3c
+1 Urza's Power Plant|m3c
+1 Urza's Tower|m3c
+1 Vindictive Flamestoker|one
+1 Volt Charge|one
+1 Wooded Ridgeline|dmu

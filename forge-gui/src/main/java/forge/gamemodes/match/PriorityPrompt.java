@@ -43,8 +43,8 @@ public final class PriorityPrompt {
             gui.updateButtons(player, localizer.getMessage("lblAccept"), localizer.getMessage("lblDecline"), true, true, true);
         } else {
             gui.showPromptMessage(player, turnMessage(gui.getGameView(), player, gui.getDayTime(), controller().macros()));
-            final String cancel = question.undoCount() > 0
-                    ? localizer.getMessage("lblUndo") + " (" + question.undoCount() + ")"
+            final String cancel = question.canUndo()
+                    ? localizer.getMessage("lblUndo") + (question.undosLeft() > 0 ? " (" + question.undosLeft() + ")" : "")
                     : localizer.getMessage("lblEndTurn");
             gui.updateButtons(player, localizer.getMessage("lblOK"), cancel, true, true, true);
         }
@@ -153,7 +153,7 @@ public final class PriorityPrompt {
             suggestion = null;
             controller.sendYieldUpdate(new YieldUpdate.DeclineSuggestion(question.player(), declined));
             show();
-        } else if (question.undoCount() > 0) {
+        } else if (question.canUndo()) {
             controller.answer(new Answer.Undo(question.id()));
         } else {
             // Pass now and leave the yield to cover the rest of the turn

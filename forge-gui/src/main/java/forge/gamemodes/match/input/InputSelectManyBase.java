@@ -115,6 +115,10 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     @Override
     protected final void onOk() {
+        // The button is disabled until enough is chosen, but a remote client can still send the press
+        if (!hasEnoughTargets()) {
+            return;
+        }
         resetUsedToPay();
         this.stop();
     }

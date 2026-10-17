@@ -74,7 +74,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     /** Enumerating abilities touches the game, so call this on the game thread or while it is parked on this input. */
-    public void refreshAbilities() {
+    private void refreshAbilities() {
         published = getController().collectPriorityAbilities();
         final Map<CardView, List<SpellAbilityView>> byCard = new LinkedHashMap<>();
         for (final SpellAbilityView view : published.keySet()) {
@@ -114,9 +114,16 @@ public class InputPassPriority extends InputSyncronizedBase {
         // The phase cannot end while the stack holds something, so no mana is lost by passing then
         final boolean losesMana = game.getStack().isEmpty() && player.getManaPool().willManaBeLostAtEndOfPhase();
         question = new Question.Priority(getController().getInputProxy().nextQuestionId(), getOwner(), abilitiesByCard,
-                getController().canUndoLastAction() ? game.getStack().getUndoStackSize() : 0,
+                getController().canUndoLastAction(), game.getUndoManager().undosLeft(),
                 losesMana, losesMana && player.getManaPool().hasBurn());
         getController().getInputProxy().askQuestion(this, question);
+    }
+
+    /** Ends this prompt without an action; the game thread then performs a pending undo. */
+    public void restartPrompt() {
+        if (isFinished()) return;
+        chosenSa = new ArrayList<>();   // non-null: no end-turn auto-pass, no awaitNextInput
+        stop();
     }
 
     private SuggestionType chooseSuggestion() {

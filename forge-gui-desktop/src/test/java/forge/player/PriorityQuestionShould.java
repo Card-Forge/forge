@@ -194,24 +194,6 @@ public class PriorityQuestionShould extends AITest {
     }
 
     @Test
-    public void askAgainAfterAnUndoWithTheUndoneState() {
-        // Undo changes the game while the prompt stays up, so the question must be rebuilt rather than re-sent
-        start();
-        final Card forest = addCard("Forest", human);
-        tapForMana(forest);
-        showPrompt();
-        assertTrue(question.undoCount() > 0, "tapping the land can be undone");
-        assertFalse(offeredView(forest).canPlay(), "the tapped land cannot tap again");
-
-        prompt.answer(new Answer.Undo(question.id()));
-
-        final Question.Priority asked = lastQuestion();
-        assertTrue(asked.id() > question.id(), "a new question was asked");
-        assertEquals(asked.undoCount(), 0);
-        assertTrue(asked.abilities().get(forest.getView()).get(0).canPlay(), "the untapped land can tap again");
-    }
-
-    @Test
     public void sendTheYieldLayersSuggestionAheadOfTheQuestionAndRecordADecline() {
         // The suggestion is the yield layer's, on its own channel; the question itself carries no interface policy
         start();

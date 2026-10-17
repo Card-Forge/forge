@@ -59,14 +59,14 @@ public class PriorityPromptShould {
         return view;
     }
 
-    private void ask(final int undoCount) {
+    private void ask(final boolean canUndo) {
         gui.setQuestion(me, new Question.Priority(7, me, Map.of(card, List.of(playable), other, List.of(ability(true))),
-                undoCount, false, false));
+                canUndo, 0, false, false));
     }
 
     @Test
     public void answerACardClickWithoutSendingTheClickToTheHost() {
-        ask(0);
+        ask(false);
         doReturn(playable).when(gui).getAbilityToPlay(any(), any(), any());
 
         final boolean handled = gui.selectCard(card, null, null);
@@ -79,7 +79,7 @@ public class PriorityPromptShould {
     @Test
     public void reportATapOnACardWithNothingPlayableAsUnhandled() {
         // Without a pointer event (mobile), false lets the GUI fall back to the zoom view
-        gui.setQuestion(me, new Question.Priority(7, me, Map.of(card, List.of(ability(false))), 0, false, false));
+        gui.setQuestion(me, new Question.Priority(7, me, Map.of(card, List.of(ability(false))), false, 0, false, false));
 
         assertFalse(gui.selectCard(card, null, null));
         verify(host, never()).answer(any());
@@ -88,7 +88,7 @@ public class PriorityPromptShould {
     @Test
     public void reportAPointerClickOnACardWithNothingPlayableAsHandled() {
         // A desktop click on such a card must not fall through to cards stacked under it or attached to it
-        gui.setQuestion(me, new Question.Priority(7, me, Map.of(card, List.of(ability(false))), 0, false, false));
+        gui.setQuestion(me, new Question.Priority(7, me, Map.of(card, List.of(ability(false))), false, 0, false, false));
 
         assertTrue(gui.selectCard(card, null, mock(ITriggerEvent.class)));
         verify(host, never()).answer(any());
@@ -96,7 +96,7 @@ public class PriorityPromptShould {
 
     @Test
     public void carryTheOtherSelectedCardsSoTheHostCanRepeatAManaAbility() {
-        ask(0);
+        ask(false);
         doReturn(playable).when(gui).getAbilityToPlay(any(), any(), any());
 
         gui.selectCard(card, List.of(other), null);
@@ -106,14 +106,14 @@ public class PriorityPromptShould {
 
     @Test
     public void passOnOk() {
-        ask(0);
+        ask(false);
         gui.selectButtonOk();
         verify(host).answer(new Answer.Pass(7));
     }
 
     @Test
     public void undoOnCancelWhenSomethingCanBeUndone() {
-        ask(2);
+        ask(true);
         gui.selectButtonCancel();
         verify(host).answer(new Answer.Undo(7));
     }
@@ -121,7 +121,7 @@ public class PriorityPromptShould {
     @Test
     public void endTheTurnByPassingNowThenYieldingForTheRestOfTheTurn() {
         // Passing first works even where the yield cannot pass by itself, such as while a macro records
-        ask(0);
+        ask(false);
         gui.selectButtonCancel();
 
         final InOrder order = inOrder(host);
@@ -132,7 +132,7 @@ public class PriorityPromptShould {
     @Test
     public void acceptASuggestionByPassingNowThenYielding() {
         gui.applyYieldUpdate(new YieldUpdate.Suggest(me, SuggestionType.STACK_YIELD));
-        ask(0);
+        ask(false);
 
         gui.selectButtonOk();
 
@@ -144,7 +144,7 @@ public class PriorityPromptShould {
     @Test
     public void declineASuggestionThenOfferThePlainPrompt() {
         gui.applyYieldUpdate(new YieldUpdate.Suggest(me, SuggestionType.STACK_YIELD));
-        ask(0);
+        ask(false);
 
         gui.selectButtonCancel();
         gui.selectButtonOk();
@@ -158,7 +158,7 @@ public class PriorityPromptShould {
         final IMacroSystem macros = mock(IMacroSystem.class);
         when(macros.isReplaying()).thenReturn(true);
         when(host.macros()).thenReturn(macros);
-        ask(2);
+        ask(true);
 
         gui.selectButtonCancel();
 
@@ -182,7 +182,7 @@ public class PriorityPromptShould {
 
     @Test
     public void withdrawAPendingQuestionWhenTheGameEnds() {
-        ask(0);
+        ask(false);
 
         gui.afterGameEnd();
         gui.selectButtonOk();

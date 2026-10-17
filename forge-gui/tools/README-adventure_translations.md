@@ -1,8 +1,19 @@
 # Translating Adventure Mode
 
+> **Status: under development and testing.**
+>
+> The internationalization work and the groundwork for supporting other
+> languages in Adventure Mode are still under development and testing.
+> For this reason, I would not recommend starting translations into other
+> languages yet, as the implementation and translation workflow may still
+> change while the Spanish translation is being completed and thoroughly
+> tested. Once the process for one language (Spanish) is complete and stable,
+> it should provide a solid foundation for opening Adventure Mode up to
+> other languages.
+
 This guide covers everything needed to add a new language to Adventure Mode.
-There are three separate translation systems, covered in order below: the
-main UI, quests/shops, and NPC dialog embedded in maps.
+There are several separate translation systems, covered in order below: the
+main UI, quests, item/shop display strings, and NPC dialog embedded in maps.
 
 ## Where translated files live
 
@@ -16,9 +27,9 @@ For example, Shandalar's Spanish translations all live together:
 
 ```
 forge-gui/res/adventure/Shandalar/languages/
-  adventure-es-ES.properties   NPC dialog (see part 3 below)
+  adventure-es-ES.properties   NPC dialog, item names/descriptions and shop
+                               titles (see parts 3 and 4 below)
   quests-es-ES.json            Quest text (see part 2 below)
-  shops-es-ES.json             Shop text (see part 2 below)
 ```
 
 Filenames never repeat the world's name — the folder already identifies it.
@@ -29,20 +40,18 @@ If Forge already ships a `<lang>.properties` file under `forge-gui/res/languages
 for your language, there's nothing to do here — it's covered by Forge's
 existing localization system, unrelated to Adventure Mode.
 
-## 2. Quests and shops
+## 2. Quests
 
 Translated by hand — there's no tooling for this part.
 
-1. Find the English source files, e.g.:
+1. Find the English source file, e.g.:
    ```
    forge-gui/res/adventure/Shandalar/world/quests.json
-   forge-gui/res/adventure/Shandalar/world/shops.json
    ```
-2. Copy each one into that plane's `languages/` folder, renamed with the
+2. Copy it into that plane's `languages/` folder, renamed with the
    locale suffix:
    ```
    forge-gui/res/adventure/Shandalar/languages/quests-es-ES.json
-   forge-gui/res/adventure/Shandalar/languages/shops-es-ES.json
    ```
 3. Translate the readable text fields. Leave keys, IDs, and card references
    untouched.
@@ -50,7 +59,26 @@ Translated by hand — there's no tooling for this part.
    There's no fallback within this file, so translate it fully before
    shipping.
 
-## 3. NPC dialog in maps (`.tmx` files)
+## 3. Items and shop titles
+
+Item names/descriptions (`items.json`) and shop titles (`shops.json`) are
+translated through keys in the same `adventure-<lang>.properties` file as
+NPC dialog — no copy of the JSON files, no tooling needed. Keys are derived
+from the English name, which is never modified (it stays the internal
+identifier the game matches on):
+
+```
+adv.item.SilverChallengeCoin.displayName=...
+adv.item.SilverChallengeCoin.description=...
+adv.shop.Black1.description=...
+```
+
+If a key is missing, the game falls back to the English text embedded in
+the JSON, so partial coverage is safe. To start a new language, copy the
+key lines with their English source values from the existing file (or ask a
+maintainer for a fresh export) and translate the values.
+
+## 4. NPC dialog in maps (`.tmx` files)
 
 Covered by `adventure_i18n.py`, in `forge-gui/tools/`. Dialog trees are
 embedded as JSON inside each `.tmx` map. Each node that needs translating
@@ -145,7 +173,18 @@ python adventure_i18n.py inject --adventure-root ..\res\adventure --world common
 `strip` removes only the keys this tool itself added (recognized by their
 `adv.*` pattern), leaving everything else untouched.
 
-## 4. Testing
+## 5. Not yet covered
+
+These are visible in-game but have no translation mechanism yet — they are
+part of the ongoing work, and another reason to wait before starting a new
+language:
+
+- Enemy names, boss intros and insults (`enemies.json`, shown in duels).
+- Point-of-interest display names (`points_of_interest.json`).
+- Hero names on the new-game screen (`heroes.json`).
+- Town names (`town_names_*.txt`, picked from lists at world generation).
+
+## 6. Testing
 
 Switch Forge's UI language, start Adventure Mode, and load the translated
 world. Any line still missing a translation falls back to English

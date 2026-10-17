@@ -23,8 +23,8 @@ public class MapSprite extends Actor {
 
     static public int BackgroundLayer = -1;
     static public int SpriteLayer = 0;
-    private Sprite spriteStar = null;
-    private Sprite spriteMagnifier = null;
+    static private Sprite spriteStar = null;
+    static private Sprite spriteMagnifier = null;
     TextureRegion texture;
     boolean isCaveDungeon, isOldorVisited, isBookmarked;
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {

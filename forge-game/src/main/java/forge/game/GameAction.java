@@ -398,38 +398,35 @@ public class GameAction {
         // Handle merged permanent here so all replacement effects are already applied.
         CardCollection mergedCards = null;
         if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
-            CardCollection cards = new CardCollection(c.getMergedCards());
-            // replace top card with copied card for correct name for human to choose.
-            cards.set(cards.indexOf(c), copied);
-            // 725.3b
+            mergedCards = new CardCollection(c.getMergedCards());
+            // replace top card with copied card for correct name for human to choose
+            mergedCards.set(mergedCards.indexOf(c), copied);
+            // CR 725.3b
             if (cause != null && zoneTo.getZoneType() == ZoneType.Exile) {
-                cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
+                mergedCards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(mergedCards, zoneTo.getZoneType(), cause);
             } else {
-                cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
+                mergedCards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(mergedCards, zoneTo.getZoneType(), cause);
             }
-            cards.set(cards.indexOf(copied), c);
-            mergedCards = cards;
             // CR 123.5c
             if (copied.isStickered()) {
-                CardCollection options = new CardCollection(cards);
-                options.set(options.indexOf(c), copied);
-                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(options);
-                if (keeper != null && keeper != copied) {
+                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(mergedCards);
+                if (keeper != copied) {
                     keeper.takeStickersFrom(copied);
                 }
             }
+            mergedCards.set(mergedCards.indexOf(copied), c);
             if (cause != null) {
                 // Replace sa targeting cards
                 final SpellAbility saTargeting = cause.getSATargetingCard();
                 if (saTargeting != null) {
-                    saTargeting.getTargets().replaceTargetCard(c, cards);
+                    saTargeting.getTargets().replaceTargetCard(c, mergedCards);
                 }
                 // Replace host remembered cards
                 // But not replace RememberLKI, since it wants to refer to the last known info.
                 Card hostCard = cause.getHostCard();
                 if (!cause.hasParam("RememberLKI") && hostCard.isRemembered(c)) {
                     hostCard.removeRemembered(c);
-                    hostCard.addRemembered(cards);
+                    hostCard.addRemembered(mergedCards);
                 }
             }
         }
@@ -1097,6 +1094,9 @@ public class GameAction {
         checkStaticAbilities(runEvents, Sets.newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
+        checkStaticAbilities(runEvents, affectedCards, preList, null);
+    }
+    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList, final Set<Card> enteringWith) {
         if (isCheckingStaticAbilitiesOnHold()) {
             return;
         }
@@ -1159,7 +1159,7 @@ public class GameAction {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
                 if (previouslyAffected == null) {
-                    affectedHere = stAb.applyContinuousAbilityBefore(layer, preList);
+                    affectedHere = stAb.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(stAb.getHostCard()) ? CardCollection.EMPTY : preList);
                     if (affectedHere != null) {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
@@ -1176,7 +1176,7 @@ public class GameAction {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
                                 toAdd.add(st2);
-                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, preList);
+                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(st2.getHostCard()) ? CardCollection.EMPTY : preList);
                                 if (newAffected != null) {
                                     affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(newAffected);
                                 }
@@ -2438,7 +2438,6 @@ public class GameAction {
 
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
-            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for (Player p : game.getPlayers()) {
@@ -2453,6 +2452,10 @@ public class GameAction {
             // This happens in hotseat matches when 2 equal lobbyplayers play.
             // No one of them has lost, so cannot decide who goes first .
             goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
+        }
+
+        if (isFirstGame) {
+            game.fireEvent(new GameEventFlipCoin(goesFirst.getView(), true, true));
         }
 
         for (Player p : game.getPlayers()) {
