@@ -277,6 +277,14 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
             cardpool.removeAll(getDeck().getOrCreate(DeckSection.Contraptions));
         }
 
+        if (FModel.getQuest().isPlanechase()) {
+            cardpool.removeAll(getDeck().getOrCreate(DeckSection.Planes));
+        }
+
+        if (FModel.getQuest().isArchenemyRumble()) {
+            cardpool.removeAll(getDeck().getOrCreate(DeckSection.Schemes));
+        }
+
         switch(FModel.getQuest().getDeckConstructionRules()){
             case Default: break;
             case Commander:
@@ -424,6 +432,16 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
                         .getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)));
                 this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Contraptions));
                 break;
+            case Planes :
+                this.getCatalogManager().setup(ItemManagerConfig.PLANAR_POOL);
+                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(planesFilter()));
+                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Planes));
+                break;
+            case Schemes :
+                this.getCatalogManager().setup(ItemManagerConfig.SCHEME_POOL);
+                this.getCatalogManager().setPool(getRemainingCardPool().getFilteredPool(schemesFilter()));
+                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Schemes));
+                break;
         }
 
         this.sectionMode = sectionMode;
@@ -516,9 +534,25 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
                 .find(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)) != null) {
             allSections.add(DeckSection.Contraptions);
         }
+
+        if (FModel.getQuest().isPlanechase()) {
+            allSections.add(DeckSection.Planes);
+        }
+
+        if (FModel.getQuest().isArchenemyRumble()) {
+            allSections.add(DeckSection.Schemes);
+        }
     }
 
     private Predicate<PaperCard> mainCardsFilter() {
         return Predicate.not(PaperCardPredicates.fromRules(CardRules::isVariant));
+    }
+
+    private Predicate<PaperCard> planesFilter() {
+        return PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANE_OR_PHENOMENON);
+    }
+
+    private Predicate<PaperCard> schemesFilter() {
+        return PaperCardPredicates.fromRules(CardRulesPredicates.IS_SCHEME);
     }
 }
