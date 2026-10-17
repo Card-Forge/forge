@@ -1134,6 +1134,15 @@ public class MatchScreen extends FScreen {
                         }
                     }
                     losers.clear();
+                    //whoever now sits at the bottom takes the bottom layout (field rows and zones), everyone else stays mirrored
+                    for (int i = 0; i < playerPanelsList.size(); i++) {
+                        VPlayerPanel panel = playerPanelsList.get(i);
+                        boolean flip = i != playerPanelsList.size() - 1;
+                        if (panel.isFlipped() != flip) {
+                            panel.setFlipped(flip);
+                            panel.revalidate(true);
+                        }
+                    }
                     if (playerPanelsList.size() == 2) {
                         //reset avatar size
                         for (VPlayerPanel playerPanel : playerPanelsList) {
