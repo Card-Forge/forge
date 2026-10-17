@@ -13,11 +13,20 @@ import forge.assets.FSkinImage;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
     public static final int TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS = 100;
-    public static final String[] REGION_NAMES = {"waste", "white", "blue", "black", "red", "green"};
+    public static final Set<String> COLOR_SET_NAMES =
+            Set.of("white", "blue", "black", "red", "green");
+
+    public static final String[] REGION_NAMES =
+            Stream.concat(
+                    Stream.of("waste"),
+                    COLOR_SET_NAMES.stream().map(String::toLowerCase)
+            ).toArray(String[]::new);
     public static void drawLockedCardOverlay(
             Batch batch, float x, float y, float w, float h) {
         // Draw lock icon
