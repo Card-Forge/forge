@@ -2068,6 +2068,11 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2], ctb), expr, c, ctb);
         }
 
+        if (sq[0].equals("CardNameUniqueVowels")) {
+            // Spy Kit: its names between them have every vowel
+            final String name = c.hasNonLegendaryCreatureNames() ? Sticker.VOWELS : c.getName();
+            return doXMath(Sticker.countUniqueVowels(name), expr, c, ctb);
+        }
         if (sq[0].equals("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);
         }
