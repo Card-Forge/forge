@@ -222,11 +222,6 @@ public class NetGameController implements IGameController {
         }
 
         @Override
-        public void repeatRememberedActions() {
-            send(ProtocolMethod.repeatRememberedActions);
-        }
-
-        @Override
         public String playbackText() {
             return null;
         }

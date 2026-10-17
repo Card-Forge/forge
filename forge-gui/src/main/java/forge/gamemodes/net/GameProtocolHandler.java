@@ -83,7 +83,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 final long queueDelayMs = startMs - receiveTimeMs;
                 if (returnType.equals(Void.TYPE)) {
                     try {
-                        method.invoke(protocolMethod.receiver(toInvoke), args);
+                        method.invoke(toInvoke, args);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
                         netLog.error("Unknown protocol method {} args={}", methodName, describeArgs(args));
                     } catch (final InvocationTargetException e) {
@@ -94,7 +94,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 } else {
                     Serializable reply = null;
                     try {
-                        final Object theReply = method.invoke(protocolMethod.receiver(toInvoke), args);
+                        final Object theReply = method.invoke(toInvoke, args);
                         if (theReply instanceof Serializable) {
                             protocolMethod.checkReturnValue(theReply);
                             reply = (Serializable) theReply;
