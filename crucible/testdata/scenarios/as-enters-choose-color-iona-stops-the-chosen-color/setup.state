@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Iona, Shield of Emeria|Id:1
+humanbattlefield=Plains|Id:2;Plains|Id:3;Plains|Id:4;Plains|Id:5;Plains|Id:6;Plains|Id:7;Plains|Id:8;Plains|Id:9;Plains|Id:10
+aihand=Lightning Bolt|Id:11;Raise the Alarm|Id:12
+aibattlefield=Mountain|Id:13;Plains|Id:14

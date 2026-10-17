@@ -1,0 +1,32 @@
+# "As Iona enters, choose a color" (K:ETBReplacement:Other:ChooseColor) runs
+# on the entering card before it lands (ADR-0022, CardFactoryUtil.java:
+# 515-543), so the choice is on the permanent: the opponent cannot cast a red
+# spell (Iona's CantBeCast of Card.ChosenColor) but still casts a white one.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+tapformana human 4 W
+tapformana human 5 W
+tapformana human 6 W
+tapformana human 7 W
+tapformana human 8 W
+tapformana human 9 W
+tapformana human 10 W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue paygeneric W
+queue colorchoice R
+castspell human 1
+resolvestack
+tapformana ai 13 R
+tapformana ai 14 W
+# Lightning Bolt is red: refused, still in hand.
+castspell ai 11
+# Raise the Alarm is white: cast, {1}{W} paid with both lands.
+queue paygeneric R
+castspell ai 12
+resolvestack

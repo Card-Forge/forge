@@ -158,7 +158,7 @@ func (discardEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 			if g.Card(id).Zone != Hand {
 				continue
 			}
-			g.moveToGraveyard(controller, id)
+			g.discardToGraveyard(controller, id, discardCause{known: true, effect: true, controller: a.Controller})
 			g.checkDiscardedTriggers(controller, id, pick.player)
 			if remember {
 				source.Memory.Remember(CardEntity(id))
@@ -317,9 +317,12 @@ func discardValidResolvable(g *Game, spec string, controller PlayerID, source Ca
 // directly from hand to graveyard" -- a Discard<N/Card> activation cost
 // (ActivateAbility, activateability.go) and the other cost sites discard
 // through it; the effect above runs the same steps across several players.
+// A discard replacement may send a card elsewhere (discardToGraveyard,
+// Madness); its cause is not known here, so a line that asks for it is
+// refused there.
 func discardCards(g *Game, controller PlayerController, ids []CardID, pid PlayerID) {
 	for _, id := range ids {
-		g.moveToGraveyard(controller, id)
+		g.discardToGraveyard(controller, id, discardCause{})
 		g.checkDiscardedTriggers(controller, id, pid)
 	}
 	g.checkDiscardedAllTriggers(controller, pid, ids)

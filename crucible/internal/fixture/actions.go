@@ -514,6 +514,15 @@ func runQueue(args []string, l *Loaded, c *engine.ScriptedController) error {
 		}
 		c.QueueDiscard(ids)
 
+	case "discardchoice":
+		// ChooseCardsToDiscard: a Discard<N/Card> cost's or effect's pick, a
+		// separate decision from the cleanup step's discard above.
+		ids, err := resolveCardIDs(l, value)
+		if err != nil {
+			return fmt.Errorf("queue discardchoice: %w", err)
+		}
+		c.QueueDiscardChoice(ids)
+
 	case "cardchoice":
 		// "none" is an explicit empty answer, for a "you may" pick (Optional$
 		// Discard) the player declines.

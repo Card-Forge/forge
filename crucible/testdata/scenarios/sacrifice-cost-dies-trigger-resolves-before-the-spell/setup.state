@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Bone Splinters|Id:1
+humanbattlefield=Swamp|Id:2;Stitcher's Supplier|Id:3
+humanlibrary=Island|Id:4;Forest|Id:5;Plains|Id:6;Mountain|Id:7
+aibattlefield=Grizzly Bears|Id:8

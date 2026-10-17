@@ -239,6 +239,16 @@ func (g *Game) moveResolvedSpellToGraveyard(controller PlayerController, a Abili
 	if c.Zone != Stack {
 		return
 	}
+	if !a.spell {
+		// A triggered ability whose card was cast while it resolved (Madness's
+		// trigger casting the card it is on): the card is that new spell,
+		// waiting on the stack, not this ability's to move.
+		for _, s := range g.stack {
+			if s.spell && s.Source == a.Source {
+				return
+			}
+		}
+	}
 	g.moveToGraveyard(controller, a.Source)
 	if a.spell {
 		g.checkSpellToGraveyardTriggers(controller, a.Source, fizzled)

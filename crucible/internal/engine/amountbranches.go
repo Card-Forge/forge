@@ -28,7 +28,7 @@ import (
 // reads state the engine already keeps for the same flag's Condition$ use
 // (continuousConditionMet, continuous.go) or the turn's history
 // (castrecord.go: Void, Revolt; Player.committedCrimes); Adamant reads the
-// spell's own paid mana (adamantValue). Not resolved: Madness,
+// spell's own paid mana (adamantValue). Not resolved:
 // Freerunning, PromisedGift (the card's own keyword or
 // static is a cast this port does not make, so the branch would only hide
 // that) and StartingPlayer. Random is randomCountValue's, a draw per read.
@@ -92,6 +92,14 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		return n, ok, true
 	}
 	switch {
+	case strings.HasPrefix(count.Head, "Madness"):
+		// AbilityUtils.java:1716-1718: Count$Madness.<True>.<False> on the
+		// ability's own SpellAbility.isMadness, which only the spell cast by
+		// Madness's trigger carries (Avacyn's Judgment's X damage).
+		if source == NoCard {
+			return 0, false, true
+		}
+		return branch(g.spellOptional(source).madness)
 	case strings.HasPrefix(count.Head, "Bargain"):
 		// AbilityUtils.java:1708-1710: the ability's own cast was bargained
 		// (SpellAbility.isBargained), which only the spell itself carries.

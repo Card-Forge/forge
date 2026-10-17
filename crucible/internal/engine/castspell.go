@@ -363,9 +363,10 @@ func (g *Game) beamMeUpCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool)
 // keyword's cost replaces the mana cost (copyWithManaCostReplaced): its mana
 // is what is paid instead, its other parts -- exiling other cards from the
 // graveyard, Lunar Hatchling's land exiled from the battlefield -- are paid
-// with it. A cost parseUnlessCost does not read (Nethergoyf's
-// ExileFromGrave<X/...+withTypesGE4>: an announced X and a test on the chosen
-// set as a whole) or one whose parts pid cannot pay is not offered (GO-7).
+// with it. Nethergoyf's ExileFromGrave<X/...+withTypesGE4> is read here
+// (escapeTypesPart): any number of other graveyard cards with four or more
+// card types among them. A cost parseUnlessCost does not read otherwise, or
+// one whose parts pid cannot pay, is not offered (GO-7).
 func (g *Game) escapeCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool) {
 	if c.Zone != Graveyard || c.Owner != pid || c.Def == nil {
 		return mana.Cost{}, unlessCost{}, false
@@ -375,10 +376,15 @@ func (g *Game) escapeCost(pid PlayerID, c *Card) (mana.Cost, unlessCost, bool) {
 		if k.Name != "Escape" || k.Details == "" {
 			continue
 		}
-		uc, ok := parseUnlessCost(k.Details)
+		text, typesSpec, typesN, hasTypes := escapeTypesPart(k.Details)
+		if !hasTypes {
+			text = k.Details
+		}
+		uc, ok := parseUnlessCost(text)
 		if !ok || !uc.hasMana {
 			return mana.Cost{}, unlessCost{}, false
 		}
+		uc.exileTypesN, uc.exileTypesSpec = typesN, typesSpec
 		mc := uc.mana
 		uc.hasMana, uc.mana, uc.manaTokens = false, mana.Cost{}, nil
 		if !g.unlessPayable(pid, c.ID, uc) {
@@ -491,6 +497,10 @@ type castOpts struct {
 	// (altcost.go): altCost is its mana, extra the rest, and the cast records
 	// OptionalCost.AltCost (optAltCost).
 	altStatic bool
+	// madness is a cast by Madness's trigger for the madness cost
+	// (PlayEffect.java:420-422, AlternativeCost.Madness): altCost is that cost,
+	// and the cast records it (castOptional.madness, Count$Madness).
+	madness bool
 }
 
 // castSpell is CastSpell past its timing and hand gates: the three spell
@@ -524,7 +534,7 @@ func (g *Game) castSpell(controller PlayerController, pid PlayerID, card CardID,
 	if opts.altStatic {
 		kinds |= optAltCost
 	}
-	g.Card(card).castOpt = castOptional{kinds: kinds, foretold: opts.foretold, escaped: opts.escape}
+	g.Card(card).castOpt = castOptional{kinds: kinds, foretold: opts.foretold, escaped: opts.escape, madness: opts.madness}
 	opts.kickers = g.chooseKicker(controller, pid, g.Card(card))
 	g.Card(card).kicker = opts.kickers
 	g.Card(card).sneaked = opts.sneak
@@ -544,9 +554,15 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 	g.holdingCastExits = true
 	defer func() {
 		g.castPending, g.preX, g.hasPreX = NoCard, 0, false
-		// Every graveyard exit a cast makes comes after its payment succeeded,
-		// so checkSpellCastTriggers has always taken castExits by now.
-		g.holdingCastExits, g.castExits = false, nil
+		// A cast that went on the stack released the hold (castExitMatches).
+		// One that failed after a cost part already fired a trigger (a
+		// sacrifice before a later part could not be paid) still owes it: the
+		// event happened, so its triggers go on the stack now.
+		if g.holdingCastExits {
+			if held := g.castExitMatches(); len(held) > 0 {
+				g.pushTriggeredAbilities(controller, held)
+			}
+		}
 	}()
 	c := g.Card(card)
 	if c.Type().HasSubtype("Aura") {

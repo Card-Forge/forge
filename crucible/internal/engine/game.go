@@ -114,15 +114,18 @@ type Game struct {
 	preX    int
 	hasPreX bool
 	// holdingCastExits is set while a spell is being cast, and castExits
-	// collects the cards that left a graveyard meanwhile -- the spell itself
-	// cast from there, a Delve or ExileFromGrave cost -- so their
-	// graveyard-origin ChangesZone triggers go on the stack with the spell's
-	// SpellCast batch, above the spell, as Java holds them until the cast is
-	// done (TriggerHandler.java:264, the stack frozen). Both are transient,
-	// empty outside castSpellChosen, so Clone does not carry them (castPending
-	// and preX neither).
+	// collects, in order, what triggered meanwhile: the cards that left a
+	// graveyard -- the spell itself cast from there, a Delve or ExileFromGrave
+	// cost -- whose graveyard-origin ChangesZone matches are read when the
+	// hold is released, and every other trigger a cost fired (a sacrifice's
+	// dies trigger, a discard's), held whole. They go on the stack with the
+	// spell's SpellCast batch, above the spell, as Java holds them in the
+	// waiting list until the cast is done (TriggerHandler.java:264, the stack
+	// frozen by PlaySpellAbility.java:682). Both are transient, empty outside
+	// castSpellChosen, so Clone does not carry them (castPending and preX
+	// neither).
 	holdingCastExits bool
-	castExits        []CardID
+	castExits        []castHeld
 	// pendingErr is a static trigger's error from a site with no error
 	// return (resolveStaticTriggers, statictrigger.go), waiting for the
 	// nearest boundary that has one -- Registry.Resolve, ResolveStack,
@@ -526,6 +529,27 @@ func (g *Game) mayPlayLand(pid PlayerID, card CardID) bool {
 		}
 	}
 	return false
+}
+
+// castHeld is one entry of a cast's trigger hold (Game.castExits): a card
+// that left a graveyard (exit), whose matches are read on release, or the
+// matches of any other trigger, held as pushTriggeredAbilities got them
+// (holdCastTriggers, leftto.go).
+type castHeld struct {
+	exit    CardID
+	matches []Ability
+}
+
+// discardCause is what a discard knows of its cause, for a discard
+// replacement's EffectOnly$ and ValidCause$ (ReplaceMoved.java:51, :85-90,
+// discardToGraveyard in replacementdiscard.go): whether an effect (not a cost
+// or the cleanup step) made it, and that effect's controller. known is false
+// where the site does not say, and a line that needs it is then refused
+// rather than guessed (GO-7).
+type discardCause struct {
+	known      bool
+	effect     bool
+	controller PlayerID
 }
 
 // recordPendingError keeps err for TakePendingError unless an earlier error

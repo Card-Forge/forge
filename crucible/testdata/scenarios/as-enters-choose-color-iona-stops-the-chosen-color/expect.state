@@ -1,0 +1,9 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Plains|Tapped;Iona, Shield of Emeria|SummonSick
+ailife=20
+aihand=Lightning Bolt
+aibattlefield=Mountain|Tapped;Plains|Tapped;T:w_1_1_soldier|SummonSick;T:w_1_1_soldier|SummonSick
+aigraveyard=Raise the Alarm

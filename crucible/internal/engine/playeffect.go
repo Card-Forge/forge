@@ -11,6 +11,9 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/carddb"
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
+	"github.com/jczastkiewicz/crucible/internal/cost"
+	"github.com/jczastkiewicz/crucible/internal/keyword"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -45,7 +48,8 @@ type playEffect struct{}
 // hook, ADR-0018 Decision point 3); a card built from outside the game
 // (CopyFromChosenName$, AnySupportedCard$ and its RandomCopied$/RandomNum$/
 // ChoiceNum$); alternate states (CastFaceDown$, CastTransformed$,
-// ReplaceIlluMask$); alternative or modified costs (PlayCost$,
+// ReplaceIlluMask$); alternative or modified costs past a plain mana
+// PlayCost$ (playCost: ManaCost, SuspendCost and the non-mana ones;
 // PlayReduceCost$, PlayRaiseCost$, ManaConversion$); ControlledByPlayer$
 // (Mindslaver control of the caster), WithTotalCMC$ (a running mana-value
 // budget), ShowCards$ (a second, display-only list), ZoneRegardless$
@@ -62,7 +66,7 @@ type playEffect struct{}
 // own for a bare TgtZone$ to restrict.
 var playUnresolvedParams = [...]string{
 	"ReplaceGraveyard", "ReplaceGraveyardValid", "CopyFromChosenName", "AnySupportedCard", "RandomCopied",
-	"RandomNum", "ChoiceNum", "CastFaceDown", "CastTransformed", "ReplaceIlluMask", "PlayCost", "PlayReduceCost",
+	"RandomNum", "ChoiceNum", "CastFaceDown", "CastTransformed", "ReplaceIlluMask", "PlayReduceCost",
 	"PlayRaiseCost", "ManaConversion", "ControlledByPlayer", "WithTotalCMC", "ShowCards", "ZoneRegardless",
 	"Condition"}
 
@@ -93,6 +97,10 @@ func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		if err := rejectParams(a, "Play", "TgtZone"); err != nil {
 			return err
 		}
+	}
+	opts, err := playCost(a)
+	if err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
@@ -140,7 +148,7 @@ func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 	optional := hasParam(a, "Optional")
 	singleOption := len(cards) == 1 && amount == 1 && optional
 	allowRepeats := hasParam(a, "AllowRepeats")
-	withoutMana := hasParam(a, "WithoutManaCost")
+	withoutMana := opts.withoutManaCost
 
 	for len(cards) > 0 && amount > 0 {
 		// chooseSingleEntityForEffect, optional unless this is the single
@@ -202,21 +210,50 @@ func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 			amount--
 			continue
 		}
-		if !withoutMana && g.Card(pick).Def.Faces[0].ManaCost.IsNoCost() {
+		if !withoutMana && !opts.hasAltCost && g.Card(pick).Def.Faces[0].ManaCost.IsNoCost() {
 			// PlayEffect.java:387-389: a spell with no mana cost cannot be
-			// paid for, so it is skipped, amount not spent.
+			// paid for, so it is skipped, amount not spent. A PlayCost$
+			// replaces the mana cost, so it is paid instead (:371-386).
 			if err := playRepeatLoop(allowRepeats, g.Card(chosenCard), "has no mana cost to pay"); err != nil {
 				return err
 			}
 			continue
 		}
-		if g.castSpell(controller, caster, pick, castOpts{withoutManaCost: withoutMana}) {
+		if g.castSpell(controller, caster, pick, opts) {
 			playRecord(g, a, pick, chosenCard)
 			g.checkChangesZoneAllTriggers(controller, []CardID{pick}, origin, Stack)
 		}
 		amount--
 	}
 	return nil
+}
+
+// playCost is the cast options a's cost params give (PlayEffect.java:
+// 369-386, :420-422): WithoutManaCost$, else a PlayCost$ of plain mana paid
+// instead of the mana cost (copyWithManaCostReplaced; Madness's "X R",
+// Blue Mage's Cane's 3). PlayCost$ ManaCost, SuspendCost, a
+// ConvertedManaCost amount and a non-mana part are other mechanics, refused
+// (GO-7). The ability Madness's keyword made (PlayEffect.java:420's
+// sa.isKeyword(Keyword.MADNESS)) casts for the madness cost, which the
+// spell then carries (castOptional.madness).
+func playCost(a *Ability) (castOpts, error) {
+	opts := castOpts{withoutManaCost: hasParam(a, "WithoutManaCost")}
+	if a.Params.Keyword != "" && keyword.Parse(a.Params.Keyword).Name == "Madness" {
+		opts.madness = true
+	}
+	raw, ok := a.Params.Param("PlayCost")
+	if !ok || opts.withoutManaCost {
+		return opts, nil
+	}
+	if !cost.Parse(raw).IsPureMana() {
+		return castOpts{}, fmt.Errorf("engine: Play: PlayCost$ %q not resolvable yet", raw)
+	}
+	mc, err := mana.Parse(raw)
+	if err != nil {
+		return castOpts{}, fmt.Errorf("engine: Play: PlayCost$ %q not resolvable yet", raw)
+	}
+	opts.altCost, opts.hasAltCost = mc, true
+	return opts, nil
 }
 
 // playRepeatLoop is the error for a card Play cannot play under

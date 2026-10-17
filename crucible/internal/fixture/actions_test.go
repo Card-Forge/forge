@@ -656,8 +656,28 @@ func TestRunActionsQueueDiscardBadIDErrors(t *testing.T) {
 	l := load(t, db, "humanlife=20\n")
 	c := engine.NewScriptedController()
 
-	if err := runActions(t, l, c, "queue discard abc\n"); err == nil {
-		t.Error("a non-numeric id did not error")
+	for _, line := range []string{"queue discard abc\n", "queue discardchoice abc\n"} {
+		if err := runActions(t, l, c, line); err == nil {
+			t.Errorf("%q: a non-numeric id did not error", line)
+		}
+	}
+}
+
+// queue discardchoice answers ChooseCardsToDiscard (a Discard<N/Card> cost),
+// a queue of its own beside queue discard's cleanup-step answer.
+func TestRunActionsQueueDiscardChoiceResolvesFixtureIDs(t *testing.T) {
+	t.Parallel()
+
+	db := testDB(t, "Mountain", "Forest")
+	l := load(t, db, "humanlife=20\nailife=20\nhumanhand=Mountain|Id:1;Forest|Id:2\n")
+	c := engine.NewScriptedController()
+
+	if err := runActions(t, l, c, "queue discardchoice 2\n"); err != nil {
+		t.Fatalf("RunActions: %v", err)
+	}
+	got := c.ChooseCardsToDiscard(l.Game, l.Game.Players()[0], nil, 1)
+	if len(got) != 1 || got[0] != l.CardByFixtureID[2] {
+		t.Errorf("discard choice %v, want [%v]", got, l.CardByFixtureID[2])
 	}
 }
 

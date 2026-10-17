@@ -128,7 +128,9 @@ func TestExploitSacrificeFiresTheExploitedTrigger(t *testing.T) {
 			c := engine.NewScriptedController()
 			c.QueuePayGeneric(mana.ShardR)
 			c.QueueConfirmEffect(tc.accept)
-			c.QueueSacrificeChoice([]engine.CardID{bears})
+			// Exploit's Optional$ sacrifice is "up to one" once confirmed
+			// (SacrificeEffect.java:138), a card choice.
+			c.QueueCardChoice([]engine.CardID{bears})
 			c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
 			if !g.CastSpell(p, sadist, c) {
 				t.Fatal("could not cast Qarsi Sadist")

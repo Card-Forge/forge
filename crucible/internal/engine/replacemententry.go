@@ -155,10 +155,17 @@ func (g *Game) entryShape(r *compile.Ability, moved *Card, origin ZoneType, h *C
 	if sub == nil {
 		return nil, false, false
 	}
+	// unhandled is an "as it enters" line no entry path runs: it is matched
+	// like the rest below and, when it applies, refused loudly rather than
+	// skipped (GO-7).
+	unhandled := false
 	if v, has := r.Param("ReplacementResult"); has && strings.EqualFold(v, "Updated") {
 		updated = true
 		if !entryUpdatedShape(sub) {
-			return nil, false, false
+			if enterShapeHandledAfterMove(sub) {
+				return nil, false, false
+			}
+			unhandled = true
 		}
 	} else if !chainMovesReplacedCard(sub) {
 		return nil, false, false
@@ -173,6 +180,10 @@ func (g *Game) entryShape(r *compile.Ability, moved *Card, origin ZoneType, h *C
 		return nil, false, false
 	}
 	if !replacementRequirementsCheck(g, h, amounts, r) {
+		return nil, false, false
+	}
+	if unhandled {
+		g.recordPendingError(fmt.Errorf("engine: %q: as-it-enters replacement ReplaceWith$ %s not resolvable yet", h.Def.Name, sub.Name))
 		return nil, false, false
 	}
 	return sub, updated, true
@@ -263,12 +274,97 @@ func chainNext(a *compile.Ability) *compile.Ability {
 // entryUpdatedShape is the set of "as it enters" abilities that run before
 // the move: a plain life loss (Lich), the StoreSVar that remembers the life
 // paid as the card enters (Phyrexian Processor, Minion of the Wastes, Nameless
-// Race: payReplacementLifeX pays its Cost$), and Devour's sacrifice, whose
-// chain's ETB$ counters wait on the card for applyEnterCounters (devour.go).
+// Race: payReplacementLifeX pays its Cost$), Devour's sacrifice, whose
+// chain's ETB$ counters wait on the card for applyEnterCounters (devour.go),
+// and a chain of entryChainAPIs ("as CARDNAME enters, choose ...").
 func entryUpdatedShape(sub *compile.Ability) bool {
 	if strings.EqualFold(sub.Name, "StoreSVar") {
-		cost, _ := sub.Param("Cost")
-		return cost == replacementPayLifeX
+		if cost, ok := sub.Param("Cost"); ok {
+			return cost == replacementPayLifeX
+		}
 	}
-	return strings.EqualFold(sub.Name, "LoseLife") || isDevourChain(sub)
+	if strings.EqualFold(sub.Name, "PutCounter") {
+		// A chain headed by its counters is applyEnterCounters', after the move.
+		return false
+	}
+	return strings.EqualFold(sub.Name, "LoseLife") || isDevourChain(sub) || entryChainRunsBeforeMove(sub, 0)
+}
+
+// entryChainAPIs are the abilities an "as CARDNAME enters" chain may be made
+// of and still run before the card lands. K:ETBReplacement:Other makes the
+// chain the replacement's overriding ability (CardFactoryUtil.java:515-543),
+// which ReplacementHandler runs before the move; ADR-0022 runs it the same way,
+// through the Registry on the entering card (runReplacementChain), so a choice
+// is on the card's Memory (which Game.Move keeps) before its statics, ETB
+// triggers and SBAs look: Cavern of Souls' ChooseType, Iona's ChooseColor,
+// Pithing Needle's NameCard, Rick's GenericChoice of StoreSVars. The others
+// act on other objects or on the entry's own counter table (PutCounter ETB$,
+// putEnterCounters): B.O.B.'s tokens, Urborg Lhurgoyf's mill, Wood
+// Elemental's sacrifice, Dungeon Master's die. An ability that would change
+// the entering card itself (Animate, AlterAttribute, Tap, SetState) is not
+// here: Game.Move rebuilds what such an effect writes, so it would be lost.
+// A param an effect does not resolve is that effect's own error (ChooseColor's
+// Random$ on Rainbow Knights), which runReplacementChain records (GO-7).
+var entryChainAPIs = [...]string{
+	"ChooseColor", "ChooseType", "ChoosePlayer", "ChooseNumber", "ChooseCard",
+	"ChooseEvenOdd", "ChooseDirection", "NameCard", "GenericChoice", "StoreSVar", "Cleanup",
+	"Mill", "Discard", "Draw", "Token", "Reveal", "RevealHand", "Sacrifice", "SacrificeAll",
+	"RollDice", "ChangeZoneAll",
+}
+
+// entryChainRunsBeforeMove reports whether every ability reachable from a
+// (its SubAbility$ chain and any other sub, a GenericChoice's choices) is an
+// entryChainAPIs entry, a PutCounter into the entry's counter table (ETB$) or
+// onto another card (Phylactery Lich's Defined$ ChosenCard), or a
+// DelayedTrigger, whose Execute$ runs later and is not walked (Predatory
+// Sludge). depth bounds a cyclic script.
+func entryChainRunsBeforeMove(a *compile.Ability, depth int) bool {
+	if depth > 32 {
+		return false
+	}
+	delayed := strings.EqualFold(a.Name, "DelayedTrigger")
+	ok := delayed
+	if strings.EqualFold(a.Name, "PutCounter") {
+		_, etb := a.Param("ETB")
+		defined, hasDefined := a.Param("Defined")
+		ok = etb || (hasDefined && !strings.EqualFold(defined, "Self") && !strings.HasPrefix(defined, "Replaced"))
+	}
+	for _, api := range entryChainAPIs {
+		ok = ok || strings.EqualFold(a.Name, api)
+	}
+	if !ok {
+		return false
+	}
+	for _, s := range a.Subs {
+		if delayed && !strings.EqualFold(s.Key, "SubAbility") {
+			continue
+		}
+		if s.Ability != nil && !entryChainRunsBeforeMove(s.Ability, depth+1) {
+			return false
+		}
+	}
+	return true
+}
+
+// enterShapeHandledAfterMove reports whether sub, an "as it enters" Moved
+// line's ability, is one a path after the move runs: "enters tapped" or
+// "untapped" and "it becomes day" (checkMovedReplacement,
+// movedBattlefieldMatch's shapes) and "enters with counters" (PutCounter with
+// ETB$, applyEnterCounters, which refuses its own unresolvable shapes). Every
+// Tap line is left to checkMovedReplacement, whose own tapShapeRecognized
+// decides it.
+func enterShapeHandledAfterMove(sub *compile.Ability) bool {
+	switch {
+	case strings.EqualFold(sub.Name, "Tap"):
+		return true
+	case strings.EqualFold(sub.Name, "Untap"):
+		defined, ok := sub.Param("Defined")
+		return ok && strings.EqualFold(defined, "ReplacedCard") && onlyParamsOf(sub, "db", "defined", "etb")
+	case strings.EqualFold(sub.Name, "DayTime"):
+		return true
+	case strings.EqualFold(sub.Name, "PutCounter"):
+		_, etb := sub.Param("ETB")
+		return etb
+	}
+	return false
 }

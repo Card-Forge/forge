@@ -1,0 +1,13 @@
+# A creature sacrificed to pay a spell's additional cost dies while the spell
+# is being cast; its dies trigger waits until the spell is on the stack and
+# goes above it (PlaySpellAbility.java:682 freezes the stack for the payment,
+# TriggerHandler.java:264 runs the waiting triggers once the spell is added).
+# Stitcher's Supplier's "mill three" therefore resolves before Bone Splinters:
+# the milled cards land in the graveyard between the Supplier and the spell.
+startturn human
+advance 3
+tapformana human 2 B
+queue targets 8
+queue sacrificechoice 3
+castspell human 1
+resolvestack

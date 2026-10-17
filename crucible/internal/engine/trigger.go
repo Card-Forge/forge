@@ -2215,6 +2215,12 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 		}
 		matches = stacked
 	}
+	// A trigger a cast's cost fired (Emerge's or an additional cost's
+	// sacrifice, a discard) waits until the spell is on the stack, then goes
+	// above it (holdCastTriggers, leftto.go).
+	if g.holdCastTriggers(matches) {
+		return
+	}
 	for _, pid := range g.playersInAPNAPOrder() {
 		for i := range matches {
 			if matches[i].Controller != pid {

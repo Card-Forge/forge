@@ -44,7 +44,7 @@
     "manaability": ["manaability.go", "activatemanaability.go"],
     "land": ["land.go"],
     "castspell": ["castspell.go", "activateability.go"],
-    "trigger": ["trigger.go", "blockerstriggers.go"],
+    "trigger": ["trigger.go", "blockerstriggers.go", "madnesstrigger.go"],
     "statictrigger": ["statictrigger.go"],
     "continuous": ["continuous.go"],
     "dependency": ["dependency.go"],
@@ -65,7 +65,8 @@
       "replacementfaces.go",
       "replacementamounts.go",
       "replacemententry.go",
-      "replacementcost.go"
+      "replacementcost.go",
+      "replacementdiscard.go"
     ],
     "playerstate": ["playerstate.go"],
     "defined": ["defined.go"],

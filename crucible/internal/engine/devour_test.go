@@ -198,7 +198,7 @@ func TestDevourRejectsABadAnswer(t *testing.T) {
 	if err == nil {
 		err = g.TakePendingError()
 	}
-	if err == nil || !strings.Contains(err.Error(), "devour answer") {
+	if err == nil || !strings.Contains(err.Error(), "optional answer") {
 		t.Errorf("err = %v, want the devour answer refused", err)
 	}
 	if got := g.Card(theirs[0]).Zone; got != engine.Battlefield {

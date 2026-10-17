@@ -7,5 +7,8 @@ tapformana human 2 W
 tapformana human 3 W
 tapformana human 4 W
 queue paygeneric W
+# Story Circle's "As Story Circle enters, choose a color" (K:ETBReplacement:
+# Other:ChooseColor) runs as it enters (ADR-0022).
+queue colorchoice W
 castspell human 1
 resolvestack

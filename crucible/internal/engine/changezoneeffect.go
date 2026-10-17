@@ -20,13 +20,20 @@ import (
 // OriginAlternative$ resolve (changeZoneHidden, changeZoneKnown).
 // AlreadyRevealed$ is read only to skip the DelayedReveal the decider is shown
 // while choosing (ChangeZoneEffect.java:1044), a display this port never
-// makes, so it is accepted and changes nothing.
+// makes, so it is accepted and changes nothing. TrackDiscarded$ (Madness's
+// "or put it into your graveyard", CR 400.7k) marks the moved card as
+// discarded (ChangeZoneEffect.java:784-786, Card.setDiscarded); the flag's
+// only readers are CardProperty's DiscardedThisTurn (CardProperty.java:
+// 987-993) and Mayhem (GameActionUtil.java:134), neither of which this port
+// has (valid.go has no DiscardedThisTurn, saspec.go refuses Mayhem), so it is
+// accepted and changes nothing a port reads; whoever ports either adds the
+// flag here and at the discard sites.
 var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
 	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown", "ExileFaceDown",
 	"Attacking", "Blocking", "LeaveBattlefield", "AtEOT", "StaticEffect",
 	"DestinationAlternative", "LibraryPositionAlternative",
-	"RememberLKI", "Champion", "Foretold", "ForetoldCost", "WithMayLook", "TrackDiscarded",
+	"RememberLKI", "Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
 	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",

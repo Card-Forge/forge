@@ -321,6 +321,8 @@ func Expand(k Keyword) (Expansion, bool) {
 		return exp, true
 	case "Devour":
 		return expandDevour(k)
+	case "Madness":
+		return expandMadness(k)
 	case "Modular":
 		// CardFactoryUtil.java:1490 and :2377: enters with N +1/+1 counters, and
 		// when it dies you may put a +1/+1 counter on target artifact creature for
@@ -476,6 +478,33 @@ func expandDevour(k Keyword) (Expansion, bool) {
 		Amounts: []SVarDef{
 			{"KWDevourSacX" + Slot, "Count$Valid " + valid + ".YouCtrl+Other"},
 			{"KWDevourX" + Slot, "Count$RememberedSize/Times." + args[0]},
+		},
+	}, true
+}
+
+// expandMadness is CardFactoryUtil's two Madness branches, "Madness:<cost>":
+// the replacement "if you discard this card, discard it into exile"
+// (CardFactoryUtil.java:2345-2362), and the Mode$ Exiled trigger "when you
+// do, cast it for its madness cost or put it into your graveyard"
+// (:1386-1420), whose ability is a Play of the card for PlayCost$ <cost>, then
+// a move of the card from exile to the graveyard when it was not cast.
+// The lines are Java's text minus display-only params. TriggerExiled fires
+// the trigger only for the exile this
+// keyword's own replacement caused (TriggerExiled.java:87-94); the engine
+// reads that off the trigger's keyword.
+func expandMadness(k Keyword) (Expansion, bool) {
+	cost := costDetail(k)
+	if cost == "" {
+		return Expansion{}, false
+	}
+	return Expansion{
+		Replacements: []string{"Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | Discard$ True | Secondary$ True | ReplaceWith$ KWMadnessExile" + Slot},
+		Triggers:     []string{"Mode$ Exiled | ValidCard$ Card.Self | Secondary$ True | Execute$ KWMadnessPlay" + Slot},
+		SVars: []SVarDef{
+			{"KWMadnessExile" + Slot, "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard"},
+			{"KWMadnessPlay" + Slot, "DB$ Play | Defined$ Self | ValidSA$ Spell | PlayCost$ " + cost + " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile | Optional$ True | RememberPlayed$ True | SubAbility$ KWMadnessGrave" + Slot},
+			{"KWMadnessGrave" + Slot, "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile | Destination$ Graveyard | TrackDiscarded$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ KWMadnessCleanup" + Slot},
+			{"KWMadnessCleanup" + Slot, "DB$ Cleanup | ClearRemembered$ True"},
 		},
 	}, true
 }

@@ -64,6 +64,12 @@ type unlessCost struct {
 	// type exiled from the payer's graveyard (CostExile).
 	exileGraveN    int
 	exileGraveSpec string
+	// exileTypesN/exileTypesSpec are ExileFromGrave<X/Type+withTypesGE<N>>:
+	// any number of the type, at least one, exiled from the payer's graveyard
+	// with N or more card types among them (Nethergoyf's escape). Only
+	// escapeCost sets them (escapeTypesPart); parseUnlessCost never does.
+	exileTypesN    int
+	exileTypesSpec string
 	// exileHandN/exileHandSpec are ExileFromHand<N/Type>: N cards of the type
 	// exiled from the payer's hand, the source itself never among them
 	// (CostExile from the hand; Allosaurus Rider's "do not count it",
@@ -466,6 +472,14 @@ func (g *Game) unlessCardsPayable(pid PlayerID, source CardID, uc unlessCost) bo
 	if uc.exileGraveN > 0 && len(g.costCandidates(pid, source, false, Graveyard, uc.exileGraveSpec)) < uc.exileGraveN {
 		return false
 	}
+	if uc.exileTypesN > 0 {
+		// CostExile.canPay (CostExile.java:215-228): the card types among every
+		// valid graveyard card reach N.
+		options := g.costCandidates(pid, source, false, Graveyard, uc.exileTypesSpec)
+		if len(options) == 0 || coreTypeCount(g, options) < uc.exileTypesN {
+			return false
+		}
+	}
 	if uc.exileHandN > 0 && len(g.costCandidates(pid, source, false, Hand, uc.exileHandSpec)) < uc.exileHandN {
 		return false
 	}
@@ -636,6 +650,11 @@ func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid P
 			exileFromGraveyard(g, controller, id)
 		}
 	}
+	if uc.exileTypesN > 0 {
+		for _, id := range g.chosenTypesCards(controller, pid, a.Source, uc) {
+			exileFromGraveyard(g, controller, id)
+		}
+	}
 	if uc.exileHandN > 0 {
 		picks := g.chosenUnlessCards(controller, pid, a.Source, g.costCandidates(pid, a.Source, false, Hand, uc.exileHandSpec), uc.exileHandN, uc.exileHandN)
 		for _, id := range picks {
@@ -695,6 +714,54 @@ func (g *Game) chosenUnlessCards(controller PlayerController, pid PlayerID, sour
 		return options[:lo]
 	}
 	return picks
+}
+
+// chosenTypesCards is the payer's pick for an exileTypesN part, the human
+// decision of HumanCostDecision.visit(CostExile) (HumanCostDecision.java:
+// 323-336): one or more of the valid graveyard cards with exileTypesN or more
+// card types among them. A pick short of that is replaced by every valid card,
+// which unlessCardsPayable said is enough, as collectEvidence does.
+func (g *Game) chosenTypesCards(controller PlayerController, pid PlayerID, source CardID, uc unlessCost) []CardID {
+	options := g.costCandidates(pid, source, false, Graveyard, uc.exileTypesSpec)
+	picks := controller.ChooseCardsForEffect(g, pid, source, options, 1, len(options))
+	if len(picks) == 0 || !isSubset(picks, options) || hasDuplicate(picks) || coreTypeCount(g, picks) < uc.exileTypesN {
+		picks = options
+	}
+	return append([]CardID(nil), picks...)
+}
+
+// coreTypeCount is AbilityUtils.countCardTypesFromList(ids, false)
+// (AbilityUtils.java:3955-3963): the distinct core types among the cards.
+func coreTypeCount(g *Game, ids []CardID) int {
+	var seen cardtype.Line
+	for _, id := range ids {
+		seen = seen.Union(g.Card(id).Type())
+	}
+	return len(seen.CoreTypes())
+}
+
+// escapeTypesPart splits Nethergoyf's ExileFromGrave<X/Type+withTypesGE<N>>
+// out of an Escape cost: the rest of the text, the type without the suffix
+// and N. ok is false for a cost without such a part. X is the number of cards
+// exiled; Java announces it (PlaySpellAbility.java:766-778) but the human
+// payment ignores it, choosing any number with N or more types
+// (HumanCostDecision.java:323-336), and nothing else reads Nethergoyf's X.
+func escapeTypesPart(text string) (rest, spec string, n int, ok bool) {
+	for _, p := range cost.Parse(text).Parts {
+		if p.Name != "ExileFromGrave" || p.Field(0) != "X" {
+			continue
+		}
+		base, num, found := strings.Cut(p.Field(1), "+withTypesGE")
+		if !found {
+			continue
+		}
+		v, err := strconv.Atoi(num)
+		if err != nil || v <= 0 || base == "" {
+			return "", "", 0, false
+		}
+		return strings.TrimSpace(strings.Replace(text, p.Text, "", 1)), base, v, true
+	}
+	return "", "", 0, false
 }
 
 // collectEvidence is CostCollectEvidence.payAsDecided: the payer exiles cards

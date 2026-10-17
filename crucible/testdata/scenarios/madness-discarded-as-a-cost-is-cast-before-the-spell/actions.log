@@ -1,0 +1,21 @@
+# CR 702.35: Fiery Temper discarded to pay Tormenting Voice's additional cost
+# is discarded into exile (Madness's Discard$ replacement,
+# CardFactoryUtil.java:2345-2362), and its "when you do, cast it for its
+# madness cost" trigger (:1386-1420) waits until Tormenting Voice is on the
+# stack, then goes above it (PlaySpellAbility.java:682 freezes the stack while
+# the cost is paid; TriggerHandler.java:264). So Fiery Temper is cast for {R}
+# and resolves first: the graveyard holds it under Tormenting Voice.
+startturn human
+advance 3
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+# Tormenting Voice: {1}{R}, discard Fiery Temper.
+queue paygeneric R
+queue discardchoice 2
+# The madness trigger: cast Fiery Temper (the single Optional$ choice),
+# targeting the opponent.
+queue confirmeffect true
+queue targets ai
+castspell human 1
+resolvestack

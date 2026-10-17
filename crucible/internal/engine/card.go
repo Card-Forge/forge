@@ -1240,6 +1240,9 @@ type castOptional struct {
 	revealed  []CardID
 	foretold  bool
 	escaped   bool
+	// madness is SpellAbility.isMadness (AlternativeCost.Madness): the spell
+	// was cast by Madness's trigger for its madness cost (Count$Madness).
+	madness bool
 	// emerged is getSacrificedAsEmerge (SpellAbility, PlaySpellAbility.java:
 	// 553): the permanent sacrificed for the Emerge cost, read as it last was
 	// (emerge.go); NoCard for a cast that did not emerge.

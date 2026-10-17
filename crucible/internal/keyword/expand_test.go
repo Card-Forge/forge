@@ -152,6 +152,8 @@ func TestExpandReplacements(t *testing.T) {
 		{"Devour:X::, where X is the number of creatures devoured this way", true, "ReplaceWith$ KWDevour{n}"},
 		{"Devour:y", false, ""},
 		{"Devour", false, ""},
+		{"Madness:X R", true, "Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | Discard$ True | Secondary$ True | ReplaceWith$ KWMadnessExile{n}"},
+		{"Madness", false, ""},
 	} {
 		t.Run(tc.line, func(t *testing.T) {
 			t.Parallel()

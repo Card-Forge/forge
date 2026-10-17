@@ -155,9 +155,7 @@ func (sacrificeEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 			continue
 		}
 		// Optional$: the player is asked first (Java asks even with no
-		// candidate), then sacrifices Amount$ of the candidates, or all of
-		// them when fewer -- the one choice ChoosePermanentsToSacrifice
-		// offers, so a player who confirms cannot then sacrifice fewer.
+		// candidate, SacrificeEffect.java:143).
 		if optional && !controller.ConfirmEffect(g, pid, a.Source) {
 			continue
 		}
@@ -168,17 +166,20 @@ func (sacrificeEffect) Resolve(g *Game, a *Ability, controller PlayerController)
 		if n == 0 {
 			continue
 		}
-		if !isDevourAbility(a) {
+		if !optional || strict {
+			// minTargets = amount (SacrificeEffect.java:138): exactly Amount$
+			// of the candidates, or all of them when fewer.
 			sacrificeCards(g, controller, a, controller.ChoosePermanentsToSacrifice(g, pid, candidates, n))
 			continue
 		}
-		// Devour's "any number": Optional$ without StrictAmount$ lets the
-		// player choose from none up to Amount$ (SacrificeEffect.java:138,
-		// choosePermanentsToSacrifice(sa, 0, amount, ...)). The answer is
-		// checked, a wrong one an error (GO-7).
+		// Optional$ without StrictAmount$ (Exploit, Devour, "you may sacrifice
+		// up to N"): minTargets is 0 (SacrificeEffect.java:138), so having
+		// confirmed, the player still chooses from none up to Amount$
+		// (choosePermanentsToSacrifice(sa, 0, amount, ...), :148). The answer
+		// is checked, a wrong one an error (GO-7).
 		chosen := controller.ChooseCardsForEffect(g, pid, a.Source, candidates, 0, n)
 		if !isSubset(chosen, candidates) || hasDuplicate(chosen) || len(chosen) > n {
-			return fmt.Errorf("engine: Sacrifice: devour answer %v is not up to %d of the %d offered", chosen, n, len(candidates))
+			return fmt.Errorf("engine: Sacrifice: optional answer %v is not up to %d of the %d offered", chosen, n, len(candidates))
 		}
 		sacrificeCards(g, controller, a, chosen)
 	}

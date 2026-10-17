@@ -460,6 +460,12 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 	switch defined {
 	case "Self":
 		return []CardID{host.ID}, nil
+	case "Self.StrictlySelf":
+		// Self filtered by StrictlySelf (Madness's "put it into your
+		// graveyard", CardFactoryUtil.java:1403): Java's game-timestamp check
+		// is identity here, as valid.go's StrictlySelf already reads it; the
+		// ChangeZone's Origin$ keeps a card that left that zone where it is.
+		return []CardID{host.ID}, nil
 	case "Enchanted", "Equipped":
 		if id, ok := host.AttachedTo(); ok {
 			return []CardID{id}, nil

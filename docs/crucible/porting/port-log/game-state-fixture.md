@@ -145,6 +145,7 @@ queue attacktarget <p>|<id>   ScriptedController.QueueAttackTarget, a player nam
 queue blocks [<b>=<a>,...]    ScriptedController.QueueBlocks, blocker=attacker pairs from Loaded.CardByFixtureID (no pairs declines)
 queue damage <b>=<n>[,...]    ScriptedController.QueueDamageAssignment, blocker=amount pairs from Loaded.CardByFixtureID
 queue discard <id>[,...]      ScriptedController.QueueDiscard, ids from Loaded.CardByFixtureID
+queue discardchoice <id>[,...]  ScriptedController.QueueDiscardChoice, ChooseCardsToDiscard's pick (a Discard<N/Card> cost), ids from Loaded.CardByFixtureID
 queue cardchoice <id>[,...]|none  ScriptedController.QueueCardChoice, an effect's ChooseCardsForEffect pick (Clone's Choices$, among others), ids from Loaded.CardByFixtureID; none is an empty pick (a declined Optional$ Discard)
 queue option <n>              ScriptedController.QueueOption, ChooseOption's index into the options offered (a type from a list, a "choose one")
 queue optionname <text>       ScriptedController.QueueOptionNamed, the ChooseOption answer equal to the text (_ stands for a space), for lists too long to index: a creature card name out of the whole database

@@ -88,18 +88,38 @@ func (g *Game) noteGraveyardExit(card CardID, from ZoneType) bool {
 	if from != Graveyard || !g.holdingCastExits {
 		return false
 	}
-	g.castExits = append(g.castExits, card)
+	g.castExits = append(g.castExits, castHeld{exit: card})
 	return true
 }
 
-// castExitMatches takes the held graveyard exits' trigger matches, in the
-// order the cards left, and empties the hold.
+// holdCastTriggers holds matches for the spell being cast and reports
+// whether it did: while a cast is in progress, a trigger a cost part fired
+// waits for the spell to be on the stack (Game.castExits).
+func (g *Game) holdCastTriggers(matches []Ability) bool {
+	if !g.holdingCastExits {
+		return false
+	}
+	if len(matches) > 0 {
+		g.castExits = append(g.castExits, castHeld{exit: NoCard, matches: matches})
+	}
+	return true
+}
+
+// castExitMatches releases the cast's trigger hold: every held trigger, in
+// the order it fired, the graveyard exits' matches read now. From here on a
+// trigger goes on the stack as it fires, above the spell. The caller pushes
+// the matches; it is called once the spell is on the stack.
 func (g *Game) castExitMatches() []Ability {
 	var matches []Ability
-	for _, id := range g.castExits {
-		matches = append(matches, g.leftGraveyardMatches(id, g.Card(id).Zone)...)
+	for _, h := range g.castExits {
+		if h.exit != NoCard {
+			matches = append(matches, g.leftGraveyardMatches(h.exit, g.Card(h.exit).Zone)...)
+			continue
+		}
+		matches = append(matches, h.matches...)
 	}
 	g.castExits = nil
+	g.holdingCastExits = false
 	return matches
 }
 
