@@ -482,19 +482,10 @@ public class YieldController {
         }
     }
 
-    /**
-     * Ends every running yield. On a local seat the controller's owner clears its own. A netplay client's controller
-     * has no owner, so the yields of {@code local} are cleared through the update path, which reaches the host, and
-     * {@code gui} shows the change.
-     */
+    /** Ends every running yield of {@code local} through the update path, which a netplay client sends on to the host. */
     public static void stopYielding(IGameController ctrl, PlayerView local, IGuiGame gui) {
-        if (ctrl == null) return;
+        if (ctrl == null || local == null) return;
         YieldController yc = ctrl.getYieldController();
-        if (yc.owner != null) {
-            yc.clearActiveYieldAndDispatch();
-            return;
-        }
-        if (local == null) return;
         if (yc.getAutoPassUntilMarker() != null) ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
         if (yc.autoPassUntilStackEmpty()) ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false, false));
         if (yc.autoPassUntilEndOfTurn()) ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
