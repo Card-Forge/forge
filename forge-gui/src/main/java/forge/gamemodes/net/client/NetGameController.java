@@ -215,17 +215,17 @@ public class NetGameController implements IGameController {
 
         @Override
         public void setRememberedActions() {
-            send(ProtocolMethod.sendMacroCommand, Command.RECORD);
+            send(ProtocolMethod.setRememberedActions);
         }
 
         @Override
         public void nextRememberedAction() {
-            send(ProtocolMethod.sendMacroCommand, Command.NEXT);
+            send(ProtocolMethod.nextRememberedAction);
         }
 
         @Override
         public void repeatRememberedActions() {
-            send(ProtocolMethod.sendMacroCommand, Command.REPEAT);
+            send(ProtocolMethod.repeatRememberedActions);
         }
 
         @Override

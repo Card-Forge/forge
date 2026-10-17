@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface IMacroSystem {
-    /** A macro button or shortcut, sent from a netplay client to its macro system on the host. */
-    enum Command { RECORD, NEXT, REPEAT }
-
     /** What the host's macro system is doing, sent to a netplay client so its macro buttons can show it. */
     record State(boolean recording, boolean replaying, boolean hasActions) implements Serializable { }
 

@@ -96,11 +96,15 @@ public enum ProtocolMethod implements IHasForgeLog {
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
     sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class),
-    sendMacroCommand          (Mode.CLIENT, Void.TYPE, IMacroSystem.Command.class);
+    setRememberedActions      (Mode.MACRO, Void.TYPE),
+    nextRememberedAction      (Mode.MACRO, Void.TYPE),
+    repeatRememberedActions   (Mode.MACRO, Void.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),
-        CLIENT(IGameController.class);
+        CLIENT(IGameController.class),
+        /** A client's call on its controller's macro system. */
+        MACRO(IMacroSystem.class);
 
         private final Class<?> toInvoke;
         Mode(final Class<?> toInvoke) {
@@ -149,6 +153,11 @@ public enum ProtocolMethod implements IHasForgeLog {
             return null;
         }
     }
+    /** What a call received from a client is made on: the controller, or for a macro its macro system. */
+    public Object receiver(final Object toInvoke) {
+        return mode == Mode.MACRO ? ((IGameController) toInvoke).macros() : toInvoke;
+    }
+
     public Class<?> getReturnType() {
         return returnType;
     }

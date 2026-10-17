@@ -47,15 +47,6 @@ public interface IGameController {
 
     IMacroSystem macros();
 
-    /** Named to match the {@code sendMacroCommand} ProtocolMethod (lookup is by name). */
-    default void sendMacroCommand(final IMacroSystem.Command command) {
-        switch (command) {
-            case RECORD -> macros().setRememberedActions();
-            case NEXT -> macros().nextRememberedAction();
-            case REPEAT -> macros().repeatRememberedActions();
-        }
-    }
-
     void nextGameDecision(NextGameDecision decision);
 
     String getActivateDescription(CardView card);
