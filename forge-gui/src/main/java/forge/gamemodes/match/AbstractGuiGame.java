@@ -75,10 +75,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameControllers.containsKey(player);
     }
 
-    public final PlayerView getCurrentPlayer() {
-        return currentPlayer;
-    }
-
     @Override
     public String getDayTime() {
         return daytime;
@@ -86,6 +82,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
+    }
+
+    public final PlayerView getCurrentPlayer() {
+        return currentPlayer;
     }
 
     @Override
