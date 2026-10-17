@@ -573,22 +573,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 @Override
                 public void valueChanged(String newValue) {
                     super.valueChanged(newValue);
-                    FOptionPane.showConfirmDialog (
-                        Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                        Forge.getLocalizer().getMessage("lblRestartForge"),
-                        Forge.getLocalizer().getMessage("lblRestart"),
-                        Forge.getLocalizer().getMessage("lblLater"), result -> {
-                            if (result) {
-                                Forge.restart(true);
-                            }
-                        }
-                    );
+                    // apply right away: no restart needed (the unique prints index is rebuilt)
+                    FModel.getMagicDb().setCardArtPreference(newValue);
                 }
             }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SMART_CARD_ART,
             Forge.getLocalizer().getMessage("lblSmartCardArtOpt"),
             Forge.getLocalizer().getMessage("nlSmartCardArtOpt") + "\n" +
-            Forge.getLocalizer().getMessage("nlSmartCardArtOptNote")), 4);
+            Forge.getLocalizer().getMessage("nlSmartCardArtOptNote")) {
+                @Override
+                public void select() {
+                    super.select();
+                    FModel.getMagicDb().setEnableSmartCardArtSelection(
+                        FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART));
+                }
+            }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
             Forge.getLocalizer().getMessage("cbDisplayFoil"),
             Forge.getLocalizer().getMessage("nlDisplayFoil")), 4);
