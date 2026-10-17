@@ -652,7 +652,7 @@ public class VPlayerPanel extends FContainer {
         float x = tabColWidth + avatar.getWidth() * 0.6f; //where the phase indicator ends
 
         float fieldWidth = width - x - commonTabWidth;
-        float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
+        float displayAreaWidth = Math.min(height / FCardPanel.ASPECT_RATIO, fieldWidth * 0.45f);
         if (selectedTab != null) {
             fieldWidth -= displayAreaWidth * (slideFieldToo ? slideProgress : 1f);
         }

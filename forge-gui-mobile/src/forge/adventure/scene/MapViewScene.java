@@ -49,9 +49,24 @@ public class MapViewScene extends UIScene {
     private int lastOverlayMode = 0; // 0=none, 1=details, 2=events, 3=reputation
 
     public static MapViewScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            clearInstance();
             object = new MapViewScene();
+        }
         return object;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        clearInstance();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
     private MapViewScene() {

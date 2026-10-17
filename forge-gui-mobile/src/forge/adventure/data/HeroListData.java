@@ -55,6 +55,9 @@ public class HeroListData {
             sprites = instance().avatarAtlas.createSprites(isFemale ? data.femaleAvatar : data.maleAvatar);
             instance().avatarSprites.put(isFemale ? data.femaleAvatar : data.maleAvatar, sprites);
         }
+        if (sprites == null || sprites.size == 0) {
+            return instance().avatarAtlas.getRegions().first();
+        }
         avatarIndex %= sprites.size;
         if (avatarIndex < 0) {
             avatarIndex += sprites.size;

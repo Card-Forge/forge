@@ -75,11 +75,47 @@ public abstract class Scene implements Disposable {
     }
 
     public static int getIntendedWidth() {
-        return Forge.isLandscapeMode() ? Config.instance().getConfigData().screenWidth : Config.instance().getConfigData().screenHeight;
+        int w = Config.instance().getConfigData() != null ? Config.instance().getConfigData().screenWidth : 480;
+        int h = Config.instance().getConfigData() != null ? Config.instance().getConfigData().screenHeight : 270;
+        return Forge.isLandscapeMode() ? w : h;
     }
 
     public static int getIntendedHeight() {
-        return Forge.isLandscapeMode() ? Config.instance().getConfigData().screenHeight : Config.instance().getConfigData().screenWidth;
+        int w = Config.instance().getConfigData() != null ? Config.instance().getConfigData().screenWidth : 480;
+        int h = Config.instance().getConfigData() != null ? Config.instance().getConfigData().screenHeight : 270;
+        return Forge.isLandscapeMode() ? h : w;
+    }
+
+    public static float getWorldWidth(int screenW, int screenH) {
+        float aspect = (screenW > 0 && screenH > 0) ? (float) screenW / (float) screenH : (Forge.isLandscapeMode() ? 16f / 9f : 9f / 16f);
+        float baseW = getIntendedWidth();
+        float baseH = getIntendedHeight();
+        float baseAspect = baseW / baseH;
+        if (aspect >= baseAspect) {
+            return baseH * aspect;
+        } else {
+            return baseW;
+        }
+    }
+
+    public static float getWorldHeight(int screenW, int screenH) {
+        float aspect = (screenW > 0 && screenH > 0) ? (float) screenW / (float) screenH : (Forge.isLandscapeMode() ? 16f / 9f : 9f / 16f);
+        float baseW = getIntendedWidth();
+        float baseH = getIntendedHeight();
+        float baseAspect = baseW / baseH;
+        if (aspect >= baseAspect) {
+            return baseH;
+        } else {
+            return baseW / aspect;
+        }
+    }
+
+    public static float getWorldWidth() {
+        return getWorldWidth(Forge.getScreenWidth(), Forge.getScreenHeight());
+    }
+
+    public static float getWorldHeight() {
+        return getWorldHeight(Forge.getScreenWidth(), Forge.getScreenHeight());
     }
 
     public abstract void act(float delta);
@@ -119,6 +155,10 @@ public abstract class Scene implements Disposable {
 
     }
     public void resize(int width, int height) {
+
+    }
+
+    public void onOrientationChanged() {
 
     }
 
