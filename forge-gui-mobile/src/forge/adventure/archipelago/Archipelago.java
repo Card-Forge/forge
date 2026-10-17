@@ -64,7 +64,7 @@ public class Archipelago {
     }
 
     public void goal() {
-        APClient.setGameState(ClientStatus.CLIENT_GOAL);
+        if (APClient != null) APClient.setGameState(ClientStatus.CLIENT_GOAL);
     }
 
     public int getRandomItemPrice() {

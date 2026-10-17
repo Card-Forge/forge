@@ -331,12 +331,20 @@ public class ArchipelagoData implements SaveFileContent {
             }
         }
         // Win condition is reached if all bosses have been defeated.
-        ArchipelagoRandomizer apRandomizer = ArchipelagoRandomizer.getInstance();
-        if (bossesDefeatedByName.size() >= apRandomizer.getSlotData().CastlesRequired) {
+        if (isGoalReached()) {
             updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED, notificationMessage);
         }
 
         return result;
+    }
+
+    public boolean isGoalReached() {
+        if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            SlotData slotData = ArchipelagoRandomizer.getInstance().getSlotData();
+            return slotData != null
+                    && bossesDefeatedByName.size() >= slotData.CastlesRequired;
+        }
+        return false;
     }
 
     public boolean addCardUnlockedByName(String cardName) {

@@ -1,6 +1,8 @@
 package forge.adventure.archipelago.events;
 
 import com.github.tommyettinger.textra.TypingLabel;
+import forge.adventure.archipelago.Archipelago;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.archipelago.ArchipelagoRandomizer;
 import forge.adventure.archipelago.SlotData;
 import forge.adventure.archipelago.ArchipelagoClient;
@@ -50,6 +52,10 @@ public class ConnectResult {
                     APClient.scoutLocations(locations);
                 }
                 APRandomizer.sendQueuedLocations();
+                // The goal status is not queued like location checks, so re-send it in case it was reached while disconnected.
+                if (ArchipelagoData.getInstance().isGoalReached()) {
+                    Archipelago.getInstance().goal();
+                }
                 // Starting items currently not supported, commenting this out for now.
 //                APClient.slotData.parseStartingItems(registries);
             } catch (Exception e) {
