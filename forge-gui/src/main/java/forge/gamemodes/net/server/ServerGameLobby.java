@@ -61,13 +61,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         return super.getSlotLimit();
     }
 
-    /** Set the lobby's declared mode (Constructed / Limited) and broadcast to clients. */
-    public void setLimitedMode(boolean limited) {
-        getData().setLimitedMode(limited);
-        updateView(true);
-    }
-
-    /** Sets the game type a Limited match starts with. The default is Draft. */
+    /** Set the game type a Limited match starts with, or null for Constructed, and broadcast to clients. */
     public void setLimitedType(GameType type) {
         getData().setLimitedType(type);
         updateView(true);

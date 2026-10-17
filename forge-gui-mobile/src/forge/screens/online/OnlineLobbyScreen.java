@@ -12,6 +12,7 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
+import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
@@ -172,7 +173,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby, IDra
             updateDeckListFilter();
         }
         // Broadcast the mode so clients mirror it (their combo is read-only)
-        if (sgl != null) sgl.setLimitedMode(isLimitedMode());
+        if (sgl != null) sgl.setLimitedType(isLimitedMode() ? GameType.Draft : null);
 
         updateModeVisibility();
         updateActionButtons();

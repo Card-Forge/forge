@@ -630,8 +630,8 @@ public abstract class GameLobby implements IHasGameType {
         private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
         private final List<LobbySlot> slots = Lists.newArrayList();
         private NetworkEventView eventView;
-        private boolean limitedMode;
-        private GameType limitedType = GameType.Draft;
+        /** The game type a Limited match starts with, or null in Constructed mode. */
+        private GameType limitedType;
         private String activeEventId;
         private boolean activeConformance;
         private int maximumCommanderBracket = 5; // mirrors DECKGEN_MAXIMUM_COMMANDER_BRACKET default (off)
@@ -654,10 +654,7 @@ public abstract class GameLobby implements IHasGameType {
             this.eventView = view;
         }
         public boolean isLimitedMode() {
-            return limitedMode;
-        }
-        public void setLimitedMode(final boolean limited) {
-            this.limitedMode = limited;
+            return limitedType != null;
         }
         public GameType getLimitedType() {
             return limitedType;

@@ -18,6 +18,7 @@ import forge.Singletons;
 import forge.card.DraftOptions;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
@@ -146,7 +147,7 @@ public class CLobby implements IDraftEventHandler {
                 configuredFormat = null;
                 serverLobby.clearCurrentEvent();
             }
-            serverLobby.setLimitedMode(isLimited);
+            serverLobby.setLimitedType(isLimited ? GameType.Draft : null);
         }
         view.updateEventPanelState();
         view.setVariantsVisible(!isLimited);
