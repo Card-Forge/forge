@@ -5,10 +5,17 @@ import forge.game.card.CardCollection;
 import forge.game.player.actions.PlayerAction;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 public interface IMacroSystem {
+    /** A macro button or shortcut, sent from a netplay client to its macro system on the host. */
+    enum Command { RECORD, NEXT, REPEAT }
+
+    /** What the host's macro system is doing, sent to a netplay client so its macro buttons can show it. */
+    record State(boolean recording, boolean replaying, boolean hasActions) implements Serializable { }
+
     void addRememberedAction(PlayerAction action);
     void setRememberedActions();
     void nextRememberedAction();
@@ -18,6 +25,7 @@ public interface IMacroSystem {
     default boolean isRecording() { return false; }
     default boolean isReplaying() { return false; }
     default boolean hasRememberedActions() { return false; }
+    default void applyState(final State state) { }
     default Byte consumeRememberedColorChoice(final List<MagicColor.Color> choices) { return null; }
     default Map<Byte, Integer> consumeRememberedManaCombo(final List<MagicColor.Color> choices,
                                                           final int manaAmount, final boolean different) {

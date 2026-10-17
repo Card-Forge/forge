@@ -206,6 +206,8 @@ public class NetGameController implements IGameController {
         return macros;
     }
     public class NetMacroSystem implements IMacroSystem {
+        private volatile State state = new State(false, false, false);
+
         @Override
         public void addRememberedAction(PlayerAction action) {
             // DO i need to send this?
@@ -213,13 +215,32 @@ public class NetGameController implements IGameController {
 
         @Override
         public void setRememberedActions() {
-            send(ProtocolMethod.setRememberedActions);
+            send(ProtocolMethod.sendMacroCommand, Command.RECORD);
         }
 
         @Override
         public void nextRememberedAction() {
-            send(ProtocolMethod.nextRememberedAction);
+            send(ProtocolMethod.sendMacroCommand, Command.NEXT);
         }
+
+        @Override
+        public void repeatRememberedActions() {
+            send(ProtocolMethod.sendMacroCommand, Command.REPEAT);
+        }
+
+        @Override
+        public void applyState(final State state) {
+            this.state = state;
+        }
+
+        @Override
+        public boolean isRecording() { return state.recording(); }
+
+        @Override
+        public boolean isReplaying() { return state.replaying(); }
+
+        @Override
+        public boolean hasRememberedActions() { return state.hasActions(); }
 
         @Override
         public String playbackText() {
