@@ -946,6 +946,39 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, false, filter);
     }
 
+    static final EnumSet<CardEdition.Type> WIDENING_EXCLUDED_TYPES = EnumSet.of(
+            CardEdition.Type.PROMO, CardEdition.Type.ONLINE, CardEdition.Type.FUNNY,
+            CardEdition.Type.COLLECTOR_EDITION, CardEdition.Type.OTHER,
+            CardEdition.Type.UNKNOWN, CardEdition.Type.CUSTOM_SET);
+
+    private PaperCard findPreferredLanguageCandidate(List<CardEdition> editions, Map<String, PaperCard> candidatesCard,
+                                                     boolean skipSpecialRarity) {
+        PaperCard firstMatch = null;
+        for (CardEdition edition : editions) {
+            PaperCard pc = candidatesCard.get(edition.getCode());
+            if (pc == null)
+                continue;
+            if (skipSpecialRarity && pc.getRarity().equals(CardRarity.Special))
+                continue;
+            if (!isPreferredLanguagePrint(pc))
+                continue;
+            if (pc.hasImage())
+                return pc;
+            if (firstMatch == null)
+                firstMatch = pc;
+        }
+        return firstMatch;
+    }
+
+    private static boolean anyHasLocalImage(List<CardEdition> editions, Map<String, PaperCard> candidatesCard) {
+        for (CardEdition edition : editions) {
+            PaperCard pc = candidatesCard.get(edition.getCode());
+            if (pc != null && pc.hasImage())
+                return true;
+        }
+        return false;
+    }
+
     // Override when there is no date
     private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter){
         return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null, false, filter);
@@ -1034,6 +1067,24 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             Collections.sort(acceptedEditions);  // CardEdition correctly sort by (release) date
             if (artPref.latestFirst)
                 Collections.reverse(acceptedEditions);  // newest editions first
+        }
+
+        if (preferredLanguageAvailability != null) {
+            PaperCard languageCandidate = findPreferredLanguageCandidate(acceptedEditions, candidatesCard, false);
+            if (languageCandidate == null && cardEditions.size() > acceptedEditions.size()
+                    && !anyHasLocalImage(acceptedEditions, candidatesCard)) {
+                List<CardEdition> excludedEditions = new ArrayList<>(cardEditions);
+                excludedEditions.removeAll(acceptedEditions);
+                excludedEditions.removeIf(edition -> WIDENING_EXCLUDED_TYPES.contains(edition.getType()));
+                if (excludedEditions.size() > 1) {
+                    Collections.sort(excludedEditions);
+                    if (artPref.latestFirst)
+                        Collections.reverse(excludedEditions);
+                }
+                languageCandidate = findPreferredLanguageCandidate(excludedEditions, candidatesCard, true);
+            }
+            if (languageCandidate != null)
+                return cr.isFoil ? languageCandidate.getFoiled() : languageCandidate;
         }
 
         final Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
