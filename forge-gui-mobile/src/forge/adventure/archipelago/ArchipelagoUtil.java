@@ -50,14 +50,18 @@ public class ArchipelagoUtil {
         return REGION_TEXT_COLORS.getOrDefault(region, "");
     }
 
-    /** A castle boss or miniboss that gives an Archipelago check. */
+    /**
+     * Static definition of a castle boss or miniboss that gives an Archipelago check: who it is, where it lives and
+     * which check it sends. It holds no progress or state; whether a save has defeated it is stored per save, see
+     * {@link ArchipelagoData#isDefeated(Boss)}.
+     */
     public static final class Boss {
-        public final String name;          // display name
-        public final String enemyName;     // enemy data name (portrait); differs when a map or nameOverride renames the enemy
-        public final String region;        // one of REGION_NAMES
+        public final String name;          // Display name
+        public final String enemyName;     // Enemy data name for their portrait; differs when a map or nameOverride renames the enemy
+        public final String region;        // One of the REGION_NAMES
         public final boolean castleBoss;
         public final ArchipelagoCheckTypes check;
-        private final List<String> recordedNames; // lower-case names a defeat can be recorded under (EnemySprite.getName())
+        private final List<String> recordedNames; // Lower-case names a defeat can be recorded under (EnemySprite.getName())
 
         private Boss(String name, String enemyName, String region, boolean castleBoss, ArchipelagoCheckTypes check, String... aliases) {
             this.name = name;
@@ -71,11 +75,12 @@ public class ArchipelagoUtil {
             this.recordedNames = Collections.unmodifiableList(names);
         }
 
-        public boolean isDefeated(Set<String> defeatedNames) {
-            for (String recorded : recordedNames) {
-                if (defeatedNames.contains(recorded)) return true;
-            }
-            return false;
+        /**
+         * True if a defeat recorded under this name belongs to this boss (case-insensitive). DuelScene records defeats
+         * under {@code EnemySprite.getName()}, which can be an alias, e.g. "Fungus of Slimefoot" for Slimefoot.
+         */
+        public boolean matches(String recordedName) {
+            return recordedName != null && recordedNames.contains(recordedName.toLowerCase());
         }
     }
 
@@ -121,16 +126,19 @@ public class ArchipelagoUtil {
             miniBoss("The Hydra of Shandalaar", "The Hydra of Shandalaar", "green", ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED),
             miniBoss("Scarecrow Captain", "Scarecrow Captain", "green", ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED));
 
-    // Returns a boss a defeat was recorded under, or null if it doesn't give a check.
+    /**
+     * Looks up which boss a defeated enemy's name belongs to (the name DuelScene passes to addBossDefeated /
+     * addMiniBossDefeated).
+     * Returns null if that enemy doesn't give a check.
+     */
     public static Boss findBoss(String recordedName) {
-        if (recordedName == null) return null;
-        Set<String> name = Set.of(recordedName.toLowerCase());
         for (Boss boss : BOSSES) {
-            if (boss.isDefeated(name)) return boss;
+            if (boss.matches(recordedName)) return boss;
         }
         return null;
     }
 
+    // The bosses of one region (one of REGION_NAMES), castle boss first, in BOSSES order.
     public static List<Boss> getBossesInRegion(String region) {
         List<Boss> bosses = new ArrayList<>();
         for (Boss boss : BOSSES) {

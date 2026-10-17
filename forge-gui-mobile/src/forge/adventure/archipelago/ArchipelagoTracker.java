@@ -71,9 +71,9 @@ public final class ArchipelagoTracker {
             Region region = new Region(ArchipelagoUtil.getRegionLabel(regionName), ArchipelagoUtil.getRegionTextColor(regionName));
             for (ArchipelagoUtil.Boss boss : ArchipelagoUtil.getBossesInRegion(regionName)) {
                 if (boss.castleBoss) {
-                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Castle Boss", boss.isDefeated(data.bossesDefeatedByName)));
+                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Castle Boss", data.isDefeated(boss)));
                 } else if (slotData.IncludeMinibossLocations == 1) {
-                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Miniboss", boss.isDefeated(data.miniBossesDefeatedByName)));
+                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Miniboss", data.isDefeated(boss)));
                 }
             }
 

@@ -284,9 +284,11 @@ public class ArchipelagoData implements SaveFileContent {
     /// --- The functions below are responsible for mutating the user data we store in the save file for both modes ---
     // Todo: Make the functions below private where possible, rewrite other code to account for this.
     // Todo: Make sure the functions below trigger all related checks in `updatePlayerChecks` when applicable.
-    // Todo: Defeating a (mini-)boss should probably count as a check.
-    // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
-    // Returns `true` if the boss was not already defeated before.
+
+    /**
+     * Records a miniboss defeat and sends its check.
+     * Returns true if this name wasn't recorded as defeated before.
+     */
     public boolean addMiniBossDefeated(String miniBossName) {
         boolean result = miniBossesDefeatedByName.add(miniBossName.toLowerCase());
         String notificationMessage = String.format("%sRandomizer:{RESET}\nMiniboss Defeated: " + miniBossName, ArchipelagoColors.Plum);
@@ -296,18 +298,31 @@ public class ArchipelagoData implements SaveFileContent {
         return result;
     }
 
+    /**
+     * Records a castle boss defeat and sends its check.
+     * Returns true if this name wasn't recorded as defeated before.
+     */
     public boolean addBossDefeated(String bossName) {
         boolean result = bossesDefeatedByName.add(bossName.toLowerCase());
         String notificationMessage = String.format("%sRandomizer:{RESET}\nCastle Boss Defeated: " + bossName, ArchipelagoColors.Plum);
         System.out.println(notificationMessage);
         ArchipelagoUtil.Boss boss = ArchipelagoUtil.findBoss(bossName);
         if (boss != null && boss.castleBoss) updatePlayerChecks(boss.check, notificationMessage);
-        // Win condition is reached if all bosses have been defeated.
+        // The goal is reached once castles_required castle bosses are defeated.
         if (isGoalReached()) {
             updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED, notificationMessage);
         }
 
         return result;
+    }
+
+    // Returns true if this save has defeated the given boss.
+    public boolean isDefeated(ArchipelagoUtil.Boss boss) {
+        Set<String> defeatedNames = boss.castleBoss ? bossesDefeatedByName : miniBossesDefeatedByName;
+        for (String defeatedName : defeatedNames) {
+            if (boss.matches(defeatedName)) return true;
+        }
+        return false;
     }
 
     // Progress per region; region is one of ArchipelagoUtil.REGION_NAMES.
