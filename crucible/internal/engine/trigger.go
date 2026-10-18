@@ -376,7 +376,7 @@ func (g *Game) checkAttacksTriggers(controller PlayerController, attacker CardID
 						}
 					}
 					if _, ok := t.Param("DefendingPlayerPoisoned"); ok {
-						if g.Player(g.defenderOf(attacker)).Counters.Count(Poison) == 0 {
+						if d := g.defenderOf(attacker); d == NoPlayer || g.Player(d).Counters.Count(Poison) == 0 {
 							continue
 						}
 					}
@@ -2259,14 +2259,18 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 // endTriggerBatch, pushTriggeredAbilities collects the stack-bound triggers
 // it is handed instead of pushing them (Static$ True triggers still run at
 // once). An event that runs several trigger modes -- declaring attackers or
-// blockers, a token entering blocking -- opens one around all of them, so
-// their triggers reach the stack in one CR 603.3b APNAP pass, every one of the
-// active player's under every one of the next player's, as Java's
-// simultaneousStackEntryList does (TriggerHandler.runSingleTrigger adds each to
-// it; MagicStack.addAllTriggeredAbilitiesToStack, MagicStack.java:855-880,
-// orders it per player). Without a batch each mode's check pushed its own APNAP
-// pass, so a non-active player's trigger of an earlier mode ended up under the
-// active player's trigger of a later one. Batches nest; the outermost closes.
+// blockers, a token entering blocking, a combat damage step
+// (dealCombatDamageStep), one effect's resolution (resolveEffectBatched: each
+// card it moves, then ChangesZoneAll), a state-based action's deaths
+// (destroyLethalToughness, destroyDamagedCreatures) -- opens one around all
+// of them, so their triggers reach the stack in one CR 603.3b APNAP pass,
+// every one of the active player's under every one of the next player's, as
+// Java's simultaneousStackEntryList does (TriggerHandler.runSingleTrigger adds
+// each to it; MagicStack.addAllTriggeredAbilitiesToStack,
+// MagicStack.java:855-880, orders it per player). Without a batch each mode's
+// check pushed its own APNAP pass, so a non-active player's trigger of an
+// earlier mode ended up under the active player's trigger of a later one.
+// Batches nest; the outermost closes.
 func (g *Game) beginTriggerBatch() { g.triggerBatchDepth++ }
 
 // endTriggerBatch closes a batch beginTriggerBatch opened. Closing the

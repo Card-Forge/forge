@@ -315,6 +315,19 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return g.Player(sourceController).LifeGainedThisTurn, true
 	case "CreaturesAttackedThisTurn":
 		return g.creaturesAttackedCount(sourceController, source, count.Argument)
+	case "AttackersDeclared":
+		// AbilityUtils.java:2511-2528 (Raid): the distinct creatures the
+		// controller attacked with this turn. Java tells two objects of one
+		// card apart (equalsWithGameTimestamp); a CardID is the card across
+		// zone changes, so a creature that attacked, left and came back to
+		// attack again counts once here.
+		var distinct []CardID
+		for _, id := range g.Player(sourceController).attackedThisTurn {
+			if !containsCard(distinct, id) {
+				distinct = append(distinct, id)
+			}
+		}
+		return len(distinct), true
 	case "LeftBattlefieldThisTurn":
 		return g.leftBattlefieldCount(sourceController, source, count.Argument)
 	case "Devoured":

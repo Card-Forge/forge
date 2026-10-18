@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=20
+humanbattlefield=Preeminent Captain|Tapped;Elite Vanguard|Tapped|SummonSick
+ailife=16

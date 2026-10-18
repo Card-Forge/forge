@@ -98,13 +98,8 @@ nothing until that property was ported, and the existing combat variant now cast
 
 ## Gaps
 
-- An unresolvable `CheckSVar$` (`checkSVarMatches`, `presentcheck.go`) makes the spell silently uncastable rather than
-  refusing loudly (GO-7). Unchanged here: turning it into a pending error changes every activated ability that reads
-  one.
-- `parsePhaseRange` reads phase names case-insensitively and refuses an unknown one; Java's `smartValueOf` also accepts
-  the enum names (`COMBAT_BEGIN`) and throws on an unknown one. The port reads the script names only.
-- The other `attacking...` suffixed forms (`attackingAlone`, `attackingSame`, `attackingBattle`, `attackingYouOrYourPW`)
-  and `DefenderCtrlForRemembered` still match nothing (`valid-strings.md`).
+- An unresolvable `CheckSVar$`, Java's phase constant names, the other `attacking...` suffixed forms and
+  `DefenderCtrlForRemembered`: resolved or refused loudly in [`m6-r9l-combat-batches.md`](m6-r9l-combat-batches.md).
 - Suffocation stays inconclusive: its `CheckSVar$ X` reads the last red instant or sorcery that dealt the caster damage
   this turn, a record the probe's board never has.
 

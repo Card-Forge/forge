@@ -195,7 +195,19 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return err
 	}
 
-	if power == 0 && toughness == 0 && grant.empty() {
+	// NumAtt$/NumDef$ Double or Triple is read per target (pumpMultiplier).
+	multiplied := false
+	for _, key := range [...]string{"NumAtt", "NumDef"} {
+		if v, _ := a.Params.Param(key); v == "Double" || v == "Triple" {
+			multiplied = true
+		}
+	}
+	if _, radiance := a.Params.Param("Radiance"); multiplied && radiance {
+		// Java's Radiance loop reuses whatever the last target's stat made the
+		// amount (PumpEffect.java:489-496); no corpus line combines them.
+		return fmt.Errorf("engine: Pump: Radiance$ with a Double/Triple amount not resolvable yet")
+	}
+	if power == 0 && toughness == 0 && grant.empty() && !multiplied {
 		// Java has no such return: replaceDying (PumpEffect.java:506) still
 		// runs, so an X=0 Necrotic Wound still exiles a creature dying this turn.
 		return g.replaceDying(a, "Pump")
@@ -231,6 +243,18 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		// CR 702.26e: a phased-out target is not pumped (PumpEffect.java).
 		if c.IsPhasedOut() || !pumpZoneMatches(a.Params, c.Zone) {
 			continue
+		}
+		power, toughness := power, toughness
+		if multiplied {
+			extraP, err := pumpMultiplier(a, c, "NumAtt")
+			if err != nil {
+				return err
+			}
+			extraT, err := pumpMultiplier(a, c, "NumDef")
+			if err != nil {
+				return err
+			}
+			power, toughness = power+extraP, toughness+extraT
 		}
 		g.pumps = append(g.pumps, pumpRecord{
 			Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
@@ -374,18 +398,19 @@ func pumpRememberObjects(g *Game, a *Ability, host *Card, key string, forget boo
 // pumpAmount reads NumAtt$/NumDef$, defaulting to 0 when the key is absent
 // (a KW$-only Pump/PumpAll line, granting no stat change at all). effect
 // names the caller (Pump/PumpAll) for the error message. "Double"/"Triple"
-// (1 real Pump line, 0 real PumpAll lines -- PumpAllEffect.java's own
-// resolve computes NumAtt$/NumDef$ once against the ability's own host, with
-// no per-target special case at all) -- the target's own power or toughness
-// doubled or tripled, PumpEffect.resolve's own special-cased literal strings
-// rather than an SVar name resolveNamedAmount would resolve -- are not
-// built.
+// read 0 here: they are the target's own power or toughness, computed per
+// target (pumpMultiplier) -- Pump's only (PumpEffect.java:305-310,
+// :468-480); PumpAll has no such case (PumpAllEffect.java computes the
+// amount once against the host), so it refuses them.
 func pumpAmount(g *Game, effect string, a *Ability, host *Card, key string) (int, error) {
 	v, ok := a.Params.Param(key)
 	if !ok {
 		return 0, nil
 	}
 	if v == "Double" || v == "Triple" {
+		if effect == "Pump" {
+			return 0, nil
+		}
 		return 0, fmt.Errorf("engine: %s: %s$ %q not resolvable yet", effect, key, v)
 	}
 	amount, ok := resolveNamedAmount(g, a.Amounts, host, v)
@@ -393,6 +418,36 @@ func pumpAmount(g *Game, effect string, a *Ability, host *Card, key string) (int
 		return 0, fmt.Errorf("engine: %s: %s$ %q is not resolvable", effect, key, v)
 	}
 	return amount, nil
+}
+
+// pumpMultiplier is PumpEffect.java:468-480 for key (NumAtt$ or NumDef$):
+// "Double" adds the target's net power (toughness) once, doubling it, and
+// "Triple" adds it twice; 0 for any other value. Java reads the stat off
+// the card the Defined$ names -- an LKI copy for TriggeredAttackerLKICopy,
+// as it was when the trigger ran -- and this port off the card as it is now
+// (definedCards' doc comment: one CardID per card, no snapshot), so a pump
+// in response to Overclocked Electromancer's attack trigger is doubled with
+// it here and not in Java. A stat that does not resolve (a printed "X" with
+// nothing defining it) is an error, not a zero (GO-7).
+func pumpMultiplier(a *Ability, c *Card, key string) (int, error) {
+	v, _ := a.Params.Param(key)
+	times := 0
+	switch v {
+	case "Double":
+		times = 1
+	case "Triple":
+		times = 2
+	default:
+		return 0, nil
+	}
+	stat, ok := c.Power()
+	if key == "NumDef" {
+		stat, ok = c.Toughness()
+	}
+	if !ok {
+		return 0, fmt.Errorf("engine: Pump: %s$ %s on %s: its stat is not resolvable", key, v, c.Def.Name)
+	}
+	return stat * times, nil
 }
 
 // pumpZoneMatches reports whether zone is one PumpZone$ permits: absent

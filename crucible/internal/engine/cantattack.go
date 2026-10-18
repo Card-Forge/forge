@@ -2,7 +2,7 @@
 // (StaticAbilityCantAttackBlock.cantAttack/applyCantAttackAbility), with
 // Mode$ CanAttackDefender ("can attack as though it didn't have defender").
 
-//enginelint:allow id zone card game valid player staticability zonemove attack
+//enginelint:allow id zone card game valid player staticability zonemove attack combat
 
 package engine
 
@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
-	"github.com/jczastkiewicz/crucible/internal/cardtype"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -77,7 +76,7 @@ func (g *Game) cantAttackApplies(c *Card, target EntityID, host *Card, s *compil
 		return false
 	}
 	if v, ok := s.Param("UnlessDefender"); ok {
-		defender, ok := g.defendingPlayerOf(target)
+		defender, ok := g.defenderPlayerOf(target)
 		if !ok {
 			return false
 		}
@@ -89,22 +88,6 @@ func (g *Game) cantAttackApplies(c *Card, target EntityID, host *Card, s *compil
 		}
 	}
 	return true
-}
-
-// defendingPlayerOf is the player defending against an attack on target: the
-// player itself, a planeswalker's controller or a battle's protector.
-func (g *Game) defendingPlayerOf(target EntityID) (PlayerID, bool) {
-	if pid, ok := target.AsPlayer(); ok {
-		return pid, true
-	}
-	if cid, ok := target.AsCard(); ok {
-		c := g.Card(cid)
-		if c.Type().Has(cardtype.Battle) {
-			return c.ProtectingPlayer, c.ProtectingPlayer != NoPlayer
-		}
-		return c.Controller(), true
-	}
-	return NoPlayer, false
 }
 
 // attackTargetMatches is matchesValidParam("Target"/"ValidAttacked", target)

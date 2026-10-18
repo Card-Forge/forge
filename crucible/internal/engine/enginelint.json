@@ -122,7 +122,7 @@
     ],
     "player": ["id", "parts", "mana"],
     "ability": ["id", "damageresolveeffect", "replaceeffect"],
-    "combat": ["id", "game", "valid", "effecthelpers"],
+    "combat": ["id", "game", "valid", "effecthelpers", "card"],
     "game": [
       "id",
       "zone",

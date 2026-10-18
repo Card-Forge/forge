@@ -253,12 +253,14 @@ func TestEntersAsCopyRejectsWhatItCannotRun(t *testing.T) {
 			want: "Tap with ETB$ not resolvable yet",
 		},
 		{
+			// Protean Raider's shape, with a Count$ head this port does not
+			// keep (its own Count$AttackersDeclared resolves).
 			name: "a CheckSVar$ amount that does not resolve (Protean Raider)",
 			setup: func(t *testing.T, _ *engine.Game, _ engine.PlayerID) *compile.Card {
 				return copyTestDef(t, "Test Raider", "Creature Shapeshifter", "2", "2", "Cost:G",
 					"R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Layer$ Copy | ReplacementResult$ Updated | Optional$ True | ReplaceWith$ DBCopy | CheckSVar$ RaidTest | Description$ Raid",
 					"SVar:DBCopy:DB$ Clone | Choices$ Creature.Other",
-					"SVar:RaidTest:Count$AttackersDeclared")
+					"SVar:RaidTest:Count$YouScryThisTurn")
 			},
 			want: `CheckSVar$ "RaidTest" not resolvable yet`,
 		},

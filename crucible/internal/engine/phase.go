@@ -39,6 +39,17 @@ var phaseNames = [numPhaseTypes]string{
 	EndOfTurn: "End of Turn", Cleanup: "Cleanup",
 }
 
+// phaseConstNames are Java's PhaseType constant names, the second spelling
+// PhaseType.smartValueOf accepts (PhaseType.java:98, v.name()): a script
+// may write `Phases$ COMBAT_BEGIN` as well as `Phases$ BeginCombat`.
+var phaseConstNames = [numPhaseTypes]string{
+	Untap: "UNTAP", Upkeep: "UPKEEP", Draw: "DRAW", Main1: "MAIN1",
+	CombatBegin: "COMBAT_BEGIN", DeclareAttackers: "COMBAT_DECLARE_ATTACKERS",
+	DeclareBlockers: "COMBAT_DECLARE_BLOCKERS", FirstStrikeDamage: "COMBAT_FIRST_STRIKE_DAMAGE",
+	CombatDamage: "COMBAT_DAMAGE", CombatEnd: "COMBAT_END", Main2: "MAIN2",
+	EndOfTurn: "END_OF_TURN", Cleanup: "CLEANUP",
+}
+
 // String returns the phase as a card script spells it.
 func (p PhaseType) String() string {
 	if int(p) >= numPhaseTypes {
@@ -113,10 +124,12 @@ func parsePhaseRange(values string) (phaseSet, bool) {
 // are, so an exact match would silently drop those 3 real lines rather than
 // fire their trigger. PhaseByName itself stays exact -- fixture.go's own
 // GameState text format is this port's own, not the corpus's, and has no
-// such inconsistency to tolerate.
+// such inconsistency to tolerate. Java's constant name (phaseConstNames) is
+// accepted too, case-insensitively, as smartValueOf does (PhaseType.java:
+// 97-101).
 func phaseNameFold(name string) (PhaseType, bool) {
-	for i, n := range phaseNames {
-		if strings.EqualFold(n, name) {
+	for i := range phaseNames {
+		if strings.EqualFold(phaseNames[i], name) || strings.EqualFold(phaseConstNames[i], name) {
 			return PhaseType(i), true
 		}
 	}

@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=EndCombat
+humanlife=20
+humanbattlefield=Invasion of Belenon|Protector:ai|Counters:DEFENSE=5;Grizzly Bears
+humangraveyard=Silvercoat Lion
+ailife=20
+aibattlefield=Hill Giant|Damage:2

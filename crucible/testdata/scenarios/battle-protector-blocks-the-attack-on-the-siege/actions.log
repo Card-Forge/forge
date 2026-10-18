@@ -1,0 +1,20 @@
+# The human attacks the Siege it controls, protected by ai (a battle is
+# attacked by its protector's opponents, CombatUtil.java:66-73). The player
+# defending against that attack is the protector, not the controller
+# (Combat.getDefenderPlayerByAttacker, Combat.java:297-299), so ai declares
+# blockers: Hill Giant (3/3) blocks Silvercoat Lion (2/2) and kills it, and the
+# battle keeps all five defense counters. The human's untapped Grizzly Bears is
+# never offered as a blocker of its own attack, which the controller-as-
+# defender reading did.
+startturn human
+advance 5
+queue attackers 1
+queue attacktarget 2
+declareattackers
+advance
+queue blocks 3=1
+declareblockers
+advance
+advance
+combatdamage
+advance

@@ -1,0 +1,18 @@
+# Overclocked Electromancer (2/2) attacks; its trigger doubles its power until
+# end of turn (Pump NumAtt$ Double: +X/+0 where X is its power,
+# PumpEffect.java:468-470), so it deals 4. The beginning-of-combat energy
+# trigger is declined.
+startturn human
+advance 4
+queue optionaltrigger false
+resolvestack
+advance
+queue attackers 1
+declareattackers
+resolvestack
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage

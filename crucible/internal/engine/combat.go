@@ -3,7 +3,11 @@
 
 package engine
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/jczastkiewicz/crucible/internal/cardtype"
+)
 
 // Combat is the game's current combat, if one is happening. Attackers is who
 // was declared this combat (CR 508.1); AttackTargets is what each one is
@@ -75,6 +79,39 @@ func (c *Combat) isBlocked(attacker CardID) bool {
 
 // isAttacking reports whether id is one of this combat's attackers.
 func (c *Combat) isAttacking(id CardID) bool { return containsCard(c.Attackers, id) }
+
+// defenderPlayerOf is the entity half of Combat.getDefenderPlayerByAttacker
+// (Combat.java:289-306): the player defending against an attack on target --
+// the player itself, a battle's protector (Combat.java:298-299) or
+// a planeswalker's controller. false when no player does: a battle with no
+// protector, Java's null. Every "defending player" reading goes through here
+// (defenderOf, defenderPlayerByAttacker, cantattack.go, valid.go's
+// DefenderCtrl), so a battle is defended by who protects it, never by who
+// controls it.
+func (g *Game) defenderPlayerOf(target EntityID) (PlayerID, bool) {
+	if pid, ok := target.AsPlayer(); ok {
+		return pid, true
+	}
+	cid, ok := target.AsCard()
+	if !ok {
+		return NoPlayer, false
+	}
+	c := g.Card(cid)
+	if c.Type().Has(cardtype.Battle) {
+		return c.ProtectingPlayer, c.ProtectingPlayer != NoPlayer
+	}
+	return c.Controller(), true
+}
+
+// defenderPlayerByAttacker is Combat.getDefenderPlayerByAttacker
+// (Combat.java:289-306) for attacker: defenderPlayerOf what it attacks; false
+// when it is not attacking (Java's null).
+func (g *Game) defenderPlayerByAttacker(attacker CardID) (PlayerID, bool) {
+	if !g.combat.isAttacking(attacker) {
+		return NoPlayer, false
+	}
+	return g.defenderPlayerOf(g.combat.AttackTargets[attacker])
+}
 
 // Block is one blocking assignment: Blocker blocks Attacker (CR 509.1). A
 // single Attacker can appear in more than one Block -- gang blocking is

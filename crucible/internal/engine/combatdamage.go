@@ -80,6 +80,15 @@ func (g *Game) DealCombatDamage(controller PlayerController) {
 // attacker checks `g.alive` before doing anything at all, and dead blockers
 // are filtered out of its list before either side of the exchange runs.
 func (g *Game) dealCombatDamageStep(controller PlayerController, firstStrike bool) {
+	// The step's damage is one event: every DamageDone trigger of every
+	// exchange, then the table's ExcessDamage, DamageDoneOnce and the rest,
+	// reach the stack in one APNAP pass (beginTriggerBatch), as Java's
+	// Combat.dealAssignedDamage runs them all into one simultaneous list
+	// (GameAction.java:2766-2803, MagicStack.java:855-880). The batch closes
+	// before the state-based actions that follow the step, so a creature the
+	// damage kills triggers in the next pass.
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
 	blockersOf := make(map[CardID][]CardID, len(g.combat.Blocks))
 	for _, b := range g.combat.Blocks {
 		blockersOf[b.Attacker] = append(blockersOf[b.Attacker], b.Blocker)

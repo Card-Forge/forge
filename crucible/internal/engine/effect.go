@@ -134,7 +134,7 @@ func (r *Registry) resolve(g *Game, a *Ability, controller PlayerController) err
 			return r.resolveUnlessCost(g, a, controller, e, unlessCost)
 		}
 	}
-	if err := e.Resolve(g, a, controller); err != nil {
+	if err := resolveEffectBatched(g, e, a, controller); err != nil {
 		return err
 	}
 	// A static trigger the effect set off failed: stop here, before the
@@ -143,6 +143,22 @@ func (r *Registry) resolve(g *Game, a *Ability, controller PlayerController) err
 		return nil
 	}
 	return r.resolveSubAbility(g, a, controller)
+}
+
+// resolveEffectBatched runs one effect's body inside a trigger batch
+// (beginTriggerBatch): everything it sets off -- each card it moves entering
+// or dying, then ChangesZoneAll for the lot, the damage it deals -- reaches
+// the stack in one CR 603.3b APNAP pass once the body is done, as Java's
+// frozen stack holds them in simultaneousStackEntryList for one ordering
+// (TriggerHandler.java:264, MagicStack.java:855-880). A nested resolution (a
+// RepeatEach's or Charm's sub-ability inside the body) joins the outer batch.
+func resolveEffectBatched(g *Game, e Effect, a *Ability, controller PlayerController) error {
+	if g == nil {
+		return e.Resolve(g, a, controller)
+	}
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
+	return e.Resolve(g, a, controller)
 }
 
 // payTriggeredCost is the Cost$ half of WrappedAbility.resolve's
@@ -226,7 +242,7 @@ func (r *Registry) resolveUnlessCost(g *Game, a *Ability, controller PlayerContr
 		if errors.Is(err, errUnlessNoCost) {
 			// calculateUnlessCost returned null (AbilityUtils.java:1416-1420): the
 			// ability resolves with nothing to pay.
-			if err := e.Resolve(g, a, controller); err != nil {
+			if err := resolveEffectBatched(g, e, a, controller); err != nil {
 				return err
 			}
 			return r.resolveSubAbility(g, a, controller)
@@ -270,7 +286,7 @@ func (r *Registry) resolveUnlessCost(g *Game, a *Ability, controller PlayerContr
 	}
 
 	if paid == switched {
-		if err := e.Resolve(g, a, controller); err != nil {
+		if err := resolveEffectBatched(g, e, a, controller); err != nil {
 			return err
 		}
 	}

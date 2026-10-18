@@ -2,6 +2,5 @@ turn=1
 activeplayer=human
 activephase=Combat Damage
 humanlife=20
-humanbattlefield=Grizzly Bears|Tapped
+humanbattlefield=Grizzly Bears|Tapped;Invasion of Belenon|Protector:ai|Counters:DEFENSE=3
 ailife=20
-aibattlefield=Invasion of Belenon|Protector:human|Counters:DEFENSE=3

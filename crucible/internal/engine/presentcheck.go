@@ -164,16 +164,25 @@ func presentCountMatches(g *Game, host *Card, amounts map[string]expr.Amount, t 
 // ConditionCheckSVar$/ConditionSVarCompare$/OrOtherConditionSVarCompare$
 // (subAbilityConditionMet, condition.go) -- generalized once the second
 // caller needed the identical logic under its own param names.
+//
+// A condition this port cannot evaluate is not an unmet one: a second SVar
+// (secondKey, not ported), a compare string too short to hold an operator and
+// an operand, or a side resolveNamedAmount cannot resolve records a pending
+// error and reads false, so the game that reached it fails instead of
+// silently skipping the ability (GO-7). Java evaluates every one of these
+// (CardTraitBase.java:470-488).
 func checkSVarMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability, checkKey, compareKey, secondKey string) bool {
 	checkSVar, ok := t.Param(checkKey)
 	if !ok {
 		return true
 	}
-	if _, ok := t.Param(secondKey); ok {
+	if second, ok := t.Param(secondKey); ok {
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q with %s$ %q not resolvable yet", checkKey, checkSVar, secondKey, second))
 		return false
 	}
 	left, ok := resolveNamedAmount(g, amounts, host, checkSVar)
 	if !ok {
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q is not resolvable", checkKey, checkSVar))
 		return false
 	}
 	compare, ok := t.Param(compareKey)
@@ -181,10 +190,12 @@ func checkSVarMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *co
 		compare = "GE1"
 	}
 	if len(compare) < 3 {
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q is not a comparison", compareKey, compare))
 		return false
 	}
 	right, ok := resolveNamedAmount(g, amounts, host, compare[2:])
 	if !ok {
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q is not resolvable", compareKey, compare))
 		return false
 	}
 	return compareOp(left, compare[:2], right)

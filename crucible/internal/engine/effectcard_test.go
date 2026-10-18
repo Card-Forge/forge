@@ -368,7 +368,8 @@ func TestEffectFailsClosedOnMalformedShapes(t *testing.T) {
 		t.Parallel()
 		g, p, _ := newTwoPlayerGame(t)
 		_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil,
-			"DB$ Effect | ConditionCheckSVar$ Armed | ConditionSVarCompare$ GE1 | Duration$ Permanent")
+			"DB$ Effect | ConditionCheckSVar$ Armed | ConditionSVarCompare$ GE1 | Duration$ Permanent",
+			"Armed", "Number$0")
 		if err != nil {
 			t.Fatalf("ResolveStack: %v", err)
 		}

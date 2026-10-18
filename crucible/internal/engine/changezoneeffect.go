@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement controlcommands
+//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement controlcommands changecombatantseffect combat valid
 
 import (
 	"fmt"
@@ -10,8 +10,8 @@ import (
 // changeZoneUnresolvedParams are ChangeZoneEffect.java's params this port
 // cannot honour yet, grouped by the mechanism each needs: an entering-state
 // modifier (Transformed$, FaceDown$, AttachedTo$ ...; WithCountersType$ and
-// WithCountersAmount$ resolve, changeZoneEnter),
-// combat insertion (Attacking$/Blocking$), a delayed follow-up (AtEOT$,
+// WithCountersAmount$ resolve, changeZoneEnter; Attacking$/Blocking$ resolve,
+// changeZoneJoinCombat), a delayed follow-up (AtEOT$,
 // LeaveBattlefield$, StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
 // changeZoneDuration, but not its ReturnAbility$/ReturnValid$ delayed
 // trigger), an alternative destination prompt (DestinationAlternative$), a
@@ -35,7 +35,7 @@ import (
 var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
 	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown", "ExileFaceDown",
-	"Attacking", "Blocking", "LeaveBattlefield", "AtEOT", "StaticEffect",
+	"LeaveBattlefield", "AtEOT", "StaticEffect",
 	"DestinationAlternative", "LibraryPositionAlternative",
 	"RememberLKI", "Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
@@ -307,6 +307,54 @@ func changeZoneEnter(g *Game, a *Ability, dest ZoneType) ([]enterCounters, error
 	return out, nil
 }
 
+// changeZoneJoinCombat is addToCombat(movedCard, sa, "Attacking", "Blocking")
+// for a card ChangeZone is about to put onto the battlefield
+// (ChangeZoneEffect.java:703 for a known origin, :1391 for a search;
+// SpellAbilityEffect.java:758-831): Attacking$ makes it attack -- "True"
+// offers every defender, anything else the " & "-joined Defined$ entities --
+// when it will be the attacking player's, Blocking$ makes it block the first
+// card the Defined$ names when it will be that attacker's defending player.
+// ctrl is the controller it enters under (GainControl$, else its own).
+//
+// It runs before the move on both paths. Java's search adds the card to
+// combat before moveToPlay (:1391 vs :1400); its known-origin move adds it
+// after moveTo (:675 vs :703), but the zone-change triggers of a resolving
+// ability wait on a frozen stack (TriggerHandler.java:264,
+// MagicStack.java:599) and are tested once the effect is done, so an "enters
+// attacking" watcher (Arni Metalbrow's ValidCard$ Creature.YouCtrl+attacking)
+// sees the card attacking either way. This port tests a zone-change trigger
+// as the card moves (checkETBTriggers), so joining first is what gives it
+// the same answer; the controller is asked for the defender before the move
+// rather than after. joined reports whether the card is now in combat, so a
+// move that leaves it off the battlefield can take it out again
+// (changeZoneLeftCombat).
+func (g *Game) changeZoneJoinCombat(controller PlayerController, a *Ability, id CardID, dest ZoneType, newController PlayerID) (joined bool, err error) {
+	if dest != Battlefield || (!hasParam(a, "Attacking") && !hasParam(a, "Blocking")) {
+		return false, nil
+	}
+	ctrl := newController
+	if ctrl == NoPlayer {
+		ctrl = g.Card(id).Controller()
+	}
+	if err := g.addToCombatAttackingAs(controller, a, id, "Attacking", ctrl); err != nil {
+		return false, fmt.Errorf("engine: ChangeZone: %w", err)
+	}
+	if err := g.addToCombatBlockingAs(controller, a, id, "Blocking", ctrl); err != nil {
+		return false, fmt.Errorf("engine: ChangeZone: %w", err)
+	}
+	return g.combat.isAttacking(id) || isBlocking(g.combat.Blocks, id), nil
+}
+
+// changeZoneLeftCombat takes id out of combat when changeZoneJoinCombat put
+// it in and the move then left it off the battlefield (an entry replaced
+// elsewhere): a creature that is not on the battlefield is in no combat
+// (CR 506.4).
+func (g *Game) changeZoneLeftCombat(id CardID, joined bool) {
+	if joined && g.Card(id).Zone != Battlefield {
+		g.removeFromCombat(id)
+	}
+}
+
 // changeZoneGainControl reads GainControl$: "True" is the activator,
 // anything else a Defined$ player spec whose first player takes control.
 func changeZoneGainControl(g *Game, a *Ability) (PlayerID, error) {
@@ -437,7 +485,12 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 			// exist and a flashback card going to exile inside Move.
 			g.removeSpellFromStack(id)
 		}
+		joined, err := g.changeZoneJoinCombat(controller, a, id, dest, newController)
+		if err != nil {
+			return err
+		}
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
+		g.changeZoneLeftCombat(id, joined)
 		if dest == Exile {
 			g.markExiledWith(id, a.Source)
 			if melded != NoCard {
@@ -749,7 +802,12 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		var movedOrigins []ZoneType
 		for _, id := range pick.chosen {
 			from := g.Card(id).Zone
+			joined, err := g.changeZoneJoinCombat(controller, a, id, dest, newController)
+			if err != nil {
+				return err
+			}
 			if pick.found && g.foundSearchReplaced(controller, id, dest) {
+				g.changeZoneLeftCombat(id, joined)
 				// GameAction.changeZone returns the card a Moved replacement
 				// sent elsewhere (GameAction.java:341-368), and Java goes on with
 				// it: ExiledWith for an exiling search, then RememberChanged$ and
@@ -765,6 +823,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				continue
 			}
 			melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
+			g.changeZoneLeftCombat(id, joined)
 			if dest == Exile {
 				g.markExiledWith(id, a.Source)
 				if melded != NoCard {

@@ -129,7 +129,11 @@ func gatherStatics(g *Game, offZone bool) []layerStatic {
 			if def == nil {
 				continue
 			}
-			for fi, face := range def.Faces {
+			// Only the faces a card is showing (liveFaces): an untransformed
+			// DFC's back face -- Invasion of Belenon's Belenon War Anthem --
+			// has no static in play, as Java reads currentState alone
+			// (triggerFaces reads them the same way).
+			for fi, face := range def.Faces[:liveFaces(def)] {
 				for si, s := range face.Statics {
 					out = append(out, layerStatic{host: host, def: def, face: fi, index: si, s: s, amounts: face.Amounts})
 				}

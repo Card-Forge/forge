@@ -69,8 +69,10 @@ func TestDeclareCombatAttackersHonorsAQueuedPlaneswalkerTarget(t *testing.T) {
 	}
 }
 
-// A battle the opponent controls is eligible the same way a planeswalker
-// is, and the same two-target choice applies.
+// A battle the opponent protects is eligible the same way a planeswalker is,
+// and the same two-target choice applies: CombatUtil.getAllPossibleDefenders
+// (CombatUtil.java:66-73) offers every battle whose protector is an opponent
+// of the attacking player, here a Siege a itself controls.
 func TestDeclareCombatAttackersHonorsAQueuedBattleTarget(t *testing.T) {
 	t.Parallel()
 
@@ -78,7 +80,8 @@ func TestDeclareCombatAttackersHonorsAQueuedBattleTarget(t *testing.T) {
 	a, b := g.Players()[0], g.Players()[1]
 	g.SetTurnState(1, a, engine.Main1)
 	attacker := g.NewCard(creatureDefPT(t, "2", "2"), a, engine.Battlefield)
-	battle := g.NewCard(battleDefDefense(t, "4"), b, engine.Battlefield)
+	battle := g.NewCard(battleDefDefense(t, "4"), a, engine.Battlefield)
+	g.Card(battle).ProtectingPlayer = b
 
 	c := engine.NewScriptedController()
 	c.QueueAttackers([]engine.CardID{attacker})
@@ -87,6 +90,30 @@ func TestDeclareCombatAttackersHonorsAQueuedBattleTarget(t *testing.T) {
 
 	if got, want := g.AttackTarget(attacker), engine.CardEntity(battle); got != want {
 		t.Errorf("AttackTarget() = %v, want %v", got, want)
+	}
+}
+
+// A battle the opponent controls but the attacking player protects is not
+// attackable (CombatUtil.java:70: its protector is no opponent of theirs),
+// and neither is one with no protector: the opponent is the only target left,
+// so the attacker is assigned to them without a question.
+func TestDeclareCombatAttackersSkipsABattleTheAttackerProtects(t *testing.T) {
+	t.Parallel()
+
+	g := newGame(t, "a", "b")
+	a, b := g.Players()[0], g.Players()[1]
+	g.SetTurnState(1, a, engine.Main1)
+	attacker := g.NewCard(creatureDefPT(t, "2", "2"), a, engine.Battlefield)
+	protected := g.NewCard(battleDefDefense(t, "4"), b, engine.Battlefield)
+	g.Card(protected).ProtectingPlayer = a
+	g.NewCard(battleDefDefense(t, "4"), a, engine.Battlefield) // no protector
+
+	c := engine.NewScriptedController()
+	c.QueueAttackers([]engine.CardID{attacker})
+	declareAttackers(t, g, c)
+
+	if got, want := g.AttackTarget(attacker), engine.PlayerEntity(b); got != want {
+		t.Errorf("AttackTarget() = %v, want %v (the opponent, the only eligible target)", got, want)
 	}
 }
 
@@ -225,8 +252,9 @@ func TestDealCombatDamageToABattleRemovesDefense(t *testing.T) {
 	g.Player(a).Life, g.Player(b).Life = 20, 20
 	g.SetTurnState(1, a, engine.Main1)
 	attacker := g.NewCard(creatureDefPT(t, "3", "3"), a, engine.Battlefield)
-	battle := g.NewCard(battleDefDefense(t, "5"), b, engine.Battlefield)
+	battle := g.NewCard(battleDefDefense(t, "5"), a, engine.Battlefield)
 	g.Card(battle).Counters.Add(engine.Defense, 5)
+	g.Card(battle).ProtectingPlayer = b
 
 	ac := engine.NewScriptedController()
 	ac.QueueAttackers([]engine.CardID{attacker})

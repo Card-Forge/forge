@@ -186,26 +186,6 @@ func TestPumpEffectChainsIntoSubAbility(t *testing.T) {
 	}
 }
 
-// TestPumpEffectRejectsDoubleNumAtt proves NumAtt$ Double (the target's own
-// power doubled, PumpEffect.resolve's own special-cased literal) fails
-// loudly rather than being read as a named SVar and silently resolving to 0.
-func TestPumpEffectRejectsDoubleNumAtt(t *testing.T) {
-	t.Parallel()
-
-	g := newGame(t, "a", "b")
-	p := g.Players()[0]
-	g.SetTurnState(1, p, engine.Main1)
-	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
-
-	_, err := castETBPump(t, g, p, etbPumpTriggerDefParams(t, "Test Double", "Defined$ Self | NumAtt$ Double", nil))
-	if err == nil {
-		t.Fatal("ResolveStack: got nil error, want one naming NumAtt")
-	}
-	if !strings.Contains(err.Error(), "NumAtt") {
-		t.Errorf("ResolveStack error = %q, want it to name NumAtt$", err.Error())
-	}
-}
-
 // TestPumpEffectRejectsUnreadHiddenKeyword proves a KW$ "HIDDEN" line nothing
 // in this port reads (Whippoorwill's no-redirection line, ReplaceDamage.java:100)
 // fails loudly, naming the line, rather than being granted and ignored.

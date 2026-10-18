@@ -455,6 +455,10 @@ func destroyLethalToughness(g *Game, controller PlayerController) bool {
 			}
 		}
 	}
+	// Every creature's dies trigger and the batch's ChangesZoneAll go to the
+	// stack in one APNAP pass (beginTriggerBatch).
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
 	for _, id := range dead {
 		g.moveToGraveyard(controller, id)
 		g.checkDiesTriggers(controller, id)
@@ -511,6 +515,9 @@ func destroyDamagedCreatures(g *Game, controller PlayerController) bool {
 		}
 	}
 	var died []CardID
+	// One APNAP pass for the dies triggers and ChangesZoneAll, as above.
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
 	for _, id := range dead {
 		if g.destroyInstead(controller, id) || g.regenerate(controller, id) {
 			continue

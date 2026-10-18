@@ -263,7 +263,12 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		if refs.triggered.attacker == NoCard {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attacker", defined)
 		}
-		candidates = []PlayerID{g.defenderOf(refs.triggered.attacker)}
+		d := g.defenderOf(refs.triggered.attacker)
+		if d == NoPlayer {
+			// Java's getDefenderPlayerByAttacker null: no player defends.
+			return nil, nil
+		}
+		candidates = []PlayerID{d}
 	case "TriggeredOriginalController":
 		// AbilityUtils.java:1022-1027 (the "OrController"/"OriginalController"
 		// suffix): a Player recorded under OriginalController is itself.

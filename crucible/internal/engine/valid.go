@@ -514,6 +514,9 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		// source's controller itself (Combat.isAttacking(card, player)); a
 		// planeswalker or battle of theirs is a different defender.
 		return containsCard(g.combat.Attackers, c.ID) && g.combat.AttackTargets[c.ID] == PlayerEntity(sourceController)
+	case strings.HasPrefix(name, "attacking"):
+		// The rest of CardProperty.java:1506-1549's "attacking" chain.
+		return attackingSuffixMatches(g, c, name, sourceController, source)
 	case strings.HasPrefix(name, "attackedYouThisTurn"):
 		// CardProperty.java:1193-1196: CardDamageHistory.hasAttackedThisTurn
 		// (sourceController), the player itself among c's declared defenders
@@ -547,31 +550,32 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 			}
 		}
 		return false
-	case name == "DefenderCtrl":
-		// CardProperty.java:197-212: c's controller is the player the
-		// source is attacking, or the controller of the planeswalker or
-		// battle it attacks (Combat.getDefendingPlayerRelatedTo,
-		// Combat.java:452-463: an Aura, Fortification or Equipment source
-		// stands for the creature it is attached to). Read off
-		// AttackTargets directly, for the reason "attacking" (above) gives.
-		// Every ValidTgts$/Valid*$ naming it (47 corpus files) resolves
-		// through here; the ForRemembered suffix is a different name and
-		// never matches.
+	case name == "DefenderCtrl", name == "DefenderCtrlForRemembered":
+		// CardProperty.java:198-213: c's controller defends against the
+		// source -- or, ForRemembered, against the source's first remembered
+		// card (Holga's and Mercadia's Downfall's RepeatEach) -- as
+		// Combat.getDefendingPlayerRelatedTo (Combat.java:452-463) reads it:
+		// an Aura, Fortification or Equipment stands for the creature it is
+		// attached to, and the defender is defenderPlayerByAttacker's (a
+		// battle's protector, not its controller). No remembered card, or a
+		// first remembered object that is not a card, matches nothing.
 		attacker := source
-		if host, ok := sourceCard(g, source); ok {
-			if t := host.Type(); t.HasSubtype("Aura") || t.HasSubtype("Equipment") || t.HasSubtype("Fortification") {
-				attacker, _ = host.AttachedTo()
+		if name == "DefenderCtrlForRemembered" {
+			sc, ok := sourceCard(g, source)
+			if !ok || len(sc.Memory.Remembered()) == 0 {
+				return false
+			}
+			if attacker, ok = sc.Memory.Remembered()[0].AsCard(); !ok {
+				return false
 			}
 		}
-		target, ok := g.combat.AttackTargets[attacker]
-		if !ok {
-			return false
+		if a, ok := sourceCard(g, attacker); ok {
+			if t := a.Type(); t.HasSubtype("Aura") || t.HasSubtype("Equipment") || t.HasSubtype("Fortification") {
+				attacker, _ = a.AttachedTo()
+			}
 		}
-		if pid, isPlayer := target.AsPlayer(); isPlayer {
-			return c.Controller() == pid
-		}
-		cid, _ := target.AsCard()
-		return g.Card(cid).Controller() == c.Controller()
+		defender, ok := g.defenderPlayerByAttacker(attacker)
+		return ok && defender == c.Controller()
 	case name == "blocking":
 		return isBlocking(g.combat.Blocks, c.ID)
 	case name == "blocked":
@@ -1259,6 +1263,61 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 		}
 	}
 	return playerProperty(g, candidate, host, source, property, amounts, depth)
+}
+
+// attackingSuffixMatches is the rest of CardProperty.java:1506-1549's chain
+// for a name starting "attacking" that propertyMatches' own cases ("attacking",
+// "attackingYou", "attacking <Defined>") do not take: c must be attacking, then
+// the suffix narrows it.
+//
+//   - "...Alone" (attackingAlone, :1511-1513): c is the only attacker. Java
+//     counts the attackers on the last-state battlefield; this counts the
+//     attackers still on the battlefield plus c itself, so a creature that died
+//     attacking alone (Thijarian Witness) still reads alone. An attacker that
+//     died in the same event as c is not counted, where Java's snapshot would.
+//   - "attackingSame" (:1515-1520): c attacks what the source attacks.
+//   - "attackingYouOrYourPW", with or without LKI (:1530-1542): c attacks the
+//     source's controller or a planeswalker they control. A battle defender
+//     never matches (Java's "planeswalker that was removed from combat" guard).
+//   - "attackingBattle" (:1521-1529) is refused: Java reads the source's
+//     defender (combat.getDefenderByAttacker(source)), not c's, so Rampaging
+//     Geoderm's "if it's attacking a battle" asks whether the Geoderm is. A
+//     Forge bug (PORT-8): recorded as a pending error, never compensated.
+//   - Any other suffix reads as "attacking", Java's fall-through.
+//
+// LKI spellings read c itself: a CardID is the card across zone changes and
+// Move leaves combat as it was (combat.go's removeFromCombat).
+func attackingSuffixMatches(g *Game, c *Card, name string, sourceController PlayerID, source CardID) bool {
+	if !containsCard(g.combat.Attackers, c.ID) {
+		return false
+	}
+	switch {
+	case strings.HasSuffix(name, "Alone"):
+		for _, id := range g.combat.Attackers {
+			if id != c.ID && g.Card(id).Zone == Battlefield {
+				return false
+			}
+		}
+		return true
+	case name == "attackingSame":
+		attacked, ok := g.combat.AttackTargets[source]
+		return ok && containsCard(g.combat.Attackers, source) && g.combat.AttackTargets[c.ID] == attacked
+	case name == "attackingBattle":
+		g.recordPendingError(fmt.Errorf("engine: valid property attackingBattle reads the source's defender (CardProperty.java:1522, a Forge bug); not resolvable"))
+		return false
+	case strings.HasPrefix(name, "attackingYouOrYourPW"):
+		target := g.combat.AttackTargets[c.ID]
+		if pid, ok := target.AsPlayer(); ok {
+			return pid == sourceController
+		}
+		id, ok := target.AsCard()
+		if !ok {
+			return false
+		}
+		d := g.Card(id)
+		return d.Type().Has(cardtype.Planeswalker) && d.Controller() == sourceController
+	}
+	return true
 }
 
 // sourceCard resolves source to its own *Card, for the properties that read

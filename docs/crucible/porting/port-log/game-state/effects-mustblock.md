@@ -115,7 +115,8 @@ A blocker no longer on the battlefield is skipped (Java's `equalsWithGameTimesta
 `DefenderCtrl` (`CardProperty.java:197-212`) is engine-wide, not MustBlock's alone: every `ValidTgts$`/`Valid*$` naming
 it (47 corpus files, attack triggers targeting "creature defending player controls") now finds its targets instead of
 none. Relative to the attacking source, or for an Aura, Equipment or Fortification source to what it is attached to
-(`Combat.getDefendingPlayerRelatedTo`, `Combat.java:452-463`). `DefenderCtrlForRemembered` stays unmatched.
+(`Combat.getDefendingPlayerRelatedTo`, `Combat.java:452-463`). `DefenderCtrlForRemembered` is
+`m6-r9l-combat-batches.md`'s.
 
 ## Mode$ MustAttack and Mode$ MustBlock land
 

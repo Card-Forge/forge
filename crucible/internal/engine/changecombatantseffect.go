@@ -99,12 +99,23 @@ func (g *Game) attackAmong(controller PlayerController, decider PlayerID, id Car
 // Remembered, ...). ForEach$ with a Defined$ value reads it off the created
 // card instead of the host, not resolvable yet.
 func (g *Game) addToCombatAttacking(controller PlayerController, a *Ability, id CardID, param string) error {
+	c := g.Card(id)
+	if c.Zone != Battlefield {
+		return nil
+	}
+	return g.addToCombatAttackingAs(controller, a, id, param, c.Controller())
+}
+
+// addToCombatAttackingAs is addToCombatAttacking for a card about to enter
+// the battlefield under ctrl (ChangeZone's Attacking$, changeZoneJoinCombat):
+// Java's addToCombat checks neither the card's zone nor anything but the
+// controller it has been given (SpellAbilityEffect.java:761, :768).
+func (g *Game) addToCombatAttackingAs(controller PlayerController, a *Ability, id CardID, param string, ctrl PlayerID) error {
 	raw, ok := a.Params.Param(param)
 	if !ok {
 		return nil
 	}
-	c := g.Card(id)
-	if !g.activePhase.IsCombat() || c.Zone != Battlefield || !c.Type().Has(cardtype.Creature) || c.Controller() != g.activePlayer {
+	if !g.activePhase.IsCombat() || !g.Card(id).Type().Has(cardtype.Creature) || ctrl != g.activePlayer {
 		return nil
 	}
 	if strings.EqualFold(raw, "True") {
@@ -157,12 +168,21 @@ func (g *Game) addToCombatAttacking(controller PlayerController, a *Ability, id 
 // reaches it (every TokenBlocking$ resolves in or after the declare blockers
 // step).
 func (g *Game) addToCombatBlocking(controller PlayerController, a *Ability, id CardID, param string) error {
+	c := g.Card(id)
+	if c.Zone != Battlefield {
+		return nil
+	}
+	return g.addToCombatBlockingAs(controller, a, id, param, c.Controller())
+}
+
+// addToCombatBlockingAs is addToCombatBlocking for a card about to enter the
+// battlefield under ctrl (ChangeZone's Blocking$, changeZoneJoinCombat).
+func (g *Game) addToCombatBlockingAs(controller PlayerController, a *Ability, id CardID, param string, ctrl PlayerID) error {
 	raw, ok := a.Params.Param(param)
 	if !ok {
 		return nil
 	}
-	c := g.Card(id)
-	if !g.activePhase.IsCombat() || c.Zone != Battlefield || !c.Type().Has(cardtype.Creature) {
+	if !g.activePhase.IsCombat() || !g.Card(id).Type().Has(cardtype.Creature) {
 		return nil
 	}
 	cards, err := definedCards(g.Card(a.Source), raw, a.refs())
@@ -174,7 +194,7 @@ func (g *Game) addToCombatBlocking(controller PlayerController, a *Ability, id C
 	}
 	attacker := cards[0]
 	defender, attacking := g.defenderPlayerByAttacker(attacker)
-	if !attacking || defender != c.Controller() {
+	if !attacking || defender != ctrl {
 		return nil
 	}
 	if g.activePhase < DeclareBlockers {
@@ -194,27 +214,4 @@ func (g *Game) addToCombatBlocking(controller PlayerController, a *Ability, id C
 		}
 	}
 	return nil
-}
-
-// defenderPlayerByAttacker is Combat.getDefenderPlayerByAttacker
-// (Combat.java:289-306): the player attacker attacks, the controller of the
-// planeswalker it attacks, or the protector of the battle it attacks; false
-// when it is not attacking (Java's null).
-func (g *Game) defenderPlayerByAttacker(attacker CardID) (PlayerID, bool) {
-	if !g.combat.isAttacking(attacker) {
-		return NoPlayer, false
-	}
-	target := g.combat.AttackTargets[attacker]
-	if pid, ok := target.AsPlayer(); ok {
-		return pid, true
-	}
-	cid, ok := target.AsCard()
-	if !ok {
-		return NoPlayer, false
-	}
-	d := g.Card(cid)
-	if d.Type().Has(cardtype.Battle) {
-		return d.ProtectingPlayer, true
-	}
-	return d.Controller(), true
 }

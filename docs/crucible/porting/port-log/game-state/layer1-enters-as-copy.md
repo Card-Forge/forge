@@ -161,5 +161,6 @@ Since measured: the chained `PutCounter ETB$` rows (3 cards) and the `SubAbility
 
 The last two copy first and fail in the chain, as any Registry chain can: the game stops at the error either way.
 
-Outside the keyword: Displaced Dinosaurs runs (tested). Protean Raider errors (`CheckSVar$ Count$AttackersDeclared`).
-Mystic Reflection and the non-`Clone` lines (Primal Clay and its four kin, The Mimeoplasm, Living Lore) run too.
+Outside the keyword: Displaced Dinosaurs runs (tested). Protean Raider runs (`Count$AttackersDeclared`,
+`m6-r9l-combat-batches.md`). Mystic Reflection and the non-`Clone` lines (Primal Clay and its four kin, The Mimeoplasm,
+Living Lore) run too.

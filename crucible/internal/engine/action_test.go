@@ -1634,29 +1634,32 @@ func TestAssignBattleProtectorAsksAgainWhenProtectorHasLost(t *testing.T) {
 
 // A Battle currently being attacked is not asked about a protector at all
 // -- CR 704.5w's own "no attacking creatures currently attacking that
-// battle" condition.
+// battle" condition. Three players: a attacks its own Siege, protected by b,
+// and b then leaves the game, so the battle has no protector while attacked.
 func TestAssignBattleProtectorNotAskedWhileBeingAttacked(t *testing.T) {
 	t.Parallel()
 
-	g := newGame(t, "a", "b")
-	a, b := g.Players()[0], g.Players()[1]
-	g.Player(a).Life, g.Player(b).Life = 20, 20
+	g := newGame(t, "a", "b", "c")
+	a, b, c := g.Players()[0], g.Players()[1], g.Players()[2]
+	g.Player(a).Life, g.Player(b).Life, g.Player(c).Life = 20, 20, 20
 	g.SetTurnState(1, a, engine.Main1)
-	battle := g.NewCard(battleDefDefense(t, "5"), b, engine.Battlefield)
+	battle := g.NewCard(battleDefDefense(t, "5"), a, engine.Battlefield)
 	g.Card(battle).Counters.Add(engine.Defense, 5)
+	g.Card(battle).ProtectingPlayer = b
 	attacker := g.NewCard(creatureDefPT(t, "2", "2"), a, engine.Battlefield)
 
 	ac := engine.NewScriptedController()
 	ac.QueueAttackers([]engine.CardID{attacker})
 	ac.QueueAttackTarget(engine.CardEntity(battle))
 	declareAttackers(t, g, ac)
+	g.Player(b).Lost = true
 
 	// No QueueBattleProtector call: if assignBattleProtector asked anyway,
 	// this panics on the empty queue, which is exactly the assertion.
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
-	if got := g.Card(battle).ProtectingPlayer; got != engine.NoPlayer {
-		t.Errorf("ProtectingPlayer = %v, want NoPlayer (still unset while attacked)", got)
+	if got := g.Card(battle).ProtectingPlayer; got != b {
+		t.Errorf("ProtectingPlayer = %v, want %v (not re-chosen while attacked)", got, b)
 	}
 }
 

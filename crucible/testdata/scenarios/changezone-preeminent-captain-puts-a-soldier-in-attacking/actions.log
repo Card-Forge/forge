@@ -1,0 +1,21 @@
+# Preeminent Captain attacks; its trigger puts Elite Vanguard from hand onto
+# the battlefield tapped and attacking (ChangeZone Attacking$ True,
+# SpellAbilityEffect.addToCombat, SpellAbilityEffect.java:758-793, joined
+# before the move as Java's search does, ChangeZoneEffect.java:1391). The
+# Vanguard was never declared, so it is an unblocked attacker once blockers
+# are declared and deals its 2 in the regular damage step, after the
+# Captain's first-strike 2.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+queue cardchoice 2
+queue attacktarget ai
+resolvestack
+advance
+queue blocks none
+declareblockers
+advance
+firststrikedamage
+advance
+combatdamage

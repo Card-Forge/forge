@@ -1,4 +1,3 @@
 humanlife=20
 ailife=20
-humanbattlefield=Grizzly Bears|Id:1
-aibattlefield=Invasion of Belenon|Id:2|Counters:DEFENSE=5
+humanbattlefield=Grizzly Bears|Id:1;Invasion of Belenon|Id:2|Counters:DEFENSE=5|Protector:ai

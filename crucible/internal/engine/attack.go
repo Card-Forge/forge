@@ -278,18 +278,35 @@ func (g *Game) chooseAttackTargets(controller PlayerController, attackers []Card
 	return targets, nil
 }
 
-// eligibleAttackTargets is every opponent still in the game, plus every
-// planeswalker or battle any of them controls (CR 506.4c).
+// eligibleAttackTargets is CombatUtil.getAllPossibleDefenders
+// (CombatUtil.java:58-76, CR 508.1b): every opponent still in the game, each
+// followed by the planeswalkers they control, then every battle on the
+// battlefield whose protector is one of those opponents -- a battle is
+// attacked by its protector's opponents, whoever controls it (a Siege its
+// caster controls and an opponent protects is attacked by its caster). A
+// battle with no protector is skipped: Java's getProtectingPlayer().
+// isOpponentOf would throw on it, and CR 704.5w assigns one before anyone
+// attacks.
 func (g *Game) eligibleAttackTargets() []EntityID {
 	var eligible []EntityID
+	isOpponent := func(pid PlayerID) bool {
+		return pid != NoPlayer && pid != g.activePlayer && !g.Player(pid).Lost
+	}
 	for _, pid := range g.Players() {
-		if pid == g.activePlayer || g.Player(pid).Lost {
+		if !isOpponent(pid) {
 			continue
 		}
 		eligible = append(eligible, PlayerEntity(pid))
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
-			t := g.Card(id).Type()
-			if t.Has(cardtype.Planeswalker) || t.Has(cardtype.Battle) {
+			if g.Card(id).Type().Has(cardtype.Planeswalker) {
+				eligible = append(eligible, CardEntity(id))
+			}
+		}
+	}
+	for _, pid := range g.Players() {
+		for _, id := range g.Zone(Battlefield, pid).Cards() {
+			c := g.Card(id)
+			if c.Type().Has(cardtype.Battle) && isOpponent(c.ProtectingPlayer) {
 				eligible = append(eligible, CardEntity(id))
 			}
 		}
@@ -297,10 +314,12 @@ func (g *Game) eligibleAttackTargets() []EntityID {
 	return eligible
 }
 
-// defenderOf is the player defending against attacker: the player it's
-// attacking directly, or the controller of the planeswalker/battle it's
-// attacking (CR 802.4a's "attacking him/her or a planeswalker/battle he/she
-// controls" is what makes that player the one who can block it).
+// defenderOf is the player defending against attacker
+// (Combat.getDefenderPlayerByAttacker, Combat.java:289-306, through
+// defenderPlayerOf): the player it's attacking directly, the controller of
+// the planeswalker it's attacking, or the protector of the battle it's
+// attacking -- the player CR 802.4a lets block it. NoPlayer for a battle with
+// no protector (Java's null), which eligibleAttackTargets never offers.
 //
 // Called per attacker, not once for the whole combat: a two-player game, or
 // a multiplayer game where the active player sent every attacker at a
@@ -309,12 +328,8 @@ func (g *Game) eligibleAttackTargets() []EntityID {
 // and DeclareCombatBlockers (block.go) groups by the result rather than
 // assuming one answer for every attacker.
 func (g *Game) defenderOf(attacker CardID) PlayerID {
-	target := g.combat.AttackTargets[attacker]
-	if pid, ok := target.AsPlayer(); ok {
-		return pid
-	}
-	cid, _ := target.AsCard()
-	return g.Card(cid).Controller()
+	pid, _ := g.defenderPlayerOf(g.combat.AttackTargets[attacker])
+	return pid
 }
 
 // attackersOf is every creature currently attacking target directly -- a

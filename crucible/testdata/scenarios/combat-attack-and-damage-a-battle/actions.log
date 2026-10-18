@@ -2,13 +2,10 @@
 # CounterType-specific branch dealPermanentDamage already has for a
 # planeswalker's loyalty (combat-attack-a-planeswalker), but a distinct
 # `if t.Has(cardtype.Battle)` case, not shared code (combatdamage.go).
-# queue battleprotector answers assignBattleProtector, asked unconditionally
-# for any Battle with no protector yet, before startturn's own first
-# state-based-action check ever gets to see it. The protector must be an
-# opponent of the Battle's own controller (ai here) -- naming the controller
-# itself leaves assignBattleProtector's own selfProtector case true, which
-# asks again on every subsequent state-based-action check.
-queue battleprotector human
+# The Siege is the human's own, protected by ai: a battle is attacked by its
+# protector's opponents (CombatUtil.getAllPossibleDefenders,
+# CombatUtil.java:66-73), so the human attacks the battle it controls. ai,
+# the protector, is the defending player and has nothing to block with.
 startturn human
 advance 5
 queue attackers 1
