@@ -234,13 +234,13 @@ lines -- `Trigger.requirementsCheck`'s own whole-table comparisons, a third gene
 are gone from this pre-filter entirely now --
 [`## Trigger.phasesCheck lands`](trigger-modes.md#triggerphasescheck-lands), resolves (or correctly skips) all four
 generically, the identical "remove the now-redundant special case once the general mechanism lands" fix this exact
-paragraph already made once for `IsPresent$`/`CheckSVar$`, above. `ValidPlayer$`'s own qualified forms
-`matchesPlayerSpec` cannot resolve (`Player.EnchantedBy`, 14; `Player.Chosen`, 3; `Opponent.EnchantedBy`, 2;
-`Player.isMonarch`, 1 — 20 real lines) stay unresolved for the identical reason `SpellCast`'s own
-`Player.EnchantedBy`/`Player.Chosen` do (`matchesPlayerSpec`'s own doc comment); `Player.EnchantedController` (34) and
-`You.descended` (10) resolve now too ("`Phase`'s own qualified `ValidPlayer$`: `EnchantedController` and `descended`,"
-below). 2,001 of 2,065 real `ValidPlayer$` lines resolve regardless of any of this (`You`, 1,832; `Player`, 113;
-`Opponent`, 47; `Player.Opponent`, 7; `Player.Other`, 2).
+paragraph already made once for `IsPresent$`/`CheckSVar$`, above. Of `ValidPlayer$`'s qualified forms, `Player.Chosen`
+(3) stays unresolved (`matchesPlayerSpec`'s own doc comment); `Player.EnchantedBy` (14) and `Opponent.EnchantedBy` (2)
+resolve from `Player.Attachments` and `Player.isMonarch` (1) from `Game.monarch`
+([`trigger-modes.md`](trigger-modes.md)); `Player.EnchantedController` (34) and `You.descended` (10) resolve now too
+("`Phase`'s own qualified `ValidPlayer$`: `EnchantedController` and `descended`," below). 2,001 of 2,065 real
+`ValidPlayer$` lines resolve regardless of any of this (`You`, 1,832; `Player`, 113; `Opponent`, 47; `Player.Opponent`,
+7; `Player.Other`, 2).
 
 `TestAdvancePhaseFiresPhaseTriggerAtCorrectStep`, `TestAdvancePhaseSkipsPhaseTriggerAtWrongStep`,
 `TestAdvancePhaseSkipsPhaseTriggerForNonActivePlayer`, `TestAdvancePhaseFiresPhaseTriggerForOpponentValidPlayer`,
@@ -284,11 +284,11 @@ building a `Spec` no real player or card token like `"You"` ever satisfies as a 
 just as cheaply, with no new dispatch logic required. `attackedTargetsOf` (trigger.go) collects the distinct entities
 actually attacked this combat, straight off `Combat.AttackTargets`, the same "only what someone is actually attacking"
 set `PhaseHandler.java`'s own `for (GameEntity ge : combat.getDefenders()) if (!combat.getAttackersOf(ge).isEmpty())`
-filter builds. A qualified player token `matchesPlayerSpec` cannot resolve (`Player.EnchantedBy`, 9;
-`Player.hasInitiative`, `Player.IsPoisoned`, `Opponent.lifeGTX`, 1 each -- 12 of 63 combined) never matches through
-either branch, so a trigger naming one of these simply never fires -- GO-7's usual outcome, reached here by never
-matching rather than a separate skip check, since Java's own per-candidate dispatch has no "unresolvable, abort" case of
-its own to mirror.
+filter builds. `Player.EnchantedBy` (9), `Player.hasInitiative` and `Player.IsPoisoned` (1 each) resolve in
+`matchesPlayerProperty` (valid.go). A qualified player token `matchesPlayerSpec` cannot resolve never matches through
+either branch, so a trigger naming one simply never fires -- GO-7's usual outcome, reached here by never matching rather
+than a separate skip check, since Java's own per-candidate dispatch has no "unresolvable, abort" case of its own to
+mirror.
 
 `ValidAttackers$`/`ValidAttackersAmount$` (123 of 286) is `validAttackersCountMatches` (trigger.go): how many of the
 attackers its own caller passes in the `ValidAttackers$` spec matches (the existing `Matches`, valid.go) -- for this
@@ -784,23 +784,14 @@ functions moved to a new `playerstate.go` (its own `enginelint.json` group, depe
 `trigger` themselves provide), and `resolveNamedAmount` moved to amount.go, next to `resolveAmount` itself -- neither
 shared function belongs to just one caller, so neither stayed in either caller's own file.
 
-`lifeTotalMatches` ports `LifeTotal$`/`LifeAmount$` (12) -- `"You"` (`g.Player(host.Controller()).Life`) and
-`"ActivePlayer"` (`g.Player(g.ActivePlayer()).Life`), the corpus's own two real `T:` values;
-`OpponentSmallest`/`OpponentGreatest` carry none and stay unresolved.
+`lifeTotalMatches` ports `LifeTotal$`/`LifeAmount$` (12) -- `"You"` (`g.Player(host.Controller()).Life`),
+`"ActivePlayer"` (`g.Player(g.ActivePlayer()).Life`) and `OpponentSmallest`/`OpponentGreatest`.
 
-Not resolved, each skipped whole rather than treated as met (GO-7, the identical "cannot evaluate, so do not fire" rule
-an unresolved `Affected$`/`Condition$` value already has elsewhere in this port): (`Revolt$` is resolved since R9d,
-[`m6-r9d-cast-leftovers.md`](m6-r9d-cast-leftovers.md)); `WerewolfTransformCondition$`/ `WerewolfUntransformCondition$`
-(65) -- Innistrad's own day/night mechanic, keyed off a "spells cast last turn" list this port tracks nowhere;
-`CheckDefinedPlayer$` (20) -- every real line qualifies it with `isMonarch`, `hasInitiative`, `withMostLife` or
-`withMostType`, mechanics this port has none of, not a shape a general
-Defined$-to-players resolver
-could close on its own even if one existed (`Player.withMostLife` as a valid string resolves now, in `matchesPlayerProperty`,
-but `CheckDefinedPlayer$`
-is a different reader).
-
-`ManaSpent$`/`ManaNotSpent$` (8) -- no paying-colors-by-cast tracked; `Adamant$` (1); `Bloodthirst$`, `Monarch$`,
-`EnduringStory$`, `DayTime$` and `ClassLevel$` (0 real `T:` lines each, dormant rather than actively skipped).
+`Revolt$` (R9d, [`m6-r9d-cast-leftovers.md`](m6-r9d-cast-leftovers.md)), `WerewolfTransformCondition$`/
+`WerewolfUntransformCondition$` (65, `Game.castLastTurn`), `CheckDefinedPlayer$`/`DefinedPlayerCompare$` (20:
+`isMonarch`, `hasInitiative`, `withMostLife`, `withMostType`), `ManaSpent$`/`ManaNotSpent$`/`Adamant$`, `EnduringStory$`
+and `DayTime$` resolve too (R9n, [`m6-r9n-checksvar-heads.md`](m6-r9n-checksvar-heads.md)). `ClassLevel$` and an
+unreadable `LifeTotal$`/`LifeAmount$` are a pending error (GO-7), never treated as met.
 
 Eleven new tests (`TestPlayLandFiresETBTriggerWhen*`/`SkipsETBTriggerWhen*`, trigger_test.go) prove `IsPresent$` both
 ways plus its `PresentZone$`/`PresentDefined$` variants, `CheckSVar$` both ways, `Threshold$` both ways, `LifeTotal$`

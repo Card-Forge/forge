@@ -136,6 +136,16 @@ func linkUsesTargeting(p *compile.Ability) bool {
 	return ok
 }
 
+// rememberTargetsLine is handleRemembering's own test (AbilityUtils.java:1520):
+// the line names RememberTargets$ and targets.
+func rememberTargetsLine(p *compile.Ability) bool {
+	if p == nil {
+		return false
+	}
+	_, ok := p.Param("RememberTargets")
+	return ok && linkUsesTargeting(p)
+}
+
 // parentTargetsOf is what Defined$ ParentTarget names for a child of parent:
 // parent's own targets, or the ones its own ParentTarget names when it chose
 // none (SpellAbility.getParentTargetingCard walks up to the first ancestor

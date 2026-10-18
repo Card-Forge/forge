@@ -71,6 +71,9 @@ func (g *Game) TapLandForMana(pid PlayerID, land CardID, color mana.Colors, cont
 	}
 	src := g.manaSourceOf(land)
 	c.Tapped = true
+	// The basic land type's intrinsic mana ability (CR 305.6) is activated
+	// like any other (MagicStack.java:232-235); it has no script line.
+	g.recordActivation(&Ability{API: APIMana, Source: land, Controller: pid, activated: true}, nil)
 	produced := g.manaReplaced(controller, pid, land,
 		producedMana{color: color, snow: c.Type().HasSupertype(cardtype.Snow), amount: 1})
 	g.addProducedMana(pid, produced, src)

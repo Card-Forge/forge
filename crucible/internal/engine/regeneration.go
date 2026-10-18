@@ -95,6 +95,9 @@ func cardCantRegenerate(g *Game, id CardID) bool {
 func (g *Game) regenerateBody(controller PlayerController, id CardID) {
 	c := g.Card(id)
 	c.Damage.Heal()
+	// RegenerationEffect.java:41: Card.addRegeneratedThisTurn, read by
+	// Count$RegeneratedThisTurn (Spiny Starfish).
+	c.regeneratedThisTurn++
 	if !c.Tapped {
 		c.Tapped = true
 		g.checkTapsTriggers(controller, id, c.Controller(), false)

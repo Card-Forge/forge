@@ -380,7 +380,7 @@ func TestControlSpellGainOnASpellThatLeftTheStackFails(t *testing.T) {
 func TestControlSpellFailsClosed(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct{ line, want string }{
-		{"DB$ ControlSpell | ValidTgts$ Card | TargetType$ Spell | Mode$ Gain | RememberTargets$ True", "RememberTargets$ not resolvable yet"},
+		{"DB$ ControlSpell | Defined$ Targeted | Mode$ Gain | TargetValidTargeting$ Player", "TargetValidTargeting$ not resolvable yet"},
 		{"DB$ ControlSpell | Defined$ Targeted | Mode$ Exchange | DefinedExchange$ Self", "DefinedExchange$ not resolvable yet"},
 		{"DB$ ControlSpell | Defined$ Targeted", "Mode$ is required"},
 		{"DB$ ControlSpell | Defined$ Targeted | Mode$ Lose", `Mode$ "Lose" not resolvable yet`},

@@ -159,7 +159,7 @@ func TestFiftyPackFailsClosed(t *testing.T) {
 		"DB$ ExchangePower | Defined$ Self | Duration$ Perpetual",
 		"DB$ AddOrRemoveCounter | Defined$ Self | RemoveConditionSVar$ X",
 		"DB$ AddOrRemoveCounter | Defined$ Self | CounterNum$ Bogus",
-		"DB$ BecomesBlocked | Defined$ Self | RememberTargets$ True",
+		"DB$ BecomesBlocked | Defined$ Self | Condition$ Kicked",
 		"DB$ ChangeCombatants | Defined$ Self | Attacking$ TargetedPlayer",
 		"DB$ GainControlVariant | AllValid$ Creature | ChangeController$ Bogus",
 		"DB$ GainControlVariant | ChangeController$ CardOwner",

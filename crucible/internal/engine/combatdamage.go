@@ -334,13 +334,17 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 	lethal := excessDamageValue(c, false)
 	t := c.Type()
 	c.Damage.Sources = append(c.Damage.Sources, source)
+	// Card.subtractCounter (Card.java:1910-1911): the counters actually
+	// removed, never more than were there.
 	if t.Has(cardtype.Planeswalker) {
-		c.Counters.Add(Loyalty, -amount)
-		emitCounterChanged(g, source, CardEntity(target), Loyalty, -amount)
+		if removed := c.Counters.Count(Loyalty) - c.Counters.Add(Loyalty, -amount); removed > 0 {
+			emitCounterChanged(g, source, CardEntity(target), Loyalty, -removed)
+		}
 	}
 	if t.Has(cardtype.Battle) {
-		c.Counters.Add(Defense, -amount)
-		emitCounterChanged(g, source, CardEntity(target), Defense, -amount)
+		if removed := c.Counters.Count(Defense) - c.Counters.Add(Defense, -amount); removed > 0 {
+			emitCounterChanged(g, source, CardEntity(target), Defense, -removed)
+		}
 	}
 	witherCounters := 0
 	if t.Has(cardtype.Creature) {

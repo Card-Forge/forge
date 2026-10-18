@@ -1,0 +1,8 @@
+turn=3
+activeplayer=human
+activephase=End of Turn
+humanlife=20
+humanhand=Mountain
+humanbattlefield=The Chain Veil;Ajani Goldmane|Counters:LOYALTY=5
+ailife=20
+aihand=Mountain

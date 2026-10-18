@@ -40,5 +40,6 @@ check `subAbilityConditionMet`); `SetInMotion`'s local evaluator is gone. Tests:
 `TestControlSpellPerplexingChimeraOffersARetarget` (`spellcontrol_test.go`).
 
 Not resolved: `Collected` (9), `TriggeredTargetLKICopy` (4), `ReplacedSource` (3), `TriggeredSpellAbility` (2),
-`TriggeredSourceLKICopy` (2), `TopOfLibrary` (2), `ExiledWith[Source]` (4); `Condition$` flags (`Threshold`, `Delirium`,
-...) and `ConditionZone$`.
+`TriggeredSourceLKICopy` (2), `TopOfLibrary` (2), `ExiledWith[Source]` (4). `ConditionZone$` and the `Condition$` values
+`conditionValueRead` knows are read in `subAbilityConditionMet`; any other `Condition$` value is a pending error (R9n,
+[`m6-r9n-checksvar-heads.md`](m6-r9n-checksvar-heads.md)).

@@ -1,0 +1,20 @@
+# AbilityUtils.handleRemembering (AbilityUtils.java:1517-1530), run on the
+# ability popped off the stack (MagicStack.java:646): Journey to Nowhere's ETB
+# trigger names RememberTargets$ and ForgetOtherTargets$, so the targeted
+# Bears are remembered on Journey before the trigger exiles them. Disenchant
+# destroys Journey; its leaves-the-battlefield trigger returns Defined$
+# Remembered -- the Bears, as a new object: untapped and summoning sick.
+startturn human
+advance 3
+tapformana human 3 W
+tapformana human 4 W
+queue paygeneric W
+castspell human 1
+queue targets 8
+resolvestack
+tapformana human 5 W
+tapformana human 6 W
+queue paygeneric W
+queue targets 1
+castspell human 2
+resolvestack

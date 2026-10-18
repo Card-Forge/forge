@@ -272,6 +272,12 @@ type Ability struct {
 	// pusher of a trigger, sets it. hasSourceOnStack reads it (CR 704.5v's
 	// "source of an ability that has triggered but not yet left the stack").
 	isTrigger bool
+	// stackRoot marks the ability resolveTop popped off the stack, never a
+	// sub-ability, Charm mode or choice it goes on to resolve: the only one
+	// MagicStack.resolveStack hands to AbilityUtils.handleRemembering
+	// (MagicStack.java:646). Registry.resolve refuses a RememberTargets$ line
+	// that is not one (rememberTargets, stack.go).
+	stackRoot bool
 	// activated marks an ability put on the stack by ActivateAbility, which
 	// pushes through pushTriggeredAbilities for its targets: it is not a
 	// trigger (isTrigger stays false).

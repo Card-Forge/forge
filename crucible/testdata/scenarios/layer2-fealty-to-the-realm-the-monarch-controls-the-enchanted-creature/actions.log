@@ -1,0 +1,21 @@
+# Fealty to the Realm: "When CARDNAME enters, you become the monarch. The
+# monarch controls enchanted creature." Its S:Mode$ Continuous | AffectedDefined$
+# Enchanted | GainControl$ Player.isMonarch is read as StaticAbilityContinuous.
+# java:597-600 reads it: the first player getDefinedPlayers names (the
+# monarch, PlayerProperty.java:85-88) gains control. Once the ETB trigger makes
+# the human the monarch, the AI's Bears move to the human's battlefield
+# (ADR-0037), still owned by the AI and summoning sick.
+startturn human
+advance 3
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+tapformana human 7 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue enchanttarget 2
+castspell human 1
+resolvestack

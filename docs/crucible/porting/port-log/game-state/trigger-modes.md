@@ -256,8 +256,9 @@ ruin_lurker_bat.txt's own "at the beginning of your end step, if you descended t
 
 `Player.EnchantedBy` (14 real lines) and `Opponent.EnchantedBy` (2) resolve from `Player.Attachments` (an Aura
 enchanting a player directly, CR 303.4h, [`player-attachment.md`](player-attachment.md)). `Player.Chosen` (3) needs a
-"choose a player" ability this port does not have. `Player.isMonarch` (1) needs a monarch tracker this port does not
-have -- the identical reason Layer 2's own qualified `GainControl$ Player.isMonarch` stays unresolved (item 27).
+"choose a player" ability this port does not have. `Player.isMonarch` (1) reads `Game.monarch`
+(`PlayerProperty.java:85-92`, `matchesPlayerSpec`), as Layer 2's `GainControl$ Player.isMonarch` does
+(`applyOneContinuousControl`, continuous.go).
 
 While researching this chunk's own real corpus counts, two stale figures elsewhere in this port's own comments turned
 out to be wrong and were corrected in place (DOC-16): `checkPhaseTriggers`'s own doc comment (trigger.go) attributed its

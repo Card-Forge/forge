@@ -946,9 +946,8 @@ granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the ope
     carry the bare key today, unlike `WerewolfTransformCondition$`/`WerewolfUntransformCondition$`'s own unrelated 65,
     which this key was never meant to catch) and the two whole-table comparisons
     (`APlayerHasMoreLifeThanEachOther$`/`APlayerHasMostCardsInHand$`, 2 and 1 real lines), plus its own remaining
-    qualified `ValidPlayer$` forms (`Player.EnchantedBy`/`Player.Chosen`/`Opponent.EnchantedBy`/`Player.isMonarch`, 14,
-    3, 2 and 1 real lines — each needing its own separate mechanic this port does not have: an Aura enchanting a player
-    directly, a chosen-player memory slot, a monarch tracker); `DamageDone`'s own
+    qualified `ValidPlayer$` form `Player.Chosen` (3 real lines, no chosen-player memory slot; `Player.EnchantedBy`,
+    `Opponent.EnchantedBy` and `Player.isMonarch` resolve, `trigger-modes.md`); `DamageDone`'s own
     `ValidCause$`/`TargetRelativeToCause$`/`TargetRelativeToSource$` (its own qualified
     `ValidTarget$ Player.Opponent`/`Player.Other` are resolved now, `Player.EnchantedBy` is not); `Discarded`'s own
     `ValidCause$`; `Taps`'s own `FirstTime$`/`Teamwork$`; `TapsForMana`'s own `Produced$` (its own qualified
@@ -1069,15 +1068,11 @@ granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the ope
     (`Game.ActivePlayer()`), the only two real `T:` values; `OpponentSmallest`/`OpponentGreatest` carry none and are not
     resolved.
 
-    Not resolved, each skipped whole rather than treated as met (GO-7): `Revolt$` (25, no
-    `Game.leftBattlefieldThisTurn`-equivalent tracked); `WerewolfTransformCondition$`/`WerewolfUntransformCondition$`
-    (65, Innistrad's own day/night mechanic, a "spells cast last turn" list this port tracks nowhere);
-    `CheckDefinedPlayer$` (20, every real line qualifies it with `isMonarch`, `hasInitiative`, `withMostLife` or
-    `withMostType` — mechanics this port has none of, not a shape a general Defined$-to-players resolver could close on
-    its own).
+    `Revolt$` (25), `WerewolfTransformCondition$`/`WerewolfUntransformCondition$` (65) and `CheckDefinedPlayer$` (20:
+    `isMonarch`, `hasInitiative`, `withMostLife`, `withMostType`) resolve now (R9d, R9n; `triggers.md`).
 
-    `ManaSpent$`/`ManaNotSpent$` (8, no paying-colors-by-cast tracked); `Adamant$` (1); `Bloodthirst$`, `Monarch$`,
-    `EnduringStory$`, `DayTime$` and `ClassLevel$` (0 real `T:` lines each, dormant).
+    `ManaSpent$`/`ManaNotSpent$` (8), `Adamant$` (1), `EnduringStory$` and `DayTime$` resolve too (R9n); `ClassLevel$`
+    is a pending error (no class level tracked).
 
     **CR 614's replacement-effect system has two more real slices now: "doesn't untap" and "prevent all of this damage,"
     both a `Layer$`/`Prevent$` flag rather than a `ReplaceWith$` sub-ability, so neither needed CR 616's own "more than
@@ -1154,10 +1149,9 @@ granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the ope
     soul_scar_mage.txt's own "put -1/-1 counters on that creature instead" among them). `CounterNum$` resolves through
     `resolveReplaceCountAmount` (above), now generalized to accept a bare, operator-less `ReplaceCount$DamageAmount` too
     — `doXMath`'s own `operators == null` identity — the dominant real shape for this dispatch specifically. 25 of the
-    corpus's own 31 real lines resolve; `SubAbility$` (5, underdark_beholder.txt's own "remove counters, then sacrifice
-    if none left" among them) refuses outright, and jared_carthalion_true_heir.txt's own real R: line naming
-    `CheckDefinedPlayer$ You.isMonarch` (1, no monarch mechanic this port tracks) is skipped by
-    `damageReplacementMatches`'s own allow-list before ever reaching this dispatch.
+    corpus's own 31 real lines resolve, jared_carthalion_true_heir.txt's `CheckDefinedPlayer$ You.isMonarch` among them
+    (R9n); `SubAbility$` (5, underdark_beholder.txt's own "remove counters, then sacrifice if none left" among them)
+    refuses outright.
 
     All four families share a new `replacementActiveZones`/`hostInActiveZones` (`replacement.go`), generalizing
     `ActiveZones$` past Battlefield alone to the 2 real Command-zone lines each of the shapes carries — the identical
@@ -1677,8 +1671,8 @@ granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the ope
     `Card.Controller` across the engine (roughly eighty call sites, `combatdamage.go`/`staticability.go`/`trigger.go`/
     `valid.go`/`attack.go`/`castspell.go`/`manaability.go`/`land.go`/`action.go`/`continuous.go`, plus
     `internal/fixture`) became a `Controller()` call the same pass, so a stolen creature is controlled by its new
-    controller everywhere the engine asks, not just where `applyContinuousControl` itself looks. Not resolved: the
-    qualified `GainControl$ Player.isMonarch` (1 of 44) — no monarch mechanic to filter by (PORT-8/GO-7).
+    controller everywhere the engine asks, not just where `applyContinuousControl` itself looks. The qualified
+    `GainControl$ Player.isMonarch` (1 of 44, Fealty to the Realm) resolves through `definedPlayers` (R9o).
 
     **`Condition$` — the one gate shared by every layer above — is real now too.** A new `continuousConditionMet`
     (continuous.go) ports `StaticAbility.checkConditions`'s own `Condition$` switch, called from all six appliers in

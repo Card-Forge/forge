@@ -110,6 +110,8 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 			// spells become last turn's, an empty turn leaving none.
 			g.castLastTurn = g.castThisTurn
 			g.castThisTurn = nil
+			// MagicStack.java:968: thisTurnActivated.clear().
+			g.activatedThisTurn = nil
 			for _, pid := range g.Players() {
 				g.Player(pid).SpellsCastThisTurn = 0
 				g.Player(pid).DamageReceivedThisTurn = 0
@@ -118,6 +120,8 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 				g.Player(pid).surveilThisTurn = 0
 			}
 			g.extraPhases = [numPhaseTypes][]PhaseType{}
+			// Java zeroes these as cleanup begins (cleanupStep); a turn this port
+			// enters without its cleanup (a state set mid-turn) starts from none too.
 			g.combatsThisTurn = 0
 			g.upkeepsThisTurn = 0
 			g.activePlayer = g.nextActivePlayer(controller)
@@ -644,6 +648,8 @@ func (g *Game) cleanupStep(controller PlayerController) {
 			g.Card(id).attackedThisTurn = nil
 			g.Card(id).LoyaltyAbilityActivated = false
 			g.Card(id).RegenShields = 0
+			// Card.onCleanupPhase (Card.java:7275).
+			g.Card(id).regeneratedThisTurn = 0
 		}
 		p := g.Player(pid)
 		p.LandsPlayedLastTurn = p.LandsPlayed
@@ -669,10 +675,14 @@ func (g *Game) cleanupStep(controller PlayerController) {
 	// (Game.onCleanupPhase).
 	g.enteredLastTurn, g.enteredThisTurn = g.enteredThisTurn, nil
 	g.leftGraveyardThisTurn = nil
-	// PhaseHandler.java:418: the CLEANUP case of onPhaseBegin zeroes the end
-	// steps begun, so cleanup itself reads none finished.
+	// PhaseHandler.java:415-418: the CLEANUP case of onPhaseBegin zeroes the
+	// upkeeps, combats and end steps begun, so cleanup itself reads none
+	// finished and the next turn starts from none.
+	g.upkeepsThisTurn = 0
+	g.combatsThisTurn = 0
 	g.endOfTurnsThisTurn = 0
 	g.countersAddedThisTurn = nil
+	g.countersRemoved = nil
 	g.playerDamageThisTurn = nil
 	g.cardDamageThisTurn = nil
 

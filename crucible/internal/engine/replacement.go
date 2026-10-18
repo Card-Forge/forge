@@ -1213,17 +1213,24 @@ func applyDamageReplaceCounter(g *Game, host CardID, replacedTarget EntityID, a 
 	if remove {
 		delta = -n
 	}
+	var counters *Counters
 	if cid, ok := target.AsCard(); ok {
-		g.Card(cid).Counters.Add(counterType, delta)
-		emitCounterChanged(g, host, target, counterType, delta)
-		return true
+		counters = &g.Card(cid).Counters
+	} else if pid, ok := target.AsPlayer(); ok {
+		counters = &g.Player(pid).Counters
+	} else {
+		return false
 	}
-	if pid, ok := target.AsPlayer(); ok {
-		g.Player(pid).Counters.Add(counterType, delta)
+	// A removal emits what was actually removed (Card.subtractCounter,
+	// Card.java:1910-1911), never more than was there.
+	before := counters.Count(counterType)
+	after := counters.Add(counterType, delta)
+	if !remove {
 		emitCounterChanged(g, host, target, counterType, delta)
-		return true
+	} else if removed := before - after; removed > 0 {
+		emitCounterChanged(g, host, target, counterType, -removed)
 	}
-	return false
+	return true
 }
 
 // drawPrevented is CR 121.4/614's own "prevent this draw" shape (Prevent$

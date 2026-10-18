@@ -390,6 +390,7 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	}
 	// The source as it is before its costs move it (ADR-0042).
 	src := g.manaSourceOf(card)
+	before := *c
 	if !g.PayManaCost(pid, costMana, controller) {
 		return false
 	}
@@ -438,6 +439,9 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if isLoyaltyAbility {
 		c.LoyaltyAbilityActivated = true
 	}
+	// MagicStack.java:232-235: a mana ability is recorded as activated before
+	// it resolves.
+	g.recordActivation(&Ability{API: APIMana, Source: card, Controller: pid, Params: ability, activated: true}, &before)
 
 	made := g.manaReplaced(controller, pid, card, producedMana{
 		color: color, colorless: colorless, snow: c.Type().HasSupertype(cardtype.Snow), amount: amount,

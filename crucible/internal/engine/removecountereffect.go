@@ -133,8 +133,12 @@ func removeCounters(g *Game, source CardID, target EntityID, counters *Counters,
 	if n <= 0 {
 		return
 	}
-	counters.Add(counterType, -n)
-	emitCounterChanged(g, source, target, counterType, -n)
+	// Card.subtractCounter's delta is what was there less what is left
+	// (Card.java:1910-1911): "remove two" from one removes one, from none
+	// removes nothing.
+	if removed := counters.Count(counterType) - counters.Add(counterType, -n); removed > 0 {
+		emitCounterChanged(g, source, target, counterType, -removed)
+	}
 }
 
 // removeCounterType reads CounterType$: a single literal name (uppercased,

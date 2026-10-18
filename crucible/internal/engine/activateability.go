@@ -368,6 +368,8 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if !g.chooseAbilityTargets(controller, &activated) {
 		return false
 	}
+	// The host before any cost moves it, for the activation record.
+	before := *c
 	x, paid := g.payManaCostX(pid, manaCost, controller)
 	if !paid {
 		return false
@@ -462,6 +464,7 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 		c.LoyaltyAbilityActivated = true
 	}
 	c.activations.note(index)
+	g.recordActivation(&activated, &before)
 	held := g.castExitMatches()
 	g.holdingCastExits, g.castExits = outerHold, outerExits
 	g.pushTriggeredAbilities(controller, []Ability{activated})

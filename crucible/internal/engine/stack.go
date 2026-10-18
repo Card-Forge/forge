@@ -16,6 +16,8 @@
 
 package engine
 
+import "fmt"
+
 // PushAbility puts an ability on the stack (CR 405.1, 601.2i, 603.3b) and
 // emits AbilityActivated. It does not itself decide who is entitled to push
 // or in what order -- that is pushTriggeredAbilities' own job (trigger.go)
@@ -179,6 +181,12 @@ func (g *Game) resolveTop(reg *Registry, controller PlayerController) error {
 		// to afterward (found auditing this call site for RestartGame,
 		// docs/crucible/adr/0033-restartgame-mid-resolution-reset.md).
 		phase, active, turn := g.activePhase, g.activePlayer, g.turn
+		// MagicStack.java:646-647: handleRemembering, then AbilityUtils.resolve
+		// (whose resolvePreAbilities gives Ascend's blessing).
+		a.stackRoot = true
+		if err := g.rememberTargets(&a); err != nil {
+			return err
+		}
 		g.ascendAtResolution(&a)
 		if err := reg.Resolve(g, &a, controller); err != nil {
 			return err
@@ -196,6 +204,50 @@ func (g *Game) resolveTop(reg *Registry, controller PlayerController) error {
 	}
 	g.moveResolvedSpellToGraveyard(controller, a, fizzled)
 	CheckStateBasedActions(g, controller)
+	return nil
+}
+
+// rememberTargets is AbilityUtils.handleRemembering (AbilityUtils.java:1517-
+// 1554) for a, the ability popped off the stack -- MagicStack.resolveStack's
+// only caller (:646) hands it nothing else, so a sub-ability's
+// RememberTargets$ is refused in Registry.resolve instead. It runs after the
+// CR 608.2b check removed the illegal targets (hasFizzled, :779) and before
+// anything else, so a declined optional trigger or a failed Condition$ still
+// leaves them remembered, as in Java.
+//
+// RememberTargets$ on a line that targets adds the targets to the host's
+// remembered list, in the order chosen; ForgetOtherTargets$ clears the list
+// first. A targeted ability on the stack (ADR-0041's stack-item entity) is the
+// SpellAbility Java remembers, whose host and controller no Remembered reader
+// here can see; it is refused, as are IncludeAllComponentCards$ (the merged
+// and melded parts of each target) and RememberCostMana$ (the paid mana as a
+// string, Ice Cauldron's "last noted type and amount"), which no reader
+// resolves (GO-7). None of the refusals changes anything first.
+func (g *Game) rememberTargets(a *Ability) error {
+	if a.Params == nil {
+		return nil
+	}
+	if _, ok := a.Params.Param("RememberCostMana"); ok {
+		return fmt.Errorf("engine: %s: RememberCostMana$ not resolvable yet", a.API)
+	}
+	if !rememberTargetsLine(a.Params) {
+		return nil
+	}
+	if _, ok := a.Params.Param("IncludeAllComponentCards"); ok {
+		return fmt.Errorf("engine: %s: IncludeAllComponentCards$ not resolvable yet", a.API)
+	}
+	for _, e := range a.Targets {
+		if _, ok := e.AsStackItem(); ok {
+			return fmt.Errorf("engine: %s: RememberTargets$ naming an ability on the stack not resolvable yet", a.API)
+		}
+	}
+	host := g.Card(a.Source)
+	if _, ok := a.Params.Param("ForgetOtherTargets"); ok {
+		host.Memory.ClearRemembered()
+	}
+	for _, e := range a.Targets {
+		host.Memory.Remember(e)
+	}
 	return nil
 }
 

@@ -199,6 +199,17 @@ type Game struct {
 	// cleared at cleanup.
 	enteredThisTurn       []zoneEntry
 	countersAddedThisTurn []counterAddition
+	// countersRemoved is Game.countersRemovedThisTurn (Game.java:114): every
+	// removal of counters from a card or a player this turn, recorded where
+	// every removal is emitted (emitCounterChanged) and cleared at cleanup
+	// (Game.java:1230). Count$CountersRemovedThisTurn reads it.
+	countersRemoved []counterRemoval
+	// activatedThisTurn is MagicStack.thisTurnActivated (MagicStack.java:983-
+	// 987): each activated or mana ability activated this turn with its host
+	// as last known, recorded as it goes on the stack (or resolves, for a
+	// mana ability) and cleared as the next turn begins (onNextTurn, :968).
+	// Count$ThisTurnActivated_ reads it.
+	activatedThisTurn []activationRecord
 	// enteredLastTurn is enteredThisTurn as the last cleanup rolled it over
 	// (Zone.resetCardsAddedThisTurn's cardsAddedLastTurn, Zone.java:120-127),
 	// read by Count$LastTurnEntered_.
@@ -310,12 +321,13 @@ type Game struct {
 	// skips is every SkipPhase effect in force (skipphaseeffect.go).
 	skips []skipPhase
 	// combatsThisTurn is PhaseHandler.nCombatsThisTurn: combat phases begun
-	// this turn, counted at CombatBegin and reset as the turn ends -- what
-	// FirstCombat$ reads once AddPhase can add a second combat.
+	// this turn, counted at CombatBegin and zeroed as cleanup begins
+	// (PhaseHandler.java:416) -- what FirstCombat$ reads once AddPhase can add
+	// a second combat.
 	combatsThisTurn int
 	// upkeepsThisTurn is PhaseHandler.nUpkeepsThisTurn: upkeep steps begun
 	// this turn, counted as one begins (PhaseHandler.java:257, the non-skipped
-	// branch only) and reset as the turn ends (:415). Count$
+	// branch only) and zeroed as cleanup begins (:415, cleanupStep). Count$
 	// FinishedUpkeepsThisTurn reads it (amountheads.go).
 	upkeepsThisTurn int
 	// skipDamageSteps is PhaseHandler.skipDamageSteps: set by a driven
@@ -761,7 +773,15 @@ func (g *Game) CounterTypeOf(d CounterDetail) (CounterType, bool) {
 // emitCounterChanged emits CounterChanged for a change of delta counters of
 // kind t on target, sourced from source. A script-written kind is interned
 // (counterDetailFor), so no kind is dropped and none is mislabeled.
+//
+// Every counter change is emitted here, after the counters changed, so a
+// removal (delta < 0) is also recorded here for Count$CountersRemovedThisTurn
+// (recordCountersRemoved): Card.subtractCounter and Player.subtractCounter's
+// addCounterRemovedThisTurn (Card.java:1932, Player.java:899).
 func emitCounterChanged(g *Game, source CardID, target EntityID, t CounterType, delta int) {
+	if delta < 0 {
+		g.recordCountersRemoved(target, t, -delta)
+	}
 	g.sink.Emit(Event{Kind: CounterChanged, Source: source, Target: target, Amount: int32(delta), Detail: uint32(g.counterDetailFor(t))})
 }
 
@@ -1019,7 +1039,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		// no controller. applyContinuousControl rebuilds rows for battlefield
 		// cards only, so a row left here would outlive the move for good.
 		c.ControlMod.Clear()
-		c.RegenShields = 0
+		c.RegenShields, c.regeneratedThisTurn = 0, 0
 		c.detainedBy = nil
 		c.goadedBy = nil
 		c.mustBlock = nil
@@ -1154,7 +1174,7 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 		c.controller = c.Owner
 		c.tempControllers = nil
 		c.ControlMod.Clear() // Move's own reason
-		c.RegenShields = 0
+		c.RegenShields, c.regeneratedThisTurn = 0, 0
 		c.detainedBy = nil
 		c.goadedBy = nil
 		c.mustBlock = nil
@@ -1506,6 +1526,8 @@ func (g *Game) Clone() *Game {
 		enteredThisTurn:       append([]zoneEntry(nil), g.enteredThisTurn...),
 		enteredLastTurn:       append([]zoneEntry(nil), g.enteredLastTurn...),
 		countersAddedThisTurn: append([]counterAddition(nil), g.countersAddedThisTurn...),
+		countersRemoved:       append([]counterRemoval(nil), g.countersRemoved...),
+		activatedThisTurn:     append([]activationRecord(nil), g.activatedThisTurn...),
 		playerDamageThisTurn:  append([]playerDamage(nil), g.playerDamageThisTurn...),
 		cardDamageThisTurn:    append([]cardDamage(nil), g.cardDamageThisTurn...),
 		sacrificedThisTurn:    append([]sacrificeRecord(nil), g.sacrificedThisTurn...),
@@ -1668,6 +1690,23 @@ type counterAddition struct {
 	putter  PlayerID
 	card    Card
 	n       int
+}
+
+// counterRemoval is one entry of Game.countersRemoved: n counters of one kind
+// removed from a card (as last known just after the removal, Java's LKI copy,
+// Game.java:1307) or from a player (player set, card unused).
+type counterRemoval struct {
+	counter CounterType
+	player  PlayerID
+	card    Card
+	n       int
+}
+
+// activationRecord is one entry of Game.activatedThisTurn: the ability as it
+// was activated, and its host as last known then.
+type activationRecord struct {
+	ability Ability
+	host    Card
 }
 
 // cloneMayPlayUses copies the counter map for Game.Clone.

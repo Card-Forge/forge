@@ -12,7 +12,7 @@ import "fmt"
 type becomesBlockedEffect struct{}
 
 func (becomesBlockedEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "BecomesBlocked", "Condition", "RememberTargets"); err != nil {
+	if err := rejectParams(a, "BecomesBlocked", "Condition"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

@@ -33,17 +33,16 @@ import "fmt"
 type controlSpellEffect struct{}
 
 // controlSpellUnresolvedParams are rejected before anything changes (PORT-8,
-// GO-7): RememberTargets$ (AbilityUtils.java:1517's generic pre-resolve
-// remember, which this port does not run) and TargetValidTargeting$ (a
-// canTargetSpellAbility filter targetChoiceFor reads for ChangeTargets
-// only) are Chef's Kiss's line; DefinedExchange$ names an exchange object
-// other than the host, which no corpus line does. Condition$ and
-// ConditionDefined$ (Sudden Substitution's `ConditionDefined$ Remembered |
-// ConditionPresent$ Card`) are SpellAbilityCondition shapes
-// subAbilityConditionMet reads as never met, which would skip the steal
-// silently.
+// GO-7): TargetValidTargeting$ (a canTargetSpellAbility filter
+// targetChoiceFor reads for ChangeTargets only) is Chef's Kiss's line, whose
+// RememberTargets$ resolveTop's rememberTargets already ran (stack.go);
+// DefinedExchange$ names an exchange object other than the host, which no
+// corpus line does. Condition$ and ConditionDefined$ (Sudden Substitution's
+// `ConditionDefined$ Remembered | ConditionPresent$ Card`) are
+// SpellAbilityCondition shapes subAbilityConditionMet reads as never met,
+// which would skip the steal silently.
 var controlSpellUnresolvedParams = [...]string{
-	"RememberTargets", "TargetValidTargeting", "DefinedExchange", "Condition"}
+	"TargetValidTargeting", "DefinedExchange", "Condition"}
 
 // namedSpell is one spell getTargetSpells names: its stack item, or
 // NoStackItem once it has left the stack (Java's null stack instance), and

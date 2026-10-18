@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Journey to Nowhere|Id:1;Disenchant|Id:2
+humanbattlefield=Plains|Id:3;Plains|Id:4;Plains|Id:5;Plains|Id:6
+aibattlefield=Grizzly Bears|Id:8|Tapped

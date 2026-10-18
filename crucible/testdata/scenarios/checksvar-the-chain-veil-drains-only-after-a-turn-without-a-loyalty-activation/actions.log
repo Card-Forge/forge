@@ -1,0 +1,17 @@
+# The Chain Veil: "At the beginning of your end step, if you didn't activate a
+# loyalty ability of a planeswalker this turn, you lose 2 life" -- CheckSVar$ X
+# EQ0 over Count$ThisTurnActivated_Activated.Loyalty+Planeswalker+YouCtrl
+# (AbilityUtils.java:2805-2816), the activations MagicStack.java:310 records
+# with their host (:983-987) and clears as the next turn begins (:968).
+startturn human
+advance 3
+# Turn 1: Ajani's +1 (ability 0) gains 2 life, so the end step trigger does not fire.
+queue action human activate 2 0
+passpriority
+advance 8
+resolvestack
+# Turn 3: no activation, so at the end step human loses 2.
+advance 2
+advance 13
+advance 11
+resolvestack

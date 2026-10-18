@@ -100,6 +100,16 @@ func (r *Registry) resolve(g *Game, a *Ability, controller PlayerController) err
 		g.resolving = a
 		defer func() { g.xctx, g.resolving = prev, prevResolving }()
 	}
+	if !a.stackRoot && rememberTargetsLine(a.Params) {
+		// AbilityUtils.handleRemembering runs on the ability popped off the
+		// stack alone (MagicStack.java:646): a sub-ability's, a Charm mode's or
+		// a choice's RememberTargets$ never reaches it, so the targets are never
+		// remembered and the chain reading Remembered acts on nothing. A Forge
+		// script defect (Volcanic Offering's DBDestroyLand, Urza, Academy
+		// Headmaster's Destroy11U), refused rather than half-resolved (PORT-8,
+		// GO-7).
+		return fmt.Errorf("engine: %s: RememberTargets$ off the stack's own ability never reaches AbilityUtils.handleRemembering (MagicStack.java:646), a script defect", a.API)
+	}
 	if a.evolve != NoCard && !g.Card(a.Source).evolvedBy(g.Card(a.evolve)) {
 		return nil
 	}

@@ -391,7 +391,7 @@ var playerPropertyNames = [...]string{
 // value contains, found false when none does. ok is false for a property this
 // port keeps no state for: StartingLibrarySize,
 // LifeGainedByTeamThisTurn, LifeStartedThisTurnWith,
-// SVarAmount, ExploredThisTurn, DamageToOppsThisTurn.
+// SVarAmount, ExploredThisTurn.
 func playerPropertyMeasure(g *Game, pid PlayerID, value string, sq []string) (n int, ok, found bool) {
 	name := ""
 	for _, candidate := range playerPropertyNames {
@@ -456,6 +456,17 @@ func playerPropertyMeasure(g *Game, pid PlayerID, value string, sq []string) (n 
 		return len(p.discardedThisTurn), true, true
 	case "AttackersDeclared":
 		return len(p.attackedThisTurn), true, true
+	case "DamageToOppsThisTurn":
+		// AbilityUtils.java:3657-3659: Player.getOpponentsAssignedDamage
+		// (Player.java:815-817), the damage the player's opponents still in the
+		// game were dealt this turn (Antagonism).
+		n := 0
+		for _, opp := range g.Players() {
+			if opp != pid && !g.Player(opp).Lost {
+				n += g.Player(opp).DamageReceivedThisTurn
+			}
+		}
+		return n, true, true
 	case "NonCombatDamageDealtThisTurn":
 		// getAssignedDamage - getAssignedCombatDamage: the noncombat damage the
 		// player was dealt this turn.

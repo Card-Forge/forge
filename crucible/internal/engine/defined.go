@@ -134,6 +134,17 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 				candidates = append(candidates, ref.controller)
 			}
 		}
+	case "TargetedOrController":
+		// AbilityUtils.java:933-935: the targeted players, then the
+		// controllers of the targeted cards (Pulse of the Forge's "that player
+		// or that planeswalker's controller").
+		for _, part := range [...]string{"Targeted", "TargetedController"} {
+			ps, err := definedPlayers(g, controller, host, part, refs)
+			if err != nil {
+				return nil, err
+			}
+			candidates = append(candidates, ps...)
+		}
 	case "ParentTargetedController":
 		// AbilityUtils.java:987-993: the controller of each card the nearest
 		// targeting ancestor targets (definedCards' ParentTarget), plus the

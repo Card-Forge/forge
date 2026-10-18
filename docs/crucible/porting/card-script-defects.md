@@ -37,15 +37,19 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `library_of_leng` (line 6)                 | `ChangeZone \| Origin$ All \| Destination$ Library` with no `NoShuffle$ True`: `ChangeZoneEffect.java:1259` shuffles the library before the discarded card goes on top; Oracle says no shuffle                          | Discard replacements (R9k)      | Not filed                                                        |
 | `nephalia_academy` (line 7)                | Same missing `NoShuffle$ True` as `library_of_leng`: the library is shuffled before the revealed card goes on top                                                                                                       | Discard replacements (R9k)      | Not filed                                                        |
 | `wilt_leaf_liege` (line 8)                 | `DefinedPlayer$ ReplacedPlayer`: `ReplaceMoved.setReplacingObjects` (`ReplaceMoved.java:120-124`) sets no Player, so the hidden ChangeZone has no fetcher and moves nothing; the replaced discard leaves it in hand     | Discard replacements (R9k)      | Not filed                                                        |
+| `volcanic_offering` (line 5)               | `RememberTargets$` on the `DBDestroyLand` sub-ability: `AbilityUtils.handleRemembering` runs on the stack's root alone (`MagicStack.java:646`), so the opponent-chosen land is never remembered or destroyed            | `RememberTargets$` port (R9o)   | Not filed                                                        |
+| `urza_academy_headmaster` (`Destroy11U`)   | `RememberTargets$` on a `GenericChoice` choice: never remembered (same site), so "return each card put into a graveyard this way" returns nothing                                                                       | `RememberTargets$` port (R9o)   | Not filed                                                        |
 
 Every row but `peace_talks`, `____________trespasser`, `turtle_tracks` and the rows marked Not filed is merged upstream.
 Turtle Tracks, Library of Leng and Nephalia Academy are reproduced as Java runs them (oracle parity, the shuffle
 included). Wilt-Leaf Liege fails closed: `definedPlayers` refuses an unrecorded `ReplacedPlayer`, the discard goes to
-the graveyard and the error is reported. The Trespasser line fails closed: `pumpKeywords` (`pumpeffect.go`) refuses a
-hidden line nothing reads, so the card is refused rather than played without its evasion. The seven of
-[#12193](https://github.com/Card-Forge/forge/pull/12193) arrived with a sync. `peace_talks` is carried as a pending fix,
-logged in [upstream-patches.md](upstream-patches.md), until upstream merges it. `internal/carddb/compile` compiles the
-whole corpus with no exemption of any kind, and `internal/valid` parses all 49,615 valid strings with no padded base.
+the graveyard and the error is reported. Volcanic Offering and Urza's `Destroy11U` fail closed: `Registry.resolve`
+refuses a `RememberTargets$` line off the stack's root ability. The Trespasser line fails closed: `pumpKeywords`
+(`pumpeffect.go`) refuses a hidden line nothing reads, so the card is refused rather than played without its evasion.
+The seven of [#12193](https://github.com/Card-Forge/forge/pull/12193) arrived with a sync. `peace_talks` is carried as a
+pending fix, logged in [upstream-patches.md](upstream-patches.md), until upstream merges it. `internal/carddb/compile`
+compiles the whole corpus with no exemption of any kind, and `internal/valid` parses all 49,615 valid strings with no
+padded base.
 
 Two more change no rules behaviour:
 

@@ -1302,11 +1302,11 @@ func TestApplyContinuousControlLeavesUnenchantedCreaturesAlone(t *testing.T) {
 	}
 }
 
-// TestApplyContinuousControlSkipsUnresolvedGainControlValue proves a
-// qualified GainControl$ value (Player.isMonarch, 1 of the corpus's 44 real
-// lines) is skipped rather than guessed at -- this port has no monarch
-// mechanic to resolve it against (PORT-8/GO-7).
-func TestApplyContinuousControlSkipsUnresolvedGainControlValue(t *testing.T) {
+// TestApplyContinuousControlWithoutMonarchChangesNothing proves the qualified
+// GainControl$ Player.isMonarch (1 of the corpus's 44 real lines) names
+// nobody while there is no monarch, so control stays put
+// (StaticAbilityContinuous.java:598's empty check).
+func TestApplyContinuousControlWithoutMonarchChangesNothing(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -1319,7 +1319,7 @@ func TestApplyContinuousControlSkipsUnresolvedGainControlValue(t *testing.T) {
 	engine.CheckStateBasedActions(g, engine.NewScriptedController())
 
 	if got := g.Card(creature).Controller(); got != b {
-		t.Errorf("Controller() = %v, want %v -- GainControl$ Player.isMonarch cannot resolve, so control must not change", got, b)
+		t.Errorf("Controller() = %v, want %v -- no monarch, so nobody gains control", got, b)
 	}
 }
 

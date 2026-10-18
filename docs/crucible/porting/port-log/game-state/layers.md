@@ -361,13 +361,13 @@ Corpus-frequency research here first had to separate two unrelated mechanics sha
 `DB$ ChangeZone | ... | GainControl$ True` (Restoration Angel, Rise from the Grave) or
 `DB$ Dig | ... | GainControl$ True`, `ChangeZoneEffect`'s own one-shot "put onto the battlefield under your control"
 effect, entirely unrelated to this layer and part of M6's own remaining 202 script effects. Of the 44 real
-`Mode$ Continuous` lines, 43 name `GainControl$ You`; the last, `GainControl$ Player.isMonarch`, is a qualified
-`getDefinedPlayers` form (the `else` branch's own `game.getPlayersInTurnOrder()` filtered by
-`PlayerPredicates.restriction`) this port has no monarch mechanic to filter by, so the whole line is skipped
-(PORT-8/GO-7) rather than guessing "the controller" and being wrong the instant any game actually changes hands. The
-affected set on the real lines is `AffectedDefined$ Enchanted` in 35 of 42 (Control Magic's own shape since upstream PR
-11932 moved `Self`/`Enchanted`/`Equipped` statics off `Affected$ ...EnchantedBy`; resolved by `layerAffectedCards`, the
-resolver Layers 4-8 share) and an `Affected$` valid-string in the other 7 (`Permanent`, `Creature`), the identical
+`Mode$ Continuous` lines, 43 name `GainControl$ You`; the last, `GainControl$ Player.isMonarch` (Fealty to the Realm),
+is a qualified `getDefinedPlayers` form (the `else` branch's own `game.getPlayersInTurnOrder()` filtered by
+`PlayerPredicates.restriction`). Both go through `definedPlayers`, whose first player gains control
+(`StaticAbilityContinuous.java:597-600`): nobody while there is no monarch; a spec it cannot read is a pending error.
+The affected set on the real lines is `AffectedDefined$ Enchanted` in 35 of 42 (Control Magic's own shape since upstream
+PR 11932 moved `Self`/`Enchanted`/`Equipped` statics off `Affected$ ...EnchantedBy`; resolved by `layerAffectedCards`,
+the resolver Layers 4-8 share) and an `Affected$` valid-string in the other 7 (`Permanent`, `Creature`), the identical
 `Matches`-driven match `applyOneContinuousPT`'s own `Affected$` already does.
 `TestControlMagicShapeGainsControlThroughAffectedDefined` (`layer2control_test.go`) proves the first shape, and that
 control reverts when the Aura leaves.
@@ -412,15 +412,15 @@ a struct field is not a method, so it is not excluded). `Controller` avoids the 
 the package is named that (only the _method_ `Card.Controller()` is, and methods are excluded).
 
 `TestApplyContinuousControlGrantsControlOfEnchantedCreature`,
-`TestApplyContinuousControlLeavesUnenchantedCreaturesAlone`,
-`TestApplyContinuousControlSkipsUnresolvedGainControlValue`, `TestApplyContinuousControlSkipsLineWithCondition` and
+`TestApplyContinuousControlLeavesUnenchantedCreaturesAlone`, `TestApplyContinuousControlWithoutMonarchChangesNothing`,
+`TestApplyContinuousControlSkipsLineWithCondition` and
 `TestApplyContinuousControlRunsBeforeKeywordSoYouCtrlSeesTheNewController` (continuous_test.go) prove the fold mechanism
 directly; `TestCheckStateBasedActionsAuraGoesToOwnersGraveyard` and
 `TestCheckStateBasedActionsAuraGoesToGraveyardWhenEnchantPropertyStopsMatching` (action_test.go, rewritten as above)
 prove a real caller reads it.
 
-Not resolved: the qualified `GainControl$ Player.isMonarch` (1 of 44, above). Layer 1 (copy effects) is
-[`effects-clone.md`](effects-clone.md)'s; Layer 3 (`GainTextOf$`) is
+`TestFealtyShapeTheMonarchControlsTheEnchantedCreature` (`layer2control_test.go`) proves `Player.isMonarch` following
+the monarch. Layer 1 (copy effects) is [`effects-clone.md`](effects-clone.md)'s; Layer 3 (`GainTextOf$`) is
 [Layer 3: `GainTextOf$` lands](layers-text-and-rules.md#layer-3-gaintextof-lands).
 
 ### `Condition$`: the one gate all six appliers share

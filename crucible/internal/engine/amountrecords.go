@@ -10,7 +10,9 @@
 // :2312-2314 YouDrewLastTurn, :2328-2330 YouScryThisTurn, :2340-2342
 // YouCastThisGame, :2377-2379 LifeYourTeamGainedThisTurn, :2543-2547
 // LeftGraveyardThisTurn, :2754-2756 TotalTurns, :2846-2863 MostCardName and
-// MostProminentCreatureType) and CardFactoryUtil.getMostProminentCreatureTypeSize
+// MostProminentCreatureType, :2839-2844 CountersRemovedThisTurn, :2805-2816
+// ThisTurnActivated_, :1848-1850 ActivatedThisGame, :2130-2131
+// RegeneratedThisTurn) and CardFactoryUtil.getMostProminentCreatureTypeSize
 // (CardFactoryUtil.java:318-346).
 
 package engine
@@ -63,6 +65,21 @@ func (g *Game) recordCountValue(sourceController PlayerID, source CardID, count 
 		}
 		n, ok = g.enteredCount(g.enteredLastTurn, sourceController, source, countText(count))
 		return n, ok, true
+	case strings.HasPrefix(count.Head, "CountersRemovedThisTurn"):
+		n, ok = g.countersRemovedCount(sourceController, source, countText(count))
+		return n, ok, true
+	case strings.HasPrefix(count.Head, "ThisTurnActivated_"):
+		n, ok = g.thisTurnActivatedCount(sourceController, source, countText(count))
+		return n, ok, true
+	case count.Head == "ActivatedThisGame":
+		n, ok = g.activatedThisGame(source)
+		return n, ok, true
+	case count.Head == "RegeneratedThisTurn":
+		// AbilityUtils.java:2130-2131: the host's Card.getRegeneratedThisTurn.
+		if source == NoCard {
+			return 0, false, true
+		}
+		return g.Card(source).regeneratedThisTurn, true, true
 	case count.Head == "MaxCombatDamageThisTurn":
 		// Player.getMaxAssignedCombatDamage (Player.java:829-831): the most
 		// combat damage any registered player was dealt this turn.
@@ -106,6 +123,38 @@ func (g *Game) recordCountValue(sourceController PlayerID, source CardID, count 
 		return 0, false, true
 	}
 	return read(g.Player(sourceController)), true, true
+}
+
+// activatedThisGame is Count$ActivatedThisGame (AbilityUtils.java:1848-1850):
+// SpellAbility.getActivationsThisGame, the host's game count for the root of
+// the ability being resolved (ActivationTable.getOriginal, ActivationTable.
+// java:23-34) -- a trigger's Execute$ ability (Trigger.triggerRun, noted for a
+// static trigger only after it resolved, TriggerHandler.java:539), or an
+// activated ability's A: line. A sub-ability does not carry its root here, so
+// it, and anything read outside a resolution, is unresolved (GO-7).
+func (g *Game) activatedThisGame(source CardID) (int, bool) {
+	a := g.resolving
+	if a == nil || a.Params == nil || source == NoCard || a.Source != source {
+		return 0, false
+	}
+	host := g.Card(source)
+	switch {
+	case a.isTrigger || a.staticTrigger:
+		_, n := host.trigActs.of(a.Params)
+		return n, true
+	case a.activated:
+		for i := 0; ; i++ {
+			ab, _, ok := host.abilityAt(i)
+			if !ok {
+				return 0, false
+			}
+			if ab == a.Params {
+				_, n := host.activations.of(i)
+				return n, true
+			}
+		}
+	}
+	return 0, false
 }
 
 // rememberedSharedCardType is Count$RememberedWithSharedCardType

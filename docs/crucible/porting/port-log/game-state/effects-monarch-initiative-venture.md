@@ -89,9 +89,10 @@ writes the designation, `Load` recreates the card through `Game.SetMonarch`, and
 the command zone. `compareGames` compares the monarch by name. Scenario:
 `testdata/scenarios/monarch-draws-at-end-step-and-passes-by-combat-damage`.
 
-**Follow-ups, not in this batch.** `Player.isMonarch`/`Count$...Monarch` valid properties stay unresolved: turning them
-on changes statements in `layers.md`, `triggers.md`, `trigger-modes.md` and `replacement.md`, and nothing here needs
-them.
+**Readers.** `Player.isMonarch`/`hasInitiative` (`matchesPlayerProperty`, `PlayerProperty.java:85-92`),
+`CheckDefinedPlayer$ You.isMonarch` (R9n, [`m6-r9n-checksvar-heads.md`](m6-r9n-checksvar-heads.md)) and Layer 2's
+`GainControl$ Player.isMonarch` (Fealty to the Realm, R9o, [`m6-r9o-r9o-findings.md`](m6-r9o-r9o-findings.md)) read
+`Game.monarch`/`Game.initiative`.
 
 **Forge `getMonarchSet` (PORT-8, `forge-java-defects.md`).** No Crucible counterpart: this port carries no set codes,
 and `becomeMonarch` takes none.

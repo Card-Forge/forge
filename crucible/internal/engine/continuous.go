@@ -17,6 +17,7 @@
 package engine
 
 import (
+	"fmt"
 	"slices"
 	"sort"
 	"strconv"
@@ -1452,20 +1453,16 @@ func applyContinuousControl(g *Game) {
 // Of the corpus's 44 real S:Mode$ Continuous lines naming GainControl$ (a
 // separate, unrelated `DB$ ChangeZone | GainControl$ True`/`DB$ Dig | ... |
 // GainControl$ True` one-shot "put onto the battlefield under your control"
-// effect -- ChangeZoneEffect.java, M6's own remaining script-effect gap, not
-// this layer at all -- shares the same param name and inflates a naive
-// corpus grep for "GainControl$" past 44 unless the two are told apart by
-// Mode$ first):
-//   - GainControl$ You (43 of 44) resolves: getDefinedPlayers' own "You"
-//     case is `players.add(player)`, and `player` is `card.getController()`
-//     whenever sa is not a SpellAbility (every real Continuous static
-//     ability here), i.e. the effect's own host -- host.Controller() below.
-//   - GainControl$ Player.isMonarch (1 of 44) does not: a qualified
-//     getDefinedPlayers form (the "else" branch's own
-//     `game.getPlayersInTurnOrder()` filtered by `PlayerPredicates
-//     .restriction`) this port has no monarch mechanic to filter by, so the
-//     whole line is skipped (PORT-8/GO-7) rather than guessing "the
-//     controller" and being wrong for every game that ever changes hands.
+// effect -- ChangeZoneEffect.java, not this layer at all -- shares the same
+// param name), 43 name GainControl$ You and one (Fealty to the Realm)
+// Player.isMonarch. Both are read the way StaticAbilityContinuous.java:597-600
+// reads them: definedPlayers' first player gains control, nobody when it
+// names none (no monarch). "You" is the host's controller -- `player` is
+// `card.getController()` whenever sa is not a SpellAbility; Player.isMonarch
+// is the getDefinedPlayers fallthrough over the players in turn order,
+// filtered by Game.monarch (matchesPlayerSpec). A spec definedPlayers cannot
+// read records a pending error (GO-7) rather than leaving the control silently
+// unchanged.
 //
 // The affected set on these lines is AffectedDefined$ Enchanted (35 of 42
 // Mode$ Continuous lines, Control Magic's own shape -- the Aura's host,
@@ -1485,10 +1482,18 @@ func applyOneContinuousControl(g *Game, host *Card, s *compile.Ability) {
 		}
 	}
 	gain, ok := s.Param("GainControl")
-	if !ok || !strings.EqualFold(gain, "You") {
+	if !ok {
 		return
 	}
-	gainer := host.Controller()
+	gainers, err := definedPlayers(g, host.Controller(), host.ID, gain, abilityRefs{})
+	if err != nil {
+		g.recordPendingError(fmt.Errorf("engine: %s: Continuous GainControl$: %w", host.Def.Name, err))
+		return
+	}
+	if len(gainers) == 0 {
+		return
+	}
+	gainer := gainers[0]
 	// AffectedDefined$ Enchanted/Equipped/Self (Control Magic's own shape since
 	// the upstream move off Affected$ ...EnchantedBy, #11932) or an Affected$
 	// valid string: staticAffected, the resolver Layers 4-8 share. An

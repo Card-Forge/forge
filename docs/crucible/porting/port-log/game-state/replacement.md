@@ -762,15 +762,10 @@ port's own damage pipeline has no equivalent state for at all -- and `ExecuteMod
 only matters when Java batches more than one simultaneous damage instance into one replacement pass, something this
 port's own `dealPermanentDamage`/`dealPlayerDamage` never do (each call is already exactly one source and one target).
 
-25 of the corpus's own 31 real `Event$ DamageDone` lines naming `DB$ RemoveCounter`/`DB$ PutCounter` resolve end to end.
-6 stay unresolved: the 5 chaining `SubAbility$` above, and jared_carthalion_true_heir.txt's own real R: line naming
-`CheckDefinedPlayer$ You.isMonarch` -- no monarch mechanic this port tracks (`GainLife`'s own `Player.isMonarch` gap,
-above) -- skipped by `damageReplacementMatches`'s own allow-list (which never lists `CheckDefinedPlayer` at all) before
-`applyDamageReplaceCounter` is ever reached; `triggerCommonRequirementsMet`'s own pre-existing `CheckDefinedPlayer`
-skip-list entry
-([`## CardTraitBase.meetsCommonRequirements`](triggers.md#cardtraitbasemeetscommonrequirements-the-one-gate-every-trigger-mode-shares))
-would refuse it a second time even if the outer allow-list somehow let it through, confirmed by disabling both gates
-together during regression-checking and watching the test fail for the expected reason.
+26 of the corpus's own 31 real `Event$ DamageDone` lines naming `DB$ RemoveCounter`/`DB$ PutCounter` resolve end to end.
+The 5 chaining `SubAbility$` above stay unresolved. jared_carthalion_true_heir.txt's R: line naming
+`CheckDefinedPlayer$ You.isMonarch` resolves: `damageReplacementMatches` reads `CheckDefinedPlayer$`/
+`DefinedPlayerCompare$` against `Game.monarch` (R9n, [`m6-r9n-checksvar-heads.md`](m6-r9n-checksvar-heads.md)).
 
 `TestDamageToCreatureReplacedByRemoveCounter` proves the "Phantom" shape (`Defined$ Self`);
 `TestDamageToPlayerReplacedByPutCounterUsingBareReplaceCount` proves the bare `ReplaceCount$DamageAmount` read;

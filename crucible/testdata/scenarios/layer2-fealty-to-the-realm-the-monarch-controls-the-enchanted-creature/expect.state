@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+monarch=human
+humanlife=20
+humanbattlefield=Island|Id:3|Tapped;Island|Id:4|Tapped;Island|Id:5|Tapped;Island|Id:6|Tapped;Island|Id:7|Tapped;Fealty to the Realm|AttachedTo:2|SummonSick;Grizzly Bears|Id:2|Owner:ai|SummonSick
+ailife=20

@@ -196,7 +196,7 @@
     ],
     "mulligan": ["id", "zone", "game", "control"],
     "match": ["id", "zone", "game", "control"],
-    "stack": ["id", "ability", "game", "effect", "event", "action", "control", "card", "zone"],
+    "stack": ["id", "ability", "game", "effect", "event", "action", "control", "card", "zone", "parts", "subability"],
     "priority": ["id", "card", "game", "phase", "control", "effect", "action", "player", "room"],
     "driver": ["id", "game", "phase", "control", "effect", "mulligan"],
     "valid": [
@@ -536,7 +536,7 @@
       "altcost",
       "unlesscost"
     ],
-    "castrecord": ["id", "zone", "card", "game", "valid", "parts"],
+    "castrecord": ["id", "zone", "card", "game", "valid", "parts", "ability"],
     "playerproperty": ["id", "zone", "card", "game", "player", "valid", "amount", "combat", "castrecord"],
     "foretell": ["id", "zone", "card", "game", "control", "parts", "mana"],
     "lifelost": [

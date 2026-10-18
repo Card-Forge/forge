@@ -46,9 +46,17 @@ var saUnresolvedPrefixes = []string{
 // (controlled by hostController, reading X from amounts). recognized is false
 // when spec names something this port does not evaluate.
 func (g *Game) spellAbilityMatches(a *Ability, spec string, host *Card, hostController PlayerID, amounts map[string]expr.Amount) (matched, recognized bool) {
+	return g.spellAbilityMatchesAs(a, g.Card(a.Source), spec, host, hostController, amounts)
+}
+
+// spellAbilityMatchesAs is spellAbilityMatches with a's own source read as
+// source: a last-known copy for an ability recorded earlier (the
+// SpellAbility copy on an LKI host MagicStack.addAbilityActivatedThisTurn
+// keeps, MagicStack.java:986).
+func (g *Game) spellAbilityMatchesAs(a *Ability, source *Card, spec string, host *Card, hostController PlayerID, amounts map[string]expr.Amount) (matched, recognized bool) {
 	recognized = true
 	for _, alt := range strings.Split(spec, ",") {
-		ok, known := g.spellAbilityMatchesOne(a, strings.TrimSpace(alt), host, hostController, amounts)
+		ok, known := g.spellAbilityMatchesOne(a, source, strings.TrimSpace(alt), host, hostController, amounts)
 		if !known {
 			recognized = false
 			continue
@@ -58,11 +66,10 @@ func (g *Game) spellAbilityMatches(a *Ability, spec string, host *Card, hostCont
 	return matched, recognized
 }
 
-func (g *Game) spellAbilityMatchesOne(a *Ability, alt string, host *Card, hostController PlayerID, amounts map[string]expr.Amount) (matched, recognized bool) {
+func (g *Game) spellAbilityMatchesOne(a *Ability, source *Card, alt string, host *Card, hostController PlayerID, amounts map[string]expr.Amount) (matched, recognized bool) {
 	head, props, _ := strings.Cut(alt, ".")
 	negated := strings.HasPrefix(head, "!")
 	head = strings.TrimPrefix(head, "!")
-	source := g.Card(a.Source)
 	kind := a.causeKind()
 	var headOK bool
 	switch head {

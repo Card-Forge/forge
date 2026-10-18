@@ -124,6 +124,116 @@ func (g *Game) recordCountersAdded(putter PlayerID, id CardID, ct CounterType, n
 	})
 }
 
+// recordCountersRemoved logs n counters of kind ct removed from target
+// (Game.addCounterRemovedThisTurn, Game.java:1306-1311): a card as it is just
+// after the removal, Java's LKI copy, or a player.
+func (g *Game) recordCountersRemoved(target EntityID, ct CounterType, n int) {
+	if n <= 0 {
+		return
+	}
+	r := counterRemoval{counter: ct, player: NoPlayer, n: n}
+	if pid, ok := target.AsPlayer(); ok {
+		r.player = pid
+	} else if id, ok := target.AsCard(); ok && id != NoCard && int(id) < len(g.cards) {
+		r.card = *g.Card(id)
+	} else {
+		return
+	}
+	g.countersRemoved = append(g.countersRemoved, r)
+}
+
+// countersRemovedCount is Count$CountersRemovedThisTurn <type> <valid>
+// (AbilityUtils.java:2839-2844, Game.getCounterRemovedThisTurn :1313-1321):
+// the counters of the type removed this turn from the cards and players that
+// match the valid string from the source controller's point of view. Java
+// splits the head on spaces and reads the third part whole, so text is the
+// head as written. A player matches only a player alternative (Player.isValid
+// is false for a Card one), a card only a card one; a player spec this port
+// cannot read is unresolved (GO-7).
+func (g *Game) countersRemovedCount(sourceController PlayerID, source CardID, text string) (int, bool) {
+	parts := strings.Split(text, " ")
+	if len(parts) < 3 || sourceController == NoPlayer {
+		return 0, false
+	}
+	kind, spec := CounterType(strings.ToUpper(parts[1])), parts[2]
+	parsed := valid.Parse(spec)
+	namesPlayers := false
+	for _, alt := range strings.Split(spec, ",") {
+		base, _, _ := strings.Cut(alt, ".")
+		if _, ok := matchesPlayerBase(sourceController, sourceController, base); ok {
+			namesPlayers = true
+		}
+	}
+	n := 0
+	for i := range g.countersRemoved {
+		r := &g.countersRemoved[i]
+		if r.counter != kind {
+			continue
+		}
+		if r.player == NoPlayer {
+			if Matches(g, &r.card, parsed, sourceController, source) {
+				n += r.n
+			}
+			continue
+		}
+		if !namesPlayers {
+			continue
+		}
+		matched, ok := matchesPlayerSpec(g, r.player, sourceController, source, spec)
+		if !ok {
+			return 0, false
+		}
+		if matched {
+			n += r.n
+		}
+	}
+	return n, true
+}
+
+// recordActivation is MagicStack.addAbilityActivatedThisTurn (MagicStack.java:
+// 983-987) for an activated ability as it goes on the stack (:310) or a mana
+// ability as it resolves (:234), neither a copy nor a trigger: the ability and
+// a last-known copy of its host. before is the host as it stood before the
+// costs were paid. A cost that moved the host (exiled from a graveyard,
+// sacrificed) leaves Java's ability on the old card object, which still reads
+// the zone it left (Zone.remove does not reset it, Zone.java:162-167), so the
+// copy is before; otherwise it is the host now, its costs paid.
+func (g *Game) recordActivation(a *Ability, before *Card) {
+	host := *g.Card(a.Source)
+	if before != nil && before.zoneStamp != host.zoneStamp {
+		host = *before
+	}
+	g.activatedThisTurn = append(g.activatedThisTurn, activationRecord{ability: *a, host: host})
+}
+
+// thisTurnActivatedCount is Count$ThisTurnActivated_<valid> (AbilityUtils.java:
+// 2805-2816, CardUtil.getThisTurnActivated :139-143): the abilities activated
+// this turn that match the SpellAbility valid string from the source
+// controller's point of view, each read with its host as last known. text is
+// the head as written; Java takes the part after the first underscore up to
+// the next. The abilities still paying their costs (Game.costPaymentStack,
+// :2810-2814) are not counted: only a Type$ Ability ReduceCost reads this
+// head while a cost is paid, and costmod.go applies Type$ Spell lines alone.
+func (g *Game) thisTurnActivatedCount(sourceController PlayerID, source CardID, text string) (int, bool) {
+	parts := strings.Split(text, "_")
+	if len(parts) < 2 || parts[1] == "" || source == NoCard || sourceController == NoPlayer {
+		return 0, false
+	}
+	host := g.Card(source)
+	n := 0
+	for i := range g.activatedThisTurn {
+		r := &g.activatedThisTurn[i]
+		matched, recognized := g.spellAbilityMatchesAs(&r.ability, &r.host, parts[1], host, sourceController, nil)
+		if !recognized {
+			return 0, false
+		}
+		if matched {
+			n++
+		}
+	}
+	return n, true
+}
+
 // zoneByLooseName is ZoneType.smartValueOf: one zone name, in any case.
 func zoneByLooseName(name string) (ZoneType, bool) {
 	if name == "" {

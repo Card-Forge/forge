@@ -58,6 +58,13 @@ func (g *Game) resolveStaticTriggers(controller PlayerController, matches []Abil
 			g.recordPendingError(fmt.Errorf("engine: static trigger of %q: %w", g.Card(a.Source).Def.Name, err))
 			return
 		}
+		// TriggerHandler.java:539: regtrig.triggerRun() once the static
+		// trigger has resolved (a stacked one is noted as it is pushed), so
+		// its own resolution reads the runs before it (Count$ActivatedThisGame,
+		// Telekinesis).
+		if a.Params != nil {
+			g.Card(a.Source).trigActs.note(a.Params)
+		}
 	}
 }
 

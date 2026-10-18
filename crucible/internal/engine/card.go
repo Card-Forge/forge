@@ -308,6 +308,11 @@ type Card struct {
 	// with it. Read by the blockedThisTurn and blockedValidThisTurn properties
 	// (validhistory.go).
 	blockedThisTurn []CardID
+	// regeneratedThisTurn is Card.regeneratedThisTurn (Card.java:3516-3523):
+	// how often the card regenerated this turn (regenerateBody), zeroed at
+	// cleanup (Card.java:7275) and on a zone change. Count$RegeneratedThisTurn
+	// reads it.
+	regeneratedThisTurn int
 
 	// LoyaltyAbilityActivated is CR 606.3's own once-per-turn marker
 	// (Card.planeswalkerAbilityActivated in Java, collapsed from an int to a
