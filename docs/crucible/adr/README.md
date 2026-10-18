@@ -52,10 +52,11 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0039](0039-layer3-word-substitution.md)                    | Layer 3 word substitution rewrites the compiled Def       | Accepted           |
 | [0040](0040-search-control-redirect.md)                     | Search control: a per-effect decision redirect            | Accepted           |
 | [0041](0041-stack-items-as-target-entities.md)              | An ability on the stack is a target entity                | Accepted           |
+| [0042](0042-mana-pool-unit-sources.md)                      | The mana pool records each unit's source card             | Accepted           |
 
 ## Numbering
 
-No gap and no missing number: 0001-0041, every number used exactly once. Numbers are allocated when an ADR is written,
+No gap and no missing number: 0001-0042, every number used exactly once. Numbers are allocated when an ADR is written,
 never reserved — the plan lists remaining subjects without numbers for that reason.
 
 The plan's M0 exit gate asked for ADR-0001 through ADR-0011 `Accepted`. The three subjects after it — ports and
