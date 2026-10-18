@@ -341,8 +341,15 @@ func indices(n int) []int {
 	return out
 }
 
-// ChooseAbilitiesForEffect takes the first abilities.
-func (*Controller) ChooseAbilitiesForEffect(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, options []string, amount int) []int {
+// ChooseAbilitiesForEffect takes the first abilities. A single pick rotates
+// with the deciding player, so that two players asked the same question do not
+// answer alike: Face to Face's best-of-three Rock, Paper, Scissors repeats until
+// someone wins (RepeatEffect.java has no cap without MaxRepeat$), and two
+// identical picks tie forever.
+func (*Controller) ChooseAbilitiesForEffect(_ *engine.Game, decider engine.PlayerID, _ engine.CardID, options []string, amount int) []int {
+	if amount == 1 && len(options) > 1 {
+		return []int{int(decider) % len(options)}
+	}
 	return indices(clip(amount, len(options)))
 }
 

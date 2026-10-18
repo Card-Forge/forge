@@ -117,6 +117,9 @@ func TestControllerAnswersEveryDecisionLegally(t *testing.T) {
 	if got := c.ChooseAbilitiesForEffect(g, p, a, []string{"x", "y"}, 5); len(got) != 2 {
 		t.Errorf("abilities = %v", got)
 	}
+	if one, two := c.ChooseAbilitiesForEffect(g, 0, a, []string{"x", "y", "z"}, 1), c.ChooseAbilitiesForEffect(g, 1, a, []string{"x", "y", "z"}, 1); one[0] == two[0] {
+		t.Errorf("two players picked alike: %v %v", one, two)
+	}
 	if got := c.ChooseModesForAbility(g, p, a, []string{"x", "y", "z"}, 2, 2); len(got) != 2 {
 		t.Errorf("modes = %v", got)
 	}
