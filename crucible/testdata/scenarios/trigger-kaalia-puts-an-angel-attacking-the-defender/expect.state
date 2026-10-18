@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=20
+humanbattlefield=Kaalia of the Vast|Tapped;Serra Angel|Tapped|SummonSick
+ailife=14

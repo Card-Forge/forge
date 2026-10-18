@@ -40,6 +40,9 @@ type xAnnounced struct {
 	// (SpellAbility.getPayingMana by color): what Count$Converge and
 	// Count$Adamant read off a cast.
 	paid [5]int
+	// colorless is the colorless mana ({C}) the payment spent, kept apart
+	// from paid so a color count never sees it (Count$Adamant.Colorless).
+	colorless int
 	// snow is how many of the units spent were snow mana: mana a snow
 	// permanent produced (Pool's snow buckets, CR 106.3a), what
 	// Count$CastTotalManaSpent Snow reads off a cast (the cast's paying mana
@@ -177,6 +180,9 @@ func (g *Game) payManaCostX(decider PlayerID, cost mana.Cost, controller PlayerC
 	// Every shard is pure by now (a hybrid's choice, a generic's chosen mana),
 	// so its color is the color of the mana that paid it.
 	for _, s := range append(resolved, snow...) {
+		if s.Colors() == 0 && s.IsColorless() {
+			x.colorless++
+		}
 		for i, col := range [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green} {
 			if s.Colors().HasAny(col) {
 				x.paid[i]++

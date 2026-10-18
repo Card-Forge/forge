@@ -1,0 +1,12 @@
+# Count$StartingPlayer.0.1 (AbilityUtils.java:2280-2282) reads
+# Game.startingPlayer, set as the first turn starts (GameAction.java:2395).
+# Human took turn 1, so on turn 2 the ai is not the starting player: its
+# Cindercone Smite deals 2 to Grizzly Bears and then makes a Treasure
+# (ConditionCheckSVar$ X, GE1 by default).
+startturn human
+advance 13
+advance 3
+tapformana ai 6 R
+queue targets 3
+castspell ai 5
+resolvestack

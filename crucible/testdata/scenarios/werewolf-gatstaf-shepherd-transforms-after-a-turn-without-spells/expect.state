@@ -1,0 +1,7 @@
+turn=3
+activeplayer=human
+activephase=Upkeep
+humanlife=20
+humanbattlefield=Forest;Forest;Gatstaf Shepherd|Transformed
+ailife=20
+aihand=Forest

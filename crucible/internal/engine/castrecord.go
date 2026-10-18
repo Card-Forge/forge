@@ -7,7 +7,8 @@
 // Count$CreaturesAttackedThisTurn and Count$LifeYouGainedThisTurn read the
 // others (AbilityUtils.java:2805, :2819, :2517, :2360); the zone changes out of
 // the battlefield are also Game.leftBattlefieldThisTurn, which
-// Count$LeftBattlefieldThisTurn, Void and Revolt read (:2537, :2698, :2268). All live on the Game
+// Count$LeftBattlefieldThisTurn, Void and Revolt read (:2537, :2698, :2268); the
+// moves out of a graveyard are Game.leftGraveyardThisTurn (:2543). All live on the Game
 // or its players, are copied by Game.Clone and end at cleanup (GO-2).
 
 package engine
@@ -39,6 +40,7 @@ func (*Game) commanderCasts() int { return 0 }
 // started, kept by the cast path in Card.castFrom.
 func (g *Game) recordSpellCast(pid PlayerID, card CardID) {
 	g.Player(pid).SpellsCastThisTurn++
+	g.Player(pid).spellsCastThisGame++
 	c := g.Card(card)
 	g.castThisTurn = append(g.castThisTurn, castRecord{card: card, controller: pid, from: c.castFrom, stamp: c.zoneStamp})
 }
@@ -69,6 +71,11 @@ func (g *Game) thisTurnCastCount(source CardID, spec string) (int, bool) {
 func (g *Game) recordEntered(c, before *Card, from, to ZoneType) {
 	if from == to {
 		return
+	}
+	if from == Graveyard {
+		// Game.addLeftGraveyardThisTurn(lastKnownInfo), GameAction.java:550-552:
+		// the card as it last was in the graveyard, whatever zone it went to.
+		g.leftGraveyardThisTurn = append(g.leftGraveyardThisTurn, *before)
 	}
 	snap := *before
 	if to == Battlefield {
@@ -133,6 +140,13 @@ func zoneByLooseName(name string) (ZoneType, bool) {
 // underscores, so a valid string that holds one is cut short; and an
 // unreadable zone (smartValueOf's null) or a shape with a `$` is unresolved.
 func (g *Game) thisTurnEnteredCount(sourceController PlayerID, source CardID, text string) (int, bool) {
+	return g.enteredCount(g.enteredThisTurn, sourceController, source, text)
+}
+
+// enteredCount is thisTurnEnteredCount over entries: this turn's zone changes,
+// or last turn's for Count$LastTurnEntered_ (CardUtil.getLastTurnEntered,
+// Zone.getCardsAddedLastTurn).
+func (g *Game) enteredCount(entries []zoneEntry, sourceController PlayerID, source CardID, text string) (int, bool) {
 	if strings.Contains(text, "$") {
 		return 0, false
 	}
@@ -156,8 +170,8 @@ func (g *Game) thisTurnEnteredCount(sourceController PlayerID, source CardID, te
 	}
 	parsed := valid.Parse(spec)
 	n := 0
-	for i := range g.enteredThisTurn {
-		e := &g.enteredThisTurn[i]
+	for i := range entries {
+		e := &entries[i]
 		if e.to == dest && (!hasOrigin || e.from == origin) && Matches(g, &e.card, parsed, sourceController, source) {
 			n++
 		}

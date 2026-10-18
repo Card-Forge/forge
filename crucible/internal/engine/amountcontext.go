@@ -21,6 +21,7 @@ import (
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/expr"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
@@ -272,6 +273,20 @@ func liveCardMeasure(head string) (func(*Card) (int, bool), bool) {
 		}, true
 	case "CardNumColors":
 		return func(c *Card) (int, bool) { return c.Colors().Count(), true }, true
+	case "ChromaSource":
+		// AbilityUtils.java:2703-2720 with the card itself as the list and no
+		// color named (ManaAtom.ALL_MANA_COLORS): its colored mana symbols.
+		return func(c *Card) (int, bool) {
+			n := 0
+			if c.Def != nil {
+				for _, s := range c.Def.Faces[0].ManaCost.Shards() {
+					if s.Colors().HasAny(mana.AllColors) {
+						n++
+					}
+				}
+			}
+			return n, true
+		}, true
 	}
 	if m, ok := perCardMeasure(head); ok {
 		return func(c *Card) (int, bool) { return m(c), true }, true
@@ -318,12 +333,14 @@ func optionalBranch(rec castOptional, count expr.Count) (int, bool) {
 }
 
 // castSAValue is an amount under a CastSA> context: the head measured against
-// the host's cast record (Card.getCastSA) -- the optional-cost branches and the
-// Collected/Revealed paid lists, the heads that record holds. cast is false
+// the host's cast record (Card.getCastSA) -- the optional-cost branches, the
+// Adamant test over the mana the cast spent and the Collected/Revealed paid
+// lists, the heads that record holds. cast is false
 // for a host that was not cast; ok is false for any other head.
 func (g *Game) castSAValue(source CardID, amt expr.Amount) (n int, ok, cast bool) {
 	switch {
 	case amt.Count != nil && (amt.Count.Head == "OptionalGenericCostPaid" || amt.Count.Head == "Teamwork"):
+	case amt.Count != nil && strings.HasPrefix(amt.Count.Head, "Adamant"):
 	case amt.Head == "Collected" || amt.Head == "Revealed":
 	default:
 		return 0, false, false
@@ -331,6 +348,11 @@ func (g *Game) castSAValue(source CardID, amt expr.Amount) (n int, ok, cast bool
 	rec, cast := g.castSARecord(source)
 	if !cast {
 		return 0, true, false
+	}
+	if amt.Count != nil && strings.HasPrefix(amt.Count.Head, "Adamant") {
+		// The cast's own paying mana (castAdamant, amountrecords.go).
+		n, ok = g.castAdamant(source, *amt.Count)
+		return n, ok, true
 	}
 	if amt.Count != nil {
 		n, ok = optionalBranch(rec, *amt.Count)

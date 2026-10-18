@@ -86,6 +86,11 @@ type Card struct {
 	// Count$CastTotalManaSpent Snow; cleared with castManaSpent.
 	castPaid [5]int
 	castSnow int
+	// castColorless is the colorless mana ({C}) that cast spent, castPaid's
+	// sixth bucket kept apart so Count$Converge, which counts castPaid's
+	// colors, never counts it: Count$Adamant.Colorless and
+	// Count$EachSpentToCast.C read it.
+	castColorless int
 	// castPaidSources is the source of each unit of mana that cast spent from
 	// the caster's pool (xAnnounced.sources, ADR-0042), read by
 	// Count$CastTotalManaSpent <valid>; cleared with castManaSpent. Replaced,

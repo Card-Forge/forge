@@ -22,10 +22,13 @@ package engine
 
 import (
 	"fmt"
+	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/expr"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
 // subAbilityUnresolvedParams names SpellAbilityCondition's own remaining
@@ -33,31 +36,19 @@ import (
 // ConditionCheckSVar$/ConditionSVarCompare$: Condition$ itself (Threshold,
 // Metalcraft, ... -- its own separate flag switch, distinct from
 // CardTraitBase's identically-named but differently-evaluated Condition$
-// gate a trigger checks), ConditionPresent2$/ConditionCompare2$ (a second,
-// independent zone-presence check no real corpus line combines with the
-// shapes built here), ConditionZone$ (present on 0 real DB$ Tap/DealDamage
-// lines carrying a resolved shape, so the isPresentMatches default,
-// Battlefield alone, is never actually overridden -- naming it anyway means
-// a shape this function was not built to check), ConditionPlayerTurn$/
-// ConditionPhases$/ConditionActivationLimit$/ConditionGameTypes$/
-// ConditionSorcerySpeed$/ConditionChosenColor$/ConditionSorcerySpeed$/
-// ConditionSpeed$/ConditionSpeed$/ConditionLifeTotal$/ConditionLifeAmount$/
-// ConditionManaSpent$/ConditionManaNotSpent$/ConditionPlayerDefined$/
-// ConditionPlayerContains$/ConditionNoDifferentColors$/
-// ConditionTargetValidTargeting$/ConditionTargetsSingleTarget$/
-// OrOtherConditionSVarCompare$/OrConditionCheckSVar$ (each its own further
-// mechanic this port tracks nothing for). A line naming any of these skips
-// entirely rather than resolving the params it does recognize and guessing
-// wrong about the rest (PORT-8/GO-7).
+// gate a trigger checks), ConditionActivationLimit$/ConditionGameTypes$/
+// ConditionSorcerySpeed$/ConditionTargetValidTargeting$/ConditionTargetsSingleTarget$
+// (each its own further mechanic this port tracks nothing for). A line naming any of these -- a
+// Condition$ value conditionValueRead does not name -- records a pending
+// error and reads false, so the game that reached it fails instead of
+// silently skipping the ability (GO-7). ConditionZone$ is not among them:
+// isPresentMatches reads it as ConditionPresent$'s zone list
+// (SpellAbilityCondition.java:184-185, :354).
 var subAbilityUnresolvedParams = [...]string{
-	"Condition", "ConditionPresent2", "ConditionCompare2", "ConditionZone",
+	"Condition",
 	"ConditionActivationLimit",
-	"ConditionGameTypes", "ConditionSorcerySpeed", "ConditionChosenColor",
-	"ConditionLifeTotal", "ConditionLifeAmount", "ConditionManaSpent",
-	"ConditionManaNotSpent", "ConditionPlayerDefined", "ConditionPlayerContains",
-	"ConditionNoDifferentColors", "ConditionTargetValidTargeting",
-	"ConditionTargetsSingleTarget", "OrOtherConditionSVarCompare",
-	"OrConditionCheckSVar",
+	"ConditionGameTypes", "ConditionSorcerySpeed", "ConditionTargetValidTargeting",
+	"ConditionTargetsSingleTarget",
 }
 
 // subAbilityConditionMet reports whether a's own SpellAbilityCondition gate
@@ -68,8 +59,12 @@ var subAbilityUnresolvedParams = [...]string{
 // ConditionFirstCombat$ (Game.isFirstCombat), ConditionPresent$/ConditionCompare$ (a zone-scan
 // count against Battlefield, isPresentMatches' own default when
 // ConditionZone$ is absent, which it always is for every real line this
-// resolves) and ConditionCheckSVar$/ConditionSVarCompare$ (a named-SVar
-// comparison), both absent meaning met -- SpellAbilityCondition.areMet's own
+// resolves), ConditionPresent2$/ConditionCompare2$/ConditionDefined2$ beside
+// a first one, ConditionPlayerContains$ (playerContainsMet),
+// ConditionLifeTotal$ (conditionLifeTotalMet), ConditionManaSpent$/
+// ConditionManaNotSpent$ (conditionManaSpentMet) and
+// ConditionCheckSVar$/ConditionSVarCompare$ (a named-SVar
+// comparison), each absent meaning met -- SpellAbilityCondition.areMet's own
 // "every unset condition passes" contract. Neither host nor amounts is a's
 // own: both belong to the ability's HOST card (the land carrying a checkland
 // SVar, the permanent resolving DealDamage), matching every other
@@ -78,12 +73,20 @@ var subAbilityUnresolvedParams = [...]string{
 // sub-ability's.
 func subAbilityConditionMet(g *Game, host *Card, amounts map[string]expr.Amount, a *compile.Ability) bool {
 	for _, key := range subAbilityUnresolvedParams {
-		if v, ok := a.Param(key); ok {
-			if key == "Condition" && conditionValueMet(g, host, a, v) {
+		v, ok := a.Param(key)
+		if !ok {
+			continue
+		}
+		if key == "Condition" && conditionValueRead(v) {
+			if conditionValueMet(g, host, a, v) {
 				continue
 			}
 			return false
 		}
+		// A condition this port cannot evaluate is not an unmet one: the
+		// ability fails instead of silently skipping (GO-7).
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q not resolvable yet", key, v))
+		return false
 	}
 	if turn, ok := a.Param("ConditionPlayerTurn"); ok {
 		mine := g.ActivePlayer() == host.Controller()
@@ -103,7 +106,203 @@ func subAbilityConditionMet(g *Game, host *Card, amounts map[string]expr.Amount,
 	if !isPresentMatches(g, host, amounts, a, "ConditionPresent", "ConditionCompare", "ConditionDefined", "ConditionZone", "ConditionPlayer") {
 		return false
 	}
-	return checkSVarMatches(g, host, amounts, a, "ConditionCheckSVar", "ConditionSVarCompare", "OrOtherConditionSVarCompare")
+	// SpellAbilityCondition.java:169-174, :376-402: the second presence check,
+	// read only beside a first one, over the same ConditionZone$.
+	if _, ok := a.Param("ConditionPresent"); ok &&
+		!isPresentMatches(g, host, amounts, a, "ConditionPresent2", "ConditionCompare2", "ConditionDefined2", "ConditionZone", "ConditionPlayer") {
+		return false
+	}
+	if !playerContainsMet(g, host, a) || !conditionLifeTotalMet(g, host, amounts, a) || !conditionManaSpentMet(g, host, a) ||
+		!conditionColorsMet(g, host, a) {
+		return false
+	}
+	return conditionSVarMet(g, host, amounts, a)
+}
+
+// conditionSVarMet is SpellAbilityCondition's ConditionCheckSVar$ block
+// (SpellAbilityCondition.java:221-237, :492-507): the SVar against
+// ConditionSVarCompare$, or -- OrOtherConditionSVarCompare$ -- a second
+// comparison of OrConditionCheckSVar$ (the same SVar when absent) that also
+// lets it pass. Variable Solutions' "If X is 1 ... If X is 4 or more, ... do
+// all of the above".
+func conditionSVarMet(g *Game, host *Card, amounts map[string]expr.Amount, a *compile.Ability) bool {
+	if _, ok := a.Param("ConditionCheckSVar"); !ok {
+		return true
+	}
+	first := checkSVarMatches(g, host, amounts, a, "ConditionCheckSVar", "ConditionSVarCompare", "")
+	compare2, ok := a.Param("OrOtherConditionSVarCompare")
+	if !ok || first {
+		return first
+	}
+	check2, ok := a.Param("OrConditionCheckSVar")
+	if !ok {
+		check2, _ = a.Param("ConditionCheckSVar")
+	}
+	left, ok := resolveNamedAmount(g, amounts, host, check2)
+	if !ok {
+		g.recordPendingError(fmt.Errorf("engine: OrConditionCheckSVar$ %q is not resolvable", check2))
+		return false
+	}
+	if len(compare2) < 3 {
+		g.recordPendingError(fmt.Errorf("engine: OrOtherConditionSVarCompare$ %q is not a comparison", compare2))
+		return false
+	}
+	right, ok := resolveNamedAmount(g, amounts, host, compare2[2:])
+	if !ok {
+		g.recordPendingError(fmt.Errorf("engine: OrOtherConditionSVarCompare$ %q is not resolvable", compare2))
+		return false
+	}
+	return compareOp(left, compare2[:2], right)
+}
+
+// conditionRefs is the refs of host's ability in context, the sa Java hands
+// AbilityUtils.getDefinedPlayers for a condition; none outside it.
+func conditionRefs(g *Game, host *Card) abilityRefs {
+	if r := g.resolving; r != nil && r.Source == host.ID {
+		return r.refs()
+	}
+	return abilityRefs{}
+}
+
+// playerContainsMet is ConditionPlayerContains$ over ConditionPlayerDefined$
+// (SpellAbilityCondition.java:404-413): every player Contains names is among
+// those Defined names, and Contains names at least one. ConditionPlayerDefined$
+// alone checks nothing, as in Java. A Defined$ this port cannot read is a
+// pending error (GO-7).
+func playerContainsMet(g *Game, host *Card, a *compile.Ability) bool {
+	contains, ok := a.Param("ConditionPlayerContains")
+	if !ok {
+		return true
+	}
+	refs := conditionRefs(g, host)
+	var list []PlayerID
+	if defined, ok := a.Param("ConditionPlayerDefined"); ok {
+		ps, err := definedPlayers(g, host.Controller(), host.ID, defined, refs)
+		if err != nil {
+			g.recordPendingError(fmt.Errorf("engine: ConditionPlayerDefined$: %w", err))
+			return false
+		}
+		list = ps
+	}
+	want, err := definedPlayers(g, host.Controller(), host.ID, contains, refs)
+	if err != nil {
+		g.recordPendingError(fmt.Errorf("engine: ConditionPlayerContains$: %w", err))
+		return false
+	}
+	if len(want) == 0 {
+		return false
+	}
+	for _, p := range want {
+		if !slices.Contains(list, p) {
+			return false
+		}
+	}
+	return true
+}
+
+// conditionLifeTotalMet is ConditionLifeTotal$/ConditionLifeAmount$
+// (SpellAbilityCondition.java:415-429): the life of the first player the
+// Defined$ names against the amount (GE1 by default), whose right side is a
+// number or "X", the host's SVar X -- Java parses anything else as an
+// integer. No player, an unreadable Defined$ or right side is a pending error
+// (GO-7): Java throws on the first two.
+func conditionLifeTotalMet(g *Game, host *Card, amounts map[string]expr.Amount, a *compile.Ability) bool {
+	defined, ok := a.Param("ConditionLifeTotal")
+	if !ok {
+		return true
+	}
+	players, err := definedPlayers(g, host.Controller(), host.ID, defined, conditionRefs(g, host))
+	if err != nil || len(players) == 0 {
+		g.recordPendingError(fmt.Errorf("engine: ConditionLifeTotal$ %q names no player", defined))
+		return false
+	}
+	compare, ok := a.Param("ConditionLifeAmount")
+	if !ok {
+		compare = "GE1"
+	}
+	if len(compare) < 3 {
+		g.recordPendingError(fmt.Errorf("engine: ConditionLifeAmount$ %q is not a comparison", compare))
+		return false
+	}
+	rhs := compare[2:]
+	right, err := strconv.Atoi(rhs)
+	if rhs == "X" {
+		var ok bool
+		right, ok = resolveNamedAmount(g, amounts, host, "X")
+		if !ok {
+			err = fmt.Errorf("X")
+		} else {
+			err = nil
+		}
+	}
+	if err != nil {
+		g.recordPendingError(fmt.Errorf("engine: ConditionLifeAmount$ %q is not resolvable", compare))
+		return false
+	}
+	return javaCompare(g.Player(players[0]).Life, compare, right)
+}
+
+// conditionColorsMet is ConditionNoDifferentColors$ (SpellAbilityCondition.
+// java:286-298: the cards the Defined$ names all have the first one's colors,
+// and there is a first one -- Dead Ringers' "unless either one is a color the
+// other isn't") and ConditionChosenColor$ (:342-346, Card.hasChosenColor: the
+// host chose that color). An unreadable Defined$ or a value that is no color
+// is a pending error (GO-7).
+func conditionColorsMet(g *Game, host *Card, a *compile.Ability) bool {
+	if defined, ok := a.Param("ConditionNoDifferentColors"); ok {
+		cards, err := definedCards(host, defined, conditionRefs(g, host))
+		if err != nil {
+			g.recordPendingError(fmt.Errorf("engine: ConditionNoDifferentColors$: %w", err))
+			return false
+		}
+		if len(cards) == 0 {
+			return false
+		}
+		first := g.Card(cards[0]).Colors()
+		for _, id := range cards[1:] {
+			if g.Card(id).Colors() != first {
+				return false
+			}
+		}
+	}
+	if v, ok := a.Param("ConditionChosenColor"); ok {
+		color, ok := manaAtomColor(v)
+		if !ok || color.Count() != 1 {
+			g.recordPendingError(fmt.Errorf("engine: ConditionChosenColor$ %q not resolvable", v))
+			return false
+		}
+		if !host.Memory.ChosenColors().HasAny(color) {
+			return false
+		}
+	}
+	return true
+}
+
+// conditionManaSpentMet is ConditionManaSpent$/ConditionManaNotSpent$
+// (SpellAbilityCondition.java:476-490): the host's cast spent every color the
+// space-separated names give (ColorSet.fromNames), or not every one. Spent
+// fails for a host that was not cast, NotSpent passes. A name that is no
+// color is a pending error (GO-7).
+func conditionManaSpentMet(g *Game, host *Card, a *compile.Ability) bool {
+	for _, key := range [...]string{"ConditionManaSpent", "ConditionManaNotSpent"} {
+		v, ok := a.Param(key)
+		if !ok || v == "" {
+			continue
+		}
+		var colors mana.Colors
+		for _, name := range strings.Fields(v) {
+			c, ok := manaAtomColor(name)
+			if !ok {
+				g.recordPendingError(fmt.Errorf("engine: %s$ %q not resolvable", key, v))
+				return false
+			}
+			colors |= c
+		}
+		if (key == "ConditionManaSpent") != castSpentAllColors(host, colors) {
+			return false
+		}
+	}
+	return true
 }
 
 // conditionValueMet is SpellAbilityCondition's Condition$ for the values this

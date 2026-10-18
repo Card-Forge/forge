@@ -98,6 +98,8 @@ func (scryEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 			g.Move(id, Library, pid)
 		}
 		g.checkScryTriggers(controller, pid, len(toTop)+len(toBottom), len(toBottom))
+		// GameAction.java:2684: p.incScryThisTurn(), after the trigger.
+		g.Player(pid).scryThisTurn++
 	}
 	return nil
 }

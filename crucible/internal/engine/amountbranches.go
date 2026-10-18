@@ -15,7 +15,6 @@ import (
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/expr"
-	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
 // branchCountValue is xCount for the branch heads. handled is false for every
@@ -28,10 +27,11 @@ import (
 // reads state the engine already keeps for the same flag's Condition$ use
 // (continuousConditionMet, continuous.go) or the turn's history
 // (castrecord.go: Void, Revolt; Player.committedCrimes); Adamant reads the
-// spell's own paid mana (adamantValue). Not resolved:
-// Freerunning, PromisedGift (the card's own keyword or
+// spell's own paid mana (adamantValue), StartingPlayer the game's first-turn
+// player (Game.startingPlayer) and IsPrime a primality test (isPrimeValue).
+// Not resolved: Freerunning and PromisedGift (the card's own keyword or
 // static is a cast this port does not make, so the branch would only hide
-// that) and StartingPlayer. Random is randomCountValue's, a draw per read.
+// that). Random is randomCountValue's, a draw per read.
 func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController PlayerID, source CardID, count expr.Count, depth int) (n int, ok, handled bool) {
 	branch := func(yes bool) (int, bool, bool) {
 		if len(count.Parameters) < 2 {
@@ -57,6 +57,28 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		pick := c.Else
 		if javaCompare(lhs, c.Comparator, rhs) {
 			pick = c.Then
+		}
+		n, ok := branchAmount(g, amounts, sourceController, source, pick, depth)
+		return n, ok, true
+	}
+	if count.Head == "IsPrime" {
+		// Count$IsPrime <amount>.<then>.<else>: ParseCount keeps "<amount>.<then>.
+		// <else>" as the argument, which Java splits on "." (sq[1], sq[2]).
+		parts := strings.Split(count.Argument, ".")
+		if len(parts) != 3 {
+			return 0, false, true
+		}
+		lhs, ok := branchAmount(g, amounts, sourceController, source, parts[0], depth)
+		if !ok {
+			return 0, false, true
+		}
+		prime, ok := isPrimeValue(lhs)
+		if !ok {
+			return 0, false, true
+		}
+		pick := parts[2]
+		if prime {
+			pick = parts[1]
 		}
 		n, ok := branchAmount(g, amounts, sourceController, source, pick, depth)
 		return n, ok, true
@@ -155,6 +177,13 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		flag = func(p PlayerID) bool { return g.Monarch() == p }
 	case "Initiative":
 		flag = func(p PlayerID) bool { return g.Initiative() == p }
+	case "StartingPlayer":
+		// AbilityUtils.java:2280-2282: Player.isStartingPlayer, the game's
+		// first-turn player (Game.startingPlayer). Unset is unresolved.
+		if g.startingPlayer == NoPlayer {
+			return 0, false, true
+		}
+		flag = func(p PlayerID) bool { return p == g.startingPlayer }
 	case "Blessing":
 		flag = func(p PlayerID) bool { return g.Player(p).Blessing }
 	case "MaxSpeed":
@@ -199,32 +228,16 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 // spell resolving off the stack, whose paid mana is its cast's (castPaid); a
 // triggered or activated root's own payment is not recorded, unresolved.
 func (g *Game) adamantValue(amounts map[string]expr.Amount, sourceController PlayerID, source CardID, count expr.Count, depth int) (int, bool) {
-	num := 3
-	if rest, ok := strings.CutPrefix(count.Head, "Adamant_"); ok {
-		n, err := strconv.Atoi(rest)
-		if err != nil {
-			return 0, false
-		}
-		num = n
-	} else if count.Head != "Adamant" {
-		return 0, false
-	}
 	a := g.resolving
-	if len(count.Parameters) < 3 || a == nil || source == NoCard || a.Source != source || g.Card(source).Zone != Stack {
+	if a == nil || source == NoCard || a.Source != source || g.Card(source).Zone != Stack {
 		return 0, false
 	}
-	color, ok := manaAtomColor(count.Parameters[0])
-	if !ok || color.Count() != 1 {
+	met, ok := adamantMet(g.Card(source), count)
+	if !ok {
 		return 0, false
-	}
-	paid := 0
-	for i, col := range [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green} {
-		if col == color {
-			paid = g.Card(source).castPaid[i]
-		}
 	}
 	pick := count.Parameters[2]
-	if paid >= num {
+	if met {
 		pick = count.Parameters[1]
 	}
 	return branchAmount(g, amounts, sourceController, source, pick, depth)

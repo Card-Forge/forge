@@ -15,6 +15,8 @@
 package engine
 
 import (
+	"fmt"
+	"math"
 	"slices"
 	"strconv"
 	"strings"
@@ -2032,15 +2034,14 @@ func isTapsForManaTrigger(t *compile.Ability) bool {
 // own separate switch, not CardTraitBase's -- an arbitrary SVar-shaped
 // boolean condition distinct from CheckSVar$/SVarCompare$'s own resolved
 // shape; 0 real Mode$ Phase lines carry the bare key today -- this pre-filter
-// never matches WerewolfTransformCondition$/WerewolfUntransformCondition$'s
-// own 65 real lines, an unrelated key it was never meant to catch, day/night
-// staying unresolved for CardTraitBase.meetsCommonRequirements' own reason
-// above), and APlayerHasMoreLifeThanEachOther$/APlayerHasMostCardsInHand$ (a
+// never matches WerewolfTransformCondition$/WerewolfUntransformCondition$,
+// which triggerCommonRequirementsMet reads over the spells cast last turn),
+// and APlayerHasMoreLifeThanEachOther$/APlayerHasMostCardsInHand$ (a
 // whole-table comparison no other trigger mode needs) -- 2 and 1 real lines.
 // A trigger carrying either of these is skipped entirely, not fired
 // unconditionally (GO-7). The qualified ValidPlayer$ forms matchesPlayerSpec
-// cannot resolve (Player.Chosen, 3; Player.isMonarch, 1) stay unresolved
-// (matchesPlayerSpec's own doc comment); Player.EnchantedBy (14) and
+// cannot resolve (Player.Chosen, 3) stay unresolved (matchesPlayerSpec's own
+// doc comment); Player.isMonarch (1) reads Game.monarch; Player.EnchantedBy (14) and
 // Opponent.EnchantedBy (2) resolve from Player.Attachments; Player.EnchantedController (34) and
 // You.descended (10) resolve now too, matchesPlayerProperty's own new cases
 // (valid.go).
@@ -2480,32 +2481,47 @@ func changesZoneResolvable(t *compile.Ability) bool {
 //   - Revolt$ True/False/None (25) -- revoltMatches, below, over the turn's
 //     left-the-battlefield record (castrecord.go's hasRevolt).
 //
-// Not resolved, each skipped whole rather than treated as met (GO-7):
-// WerewolfTransformCondition$/WerewolfUntransformCondition$ (65,
-// Innistrad's own day/night mechanic, a "spells cast last turn" list this
-// port tracks nowhere); CheckDefinedPlayer$ (20, every real line qualifies
-// it with isMonarch/hasInitiative/withMostLife/withMostType -- a mechanic
-// this port has no state for, not a shape a general Defined$-to-players
-// resolver could close on its own); ManaSpent$/ManaNotSpent$ (8, no
-// paying-colors-by-cast tracked); Adamant$ (1); EnduringStory$/DayTime$/
-// ClassLevel$ (0 real T: lines each, dormant). Monarch$ is host's
-// controller being the monarch (Game.monarch), the one R: line naming it
-// Archon of Coronation's.
+//   - WerewolfTransformCondition$/WerewolfUntransformCondition$ over the
+//     spells cast last turn (Game.castLastTurn, werewolfConditionsMet);
+//     ManaSpent$/ManaNotSpent$/Adamant$ over the host's cast record
+//     (castManaConditionsMet); CheckDefinedPlayer$/DefinedPlayerCompare$
+//     through definedPlayers (checkDefinedPlayerMatches); EnduringStory$
+//     (Player.EnduringStory) and DayTime$, all in amountrecords.go or below.
+//
+// A condition this port cannot read records a pending error and reads false,
+// so the game fails instead of silently skipping the trigger (GO-7):
+// ClassLevel$ (no Class level is tracked; every real line is on Mode$
+// ClassLevelGained), a CheckDefinedPlayer$ definedPlayers cannot read, a
+// LifeTotal$ other than You/ActivePlayer/OpponentSmallest/OpponentGreatest,
+// a compare that is not one. Monarch$ is host's controller being the monarch
+// (Game.monarch), the one R: line naming it Archon of Coronation's.
 func triggerCommonRequirementsMet(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability) bool {
-	for _, key := range [...]string{
-		"WerewolfTransformCondition", "WerewolfUntransformCondition",
-		"CheckDefinedPlayer", "ManaSpent", "ManaNotSpent", "Adamant",
-		"EnduringStory", "ClassLevel",
-	} {
-		if _, ok := t.Param(key); ok {
-			return false
-		}
+	if v, ok := t.Param("ClassLevel"); ok {
+		// No Class level is tracked (ClassLevelUp is not ported): a condition
+		// on it cannot be read, so the game fails rather than skip (GO-7).
+		g.recordPendingError(fmt.Errorf("engine: %q: ClassLevel$ %q not resolvable yet", host.Def.Name, v))
+		return false
+	}
+	_, transform := t.Param("WerewolfTransformCondition")
+	_, untransform := t.Param("WerewolfUntransformCondition")
+	if (transform || untransform) && !g.werewolfConditionsMet(transform, untransform) {
+		return false
+	}
+	if !castManaConditionsMet(g, host, t) {
+		return false
+	}
+	if !checkDefinedPlayerMatches(g, host, amounts, t) {
+		return false
+	}
+	if !boolFlagMatches(t, "EnduringStory", func() bool { return g.Player(host.Controller()).EnduringStory }) {
+		return false
 	}
 	// CardTraitBase.requirementsCheck's DayTime$: the game is Day, Night or
-	// Neither (Gavony Dawnguard's "if it's neither day nor night").
+	// Neither (Gavony Dawnguard's "if it's neither day nor night"); Java
+	// matches the value case-insensitively and lets any other value pass.
 	if v, ok := t.Param("DayTime"); ok {
-		want, known := map[string]DayTime{"Neither": DayNeither, "Day": Day, "Night": Night}[v]
-		if !known || g.dayTime != want {
+		want, known := map[string]DayTime{"neither": DayNeither, "day": Day, "night": Night}[strings.ToLower(v)]
+		if known && g.dayTime != want {
 			return false
 		}
 	}
@@ -2582,10 +2598,10 @@ func boolFlagMatches(t *compile.Ability, key string, has func() bool) bool {
 	return strings.EqualFold(v, "True") == has()
 }
 
-// lifeTotalMatches is CardTraitBase's own LifeTotal$/LifeAmount$ block, the
-// two real corpus values on a T: line: "You" (host's own controller) and
-// "ActivePlayer" (Game.ActivePlayer()) -- OpponentSmallest/OpponentGreatest
-// carry no real T: line and are not resolved.
+// lifeTotalMatches is CardTraitBase's own LifeTotal$/LifeAmount$ block
+// (CardTraitBase.java:377-401): "You" (host's own controller), "ActivePlayer"
+// (Game.ActivePlayer()) and OpponentSmallest/OpponentGreatest. Any other
+// value, or a compare it cannot read, is a pending error (GO-7).
 func lifeTotalMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability) bool {
 	player, ok := t.Param("LifeTotal")
 	if !ok {
@@ -2597,7 +2613,25 @@ func lifeTotalMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *co
 		life = g.Player(host.Controller()).Life
 	case "ActivePlayer":
 		life = g.Player(g.ActivePlayer()).Life
+	case "OpponentSmallest", "OpponentGreatest":
+		// Player.getOpponentsSmallestLifeTotal/GreatestLifeTotal: Aggregates
+		// min/max over the opponents still in the game, seeded with
+		// Integer.MAX_VALUE/MIN_VALUE for none.
+		smallest := player == "OpponentSmallest"
+		life = math.MinInt32
+		if smallest {
+			life = math.MaxInt32
+		}
+		for _, pid := range g.Players() {
+			if pid == host.Controller() || g.Player(pid).Lost {
+				continue
+			}
+			if l := g.Player(pid).Life; smallest && l < life || !smallest && l > life {
+				life = l
+			}
+		}
 	default:
+		g.recordPendingError(fmt.Errorf("engine: LifeTotal$ %q not resolvable", player))
 		return false
 	}
 	compare, ok := t.Param("LifeAmount")
@@ -2605,10 +2639,12 @@ func lifeTotalMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *co
 		compare = "GE1"
 	}
 	if len(compare) < 3 {
+		g.recordPendingError(fmt.Errorf("engine: LifeAmount$ %q is not a comparison", compare))
 		return false
 	}
 	right, ok := resolveNamedAmount(g, amounts, host, compare[2:])
 	if !ok {
+		g.recordPendingError(fmt.Errorf("engine: LifeAmount$ %q is not resolvable", compare))
 		return false
 	}
 	return compareOp(life, compare[:2], right)

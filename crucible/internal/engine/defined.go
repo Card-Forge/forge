@@ -88,6 +88,28 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 	}
 	var candidates []PlayerID
 	switch defined {
+	case "Registered":
+		// AbilityUtils.java:1110-1111: game.getRegisteredPlayers, those who
+		// have left the game included -- not filtered below.
+		return append([]PlayerID(nil), g.Players()...), nil
+	case "ActivePlayer":
+		// AbilityUtils.java:1171-1172: the turn's player.
+		candidates = []PlayerID{g.activePlayer}
+	case "DefendingPlayer":
+		// AbilityUtils.java:1129-1130: Combat.getDefendingPlayerRelatedTo
+		// (Combat.java:452-463), the player defending against the host -- or
+		// against what the host enchants, fortifies or equips. Java reads
+		// game.getCombat() unguarded, so outside combat it has no answer.
+		if !g.activePhase.IsCombat() {
+			return nil, fmt.Errorf("engine: Defined$ %q outside combat", defined)
+		}
+		attacker := host
+		if to, ok := g.Card(host).AttachedTo(); ok {
+			attacker = to
+		}
+		if d := g.defenderOf(attacker); d != NoPlayer {
+			candidates = []PlayerID{d}
+		}
 	case "You":
 		candidates = []PlayerID{controller}
 	case "Player":
@@ -389,6 +411,25 @@ func triggeredPlayersFiltered(g *Game, controller PlayerID, host CardID, base, f
 		}
 	}
 	return out, nil
+}
+
+// triggeredDefender is Defined$ TriggeredDefender: AbilityKey.Defender of
+// Mode$ Attacks (TriggerAttacks.setTriggeringObjects,
+// combat.getDefenderByAttacker), the player, planeswalker or battle the
+// recorded attacker attacks -- Kaalia of the Vast's "put it onto the
+// battlefield tapped and attacking that player or planeswalker". Read off the
+// combat as TriggeredDefendingPlayer is (defenderOf): an attacker since
+// removed from combat defends against nothing, an empty answer. A trigger
+// that recorded no attacker is an error (GO-7).
+func triggeredDefender(g *Game, refs abilityRefs) ([]EntityID, error) {
+	if refs.triggered.attacker == NoCard {
+		return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no attacker", "TriggeredDefender")
+	}
+	target, ok := g.combat.AttackTargets[refs.triggered.attacker]
+	if !ok || target == NoEntity {
+		return nil, nil
+	}
+	return []EntityID{target}, nil
 }
 
 // cardController is Defined$ TriggeredCardController's player: the frozen
@@ -744,12 +785,15 @@ func definedCardsInGame(g *Game, activator PlayerID, host *Card, defined string,
 // then the cards. A spelling only one of the two readers knows yields that
 // side alone; one neither knows is an error.
 func definedEntities(g *Game, controller PlayerID, host *Card, def string, refs abilityRefs) ([]EntityID, error) {
+	if def == "TriggeredDefender" {
+		return triggeredDefender(g, refs)
+	}
 	var out []EntityID
 	players, perr := definedPlayers(g, controller, host.ID, def, refs)
 	for _, p := range players {
 		out = append(out, PlayerEntity(p))
 	}
-	cards, cerr := definedCards(host, def, refs)
+	cards, cerr := definedCardsInGame(g, controller, host, def, refs)
 	for _, c := range cards {
 		out = append(out, CardEntity(c))
 	}

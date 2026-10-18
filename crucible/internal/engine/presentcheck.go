@@ -18,7 +18,7 @@ import (
 // entirely is a pass, the identical "no restriction" contract every other
 // optional gate in this port already has). PresentZone$ defaults to
 // Battlefield, a comma list otherwise (ZoneByName per entry, an
-// unrecognized name skips rather than guesses); PresentPlayer$ is "You"
+// unrecognized name a pending error, GO-7); PresentPlayer$ is "You"
 // (host's own controller only), anything else -- "Any", the corpus's own
 // overwhelming default, or absent -- every player, Java's own three
 // additive You/Opponent/Allies blocks collapsed to the one partition they
@@ -48,6 +48,7 @@ func isPresentMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *co
 		for _, name := range strings.Split(zoneList, ",") {
 			z, ok := ZoneByName(name)
 			if !ok {
+				g.recordPendingError(fmt.Errorf("engine: %s$ %q: zone %q not resolvable", zoneKey, zoneList, name))
 				return false
 			}
 			zones = append(zones, z)
@@ -137,17 +138,22 @@ func definedPresentMatches(g *Game, host *Card, amounts map[string]expr.Amount, 
 }
 
 // presentCountMatches compares n, the count of present objects, against
-// compareKey (GE1 when absent), its right side a literal or a named SVar.
+// compareKey (GE1 when absent), its right side a literal or a named SVar. A
+// compare string too short to hold an operator and an operand, or a right
+// side resolveNamedAmount cannot resolve, records a pending error and reads
+// false (GO-7): Java evaluates both (CardTraitBase.java:425-431).
 func presentCountMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *compile.Ability, compareKey string, n int) bool {
 	compare, ok := t.Param(compareKey)
 	if !ok {
 		compare = "GE1"
 	}
 	if len(compare) < 3 {
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q is not a comparison", compareKey, compare))
 		return false
 	}
 	right, ok := resolveNamedAmount(g, amounts, host, compare[2:])
 	if !ok {
+		g.recordPendingError(fmt.Errorf("engine: %s$ %q is not resolvable", compareKey, compare))
 		return false
 	}
 	return compareOp(n, compare[:2], right)

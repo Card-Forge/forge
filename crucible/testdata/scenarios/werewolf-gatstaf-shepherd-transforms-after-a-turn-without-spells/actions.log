@@ -1,0 +1,19 @@
+# WerewolfTransformCondition$ (CardTraitBase.java:509-513) reads
+# MagicStack.lastTurnCast, the spells of the previous turn rotated at each new
+# turn (MagicStack.java:965-979). Gatstaf Shepherd is cast on turn 1, so at
+# turn 2's upkeep a spell was cast last turn and it stays a Human; nobody casts
+# anything on turn 2, so at turn 3's upkeep it transforms.
+startturn human
+advance 3
+tapformana human 1 G
+tapformana human 2 G
+queue paygeneric G
+castspell human 3
+resolvestack
+# Main1 of turn 1 to the untap step of turn 2, then its upkeep: no trigger.
+advance 10
+advance
+resolvestack
+# Upkeep of turn 2 to the upkeep of turn 3: the transform trigger fires.
+advance 13
+resolvestack

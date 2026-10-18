@@ -76,6 +76,11 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		}
 		return g.thisTurnEnteredCount(sourceController, source, text)
 	}
+	// Before the DamageThisTurn branch: xCount reads MaxOppDamageThisTurn and
+	// MaxCombatDamageThisTurn ahead of it (AbilityUtils.java:2410-2416).
+	if n, ok, handled := g.recordCountValue(sourceController, source, count); handled {
+		return n, ok
+	}
 	if strings.Contains(count.Head, "DamageThisTurn") {
 		return g.damageThisTurnCount(sourceController, source, count)
 	}
@@ -771,7 +776,8 @@ func (g *Game) lastStateCount(sourceController PlayerID, source CardID, count ex
 // copies share; sources are grouped by CardID here, which a zone change does
 // not renew (ADR-0009). The heads Java catches in earlier branches
 // (TotalDamageThisTurn, MaxOppDamageThisTurn, MaxCombatDamageThisTurn,
-// SingleMaxDamageThisTurn) are not this branch and stay unresolved, as is a
+// SingleMaxDamageThisTurn) are not this branch: the two Max...ThisTurn heads
+// are recordCountValue's (amountrecords.go), the other two stay unresolved, as is a
 // player target whose valid string matchesPlayerSpec cannot read.
 func (g *Game) damageThisTurnCount(sourceController PlayerID, source CardID, count expr.Count) (int, bool) {
 	text := count.Head

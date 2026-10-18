@@ -1,0 +1,19 @@
+# Kaalia of the Vast attacks the opponent; its trigger puts Serra Angel from
+# hand onto the battlefield tapped and attacking "that opponent":
+# Attacking$ TriggeredDefender, Mode$ Attacks' AbilityKey.Defender
+# (TriggerAttacks, SpellAbilityEffect.addToCombat's getDefinedEntities). The
+# Angel is unblocked and deals its 4 beside Kaalia's 2.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+queue cardchoice 2
+queue attacktarget ai
+resolvestack
+advance
+queue blocks none
+declareblockers
+advance
+firststrikedamage
+advance
+combatdamage

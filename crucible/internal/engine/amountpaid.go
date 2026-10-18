@@ -20,7 +20,8 @@ import (
 )
 
 // validFamilyValue is xCount's own Valid branch: the cards count.Valid
-// matches in the zones count.Head names (validCountZones, amount.go), or the
+// matches in the zones count.Head names (validCountZones, amount.go), every
+// card in the game for ValidAll (cardsInGame), or the
 // source alone for ValidSelf (`lparts[0].endsWith("Self")`), then either their
 // number or, when count.DistinctProperty is set, handlePaid over them. The
 // zone list is every player's own zone of that type, the identical
@@ -29,12 +30,16 @@ import (
 // applies it once, to handlePaid's result.
 func validFamilyValue(g *Game, sourceController PlayerID, source CardID, count expr.Count) (int, bool) {
 	var pool []CardID
-	if strings.HasSuffix(count.Head, "Self") && !strings.Contains(count.Head, "All") {
+	switch {
+	case strings.Contains(count.Head, "All"):
+		// lparts[0].contains("All"): Game.getCardsInGame (Game.java:761-789).
+		pool = g.cardsInGame()
+	case strings.HasSuffix(count.Head, "Self"):
 		if source == NoCard {
 			return 0, false
 		}
 		pool = []CardID{source}
-	} else {
+	default:
 		zones, ok := validCountZones(count.Head)
 		if !ok {
 			return 0, false

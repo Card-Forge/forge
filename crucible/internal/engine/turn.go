@@ -31,9 +31,22 @@ package engine
 // -- the same relationship Java's devAdvanceToPhase has to
 // advanceToNextPhase: a state injection for tests, not a play action. Real
 // play reaches a turn state through StartTurn and AdvancePhase only.
+//
+// Turn 1 is the starting player's by definition, so a turn-1 state also sets
+// the starting player (Game.startingPlayer); a later turn leaves it as it was,
+// SetStartingPlayer's to inject.
 func (g *Game) SetTurnState(turn int, active PlayerID, phase PhaseType) {
 	g.turn, g.activePlayer, g.activePhase = turn, active, phase
+	if turn == 1 {
+		g.startingPlayer = active
+	}
 }
+
+// SetStartingPlayer names who took the game's first turn (Game.
+// setStartingPlayer), a state injection for a fixture or probe that starts
+// past turn 1 -- SetTurnState's own relationship to StartTurn. Real play sets
+// it through StartTurn only.
+func (g *Game) SetStartingPlayer(pid PlayerID) { g.startingPlayer = pid }
 
 // StartTurn begins the game's first turn -- turn 1, phase Untap, active as
 // given -- and runs the untap step's actions and the state-based-action
@@ -46,6 +59,7 @@ func (g *Game) SetTurnState(turn int, active PlayerID, phase PhaseType) {
 func (g *Game) StartTurn(active PlayerID, controller PlayerController) {
 	g.turn = 1
 	g.activePlayer = active
+	g.startingPlayer = active
 	g.activePhase = Untap
 	g.Player(active).Turn++
 	g.notePowerSurgeLands(active)
@@ -92,9 +106,12 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 			g.turn++
 			g.previousPlayer = g.activePlayer
 			g.previousPlayerSpells = g.Player(g.activePlayer).SpellsCastThisTurn
+			// MagicStack.onNextTurn (MagicStack.java:965-979): this turn's
+			// spells become last turn's, an empty turn leaving none.
+			g.castLastTurn = g.castThisTurn
+			g.castThisTurn = nil
 			for _, pid := range g.Players() {
 				g.Player(pid).SpellsCastThisTurn = 0
-				g.castThisTurn = nil
 				g.Player(pid).DamageReceivedThisTurn = 0
 				g.Player(pid).damageLastTurn = g.Player(pid).damageThisTurn
 				g.Player(pid).damageThisTurn = [2]int{}
@@ -282,6 +299,9 @@ func (g *Game) beginStep(controller PlayerController, driven bool) (bool, error)
 		// PhaseHandler.java:257: nUpkeepsThisTurn++, a begun upkeep only (a
 		// skipped one never reaches beginStep).
 		g.upkeepsThisTurn++
+	case EndOfTurn:
+		// PhaseHandler.java:362: nEndOfTurnsThisTurn++.
+		g.endOfTurnsThisTurn++
 	case Draw:
 		g.drawStep(controller)
 	case Main1:
@@ -628,6 +648,10 @@ func (g *Game) cleanupStep(controller PlayerController) {
 		p := g.Player(pid)
 		p.LandsPlayedLastTurn = p.LandsPlayed
 		p.LandsPlayed = 0
+		// Player.onCleanupPhase (Player.java:2474-2494): the "last turn" counts
+		// take this turn's before they reset.
+		p.drawnLastTurn, p.lifeLostLastTurn = p.CardsDrawnThisTurn, p.LifeLostThisTurn
+		p.scryThisTurn = 0
 		p.CardsDrawnThisTurn = 0
 		p.DescendedThisTurn, p.descended = false, 0
 		p.committedCrimes = 0
@@ -643,7 +667,11 @@ func (g *Game) cleanupStep(controller PlayerController) {
 	// Zone.resetCardsAddedThisTurn (Player.onCleanupPhase),
 	// Game.clearCountersThisTurn and Game.clearGlobalDamageHistory
 	// (Game.onCleanupPhase).
-	g.enteredThisTurn = nil
+	g.enteredLastTurn, g.enteredThisTurn = g.enteredThisTurn, nil
+	g.leftGraveyardThisTurn = nil
+	// PhaseHandler.java:418: the CLEANUP case of onPhaseBegin zeroes the end
+	// steps begun, so cleanup itself reads none finished.
+	g.endOfTurnsThisTurn = 0
 	g.countersAddedThisTurn = nil
 	g.playerDamageThisTurn = nil
 	g.cardDamageThisTurn = nil

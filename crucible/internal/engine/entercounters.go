@@ -86,7 +86,8 @@ func (g *Game) applyEnterCounters(controller PlayerController, moved CardID, ori
 		if !onlyParams(r, "validcard", "destination", "origin", "replacementresult", "layer",
 			// the flags triggerCommonRequirementsMet evaluates
 			"bloodthirst", "metalcraft", "delirium", "threshold", "hellbent", "fatefulhour", "lifetotal", "lifeamount", "revolt",
-			"ispresent2", "presentcompare2", "presentzone2", "presentplayer2", "presentdefined2") {
+			"ispresent2", "presentcompare2", "presentzone2", "presentplayer2", "presentdefined2",
+			"adamant", "manaspent", "mananotspent", "checkdefinedplayer", "definedplayercompare", "enduringstory") {
 			// Optional$ and the like: counters it may decline are not put
 			// unconditionally.
 			g.recordPendingError(fmt.Errorf("engine: %q: ETB$ PutCounter replacement: a param past ValidCard$/Destination$/Origin$ not resolvable yet", h.Def.Name))

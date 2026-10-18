@@ -1,0 +1,9 @@
+turn=2
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humangraveyard=Grizzly Bears
+ailife=20
+aibattlefield=Mountain|Tapped;T:c_a_treasure_sac|SummonSick
+aihand=Mountain
+aigraveyard=Cindercone Smite

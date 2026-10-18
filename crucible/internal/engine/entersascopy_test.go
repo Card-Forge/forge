@@ -260,7 +260,7 @@ func TestEntersAsCopyRejectsWhatItCannotRun(t *testing.T) {
 				return copyTestDef(t, "Test Raider", "Creature Shapeshifter", "2", "2", "Cost:G",
 					"R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Layer$ Copy | ReplacementResult$ Updated | Optional$ True | ReplaceWith$ DBCopy | CheckSVar$ RaidTest | Description$ Raid",
 					"SVar:DBCopy:DB$ Clone | Choices$ Creature.Other",
-					"SVar:RaidTest:Count$YouScryThisTurn")
+					"SVar:RaidTest:Count$YouRollThisTurn")
 			},
 			want: `CheckSVar$ "RaidTest" not resolvable yet`,
 		},

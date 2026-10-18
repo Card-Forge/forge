@@ -56,7 +56,8 @@
       "amountpaid.go",
       "amountcontext.go",
       "amountbranches.go",
-      "amountplayers.go"
+      "amountplayers.go",
+      "amountrecords.go"
     ],
     "replacement": [
       "replacement.go",
@@ -210,7 +211,8 @@
       "effecthelpers",
       "amount",
       "playerproperty",
-      "defined"
+      "defined",
+      "ability"
     ],
     "attack": [
       "id",
@@ -476,7 +478,7 @@
     ],
     "playerstate": ["id", "zone", "card", "game"],
     "defined": ["id", "game", "player", "card", "ability", "parts", "valid", "zone"],
-    "condition": ["presentcheck", "id", "card", "game", "ability", "trigger", "phase"],
+    "condition": ["presentcheck", "id", "card", "game", "ability", "trigger", "phase", "amount", "valid", "defined"],
     "pumpeffect": [
       "id",
       "player",

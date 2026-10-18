@@ -39,6 +39,7 @@ package engine
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -631,7 +632,20 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 	// ControlledBy <player spec>: c's controller matches the spec from the
 	// source's point of view (CardProperty.java's ControlledBy branch).
 	case strings.HasPrefix(name, "ControlledBy "):
-		matched, ok := matchesPlayerSpec(g, c.Controller(), sourceController, source, strings.TrimPrefix(name, "ControlledBy "))
+		spec := strings.TrimPrefix(name, "ControlledBy ")
+		matched, ok := matchesPlayerSpec(g, c.Controller(), sourceController, source, spec)
+		if !ok && source != NoCard {
+			// CardProperty.java:310-317: a spec Player.isValid cannot read is a
+			// Defined$ list (getDefinedPlayers) -- Zara, Renegade Recruiter's
+			// "ControlledBy DefendingPlayer" -- read with the refs of source's
+			// ability in context, when there is one.
+			var refs abilityRefs
+			if a := g.resolving; a != nil && a.Source == source {
+				refs = a.refs()
+			}
+			players, err := definedPlayers(g, sourceController, source, spec, refs)
+			return err == nil && slices.Contains(players, c.Controller())
+		}
 		return ok && matched
 	// canBeBeamedUp: no CantBeBeamedUp static covers c (Marooned).
 	case name == "canBeBeamedUp":
@@ -1237,6 +1251,12 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 		return true, true
 	case "descended":
 		return g.Player(candidate).DescendedThisTurn, true
+	case "isMonarch":
+		// PlayerProperty.java:85-88: Player.isMonarch (Game.monarch).
+		return g.monarch == candidate, true
+	case "hasInitiative":
+		// PlayerProperty.java:89-92: Player.hasInitiative.
+		return g.initiative == candidate, true
 	case "committedCrimeThisTurn":
 		// PlayerProperty.java:83-84: at least one crime this turn.
 		return g.Player(candidate).committedCrimes > 0, true

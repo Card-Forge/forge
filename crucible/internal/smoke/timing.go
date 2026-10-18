@@ -102,6 +102,7 @@ func (p *Prober) walk(g *engine.Game, ctl *Controller, pid, opp engine.PlayerID,
 		active, turn = opp, 2
 	}
 	g.SetTurnState(turn, active, engine.Untap)
+	g.SetStartingPlayer(pid)
 	for g.ActivePhase() != m.step {
 		if g.Over() || g.Turn() != turn || g.ActivePhase() > m.step {
 			return fmt.Errorf("%v could not be reached", m)

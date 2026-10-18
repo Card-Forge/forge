@@ -174,12 +174,35 @@ type Game struct {
 	// and from where (Count$ThisTurnCast_<valid>, castrecord.go); cleared when
 	// a new turn starts.
 	castThisTurn []castRecord
+	// castLastTurn is MagicStack.lastTurnCast (MagicStack.java:961-979): the
+	// previous turn's castThisTurn, rotated as a new turn starts. The
+	// Werewolf trigger conditions read it (amountrecords.go).
+	castLastTurn []castRecord
+	// startingPlayer is Game.startingPlayer (Game.java:128): who took the
+	// game's first turn, set by StartTurn (GameAction.java:2395 sets it just
+	// before startFirstTurn) or by a turn-1 SetTurnState. NoPlayer when
+	// neither ran (a fixture dropped into a later turn), which
+	// Count$StartingPlayer reports unresolved (GO-7).
+	startingPlayer PlayerID
+	// leftGraveyardThisTurn is Game.leftGraveyardThisTurn (Game.java:298-
+	// 313): each card that left a graveyard this turn, as last known there
+	// (GameAction.java:550-552's lastKnownInfo, the pre-move copy). Read by
+	// Count$LeftGraveyardThisTurn; cleared at cleanup (Game.java:1229).
+	leftGraveyardThisTurn []Card
+	// endOfTurnsThisTurn is PhaseHandler.nEndOfTurnsThisTurn: end steps
+	// begun this turn (PhaseHandler.java:362), read by
+	// Count$FinishedEndOfTurnsThisTurn and zeroed as cleanup begins (:418).
+	endOfTurnsThisTurn int
 	// enteredThisTurn is every zone change this turn, as the card stood in
 	// the zone it entered (a battlefield entry) or left (any other), and
 	// countersAddedThisTurn every counter placement (castrecord.go); both
 	// cleared at cleanup.
 	enteredThisTurn       []zoneEntry
 	countersAddedThisTurn []counterAddition
+	// enteredLastTurn is enteredThisTurn as the last cleanup rolled it over
+	// (Zone.resetCardsAddedThisTurn's cardsAddedLastTurn, Zone.java:120-127),
+	// read by Count$LastTurnEntered_.
+	enteredLastTurn []zoneEntry
 	// playerDamageThisTurn is every instance of damage dealt to a player this
 	// turn, in order, with a last-known copy of its source (the player-target
 	// half of Game.globalDamageHistory/damageThisTurnLKI, Game.java:1357-1360);
@@ -1457,7 +1480,12 @@ func (g *Game) Clone() *Game {
 		mayPlay:               append([]mayPlayGrant(nil), g.mayPlay...),
 		mayPlayUses:           cloneMayPlayUses(g.mayPlayUses),
 		castThisTurn:          append([]castRecord(nil), g.castThisTurn...),
+		castLastTurn:          append([]castRecord(nil), g.castLastTurn...),
+		startingPlayer:        g.startingPlayer,
+		leftGraveyardThisTurn: append([]Card(nil), g.leftGraveyardThisTurn...),
+		endOfTurnsThisTurn:    g.endOfTurnsThisTurn,
 		enteredThisTurn:       append([]zoneEntry(nil), g.enteredThisTurn...),
+		enteredLastTurn:       append([]zoneEntry(nil), g.enteredLastTurn...),
 		countersAddedThisTurn: append([]counterAddition(nil), g.countersAddedThisTurn...),
 		playerDamageThisTurn:  append([]playerDamage(nil), g.playerDamageThisTurn...),
 		cardDamageThisTurn:    append([]cardDamage(nil), g.cardDamageThisTurn...),

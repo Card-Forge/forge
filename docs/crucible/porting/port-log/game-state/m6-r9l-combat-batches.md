@@ -53,7 +53,7 @@ both paths: Java's search does so (`:1391` vs `:1400`); its known-origin move jo
 zone-change triggers wait until the effect ends, so "enters attacking" watchers (Arni Metalbrow) see it attacking either
 way. This port tests them as the card moves, so joining first gives the same answer; the defender is asked before the
 move instead of after. A move that leaves the card off the battlefield takes it out of combat again. `TriggeredDefender`
-(Kaalia) and `DefendingPlayer` (Zara) are not `Defined$` spellings yet: error when reached.
+(Kaalia) and `DefendingPlayer` (Zara) resolve since R9n ([`m6-r9n-checksvar-heads.md`](m6-r9n-checksvar-heads.md)).
 
 ## Smaller pieces
 
@@ -76,12 +76,10 @@ move instead of after. A move that leaves the card off the battlefield takes it 
 
 ## Engine findings left open
 
-| Where                                                                                    | Finding                                                                                 |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `card.go` `traitFaces` (≈55 static/replacement scans)                                    | Still reads a DFC's back face; only continuous statics and triggers use `liveFaces`     |
-| `condition.go` `subAbilityUnresolvedParams`, `trigger.go` `triggerCommonRequirementsMet` | Unported params skip the line silently (GO-7), the shape this batch fixed for CheckSVar |
-| `presentcheck.go` `presentCountMatches`                                                  | Unresolvable `PresentCompare$` operand still reads false silently                       |
-| `defined.go` `TriggeredDefendingPlayer`                                                  | Reads the current combat, not the trigger-time value Java stores                        |
+| Where                                                 | Finding                                                                             |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `card.go` `traitFaces` (≈55 static/replacement scans) | Still reads a DFC's back face; only continuous statics and triggers use `liveFaces` |
+| `defined.go` `TriggeredDefendingPlayer`               | Reads the current combat, not the trigger-time value Java stores                    |
 
 ## Smoke probe
 

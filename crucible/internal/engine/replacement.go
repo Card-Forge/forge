@@ -1031,8 +1031,9 @@ func damageReplacementMatches(g *Game, r *compile.Ability, source CardID, hostCo
 		case "event", "replacewith", "description", "validtarget", "activezones", "validsource", "iscombat", "secondary",
 			"playerturn", "checksvar", "svarcompare", "ispresent", "preventioneffect", "damageamount",
 			"alwaysreplace", "executemode", "damagetarget",
-			// replacementRequirementsCheck reads it (revoltMatches).
-			"revolt":
+			// replacementRequirementsCheck reads them (revoltMatches,
+			// checkDefinedPlayerMatches).
+			"revolt", "checkdefinedplayer", "definedplayercompare":
 		default:
 			return false
 		}
@@ -1165,13 +1166,10 @@ func resolveReplaceCountAmount(g *Game, amounts map[string]expr.Amount, host *Ca
 // dispatch in this file already gives (5 real lines, underdark_beholder.txt's
 // own "remove counters, then sacrifice if none left" among them).
 //
-// 25 of the corpus's own 31 real DamageDone lines naming DB$ RemoveCounter/
-// PutCounter resolve end to end. 6 stay unresolved: the 5 chaining
-// SubAbility$ above, and jared_carthalion_true_heir.txt's own real R: line
-// naming CheckDefinedPlayer$ You.isMonarch -- no monarch mechanic to check
-// (GainLife's own Player.isMonarch gap, port-log/game-state.md), skipped by
-// damageReplacementMatches' own allow-list before this function is ever
-// reached.
+// 26 of the corpus's own 31 real DamageDone lines naming DB$ RemoveCounter/
+// PutCounter resolve end to end, jared_carthalion_true_heir.txt's
+// CheckDefinedPlayer$ You.isMonarch among them (checkDefinedPlayerMatches,
+// amountrecords.go). The 5 chaining SubAbility$ above stay unresolved.
 func applyDamageReplaceCounter(g *Game, host CardID, replacedTarget EntityID, a *compile.Ability, amounts map[string]expr.Amount, amount int) bool {
 	remove := strings.EqualFold(a.Name, "RemoveCounter")
 	if !remove && !strings.EqualFold(a.Name, "PutCounter") {

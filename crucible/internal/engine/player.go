@@ -160,6 +160,20 @@ type Player struct {
 	// (Player.lifeGainedThisTurn, after replacement and prevention), read by
 	// Count$LifeYouGainedThisTurn.
 	LifeGainedThisTurn int
+	// lifeLostLastTurn and drawnLastTurn are Player.lifeLostLastTurn and
+	// numDrawnLastTurn: LifeLostThisTurn and CardsDrawnThisTurn as the last
+	// cleanup rolled them over (Player.onCleanupPhase, Player.java:2474,
+	// :2493). Read by the LifeLostLastTurn player measure and
+	// Count$YouDrewLastTurn.
+	lifeLostLastTurn, drawnLastTurn int
+	// scryThisTurn is Player.scryThisTurn: how many times this player scried
+	// this turn (GameAction.java:2684, once per scrying player), reset at
+	// cleanup (Player.java:2486). Read by Count$YouScryThisTurn.
+	scryThisTurn int
+	// spellsCastThisGame is Player.spellsCastThisGame (Player.java:2313):
+	// every spell this player cast this game, reset only by a RestartGame.
+	// Read by Count$YouCastThisGame.
+	spellsCastThisGame int
 	// attackedThisTurn is Player.attackedThisTurn flattened: every creature this
 	// player attacked with this turn, once per declaration (Count$
 	// CreaturesAttackedThisTurn counts a creature that attacked twice twice).

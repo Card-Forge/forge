@@ -715,6 +715,7 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 	// The X is announced here, so from the return on Count$xPaid reads it.
 	defer func() { g.castPending = NoCard }()
 	c.castManaSpent, c.castPaid, c.castSnow, c.castPaidSources = 0, [5]int{}, 0, nil
+	c.castColorless = 0
 	if opts.paysNoMana() {
 		return xAnnounced{}, true
 	}
@@ -746,6 +747,7 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 		// The mana another player paid (assist) is not in x.paid: Converge
 		// and Adamant read only the caster's.
 		c.castPaid, c.castSnow, c.castPaidSources = x.paid, x.snow, x.sources
+		c.castColorless = x.colorless
 		if emerged != NoCard {
 			g.payEmergeSacrifice(controller, pid, c.ID, emerged)
 		}
