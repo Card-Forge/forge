@@ -37,19 +37,7 @@ public class SimultaneousEntryTriggerTest extends AITest {
 
     @Test
     public void kodamaSeesMoxDiamondThatEntersWithItButMovesFirst() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
-        addCardToZone("Island", p, ZoneType.Hand);
-        addCardToZone("Mox Diamond", p, ZoneType.Graveyard);
-        addCardToZone("Kodama of the East Tree", p, ZoneType.Graveyard);
-        game.getAction().checkStateEffects(true);
-
-        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Battlefield", addCard("Forest", p));
-        sa.setActivatingPlayer(p);
-        AbilityUtils.resolve(sa);
-        game.getAction().checkStateEffects(true);
-        game.getStack().addAllTriggeredAbilitiesToStack();
+        Game game = returnTogether("Mox Diamond", "Kodama of the East Tree");
 
         AssertJUnit.assertEquals(1, game.getStack().size());
         AssertJUnit.assertEquals("Kodama of the East Tree", game.getStack().peekAbility().getHostCard().getName());
