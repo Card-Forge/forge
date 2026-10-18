@@ -146,7 +146,7 @@ replacement effects, continuous effects across all eight layers (partial), targe
 
 M6 in progress: 191 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
 `registry_gen.go`); the rest return `ErrUnimplemented`, and the other 12 have no real corpus line.
-`crucible card-smoke -all` measures how many cards play: 91.5% of 33,618 judged, an upper bound; the refusal causes it
+`crucible card-smoke -all` measures how many cards play: 91.7% of 33,616 judged, an upper bound; the refusal causes it
 groups are the backlog.
 
 Everything left, easiest first: `docs/crucible/00-master-implementation-plan-open.md`. Full per-gap list:
