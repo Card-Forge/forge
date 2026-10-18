@@ -2,6 +2,7 @@ package forge.game.replacement;
 
 import forge.ai.AITest;
 import forge.game.Game;
+import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -41,6 +42,23 @@ public class SimultaneousEntryReplacementTest extends AITest {
         Card depths = returnTogether("Solemnity", "Dark Depths");
 
         AssertJUnit.assertEquals(10, depths.getCounters(CounterEnumType.ICE));
+    }
+
+    @Test
+    public void doublingSeasonDoesNotDoubleCountersSolemnityStops() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        addCard("Solemnity", p);
+        addCard("Doubling Season", p);
+        Card depths = addCardToZone("Dark Depths", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        game.getAction().moveToPlay(depths, null, null);
+
+        AssertJUnit.assertEquals(0, game.getCardState(depths).getCounters(CounterEnumType.ICE));
+        AssertJUnit.assertTrue(game.getGameLog().getLogEntries(GameLogEntryType.EFFECT_REPLACED).stream()
+                .noneMatch(e -> e.message().contains("twice that many")));
     }
 
     @Test
