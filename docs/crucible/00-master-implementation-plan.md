@@ -616,7 +616,7 @@ printed form.
 
 ### M6 — Effects, corpus-gated — 6–12 wks _(parallelizable; the long tail)_
 
-**Both in progress.** M5's test-port matrix is green and 190 of the 203 script-driven effect APIs resolve; 91.9% of the
+**Both in progress.** M5's test-port matrix is green and 190 of the 203 script-driven effect APIs resolve; 92.0% of the
 corpus's judged cards play (`crucible card-smoke -all`, an upper bound). Item-by-item detail (24-32), full Java
 citations: [00-master-implementation-plan-in-progress.md](00-master-implementation-plan-in-progress.md). What is left,
 easiest first: [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md), "Remaining work".
