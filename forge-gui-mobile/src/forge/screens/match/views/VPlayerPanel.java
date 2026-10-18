@@ -71,14 +71,15 @@ public class VPlayerPanel extends FContainer {
     private static final float ALT_ZONE_MAX_WIDTH_RATIO = 0.45f; //the box grows with its cards up to this fraction of the space between the tab columns
     private static int altZoneLayoutCache = -1;
 
-    //compact landscape layout: a control column on the left (avatar, life, a scroller showing two zone tabs and the phase
-    //button), card zones sliding up from the panel's outer edge and the command zone sliding in from the right
+    //compact landscape layout: a control column on the left (avatar, life, the phase button and a scroller showing three zone tabs), card zones sliding up from the panel's outer edge and the command zone sliding in from the right
     private static final int COMPACT_MAX_VISIBLE_TABS = 3;         //zone tabs shown at once, the others scroll into place
-    private static final float COMPACT_MIN_CELL_RATIO = 0.65f;     //three tabs are only shown when each stays at least this fraction of the column width tall, else two
+    private static final float COMPACT_MIN_CELL_RATIO = 0.5f;      //the avatar shrinks until three tabs are at least this fraction of the column width tall (or COMPACT_MIN_CELL)
+    private static final float COMPACT_MIN_CELL = Utils.scale(28); //smallest comfortable tab height
+    private static final float COMPACT_MAX_AVATAR_RATIO = 0.24f;  //the avatar is at most this fraction of the panel height
+    private static final float COMPACT_MIN_AVATAR = Utils.scale(32); //the avatar never shrinks below this, however short the panel is
     private static final float COMPACT_COLUMN_WIDTH_RATIO = 1.25f; //control column width as a multiple of the avatar width, wide enough for 3 digit tab values
     private static final FSkinFont COMPACT_VALUE_FONT = INFO2_FONT; //tab values, larger than the portrait ones
     private static final float COMPACT_STRIP_RATIO = 1f / 3f;      //card zone and command zone height as a fraction of panel height: with the field shrunk to the other two thirds its two rows are exactly as tall
-    private static final float COMPACT_PHASE_BTN_RATIO = 0.55f;    //phase button height as a fraction of a tab cell
     private static final float COMPACT_STOPS_WIDTH_RATIO = 0.75f;  //phase stop column width as a fraction of the avatar width
     private static final float COMPACT_SNAP_SPEED = 14f;           //how quickly the tab scroller settles on a tab
     private static final float COMPACT_FLING_WINDOW_MS = 300f;     //a fling this soon after a drag belongs to the tab scroller
@@ -209,9 +210,10 @@ public class VPlayerPanel extends FContainer {
     private final CompactTabStrip tabStrip;
     private final CompactPhaseButton phaseButton;
     private final List<InfoTab> compactOrder = new ArrayList<>(), compactTabs = new ArrayList<>();
-    private float compactScroll, compactScrollTarget; //in tabs, 0 shows the first two tabs
+    private float compactScroll, compactScrollTarget; //in tabs, 0 shows the first three tabs
     private float compactCell, compactViewTop, compactViewHeight;
-    private int compactVisible = COMPACT_MAX_VISIBLE_TABS; //tabs shown at once with the current panel height
+    private int compactVisible = COMPACT_MAX_VISIBLE_TABS; //tabs shown at once
+    private float compactPhaseTop, compactPhaseHeight, compactAvatarSize = -1f, compactAvatarNatural; //phase button under the life total, avatar fitted to the panel
     private CompactScrollAnimation compactScrollAnimation;
     private final Color compactHintColor = new Color();
     private boolean commandUserOpened; //compact layout: opened by hand while no card zone was open, stays open until closed by hand
@@ -626,6 +628,7 @@ public class VPlayerPanel extends FContainer {
         tabStrip.setVisible(false); //compact landscape controls
         phaseButton.setVisible(false);
         phaseIndicator.syncCompactVisibility();
+        restoreAvatarSize();
         //layout for bottom panel by default
         float x = avatarHeight;
         float w = width - avatarHeight;
@@ -703,8 +706,10 @@ public class VPlayerPanel extends FContainer {
         //tab columns keep a minimum width so the icon and a 2-digit count always fit, even with the half size avatars of 3-4 player games
         if (isCompactLayout()) { //wider column and bigger values so 2 and 3 digit counts stay readable
             tabValueWidth = COMPACT_VALUE_FONT.getBounds("000").width;
-            tabColWidth = Math.max(Math.round(avatar.getWidth() * COMPACT_COLUMN_WIDTH_RATIO), TAB_MIN_ICON + tabValueWidth + 3 * INFO_TAB_PADDING_X + getCompactGutter());
+            fitCompactAvatar(height);
+            tabColWidth = Math.max(Math.round(avatar.getWidth() * COMPACT_COLUMN_WIDTH_RATIO), getCompactMinColumnWidth());
         } else {
+            restoreAvatarSize();
             tabValueWidth = INFO_FONT.getBounds("00").width;
             tabColWidth = Math.max(avatar.getWidth(), TAB_MIN_ICON + tabValueWidth + 3 * INFO_TAB_PADDING_X);
         }
@@ -721,13 +726,50 @@ public class VPlayerPanel extends FContainer {
         } else
             y += lblLife.getHeight();
 
+        final boolean compact = isCompactLayout();
+        if (compact) { //the phase button sits right under the life total, the tab scroller takes the rest
+            compactPhaseTop = y + TAB_COLUMN_PAD;
+            compactPhaseHeight = getCompactPhaseHeight();
+            y = compactPhaseTop + compactPhaseHeight;
+        }
         tabColTop = y;
         tabColHeight = height - y;
-        final boolean compact = isCompactLayout();
         tabStrip.setVisible(compact);
         phaseButton.setVisible(compact);
         layoutTabsLandscape();
         updateTabLayout(width, height);
+    }
+
+    //the compact layout shrinks the avatar on short panels; give it its size back when that layout isn't in use
+    private void restoreAvatarSize() {
+        if (compactAvatarSize < 0) { return; }
+        avatar.setSize(compactAvatarNatural, compactAvatarNatural);
+        compactAvatarSize = -1f;
+    }
+
+    private float getCompactMinColumnWidth() {
+        return TAB_MIN_ICON + tabValueWidth + 3 * INFO_TAB_PADDING_X + getCompactGutter();
+    }
+
+    private float getCompactPhaseHeight() {
+        return Math.round(Math.max(Utils.scale(18), INFO2_FONT.getLineHeight() * 1.4f));
+    }
+
+    //Shrinks the avatar on short panels (long phones, where a finger sized avatar is huge) so at least three zone tabs
+    //of a usable size fit in the column under the avatar, the life total and the phase button.
+    private void fitCompactAvatar(float height) {
+        if (compactAvatarSize < 0 || Math.abs(avatar.getWidth() - compactAvatarSize) > 0.5f) {
+            compactAvatarNatural = Math.min(avatar.getWidth(), VAvatar.HEIGHT); //set from outside (game size changes)
+        }
+        final float lifeHeight = Forge.altPlayerLayout ? (adjustHeight > 2 ? INFO_FONT.getLineHeight() / 2 : 0) : LIFE_FONT.getLineHeight();
+        final float minCell = Math.max(COMPACT_MIN_CELL, getCompactMinColumnWidth() * COMPACT_MIN_CELL_RATIO);
+        final float budget = height - lifeHeight - TAB_COLUMN_PAD - getCompactPhaseHeight() - 2 * TAB_COLUMN_PAD - COMPACT_MAX_VISIBLE_TABS * minCell;
+        final float limit = Math.min(compactAvatarNatural, Math.min(budget, height * COMPACT_MAX_AVATAR_RATIO));
+        final float size = Math.round(Math.max(Math.min(COMPACT_MIN_AVATAR, compactAvatarNatural), limit));
+        if (Math.abs(avatar.getWidth() - size) > 0.5f || avatar.getHeight() != avatar.getWidth()) {
+            avatar.setSize(size, size);
+        }
+        compactAvatarSize = avatar.getWidth();
     }
 
     private void layoutTabsLandscape() {
@@ -761,7 +803,7 @@ public class VPlayerPanel extends FContainer {
         layoutColumn(right, initW - tabWidth, 0, tabWidth, initH, cell);
     }
 
-    //the order the compact layout's tab scroller shows the tabs in: hand and library first, as in the two tabs shown at rest
+    //the order the compact layout's tab scroller shows the tabs in: hand and library first, as in the tabs shown at rest
     private List<InfoTab> getCompactOrder() {
         if (compactOrder.isEmpty()) {
             for (ZoneType zoneType : new ZoneType[] { ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Flashback }) {
@@ -783,7 +825,7 @@ public class VPlayerPanel extends FContainer {
         return Math.max(0, compactTabs.size() - getCompactVisibleCount());
     }
 
-    //compact layout: avatar and life on top, the two tab scroller under them and the phase button at the bottom of the column
+    //compact layout: avatar and life on top, the phase button under them and the three tab scroller below
     private void layoutCompactColumn() {
         commonTabWidth = 0f; //no right hand tab column
         final List<InfoTab> shown = compactTabs;
@@ -794,14 +836,11 @@ public class VPlayerPanel extends FContainer {
         if (shown.isEmpty() || tabColWidth <= 0 || initH <= 0) { return; }
         if (tabValueWidth <= 0) { tabValueWidth = INFO_FONT.getBounds("00").width; }
 
-        //as many tabs as fit at a comfortable touch size (up to three), with the phase button's height kept free under them
+        //three tabs, always: the avatar was fitted so they stay a usable size
         final float available = tabColHeight - 2 * TAB_COLUMN_PAD;
         compactVisible = COMPACT_MAX_VISIBLE_TABS;
-        while (compactVisible > 2 && available / (compactVisible + COMPACT_PHASE_BTN_RATIO) < tabColWidth * COMPACT_MIN_CELL_RATIO) {
-            compactVisible--;
-        }
         final int visible = getCompactVisibleCount();
-        float cell = available / (visible + COMPACT_PHASE_BTN_RATIO);
+        float cell = available / COMPACT_MAX_VISIBLE_TABS;
         cell = Math.max(1f, (float) Math.floor(Math.min(cell, tabColWidth * TAB_MAX_HEIGHT_RATIO)));
         compactCell = cell;
         tabIconSize = Math.max(1f, Math.min(cell * TAB_ICON_RATIO, tabColWidth - getCompactGutter() - tabValueWidth - 3 * INFO_TAB_PADDING_X));
@@ -810,8 +849,7 @@ public class VPlayerPanel extends FContainer {
         compactViewHeight = cell * visible;
         tabStrip.setBounds(getColumnX(), compactViewTop, tabColWidth, compactViewHeight);
 
-        final float phaseHeight = Math.round(cell * COMPACT_PHASE_BTN_RATIO);
-        phaseButton.setBounds(getColumnX() + TAB_COLUMN_PAD, initH - TAB_COLUMN_PAD - phaseHeight, tabColWidth - 2 * TAB_COLUMN_PAD, phaseHeight);
+        phaseButton.setBounds(getColumnX() + TAB_COLUMN_PAD, compactPhaseTop, tabColWidth - 2 * TAB_COLUMN_PAD, compactPhaseHeight);
 
         final float max = getCompactMaxScroll();
         compactScroll = Math.max(0f, Math.min(compactScroll, max));
@@ -1011,7 +1049,7 @@ public class VPlayerPanel extends FContainer {
     private void updateTabLayout(float width, float height) {
         phaseIndicator.resetFont();
         if (isCompactLayout()) { //the stops column opens over the left edge of the field
-            final float stopsWidth = Math.round(avatar.getWidth() * COMPACT_STOPS_WIDTH_RATIO);
+            final float stopsWidth = Math.round(Math.max(avatar.getWidth() * COMPACT_STOPS_WIDTH_RATIO, tabColWidth * 0.55f));
             //opens on the inner side of the control column
             phaseIndicator.setBounds(isCompactRight() ? getColumnX() - stopsWidth : tabColWidth, 0, stopsWidth, height);
         } else {

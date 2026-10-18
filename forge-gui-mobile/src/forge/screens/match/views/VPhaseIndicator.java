@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BooleanSupplier;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
@@ -67,10 +68,10 @@ public class VPhaseIndicator extends FContainer {
     private boolean isCollapsedMode() { return Forge.isLandscapeMode() && !expandTarget; }
 
     //compact landscape layout: nothing is drawn until the phase button opens the stops column
-    private java.util.function.BooleanSupplier onRight;
+    private BooleanSupplier onRight;
 
     /** @param onRight tells whether the panel's controls are on the right, so the stops open to their left */
-    public void setOnRight(java.util.function.BooleanSupplier onRight) {
+    public void setOnRight(BooleanSupplier onRight) {
         this.onRight = onRight;
     }
 
