@@ -19,12 +19,21 @@ package forge.screens.match.views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -32,6 +41,7 @@ import forge.deck.CommanderBracketCalculator;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
+import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -48,6 +58,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
+import forge.util.AITimeoutTracker;
 import forge.util.Localizer;
 import forge.view.arcane.PlayArea;
 import net.miginfocom.swing.MigLayout;
@@ -76,7 +87,60 @@ public class VField implements IVDoc<CField> {
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
     private final PlayArea tabletop;
-    private final SkinnedPanel avatarArea = new SkinnedPanel();
+    private final SkinnedPanel avatarArea = new SkinnedPanel() {
+        @Override
+        protected void paintChildren(final Graphics g) {
+            super.paintChildren(g);
+            paintAITimeoutBar(g);
+        }
+    };
+
+    // ---- AI "thinking" timer bar over the avatar (shrinks to 0 at the AI timeout) ----
+    private static final Color BAR_BG = new Color(0, 0, 0, 165);
+    private static final Color BAR_AMBER = new Color(255, 165, 0);
+    private static final Set<VField> LIVE_FIELDS = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap<>()));
+    static {
+        // AITimeoutTracker calls this when a bar is due to appear and whenever an AI decision ends
+        AITimeoutTracker.setRepaintHook(() -> SwingUtilities.invokeLater(() -> {
+            final List<VField> fields;
+            synchronized (LIVE_FIELDS) { fields = new ArrayList<>(LIVE_FIELDS); }
+            for (final VField f : fields) { f.refreshAITimeoutBar(); }
+        }));
+    }
+    private final Timer aiTimeoutTimer = new Timer(50, e -> refreshAITimeoutBar());
+    private boolean aiTimeoutBarShown;
+
+    /** (game, player) key of this field's player; the tracker is shared by every game in the JVM. */
+    private long aiTimeoutKey() {
+        final GameView gv = matchUI == null ? null : matchUI.getGameView();
+        return gv == null ? Long.MIN_VALUE : AITimeoutTracker.key(gv.getId(), player.getId()); // MIN_VALUE: no session
+    }
+
+    private void refreshAITimeoutBar() {
+        if (player == null) { return; }
+        final boolean show = AITimeoutTracker.getRemainingFraction(aiTimeoutKey()) >= 0f;
+        if (show) {
+            if (!aiTimeoutTimer.isRunning()) { aiTimeoutTimer.start(); }
+            avatarArea.repaint();
+        } else {
+            aiTimeoutTimer.stop();
+            if (aiTimeoutBarShown) { avatarArea.repaint(); } // clear it
+        }
+        aiTimeoutBarShown = show;
+    }
+
+    private void paintAITimeoutBar(final Graphics g) {
+        if (player == null) { return; }
+        final float f = AITimeoutTracker.getRemainingFraction(aiTimeoutKey());
+        if (f < 0f) { return; }
+        final Rectangle r = lblAvatar.getBounds();
+        final int barH = Math.max(4, r.height / 10);
+        final int y = r.y + r.height - barH;
+        g.setColor(BAR_BG);
+        g.fillRect(r.x, y, r.width, barH);
+        g.setColor(f > 0.5f ? Color.GREEN : f > 0.25f ? BAR_AMBER : Color.RED);
+        g.fillRect(r.x, y, Math.round(r.width * f), barH);
+    }
 
     private final PlayerDetailsPanel detailsPanel;
 
@@ -111,6 +175,7 @@ public class VField implements IVDoc<CField> {
 
         this.matchUI = matchUI;
         this.player = p;
+        LIVE_FIELDS.add(this);
         if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
         else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
 

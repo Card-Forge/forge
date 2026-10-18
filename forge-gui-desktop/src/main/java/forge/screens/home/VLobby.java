@@ -317,10 +317,6 @@ public class VLobby implements ILobbyView {
             btnNewEvent.setFont(FSkin.getRelativeFont(18));
             btnNewEvent.addActionListener(e -> controller.openEventConfigDialog());
         }
-        String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
-        if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
-            defaultGamesInMatch = "3";
-        }
 
         gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");

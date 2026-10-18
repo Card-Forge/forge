@@ -152,7 +152,7 @@ public class GauntletMini {
 
         Set<GameType> gameTypes = null;
         if (gauntletType == GameType.CommanderDraft) {
-            gameTypes = java.util.EnumSet.of(GameType.Commander);
+            gameTypes = Set.of(GameType.Commander);
         }
 
         hostedMatch.startMatch(gauntletType, gameTypes, starter, human, GuiBase.getInterface().getNewGuiGame());

@@ -1839,14 +1839,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
-    public AiAbilityDecision doReturnCommanderLogic(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision doReturnCommanderLogic(SpellAbility sa, Player ai) {
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>)sa.getReplacingObject(AbilityKey.OriginalParams);
         SpellAbility causeSa = (SpellAbility)originalParams.get(AbilityKey.Cause);
         SpellAbility causeSub = null;
         ZoneType destination = (ZoneType)originalParams.get(AbilityKey.Destination);
 
-        if (ZoneType.Hand.equals(destination)) {
+        if (destination == ZoneType.Hand) {
             // don't replace since its easier to cast it again
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -1860,24 +1860,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (causeSa != null && (causeSub = causeSa.getSubAbility()) != null) {
             ApiType subApi = causeSub.getApi();
 
-            if (subApi == ApiType.ChangeZone && "Exile".equals(causeSub.getParam("Origin"))
-                    && "Battlefield".equals(causeSub.getParam("Destination"))) {
+            if (subApi == ApiType.ChangeZone
+                    && "Exile".equals(causeSub.getParam("Origin")) && "Battlefield".equals(causeSub.getParam("Destination"))) {
                 // A blink effect implemented using ChangeZone API
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (subApi == ApiType.DelayedTrigger) {
                 SpellAbility exec = causeSub.getAdditionalAbility("Execute");
-                if (exec != null && exec.getApi() == ApiType.ChangeZone) {
+                if (exec != null && exec.getApi() == ApiType.ChangeZone
+                        && "Exile".equals(exec.getParam("Origin")) && "Battlefield".equals(exec.getParam("Destination"))) {
                     // A blink effect implemented using a delayed trigger
-                    if (!"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"))) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    }
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-            } else {
-                if (causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject(AbilityKey.Card))
-                        || !causeSa.getActivatingPlayer().equals(aiPlayer)) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
+            } else if (sa.getReplacingObject(AbilityKey.Card).equals(causeSa.getHostCard()) && causeSa.getActivatingPlayer().equals(ai)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }

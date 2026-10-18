@@ -2,11 +2,11 @@ package forge.gamemodes.match.input;
 
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.Selection;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,12 +33,6 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         this.min = Math.min(min, choices.size());
         this.max = Math.min(max, choices.size());
         this.sa = sa;
-        final List<StackItemView> views = new ArrayList<>();
-        for (final SpellAbilityStackInstance si : choices) {
-            views.add(si.getView());
-        }
-        getController().getGui().setSelectableTargets(views);
-        TargetingProgress.showChosen(getController().getGui(), sa);
     }
 
     public void setMessage(final String message0) { message = message0; }
@@ -47,13 +41,20 @@ public class InputSelectStackItems extends InputSyncronizedBase {
     public List<SpellAbilityStackInstance> getSelected() { return selected; }
 
     @Override
-    protected void showMessage() {
-        // Refreshing the offered stack items also lets headless clients respond to each step of a multi-target prompt.
-        final List<StackItemView> selectable = new ArrayList<>();
+    protected Selection getSelection() {
+        final List<TrackableObject> offered = new ArrayList<>();
         for (final SpellAbilityStackInstance si : choices) {
-            selectable.add(si.getView());
+            offered.add(si.getView());
         }
-        getController().getGui().setSelectableTargets(selectable);
+        final List<TrackableObject> chosen = sa == null ? new ArrayList<>() : TargetingProgress.chosenTargets(sa);
+        for (final SpellAbilityStackInstance si : selected) {
+            chosen.add(si.getView());
+        }
+        return new Selection(List.of(), 0, 0, offered, chosen);
+    }
+
+    @Override
+    protected void showMessage() {
         final String text = message.contains("%d") ? String.format(message, max - selected.size()) : message;
         showMessage(text, sa == null ? (forge.game.card.CardView) null : sa.getView().getHostCard());
         getController().getGui().updateButtons(getOwner(), selected.size() >= min, allowCancel, true);
@@ -77,21 +78,13 @@ public class InputSelectStackItems extends InputSyncronizedBase {
         if (!wasSelected) {
             selected.add(si);
         }
-        getController().getGui().setHighlighted(Collections.singletonList(si.getView()), !wasSelected);
+        showSelection();
         if (selected.size() >= max) {
             selectButtonOK();
         } else {
             showMessage();
         }
         return true;
-    }
-
-    private void unmarkSelected() {
-        final List<StackItemView> views = new ArrayList<>();
-        for (final SpellAbilityStackInstance si : selected) {
-            views.add(si.getView());
-        }
-        getController().getGui().setHighlighted(views, false);
     }
 
     @Override
@@ -102,18 +95,8 @@ public class InputSelectStackItems extends InputSyncronizedBase {
     @Override
     protected void onCancel() {
         cancelled = true;
-        unmarkSelected();
         selected.clear();
         stop();
-    }
-
-    @Override
-    protected void onStop() {
-        getController().getGui().clearSelectables();
-        if (cancelled || sa == null
-                || !(TargetingProgress.hasLaterTargetingStep(sa) || getController().isKeepingTargetsMarked())) {
-            unmarkSelected();
-        }
     }
 
     @Override

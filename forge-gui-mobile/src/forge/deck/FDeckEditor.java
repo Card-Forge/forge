@@ -902,12 +902,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         DeckFormat format = this.editorConfig.getDeckFormat();
         if(card == null)
             return 0;
-        else if (!shouldEnforceConformity())
+        if (!shouldEnforceConformity())
             return Integer.MAX_VALUE;
-        else if(format != null)
+        if(format != null)
             return format.getMaxCardCopies(card);
-        else
-            return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+        return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
     }
 
     protected DeckSectionPage showExtraSectionTab(DeckSection section) {

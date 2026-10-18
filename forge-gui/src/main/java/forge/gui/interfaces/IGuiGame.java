@@ -15,17 +15,18 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
-import forge.trackable.TrackableObject;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -263,26 +264,17 @@ public interface IGuiGame {
 
     default void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players) {}
 
-    void setHighlighted(Iterable<? extends TrackableObject> objects, boolean b);
-
     /**
-     * Mark {@code cards} as selectable and publish the active selection's
-     * minimum / maximum required count for client-side use (e.g.,
-     * select-min hotkeys). A maximum of {@code 0} marks display-only highlighting, for which the GUI opens no zones.
+     * Replaces what the active prompt marks. A selection with a maximum of {@code 0} only highlights its cards, for which
+     * the GUI opens no zones.
      */
-    void setSelectables(Iterable<CardView> cards, int min, int max);
+    void setSelection(Selection selection);
     /**
-     * Marks players and stack items as valid targets of the active prompt, replacing earlier marks (cards go through
-     * {@link #setSelectables}); {@link #clearSelectables()} removes them.
-     */
-    default void setSelectableTargets(Iterable<? extends TrackableObject> targets) {}
-    /**
-     * Whether this GUI lets the player pick stack items as targets by tapping or clicking them in its stack view (and
-     * implements the two methods above). Otherwise targets on the stack are chosen in a dialog. A GUI that forwards
-     * these calls to a remote client returns true only if that client can handle them.
+     * Whether this GUI lets the player pick stack items as targets by tapping or clicking them in its stack view.
+     * Otherwise targets on the stack are chosen in a dialog. A GUI that forwards the selection to a remote client
+     * returns true only if that client can handle it.
      */
     default boolean canPickStackTargets() { return false; }
-    void clearSelectables();
     boolean isSelecting();
 
     void setWeaklySelectable(final Iterable<CardView> cards);
@@ -317,6 +309,8 @@ public interface IGuiGame {
     default void refreshYieldUi(PlayerView player) {}
     /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
     void applyYieldUpdate(YieldUpdate update);
+    /** Apply the macro state of the current player's controller. A local controller holds its own, so only a netplay client is sent one. */
+    void applyMacroState(IMacroSystem.State state);
 
     /**
      * Apply a delta update packet to the local game state.
