@@ -994,7 +994,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         if (toTop.size() < cards.size()) { // the top isn't everything
             for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
-                toBottom.add(result.get(i));
+                toBottom.add(0, result.get(i));
             }
         }
         return ImmutablePair.of(toTop, toBottom);
@@ -1171,7 +1171,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return cards;
         }
         endTempShowCards();
-        if(topOfDeck)
+        // The card listed first goes nearest the chosen end of the deck, so it must be moved last
+        if(destinationZone.isDeck())
             Collections.reverse(choices);
         CardCollection result = new CardCollection();
         gameCacheMove.addToList(choices, result);
