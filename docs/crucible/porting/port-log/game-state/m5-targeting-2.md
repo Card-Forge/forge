@@ -8,7 +8,7 @@
 | `K:MayFlashSac`                                       | `castOptions` (`castoptions.go`) adds a flash option when the caster controls the card and could not cast a sorcery (`MayPlayNotSorcerySpeed$`, `GameActionUtil.java:343`); `sameWay` keeps it apart from the plain cast. A cast through it registers a `Phase$ Cleanup` delayed `SacrificeAll` of the card (`sacrificeAtCleanup`, the tree `CardFactoryUtil.java:2025-2038` builds from strings). Spider Climb, Necromancy, Parapet. |
 | `CastWithFlash` `ValidSA$` with `XCost`/`IsTargeting` | `flashMode` (`staticability.go`): such a line lets the cast begin out of timing (`anyWithFlashNeedsInfo`), and `castsWithFlashChosen` decides once targets and X are chosen (`flashDecided`, called by every cast branch). `saspec.go` reads `XCost<cmp><n>` (`saXCost`) and `IsTargeting Valid <spec>` (`saIsTargeting`). Silver Scrutiny, Flash Photography, Timely Ward.                                                           |
 
-Not ported: `ValidSA$ Spell.Teamwork` (Quantum Reduction): no Teamwork optional cost exists. A `MayPlayText$` on a
+`ValidSA$ Spell.Teamwork` (Quantum Reduction) resolves ([`m6-r10-r10.md`](m6-r10-r10.md)). A `MayPlayText$` on a
 `MayPlay$` static is display text only (`GameActionUtil.java:398`); the old refusal in `continuous.go` is unchanged.
 
 Fixtures: `flash-may-flash-cost-*` (2), `flash-may-flash-sac-spider-climb-on-opponents-turn`,

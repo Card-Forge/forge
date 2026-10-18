@@ -56,9 +56,8 @@ ability by `Ability.spell`). Tests: `wardstack_test.go`; fixtures `ward-activate
   and `checkSVarMatches` instead of skipping the line, for every static mode using it.
 - `Mode$ CastWithFlash` reads `ValidSA$` through `spellAbilityMatches` (so `Spell.Hero`, `Activated.Equip`,
   `Activated.Loyalty` evaluate) and `ActivateAbility` asks `activatesWithFlash` before its sorcery-speed gate (`Equip`,
-  loyalty abilities). `IsPresent$`/`CheckSVar$` lines now apply. Still skipped: `ValidSA$` naming `XCost`, `Teamwork`,
-  `IsTargeting` (Java asks them after targets and X are chosen), `MayFlashCost`/`MayFlashSac`. Tests:
-  `castflashshapes_test.go`.
+  loyalty abilities). `IsPresent$`/`CheckSVar$` lines now apply. Still skipped: `ValidSA$` naming `XCost`, `IsTargeting`
+  (Java asks them after targets and X are chosen), `MayFlashCost`/`MayFlashSac`. Tests: `castflashshapes_test.go`.
 - Not ported: `Mode$ CantTarget` with `SourceCanOnlyTarget$` (Wall of Shadows; needs the root ability's `ValidTgts$` at
   `cardCantBeTargetedBy`, whose callers pass no ability) and `EffectZone$ Stack` (Enthralling Hold; needs the spell
   being cast as a static host before it reaches the stack); `canTarget`'s multi-target params.

@@ -39,9 +39,8 @@ Fixtures: `exchange-control-confusion-in-the-ranks-swaps-same-type`,
 
 Tests: `unlesscostdefined_test.go`, `castflashinfo_test.go`.
 
-Not ported, no framework: `CastWithFlash` `ValidSA$ Spell.Teamwork` (Quantum Reduction) and `CollectEvidence` as an
-activation or spell cost both need `Mode$ OptionalCost` statics (`CostTeamwork`, `CostCollectEvidence` as additional
-costs), which nothing in the engine reads; Cryptex's `T CollectEvidence<3>` needs the cost in the activation shape.
+`CastWithFlash` `ValidSA$ Spell.Teamwork` (Quantum Reduction) and Cryptex's `T CollectEvidence<3>` activation cost
+resolve; see [`m6-r10-r10.md`](m6-r10-r10.md).
 
 ## Pump on a player (`pumpeffect.go`)
 
