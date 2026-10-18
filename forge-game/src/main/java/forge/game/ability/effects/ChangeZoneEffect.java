@@ -666,6 +666,24 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
+                if (sa.hasParam("CombinedWith")) {
+                    CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("CombinedWith"), sa);
+                    if (list.isEmpty()) {
+                        list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("CombinedWith"), hostCard.getController(), hostCard, sa);
+                    }
+
+                    if (!list.isEmpty()) {
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("Attach", gameCard);
+                        Card hostCreature = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
+                        if (hostCreature != null) {
+                            AugmentEffect.augment(sa, hostCreature, gameCard);
+                        }
+                    }
+                    //no need for the rest
+                    continue;
+                }
+
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                 if (sa.hasParam("FaceDown")) {
                     gameCard.turnFaceDown(true);
@@ -1386,6 +1404,24 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
+                    }
+
+                    if (sa.hasParam("CombinedWith")) {
+                        CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("CombinedWith"), sa);
+                        if (list.isEmpty()) {
+                            list = CardLists.getValidCards(triggerList.getLastStateBattlefield(), sa.getParam("CombinedWith"), source.getController(), source, sa);
+                        }
+
+                        if (!list.isEmpty()) {
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", c);
+                            Card hostCreature = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", source.toString()), params);
+                            if (hostCreature != null) {
+                                AugmentEffect.augment(sa, hostCreature, c);
+                            }
+                        }
+                        //no need for the rest
+                        continue;
                     }
 
                     if (addToCombat(c, sa, "Attacking", "Blocking")) {

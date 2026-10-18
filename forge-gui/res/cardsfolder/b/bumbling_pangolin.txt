@@ -2,6 +2,7 @@ Name:Bumbling Pangolin
 ManaCost:3 R
 Types:Host Creature Pangolin Beast
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may destroy target artifact.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact
+K:Augment Host:Pangolin:LeftSide:TrigDestroy
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may destroy target artifact.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ you may destroy target artifact.
 Oracle:When this creature enters, you may destroy target artifact.

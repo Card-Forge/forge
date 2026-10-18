@@ -1,0 +1,8 @@
+Name:Steam-Powered
+ManaCost:no cost
+Types:Artifact Creature Construct
+Colors:colorless
+PTModifier:+0/+4
+K:Augment:4:LeftSide
+SVar:LeftSide:A:AB$ Effect | Cost$ 5 | SpellDescription$
+Oracle:{5}:\nAugment {4} ({4}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

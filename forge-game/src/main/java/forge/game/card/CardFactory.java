@@ -804,7 +804,11 @@ public class CardFactory {
         }
         state.setBasePower(state.getBasePower() + Integer.parseInt(augmentState.getPowerModifier()));
         state.setBaseToughness(state.getBaseToughness() + Integer.parseInt(augmentState.getToughnessModifier()));
-        state.setName(augmentState.getName() + hostKeyword.getRightSideName());
+        String augmentName = augmentState.getName();
+        if (!augmentName.endsWith("-")) {
+            augmentName += " ";
+        }
+        state.setName(augmentName + hostKeyword.getRightSideName());
         state.addColor(augmentState.getColor());
         state.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getName).collect(Collectors.toList()));
         state.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getName).collect(Collectors.toList()));

@@ -3,11 +3,13 @@ package forge.game.ability.effects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -66,13 +68,22 @@ public class AugmentEffect  extends SpellAbilityEffect {
         if (gameCard == null || !augmentCreature.equalsWithGameTimestamp(gameCard)) {
             return;
         }
+        augment(sa, hostCreature, augmentCreature);
+    }
 
+    public static Card augment(SpellAbility sa, Card hostCreature, Card augmentCreature) {
+        final Game game = hostCreature.getGame();
         if (!hostCreature.attachAugment(augmentCreature)) {
-            return;
+            return null;
         };
+
+        CardCloneStates cloneState = CardFactory.getAugmentedCloneState(hostCreature, sa);
+        if (cloneState == null) {
+            return null;
+        }
         final long ts = game.getNextTimestamp();
         hostCreature.setAugmentedTimeStamp(ts);
-        hostCreature.addCloneState(CardFactory.getAugmentedCloneState(hostCreature, sa), ts);
+        hostCreature.addCloneState(cloneState, ts);
 
         // Re-register triggers for target card
         game.getTriggerHandler().clearActiveTriggers(hostCreature, null);
@@ -82,5 +93,7 @@ public class AugmentEffect  extends SpellAbilityEffect {
 
         hostCreature.updateStateForView();
         augmentCreature.updateStateForView();
+        game.getTriggerHandler().runTrigger(TriggerType.Augments, AbilityKey.mapFromCard(hostCreature), false);
+        return hostCreature;
     }
 }

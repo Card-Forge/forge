@@ -2,6 +2,7 @@ Name:Mer Man
 ManaCost:4 U
 Types:Host Creature Human Fish
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Augment Host:Man:LeftSide:TrigDraw
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ you may draw a card.
 Oracle:When this creature enters, you may draw a card.

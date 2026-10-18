@@ -1519,7 +1519,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 this.augmentedWith = null;
             }
             view.updateAugment(this);
-            return true;
+            return false;
         }
         if (this.augmentedWith != null || augment.augmenting != null) {
             return false;

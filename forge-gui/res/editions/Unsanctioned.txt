@@ -113,5 +113,6 @@ ScryfallCode=UND
 
 [CreatureTypes]
 Clamfolk:Clamfolk
+Chameleon:Chameleons
 [WalkerTypes]
 B.O.B.
