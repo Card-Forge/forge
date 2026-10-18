@@ -27,16 +27,15 @@ import (
 // evaluate. Every one fails the whole line loudly (PORT-8/GO-7):
 // Optional$ (2) -- an interactive "would you like to
 // fight" confirm, the identical gap Sacrifice's/Discard's/Pump's own
-// Optional$ already document;
-// TargetsAtRandom$ (1) -- Aggregates.random, a randomized choice this
-// port's own ChooseTargets contract does not carry; SorcerySpeed$ (1) -- a
+// Optional$ already document (TargetsAtRandom$ is chosen when the targets
+// are, randomTargets in targeting.go); SorcerySpeed$ (1) -- a
 // cost-restriction flag with no cost-payment site to attach to,
 // sacrificeEffect's own identical reasoning; Condition$/ConditionDefined$
 // (0/0) -- condition.go's own subAbilityConditionMet would otherwise
 // silently no-op a card naming either, dealDamageEffect's own identical
 // reasoning.
 var fightUnresolvedParams = [...]string{
-	"Optional", "TargetsAtRandom", "SorcerySpeed",
+	"Optional", "SorcerySpeed",
 	"Condition"}
 
 // fightEffect resolves Mode$/DB$/AB$ Fight. ConditionPresent$/

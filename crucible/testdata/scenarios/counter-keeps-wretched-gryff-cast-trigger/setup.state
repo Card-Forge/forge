@@ -1,0 +1,7 @@
+humanlife=20
+ailife=20
+humanbattlefield=Island|Id:2;Island|Id:3;Island|Id:4;Island|Id:5;Island|Id:6;Island|Id:7;Island|Id:8
+humanhand=Wretched Gryff|Id:1
+humanlibrary=Plains|Id:20
+aibattlefield=Island|Id:30;Island|Id:31
+aihand=Counterspell|Id:32

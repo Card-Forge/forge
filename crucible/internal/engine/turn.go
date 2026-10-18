@@ -646,6 +646,7 @@ func (g *Game) cleanupStep(controller PlayerController) {
 	g.enteredThisTurn = nil
 	g.countersAddedThisTurn = nil
 	g.playerDamageThisTurn = nil
+	g.cardDamageThisTurn = nil
 
 	g.combatDamagePrevented = false
 	g.preventShields = nil

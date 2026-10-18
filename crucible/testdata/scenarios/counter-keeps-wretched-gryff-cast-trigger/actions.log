@@ -1,0 +1,29 @@
+# Countering a spell removes the spell's own stack item and nothing else
+# (CounterEffect.java:258, MagicStack.remove(si)). Wretched Gryff's "When you
+# cast this spell, draw a card" (Mode$ SpellCast | ValidCard$ Card.Self) has
+# the Gryff's card as its source, but it is an ability of its own: ai's
+# Counterspell counters the Gryff and the trigger still resolves, so human
+# draws the Plains. Removing every stack item sourced by the card would drop
+# the trigger with the spell.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+tapformana human 7 U
+tapformana human 8 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+castspell human 1
+tapformana ai 30 U
+tapformana ai 31 U
+queue targets 1
+castspell ai 32
+resolvestack

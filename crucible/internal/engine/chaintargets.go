@@ -72,7 +72,12 @@ func (g *Game) resolveChainTargets(controller PlayerController, a *Ability) bool
 		if len(choice.candidates) > 0 && (choice.max > 0 || choice.min > 0) {
 			// TargetMin$ 0 with no candidate, or no target allowed at all,
 			// asks nothing (resolveTargets).
-			chosen = controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
+			var err error
+			if chosen, err = g.chooseTargets(controller, &link, choice); err != nil {
+				a.failLinkTargets(sub, api, err)
+				a.chainTargets = append(a.chainTargets, chainTarget{Params: sub.Ability, Err: err})
+				return true
+			}
 		}
 		// CR 601.2d: the link's division is announced right after its targets.
 		divided, err := g.divideAmongTargets(controller, decider, &link, chosen)

@@ -202,10 +202,12 @@ func excessSoFar(c *Card, table *damageTable, amount, lethal int) int {
 // (checkDamageTableTriggers): every permanent dealt excess damage is marked
 // (setHasBeenDealtExcessDamageThisTurn), Mode$ ExcessDamage fires once for
 // it, and Mode$ ExcessDamageAll fires once for the batch when any permanent
-// was. Card.logExcessDamage's running total is not kept: its one reader,
-// Count$ExcessDamageReceivedThisTurn, is read only through Overclocked
-// Electromancer's CardTriggeredTarget$ head, which this port does not
-// resolve.
+// was. Card.logExcessDamage adds the excess to the card's running total
+// (Damage.ExcessReceived, Count$ExcessDamageReceivedThisTurn). Each of the
+// batch's damage records to a card gets the batch's outcome on its target
+// copy, excess or not (CardDamageTable.java:130, "overwrite previous excess
+// outcomes because Rith, Liberated Primeval cares about who controlled it at
+// this moment").
 //
 // ExcessDamage (TriggerExcessDamage.performTest, :50-62) matches ValidTarget$
 // against the damaged permanent and CombatDamage$ against isCombat, and
@@ -219,11 +221,17 @@ func (g *Game) triggerExcessDamage(controller PlayerController, table damageTabl
 	var damaged []CardID
 	var matches []Ability
 	for _, d := range batchExcess(g, table) {
+		for _, e := range table {
+			if e.Record > 0 && e.Target == CardEntity(d.card) {
+				g.cardDamageThisTurn[e.Record-1].target.Damage.ExcessThisTurn = d.excess > 0
+			}
+		}
 		if d.excess <= 0 {
 			continue
 		}
 		c := g.Card(d.card)
 		c.Damage.ExcessThisTurn = true
+		c.Damage.ExcessReceived += d.excess
 		damaged = append(damaged, d.card)
 		objs := triggeredObjects{target: CardEntity(d.card), counts: triggerCounts{damage: d.excess, set: countDamage}}
 		matches = append(matches, g.onceTriggerMatches("ExcessDamage", func(h *Card, t *compile.Ability) bool {

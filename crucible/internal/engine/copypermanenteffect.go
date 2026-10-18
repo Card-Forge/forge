@@ -22,8 +22,9 @@ import (
 // definition and any power/toughness its creating effect set, since this
 // port has no other copy effects to fold in. SetPower$/SetToughness$ change
 // the copy's own base values (CR 707.9b), TokenTapped$ taps it and
-// RememberTokens$ remembers it on the host and TokenAttacking$ puts it into
-// combat attacking (addToCombatAttacking); the other copy exceptions and
+// RememberTokens$ remembers it on the host and TokenAttacking$/TokenBlocking$
+// put it into combat attacking or blocking (addToCombatAttacking,
+// addToCombatBlocking); the other copy exceptions and
 // end-of-turn cleanup are not resolved.
 type copyPermanentEffect struct{}
 
@@ -100,6 +101,9 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 				// TokenEffectBase.makeTokenTable's addToCombat (TokenEffectBase.java:188),
 				// which CopyPermanentEffect inherits.
 				if err := g.addToCombatAttacking(controller, a, id, "TokenAttacking"); err != nil {
+					return fmt.Errorf("engine: CopyPermanent: %w", err)
+				}
+				if err := g.addToCombatBlocking(controller, a, id, "TokenBlocking"); err != nil {
 					return fmt.Errorf("engine: CopyPermanent: %w", err)
 				}
 				if hasParam(a, "RememberTokens") {

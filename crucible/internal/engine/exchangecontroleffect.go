@@ -7,11 +7,12 @@ import "fmt"
 // exchangeControlUnresolvedParams: target-selection restrictions targeting.go
 // does not enforce, and Charm's ModeCost$ linkage. TargetsWithSharedCardType$,
 // TargetsWithSharedTypes$, TargetsWithRelatedProperty$,
-// TargetsWithDefinedController$ and TargetingPlayer$ are enforced when the
-// targets are chosen (targeting.go), so they no longer refuse here.
+// TargetsWithDefinedController$, TargetingPlayer$ and TargetsAtRandom$ are
+// enforced when the targets are chosen (targeting.go), so they no longer
+// refuse here.
 var exchangeControlUnresolvedParams = [...]string{
 	"TargetsWithSameCardType", "TargetsWithDifferentControllers",
-	"TargetsAtRandom", "ModeCost",
+	"ModeCost",
 	"Condition", "SorcerySpeed",
 }
 

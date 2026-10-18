@@ -77,7 +77,11 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 		// (TargetSelection.java:84, 117-120).
 		return true
 	}
-	chosen := controller.ChooseTargets(g, decider, choice.candidates, choice.min, choice.max)
+	chosen, err := g.chooseTargets(controller, a, choice)
+	if err != nil {
+		a.targetsErr = err
+		return true
+	}
 	a.Targets = g.trimTargetSet(a, chosen)
 	a.recordForEachControllers(g)
 	if cards := len(a.Targets); cards < len(chosen) && cards < choice.min {
@@ -94,6 +98,50 @@ func (g *Game) resolveTargets(controller PlayerController, a *Ability) bool {
 	}
 	a.divided = divided
 	return true
+}
+
+// chooseTargets is TargetSelection.chooseTargets' choice among choice's
+// candidates for a, whose targets are being chosen for the first time
+// (numTargets == null, TargetSelection.java:123): with TargetsAtRandom$
+// (TargetRestrictions.java:202-204) the game picks them at random
+// (randomTargets) and nobody is asked; otherwise choice.targeter is asked.
+func (g *Game) chooseTargets(controller PlayerController, a *Ability, choice targetChoice) ([]EntityID, error) {
+	if _, random := a.Params.Param("TargetsAtRandom"); random {
+		return g.randomTargets(a, choice)
+	}
+	return controller.ChooseTargets(g, choice.targeter, choice.candidates, choice.min, choice.max), nil
+}
+
+// randomTargets is TargetSelection.java:123-137: num targets drawn one at a
+// time from the candidates in getAllCandidates' order, each removed once
+// drawn (Aggregates.random over a List: no draw for a single candidate,
+// randomIndex). num is TargetMin$, or with RandomNumTargets$
+// (TargetRestrictions.java:205-207) Aggregates.randomInt between TargetMin$
+// (at least 1) and the lesser of TargetMax$ and the candidate count. A
+// random count whose lower bound exceeds its upper one makes Java's nextInt
+// throw; here it is an error. Java's AI picks such targets its own way per
+// API (DamageDealAi.java:466, ControlGainAi.java:96); this is the rules'
+// "chosen at random", the same for every controller.
+func (g *Game) randomTargets(a *Ability, choice targetChoice) ([]EntityID, error) {
+	candidates := append([]EntityID(nil), choice.candidates...)
+	num := choice.min
+	if _, randomNum := a.Params.Param("RandomNumTargets"); randomNum {
+		top, bot := min(len(candidates), choice.max), max(choice.min, 1)
+		if top < bot {
+			return nil, fmt.Errorf("RandomNumTargets$ between %d and %d not resolvable", bot, top)
+		}
+		num = g.randomInt(bot, top)
+	}
+	var out []EntityID
+	for range num {
+		i := g.randomIndex(len(candidates))
+		if i < 0 {
+			break
+		}
+		out = append(out, candidates[i])
+		candidates = slices.Delete(candidates, i, i+1)
+	}
+	return out, nil
 }
 
 // inAbilityContext makes a the ability in context (Game.resolving) until the

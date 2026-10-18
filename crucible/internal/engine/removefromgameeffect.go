@@ -30,20 +30,17 @@ func (removeFromGameEffect) Resolve(g *Game, a *Ability, _ PlayerController) err
 
 // ceaseToExist is GameAction.ceaseToExist(c, true): id leaves whatever zone
 // it is in -- the stack included, dropping the spell -- for ZoneType None,
-// with no zone-change trigger.
+// with no zone-change trigger. On the stack only the spell goes
+// (GameAction.java:970-972 calls MagicStack.remove(Card), MagicStack.java:
+// 799-805, which removes spell items alone): a triggered or activated ability
+// whose source is the card stays and resolves on its own.
 func (g *Game) ceaseToExist(id CardID) {
 	c := g.Card(id)
 	if c.Zone == None {
 		return
 	}
 	if c.Zone == Stack {
-		kept := g.stack[:0]
-		for _, s := range g.stack {
-			if s.Source != id {
-				kept = append(kept, s)
-			}
-		}
-		g.stack = kept
+		g.removeSpellFromStack(id)
 	}
 	if c.Zone == Battlefield {
 		g.removeFromCombat(id)

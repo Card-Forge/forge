@@ -75,7 +75,9 @@ func (g *Game) Blocks() []Block { return g.combat.Blocks }
 // the first Blocks trigger, AttackerBlockedOnce after the last AttackerBlocked.
 // The unblocked-attacker triggers (AttackerUnblocked, AttackerUnblockedOnce)
 // run before all of them, as Java runs Combat.fireTriggersForUnblockedAttackers
-// first (PhaseHandler.java:746).
+// first (PhaseHandler.java:746). That order is the order the triggers are
+// found; all of them go to the stack together, in one APNAP pass, when the
+// trigger batch around them closes (beginTriggerBatch).
 func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, error) {
 	attackers := g.combat.Attackers
 	if len(attackers) == 0 {
@@ -132,6 +134,10 @@ func (g *Game) DeclareCombatBlockers(controller PlayerController) ([]Block, erro
 	g.combat.blockDecided = append(g.combat.blockDecided, attackers...)
 	blockersByAttacker := map[CardID][]CardID{}
 	var blockedAttackers []CardID
+	// Every mode below goes to the stack in one APNAP pass
+	// (beginTriggerBatch): Java runs them all into one simultaneous list.
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
 	// PhaseHandler.java:746: Combat.fireTriggersForUnblockedAttackers runs
 	// first, once every attacker is blocked or unblocked (blockDecided).
 	g.checkUnblockedTriggers(controller)

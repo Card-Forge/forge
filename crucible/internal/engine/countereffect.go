@@ -93,13 +93,12 @@ func (counterEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 		if g.counterReplaced(controller, a, id, causeSpell) {
 			continue
 		}
-		kept := g.stack[:0]
-		for _, s := range g.stack {
-			if s.Source != id {
-				kept = append(kept, s)
-			}
-		}
-		g.stack = kept
+		// CounterEffect.removeFromStack's game.getStack().remove(si)
+		// (CounterEffect.java:258): the spell's own item leaves the stack, and
+		// nothing else -- a cast trigger whose source is the spell's card stays
+		// and still resolves (MagicStack.remove(Card), MagicStack.java:799-805,
+		// keeps abilities the same way).
+		g.removeSpellFromStack(id)
 		switch dest {
 		case "Graveyard":
 			g.moveByEffect(controller, id, Graveyard, 0, NoPlayer, false)

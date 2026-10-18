@@ -80,6 +80,11 @@ func (g *Game) DeclareCombatAttackers(controller PlayerController) ([]CardID, er
 
 	g.combat.Attackers = attackers
 	g.combat.AttackTargets = targets
+	// One batch for every mode the declaration runs (Taps, Exerted, Attacks,
+	// AttackersDeclared...): Java collects them all before any reaches the
+	// stack (beginTriggerBatch).
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
 	for _, id := range attackers {
 		if !g.Card(id).HasKeyword("Vigilance") {
 			g.Card(id).Tapped = true

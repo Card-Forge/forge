@@ -30,7 +30,7 @@ var contextHeads = map[string]bool{
 	"Targeted": true, "ParentTargeted": true, "TriggeredCard": true, "TriggeredAttacker": true, "TriggeredBlocker": true,
 	"TriggeredSource": true, "TriggerRemembered": true, "Sacrificed": true, "Exiled": true, "Discarded": true,
 	"Collected": true, "Revealed": true, "TriggerObjectsAttackers": true, "TriggeredExploited": true,
-	"TriggeredDevoured": true,
+	"TriggeredDevoured": true, "CardTriggeredTarget": true,
 }
 
 // listHeadCards is the card list an amount head names, in calculateAmount's
@@ -140,7 +140,8 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 	// list holds the battlefield Card object, which the move to the graveyard
 	// replaced with a copy (GameAction.java:207).
 	lki := head == "Sacrificed" || head == "Exiled" || head == "TriggeredCard" || head == "TriggerRemembered" ||
-		head == "TriggerObjectsAttackers" || head == "TriggeredExploited" || head == "TriggeredDevoured"
+		head == "TriggerObjectsAttackers" || head == "TriggeredExploited" || head == "TriggeredDevoured" ||
+		head == "CardTriggeredTarget"
 	return g.cardsOf(ids, lki), true
 }
 
@@ -212,6 +213,15 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 		if id, isCard := a.triggered.source.AsCard(); isCard {
 			ids = []CardID{id}
 		}
+	case "CardTriggeredTarget":
+		// AbilityUtils.java:702-707: AbilityKey.Target read as a card
+		// ("CardTriggered" bypasses keys that could be a player). An
+		// unrecorded or player target is no card: unresolved (GO-7).
+		id, isCard := a.triggered.target.AsCard()
+		if !isCard {
+			return nil, false
+		}
+		ids = []CardID{id}
 	case "TriggerRemembered":
 		// SpellAbility.getTriggerRemembered, its cards only.
 		for _, e := range a.TriggerRemembered {

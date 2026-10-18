@@ -178,13 +178,11 @@ func (g *Game) counterReplaced(controller PlayerController, cause *Ability, spel
 				return
 			}
 			out = append(out, replacementCandidate{host: h, rule: r, apply: func() replacementResult {
-				kept := g.stack[:0]
-				for _, s := range g.stack {
-					if s.Source != spell {
-						kept = append(kept, s)
-					}
-				}
-				g.stack = kept
+				// The ReplaceWith$ ChangeZone's Origin$ Stack move takes the
+				// spell off with MagicStack.remove(Card) (ChangeZoneEffect.java:
+				// 577-579, MagicStack.java:799-805): its items alone, never a
+				// cast trigger of the same card.
+				g.removeSpellFromStack(spell)
 				if err := g.runReplacementChain(controller, h, amounts, sub, &replacementEvent{result: replacementReplaced, card: spell}); err != nil {
 					g.recordPendingError(err)
 				}

@@ -76,6 +76,9 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		}
 		return g.thisTurnEnteredCount(sourceController, source, text)
 	}
+	if strings.Contains(count.Head, "DamageThisTurn") {
+		return g.damageThisTurnCount(sourceController, source, count)
+	}
 	switch count.Head {
 	case "Intensity":
 		// AbilityUtils.java:2094: Card.getIntensity(true), the host's own.
@@ -290,6 +293,13 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 			return 0, false
 		}
 		return g.Card(source).damageDealtThisTurn, true
+	case "ExcessDamageReceivedThisTurn":
+		// AbilityUtils.java:2406-2408: Card.getExcessDamageThisTurn, the
+		// excess the host was dealt this turn (Damage.ExcessReceived).
+		if source == NoCard {
+			return 0, false
+		}
+		return g.Card(source).Damage.ExcessReceived, true
 	case "LifeYouGainedThisTurn":
 		return g.Player(sourceController).LifeGainedThisTurn, true
 	case "CreaturesAttackedThisTurn":
@@ -716,6 +726,110 @@ func (g *Game) lastStateCount(sourceController PlayerID, source CardID, count ex
 	for _, id := range snapshot {
 		if Matches(g, g.Card(id), spec, sourceController, source) {
 			n++
+		}
+	}
+	return n, true
+}
+
+// damageThisTurnCount is xCount's DamageThisTurn branch (AbilityUtils.java:
+// 2434-2450) for `Count$[Num|Max][NonCombat|Combat]DamageThisTurn <validSource>
+// <validTarget>`: Game.getDamageDoneThisTurn (Game.java:1334-1350) sums, per
+// source, the damage of this turn's instances whose source copy matches
+// validSource and whose target -- the player, or the card's copy as it was
+// dealt the damage (cardDamage) -- matches validTarget
+// (CardDamageHistory.java:259-281), keeping each source with a nonzero sum.
+// "Num" is how many sources those are, "Max" the largest sum, anything else
+// their total; "CombatDamage" restricts to combat damage and "NonCombat..." to
+// the rest. The names are read off the text before the first `.`, as Java
+// reads sq[0]. Both valid strings are matched from the host's controller.
+//
+// Java's CardDamageHistory belongs to the source card object, which its LKI
+// copies share; sources are grouped by CardID here, which a zone change does
+// not renew (ADR-0009). The heads Java catches in earlier branches
+// (TotalDamageThisTurn, MaxOppDamageThisTurn, MaxCombatDamageThisTurn,
+// SingleMaxDamageThisTurn) are not this branch and stay unresolved, as is a
+// player target whose valid string matchesPlayerSpec cannot read.
+func (g *Game) damageThisTurnCount(sourceController PlayerID, source CardID, count expr.Count) (int, bool) {
+	text := count.Head
+	if count.Argument != "" {
+		text += " " + count.Argument
+	} else if len(count.Parameters) > 0 {
+		text += "." + strings.Join(count.Parameters, ".")
+	}
+	sq0, _, _ := strings.Cut(text, ".")
+	switch {
+	case strings.Contains(sq0, "TotalDamageThisTurn"), sq0 == "MaxOppDamageThisTurn",
+		sq0 == "MaxCombatDamageThisTurn", sq0 == "SingleMaxDamageThisTurn":
+		return 0, false
+	}
+	props := strings.Split(text, " ")
+	if len(props) < 3 || source == NoCard {
+		return 0, false
+	}
+	combatOnly, nonCombatOnly := false, false
+	if strings.Contains(sq0, "CombatDamage") {
+		nonCombatOnly = strings.Contains(sq0, "Non")
+		combatOnly = !nonCombatOnly
+	}
+	kindMatches := func(combat bool) bool {
+		return (!combatOnly || combat) && (!nonCombatOnly || !combat)
+	}
+	sourceSpec, tgtText := valid.Parse(props[1]), props[2]
+	parsedTarget := valid.Parse(tgtText)
+	type sourceSum struct {
+		id  CardID
+		sum int
+	}
+	var sums []sourceSum
+	add := func(id CardID, n int) {
+		for i := range sums {
+			if sums[i].id == id {
+				sums[i].sum += n
+				return
+			}
+		}
+		sums = append(sums, sourceSum{id: id, sum: n})
+	}
+	// A target spec naming no player base (Creature.Other) matches no player,
+	// as Player.isValid answers; matchesPlayerSpec reports that as unreadable.
+	playerBase := false
+	for _, alt := range strings.Split(tgtText, ",") {
+		base, _, _ := strings.Cut(alt, ".")
+		if _, ok := matchesPlayerBase(NoPlayer, NoPlayer, base); ok {
+			playerBase = true
+		}
+	}
+	for i := range g.playerDamageThisTurn {
+		d := &g.playerDamageThisTurn[i]
+		if !playerBase || !kindMatches(d.combat) || !Matches(g, &d.source, sourceSpec, sourceController, source) {
+			continue
+		}
+		matched, ok := matchesPlayerSpec(g, d.target, sourceController, source, tgtText)
+		if !ok {
+			return 0, false
+		}
+		if matched {
+			add(d.source.ID, d.amount)
+		}
+	}
+	for i := range g.cardDamageThisTurn {
+		d := &g.cardDamageThisTurn[i]
+		if kindMatches(d.combat) && Matches(g, &d.source, sourceSpec, sourceController, source) &&
+			Matches(g, &d.target, parsedTarget, sourceController, source) {
+			add(d.source.ID, d.amount)
+		}
+	}
+	n := 0
+	switch {
+	case strings.Contains(sq0, "Max"):
+		for _, s := range sums {
+			n = max(n, s.sum)
+		}
+	case strings.HasPrefix(sq0, "Num"):
+		n = len(sums)
+	default:
+		for _, s := range sums {
+			n += s.sum
 		}
 	}
 	return n, true

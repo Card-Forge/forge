@@ -1,0 +1,23 @@
+# Brimaz, King of Oreskos blocks Craw Wurm (6/4). Its AttackerBlocked trigger
+# creates a 1/1 Cat Soldier "that's blocking that creature" (TokenBlocking$
+# TriggeredAttacker): SpellAbilityEffect.addToCombat's blocking half
+# (SpellAbilityEffect.java:795-829) adds the token as a blocker of the Wurm
+# with no legality check. The Wurm is already blocked, so AttackerBlocked does
+# not run again (no second token). In the damage step the Wurm assigns all 6
+# to Brimaz (queue damage names fixture cards only; the token gets none), and
+# Brimaz's 3 plus the Cat Soldier's 1 kill the 4-toughness Wurm -- the token
+# dealt combat damage as a blocker.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks 2=1
+declareblockers
+resolvestack
+advance
+advance
+queue damage 2=6
+combatdamage
+# The end of combat step's state-based check puts the dead in graveyards.
+advance

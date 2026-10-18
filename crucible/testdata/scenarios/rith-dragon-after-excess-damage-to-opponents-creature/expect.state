@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=End of Turn
+humanlife=20
+humanbattlefield=Rith, Liberated Primeval|Id:1;Craw Wurm|Id:2|Tapped|Damage:2;T:r_4_4_dragon_flying|SummonSick
+ailife=20
+aigraveyard=Grizzly Bears

@@ -287,6 +287,11 @@ func perCardMeasure(head string) (func(*Card) int, bool) {
 	if head == "CardManaCost" {
 		return func(c *Card) int { return c.CMC() }, true
 	}
+	if head == "ExcessDamageReceivedThisTurn" {
+		// xCount per card (AbilityUtils.java:2406-2408): Card.logExcessDamage's
+		// running total.
+		return func(c *Card) int { return c.Damage.ExcessReceived }, true
+	}
 	if kind, ok := strings.CutPrefix(head, "CardCounters."); ok && kind != "" && !strings.Contains(kind, ".") {
 		if kind == "ALL" {
 			return func(c *Card) int { return c.Counters.Total() }, true

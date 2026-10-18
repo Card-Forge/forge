@@ -693,10 +693,9 @@ func isBlocksTrigger(t *compile.Ability) bool {
 // after the declaration passed validation and
 // checkBlocksTriggers/checkAttackerBlockedByCreatureTriggers have both
 // already run for each -- CR 509.2 groups every "blocks"/"becomes blocked"
-// trigger as one simultaneous event, but this port fires each shape as its
-// own separate APNAP pass the same way checkAttacksTriggers and
-// checkAttackersDeclaredTrigger already are for the declare-attackers step,
-// rather than collecting every shape at once. No own/other split is
+// trigger as one simultaneous event: DeclareCombatBlockers opens a trigger
+// batch (beginTriggerBatch) around every mode it runs, so all of them reach
+// the stack in one APNAP pass, as the declare-attackers modes do. No own/other split is
 // needed: TriggerAttackerBlocked itself never special-cases the attacker's
 // own trigger, the identical reason checkBlocksTriggers needs none.
 //
@@ -1023,6 +1022,10 @@ type damageEntry struct {
 	// GameAction.java:2750-2752): what batchExcess subtracts. 0 for a
 	// player target.
 	Lethal int
+	// Record is 1 + the index of this entry's Game.cardDamageThisTurn record
+	// for a card target, 0 for none: triggerExcessDamage writes the batch's
+	// excess outcome onto that record's target copy.
+	Record int
 }
 
 type damageTable []damageEntry
@@ -2215,6 +2218,12 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 		}
 		matches = stacked
 	}
+	// Inside a trigger batch (beginTriggerBatch) the matches wait for the
+	// batch's one APNAP pass, with every other mode the same event runs.
+	if g.triggerBatchDepth > 0 {
+		g.triggerBatch = append(g.triggerBatch, matches...)
+		return
+	}
 	// A trigger a cast's cost fired (Emerge's or an additional cost's
 	// sacrifice, a discard) waits until the spell is on the stack, then goes
 	// above it (holdCastTriggers, leftto.go).
@@ -2243,6 +2252,37 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 			batch = append(batch, g.crimeTriggers(pushed)...)
 			g.pushTriggeredAbilities(controller, batch)
 		}
+	}
+}
+
+// beginTriggerBatch opens a trigger batch: until the matching
+// endTriggerBatch, pushTriggeredAbilities collects the stack-bound triggers
+// it is handed instead of pushing them (Static$ True triggers still run at
+// once). An event that runs several trigger modes -- declaring attackers or
+// blockers, a token entering blocking -- opens one around all of them, so
+// their triggers reach the stack in one CR 603.3b APNAP pass, every one of the
+// active player's under every one of the next player's, as Java's
+// simultaneousStackEntryList does (TriggerHandler.runSingleTrigger adds each to
+// it; MagicStack.addAllTriggeredAbilitiesToStack, MagicStack.java:855-880,
+// orders it per player). Without a batch each mode's check pushed its own APNAP
+// pass, so a non-active player's trigger of an earlier mode ended up under the
+// active player's trigger of a later one. Batches nest; the outermost closes.
+func (g *Game) beginTriggerBatch() { g.triggerBatchDepth++ }
+
+// endTriggerBatch closes a batch beginTriggerBatch opened. Closing the
+// outermost one pushes everything it collected, in the order the checks found
+// it, through pushTriggeredAbilities' APNAP pass. Triggers that pass itself
+// raises (BecomesTarget, ward, crimes) are Java's next round and go on the
+// stack as they are found, outside the batch.
+func (g *Game) endTriggerBatch(controller PlayerController) {
+	g.triggerBatchDepth--
+	if g.triggerBatchDepth > 0 {
+		return
+	}
+	batch := g.triggerBatch
+	g.triggerBatch = nil
+	if len(batch) > 0 {
+		g.pushTriggeredAbilities(controller, batch)
 	}
 }
 

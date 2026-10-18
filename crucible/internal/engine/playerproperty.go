@@ -36,6 +36,22 @@ func (g *Game) recordPlayerDamage(source CardID, target PlayerID, amount int, co
 		playerDamage{source: *g.Card(source), target: target, amount: amount, combat: combat})
 }
 
+// logCardDamage logs amount of damage source dealt the card target
+// (CardDamageHistory.registerDamage, CardDamageHistory.java:236-254, and
+// Game.addGlobalDamageHistory's LKI pair, Game.java:1357-1360), answering 1 +
+// the record's index for the batch's damageEntry (0 for nothing logged:
+// registerDamage ignores damage of zero or less). The target copy's excess
+// flag starts false (cardDamage's doc comment).
+func (g *Game) logCardDamage(source, target CardID, amount int, combat bool) int {
+	if amount <= 0 {
+		return 0
+	}
+	rec := cardDamage{source: *g.Card(source), target: *g.Card(target), amount: amount, combat: combat}
+	rec.target.Damage.ExcessThisTurn = false
+	g.cardDamageThisTurn = append(g.cardDamageThisTurn, rec)
+	return len(g.cardDamageThisTurn)
+}
+
 // recordSacrificed is Player.addSacrificedThisTurn: a last-known copy of id,
 // taken while it is still on the battlefield, added to pid's sacrifices of
 // the turn.

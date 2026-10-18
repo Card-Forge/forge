@@ -66,6 +66,14 @@ func (g *Game) checkAttackerBlockedOnceTriggers(controller PlayerController, blo
 			blocked = append(blocked, a)
 		}
 	}
+	g.runAttackerBlockedOnce(controller, blocked)
+}
+
+// runAttackerBlockedOnce runs Mode$ AttackerBlockedOnce with AbilityKey.Attackers
+// blocked, nothing when it is empty: the declaration's blocked attackers
+// (checkAttackerBlockedOnceTriggers), or the one attacker an effect's creature
+// starts blocking (addToCombatBlocking, SpellAbilityEffect.java:808-812).
+func (g *Game) runAttackerBlockedOnce(controller PlayerController, blocked []CardID) {
 	if len(blocked) == 0 {
 		return
 	}

@@ -362,12 +362,15 @@ func (g *Game) dealPermanentDamage(controller PlayerController, source, target C
 		flags |= FlagDeathtouch
 	}
 	g.sink.Emit(Event{Kind: DamageDealt, Source: source, Target: CardEntity(target), Amount: int32(amount), Flags: flags})
+	// CardDamageHistory.registerDamage (GameAction.java:2757): logged after
+	// the damage is applied, with copies of source and target as they are now.
+	record := g.logCardDamage(source, target, amount, isCombat)
 	g.checkDamageDoneTriggersToCard(controller, source, target, amount, isCombat)
 	// Through addCardCounters, so the -1/-1 counters fire CounterAdded and
 	// enter the turn's counter record like any other placement.
 	g.addCardCounters(controller, g.Card(source).Controller(), source, target, M1M1, witherCounters)
 	if table != nil {
-		*table = append(*table, damageEntry{Source: source, Target: CardEntity(target), Amount: amount, Lethal: lethal})
+		*table = append(*table, damageEntry{Source: source, Target: CardEntity(target), Amount: amount, Lethal: lethal, Record: record})
 	}
 }
 

@@ -19,6 +19,10 @@ type Damage struct {
 	// damage is marked (dealPermanentDamage), so a DamageDone trigger of the
 	// same batch already sees it.
 	ExcessThisTurn bool
+	// ExcessReceived is the excess damage the card was dealt this turn, summed
+	// over every damage batch (Card.logExcessDamage, Card.java:6193-6195):
+	// Count$ExcessDamageReceivedThisTurn reads it.
+	ExcessReceived int
 	// Sources are the cards that dealt damage to this one this turn, in
 	// order (Card.getDamageReceivedThisTurn's source half): the "DamagedBy"
 	// valid property reads them.
@@ -42,11 +46,11 @@ func (d *Damage) Mark(amount int, deathtouch bool) {
 func (d *Damage) Clear() { *d = Damage{} }
 
 // Heal is Clear for a heal or a regeneration (Card.healDamage,
-// Card.java:6181-6185): the excess flag stays for the rest of the turn,
-// since only the cleanup step resets it (Card.resetExcessDamage, :7285), and
-// so do the sources: healDamage clears the marked damage and the assigned
-// damage map, never damageReceivedThisTurn (GameEntity.java:56), which
-// DamagedBy and wasDealtDamageThisTurn read.
+// Card.java:6181-6185): the excess flag and total stay for the rest of the
+// turn, since only the cleanup step resets them (Card.resetExcessDamage,
+// :6202-6205, called at :7285), and so do the sources: healDamage clears the marked damage and
+// the assigned damage map, never damageReceivedThisTurn (GameEntity.java:56),
+// which DamagedBy and wasDealtDamageThisTurn read.
 func (d *Damage) Heal() {
-	*d = Damage{ExcessThisTurn: d.ExcessThisTurn, Sources: d.Sources}
+	*d = Damage{ExcessThisTurn: d.ExcessThisTurn, ExcessReceived: d.ExcessReceived, Sources: d.Sources}
 }

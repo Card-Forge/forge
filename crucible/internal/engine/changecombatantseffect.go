@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow control game ability effecthelpers card condition defined zone id valid
+//enginelint:allow control game ability effecthelpers card condition defined zone id valid trigger combat blockeffect phase
 
 import (
 	"fmt"
@@ -126,4 +126,95 @@ func (g *Game) addToCombatAttacking(controller PlayerController, a *Ability, id 
 		}
 	}
 	return g.attackAmong(controller, a.Controller, id, defs)
+}
+
+// addToCombatBlocking is SpellAbilityEffect.addToCombat's blocking half
+// (SpellAbilityEffect.java:795-829) for the creature id an effect of a just
+// put onto the battlefield, read from param (TokenBlocking$): only a creature,
+// only during combat (:761). The attacker is the first card the param's
+// Defined$ names from the host (TriggeredAttacker, Targeted, Imprinted); id
+// blocks it when id's controller is that attacker's defending player
+// (Combat.getDefenderPlayerByAttacker, :797). Nothing checks the block's
+// legality -- Java calls neither canBlock nor validateBlocks -- and the pair is
+// not recorded as blocked this turn (only declareBlockersTurnBasedAction and
+// BlockEffect record that). The new blocker goes last in the attacker's
+// damage assignment order (Combat.addBlockerToDamageAssignmentOrder without
+// legacy ordering), which is g.combat.Blocks' order.
+//
+// Triggers, in Java's order and as one batch (beginTriggerBatch):
+// AttackerBlockedByCreature for the pair, AttackerBlockedOnce with this
+// attacker alone (:808-812), and -- only for an attacker that was not blocked
+// before -- AttackerBlocked with every blocker it now has (:815-823), which
+// also decides its blocked status (setBlocked). Blocks and BlockersDeclared do
+// not run. Brimaz's own token blocks an attacker Brimaz already blocks, so
+// only the first two run for it.
+//
+// An attacker that is no longer attacking is skipped: Java's
+// getDefenderPlayerByAttacker returns null there and :797's .equals throws
+// (a Forge defect, PORT-8), where the rule (CR 506.4) is that a creature
+// removed from combat cannot be blocked. A block before blockers are declared
+// is refused: DeclareCombatBlockers would replace it, and no corpus line
+// reaches it (every TokenBlocking$ resolves in or after the declare blockers
+// step).
+func (g *Game) addToCombatBlocking(controller PlayerController, a *Ability, id CardID, param string) error {
+	raw, ok := a.Params.Param(param)
+	if !ok {
+		return nil
+	}
+	c := g.Card(id)
+	if !g.activePhase.IsCombat() || c.Zone != Battlefield || !c.Type().Has(cardtype.Creature) {
+		return nil
+	}
+	cards, err := definedCards(g.Card(a.Source), raw, a.refs())
+	if err != nil {
+		return fmt.Errorf("%s$: %w", param, err)
+	}
+	if len(cards) == 0 {
+		return nil
+	}
+	attacker := cards[0]
+	defender, attacking := g.defenderPlayerByAttacker(attacker)
+	if !attacking || defender != c.Controller() {
+		return nil
+	}
+	if g.activePhase < DeclareBlockers {
+		return fmt.Errorf("%s$ before blockers are declared not resolvable yet", param)
+	}
+	wasBlocked := g.combat.isBlocked(attacker)
+	pair := Block{Blocker: id, Attacker: attacker}
+	g.combat.Blocks = append(g.combat.Blocks, pair)
+	g.beginTriggerBatch()
+	defer g.endTriggerBatch(controller)
+	g.checkAttackerBlockedByCreatureTriggers(controller, pair)
+	g.runAttackerBlockedOnce(controller, []CardID{attacker})
+	if !wasBlocked {
+		g.checkAttackerBlockedTriggers(controller, attacker, g.blockersOf(attacker))
+		if !containsCard(g.combat.blockDecided, attacker) {
+			g.combat.blockDecided = append(g.combat.blockDecided, attacker)
+		}
+	}
+	return nil
+}
+
+// defenderPlayerByAttacker is Combat.getDefenderPlayerByAttacker
+// (Combat.java:289-306): the player attacker attacks, the controller of the
+// planeswalker it attacks, or the protector of the battle it attacks; false
+// when it is not attacking (Java's null).
+func (g *Game) defenderPlayerByAttacker(attacker CardID) (PlayerID, bool) {
+	if !g.combat.isAttacking(attacker) {
+		return NoPlayer, false
+	}
+	target := g.combat.AttackTargets[attacker]
+	if pid, ok := target.AsPlayer(); ok {
+		return pid, true
+	}
+	cid, ok := target.AsCard()
+	if !ok {
+		return NoPlayer, false
+	}
+	d := g.Card(cid)
+	if d.Type().Has(cardtype.Battle) {
+		return d.ProtectingPlayer, true
+	}
+	return d.Controller(), true
 }

@@ -1,0 +1,21 @@
+# Rith, Liberated Primeval: "At the beginning of your end step, if a creature
+# or planeswalker an opponent controlled was dealt excess damage this turn,
+# create a 4/4 red Dragon". Its CheckSVar is Count$NumDamageThisTurn Card
+# Creature.OppCtrl+wasDealtExcessDamageThisTurn,... (AbilityUtils.java:
+# 2434-2450): the turn's damage records, each target matched as it was when
+# dealt the damage, with its batch's excess outcome (CardDamageTable.java:130).
+# Craw Wurm (6/4) is blocked by ai's Grizzly Bears (2/2): 4 excess. The Bears
+# die at end of combat; at human's end step the record still names an
+# opponent's creature dealt excess damage, so the Dragon is made.
+startturn human
+advance 5
+queue attackers 2
+declareattackers
+advance
+queue blocks 3=2
+declareblockers
+advance
+advance
+combatdamage
+advance 3
+resolvestack

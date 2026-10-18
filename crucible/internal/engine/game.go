@@ -186,6 +186,12 @@ type Game struct {
 	// the wasDealt...ThisTurnBy player properties read it (playerproperty.go).
 	// Cleared at cleanup (Game.clearGlobalDamageHistory).
 	playerDamageThisTurn []playerDamage
+	// cardDamageThisTurn is the card-target half: every instance of damage
+	// dealt to a card this turn, in order, with last-known copies of its
+	// source and target (Game.damageThisTurnLKI's pair). The Count$
+	// ...DamageThisTurn family reads both halves (damageThisTurnCount,
+	// amountheads.go). Cleared at cleanup with playerDamageThisTurn.
+	cardDamageThisTurn []cardDamage
 	// sacrificedThisTurn is every player's Player.sacrificedThisTurn in one
 	// list: a last-known copy of each permanent sacrificed this turn, in
 	// order, as it stood on the battlefield (GameAction.sacrifice's
@@ -204,10 +210,19 @@ type Game struct {
 
 	// stack is CR 405's stack of resolvable abilities, last on first off (the
 	// last element is the top). Distinct from the Stack ZoneType a spell's
-	// own card occupies -- Zone(Stack, NoPlayer) tracks where the card is,
-	// this tracks resolution order, and nothing yet moves a card there or
-	// pushes an ability here (stack.go).
+	// own card occupies -- Zone(Stack, owner) tracks where the card is (put
+	// keys every zone by the card's owner), this tracks resolution order
+	// (stack.go). A spell is the item marked spell whose Source is its card.
 	stack []Ability
+
+	// triggerBatch holds the triggered abilities found while a batch is open
+	// (triggerBatchDepth > 0, beginTriggerBatch, trigger.go): the matches of
+	// every mode one event runs, put on the stack together in one APNAP pass
+	// when the outermost batch closes -- Java's simultaneousStackEntryList
+	// (MagicStack.java:851-880) for the events that run several modes at
+	// once. Empty outside a batch.
+	triggerBatch      []Ability
+	triggerBatchDepth int
 
 	// combat is CR 506-510's combat state, starting with CR 508's declared
 	// attackers (combat.go, attack.go). Zero-valued when no combat is in
@@ -1399,6 +1414,10 @@ func (g *Game) Clone() *Game {
 		// the real sink would record imagined casts as real.
 		sink:  DiscardSink{},
 		stack: append([]Ability(nil), g.stack...),
+		// Empty outside a synchronous engine call (beginTriggerBatch), so
+		// both copy to nothing in practice; carried for completeness.
+		triggerBatch:      append([]Ability(nil), g.triggerBatch...),
+		triggerBatchDepth: g.triggerBatchDepth,
 		// Carried so the clone's next push gets an ID no item already on
 		// its stack has (ADR-0018: a StackItemID is never reused within a
 		// game, and CopySpellAbility tells a copy from its original by it).
@@ -1433,6 +1452,7 @@ func (g *Game) Clone() *Game {
 		enteredThisTurn:       append([]zoneEntry(nil), g.enteredThisTurn...),
 		countersAddedThisTurn: append([]counterAddition(nil), g.countersAddedThisTurn...),
 		playerDamageThisTurn:  append([]playerDamage(nil), g.playerDamageThisTurn...),
+		cardDamageThisTurn:    append([]cardDamage(nil), g.cardDamageThisTurn...),
 		sacrificedThisTurn:    append([]sacrificeRecord(nil), g.sacrificedThisTurn...),
 		snowAnyColor:          g.snowAnyColor,
 		dayTime:               g.dayTime,
@@ -1574,6 +1594,20 @@ type playerDamage struct {
 	target PlayerID
 	amount int
 	combat bool
+}
+
+// cardDamage is one instance of damage dealt to a card: the source as it
+// stood when it dealt the damage, the target as it stood once dealt it, how
+// much and whether it was combat damage. The target copy's
+// Damage.ExcessThisTurn is not the card's own flag: Java's LKI copy does not
+// copy it (CardCopyService.java:331-333), and CardDamageTable.java:130 then
+// sets it to whether this damage batch dealt the card excess damage
+// (triggerExcessDamage) -- so Rith's "was dealt excess damage" counts an
+// instance whose own batch was excess, with the controller of that moment.
+type cardDamage struct {
+	source, target Card
+	amount         int
+	combat         bool
 }
 
 // sacrificeRecord is one entry of Game.sacrificedThisTurn: who sacrificed

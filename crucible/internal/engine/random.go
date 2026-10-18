@@ -22,6 +22,12 @@ func (g *Game) randomSample(n, count int) []int {
 	return out
 }
 
+// randomInt is Aggregates.randomInt (Aggregates.java:191-193): nextInt(hi -
+// lo + 1) + lo. The caller guarantees lo <= hi.
+func (g *Game) randomInt(lo, hi int) int {
+	return int(g.rand.Int32n(int32(hi-lo+1))) + lo
+}
+
 // randomIndex is Aggregates.random over a List of n: no draw for zero or one
 // element, otherwise nextInt(n). -1 when n is zero.
 func (g *Game) randomIndex(n int) int {
