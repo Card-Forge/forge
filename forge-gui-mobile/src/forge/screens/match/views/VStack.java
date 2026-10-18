@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -55,6 +57,8 @@ public class VStack extends FDropDown {
     public static final float MARGINS = Utils.scale(4);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final float ALPHA_COMPOSITE = 0.5f;
+    private static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.18f);
+    private static final Color GLASS_PANE = new Color(35 / 255f, 40 / 255f, 44 / 255f, 0.6f);
     private static final TextRenderer textRenderer = new TextRenderer(true);
 
     private StackInstanceDisplay activeItem;
@@ -65,6 +69,78 @@ public class VStack extends FDropDown {
     private final Map<Integer, StackInstanceDisplay> displayById = new HashMap<>(); // rebuilt on every layout
 
     public VStack() {
+    }
+
+    //compact layout: the stack slides in from, and back out to, the right edge of the screen
+    private static final float COMPACT_SLIDE_SECONDS = 0.18f;
+    private float compactSlide = 1f, compactSlideTarget = 1f, compactRestX;
+    private CompactSlideAnimation compactSlideAnimation;
+
+    private static final boolean COMPACT_SLIDE_ANIMATED = false; //the slide made some people dizzy, so the stack just appears
+
+    private static boolean slides() {
+        return COMPACT_SLIDE_ANIMATED && VPlayerPanel.isCompactLayout();
+    }
+
+    @Override
+    public void show() {
+        if (!slides()) {
+            compactSlide = compactSlideTarget = 1f;
+            super.show();
+            return;
+        }
+        compactSlideTarget = 1f;
+        if (!isVisible()) {
+            compactSlide = 0f; //starts off screen
+            super.show();
+        } else {
+            update(); //was sliding away: bring it up to date
+        }
+        startCompactSlide();
+    }
+
+    @Override
+    public void hide() {
+        if (!slides() || !isVisible()) {
+            compactSlide = compactSlideTarget = 1f;
+            super.hide();
+            return;
+        }
+        compactSlideTarget = 0f;
+        startCompactSlide();
+    }
+
+    private void startCompactSlide() {
+        if (compactSlideAnimation == null) {
+            compactSlideAnimation = new CompactSlideAnimation();
+            compactSlideAnimation.start();
+        }
+    }
+
+    private void applyCompactSlide() {
+        setBounds(Math.round(compactRestX + (1f - compactSlide) * getWidth()), getTop(), getWidth(), getHeight());
+    }
+
+    private class CompactSlideAnimation extends ForgeAnimation {
+        @Override
+        protected boolean advance(float dt) {
+            final float step = dt / COMPACT_SLIDE_SECONDS;
+            if (compactSlide < compactSlideTarget) {
+                compactSlide = Math.min(compactSlideTarget, compactSlide + step);
+            } else {
+                compactSlide = Math.max(compactSlideTarget, compactSlide - step);
+            }
+            applyCompactSlide();
+            return compactSlide != compactSlideTarget;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            compactSlideAnimation = null;
+            if (compactSlideTarget <= 0f && isVisible()) {
+                VStack.super.hide(); //fully out of sight
+            }
+        }
     }
 
     @Override
@@ -113,7 +189,7 @@ public class VStack extends FDropDown {
             getMenuTab().setText(Forge.getLocalizer().getMessage("lblStack") + " (" + stackSize + ")");
 
             if (stackSize > 0) {
-                if (!isVisible()) {
+                if (!isVisible() || compactSlideTarget <= 0f) { //compact layout: also when it is sliding away
                     if (stackSize > oldStackSize) { //don't re-show stack if user hid it and then resolved an item on the stack
                         show();
                     }
@@ -192,6 +268,10 @@ public class VStack extends FDropDown {
     protected void updateSizeAndPosition() {
         if (!getRotate90()) {
             super.updateSizeAndPosition();
+            if (slides()) { //shift what the drop down placed by how far it has slid in
+                compactRestX = getLeft();
+                applyCompactSlide();
+            }
             return;
         }
         
@@ -210,6 +290,24 @@ public class VStack extends FDropDown {
     @Override
     protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
+    }
+
+    private static Color glassTint(Color c, float k) {
+        return new Color(c.r * k, c.g * k, c.b * k, 0.92f);
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        if (!VPlayerPanel.isCompactLayout()) { super.drawBackground(g); return; }
+        if (activeItem == null) { //empty stack: a frosted pane holds the label, otherwise the cards float over the match
+            g.fillRect(GLASS_PANE, 0, 0, getWidth(), getHeight());
+            g.drawRect(1, FDropDown.getBorderColor().getColor(), 0, 0, getWidth(), getHeight());
+        }
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        if (!VPlayerPanel.isCompactLayout()) { super.drawOverlay(g); }
     }
 
     @Override
@@ -264,7 +362,7 @@ public class VStack extends FDropDown {
 
     public class StackInstanceDisplay extends FDisplayObject {
         public final StackItemView stackInstance;
-        private final Color foreColor, backColor;
+        private final Color foreColor, backColor, backColor2; //backColor2: the far end of the gradient on glass cards
         private String text;
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
@@ -286,7 +384,14 @@ public class VStack extends FDropDown {
             final boolean isFaceDown = card.isFaceDown();
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(card.getCurrentState(), true); // otherwise doesn't work correctly for face down Morphs
             backColor = FSkinColor.fromRGB(color.r, color.g, color.b);
-            foreColor = FSkinColor.getHighContrastColor(backColor);
+            Color end = backColor; //multicolour cards blend from their first colour to their last
+            if (!isFaceDown) {
+                final List<DetailColors> all = CardDetailUtil.getBorderColors(card.getCurrentState(), true);
+                final DetailColors last = all.get(all.size() - 1);
+                end = FSkinColor.fromRGB(last.r, last.g, last.b);
+            }
+            backColor2 = end;
+            foreColor = VPlayerPanel.isFrosted() ? Color.WHITE : FSkinColor.getHighContrastColor(backColor); //glass cards are dark
 
             width -= CARD_WIDTH; //account for card picture
             width -= 3 * PADDING + 2 * BORDER_THICKNESS; //account for left and right insets and gap between picture and text
@@ -402,8 +507,18 @@ public class VStack extends FDropDown {
 
             g.startClip(0, 0, w, getHeight()); //clip based on actual height
 
-            final Color borderColor = picked ? FSelectionBox.CHOSEN_COLOR : isHovered() ? Color.GRAY : Color.BLACK;
-            g.fillRect(borderColor, x, y, w, h); //draw rectangle for border
+            final boolean glass = VPlayerPanel.isFrosted();
+            final Color borderColor = picked ? FSelectionBox.CHOSEN_COLOR : isHovered() ? Color.GRAY : glass ? GLASS_EDGE : Color.BLACK;
+            if (glass) { //frosted glass card: lively translucent colour gradient, outlined only when hovered or picked
+                final Color c1 = glassTint(backColor, 0.80f);
+                final Color c2 = backColor2.equals(backColor) ? glassTint(backColor, 0.50f) : glassTint(backColor2, 0.80f);
+                g.fillGradientRect(c1, c2, false, x, y, w, h);
+                if (picked || isHovered()) {
+                    g.drawRect(Math.max(1f, Utils.scale(1.5f)), picked ? FSelectionBox.CHOSEN_COLOR : FDropDown.getBorderColor().getColor(), x, y, w, h);
+                }
+            } else {
+                g.fillRect(borderColor, x, y, w, h); //draw rectangle for border
+            }
             if (pickable && !picked) { // same moving dashes as every other valid target, over the border ring
                 FSelectionBox.draw(g, BORDER_THICKNESS, x, y, w, h);
             }
@@ -412,7 +527,9 @@ public class VStack extends FDropDown {
             y += BORDER_THICKNESS;
             w -= 2 * BORDER_THICKNESS;
             h -= 2 * BORDER_THICKNESS;
-            g.fillRect(backColor, x, y, w, h);
+            if (!glass) {
+                g.fillRect(backColor, x, y, w, h);
+            }
             if (picked) { // chosen: a second solid frame inside the border so it is easy to see
                 FSelectionBox.drawChosen(g, BORDER_THICKNESS, x, y, w, h);
             }

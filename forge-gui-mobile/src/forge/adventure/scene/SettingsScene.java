@@ -355,6 +355,9 @@ public class SettingsScene extends UIScene {
         });
         addLabel(localizer.getMessage("lblCompactLayout"));
         settingGroup.add(compactLayout).align(Align.right).pad(2);
+        addCheckBox(localizer.getMessageorUseDefault("lblCompactHideMenu", "Hide Top Menu (Compact Layout)"), ForgePreferences.FPref.UI_COMPACT_HIDE_MENU, VPlayerPanel::reloadMenuHidden);
+        addCheckBox(localizer.getMessageorUseDefault("lblCompactZoneTabs", "Compact Zone Tabs (Landscape Mode)"), ForgePreferences.FPref.UI_COMPACT_ZONE_TABS, VPlayerPanel::reloadZoneOverlay);
+        addCheckBox(localizer.getMessageorUseDefault("lblFrostedStyle", "Frosted Style (Match Screen)"), ForgePreferences.FPref.UI_FROSTED_STYLE, VPlayerPanel::reloadFrosted);
         addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         String currentAnim;
         switch (CardFlightOverlay.style()) { // maps legacy "true"/"false" values too

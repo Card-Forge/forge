@@ -104,6 +104,11 @@ public class VPhaseIndicator extends FContainer {
     }
 
     //the colours a phase stop label uses: whether it is the current phase, and whether the game stops at it
+    private static final Color COMPACT_STOPS_BG = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.62f); //same glass as the player panel
+    private static final Color COMPACT_STOPS_EDGE = new Color(1f, 1f, 1f, 0.12f);
+    private static final Color COMPACT_BAND_ON = new Color(1f, 1f, 1f, 0.16f);
+    private static final Color COMPACT_BAND = new Color(1f, 1f, 1f, 0.07f);
+
     private static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
         final boolean adv = Forge.isMobileAdventureMode;
         if (active) {
@@ -128,20 +133,18 @@ public class VPhaseIndicator extends FContainer {
 
         final String text;
         final Color textColor;
-        if (myTurn) { //same colour the stop of the current phase has
+        if (myTurn) { //soft band, the text carries the stop colour
             final PhaseLabel label = phaseLabels.get(phase);
-            g.fillRect(getPhaseColor(true, label != null && label.stopAtPhase), 0, 0, w, h);
+            g.fillRect(expandTarget ? COMPACT_BAND_ON : COMPACT_BAND, 0, 0, w, h);
             text = getPhaseCaption(phase);
-            textColor = Color.BLACK;
+            textColor = getPhaseColor(true, label != null && label.stopAtPhase).getColor();
         } else {
-            g.fillRect(getPhaseColor(false, false), 0, 0, w, h);
+            g.fillRect(expandTarget ? COMPACT_BAND_ON : COMPACT_BAND, 0, 0, w, h);
             text = "--";
             textColor = player.getHasPriority() ? getPhaseColor(false, true).getColor() : IDLE_NAME_COLOR;
         }
         g.drawText(text, NAME_FONT, textColor, 0, 0, w, h, false, Align.center, true);
-        if (expandTarget) { //stops are open: outline the button so it reads as pressed
-            g.drawRect(Math.max(1f, Utils.scale(1.5f)), FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_TEXT : Colors.CLR_TEXT).getColor(), 0, 0, w, h);
-        }
+        //stops open: the band just lightens, no outline
     }
 
     //reused colour so the tint doesn't allocate a new FSkinColor every frame
@@ -207,14 +210,13 @@ public class VPhaseIndicator extends FContainer {
     private void drawCompactStops(Graphics g) {
         if (expand <= 0f) { return; }
         final float w = getWidth(), h = getHeight();
-        final FSkinColor backdrop = FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2);
         final float revealW = w * expand;
         final boolean right = onRight != null && onRight.getAsBoolean(); //opens towards the left of a right hand control column
         g.startClip(right ? w - revealW : 0, 0, revealW, h);
         try {
-            g.fillRect(tint(backdrop, 0.92f), 0, 0, w, h);
+            g.fillRect(COMPACT_STOPS_BG, 0, 0, w, h);
             super.draw(g);
-            g.drawLine(1, MatchScreen.getBorderColor(), right ? 0 : w, 0, right ? 0 : w, h);
+            g.drawLine(1, COMPACT_STOPS_EDGE, right ? 0 : w, 0, right ? 0 : w, h);
         } finally {
             g.endClip();
         }
@@ -472,6 +474,17 @@ public class VPhaseIndicator extends FContainer {
                 g.fillRect(YIELD_MARKER_COLOR, x, 0, w, h);
                 drawChevron(g, x, w, h);
                 // Skip the caption when marked — chevron replaces the phase abbreviation.
+            } else if (VPlayerPanel.isFrosted()) { //modern: soft translucent cells, the stop colour tints them
+                final Color tint = getPhaseColor(active, stopAtPhase).getColor();
+                final Color fill;
+                if (active && stopAtPhase) { fill = new Color(tint.r, tint.g, tint.b, 0.90f); }
+                else if (stopAtPhase) { fill = new Color(tint.r, tint.g, tint.b, 0.40f); }
+                else if (active) { fill = new Color(1f, 1f, 1f, 0.28f); }
+                else { fill = new Color(1f, 1f, 1f, 0.07f); }
+                final float gap = Math.max(1f, Utils.scale(1));
+                g.fillRect(isHovered() ? new Color(1f, 1f, 1f, 0.18f) : fill, x, gap, w, h - 2 * gap);
+                final Color text = active && stopAtPhase ? Color.BLACK : new Color(1f, 1f, 1f, active || stopAtPhase ? 0.95f : 0.55f);
+                g.drawText(caption, font, text, x, 0, w, h, false, Align.center, true);
             } else {
                 FSkinColor backColor;
                 if (active && stopAtPhase) {

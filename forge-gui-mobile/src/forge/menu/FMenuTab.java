@@ -2,6 +2,7 @@ package forge.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -71,6 +72,7 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
         }
         return true;
     }
+    public FDropDown getDropDown() { return dropDown; }
     public void hideDropDown() {
         if (dropDown.isVisible())
             dropDown.hide();
@@ -130,6 +132,8 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
         }
     }
 
+    boolean isGlass() { return menuBar.isGlass(); }
+
     public float getMinWidth() {
         if (iconOnly) {
             float multiplier = Forge.isLandscapeMode() ? 2.5f : 1.8f;
@@ -138,11 +142,51 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
         return minWidth;
     }
 
+    //frosted look: no filled block or border, a soft glow under the open tab with a thin accent line
+    private void drawGlass(Graphics g) {
+        final float w = getWidth(), h = getHeight();
+        final boolean open = dropDown.isVisible();
+        final Color accent = getSelBackColor().getColor();
+        if (open) {
+            g.fillGradientRect(new Color(accent.r, accent.g, accent.b, 0f),
+                    new Color(accent.r, accent.g, accent.b, 0.45f), true, 0, 0, w, h);
+            g.fillRect(new Color(accent.r, accent.g, accent.b, 1f), 0, h - Utils.scale(2), w, Utils.scale(2));
+        } else if (isHovered()) {
+            g.fillRect(new Color(1f, 1f, 1f, 0.08f), 0, 0, w, h);
+        }
+        if (flashStartMs > 0) { //unread message flash
+            long elapsed = System.currentTimeMillis() - flashStartMs;
+            if (elapsed < FLASH_DURATION_MS) {
+                g.fillRect(BADGE_COLOR.alphaColor(0.55f * (1f - (float) elapsed / FLASH_DURATION_MS)), 0, 0, w, h);
+                Gdx.graphics.requestRendering();
+            } else {
+                flashStartMs = 0;
+            }
+        }
+        if (index < menuBar.getTabCount() - 1) { //faint divider
+            g.drawLine(SEPARATOR_WIDTH, new Color(1f, 1f, 1f, 0.10f), w, h / 4, w, h - h / 4);
+        }
+        final float x = PADDING, y = PADDING, tw = w - 2 * PADDING, th = h - 2 * PADDING;
+        if (iconOnly) {
+            FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
+            float scaleW = tw * 0.8f;
+            float scaleH = scaleW * 0.6f;
+            g.drawImage(icon, x + tw / 2 - scaleW / 2, y + th / 2 - scaleH / 2, scaleW, scaleH);
+        } else {
+            g.drawText(text, FONT, open ? Color.WHITE : new Color(1f, 1f, 1f, 0.6f), x, y, tw, th, false, Align.center, true);
+        }
+        drawUnreadBadge(g, unreadCount, w);
+    }
+
     @Override
     public void draw(Graphics g) {
         float x, y, w, h;
 
         FSkinColor foreColor;
+        if (menuBar.isGlass()) {
+            drawGlass(g);
+            return;
+        }
         if (dropDown.isVisible()) {
             x = PADDING; //round so lines show up reliably
             y = PADDING;

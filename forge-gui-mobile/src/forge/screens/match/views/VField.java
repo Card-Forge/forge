@@ -272,6 +272,9 @@ public class VField extends FContainer {
         }
 
         @Override
+        protected void drawBackground(forge.Graphics g) { } //battlefield rows never get the zone backing
+
+        @Override
         protected boolean animateEntry() { return true; }
 
         @Override
