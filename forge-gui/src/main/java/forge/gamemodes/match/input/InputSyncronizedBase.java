@@ -1,6 +1,7 @@
 package forge.gamemodes.match.input;
 
 import forge.util.IHasForgeLog;
+import forge.gamemodes.match.Selection;
 import forge.gui.FThreads;
 import forge.gui.error.BugReporter;
 import forge.player.PlayerControllerHuman;
@@ -42,6 +43,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     @Override
     public final void stop() {
         onStop();
+        getController().getGui().setSelection(Selection.ofChosen(getController().getKeptMarks()));
 
         // ensure input won't accept any user actions.
         FThreads.invokeInEdtNowOrLater(this::setFinished);

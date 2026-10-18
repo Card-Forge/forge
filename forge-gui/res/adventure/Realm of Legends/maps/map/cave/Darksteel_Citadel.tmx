@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="100">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytVMENwyAM9DMVMAHpYsksNI9uU3WBtOk6VccoPJAoPhwT1dJJkYLvsH1mtESzI3rYNqb4f7QcUl6Zk8/V+ecIKXxD6ynkecDf0v2ciN4n/o049mK1/H6pB7PjXPeB6Dbw78SxuP0ateE7a+iNi/nFEhEiNmWf09nMsxi9Lponmlmrz0fm6y3XTTNaC6/3+DmfDYb3sQSqt+Z7WZljA7qonhZSZG/35rZ0NW9HXdcGeBHPBHYu76f27dDWUwZ6A7SBakHvrtavwej2CnGiPiDdUO1+mSvdU5pFrYu8Lfl5bxfKu+b+It1ePx/xzD/2SIOr4/gCMTp8IA==
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVEEOwjAM6zjvCX3GxFMHT+EdwIPYDpai4KRuhIQla9XWxGsSt6+tvS5jPtZvqjHsWz/eX49nhi3Iocb4/FtBd7QXeJr/exd1sxwVqLoV7EtrN0fgXCu6Nsd9yfcCtjcgcK7V/nZxL9P1czgzz16X1dFzNM+jePTD6rI6Rox0Z+h1lbsjOwcYxXtdeCvzVVaT6DwWVf9mNVF0GXbBV9BV+st0mX+jnBZRL5ju7DwrXvA1+cU8/8tHClkNPqeiocM=
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgMGNiwAtMcMjj04esB10dLvPwAWQzrpChfxTQHsxgZGCYxkhe/FICQGmDnnbC0iIoHV6isd3EmE1u/h1IQEzZQUy5gc0ckDoZHvLdNlCAGuXkcAOkxi+hvDASAbZ0BQA3HQoF
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhYEEeiODK4oIGdjQ6eajIwPNPEFJdnZ2BQYMdkEwJvNLCz0QGjFgMDkxam+F6gPfvYMdmDBaCHPbHhjAvQOpxxAUrCOYIdgkkFpKRnYtI4OniozsDwSJ0MjRSCv0A7/w2AvdQA6OGcJ4IqHsYOwaQCbUYGhmgoO5ZMt1EC/tDZvl9QOhgYVjFY5NHDOYgduzg6+AjM25/IyN+UAl5gncCHpV6gJYCVK+SULdQEALykI6M=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/booster.tx" x="377.212" y="68.6675">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="208.533" y="133.144">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Darksteel Reactor&quot;, &quot;Darksteel Brute&quot;, &quot;Coretapper&quot;, &quot;Darksteel Juggernaut&quot;, &quot;Energy Chamber&quot;]}"/>
+    <property name="enemy" value="Memnarch"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/booster.tx" x="296.882" y="67.9511">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/booster.tx" x="79.8016" y="79.8016">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MRD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MRD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MRD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/scroll.tx" x="409.462" y="233.858">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Darksteel Colossus&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="104.58" y="207.464">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Darksteel Citadel&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/scroll.tx" x="440.165" y="100.271">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Darksteel Relic&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="184.709" y="224.951" width="62.5876" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A factory stretches tall overhead, walls of solid darksteel giving it an imposing, inescapable feel. A massive golem watches you with an eyeless face up ahead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="303.346" y="175.144">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Darksteel Ingot&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

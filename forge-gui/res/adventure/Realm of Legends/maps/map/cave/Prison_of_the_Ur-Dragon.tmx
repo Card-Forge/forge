@@ -292,7 +292,7 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Though the warded cell before you is wider and significantly taller than the others, the massive hydra before you strains against the walls, barely able to be contained. Without hesitate, its many heads begin lunging towards you.&quot;,
+   &quot;text&quot;: &quot;Though the warded cell before you is wider and significantly taller than the others, the massive hydra before you strains against the walls, barely able to be contained. Without hesitation, its many heads begin lunging towards you.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }

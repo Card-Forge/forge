@@ -25,6 +25,8 @@ import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
 import forge.screens.match.views.VPhaseIndicator;
+import forge.screens.match.views.VPlayerPanel;
+import forge.screens.match.views.VPrompt;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
@@ -202,6 +204,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_INCLUDE_BASIC_LANDS,
             Forge.getLocalizer().getMessage("cbAnteIncludeBasicLands"),
             Forge.getLocalizer().getMessage("nlAnteIncludeBasicLands")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_RECORD_REPLAYS,
+            "Record replays",
+            "Save each game you play so it can be watched again later. Only the last 20 are kept."), 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
             Forge.getLocalizer().getMessage("lblHotSeatMode"),
             Forge.getLocalizer().getMessage("nlHotSeatMode")), 1);
@@ -257,6 +262,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
             Forge.getLocalizer().getMessage("cbShowStormCount"),
             Forge.getLocalizer().getMessage("nlShowStormCount")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_TARGET_BOX,
+            Forge.getLocalizer().getMessage("lblShowTargetBox"),
+            Forge.getLocalizer().getMessage("nlShowTargetBox")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
@@ -277,6 +285,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS
             }), 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_UNDO_MODE,
+            Forge.getLocalizer().getMessage("cbUndoMode"),
+            Forge.getLocalizer().getMessage("nlUndoMode"),
+            new String[] {
+                ForgeConstants.UNDO_MODE_OFF, ForgeConstants.UNDO_MODE_SINGLE, ForgeConstants.UNDO_MODE_FREE
+            }), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SEPARATE_UNDO_BUTTON,
+            Forge.getLocalizer().getMessage("lblSeparateUndo"),
+            Forge.getLocalizer().getMessage("nlSeparateUndo")) {
+                @Override
+                public void select() {
+                    super.select();
+                    VPrompt.reloadSeparateUndo();
+                }
+            }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
             Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
             Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
@@ -299,6 +322,18 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
                     if (MatchController.instance != null)
                         MatchController.instance.resetPlayerPanels();
+                }
+            }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERZONETABS,
+            Forge.getLocalizer().getMessageorUseDefault("lblAltZoneTabs", "Alternate Zone Layout (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlAltZoneTabs", "Shows the open zone (hand, graveyard...) as a wide bottom row instead of a side panel.")) {
+                @Override
+                public void select() {
+                    super.select();
+                    VPlayerPanel.reloadAltZoneLayout();
+                    if (MatchController.instance != null) {
+                        MatchController.instance.resetPlayerPanels();
+                    }
                 }
             }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
@@ -538,22 +573,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 @Override
                 public void valueChanged(String newValue) {
                     super.valueChanged(newValue);
-                    FOptionPane.showConfirmDialog (
-                        Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                        Forge.getLocalizer().getMessage("lblRestartForge"),
-                        Forge.getLocalizer().getMessage("lblRestart"),
-                        Forge.getLocalizer().getMessage("lblLater"), result -> {
-                            if (result) {
-                                Forge.restart(true);
-                            }
-                        }
-                    );
+                    // apply right away: no restart needed (the unique prints index is rebuilt)
+                    FModel.getMagicDb().setCardArtPreference(newValue);
                 }
             }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SMART_CARD_ART,
             Forge.getLocalizer().getMessage("lblSmartCardArtOpt"),
             Forge.getLocalizer().getMessage("nlSmartCardArtOpt") + "\n" +
-            Forge.getLocalizer().getMessage("nlSmartCardArtOptNote")), 4);
+            Forge.getLocalizer().getMessage("nlSmartCardArtOptNote")) {
+                @Override
+                public void select() {
+                    super.select();
+                    FModel.getMagicDb().setEnableSmartCardArtSelection(
+                        FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART));
+                }
+            }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
             Forge.getLocalizer().getMessage("cbDisplayFoil"),
             Forge.getLocalizer().getMessage("nlDisplayFoil")), 4);

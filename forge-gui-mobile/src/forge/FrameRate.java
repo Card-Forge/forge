@@ -95,11 +95,16 @@ public class FrameRate {
         }
 
         Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
-        Forge.getGraphics().getBatch().begin();
 
-        font.draw(Forge.getGraphics().getBatch(), cachedDisplayString, hudColor, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), true, Align.left);
-
-        Forge.getGraphics().getBatch().end();
+        SpriteBatch batch = Forge.getGraphics().getBatch();
+        boolean notDrawing = !batch.isDrawing();
+        if (notDrawing) {
+            batch.begin();
+        }
+        font.draw(batch, cachedDisplayString, hudColor, 5, Forge.getScreenHeight() - 5, Forge.getScreenWidth(), true, Align.left);
+        if (notDrawing) {
+            batch.end();
+        }
     }
 
     private void composeDisplay() {

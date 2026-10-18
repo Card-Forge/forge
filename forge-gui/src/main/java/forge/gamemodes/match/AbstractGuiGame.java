@@ -3,11 +3,11 @@ package forge.gamemodes.match;
 import com.google.common.collect.*;
 
 import forge.deck.Deck;
-import forge.game.GameEntityView;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.spellability.StackItemView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.phase.PhaseType;
@@ -20,12 +20,14 @@ import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.Localizer;
@@ -74,10 +76,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameControllers.containsKey(player);
     }
 
-    public final PlayerView getCurrentPlayer() {
-        return currentPlayer;
-    }
-
     @Override
     public String getDayTime() {
         return daytime;
@@ -85,6 +83,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
+    }
+
+    public final PlayerView getCurrentPlayer() {
+        return currentPlayer;
     }
 
     @Override
@@ -176,6 +178,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameControllers.get(player);
     }
 
+    private boolean replay;
+
+    /** True while this GUI is showing a recorded game rather than a live one. */
+    public final boolean isReplay() {
+        return replay;
+    }
+    public final void setReplay(final boolean replay0) {
+        replay = replay0;
+    }
+
     public final Collection<IGameController> getOriginalGameControllers() {
         return originalGameControllers.values();
     }
@@ -237,10 +249,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * {@link #mayView}.
      */
     public void resetForNewMatch() {
+        replay = false;
         gameControllers.clear();
         originalGameControllers.clear();
         spectator = null;
         currentPlayer = null;
+        selection = Selection.NONE;
     }
 
     @Override
@@ -303,45 +317,46 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<GameEntityView> highlighted = Sets.newHashSet();
+    private volatile Selection selection = Selection.NONE;
 
     @Override
-    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+    public void setSelection(final Selection next) {
+        final Selection prev = selection;
+        selection = next;
         // updateSingleCard reaches the widgets directly, and callers include the game thread
         FThreads.invokeInEdtNowOrLater(() -> {
-            for (final GameEntityView gv : entities) {
-                final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
-                if (!hasChanged) continue;
-                if (gv instanceof PlayerView pv) {
+            for (final TrackableObject object : Sets.symmetricDifference(new HashSet<>(prev.chosen()), new HashSet<>(next.chosen()))) {
+                if (object instanceof PlayerView pv) {
                     updateLives(Collections.singleton(pv));
-                }
-                if (gv instanceof CardView cv) {
+                } else if (object instanceof CardView cv) {
                     updateCard(cv);
                 }
             }
         });
     }
 
-    public boolean isHighlighted(final GameEntityView ge) {
-        return highlighted.contains(ge);
+    public Selection getSelection() {
+        return selection;
     }
 
-    private final Set<CardView> selectableCards = Sets.newHashSet();
-    private int selectionMin = 0;
-    private int selectionMax = 0;
+    public boolean isHighlighted(final TrackableObject object) {
+        return selection.chosen().contains(object);
+    }
 
-    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        for (CardView cv : cards) {
-            selectableCards.add(cv);
+    public boolean isSelectable(final PlayerView player) {
+        return player != null && selection.targets().contains(player);
+    }
+
+    public boolean isSelectable(final StackItemView item) {
+        return item != null && selection.targets().contains(item);
+    }
+
+    /** A stack entry was picked in this GUI's stack view while stack targets are being chosen. */
+    public void pickStackItem(final StackItemView item) {
+        final IGameController controller = getGameController();
+        if (controller != null && item != null) {
+            controller.selectStackItem(item);
         }
-        selectionMin = min;
-        selectionMax = max;
-    }
-
-    public void clearSelectables() {
-        selectableCards.clear();
-        selectionMin = 0;
-        selectionMax = 0;
     }
 
     protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
@@ -358,27 +373,27 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     public boolean isSelectable(final CardView card) {
-        return selectableCards.contains(card);
+        return selection.cards().contains(card);
     }
 
     /** Number of selectable cards currently highlighted — i.e. picked so far in the active selection prompt. */
     public int countPickedSelectables() {
         int n = 0;
-        for (CardView cv : selectableCards) {
-            if (highlighted.contains(cv)) n++;
+        for (CardView cv : selection.cards()) {
+            if (selection.chosen().contains(cv)) n++;
         }
         return n;
     }
 
     public boolean isSelecting() {
-        return !selectableCards.isEmpty();
+        return !selection.cards().isEmpty();
     }
 
     public int getSelectionMin() {
-        return selectionMin;
+        return selection.min();
     }
     public int getSelectionMax() {
-        return selectionMax;
+        return selection.max();
     }
 
     /** Weighted membership: duplicates in the pushed iterable accumulate counts, so a card's
@@ -434,6 +449,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * Concede game, bring up WinLose UI.
      */
     public boolean concede() {
+        if (replay) {
+            // nothing to concede in a recording: leaving is just closing it, and the caller closes the screen
+            forge.gamemodes.net.client.ReplayPlayer.stopFor(this, false);
+            return true;
+        }
         if (gameView.isGameOver()) {
             return true;
         }
@@ -720,6 +740,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
         refreshYieldUi(pv);
+    }
+
+    @Override
+    public void applyMacroState(final IMacroSystem.State state) {
+        final IGameController c = getGameController();
+        if (c != null) c.macros().applyState(state);
     }
 
     /** Toggle the auto-pass marker for {@code phase} on {@code phaseOwner}'s turn. The

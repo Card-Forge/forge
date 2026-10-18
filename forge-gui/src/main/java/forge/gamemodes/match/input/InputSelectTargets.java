@@ -4,14 +4,15 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.game.GameEntity;
-import forge.game.GameEntityView;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.gamemodes.match.Selection;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -32,6 +33,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private final TargetRestrictions tgt;
     private final SpellAbility sa;
     private final Integer numTargets;
+    private final int initialMin;
+    private final int initialMax;
     private final Collection<Integer> divisionValues;
     private Card lastTarget = null;
     private boolean bCancel = false;
@@ -60,14 +63,24 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             lastTarget = card;
         }
 
-        final int initialMin = numTargets != null ? numTargets : sa.getMinTargets();
-        final int initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
-        controller.getGui().setSelectables(CardView.getCollection(choices), initialMin, initialMax);
-        final List<GameEntityView> views = new ArrayList<>();
-        for (final GameEntity c : targets) {
-            if (c instanceof Card) views.add(GameEntityView.get(c));
+        initialMin = numTargets != null ? numTargets : sa.getMinTargets();
+        initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
+    }
+
+    /** The valid cards, the players that can still be picked, and what this spell's steps have chosen so far. */
+    @Override
+    protected Selection getSelection() {
+        final List<Player> valid = new ArrayList<>();
+        if (!mustTargetFiltered) { // same checks as onPlayerSelected
+            for (final Player p : getController().getGame().getPlayers()) {
+                if (targets.contains(p) || p.hasLost() || !sa.canTarget(p)) { continue; }
+                if (sa.isSpell() && sa.getHostCard().isAura() && !p.canBeAttached(sa.getHostCard(), sa)) { continue; }
+                if (filter != null && !filter.test(p)) { continue; }
+                valid.add(p);
+            }
         }
-        controller.getGui().setHighlighted(views, true);
+        return new Selection(new ArrayList<>(CardView.getCollection(choices)), initialMin, initialMax,
+                new ArrayList<>(PlayerView.getCollection(valid)), TargetingProgress.chosenTargets(sa));
     }
 
     @Override
@@ -396,7 +409,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (ge instanceof Card c) {
             lastTarget = c;
         }
-        getController().getGui().setHighlighted(List.of(GameEntityView.get(ge)), true);
+        showSelection();
 
         if (hasAllTargets()) {
             bOk = true;
@@ -421,28 +434,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             // try to get last selected card
             lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
-        getController().getGui().setHighlighted(List.of(GameEntityView.get(ge)), false);
+        showSelection();
 
         this.showMessage();
     }
 
     private void done() {
-        final List<GameEntityView> views = new ArrayList<>(targets.size());
-        for (final GameEntity ge : targets) views.add(GameEntityView.get(ge));
-        getController().getGui().setHighlighted(views, false);
-
         this.stop();
     }
 
     private boolean hasAllTargets() {
         return sa.isMaxTargetChosen() || (numTargets != null && numTargets == targets.size()) || (divisionValues != null && sa.getStillToDivide() <= 0)
             || (divisionValues == null && sa.isDividedAsYouChoose() && targets.size() == sa.getStillToDivide());
-    }
-
-    @Override
-    protected void onStop() {
-        getController().getGui().clearSelectables();
-        super.onStop();
     }
 
 }

@@ -8,12 +8,15 @@ import forge.game.card.CardView;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.localinstance.skin.FSkinProp;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
@@ -61,20 +64,17 @@ public enum ProtocolMethod implements IHasForgeLog {
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
-    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
-    clearSelectables    (Mode.SERVER, Void.TYPE),
+    setSelection        (Mode.SERVER, Void.TYPE, Selection.class),
     showRevealedCards   (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     hideRevealedCards   (Mode.SERVER, Void.TYPE),
-    setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*GameEntityView*/.class, Boolean.TYPE),
     setWeaklySelectable (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearWeaklySelectable(Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
-    setRememberedActions(Mode.SERVER, Void.TYPE),
-    nextRememberedAction(Mode.SERVER, Void.TYPE),
     awaitNextInput      (Mode.SERVER, Void.TYPE),
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
     /** Server→client push of authoritative yield-state changes. */
     applyYieldUpdate    (Mode.SERVER, Void.TYPE, YieldUpdate.class),
+    applyMacroState     (Mode.SERVER, Void.TYPE, IMacroSystem.State.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -87,6 +87,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     selectButtonOk            (Mode.CLIENT, Void.TYPE),
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
+    selectStackItem           (Mode.CLIENT, Void.TYPE, StackItemView.class),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),
@@ -94,11 +95,16 @@ public enum ProtocolMethod implements IHasForgeLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
+    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class),
+    setRememberedActions      (Mode.MACRO, Void.TYPE),
+    nextRememberedAction      (Mode.MACRO, Void.TYPE),
+    repeatRememberedActions   (Mode.MACRO, Void.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),
-        CLIENT(IGameController.class);
+        CLIENT(IGameController.class),
+        /** A client's call on its controller's macro system. */
+        MACRO(IMacroSystem.class);
 
         private final Class<?> toInvoke;
         Mode(final Class<?> toInvoke) {
@@ -147,6 +153,11 @@ public enum ProtocolMethod implements IHasForgeLog {
             return null;
         }
     }
+    /** What a call received from a client is made on: the controller, or for a macro its macro system. */
+    public Object receiver(final Object toInvoke) {
+        return mode == Mode.MACRO ? ((IGameController) toInvoke).macros() : toInvoke;
+    }
+
     public Class<?> getReturnType() {
         return returnType;
     }
