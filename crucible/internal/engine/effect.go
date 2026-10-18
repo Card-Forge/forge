@@ -2,7 +2,7 @@
 
 package engine
 
-//enginelint:allow id zone parts card player game ability control subability defined manapay unlesscost textwords
+//enginelint:allow id zone parts card player game ability control subability defined manapay unlesscost textwords costparts
 
 import (
 	"errors"
@@ -170,9 +170,11 @@ func resolveEffectBatched(g *Game, e Effect, a *Ability, controller PlayerContro
 // controller is asked once (ConfirmOptionalTrigger) unless an OptionalDecider$
 // already did. An ability whose cost ActivateAbility already paid
 // (Ability.costPaid), one of the host's own printed A: lines, and every DB$
-// line skip this. A cost parseUnlessCost does
-// not read is an error rather than a free resolution (GO-7). paid reports
-// whether the ability goes on to resolve.
+// line skip this. An X in the cost is announced once the controller agreed to
+// pay (announceTriggeredX) or, when the card's X is computed, evaluated
+// (triggeredCostShape). A cost parseUnlessCost does not read is an error
+// rather than a free resolution (GO-7). paid reports whether the ability goes
+// on to resolve.
 func (r *Registry) payTriggeredCost(g *Game, a *Ability, controller PlayerController) (paid bool, err error) {
 	if a.costPaid || a.Params == nil || a.Params.Record != compile.Activated || isOwnActivatedAbility(g.Card(a.Source), a.Params) {
 		return true, nil
@@ -181,12 +183,17 @@ func (r *Registry) payTriggeredCost(g *Game, a *Ability, controller PlayerContro
 	if !ok || text == "0" {
 		return true, nil
 	}
-	uc, ok := parseUnlessCost(text)
-	if !ok {
-		return false, fmt.Errorf("engine: triggered AB$ Cost$ %q not resolvable yet", text)
+	uc, announce, err := g.triggeredCostShape(a, text, controller)
+	if err != nil {
+		return false, err
 	}
 	if !a.Optional && !uc.mandatory && !controller.ConfirmOptionalTrigger(g, a.Controller, a.Source) {
 		return false, nil
+	}
+	if announce {
+		if uc, ok = g.announceTriggeredX(controller, a, text, uc); !ok {
+			return false, nil
+		}
 	}
 	// The cost is the ability's own: what it sacrificed or discarded is the
 	// paid list its Sacrificed$/Discarded$ amounts read (Disciple of

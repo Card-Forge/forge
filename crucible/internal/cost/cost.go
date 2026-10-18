@@ -217,6 +217,10 @@ type ActivationShape struct {
 	ExileGraveSpec  string
 	DiscardTypeN    int
 	DiscardTypeSpec string
+	// CollectEvidenceN is CollectEvidence<N>'s own N (CostCollectEvidence:
+	// exile graveyard cards with total mana value N or more), 0 when the cost
+	// names no such part. Cryptex's "{T}, Collect evidence 3".
+	CollectEvidenceN int
 }
 
 // chosenCardSpec reports whether field names a type to pick cards of: not the
@@ -358,6 +362,12 @@ func (c Cost) ActivationShape() (ActivationShape, bool) {
 			shape.SelfExileFromGrave = true
 		case p.Name == "ExileFromHand" && !shape.SelfExileFromHand && p.Field(0) == "1" && isSelfReferenceField(p.Field(1)):
 			shape.SelfExileFromHand = true
+		case p.Name == "CollectEvidence" && shape.CollectEvidenceN == 0:
+			n, err := strconv.Atoi(p.Field(0))
+			if err != nil || n <= 0 {
+				return ActivationShape{}, false
+			}
+			shape.CollectEvidenceN = n
 		default:
 			return ActivationShape{}, false
 		}

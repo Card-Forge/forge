@@ -157,7 +157,7 @@ func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller Player
 		var timed []castOption
 		for _, o := range options {
 			if c.Type().Has(cardtype.Instant) || o.flash || flashByCost || g.castsWithFlash(pid, card) ||
-				g.canActSorcerySpeed(pid) || g.castsWithFlashNeedsInfo(pid, card) {
+				g.canActSorcerySpeed(pid) || g.castsWithFlashNeedsInfo(pid, card) || g.castsWithFlashOptional(pid, card) {
 				timed = append(timed, o)
 			}
 		}
@@ -213,7 +213,9 @@ func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller Player
 		extra, text, ok := mayFlashCost(c)
 		behold, beholdText, beholdOK := mayFlashBehold(c)
 		switch {
-		case g.castsWithFlashNeedsInfo(pid, card):
+		case g.castsWithFlashNeedsInfo(pid, card), g.castsWithFlashOptional(pid, card):
+			// Teamwork's flash (castsWithFlashOptional) is decided the same way,
+			// once the optional costs are chosen.
 			opts.flashNeedsInfo = true
 		case ok && controller.ConfirmPayCost(g, pid, cost.Parse(text), card):
 			opts.flashCost, opts.hasFlashCost = extra, true
@@ -594,8 +596,8 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 		}
 		return false
 	}
-	if hasExtra {
-		g.payUnlessParts(controller, &Ability{Source: card, Controller: pid}, pid, extra)
+	if hasExtra && !g.payUnlessParts(controller, &Ability{Source: card, Controller: pid, spell: true}, pid, extra) {
+		return false
 	}
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {
 		return false
@@ -774,6 +776,15 @@ func (g *Game) putSpellOnStack(card CardID, pid PlayerID) {
 	g.Move(card, Stack, pid)
 	g.Card(card).controller = pid
 	g.noteGraveyardExit(card, from)
+	// The cards the optional costs exiled are exiled with the spell object:
+	// Java pays with the spell already on the stack (PlaySpellAbility.java:624,
+	// :683), where this port pays first.
+	rec := g.Card(card).castOpt
+	for _, list := range [][]CardID{rec.exiled, rec.collected} {
+		for _, id := range list {
+			g.markExiledWith(id, card)
+		}
+	}
 }
 
 // castAura is CastSpell's own Aura branch (CardState.java's getAuraSpell,
@@ -975,10 +986,10 @@ func (g *Game) castInstantOrSorcery(pid PlayerID, card CardID, c *Card, controll
 		// shard to carry it; the spell still records it for Count$xPaid.
 		x = xAnnounced{value: g.preX, announced: true}
 	}
-	if hasExtra {
-		// The spell's additional cost is its own paid list: Sacrificed$ and
-		// Discarded$ read it as the spell resolves (SpellAbility.getPaidList).
-		g.payUnlessPartsInto(controller, &a, pid, extra, &a.paid)
+	// The spell's additional cost is its own paid list: Sacrificed$ and
+	// Discarded$ read it as the spell resolves (SpellAbility.getPaidList).
+	if hasExtra && !g.payUnlessPartsInto(controller, &a, pid, extra, &a.paid) {
+		return false
 	}
 	a.paid.recorded = true
 	if opts.sneak && !g.paySneakReturn(controller, pid, card) {

@@ -30,9 +30,8 @@ import (
 // whole line loudly rather than producing the wrong mana or ignoring a real
 // restriction (PORT-8/GO-7): RestrictValid$ (53 real lines clearing every
 // other gate here) is a mana-pool spending restriction this port's own Pool
-// has no way to tag mana with; SubAbility$ (28) chains a further ability
-// this immediate, no-stack resolution has nowhere to route through
-// Registry.Resolve; IsPresent$/ConditionCheckSVar$/ConditionSVarCompare$/
+// has no way to tag mana with; SubAbility$ is admitted and resolved once the
+// mana is made (resolveManaSubAbility); IsPresent$/ConditionCheckSVar$/ConditionSVarCompare$/
 // PresentCompare$/CheckSVar$/SVarCompare$ (combined) are an
 // "activate only if..." restriction this port has no general resolving-
 // ability gate for (distinct from subAbilityConditionMet's own Condition-
@@ -56,7 +55,7 @@ import (
 // identical reasoning as the IsPresent$/ConditionCheckSVar$/... group
 // above).
 var manaAbilityAllowedParams = map[string]bool{
-	"ab": true, "cost": true, "spelldescription": true, "produced": true, "amount": true,
+	"ab": true, "cost": true, "spelldescription": true, "produced": true, "amount": true, "subability": true,
 	"planeswalker": true, "ultimate": true, "activationzone": true, "activationphases": true,
 	"playerturn": true, "opponentturn": true, "activationfirstcombat": true, "activationafterblockers": true,
 }
@@ -181,13 +180,12 @@ func parseComboColors(produced string) (mana.Colors, bool) {
 // AddsKeywordsUntil$, already outside manaAbilityAllowedParams for an
 // unrelated reason, so it stays unreachable regardless of this landing),
 // 22 more name tapXType<...> (birchlore_rangers.txt's own real "Tap two
-// untapped Elves you control: Add one mana of any color" among them), and 27
-// of the 83 real corpus lines naming AddCounter<...>/SubCounter<...> resolve
-// (3 AddCounter, 24 SubCounter -- a "[+N]: Add ..." loyalty ability among the
-// first, a mana rock's own charge-counter-powered
-// "T, Remove a charge counter from CARDNAME: Add one mana of any color"
-// shape the corpus's own dominant real one for the second); the remaining
-// 56 name a param outside manaAbilityAllowedParams (SubAbility$/AILogic$/
+// untapped Elves you control: Add one mana of any color" among them), and
+// the real corpus lines naming AddCounter<...>/SubCounter<...> resolve (a
+// "[+N]: Add ..." loyalty ability among the first, a mana rock's own
+// charge-counter-powered "T, Remove a charge counter from CARDNAME: Add one
+// mana of any color" shape the corpus's own dominant real one for the
+// second) unless they name a param outside manaAbilityAllowedParams (AILogic$/
 // RestrictValid$/CostDesc$ among the most common), an unresolvable
 // AddCounter/SubCounter shape (a non-literal N -- SubCounter<X/...>'s own
 // "remove that many counters" storage-counter-battery shape, X1+, or a
@@ -328,6 +326,10 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if shape.SubCounterType != "" && shape.SubCounterN > c.Counters.Count(CounterType(strings.ToUpper(shape.SubCounterType))) {
 		return false
 	}
+	// CostCollectEvidence.canPay (:42-48): the graveyard's total mana value.
+	if shape.CollectEvidenceN > 0 && graveyardManaValue(g, g.Zone(Graveyard, pid).Cards()) < shape.CollectEvidenceN {
+		return false
+	}
 	var tapCandidates []CardID
 	if shape.TapTypeN > 0 {
 		if !tapTypeResolvable(shape.TapTypeSpec) {
@@ -380,6 +382,12 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if !ok {
 		return false
 	}
+	// A SubAbility$ link's targets are chosen with the ability, before any
+	// cost is paid (CR 602.2b, PlaySpellAbility.java:675-683).
+	sub, hasSub := g.manaSubParent(pid, card, ability)
+	if hasSub && !g.chooseAbilityTargets(controller, &sub) {
+		return false
+	}
 	// The source as it is before its costs move it (ADR-0042).
 	src := g.manaSourceOf(card)
 	if !g.PayManaCost(pid, costMana, controller) {
@@ -424,6 +432,9 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if shape.SelfExileFromHand {
 		exileFromHand(g, card)
 	}
+	if shape.CollectEvidenceN > 0 {
+		g.collectEvidence(controller, pid, card, shape.CollectEvidenceN)
+	}
 	if isLoyaltyAbility {
 		c.LoyaltyAbilityActivated = true
 	}
@@ -437,5 +448,31 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 		g.noteTapsForMana(card, pid)
 		g.checkTapsForManaTriggers(controller, card, pid, made)
 	}
+	if hasSub {
+		g.resolveManaSubAbility(controller, &sub)
+	}
 	return true
+}
+
+// manaSubParent is the mana ability as the parent of its SubAbility$ chain,
+// and whether it has one.
+func (g *Game) manaSubParent(pid PlayerID, card CardID, ability *compile.Ability) (Ability, bool) {
+	if _, ok := ability.Param("SubAbility"); !ok {
+		return Ability{}, false
+	}
+	return Ability{
+		API: APIMana, Source: card, Controller: pid, Params: ability,
+		Amounts: g.Card(card).abilityAmounts(ability), costPaid: true, activated: true,
+	}, true
+}
+
+// resolveManaSubAbility runs a mana ability's SubAbility$ chain once its mana
+// is made: a mana ability resolves at once, sub-abilities included
+// (AbilityUtils.resolve's resolveSubAbilities, CR 605.3a) -- a pain land's
+// damage, Cryptex's "Put an unlock counter on CARDNAME". A chain that fails
+// leaves its error pending (GO-7): the mana is already in the pool.
+func (g *Game) resolveManaSubAbility(controller PlayerController, parent *Ability) {
+	if err := g.registry.resolveSubAbility(g, parent, controller); err != nil {
+		g.recordPendingError(err)
+	}
 }

@@ -832,6 +832,22 @@ func (g *Game) hostObjectStamp(host CardID) (uint64, bool) {
 	return h.zoneStamp, false
 }
 
+// relinkExiledWith carries the cards exiled with a spell over to the permanent
+// it becomes (CR 607.2q; GameAction.java:480-481). Java's permanent is the
+// spell's own Card object (GameAction.java:171-172), so every exiled card's
+// getExiledWith still names it; here the object is the zoneStamp, so each card
+// marked with the spell's stack stamp is marked with the permanent's.
+func (g *Game) relinkExiledWith(host CardID, stackStamp, newStamp uint64) {
+	for _, p := range g.Players() {
+		for _, id := range g.Zone(Exile, p).Cards() {
+			c := g.Card(id)
+			if c.exiledWith.host == host && c.exiledWith.stamp == stackStamp {
+				c.exiledWith = exiledWithMark{host: host, stamp: newStamp, listed: true}
+			}
+		}
+	}
+}
+
 // SetExiledWith records card as exiled with host's current object, the
 // way GameState's own "ExiledWith:<id>" annotation does
 // (GameState.java:771-781, which also lists card on host whatever zone
@@ -950,6 +966,9 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 	g.put(id, kind, owner)
 	if from != kind {
 		c.zoneEntered, c.zoneEntryTurn, c.zoneEntryFrom = true, g.turn, from
+	}
+	if from == Stack && kind == Battlefield {
+		g.relinkExiledWith(id, leftStamp, c.zoneStamp)
 	}
 
 	// A card exiled face down (Heist) turns face up as it leaves exile.
@@ -1575,20 +1594,7 @@ func (g *Game) Clone() *Game {
 		out.zones[k] = z.clone()
 	}
 	for id, snap := range g.lki {
-		s := *snap
-		s.Counters = snap.Counters.clone()
-		s.Memory = snap.Memory.clone()
-		s.PT = snap.PT.clone()
-		s.TypeMod = snap.TypeMod.clone()
-		s.ColorMod = snap.ColorMod.clone()
-		s.KeywordMod = snap.KeywordMod.clone()
-		s.ControlMod = snap.ControlMod.clone()
-		s.copies = append([]copyEffect(nil), snap.copies...)
-		s.grants = append([]grantedTriggers(nil), snap.grants...)
-		if snap.attachments != nil {
-			s.attachments = snap.attachments.Clone()
-		}
-		out.lki[id] = &s
+		out.lki[id] = snap.frozenCopy()
 	}
 	return out
 }

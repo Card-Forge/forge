@@ -1,0 +1,19 @@
+# Flameblast Dragon's attack trigger is an AB$ DealDamage with Cost$ X R
+# (flameblast_dragon.txt): its target is chosen as it goes on the stack; as it
+# resolves its controller agrees to pay, X is announced
+# (PlaySpellAbility.announceValuesLikeX, run for the wrapped ability by
+# WrappedAbility.java:440) as 2, {2}{R} is paid from three Mountains tapped in
+# the declare-attackers step, and the ability deals X = 2 to the AI.
+startturn human
+advance 5
+queue attackers 1
+queue targets ai
+declareattackers
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+queue optionaltrigger true
+queue payx 2
+queue paygeneric R
+queue paygeneric R
+resolvestack

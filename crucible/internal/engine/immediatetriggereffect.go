@@ -14,7 +14,8 @@ import (
 // RememberEach$). Java registers it as a delayed trigger that fires at the
 // next trigger check; this port pushes it at once, which lands it on the
 // stack above everything the resolving ability left there, the same
-// resolution order. OptionalDecider$ You makes it a "may".
+// resolution order. OptionalDecider$ You makes it a "may". The copies carry
+// the spawning ability's X.
 // RememberSVarAmount$ remembers an Integer and fails closed, as do Static$
 // and the triggering-object copies.
 type immediateTriggerEffect struct{}
@@ -64,9 +65,13 @@ func (immediateTriggerEffect) Resolve(g *Game, a *Ability, controller PlayerCont
 		if each {
 			r = remember[i : i+1]
 		}
+		// Count$xPaid in the reflexive trigger reads the X of the ability that
+		// spawned it, 0 when that one announced none (AbilityUtils.java:
+		// 1649-1656): Isareth's "pay {X}. When you do, ... mana value X".
 		abilities = append(abilities, Ability{
 			API: api, Source: a.Source, Controller: a.Controller, Params: execs[0].Ability,
 			Amounts: a.Amounts, Optional: optional, TriggerRemembered: r,
+			xManaCostPaid: a.xManaCostPaid, hasXManaCostPaid: true,
 		})
 	}
 	g.pushTriggeredAbilities(controller, abilities)

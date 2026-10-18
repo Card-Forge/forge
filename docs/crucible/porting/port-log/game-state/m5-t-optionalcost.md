@@ -18,22 +18,19 @@ pick, and `GameActionUtil.addOptionalCosts` (`:537-569`) adds each pick to the s
 
 Readers:
 
-| Reader                                                              | Port                                                                                                                                                                                                                                                                                                            |
-| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Count$OptionalGenericCostPaid.A.B`, `Count$Teamwork.A.B`           | `optionalBranch` over `Game.spellOptional`: the record while the card is being cast (`castPending`, so Pyrrhic Strike's `CharmNum$` and Bite Down on Crime's `ReduceCost` read it) or on the stack. A permanent's own abilities read nothing (`AbilityUtils.java:1700-1706` reads the ability's own root).      |
-| `Condition$ OptionalCost`, `ConditionOptionalPaid$`                 | `conditionValueMet` (`SpellAbilityCondition.java:118-128`, `:283-284`; default True). `rejectUnreadCondition` replaces the blanket `Condition$` refusal in Destroy, GainLife, ChangeZoneAll, Effect, Fog and ControlPlayer, which therefore also read `Condition$ Kicked` now.                                  |
-| `CastSA>` amounts                                                   | `castSAValue`: `Count$OptionalGenericCostPaid`, `Count$Teamwork`, `Collected$`, `Revealed$` against `Card.castOpt` (Katara, Spotlight Falcon, Vitu-Ghazi Inspector). A card not cast reads 0, as Java's unswitched context does (`AbilityUtils.java:4036-4040`, `:729`). Other `CastSA>` heads stay unresolved. |
-| `Collected$`, `Revealed$`, `Defined$ Collected`, `CastSA>Collected` | `contextHeads` and `definedCards`. `collectEvidence` returns what it exiled.                                                                                                                                                                                                                                    |
-| `Count$Presence_<Type>.A.B`                                         | `presenceCount` (`AbilityUtils.java:2180-2192`): cast, and a revealed card of the type or a controlled permanent of the type. Java counts the battlefield as the amount is read, not as the spell was cast (a Forge defect, `forge-java-defects.md`); reproduced.                                               |
-| `ReduceCost` `Relative$`                                            | Read on the spell's own line only (`costModStatus`): the static's host is then the spell the amount is read against. On any other host the line stays unresolvable.                                                                                                                                             |
+| Reader                                                              | Port                                                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Count$OptionalGenericCostPaid.A.B`, `Count$Teamwork.A.B`           | `branchCountValue` over `Game.spellOptional`, each branch an amount (Dragon's Fire's `X`): the record while the card is being cast (`castPending`, so Pyrrhic Strike's `CharmNum$` and Bite Down on Crime's `ReduceCost` read it) or on the stack. A permanent's own abilities read nothing (`AbilityUtils.java:1700-1706` reads the ability's own root). |
+| `Condition$ OptionalCost`, `ConditionOptionalPaid$`                 | `conditionValueMet` (`SpellAbilityCondition.java:118-128`, `:283-284`; default True). `rejectUnreadCondition` replaces the blanket `Condition$` refusal in Destroy, GainLife, ChangeZoneAll, Effect, Fog and ControlPlayer, which therefore also read `Condition$ Kicked` now.                                                                            |
+| `CastSA>` amounts                                                   | `castSAValue`: `Count$OptionalGenericCostPaid`, `Count$Teamwork`, `Collected$`, `Revealed$` against `Card.castOpt` (Katara, Spotlight Falcon, Vitu-Ghazi Inspector). A card not cast reads 0, as Java's unswitched context does (`AbilityUtils.java:4036-4040`, `:729`). Other `CastSA>` heads stay unresolved.                                           |
+| `Collected$`, `Revealed$`, `Defined$ Collected`, `CastSA>Collected` | `contextHeads` and `definedCards`. `collectEvidence` returns what it exiled.                                                                                                                                                                                                                                                                              |
+| `Count$Presence_<Type>.A.B`                                         | `presenceCount` (`AbilityUtils.java:2180-2192`): cast, and a revealed card of the type or a controlled permanent of the type. Java counts the battlefield as the amount is read, not as the spell was cast (a Forge defect, `forge-java-defects.md`); reproduced.                                                                                         |
+| `ReduceCost` `Relative$`                                            | Read on the spell's own line only (`costModStatus`): the static's host is then the spell the amount is read against. On any other host the line stays unresolvable.                                                                                                                                                                                       |
 
-Refused (the cast is declined, the reason left for `TakePendingError`, GO-7):
-
-| Card                  | Shape                                 | Reason                                                                                                                                                                                                    |
-| --------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dragon's Fire         | `RevealOrChoose<1/Dragon>`            | `parseUnlessCost` has no such part                                                                                                                                                                        |
-| Celestial Reunion     | `ChooseCreatureType<1> Behold<2/...>` | `ChooseCreatureType` cost part not ported                                                                                                                                                                 |
-| Redemptor Dreadnought | `ExileFromGrave<1/Creature>`          | `CostExile` links the exiled card to the spell, and the permanent keeps the link (`GameAction.java:480-481`, CR 607.2q); `exiledWith` is stamp-keyed and the link breaks on the stack-to-battlefield move |
+Dragon's Fire (`RevealOrChoose`), Celestial Reunion (`ChooseCreatureType`, Behold of the chosen type), Redemptor
+Dreadnought (the exiled-with link kept from spell to permanent), Quantum Reduction (`CastWithFlash`
+`ValidSA$ Spell.Teamwork`) and Cryptex (`CollectEvidence` as an activation cost) resolve:
+[`m6-r10-r10.md`](m6-r10-r10.md).
 
 Not ported:
 
@@ -42,11 +39,9 @@ Not ported:
   (`etbCounter`), Dragonlord's Prerogative (`R:` line), Graven Archfiend. `checkSVarMatches` looks the value up as an
   SVar name and reads the condition as unmet. Needs `compile.addInlineAmounts` extended past the four Layer 7 keys, a
   golden AST regeneration.
-- `CastWithFlash` `ValidSA$ Spell.Teamwork` (Quantum Reduction): `Spell.Teamwork` stays in `saUnresolvedPrefixes`; the
-  out-of-timing gate has no "flash only if Teamwork is chosen" branch. `Card.Self+Teamwork` (Team Tactics, Cruel
-  Alliance) and `Taps`'s `Teamwork$` (Agent Maria Hill) are not read either.
-- `CollectEvidence` as an activation cost (Cryptex's `T CollectEvidence<3>`): `cost.ActivationShape` has no such part.
-- Territorial Strike's `Duration$ Perpetual` pump of `RevealedCards`; Dragon's Fire's `Revealed$CardPower`.
+- `Card.Self+Teamwork` (Team Tactics, Cruel Alliance; both also refused for `ConditionZone$`) and `Taps`'s `Teamwork$`
+  (Agent Maria Hill) are not read.
+- Territorial Strike's `Duration$ Perpetual` pump of `RevealedCards`.
 - A spell copy does not carry the record (nor `kicker`), CR 707.10.
 
 Tests: `optionalcost_test.go`. Fixtures: `optional-cost-cinder-strike-blight-paid-deals-four`,

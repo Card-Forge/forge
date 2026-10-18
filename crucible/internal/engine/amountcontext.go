@@ -126,11 +126,17 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 	switch head {
 	case "Collected", "Revealed":
 		// The cast spell's paid lists (CostCollectEvidence, CostReveal), read
-		// while source is that spell (spellOptional).
+		// while source is that spell (spellOptional). Revealed is Java's LKI
+		// list: each card as it was revealed or chosen (CostPartWithList.java:
+		// 136-138), so Dragon's Fire reads the Dragon's power as it was paid.
 		if source == NoCard {
 			return nil, false
 		}
-		ids = optionalList(g.spellOptional(source), head)
+		rec := g.spellOptional(source)
+		if head == "Revealed" && len(rec.revealedLKI) == len(rec.revealed) && len(rec.revealed) > 0 {
+			return append([]*Card(nil), rec.revealedLKI...), true
+		}
+		ids = optionalList(rec, head)
 	default:
 		var ok bool
 		if ids, ok = g.abilityListIDs(source, head); !ok {

@@ -172,11 +172,13 @@ func TestMayFlashCostBeholdNeedsAMatchingCardAndConsent(t *testing.T) {
 			def := creatureDefCost(t, "Exhale Like", "G")
 			def.Faces[0].Keywords = append(def.Faces[0].Keywords, "MayFlashCost:Behold<1/Elf>")
 			card := g.NewCard(def, p, engine.Hand)
-			g.NewCard(scriptDef(t, "Test Elf", "Creature Elf"), p, tc.zone)
+			elf := g.NewCard(scriptDef(t, "Test Elf", "Creature Elf"), p, tc.zone)
 			g.SetTurnState(1, other, engine.Main1)
 			g.Player(p).ManaPool.Add(mana.Green, 1)
 			c := engine.NewScriptedController()
 			c.QueueConfirmPayCost(tc.confirm)
+			// The beheld card is the cast's Revealed list (payChoiceParts).
+			c.QueueCardChoice([]engine.CardID{elf})
 			if got := g.CastSpell(p, card, c); got != tc.want {
 				t.Fatalf("CastSpell = %v, want %v", got, tc.want)
 			}

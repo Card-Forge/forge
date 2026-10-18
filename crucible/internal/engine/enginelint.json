@@ -325,7 +325,9 @@
       "exile",
       "exilefromgrave",
       "taptype",
-      "replaceeffect"
+      "replaceeffect",
+      "unlesscost",
+      "subability"
     ],
     "land": ["id", "zone", "card", "game", "player", "phase", "trigger", "replacement", "control"],
     "castspell": [

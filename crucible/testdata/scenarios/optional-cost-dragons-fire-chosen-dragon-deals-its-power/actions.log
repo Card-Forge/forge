@@ -1,0 +1,15 @@
+# Dragon's Fire's Mode$ OptionalCost RevealOrChoose<1/Dragon> (CostReveal over
+# the hand and the battlefield, Cost.java:522-526): the caster chooses the
+# Shivan Dragon they control, so Count$OptionalGenericCostPaid.X.3 reads X,
+# Revealed$CardPower, and the spell deals 5 damage -- enough for the 6/4 Craw
+# Wurm, which the unpaid 3 would not kill.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+queue confirmpaycost true
+queue cardchoice 4
+queue targets 5
+queue paygeneric R
+castspell human 1
+resolvestack

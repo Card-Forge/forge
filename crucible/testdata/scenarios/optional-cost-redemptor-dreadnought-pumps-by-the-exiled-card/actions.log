@@ -1,0 +1,32 @@
+# Redemptor Dreadnought's Mode$ OptionalCost ExileFromGrave<1/Creature>: the
+# Craw Wurm it exiles is exiled with the spell (CostExile.java:294), and the
+# permanent the spell becomes keeps the link (CR 607.2q, GameAction.java:
+# 480-481). Fervor gives it haste, so it attacks this turn: its attack trigger
+# finds Card.ExiledWithSource and gives it +6/+6, and the unblocked 4/4 deals
+# 10. Without the link it would deal 4.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+tapformana human 6 R
+queue confirmpaycost true
+queue cardchoice 7
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+castspell human 1
+resolvestack
+advance 2
+queue attackers 1
+declareattackers
+resolvestack
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage

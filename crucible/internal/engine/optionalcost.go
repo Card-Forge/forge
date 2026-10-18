@@ -158,15 +158,9 @@ func optionalStaticOption(h *Card, param func(string) (string, bool)) (optionalC
 	if !ok {
 		return optionalCostOption{}, false, fmt.Errorf("engine: %q: OptionalCost Cost$ %q not resolvable yet", h.Def.Name, text)
 	}
-	if uc.exileGraveN > 0 {
-		// CostExile marks what it exiles as exiled with the spell
-		// (SpellAbilityEffect.handleExiledWith), and the permanent keeps the
-		// link (GameAction.java:480-481, CR 607.2q): Redemptor Dreadnought's
-		// attack trigger reads it. The link across the stack-to-battlefield
-		// move is not modelled, so the cost is refused rather than paid
-		// without it.
-		return optionalCostOption{}, false, fmt.Errorf("engine: %q: OptionalCost Cost$ %q: the exiled-with link is not resolvable yet", h.Def.Name, text)
-	}
+	// A part that exiles marks the cards as exiled with the spell
+	// (putSpellOnStack), and the permanent keeps the link (relinkExiledWith,
+	// CR 607.2q): Redemptor Dreadnought's attack trigger reads it.
 	o := optionalCostOption{text: text, uc: uc, kind: optGeneric}
 	color, ok := param("ReduceColor")
 	if !ok {
@@ -178,6 +172,30 @@ func optionalStaticOption(h *Card, param func(string) (string, bool)) (optionalC
 	}
 	o.kind, o.reduce, o.hasReduce = 0, shard, true
 	return o, true, nil
+}
+
+// castsWithFlashOptional is the second half of SpellAbility.canPlay
+// (checkOptionalCosts) (SpellAbility.java:467-491) for timing: card cannot be
+// cast now, but could be with one of its optional costs paid -- Quantum
+// Reduction's CastWithFlash ValidSA$ Spell.Teamwork. Each option pid can pay
+// is tried on its own (canPlayWithOptionalCost). The cast then begins, and
+// once the costs are chosen PlaySpellAbility.java:107 asks canPlay again
+// (castsWithFlashChosen through flashDecided): a cast without that cost fails.
+func (g *Game) castsWithFlashOptional(pid PlayerID, card CardID) bool {
+	options, err := g.optionalCostOptions(pid, card)
+	if err != nil {
+		return false
+	}
+	for _, o := range options {
+		if o.kind == 0 || !g.optionalOptionPayable(pid, card, o) {
+			continue
+		}
+		probe := &Ability{Source: card, Controller: pid, spell: true, probing: true, probeTeamwork: o.kind&optTeamwork != 0}
+		if g.flashStatic(pid, card, probe, flashPlain) {
+			return true
+		}
+	}
+	return false
 }
 
 // chooseOptionalCosts is PlaySpellAbility.chooseOptionalAdditionalCosts for
@@ -231,7 +249,9 @@ func (choice *optionalChoice) add(o optionalCostOption) {
 func (uc unlessCost) hasParts() bool {
 	return uc.lifeN > 0 || uc.energyN > 0 || uc.discardN > 0 || uc.discardHand || uc.sacN > 0 || uc.damageN > 0 ||
 		uc.drawN > 0 || uc.returnN > 0 || uc.revealN > 0 || uc.addCounterN > 0 || uc.exileGraveN > 0 || uc.tapN > 0 ||
-		uc.evidenceN > 0 || uc.youCounterN > 0 || uc.libN > 0 || uc.removeAnyN > 0
+		uc.evidenceN > 0 || uc.youCounterN > 0 || uc.libN > 0 || uc.removeAnyN > 0 || uc.subCounterN > 0 ||
+		uc.discardTypeN > 0 || uc.movedToGraveN > 0 || uc.forage || uc.exileHandAll || uc.exileEitherN > 0 ||
+		uc.chooseCreatureType
 }
 
 // optionalOptionPayable is CostPart.canPay for o's non-mana part.
@@ -326,13 +346,18 @@ func (g *Game) optionalPartsPayable(pid PlayerID, card CardID, choice optionalCh
 func (g *Game) payOptionalParts(controller PlayerController, pid PlayerID, card CardID, choice optionalChoice) bool {
 	a := &Ability{Source: card, Controller: pid, spell: true}
 	for _, uc := range choice.parts {
-		if uc.revealN > 0 {
-			revealed := g.chosenUnlessCards(controller, pid, card, g.revealCandidates(pid, card, uc), uc.revealN, uc.revealN)
-			g.Card(card).castOpt.revealed = append(append([]CardID(nil), g.Card(card).castOpt.revealed...), revealed...)
-		}
 		evidence := uc.evidenceN
 		uc.evidenceN = 0
-		g.payUnlessParts(controller, a, pid, uc)
+		var paid paidLists
+		// The type, the revealed cards and the rest (payChoiceParts records
+		// the reveal on the spell): a type with too few cards to behold
+		// declines the payment and the cast.
+		if !g.payUnlessPartsInto(controller, a, pid, uc, &paid) {
+			return false
+		}
+		if len(paid.exiled) > 0 {
+			g.Card(card).castOpt.exiled = append(append([]CardID(nil), g.Card(card).castOpt.exiled...), paid.exiled...)
+		}
 		if evidence > 0 {
 			collected := g.collectEvidence(controller, pid, card, evidence)
 			g.Card(card).castOpt.collected = append(append([]CardID(nil), g.Card(card).castOpt.collected...), collected...)

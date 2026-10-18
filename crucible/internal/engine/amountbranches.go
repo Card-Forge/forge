@@ -114,6 +114,16 @@ func branchCountValue(g *Game, amounts map[string]expr.Amount, sourceController 
 		return n, ok, true
 	}
 	switch {
+	case count.Head == "OptionalGenericCostPaid" || count.Head == "Teamwork":
+		// AbilityUtils.java:1700-1706: the ability's own cast record, which only
+		// a spell has (spellOptional), each branch an amount (calculateAmount):
+		// Dragon's Fire's Count$OptionalGenericCostPaid.X.3, X the revealed
+		// card's power.
+		kind := optGeneric
+		if count.Head == "Teamwork" {
+			kind = optTeamwork
+		}
+		return branch(g.spellOptional(source).has(kind))
 	case strings.HasPrefix(count.Head, "Madness"):
 		// AbilityUtils.java:1716-1718: Count$Madness.<True>.<False> on the
 		// ability's own SpellAbility.isMadness, which only the spell cast by

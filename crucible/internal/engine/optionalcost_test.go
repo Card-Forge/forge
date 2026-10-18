@@ -426,35 +426,6 @@ func TestPresenceCountsRevealedOrControlledDragon(t *testing.T) {
 	}
 }
 
-// The OptionalCost shapes this port cannot pay are refused at cast time, with
-// the reason left for TakePendingError, rather than cast without the choice.
-func TestOptionalCostUnportedShapesRefuseTheCast(t *testing.T) {
-	t.Parallel()
-
-	for _, tc := range []struct{ card, want string }{
-		{"Dragon's Fire", "RevealOrChoose"},
-		{"Celestial Reunion", "ChooseCreatureType"},
-		{"Redemptor Dreadnought", "exiled-with link"},
-	} {
-		t.Run(tc.card, func(t *testing.T) {
-			t.Parallel()
-
-			g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
-			card := g.NewCard(corpusCard(t, tc.card), p, engine.Hand)
-			g.Player(p).ManaPool.Add(mana.Red, 6)
-			if g.CastSpell(p, card, engine.NewScriptedController()) {
-				t.Fatal("CastSpell succeeded, want it refused")
-			}
-			if err := g.TakePendingError(); err == nil || !strings.Contains(err.Error(), tc.want) {
-				t.Errorf("pending error = %v, want one naming %q", err, tc.want)
-			}
-			if g.Card(card).Zone != engine.Hand {
-				t.Errorf("the card is in %v, want it left in hand", g.Card(card).Zone)
-			}
-		})
-	}
-}
-
 // A Teamwork answer that cannot pay the cost (here a creature the caster does
 // not control) fails the cast with a pending error and taps nothing, instead of
 // tapping every candidate in its place.

@@ -189,6 +189,13 @@ type Ability struct {
 	// zone is not enough to tell: a "when you cast this spell" trigger's
 	// Source is that same card, sitting above it (spellItemOf, stack.go).
 	spell bool
+	// probing marks a spell not yet cast asked about as though one optional
+	// cost were paid: SpellAbility.canPlay(checkOptionalCosts) tries the spell
+	// with each one added (SpellAbility.java:467-491). probeTeamwork is that
+	// cost being Teamwork, what the Teamwork property reads before the cast
+	// records anything (castsWithFlashOptional).
+	probing       bool
+	probeTeamwork bool
 
 	// hostTransforms is the host's transform count when this ability went
 	// on the stack -- or, for a delayed trigger, when it was created: Java's

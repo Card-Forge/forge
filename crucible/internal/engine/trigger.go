@@ -517,12 +517,10 @@ func (g *Game) checkSpellCastTriggers(controller PlayerController, cast CardID, 
 // TriggerZones$ or one naming Stack (phaseTriggerZoneMatches). Battlefield
 // and Command hosts keep the ungated scan they always had.
 //
-// A stack host's trigger whose Execute$ is an AB$ with its own Cost$ is
-// skipped: a triggered ability's Cost$ is neither asked for nor paid
-// anywhere in this port yet (game-state.md, "Not ported yet"), and firing it
-// would hand out Bearer of Silence's "you may pay {1}{C}" edict, Eldrazi
-// Obligator's steal and 4 more cast triggers for free. They stay unfired,
-// as before the stack was scanned at all.
+// A stack host's trigger whose Execute$ is an AB$ with its own Cost$ fires
+// like any other: Registry.payTriggeredCost (effect.go) asks for the cost as
+// it resolves (Bearer of Silence's "you may pay {1}{C}", Blight Herder's
+// ExiledMoveToGrave), and a cost it cannot read fails that resolution.
 //
 // Every face's triggers are read (triggerFaces), where Java reads only the
 // current state's. No real self-cast trigger sits on a face other than the

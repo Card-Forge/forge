@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Dragon's Fire|Id:1
+humanbattlefield=Mountain|Id:2;Mountain|Id:3;Shivan Dragon|Id:4
+aibattlefield=Craw Wurm|Id:5

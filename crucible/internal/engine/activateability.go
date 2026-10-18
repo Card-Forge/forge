@@ -312,6 +312,10 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if shape.SubCounterType != "" && shape.SubCounterN > c.Counters.Count(CounterType(strings.ToUpper(shape.SubCounterType))) {
 		return false
 	}
+	// CostCollectEvidence.canPay (:42-48): the graveyard's total mana value.
+	if shape.CollectEvidenceN > 0 && graveyardManaValue(g, g.Zone(Graveyard, pid).Cards()) < shape.CollectEvidenceN {
+		return false
+	}
 	var tapCandidates, tapChosen []CardID
 	if shape.TapTypeN > 0 {
 		if !tapTypeResolvable(shape.TapTypeSpec) {
@@ -448,6 +452,11 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if shape.SelfExileFromHand {
 		activated.paid.exiled = append(activated.paid.exiled, card)
 		exileFromHand(g, card)
+	}
+	if shape.CollectEvidenceN > 0 {
+		// CostCollectEvidence's paymentOrder is 15 (:36-39), the sacrifices'
+		// and exiles' own: it is paid with them, after the counters.
+		g.collectEvidence(controller, pid, card, shape.CollectEvidenceN)
 	}
 	if isLoyaltyAbility {
 		c.LoyaltyAbilityActivated = true

@@ -1270,8 +1270,18 @@ type castOptional struct {
 	kinds     optionalKinds
 	collected []CardID
 	revealed  []CardID
-	foretold  bool
-	escaped   bool
+	// revealedLKI is the "Revealed" list as Java keeps it: each revealed or
+	// chosen card frozen as it was paid (CostPartWithList.java:136-138,
+	// CostReveal's getHashForLKIList), what Revealed$CardPower reads. Parallel
+	// to revealed.
+	revealedLKI []*Card
+	// exiled are the cards the optional costs exiled (CostExile's "Exiled"),
+	// marked as exiled with the spell once it is on the stack (putSpellOnStack:
+	// Java moves the spell there before paying, PlaySpellAbility.java:624, and
+	// CostExile.java:294 marks them then).
+	exiled   []CardID
+	foretold bool
+	escaped  bool
 	// madness is SpellAbility.isMadness (AlternativeCost.Madness): the spell
 	// was cast by Madness's trigger for its madness cost (Count$Madness).
 	madness bool
@@ -1298,10 +1308,38 @@ func (c *Card) spellCollected() []CardID {
 	return c.castOpt.collected
 }
 
+// frozenCopy is a copy of the snapshot c that shares no mutable state with it:
+// what Game.Clone gives every last-known-information card, and what a cost's
+// paid list keeps of a card as it was paid (CardCopyService.getLKICopy).
+func (c *Card) frozenCopy() *Card {
+	s := *c
+	s.Counters = c.Counters.clone()
+	s.Memory = c.Memory.clone()
+	s.PT = c.PT.clone()
+	s.TypeMod = c.TypeMod.clone()
+	s.ColorMod = c.ColorMod.clone()
+	s.KeywordMod = c.KeywordMod.clone()
+	s.ControlMod = c.ControlMod.clone()
+	s.copies = append([]copyEffect(nil), c.copies...)
+	s.grants = append([]grantedTriggers(nil), c.grants...)
+	if c.attachments != nil {
+		s.attachments = c.attachments.Clone()
+	}
+	return &s
+}
+
 // clone is o with its own lists, for Game.Clone.
 func (o castOptional) clone() castOptional {
 	o.collected = append([]CardID(nil), o.collected...)
 	o.revealed = append([]CardID(nil), o.revealed...)
+	o.exiled = append([]CardID(nil), o.exiled...)
+	if o.revealedLKI != nil {
+		lki := make([]*Card, len(o.revealedLKI))
+		for i, c := range o.revealedLKI {
+			lki[i] = c.frozenCopy()
+		}
+		o.revealedLKI = lki
+	}
 	return o
 }
 

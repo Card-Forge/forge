@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Declare Attackers
+humanlife=20
+humanbattlefield=Flameblast Dragon|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped
+ailife=18

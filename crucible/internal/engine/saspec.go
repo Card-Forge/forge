@@ -34,7 +34,7 @@ var saKeywordProperties = map[string][]string{
 var saUnresolvedPrefixes = []string{
 	"CountersRemovedToPay", "Bargain", "Backup", "Bestow", "Blitz", "Buyback", "Craft", "Dash",
 	"Disturb", "Embalm", "Eternalize", "BeamMeUp", "Flashback", "Harmonize", "Jumpstart", "Kicked", "Aftermath",
-	"MorphUp", "ManifestUp", "Teamwork", "Unlock", "isTurnFaceUp", "isCastFaceDown", "Mayhem", "Mutate",
+	"MorphUp", "ManifestUp", "Unlock", "isTurnFaceUp", "isCastFaceDown", "Mayhem", "Mutate",
 	"Ninjutsu", "Sneak", "Foretelling", "Foretold", "Plotting", "Modal", "ClassLevelUp", "Daybound",
 	"Nightbound", "Warp", "Ward", "CumulativeUpkeep", "SameKeyword", "ChapterNotLore", "EffectSourceAbility",
 	"LastChapter", "paidPhyrexianMana", "ManaSpent", "ManaFrom", "MayPlaySource",
@@ -136,6 +136,14 @@ func (g *Game) spellAbilityHasProperty(a *Ability, source *Card, prop string, ho
 		return matched, true
 	case prop == "singleTarget":
 		return len(a.Targets) == 1, true
+	case prop == "Teamwork":
+		// SpellAbilityProperty.java:93-94, SpellAbility.isTeamwork (:658-660):
+		// the spell's own Teamwork optional cost was paid. Only a spell records
+		// one (spellOptional); a probe reads the cost it is tried with.
+		if a.probing {
+			return a.probeTeamwork, true
+		}
+		return a.spell && g.spellOptional(a.Source).has(optTeamwork), true
 	case strings.HasPrefix(prop, "numTargets"):
 		return g.saTargetCount(a, prop, host, amounts)
 	case strings.HasPrefix(prop, "cmc"):
