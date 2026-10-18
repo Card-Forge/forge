@@ -1171,7 +1171,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return cards;
         }
         endTempShowCards();
-        if(topOfDeck)
+        // The card listed first goes nearest the chosen end of the deck, so it must be moved last
+        if(destinationZone.isDeck())
             Collections.reverse(choices);
         CardCollection result = new CardCollection();
         gameCacheMove.addToList(choices, result);
