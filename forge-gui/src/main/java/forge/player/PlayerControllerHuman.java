@@ -994,7 +994,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         if (toTop.size() < cards.size()) { // the top isn't everything
             for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
-                toBottom.add(result.get(i));
+                toBottom.add(0, result.get(i));
             }
         }
         return ImmutablePair.of(toTop, toBottom);
