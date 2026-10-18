@@ -10,8 +10,8 @@ everything still to do, easiest first: [00-master-implementation-plan-open.md](0
 
 ### M5 — Rules kernel — 6–10 wks _(the largest single risk)_
 
-**In progress.** The test-port matrix is green. What is left (P4's qualitative half, attack costs, graveyard watchers,
-the granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the open plan's "Remaining work".
+**In progress.** The test-port matrix is green. What is left (P4's qualitative half, graveyard watchers, the
+granted-static layers, the rest of `PlayerController`) is rows R9-R19 of the open plan's "Remaining work".
 
 24. Turn/phase/step loop + priority (`PhaseHandler` port). **Done** — `turn.go`, `phase.go`, including CR 511.3's end of
     combat cleanup (`endCombat`); `PassPriority` (ADR-0019) and the turn driver `Game.Step`/`Game.Run` (`driver.go`,

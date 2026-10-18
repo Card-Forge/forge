@@ -49,7 +49,6 @@ a requirement attacks its highest-count defender (stable reverse sort, Java's Ti
 | --------------------------------------------------------------------------------------------------- | --------------------------------------- |
 | `AttackRestrictionType` (NEED_TWO_OTHERS, NOT_ALONE, ONLY_ALONE, NEED_BLACK_OR_GREEN, …)            | no "can't attack alone"/CantAttack yet  |
 | `GlobalAttackRestrictions` max, `isLimited`'s with/without branches, predicate reservations         | no maximum-attackers source             |
-| `getAttackCost` skip (Propaganda, `Mode$ CantAttackUnless`)                                         | no attack costs                         |
 | `causesToAttack` (`Mode$ AttackRequirement`, 4 lines), `playerRequirements` (`PlayerMustAttack`, 2) | in play → `error`, not uncounted (GO-7) |
 
 The goad restriction half (`CombatUtil.canAttack`'s goad branch, `CombatUtil.java:215-229`) stays `goadTargets`: the
