@@ -79,10 +79,6 @@ damaging one creature simultaneously): Java's earlier source's trigger then sees
 **Order.** Java iterates the lethal-damage snapshot as a `HashMap` (`GameAction.java:2738`), whose order no rule fixes;
 this port uses first-damaged order.
 
-**Not kept:** `Card.logExcessDamage`'s running total. Its one reader, `Count$ExcessDamageReceivedThisTurn`, is reached
-only through Overclocked Electromancer's `CardTriggeredTarget$` amount head, which this port does not resolve (and the
-card is refused earlier, at its Pump).
-
 ## `TriggeredTarget` valid property
 
 `CardProperty.java:2045-2063`: the card is the root ability's `AbilityKey.Target` triggering object. Read off the
@@ -124,13 +120,11 @@ Galleon and Zangief, the Red Cyclone played because their triggers never fired, 
 
 ## Not ported
 
-| Shape                                                              | Reason                                                                 |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| `ExcessSVar$` under `DamageMap$`                                   | No corpus line (above)                                                 |
-| `Count$ExcessDamageReceivedThisTurn`, `CardTriggeredTarget$`       | Overclocked Electromancer only; refused earlier at Pump                |
-| ExcessDamageAll's `Targets` (Defined$ TriggeredTargets)            | No corpus reader                                                       |
-| Java's LKI damage-history excess flag (`CardDamageTable.java:130`) | Read by `Count$NumDamageThisTurn` (Rith, Liberated Primeval), unported |
-| checkStaticAbilities' non-layer steps between links                | Left to the next SBA pass (above)                                      |
+| Shape                                                   | Reason                            |
+| ------------------------------------------------------- | --------------------------------- |
+| `ExcessSVar$` under `DamageMap$`                        | No corpus line (above)            |
+| ExcessDamageAll's `Targets` (Defined$ TriggeredTargets) | No corpus reader                  |
+| checkStaticAbilities' non-layer steps between links     | Left to the next SBA pass (above) |
 
 ## Tests
 

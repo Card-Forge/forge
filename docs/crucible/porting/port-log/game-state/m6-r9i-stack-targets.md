@@ -47,7 +47,6 @@ attacker's band unblocked (`setBlocked(false)`, `:791`, `Combat.blockDecided`), 
 | -------------------------------------- | ---------------------------------------------- |
 | `ForEach$` with a Defined$ value       | Error: Java reads it off the token, not ported |
 | A Defined$ value that does not resolve | Error (Seraphic Greatsword, Najeela)           |
-| `TokenBlocking$`                       | Still refused (Brimaz's block trigger)         |
 
 ## Target questions that were dropped silently
 
@@ -99,15 +98,6 @@ smoke probe counted them as playing.
 | New state: `triggeredObjects.exploited`, `chainTarget.Targeter`, `enterCounters.placer` | Values on value structs; `Ability` and `Game.Clone` copy them with no allocation; `clonedChainTargets` copies the field        |
 | No new `PlayerController` method                                                        | The token's defender is `ChooseAttackTarget`; targets are `ChooseTargets`                                                      |
 | enginelint: `valid` may reference `defined`                                             | `OpponentOf <Defined>` is Java's `getDefinedPlayers` from `PlayerProperty`                                                     |
-
-## Forge defects and engine findings
-
-| Where                                                                                              | Finding                                                                                                                                             |
-| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `countereffect.go:89-95`, `removefromgameeffect.go:39-47`, `replacementevents.go:171-177` (engine) | Remove every stack item whose source is the card, cast triggers included; Java removes the spell only (`MagicStack.java:799-805`). Not changed here |
-| `game.go:202-206` (engine)                                                                         | The `stack` field's comment says a spell's card lives in `Zone(Stack, NoPlayer)`; `Game.put` keys it by owner                                       |
-| `targeting.go` (engine)                                                                            | `TargetsAtRandom$` is not read by targeting: a Pump naming it chooses normally. ExchangeControl, GainControl and Fight reject it themselves         |
-| `trigger.go` (engine)                                                                              | Each check pushes its own batch, so APNAP order holds within a trigger mode, not across modes as Java's simultaneous list orders them               |
 
 ## Smoke probe
 
