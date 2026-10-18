@@ -282,7 +282,7 @@ func TestMustAttackStaticRejectsUnportedShapes(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct{ static, want string }{
 		{"Mode$ MustAttack | ValidCreature$ Card.Self | ValidPlayer$ Opponent", "ValidPlayer$ not resolvable yet"},
-		{"Mode$ MustAttack | ValidCreature$ Card.Self | Condition$ Monarch", `Condition$ "Monarch" not resolvable yet`},
+		{"Mode$ MustAttack | ValidCreature$ Card.Self | Condition$ MaxSpeed", `Condition$ "MaxSpeed" not resolvable yet`},
 		{"Mode$ MustAttack | ValidCreature$ Card.Self | AffectedZone$ Graveyard", `AffectedZone$ "Graveyard" not resolvable yet`},
 		{"Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ CardOwner", "MustAttack$"},
 		{"Mode$ AttackRequirement | ValidCard$ Creature | ValidAttacker$ Creature", "Mode$ AttackRequirement static not resolvable yet"},

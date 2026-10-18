@@ -1,0 +1,22 @@
+# CR 508.1d/508.1h: ai's Ghostly Prison taxes each attacker {2}. Human
+# declares Silvercoat Lion and Grizzly Bears, pays the Lion's tax and
+# declines the Bears' one. The unpaid attacker leaves combat and untaps
+# (PhaseHandler.java:580-584: removeFromCombat, then setTapped(false) for a
+# creature tapped only provisionally); the rest of the attack stands
+# (validateAttackers again, nothing violated), so only the Lion deals damage.
+startturn human
+advance 5
+tapformana human 3 W
+tapformana human 4 W
+queue attackers 1,2
+queue confirmpaycost true
+queue paygeneric W
+queue paygeneric W
+queue confirmpaycost false
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage

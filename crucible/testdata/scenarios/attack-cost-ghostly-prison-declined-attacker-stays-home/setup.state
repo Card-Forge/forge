@@ -1,0 +1,4 @@
+humanlife=20
+ailife=20
+humanbattlefield=Silvercoat Lion|Id:1;Grizzly Bears|Id:2;Plains|Id:3;Plains|Id:4
+aibattlefield=Ghostly Prison|Id:5

@@ -11,9 +11,10 @@
 // source for: AttackRestriction's types (NEED_TWO_OTHERS, NOT_ALONE,
 // ONLY_ALONE, NEED_BLACK_OR_GREEN, NEED_GREATER_POWER -- "can't attack
 // alone" keywords and Mode$ CantAttack statics), GlobalAttackRestrictions'
-// maximum attacker counts, attack costs (Propaganda, Mode$ CantAttackUnless)
-// and the requirements of Mode$ AttackRequirement and Mode$
-// PlayerMustAttack. With none of them, getLegalAttackers' search collapses
+// maximum attacker counts and the requirements of Mode$ AttackRequirement
+// and Mode$ PlayerMustAttack. Attack costs (Propaganda, Mode$
+// CantAttackUnless, attackcost.go) are ported: legalAttack skips a costed
+// pair. With the rest absent, getLegalAttackers' search collapses
 // to its unrestricted path: every creature with a requirement attacks the
 // defender it has the most requirements toward, and the search's branches
 // that only a restriction or a maximum reaches (the ONLY_ALONE loop,
@@ -291,35 +292,68 @@ func (g *Game) sortedFilteredRequirements(ac attackConstraints) []attackOption {
 
 // legalAttack is collectLegalAttackers' unrestricted path (the file's doc
 // comment has why no other path is reachable): walk the sorted options,
-// skip one that meets no requirement, otherwise send its creature at its
-// defender and drop the creature's remaining options.
-func legalAttack(options []attackOption) map[CardID]EntityID {
+// skip one that meets no requirement or whose pair has an attack cost
+// (AttackConstraints.java:195-197, "has to pay a cost: skip!" -- a zero
+// cost too, getAttackCost being non-null), otherwise send its creature at
+// its defender and drop the creature's remaining options. A costed pair is
+// skipped alone: the creature's other options stay, as Java removes only
+// that Attack from reqs.
+func (g *Game) legalAttack(options []attackOption) (map[CardID]EntityID, error) {
 	attack := map[CardID]EntityID{}
 	for _, o := range options {
 		if _, done := attack[o.attacker]; done || o.requirements == 0 {
 			continue
 		}
+		_, costed, err := g.attackCost(o.attacker, o.defender)
+		if err != nil {
+			return nil, err
+		}
+		if costed {
+			continue
+		}
 		attack[o.attacker] = o.defender
 	}
-	return attack
+	return attack, nil
 }
 
-// validateAttackers is CombatUtil.validateAttackers (CombatUtil.java:82):
+// attackValidation is a combat's AttackConstraints as Combat.initConstraints
+// builds it, once, before anything taps: the requirements and the sorted
+// options. PhaseHandler.declareAttackersTurnBasedAction re-validates against
+// the same constraints after an attacker is dropped for an unpaid attack cost
+// (PhaseHandler.java:585), while the declared attackers sit provisionally
+// tapped; rebuilding them then would read every one of those as unable to
+// attack (canAttackAtAll's untapped test).
+type attackValidation struct {
+	ac      attackConstraints
+	options []attackOption
+}
+
+// newAttackValidation builds the constraints of the current board.
+func (g *Game) newAttackValidation() (attackValidation, error) {
+	ac, err := g.newAttackConstraints()
+	if err != nil {
+		return attackValidation{}, err
+	}
+	return attackValidation{ac: ac, options: g.sortedFilteredRequirements(ac)}, nil
+}
+
+// checkAttackers is CombatUtil.validateAttackers (CombatUtil.java:82):
 // the declared attack may leave no more requirements unmet than the best
 // attack getLegalAttackers finds -- the one collectLegalAttackers builds, or
 // nobody attacking, whichever violates fewer. On failure the error names
 // every creature the declaration leaves with more unmet requirements than
-// the best attack does.
-func (g *Game) validateAttackers(attackers []CardID, targets map[CardID]EntityID) error {
-	ac, err := g.newAttackConstraints()
-	if err != nil {
-		return err
-	}
+// the best attack does. Attack costs are read live, as Java's getAttackCost
+// call inside collectLegalAttackers is.
+func (g *Game) checkAttackers(v attackValidation, attackers []CardID, targets map[CardID]EntityID) error {
+	ac := v.ac
 	declared := make(map[CardID]EntityID, len(attackers))
 	for _, id := range attackers {
 		declared[id] = targets[id]
 	}
-	best := legalAttack(g.sortedFilteredRequirements(ac))
+	best, err := g.legalAttack(v.options)
+	if err != nil {
+		return err
+	}
 	bestN := ac.countViolations(best)
 	if empty := ac.countViolations(nil); empty < bestN {
 		best, bestN = nil, empty
@@ -417,7 +451,8 @@ func combatStaticConditionsMet(g *Game, h *Card, face *compile.Face, s *compile.
 // rather than reading it as unmet.
 func knownStaticCondition(c string) bool {
 	switch c {
-	case "PlayerTurn", "NotPlayerTurn", "Threshold", "Hellbent", "Metalcraft", "Delirium", "FatefulHour":
+	case "PlayerTurn", "NotPlayerTurn", "Threshold", "Hellbent", "Metalcraft", "Delirium", "FatefulHour",
+		"Blessing", "Monarch", "EnduringStory":
 		return true
 	}
 	return false

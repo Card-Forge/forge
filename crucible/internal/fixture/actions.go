@@ -132,8 +132,9 @@ func RunActions(r io.Reader, l *Loaded, controller *engine.ScriptedController) e
 // expectError is the expecterror verb: the action after the text must fail
 // -- by its own error or one left on the Game (TakePendingError, ADR-0020)
 // -- and the error must contain the text. A declaration the engine rejects
-// (ADR-0024) changes nothing, so a scenario can follow it with a legal one,
-// the way Java re-prompts a human.
+// (ADR-0024) changes nothing (past attack costs already paid when an unpaid
+// one breaks the attack, attackcost.go), so a scenario can follow it with a
+// legal one, the way Java re-prompts a human.
 func expectError(args []string, l *Loaded, c *engine.ScriptedController) error {
 	if len(args) < 2 {
 		return fmt.Errorf("expecterror: want a text and an action, got %q", strings.Join(args, " "))

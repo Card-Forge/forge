@@ -1,0 +1,22 @@
+# CR 508.1d/508.1h-j: ai's Propaganda ("creatures can't attack you unless
+# their controller pays {2} for each creature they control that's attacking
+# you", Mode$ CantAttackUnless) taxes human's Silvercoat Lion. Human floats
+# {W}{W} in the declare attackers step, declares the Lion, agrees to pay
+# (ConfirmPayCost, the same question an UnlessCost$ asks) and pays both
+# generic units from the pool (CombatUtil.checkPropagandaEffects,
+# PhaseHandler.java:576-597). The Lion attacks, tapped, and deals 2.
+startturn human
+advance 5
+tapformana human 2 W
+tapformana human 3 W
+queue attackers 1
+queue confirmpaycost true
+queue paygeneric W
+queue paygeneric W
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage

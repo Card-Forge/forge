@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Combat Damage
+humanlife=20
+humanbattlefield=Silvercoat Lion|Tapped;Grizzly Bears;Plains|Tapped;Plains|Tapped
+ailife=18
+aibattlefield=Ghostly Prison

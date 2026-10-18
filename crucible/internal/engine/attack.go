@@ -23,10 +23,14 @@ func (g *Game) Attackers() []CardID { return g.combat.Attackers }
 // The steps run in PhaseHandler.declareAttackersTurnBasedAction's order
 // (PhaseHandler.java:545-556): the controller's answer and each attacker's
 // defender (CR 508.1a-b, chooseAttackTargets) first, then the legality check
-// (CR 508.1c-d, validateAttackers in attackconstraints.go), and only then
+// (CR 508.1c-d, checkAttackers in attackconstraints.go), and only then
 // does anything happen to the game -- declared attackers tap unless they
-// have vigilance (CR 508.1f), exert (CR 508.1g) and trigger. A declaration
-// that fails the check is an *IllegalDeclarationError and changes nothing
+// have vigilance (CR 508.1f), pay their attack costs (CR 508.1h-j,
+// payAttackCosts in attackcost.go; one not paid leaves the attack), exert
+// (CR 508.1g) and trigger. A declaration that fails the check is an
+// *IllegalDeclarationError and changes nothing; one that fails it again
+// after an unpaid attack cost dropped an attacker is one too, and keeps what
+// was already paid (Java's own TODO, PhaseHandler.java:577)
 // (ADR-0024): Java re-prompts its human, this port's controller is expected
 // to answer legally, and nothing is repaired on its behalf -- a goaded
 // creature left home is not added back, since which creature obeys a
@@ -70,14 +74,22 @@ func (g *Game) DeclareCombatAttackers(controller PlayerController) ([]CardID, er
 	if err != nil {
 		return nil, err
 	}
-	if err := g.validateAttackers(attackers, targets); err != nil {
+	v, err := g.newAttackValidation()
+	if err != nil {
+		return nil, err
+	}
+	if err := g.checkAttackers(v, attackers, targets); err != nil {
 		return nil, err
 	}
 
 	if err := g.attackAloneViolation(attackers); err != nil {
 		return nil, err
 	}
+	if err := g.checkAttackCosts(attackers, targets); err != nil {
+		return nil, err
+	}
 
+	prev := g.combat
 	g.combat.Attackers = attackers
 	g.combat.AttackTargets = targets
 	// One batch for every mode the declaration runs (Taps, Exerted, Attacks,
@@ -85,12 +97,29 @@ func (g *Game) DeclareCombatAttackers(controller PlayerController) ([]CardID, er
 	// stack (beginTriggerBatch).
 	g.beginTriggerBatch()
 	defer g.endTriggerBatch(controller)
+	// Tapped before any attack cost is paid, so an attacker cannot tap for
+	// mana or for a tapXType cost toward one (PhaseHandler.java:554-561); its
+	// Taps trigger waits until the attack stands.
+	var provisional []CardID
 	for _, id := range attackers {
 		if !g.Card(id).HasKeyword("Vigilance") {
 			g.Card(id).Tapped = true
+			provisional = append(provisional, id)
+		}
+	}
+	attackers, err = g.payAttackCosts(controller, v, provisional, prev)
+	if err != nil {
+		return nil, err
+	}
+	for _, id := range attackers {
+		if containsCard(provisional, id) {
 			g.checkTapsTriggers(controller, id, g.Card(id).Controller(), true)
 		}
 	}
+	// Java asks which attackers exert before the attack costs and pays the
+	// exert inside the same Cost (PhaseHandler.java:564-578); here exert is
+	// offered after, to the attackers whose costs were paid, so a dropped
+	// attacker never exerts. Only the order of the questions differs.
 	g.exertDeclaredAttackers(controller, attackers)
 	for _, id := range attackers {
 		g.Card(id).AttacksThisTurn++

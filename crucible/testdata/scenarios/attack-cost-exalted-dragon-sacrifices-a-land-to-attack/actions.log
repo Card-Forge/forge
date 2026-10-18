@@ -1,0 +1,17 @@
+# CR 508.1h: Exalted Dragon's own "can't attack unless you sacrifice a
+# land" (Mode$ CantAttackUnless | ValidCard$ Creature.Self | Cost$
+# Sac<1/Land>) is a non-mana attack cost, paid through the same UnlessCost$
+# parts as a mana one. Human sacrifices Plains 2; the 5/5 flier attacks and
+# deals 5.
+startturn human
+advance 5
+queue attackers 1
+queue confirmpaycost true
+queue sacrificechoice 2
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage
