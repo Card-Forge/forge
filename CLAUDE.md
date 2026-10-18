@@ -129,103 +129,29 @@ Audience is an IT engineer. Compress grammar, not substance.
 
 ## Commands
 
-```bash
-# Markdown — both required before every commit (DOC-14, DOC-15)
-prettier --write .            # format; .prettierignore excludes all upstream Forge files
-prettier --check .            # CI gate
-npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"   # semantic lint
-```
-
-```bash
-# Go — every line below is a CI gate (.github/workflows/crucible-go.yml)
-cd crucible && gofmt -l . && go vet ./...
-cd crucible && go test -race ./...
-cd crucible && go test -race -coverprofile=cover.out ./... && go run ./tools/covergate -profile cover.out   # TEST-12 floors
-cd crucible && go run ./tools/enginelint -config internal/engine/enginelint.json   # new engine file → new group + allow-list
-cd crucible && go run ./tools/docgate -module . -docs ../docs/crucible            # DOC-12 docs land with code
-cd crucible && go run ./tools/apiscan -check && go run ./tools/apiscan -check -api
-cd crucible && golangci-lint run   # v2.14.0, same as CI; scripts/ensure-golangci.sh installs one built with go.mod's Go
-
-# All of the above in CI order. .claude/ hooks run full before every Claude commit (blocking) and fast on Stop (report
-# only), both with GATES_AUTO_SKIP=1: gates whose inputs are unchanged since HEAD are skipped, and go test uses its cache
-# (CI keeps -count=1). Measured: ~25 s with tests cached; a changed engine adds its own ~45 s test run. New .claude/ files need `git add -f`: upstream
-# .gitignore ignores .claude
-crucible/scripts/gates.sh fast|full
-
-# What to port next: unregistered APIs by corpus line count, deferred ones marked (port-effect step 0)
-crucible/scripts/unported-apis.sh 30
-
-# How many cards the engine plays, and why the rest are refused (smoke-probe.md); ~2 min for the whole corpus
-cd crucible && go run ./cmd/crucible card-smoke -all -workers 8     # or -decks <dir> / -cards "A,B"
-
-# After a worktree porter hands back: commit+merge, remeasure, rewrite the quoted smoke numbers; finish = prettier,
-# markdownlint, docs commit, worktree cleanup (forced only when merged and clean)
-cd crucible && go run ./tools/landporter land BRANCH "msg" && go run ./tools/landporter finish BRANCH "docs: msg"
-# Same tool: agent prompt for an open-plan row; delete or add plan rows; reconcile also rewrites smoke-probe.md's top-refusal table
-cd crucible && go run ./tools/landporter brief R9g slug ; landporter plan rm R9g ; landporter plan add -after R9h -id R9j "text"
-
-# Parallel porters (port-batch skill): list agent worktrees, merge their branches, remove merged ones
-crucible/scripts/merge-porters.sh list|merge|cleanup [BRANCH...]
-
-# After editing .claude/hooks: their decision logic (what counts as a commit, what REV-1 guards)
-.claude/hooks/hooks_test.sh
-
-# Regenerate NewRegistry after adding an effect (ADR-0017); CI fails on a stale registry_gen.go
-cd crucible && go generate -run genregistry ./internal/engine
-
-# Regenerate the golden AST fingerprints, then review the diff
-cd crucible && go test ./internal/carddb/compile -run TestCorpusAST -update
-
-# Java oracle
-mvn -pl crucible/oracle-java -am test
-
-# Upstream Java suite: TestNG, needs a display
-mvn -U -B clean test          # CI runs this under Xvfb
-```
-
----
+Before every commit: `prettier --write .` (DOC-14), `npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"`
+(DOC-15); `.claude/` hooks run `crucible/scripts/gates.sh full` (blocking) on every Claude commit. Every other command
+(Go gates, `card-smoke`, `landporter`, `merge-porters.sh`, `genregistry`, the Java oracle) is in the `crucible-commands`
+skill: load it before running or recommending one.
 
 ## Current state
 
-M0 done — 16 ADRs `Accepted`, 7 guidelines, 4 design docs, 6 DSL grammars.
+M0-M4 done (ADRs, guidelines, `pkg/collect`, `pkg/javarand`,
+`internal/{mana,cardtype,carddb,deck,valid,expr,cost,keyword}`, the tools under `tools/`, the typed AST for all 33,980
+cards, `internal/engine` core, `PlayerController`, fixture round-trip). P1 and P2 exit gates green. Detail:
+`docs/crucible/00-master-implementation-plan.md`.
 
-M1 done — `pkg/collect`, `pkg/javarand` (bit-matches Java over the committed golden), `internal/mana` (round-trips every
-cost in the corpus), `internal/cardtype`, `tools/javacycles`, `tools/enginelint`, `tools/docgate`, `tools/covergate`,
-`oracle-java`.
-
-M2 done — `internal/carddb`, `internal/deck`, `tools/carddump`, `crucible corpus-coverage`. P1 gate green: the canonical
-dump is byte-identical to Forge's own `CardRules.Reader` across the whole corpus, and no script key is exempt from the
-parser.
-
-M3 done — `internal/carddb/compile` compiles all 33,980 cards with no exemption; `internal/valid`, `expr`, `cost`,
-`keyword` port the value grammars; `tools/apiscan` gates the param vocabulary two ways, both at zero; typed param
-structs generated (`compile/params_gen.go`); the valid property vocabulary gate is green
-(`TestEveryPropertyIsAccountedFor`, M3 item 19, `port-log/valid-strings.md`). **P2 exit gate green:** no unknowns,
-allowlist empty, golden AST diff clean.
-
-M4 done — `internal/engine/{game,card,player,zone,event,control}`; `PlayerController` (eleven decision methods) with
-`ScriptedController`; `GameState` fixture load/dump, byte-identical round-trip (`internal/fixture`); event schema
-(ADR-0013); `Effect`/`Registry` dispatch, effects inside `internal/engine`, registry generated (ADR-0017).
-
-M5 in progress (rules kernel): turn/priority loop and turn driver (`Game.Step`/`Game.Run`, ADR-0026), zone changes and
-state-based actions, combat, mulligans, the valid-string evaluator, mana pool and payment, casting permanents, Auras and
-Instants/Sorceries through the stack (ADR-0018), trigger firing, replacement effects, block legality, continuous effects
-across all eight layers (partial), targeting, SubAbility chaining, last-known information, activated abilities.
+M5 in progress (rules kernel): turn/priority loop, zone changes, SBA, combat, mana, casting, stack, triggers,
+replacement effects, continuous effects across all eight layers (partial), targeting, LKI, activated abilities.
 
 M6 in progress: 191 of the corpus's 203 script-driven `Effect` APIs resolve (`NewRegistry`, generated into
-`registry_gen.go`); the rest return `ErrUnimplemented`. Of the other 12, none has a real corpus line: `Mutate`, `Bond`,
-`Encode`, `InternalLegendaryRule`/`InternalRadiation`, ... have zero real `AB$`/`SP$`/`DB$` lines under that exact name
-and never surface in `unported-apis.sh`'s corpus-driven listing at all. `ChangeText` and `ExchangeTextBox` resolve
-through Layer 3 word substitution (ADR-0039). `crucible card-smoke -all` measures how many cards play: 91.5% of 33,618
-judged, an upper bound; the refusal causes it groups are the backlog.
+`registry_gen.go`); the rest return `ErrUnimplemented`, and the other 12 have no real corpus line.
+`crucible card-smoke -all` measures how many cards play: 91.5% of 33,618 judged, an upper bound; the refusal causes it
+groups are the backlog.
 
-Thin or missing: a granted static's Layer 4/5 effects; attack costs; stickers; graveyard-zone ETB and dies watchers;
-`RollDice`'s `DicePTExchanges`; the long tail of single-card shapes. Everything left, easiest first:
-`00-master-implementation-plan-open.md`. Full per-gap list: `port-log/game-state.md`, "Not ported yet".
-
-**M5 exit gate:** the test-port matrix is green (every `M5? yes` row `ported` or `superseded`,
-`porting/test-port-matrix.md`). **P4 exit gate:** fixture-count half met (≥300 scenarios, `testdata/scenarios/`);
-qualitative half ("every layer, every SBA," Plan Section 3.2) not.
+Everything left, easiest first: `docs/crucible/00-master-implementation-plan-open.md`. Full per-gap list:
+`docs/crucible/porting/port-log/game-state.md`, "Not ported yet". **M5 exit gate:** test-port matrix green (met). **P4
+exit gate:** fixture-count half met (≥300 scenarios), qualitative half not.
 
 Keep this section short — it loads every session. Every primitive, corpus count, design decision and Java citation goes
 in `docs/crucible/00-master-implementation-plan-in-progress.md` items 24-32 and
