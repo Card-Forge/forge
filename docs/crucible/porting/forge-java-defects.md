@@ -510,3 +510,11 @@ Tide in the Java game first.
 
 **Crucible meanwhile:** `spellCost` (`costmod.go`) refuses the cast of any RaiseCost with a non-mana `Cost$` (open plan
 R25h), so nothing is played. When R25h lands, the announce follows Java (PORT-7) until upstream agrees.
+
+## Attack costs not refunded when the attack turns illegal (`PhaseHandler.java:577`)
+
+When dropping an unpaid attacker makes the declared attack illegal, costs already paid for other attackers are not
+refunded (Java's own TODO at `PhaseHandler.java:577`). Reproduce: two creatures under Propaganda, pay for one, decline
+the other where a requirement forces both to attack together.
+
+**Crucible meanwhile:** the port keeps the payments too (PORT-7), so parity holds until upstream fixes it.
