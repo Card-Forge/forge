@@ -53,8 +53,8 @@ func TestGenericChoiceEffectEachPlayerTempRemember(t *testing.T) {
 	}
 }
 
-// TestGenericChoiceEffectRejectsBadShapes proves AtRandom$, an out-of-range
-// answer, and a choice carrying UnlessCost$ fail closed.
+// TestGenericChoiceEffectRejectsBadShapes proves AtRandom$ Urza, an
+// out-of-range answer, and a choice carrying UnlessCost$ fail closed.
 func TestGenericChoiceEffectRejectsBadShapes(t *testing.T) {
 	t.Parallel()
 
@@ -62,7 +62,7 @@ func TestGenericChoiceEffectRejectsBadShapes(t *testing.T) {
 		line string
 		pick []int
 	}{
-		{"DB$ GenericChoice | Defined$ You | AtRandom$ True | Choices$ DBA,DBB", nil},
+		{"DB$ GenericChoice | Defined$ You | AtRandom$ Urza | Choices$ DBA,DBB", nil},
 		{"DB$ GenericChoice | Defined$ You | Choices$ DBA,DBB", []int{2}},
 		{"DB$ GenericChoice | Defined$ You | Choices$ DBA,DBC", nil},
 	}

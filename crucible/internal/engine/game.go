@@ -879,13 +879,18 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 	}
 	c := g.Card(id)
 	from := c.Zone
+	if from == Battlefield && kind != Battlefield && c.prepared != NoCard {
+		// The prepared creature's leaves-play command
+		// (AlterAttributeEffect.java:87, prepare.go).
+		g.unprepare(id)
+	}
 	before := *c
 	g.clearTextRecords(id)
 	if from == Exile && kind != Exile {
 		c.foretold = false
 	}
 	if kind != Stack && kind != Battlefield {
-		c.wasCast, c.castManaSpent, c.castSnow = false, 0, 0
+		c.wasCast, c.castManaSpent, c.castSnow, c.castPaidSources = false, 0, 0, nil
 	}
 	if from == Stack && c.flashbackCast {
 		// CR 702.34a, Flashback's replacement (CardFactoryUtil.java:2252:
@@ -1067,6 +1072,9 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 	}
 	c := g.Card(id)
 	from := c.Zone
+	if from == Battlefield && c.prepared != NoCard {
+		g.unprepare(id)
+	}
 	before := *c
 	g.clearTextRecords(id)
 	if from == Stack {
@@ -1476,6 +1484,7 @@ func (g *Game) Clone() *Game {
 
 	for i := range out.players {
 		out.players[i].Counters = g.players[i].Counters.clone()
+		out.players[i].ManaPool = g.players[i].ManaPool.clone()
 		if g.players[i].attachments != nil {
 			out.players[i].attachments = g.players[i].attachments.Clone()
 		}
@@ -1504,6 +1513,7 @@ func (g *Game) Clone() *Game {
 		c.blockedThisTurn = append([]CardID(nil), g.cards[i].blockedThisTurn...)
 		c.attackedThisTurn = append([]EntityID(nil), g.cards[i].attackedThisTurn...)
 		c.devoured = append([]CardID(nil), g.cards[i].devoured...)
+		c.castPaidSources = append([]manaSource(nil), g.cards[i].castPaidSources...)
 		c.activations = g.cards[i].activations.clone()
 		c.trigActs = g.cards[i].trigActs.clone()
 		c.trigResolved = g.cards[i].trigResolved.clone()

@@ -16,6 +16,7 @@ import (
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
+	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
 // definedPlayers resolves Defined$ to the players it names: "You" (the
@@ -700,6 +701,38 @@ func targetedOrDefinedCards(host *Card, a *compile.Ability, refs abilityRefs) ([
 		defined = "Self"
 	}
 	return definedCards(host, defined, refs)
+}
+
+// definedCardsInGame is definedCards with the game in reach, for the forms
+// that scan it (AbilityUtils.java:287-303): "Valid <spec>" over the
+// battlefield and "Valid<Zone> <spec>" over that zone, each zone across every
+// player in seat order (game.getCardsIn), filtered with the activator as You.
+// "ValidAll" (every card in the game) is not resolved; any other form is
+// definedCards'.
+func definedCardsInGame(g *Game, activator PlayerID, host *Card, defined string, refs abilityRefs) ([]CardID, error) {
+	head, spec, found := strings.Cut(defined, " ")
+	zoneName, isValid := strings.CutPrefix(head, "Valid")
+	if !found || !isValid {
+		return definedCards(host, defined, refs)
+	}
+	zone := Battlefield
+	if zoneName != "" {
+		z, ok := ZoneByName(zoneName)
+		if !ok {
+			return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+		}
+		zone = z
+	}
+	parsed := valid.Parse(spec)
+	var out []CardID
+	for _, pid := range g.Players() {
+		for _, id := range g.Zone(zone, pid).Cards() {
+			if Matches(g, g.Card(id), parsed, activator, host.ID) {
+				out = append(out, id)
+			}
+		}
+	}
+	return out, nil
 }
 
 // definedEntities is AbilityUtils.getDefinedEntities: the players def names,

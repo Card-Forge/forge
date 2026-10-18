@@ -1,0 +1,12 @@
+# The stack is frozen while an activated ability's costs are paid
+# (PlaySpellAbility.java:682), as it is for a spell: Stitcher's Supplier,
+# sacrificed to Yawgmoth's "pay 1 life, sacrifice another creature" cost, dies
+# while the stack is frozen, and its "mill three" trigger waits and goes on the
+# stack above the ability (MagicStack.addAndUnfreeze). The mill resolves
+# first (Island, Forest, Plains), then the ability draws the Mountain.
+startturn human
+advance 3
+queue sacrificechoice 2
+queue targets none
+queue action human activate 1 0
+passpriority

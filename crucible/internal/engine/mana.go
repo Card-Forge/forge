@@ -26,6 +26,73 @@ import "github.com/jczastkiewicz/crucible/internal/mana"
 type Pool struct {
 	white, blue, black, red, green, colorless                         int
 	snowWhite, snowBlue, snowBlack, snowRed, snowGreen, snowColorless int
+	// units is every floating unit's provenance in the order it was added
+	// (ADR-0042): per bucket exactly as many entries as that bucket's
+	// counter, the oldest first. The counters stay the payment authority; a
+	// payment takes each decremented bucket's oldest units (takeSpent), as
+	// Java's ManaPool.tryPayCostWithColor spends the first Mana of a color
+	// in its list (ManaPool.java:228-250). The slice is owned by this Pool:
+	// Game.Clone copies it, and Empty drops it rather than truncating, so a
+	// value copy (DrainMana's drained pool) never sees a later write.
+	units []poolUnit
+}
+
+// manaSource is the card a unit of mana came from and that card's
+// zone-change timestamp when its mana ability was activated: Mana.sourceCard,
+// the object as it was then (ADR-0042). The zero value (NoCard) is mana
+// added with no source -- a fixture, the smoke probe, a test.
+type manaSource struct {
+	card  CardID
+	stamp uint64
+}
+
+// poolUnit is one floating unit: its bucket (0-5 plain white, blue, black,
+// red, green, {C}; 6-11 the same order snow) and its source.
+type poolUnit struct {
+	bucket uint8
+	src    manaSource
+}
+
+// Pool buckets, the index order of counters and SnowBreakdown.
+const (
+	bucketColorless = 5
+	bucketSnow      = 6
+)
+
+// counters is the twelve buckets in poolUnit.bucket order.
+func (p *Pool) counters() [12]*int {
+	return [12]*int{&p.white, &p.blue, &p.black, &p.red, &p.green, &p.colorless,
+		&p.snowWhite, &p.snowBlue, &p.snowBlack, &p.snowRed, &p.snowGreen, &p.snowColorless}
+}
+
+// colorBucket is the plain bucket of one color. color must be exactly one of
+// the five; anything else is an engine invariant breach (GO-7), reported by
+// ok false for the caller to panic on with its own name.
+func colorBucket(color mana.Colors) (int, bool) {
+	switch color {
+	case mana.White:
+		return 0, true
+	case mana.Blue:
+		return 1, true
+	case mana.Black:
+		return 2, true
+	case mana.Red:
+		return 3, true
+	case mana.Green:
+		return 4, true
+	}
+	return 0, false
+}
+
+// addUnits adds n units to bucket b, each from src.
+func (p *Pool) addUnits(b, n int, src manaSource) {
+	if n <= 0 {
+		return
+	}
+	*p.counters()[b] += n
+	for range n {
+		p.units = append(p.units, poolUnit{bucket: uint8(b), src: src})
+	}
 }
 
 // Add puts n mana of one color in the pool. color must be exactly one of
@@ -33,27 +100,18 @@ type Pool struct {
 // than one bit set) is an engine invariant breach, not something a card
 // script can cause, so it panics rather than silently doing nothing (GO-7).
 func (p *Pool) Add(color mana.Colors, n int) {
-	switch color {
-	case mana.White:
-		p.white += n
-	case mana.Blue:
-		p.blue += n
-	case mana.Black:
-		p.black += n
-	case mana.Red:
-		p.red += n
-	case mana.Green:
-		p.green += n
-	default:
+	b, ok := colorBucket(color)
+	if !ok {
 		panic("engine: Pool.Add wants exactly one color")
 	}
+	p.addUnits(b, n, manaSource{})
 }
 
 // AddColorless puts n {C} mana in the pool -- CR 106.3's colorless mana
 // symbol, distinct from mana.Colors' own empty set (mana.Colors' own doc
 // comment: {C} is a way to pay a cost, not a color, and is not
 // representable there at all).
-func (p *Pool) AddColorless(n int) { p.colorless += n }
+func (p *Pool) AddColorless(n int) { p.addUnits(bucketColorless, n, manaSource{}) }
 
 // AddSnow puts n snow mana of one color in the pool -- the same color
 // contract [Pool.Add] carries, just landing in the snow bucket instead of
@@ -62,25 +120,56 @@ func (p *Pool) AddColorless(n int) { p.colorless += n }
 // fallback); the only thing it can do that plain mana cannot is pay a snow
 // ({S}) requirement.
 func (p *Pool) AddSnow(color mana.Colors, n int) {
-	switch color {
-	case mana.White:
-		p.snowWhite += n
-	case mana.Blue:
-		p.snowBlue += n
-	case mana.Black:
-		p.snowBlack += n
-	case mana.Red:
-		p.snowRed += n
-	case mana.Green:
-		p.snowGreen += n
-	default:
+	b, ok := colorBucket(color)
+	if !ok {
 		panic("engine: Pool.AddSnow wants exactly one color")
 	}
+	p.addUnits(bucketSnow+b, n, manaSource{})
 }
 
 // AddSnowColorless puts n snow {C} mana in the pool -- [Pool.AddColorless]'s
 // own contract, snow-tagged.
-func (p *Pool) AddSnowColorless(n int) { p.snowColorless += n }
+func (p *Pool) AddSnowColorless(n int) { p.addUnits(bucketSnow+bucketColorless, n, manaSource{}) }
+
+// takeSpent removes the units a payment spent -- for every bucket, its
+// oldest units past the bucket's counter -- and returns them in pool order.
+func (p *Pool) takeSpent() []poolUnit {
+	var excess [12]int
+	for _, u := range p.units {
+		excess[u.bucket]++
+	}
+	spentAny := false
+	for b, n := range p.counters() {
+		excess[b] -= *n
+		spentAny = spentAny || excess[b] > 0
+	}
+	if !spentAny {
+		return nil
+	}
+	var spent []poolUnit
+	kept := p.units[:0]
+	for _, u := range p.units {
+		if excess[u.bucket] > 0 {
+			excess[u.bucket]--
+			spent = append(spent, u)
+			continue
+		}
+		kept = append(kept, u)
+	}
+	p.units = kept
+	return spent
+}
+
+// clone is the pool with its own copy of units; an empty list allocates
+// nothing (TestCloneAllocationsStayBounded).
+func (p Pool) clone() Pool {
+	if len(p.units) > 0 {
+		p.units = append([]poolUnit(nil), p.units...)
+	} else {
+		p.units = nil
+	}
+	return p
+}
 
 // Total is how much mana of any kind is in the pool, snow and plain alike.
 func (p *Pool) Total() int {
@@ -146,6 +235,15 @@ func (p *Pool) convertTo(color mana.Colors, colorless bool) {
 		*snow[to] += *snow[i]
 		*snow[i] = 0
 	}
+	// Each unit keeps its source and its place, now of the one type
+	// (ManaPool.convertManaColor's Mana.convertColor keeps sourceCard).
+	for i, u := range p.units {
+		if u.bucket >= bucketSnow {
+			p.units[i].bucket = uint8(bucketSnow + to)
+		} else {
+			p.units[i].bucket = uint8(to)
+		}
+	}
 }
 
 // Empty clears the pool -- CR 500.4, run once per phase/step transition
@@ -206,7 +304,8 @@ func (p *Pool) Pay(cost mana.Cost) bool {
 // {S} requirement), and any failure anywhere leaves the pool exactly as it
 // was, the same all-or-nothing guarantee Pay itself already makes.
 func (p *Pool) PayWithSnow(cost mana.Cost, snow []mana.Shard) bool {
-	return p.payWithSnow(cost, snow, false)
+	_, ok := p.payWithSnow(cost, snow, false)
+	return ok
 }
 
 // payWithSnow is [Pool.PayWithSnow]; snowAny is a cast through
@@ -215,7 +314,8 @@ func (p *Pool) PayWithSnow(cost mana.Cost, snow []mana.Shard) bool {
 // with a color mask takes any snow mana). It is tried after the pip's own plain
 // and snow mana, colorless snow first, then the other colors in WUBRG order --
 // the choice of which snow source pays is the payer's, and this port picks.
-func (p *Pool) payWithSnow(cost mana.Cost, snow []mana.Shard, snowAny bool) bool {
+// It returns the units spent (takeSpent, ADR-0042).
+func (p *Pool) payWithSnow(cost mana.Cost, snow []mana.Shard, snowAny bool) ([]poolUnit, bool) {
 	spend := *p
 	for _, s := range cost.Shards() {
 		var plain, snowBucket *int
@@ -233,7 +333,7 @@ func (p *Pool) payWithSnow(cost mana.Cost, snow []mana.Shard, snowAny bool) bool
 		case mana.ShardC:
 			plain, snowBucket = &spend.colorless, &spend.snowColorless
 		default:
-			return false
+			return nil, false
 		}
 		switch {
 		case *plain > 0:
@@ -242,7 +342,7 @@ func (p *Pool) payWithSnow(cost mana.Cost, snow []mana.Shard, snowAny bool) bool
 			*snowBucket--
 		case snowAny && s != mana.ShardC && spend.takeAnySnow():
 		default:
-			return false
+			return nil, false
 		}
 	}
 
@@ -262,10 +362,10 @@ func (p *Pool) payWithSnow(cost mana.Cost, snow []mana.Shard, snowAny bool) bool
 		case mana.ShardC:
 			bucket = &spend.snowColorless
 		default:
-			return false
+			return nil, false
 		}
 		if *bucket == 0 {
-			return false
+			return nil, false
 		}
 		*bucket--
 	}
@@ -298,13 +398,13 @@ func (p *Pool) payWithSnow(cost mana.Cost, snow []mana.Shard, snowAny bool) bool
 		case spend.snowGreen > 0:
 			spend.snowGreen--
 		default:
-			return false
+			return nil, false
 		}
 		generic--
 	}
 
 	*p = spend
-	return true
+	return p.takeSpent(), true
 }
 
 // takeAnySnow spends one snow mana of any type, colorless first, and reports
@@ -334,4 +434,6 @@ func (p *Pool) merge(o Pool) {
 	p.snowRed += o.snowRed
 	p.snowGreen += o.snowGreen
 	p.snowColorless += o.snowColorless
+	// The drained units keep their sources, after p's own.
+	p.units = append(p.units, o.units...)
 }

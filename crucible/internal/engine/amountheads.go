@@ -216,22 +216,33 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 	case "CastTotalManaSpent":
 		// AbilityUtils.java:1896-1908: the cast SpellAbility's total mana
 		// spent, 0 for a card that was not cast; `CastTotalManaSpent <valid>`
-		// counts the paying mana whose source card matches. The pool keeps no
-		// source card, only whether a snow permanent made the mana (CR
-		// 106.3a), so `Snow` -- the source is a snow permanent -- is the one
-		// restriction it can answer; Cave, Desert, Treasure and the rest stay
-		// unresolved (GO-7).
-		if source == NoCard || (count.Argument != "" && count.Argument != "Snow") {
+		// counts the paying mana whose source card matches the comma-separated
+		// restrictions (CardPredicates.restriction, the counting card's
+		// controller as "You"). `Snow` reads the pool's snow buckets (mana a
+		// snow permanent made, CR 106.3a); any other restriction reads each
+		// unit's recorded source (castPaidSources, ADR-0042), a source that
+		// has since left the battlefield as its last-known object.
+		if source == NoCard {
 			return 0, false
 		}
 		c := g.Card(source)
 		if !c.wasCast {
 			return 0, true
 		}
-		if count.Argument == "Snow" {
+		switch count.Argument {
+		case "":
+			return c.castManaSpent, true
+		case "Snow":
 			return c.castSnow, true
 		}
-		return c.castManaSpent, true
+		spec := valid.Parse(count.Argument)
+		n := 0
+		for _, src := range c.castPaidSources {
+			if from := g.manaSourceCard(src); from != nil && Matches(g, from, spec, sourceController, source) {
+				n++
+			}
+		}
+		return n, true
 	}
 	if sourceController == NoPlayer {
 		return 0, false

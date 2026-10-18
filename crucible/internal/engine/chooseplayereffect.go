@@ -5,12 +5,14 @@ package engine
 import "fmt"
 
 // choosePlayerUnresolvedParams are ChoosePlayerEffect.java's params this
-// port cannot honour yet: Random$ (Aggregates.random's RNG draw), Secretly$
-// (a separate secret-chosen-player slot), Protect$ (battle protector
-// reassignment), Optional$, and the ChooseSubAbility$/CantChooseSubAbility$
-// AdditionalAbility dispatch no effect in this port has yet.
+// port cannot honour yet: Protect$ (battle protector reassignment),
+// Optional$, and the ChooseSubAbility$/CantChooseSubAbility$
+// AdditionalAbility dispatch no effect in this port has yet. Random$ picks
+// with Aggregates.random over Choices$ (ChoosePlayerEffect.java:47-48);
+// Secretly$ writes the same chosen-player slot, only without updating the
+// view (Card.setSecretChosenPlayer, Card.java:2127-2129).
 var choosePlayerUnresolvedParams = [...]string{
-	"Random", "Secretly", "Protect", "Optional",
+	"Protect", "Optional",
 	"ChooseSubAbility", "CantChooseSubAbility",
 	"Condition", "OrOtherConditionSVarCompare",
 }
@@ -47,10 +49,16 @@ func (choosePlayerEffect) Resolve(g *Game, a *Ability, controller PlayerControll
 	if len(choices) == 0 {
 		return nil
 	}
+	_, random := a.Params.Param("Random")
 	for _, pid := range choosers {
-		chosen := controller.ChoosePlayerForEffect(g, pid, a.Source, choices)
-		if err := checkChoice([]PlayerID{chosen}, choices, 1, 1); err != nil {
-			return fmt.Errorf("engine: ChoosePlayer: %w", err)
+		var chosen PlayerID
+		if random {
+			chosen = choices[g.randomIndex(len(choices))]
+		} else {
+			chosen = controller.ChoosePlayerForEffect(g, pid, a.Source, choices)
+			if err := checkChoice([]PlayerID{chosen}, choices, 1, 1); err != nil {
+				return fmt.Errorf("engine: ChoosePlayer: %w", err)
+			}
 		}
 		source.Memory.SetChosenPlayer(chosen)
 		if _, ok := a.Params.Param("ForgetOtherRemembered"); ok {

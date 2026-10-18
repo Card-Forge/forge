@@ -34,9 +34,14 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `bringer_of_green_zeniths_twilight`        | Line 6 writes `no condition`; `makeEtbCounter` compares `"no Condition"` case-sensitively (`CardFactoryUtil.java:557`)                                                                                                  | Review of the R9d port          | Not filed                                                        |
 | `jin_sakai_ghost_of_tsushima`              | Line 7 puts `ConditionCheckSVar$ X \| ConditionSVarCompare$ EQ0` on the `DB$ Charm` itself; the chosen modes are chained as sub-abilities and still resolve (`CharmEffect.java:293-317`, `AbilityUtils.java:1395-1403`) | Review of the R9g port          | Not filed                                                        |
 | `overclocked_electromancer` (line 9)       | Oracle says "deals combat damage to a creature", but the `Mode$ DamageDone` trigger has no `CombatDamage$ True`, so noncombat damage fires it too                                                                       | Review of the R9j port          | Not filed                                                        |
+| `library_of_leng` (line 6)                 | `ChangeZone \| Origin$ All \| Destination$ Library` with no `NoShuffle$ True`: `ChangeZoneEffect.java:1259` shuffles the library before the discarded card goes on top; Oracle says no shuffle                          | Discard replacements (R9k)      | Not filed                                                        |
+| `nephalia_academy` (line 7)                | Same missing `NoShuffle$ True` as `library_of_leng`: the library is shuffled before the revealed card goes on top                                                                                                       | Discard replacements (R9k)      | Not filed                                                        |
+| `wilt_leaf_liege` (line 8)                 | `DefinedPlayer$ ReplacedPlayer`: `ReplaceMoved.setReplacingObjects` (`ReplaceMoved.java:120-124`) sets no Player, so the hidden ChangeZone has no fetcher and moves nothing; the replaced discard leaves it in hand     | Discard replacements (R9k)      | Not filed                                                        |
 
-Every row but `peace_talks`, `____________trespasser` and `turtle_tracks` is merged upstream. Turtle Tracks is
-reproduced as Java runs it (oracle parity). The Trespasser line fails closed: `pumpKeywords` (`pumpeffect.go`) refuses a
+Every row but `peace_talks`, `____________trespasser`, `turtle_tracks` and the rows marked Not filed is merged upstream.
+Turtle Tracks, Library of Leng and Nephalia Academy are reproduced as Java runs them (oracle parity, the shuffle
+included). Wilt-Leaf Liege fails closed: `definedPlayers` refuses an unrecorded `ReplacedPlayer`, the discard goes to
+the graveyard and the error is reported. The Trespasser line fails closed: `pumpKeywords` (`pumpeffect.go`) refuses a
 hidden line nothing reads, so the card is refused rather than played without its evasion. The seven of
 [#12193](https://github.com/Card-Forge/forge/pull/12193) arrived with a sync. `peace_talks` is carried as a pending fix,
 logged in [upstream-patches.md](upstream-patches.md), until upstream merges it. `internal/carddb/compile` compiles the

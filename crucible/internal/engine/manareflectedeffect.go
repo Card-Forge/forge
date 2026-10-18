@@ -104,7 +104,7 @@ func (manaReflectedEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 	m.amount = amount
 	m.snow = source.Type().HasSupertype(cardtype.Snow)
 	for _, pid := range players {
-		g.addProducedMana(pid, m)
+		g.addProducedMana(pid, m, g.manaSourceOf(a.Source))
 	}
 	return nil
 }

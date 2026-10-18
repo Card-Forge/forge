@@ -87,11 +87,12 @@ the effect before either can activate, target or resolve. Each lands as a shared
   (`SwitchBlockEffect.runTriggers`), through `checkAttackerBlockedByCreatureTriggers`/`checkBlocksTriggers`.
 - `Condition$` rejected (`rejectParams`), as `blockEffect` does.
 
-Known gaps, general to `ActivateAbility`, not SwitchBlock's own (pinned by `TestSwitchBlockSorrowsPathRealCard`):
+A trigger fired by paying the cost (Sorrow's Path's Taps trigger) waits while the stack is frozen and goes on top of the
+ability (`PlaySpellAbility.java:682`, R9k), as `TestSwitchBlockSorrowsPathRealCard` pins. Known gap, general to
+`ActivateAbility`, not SwitchBlock's own:
 
 | Gap                                                                                                                                        | Effect on these two cards                                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| A trigger fired by paying the cost (`checkTapsTriggers`) is pushed during payment, under the ability; Java (CR 603.3) puts it on top       | Sorrow's Path's own Taps trigger (2 damage to you and each creature you control) resolves after the switch here, before it in Java              |
 | Cost is paid and cost triggers fire before targets are chosen; `targetChoiceFor` refuses only zero candidates, not fewer than `TargetMin$` | With one legal target, Jarkeld taps and Sorrow's Path taps and deals its damage for nothing; Java refuses the activation (`TargetMin$ 2` unmet) |
 
 No Java counterpart, by design:

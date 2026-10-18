@@ -47,15 +47,15 @@ func TestChoosePlayerEffectRejectsUnofferedAnswer(t *testing.T) {
 	}
 }
 
-// TestChoosePlayerEffectRejectsUnresolvedParam proves Random$ fails closed.
+// TestChoosePlayerEffectRejectsUnresolvedParam proves Protect$ fails closed.
 func TestChoosePlayerEffectRejectsUnresolvedParam(t *testing.T) {
 	t.Parallel()
 
 	g, p, _ := newTwoPlayerGame(t)
 	c := engine.NewScriptedController()
-	def := etbChainDef(t, "Test ChoosePlayer Random", "DB$ ChoosePlayer | Defined$ You | Choices$ Player | Random$ True")
+	def := etbChainDef(t, "Test ChoosePlayer Protect", "DB$ ChoosePlayer | Defined$ You | Choices$ Player | Protect$ True")
 	if _, err := castETBChain(t, g, p, def, c); err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved Random$")
+		t.Fatal("ResolveStack succeeded, want an error for unresolved Protect$")
 	}
 }
 

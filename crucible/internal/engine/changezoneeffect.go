@@ -15,9 +15,13 @@ import (
 // LeaveBattlefield$, StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
 // changeZoneDuration, but not its ReturnAbility$/ReturnValid$ delayed
 // trigger), an alternative destination prompt (DestinationAlternative$), a
-// non-default search loop (AtRandom$, Different*$, WithTotal*$, Exactly$,
-// Reorder$), or an LKI copy in Memory (RememberLKI$). Chooser$ and
-// OriginAlternative$ resolve (changeZoneHidden, changeZoneKnown).
+// non-default search loop (Different*$, WithTotal*$, Exactly$, Reorder$; and
+// AtRandom$, whose Aggregates.random draws over the fetch list after
+// fetchList.sort() orders it by CardView.toString -- zone text, translated
+// name and Java card id, ChangeZoneEffect.java:1097, :1199 -- an order this
+// port cannot reproduce, so the same draw would pick another card), or an LKI
+// copy in Memory (RememberLKI$). Chooser$ and OriginAlternative$ resolve
+// (changeZoneHidden, changeZoneKnown).
 // AlreadyRevealed$ is read only to skip the DelayedReveal the decider is shown
 // while choosing (ChangeZoneEffect.java:1044), a display this port never
 // makes, so it is accepted and changes nothing. TrackDiscarded$ (Madness's

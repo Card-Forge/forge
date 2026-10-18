@@ -5,12 +5,17 @@ package engine
 import "fmt"
 
 // genericChoiceUnresolvedParams are ChooseGenericEffect.java's params this
-// port cannot honour yet: random picks (AtRandom$, NumRandomChoices$), a
-// hidden or recorded choice (Secretly$, SetChosenMode$, Guess$), and the
-// batched damage/zone tables (DamageMap$, ChangeZoneTable$).
+// port cannot honour yet: NumRandomChoices$ (a random subset first), Guess$,
+// and the batched damage/zone tables (DamageMap$, ChangeZoneTable$).
+// SetChosenMode$ records the pick on the host (ChooseGenericEffect.java:
+// 120-122); LockInText$ is display text the statics also carry; Secretly$
+// only gathers the picks into one notification (:116-119, :143-145).
+// AtRandom$ True picks with Aggregates.random(choices, ChoiceAmount$) (:86-89);
+// AtRandom$ Urza re-draws targeting choices with no candidates (:91-100) and
+// is refused.
 var genericChoiceUnresolvedParams = [...]string{
-	"AtRandom", "NumRandomChoices", "Secretly", "SetChosenMode", "Guess",
-	"DamageMap", "ChangeZoneTable", "LockInText",
+	"NumRandomChoices", "Guess",
+	"DamageMap", "ChangeZoneTable",
 	"Condition", "Ultimate",
 }
 
@@ -31,6 +36,10 @@ func (genericChoiceEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: GenericChoice: %s$ not resolvable yet", key)
 		}
+	}
+	random, atRandom := a.Params.Param("AtRandom")
+	if atRandom && random != "True" {
+		return fmt.Errorf("engine: GenericChoice: AtRandom$ %s not resolvable yet", random)
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
@@ -60,23 +69,35 @@ func (genericChoiceEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		return fmt.Errorf("engine: GenericChoice: %w", err)
 	}
 	_, tempRem := a.Params.Param("TempRemember")
+	_, setMode := a.Params.Param("SetChosenMode")
 	for _, p := range players {
 		if len(choices) == 0 {
 			continue
 		}
-		picked := controller.ChooseAbilitiesForEffect(g, p, a.Source, names, amount)
-		all := make([]int, len(choices))
-		for i := range all {
-			all[i] = i
-		}
-		if err := checkChoice(picked, all, amount, amount); err != nil {
-			return fmt.Errorf("engine: GenericChoice: %w", err)
+		var picked []int
+		if atRandom {
+			picked = g.randomSample(len(choices), amount)
+		} else {
+			picked = controller.ChooseAbilitiesForEffect(g, p, a.Source, names, amount)
+			all := make([]int, len(choices))
+			for i := range all {
+				all[i] = i
+			}
+			if err := checkChoice(picked, all, amount, amount); err != nil {
+				return fmt.Errorf("engine: GenericChoice: %w", err)
+			}
 		}
 		var oldRem []EntityID
 		if tempRem {
 			oldRem = swapRememberedPlayer(&source.Memory, p)
 		}
 		for _, i := range picked {
+			if setMode {
+				// The chosen ability's description is the mode
+				// (chosenSA.getDescription(), its SpellDescription$).
+				desc, _ := choices[i].Ability.Param("SpellDescription")
+				g.Card(a.Source).Memory.SetChosenMode(desc)
+			}
 			if err := g.resolveAdditional(a, controller, choices[i]); err != nil {
 				return err
 			}

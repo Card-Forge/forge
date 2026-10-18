@@ -66,6 +66,10 @@ func (g *Game) entryReplaced(controller PlayerController, moved CardID, origin Z
 			card.setCopies(nil)
 		}
 		card.pendingEnter, card.devoured = nil, nil
+		// Being prepared does not end here: Java unprepares only through a
+		// leaves-play command (AlterAttributeEffect.java:87), which a card
+		// that never entered does not run, so its copy stays castable
+		// (forge-java-defects.md, PORT-8).
 	}
 	if replaced && card.Zone != Battlefield {
 		// A card the chain left outside the battlefield is not under the
@@ -323,7 +327,7 @@ func entryChainRunsBeforeMove(a *compile.Ability, depth int) bool {
 		return false
 	}
 	delayed := strings.EqualFold(a.Name, "DelayedTrigger")
-	ok := delayed
+	ok := delayed || entersPrepared(a) || modeOnlyPump(a)
 	if strings.EqualFold(a.Name, "PutCounter") {
 		_, etb := a.Param("ETB")
 		defined, hasDefined := a.Param("Defined")
@@ -344,6 +348,28 @@ func entryChainRunsBeforeMove(a *compile.Ability, depth int) bool {
 		}
 	}
 	return true
+}
+
+// entersPrepared reports whether a is "this creature enters prepared": an
+// AlterAttribute making the entering card itself prepared. Unlike the other
+// attributes, which Game.Move rebuilds, the prepared link (Card.prepared,
+// prepare.go) survives the entry and ends only when the card leaves the
+// battlefield, as Java's leaves-play command does (AlterAttributeEffect.java:87).
+func entersPrepared(a *compile.Ability) bool {
+	if !strings.EqualFold(a.Name, "AlterAttribute") {
+		return false
+	}
+	attrs, _ := a.Param("Attributes")
+	defined, hasDefined := a.Param("Defined")
+	return strings.TrimSpace(attrs) == "Prepared" && (!hasDefined || defined == "Self") &&
+		onlyParamsOf(a, "db", "attributes", "defined", "spelldescription", "subability")
+}
+
+// modeOnlyPump reports whether a is a Pump that changes nothing, only names a
+// mode: the Sieges' "DB$ Pump | SpellDescription$ Khans" choices of a
+// SetChosenMode$ GenericChoice, whose description is all that is kept.
+func modeOnlyPump(a *compile.Ability) bool {
+	return strings.EqualFold(a.Name, "Pump") && onlyParamsOf(a, "db", "spelldescription")
 }
 
 // enterShapeHandledAfterMove reports whether sub, an "as it enters" Moved

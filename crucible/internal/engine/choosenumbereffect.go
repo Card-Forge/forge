@@ -5,14 +5,16 @@ package engine
 import "fmt"
 
 // chooseNumberUnresolvedParams are ChooseNumberEffect.java's params this
-// port cannot honour yet: Random$ (MyRandom), the whole Secretly$ branch
-// (KeepSecret$, Highest$/Lowest$/NotLowest$, Matched/UnmatchedAbility$,
-// Guesser$/GuessCorrect$/GuessWrong$ -- AdditionalAbility dispatch),
+// port cannot honour yet: the whole Secretly$ branch (KeepSecret$,
+// Highest$/Lowest$/NotLowest$, Matched/UnmatchedAbility$,
+// Guesser$/GuessCorrect$/GuessWrong$ -- AdditionalAbility dispatch over a
+// HashMap<Player, Integer> whose iteration order orders the winners),
 // RemoveChoices$ (reads remembered Integers, which Memory cannot hold), and
 // RememberChosen$ (in Java it only ever adds the Secretly$ map's Integer
-// values, again not an EntityID).
+// values, again not an EntityID). Random$ is MyRandom's nextInt(max-min+1)
+// + min (ChooseNumberEffect.java:65-66).
 var chooseNumberUnresolvedParams = [...]string{
-	"Random", "Secretly", "KeepSecret", "Highest", "Lowest", "NotLowest",
+	"Secretly", "KeepSecret", "Highest", "Lowest", "NotLowest",
 	"MatchedAbility", "UnmatchedAbility", "Guesser", "GuessCorrect",
 	"GuessWrong", "RememberHighest", "RemoveChoices", "RememberChosen",
 	"ChooseNumberSubAbility",
@@ -47,10 +49,21 @@ func (chooseNumberEffect) Resolve(g *Game, a *Ability, controller PlayerControll
 	if err != nil {
 		return fmt.Errorf("engine: ChooseNumber: %w", err)
 	}
+	_, random := a.Params.Param("Random")
+	if random && hi < lo {
+		// Random.nextInt throws on a non-positive bound (GO-7: an error, not
+		// a panic).
+		return fmt.Errorf("engine: ChooseNumber: Random$ between %d and %d", lo, hi)
+	}
 	for _, pid := range choosers {
-		n := controller.ChooseNumber(g, pid, a.Source, lo, hi)
-		if n < lo || n > hi {
-			return fmt.Errorf("engine: ChooseNumber: controller chose %d, want between %d and %d", n, lo, hi)
+		var n int
+		if random {
+			n = g.randomInt(lo, hi)
+		} else {
+			n = controller.ChooseNumber(g, pid, a.Source, lo, hi)
+			if n < lo || n > hi {
+				return fmt.Errorf("engine: ChooseNumber: controller chose %d, want between %d and %d", n, lo, hi)
+			}
 		}
 		source.Memory.SetChosenNumber(n)
 	}

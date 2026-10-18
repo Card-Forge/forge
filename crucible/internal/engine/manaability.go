@@ -69,10 +69,11 @@ func (g *Game) TapLandForMana(pid PlayerID, land CardID, color mana.Colors, cont
 	if !c.Type().HasSubtype(basic) {
 		return false
 	}
+	src := g.manaSourceOf(land)
 	c.Tapped = true
 	produced := g.manaReplaced(controller, pid, land,
 		producedMana{color: color, snow: c.Type().HasSupertype(cardtype.Snow), amount: 1})
-	g.addProducedMana(pid, produced)
+	g.addProducedMana(pid, produced, src)
 	g.checkTapsTriggers(controller, land, pid, false)
 	g.noteTapsForMana(land, pid)
 	g.checkTapsForManaTriggers(controller, land, pid, produced)
@@ -80,20 +81,56 @@ func (g *Game) TapLandForMana(pid PlayerID, land CardID, color mana.Colors, cont
 }
 
 // addProducedMana puts one production of mana in pid's pool, after
-// ProduceMana replacements (manaReplaced, replacement.go) have had their say.
-func (g *Game) addProducedMana(pid PlayerID, m producedMana) {
+// ProduceMana replacements (manaReplaced, replacement.go) have had their say,
+// each unit recording src, the card whose ability made it (ADR-0042).
+func (g *Game) addProducedMana(pid PlayerID, m producedMana, src manaSource) {
 	if m.amount <= 0 {
 		return
 	}
-	pool := &g.Player(pid).ManaPool
-	switch {
-	case m.colorless && m.snow:
-		pool.AddSnowColorless(m.amount)
-	case m.colorless:
-		pool.AddColorless(m.amount)
-	case m.snow:
-		pool.AddSnow(m.color, m.amount)
-	default:
-		pool.Add(m.color, m.amount)
+	g.Player(pid).ManaPool.addProduced(m, src)
+}
+
+// addProduced puts one production of mana in the pool, each unit from src
+// (ADR-0042). m.color must be exactly one color unless m.colorless; anything
+// else is an engine invariant breach (GO-7).
+func (p *Pool) addProduced(m producedMana, src manaSource) {
+	b := bucketColorless
+	if !m.colorless {
+		var ok bool
+		if b, ok = colorBucket(m.color); !ok {
+			panic("engine: Pool.addProduced wants exactly one color")
+		}
 	}
+	if m.snow {
+		b += bucketSnow
+	}
+	p.addUnits(b, m.amount, src)
+}
+
+// manaSourceOf is card as the source of mana its ability is about to make:
+// the card and its current zone-change timestamp, taken before the ability's
+// costs move it (a Treasure's sacrifice), as Java's Mana keeps the
+// battlefield Card object it was made by (ADR-0042).
+func (g *Game) manaSourceOf(card CardID) manaSource {
+	if card == NoCard {
+		return manaSource{}
+	}
+	return manaSource{card: card, stamp: g.Card(card).Timestamp}
+}
+
+// manaSourceCard is the object a recorded source reads as: the card itself
+// while it is the same object (its timestamp unchanged), else its last
+// battlefield snapshot (Game.LKI), else the card as it is now. NoCard for
+// mana with no source.
+func (g *Game) manaSourceCard(src manaSource) *Card {
+	if src.card == NoCard {
+		return nil
+	}
+	c := g.Card(src.card)
+	if c.Timestamp != src.stamp {
+		if l := g.LKI(src.card); l != nil {
+			return l
+		}
+	}
+	return c
 }

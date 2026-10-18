@@ -15,13 +15,16 @@ import (
 // for the others -- or from ValidTypes$ when given, less InvalidTypes$. The
 // host records it (setChosenType, or setChosenType2 with ChooseType2$).
 // AtRandom$ picks with Aggregates.random, only over an explicit ValidTypes$
-// list since Java's type sets have no stable order to match. Subtype lists
-// come from the game DB's type vocabulary and are offered sorted.
+// list: Java's subtype lists are HashSet iterations (CardType.Constant,
+// CardType.java:871-873) whose order this port does not reproduce. Subtype
+// lists come from the game DB's type vocabulary and are offered sorted.
+// Secretly$ writes the same chosen-type slot without updating the view
+// (Card.setSecretChosenType, Card.java:2214-2216).
 type chooseTypeEffect struct{}
 
 func (chooseTypeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectParams(a, "ChooseType", "Condition", "TypesFromDefined", "MostPrevalentInDefinedZone",
-		"Note", "ChooseNoted", "Secretly"); err != nil {
+		"Note", "ChooseNoted"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

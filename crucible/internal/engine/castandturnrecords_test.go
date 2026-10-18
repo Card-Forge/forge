@@ -362,8 +362,9 @@ func TestRememberAmountCountsReplacedCounters(t *testing.T) {
 	}
 }
 
-// Count$CastTotalManaSpent Snow counts the snow mana the cast spent; any other
-// source restriction is unresolved (the pool keeps no source card).
+// Count$CastTotalManaSpent Snow counts the snow mana the cast spent (the
+// pool's snow buckets; other restrictions read each unit's source,
+// castmanasources_test.go).
 func TestCastTotalManaSpentCountsSnowMana(t *testing.T) {
 	t.Parallel()
 

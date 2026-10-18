@@ -103,6 +103,12 @@ func (g *Game) castOptions(pid PlayerID, card CardID, fromHand bool) []castOptio
 		}
 		grants = append(grants, o)
 	}
+	// A prepared creature's copy of its spell (prepare.go): the prepared
+	// effect's MayPlay$ static, no cost change (AlterAttributeEffect.java:83-85).
+	if g.preparedCaster(card) == pid {
+		zonePermission = true
+		grants = append(grants, castOption{})
+	}
 	if !zonePermission {
 		return nil
 	}

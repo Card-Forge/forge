@@ -63,13 +63,14 @@ func (g *Game) createToken(controller PlayerController, spec tokenSpec) CardID {
 // removeTokensOffBattlefield is CR 704.5d: a token in any zone but the
 // battlefield leaves the game, silently (Zone.remove, no zone-change
 // event). It is parked in its owner's None zone, since a CardID is never
-// freed (ADR-0009).
+// freed (ADR-0009). A prepared spell's copy waiting in exile stays
+// (GameAction.java:1922-1924, prepare.go).
 func removeTokensOffBattlefield(g *Game) bool {
 	performed := false
 	for _, pid := range g.Players() {
 		for _, kind := range []ZoneType{Hand, Library, Graveyard, Exile, Command, Sideboard} {
 			for _, id := range append([]CardID(nil), g.Zone(kind, pid).Cards()...) {
-				if g.Card(id).IsToken {
+				if c := g.Card(id); c.IsToken && !hiddenPreparedSpell(c) {
 					g.Zone(kind, pid).cards.Remove(id)
 					g.put(id, None, g.Card(id).Owner)
 					performed = true

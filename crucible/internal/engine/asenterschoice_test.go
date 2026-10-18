@@ -6,6 +6,7 @@ import (
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
 	"github.com/jczastkiewicz/crucible/internal/mana"
+	"github.com/jczastkiewicz/crucible/pkg/javarand"
 )
 
 // "As CARDNAME enters, choose ..." (K:ETBReplacement:Other:<SVar>) runs its
@@ -86,13 +87,14 @@ func TestAsEntersMillRunsBeforeTheMove(t *testing.T) {
 }
 
 // An as-enters chain no entry path runs is refused, not skipped (GO-7): an
-// AlterAttribute would write onto the card that Game.Move then rebuilds.
+// AlterAttribute other than Prepared would write onto the card that
+// Game.Move then rebuilds.
 func TestAsEntersUnresolvableChainIsAnError(t *testing.T) {
 	t.Parallel()
 	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
-	def := scriptDef(t, "Prepared Entrant", "Creature Elf",
-		"K:ETBReplacement:Other:DBPrepare",
-		"SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared")
+	def := scriptDef(t, "Suspected Entrant", "Creature Elf",
+		"K:ETBReplacement:Other:DBSuspect",
+		"SVar:DBSuspect:DB$ AlterAttribute | Attributes$ Suspected")
 	entrant := g.NewCard(def, p, engine.Hand)
 	err := castEntrant(t, g, p, entrant, engine.NewScriptedController())
 	if err == nil || !strings.Contains(err.Error(), "as-it-enters replacement ReplaceWith$ AlterAttribute") {
@@ -154,15 +156,21 @@ func TestAsEntersChainShapes(t *testing.T) {
 	}
 }
 
-// Rainbow Knights' ChooseColor carries Random$, which ChooseColor does not
-// resolve: the entry is refused rather than the protection silently missing.
-func TestRainbowKnightsRandomColorIsRefused(t *testing.T) {
+// Rainbow Knights' ChooseColor carries Random$: as it enters, one color is
+// drawn with Aggregates.random over WUBRG (ChooseColorEffect.java:80-87) --
+// the game's first draw, nextInt(5) on its seed -- and kept on the permanent.
+func TestRainbowKnightsRandomColorIsChosenAsItEnters(t *testing.T) {
 	t.Parallel()
 	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
 	knights := g.NewCard(corpusCard(t, "Rainbow Knights"), p, engine.Hand)
 	g.Player(p).ManaPool.Add(mana.White, 2)
-	err := castEntrant(t, g, p, knights, engine.NewScriptedController())
-	if err == nil || !strings.Contains(err.Error(), "Random$") {
-		t.Errorf("err = %v, want ChooseColor's Random$ refused", err)
+	c := engine.NewScriptedController()
+	c.QueuePayGeneric(mana.ShardW)
+	if err := castEntrant(t, g, p, knights, c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	want := [...]mana.Colors{mana.White, mana.Blue, mana.Black, mana.Red, mana.Green}[javarand.New(1).Int32n(5)]
+	if got := g.Card(knights).Memory.ChosenColors(); got != want {
+		t.Errorf("chosen colors = %v, want %v", got, want)
 	}
 }

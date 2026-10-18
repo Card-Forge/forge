@@ -43,8 +43,9 @@ func delveSorceryDef(t *testing.T) *compile.Card {
 }
 
 // An ExileFromGrave<1/CARDNAME> cost takes its card out of the graveyard: a
-// watcher's graveyard-origin trigger fires. Paying for an activated ability,
-// it goes on the stack as the cost is paid, under the ability.
+// watcher's graveyard-origin trigger fires. The stack is frozen while the
+// ability's costs are paid (PlaySpellAbility.java:682), so the trigger waits
+// and goes on the stack above the ability (MagicStack.addAndUnfreeze).
 func TestExileFromGraveCostFiresGraveyardLeaveTriggers(t *testing.T) {
 	t.Parallel()
 
@@ -58,10 +59,10 @@ func TestExileFromGraveCostFiresGraveyardLeaveTriggers(t *testing.T) {
 		t.Fatal("ActivateAbility returned false")
 	}
 	if g.StackLen() != 2 {
-		t.Fatalf("StackLen() = %d, want 2 (the ability over the watcher's trigger)", g.StackLen())
+		t.Fatalf("StackLen() = %d, want 2 (the watcher's trigger over the ability)", g.StackLen())
 	}
-	if top, _ := g.StackTop(); top.Source != creature {
-		t.Errorf("stack top source = %v, want the activated ability's %v", top.Source, creature)
+	if top, _ := g.StackTop(); top.Source != watcher {
+		t.Errorf("stack top source = %v, want the watcher's trigger %v", top.Source, watcher)
 	}
 	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
 		t.Fatal(err)

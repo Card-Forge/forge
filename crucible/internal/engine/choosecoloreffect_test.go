@@ -54,15 +54,19 @@ func TestChooseColorEffectRejectsExcludedColor(t *testing.T) {
 	}
 }
 
-// TestChooseColorEffectRejectsUnresolvedParam proves Random$ fails closed.
-func TestChooseColorEffectRejectsUnresolvedParam(t *testing.T) {
+// TestChooseColorEffectRejectsRandomWithChoices proves Random$ or Exclude$
+// beside Choices$ fails closed: Java's Arrays.asList list cannot shrink.
+func TestChooseColorEffectRejectsRandomWithChoices(t *testing.T) {
 	t.Parallel()
 
-	g, p, _ := newTwoPlayerGame(t)
-	c := engine.NewScriptedController()
-	def := etbChainDef(t, "Test ChooseColor Random", "DB$ ChooseColor | Defined$ You | Random$ True")
-	if _, err := castETBChain(t, g, p, def, c); err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved Random$")
+	for _, line := range []string{
+		"DB$ ChooseColor | Defined$ You | Random$ True | Choices$ white,blue",
+		"DB$ ChooseColor | Defined$ You | Choices$ white,blue | Exclude$ white",
+	} {
+		g, p, _ := newTwoPlayerGame(t)
+		if _, err := castETBChain(t, g, p, etbChainDef(t, "Test ChooseColor Choices", line), engine.NewScriptedController()); err == nil {
+			t.Errorf("%q: ResolveStack succeeded, want an error", line)
+		}
 	}
 }
 

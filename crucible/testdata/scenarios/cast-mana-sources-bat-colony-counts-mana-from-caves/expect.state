@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Hidden Courtyard|Tapped;Hidden Courtyard|Tapped;Plains|Tapped;Bat Colony|SummonSick;T:b_1_1_bat_flying|SummonSick;T:b_1_1_bat_flying|SummonSick
+ailife=20

@@ -2,10 +2,11 @@
 // ReplaceMoved admits only for a move a discard makes (ReplaceMoved.java:
 // 79-83; Player.discard puts AbilityKey.Discard and EffectOnly into the move's
 // run params, Player.java:1431-1433). Madness's "if you discard this card,
-// discard it into exile" (CardFactoryUtil.java:2345-2362) is the shape that
-// resolves; its exile fires the keyword's own Mode$ Exiled trigger ("when you
-// do, cast it for its madness cost or put it into your graveyard",
-// CardFactoryUtil.java:1386-1420). The card is still discarded: the
+// discard it into exile" (CardFactoryUtil.java:2345-2362) exiles the card and
+// fires the keyword's own Mode$ Exiled trigger ("when you do, cast it for its
+// madness cost or put it into your graveyard", CardFactoryUtil.java:
+// 1386-1420); any other line runs its ReplaceWith$ chain, which moves the
+// card (Loxodon Smiter, Library of Leng). The card is still discarded: the
 // Discarded triggers run after the move either way (Player.java:1448-1452).
 
 package engine
@@ -38,15 +39,19 @@ type discardLine struct {
 	rule    *compile.Ability
 }
 
-// discardReplaced applies the Discard$ True line that applies to id's
-// discard, reporting whether one did. The madness shape -- ReplaceWith$ a
-// ChangeZone of Defined$ ReplacedCard to Exile, nothing else on the line --
-// exiles the card and fires the madness trigger. Any other line that applies
-// (Loxodon Smiter's "put it onto the battlefield instead", Library of Leng's
-// "you may put it on top of your library") is a pending error, and so is a
-// discard line together with a graveyard replacement that would also apply
-// (Rest in Peace): CR 616.1 has the affected player order them, which this
-// does not model.
+// discardReplaced applies the Discard$ True lines that apply to id's
+// discard through the CR 616.1 walk (runReplacements: the discarding player
+// picks among several, an Optional$ line asks first), reporting whether one
+// replaced the move. The madness shape -- ReplaceWith$ a ChangeZone of
+// Defined$ ReplacedCard to Exile, nothing else on the line -- exiles the card
+// and fires the madness trigger. Any other line whose ReplaceWith$ chain
+// moves the replaced card (Loxodon Smiter's "put it onto the battlefield
+// instead", Library of Leng's "you may put it on top of your library",
+// Nephalia Academy's reveal first) runs that chain, as ReplaceMoved's
+// overriding ability does. A chain that moves nothing else is a pending
+// error, and so is a discard line together with a graveyard replacement that
+// would also apply (Rest in Peace): the discard walk does not offer the
+// graveyard lines as candidates of the same CR 616.1 choice.
 func (g *Game) discardReplaced(controller PlayerController, id CardID, cause discardCause) bool {
 	c := g.Card(id)
 	var lines []discardLine
@@ -87,22 +92,55 @@ func (g *Game) discardReplaced(controller PlayerController, id CardID, cause dis
 	if len(lines) == 0 {
 		return false
 	}
-	line := lines[0]
-	if len(lines) > 1 {
-		g.recordPendingError(fmt.Errorf("engine: %q: two discard replacements apply to one discard: CR 616.1 order not resolvable yet", c.Def.Name))
-		return false
-	}
-	if !madnessExileShape(line.rule) {
-		g.recordPendingError(fmt.Errorf("engine: %q: Event$ Moved Discard$ shape not resolvable yet", line.host.Def.Name))
-		return false
+	for _, line := range lines {
+		if !madnessExileShape(line.rule) && !discardChainShape(line.rule) {
+			g.recordPendingError(fmt.Errorf("engine: %q: Event$ Moved Discard$ shape not resolvable yet", line.host.Def.Name))
+			return false
+		}
 	}
 	if dest, _ := g.movedGraveyardDestination(id); dest != Graveyard {
 		g.recordPendingError(fmt.Errorf("engine: %q: a discard replacement and a graveyard replacement both apply: CR 616.1 order not resolvable yet", c.Def.Name))
 		return false
 	}
-	g.Move(id, Exile, c.Owner)
-	g.checkMadnessTriggers(controller, id, line.rule.Keyword)
-	return true
+	from := c.Zone
+	return g.runReplacements(controller, c.Controller(), func() []replacementCandidate {
+		cands := make([]replacementCandidate, 0, len(lines))
+		for _, line := range lines {
+			line := line
+			cands = append(cands, replacementCandidate{host: line.host, rule: line.rule, apply: func() replacementResult {
+				if madnessExileShape(line.rule) {
+					g.Move(id, Exile, g.Card(id).Owner)
+					g.checkMadnessTriggers(controller, id, line.rule.Keyword)
+					return replacementReplaced
+				}
+				err := g.runReplacementChain(controller, line.host, line.amounts, replaceWithSub(line.rule),
+					&replacementEvent{result: replacementReplaced, card: id})
+				if err != nil {
+					g.recordPendingError(err)
+				}
+				if g.Card(id).Zone == from {
+					// The chain did not move the card: the discard's own move
+					// still happens.
+					return replacementNotReplaced
+				}
+				return replacementReplaced
+			}})
+		}
+		return cands
+	}) == replacementReplaced
+}
+
+// discardChainShape reports whether r is a discard line this port runs past
+// Madness: its params are ones the walk reads (ActiveZones$, ValidCard$,
+// ValidCause$, EffectOnly$, Discard$, Optional$, Description$) and its
+// ReplaceWith$ chain moves the replaced card (a ChangeZone of Defined$
+// ReplacedCard), the shape that stands in for the move.
+func discardChainShape(r *compile.Ability) bool {
+	if !onlyParams(r, "validcard", "validcause", "effectonly", "discard", "optional") {
+		return false
+	}
+	sub := replaceWithSub(r)
+	return sub != nil && chainMovesReplacedCard(sub)
 }
 
 // discardCauseMatches is ReplaceMoved's EffectOnly$ and ValidCause$ for a

@@ -46,7 +46,7 @@ Avacyn's Judgment and From Under the Floorboards refused (`Count$Madness`); ever
 
 | Decision                                                                       | Why                                                                                                                                                                                                                                                                                                     |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hold all cast-time triggers in the existing `castExits` list                   | Java holds the whole waiting list while the stack is frozen; the graveyard-exit hold was the same seam. One ordered list (`castHeld`) keeps exits and other triggers in firing order. Activated abilities' costs still push at once (not this row)                                                      |
+| Hold all cast-time triggers in the existing `castExits` list                   | Java holds the whole waiting list while the stack is frozen; the graveyard-exit hold was the same seam. One ordered list (`castHeld`) keeps exits and other triggers in firing order. Activated abilities' costs share the hold (R9k)                                                                   |
 | A spell's trigger stays where it is after `castExitMatches`                    | castAura and the instant branch push BecomesTarget/Ward/crime matches after the SpellCast batch; ending the hold at release keeps them as they were                                                                                                                                                     |
 | As-enters chains admitted by API allow-list, not by "everything registered"    | An effect that writes onto the entering card (AlterAttribute's prepared flag, Animate's P/T) would be rebuilt by `Move`; running it before the move would lose it silently. Those stay refused until the entry carries them, like `pendingEnter` for counters                                           |
 | Madness trigger fired by the replacement, not by a general `Mode$ Exiled` scan | TriggerExiled admits the madness trigger only for its own keyword's cause; the corpus's other `Mode$ Exiled` lines (Soulherder, Market Gnome) are battlefield exiles this port does not fire yet                                                                                                        |
@@ -58,18 +58,16 @@ Avacyn's Judgment and From Under the Floorboards refused (`Count$Madness`); ever
 
 ## Refused (GO-7)
 
-| Shape                                                                                                | Error                                                            |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Discard replacements other than Madness's (Loxodon Smiter, Library of Leng, Nephalia Academy)        | `Event$ Moved Discard$ shape not resolvable yet`                 |
-| A discard line with `EffectOnly$`/`ValidCause$` at a site that does not know the cause (costs)       | `the discard's cause is not known here`                          |
-| Two discard lines, or a discard line beside a graveyard replacement                                  | `CR 616.1 order not resolvable yet`                              |
-| `ChooseColor`'s `Random$` (Rainbow Knights, Gem Bazaar), `ChooseNumber`'s `Random$`/`Secretly$`      | the effect's own `not resolvable yet`, via the entry chain       |
-| A `GenericChoice` whose choices hold a `Pump` (the Sieges), an AlterAttribute/Animate/RollDice chain | `as-it-enters replacement ReplaceWith$ <Api> not resolvable yet` |
+| Shape                                                                                          | Error                                                            |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| A discard line whose ReplaceWith$ chain does not move the replaced card                        | `Event$ Moved Discard$ shape not resolvable yet`                 |
+| A discard line with `EffectOnly$`/`ValidCause$` at a site that does not know the cause (costs) | `the discard's cause is not known here`                          |
+| A discard line beside a graveyard replacement                                                  | `CR 616.1 order not resolvable yet`                              |
+| `ChooseNumber`'s `Secretly$`                                                                   | the effect's own `not resolvable yet`, via the entry chain       |
+| A `GenericChoice` whose choices note cards (Archangel of Strife), an Animate/RollDice chain    | `as-it-enters replacement ReplaceWith$ <Api> not resolvable yet` |
 
-## Not done
-
-`CastTotalManaSpent` Cave/Desert/Treasure (Bat Colony, Cataclysmic Prospecting, Spoils of the Hunt): the mana pool keeps
-no source card per unit; needs an ADR first (ADRP-4).
+Other discard replacements, the Sieges' mode choice, enters-prepared, `ChooseColor`'s `Random$` and `CastTotalManaSpent`
+Cave/Desert/Treasure resolve since R9k ([`m6-r9k-cast-mana-sources.md`](m6-r9k-cast-mana-sources.md)).
 
 ## Tests
 

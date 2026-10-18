@@ -1,0 +1,15 @@
+# Bat Colony: "create a 1/1 black Bat creature token with flying for each mana
+# from a Cave spent to cast it" -- Count$CastTotalManaSpent Cave counts the
+# paying mana whose source card is a Cave (AbilityUtils.java:1899-1907). Each
+# floating unit records the card that made it (ADR-0042): two Hidden
+# Courtyards (Land Cave) and a Plains pay {2}{W}, so two of the three mana
+# came from Caves and two Bats are created.
+startturn human
+advance 3
+queue action human manaability 1 0
+queue action human manaability 2 0
+queue action human tapformana 3 W
+queue paygeneric W
+queue paygeneric W
+queue action human cast 4
+passpriority

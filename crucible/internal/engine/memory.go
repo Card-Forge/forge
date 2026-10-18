@@ -57,7 +57,19 @@ type Memory struct {
 	// copies it onto an effect card (EffectEffect.java:277-306), so neither
 	// Cleanup nor copyChoicesFrom touches it.
 	chosenSector string
+
+	// chosenMode is Card's setChosenMode (Card.java:2327): the description of
+	// the choice a GenericChoice with SetChosenMode$ resolved (the Sieges'
+	// "Khans"/"Dragons"), read by Card.ChosenMode<X> (CardProperty.java:116).
+	// Java never clears it.
+	chosenMode string
 }
+
+// SetChosenMode records the mode a SetChosenMode$ choice picked.
+func (m *Memory) SetChosenMode(mode string) { m.chosenMode = mode }
+
+// ChosenMode is the recorded mode, "" before any.
+func (m *Memory) ChosenMode() string { return m.chosenMode }
 
 // Remember adds an entity, and reports whether it was new. Order is the order
 // things were remembered, which is what a `RepeatEach$` over the list walks.

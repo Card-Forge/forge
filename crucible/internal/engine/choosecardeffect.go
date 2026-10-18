@@ -11,19 +11,20 @@ import (
 )
 
 // chooseCardUnresolvedParams are ChooseCardEffect.java's params this port
-// cannot honour yet: every alternative selection mode (AtRandom$ needs
-// Aggregates.random's exact RNG draw order, ChooseEach$/EachBasicType$/
-// WithTotalPower$/WithDifferentPowers$/EachDifferentPower$/ControlAndNot$
-// are separate loops), the non-default choice pools
-// (AllCards$, IncludeSpellsOnStack$, TargetControls$), ChosenMap$'s
-// per-player map and Secretly$'s hidden reveal. 399 real (AB|DB)$ lines;
-// the default chooseCardsForEffect shape covers most of them.
-// QuasiLibrarySearch$ resolves (chooseCardQuasiSearch).
+// cannot honour yet: the alternative selection loops (ChooseEach$/
+// EachBasicType$/WithTotalPower$/WithDifferentPowers$/EachDifferentPower$/
+// ControlAndNot$), the non-default choice pools (AllCards$,
+// IncludeSpellsOnStack$, TargetControls$) and ChosenMap$'s per-player map.
+// 399 real (AB|DB)$ lines; the default chooseCardsForEffect shape covers
+// most of them. QuasiLibrarySearch$ resolves (chooseCardQuasiSearch);
+// AtRandom$ is Aggregates.random(pChoices, Amount) over the pool in its scan
+// order (ChooseCardEffect.java:225-228); Secretly$ only moves Reveal$'s
+// display to after every chooser (:275-288), no state.
 var chooseCardUnresolvedParams = [...]string{
-	"AtRandom", "ChooseEach", "EachBasicType", "WithTotalPower",
+	"ChooseEach", "EachBasicType", "WithTotalPower",
 	"WithDifferentPowers", "EachDifferentPower", "ControlAndNot",
 	"AllCards", "IncludeSpellsOnStack", "TargetControls",
-	"ChosenMap", "Secretly", "ChoiceTitleAppend", "StartingWith", "Optional",
+	"ChosenMap", "ChoiceTitleAppend", "StartingWith", "Optional",
 	"UnlessResolveSubs", "LockInText", "OrString",
 	"Condition", "SorcerySpeed", "ModeCost",
 	"ConditionManaNotSpent", "ConditionGameTypes",
@@ -101,6 +102,15 @@ func (chooseCardEffect) Resolve(g *Game, a *Ability, controller PlayerController
 					pChoices = append(pChoices, cid)
 				}
 			}
+		}
+		if hasParam(a, "AtRandom") && len(pChoices) > 0 {
+			// Aggregates.random's reservoir: Amount$ cards, the sample's order
+			// (ChooseCardEffect.java:225-228, ahead of the default and quasi
+			// search branches).
+			for _, i := range g.randomSample(len(pChoices), maxAmount) {
+				all = append(all, pChoices[i])
+			}
+			continue
 		}
 		if quasi {
 			// ChooseCardEffect.java:260-265: one card, optional unless

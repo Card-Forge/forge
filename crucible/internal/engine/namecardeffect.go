@@ -4,9 +4,11 @@ package engine
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/jczastkiewicz/crucible/internal/carddb"
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 )
 
@@ -17,12 +19,14 @@ import (
 // Card) under CardFacePredicates.valid. The host adds the name to its named
 // cards (addNamedCard) and the player records it as their named card.
 // AtRandom$ picks with Aggregates.random from a ChooseFromList$ list;
-// AtRandom$ over the whole DB (a stream collector's random draw) and
-// ChooseFromDefinedCards$ are not resolved.
+// AtRandom$ over the whole DB (a stream collector's random draw) is not
+// resolved. ChooseFromDefinedCards$ offers the names of those cards passing
+// ValidCards$ (a split card both halves), sorted (ChooseCardNameEffect.java:
+// 62-78).
 type nameCardEffect struct{}
 
 func (nameCardEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "NameCard", "Condition", "ChooseFromDefinedCards"); err != nil {
+	if err := rejectParams(a, "NameCard", "Condition"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)
@@ -31,7 +35,17 @@ func (nameCardEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 	}
 	_, random := a.Params.Param("AtRandom")
 	var names []string
-	if raw, ok := a.Params.Param("ChooseFromList"); ok {
+	if raw, ok := a.Params.Param("ChooseFromDefinedCards"); ok {
+		if random {
+			// Java's defined branch ignores AtRandom$ for the pick yet skips
+			// the player's named card for it (:136-138); no card combines them.
+			return fmt.Errorf("engine: NameCard: AtRandom$ with ChooseFromDefinedCards$ not resolvable yet")
+		}
+		var err error
+		if names, err = definedCardNames(g, a, source, raw); err != nil {
+			return err
+		}
+	} else if raw, ok := a.Params.Param("ChooseFromList"); ok {
 		_, exclude := a.Params.Param("ExcludeChosen")
 		for _, n := range strings.Split(raw, ",") {
 			n = strings.ReplaceAll(n, ";", ",")
@@ -82,6 +96,36 @@ func (nameCardEffect) Resolve(g *Game, a *Ability, controller PlayerController) 
 		}
 	}
 	return nil
+}
+
+// definedCardNames is ChooseCardNameEffect's ChooseFromDefinedCards$ list
+// (ChooseCardNameEffect.java:63-77): the defined cards passing ValidCards$
+// (default Card, the host's controller as You), each card's main face name
+// once and a split card's other half too, sorted by name (CardFace.compareTo).
+func definedCardNames(g *Game, a *Ability, source *Card, defined string) ([]string, error) {
+	cards, err := definedCardsInGame(g, a.Controller, source, defined, a.refs())
+	if err != nil {
+		return nil, fmt.Errorf("engine: NameCard: ChooseFromDefinedCards$: %w", err)
+	}
+	spec, ok := a.Params.Param("ValidCards")
+	if !ok {
+		spec = "Card"
+	}
+	var names []string
+	for _, id := range filterValid(g, cards, spec, source.Controller(), source.ID) {
+		def := g.Card(id).Def
+		if def == nil {
+			continue
+		}
+		if !containsString(names, def.Faces[0].Name) {
+			names = append(names, def.Faces[0].Name)
+			if def.SplitType == carddb.SplitSplit && def.Faces[1].Name != "" && !containsString(names, def.Faces[1].Name) {
+				names = append(names, def.Faces[1].Name)
+			}
+		}
+	}
+	sort.Strings(names)
+	return names, nil
 }
 
 // nameableCards lists the DB's card names whose front face passes spec

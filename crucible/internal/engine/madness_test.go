@@ -1,7 +1,6 @@
 package engine_test
 
 import (
-	"strings"
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
@@ -119,28 +118,4 @@ func TestCountMadnessReadsTheMadnessCast(t *testing.T) {
 	if got := zombies(g2, p2); got != 3 {
 		t.Errorf("cast from hand: %d tokens, want 3", got)
 	}
-}
-
-// A discard replacement other than Madness's is refused when it applies
-// (Loxodon Smiter, discarded by an opponent's effect), and ignored when its
-// EffectOnly$/ValidCause$ say it does not (the owner's own discard).
-func TestOtherDiscardReplacementsAreRefusedWhenTheyApply(t *testing.T) {
-	t.Parallel()
-
-	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
-	smiter := g.NewCard(corpusCard(t, "Loxodon Smiter"), p, engine.Hand)
-	if err := discardHand(t, g, p, engine.NewScriptedController()); err != nil {
-		t.Fatalf("own discard: %v", err)
-	}
-	if got := g.Card(smiter).Zone; got != engine.Graveyard {
-		t.Errorf("own discard: Loxodon Smiter is in %v, want the graveyard", got)
-	}
-
-	g2, p2, other2 := newTwoPlayerGameOn(t, scenarioDB(t))
-	g2.NewCard(corpusCard(t, "Loxodon Smiter"), p2, engine.Hand)
-	_, err := resolveNow(t, g2, other2, engine.NewScriptedController(), nil, "DB$ Discard | Defined$ Opponent | Mode$ Hand")
-	if err == nil || !strings.Contains(err.Error(), "Discard$ shape not resolvable") {
-		t.Errorf("opponent's discard: err = %v, want the Smiter's replacement refused", err)
-	}
-	_ = other
 }

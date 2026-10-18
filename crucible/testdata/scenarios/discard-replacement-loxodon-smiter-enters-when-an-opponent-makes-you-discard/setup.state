@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Mind Rot|Id:1
+humanbattlefield=Swamp|Id:2;Swamp|Id:3;Swamp|Id:4
+aihand=Loxodon Smiter|Id:5;Island|Id:6

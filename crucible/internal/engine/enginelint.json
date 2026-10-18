@@ -98,10 +98,13 @@
     "facedown": ["facedown.go"],
     "textrewrite": ["textrewrite.go"],
     "textwords": ["textwords.go"],
+    "prepare": ["prepare.go"],
     "registry": ["registry_gen.go"]
   },
   "allow": {
     "zone": ["id"],
+    "mana": ["id"],
+    "prepare": ["card", "game", "id", "zone", "removefromgameeffect"],
     "layer": [],
     "parts": ["id", "layer"],
     "card": [
@@ -109,6 +112,7 @@
       "zone",
       "parts",
       "layer",
+      "mana",
       "goadeffect",
       "effecteffect",
       "cloneeffect",
@@ -124,6 +128,8 @@
       "zone",
       "parts",
       "card",
+      "mana",
+      "prepare",
       "player",
       "phase",
       "event",
@@ -197,6 +203,7 @@
       "zone",
       "card",
       "parts",
+      "prepare",
       "game",
       "combat",
       "player",
@@ -297,9 +304,10 @@
       "staticability",
       "excessdamage"
     ],
-    "manapay": ["id", "game", "player", "control", "event"],
+    "manapay": ["id", "game", "player", "control", "event", "mana"],
     "manaability": [
       "id",
+      "mana",
       "zone",
       "parts",
       "card",
@@ -467,7 +475,7 @@
       "devour"
     ],
     "playerstate": ["id", "zone", "card", "game"],
-    "defined": ["id", "game", "player", "card", "ability", "parts", "valid"],
+    "defined": ["id", "game", "player", "card", "ability", "parts", "valid", "zone"],
     "condition": ["presentcheck", "id", "card", "game", "ability", "trigger", "phase"],
     "pumpeffect": [
       "id",
@@ -577,7 +585,7 @@
     "animate": ["ability", "card", "controlcommands", "effecthelpers", "game", "id", "layer", "parts", "valid", "zone"],
     "delayedtrigger": ["ability", "card", "game", "id", "player", "trigger", "valid", "zone"],
     "random": ["game"],
-    "token": ["card", "control", "event", "game", "id", "parts", "zone", "zonemove"],
+    "token": ["card", "control", "event", "game", "id", "parts", "zone", "zonemove", "prepare"],
     "facedown": ["card", "id", "game", "control", "zone", "ability", "effecthelpers", "condition", "parts", "defined"],
     "textrewrite": [],
     "textwords": ["card", "game", "ability", "id", "zone", "continuous", "continuouslayers", "textrewrite", "valid"]

@@ -368,6 +368,15 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if !paid {
 		return false
 	}
+	// PlaySpellAbility.java:682: the stack is frozen while the costs are paid,
+	// so a trigger a cost fires (a sacrificed creature's dies trigger, a
+	// discarded card's) waits for the ability and goes on the stack above it
+	// (MagicStack.addAndUnfreeze, :132-171). The cast's hold (holdCastTriggers)
+	// is that waiting list, begun once the mana is paid: no later part fails,
+	// so the hold always ends below. An enclosing hold is set aside and put
+	// back before the ability is pushed.
+	outerHold, outerExits := g.holdingCastExits, g.castExits
+	g.holdingCastExits, g.castExits = true, nil
 	x.setOn(&activated)
 	activated.paid.recorded = true
 	if shape.Tap {
@@ -444,13 +453,19 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 		c.LoyaltyAbilityActivated = true
 	}
 	c.activations.note(index)
+	held := g.castExitMatches()
+	g.holdingCastExits, g.castExits = outerHold, outerExits
 	g.pushTriggeredAbilities(controller, []Ability{activated})
-	g.checkAbilityCastTriggers(controller, &activated)
+	// One batch, as unfreezeStack runs every waiting trigger at once: the
+	// costs' triggers in firing order, then AbilityCast, then Cycled
+	// (MagicStack.java:354-365).
+	held = append(held, g.abilityCastMatches(&activated)...)
 	if isCycling(ability) {
 		pl := g.Player(pid)
 		pl.CyclingThisTurn++
-		g.checkCycledTriggers(controller, card, pid, pl.CyclingThisTurn == 1)
+		held = append(held, g.cycledMatches(card, pid, pl.CyclingThisTurn == 1)...)
 	}
+	g.pushTriggeredAbilities(controller, held)
 	return true
 }
 

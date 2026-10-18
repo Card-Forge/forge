@@ -93,13 +93,16 @@ var abilityCastParams = map[string]bool{
 	"validactivatingplayer": true, "validsa": true,
 }
 
-// checkAbilityCastTriggers is MagicStack.addAbility's AbilityCast and
+// abilityCastMatches is MagicStack.addAbility's AbilityCast and
 // SpellAbilityCast runs (MagicStack.java:235-237, :350) for the activated
 // ability a that was just put on the stack: ValidCard$ against the ability's
 // source card, ValidActivatingPlayer$ against its controller, ValidSA$ against
 // the ability (spellAbilityMatches). TargetsValid$ and ValidSAonCard$ lines
-// are not fired.
-func (g *Game) checkAbilityCastTriggers(controller PlayerController, a *Ability) {
+// are not fired. ActivateAbility pushes them in one batch with the triggers
+// its costs fired while the stack was frozen and the Cycled ones, as
+// MagicStack.unfreezeStack runs every waiting trigger at once
+// (MagicStack.java:159-171).
+func (g *Game) abilityCastMatches(a *Ability) []Ability {
 	source := g.Card(a.Source)
 	matches := g.scanTriggers(abilityCastModes, func(h *Card, face triggerFace, t *compile.Ability) (triggeredObjects, bool) {
 		if !paramsResolvable(t, abilityCastParams) || !g.triggerCardMatches(h, t, "ValidCard", source) ||
@@ -113,7 +116,7 @@ func (g *Game) checkAbilityCastTriggers(controller PlayerController, a *Ability)
 		}
 		return triggeredObjects{card: a.Source}, true
 	})
-	g.pushTriggeredAbilities(controller, matches)
+	return matches
 }
 
 // cycledParams are the params a Cycled trigger may carry that are evaluated.
@@ -122,10 +125,11 @@ var cycledParams = map[string]bool{
 	"secondary": true, "validcard": true, "validplayer": true, "firsttime": true, "checksvar": true, "svarcompare": true,
 }
 
-// checkCycledTriggers is Player.addCycled (Player.java:3861): the card cycled
-// by activating its Cycling or TypeCycling ability, now in its owner's
-// graveyard. FirstTime$ is the player's first cycling this turn.
-func (g *Game) checkCycledTriggers(controller PlayerController, card CardID, pid PlayerID, first bool) {
+// cycledMatches is Player.addCycled (Player.java:3861, run from
+// MagicStack.java:363-365): the card cycled by activating its Cycling or
+// TypeCycling ability, now in its owner's graveyard. FirstTime$ is the
+// player's first cycling this turn.
+func (g *Game) cycledMatches(card CardID, pid PlayerID, first bool) []Ability {
 	cycled := g.Card(card)
 	matches := g.scanTriggers([]string{"Cycled"}, func(h *Card, _ triggerFace, t *compile.Ability) (triggeredObjects, bool) {
 		if !paramsResolvable(t, cycledParams) || !g.triggerCardMatches(h, t, "ValidCard", cycled) ||
@@ -137,7 +141,7 @@ func (g *Game) checkCycledTriggers(controller PlayerController, card CardID, pid
 		}
 		return triggeredObjects{card: card, player: pid}, true
 	})
-	g.pushTriggeredAbilities(controller, matches)
+	return matches
 }
 
 var unblockedParams = map[string]bool{

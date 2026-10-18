@@ -45,6 +45,10 @@ type xAnnounced struct {
 	// Count$CastTotalManaSpent Snow reads off a cast (the cast's paying mana
 	// whose source card is snow, AbilityUtils.java:1899-1907).
 	snow int
+	// sources is each spent unit's source card (ADR-0042), in pool order:
+	// SpellAbility.getPayingMana's Mana.getSourceCard, what
+	// Count$CastTotalManaSpent <valid> reads off a cast.
+	sources []manaSource
 }
 
 // payManaCostX is PayManaCost that also reports the X it announced, for the
@@ -157,8 +161,12 @@ func (g *Game) payManaCostX(decider PlayerID, cost mana.Cost, controller PlayerC
 		return xAnnounced{}, false
 	}
 	snowBefore := g.Player(decider).ManaPool.SnowBreakdown()
-	if !g.Player(decider).ManaPool.payWithSnow(mana.FromShards(resolved, 0), snow, g.snowAnyColor) {
+	spent, ok := g.Player(decider).ManaPool.payWithSnow(mana.FromShards(resolved, 0), snow, g.snowAnyColor)
+	if !ok {
 		return xAnnounced{}, false
+	}
+	for _, u := range spent {
+		x.sources = append(x.sources, u.src)
 	}
 	// Which bucket paid a plain pip or a generic unit is payWithSnow's own
 	// order (plain before snow), so this is the snow mana that order spent.

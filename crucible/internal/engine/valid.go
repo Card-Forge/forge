@@ -77,6 +77,11 @@ func Matches(g *Game, c *Card, spec valid.Spec, sourceController PlayerID, sourc
 }
 
 func altMatches(g *Game, c *Card, alt valid.Alternative, sourceController PlayerID, source CardID) bool {
+	if hiddenPreparedSpell(c) {
+		// Card.java:5845-5848: a prepared spell's copy in exile fails every
+		// restriction -- a negated one reads its testFailed, true.
+		return alt.Base.Negated
+	}
 	if !baseMatches(c, alt.Base.Name) {
 		return alt.Base.Negated
 	}
@@ -277,6 +282,17 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		return g.isRingBearer(c)
 	case name == "IsSolved":
 		return c.Solved
+	case strings.HasPrefix(name, "ChosenMode"):
+		// CardProperty.java:116-117: c's own chosen mode is the rest of the
+		// property (a Siege's Card.ChosenModeKhans).
+		return c.Memory.ChosenMode() == name[len("ChosenMode"):]
+	case name == "IsPrepared":
+		// CardProperty.java:1861: the permanent is prepared (prepare.go).
+		return c.prepared != NoCard
+	case name == "prepared":
+		// CardStateProperty.java:79-80: the card is in its PreparedSpell state,
+		// a prepared spell's copy (Codie's "whenever you cast a prepared spell").
+		return c.preparedFrom != NoCard
 	case name == "FullyUnlocked":
 		// CardProperty.java:1863: both doors of a Room permanent unlocked.
 		return len(c.UnlockedDoors()) == 2

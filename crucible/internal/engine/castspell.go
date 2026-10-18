@@ -238,6 +238,7 @@ func (g *Game) castFromHand(pid PlayerID, card CardID, d Door, controller Player
 	if opts.fromKeyword {
 		g.Card(card).flashbackCast = true
 	}
+	g.preparedCast(card)
 	g.noteMayPlayUse(way)
 	if way.replaceExile {
 		g.Card(card).graveyardToExile = true
@@ -713,7 +714,7 @@ func xIsPaid(c *Card) bool {
 func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, opts castOpts) (xAnnounced, bool) {
 	// The X is announced here, so from the return on Count$xPaid reads it.
 	defer func() { g.castPending = NoCard }()
-	c.castManaSpent, c.castPaid, c.castSnow = 0, [5]int{}, 0
+	c.castManaSpent, c.castPaid, c.castSnow, c.castPaidSources = 0, [5]int{}, 0, nil
 	if opts.paysNoMana() {
 		return xAnnounced{}, true
 	}
@@ -744,7 +745,7 @@ func (g *Game) payCastCost(pid PlayerID, c *Card, controller PlayerController, o
 		c.castManaSpent = len(total.Shards()) + total.Generic() + x.value*total.CountX()
 		// The mana another player paid (assist) is not in x.paid: Converge
 		// and Adamant read only the caster's.
-		c.castPaid, c.castSnow = x.paid, x.snow
+		c.castPaid, c.castSnow, c.castPaidSources = x.paid, x.snow, x.sources
 		if emerged != NoCard {
 			g.payEmergeSacrifice(controller, pid, c.ID, emerged)
 		}

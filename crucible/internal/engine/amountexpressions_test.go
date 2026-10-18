@@ -244,8 +244,8 @@ func TestScalarCountHeads(t *testing.T) {
 			}
 		})
 	}
-	if err := gainErr(t, nil, "Count$CastTotalManaSpent Treasure"); err == nil {
-		t.Error("Count$CastTotalManaSpent <valid> resolved; the mana's sources are not recorded")
+	if got := gainedFrom(t, nil, "Count$CastTotalManaSpent Treasure"); got != 0 {
+		t.Errorf("Count$CastTotalManaSpent Treasure over sourceless mana gained %d, want 0", got)
 	}
 }
 

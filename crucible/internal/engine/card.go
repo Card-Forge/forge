@@ -86,6 +86,17 @@ type Card struct {
 	// Count$CastTotalManaSpent Snow; cleared with castManaSpent.
 	castPaid [5]int
 	castSnow int
+	// castPaidSources is the source of each unit of mana that cast spent from
+	// the caster's pool (xAnnounced.sources, ADR-0042), read by
+	// Count$CastTotalManaSpent <valid>; cleared with castManaSpent. Replaced,
+	// never written in place, so clones may share it.
+	castPaidSources []manaSource
+	// prepared is the exiled copy of this creature's prepare spell while it is
+	// prepared (Card.preparedEffect's remembered card, prepare.go), NoCard
+	// otherwise. preparedFrom, on that copy, is the creature it was made for:
+	// the copy is in its PreparedSpell state for as long as it exists.
+	prepared     CardID
+	preparedFrom CardID
 	// foretold marks a card exiled by the Foretell special action, and
 	// foretoldTurn the turn it happened (foretell.go).
 	foretold     bool

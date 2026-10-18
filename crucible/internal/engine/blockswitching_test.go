@@ -271,11 +271,10 @@ func sorrowsPathDef(t *testing.T) *compile.Card {
 // TestSwitchBlockSorrowsPathRealCard proves the printed card: a Land that
 // entered this turn still pays its {T} (Card.isSick needs a creature,
 // Card.java:3651), the switch happens, and its Taps trigger deals 2 to its
-// controller and each creature they control. It also pins this port's
-// stack order: checkTapsTriggers pushes the Taps trigger while the cost is
-// paid, so it sits under the switch and resolves after it. Java (CR 603.3)
-// puts it on top, so it resolves first -- ActivateAbility's general gap,
-// effects-switchblock.md.
+// controller and each creature they control. It also pins the stack order:
+// the stack is frozen while the {T} is paid (PlaySpellAbility.java:682), so
+// the Taps trigger waits and goes on top of the switch, resolving first
+// (MagicStack.addAndUnfreeze).
 func TestSwitchBlockSorrowsPathRealCard(t *testing.T) {
 	t.Parallel()
 
@@ -293,8 +292,8 @@ func TestSwitchBlockSorrowsPathRealCard(t *testing.T) {
 	if !f.g.ActivateAbility(f.p, path, 0, c) {
 		t.Fatal("ActivateAbility returned false for a Land that entered this turn")
 	}
-	if top, ok := f.g.StackTop(); !ok || top.API != engine.APISwitchBlock || f.g.StackLen() != 2 {
-		t.Fatalf("stack len %d, top %v, want the switch above the Taps trigger", f.g.StackLen(), top.API)
+	if top, ok := f.g.StackTop(); !ok || top.API != engine.APIDamageAll || f.g.StackLen() != 2 {
+		t.Fatalf("stack len %d, top %v, want the Taps trigger above the switch", f.g.StackLen(), top.API)
 	}
 	if err := f.g.ResolveStack(engine.NewRegistry(), c); err != nil {
 		t.Fatalf("ResolveStack: %v", err)

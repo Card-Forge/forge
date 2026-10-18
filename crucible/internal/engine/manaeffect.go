@@ -26,7 +26,7 @@
 
 package engine
 
-//enginelint:allow id card game player ability defined condition control amount manaability
+//enginelint:allow id card game player ability defined condition control amount manaability replaceeffect
 
 import (
 	"fmt"
@@ -91,6 +91,8 @@ func (manaEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		return fmt.Errorf("engine: Mana: %w", err)
 	}
 
+	// The host made the mana (ManaEffect's AbilityManaPart source), ADR-0042.
+	src := g.manaSourceOf(a.Source)
 	for _, pid := range players {
 		pool := &g.Player(pid).ManaPool
 		switch {
@@ -99,7 +101,7 @@ func (manaEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 			if color.Count() != 1 {
 				return fmt.Errorf("engine: Mana: ChooseManaColor did not answer with exactly one color")
 			}
-			pool.Add(color, amount)
+			pool.addProduced(producedMana{color: color, amount: amount}, src)
 		case strings.HasPrefix(produced, "Combo "):
 			options, comboOK := parseComboColors(produced)
 			if !comboOK {
@@ -109,17 +111,13 @@ func (manaEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 			if color.Count() != 1 || !options.Has(color) {
 				return fmt.Errorf("engine: Mana: ChooseManaColor did not answer with one color from the offered set")
 			}
-			pool.Add(color, amount)
+			pool.addProduced(producedMana{color: color, amount: amount}, src)
 		default:
 			color, colorless, colorOK := producedManaColor(produced)
 			if !colorOK {
 				return fmt.Errorf("engine: Mana: Produced$ %q not resolvable yet", produced)
 			}
-			if colorless {
-				pool.AddColorless(amount)
-			} else {
-				pool.Add(color, amount)
-			}
+			pool.addProduced(producedMana{color: color, colorless: colorless, amount: amount}, src)
 		}
 	}
 	return nil

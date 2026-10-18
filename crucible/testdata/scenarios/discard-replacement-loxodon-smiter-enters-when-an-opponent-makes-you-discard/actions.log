@@ -1,0 +1,19 @@
+# Loxodon Smiter: "If a spell or ability an opponent controls causes you to
+# discard Loxodon Smiter, put it onto the battlefield instead of putting it
+# into your graveyard." Its hand line (Event$ Moved | Discard$ True |
+# ValidCause$ SpellAbility.OppCtrl | EffectOnly$ True, ReplaceMoved.java:
+# 79-90) replaces the discard's move with its ReplaceWith$ chain, a ChangeZone
+# of the replaced card to the battlefield. Mind Rot is the human's spell, so
+# the Smiter enters under the AI's control; the Island goes to the graveyard.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+tapformana human 4 B
+queue paygeneric B
+queue paygeneric B
+queue targets ai
+castspell human 1
+queue discardchoice 5,6
+queue cardorder 5,6
+resolvestack

@@ -101,6 +101,35 @@ func TestCastTriggerDoesNotMoveItsSpellOffTheStack(t *testing.T) {
 	}
 }
 
+// An activated ability's cost freezes the stack the same way
+// (PlaySpellAbility.java:682 runs for every non-mana ability): the creature
+// sacrificed to Ashnod's Altar-style "Sac<1/Creature>" dies while the cost is
+// paid, and its dies trigger goes above the ability, in one batch with the
+// AbilityCast triggers (MagicStack.unfreezeStack, :159-171).
+func TestActivationCostDiesTriggerGoesAboveTheAbility(t *testing.T) {
+	t.Parallel()
+	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
+	g.NewCard(corpusCard(t, "Grizzly Bears"), p, engine.Library)
+	fodder := g.NewCard(scriptDef(t, "Dying Fodder", "Creature Elf", fodderWithDiesDraw(t)...), p, engine.Battlefield)
+	altar := g.NewCard(creatureDefWithAbility(t, "Test Altar", "AB$ GainLife | Cost$ Sac<1/Creature.Other> | Defined$ You | LifeAmount$ 3"),
+		p, engine.Battlefield)
+	c := engine.NewScriptedController()
+	c.QueueSacrificeChoice([]engine.CardID{fodder})
+	if !g.ActivateAbility(p, altar, 0, c) {
+		t.Fatal("could not activate the altar")
+	}
+	top, _ := g.StackTop()
+	if g.StackLen() != 2 || top.Source != fodder {
+		t.Fatalf("stack len %d, top from card %d; want the dies trigger of %d above the ability", g.StackLen(), top.Source, fodder)
+	}
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if got := len(g.Zone(engine.Hand, p).Cards()); got != 1 || g.Player(p).Life != 23 {
+		t.Errorf("hand %d, life %d; want the draw and the 3 life", got, g.Player(p).Life)
+	}
+}
+
 // An additional cost (Bone Splinters' Sac<1/Creature>): the same order.
 func TestAdditionalCostSacrificeDiesTriggerGoesAboveTheSpell(t *testing.T) {
 	t.Parallel()

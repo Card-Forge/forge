@@ -380,6 +380,8 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	if !ok {
 		return false
 	}
+	// The source as it is before its costs move it (ADR-0042).
+	src := g.manaSourceOf(card)
 	if !g.PayManaCost(pid, costMana, controller) {
 		return false
 	}
@@ -429,7 +431,7 @@ func (g *Game) ActivateManaAbility(pid PlayerID, card CardID, index int, control
 	made := g.manaReplaced(controller, pid, card, producedMana{
 		color: color, colorless: colorless, snow: c.Type().HasSupertype(cardtype.Snow), amount: amount,
 	})
-	g.addProducedMana(pid, made)
+	g.addProducedMana(pid, made, src)
 
 	if shape.Tap {
 		g.noteTapsForMana(card, pid)

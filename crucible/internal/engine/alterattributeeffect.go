@@ -11,10 +11,12 @@ import (
 // targeted card gains (Activate$ True, the default) or loses each of the
 // comma-separated Attributes$ -- Suspected (CR 701.60: menace and "can't
 // block" while suspected, never suspected twice), Solved, Harnessed and
-// Plotted, each a flag on the card. Optional$ lets the activator decline
-// first. Prepared (a command-zone effect with a cast trigger), Saddled
-// (reads the saddle cost's tapped creatures) and Commander are not
-// resolved, nor is Suspected while a CantBeSuspected static is out.
+// Plotted, each a flag on the card, and Prepared (prepare.go: an exiled copy
+// of its prepare spell its controller may cast; never "altered", so never
+// remembered, AlterAttributeEffect.java:65-90). Optional$ lets the activator
+// decline first. Saddled (reads the saddle cost's tapped creatures) and
+// Commander are not resolved, nor is Suspected while a CantBeSuspected
+// static is out.
 type alterAttributeEffect struct{}
 
 func (alterAttributeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -30,7 +32,7 @@ func (alterAttributeEffect) Resolve(g *Game, a *Ability, controller PlayerContro
 	for i, attr := range attrs {
 		attr = strings.TrimSpace(attr)
 		switch attr {
-		case "Suspect", "Suspected", "Solve", "Solved", "Harnessed", "Plotted":
+		case "Suspect", "Suspected", "Solve", "Solved", "Harnessed", "Plotted", "Prepared":
 		default:
 			return fmt.Errorf("engine: AlterAttribute: attribute %q not resolvable yet", attr)
 		}
@@ -49,10 +51,18 @@ func (alterAttributeEffect) Resolve(g *Game, a *Ability, controller PlayerContro
 	}
 	_, remember := a.Params.Param("RememberAltered")
 	for _, id := range cards {
-		c := g.Card(id)
 		for _, attr := range attrs {
+			// Re-read: prepare's NewCard may have grown the arena.
+			c := g.Card(id)
 			altered := true
 			switch attr {
+			case "Prepared":
+				altered = false
+				if activate {
+					g.prepare(id, a.Controller)
+				} else {
+					g.unprepare(id)
+				}
 			case "Suspect", "Suspected":
 				if activate && battlefieldStaticNames(g, "CantBeSuspected") {
 					return fmt.Errorf("engine: AlterAttribute: CantBeSuspected statics not resolvable yet")
@@ -66,7 +76,7 @@ func (alterAttributeEffect) Resolve(g *Game, a *Ability, controller PlayerContro
 				c.Plotted = activate
 			}
 			if altered && remember {
-				source.Memory.Remember(CardEntity(id))
+				g.Card(a.Source).Memory.Remember(CardEntity(id))
 			}
 		}
 	}

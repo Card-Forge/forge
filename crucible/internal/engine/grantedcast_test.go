@@ -42,11 +42,11 @@ func TestACostReductionAloneDoesNotReachAnotherHand(t *testing.T) {
 	}
 	// Option 0 is the normal cast, option 1 the {0} one: with the mana in the
 	// pool the free one still costs nothing.
-	before := g.Player(p).ManaPool
+	before := g.Player(p).ManaPool.Breakdown()
 	if !castFree(t, g, p, mine, 1, engine.PlayerEntity(other)) {
 		t.Fatal("could not cast my own Bolt for {0} under As Foretold")
 	}
-	if g.Player(p).ManaPool != before {
+	if g.Player(p).ManaPool.Breakdown() != before {
 		t.Error("the {0} cast spent mana")
 	}
 }
