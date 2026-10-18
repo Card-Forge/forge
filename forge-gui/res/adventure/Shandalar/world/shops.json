@@ -1905,7 +1905,47 @@
 		}
 	  ]
 	}]
-},{                                    
+},{
+"name":"Faerie",
+"description":"Cliques and Sneaks",
+"spriteAtlas":"maps/tileset/buildings.atlas",
+"sprite":"FaerieShop",
+  "rewards": [
+	{
+	  "count":8,
+	  "type":"Union",
+	  "cardUnion": [
+		{
+		  "count":1,
+		  "subTypes": ["Faerie"]
+		},
+		{
+		  "count":1,
+		  "cardText": "Faerie"
+		}
+	  ]
+	}]
+},{
+	"name":"Ninja",
+ "description":"The Shadow Dojo",
+ "spriteAtlas":"maps/tileset/buildings.atlas",
+ "sprite":"NinjaShop",
+   "rewards": [
+	 {
+	   "count":8,
+	   "type":"Union",
+	   "cardUnion": [
+		 {
+		   "count":1,
+		   "subTypes": ["Ninja"]
+		 },
+		 {
+		   "count":1,
+		   "cardText": "Ninja"
+		 }
+	   ]
+	 }]
+ },{
 "name":"Zombie",                  
 "description":"Braaaaaains???",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
