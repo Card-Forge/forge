@@ -1,0 +1,11 @@
+# Grolnok's second line (Origin$ Library | Destination$ Graveyard |
+# ValidCard$ Permanent.YouOwn, TriggerZones$ Battlefield) runs ChangeZone
+# WithCountersType$ CROAK to Exile: the counter is added after the move
+# (ChangeZoneEffect.java:751-755). Thought Scour mills Forest and Swamp, both
+# exiled with a croak counter, then draws the Plains.
+startturn human
+advance 3
+tapformana human 2 U
+queue targets human
+castspell human 1
+resolvestack

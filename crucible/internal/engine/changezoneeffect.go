@@ -277,14 +277,16 @@ func alternativeOrigin(g *Game, a *Ability, controller PlayerController, decider
 // changeZoneEnter reads WithCountersType$ (a comma list, each kind added) and
 // WithCountersAmount$ (default 1): the counters a permanent entering the
 // battlefield gets (ChangeZoneEffect.java:614). "Any" is a choice this port does
-// not make, and counters on a destination other than the battlefield are not
-// applied, so either is an error rather than a silent omission (GO-7).
-func changeZoneEnter(g *Game, a *Ability, dest ZoneType) ([]enterCounters, error) {
+// not make, so it is an error rather than a silent omission (GO-7). Counters
+// on another destination are added after the move (known origin only,
+// ChangeZoneEffect.java:751-755: changeZoneKnown); the search path does not
+// apply them, so there they are an error too.
+func changeZoneEnter(g *Game, a *Ability, dest ZoneType, known bool) ([]enterCounters, error) {
 	raw, ok := a.Params.Param("WithCountersType")
 	if !ok {
 		return nil, nil
 	}
-	if dest != Battlefield {
+	if dest != Battlefield && !known {
 		return nil, fmt.Errorf("engine: ChangeZone: WithCountersType$ with Destination$ %v not resolvable yet", dest)
 	}
 	n := 1
@@ -432,7 +434,7 @@ func changeZonePreMemory(a *Ability, source *Card) {
 // 566). With until (Duration$ UntilHostLeavesPlay) the moved cards return
 // when the host leaves the battlefield (changeZoneUntilCommand, :865).
 func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
-	enter, err := changeZoneEnter(g, a, dest)
+	enter, err := changeZoneEnter(g, a, dest, true)
 	if err != nil {
 		return err
 	}
@@ -514,6 +516,13 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		}
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 		g.changeZoneLeftCombat(id, joined)
+		if dest != Battlefield {
+			// The counters go on the moved card after it arrives, the
+			// activator placing them (ChangeZoneEffect.java:751-755).
+			for _, e := range enter {
+				g.addCardCounters(controller, e.placer, a.Source, id, e.kind, e.n)
+			}
+		}
 		if dest == Exile {
 			g.markExiledWith(id, a.Source)
 			if melded != NoCard {
@@ -634,7 +643,7 @@ func (g *Game) canSearchLibraryWith(decider, target, activator PlayerID) bool {
 // ControlOpponentsSearchingLibrary$ grant applies only to a fetcher deciding
 // their own search (:1071).
 func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
-	enter, err := changeZoneEnter(g, a, dest)
+	enter, err := changeZoneEnter(g, a, dest, false)
 	if err != nil {
 		return err
 	}
