@@ -1,0 +1,8 @@
+# Bloodghast's landfall line is TriggerZones$ Graveyard: a land entering under
+# its owner's control fires it from the graveyard (TriggerReplacementBase.java:61-65).
+# OptionalDecider$ You: the scenario controller accepts it.
+startturn human
+advance 3
+queue optionaltrigger true
+playland human 1
+resolvestack

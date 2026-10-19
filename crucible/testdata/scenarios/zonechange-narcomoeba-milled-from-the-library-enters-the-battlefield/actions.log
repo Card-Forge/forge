@@ -1,0 +1,12 @@
+# Origin$ Library | Destination$ Graveyard | ValidCard$ Card.Self: Thought Scour
+# targets its own caster, mills Narcomoeba and a Swamp, then draws the Plains.
+# Narcomoeba's trigger fires from the graveyard it was milled into (a self
+# trigger with no TriggerZones$) and the optional put-onto-the-battlefield is
+# accepted.
+startturn human
+advance 3
+tapformana human 2 U
+queue targets human
+queue optionaltrigger true
+castspell human 1
+resolvestack

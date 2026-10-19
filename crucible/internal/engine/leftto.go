@@ -78,7 +78,22 @@ func (g *Game) checkLeftToTriggers(controller PlayerController, left CardID, des
 // (checkETBTriggers) already reads Origin$ there, so calling both would fire a
 // Destination$ Any line twice.
 func (g *Game) checkLeftGraveyardTriggers(controller PlayerController, card CardID, dest ZoneType) {
-	g.pushTriggeredAbilities(controller, g.leftGraveyardMatches(card, dest))
+	g.pushTriggeredAbilities(controller, g.leftZoneMatches(card, Graveyard, dest))
+}
+
+// checkLeftZoneTriggers is checkLeftGraveyardTriggers for the other
+// non-battlefield origins: ChangesZone lines naming Origin$ Hand or Library
+// (a mill, a discard, a draw, a library-to-hand fetch: Narcomoeba, Ulamog the
+// Infinite Gyre, Dreadhound, Volatile Rift) for each of cards, which just moved
+// from origin to the zone it now sits in. The matches of the whole batch are
+// pushed together, one APNAP pass, as Java runs a CardZoneTable's triggers
+// once the move is done.
+func (g *Game) checkLeftZoneTriggers(controller PlayerController, cards []CardID, origin ZoneType) {
+	var matches []Ability
+	for _, id := range cards {
+		matches = append(matches, g.leftZoneMatches(id, origin, g.Card(id).Zone)...)
+	}
+	g.pushTriggeredAbilities(controller, matches)
 }
 
 // noteGraveyardExit records card, which just left from, in castExits when it
@@ -113,7 +128,7 @@ func (g *Game) castExitMatches() []Ability {
 	var matches []Ability
 	for _, h := range g.castExits {
 		if h.exit != NoCard {
-			matches = append(matches, g.leftGraveyardMatches(h.exit, g.Card(h.exit).Zone)...)
+			matches = append(matches, g.leftZoneMatches(h.exit, Graveyard, g.Card(h.exit).Zone)...)
 			continue
 		}
 		matches = append(matches, h.matches...)
@@ -123,10 +138,11 @@ func (g *Game) castExitMatches() []Ability {
 	return matches
 }
 
-// leftGraveyardMatches is checkLeftGraveyardTriggers' collection half, for a
+// leftZoneMatches is checkLeftGraveyardTriggers' collection half, for a
 // caller that pushes the matches in a wider batch (a spell cast from a
 // graveyard, whose SpellCast triggers Java holds alongside,
-// TriggerHandler.java:264). Every trigger is gated by its TriggerZones$
+// TriggerHandler.java:264), and the shared body of checkLeftZoneTriggers for a
+// hand or library origin. Every trigger is gated by its TriggerZones$
 // against its host's zone (TriggerReplacementBase.zonesCheck,
 // TriggerReplacementBase.java:61-65, phaseTriggerZoneMatches):
 //
@@ -141,34 +157,34 @@ func (g *Game) castExitMatches() []Ability {
 // (TriggerChangesZone.java:121-124 reads CardLKI for a graveyard origin) has
 // no graveyard snapshot here, and Move only clears continuous-effect grants,
 // which no corpus Origin$ Graveyard ValidCard$ reads.
-func (g *Game) leftGraveyardMatches(card CardID, dest ZoneType) []Ability {
-	if dest == Battlefield || dest == Graveyard {
+func (g *Game) leftZoneMatches(card CardID, origin, dest ZoneType) []Ability {
+	if dest == Battlefield || dest == origin {
 		return nil
 	}
 	c := g.Card(card)
-	matches := g.appendLeftGraveyardMatches(nil, c, dest, c, dest)
+	matches := g.appendLeftZoneMatches(nil, c, dest, c, origin, dest)
 	for _, pid := range g.Players() {
 		for _, z := range phaseTriggerZones {
 			for _, watcher := range g.Zone(z, pid).Cards() {
 				if watcher == card {
 					continue
 				}
-				matches = g.appendLeftGraveyardMatches(matches, g.Card(watcher), z, c, dest)
+				matches = g.appendLeftZoneMatches(matches, g.Card(watcher), z, c, origin, dest)
 			}
 		}
 	}
 	return matches
 }
 
-// appendLeftGraveyardMatches appends host's (sitting in zone) graveyard-origin
-// ChangesZone triggers that fire for moved going to dest.
-func (g *Game) appendLeftGraveyardMatches(matches []Ability, host *Card, zone ZoneType, moved *Card, dest ZoneType) []Ability {
+// appendLeftZoneMatches appends host's (sitting in zone) ChangesZone triggers
+// from origin that fire for moved going to dest.
+func (g *Game) appendLeftZoneMatches(matches []Ability, host *Card, zone ZoneType, moved *Card, origin, dest ZoneType) []Ability {
 	if host.Def == nil {
 		return matches
 	}
 	for face := range host.triggerFaces {
 		for _, t := range face.Triggers {
-			if !strings.EqualFold(t.Name, "ChangesZone") || !hasZoneOrAny(t, "Origin", Graveyard) ||
+			if !strings.EqualFold(t.Name, "ChangesZone") || !hasZoneOrAny(t, "Origin", origin) ||
 				!hasZoneOrAny(t, "Destination", dest) || !changesZoneResolvable(t) || !phaseTriggerZoneMatches(host, t, zone) {
 				continue
 			}

@@ -97,6 +97,9 @@ func (g *Game) moveByEffectOnly(controller PlayerController, id CardID, dest Zon
 		// graveyard itself fires nothing here.
 		g.checkLeftGraveyardTriggers(controller, id, g.Card(id).Zone)
 	}
+	if origin == Hand || origin == Library {
+		g.checkLeftZoneTriggers(controller, []CardID{id}, origin)
+	}
 	if origin != Battlefield {
 		return melded
 	}

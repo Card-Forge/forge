@@ -108,6 +108,7 @@ func (millEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 			}
 		}
 	}
+	g.checkLeftZoneTriggers(controller, milled, Library)
 	g.checkChangesZoneAllTriggers(controller, milled, Library, Graveyard)
 	return nil
 }

@@ -129,7 +129,10 @@ func (g *Game) checkETBTriggers(controller PlayerController, entered CardID, ori
 func (g *Game) otherETBTriggerMatches(entered CardID, origin ZoneType) []Ability {
 	var matches []Ability
 	for _, pid := range g.Players() {
-		for _, watcher := range g.traitHosts(pid) {
+		hosts := g.traitHosts(pid)
+		inPlay := len(hosts)
+		hosts = append(hosts[:inPlay:inPlay], g.Zone(Graveyard, pid).Cards()...)
+		for i, watcher := range hosts {
 			if watcher == entered {
 				continue
 			}
@@ -139,7 +142,7 @@ func (g *Game) otherETBTriggerMatches(entered CardID, origin ZoneType) []Ability
 			}
 			for face := range w.triggerFaces {
 				for _, t := range face.Triggers {
-					if !isETBTrigger(t, origin) {
+					if !isETBTrigger(t, origin) || (i >= inPlay && !graveyardWatcher(w, t)) {
 						continue
 					}
 					validCard, ok := t.Param("ValidCard")
@@ -161,6 +164,14 @@ func (g *Game) otherETBTriggerMatches(entered CardID, origin ZoneType) []Ability
 		}
 	}
 	return matches
+}
+
+// graveyardWatcher reports whether t, on a card sitting in a graveyard, is
+// live there: it names TriggerZones$ Graveyard (Bloodghast, Bridge from
+// Below). A line with no TriggerZones$ stays battlefield-only for a
+// permanent's trigger, so a graveyard card is not walked for it.
+func graveyardWatcher(h *Card, t *compile.Ability) bool {
+	return !h.IsEffect && hasZone(t, "TriggerZones", "Graveyard")
 }
 
 // evolveCheck is Trigger.meetsRequirementsOnTriggeredObjects' CR 702.100c
@@ -273,19 +284,32 @@ func (g *Game) otherDiesTriggerMatches(left CardID) []Ability {
 		// An exiled card watches too when its trigger names TriggerZones$
 		// Exile: the Haunt keyword's "when the creature it haunts dies"
 		// (CardFactoryUtil.java:1207) and suspended Nihilith's Origin$ Any
-		// line, the corpus's two such dies-shaped lines. A graveyard watcher
-		// is a separate gap (game-state.md).
+		// line, the corpus's two such dies-shaped lines. A graveyard card
+		// watches the same way under TriggerZones$ Graveyard (Bridge from
+		// Below); dying itself is skipped, it is not its own watcher there.
 		hosts := g.traitHosts(pid)
 		inPlay := len(hosts)
 		hosts = append(hosts[:inPlay:inPlay], g.Zone(Exile, pid).Cards()...)
+		exiled := len(hosts)
+		hosts = append(hosts[:exiled:exiled], g.Zone(Graveyard, pid).Cards()...)
 		for i, watcher := range hosts {
 			w := g.Card(watcher)
 			if w.Def == nil {
 				continue
 			}
+			if i >= inPlay && watcher == left {
+				continue
+			}
 			for face := range w.triggerFaces {
 				for _, t := range face.Triggers {
-					if !isDiesTrigger(t) || (i >= inPlay && (w.IsEffect || !hasZone(t, "TriggerZones", "Exile"))) {
+					if !isDiesTrigger(t) {
+						continue
+					}
+					if i >= exiled {
+						if !graveyardWatcher(w, t) {
+							continue
+						}
+					} else if i >= inPlay && (w.IsEffect || !hasZone(t, "TriggerZones", "Exile")) {
 						continue
 					}
 					validCard, ok := t.Param("ValidCard")

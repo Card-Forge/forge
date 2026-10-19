@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Terror|Id:1
+humanbattlefield=Swamp|Id:2;Swamp|Id:3
+humangraveyard=Bridge from Below|Id:4
+aibattlefield=Grizzly Bears|Id:5

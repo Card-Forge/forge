@@ -160,6 +160,7 @@ func (discardEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 			}
 			g.discardToGraveyard(controller, id, discardCause{known: true, effect: true, controller: a.Controller})
 			g.checkDiscardedTriggers(controller, id, pick.player)
+			g.checkLeftZoneTriggers(controller, []CardID{id}, Hand)
 			if remember {
 				source.Memory.Remember(CardEntity(id))
 			}
@@ -324,6 +325,7 @@ func discardCards(g *Game, controller PlayerController, ids []CardID, pid Player
 	for _, id := range ids {
 		g.discardToGraveyard(controller, id, discardCause{})
 		g.checkDiscardedTriggers(controller, id, pid)
+		g.checkLeftZoneTriggers(controller, []CardID{id}, Hand)
 	}
 	g.checkDiscardedAllTriggers(controller, pid, ids)
 }

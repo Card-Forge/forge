@@ -546,6 +546,7 @@ func (g *Game) drawOneCard(controller PlayerController, pid PlayerID) bool {
 		g.Player(pid).DrawnThisDrawStep++
 	}
 	g.checkDrawnTriggers(controller, pid, id, g.Player(pid).CardsDrawnThisTurn)
+	g.checkLeftZoneTriggers(controller, []CardID{id}, Library)
 	return true
 }
 

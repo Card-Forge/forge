@@ -1,0 +1,12 @@
+# Terror kills the opponent's Bears. Bridge from Below in the human's graveyard
+# watches (TriggerZones$ Graveyard): the creature went to an opponent's
+# graveyard, so the second line exiles Bridge (IsPresent$ Card.StrictlySelf in
+# the graveyard); the first, for the human's own nontoken creature, stays quiet.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue paygeneric B
+queue targets 5
+castspell human 1
+resolvestack
