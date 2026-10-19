@@ -153,9 +153,9 @@ func TestRemoveCounterEffectRejectsUnresolvedParam(t *testing.T) {
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 
-	def := etbRemoveCounterTriggerDefParams(t, "Test Remove Optional", "CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | Optional$ True")
+	def := etbRemoveCounterTriggerDefParams(t, "Test Remove UpTo", "CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | UpTo$ True")
 	_, err := castETBRemoveCounterSelf(t, g, p, def, func(c *engine.Card) { c.Counters.Add(engine.P1P1, 1) })
 	if err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved Optional$")
+		t.Fatal("ResolveStack succeeded, want an error for unresolved UpTo$")
 	}
 }

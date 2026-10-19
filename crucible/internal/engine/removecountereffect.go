@@ -51,8 +51,6 @@ import (
 var removeCounterUnresolvedParams = [...]string{
 	"ValidTgts", "TargetMin", "TargetMax",
 	"TgtZone", "UpTo",
-	"Optional",
-	"RememberRemoved", "RememberAmount",
 	"Condition"}
 
 // removeCounterEffect resolves Mode$/DB$/AB$ RemoveCounter for the Defined$
@@ -76,6 +74,10 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		return nil
 	}
 
+	if _, ok := a.Params.Param("Optional"); ok && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+		// CountersRemoveEffect.java:84-88.
+		return nil
+	}
 	counterType, allKinds, err := removeCounterType(a.Params)
 	if err != nil {
 		return err
@@ -109,11 +111,26 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		}
 	}
 
+	// RememberRemoved$ remembers a (kind, index) pair per counter taken off a
+	// card of a literal kind, and RememberAmount$ the total removed from
+	// anything (CountersRemoveEffect.java:187-192, :217-219).
+	_, rememberRemoved := a.Params.Param("RememberRemoved")
+	_, rememberAmount := a.Params.Param("RememberAmount")
+	total := 0
 	for _, cid := range cards {
-		removeCounters(g, a.Source, CardEntity(cid), &g.Card(cid).Counters, counterType, allKinds, allAmount, amount)
+		removed := removeCounters(g, a.Source, CardEntity(cid), &g.Card(cid).Counters, counterType, allKinds, allAmount, amount)
+		total += removed
+		if rememberRemoved && !allKinds {
+			for i := range removed {
+				source.Memory.RememberRemovedCounter(counterType, i)
+			}
+		}
 	}
 	for _, pid := range players {
-		removeCounters(g, a.Source, PlayerEntity(pid), &g.Player(pid).Counters, counterType, allKinds, allAmount, amount)
+		total += removeCounters(g, a.Source, PlayerEntity(pid), &g.Player(pid).Counters, counterType, allKinds, allAmount, amount)
+	}
+	if rememberAmount && total > 0 {
+		source.Memory.RememberNumber(total)
 	}
 	return nil
 }
@@ -126,28 +143,31 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 // entity carries, CounterType$ All's own real shape; otherwise allAmount
 // reads the entity's own current count of counterType first (CounterNum$
 // All, computed per entity since it can differ target to target).
-func removeCounters(g *Game, source CardID, target EntityID, counters *Counters, counterType CounterType, allKinds, allAmount bool, amount int) {
+func removeCounters(g *Game, source CardID, target EntityID, counters *Counters, counterType CounterType, allKinds, allAmount bool, amount int) (total int) {
 	if allKinds {
 		for _, kind := range counters.Kinds() {
 			n := counters.Count(kind)
 			counters.Add(kind, -n)
 			emitCounterChanged(g, source, target, kind, -n)
+			total += n
 		}
-		return
+		return total
 	}
 	n := amount
 	if allAmount {
 		n = counters.Count(counterType)
 	}
 	if n <= 0 {
-		return
+		return 0
 	}
 	// Card.subtractCounter's delta is what was there less what is left
 	// (Card.java:1910-1911): "remove two" from one removes one, from none
 	// removes nothing.
-	if removed := counters.Count(counterType) - counters.Add(counterType, -n); removed > 0 {
+	removed := counters.Count(counterType) - counters.Add(counterType, -n)
+	if removed > 0 {
 		emitCounterChanged(g, source, target, counterType, -removed)
 	}
+	return max(removed, 0)
 }
 
 // removeCounterType reads CounterType$: a single literal name (uppercased,

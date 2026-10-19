@@ -134,3 +134,47 @@ func TestGainControlChoicesTakesTheChosenPermanent(t *testing.T) {
 		t.Errorf("controller = %v, want %v", got, p)
 	}
 }
+
+// RememberRemoved$ remembers one (kind, index) pair per counter taken off a
+// card, RememberAmount$ the total (CountersRemoveEffect.java:187-192, :217-219);
+// the pairs of two cards collapse onto the indices of the larger, as Java's set
+// does.
+func TestRemoveCounterRemembersWhatItRemoved(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	a := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	b := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	g.Card(a).Counters.Add(engine.P1P1, 3)
+	g.Card(b).Counters.Add(engine.P1P1, 1)
+	c := engine.NewScriptedController()
+	c.QueueCardChoice([]engine.CardID{a, b})
+	host, err := resolveNow(t, g, p, c, nil,
+		"DB$ RemoveCounter | Choices$ Creature.YouCtrl | ChoiceNum$ 2 | CounterType$ P1P1 | CounterNum$ All | RememberRemoved$ True | RememberAmount$ True")
+	if err != nil {
+		t.Fatal(err)
+	}
+	m := g.Card(host).Memory
+	if got := m.RememberedCount(); got != 4 {
+		t.Errorf("RememberedCount = %d, want 4 (3 pairs and the total)", got)
+	}
+	if nums := m.RememberedNumbers(); len(nums) != 1 || nums[0] != 4 {
+		t.Errorf("RememberedNumbers = %v, want [4]", nums)
+	}
+}
+
+func TestRemoveCounterOptionalDeclined(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	a := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	g.Card(a).Counters.Add(engine.P1P1, 2)
+	c := engine.NewScriptedController()
+	c.QueueConfirmEffect(false)
+	if _, err := resolveNow(t, g, p, c, nil, "DB$ RemoveCounter | Choices$ Creature.YouCtrl | Optional$ True | CounterType$ P1P1"); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Card(a).Counters.Count(engine.P1P1); got != 2 {
+		t.Errorf("counters = %d, want 2", got)
+	}
+}

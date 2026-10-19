@@ -34,8 +34,14 @@ type Memory struct {
 	// the two kinds, every reader of Remembered filters by type the way Java's
 	// instanceof checks do.
 	rememberedNumbers *collect.OrderedSet[int]
-	imprinted         *collect.OrderedSet[CardID]
-	chosen            *collect.OrderedSet[CardID]
+	// rememberedRemovals are the Pair<CounterType, Integer> objects
+	// RemoveCounter's RememberRemoved$ adds, one per counter taken off a card
+	// (CountersRemoveEffect.java:187-192). A set like Java's, so removals of
+	// the same kind from two cards collapse onto the indices 0..n-1 of the
+	// larger. Count$RememberedSize counts them.
+	rememberedRemovals *collect.OrderedSet[removedCounter]
+	imprinted          *collect.OrderedSet[CardID]
+	chosen             *collect.OrderedSet[CardID]
 
 	// chosenPlayer, chosenColors and chosenNumber are Java Card's own
 	// setChosenPlayer/setChosenColors/setChosenNumber: single values, each
@@ -117,6 +123,21 @@ func (m *Memory) RememberNumber(n int) bool {
 	return m.rememberedNumbers.Add(n)
 }
 
+// removedCounter is the (kind, index) pair RememberRemoved$ remembers.
+type removedCounter struct {
+	kind  CounterType
+	index int
+}
+
+// RememberRemovedCounter remembers the index-th counter of kind removed by a
+// RememberRemoved$ RemoveCounter, and reports whether it was new.
+func (m *Memory) RememberRemovedCounter(kind CounterType, index int) bool {
+	if m.rememberedRemovals == nil {
+		m.rememberedRemovals = collect.NewOrderedSet[removedCounter](1)
+	}
+	return m.rememberedRemovals.Add(removedCounter{kind, index})
+}
+
 // RememberedNumbers returns the integers the card remembers, in order.
 func (m *Memory) RememberedNumbers() []int {
 	if m.rememberedNumbers == nil {
@@ -132,13 +153,16 @@ func (m *Memory) RememberedCount() int {
 	if m.rememberedNumbers != nil {
 		n += m.rememberedNumbers.Len()
 	}
+	if m.rememberedRemovals != nil {
+		n += m.rememberedRemovals.Len()
+	}
 	return n
 }
 
 // ClearRemembered empties the remembered list, integers included, which is
 // what `ClearRemembered$ True` does (Card.clearRemembered).
 func (m *Memory) ClearRemembered() {
-	m.remembered, m.rememberedNumbers, m.rememberedLKI = nil, nil, nil
+	m.remembered, m.rememberedNumbers, m.rememberedRemovals, m.rememberedLKI = nil, nil, nil, nil
 }
 
 // Imprint adds a card to the imprinted list.
@@ -314,6 +338,9 @@ func (m Memory) clone() Memory {
 	}
 	if m.rememberedNumbers != nil {
 		out.rememberedNumbers = m.rememberedNumbers.Clone()
+	}
+	if m.rememberedRemovals != nil {
+		out.rememberedRemovals = m.rememberedRemovals.Clone()
 	}
 	if m.imprinted != nil {
 		out.imprinted = m.imprinted.Clone()
