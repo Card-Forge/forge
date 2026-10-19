@@ -15,14 +15,13 @@ This repo is a fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). 
 
 ## Read in this order
 
-| #   | Document                                                                                     | What it gives you                                                             |
-| --- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| 1   | [00-master-implementation-plan.md](00-master-implementation-plan.md)                         | Codebase analysis, port strategy, telemetry design, roadmap; M0-M4 done       |
-| 1a  | [00-master-implementation-plan-in-progress.md](00-master-implementation-plan-in-progress.md) | M5-M6 item-by-item detail, currently underway                                 |
-| 1b  | [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md)               | M7-M9 item-by-item detail, not yet started                                    |
-| 2   | [guidelines/README.md](guidelines/README.md)                                                 | The binding rule set. Start with the doc-style guide                          |
-| 3   | [adr/README.md](adr/README.md)                                                               | The 14 accepted decisions, indexed                                            |
-| 4   | [design/](design/)                                                                           | How those decisions compose: engine, card compilation, concurrency, telemetry |
+| #   | Document                                                                       | What it gives you                                                             |
+| --- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| 1   | [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md) | The only plan: remaining work easiest first, exit gates, M7-M9                |
+| 1b  | [00-master-implementation-plan-open.md](00-master-implementation-plan-open.md) | M7-M9 item-by-item detail, not yet started                                    |
+| 2   | [guidelines/README.md](guidelines/README.md)                                   | The binding rule set. Start with the doc-style guide                          |
+| 3   | [adr/README.md](adr/README.md)                                                 | The 14 accepted decisions, indexed                                            |
+| 4   | [design/](design/)                                                             | How those decisions compose: engine, card compilation, concurrency, telemetry |
 
 `/CLAUDE.md` at the repo root is the entry point for Claude Code and points at the same rules.
 

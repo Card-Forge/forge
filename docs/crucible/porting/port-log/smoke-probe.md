@@ -106,7 +106,6 @@ LandPlayed are gone).
 - Command-zone cards are counted as `placed`, which proves nothing about their one-shot abilities. A sticker sheet is
   refused by the probe itself (open plan R15), not by the engine, and that line goes when stickers are ported.
 - The replay-parity harness (ADR-0010 L3): `RecordingPlayerController` over the 110 `PlayerController` methods in
-  `oracle-java` and a `ReplayController` here. Separate work; see `00-master-implementation-plan-in-progress.md`
-  item 32.
+  `oracle-java` and a `ReplayController` here. Separate work; open plan, Exit gates, P5.
 
 Tests: `internal/smoke/probe_test.go`.

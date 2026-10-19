@@ -17,8 +17,6 @@ const (
 // proseDocs quote the whole-corpus percentage in prose.
 var proseDocs = []string{
 	claudeMD,
-	"docs/crucible/00-master-implementation-plan.md",
-	"docs/crucible/00-master-implementation-plan-in-progress.md",
 	"docs/crucible/00-master-implementation-plan-open.md",
 }
 

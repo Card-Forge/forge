@@ -67,9 +67,8 @@ clause. The file is its own group, named after its base name. `enginelint.json` 
 carrying the standard generated-code header are not checked as the source of a reference; they are wiring, and the
 generator is what constrains them.
 
-**Counts are checked, not maintained.** `genregistry -check` also verifies the resolved-API count written in `CLAUDE.md`
-and `00-master-implementation-plan-in-progress.md`: registered APIs minus the three M5 casting entries
-(`PermanentCreature`, `PermanentNoncreature`, `Attach`).
+**Counts are checked, not maintained.** `genregistry -check` also verifies the resolved-API count written in
+`CLAUDE.md`: registered APIs minus the three M5 casting entries (`PermanentCreature`, `PermanentNoncreature`, `Attach`).
 
 **Unimplemented APIs stay explicit:** an empty slot returns `ErrUnimplemented` naming the API (ADR-0011 decides when
 that is acceptable).

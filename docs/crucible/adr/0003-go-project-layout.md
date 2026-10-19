@@ -173,6 +173,5 @@ readable and makes partial registration possible in tests.
 
 - [01-go-coding-standards.md](../guidelines/01-go-coding-standards.md) — GO-5, GO-9, GO-10
 - [03-testing-standards.md](../guidelines/03-testing-standards.md) — TEST-4, package as test unit
-- [00-master-implementation-plan.md](../00-master-implementation-plan.md) — Section 3.1, which defers to this ADR
 - ADR-0008 — effect dispatch registry
 - ADR-0009 — handles and the arena, which is what keeps the core from growing

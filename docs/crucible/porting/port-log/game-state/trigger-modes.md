@@ -267,8 +267,7 @@ real `Mode$ Phase` line today -- the count "65" that actually belongs to a wholl
 `WerewolfTransformCondition$`/`WerewolfUntransformCondition$` (Innistrad's own day/night mechanic, unresolved for
 `CardTraitBase.meetsCommonRequirements`'s own reason, "`Trigger.phasesCheck` lands," above); a real corpus check
 confirms 0 lines carry the bare `Condition$` key on a `Mode$ Phase` line, and only 6 carry it at all corpus-wide, none
-reachable through this port's own static trigger walk. `docs/crucible/00-master-implementation-plan-in-progress.md`'s
-item 26 had the identical figure in the identical place, fixed the same way.
+reachable through this port's own static trigger walk.
 
 Eight new tests, all in `triggerphases_test.go`: `TestAdvancePhaseFiresPhaseTriggerWhenEnchantedControllerMatches`/
 `TestAdvancePhaseSkipsPhaseTriggerWhenEnchantedControllerDoesNotMatch` (an Aura's own controller and the enchanted

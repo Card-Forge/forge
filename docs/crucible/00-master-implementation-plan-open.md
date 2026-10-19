@@ -1,8 +1,8 @@
 # Crucible — Implementation Plan: Open
 
-Everything still to do, sorted easiest first, and milestones M7-M9, not yet started. Roadmap overview and completed
-milestones (M0-M4): [00-master-implementation-plan.md](00-master-implementation-plan.md). Currently in progress (M5-M6):
-[00-master-implementation-plan-in-progress.md](00-master-implementation-plan-in-progress.md).
+The only plan file. Everything still to do, sorted easiest first; the exit gates; milestones M7-M9, not yet started.
+M0-M4 are done; M5-M6 are in progress, their landed work recorded per topic in
+[`porting/port-log/game-state.md`](porting/port-log/game-state.md).
 
 ---
 
@@ -34,7 +34,7 @@ every port.
 | R25n | Findings of R25f: 88 cards still inconclusive (the "72" was stale; only 32 needed game state); refusals now visible: `Attach` `Move$` with `Object$ ParentTarget` (Aura Graft), `PumpAll Duration$` (For the Common Good), `Pump AtEOT$` (Glyph of Destruction, with R25l), `ExchangeControl TargetsWithSameCardType$` (Role Reversal, Shifting Loyalties), `CopyPermanent Populate$` (Scion of Vitu-Ghazi); Flashback, Recoup and Sins of the Past still cannot be cast on the rich board (cause not traced); unported properties `MonoColor`, `NotedColor`, `greatestPower`, `BorderColorSilver`, `YourTeamCtrl`; `cloneUnportedProperties` in `cloneeffect.go` still lists `token`, which `valid.go` answers; closed notes `effects-clone.md:102,125` and `effects-switchblock.md:18` list `ThisTurnEntered*` as unported | M6 | M | `card-smoke` re-rank |
 | R9m | Findings of R9k: ChangeZone `AtRandom$` (about 30 cards; Java sorts the fetch list by `CardView.toString`, `ChangeZoneEffect.java:1097`, `:1199`, an order Crucible cannot reproduce); ChooseType `AtRandom$` over a `Type$` list (HashSet order, `CardType.java:871-873`), `TypesFromDefined$` and `MostPrevalentInDefinedZone$` (ExiledWith/Craft and noted types); ChooseNumber `Secretly$` (HashMap order); NameCard `AtRandom$` over the card database; GenericChoice `AtRandom$ Urza`, `NumRandomChoices$`, `Guess$`; Codie `Defined$ Valid ...` on AlterAttribute; Coin of Mastery `ReplacedCard$CastTotalManaSpent`; a cast prepared copy has no legal-action listing (only `CastSpell` reaches it); the probe never tries the prepared copy; `effects-switchblock.md` gap row on cost-before-targets is stale; possible Forge bug unconfirmed: the token-in-exile check (`GameAction.java:1912-1932`) exempts a prepared copy in exile but not once cast | M6 | M | `card-smoke` re-rank |
 | R9q | Findings of R9p: Unyaro and Coiling Rebirth (Gift casting / PromisedGift); Mana Clash (FlipCoin `RememberResult$`); Spikeshell Harrier; Undercellar Sweep `Triggered` ctb; Ice Cauldron, Jeweled Amulet (`RememberCostMana$`); `costPaymentStack`; 3 plays->refused now naming real heads (Korvold, Valiant Changeling, Lullmage's Domination); detail in `m6-r9p-r9p.md` | M6 | M | card-smoke re-rank |
-| R17 | Close P4: the qualitative half, "every layer, every SBA" (Plan Section 3.2), with the audit written down and M5's exit gate declared | M5 | L | — |
+| R17 | Close P4: the qualitative half, "every layer, every SBA" (Exit gates, P4), with the audit written down and M5's exit gate declared | M5 | L | — |
 | R18 | The rest of `PlayerController` (about 90 Java decision methods against 52 here), `PhaseHandler` step bodies, `undoStack`, `CardState` flip trivia | M5 | L | mostly M7's AI needs them |
 | R19 | Silent-miss audit: the probe cannot see a card that plays and misplays. A Java scenario runner for L2 parity (ADR-0010 names it; none exists) and a pass over the silent GO-7 gaps | M5-M6 | L | oracle-java work |
 | R20a | Gauntlet decklists in `gauntlets/modern/` with `gauntlet.toml` (format, weights, source and date), loaded by `internal/deck`; `crucible card-smoke -decks gauntlets/modern` prints the played share | M6 | S | **your decklists** (none are invented) |
@@ -70,6 +70,20 @@ only row whose input Claude must not invent: a fabricated metagame yields confid
 ([`meta-gauntlet.md`](research/meta-gauntlet.md)).
 
 ---
+
+## Exit gates
+
+Each milestone closes on its gate. Scenario parity = `TestScenarios` over `crucible/testdata/scenarios/` (ADR-0010 L2);
+replay parity = recorded Java games replayed in Go (L3, harness not started); statistical parity = win-rate within stated
+bounds (L4).
+
+| Gate | Milestone | Condition | State |
+| --- | --- | --- | --- |
+| P4 | M5 rules kernel | Scenario parity green on ≥300 hand-written scenarios covering every step transition, every layer, every SBA | Count met (441), every layer met; trigger modes other than enters/dies/attacks/blocks/deals damage/is discarded/becomes tapped/taps for mana/casts a spell/upkeep lack a fixture (R17) |
+| P5 | M6 effects | 100% supported for the active gauntlet (`card-smoke -decks`); scenario parity per API (normal, edge, interaction); replay parity green over the nightly log corpus | Not met: 92.1% of corpus judged cards play; replay harness not started |
+| P6 | M7 AI | Statistical parity vs Java on the reference gauntlet, not bit-exact | Not started |
+| P7 | M8 sim runner | 100k games on the reference gauntlet, zero panics, zero hangs (turn cap), seed re-run byte-identical telemetry | Not started |
+| P8 | M9 reporting | Reports for known-good and known-bad decks give the expected diagnosis on a blind test set | Not started |
 
 ## Milestones
 

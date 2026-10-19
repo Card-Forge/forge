@@ -275,7 +275,6 @@ The specification the telemetry recorder is built against. Anything missing here
 
 ## Related
 
-- [`../00-master-implementation-plan.md`](../00-master-implementation-plan.md) — Phase 4, the telemetry design
 - [`../adr/0006-determinism-and-rng.md`](../adr/0006-determinism-and-rng.md) — seeds recorded per row
 - [`../guidelines/00-documentation-style.md`](../guidelines/00-documentation-style.md) — DOC-4, every rule carries a
   reason

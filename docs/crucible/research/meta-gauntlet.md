@@ -141,5 +141,3 @@ The order formats are added is a scheduling decision, made with that report in h
 
 - [ADR-0011](../adr/0011-card-corpus-scoping.md) — corpus scoping, which this document parameterises
 - [`../telemetry/metric-definitions.md`](../telemetry/metric-definitions.md) — MET-24, results split by play/draw
-- [`../00-master-implementation-plan-in-progress.md`](../00-master-implementation-plan-in-progress.md) — M6, sized by
-  this gauntlet

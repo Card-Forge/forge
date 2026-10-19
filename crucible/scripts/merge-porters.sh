@@ -24,7 +24,7 @@
 #   internal/engine/registry_gen.go   generated: take either side, regenerate
 #   append-only docs (index rows,     union of both sides: every porter adds
 #   defect/patch tables)              rows, none edits another's
-#   CLAUDE.md, the in-progress plan   HEAD's side; the count sentence is
+#   CLAUDE.md                        HEAD's side; the count sentence is
 #                                     rewritten from the registry afterwards
 # Any other conflict stops the run with the cherry-pick left in progress:
 # resolve it, `git cherry-pick --continue`, then rerun merge with the
@@ -40,8 +40,7 @@ cd "$root"
 union_docs='docs/crucible/porting/port-log/game-state.md
 docs/crucible/porting/forge-java-defects.md
 docs/crucible/porting/upstream-patches.md'
-ours_docs='CLAUDE.md
-docs/crucible/00-master-implementation-plan-in-progress.md'
+ours_docs='CLAUDE.md'
 
 wt_of() { # worktree path checked out on branch $1, if any
 	git worktree list --porcelain | awk -v b="refs/heads/$1" '
@@ -128,8 +127,8 @@ merge)
 	out=$(cd crucible && go generate -run genregistry ./internal/engine)
 	n=$(printf '%s' "$out" | sed -nE 's/.* ([0-9]+) resolved script-driven/\1/p')
 	sed -i.bak -E "s/[0-9]+ of the corpus's ([0-9]+) script-driven/$n of the corpus's \1 script-driven/" \
-		CLAUDE.md docs/crucible/00-master-implementation-plan-in-progress.md
-	rm -f CLAUDE.md.bak docs/crucible/00-master-implementation-plan-in-progress.md.bak
+		CLAUDE.md
+	rm -f CLAUDE.md.bak
 	echo "merged; $n resolved script-driven APIs. Next: gates.sh full, fix '## Not ported yet', commit."
 	git status --short
 	;;

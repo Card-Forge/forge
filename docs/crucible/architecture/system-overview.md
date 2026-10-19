@@ -156,6 +156,6 @@ to upstream and is not edited; anything that lands outside those paths is logged
 
 - [`module-map.md`](module-map.md) — every Go package, once packages exist
 - [`../adr/README.md`](../adr/README.md) — the eleven decisions this describes the result of
-- [`../00-master-implementation-plan.md`](../00-master-implementation-plan.md) — milestones and their exit gates
+- [`../00-master-implementation-plan-open.md`](../00-master-implementation-plan-open.md) — remaining work and exit gates
 - [`../guidelines/06-architecture-docs.md`](../guidelines/06-architecture-docs.md) — `ARCH-n`, the rules this document
   follows

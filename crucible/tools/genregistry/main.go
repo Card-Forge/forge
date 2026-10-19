@@ -10,7 +10,7 @@
 //
 //	go generate -run genregistry ./internal/engine   # from the module root
 //	go run ./tools/genregistry -dir internal/engine -check \
-//	    -docs ../CLAUDE.md,../docs/crucible/00-master-implementation-plan-in-progress.md
+//	    -docs ../CLAUDE.md
 //
 // -check writes nothing and fails when the committed file is stale, or when a
 // doc's resolved-API count disagrees with the registry. ADR-0008 named that

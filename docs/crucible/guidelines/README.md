@@ -57,6 +57,6 @@ guideline is stale — fix it in the same PR.
 
 ## Related
 
-- `docs/crucible/00-master-implementation-plan.md` — the plan these rules serve
+- `docs/crucible/00-master-implementation-plan-open.md` — the plan these rules serve
 - `docs/crucible/adr/` — decisions
 - `/CLAUDE.md` — entry point that points here

@@ -247,7 +247,5 @@ milestone).
 
 ## Related
 
-- [00-master-implementation-plan](../00-master-implementation-plan.md) — §3.4 Java suite inventory, §3.5 milestone test
-  table
 - [03-testing-standards](../guidelines/03-testing-standards.md) — TEST-5 fixture format
 - [port-log/game-state](port-log/game-state.md) — "Not ported yet"

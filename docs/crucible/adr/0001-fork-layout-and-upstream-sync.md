@@ -111,5 +111,4 @@ dependency ever ends.
 ## Related
 
 - [05-commit-and-review.md](../guidelines/05-commit-and-review.md) — REV-1 and REV-7 implement this ADR
-- [00-master-implementation-plan.md](../00-master-implementation-plan.md) — Section 2.1
 - ADR-0010 — differential testing, which is why the oracle stays in-tree

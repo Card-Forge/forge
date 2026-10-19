@@ -65,9 +65,7 @@ func tree(t *testing.T) string {
 			"preconstructed decks it is 92.0% of 8,000\njudged.\n\n" +
 			"| Cards | Refusal |\n| ----: | ------- |\n|     1 | old     |\n\nRun it.\n",
 		claudeMD: "plays: 90.0% of 33,000\njudged, an upper bound.\n",
-		"docs/crucible/00-master-implementation-plan.md":             "86.0% of the\ncorpus's judged cards play\n",
-		"docs/crucible/00-master-implementation-plan-in-progress.md": "90.0%\nof the 33,512 judged corpus cards\n",
-		"docs/crucible/00-master-implementation-plan-open.md":        "90.0% of the 33,000 judged corpus\n",
+		"docs/crucible/00-master-implementation-plan-open.md": "90.0% of the 33,000 judged corpus\n",
 	}
 	for rel, s := range files {
 		p := filepath.Join(root, rel)
@@ -90,7 +88,7 @@ func TestReconcileRewritesEveryQuotedNumber(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(changed) != 5 || before["plays"] != 30000 {
+	if len(changed) != 3 || before["plays"] != 30000 {
 		t.Fatalf("changed %v before %v", changed, before)
 	}
 	read := func(rel string) string {
@@ -100,8 +98,6 @@ func TestReconcileRewritesEveryQuotedNumber(t *testing.T) {
 	for rel, want := range map[string]string{
 		smokeDoc: "| plays        | 30,618 |",
 		claudeMD: "91.4% of 33,513\njudged",
-		"docs/crucible/00-master-implementation-plan.md":             "91.4% of the\ncorpus's judged",
-		"docs/crucible/00-master-implementation-plan-in-progress.md": "91.4%\nof the 33,513 judged",
 	} {
 		if !strings.Contains(read(rel), want) {
 			t.Errorf("%s lacks %q:\n%s", rel, want, read(rel))

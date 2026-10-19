@@ -24,20 +24,19 @@ linters that check the port's architectural premises. What is finished is the bl
 accepted ADRs, 7 binding guidelines, 4 design documents and the implementation plan. That order is deliberate: the port
 is documentation-driven.
 
-Progress is tracked in [the implementation plan](docs/crucible/00-master-implementation-plan.md), §5 — split into
-[in-progress](docs/crucible/00-master-implementation-plan-in-progress.md) and
-[open](docs/crucible/00-master-implementation-plan-open.md) milestone detail once a milestone leaves M0-M4.
+Progress is tracked in [the open plan](docs/crucible/00-master-implementation-plan-open.md): remaining work, exit gates,
+milestones M7-M9.
 
 ---
 
 ## Start here
 
-| If you want to                      | Read                                                                  |
-| ----------------------------------- | --------------------------------------------------------------------- |
-| Understand what this is             | [System overview](docs/crucible/architecture/system-overview.md)      |
-| See the whole plan                  | [Implementation plan](docs/crucible/00-master-implementation-plan.md) |
-| Know why something is the way it is | [Architecture Decision Records](docs/crucible/adr/README.md)          |
-| Contribute code or docs             | [Guidelines](docs/crucible/guidelines/README.md)                      |
+| If you want to                      | Read                                                             |
+| ----------------------------------- | ---------------------------------------------------------------- |
+| Understand what this is             | [System overview](docs/crucible/architecture/system-overview.md) |
+| See the whole plan                  | [Open plan](docs/crucible/00-master-implementation-plan-open.md) |
+| Know why something is the way it is | [Architecture Decision Records](docs/crucible/adr/README.md)     |
+| Contribute code or docs             | [Guidelines](docs/crucible/guidelines/README.md)                 |
 
 `/CLAUDE.md` is the entry point for Claude Code and points at the same rules.
 

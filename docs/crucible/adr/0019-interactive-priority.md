@@ -19,8 +19,7 @@ This blocks:
   next thing both need past their dominant shape.
 - Most of the ~57 real remaining `PlayerController` gaps: `chooseSpellAbilityToPlay`/`playChosenSpellAbility` (the ask
   loop itself), `chooseTargetsFor`/`chooseNewTargetsFor` for a response, `payManaCost` as a response, and everything
-  else in `00-master-implementation-plan-in-progress.md` item 29's casting-infra bucket that exists only to serve a real
-  priority window.
+  else in the casting infrastructure that exists only to serve a real priority window.
 - `MustBlock`'s own deferred question (`effects-batches.md:696`): whether to trust, re-prompt, or error on a
   controller's answer that turns out to violate a legality check discovered after the fact. This ADR decides that
   question generally (Decision, point 5) — `MustBlock`'s own ADR applies it rather than re-deciding it.
@@ -126,9 +125,9 @@ Option 1 chosen.
    Cleanup body carrying a separate repeat-check; `PassPriority` is not wired into `beginPhase` yet (Decision, point 2),
    so there is only one caller to check it today. Combat steps with no attackers/no damage to assign
    (`COMBAT_DECLARE_ATTACKERS` with zero attackers, a first-strike-damage step with no first strikers) do not grant it
-   either in Java — this port's own Combat is thin enough (`00-master-implementation-plan-in-progress.md` item 29) that
-   this rule is stated now and wired in once each of those steps has a real body to guard, not implemented in
-   `givesPriority` itself yet. Every other step/phase grants it unconditionally.
+   either in Java — this port's own Combat is thin enough that this rule is stated now and wired in once each of those
+   steps has a real body to guard, not implemented in `givesPriority` itself yet. Every other step/phase grants it
+   unconditionally.
 5. **`CastSpell` and `ActivateAbility` gain a CR 307.1 timing check in place of their current blanket gate**, and a
    controller's chosen action that fails it is an error, not a silent skip or a re-prompt. Both functions today reject
    any cast/activate unless `pid == g.activePlayer`, the phase is `Main1`/`Main2`, and the stack is empty

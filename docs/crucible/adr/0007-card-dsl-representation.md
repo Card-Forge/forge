@@ -102,7 +102,5 @@ hours; noticeable when iterating on a single fixture, which argues for a corpus-
 
 - [01-go-coding-standards.md](../guidelines/01-go-coding-standards.md) — GO-8, typed params
 - [02-java-to-go-translation.md](../guidelines/02-java-to-go-translation.md) — PORT-2
-- [00-master-implementation-plan.md](../00-master-implementation-plan.md) — Section 1.4, and the compile-once claim this
-  ADR corrects
 - ADR-0005 — sharing the compiled structure by pointer
 - ADR-0008 — how a compiled ability reaches its effect

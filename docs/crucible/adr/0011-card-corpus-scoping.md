@@ -93,7 +93,6 @@ engine, and reports need to record which corpus produced them.
 ## Related
 
 - [03-testing-standards.md](../guidelines/03-testing-standards.md) — TEST-12, fixture count as the measure for effects
-- [00-master-implementation-plan.md](../00-master-implementation-plan.md) — Section 1.5, the coverage curve
 - ADR-0002 — the oracle is a CI dependency, never a runtime fallback
 - ADR-0008 — sentinel effects, and when an unregistered API is acceptable
 - ADR-0010 — the parity layers that assert support

@@ -17,10 +17,10 @@ found, this is a genuine engine gap):
 - `Play` (330 lines) — `docs/crucible/porting/port-log/game-state/effects-play-copyspellability.md:23-41`
 - `CopySpellAbility` (255 lines) — same file, lines 43-58
 
-It also blocks 29 of the ~57 real remaining gaps in `PlayerController`
-(`docs/crucible/00-master-implementation-plan-in-progress.md` item 29's own "Not ported yet" table, `PlayerController`'s
-110-vs-46 row): `chooseSpellAbilityToPlay`, `chooseTargetsFor`, `chooseNewTargetsFor`, `chooseModeForAbility`,
-cost-payment hooks and more all exist only to serve casting a real spell, which this port cannot do yet.
+It also blocks 29 of the ~57 real remaining gaps in `PlayerController` (`docs/crucible/porting/port-log/game-state.md`
+"Not ported yet", `PlayerController`'s 110-vs-46 row): `chooseSpellAbilityToPlay`, `chooseTargetsFor`,
+`chooseNewTargetsFor`, `chooseModeForAbility`, cost-payment hooks and more all exist only to serve casting a real spell,
+which this port cannot do yet.
 
 The research doc's own step 4 (`effects-play-copyspellability.md:75-76`) is explicit: landing this changes
 `ResolveStack`'s documented contract ("no `PlayerController` method lets a player respond to anything on the stack",

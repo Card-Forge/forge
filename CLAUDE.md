@@ -7,7 +7,7 @@ Fork of [Card-Forge/forge](https://github.com/Card-Forge/forge). Java MTG engine
 **Crucible** = Go port of that engine + automated deck testing / optimization suite. Runs batch simulations of a target
 deck vs a meta gauntlet, captures telemetry (dead cards, mana health, per-card impact), emits deck-improvement reports.
 
-Plan: `docs/crucible/00-master-implementation-plan.md`
+Plan: `docs/crucible/00-master-implementation-plan-open.md` (the only plan file)
 
 ---
 
@@ -107,8 +107,7 @@ before running or recommending one.
 
 M0-M4 done (ADRs, guidelines, `pkg/collect`, `pkg/javarand`,
 `internal/{mana,cardtype,carddb,deck,valid,expr,cost,keyword}`, the tools under `tools/`, the typed AST for all 33,980
-cards, `internal/engine` core, `PlayerController`, fixture round-trip). P1 and P2 exit gates green. Detail:
-`docs/crucible/00-master-implementation-plan.md`.
+cards, `internal/engine` core, `PlayerController`, fixture round-trip). P1 and P2 exit gates green.
 
 M5 in progress (rules kernel): turn/priority loop, zone changes, SBA, combat, mana, casting, stack, triggers,
 replacement effects, continuous effects across all eight layers (partial), targeting, LKI, activated abilities.
@@ -123,8 +122,7 @@ Everything left, easiest first: `docs/crucible/00-master-implementation-plan-ope
 exit gate:** fixture-count half met (≥300 scenarios), qualitative half not.
 
 Keep this section short — it loads every session. Every primitive, corpus count, design decision and Java citation goes
-in `docs/crucible/00-master-implementation-plan-in-progress.md` items 24-32 and
-`docs/crucible/porting/port-log/game-state.md`, never here.
+in `docs/crucible/porting/port-log/game-state.md` and its topic files, never here.
 
 ---
 

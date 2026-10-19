@@ -96,7 +96,7 @@ gate "go vet" go vet ./...
 gate golangci-lint golangci
 gate enginelint go run ./tools/enginelint -config internal/engine/enginelint.json
 gate genregistry go run ./tools/genregistry -dir internal/engine -check \
-	-docs ../CLAUDE.md,../docs/crucible/00-master-implementation-plan-in-progress.md
+	-docs ../CLAUDE.md
 gate docgate go run ./tools/docgate -module . -docs ../docs/crucible
 gate "apiscan -check" go run ./tools/apiscan -check
 gate "apiscan -check -api" go run ./tools/apiscan -check -api

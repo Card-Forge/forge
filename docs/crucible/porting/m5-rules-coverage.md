@@ -3,7 +3,7 @@
 - **Status:** Active. P4 qualitative half open: every `missing` and `impl-no-fixture` row is listed in
   [Backlog](#backlog)
 - **Applies to:** P4 exit gate, qualitative half — "every step transition, every layer, every SBA"
-  ([plan, P4 — Rules kernel](../00-master-implementation-plan.md#p4--rules-kernel))
+  ([open plan, Exit gates](../00-master-implementation-plan-open.md#exit-gates))
 
 Checkable form of that sentence. One row per rule; a rule the port handles in parts gets one row per part. **Half met
 when [Backlog](#backlog) is empty.** Reason: "every layer, every SBA" read as prose has no end state; a row per CR item

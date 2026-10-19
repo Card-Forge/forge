@@ -135,7 +135,7 @@ jobs:
       # in memory and compares; the same run checks the resolved-API count the
       # docs quote.
       - name: genregistry — registry and API count current (ADR-0017)
-        run: go run ./tools/genregistry -dir internal/engine -check -docs ../CLAUDE.md,../docs/crucible/00-master-implementation-plan-in-progress.md
+        run: go run ./tools/genregistry -dir internal/engine -check -docs ../CLAUDE.md
 
       # `go build ./tools/x` drops the binary in the module root, and the
       # .gitignore list of tool names goes stale every time a tool is added.

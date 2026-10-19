@@ -34,7 +34,7 @@ crucible/scripts/unported-apis.sh 30
 cd crucible && go run ./cmd/crucible card-smoke -all -workers 8     # or -decks <dir> / -cards "A,B"
 
 # After landing engine work in main: both smoke probes (corpus + precons), rewrite quoted numbers in smoke-probe.md,
-# CLAUDE.md and the three plans, before/after table
+# CLAUDE.md and the open plan, before/after table
 cd crucible && go run ./tools/landporter reconcile
 # Open-plan rows: delete or add (-after takes a row that still exists)
 cd crucible && go run ./tools/landporter plan rm ROW ; go run ./tools/landporter plan add -after ROW -id ID "text"
