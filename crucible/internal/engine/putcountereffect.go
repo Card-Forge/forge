@@ -71,7 +71,7 @@ var putCounterUnresolvedParams = [...]string{
 	"ETB",
 	"Choices", "ChoiceTitle", "ChoiceAmount", "MinChoiceAmount", "ChoicesDesc", "ChoiceZone", "ChoiceOptional",
 	"DividedRandomly", "SplitAmount",
-	"Monstrosity", "Adapt", "Bolster", "Support", "PowerUp", "Exhaust",
+	"Bolster", "PowerUp",
 	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
 	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "SkipReceiveCounters", "RandomType",
 	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
@@ -120,14 +120,30 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		return g.putEnterCounters(a, source, placer)
 	}
 
-	counterType, err := putCounterType(a.Params)
-	if err != nil {
-		return err
-	}
-
-	counterNum, ok := a.Params.Param("CounterNum")
-	if !ok {
-		counterNum = "1"
+	// Monstrosity$, Adapt$ and Support$ rewrite the ability into +1/+1
+	// counters (CountersPutEffect.buildSpellAbility, :740-800); Exhaust$ is an
+	// activation limit (activationLimitsMet) and never read here.
+	monstrosity, isMonstrosity := a.Params.Param("Monstrosity")
+	adapt, isAdapt := a.Params.Param("Adapt")
+	_, isSupport := a.Params.Param("Support")
+	var counterType CounterType
+	var counterNum string
+	switch {
+	case isMonstrosity:
+		counterType, counterNum = P1P1, monstrosity
+	case isAdapt:
+		counterType, counterNum = P1P1, adapt
+	case isSupport:
+		counterType, counterNum = P1P1, "1"
+	default:
+		var err error
+		if counterType, err = putCounterType(a.Params); err != nil {
+			return err
+		}
+		var ok bool
+		if counterNum, ok = a.Params.Param("CounterNum"); !ok {
+			counterNum = "1"
+		}
 	}
 	amount, ok := resolveNamedAmount(g, a.Amounts, source, counterNum)
 	if !ok {
@@ -138,6 +154,7 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	var players []PlayerID
 	defined, hasDefined := a.Params.Param("Defined")
 	_, targeted := a.Params.Param("ValidTgts")
+	targeted = targeted || isSupport
 	divided := a.isDivided()
 	if divided && (!targeted || hasDefined) {
 		// Untargeted, the division is asked card by card as the effect
@@ -200,12 +217,23 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	// setCount): the counters each object was to get, summed.
 	total := 0
 	for i, cid := range cards {
+		// CountersPutEffect.java:485-489: Adapt skips a creature that has +1/+1
+		// counters (CanAdapt statics are not modelled), Monstrosity one that is
+		// already monstrous.
+		if isAdapt && g.Card(cid).Counters.Count(P1P1) > 0 || isMonstrosity && g.Card(cid).monstrous {
+			continue
+		}
 		n := g.countersReplaced(controller, placer, CardEntity(cid), counterType, amounts[i])
 		if n <= 0 {
 			continue
 		}
 		total += n
 		g.addCardCounters(controller, placer, a.Source, cid, counterType, n)
+		if isMonstrosity {
+			// :543-548.
+			g.Card(cid).monstrous = true
+			g.checkMonstrousTriggers(controller, cid)
+		}
 	}
 	if keyword.Parse(a.Params.Keyword).Name == "Renown" {
 		// CountersPutEffect.java:553: whatever the counters did.

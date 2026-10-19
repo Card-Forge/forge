@@ -557,6 +557,15 @@ func (g *Game) otherRestrictionsMet(c *Card, ability *compile.Ability) bool {
 // that cannot be resolved refuses the activation (GO-7).
 func (g *Game) activationLimitsMet(c *Card, index int, ability *compile.Ability) bool {
 	turn, game := c.activations.of(index)
+	if _, ok := ability.Param("Exhaust"); ok && game >= 1 {
+		// SpellAbilityRestriction.java:465-471: an Exhaust or Power-up ability
+		// is limited to one activation a game (StaticAbilityAdditionalActivations
+		// raises it; no corpus card does yet).
+		return false
+	}
+	if _, ok := ability.Param("PowerUp"); ok && game >= 1 {
+		return false
+	}
 	for _, k := range [...]struct {
 		key   string
 		count int

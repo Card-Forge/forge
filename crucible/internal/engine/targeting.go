@@ -438,6 +438,16 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		// itself; no script line names it.
 		validTgts, named = "Land.YouCtrl", true
 	}
+	support, isSupport := a.Params.Param("Support")
+	isSupport = isSupport && !named && a.API == APIPutCounter
+	if isSupport {
+		// CountersPutEffect.buildSpellAbility (:779-800): up to N target
+		// creatures, other than the host when it is a permanent.
+		validTgts, named = "Creature", true
+		if g.Card(a.Source).Type().IsPermanent() {
+			validTgts = "Creature.Other"
+		}
+	}
 	if !named {
 		return targetChoice{}, false, true
 	}
@@ -449,6 +459,9 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 	maxStr, ok := a.Params.Param("TargetMax")
 	if !ok {
 		maxStr = "1"
+	}
+	if isSupport {
+		minStr, maxStr = "0", support
 	}
 	// An amount this port cannot resolve is not "no legal target": the ability
 	// is pushed and fails when it resolves, naming the param (GO-7). Java

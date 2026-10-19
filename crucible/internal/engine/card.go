@@ -148,6 +148,10 @@ type Card struct {
 	// had its counters put on it; Move clears it when the card leaves the
 	// battlefield.
 	renowned bool
+	// monstrous is Card.isMonstrous (CR 701.31): a Monstrosity ability has
+	// resolved for it; cleared when the card leaves the battlefield like
+	// renowned.
+	monstrous bool
 	// IsCopiedSpell marks the card a copy of a spell lives on
 	// (GamePieceType.COPIED_SPELL, CardFactory.copySpellHost): it exists
 	// only on the stack and ceases to exist the moment anything would move

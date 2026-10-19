@@ -1051,7 +1051,7 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.attackedThisTurn = nil
 		c.devoured = nil
 		c.Suspected, c.Solved, c.Harnessed = false, false, false
-		c.renowned = false
+		c.renowned, c.monstrous = false, false
 		// Layer 3's text change ends with the object (CR 400.7), before the
 		// copy and face-down restores below read or replace Def.
 		c.clearTextChange()

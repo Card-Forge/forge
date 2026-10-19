@@ -459,6 +459,8 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		return ok && c.Zone == zone
 	case name == "IsRenowned":
 		return c.renowned
+	case name == "IsMonstrous":
+		return c.monstrous
 	case name == "HasDevoured":
 		// CardProperty.java:1823-1826: its Devour sacrificed something as it
 		// entered (Hellkite Hatchling).
