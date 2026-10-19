@@ -27,7 +27,7 @@ table (step 5); the script picks it up from there.
 Routine or hard: routine = the dominant shape is a state change over pieces the engine already has. Hard = needs a new
 stack/casting mechanic, a Layer 1 copy, synthetic Command-zone cards with their own triggers, a new trigger mode, a new
 `PlayerController` decision loop, or changes a documented contract (e.g. `DeclareCombatBlockers`' "not re-checked") --
-that last one needs an ADR first (ADRP-4). Hard ones go to `effect-porter-hard`, or get deferred.
+that last one needs an ADR first (ADRP-4). Do them inline; ADR first when a contract changes.
 
 Then delegate to the `forge-oracle` subagent: "forge-oracle: <Api>". Its answer gives the params the Java reads,
 resolution order, controller decisions, corpus shapes and PORT-8 bugs. Do not read `forge-game/` inline unless it left a
@@ -169,9 +169,6 @@ Every function it prints is under 90%; cover its missing branches (`go tool cove
 `effects-batches.md` and the other existing `effects-*.md` files are closed: never append to them. Reason: parallel
 porters appending to one file conflict on every merge; a new file per batch never does, and the index rows it adds merge
 as a union (`scripts/merge-porters.sh`).
-
-A parallel porter (`effect-porter`, `effect-porter-hard`) leaves `## Not ported yet` and the counts to the orchestrator
-that merges the batches (`port-batch` skill). Reason: every porter edits the same sentence.
 
 Count = registered APIs minus the three M5 casting entries. `genregistry -check` (in `gates.sh` and CI) prints it and
 fails when `CLAUDE.md` or the plan quotes a different number:

@@ -161,27 +161,23 @@ in `docs/crucible/00-master-implementation-plan-in-progress.md` items 24-32 and
 
 ## Subagents and skills
 
-| Kind     | Name                 | Use for                                                                                |
-| -------- | -------------------- | -------------------------------------------------------------------------------------- |
-| subagent | `forge-oracle`       | Java semantics of an API before porting. Keeps `forge-game/` reads out of context      |
-| subagent | `effect-porter`      | Batch of routine M6 effects (Sonnet), one worktree per batch, run in parallel          |
-| subagent | `effect-porter-hard` | M6 effects needing real design (stack/casting, Layer 1, Command zone) - `effort: high` |
-| skill    | `rules-review`       | Diff vs non-negotiables, before commit                                                 |
-| skill    | `port-effect`        | Any M6 `ApiType` effect: file, registry, enginelint, test, docs, counts                |
-| skill    | `port-batch`         | Big M6 batch: split across parallel porters, merge, reconcile, clean up worktrees      |
-| skill    | `port-java-unit`     | Any other Java unit, PORT-3 order                                                      |
-| skill    | `add-scenario`       | Rules test as a `testdata/scenarios/` fixture                                          |
-| skill    | `sync-upstream`      | Merge `Card-Forge/forge`, verify the port still agrees with what moved                 |
-| skill    | `check-card`         | Audit a card script against Oracle text and the Java that runs it; upstream fix branch |
+| Kind     | Name             | Use for                                                                                |
+| -------- | ---------------- | -------------------------------------------------------------------------------------- |
+| subagent | `forge-oracle`   | Java semantics of an API before porting. Keeps `forge-game/` reads out of context      |
+| skill    | `rules-review`   | Diff vs non-negotiables, before commit                                                 |
+| skill    | `port-effect`    | Any M6 `ApiType` effect: file, registry, enginelint, test, docs, counts                |
+| skill    | `port-java-unit` | Any other Java unit, PORT-3 order                                                      |
+| skill    | `add-scenario`   | Rules test as a `testdata/scenarios/` fixture                                          |
+| skill    | `sync-upstream`  | Merge `Card-Forge/forge`, verify the port still agrees with what moved                 |
+| skill    | `check-card`     | Audit a card script against Oracle text and the Java that runs it; upstream fix branch |
 
 Engine port-log lives in `docs/crucible/porting/port-log/game-state/<topic>.md`; `game-state.md` is the index plus
 `Not ported yet`. Each new M6 batch gets its own `game-state/effects-<batch>.md`; existing `effects-*.md` files are
-closed, so parallel porters never append to one file.
+closed.
 
-Worktree subagents cannot run `git`: the user's global `rtk` hook rewrites it to `rtk git`, which the isolation guard
-refuses, and no variant passes. Never bypass it with `/usr/bin/git`. Subagents leave work uncommitted; the main session
-commits with `crucible/scripts/merge-porters.sh commit BRANCH MSG`. Any worktree-subagent prompt carries the prompt
-block from `docs/crucible/runbooks/subagent-worktrees.md` (failures seen and their rules).
+Work happens in the main session: subagents cost more tokens than the same work inline (cold start, worktree one-command
+rule). Only `forge-oracle` is used, for Java research. `landporter`, `merge-porters.sh` and
+`runbooks/subagent-worktrees.md` remain for a rare worktree run.
 
 Hooks resolve the checkout from the tool call (hook input `cwd`, the edited path, `git -C`/`cd`), never
-`$CLAUDE_PROJECT_DIR` alone: a porter's worktree is gated and REV-1-guarded as its own checkout.
+`$CLAUDE_PROJECT_DIR` alone: a worktree is gated and REV-1-guarded as its own checkout.
