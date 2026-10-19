@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         java: [ '17' ]
-    name: Test with Java ${{ matrix.Java }}
+    name: Test Android (Java ${{ matrix.Java }})
     steps:
       - uses: actions/checkout@v3
 
