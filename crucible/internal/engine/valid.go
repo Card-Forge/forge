@@ -223,6 +223,11 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		}
 		stamp, _ := g.hostObjectStamp(source)
 		return ew.stamp == stamp
+	case strings.HasPrefix(name, "delved"):
+		// CardProperty.java:1367-1369 (startsWith, so any suffix matches):
+		// c is among the cards source's own last delve exiled.
+		sc, ok := sourceCard(g, source)
+		return ok && slices.Contains(sc.delved, c.ID)
 	case name == "HauntedBy":
 		// CardProperty.java:553: c is haunted by source (Card.haunts). Only
 		// the Haunt keyword's own trigger writes it (compile/haunt.go).

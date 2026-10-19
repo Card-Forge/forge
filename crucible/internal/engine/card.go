@@ -410,6 +410,12 @@ type Card struct {
 	// GameAction.java:576-579), and markExiledWith (zonemove.go) sets it
 	// after an effect's own exile move, ADR-0034.
 	exiledWith exiledWithMark
+	// delved is Card.delvedCards (Card.java:111): the cards the last delve
+	// payment of this card exiled, read by the "delved" valid property
+	// (Soulflayer). Cleared only by the next delve cast (CostAdjustment.java:
+	// 262), never by a zone change: the host is one object from stack to
+	// battlefield. Held by ID, as a card keeps its ID through Exile.
+	delved []CardID
 	// haunting is Card.haunting (Card.java:1392, CR 702.55): the creature
 	// this exiled card haunts, set by Haunt (haunteffect.go) and read by the
 	// HauntedBy valid property. The zero value haunts nothing.

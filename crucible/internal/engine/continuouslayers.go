@@ -612,11 +612,6 @@ func layerKeywordChange(g *Game, host *Card, amounts map[string]expr.Amount, s *
 	return k, true
 }
 
-// layerUnportedSharedRestrictions are SharedRestrictions$ properties Matches
-// cannot answer: it would read each as a type and match nothing, silently
-// (GO-7). "delved" is Soulflayer's: the cards exiled by its own delve.
-var layerUnportedSharedRestrictions = [...]string{"delved"}
-
 // layerSharedKeywords is CardFactoryUtil.sharedKeywords (:398-460) for
 // SharedKeywordsZone$: of the keywords in add, the ones some card in the
 // zones that matches SharedRestrictions$ (default Card) carries, read from
@@ -625,7 +620,7 @@ var layerUnportedSharedRestrictions = [...]string{"delved"}
 // (Protection, Landwalk, Hexproof and Trample keep their own text; a
 // ProtectionColor is "Protection from <color>" only for the five colors);
 // any other token is kept if a card has a line equal to it, case aside.
-// false for a zone name that is none or a restriction Matches cannot answer.
+// false for a zone name that is none.
 func layerSharedKeywords(g *Game, host *Card, s *compile.Ability, add []string, zonesRaw string) ([]string, bool) {
 	var zones []ZoneType
 	for _, name := range strings.Split(zonesRaw, ",") {
@@ -640,13 +635,6 @@ func layerSharedKeywords(g *Game, host *Card, s *compile.Ability, add []string, 
 		restrictions = v
 	}
 	spec := valid.Parse(restrictions)
-	for _, alt := range spec.Alternatives {
-		for _, p := range alt.Properties {
-			if slices.Contains(layerUnportedSharedRestrictions[:], p.Name) {
-				return nil, false
-			}
-		}
-	}
 	var land, protection, protectionColor, hexproof, trample []string
 	all := map[string]bool{}
 	for _, z := range zones {

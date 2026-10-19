@@ -18,6 +18,9 @@ import (
 // costAssist is what paying a reduced cost will tap and exile.
 type costAssist struct {
 	tap, exile []CardID
+	// delveHost is the spell whose delved list settle fills; NoCard when the
+	// spell has no Delve.
+	delveHost CardID
 }
 
 // assistCost reduces total by what the caster chooses to convoke, improvise and
@@ -27,6 +30,12 @@ type costAssist struct {
 // cost holds, is declined whole: the spell is cast without that assist.
 func (g *Game) assistCost(controller PlayerController, pid PlayerID, c *Card, total mana.Cost) (mana.Cost, costAssist) {
 	var assist costAssist
+	if c.HasKeyword("Delve") {
+		// CostAdjustment.java:262: the list clears before the choice, so a
+		// cast that then pays nothing leaves it empty (PORT-7).
+		c.delved = nil
+		assist.delveHost = c.ID
+	}
 	if total.IsNoCost() {
 		return total, assist
 	}
@@ -109,6 +118,9 @@ func convokePay(g *Game, picks, candidates []CardID, generic int, shards []mana.
 // holds them.
 func (a costAssist) settle(g *Game, controller PlayerController) {
 	tapChosenPermanents(g, controller, a.tap)
+	if a.delveHost != NoCard {
+		g.Card(a.delveHost).delved = slices.Clone(a.exile)
+	}
 	for _, id := range a.exile {
 		c := g.Card(id)
 		from := c.Zone

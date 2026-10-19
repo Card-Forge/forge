@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
 // TestCantHaveKeywordStripsTheKeywordWhateverGrantsIt proves CantHaveKeyword$
@@ -93,21 +94,52 @@ func TestSharedKeywordsZoneOnTheBattlefieldReadsTheControllersPointOfView(t *tes
 	}
 }
 
-// TestSharedKeywordsZoneRefusesARestrictionMatchesCannotAnswer proves a
-// restriction naming a property Matches has no case for ("delved") applies
-// nothing rather than reading it as a type that matches no card (GO-7).
-func TestSharedKeywordsZoneRefusesARestrictionMatchesCannotAnswer(t *testing.T) {
+// TestSharedKeywordsZoneGrantsOnlyWhatTheHostsDelveExiled proves Soulflayer's
+// "delved" restriction (CardProperty.java:1367-1369): of the exiled creature
+// cards, only the ones its own delve exiled count, and the list survives the
+// spell becoming a permanent.
+func TestSharedKeywordsZoneGrantsOnlyWhatTheHostsDelveExiled(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
+	soul := g.NewCard(corpusCard(t, "Soulflayer"), p, engine.Hand)
+	flyer := g.NewCard(creatureDefPTKeywords(t, "1", "1", "Flying"), p, engine.Graveyard)
+	g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Graveyard)
+	g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Graveyard)
+	g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Graveyard)
+	grave := g.Zone(engine.Graveyard, p).Cards()
+	// Trample sits in exile, but nothing delved it.
+	g.NewCard(creatureDefPTKeywords(t, "1", "1", "Trample"), p, engine.Exile)
+	g.Player(p).ManaPool.Add(mana.Black, 2)
+
+	c := engine.NewScriptedController()
+	c.QueueCardChoice(grave)
+	c.QueuePayGeneric(mana.ShardB)
+	c.QueuePayGeneric(mana.ShardB)
+	if !g.CastSpell(p, soul, c) {
+		t.Fatal("Soulflayer could not be cast delving four cards")
+	}
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatal(err)
+	}
+	sba(g)
+	if g.Card(soul).Zone != engine.Battlefield {
+		t.Fatalf("Soulflayer is in %v, want Battlefield", g.Card(soul).Zone)
+	}
+	if !g.Card(soul).HasKeyword("Flying") {
+		t.Errorf("keyword lines = %v, want Flying from the delved flyer %v", g.Card(soul).KeywordLines(), flyer)
+	}
+	if g.Card(soul).HasKeyword("Trample") {
+		t.Errorf("keyword lines = %v, want no Trample: that card was not delved", g.Card(soul).KeywordLines())
+	}
+}
+
+// TestSharedKeywordsZoneRefusesAZoneThatIsNone proves a zone name that is none
+// applies nothing (GO-7).
+func TestSharedKeywordsZoneRefusesAZoneThatIsNone(t *testing.T) {
 	t.Parallel()
 
 	g, p := textGame(t)
-	host := g.NewCard(scriptDef(t, "Soul", "Creature",
-		"S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Flying | SharedKeywordsZone$ Exile | SharedRestrictions$ Creature.delved"),
-		p, engine.Battlefield)
-	g.NewCard(creatureDefPTKeywords(t, "1", "1", "Flying"), p, engine.Exile)
-	sba(g)
-	if g.Card(host).HasKeyword("Flying") {
-		t.Error("an unanswerable restriction granted flying")
-	}
 	bad := g.NewCard(scriptDef(t, "Bad", "Creature",
 		"S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Flying | SharedKeywordsZone$ Nowhere"), p, engine.Battlefield)
 	sba(g)
