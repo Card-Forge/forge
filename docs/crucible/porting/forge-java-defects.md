@@ -540,3 +540,14 @@ a chooser with no permanents and no cards in hand escapes the effect. Script-sid
 the effect. `CostPartMana.java:118-120` (`canPay` always true, "for now") makes the 13 mana choices unfiltered, and `:75`
 builds the cost from the raw string, skipping `AbilityUtils.calculateUnlessCost` (`AbilityUtils.java:1447`).
 Crucible reproduces both (`quirks.md`).
+
+### `CountersRemoveEffect.java:75`, `:137`, `TapEffect.java:44` — Chooser$ ignored
+
+Found while porting the `Choices$` pick (open plan R16e). Not filed. No corpus line combines the two.
+
+`CountersPutEffect` (`:196-202`), `ControlGainEffect` (`:108-109`) and `MustBlockEffect` (`:42-44`) ask the player `Chooser$`
+names; `CountersRemoveEffect` and `TapEffect` ask the activator and never read it. `ChoiceAmount$`/`ChoiceTitle$` are
+also unread by RemoveCounter (it reads `ChoiceNum$`), and `ChoiceOptional$` by Tap. `Mandatory$` is read by none of the
+five. `ControlGainEffect.java:109` and `MustBlockEffect.java:44` call `.get(0)` on `Chooser$` with no empty check (an
+empty list throws; `CountersPutEffect:198` returns). Crucible reproduces the ignored parameters and returns an error
+for the empty list.
