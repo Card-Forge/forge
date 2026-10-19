@@ -1,11 +1,11 @@
 # Runbook — Subagents in worktrees
 
 - **Status:** Active
-- **Applies to:** every subagent spawned with `isolation: "worktree"` (`port-batch` skill, `effect-porter*`, batch
-  prompts written by hand)
+- **Applies to:** every subagent spawned with `isolation: "worktree"`. Rare: work runs in the main session (CLAUDE.md,
+  "Subagents and skills")
 
 Failures seen in M5 batches A-I, each with the rule that avoids it. Put the **Prompt block** at the end into every
-worktree-subagent prompt that is not an `effect-porter*` definition (those already carry it).
+worktree-subagent prompt (`landporter brief` adds it).
 
 ---
 

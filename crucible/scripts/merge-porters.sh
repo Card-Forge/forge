@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Merges parallel effect-porter branches into the current branch and cleans up
-# after them. The port-batch skill's merge step.
+# Merges worktree-subagent branches into the current branch and cleans up
+# after them.
 #
 #   merge-porters.sh list               every agent worktree: branch, commits
 #                                       not on HEAD, uncommitted files

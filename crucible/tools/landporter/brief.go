@@ -9,7 +9,7 @@ import (
 
 const runbook = "docs/crucible/runbooks/subagent-worktrees.md"
 
-// brief builds the prompt for an effect-porter-hard agent that works open-plan row id.
+// brief builds the prompt for a worktree subagent that works open-plan row id.
 func brief(root, id, slug string) (string, error) {
 	text, err := planRow(root, id)
 	if err != nil {
