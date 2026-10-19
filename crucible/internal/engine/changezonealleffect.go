@@ -10,7 +10,7 @@ var changeZoneAllUnresolvedParams = [...]string{
 	"Duration", "ExileFaceDown", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
 	"WithCountersType", "StaticEffect", "RememberLKI", "TypeLimit", "AtEOT", "OptionQuestion",
 	"Hidden", "ChangeNum", "PowerUp", "Pawprint", "Random",
-	"SorcerySpeed", "Ultimate",
+	"Ultimate",
 }
 
 // changeZoneAllEffect is ChangeZoneAllEffect.java: every card in the

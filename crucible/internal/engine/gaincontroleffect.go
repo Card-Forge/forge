@@ -12,7 +12,7 @@ import "fmt"
 // targeting.go's.
 var gainControlUnresolvedParams = [...]string{
 	"Choices", "Chooser", "AllValid",
-	"Condition", "SorcerySpeed", "Ultimate",
+	"Condition", "Ultimate",
 }
 
 // gainControlEffect is ControlGainEffect.java's permanent shape: the

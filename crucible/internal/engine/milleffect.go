@@ -28,8 +28,7 @@ import "fmt"
 // activateability.go), never a restriction on how the effect it pays for
 // resolves, every other M6 effect's own identical reasoning; Ultimate$ (3)
 // -- a planeswalker-ultimate-specific flag, its own further mechanic;
-// SorcerySpeed$ (2) -- a cost-restriction flag with no cost-payment site to
-// attach to, sacrificeEffect's own identical reasoning; ReduceCost$/
+// ReduceCost$/
 // ModeCost$ (1/1) -- Charm's own per-mode cost linkage and a cost-reduction
 // effect neither one this file has anywhere to route through; Condition$/
 // ConditionDefined$ (0/5) -- condition.go's own subAbilityConditionMet
@@ -39,7 +38,7 @@ import "fmt"
 // actual zone change, the identical "cosmetic, ignored" treatment
 // SpellDescription$/TgtPrompt$ already get everywhere.
 var millUnresolvedParams = [...]string{
-	"Destination", "Optional", "Ultimate", "SorcerySpeed", "ReduceCost",
+	"Destination", "Optional", "Ultimate", "ReduceCost",
 	"ModeCost", "Condition"}
 
 // millEffect resolves Mode$/DB$/AB$ Mill. ConditionPresent$/

@@ -13,8 +13,7 @@ import "fmt"
 var exchangeControlUnresolvedParams = [...]string{
 	"TargetsWithSameCardType", "TargetsWithDifferentControllers",
 	"ModeCost",
-	"Condition", "SorcerySpeed",
-}
+	"Condition"}
 
 // exchangeControlEffect is ControlExchangeEffect.java: two permanents trade
 // controllers. With targets, the first target is object1 and either the

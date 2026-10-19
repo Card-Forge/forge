@@ -42,7 +42,7 @@ var changeZoneUnresolvedParams = [...]string{
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
 	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",
 	"ImprintLast", "Unearth",
-	"Condition", "SorcerySpeed", "Ultimate", "ModeCost",
+	"Condition", "Ultimate", "ModeCost",
 	// ExiledWithEffectSource$ marks the effect card's own source as the
 	// exiler instead of the host (SpellAbilityEffect.java:1092-1094).
 	"ExiledWithEffectSource",

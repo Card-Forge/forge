@@ -28,15 +28,12 @@ import (
 // Optional$ (2) -- an interactive "would you like to
 // fight" confirm, the identical gap Sacrifice's/Discard's/Pump's own
 // Optional$ already document (TargetsAtRandom$ is chosen when the targets
-// are, randomTargets in targeting.go); SorcerySpeed$ (1) -- a
-// cost-restriction flag with no cost-payment site to attach to,
-// sacrificeEffect's own identical reasoning; Condition$/ConditionDefined$
+// are, randomTargets in targeting.go); Condition$/ConditionDefined$
 // (0/0) -- condition.go's own subAbilityConditionMet would otherwise
 // silently no-op a card naming either, dealDamageEffect's own identical
 // reasoning.
 var fightUnresolvedParams = [...]string{
-	"Optional", "SorcerySpeed",
-	"Condition"}
+	"Optional", "Condition"}
 
 // fightEffect resolves Mode$/DB$/AB$ Fight. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved

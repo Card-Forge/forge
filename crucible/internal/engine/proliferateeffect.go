@@ -7,8 +7,7 @@ import "fmt"
 // proliferateUnresolvedParams are CountersProliferateEffect.java's params
 // this port cannot honour yet.
 var proliferateUnresolvedParams = [...]string{
-	"Condition", "SorcerySpeed",
-}
+	"Condition"}
 
 // proliferateEffect is CountersProliferateEffect.java: Amount$ times
 // (default 1), the activator chooses any number of players and battlefield

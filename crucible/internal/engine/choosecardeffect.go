@@ -26,7 +26,7 @@ var chooseCardUnresolvedParams = [...]string{
 	"AllCards", "IncludeSpellsOnStack", "TargetControls",
 	"ChosenMap", "ChoiceTitleAppend", "StartingWith", "Optional",
 	"UnlessResolveSubs", "LockInText", "OrString",
-	"Condition", "SorcerySpeed", "ModeCost",
+	"Condition", "ModeCost",
 	"ConditionManaNotSpent", "ConditionGameTypes",
 }
 

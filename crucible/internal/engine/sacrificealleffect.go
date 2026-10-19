@@ -45,7 +45,7 @@ import (
 // PayEnergy<.../DefinedCost_.../X-shard UnlessCost$ or a controller-derived
 // UnlessPayer$ (EnchantedController) this port cannot resolve.
 var sacrificeAllUnresolvedParams = [...]string{
-	"Activator", "SorcerySpeed", "ImprintSacrificed",
+	"Activator", "ImprintSacrificed",
 }
 
 type sacrificeAllEffect struct{}

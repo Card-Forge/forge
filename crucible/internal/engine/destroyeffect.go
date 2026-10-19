@@ -34,9 +34,7 @@ import (
 // not evaluate. Every one fails the whole line loudly rather than destroying
 // the wrong permanent or silently dropping half of what it asked for
 // (PORT-8/GO-7): a Condition$ value subAbilityConditionMet does not read
-// (rejectUnreadCondition; Kicked and OptionalCost resolve); SorcerySpeed$ (9) -- a cost-restriction flag with
-// no cost-payment site to attach to, sacrificeEffect's own identical
-// reasoning; Ultimate$ (11) -- a planeswalker-ultimate-specific flag, its
+// (rejectUnreadCondition; Kicked and OptionalCost resolve); Ultimate$ (11) -- a planeswalker-ultimate-specific flag, its
 // own further mechanic; ModeCost$ (7) -- Charm's own per-mode cost linkage,
 // unrelated; RememberLKI$ (10) -- needs an LKI snapshot of the destroyed
 // permanent taken before the move, this port's own Game.LKI is a whole-batch
@@ -50,7 +48,7 @@ import (
 // resolveUnlessCost (effect.go) gates the whole ability before Registry.
 // Resolve ever reaches it.
 var destroyUnresolvedParams = [...]string{
-	"SorcerySpeed", "Ultimate",
+	"Ultimate",
 	"ModeCost", "RememberLKI",
 }
 

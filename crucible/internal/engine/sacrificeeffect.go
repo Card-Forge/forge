@@ -37,8 +37,7 @@ import (
 // presence marks a line this port would misclassify rather than one it can
 // safely ignore; ValidCard$ (3) -- SacrificeEffect.java
 // never reads this key at all, so its real meaning on the handful of lines
-// naming it is unclear; SorcerySpeed$ (1) -- a cost-restriction flag with
-// no cost-payment site to attach to; SacEachValid$ (1) -- a comma-list of
+// naming it is unclear; SacEachValid$ (1) -- a comma-list of
 // several SacValid$ specs sacrificed independently, a distribution
 // mechanic; Random$ (1) -- Aggregates.random, a randomized choice this
 // port's own ChoosePermanentsToSacrifice contract does not carry; Destroy$
@@ -78,7 +77,7 @@ import (
 var sacrificeUnresolvedParams = [...]string{
 	"ConditionActivationLimit",
 	"ChangeNum", "ValidCard",
-	"SorcerySpeed", "SacEachValid", "Random", "Destroy",
+	"SacEachValid", "Random", "Destroy",
 }
 
 type sacrificeEffect struct{}

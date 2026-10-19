@@ -13,7 +13,7 @@ import (
 // cannot honour yet; a bare CheckSVar$/SVarCompare$ is the activation gate
 // activationLimitsMet's sibling otherRestrictionsMet enforces.
 var chooseColorUnresolvedParams = [...]string{
-	"Condition", "SorcerySpeed", "InstantSpeed", "Forecast",
+	"Condition", "InstantSpeed", "Forecast",
 }
 
 // chooseColorEffect is ChooseColorEffect.java: each chooser (Defined$,

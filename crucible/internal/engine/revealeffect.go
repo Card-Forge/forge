@@ -9,8 +9,7 @@ import "fmt"
 // BecomeStartingPlayer$ (1 line each).
 var revealUnresolvedParams = [...]string{
 	"Random", "OptionalDecider", "BecomeStartingPlayer",
-	"Condition", "SorcerySpeed",
-}
+	"Condition"}
 
 // revealEffect is RevealEffect.java: each player (Defined$/ValidTgts$,
 // default You) with a non-empty hand reveals RevealDefined$'s cards,
