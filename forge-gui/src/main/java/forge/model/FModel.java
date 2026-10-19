@@ -186,21 +186,38 @@ public final class FModel {
         Lang.createInstance(getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
+        //the card, token and custom readers each report 0..total on their own, which made the bar fill up and start over.
+        //Every restart is treated as the next stage of one overall run, weighted by its usual share of the work, and the bar only moves forward.
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
+            private final float[] stageWeights = {0.8f, 0.2f}; //cards, tokens, custom cards, custom tokens
+            private int stage = 0;
+            private float lastFraction = 0f, shown = 0f;
+
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
                 FThreads.invokeInEdtLater(() -> {
                     progressBar.setDescription(name);
-                    progressBar.setPercentMode(usePercents);
+                    progressBar.setPercentMode(true);
                 });
             }
 
             @Override
-            public void report(final int current, final int total) {
+            public synchronized void report(final int current, final int total) {
+                final float fraction = total <= 0 ? 0f : Math.min(1f, (float) current / total);
+                if (fraction < lastFraction - 0.5f && stage < stageWeights.length - 1) {
+                    stage++; //a new reader started counting again from the beginning
+                }
+                lastFraction = fraction;
+                float base = 0f;
+                for (int i = 0; i < stage; i++) {
+                    base += stageWeights[i];
+                }
+                shown = Math.max(shown, base + stageWeights[stage] * fraction);
+                final int value = Math.round(shown * 1000f);
                 FThreads.invokeInEdtLater(() -> {
-                    progressBar.setMaximum(total);
-                    progressBar.setValue(current);
+                    progressBar.setMaximum(1000);
+                    progressBar.setValue(value);
                 });
             }
         };

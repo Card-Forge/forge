@@ -302,8 +302,11 @@ public class VStack extends FDropDown {
         }
     }
 
+    private static final Color GLASS_BASE = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.92f); //dark backing: battlefield cards never show through an item
+    private static final float GLASS_ALPHA_COMPOSITE = 0.8f;
+
     private static Color glassTint(Color c, float k) {
-        return new Color(c.r * k, c.g * k, c.b * k, 0.92f);
+        return new Color(c.r * k, c.g * k, c.b * k, 0.92f); //a soft wash of the card colour over the base
     }
 
     @Override
@@ -512,7 +515,7 @@ public class VStack extends FDropDown {
             final boolean picked = MatchController.instance.isHighlighted(stackInstance);
             boolean needAlpha = (activeStackInstance != stackInstance) && !picked;
             if (needAlpha) {
-                g.setAlphaComposite(ALPHA_COMPOSITE);
+                g.setAlphaComposite(VPlayerPanel.isFrosted() ? GLASS_ALPHA_COMPOSITE : ALPHA_COMPOSITE);
             }
 
             g.startClip(0, 0, w, getHeight()); //clip based on actual height
@@ -522,6 +525,7 @@ public class VStack extends FDropDown {
             if (glass) { //frosted glass card: lively translucent colour gradient, outlined only when hovered or picked
                 final Color c1 = glassTint(backColor, 0.80f);
                 final Color c2 = backColor2.equals(backColor) ? glassTint(backColor, 0.50f) : glassTint(backColor2, 0.80f);
+                g.fillRect(GLASS_BASE, x, y, w, h);
                 g.fillGradientRect(c1, c2, false, x, y, w, h);
                 if (picked || isHovered()) {
                     g.drawRect(Math.max(1f, Utils.scale(1.5f)), picked ? FSelectionBox.CHOSEN_COLOR : FDropDown.getBorderColor().getColor(), x, y, w, h);

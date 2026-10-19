@@ -26,6 +26,9 @@ public class SplashScreen extends FContainer {
     private FButton btnAdventure, btnHome;
     private BGAnimation bgAnimation;
 
+    private static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.28f);
+    private static final Color TEXT_SOFT = new Color(1f, 1f, 1f, 0.82f);
+
     public SplashScreen() {
         progressBar = getProgressBar();
         bgAnimation = getBgAnimation();
@@ -160,7 +163,7 @@ public class SplashScreen extends FContainer {
             String version = "v." + Forge.getDeviceAdapter().getVersionString();
             g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
             progressBar.setBounds((Forge.getScreenWidth() - w2)/2, Forge.getScreenHeight() - h2 * 2f, w2, h2);
-            g.draw(progressBar);
+            drawModernBar(g, (Forge.getScreenWidth() - w2 * 0.8f)/2, Forge.getScreenHeight() - h2 * 2f + h2 * 0.25f, w2 * 0.8f, h2 * 0.5f);
         }
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -338,6 +341,44 @@ public class SplashScreen extends FContainer {
         g.setAlphaComposite(oldAlpha);
     }
 
+    //slim pill progress bar in the theme's progress colours: a translucent track with a thin light edge, the fill and the text on it
+    private void drawModernBar(Graphics g, float x, float y, float w, float h) {
+        final float radius = h / 2;
+        final Color back = FProgressBar.getBackColor(), sel = FProgressBar.getSelBackColor();
+        g.fillRoundRect(GLASS_EDGE, x, y, w, h, radius);
+        final float edge = Math.max(1f, h * 0.06f);
+        g.fillRoundRect(new Color(back.r, back.g, back.b, 0.82f), x + edge, y + edge, w - 2 * edge, h - 2 * edge, radius - edge);
+        final float max = Math.max(1, progressBar.getMaximum());
+        final float fraction = Math.max(0f, Math.min(1f, progressBar.getValue() / max));
+        if (fraction > 0f) {
+            final float inner = edge * 2;
+            final float fillW = Math.max(h - 2 * inner, (w - 2 * inner) * fraction);
+            g.fillRoundRect(sel, x + inner, y + inner, fillW, h - 2 * inner, (h - 2 * inner) / 2);
+        }
+        final String message = progressBar.getMessage();
+        if (message != null) {
+            g.drawText(message, FSkinFont.get(11), FProgressBar.getSelForeColor(), x + radius, y, w - 2 * radius, h, false, Align.center, true);
+        }
+    }
+
+    //the splash artwork fills the screen: a dimmed, cropped copy behind the centred original, which fades into it at the sides
+    private void drawSplashBackdrop(Graphics g, float x, float y, float w, float h) {
+        final float sw = getWidth(), sh = getHeight();
+        final float scale = Math.max(sw / w, sh / h);
+        final float cw = w * scale, ch = h * scale;
+        g.drawImage(splashTexture, (sw - cw) / 2, (sh - ch) / 2, cw, ch);
+        final Color dim = new Color(0f, 0f, 0f, 0.62f), clear = new Color(0f, 0f, 0f, 0f);
+        g.fillRect(dim, 0, 0, sw, sh);
+        g.drawImage(splashTexture, x, y, w, h);
+        final float fade = Math.min(w * 0.18f, Math.max(0f, x)); //only where the artwork doesn't reach the screen edge
+        if (fade > 0) {
+            g.fillGradientRect(dim, clear, false, x, y, fade, h);
+            g.fillGradientRect(clear, dim, false, x + w - fade, y, fade, h);
+        }
+        g.fillGradientRect(new Color(0f, 0f, 0f, 0.35f), clear, true, 0, 0, sw, sh * 0.25f);
+        g.fillGradientRect(clear, new Color(0f, 0f, 0f, 0.55f), true, 0, sh * 0.6f, sw, sh * 0.4f);
+    }
+
     void drawDisclaimer(Graphics g) {
         if (splashTexture == null) {
             return;
@@ -359,7 +400,7 @@ public class SplashScreen extends FContainer {
             w = getHeight() / backgroundRatio;
             x = (getWidth() - w) / 2;
         }
-        g.drawImage(splashTexture, x, y, w, h);
+        drawSplashBackdrop(g, x, y, w, h);
 
         y += h * 295f / 450f;
         if (disclaimerFont == null) {
@@ -373,14 +414,15 @@ public class SplashScreen extends FContainer {
             FSkinFont.preloadAll("");
             disclaimerFont = FSkinFont.get(9);
         }
-        g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,
+        g.drawText(disclaimer, disclaimerFont, TEXT_SOFT,
                 x, y, w, disclaimerHeight, true, Align.center, true);
 
         float padding = 20f / 450f * w;
         float pbHeight = 57f / 450f * h;
         y += 78f / 450f * h;
         progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
-        g.draw(progressBar);
+        final float barW = Math.min(w - 2 * padding, getWidth() * 0.5f), barH = pbHeight * 0.45f;
+        drawModernBar(g, (getWidth() - barW) / 2, y + (pbHeight - barH) / 2, barW, barH);
 
         String version = "v." + Forge.getDeviceAdapter().getVersionString();
         g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
