@@ -197,7 +197,7 @@ func (g *Game) playerCountPlayers(amounts map[string]expr.Amount, controller Pla
 			return nil, false
 		}
 		var out []PlayerID
-		for _, pid := range rememberedPlayers(g, hType, g.Card(source).Memory.Remembered(), true) {
+		for _, pid := range rememberedPlayers(g, hType, g.Card(source).Memory.Remembered(), true, g.Card(source)) {
 			if !slices.Contains(out, pid) {
 				out = append(out, pid)
 			}

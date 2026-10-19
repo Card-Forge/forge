@@ -20,6 +20,11 @@ import (
 // puts a player in the same list as a card.
 type Memory struct {
 	remembered *collect.OrderedSet[EntityID]
+	// rememberedLKI marks the remembered cards Java holds as last-known-
+	// information copies (RememberLKI$, CardCopyService.getLKICopy): a reader
+	// of state or controller sees the card as it last was on the battlefield,
+	// not where it went.
+	rememberedLKI *collect.OrderedSet[CardID]
 	// rememberedNumbers are the integers in Java's remembered set
 	// (Card.rememberedObjects, a LinkedHashSet<Object>, Card.java:194): what
 	// PutCounter's RememberAmount$ adds (GameEntityCounterTable.java:181-184)
@@ -80,6 +85,21 @@ func (m *Memory) Remember(e EntityID) bool {
 	return m.remembered.Add(e)
 }
 
+// RememberLKI remembers the card as a last-known-information copy: it joins
+// the remembered list and is read from its snapshot (RememberedLKI).
+func (m *Memory) RememberLKI(id CardID) {
+	m.Remember(CardEntity(id))
+	if m.rememberedLKI == nil {
+		m.rememberedLKI = collect.NewOrderedSet[CardID](2)
+	}
+	m.rememberedLKI.Add(id)
+}
+
+// IsRememberedLKI reports whether id was remembered by RememberLKI.
+func (m *Memory) IsRememberedLKI(id CardID) bool {
+	return m.rememberedLKI != nil && m.rememberedLKI.Contains(id)
+}
+
 // Remembered returns what the card remembers, in order.
 func (m *Memory) Remembered() []EntityID {
 	if m.remembered == nil {
@@ -117,7 +137,9 @@ func (m *Memory) RememberedCount() int {
 
 // ClearRemembered empties the remembered list, integers included, which is
 // what `ClearRemembered$ True` does (Card.clearRemembered).
-func (m *Memory) ClearRemembered() { m.remembered, m.rememberedNumbers = nil, nil }
+func (m *Memory) ClearRemembered() {
+	m.remembered, m.rememberedNumbers, m.rememberedLKI = nil, nil, nil
+}
 
 // Imprint adds a card to the imprinted list.
 func (m *Memory) Imprint(id CardID) bool {
@@ -162,6 +184,9 @@ func (m *Memory) ClearChosen() { m.chosen = nil }
 func (m *Memory) Forget(e EntityID) bool {
 	if m.remembered == nil {
 		return false
+	}
+	if id, ok := e.AsCard(); ok && m.rememberedLKI != nil {
+		m.rememberedLKI.Remove(id)
 	}
 	return m.remembered.Remove(e)
 }

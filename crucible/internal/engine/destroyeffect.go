@@ -36,10 +36,7 @@ import (
 // (PORT-8/GO-7): a Condition$ value subAbilityConditionMet does not read
 // (rejectUnreadCondition; Kicked and OptionalCost resolve); Ultimate$ (11) -- a planeswalker-ultimate-specific flag, its
 // own further mechanic; ModeCost$ (7) -- Charm's own per-mode cost linkage,
-// unrelated; RememberLKI$ (10) -- needs an LKI snapshot of the destroyed
-// permanent taken before the move, this port's own Game.LKI is a whole-batch
-// zone-change record (game-state.md), not wired to a single script-driven
-// effect's own Remembered list yet.
+// unrelated.
 //
 // SubAbility$ chains through resolveSubAbility (subability.go,
 // Registry.Resolve, effect.go) once this effect's own body finishes, the
@@ -49,7 +46,7 @@ import (
 // Resolve ever reaches it.
 var destroyUnresolvedParams = [...]string{
 	"Ultimate",
-	"ModeCost", "RememberLKI",
+	"ModeCost",
 }
 
 // destroyEffect resolves Mode$/DB$/AB$ Destroy. ConditionPresent$/
@@ -80,17 +77,30 @@ func (destroyEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 	cards = append(cards, g.radianceCards(a)...)
 	_, remember := a.Params.Param("RememberDestroyed")
 	_, noRegen := a.Params.Param("NoRegen")
+	_, rememberLKI := a.Params.Param("RememberLKI")
+	_, alwaysRemember := a.Params.Param("AlwaysRemember")
 	var destroyed []CardID
 	for _, id := range cards {
 		c := g.Card(id)
 		if c.Zone != Battlefield || !canBeDestroyed(c) {
+			if rememberLKI && alwaysRemember && c.Zone == Battlefield {
+				g.Card(a.Source).Memory.RememberLKI(id)
+			}
 			continue
 		}
 		if g.destroyInstead(controller, id) || (!noRegen && g.regenerate(controller, id)) {
+			if rememberLKI && alwaysRemember {
+				g.Card(a.Source).Memory.RememberLKI(id)
+			}
 			continue
 		}
 		if remember {
 			g.Card(a.Source).Memory.Remember(CardEntity(id))
+		}
+		if rememberLKI {
+			// DestroyEffect.java:102-104: the battlefield snapshot of a
+			// destroyed card (the live card's snapshot is frozen as it moves).
+			g.Card(a.Source).Memory.RememberLKI(id)
 		}
 		g.moveToGraveyard(controller, id)
 		g.checkDiesTriggers(controller, id)

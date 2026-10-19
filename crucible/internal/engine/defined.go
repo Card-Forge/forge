@@ -158,6 +158,13 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 				candidates = append(candidates, ref.controller)
 			}
 		}
+	case "TargetedOwner", "ThisTargetedOwner":
+		// AbilityUtils.java:963-967, :983-986: the owner of each targeted card.
+		for _, e := range refs.targets {
+			if id, ok := e.AsCard(); ok {
+				candidates = append(candidates, g.Card(id).Owner)
+			}
+		}
 	case "TargetedOrController":
 		// AbilityUtils.java:933-935: the targeted players, then the
 		// controllers of the targeted cards (Pulse of the Forge's "that player
@@ -254,7 +261,7 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 			candidates = []PlayerID{pid}
 		}
 	case "Remembered", "RememberedController", "RememberedOwner":
-		candidates = rememberedPlayers(g, defined, g.Card(host).Memory.Remembered(), true)
+		candidates = rememberedPlayers(g, defined, g.Card(host).Memory.Remembered(), true, g.Card(host))
 	case "ImprintedController", "ImprintedOwner":
 		// AbilityUtils.java:996-997: addPlayer over the imprinted cards, the
 		// Remembered branch's own reading of each card.
@@ -262,11 +269,11 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		for _, id := range g.Card(host).Memory.Imprinted() {
 			imprinted = append(imprinted, CardEntity(id))
 		}
-		candidates = rememberedPlayers(g, "Remembered"+strings.TrimPrefix(defined, "Imprinted"), imprinted, false)
+		candidates = rememberedPlayers(g, "Remembered"+strings.TrimPrefix(defined, "Imprinted"), imprinted, false, nil)
 	case "DelayTriggerRemembered":
-		candidates = rememberedPlayers(g, "", refs.triggerRemembered, false)
+		candidates = rememberedPlayers(g, "", refs.triggerRemembered, false, nil)
 	case "DelayTriggerRememberedController":
-		candidates = rememberedPlayers(g, "RememberedController", refs.triggerRemembered, false)
+		candidates = rememberedPlayers(g, "RememberedController", refs.triggerRemembered, false, nil)
 	case "TriggeredPlayer":
 		if refs.triggered.player == NoPlayer {
 			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no player", defined)
@@ -534,7 +541,7 @@ func playersIn(entities []EntityID) []PlayerID {
 // def.endsWith("Remembered") branch -- the players that card itself
 // remembers, one level deep (recurse false), which is Java's own
 // skipRemembered guard against Riveteers Overlook's StackOverflow.
-func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse bool) []PlayerID {
+func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse bool, host *Card) []PlayerID {
 	var out []PlayerID
 	for _, e := range remembered {
 		if pid, ok := e.AsPlayer(); ok {
@@ -546,6 +553,9 @@ func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse b
 			continue
 		}
 		c := g.Card(cid)
+		if host != nil && host.Memory.IsRememberedLKI(cid) {
+			c = g.lkiOrLive(cid)
+		}
 		switch defined {
 		case "RememberedController":
 			out = append(out, c.Controller())
@@ -553,7 +563,7 @@ func rememberedPlayers(g *Game, defined string, remembered []EntityID, recurse b
 			out = append(out, c.Owner)
 		default:
 			if recurse {
-				out = append(out, rememberedPlayers(g, defined, c.Memory.Remembered(), false)...)
+				out = append(out, rememberedPlayers(g, defined, c.Memory.Remembered(), false, c)...)
 			}
 		}
 	}

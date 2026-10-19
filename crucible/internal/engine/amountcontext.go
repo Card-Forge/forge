@@ -74,13 +74,14 @@ func (g *Game) listHeadCards(sourceController PlayerID, source CardID, head stri
 		if source == NoCard {
 			return nil, false, true
 		}
-		var ids []CardID
-		for _, e := range g.Card(source).Memory.Remembered() {
+		var cards []*Card
+		mem := &g.Card(source).Memory
+		for _, e := range mem.Remembered() {
 			if id, isCard := e.AsCard(); isCard {
-				ids = append(ids, id)
+				cards = append(cards, g.cardsOf([]CardID{id}, strings.HasSuffix(head, "LKI") || mem.IsRememberedLKI(id))...)
 			}
 		}
-		return g.cardsOf(ids, strings.HasSuffix(head, "LKI")), true, true
+		return cards, true, true
 	case strings.HasPrefix(head, "Imprinted"):
 		if source == NoCard {
 			return nil, false, true
@@ -100,6 +101,12 @@ func (g *Game) listHeadCards(sourceController PlayerID, source CardID, head stri
 		return cards, ok, true
 	}
 	return nil, false, false
+}
+
+// lkiOrLive is id's last-known-information snapshot once it has left the
+// battlefield and the engine kept one, else the card as it is.
+func (g *Game) lkiOrLive(id CardID) *Card {
+	return g.cardsOf([]CardID{id}, true)[0]
 }
 
 // cardsOf is ids as cards; lki reads a card that has left the battlefield from

@@ -8,7 +8,7 @@ import "fmt"
 // port cannot honour yet (same mechanisms as changeZoneUnresolvedParams).
 var changeZoneAllUnresolvedParams = [...]string{
 	"Duration", "ExileFaceDown", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
-	"WithCountersType", "StaticEffect", "RememberLKI", "TypeLimit", "AtEOT", "OptionQuestion",
+	"WithCountersType", "StaticEffect", "TypeLimit", "AtEOT", "OptionQuestion",
 	"Hidden", "ChangeNum", "PowerUp", "Pawprint", "Random",
 	"Ultimate",
 }
@@ -116,8 +116,13 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	_, tapped := a.Params.Param("Tapped")
 	moved := map[ZoneType][]CardID{}
 	var movedOrigins []ZoneType
+	_, rememberLKI := a.Params.Param("RememberLKI")
 	for _, id := range cards {
 		from := g.Card(id).Zone
+		if rememberLKI {
+			// ChangeZoneAllEffect.java:127-129: each card's copy, before it moves.
+			source.Memory.RememberLKI(id)
+		}
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped)
 		if dest == Exile {
 			g.markExiledWith(id, a.Source)

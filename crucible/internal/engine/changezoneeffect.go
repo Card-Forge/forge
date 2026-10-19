@@ -4,6 +4,7 @@ package engine
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -19,8 +20,9 @@ import (
 // AtRandom$, whose Aggregates.random draws over the fetch list after
 // fetchList.sort() orders it by CardView.toString -- zone text, translated
 // name and Java card id, ChangeZoneEffect.java:1097, :1199 -- an order this
-// port cannot reproduce, so the same draw would pick another card), or an LKI
-// copy in Memory (RememberLKI$). Chooser$ and OriginAlternative$ resolve
+// port cannot reproduce, so the same draw would pick another card).
+// RememberLKI$ and a known-origin DestinationAlternative$ resolve
+// (Memory.RememberLKI, changeZoneAltDest). Chooser$ and OriginAlternative$ resolve
 // (changeZoneHidden, changeZoneKnown).
 // AlreadyRevealed$ is read only to skip the DelayedReveal the decider is shown
 // while choosing (ChangeZoneEffect.java:1044), a display this port never
@@ -36,8 +38,7 @@ var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
 	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown", "ExileFaceDown",
 	"LeaveBattlefield", "AtEOT", "StaticEffect",
-	"DestinationAlternative", "LibraryPositionAlternative",
-	"RememberLKI", "Champion", "Foretold", "ForetoldCost", "WithMayLook",
+	"Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
 	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",
@@ -380,6 +381,11 @@ func changeZoneGainControl(g *Game, a *Ability) (PlayerID, error) {
 // changeZoneMemory applies RememberChanged$/ForgetChanged$/Imprint$ for a
 // card that actually moved.
 func changeZoneMemory(a *Ability, source *Card, id CardID) {
+	if _, ok := a.Params.Param("RememberLKI"); ok {
+		// changeHiddenOriginResolve (:1492) after the move; the known-origin
+		// path remembered it already (idempotent).
+		source.Memory.RememberLKI(id)
+	}
 	if _, ok := a.Params.Param("RememberChanged"); ok {
 		source.Memory.Remember(CardEntity(id))
 	}
@@ -434,6 +440,16 @@ func changeZonePreMemory(a *Ability, source *Card) {
 // 566). With until (Duration$ UntilHostLeavesPlay) the moved cards return
 // when the host leaves the battlefield (changeZoneUntilCommand, :865).
 func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
+	libPos, err := libraryPosition(g, a, source)
+	if err != nil {
+		return fmt.Errorf("engine: ChangeZone: %w", err)
+	}
+	if _, ok := a.Params.Param("DestinationAlternative"); ok {
+		// ChangeZoneEffect.java:485-489, before any card is looked at.
+		if dest, libPos, err = g.changeZoneAltDest(controller, a, source, dest, libPos, a.Controller); err != nil {
+			return err
+		}
+	}
 	enter, err := changeZoneEnter(g, a, dest, true)
 	if err != nil {
 		return err
@@ -443,10 +459,6 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		return err
 	}
 	cards, err := changeZoneKnownCards(a, source, origin)
-	if err != nil {
-		return fmt.Errorf("engine: ChangeZone: %w", err)
-	}
-	libPos, err := libraryPosition(g, a, source)
 	if err != nil {
 		return fmt.Errorf("engine: ChangeZone: %w", err)
 	}
@@ -483,8 +495,14 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 	_, tapped := a.Params.Param("Tapped")
 	moved := map[ZoneType][]CardID{}
 	var movedOrigins []ZoneType
+	_, rememberLKI := a.Params.Param("RememberLKI")
 	for _, id := range cards {
 		c := g.Card(id)
+		if rememberLKI && !c.IsPhasedOut() {
+			// ChangeZoneEffect.java:561: the copy is remembered before the
+			// origin check and the optional confirm, moved or not.
+			source.Memory.RememberLKI(id)
+		}
 		if len(origin) > 0 && !zoneIn(c.Zone, origin) {
 			continue
 		}
@@ -643,6 +661,11 @@ func (g *Game) canSearchLibraryWith(decider, target, activator PlayerID) bool {
 // ControlOpponentsSearchingLibrary$ grant applies only to a fetcher deciding
 // their own search (:1071).
 func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
+	if _, ok := a.Params.Param("DestinationAlternative"); ok {
+		// handleAltDest runs after the search has chosen its cards
+		// (ChangeZoneEffect.java:1252-1256); only the known-origin call is ported.
+		return fmt.Errorf("engine: ChangeZone: DestinationAlternative$ with a hidden origin not resolvable yet")
+	}
 	enter, err := changeZoneEnter(g, a, dest, false)
 	if err != nil {
 		return err
@@ -897,4 +920,71 @@ func appendUniquePlayer(ps []PlayerID, pid PlayerID) []PlayerID {
 		}
 	}
 	return append(ps, pid)
+}
+
+// changeZoneAltDest is handleAltDest (ChangeZoneEffect.java:1659-1703): the
+// DestinationAlternative$ zone (LibraryPositionAlternative$, default 0) in
+// place of the destination, when DestAltSVar$ allows it (always, absent one;
+// a "MANDATORY " prefix makes the alternative compulsory, otherwise the SVar
+// is compared with DestAltSVarCompare$, default GE1) and the decider -- the
+// AlternativeDecider$ player, else p -- declines the primary one. A decider
+// that names nobody is not asked and the primary destination stands. The
+// confirm is inverted against its prompt: false picks the alternative (:1700).
+func (g *Game) changeZoneAltDest(controller PlayerController, a *Ability, host *Card, dest ZoneType, libPos int, p PlayerID) (ZoneType, int, error) {
+	allow, optional := true, true
+	if raw, ok := a.Params.Param("DestAltSVar"); ok {
+		if rest, mandatory := strings.CutPrefix(raw, "MANDATORY "); mandatory {
+			optional, raw = false, rest
+		}
+		cmp, ok := a.Params.Param("DestAltSVarCompare")
+		if !ok {
+			cmp = "GE1"
+		}
+		x, ok := resolveNamedAmount(g, a.Amounts, host, raw)
+		if !ok {
+			return dest, libPos, fmt.Errorf("engine: ChangeZone: DestAltSVar$ %q is not resolvable", raw)
+		}
+		if len(cmp) < 3 {
+			return dest, libPos, fmt.Errorf("engine: ChangeZone: DestAltSVarCompare$ %q is not a comparison", cmp)
+		}
+		y, ok := resolveNamedAmount(g, a.Amounts, host, cmp[2:])
+		if !ok {
+			return dest, libPos, fmt.Errorf("engine: ChangeZone: DestAltSVarCompare$ %q is not resolvable", cmp)
+		}
+		allow = compareOp(x, cmp[:2], y)
+	}
+	name, _ := a.Params.Param("DestinationAlternative")
+	alt, ok := ZoneByName(name)
+	if !ok {
+		return dest, libPos, fmt.Errorf("engine: ChangeZone: DestinationAlternative$ %q is not a zone", name)
+	}
+	altPos := 0
+	if raw, ok := a.Params.Param("LibraryPositionAlternative"); ok {
+		n, err := strconv.Atoi(raw)
+		if err != nil {
+			return dest, libPos, fmt.Errorf("engine: ChangeZone: LibraryPositionAlternative$ %q is not a number", raw)
+		}
+		altPos = n
+	}
+	if !allow {
+		return dest, libPos, nil
+	}
+	if !optional {
+		return alt, altPos, nil
+	}
+	decider := p
+	if spec, ok := a.Params.Param("AlternativeDecider"); ok {
+		players, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+		if err != nil {
+			return dest, libPos, fmt.Errorf("engine: ChangeZone: AlternativeDecider$: %w", err)
+		}
+		if len(players) == 0 {
+			return dest, libPos, nil
+		}
+		decider = players[0]
+	}
+	if !controller.ConfirmEffect(g, decider, a.Source) {
+		return alt, altPos, nil
+	}
+	return dest, libPos, nil
 }

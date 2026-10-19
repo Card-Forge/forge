@@ -82,8 +82,8 @@ func TestProbeReportsWhatTheStagedBoardReveals(t *testing.T) {
 		{"Aura Graft", smoke.Refused},
 		// A Wall that blocks: Pump AtEOT$.
 		{"Glyph of Destruction", smoke.Refused},
-		// A token the probe player controls: PumpAll Duration$.
-		{"For the Common Good", smoke.Refused},
+		// PumpAll Duration$ Perpetual.
+		{"Naktamun Shines Again", smoke.Refused},
 		// Its second target, "blockedByValidThisTurn ParentTarget", is a
 		// Defined$ list the valid evaluator is not given.
 		{"Glyph of Delusion", smoke.Inconclusive},

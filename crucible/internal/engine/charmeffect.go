@@ -21,8 +21,9 @@ import (
 // charmUnresolvedParams are CharmEffect params this port does not model:
 // ChoiceRestriction$ (Card.getChosenModes' once-per-turn/-game bookkeeping),
 // CanRepeatModes$, Optional$, Chooser$ (an opponent chooses), Random$
-// Compare, Defined$ (never read by CharmEffect; its six lines lean on a
-// mode reading it). ActivationLimit$/GameActivationLimit$ are enforced at
+// Compare, Defined$ (never read by CharmEffect, 40 corpus lines of `Defined$ You`: a
+// dead script param, forge-java-defects.md and card-script-defects.md; refused until
+// the scripts drop it, PORT-8). ActivationLimit$/GameActivationLimit$ are enforced at
 // activation (activationLimitsMet, activateability.go).
 var charmUnresolvedParams = [...]string{
 	"ChoiceRestriction", "CanRepeatModes", "Optional", "Chooser", "RandomCompare",

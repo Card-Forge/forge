@@ -85,12 +85,17 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return nil
 	}
 
-	permanent := false
+	permanent, untilNextTurn := false, false
 	if d, ok := a.Params.Param("Duration"); ok {
-		if d != "Permanent" {
+		switch d {
+		case "Permanent":
+			permanent = true
+		case "UntilYourNextTurn":
+			// SpellAbilityEffect.addUntilCommand (:980-981), as Pump's.
+			permanent, untilNextTurn = true, true
+		default:
 			return fmt.Errorf("engine: PumpAll: Duration$ %q not resolvable yet", d)
 		}
-		permanent = true
 	}
 
 	power, err := pumpAmount(g, "PumpAll", a, source, "NumAtt")
@@ -136,6 +141,7 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 				g.pumps = append(g.pumps, pumpRecord{
 					Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
 					Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
+					HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
 				})
 			}
 		}
