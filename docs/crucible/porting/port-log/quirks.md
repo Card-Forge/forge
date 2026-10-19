@@ -54,10 +54,39 @@ New quirk or deviation → one row here, same commit (DOC-12). Landed work beyon
 | Param values never read where Java reads presence only: timing restrictions, `FirstCombat$`, `PlayerTurn$`/`NotPlayerTurn$` | `hasParam` | `turn.go`, `trigger.go` |
 | `AddType$ Food,Blood,...` with commas is one subtype named with the commas (Phyrexian Adapter) | `CardType.add` | `continuous.go` |
 
+| `ThisTurnEntered_` splits at the first five underscores, so a valid string holding an underscore is cut short | `AbilityUtils.java:2806` | per-turn ledgers, `valid.go` |
+| Activation host snapshot: a cost that moved the card leaves the old object, whose zone still names the zone it left (Laboratory Drudge's `inZoneGraveyard` reads true for a card exiled from the graveyard as its cost) | `Zone.remove` keeps the zone field | activation records, `activateability.go` |
+| Hollow Marauder's `Minus.Remembered$Valid ...` subtracts nothing: the operator splits on `.` into three parts | `AbilityUtils.java:3278-3287` | `amount.go` |
 ## Deviations from Java
 
 | Deviation | Java | Why |
 | --- | --- | --- |
+| Params Java reads silently or ignores (an unread value, an `Origin` on a known-origin move, a missing trigger key read as empty, `ReplaceDyingCondition$` other than `Kicked`, a second chosen color) are refused with an error | silent default | GO-7: one refusal per card beats a silent wrong answer |
+| Collections Java keeps in hash order (`Vote` tally and `EachVote$`, `MultiplePiles` piles, `DigMultiple` categories, `ChooseType` subtypes) use the options' own order, subtypes sorted; `AtRandom$` over such a list is refused | `HashMap`/`HashSet` order | Java's order is undefined |
+| `MayPlay$`: two live grants on one card that differ in cost or timing, or a cost-changing grant on a card also castable from hand (Omniscience, Fires of Invention): the cast declines with a pending error and the game stops | the player picks the spell side | No `ChooseMayPlayOption` decision yet; picking for the player would be a guess |
+| `ValidAfterStack$ Spell.<props>` checked as the grant is built | checked after the spell is on the stack, cast rolled back | Differs only for a mana value reading X; `continuous.go` |
+| Activation pays mana, then tap, then the irreversible parts (sacrifice) last | part-by-part `CostPayment` loop with undo | CR 601.2h allows any order; a failed mana payment never sacrifices for nothing; `activateability.go` |
+| `Optional$` Sacrifice (not Devour) sacrifices exactly min(`Amount$`, candidates) once confirmed | 0 to `Amount$` | `sacrificeeffect.go` |
+| Unblocked-attacker triggers run last in `DeclareCombatBlockers` | first (`Combat.fireTriggersForUnblockedAttackers`, `PhaseHandler.java:746`) | `block.go` |
+| `AttackedTarget$` filter evaluated once as the trigger fires | lazy `Iterable`, re-run on every read | Differs only if the answer changes before resolution (an Aura moved under `Player.EnchantedBy`) |
+| Joining combat before the move on the known path: prompt order differs, trigger answers match | deferred check | `changezoneeffect.go` |
+| `Secretly$` choices (ChooseCard, GenericChoice, ChoosePlayer, ChooseType) are open choices | hidden display only | No rules difference |
+| `Duration$ UntilHostLeavesPlay`: the host's leaves trigger and the returned card's enters trigger may stack in a different order | same commands, different hook | `changezoneeffect.go`, `controlcommands.go` |
+| A command firing with no `PlayerController` at hand (zone change, phase out, end of combat) leaves the zone correction to the next SBA pass; only the moment the permanent changes lists differs | `GameAction.java:1205-1207` | `controlcommands.go` |
+| Two `SetMaxHandSize$` effects on one player fold in timestamp order | order not pinned in Java | Deliberate choice; `player.go` |
+| `MayPlaySnowIgnoreColor$`: the snow source that pays is picked here, colorless first, then WUBRG | left to the payer | `mana.go` |
+| Per-turn attack and `LifeGainedThisTurn` records reset at cleanup for every player | `clearAttackedMyTurn` caller not traced | An attack made on an opponent's turn drops at cleanup too |
+| Counters placed outside `addCardCounters` (loyalty on entry, `MoveCounter`, replacement-modified placements) are not logged in `CountersAddedThisTurn`; placements writing `Counters.Add` directly (entering with counters, loyalty, defense, `Proliferate`, move/double) ignore `CantPutCounter` | every placement | Gap; `replacement.go`, `staticability.go` |
+| Sneaked creature whose defender left: resolution error before it moves | keeps it attacking the CR 506.4c `<Nothing>` card | Unmodelled; `sneak.go` |
+| Animate Dead after the host's `ClearRemembered$`: the delayed trigger's own `RememberObjects$` stands in for the host's last-known remembered list | host's LKI remembered list | No remembered-list LKI; `delayedtrigger.go` |
+| `Defined$ Remembered` after `RememberLKI$` (Absorb Identity) copies the current values, not an LKI snapshot | LKI copy | Differs only when the remembered permanent was itself a copy; `cloneeffect.go` |
+| A `SpellCast` trigger with no `TriggerZones$` on a card in hand, library or graveyard watching other spells is not scanned | scanned | Real scripts name `TriggerZones$ Battlefield`; `appendSpellCastMatches`, `trigger.go` |
+| `ReturnFromExile`'s enters trigger during RestartGame waits on the stack through the restart | collected in the waiting list, pushed at the first priority check | Same first window; `restartgameeffect.go` |
+| CopySpellAbility `IgnoreFreeze$` is a no-op | freezes the stack | The engine never freezes the stack |
+| ChangeX writes the stack item only | writes `tgtSA` and the host's cast SA | No `SpellAbilityStackInstance`; same value |
+| Camouflage: every chosen creature leaves the pool | kept while `canBlockAny() \|\| canBlockAdditional() >= blockedCount` | Nothing grants either; `camouflageeffect.go` |
+| A vote asks `ChooseNumber` only when an optional vote exists | always `chooseNumber(0, optionalVotes)` | A `[0, 0]` choice decides nothing; `voteeffect.go` |
+| `TargetsWithSameController$`: the `ChooseTargets` answer is not re-validated per pick | checks each click | A split pair fizzles whole at resolution; `targeting.go` |
 | FlipOntoBattlefield on a non-Aura enchantment spot: error | `FlipOntoBattlefieldEffect.java:109` sweeps every permanent | Forge defect; `flipCandidates` |
 | ChaosEnsues `Defined$` naming two distinct planes: error | `TriggerChaosEnsues.java:43-48` fires neither | Suspected defect, no real card; `chaosEnsuesTriggerMatches` |
 | An ending `ExchangeTextBox` drops its own rows, so earlier word changes return | `TextBoxExchangeEffect.java:74-76` leaves them wiped | Forge defect; `exchangetextboxeffect.go` |

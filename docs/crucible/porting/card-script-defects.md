@@ -40,6 +40,7 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `volcanic_offering` (line 5) | `RememberTargets$` on the `DBDestroyLand` sub-ability: `AbilityUtils.handleRemembering` runs on the stack's root alone (`MagicStack.java:646`), so the opponent-chosen land is never remembered or destroyed | `RememberTargets$` port (R9o) | Not filed |
 | `urza_academy_headmaster` (`Destroy11U`) | `RememberTargets$` on a `GenericChoice` choice: never remembered (same site), so "return each card put into a graveyard this way" returns nothing | `RememberTargets$` port (R9o) | Not filed |
 | `phyrexian_adapter` | `AddType$ Food,Blood,Clue,Treasure,Powerstone` (line 6): a comma list where every other line uses `" & "`; `CardType.add` stores one subtype named with the commas | Layer 4 port | Not filed |
+| `hollow_marauder` | `Y:TargetedPlayer$Amount/Minus.Remembered$Valid Card.cmcGE4` (line 11): `doXMath` splits the operator on `.` (`AbilityUtils.java:3278-3287`), gets three parts and leaves the operand 0, so the subtraction never happens | Amounts port (R9) | Not filed |
 
 Every row but `peace_talks`, `____________trespasser`, `turtle_tracks` and the rows marked Not filed is merged upstream.
 Turtle Tracks, Library of Leng and Nephalia Academy are reproduced as Java runs them (oracle parity, the shuffle

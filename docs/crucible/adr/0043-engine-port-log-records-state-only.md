@@ -47,7 +47,7 @@ Option 3, for `internal/engine` only.
 | Java provenance, null decisions                     | Header and inline comments in the Go file (GO-15)                 |
 | Package-level model (handles, zones, dispatch)      | `port-log/game-state.md`, the module-map row's note (docgate)     |
 
-Option 1 rejected: the measurement above; 1.6 MB of which the unique part fits in 11 KB. Option 2 rejected: an unread
+Option 1 rejected: the measurement above; 1.6 MB of which the unique part fits in 17 KB. Option 2 rejected: an unread
 file still has to be written on every row (DOC-12), and its quirks stay undiscoverable.
 
 ## Consequences
@@ -56,9 +56,10 @@ Every engine change that reproduces a Java quirk or departs from Java adds a row
 Without that row, a later parity failure has no written explanation, which is exactly the failure ADR-0004 guards
 against; reviewers check for it the way they check for a test.
 
-The deleted notes stay in git history at commit `624d87dba16`. Quirk extraction was keyword-based (PORT-7, quirk,
-deviation, reproduce and similar) plus a read of every hit, so a quirk described without those words survives only
-there.
+The deleted notes stay in git history at commit `624d87dba16`. Quirk extraction ran in two passes over every note, each
+hit read by hand: quirk words (PORT-7, quirk, deviation, reproduce), then comparison phrases (differs, where Java,
+instead of Java, Java would, not reproduced, pinned). A quirk described in neither vocabulary survives only in that
+commit.
 
 Other packages are unaffected: their notes are small and stable, and docgate still requires each ported package's
 module-map row to link one.
