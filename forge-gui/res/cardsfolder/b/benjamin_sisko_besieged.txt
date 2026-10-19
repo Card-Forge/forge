@@ -1,0 +1,7 @@
+Name:Benjamin Sisko, Besieged
+ManaCost:4 G G
+Types:Legendary Creature Human Officer
+PT:5/5
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouOwn,Creature.TopLibrary+YouOwn | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands and cast creature spells from the top of your library.
+Oracle:Play with the top card of your library revealed.\nYou may play lands and cast creature spells from the top of your library.

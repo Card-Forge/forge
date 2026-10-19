@@ -29,8 +29,13 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
     }
 
     public void fetch() {
-        if (!ImageCache.getInstance().imageKeyFileExists(key)) {
-            fetcher.fetchImage(key, this);
+        try {
+            if (!ImageCache.getInstance().imageKeyFileExists(key)) {
+                fetcher.fetchImage(key, this);
+            }
+        } catch (Throwable t) {
+            // never let a fetch failure kill the render thread; surface it
+            System.err.println("Image fetch failed for " + key + ": " + t);
         }
     }
 

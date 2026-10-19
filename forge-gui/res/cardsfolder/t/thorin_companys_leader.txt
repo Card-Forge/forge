@@ -1,0 +1,8 @@
+Name:Thorin, Company's Leader
+ManaCost:4 R
+Types:Legendary Creature Dwarf Warrior
+PT:4/5
+T:Mode$ DamageDone | ValidSource$ Dwarf.YouCtrl | ValidTarget$ Player,Battle | CombatDamage$ True | Execute$ MakeTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dwarf you control deals combat damage to a player or battle, create two Treasure tokens.
+SVar:MakeTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 2
+A:AB$ PumpAll | Cost$ 10 | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn.
+Oracle:Whenever a Dwarf you control deals combat damage to a player or battle, create two Treasure tokens.\n{10}: Creatures you control gain double strike until end of turn.

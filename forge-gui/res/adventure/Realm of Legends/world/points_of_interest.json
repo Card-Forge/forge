@@ -2,7 +2,7 @@
 	{
 		"name": "Aerie",
 		"displayName": "Aerie",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Aerie",
@@ -14,7 +14,7 @@
 	{
 		"name": "Abzan War Camp",
 		"displayName": "Abzan War Camp",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building11",
@@ -26,7 +26,7 @@
 	{
 		"name": "Boros Fortress",
 		"displayName": "Boros Fortress",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Boros Guildgate",
@@ -38,7 +38,7 @@
 	{
 		"name": "Church of Avacyn",
 		"displayName": "Church of Avacyn",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Monastery",
@@ -50,7 +50,7 @@
 	{
 		"name": "Dusk Legion Fortress",
 		"displayName": "Dusk Legion Fortress",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building12",
@@ -62,7 +62,7 @@
 	{
 		"name": "Elesh Norn's Basilica",
 		"displayName": "Elesh Norn's Basilica",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Fair Basilica",
@@ -74,7 +74,7 @@
 	{
 		"name": "Heavenly Sky",
 		"displayName": "Heavenly Sky",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building118",
@@ -86,7 +86,7 @@
 	{
 		"name": "Kenrith's Court",
 		"displayName": "Kenrith's Court",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building134",
@@ -98,7 +98,7 @@
 	{
 		"name": "Leonin Den",
 		"displayName": "Leonin Den",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "LionDen",
@@ -110,7 +110,7 @@
 	{
 		"name": "Lorehold Classroom",
 		"displayName": "Lorehold Classroom",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "digsite",
@@ -122,7 +122,7 @@
 	{
 		"name": "Omenport",
 		"displayName": "Omenport",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Zedruu",
@@ -134,7 +134,7 @@
 	{
 		"name": "Orzhov Basilica",
 		"displayName": "Orzhov Basilica",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Orzhov Guildgate",
@@ -146,7 +146,7 @@
 	{
 		"name": "Spara's Headqurters",
 		"displayName": "Spara's Headqurters",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building40",
@@ -170,7 +170,7 @@
 	{
 		"name": "Three Tree City",
 		"displayName": "Three Tree City",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building84",
@@ -182,7 +182,7 @@
 	{
 		"name": "White Tower of Worship",
 		"displayName": "White Tower of Worship",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
@@ -194,7 +194,7 @@
 	{
 		"name": "Azorius Senate Hall",
 		"displayName": "Azorius Senate Hall",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Azorius Guildgate",
@@ -206,7 +206,7 @@
 	{
 		"name": "Blue Tower of Worship",
 		"displayName": "Blue Tower of Worship",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
@@ -218,7 +218,7 @@
 	{
 		"name": "Cave of Wonders",
 		"displayName": "Cave of Wonders",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building145",
@@ -230,7 +230,7 @@
 	{
 		"name": "Frostbitten Cavern",
 		"displayName": "Frostbitten Cavern",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "frostbittencavern",
@@ -242,7 +242,7 @@
 	{
 		"name": "High and Dry Docks",
 		"displayName": "High and Dry Docks",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building58",
@@ -254,7 +254,7 @@
 	{
 		"name": "Izzet Lab",
 		"displayName": "Izzet Lab",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Izzet Guildgate",
@@ -266,7 +266,7 @@
 	{
 		"name": "Jeskai War Camp",
 		"displayName": "Jeskai War Camp",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building10",
@@ -278,7 +278,7 @@
 	{
 		"name": "Kiora Island",
 		"displayName": "Kiora Island",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Kiora",
@@ -290,7 +290,7 @@
 	{
 		"name": "Lab of Jin-Gitaxias",
 		"displayName": "Lab of Jin-Gitaxias",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "GitLabSmall",
@@ -302,7 +302,7 @@
 	{
 		"name": "Quandrix Classroom",
 		"displayName": "Quandrix Classroom",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Portal",
@@ -314,7 +314,7 @@
 	{
 		"name": "Raffine's Tower",
 		"displayName": "Raffine's Tower",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building101",
@@ -326,7 +326,7 @@
 	{
 		"name": "Serpent Seaside",
 		"displayName": "Serpent Seaside",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "WurmPond",
@@ -350,7 +350,7 @@
 	{
 		"name": "Teferi's Hideout",
 		"displayName": "Teferi's Hideout",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Jace",
@@ -362,7 +362,7 @@
 	{
 		"name": "Urza's Tower",
 		"displayName": "Urza's Tower",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Annex1",
@@ -374,7 +374,7 @@
 	{
 		"name": "Wilds of Eldraine",
 		"displayName": "Wilds of Eldraine",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Garruk",
@@ -386,7 +386,7 @@
 	{
 		"name": "Wizard Palace",
 		"displayName": "Wizard Palace",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "DjinnPalace",
@@ -398,7 +398,7 @@
 	{
 		"name": "Black Tower of Worship",
 		"displayName": "Black Tower of Worship",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
@@ -410,7 +410,7 @@
 	{
 		"name": "Castle Sengir",
 		"displayName": "Castle Sengir",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "VampireCastle",
@@ -422,7 +422,7 @@
 	{
 		"name": "Castle Voldaren",
 		"displayName": "Castle Voldaren",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "ArzakonFortress",
@@ -434,7 +434,7 @@
 	{
 		"name": "Church of Valgavoth",
 		"displayName": "Church of Valgavoth",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Valvagoth's Lair",
@@ -446,7 +446,7 @@
 	{
 		"name": "Court of Paliano",
 		"displayName": "Court of Paliano",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building91",
@@ -456,9 +456,141 @@
 			"Story"]
 	},
 	{
+		"name": "Isolated Hut",
+		"displayName": "Isolated Hut",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building198",
+		"map": "../Realm of Legends/maps/map/evilgrove/Isolated_Hut.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "An-Havva Inn",
+		"displayName": "An-Havva Inn",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building41",
+		"map": "../Realm of Legends/maps/map/grove/An-Havva_Inn.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Opal Cavern",
+		"displayName": "Ancient Opal Cavern",
+		"type": "sidebosshard",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "ForgottenCave",
+		"map": "../Realm of Legends/maps/map/cave/Ancient_Opal_Cavern.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Otherworldly Market",
+		"displayName": "Otherworldly Market",
+		"type": "capital",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Universe Portal",
+		"map": "../Realm of Legends/maps/map/cave/Otherworldly_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Eclipsed Elven Court",
+		"displayName": "Eclipsed Elven Court",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Great Aurora",
+		"map": "../Realm of Legends/maps/map/evilgrove/Eclipsed_Elven_Court.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ashling's Domain",
+		"displayName": "Ashling's Domain",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Ashling Domain",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Ashlings_Domain.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Idyllic Beachfront",
+		"displayName": "Idyllic Beachfront",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Idyllic Beachfront",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Idyllic_Beachfront.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Crypt of Broken Rules",
+		"displayName": "Crypt of Broken Rules",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building53",
+		"map": "../Realm of Legends/maps/map/cave/Crypt_of_Broken_Rules.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Peaceful Clearing",
+		"displayName": "Peaceful Clearing",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Tranquil Clearing",
+		"map": "../Realm of Legends/maps/map/fort/Peaceful_Clearing.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Fblthp's Maze",
+		"displayName": "Fblthp's Maze",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Maze",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Fblthps_Maze.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Planeswalker Dueling Club",
+		"displayName": "Planeswalker Dueling Club",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building56",
+		"map": "../Realm of Legends/maps/map/cave/Planeswalker_Dueling_Club.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Gitrog Bog",
 		"displayName": "Gitrog Bog",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Mystical Bog",
@@ -470,7 +602,7 @@
 	{
 		"name": "Golgari Sewers",
 		"displayName": "Golgari Sewers",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Golgari Guildgate",
@@ -482,7 +614,7 @@
 	{
 		"name": "Haunted Fengraf",
 		"displayName": "Haunted Fengraf",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Graveyard",
@@ -494,10 +626,10 @@
 	{
 		"name": "Hidden Dimir Base",
 		"displayName": "Condemned Sewers",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
-		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
-		"sprite": "Building180",
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Dimir Guildgate",
 		"map": "../Realm of Legends/maps/map/evilgrove/Hidden_Dimir_Base.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
@@ -506,7 +638,7 @@
 	{
 		"name": "Infernal Scriptorium",
 		"displayName": "Infernal Scriptorium",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Pentagram",
@@ -518,7 +650,7 @@
 	{
 		"name": "Mycotyrant's Mire",
 		"displayName": "Mycotyrant's Mire",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Slimefoot",
@@ -530,7 +662,7 @@
 	{
 		"name": "Old Phyrexia Holdout",
 		"displayName": "Old Phyrexia Holdout",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building149",
@@ -542,7 +674,7 @@
 	{
 		"name": "Rat Cave",
 		"displayName": "Rat Cave",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building62",
@@ -554,7 +686,7 @@
 	{
 		"name": "Sheoldred's Stronghold",
 		"displayName": "Sheoldred's Stronghold",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "DrossOutpost",
@@ -566,7 +698,7 @@
 	{
 		"name": "Silverquill Classroom",
 		"displayName": "Silverquill Classroom",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building143",
@@ -590,7 +722,7 @@
 	{
 		"name": "Sultai War Camp",
 		"displayName": "Sultai War Camp",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "SwampQueenCastle",
@@ -602,7 +734,7 @@
 	{
 		"name": "Xander's Lounge",
 		"displayName": "Xander's Lounge",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building128",
@@ -614,7 +746,7 @@
 	{
 		"name": "Church of Kaalia",
 		"displayName": "Church of Kaalia",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Building44",
@@ -626,7 +758,7 @@
 	{
 		"name": "Dwarven Mine",
 		"displayName": "Dwarven Mine",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "DwarfMine",
@@ -638,7 +770,7 @@
 	{
 		"name": "Goblin War Camp",
 		"displayName": "Goblin War Camp",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "KingPhilCourt",
@@ -650,7 +782,7 @@
 	{
 		"name": "Gruul Stomping Grounds",
 		"displayName": "Gruul Stomping Grounds",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Gruul Guildgate",
@@ -662,7 +794,7 @@
 	{
 		"name": "Kher Keep",
 		"displayName": "Kher Keep",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "LavaForge",
@@ -674,7 +806,7 @@
 	{
 		"name": "Mardu War Camp",
 		"displayName": "Mardu War Camp",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building65",
@@ -686,7 +818,7 @@
 	{
 		"name": "Mishra's Foundry",
 		"displayName": "Mishra's Foundry",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building55",
@@ -698,7 +830,7 @@
 	{
 		"name": "Prismari Classroom",
 		"displayName": "Prismari Classroom",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building22",
@@ -710,7 +842,7 @@
 	{
 		"name": "Rakdos Party Cave",
 		"displayName": "Rakdos Party Cave",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Rakdos Guildgate",
@@ -722,7 +854,7 @@
 	{
 		"name": "Red Tower of Worship",
 		"displayName": "Red Tower of Worship",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
@@ -746,7 +878,7 @@
 	{
 		"name": "Tarnation",
 		"displayName": "Tarnation",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "ruinedcity",
@@ -758,7 +890,7 @@
 	{
 		"name": "Urabrask's Furnace",
 		"displayName": "Urabrask's Furnace",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "FurnaceBase",
@@ -770,7 +902,7 @@
 	{
 		"name": "Yule Town",
 		"displayName": "Yule Town",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "YuleTown",
@@ -782,7 +914,7 @@
 	{
 		"name": "Zendikar War Camp",
 		"displayName": "Zendikar War Camp",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building147",
@@ -794,7 +926,7 @@
 	{
 		"name": "Ziatora's Proving Ground",
 		"displayName": "Ziatora's Proving Ground",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "DragonTemple",
@@ -806,7 +938,7 @@
 	{
 		"name": "Dinosaur Crater",
 		"displayName": "Dinosaur Crater",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "primaljungle",
@@ -818,7 +950,7 @@
 	{
 		"name": "Green Tower of Worship",
 		"displayName": "Green Tower of Worship",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "MageTowerGreen",
@@ -830,7 +962,7 @@
 	{
 		"name": "Honey Cove",
 		"displayName": "Honey Cove",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building160",
@@ -842,7 +974,7 @@
 	{
 		"name": "Hydra Lake",
 		"displayName": "Hydra Lake",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building87",
@@ -854,7 +986,7 @@
 	{
 		"name": "Insect Hive",
 		"displayName": "Insect Hive",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Xira",
@@ -866,7 +998,7 @@
 	{
 		"name": "Jetmir's Garden",
 		"displayName": "Jetmir's Garden",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "FortGreen",
@@ -878,7 +1010,7 @@
 	{
 		"name": "Sacred Elven Grove",
 		"displayName": "Sacred Elven Grove",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "DruidGrove",
@@ -890,7 +1022,7 @@
 	{
 		"name": "Selesnya Garden",
 		"displayName": "Selesnya Garden",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Selesnya Guildgate",
@@ -902,7 +1034,7 @@
 	{
 		"name": "Simian City",
 		"displayName": "Simian City",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building152",
@@ -914,7 +1046,7 @@
 	{
 		"name": "Simic Breeding Pool",
 		"displayName": "Simic Breeding Pool",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Simic Guildgate",
@@ -926,7 +1058,7 @@
 	{
 		"name": "Slimy Sewers",
 		"displayName": "Slimy Sewers",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "SlimeCave",
@@ -950,7 +1082,7 @@
 	{
 		"name": "Squirrel Farm",
 		"displayName": "Squirrel Farm",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "farm",
@@ -962,7 +1094,7 @@
 	{
 		"name": "Temur War Camp",
 		"displayName": "Temur War Camp",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building66",
@@ -974,7 +1106,7 @@
 	{
 		"name": "Vorinclex's Maze",
 		"displayName": "Vorinclex's Maze",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "CopperhostForest",
@@ -986,7 +1118,7 @@
 	{
 		"name": "Witherbloom Classroom",
 		"displayName": "Witherbloom Classroom",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "MageTower",
@@ -998,7 +1130,7 @@
 	{
 		"name": "Wolf Den",
 		"displayName": "Wolf Den",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building151",
@@ -1022,7 +1154,7 @@
 	{
 		"name": "Ancient Dragon Grove",
 		"displayName": "Ancient Dragon Grove",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building2",
@@ -1034,7 +1166,7 @@
 	{
 		"name": "Arzakon's Fortress",
 		"displayName": "Arzakon's Fortress",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building51",
@@ -1046,7 +1178,7 @@
 	{
 		"name": "Bonder's Enclave",
 		"displayName": "Bonder's Enclave",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building4",
@@ -1058,7 +1190,7 @@
 	{
 		"name": "Cavern of Calamity",
 		"displayName": "Cavern of Calamity",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "CalamityCave",
@@ -1094,7 +1226,7 @@
 	{
 		"name": "Crumbling Naktamun",
 		"displayName": "Crumbling Naktamun",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "CrumblingNaktamun",
@@ -1118,7 +1250,7 @@
 	{
 		"name": "First Church of Nyx",
 		"displayName": "First Church of Nyx",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "FortSaintedOne",
@@ -1130,7 +1262,7 @@
 	{
 		"name": "Ghirapur Factory",
 		"displayName": "Ghirapur Factory",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Aether Garage",
@@ -1142,7 +1274,7 @@
 	{
 		"name": "Ghost Town",
 		"displayName": "Ghost Town",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "GhostTown",
@@ -1166,7 +1298,7 @@
 	{
 		"name": "Kaldheim War Camp",
 		"displayName": "Kaldheim War Camp",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "SnowAbbey",
@@ -1178,7 +1310,7 @@
 	{
 		"name": "Karn's Factory",
 		"displayName": "Karn's Factory",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Factory",
@@ -1190,7 +1322,7 @@
 	{
 		"name": "Lair of Behemoths",
 		"displayName": "Lair of Behemoths",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building50",
@@ -1202,7 +1334,7 @@
 	{
 		"name": "Morophon's Pool",
 		"displayName": "Morophon's Pool",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building150",
@@ -1214,7 +1346,7 @@
 	{
 		"name": "Neon Dragon Grove",
 		"displayName": "Neon Dragon Grove",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Neo Kamigawa",
@@ -1226,7 +1358,7 @@
 	{
 		"name": "New Weatherlight Dock Site",
 		"displayName": "New Weatherlight Dock Site",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building59",
@@ -1238,7 +1370,7 @@
 	{
 		"name": "Old Weatherlight Dock Site",
 		"displayName": "Old Weatherlight Dock Site",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building61",
@@ -1262,7 +1394,7 @@
 	{
 		"name": "Secluded Glen",
 		"displayName": "Secluded Glen",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "SecludedGlen",
@@ -1274,7 +1406,7 @@
 	{
 		"name": "Second Church of Nyx",
 		"displayName": "Second Church of Nyx",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "FortSaintedOne",
@@ -1310,7 +1442,7 @@
 	{
 		"name": "Spacecraft Repair Bay",
 		"displayName": "Spacecraft Repair Bay",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building146",
@@ -1334,7 +1466,7 @@
 	{
 		"name": "Urtet's Factory",
 		"displayName": "Urtet's Factory",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building128",
@@ -1346,7 +1478,7 @@
 	{
 		"name": "Valor's Reach Arena",
 		"displayName": "Valor's Reach Arena",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building15",
@@ -1358,7 +1490,7 @@
 	{
 		"name": "Ancient Ruby Lavafield",
 		"displayName": "Ancient Ruby Lavafield",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building107",
@@ -1370,7 +1502,7 @@
 	{
 		"name": "Ancient Jet Hill",
 		"displayName": "Ancient Jet Hill",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building109",
@@ -1382,7 +1514,7 @@
 	{
 		"name": "Ancient Pearl Mesa",
 		"displayName": "Ancient Pearl Mesa",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building108",
@@ -1394,7 +1526,7 @@
 	{
 		"name": "Ancient Emerald Clearing",
 		"displayName": "Ancient Emerald Clearing",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building105",
@@ -1406,7 +1538,7 @@
 	{
 		"name": "Ancient Sapphire Pool",
 		"displayName": "Ancient Sapphire Pool",
-		"type": "castle",
+		"type": "sidebosshard",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building106",
@@ -1418,7 +1550,7 @@
 	{
 		"name": "Strixhaven Stadium",
 		"displayName": "Strixhaven Stadium",
-		"type": "cave",
+		"type": "sidebosseasy",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building94",
@@ -1430,11 +1562,479 @@
 	{
 		"name": "Unstable Snarl",
 		"displayName": "Unstable Snarl",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
 		"sprite": "Snarl",
 		"map": "../Realm of Legends/maps/map/cave/Unstable_Snarl.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Alhammarret's Archive",
+		"displayName": "Alhammarret's Archive",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building97",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Alhammarrets_Archive.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Argivian Military Camp",
+		"displayName": "Argivian Military Camp",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building13",
+		"map": "../Realm of Legends/maps/map/fort/Argivian_Military_Camp.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Assembly Ground",
+		"displayName": "Assembly Ground",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "BarbarianCamp",
+		"map": "../Realm of Legends/maps/map/fort/Assembly_Ground.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Baneful Cavern",
+		"displayName": "Baneful Cavern",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building148",
+		"map": "../Realm of Legends/maps/map/evilgrove/Baneful_Cavern.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Blor's Pond",
+		"displayName": "Blor's Pond",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "FlamingoPond",
+		"map": "../Realm of Legends/maps/map/grove/Blors_Pond.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Darksteel Citadel",
+		"displayName": "Darksteel Citadel",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Castle",
+		"map": "../Realm of Legends/maps/map/cave/Darksteel_Citadel.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Hellion Cave",
+		"displayName": "Hellion Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Hellion_Cave.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Hermit's Hideout",
+		"displayName": "Hermit's Hideout",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Hermits_Hideout.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Isolated Dunes",
+		"displayName": "Isolated Dunes",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "ruinedcity",
+		"map": "../Realm of Legends/maps/map/grove/Isolated_Dunes.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Jester's Tent",
+		"displayName": "Jester's Tent",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Black Circus",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Jesters_Tent.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Nekoru Nest",
+		"displayName": "Nekoru Nest",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building138",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Nekoru_Nest.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Tresserhorn Keep",
+		"displayName": "Tresserhorn Keep",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Slobad",
+		"map": "../Realm of Legends/maps/map/evilgrove/Tresserhorn_Keep.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Echoverse Overlay",
+		"displayName": "Echoverse Overlay",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "RealityOverlay",
+		"map": "../Realm of Legends/maps/map/cave/Echoverse_Overlay.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Hexhaven Tower",
+		"displayName": "Hexhaven Tower",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "HexhavenTower",
+		"map": "../Realm of Legends/maps/map/cave/Hexhaven_Tower_1.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Theorist's Sanctum",
+		"displayName": "Theorist's Sanctum",
+		"type": "sidebosshard",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building79",
+		"map": "../Realm of Legends/maps/map/cave/Theorists_Sanctum.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Hidden Sword Clearing",
+		"displayName": "Hidden Sword Clearing",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Grove",
+		"map": "../Realm of Legends/maps/map/cave/Hidden_Sword_Clearing.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Artifact Black Market",
+		"displayName": "Artifact Black Market",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Mysterious Merchant",
+		"map": "../Realm of Legends/maps/map/cave/Artifact_Black_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "White Black Market",
+		"displayName": "White Black Market",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Mysterious Merchant",
+		"map": "../Realm of Legends/maps/map/fort/White_Black_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Blue Black Market",
+		"displayName": "Blue Black Market",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Mysterious Merchant",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Blue_Black_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Black Black Market",
+		"displayName": "Black Black Market",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Mysterious Merchant",
+		"map": "../Realm of Legends/maps/map/evilgrove/Black_Black_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Red Black Market",
+		"displayName": "Red Black Market",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Mysterious Merchant",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Red_Black_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Green Black Market",
+		"displayName": "Green Black Market",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Mysterious Merchant",
+		"map": "../Realm of Legends/maps/map/grove/Green_Black_Market.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Cursed Graveyard",
+		"displayName": "Cursed Graveyard",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "OtherGraveyard",
+		"map": "../Realm of Legends/maps/map/evilgrove/Cursed_Graveyard.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Skeleton Ship",
+		"displayName": "Skeleton Ship",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Siren",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Skeleton_Ship.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Card Dealer's Cave",
+		"displayName": "Card Dealer's Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Shady Merchant",
+		"map": "../Realm of Legends/maps/map/cave/Card_Dealers_Cave.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Brushwagg Underbrush",
+		"displayName": "Brushwagg Underbrush",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Grove",
+		"map": "../Realm of Legends/maps/map/grove/Brushwagg_Underbrush.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Jandor's Caravan",
+		"displayName": "Jandor's Caravan",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building42",
+		"map": "../Realm of Legends/maps/map/grove/Jandors_Caravan.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Horrible Factory",
+		"displayName": "Horrible Factory",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building21",
+		"map": "../Realm of Legends/maps/map/cave/Horrible_Factory.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Thieves' Hideout",
+		"displayName": "Thieves' Hideout",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "banditcave",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Thieves_Hideout.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Mtenda Mesa",
+		"displayName": "Mtenda Mesa",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building38",
+		"map": "../Realm of Legends/maps/map/fort/Mtenda_Mesa.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Koskun Keep",
+		"displayName": "Koskun Keep",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building50",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Koskun_Keep.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Rathi Shadow Rift",
+		"displayName": "Rathi Shadow Rift",
+		"type": "sidebosseasy",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Snarl",
+		"map": "../Realm of Legends/maps/map/fort/Rathi_Shadow_Rift.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Old Capenna Memorial",
+		"displayName": "Old Capenna Memorial",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building112",
+		"map": "../Realm of Legends/maps/map/fort/Old_Capenna_Memorial.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Rubblebelt's Edge",
+		"displayName": "Rubblebelt's Edge",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building34",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Rubblebelts_Edge.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Schemer's Study",
+		"displayName": "Schemer's Study",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "CateranCastle",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Schemers_Study.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Grave of Gaea",
+		"displayName": "Grave of Gaea",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building45",
+		"map": "../Realm of Legends/maps/map/grove/Grave_of_Gaea.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Oriq Inner Sanctum",
+		"displayName": "Oriq Inner Sanctum",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building6",
+		"map": "../Realm of Legends/maps/map/evilgrove/Oriq_Inner_Sanctum.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Golden Throne Room",
+		"displayName": "Golden Throne Room",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building17",
+		"map": "../Realm of Legends/maps/map/cave/Golden_Throne_Room.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Domain of Night",
+		"displayName": "Domain of Night",
+		"type": "sidebossmoderate",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildingsbosses.atlas",
+		"sprite": "Great Aurora",
+		"map": "../Realm of Legends/maps/map/cave/Domain_of_Night.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story"]

@@ -4,6 +4,7 @@ Date=2025-04-29
 Name=Alchemy: Tarkir
 Type=Online
 ScryfallCode=YTDM
+Booster=1 UncommonRareMythic:fromsheet("YTDM cards"), 8 Common:fromsheet("TDM cards"), 3 Uncommon:fromSheet("TDM cards"), 1 UncommonRareMythic:fromSheet("TDM cards"), 1 RareMythic:fromSheet("TDM cards"), 1 BasicLand:fromSheet("TDM cards")
 
 [cards]
 1 M Lam, Storm Crane Elder @Irina Nordsol

@@ -1,0 +1,6 @@
+Name:Big Winner
+ManaCost:3 R
+Types:Creature Ogre Warrior Guest
+PT:5/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | IsPresent$ Permanent.stickered+YouCtrl | Description$ CARDNAME has trample as long as you control a stickered permanent.
+Oracle:This creature has trample as long as you control a stickered permanent.

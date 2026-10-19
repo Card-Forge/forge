@@ -3,10 +3,12 @@ package forge;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.gamemodes.limited.CardRanker;
+import forge.gamemodes.limited.DraftRankCache;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,6 +24,19 @@ public class CardRankerTest {
     @BeforeTest
     void setupTest() {
         GuiBase.setInterface(new GuiDesktop());
+    }
+
+    /**
+     * The first draft ranking lookup lazily reads and parses the entire rankings
+     * folder (~186 files, ~45k lines). Left to happen inside testRank, that one-time
+     * load dominates the method's 1 second timeout - the test measures disk I/O
+     * rather than ranking, and fails intermittently when the machine is busy running
+     * the rest of the suite. Warming it here keeps the timeout meaningful.
+     * Runs after @BeforeTest, so GuiBase is already set.
+     */
+    @BeforeClass
+    void warmDraftRankings() {
+        DraftRankCache.getRanking("Plains", "BFZ");
     }
 
     @Test(timeOut = 1000, enabled = true)

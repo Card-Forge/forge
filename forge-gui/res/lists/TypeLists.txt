@@ -22,6 +22,7 @@ Advisor:Advisors
 Aetherborn:Aetherborn
 Alien:Aliens
 Ally:Allies
+Andorian:Andorians
 Angel:Angels
 Antelope:Antelopes
 Ape:Apes
@@ -53,10 +54,12 @@ Bird:Birds
 Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
+Borg:Borg
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
 C'tan:C'tan
+Caitian:Caitians
 Camel:Camels
 Capybara:Capybaras
 Caribou:Caribous
@@ -73,6 +76,7 @@ Coward:Cowards
 Coyote:Coyotes
 Crab:Crabs
 Crocodile:Crocodiles
+Custodes:Custodes
 Cyberman:Cybermen
 Cyclops:Cyclopes
 Dalek:Daleks
@@ -129,6 +133,7 @@ Goblin:Goblins
 God:Gods
 Golem:Golems
 Gorgon:Gorgons
+Gorn:Gorns
 Graveborn:Graveborn
 Gremlin:Gremlins
 Griffin:Griffins
@@ -161,8 +166,10 @@ Jellyfish:Jellyfishes
 Juggernaut:Juggernauts
 Kangaroo:Kangaroos
 Kavu:Kavu
+Kelpien:Kelpiens
 Kirin:Kirins
 Kithkin:Kithkin
+Klingon:Klingons
 Knight:Knights
 Kobold:Kobolds
 Kor:Kors
@@ -170,6 +177,7 @@ Kraken:Krakens
 Kree:Kree
 Lamia:Lamias
 Lammasu:Lammasus
+Lanthanite:Lanthanites
 Leech:Leeches
 Lemur:Lemurs
 Leviathan:Leviathans
@@ -183,6 +191,7 @@ Masticore:Masticores
 Mercenary:Mercenaries
 Merfolk:Merfolk
 Metathran:Metathrans
+Mindless-One:Mindless-Ones
 Minion:Minions
 Minotaur:Minotaurs
 Mite:Mites
@@ -215,6 +224,7 @@ Ooze:Oozes
 Orb:Orbs
 Orc:Orcs
 Orgg:Orggs
+Orion:Orions
 Otter:Otters
 Ouphe:Ouphes
 Ox:Oxen
@@ -239,6 +249,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Q:Q
 Qu:Qu
 Raccoon:Raccoons
 Rabbit:Rabbits
@@ -250,6 +261,7 @@ Rhino:Rhinos
 Rigger:Riggers
 Robot:Robots
 Rogue:Rogues
+Romulan:Romulans
 Sable:Sables
 Salamander:Salamanders
 Samurai:Samurais
@@ -302,13 +314,17 @@ Surrakar:Surrakars
 Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
+Talosian:Talosians
+Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
 Thalakos:Thalakoses
+Tholian:Tholians
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
 Time Lord:Time Lords
+Tosk:Tosks
 Toy:Toys
 Treefolk:Treefolk
 Trilobite:Trilobites
@@ -323,7 +339,10 @@ Varmint:Varmints
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
+Vorta:Vorta
+Vulcan:Vulcans
 Wall:Walls
+Walrus:Walruses
 Warlock:Warlocks
 Warrior:Warriors
 Weasel:Weasels
@@ -337,6 +356,7 @@ Wombat:Wombats
 Worm:Worms
 Wraith:Wraiths
 Wurm:Wurms
+Xindi:Xindi
 Yeti:Yetis
 Zombie:Zombies
 Zubera:Zuberas
@@ -347,6 +367,7 @@ Chorus
 Lesson
 Omen
 Trap
+Vengeance
 [EnchantmentTypes]
 Aura:Auras
 Background
@@ -367,10 +388,12 @@ Blood
 Bobblehead:Bobbleheads
 Book:Books
 Clue:Clues
+Communicator:Communicators
 Equipment
 Food:Foods
 Fortification
 Gold
+Heartwood
 Incubator:Incubators
 Infinity
 Junk
@@ -388,6 +411,7 @@ Ajani
 Aminatou
 Angrath
 Arlinn
+Arzakon
 Ashiok
 Bahamut
 Basri
@@ -403,13 +427,16 @@ Dellian
 Dihada
 Domri
 Dovin
+Dyfed
 Ellywick
 Elminster
 Elspeth
 Estrid
+Feroz
 Freyalise
 Garruk
 Gideon
+Greensleeves
 Grist
 Guff
 Huatli
@@ -441,6 +468,8 @@ Saheeli
 Samut
 Sarkhan
 Serra
+Sifa
+Sivitri
 Sorin
 Szat
 Tamiyo
@@ -448,6 +477,7 @@ Tasha
 Teferi
 Teyo
 Tezzeret
+Thomil
 Tibalt
 Tyvar
 Ugin
@@ -458,6 +488,7 @@ Vraska
 Vronos
 Will
 Windgrace
+Worzel
 Wrenn
 Xenagos
 Yanggu
@@ -476,6 +507,7 @@ Antausia
 Apalapucia
 Arcavios
 Arkhos
+Avishkar
 Azgol
 Belenon
 Bolas's Meditation Realm
@@ -499,7 +531,6 @@ Innistrad
 Iquatana
 Ir
 Ixalan
-Kaladesh
 Kaldheim
 Kamigawa
 Kandoka
@@ -543,6 +574,7 @@ Theros
 Time
 Trenzalore
 Ulgrotha
+Unknown Planet
 Valla
 Vryn
 Wildfire

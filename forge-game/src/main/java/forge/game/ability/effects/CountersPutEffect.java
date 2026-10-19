@@ -590,7 +590,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
             cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
         }
 
-
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (sa.hasParam("TriggeredCounterMap")) {

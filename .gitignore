@@ -58,6 +58,9 @@ forge-gui-android/res/*/*
 !forge-gui-android/res/*/ic_launcher.png
 !forge-gui-android/res/*/ic_launcher*.png
 !forge-gui-android/res/layout/main.xml
+# iOS app-icon asset catalog; the negation outranks any contributor-global
+# '*.png' excludes rule that would otherwise silently drop the icons
+!forge-gui-ios/resources/**
 forge-gui-android/*.keystore
 forge-gui-android/**/Thumbs.db
 forge-gui-mobile-dev/**/Thumbs.db
@@ -99,3 +102,4 @@ __pycache__
 .claude
 # EDHREC commander matrix tool intermediates
 forge-gui/tools/build
+forge-gui-ios/robovm.properties

@@ -10,11 +10,7 @@ turn=1
 activeplayer=p0
 activephase=MAIN1
 p0life=20
-p0landsplayed=0
-p0landsplayedlastturn=0
 p0hand=Furnace Reins;Mirran Banesplitter;Voldaren Thrillseeker;Enduring Bondwarden;Boon-Bringer Valkyrie
 p0battlefield=Trailblazing Historian;Mirror-Shield Hoplite;Plains;Plains;Mountain;Mountain;Wind-Scarred Crag|NoETBTrigs
 p1life=14
-p1landsplayed=0
-p1landsplayedlastturn=0
 p1battlefield=T:incubator_c_0_0_a_phyrexian|Transformed|Counters:P1P1=3

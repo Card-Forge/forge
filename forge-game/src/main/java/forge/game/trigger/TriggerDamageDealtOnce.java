@@ -26,6 +26,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 import forge.util.Localizer;
 
 /**
@@ -65,16 +66,24 @@ public class TriggerDamageDealtOnce extends Trigger {
             }
         }
 
-        if (hasParam("ValidTarget")) {
-            final Map<GameEntity, Integer> damageMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+            return false;
+        }
 
+        final Map<GameEntity, Integer> damageMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
+        if (hasParam("ValidTarget")) {
             if (getDamageAmount(damageMap) <= 0) {
                 return false;
             }
         }
 
-        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
-            return false;
+        if (hasParam("AtLeastOneInstance")) {
+            final String fullParam = getParam("AtLeastOneInstance");
+            final String operator = fullParam.substring(0, 2);
+            int operand = Integer.parseInt(fullParam.substring(2));
+            if (!damageMap.values().stream().anyMatch(dmg -> Expressions.compare(dmg, operator, operand))) {
+                return false;
+            }
         }
 
         return true;

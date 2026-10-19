@@ -83,7 +83,7 @@
   </object>
   <object id="64" template="../../../../common/maps/obj/enemy.tx" x="183.466" y="178.731">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Knight of the Keep|ELD&quot;, &quot;Honden of Cleaning Fire|EMA&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Knight of the Keep|ELD&quot;, &quot;Honden of Cleansing Fire|EMA&quot;
 ]}</property>
     <property name="enemy" value="Will"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -414,7 +414,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   </object>
   <object id="159" template="../../../../common/maps/obj/enemy.tx" x="182.75" y="177.75">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Honden of Cleaning Fire|EMA&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Honden of Cleansing Fire|EMA&quot;
 ]}</property>
     <property name="enemy" value="Will"/>
     <property name="spawn.Hard" type="bool" value="false"/>

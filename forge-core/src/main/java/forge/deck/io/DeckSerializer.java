@@ -68,6 +68,15 @@ public class DeckSerializer {
         if (!d.getKeyCards().isEmpty()) {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.KEY_CARDS, "=", StringUtils.join(d.getKeyCards(), ";")));
         }
+        if (!d.getAltCommanders().isEmpty()) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.ALT_COMMANDERS, "=", StringUtils.join(d.getAltCommanders(), ";")));
+        }
+        if (!d.getSleeveArtKey().isEmpty()) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.SLEEVE_ART, "=", d.getSleeveArtKey()));
+            if (d.getSleeveArtOffset() != Deck.DEFAULT_SLEEVE_OFFSET) {
+                out.add(TextUtil.concatNoSpace(DeckFileHeader.SLEEVE_OFFSET, "=", String.valueOf(d.getSleeveArtOffset())));
+            }
+        }
 
         for (Entry<DeckSection, CardPool> s : d) {
             if (s.getValue().isEmpty())
@@ -114,6 +123,11 @@ public class DeckSerializer {
         for (String keyCard : dh.getKeyCards()) {
             d.addKeyCard(keyCard);
         }
+        for (String altCommander : dh.getAltCommanders()) {
+            d.addAltCommander(altCommander);
+        }
+        d.setSleeveArtKey(dh.getSleeveArtKey());
+        d.setSleeveArtOffset(dh.getSleeveArtOffset());
         d.setDeferredSections(sections);
         return d;
     }

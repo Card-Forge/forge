@@ -7,8 +7,8 @@ SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | Remembe
 SVar:DBTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | SubAbility$ DBCleanup | Execute$ DBToken | TriggerDescription$ Whenever you reveal an instant or sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying.
 SVar:DBToken:DB$ Token | TokenScript$ cherubael
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigInvestigate | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigInvestigate | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate | Num$ X | Defined$ You
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Type$Clue|Demon|Artifact & Ability$Token|Sacrifice
-Oracle:You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying.\nWhenever Inquisitor Eisenhorn deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+Oracle:You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying.\nWhenever Inquisitor Eisenhorn deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

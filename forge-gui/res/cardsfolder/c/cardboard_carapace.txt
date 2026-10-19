@@ -3,6 +3,6 @@ ManaCost:5 G
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ For each other card named Cardboard Carapace you have with you outside the game, enchanted creature gets +1/+1.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ X | AddToughness$ X | Description$ For each other card named Cardboard Carapace you have with you outside the game, enchanted creature gets +1/+1.
 SVar:X:Count$ValidSideboard Card.namedCardboard Carapace
 Oracle:Enchant creature\nFor each other card named Cardboard Carapace you have with you outside the game, enchanted creature gets +1/+1.

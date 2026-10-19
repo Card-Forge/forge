@@ -8,6 +8,7 @@ import forge.game.Game;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputPlaybackControl;
 import forge.gui.interfaces.IGuiGame;
@@ -59,10 +60,6 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public void passPriority() {
-    }
-
-    @Override
     public void useMana(final byte mana) {
     }
 
@@ -80,6 +77,10 @@ public class WatchLocalGame extends PlayerControllerHuman {
 
     @Override
     public void selectAbility(final SpellAbilityView sa) {
+    }
+
+    @Override
+    public void selectStackItem(final StackItemView item) {
     }
 
     @Override

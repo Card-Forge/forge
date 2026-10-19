@@ -97,13 +97,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 return null;
             }
             return PaymentDecision.card(player.getLastDrawnCard());
-        } else if (cost.payCostFromSource()) {
+        }
+        if (cost.payCostFromSource()) {
             if (!hand.contains(source)) {
                 return null;
             }
-
             return PaymentDecision.card(source);
-        } else if (type.equals("Hand")) {
+        }
+        if (type.equals("Hand")) {
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
                 hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard, ability);
             }
@@ -121,7 +122,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(randomSubset);
-        } else if (type.contains("+WithDifferentNames")) {
+        }
+        if (type.contains("+WithDifferentNames")) {
             CardCollection differentNames = new CardCollection();
             CardCollection discardMe = CardLists.filter(hand, CardPredicates.hasSVar("DiscardMe"));
             while (c > 0) {
@@ -138,15 +140,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 c--;
             }
             return PaymentDecision.card(differentNames);
-        } else {
-            final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-
-            CardCollection result = aic.getCardsToDiscard(c, type.split(";"), ability, discarded);
-            if (result != null) {
-                discarded.addAll(result);
-            }
-            return PaymentDecision.card(result);
         }
+        final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
+
+        CardCollection result = aic.getCardsToDiscard(c, type.split(";"), ability, discarded);
+        if (result != null) {
+            discarded.addAll(result);
+        }
+        return PaymentDecision.card(result);
     }
 
     @Override

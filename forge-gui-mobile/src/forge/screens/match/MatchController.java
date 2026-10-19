@@ -2,11 +2,19 @@ package forge.screens.match;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Timer;
 import com.google.common.collect.Maps;
+import forge.animation.FlipOntoBattlefieldAnimation;
+import forge.game.ability.effects.FlipOntoBattlefieldEffect;
+import forge.screens.LoadingOverlay;
+import forge.toolbox.FOverlay;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.adventure.scene.DuelScene;
@@ -20,12 +28,15 @@ import forge.Forge;
 import forge.Graphics;
 import forge.GuiMobile;
 import forge.LobbyPlayer;
+import forge.gamemodes.net.client.FGameClient;
+import forge.screens.online.OnlineLobbyScreen;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
+import forge.card.CardSleeveImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
@@ -38,6 +49,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
@@ -57,6 +69,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VPhaseIndicator;
@@ -75,18 +88,21 @@ import forge.util.collect.FCollectionView;
 
 public class MatchController extends NetworkGuiGame {
     private MatchController() { }
+    static {
+        // the mobile board knows where the cards are, so it can handle 3-4 card corner hits
+        FlipOntoBattlefieldEffect.boardDecidesHits = true;
+    }
     public static final MatchController instance = new MatchController();
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
     private static GameState phaseGameState;
-
-    private GameState getPhaseGameState() {
-        return phaseGameState;
-    }
+    private static boolean introShowing;      // EDT only
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
-    private final Map<PlayerView, InfoTab> lastZonesToRestore = Maps.newHashMap();
+    private Map<PlayerView, Object> selectionZonesBackup;
+    // a panel with no tab selected backs up as this, so a restore can tell it from an entry openZones never touched
+    private static final Object NO_TAB = new Object();
 
     public static MatchScreen getView() {
         return view;
@@ -166,6 +182,10 @@ public class MatchController extends NetworkGuiGame {
     public static FImage getPlayerSleeve(final PlayerView p) {
         if (p == null)
             return FSkinImage.UNKNOWN;
+        final String artKey = p.getSleeveArtKey();
+        if (!StringUtils.isEmpty(artKey)) {
+            return new CardSleeveImage(artKey, p.getSleeveArtOffset()); // card-art sleeve: cover-cropped to the sleeve aspect
+        }
         return new FTextureRegionImage(FSkin.getSleeves().get(p.getSleeveIndex()));
     }
 
@@ -184,11 +204,6 @@ public class MatchController extends NetworkGuiGame {
         if(!GuiBase.isNetPlay(this))
             return;
         refreshCardDetails(null);
-    }
-
-    @Override
-    public GameState getGamestate() {
-        return getPhaseGameState();
     }
 
     public boolean hotSeatMode() {
@@ -220,9 +235,11 @@ public class MatchController extends NetworkGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
+        DiceOverlay.getInstance().attach(getGameView().getGame()); // mobile-only dice animations
         if(GuiBase.isNetPlay(this))
             view.resetFields();
-        clearSelectables();  //fix uncleared selection
+        selectionZonesBackup = null;
+        setSelection(Selection.NONE);  //fix uncleared selection
 
         if (noHumans) {
             //add special object that pauses game if screen touched
@@ -253,7 +270,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
-        cancelWaitingTimer();
+        cancelAwaitNextInput();
         view.getPrompt(player).setMessage(message, card);
     }
 
@@ -265,6 +282,68 @@ public class MatchController extends NetworkGuiGame {
         btn2.setText(label2);
         btn1.setEnabled(enable1);
         btn2.setEnabled(enable2);
+    }
+
+    public static void setIntroShowing(final boolean showing) {
+        introShowing = showing;
+    }
+
+    private static boolean coinBlocked() {
+        return introShowing
+                || Forge.getTransitionScreen() != null                 // match-entry transition still running
+                || FOverlay.getTopOverlay() instanceof LoadingOverlay; // loading overlay still up
+    }
+
+    /** EDT only. Re-checks every 0.2s, then gives up after. */
+    private static void runCoinWhenClear(final Runnable show, final int tries) {
+        if (!coinBlocked() || tries <= 0) {
+            show.run();
+            return;
+        }
+        Timer.schedule(new Timer.Task() {
+            @Override public void run() {
+                FThreads.invokeInEdtLater(() -> runCoinWhenClear(show, tries - 1));
+            }
+        }, 0.2f);
+    }
+
+    @Override
+    public void showCoinFlip(final boolean heads, final String caption, final boolean waitForTap) {
+        if (FThreads.isGuiThread()) {
+            return;
+        }
+        final CountDownLatch latch = new CountDownLatch(1);
+        FThreads.invokeInEdtLater(() -> runCoinWhenClear(() -> {
+            try {
+                new CoinFlipOverlay(heads, caption, waitForTap, latch::countDown).show();
+            } catch (RuntimeException e) {
+                latch.countDown();
+            }
+        }, 300));
+        try {
+            latch.await();   // block the game thread until the overlay is dismissed
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @Override
+    public void showFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, List<CardView> battlefield, int timesFlipped) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP)) {
+            return;
+        }
+        final CountDownLatch done = new CountDownLatch(1);
+        Gdx.app.postRunnable(() -> new FlipOntoBattlefieldAnimation(flipped, target, hit, battlefield, timesFlipped, done::countDown).start());
+        try {
+            done.await(6, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @Override
+    public void endFlipOntoBattlefield(CardView flipped) {
+        FlipOntoBattlefieldAnimation.markResolved(flipped);
     }
 
     @Override
@@ -298,9 +377,6 @@ public class MatchController extends NetworkGuiGame {
             }
         }
 
-        if(GuiBase.isNetPlay(this))
-            view.getStack().checkEmptyStack();
-
         if (ph != null && saveState && ph.isMain()) {
             phaseGameState = new GameState();
             try {
@@ -333,13 +409,6 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void disableOverlay() {
-    }
-    @Override
-    public void enableOverlay() {
-    }
-
-    @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
             if (Config.instance().getSettingData().disableWinLose) {
@@ -363,6 +432,16 @@ public class MatchController extends NetworkGuiGame {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);
         }
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true; // stack entries are tapped in the stack view (VStack)
+    }
+
+    @Override
+    public void onSnapshotRestored() {
+        VCardDisplayArea.CardAreaPanel.resetForUndo();
     }
 
     @Override
@@ -415,8 +494,7 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
-        PlayerZoneUpdates updates = new PlayerZoneUpdates();
+    public void openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
         if (zones.size() == 1) {
             final ZoneType zoneType = zones.iterator().next();
             switch (zoneType) {
@@ -424,46 +502,28 @@ public class MatchController extends NetworkGuiGame {
                 case Command:
                     playersWithTargetables.clear(); //clear since no zones need to be restored
                 default:
-                    lastZonesToRestore.clear();
                     //open zone tab for given zone if needed
-                    boolean result = true;
                     for (final PlayerView player : playersWithTargetables.keySet()) {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-                        if (backupLastZones)
-                            lastZonesToRestore.put(player, playerPanel.getSelectedTab());
-                        playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
-                        updates.add(new PlayerZoneUpdate(player, zoneType));
+                        final InfoTab previous = playerPanel.getSelectedTab();
+                        playersWithTargetables.put(player, previous == null ? NO_TAB : previous); //backup selected tab before changing it
                         playerPanel.setSelectedZone(zoneType);
                     }
             }
         }
-        return updates;
     }
 
-    @Override
-    public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        for(PlayerZoneUpdate update : playerZoneUpdates) {
-            PlayerView player = update.getPlayer();
-
-            ZoneType zone = null;
-            for(ZoneType type : update.getZones()) {
-                zone = type;
-                break;
-            }
-
-            final VPlayerPanel playerPanel = view.getPlayerPanel(player);
-            if (zone == null) {
-                playerPanel.hideSelectedTab();
+    /** Restores the tabs openZones backed up into the caller's own map, leaving entries it never touched alone. */
+    public void restoreOldZones(final Map<PlayerView, Object> backup) {
+        for (final Map.Entry<PlayerView, Object> e : backup.entrySet()) {
+            if (e.getKey() == null || e.getKey().getHasLost()) {
                 continue;
             }
-
-            //final InfoTab zoneTab = playerPanel.getZoneTab(zone);
-            //playerPanel.setSelectedTab(zoneTab);
-        }
-        for (Map.Entry<PlayerView, InfoTab> e : lastZonesToRestore.entrySet()) {
-            if (e.getKey() != null && !e.getKey().getHasLost()) {
-                final VPlayerPanel p = view.getPlayerPanel(e.getKey());
-                p.setSelectedTab(e.getValue());
+            final Object previous = e.getValue();
+            if (previous == NO_TAB) {
+                view.getPlayerPanel(e.getKey()).setSelectedTab(null);
+            } else if (previous instanceof InfoTab tab) {
+                view.getPlayerPanel(e.getKey()).setSelectedTab(tab);
             }
         }
     }
@@ -518,16 +578,6 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        return view.tempShowZones(controller, zonesToUpdate);
-    }
-
-    @Override
-    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-	    view.hideZones(controller, zonesToUpdate);
-    }
-
-    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView card : cards) {
             view.updateSingleCard(card);
@@ -535,25 +585,67 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        super.setSelectables(cards, min, max);
+    public void setSelection(final Selection selection) {
+        final Selection prev = getSelection();
+        super.setSelection(selection);
+        final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
+        FThreads.invokeInEdtLater(() -> {
+            if (stackOffered && !view.getStack().isVisible()) { // stack items are picked in the stack view, so bring it up
+                view.getStack().show();
+            }
+            if (selection.offersStackItems()) {
+                view.getStack().update();
+            }
+            Gdx.graphics.requestRendering();
+        });
+        if (prev.cards().equals(selection.cards())) {
+            return;
+        }
+        if (selection.cards().isEmpty()) {
+            clearSelectableCards();
+            return;
+        }
+        final PlayerZoneUpdates zones = selection.max() > 0 ? getZonesHolding(selection.cards()) : new PlayerZoneUpdates();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
+            final Set<ZoneType> zoneTypes = EnumSet.noneOf(ZoneType.class);
+            final Map<PlayerView, Object> players = Maps.newHashMap();
+            for (final PlayerZoneUpdate update : zones) {
+                for (final ZoneType zone : update.getZones()) {
+                    // Command has no tab to switch to, and letting it reach openZones would empty this backup
+                    if (zone == ZoneType.Command) {
+                        continue;
+                    }
+                    zoneTypes.add(zone);
+                    players.put(update.getPlayer(), null);
+                }
+            }
+            if (zoneTypes.isEmpty()) {
+                return;
+            }
+            updateZones(zones);
+            openZones(getCurrentPlayer(), zoneTypes, players);
+            // the selectable cards can change while one prompt is open; the first backup is the one to keep
+            if (selectionZonesBackup == null) {
+                selectionZonesBackup = players;
+            }
         });
     }
 
-    @Override
-    public void clearSelectables() {
-        super.clearSelectables();
+    private void clearSelectableCards() {
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                 updateCardsNetSafe(p.getCards(ZoneType.Hand));
+            }
+            if (selectionZonesBackup != null) {
+                restoreOldZones(selectionZonesBackup);
+                selectionZonesBackup = null;
             }
         });
     }
@@ -609,8 +701,10 @@ public class MatchController extends NetworkGuiGame {
                 final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
                 label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
-                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase,
-                        () -> label.setStopAtPhase(true)));
+                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase, () -> {
+                    label.setStopAtPhase(true);
+                    instance.pushSkipPhaseToControllers(player, phase);
+                }));
             }
         }
 
@@ -618,6 +712,8 @@ public class MatchController extends NetworkGuiGame {
     }
 
     public static void writeMatchPreferences() {
+        if (Forge.lifecycleClosing)
+            return;
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VPlayerPanel> panels = view.getPlayerPanelsList();
         final PhaseType[] phases = PhaseType.values();
@@ -810,5 +906,59 @@ public class MatchController extends NetworkGuiGame {
                         controlFlags.add(flag);
                     }
                 });
+    }
+
+    private ReconnectModals.ReconnectingHandle reconnectingHandle;
+    private boolean userDismissedReconnectDialog;
+
+    @Override
+    public void onReconnectStateChanged(final FGameClient.ReconnectState state, final int attemptIndex, final int nextDelaySeconds) {
+        FThreads.invokeInEdtLater(() -> {
+            final FGameClient client = OnlineLobbyScreen.getfGameClient();
+            switch (state) {
+                case RECONNECTING:
+                    if (userDismissedReconnectDialog) break;
+                    if (reconnectingHandle == null && client != null) {
+                        reconnectingHandle = ReconnectModals.showReconnecting(client,
+                                () -> {
+                                    userDismissedReconnectDialog = true;
+                                    reconnectingHandle = null;
+                                },
+                                MatchController::returnToMainMenu);
+                    }
+                    if (reconnectingHandle != null) {
+                        reconnectingHandle.update(attemptIndex, FGameClient.getTotalReconnectAttempts(), nextDelaySeconds);
+                    }
+                    break;
+                case CONNECTED:
+                    if (reconnectingHandle != null) {
+                        reconnectingHandle.dismiss();
+                        reconnectingHandle = null;
+                    }
+                    if (userDismissedReconnectDialog) {
+                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblReconnectedToast"));
+                    }
+                    userDismissedReconnectDialog = false;
+                    break;
+                case FAILED:
+                    if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                    userDismissedReconnectDialog = false;
+                    if (client != null) ReconnectModals.showFailed(client, MatchController::returnToMainMenu);
+                    break;
+                case SEAT_LOST:
+                    if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                    userDismissedReconnectDialog = false;
+                    if (client != null) ReconnectModals.showSeatLost(client, MatchController::returnToMainMenu);
+                    break;
+            }
+        });
+    }
+
+    private static void returnToMainMenu() {
+        OnlineLobbyScreen.clearGameLobby();
+        if (OnlineLobbyScreen.getfGameClient() != null) {
+            OnlineLobbyScreen.closeClient();
+        }
+        Forge.openHomeScreen(Forge.lastButtonIndex, Forge.getCurrentScreen());
     }
 }

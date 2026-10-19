@@ -92,6 +92,21 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.SleeveIndex, p.getLobbyPlayer().getSleeveIndex());
     }
 
+    public String getSleeveArtKey() {
+        return get(TrackableProperty.SleeveArtKey);
+    }
+    void updateSleeveArtKey(Player p) {
+        set(TrackableProperty.SleeveArtKey, p.getLobbyPlayer().getSleeveArtKey());
+    }
+
+    public int getSleeveArtOffset() {
+        final Integer offset = get(TrackableProperty.SleeveArtOffset);
+        return offset == null ? 500 : offset;
+    }
+    void updateSleeveArtOffset(Player p) {
+        set(TrackableProperty.SleeveArtOffset, p.getLobbyPlayer().getSleeveArtOffset());
+    }
+
     public String getCurrentPlaneName() { return get(TrackableProperty.CurrentPlane); }
     void updateCurrentPlaneName( String plane ) {
         set(TrackableProperty.CurrentPlane, plane);
@@ -187,6 +202,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.IsExtraTurn, val);
     }
 
+    public int getExtraTurnCount() {
+        return get(TrackableProperty.ExtraTurnCount);
+    }
+    public void setExtraTurnCount(final int val) {
+        set(TrackableProperty.ExtraTurnCount, val);
+    }
+
     public boolean getHasLost() {
         return get(TrackableProperty.HasLost);
     }
@@ -206,13 +228,6 @@ public class PlayerView extends GameEntityView {
     }
     public void setAvatarLifeDifference(final int val) {
         set(TrackableProperty.AvatarLifeDifference, val);
-    }
-
-    public int getExtraTurnCount() {
-        return get(TrackableProperty.ExtraTurnCount);
-    }
-    public void setExtraTurnCount(final int val) {
-        set(TrackableProperty.ExtraTurnCount, val);
     }
 
     public boolean getHasPriority() {

@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:SpecificCard
 SVar:AttachAIValid:Card.Black
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 2 | AddToughness$ 1 | Description$ Enchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonBlack | AddPower$ -1 | AddToughness$ -2 | Secondary$ True
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature.Black | AddPower$ 2 | AddToughness$ 1 | Description$ Enchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature.nonBlack | AddPower$ -1 | AddToughness$ -2 | Secondary$ True
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.

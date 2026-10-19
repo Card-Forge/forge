@@ -241,6 +241,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         boolean skipped = false;
 
         game.getTriggerHandler().resetActiveTriggers();
+        game.getUndoManager().barrier("Phase Begin.");
         if (isSkippingPhase(phase)) {
             skipped = true;
             givePriorityToPlayer = false;
@@ -280,7 +281,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     }
 
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    // all Sagas get a Lore counter at the beginning of pre combat
+                    // CR 703.4f
                     for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
                         if (c.isSaga() && c.hasChapter()) {
                             c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
@@ -288,7 +289,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     }
                     table.replaceCounterEffect(game, null);
 
-                    // roll for attractions if we have any
+                    // CR 703.4g
                     if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isAttraction)) {
                         playerTurn.rollToVisitAttractions();
                     }
@@ -367,7 +368,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     break;
 
                 case CLEANUP:
-                    // Rule 514.1
+                    // CR 514.1
                     final int handSize = playerTurn.getZone(ZoneType.Hand).size();
                     final int max = playerTurn.getMaxHandSize();
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
@@ -396,15 +397,13 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                         }
                     }
 
-                    // Rule 514.2
-                    // Reset Damage received map
+                    // CR 514.2
                     for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                         if (!StaticAbilityNoCleanupDamage.damageNotRemoved(c)) {
                             c.setDamage(0);
                         }
                         c.setHasBeenDealtDeathtouchDamage(false);
                     }
-
                     game.getEndOfTurn().executeUntil();
                     game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
                     game.getEndOfTurn().registerUntilEndCommand(playerTurn);
@@ -420,10 +419,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     nEndOfTurnsThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
-                    // Rule 514.3
+                    // CR 514.3
                     givePriorityToPlayer = false;
 
-                    // Rule 514.3a - state-based actions
+                    // CR 514.3a - part for state-based actions
                     if (game.getAction().checkStateEffects(true)) {
                         bRepeatCleanup = true;
                         givePriorityToPlayer = true;
@@ -445,7 +444,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         // This line fixes Combat Damage triggers not going off when they should
         game.getStack().unfreezeStack();
 
-        // Rule 514.3a
+        // CR 514.3a
         if (phase == PhaseType.CLEANUP && (!game.getStack().isEmpty() || game.getStack().hasSimultaneousStackEntries())) {
             bRepeatCleanup = true;
             givePriorityToPlayer = true;
@@ -463,7 +462,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             int burn = p.getManaPool().clearPool(true).size();
 
             if (p.getManaPool().hasBurn()) {
-                final int lost = p.loseLife(burn, false, true);
+                final int lost = p.loseLife(burn, false, true, null);
                 if (lost > 0) {
                     lossMap.put(p, lost);
                 }
@@ -528,6 +527,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 planarDiceSpecialActionThisTurn = 0;
                 // Play the End Turn sound
                 game.fireEvent(new GameEventTurnEnded());
+                game.getUndoManager().barrier("Turn Ended.");
                 break;
             default: // no action
         }
@@ -543,6 +543,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     return;
                 }
 
+                if (!game.getUndoManager().isOwner(whoDeclares)) {
+                    game.getUndoManager().barrier("Opponent declared attackers");
+                }
                 whoDeclares.getController().declareAttackers(playerTurn, combat);
                 combat.removeAbsentCombatants();
 
@@ -669,6 +672,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     repRunParams.put(AbilityKey.Player, whoDeclaresBlockers);
                     ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
                     if (repres == ReplacementResult.NotReplaced) {
+                        if (!game.getUndoManager().isOwner(whoDeclaresBlockers)) {
+                            game.getUndoManager().barrier("Opponent declared blockers");
+                        }
                         // If not replaced, run normal declare blockers
                         whoDeclaresBlockers.getController().declareBlockers(p, combat);
                     }
@@ -738,8 +744,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             game.fireEvent(new GameEventBlockersDeclared(p, blockers));
         } while (p != playerTurn);
 
-        combat.orderBlockersForDamageAssignment(); // 509.2
-        combat.orderAttackersForDamageAssignment(); // 509.3
+        // CR 509.2
+        combat.orderBlockersForDamageAssignment();
+        // CR 509.3
+        combat.orderAttackersForDamageAssignment();
 
         combat.removeAbsentCombatants();
 
@@ -790,7 +798,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
             blocked.add(a);
 
-            // Run triggers
             {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
@@ -865,10 +872,8 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         // The bottom of the extra turn stack is the normal turn
         boolean isExtraTurn = !extraTurns.isEmpty();
 
-        // update ExtraTurn Count
         nextPlayer.setExtraTurnCount(getExtraTurnForPlayer(nextPlayer));
 
-        // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(nextPlayer);
         repRunParams.put(AbilityKey.ExtraTurn, isExtraTurn);
         ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginTurn, repRunParams);
@@ -910,8 +915,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
     public final ExtraTurn addExtraTurn(final Player player) {
         Player previous = null;
-        // use a stack to handle extra turns, make sure the bottom of the stack
-        // restores original turn order
+        // use a stack to handle extra turns, make sure the bottom of the stack restores original turn order
         if (extraTurns.isEmpty()) {
             extraTurns.push(new ExtraTurn(game.getNextPlayerAfter(playerTurn)));
         } else {
@@ -919,7 +923,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         }
 
         ExtraTurn result = extraTurns.push(new ExtraTurn(player));
-        // update Extra Turn for all players
         for (final Player p : game.getPlayers()) {
             p.setExtraTurnCount(getExtraTurnForPlayer(p));
         }
@@ -929,8 +932,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         if (previous != null) {
             toUpdate.add(previous);
         }
-
-        // fireEvent to update the Details
         game.fireEvent(new GameEventPlayerStatsChanged(toUpdate));
 
         return result;
@@ -1049,7 +1050,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 sw.start();
             }
 
-            game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
             List<SpellAbility> chosenSa = null;
 
             int loopCount = 0;
@@ -1058,6 +1058,8 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     // state-based effects check could lead to game over
                     return;
                 }
+                // CR 117.3 A player receives priority once state-based actions are done, and again after each thing they do
+                game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
                 game.stashGameState();
 
                 chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
@@ -1073,6 +1075,12 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 if (chosenSa == null) {
                     break; // that means 'I pass'
                 }
+
+                // An opponent (AI or remote human) acted: the player now knows something, so no undo past this point
+                if (!game.getUndoManager().isOwner(pPlayerPriority)) {
+                    game.getUndoManager().barrier("Opponent acted");
+                }
+
                 if (DEBUG_PHASES) {
                     System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
                 }
@@ -1123,12 +1131,12 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
         }
 
-        // actingPlayer is the player who may act
-        // the firstAction is the player who gained Priority First in this segment
-        // of Priority
         Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
 
-        if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
+        if (game.isGameOver() || nextPlayer == null) {
+            // conceded?
+            return;
+        }
 
         if (DEBUG_PHASES) {
             System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
@@ -1141,7 +1149,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     setPriority(playerTurn);
                 }
 
-                // end phase
                 givePriorityToPlayer = true;
                 onPhaseEnd();
                 advanceToNextPhase();
@@ -1151,7 +1158,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 game.getStack().resolveStack();
             }
         } else {
-            // pass the priority to other player
             pPlayerPriority = nextPlayer;
         }
 
@@ -1163,7 +1169,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             return;
         }
 
-        // update Priority for all players
         for (final Player p : game.getPlayers()) {
             p.setHasPriority(getPriorityPlayer() == p);
         }
@@ -1172,16 +1177,20 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private boolean checkStateBasedEffects() {
         final Set<Card> allAffectedCards = new HashSet<>();
         do {
-            // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
+            // CR 704.3 Whenever a player would get priority, the game checks ... for state-based actions,
             game.getAction().checkStateEffects(false, allAffectedCards);
             if (game.isGameOver()) {
-                return true; // state-based effects check could lead to game over
+                // state-based effects check could lead to game over
+                return true;
             }
         } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
 
+        if (game.getStack().isEmpty()) {
+            game.getStack().clearTriggerRepeats();
+        }
+
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
-            allAffectedCards.clear();
             // Update flashback views after static abilities have been recalculated,
             // so play-from-zone abilities (e.g. Bolas's Citadel) are reflected
             game.getPlayers().forEach(Player::updateFlashbackForView);

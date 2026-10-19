@@ -53,13 +53,18 @@ import java.util.stream.Collectors;
 public class BoosterDraft implements IBoosterDraft {
 
     private int nextId = 0;
-    private static final int N_PLAYERS = 8;
+    public static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
 
     int podSize;
     private final List<LimitedPlayer> players = new ArrayList<>();
     private LimitedPlayer localPlayer;
     private boolean readyForComputerPick = false;
+
+    /** Whether this draft uses Commander-format deck-building rules. */
+    protected boolean isCommanderDraft = false;
+    protected String freeCommanderName = null;
+    protected String impliedPartner = null;
 
     private IDraftLog draftLog = null;
 
@@ -193,7 +198,10 @@ public class BoosterDraft implements IBoosterDraft {
                             // Auto choosing recommended pod size. In the future we may want to allow user to choose
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
-                        doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
+                        doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
+                        if (edition.getDraftType() == CardEdition.DraftType.Commander) {
+                            activateCommanderDraft(edition.getDraftOptions().getFreeCommander(), edition.getDraftOptions().getImpliedPartner());
+                        }
                     }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
@@ -321,7 +329,10 @@ public class BoosterDraft implements IBoosterDraft {
             if (newPodSize != draft.getPodSize()) {
                 draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
             }
-            draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
+            draft.doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
+            if (edition.getDraftType() == CardEdition.DraftType.Commander) {
+                draft.activateCommanderDraft(edition.getDraftOptions().getFreeCommander(), edition.getDraftOptions().getImpliedPartner());
+            }
         }
 
         for (String booster : boosters) {
@@ -356,7 +367,35 @@ public class BoosterDraft implements IBoosterDraft {
         localPlayer = new LimitedPlayer(0, this);
         players.add(localPlayer);
         for (int i = 1; i < this.podSize; i++) {
-            players.add(new LimitedPlayerAI(i, this));
+            players.add(createAIPlayer(i));
+        }
+    }
+
+    /**
+     * Factory method for AI players.  Returns a {@link CommanderLimitedPlayerAI}
+     * when this is a commander draft, otherwise a plain {@link LimitedPlayerAI}.
+     */
+    protected LimitedPlayer createAIPlayer(final int seatingOrder) {
+        if (isCommanderDraft) {
+            return new CommanderLimitedPlayerAI(seatingOrder, this, freeCommanderName, impliedPartner);
+        }
+        return new LimitedPlayerAI(seatingOrder, this);
+    }
+
+    /**
+     * Activate commander-draft mode and replace any already-created AI players
+     * with {@link CommanderLimitedPlayerAI} instances.  Must be called before
+     * {@link #initializeBoosters()}.
+     *
+     * @param freeCmdName    name of the edition's free commander, or {@code null}
+     * @param impliedPartner
+     */
+    protected void activateCommanderDraft(final String freeCmdName, String impliedPartner) {
+        this.isCommanderDraft = true;
+        this.freeCommanderName = (freeCmdName != null && !freeCmdName.isEmpty()) ? freeCmdName : null;
+        this.impliedPartner = impliedPartner;
+        for (int i = 1; i < this.players.size(); i++) {
+            this.players.set(i, createAIPlayer(i));
         }
     }
 
@@ -373,7 +412,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         // Resize players list if it was already generated
         while (this.players.size() < this.podSize) {
-            this.players.add(new LimitedPlayerAI(this.players.size(), this));
+            this.players.add(createAIPlayer(this.players.size()));
         }
         while (this.players.size() > this.podSize) {
             this.players.remove(this.players.size() - 1);
@@ -419,6 +458,42 @@ public class BoosterDraft implements IBoosterDraft {
 
     public int getPodSize() {
         return this.podSize;
+    }
+
+    public void setDoublePick(DraftOptions.DoublePick doublePick) {
+        this.doublePickDuringDraft = doublePick;
+    }
+
+    /** The pick rule as the set declared it, before resolving against a pod size. */
+    public DraftOptions.DoublePick getDoublePick() {
+        return this.doublePickDuringDraft;
+    }
+
+    /**
+     * True when the pick rule gives this player another card from the pack they just
+     * picked from. Call after {@link LimitedPlayer#draftCard} has counted the pick.
+     * Keyed on the player's own count so the network host, where seats do not pick in
+     * lockstep, gets the same answer as offline play.
+     */
+    public boolean keepsPackAfterPick(LimitedPlayer player) {
+        DraftOptions.DoublePick rule = this.doublePickDuringDraft == null
+                ? DraftOptions.DoublePick.NEVER
+                : this.doublePickDuringDraft.resolve(this.podSize);
+        return switch (rule) {
+            case FIRST_PICK -> player.draftedThisRound == 1;
+            case ALWAYS -> player.draftedThisRound % 2 == 1;
+            default -> false;
+        };
+    }
+
+    /** @return whether this draft uses Commander-format deck-building rules. */
+    public boolean isCommanderDraft() {
+        return isCommanderDraft;
+    }
+
+    /** @return the edition's free commander name, or {@code null} if none. */
+    public String getFreeCommanderName() {
+        return freeCommanderName;
     }
 
     @Override
@@ -562,7 +637,6 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
-
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < this.podSize; i++) {
                 DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
@@ -580,7 +654,6 @@ public class BoosterDraft implements IBoosterDraft {
         if (firstPlayer.unopenedPacks.isEmpty()) {
             return false;
         }
-        // todo set pick two logic  for this booster group
 
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
@@ -628,13 +701,6 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
-        if (DraftOptions.DoublePick.FIRST_PICK.equals(this.doublePickDuringDraft) && currentBoosterPick == 0) {
-            adjust = 0;
-        } else if (currentBoosterPick % 2 == 0 && DraftOptions.DoublePick.ALWAYS.equals(this.doublePickDuringDraft)) {
-            // This may not work with Conspiracy cards that mess with the draft
-            // But it probably doesn't matter since Conspiracy doesn't have double pick?
-            adjust = 0;
-        }
 
         // Do any players have a Canal Dredger?
         List<LimitedPlayer> dredgers = new ArrayList<>();
@@ -682,7 +748,9 @@ public class BoosterDraft implements IBoosterDraft {
             }
 
             if (passToPlayer == null) {
-                passToPlayer = this.players.get((i + adjust + this.podSize) % this.podSize);
+                passToPlayer = keepsPackAfterPick(pl)
+                        ? pl
+                        : this.players.get((i + adjust + this.podSize) % this.podSize);
             }
 
             assert(!toPass.containsKey(passingPack));
@@ -778,9 +846,7 @@ public class BoosterDraft implements IBoosterDraft {
         for(LimitedPlayer pl : brokers) {
             pl.activateBrokers(this.players);
         }
-
     }
-
 
     private static String choosePackByPack(final List<String> setz, int packs) {
         StringBuilder sb = new StringBuilder();

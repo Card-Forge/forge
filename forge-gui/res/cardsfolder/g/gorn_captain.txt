@@ -1,0 +1,6 @@
+Name:Gorn Captain
+ManaCost:3 G
+Types:Creature Gorn Soldier
+PT:4/3
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player it's attacking.)

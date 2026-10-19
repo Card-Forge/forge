@@ -1,0 +1,19 @@
+Name:Sticky Kavu Daredevil
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Sticky
+SVar:STK2:Kind$ Name | Word$ Kavu
+SVar:STK3:Kind$ Name | Word$ Daredevil
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever this permanent dies, you may return target creature to its owner's hand. | Triggers$ STK7Dies
+SVar:STK8:Kind$ Ability | Tickets$ 4 | Text$ Whenever this creature attacks, creatures you control get +1/+1 until end of turn. | Triggers$ STK8Attacks
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 3 | Toughness$ 3
+SVar:STK10:Kind$ PT | Tickets$ 3 | Power$ 2 | Toughness$ 6
+SVar:STK7Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ STK7Bounce | TriggerDescription$ Whenever this permanent dies, you may return target creature to its owner's hand.
+SVar:STK7Bounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:STK8Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK8PumpAll | TriggerDescription$ Whenever this creature attacks, creatures you control get +1/+1 until end of turn.
+SVar:STK8PumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+Oracle:{TK}{TK} — Whenever this permanent dies, you may return target creature to its owner's hand.\n{TK}{TK}{TK}{TK} — Whenever this creature attacks, creatures you control get +1/+1 until end of turn.\n{TK}{TK} — 3/3\n{TK}{TK}{TK} — 2/6

@@ -1,7 +1,7 @@
 Name:My Precious
 ManaCost:3
 Types:Legendary Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Hexproof | Description$ Equipped creature has hexproof and can't be blocked.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Hexproof | Description$ Equipped creature has hexproof and can't be blocked.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Secondary$ True | Description$ Equipped creature has hexproof and can't be blocked.
 K:Equip:2 PayLife<2>
 AlternateMode:Adventure

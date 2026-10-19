@@ -47,19 +47,25 @@
     <property name="dialog">[
   {
     &quot;text&quot;: &quot;You see a coffin lying at the center of the crypt. This relic of vampiric history, once a vessel for the undying, now stood as a time-worn testament to the passage of ages, a silent witness to the secrets and shadows that had unfolded within its confines. The ancient coffin, a repository of centuries, exuded an aura of both menace and melancholy, a silent sentinel to the mysteries of the nocturnal realm.&quot;,
+    &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_1.62.d.n0.text&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Leave&quot; },
+      { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
+        &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_1.62.d.n3.name&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
+        &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_1.62.d.n2.text&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Leave&quot; },
+          { &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
+            &quot;locname&quot;: &quot;adv.vampirecastle_vampirecastle_grave_1.62.d.n6.name&quot;,
             &quot;text&quot;: &quot;As you open the coffin, a powerful figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
+            &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_1.62.d.n5.text&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Prepare yourself!&quot;,
+                &quot;locname&quot;: &quot;adv.shared.prepare&quot;,
                 &quot;action&quot;: [
                   { &quot;activateMapObject&quot;: 50 },
                   { &quot;deleteMapObject&quot;: 63 },
@@ -79,8 +85,9 @@
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;loctext&quot;: &quot;adv.vampirecastle_vampirecastle_grave_1.63.d.n0.text&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; } 
     ]
 }]</property>
    </properties>

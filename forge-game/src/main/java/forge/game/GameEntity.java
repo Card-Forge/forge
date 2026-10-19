@@ -54,6 +54,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     protected CardCollection attachedCards = new CardCollection();
     protected Multiset<CounterType> counters = HashMultiset.create();
     protected List<Pair<Integer, Boolean>> damageReceivedThisTurn = Lists.newArrayList();
+    protected List<Pair<Integer, Boolean>> damageReceivedLastTurn = Lists.newArrayList();
 
     protected GameEntity(int id0) {
         id = id0;
@@ -79,6 +80,13 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
     public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+        return staticDamagePrevention(damage, possiblePrevention, source, isCombat, null);
+    }
+
+    // combatDamagePreventedThisTurn: optional precomputed result of
+    // ReplacementHandler.isPreventCombatDamageThisTurn, so the AI can cache it
+    // instead of re-running the check for every attacker of a predicted combat
+    public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat, final Boolean combatDamagePreventedThisTurn) {
         if (damage <= 0) {
             return 0;
         }
@@ -86,8 +94,13 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
             return damage;
         }
 
-        if (isCombat && getGame().getReplacementHandler().isPreventCombatDamageThisTurn()) {
-            return 0;
+        if (isCombat) {
+            final boolean prevented = combatDamagePreventedThisTurn != null
+                    ? combatDamagePreventedThisTurn.booleanValue()
+                    : getGame().getReplacementHandler().isPreventCombatDamageThisTurn();
+            if (prevented) {
+                return 0;
+            }
         }
 
         for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
@@ -353,6 +366,9 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
     public void setDamageReceivedThisTurn(List<Pair<Integer, Boolean>> dmg) {
         damageReceivedThisTurn.addAll(dmg);
     }
+    public List<Pair<Integer, Boolean>> getDamageReceivedLastTurn() {
+        return damageReceivedLastTurn;
+    }
 
     public void receiveDamage(Pair<Integer, Boolean> dmg) {
         damageReceivedThisTurn.add(dmg);
@@ -365,8 +381,11 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
         return getAssignedDamage(true, null);
     }
     public final int getAssignedDamage(Boolean isCombat, final Card source) {
+        return getAssignedDamage(isCombat, source, false);
+    }
+    public final int getAssignedDamage(Boolean isCombat, final Card source, final boolean lastTurn) {
         int num = 0;
-        for (Pair<Integer, Boolean> dmg : damageReceivedThisTurn) {
+        for (Pair<Integer, Boolean> dmg : (lastTurn ? damageReceivedLastTurn : damageReceivedThisTurn)) {
             if (isCombat != null && dmg.getRight() != isCombat) {
                 continue;
             }

@@ -1,0 +1,9 @@
+Name:Eagle of the Great Shelf
+ManaCost:4 W
+Types:Creature Bird Soldier
+PT:2/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gets +1/+1 until end of turn for each other creature you control.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.YouCtrl+Other
+Oracle:Flying\nWhenever this creature attacks, it gets +1/+1 until end of turn for each other creature you control.

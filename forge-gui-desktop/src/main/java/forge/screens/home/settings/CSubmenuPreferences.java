@@ -10,13 +10,14 @@ import forge.game.GameLogVerbosity;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
+import forge.gui.download.CdnUuidCache;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.properties.PreferencesStore;
+import forge.localinstance.properties.IPreferences;
 import forge.menus.LayoutMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -110,13 +111,14 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
         lstControls.add(Pair.of(view.getCbRenderBlackCardBorders(), FPref.UI_RENDER_BLACK_BORDERS));
         lstControls.add(Pair.of(view.getCbShowActionableHighlights(), FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS));
+        lstControls.add(Pair.of(view.getCbShowAutoTapPreview(), FPref.UI_SHOW_AUTOTAP_PREVIEW));
         lstControls.add(Pair.of(view.getCbShowLinkedExileCards(), FPref.UI_SHOW_LINKED_EXILE_CARDS));
         lstControls.add(Pair.of(view.getCbLargeCardViewers(), FPref.UI_LARGE_CARD_VIEWERS));
         lstControls.add(Pair.of(view.getCbSmallDeckViewer(), FPref.UI_SMALL_DECK_VIEWER));
         lstControls.add(Pair.of(view.getCbRandomArtInPools(), FPref.UI_RANDOM_ART_IN_POOLS));
         lstControls.add(Pair.of(view.getCbEnforceDeckLegality(), FPref.ENFORCE_DECK_LEGALITY));
         lstControls.add(Pair.of(view.getCbPerformanceMode(), FPref.PERFORMANCE_MODE));
-        lstControls.add(Pair.of(view.getCbExperimentalRestore(), FPref.MATCH_EXPERIMENTAL_RESTORE));
+        //lstControls.add(Pair.of(view.getCbExperimentalRestore(), FPref.MATCH_EXPERIMENTAL_RESTORE));
         lstControls.add(Pair.of(view.getCbOrderHand(), FPref.UI_ORDER_HAND));
         lstControls.add(Pair.of(view.getCbFilteredHands(), FPref.FILTERED_HANDS));
         lstControls.add(Pair.of(view.getCbCloneImgSource(), FPref.UI_CLONE_MODE_SOURCE));
@@ -164,8 +166,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbShowDraftRanking(), FPref.UI_OVERLAY_DRAFT_RANKING));
         lstControls.add(Pair.of(view.getCbAiPicker(), FPref.UI_ENABLE_AI_PICKER));
 
-
-        for(final Pair<JCheckBox, FPref> kv : lstControls) {
+        for (final Pair<JCheckBox, FPref> kv : lstControls) {
           kv.getKey().addItemListener(arg0 -> {
               if (updating) { return; }
 
@@ -205,6 +206,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeDefaultFontSizeComboBox();
         initializeCardArtFormatComboBox();
         initializeCardArtPreference();
+        initializeCardDownloadLanguageComboBox();
         initializeAutoUpdaterComboBox();
         initializeServerUPnPComboBox();
         initializeMulliganRuleComboBox();
@@ -223,6 +225,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
+        initializeUndoModeComboBox();
         initializePlayerNameButton();
         initializeServerPortButton();
         initializeAfkTimeoutButton();
@@ -418,6 +421,46 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
+    private void initializeCardDownloadLanguageComboBox() {
+        final Map<String, String> cardLangMapping = ForgeConstants.getScryfallCardLanguageMapping();
+        final String[] localizedOptions = cardLangMapping.keySet().toArray(new String[0]);
+
+        final FPref cardLangPreference = FPref.UI_CARD_DOWNLOAD_LANG;
+
+        final FComboBoxPanel<String> panel = this.view.getCbpCardDownloadLangComboBoxPanel();
+        final FComboBox<String> comboBox = createLocalizedComboBox(localizedOptions, cardLangPreference, cardLangMapping);
+        comboBox.addItemListener(e -> applyPreferredLanguageAvailability());
+
+        final String savedCode = this.prefs.getPref(cardLangPreference);
+        final String selectedDisplayName = cardLangMapping.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(savedCode))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse("English");
+
+        panel.setComboBox(comboBox, selectedDisplayName);
+
+        final JCheckBox cbPreferLang = this.view.getCbPreferLangForUniqueCards();
+        cbPreferLang.setSelected(this.prefs.getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS));
+        cbPreferLang.addItemListener(e -> {
+            this.prefs.setPref(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS, String.valueOf(cbPreferLang.isSelected()));
+            this.prefs.save();
+            applyPreferredLanguageAvailability();
+        });
+
+        applyPreferredLanguageAvailability();
+    }
+
+    private void applyPreferredLanguageAvailability() {
+        String langCode = this.prefs.getPref(FPref.UI_CARD_DOWNLOAD_LANG);
+        boolean preferForUnique = this.prefs.getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS);
+        if (!preferForUnique || langCode == null || langCode.isEmpty() || "en".equalsIgnoreCase(langCode)) {
+            FModel.getMagicDb().setPreferredLanguageAvailability(null);
+        } else {
+            FModel.getMagicDb().setPreferredLanguageAvailability((setCode, cn) -> CdnUuidCache.isAvailableInLanguage(setCode, cn, langCode));
+        }
+    }
+
     private void initializeServerUPnPComboBox() {
         // Step 1: Define the localized strings and mappings
         final Map<String, String> upnpPreferenceMapping = ForgeConstants.getUPnPPreferenceMapping();
@@ -520,7 +563,8 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeCardArtPreference() {
         final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
         final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
-        final String [] choices = {latestOpt, originalOpt};
+        final String originalBlackOpt = Localizer.getInstance().getMessage("originalBlackBorderArtOpt");
+        final String [] choices = {latestOpt, originalOpt, originalBlackOpt};
         final FPref uiPreferredArt = FPref.UI_PREFERRED_ART;
 
         final FComboBoxPanel<String> panel = this.view.getCbpCardArtPreference();
@@ -530,13 +574,15 @@ public enum CSubmenuPreferences implements ICDoc {
             if (artPreference == null)
                 artPreference = latestOpt;  // default, just in case
             boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+            boolean blackBorder = artPreference.equalsIgnoreCase(originalBlackOpt);
             boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
-            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter, blackBorder);
             String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
             CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
             CSubmenuPreferences.this.prefs.save();
         });
-        final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
+        final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt
+                : (FModel.getMagicDb().cardArtPreferenceIsBlackBorder() ? originalBlackOpt : originalOpt);
         panel.setComboBox(comboBox, selectedItem);
 
         final JCheckBox coreExpFilter = this.view.getCbCardArtCoreExpansionsOnlyOpt();
@@ -544,8 +590,9 @@ public enum CSubmenuPreferences implements ICDoc {
         coreExpFilter.setSelected(selected);
         coreExpFilter.addItemListener(e -> {
             boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
+            boolean blackBorder = FModel.getMagicDb().cardArtPreferenceIsBlackBorder();
             boolean coreExpFilter1 = e.getStateChange() == ItemEvent.SELECTED;
-            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter1);
+            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter1, blackBorder);
             String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
             CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
             CSubmenuPreferences.this.prefs.save();
@@ -602,6 +649,15 @@ public enum CSubmenuPreferences implements ICDoc {
         };
         final FPref userSetting = FPref.UI_AUTO_DECISION_MODE;
         final FComboBoxPanel<String> panel = this.view.getAutoDecisionModeComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeUndoModeComboBox() {
+        final String[] elems = {ForgeConstants.UNDO_MODE_OFF, ForgeConstants.UNDO_MODE_SINGLE, ForgeConstants.UNDO_MODE_FREE};
+        final FPref userSetting = FPref.UI_UNDO_MODE;
+        final FComboBoxPanel<String> panel = this.view.getCbpUndoMode();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
@@ -694,7 +750,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     }
 
-    private <E> FComboBox<E> createComboBox(final E[] items, final PreferencesStore.IPref setting) {
+    private <E> FComboBox<E> createComboBox(final E[] items, final IPreferences.IPref setting) {
         final FComboBox<E> comboBox = new FComboBox<>(items);
         addComboBoxListener(comboBox, setting);
         return comboBox;
@@ -702,7 +758,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private <E> FComboBox<E> createLocalizedComboBox(
             final E[] localizedItems,
-            final PreferencesStore.IPref setting,
+            final IPreferences.IPref setting,
             final Map<E, String> mapping) {
 
         //Step 1: Create the combo box
@@ -715,7 +771,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
 
-    private <E> void addComboBoxListener(final FComboBox<E> comboBox, final PreferencesStore.IPref setting) {
+    private <E> void addComboBoxListener(final FComboBox<E> comboBox, final IPreferences.IPref setting) {
         comboBox.addItemListener(e -> {
             final E selectedType = comboBox.getSelectedItem();
             if (setting instanceof ForgePreferences.FPref) {
@@ -731,7 +787,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private <E> void addLocalizedComboBoxListener(
             final FComboBox<E> comboBox,
-            final PreferencesStore.IPref setting,
+            final IPreferences.IPref setting,
             final Map<E, String> mapping) {
 
         comboBox.addItemListener(e -> {

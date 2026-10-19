@@ -1,0 +1,9 @@
+Name:Elven Raft-Steerer
+ManaCost:2 U
+Types:Creature Elf Pilot
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall — Whenever a land you control enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTap,DBUntap
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | SpellDescription$ Tap target creature an opponent controls.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | SpellDescription$ Untap target creature you control.
+Oracle:Landfall — Whenever a land you control enters, choose one —\n• Tap target creature an opponent controls.\n• Untap target creature you control.

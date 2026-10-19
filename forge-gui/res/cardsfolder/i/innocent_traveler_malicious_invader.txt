@@ -15,5 +15,5 @@ Colors:black
 Types:Creature Vampire
 PT:3/3
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Human.OppCtrl | Description$ CARDNAME gets +2/+0 as long as an opponent controls a Human.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ 2 | IsPresent$ Human.OppCtrl | Description$ CARDNAME gets +2/+0 as long as an opponent controls a Human.
 Oracle:Flying\nMalicious Invader gets +2/+0 as long as an opponent controls a Human.

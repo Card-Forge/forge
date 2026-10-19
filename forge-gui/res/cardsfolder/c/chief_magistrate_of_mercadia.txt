@@ -1,0 +1,11 @@
+Name:Chief Magistrate of Mercadia
+ManaCost:4 R W
+Types:Legendary Creature Human Noble
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 2/1 red Goblin creature token with haste. Then if you're the monarch, for each creature token you control, create a token that's a copy of it.
+SVar:TrigToken:DB$ Token | TokenScript$r_2_1_goblin_haste | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Valid Creature.YouCtrl+token | ConditionCheckSVar$ X
+SVar:X:Count$Monarch.1.0
+Oracle:When Chief Magistrate of Mercadia enters, you become the monarch.\nAt the beginning of your upkeep, create a 2/1 red Goblin creature token with haste. Then if you're the monarch, for each creature token you control, create a token that's a copy of it.

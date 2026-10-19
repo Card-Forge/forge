@@ -5,6 +5,7 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
@@ -37,6 +38,9 @@ public interface IGameController {
 
     void selectAbility(SpellAbilityView sa);
 
+    /** Picks an item on the stack while a prompt is asking for stack targets. */
+    void selectStackItem(StackItemView item);
+
     void undoLastAction();
 
     IDevModeCheats cheat();
@@ -54,8 +58,6 @@ public interface IGameController {
      * Called automatically when checksum validation fails to recover from desynchronization.
      */
     void requestResync();
-
-    void passPriority();
 
     // Auto-yield preferences
     default boolean shouldAutoYield(String key) {

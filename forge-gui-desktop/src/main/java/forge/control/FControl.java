@@ -26,8 +26,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +40,7 @@ import com.google.common.collect.Lists;
 
 import forge.ImageCache;
 import forge.Singletons;
+import forge.download.AutoUpdater;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.QuestDataIO;
@@ -63,13 +62,10 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.BuildInfo;
-import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.RestartUtil;
 import forge.view.FFrame;
 import forge.view.FView;
-
-import static forge.localinstance.properties.ForgeConstants.GITHUB_SNAPSHOT_URL;
 
 /**
  * <p>
@@ -88,9 +84,7 @@ public enum FControl implements KeyEventDispatcher {
     private boolean altKeyLastDown;
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
-    private String snapsVersion = "", currentVersion = "";
-    private Date snapsTimestamp = null, buildTimeStamp = null;
-    private boolean isSnapshot, hasSnapsUpdate;
+    private Date snapsVersion;
     private Localizer localizer;
 
     public enum CloseAction {
@@ -175,12 +169,8 @@ public enum FControl implements KeyEventDispatcher {
         });
     }
 
-    public Date getBuildTimeStamp() {
-        return buildTimeStamp;
-    }
-
     public Date getSnapsTimestamp() {
-        return snapsTimestamp;
+        return snapsVersion;
     }
 
     public CloseAction getCloseAction() {
@@ -200,8 +190,8 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public boolean canExitForge(final boolean forRestart) {
-        final String action = (forRestart ? getLocalizer().getMessage("lblRestart") : getLocalizer().getMessage("lblExit"));
-        String userPrompt = (forRestart ? getLocalizer().getMessage("lblAreYouSureYouWishRestartForge") : getLocalizer().getMessage("lblAreYouSureYouWishExitForge"));
+        final String action = forRestart ? getLocalizer().getMessage("lblRestart") : getLocalizer().getMessage("lblExit");
+        String userPrompt = forRestart ? getLocalizer().getMessage("lblAreYouSureYouWishRestartForge") : getLocalizer().getMessage("lblAreYouSureYouWishExitForge");
         final boolean hasCurrentMatches = hasCurrentMatches();
         if (hasCurrentMatches) {
             userPrompt = getLocalizer().getMessage("lblOneOrMoreGamesActive") + ". " + userPrompt;
@@ -239,24 +229,19 @@ public enum FControl implements KeyEventDispatcher {
      */
     public void initialize() {
         final ForgePreferences prefs = FModel.getPreferences();
-        currentVersion = BuildInfo.getVersionString();
-        isSnapshot = currentVersion.contains("SNAPSHOT");
-        //get version string
-        try {
-            if (isSnapshot && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
-                URL url = new URL(GITHUB_SNAPSHOT_URL + "version.txt");
-                snapsVersion = FileUtil.readFileToString(url);
-                url = new URL(GITHUB_SNAPSHOT_URL + "build.txt");
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
-                buildTimeStamp = BuildInfo.getTimestamp();
-                hasSnapsUpdate = BuildInfo.verifyTimestamp(snapsTimestamp);
-            }
 
-        } catch (Exception ignored) {
-        }
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
+
+        try {
+            if (BuildInfo.isDevelopmentVersion() && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
+                AutoUpdater au = new AutoUpdater(false);
+                if (au.verifyUpdateable()) {
+                    snapsVersion = au.getSnapsBuildDate();
+                }
+            }
+        } catch (Exception ignored) {
+        }
 
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
@@ -301,12 +286,8 @@ public enum FControl implements KeyEventDispatcher {
         SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
     }
 
-    public boolean isSnapshot() {
-        return isSnapshot;
-    }
-
     public String getSnapshotNotification() {
-        if (!isSnapshot || !hasSnapsUpdate || snapsVersion.isEmpty())
+        if (snapsVersion == null)
             return "";
         return getLocalizer().getMessage("lblNewSnapshotVersion", snapsVersion);
     }
@@ -375,12 +356,10 @@ public enum FControl implements KeyEventDispatcher {
             if (isMatchBackgroundImageVisible()) {
                 if (screen.getDaytime() == null)
                     FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
-                else {
-                    if ("Day".equals(screen.getDaytime()))
-                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
-                    else
-                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
-                }
+                else if ("Day".equals(screen.getDaytime()))
+                    FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
+                else
+                    FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
             } else {
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image) null);
             }
@@ -409,9 +388,7 @@ public enum FControl implements KeyEventDispatcher {
      * Remove all children from a specified layer.
      */
     private void clearChildren(final int layer0) {
-        final Component[] children = FView.SINGLETON_INSTANCE.getLpnDocument().getComponentsInLayer(layer0);
-
-        for (final Component c : children) {
+        for (final Component c : FView.SINGLETON_INSTANCE.getLpnDocument().getComponentsInLayer(layer0)) {
             display.remove(c);
         }
     }

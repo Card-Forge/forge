@@ -332,6 +332,10 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
         }
 
+        if (params.containsKey("EnduringStory")) {
+            if ("True".equalsIgnoreCase(params.get("EnduringStory")) != hostController.hasEnduringStory()) return false;
+        }
+
         if (params.containsKey("DayTime")) {
             if ("Day".equalsIgnoreCase(params.get("DayTime"))) {
                 if (!game.isDay()) {
@@ -509,15 +513,8 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         if (params.containsKey("WerewolfUntransformCondition")) {
-            List<Card> casted = game.getStack().getSpellsCastLastTurn();
-            boolean conditionMet = false;
-            for (Player p : game.getPlayers()) {
-                if (CardLists.count(casted, CardPredicates.isController(p)) > 1) {
-                    conditionMet = true;
-                    break;
-                }
-            }
-            if (!conditionMet) {
+            final List<Card> casted = game.getStack().getSpellsCastLastTurn();
+            if (game.getPlayers().stream().noneMatch(p -> CardLists.count(casted, CardPredicates.isController(p)) > 1)) {
                 return false;
             }
         }

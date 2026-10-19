@@ -264,8 +264,7 @@ public class FCardImageRenderer {
                 g.rotate(Math.PI);
             }
             drawFlipCardImage(g, state, text, flipState, flipText, width, height - heightAdjust, art);
-        } else if (card.hasSecondaryState() ||
-                (card.hasAlternateState() && card.getAlternateState().getState() == CardStateName.PreparedSpell)) {
+        } else if (card.hasSecondaryState() || card.hasPreparedSpell()) {
             boolean needTranslation = !card.isToken() || card.getCloneOrigin() != null;
             final CardStateView state = card.getState(false);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);

@@ -22,9 +22,9 @@ Types:Legendary Enchantment Creature Saga Demon
 PT:9/9
 K:Chapter:3:DBFight,DBMana,DBMana
 SVar:DBFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature | SpellDescription$ Lunge — NICKNAME fights up to one other target creature.
-SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 4 | SubAbility$ DBExileSelf | SpellDescription$ Brimstone — Add {R}{R}{R}{R}. If NICKNAME has three or more lore counters on it, exile it, then return it to the battlefield (front face up.)
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 4 | SubAbility$ DBExileSelf | SpellDescription$ Brimstone — Add {R}{R}{R}{R}. If NICKNAME has three or more lore counters on it, exile it, then return it to the battlefield (front face up).
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBReturnSelf | RememberChanged$ True
 SVar:DBReturnSelf:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$CardCounters.LORE
-Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Lunge — Ifrit fights up to one other target creature.\nII, III — Brimstone — Add {R}{R}{R}{R}. If Ifrit has three or more lore counters on it, exile it, then return it to the battlefield (front face up.)
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Lunge — Ifrit fights up to one other target creature.\nII, III — Brimstone — Add {R}{R}{R}{R}. If Ifrit has three or more lore counters on it, exile it, then return it to the battlefield (front face up).

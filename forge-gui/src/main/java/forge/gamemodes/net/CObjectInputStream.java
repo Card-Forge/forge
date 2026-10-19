@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 import io.netty.handler.codec.serialization.ClassResolver;
 
 import java.io.*;
@@ -21,7 +22,7 @@ import java.io.*;
  *       PlayerView instances from the Tracker.</li>
  * </ul>
  */
-public class CObjectInputStream extends ObjectInputStream {
+public class CObjectInputStream extends ObjectInputStream implements IHasForgeLog {
     private final ClassResolver classResolver;
     private final Tracker tracker;
 
@@ -39,6 +40,7 @@ public class CObjectInputStream extends ObjectInputStream {
         if (tracker != null) {
             enableResolveObject(true);
         }
+        WireStreamLimits.applyTo(this);
     }
 
     @Override
@@ -46,14 +48,21 @@ public class CObjectInputStream extends ObjectInputStream {
         int type = read();
         if (type < 0)
             throw new EOFException();
-        else if (type == CObjectOutputStream.TYPE_THIN_DESCRIPTOR)
-            return ObjectStreamClass.lookupAny(classResolver.resolve(readUTF()));
-        else
+        else if (type == CObjectOutputStream.TYPE_THIN_DESCRIPTOR) {
+            // Checked here because the thin path resolves the class itself, so
+            // the JDK's own resolveClass call would come too late. The wide
+            // path needs no check — resolveClass below covers it.
+            final String name = readUTF();
+            WireClassFilter.checkAllowed(name);
+            return ObjectStreamClass.lookupAny(classResolver.resolve(name));
+        } else {
             return super.readClassDescriptor();
+        }
     }
 
     @Override
     protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+        WireClassFilter.checkAllowed(desc.getName());
         Class<?> clazz;
         try {
             clazz = classResolver.resolve(desc.getName());
@@ -61,6 +70,22 @@ public class CObjectInputStream extends ObjectInputStream {
             clazz = super.resolveClass(desc);
         }
         return clazz;
+    }
+
+    /**
+     * A proxy descriptor carries no class name, so it reaches neither method
+     * above — the JDK reads the interface list and calls this instead, which is
+     * where the best-known chains start. The protocol carries no proxies.
+     */
+    @Override
+    protected Class<?> resolveProxyClass(String[] interfaces) throws IOException, ClassNotFoundException {
+        netLog.error("Rejected dynamic proxy on the wire implementing {} — "
+                + "the multiplayer protocol does not carry proxies", String.join(", ", interfaces));
+        if (WireClassFilter.isEnforcing()) {
+            throw new InvalidClassException("dynamic proxy",
+                    "proxy classes are not permitted by the multiplayer class filter");
+        }
+        return super.resolveProxyClass(interfaces);
     }
 
     @Override

@@ -20,6 +20,7 @@ import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantGainControl;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
@@ -84,19 +85,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
-    }
-
-    private static void doLoseControl(final Card c, final Card host, final long tStamp) {
-        if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
-            return;
-        }
-        final Game game = host.getGame();
-        if (c.isInPlay()) {
-            c.removeTempController(tStamp);
-
-            game.getAction().controllerChangeZoneCorrection(c);
-        }
-        host.removeGainControlTargets(c);
     }
 
     @Override
@@ -256,13 +244,20 @@ public class ControlGainEffect extends SpellAbilityEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.GameCommand} object.
      */
-    private static GameCommand getLoseControlCommand(final Card c, final long tStamp, final Card hostCard) {
+    private static GameCommand getLoseControlCommand(final Card c, final long tStamp, final Card host) {
         final GameCommand loseControl = new GameCommand() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
             public void run() {
-                doLoseControl(c, hostCard, tStamp);
+                if (StaticAbilityCantGainControl.cantGainControl(c)) {
+                    return;
+                }
+                if (c.isInPlay()) {
+                    c.removeTempController(tStamp);
+                    c.getGame().getAction().controllerChangeZoneCorrection(c);
+                }
+                host.removeGainControlTargets(c);
                 c.removeChangedSVars(tStamp, 0);
             }
         };

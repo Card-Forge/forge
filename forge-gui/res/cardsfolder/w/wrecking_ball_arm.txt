@@ -3,6 +3,6 @@ ManaCost:2
 Types:Legendary Artifact Equipment
 K:Equip:3:Creature.YouCtrl+Legendary:legendary creature
 K:Equip:7
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | SetPower$ 7 | SetToughness$ 7 | Description$ Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | SetPower$ 7 | SetToughness$ 7 | Description$ Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | ValidBlocker$ Creature.powerLE2 | Secondary$ True | Description$ Equipped creature can't be blocked by creatures with power 2 or less.
 Oracle:Equipped creature has base power and toughness 7/7 and can't be blocked by creatures with power 2 or less.\nEquip legendary creature {3}\nEquip {7}

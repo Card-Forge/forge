@@ -1,0 +1,10 @@
+Name:Great Goblin, Foul-Hearted
+ManaCost:3 B R
+Types:Legendary Creature Goblin Noble
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAmass | TriggerDescription$ Whenever NICKNAME enters or attacks, amass Goblins 3.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAmass | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, amass Goblins 3.
+SVar:TrigAmass:DB$ Amass | Type$ Goblin | Num$ 3
+S:Mode$ Continuous | Affected$ Army.YouCtrl | AddKeyword$ Trample | Description$ Armies you control have trample.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Great Goblin enters or attacks, amass Goblins 3.\nArmies you control have trample.

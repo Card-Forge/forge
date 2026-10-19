@@ -3,6 +3,7 @@ package forge.game.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import forge.game.card.sticker.StickerSheet;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -49,6 +50,12 @@ public class CardView extends GameEntityView {
         return stateViewCache;
     }
 
+    @Override
+    public final boolean equals(final Object o) {
+        if (o == null) { return false; }
+        return o.hashCode() == hashCode() && o instanceof CardView;
+    }
+
     public CardView getBackup() {
         if (get(TrackableProperty.PaperCardBackup) == null)
             return null;
@@ -57,6 +64,13 @@ public class CardView extends GameEntityView {
 
     public static CardView getCardForUi(IPaperCard pc) {
         return Card.getCardForUi(pc).getView();
+    }
+
+    public Object getObject() {
+        return get(TrackableProperty.Object);
+    }
+    public void clearObject() {
+        set(TrackableProperty.Object, null);
     }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
@@ -84,7 +98,15 @@ public class CardView extends GameEntityView {
 
     public CardView(final int id0, final Tracker tracker) {
         super(id0, tracker);
-        set(TrackableProperty.CurrentState, new CardStateView(id0, CardStateName.Original, tracker));
+        set(TrackableProperty.CurrentState, createAlternateState(CardStateName.Original));
+    }
+    public CardView(final int id0, final Tracker tracker, final String name0, final String description, final Object object) {
+        super(id0, tracker);
+        set(TrackableProperty.CurrentState, createAlternateState(CardStateName.Original));
+        getCurrentState().setName(name0);
+        getCurrentState().setOracleText(description);
+        set(TrackableProperty.Name, name0);
+        set(TrackableProperty.Object, object);
     }
     public CardView(final int id0, final Tracker tracker, final String name0) {
         this(id0, tracker);
@@ -94,10 +116,8 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChangedTypes, new HashMap<String, String>());
         set(TrackableProperty.Sickness, true);
     }
-    public CardView(final int id0, final Tracker tracker, final String name0, final PlayerView ownerAndController, final String imageKey) {
+    public CardView(final int id0, final Tracker tracker, final String name0, final String imageKey) {
         this(id0, tracker, name0);
-        set(TrackableProperty.Owner, ownerAndController);
-        set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
     }
 
@@ -172,6 +192,10 @@ public class CardView extends GameEntityView {
 
     public boolean hasSecondaryState() {
         return get(TrackableProperty.Secondary);
+    }
+
+    public boolean hasPreparedSpell() {
+        return hasAlternateState() && getAlternateState().getState() == CardStateName.PreparedSpell;
     }
 
     public boolean isModalCard() {
@@ -324,7 +348,6 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         super.updateCounters(c);
-        updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
@@ -332,39 +355,12 @@ public class CardView extends GameEntityView {
         state.updateDefense(c);
     }
 
-    public int getCrackOverlayInt() {
-        if (get(TrackableProperty.CrackOverlay) == null)
-            return 0;
-        return get(TrackableProperty.CrackOverlay);
-    }
     public int getDamage() {
         return get(TrackableProperty.Damage);
     }
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
-        //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
-        int randCrackLevel = 0;
-        if (c.getDamage() > 0) {
-            switch (c.getDamage()) {
-                case 1:
-                case 2:
-                    randCrackLevel = 0;
-                    break;
-                case 3:
-                case 4:
-                    randCrackLevel = 1;
-                    break;
-                case 5:
-                case 6:
-                    randCrackLevel = 2;
-                    break;
-                default:
-                    randCrackLevel = 3;
-                    break;
-            }
-        }
-        set(TrackableProperty.CrackOverlay, randCrackLevel);
     }
 
     public int getAssignedDamage() {
@@ -609,17 +605,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NamedCard, c.getNamedCards());
         flagAsChanged(TrackableProperty.NamedCard);
     }
-    public boolean getMayPlayPlayers(PlayerView pv) {
-        TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
-        return col != null && col.indexOf(pv) != -1;
-    }
-    void setMayPlayPlayers(Iterable<Player> list) {
-        if (Iterables.isEmpty(list)) {
-            set(TrackableProperty.MayPlayPlayers, null);
-        } else {
-            set(TrackableProperty.MayPlayPlayers, PlayerView.getCollection(list));
-        }
-    }
+
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
@@ -682,6 +668,9 @@ public class CardView extends GameEntityView {
             break;
         case SchemeDeck:
             // true for now, to actually see the Scheme cards (can't see deck anyway)
+            return true;
+        case StickerSheets:
+            // CR 123.2c
             return true;
         default:
             break;
@@ -816,6 +805,10 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NonAbilityText, c.getNonAbilityText());
     }
 
+    void updateStickers(Card c) {
+        set(TrackableProperty.Stickers, StickerSheet.describe(c));
+    }
+
     public String getText() {
         return getText(getCurrentState(), null);
     }
@@ -880,6 +873,11 @@ public class CardView extends GameEntityView {
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+
+        String stickers = get(TrackableProperty.Stickers);
+        if (StringUtils.isNotEmpty(stickers)) {
+            sb.append("\r\n\r\n").append(stickers);
         }
 
         Set<Integer> attractionLights = get(TrackableProperty.AttractionLights);
@@ -976,21 +974,12 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.RightSplitState);
     }
 
-    public boolean hasBackSide() {
-        return get(TrackableProperty.HasBackSide);
-    }
-    public String getBackSideName() { return get(TrackableProperty.BackSideName); }
-
     public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 
     public CardStateView getState(final boolean alternate0) {
         return alternate0 ? getAlternateState() : getCurrentState();
-    }
-    void updateBackSide(String stateName, boolean hasBackSide) {
-        set(TrackableProperty.HasBackSide, hasBackSide);
-        set(TrackableProperty.BackSideName, stateName);
     }
 
     public boolean wasDestroyed() {
@@ -1016,6 +1005,13 @@ public class CardView extends GameEntityView {
     }
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
+    }
+    public boolean useCardArt() {
+        // prevent NPE
+        if (getCurrentState() == null)
+            return false;
+        // Use card art for prepared spell
+        return CardStateName.PreparedSpell.equals(getCurrentState().state);
     }
 
     void updateState(Card c) {
@@ -1046,10 +1042,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Modal, c.isModal());
         set(TrackableProperty.Room, c.isRoom());
         set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
-
-        //backside
-        if (c.getAlternateState() != null)
-            updateBackSide(c.getAlternateState().getName(), c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
@@ -1269,6 +1261,12 @@ public class CardView extends GameEntityView {
         }
 
         @Override
+        public final boolean equals(final Object o) {
+            if (o == null) { return false; }
+            return o.hashCode() == hashCode() && o instanceof CardStateView;
+        }
+
+        @Override
         public int hashCode() {
             return Objects.hash(getId(), state);
         }
@@ -1432,6 +1430,8 @@ public class CardView extends GameEntityView {
                 num = num - c.getBasePower() + c.getAlternateState().getBasePower();
             }
             set(TrackableProperty.Power, num);
+            // isLethalDamageByPower() cards use power. so this needs update too for VAssignCombatDamage dialog -> auto
+            CardView.this.updateLethalDamage(c);
         }
         void updatePower(CardState c) {
             Card card = c.getCard();
@@ -1457,6 +1457,7 @@ public class CardView extends GameEntityView {
                 num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
             set(TrackableProperty.Toughness, num);
+            CardView.this.updateLethalDamage(c);
         }
         void updateToughness(CardState c) {
             Card card = c.getCard();
@@ -1567,6 +1568,10 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.FoilIndex, c.getFoil());
         }
         public void setFoilIndexOverride(int index0) {
+            if (index0 == -2) { // 0 turns off the shader foil switch
+                foilIndexOverride = MyRandom.getRandom().nextInt(50) + 1;
+                return;
+            }
             if (index0 < 0) {
                 index0 = CardEdition.getRandomFoil(getSetCode());
             }

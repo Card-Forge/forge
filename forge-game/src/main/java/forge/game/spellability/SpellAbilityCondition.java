@@ -91,6 +91,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
             }
+            if (value.equals("EnduringStory")) {
+                this.setEnduringStory(true);
+            }
             if (value.equals("Kicked")) {
                 this.kicked = true;
             }
@@ -266,6 +269,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isDelirium() && !activator.hasDelirium()) return false;
         if (this.isRevolt() && !activator.hasRevolt()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
+        if (this.isEnduringStory() && !activator.hasEnduringStory()) return false;
 
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
@@ -348,7 +352,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } else {
                 list = new FCollection<>();
                 for (final ZoneType zone : getPresentZones()) {
-                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                    if (!sa.isReplacementAbility() || (!zone.equals(ZoneType.Battlefield) && !zone.equals(ZoneType.Graveyard))) {
                         list.addAll(game.getCardsIn(zone));
                     } else if (zone.equals(ZoneType.Battlefield)) {
                         list.addAll(sa.getRootAbility().getLastStateBattlefield());
@@ -376,7 +380,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } else {
                 list = new FCollection<>();
                 for (final ZoneType zone : getPresentZones()) {
-                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                    if (!sa.isReplacementAbility() || (!zone.equals(ZoneType.Battlefield) && !zone.equals(ZoneType.Graveyard))) {
                         list.addAll(game.getCardsIn(zone));
                     } else if (zone.equals(ZoneType.Battlefield)) {
                         list.addAll(sa.getRootAbility().getLastStateBattlefield());

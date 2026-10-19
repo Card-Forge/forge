@@ -6,5 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.Scarecrow+Other+YouCtrl | AddPower$ 1 | 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Scarecrow.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever another Scarecrow you control enters, destroy target permanent.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent
 SVar:PlayMain1:TRUE
+DeckHints:Type$Scarecrow
 AI:RemoveDeck:Random
 Oracle:({2/W} can be paid with any two mana or with {W}. This card's mana value is 10.)\nOther Scarecrow creatures you control get +1/+1.\nWhenever another Scarecrow you control enters, destroy target permanent.

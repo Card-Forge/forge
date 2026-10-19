@@ -18,14 +18,12 @@
 package forge.player;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
@@ -33,6 +31,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.input.InputSelectStackItems;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -40,7 +39,6 @@ import forge.util.TextUtil;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -101,6 +99,10 @@ public class TargetSelection {
         if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
+            if (controller.getGui().canPickStackTargets()) {
+                // stack items can be picked by tapping them in the stack view, like any other target
+                return chooseStackItemsInView(mandatory, numTargets);
+            }
             return chooseCardFromStack(mandatory, numTargets);
         }
 
@@ -175,19 +177,11 @@ public class TargetSelection {
             }
             return ability.getTargets().add(validTargets.get(0));
         }
-        final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
-        for (Card card : validTargets) {
-            playersWithValidTargets.put(PlayerView.get(card.getController()), null);
-        }
-
-        PlayerView playerView = controller.getLocalPlayerView();
-        PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, validTargets.stream().map(c -> c.getZone().getZoneType()).collect(Collectors.toSet()), playersWithValidTargets, true);
         if (!zones.contains(ZoneType.Stack)) {
             InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, numTargets, divisionValues, filter, mustTargetFiltered);
             inp.showAndWait();
             choiceResult = !inp.hasCancelled();
             bTargetingDone = inp.hasPressedOk();
-            controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
         } else {
             // for every other case an all-purpose GuiChoose
             choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
@@ -293,6 +287,47 @@ public class TargetSelection {
                 ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
             }
         }
+        return true;
+    }
+
+    /**
+     * Targets items on the stack (spells, triggered and activated abilities) by tapping them in the stack view.
+     * Items are picked by stack instance, so abilities that share a source card are told apart.
+     */
+    private boolean chooseStackItemsInView(final boolean mandatory, final Integer numTargets) {
+        final Game game = ability.getActivatingPlayer().getGame();
+        final List<SpellAbilityStackInstance> choices = new ArrayList<>();
+
+        for (final SpellAbilityStackInstance si : game.getStack()) {
+            final SpellAbility onStack = si.getSpellAbility();
+            if (ability.canTargetSpellAbility(onStack) && !ability.getTargets().contains(onStack)) {
+                choices.add(si);
+            }
+        }
+
+        final int chosenSoFar = ability.getTargets().size();
+        final int wantMin = numTargets != null ? numTargets : ability.getMinTargets();
+        final int wantMax = numTargets != null ? numTargets : ability.getMaxTargets();
+        final int max = Math.min(wantMax - chosenSoFar, choices.size());
+        final int min = Math.min(Math.max(0, wantMin - chosenSoFar), max);
+
+        if (max <= 0) {
+            bTargetingDone = true;
+            return ability.isMinTargetChosen(); // nothing left to pick: fine only if enough are chosen
+        }
+
+        final InputSelectStackItems inp = new InputSelectStackItems(controller, min, max, choices, ability);
+        inp.setMessage(TextUtil.fastReplace(getTgt().getVTSelection(), "CARDNAME", ability.getHostCard().toString()));
+        inp.setCancelAllowed(!mandatory);
+        inp.showAndWait();
+
+        if (inp.hasCancelled()) {
+            return false;
+        }
+        for (final SpellAbilityStackInstance si : inp.getSelected()) {
+            ability.getTargets().add(si.getSpellAbility());
+        }
+        bTargetingDone = true;
         return true;
     }
 

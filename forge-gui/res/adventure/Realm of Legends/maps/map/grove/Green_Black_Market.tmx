@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="81">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlW0OgjAMhvePNYZTeBaQcCbjdfy8FSIewzWjoSuNUVaMTRrCtvTpx8uowbn6z/3inbuOfvO/Y/bhWbho7UqMO6Q1PYKffWRuN3ZcYqFjXcfw/hRnGojcwrDe3RiTrIP5DKlmLael3giuxqYZW/YY4x3KObuCScc9pGu5mpY9RqMcOph4pGVa02bxba2cRYZzJA1Lw70Bls+Zfx+y1pbtF2zfSs+8z/sy5VJug8gvp8fvtKzFludya9Z6TVYp5yzvSsnWdMPvaMu7A9knH12LyXNb47/wiRZyuS8kg7EV
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaoNSAgaHMgP72TgTaOWkA7F0LtHMdle1lNoDgCDr65xTQrtNAfMYAlU1r8Axox3MgfmGAyqY1YDIEhjEQsxiisukFmKF+ZKeflQMC6JmWkAE90xIyIDUtLaGy/cM9PY00AABM4RrT
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="209" y="272">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/dialog.tx" x="186.337" y="236.25" width="59.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Inside this unassuming cave, you see a handful of shady, cloaked figures. They seem to be running some sort of market for powerful spells - the prices are high but the power is undeniable.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../../../common/maps/obj/dialog.tx" x="171.337" y="105.25" width="67.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Separate from the others, a lone figure stands off in an alcove. They call out softly as you approach.
+
+'You want true power? I have a spell here which the ancient mages banned from ever being cast. Don't ask how I got it, but it can be yours... if you have the gold.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/dialog.tx" x="188.615" y="68.75" width="32.269" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'The forbidden spell I'm selling is Natural Order. Sacrifice a green creature and turn it into any other - something small into the fiercest creatures to exist.'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 100000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -100000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Natural Order&quot;, &quot;count&quot;: 1 }
+            ],
+		&quot;deleteMapObject&quot;:-1
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Let's shake on it. (Spend 100,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 100000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'You're cash shy, friend. Come back when you've gotten a lot more gold.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;Too rich for my blood&quot;,
+					&quot;text&quot;: &quot;'If you're lucky, I'll still be here when you change your mind.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/dialog.tx" x="79.3655" y="132.75" width="53.269" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'I have two powerful tutors to find what you need. Survival of the Fittest can repeatedly discard creatures to find new better ones and Finale of Devastation can get any creature into play and with enough mana provide a devastating boost to your forces.'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I want the Survival of the Fittest. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Survival of the Fittest&quot;, &quot;count&quot;: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Survival of the Fittest. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'No gold, no sale.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Finale of Devastation. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Finale of Devastation&quot;, &quot;count&quot;: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Finale of Devastation. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'No gold, no sale.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;Perhaps some other time.&quot;,
+					&quot;text&quot;: &quot;'Come back with heavier pockets.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="25.8655" y="133.75" width="53.269" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'I have two efficient ways to search for any creatures you want. Green Sun's Zenith pulls creatures from your library to the battlefield. Chord of Calling does the same, but faster and your creatures can help pay, but its a bit more expensive up front.'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I want the Green Sun's Zenith. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Green Sun's Zenith&quot;, &quot;count&quot;: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Green Sun's Zenith. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'No gold, no sale.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Chord of Calling. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chord of Calling&quot;, &quot;count&quot;: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Chord of Calling. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'No gold, no sale.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;Perhaps some other time.&quot;,
+					&quot;text&quot;: &quot;'Come back with heavier pockets.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="30.7574" y="213.772" width="53.269" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'I have two powerful sources of card advantage for sale. The Great Henge turns every creature into draw while gaining life, making mana, AND making them stronger. Sylvan Library lets you dig deep for advantage if you pay life, or just reorder things for free.'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I want The Great Henge. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;The Great Henge&quot;, &quot;count&quot;: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want The Great Henge. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'No gold, no sale.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Sylvan Library. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000 }
+        ],
+        &quot;text&quot;: &quot;'Pleasure doing business with you.'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -20000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sylvan Library&quot;, &quot;count&quot;: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I want the Sylvan Library. (Spend 20,0000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 20000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'No gold, no sale.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;Perhaps some other time.&quot;,
+					&quot;text&quot;: &quot;'Come back with heavier pockets.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

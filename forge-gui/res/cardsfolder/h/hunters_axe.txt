@@ -1,0 +1,8 @@
+Name:Hunter's Axe
+ManaCost:G
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddTrigger$ AttackTrigger | Description$ Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn."
+SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | KWChoice$ Trample,Deathtouch
+K:Equip:2
+Oracle:Equipped creature gets +2/+0 and has "Whenever this creature attacks, it gains your choice of trample or deathtouch until end of turn."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

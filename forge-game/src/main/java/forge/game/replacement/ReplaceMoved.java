@@ -2,8 +2,11 @@ package forge.game.replacement;
 
 import java.util.Map;
 
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -13,12 +16,6 @@ import forge.game.zone.ZoneType;
  */
 public class ReplaceMoved extends ReplacementEffect {
 
-    /**
-     * 
-     * TODO: Write javadoc for Constructor.
-     * @param mapParams &emsp; HashMap<String, String>
-     * @param host &emsp; Card
-     */
     public ReplaceMoved(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
         super(mapParams, host, intrinsic);
     }
@@ -102,6 +99,15 @@ public class ReplaceMoved extends ReplacementEffect {
 
         if (runParams.get(AbilityKey.Destination) == ZoneType.Battlefield && !canReplaceETB(runParams)) {
             return false;
+        }
+        if (isKeyword(Keyword.COMPLEATED)) {
+            if (!runParams.containsKey(AbilityKey.CounterTable)) {
+                return false;
+            }
+            GameEntityCounterTable table = (GameEntityCounterTable) runParams.get(AbilityKey.CounterTable);
+            if (table.get(hostCard.getController(), hostCard, CounterEnumType.LOYALTY) <= 0) {
+                return false;
+            }
         }
 
         return true;
