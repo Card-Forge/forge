@@ -190,7 +190,7 @@ public final class FModel {
         //Every restart is treated as the next stage of one overall run, weighted by its usual share of the work, and the bar only moves forward.
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
-            private final float[] stageWeights = {0.8f, 0.2f}; //cards, tokens, custom cards, custom tokens
+            private final float[] stageWeights = {0.8f, 0.1f, 0.05f, 0.05f}; //cards, tokens, custom cards, custom tokens
             private int stage = 0;
             private float lastFraction = 0f, shown = 0f;
 
@@ -215,10 +215,7 @@ public final class FModel {
                 }
                 shown = Math.max(shown, base + stageWeights[stage] * fraction);
                 final int value = Math.round(shown * 1000f);
-                FThreads.invokeInEdtLater(() -> {
-                    progressBar.setMaximum(1000);
-                    progressBar.setValue(value);
-                });
+                updateProgressBar(progressBar, value);
             }
         };
 
@@ -301,6 +298,13 @@ public final class FModel {
                 deckGenMatrixLoaded=false;
             }
         }
+    }
+
+    private static void updateProgressBar(IProgressBar progressBar, int value) {
+        FThreads.invokeInEdtLater(() -> {
+            progressBar.setMaximum(1000);
+            progressBar.setValue(value);
+        });
     }
 
     private static boolean deckGenMatrixLoaded = false;

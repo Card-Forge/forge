@@ -1,5 +1,6 @@
 package forge.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -341,6 +342,8 @@ public class SplashScreen extends FContainer {
         g.setAlphaComposite(oldAlpha);
     }
 
+    private float shownFraction;
+    public boolean isBarSettled() { return shownFraction >= 0.999f; }
     //slim pill progress bar in the theme's progress colours: a translucent track with a thin light edge, the fill and the text on it
     private void drawModernBar(Graphics g, float x, float y, float w, float h) {
         final float radius = h / 2;
@@ -349,7 +352,12 @@ public class SplashScreen extends FContainer {
         final float edge = Math.max(1f, h * 0.06f);
         g.fillRoundRect(new Color(back.r, back.g, back.b, 0.82f), x + edge, y + edge, w - 2 * edge, h - 2 * edge, radius - edge);
         final float max = Math.max(1, progressBar.getMaximum());
-        final float fraction = Math.max(0f, Math.min(1f, progressBar.getValue() / max));
+        final float target = Math.max(0f, Math.min(1f, progressBar.getValue() / max));
+        final float dt = Gdx.graphics.getDeltaTime();
+        shownFraction += (target - shownFraction) * Math.min(1f, dt * 10f);
+        if (target - shownFraction < 0.002f) { shownFraction = target; }
+        if (shownFraction != target) { Gdx.graphics.requestRendering(); }
+        final float fraction = shownFraction;
         if (fraction > 0f) {
             final float inner = edge * 2;
             final float fillW = Math.max(h - 2 * inner, (w - 2 * inner) * fraction);

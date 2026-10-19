@@ -599,6 +599,8 @@ public class VStack extends FDropDown {
             }
             if (!launched) { // replaces the early return
                 CardRenderer.drawCardWithOverlays(g, sourceCard, xx, yy, CARD_WIDTH, CARD_HEIGHT, CardStackPosition.Top, true, false, false);
+            } else {
+                g.drawRect(BORDER_THICKNESS / 2, borderColor, xx, yy, CARD_WIDTH, CARD_HEIGHT);
             }
             g.endClip();
 
