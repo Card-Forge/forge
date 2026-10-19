@@ -878,3 +878,22 @@ func TestCloneAdventurerKeepsBothFacesAndGainsOnTheCurrentOne(t *testing.T) {
 		t.Error("AddTypes$ skipped the second copied state")
 	}
 }
+
+// TestCloneDefinedExiledWithCopiesWhatTheHostExiled proves Defined$
+// ExiledWith (AbilityUtils.java:304, Loose in the Park): the host exiles a
+// card, then becomes a copy of it, read from the host's exiled list.
+func TestCloneDefinedExiledWithCopiesWhatTheHostExiled(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	giant := g.NewCard(giantDef(t), other, engine.Battlefield)
+	host := resolveLine(t, g, p, engine.NewScriptedController(),
+		"DB$ ChangeZoneAll | ChangeType$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBClone",
+		"DBClone", "DB$ Clone | Defined$ ExiledWith")
+	if z := g.Card(giant).Zone; z != engine.Exile {
+		t.Fatalf("giant zone = %v, want exile", z)
+	}
+	if got := g.Card(host).Def.Name; got != g.Card(giant).Def.Name {
+		t.Errorf("host is %q, want a copy of %q", got, g.Card(giant).Def.Name)
+	}
+}

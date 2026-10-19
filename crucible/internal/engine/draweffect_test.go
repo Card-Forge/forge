@@ -227,3 +227,59 @@ func TestDrawEffectRespectsConditionCheckSVar(t *testing.T) {
 		})
 	}
 }
+
+// drawHandSize fills p's library with five lands and returns the hand growth
+// after resolving line (a Draw chain) with controller c.
+func drawHandSize(t *testing.T, c *engine.ScriptedController, line string, svars ...string) (g *engine.Game, p engine.PlayerID, host engine.CardID, hand int) {
+	t.Helper()
+	g, p, _ = newTwoPlayerGame(t)
+	for range 5 {
+		g.NewCard(landDef(t, "Test Forest", "Land Forest"), p, engine.Library)
+	}
+	before := g.Zone(engine.Hand, p).Len()
+	host = resolveLine(t, g, p, c, line, svars...)
+	return g, p, host, g.Zone(engine.Hand, p).Len() - before
+}
+
+// TestDrawOptionalDeciderAsksTheDrawingPlayer proves DrawEffect.java:67's
+// optional draw: the player confirms, and a decline draws nothing.
+func TestDrawOptionalDeciderAsksTheDrawingPlayer(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		confirm bool
+		want    int
+	}{{true, 2}, {false, 0}} {
+		c := engine.NewScriptedController()
+		c.QueueConfirmEffect(tc.confirm)
+		_, _, _, got := drawHandSize(t, c, "DB$ Draw | Defined$ You | NumCards$ 2 | OptionalDecider$ True")
+		if got != tc.want {
+			t.Errorf("confirm %v: drew %d, want %d", tc.confirm, got, tc.want)
+		}
+	}
+}
+
+// TestDrawUptoDrawsTheChosenNumber proves Upto$: the player picks 0 to
+// NumCards$ (DrawEffect.java:88-90).
+func TestDrawUptoDrawsTheChosenNumber(t *testing.T) {
+	t.Parallel()
+
+	c := engine.NewScriptedController()
+	c.QueueConfirmEffect(true) // Upto$ is optional too (DrawEffect.java:67)
+	c.QueueNumberChoice(1)
+	_, _, _, got := drawHandSize(t, c, "DB$ Draw | Defined$ You | NumCards$ 3 | Upto$ True")
+	if got != 1 {
+		t.Errorf("drew %d, want the chosen 1", got)
+	}
+}
+
+// TestDrawRememberDrawnRemembersTheCards proves RememberDrawn$: the host
+// remembers the drawn cards, and only those.
+func TestDrawRememberDrawnRemembersTheCards(t *testing.T) {
+	t.Parallel()
+
+	g, _, host, got := drawHandSize(t, engine.NewScriptedController(), "DB$ Draw | Defined$ You | NumCards$ 2 | RememberDrawn$ True")
+	if n := len(g.Card(host).Memory.Remembered()); got != 2 || n != 2 {
+		t.Errorf("drew %d, remembered %d, want 2 and 2", got, n)
+	}
+}

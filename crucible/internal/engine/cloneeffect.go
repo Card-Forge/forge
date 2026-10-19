@@ -522,7 +522,7 @@ func cloneTargets(g *Game, a *Ability, source *Card) ([]CardID, error) {
 func cloneDefinedCards(g *Game, a *Ability, source *Card, raw string) ([]CardID, error) {
 	rest, ok := strings.CutPrefix(raw, "Valid ")
 	if !ok {
-		cards, err := definedCards(source, raw, a.refs())
+		cards, err := definedCardsInGame(g, a.Controller, source, raw, a.refs())
 		if err != nil {
 			return nil, fmt.Errorf("engine: Clone: %w", err)
 		}

@@ -809,6 +809,10 @@ func targetedOrDefinedCards(host *Card, a *compile.Ability, refs abilityRefs) ([
 // "ValidAll" (every card in the game) is not resolved; any other form is
 // definedCards'.
 func definedCardsInGame(g *Game, activator PlayerID, host *Card, defined string, refs abilityRefs) ([]CardID, error) {
+	if defined == "ExiledWith" {
+		// AbilityUtils.java:304-305: the cards the host exiled (Card.getExiledCards).
+		return g.exiledWithCards(host.ID), nil
+	}
 	head, spec, found := strings.Cut(defined, " ")
 	zoneName, isValid := strings.CutPrefix(head, "Valid")
 	if !found || !isValid {

@@ -126,6 +126,9 @@ type Game struct {
 	// neither).
 	holdingCastExits bool
 	castExits        []castHeld
+	// drawRecord collects the cards drawOneCard draws while a Draw effect
+	// with RememberDrawn$ is resolving; nil otherwise.
+	drawRecord *[]CardID
 	// pendingErr is a static trigger's error from a site with no error
 	// return (resolveStaticTriggers, statictrigger.go), waiting for the
 	// nearest boundary that has one -- Registry.Resolve, ResolveStack,

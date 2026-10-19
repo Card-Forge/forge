@@ -547,6 +547,9 @@ func (g *Game) drawOneCard(controller PlayerController, pid PlayerID) bool {
 	}
 	g.checkDrawnTriggers(controller, pid, id, g.Player(pid).CardsDrawnThisTurn)
 	g.checkLeftZoneTriggers(controller, []CardID{id}, Library)
+	if g.drawRecord != nil {
+		*g.drawRecord = append(*g.drawRecord, id)
+	}
 	return true
 }
 

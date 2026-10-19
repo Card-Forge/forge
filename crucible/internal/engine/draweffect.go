@@ -24,12 +24,10 @@ import "fmt"
 // every one of the corpus's own 747 real SVar-defined Draw lines carrying a
 // Condition*$ param silently drew anyway.
 //
-// Not ported: Upto (a player chooses how many, 0 to NumCards$), the optional
-// draw's own confirmation prompt (OptionalDecider$), Reveal, and
-// RememberDrawn -- none of PlayerController's methods this port has yet
-// covers a numeric or reveal choice (control.go's own "90 of 110 methods"
-// gap), so a script needing one of these fails loudly (below) rather than
-// drawing the wrong number silently.
+// Upto$ (the player chooses 0 to NumCards$), OptionalDecider$ (the drawing
+// player confirms; the value names no one, DrawEffect.java:67) and
+// RememberDrawn$ are resolved. Not ported: Reveal$ (no reveal event), which
+// fails loudly rather than drawing unrevealed.
 //
 // SubAbility$ was never in this list -- Draw never blocked it -- but had
 // nowhere to go until resolveSubAbility (subability.go, effect.go's own
@@ -51,7 +49,7 @@ func (drawEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		}
 		n = parsed
 	}
-	for _, key := range []string{"Upto", "OptionalDecider", "Reveal", "RememberDrawn"} {
+	for _, key := range []string{"Reveal"} {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Draw: %s$ not resolvable yet", key)
 		}
@@ -65,8 +63,49 @@ func (drawEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 	if err != nil {
 		return err
 	}
+	_, upto := a.Params.Param("Upto")
+	_, decider := a.Params.Param("OptionalDecider")
+	optional := decider || upto
+	_, remember := a.Params.Param("RememberDrawn")
+	// A player named twice draws once, for the sum (DrawEffect.java:75-79).
+	var order []PlayerID
+	times := map[PlayerID]int{}
 	for _, pid := range players {
-		g.DrawCards(pid, n, controller)
+		if times[pid] == 0 {
+			order = append(order, pid)
+		}
+		times[pid]++
+	}
+	for _, pid := range order {
+		num := n * times[pid]
+		// Optional, not up to: a draw the player cannot make in full is skipped.
+		if optional && !upto && g.cantDrawAmount(pid, num) {
+			continue
+		}
+		if optional && !controller.ConfirmEffect(g, pid, a.Source) {
+			continue
+		}
+		if upto {
+			for num > 0 && g.cantDrawAmount(pid, num) {
+				num--
+			}
+			if num <= 0 {
+				continue
+			}
+			num = controller.ChooseNumber(g, pid, a.Source, 0, num)
+		}
+		if remember {
+			var drawn []CardID
+			outer := g.drawRecord
+			g.drawRecord = &drawn
+			g.DrawCards(pid, num, controller)
+			g.drawRecord = outer
+			for _, id := range drawn {
+				source.Memory.Remember(CardEntity(id))
+			}
+			continue
+		}
+		g.DrawCards(pid, num, controller)
 	}
 	return nil
 }

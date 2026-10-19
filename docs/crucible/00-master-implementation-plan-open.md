@@ -11,7 +11,7 @@ M0-M4 are done; M5-M6 are in progress, their landed work recorded per topic in
 Sizes: **S** under a day, one sitting. **M** one porter batch, 1-3 days. **L** 1-2 weeks, a design call or several
 batches. No row is larger. Within a size the order is by value per effort. `R` numbers are this list's own; milestone
 items keep their numbers (24-41). The refusal figures come from `crucible card-smoke -all`
-([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 92.1% of the 33,618 judged corpus cards play, an upper bound,
+([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 92.2% of the 33,617 judged corpus cards play, an upper bound,
 since silent misses are invisible. Re-rank with the command before starting any M item, because the counts move with
 every port.
 
@@ -21,7 +21,8 @@ every port.
 | R10a | Leftovers of R10: the 7 pay-N-times cards (`Mana<…\NumTimes>` cost), Incinerator of the Guilty and Hordewing Skaab (refused for other causes), 3 cards whose cost now pays but whose effect refuses (Atraxa's Skitterfang `KWChoice$`, Biting-Palm Ninja `RevealHand` `Defined$`, Myr Battlesphere `DealDamage` `Defined$ TriggeredDefender.Opponent & Valid ...`); `Mill<N>` cost part waits on the Forge bug in `forge-java-defects.md` | M6 | S | `card-smoke` re-rank |
 | R11a | Leftovers of R11: `Mode$ CantBlockUnless` (10 lines, blockers block free); mana-ability window for payments outside priority (attack costs, `UnlessCost$` at resolution pay from the pool only, CR 508.1i); exert asked after attack costs, Java before | M6 | S | `card-smoke` re-rank |
 | R12b | Findings of R12a: `ChangesZone` lines from a stack, exile or command origin to a non-battlefield zone fire nothing (34 `Origin$ Exile`/`Destination$ Any` lines, 3 `Origin$ Stack`), and a graveyard host with no `TriggerZones$` is never walked; `WithCountersType$` on the hidden-origin search path still refuses a non-battlefield destination | M5 | M | `card-smoke` re-rank |
-| R13 | Single-card shapes: Assimilation Aegis (`Clone` `UntilUnattached`), Loose in the Park (`Draft`, `ExiledWith`), Dinosaur Headdress (Craft), Curse of Leeches and Ludevic `Transform` scenarios, The Last Ronin's Technique (`Count$ValidStack`), Opposition Agent edge cases | M6 | M | — |
+| R13 | Single-card scenarios for shapes that already play, untested: Assimilation Aegis (`Clone` `UntilUnattached`), Dinosaur Headdress (Craft), Curse of Leeches and Ludevic `Transform`, The Last Ronin's Technique (`Count$ValidStack`), Opposition Agent edge cases | M6 | M | `card-smoke` re-rank |
+| R13a | Findings of R13: Draw `Reveal$` (5 lines, no reveal event); Ludevic Necro-Alchemist (`ConditionCheckSVar$` over `PlayerCountDefinedRegistered.Other$HasPropertyLostLifeThisTurn`); Cut a Deal (`Draw` `NumCards$` form); The Second Doctor (`Effect` `EffectOwner$` `Defined$` form) | M6 | S | `card-smoke` re-rank |
 | R14 | Layer 4/5 effects of a granted static, `SharedRestrictions$ delved` (Soulflayer) | M5 | L | design note on `traitGrants` |
 | R15 | Stickers: `StickerSheet`, `PutSticker`, `StickerPlaced`, `ZoneType.StickerSheets`, `Count$CardStickers` (about 48 cards) | M6 | L | — |
 | R16 | `RollDice` `DicePTExchanges` (Vedalken Squirrel-Whacker): `chooseRollToSwap` and `chooseRollSwapValue` are two new `PlayerController` methods | M6 | L | ADR first (ADRP-4); one card |
