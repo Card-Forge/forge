@@ -18,57 +18,37 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Stream;
 
 public class ArchipelagoUtil {
     private static final FImage CARD_LOCKED_ICON = FSkinImage.LOCK;
     public static final int TOTAL_AMOUNT_OF_SET_UNLOCK_CHECKS = 100;
-    public static final String WASTE_REGION = "waste";
+    // Location id of a check that doesn't exist in the APWorld (Emrakul only counts towards the goal).
+    public static final long NO_LOCATION = -1L;
     public static final Set<String> COLOR_SET_NAMES =
             Collections.unmodifiableSet(new LinkedHashSet<>(List.of("white", "blue", "black", "red", "green")));
-
-    public static final String[] REGION_NAMES =
-            Stream.concat(
-                    Stream.of(WASTE_REGION),
-                    COLOR_SET_NAMES.stream().map(String::toLowerCase)
-            ).toArray(String[]::new);
-
-    private static final Map<String, String> REGION_LABELS = Map.of(
-            WASTE_REGION, "Wastes", "white", "White", "blue", "Blue", "black", "Black", "red", "Red", "green", "Green");
-    private static final Map<String, String> REGION_TEXT_COLORS = Map.of(
-            WASTE_REGION, ArchipelagoColors.RegionWastes, "white", ArchipelagoColors.RegionWhite,
-            "blue", ArchipelagoColors.RegionBlue, "black", ArchipelagoColors.RegionBlack,
-            "red", ArchipelagoColors.RegionRed, "green", ArchipelagoColors.RegionGreen);
-
-    public static String getRegionLabel(String region) {
-        return REGION_LABELS.getOrDefault(region, region);
-    }
-
-    public static String getRegionTextColor(String region) {
-        return REGION_TEXT_COLORS.getOrDefault(region, "");
-    }
 
     /**
      * Static definition of a castle boss or miniboss that gives an Archipelago check: who it is, where it lives and
      * which check it sends. It holds no progress or state; whether a save has defeated it is stored per save, see
-     * {@link ArchipelagoData#isDefeated(Boss)}.
+     * {@link ArchipelagoData#isBossOrMinibossDefeated(Boss)}.
      */
     public static final class Boss {
         public final String name;          // Display name
         public final String enemyName;     // Enemy data name for their portrait; differs when a map or nameOverride renames the enemy
-        public final String region;        // One of the REGION_NAMES
+        public final ArchipelagoRegion region;
         public final boolean castleBoss;
         public final ArchipelagoCheckTypes check;
+        public final long locationId;     // Archipelago location id sent for this boss, or NO_LOCATION (Emrakul only counts towards the goal)
         private final List<String> recordedNames; // Lower-case names a defeat can be recorded under (EnemySprite.getName())
 
-        private Boss(String name, String enemyName, String region, boolean castleBoss, ArchipelagoCheckTypes check, String... aliases) {
+        private Boss(String name, String enemyName, ArchipelagoRegion region, boolean castleBoss, ArchipelagoCheckTypes check, long locationId, String... aliases) {
             this.name = name;
             this.enemyName = enemyName;
             this.region = region;
             this.castleBoss = castleBoss;
             this.check = check;
+            this.locationId = locationId;
             List<String> names = new ArrayList<>();
             names.add(name.toLowerCase());
             for (String alias : aliases) names.add(alias.toLowerCase());
@@ -84,47 +64,47 @@ public class ArchipelagoUtil {
         }
     }
 
-    private static Boss castleBoss(String name, String region, ArchipelagoCheckTypes check) {
-        return new Boss(name, name, region, true, check);
+    private static Boss castleBoss(String name, ArchipelagoRegion region, ArchipelagoCheckTypes check, long locationId) {
+        return new Boss(name, name, region, true, check, locationId);
     }
 
-    private static Boss miniBoss(String name, String enemyName, String region, ArchipelagoCheckTypes check, String... aliases) {
-        return new Boss(name, enemyName, region, false, check, aliases);
+    private static Boss miniBoss(String name, String enemyName, ArchipelagoRegion region, ArchipelagoCheckTypes check, long locationId, String... aliases) {
+        return new Boss(name, enemyName, region, false, check, locationId, aliases);
     }
 
-    // All checked bosses, grouped by region in REGION_NAMES order; the castle boss comes first in each region.
+    // All checked bosses, grouped by region in ArchipelagoRegion order; the castle boss comes first in each region.
     public static final List<Boss> BOSSES = List.of(
-            castleBoss("Emrakul", WASTE_REGION, ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED),
-            miniBoss("The Mother Slime", "Ooze Boss", WASTE_REGION, ArchipelagoCheckTypes.SLIME_MOTHER_DEFEATED),
-            miniBoss("Slobad", "Slobad", WASTE_REGION, ArchipelagoCheckTypes.SLOBAD_DEFEATED),
-            miniBoss("Xira", "Xira", WASTE_REGION, ArchipelagoCheckTypes.XIRA_DEFEATED),
-            castleBoss("Akroma", "white", ArchipelagoCheckTypes.BOSS_WHITE_DEFEATED),
-            miniBoss("Nahiri", "Nahiri", "white", ArchipelagoCheckTypes.NAHIRI_DEFEATED),
-            miniBoss("Valyx Feaster of Torment", "Valyx Feaster of Torment", "white", ArchipelagoCheckTypes.VALYX_DEFEATED),
-            castleBoss("Lorthos", "blue", ArchipelagoCheckTypes.BOSS_BLUE_DEFEATED),
-            miniBoss("Jace", "Jace", "blue", ArchipelagoCheckTypes.JACE_DEFEATED),
-            miniBoss("Kiora", "Kiora", "blue", ArchipelagoCheckTypes.KIORA_DEFEATED),
-            miniBoss("Myr Superion", "Myr Superion", "blue", ArchipelagoCheckTypes.MYR_SUPERION_DEFEATED),
-            miniBoss("Sliver Queen", "Sliver Queen", "blue", ArchipelagoCheckTypes.SLIVER_QUEEN_DEFEATED),
-            miniBoss("Teferi", "Teferi", "blue", ArchipelagoCheckTypes.TEFERI_DEFEATED),
-            castleBoss("Griselbrand", "black", ArchipelagoCheckTypes.BOSS_BLACK_DEFEATED),
-            miniBoss("Grolnok", "Grolnok", "black", ArchipelagoCheckTypes.GROLNOK_DEFEATED),
-            miniBoss("Guardian Angel", "Guardian Angel", "black", ArchipelagoCheckTypes.GUARDIAN_ANGEL_DEFEATED),
-            miniBoss("Liliana", "Liliana", "black", ArchipelagoCheckTypes.LILIANA_DEFEATED),
+            castleBoss("Emrakul", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.BOSS_COLORLESS_DEFEATED, NO_LOCATION),
+            miniBoss("The Mother Slime", "Ooze Boss", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.SLIME_MOTHER_DEFEATED, 100L),
+            miniBoss("Slobad", "Slobad", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.SLOBAD_DEFEATED, 101L),
+            miniBoss("Xira", "Xira", ArchipelagoRegion.WASTE, ArchipelagoCheckTypes.XIRA_DEFEATED, 102L),
+            castleBoss("Akroma", ArchipelagoRegion.WHITE, ArchipelagoCheckTypes.BOSS_WHITE_DEFEATED, 1L),
+            miniBoss("Nahiri", "Nahiri", ArchipelagoRegion.WHITE, ArchipelagoCheckTypes.NAHIRI_DEFEATED, 200L),
+            miniBoss("Valyx Feaster of Torment", "Valyx Feaster of Torment", ArchipelagoRegion.WHITE, ArchipelagoCheckTypes.VALYX_DEFEATED, 201L),
+            castleBoss("Lorthos", ArchipelagoRegion.BLUE, ArchipelagoCheckTypes.BOSS_BLUE_DEFEATED, 2L),
+            miniBoss("Jace", "Jace", ArchipelagoRegion.BLUE, ArchipelagoCheckTypes.JACE_DEFEATED, 300L),
+            miniBoss("Kiora", "Kiora", ArchipelagoRegion.BLUE, ArchipelagoCheckTypes.KIORA_DEFEATED, 301L),
+            miniBoss("Myr Superion", "Myr Superion", ArchipelagoRegion.BLUE, ArchipelagoCheckTypes.MYR_SUPERION_DEFEATED, 302L),
+            miniBoss("Sliver Queen", "Sliver Queen", ArchipelagoRegion.BLUE, ArchipelagoCheckTypes.SLIVER_QUEEN_DEFEATED, 303L),
+            miniBoss("Teferi", "Teferi", ArchipelagoRegion.BLUE, ArchipelagoCheckTypes.TEFERI_DEFEATED, 304L),
+            castleBoss("Griselbrand", ArchipelagoRegion.BLACK, ArchipelagoCheckTypes.BOSS_BLACK_DEFEATED, 3L),
+            miniBoss("Grolnok", "Grolnok", ArchipelagoRegion.BLACK, ArchipelagoCheckTypes.GROLNOK_DEFEATED, 400L),
+            miniBoss("Guardian Angel", "Guardian Angel", ArchipelagoRegion.BLACK, ArchipelagoCheckTypes.GUARDIAN_ANGEL_DEFEATED, 401L),
+            miniBoss("Liliana", "Liliana", ArchipelagoRegion.BLACK, ArchipelagoCheckTypes.LILIANA_DEFEATED, 402L),
             // Slimefoot's enemy has nameOverride "Fungus of Slimefoot", which is the name recorded on defeat
-            miniBoss("Slimefoot", "Slimefoot", "black", ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED, "Fungus of Slimefoot"),
-            miniBoss("Sorin", "Sorin", "black", ArchipelagoCheckTypes.SORIN_DEFEATED),
-            castleBoss("Lathliss", "red", ArchipelagoCheckTypes.BOSS_RED_DEFEATED),
-            miniBoss("Chandra", "Chandra", "red", ArchipelagoCheckTypes.CHANDRA_DEFEATED),
-            miniBoss("Tibalt's Torturer", "Torturer", "red", ArchipelagoCheckTypes.TIBALTS_TORTURER_DEFEATED),
-            miniBoss("Tibalt", "Tibalt", "red", ArchipelagoCheckTypes.TIBALT_DEFEATED),
-            miniBoss("Zedruu's Cook", "The Cheff", "red", ArchipelagoCheckTypes.ZEDRUUS_COOK_DEFEATED),
-            miniBoss("Conjurer", "Conjurer", "red", ArchipelagoCheckTypes.CONJURER_DEFEATED),
-            miniBoss("Zedruu", "Zedruu", "red", ArchipelagoCheckTypes.ZEDRUU_DEFEATED),
-            castleBoss("Ghalta", "green", ArchipelagoCheckTypes.BOSS_GREEN_DEFEATED),
-            miniBoss("Garruk", "Garruk", "green", ArchipelagoCheckTypes.GARRUK_DEFEATED),
-            miniBoss("The Hydra of Shandalaar", "The Hydra of Shandalaar", "green", ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED),
-            miniBoss("Scarecrow Captain", "Scarecrow Captain", "green", ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED));
+            miniBoss("Slimefoot", "Slimefoot", ArchipelagoRegion.BLACK, ArchipelagoCheckTypes.SLIMEFOOT_DEFEATED, 403L, "Fungus of Slimefoot"),
+            miniBoss("Sorin", "Sorin", ArchipelagoRegion.BLACK, ArchipelagoCheckTypes.SORIN_DEFEATED, 404L),
+            castleBoss("Lathliss", ArchipelagoRegion.RED, ArchipelagoCheckTypes.BOSS_RED_DEFEATED, 4L),
+            miniBoss("Chandra", "Chandra", ArchipelagoRegion.RED, ArchipelagoCheckTypes.CHANDRA_DEFEATED, 500L),
+            miniBoss("Tibalt's Torturer", "Torturer", ArchipelagoRegion.RED, ArchipelagoCheckTypes.TIBALTS_TORTURER_DEFEATED, 501L),
+            miniBoss("Tibalt", "Tibalt", ArchipelagoRegion.RED, ArchipelagoCheckTypes.TIBALT_DEFEATED, 502L),
+            miniBoss("Zedruu's Cook", "The Cheff", ArchipelagoRegion.RED, ArchipelagoCheckTypes.ZEDRUUS_COOK_DEFEATED, 503L),
+            miniBoss("Conjurer", "Conjurer", ArchipelagoRegion.RED, ArchipelagoCheckTypes.CONJURER_DEFEATED, 504L),
+            miniBoss("Zedruu", "Zedruu", ArchipelagoRegion.RED, ArchipelagoCheckTypes.ZEDRUU_DEFEATED, 505L),
+            castleBoss("Ghalta", ArchipelagoRegion.GREEN, ArchipelagoCheckTypes.BOSS_GREEN_DEFEATED, 5L),
+            miniBoss("Garruk", "Garruk", ArchipelagoRegion.GREEN, ArchipelagoCheckTypes.GARRUK_DEFEATED, 600L),
+            miniBoss("The Hydra of Shandalaar", "The Hydra of Shandalaar", ArchipelagoRegion.GREEN, ArchipelagoCheckTypes.HYDRA_OF_SHANDALAAR_DEFEATED, 601L),
+            miniBoss("Scarecrow Captain", "Scarecrow Captain", ArchipelagoRegion.GREEN, ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED, 602L));
 
     /**
      * Looks up which boss a defeated enemy's name belongs to (the name DuelScene passes to addBossDefeated /
@@ -138,14 +118,47 @@ public class ArchipelagoUtil {
         return null;
     }
 
-    // The bosses of one region (one of REGION_NAMES), castle boss first, in BOSSES order.
-    public static List<Boss> getBossesInRegion(String region) {
+    // The bosses of one region, castle boss first, in BOSSES order.
+    public static List<Boss> getBossesInRegion(ArchipelagoRegion region) {
         List<Boss> bosses = new ArrayList<>();
         for (Boss boss : BOSSES) {
-            if (boss.region.equals(region)) bosses.add(boss);
+            if (boss.region == region) bosses.add(boss);
         }
         return bosses;
     }
+
+    // The boss that sends the given check, or null if the check isn't a boss check.
+    public static Boss findBossByCheck(ArchipelagoCheckTypes check) {
+        for (Boss boss : BOSSES) {
+            if (boss.check == check) return boss;
+        }
+        return null;
+    }
+
+    /// --- Archipelago location ids (must match the APWorld's locations.py) ---
+    // Repeatable checks per region: the n-th check (n starts at 1) is base + n, with base = offset + 10000 * the region's
+    // ordinal in ArchipelagoRegion (Wastes 0 ... Green 5), e.g. the 2nd white battle check is 19999 + 2.
+    private static final long BATTLE_LOCATION_OFFSET = 9999L;
+    private static final long INN_EVENT_LOCATION_OFFSET = 10999L;
+    private static final long TOWN_QUEST_LOCATION_OFFSET = 11999L;
+    // Card collection checks: the n-th check for a rarity is base + n.
+    public static final long COMMON_CARD_LOCATION_BASE = 4999L;
+    public static final long UNCOMMON_CARD_LOCATION_BASE = 5099L;
+    public static final long RARE_CARD_LOCATION_BASE = 5199L;
+    public static final long MYTHIC_RARE_CARD_LOCATION_BASE = 5299L;
+
+    public static long getBattleLocationBase(ArchipelagoRegion region) {
+        return BATTLE_LOCATION_OFFSET + 10000L * region.ordinal();
+    }
+
+    public static long getInnEventLocationBase(ArchipelagoRegion region) {
+        return INN_EVENT_LOCATION_OFFSET + 10000L * region.ordinal();
+    }
+
+    public static long getTownQuestLocationBase(ArchipelagoRegion region) {
+        return TOWN_QUEST_LOCATION_OFFSET + 10000L * region.ordinal();
+    }
+
     public static void drawLockedCardOverlay(
             Batch batch, float x, float y, float w, float h) {
         // Draw lock icon
@@ -180,30 +193,25 @@ public class ArchipelagoUtil {
         g.setAlphaComposite(oldalpha);
     }
 
-    private static TextureRegion getRegionRune(String regionName) {
-        return switch (regionName.toLowerCase()) {
-            case "white" -> Config.instance().getItemSprite("WhiteRune");
-            case "blue" -> Config.instance().getItemSprite("BlueRune");
-            case "black" -> Config.instance().getItemSprite("BlackRune");
-            case "red" -> Config.instance().getItemSprite("RedRune");
-            case "green" -> Config.instance().getItemSprite("GreenRune");
-            default -> null;
-        };
+    // The rune sprite of the region the game calls biomeName, or null if that biome has no rune.
+    private static TextureRegion getRegionRune(String biomeName) {
+        ArchipelagoRegion region = ArchipelagoRegion.fromBiomeName(biomeName);
+        return region != null && region.runeSpriteName != null ? Config.instance().getItemSprite(region.runeSpriteName) : null;
     }
 
     public static void updateLastTraversedRegionOnTeleport(String command) {
         String loweredCommand = command.toLowerCase();
         ArchipelagoData apData = ArchipelagoData.getInstance();
-        if (loweredCommand.contains("spawn")) { apData.setLastTraversedRegion("waste"); }
-        if (loweredCommand.contains("plains")) { apData.setLastTraversedRegion("white"); }
-        if (loweredCommand.contains("island")) { apData.setLastTraversedRegion("blue"); }
-        if (loweredCommand.contains("swamp")) { apData.setLastTraversedRegion("black"); }
-        if (loweredCommand.contains("mountain")) { apData.setLastTraversedRegion("red"); }
-        if (loweredCommand.contains("forest")) { apData.setLastTraversedRegion("green"); }
+        if (loweredCommand.contains("spawn")) { apData.setLastTraversedRegion(ArchipelagoRegion.WASTE); }
+        if (loweredCommand.contains("plains")) { apData.setLastTraversedRegion(ArchipelagoRegion.WHITE); }
+        if (loweredCommand.contains("island")) { apData.setLastTraversedRegion(ArchipelagoRegion.BLUE); }
+        if (loweredCommand.contains("swamp")) { apData.setLastTraversedRegion(ArchipelagoRegion.BLACK); }
+        if (loweredCommand.contains("mountain")) { apData.setLastTraversedRegion(ArchipelagoRegion.RED); }
+        if (loweredCommand.contains("forest")) { apData.setLastTraversedRegion(ArchipelagoRegion.GREEN); }
     }
 
-    public static void drawLockedRegionOverhead(Batch batch, String regionName, float centerX, float baseY, float alpha) {
-        TextureRegion rune = getRegionRune(regionName);
+    public static void drawLockedRegionOverhead(Batch batch, String biomeName, float centerX, float baseY, float alpha) {
+        TextureRegion rune = getRegionRune(biomeName);
         if (rune == null)
             return;
 
@@ -245,11 +253,17 @@ public class ArchipelagoUtil {
     // returnColor restores the label's text color after the red marker (e.g. "[BLACK]" for event descriptions).
     public static String lockedBlockMarker(CardBlock block, String returnColor) {
         ArchipelagoData data = ArchipelagoData.getInstance();
-        if (block == null || data.getArchipelagoMode() == ArchipelagoMode.disabled) return "";
+        if (block == null || data.getArchipelagoMode() == ArchipelagoMode.disabled) {
+            return "";
+        }
         List<CardEdition> sets = block.getSets();
-        if (sets.isEmpty()) return "";
+        if (sets.isEmpty()) {
+            return "";
+        }
         for (CardEdition set : sets) {
-            if (data.isSetUnlocked(set.getCode())) return "";
+            if (data.isSetUnlocked(set.getCode())) {
+                return "";
+            }
         }
         return " [RED](Locked)" + returnColor;
     }

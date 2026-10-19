@@ -54,6 +54,8 @@ public class ArchipelagoTrackerScene extends UIScene {
     private TextureRegion checkIcon;
     private TextField setSearch;
     private List<String[]> unlockedSets = Collections.emptyList();
+    // Scroll position when the tracker was last left, restored when it's opened again in this session (not saved).
+    private static float lastScrollY = 0;
 
     private ArchipelagoTrackerScene() {
         super(Forge.isLandscapeMode() ? "ui/aptracker.json" : "ui/aptracker_portrait.json");
@@ -84,6 +86,16 @@ public class ArchipelagoTrackerScene extends UIScene {
     public void enter() {
         super.enter();
         build();
+        // Lay out the rebuilt content first so the old position can be scrolled to, then jump there without animating.
+        contentPane.layout();
+        contentPane.setScrollY(lastScrollY);
+        contentPane.updateVisualScroll();
+    }
+
+    @Override
+    public boolean leave() {
+        lastScrollY = contentPane.getScrollY();
+        return super.leave();
     }
 
     public boolean back() {

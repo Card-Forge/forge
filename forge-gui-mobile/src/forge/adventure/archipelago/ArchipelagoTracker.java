@@ -67,26 +67,26 @@ public final class ArchipelagoTracker {
         ArchipelagoRandomizer randomizer = ArchipelagoRandomizer.getInstance();
         SlotData slotData = randomizer.getSlotData();
 
-        for (String regionName : ArchipelagoUtil.REGION_NAMES) {
-            Region region = new Region(ArchipelagoUtil.getRegionLabel(regionName), ArchipelagoUtil.getRegionTextColor(regionName));
-            for (ArchipelagoUtil.Boss boss : ArchipelagoUtil.getBossesInRegion(regionName)) {
+        for (ArchipelagoRegion apRegion : ArchipelagoRegion.values()) {
+            Region region = new Region(apRegion.label, apRegion.textColor);
+            for (ArchipelagoUtil.Boss boss : ArchipelagoUtil.getBossesInRegion(apRegion)) {
                 if (boss.castleBoss) {
-                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Castle Boss", data.isDefeated(boss)));
+                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Castle Boss", data.isBossOrMinibossDefeated(boss)));
                 } else if (slotData.IncludeMinibossLocations == 1) {
-                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Miniboss", data.isDefeated(boss)));
+                    region.entries.add(new Entry(Icon.BOSS, boss.enemyName, boss.name + " - Miniboss", data.isBossOrMinibossDefeated(boss)));
                 }
             }
 
-            addShop(region, Icon.EQUIPMENT_SHOP, "Equipment shop items left: ", randomizer.getShopItems(regionName + " equipment"));
-            if (!ArchipelagoUtil.WASTE_REGION.equals(regionName)) { // the Wastes have no item shop
-                addShop(region, Icon.ITEM_SHOP, "Item shop items left: ", randomizer.getShopItems(regionName + " items"));
+            addShop(region, Icon.EQUIPMENT_SHOP, "Equipment shop items left: ", randomizer.getShopItems(apRegion, false));
+            if (apRegion != ArchipelagoRegion.WASTE) { // the Wastes have no item shop
+                addShop(region, Icon.ITEM_SHOP, "Item shop items left: ", randomizer.getShopItems(apRegion, true));
             }
-            addRemaining(region, Icon.TOWN_QUESTS, "Town quests left: ", data.getCompletedTownQuests(regionName), slotData.QuestLocations);
-            addRemaining(region, Icon.INN_EVENTS, "Inn events left: ", data.getCompletedTownInnEvents(regionName), slotData.EventLocations);
+            addRemaining(region, Icon.TOWN_QUESTS, "Town quests left: ", data.getCompletedTownQuests(apRegion), slotData.QuestLocations);
+            addRemaining(region, Icon.INN_EVENTS, "Inn events left: ", data.getCompletedTownInnEvents(apRegion), slotData.EventLocations);
 
             long battleTarget = (long) slotData.FightLocations * slotData.FightsPerLocation;
             if (battleTarget > 0) {
-                long won = data.getBattlesWon(regionName);
+                long won = data.getBattlesWon(apRegion);
                 region.entries.add(new Entry(Icon.BATTLES, null, "Battles won: " + Math.min(won, battleTarget) + "/" + battleTarget, won >= battleTarget));
             }
             regions.add(region);
@@ -96,7 +96,7 @@ public final class ArchipelagoTracker {
 
     public static Progress getGoalProgress() {
         if (!isAvailable()) return new Progress("Castle bosses defeated", 0, 0);
-        return new Progress("Castle bosses defeated", ArchipelagoData.getInstance().bossesDefeatedByName.size(),
+        return new Progress("Castle bosses defeated", ArchipelagoData.getInstance().getCastleBossesDefeatedCount(),
                 ArchipelagoRandomizer.getInstance().getSlotData().CastlesRequired);
     }
 
