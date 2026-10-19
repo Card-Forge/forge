@@ -75,10 +75,10 @@ explained or dropped, never silently lost. A porter reporting a bypass (`/usr/bi
 
 1. `## Not ported yet` in `game-state.md`: the remaining-effects sentence, and the largest-gaps list in `CLAUDE.md`
    (fresh `unported-apis.sh` numbers).
-2. `gate-runner` subagent: `gates.sh full`. The merged batch is the first time the porters' changes run together, so a
+2. `gates.sh full` (pipe through `tail -40`). The merged batch is the first time the porters' changes run together, so a
    green porter branch does not imply a green merge. Coverage is the usual failure; `port-effect` step 4 has the
    per-file check.
-3. `rules-reviewer` subagent on `git diff <base>..HEAD` plus the working tree. Fix its findings.
+3. `rules-review` skill on `git diff <base>..HEAD` plus the working tree. Fix its findings.
 4. Commit the reconciliation. The commit hook runs the gates in this checkout.
 
 ## 6. Clean up

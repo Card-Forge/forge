@@ -164,10 +164,9 @@ in `docs/crucible/00-master-implementation-plan-in-progress.md` items 24-32 and
 | Kind     | Name                 | Use for                                                                                |
 | -------- | -------------------- | -------------------------------------------------------------------------------------- |
 | subagent | `forge-oracle`       | Java semantics of an API before porting. Keeps `forge-game/` reads out of context      |
-| subagent | `rules-reviewer`     | Diff vs non-negotiables, before commit                                                 |
-| subagent | `gate-runner`        | Gates or one test, failures only                                                       |
 | subagent | `effect-porter`      | Batch of routine M6 effects (Sonnet), one worktree per batch, run in parallel          |
 | subagent | `effect-porter-hard` | M6 effects needing real design (stack/casting, Layer 1, Command zone) - `effort: high` |
+| skill    | `rules-review`       | Diff vs non-negotiables, before commit                                                 |
 | skill    | `port-effect`        | Any M6 `ApiType` effect: file, registry, enginelint, test, docs, counts                |
 | skill    | `port-batch`         | Big M6 batch: split across parallel porters, merge, reconcile, clean up worktrees      |
 | skill    | `port-java-unit`     | Any other Java unit, PORT-3 order                                                      |

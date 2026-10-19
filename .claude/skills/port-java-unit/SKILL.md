@@ -38,7 +38,7 @@ For ApiType effects use the `port-effect` skill instead. Rules: `docs/crucible/g
    - New non-stdlib import -> needs an ADR first (GO-14). Stop and ask.
 7. **Docs in the same commit** (DOC-12), in the compressed style (`guidelines/00-documentation-style.md`); run
    `prettier --write` on touched `.md`.
-8. **Review and commit.** `rules-reviewer` on the diff, fix, commit (hook runs `gates.sh full`).
+8. **Review and commit.** `rules-review` skill on the diff, fix, commit (hook runs `gates.sh full`).
 
 ## Stop and ask when
 

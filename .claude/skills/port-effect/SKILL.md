@@ -183,5 +183,5 @@ cd crucible && go run ./tools/genregistry -dir internal/engine -check \
 
 ## 6. Verify, then commit
 
-Delegate to `rules-reviewer` on the diff, fix findings, then commit. The commit hook runs `gates.sh full` and blocks on
-red; to see failures without the context flood use the `gate-runner` subagent first.
+Run the `rules-review` skill on the diff, fix findings, then commit. The commit hook runs `gates.sh full` and blocks on
+red; to see failures without the context flood pipe `gates.sh full` through `tail -40` first.
