@@ -139,3 +139,37 @@ func TestAnimateAllGrantsTheAbilityToEachCard(t *testing.T) {
 		}
 	}
 }
+
+// Animate's Triggers$ without Duration$ Perpetual (AnimateEffect.java:127-130):
+// the animated card carries the trigger until the record ends -- cleanup by
+// default.
+func TestAnimateTriggersEndAtCleanup(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	creature := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+	for range 3 {
+		g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Library)
+	}
+	stealUntil(t, g, p, creature, "DB$ Animate | ValidTgts$ Creature | Triggers$ TrigGain",
+		"TrigGain", "Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DBGain",
+		"DBGain", "DB$ GainLife | Defined$ You | LifeAmount$ 2")
+	c := engine.NewScriptedController()
+	g.DrawCards(p, 1, c)
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Player(p).Life; got != 22 {
+		t.Fatalf("life after a draw = %d, want 22: the granted trigger did not fire", got)
+	}
+	endTurn(g, 1, p)
+	g.SetTurnState(2, p, engine.Main1)
+	sba(g)
+	g.DrawCards(p, 1, c)
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Player(p).Life; got != 22 {
+		t.Errorf("life after the next turn's draw = %d, want 22: the trigger outlived the turn", got)
+	}
+}

@@ -103,7 +103,7 @@ func TestTokenAnimateTriggerPackFailsClosed(t *testing.T) {
 		"DB$ Amass | Type$ Elf | Num$ 1",
 		"DB$ Amass | Num$ 1",
 		"DB$ Incubate | Amount$ Bogus",
-		"DB$ Animate | Defined$ Self | Triggers$ DBX",
+		"DB$ Animate | Defined$ Self | Replacements$ DBX",
 		"DB$ Animate | Defined$ Self | Power$ 1 | Duration$ Perpetual",
 		"DB$ Animate | Defined$ Self | Types$ ChosenType",
 		"DB$ Animate | Defined$ Self | Colors$ Plaid",

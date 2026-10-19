@@ -52,6 +52,11 @@ type animateRecord struct {
 	// never edited: Clone copies the record by value.
 	abilities      []*compile.Ability
 	abilityAmounts map[string]expr.Amount
+	// triggers are the triggers a Triggers$ without Duration$ Perpetual
+	// grants (AnimateEffect.java:127-130): read through traitGrants while the
+	// record lives, so they end with it (cleanup, or Permanent: never) and
+	// go with the card at a zone change.
+	triggers []*compile.Ability
 }
 
 // changesTypes reports whether r carries any Layer 4 change.
@@ -132,8 +137,8 @@ func animateKeywords(g *Game) {
 // statics' own Layer 6 grants and removals, which then apply over it.
 func animateAbilities(g *Game) {
 	liveAnimates(g, func(c *Card, r *animateRecord) {
-		if len(r.abilities) > 0 {
-			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), traitGrant{abilities: r.abilities, amounts: r.abilityAmounts})
+		if len(r.abilities) > 0 || len(r.triggers) > 0 {
+			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), traitGrant{abilities: r.abilities, triggers: r.triggers, amounts: r.abilityAmounts})
 		}
 	})
 }
@@ -255,10 +260,11 @@ func buildAnimate(g *Game, a *Ability, api string) (animateRecord, []*compile.Ab
 	if err := rejectParams(a, api, animateUnresolvedParams[:]...); err != nil {
 		return r, nil, err
 	}
-	grants, err := animateTriggerGrants(a, api)
+	grants, timed, err := animateTriggerGrants(a, api)
 	if err != nil {
 		return r, nil, err
 	}
+	r.triggers = timed
 	if d, _ := a.Params.Param("Duration"); grants == nil && api == "Animate" && hostBoundDuration(d) {
 		// AnimateEffectBase's unanimate closure goes through addUntilCommand,
 		// so the record outlives cleanup and a command on the host ends it.
@@ -368,7 +374,7 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 // empty reports whether r changes nothing at all.
 func (r *animateRecord) empty() bool {
 	return !r.changesTypes() && !r.HasColors && len(r.AddKeywords) == 0 && len(r.RemoveKeywords) == 0 &&
-		!r.RemoveAllKW && !r.HasPower && !r.HasToughness && len(r.abilities) == 0
+		!r.RemoveAllKW && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0
 }
 
 // animateCards applies template to each card on the battlefield under one
@@ -391,29 +397,28 @@ func (g *Game) animateCards(template animateRecord, cards []CardID) {
 	}
 }
 
-// animateTriggerGrants reads Triggers$ (ADR-0023's trigger slice): the
-// compiled triggers the resolution grants, nil when it names none. Only
-// Duration$ Perpetual is built -- PerpetualAbilities over changedCardTraits
-// (AnimateEffectBase.java:221-233), a grant that never ends and survives
-// zone changes (grantedTriggers, card.go). A grant that ends (until end of
-// turn, Permanent on a card that later leaves play, ...) needs the overlay's
-// removal bookkeeping for continuous effects, the rest of ADR-0023, and is
-// refused. So is a grant compile left unfollowed because the trigger
-// regrants itself (Snarlfang Vermin, compile.go's regrants). An Execute$
-// naming TgtZone$ (Pass the Torch's own TrigPlay) needs no refusal of its
-// own here: pushTriggeredAbilities calls resolveTargets uniformly for every
-// pushed ability, granted trigger included, and targetChoiceFor
-// (targeting.go) reads TgtZone$ there the same way any other pushed
-// ability's targeting would.
-func animateTriggerGrants(a *Ability, api string) ([]*compile.Ability, error) {
-	var out []*compile.Ability
+// animateTriggerGrants reads Triggers$ and Replacements$ (ADR-0023's trigger
+// slice). Duration$ Perpetual is PerpetualAbilities over changedCardTraits
+// (AnimateEffectBase.java:221-233): a grant that never ends and survives zone
+// changes (grantedTriggers, card.go), returned as perpetual. Any other
+// Triggers$ is a trigger that lives as the animateRecord does -- until end of
+// turn, or Permanent -- returned as timed (animateAbilities reads it). A
+// Replacements$ without Perpetual is refused, as is a grant compile left
+// unfollowed because the trigger regrants itself (Snarlfang Vermin,
+// compile.go's regrants). An Execute$ naming TgtZone$ (Pass the Torch's own
+// TrigPlay) needs no refusal of its own here: pushTriggeredAbilities calls
+// resolveTargets uniformly for every pushed ability, granted trigger
+// included, and targetChoiceFor (targeting.go) reads TgtZone$ there the same
+// way any other pushed ability's targeting would.
+func animateTriggerGrants(a *Ability, api string) (perpetual, timed []*compile.Ability, err error) {
+	d, _ := a.Params.Param("Duration")
 	for _, key := range [...]string{"Triggers", "Replacements"} {
 		raw, ok := a.Params.Param(key)
 		if !ok {
 			continue
 		}
-		if d, _ := a.Params.Param("Duration"); d != "Perpetual" {
-			return nil, fmt.Errorf("engine: %s: %s$ not resolvable yet", api, key)
+		if d != "Perpetual" && key == "Replacements" {
+			return nil, nil, fmt.Errorf("engine: %s: %s$ not resolvable yet", api, key)
 		}
 		var subs []compile.SubRef
 		for _, sub := range a.Params.Subs {
@@ -428,16 +433,20 @@ func animateTriggerGrants(a *Ability, api string) ([]*compile.Ability, error) {
 			}
 		}
 		if len(subs) != names {
-			return nil, fmt.Errorf("engine: %s: %s$ %q grants a trait that regrants itself, not resolvable yet", api, key, raw)
+			return nil, nil, fmt.Errorf("engine: %s: %s$ %q grants a trait that regrants itself, not resolvable yet", api, key, raw)
 		}
 		for _, sub := range subs {
-			if key == "Replacements" && !perpetualReplacementSupported(sub.Ability) {
-				return nil, fmt.Errorf("engine: %s: Replacements$ %q is not an enters-tapped replacement, not resolvable yet", api, raw)
+			switch {
+			case d != "Perpetual":
+				timed = append(timed, sub.Ability)
+			case key == "Replacements" && !perpetualReplacementSupported(sub.Ability):
+				return nil, nil, fmt.Errorf("engine: %s: Replacements$ %q is not an enters-tapped replacement, not resolvable yet", api, raw)
+			default:
+				perpetual = append(perpetual, sub.Ability)
 			}
-			out = append(out, sub.Ability)
 		}
 	}
-	return out, nil
+	return perpetual, timed, nil
 }
 
 // animateAbilityGrants reads Abilities$: the compiled activated abilities the

@@ -207,10 +207,10 @@ func TestAnimateTriggerGrantShapesThatFail(t *testing.T) {
 		want  string
 	}{
 		{
-			name:  "a grant that ends",
-			line:  "DB$ Animate | Defined$ Self | Triggers$ Grant",
-			svars: []string{"Grant", "Mode$ Attacks | ValidCard$ Card.Self | Execute$ Gain", "Gain", "DB$ GainLife | LifeAmount$ 1"},
-			want:  "Triggers$ not resolvable yet",
+			name:  "a replacement grant that ends",
+			line:  "DB$ Animate | Defined$ Self | Replacements$ Grant",
+			svars: []string{"Grant", "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap", "DBTap", "DB$ Tap | Defined$ Self"},
+			want:  "Replacements$ not resolvable yet",
 		},
 		{
 			name: "a perpetual characteristic change",
