@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humangraveyard=Waiting in the Weeds
+humanbattlefield=Forest|Tapped;Forest|Tapped;Forest|Tapped;Forest;Forest;T:g_1_1_cat|SummonSick;T:g_1_1_cat|SummonSick
+ailife=20
+aibattlefield=Forest;T:g_1_1_cat|SummonSick

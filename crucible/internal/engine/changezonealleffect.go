@@ -9,7 +9,7 @@ import "fmt"
 var changeZoneAllUnresolvedParams = [...]string{
 	"Duration", "ExileFaceDown", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
 	"WithCountersType", "StaticEffect", "TypeLimit", "AtEOT", "OptionQuestion",
-	"Hidden", "ChangeNum", "PowerUp", "Pawprint", "Random",
+	"Hidden", "ChangeNum", "Pawprint", "Random",
 	"Ultimate",
 }
 

@@ -113,7 +113,7 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		}
 	}
 	if len(created) > 0 {
-		g.checkChangesZoneAllTriggers(controller, created, None, Battlefield)
+		g.checkCreatedZoneAllTriggers(controller, created)
 	}
 	return nil
 }

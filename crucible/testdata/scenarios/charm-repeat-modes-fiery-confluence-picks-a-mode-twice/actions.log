@@ -1,0 +1,16 @@
+# CanRepeatModes$ (CharmEffect.java:228-237, PlayerControllerHuman.java:1996):
+# Fiery Confluence picks "2 damage to each opponent" twice and "1 damage to each
+# creature" once. "Destroy target artifact" has no legal target, so only two
+# modes are offered (indices 0 and 1) and three choices still stand. The AI
+# takes 4 and its Llanowar Elves dies.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+queue paygeneric R
+queue paygeneric R
+queue modechoice 1,1,0
+castspell human 1
+resolvestack

@@ -20,13 +20,13 @@ import (
 
 // charmUnresolvedParams are CharmEffect params this port does not model:
 // ChoiceRestriction$ (Card.getChosenModes' once-per-turn/-game bookkeeping),
-// CanRepeatModes$, Optional$, Chooser$ (an opponent chooses), Random$
+// Optional$, Chooser$ (an opponent chooses), Random$
 // Compare, Defined$ (never read by CharmEffect, 40 corpus lines of `Defined$ You`: a
 // dead script param, forge-java-defects.md and card-script-defects.md; refused until
 // the scripts drop it, PORT-8). ActivationLimit$/GameActivationLimit$ are enforced at
 // activation (activationLimitsMet, activateability.go).
 var charmUnresolvedParams = [...]string{
-	"ChoiceRestriction", "CanRepeatModes", "Optional", "Chooser", "RandomCompare",
+	"ChoiceRestriction", "Optional", "Chooser", "RandomCompare",
 	"RandomCompareSVar", "Defined",
 }
 
@@ -84,23 +84,44 @@ func (g *Game) chooseCharmModes(controller PlayerController, a *Ability) (bool, 
 		}
 		minModes = n
 	}
-	if minModes > len(options) {
-		return false, nil
-	}
-	if num > len(options) {
-		num = len(options)
+	// CanRepeatModes$ (CharmEffect.java:228-237): a mode may be chosen again
+	// and neither the minimum nor the count is held to the number of modes.
+	_, repeat := a.Params.Param("CanRepeatModes")
+	if !repeat {
+		if minModes > len(options) {
+			return false, nil
+		}
+		if num > len(options) {
+			num = len(options)
+		}
 	}
 
 	var chosen []int
 	if random, ok := a.Params.Param("Random"); ok {
-		if random != "True" {
+		if random != "True" || repeat {
 			return false, fmt.Errorf("engine: Charm: Random$ %q not resolvable yet", random)
 		}
 		chosen = g.randomSample(len(options), num)
 	} else {
 		chosen = controller.ChooseModesForAbility(g, a.Controller, a.Source, names, minModes, num)
-		if err := checkModeChoice(chosen, len(options), minModes, num); err != nil {
+		if err := checkModeChoice(chosen, len(options), minModes, num, repeat); err != nil {
 			return false, err
+		}
+		if _, ok := a.Params.Param("Pawprint"); ok {
+			// PlayerControllerHuman.java:1978-2003: a mode whose Pawprint$ no
+			// longer fits in CharmNum$ is not offered.
+			total := 0
+			for _, i := range chosen {
+				raw, _ := options[i].Params.Param("Pawprint")
+				n, ok := resolveNamedAmount(g, a.Amounts, host, raw)
+				if !ok {
+					return false, fmt.Errorf("engine: Charm: Pawprint$ %q is not resolvable", raw)
+				}
+				total += n
+			}
+			if total > num {
+				return false, fmt.Errorf("engine: Charm: chose %d pawprints, want at most %d", total, num)
+			}
 		}
 	}
 	sort.Ints(chosen)
@@ -145,15 +166,15 @@ func (g *Game) modeHasLegalTargets(mode *Ability) bool {
 	return ok
 }
 
-// checkModeChoice rejects a controller answer that is not lo..hi distinct
-// indices into n options.
-func checkModeChoice(chosen []int, n, lo, hi int) error {
+// checkModeChoice rejects a controller answer that is not lo..hi indices into
+// n options, distinct unless repeat (CanRepeatModes$).
+func checkModeChoice(chosen []int, n, lo, hi int, repeat bool) error {
 	if len(chosen) < lo || len(chosen) > hi {
 		return fmt.Errorf("engine: Charm: chose %d modes, want %d..%d", len(chosen), lo, hi)
 	}
 	seen := make([]bool, n)
 	for _, i := range chosen {
-		if i < 0 || i >= n || seen[i] {
+		if i < 0 || i >= n || seen[i] && !repeat {
 			return fmt.Errorf("engine: Charm: mode index %d is not a distinct choice among %d", i, n)
 		}
 		seen[i] = true

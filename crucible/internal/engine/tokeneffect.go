@@ -128,7 +128,7 @@ func (tokenEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 			g.Card(id).Memory.Remember(CardEntity(a.Source))
 		}
 	}
-	g.checkChangesZoneAllTriggers(controller, created, None, Battlefield)
+	g.checkCreatedZoneAllTriggers(controller, created)
 	return nil
 }
 

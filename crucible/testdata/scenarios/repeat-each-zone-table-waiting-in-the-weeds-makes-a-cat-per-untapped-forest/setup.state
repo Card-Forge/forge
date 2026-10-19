@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Waiting in the Weeds|Id:1
+humanbattlefield=Forest|Id:2;Forest|Id:3;Forest|Id:4;Forest|Id:5;Forest|Id:6
+aibattlefield=Forest|Id:7

@@ -46,6 +46,7 @@
 package engine
 
 import (
+	"slices"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -353,6 +354,11 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	if err != nil {
 		return false
 	}
+	if _, ok := ability.Param("PowerUp"); ok && c.Def != nil && c.zoneEntered && c.zoneEntryTurn == g.turn {
+		// CostAdjustment.java:225-228: a Power-up ability costs the host's own
+		// mana cost less on the turn the host entered.
+		manaCost = subtractManaCost(manaCost, c.Def.Faces[0].ManaCost)
+	}
 	apiType, ok := APIByName(ability.Name)
 	if !ok {
 		return false
@@ -639,4 +645,21 @@ func (g *Game) timingRestrictionsMet(pid PlayerID, ability *compile.Ability) boo
 func isCycling(ability *compile.Ability) bool {
 	name := keyword.Parse(ability.Keyword).Name
 	return name == "Cycling" || name == "TypeCycling"
+}
+
+// subtractManaCost is ManaCostBeingPaid.subtractManaCost: each shard of sub
+// that cost still holds comes off it, any other shard takes its mana value off
+// the generic part, then sub's generic part does too (never below 0). An X
+// shard of sub drops one X of cost.
+func subtractManaCost(cost, sub mana.Cost) mana.Cost {
+	shards := slices.Clone(cost.Shards())
+	generic := cost.Generic()
+	for _, sh := range sub.Shards() {
+		if i := slices.Index(shards, sh); i >= 0 {
+			shards = slices.Delete(shards, i, i+1)
+		} else if !sh.IsX() {
+			generic = max(0, generic-sh.CMC())
+		}
+	}
+	return mana.FromShards(shards, max(0, generic-sub.Generic()))
 }

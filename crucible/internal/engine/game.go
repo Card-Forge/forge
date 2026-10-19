@@ -196,6 +196,11 @@ type Game struct {
 	// begun this turn (PhaseHandler.java:362), read by
 	// Count$FinishedEndOfTurnsThisTurn and zeroed as cleanup begins (:418).
 	endOfTurnsThisTurn int
+	// zoneBatchOpen is set while a RepeatEach naming ChangeZoneTable$ runs its
+	// loop (zonebatch.go); zoneBatchCreated are the tokens and copies the loop
+	// has put onto the battlefield so far, held for one ChangesZoneAll.
+	zoneBatchOpen    bool
+	zoneBatchCreated []CardID
 	// enteredThisTurn is every zone change this turn, as the card stood in
 	// the zone it entered (a battlefield entry) or left (any other), and
 	// countersAddedThisTurn every counter placement (castrecord.go); both

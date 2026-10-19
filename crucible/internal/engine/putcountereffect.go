@@ -70,7 +70,7 @@ var putCounterUnresolvedParams = [...]string{
 	"ETB",
 	"ChoiceOptional",
 	"DividedRandomly", "SplitAmount",
-	"Bolster", "PowerUp",
+	"Bolster",
 	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
 	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "SkipReceiveCounters", "RandomType",
 	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",

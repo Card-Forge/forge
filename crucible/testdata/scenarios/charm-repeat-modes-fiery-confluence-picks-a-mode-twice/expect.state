@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humangraveyard=Fiery Confluence
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped
+ailife=16
+aigraveyard=Llanowar Elves

@@ -1,0 +1,20 @@
+# Power-up (CostAdjustment.java:225-228): Bold Biochemist's {5}{U} ability costs
+# its own mana cost {1}{U} less the turn it entered, so four generic mana pay
+# for it; it puts a +1/+1 counter on it and draws two cards.
+startturn human
+advance 3
+tapformana human 2 U
+tapformana human 3 U
+queue paygeneric U
+castspell human 1
+resolvestack
+tapformana human 4 U
+tapformana human 5 U
+tapformana human 6 U
+tapformana human 7 U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue paygeneric U
+queue action human activate 1 0
+passpriority

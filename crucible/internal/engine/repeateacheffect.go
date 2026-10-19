@@ -12,11 +12,11 @@ import (
 // cannot honour yet: the stack-object and card-type loops
 // (RepeatSpellAbilities$, RepeatTypesFrom$), a delayed per-player loop
 // (NextTurnForEachPlayer$), vote amounts (AmountFromVotes$), the batched
-// damage/zone/life tables (DamageMap$, ChangeZoneTable$, LoseLifeMap$), a
+// damage/life tables (DamageMap$, LoseLifeMap$), a
 // chooser-ordered loop (ChooseOrder$), and a non-APNAP start (StartingWith$).
 var repeatEachUnresolvedParams = [...]string{
 	"RepeatSpellAbilities", "RepeatTypesFrom", "NextTurnForEachPlayer", "AmountFromVotes",
-	"DamageMap", "ChangeZoneTable", "LoseLifeMap", "ChooseOrder", "StartingWith",
+	"DamageMap", "LoseLifeMap", "ChooseOrder", "StartingWith",
 	"Condition", "Ultimate",
 }
 
@@ -44,6 +44,11 @@ func (repeatEachEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		if _, prompt := a.Params.Param("OptionPrompt"); prompt && !controller.ConfirmEffect(g, a.Controller, a.Source) {
 			return nil
 		}
+	}
+	if _, ok := a.Params.Param("ChangeZoneTable"); ok {
+		// RepeatEachEffect.java:84-86, :202-205: one CardZoneTable for the whole
+		// loop; the batched ChangesZoneAll fires when it ends.
+		defer g.openZoneBatch(controller)()
 	}
 	_, useImprinted := a.Params.Param("UseImprinted")
 	m := &source.Memory

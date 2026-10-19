@@ -1,0 +1,12 @@
+# RepeatEach with ChangeZoneTable$ (RepeatEachEffect.java:84-86, :202-205):
+# every player gets a 1/1 Cat per untapped Forest they control. Casting taps
+# three of the human's five Forests, so the human makes two Cats and the AI one;
+# the loop's tokens share one table, whose batched ChangesZoneAll fires after it.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+queue paygeneric G
+castspell human 1
+resolvestack
