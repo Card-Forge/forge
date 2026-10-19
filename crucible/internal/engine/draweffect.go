@@ -73,6 +73,9 @@ func (drawEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		times[pid]++
 	}
 	for _, pid := range order {
+		if g.Player(pid).Lost {
+			continue // DrawEffect.java:70-72: !p.isInGame()
+		}
 		num := n * times[pid]
 		// Optional, not up to: a draw the player cannot make in full is skipped.
 		if optional && !upto && g.cantDrawAmount(pid, num) {
