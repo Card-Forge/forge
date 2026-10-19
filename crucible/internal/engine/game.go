@@ -1322,6 +1322,7 @@ func (g *Game) put(id CardID, kind ZoneType, owner PlayerID) {
 	c.trigResolved = nil
 	g.timestamp++
 	c.Timestamp, c.zoneStamp = g.timestamp, g.timestamp
+	c.newPTs = nil
 	if kind != Stack {
 		c.exiledWith = exiledWithMark{}
 	}
@@ -1344,6 +1345,7 @@ func (g *Game) putFront(id CardID, owner PlayerID) {
 	c.Timestamp, c.zoneStamp = g.timestamp, g.timestamp
 	c.exiledWith = exiledWithMark{}
 	c.stickers = nil
+	c.newPTs = nil
 	g.Zone(Library, owner).cards.Prepend(id)
 }
 

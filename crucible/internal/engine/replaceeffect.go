@@ -8,6 +8,7 @@ package engine
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -73,6 +74,11 @@ type replacementEvent struct {
 	// step, earlier defenders' included, which the ReplaceWith$ ability adds
 	// its own to in place of the normal declaration (ADR-0035).
 	blocks []Block
+
+	// exchanges is RollDice's DicePTExchanges set (RollDiceEffect.java:140):
+	// the cards whose ReplaceEffect VarType$ CardSet added themselves, each
+	// once, in the order they applied (ADR-0045).
+	exchanges []CardID
 }
 
 // producedMana is one production of mana as this port's mana abilities make
@@ -129,6 +135,20 @@ func (replaceEffectEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 		return err
 	}
 	if !subAbilityConditionMet(g, g.Card(a.Source), a.Amounts, a.Params) {
+		return nil
+	}
+	if t, _ := a.Params.Param("VarType"); t == "CardSet" {
+		// ReplaceEffect.java:52-57; the only CardSet in the corpus is RollDice's
+		// DicePTExchanges, which Self adds the host to.
+		name, _ := a.Params.Param("VarName")
+		value, _ := a.Params.Param("VarValue")
+		if name != "DicePTExchanges" || value != "Self" {
+			return fmt.Errorf("engine: ReplaceEffect: VarType$ CardSet with VarName$ %q VarValue$ %q not resolvable yet", name, value)
+		}
+		if !slices.Contains(ev.exchanges, a.Source) {
+			ev.exchanges = append(ev.exchanges, a.Source)
+		}
+		ev.result = replacementUpdated
 		return nil
 	}
 	if t, ok := a.Params.Param("VarType"); ok && t != "amount" {

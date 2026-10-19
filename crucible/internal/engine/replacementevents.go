@@ -394,7 +394,7 @@ func (g *Game) lifeReduced(controller PlayerController, pid PlayerID, amount int
 // rolls ignored (VarName$ Ignore) -- Pixie Guide, Wyll and Barbarian Class's
 // "roll one more die and ignore the lowest" -- and the edited values are what
 // is rolled. ValidPlayer$ and ValidSides$ are ReplaceRollDice.canReplace's.
-func (g *Game) rollReplaced(controller PlayerController, player PlayerID, amount, sides, ignore int) (int, int) {
+func (g *Game) rollReplaced(controller PlayerController, player PlayerID, amount, sides, ignore int) (int, int, []CardID) {
 	ev := replacementEvent{amountName: "Number", amount: amount, vars: map[string]int{"ignore": ignore}}
 	g.runReplacements(controller, player, func() []replacementCandidate {
 		var out []replacementCandidate
@@ -425,13 +425,13 @@ func (g *Game) rollReplaced(controller PlayerController, player PlayerID, amount
 		})
 		return out
 	})
-	return ev.amount, ev.vars["ignore"]
+	return ev.amount, ev.vars["ignore"], ev.exchanges
 }
 
 // rollReplacementResolvable reports whether r, an Event$ RollDice line, only
 // edits the dice count and the ignored rolls: its ReplaceWith$ chain is
 // ReplaceEffect abilities naming VarName$ Number or Ignore. Vedalken Squirrel-
-// Whacker's DicePTExchanges (VarType$ CardSet) is not one.
+// Whacker's DicePTExchanges (VarType$ CardSet) is the one other line.
 func rollReplacementResolvable(r *compile.Ability) bool {
 	if !onlyParams(r, "event", "validplayer", "validsides", "replacewith", "description", "activezones", "secondary") {
 		return false
@@ -444,8 +444,14 @@ func rollReplacementResolvable(r *compile.Ability) bool {
 		if !strings.EqualFold(a.Name, "ReplaceEffect") {
 			return false
 		}
-		if _, typed := a.Param("VarType"); typed {
-			return false
+		if t, typed := a.Param("VarType"); typed {
+			// Vedalken Squirrel-Whacker's exchange set (ADR-0045).
+			name, _ := a.Param("VarName")
+			value, _ := a.Param("VarValue")
+			if t != "CardSet" || name != "DicePTExchanges" || value != "Self" {
+				return false
+			}
+			continue
 		}
 		if name, _ := a.Param("VarName"); !strings.EqualFold(name, "Number") && !strings.EqualFold(name, "Ignore") {
 			return false

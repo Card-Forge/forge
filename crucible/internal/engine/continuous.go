@@ -203,6 +203,7 @@ func applyContinuousPT(g *Game) {
 	forEachOffBattlefieldCard(g, func(c *Card) { c.PT.Clear() })
 	animatePT(g)
 	stickerPT(g)
+	newPTEffects(g)
 	pumpPT(g)
 	statics := continuousStaticsAllZones(g)
 	for _, ls := range statics {

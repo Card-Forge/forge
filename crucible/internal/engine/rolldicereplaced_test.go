@@ -92,18 +92,74 @@ func TestRollDiceReplacementHonoursValidSidesAndPlayer(t *testing.T) {
 	}
 }
 
-// TestRollDiceReplacementWithAnExchangeStillFailsClosed is Vedalken
-// Squirrel-Whacker's DicePTExchanges (VarType$ CardSet): a post-roll exchange
-// this port does not model, so the roll errors rather than landing unmodified.
-func TestRollDiceReplacementWithAnExchangeStillFailsClosed(t *testing.T) {
+// swapperDef is Vedalken Squirrel-Whacker's replacement on a 3/4 creature.
+func swapperDef(t *testing.T) *compile.Card {
+	t.Helper()
+
+	reg, err := cardtype.LoadRegistry(strings.NewReader("[CreatureTypes]\nElf\n"))
+	if err != nil {
+		t.Fatalf("LoadRegistry: %v", err)
+	}
+	raw := &carddb.Card{Filename: "Test Swapper"}
+	raw.Faces[0].Present = true
+	raw.Faces[0].Name = "Test Swapper"
+	raw.Faces[0].Type = cardtype.Parse(reg, "Creature Elf")
+	raw.Faces[0].Power, raw.Faces[0].Toughness = "3", "4"
+	raw.Faces[0].Replacements = []string{"Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ValidSides$ 6 | ReplaceWith$ SwapRoll | Description$ Exchange."}
+	raw.Faces[0].SVars.Set("SwapRoll", "DB$ ReplaceEffect | VarName$ DicePTExchanges | VarType$ CardSet | VarValue$ Self")
+	c, err := compile.Compile(raw)
+	if err != nil {
+		t.Fatalf("compile: %v", err)
+	}
+	return c
+}
+
+// TestRollDiceExchangeSwapsARollWithPowerOrToughness is Vedalken Squirrel-
+// Whacker's DicePTExchanges (RollDiceEffect.java:233-262, ADR-0045): the roll
+// becomes the creature's power or toughness, which becomes the roll, and a
+// refused stat asks for a roll again.
+func TestRollDiceExchangeSwapsARollWithPowerOrToughness(t *testing.T) {
 	t.Parallel()
 
-	g, p, _ := newTwoPlayerGame(t)
-	g.NewCard(rollReplacementDef(t, "Test Swapper",
-		"Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ValidSides$ 6 | ReplaceWith$ SwapRoll | Description$ Exchange.",
-		"SwapRoll", "DB$ ReplaceEffect | VarName$ DicePTExchanges | VarType$ CardSet | VarValue$ Self"), p, engine.Battlefield)
-
-	if _, err := castETBChain(t, g, p, etbChainDef(t, "Test Die", "DB$ RollDice | Sides$ 6"), engine.NewScriptedController()); err == nil {
-		t.Error("roll with an exchange replacement in play succeeded, want an error")
+	natural := int(javarand.New(1).Int32n(6)) + 1
+	for _, tc := range []struct {
+		name         string
+		rollAnswers  []int
+		statAnswers  []int
+		wantLife     int
+		wantPT       [2]int
+		wantSwapUsed bool
+	}{
+		{"power", []int{0}, []int{0}, 20 + 3, [2]int{natural, 4}, true},
+		{"toughness", []int{0}, []int{1}, 20 + 4, [2]int{3, natural}, true},
+		{"no roll chosen", []int{-1}, nil, 20 + natural, [2]int{3, 4}, false},
+		{"stat refused then roll declined", []int{0, -1}, []int{-1}, 20 + natural, [2]int{3, 4}, false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			g, p, _ := newTwoPlayerGame(t)
+			squirrel := g.NewCard(swapperDef(t), p, engine.Battlefield)
+			c := engine.NewScriptedController()
+			for _, a := range tc.rollAnswers {
+				c.QueueRollToSwap(a)
+			}
+			for _, a := range tc.statAnswers {
+				c.QueueRollSwapValue(a)
+			}
+			if tc.wantSwapUsed || len(tc.rollAnswers) > 1 {
+				c.QueueCardChoice([]engine.CardID{squirrel})
+			}
+			resolveLine(t, g, p, c,
+				"DB$ RollDice | Sides$ 6 | ResultSVar$ Result | SubAbility$ DBGain",
+				"DBGain", "DB$ GainLife | Defined$ You | LifeAmount$ Result")
+			if got := g.Player(p).Life; got != tc.wantLife {
+				t.Errorf("life = %d, want %d (natural roll %d)", got, tc.wantLife, natural)
+			}
+			pw, _ := g.Card(squirrel).Power()
+			th, _ := g.Card(squirrel).Toughness()
+			if pw != tc.wantPT[0] || th != tc.wantPT[1] {
+				t.Errorf("P/T = %d/%d, want %d/%d", pw, th, tc.wantPT[0], tc.wantPT[1])
+			}
+		})
 	}
 }

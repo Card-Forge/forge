@@ -73,3 +73,10 @@ func (pt *PT) truncate(n int) { pt.effects = pt.effects[:n] }
 func (pt PT) clone() PT {
 	return PT{effects: append([]PTEffect(nil), pt.effects...), switches: pt.switches}
 }
+
+// newPT is one Card.addNewPT entry (Card.java:4390-4398): a set-P/T effect at
+// its own timestamp, Layer 7b (ADR-0045).
+type newPT struct {
+	timestamp        uint64
+	power, toughness int
+}

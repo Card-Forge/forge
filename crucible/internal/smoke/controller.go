@@ -397,6 +397,16 @@ func (*Controller) ChooseStickerNamePosition(*engine.Game, engine.PlayerID, engi
 	return 0
 }
 
+// ChooseRollToSwap swaps no roll.
+func (*Controller) ChooseRollToSwap(*engine.Game, engine.PlayerID, engine.CardID, []int) int {
+	return -1
+}
+
+// ChooseRollSwapValue declines both stats.
+func (*Controller) ChooseRollSwapValue(*engine.Game, engine.PlayerID, engine.CardID, int, int, int) int {
+	return -1
+}
+
 // ChooseRoomDoor picks the first door.
 func (*Controller) ChooseRoomDoor(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, doors []engine.Door) engine.Door {
 	return doors[0]

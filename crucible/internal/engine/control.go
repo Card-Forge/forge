@@ -521,6 +521,19 @@ type PlayerController interface {
 	// chooseStickerNamePosition (PlayerController.java:260, ADR-0044).
 	ChooseStickerNamePosition(g *Game, decider PlayerID, target CardID, option StickerOption) int
 
+	// ChooseRollToSwap picks the die roll a Vedalken Squirrel-Whacker style
+	// exchange swaps with a creature's power or toughness, answering with its
+	// index in rolls, or -1 for none -- Java's chooseRollToSwap
+	// (PlayerController.java:279, ADR-0045). The caller checks the answer
+	// (GO-7).
+	ChooseRollToSwap(g *Game, decider PlayerID, source CardID, rolls []int) int
+
+	// ChooseRollSwapValue picks which stat the roll swaps with: 0 for power,
+	// 1 for toughness, -1 for none (the roll is then asked again) -- Java's
+	// chooseRollSwapValue (PlayerController.java:280, ADR-0045). The caller
+	// checks the answer (GO-7).
+	ChooseRollSwapValue(g *Game, decider PlayerID, source CardID, roll, power, toughness int) int
+
 	// ChooseRoomDoor picks one of doors, doors of the Room room -- Java's
 	// chooseSingleCardState over the Room's LeftSplit/RightSplit states,
 	// asked by UnlockDoor's Mode$ Unlock ("Choose Room to unlock") and Mode$
@@ -644,6 +657,8 @@ type ScriptedController struct {
 	sector             []int
 	sticker            []int
 	stickerPos         []int
+	rollSwap           []int
+	rollSwapValue      []int
 	roomDoor           []Door
 	replacementPick    []int
 	replacementConfirm []bool
@@ -1362,6 +1377,22 @@ func (c *ScriptedController) QueueStickerNamePosition(i int) { c.stickerPos = ap
 // queued.
 func (c *ScriptedController) ChooseStickerNamePosition(_ *Game, _ PlayerID, _ CardID, _ StickerOption) int {
 	return popQueue(&c.stickerPos, "sticker name position")
+}
+
+// QueueRollToSwap appends the answer to the next ChooseRollToSwap call.
+func (c *ScriptedController) QueueRollToSwap(i int) { c.rollSwap = append(c.rollSwap, i) }
+
+// ChooseRollToSwap returns the next answer QueueRollToSwap queued.
+func (c *ScriptedController) ChooseRollToSwap(_ *Game, _ PlayerID, _ CardID, _ []int) int {
+	return popQueue(&c.rollSwap, "roll to swap")
+}
+
+// QueueRollSwapValue appends the answer to the next ChooseRollSwapValue call.
+func (c *ScriptedController) QueueRollSwapValue(i int) { c.rollSwapValue = append(c.rollSwapValue, i) }
+
+// ChooseRollSwapValue returns the next answer QueueRollSwapValue queued.
+func (c *ScriptedController) ChooseRollSwapValue(_ *Game, _ PlayerID, _ CardID, _, _, _ int) int {
+	return popQueue(&c.rollSwapValue, "roll swap value")
 }
 
 // QueueRoomDoor appends the answer to the next ChooseRoomDoor call.

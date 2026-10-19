@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow ability additional card condition control defined effecthelpers game id parts replacement zone
+//enginelint:allow ability additional card condition control defined effecthelpers game id parts replacement taptype zone
 
 import (
 	"fmt"
@@ -102,7 +102,7 @@ func (g *Game) rollDiceFor(a *Ability, controller PlayerController, pid PlayerID
 	}
 	// ReplacementType.RollDice runs before the dice are rolled; Updated edits the
 	// number of dice and the lowest rolls ignored (RollDiceEffect.rollAction).
-	amount, ignore = g.rollReplaced(controller, pid, amount, sides, ignore)
+	amount, ignore, exchanges := g.rollReplaced(controller, pid, amount, sides, ignore)
 	var rolls []int
 	for i := 0; i < amount; i++ {
 		rolls = append(rolls, int(g.rand.Int32n(int32(sides)))+1)
@@ -115,13 +115,21 @@ func (g *Game) rollDiceFor(a *Ability, controller PlayerController, pid PlayerID
 	if hasParam(a, "UseHighestRoll") && len(natural) > 0 {
 		natural = natural[len(natural)-1:]
 	}
+	modified := make([]int, len(natural))
+	for i, n := range natural {
+		modified[i] = n + modifier
+	}
+	if len(exchanges) > 0 {
+		if err := g.swapDiceRolls(controller, pid, a.Source, exchanges, modified); err != nil {
+			return 0, err
+		}
+	}
 	var final []int
 	even, odd, different, maxRolls := 0, 0, 0, 0
 	seen := map[int]bool{}
 	doubles := false
 	total := 0
-	for _, n := range natural {
-		m := n + modifier
+	for i, m := range modified {
 		if !seen[m] {
 			different++
 		} else {
@@ -133,7 +141,7 @@ func (g *Game) rollDiceFor(a *Ability, controller PlayerController, pid PlayerID
 		} else {
 			odd++
 		}
-		if n == sides {
+		if natural[i] == sides {
 			maxRolls++
 		}
 		final = append(final, m)
@@ -260,4 +268,64 @@ func diceModifierInPlay(g *Game) bool {
 		}
 	}
 	return false
+}
+
+// maxSwapDeclines bounds how often a controller may refuse the stat after
+// choosing a roll and a card. Java asks again without limit
+// (RollDiceEffect.java:233-262); a controller that never answers would hang
+// the game, so the bound is an engine error (GO-7).
+const maxSwapDeclines = 64
+
+// swapDiceRolls is RollDiceEffect.java:233-262, the exchange phase of
+// DicePTExchanges: while an exchange card is left, the roller picks a roll
+// (none ends the phase), one of the cards, and power or toughness; the roll
+// becomes that stat of the card's current P/T and the stat becomes the roll
+// (Card.addNewPT, a fresh timestamp). The card is spent only when a stat was
+// chosen; refusing it asks for a roll again. Only the modified value changes
+// (Java's naturalValue stays, so MaxRolls counts the pre-swap roll).
+func (g *Game) swapDiceRolls(controller PlayerController, pid PlayerID, source CardID, exchanges []CardID, rolls []int) error {
+	left := append([]CardID(nil), exchanges...)
+	declines := 0
+	for len(left) > 0 && len(rolls) > 0 {
+		ri := controller.ChooseRollToSwap(g, pid, source, append([]int(nil), rolls...))
+		if ri < 0 {
+			return nil
+		}
+		if ri >= len(rolls) {
+			return fmt.Errorf("engine: RollDice: ChooseRollToSwap answered %d of %d rolls", ri, len(rolls))
+		}
+		pick := controller.ChooseCardsForEffect(g, pid, source, left, 1, 1)
+		if len(pick) != 1 || !isSubset(pick, left) {
+			pick = left[:1]
+		}
+		c := g.Card(pick[0])
+		power, _ := c.Power()
+		toughness, _ := c.Toughness()
+		stat := controller.ChooseRollSwapValue(g, pid, source, rolls[ri], power, toughness)
+		if stat != 0 && stat != 1 {
+			if stat != -1 {
+				return fmt.Errorf("engine: RollDice: ChooseRollSwapValue answered %d", stat)
+			}
+			if declines++; declines > maxSwapDeclines {
+				return fmt.Errorf("engine: RollDice: the roll swap was refused %d times", declines)
+			}
+			continue
+		}
+		old := rolls[ri]
+		g.timestamp++
+		if stat == 0 {
+			rolls[ri] = power
+			c.newPTs = append(c.newPTs[:len(c.newPTs):len(c.newPTs)], newPT{g.timestamp, old, toughness})
+		} else {
+			rolls[ri] = toughness
+			c.newPTs = append(c.newPTs[:len(c.newPTs):len(c.newPTs)], newPT{g.timestamp, power, old})
+		}
+		for i, id := range left {
+			if id == pick[0] {
+				left = append(left[:i:i], left[i+1:]...)
+				break
+			}
+		}
+	}
+	return nil
 }

@@ -426,6 +426,11 @@ type Card struct {
 	// card, in placement order (ADR-0044). A move into a hidden zone clears it
 	// (put); one into a public zone keeps it (GameAction.java:268-270).
 	stickers []appliedSticker
+	// newPTs is Card.addNewPT's list (Card.java:4390-4398): set-P/T effects
+	// a dice exchange wrote, in timestamp order (ADR-0045). Rebuilt into the
+	// P/T layers every pass (newPTEffects); any zone change drops it
+	// (Card.clearNewPT via removeChangedState, GameAction.java:363).
+	newPTs []newPT
 	// haunting is Card.haunting (Card.java:1392, CR 702.55): the creature
 	// this exiled card haunts, set by Haunt (haunteffect.go) and read by the
 	// HauntedBy valid property. The zero value haunts nothing.

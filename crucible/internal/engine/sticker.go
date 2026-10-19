@@ -155,6 +155,21 @@ func stickerPT(g *Game) {
 	}
 }
 
+// newPTEffects re-adds every card's addNewPT list as Layer 7b set effects,
+// beside stickerPT: applyContinuousPT clears the effects it reads first, so
+// the list on the card is the state.
+func newPTEffects(g *Game) {
+	for i := 1; i < len(g.cards); i++ {
+		c := &g.cards[i]
+		for _, e := range c.newPTs {
+			c.PT.Add(PTEffect{
+				Layer: LayerSetPT, Timestamp: e.timestamp,
+				Power: e.power, Toughness: e.toughness, HasPower: true, HasToughness: true,
+			})
+		}
+	}
+}
+
 // nameBlank is Card.NAME_BLANK's first match (Card.java:4697, `_{2,}`): the
 // byte range of the first run of two or more underscores in name, or nil.
 func nameBlank(name string) []int {
