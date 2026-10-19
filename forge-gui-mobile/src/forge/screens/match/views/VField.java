@@ -2,7 +2,6 @@ package forge.screens.match.views;
 
 import java.util.*;
 
-import forge.Forge;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
@@ -252,13 +251,8 @@ public class VField extends FContainer {
             y1 = 0;
             y2 = cardSize;
         }
-        if (Forge.isHorizontalTabLayout()) {
-            row1.setBounds(0, y1, width, cardSize);
-            row2.setBounds(0, y2, width, cardSize);
-        } else {
-            row1.setBounds(0, y1, width - fieldModifier, cardSize);
-            row2.setBounds(0, y2, (width - commandZoneWidth) - fieldModifier, cardSize);
-        }
+        row1.setBounds(0, y1, width - fieldModifier, cardSize);
+        row2.setBounds(0, y2, (width - commandZoneWidth) - fieldModifier, cardSize);
     }
 
     public class FieldRow extends VCardDisplayArea {

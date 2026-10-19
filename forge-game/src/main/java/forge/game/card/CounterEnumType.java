@@ -411,6 +411,8 @@ public enum CounterEnumType implements CounterType {
 
     SHY("SHY", 232, 178, 199, CounterAiCategory.Neutral),
 
+    SIN("SIN", 110, 60, 35, CounterAiCategory.Positive),
+
     SILVER("SILVER", 192, 192, 192, CounterAiCategory.Positive),
 
     SKEWER("SKEWER", 202, 192, 156, CounterAiCategory.Positive),

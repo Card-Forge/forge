@@ -2,6 +2,7 @@ package forge.game.trigger;
 
 import forge.ai.AITest;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -31,5 +32,25 @@ public class SimultaneousEntryTriggerTest extends AITest {
         game.getStack().addAllTriggeredAbilitiesToStack();
 
         AssertJUnit.assertEquals(2, game.getStack().size());
+    }
+
+    @Test
+    public void kodamaSeesMoxDiamondThatEntersWithItButMovesFirst() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        addCardToZone("Island", p, ZoneType.Hand);
+        addCardToZone("Mox Diamond", p, ZoneType.Graveyard);
+        addCardToZone("Kodama of the East Tree", p, ZoneType.Graveyard);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Battlefield", addCard("Forest", p));
+        sa.setActivatingPlayer(p);
+        AbilityUtils.resolve(sa);
+        game.getAction().checkStateEffects(true);
+        game.getStack().addAllTriggeredAbilitiesToStack();
+
+        AssertJUnit.assertEquals(1, game.getStack().size());
+        AssertJUnit.assertEquals("Kodama of the East Tree", game.getStack().peekAbility().getHostCard().getName());
     }
 }

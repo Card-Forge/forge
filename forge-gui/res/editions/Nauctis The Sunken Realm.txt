@@ -1,7 +1,7 @@
 [metadata]
 Code=NAU
 Date=2027-02-05
-Name=Name=Nauctis: The Sunken Realm
+Name=Nauctis: The Sunken Realm
 Type=Expansion
 ScryfallCode=NAU
 

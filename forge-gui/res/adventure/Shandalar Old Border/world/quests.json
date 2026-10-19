@@ -226,6 +226,31 @@
 },
 {
 	"id": 2,
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
+	],
 	"isTemplate": true,
 	"name": "Wanderlust",
 	"description": "Make a delivery to a distant location.",
@@ -2862,6 +2887,31 @@
 },
 {
 	"id": 11,
+	"questSourceTags": [
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"plains_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"island_capital",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"swamp_capital",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"mountain_capital",
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"forest_capital"
+	],
 	"isTemplate": true,
 	"name": "Eviction Notice",
 	"description": "Clear all enemies from a dungeon.",
@@ -11743,7 +11793,7 @@
 							"options": [
 								{
 									"name": "(Continue)",
-									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"",
+									"text": "The Merfolk tightens its grip on the Homarid head. \"Do not heed that thing. Will you stand with the defenders of Svyelunite Temple, side with its despoilers, or leave us to our war?\"\n\nWarning: Hard quest.",
 									"options": [
 										{
 											"condition": [
@@ -12526,20 +12576,6 @@
 				"POIToken": "",
 				"mapFlag": "FE_Svyelunite_OpponentsDefeated",
 				"mapFlagValue": 18
-			},
-			{
-				"id": 2,
-				"name": "Return to Town",
-				"description": "Return to the town where you accepted the request.",
-				"here": true,
-				"objective": "Travel",
-				"prerequisiteIDs": [
-					1
-				],
-				"prologue": {},
-				"epilogue": {},
-				"failureDialog": {},
-				"POIToken": ""
 			}
 		],
 		"questSourceTags": [

@@ -1,40 +1,10 @@
 package forge.util;
 
-import forge.Forge;
 import forge.game.card.CardView;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.screens.match.MatchController;
 
 public class CardRendererUtils {
-    public static boolean needsRotation(final CardView card) {
-        return needsRotation(card.isSplitCard() ? ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS
-                : ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, canShowAlternate(card, card.getOracleName()));
-    }
-    public static boolean needsRotation(final CardView card, final boolean altState) {
-        return needsRotation(card.isSplitCard() ? ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS
-                : ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, altState);
-    }
-    public static boolean needsRotation(final ForgePreferences.FPref fPref, final CardView card, boolean altState) {
-        if (isPreferenceEnabled(fPref)) {
-            if (Forge.enableUIMask.equals("Art") || card.useCardArt())
-                return false;
-            switch (fPref) {
-                case UI_ROTATE_SPLIT_CARDS -> {
-                    return card.isSplitCard() && MatchController.instance.mayView(card) && !card.isFaceDown();
-                }
-                case UI_ROTATE_PLANE_OR_PHENOMENON -> {
-                    return card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()
-                            || (card.getCurrentState().isBattle() && !altState)
-                            || (card.getAlternateState() != null && card.getAlternateState().isBattle() && altState);
-                }
-                default -> {
-                    return false;
-                }
-            }
-        }
-        return false;
-    }
     public static boolean canShowAlternate(final CardView card, final String reference) {
         if (card == null)
             return false;
@@ -59,8 +29,12 @@ public class CardRendererUtils {
         return showAlt;
     }
     public static boolean hasAftermath(final CardView card) {
-        if (card.hasAlternateState())
-            return card.getAlternateState().hasAftermath();
+        if (card.hasAlternateState()) {
+            if (card.getId() != -1)
+                return card.getAlternateState().hasAftermath();
+            else
+                return card.getAlternateState().getOracleText().contains("Aftermath");
+        }
         return false;
     }
 
