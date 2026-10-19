@@ -55,6 +55,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -93,7 +94,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private KeywordCollection cachedKeywords = new KeywordCollection();
 
     private CardRarity rarity = CardRarity.Unknown;
+    private List<CardRarity> additionalRarities = new ArrayList<>();
     private String setCode = CardEdition.UNKNOWN_CODE;
+    private List<String> additionalSetCodes = new ArrayList<>();
 
     private final CardStateView view;
     private final Card card;
@@ -908,7 +911,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setIntrinsicKeywords(source.intrinsicKeywords.getValues(), lki);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
+        additionalRarities.clear();
+        additionalRarities.addAll(source.additionalRarities);
         setSetCode(source.setCode);
+        additionalSetCodes.clear();
+        additionalSetCodes.addAll(source.additionalSetCodes);
 
         Trigger dontCopyTr = null;
         if (ctb != null && ctb.hasParam("DoesntHaveThisAbility")) {
@@ -1037,11 +1044,23 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.updateRarity(this);
     }
 
+    public List<CardRarity> getAdditionalRarities() { return additionalRarities; }
+    public void addRarity(CardRarity rarity0) {
+        additionalRarities.add(rarity0);
+        view.updateRarity(this);
+    }
+
     public String getSetCode() {
         return setCode;
     }
     public void setSetCode(String setCode0) {
         setCode = setCode0;
+        view.updateSetCode(this);
+    }
+
+    public List<String> getAdditionalSetCodes() { return additionalSetCodes; }
+    public void addSetCode(String setCode0) {
+        additionalSetCodes.add(setCode0);
         view.updateSetCode(this);
     }
 

@@ -77,7 +77,12 @@ public class CardCopyService {
             if (copyFrom.hasMergedCard()) {
                 out.setMergedCards(copyFrom.getMergedCards());
             }
-
+            if (copyFrom.getAugmentedWith() != null) {
+                out.setAugmentedWith(copyFrom.getAugmentedWith());
+            }
+            if (copyFrom.getAugmenting() != null) {
+                out.setAugmenting(copyFrom.getAugmenting());
+            }
             out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
 
             out.setSpecialized(copyFrom.isSpecialized());

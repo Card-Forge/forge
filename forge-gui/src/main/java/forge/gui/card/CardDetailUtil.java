@@ -655,6 +655,15 @@ public class CardDetailUtil {
             }
         }
 
+        if (state.hasAdditionalRarities()) {
+            area.append("\n\n");
+            area.append("Additional Rarities: ").append(state.getAdditionalRarities());
+        }
+        if (state.hasAdditionalSetCodes()) {
+            area.append("\n\n");
+            area.append("Additional Set Codes: ").append(state.getAdditionalSetCodes());
+        }
+
         //show owner if being controlled by a different player
         if (card.getOwner() != card.getController()) {
             area.append("\n\n");

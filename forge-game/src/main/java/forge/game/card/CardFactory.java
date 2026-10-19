@@ -813,6 +813,8 @@ public class CardFactory {
         state.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getName).collect(Collectors.toList()));
         state.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getName).collect(Collectors.toList()));
         state.addType(augmentState.getType().getSubtypes());
+        state.addRarity(augmentState.getRarity());
+        state.addSetCode(augmentState.getSetCode());
         state.removeType(CardType.Supertype.Host);
         hostKeyword.combine(augmentKeyword);
         final CardCloneStates result = new CardCloneStates(host, sa);

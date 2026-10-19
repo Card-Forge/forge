@@ -1,4 +1,4 @@
-Name:Rhino
+Name:Rhino-
 ManaCost:no cost
 Types:Creature Rhino
 Colors:white

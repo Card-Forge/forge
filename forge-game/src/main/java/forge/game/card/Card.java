@@ -1155,7 +1155,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public boolean isCloned() {
         return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp
-                && clonedStates.lastEntry().getKey() != prototypeTimestamp;
+                && clonedStates.lastEntry().getKey() != prototypeTimestamp
+                && clonedStates.lastEntry().getKey() != augmentedTimeStamp;
     }
 
     public final boolean isFaceDown() {
@@ -1530,7 +1531,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
     public final Card getAugmentedWith() { return augmentedWith; }
+    public void setAugmentedWith(Card augmentedWith) { this.augmentedWith = augmentedWith; }
     public final Card getAugmenting() { return augmenting; }
+    public void setAugmenting(Card augmenting) { this.augmenting = augmenting; }
+
     public final long getAugmentedTimestamp() {
         return augmentedTimeStamp;
     }
