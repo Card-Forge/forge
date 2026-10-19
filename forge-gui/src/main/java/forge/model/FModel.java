@@ -193,6 +193,7 @@ public final class FModel {
             private final float[] stageWeights = {0.8f, 0.1f, 0.05f, 0.05f}; //cards, tokens, custom cards, custom tokens
             private int stage = 0;
             private float lastFraction = 0f, shown = 0f;
+            private int lastPosted = -1; //the bar has few steps, so most reports change nothing and are not posted to the UI thread
 
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
@@ -214,8 +215,11 @@ public final class FModel {
                     base += stageWeights[i];
                 }
                 shown = Math.max(shown, base + stageWeights[stage] * fraction);
-                final int value = Math.round(shown * 1000f);
-                updateProgressBar(progressBar, value);
+                final int value = Math.round(shown * progressCeiling);
+                if (value != lastPosted) { //tens of thousands of cards report, only a few hundred bar steps are worth a UI post
+                    lastPosted = value;
+                    updateProgressBar(progressBar, value);
+                }
             }
         };
 
@@ -299,6 +303,9 @@ public final class FModel {
             }
         }
     }
+
+    //mobile lowers this to leave room on the bar for its own startup steps after the card databases are loaded
+    public static volatile int progressCeiling = 1000;
 
     private static void updateProgressBar(IProgressBar progressBar, int value) {
         FThreads.invokeInEdtLater(() -> {

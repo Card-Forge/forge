@@ -39,6 +39,12 @@ public class VPrompt extends FContainer {
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
     public static final float PADDING = Utils.scale(2);
     private static final Color COMPACT_SCRIM = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.62f);
+    private static final Color MENU_BTN_ON = new Color(1f, 1f, 1f, 0.28f);
+    private static final Color MENU_BTN_OFF = new Color(1f, 1f, 1f, 0.14f);
+    private static final java.util.regex.Pattern FROSTED_BREAKS = java.util.regex.Pattern.compile("\\s*\\n+\\s*");
+    private String frostedSource, frostedText; //the frosted message block is fitted once per message and size, not every frame
+    private float frostedW, frostedH;
+    private FSkinFont frostedFont;
     public static final FSkinFont FONT = FSkinFont.get(14);
     public static FSkinColor getBackColor() {
         if (Forge.isMobileAdventureMode)
@@ -132,7 +138,7 @@ public class VPrompt extends FContainer {
         public void draw(Graphics g) {
             final float cx = getWidth() / 2, cy = getHeight() / 2;
             final float r = Math.min(getWidth(), getHeight()) / 2f * 0.9f;
-            g.fillCircle(pressed || isHovered() ? new com.badlogic.gdx.graphics.Color(1f, 1f, 1f, 0.28f) : new com.badlogic.gdx.graphics.Color(1f, 1f, 1f, 0.14f), cx, cy, r);
+            g.fillCircle(pressed || isHovered() ? MENU_BTN_ON : MENU_BTN_OFF, cx, cy, r);
             g.drawCircle(Utils.scale(1), GLASS_EDGE, cx, cy, r);
             final float lineW = r * 1.0f, lineH = Math.max(1.5f, r * 0.14f), gap = r * 0.36f;
             final com.badlogic.gdx.graphics.Color c = com.badlogic.gdx.graphics.Color.WHITE;
@@ -412,13 +418,19 @@ public class VPrompt extends FContainer {
                 float w = getWidth() - 2 * PADDING;
                 float h = getHeight() - 2 * PADDING;
                 if (isFrostedMatch()) { //one tidy block: the biggest font that fits two lines, centred
-                    final String text = message.trim().replaceAll("\\s*\\n+\\s*", "  \u00b7  ");
-                    FSkinFont font = FONT;
-                    for (int size = 14; size >= 11; size--) {
-                        font = FSkinFont.get(size);
-                        if (renderer.getWrappedBounds(text, font, w).height <= Math.min(h, font.getLineHeight() * 2.1f)) { break; }
+                    if (!message.equals(frostedSource) || w != frostedW || h != frostedH) {
+                        frostedSource = message;
+                        frostedW = w;
+                        frostedH = h;
+                        frostedText = FROSTED_BREAKS.matcher(message.trim()).replaceAll("  \u00b7  ");
+                        FSkinFont font = FONT;
+                        for (int size = 14; size >= 11; size--) {
+                            font = FSkinFont.get(size);
+                            if (renderer.getWrappedBounds(frostedText, font, w).height <= Math.min(h, font.getLineHeight() * 2.1f)) { break; }
+                        }
+                        frostedFont = font;
                     }
-                    renderer.drawText(g, text, font, getForeColor(), x, y, w, h, y, h, true, Align.center, true);
+                    renderer.drawText(g, frostedText, frostedFont, getForeColor(), x, y, w, h, y, h, true, Align.center, true);
                     return;
                 }
                 renderer.drawText(g, message, FONT, getForeColor(), x, y, w, h, y, h, true, Align.center, true);

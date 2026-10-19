@@ -142,17 +142,25 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
         return minWidth;
     }
 
+    //scratch and constant colours for drawGlass, so a frame allocates nothing (render thread only)
+    private static final Color GLASS_HOVER = new Color(1f, 1f, 1f, 0.08f);
+    private static final Color GLASS_DIVIDER = new Color(1f, 1f, 1f, 0.10f);
+    private static final Color GLASS_TEXT_DIM = new Color(1f, 1f, 1f, 0.6f);
+    private static final Color GLASS_GLOW_TOP = new Color(), GLASS_GLOW_BOTTOM = new Color(), GLASS_LINE = new Color();
+
     //frosted look: no filled block or border, a soft glow under the open tab with a thin accent line
     private void drawGlass(Graphics g) {
         final float w = getWidth(), h = getHeight();
         final boolean open = dropDown.isVisible();
         final Color accent = getSelBackColor().getColor();
         if (open) {
-            g.fillGradientRect(new Color(accent.r, accent.g, accent.b, 0f),
-                    new Color(accent.r, accent.g, accent.b, 0.45f), true, 0, 0, w, h);
-            g.fillRect(new Color(accent.r, accent.g, accent.b, 1f), 0, h - Utils.scale(2), w, Utils.scale(2));
+            GLASS_GLOW_TOP.set(accent.r, accent.g, accent.b, 0f);
+            GLASS_GLOW_BOTTOM.set(accent.r, accent.g, accent.b, 0.45f);
+            GLASS_LINE.set(accent.r, accent.g, accent.b, 1f);
+            g.fillGradientRect(GLASS_GLOW_TOP, GLASS_GLOW_BOTTOM, true, 0, 0, w, h);
+            g.fillRect(GLASS_LINE, 0, h - Utils.scale(2), w, Utils.scale(2));
         } else if (isHovered()) {
-            g.fillRect(new Color(1f, 1f, 1f, 0.08f), 0, 0, w, h);
+            g.fillRect(GLASS_HOVER, 0, 0, w, h);
         }
         if (flashStartMs > 0) { //unread message flash
             long elapsed = System.currentTimeMillis() - flashStartMs;
@@ -164,7 +172,7 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
             }
         }
         if (index < menuBar.getTabCount() - 1) { //faint divider
-            g.drawLine(SEPARATOR_WIDTH, new Color(1f, 1f, 1f, 0.10f), w, h / 4, w, h - h / 4);
+            g.drawLine(SEPARATOR_WIDTH, GLASS_DIVIDER, w, h / 4, w, h - h / 4);
         }
         final float x = PADDING, y = PADDING, tw = w - 2 * PADDING, th = h - 2 * PADDING;
         if (iconOnly) {
@@ -173,7 +181,7 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
             float scaleH = scaleW * 0.6f;
             g.drawImage(icon, x + tw / 2 - scaleW / 2, y + th / 2 - scaleH / 2, scaleW, scaleH);
         } else {
-            g.drawText(text, FONT, open ? Color.WHITE : new Color(1f, 1f, 1f, 0.6f), x, y, tw, th, false, Align.center, true);
+            g.drawText(text, FONT, open ? Color.WHITE : GLASS_TEXT_DIM, x, y, tw, th, false, Align.center, true);
         }
         drawUnreadBadge(g, unreadCount, w);
     }

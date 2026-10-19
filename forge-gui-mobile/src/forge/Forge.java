@@ -55,12 +55,7 @@ import forge.screens.match.MatchScreen;
 import forge.screens.settings.CardImageBrowserScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDialog;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FGestureAdapter;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FOverlay;
+import forge.toolbox.*;
 import forge.util.*;
 import io.sentry.ScopeType;
 import io.sentry.Sentry;
@@ -270,19 +265,16 @@ public class Forge implements ApplicationListener {
             Runnable runnable = () -> {
                 safeToClose = false;
                 ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
+                FModel.progressCeiling = 850; //the card databases fill the bar to 85%, the steps below take it from there
                 FModel.initialize(getSplashScreen().getProgressBar(), null);
-                int value = getSplashScreen().getProgressBar().getValue() / 100;
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
-                getSplashScreen().getProgressBar().setValue(getSplashScreen().getProgressBar().getValue() + value);
+                splashStep(getLocalizer().getMessage("lblLoadingFonts"), 850);
                 FSkinFont.preloadAll(locale);
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
-                getSplashScreen().getProgressBar().setValue(getSplashScreen().getProgressBar().getValue() + value);
+                splashStep(getLocalizer().getMessage("lblLoadingCardTranslations"), 900);
                 CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPrepareDatabase"));
-                getSplashScreen().getProgressBar().setValue(getSplashScreen().getProgressBar().getValue() + value);
+                splashStep(getLocalizer().getMessage("lblPrepareDatabase"), 940);
                 Gdx.app.postRunnable(this::afterDbLoaded);
             };
             //see if app or assets need updating
@@ -441,12 +433,24 @@ public class Forge implements ApplicationListener {
             e.printStackTrace();
         }
     }
+    //Moves the splash bar forward (never back). Goes through the EDT so it stays in order with the FModel progress
+    //updates, which are posted there too, instead of racing them from the loader thread. A null description keeps the old one.
+    private void splashStep(final String description, final int value) {
+        FThreads.invokeInEdtLater(() -> {
+            final SplashScreen splash = getSplashScreen();
+            if (splash == null) { return; }
+            final FProgressBar bar = splash.getProgressBar();
+            if (description != null) { bar.setDescription(description); }
+            bar.setMaximum(1000);
+            if (value > bar.getValue()) { bar.setValue(value); }
+        });
+    }
     protected void afterDbLoaded() {
         if (GuiBase.isAndroid() && autoCache)
             getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + " - Detected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
         else
             getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
-        getSplashScreen().getProgressBar().setValue(1000);
+        splashStep(null, 970); //skin and drafts still have to load, so do not show 100% yet
         //override transition & title bg
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
@@ -475,9 +479,12 @@ public class Forge implements ApplicationListener {
             FThreads.invokeInBackgroundThread(() -> {
                 //load Drafts
                 preloadBoosterDrafts();
+                splashStep(null, 1000);
+                final long giveUpAt = System.currentTimeMillis() + 2000; //never hold the splash if the bar cannot settle (no frames drawn, odd maximum)
                 Timer.schedule(new Timer.Task() {
                     @Override public void run() {
-                        if (!getSplashScreen().isBarSettled()) { Timer.schedule(this, 0.03f); return; }
+                        final SplashScreen splash = getSplashScreen();
+                        if (splash != null && !splash.isBarSettled() && System.currentTimeMillis() < giveUpAt) { Timer.schedule(this, 0.03f); return; }
                         Gdx.graphics.requestRendering();
                         Gdx.app.postRunnable(() -> {
                             if (selector.equals("Adventure")) {

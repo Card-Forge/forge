@@ -376,6 +376,7 @@ public class VStack extends FDropDown {
     public class StackInstanceDisplay extends FDisplayObject {
         public final StackItemView stackInstance;
         private final Color foreColor, backColor, backColor2; //backColor2: the far end of the gradient on glass cards
+        private Color glassStart, glassEnd; //the frosted gradient, built on the first glass draw
         private String text;
         private float preferredHeight;
         private final Rectangle cardBounds = new Rectangle(0, 0, 0, 0);
@@ -400,8 +401,10 @@ public class VStack extends FDropDown {
             Color end = backColor; //multicolour cards blend from their first colour to their last
             if (!isFaceDown) {
                 final List<DetailColors> all = CardDetailUtil.getBorderColors(card.getCurrentState(), true);
-                final DetailColors last = all.get(all.size() - 1);
-                end = FSkinColor.fromRGB(last.r, last.g, last.b);
+                if (!all.isEmpty()) {
+                    final DetailColors last = all.get(all.size() - 1);
+                    end = FSkinColor.fromRGB(last.r, last.g, last.b);
+                }
             }
             backColor2 = end;
             foreColor = VPlayerPanel.isFrosted() ? Color.WHITE : FSkinColor.getHighContrastColor(backColor); //glass cards are dark
@@ -523,10 +526,12 @@ public class VStack extends FDropDown {
             final boolean glass = VPlayerPanel.isFrosted();
             final Color borderColor = picked ? FSelectionBox.CHOSEN_COLOR : isHovered() ? Color.GRAY : glass ? GLASS_EDGE : Color.BLACK;
             if (glass) { //frosted glass card: lively translucent colour gradient, outlined only when hovered or picked
-                final Color c1 = glassTint(backColor, 0.80f);
-                final Color c2 = backColor2.equals(backColor) ? glassTint(backColor, 0.50f) : glassTint(backColor2, 0.80f);
+                if (glassStart == null) { //the card colours never change, so the tints are built once, not every frame
+                    glassStart = glassTint(backColor, 0.80f);
+                    glassEnd = backColor2.equals(backColor) ? glassTint(backColor, 0.50f) : glassTint(backColor2, 0.80f);
+                }
                 g.fillRect(GLASS_BASE, x, y, w, h);
-                g.fillGradientRect(c1, c2, false, x, y, w, h);
+                g.fillGradientRect(glassStart, glassEnd, false, x, y, w, h);
                 if (picked || isHovered()) {
                     g.drawRect(Math.max(1f, Utils.scale(1.5f)), picked ? FSelectionBox.CHOSEN_COLOR : FDropDown.getBorderColor().getColor(), x, y, w, h);
                 }

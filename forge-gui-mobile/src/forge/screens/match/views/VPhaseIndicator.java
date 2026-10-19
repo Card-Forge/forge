@@ -107,6 +107,7 @@ public class VPhaseIndicator extends FContainer {
     private static final Color COMPACT_STOPS_EDGE = new Color(1f, 1f, 1f, 0.12f);
     private static final Color COMPACT_BAND_ON = new Color(1f, 1f, 1f, 0.16f);
     private static final Color COMPACT_BAND = new Color(1f, 1f, 1f, 0.07f);
+    private static final Color FROST_FILL = new Color(), FROST_TEXT = new Color(); //scratch colours for the stop labels, render thread only
 
     private static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
         final boolean adv = Forge.isMobileAdventureMode;
@@ -475,15 +476,16 @@ public class VPhaseIndicator extends FContainer {
                 // Skip the caption when marked — chevron replaces the phase abbreviation.
             } else if (VPlayerPanel.isFrosted()) { //modern: soft translucent cells, the stop colour tints them
                 final Color tint = getPhaseColor(active, stopAtPhase).getColor();
-                final Color fill;
-                if (active && stopAtPhase) { fill = new Color(tint.r, tint.g, tint.b, 0.90f); }
-                else if (stopAtPhase) { fill = new Color(tint.r, tint.g, tint.b, 0.40f); }
-                else if (active) { fill = new Color(1f, 1f, 1f, 0.28f); }
-                else { fill = new Color(1f, 1f, 1f, 0.07f); }
+                if (isHovered()) { FROST_FILL.set(1f, 1f, 1f, 0.18f); }
+                else if (active && stopAtPhase) { FROST_FILL.set(tint.r, tint.g, tint.b, 0.90f); }
+                else if (stopAtPhase) { FROST_FILL.set(tint.r, tint.g, tint.b, 0.40f); }
+                else if (active) { FROST_FILL.set(1f, 1f, 1f, 0.28f); }
+                else { FROST_FILL.set(1f, 1f, 1f, 0.07f); }
                 final float gap = Math.max(1f, Utils.scale(1));
-                g.fillRect(isHovered() ? new Color(1f, 1f, 1f, 0.18f) : fill, x, gap, w, h - 2 * gap);
-                final Color text = active && stopAtPhase ? Color.BLACK : new Color(1f, 1f, 1f, active || stopAtPhase ? 0.95f : 0.55f);
-                g.drawText(caption, font, text, x, 0, w, h, false, Align.center, true);
+                g.fillRect(FROST_FILL, x, gap, w, h - 2 * gap);
+                if (active && stopAtPhase) { FROST_TEXT.set(Color.BLACK); }
+                else { FROST_TEXT.set(1f, 1f, 1f, active || stopAtPhase ? 0.95f : 0.55f); }
+                g.drawText(caption, font, FROST_TEXT, x, 0, w, h, false, Align.center, true);
             } else {
                 FSkinColor backColor;
                 if (active && stopAtPhase) {
