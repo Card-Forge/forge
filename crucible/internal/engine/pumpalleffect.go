@@ -85,11 +85,13 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return nil
 	}
 
-	permanent, untilNextTurn := false, false
+	permanent, untilNextTurn, perpetual := false, false, false
 	if d, ok := a.Params.Param("Duration"); ok {
 		switch d {
 		case "Permanent":
 			permanent = true
+		case "Perpetual":
+			permanent, perpetual = true, true
 		case "UntilYourNextTurn":
 			// SpellAbilityEffect.addUntilCommand (:980-981), as Pump's.
 			permanent, untilNextTurn = true, true
@@ -109,6 +111,9 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	grant, err := pumpKeywords("PumpAll", a.Params)
 	if err != nil {
 		return err
+	}
+	if perpetual && (len(grant.hidden) > 0 || grant.switched) {
+		return fmt.Errorf("engine: PumpAll: Duration$ Perpetual with a HIDDEN keyword not resolvable yet")
 	}
 	if power == 0 && toughness == 0 && grant.empty() {
 		return nil
@@ -141,7 +146,7 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 				g.pumps = append(g.pumps, pumpRecord{
 					Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
 					Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
-					HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
+					HasUntil: untilNextTurn, UntilTurnOf: a.Controller, Perpetual: perpetual,
 				})
 			}
 		}

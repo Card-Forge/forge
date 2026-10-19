@@ -133,11 +133,13 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	// ends it with a command on the host (addUntilCommand,
 	// SpellAbilityEffect.java:1007-1017); checkValidDuration runs first
 	// (PumpEffect.java:271).
-	permanent, hostBound, untilNextTurn := false, "", false
+	permanent, hostBound, untilNextTurn, perpetual := false, "", false, false
 	if d, ok := a.Params.Param("Duration"); ok {
 		switch {
 		case d == "Permanent":
 			permanent = true
+		case d == "Perpetual":
+			permanent, perpetual = true, true
 		case d == "UntilYourNextTurn":
 			// SpellAbilityEffect.addUntilCommand: the untap phase of the
 			// activator's next turn (PhaseHandler.java:252).
@@ -173,6 +175,11 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return nil
 	}
 	grant.keywords = keywords
+	if perpetual && (len(grant.hidden) > 0 || grant.switched) {
+		// Java keeps HIDDEN keywords out of the perpetual list
+		// (PumpEffect.java:40-50, :82), so they would not survive a zone change.
+		return fmt.Errorf("engine: Pump: Duration$ Perpetual with a HIDDEN keyword not resolvable yet")
+	}
 	players, err := g.pumpPlayers(a, grant)
 	if err != nil {
 		return err
@@ -235,7 +242,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		}
 		g.pumps = append(g.pumps, pumpRecord{
 			Timestamp: timestamp, Keywords: grant.keywords, OnPlayer: true, Player: p,
-			Permanent: permanent, HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
+			// A Perpetual keyword pump of a player wears off at end of turn
+			// (PumpEffect.java:135 lacks the `!perpetual` the card branch has).
+			Permanent: permanent && !perpetual, HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
 		})
 	}
 	for _, cid := range cards {
@@ -259,7 +268,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		g.pumps = append(g.pumps, pumpRecord{
 			Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
 			Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
-			HasUntil: untilNextTurn, UntilTurnOf: a.Controller,
+			HasUntil: untilNextTurn, UntilTurnOf: a.Controller, Perpetual: perpetual,
 		})
 		if hostBound != "" {
 			g.registerHostBoundEnd(source, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}, hostBound)

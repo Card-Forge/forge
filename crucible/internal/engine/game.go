@@ -447,6 +447,11 @@ type pumpRecord struct {
 	// Permanent so cleanup keeps it.
 	HasUntil    bool
 	UntilTurnOf PlayerID
+	// Perpetual is Duration$ Perpetual: the boost and keywords live on the
+	// card for good, in any zone, and survive every zone change (Card.
+	// perpetual, re-applied by GameAction.java:265-266). clearPumps keeps it.
+	// Always Permanent too, so cleanup keeps it.
+	Perpetual bool
 }
 
 // endPumpsUntilTurnOf ends every Duration$ UntilYourNextTurn pump p made, as
@@ -471,11 +476,12 @@ func (g *Game) endPumpsUntilTurnOf(p PlayerID) {
 // this by checking the target's game timestamp at apply time
 // (`applyTo.equalsWithGameTimestamp(gameCard)`), a per-instance identity
 // check this port has no equivalent of; dropping the record on exit gets
-// the same real-world answer without one.
+// the same real-world answer without one. A Perpetual record is the exception:
+// Java re-applies the card's perpetual list to the new object.
 func (g *Game) clearPumps(id CardID) {
 	kept := g.pumps[:0]
 	for _, p := range g.pumps {
-		if p.Card != id {
+		if p.Card != id || p.Perpetual {
 			kept = append(kept, p)
 		}
 	}
