@@ -9,11 +9,11 @@
 
 ## Who discards
 
-| Shape                                    | Discarders                         | Java                               |
-| ---------------------------------------- | ---------------------------------- | ---------------------------------- |
-| `ValidTgts$` (`TargetMin$`/`TargetMax$`) | the ability's target players       | `getTargetPlayers`, line 125       |
-| `Defined$` only                          | `definedPlayers`, default `You`    | `getPlayers(false, "Defined", sa)` |
-| `Mode$ RevealTgtChoose`                  | `Defined$` first, else the targets | `getDefinedPlayersOrTargeted`      |
+| Shape | Discarders | Java |
+| --- | --- | --- |
+| `ValidTgts$` (`TargetMin$`/`TargetMax$`) | the ability's target players | `getTargetPlayers`, line 125 |
+| `Defined$` only | `definedPlayers`, default `You` | `getPlayers(false, "Defined", sa)` |
+| `Mode$ RevealTgtChoose` | `Defined$` first, else the targets | `getDefinedPlayersOrTargeted` |
 
 `targetedOrDefinedPlayers` (`defined.go`) is the existing `getTargetPlayers` mirror; `resolveTargets` (`targeting.go`)
 already chose the targets and read `TargetMin$`/`TargetMax$` before the ability resolves. 171 smoke refusals named
@@ -21,16 +21,16 @@ already chose the targets and read `TargetMin$`/`TargetMax$` before the ability 
 
 ## What each discards
 
-| `Mode$`                      | Lines | Cards                                                        | Chooser                             |
-| ---------------------------- | ----- | ------------------------------------------------------------ | ----------------------------------- |
-| `TgtChoose`                  | 813   | `min(NumCards$, valid)` of the hand matching `DiscardValid$` | the discarder                       |
-| `Hand`                       | 110   | the whole hand                                               | none                                |
-| `RevealYouChoose`            | 82    | as `TgtChoose`                                               | the activator                       |
-| `Random`                     | 59    | `randomSample` over the valid hand cards                     | none (game RNG)                     |
-| `Defined`                    | 25    | `DefinedCards$` (`definedCards`)                             | none                                |
-| `RevealDiscardAll`           | 13    | every valid hand card                                        | none                                |
-| `LookYouChoose`, `YouChoose` | 7, 2  | as `TgtChoose`                                               | the activator                       |
-| `RevealTgtChoose`            | 1     | as `TgtChoose`                                               | the first target (Rakdos Augermage) |
+| `Mode$` | Lines | Cards | Chooser |
+| --- | --- | --- | --- |
+| `TgtChoose` | 813 | `min(NumCards$, valid)` of the hand matching `DiscardValid$` | the discarder |
+| `Hand` | 110 | the whole hand | none |
+| `RevealYouChoose` | 82 | as `TgtChoose` | the activator |
+| `Random` | 59 | `randomSample` over the valid hand cards | none (game RNG) |
+| `Defined` | 25 | `DefinedCards$` (`definedCards`) | none |
+| `RevealDiscardAll` | 13 | every valid hand card | none |
+| `LookYouChoose`, `YouChoose` | 7, 2 | as `TgtChoose` | the activator |
+| `RevealTgtChoose` | 1 | as `TgtChoose` | the first target (Rakdos Augermage) |
 
 Counts are real `(AB|SP|DB)$ Discard` lines (1,112 total). Bounds for the choose family are
 `DiscardEffect.java:258-259`: `Optional$` or `AnyNumber$` lowers the minimum to 0, `AnyNumber$` raises the maximum to
@@ -45,12 +45,12 @@ Reveal and Look change nothing: the engine has no hidden zone (the same reading 
 
 No new `PlayerController` method. Reason: every choice fits an existing contract.
 
-| Decision                                                                      | Method                 | Why                                                                                        |
-| ----------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------ |
-| `TgtChoose` with no `DiscardValid$`/`Optional$`/`AnyNumber$`/`RevealNumber$`  | `ChooseCardsToDiscard` | the discarder's whole hand, exact count: its contract; keeps existing scripts and fixtures |
-| every other pick (`YouChoose` family, filtered, optional, any number, reveal) | `ChooseCardsForEffect` | lo..hi over an offered pool, re-checked by `checkChoice` (GO-7)                            |
-| `Optional$` confirm                                                           | `ConfirmEffect`        | Java's `confirmAction` for an `Optional$` param                                            |
-| graveyard order of two or more cards                                          | `OrderCardsForZone`    | `GameActionUtil.orderCardsByTheirOwners` on every path                                     |
+| Decision | Method | Why |
+| --- | --- | --- |
+| `TgtChoose` with no `DiscardValid$`/`Optional$`/`AnyNumber$`/`RevealNumber$` | `ChooseCardsToDiscard` | the discarder's whole hand, exact count: its contract; keeps existing scripts and fixtures |
+| every other pick (`YouChoose` family, filtered, optional, any number, reveal) | `ChooseCardsForEffect` | lo..hi over an offered pool, re-checked by `checkChoice` (GO-7) |
+| `Optional$` confirm | `ConfirmEffect` | Java's `confirmAction` for an `Optional$` param |
+| graveyard order of two or more cards | `OrderCardsForZone` | `GameActionUtil.orderCardsByTheirOwners` on every path |
 
 ## Order of events
 
@@ -69,11 +69,11 @@ with an empty hand included, a choose-mode discarder who picked nothing excluded
 `filterValid` reads an unported property as false for every card, which would discard nothing silently.
 `discardValidResolvable` checks the corpus's `DiscardValid$` values before anything moves:
 
-| Property                                      | Handling                                                                                                                                                                          |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ChosenColor` (Addle, Persecute, Crosis)      | now a `valid.go` case: `CardStateProperty.java:58-59`, the source's chosen color; refused when more than one color is chosen, since `Memory` keeps a set and Java reads the first |
-| `SharesColorWith <defined>` (Mind Extraction) | refused: no evaluator for the suffixed form                                                                                                                                       |
-| a comparison operand (`cmcEQX`)               | refused when `compareOperand` cannot resolve it                                                                                                                                   |
+| Property | Handling |
+| --- | --- |
+| `ChosenColor` (Addle, Persecute, Crosis) | now a `valid.go` case: `CardStateProperty.java:58-59`, the source's chosen color; refused when more than one color is chosen, since `Memory` keeps a set and Java reads the first |
+| `SharesColorWith <defined>` (Mind Extraction) | refused: no evaluator for the suffixed form |
+| a comparison operand (`cmcEQX`) | refused when `compareOperand` cannot resolve it |
 
 Every other property the 99 `DiscardValid$` lines name (`nonLand`, `NamedCard`, `IsRemembered`, `ChosenCard`,
 `ChosenType`, `sharesNameWith`, type names, colors) already has a case.
@@ -92,12 +92,12 @@ play ([`m6-r9-pump-kw.md`](m6-r9-pump-kw.md)); Somnophore fails in `Effect` `Dur
 
 ## Not ported
 
-| Param                       | Lines | Reason                                                                                                                     |
-| --------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------- |
-| `UnlessType$`               | 15    | `chooseCardsToDiscardUnlessType`: N cards, or fewer if one has the type; `ChooseCardsForEffect`'s lo..hi cannot express it |
-| `RememberDiscardingPlayer$` | 0     | never read by Java; rejected rather than ignored                                                                           |
-| `Defined$ X & Y`            | 3     | `getPlayers` splits on `" & "`; `definedPlayers` does not                                                                  |
-| `Player.canDiscardBy`       | —     | `StaticAbilityCantDiscard`: no `Mode$ CantDiscard` static is ported, so nothing can make it false                          |
+| Param | Lines | Reason |
+| --- | --- | --- |
+| `UnlessType$` | 15 | `chooseCardsToDiscardUnlessType`: N cards, or fewer if one has the type; `ChooseCardsForEffect`'s lo..hi cannot express it |
+| `RememberDiscardingPlayer$` | 0 | never read by Java; rejected rather than ignored |
+| `Defined$ X & Y` | 3 | `getPlayers` splits on `" & "`; `definedPlayers` does not |
+| `Player.canDiscardBy` | — | `StaticAbilityCantDiscard`: no `Mode$ CantDiscard` static is ported, so nothing can make it false |
 
 ## Tests
 

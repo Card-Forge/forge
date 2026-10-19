@@ -12,23 +12,23 @@ Read the changed code, then the rule text for anything you flag: `docs/crucible/
 
 ## Check each of these
 
-| Rule    | Violation looks like                                                                                                         |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| GO-2    | package-level `var` holding mutable state in `internal/engine/...` or `internal/carddb/...`                                  |
-| GO-3    | `sync.Mutex`, `sync.RWMutex`, `atomic` in the engine                                                                         |
-| GO-4    | `reflect` in the engine; effect dispatch not through `NewRegistry()`                                                         |
-| GO-7    | `panic` on something a card script can cause; script-reachable failure not returned as `error`                               |
-| GO-8    | `any` / `interface{}` in engine or carddb; `map[string]string` for ability params                                            |
-| GO-9    | identity by pointer instead of `CardID` / `PlayerID`                                                                         |
-| GO-12   | ranging over a bare Go `map` where order reaches game state, events or triggers (use `collect.Ordered*`)                     |
-| PORT-2  | parsing script strings at resolve time instead of using the compiled AST / typed params                                      |
-| PORT-8  | Go code compensating for a Forge bug instead of reporting it                                                                 |
+| Rule | Violation looks like |
+| --- | --- |
+| GO-2 | package-level `var` holding mutable state in `internal/engine/...` or `internal/carddb/...` |
+| GO-3 | `sync.Mutex`, `sync.RWMutex`, `atomic` in the engine |
+| GO-4 | `reflect` in the engine; effect dispatch not through `NewRegistry()` |
+| GO-7 | `panic` on something a card script can cause; script-reachable failure not returned as `error` |
+| GO-8 | `any` / `interface{}` in engine or carddb; `map[string]string` for ability params |
+| GO-9 | identity by pointer instead of `CardID` / `PlayerID` |
+| GO-12 | ranging over a bare Go `map` where order reaches game state, events or triggers (use `collect.Ordered*`) |
+| PORT-2 | parsing script strings at resolve time instead of using the compiled AST / typed params |
+| PORT-8 | Go code compensating for a Forge bug instead of reporting it |
 | effects | new `<api>effect.go` that does not reject unresolved params with an `error` before acting, or skips `subAbilityConditionMet` |
-| TEST-1  | new test in `package engine` (internal) without a why-comment; default is `package engine_test`                              |
-| TEST-8  | mocking library or fake that a different DB / RNG / controller would replace                                                 |
-| tests   | engine test with one player (game ends at first SBA check, CR 104.2a); ignored `error` returns                               |
-| REV-1   | edits outside `crucible/`, `docs/crucible/`, `.claude/`, `CLAUDE.md` not logged in `porting/upstream-patches.md`             |
-| DOC-12  | new package without `architecture/module-map.md` row; new effect without `port-log/game-state.md` section                    |
+| TEST-1 | new test in `package engine` (internal) without a why-comment; default is `package engine_test` |
+| TEST-8 | mocking library or fake that a different DB / RNG / controller would replace |
+| tests | engine test with one player (game ends at first SBA check, CR 104.2a); ignored `error` returns |
+| REV-1 | edits outside `crucible/`, `docs/crucible/`, `.claude/`, `CLAUDE.md` not logged in `porting/upstream-patches.md` |
+| DOC-12 | new package without `architecture/module-map.md` row; new effect without `port-log/game-state.md` section |
 
 Also flag plain correctness bugs you are confident of: wrong CR rule, off-by-one in counts, error swallowed, event not
 emitted where Java fires a trigger.

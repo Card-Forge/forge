@@ -18,12 +18,12 @@ line from applying to that nested move (`ReplacementHandler.java:137`, `:227-228
 replacements and the ETB triggers, since the chain's own `ChangeZone` ran them. `runReplacements` keeps the applied line
 in `Game.replacing` for the length of the chain, which is `hasRun`.
 
-| Shape                                                     | Layer   | Corpus lines                                                                                                                                                      |
-| --------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PayBeforeETB`/`SacBeforeETB` chain                       | Other   | 9: Lake of the Dead, Mox Diamond, Balduvian Trading Post, Heart of Yavimaya, Lotus Vale, Scorched Ruins, Kjeldoran Outpost, Soldevi Excavations, Sheltered Valley |
-| `ReplaceWith$ Exile` (`ChangeZone Defined$ ReplacedCard`) | Other   | 2: Containment Priest, Primeval Spawn                                                                                                                             |
-| `DBChooseOpp` + `ChangeZone GainControl$ ChosenPlayer`    | Control | 3 of 3 `Layer$ Control` Moved lines on a card: Captive Audience, Pendant of Prosperity, Xantcha, Abby                                                             |
-| `ReplacementResult$ Updated` + `LoseLife`                 | Other   | 1: Lich                                                                                                                                                           |
+| Shape | Layer | Corpus lines |
+| --- | --- | --- |
+| `PayBeforeETB`/`SacBeforeETB` chain | Other | 9: Lake of the Dead, Mox Diamond, Balduvian Trading Post, Heart of Yavimaya, Lotus Vale, Scorched Ruins, Kjeldoran Outpost, Soldevi Excavations, Sheltered Valley |
+| `ReplaceWith$ Exile` (`ChangeZone Defined$ ReplacedCard`) | Other | 2: Containment Priest, Primeval Spawn |
+| `DBChooseOpp` + `ChangeZone GainControl$ ChosenPlayer` | Control | 3 of 3 `Layer$ Control` Moved lines on a card: Captive Audience, Pendant of Prosperity, Xantcha, Abby |
+| `ReplacementResult$ Updated` + `LoseLife` | Other | 1: Lich |
 
 - The entering card is matched as it would exist on the battlefield under the player it enters for (`card.controller`
   set for the check), so a `ValidCard$ Card.Self` line is read off a card in hand, on the stack or in a graveyard.
@@ -43,23 +43,23 @@ exiled as the copy ([`layers-n-copy.md`](layers-n-copy.md#the-copy-layer-runs-be
 Fixture verbs added: `queue cardchoice none` (an empty pick), `queue playerchoice <p>`, `queue colorchoice <c>`,
 `queue option <n>`.
 
-| Scenario                                                               | Proves                                                     |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `replacement-moved-lake-of-the-dead-sacrifices-a-swamp`                | sacrifice, then the chain's `ChangeZone` enters the land   |
-| `replacement-moved-lake-of-the-dead-no-swamp-goes-to-the-graveyard`    | X is 0: graveyard, land drop still used                    |
-| `replacement-moved-mox-diamond-discards-a-land`                        | `Optional$ Discard`, `RememberDiscarded$`, cast from stack |
-| `replacement-moved-mox-diamond-declined-goes-to-the-graveyard`         | empty pick: graveyard                                      |
-| `replacement-moved-scorched-ruins-sacrifices-two-untapped-lands`       | `Amount$ 2`, the entering land is not a candidate          |
-| `replacement-moved-scorched-ruins-with-one-land-goes-to-the-graveyard` | `StrictAmount$`: nothing sacrificed                        |
-| `replacement-moved-sheltered-valley-sacrifices-the-other-valley`       | `SacrificeAll` before the new Valley is in play            |
-| `replacement-moved-containment-priest-exiles-a-reanimated-creature`    | not cast: exiled instead of entering                       |
-| `replacement-moved-containment-priest-lets-a-cast-creature-enter`      | `!wasCast` fails for a cast spell                          |
-| `replacement-moved-primeval-spawn-reanimated-is-exiled`                | self line read from the graveyard                          |
-| `replacement-moved-primeval-spawn-cast-for-mana-enters`                | `CastSa Spell.ManaSpent EQ0` fails                         |
-| `replacement-moved-captive-audience-enters-under-an-opponent`          | Control layer, `GainControl$ ChosenPlayer`                 |
-| `replacement-moved-pendant-of-prosperity-enters-under-an-opponent`     | the same with `DBCleanup`                                  |
-| `replacement-moved-lich-loses-all-life-as-it-enters`                   | `Updated`: loses life, then enters, survives at 0          |
-| `replacement-moved-lich-at-seven-life-enters-at-zero`                  | `LifeTotal` read when the line runs                        |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-moved-lake-of-the-dead-sacrifices-a-swamp` | sacrifice, then the chain's `ChangeZone` enters the land |
+| `replacement-moved-lake-of-the-dead-no-swamp-goes-to-the-graveyard` | X is 0: graveyard, land drop still used |
+| `replacement-moved-mox-diamond-discards-a-land` | `Optional$ Discard`, `RememberDiscarded$`, cast from stack |
+| `replacement-moved-mox-diamond-declined-goes-to-the-graveyard` | empty pick: graveyard |
+| `replacement-moved-scorched-ruins-sacrifices-two-untapped-lands` | `Amount$ 2`, the entering land is not a candidate |
+| `replacement-moved-scorched-ruins-with-one-land-goes-to-the-graveyard` | `StrictAmount$`: nothing sacrificed |
+| `replacement-moved-sheltered-valley-sacrifices-the-other-valley` | `SacrificeAll` before the new Valley is in play |
+| `replacement-moved-containment-priest-exiles-a-reanimated-creature` | not cast: exiled instead of entering |
+| `replacement-moved-containment-priest-lets-a-cast-creature-enter` | `!wasCast` fails for a cast spell |
+| `replacement-moved-primeval-spawn-reanimated-is-exiled` | self line read from the graveyard |
+| `replacement-moved-primeval-spawn-cast-for-mana-enters` | `CastSa Spell.ManaSpent EQ0` fails |
+| `replacement-moved-captive-audience-enters-under-an-opponent` | Control layer, `GainControl$ ChosenPlayer` |
+| `replacement-moved-pendant-of-prosperity-enters-under-an-opponent` | the same with `DBCleanup` |
+| `replacement-moved-lich-loses-all-life-as-it-enters` | `Updated`: loses life, then enters, survives at 0 |
+| `replacement-moved-lich-at-seven-life-enters-at-zero` | `LifeTotal` read when the line runs |
 
 ## Not landed from the Moved remainder
 
@@ -89,10 +89,10 @@ attached to does nothing (`Card.java:3929`), otherwise `Game.Attach` and then `a
 a card to a card calls it (`attachEffect`, `attachObject`, `attachActivated`, `tokenEffect`). Player hosts
 (`AttachToPlayer`) are not run through it: no corpus `Attached` line has a player `ValidTarget$`.
 
-| Scenario                                                                   | Proves                                                 |
-| -------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `replacement-attached-sanctuary-blade-protects-from-the-chosen-color`      | red chosen as it attaches: a Bolt on the Bears fizzles |
-| `replacement-attached-sanctuary-blade-protects-only-from-the-chosen-color` | green chosen: the Bolt kills the 4/2                   |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-attached-sanctuary-blade-protects-from-the-chosen-color` | red chosen as it attaches: a Bolt on the Bears fizzles |
+| `replacement-attached-sanctuary-blade-protects-only-from-the-chosen-color` | green chosen: the Bolt kills the 4/2 |
 
 Psychic Paper is ported ([`m5-q-attached.md`](m5-q-attached.md)). Not done: Paleontologist's Pick-Axe (its back face,
 Dinosaur Headdress, needs `ExiledWith` and craft).
@@ -102,12 +102,12 @@ Dinosaur Headdress, needs `ExiledWith` and craft).
 The fixture format gained `|Transformed` (`GameState.java:360-366`, `:1346`): `Game.Transform` and
 `Card.InTransformedState`, so a transformed permanent loads and dumps by its front face's name.
 
-| Scenario                                                                     | Proves                                                       |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `replacement-transform-zenos-chooses-an-opponent-as-it-becomes-shinryu`      | `Event$ Transform` `ChoosePlayer` runs once Zenos is Shinryu |
-| `replacement-transform-zenos-does-not-transform-when-another-creature-dies`  | `ChosenCardStrict`: another death does not transform         |
-| `replacement-turn-face-up-aquamorph-entity-chooses-one-power-five-toughness` | `GenericChoice` branch 0 (1/5) survives a Bolt               |
-| `replacement-turn-face-up-aquamorph-entity-chooses-five-power-one-toughness` | branch 1 (5/1) dies to it                                    |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-transform-zenos-chooses-an-opponent-as-it-becomes-shinryu` | `Event$ Transform` `ChoosePlayer` runs once Zenos is Shinryu |
+| `replacement-transform-zenos-does-not-transform-when-another-creature-dies` | `ChosenCardStrict`: another death does not transform |
+| `replacement-turn-face-up-aquamorph-entity-chooses-one-power-five-toughness` | `GenericChoice` branch 0 (1/5) survives a Bolt |
+| `replacement-turn-face-up-aquamorph-entity-chooses-five-power-one-toughness` | branch 1 (5/1) dies to it |
 
 Not done:
 
@@ -133,10 +133,10 @@ line was skipped silently.
   chain (the 17 "different `DB$` API" lines). A `Replace…` effect that cannot run keeps the old silent skip, since one
   that ran and changed nothing looks the same.
 
-| Scenario                                                               | Proves                                              |
-| ---------------------------------------------------------------------- | --------------------------------------------------- |
-| `replacement-draw-laboratory-maniac-wins-from-an-empty-library`        | `WinsGame` replaces the draw before the 704.5b loss |
-| `replacement-draw-laboratory-maniac-with-cards-left-draws-normally`    | `IsPresent$ ... EQ0` gate                           |
-| `replacement-draw-blood-scrivener-hellbent-draws-two-and-loses-life`   | chained substitute, `hasRun` for the nested draws   |
-| `replacement-gain-life-rain-of-gore-turns-a-spell-gain-into-life-loss` | spell gain becomes life loss                        |
-| `replacement-gain-life-rain-of-gore-leaves-lifelink-alone`             | lifelink has no `SourceSA`                          |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-draw-laboratory-maniac-wins-from-an-empty-library` | `WinsGame` replaces the draw before the 704.5b loss |
+| `replacement-draw-laboratory-maniac-with-cards-left-draws-normally` | `IsPresent$ ... EQ0` gate |
+| `replacement-draw-blood-scrivener-hellbent-draws-two-and-loses-life` | chained substitute, `hasRun` for the nested draws |
+| `replacement-gain-life-rain-of-gore-turns-a-spell-gain-into-life-loss` | spell gain becomes life loss |
+| `replacement-gain-life-rain-of-gore-leaves-lifelink-alone` | lifelink has no `SourceSA` |

@@ -30,32 +30,32 @@ chain's fallthrough both resolve a bare word the same way in Java, so one method
 
 ## Deviations from Java
 
-| Deviation                                                                    | Reason                                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The vocabulary is a `*Registry` passed in, not `CardType.Constant`'s statics | `Constant` is a mutable static guarded by a `LOADED` flag — the exact singleton shape GO-2 bans. One immutable registry is shared by every game instead                                                   |
-| Multiword subtypes match longest-first                                       | Java takes the first `startsWith` hit from a `HashSet`, so the result depends on hash order. Iteration order is load-bearing here (GO-12)                                                                 |
-| `Parse` returns no error                                                     | No type line can fail. Nothing is dropped either: `CardType.parse` adds each word with `add()`, which never calls `sanisfySubtypes`, so Forge's own database holds `Contraption` and `Killbot` as written |
-| Core and supertypes are bitmasks; subtypes stay an ordered slice             | Java uses `EnumSet` (iterates in declaration order) and `LinkedHashSet` (iterates in insertion order). Bitmask plus slice reproduces both, and `Line` stays copyable                                      |
-| `Line` is immutable, and `Parse` is the only constructor                     | Java's `CardType` is mutable, with `add`, `remove`, `clear` and a `calculatedType` cache invalidated on every write. Static card data never changes after load (PORT-2)                                   |
+| Deviation | Reason |
+| --- | --- |
+| The vocabulary is a `*Registry` passed in, not `CardType.Constant`'s statics | `Constant` is a mutable static guarded by a `LOADED` flag — the exact singleton shape GO-2 bans. One immutable registry is shared by every game instead |
+| Multiword subtypes match longest-first | Java takes the first `startsWith` hit from a `HashSet`, so the result depends on hash order. Iteration order is load-bearing here (GO-12) |
+| `Parse` returns no error | No type line can fail. Nothing is dropped either: `CardType.parse` adds each word with `add()`, which never calls `sanisfySubtypes`, so Forge's own database holds `Contraption` and `Killbot` as written |
+| Core and supertypes are bitmasks; subtypes stay an ordered slice | Java uses `EnumSet` (iterates in declaration order) and `LinkedHashSet` (iterates in insertion order). Bitmask plus slice reproduces both, and `Line` stays copyable |
+| `Line` is immutable, and `Parse` is the only constructor | Java's `CardType` is mutable, with `add`, `remove`, `clear` and a `calculatedType` cache invalidated on every write. Static card data never changes after load (PORT-2) |
 
 ## Not ported yet
 
-| Java                                                                          | When                                                                                          |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `allCreatureTypes`, `excludedCreatureSubtypes`, and the `(All except X)` form | Changeling and type-changing effects, M4-M6                                                   |
-| `getTypeWithChanges`, `ICardChangedType`, `CardChangedType`                   | The continuous-effect layer system, M5                                                        |
-| `add`, `remove`, `setCreatureTypes`, `clear`                                  | Same — mutation only happens to a card in play                                                |
-| `isOutlaw`, `isParty` and their `OUTLAW_TYPES` / `PARTY_TYPES` sets           | The effects that ask, M6                                                                      |
-| `getSortedSubTypes`, `compareTo`, `toGamePieceType`                           | Deck editor and non-constructed formats; out of scope (PORT-6)                                |
-| Deciding what the 24 corpus subtypes absent from `TypeLists.txt` mean         | M4. The database keeps them; the vocabulary only decides which survive a type-changing effect |
+| Java | When |
+| --- | --- |
+| `allCreatureTypes`, `excludedCreatureSubtypes`, and the `(All except X)` form | Changeling and type-changing effects, M4-M6 |
+| `getTypeWithChanges`, `ICardChangedType`, `CardChangedType` | The continuous-effect layer system, M5 |
+| `add`, `remove`, `setCreatureTypes`, `clear` | Same — mutation only happens to a card in play |
+| `isOutlaw`, `isParty` and their `OUTLAW_TYPES` / `PARTY_TYPES` sets | The effects that ask, M6 |
+| `getSortedSubTypes`, `compareTo`, `toGamePieceType` | Deck editor and non-constructed formats; out of scope (PORT-6) |
+| Deciding what the 24 corpus subtypes absent from `TypeLists.txt` mean | M4. The database keeps them; the vocabulary only decides which survive a type-changing effect |
 
 ## Null decisions
 
-| Java                                                          | Go                                                                      |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `CoreType.getEnum` / `Supertype.getEnum` return `null`        | `(CoreType, bool)` and `(Supertype, bool)`                              |
-| `getMultiwordType` returns `null` when no multiword type fits | `(string, bool)`                                                        |
-| A missing registry                                            | Panic, not an error: no card script can cause it, so it is a bug (GO-7) |
+| Java | Go |
+| --- | --- |
+| `CoreType.getEnum` / `Supertype.getEnum` return `null` | `(CoreType, bool)` and `(Supertype, bool)` |
+| `getMultiwordType` returns `null` when no multiword type fits | `(string, bool)` |
+| A missing registry | Panic, not an error: no card script can cause it, so it is a bug (GO-7) |
 
 ## Pinned quirks (PORT-7)
 

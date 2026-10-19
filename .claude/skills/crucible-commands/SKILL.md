@@ -7,7 +7,7 @@ description: Every build, test, gate, lint, smoke-probe, landporter, registry-ge
 
 ```bash
 # Markdown — both required before every commit (DOC-14, DOC-15)
-prettier --write .            # format; .prettierignore excludes all upstream Forge files
+prettier --write .            # format; .prettierignore excludes upstream Forge files and Claude-only docs (DOC-14)
 prettier --check .            # CI gate
 npx markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"   # semantic lint
 ```

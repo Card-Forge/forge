@@ -7,13 +7,13 @@
 A `TargetMin$`/`TargetMax$` that names an SVar is read while the spell is cast (`resolveNamedAmount`), so an SVar the
 engine could not resolve made the cast fail without a word. Each shape below now resolves.
 
-| Amount                                                               | Cards                                                                          | Java                          |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------- |
-| `PlayerCountPlayers$Amount/Plus.MaxPermanents`                       | Aurelia's Fury, Conflagrate, Meteor Shower, Rolling Thunder, Avacyn's Judgment | `AbilityUtils.java:3431-3434` |
-| `Count$LastStateBattlefieldWithFallback <valid>` / `...Graveyard...` | Jaws of Stone, Reap, Volcanic Wind, Aether Burst                               | `AbilityUtils.java:1804-1846` |
-| `Count$Kicked.<SVar>.<n>`                                            | Divine Resilience, The Eagles Are Coming!                                      | `AbilityUtils.java:1695-1698` |
-| `PlayerCountPropertyYou$AttractionsVisitedThisTurn`                  | Black Hole                                                                     | `AbilityUtils.java:3683`      |
-| `Count$TotalDamageDoneByThisTurn`                                    | Brightflame's life gain                                                        | `AbilityUtils.java:2400`      |
+| Amount | Cards | Java |
+| --- | --- | --- |
+| `PlayerCountPlayers$Amount/Plus.MaxPermanents` | Aurelia's Fury, Conflagrate, Meteor Shower, Rolling Thunder, Avacyn's Judgment | `AbilityUtils.java:3431-3434` |
+| `Count$LastStateBattlefieldWithFallback <valid>` / `...Graveyard...` | Jaws of Stone, Reap, Volcanic Wind, Aether Burst | `AbilityUtils.java:1804-1846` |
+| `Count$Kicked.<SVar>.<n>` | Divine Resilience, The Eagles Are Coming! | `AbilityUtils.java:1695-1698` |
+| `PlayerCountPropertyYou$AttractionsVisitedThisTurn` | Black Hole | `AbilityUtils.java:3683` |
+| `Count$TotalDamageDoneByThisTurn` | Brightflame's life gain | `AbilityUtils.java:2400` |
 
 - `PlayerCount...$Amount` refused any operator, a guard written for the Highest/Lowest forms that Java applies twice. It
   now refuses only those.

@@ -18,14 +18,14 @@ resolves the name with `definedEntities` against the ability that is resolving w
 `valid.Matches`, players by `matchesPlayerSpec`. An LKI spelling (`RememberedLKI`, `TriggeredCardLKICopy`) reads a card
 that left the battlefield from `Game.LKI`.
 
-| Name                                                                                   | Objects                                                                               |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `Self`, `Enchanted`, `Equipped`, `Imprinted`, `ChosenCard`, `Remembered[LKI]`          | the host's own references (`definedCards`)                                            |
-| `Targeted`, `ThisTargetedCard`                                                         | the ability's targets                                                                 |
-| `ParentTarget`                                                                         | the nearest ancestor ability's targets (`Ability.parentTargets`, set per sub-ability) |
-| `Sacrificed`                                                                           | the cards the activation cost sacrificed (`paidLists`)                                |
-| `TriggeredCard[LKICopy]`                                                               | the card the trigger recorded; read only by a condition                               |
-| `DelayTriggerRemembered[LKI]`, `TriggeredAttacker`/`Blocker`/`NewCard`, `ReplacedCard` | the existing `definedCards` cases                                                     |
+| Name | Objects |
+| --- | --- |
+| `Self`, `Enchanted`, `Equipped`, `Imprinted`, `ChosenCard`, `Remembered[LKI]` | the host's own references (`definedCards`) |
+| `Targeted`, `ThisTargetedCard` | the ability's targets |
+| `ParentTarget` | the nearest ancestor ability's targets (`Ability.parentTargets`, set per sub-ability) |
+| `Sacrificed` | the cards the activation cost sacrificed (`paidLists`) |
+| `TriggeredCard[LKICopy]` | the card the trigger recorded; read only by a condition |
+| `DelayTriggerRemembered[LKI]`, `TriggeredAttacker`/`Blocker`/`NewCard`, `ReplacedCard` | the existing `definedCards` cases |
 
 ## Fails closed
 

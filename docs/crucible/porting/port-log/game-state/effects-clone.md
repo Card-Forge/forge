@@ -24,13 +24,13 @@ trigger/ability/static/replacement scans, `Def.Faces[0].Amounts`), and `TypeMod`
 `ControlMod` fold over it. Face-down cards (`faceUpDef`) and transformed ones (`frontDef`) already swap `Def`. Layer 1
 follows the same pattern, so no new layer system was needed:
 
-| Piece                             | What it holds                                                               | Why                                                                                                                         |
-| --------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `Card.copies []copyEffect`        | Copy effects in ascending timestamp; the last one's `def` is `Def`          | Java's `clonedStates`: a permanent and an until-end-of-turn copy coexist, the later wins, ending it reveals the earlier     |
-| `Card.uncopiedDef`                | `Def` as it was before the first copy                                       | What `Def` returns to when the last copy ends. Doubles as `UncopiedDef()`, the name `GameState` writes                      |
-| `copyEffect.def`                  | A per-game `*compile.Card` built once at resolution, never written again    | PORT-2: no script text is re-read; `faceDownDef` and the transformed back face already build a `*compile.Card` the same way |
-| `copyEffect.life`                 | `effectLifetime` (duration, activator, host), reused from `effecteffect.go` | Same until-command vocabulary effect cards already expire by                                                                |
-| `copyEffect.remembered/imprinted` | The copy's `Memory` as a `Duration$` copy began                             | CloneEffect's `unclone` command restores it (Death-Mask Duplicant)                                                          |
+| Piece | What it holds | Why |
+| --- | --- | --- |
+| `Card.copies []copyEffect` | Copy effects in ascending timestamp; the last one's `def` is `Def` | Java's `clonedStates`: a permanent and an until-end-of-turn copy coexist, the later wins, ending it reveals the earlier |
+| `Card.uncopiedDef` | `Def` as it was before the first copy | What `Def` returns to when the last copy ends. Doubles as `UncopiedDef()`, the name `GameState` writes |
+| `copyEffect.def` | A per-game `*compile.Card` built once at resolution, never written again | PORT-2: no script text is re-read; `faceDownDef` and the transformed back face already build a `*compile.Card` the same way |
+| `copyEffect.life` | `effectLifetime` (duration, activator, host), reused from `effecteffect.go` | Same until-command vocabulary effect cards already expire by |
+| `copyEffect.remembered/imprinted` | The copy's `Memory` as a `Duration$` copy began | CloneEffect's `unclone` command restores it (Death-Mask Duplicant) |
 
 Layering is correct by construction: a +2/+2 pump, a Layer 4 type grant and +1/+1 counters applied before the copy still
 apply over the copied values (`TestCloneLaterLayersApplyOverCopiedValues`), because they were never part of `Def`.
@@ -57,14 +57,14 @@ modal and meld cards. `cloneDef` keeps every face for `SplitFlip`/`SplitSplit`/`
 
 ### Resolution, `CloneEffect.resolve`
 
-| Step          | Params                                                                                                                                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Duration      | Absent: permanent. `UntilEndOfTurn` ends at cleanup, `UntilYourNextTurn` as the activator's turn begins, `UntilHostLeavesPlay` as the host leaves (no-op if the host is off the battlefield and stack)                   |
-| Card to copy  | `Choices$` (activator picks, in `ChoiceZone$`, `ChoiceOptional$`), else first `Defined$`, else first targeted card, else `CopyFromChosenName$` (DB lookup of the host's named card)                                      |
-| Confirm       | `Optional$` asks the host's controller (`host.getController()`, not the activator)                                                                                                                                       |
-| Becoming copy | `CloneTarget$` (`definedCards` plus `Valid <spec>`), else the target when `Choices$` chose, else the host; `ExcludeChosen$`, `CloneZone$`                                                                                |
-| Except        | `NewName$`, `KeepName$`, `AddColors$`, `SetColor$` (drops devoid and a CDA color), `NonLegendary$`, `AddTypes$`, `AddKeywords$` (`IfNew`), `SetPower$`/`SetToughness$` (drop a CDA P/T), `AddSVars$`, `GainThisAbility$` |
-| After         | `IntoPlayTapped$` taps; host's own memory cleared unless `ImprintRememberedNoCleanup$`; `Duration$` snapshot; target's memory cleared; `RememberCloneOrigin$`                                                            |
+| Step | Params |
+| --- | --- |
+| Duration | Absent: permanent. `UntilEndOfTurn` ends at cleanup, `UntilYourNextTurn` as the activator's turn begins, `UntilHostLeavesPlay` as the host leaves (no-op if the host is off the battlefield and stack) |
+| Card to copy | `Choices$` (activator picks, in `ChoiceZone$`, `ChoiceOptional$`), else first `Defined$`, else first targeted card, else `CopyFromChosenName$` (DB lookup of the host's named card) |
+| Confirm | `Optional$` asks the host's controller (`host.getController()`, not the activator) |
+| Becoming copy | `CloneTarget$` (`definedCards` plus `Valid <spec>`), else the target when `Choices$` chose, else the host; `ExcludeChosen$`, `CloneZone$` |
+| Except | `NewName$`, `KeepName$`, `AddColors$`, `SetColor$` (drops devoid and a CDA color), `NonLegendary$`, `AddTypes$`, `AddKeywords$` (`IfNew`), `SetPower$`/`SetToughness$` (drop a CDA P/T), `AddSVars$`, `GainThisAbility$` |
+| After | `IntoPlayTapped$` taps; host's own memory cleared unless `ImprintRememberedNoCleanup$`; `Duration$` snapshot; target's memory cleared; `RememberCloneOrigin$` |
 
 `GainThisAbility$` (24 lines) keeps "this ability" on the copy: `cloneRoot` finds the trigger, activated ability or
 replacement on the host whose compiled tree holds the resolving line, by pointer (`SpellAbility.getRootAbility`), and
@@ -92,24 +92,24 @@ through combat as a 3/3 copy of Hill Giant.
 
 ### Rejected
 
-| Param or shape                                                                                                               | Why                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `GainTextAbilities$`, `GainTextOf$`                                                                                          | No `Clone` line writes them (only Volrath's Shapeshifter's static does); refused rather than guessed                         |
-| `SetManaCost$`, `SetColorByManaCost$`                                                                                        | Mana-cost rewriting                                                                                                          |
-| `SetCreatureTypes$`, `RemoveKeywords$`, `SetLoyalty$`                                                                        | No corpus line; `RemoveCardTypes$`/`RemoveSubTypes$` resolve ([`layers-n-copy.md`](layers-n-copy.md#clones-rejected-params)) |
-| `RemoveCreatureTypes$`                                                                                                       | `getCloneStates` never reads it (PORT-8, below)                                                                              |
-| `Duration$` `UntilUnattached`, `UntilFacedown`, `UntilTargetedUntaps`, `UntilNextEndStep`                                    | Endings this port does not track                                                                                             |
-| `Choices$`/`Valid` properties `token`, `NotDefinedTargeted`, `ExiledWithSource`, `ThisTurnEntered*`, non-literal comparisons | `Matches` has no case and reads them false silently (GO-7)                                                                   |
-| A copy target outside the battlefield, or face down                                                                          | Java's clone state there is hidden or dies with the next zone change; neither is modeled                                     |
+| Param or shape | Why |
+| --- | --- |
+| `GainTextAbilities$`, `GainTextOf$` | No `Clone` line writes them (only Volrath's Shapeshifter's static does); refused rather than guessed |
+| `SetManaCost$`, `SetColorByManaCost$` | Mana-cost rewriting |
+| `SetCreatureTypes$`, `RemoveKeywords$`, `SetLoyalty$` | No corpus line; `RemoveCardTypes$`/`RemoveSubTypes$` resolve ([`layers-n-copy.md`](layers-n-copy.md#clones-rejected-params)) |
+| `RemoveCreatureTypes$` | `getCloneStates` never reads it (PORT-8, below) |
+| `Duration$` `UntilUnattached`, `UntilFacedown`, `UntilTargetedUntaps`, `UntilNextEndStep` | Endings this port does not track |
+| `Choices$`/`Valid` properties `token`, `NotDefinedTargeted`, `ExiledWithSource`, `ThisTurnEntered*`, non-literal comparisons | `Matches` has no case and reads them false silently (GO-7) |
+| A copy target outside the battlefield, or face down | Java's clone state there is hidden or dies with the next zone change; neither is modeled |
 
 ### Divergences
 
-| Where                           | Java                                                                | Here                                               |
-| ------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------- |
+| Where | Java | Here |
+| --- | --- | --- |
 | Transforming a copied permanent | Flips `backside`; setState fails; the flip shows once the copy ends | `transform` refuses; no flip (`setstateeffect.go`) |
-| Phased-out copy target          | Skipped                                                             | Phasing is not modeled                             |
-| `GameEventCardStatsChanged`     | Fired per copy and unclone                                          | No event kind                                      |
-| `setMarkedColors` (Spire)       | Copied                                                              | Marked colors are not modeled                      |
+| Phased-out copy target | Skipped | Phasing is not modeled |
+| `GameEventCardStatsChanged` | Fired per copy and unclone | No event kind |
+| `setMarkedColors` (Spire) | Copied | Marked colors are not modeled |
 
 ### Shapes not resolved
 
@@ -117,13 +117,13 @@ through combat as a 3/3 copy of Hill Giant.
 Copy-layer replacement ([`layer1-enters-as-copy.md`](layer1-enters-as-copy.md); one more, Lazotep Convert's, is
 unreachable). Blocked, by first blocker:
 
-| Shape                                                                    | Lines | Blocker                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Run as a Copy-layer replacement (`K:ETBReplacement:Copy`, `Layer$ Copy`) | 18    | [`layer1-enters-as-copy.md`](layer1-enters-as-copy.md#what-resolves)                                                                                                                                                                    |
-| `R:` replacement with `ReplaceWith$` Clone, `Event$ Transform` (Ludevic) | 1     | `replacement.go` dispatches no `Transform` replacement                                                                                                                                                                                  |
-| `Defined$`/`CloneTarget$` outside `definedCards`                         | 27    | `ParentTarget` (a sub-ability's own `ValidTgts$` is not targeted separately, `subability.go`), `TriggeredCardLKICopy`, `TriggeredTarget*`, `RememberedLKI`, `Sacrificed`, `TopOfLibrary`, `ExiledWith`, `Exiled`, `Remembered.Creature` |
-| Unported valid properties                                                | 10    | `NotDefinedTargeted`, `token`, `ExiledWithSource`, `ThisTurnEntered*`, `cmcLEY`                                                                                                                                                         |
-| Unported durations                                                       | 3     | `UntilUnattached` 2, `UntilTargetedUntaps`                                                                                                                                                                                              |
+| Shape | Lines | Blocker |
+| --- | --- | --- |
+| Run as a Copy-layer replacement (`K:ETBReplacement:Copy`, `Layer$ Copy`) | 18 | [`layer1-enters-as-copy.md`](layer1-enters-as-copy.md#what-resolves) |
+| `R:` replacement with `ReplaceWith$` Clone, `Event$ Transform` (Ludevic) | 1 | `replacement.go` dispatches no `Transform` replacement |
+| `Defined$`/`CloneTarget$` outside `definedCards` | 27 | `ParentTarget` (a sub-ability's own `ValidTgts$` is not targeted separately, `subability.go`), `TriggeredCardLKICopy`, `TriggeredTarget*`, `RememberedLKI`, `Sacrificed`, `TopOfLibrary`, `ExiledWith`, `Exiled`, `Remembered.Creature` |
+| Unported valid properties | 10 | `NotDefinedTargeted`, `token`, `ExiledWithSource`, `ThisTurnEntered*`, `cmcLEY` |
+| Unported durations | 3 | `UntilUnattached` 2, `UntilTargetedUntaps` |
 
 `Defined$ Remembered` after `RememberLKI$` (Absorb Identity) copies the remembered card's current values, not its LKI
 snapshot: `Memory` holds a `CardID`, and a card's copiable values off the battlefield are its printed ones, so this
@@ -131,10 +131,10 @@ differs only when the remembered permanent was itself a copy.
 
 ### Forge defects found (PORT-8)
 
-| Site                                                                          | Defect                                                                                                                                                                                       | Crucible meanwhile                                  |
-| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `forge-gui/res/cardsfolder/l/ludevic_necrogenius_olag_ludevics_hubris.txt:23` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so `MagicColor.fromName("blue & black")` is 0: Olag gains no color                                                          | `error`: `AddColors$ "Blue & Black" names no color` |
-| `forge-gui/res/cardsfolder/t/taskmaster_mercenary_mimic.txt:6`                | `RemoveCreatureTypes$ True` is never read by `getCloneStates` (`CardFactory.java:579-581` reads `RemoveCardTypes$`/`RemoveSubTypes$`): the copy keeps its creature types, against its Oracle | `RemoveCreatureTypes$` rejected                     |
+| Site | Defect | Crucible meanwhile |
+| --- | --- | --- |
+| `forge-gui/res/cardsfolder/l/ludevic_necrogenius_olag_ludevics_hubris.txt:23` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so `MagicColor.fromName("blue & black")` is 0: Olag gains no color | `error`: `AddColors$ "Blue & Black" names no color` |
+| `forge-gui/res/cardsfolder/t/taskmaster_mercenary_mimic.txt:6` | `RemoveCreatureTypes$ True` is never read by `getCloneStates` (`CardFactory.java:579-581` reads `RemoveCardTypes$`/`RemoveSubTypes$`): the copy keeps its creature types, against its Oracle | `RemoveCreatureTypes$` rejected |
 
 Both are card-script defects, logged in [card-script-defects.md](../../card-script-defects.md). Both lines are fixed
 upstream ([#12193](https://github.com/Card-Forge/forge/pull/12193): `AddColors$ Blue,Black`, `RemoveSubTypes$ True`), so

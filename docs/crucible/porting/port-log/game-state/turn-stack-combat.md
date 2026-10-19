@@ -165,15 +165,15 @@ A response can make a spell's target illegal before it resolves; CR 608.2b's per
 Ported from `PhaseHandler.mainGameLoop`/`mainLoopStep` (`PhaseHandler.java:1032-1160`). `AdvancePhase` stays
 bookkeeping; both walks share `advanceStep`/`beginStep` (`turn.go`), and only `driven=true` adds the parts below.
 
-| Step              | Driven turn-based action (before phase triggers)                   | Priority                                                                            | Java                               |
-| ----------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------- |
-| Untap             | unchanged                                                          | never                                                                               | `PhaseHandler.java:251`            |
-| DeclareAttackers  | `DeclareCombatAttackers`                                           | always, zero attackers included                                                     | `:305-312`                         |
-| DeclareBlockers   | `DeclareCombatBlockers`; skipped with no attackers                 | always                                                                              | `:228-233`, `:314-319`             |
-| FirstStrikeDamage | damage if `combatDamageAssigned(true)`; skipped with no attackers  | only if damage is assigned                                                          | `:321-332`                         |
-| CombatDamage      | damage if `combatDamageAssigned(false)`; skipped with no attackers | only if damage is assigned                                                          | `:334-344`                         |
-| Cleanup           | unchanged                                                          | only if its SBA check did something or the stack is non-empty; then another Cleanup | `:419-428`, `:446-450`, `:156-158` |
-| every other step  | unchanged                                                          | always                                                                              | —                                  |
+| Step | Driven turn-based action (before phase triggers) | Priority | Java |
+| --- | --- | --- | --- |
+| Untap | unchanged | never | `PhaseHandler.java:251` |
+| DeclareAttackers | `DeclareCombatAttackers` | always, zero attackers included | `:305-312` |
+| DeclareBlockers | `DeclareCombatBlockers`; skipped with no attackers | always | `:228-233`, `:314-319` |
+| FirstStrikeDamage | damage if `combatDamageAssigned(true)`; skipped with no attackers | only if damage is assigned | `:321-332` |
+| CombatDamage | damage if `combatDamageAssigned(false)`; skipped with no attackers | only if damage is assigned | `:334-344` |
+| Cleanup | unchanged | only if its SBA check did something or the stack is non-empty; then another Cleanup | `:419-428`, `:446-450`, `:156-158` |
+| every other step | unchanged | always | — |
 
 `drivenSkips` also skips turn 1's draw step in a two-player game (CR 103.7a, `:221-222`); `advance` still begins it and
 `drawStep` draws nothing. A skipped step is not begun at all: no `PhaseBegan`, no phase triggers — Java's `skipped` path
@@ -624,11 +624,11 @@ two-sided combat scenario.
 `Card.addDamageAfterPrevention` (`Card.java:6201`) and `Player.addDamageAfterPrevention` (`Player.java:656`) decide what
 damage that survived prevention does. `dealPermanentDamage` and `dealPlayerDamage` (`combatdamage.go`) port both:
 
-| Source has | Target creature (CR 120.3d)                | Target player (CR 120.3b)                  |
-| ---------- | ------------------------------------------ | ------------------------------------------ |
-| Wither     | that many -1/-1 counters, no marked damage | life loss as normal                        |
-| Infect     | as Wither                                  | that many poison counters, no life loss    |
-| Toxic N    | marked damage as normal                    | combat damage only: N more poison counters |
+| Source has | Target creature (CR 120.3d) | Target player (CR 120.3b) |
+| --- | --- | --- |
+| Wither | that many -1/-1 counters, no marked damage | life loss as normal |
+| Infect | as Wither | that many poison counters, no life loss |
+| Toxic N | marked damage as normal | combat damage only: N more poison counters |
 
 Counters go through `countersReplaced` (a Doubling Season-style replacement applies, as for `PutCounter`) and emit
 `CounterChanged`. The deathtouch flag is set whether the damage is marked or dealt as counters, and infect damage still

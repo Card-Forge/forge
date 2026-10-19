@@ -10,10 +10,10 @@ Vampire.
 
 ## Targets before costs (`activateability.go`, `chaintargets.go`)
 
-| Java                                                                      | Go                                                                                                                |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Java | Go |
+| --- | --- |
 | `PlaySpellAbility.java:675-683`: announce X, `setupTargets`, then payment | `ActivateAbility` calls `chooseAbilityTargets` after cost feasibility and the cost-card picks, before any payment |
-| `MagicStack.hasFizzled` recursion into `getSubAbility()` (`:745-751`)     | `dropIllegalTargets` walks `Ability.chainTargets`, stamps kept per link                                           |
+| `MagicStack.hasFizzled` recursion into `getSubAbility()` (`:745-751`) | `dropIllegalTargets` walks `Ability.chainTargets`, stamps kept per link |
 
 `chooseAbilityTargets` is Charm modes, `resolveTargets` and `resolveChainTargets`, shared with `pushTriggeredAbilities`;
 `Ability.targetsChosen` stops the second choice. An activated ability with no legal target now pays nothing: the
@@ -26,9 +26,9 @@ ability from fizzling, and every illegal one is removed. Charm modes' and copies
 
 ## `LoseControl$` (`controlcommands.go`)
 
-| Token                   | Java                                                         | Go                                                                          |
-| ----------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| `StaticCommandCheck`    | `Card.staticCommandList`, `GameAction.java:1180-1198`        | `Card.staticCmds` of `staticCheck`, `runStaticCommands` after the layers    |
+| Token | Java | Go |
+| --- | --- | --- |
+| `StaticCommandCheck` | `Card.staticCommandList`, `GameAction.java:1180-1198` | `Card.staticCmds` of `staticCheck`, `runStaticCommands` after the layers |
 | `UntilSourceUnattached` | `unattachCommandList`, run by `unattachFromEntity` (`:3995`) | `Card.unattachCmds`, run by `Game.Unattach`; also leaves-play and phase-out |
 
 `staticCheck` keeps the host's `Amounts`, the SVar name and the compare string: the left SVar is evaluated with the
@@ -50,14 +50,14 @@ reproduced). `goad.Timestamp` is new. Corpus: Pump 6 lines, Goad 1 (Vislor Turlo
 
 ## Delayed and static `ChangesZone` (`leftto.go`, `turnbegin.go`, `statictrigger.go`)
 
-| Piece                                                    | Go                                                                                         |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Leaves to hand or library (CR 603.6d)                    | `checkLeftToTriggers` (own, other watchers, delayed watches); `moveByEffect` calls it      |
-| Delayed watch on a bounce                                | `checkReturnedTriggers` is `checkLeftToTriggers(Hand)`, so `returnCards` fires it as well  |
-| `Origin$ Graveyard` line, dest not battlefield/graveyard | `checkLeftGraveyardTriggers`, from `moveByEffect`                                          |
-| `Static$ True` on dies, exile, hand, library, ETB, those | `Ability.staticTrigger`; `pushTriggeredAbilities` resolves them inline first               |
-| `Mode$ TurnBegin` (9 corpus lines, all static resets)    | `checkTurnBeginTriggers`, in `advanceStep` as the turn is handed over (`PhaseHandler:524`) |
-| `ThisTurnEnteredFrom_<Zone>` (`CardProperty.java:954`)   | `Card.zoneEntered/zoneEntryTurn/zoneEntryFrom`, set by `Move`/`MoveToLibraryTop`           |
+| Piece | Go |
+| --- | --- |
+| Leaves to hand or library (CR 603.6d) | `checkLeftToTriggers` (own, other watchers, delayed watches); `moveByEffect` calls it |
+| Delayed watch on a bounce | `checkReturnedTriggers` is `checkLeftToTriggers(Hand)`, so `returnCards` fires it as well |
+| `Origin$ Graveyard` line, dest not battlefield/graveyard | `checkLeftGraveyardTriggers`, from `moveByEffect` |
+| `Static$ True` on dies, exile, hand, library, ETB, those | `Ability.staticTrigger`; `pushTriggeredAbilities` resolves them inline first |
+| `Mode$ TurnBegin` (9 corpus lines, all static resets) | `checkTurnBeginTriggers`, in `advanceStep` as the turn is handed over (`PhaseHandler:524`) |
+| `ThisTurnEnteredFrom_<Zone>` (`CardProperty.java:954`) | `Card.zoneEntered/zoneEntryTurn/zoneEntryFrom`, set by `Move`/`MoveToLibraryTop` |
 
 Krovikan Vampire's chain is now whole: static dies trigger remembers, static `Origin$ Graveyard` trigger forgets, leaves
 clears, `TurnBegin` clears, `CheckSVar$ X` over `Remembered$Amount` (already read by `contextValue`), and

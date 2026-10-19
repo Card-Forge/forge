@@ -17,9 +17,9 @@ trigger strings; this port builds the same `compile.Ability` trees directly (`mo
 `earthbendReturnTrigger` already builds Earthbend's delayed triggers. Nothing is parsed at runtime (PORT-2), and the
 card needs no database entry, so every `NewGame(nil, ...)` test game can hold one.
 
-| Trigger                                                                                                        | Effect                                                    |
-| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `Mode$ Phase \| Phase$ End of Turn \| TriggerZones$ Command \| ValidPlayer$ You`                               | `DB$ Draw \| Defined$ You`                                |
+| Trigger | Effect |
+| --- | --- |
+| `Mode$ Phase \| Phase$ End of Turn \| TriggerZones$ Command \| ValidPlayer$ You` | `DB$ Draw \| Defined$ You` |
 | `Mode$ DamageDone \| ValidSource$ Creature \| ValidTarget$ You \| CombatDamage$ True \| TriggerZones$ Command` | `DB$ BecomeMonarch \| Defined$ TriggeredSourceController` |
 
 The card is an `IsEffect` Command-zone card, so `traitHosts` and `checkPhaseTriggers` already run its triggers there
@@ -36,12 +36,12 @@ stops the new player, nothing else happens and `Game.monarch` still names the pr
 
 ### New engine state
 
-| State                                                                      | Why                                                                                                                                         |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Game.monarch`, `Game.monarchBeginTurn`                                    | `Game.monarch`/`monarchBeginTurn`; the second is set as each turn begins (`PhaseHandler.java:848`) for `Mode$ BecomeMonarch`'s `BeginTurn$` |
-| `Player.monarchEffect`                                                     | The one reused card, above                                                                                                                  |
-| `Player.lossHandled`                                                       | `Game.onPlayerLost` runs once per loser; without the flag a monarch the successor cannot replace would be re-passed on every later SBA pass |
-| `Ability.triggered` (`triggeredObjects`: source, sourceController, player) | Java's triggering-objects map, the keys ported modes set. Carried to every chained sub-ability, as `TriggerRemembered` is                   |
+| State | Why |
+| --- | --- |
+| `Game.monarch`, `Game.monarchBeginTurn` | `Game.monarch`/`monarchBeginTurn`; the second is set as each turn begins (`PhaseHandler.java:848`) for `Mode$ BecomeMonarch`'s `BeginTurn$` |
+| `Player.monarchEffect` | The one reused card, above |
+| `Player.lossHandled` | `Game.onPlayerLost` runs once per loser; without the flag a monarch the successor cannot replace would be re-passed on every later SBA pass |
+| `Ability.triggered` (`triggeredObjects`: source, sourceController, player) | Java's triggering-objects map, the keys ported modes set. Carried to every chained sub-ability, as `TriggerRemembered` is |
 
 `Game.Clone` copies both `Game` fields; the `Player` and `Ability` fields are values copied with their structs.
 
@@ -49,13 +49,13 @@ stops the new player, nothing else happens and `Game.monarch` still names the pr
 and `TriggeredPlayer` off `Ability.triggered`. A trigger mode that does not record the key leaves it zero, and the
 reference is an `error` (`the trigger recorded no source`), never an empty player list. Set today:
 
-| Mode                          | Key recorded                                                                                                                        |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Mode | Key recorded |
+| --- | --- |
 | `DamageDone` (card or player) | Source = the damage source; sourceController read at damage time. Java stores an LKI copy (`TriggerDamageDone.java`'s `getLKICopy`) |
-| `BecomeMonarch`               | Player = the new monarch (`TriggerBecomeMonarch.setTriggeringObjects`)                                                              |
-| `DungeonCompleted`            | Player = who completed it (`TriggerCompletedDungeon.setTriggeringObjects`)                                                          |
-| `TakesInitiative`             | Player = who took it (`TriggerTakesInitiative.setTriggeringObjects`)                                                                |
-| `DamageDoneOnceByController`  | Source = the player whose creatures dealt the damage (`TriggerDamageDoneOnceByController.setTriggeringObjects`)                     |
+| `BecomeMonarch` | Player = the new monarch (`TriggerBecomeMonarch.setTriggeringObjects`) |
+| `DungeonCompleted` | Player = who completed it (`TriggerCompletedDungeon.setTriggeringObjects`) |
+| `TakesInitiative` | Player = who took it (`TriggerTakesInitiative.setTriggeringObjects`) |
+| `DamageDoneOnceByController` | Source = the player whose creatures dealt the damage (`TriggerDamageDoneOnceByController.setTriggeringObjects`) |
 
 A card source named as players (`Defined$ TriggeredSource` on a `DamageDone` trigger) is rejected:
 `AbilityUtils.addPlayer` over a card is a shape no ported line needs.
@@ -114,13 +114,13 @@ each room ability. Only the four `res/tokenscripts` dungeons carry the keyword; 
 golden AST is unchanged. A room without `RoomName$`, or leading to an SVar its keyword does not list, is
 `compile.ErrBadRoom` -- Java dereferences `null` on both.
 
-| Step                | Port                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Which dungeon       | The player's dungeon in the Command zone, unless its marker is on its last room -- that one is completed first. Otherwise a new one from the token table (`DB.TokenScripts`, new, sorted), `Dungeon$`'s subtype or every enterable dungeon, offered sorted by name through `ChooseOption` (Java's `chooseSingleCardFace` over a `TreeMap`) -- asked even for one option, as Java asks |
-| Enterable           | `CardRules.isEnterableDungeon` reads oracle text for "You can't enter this dungeon unless"; `compile.Face` has none, so the matching `K:` line (Undercity's only) stands in                                                                                                                                                                                                           |
-| Which room          | Empty marker: the first room. Otherwise the one `NextRoomName$` room, or the player's pick of several through `ChooseAbilitiesForEffect` over room names (Java's `chooseSingleSpellForEffect`)                                                                                                                                                                                        |
-| Enter               | `Card.CurrentRoom` set; `Mode$ RoomEntered` triggers run (`playerActionTriggerMatches`, gated on `ValidCard$` and an exact `ValidRoom$` match); `Player.VenturedThisTurn` counts up                                                                                                                                                                                                   |
-| Complete (CR 309.7) | SBA `completeFinishedDungeons`, next to `removeTokensOffBattlefield` (Java's same 704.5d loop): marker on the last room and nothing from the dungeon on the stack. The dungeon joins `Player.completedDungeons`, ceases to exist (`None`, as `exileEffect` parks an effect card), `Mode$ DungeonCompleted` triggers run                                                               |
+| Step | Port |
+| --- | --- |
+| Which dungeon | The player's dungeon in the Command zone, unless its marker is on its last room -- that one is completed first. Otherwise a new one from the token table (`DB.TokenScripts`, new, sorted), `Dungeon$`'s subtype or every enterable dungeon, offered sorted by name through `ChooseOption` (Java's `chooseSingleCardFace` over a `TreeMap`) -- asked even for one option, as Java asks |
+| Enterable | `CardRules.isEnterableDungeon` reads oracle text for "You can't enter this dungeon unless"; `compile.Face` has none, so the matching `K:` line (Undercity's only) stands in |
+| Which room | Empty marker: the first room. Otherwise the one `NextRoomName$` room, or the player's pick of several through `ChooseAbilitiesForEffect` over room names (Java's `chooseSingleSpellForEffect`) |
+| Enter | `Card.CurrentRoom` set; `Mode$ RoomEntered` triggers run (`playerActionTriggerMatches`, gated on `ValidCard$` and an exact `ValidRoom$` match); `Player.VenturedThisTurn` counts up |
+| Complete (CR 309.7) | SBA `completeFinishedDungeons`, next to `removeTokensOffBattlefield` (Java's same 704.5d loop): marker on the last room and nothing from the dungeon on the stack. The dungeon joins `Player.completedDungeons`, ceases to exist (`None`, as `exileEffect` parks an effect card), `Mode$ DungeonCompleted` triggers run |
 
 **New engine state:** `Card.CurrentRoom` (`Card.currentRoom`), `Player.VenturedThisTurn` (reset at cleanup, as
 `Player.onCleanupPhase` does), `Player.completedDungeons` (deep-copied by `Game.Clone`; nil until the first completion,
@@ -137,12 +137,12 @@ reached by the dungeons: `Count$DungeonsCompleted` and the other dungeon counts,
 **Rooms that resolve.** A room's ability is an ordinary ability of another API, so a dungeon is only as playable as its
 rooms. Each of the 30 rooms, resolved on its own with a token table holding the scripts it names:
 
-| Dungeon                 | Rooms | Resolve                                                                                  | Error (the room's own API rejects it)                                                                                                                  |
-| ----------------------- | ----: | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Lost Mine of Phandelver |     7 | Cave Entrance, Goblin Lair, Mine Tunnels, Dark Pool, Temple of Dumathoin                 | Storeroom, Fungi Cavern (`PutCounter`/`Pump` reject `ValidTgts$`)                                                                                      |
-| Undercity               |     9 | Secret Entrance, Lost Well, Trap!, Arena, Stash, Catacombs                               | Forge (`PutCounter` `ValidTgts$`), Archive (bare `DB$ Draw`: `drawEffect` has no `Defined$` default), Throne of the Dead Three (`Dig` `WithCounters$`) |
-| Tomb of Annihilation    |     5 | Trapped Entry, Cradle of the Death God                                                   | Veils of Fear, Sandfall Cell (`UnlessCost$`), Oubliette (`Sacrifice` `SacEachValid$`)                                                                  |
-| Dungeon of the Mad Mage |     9 | Yawning Portal, Dungeon Level, Goblin Bazaar, Lost Level, Deep Mines, Muiral's Graveyard | Twisted Caverns (`Pump` `ValidTgts$`), Runestone Caverns (`Play` unported), Mad Wizard's Lair (`Draw` `RememberDrawn$`)                                |
+| Dungeon | Rooms | Resolve | Error (the room's own API rejects it) |
+| --- | ---: | --- | --- |
+| Lost Mine of Phandelver | 7 | Cave Entrance, Goblin Lair, Mine Tunnels, Dark Pool, Temple of Dumathoin | Storeroom, Fungi Cavern (`PutCounter`/`Pump` reject `ValidTgts$`) |
+| Undercity | 9 | Secret Entrance, Lost Well, Trap!, Arena, Stash, Catacombs | Forge (`PutCounter` `ValidTgts$`), Archive (bare `DB$ Draw`: `drawEffect` has no `Defined$` default), Throne of the Dead Three (`Dig` `WithCounters$`) |
+| Tomb of Annihilation | 5 | Trapped Entry, Cradle of the Death God | Veils of Fear, Sandfall Cell (`UnlessCost$`), Oubliette (`Sacrifice` `SacEachValid$`) |
+| Dungeon of the Mad Mage | 9 | Yawning Portal, Dungeon Level, Goblin Bazaar, Lost Level, Deep Mines, Muiral's Graveyard | Twisted Caverns (`Pump` `ValidTgts$`), Runestone Caverns (`Play` unported), Mad Wizard's Lair (`Draw` `RememberDrawn$`) |
 
 A room that errors fails its trigger's resolution loudly, never silently; each gap is its own API's to close. The bare
 `DB$ Draw` default (Java's `getTargetPlayers` falls back to the activator) is the widest: it is not specific to rooms.
@@ -167,11 +167,11 @@ ported from `TakeInitiativeEffect.java`, `GameAction.takeInitiative` (`GameActio
 "The Initiative" is built the way "The Monarch" is (`initiativeEffectDef`, one reused card per player in
 `Player.initiativeEffect`), carrying Java's three triggers in Java's order:
 
-| Trigger                                                                                                                      | Effect                                           |
-| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Trigger | Effect |
+| --- | --- |
 | `Mode$ DamageDoneOnceByController \| ValidSource$ Player \| ValidTarget$ You \| CombatDamage$ True \| TriggerZones$ Command` | `DB$ TakeInitiative \| Defined$ TriggeredSource` |
-| `Mode$ Phase \| Phase$ Upkeep \| TriggerZones$ Command \| ValidPlayer$ You \| Secondary$ True`                               | `DB$ Venture \| Dungeon$ Undercity`              |
-| `Mode$ TakesInitiative \| ValidPlayer$ You \| TriggerZones$ Command`                                                         | `DB$ Venture \| Dungeon$ Undercity`              |
+| `Mode$ Phase \| Phase$ Upkeep \| TriggerZones$ Command \| ValidPlayer$ You \| Secondary$ True` | `DB$ Venture \| Dungeon$ Undercity` |
+| `Mode$ TakesInitiative \| ValidPlayer$ You \| TriggerZones$ Command` | `DB$ Venture \| Dungeon$ Undercity` |
 
 Java re-registers the new card's triggers (`registerActiveTrigger`) so its own TakesInitiative trigger sees the take
 that created it; this port's trigger checks walk the zones live, so the card in the Command zone is enough.

@@ -16,25 +16,25 @@ CR 901's planeswalk. Ported from `forge-game/src/main/java/forge/game/ability/ef
 `resolve`, with `Player.planeswalk`/`planeswalkTo`/`leaveCurrentPlane` (`Player.java:2641-2679`) inlined. Resolution
 order is Java's:
 
-| Step                   | Go                                                                                                                | Java                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Planechase gate        | `!g.planechaseActive` → no-op                                                                                     | `game.getActivePlanes() == null` → return (`:23`)            |
-| `Optional$`            | `controller.ConfirmEffect(activator)`; declined → no-op                                                           | `confirmAction` (`:27-30`)                                   |
-| Planeswalk replacement | any live `Event$ Planeswalk` replacement (`eachReplacement`) → error, nothing moved                               | `ReplacementType.Planeswalk` run (`:32-37`)                  |
-| Leave                  | every non-lost player in seat order: `PlaneswalkedFrom` fires, then their plane → its owner's `PlanarDeck` bottom | `for p : game.getPlayers() p.leaveCurrentPlane()` (`:39-43`) |
-| Walk                   | top of activator's `PlanarDeck` → activator's `Command`; `activePlane` set; `PlaneswalkedTo` fires                | `activator.planeswalk(sa)` (`:47`)                           |
+| Step | Go | Java |
+| --- | --- | --- |
+| Planechase gate | `!g.planechaseActive` → no-op | `game.getActivePlanes() == null` → return (`:23`) |
+| `Optional$` | `controller.ConfirmEffect(activator)`; declined → no-op | `confirmAction` (`:27-30`) |
+| Planeswalk replacement | any live `Event$ Planeswalk` replacement (`eachReplacement`) → error, nothing moved | `ReplacementType.Planeswalk` run (`:32-37`) |
+| Leave | every non-lost player in seat order: `PlaneswalkedFrom` fires, then their plane → its owner's `PlanarDeck` bottom | `for p : game.getPlayers() p.leaveCurrentPlane()` (`:39-43`) |
+| Walk | top of activator's `PlanarDeck` → activator's `Command`; `activePlane` set; `PlaneswalkedTo` fires | `activator.planeswalk(sa)` (`:47`) |
 
 Top of a `PlanarDeck` is index 0 and `Game.Move` appends to the bottom, the `Library` convention (`MoveToLibraryTop`'s
 doc comment); Java's `getZone(PlanarDeck).get(0)` and `moveTo(ZoneType.PlanarDeck, plane, -1)` match.
 
 ### Engine state (ADR-0029)
 
-| Piece                                          | Shape                                                                                                                                                                                                                                               |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Game.activePlane CardID`                      | `ActivePlane()`, `SetActivePlane(id)` (setup/fixture injection, moves nothing). `NoCard` = none. Planar controller = `Card(ActivePlane()).ZoneOwner`; no `Player` field                                                                             |
-| `Game.planechaseActive bool`                   | `PlanechaseActive()`. Set by `NewCard` the first time setup creates a card in any `PlanarDeck`, never unset: "any `PlanarDeck` non-empty after setup" without a finalize call, since `NewCard` is setup-only and real play only `Move`s cards there |
-| `Clone`                                        | copies both (value fields); `TestClonePlanechaseState`                                                                                                                                                                                              |
-| Unexported fields, exported accessors/injector | engine convention (`monarch`/`Monarch()`/`SetMonarch`); the ADR's `Game.ActivePlane`/`Game.PlanechaseActive` names are the accessors                                                                                                                |
+| Piece | Shape |
+| --- | --- |
+| `Game.activePlane CardID` | `ActivePlane()`, `SetActivePlane(id)` (setup/fixture injection, moves nothing). `NoCard` = none. Planar controller = `Card(ActivePlane()).ZoneOwner`; no `Player` field |
+| `Game.planechaseActive bool` | `PlanechaseActive()`. Set by `NewCard` the first time setup creates a card in any `PlanarDeck`, never unset: "any `PlanarDeck` non-empty after setup" without a finalize call, since `NewCard` is setup-only and real play only `Move`s cards there |
+| `Clone` | copies both (value fields); `TestClonePlanechaseState` |
+| Unexported fields, exported accessors/injector | engine convention (`monarch`/`Monarch()`/`SetMonarch`); the ADR's `Game.ActivePlane`/`Game.PlanechaseActive` names are the accessors |
 
 ### `Mode$ PlaneswalkedFrom` and `Mode$ PlaneswalkedTo` land
 
@@ -64,13 +64,13 @@ APIs.
 
 ### Corpus: 28 of 30 real `DB$ Planeswalk` lines resolve
 
-| Shape                                                                   | Lines | Status                                                                                                                                                                               |
-| ----------------------------------------------------------------------- | ----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Bare, `SubAbility$`, `SpellDescription$`, `ConditionCheckSVar$`         |    26 | resolve; mostly a phenomenon's "(Then planeswalk away from this phenomenon.)"                                                                                                        |
-| `Optional$ True` (TARDIS, Start the TARDIS)                             |     2 | resolve through `ConfirmEffect`; a no-op outside Planechase, as Java. Deviates from ADR-0029's own listed example of a shape to reject — 2 real corpus lines make it worth resolving |
-| `Defined$ Remembered` (Spatial Merging)                                 |     1 | **rejected**: walks to two planes at once                                                                                                                                            |
-| `Defined$ Remembered \| DontPlaneswalkAway$ True` (Norn's Seedcore)     |     1 | **rejected**: new plane joins the old one                                                                                                                                            |
-| `Cause$ PlanarDie` (synthetic, `Player.java:3272`; 0 card-script lines) |     — | resolves: `Cause$` only feeds the replacement's `AbilityKey.Cause`, and that path fails closed (below)                                                                               |
+| Shape | Lines | Status |
+| --- | ---: | --- |
+| Bare, `SubAbility$`, `SpellDescription$`, `ConditionCheckSVar$` | 26 | resolve; mostly a phenomenon's "(Then planeswalk away from this phenomenon.)" |
+| `Optional$ True` (TARDIS, Start the TARDIS) | 2 | resolve through `ConfirmEffect`; a no-op outside Planechase, as Java. Deviates from ADR-0029's own listed example of a shape to reject — 2 real corpus lines make it worth resolving |
+| `Defined$ Remembered` (Spatial Merging) | 1 | **rejected**: walks to two planes at once |
+| `Defined$ Remembered \| DontPlaneswalkAway$ True` (Norn's Seedcore) | 1 | **rejected**: new plane joins the old one |
+| `Cause$ PlanarDie` (synthetic, `Player.java:3272`; 0 card-script lines) | — | resolves: `Cause$` only feeds the replacement's `AbilityKey.Cause`, and that path fails closed (below) |
 
 **Rejected: `Defined$`, `DontPlaneswalkAway$`.** Both need more than one concurrent active plane (Java's
 `currentPlanes`/`activePlanes` lists grow past one). ADR-0029 chose a single `activePlane` on the premise "none found";
@@ -90,13 +90,13 @@ plane counts: it goes to the bottom first and is walked straight back to
 
 ### Not ported
 
-| Gap                                                         | Why                                                                                                                                                                                                                            |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Game-start `initPlane` (`Player.java:2693-2711`, CR 901.5)  | Match setup, not an effect; Crucible has no match setup. `SetActivePlane` injects a starting plane                                                                                                                             |
-| CR 901.6/901.10 planar controller or owner leaving the game | `Game.onPlayerLost` (`Game.java:899-986`); a lost player's plane is not moved. Leave loop skips lost players like `game.getPlayers()`                                                                                          |
-| `planeswalkedToThisTurn`                                    | No real reader among ported shapes                                                                                                                                                                                             |
-| Plane counters across a trip to the planar deck             | `Move` keeps `Counters` off-battlefield; Java builds a new card object. A revisited Mount Keralia would keep old pressure counters                                                                                             |
-| Scenario fixture                                            | `GameState.java` has no `PlanarDeck` zone key (`ZONES`, `GameState.java:53`, only `command` among the non-standard zones); a Crucible-only key would break the Java oracle's reading of the same fixture. Module tests instead |
+| Gap | Why |
+| --- | --- |
+| Game-start `initPlane` (`Player.java:2693-2711`, CR 901.5) | Match setup, not an effect; Crucible has no match setup. `SetActivePlane` injects a starting plane |
+| CR 901.6/901.10 planar controller or owner leaving the game | `Game.onPlayerLost` (`Game.java:899-986`); a lost player's plane is not moved. Leave loop skips lost players like `game.getPlayers()` |
+| `planeswalkedToThisTurn` | No real reader among ported shapes |
+| Plane counters across a trip to the planar deck | `Move` keeps `Counters` off-battlefield; Java builds a new card object. A revisited Mount Keralia would keep old pressure counters |
+| Scenario fixture | `GameState.java` has no `PlanarDeck` zone key (`ZONES`, `GameState.java:53`, only `command` among the non-standard zones); a Crucible-only key would break the Java oracle's reading of the same fixture. Module tests instead |
 
 ### Forge defect found (PORT-8)
 

@@ -10,12 +10,12 @@ Java: `CardFace.parsePT` (`CardFace.java:112-127`) strips the `*` and its sign: 
 `Card.BasePower`/`BaseToughness` now read that through `carddb.PrintedPT`, not `strconv.Atoi`. Layer 7a
 (characteristic-defining `SetPower$`/`SetToughness$`, `Count$` amounts via `resolveAmount`) already replaces the base.
 
-| Case                                                        | Result                                                     |
-| ----------------------------------------------------------- | ---------------------------------------------------------- |
-| `*` with no characteristic-defining static                  | base 0, dies to 704.5f                                     |
-| `*` with a CDA that resolved (Maro, Tarmogoyf)              | the CDA's value                                            |
+| Case | Result |
+| --- | --- |
+| `*` with no characteristic-defining static | base 0, dies to 704.5f |
+| `*` with a CDA that resolved (Maro, Tarmogoyf) | the CDA's value |
 | `*` with a CDA whose amount `resolveAmount` cannot evaluate | unresolved (`ok=false`), left alone: `Card.starUnresolved` |
-| counters, `MODIFYPT`/`SETPT` effects                        | folded by `Card.Toughness` already; not new in this batch  |
+| counters, `MODIFYPT`/`SETPT` effects | folded by `Card.Toughness` already; not new in this batch |
 
 Reason for the third row: base 0 is parsePT's convention, not the creature's real value, so killing it would be a guess
 (GO-7). Java 704.5e does not exist in Forge (704.5d is the token rule, with a stack exception for copies);
@@ -52,15 +52,15 @@ Scenarios `ironclaw-curse-enchanted-creature-can-still-block-a-smaller-attacker`
 
 ## Cast/activate restrictions
 
-| Key                    | Result                                                                               |
-| ---------------------- | ------------------------------------------------------------------------------------ |
-| `Activation$ Blessing` | `Player.Blessing`; set by `assignBlessings` (Ascend permanent half, 10 permanents)   |
-| `Condition$ Blessing`  | same flag, `continuousConditionMet` (9 real lines resolve now)                       |
-| `Activation$ Solved`   | `Card.Solved`                                                                        |
+| Key | Result |
+| --- | --- |
+| `Activation$ Blessing` | `Player.Blessing`; set by `assignBlessings` (Ascend permanent half, 10 permanents) |
+| `Condition$ Blessing` | same flag, `continuousConditionMet` (9 real lines resolve now) |
+| `Activation$ Solved` | `Card.Solved` |
 | `ActivationGameTypes$` | refuses: a `Game` has no variant applied (Java's `hasAppliedVariant` is false there) |
-| `ClassLevel$`          | refuses (GO-7): no Class level is tracked; 0 real `A:`/`S:` lines                    |
-| `InstantSpeed$`        | not read: only matters for a mana ability mid-payment, never interleaved here        |
-| Sneak declare-blockers | `sneakAvailable` ([`m5-t-sneak-charm.md`](m5-t-sneak-charm.md))                      |
+| `ClassLevel$` | refuses (GO-7): no Class level is tracked; 0 real `A:`/`S:` lines |
+| `InstantSpeed$` | not read: only matters for a mana ability mid-payment, never interleaved here |
+| Sneak declare-blockers | `sneakAvailable` ([`m5-t-sneak-charm.md`](m5-t-sneak-charm.md)) |
 
 The instant/sorcery Ascend check at resolution is ported in [`m5-kernel-2.md`](m5-kernel-2.md). A blessing granted makes
 the state-based pass repeat (CR 702.131d). Scenarios `ascend-citys-blessing-lets-arch-of-orazca-draw`,

@@ -34,15 +34,10 @@
     "MD049": false, // emphasis-style
     "MD050": false, // strong-style
 
-    // MD013 line-length: Prettier hard-wraps prose at 120 (.prettierrc
-    // printWidth). Tables and code blocks are exempt because Prettier pads
-    // table cells to content width, which no column limit can satisfy.
-    "MD013": {
-      "line_length": 120,
-      "tables": false,
-      "code_blocks": false,
-      "headings": false,
-    },
+    // MD013 line-length: Prettier hard-wraps prose at 120 in the files it
+    // formats, and the Claude-only files .prettierignore lists are not
+    // wrapped at all (DOC-14), so no line limit holds for both.
+    "MD013": false,
 
     // --- 2. Deliberate conventions -------------------------------------
 

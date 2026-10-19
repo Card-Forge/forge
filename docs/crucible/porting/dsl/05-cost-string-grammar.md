@@ -68,20 +68,20 @@ the bodies it tore in half — the same trap as above, in the tool used to measu
 `Cost.java` knows 55 named parts. Twelve are unused by the corpus, and the ones it does use are inventoried in
 `internal/cost/testdata/costs.golden`.
 
-| Part                           | Shape     | Meaning              |
-| ------------------------------ | --------- | -------------------- |
-| `1`, `2`, `3`, `X`, `0`        | bare      | Generic mana         |
-| `W` `U` `B` `R` `G`            | bare      | Coloured mana        |
-| `T`                            | bare      | Tap this permanent   |
-| `Q`                            | bare      | Untap this permanent |
-| `Sac<n/valid/desc>`            | bracketed | Sacrifice            |
-| `Discard<n/valid/desc>`        | bracketed | Discard              |
-| `SubCounter<n/type/...>`       | bracketed | Remove counters      |
-| `AddCounter<n/type/...>`       | bracketed | Put counters         |
-| `PayLife<n>`                   | bracketed | Pay life             |
-| `PayEnergy<n>`                 | bracketed | Pay energy           |
+| Part | Shape | Meaning |
+| --- | --- | --- |
+| `1`, `2`, `3`, `X`, `0` | bare | Generic mana |
+| `W` `U` `B` `R` `G` | bare | Coloured mana |
+| `T` | bare | Tap this permanent |
+| `Q` | bare | Untap this permanent |
+| `Sac<n/valid/desc>` | bracketed | Sacrifice |
+| `Discard<n/valid/desc>` | bracketed | Discard |
+| `SubCounter<n/type/...>` | bracketed | Remove counters |
+| `AddCounter<n/type/...>` | bracketed | Put counters |
+| `PayLife<n>` | bracketed | Pay life |
+| `PayEnergy<n>` | bracketed | Pay energy |
 | `ExileFromGrave<n/valid/desc>` | bracketed | Exile from graveyard |
-| `tapXType<n/valid/desc>`       | bracketed | Tap other permanents |
+| `tapXType<n/valid/desc>` | bracketed | Tap other permanents |
 
 Roughly 45 named cost part types in total, matching the 52 files in Java's `cost/` package.
 

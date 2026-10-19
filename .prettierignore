@@ -24,3 +24,11 @@
 
 # Build output
 **/target/
+
+# Claude-only files: read by Claude Code, rewritten by tools on most commits, not
+# read by people. Unformatted on purpose: prettier pads every table cell to the
+# widest one, which costs tokens on every read (DOC-14).
+/CLAUDE.md
+/.claude/
+/docs/crucible/00-master-implementation-plan*.md
+/docs/crucible/porting/

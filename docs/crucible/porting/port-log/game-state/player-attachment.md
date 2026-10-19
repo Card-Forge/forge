@@ -11,16 +11,16 @@ Java: `Card.getPlayerAttachedTo` / `getEntityAttachedTo` (one field, a `GameEnti
 `GameEntity.cantBeEnchantedByMsg` (`GameEntity.java:292`), `GameAction.stateBasedAction704_attach`
 (`GameAction.java:1754`). 50 corpus cards carry `K:Enchant:Player` (46) or `K:Enchant:Opponent` (4).
 
-| Piece                | Go                                                                        | Java                                             |
-| -------------------- | ------------------------------------------------------------------------- | ------------------------------------------------ |
-| Which player         | `Card.attachedPlayer`, never set together with `attachedTo`               | `Card.entityAttachedTo`                          |
-| Reverse              | `Player.attachments` (ordered), cloned by `Game.Clone`                    | `GameEntity.attachedCards`                       |
-| Writers              | `Game.Attach`, `AttachToPlayer`, `Unattach` only                          | `Card.attachToEntity`                            |
-| Cast                 | `castPlayerAura`: legal players, one `ChooseTargets` question             | `AttachEffect` / `getAuraSpell` target           |
-| Legal players        | `matchesPlayerSpec` on `Player`/`Opponent`, then `playerCantBeTargetedBy` | `isValid(Enchant type)` plus `canBeTargetedBy`   |
-| Resolve              | `attachEffect` reads the player from `Ability.Targets`                    | `AttachEffect.resolve`                           |
-| Stays legal          | `playerEnchantLegal`: player in the game and still fits the type          | `cantBeEnchantedByMsg`                           |
-| Non-Aura on a player | unattached, stays on the battlefield (CR 704.5n)                          | `isCreature() \|\| !canBeAttached` in 704_attach |
+| Piece | Go | Java |
+| --- | --- | --- |
+| Which player | `Card.attachedPlayer`, never set together with `attachedTo` | `Card.entityAttachedTo` |
+| Reverse | `Player.attachments` (ordered), cloned by `Game.Clone` | `GameEntity.attachedCards` |
+| Writers | `Game.Attach`, `AttachToPlayer`, `Unattach` only | `Card.attachToEntity` |
+| Cast | `castPlayerAura`: legal players, one `ChooseTargets` question | `AttachEffect` / `getAuraSpell` target |
+| Legal players | `matchesPlayerSpec` on `Player`/`Opponent`, then `playerCantBeTargetedBy` | `isValid(Enchant type)` plus `canBeTargetedBy` |
+| Resolve | `attachEffect` reads the player from `Ability.Targets` | `AttachEffect.resolve` |
+| Stays legal | `playerEnchantLegal`: player in the game and still fits the type | `cantBeEnchantedByMsg` |
+| Non-Aura on a player | unattached, stays on the battlefield (CR 704.5n) | `isCreature() \|\| !canBeAttached` in 704_attach |
 
 The target is a player, so it travels in `Ability.Targets` like any player target and `Ability.Target` stays `NoCard`.
 `targetsStillLegal` therefore runs the ordinary per-entity legality check on it (hexproof, shroud, protection, `Lost`)
@@ -28,12 +28,12 @@ and the spell fizzles when the player is no longer a legal target. A lone legal 
 
 What the player attachment feeds:
 
-| Corpus form                                                                               | Lines | Resolved by                                                 |
-| ----------------------------------------------------------------------------------------- | ----- | ----------------------------------------------------------- |
-| `Player.EnchantedBy`, `Opponent.EnchantedBy` (trigger, replacement, static valid strings) | 36+   | `matchesPlayerProperty` `EnchantedBy`                       |
-| `Defined$ EnchantedPlayer`, `Enchanted`, `EnchantedController`                            | 13    | `definedPlayers`                                            |
-| `Creature.EnchantedPlayerCtrl`, `Card.EnchantedPlayer`                                    | 4     | `propertyMatches`: owner/controller is the enchanted player |
-| `Curse.AttachedTo Player.EnchantedBy`, `Curse.AttachedTo You`                             | 4     | `propertyMatches` `AttachedTo <restriction>`                |
+| Corpus form | Lines | Resolved by |
+| --- | --- | --- |
+| `Player.EnchantedBy`, `Opponent.EnchantedBy` (trigger, replacement, static valid strings) | 36+ | `matchesPlayerProperty` `EnchantedBy` |
+| `Defined$ EnchantedPlayer`, `Enchanted`, `EnchantedController` | 13 | `definedPlayers` |
+| `Creature.EnchantedPlayerCtrl`, `Card.EnchantedPlayer` | 4 | `propertyMatches`: owner/controller is the enchanted player |
+| `Curse.AttachedTo Player.EnchantedBy`, `Curse.AttachedTo You` | 4 | `propertyMatches` `AttachedTo <restriction>` |
 
 `AttachedTo <restriction>` is `CardProperty.java:441` for every attached object, not only for players: a card host is
 matched through `Matches`, a player host through `matchesPlayerSpec`. The Java fallback to the ability's own defined

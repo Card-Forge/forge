@@ -8,14 +8,14 @@ Four trigger gaps closed: `ChangesController` past the plain card trigger, Comma
 
 ## `ChangesController`: `TriggerController$`, delayed mode, runChangeControllerCommands
 
-| Java                                                                          | Go                                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `TriggerHandler.java:494-497` `TriggerController$` sets activating player     | `checkChangesControllerTriggers` (`trigger.go`) resolves it, first player wins      |
-| `TriggerChangesController.setTriggeringObjects`: `Card`, `OriginalController` | `triggeredObjects.card` + `.originalController` (`ability.go`)                      |
-| `AbilityUtils.java:1022-1027` `TriggeredOriginalController` is the player     | `definedPlayers` case `TriggeredOriginalController` (`defined.go`)                  |
-| `DelayedTriggerEffect` with `Mode$ ChangesController` (4 real lines)          | `delayedTriggerEffect` accepts the mode; `delayedChangesControllerMatches` fires it |
-| `ThisTurn$` on the delayed line                                               | existing `delayedTrigger.ThisTurn` (`delayedTriggersOnNextTurn`), no new code       |
-| `GameAction.java:1008-1022` unpair, `runChangeControllerCommands`             | [`m5-control.md`](m5-control.md)                                                    |
+| Java | Go |
+| --- | --- |
+| `TriggerHandler.java:494-497` `TriggerController$` sets activating player | `checkChangesControllerTriggers` (`trigger.go`) resolves it, first player wins |
+| `TriggerChangesController.setTriggeringObjects`: `Card`, `OriginalController` | `triggeredObjects.card` + `.originalController` (`ability.go`) |
+| `AbilityUtils.java:1022-1027` `TriggeredOriginalController` is the player | `definedPlayers` case `TriggeredOriginalController` (`defined.go`) |
+| `DelayedTriggerEffect` with `Mode$ ChangesController` (4 real lines) | `delayedTriggerEffect` accepts the mode; `delayedChangesControllerMatches` fires it |
+| `ThisTurn$` on the delayed line | existing `delayedTrigger.ThisTurn` (`delayedTriggersOnNextTurn`), no new code |
+| `GameAction.java:1008-1022` unpair, `runChangeControllerCommands` | [`m5-control.md`](m5-control.md) |
 
 `TriggerController$` and `ThisTurn$` never appear on a `T:` card line together: `TriggerController$` is Khârn the
 Betrayer's (`TriggeredOriginalController`, the player who lost control draws), `ThisTurn$` is Stolen Uniform's delayed
@@ -75,12 +75,12 @@ opponent of the ability controller with a creature attacking the enchanted playe
 `triggerpack.go`, through `scanTriggers` (`triggerscan.go`). Corpus lines: `TurnFaceUp` 126, `Transformed` 35, `Scry`
 24, `Surveil` 16.
 
-| Mode          | Fires from                                               | Params evaluated | Lines left unfired |
-| ------------- | -------------------------------------------------------- | ---------------- | ------------------ |
-| `Scry`        | `scryEffect` per scrying player (`GameAction.java:2655`) | `ValidPlayer$`   | `ToBottom$` (1)    |
-| `Surveil`     | `surveilEffect` per player (`Player.java:1088`)          | `ValidPlayer$`   | `FirstTime$` (1)   |
-| `Transformed` | `SetState` `Mode$ Transform`, after `Game.transform`     | `ValidCard$`     | none               |
-| `TurnFaceUp`  | `SetState` `Mode$ TurnFaceUp`                            | `ValidCard$`     | `ValidCause$` (2)  |
+| Mode | Fires from | Params evaluated | Lines left unfired |
+| --- | --- | --- | --- |
+| `Scry` | `scryEffect` per scrying player (`GameAction.java:2655`) | `ValidPlayer$` | `ToBottom$` (1) |
+| `Surveil` | `surveilEffect` per player (`Player.java:1088`) | `ValidPlayer$` | `FirstTime$` (1) |
+| `Transformed` | `SetState` `Mode$ Transform`, after `Game.transform` | `ValidCard$` | none |
+| `TurnFaceUp` | `SetState` `Mode$ TurnFaceUp` | `ValidCard$` | `ValidCause$` (2) |
 
 A line naming any param outside the table's evaluated set plus the general ones (`effectEventTriggerParams`) is not
 fired (GO-7). Scry's `ScryNum`/`ScryBottom` triggering counts are not recorded (Elvish Mariner's `X`, Celeborn's `X`

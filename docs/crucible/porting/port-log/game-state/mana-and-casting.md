@@ -386,12 +386,12 @@ Closes the M5 "Not ported yet" row for non-combat damage to a planeswalker or a 
 (`activateability.go`), one check shared by `ActivateAbility`, `ActivateManaAbility` and `CastSpell`. Reason: Java reads
 these keys off any ability's restriction, so one function per entry point would let them drift.
 
-| Key                        | Reading                                                                              |
-| -------------------------- | ------------------------------------------------------------------------------------ |
-| `PlayerTurn$`              | activator is the active player                                                       |
-| `OpponentTurn$`            | activator is not the active player (`Player.isOpponentOf`; no teams)                 |
-| `ActivationPhases$`        | current step in `parsePhaseRange`'s set; an unreadable value declines (GO-7)         |
-| `ActivationFirstCombat$`   | `combatsThisTurn` at most 1 inside a combat step, 0 outside one (`getNumCombat`)     |
+| Key | Reading |
+| --- | --- |
+| `PlayerTurn$` | activator is the active player |
+| `OpponentTurn$` | activator is not the active player (`Player.isOpponentOf`; no teams) |
+| `ActivationPhases$` | current step in `parsePhaseRange`'s set; an unreadable value declines (GO-7) |
+| `ActivationFirstCombat$` | `combatsThisTurn` at most 1 inside a combat step, 0 outside one (`getNumCombat`) |
 | `ActivationAfterBlockers$` | `skipDamageSteps` false (CR 506.7f); set only by the turn driver (`Game.Step`/`Run`) |
 
 Values are never read, as Java does not read them. Sneak's declare-blockers-only timing is not ported: Crucible has no
@@ -419,17 +419,17 @@ the way Java does. The fail-closed tests that used those keys (`failclosed_test.
 
 Tests (`casttiming_test.go`, `package engine_test`):
 
-| Test                                                         | Proves                                                                                               |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| `TestCastInstantHonoursPrintedTimingRestrictions`            | Phases (single, range), `PlayerTurn$`, `OpponentTurn$` and a combination; declined cast pays nothing |
-| `TestCastSorceryHonoursPrintedPhases`                        | `ActivationPhases$` narrows a Sorcery's window                                                       |
-| `TestCastInstantUnreadableActivationPhasesDeclines`          | Unreadable phase list declines                                                                       |
-| `TestActivateAbilityHonoursPlayerAndOpponentTurn`            | The same keys on an activated ability                                                                |
-| `TestCastInstantFirstCombatOnly`                             | First combat allowed, an `AddPhase` extra combat refused                                             |
-| `TestCastInstantAfterBlockersRefusedOnceBlockersWereSkipped` | Refused after a combat with no attackers skipped declare blockers                                    |
-| `TestPlayDoesNotOfferASpellOutsideItsPrintedTiming`          | `Play` leaves a spell in exile outside its window and casts it inside                                |
-| `TestActivateManaAbilityHonoursPlayerTurn`                   | A mana ability naming `PlayerTurn$` is admitted and limited to its controller's turn                 |
-| `TestTimedSpellResolvesOnceCast`                             | A `DestroyAll` spell naming both keys casts and resolves                                             |
+| Test | Proves |
+| --- | --- |
+| `TestCastInstantHonoursPrintedTimingRestrictions` | Phases (single, range), `PlayerTurn$`, `OpponentTurn$` and a combination; declined cast pays nothing |
+| `TestCastSorceryHonoursPrintedPhases` | `ActivationPhases$` narrows a Sorcery's window |
+| `TestCastInstantUnreadableActivationPhasesDeclines` | Unreadable phase list declines |
+| `TestActivateAbilityHonoursPlayerAndOpponentTurn` | The same keys on an activated ability |
+| `TestCastInstantFirstCombatOnly` | First combat allowed, an `AddPhase` extra combat refused |
+| `TestCastInstantAfterBlockersRefusedOnceBlockersWereSkipped` | Refused after a combat with no attackers skipped declare blockers |
+| `TestPlayDoesNotOfferASpellOutsideItsPrintedTiming` | `Play` leaves a spell in exile outside its window and casts it inside |
+| `TestActivateManaAbilityHonoursPlayerTurn` | A mana ability naming `PlayerTurn$` is admitted and limited to its controller's turn |
+| `TestTimedSpellResolvesOnceCast` | A `DestroyAll` spell naming both keys casts and resolves |
 
 ## `ActivationLimit$` and `GameActivationLimit$`
 
@@ -438,12 +438,12 @@ limit this turn (`ActivationLimit$`, 140 real `AB$` lines) or this game (`GameAc
 `activationLimitsMet` (`activateability.go`) is that check, run by `ActivateAbility` beside `timingRestrictionsMet`. The
 limit is an amount, `X` through the card's own SVars; one that cannot be resolved refuses the activation (GO-7).
 
-| State                             | Java                                      | Go                                        |
-| --------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| counts per `A:` line              | `Card.numberTurnActivations`/`...Game...` | `Card.activations`, keyed by line index   |
-| incremented when it goes on stack | `MagicStack.java:229,305`                 | `ActivateAbility`, after the cost is paid |
-| turn count reset                  | every card, cleanup (`Game.java:1239`)    | every card in the arena, `cleanupStep`    |
-| both counts reset                 | the card is a new object (CR 400.7)       | any zone change (`put`, `putFront`)       |
+| State | Java | Go |
+| --- | --- | --- |
+| counts per `A:` line | `Card.numberTurnActivations`/`...Game...` | `Card.activations`, keyed by line index |
+| incremented when it goes on stack | `MagicStack.java:229,305` | `ActivateAbility`, after the cost is paid |
+| turn count reset | every card, cleanup (`Game.java:1239`) | every card in the arena, `cleanupStep` |
+| both counts reset | the card is a new object (CR 400.7) | any zone change (`put`, `putFront`) |
 
 A mana ability and an `SP$` spell with a limit are not checked (0 real `SP$` lines name one; `manaAbilityAllowedParams`
 refuses the mana lines). `charmeffect.go`, `untapalleffect.go` and `destroyalleffect.go` no longer reject the two keys.
@@ -461,13 +461,13 @@ while it is on the battlefield and may receive the counters, `CostPutCounter.can
 `Reveal`, `ExileFromGrave`, `tapXType`, `Draw` naming another player and an `X` are read now
 ([`m5-ward-protection.md`](m5-ward-protection.md#unlesscost-and-ward-cost-shapes)).
 
-| Step                     | Rule                                                                                             |
-| ------------------------ | ------------------------------------------------------------------------------------------------ |
-| decide                   | `ConfirmPayCost(g, payer, cost.Cost, source)`: the parsed cost replaces the mana-only argument   |
-| payable first            | life at least `PayLife` (CR 119.4), enough cards to discard, enough permanents to sacrifice      |
-| mana                     | `PayManaCost`, which fails atomically, so a cost that cannot be met pays none of its other parts |
-| life, discard, sacrifice | the `LifeChanged` event as `loseLifeEffect`; the payer chooses discards and sacrifices           |
-| return, damage, draw     | the payer chooses the permanents returned; damage and draws run last, as `CostDamage`/`CostDraw` |
+| Step | Rule |
+| --- | --- |
+| decide | `ConfirmPayCost(g, payer, cost.Cost, source)`: the parsed cost replaces the mana-only argument |
+| payable first | life at least `PayLife` (CR 119.4), enough cards to discard, enough permanents to sacrifice |
+| mana | `PayManaCost`, which fails atomically, so a cost that cannot be met pays none of its other parts |
+| life, discard, sacrifice | the `LifeChanged` event as `loseLifeEffect`; the payer chooses discards and sacrifices |
+| return, damage, draw | the payer chooses the permanents returned; damage and draws run last, as `CostDamage`/`CostDraw` |
 
 ### PORT-2 debt: cost text parsed at resolution
 
@@ -520,13 +520,13 @@ scan that left a cost trigger unfired on the stack (`executeHasCost`). Tests: `T
 Sorcery's `SP$` line. They reuse the trigger-side evaluators (`isPresentMatches`, `lifeTotalMatches`,
 `checkSVarMatches`), so the two cannot drift.
 
-| Param (real `AB$` lines)                                        | Reading                                                                      |
-| --------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `Activator$` (53)                                               | `matchesPlayerSpec` against the permanent's controller; default `You`        |
-| `IsPresent$` (112), `PresentCompare$` (29), `PresentZone$` (13) | count of matching cards, default `GE1`, default zone Battlefield             |
-| `LifeTotal$`, `LifeAmount$` (281)                               | `You` or `ActivePlayer` life against the compare                             |
-| `Activation$` (44)                                              | Threshold, Metalcraft, Delirium, Hellbent; Blessing and Solved refuse (GO-7) |
-| `CheckSVar$` (95), `SVarCompare$` (60)                          | one SVar chain link, default `GE1`; `CheckSecondSVar$` is not read, as Java  |
+| Param (real `AB$` lines) | Reading |
+| --- | --- |
+| `Activator$` (53) | `matchesPlayerSpec` against the permanent's controller; default `You` |
+| `IsPresent$` (112), `PresentCompare$` (29), `PresentZone$` (13) | count of matching cards, default `GE1`, default zone Battlefield |
+| `LifeTotal$`, `LifeAmount$` (281) | `You` or `ActivePlayer` life against the compare |
+| `Activation$` (44) | Threshold, Metalcraft, Delirium, Hellbent; Blessing and Solved refuse (GO-7) |
+| `CheckSVar$` (95), `SVarCompare$` (60) | one SVar chain link, default `GE1`; `CheckSecondSVar$` is not read, as Java |
 
 `PresentPlayer$` and `IsPresent2$` are not read either: the restriction does not read them. With `Activator$ Opponent`
 or `Player` another player may activate a battlefield permanent; the permanent's own zone checks are unchanged. Sixteen
@@ -554,12 +554,12 @@ Tests: `castflash_test.go`.
 path for hand casts, `Play` and `Discover`, asks `cantBeCast` (`cantbecast.go`) first. Hosts are the battlefield and
 Command-zone statics plus the card itself (`staticHostsWith`; `EffectZone$ All` lines such as "can't be cast unless X").
 
-| Param                   | Reading (`applyCantBeCastAbility`)                                                                                                              |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ValidCard$`, `Caster$` | `Matches` on the card, `matchesPlayerSpec` on the caster; absent matches anything                                                               |
-| `OnlySorcerySpeed$`     | applies only when the caster could not cast a sorcery (`canActSorcerySpeed`)                                                                    |
-| `Origin$`               | applies only to a card cast from one of the listed zones                                                                                        |
-| `NumLimitEachTurn$`     | applies once the caster cast that many spells; `Player.SpellsCastThisTurn` counts all spells, so only a `ValidCard$` of `Card` or none resolves |
+| Param | Reading (`applyCantBeCastAbility`) |
+| --- | --- |
+| `ValidCard$`, `Caster$` | `Matches` on the card, `matchesPlayerSpec` on the caster; absent matches anything |
+| `OnlySorcerySpeed$` | applies only when the caster could not cast a sorcery (`canActSorcerySpeed`) |
+| `Origin$` | applies only to a card cast from one of the listed zones |
+| `NumLimitEachTurn$` | applies once the caster cast that many spells; `Player.SpellsCastThisTurn` counts all spells, so only a `ValidCard$` of `Card` or none resolves |
 
 Any other param (`cmcGT$`, `CheckSVar$`, `IsPresent$`, ...) or an unrecognized `Caster$` makes the line unresolvable and
 it is not applied (GO-7).

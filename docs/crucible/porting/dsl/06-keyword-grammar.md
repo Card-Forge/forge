@@ -22,11 +22,11 @@ Colon-separated and **positional**. There is no key naming the arguments, so eac
 **18,248 `K:` lines**, resolved with Forge's own rule (`Keyword.getKeywordDetails`) rather than by cutting at the first
 colon:
 
-| What                                     | Distinct |   Uses |
-| ---------------------------------------- | -------: | -----: |
-| Keywords Forge's enum defines            |      199 | 18,062 |
-| Pseudo-keywords the card factory handles |       11 |  1,297 |
-| Lines that are rules text on a `K:` line |       36 |    144 |
+| What | Distinct | Uses |
+| --- | ---: | ---: |
+| Keywords Forge's enum defines | 199 | 18,062 |
+| Pseudo-keywords the card factory handles | 11 | 1,297 |
+| Lines that are rules text on a `K:` line | 36 | 144 |
 
 Forge's enum has **203** constants, so four are defined and unused. The pseudo-keywords — `etbCounter`,
 `ETBReplacement`, `Chapter`, `Class`, `AlternateAdditionalCost` and six more — are the vocabulary a compiler owes on top
@@ -38,14 +38,14 @@ rules text becomes its own "head".
 Argument counts:
 
 | Arguments | Occurrences | Share |
-| --------: | ----------: | ----: |
-|         0 |      11,202 | 61.4% |
-|         1 |       5,169 | 28.3% |
-|         2 |       1,427 |  7.8% |
-|         3 |         203 |  1.1% |
-|         4 |         189 |  1.0% |
-|         5 |          54 |       |
-|         6 |           1 |       |
+| ---: | ---: | ---: |
+| 0 | 11,202 | 61.4% |
+| 1 | 5,169 | 28.3% |
+| 2 | 1,427 | 7.8% |
+| 3 | 203 | 1.1% |
+| 4 | 189 | 1.0% |
+| 5 | 54 | |
+| 6 | 1 | |
 
 **7,043 keywords (38.6%) take at least one argument.** Most parameterised heads: `Enchant`, `Equip`, `etbCounter`,
 `ETBReplacement`, `Cycling`, `Kicker`, `Chapter`, `Ward`, `Flashback`, `Crew`, `Morph`, `Landwalk`.

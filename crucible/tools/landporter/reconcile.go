@@ -120,7 +120,7 @@ func Table(before map[string]int, all, precon Result) string {
 
 const topCauses = 6
 
-// causeRows renders the largest refusal causes as table rows (prettier aligns them).
+// causeRows renders the largest refusal causes as compact table rows (DOC-14: smoke-probe.md is not prettier-formatted).
 func causeRows(causes []Cause) string {
 	var b strings.Builder
 	for i, c := range causes {

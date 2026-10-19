@@ -18,22 +18,22 @@ name every time a `Card` is constructed; Crucible resolves it once at load, whic
 All four are AbilityFactory's, and the API gate on the last two is not decoration — `Choices$` on any other API is a
 valid string, and resolving it as a list of SVar names would fail on cards that are correct.
 
-| Shape                         | Resolves to      | Gate                                                                               |
-| ----------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
-| `SubAbility$ X`               | One SVar         | None                                                                               |
-| 29 additional-ability keys    | One SVar each    | None. Java's `additionalAbilityKeys`, plus `SubAbility` and `PreventionSubAbility` |
-| `Choices$ A,B,C`              | A list           | API is `Charm`, `GenericChoice`, `AssignGroup`, `VillainousChoice` or `Vote`       |
-| `ResultSubAbilities$ 1:A,2:B` | `key:svar` pairs | API is `RollDice`                                                                  |
+| Shape | Resolves to | Gate |
+| --- | --- | --- |
+| `SubAbility$ X` | One SVar | None |
+| 29 additional-ability keys | One SVar each | None. Java's `additionalAbilityKeys`, plus `SubAbility` and `PreventionSubAbility` |
+| `Choices$ A,B,C` | A list | API is `Charm`, `GenericChoice`, `AssignGroup`, `VillainousChoice` or `Vote` |
+| `ResultSubAbilities$ 1:A,2:B` | `key:svar` pairs | API is `RollDice` |
 
 ## Param maps are maps, not lists
 
 `FileSection.parseToMap` reads params into a `TreeMap` with `String.CASE_INSENSITIVE_ORDER`. Two consequences, both
 load-bearing and both measured in the corpus:
 
-| Consequence                              | Corpus                                                 |
-| ---------------------------------------- | ------------------------------------------------------ |
-| A repeated key keeps only its last value | 29 lines on 24 cards repeat a key                      |
-| Key spelling ignores case                | 5 keys have two spellings, including one `SubABility$` |
+| Consequence | Corpus |
+| --- | --- |
+| A repeated key keeps only its last value | 29 lines on 24 cards repeat a key |
+| Key spelling ignores case | 5 keys have two spellings, including one `SubABility$` |
 
 Reading the params as a list instead chains a sub-ability Forge never chains — `the_eagles_are_coming` writes
 `SubAbility$` twice, and only the second exists — and misses one it does.
@@ -42,22 +42,22 @@ Order is kept anyway, because Java's TreeMap loses it and nothing should depend 
 
 ## Deviations from Java
 
-| Java                                                            | Go                                                                                                                    |
-| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| An unresolved `SubAbility$` prints to stdout and returns `null` | `error` naming the card and the reference. A chain that ends early is a defect, not a state (PORT-8)                  |
-| A cycle would recurse until the stack ends                      | `ErrCycle`, detected by the set of SVars on the current chain                                                         |
-| `AbilityRecordType` covers `AB`, `SP`, `ST`, `DB`               | Seven records: those four plus `RE`, and `Mode$` split into `Trigger` and `StaticEffect` by the line carrying it      |
-| Resolution happens per `Card` construction                      | Once per script at load (ADR-0007). A game builds ~120 cards, and a million-game run would repeat the work 10^8 times |
+| Java | Go |
+| --- | --- |
+| An unresolved `SubAbility$` prints to stdout and returns `null` | `error` naming the card and the reference. A chain that ends early is a defect, not a state (PORT-8) |
+| A cycle would recurse until the stack ends | `ErrCycle`, detected by the set of SVars on the current chain |
+| `AbilityRecordType` covers `AB`, `SP`, `ST`, `DB` | Seven records: those four plus `RE`, and `Mode$` split into `Trigger` and `StaticEffect` by the line carrying it |
+| Resolution happens per `Card` construction | Once per script at load (ADR-0007). A game builds ~120 cards, and a million-game run would repeat the work 10^8 times |
 
 ## Not ported yet
 
-| Java                                                                             | When       |
-| -------------------------------------------------------------------------------- | ---------- |
-| Typed params. Values are text here                                               | M3 slice C |
-| Costs, valid strings, count expressions -- the values themselves                 | M3 slice D |
-| Keyword expansion (`CardFactoryUtil.setupKeywordedAbilities`)                    | M3         |
-| SVars naming statics, triggers or replacements (`StaticAbilities$`, `Triggers$`) | M4         |
-| Functional variants -- `Variant:` faces have their own lines                     | M3 slice C |
+| Java | When |
+| --- | --- |
+| Typed params. Values are text here | M3 slice C |
+| Costs, valid strings, count expressions -- the values themselves | M3 slice D |
+| Keyword expansion (`CardFactoryUtil.setupKeywordedAbilities`) | M3 |
+| SVars naming statics, triggers or replacements (`StaticAbilities$`, `Triggers$`) | M4 |
+| Functional variants -- `Variant:` faces have their own lines | M3 slice C |
 
 ## Golden AST diff
 
@@ -77,12 +77,12 @@ unexplained change into an approved one, which is worse than having no golden.
 `AbilityFactory.additionalAbilityKeys` is not the whole set of params whose value is an SVar holding an ability. Four
 more are resolved by the handler or the effect that needs them, and reading only the list leaves them unfollowed:
 
-| Key                              | Resolved by                   | Corpus uses |
-| -------------------------------- | ----------------------------- | ----------: |
-| `ReplaceWith`                    | `ReplacementHandler.java:843` |       1,581 |
-| `ExtraTurnDelayedTriggerExecute` | `AddTurnEffect.java:50`       |           7 |
-| `ExtraPhaseDelayedTriggerExcute` | `AddPhaseEffect.java:72`      |           4 |
-| `Else`                           | `RollDiceEffect.java:474`     |           0 |
+| Key | Resolved by | Corpus uses |
+| --- | --- | ---: |
+| `ReplaceWith` | `ReplacementHandler.java:843` | 1,581 |
+| `ExtraTurnDelayedTriggerExecute` | `AddTurnEffect.java:50` | 7 |
+| `ExtraPhaseDelayedTriggerExcute` | `AddPhaseEffect.java:72` | 4 |
+| `Else` | `RollDiceEffect.java:474` | 0 |
 
 The misspelling in `ExtraPhaseDelayedTriggerExcute` is Forge's own and is load-bearing: the param map is keyed on it, so
 correcting it in the Go port would stop the key matching.
@@ -101,20 +101,20 @@ ADR-0007 says parameters become typed structs per API — `DealDamageParams` hol
 not two strings. Nothing in Forge declares those types, so they have to be recovered, and `tools/apiscan -kinds` is the
 measurement. Two independent signals, because neither is sufficient:
 
-| Signal             | Settles                                                                             | Cannot settle                                      |
-| ------------------ | ----------------------------------------------------------------------------------- | -------------------------------------------------- |
-| The Java call site | `calculateAmount` → amount, `ZoneType.smartValueOf` → zone, `getValidCards` → valid | A key with no distinctive consumer                 |
-| The written values | Every value `True`/`False` → flag; an expression head → amount; spaces → prose      | Zone vs valid string vs SVar name: all bare tokens |
+| Signal | Settles | Cannot settle |
+| --- | --- | --- |
+| The Java call site | `calculateAmount` → amount, `ZoneType.smartValueOf` → zone, `getValidCards` → valid | A key with no distinctive consumer |
+| The written values | Every value `True`/`False` → flag; an expression head → amount; spaces → prose | Zone vs valid string vs SVar name: all bare tokens |
 
 The type belongs to the **(API, key) pair**, not the key: `AttachedTo` is a valid string on some effects and an object
 selector on others, and one type for both would be wrong for both. Over the 6,684 pairs the corpus writes:
 
-| Evidence                    | Pairs | Share |
-| --------------------------- | ----: | ----: |
-| Typed by the API's own Java |   337 |    5% |
-| Typed by shared code        | 1,237 |   19% |
-| Flag, from its values alone | 1,201 |   18% |
-| No evidence                 | 3,909 |   58% |
+| Evidence | Pairs | Share |
+| --- | ---: | ---: |
+| Typed by the API's own Java | 337 | 5% |
+| Typed by shared code | 1,237 | 19% |
+| Flag, from its values alone | 1,201 | 18% |
+| No evidence | 3,909 | 58% |
 
 Per-API attribution earns its keep on exactly the ambiguous pairs: `AttachedTo` resolves to `defined` on `CopyPermanent`
 and `Token`, and stays split on `ChangeZone`, where that effect genuinely uses it both ways.
@@ -148,10 +148,10 @@ anywhere.
 
 Two Java behaviours the port depends on, both found by that gate:
 
-| Behaviour                                                     | Where                                    |
-| ------------------------------------------------------------- | ---------------------------------------- |
-| `matchesValidParam` returns **true** when the param is absent | `CardTraitBase.java:259-265`             |
-| An absent param takes the effect's default, not a failure     | e.g. `getParamOrDefault` on every effect |
+| Behaviour | Where |
+| --- | --- |
+| `matchesValidParam` returns **true** when the param is absent | `CardTraitBase.java:259-265` |
+| An absent param takes the effect's default, not a failure | e.g. `getParamOrDefault` on every effect |
 
 The first is the one that bites: a missing `Valid…` key does not narrow a restriction, it removes it.
 
@@ -178,13 +178,13 @@ The rule that turns evidence into a field type lives in `fieldType`, in one plac
 4. **Anything ambiguous or unevidenced stays a `string`.** A wrong type is worse than an untyped one, because it
    compiles.
 
-| Field type    | Fields |
-| ------------- | -----: |
-| `string`      |  2,792 |
-| `bool`        |    993 |
-| `expr.Amount` |    254 |
-| `valid.Spec`  |    194 |
-| `int`         |     68 |
+| Field type | Fields |
+| --- | ---: |
+| `string` | 2,792 |
+| `bool` | 993 |
+| `expr.Amount` | 254 |
+| `valid.Spec` | 194 |
+| `int` | 68 |
 
 Two Java behaviours the generator reproduces rather than tidies. Keys are matched folded, because the param map is a
 `TreeMap(CASE_INSENSITIVE_ORDER)` — the corpus writes both `UpTo$` and `Upto$`, and they are one parameter and one

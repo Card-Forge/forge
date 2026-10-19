@@ -15,13 +15,13 @@
 
 ## A battle is defended by its protector
 
-| Piece                                       | Was                                | Now (Java)                                                                                    |
-| ------------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------- |
-| `defenderOf` (blockers, `DefendingPlayer`)  | battle's controller                | protector, `Combat.getDefenderPlayerByAttacker` (`Combat.java:297-299`)                       |
-| `eligibleAttackTargets`                     | battles opponents control          | battles whose protector is an opponent, wherever they sit (`CombatUtil.java:66-73`)           |
-| `DefenderCtrl`                              | battle's controller                | `getDefendingPlayerRelatedTo` → protector (`CardProperty.java:198-213`)                       |
-| `cantattack.go`, `defenderPlayerByAttacker` | own copies                         | one helper, `defenderPlayerOf` in `combat.go` (valid may reference combat, not attack)        |
-| Battle with no protector                    | `g.Card(NoCard)` panic on a lookup | not attackable (Java's `getProtectingPlayer().isOpponentOf` would throw); `NoPlayer` defender |
+| Piece | Was | Now (Java) |
+| --- | --- | --- |
+| `defenderOf` (blockers, `DefendingPlayer`) | battle's controller | protector, `Combat.getDefenderPlayerByAttacker` (`Combat.java:297-299`) |
+| `eligibleAttackTargets` | battles opponents control | battles whose protector is an opponent, wherever they sit (`CombatUtil.java:66-73`) |
+| `DefenderCtrl` | battle's controller | `getDefendingPlayerRelatedTo` → protector (`CardProperty.java:198-213`) |
+| `cantattack.go`, `defenderPlayerByAttacker` | own copies | one helper, `defenderPlayerOf` in `combat.go` (valid may reference combat, not attack) |
+| Battle with no protector | `g.Card(NoCard)` panic on a lookup | not attackable (Java's `getProtectingPlayer().isOpponentOf` would throw); `NoPlayer` defender |
 
 A Siege its caster controls is attacked by that caster; `combat-attack-and-damage-a-battle` attacked a battle the
 attacker itself protected (Java-illegal) and is rewritten to the legal shape. `TestAssignBattleProtectorNotAskedWhile…`
@@ -35,11 +35,11 @@ triggers already did (`Card.getStaticAbilities` reads `currentState`, `Card.java
 
 R9j's batch (`beginTriggerBatch`) now also wraps:
 
-| Event                                                         | Modes in one pass                                                    |
-| ------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `dealCombatDamageStep`                                        | DamageDone per exchange, ExcessDamage\*, DamageDoneOnce\*, DamageAll |
-| one effect body (`resolveEffectBatched`, every Registry path) | each moved card's ChangesZone, then ChangesZoneAll, damage, …        |
-| `destroyLethalToughness`, `destroyDamagedCreatures`           | dies triggers, then ChangesZoneAll                                   |
+| Event | Modes in one pass |
+| --- | --- |
+| `dealCombatDamageStep` | DamageDone per exchange, ExcessDamage\*, DamageDoneOnce\*, DamageAll |
+| one effect body (`resolveEffectBatched`, every Registry path) | each moved card's ChangesZone, then ChangesZoneAll, damage, … |
+| `destroyLethalToughness`, `destroyDamagedCreatures` | dies triggers, then ChangesZoneAll |
 
 Java holds every trigger of a resolving ability on a frozen stack (`TriggerHandler.java:264`, `MagicStack.java:599`) and
 orders the whole list per player (`:855-880`). No existing scenario moved. Remaining divergence: Java's list also spans
@@ -57,29 +57,29 @@ move instead of after. A move that leaves the card off the battlefield takes it 
 
 ## Smaller pieces
 
-| Piece                                                      | Does                                                                                                                            |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Pump `NumAtt$`/`NumDef$` `Double`/`Triple`                 | +stat ×1/×2 per target (`PumpEffect.java:468-480`), current stat, not the LKI copy's; `Radiance$` beside it and PumpAll refused |
-| `checkSVarMatches`                                         | unresolvable side, operand-less compare, `CheckSecondSVar$` record a pending error (GO-7)                                       |
-| `Count$AttackersDeclared` (Raid)                           | distinct creatures in the controller's `attackedThisTurn` (`AbilityUtils.java:2511-2528`), by CardID                            |
-| Phase names                                                | Java constant names too (`COMBAT_BEGIN`, `PhaseType.java:98`); no corpus line uses them                                         |
-| `attackingAlone`/`Same`/`YouOrYourPW[LKI]`, other suffixes | `CardProperty.java:1506-1549`; Alone counts live attackers plus the card itself                                                 |
-| `DefenderCtrlForRemembered`                                | first remembered card's defending player (Holga, Mercadia's Downfall)                                                           |
-| `attackingBattle`                                          | refused loudly: Forge bug below                                                                                                 |
+| Piece | Does |
+| --- | --- |
+| Pump `NumAtt$`/`NumDef$` `Double`/`Triple` | +stat ×1/×2 per target (`PumpEffect.java:468-480`), current stat, not the LKI copy's; `Radiance$` beside it and PumpAll refused |
+| `checkSVarMatches` | unresolvable side, operand-less compare, `CheckSecondSVar$` record a pending error (GO-7) |
+| `Count$AttackersDeclared` (Raid) | distinct creatures in the controller's `attackedThisTurn` (`AbilityUtils.java:2511-2528`), by CardID |
+| Phase names | Java constant names too (`COMBAT_BEGIN`, `PhaseType.java:98`); no corpus line uses them |
+| `attackingAlone`/`Same`/`YouOrYourPW[LKI]`, other suffixes | `CardProperty.java:1506-1549`; Alone counts live attackers plus the card itself |
+| `DefenderCtrlForRemembered` | first remembered card's defending player (Holga, Mercadia's Downfall) |
+| `attackingBattle` | refused loudly: Forge bug below |
 
 ## Forge defects
 
-| Where                    | Defect                                                                                                                                  |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Where | Defect |
+| --- | --- |
 | `CardProperty.java:1522` | `attackingBattle` reads `combat.getDefenderByAttacker(source)`, not `card`: Rampaging Geoderm asks whether the Geoderm attacks a battle |
-| `CombatUtil.java:70`     | `battle.getProtectingPlayer().isOpponentOf(...)` throws on a battle with no protector                                                   |
+| `CombatUtil.java:70` | `battle.getProtectingPlayer().isOpponentOf(...)` throws on a battle with no protector |
 
 ## Engine findings left open
 
-| Where                                                 | Finding                                                                             |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Where | Finding |
+| --- | --- |
 | `card.go` `traitFaces` (≈55 static/replacement scans) | Still reads a DFC's back face; only continuous statics and triggers use `liveFaces` |
-| `defined.go` `TriggeredDefendingPlayer`               | Reads the current combat, not the trigger-time value Java stores                    |
+| `defined.go` `TriggeredDefendingPlayer` | Reads the current combat, not the trigger-time value Java stores |
 
 ## Smoke probe
 
@@ -87,11 +87,11 @@ move instead of after. A move that leaves the card off the battlefield takes it 
 hung 0, judged 91.6% → 91.5%. Per-card lists: scratchpad `af84-smoke-before.txt`, `af84-smoke-after.txt`, CheckSVar
 classification `af84-svar-flips.txt`, final diff `af84-smoke-diff.txt`.
 
-| Flip             | Cards | Why                                                                                                                                                                                                                      |
-| ---------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| refused → plays  | 32    | Pump Double (19: Bulk Up, Overclocked Electromancer, Unleash Fury, …); ChangeZone `Attacking$` (11: Preeminent Captain, Kinscaer Sentry, Shadowfax, …); `Count$AttackersDeclared` (Protean Raider, Wedding Announcement) |
-| plays → refused  | 69    | 66 CheckSVar heads this port does not resolve (below); Raid now true reaches Brazen Cannonade's `Effect Duration$` and Perforating Artist's GenericChoice `UnlessCost$`; Rampaging Geoderm `attackingBattle`             |
-| placed → refused | 4     | CheckSVar: Mine Is the Only Truth, Necropotence Avatar, Unyaro, You Cannot Hide from Me                                                                                                                                  |
+| Flip | Cards | Why |
+| --- | --- | --- |
+| refused → plays | 32 | Pump Double (19: Bulk Up, Overclocked Electromancer, Unleash Fury, …); ChangeZone `Attacking$` (11: Preeminent Captain, Kinscaer Sentry, Shadowfax, …); `Count$AttackersDeclared` (Protean Raider, Wedding Announcement) |
+| plays → refused | 69 | 66 CheckSVar heads this port does not resolve (below); Raid now true reaches Brazen Cannonade's `Effect Duration$` and Perforating Artist's GenericChoice `UnlessCost$`; Rampaging Geoderm `attackingBattle` |
+| placed → refused | 4 | CheckSVar: Mine Is the Only Truth, Necropotence Avatar, Unyaro, You Cannot Hide from Me |
 
 Every CheckSVar flip is a head Java resolves and this port does not: `Count$Adamant…`/`CastSA>Count$…` (Catharsis,
 Drowner of Truth, Wumpus Aberration, Desecrate Reality, Deceit, Emptiness, Vibrance, Wistfulness, Plumb the Forbidden),
@@ -105,13 +105,13 @@ Drowner of Truth, Wumpus Aberration, Desecrate Reality, Deceit, Emptiness, Vibra
 
 ## Decisions
 
-| Decision                                                      | Why                                                                                     |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Batch per effect body, not per whole resolution               | Smallest event Java treats as simultaneous that covers every ChangesZoneAll site; nests |
-| Join combat before the move on the known path too             | Trigger answers match Java's deferred check; only the prompt order differs              |
-| `attackingBattle` refused, not mirrored                       | PORT-8: neither compensate nor knowingly reproduce; refusal is visible                  |
-| Port `Count$AttackersDeclared` here                           | Largest CheckSVar flip cluster (≈45 Raid cards), combat state already kept              |
-| No new engine state, no new `PlayerController` method, no ADR | —                                                                                       |
+| Decision | Why |
+| --- | --- |
+| Batch per effect body, not per whole resolution | Smallest event Java treats as simultaneous that covers every ChangesZoneAll site; nests |
+| Join combat before the move on the known path too | Trigger answers match Java's deferred check; only the prompt order differs |
+| `attackingBattle` refused, not mirrored | PORT-8: neither compensate nor knowingly reproduce; refusal is visible |
+| Port `Count$AttackersDeclared` here | Largest CheckSVar flip cluster (≈45 Raid cards), combat state already kept |
+| No new engine state, no new `PlayerController` method, no ADR | — |
 
 ## Tests
 

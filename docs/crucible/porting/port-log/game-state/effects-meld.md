@@ -13,15 +13,15 @@ there.
 
 **Corpus.** 7 real lines, one per meld pair. 6 resolve, 1 rejected.
 
-| Card (primary + secondary)                          | Shape                                                                    | Status                                                    |
-| --------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------- |
-| Gisela, the Broken Blade + Bruna, the Fading Light  | End-step trigger, `IsPresent2$ Creature...+namedBruna; the Fading Light` | Resolves (`TestMeldGiselaAndBruna...`)                    |
-| Graf Rats + Midnight Scavengers                     | Begin-combat trigger, same `IsPresent2$` shape                           | Resolves                                                  |
-| Titania, Voice of Gaea + Argoth, Sanctum of Nature  | Upkeep trigger, `CheckSVar$`, `SecondaryType$ Land`                      | Resolves (`TestMeldTitania...`)                           |
-| Hanweir Battlements + Hanweir Garrison              | `AB$ Meld`, `Cost$ 3 R R T`, `ConditionPresent$` + `ConditionCheckSVar$` | Resolves (`TestMeldHanweir...`)                           |
-| Urza, Lord Protector + The Mightstone and Weakstone | `AB$ Meld`, `Cost$ 7`, `SecondaryType$ Artifact`, `SorcerySpeed$`        | Resolves (`TestMeldUrza...`)                              |
-| Mishra, Claimed by Gix + Phyrexian Dragon Engine    | `AttackersDeclared` chain, `Tapped$ True`, `Attacking$ True`             | Resolves (`TestMeldMishra...`)                            |
-| Vanille, Cheerful l'Cie + Fang, Fearless l'Cie      | Main1 trigger executing `AB$ Meld \| Cost$ 3 B G`                        | Resolves, cost paid as it resolves (`TestMeldVanille...`) |
+| Card (primary + secondary) | Shape | Status |
+| --- | --- | --- |
+| Gisela, the Broken Blade + Bruna, the Fading Light | End-step trigger, `IsPresent2$ Creature...+namedBruna; the Fading Light` | Resolves (`TestMeldGiselaAndBruna...`) |
+| Graf Rats + Midnight Scavengers | Begin-combat trigger, same `IsPresent2$` shape | Resolves |
+| Titania, Voice of Gaea + Argoth, Sanctum of Nature | Upkeep trigger, `CheckSVar$`, `SecondaryType$ Land` | Resolves (`TestMeldTitania...`) |
+| Hanweir Battlements + Hanweir Garrison | `AB$ Meld`, `Cost$ 3 R R T`, `ConditionPresent$` + `ConditionCheckSVar$` | Resolves (`TestMeldHanweir...`) |
+| Urza, Lord Protector + The Mightstone and Weakstone | `AB$ Meld`, `Cost$ 7`, `SecondaryType$ Artifact`, `SorcerySpeed$` | Resolves (`TestMeldUrza...`) |
+| Mishra, Claimed by Gix + Phyrexian Dragon Engine | `AttackersDeclared` chain, `Tapped$ True`, `Attacking$ True` | Resolves (`TestMeldMishra...`) |
+| Vanille, Cheerful l'Cie + Fang, Fearless l'Cie | Main1 trigger executing `AB$ Meld \| Cost$ 3 B G` | Resolves, cost paid as it resolves (`TestMeldVanille...`) |
 
 **Resolution order** (`MeldEffect.java`): secondary candidates = activator's battlefield, owned by activator, name
 `Secondary$`, type `SecondaryType$` (default `Creature`); none → no-op. One pick (`ChooseCardsForEffect`, 1..1). Host
@@ -37,15 +37,15 @@ description.
 
 ## Engine pieces
 
-| Piece                            | Where                                          | Why                                                                                                                                                                 |
-| -------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Card.MeldedWith`, `Card.Melded` | `card.go`                                      | ADR-0032's pair state; plain values, `Game.Clone`'s `copy` carries them                                                                                             |
-| Meld face swap                   | `meldeffect.go`                                | `transform()`'s own idiom: synthetic back `compile.Card`, `frontDef` holds the front; `turnFrontFaceUp` reverts on leaving                                          |
-| Split back apart                 | `Card.leaveMeld`/`Game.unmeld` (`game.go`)     | Hooked in `Move` and `MoveToLibraryTop`'s leave-battlefield branches; non-melded moves pay one `NoCard` compare                                                     |
-| `named<Name>` valid property     | `valid.go` (`sharesName`)                      | `CardProperty.java:62-68`; every corpus line's trigger or condition reads it. Previously false for every card (Play rejected it)                                    |
-| Live faces for trigger scans     | `liveFaces` (`trigger.go`)                     | `triggerFaces` read every face of `Def`: Mishra, Claimed by Gix attacking fired Mishra, Lost to Phyrexia's attack charm. See below                                  |
-| Leave combat on meld             | `removeFromCombat` in `meldeffect.go`          | `GameAction.java:424-429`; `Move` does not, and `combatdamage.go:157` counts any attacker whose `Zone` is `Battlefield` -- a melded Dragon Engine would deal damage |
-| `Attacking$ True`                | `attackByEffect` (`changecombatantseffect.go`) | `SpellAbilityEffect.addToCombat` (`SpellAbilityEffect.java:758-793`); extracted from `ChangeCombatants`, shared                                                     |
+| Piece | Where | Why |
+| --- | --- | --- |
+| `Card.MeldedWith`, `Card.Melded` | `card.go` | ADR-0032's pair state; plain values, `Game.Clone`'s `copy` carries them |
+| Meld face swap | `meldeffect.go` | `transform()`'s own idiom: synthetic back `compile.Card`, `frontDef` holds the front; `turnFrontFaceUp` reverts on leaving |
+| Split back apart | `Card.leaveMeld`/`Game.unmeld` (`game.go`) | Hooked in `Move` and `MoveToLibraryTop`'s leave-battlefield branches; non-melded moves pay one `NoCard` compare |
+| `named<Name>` valid property | `valid.go` (`sharesName`) | `CardProperty.java:62-68`; every corpus line's trigger or condition reads it. Previously false for every card (Play rejected it) |
+| Live faces for trigger scans | `liveFaces` (`trigger.go`) | `triggerFaces` read every face of `Def`: Mishra, Claimed by Gix attacking fired Mishra, Lost to Phyrexia's attack charm. See below |
+| Leave combat on meld | `removeFromCombat` in `meldeffect.go` | `GameAction.java:424-429`; `Move` does not, and `combatdamage.go:157` counts any attacker whose `Zone` is `Battlefield` -- a melded Dragon Engine would deal damage |
+| `Attacking$ True` | `attackByEffect` (`changecombatantseffect.go`) | `SpellAbilityEffect.addToCombat` (`SpellAbilityEffect.java:758-793`); extracted from `ChangeCombatants`, shared |
 
 **Where the secondary lives.** Java's `addToMelded` removes the card from its zone, points its zone at the battlefield
 and adds it to a separate `meldedCards` list, never to the zone's card list: `getCards()`, `contains()`, `size()` never
@@ -84,24 +84,24 @@ trigger unflipped; `TestFlipFaceTriggersAreNotLiveOnTheFrontFace` pins the fix.
 
 ## Rejected with an error before acting
 
-| Shape                                       | Why                                                                                                                   |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `Attacking$` other than `True`, `Blocking$` | `addToCombat`'s defined-defender and blocker branches; 0 corpus lines                                                 |
-| `Condition$`                                | `subAbilityConditionMet` would skip it silently                                                                       |
-| No `Primary$`/`Secondary$`                  | Java's `sharesNameWith(null)` fails after exiling both                                                                |
-| Host no longer on the battlefield           | Java rechecks a trigger's `IsPresent$` at resolution (CR 603.4); Crucible does not, and would meld from the graveyard |
-| Any `Mode$ CantExile` static in play        | `Card.canExiledBy` not modeled (same stance as `heisteffect.go:23`); 1 corpus card                                    |
+| Shape | Why |
+| --- | --- |
+| `Attacking$` other than `True`, `Blocking$` | `addToCombat`'s defined-defender and blocker branches; 0 corpus lines |
+| `Condition$` | `subAbilityConditionMet` would skip it silently |
+| No `Primary$`/`Secondary$` | Java's `sharesNameWith(null)` fails after exiling both |
+| Host no longer on the battlefield | Java rechecks a trigger's `IsPresent$` at resolution (CR 603.4); Crucible does not, and would meld from the graveyard |
+| Any `Mode$ CantExile` static in play | `Card.canExiledBy` not modeled (same stance as `heisteffect.go:23`); 1 corpus card |
 
 ## Not ported
 
-| Gap                                                                                                                                 | Java                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Melded mana value = sum of both front faces; `CMC()` reads the meld face's `no cost`, 0                                             | `Card.java:7244-7250`                                                              |
-| The secondary joins the caller's `ChangesZoneAll` batch on a split                                                                  | `storeChangesZoneAll`, `GameAction.java:641`                                       |
-| `ChangeZone` `Remember$`/exiled-with and `WithCountersType$` reaching the melded card                                               | `ChangeZoneEffect.java:790-796`, `:1452-1485`                                      |
-| Fixture `\|Meld:<Name>` dump and load; no scenario fixture of a melded permanent for that reason (Transformed is not ported either) | `GameState.java:322-330`, `:1322-1334`                                             |
-| Commander-ness through the melded card                                                                                              | `Card.java:7282`, `:7304`                                                          |
-| `sharesName`'s own `hasNonLegendaryCreatureNames()` tail (SpyKit's text-changing ability)                                           | `Card.java:5864-5868`; 0 real `named<Name>` lines reach a SpyKit-shaped card today |
+| Gap | Java |
+| --- | --- |
+| Melded mana value = sum of both front faces; `CMC()` reads the meld face's `no cost`, 0 | `Card.java:7244-7250` |
+| The secondary joins the caller's `ChangesZoneAll` batch on a split | `storeChangesZoneAll`, `GameAction.java:641` |
+| `ChangeZone` `Remember$`/exiled-with and `WithCountersType$` reaching the melded card | `ChangeZoneEffect.java:790-796`, `:1452-1485` |
+| Fixture `\|Meld:<Name>` dump and load; no scenario fixture of a melded permanent for that reason (Transformed is not ported either) | `GameState.java:322-330`, `:1322-1334` |
+| Commander-ness through the melded card | `Card.java:7282`, `:7304` |
+| `sharesName`'s own `hasNonLegendaryCreatureNames()` tail (SpyKit's text-changing ability) | `Card.java:5864-5868`; 0 real `named<Name>` lines reach a SpyKit-shaped card today |
 
 **Forge bug** (`forge-java-defects.md`): `GameAction.java:635-640` computes `unmeldPosition` and passes `position`, so
 the comment's "ask controller if it wants to be on top or bottom" never happens. Reproduced for oracle parity.

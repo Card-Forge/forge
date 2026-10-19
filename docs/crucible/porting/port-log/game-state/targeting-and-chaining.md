@@ -200,14 +200,14 @@ fizzles — no effect, no sub-ability, no `AbilityResolved` — when at least on
 it or a chosen mode names `CantFizzle$`. A fizzled spell still goes to its owner's graveyard
 (`moveResolvedSpellToGraveyard`).
 
-| Target | Illegal when                                                                                             | Java                                                         |
-| ------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Card   | it changed zones since targeted (its `zoneStamp` differs from the one `stampTargets` recorded; CR 400.7) | `equalsWithGameTimestamp`, `:716-722`                        |
-| Card   | it is phased out (CR 702.26b)                                                                            | `Card.canBeTargetedBy`, `Card.java:6829-6831`                |
-| Card   | it no longer matches the ability's `ValidTgts$`                                                          | `canTarget`'s `isValid`, `SpellAbility.java:1591-1594`       |
-| Card   | Hexproof, Shroud or Protection refuses activator/source (`cardCantBeTargetedBy`, below)                  | `Card.canBeTargetedBy`, `StaticAbilityCantTarget.java:37-51` |
-| Player | they left the game, or no longer match `ValidTgts$`                                                      | `Player.canBeTargetedBy`, `Player.java:1033-1043`            |
-| other  | never (an ability targeted by `ChangeTargets`)                                                           | —                                                            |
+| Target | Illegal when | Java |
+| --- | --- | --- |
+| Card | it changed zones since targeted (its `zoneStamp` differs from the one `stampTargets` recorded; CR 400.7) | `equalsWithGameTimestamp`, `:716-722` |
+| Card | it is phased out (CR 702.26b) | `Card.canBeTargetedBy`, `Card.java:6829-6831` |
+| Card | it no longer matches the ability's `ValidTgts$` | `canTarget`'s `isValid`, `SpellAbility.java:1591-1594` |
+| Card | Hexproof, Shroud or Protection refuses activator/source (`cardCantBeTargetedBy`, below) | `Card.canBeTargetedBy`, `StaticAbilityCantTarget.java:37-51` |
+| Player | they left the game, or no longer match `ValidTgts$` | `Player.canBeTargetedBy`, `Player.java:1033-1043` |
+| other | never (an ability targeted by `ChangeTargets`) | — |
 
 `zoneStamp` (`card.go`) is Java's `gameTimestamp`: set only as a card enters a zone (`put`/`putFront`), so a transform
 (which restamps `Timestamp` for layer order) does not fizzle a spell targeting the transformed permanent. `PushAbility`
@@ -233,11 +233,11 @@ identically at target selection (`targetCandidates`) and at the CR 608.2b resolu
 `auraTargetStillLegal`) — Java's own `SpellAbility.canTarget` runs `entity.canBeTargetedBy(this)` at both call sites
 regardless of `fizzleCheck` (`SpellAbility.java:1608`), no asymmetry to reproduce.
 
-| Keyword    | Refuses when                                                                                         | Activator gate | CR        |
-| ---------- | ---------------------------------------------------------------------------------------------------- | -------------- | --------- |
-| Protection | source (the ability's own host card) matches `protectionEach`'s spec                                 | none           | 702.16e   |
-| Shroud     | always                                                                                               | none           | 702.18a   |
-| Hexproof   | activator is an opponent of target's controller, and (bare, or source matches `hexproofValidSource`) | Opponent       | 702.11b/e |
+| Keyword | Refuses when | Activator gate | CR |
+| --- | --- | --- | --- |
+| Protection | source (the ability's own host card) matches `protectionEach`'s spec | none | 702.16e |
+| Shroud | always | none | 702.18a |
+| Hexproof | activator is an opponent of target's controller, and (bare, or source matches `hexproofValidSource`) | Opponent | 702.11b/e |
 
 `hexproofValidSource` (`staticability.go`, built for an Aura's own attach check) is reused unchanged — the same
 `"Card.<color>,Emblem.<color>"` spec Java's `Protection.getProtectionValid` produces, matched here against `source`
@@ -541,20 +541,20 @@ card this game has ever printed, and this port's `*Game` holds no `*carddb.DB` r
 ADR-0013's schema (`event.go`) landed with the turn structure it names but with nothing behind it: no `Game` field held
 a `Sink`, and nothing called `Emit`. Every mechanism this port has built now does:
 
-| Call site                                                                       | Kind(s)                                             |
-| ------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `Move`                                                                          | `ZoneChanged`                                       |
-| `StartTurn`, `AdvancePhase` (on wrap)                                           | `TurnBegan`                                         |
-| `beginPhase` (every step)                                                       | `PhaseBegan`                                        |
-| `drawStep`                                                                      | `CardDrawn`, alongside `Move`'s own `ZoneChanged`   |
-| `CheckStateBasedActions` (once, on end)                                         | `GameEnded`                                         |
-| `PushAbility`                                                                   | `AbilityActivated`                                  |
-| `ResolveStack` (per item)                                                       | `AbilityResolved`                                   |
-| `CastSpell` (on a successful cast)                                              | `SpellCast`                                         |
-| `dealCombatDamageStep` (per exchange, both damage steps)                        | `DamageDealt`, plus `LifeChanged` for player damage |
-| `annihilateCounters`, `dealPermanentDamage`, `Move`'s ETB loyalty/defense grant | `CounterChanged`                                    |
-| `PayManaCost` (a Phyrexian or hybrid Phyrexian shard resolved to life)          | `LifeChanged`                                       |
-| `Game.phase` (phasing.go, every permanent phasing in or out, ADR-0021)          | `Phased` (schema v2)                                |
+| Call site | Kind(s) |
+| --- | --- |
+| `Move` | `ZoneChanged` |
+| `StartTurn`, `AdvancePhase` (on wrap) | `TurnBegan` |
+| `beginPhase` (every step) | `PhaseBegan` |
+| `drawStep` | `CardDrawn`, alongside `Move`'s own `ZoneChanged` |
+| `CheckStateBasedActions` (once, on end) | `GameEnded` |
+| `PushAbility` | `AbilityActivated` |
+| `ResolveStack` (per item) | `AbilityResolved` |
+| `CastSpell` (on a successful cast) | `SpellCast` |
+| `dealCombatDamageStep` (per exchange, both damage steps) | `DamageDealt`, plus `LifeChanged` for player damage |
+| `annihilateCounters`, `dealPermanentDamage`, `Move`'s ETB loyalty/defense grant | `CounterChanged` |
+| `PayManaCost` (a Phyrexian or hybrid Phyrexian shard resolved to life) | `LifeChanged` |
+| `Game.phase` (phasing.go, every permanent phasing in or out, ADR-0021) | `Phased` (schema v2) |
 
 `Game.sink` defaults to `DiscardSink{}`, set in `NewGame`, so no existing caller — every test, `fixture.Load` — had to
 start constructing one. `SetSink` is the opt-in a recorder (M8) uses. `Game.Clone` always gives the clone a fresh

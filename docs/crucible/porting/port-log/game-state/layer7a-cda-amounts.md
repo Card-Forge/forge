@@ -20,24 +20,24 @@ Measured, not assumed: every `SetPower$`/`SetToughness$` on a real `Characterist
 followed to the body. 405 dimensions on 242 lines. `xPaid` appears on **none** of them; `CardCounters` on 6, `Devotion`
 on 5.
 
-| Shape (after SVar chain)                                                                | Dims | Status                                                 |
-| --------------------------------------------------------------------------------------- | ---- | ------------------------------------------------------ |
-| `Count$Valid[<Zone>[,<Zone>]] <spec>`, no suffix                                        | 275  | resolved before this slice                             |
-| same, with a doXMath suffix (`/Twice`, `/Plus.1`, `/Times.2`)                           | 23   | resolved                                               |
-| same, with a `$<property>` (`CardTypes`, `GreatestCardManaCost`, `P1P1`, ...)           | 27   | 25 resolved; `DifferentCardNames` (2) deferred         |
-| `SVar$X/Plus.1`, `SVar$Y/HalfUp` (the goyfs, Malignus)                                  | 13   | resolved                                               |
-| `Count$Domain[/Twice]`                                                                  | 9    | resolved                                               |
-| `Count$YourLifeTotal[/Minus.Z]`, Z = `Count$OppGreatestLifeTotal`                       | 8    | resolved                                               |
-| `Number$N[/Plus.X]`, `Count$ChosenNumber` (Shapeshifter, Mwonvuli Ooze)                 | 8    | resolved                                               |
-| literal                                                                                 | 6    | resolved before this slice                             |
-| `Count$CardCounters.<TYPE>[/Twice]`                                                     | 6    | resolved                                               |
-| `Count$Devotion.<Color>`                                                                | 5    | resolved                                               |
-| `Count$NumInAllHands`, `Count$Chroma.<C>`, `ChromaInGrave.<C>`, `Count$YouDrewThisTurn` | 9    | resolved                                               |
-| `PlayerCountOpponents$HighestCardsInHand`                                               | 2    | resolved                                               |
-| `ExiledWith$CardPower`/`ExiledWith$Colors`                                              | 5    | deferred: no exiled-with tracking                      |
-| `Remembered$Amount`/`Remembered$CardManaCost`, `PlayerCountRemembered$Life...`          | 6    | deferred: Remembered-list heads                        |
-| `Count$YourTurns`                                                                       | 2    | deferred: `Player.Turn` is never incremented           |
-| `Count$Party`                                                                           | 1    | deferred: needs `*cardtype.Registry` and Java's greedy |
+| Shape (after SVar chain) | Dims | Status |
+| --- | --- | --- |
+| `Count$Valid[<Zone>[,<Zone>]] <spec>`, no suffix | 275 | resolved before this slice |
+| same, with a doXMath suffix (`/Twice`, `/Plus.1`, `/Times.2`) | 23 | resolved |
+| same, with a `$<property>` (`CardTypes`, `GreatestCardManaCost`, `P1P1`, ...) | 27 | 25 resolved; `DifferentCardNames` (2) deferred |
+| `SVar$X/Plus.1`, `SVar$Y/HalfUp` (the goyfs, Malignus) | 13 | resolved |
+| `Count$Domain[/Twice]` | 9 | resolved |
+| `Count$YourLifeTotal[/Minus.Z]`, Z = `Count$OppGreatestLifeTotal` | 8 | resolved |
+| `Number$N[/Plus.X]`, `Count$ChosenNumber` (Shapeshifter, Mwonvuli Ooze) | 8 | resolved |
+| literal | 6 | resolved before this slice |
+| `Count$CardCounters.<TYPE>[/Twice]` | 6 | resolved |
+| `Count$Devotion.<Color>` | 5 | resolved |
+| `Count$NumInAllHands`, `Count$Chroma.<C>`, `ChromaInGrave.<C>`, `Count$YouDrewThisTurn` | 9 | resolved |
+| `PlayerCountOpponents$HighestCardsInHand` | 2 | resolved |
+| `ExiledWith$CardPower`/`ExiledWith$Colors` | 5 | deferred: no exiled-with tracking |
+| `Remembered$Amount`/`Remembered$CardManaCost`, `PlayerCountRemembered$Life...` | 6 | deferred: Remembered-list heads |
+| `Count$YourTurns` | 2 | deferred: `Player.Turn` is never incremented |
+| `Count$Party` | 1 | deferred: needs `*cardtype.Registry` and Java's greedy |
 
 Net: 389 of 405 by shape — per CDA line, SVar chain followed, every face. `TestCharacteristicDefiningCorpusFloor`
 measures it end to end against the real card DB, one card per name, face 0, alone on the battlefield: 363 of 374 "\*"
@@ -52,60 +52,60 @@ evaluator is shared by some 30 callers (DealDamage, Dig, Surveil, Sacrifice, tri
 every head added here resolves for all of them. Chosen over a CDA-only resolver because the heads are context-free —
 each reads the host, its controller, or a zone — and one evaluator is one place for Java parity.
 
-| Piece                                          | What                                                                                  | Why                                                                                                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `expr.Amount.Count`                            | `Count$` body already read by `ParseCount`                                            | Evaluator no longer parses script text per SBA pass (PORT-2). Amounts are not in the canonical AST, so golden fingerprints unchanged  |
-| `expr.Amount.Numeric`, `expr.Op.Numeric/Value` | `Number$N` body and an integer operator operand, read at load                         | Same reason; an operand that is not an integer is an SVar name, looked up                                                             |
-| `addInlineAmounts` (compile.go)                | Static P/T value written as a raw expression, keyed by its own text in `Face.Amounts` | `nethergoyf.txt` writes `SetPower$ Count$...` inline; `calculateAmount` reads it as raw (`indexOf('$') > 0`). An SVar name has no `$` |
-| `applyOperator`                                | doXMath, all 18 operators, containment in Java's order                                | HalfUp/HalfDown on a negative use `math.Ceil`/`Floor`, not Go's truncating division                                                   |
-| `namedAmount`                                  | Runtime SVar (`Card.svars`) first, then `amounts`, at every hop                       | Java's `getSVar` sees StoreSVar values at every level, not only the outermost name                                                    |
-| `handlePaid` (amountpaid.go)                   | handlePaid in its own branch order                                                    | A name an earlier branch catches never reaches a later one; unknown property → unresolved, never a plain match count                  |
+| Piece | What | Why |
+| --- | --- | --- |
+| `expr.Amount.Count` | `Count$` body already read by `ParseCount` | Evaluator no longer parses script text per SBA pass (PORT-2). Amounts are not in the canonical AST, so golden fingerprints unchanged |
+| `expr.Amount.Numeric`, `expr.Op.Numeric/Value` | `Number$N` body and an integer operator operand, read at load | Same reason; an operand that is not an integer is an SVar name, looked up |
+| `addInlineAmounts` (compile.go) | Static P/T value written as a raw expression, keyed by its own text in `Face.Amounts` | `nethergoyf.txt` writes `SetPower$ Count$...` inline; `calculateAmount` reads it as raw (`indexOf('$') > 0`). An SVar name has no `$` |
+| `applyOperator` | doXMath, all 18 operators, containment in Java's order | HalfUp/HalfDown on a negative use `math.Ceil`/`Floor`, not Go's truncating division |
+| `namedAmount` | Runtime SVar (`Card.svars`) first, then `amounts`, at every hop | Java's `getSVar` sees StoreSVar values at every level, not only the outermost name |
+| `handlePaid` (amountpaid.go) | handlePaid in its own branch order | A name an earlier branch catches never reaches a later one; unknown property → unresolved, never a plain match count |
 
 No new `Game` state, no new controller decision: `Game.Clone` and `TestCloneAllocationsStayBounded` are untouched.
 
 ### Java behavior kept exact
 
-| Behavior                                                                        | Where it shows                                                         |
-| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Sign multiplier applies last: `-Number$7/Plus.1` is −8                          | `calculateAmount`'s `val * multiplier`                                 |
-| Empty matched list is 0 before the outer operator: Tarmogoyf is 0/1             | `handlePaid`'s first line, then `xCount`'s `doXMath(num, expr)`        |
-| Operand with more than one `.` part is 0; `Plus.1.2` leaves the number alone    | `doXMath`'s `s.length == 2`                                            |
+| Behavior | Where it shows |
+| --- | --- |
+| Sign multiplier applies last: `-Number$7/Plus.1` is −8 | `calculateAmount`'s `val * multiplier` |
+| Empty matched list is 0 before the outer operator: Tarmogoyf is 0/1 | `handlePaid`'s first line, then `xCount`'s `doXMath(num, expr)` |
+| Operand with more than one `.` part is 0; `Plus.1.2` leaves the number alone | `doXMath`'s `s.length == 2` |
 | Devotion: a hybrid symbol counts once toward any mask it touches, generic never | `ManaCostShard.isColor`; plus `Mode$ Devotion` (Altar of the Pantheon) |
-| `OppGreatestLifeTotal` with no opponents is `Integer.MIN_VALUE`                 | `Aggregates.max`'s seed                                                |
-| `PlayerCount...$Highest` seeds 0, `Lowest` 99999                                | `playerXCount`                                                         |
+| `OppGreatestLifeTotal` with no opponents is `Integer.MIN_VALUE` | `Aggregates.max`'s seed |
+| `PlayerCount...$Highest` seeds 0, `Lowest` 99999 | `playerXCount` |
 
 ### Refused rather than guessed (GO-7)
 
-| Shape                                             | Reason                                                                                                                                              |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Context prefix (`CastSA>`, `Spawner>`, ...)       | `adjustTriggerContext` switches the measuring ability; a static has none. No CDA writes one                                                         |
-| `Mod.0`                                           | Java throws `ArithmeticException`                                                                                                                   |
-| `PlayerCount...` with an operator                 | `playerXCount` hands `Highest<X>/<op>` down to `playerXProperty`, applying the operator twice. 0 corpus lines                                       |
+| Shape | Reason |
+| --- | --- |
+| Context prefix (`CastSA>`, `Spawner>`, ...) | `adjustTriggerContext` switches the measuring ability; a static has none. No CDA writes one |
+| `Mod.0` | Java throws `ArithmeticException` |
+| `PlayerCount...` with an operator | `playerXCount` hands `Highest<X>/<op>` down to `playerXProperty`, applying the operator twice. 0 corpus lines |
 | Per-card `CardPower`/`CardToughness` (Greatest\*) | A battlefield permanent's power is mid-rebuild while the layer pass runs (`Game.layering`); read outside it, [`m6-r9-amounts.md`](m6-r9-amounts.md) |
-| Devotion to `Chosen...` or colorless              | Host's chosen color / a mana type with no `mana.Colors` bit; 0 CDA lines                                                                            |
-| `Mode$ Devotion` line with any other param        | `checkConditions`' Condition$ family is not evaluated for this mode                                                                                 |
-| An operand SVar that does not resolve             | Java prints to stderr and uses 0; a wrong P/T is worse than an unresolved one                                                                       |
+| Devotion to `Chosen...` or colorless | Host's chosen color / a mana type with no `mana.Colors` bit; 0 CDA lines |
+| `Mode$ Devotion` line with any other param | `checkConditions`' Condition$ family is not evaluated for this mode |
+| An operand SVar that does not resolve | Java prints to stderr and uses 0; a wrong P/T is worse than an unresolved one |
 
 ### Latent Forge defects (PORT-8)
 
 None is reachable from today's corpus, so none is patched upstream; each is why the matching shape above is refused
 rather than reproduced.
 
-| File:line                     | Defect                                                                                                             |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| File:line | Defect |
+| --- | --- |
 | `AbilityUtils.java:3310,3321` | `playerXCount` Highest/Lowest pass the whole `s`, `/op` included, to `playerXProperty`: the operator applies twice |
-| `AbilityUtils.java:3257`      | `doXMath` `Mod` with a zero operand throws `ArithmeticException`                                                   |
-| `AbilityUtils.java:1584`      | `xCount` `Number$` with a non-integer body throws `NumberFormatException`                                          |
+| `AbilityUtils.java:3257` | `doXMath` `Mod` with a zero operand throws `ArithmeticException` |
+| `AbilityUtils.java:1584` | `xCount` `Number$` with a non-integer body throws `NumberFormatException` |
 
 ### Deferred, and what each needs
 
-| Shape                                                    | Needs                                                                                                                           |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `Count$Party`                                            | `*cardtype.Registry` for changeling's all-creature-types, and Java's `HashMultimap` greedy assignment order reproduced (PORT-7) |
-| `$CreatureType`/`LandType`/`PlaneswalkerType`/`AllTypes` | `*cardtype.Registry` to tell a creature type from any other subtype (`CardType.getCreatureTypes`)                               |
-| `$DifferentCardNames`                                    | `CardLists.getDifferentNamesCount`: Spy Kit's non-legendary names and no-name cards; no `sharesNameWith` in the engine          |
-| `ExiledWith$...`                                         | `Card.getExiledCards` tracking, written by the effects that exile "with" a card                                                 |
-| `Count$YourTurns`                                        | `Player.Turn` incremented at each turn start (turn.go); today nothing writes it                                                 |
+| Shape | Needs |
+| --- | --- |
+| `Count$Party` | `*cardtype.Registry` for changeling's all-creature-types, and Java's `HashMultimap` greedy assignment order reproduced (PORT-7) |
+| `$CreatureType`/`LandType`/`PlaneswalkerType`/`AllTypes` | `*cardtype.Registry` to tell a creature type from any other subtype (`CardType.getCreatureTypes`) |
+| `$DifferentCardNames` | `CardLists.getDifferentNamesCount`: Spy Kit's non-legendary names and no-name cards; no `sharesNameWith` in the engine |
+| `ExiledWith$...` | `Card.getExiledCards` tracking, written by the effects that exile "with" a card |
+| `Count$YourTurns` | `Player.Turn` incremented at each turn start (turn.go); today nothing writes it |
 
 ### Known limits (not new, now load-bearing)
 

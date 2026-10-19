@@ -22,14 +22,14 @@ Pump writes its boost straight onto the card (`PumpEffect.java:61`, `addPTBoost`
 This port keeps a resolved Pump as a `pumpRecord` applied in Layer 7c, so only the rebuild puts the boost on the card
 before the next link reads it: Rhino's Rampage's 5/1 pumped to 6/1 deals 6, not 5.
 
-| Piece       | Go                                                                                   | Why                                                                                     |
-| ----------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| Call site   | `resolveSubAbility`, once the sub is found, before `Registry.Resolve` of the child   | Java refreshes only when a sub-ability exists (`:1361-1364`)                            |
-| Rebuild     | `refreshLayersBetweenLinks` → `refreshLayers` (all eight layers, no SBA)             | Reuses the existing pass; no parallel mechanism                                         |
-| Context     | `g.resolving` and `g.xctx` cleared for the rebuild, restored after                   | Statics evaluate their own amounts, not the parent's targets or X                       |
-| Re-entry    | Skipped while `g.layering > 0`                                                       | A layer pass can reach a chain                                                          |
-| SBA hold    | Skipped while `g.staticsHeld > 0`, set for the whole of `checkStateBasedActionsPass` | Java's `setHoldCheckingStaticAbilities` around the SBA's destruction (`:1588-1618`)     |
-| Left to SBA | Control-zone correction, static commands, unpairing, Always/Immediate triggers       | Java's `checkStaticAbilities` does them too (`:1203-1248`); the next SBA pass does here |
+| Piece | Go | Why |
+| --- | --- | --- |
+| Call site | `resolveSubAbility`, once the sub is found, before `Registry.Resolve` of the child | Java refreshes only when a sub-ability exists (`:1361-1364`) |
+| Rebuild | `refreshLayersBetweenLinks` → `refreshLayers` (all eight layers, no SBA) | Reuses the existing pass; no parallel mechanism |
+| Context | `g.resolving` and `g.xctx` cleared for the rebuild, restored after | Statics evaluate their own amounts, not the parent's targets or X |
+| Re-entry | Skipped while `g.layering > 0` | A layer pass can reach a chain |
+| SBA hold | Skipped while `g.staticsHeld > 0`, set for the whole of `checkStateBasedActionsPass` | Java's `setHoldCheckingStaticAbilities` around the SBA's destruction (`:1588-1618`) |
+| Left to SBA | Control-zone correction, static commands, unpairing, Always/Immediate triggers | Java's `checkStaticAbilities` does them too (`:1203-1248`); the next SBA pass does here |
 
 **New engine state:** `Game.staticsHeld int`, transient like `layering`: zero between calls, so `Game.Clone` leaves it
 zero. Java's hold is narrower (destroy/sacrifice only); here it covers the whole pass, which also runs the layers
@@ -42,12 +42,12 @@ itself.
 with the effect's source instead of the effect (`:1092-1094`): `Card.getEffectSource` is the host of the ability that
 made the effect (`Card.java:7233-7237`), here Gut. Gut's specialized faces copy `Defined$ ExiledWith`.
 
-| Piece    | Go                                                                                                          |
-| -------- | ----------------------------------------------------------------------------------------------------------- |
-| Build    | `replaceDyingDef` appends the param; `replaceDyingUnresolvedParams` keeps `ReplaceDyingValid$`/`Zone$`      |
-| Dispatch | `movedGraveyardDestination` admits the key and records `effectLife.host` in `movedPost.exiledWith`          |
-| Mark     | `moveToGraveyard` calls `markExiledWith` for the card and a melded partner after the move (exile only)      |
-| Guard    | On a host that is not an effect card: pending error, replacement not applied (Java: null `getEffectSource`) |
+| Piece | Go |
+| --- | --- |
+| Build | `replaceDyingDef` appends the param; `replaceDyingUnresolvedParams` keeps `ReplaceDyingValid$`/`Zone$` |
+| Dispatch | `movedGraveyardDestination` admits the key and records `effectLife.host` in `movedPost.exiledWith` |
+| Mark | `moveToGraveyard` calls `markExiledWith` for the card and a melded partner after the move (exile only) |
+| Guard | On a host that is not an effect card: pending error, replacement not applied (Java: null `getEffectSource`) |
 
 No corpus `R:` line names `ExiledWithEffectSource$`; only `replaceDying` builds it. The plain shape (Lava Coil) still
 marks nothing: Java marks it exiled with the effect card, which no reader looks at before the effect is exiled at
@@ -60,15 +60,15 @@ DamageDoneOnce family (`GameAction.java:2766-2767`, `:2803`). For each permanent
 batch it sets `hasBeenDealtExcessDamageThisTurn`, logs the excess, and runs Mode$ ExcessDamage; then Mode$
 ExcessDamageAll once (`CardDamageTable.java:126-162`).
 
-| Piece                          | Go                                                                                                                               |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| Per-card excess                | `batchExcess`, shared by `bindExcessSVar` and the triggers so the two cannot disagree                                            |
-| `Damage.ExcessThisTurn`        | Set by `dealPermanentDamage` (`excessSoFar`) before the exchange's DamageDone check, and again by `triggerExcessDamage`          |
-| Mode$ ExcessDamage             | Per damaged permanent: `ValidTarget$`, `CombatDamage$`; records `Target` and `DamageAmount` (the excess)                         |
-| Mode$ ExcessDamageAll          | Once per batch: `CombatDamage$`, one damaged permanent matching `ValidTarget$`; `Targets` not recorded (no reader)               |
-| Where                          | `checkDamageTableTriggers`, after lifelink, before DamageDoneOnce: every damage path (combat, DealDamage, DamageAll, Fight, ...) |
-| Heal, regeneration             | `Damage.Heal` keeps the flag (`Card.healDamage`, `Card.java:6181-6185`); cleanup's `Clear` drops it (`:7285`)                    |
-| `wasDealtExcessDamageThisTurn` | Valid property on the flag (`CardProperty.java:1164-1167`); it read false for every card before                                  |
+| Piece | Go |
+| --- | --- |
+| Per-card excess | `batchExcess`, shared by `bindExcessSVar` and the triggers so the two cannot disagree |
+| `Damage.ExcessThisTurn` | Set by `dealPermanentDamage` (`excessSoFar`) before the exchange's DamageDone check, and again by `triggerExcessDamage` |
+| Mode$ ExcessDamage | Per damaged permanent: `ValidTarget$`, `CombatDamage$`; records `Target` and `DamageAmount` (the excess) |
+| Mode$ ExcessDamageAll | Once per batch: `CombatDamage$`, one damaged permanent matching `ValidTarget$`; `Targets` not recorded (no reader) |
+| Where | `checkDamageTableTriggers`, after lifelink, before DamageDoneOnce: every damage path (combat, DealDamage, DamageAll, Fight, ...) |
+| Heal, regeneration | `Damage.Heal` keeps the flag (`Card.healDamage`, `Card.java:6181-6185`); cleanup's `Clear` drops it (`:7285`) |
+| `wasDealtExcessDamageThisTurn` | Valid property on the flag (`CardProperty.java:1164-1167`); it read false for every card before |
 
 **Why the flag is set per exchange.** Java tests a DamageDone trigger only once the batch is done (waiting triggers), so
 Zangief's `ValidTarget$ Creature.wasDealtExcessDamageThisTurn` sees the excess that same damage dealt. This port checks
@@ -100,19 +100,19 @@ card uses.
 
 `crucible card-smoke -all -workers 8 -list`, before → after:
 
-| Status       | Before | After  |
-| ------------ | ------ | ------ |
-| plays        | 30,624 | 30,626 |
-| refused      | 2,889  | 2,887  |
-| placed       | 372    | 372    |
-| inconclusive | 193    | 193    |
-| judged play  | 91.4%  | 91.4%  |
+| Status | Before | After |
+| --- | --- | --- |
+| plays | 30,624 | 30,626 |
+| refused | 2,889 | 2,887 |
+| placed | 372 | 372 |
+| inconclusive | 193 | 193 |
+| judged play | 91.4% | 91.4% |
 
-| Flip            | Card                     | Cause                                                                                                                                                                                   |
-| --------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| refused → plays | Gut, Fanatical Priestess | `Fight: ReplaceDyingExiledWith$ not resolvable yet` resolved                                                                                                                            |
-| refused → plays | Blade of Shared Souls    | `TriggeredTarget` now excludes the attached Rebel token, the probe board's only creature, so the Clone trigger has no target and its `Duration$ UntilUnattached` refusal is not reached |
-| plays → refused | none                     |                                                                                                                                                                                         |
+| Flip | Card | Cause |
+| --- | --- | --- |
+| refused → plays | Gut, Fanatical Priestess | `Fight: ReplaceDyingExiledWith$ not resolvable yet` resolved |
+| refused → plays | Blade of Shared Souls | `TriggeredTarget` now excludes the attached Rebel token, the probe board's only creature, so the Clone trigger has no target and its `Duration$ UntilUnattached` refusal is not reached |
+| plays → refused | none | |
 
 The probe cannot see the rest: Rhino's Rampage, The Last Agni Kai and every other Pump-then-link chain played before and
 still do, now with the pumped numbers; Aegar, the Freezing Flame, Fall of Cair Andros, Toralf, God of Fury, Magmatic
@@ -120,11 +120,11 @@ Galleon and Zangief, the Red Cyclone played because their triggers never fired, 
 
 ## Not ported
 
-| Shape                                                   | Reason                            |
-| ------------------------------------------------------- | --------------------------------- |
-| `ExcessSVar$` under `DamageMap$`                        | No corpus line (above)            |
-| ExcessDamageAll's `Targets` (Defined$ TriggeredTargets) | No corpus reader                  |
-| checkStaticAbilities' non-layer steps between links     | Left to the next SBA pass (above) |
+| Shape | Reason |
+| --- | --- |
+| `ExcessSVar$` under `DamageMap$` | No corpus line (above) |
+| ExcessDamageAll's `Targets` (Defined$ TriggeredTargets) | No corpus reader |
+| checkStaticAbilities' non-layer steps between links | Left to the next SBA pass (above) |
 
 ## Tests
 

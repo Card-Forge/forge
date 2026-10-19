@@ -12,12 +12,12 @@
 X, 0 when never cast). 927 corpus files read it: Blaze's `NumDmg$ X`, every `K:etbCounter:...:X`, Walking Ballista,
 Hangarback Walker.
 
-| Java                                                    | Go                                                                                                             |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `root.getXManaCostPaid() != null`                       | `Game.xctx`, set by `Registry.resolve` from `Ability.xManaCostPaid`/`hasXManaCostPaid` and restored afterwards |
-| `getRootAbility()`                                      | `resolveSubAbility` copies the X onto the child, so every ability of a chain reads its root's                  |
+| Java | Go |
+| --- | --- |
+| `root.getXManaCostPaid() != null` | `Game.xctx`, set by `Registry.resolve` from `Ability.xManaCostPaid`/`hasXManaCostPaid` and restored afterwards |
+| `getRootAbility()` | `resolveSubAbility` copies the X onto the child, so every ability of a chain reads its root's |
 | `c.getXManaCostPaid()` (`getCastSA().getXManaCostPaid`) | `Card.castX`, set when the spell is cast, cleared by `Game.Move` when the card leaves the stack or battlefield |
-| `ChangeX` rewrites the cast ability's X                 | `changeXEffect` also writes `Card.castX` of a spell                                                            |
+| `ChangeX` rewrites the cast ability's X | `changeXEffect` also writes `Card.castX` of a spell |
 
 A triggered ability of a permanent carries no X of its own, so it reads `castX`: an "enters" trigger of an X spell sees
 the X it was cast with. `Game.xctx` also records the resolving ability's source, and `xPaid` reads it only for that
@@ -55,12 +55,12 @@ puts them all into one counter table and applies the `AddCounter` replacements o
 summed first and `countersReplaced` runs once per kind (Hardened Scales adds one for the lot). `eachReplacement` reads
 only the live faces (`liveFaces`), so a front face entering does not pick up its back face's `K:etbCounter`.
 
-| Shape                                                                                                                        | Result                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `Defined$ Self` on moved's own line                                                                                          | counters on moved                                                                           |
-| `Defined$ ReplacedCard`                                                                                                      | counters on moved, from another permanent's line (`ValidCard$ Creature.YouCtrl+Other`, ...) |
-| `Defined$ Self` on another permanent                                                                                         | none: its own "self" is not what entered                                                    |
-| any other `Defined$`, an extra `PutCounter` param, an extra replacement param (`Optional$`), an amount that does not resolve | pending error (ADR-0020 decision 4, GO-7), never an entry without the counters              |
+| Shape | Result |
+| --- | --- |
+| `Defined$ Self` on moved's own line | counters on moved |
+| `Defined$ ReplacedCard` | counters on moved, from another permanent's line (`ValidCard$ Creature.YouCtrl+Other`, ...) |
+| `Defined$ Self` on another permanent | none: its own "self" is not what entered |
+| any other `Defined$`, an extra `PutCounter` param, an extra replacement param (`Optional$`), an amount that does not resolve | pending error (ADR-0020 decision 4, GO-7), never an entry without the counters |
 
 A replacement whose condition does not resolve (`CheckSVar$` over an amount `resolveAmount` lacks, `ValidCard$` with an
 unported property such as `escaped`) does not apply: the permanent enters without the counters. That is the existing

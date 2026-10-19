@@ -5,16 +5,16 @@
 CR 702.26b: a phased-out permanent is treated as though it does not exist, yet stays in the battlefield zone. ADR-0021
 decided where that lives; this section records what was built.
 
-| Piece                   | Where                                                    | Java                                                                        |
-| ----------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Filtered enumeration    | `Zone.Cards` (`zone.go`)                                 | `PlayerZoneBattlefield.getCards(true)`, `PlayerZoneBattlefield.java:76-100` |
-| Opt-in full battlefield | `Zone.CardsIncludingPhasedOut`                           | `Game.getCardsIncludePhasingIn`, `Game.java:618`                            |
-| Card state              | `Card.phasedOut`/`directlyPhasedOut`/`wontPhaseInNormal` | `Card.phasedOut`, `directlyPhasedOut`, `wontPhaseInNormal`, `:252-254`      |
-| Only writer             | `Game.setPhasedOut` (`game.go`)                          | `Card.setPhasedOut`, `:5581-5585`                                           |
-| Phase operation         | `Game.phase`/`switchPhaseState` (`phasing.go`)           | `Card.phase`/`switchPhaseState`, `:5589-5675`                               |
-| Untap-step phasing      | `untapStepPhasing`                                       | `Untap.doPhasing`, `Untap.java:198-249`                                     |
-| Event                   | `Phased`, `Detail` = `PhaseDetailOut`/`PhaseDetailIn`    | `GameEventCardPhased`                                                       |
-| Fixture key             | `PhasedOut:P<seat>` (`internal/fixture`)                 | `GameState.java:309-311`, `:1302-1304`                                      |
+| Piece | Where | Java |
+| --- | --- | --- |
+| Filtered enumeration | `Zone.Cards` (`zone.go`) | `PlayerZoneBattlefield.getCards(true)`, `PlayerZoneBattlefield.java:76-100` |
+| Opt-in full battlefield | `Zone.CardsIncludingPhasedOut` | `Game.getCardsIncludePhasingIn`, `Game.java:618` |
+| Card state | `Card.phasedOut`/`directlyPhasedOut`/`wontPhaseInNormal` | `Card.phasedOut`, `directlyPhasedOut`, `wontPhaseInNormal`, `:252-254` |
+| Only writer | `Game.setPhasedOut` (`game.go`) | `Card.setPhasedOut`, `:5581-5585` |
+| Phase operation | `Game.phase`/`switchPhaseState` (`phasing.go`) | `Card.phase`/`switchPhaseState`, `:5589-5675` |
+| Untap-step phasing | `untapStepPhasing` | `Untap.doPhasing`, `Untap.java:198-249` |
+| Event | `Phased`, `Detail` = `PhaseDetailOut`/`PhaseDetailIn` | `GameEventCardPhased` |
+| Fixture key | `PhasedOut:P<seat>` (`internal/fixture`) | `GameState.java:309-311`, `:1302-1304` |
 
 **Storage.** `Zone` cannot see the card arena, so it keeps its own phased-out subset (`Zone.phasedOut`, an `OrderedSet`,
 nil until something phases out). `Cards` returns the zone's own slice when the subset is empty -- every zone but the
@@ -27,13 +27,13 @@ information keeps `IsPhasedOut` (`GameAction.java:977` reads it). `Game.Clone` c
 
 **Opt-in callers.** Each cites the Java opt-in it mirrors (ADR-0021 decision 2):
 
-| Caller                                   | Java                                                               |
-| ---------------------------------------- | ------------------------------------------------------------------ |
-| `untapStepPhasing`                       | `Untap.java:202`                                                   |
-| `phasesValidCards` under `PhaseInOrOut$` | `PhasesEffect.java:47-48`                                          |
-| `cleanupStep` damage and resets          | `PhaseHandler.java:400`, `Game.java:1236`                          |
-| `fixture.dumpZone`                       | `GameState.java:182`, `:223`                                       |
-| `compareZoneCards` (scenario harness)    | same fixture opt-in, so a phased-out card is compared, not skipped |
+| Caller | Java |
+| --- | --- |
+| `untapStepPhasing` | `Untap.java:202` |
+| `phasesValidCards` under `PhaseInOrOut$` | `PhasesEffect.java:47-48` |
+| `cleanupStep` damage and resets | `PhaseHandler.java:400`, `Game.java:1236` |
+| `fixture.dumpZone` | `GameState.java:182`, `:223` |
+| `compareZoneCards` (scenario harness) | same fixture opt-in, so a phased-out card is compared, not skipped |
 
 **The operation.** Phasing is never `Move`: no `ZoneChanged`, no ETB/LTB trigger. Phasing out records the controller
 whose untap step returns it (`Card.java:5645`) and removes it from combat (`:5647-5650`); phasing in unattaches it from
@@ -73,49 +73,49 @@ mods stay as they were when it phased out -- hidden while it is out, rebuilt by 
 
 Guarded here, each citing the Java line it mirrors:
 
-| Go site                                    | Java guard                              |
-| ------------------------------------------ | --------------------------------------- |
-| `canBeDestroyed` (`destroyeffect.go`)      | `Card.canBeDestroyed`, `Card.java:6816` |
-| `sacrificeEffect` self, `sacrificeCards`   | `Card.canBeSacrificedBy`, `:6909`       |
-| `changeZoneKnown` (`changezoneeffect.go`)  | `ChangeZoneEffect.java:557`             |
-| `tapEffect`                                | `TapEffect.java:56`                     |
-| `untapEffect`                              | `UntapEffect.java:57`                   |
-| `animateCards` (`animate.go`)              | `AnimateEffect.java:168`, `:176`        |
-| `applyPumpEffects`, `applyAnimateEffects`  | see "By-ID re-adders"                   |
-| `auraTargetStillLegal`, `targetStillLegal` | `Card.canBeTargetedBy`, `:6829`         |
+| Go site | Java guard |
+| --- | --- |
+| `canBeDestroyed` (`destroyeffect.go`) | `Card.canBeDestroyed`, `Card.java:6816` |
+| `sacrificeEffect` self, `sacrificeCards` | `Card.canBeSacrificedBy`, `:6909` |
+| `changeZoneKnown` (`changezoneeffect.go`) | `ChangeZoneEffect.java:557` |
+| `tapEffect` | `TapEffect.java:56` |
+| `untapEffect` | `UntapEffect.java:57` |
+| `animateCards` (`animate.go`) | `AnimateEffect.java:168`, `:176` |
+| `applyPumpEffects`, `applyAnimateEffects` | see "By-ID re-adders" |
+| `auraTargetStillLegal`, `targetStillLegal` | `Card.canBeTargetedBy`, `:6829` |
 
 Not guarded yet. A targeted reference is covered by `targetStillLegal`; these matter only for a `Defined$` that names a
 phased-out card without targeting it (`Remembered`, `Self`, `Enchanted`, ...):
 
-| Java guard                                                                      | Go site                                                                                                                                  |
-| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `canReceiveCounters`/`canRemoveCounters`, `Card.java:1719`, `:1730`             | `putcountereffect.go`, `removecountereffect.go`                                                                                          |
-| `changeCardState`, `Card.java:664`                                              | `setstateeffect.go`                                                                                                                      |
-| `PumpEffect.java:444`, `DebuffEffect.java:75`, `ProtectEffect.java:150`         | `pumpeffect.go` (Debuff/Protection share `animateCards`, guarded)                                                                        |
-| `ControlGainEffect.java:138`, `ControlExchangeEffect.java:76`                   | `gaincontroleffect.go`, `exchangecontroleffect.go`                                                                                       |
-| `CloneEffect.java:139`, `AlterAttributeEffect.java:50`, `AirbendEffect.java:60` | `cloneeffect.go`, `alterattributeeffect.go`, `airbendeffect.go`                                                                          |
-| `DamageDealEffect.java:254`, `DamageEachEffect.java:98`, `FightEffect.java:109` | `dealdamageeffect.go`, `eachdamageeffect.go`, `fighteffect.go`                                                                           |
-| `MustBlockEffect.java:72`                                                       | not ported (ADR-0024)                                                                                                                    |
-| `CombatUtil.java:208` (can attack), `:474` (can block)                          | `attack.go`, `block.go` -- declarations read the filtered enumeration; a scripted controller naming a phased-out creature is not refused |
-| `SpellAbilityRestriction.java:548` (activate)                                   | `activateability.go`, `activatemanaability.go`                                                                                           |
-| `ChangeZoneEffect.java:1006` (hidden origin)                                    | `changeZoneHidden` reads filtered zones                                                                                                  |
-| `SpellAbilityEffect.java:1049`, `:1060` (`AsLongAsControl`, tapped durations)   | durations not ported                                                                                                                     |
-| `StaticAbility.java:341`, `TriggerReplacementBase.java:62` (host phased out)    | covered: `traitHosts` and the replacement walks read the filtered enumeration                                                            |
+| Java guard | Go site |
+| --- | --- |
+| `canReceiveCounters`/`canRemoveCounters`, `Card.java:1719`, `:1730` | `putcountereffect.go`, `removecountereffect.go` |
+| `changeCardState`, `Card.java:664` | `setstateeffect.go` |
+| `PumpEffect.java:444`, `DebuffEffect.java:75`, `ProtectEffect.java:150` | `pumpeffect.go` (Debuff/Protection share `animateCards`, guarded) |
+| `ControlGainEffect.java:138`, `ControlExchangeEffect.java:76` | `gaincontroleffect.go`, `exchangecontroleffect.go` |
+| `CloneEffect.java:139`, `AlterAttributeEffect.java:50`, `AirbendEffect.java:60` | `cloneeffect.go`, `alterattributeeffect.go`, `airbendeffect.go` |
+| `DamageDealEffect.java:254`, `DamageEachEffect.java:98`, `FightEffect.java:109` | `dealdamageeffect.go`, `eachdamageeffect.go`, `fighteffect.go` |
+| `MustBlockEffect.java:72` | not ported (ADR-0024) |
+| `CombatUtil.java:208` (can attack), `:474` (can block) | `attack.go`, `block.go` -- declarations read the filtered enumeration; a scripted controller naming a phased-out creature is not refused |
+| `SpellAbilityRestriction.java:548` (activate) | `activateability.go`, `activatemanaability.go` |
+| `ChangeZoneEffect.java:1006` (hidden origin) | `changeZoneHidden` reads filtered zones |
+| `SpellAbilityEffect.java:1049`, `:1060` (`AsLongAsControl`, tapped durations) | durations not ported |
+| `StaticAbility.java:341`, `TriggerReplacementBase.java:62` (host phased out) | covered: `traitHosts` and the replacement walks read the filtered enumeration |
 
 ## `Phases` and `K:Phasing` land
 
 `phasesEffect` (`phaseseffect.go`) is `PhasesEffect.resolve`. It resolves every corpus param:
 
-| Param                                 | Behavior                                                                                                                                            |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AllValid$`                           | every battlefield permanent matching; phased-out ones too under `PhaseInOrOut$`                                                                     |
-| `Defined$`                            | `getDefinedCardsOrTargeted`: `Defined$` first (each `" & "` part; `Valid <spec>` read locally, as `cloneeffect.go` does), else targets, else `Self` |
-| `ValidTgts$`                          | the chosen targets                                                                                                                                  |
-| `PhaseInOrOut$`                       | each permanent phases the other way; directions decided before any phases (`PhasesEffect.java:63-73`)                                               |
-| `WontPhaseInNormal$`                  | the untap step does not phase it back in (`Card.switchPhaseState`'s first check)                                                                    |
-| `Tapped$`/`Untapped$`                 | set as `PhaseInOrOut$` phases a permanent in, no tap/untap trigger                                                                                  |
-| `AnyNumber$`                          | `ChooseCardsForEffect`, 0 to all                                                                                                                    |
-| `RememberAffected$`/`RememberValids$` | remembered on the host                                                                                                                              |
+| Param | Behavior |
+| --- | --- |
+| `AllValid$` | every battlefield permanent matching; phased-out ones too under `PhaseInOrOut$` |
+| `Defined$` | `getDefinedCardsOrTargeted`: `Defined$` first (each `" & "` part; `Valid <spec>` read locally, as `cloneeffect.go` does), else targets, else `Self` |
+| `ValidTgts$` | the chosen targets |
+| `PhaseInOrOut$` | each permanent phases the other way; directions decided before any phases (`PhasesEffect.java:63-73`) |
+| `WontPhaseInNormal$` | the untap step does not phase it back in (`Card.switchPhaseState`'s first check) |
+| `Tapped$`/`Untapped$` | set as `PhaseInOrOut$` phases a permanent in, no tap/untap trigger |
+| `AnyNumber$` | `ChooseCardsForEffect`, 0 to all |
+| `RememberAffected$`/`RememberValids$` | remembered on the host |
 
 `TargetedPlayerCtrl` (`CardProperty.java:277-280`, 4 corpus lines) needs the ability's targets, which `Matches` does not
 see; `phasesValidCards` answers it from `Ability.Targets`, phased-in cards only. Negated, it is rejected
@@ -164,9 +164,9 @@ kept.
 
 ### Not modeled
 
-| Java                                                      | Why                                        |
-| --------------------------------------------------------- | ------------------------------------------ |
-| `clearEncodedCards`                                       | cipher not ported                          |
-| `Combat.saveLKI`                                          | combat LKI not ported                      |
-| Phasing in unattaches from a player no longer in the game | this port attaches only to cards           |
-| `PhasesEffect.java:75-79` timestamp half                  | `CardID` survives a zone change (ADR-0009) |
+| Java | Why |
+| --- | --- |
+| `clearEncodedCards` | cipher not ported |
+| `Combat.saveLKI` | combat LKI not ported |
+| Phasing in unattaches from a player no longer in the game | this port attaches only to cards |
+| `PhasesEffect.java:75-79` timestamp half | `CardID` survives a zone change (ADR-0009) |

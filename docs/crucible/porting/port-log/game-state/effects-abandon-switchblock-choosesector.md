@@ -68,15 +68,15 @@ exception, cards this port cannot deal from a scheme deck at all yet.
 
 ### Tests (`abandoneffect_test.go`)
 
-| Test                                                        | Proves                                                                       |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `TestAbandonEffectMovesCommandCardToSchemeDeckAndRemembers` | Bare `DB$ Abandon`, `RememberAbandoned$ True`                                |
-| `TestAbandonEffectOptionalDeclinedLeavesSchemeInCommand`    | `Optional$ True`, declined -> no-op                                          |
-| `TestAbandonEffectOptionalAcceptedAbandons`                 | `Optional$ True`, accepted                                                   |
-| `TestAbandonEffectConditionUnmetLeavesSchemeInCommand`      | `ConditionCheckSVar$`/`ConditionSVarCompare$` gates the whole ability        |
-| `TestAbandonEffectHostNotInCommandIsNoOp`                   | A host not in Command when `DB$ Abandon` resolves is a no-op, not a panic    |
-| `TestAbandonEffectFiresWatchingAbandonedTrigger`            | `checkAbandonedTriggers`' `ValidCard$ Card.IsRemembered` match and non-match |
-| `TestAbandonEffectSkipsStaticTrigger`                       | `Static$ True` is skipped, not pushed onto the stack                         |
+| Test | Proves |
+| --- | --- |
+| `TestAbandonEffectMovesCommandCardToSchemeDeckAndRemembers` | Bare `DB$ Abandon`, `RememberAbandoned$ True` |
+| `TestAbandonEffectOptionalDeclinedLeavesSchemeInCommand` | `Optional$ True`, declined -> no-op |
+| `TestAbandonEffectOptionalAcceptedAbandons` | `Optional$ True`, accepted |
+| `TestAbandonEffectConditionUnmetLeavesSchemeInCommand` | `ConditionCheckSVar$`/`ConditionSVarCompare$` gates the whole ability |
+| `TestAbandonEffectHostNotInCommandIsNoOp` | A host not in Command when `DB$ Abandon` resolves is a no-op, not a panic |
+| `TestAbandonEffectFiresWatchingAbandonedTrigger` | `checkAbandonedTriggers`' `ValidCard$ Card.IsRemembered` match and non-match |
+| `TestAbandonEffectSkipsStaticTrigger` | `Static$ True` is skipped, not pushed onto the stack |
 
 ---
 
@@ -150,10 +150,10 @@ properties — not a narrow param gap.
 
 **Researched and deferred.**
 
-| API            | Blocker                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SwitchBlock`  | `Matches` takes no ability/targets param (`Creature.blockingTargeted`), no per-turn blocked-by state on `Card`, no `TargetsWithSameController$` (above) |
-| `ChooseSector` | Space Beleren's own single-card sector mechanic: per-`Card` sector field, a new state-based action, two new valid-string properties (above)             |
+| API | Blocker |
+| --- | --- |
+| `SwitchBlock` | `Matches` takes no ability/targets param (`Creature.blockingTargeted`), no per-turn blocked-by state on `Card`, no `TargetsWithSameController$` (above) |
+| `ChooseSector` | Space Beleren's own single-card sector mechanic: per-`Card` sector field, a new state-based action, two new valid-string properties (above) |
 
 ## Forge bugs found
 

@@ -8,12 +8,12 @@ compiled abilities), and nothing more of it.
 
 ## Perpetual trigger grants land (ADR-0023, trigger slice)
 
-| Piece                                | Where                                          | ADR-0023                                                       |
-| ------------------------------------ | ---------------------------------------------- | -------------------------------------------------------------- |
-| `Triggers$` compiled at load         | `compile.go` (`animateAPIs`, `isAnimateGrant`) | Decision 1: grant SVars compile at load (PORT-2)               |
-| Per-card overlay                     | `Card.grants`, `grantedTriggers` (`card.go`)   | Decision 2: overlay keyed by timestamp; `Game.Clone` copies it |
-| Trigger accessor, every scan through | `Card.triggerFaces` (`trigger.go`)             | Decision 3: all trigger reads merge definition + overlay       |
-| Refuse what cannot apply             | `animateTriggerGrants` (`animate.go`)          | Decision 4: an unapplicable grant fails when applied           |
+| Piece | Where | ADR-0023 |
+| --- | --- | --- |
+| `Triggers$` compiled at load | `compile.go` (`animateAPIs`, `isAnimateGrant`) | Decision 1: grant SVars compile at load (PORT-2) |
+| Per-card overlay | `Card.grants`, `grantedTriggers` (`card.go`) | Decision 2: overlay keyed by timestamp; `Game.Clone` copies it |
+| Trigger accessor, every scan through | `Card.triggerFaces` (`trigger.go`) | Decision 3: all trigger reads merge definition + overlay |
+| Refuse what cannot apply | `animateTriggerGrants` (`animate.go`) | Decision 4: an unapplicable grant fails when applied |
 
 **Compile.** An `Animate`/`AnimateAll` `Triggers$` value is a comma list of SVars holding triggers
 (`AnimateEffect.java:128-130`, `AnimateAllEffect.java:109-110`, parsed per grant by `TriggerHandler.parseTrigger` at
@@ -50,13 +50,13 @@ declined one survives and fires on the next cast.
 
 Refused with an error when applied (ADR-0023 decision 4, GO-7):
 
-| Shape                                                        | Why                                                                                                                                                                        |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Triggers$` under any other duration                         | A grant that ends needs the overlay's removal bookkeeping, the rest of ADR-0023                                                                                            |
+| Shape | Why |
+| --- | --- |
+| `Triggers$` under any other duration | A grant that ends needs the overlay's removal bookkeeping, the rest of ADR-0023 |
 | `Duration$ Perpetual` with `Power$`/`Types$`/`Keywords$`/... | `PerpetualPTBoost`/`PerpetualTypes`/... each need a zone-surviving store; an `animateRecord` is dropped by `clearAnimates` at the next zone change (Hydroponics Architect) |
-| `Duration$ Perpetual` with no `Triggers$`                    | Same, `animateDuration`'s existing error                                                                                                                                   |
-| A regrant compile left unfollowed                            | Fewer compiled grants than names (Snarlfang Vermin)                                                                                                                        |
-| A granted trigger whose `Execute$` names `TgtZone$`          | `targetCandidates` (`targeting.go`) scans the battlefield only: Pass the Torch's `TrigPlay` would find no target and silently never go on the stack                        |
+| `Duration$ Perpetual` with no `Triggers$` | Same, `animateDuration`'s existing error |
+| A regrant compile left unfollowed | Fewer compiled grants than names (Snarlfang Vermin) |
+| A granted trigger whose `Execute$` names `TgtZone$` | `targetCandidates` (`targeting.go`) scans the battlefield only: Pass the Torch's `TrigPlay` would find no target and silently never go on the stack |
 
 `Abilities$`, `staticAbilities$`, `Replacements$`, `RemoveAllAbilities$`, `sVars$` stay in `animateUnresolvedParams`.
 
@@ -74,8 +74,8 @@ Fix scoped to the cast card: after the `traitHosts` walk, the spell on the Stack
 shared by ~40 scans, is untouched. A trigger with no `TriggerZones$` on a card in hand, library or graveyard watching
 _other_ spells stays unscanned, as before (Java would see it; real scripts name `TriggerZones$ Battlefield` on those).
 
-| Left unfired from the stack                 | Why                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Left unfired from the stack | Why |
+| --- | --- |
 | A trigger on a face other than the one cast | `triggerFaces` reads only `Faces[0]` of a transforming, flipping, modal, melded, specialize or prepare card (`liveFaces`, `effects-meld.md`); split, adventure and omen cards keep every face. The 3 multi-face cards (Bruna, the Fading Light; Lae'zel, Githyanki Warrior; Drowner of Truth) print it on the front |
 
 ## LosePerpetual lands
@@ -94,9 +94,9 @@ affected: effects that evaluate conditions without rejecting `ConditionDefined$`
 `ConditionDefined$ Remembered` lines (`Discard` 14, `SetState` 6, `MakeCard` 6, `Scry` 5, ...) move from silently unmet
 to evaluated. `LosePerpetual` itself rejects `Condition$` and every other `ConditionDefined$` (GO-7).
 
-| Card           | Status                                                                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Racketeer Boss | End to end: scenario `perpetual-cast-trigger-racketeer-boss-treasure-once` (grant in hand, fires from the stack, Treasure, lost; recast makes none)          |
+| Card | Status |
+| --- | --- |
+| Racketeer Boss | End to end: scenario `perpetual-cast-trigger-racketeer-boss-treasure-once` (grant in hand, fires from the stack, Treasure, lost; recast makes none) |
 | Pass the Torch | Its `Animate` fails closed: `TrigPlay` targets `TgtZone$ Graveyard`, and Play's graveyard targeting does not exist (`playUnresolvedParams`, `playeffect.go`) |
 
 Other `Duration$ Perpetual | Triggers$` lines no longer rejected on the grant itself (whether the trigger then fires is
@@ -107,21 +107,21 @@ Collector (`AnimateAll`).
 
 ## Supporting changes outside the effect
 
-| Change                                      | Why                                                                                                                                                                      |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Change | Why |
+| --- | --- |
 | `tools/enginelint` skips a selector's `Sel` | `x.Sel` is qualified, never a reference to a package-level declaration, and methods are untracked; `compile.Ability` in `card.go` was reported as the engine's `Ability` |
-| `scenarioDB` loads `res/tokenscripts`       | A scenario's `Token` effect (Racketeer Boss's Treasure) needs its `TokenScript$`                                                                                         |
-| `param-kinds.golden` regenerated            | Newly followed chains raise counts; two pairs appear (`LosePerpetual`'s four keys, `Play Destination`)                                                                   |
+| `scenarioDB` loads `res/tokenscripts` | A scenario's `Token` effect (Racketeer Boss's Treasure) needs its `TokenScript$` |
+| `param-kinds.golden` regenerated | Newly followed chains raise counts; two pairs appear (`LosePerpetual`'s four keys, `Play Destination`) |
 
 ## What ADR-0023 still owes
 
-| Owed                                                                                                                       | Size                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Owed | Size |
+| --- | --- |
 | `Abilities$`/`staticAbilities$`/`Replacements$`/`RemoveAllAbilities$` grants, and the static/replacement/ability accessors | Decision 3's other ~36 loops; `S:` `AddAbility$` 341, `AddTrigger$` 249, `AddStaticAbility$` 54 |
-| Grants that end (until end of turn, `Permanent`, continuous `S:` grants rebuilt each pass)                                 | Decision 2's duration and removal bookkeeping                                                   |
-| `RemoveAllAbilities$` timestamp removal                                                                                    | 49 lines                                                                                        |
-| Perpetual PT/keyword/type/color/mana-cost changes                                                                          | ~220 of 252 real `Duration$ Perpetual` lines; each needs its own zone-surviving store           |
-| Coverage report of unapplicable grants at load (`cmd/crucible/coverage.go`)                                                | Decision 4's second half                                                                        |
+| Grants that end (until end of turn, `Permanent`, continuous `S:` grants rebuilt each pass) | Decision 2's duration and removal bookkeeping |
+| `RemoveAllAbilities$` timestamp removal | 49 lines |
+| Perpetual PT/keyword/type/color/mana-cost changes | ~220 of 252 real `Duration$ Perpetual` lines; each needs its own zone-surviving store |
+| Coverage report of unapplicable grants at load (`cmd/crucible/coverage.go`) | Decision 4's second half |
 
 Supersedes the `LosePerpetual` row of `effects-batch-c.md`'s "Researched and deferred" table; that file is closed, so
 the row stays as written there.

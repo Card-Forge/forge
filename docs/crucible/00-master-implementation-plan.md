@@ -38,17 +38,17 @@ rework.
 
 ## 1.1 Module inventory (measured)
 
-| Module                                       | Java files |     LOC | Port?                   | Notes                                                                                                                                 |
-| -------------------------------------------- | ---------: | ------: | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `forge-core`                                 |        152 |  26,385 | **Yes — first**         | Static card data, card-script reader, mana/color/type models, deck IO, collections                                                    |
-| `forge-game`                                 |        807 | 126,676 | **Yes — second**        | The rules engine. Everything below hangs off it                                                                                       |
-| `forge-ai`                                   |        191 |  56,815 | **Yes — third**         | `AiController`, `ComputerUtil*`, per-API `SpellAbilityAi`, lookahead simulator                                                        |
-| `forge-gui`                                  |        441 |  77,033 | **Partial**             | Mostly UI-agnostic glue + resource bootstrap. Harvest `FModel`-equivalent load paths only                                             |
-| `forge-gui-desktop`                          |        523 | 114,054 | **No** (harvest 1 file) | Swing. But `forge/view/SimulateMatch.java` is the existing headless batch entrypoint — read it as the reference for Crucible's runner |
-| `forge-gui-mobile`                           |        367 | 100,889 | No                      | libGDX UI                                                                                                                             |
-| `forge-gui-android` / `-ios` / `-mobile-dev` |         64 |   7,295 | No                      | Platform shells                                                                                                                       |
-| `adventure-editor`                           |         39 |   5,989 | No                      | Adventure mode tooling                                                                                                                |
-| `forge-lda`                                  |         23 |   1,933 | No                      | Latent Dirichlet deck analysis; interesting later, irrelevant now                                                                     |
+| Module | Java files | LOC | Port? | Notes |
+| --- | ---: | ---: | --- | --- |
+| `forge-core` | 152 | 26,385 | **Yes — first** | Static card data, card-script reader, mana/color/type models, deck IO, collections |
+| `forge-game` | 807 | 126,676 | **Yes — second** | The rules engine. Everything below hangs off it |
+| `forge-ai` | 191 | 56,815 | **Yes — third** | `AiController`, `ComputerUtil*`, per-API `SpellAbilityAi`, lookahead simulator |
+| `forge-gui` | 441 | 77,033 | **Partial** | Mostly UI-agnostic glue + resource bootstrap. Harvest `FModel`-equivalent load paths only |
+| `forge-gui-desktop` | 523 | 114,054 | **No** (harvest 1 file) | Swing. But `forge/view/SimulateMatch.java` is the existing headless batch entrypoint — read it as the reference for Crucible's runner |
+| `forge-gui-mobile` | 367 | 100,889 | No | libGDX UI |
+| `forge-gui-android` / `-ios` / `-mobile-dev` | 64 | 7,295 | No | Platform shells |
+| `adventure-editor` | 39 | 5,989 | No | Adventure mode tooling |
+| `forge-lda` | 23 | 1,933 | No | Latent Dirichlet deck analysis; interesting later, irrelevant now |
 
 Dependency direction is strictly one-way: `forge-core ← forge-game ← forge-ai ← forge-gui ← GUI shells`. Nothing in
 `forge-game` imports `forge-ai`; the AI plugs in through the abstract `PlayerController`. **This is the single most
@@ -60,23 +60,23 @@ Apache Commons Lang.
 
 ## 1.2 `forge-game` internal weight (LOC by package)
 
-| Package                           | Files |    LOC | Port priority                        |
-| --------------------------------- | ----: | -----: | ------------------------------------ |
-| `ability` (incl. 205 `effects/*`) |   215 | 32,650 | P5 — incremental, corpus-gated       |
-| `card`                            |    42 | 22,632 | P3 — `Card.java` alone is 8,105 LOC  |
-| `trigger`                         |   141 | 11,884 | P4                                   |
-| `spellability`                    |    24 |  8,153 | P3/P4                                |
-| `player`                          |    34 |  7,615 | P3                                   |
-| `cost`                            |    52 |  7,916 | P2 (parser) + P4 (payment)           |
-| `staticability`                   |    63 |  5,614 | P4 — continuous-effect layers        |
-| `replacement`                     |    47 |  3,742 | P4                                   |
-| `combat`                          |    10 |  3,119 | P4                                   |
-| `keyword`                         |    38 |  2,479 | P3                                   |
-| `phase`                           |     7 |  2,042 | P4 — `PhaseHandler` is the turn loop |
-| `zone`                            |     8 |  1,735 | P3 + P4 (`MagicStack`, 1,019 LOC)    |
-| `mana`                            |     6 |  1,386 | P4                                   |
-| `event`                           |    63 |  1,512 | P3 — becomes the telemetry spine     |
-| `mulligan`                        |     7 |    338 | P4                                   |
+| Package | Files | LOC | Port priority |
+| --- | ---: | ---: | --- |
+| `ability` (incl. 205 `effects/*`) | 215 | 32,650 | P5 — incremental, corpus-gated |
+| `card` | 42 | 22,632 | P3 — `Card.java` alone is 8,105 LOC |
+| `trigger` | 141 | 11,884 | P4 |
+| `spellability` | 24 | 8,153 | P3/P4 |
+| `player` | 34 | 7,615 | P3 |
+| `cost` | 52 | 7,916 | P2 (parser) + P4 (payment) |
+| `staticability` | 63 | 5,614 | P4 — continuous-effect layers |
+| `replacement` | 47 | 3,742 | P4 |
+| `combat` | 10 | 3,119 | P4 |
+| `keyword` | 38 | 2,479 | P3 |
+| `phase` | 7 | 2,042 | P4 — `PhaseHandler` is the turn loop |
+| `zone` | 8 | 1,735 | P3 + P4 (`MagicStack`, 1,019 LOC) |
+| `mana` | 6 | 1,386 | P4 |
+| `event` | 63 | 1,512 | P3 — becomes the telemetry spine |
+| `mulligan` | 7 | 338 | P4 |
 
 ## 1.3 The core loops that must be ported first
 
@@ -116,23 +116,23 @@ multi-threaded, and feeds each file to `CardRules.Reader`.
 parse into per-face `CardFace` objects, producing an immutable `CardRules` shared by every instance of that card across
 every game. Measured key frequency across the corpus:
 
-| Key                                                                                                                                               |  Count | Meaning                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | -----: | ------------------------------------------------------------ |
-| `SVar:`                                                                                                                                           | 59,405 | Named variable: sub-abilities, numeric expressions, AI hints |
-| `Types:`                                                                                                                                          | 34,627 | Type line                                                    |
-| `Oracle:`                                                                                                                                         | 34,627 | Rules text (display only)                                    |
-| `ManaCost:`                                                                                                                                       | 34,626 | e.g. `1 U`, `no cost`                                        |
-| `Name:`                                                                                                                                           | 34,618 |                                                              |
-| `PT:`                                                                                                                                             | 19,198 | `2/1`                                                        |
-| `A:`                                                                                                                                              | 18,449 | Ability (spell or activated)                                 |
-| `K:`                                                                                                                                              | 18,245 | Keyword, optionally parameterized (`Dash:1 R`)               |
-| `T:`                                                                                                                                              | 16,971 | Triggered ability                                            |
-| `DeckHas:` / `DeckHints:` / `DeckNeeds:` / `DeckRule:`                                                                                            | 13,590 | Deckbuilder metadata                                         |
-| `S:`                                                                                                                                              |  7,093 | Static ability                                               |
-| `AI:`                                                                                                                                             |  4,952 | AI hints (e.g. `RemoveDeck:All`)                             |
-| `R:`                                                                                                                                              |  1,693 | Replacement effect                                           |
-| `AlternateMode:`                                                                                                                                  |    902 | Split / transform / adventure / meld / specialize            |
-| `Colors:`, `Loyalty:`, `Defense:`, `Variant:`, `SPECIALIZE:`, `MeldPair:`, `CopyFaceFrom:`, `HandLifeModifier:`, `Text:`, `Draft:`, `SETCOLORID:` | <2,000 | Long tail — all must be handled, most are trivial            |
+| Key | Count | Meaning |
+| --- | ---: | --- |
+| `SVar:` | 59,405 | Named variable: sub-abilities, numeric expressions, AI hints |
+| `Types:` | 34,627 | Type line |
+| `Oracle:` | 34,627 | Rules text (display only) |
+| `ManaCost:` | 34,626 | e.g. `1 U`, `no cost` |
+| `Name:` | 34,618 | |
+| `PT:` | 19,198 | `2/1` |
+| `A:` | 18,449 | Ability (spell or activated) |
+| `K:` | 18,245 | Keyword, optionally parameterized (`Dash:1 R`) |
+| `T:` | 16,971 | Triggered ability |
+| `DeckHas:` / `DeckHints:` / `DeckNeeds:` / `DeckRule:` | 13,590 | Deckbuilder metadata |
+| `S:` | 7,093 | Static ability |
+| `AI:` | 4,952 | AI hints (e.g. `RemoveDeck:All`) |
+| `R:` | 1,693 | Replacement effect |
+| `AlternateMode:` | 902 | Split / transform / adventure / meld / specialize |
+| `Colors:`, `Loyalty:`, `Defense:`, `Variant:`, `SPECIALIZE:`, `MeldPair:`, `CopyFaceFrom:`, `HandLifeModifier:`, `Text:`, `Draft:`, `SETCOLORID:` | <2,000 | Long tail — all must be handled, most are trivial |
 
 **Critical:** at stage 1 the `A:`, `T:`, `S:`, `R:`, and `SVar:` values are stored as **raw strings**. No ability
 objects exist yet. Multi-face cards switch face via `AlternateMode:` and continue parsing into `faces[curFace]`.
@@ -187,14 +187,14 @@ prominently in the translation rules so nobody "faithfully" ports the string int
 
 Measured across the whole corpus (192 distinct APIs actually used out of 203 defined):
 
-| Ability instances |       | Cards **fully** covered |                      |
-| ----------------- | ----- | ----------------------- | -------------------- |
-| top 10 APIs       | 58.6% | top 10 APIs             | 50.2% (16,913 cards) |
-| top 20 APIs       | 77.0% | top 20 APIs             | 69.6% (23,446)       |
-| top 30 APIs       | 84.7% | top 30 APIs             | 78.5% (26,439)       |
-| top 50 APIs       | 92.3% | top 50 APIs             | 88.6% (29,849)       |
-| top 75 APIs       | 96.4% | top 75 APIs             | 94.2% (31,738)       |
-| top 100 APIs      | 98.3% | top 100 APIs            | 97.3% (32,774)       |
+| Ability instances | | Cards **fully** covered | |
+| --- | --- | --- | --- |
+| top 10 APIs | 58.6% | top 10 APIs | 50.2% (16,913 cards) |
+| top 20 APIs | 77.0% | top 20 APIs | 69.6% (23,446) |
+| top 30 APIs | 84.7% | top 30 APIs | 78.5% (26,439) |
+| top 50 APIs | 92.3% | top 50 APIs | 88.6% (29,849) |
+| top 75 APIs | 96.4% | top 75 APIs | 94.2% (31,738) |
+| top 100 APIs | 98.3% | top 100 APIs | 97.3% (32,774) |
 
 4,495 cards (13.3%) have zero scripted abilities — vanilla or keyword-only.
 
@@ -256,14 +256,14 @@ Numbers are allocated when an ADR is written, never reserved in advance. Reservi
 decided before anyone knew what the ADR would say, and leaves a permanent hole if the subject turns out unnecessary —
 ADRP-3 forbids reuse. Each subject below takes the next free number on the day it is written.
 
-| Subject                                                                  | Needed before       |
-| ------------------------------------------------------------------------ | ------------------- |
-| Error handling & panic policy — engine invariants vs. recoverable errors | M5                  |
-| AI port strategy & parity tolerance — statistical, not bit-exact         | M7                  |
-| Causal attribution methodology for per-card impact metrics               | M9                  |
-| Reporting output formats & CLI UX                                        | M9                  |
-| Observability, logging, and profiling                                    | M8                  |
-| Oracle-data licensing & redistribution posture (repo is GPLv3)           | before distribution |
+| Subject | Needed before |
+| --- | --- |
+| Error handling & panic policy — engine invariants vs. recoverable errors | M5 |
+| AI port strategy & parity tolerance — statistical, not bit-exact | M7 |
+| Causal attribution methodology for per-card impact metrics | M9 |
+| Reporting output formats & CLI UX | M9 |
+| Observability, logging, and profiling | M8 |
+| Oracle-data licensing & redistribution posture (repo is GPLv3) | before distribution |
 
 ## 2.4 Java → Go translation rules
 
@@ -288,12 +288,12 @@ today.
 
 Paths the module carries that are not packages, and so appear in neither document:
 
-| Path                  | Contents                                                                |
-| --------------------- | ----------------------------------------------------------------------- |
-| `testdata/scenarios/` | `GameState`-format fixtures, shared with the Java oracle (TEST-5)       |
-| `testdata/golden/`    | Golden AST dumps, event streams, decision logs                          |
-| `tools/gen/`          | `go:generate` sources — effect registry, typed param structs (ADR-0008) |
-| `oracle-java/`        | Maven module: dumpers and recorders against Forge (ADR-0010)            |
+| Path | Contents |
+| --- | --- |
+| `testdata/scenarios/` | `GameState`-format fixtures, shared with the Java oracle (TEST-5) |
+| `testdata/golden/` | Golden AST dumps, event streams, decision logs |
+| `tools/gen/` | `go:generate` sources — effect registry, typed param structs (ADR-0008) |
+| `oracle-java/` | Maven module: dumpers and recorders against Forge (ADR-0010) |
 
 ## 3.2 Porting sequence — exact order, with exit gates
 
@@ -452,15 +452,15 @@ over Java 17 and 21, inside a virtual framebuffer. The release/snapshot workflow
 
 ### Test families, ranked by value to the port
 
-| Family                       | Files | Tests | Value to Crucible                                                                                                                                                                                                                                                                                           |
-| ---------------------------- | ----: | ----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `forge/ai/simulation/`       |     7 |   142 | **Highest.** `GameSimulationTest` (2,856 LOC, 78 tests) is real rules assertion — static abilities, layer interactions, equipment/aura grants, monstrous, triggers, combat. Plus `SpellAbilityPickerSimulationTest` (34), `GameStateEvaluatorTest`, `OnePlaySafetyCheckerTest`, `TerminalScoreDiscountTest` |
-| `forge/card/`                |     8 |    83 | **High.** `CardDbCardMockTestCase` alone is 54 tests over card-DB lookup, editions, request strings, lazy loading. Directly portable to Crucible P1/P2                                                                                                                                                      |
-| `forge/deck/`                |     5 |    89 | Deck construction/generation. Relevant at P7                                                                                                                                                                                                                                                                |
-| `forge/ai/ability/`          |    13 |    38 | Per-API AI behaviour (`DamageDealAiTest`, `ChangeZoneAiTest`, `CountersProliferateAiTest`, `UnlockDoorAiTest`, …). The template for Go's per-effect test layout                                                                                                                                             |
-| `forge/gamesimulationtests/` |    31 |    15 | **Right shape, wrong medium, almost empty.** A declarative builder DSL keyed to Comprehensive Rules numbers — but only sections 103 and 104 are covered                                                                                                                                                     |
-| `forge/net/`                 |    18 |    16 | Network play harness. Irrelevant to Crucible                                                                                                                                                                                                                                                                |
-| everything else              |    36 |    89 | Boosters, draft, conquest, GUI smoke, `FCollection`                                                                                                                                                                                                                                                         |
+| Family | Files | Tests | Value to Crucible |
+| --- | ---: | ---: | --- |
+| `forge/ai/simulation/` | 7 | 142 | **Highest.** `GameSimulationTest` (2,856 LOC, 78 tests) is real rules assertion — static abilities, layer interactions, equipment/aura grants, monstrous, triggers, combat. Plus `SpellAbilityPickerSimulationTest` (34), `GameStateEvaluatorTest`, `OnePlaySafetyCheckerTest`, `TerminalScoreDiscountTest` |
+| `forge/card/` | 8 | 83 | **High.** `CardDbCardMockTestCase` alone is 54 tests over card-DB lookup, editions, request strings, lazy loading. Directly portable to Crucible P1/P2 |
+| `forge/deck/` | 5 | 89 | Deck construction/generation. Relevant at P7 |
+| `forge/ai/ability/` | 13 | 38 | Per-API AI behaviour (`DamageDealAiTest`, `ChangeZoneAiTest`, `CountersProliferateAiTest`, `UnlockDoorAiTest`, …). The template for Go's per-effect test layout |
+| `forge/gamesimulationtests/` | 31 | 15 | **Right shape, wrong medium, almost empty.** A declarative builder DSL keyed to Comprehensive Rules numbers — but only sections 103 and 104 are covered |
+| `forge/net/` | 18 | 16 | Network play harness. Irrelevant to Crucible |
+| everything else | 36 | 89 | Boosters, draft, conquest, GUI smoke, `FCollection` |
 
 The `gamesimulationtests` DSL is worth reading before designing Crucible's fixtures — it is the correct idea:
 
@@ -499,16 +499,16 @@ layer table and `TEST-5` the fixture format.
 
 What belongs here rather than there is when each layer has to exist:
 
-| Milestone | Test work that is part of its exit gate                                     |
-| --------- | --------------------------------------------------------------------------- |
-| M1        | L1 unit tests + `javarand` parity; CI running `go test -race`               |
-| M2        | L2 corpus golden diff; port the 83 `forge/card` tests                       |
-| M3        | L1 tests for every sub-DSL; L5 fuzz targets on all parsers                  |
-| M4        | L3 harness itself, plus `GameState` round-trip fixtures                     |
-| M5        | ≥300 rules fixtures; test-port matrix green for rules-relevant Java tests   |
-| M6        | ≥3 fixtures per implemented API; L4 replay parity live                      |
-| M7        | Port the 142 `ai/simulation` + 38 `ai/ability` tests; statistical dashboard |
-| M8        | L5 soak at 10⁵ games; determinism re-run test                               |
+| Milestone | Test work that is part of its exit gate |
+| --- | --- |
+| M1 | L1 unit tests + `javarand` parity; CI running `go test -race` |
+| M2 | L2 corpus golden diff; port the 83 `forge/card` tests |
+| M3 | L1 tests for every sub-DSL; L5 fuzz targets on all parsers |
+| M4 | L3 harness itself, plus `GameState` round-trip fixtures |
+| M5 | ≥300 rules fixtures; test-port matrix green for rules-relevant Java tests |
+| M6 | ≥3 fixtures per implemented API; L4 replay parity live |
+| M7 | Port the 142 `ai/simulation` + 38 `ai/ability` tests; statistical dashboard |
+| M8 | L5 soak at 10⁵ games; determinism re-run test |
 
 Porting an inherited Java test means converting it into a fixture directory, not into a Go test function. One row per
 test in [`porting/test-port-matrix.md`](porting/test-port-matrix.md), which doubles as M5's exit gate.
@@ -520,13 +520,13 @@ test in [`porting/test-port-matrix.md`](porting/test-port-matrix.md), which doub
 The engine **emits, never stores**: it writes flat events into a per-game buffer and knows nothing about what records
 them. Everything this phase used to specify has since been decided or defined elsewhere, and is normative there.
 
-| Subject                                                          | Owner                                                                                      |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Event struct, recording levels, schema versioning                | [ADR-0013](adr/0013-telemetry-event-bus.md)                                                |
-| Shard format, and why DuckDB is invoked rather than imported     | [ADR-0014](adr/0014-telemetry-storage-format.md)                                           |
-| Why v1 reports without DuckDB at all                             | [ADR-0016](adr/0016-reporting-without-duckdb.md)                                           |
-| Dead cards, castability probe, mana health, per-card impact      | [`telemetry/metric-definitions.md`](telemetry/metric-definitions.md) — `MET-1` to `MET-25` |
-| How an engine event becomes a figure in a report, stage by stage | [`design/telemetry-pipeline.md`](design/telemetry-pipeline.md)                             |
+| Subject | Owner |
+| --- | --- |
+| Event struct, recording levels, schema versioning | [ADR-0013](adr/0013-telemetry-event-bus.md) |
+| Shard format, and why DuckDB is invoked rather than imported | [ADR-0014](adr/0014-telemetry-storage-format.md) |
+| Why v1 reports without DuckDB at all | [ADR-0016](adr/0016-reporting-without-duckdb.md) |
+| Dead cards, castability probe, mana health, per-card impact | [`telemetry/metric-definitions.md`](telemetry/metric-definitions.md) — `MET-1` to `MET-25` |
+| How an engine event becomes a figure in a report, stage by stage | [`design/telemetry-pipeline.md`](design/telemetry-pipeline.md) |
 
 The one cross-milestone dependency worth repeating here, because it decides M5's scope: **the castability probe asks the
 rules engine a question, and only the engine can answer it.** M5 ships that support for a consumer that does not exist
@@ -545,28 +545,28 @@ open-ended. Sequence is firm; durations are not.
 
 **Complete.**
 
-| #   | Item                                                                             | State                                                                                                                                                                           |
-| --- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | `docs/crucible/` structure, `README.md`, `adr/README.md`                         | Done                                                                                                                                                                            |
-| 2   | **ADR-0001 … ADR-0014**                                                          | Done — all fourteen `Accepted`. The gate asked for 0001-0011; 0012-0014 followed as ports-and-adapters and telemetry came into scope                                            |
-| 3   | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index                                                                                                                                               |
-| 4   | `/CLAUDE.md`                                                                     | Done — inlines the ten non-negotiables and the module-first testing rule                                                                                                        |
-| 5   | `architecture/` and `design/`                                                    | Done — `system-overview` and `module-map` describe what exists; four design documents (ARCH-10) hold the target shape. `engine-state-model` omitted, covered by `engine-design` |
-| 6   | DSL grammars under `porting/dsl/`                                                | Done — six grammars derived from the corpus                                                                                                                                     |
-| 7   | `telemetry/metric-definitions.md`                                                | Done — 21 numbered definitions, versioned                                                                                                                                       |
-| 8   | `research/meta-gauntlet.md`                                                      | Done — format, sources, refresh cadence, resulting corpus. The Modern decklists themselves need an external source and gate M6's backlog, not M0                                |
+| # | Item | State |
+| --- | --- | --- |
+| 1 | `docs/crucible/` structure, `README.md`, `adr/README.md` | Done |
+| 2 | **ADR-0001 … ADR-0014** | Done — all fourteen `Accepted`. The gate asked for 0001-0011; 0012-0014 followed as ports-and-adapters and telemetry came into scope |
+| 3 | `guidelines/` — `DOC-n`, `GO-n`, `PORT-n`, `TEST-n`, `ADRP-n`, `REV-n`, `ARCH-n` | Done — seven documents plus index |
+| 4 | `/CLAUDE.md` | Done — inlines the ten non-negotiables and the module-first testing rule |
+| 5 | `architecture/` and `design/` | Done — `system-overview` and `module-map` describe what exists; four design documents (ARCH-10) hold the target shape. `engine-state-model` omitted, covered by `engine-design` |
+| 6 | DSL grammars under `porting/dsl/` | Done — six grammars derived from the corpus |
+| 7 | `telemetry/metric-definitions.md` | Done — 21 numbered definitions, versioned |
+| 8 | `research/meta-gauntlet.md` | Done — format, sources, refresh cadence, resulting corpus. The Modern decklists themselves need an external source and gate M6's backlog, not M0 |
 
 ### M1 — Go foundation & the oracle harness skeleton — 1.5-2 wks
 
 **Complete.**
 
-| #   | Item                                                                    | State                                                               |
-| --- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| 9   | `crucible/` module, CI (build/lint/test), `pkg/collect`, `pkg/javarand` | Done                                                                |
-| 10  | `oracle-java/` Maven module wired into the build; first dumper          | Done — `RandomDumper`, standalone POM (ADR-0002)                    |
-| 11  | `tools/javacycles`, `tools/enginelint`                                  | Done — both premises of ADR-0003 now machine-checked                |
-| 12  | `internal/mana`, `internal/cardtype`                                    | Done — both corpus round-trips green, goldens committed             |
-| 13  | `tools/docgate`                                                         | Done — DOC-12, PORT-4 and ADRP-4 now fail the build, not the review |
+| # | Item | State |
+| --- | --- | --- |
+| 9 | `crucible/` module, CI (build/lint/test), `pkg/collect`, `pkg/javarand` | Done |
+| 10 | `oracle-java/` Maven module wired into the build; first dumper | Done — `RandomDumper`, standalone POM (ADR-0002) |
+| 11 | `tools/javacycles`, `tools/enginelint` | Done — both premises of ADR-0003 now machine-checked |
+| 12 | `internal/mana`, `internal/cardtype` | Done — both corpus round-trips green, goldens committed |
+| 13 | `tools/docgate` | Done — DOC-12, PORT-4 and ADRP-4 now fail the build, not the review |
 
 **Exit gate:** P0 gate (Section 3.2), green. `javarand` reproduces every draw kind over the 1,199-record golden; all 858
 distinct `ManaCost` values and all 3,908 distinct `Types` values in the corpus parse and round-trip through their
@@ -638,12 +638,12 @@ easiest first: [00-master-implementation-plan-open.md](00-master-implementation-
 
 ## 5.1 Top risks and their mitigations
 
-| Risk                                                                                             | Mitigation                                                                                                                                                   |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Layer system divergence** (silently wrong P/T, types, costs — poisons every downstream metric) | Dedicated fixture family per layer and per timestamp-ordering case, built during M5 before any effect work                                                   |
-| **Effect long tail is unbounded**                                                                | Corpus gate (ADR-0011). "Done" is defined by the gauntlet, not by the whole corpus. Unsupported card in a deck = hard error at load, never a silent misplay  |
-| **AI divergence masking rules bugs**                                                             | Replay-parity harness (Layer 3) removes AI from rules comparison entirely. Build it in M6, not M7                                                            |
-| **Upstream fork drift**                                                                          | ADR-0001: no edits to upstream Java; all patches logged. Upstream card-script changes are absorbed automatically, since Crucible reads the same `.txt` files |
-| **Telemetry metrics that are subtly wrong** (worse than no metrics)                              | Normative, versioned definitions written in M0; thresholds in config and printed in every report header                                                      |
-| **Confounded impact metrics mis-ranking cards**                                                  | Four labelled attribution modes; A/B swap as the confirmatory gate before any recommendation is emitted                                                      |
-| **Estimate risk on M5/M6**                                                                       | These two milestones dominate. Re-baseline after M5's exit gate with real velocity data before committing to a date                                          |
+| Risk | Mitigation |
+| --- | --- |
+| **Layer system divergence** (silently wrong P/T, types, costs — poisons every downstream metric) | Dedicated fixture family per layer and per timestamp-ordering case, built during M5 before any effect work |
+| **Effect long tail is unbounded** | Corpus gate (ADR-0011). "Done" is defined by the gauntlet, not by the whole corpus. Unsupported card in a deck = hard error at load, never a silent misplay |
+| **AI divergence masking rules bugs** | Replay-parity harness (Layer 3) removes AI from rules comparison entirely. Build it in M6, not M7 |
+| **Upstream fork drift** | ADR-0001: no edits to upstream Java; all patches logged. Upstream card-script changes are absorbed automatically, since Crucible reads the same `.txt` files |
+| **Telemetry metrics that are subtly wrong** (worse than no metrics) | Normative, versioned definitions written in M0; thresholds in config and printed in every report header |
+| **Confounded impact metrics mis-ranking cards** | Four labelled attribution modes; A/B swap as the confirmatory gate before any recommendation is emitted |
+| **Estimate risk on M5/M6** | These two milestones dominate. Re-baseline after M5's exit gate with real velocity data before committing to a date |

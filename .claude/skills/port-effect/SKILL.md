@@ -70,13 +70,13 @@ func (<api>Effect) Resolve(g *Game, a *Ability, c PlayerController) error {
 
 Rules that bite here:
 
-| Rule   | Do                                                                                                                                                                                               |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| GO-12  | Iterate `collect.OrderedSet`/`OrderedMap` or slices, never a bare `map`, where order is visible                                                                                                  |
-| GO-9   | Hold `CardID`/`PlayerID`, never `*Card`                                                                                                                                                          |
-| GO-8   | No `any`; read params through `a.Params`                                                                                                                                                         |
-| PORT-8 | Forge bug found -> stop, report file:line, do not compensate in Go                                                                                                                               |
-| GO-7   | A valid-string property `Matches` has no case for reads false for every card, silently. Check each `Choices$`/`Valid*$` property the dominant shape uses in `valid.go`; reject the unported ones |
+| Rule | Do |
+| --- | --- |
+| GO-12 | Iterate `collect.OrderedSet`/`OrderedMap` or slices, never a bare `map`, where order is visible |
+| GO-9 | Hold `CardID`/`PlayerID`, never `*Card` |
+| GO-8 | No `any`; read params through `a.Params` |
+| PORT-8 | Forge bug found -> stop, report file:line, do not compensate in Go |
+| GO-7 | A valid-string property `Matches` has no case for reads false for every card, silently. Check each `Choices$`/`Valid*$` property the dominant shape uses in `valid.go`; reject the unported ones |
 
 Reuse helpers: `targetedOrDefinedCards`, `targetedOrDefinedPlayers` (`defined.go`), `resolveNamedAmount`, `optionalAmount`, `checkChoice`, `moveByEffect`.
 
@@ -141,13 +141,13 @@ Test every resolved param branch now: `internal/engine` has a 90% floor (TEST-12
 
 ## 5. Docs, same commit (DOC-12)
 
-| File                                                             | Change                                                                                                                                                                                  |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/crucible/porting/port-log/game-state/effects-<batch>.md`   | New file, one per batch (`<batch>` = kebab-case of its lead APIs). A `## <Apis> land` section: what resolves, what is rejected and why, shared engine pieces, Java `path:line`; then a `**Researched and deferred.**` table for APIs researched and not ported |
-| `docs/crucible/porting/port-log/game-state.md`                   | Index row for the new section; update the remaining-effects sentence in `## Not ported yet` (`M6's N remaining ...`)                                                                   |
-| `docs/crucible/00-master-implementation-plan-in-progress.md`     | Resolved-API count                                                                                                                                                                      |
-| `CLAUDE.md`                                                      | `M6 in progress: N of the corpus's 203` count and largest gaps (`unported-apis.sh` counts)                                                                                             |
-| `docs/crucible/porting/forge-java-defects.md`                    | A row per Forge Java bug found (PORT-8): site, defect, what Crucible does meanwhile, upstream status                                                                                   |
+| File | Change |
+| --- | --- |
+| `docs/crucible/porting/port-log/game-state/effects-<batch>.md` | New file, one per batch (`<batch>` = kebab-case of its lead APIs). A `## <Apis> land` section: what resolves, what is rejected and why, shared engine pieces, Java `path:line`; then a `**Researched and deferred.**` table for APIs researched and not ported |
+| `docs/crucible/porting/port-log/game-state.md` | Index row for the new section; update the remaining-effects sentence in `## Not ported yet` (`M6's N remaining ...`) |
+| `docs/crucible/00-master-implementation-plan-in-progress.md` | Resolved-API count |
+| `CLAUDE.md` | `M6 in progress: N of the corpus's 203` count and largest gaps (`unported-apis.sh` counts) |
+| `docs/crucible/porting/forge-java-defects.md` | A row per Forge Java bug found (PORT-8): site, defect, what Crucible does meanwhile, upstream status |
 
 `effects-*.md` files are closed: one new file per batch.
 

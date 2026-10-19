@@ -18,14 +18,14 @@ no `Mode$ ChaosEnsues` run, so `checkChaosEnsuesTriggers`/`chaosEnsuesTriggerMat
 `TriggerZones$`/`ValidPlayer$`, use the host's controller and record `TriggeredPlayer`, none of which Java does here. No
 new engine state, no new `PlayerController` method, `trigger.go` untouched; `Clone` unaffected.
 
-| Step            | Go                                                                                                        | Java                                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| Condition gate  | `subAbilityConditionMet`                                                                                  | `SpellAbilityEffect` shared gate                         |
-| Cards           | `targetedOrDefinedCards` (targets, else `Defined$`, default `Self`), deduplicated                         | `getTargetCards` → `CardCollection` (`:20`)              |
-| Chaos abilities | each card's `isChaosEnsuesTrigger` lines, in script order; any zone, no `TriggerZones$` gate              | `c.getTriggers()`, `getMode() == ChaosEnsues` (`:21-22`) |
-| Copy            | `Execute$` ability, `Source` = the plane, `Controller` = `a.Controller` (activator), no triggered objects | `t.ensureAbility().copy(activatingPlayer)` (`:23`)       |
-| Stack           | all copies collected, then one `pushTriggeredAbilities` call                                              | `orderAndPlaySimultaneousSa(validSA)` (`:38`)            |
-| Planechase gate | none                                                                                                      | none: unlike `ChaosEnsuesEffect.java:33`                 |
+| Step | Go | Java |
+| --- | --- | --- |
+| Condition gate | `subAbilityConditionMet` | `SpellAbilityEffect` shared gate |
+| Cards | `targetedOrDefinedCards` (targets, else `Defined$`, default `Self`), deduplicated | `getTargetCards` → `CardCollection` (`:20`) |
+| Chaos abilities | each card's `isChaosEnsuesTrigger` lines, in script order; any zone, no `TriggerZones$` gate | `c.getTriggers()`, `getMode() == ChaosEnsues` (`:21-22`) |
+| Copy | `Execute$` ability, `Source` = the plane, `Controller` = `a.Controller` (activator), no triggered objects | `t.ensureAbility().copy(activatingPlayer)` (`:23`) |
+| Stack | all copies collected, then one `pushTriggeredAbilities` call | `orderAndPlaySimultaneousSa(validSA)` (`:38`) |
+| Planechase gate | none | none: unlike `ChaosEnsuesEffect.java:33` |
 
 Order on the stack: `pushTriggeredAbilities` has no ordering decision (its doc comment, `trigger.go`), so copies keep
 found order — last card's ability on top, resolving first. Same as the AI's `orderAndPlaySimultaneousSa`, which plays
@@ -43,13 +43,13 @@ read it).
 Checked for every copy before any is pushed, so a rejected chaos trigger fails the whole resolve with nothing on the
 stack. Error: `engine: RunChaos: <card>: chaos trigger <Key>$ not resolvable yet`.
 
-| Chaos-trigger shape                                                                                                         | Real lines | Why                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------------- | ---------: | ---------------------------------------------------------------------------------------------------------- |
-| `OptionalDecider$`                                                                                                          |          6 | Forge defect: optional flag set on the RunChaos ability, not on the copy (below)                           |
-| `Cost$`                                                                                                                     |          0 | Same defect (`:29-30`)                                                                                     |
-| `Static$`, `TriggerController$`, any other param past `Mode$`/`TriggerZones$`/`Execute$`/`TriggerDescription$`/`Secondary$` |          0 | Java never reads them here; resolving as if absent would guess. Allow-list = the 158 real lines' param set |
-| No `Execute$`                                                                                                               |          0 | `ensureAbility` gives an empty ability; `chaos trigger without Execute$ not resolvable yet`                |
-| `Execute$` API unknown                                                                                                      |          0 | `chaos trigger Execute$ API "<name>" not resolvable yet`                                                   |
+| Chaos-trigger shape | Real lines | Why |
+| --- | ---: | --- |
+| `OptionalDecider$` | 6 | Forge defect: optional flag set on the RunChaos ability, not on the copy (below) |
+| `Cost$` | 0 | Same defect (`:29-30`) |
+| `Static$`, `TriggerController$`, any other param past `Mode$`/`TriggerZones$`/`Execute$`/`TriggerDescription$`/`Secondary$` | 0 | Java never reads them here; resolving as if absent would guess. Allow-list = the 158 real lines' param set |
+| No `Execute$` | 0 | `ensureAbility` gives an empty ability; `chaos trigger without Execute$ not resolvable yet` |
+| `Execute$` API unknown | 0 | `chaos trigger Execute$ API "<name>" not resolvable yet` |
 
 A `Defined$` spelling `definedCards` does not resolve is `engine: Defined$ "<spec>" not resolvable yet`, as every
 reader.
@@ -67,8 +67,8 @@ reading and CR 603.3d's.
 
 ### Corpus: 1 real `DB$ RunChaos` line
 
-| Card              | Shape                                             | Status                                                                                                                                         |
-| ----------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Card | Shape | Status |
+| --- | --- | --- |
 | Pools of Becoming | `Defined$ Remembered \| SubAbility$ DBChangeZone` | resolves; unreachable today: its parent `DB$ PeekAndReveal \| SourceZone$ PlanarDeck` is rejected (`peekandrevealeffect.go:11`, `SourceZone$`) |
 
 Pools' `DBChangeZone` (`Origin$ PlanarDeck | Destination$ PlanarDeck`) is a second blocker: `PlanarDeck` is not a
@@ -76,9 +76,9 @@ Pools' `DBChangeZone` (`Origin$ PlanarDeck | Destination$ PlanarDeck`) is a seco
 
 ### Not ported
 
-| Gap              | Why                                                                                                                                                               |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gap | Why |
+| --- | --- |
 | Scenario fixture | `GameState.java` has no `PlanarDeck` zone key (`ZONES`, `GameState.java:53`); a Crucible-only key would break the Java oracle's reading (`effects-planeswalk.md`) |
-| Order decision   | `orderAndPlaySimultaneousSa`'s reorder prompt has no `PlayerController` counterpart; `pushTriggeredAbilities`' existing gap, not widened here                     |
+| Order decision | `orderAndPlaySimultaneousSa`'s reorder prompt has no `PlayerController` counterpart; `pushTriggeredAbilities`' existing gap, not widened here |
 
 Tests: `planar_runchaos_test.go`.

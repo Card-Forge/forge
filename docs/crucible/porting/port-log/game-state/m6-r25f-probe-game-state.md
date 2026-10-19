@@ -19,42 +19,42 @@ game state a placed board does not have. The rest are cost shapes (R25g, R25h), 
 (R25m). Two causes stacked for most of the 32: the probe never played the state, and the engine read the property as a
 type, so it matched nothing even where the state existed (`propertyMatches`' fallback, a silent GO-7 miss).
 
-| State                                 | Cards                                                                                                                                                                         | Property                                                                    |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Dealt or was dealt damage this turn   | Avenging Arrow, Executioner's Swing, Crushing Pain, Fatal Blow, Mirrodin Avenged, Needle Drop, You Are Already Dead, Treacherous Greed (a `Sac` cost), Reciprocate (to "you") | `dealtDamageThisTurn`, `wasDealtDamageThisTurn`, `dealtDamageToYouThisTurn` |
-| Blocked, or was blocked by, this turn | Sizzling Barrage, Glyph of Delusion, Time to Reflect, You Cannot Pass!                                                                                                        | `blockedThisTurn`, `blockedValidThisTurn`, `blockedByValidThisTurn`         |
-| Combat in progress                    | Aang's Defense (its own blocker), Glyph of Destruction, Mirror Strike, Surge of Righteousness, Confront the Assault (`IsPresent$`)                                            | `blocking`, `attacking`, `unblocked`, `attackingYou` (already read)         |
-| Entered this turn, or since your last | Cradle to Grave, Premature Burial, Grim Return, Reenact the Crime                                                                                                             | `ThisTurnEntered`, `EnteredSinceYourLastTurn`, `ThisTurnEnteredFrom_`       |
-| An Aura attached                      | Aura Graft, Enchantment Alteration, Cut the Earthly Bond, Venomous Vines                                                                                                      | `AttachedTo`, `enchanted` (already read)                                    |
-| Spell history                         | Laquatus's Disdain (cast from a graveyard), Second Guess (second spell this turn)                                                                                             | `wasCastFromGraveyard`, `SecondSpellCastThisTurn`                           |
-| A token, a +1/+1 counter, a face-down | For the Common Good, Mutant's Prey, Break Open                                                                                                                                | `token`, `counters_GE1_P1P1`, `faceDown` (already read)                     |
-| Castable from its graveyard only      | Haakon, Stromgald Scourge                                                                                                                                                     | not a property: a graveyard `MayPlay$` static (Gaps)                        |
+| State | Cards | Property |
+| --- | --- | --- |
+| Dealt or was dealt damage this turn | Avenging Arrow, Executioner's Swing, Crushing Pain, Fatal Blow, Mirrodin Avenged, Needle Drop, You Are Already Dead, Treacherous Greed (a `Sac` cost), Reciprocate (to "you") | `dealtDamageThisTurn`, `wasDealtDamageThisTurn`, `dealtDamageToYouThisTurn` |
+| Blocked, or was blocked by, this turn | Sizzling Barrage, Glyph of Delusion, Time to Reflect, You Cannot Pass! | `blockedThisTurn`, `blockedValidThisTurn`, `blockedByValidThisTurn` |
+| Combat in progress | Aang's Defense (its own blocker), Glyph of Destruction, Mirror Strike, Surge of Righteousness, Confront the Assault (`IsPresent$`) | `blocking`, `attacking`, `unblocked`, `attackingYou` (already read) |
+| Entered this turn, or since your last | Cradle to Grave, Premature Burial, Grim Return, Reenact the Crime | `ThisTurnEntered`, `EnteredSinceYourLastTurn`, `ThisTurnEnteredFrom_` |
+| An Aura attached | Aura Graft, Enchantment Alteration, Cut the Earthly Bond, Venomous Vines | `AttachedTo`, `enchanted` (already read) |
+| Spell history | Laquatus's Disdain (cast from a graveyard), Second Guess (second spell this turn) | `wasCastFromGraveyard`, `SecondSpellCastThisTurn` |
+| A token, a +1/+1 counter, a face-down | For the Common Good, Mutant's Prey, Break Open | `token`, `counters_GE1_P1P1`, `faceDown` (already read) |
+| Castable from its graveyard only | Haakon, Stromgald Scourge | not a property: a graveyard `MayPlay$` static (Gaps) |
 
 ## Engine: the turn-history properties
 
 `validhistory.go`'s `turnHistoryMatches` answers them; `propertyMatches` asks it after its own switch and before the
 keyword, color and type fallbacks, so no existing case is shadowed.
 
-| Property                                             | Go                                                                                                                                         | Java                                                                        |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| `ThisTurnEntered`, `ThisTurnEntered[Your]<Zone>`     | `zoneEntered` and `zoneEntryTurn` the current turn; the zone form also needs the card in the source controller's `<Zone>`, owned when Your | `CardProperty.java:969-986`, `Card.enteredThisTurn` (`Card.java:2056-2058`) |
-| `EnteredSinceYourLastTurn`                           | `zoneEntryTurn` past the source controller's new `Player.lastTurnNr`                                                                       | `CardProperty.java:951-954`, `Player.java:2514-2519`                        |
-| `dealtDamageThisTurn`                                | `Card.damageDealtThisTurn` above 0                                                                                                         | `:1177-1180`, `Card.getTotalDamageDoneBy` (`Card.java:6104-6106`)           |
-| `wasDealtDamageThisTurn`                             | `Damage.Sources` not empty                                                                                                                 | `:1156-1159`, `GameEntity.getAssignedDamage` (`GameEntity.java:377-392`)    |
-| `dealtDamageToYouThisTurn`                           | an entry of `Game.playerDamageThisTurn` with this object (same `CardID`, same `zoneStamp`) as source and the source controller as target   | `:1144-1147`, `CardDamageHistory.getDamageDoneThisTurn` (`:256-281`)        |
-| `blockedThisTurn`                                    | the new `Card.blockedThisTurn` not empty                                                                                                   | `:1199-1202`                                                                |
-| `blockedByThisTurn`, `gotBlockedThisTurn`            | `Card.blockedByThisTurn` not empty                                                                                                         | `:1207-1210`, `:1615-1616`                                                  |
-| `blockedValidThisTurn X`, `blockedByValidThisTurn X` | a card of the list matches `X`, read with the card's controller as source controller                                                       | `:1617-1646`, restriction half                                              |
-| `wasCastFrom[Your\|Their]<Zone>[ByYou]`              | `wasCast`, `castFrom` the zone, the card's owner the zone's player for Your/Their, `castBy` for ByYou                                      | `:1929-1949`                                                                |
-| `SecondSpellCastThisTurn`                            | `Game.castThisTurn[1]` is this object: same `CardID`, and the new `castRecord.stamp` equals the card's `zoneStamp`                         | `:924-931`, `equalsWithGameTimestamp`                                       |
+| Property | Go | Java |
+| --- | --- | --- |
+| `ThisTurnEntered`, `ThisTurnEntered[Your]<Zone>` | `zoneEntered` and `zoneEntryTurn` the current turn; the zone form also needs the card in the source controller's `<Zone>`, owned when Your | `CardProperty.java:969-986`, `Card.enteredThisTurn` (`Card.java:2056-2058`) |
+| `EnteredSinceYourLastTurn` | `zoneEntryTurn` past the source controller's new `Player.lastTurnNr` | `CardProperty.java:951-954`, `Player.java:2514-2519` |
+| `dealtDamageThisTurn` | `Card.damageDealtThisTurn` above 0 | `:1177-1180`, `Card.getTotalDamageDoneBy` (`Card.java:6104-6106`) |
+| `wasDealtDamageThisTurn` | `Damage.Sources` not empty | `:1156-1159`, `GameEntity.getAssignedDamage` (`GameEntity.java:377-392`) |
+| `dealtDamageToYouThisTurn` | an entry of `Game.playerDamageThisTurn` with this object (same `CardID`, same `zoneStamp`) as source and the source controller as target | `:1144-1147`, `CardDamageHistory.getDamageDoneThisTurn` (`:256-281`) |
+| `blockedThisTurn` | the new `Card.blockedThisTurn` not empty | `:1199-1202` |
+| `blockedByThisTurn`, `gotBlockedThisTurn` | `Card.blockedByThisTurn` not empty | `:1207-1210`, `:1615-1616` |
+| `blockedValidThisTurn X`, `blockedByValidThisTurn X` | a card of the list matches `X`, read with the card's controller as source controller | `:1617-1646`, restriction half |
+| `wasCastFrom[Your\|Their]<Zone>[ByYou]` | `wasCast`, `castFrom` the zone, the card's owner the zone's player for Your/Their, `castBy` for ByYou | `:1929-1949` |
+| `SecondSpellCastThisTurn` | `Game.castThisTurn[1]` is this object: same `CardID`, and the new `castRecord.stamp` equals the card's `zoneStamp` | `:924-931`, `equalsWithGameTimestamp` |
 
 New state, each copied by `Game.Clone` (nil slices stay nil, `TestCloneAllocationsStayBounded` unaffected):
 
-| State                  | Why                                                                                                                                                                                                        |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| State | Why |
+| --- | --- |
 | `Card.blockedThisTurn` | `Card.getBlockedThisTurn`, the blocker's mirror of `blockedByThisTurn`; written by the same `recordBlockedBy` (Java writes both at `PhaseHandler.java:804-805`, `BlockEffect.java:60-61`), cleared with it |
-| `Player.lastTurnNr`    | `Player.getLastTurnNr`, set where Java sets it, as the player's own turn is cleaned up (`cleanupPlayerRecords`)                                                                                            |
-| `castRecord.stamp`     | the object identity Java's `equalsWithGameTimestamp` compares, so a second spell that resolved into a permanent is no longer that spell                                                                    |
+| `Player.lastTurnNr` | `Player.getLastTurnNr`, set where Java sets it, as the player's own turn is cleaned up (`cleanupPlayerRecords`) |
+| `castRecord.stamp` | the object identity Java's `equalsWithGameTimestamp` compares, so a second spell that resolved into a permanent is no longer that spell |
 
 No controller method was added.
 
@@ -73,16 +73,16 @@ of them matched nothing before. Scion of Vitu-Ghazi's trigger now fires and its 
 `internal/smoke/staged.go` appends `stagedVariants` after every existing variant, tried for any card still not cast, so
 no card an earlier variant cast changes. Each plays its state through the engine; nothing is poked into a field.
 
-| Variant                      | Played                                                                                                 | For                                                                   |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
-| `stageAura`                  | Pacifism cast and resolved                                                                             | `Aura.AttachedTo ...`, `enchanted`                                    |
-| `stageEntered`               | Murder cast at the first creature offered, then Grizzly Bears cast and resolved                        | `ThisTurnEntered`, `EnteredSinceYourLastTurn`, `ThisTurnEnteredFrom_` |
-| `stageSpells`                | two Lightning Bolts cast, left on the stack                                                            | `SecondSpellCastThisTurn`                                             |
-| `stageFlashback`             | Think Twice cast from the graveyard for its Flashback cost, left on the stack                          | `wasCastFromGraveyard`                                                |
-| `stageDamaged`               | Electrickery (1 damage to a creature the probe player does not control)                                | `wasDealtDamageThisTurn` on a creature that lived                     |
-| `stageToken`, `stageCounter` | Raise the Alarm; Battlegrowth on the first creature offered                                            | `token`, `counters_GE1_P1P1`                                          |
-| `stageFaceDown`              | the opponent's turn walked to its first main phase, Soul Summons cast by the opponent                  | `faceDown+OppCtrl`                                                    |
-| Six combat moments           | a turn walked (`walk`, `timing.go`) to its declare blockers step or second main phase, blocking or not | the combat and damage rows above                                      |
+| Variant | Played | For |
+| --- | --- | --- |
+| `stageAura` | Pacifism cast and resolved | `Aura.AttachedTo ...`, `enchanted` |
+| `stageEntered` | Murder cast at the first creature offered, then Grizzly Bears cast and resolved | `ThisTurnEntered`, `EnteredSinceYourLastTurn`, `ThisTurnEnteredFrom_` |
+| `stageSpells` | two Lightning Bolts cast, left on the stack | `SecondSpellCastThisTurn` |
+| `stageFlashback` | Think Twice cast from the graveyard for its Flashback cost, left on the stack | `wasCastFromGraveyard` |
+| `stageDamaged` | Electrickery (1 damage to a creature the probe player does not control) | `wasDealtDamageThisTurn` on a creature that lived |
+| `stageToken`, `stageCounter` | Raise the Alarm; Battlegrowth on the first creature offered | `token`, `counters_GE1_P1P1` |
+| `stageFaceDown` | the opponent's turn walked to its first main phase, Soul Summons cast by the opponent | `faceDown+OppCtrl` |
+| Six combat moments | a turn walked (`walk`, `timing.go`) to its declare blockers step or second main phase, blocking or not | the combat and damage rows above |
 
 The combat moments: own declare blockers step with blocks, own second main phase with and without blocks, the opponent's
 declare blockers step and second main phase, each with and without blocks. A blocking defender uses the new
@@ -101,32 +101,32 @@ the card. Once the card is cast, any engine refusal is the outcome as for every 
 
 `crucible card-smoke -all -workers 8 -list`, same corpus:
 
-| Outcome      | Before | After |
-| ------------ | -----: | ----: |
-| plays        |  30656 | 30686 |
-| refused      |   2926 |  2931 |
-| inconclusive |    123 |    88 |
-| judged       |  33582 | 33617 |
-| % plays      |   91.3 |  91.3 |
+| Outcome | Before | After |
+| --- | ---: | ---: |
+| plays | 30656 | 30686 |
+| refused | 2926 | 2931 |
+| inconclusive | 123 | 88 |
+| judged | 33582 | 33617 |
+| % plays | 91.3 | 91.3 |
 
 37 cards changed.
 
-| Change                      | Cards                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| inconclusive -> plays (30)  | Aang's Defense, Avenging Arrow, Break Open, Confront the Assault, Cradle to Grave, Crushing Pain, Cut the Earthly Bond, Enchantment Alteration, Even the Odds, Executioner's Swing, Fatal Blow, Grim Return, Laquatus's Disdain, Lay Down Arms, Mirrodin Avenged, Mirror Strike, Molder, Mutant's Prey, Needle Drop, Premature Burial, Reciprocate, Reenact the Crime, Second Guess, Sizzling Barrage, Surge of Righteousness, Time to Reflect, Treacherous Greed, Venomous Vines, You Are Already Dead, You Cannot Pass! |
-| inconclusive -> refused (5) | see below                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| plays -> refused (1)        | Scion of Vitu-Ghazi: `CopyPermanent: Populate$ not resolvable yet`. Its "if you cast it from your hand" trigger (`ValidCard$ Card.wasCastFromYourHandByYou+Self`) never fired before                                                                                                                                                                                                                                                                                                                                      |
-| refused -> plays (1)        | Sakashima's Protégé: `Choices$ Permanent.ThisTurnEntered+Other` was refused by `cloneSpec`                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Change | Cards |
+| --- | --- |
+| inconclusive -> plays (30) | Aang's Defense, Avenging Arrow, Break Open, Confront the Assault, Cradle to Grave, Crushing Pain, Cut the Earthly Bond, Enchantment Alteration, Even the Odds, Executioner's Swing, Fatal Blow, Grim Return, Laquatus's Disdain, Lay Down Arms, Mirrodin Avenged, Mirror Strike, Molder, Mutant's Prey, Needle Drop, Premature Burial, Reciprocate, Reenact the Crime, Second Guess, Sizzling Barrage, Surge of Righteousness, Time to Reflect, Treacherous Greed, Venomous Vines, You Are Already Dead, You Cannot Pass! |
+| inconclusive -> refused (5) | see below |
+| plays -> refused (1) | Scion of Vitu-Ghazi: `CopyPermanent: Populate$ not resolvable yet`. Its "if you cast it from your hand" trigger (`ValidCard$ Card.wasCastFromYourHandByYou+Self`) never fired before |
+| refused -> plays (1) | Sakashima's Protégé: `Choices$ Permanent.ThisTurnEntered+Other` was refused by `cloneSpec` |
 
 Even the Odds, Lay Down Arms and Molder are not game-state cards: a staged board happens to give them what they need
 (more creatures on the opponent's side; a token of mana value 0; Pacifism at mana value 2 for an X of 2).
 
-| Card                              | Refusal, at resolution                                                |
-| --------------------------------- | --------------------------------------------------------------------- |
-| Aura Graft                        | `Attach: Move$ with Object$ not resolvable yet` (its `ReEnchant` sub) |
-| For the Common Good               | `PumpAll: Duration$ "_" not resolvable yet`                           |
-| Glyph of Destruction              | `Pump: AtEOT$ not resolvable yet`                                     |
-| Role Reversal, Shifting Loyalties | `ExchangeControl: TargetsWithSameCardType$ not resolvable yet`        |
+| Card | Refusal, at resolution |
+| --- | --- |
+| Aura Graft | `Attach: Move$ with Object$ not resolvable yet` (its `ReEnchant` sub) |
+| For the Common Good | `PumpAll: Duration$ "_" not resolvable yet` |
+| Glyph of Destruction | `Pump: AtEOT$ not resolvable yet` |
+| Role Reversal, Shifting Loyalties | `ExchangeControl: TargetsWithSameCardType$ not resolvable yet` |
 
 ## Gaps
 

@@ -11,15 +11,15 @@
 
 ## `ChangeText`, `ExchangeTextBox`, `ChangeColorWordsTo$`
 
-| Piece               | Where                                                                                                               |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Word records        | `Game.textWords` (one per card, kind, pair, timestamp, permanent); `Game.textBoxes` (one per exchanged card)        |
-| Fold                | `foldWords`: rows in timestamp order, `a->b` then `b->c` chains to `a->c`, a clear row empties the table            |
-| Rewrite             | `rewriteDef`: params, sub-abilities, modifiable keyword lines, type line; memoised per game in `Game.textMemo`      |
-| Stage               | `applyTextWords`, last step of `applyContinuousText`; swaps `Def` through `setTextChange`, so Layers 4-8 fold on it |
-| Spells on the stack | `Registry.resolve` calls `textChangedSpell`: the ability built at cast is rewritten with the card's folded map      |
-| End                 | cleanup drops non-`Permanent`; `Move` drops the card's records (CR 400.7); host-bound exchanges end with the host   |
-| Choices             | `ChooseColors` (new color excludes the original), `ChooseOption` over the DB's basic / creature type lists          |
+| Piece | Where |
+| --- | --- |
+| Word records | `Game.textWords` (one per card, kind, pair, timestamp, permanent); `Game.textBoxes` (one per exchanged card) |
+| Fold | `foldWords`: rows in timestamp order, `a->b` then `b->c` chains to `a->c`, a clear row empties the table |
+| Rewrite | `rewriteDef`: params, sub-abilities, modifiable keyword lines, type line; memoised per game in `Game.textMemo` |
+| Stage | `applyTextWords`, last step of `applyContinuousText`; swaps `Def` through `setTextChange`, so Layers 4-8 fold on it |
+| Spells on the stack | `Registry.resolve` calls `textChangedSpell`: the ability built at cast is rewritten with the card's folded map |
+| End | cleanup drops non-`Permanent`; `Move` drops the card's records (CR 400.7); host-bound exchanges end with the host |
+| Choices | `ChooseColors` (new color excludes the original), `ChooseOption` over the DB's basic / creature type lists |
 
 Regex semantics kept (PORT-7): left `\b` only, `non` prefix kept, nothing replaced within 100 characters after `named`,
 color words lower case then as written, `Any` skipping its destination, type words case sensitive, a value equal to a
@@ -44,12 +44,12 @@ so `Red` also rewrites the front of `Reduce`. Reproduced (PORT-7), as parity dep
 
 ## Granted-static gaps
 
-| Gap                                                    | State                                                                                                              |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `CardManaCost` / `ConvertedManaCost` in a granted body | Lands: `costSubstitutedGrant`, per receiving card; abilities take either token, statics only the second            |
-| Layer 3 text change on a granted body                  | Lands for free: a grant's SVars are read through the host's rewritten `Def`; the grant row itself is not rewritten |
-| A granted static's Layer 4/5 effects                   | Not done                                                                                                           |
-| `AddSVar$`                                             | Lands for free: the granted body reads the granting face's amounts and sub-abilities                               |
+| Gap | State |
+| --- | --- |
+| `CardManaCost` / `ConvertedManaCost` in a granted body | Lands: `costSubstitutedGrant`, per receiving card; abilities take either token, statics only the second |
+| Layer 3 text change on a granted body | Lands for free: a grant's SVars are read through the host's rewritten `Def`; the grant row itself is not rewritten |
+| A granted static's Layer 4/5 effects | Not done |
+| `AddSVar$` | Lands for free: the granted body reads the granting face's amounts and sub-abilities |
 
 Java applies a static granted in Layer 6 to Layers 4 and 5 from the next pass. This port rebuilds grants after Layers
 4-5, so the effect would need a second settle step; no real shape depends on it yet beyond a handful of Auras that also
@@ -59,13 +59,13 @@ sub-abilities of the granting face, which a grant already carries, so no per-car
 
 ## Layers 4, 5 and 6
 
-| Row                                        | State                                                                                                                         |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| `AddAllCreatureTypes$` (8)                 | Lands: `layerTypeChange` adds every creature type of the DB vocabulary via `Game.allCreatureTypes`, shared with Changeling    |
-| `CardManaCost` in a keyword (2 real lines) | Lands: `mana.Cost.ShortString` (`ManaCost.getShortString`), `layerKeywordsFor`; `CardManaCost` wins over `ConvertedManaCost`  |
-| `SharedKeywordsZone$`, `CantHaveKeyword$`  | Lands: `layerSharedKeywords` (`CardFactoryUtil.getSharedKeywords`), `KeywordEffect.CantHave` stripped in `KeywordMod.fold`    |
-| "Loses all abilities" past keywords        | Already resolved before this batch (`abilityRemoval`, `printedTraitsRemoved`, `removeallabilities_test.go`); the row is stale |
-| `CheckSVar$` amount outside `Count$Valid`  | Not done: the general `calculateAmount` port                                                                                  |
+| Row | State |
+| --- | --- |
+| `AddAllCreatureTypes$` (8) | Lands: `layerTypeChange` adds every creature type of the DB vocabulary via `Game.allCreatureTypes`, shared with Changeling |
+| `CardManaCost` in a keyword (2 real lines) | Lands: `mana.Cost.ShortString` (`ManaCost.getShortString`), `layerKeywordsFor`; `CardManaCost` wins over `ConvertedManaCost` |
+| `SharedKeywordsZone$`, `CantHaveKeyword$` | Lands: `layerSharedKeywords` (`CardFactoryUtil.getSharedKeywords`), `KeywordEffect.CantHave` stripped in `KeywordMod.fold` |
+| "Loses all abilities" past keywords | Already resolved before this batch (`abilityRemoval`, `printedTraitsRemoved`, `removeallabilities_test.go`); the row is stale |
+| `CheckSVar$` amount outside `Count$Valid` | Not done: the general `calculateAmount` port |
 
 Tests: `textwords_test.go`, `textboxwords_test.go`, `textrewrite_test.go`, `layerscostgrants_test.go`,
 `internal/mana/shortstring_test.go`. No scenario fixture: the state dump holds zones, life and counters only, never

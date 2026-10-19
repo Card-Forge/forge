@@ -10,28 +10,28 @@ written there.
 
 `Card.exiledWith` (`card.go`) is Java's `Card.exiledWith` (`Card.java:326`): which host object exiled the card.
 
-| Piece                       | Where              | Java                                                                                        |
-| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------- |
-| Mark cleared on zone entry  | `put`/`putFront`   | `Card.cleanupExiledWith` on every move but to the stack (`GameAction.java:576-579`)         |
-| Mark set after exile move   | `markExiledWith`   | `SpellAbilityEffect.handleExiledWith` (`SpellAbilityEffect.java:1087-1116`)                 |
-| Host object stamp           | `hostObjectStamp`  | `equalsWithGameTimestamp` against the ability's host object (`CardProperty.java:397-411`)   |
-| `ExiledWithSource` property | `valid.go`         | `CardProperty.java:397-411`, exact name only                                                |
-| Fixture `ExiledWith:<id>`   | `internal/fixture` | `GameState.java:407-410` (dump), `:771-781`/`:1398` (load)                                  |
-| `Spell` valid base          | `baseMatches`      | `Card.isSpell` (`Card.java:5500-5502`): instant, sorcery, or an Aura off the battlefield    |
-| Last battlefield stamp      | `battlefieldStamp` | the old object an ability keeps after its host moves (LKI copy keeps its `gameTimestamp`)   |
-| Setting sites               | six effects        | `ChangeZone`, `ChangeZoneAll`, `Dig`, `DigUntil`, `Heist`, `Airbend` -- Java's own callers  |
-| Reject lists lifted         | `playeffect.go`    | `Play`'s `Valid$ Card.ExiledWithSource`; `Clone`'s `cloneUnportedProperties` entry went too |
+| Piece | Where | Java |
+| --- | --- | --- |
+| Mark cleared on zone entry | `put`/`putFront` | `Card.cleanupExiledWith` on every move but to the stack (`GameAction.java:576-579`) |
+| Mark set after exile move | `markExiledWith` | `SpellAbilityEffect.handleExiledWith` (`SpellAbilityEffect.java:1087-1116`) |
+| Host object stamp | `hostObjectStamp` | `equalsWithGameTimestamp` against the ability's host object (`CardProperty.java:397-411`) |
+| `ExiledWithSource` property | `valid.go` | `CardProperty.java:397-411`, exact name only |
+| Fixture `ExiledWith:<id>` | `internal/fixture` | `GameState.java:407-410` (dump), `:771-781`/`:1398` (load) |
+| `Spell` valid base | `baseMatches` | `Card.isSpell` (`Card.java:5500-5502`): instant, sorcery, or an Aura off the battlefield |
+| Last battlefield stamp | `battlefieldStamp` | the old object an ability keeps after its host moves (LKI copy keeps its `gameTimestamp`) |
+| Setting sites | six effects | `ChangeZone`, `ChangeZoneAll`, `Dig`, `DigUntil`, `Heist`, `Airbend` -- Java's own callers |
+| Reject lists lifted | `playeffect.go` | `Play`'s `Valid$ Card.ExiledWithSource`; `Clone`'s `cloneUnportedProperties` entry went too |
 
 **Identity is the host object, not the `CardID` alone.** This port's IDs are stable across zone moves, so a plain
 `CardID` match over-matches: Java compares `equalsWithGameTimestamp`, and a host that left the battlefield and came back
 is a new object that exiled nothing. The mark stores the host's `zoneStamp` at exile time; the property compares it
 against the stamp of the host object an ability of the host sees (`hostObjectStamp`, `game.go`):
 
-| Host is in                          | Object an ability sees                       | Reason                                                           |
-| ----------------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
-| Battlefield, Stack, Command         | current object (`zoneStamp`)                 | Java's host object is the live one                               |
-| elsewhere, left the battlefield     | last battlefield object (`battlefieldStamp`) | Java's ability keeps the old host object, not the moved copy     |
-| elsewhere, never on the battlefield | current object, not listed                   | Java adds to `exiledCards` only for a host in play/stack/Command |
+| Host is in | Object an ability sees | Reason |
+| --- | --- | --- |
+| Battlefield, Stack, Command | current object (`zoneStamp`) | Java's host object is the live one |
+| elsewhere, left the battlefield | last battlefield object (`battlefieldStamp`) | Java's ability keeps the old host object, not the moved copy |
+| elsewhere, never on the battlefield | current object, not listed | Java adds to `exiledCards` only for a host in play/stack/Command |
 
 The second row is what makes Karn work: the restart shuffles Karn into its library before `ReturnFromExile` resolves,
 and Java's `sa.getHostCard()` is still the battlefield-era Karn object whose `exiledCards` list and timestamp match.
@@ -61,11 +61,11 @@ library's top, never the stack.
 
 **Rejected, before acting.**
 
-| Shape                             | Where                  | Reason                                                                      |
-| --------------------------------- | ---------------------- | --------------------------------------------------------------------------- |
-| `ExiledWithEffectSource$` (3)     | `ChangeZone`           | marks the effect card's own source instead (`SpellAbilityEffect.java:1092`) |
-| `ExiledWithSourceLKI` (15)        | `Play` (`playSpecGap`) | reads the exile zone's cards-added-this-turn LKI list, not ported           |
-| `ExiledWithEffectSource` property | `Play` (`playSpecGap`) | effect-card source comparison, not ported                                   |
+| Shape | Where | Reason |
+| --- | --- | --- |
+| `ExiledWithEffectSource$` (3) | `ChangeZone` | marks the effect card's own source instead (`SpellAbilityEffect.java:1092`) |
+| `ExiledWithSourceLKI` (15) | `Play` (`playSpecGap`) | reads the exile zone's cards-added-this-turn LKI list, not ported |
+| `ExiledWithEffectSource` property | `Play` (`playSpecGap`) | effect-card source comparison, not ported |
 
 Not set: cost exiles (`CostExile`, `CostExileFromStack`, `CostBeholdExile`, `CostForage`, `CostCollectEvidence` all call
 `handleExiledWith`) and the casting-time sites (`PlaySpellAbility.java:534-535`, `CostAdjustment.java:274-275`, craft
@@ -108,14 +108,14 @@ the moves; Java's `moveToLibrary` does consult `ReplaceMoved`.
 **Driver restart signal.** Java leaves its game loop (`GameStage.RestartedByKarn`, `PhaseHandler.java:1034`,
 `:1150-1155`) and reruns `GameAction.startGame`'s loop body (`GameAction.java:2326-2381`). Here:
 
-| Entry point                             | On a restart during it                              | Called while restarted    |
-| --------------------------------------- | --------------------------------------------------- | ------------------------- |
-| `resolveTop`                            | returns right after `AbilityResolved`, no SBA check | --                        |
-| `priorityRound`/`PassPriority`          | ends the round                                      | `errRestartPending`       |
-| `Step`/`Run`                            | return nil, `Over()` false                          | `errRestartPending`       |
-| `ResolveStack`                          | stops, rest of the stack kept                       | `errRestartPending`       |
-| `ResumeAfterRestart` (new)              | --                                                  | the resume; else an error |
-| Subgame driver, fixture `resumerestart` | resume and run on                                   | --                        |
+| Entry point | On a restart during it | Called while restarted |
+| --- | --- | --- |
+| `resolveTop` | returns right after `AbilityResolved`, no SBA check | -- |
+| `priorityRound`/`PassPriority` | ends the round | `errRestartPending` |
+| `Step`/`Run` | return nil, `Over()` false | `errRestartPending` |
+| `ResolveStack` | stops, rest of the stack kept | `errRestartPending` |
+| `ResumeAfterRestart` (new) | -- | the resume; else an error |
+| Subgame driver, fixture `resumerestart` | resume and run on | -- |
 
 `ResumeAfterRestart` (`driver.go`) is Java's loop body for a restart: each live player draws an opening hand
 (`drawOpeningHand`, no shuffle), London mulligans from the activator, flag cleared, `StartTurn(activator)`. Not
@@ -130,12 +130,12 @@ handler's waiting list and puts it on the stack at that same first priority chec
 
 **Rejected, before anything changes (PORT-8, GO-7):**
 
-| Shape                                          | Reason                                                                                                   |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| A card in any Stack zone                       | `restartZones` has no Stack; `MagicStack.reset` (`MagicStack.java:97-109`) clears entries, not the cards |
-| A Command-zone card neither effect nor dungeon | commander to library and `Player.initVariantsZones` rebuild, neither ported                              |
-| Planechase game, any card in a variant deck    | `initVariantsZones` (`Player.java:2918`) rebuilds planar/scheme/attraction/contraption decks             |
-| `RestrictFromZone$` outside `restartZones`     | 0 real lines; Java would still add that zone's matching cards to the library                             |
+| Shape | Reason |
+| --- | --- |
+| A card in any Stack zone | `restartZones` has no Stack; `MagicStack.reset` (`MagicStack.java:97-109`) clears entries, not the cards |
+| A Command-zone card neither effect nor dungeon | commander to library and `Player.initVariantsZones` rebuild, neither ported |
+| Planechase game, any card in a variant deck | `initVariantsZones` (`Player.java:2918`) rebuilds planar/scheme/attraction/contraption decks |
+| `RestrictFromZone$` outside `restartZones` | 0 real lines; Java would still add that zone's matching cards to the library |
 
 `NewGame` triggers are not built: every real one (5 lines) has `TriggerZones$ Command` on a vanguard/conspiracy-style
 card, which the Command-zone rejection already refuses, so `ResumeAfterRestart` skipping the trigger drops nothing. The

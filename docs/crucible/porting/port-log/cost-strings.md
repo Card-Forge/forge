@@ -46,18 +46,18 @@ The corpus test skips a `Cost$` whose whole value names an SVar on the same face
 
 ## Deviations from Java
 
-| Java                                                         | Go                                                                                               |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| 52 `CostPart` subclasses, each parsing its own body          | One `Part` with named fields. Meaning belongs with payment, which is M5                          |
-| Tap and untap are flags _and_ parts                          | Same. `Cost.Tap` is set in the pre-pass, and `T` is also a part, because Java does both          |
+| Java | Go |
+| --- | --- |
+| 52 `CostPart` subclasses, each parsing its own body | One `Part` with named fields. Meaning belongs with payment, which is M5 |
+| Tap and untap are flags _and_ parts | Same. `Cost.Tap` is set in the pre-pass, and `T` is also a part, because Java does both |
 | The mana leftovers are joined and handed to `ManaCostParser` | Kept as a token list. `internal/mana` parses it when the caller needs a cost rather than a shape |
-| A body field that does not exist is a `length >` check       | `Part.Field(i)` returns empty past the end, so the check is in one place                         |
+| A body field that does not exist is a `length >` check | `Part.Field(i)` returns empty past the end, so the check is in one place |
 
 ## Not ported yet
 
-| Java                                                 | When                                                              |
-| ---------------------------------------------------- | ----------------------------------------------------------------- |
-| Paying: `canPay`, `payAsDecided`, the 52 subclasses  | M5                                                                |
-| `CostPartMana`'s restriction after a `\` in the body | M5                                                                |
-| `XMin` semantics, and `Mandatory`                    | M5                                                                |
-| The 12 named parts no corpus card uses               | If a card ever uses one, the fall-through test fails and names it |
+| Java | When |
+| --- | --- |
+| Paying: `canPay`, `payAsDecided`, the 52 subclasses | M5 |
+| `CostPartMana`'s restriction after a `\` in the body | M5 |
+| `XMin` semantics, and `Mandatory` | M5 |
+| The 12 named parts no corpus card uses | If a card ever uses one, the fall-through test fails and names it |

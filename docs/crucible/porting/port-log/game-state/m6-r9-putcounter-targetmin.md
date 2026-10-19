@@ -20,12 +20,12 @@
 failed. `crucible card-smoke -all` refused 138 cards with `PutCounter: TargetMin$ not resolvable yet` (86 at `resolve`,
 29 at `activate`, 23 at `turns`). Shapes, as found by dropping the two keys and reading the next refusal:
 
-| Shape                                                       | Cards | Status                                                                                                                                                                                                              |
-| ----------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Each target gets `CounterNum$` (Gird for Battle, Basri Ket) | 100   | Resolved: the targets were already chosen by `resolveTargets`                                                                                                                                                       |
-| `DividedAsYouChoose$` over the line's own targets           | 28    | Resolved (below); 25 play, Bounty of the Hunt stops at `RemovePhase$`, Glint Weaver at its `GainLife` amount, Lathiel at `DividedUpTo$`                                                                             |
-| Another refused param or amount on the line or its chain    | 9     | Argothian Uprooting, Kaya the Inexorable (`Animate: Triggers$`), Elspeth Resplendent (`CounterTypes$`), Orcish Catapult (`DividedRandomly$`), Jenova, The Caves of Androzani, Liege of the Tangle, Olinda, Turf War |
-| Sky Deck (an Attraction)                                    | 1     | `placed` now                                                                                                                                                                                                        |
+| Shape | Cards | Status |
+| --- | --- | --- |
+| Each target gets `CounterNum$` (Gird for Battle, Basri Ket) | 100 | Resolved: the targets were already chosen by `resolveTargets` |
+| `DividedAsYouChoose$` over the line's own targets | 28 | Resolved (below); 25 play, Bounty of the Hunt stops at `RemovePhase$`, Glint Weaver at its `GainLife` amount, Lathiel at `DividedUpTo$` |
+| Another refused param or amount on the line or its chain | 9 | Argothian Uprooting, Kaya the Inexorable (`Animate: Triggers$`), Elspeth Resplendent (`CounterTypes$`), Orcish Catapult (`DividedRandomly$`), Jenova, The Caves of Androzani, Liege of the Tangle, Olinda, Turf War |
+| Sky Deck (an Attraction) | 1 | `placed` now |
 
 ## Each target gets `CounterNum$`
 
@@ -49,13 +49,13 @@ human controller does this in `chooseTargetsFor` (`PlayerControllerHuman.java:24
 `TargetChoices.dividedMap`; `CountersPutEffect` reads each target's share at resolution (`:460-461`), `CounterNum$`
 unread. Crucible had nowhere to carry a division, so the shape was refused (here and in `DealDamage`).
 
-| Piece                                      | Does                                                                                                                                                                                                                                                                                                                     | Why                                                                                    |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| `capDividedChoice`                         | `TargetMax$` capped at the `DividedAsYouChoose$` total, `TargetMin$` at the cap; a total of 0 asks for no target                                                                                                                                                                                                         | `InputSelectTargets.java:438-439`, `TargetRestrictions.java:370-376`                   |
-| `divideAmongTargets`                       | Right after `ChooseTargets`: one target takes all, as many targets as the amount get one each, otherwise `DivideAmongTargets` is asked                                                                                                                                                                                   | `PlayerControllerHuman.java:2495-2526`; total evaluated at targeting (`:2182-2188`)    |
-| `checkDivision`                            | One share per target, each at least one, summing to the total; else `targetsErr`, the spell fails at resolution and places nothing                                                                                                                                                                                       | GO-7; Java's GUI enforces the same (`assignGenericAmount`, `atLeastOne`)               |
-| `Ability.divided`, `chainTarget.Divided`   | Shares keyed by target, never by position; replaced, never written in place                                                                                                                                                                                                                                              | `dropIllegalTargets` rebuilds `Targets`; `Game.Clone` and `copySpell` share the slices |
-| `resolveChainTargets`, `resolveSubAbility` | A link announces its own division; its child `Ability` carries it (`chainTargetsFor`). A link whose targets or division could not be asked records its own error (`chainTarget.Err`, the child's `targetsErr`) and the root's (`failLinkTargets`), so the whole ability fails in `Registry.resolve` before the root acts | Java walks every targeting link (`chooseTargetsFor`'s loop)                            |
+| Piece | Does | Why |
+| --- | --- | --- |
+| `capDividedChoice` | `TargetMax$` capped at the `DividedAsYouChoose$` total, `TargetMin$` at the cap; a total of 0 asks for no target | `InputSelectTargets.java:438-439`, `TargetRestrictions.java:370-376` |
+| `divideAmongTargets` | Right after `ChooseTargets`: one target takes all, as many targets as the amount get one each, otherwise `DivideAmongTargets` is asked | `PlayerControllerHuman.java:2495-2526`; total evaluated at targeting (`:2182-2188`) |
+| `checkDivision` | One share per target, each at least one, summing to the total; else `targetsErr`, the spell fails at resolution and places nothing | GO-7; Java's GUI enforces the same (`assignGenericAmount`, `atLeastOne`) |
+| `Ability.divided`, `chainTarget.Divided` | Shares keyed by target, never by position; replaced, never written in place | `dropIllegalTargets` rebuilds `Targets`; `Game.Clone` and `copySpell` share the slices |
+| `resolveChainTargets`, `resolveSubAbility` | A link announces its own division; its child `Ability` carries it (`chainTargetsFor`). A link whose targets or division could not be asked records its own error (`chainTarget.Err`, the child's `targetsErr`) and the root's (`failLinkTargets`), so the whole ability fails in `Registry.resolve` before the root acts | Java walks every targeting link (`chooseTargetsFor`'s loop) |
 
 A target removed under CR 608.2b takes its share with it (`TargetChoices.java:71-82`): the one left keeps its own share,
 not the whole amount. Charm modes go through `resolveTargets` too (Abzan Charm).
@@ -73,24 +73,24 @@ gives every target one and the rest to the first.
 
 ## Refused, by name
 
-| Shape                                                                | Reason                                                                                                                                                |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DividedUpTo$` (Lathiel, 1 refused card)                             | A further "how much of it" `chooseNumber` before dividing (`PlayerControllerHuman.java:2492`)                                                         |
-| `DividedAsYouChoose$` with `Defined$`, or with no `ValidTgts$`       | Untargeted, Java divides card by card at resolution (`CountersPutEffect.java:470-483`, `Choices$`)                                                    |
+| Shape | Reason |
+| --- | --- |
+| `DividedUpTo$` (Lathiel, 1 refused card) | A further "how much of it" `chooseNumber` before dividing (`PlayerControllerHuman.java:2492`) |
+| `DividedAsYouChoose$` with `Defined$`, or with no `ValidTgts$` | Untargeted, Java divides card by card at resolution (`CountersPutEffect.java:470-483`, `Choices$`) |
 | New targets for a divided copy (`MayChooseTarget$`, copier says yes) | Java reassigns the original's division values to the new targets (`PlayerControllerHuman.java:2549`); a copy keeping its targets keeps their division |
-| `DividedRandomly$`, `RemovePhase$`, `CounterTypes$`                  | Unchanged: each its own mechanic                                                                                                                      |
+| `DividedRandomly$`, `RemovePhase$`, `CounterTypes$` | Unchanged: each its own mechanic |
 
 ## Smoke probe
 
 `crucible card-smoke -all -workers 8`, before → after:
 
-| Status       | Before | After  |
-| ------------ | ------ | ------ |
-| plays        | 29,610 | 29,735 |
-| refused      | 3,911  | 3,785  |
-| placed       | 359    | 360    |
-| inconclusive | 198    | 198    |
-| judged play  | 88.3%  | 88.7%  |
+| Status | Before | After |
+| --- | --- | --- |
+| plays | 29,610 | 29,735 |
+| refused | 3,911 | 3,785 |
+| placed | 359 | 360 |
+| inconclusive | 198 | 198 |
+| judged play | 88.3% | 88.7% |
 
 All 138 changed cards are the refused ones: 125 refused → plays, 12 refused for another reason (above), 1 refused →
 placed (Sky Deck; judged 33,521 → 33,520). No card went plays → refused.

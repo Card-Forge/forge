@@ -17,15 +17,15 @@ the dungeon SBA (`completeFinishedDungeons`).
 Ported from `forge-game/src/main/java/forge/game/ability/effects/SetInMotionEffect.java`'s `resolve`, with
 `Player.setSchemeInMotion` (`Player.java:275-292`) as `Game.setSchemeInMotion`.
 
-| Step           | Go                                                                                         | Java                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| Condition gate | `subAbilityConditionMet` (below)                                                           | `SpellAbilityCondition.areMet`                                               |
-| Player         | host's controller                                                                          | `source.getController()` (`:18`), not the activator                          |
-| Repeats        | `RepeatNum$` through `optionalAmount`, default 1                                           | `calculateAmount(RepeatNum)` (`:21-24`)                                      |
-| Which scheme   | top of player's `SchemeDeck`, or with `Again$` the triggering scheme (`AbilityKey.Scheme`) | `getZone(SchemeDeck).get(0)` / root ability's triggering `Scheme` (`:27-31`) |
-| Replacement    | any live `Event$ SetInMotion` replacement → error, nothing moved                           | `ReplacementType.SetInMotion` run (`Player.java:279-281`)                    |
-| Move           | scheme → its owner's `Command` (`Move` fires no `ChangesZone` trigger)                     | `moveToCommand`, `ChangesZone` suppressed (`GameAction.java:942-947`)        |
-| Trigger        | `checkSetInMotionTriggers(scheme)`; a `Static$` trigger's error returned                   | `runTrigger(TriggerType.SetInMotion, Scheme)` (`Player.java:289-291`)        |
+| Step | Go | Java |
+| --- | --- | --- |
+| Condition gate | `subAbilityConditionMet` (below) | `SpellAbilityCondition.areMet` |
+| Player | host's controller | `source.getController()` (`:18`), not the activator |
+| Repeats | `RepeatNum$` through `optionalAmount`, default 1 | `calculateAmount(RepeatNum)` (`:21-24`) |
+| Which scheme | top of player's `SchemeDeck`, or with `Again$` the triggering scheme (`AbilityKey.Scheme`) | `getZone(SchemeDeck).get(0)` / root ability's triggering `Scheme` (`:27-31`) |
+| Replacement | any live `Event$ SetInMotion` replacement → error, nothing moved | `ReplacementType.SetInMotion` run (`Player.java:279-281`) |
+| Move | scheme → its owner's `Command` (`Move` fires no `ChangesZone` trigger) | `moveToCommand`, `ChangesZone` suppressed (`GameAction.java:942-947`) |
+| Trigger | `checkSetInMotionTriggers(scheme)`; a `Static$` trigger's error returned | `runTrigger(TriggerType.SetInMotion, Scheme)` (`Player.java:289-291`) |
 
 Top of a `SchemeDeck` is index 0 and `Game.Move` appends to the bottom, the `PlanarDeck`/`Library` convention.
 
@@ -42,9 +42,9 @@ repeat). `Again$` with no recorded triggering scheme (Java would dereference nul
 `ReplaceSetInMotion.java` is not ported. Its presence alone refuses the action — `planeswalkReplacement`'s shape
 (`effects-planeswalk.md`) — rather than setting a scheme in motion as if it were absent. Its two sources:
 
-| Source                                                                                               | Why not ported                                                                                                         |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Plots That Span Centuries' effect card (`PlotPower`, `ReplaceWith$ PlotRep`)                         | `PlotRep` chains `SubAbility$ ExilePlot`; `runReplaceWith` (`replacement.go`) refuses a chained `ReplaceWith$`         |
+| Source | Why not ported |
+| --- | --- |
+| Plots That Span Centuries' effect card (`PlotPower`, `ReplaceWith$ PlotRep`) | `PlotRep` chains `SubAbility$ ExilePlot`; `runReplaceWith` (`replacement.go`) refuses a chained `ReplaceWith$` |
 | `AddTurnEffect.createCantSetSchemesInMotionEffect` (`AddTurnEffect.java:69-83`, `Layer$ CantHappen`) | Unreachable: `addturneffect.go` already rejects `NoSchemes$`, the only param that creates it (`PhaseHandler.java:888`) |
 
 ### `ConditionDefined$`
@@ -72,10 +72,10 @@ reason.
 
 ### Corpus: 1 of 2 real `DB$ SetInMotion` lines resolves
 
-| Line                                                                                                | Status                                                                                                                            |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `my_laughter_echoes.txt:6`, `Again$ True \| ConditionDefined$ Remembered \| ConditionPresent$ Card` | resolves (`TestMyLaughterEchoesSetsTheSchemeInMotionAgain`)                                                                       |
-| `plots_that_span_centuries.txt:7`, `RepeatNum$ 3`, the `ReplaceWith$` of `PlotPower`                | `RepeatNum$` resolves in the effect (`TestSetInMotionRepeatNum`); the line itself is reached only through the refused replacement |
+| Line | Status |
+| --- | --- |
+| `my_laughter_echoes.txt:6`, `Again$ True \| ConditionDefined$ Remembered \| ConditionPresent$ Card` | resolves (`TestMyLaughterEchoesSetsTheSchemeInMotionAgain`) |
+| `plots_that_span_centuries.txt:7`, `RepeatNum$ 3`, the `ReplaceWith$` of `PlotPower` | `RepeatNum$` resolves in the effect (`TestSetInMotionRepeatNum`); the line itself is reached only through the refused replacement |
 
 ## Mode$ SetInMotion lands
 
@@ -98,12 +98,12 @@ Corpus: 85 real `Mode$ SetInMotion` lines on 84 cards (81 `Scheme`, 3 `Ongoing S
 
 ### Not ported
 
-| Gap                                                                                        | Why                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CR 904.6 archenemy goes first (`GameAction.java:2395-2401`), scheme deck shuffled at start | Match setup, not an effect; Crucible has no match setup. Tests seat the `SchemeDeck` with `NewCard`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| A face-up scheme's other traits                                                            | `Mode$ Phase` fires from `Command` (`phaseTriggerZones`, `trigger.go:1861`; 17 real lines on Ongoing schemes, `TestOngoingSchemePhaseTriggerFiresFromCommand`). Every walk built on `traitHosts` (battlefield plus effect cards) skips a plain `Command` scheme: its other trigger modes (`Attacks`, `AttackersDeclared`, `ChangesZone`, `SpellCast`, `BecomesTarget`, `DamageDoneOnce`, `AttackerUnblocked`, `Abandoned` on `Card.Self` — 14 real lines on Ongoing schemes) and its `S:` static abilities (`Continuous` 5, `CantBeCast`, `ReduceCost`, `UntapOtherPlayer`) do not apply yet. Newly reachable now that Main1 puts Ongoing schemes face up; widening `traitHosts` to face-up schemes touches every one of its ~35 callers, left for its own change |
-| `ReplacementType.SetInMotion`                                                              | Above; fail-closed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Scenario fixture                                                                           | `GameState.java`'s `ZONES` (`GameState.java:46-54`) has no `SchemeDeck` key; a Crucible-only key would break the Java oracle's reading of the same fixture. Module tests instead (`archenemy_test.go`), the planeswalk precedent                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Gap | Why |
+| --- | --- |
+| CR 904.6 archenemy goes first (`GameAction.java:2395-2401`), scheme deck shuffled at start | Match setup, not an effect; Crucible has no match setup. Tests seat the `SchemeDeck` with `NewCard` |
+| A face-up scheme's other traits | `Mode$ Phase` fires from `Command` (`phaseTriggerZones`, `trigger.go:1861`; 17 real lines on Ongoing schemes, `TestOngoingSchemePhaseTriggerFiresFromCommand`). Every walk built on `traitHosts` (battlefield plus effect cards) skips a plain `Command` scheme: its other trigger modes (`Attacks`, `AttackersDeclared`, `ChangesZone`, `SpellCast`, `BecomesTarget`, `DamageDoneOnce`, `AttackerUnblocked`, `Abandoned` on `Card.Self` — 14 real lines on Ongoing schemes) and its `S:` static abilities (`Continuous` 5, `CantBeCast`, `ReduceCost`, `UntapOtherPlayer`) do not apply yet. Newly reachable now that Main1 puts Ongoing schemes face up; widening `traitHosts` to face-up schemes touches every one of its ~35 callers, left for its own change |
+| `ReplacementType.SetInMotion` | Above; fail-closed |
+| Scenario fixture | `GameState.java`'s `ZONES` (`GameState.java:46-54`) has no `SchemeDeck` key; a Crucible-only key would break the Java oracle's reading of the same fixture. Module tests instead (`archenemy_test.go`), the planeswalk precedent |
 
 ### Forge defects found (PORT-8)
 

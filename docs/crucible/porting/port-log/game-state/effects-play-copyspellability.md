@@ -11,9 +11,9 @@ card is an instant or sorcery, which the dominant shapes cannot rule out.
 
 **Not the blocker: the priority window.** Neither dominant shape needs a player to respond to anything.
 
-| API                | Why no priority window is needed                                                                                                                                                                          |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Play`             | Casts during resolution; timing is bypassed (`PlayEffect.java:460`, `playSaFromPlayEffect`), as `castWithoutPaying` (`discovereffect.go`) already does                                                    |
+| API | Why no priority window is needed |
+| --- | --- |
+| `Play` | Casts during resolution; timing is bypassed (`PlayEffect.java:460`, `playSaFromPlayEffect`), as `castWithoutPaying` (`discovereffect.go`) already does |
 | `CopySpellAbility` | 164 of 255 lines are `Defined$ TriggeredSpellAbility` under a `Mode$ SpellCast` trigger. The trigger sits above the spell and resolves first under `ResolveStack`'s all-pass model, so the spell is there |
 
 **The blocker: no instant or sorcery exists as a stack object.** `CastSpell` (`castspell.go`) casts only non-Aura
@@ -26,15 +26,15 @@ Java: `PlayEffect.java:84-493` (`resolve`), `PlayerControllerHuman.java:2416` / 
 (`playSaFromPlayEffect` → full `playSpellAbility`, cost payment and targeting included), `AbilityUtils`
 `getSpellsFromPlayEffect`.
 
-| Shape                                                                     | Lines | Casts                               |
-| ------------------------------------------------------------------------- | ----- | ----------------------------------- |
-| `Optional$`                                                               | 310   | --                                  |
-| `WithoutManaCost$`                                                        | 284   | --                                  |
-| `ValidSA$ Spell...` (205 bare `Spell`, rest with `cmc`/type suffixes)     | 242   | Mostly any card type                |
-| `Defined$ Remembered` / `Valid$ Card.IsRemembered`                        | 128   | Whatever an earlier step exiled     |
-| `ValidSA$`/`ValidTgts$`/`Valid$` naming only `Instant`/`Sorcery` per item | 63    | Only an instant or sorcery, always  |
-| `CopyCard$`                                                               | 56    | A token copy cast from its zone     |
-| `ReplaceGraveyard$`                                                       | 35    | Exile instead of graveyard, on cast |
+| Shape | Lines | Casts |
+| --- | --- | --- |
+| `Optional$` | 310 | -- |
+| `WithoutManaCost$` | 284 | -- |
+| `ValidSA$ Spell...` (205 bare `Spell`, rest with `cmc`/type suffixes) | 242 | Mostly any card type |
+| `Defined$ Remembered` / `Valid$ Card.IsRemembered` | 128 | Whatever an earlier step exiled |
+| `ValidSA$`/`ValidTgts$`/`Valid$` naming only `Instant`/`Sorcery` per item | 63 | Only an instant or sorcery, always |
+| `CopyCard$` | 56 | A token copy cast from its zone |
+| `ReplaceGraveyard$` | 35 | Exile instead of graveyard, on cast |
 
 A port reusing `castWithoutPaying` resolves permanent spells only: 63 lines always error, and most of the rest error
 whenever the exiled or remembered card is an instant or sorcery. `Discover` takes that route (`discovereffect.go`); for
@@ -46,13 +46,13 @@ Java: `CopySpellAbilityEffect.java:65-210` (`resolve`), `CardFactory.java:80-117
 card built from the original), `CardFactory.java:127-167` (`copySpellAbilityAndPossiblyHost`, costs cleared),
 `MagicStack.java:680-681` (copy ceases to exist leaving the stack, CR 707.10a).
 
-| Shape                                                           | Lines | Needs                                                                                            |
-| --------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------ |
-| `MayChooseTarget$`                                              | 207   | New targets for the copy (CR 707.10c)                                                            |
-| `Defined$ TriggeredSpellAbility`                                | 164   | The `SpellCast` trigger's triggering stack item                                                  |
-| `TargetType$ Spell` / `ValidTgts$ Instant,Sorcery` and variants | 52    | Targeting a stack item                                                                           |
-| `TargetType$ Activated`/`Triggered`, `ValidStack Ability...`    | 17    | Copy of an ability; stack-item identity exists since R25e (ADR-0041), the copy itself is unbuilt |
-| Copies of permanent spells (`Card.Outlaw`, `Creature.YouCtrl`)  | few   | Token on resolution (CR 707.10f), Layer 1 copiable data                                          |
+| Shape | Lines | Needs |
+| --- | --- | --- |
+| `MayChooseTarget$` | 207 | New targets for the copy (CR 707.10c) |
+| `Defined$ TriggeredSpellAbility` | 164 | The `SpellCast` trigger's triggering stack item |
+| `TargetType$ Spell` / `ValidTgts$ Instant,Sorcery` and variants | 52 | Targeting a stack item |
+| `TargetType$ Activated`/`Triggered`, `ValidStack Ability...` | 17 | Copy of an ability; stack-item identity exists since R25e (ADR-0041), the copy itself is unbuilt |
+| Copies of permanent spells (`Card.Outlaw`, `Creature.YouCtrl`) | few | Token on resolution (CR 707.10f), Layer 1 copiable data |
 
 The 17 ability-copy lines are not carved out. Reason: they need the same stack-item identity the dominant shape needs,
 and building it for 17 lines would decide that design ahead of it.
@@ -79,7 +79,7 @@ and building it for 17 lines would decide that design ahead of it.
 
 **Researched and deferred.**
 
-| API                | Blocker                                                                                                                                                    |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Play`             | No instant/sorcery spell object on the stack: `A:SP$` cast, Stack → Graveyard after resolution, CR 608.2b fizzle (design steps 1-2, above)                 |
+| API | Blocker |
+| --- | --- |
+| `Play` | No instant/sorcery spell object on the stack: `A:SP$` cast, Stack → Graveyard after resolution, CR 608.2b fizzle (design steps 1-2, above) |
 | `CopySpellAbility` | Steps 1-2, plus stack-item identity, `TriggeredSpellAbility` on `SpellCast` triggers, copy-host cards ceasing to exist, Layer 1 permanent-spell copies (3) |

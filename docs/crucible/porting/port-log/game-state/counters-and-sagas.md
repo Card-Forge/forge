@@ -25,12 +25,12 @@ player, `AbilityKey.Source`, `Card.java:1805`; [R9f](m6-r9f-trigger-findings.md)
 
 ## Sagas (CR 714)
 
-| Rule                                                                                                  | Go                                                                                                                                     |
-| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| enters with a lore counter (`CardState.getSagaRep`)                                                   | `applySagaCounter`, from `enterBattlefieldReplacements`, for a Saga type without `Read ahead`; through `countersReplaced`              |
-| a lore counter at the precombat main (`PhaseHandler.java:283`)                                        | `sagaLoreCounters` in `beginStep`'s Main1 case, for each Saga the active player controls with a `Chapter` keyword                      |
-| chapter N triggers when the counters reach N                                                          | `keyword.Expand`'s `Chapter:<N>:<SVar>,...`: one `Mode$ CounterAdded \| CounterType$ LORE \| CounterAmount$ EQ<i>` trigger per chapter |
-| sacrifice when lore counters reach the last chapter and none of its chapter abilities is on the stack | `sacrificeCompletedSagas`, a state-based action; `hasChapterOnStack` scans the stack for an ability tagged `Chapter`                   |
+| Rule | Go |
+| --- | --- |
+| enters with a lore counter (`CardState.getSagaRep`) | `applySagaCounter`, from `enterBattlefieldReplacements`, for a Saga type without `Read ahead`; through `countersReplaced` |
+| a lore counter at the precombat main (`PhaseHandler.java:283`) | `sagaLoreCounters` in `beginStep`'s Main1 case, for each Saga the active player controls with a `Chapter` keyword |
+| chapter N triggers when the counters reach N | `keyword.Expand`'s `Chapter:<N>:<SVar>,...`: one `Mode$ CounterAdded \| CounterType$ LORE \| CounterAmount$ EQ<i>` trigger per chapter |
+| sacrifice when lore counters reach the last chapter and none of its chapter abilities is on the stack | `sacrificeCompletedSagas`, a state-based action; `hasChapterOnStack` scans the stack for an ability tagged `Chapter` |
 
 `compileFace` tags the ability a synthesized trigger or replacement runs with the keyword line it came from
 (`Ability.Keyword` on the `Execute$`/`ReplaceWith$` sub-ability, as Java's `SpellAbility.isKeyword` sees it), which is

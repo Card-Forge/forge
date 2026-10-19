@@ -15,14 +15,14 @@ Layer 1's model already existed: `Card.copies`, a timestamp-ordered stack of cop
 missing was the one way the corpus most often starts a copy effect: as a **replacement of the card's entry** (CR 614.1c,
 707.2), Java's `ReplacementLayer.Copy` (CR 616.1c) run for `Event$ Moved`.
 
-| Corpus shape                                                 | Cards | Where it lives                                                  |
-| ------------------------------------------------------------ | ----: | --------------------------------------------------------------- |
-| `K:ETBReplacement:Copy:<SVar>:Optional`, SVar a `DB$ Clone`  |    63 | The card's own entry (Clone, Phyrexian Metamorph, Vesuva...)    |
-| `K:ETBReplacement:Copy:<SVar>:Mandatory:Battlefield:<Valid>` |     3 | Another permanent (Essence of the Wild, Thunderbond Vanguard)   |
-| `K:ETBReplacement:Copy:<SVar>`, SVar not a Clone             |     2 | The Mimeoplasm (`ChooseCard` chain), Living Lore (`ChangeZone`) |
-| `R:Event$ Moved \| Layer$ Copy \| ReplaceWith$ <Clone>`      |     2 | Protean Raider (self), Displaced Dinosaurs (watcher)            |
-| `R:Event$ Moved \| Layer$ Copy \| ReplaceWith$ <not Clone>`  |     5 | Primal Clay, Molten Sentry, ... (`GenericChoice`/`FlipCoin`)    |
-| Effect card `ReplacementEffects$` with `Layer$ Copy`         |     1 | Mystic Reflection                                               |
+| Corpus shape | Cards | Where it lives |
+| --- | ---: | --- |
+| `K:ETBReplacement:Copy:<SVar>:Optional`, SVar a `DB$ Clone` | 63 | The card's own entry (Clone, Phyrexian Metamorph, Vesuva...) |
+| `K:ETBReplacement:Copy:<SVar>:Mandatory:Battlefield:<Valid>` | 3 | Another permanent (Essence of the Wild, Thunderbond Vanguard) |
+| `K:ETBReplacement:Copy:<SVar>`, SVar not a Clone | 2 | The Mimeoplasm (`ChooseCard` chain), Living Lore (`ChangeZone`) |
+| `R:Event$ Moved \| Layer$ Copy \| ReplaceWith$ <Clone>` | 2 | Protean Raider (self), Displaced Dinosaurs (watcher) |
+| `R:Event$ Moved \| Layer$ Copy \| ReplaceWith$ <not Clone>` | 5 | Primal Clay, Molten Sentry, ... (`GenericChoice`/`FlipCoin`) |
+| Effect card `ReplacementEffects$` with `Layer$ Copy` | 1 | Mystic Reflection |
 
 Three pieces were missing, each named in `effects-clone.md`'s shapes table: `compile` expanded no `ETBReplacement`
 keyword, so its SVar compiled nowhere; nothing ran a Copy-layer replacement; and `Clone` refused to run as a replacement
@@ -59,25 +59,25 @@ fails on; they belong to whoever ports that layer. `ast.golden` changes for exac
 ([`layers-n-copy.md`](layers-n-copy.md#the-copy-layer-runs-before-the-move)); `enterBattlefieldReplacements` runs the
 rest after the move. Steps, in `ReplacementHandler.run`'s layer order:
 
-| Step           | What                                                                                                        | Java                                   |
-| -------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| 1. Gather      | `Layer$ Copy` `Moved` replacements: the entering card's own current face, then `traitHosts` (other hosts)   | `getReplacementList(Moved, ..., Copy)` |
-| 2. Choose      | One candidate applies; several: the entering player picks (`ChooseReplacementEffect`)                       | `chooseSingleReplacementEffect`        |
-| 3. Optional    | `Optional$` asks the entering card's controller (`ConfirmEffect`)                                           | `executeReplacement`'s decider         |
-| 4. Run         | `ReplaceWith$` `Clone` chain through the Registry, host's controller activating, `replacing.card` = entrant | `playSpellAbilityNoStack`              |
-| 5. Re-gather   | Back to 1, skipping (host, replacement) pairs already applied                                               | `Updated` re-run with `hasRun`         |
-| 6. Other layer | `checkMovedReplacement`'s "enters tapped" over the now-copied `Def`                                         | Next layer                             |
+| Step | What | Java |
+| --- | --- | --- |
+| 1. Gather | `Layer$ Copy` `Moved` replacements: the entering card's own current face, then `traitHosts` (other hosts) | `getReplacementList(Moved, ..., Copy)` |
+| 2. Choose | One candidate applies; several: the entering player picks (`ChooseReplacementEffect`) | `chooseSingleReplacementEffect` |
+| 3. Optional | `Optional$` asks the entering card's controller (`ConfirmEffect`) | `executeReplacement`'s decider |
+| 4. Run | `ReplaceWith$` `Clone` chain through the Registry, host's controller activating, `replacing.card` = entrant | `playSpellAbilityNoStack` |
+| 5. Re-gather | Back to 1, skipping (host, replacement) pairs already applied | `Updated` re-run with `hasRun` |
+| 6. Other layer | `checkMovedReplacement`'s "enters tapped" over the now-copied `Def` | Next layer |
 
 Consequences, each tested (`entersascopy_test.go`):
 
-| Behavior                                                                                           | Why                                                               |
-| -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| A Clone entering as a copy of a creature with an ETB trigger triggers it                           | Copy runs before `checkETBTriggers` (CR 614.12 before CR 603.2)   |
-| Vesuva copying a tapland enters tapped                                                             | Step 6 reads the copied definition (CR 614.12)                    |
-| Body Double copying a Clone card in a graveyard then copies a creature                             | Step 5: the copy carries Clone's replacement, not yet run         |
-| `Choices$ Creature` never offers the entering card                                                 | The card is not on the battlefield yet while the replacement runs |
-| A watcher's `CloneTarget$ ReplacedCard` names the entering card                                    | `Defined$ ReplacedCard` (`definedCards`, `abilityRefs.replaced`)  |
-| Declining, or nothing to copy, leaves the card as itself (a 0/0 Clone dies to state-based actions) | `Clone` returns before acting                                     |
+| Behavior | Why |
+| --- | --- |
+| A Clone entering as a copy of a creature with an ETB trigger triggers it | Copy runs before `checkETBTriggers` (CR 614.12 before CR 603.2) |
+| Vesuva copying a tapland enters tapped | Step 6 reads the copied definition (CR 614.12) |
+| Body Double copying a Clone card in a graveyard then copies a creature | Step 5: the copy carries Clone's replacement, not yet run |
+| `Choices$ Creature` never offers the entering card | The card is not on the battlefield yet while the replacement runs |
+| A watcher's `CloneTarget$ ReplacedCard` names the entering card | `Defined$ ReplacedCard` (`definedCards`, `abilityRefs.replaced`) |
+| Declining, or nothing to copy, leaves the card as itself (a 0/0 Clone dies to state-based actions) | `Clone` returns before acting |
 
 Scenario `clone-enters-as-copy-and-gets-the-copied-etb-trigger` casts the real Clone as a copy of Venerable Monk: its
 controller gains 2 life and the copy survives the state-based action check a 0/0 would not. `actions.log` gains
@@ -96,18 +96,18 @@ identical entry in `Card.copies`, no visible change. Whether Java's re-run does 
 
 ### Divergences
 
-| Where                   | Java                                                    | Here                                                                                     |
-| ----------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Where | Java | Here |
+| --- | --- | --- |
 | Cards entering together | Last battlefield state excludes every card of the batch | `ChangeZoneAll` and other loops move one card at a time: a Clone can copy an earlier one |
 
 ### Rejected, as a pending error before anything changes
 
-| Shape                                                                        | Why                                                                                                                                              |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| A chained sub-ability with `ETB$` that is not a `PutCounter`                 | Only `PutCounter` puts something into the entry ([`layers-n-copy.md`](layers-n-copy.md#etb-counters-in-an-entry-chain)); refused before the copy |
-| `CheckSVar$`/`SVarCompare$` that does not resolve (Protean Raider)           | `checkSVarMatches` reads it as "does not apply", which would skip the copy silently                                                              |
-| `ValidTgts$` anywhere in the chain; a replacement param outside the read set | Not modeled at a replacement site                                                                                                                |
-| `Clone`'s own rejected params (`RemoveCreatureTypes$`, `SetManaCost$`, ...)  | [`effects-clone.md`](effects-clone.md#rejected); `Clone` errors before acting                                                                    |
+| Shape | Why |
+| --- | --- |
+| A chained sub-ability with `ETB$` that is not a `PutCounter` | Only `PutCounter` puts something into the entry ([`layers-n-copy.md`](layers-n-copy.md#etb-counters-in-an-entry-chain)); refused before the copy |
+| `CheckSVar$`/`SVarCompare$` that does not resolve (Protean Raider) | `checkSVarMatches` reads it as "does not apply", which would skip the copy silently |
+| `ValidTgts$` anywhere in the chain; a replacement param outside the read set | Not modeled at a replacement site |
+| `Clone`'s own rejected params (`RemoveCreatureTypes$`, `SetManaCost$`, ...) | [`effects-clone.md`](effects-clone.md#rejected); `Clone` errors before acting |
 
 The error goes through `recordPendingError` (ADR-0020 decision 4): the entry sites have no error return, and
 `Registry.Resolve`/`ResolveStack`/the fixture runner take it at the next boundary.
@@ -132,27 +132,27 @@ agrees to every copy and picks the first card offered.
 
 Of the 66 `K:ETBReplacement:Copy` cards whose SVar is a `Clone`:
 
-| Outcome                                                                                             | Cards |
-| --------------------------------------------------------------------------------------------------- | ----: |
-| Entered as a copy (Clone, Phyrexian Metamorph, Vesuva, Body Double, Phantasmal Image, Evil Twin...) |    43 |
-| Watcher; its own entry replaces nothing (Essence of the Wild, Infinite Reflection, Thunderbond)     |     3 |
-| Board offered nothing matching `Choices$` (Deceptive Frostkite, Jwari Shapeshifter, The Master)     |     3 |
-| Battle entering front face up, never offered its back face's copy (Invasion of Amonkhet)            |     1 |
-| Error                                                                                               |    16 |
+| Outcome | Cards |
+| --- | ---: |
+| Entered as a copy (Clone, Phyrexian Metamorph, Vesuva, Body Double, Phantasmal Image, Evil Twin...) | 43 |
+| Watcher; its own entry replaces nothing (Essence of the Wild, Infinite Reflection, Thunderbond) | 3 |
+| Board offered nothing matching `Choices$` (Deceptive Frostkite, Jwari Shapeshifter, The Master) | 3 |
+| Battle entering front face up, never offered its back face's copy (Invasion of Amonkhet) | 1 |
+| Error | 16 |
 
 The 3 watchers share Essence of the Wild's shape, tested with a synthetic card; the 3 unmatched filter on properties
 `Matches` has (`powerGE4`, `Ally`, `counters_GE1_TAKEOVER`). The 16 errors:
 
-| Blocker                                                                                                  | Cards | Before the copy |
-| -------------------------------------------------------------------------------------------------------- | ----: | --------------- |
-| Valid properties `Matches` lacks (`ThisTurnEntered*`, `cmcLEY`)                                          |     4 | yes             |
-| `RemoveCardTypes$`/`RemoveSubTypes$`, `Embalm$`/`RemoveCost$`                                            |     3 | yes             |
-| Chained `PutCounter` with `ETB$` (Altered Ego, Undercover Operative, Dominion Saboteur)                  |     3 | yes             |
-| `SubAbility$` `Effect` replacing the same entry (Spark Double, Moritte of the Frost)                     |     2 | yes             |
-| `SetPower$ X` not resolvable (Hulking Metamorph)                                                         |     1 | yes             |
-| `Duration$ UntilFacedown` (Vesuvan Shapeshifter)                                                         |     1 | yes             |
-| Chained `ImmediateTrigger` `ConditionDefined$` (Superior Spider-Man)                                     |     1 | no              |
-| Its "when you do" trigger's `Effect` `Duration$ AsLongAsControl`, on resolving (Wall of Stolen Identity) |     1 | no              |
+| Blocker | Cards | Before the copy |
+| --- | ---: | --- |
+| Valid properties `Matches` lacks (`ThisTurnEntered*`, `cmcLEY`) | 4 | yes |
+| `RemoveCardTypes$`/`RemoveSubTypes$`, `Embalm$`/`RemoveCost$` | 3 | yes |
+| Chained `PutCounter` with `ETB$` (Altered Ego, Undercover Operative, Dominion Saboteur) | 3 | yes |
+| `SubAbility$` `Effect` replacing the same entry (Spark Double, Moritte of the Frost) | 2 | yes |
+| `SetPower$ X` not resolvable (Hulking Metamorph) | 1 | yes |
+| `Duration$ UntilFacedown` (Vesuvan Shapeshifter) | 1 | yes |
+| Chained `ImmediateTrigger` `ConditionDefined$` (Superior Spider-Man) | 1 | no |
+| Its "when you do" trigger's `Effect` `Duration$ AsLongAsControl`, on resolving (Wall of Stolen Identity) | 1 | no |
 
 Since measured: the chained `PutCounter ETB$` rows (3 cards) and the `SubAbility$ Effect` rows (2) resolve, as do
 `RemoveCardTypes$` Imposter Mech and Machine God's Effigy, as do Vizier of Many Faces (`Embalm$`/`RemoveCost$`) and

@@ -57,25 +57,25 @@ cd crucible && go run ./tools/vocabscan -kind countOperator
 **Seventeen operators**, not the twelve a `grep` for `/[A-Za-z]+` finds: that pattern misses every operator on an amount
 expression whose head is not `Count`.
 
-| Operator           | Uses | Meaning              |
-| ------------------ | ---: | -------------------- |
-| `Plus`             |  329 | Add operand          |
-| `Times`            |  180 | Multiply by operand  |
-| `Twice`            |  169 | ×2, no operand       |
-| `Minus`            |  116 | Subtract operand     |
-| `LimitMax`         |   84 | Clamp above          |
-| `HalfUp`           |   59 | ÷2, round up         |
-| `HalfDown`         |   42 | ÷2, round down       |
-| `NMinus`           |   14 | Operand minus value  |
-| `LimitMin`         |   10 | Clamp below          |
-| `Thrice`           |    9 | ×3, no operand       |
-| `Abs`              |    6 | Absolute value       |
-| `DivideEvenlyDown` |    6 | Divide, round down   |
-| `ThirdUp`          |    5 | ÷3, round up         |
-| `Mod`              |    3 | Remainder            |
-| `DivideEvenlyUp`   |    1 | Divide, round up     |
-| `Negative`         |    1 | Sign flip            |
-| `Pow`              |    1 | Raise to the operand |
+| Operator | Uses | Meaning |
+| --- | ---: | --- |
+| `Plus` | 329 | Add operand |
+| `Times` | 180 | Multiply by operand |
+| `Twice` | 169 | ×2, no operand |
+| `Minus` | 116 | Subtract operand |
+| `LimitMax` | 84 | Clamp above |
+| `HalfUp` | 59 | ÷2, round up |
+| `HalfDown` | 42 | ÷2, round down |
+| `NMinus` | 14 | Operand minus value |
+| `LimitMin` | 10 | Clamp below |
+| `Thrice` | 9 | ×3, no operand |
+| `Abs` | 6 | Absolute value |
+| `DivideEvenlyDown` | 6 | Divide, round down |
+| `ThirdUp` | 5 | ÷3, round up |
+| `Mod` | 3 | Remainder |
+| `DivideEvenlyUp` | 1 | Divide, round up |
+| `Negative` | 1 | Sign flip |
+| `Pow` | 1 | Raise to the operand |
 
 `Twice`, `Thrice` and `Abs` take no operand; the rest do. `NMinus` reverses the operands relative to `Minus`, which is
 the one asymmetry worth a test of its own.
@@ -86,15 +86,15 @@ the one asymmetry worth a test of its own.
 
 Heads fall into families:
 
-| Family                | Examples                                                                                               |
-| --------------------- | ------------------------------------------------------------------------------------------------------ |
-| Zone and board counts | `CardsInYourHand`, `TypeInYourYard`, `Valid <valid-string>`                                            |
-| Card state            | `CardCounters.<type>`, `CardPower`, `CardManaCost`                                                     |
-| Player state          | `YourLifeTotal`, `OppLifeTotal`, `YourPoisonCounters`                                                  |
-| Turn history          | `ThisTurnCast_Card`, `ThisTurnEntered_Battlefield_Creature`, `ThisTurnActivated_Activated`             |
-| Threshold conditions  | `Adamant`, `Morbid`, `Delirium`, `Devotion`, `DevotionDual`, `Monarch`, `Teamwork`                     |
-| Cast context          | `IfCastInOwnMainPhase`, `wasCastFromGraveyard`, `Kicked`, `OptionalGenericCostPaid`                    |
-| Randomness            | `Random` — draws from the game's `Game` RNG stream ([ADR-0006](../../adr/0006-determinism-and-rng.md)) |
+| Family | Examples |
+| --- | --- |
+| Zone and board counts | `CardsInYourHand`, `TypeInYourYard`, `Valid <valid-string>` |
+| Card state | `CardCounters.<type>`, `CardPower`, `CardManaCost` |
+| Player state | `YourLifeTotal`, `OppLifeTotal`, `YourPoisonCounters` |
+| Turn history | `ThisTurnCast_Card`, `ThisTurnEntered_Battlefield_Creature`, `ThisTurnActivated_Activated` |
+| Threshold conditions | `Adamant`, `Morbid`, `Delirium`, `Devotion`, `DevotionDual`, `Monarch`, `Teamwork` |
+| Cast context | `IfCastInOwnMainPhase`, `wasCastFromGraveyard`, `Kicked`, `OptionalGenericCostPaid` |
+| Randomness | `Random` — draws from the game's `Game` RNG stream ([ADR-0006](../../adr/0006-determinism-and-rng.md)) |
 
 **Turn-history heads are structured, not opaque.** `ThisTurnEntered_Graveyard_from_Battlefield_Creature` decomposes as
 zone, source zone, and a type filter. Porting them as 200 string constants would work and would be wrong — the

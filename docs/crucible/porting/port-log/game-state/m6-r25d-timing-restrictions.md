@@ -28,14 +28,14 @@ and belong to R25h and R25g.
 
 ## Engine pieces
 
-| Piece                                    | Go                                                                                                                                                                            | Java                                                                                                                                           |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BeenAttackedThisCombat` player property | `playerProperty`: some player's `attackedPlayersThisCombat` names the candidate                                                                                               | `PlayerProperty.java:477-483`, any registered player's `getAttackedPlayersMyCombat`                                                            |
-| The per-combat record                    | `Player.attackedPlayersThisCombat`, appended once per player by `recordAttacked`, cleared for the active player in `endCombat`                                                | `Player.addCreaturesAttackedThisTurn` (`Player.java:1839-1841`), only from `CombatUtil.checkDeclaredAttacker`; `Combat.endCombat` (`:170`)     |
-| `Count$FinishedUpkeepsThisTurn`          | `Game.upkeepsThisTurn`, counted in `beginStep`'s Upkeep case (a skipped upkeep never begins), reset at the turn boundary; the amount subtracts the upkeep in progress         | `nUpkeepsThisTurn++` (`PhaseHandler.java:257`, non-skipped branch), reset `:415`; `AbilityUtils.java:2213-2216`                                |
-| `attackingYou` card property             | attacking, and the defender is the source's controller itself                                                                                                                 | `CardProperty.java:1509,1514`, `Combat.isAttacking(card, player)`                                                                              |
-| `attackedYouThisTurn` card property      | `Card.attackedThisTurn` (the declared defender, once per declaration, from `recordAttacked`) holds the source's controller; cleared at cleanup and on leaving the battlefield | `CardProperty.java:1193-1196`, `CardDamageHistory.hasAttackedThisTurn` (`:59-72`, `:93-95`), `newTurn` from `Card.onCleanupPhase` (`:287-288`) |
-| `DefendingPlayer[Ctrl]` card property    | the card's owner (controller for `...Ctrl`) is attacked: some attacker's defender is that player, or a planeswalker or battle that player controls or protects                | `CardProperty.java:231-238`, `Combat.isPlayerAttacked` (`Combat.java:956-970`)                                                                 |
+| Piece | Go | Java |
+| --- | --- | --- |
+| `BeenAttackedThisCombat` player property | `playerProperty`: some player's `attackedPlayersThisCombat` names the candidate | `PlayerProperty.java:477-483`, any registered player's `getAttackedPlayersMyCombat` |
+| The per-combat record | `Player.attackedPlayersThisCombat`, appended once per player by `recordAttacked`, cleared for the active player in `endCombat` | `Player.addCreaturesAttackedThisTurn` (`Player.java:1839-1841`), only from `CombatUtil.checkDeclaredAttacker`; `Combat.endCombat` (`:170`) |
+| `Count$FinishedUpkeepsThisTurn` | `Game.upkeepsThisTurn`, counted in `beginStep`'s Upkeep case (a skipped upkeep never begins), reset at the turn boundary; the amount subtracts the upkeep in progress | `nUpkeepsThisTurn++` (`PhaseHandler.java:257`, non-skipped branch), reset `:415`; `AbilityUtils.java:2213-2216` |
+| `attackingYou` card property | attacking, and the defender is the source's controller itself | `CardProperty.java:1509,1514`, `Combat.isAttacking(card, player)` |
+| `attackedYouThisTurn` card property | `Card.attackedThisTurn` (the declared defender, once per declaration, from `recordAttacked`) holds the source's controller; cleared at cleanup and on leaving the battlefield | `CardProperty.java:1193-1196`, `CardDamageHistory.hasAttackedThisTurn` (`:59-72`, `:93-95`), `newTurn` from `Card.onCleanupPhase` (`:287-288`) |
+| `DefendingPlayer[Ctrl]` card property | the card's owner (controller for `...Ctrl`) is attacked: some attacker's defender is that player, or a planeswalker or battle that player controls or protects | `CardProperty.java:231-238`, `Combat.isPlayerAttacked` (`Combat.java:956-970`) |
 
 `BeenAttackedThisCombat` records the declaration, not the live combat: an attacker removed from combat (Champion's
 Victory, Remove) leaves it true, and a creature put onto the battlefield attacking never sets it, as only
@@ -65,33 +65,33 @@ Appended last, the variants change no card an earlier variant already cast.
 
 `crucible card-smoke -all -workers 8 -list`, same corpus:
 
-| Outcome      | Before | After |
-| ------------ | -----: | ----: |
-| plays        |  30608 | 30637 |
-| refused      |   2929 |  2938 |
-| inconclusive |    168 |   130 |
-| judged       |  33537 | 33575 |
-| % plays      |   91.3 |  91.2 |
+| Outcome | Before | After |
+| --- | ---: | ---: |
+| plays | 30608 | 30637 |
+| refused | 2929 | 2938 |
+| inconclusive | 168 | 130 |
+| judged | 33537 | 33575 |
+| % plays | 91.3 | 91.2 |
 
 38 cards changed, the 37 timing cards and Yare, all from `inconclusive`. No card went from `plays` to `refused` or back.
 The percentage falls because nine newly judged cards are refused.
 
-| Now       | Cards                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `plays`   | Assassin's Blade, Camouflage, Champion's Victory, Command of Unsummoning, Curtain of Light, Dazzling Beauty, Deep Wood, Defiant Stand, Delirium, Disharmony, Eightfold Maze, Festival, Glyph of Reincarnation, Gorilla War Cry, Harsh Justice, Heavy Fog, Jabari's Influence, Just Fate, Melee, Necrologia, Panic, Rally the Troops, Remove, Reset, Scorching Winds, Siren's Call, Teleport, Treetop Defense, Warrior's Stand |
-| `refused` | see below                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Now | Cards |
+| --- | --- |
+| `plays` | Assassin's Blade, Camouflage, Champion's Victory, Command of Unsummoning, Curtain of Light, Dazzling Beauty, Deep Wood, Defiant Stand, Delirium, Disharmony, Eightfold Maze, Festival, Glyph of Reincarnation, Gorilla War Cry, Harsh Justice, Heavy Fog, Jabari's Influence, Just Fate, Melee, Necrologia, Panic, Rally the Troops, Remove, Reset, Scorching Winds, Siren's Call, Teleport, Treetop Defense, Warrior's Stand |
+| `refused` | see below |
 
-| Card                 | Refusal, at resolution                                                             |
-| -------------------- | ---------------------------------------------------------------------------------- |
-| Blaze of Glory       | `Pump: CanBlockAny$ not resolvable yet`                                            |
-| False Orders         | `RemoveFromCombat: UnblockCreaturesBlockedOnlyBy$ not resolvable yet`              |
-| Flash Foliage        | `Token: TokenBlocking$ not resolvable yet`                                         |
+| Card | Refusal, at resolution |
+| --- | --- |
+| Blaze of Glory | `Pump: CanBlockAny$ not resolvable yet` |
+| False Orders | `RemoveFromCombat: UnblockCreaturesBlockedOnlyBy$ not resolvable yet` |
+| Flash Foliage | `Token: TokenBlocking$ not resolvable yet` |
 | Illusionist's Gambit | `RemoveFromCombat: engine: Defined$ "Valid Creature.attacking" not resolvable yet` |
-| Take the Bait        | `Goad: engine: Defined$ "Valid Creature.attacking" not resolvable yet`             |
-| Tears of Rage        | `PumpAll: AtEOT$ not resolvable yet`                                               |
-| Wake the Dead        | `ChangeZone: AtEOT$ not resolvable yet`                                            |
-| Winter's Chill       | `GenericChoice: choice Pay2 carries UnlessCost$, not resolvable yet`               |
-| Yare                 | `Pump: CanBlockAmount$ not resolvable yet`                                         |
+| Take the Bait | `Goad: engine: Defined$ "Valid Creature.attacking" not resolvable yet` |
+| Tears of Rage | `PumpAll: AtEOT$ not resolvable yet` |
+| Wake the Dead | `ChangeZone: AtEOT$ not resolvable yet` |
+| Winter's Chill | `GenericChoice: choice Pay2 carries UnlessCost$, not resolvable yet` |
+| Yare | `Pump: CanBlockAmount$ not resolvable yet` |
 
 Yare has no timing restriction and was not on the row's list: its only target, `Creature.DefendingPlayerCtrl`, matched
 nothing until that property was ported, and the existing combat variant now casts it.

@@ -325,11 +325,11 @@ at construction time.
 (`maxSBAPasses`, `GameAction.java:1417`; CR 704.3). Each pass rebuilds the continuous effects the last one's moves
 changed, so a creature that dies with its anthem, or a Role that goes to the graveyard, is reflected in the same call.
 
-| CR     | Rule                                                                                                                   | Where                        |
-| ------ | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| CR | Rule | Where |
+| --- | --- | --- |
 | 704.5n | Equipment on a non-creature, Fortification on a non-land, a creature or battle attached to anything becomes unattached | `cleanupDanglingAttachments` |
-| 704.5y | two Roles of one controller on a permanent: the older goes                                                             | `resolveRoleRule`            |
-| 704.5z | no speed and a "Start your engines!" permanent: speed 1                                                                | `startYourEngines`           |
+| 704.5y | two Roles of one controller on a permanent: the older goes | `resolveRoleRule` |
+| 704.5z | no speed and a "Start your engines!" permanent: speed 1 | `startYourEngines` |
 
 Token `AttachedTo$` (about 50 corpus lines, the Role tokens among them) attaches each created Aura or Equipment token to
 the first defined card (`tokenAttachHost`); an Aura token that cannot attach (`tokenCanAttach`: Enchant restriction,

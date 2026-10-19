@@ -12,15 +12,15 @@ Animate's `Abilities$` grant (Quicksmith Rebel, Welcome to . . .).
 Java runs `ChangesZone` for every zone change but a same-zone one (`GameAction.java:153`, `:601-613`). Audit of the
 `Game.Move`/`MoveToLibraryTop` callers that bypass `moveByEffect`:
 
-| Path                                                                 | Java fires                               | Go now                                                                            |
-| -------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------- |
-| `ExileFromGrave` cost (activate, mana, chosen, unless, evidence)     | Origin Graveyard                         | `exileFromGraveyard` fires `checkLeftGraveyardTriggers`                           |
-| Delve exile (`costAssist.settle`)                                    | Origin Graveyard, held until cast done   | held in `castExits`, pushed with the SpellCast batch                              |
-| Cast from a graveyard (`putSpellOnStack`)                            | Origin Graveyard → Stack, held           | same hold                                                                         |
-| Moved replacement redirects a dying permanent to library/hand        | leaves-battlefield at that destination   | `checkDiesTriggers` routes Library/Hand to `checkLeftToTriggers` (was Exile only) |
-| `MoveToLibraryTop` from the battlefield                              | LKI of the leaving permanent             | freezes `g.lki` as `Move` does (stale or missing snapshot before)                 |
-| `exileFromHand`, draw, mulligan, scry/surveil, Command/scheme/planar | Origin Hand/Library/Command lines        | not walked: no non-battlefield-destination walk for those origins (gap)           |
-| `RestartGame`                                                        | suppressed (`RestartGameEffect.java:42`) | nothing, matches                                                                  |
+| Path | Java fires | Go now |
+| --- | --- | --- |
+| `ExileFromGrave` cost (activate, mana, chosen, unless, evidence) | Origin Graveyard | `exileFromGraveyard` fires `checkLeftGraveyardTriggers` |
+| Delve exile (`costAssist.settle`) | Origin Graveyard, held until cast done | held in `castExits`, pushed with the SpellCast batch |
+| Cast from a graveyard (`putSpellOnStack`) | Origin Graveyard → Stack, held | same hold |
+| Moved replacement redirects a dying permanent to library/hand | leaves-battlefield at that destination | `checkDiesTriggers` routes Library/Hand to `checkLeftToTriggers` (was Exile only) |
+| `MoveToLibraryTop` from the battlefield | LKI of the leaving permanent | freezes `g.lki` as `Move` does (stale or missing snapshot before) |
+| `exileFromHand`, draw, mulligan, scry/surveil, Command/scheme/planar | Origin Hand/Library/Command lines | not walked: no non-battlefield-destination walk for those origins (gap) |
+| `RestartGame` | suppressed (`RestartGameEffect.java:42`) | nothing, matches |
 
 `checkLeftGraveyardTriggers` / `leftGraveyardMatches` now walk:
 
@@ -68,12 +68,12 @@ of Ice, Wall of Stolen Identity) already worked; pinned by
 
 ## Not done
 
-| Item                                                                                                        | Reason                                                                                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Item | Reason |
+| --- | --- |
 | Graveyard-zone ETB/dies watchers (Bloodghast, Prized Amalgam, Bridge from Below, Nether Traitor; ~38 lines) | `otherETBTriggerMatches`/`otherDiesTriggerMatches` walk `traitHosts` only; a dies watcher needs Java's `LastStateGraveyard` check (`TriggerChangesZone.java:111-117`) for simultaneous deaths |
-| Hand/library/stack-origin lines to a non-battlefield zone (Syr Konrad's first line)                         | no walk for those origins                                                                                                                                                                     |
-| Assimilation Aegis (`Clone` `Duration$ UntilUnattached`)                                                    | not started this batch; `addUntilCommand`'s branch is `SpellAbilityEffect.java:1025-1028` (leaves play, unattach, phase out)                                                                  |
-| An unresolvable `TargetMin$`/`TargetMax$` amount drops the trigger silently                                 | `targetChoiceFor` folds it into "no legal targets" (`targeting.go` doc); an error at resolution (`targetsErr`) would surface it (GO-7)                                                        |
+| Hand/library/stack-origin lines to a non-battlefield zone (Syr Konrad's first line) | no walk for those origins |
+| Assimilation Aegis (`Clone` `Duration$ UntilUnattached`) | not started this batch; `addUntilCommand`'s branch is `SpellAbilityEffect.java:1025-1028` (leaves play, unattach, phase out) |
+| An unresolvable `TargetMin$`/`TargetMax$` amount drops the trigger silently | `targetChoiceFor` folds it into "no legal targets" (`targeting.go` doc); an error at resolution (`targetsErr`) would surface it (GO-7) |
 
 ## Fixtures and tests
 

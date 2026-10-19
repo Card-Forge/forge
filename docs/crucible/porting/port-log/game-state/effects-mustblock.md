@@ -11,12 +11,12 @@
 CR 508.1c-d/509.1b-c: a declaration obeys every restriction and as many requirements as possible. Java checks both sides
 differently; this port reproduces each as it is (PORT-7, ADR-0024 Decision 1).
 
-| Side      | Go                                                     | Java                                                                                                                                                |
-| --------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Attackers | `validateAttackers`, `attackconstraints.go`            | `CombatUtil.validateAttackers` (`CombatUtil.java:82`), `AttackConstraints.getLegalAttackers` (`AttackConstraints.java:77-160`), `AttackRequirement` |
-| Blockers  | `validateBlocks`, `blockvalidation.go`                 | `CombatUtil.validateBlocks` (`:637`), `findFreeBlockers` (`:604`), `mustBlockAnAttacker` (`:745`), `attackerLureSatisfied`                          |
-| Pairings  | `checkBlockPairing`, `block.go`                        | `InputBlock.onCardSelected`'s per-click `CombatUtil.canBlock(attacker, blocker, combat)` (`InputBlock.java:151`)                                    |
-| Failure   | `*IllegalDeclarationError{Rule, Cards, Reason}`, no-op | Human re-prompted (`PhaseHandler.java:547-550`, `InputBlock.java:101-109`)                                                                          |
+| Side | Go | Java |
+| --- | --- | --- |
+| Attackers | `validateAttackers`, `attackconstraints.go` | `CombatUtil.validateAttackers` (`CombatUtil.java:82`), `AttackConstraints.getLegalAttackers` (`AttackConstraints.java:77-160`), `AttackRequirement` |
+| Blockers | `validateBlocks`, `blockvalidation.go` | `CombatUtil.validateBlocks` (`:637`), `findFreeBlockers` (`:604`), `mustBlockAnAttacker` (`:745`), `attackerLureSatisfied` |
+| Pairings | `checkBlockPairing`, `block.go` | `InputBlock.onCardSelected`'s per-click `CombatUtil.canBlock(attacker, blocker, combat)` (`InputBlock.java:151`) |
+| Failure | `*IllegalDeclarationError{Rule, Cards, Reason}`, no-op | Human re-prompted (`PhaseHandler.java:547-550`, `InputBlock.java:101-109`) |
 
 `DeclareCombatAttackers`/`DeclareCombatBlockers` now return `(…, error)`. Nothing is applied before validation passes:
 attack targets are chosen into a local map, tapping, exert and triggers follow (Java order,
@@ -32,11 +32,11 @@ which block to drop is the controller's choice; a fixture could not tell a legal
 `attackRequirement` per creature the active player controls (tapped ones too, Java's `getCreaturesInPlay`: an
 unavoidable violation counts in the declared and the best attack alike, so it cancels):
 
-| Requirement source                            | Counted as                                                                              |
-| --------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Goad (CR 701.15b)                             | one toward every possible defender per distinct goader (`AttackRequirement.java:36-38`) |
-| `S:Mode$ MustAttack`, no `MustAttack$`        | one toward every possible defender                                                      |
-| `S:Mode$ MustAttack \| MustAttack$ <defined>` | one toward each named entity, minus the active player and what it controls (CR 506.2)   |
+| Requirement source | Counted as |
+| --- | --- |
+| Goad (CR 701.15b) | one toward every possible defender per distinct goader (`AttackRequirement.java:36-38`) |
+| `S:Mode$ MustAttack`, no `MustAttack$` | one toward every possible defender |
+| `S:Mode$ MustAttack \| MustAttack$ <defined>` | one toward each named entity, minus the active player and what it controls (CR 506.2) |
 
 Violations = sum of a creature's counts minus the count toward the defender it attacks. Best attack =
 `collectLegalAttackers`' unrestricted path (below) or nobody attacking, whichever violates fewer; the declaration may
@@ -45,10 +45,10 @@ violate no more. The error names every creature the declaration leaves worse off
 Restriction sources this port does not have, so `getLegalAttackers`' search collapses to one path — every creature with
 a requirement attacks its highest-count defender (stable reverse sort, Java's TimSort):
 
-| Java piece not reachable here                                                                       | Why                                     |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `AttackRestrictionType` (NEED_TWO_OTHERS, NOT_ALONE, ONLY_ALONE, NEED_BLACK_OR_GREEN, …)            | no "can't attack alone"/CantAttack yet  |
-| `GlobalAttackRestrictions` max, `isLimited`'s with/without branches, predicate reservations         | no maximum-attackers source             |
+| Java piece not reachable here | Why |
+| --- | --- |
+| `AttackRestrictionType` (NEED_TWO_OTHERS, NOT_ALONE, ONLY_ALONE, NEED_BLACK_OR_GREEN, …) | no "can't attack alone"/CantAttack yet |
+| `GlobalAttackRestrictions` max, `isLimited`'s with/without branches, predicate reservations | no maximum-attackers source |
 | `causesToAttack` (`Mode$ AttackRequirement`, 4 lines), `playerRequirements` (`PlayerMustAttack`, 2) | in play → `error`, not uncounted (GO-7) |
 
 The goad restriction half (`CombatUtil.canAttack`'s goad branch, `CombatUtil.java:215-229`) stays `goadTargets`: the
@@ -61,15 +61,15 @@ Java's local approximation, not CR 509.1c's maximum — `findFreeBlockers`' own
 `TODO according to 509.1c, this should really check if the maximum possible is already fulfilled`
 (`CombatUtil.java:602-603`), cited in `blockvalidation.go`. Checks, first failure wins, Java's order:
 
-| Check                                                                                                  | Rule          |
-| ------------------------------------------------------------------------------------------------------ | ------------- |
+| Check | Rule |
+| --- | --- |
 | Pairing: attacker not this defender's (CR 802.4a), blocker not offered, repeated pair, second attacker | 509.1a/802.4a |
-| Pairing: `CanBlock` (CantBlockBy statics and keywords, `CARDNAME can't block.`, can't-block-alone)     | 509.1b        |
-| `MustBlock` requirement a creature could meet ("must still block")                                     | 509.1c        |
-| Lure keywords and `MustBlock` via `mustBlockAnAttacker`                                                | 509.1c        |
-| `S:Mode$ MustBlock` ("blocks each combat if able")                                                     | 509.1c        |
-| `CARDNAME can't block alone.`, `… unless at least two other creatures block.`, `… greater power`       | 509.1b        |
-| Blocker count per attacker: Menace (min 2), `S:Mode$ MinMaxBlocker` `Min$ <n>\|All`, `Max$ <n>`        | 509.1b        |
+| Pairing: `CanBlock` (CantBlockBy statics and keywords, `CARDNAME can't block.`, can't-block-alone) | 509.1b |
+| `MustBlock` requirement a creature could meet ("must still block") | 509.1c |
+| Lure keywords and `MustBlock` via `mustBlockAnAttacker` | 509.1c |
+| `S:Mode$ MustBlock` ("blocks each combat if able") | 509.1c |
+| `CARDNAME can't block alone.`, `… unless at least two other creatures block.`, `… greater power` | 509.1b |
+| Blocker count per attacker: Menace (min 2), `S:Mode$ MinMaxBlocker` `Min$ <n>\|All`, `Max$ <n>` | 509.1b |
 
 Reproduced quirks (PORT-7): `validateBlocks`' free-blocker loop takes every free blocker able to help on its first pass
 whatever `additionalBlockers` is, and consumes them for later creatures' checks; lure keyword lines match by prefix
@@ -91,23 +91,23 @@ attackers (`CanBlockAny$`/`CanBlockAmount$`, 42 lines, unported in Pump and Cont
 The requirement lives on the blocker, as Java's `Card.mustBlockCards` (`MustBlockEffect.java:76`/`:79`): new state
 `Card.mustBlock []mustBlockReq{Attacker, UntilEndOfCombat}`, read through `Card.MustBlockAttackers`. Lifetime:
 
-| Ends                                        | Where                                 | Java                                          |
-| ------------------------------------------- | ------------------------------------- | --------------------------------------------- |
-| Cleanup, every entry                        | `endMustBlocks(false)`, `cleanupStep` | `Card.onCleanupPhase` → `clearMustBlockCards` |
-| End of combat, `Duration$ UntilEndOfCombat` | `endMustBlocks(true)`, `endCombat`    | `addUntilCommand` → `EndOfCombat.addUntil`    |
-| Leaving the battlefield                     | `Game.Move`                           | new object (CR 400.7)                         |
+| Ends | Where | Java |
+| --- | --- | --- |
+| Cleanup, every entry | `endMustBlocks(false)`, `cleanupStep` | `Card.onCleanupPhase` → `clearMustBlockCards` |
+| End of combat, `Duration$ UntilEndOfCombat` | `endMustBlocks(true)`, `endCombat` | `addUntilCommand` → `EndOfCombat.addUntil` |
+| Leaving the battlefield | `Game.Move` | new object (CR 400.7) |
 
 `Game.Clone` copies the slice (nil stays nil, `TestCloneAllocationsStayBounded` unchanged).
 
-| Shape (lines)                                                 | Status                                                                         |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Host is the attacker, `ValidTgts$` blocker (16)               | resolves; 2 name `ValidTgts$ Creature.DefenderCtrl`, now a `valid.go` property |
-| `DefinedAttacker$ TriggeredAttacker[LKICopy]` (4)             | 3 resolve: `Mode$ Attacks` now records `triggered.attacker`                    |
-| `BlockAllDefined$ True` (2), `Duration$ UntilEndOfCombat` (4) | resolve                                                                        |
-| `Defined$ Valid …` / `DefinedAttacker$ Valid …` (2)           | `error`: `definedCards` has no valid-string form                               |
+| Shape (lines) | Status |
+| --- | --- |
+| Host is the attacker, `ValidTgts$` blocker (16) | resolves; 2 name `ValidTgts$ Creature.DefenderCtrl`, now a `valid.go` property |
+| `DefinedAttacker$ TriggeredAttacker[LKICopy]` (4) | 3 resolve: `Mode$ Attacks` now records `triggered.attacker` |
+| `BlockAllDefined$ True` (2), `Duration$ UntilEndOfCombat` (4) | resolve |
+| `Defined$ Valid …` / `DefinedAttacker$ Valid …` (2) | `error`: `definedCards` has no valid-string form |
 | `DefinedAttacker$ ParentTarget` / `Defined$ ParentTarget` (5) | `error`: a sub-ability is not targeted apart from its parent (`subability.go`) |
-| `Choices$ … \| Chooser$ TriggeredDefendingPlayer` (1)         | `error`: `Choices$`/`Chooser$`/`ChoiceTitle$` rejected before acting           |
-| Any other `Duration$`                                         | `error` (none in the corpus)                                                   |
+| `Choices$ … \| Chooser$ TriggeredDefendingPlayer` (1) | `error`: `Choices$`/`Chooser$`/`ChoiceTitle$` rejected before acting |
+| Any other `Duration$` | `error` (none in the corpus) |
 
 A blocker no longer on the battlefield is skipped (Java's `equalsWithGameTimestamp`).
 
@@ -125,14 +125,14 @@ Both scanned on demand over `traitHosts` (battlefield and Command-zone effect ca
 (`DB$ Effect | StaticAbilities$ MustAttack|MustBlock` with `ValidCreature$ Card.IsRemembered`, 18 and 14 lines) reach
 them unchanged.
 
-| Param                                                             | Handling                                                                  |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `ValidCreature$` (`ValidCard$` for MinMaxBlocker)                 | `Matches`, host as source; absent matches all                             |
-| `MustAttack$`                                                     | `definedEntities`, host's controller, no refs; an unknown spelling errors |
-| `Condition$`                                                      | `continuousConditionMet`'s values; any other → `error`                    |
-| `IsPresent$`, `PresentCompare$`, `PresentZone$`, `PresentPlayer$` | `isPresentMatches`                                                        |
-| `AffectedZone$ Battlefield`, `Description$`, `Secondary$`         | accepted, no effect; another `AffectedZone$` → `error`                    |
-| anything else (`ValidPlayer$` 1 line, …)                          | `error` from the declaration                                              |
+| Param | Handling |
+| --- | --- |
+| `ValidCreature$` (`ValidCard$` for MinMaxBlocker) | `Matches`, host as source; absent matches all |
+| `MustAttack$` | `definedEntities`, host's controller, no refs; an unknown spelling errors |
+| `Condition$` | `continuousConditionMet`'s values; any other → `error` |
+| `IsPresent$`, `PresentCompare$`, `PresentZone$`, `PresentPlayer$` | `isPresentMatches` |
+| `AffectedZone$ Battlefield`, `Description$`, `Secondary$` | accepted, no effect; another `AffectedZone$` → `error` |
+| anything else (`ValidPlayer$` 1 line, …) | `error` from the declaration |
 
 `MustAttack$` spellings `definedEntities` does not know (`CardOwner`, `EffectSource`, `RememberedPlayer`,
 `EnchantedController`, …, 13 lines) error when the static applies. `Player.Other` (2 lines) and `Player.IsRemembered` (2

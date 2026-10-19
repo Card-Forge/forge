@@ -6,10 +6,10 @@
 root line (`root`; a Charm mode asks through its Charm, `Ability.charmRoot`), an Aura's Enchant text (`enchant`) and
 `casting`.
 
-| Param                  | Port                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SourceCanOnlyTarget$` | `targetAsk.onlyTargets` (`StaticAbilityCantTarget.java:108-129`): every targeting part under the root (a Charm's every `Choices` chain, else the root's `SubAbility$` chain) names a `ValidTgts$` that contains the word, no comma, no `non`+word. Wall of Shadows (1 line). An asker with no known root never qualifies.                                       |
-| `EffectZone$ Stack`    | live only on the spell being cast (`targetAsk.casting`, set by `castInstantOrSorcery`, `castAura`, `castPlayerAura`; cleared once targets are chosen). `cantTargetHost` skips the host-zone test (`staticOtherConditionsMet`) because the card is still in hand Go-side. Enthralling Hold, Dream Leash (2 lines). Copies and resolution re-checks never set it. |
+| Param | Port |
+| --- | --- |
+| `SourceCanOnlyTarget$` | `targetAsk.onlyTargets` (`StaticAbilityCantTarget.java:108-129`): every targeting part under the root (a Charm's every `Choices` chain, else the root's `SubAbility$` chain) names a `ValidTgts$` that contains the word, no comma, no `non`+word. Wall of Shadows (1 line). An asker with no known root never qualifies. |
+| `EffectZone$ Stack` | live only on the spell being cast (`targetAsk.casting`, set by `castInstantOrSorcery`, `castAura`, `castPlayerAura`; cleared once targets are chosen). `cantTargetHost` skips the host-zone test (`staticOtherConditionsMet`) because the card is still in hand Go-side. Enthralling Hold, Dream Leash (2 lines). Copies and resolution re-checks never set it. |
 
 Fixtures: `cant-target-only-walls-*` (4), `cant-target-stack-zone-*` (3).
 

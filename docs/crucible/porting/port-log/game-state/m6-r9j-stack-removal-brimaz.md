@@ -23,10 +23,10 @@
 countered item (`remove(si)`, `:258`). Three Go sites dropped every item sourced by the card, so a "when you cast this
 spell" trigger died with its spell. All three now call `removeSpellFromStack`.
 
-| Site                              | Java                                                         |
-| --------------------------------- | ------------------------------------------------------------ |
-| `counterEffect` spell branch      | `CounterEffect.java:258`                                     |
-| `ceaseToExist` (RemoveFromGame)   | `GameAction.java:970-972` → `MagicStack.remove(Card)`        |
+| Site | Java |
+| --- | --- |
+| `counterEffect` spell branch | `CounterEffect.java:258` |
+| `ceaseToExist` (RemoveFromGame) | `GameAction.java:970-972` → `MagicStack.remove(Card)` |
 | `counterReplaced` (Guile's exile) | the ReplaceWith$ ChangeZone, `ChangeZoneEffect.java:577-579` |
 
 Every spell push sets `Ability.spell` (the cast paths in `castspell.go`, `copySpell`), so the filter finds the spell.
@@ -37,15 +37,15 @@ Every spell push sets `Ability.spell` (the cast paths in `castspell.go`, `copySp
 half (`TokenEffectBase.java:188`). CopyPermanent read neither `TokenBlocking$` nor refused it before; Mirror Match was
 refused earlier by RepeatEach's `ChangeZoneTable$`.
 
-| Step                                                                | Java                                  |
-| ------------------------------------------------------------------- | ------------------------------------- |
-| A creature, during combat                                           | `:761`                                |
-| Attacker = first card the Defined$ names                            | `:796`                                |
-| Token's controller defends against the attacker                     | `:797`, `getDefenderPlayerByAttacker` |
-| Block added, no legality check, no blocked-pair record              | `Combat.addBlocker`                   |
-| Last in damage assignment order                                     | `addBlockerToDamageAssignmentOrder`   |
-| AttackerBlockedByCreature, AttackerBlockedOnce (this attacker only) | `:802-812`                            |
-| AttackerBlocked and blocked status, only if not blocked before      | `:815-826`                            |
+| Step | Java |
+| --- | --- |
+| A creature, during combat | `:761` |
+| Attacker = first card the Defined$ names | `:796` |
+| Token's controller defends against the attacker | `:797`, `getDefenderPlayerByAttacker` |
+| Block added, no legality check, no blocked-pair record | `Combat.addBlocker` |
+| Last in damage assignment order | `addBlockerToDamageAssignmentOrder` |
+| AttackerBlockedByCreature, AttackerBlockedOnce (this attacker only) | `:802-812` |
+| AttackerBlocked and blocked status, only if not blocked before | `:815-826` |
 
 Brimaz's token blocks an attacker Brimaz already blocks: AttackerBlocked does not run again. A block before blockers are
 declared is refused (`DeclareCombatBlockers` would replace it; no corpus line gets there).
@@ -56,11 +56,11 @@ Java picks random targets in the human controller's `TargetSelection` (`:123-137
 (`DamageDealAi.java:466`, `ControlGainAi.java:96`). Here it is the rules' "chosen at random" for every controller:
 `chooseTargets` draws instead of asking, for a root and for a SubAbility$ link.
 
-| Shape                   | Draws                                                                                           |
-| ----------------------- | ----------------------------------------------------------------------------------------------- |
-| `TargetsAtRandom$`      | TargetMin$ times `Aggregates.random` over the remaining candidates; one candidate draws nothing |
-| `RandomNumTargets$`     | `randomInt(max(TargetMin$,1), min(TargetMax$, candidates))` first                               |
-| Lower bound above upper | Error (Java's `nextInt` throws)                                                                 |
+| Shape | Draws |
+| --- | --- |
+| `TargetsAtRandom$` | TargetMin$ times `Aggregates.random` over the remaining candidates; one candidate draws nothing |
+| `RandomNumTargets$` | `randomInt(max(TargetMin$,1), min(TargetMax$, candidates))` first |
+| Lower bound above upper | Error (Java's `nextInt` throws) |
 
 ExchangeControl, GainControl and Fight no longer refuse the param. BecomesTargetOnce's `Random` key
 (`MagicStack.java:441`) is not recorded: the mode is not ported.
@@ -72,11 +72,11 @@ player's trigger of a later mode. Java adds every trigger to `simultaneousStackE
 player (`MagicStack.java:855-880`). `beginTriggerBatch`/`endTriggerBatch` collect what `pushTriggeredAbilities` is
 handed and push it in one pass when the outermost batch closes.
 
-| Event                    | Modes in the batch                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `DeclareCombatAttackers` | Taps, Exerted, Attacks, AttackersDeclaredOneTarget, AttackersDeclared                                              |
-| `DeclareCombatBlockers`  | AttackerUnblocked[Once], BlockersDeclared, Blocks, AttackerBlockedByCreature, AttackerBlocked, AttackerBlockedOnce |
-| `addToCombatBlocking`    | its three modes                                                                                                    |
+| Event | Modes in the batch |
+| --- | --- |
+| `DeclareCombatAttackers` | Taps, Exerted, Attacks, AttackersDeclaredOneTarget, AttackersDeclared |
+| `DeclareCombatBlockers` | AttackerUnblocked[Once], BlockersDeclared, Blocks, AttackerBlockedByCreature, AttackerBlocked, AttackerBlockedOnce |
+| `addToCombatBlocking` | its three modes |
 
 `Static$ True` triggers still run when found. Triggers the final push raises (BecomesTarget, ward, crimes) go on as
 found, Java's next round. Other events (combat damage, a zone change with ChangesZoneAll) still push per mode.
@@ -87,13 +87,13 @@ found, Java's next round. Other events (combat damage, a zone change with Change
 was the player half): source and target copies, amount, combat. `logCardDamage` records it once the damage is applied
 (`CardDamageHistory.registerDamage`, `GameAction.java:2757`).
 
-| Piece                                                           | Does                                                                                   | Java                                                       |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Target copy's excess flag                                       | Not copied; set to the batch's outcome by `triggerExcessDamage` (`damageEntry.Record`) | `CardCopyService.java:331-333`, `CardDamageTable.java:130` |
-| `Count$[Num\|Max][NonCombat\|Combat]DamageThisTurn <src> <tgt>` | Per-source sums of matching instances; Num, Max or total                               | `AbilityUtils.java:2434-2450`, `Game.java:1334-1350`       |
-| `Damage.ExcessReceived`                                         | `logExcessDamage`'s running total; Heal keeps it, cleanup clears it                    | `Card.java:6193-6205`                                      |
-| `Count$ExcessDamageReceivedThisTurn`                            | The host's total; per card through handlePaid                                          | `AbilityUtils.java:2406-2408`                              |
-| `CardTriggeredTarget$`                                          | AbilityKey.Target as a card, read from its LKI                                         | `AbilityUtils.java:702-707`                                |
+| Piece | Does | Java |
+| --- | --- | --- |
+| Target copy's excess flag | Not copied; set to the batch's outcome by `triggerExcessDamage` (`damageEntry.Record`) | `CardCopyService.java:331-333`, `CardDamageTable.java:130` |
+| `Count$[Num\|Max][NonCombat\|Combat]DamageThisTurn <src> <tgt>` | Per-source sums of matching instances; Num, Max or total | `AbilityUtils.java:2434-2450`, `Game.java:1334-1350` |
+| `Damage.ExcessReceived` | `logExcessDamage`'s running total; Heal keeps it, cleanup clears it | `Card.java:6193-6205` |
+| `Count$ExcessDamageReceivedThisTurn` | The host's total; per card through handlePaid | `AbilityUtils.java:2406-2408` |
+| `CardTriggeredTarget$` | AbilityKey.Target as a card, read from its LKI | `AbilityUtils.java:702-707` |
 
 Sources are grouped by CardID; Java's history belongs to the card object. TotalDamageThisTurn, MaxOppDamageThisTurn,
 MaxCombatDamageThisTurn and SingleMaxDamageThisTurn are Java's earlier branches and stay unresolved. Heal and
@@ -101,45 +101,45 @@ regeneration keeping `Damage.Sources` and the excess flag was R25f's; verified, 
 
 ## Decisions
 
-| Decision                                                                                                                           | Why                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Per-event trigger batch, not a global list flushed at priority                                                                     | Push timing elsewhere stays as it was; no test or scenario moved. The batch closes inside the same engine call, so ADR-0019's "no waiting queue a priority ask drains" still holds |
-| New state: `Game.triggerBatch`/`triggerBatchDepth`, `Game.cardDamageThisTurn`, `Damage.ExcessReceived`, `damageEntry.Record`       | Values on value structs; `Game.Clone` copies the slices, empty ones allocate nothing                                                                                               |
-| Random targets in the engine, not a controller method                                                                              | CR 115/601.2c "at random" is no player's decision                                                                                                                                  |
-| No new `PlayerController` method                                                                                                   | —                                                                                                                                                                                  |
-| enginelint: `changecombatantseffect` may reference `trigger`, `combat`, `blockeffect`, `phase`; `targeting` may reference `random` | `addToCombatBlocking` runs block triggers; random picks use `random.go`                                                                                                            |
+| Decision | Why |
+| --- | --- |
+| Per-event trigger batch, not a global list flushed at priority | Push timing elsewhere stays as it was; no test or scenario moved. The batch closes inside the same engine call, so ADR-0019's "no waiting queue a priority ask drains" still holds |
+| New state: `Game.triggerBatch`/`triggerBatchDepth`, `Game.cardDamageThisTurn`, `Damage.ExcessReceived`, `damageEntry.Record` | Values on value structs; `Game.Clone` copies the slices, empty ones allocate nothing |
+| Random targets in the engine, not a controller method | CR 115/601.2c "at random" is no player's decision |
+| No new `PlayerController` method | — |
+| enginelint: `changecombatantseffect` may reference `trigger`, `combat`, `blockeffect`, `phase`; `targeting` may reference `random` | `addToCombatBlocking` runs block triggers; random picks use `random.go` |
 
 ## Forge defects
 
-| Where                             | Defect                                                                                                                    |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `SpellAbilityEffect.java:797`     | `getDefenderPlayerByAttacker` returns null for an attacker no longer in combat; `.equals` throws. Go skips the block      |
+| Where | Defect |
+| --- | --- |
+| `SpellAbilityEffect.java:797` | `getDefenderPlayerByAttacker` returns null for an attacker no longer in combat; `.equals` throws. Go skips the block |
 | `overclocked_electromancer.txt:9` | "deals combat damage to a creature" with no `CombatDamage$ True` on the DamageDone trigger: fires on noncombat damage too |
 
 ## Engine findings
 
-| Where                                | Finding                                                                                                                                                                                                                         |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `attack.go` `defenderOf`             | Returns a battle's controller, not its `ProtectingPlayer` (`Combat.java:297-299`; `cantattack.go:103` reads the protector): `DeclareCombatBlockers` asks the wrong player about an attack on a battle. Unverified by a scenario |
-| `presentcheck.go` `checkSVarMatches` | An unresolvable CheckSVar reads false silently: Rith and the other `Count$...DamageThisTurn` cards "played" in the smoke probe while their condition never held                                                                 |
-| `changezoneeffect.go`                | `Attacking$` (34 corpus lines) and `Blocking$` (1) still refused                                                                                                                                                                |
+| Where | Finding |
+| --- | --- |
+| `attack.go` `defenderOf` | Returns a battle's controller, not its `ProtectingPlayer` (`Combat.java:297-299`; `cantattack.go:103` reads the protector): `DeclareCombatBlockers` asks the wrong player about an attack on a battle. Unverified by a scenario |
+| `presentcheck.go` `checkSVarMatches` | An unresolvable CheckSVar reads false silently: Rith and the other `Count$...DamageThisTurn` cards "played" in the smoke probe while their condition never held |
+| `changezoneeffect.go` | `Attacking$` (34 corpus lines) and `Blocking$` (1) still refused |
 
 ## Smoke probe
 
 `crucible card-smoke -all -workers 8 -list`, before → after:
 
-| Status       | Before | After  |
-| ------------ | ------ | ------ |
-| plays        | 30,686 | 30,691 |
-| refused      | 2,931  | 2,925  |
-| placed       | 373    | 374    |
-| inconclusive | 88     | 88     |
-| judged play  | 91.3%  | 91.3%  |
+| Status | Before | After |
+| --- | --- | --- |
+| plays | 30,686 | 30,691 |
+| refused | 2,931 | 2,925 |
+| placed | 373 | 374 |
+| inconclusive | 88 | 88 |
+| judged play | 91.3% | 91.3% |
 
-| Flip             | Cards | Which                                                                                                                                         |
-| ---------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| refused → plays  | 5     | Flash Foliage (`TokenBlocking$`); Power Struggle, Scab-Clan Giant, Witch Hunt (`TargetsAtRandom$`); Reverse Polarity (`Count$DamageThisTurn`) |
-| refused → placed | 1     | Nature Shields Its Own (`TokenBlocking$`)                                                                                                     |
+| Flip | Cards | Which |
+| --- | --- | --- |
+| refused → plays | 5 | Flash Foliage (`TokenBlocking$`); Power Struggle, Scab-Clan Giant, Witch Hunt (`TargetsAtRandom$`); Reverse Polarity (`Count$DamageThisTurn`) |
+| refused → placed | 1 | Nature Shields Its Own (`TokenBlocking$`) |
 
 No card went from plays to refused. Brimaz, Rith, Inferno Trap, Case of the Burning Masks, Wolverine, Cinderheart Giant,
 Goblin Test Pilot, Goblin Polka Band and Power Pack were "plays" before and still are: their missing behavior was silent

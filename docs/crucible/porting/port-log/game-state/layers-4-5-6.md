@@ -16,11 +16,11 @@ own gate, affected set and runtime tokens.
 
 Three mechanisms, ported into `continuouslayers.go`, decide whether and how a real `S:Mode$ Continuous` line applies:
 
-| Mechanism                                                                                                           | Java                                                                       |
-| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `AffectedDefined$ Self`/`Enchanted`/`Equipped`/`AttachedBy Self`: upstream's shape for Auras, Equipment, self-buffs | `getAffectedCards`, `StaticAbilityContinuous.java:1048-1050,1066-1067`     |
-| `IsPresent$`, `CheckSVar$` chain, `EffectZone$`, `TopCardOfLibraryIs$` (`layerStaticApplies`)                       | `StaticAbility.checkConditions`/`zonesCheck`, `StaticAbility.java:337-512` |
-| Runtime tokens (`ChosenType`, `ChosenColor`, `AllColors`, `HostCardUID`, ...), `Remove*Types$`, `RemoveKeyword$`    | `StaticAbilityContinuous.java:167-460, 706-748`                            |
+| Mechanism | Java |
+| --- | --- |
+| `AffectedDefined$ Self`/`Enchanted`/`Equipped`/`AttachedBy Self`: upstream's shape for Auras, Equipment, self-buffs | `getAffectedCards`, `StaticAbilityContinuous.java:1048-1050,1066-1067` |
+| `IsPresent$`, `CheckSVar$` chain, `EffectZone$`, `TopCardOfLibraryIs$` (`layerStaticApplies`) | `StaticAbility.checkConditions`/`zonesCheck`, `StaticAbility.java:337-512` |
+| Runtime tokens (`ChosenType`, `ChosenColor`, `AllColors`, `HostCardUID`, ...), `Remove*Types$`, `RemoveKeyword$` | `StaticAbilityContinuous.java:167-460, 706-748` |
 
 Every host-side value these tokens read already exists: `Memory` (`memory.go`) holds the chosen color, type, number,
 player, names and even/odd, and the imprinted list. `*cardtype.Registry` is also already reachable, see below.
@@ -45,11 +45,11 @@ itself.
 
 `continuous.go` keeps the three appliers; each now reads one line through three helpers in `continuouslayers.go`:
 
-| Helper                                          | Java                            | Does                                                                                                                                                                             |
-| ----------------------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `layerStaticApplies`                            | `StaticAbility.checkConditions` | host zone (`EffectZone$`, effect card = Command only, default battlefield; skipped for CDA), `Condition$`, `IsPresent$`, `TopCardOfLibraryIs$`, `CheckSVar$`..`CheckFourthSVar$` |
-| `layerAffectedCards`                            | `getAffectedCards`              | CDA = host (unless in `ExcludeZone$`); else `AffectedDefined$` (phased-in), else `AffectedZone$` zones, else battlefield; then `Affected$`                                       |
-| `layerTypeChange`/`ColorChange`/`KeywordChange` | TYPE/COLOR/ABILITIES branches   | the effect record, runtime tokens resolved                                                                                                                                       |
+| Helper | Java | Does |
+| --- | --- | --- |
+| `layerStaticApplies` | `StaticAbility.checkConditions` | host zone (`EffectZone$`, effect card = Command only, default battlefield; skipped for CDA), `Condition$`, `IsPresent$`, `TopCardOfLibraryIs$`, `CheckSVar$`..`CheckFourthSVar$` |
+| `layerAffectedCards` | `getAffectedCards` | CDA = host (unless in `ExcludeZone$`); else `AffectedDefined$` (phased-in), else `AffectedZone$` zones, else battlefield; then `Affected$` |
+| `layerTypeChange`/`ColorChange`/`KeywordChange` | TYPE/COLOR/ABILITIES branches | the effect record, runtime tokens resolved |
 
 Kept Java quirks (PORT-7), each visible to a card:
 
@@ -78,13 +78,13 @@ when every param that layer's applier reads is a shape the port evaluates (wheth
 state, not shape). A `CheckSVar$`/`PresentCompare$` operand counts as resolvable when it is an integer or an SVar
 `resolveAmount` (`amount.go`) computes: `Count$Valid<zones> <spec>` with no operator or distinct-property suffix.
 
-| Lines                                                    | Total | Resolved |
-| -------------------------------------------------------- | ----- | -------- |
-| `AddType$`/`RemoveType$`                                 | 284   | 254      |
-| Type flags without `AddType$`/`RemoveType$`              | 10    | 2        |
-| `AddColor$`/`SetColor$`                                  | 61    | 60       |
-| `AddKeyword$`                                            | 1,875 | 1,710    |
-| `RemoveKeyword$`/`RemoveAllAbilities$`, no `AddKeyword$` | 61    | 56       |
+| Lines | Total | Resolved |
+| --- | --- | --- |
+| `AddType$`/`RemoveType$` | 284 | 254 |
+| Type flags without `AddType$`/`RemoveType$` | 10 | 2 |
+| `AddColor$`/`SetColor$` | 61 | 60 |
+| `AddKeyword$` | 1,875 | 1,710 |
+| `RemoveKeyword$`/`RemoveAllAbilities$`, no `AddKeyword$` | 61 | 56 |
 
 Most of the resolved total names `AffectedDefined$ Self`/`Enchanted`/`Equipped`/`AttachedBy Self` -- upstream's current
 shape for Auras, Equipment and self-buffs -- and reaches its target through `layerAffectedCards`. The unresolved
@@ -92,12 +92,12 @@ remainder is the "Still not resolved" table below.
 
 ### Still not resolved
 
-| Shape                                                                 | Lines (type/color/kw)    | Why                                                                                                                                                                                                                               |
-| --------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CheckSVar$`/`PresentCompare$` naming an amount outside `Count$Valid` | 26 / 0 / 90              | `Count$Devotion*` (22), `Count$ThisTurnCast_*` (15), `Imprinted$Valid` (9), `PlayerCountOpponents$*`, `Count$CardCounters`, ...: the general `AbilityUtils.calculateAmount` port, shared by every layer, not a Layer 4-6 question |
-| `EffectZone$` without `Battlefield` (Command, Graveyard, Stack)       | 4 / 1 / 40               | `traitHosts` (`game.go`) walks the battlefield and effect cards only; emblems, planes and graveyard/stack-functioning statics need their own host walk                                                                            |
-| `SharedKeywordsZone$`, `FromDraftNotes$`, `CantHaveKeyword$`          | 8, 1, 5                  | `SharedKeywordsZone$` and `CantHaveKeyword$` land (`layerSharedKeywords`, `KeywordEffect.CantHave`); draft notes (no draft)                                                                                                       |
-| CDA hosts off the battlefield                                         | 9 each, counted resolved | a CDA functions in every zone; only battlefield hosts are walked, so "this spell has flash" and "is every color" in hand do not apply yet                                                                                         |
+| Shape | Lines (type/color/kw) | Why |
+| --- | --- | --- |
+| `CheckSVar$`/`PresentCompare$` naming an amount outside `Count$Valid` | 26 / 0 / 90 | `Count$Devotion*` (22), `Count$ThisTurnCast_*` (15), `Imprinted$Valid` (9), `PlayerCountOpponents$*`, `Count$CardCounters`, ...: the general `AbilityUtils.calculateAmount` port, shared by every layer, not a Layer 4-6 question |
+| `EffectZone$` without `Battlefield` (Command, Graveyard, Stack) | 4 / 1 / 40 | `traitHosts` (`game.go`) walks the battlefield and effect cards only; emblems, planes and graveyard/stack-functioning statics need their own host walk |
+| `SharedKeywordsZone$`, `FromDraftNotes$`, `CantHaveKeyword$` | 8, 1, 5 | `SharedKeywordsZone$` and `CantHaveKeyword$` land (`layerSharedKeywords`, `KeywordEffect.CantHave`); draft notes (no draft) |
+| CDA hosts off the battlefield | 9 each, counted resolved | a CDA functions in every zone; only battlefield hosts are walked, so "this spell has flash" and "is every color" in hand do not apply yet |
 
 `forge-gui/res/cardsfolder/p/phyrexian_adapter.txt:6` writes `AddType$ Food,Blood,Clue,Treasure,Powerstone`: a comma
 list where every other line uses `" & "`. Java's `CardType.add` stores it as one subtype named with the commas, and so

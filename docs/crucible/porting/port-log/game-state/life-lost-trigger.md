@@ -11,11 +11,11 @@ amount fires nothing. It adds to `Player.LifeLostThisTurn` (reset in `turn.go` a
 every `Mode$ LifeLost` trigger whose `ValidPlayer$`, `FirstTime$` and `LifeAmount$` hold. One damage or LoseLife event
 is one trigger firing, not one per point.
 
-| Caller                                | Source of the loss      |
-| ------------------------------------- | ----------------------- |
-| `loselifeeffect.go`                   | `LoseLife` effect       |
-| `combatdamage.go`                     | combat damage to player |
-| `activateability.go` (`PayLife` cost) | life paid as a cost     |
+| Caller | Source of the loss |
+| --- | --- |
+| `loselifeeffect.go` | `LoseLife` effect |
+| `combatdamage.go` | combat damage to player |
+| `activateability.go` (`PayLife` cost) | life paid as a cost |
 
 Not ported: `ValidCause$` and `ResolvedLimit$` on a `LifeLost` line (skipped, not applied); `LifeLostAll` (the batch
 mode); loss from non-combat damage paths other than the ones above. Test: `lifelost_test.go` (Vengeful Warchief gets one

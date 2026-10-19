@@ -7,11 +7,11 @@
 
 Three shapes the turn driver's scenarios (ADR-0026) hit first. Each blocked a common card, not an edge case.
 
-| Shape                                                            | Corpus                                                                    | Go                                                               | Java                                                        |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------- |
-| `Pump` with `ValidTgts$` (Giant Growth)                          | 2,555 of 5,034 `(SP\|AB\|DB)$ Pump` lines; 2,318 name no unresolved param | `pumpEffect.Resolve` via `targetedOrDefinedCards` (`defined.go`) | `PumpEffect.resolve`, `getCardsfromTargets`                 |
-| `GainLife` with no `Defined$` (Nourish)                          | 796 of 1,804 `(SP\|AB\|DB)$ GainLife` lines; 774 name no unresolved param | `gainLifePlayers` (`gainlifeeffect.go`)                          | `LifeGainEffect.resolve`; `SpellAbilityEffect.java:326-345` |
-| `Defined$ TriggeredCardController` on `Mode$ Discarded` (Megrim) | every Discarded watcher naming the discarder                              | `checkDiscardedTriggers` (`trigger.go`) records `triggered.card` | `TriggerDiscarded.java:72-74`                               |
+| Shape | Corpus | Go | Java |
+| --- | --- | --- | --- |
+| `Pump` with `ValidTgts$` (Giant Growth) | 2,555 of 5,034 `(SP\|AB\|DB)$ Pump` lines; 2,318 name no unresolved param | `pumpEffect.Resolve` via `targetedOrDefinedCards` (`defined.go`) | `PumpEffect.resolve`, `getCardsfromTargets` |
+| `GainLife` with no `Defined$` (Nourish) | 796 of 1,804 `(SP\|AB\|DB)$ GainLife` lines; 774 name no unresolved param | `gainLifePlayers` (`gainlifeeffect.go`) | `LifeGainEffect.resolve`; `SpellAbilityEffect.java:326-345` |
+| `Defined$ TriggeredCardController` on `Mode$ Discarded` (Megrim) | every Discarded watcher naming the discarder | `checkDiscardedTriggers` (`trigger.go`) records `triggered.card` | `TriggerDiscarded.java:72-74` |
 
 **Pump.** Targets come from `Ability.Targets`, already chosen at cast/activation (ADR-0018). A target that phased out
 (CR 702.26e) or left `PumpZone$` (Battlefield by default) since it was chosen is skipped, the same two checks Java's own

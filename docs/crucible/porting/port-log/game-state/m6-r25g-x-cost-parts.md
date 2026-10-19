@@ -15,13 +15,13 @@ serves the mana X, every part and `Count$xPaid` (`TargetMax$ X`, `NumCards$ X`).
 
 ## What Go does
 
-| Step                  | Where                                                                                                                       |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Does the spell ask?   | `announceXFor`: mana X, or the `A:SP$` line's `Cost$` has a part of amount `X` (`costNamesX`) and `xIsPaid`                 |
-| The bound             | `nonManaXMax`: X = 1, 2, ... until `unlessPayable` fails, so each part's own rules (a hand card other than the source) hold |
-| The answer            | `ChoosePayX` as before, clamped to the bound (an out-of-range answer is a range the Java dialog would not offer)            |
-| Held for the cast     | `Game.preX`; `spellAdditionalCost` parses the `Cost$` with it (`parseUnlessCostX`: X of 0 drops the part)                   |
-| Recorded on the spell | `castInstantOrSorcery` copies `preX` to the ability when no mana shard carried it, so `Count$xPaid` reads it at resolution  |
+| Step | Where |
+| --- | --- |
+| Does the spell ask? | `announceXFor`: mana X, or the `A:SP$` line's `Cost$` has a part of amount `X` (`costNamesX`) and `xIsPaid` |
+| The bound | `nonManaXMax`: X = 1, 2, ... until `unlessPayable` fails, so each part's own rules (a hand card other than the source) hold |
+| The answer | `ChoosePayX` as before, clamped to the bound (an out-of-range answer is a range the Java dialog would not offer) |
+| Held for the cast | `Game.preX`; `spellAdditionalCost` parses the `Cost$` with it (`parseUnlessCostX`: X of 0 drops the part) |
+| Recorded on the spell | `castInstantOrSorcery` copies `preX` to the ability when no mana shard carried it, so `Count$xPaid` reads it at resolution |
 
 Bond of Agony (`X B PayLife<X>`), Channeled Force (`Discard<X/Card/card>`), Chill Haunting, Burn at the Stake, Scorched
 Earth, Skeletal Scrying and Avalanche cast and resolve. `TestXAnnouncedForACostPartIsSharedAndBounded` pins the shared

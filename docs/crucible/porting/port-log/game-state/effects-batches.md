@@ -641,12 +641,12 @@ the options' own order, sorted subtypes, and refuses `AtRandom$` over a list wit
 default `You`) picks one source; the pick becomes the host's chosen card (`Memory.Choose`), `RememberChosen$` also
 remembers it. 65 of 67 real lines chain into `DB$ Effect`, still `ErrUnimplemented`.
 
-| Pool group, in Java's order  | This port                                                                             |
-| ---------------------------- | ------------------------------------------------------------------------------------- |
-| Battlefield permanents       | Every player's battlefield, seat order                                                |
-| Stack item sources           | Resolving ability first, then `g.stack` top to bottom                                 |
+| Pool group, in Java's order | This port |
+| --- | --- |
+| Battlefield permanents | Every player's battlefield, seat order |
+| Stack item sources | Resolving ability first, then `g.stack` top to bottom |
 | Objects stack items refer to | First targeted card per item (`getTargetCard`); triggering/replacing objects not held |
-| Face-up Command-zone cards   | Every player's Command zone, face-down skipped                                        |
+| Face-up Command-zone cards | Every player's Command zone, face-down skipped |
 
 - Pool is an `OrderedSet`: Java's `CardCollection` keeps a card at its first position, so an activated ability's source
   or a targeted permanent is offered once, among the permanents. Reason: an `[]CardID` would offer it twice.
@@ -670,10 +670,10 @@ has no case for, so a red spell would still read red.
 
 **Forge bugs (PORT-8, not carried; tracked in [`forge-java-defects.md`](../../forge-java-defects.md)).**
 
-| Site                              | Bug                                                                                                                                                      | Here           |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `ChooseSourceEffect.java:84-89`   | `TargetControls$` read by presence only; `tgtPlayers.get(0)` unguarded, `IndexOutOfBoundsException` when the chooser left the game; PR removes the param | Param rejected |
-| `ChooseSourceEffect.java:131-133` | Pool exhausted before every chooser picks → do/while rejects the dividers forever, game hangs                                                            | `error`        |
+| Site | Bug | Here |
+| --- | --- | --- |
+| `ChooseSourceEffect.java:84-89` | `TargetControls$` read by presence only; `tgtPlayers.get(0)` unguarded, `IndexOutOfBoundsException` when the chooser left the game; PR removes the param | Param rejected |
+| `ChooseSourceEffect.java:131-133` | Pool exhausted before every chooser picks → do/while rejects the dividers forever, game hangs | `error` |
 
 **`<Color>Source` valid property** lands with it: 15 of 67 `Choices$` lines name one (`Card.RedSource`, ...).
 `valid-strings.md` has the rule and the Ghostly Flame exception.
@@ -691,10 +691,10 @@ named `<Type$> Token`. Then `Num$` (default 1) loyalty counters on one such toke
 
 **Researched and deferred.**
 
-| API             | Blocker                                                                                                  |
-| --------------- | -------------------------------------------------------------------------------------------------------- |
-| `MustBlock`     | Enforcement breaks `DeclareCombatBlockers`' "not re-checked" contract; re-prompt vs correct needs an ADR |
-| `ManaReflected` | Triggered mana abilities (CR 605.1b), [`effects-manareflected.md`](effects-manareflected.md)             |
+| API | Blocker |
+| --- | --- |
+| `MustBlock` | Enforcement breaks `DeclareCombatBlockers`' "not re-checked" contract; re-prompt vs correct needs an ADR |
+| `ManaReflected` | Triggered mana abilities (CR 605.1b), [`effects-manareflected.md`](effects-manareflected.md) |
 
 `BecomeMonarch`/`TakeInitiative`/`Venture` retired from this table: their own blocker (synthetic Command-zone effect
 cards with their own triggers) stopped applying once the `Effect` port gave Command-zone `IsEffect` cards live triggers
@@ -712,14 +712,14 @@ cards with their own triggers) stopped applying once the `Effect` port gave Comm
 Six more script-driven APIs resolve, 145 of the corpus's 203 (`Empower` landed with `ChooseSource`, above). Corpus
 lines: Earthbend 38, Airbend 13, Discover 37, Draft 42, Heist 8, ExchangeZone 1.
 
-| API            | Resolves                                                                                                                                                                                                             | Fails closed / not modeled                                                                                   |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Earthbend`    | Target land you control becomes a 0/0 haste land creature (Permanent `animateRecord`), `Num$` +1/+1 counters, two delayed "return it tapped under your control" triggers (dies, exiled), then ElementalBend triggers | `AB$ Earthbend` (3 lines): `ActivateAbility` chooses no targets yet                                          |
-| `Airbend`      | Each target or `Defined$` permanent exiled; owner may cast a nonland non-token one for {2} (`ExilePlayGrant`); `ChangesZoneAll`; ElementalBend triggers when anything moved                                          | `TgtZone$` (1 line, a spell on the stack)                                                                    |
-| `Discover`     | Exile from top until nonland with MV ≤ `Num$`, one `ChangesZoneAll` per card; cast (`ConfirmEffect` true) or hand; rest to bottom shuffled; `Mode$ Discover` triggers; `RememberDiscovered$`                         | Casting an instant, sorcery or Aura: checked by peeking before anything moves, then an error                 |
-| `Draft`        | `DraftNum$` rounds: spellbook shuffled, first three made (the `A-` version when the DB has it), one picked to hand; `RememberDrafted$`                                                                               | --                                                                                                           |
-| `Heist`        | `Num$` rounds: three random nonland cards of the target's library, one exiled face down; heister may play it with any mana type (`ExilePlayGrant`)                                                                   | `addMayLookFaceDownExile` (no hidden-information model); `canExiledBy` (no `CantExile` static)               |
-| `ExchangeZone` | `Object$` (default host) in `Zone1$` swaps with a chosen `ValidExchange$` card in `Zone2$`; optional unless `Mandatory$`                                                                                             | `Type$` (Aura re-attachment, 0 lines). The one real line (Darkpact) is an ante sorcery this port cannot cast |
+| API | Resolves | Fails closed / not modeled |
+| --- | --- | --- |
+| `Earthbend` | Target land you control becomes a 0/0 haste land creature (Permanent `animateRecord`), `Num$` +1/+1 counters, two delayed "return it tapped under your control" triggers (dies, exiled), then ElementalBend triggers | `AB$ Earthbend` (3 lines): `ActivateAbility` chooses no targets yet |
+| `Airbend` | Each target or `Defined$` permanent exiled; owner may cast a nonland non-token one for {2} (`ExilePlayGrant`); `ChangesZoneAll`; ElementalBend triggers when anything moved | `TgtZone$` (1 line, a spell on the stack) |
+| `Discover` | Exile from top until nonland with MV ≤ `Num$`, one `ChangesZoneAll` per card; cast (`ConfirmEffect` true) or hand; rest to bottom shuffled; `Mode$ Discover` triggers; `RememberDiscovered$` | Casting an instant, sorcery or Aura: checked by peeking before anything moves, then an error |
+| `Draft` | `DraftNum$` rounds: spellbook shuffled, first three made (the `A-` version when the DB has it), one picked to hand; `RememberDrafted$` | -- |
+| `Heist` | `Num$` rounds: three random nonland cards of the target's library, one exiled face down; heister may play it with any mana type (`ExilePlayGrant`) | `addMayLookFaceDownExile` (no hidden-information model); `canExiledBy` (no `CantExile` static) |
+| `ExchangeZone` | `Object$` (default host) in `Zone1$` swaps with a chosen `ValidExchange$` card in `Zone2$`; optional unless `Mandatory$` | `Type$` (Aura re-attachment, 0 lines). The one real line (Darkpact) is an ante sorcery this port cannot cast |
 
 Shared engine pieces:
 
@@ -775,22 +775,22 @@ name.
 **Active zone.** An effect card's traits are active in the Command zone alone, whatever `TriggerZones$`/`ActiveZones$`
 say (`setActiveZone(EnumSet.of(ZoneType.Command))`):
 
-| Walker                                                                                                                             | Change                                                                 |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Walker | Change |
+| --- | --- |
 | Every `continuous.go` applier, `cantBlockBy`, `ignoreLegendRule`, and every battlefield-walking trigger check in `trigger.go` (19) | Host list is `Game.traitHosts`: battlefield, then Command effect cards |
-| `phaseTriggerZoneMatches` (Phase, AttackersDeclared, Drawn, LifeGained, LandPlayed)                                                | Effect card matches the Command zone only                              |
-| `hostInActiveZones` (every replacement dispatch)                                                                                   | Effect card matches the Command zone only                              |
+| `phaseTriggerZoneMatches` (Phase, AttackersDeclared, Drawn, LifeGained, LandPlayed) | Effect card matches the Command zone only |
+| `hostInActiveZones` (every replacement dispatch) | Effect card matches the Command zone only |
 
 **Lifetime.** `effectLifetime` on the card records the `Duration$` and the move watch; `Game.Clone` copies it by value.
 
-| `Duration$`                                                   | Ends                                                                                                                                                     |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| absent, `EndOfTurn`, `UntilEndOfTurn` (Java's default branch) | Next cleanup step (`endEffectsAtCleanup`)                                                                                                                |
-| `Permanent`                                                   | Never by duration                                                                                                                                        |
-| `UntilYourNextTurn`                                           | As its controller's next turn begins (`endEffectsAtTurnStart`, `AdvancePhase`)                                                                           |
-| `UntilTheEndOfYourNextTurn`                                   | Cleanup of the controller's next turn; one made during their turn survives that one                                                                      |
-| `UntilEndOfCombat`                                            | `endCombat` (`endEffectsAtEndOfCombat`)                                                                                                                  |
-| `UntilHostLeavesPlay`, `UntilHostLeavesPlayOrEOT`             | Host leaves the battlefield (and, for the second, next cleanup); no effect if host is neither on the battlefield nor on the stack (`checkValidDuration`) |
+| `Duration$` | Ends |
+| --- | --- |
+| absent, `EndOfTurn`, `UntilEndOfTurn` (Java's default branch) | Next cleanup step (`endEffectsAtCleanup`) |
+| `Permanent` | Never by duration |
+| `UntilYourNextTurn` | As its controller's next turn begins (`endEffectsAtTurnStart`, `AdvancePhase`) |
+| `UntilTheEndOfYourNextTurn` | Cleanup of the controller's next turn; one made during their turn survives that one |
+| `UntilEndOfCombat` | `endCombat` (`endEffectsAtEndOfCombat`) |
+| `UntilHostLeavesPlay`, `UntilHostLeavesPlayOrEOT` | Host leaves the battlefield (and, for the second, next cleanup); no effect if host is neither on the battlefield nor on the stack (`checkValidDuration`) |
 
 `ExileOnMoved$ <zones>` ends the effect when a remembered card leaves one of the zones. `ForgetOnMoved$ <zones>` forgets
 a remembered card that leaves one of them for anywhere but the stack or exile, that is exiled from anywhere, or --
@@ -826,24 +826,24 @@ are gone. A `ReplaceWith$` naming `SubAbility$`, or a param its effect rejects, 
 untouched. On the stack (no event) `ReplaceEffect` fails, the other five do nothing
 (`if (!sa.isReplacementAbility()) return;`).
 
-| API                  | Resolves                                                                                                                                                              | Rejected                                                            |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `ReplaceEffect`      | Default `VarType$` (amount): `VarName$` must be the event's (`DamageAmount`, `LifeGained`, ...); `VarValue$` a literal, `ReplaceCount$` expression or any host amount | `VarType$` Card/Player/GameEntity/Map/CardSet/PlanarDice, `VarKey$` |
-| `ReplaceDamage`      | Prevent `Amount$` (default 1); a `Number$` SVar is a depleting shield written back to the host, an effect card exiled once spent; `PreventedDamage` SVar set          | `DivideShield$`                                                     |
-| `ReplaceSplitDamage` | `VarName$` (default 1) of the damage goes to `DamageTarget$`, dealt by the caller as its own event (`dealRedirectedDamage`); a spent effect card is exiled            | --                                                                  |
-| `ReplaceToken`       | `Type$ Amount`, `Amount$` Twice/Thrice/HalfUp/HalfDown/Plus.N/Minus.N (default Twice)                                                                                 | `Type$` AddToken/ReplaceToken/ReplaceController                     |
-| `ReplaceCounter`     | `Amount$` over `ReplaceCount$CounterNum`; `ValidCounterType$`; `ChooseCounter$` moot (one source per placement)                                                       | `ValidSource$`                                                      |
-| `ReplaceMana`        | `ReplaceMana$` (a symbol or `Any`), `ReplaceType$`, `ReplaceColor$` (+`ReplaceOnly$`, `Chosen`), `ReplaceAmount$`                                                     | --                                                                  |
+| API | Resolves | Rejected |
+| --- | --- | --- |
+| `ReplaceEffect` | Default `VarType$` (amount): `VarName$` must be the event's (`DamageAmount`, `LifeGained`, ...); `VarValue$` a literal, `ReplaceCount$` expression or any host amount | `VarType$` Card/Player/GameEntity/Map/CardSet/PlanarDice, `VarKey$` |
+| `ReplaceDamage` | Prevent `Amount$` (default 1); a `Number$` SVar is a depleting shield written back to the host, an effect card exiled once spent; `PreventedDamage` SVar set | `DivideShield$` |
+| `ReplaceSplitDamage` | `VarName$` (default 1) of the damage goes to `DamageTarget$`, dealt by the caller as its own event (`dealRedirectedDamage`); a spent effect card is exiled | -- |
+| `ReplaceToken` | `Type$ Amount`, `Amount$` Twice/Thrice/HalfUp/HalfDown/Plus.N/Minus.N (default Twice) | `Type$` AddToken/ReplaceToken/ReplaceController |
+| `ReplaceCounter` | `Amount$` over `ReplaceCount$CounterNum`; `ValidCounterType$`; `ChooseCounter$` moot (one source per placement) | `ValidSource$` |
+| `ReplaceMana` | `ReplaceMana$` (a symbol or `Any`), `ReplaceType$`, `ReplaceColor$` (+`ReplaceOnly$`, `Chosen`), `ReplaceAmount$` | -- |
 
 **New replacement events** (`replacement.go`, all through `eachReplacement`: Battlefield and Command hosts, first match
 applies, the file's CR 616 simplification):
 
-| Event         | Wired at                                                     | Checks                                                                                                                      | Skips the line                           |
-| ------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `AddCounter`  | `putCounterEffect`, per card and per player                  | `ValidCard$`, `ValidPlayer$`, `ValidObject$`, `ValidCounterType$`, `ValidSource$` (placer), `EffectOnly$`                   | `ValidCause$`, anything else             |
-| `CreateToken` | `tokenEffect`, per owner and script                          | `ValidToken$` (against the unentered token), `ValidPlayer$` (creator), `EffectOnly$`                                        | `Optional$`, `Layer$`                    |
-| `ProduceMana` | `TapLandForMana`, `ActivateManaAbility` (`addProducedMana`)  | `ValidCard$` (the source), `ValidActivator$`                                                                                | `ManaAmount$`, `ValidSA$`                |
-| `DamageDone`  | existing; now also `DamageTarget$` (`damageRedirectAllowed`) | the can't-be-redirected keyword, defined players in the game, defined cards creature/planeswalker/battle on the battlefield | the cause's `NoRedirection$` is not seen |
+| Event | Wired at | Checks | Skips the line |
+| --- | --- | --- | --- |
+| `AddCounter` | `putCounterEffect`, per card and per player | `ValidCard$`, `ValidPlayer$`, `ValidObject$`, `ValidCounterType$`, `ValidSource$` (placer), `EffectOnly$` | `ValidCause$`, anything else |
+| `CreateToken` | `tokenEffect`, per owner and script | `ValidToken$` (against the unentered token), `ValidPlayer$` (creator), `EffectOnly$` | `Optional$`, `Layer$` |
+| `ProduceMana` | `TapLandForMana`, `ActivateManaAbility` (`addProducedMana`) | `ValidCard$` (the source), `ValidActivator$` | `ManaAmount$`, `ValidSA$` |
+| `DamageDone` | existing; now also `DamageTarget$` (`damageRedirectAllowed`) | the can't-be-redirected keyword, defined players in the game, defined cards creature/planeswalker/battle on the battlefield | the cause's `NoRedirection$` is not seen |
 
 Every other counter, token or mana site (`Counters.Add` in costs and keyword effects, `Amass`/`Investigate`/`Incubate`
 tokens, `Mana` effects) does not consult these events yet.

@@ -572,13 +572,13 @@ the stack both resolve. Both limits must be literal integers, as Java's integer 
 
 ## `AbilityCast`, `SpellAbilityCast`, `SpellCastOrCopy`, `Cycled`, `AttackerUnblocked`, `DiscardedAll`
 
-| Mode                                           | Fires                                                                                          | Java                                                  | Go                                                     |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
-| `AbilityCast` (44)                             | as an activated ability goes on the stack                                                      | `MagicStack.java:235-237`, `:350`                     | `checkAbilityCastTriggers`, from `ActivateAbility`     |
-| `SpellAbilityCast` (6), `SpellCastOrCopy` (31) | a cast spell (and an ability, for the first); copies are not fired                             | `MagicStack.java:331-400`                             | `spellCastModes` in `appendSpellCastMatches`           |
-| `Cycled` (78)                                  | after a Cycling or TypeCycling ability is activated; `FirstTime$` the player's first this turn | `Player.addCycled`, `Player.java:3861`                | `checkCycledTriggers`, `Player.CyclingThisTurn`        |
-| `AttackerUnblocked` (37), `...Once`            | after blockers are declared, per unblocked attacker (forced-blocked ones are blocked)          | `Combat.java:673-703`                                 | `checkUnblockedTriggers`, from `DeclareCombatBlockers` |
-| `DiscardedAll` (22)                            | once per batch of discards; `FirstTime$` none matching earlier this turn                       | `SpellAbilityEffect.java:943`, `CostDiscard.java:246` | `checkDiscardedAllTriggers`, `Defined$ TriggeredCards` |
+| Mode | Fires | Java | Go |
+| --- | --- | --- | --- |
+| `AbilityCast` (44) | as an activated ability goes on the stack | `MagicStack.java:235-237`, `:350` | `checkAbilityCastTriggers`, from `ActivateAbility` |
+| `SpellAbilityCast` (6), `SpellCastOrCopy` (31) | a cast spell (and an ability, for the first); copies are not fired | `MagicStack.java:331-400` | `spellCastModes` in `appendSpellCastMatches` |
+| `Cycled` (78) | after a Cycling or TypeCycling ability is activated; `FirstTime$` the player's first this turn | `Player.addCycled`, `Player.java:3861` | `checkCycledTriggers`, `Player.CyclingThisTurn` |
+| `AttackerUnblocked` (37), `...Once` | after blockers are declared, per unblocked attacker (forced-blocked ones are blocked) | `Combat.java:673-703` | `checkUnblockedTriggers`, from `DeclareCombatBlockers` |
+| `DiscardedAll` (22) | once per batch of discards; `FirstTime$` none matching earlier this turn | `SpellAbilityEffect.java:943`, `CostDiscard.java:246` | `checkDiscardedAllTriggers`, `Defined$ TriggeredCards` |
 
 `triggerscan.go` holds the shared walk (`scanTriggers`, `appendTriggerMatches`) and each mode's param whitelist
 (`paramsResolvable`): a line naming a param outside it does not fire (GO-7). `ValidSA$` is evaluated by

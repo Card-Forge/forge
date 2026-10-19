@@ -18,42 +18,42 @@ The `effects-batch-b.md` deferral no longer holds: `targetChoiceFor` offers stac
 
 Java changes the spell's controller in two places; this port stores it in four.
 
-| Where                               | Change                                                           | Java                                                                                   | Reason                                                                                                                               |
-| ----------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Stack item `Ability.Controller`     | set to new controller                                            | `SpellAbilityStackInstance.setActivatingPlayer` (`SpellAbilityStackInstance.java:170`) | read at resolution; `resolveSubAbility`/`resolveAdditional` build each child from it, so the sub chain follows with no extra write   |
-| Each `Ability.Modes[i].Controller`  | set to new controller, `Modes` copied first                      | same, trickling into `subInstance`                                                     | `chooseCharmModes` stores a controller per mode (`charmeffect.go:59`); `Game.Clone` shares the `Modes` backing array                 |
-| Card `tempControllers`              | `ControlEffect{Timestamp, Controller}` appended                  | `Card.addTempController` (`ControlSpellEffect.java:98`)                                | `permanentEffect` moves the card to `a.Controller`'s battlefield; `Card.Controller()` must agree, and a temp entry rides along there |
-| `Move`/`MoveToLibraryTop` off Stack | `tempControllers = nil` beside the existing `controller = Owner` | `GameAction.java:651-654` `clearControllers`                                           | otherwise a stolen instant in its owner's graveyard still reports the thief, and so does its next cast                               |
+| Where | Change | Java | Reason |
+| --- | --- | --- | --- |
+| Stack item `Ability.Controller` | set to new controller | `SpellAbilityStackInstance.setActivatingPlayer` (`SpellAbilityStackInstance.java:170`) | read at resolution; `resolveSubAbility`/`resolveAdditional` build each child from it, so the sub chain follows with no extra write |
+| Each `Ability.Modes[i].Controller` | set to new controller, `Modes` copied first | same, trickling into `subInstance` | `chooseCharmModes` stores a controller per mode (`charmeffect.go:59`); `Game.Clone` shares the `Modes` backing array |
+| Card `tempControllers` | `ControlEffect{Timestamp, Controller}` appended | `Card.addTempController` (`ControlSpellEffect.java:98`) | `permanentEffect` moves the card to `a.Controller`'s battlefield; `Card.Controller()` must agree, and a temp entry rides along there |
+| `Move`/`MoveToLibraryTop` off Stack | `tempControllers = nil` beside the existing `controller = Owner` | `GameAction.java:651-654` `clearControllers` | otherwise a stolen instant in its owner's graveyard still reports the thief, and so does its next cast |
 
 Not `changeControllerAt` for the spell: summoning sickness and removal from combat are permanent semantics (CR 302.6,
 506.4). The exchanged host does use it.
 
 ### Shapes
 
-| Param                              | Resolution                                                                                                                                                                                                                                    |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ValidTgts$` + `TargetType$ Spell` | each targeted card on the stack (`spellItemOf`)                                                                                                                                                                                               |
-| `Defined$ Targeted`                | same list, a sub-ability carrying its parent's `Targets` (`getAllTargetChoices`, `AbilityUtils.java:1261-1275`)                                                                                                                               |
-| `Defined$ TriggeredSpellAbility`   | `triggered.spellAbility`, the Mode$ SpellCast record; named even after the spell left the stack                                                                                                                                               |
-| `Mode$ Gain`                       | spell to `NewController$`'s first player (`definedPlayers`), else a player target when targeting, else the activator (`getDefinedPlayersOrTargeted`)                                                                                          |
-| `Mode$ Exchange`                   | host skipped unless on the battlefield, phased in, spell still on the stack, spell's controller still in the game (`ControlSpellEffect.java:74-81`); host to the spell's controller, spell to the host's controller, one timestamp (`:69-90`) |
-| `Remember$`                        | host (Exchange), then the spell, on the host's `Memory`                                                                                                                                                                                       |
+| Param | Resolution |
+| --- | --- |
+| `ValidTgts$` + `TargetType$ Spell` | each targeted card on the stack (`spellItemOf`) |
+| `Defined$ Targeted` | same list, a sub-ability carrying its parent's `Targets` (`getAllTargetChoices`, `AbilityUtils.java:1261-1275`) |
+| `Defined$ TriggeredSpellAbility` | `triggered.spellAbility`, the Mode$ SpellCast record; named even after the spell left the stack |
+| `Mode$ Gain` | spell to `NewController$`'s first player (`definedPlayers`), else a player target when targeting, else the activator (`getDefinedPlayersOrTargeted`) |
+| `Mode$ Exchange` | host skipped unless on the battlefield, phased in, spell still on the stack, spell's controller still in the game (`ControlSpellEffect.java:74-81`); host to the spell's controller, spell to the host's controller, one timestamp (`:69-90`) |
+| `Remember$` | host (Exchange), then the spell, on the host's `Memory` |
 
 `runChangeControllerCommands` (`:88`, `:96`) is not called from here: a spell on the stack hosts no change-controller
 command (they are registered on battlefield hosts, [`m5-control.md`](m5-control.md)).
 
 ### Rejected before acting (PORT-8, GO-7)
 
-| Shape                                                    | Reason                                                                                                                                                                                           |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `RememberTargets$`                                       | `AbilityUtils.java:1517`'s generic pre-resolve remember; not run by this port                                                                                                                    |
-| `TargetValidTargeting$`                                  | `targetChoiceFor` reads it for ChangeTargets only                                                                                                                                                |
-| `DefinedExchange$`                                       | an exchange object other than the host; no corpus line                                                                                                                                           |
-| `Condition$`                                             | `subAbilityConditionMet` reads it as never met: a silent skip                                                                                                                                    |
-| missing `Mode$`; `Mode$` other than `Gain`/`Exchange`    | Java NPEs on the missing param (`ControlSpellEffect.java:58`) and reads any other value as Gain; every corpus line says `Gain` or `Exchange`, so an unknown value is refused rather than guessed |
-| `Defined$` other than `Targeted`/`TriggeredSpellAbility` | `getDefinedSpellAbilities` shapes not built (`Remembered`, `ValidStack`, ...)                                                                                                                    |
-| `CantGainControl` static in play, Exchange mode          | `Card.canBeControlledBy`'s static half                                                                                                                                                           |
-| Gain mode, spell no longer on the stack                  | Java dereferences the null stack instance (`ControlSpellEffect.java:99`); no corpus chain reaches it, every Gain spell being a target its parent fizzles without                                 |
+| Shape | Reason |
+| --- | --- |
+| `RememberTargets$` | `AbilityUtils.java:1517`'s generic pre-resolve remember; not run by this port |
+| `TargetValidTargeting$` | `targetChoiceFor` reads it for ChangeTargets only |
+| `DefinedExchange$` | an exchange object other than the host; no corpus line |
+| `Condition$` | `subAbilityConditionMet` reads it as never met: a silent skip |
+| missing `Mode$`; `Mode$` other than `Gain`/`Exchange` | Java NPEs on the missing param (`ControlSpellEffect.java:58`) and reads any other value as Gain; every corpus line says `Gain` or `Exchange`, so an unknown value is refused rather than guessed |
+| `Defined$` other than `Targeted`/`TriggeredSpellAbility` | `getDefinedSpellAbilities` shapes not built (`Remembered`, `ValidStack`, ...) |
+| `CantGainControl` static in play, Exchange mode | `Card.canBeControlledBy`'s static half |
+| Gain mode, spell no longer on the stack | Java dereferences the null stack instance (`ControlSpellEffect.java:99`); no corpus chain reaches it, every Gain spell being a target its parent fizzles without |
 
 Perplexing Chimera's `ChangeTargets` is gated on
 `ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE2` (the host and the spell, both
@@ -61,14 +61,14 @@ remembered), which `subAbilityConditionMet` evaluates ([`condition-defined.md`](
 
 ### Per card
 
-| Card                | Status                                                                                                                                                         |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Aethersnatch        | Full, retarget included                                                                                                                                        |
-| Commandeer          | Full (alternative cost `ExileFromHand` aside)                                                                                                                  |
-| Invert Polarity     | Win branch full; lose branch fails closed in `Counter` (`Defined$` rejected, `countereffect.go`)                                                               |
-| Perplexing Chimera  | Full: the exchange resolves, then `ChangeTargets` asks its optional retarget once both cards are remembered                                                    |
-| Sudden Substitution | Fails closed: a `SubAbility$` with its own `ValidTgts$` and `NewController$ Player.IsRemembered` (`definedPlayers`)                                            |
-| Chef's Kiss         | Never cast: `TargetType$ Spell.numTargets EQ1` takes `targetChoiceFor`'s literal-`Spell` branch, which has no candidates; its chain also needs `RandomTarget$` |
+| Card | Status |
+| --- | --- |
+| Aethersnatch | Full, retarget included |
+| Commandeer | Full (alternative cost `ExileFromHand` aside) |
+| Invert Polarity | Win branch full; lose branch fails closed in `Counter` (`Defined$` rejected, `countereffect.go`) |
+| Perplexing Chimera | Full: the exchange resolves, then `ChangeTargets` asks its optional retarget once both cards are remembered |
+| Sudden Substitution | Fails closed: a `SubAbility$` with its own `ValidTgts$` and `NewController$ Player.IsRemembered` (`definedPlayers`) |
+| Chef's Kiss | Never cast: `TargetType$ Spell.numTargets EQ1` takes `targetChoiceFor`'s literal-`Spell` branch, which has no candidates; its chain also needs `RandomTarget$` |
 
 ### Tests
 

@@ -816,9 +816,9 @@ or Command-zone host whose `Condition$` holds (`continuousConditionMet`) and who
 or a `ValidPlayer$` `matchesPlayerSpec` does not recognize (`Player.EnchantedBy`), is skipped, never assumed to hold
 (GO-7).
 
-| Static                       | Where it bites                                                                                                                       |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `CantGainLife` (20 cards)    | `Game.gainLife` (`gainlifeeffect.go`): `GainLife`, lifelink, and `SetLife`/exchange gains                                            |
+| Static | Where it bites |
+| --- | --- |
+| `CantGainLife` (20 cards) | `Game.gainLife` (`gainlifeeffect.go`): `GainLife`, lifelink, and `SetLife`/exchange gains |
 | `CantDraw` (7), `DrawLimit$` | each iteration of `Game.DrawCards` (`turn.go`), so the draw step and `Draw` obey it; `Draw<N/You>` unless-costs ask `cantDrawAmount` |
 
 `DrawLimit$` defaults to 0 (no draws); `N` allows `N` draws a turn: the next draw is refused once `CardsDrawnThisTurn`

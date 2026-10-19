@@ -17,10 +17,10 @@ For ApiType effects use the `port-effect` skill instead. Rules: `docs/crucible/g
    Read inline only what it could not answer.
 2. **Port-log note first.** Decide where it goes:
 
-   | Unit                           | Note                                                                                                                          |
-   | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-   | Part of `internal/engine`      | New `##` section in the matching `docs/crucible/porting/port-log/game-state/<topic>.md`, plus an index row in `game-state.md` |
-   | New package or standalone unit | New `docs/crucible/porting/port-log/<unit>.md` in PORT-4 format                                                               |
+   | Unit | Note |
+   | --- | --- |
+   | Part of `internal/engine` | New `##` section in the matching `docs/crucible/porting/port-log/game-state/<topic>.md`, plus an index row in `game-state.md` |
+   | New package or standalone unit | New `docs/crucible/porting/port-log/<unit>.md` in PORT-4 format |
 
    Topic files: `state-based-actions`, `layers`, `turn-stack-combat`, `mana-and-casting`, `triggers`, `trigger-modes`,
    `replacement`, `activation`, `activation-costs`, `targeting-and-chaining`, `effects-*`. Content: what it does, real
@@ -37,7 +37,7 @@ For ApiType effects use the `port-effect` skill instead. Rules: `docs/crucible/g
    - New package -> row in `docs/crucible/architecture/module-map.md` linking its port-log note (`docgate`, PORT-4).
    - New non-stdlib import -> needs an ADR first (GO-14). Stop and ask.
 7. **Docs in the same commit** (DOC-12), in the compressed style (`guidelines/00-documentation-style.md`); run
-   `prettier --write` on touched `.md`.
+   `prettier --write` on touched `.md` (skips the Claude-only files, DOC-14).
 8. **Review and commit.** `rules-review` skill on the diff, fix, commit (hook runs `gates.sh full`).
 
 ## Stop and ask when

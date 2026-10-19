@@ -11,11 +11,11 @@ Forge has no layer value for it: `StaticAbilityLayer.SWITCHPT` is commented out 
 `Pump`/`PumpAll` `KW$ HIDDEN ...`. `Card.getNetPower`/`getNetToughness` swap the whole unswitched total (current value,
 temp boost, counters) when the keyword's amount is odd (`Card.java:4447-4458`). Two switches cancel.
 
-| Go                                          | Java                                                                       |
-| ------------------------------------------- | -------------------------------------------------------------------------- |
-| `pumpRecord.Switched`, `pumpKeywords`       | `PumpEffect.java:51`; the one `HIDDEN` token resolved, others still refuse |
-| `PT.AddSwitch`/`Switched` (parity)          | `getAmountOfKeyword(...) % 2`                                              |
-| `Card.Power`/`Toughness` swap after counter | `getNetPower`; `unswitchedPower`/`unswitchedToughness` are the inputs      |
+| Go | Java |
+| --- | --- |
+| `pumpRecord.Switched`, `pumpKeywords` | `PumpEffect.java:51`; the one `HIDDEN` token resolved, others still refuse |
+| `PT.AddSwitch`/`Switched` (parity) | `getAmountOfKeyword(...) % 2` |
+| `Card.Power`/`Toughness` swap after counter | `getNetPower`; `unswitchedPower`/`unswitchedToughness` are the inputs |
 
 Corpus: 30-odd `Pump`/`PumpAll` lines, all `HIDDEN` on the exact phrase; no `AddHiddenKeyword$` or `AddKeyword$` carries
 it. `PT` carries the count (not `hiddenKeywords`, which `applyContinuousRules` clears after the P/T layer). `Pump` with
@@ -50,8 +50,8 @@ swapped).
 
 ## Not ported
 
-| Gap                | Why                                                                                                                              |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| Layer 1 ordering   | `StaticAbility.generateLayer` never returns `COPY`: no static ever runs in Layer 1, so there is nothing to order                 |
+| Gap | Why |
+| --- | --- |
+| Layer 1 ordering | `StaticAbility.generateLayer` never returns `COPY`: no static ever runs in Layer 1, so there is nothing to order |
 | Layer 3 dependency | Only `GainTextOf$` (self-only) and `AddNames$` resolve; no pair of real lines can depend on each other, so it cannot be observed |
-| 7c-before-7b order | Fixed, but no real corpus pair discriminates it; covered by `layer7c-applies-after-the-layer-7b-set` only for the 7b/7c order    |
+| 7c-before-7b order | Fixed, but no real corpus pair discriminates it; covered by `layer7c-applies-after-the-layer-7b-set` only for the 7b/7c order |

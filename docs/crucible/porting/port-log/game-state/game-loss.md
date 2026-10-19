@@ -13,13 +13,13 @@ the `Layer$ CantHappen` shape (about 40 corpus lines: Platinum Angel, Abyssal Pe
 Soul Echo, Transcendence). The host must be in an `ActiveZones$` zone of Battlefield or Command, and a line naming a
 param outside the allow-list is skipped (GO-7).
 
-| Caller                                                | Reason                                      |
-| ----------------------------------------------------- | ------------------------------------------- |
-| state-based action, attempted draw from empty library | `Milled` (704.5b)                           |
-| state-based action, life 0 or less                    | `LifeReachedZero` (704.5a)                  |
-| state-based action, ten poison counters               | `Poisoned` (704.5c)                         |
-| `LosesGame` effect                                    | `SpellEffect`                               |
-| `WinsGame` effect, SBA winner check                   | `cantWin` (`altWinBySpellEffect`, `hasWon`) |
+| Caller | Reason |
+| --- | --- |
+| state-based action, attempted draw from empty library | `Milled` (704.5b) |
+| state-based action, life 0 or less | `LifeReachedZero` (704.5a) |
+| state-based action, ten poison counters | `Poisoned` (704.5c) |
+| `LosesGame` effect | `SpellEffect` |
+| `WinsGame` effect, SBA winner check | `cantWin` (`altWinBySpellEffect`, `hasWon`) |
 
 The SBA tries the three conditions in `checkLoseCondition`'s order and stops at the first that takes effect. The last
 player left standing still wins when a permanent says they can't win: `checkGameOverCondition` counts players with no

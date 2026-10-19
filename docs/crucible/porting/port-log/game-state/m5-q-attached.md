@@ -12,13 +12,13 @@ Follows [`m5-control-2.md`](m5-control-2.md) and [`m5-replacement-3.md`](m5-repl
 `Event$ Attached` replacements (`Card.java:3949-3953`). `Game.attachTo` (card host) and the new `Game.attachToPlayer`
 (an "Enchant player" Aura, `castspell.go`) call it; the fixture loader's `Game.Attach` does not.
 
-| Param                     | Java                                      | Go                                                                                      |
-| ------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------- |
-| `ValidSource$`            | attachment, host card as source           | `triggerCardMatches`                                                                    |
-| `ValidTarget$`            | card or player, host card as source       | `attachTargetMatches`: `Matches` for a card, `matchesPlayerSpec` for a player           |
+| Param | Java | Go |
+| --- | --- | --- |
+| `ValidSource$` | attachment, host card as source | `triggerCardMatches` |
+| `ValidTarget$` | card or player, host card as source | `attachTargetMatches`: `Matches` for a card, `matchesPlayerSpec` for a player |
 | `TargetRelativeToSource$` | target, the attachment as the source card | `attachTargetRelative`: same, with `Game.relativeAmounts` set to the trigger host SVars |
-| triggering `Source`       | `AbilityKey.AttachSource`                 | `triggeredObjects.source`, so `LoseControl$ UntilSourceUnattached` registers            |
-| triggering `Target`       | `AbilityKey.AttachTarget`                 | `triggeredObjects.target`; `Defined$ TriggeredTarget` / `TriggeredTargetLKICopy`        |
+| triggering `Source` | `AbilityKey.AttachSource` | `triggeredObjects.source`, so `LoseControl$ UntilSourceUnattached` registers |
+| triggering `Target` | `AbilityKey.AttachTarget` | `triggeredObjects.target`; `Defined$ TriggeredTarget` / `TriggeredTargetLKICopy` |
 
 `TargetRelativeToSource$ ...cmcLEX` (Eriette, the Beguiler) is `AbilityUtils.calculateAmount(source, "X", trigger)`: the
 SVar is read off the trigger (Eriette: `Count$CardManaCost`), the amount off the source card (the Aura).
@@ -28,14 +28,14 @@ Corpus: Siona, Enormous Energy Blade and Eriette resolve. Assimilation Aegis' `C
 and `CloneTarget$ TriggeredTargetLKICopy` is not ported (Layer 1 duration), and Dinosaur Headdress' `Static$ True`
 Attached trigger needs Craft.
 
-| Scenario                                                                    | Proves                                                            |
-| --------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `attached-enormous-energy-blade-taps-the-equipped-creature`                 | equip fires it, `TriggeredTargetLKICopy` is the host              |
-| `attached-siona-makes-a-token-when-an-aura-attaches-to-your-creature`       | Aura resolution attaches and fires it                             |
-| `attached-siona-ignores-an-aura-on-an-opposing-creature`                    | `ValidTarget$ Creature.YouCtrl` fails                             |
-| `attached-siona-ignores-an-aura-attached-to-a-player`                       | player host fires it, a card spec does not match                  |
+| Scenario | Proves |
+| --- | --- |
+| `attached-enormous-energy-blade-taps-the-equipped-creature` | equip fires it, `TriggeredTargetLKICopy` is the host |
+| `attached-siona-makes-a-token-when-an-aura-attaches-to-your-creature` | Aura resolution attaches and fires it |
+| `attached-siona-ignores-an-aura-on-an-opposing-creature` | `ValidTarget$ Creature.YouCtrl` fails |
+| `attached-siona-ignores-an-aura-attached-to-a-player` | player host fires it, a card spec does not match |
 | `attached-eriette-the-beguiler-steals-a-permanent-no-pricier-than-the-aura` | `cmcLEX` with X = the Aura's mana value, control until unattached |
-| `attached-eriette-the-beguiler-leaves-a-pricier-permanent-alone`            | `cmcLEX` fails                                                    |
+| `attached-eriette-the-beguiler-leaves-a-pricier-permanent-alone` | `cmcLEX` fails |
 
 ## Event$ Attached: Psychic Paper
 
@@ -56,12 +56,12 @@ paying life. The life leaves before the ability resolves, X is the ability's `xM
 outside the range is an error and takes no life. `entryUpdatedShape` accepts the `StoreSVar` shape of
 `ReplacementResult$ Updated`.
 
-| Scenario                                                                    | Proves                                         |
-| --------------------------------------------------------------------------- | ---------------------------------------------- |
-| `replacement-moved-minion-of-the-wastes-pays-five-life-and-is-a-five-five`  | 20 to 15 life, the CDA 5/5 survives            |
-| `replacement-moved-minion-of-the-wastes-paying-no-life-dies-as-a-zero-zero` | X 0: 0/0 dies                                  |
-| `replacement-moved-nameless-race-pays-up-to-the-white-permanents-limit`     | `XMax$ Limit` = 2 (permanent + graveyard card) |
-| `replacement-moved-nameless-race-refuses-paying-over-the-limit`             | 3 against limit 1 is an error, no life paid    |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-moved-minion-of-the-wastes-pays-five-life-and-is-a-five-five` | 20 to 15 life, the CDA 5/5 survives |
+| `replacement-moved-minion-of-the-wastes-paying-no-life-dies-as-a-zero-zero` | X 0: 0/0 dies |
+| `replacement-moved-nameless-race-pays-up-to-the-white-permanents-limit` | `XMax$ Limit` = 2 (permanent + graveyard card) |
+| `replacement-moved-nameless-race-refuses-paying-over-the-limit` | 3 against limit 1 is an error, no life paid |
 
 Phyrexian Processor shares the shape; its token ability reads `LifePaidOnETB` and has no scenario of its own. Module
 test: `replacementpaylife_test.go` (range, `XMax$`, a `Cost$` of another shape).
@@ -77,12 +77,12 @@ test: `replacementpaylife_test.go` (range, `XMax$`, a `Cost$` of another shape).
 
 ## Fixture verbs and helpers
 
-| Change                                                              | Where                                               |
-| ------------------------------------------------------------------- | --------------------------------------------------- |
-| `queue optionname <text>`, `queue numberchoice <n>`                 | `internal/fixture/actions.go`                       |
+| Change | Where |
+| --- | --- |
+| `queue optionname <text>`, `queue numberchoice <n>` | `internal/fixture/actions.go` |
 | `ScriptedController.option` is `[]optionAnswer`; `QueueOptionNamed` | `control.go` (`QueueOption(i)` keeps its signature) |
-| `Game.relativeAmounts`, `triggeredObjects.target`                   | `game.go`, `ability.go`                             |
-| `Game.attachToPlayer`                                               | `replacementfaces.go`                               |
+| `Game.relativeAmounts`, `triggeredObjects.target` | `game.go`, `ability.go` |
+| `Game.attachToPlayer` | `replacementfaces.go` |
 
 ## Not landed
 

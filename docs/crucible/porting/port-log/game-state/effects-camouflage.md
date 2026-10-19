@@ -11,15 +11,15 @@ written there.
 
 ## DeclareBlocker replacement and steady-state repair
 
-| Piece                                               | Where                                                          | Java                                                              |
-| --------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Hook before the controller call                     | `block.go` `DeclareCombatBlockers`                             | `PhaseHandler.java:664-672`                                       |
-| `Event$ DeclareBlocker` dispatch                    | `replacement.go` `declareBlockersReplaced`                     | `ReplaceDeclareBlocker.canReplace` (`ValidPlayer$` vs `Affected`) |
-| `canBlock(p, combat)` guard                         | `blockvalidation.go` `canBlockPlayer`                          | `CombatUtil.java:874-889`                                         |
-| `ReplaceWith$` DB$ dispatch, error surfaced         | `replacement.go` `runReplaceWithEffect`                        | `ReplacementHandler` running the `ReplaceWith$` ability           |
-| Replacing objects `Player`/`DefendingPlayer`        | `replaceeffect.go` `replacementEvent.player`/`defendingPlayer` | `ReplaceDeclareBlocker.setReplacingObjects`                       |
-| `Defined$ ReplacedPlayer`/`ReplacedDefendingPlayer` | `defined.go` `definedPlayers`, `ability.go` `abilityRefs`      | `AbilityUtils.java:1097-1103`                                     |
-| Steady-state repair                                 | `block.go` `repairReplacedBlocks`                              | `PhaseHandler.java:693-723`                                       |
+| Piece | Where | Java |
+| --- | --- | --- |
+| Hook before the controller call | `block.go` `DeclareCombatBlockers` | `PhaseHandler.java:664-672` |
+| `Event$ DeclareBlocker` dispatch | `replacement.go` `declareBlockersReplaced` | `ReplaceDeclareBlocker.canReplace` (`ValidPlayer$` vs `Affected`) |
+| `canBlock(p, combat)` guard | `blockvalidation.go` `canBlockPlayer` | `CombatUtil.java:874-889` |
+| `ReplaceWith$` DB$ dispatch, error surfaced | `replacement.go` `runReplaceWithEffect` | `ReplacementHandler` running the `ReplaceWith$` ability |
+| Replacing objects `Player`/`DefendingPlayer` | `replaceeffect.go` `replacementEvent.player`/`defendingPlayer` | `ReplaceDeclareBlocker.setReplacingObjects` |
+| `Defined$ ReplacedPlayer`/`ReplacedDefendingPlayer` | `defined.go` `definedPlayers`, `ability.go` `abilityRefs` | `AbilityUtils.java:1097-1103` |
+| Steady-state repair | `block.go` `repairReplacedBlocks` | `PhaseHandler.java:693-723` |
 
 **Hook.** Per defender, after the "no untapped creature" skip and before `controller.DeclareCombatBlockers`. No matching
 line: the normal declaration runs unchanged. A matching line: the controller is never asked; the `ReplaceWith$` ability
@@ -69,19 +69,19 @@ SVar:DBCamouflage:DB$ Camouflage | Defined$ ReplacedPlayer | Defender$ ReplacedD
 
 **Resolution order** (`camouflageeffect.go`):
 
-| Step                 | Crucible                                                                                    | Java                                             |
-| -------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| Context              | `error` unless resolving as a `DeclareBlocker` replacement                                  | Java adds to the live `Combat`                   |
-| Declarer             | `Defined$`, default `You` (the caster), first player; none → `error`                        | `getDefinedPlayersOrTargeted(sa).get(0)`         |
-| Defender             | `Defender$`, default `You`, first player; none → `error`                                    | `getDefinedPlayers(host, "Defender", sa)`        |
-| Pool                 | Defender's creatures; any `canBlockAtAll` rejects → `error` before any pile (Forge bug)     | `:76-82`, throws (below)                         |
-| Piles                | One `ChooseCardsForEffect` per attacker in combat, 0..pool; chosen leave the pool           | `:85-101`                                        |
-| Empty pool           | Remaining piles empty, not asked                                                            | Asked with an empty list                         |
-| Shuffle              | Copy of `combat.Attackers`, `g.rand.Shuffle` (= `Collections.shuffle`)                      | `CardLists.shuffle` (`CardLists.java:164-165`)   |
-| Pile filter          | `canBlockCombat` against the combat so far (lure, max blockers, `CantBlockBy`)              | `CombatUtil.canBlock(attacker, blocker, combat)` |
-| Min (Menace, `Min$`) | Pile below it blocks nothing                                                                | `:35-38`                                         |
-| Max (`Max$`)         | Pile above it: declarer picks exactly 1 (`ChooseCardsForEffect` 1..1), whatever the maximum | `:40-46`                                         |
-| Otherwise            | Every creature in the pile blocks                                                           | `:49-51`                                         |
+| Step | Crucible | Java |
+| --- | --- | --- |
+| Context | `error` unless resolving as a `DeclareBlocker` replacement | Java adds to the live `Combat` |
+| Declarer | `Defined$`, default `You` (the caster), first player; none → `error` | `getDefinedPlayersOrTargeted(sa).get(0)` |
+| Defender | `Defender$`, default `You`, first player; none → `error` | `getDefinedPlayers(host, "Defender", sa)` |
+| Pool | Defender's creatures; any `canBlockAtAll` rejects → `error` before any pile (Forge bug) | `:76-82`, throws (below) |
+| Piles | One `ChooseCardsForEffect` per attacker in combat, 0..pool; chosen leave the pool | `:85-101` |
+| Empty pool | Remaining piles empty, not asked | Asked with an empty list |
+| Shuffle | Copy of `combat.Attackers`, `g.rand.Shuffle` (= `Collections.shuffle`) | `CardLists.shuffle` (`CardLists.java:164-165`) |
+| Pile filter | `canBlockCombat` against the combat so far (lure, max blockers, `CantBlockBy`) | `CombatUtil.canBlock(attacker, blocker, combat)` |
+| Min (Menace, `Min$`) | Pile below it blocks nothing | `:35-38` |
+| Max (`Max$`) | Pile above it: declarer picks exactly 1 (`ChooseCardsForEffect` 1..1), whatever the maximum | `:40-46` |
+| Otherwise | Every creature in the pile blocks | `:49-51` |
 
 Piles are chosen for attacker index `i` before the shuffle, then pile `i` goes to shuffled attacker `i`. Every
 controller answer is checked (`checkChoice`); a bad one is an `error`, nothing applied.
@@ -118,20 +118,20 @@ blockers.
 
 **Tests** (`camouflageblocks_test.go`, `package engine_test`):
 
-| Test                                                   | Proves                                                                                     |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `TestCamouflageReplacesTheBlockerDeclaration`          | Controller never asked to declare; defender decides one pile of its creatures; pile blocks |
-| `TestCamouflageDeclarerAndDefenderAreDistinctValues`   | `Defined$` absent: caster decides, pool still the defender's                               |
-| `TestCamouflagePilesAreAssignedToAttackersAtRandom`    | One pile per attacker, chosen creature leaves pool, whole pile to one attacker, replayable |
-| `TestCamouflageMenaceNeedsAPileOfTwo`                  | Min branch: Menace pile of 1 blocks nothing, pile of 2 blocks                              |
-| `TestCamouflageMaxBlockerHasTheDeclarerPickOne`        | Max branch: `Max$ 1` static, pile of 2, declarer picks exactly 1                           |
-| `TestCamouflageRepairsInsteadOfValidating`             | Every steady-state rule drops silently, no `IllegalDeclarationError`; lure goes unchecked  |
-| `TestCamouflageFailsClosedOnACreatureThatCannotBlock`  | Tapped defender creature: `error`, nothing offered or applied                              |
-| `TestCamouflageSkipsADefenderThatCannotBlock`          | `canBlock(p, combat)` false (flier): neither piles nor normal declaration                  |
-| `TestCamouflageDoesNotReplaceItsCastersOwnDeclaration` | `ValidPlayer$ Opponent`: caster defending declares normally                                |
-| `TestCamouflageRejectsWhatItCannotResolve`             | Bad answer, empty/unknown `Defined$`/`Defender$`, unknown line param, chained, no context  |
-| `TestCamouflageRejectsABadMaxBlockerPick`              | Max-branch pick outside the pile: `error`                                                  |
-| `TestCamouflageSurfacesAnUnresolvableBlockerLimit`     | Unresolvable `Max$`: `error`, no guessed limit                                             |
+| Test | Proves |
+| --- | --- |
+| `TestCamouflageReplacesTheBlockerDeclaration` | Controller never asked to declare; defender decides one pile of its creatures; pile blocks |
+| `TestCamouflageDeclarerAndDefenderAreDistinctValues` | `Defined$` absent: caster decides, pool still the defender's |
+| `TestCamouflagePilesAreAssignedToAttackersAtRandom` | One pile per attacker, chosen creature leaves pool, whole pile to one attacker, replayable |
+| `TestCamouflageMenaceNeedsAPileOfTwo` | Min branch: Menace pile of 1 blocks nothing, pile of 2 blocks |
+| `TestCamouflageMaxBlockerHasTheDeclarerPickOne` | Max branch: `Max$ 1` static, pile of 2, declarer picks exactly 1 |
+| `TestCamouflageRepairsInsteadOfValidating` | Every steady-state rule drops silently, no `IllegalDeclarationError`; lure goes unchecked |
+| `TestCamouflageFailsClosedOnACreatureThatCannotBlock` | Tapped defender creature: `error`, nothing offered or applied |
+| `TestCamouflageSkipsADefenderThatCannotBlock` | `canBlock(p, combat)` false (flier): neither piles nor normal declaration |
+| `TestCamouflageDoesNotReplaceItsCastersOwnDeclaration` | `ValidPlayer$ Opponent`: caster defending declares normally |
+| `TestCamouflageRejectsWhatItCannotResolve` | Bad answer, empty/unknown `Defined$`/`Defender$`, unknown line param, chained, no context |
+| `TestCamouflageRejectsABadMaxBlockerPick` | Max-branch pick outside the pile: `error` |
+| `TestCamouflageSurfacesAnUnresolvableBlockerLimit` | Unresolvable `Max$`: `error`, no guessed limit |
 
 `camouflage_internal_test.go` (`package engine`, TEST-2): `ReplacedPlayer` and `ReplacedDefendingPlayer` always name the
 same player through the public API (no declares-blockers redirect), so a swap of the two reads would pass every test

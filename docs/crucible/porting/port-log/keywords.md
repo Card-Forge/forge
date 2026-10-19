@@ -24,12 +24,12 @@ each line and compares `.Name`, so a keyword written with arguments (`"Ward:2"`)
 
 `Keyword.getKeywordDetails` has three cases, and the middle one is the reason:
 
-| Line                      | Case                                               |
-| ------------------------- | -------------------------------------------------- |
-| `Ward:2`                  | A `:` splits head from details at the first colon  |
-| `First strike`            | No colon, so the **whole line** is tried as a name |
-| `Bands with other Dragon` | The whole line fails, so the first word is tried   |
-| `Flying`                  | No colon, no space: the line is the name           |
+| Line | Case |
+| --- | --- |
+| `Ward:2` | A `:` splits head from details at the first colon |
+| `First strike` | No colon, so the **whole line** is tried as a name |
+| `Bands with other Dragon` | The whole line fails, so the first word is tried |
+| `Flying` | No colon, no space: the line is the name |
 
 Cutting at the first colon gets the first and last right and the middle two wrong. `smartValueOf` is an exact
 case-insensitive match on the display name, so the space case is not a prefix rule.
@@ -39,11 +39,11 @@ and leaving it in would make `Ward:2:Flavor Protective Ward` an amount keyword w
 
 ## What the corpus actually writes
 
-| What                                     | Distinct |   Uses |
-| ---------------------------------------- | -------: | -----: |
-| Keywords the enum defines                |      199 | 18,062 |
-| Pseudo-keywords the card factory handles |       11 |  1,297 |
-| Rules text on a `K:` line                |       36 |    144 |
+| What | Distinct | Uses |
+| --- | ---: | ---: |
+| Keywords the enum defines | 199 | 18,062 |
+| Pseudo-keywords the card factory handles | 11 | 1,297 |
+| Rules text on a `K:` line | 36 | 144 |
 
 The enum has 203 constants, so four are defined and unused.
 
@@ -62,34 +62,34 @@ it to `UNDEFINED` and falls back to a simple keyword holding the original string
 The enum names a `KeywordInstance` subclass per keyword, and that class is the contract: `Ward:2` and `Hexproof:White`
 are written identically and mean different things. The table records it.
 
-| Shape           | Keywords | Example                        |
-| --------------- | -------: | ------------------------------ |
-| `Simple`        |       88 | `Flying`                       |
-| `Cost`          |       54 | `Dash:4 R W`                   |
-| `Amount`        |       27 | `Absorb:1`                     |
-| `Special`       |       23 | `Ward`, `Protection`, `Kicker` |
-| `Type`          |        5 | `Champion:Elf`                 |
-| `CostAndAmount` |        3 | `Awaken:3:4 U`                 |
-| `CostAndType`   |        2 |                                |
+| Shape | Keywords | Example |
+| --- | ---: | --- |
+| `Simple` | 88 | `Flying` |
+| `Cost` | 54 | `Dash:4 R W` |
+| `Amount` | 27 | `Absorb:1` |
+| `Special` | 23 | `Ward`, `Protection`, `Kicker` |
+| `Type` | 5 | `Champion:Elf` |
+| `CostAndAmount` | 3 | `Awaken:3:4 U` |
+| `CostAndType` | 2 | |
 
 `Special` is the seventeen classes with a parser of their own plus the six that share one; their details stay text until
 the keyword is expanded.
 
 ## Deviations from Java
 
-| Java                                                          | Go                                                                                      |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `getInstance` reflects a class per keyword and parses eagerly | A table row with a `Kind`. No reflection in the engine (GO-4), and the shape is data    |
-| An unresolved head silently becomes a `SimpleKeyword`         | `Entry` is nil and `Kind()` is `Unknown`, so a caller can tell text from vocabulary     |
-| `KeywordWithAmount.parse` throws on a non-numeric amount      | The corpus test checks it instead: every `Amount` keyword's argument is a number or `X` |
+| Java | Go |
+| --- | --- |
+| `getInstance` reflects a class per keyword and parses eagerly | A table row with a `Kind`. No reflection in the engine (GO-4), and the shape is data |
+| An unresolved head silently becomes a `SimpleKeyword` | `Entry` is nil and `Kind()` is `Unknown`, so a caller can tell text from vocabulary |
+| `KeywordWithAmount.parse` throws on a non-numeric amount | The corpus test checks it instead: every `Amount` keyword's argument is a number or `X` |
 
 ## Not ported yet
 
-| Java                                                              | When                                 |
-| ----------------------------------------------------------------- | ------------------------------------ |
+| Java | When |
+| --- | --- |
 | `CardFactoryUtil.setupKeywordedAbilities` — expansion into traits | M3, after the effect registry exists |
-| The 23 bespoke `KeywordInstance` parsers                          | M5, with the keywords they implement |
-| Reminder text formatting                                          | Never. Display only (PORT-6)         |
+| The 23 bespoke `KeywordInstance` parsers | M5, with the keywords they implement |
+| Reminder text formatting | Never. Display only (PORT-6) |
 
 ## Expansion (ADR-0038)
 
@@ -101,39 +101,39 @@ keyword line (`KWProwess<n>`, so two keywords never collide) and tags each synth
 the line it came from. `ok == false` leaves the keyword inert: no template, or details this port does not translate
 (GO-7).
 
-| Keyword           | Lines (corpus) | Expands to                                                                                                                                                                                                                                                  |
-| ----------------- | -------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Equip             |            650 | `AB$ Attach \| Cost$ <cost> \| ValidTgts$ Creature.YouCtrl \| SorcerySpeed$ True`                                                                                                                                                                           |
-| Cycling           |            306 | `AB$ Draw \| Cost$ <cost> Discard<1/CARDNAME> \| ActivationZone$ Hand`                                                                                                                                                                                      |
-| TypeCycling       |            106 | `AB$ ChangeZone \| Cost$ <cost> Discard<1/CARDNAME> \| ActivationZone$ Hand \| Origin$ Library \| Destination$ Hand \| ChangeType$ <type>`                                                                                                                  |
-| Crew              |            192 | `AB$ Animate \| Cost$ tapXType<Any/Creature.Other+withTotalPowerGEN> \| Defined$ Self \| Types$ Artifact,Creature`                                                                                                                                          |
-| Affinity          |             77 | `S:Mode$ ReduceCost \| ValidCard$ Card.Self \| Type$ Spell \| Amount$ KWAffinity<n> \| EffectZone$ All`, the amount `Count$Valid <type>.YouCtrl` in `Face.Amounts`                                                                                          |
-| Prowess           |            104 | `T:Mode$ SpellCast` (noncreature, yours) running `DB$ Pump +1/+1` on Self                                                                                                                                                                                   |
-| Exalted           |             35 | `T:Mode$ Attacks` (alone, a creature you control) pumping `TriggeredAttackerLKICopy` +1/+1                                                                                                                                                                  |
-| Annihilator       |             14 | `T:Mode$ Attacks` running `DB$ Sacrifice \| Defined$ TriggeredDefendingPlayer \| SacValid$ Permanent \| Amount$ N`                                                                                                                                          |
-| Bushido           |             37 | `T:Mode$ Blocks` and `T:Mode$ AttackerBlocked`, both pumping Self +N/+N                                                                                                                                                                                     |
-| Afterlife         |             11 | `T:Mode$ ChangesZone` (dies) making N `wb_1_1_spirit_flying` tokens                                                                                                                                                                                         |
-| Persist, Undying  |         24, 22 | `T:Mode$ ChangesZone` (dies with no -1/-1 resp. +1/+1 counter) returning `TriggeredNewCardLKICopy` with one                                                                                                                                                 |
-| etbCounter        |            477 | `R:Event$ Moved \| ValidCard$ Card.Self \| Destination$ Battlefield \| ReplaceWith$ KWEtbCounter<n>` running `DB$ PutCounter \| Defined$ Self \| ETB$ True`; extra params ride on the replacement                                                           |
-| Fabricate         |             16 | `T:Mode$ ChangesZone` (enters) running `DB$ Token \| TokenScript$ c_1_1_a_servo \| UnlessCost$ AddCounter<N/P1P1> \| UnlessPayer$ You`                                                                                                                      |
-| Extort            |             18 | `T:Mode$ SpellCast` (yours) running `AB$ LoseLife \| Cost$ WB \| Defined$ Player.Opponent`, then `DB$ GainLife \| LifeAmount$ AFLifeLost`                                                                                                                   |
-| Echo              |             52 | `T:Mode$ Phase` (your upkeep, `IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep`) running `DB$ Sacrifice \| Echo$ <cost>`                                                                                                                               |
-| Cumulative upkeep |             80 | `T:Mode$ Phase` (your upkeep) running `DB$ Sacrifice \| CumulativeUpkeep$ <cost>`                                                                                                                                                                           |
-| Renown            |             20 | `T:Mode$ DamageDone` (combat damage to a player, `IsPresent$ Card.Self+!IsRenowned`) running `DB$ PutCounter`; PutCounter then sets the creature renowned                                                                                                   |
-| Chapter           |            236 | one `T:Mode$ CounterAdded \| CounterType$ LORE \| CounterAmount$ EQ<i>` per chapter running that chapter's SVar                                                                                                                                             |
-| Bloodthirst       |             23 | `R:Event$ Moved` (enters, `Bloodthirst$ True`) running `DB$ PutCounter \| ETB$ True` for N; `Bloodthirst X` counts the damage (`Count$BloodthirstAmount`)                                                                                                   |
-| Modular           |             24 | enters with N +1/+1 counters (as `etbCounter`), and `T:Mode$ ChangesZone` (dies, `OptionalDecider$ You`) putting `TriggeredCard$CardCounters.P1P1` counters on target `Artifact.Creature`                                                                   |
-| Battle cry        |             13 | `T:Mode$ Attacks` (Self) running `DB$ PumpAll \| ValidCards$ Creature.attacking+Other \| NumAtt$ 1`                                                                                                                                                         |
-| Dethrone          |              9 | `T:Mode$ Attacks` with `Attacked$ Player.withMostLife` putting a +1/+1 counter on Self                                                                                                                                                                      |
-| Flanking          |             30 | `T:Mode$ AttackerBlockedByCreature` (`ValidBlocker$ Creature.withoutFlanking`) pumping `TriggeredBlockerLKICopy` -1/-1                                                                                                                                      |
-| Afflict           |             10 | `T:Mode$ AttackerBlocked` making `TriggeredDefendingPlayer` lose N life                                                                                                                                                                                     |
-| Soulshift         |             26 | `T:Mode$ ChangesZone` (dies, `OptionalDecider$ You`) returning target `Spirit.YouOwn+cmcLEN` from the graveyard to hand                                                                                                                                     |
-| Mentor            |             19 | `T:Mode$ Attacks` putting a +1/+1 counter on target `Creature.attacking+powerLTKWPower<n>`, the amount `Count$CardPower`                                                                                                                                    |
-| Training          |             11 | `T:Mode$ Attacks` with `IsPresent$ Creature.attacking+Other+powerGTKWPower<n>` putting a +1/+1 counter on Self                                                                                                                                              |
-| Evolve            |             23 | `T:Mode$ ChangesZone` (`Creature.YouCtrl+Other`, `Condition$ Evolve`) putting a +1/+1 counter on Self                                                                                                                                                       |
-| Cascade           |             43 | `T:Mode$ SpellCast` (`ValidCard$ Card.Self`, `TriggerZones$ Stack`) running `DB$ DigUntil` (nonland, `cmcLT` the spell's `Count$CardManaCost`), then `DB$ Play` (free, optional), `DB$ ChangeZoneAll` (the rest to the bottom, random order), `DB$ Cleanup` |
-| Storm             |             37 | `T:Mode$ SpellCast` (self, from the stack) running `DB$ CopySpellAbility \| Amount$ TriggerCount$CurrentStormCount/Minus.1 \| MayChooseTarget$ True`                                                                                                        |
-| Exploit           |             25 | `T:Mode$ ChangesZone` (enters) running `DB$ Sacrifice \| SacValid$ Creature \| Optional$ True`; Sacrifice fires `Mode$ Exploited` (`exploit.go`) for a keyword-tagged ability                                                                               |
+| Keyword | Lines (corpus) | Expands to |
+| --- | ---: | --- |
+| Equip | 650 | `AB$ Attach \| Cost$ <cost> \| ValidTgts$ Creature.YouCtrl \| SorcerySpeed$ True` |
+| Cycling | 306 | `AB$ Draw \| Cost$ <cost> Discard<1/CARDNAME> \| ActivationZone$ Hand` |
+| TypeCycling | 106 | `AB$ ChangeZone \| Cost$ <cost> Discard<1/CARDNAME> \| ActivationZone$ Hand \| Origin$ Library \| Destination$ Hand \| ChangeType$ <type>` |
+| Crew | 192 | `AB$ Animate \| Cost$ tapXType<Any/Creature.Other+withTotalPowerGEN> \| Defined$ Self \| Types$ Artifact,Creature` |
+| Affinity | 77 | `S:Mode$ ReduceCost \| ValidCard$ Card.Self \| Type$ Spell \| Amount$ KWAffinity<n> \| EffectZone$ All`, the amount `Count$Valid <type>.YouCtrl` in `Face.Amounts` |
+| Prowess | 104 | `T:Mode$ SpellCast` (noncreature, yours) running `DB$ Pump +1/+1` on Self |
+| Exalted | 35 | `T:Mode$ Attacks` (alone, a creature you control) pumping `TriggeredAttackerLKICopy` +1/+1 |
+| Annihilator | 14 | `T:Mode$ Attacks` running `DB$ Sacrifice \| Defined$ TriggeredDefendingPlayer \| SacValid$ Permanent \| Amount$ N` |
+| Bushido | 37 | `T:Mode$ Blocks` and `T:Mode$ AttackerBlocked`, both pumping Self +N/+N |
+| Afterlife | 11 | `T:Mode$ ChangesZone` (dies) making N `wb_1_1_spirit_flying` tokens |
+| Persist, Undying | 24, 22 | `T:Mode$ ChangesZone` (dies with no -1/-1 resp. +1/+1 counter) returning `TriggeredNewCardLKICopy` with one |
+| etbCounter | 477 | `R:Event$ Moved \| ValidCard$ Card.Self \| Destination$ Battlefield \| ReplaceWith$ KWEtbCounter<n>` running `DB$ PutCounter \| Defined$ Self \| ETB$ True`; extra params ride on the replacement |
+| Fabricate | 16 | `T:Mode$ ChangesZone` (enters) running `DB$ Token \| TokenScript$ c_1_1_a_servo \| UnlessCost$ AddCounter<N/P1P1> \| UnlessPayer$ You` |
+| Extort | 18 | `T:Mode$ SpellCast` (yours) running `AB$ LoseLife \| Cost$ WB \| Defined$ Player.Opponent`, then `DB$ GainLife \| LifeAmount$ AFLifeLost` |
+| Echo | 52 | `T:Mode$ Phase` (your upkeep, `IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep`) running `DB$ Sacrifice \| Echo$ <cost>` |
+| Cumulative upkeep | 80 | `T:Mode$ Phase` (your upkeep) running `DB$ Sacrifice \| CumulativeUpkeep$ <cost>` |
+| Renown | 20 | `T:Mode$ DamageDone` (combat damage to a player, `IsPresent$ Card.Self+!IsRenowned`) running `DB$ PutCounter`; PutCounter then sets the creature renowned |
+| Chapter | 236 | one `T:Mode$ CounterAdded \| CounterType$ LORE \| CounterAmount$ EQ<i>` per chapter running that chapter's SVar |
+| Bloodthirst | 23 | `R:Event$ Moved` (enters, `Bloodthirst$ True`) running `DB$ PutCounter \| ETB$ True` for N; `Bloodthirst X` counts the damage (`Count$BloodthirstAmount`) |
+| Modular | 24 | enters with N +1/+1 counters (as `etbCounter`), and `T:Mode$ ChangesZone` (dies, `OptionalDecider$ You`) putting `TriggeredCard$CardCounters.P1P1` counters on target `Artifact.Creature` |
+| Battle cry | 13 | `T:Mode$ Attacks` (Self) running `DB$ PumpAll \| ValidCards$ Creature.attacking+Other \| NumAtt$ 1` |
+| Dethrone | 9 | `T:Mode$ Attacks` with `Attacked$ Player.withMostLife` putting a +1/+1 counter on Self |
+| Flanking | 30 | `T:Mode$ AttackerBlockedByCreature` (`ValidBlocker$ Creature.withoutFlanking`) pumping `TriggeredBlockerLKICopy` -1/-1 |
+| Afflict | 10 | `T:Mode$ AttackerBlocked` making `TriggeredDefendingPlayer` lose N life |
+| Soulshift | 26 | `T:Mode$ ChangesZone` (dies, `OptionalDecider$ You`) returning target `Spirit.YouOwn+cmcLEN` from the graveyard to hand |
+| Mentor | 19 | `T:Mode$ Attacks` putting a +1/+1 counter on target `Creature.attacking+powerLTKWPower<n>`, the amount `Count$CardPower` |
+| Training | 11 | `T:Mode$ Attacks` with `IsPresent$ Creature.attacking+Other+powerGTKWPower<n>` putting a +1/+1 counter on Self |
+| Evolve | 23 | `T:Mode$ ChangesZone` (`Creature.YouCtrl+Other`, `Condition$ Evolve`) putting a +1/+1 counter on Self |
+| Cascade | 43 | `T:Mode$ SpellCast` (`ValidCard$ Card.Self`, `TriggerZones$ Stack`) running `DB$ DigUntil` (nonland, `cmcLT` the spell's `Count$CardManaCost`), then `DB$ Play` (free, optional), `DB$ ChangeZoneAll` (the rest to the bottom, random order), `DB$ Cleanup` |
+| Storm | 37 | `T:Mode$ SpellCast` (self, from the stack) running `DB$ CopySpellAbility \| Amount$ TriggerCount$CurrentStormCount/Minus.1 \| MayChooseTarget$ True` |
+| Exploit | 25 | `T:Mode$ ChangesZone` (enters) running `DB$ Sacrifice \| SacValid$ Creature \| Optional$ True`; Sacrifice fires `Mode$ Exploited` (`exploit.go`) for a keyword-tagged ability |
 
 Equip's `ReduceCost$` and `AlternateCost$` extras are not read by any ability this port resolves, so those Equip lines
 (about 25) stay inert; an `ActivationLimit$` extra is carried as written. The engine side: `attachEffect` resolves an

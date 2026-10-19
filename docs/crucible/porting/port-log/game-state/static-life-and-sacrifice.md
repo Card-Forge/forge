@@ -6,11 +6,11 @@
 
 `StaticAbilityCantSacrifice` and `StaticAbilityCantGainLosePayLife` are read where Java reads them:
 
-| Reader                                              | Stops                                                                                                                            | Java                     |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `cantSacrifice(card, effect, cause)`                | a sacrifice effect's candidates and the card itself; a Sac cost's picks and `Sac<1/CARDNAME>`; `sacrificeCardsFor` as a backstop | `Card.canBeSacrificedBy` |
-| `cantLoseLife(pid)` (CantLoseLife, CantChangeLife)  | LoseLife effects, damage's life loss, `RLoseLife` replacements                                                                   | `Player.canLoseLife`     |
-| `cantPayLife(pid, effect, cause)` (+ the two above) | PayLife activation costs, unless costs, a Phyrexian mana payment                                                                 | `Player.canPayLife`      |
+| Reader | Stops | Java |
+| --- | --- | --- |
+| `cantSacrifice(card, effect, cause)` | a sacrifice effect's candidates and the card itself; a Sac cost's picks and `Sac<1/CARDNAME>`; `sacrificeCardsFor` as a backstop | `Card.canBeSacrificedBy` |
+| `cantLoseLife(pid)` (CantLoseLife, CantChangeLife) | LoseLife effects, damage's life loss, `RLoseLife` replacements | `Player.canLoseLife` |
+| `cantPayLife(pid, effect, cause)` (+ the two above) | PayLife activation costs, unless costs, a Phyrexian mana payment | `Player.canPayLife` |
 
 `ForCost$ True` limits a line to costs, `False` to effects (`effect` says which). `ValidCause$` is matched by
 `causeMatches` against the kind of ability (`Spell`, `Activated`, `Triggered`, `SpellAbility`, with `ManaAbility` and

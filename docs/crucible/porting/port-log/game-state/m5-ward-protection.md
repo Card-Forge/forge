@@ -6,26 +6,26 @@
 `Return`, `Reveal`, `DamageYou`, `PayEnergy`, `Draw<N/You>` and `AddCounter<N/Type>` on the source (those already
 landed; the old "Not ported yet" counts for `Reveal` (22) and `AddCounter` (4) were stale).
 
-| Part                                   | Payment                                                                                                                 |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `ExileFromGrave<N/Type>`               | payer picks N matching graveyard cards (`chosenUnlessCards`), `exileFromGraveyard`                                      |
-| `tapXType<N/Type>`                     | `tapTypeCandidates`, `ChoosePermanentsToTap`, `tapChosenPermanents`                                                     |
+| Part | Payment |
+| --- | --- |
+| `ExileFromGrave<N/Type>` | payer picks N matching graveyard cards (`chosenUnlessCards`), `exileFromGraveyard` |
+| `tapXType<N/Type>` | `tapTypeCandidates`, `ChoosePermanentsToTap`, `tapChosenPermanents` |
 | `AddCounter<N/Type/Spec>`, `Blight<N>` | payer picks a card matching `Spec` that may receive the counters; `Blight` is M1M1 on `Creature.YouCtrl` (`CostBlight`) |
-| `AddCounterYou<N/Type>`                | the payer gets the counters through `countersReplaced`                                                                  |
-| `CollectEvidence<N>`                   | payer exiles graveyard cards of total mana value at least N (`CostCollectEvidence`)                                     |
-| `Waterbend<N>`                         | N generic mana; the payer may tap untapped artifacts and creatures for {1} each (`waterbendReduce`)                     |
-| `Draw<N/Player...>`                    | every player the spec names that may draw (`unlessDrawers`; `Player.targetedBy` names every player)                     |
+| `AddCounterYou<N/Type>` | the payer gets the counters through `countersReplaced` |
+| `CollectEvidence<N>` | payer exiles graveyard cards of total mana value at least N (`CostCollectEvidence`) |
+| `Waterbend<N>` | N generic mana; the payer may tap untapped artifacts and creatures for {1} each (`waterbendReduce`) |
+| `Draw<N/Player...>` | every player the spec names that may draw (`unlessDrawers`; `Player.targetedBy` names every player) |
 
 An illegal pick (not a subset, wrong count) falls back to the first options: a payer cannot back out of a payment
 already half made; payability was checked first.
 
 `expandUnlessCost` evaluates SVars before parsing (`AbilityUtils.calculateUnlessCost`, `PlaySpellAbility.payManaCost`):
 
-| Text                                     | Meaning                                      |
-| ---------------------------------------- | -------------------------------------------- |
+| Text | Meaning |
+| --- | --- |
 | a bare SVar name other than X (`Y`, `Z`) | that much generic mana, or of `UnlessColor$` |
-| mana symbol `X`                          | generic mana, the amount of SVar `X`         |
-| `Name<X/...>` (`PayLife`, `PayEnergy`)   | the SVar's amount as the part's count        |
+| mana symbol `X` | generic mana, the amount of SVar `X` |
+| `Name<X/...>` (`PayLife`, `PayEnergy`) | the SVar's amount as the part's count |
 
 An SVar this port cannot evaluate (`Targeted$CardManaCost`, `TriggeredCard$CardManaCost`, `Count$ChosenNumber`) is an
 error at resolution (GO-7). `Ward:X`-style Ward lines evaluate X against the warded card's own SVars when Ward's trigger

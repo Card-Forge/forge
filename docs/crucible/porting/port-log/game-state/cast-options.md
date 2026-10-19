@@ -12,11 +12,11 @@ Java offers each `MayPlay$` grant as its own `SpellAbility` and the player picks
 `anyType`). A grant that only adds flash merges into the option it matches; a `MayPlayDontGrantZonePermissions$` grant
 is an option only when the card is castable from where it is anyway (the hand, or another grant that gives the zone).
 
-| Source                                       | Option                                                                                      |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| the card is in `pid`'s hand                  | the normal cast, listed first                                                               |
+| Source | Option |
+| --- | --- |
+| the card is in `pid`'s hand | the normal cast, listed first |
 | a Layer 8 `MayPlay$` static (`Game.mayPlay`) | `MayPlayWithoutManaCost$`, `MayPlayAltManaCost$`, `MayPlayIgnoreType$`, `MayPlayWithFlash$` |
-| `Game.exileGrants` (Airbend, Heist)          | `{2}` / any type of mana, from exile                                                        |
+| `Game.exileGrants` (Airbend, Heist) | `{2}` / any type of mana, from exile |
 
 `applyOneContinuousMayPlay` now reads `MayPlayLimit$` (casts per turn through the static, `Game.mayPlayUses`),
 `MayPlayAltManaCost$`, `MayPlayIgnoreType$`, `MayPlayPlayer$` (the grantees, e.g. `Player.Active`), `CheckSVar$` +

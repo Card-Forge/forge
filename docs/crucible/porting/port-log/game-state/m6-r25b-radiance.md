@@ -12,25 +12,25 @@ resolution (`DamageDealEffect.java:195`, `PumpEffect.java:489`, `UntapEffect.jav
 `ProtectEffect.java:141`, `DamagePreventEffect.java:102`) and applies itself to the result too. Rules read from the
 source:
 
-| Rule                                                               | Java                                        |
-| ------------------------------------------------------------------ | ------------------------------------------- |
-| Reads the targeting ability: `sa` itself or the nearest ancestor   | `getSATargetingCard`, `CardUtil.java:150`   |
-| Only that ability's `Radiance$` counts; a sub-ability needs none   | `CardUtil.java:151`                         |
-| Card targets only; a player target yields nothing                  | `getTargetCards`, `CardUtil.java:159`       |
-| Colors of all targets combined; battlefield cards of each color    | `getColoredCardsInPlay`, `:170-174`         |
+| Rule | Java |
+| --- | --- |
+| Reads the targeting ability: `sa` itself or the nearest ancestor | `getSATargetingCard`, `CardUtil.java:150` |
+| Only that ability's `Radiance$` counts; a sub-ability needs none | `CardUtil.java:151` |
+| Card targets only; a player target yields nothing | `getTargetCards`, `CardUtil.java:159` |
+| Colors of all targets combined; battlefield cards of each color | `getColoredCardsInPlay`, `:170-174` |
 | Excludes targets, keeps `ValidTgts$` matches for the host's player | `c.isValid(valid, controller, ...)`, `:175` |
 
 `isValid`, not a targeting check: hexproof, shroud and protection do not stop a radiance permanent.
 
 ## Go
 
-| Piece                            | Where                                                                                      |
-| -------------------------------- | ------------------------------------------------------------------------------------------ |
-| `targetUnresolvedParams` removed | `targeting.go` (the list held only `Radiance`)                                             |
-| `Ability.radiance`               | the ancestor's `ValidTgts$`, passed to a `SubAbility$` child by `resolveSubAbility`        |
-| `Ability.radianceSpec`           | own `ValidTgts$` when `a` has card targets and names `Radiance$`, else the inherited value |
-| `Game.radianceCards`             | WUBRG, then battlefield order; one entry per permanent; computed at resolution             |
-| Six effects call `radianceCards` | one line each; `Radiance` dropped from `Pump`, `Protection`, `PreventDamage` reject lists  |
+| Piece | Where |
+| --- | --- |
+| `targetUnresolvedParams` removed | `targeting.go` (the list held only `Radiance`) |
+| `Ability.radiance` | the ancestor's `ValidTgts$`, passed to a `SubAbility$` child by `resolveSubAbility` |
+| `Ability.radianceSpec` | own `ValidTgts$` when `a` has card targets and names `Radiance$`, else the inherited value |
+| `Game.radianceCards` | WUBRG, then battlefield order; one entry per permanent; computed at resolution |
+| Six effects call `radianceCards` | one line each; `Radiance` dropped from `Pump`, `Protection`, `PreventDamage` reject lists |
 
 Rally the Righteous: the `Untap` targets, its `Pump` child has `Defined$ ParentTarget` and no `ValidTgts$`; the child
 inherits the parent's spec and `parentTargets`, as `getSATargetingCard` walks up.

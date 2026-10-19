@@ -14,14 +14,14 @@
 `entryReplaced` now runs Control, then `applyCopyReplacements`, then Other, all before `Game.Move`. The old post-move
 call is gone from `enterBattlefieldReplacements`.
 
-| Consequence                                                                             | Why                                                                    |
-| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| A Clone under Containment Priest copies first; the Priest reads the copy                | Other layer sees the copied `Def`; a noncreature copy enters           |
-| An entry the Other layer replaces away drops the copy effect and any pending counters   | CR 400.7; `entryReplaced` clears both when the card did not land       |
-| A card entering from a graveyard is still in it while `Choices$` runs                   | Java's last graveyard state; the "moved out already" divergence closed |
-| A copied planeswalker or battle gets its printed loyalty or defense in `Move`           | `Move` reads `BaseLoyalty` from the copied `Def`                       |
-| `cloneEffect` accepts a target outside the battlefield only if it is `a.replacedCard()` | The entering card is still in hand, on the stack or in a graveyard     |
-| `Choices$` no longer needs the by-hand "not the entering card" filter                   | Nothing on the battlefield is the entrant yet                          |
+| Consequence | Why |
+| --- | --- |
+| A Clone under Containment Priest copies first; the Priest reads the copy | Other layer sees the copied `Def`; a noncreature copy enters |
+| An entry the Other layer replaces away drops the copy effect and any pending counters | CR 400.7; `entryReplaced` clears both when the card did not land |
+| A card entering from a graveyard is still in it while `Choices$` runs | Java's last graveyard state; the "moved out already" divergence closed |
+| A copied planeswalker or battle gets its printed loyalty or defense in `Move` | `Move` reads `BaseLoyalty` from the copied `Def` |
+| `cloneEffect` accepts a target outside the battlefield only if it is `a.replacedCard()` | The entering card is still in hand, on the stack or in a graveyard |
+| `Choices$` no longer needs the by-hand "not the entering card" filter | Nothing on the battlefield is the entrant yet |
 
 `AdditionalAbility` children (`resolveAdditional`, `FlipCoin` branches) now carry `replacing`; Molten Sentry's Clone
 read an unset `replacedCard()` before, which only worked because its target was the host on the battlefield.
@@ -46,12 +46,12 @@ Scales) sees the whole pile once. `Defined$` is `Self`, `ReplacedCard` or `Repla
 one pile per kind the named cards hold (Dominion Saboteur), `CounterNum$` overriding the count. Outside an entry `ETB$`
 is still refused.
 
-| Card                 | Shape                                                  | Scenario                                                                                                                                            |
-| -------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Altered Ego          | `P1P1`, `CounterNum$ X`                                | module test (`xPaid` needs a payment fixture)                                                                                                       |
+| Card | Shape | Scenario |
+| --- | --- | --- |
+| Altered Ego | `P1P1`, `CounterNum$ X` | module test (`xPaid` needs a payment fixture) |
 | Undercover Operative | `ConditionDefined$ Remembered`, `RememberCloneOrigin$` | `undercover-operative-copies-your-creature-and-enters-with-a-shield-counter`, `undercover-operative-copies-an-opponents-creature-without-a-counter` |
-| Dominion Saboteur    | `EachFromSource$ Remembered`                           | module test                                                                                                                                         |
-| The Mimeoplasm       | `ChooseCard`, `ChangeZoneAll`, `PutCounter`, `Clone`   | `the-mimeoplasm-enters-as-a-copy-with-counters-equal-to-the-other-power`                                                                            |
+| Dominion Saboteur | `EachFromSource$ Remembered` | module test |
+| The Mimeoplasm | `ChooseCard`, `ChangeZoneAll`, `PutCounter`, `Clone` | `the-mimeoplasm-enters-as-a-copy-with-counters-equal-to-the-other-power` |
 
 `actions.log` gains `queue cardorder <id>[,...]` (`QueueCardOrder`): the two exiled cards of The Mimeoplasm are ordered
 by `orderCardsByTheirOwners`.
@@ -76,12 +76,12 @@ two cards entering through one `ChangeZoneAll` both copy and the effect ends aft
 
 Corpus lines naming each (real `(AB|SP|DB)$ Clone` lines, same-line):
 
-| Param                                                                                                     | Lines | Cards                                           | Outcome                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------- | ----: | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `RemoveCardTypes$` (+ `RemoveSubTypes$` under it)                                                         |     3 | Imposter Mech, Machine God's Effigy, Taskmaster | ported (`CardFactory.java:579-581`); Taskmaster still errors on `RemoveCreatureTypes$`, which Java never reads (PORT-8)   |
-| `PumpKeywords$`/`PumpDuration$`                                                                           |     2 | Loose in the Park, The Fourteenth Doctor        | ported (`CloneEffect.java:153-156`, `tokenPumpKeywords`); Loose in the Park still needs `Draft` and `ExiledWith`          |
-| `Embalm$`/`RemoveCost$`                                                                                   |     1 | Vizier of Many Faces                            | ported (`CardFactory.java:555`, `:613`): a card that is not an embalmed token takes the plain copy (Embalm is not ported) |
-| `SetManaCost$`, `SetColorByManaCost$`, `SetCreatureTypes$`, `RemoveKeywords$`, `SetLoyalty$`, `GainText*` |     0 | —                                               | kept rejected, no corpus line                                                                                             |
+| Param | Lines | Cards | Outcome |
+| --- | ---: | --- | --- |
+| `RemoveCardTypes$` (+ `RemoveSubTypes$` under it) | 3 | Imposter Mech, Machine God's Effigy, Taskmaster | ported (`CardFactory.java:579-581`); Taskmaster still errors on `RemoveCreatureTypes$`, which Java never reads (PORT-8) |
+| `PumpKeywords$`/`PumpDuration$` | 2 | Loose in the Park, The Fourteenth Doctor | ported (`CloneEffect.java:153-156`, `tokenPumpKeywords`); Loose in the Park still needs `Draft` and `ExiledWith` |
+| `Embalm$`/`RemoveCost$` | 1 | Vizier of Many Faces | ported (`CardFactory.java:555`, `:613`): a card that is not an embalmed token takes the plain copy (Embalm is not ported) |
+| `SetManaCost$`, `SetColorByManaCost$`, `SetCreatureTypes$`, `RemoveKeywords$`, `SetLoyalty$`, `GainText*` | 0 | — | kept rejected, no corpus line |
 
 `RemoveCardTypes$` clears the core types and keeps supertypes; `RemoveSubTypes$`, read only under it, then drops every
 subtype, since no core type is left to allow one.
@@ -99,8 +99,8 @@ The other Layer 4/5/6 rows of the "Still not resolved" table are not `Condition$
 
 ## Divergences and remaining
 
-| Where                           | Java                                                                                                 | Here                                                                                                    |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Cards entering together         | One counter table, one copy decision per batch                                                       | One entry at a time; a batch-hosted effect (Mystic Reflection) lives until the batch's `ChangesZoneAll` |
-| Effect left in the Command zone | Moritte's `ValidCard$ Creature.IsRemembered` never matches a noncreature copy, so its effect lingers | Same: nothing exiles it                                                                                 |
-| `ChangesZoneAll` trigger order  | ETB and batch triggers collected together, then ordered                                              | ETB triggers are pushed first, the batch ones second                                                    |
+| Where | Java | Here |
+| --- | --- | --- |
+| Cards entering together | One counter table, one copy decision per batch | One entry at a time; a batch-hosted effect (Mystic Reflection) lives until the batch's `ChangesZoneAll` |
+| Effect left in the Command zone | Moritte's `ValidCard$ Creature.IsRemembered` never matches a noncreature copy, so its effect lingers | Same: nothing exiles it |
+| `ChangesZoneAll` trigger order | ETB and batch triggers collected together, then ordered | ETB triggers are pushed first, the batch ones second |

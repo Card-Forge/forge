@@ -7,14 +7,14 @@
 Six grammars. Together they specify everything `internal/carddb` must parse, and they are the input to the typed param
 struct generator ([ADR-0007](../../adr/0007-card-dsl-representation.md), [ADR-0008](../../adr/0008-effect-dispatch.md)).
 
-| Grammar                                            | Governs                            | Java counterpart                   |
-| -------------------------------------------------- | ---------------------------------- | ---------------------------------- |
-| [Card script](01-card-script-grammar.md)           | The `Key:Value` line format        | `CardRules.Reader.parseLine`       |
-| [Param map](02-param-map-grammar.md)               | `Key$ Value \| Key$ Value`         | `AbilityFactory.getMapParams`      |
-| [Valid string](03-valid-string-grammar.md)         | `Creature.Green+attacking+YouCtrl` | `CardProperty` (2,135 LOC)         |
-| [Count expression](04-count-expression-grammar.md) | `Count$CardsInYourHand/Twice`      | `AbilityUtils` (3,950 LOC)         |
-| [Cost string](05-cost-string-grammar.md)           | `2 R T Sac<1/Creature>`            | 52 files in `forge-game/.../cost/` |
-| [Keyword](06-keyword-grammar.md)                   | `Dash:1 R`, `Cycling:2`            | `Keyword`, `KeywordInterface`      |
+| Grammar | Governs | Java counterpart |
+| --- | --- | --- |
+| [Card script](01-card-script-grammar.md) | The `Key:Value` line format | `CardRules.Reader.parseLine` |
+| [Param map](02-param-map-grammar.md) | `Key$ Value \| Key$ Value` | `AbilityFactory.getMapParams` |
+| [Valid string](03-valid-string-grammar.md) | `Creature.Green+attacking+YouCtrl` | `CardProperty` (2,135 LOC) |
+| [Count expression](04-count-expression-grammar.md) | `Count$CardsInYourHand/Twice` | `AbilityUtils` (3,950 LOC) |
+| [Cost string](05-cost-string-grammar.md) | `2 R T Sac<1/Creature>` | 52 files in `forge-game/.../cost/` |
+| [Keyword](06-keyword-grammar.md) | `Dash:1 R`, `Cycling:2` | `Keyword`, `KeywordInterface` |
 
 ---
 

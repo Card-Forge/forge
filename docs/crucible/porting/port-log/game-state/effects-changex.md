@@ -10,13 +10,13 @@ Java keeps the value of X a cost was paid with on the `SpellAbility` itself: `Sp
 `announceValuesLikeX` at `:752-781`), null when no cost part carries an X. `Card.getXManaCostPaid`
 (`Card.java:1621-1627`) reads it back off the card's cast SA.
 
-| Piece                                                  | Where                | Why                                                                                                                                 |
-| ------------------------------------------------------ | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `Ability.xManaCostPaid` / `hasXManaCostPaid`           | `ability.go`         | Java's field; the bool is its null. A value, so `Game.Clone` and a `CopySpellAbility` copy (CR 707.10) carry it with no clone code  |
-| `payManaCostX` returning `xAnnounced`                  | `manapay.go`         | `PayManaCost`'s own body; `PayManaCost` wraps it, so its five callers and its `bool` contract are unchanged                         |
-| `payCastCost` returns `xAnnounced`; `xAnnounced.setOn` | `castspell.go`       | All three cast branches (permanent, Aura, Instant/Sorcery) set it before `PushAbility`, so `checkSpellCastTriggers` already sees it |
-| `ActivateAbility` sets it                              | `activateability.go` | CR 602.2b: an activated ability's `{X}` is announced the same way; Java's `setXManaCostPaid` makes no spell/ability split           |
-| `(*Ability).XManaCostPaid() (int, bool)`               | `changexeffect.go`   | Read accessor for module tests and later `Count$xPaid` readers                                                                      |
+| Piece | Where | Why |
+| --- | --- | --- |
+| `Ability.xManaCostPaid` / `hasXManaCostPaid` | `ability.go` | Java's field; the bool is its null. A value, so `Game.Clone` and a `CopySpellAbility` copy (CR 707.10) carry it with no clone code |
+| `payManaCostX` returning `xAnnounced` | `manapay.go` | `PayManaCost`'s own body; `PayManaCost` wraps it, so its five callers and its `bool` contract are unchanged |
+| `payCastCost` returns `xAnnounced`; `xAnnounced.setOn` | `castspell.go` | All three cast branches (permanent, Aura, Instant/Sorcery) set it before `PushAbility`, so `checkSpellCastTriggers` already sees it |
+| `ActivateAbility` sets it | `activateability.go` | CR 602.2b: an activated ability's `{X}` is announced the same way; Java's `setXManaCostPaid` makes no spell/ability split |
+| `(*Ability).XManaCostPaid() (int, bool)` | `changexeffect.go` | Read accessor for module tests and later `Count$xPaid` readers |
 
 `WithoutManaCost$` cast (`castOpts.withoutManaCost`) records none: the cost has no X part left, and
 `announceValuesLikeX` calls `setXManaCostPaid(null)` then. X = 0 announced is recorded as `(0, true)`, not as absent.
@@ -39,20 +39,20 @@ Corpus: 2 `Mode$ SpellCast` lines carry `HasXManaCost$`. `unbound_flourishing.tx
 `changexeffect.go` ports `ChangeXEffect.java`'s resolve: the X a spell or ability on the stack was paid with becomes
 `Value$`. Mana already paid is untouched. Corpus:
 
-| Card                          | Line                                                                                              | Reaches ChangeX                                                                                                                         |
-| ----------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `unbound_flourishing.txt`     | `DB$ ChangeX \| Defined$ TriggeredSpellAbility \| Value$ TriggeredSpellAbility>Count$xPaid/Twice` | Yes: `Mode$ SpellCast \| ValidCard$ Permanent \| HasXManaCost$ True`                                                                    |
-| `glava_five_advents_mage.txt` | `DB$ ChangeX \| Defined$ TriggeredSpellAbility \| Value$ 5`                                       | No: `Mode$ SpellAbilityCast` (unported trigger mode) with `ValidSA$` and `ResolvedLimit$`; the effect itself resolves its literal shape |
+| Card | Line | Reaches ChangeX |
+| --- | --- | --- |
+| `unbound_flourishing.txt` | `DB$ ChangeX \| Defined$ TriggeredSpellAbility \| Value$ TriggeredSpellAbility>Count$xPaid/Twice` | Yes: `Mode$ SpellCast \| ValidCard$ Permanent \| HasXManaCost$ True` |
+| `glava_five_advents_mage.txt` | `DB$ ChangeX \| Defined$ TriggeredSpellAbility \| Value$ 5` | No: `Mode$ SpellAbilityCast` (unported trigger mode) with `ValidSA$` and `ResolvedLimit$`; the effect itself resolves its literal shape |
 
 Resolution:
 
-| Step                  | Behavior                                                                                                                                                                                                                                  |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Target                | `Defined$ TriggeredSpellAbility` only: `triggeredObjects.spellAbility`, the stack item `checkSpellCastTriggers` recorded. None recorded -> error                                                                                          |
-| Spell gone            | Not on the stack any more (countered, resolved) -> no-op, no error. Java writes to the orphaned `SpellAbility`; no later reader in this port could see it                                                                                 |
-| `Value$`              | Literal; named SVar (`resolveNamedAmount`, sign applied); or `TriggeredSpellAbility>Count$xPaid[/op]`, the triggering spell's X (0 when unannounced, `AbilityUtils.java:1636-1637`, `:1688`), operator via `doXMath` (`replaceeffect.go`) |
-| Write                 | Only when the spell announced an X (`ChangeXEffect.java:24,27`'s null checks). `Value$` is computed first, as Java does                                                                                                                   |
-| Cast SA vs stack copy | Java writes both `tgtSA` and the host's cast SA (`ChangeXEffect.java:22-29`); they differ only for a `SpellAbilityStackInstance`, which this port lacks: the stack item is the cast ability                                               |
+| Step | Behavior |
+| --- | --- |
+| Target | `Defined$ TriggeredSpellAbility` only: `triggeredObjects.spellAbility`, the stack item `checkSpellCastTriggers` recorded. None recorded -> error |
+| Spell gone | Not on the stack any more (countered, resolved) -> no-op, no error. Java writes to the orphaned `SpellAbility`; no later reader in this port could see it |
+| `Value$` | Literal; named SVar (`resolveNamedAmount`, sign applied); or `TriggeredSpellAbility>Count$xPaid[/op]`, the triggering spell's X (0 when unannounced, `AbilityUtils.java:1636-1637`, `:1688`), operator via `doXMath` (`replaceeffect.go`) |
+| Write | Only when the spell announced an X (`ChangeXEffect.java:24,27`'s null checks). `Value$` is computed first, as Java does |
+| Cast SA vs stack copy | Java writes both `tgtSA` and the host's cast SA (`ChangeXEffect.java:22-29`); they differ only for a `SpellAbilityStackInstance`, which this port lacks: the stack item is the cast ability |
 
 `changeXValue` evaluates the `TriggeredSpellAbility>` context head itself: a context-switched `Count$xPaid` reads the
 triggering spell's X, which the plain `xPaid` head (the resolving ability's own) does not.

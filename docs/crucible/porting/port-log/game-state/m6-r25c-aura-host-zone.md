@@ -18,18 +18,18 @@ Coronet and Decomposition were on the R25c list but name battlefield hosts (a cr
 creature), see "Two other shapes the R25c list held". A whole-corpus search for `^K:Enchant:.*inZone` finds exactly
 those three cards.
 
-| Piece                  | Go                                                                                         | Java                                           |
-| ---------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------- |
-| Zone predicate         | `enchantsOutsidePlay(spec)`: the spec text contains `inZone`                               | `v.contains("inZone")`, `Card.java:6986`       |
-| Cast-time candidates   | `enchantTargets`: battlefield, then every graveyard when the predicate holds               | `TgtZone$ Battlefield,Graveyard`               |
-| Other `inZone` zones   | Match nothing searched (`inZoneExile` finds no host), the cast is refused                  | same: only two zones are searched              |
-| Hexproof, protection   | `cardCantBeTargetedBy` as for a battlefield host (its own `Zone != Battlefield` early out) | `canBeTargetedBy`                              |
-| Resolution re-check    | `auraTargetStillLegal`: battlefield, or graveyard under the predicate; host re-matches     | `Attach` target legality                       |
-| Enters attached        | `attachEffect` unchanged: `Move` to the battlefield, `attachTo` the graveyard card         | `moveToPlay`, `attachToEntity`                 |
-| Stays attached         | `attachmentHostInPlay` in `cleanupDanglingAttachments`; `Matches` then decides             | 704_attach via `canBeAttached(c, null, true)`  |
-| Current `Enchant` type | `enchantSpec` reads `KeywordLines()`, not the printed face                                 | `aura.getKeywords(Keyword.ENCHANT)`            |
-| Re-attach              | `DB$ Attach \| Defined$ X` (no `ValidTgts$`, no `Object$`): `attachDefined`                | `AttachEffect.resolve`, `Defined` branch       |
-| Attach gate            | `canBeAttached` adds the in-play-or-`inZone` rule for an Aura                              | `attachToEntity` -> `canBeAttached` -> message |
+| Piece | Go | Java |
+| --- | --- | --- |
+| Zone predicate | `enchantsOutsidePlay(spec)`: the spec text contains `inZone` | `v.contains("inZone")`, `Card.java:6986` |
+| Cast-time candidates | `enchantTargets`: battlefield, then every graveyard when the predicate holds | `TgtZone$ Battlefield,Graveyard` |
+| Other `inZone` zones | Match nothing searched (`inZoneExile` finds no host), the cast is refused | same: only two zones are searched |
+| Hexproof, protection | `cardCantBeTargetedBy` as for a battlefield host (its own `Zone != Battlefield` early out) | `canBeTargetedBy` |
+| Resolution re-check | `auraTargetStillLegal`: battlefield, or graveyard under the predicate; host re-matches | `Attach` target legality |
+| Enters attached | `attachEffect` unchanged: `Move` to the battlefield, `attachTo` the graveyard card | `moveToPlay`, `attachToEntity` |
+| Stays attached | `attachmentHostInPlay` in `cleanupDanglingAttachments`; `Matches` then decides | 704_attach via `canBeAttached(c, null, true)` |
+| Current `Enchant` type | `enchantSpec` reads `KeywordLines()`, not the printed face | `aura.getKeywords(Keyword.ENCHANT)` |
+| Re-attach | `DB$ Attach \| Defined$ X` (no `ValidTgts$`, no `Object$`): `attachDefined` | `AttachEffect.resolve`, `Defined` branch |
+| Attach gate | `canBeAttached` adds the in-play-or-`inZone` rule for an Aura | `attachToEntity` -> `canBeAttached` -> message |
 
 ## Animate Dead and Dance of the Dead end to end
 
@@ -64,10 +64,10 @@ cards; a delayed trigger whose host already ran its `ClearRemembered$` cleanup f
 
 ## Two other shapes the R25c list held
 
-| Card                      | Cause                                                                                                      | Fix                                                                          |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Daybreak Coronet          | `Creature.EnchantedBy Aura.Other`: the property name has a nested spec, which `propertyMatches` left false | `EnchantedBy <spec>` matches when one of the candidate's attachments matches |
-| Decomposition, Lion Umbra | the fixed probe board has no black creature, no modified creature                                          | `tailor.go` (below)                                                          |
+| Card | Cause | Fix |
+| --- | --- | --- |
+| Daybreak Coronet | `Creature.EnchantedBy Aura.Other`: the property name has a nested spec, which `propertyMatches` left false | `EnchantedBy <spec>` matches when one of the candidate's attachments matches |
+| Decomposition, Lion Umbra | the fixed probe board has no black creature, no modified creature | `tailor.go` (below) |
 
 `EnchantedBy Imprinted` and `EnchantedBy Targeted` (`CardProperty.java:469-481`) stay false, as before.
 

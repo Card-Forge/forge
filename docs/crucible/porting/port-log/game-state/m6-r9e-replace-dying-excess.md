@@ -24,29 +24,29 @@ Event$ Moved | ValidLKI$ Card.IsRemembered | Origin$ Battlefield | Destination$ 
   -> DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 ```
 
-| Piece       | Does                                                                                     | Why                                                                                     |
-| ----------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Definition  | `replaceDyingDef` builds the tree as `compile.Ability` literals; nothing parsed          | PORT-2; Java parses the strings at `:728-740`. Same precedent as `monarchEffectDef`     |
-| Applying    | The existing Moved dispatch `movedGraveyardDestination` reads it from the Command zone   | No new replacement path; SBA, Destroy, Sacrifice all reach it through `moveToGraveyard` |
-| Lifetime    | `effectUntilEndOfTurn`, exiled at the next cleanup                                       | `game.getEndOfTurn().addUntil(exileEffect)`, `:752`                                     |
-| Forget      | `forgetOnMoved` = Battlefield: a remembered card leaving is forgotten, empty effect goes | `addForgetOnMovedTrigger(eff, "Battlefield")`; `effectCardsSeeMove`                     |
-| No cards    | No effect                                                                                | `:712-715`; Disintegrate at a player                                                    |
-| `.<valid>`  | `Remembered.Creature`, `ThisTargetedCard.Creature`: base through `definedCards`, filter  | `getDefinedCards`' `incR` split, each alternative prefixed `Card.` (`:319-326`)         |
-| `Condition` | `ReplaceDyingCondition$ Kicked`: no effect unless kicked                                 | `:693-701`; any other value refused, Java would install the effect regardless           |
-| SVars       | The effect's face carries the ability's amounts                                          | `createEffect`'s `eff.setSVars(sa.getSVars())`                                          |
+| Piece | Does | Why |
+| --- | --- | --- |
+| Definition | `replaceDyingDef` builds the tree as `compile.Ability` literals; nothing parsed | PORT-2; Java parses the strings at `:728-740`. Same precedent as `monarchEffectDef` |
+| Applying | The existing Moved dispatch `movedGraveyardDestination` reads it from the Command zone | No new replacement path; SBA, Destroy, Sacrifice all reach it through `moveToGraveyard` |
+| Lifetime | `effectUntilEndOfTurn`, exiled at the next cleanup | `game.getEndOfTurn().addUntil(exileEffect)`, `:752` |
+| Forget | `forgetOnMoved` = Battlefield: a remembered card leaving is forgotten, empty effect goes | `addForgetOnMovedTrigger(eff, "Battlefield")`; `effectCardsSeeMove` |
+| No cards | No effect | `:712-715`; Disintegrate at a player |
+| `.<valid>` | `Remembered.Creature`, `ThisTargetedCard.Creature`: base through `definedCards`, filter | `getDefinedCards`' `incR` split, each alternative prefixed `Card.` (`:319-326`) |
+| `Condition` | `ReplaceDyingCondition$ Kicked`: no effect unless kicked | `:693-701`; any other value refused, Java would install the effect regardless |
+| SVars | The effect's face carries the ability's amounts | `createEffect`'s `eff.setSVars(sa.getSVars())` |
 
 No new `Game` state and no new controller decision: the effect card is an ordinary arena card (`IsEffect`,
 `effectLife`), which `Game.Clone` already copies; its definition is immutable once built.
 
 Where each effect calls it, matching Java's position relative to its early returns:
 
-| Effect          | Call site                                                                                             | Corpus lines |
-| --------------- | ----------------------------------------------------------------------------------------------------- | ------------ |
-| `DealDamage`    | After the batch, `RememberDamaged$` and triggers; under `DamageMap$` before the later `DamageResolve` | 44           |
-| `DamageAll`     | After the sweep and `RememberDamaged$`; also with `NumDmg$` 0                                         | 6            |
-| `DamageResolve` | After the map is dealt and `RememberDamaged$`                                                         | 1            |
-| `Fight`         | After the fight's damage; no effect with fewer than two fighters (`:60-62`)                           | 4            |
-| `Pump`          | At the end; also on Go's "nothing to pump" return, which Java does not have                           | 4            |
+| Effect | Call site | Corpus lines |
+| --- | --- | --- |
+| `DealDamage` | After the batch, `RememberDamaged$` and triggers; under `DamageMap$` before the later `DamageResolve` | 44 |
+| `DamageAll` | After the sweep and `RememberDamaged$`; also with `NumDmg$` 0 | 6 |
+| `DamageResolve` | After the map is dealt and `RememberDamaged$` | 1 |
+| `Fight` | After the fight's damage; no effect with fewer than two fighters (`:60-62`) | 4 |
+| `Pump` | At the end; also on Go's "nothing to pump" return, which Java does not have | 4 |
 
 `ReplaceDyingDefined$` is checked before the effect acts (`checkReplaceDying`): the base spelling must be one
 `definedCards` reads. `ReplaceDyingValid$` and `ReplaceDyingZone$` (no corpus line) are refused by name.
@@ -56,11 +56,11 @@ Where each effect calls it, matching Java's position relative to its early retur
 
 Before this batch these lines played, ignoring a param:
 
-| Effect          | Param read nowhere                            | Cards                                                                                                          |
-| --------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `Pump`          | `ReplaceDyingDefined$`                        | Bleed Dry, Gnashing of Teeth, Necrotic Wound, Ob Nixilis's Cruelty                                             |
-| `DamageAll`     | `ReplaceDyingDefined$` and `RememberDamaged$` | Anger of the Gods, Crush the Weak, Draconic Intervention, Gallifrey Falls, Yamabushi's Storm, Underworld Fires |
-| `DamageResolve` | `RememberDamaged$`                            | Serpentine Spike (also refused for `ReplaceDyingDefined$`)                                                     |
+| Effect | Param read nowhere | Cards |
+| --- | --- | --- |
+| `Pump` | `ReplaceDyingDefined$` | Bleed Dry, Gnashing of Teeth, Necrotic Wound, Ob Nixilis's Cruelty |
+| `DamageAll` | `ReplaceDyingDefined$` and `RememberDamaged$` | Anger of the Gods, Crush the Weak, Draconic Intervention, Gallifrey Falls, Yamabushi's Storm, Underworld Fires |
+| `DamageResolve` | `RememberDamaged$` | Serpentine Spike (also refused for `ReplaceDyingDefined$`) |
 
 `DamageAll`'s `RememberDamaged$` has 11 corpus lines. Besides the six above, Reckless Blaze (plays: its Effect's
 `RememberObjects$ Remembered` now holds the damaged creatures, so its "dies this turn, add {R}" trigger can match),
@@ -78,14 +78,14 @@ batch (`:2738-2752`); `triggerExcessDamage` sums what the batch dealt it, subtra
 dealt deathtouch damage), and adds the positive results of the permanents matching `ExcessSVarCondition$` into the
 cause's SVar, 0 included (`CardDamageTable.java:113-155`).
 
-| Piece          | Go                                                                                                                     |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Snapshot       | `damageEntry.Lethal`, set by `dealPermanentDamage` right before marking; the first entry per card is used              |
-| Sum            | Per card across every source of the table, in first-damaged order                                                      |
-| Not damageable | A card none of creature, planeswalker, battle adds nothing (`Card.java:6325-6327` deals it 0)                          |
-| Condition      | Matched against the damaged permanent, not the source (`:137`); the opposite of `ExcessDamageCondition$`               |
-| `targetedBy`   | `matchesWithTargetedBy`: the root's `isTargeting` over the chain, read as own targets, `parentTargets`, `chainTargets` |
-| Binding        | `withAmount` on `a.Amounts`; `resolveSubAbility` hands the map down, Java's `getSVarFallback` parent read              |
+| Piece | Go |
+| --- | --- |
+| Snapshot | `damageEntry.Lethal`, set by `dealPermanentDamage` right before marking; the first entry per card is used |
+| Sum | Per card across every source of the table, in first-damaged order |
+| Not damageable | A card none of creature, planeswalker, battle adds nothing (`Card.java:6325-6327` deals it 0) |
+| Condition | Matched against the damaged permanent, not the source (`:137`); the opposite of `ExcessDamageCondition$` |
+| `targetedBy` | `matchesWithTargetedBy`: the root's `isTargeting` over the chain, read as own targets, `parentTargets`, `chainTargets` |
+| Binding | `withAmount` on `a.Amounts`; `resolveSubAbility` hands the map down, Java's `getSVarFallback` parent read |
 
 Callers: `DealDamage` (22 lines) and `Fight` (2: Rhino's Rampage, The Last Agni Kai). Under `DamageMap$` it is refused:
 Java's cause there is the later `DamageResolve`, so the `DealDamage` link's SVar is never set.
@@ -105,39 +105,39 @@ for `targetedBy`; no `ExcessSVarCondition$` line sits under two targeting ancest
 
 `crucible card-smoke -all -workers 8`, before → after:
 
-| Status       | Before | After  |
-| ------------ | ------ | ------ |
-| plays        | 30,572 | 30,630 |
-| refused      | 2,941  | 2,883  |
-| placed       | 372    | 372    |
-| inconclusive | 193    | 193    |
-| judged play  | 91.2%  | 91.4%  |
+| Status | Before | After |
+| --- | --- | --- |
+| plays | 30,572 | 30,630 |
+| refused | 2,941 | 2,883 |
+| placed | 372 | 372 |
+| inconclusive | 193 | 193 |
+| judged play | 91.2% | 91.4% |
 
-| Flip                    | Cards | Cause                                                                                                                                                                                                                                                      |
-| ----------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| refused → plays         | 58    | 37 `DealDamage` `ReplaceDyingDefined$` (The War Doctor at `turns`), 16 `ExcessSVar$`, Mawloc and Unnatural Aggression (`Fight` `ReplaceDying`), Rhino's Rampage and The Last Agni Kai (`Fight` `ExcessSVarCondition$`), Serpentine Spike (`DamageResolve`) |
-| refused, reason changed | 9     | Each now stops at a later refusal (below)                                                                                                                                                                                                                  |
-| plays → refused         | 0     |                                                                                                                                                                                                                                                            |
+| Flip | Cards | Cause |
+| --- | --- | --- |
+| refused → plays | 58 | 37 `DealDamage` `ReplaceDyingDefined$` (The War Doctor at `turns`), 16 `ExcessSVar$`, Mawloc and Unnatural Aggression (`Fight` `ReplaceDying`), Rhino's Rampage and The Last Agni Kai (`Fight` `ExcessSVarCondition$`), Serpentine Spike (`DamageResolve`) |
+| refused, reason changed | 9 | Each now stops at a later refusal (below) |
+| plays → refused | 0 | |
 
-| Card                     | Now stops at                                                                                                                      |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| Bolg of the North        | `DealDamage: NumDmg$ "_" is not resolvable` (`X` = `Spawner>Sacrificed$CardPower`, the ImmediateTrigger spawner's cost-paid list) |
-| Brazen Boarding          | `MakeCard: Filter$ not resolvable yet`                                                                                            |
-| Burn from Within         | `Debuff: Defined$ "_" not resolvable yet`                                                                                         |
-| Gut, Fanatical Priestess | `Fight: ReplaceDyingExiledWith$ not resolvable yet`                                                                               |
-| Mephit's Enthusiasm      | `Effect: Boon$ not resolvable yet`                                                                                                |
-| Narset's Rebuke          | `Mana: Produced$ "_" not resolvable yet`                                                                                          |
-| Ravenous Pursuit         | `Pump: Duration$ "_" not resolvable yet`                                                                                          |
-| Red Sun's Zenith         | `ChangeZone: Defined$ "_" not resolvable yet`                                                                                     |
-| Unleash the Inferno      | `ImmediateTrigger: RememberSVarAmount$ not resolvable yet`                                                                        |
+| Card | Now stops at |
+| --- | --- |
+| Bolg of the North | `DealDamage: NumDmg$ "_" is not resolvable` (`X` = `Spawner>Sacrificed$CardPower`, the ImmediateTrigger spawner's cost-paid list) |
+| Brazen Boarding | `MakeCard: Filter$ not resolvable yet` |
+| Burn from Within | `Debuff: Defined$ "_" not resolvable yet` |
+| Gut, Fanatical Priestess | `Fight: ReplaceDyingExiledWith$ not resolvable yet` |
+| Mephit's Enthusiasm | `Effect: Boon$ not resolvable yet` |
+| Narset's Rebuke | `Mana: Produced$ "_" not resolvable yet` |
+| Ravenous Pursuit | `Pump: Duration$ "_" not resolvable yet` |
+| Red Sun's Zenith | `ChangeZone: Defined$ "_" not resolvable yet` |
+| Unleash the Inferno | `ImmediateTrigger: RememberSVarAmount$ not resolvable yet` |
 
 ## Not ported
 
-| Shape                                        | Reason                                                        |
-| -------------------------------------------- | ------------------------------------------------------------- |
-| `ReplaceDyingCondition$` other than `Kicked` | Java ignores the value and installs the effect; no such line  |
-| `ExcessSVar$` under `DamageMap$`             | The SVar belongs to the later `DamageResolve`; no corpus line |
-| `ExcessSVarCondition$` naming `!targetedBy`  | No corpus line                                                |
+| Shape | Reason |
+| --- | --- |
+| `ReplaceDyingCondition$` other than `Kicked` | Java ignores the value and installs the effect; no such line |
+| `ExcessSVar$` under `DamageMap$` | The SVar belongs to the later `DamageResolve`; no corpus line |
+| `ExcessSVarCondition$` naming `!targetedBy` | No corpus line |
 
 `ReplaceDyingExiledWith$`, the ExcessDamage/ExcessDamageAll trigger modes with `Damage.ExcessThisTurn`, and a Pump's P/T
 change being visible to the next link of its chain (Rhino's Rampage) are in

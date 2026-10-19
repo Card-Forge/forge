@@ -13,16 +13,16 @@ Plan: `docs/crucible/00-master-implementation-plan.md`
 
 ## Read before working
 
-| Doing                                               | Read first                                              |
-| --------------------------------------------------- | ------------------------------------------------------- |
-| Writing **any** doc, ADR, comment, commit body      | `docs/crucible/guidelines/00-documentation-style.md`    |
-| Writing Go                                          | `docs/crucible/guidelines/01-go-coding-standards.md`    |
-| Porting a Java file                                 | `docs/crucible/guidelines/02-java-to-go-translation.md` |
-| Writing tests                                       | `docs/crucible/guidelines/03-testing-standards.md`      |
-| Making an architectural decision                    | `docs/crucible/guidelines/04-adr-process.md`            |
-| Writing anything under `architecture/` or `design/` | `docs/crucible/guidelines/06-architecture-docs.md`      |
-| Committing / reviewing                              | `docs/crucible/guidelines/05-commit-and-review.md`      |
-| Syncing with `Card-Forge/forge`                     | `docs/crucible/runbooks/upstream-sync.md`               |
+| Doing | Read first |
+| --- | --- |
+| Writing **any** doc, ADR, comment, commit body | `docs/crucible/guidelines/00-documentation-style.md` |
+| Writing Go | `docs/crucible/guidelines/01-go-coding-standards.md` |
+| Porting a Java file | `docs/crucible/guidelines/02-java-to-go-translation.md` |
+| Writing tests | `docs/crucible/guidelines/03-testing-standards.md` |
+| Making an architectural decision | `docs/crucible/guidelines/04-adr-process.md` |
+| Writing anything under `architecture/` or `design/` | `docs/crucible/guidelines/06-architecture-docs.md` |
+| Committing / reviewing | `docs/crucible/guidelines/05-commit-and-review.md` |
+| Syncing with `Card-Forge/forge` | `docs/crucible/runbooks/upstream-sync.md` |
 
 Index: `docs/crucible/guidelines/README.md`
 
@@ -33,12 +33,12 @@ commit bodies.
 
 ## Layout — do not deviate
 
-| Path                    | Contents                                                     |
-| ----------------------- | ------------------------------------------------------------ |
-| `crucible/`             | **All** Go code. Own `go.mod`                                |
-| `docs/crucible/`        | **All** Crucible docs                                        |
+| Path | Contents |
+| --- | --- |
+| `crucible/` | **All** Go code. Own `go.mod` |
+| `docs/crucible/` | **All** Crucible docs |
 | `crucible/oracle-java/` | Only place Java may be added — test-scoped dumpers/recorders |
-| everything else         | Upstream Forge. **Do not edit**                              |
+| everything else | Upstream Forge. **Do not edit** |
 
 Unavoidable upstream edit → log it in `docs/crucible/porting/upstream-patches.md`, same commit.
 `.claude/hooks/guard-upstream.sh` asks before any unlogged one. Reason: every touched line outside `crucible/` and
@@ -90,7 +90,8 @@ files (TEST-3). Level table and reasons: `guidelines/03-testing-standards.md` (T
 Compressed style, full rules in `guidelines/00-documentation-style.md`. Never drop technical content (DOC-2); every rule
 carries a reason (DOC-4); code and code comments stay normal English (DOC-7). **State, never history**: no `Correction`
 / `Update` / changelog sections, fix the fact in place (DOC-16, ADRP-3). **Run `prettier --write .` before every
-commit** (DOC-14).
+commit** (DOC-14). Claude-only files (this one, `.claude/`, the `00-master-implementation-plan*.md` files,
+`docs/crucible/porting/`) are in `.prettierignore`: compact tables (`| a | b |`, no padding), prose unwrapped.
 
 ---
 
@@ -129,15 +130,15 @@ in `docs/crucible/00-master-implementation-plan-in-progress.md` items 24-32 and
 
 ## Subagents and skills
 
-| Kind     | Name             | Use for                                                                                |
-| -------- | ---------------- | -------------------------------------------------------------------------------------- |
-| subagent | `forge-oracle`   | Java semantics of an API before porting. Keeps `forge-game/` reads out of context      |
-| skill    | `rules-review`   | Diff vs non-negotiables, before commit                                                 |
-| skill    | `port-effect`    | Any M6 `ApiType` effect: file, registry, enginelint, test, docs, counts                |
-| skill    | `port-java-unit` | Any other Java unit, PORT-3 order                                                      |
-| skill    | `add-scenario`   | Rules test as a `testdata/scenarios/` fixture                                          |
-| skill    | `sync-upstream`  | Merge `Card-Forge/forge`, verify the port still agrees with what moved                 |
-| skill    | `check-card`     | Audit a card script against Oracle text and the Java that runs it; upstream fix branch |
+| Kind | Name | Use for |
+| --- | --- | --- |
+| subagent | `forge-oracle` | Java semantics of an API before porting. Keeps `forge-game/` reads out of context |
+| skill | `rules-review` | Diff vs non-negotiables, before commit |
+| skill | `port-effect` | Any M6 `ApiType` effect: file, registry, enginelint, test, docs, counts |
+| skill | `port-java-unit` | Any other Java unit, PORT-3 order |
+| skill | `add-scenario` | Rules test as a `testdata/scenarios/` fixture |
+| skill | `sync-upstream` | Merge `Card-Forge/forge`, verify the port still agrees with what moved |
+| skill | `check-card` | Audit a card script against Oracle text and the Java that runs it; upstream fix branch |
 
 Engine port-log lives in `docs/crucible/porting/port-log/game-state/<topic>.md`; `game-state.md` is the index plus
 `Not ported yet`.

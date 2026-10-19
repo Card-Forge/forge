@@ -21,12 +21,12 @@ Java read directly: `TriggerHandler.java:243-262` (`runTrigger`: `TapsForMana`/`
 
 ### What happens
 
-| Step                         | Go                                                                                                                  | Java                                                                         |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Mana produced, replacements  | `TapLandForMana`/`ActivateManaAbility` keep `manaReplaced`'s result, add it, pass it to `checkTapsForManaTriggers`  | `produceMana` returns `afterReplace` (`AbilityManaPart.java:174`, `:211`)    |
-| Static matches first         | `tapsForManaMatches(..., static=true)` → `resolveStaticTriggers`                                                    | `runWaitingTrigger` static loop (`TriggerHandler.java:300-309`)              |
-| Then the rest                | `tapsForManaMatches(..., static=false)` → `pushTriggeredAbilities`, collected after statics resolved                | Non-static `canRunTrigger` evaluated after statics ran                       |
-| Resolution                   | `g.registry.Resolve` — `Optional$`, `UnlessCost$`, `SubAbility$`, `ErrUnimplemented` as for a stacked ability       | `playTrigger` → `playNoStack`                                                |
+| Step | Go | Java |
+| --- | --- | --- |
+| Mana produced, replacements | `TapLandForMana`/`ActivateManaAbility` keep `manaReplaced`'s result, add it, pass it to `checkTapsForManaTriggers` | `produceMana` returns `afterReplace` (`AbilityManaPart.java:174`, `:211`) |
+| Static matches first | `tapsForManaMatches(..., static=true)` → `resolveStaticTriggers` | `runWaitingTrigger` static loop (`TriggerHandler.java:300-309`) |
+| Then the rest | `tapsForManaMatches(..., static=false)` → `pushTriggeredAbilities`, collected after statics resolved | Non-static `canRunTrigger` evaluated after statics ran |
+| Resolution | `g.registry.Resolve` — `Optional$`, `UnlessCost$`, `SubAbility$`, `ErrUnimplemented` as for a stacked ability | `playTrigger` → `playNoStack` |
 | Triggering objects, all hits | `triggeredObjects{card, activator, produced}`; `Defined$ TriggeredCardController`, `TriggeredActivator` now resolve | `setTriggeringObjectsFrom(Card, Produced, Activator)` (`...ForMana.java:88`) |
 
 Static resolution emits no `AbilityActivated`/`AbilityResolved` and runs no state-based-action check: `playNoStack` has
@@ -35,23 +35,23 @@ APNAP: Java walks `activeTriggers` in order for statics.
 
 ### New engine state
 
-| Field                | Why                                                                                                                                                                                                                         |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Game.registry`      | Set by `NewGame` to `NewRegistry()`; was set lazily in `Registry.Resolve`. Mana entry points take no `*Registry`, so a static trigger there had nothing to resolve through. Shared by `Clone` like `db` (stateless effects) |
-| `Game.pendingErr`    | A trigger site has no error return (`TapLandForMana`/`ActivateManaAbility` return bool, `Move` nothing). First error kept; copied by `Clone`                                                                                |
-| `triggeredObjects.*` | `card`, `activator`, `produced` (a `producedMana` value, so `Clone`'s stack `append` copies it with no aliasing). `produced` has no reader yet; `ManaReflected`'s `ReflectProperty$ Produced` is its consumer               |
+| Field | Why |
+| --- | --- |
+| `Game.registry` | Set by `NewGame` to `NewRegistry()`; was set lazily in `Registry.Resolve`. Mana entry points take no `*Registry`, so a static trigger there had nothing to resolve through. Shared by `Clone` like `db` (stateless effects) |
+| `Game.pendingErr` | A trigger site has no error return (`TapLandForMana`/`ActivateManaAbility` return bool, `Move` nothing). First error kept; copied by `Clone` |
+| `triggeredObjects.*` | `card`, `activator`, `produced` (a `producedMana` value, so `Clone`'s stack `append` copies it with no aliasing). `produced` has no reader yet; `ManaReflected`'s `ReflectProperty$ Produced` is its consumer |
 
 ### Error path (GO-7)
 
 `Game.TakePendingError` returns and clears the waiting error. Boundaries that take it:
 
-| Boundary                              | When                                                                                  |
-| ------------------------------------- | ------------------------------------------------------------------------------------- |
-| `Registry.Resolve`                    | After the effect ran without error — covers an effect tapping for mana mid-resolution |
-| `ResolveStack`                        | At entry, before anything resolves                                                    |
-| `PassPriority`                        | At entry and after each applied action                                                |
-| `fixture.RunActions`                  | After every `actions.log` line, so `tapformana` cannot swallow it                     |
-| Any driver calling a bool entry point | Calls `TakePendingError` itself                                                       |
+| Boundary | When |
+| --- | --- |
+| `Registry.Resolve` | After the effect ran without error — covers an effect tapping for mana mid-resolution |
+| `ResolveStack` | At entry, before anything resolves |
+| `PassPriority` | At entry and after each applied action |
+| `fixture.RunActions` | After every `actions.log` line, so `tapformana` cannot swallow it |
+| Any driver calling a bool entry point | Calls `TakePendingError` itself |
 
 Refused, not guessed: a static match whose API is `Charm` or that names `ValidTgts$` records `... not resolvable yet`
 (no static `TapsForMana` line in the corpus needs either; choosing targets would need `BecomesTarget` firing with no

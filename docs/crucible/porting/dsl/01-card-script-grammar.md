@@ -28,12 +28,12 @@ line in the corpus, and it is also the one that switches faces.
 A script fills an array of **seven faces**. Which one an entry lands on depends on state built by earlier lines, and
 there are four separate mechanisms — not one.
 
-| Mechanism               | Effect                                                                          | In corpus |
-| ----------------------- | ------------------------------------------------------------------------------- | --------: |
-| `ALTERNATE`             | Subsequent entries go to face 1                                                 |       875 |
-| `SPECIALIZE:<COLOUR>`   | Subsequent entries go to face 2-6, by `WHITE BLUE BLACK RED GREEN`              |        95 |
-| `Variant:<name>:<line>` | The rest of the line is re-parsed onto a named variant face of the current face |       297 |
-| `CopyFaceFrom:<name>`   | Registers a placeholder resolved after the whole corpus has loaded              |        25 |
+| Mechanism | Effect | In corpus |
+| --- | --- | ---: |
+| `ALTERNATE` | Subsequent entries go to face 1 | 875 |
+| `SPECIALIZE:<COLOUR>` | Subsequent entries go to face 2-6, by `WHITE BLUE BLACK RED GREEN` | 95 |
+| `Variant:<name>:<line>` | The rest of the line is re-parsed onto a named variant face of the current face | 297 |
+| `CopyFaceFrom:<name>` | Registers a placeholder resolved after the whole corpus has loaded | 25 |
 
 `Name:` is what creates a face: it constructs the face object at the current index, so an entry before the first `Name:`
 on a face has nothing to attach to.
@@ -51,33 +51,33 @@ $ find forge-gui/res/cardsfolder -name '*.txt' -exec cat {} + \
     | grep -oE '^[A-Za-z0-9_]+:' | sort | uniq -c | sort -rn
 ```
 
-| Key                                                 |  Count | Value grammar                                                                        |
-| --------------------------------------------------- | -----: | ------------------------------------------------------------------------------------ |
-| `SVar:`                                             | 59,418 | `name ":" ( param-map \| count-expression \| text )` — see below                     |
-| `Types:`                                            | 34,631 | Space-separated supertypes, card types, subtypes                                     |
-| `Oracle:`                                           | 34,631 | Free text. `\n` is a literal line break. Display only                                |
-| `ManaCost:`                                         | 34,630 | Mana cost, or the literal `no cost`                                                  |
-| `Name:`                                             | 34,622 | Free text; the card's identity                                                       |
-| `PT:`                                               | 19,199 | `power "/" toughness`, either may be `*` or a `Count$` reference                     |
-| `A:`                                                | 18,452 | Param map, first key `SP$` or `AB$`                                                  |
-| `K:`                                                | 18,245 | Keyword, optionally `name ":" arguments`                                             |
-| `T:`                                                | 16,976 | Param map, first key `Mode$`                                                         |
-| `DeckHas:`, `DeckHints:`, `DeckNeeds:`, `DeckRule:` | 13,590 | Deckbuilder metadata, `type$value` pairs                                             |
-| `S:`                                                |  7,094 | Param map, first key `Mode$`                                                         |
-| `AI:`                                               |  4,952 | AI hints, e.g. `RemoveDeck:All`                                                      |
-| `R:`                                                |  1,693 | Param map, first key `Event$`                                                        |
-| `AlternateMode:`                                    |    902 | `Split` \| `Transform` \| `Adventure` \| `Meld` \| `Specialize` \| `Modal` \| `Flip` |
-| `Colors:`                                           |    379 | Colour override, comma-separated                                                     |
-| `Loyalty:`                                          |    355 | Integer                                                                              |
-| `Variant:`                                          |    297 | Functional variant marker                                                            |
-| `HandLifeModifier:`                                 |    106 | Vanguard hand/life deltas                                                            |
-| `SPECIALIZE:`                                       |     95 | Specialize face mapping                                                              |
-| `Text:`                                             |     72 | Rules text override                                                                  |
-| `Draft:`                                            |     48 | Draft-time behaviour                                                                 |
-| `Defense:`                                          |     37 | Battle defense                                                                       |
-| `CopyFaceFrom:`                                     |     25 | Face inheritance                                                                     |
-| `MeldPair:`                                         |     14 | Meld partner name                                                                    |
-| `SETCOLORID:`, `Lights:`                            |      2 | Long tail; each appears once                                                         |
+| Key | Count | Value grammar |
+| --- | ---: | --- |
+| `SVar:` | 59,418 | `name ":" ( param-map \| count-expression \| text )` — see below |
+| `Types:` | 34,631 | Space-separated supertypes, card types, subtypes |
+| `Oracle:` | 34,631 | Free text. `\n` is a literal line break. Display only |
+| `ManaCost:` | 34,630 | Mana cost, or the literal `no cost` |
+| `Name:` | 34,622 | Free text; the card's identity |
+| `PT:` | 19,199 | `power "/" toughness`, either may be `*` or a `Count$` reference |
+| `A:` | 18,452 | Param map, first key `SP$` or `AB$` |
+| `K:` | 18,245 | Keyword, optionally `name ":" arguments` |
+| `T:` | 16,976 | Param map, first key `Mode$` |
+| `DeckHas:`, `DeckHints:`, `DeckNeeds:`, `DeckRule:` | 13,590 | Deckbuilder metadata, `type$value` pairs |
+| `S:` | 7,094 | Param map, first key `Mode$` |
+| `AI:` | 4,952 | AI hints, e.g. `RemoveDeck:All` |
+| `R:` | 1,693 | Param map, first key `Event$` |
+| `AlternateMode:` | 902 | `Split` \| `Transform` \| `Adventure` \| `Meld` \| `Specialize` \| `Modal` \| `Flip` |
+| `Colors:` | 379 | Colour override, comma-separated |
+| `Loyalty:` | 355 | Integer |
+| `Variant:` | 297 | Functional variant marker |
+| `HandLifeModifier:` | 106 | Vanguard hand/life deltas |
+| `SPECIALIZE:` | 95 | Specialize face mapping |
+| `Text:` | 72 | Rules text override |
+| `Draft:` | 48 | Draft-time behaviour |
+| `Defense:` | 37 | Battle defense |
+| `CopyFaceFrom:` | 25 | Face inheritance |
+| `MeldPair:` | 14 | Meld partner name |
+| `SETCOLORID:`, `Lights:` | 2 | Long tail; each appears once |
 
 **A key Forge's `parseLine` matches no case for is ignored without complaint**, which is how a malformed line survives
 in the corpus: it costs the card its effect and says nothing. `spirit_of_resilience` wrote `DBCleanup:` for

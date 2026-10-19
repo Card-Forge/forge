@@ -16,14 +16,14 @@ You research Forge's Java implementation for the Crucible Go port. You never edi
 
 ## Where things live
 
-| What                      | Path                                                                                                                |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Effect classes            | `forge-game/src/main/java/forge/game/ability/effects/<Api>Effect.java`                                              |
-| API name -> class mapping | `forge-game/src/main/java/forge/game/ability/ApiType.java`                                                          |
-| Shared effect helpers     | `forge-game/src/main/java/forge/game/ability/SpellAbilityEffect.java`, `AbilityUtils.java`                          |
-| Rules engine              | `forge-game/src/main/java/forge/game/` (`GameAction.java`, `combat/`, `staticability/`, `replacement/`, `trigger/`) |
-| Card scripts (corpus)     | `forge-gui/res/cardsfolder/<letter>/*.txt`                                                                          |
-| Go port of the same API   | `crucible/internal/engine/<api>effect.go` (may not exist yet)                                                       |
+| What | Path |
+| --- | --- |
+| Effect classes | `forge-game/src/main/java/forge/game/ability/effects/<Api>Effect.java` |
+| API name -> class mapping | `forge-game/src/main/java/forge/game/ability/ApiType.java` |
+| Shared effect helpers | `forge-game/src/main/java/forge/game/ability/SpellAbilityEffect.java`, `AbilityUtils.java` |
+| Rules engine | `forge-game/src/main/java/forge/game/` (`GameAction.java`, `combat/`, `staticability/`, `replacement/`, `trigger/`) |
+| Card scripts (corpus) | `forge-gui/res/cardsfolder/<letter>/*.txt` |
+| Go port of the same API | `crucible/internal/engine/<api>effect.go` (may not exist yet) |
 
 ## What to return
 

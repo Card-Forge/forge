@@ -14,13 +14,13 @@ Real lines: 54 `AddStaticAbility$` (Rune of Flight/Speed/Might/..., Walking Sarc
 Vindicator, Tsagan Raider-Warlord), 9 `AddReplacementEffect$` (Bewitching Leechcraft, Hedron-Field Purists, Pulmonic
 Sliver, Master Chef, Cloudsteel Kirin, ...).
 
-| Piece                                                                                                       | Where                                    |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| The SVars were already compiled (`continuousGrantKeys`); the grant row gains `statics`, `replacements`      | `traitGrant`, `applyOneContinuousTraits` |
-| Every walk over a host's statics or replacements reads `traitFaces`; it appends one pseudo-face per grant   | `Card.grantFaces` (one seam, ~20 walks)  |
-| `RemoveAllAbilities$` takes granted statics and replacements granted earlier, `RemoveNonManaAbilities$` too | `removeTraits`                           |
+| Piece | Where |
+| --- | --- |
+| The SVars were already compiled (`continuousGrantKeys`); the grant row gains `statics`, `replacements` | `traitGrant`, `applyOneContinuousTraits` |
+| Every walk over a host's statics or replacements reads `traitFaces`; it appends one pseudo-face per grant | `Card.grantFaces` (one seam, ~20 walks) |
+| `RemoveAllAbilities$` takes granted statics and replacements granted earlier, `RemoveNonManaAbilities$` too | `removeTraits` |
 | A granted static applies in the layer that granted it (and so does what it grants), then in every later one | `abilitiesLayerOps`, `continuousStatics` |
-| Grants are cleared at the start of every pass, so Layers 2-5 never read last pass's                         | `applyContinuousLayers`                  |
+| Grants are cleared at the start of every pass, so Layers 2-5 never read last pass's | `applyContinuousLayers` |
 
 Granted statics enter `continuousStatics` with `face: -1` and an index running across the host's grants.
 
@@ -62,12 +62,12 @@ enter as their chosen shape; Living Lore's `ChangeZone` exiles on entry. A copy 
 (`Defined$ Self`, `copyEffect.ofSelf`) is not a new generation of its own entry replacements, so Primal Clay's
 replacement does not re-apply after its mold.
 
-| Shape                                          | State                                                                                                         |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Primal Clay family, Molten Sentry, Living Lore | resolve; scenarios `primal-clay-*`, tests `entersasnonclone_test.go`                                          |
-| The Mimeoplasm                                 | still an error: its chain `PutCounter` with `ETB$` (counters as part of the entry) is refused before the copy |
-| CR 616.1 choice among copy replacements        | still an error (`PlayerController` has no replacement-order decision on this path)                            |
-| Mystic Reflection, `Clone`'s rejected params   | unchanged                                                                                                     |
+| Shape | State |
+| --- | --- |
+| Primal Clay family, Molten Sentry, Living Lore | resolve; scenarios `primal-clay-*`, tests `entersasnonclone_test.go` |
+| The Mimeoplasm | still an error: its chain `PutCounter` with `ETB$` (counters as part of the entry) is refused before the copy |
+| CR 616.1 choice among copy replacements | still an error (`PlayerController` has no replacement-order decision on this path) |
+| Mystic Reflection, `Clone`'s rejected params | unchanged |
 
 Living Lore's `SetPower$ X` over `Remembered$CardManaCost` needs the remembered-amount CDA (`layer7a-cda-amounts.md`).
 

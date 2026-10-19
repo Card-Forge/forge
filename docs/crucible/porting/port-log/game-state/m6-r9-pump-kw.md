@@ -19,17 +19,17 @@ token. No variable-keyword shape (Protection, Ward, Landwalk, ...) was among the
 6 unrefused (this batch checked the refusal, not how Layer 6 applies each one). Corpus count of the refused tokens,
 `(AB|SP|DB)$ Pump`/`PumpAll` lines:
 
-| Hidden line                                                                                       | Pump | PumpAll | Status                                       |
-| ------------------------------------------------------------------------------------------------- | ---- | ------- | -------------------------------------------- |
-| `CARDNAME can't block.`                                                                           | 112  | 4       | Resolved (`canBlockAtAll`)                   |
-| `This card doesn't untap during your next untap step.`                                            | 94   | 11      | Resolved (`untapBlocked`, untap removal)     |
-| `CARDNAME must be blocked if able.`                                                               | 15   | 1       | Resolved (block requirements)                |
-| `All creatures able to block CARDNAME do so.`                                                     | 12   | 0       | Resolved (block requirements)                |
-| `CARDNAME can't attack or block.`                                                                 | 9    | 0       | Resolved (both halves)                       |
-| `CARDNAME can't attack.`                                                                          | 5    | 0       | Resolved (`canAttackAtAll`)                  |
-| `During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.` | 1    | 0       | Refused: bounce at `Untap.java:93` not built |
-| `Damage that would be dealt to CARDNAME can't be redirected.`                                     | 1    | 0       | Refused: no damage redirection               |
-| `Unblockable`                                                                                     | 1    | 0       | Refused: read by no Java code (below)        |
+| Hidden line | Pump | PumpAll | Status |
+| --- | --- | --- | --- |
+| `CARDNAME can't block.` | 112 | 4 | Resolved (`canBlockAtAll`) |
+| `This card doesn't untap during your next untap step.` | 94 | 11 | Resolved (`untapBlocked`, untap removal) |
+| `CARDNAME must be blocked if able.` | 15 | 1 | Resolved (block requirements) |
+| `All creatures able to block CARDNAME do so.` | 12 | 0 | Resolved (block requirements) |
+| `CARDNAME can't attack or block.` | 9 | 0 | Resolved (both halves) |
+| `CARDNAME can't attack.` | 5 | 0 | Resolved (`canAttackAtAll`) |
+| `During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.` | 1 | 0 | Refused: bounce at `Untap.java:93` not built |
+| `Damage that would be dealt to CARDNAME can't be redirected.` | 1 | 0 | Refused: no damage redirection |
+| `Unblockable` | 1 | 0 | Refused: read by no Java code (below) |
 
 ## Hidden lines are pump-record state
 
@@ -38,12 +38,12 @@ Java splits `KW$` in `applyPump`: a token starting `HIDDEN` loses the prefix and
 `Duration$ Permanent`. `pumpKeywords` returns the same split as a `pumpGrant` (plain keywords, hidden lines, the Layer
 7d switch); mixed lines (`Trample & HIDDEN CARDNAME can't block.`) work.
 
-| Piece                     | Does                                                                                           | Why                                                                                                     |
-| ------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `pumpRecord.Hidden`       | The lines, prefix stripped                                                                     | The record is the state; `Card.hiddenKeywords` is rebuilt every pass (`clearHiddenKeywords`)            |
-| `pumpHiddenKeywords`      | Puts every live record's lines back on its card, in `applyContinuousRules`                     | Same pass that rebuilds static `AddHiddenKeyword$` grants; a direct write would vanish on the next pass |
-| `hiddenKeywordRead`       | One allow-list for statics and pumps; gains `CARDNAME can't attack.` (read by `attack.go`)     | A line nothing reads would be granted and ignored: refused, naming the line (GO-7)                      |
-| `endNextUntapStepKeyword` | After the active player's untap, strips the untap line from records on permanents they control | `Untap.java:157-161`; a record left granting nothing is dropped                                         |
+| Piece | Does | Why |
+| --- | --- | --- |
+| `pumpRecord.Hidden` | The lines, prefix stripped | The record is the state; `Card.hiddenKeywords` is rebuilt every pass (`clearHiddenKeywords`) |
+| `pumpHiddenKeywords` | Puts every live record's lines back on its card, in `applyContinuousRules` | Same pass that rebuilds static `AddHiddenKeyword$` grants; a direct write would vanish on the next pass |
+| `hiddenKeywordRead` | One allow-list for statics and pumps; gains `CARDNAME can't attack.` (read by `attack.go`) | A line nothing reads would be granted and ignored: refused, naming the line (GO-7) |
+| `endNextUntapStepKeyword` | After the active player's untap, strips the untap line from records on permanents they control | `Untap.java:157-161`; a record left granting nothing is dropped |
 
 No `CARDNAME can't attack.` static line exists in the corpus, so widening the allow-list changes no static.
 
@@ -73,13 +73,13 @@ Gaea's Blessing over an empty graveyard could not be cast: `targetChoiceFor` ans
 candidate pool whatever `TargetMin$` said. `TargetSelection.chooseTargets` cancels only when there are neither enough
 candidates nor enough targets (`TargetSelection.java:82`, `:113-120`), and a minimum of 0 is always enough. Now:
 
-| Site                    | `TargetMin$ 0`, no candidate                                                |
-| ----------------------- | --------------------------------------------------------------------------- |
-| `targetChoiceFor`       | ok, empty pool                                                              |
-| `resolveTargets`        | no `ChooseTargets` question; the ability goes on with no target             |
-| `resolveChainTargets`   | the link records an empty choice, no question                               |
-| `copySpell` new targets | no `ConfirmEffect`/`ChooseTargets` question                                 |
-| resolution              | no fizzle (no target to lose); `ValidTgts$` named, so no `Defined$` default |
+| Site | `TargetMin$ 0`, no candidate |
+| --- | --- |
+| `targetChoiceFor` | ok, empty pool |
+| `resolveTargets` | no `ChooseTargets` question; the ability goes on with no target |
+| `resolveChainTargets` | the link records an empty choice, no question |
+| `copySpell` new targets | no `ConfirmEffect`/`ChooseTargets` question |
+| resolution | no fizzle (no target to lose); `ValidTgts$` named, so no `Defined$` default |
 
 `TestUpToTargetsWithNoCandidateStillResolves` pins the last row. Every smoke card that went plays→refused with this
 change names `TargetMin$ 0`: the ability used to vanish silently, and now reaches its effect, which refuses a param it
@@ -92,19 +92,19 @@ an empty list there.
 
 `crucible card-smoke -all -workers 8`, before → after this change:
 
-| Status       | Before | After  |
-| ------------ | ------ | ------ |
-| plays        | 29,190 | 29,308 |
-| refused      | 4,319  | 4,214  |
-| inconclusive | 211    | 198    |
-| judged play  | 87.1%  | 87.4%  |
+| Status | Before | After |
+| --- | --- | --- |
+| plays | 29,190 | 29,308 |
+| refused | 4,319 | 4,214 |
+| inconclusive | 211 | 198 |
+| judged play | 87.1% | 87.4% |
 
-| Flip                    | Cards | Cause                                                                                                                                                                            |
-| ----------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| refused → plays         | 149   | 128 `KW$`, 19 `TargetsWithDefinedController$`; Mindbreak Trap and Disorienting Choice play on the zero-target path only (`TargetMin$ 0`), their old refusals still stand         |
-| refused, reason changed | 19    | 18 `KW$`: 16 lure pumps now refused at `turns` (below), Jet's Brainwashing (`GainControl: Condition$`), Searing Barb (`Pump: Defined$`); The Caves of Androzani (`TargetMin$ 0`) |
-| plays → refused         | 41    | `TargetMin$ 0` abilities now reaching their effect                                                                                                                               |
-| inconclusive → decided  | 13    | `TargetMin$ 0`: 10 play (zero-target path only), 3 refused                                                                                                                       |
+| Flip | Cards | Cause |
+| --- | --- | --- |
+| refused → plays | 149 | 128 `KW$`, 19 `TargetsWithDefinedController$`; Mindbreak Trap and Disorienting Choice play on the zero-target path only (`TargetMin$ 0`), their old refusals still stand |
+| refused, reason changed | 19 | 18 `KW$`: 16 lure pumps now refused at `turns` (below), Jet's Brainwashing (`GainControl: Condition$`), Searing Barb (`Pump: Defined$`); The Caves of Androzani (`TargetMin$ 0`) |
+| plays → refused | 41 | `TargetMin$ 0` abilities now reaching their effect |
+| inconclusive → decided | 13 | `TargetMin$ 0`: 10 play (zero-target path only), 3 refused |
 
 The 16 lure pumps (Alluring Scent, Compelled Duel, Irresistible Prey, ...) now grant "must be blocked"; the probe's
 block declarer does not satisfy block requirements, so the engine rejects its declaration (CR 509.1c), as it already did
@@ -112,13 +112,13 @@ for Lure, Gift of the Deity and 7 others.
 
 ## Not ported
 
-| Shape                                                                | Lines | Reason                                                          |
-| -------------------------------------------------------------------- | ----- | --------------------------------------------------------------- |
-| `HIDDEN During your next untap step, ... return CARDNAME ...`        | 1     | Untap-step bounce (`Untap.java:93`); Undiscovered Paradise      |
-| `HIDDEN Damage that would be dealt to CARDNAME can't be redirected.` | 1     | No damage redirection (`ReplaceDamage.java:100`); Whippoorwill  |
-| `HIDDEN Unblockable`                                                 | 1     | Card-script defect: nothing reads it (`card-script-defects.md`) |
-| a hidden line on a player                                            | 0     | Java's own result is an unread player keyword                   |
-| `Defined$ ParentTarget` after an ancestor chose zero targets         | —     | Fails closed (`defined.go`); Java returns an empty list         |
+| Shape | Lines | Reason |
+| --- | --- | --- |
+| `HIDDEN During your next untap step, ... return CARDNAME ...` | 1 | Untap-step bounce (`Untap.java:93`); Undiscovered Paradise |
+| `HIDDEN Damage that would be dealt to CARDNAME can't be redirected.` | 1 | No damage redirection (`ReplaceDamage.java:100`); Whippoorwill |
+| `HIDDEN Unblockable` | 1 | Card-script defect: nothing reads it (`card-script-defects.md`) |
+| a hidden line on a player | 0 | Java's own result is an unread player keyword |
+| `Defined$ ParentTarget` after an ancestor chose zero targets | — | Fails closed (`defined.go`); Java returns an empty list |
 
 ## Tests
 

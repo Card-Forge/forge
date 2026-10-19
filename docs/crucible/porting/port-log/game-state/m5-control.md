@@ -12,15 +12,15 @@ Java registers `GameCommand` closures. A closure is code in game state, so each 
 data-only shape, `scheduledaction.go`): `commandLoseControl` (`ControlGainEffect.getLoseControlCommand`) and
 `commandEndEffect` (an Effect card's `addUntilCommand` closure).
 
-| Java                                                              | Go                                                                                      |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `Card.add/runLeavesPlayCommands` (`Card.java:3598`)               | `Card.leavesPlayCmds`, `runLeavesPlayCommands`, run from `effectCardsSeeMove`           |
-| `Card.add/runUntapCommands` (`Card.java:4724`)                    | `Card.untapCmds`, `runUntapCommands` at every untap site (below)                        |
-| `Card.add/runChangeControllerCommands` (`Card.java:3628`)         | `Card.changeControllerCmds`, run and cleared by `correctControllerZone` before move     |
-| `Card.add/runPhaseOutCommands` (`Card.java:5650`)                 | `Card.phaseOutCmds`, run in `switchPhaseState` before the permanent phases out          |
-| `EndOfTurn.addUntil`, `executeUntil` (`PhaseHandler.java:406`)    | `Game.endOfTurnCmds`, `runEndOfTurnCommands` in `cleanupStep`                           |
-| `EndOfCombat.addUntil`, `executeUntil` (`PhaseHandler.java:1262`) | `Game.endOfCombatCmds`, `runEndOfCombatCommands` in `endCombat`                         |
-| `addUntilEnd`/`registerUntilEnd` (`Phase.java`)                   | `Game.endOfNextTurnCmds` with `Armed`, same semantics as `effectUntilEndOfYourNextTurn` |
+| Java | Go |
+| --- | --- |
+| `Card.add/runLeavesPlayCommands` (`Card.java:3598`) | `Card.leavesPlayCmds`, `runLeavesPlayCommands`, run from `effectCardsSeeMove` |
+| `Card.add/runUntapCommands` (`Card.java:4724`) | `Card.untapCmds`, `runUntapCommands` at every untap site (below) |
+| `Card.add/runChangeControllerCommands` (`Card.java:3628`) | `Card.changeControllerCmds`, run and cleared by `correctControllerZone` before move |
+| `Card.add/runPhaseOutCommands` (`Card.java:5650`) | `Card.phaseOutCmds`, run in `switchPhaseState` before the permanent phases out |
+| `EndOfTurn.addUntil`, `executeUntil` (`PhaseHandler.java:406`) | `Game.endOfTurnCmds`, `runEndOfTurnCommands` in `cleanupStep` |
+| `EndOfCombat.addUntil`, `executeUntil` (`PhaseHandler.java:1262`) | `Game.endOfCombatCmds`, `runEndOfCombatCommands` in `endCombat` |
+| `addUntilEnd`/`registerUntilEnd` (`Phase.java`) | `Game.endOfNextTurnCmds` with `Armed`, same semantics as `effectUntilEndOfYourNextTurn` |
 
 Untap sites that run `untapCmds` (Java funnels all through `Card.untap`): `untapStep`, `untapeffect.go`,
 `untapalleffect.go`, `taporuntapeffect.go`, `taporuntapalleffect.go`, `gaincontroleffect.go`. `PhasesEffect`'s untap
@@ -35,14 +35,14 @@ Leaving the battlefield also clears the untap, change-controller and phase-out l
 
 ## `GainControl` (`gaincontroleffect.go`)
 
-| Java (`ControlGainEffect.resolve`)                                                                                         | Go                                                                     |
-| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `LoseControl$` split on `,`                                                                                                | `parseLoseControl`; unknown or refused token is an error (GO-7)        |
-| early returns for `LeavesPlay`, `LoseControl`, `Untap` (`:127-135`)                                                        | same checks before the target loop                                     |
-| `canBeControlledBy`: `isInGame`, phased-out skip                                                                           | `Lost` and `IsPhasedOut` skips; `CantGainControl` static not evaluated |
-| `addTempController(newController, tStamp)` then untap, keywords, remember, commands, then `controllerChangeZoneCorrection` | same order                                                             |
-| `AddKWs$` split on `&`, keywords until end of turn                                                                         | non-permanent `pumpRecord` at the same timestamp                       |
-| `LeavesPlay` registered only when host differs from target                                                                 | same                                                                   |
+| Java (`ControlGainEffect.resolve`) | Go |
+| --- | --- |
+| `LoseControl$` split on `,` | `parseLoseControl`; unknown or refused token is an error (GO-7) |
+| early returns for `LeavesPlay`, `LoseControl`, `Untap` (`:127-135`) | same checks before the target loop |
+| `canBeControlledBy`: `isInGame`, phased-out skip | `Lost` and `IsPhasedOut` skips; `CantGainControl` static not evaluated |
+| `addTempController(newController, tStamp)` then untap, keywords, remember, commands, then `controllerChangeZoneCorrection` | same order |
+| `AddKWs$` split on `&`, keywords until end of turn | non-permanent `pumpRecord` at the same timestamp |
+| `LeavesPlay` registered only when host differs from target | same |
 
 Registered tokens: `EOT` (127 corpus lines), `LeavesPlay`/`LoseControl` combinations (31), `Untap` combinations (9),
 `UntilTheEndOfYourNextTurn` (5), `EndOfCombat` (1). `StaticCommandCheck` and `UntilSourceUnattached` are ported in
@@ -59,16 +59,16 @@ and `Goad` still refuse it (their own lifetime tables).
 
 ## Soulbond (`soulbond.go`)
 
-| Java                                                       | Go                                                                   |
-| ---------------------------------------------------------- | -------------------------------------------------------------------- |
-| `Card.pairedWith`, `isPaired` (`Card.java:1390`)           | `Card.pairedWith`, `IsPaired`, `PairedWith`                          |
-| `BondEffect` (`DB$ Bond`)                                  | `bondEffect`; optional pick is `ChooseCardsForEffect(lo 0, hi 1)`    |
-| keyword's two triggers (`CardFactoryUtil.java:1740-1760`)  | `keyword/expand.go` `Soulbond` case; `Defined$ TriggeredCardLKICopy` |
-| unpair on leaving (`GameAction.java:622-628`)              | `unpairOnLeave` from both `Move` paths                               |
-| unpair on controller change (`GameAction.java:1015-1020`)  | `unpair` in `correctControllerZone`                                  |
-| unpair in the state check (`GameAction.java:1209-1215`)    | `unpairInvalid` after the layer pass in `checkStateBasedActions`     |
-| unpair on phasing out (`Card.java:5654`)                   | `unpair` in `switchPhaseState`                                       |
-| `Paired`/`PairedWith` properties (`CardProperty.java:564`) | `valid.go`                                                           |
+| Java | Go |
+| --- | --- |
+| `Card.pairedWith`, `isPaired` (`Card.java:1390`) | `Card.pairedWith`, `IsPaired`, `PairedWith` |
+| `BondEffect` (`DB$ Bond`) | `bondEffect`; optional pick is `ChooseCardsForEffect(lo 0, hi 1)` |
+| keyword's two triggers (`CardFactoryUtil.java:1740-1760`) | `keyword/expand.go` `Soulbond` case; `Defined$ TriggeredCardLKICopy` |
+| unpair on leaving (`GameAction.java:622-628`) | `unpairOnLeave` from both `Move` paths |
+| unpair on controller change (`GameAction.java:1015-1020`) | `unpair` in `correctControllerZone` |
+| unpair in the state check (`GameAction.java:1209-1215`) | `unpairInvalid` after the layer pass in `checkStateBasedActions` |
+| unpair on phasing out (`Card.java:5654`) | `unpair` in `switchPhaseState` |
+| `Paired`/`PairedWith` properties (`CardProperty.java:564`) | `valid.go` |
 
 Pinned quirk (PORT-7): leaving the battlefield frees the partner, but a token keeps its own `pairedWith`
 (`!c.isRealToken()`); a token ceases to exist, so only last-known information shows it.
@@ -79,13 +79,13 @@ through Wolfir Silverheart's +4/+4.
 
 ## Delayed lines, end to end
 
-| Card                | Needed                                                                                                                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Ray of Command      | `LoseControl$ EOT`, `AddKWs$`; the EOT command runs inside cleanup, the delayed trigger gets CR 514.3a priority                                                                                              |
-| Magus of the Unseen | same, as an activated ability                                                                                                                                                                                |
-| Stolen Uniform      | `IsPresent$` on a delayed trigger (`delayedPresentMatches`), `Pump` `RememberObjects$`, `Attach` `Object$`, targets of a sub-ability (below)                                                                 |
-| Seraph              | `Creature.DamagedBy` (`Damage.Sources`), `Defined$ TriggeredCard*`, delayed `Mode$ ChangesZone` from the battlefield with `ValidCard$ Card.StrictlySelf` and `Destination$ Any`, `Cleanup` `ClearTriggered$` |
-| Krovikan Vampire    | landed, see [`m5-control-2.md`](m5-control-2.md)                                                                                                                                                             |
+| Card | Needed |
+| --- | --- |
+| Ray of Command | `LoseControl$ EOT`, `AddKWs$`; the EOT command runs inside cleanup, the delayed trigger gets CR 514.3a priority |
+| Magus of the Unseen | same, as an activated ability |
+| Stolen Uniform | `IsPresent$` on a delayed trigger (`delayedPresentMatches`), `Pump` `RememberObjects$`, `Attach` `Object$`, targets of a sub-ability (below) |
+| Seraph | `Creature.DamagedBy` (`Damage.Sources`), `Defined$ TriggeredCard*`, delayed `Mode$ ChangesZone` from the battlefield with `ValidCard$ Card.StrictlySelf` and `Destination$ Any`, `Cleanup` `ClearTriggered$` |
+| Krovikan Vampire | landed, see [`m5-control-2.md`](m5-control-2.md) |
 
 `delayedPresentMatches` reads `IsPresent$` once, as the trigger fires (Java checks again as it resolves), with
 `Card.IsTriggerRemembered` applied against the trigger's `RememberObjects$` list. `PresentCompare$`/`PresentZone$`/

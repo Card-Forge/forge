@@ -19,12 +19,12 @@ candidates in play order (players, zones, cards, faces, lines: `eachReplacementR
 closure that edits the event the dispatch owns and returns Replaced, Updated or NotReplaced. `collect` runs again after
 every applied effect, so a line gated on the amount (`DamageAmount$`) sees the updated one.
 
-| Dispatch                                     | Event$       | Decider                       |
-| -------------------------------------------- | ------------ | ----------------------------- |
-| `drawReplaced`                               | `Draw`       | the drawing player            |
-| `gainLifeReplaced`                           | `GainLife`   | the player gaining            |
-| `damageReplaced` (`damageReplacement`)       | `DamageDone` | the damaged card's controller |
-| `damageReplacedPlayer` (`damageReplacement`) | `DamageDone` | the damaged player            |
+| Dispatch | Event$ | Decider |
+| --- | --- | --- |
+| `drawReplaced` | `Draw` | the drawing player |
+| `gainLifeReplaced` | `GainLife` | the player gaining |
+| `damageReplaced` (`damageReplacement`) | `DamageDone` | the damaged card's controller |
+| `damageReplacedPlayer` (`damageReplacement`) | `DamageDone` | the damaged player |
 
 `PlayerController.ChooseReplacementEffect(g, decider, options []ReplacementOption) int` is the hook, with its own caller
 here and nowhere else. `ScriptedController` answers from `QueueReplacementEffect(i)`; the fixture verb is
@@ -36,13 +36,13 @@ two permanents and are asked). A controller answering out of range records a pen
 Two Furnaces of Rath compound (2, 4, 8). Rhox Faithmender (twice) and Angel of Vitality (plus 1) turn a gain of 6 into
 13 or 14 depending on the order.
 
-| Scenario                                           | Proves                                            |
-| -------------------------------------------------- | ------------------------------------------------- |
-| `replacement-616-gain-life-doubling-then-plus-one` | index 0 applies Faithmender first: 6 gives 13     |
-| `replacement-616-gain-life-plus-one-then-doubling` | index 1 applies Angel first: 6 gives 14           |
-| `replacement-616-damage-doubling-then-plus-one`    | Furnace then Thor: 2 gives 5                      |
-| `replacement-616-damage-plus-one-then-doubling`    | Thor then Furnace: 2 gives 6                      |
-| `replacement-616-two-furnaces-quadruple-damage`    | two identical shapes compound, one question asked |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-616-gain-life-doubling-then-plus-one` | index 0 applies Faithmender first: 6 gives 13 |
+| `replacement-616-gain-life-plus-one-then-doubling` | index 1 applies Angel first: 6 gives 14 |
+| `replacement-616-damage-doubling-then-plus-one` | Furnace then Thor: 2 gives 5 |
+| `replacement-616-damage-plus-one-then-doubling` | Thor then Furnace: 2 gives 6 |
+| `replacement-616-two-furnaces-quadruple-damage` | two identical shapes compound, one question asked |
 
 Not ported: Java's `ReplacementLayer` order (CantHappen, Control, Copy, Transform, Other) as one loop per layer. The
 Copy layer (`applyCopyReplacements`) and the `Prevent$ True` / `Layer$ CantHappen` shapes run in their own functions
@@ -58,13 +58,13 @@ Real R: line counts from the corpus (1,717 lines). Already resolved elsewhere: `
 `ProduceMana`, `DeclareBlocker` (`replacement.go`), `GameLoss`/`GameWin` `CantHappen` (`gameloss.go`), `Destroy` with
 `Regeneration$` (`regeneration.go`). The unresolved rest, in count order, and what `replacementevents.go` ports:
 
-| Event$        | Lines | Shape ported                                                          | Java                                              |
-| ------------- | ----- | --------------------------------------------------------------------- | ------------------------------------------------- |
-| `Counter`     | 118   | `Layer$ CantHappen`, `ValidCard$`, `ValidSA$ Spell[.props]` (117)     | `CounterEffect.removeFromStack`, `ReplaceCounter` |
-| `BeginPhase`  | 21    | `Skip$ True` with `Phase$`, optional `ValidPlayer$`, `Hellbent$` (20) | `PhaseHandler.advanceToNextPhase`                 |
-| `LifeReduced` | 8     | `ReplaceEffect` on `Amount` (limit, double), `CantHappen`, `Result$`  | `Player.loseLife`, `ReplaceLifeReduced`           |
-| `LoseMana`    | 5     | `ReplaceMana` `ReplaceType$` converts the pool instead of emptying it | `ManaPool.clearPool`                              |
-| `BeginTurn`   | 5     | `Skip$ True` with `ExtraTurn$ True` (4)                               | `PhaseHandler.getNextActivePlayer`                |
+| Event$ | Lines | Shape ported | Java |
+| --- | --- | --- | --- |
+| `Counter` | 118 | `Layer$ CantHappen`, `ValidCard$`, `ValidSA$ Spell[.props]` (117) | `CounterEffect.removeFromStack`, `ReplaceCounter` |
+| `BeginPhase` | 21 | `Skip$ True` with `Phase$`, optional `ValidPlayer$`, `Hellbent$` (20) | `PhaseHandler.advanceToNextPhase` |
+| `LifeReduced` | 8 | `ReplaceEffect` on `Amount` (limit, double), `CantHappen`, `Result$` | `Player.loseLife`, `ReplaceLifeReduced` |
+| `LoseMana` | 5 | `ReplaceMana` `ReplaceType$` converts the pool instead of emptying it | `ManaPool.clearPool` |
+| `BeginTurn` | 5 | `Skip$ True` with `ExtraTurn$ True` (4) | `PhaseHandler.getNextActivePlayer` |
 
 Details that are not obvious from the Java:
 
@@ -87,17 +87,17 @@ Details that are not obvious from the Java:
   snow kept as snow.
 - `eachReplacementRule` walks `liveTraitFaces`, so a transformed or modal card's other face is not a host.
 
-| Scenario                                                                       | Proves                                      |
-| ------------------------------------------------------------------------------ | ------------------------------------------- |
-| `replacement-counter-kavu-chameleon-cannot-be-countered`                       | self line from the stack                    |
-| `replacement-counter-leyline-of-lifeforce-protects-a-creature-spell`           | battlefield line, no `YouCtrl`              |
-| `replacement-counter-allosaurus-shepherd-protects-only-its-controllers-spells` | `YouCtrl` scopes to the host controller     |
-| `replacement-begin-phase-necropotence-skips-the-draw-step`                     | `Skip$ True`, `ValidPlayer$ You`            |
-| `replacement-begin-phase-eon-hub-skips-every-upkeep`                           | no `ValidPlayer$`, every player             |
-| `replacement-begin-turn-stranglehold-skips-an-opponents-extra-turn`            | extra turn skipped, normal order resumes    |
-| `replacement-life-reduced-worship-leaves-one-life`                             | `Result$`, `lifeGE1`, `LimitMax.Difference` |
-| `replacement-life-reduced-bloodletter-doubles-an-opponents-life-loss`          | `PlayerTurn$`, inline `ReplaceCount$`       |
-| `replacement-lose-mana-horizon-stone-keeps-unspent-mana-as-colorless`          | pool converted, not emptied                 |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-counter-kavu-chameleon-cannot-be-countered` | self line from the stack |
+| `replacement-counter-leyline-of-lifeforce-protects-a-creature-spell` | battlefield line, no `YouCtrl` |
+| `replacement-counter-allosaurus-shepherd-protects-only-its-controllers-spells` | `YouCtrl` scopes to the host controller |
+| `replacement-begin-phase-necropotence-skips-the-draw-step` | `Skip$ True`, `ValidPlayer$ You` |
+| `replacement-begin-phase-eon-hub-skips-every-upkeep` | no `ValidPlayer$`, every player |
+| `replacement-begin-turn-stranglehold-skips-an-opponents-extra-turn` | extra turn skipped, normal order resumes |
+| `replacement-life-reduced-worship-leaves-one-life` | `Result$`, `lifeGE1`, `LimitMax.Difference` |
+| `replacement-life-reduced-bloodletter-doubles-an-opponents-life-loss` | `PlayerTurn$`, inline `ReplaceCount$` |
+| `replacement-lose-mana-horizon-stone-keeps-unspent-mana-as-colorless` | pool converted, not emptied |
 
 Not ported: `RollDice` (4), `Attached` (3), and the rest at one line each; `Destroy` without `Regeneration$`,
 `TurnFaceUp`, `Transform`, `Scry`/`Mill`/`DrawCards` and the `Optional$` lines are in
@@ -113,13 +113,13 @@ played at once, without the stack (the "buffered" branch is `DamageDone` only), 
 shape; it gained the `controller` they all had in scope (a chain's token or extra turn may ask a decision).
 `movedGraveyardDestination` returns the zone and a `movedPost`:
 
-| Param on the ChangeZone | Effect                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------ |
-| `Destination$`          | `Exile`, `Hand` or `Library`                                                   |
-| `LibraryPosition$`      | `0` (top, the default) or `-1` (bottom); other values are a pending error      |
-| `Shuffle$ True`         | the owner's library is shuffled with the game's RNG after the card goes in     |
-| `Reveal$`               | accepted, no effect (hidden information is not tracked)                        |
-| `SubAbility$`           | the chain resolves through the Registry from the host, as its controller's own |
+| Param on the ChangeZone | Effect |
+| --- | --- |
+| `Destination$` | `Exile`, `Hand` or `Library` |
+| `LibraryPosition$` | `0` (top, the default) or `-1` (bottom); other values are a pending error |
+| `Shuffle$ True` | the owner's library is shuffled with the game's RNG after the card goes in |
+| `Reveal$` | accepted, no effect (hidden information is not tracked) |
+| `SubAbility$` | the chain resolves through the Registry from the host, as its controller's own |
 
 All 91 real `Destination$ Graveyard` lines now resolve: Library 8 (Gravebane Zombie top, Nissa's Chosen and Wheel of Sun
 and Moon bottom, Darksteel and Blightsteel Colossus, Progenitus, Legacy Weapon, Nexus of Fate shuffled), chains 4
@@ -127,12 +127,12 @@ and Moon bottom, Darksteel and Blightsteel Colossus, Progenitus, Legacy Weapon, 
 and returned triggers key off the zone the card ended in, so a library-bound creature does not die. Token and copy
 vanishing (CR 704.5d) is `Game.Move`'s and landed earlier.
 
-| Scenario                                                                   | Proves                                |
-| -------------------------------------------------------------------------- | ------------------------------------- |
-| `replacement-moved-gravebane-zombie-dies-on-top-of-its-owners-library`     | top of the library, not the graveyard |
-| `replacement-moved-nissas-chosen-dies-on-the-bottom-of-its-owners-library` | `LibraryPosition$ -1`                 |
-| `replacement-moved-progenitus-is-shuffled-into-the-library`                | `Shuffle$ True`                       |
-| `replacement-moved-kalitas-exiles-and-creates-a-zombie`                    | `SubAbility$` chain after the exile   |
+| Scenario | Proves |
+| --- | --- |
+| `replacement-moved-gravebane-zombie-dies-on-top-of-its-owners-library` | top of the library, not the graveyard |
+| `replacement-moved-nissas-chosen-dies-on-the-bottom-of-its-owners-library` | `LibraryPosition$ -1` |
+| `replacement-moved-progenitus-is-shuffled-into-the-library` | `Shuffle$ True` |
+| `replacement-moved-kalitas-exiles-and-creates-a-zombie` | `SubAbility$` chain after the exile |
 
 Not ported: a `Destination$` other than Graveyard or the battlefield's tapped shapes on `Event$ Moved` (the 973-line
 family is almost all `Destination$ Battlefield`, resolved as "enters tapped" only), a `ChangeZone` replacement of an

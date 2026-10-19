@@ -19,11 +19,11 @@ Directory name = what it proves, kebab-case, flat under `crucible/testdata/scena
 
 ## 2. Write the files
 
-| File           | Content                                                                                             |
-| -------------- | --------------------------------------------------------------------------------------------------- |
-| `setup.state`  | Forge `GameState` text format, same one the Java oracle reads. Do not invent keys                   |
-| `actions.log`  | Ordered scripted decisions, one per line; `#` comments explain the CR rule and why each step exists |
-| `expect.state` | The post-state, same format as `setup.state`                                                        |
+| File | Content |
+| --- | --- |
+| `setup.state` | Forge `GameState` text format, same one the Java oracle reads. Do not invent keys |
+| `actions.log` | Ordered scripted decisions, one per line; `#` comments explain the CR rule and why each step exists |
+| `expect.state` | The post-state, same format as `setup.state` |
 
 Grammar references: `setup.state` / `expect.state` keys in `docs/crucible/porting/port-log/game-state-fixture.md`
 (`Parse`/`Write`), `actions.log` verbs in its `## Scenarios: actions.log and the harness` section. Copy the closest

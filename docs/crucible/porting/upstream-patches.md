@@ -8,9 +8,9 @@ REV-1 ([../guidelines/05-commit-and-review.md](../guidelines/05-commit-and-revie
 
 Two kinds, and the distinction matters:
 
-| Kind                                                   | Conflict risk on the next upstream sync                                  |
-| ------------------------------------------------------ | ------------------------------------------------------------------------ |
-| **edit** — a line changed in a file upstream owns      | **High.** Conflicts every time upstream touches the same region. Avoid   |
+| Kind | Conflict risk on the next upstream sync |
+| --- | --- |
+| **edit** — a line changed in a file upstream owns | **High.** Conflicts every time upstream touches the same region. Avoid |
 | **add** — a new file in a directory upstream also uses | **Low.** Only conflicts if upstream later adds a file with the same name |
 
 Default is zero of both. Anything landing here needs a reason that survives review, and the row goes in the same commit
@@ -18,22 +18,22 @@ as the change.
 
 ## Log
 
-| Date       | Kind | Path                                | Why                                                                                                                                                                                                                | Commit        |
-| ---------- | ---- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| 2026-09-06 | add  | `.github/workflows/claude.yml`      | GitHub Actions only reads workflows from `.github/workflows/`. No alternative location exists. Created by `/install-github-app`                                                                                    | `9f0d3ad315d` |
-| 2026-09-06 | add  | `.prettierrc`, `.prettierignore`    | Prettier resolves config from the repo root only. `.prettierignore` is what keeps every upstream file unformatted (DOC-14)                                                                                         | `ff8c555fdf0` |
-| 2026-09-06 | add  | `.markdownlint-cli2.jsonc`          | Same root-only resolution, and the VSCode extension reads the same file so editor and CI agree (DOC-15)                                                                                                            | `ff8c555fdf0` |
-| 2026-09-06 | add  | `CLAUDE.md`                         | Claude Code reads it from the repo root only                                                                                                                                                                       | `ff8c555fdf0` |
-| 2026-09-06 | add  | `.github/workflows/crucible-go.yml` | GitHub Actions only reads workflows from `.github/workflows/`. Crucible's own Go CI: build, race tests, and every gate. Added in M1 and logged here late — REV-1 requires the row in the same commit as the change | `b976078523d` |
-| 2026-09-06 | add  | `.github/dependabot.yml`            | Dependabot reads config from `.github/` only. Scoped to `github-actions`; a `maven` entry at the root would auto-generate PRs editing upstream `pom.xml` files                                                     | `pending`     |
+| Date | Kind | Path | Why | Commit |
+| --- | --- | --- | --- | --- |
+| 2026-09-06 | add | `.github/workflows/claude.yml` | GitHub Actions only reads workflows from `.github/workflows/`. No alternative location exists. Created by `/install-github-app` | `9f0d3ad315d` |
+| 2026-09-06 | add | `.prettierrc`, `.prettierignore` | Prettier resolves config from the repo root only. `.prettierignore` is what keeps every upstream file unformatted (DOC-14) | `ff8c555fdf0` |
+| 2026-09-06 | add | `.markdownlint-cli2.jsonc` | Same root-only resolution, and the VSCode extension reads the same file so editor and CI agree (DOC-15) | `ff8c555fdf0` |
+| 2026-09-06 | add | `CLAUDE.md` | Claude Code reads it from the repo root only | `ff8c555fdf0` |
+| 2026-09-06 | add | `.github/workflows/crucible-go.yml` | GitHub Actions only reads workflows from `.github/workflows/`. Crucible's own Go CI: build, race tests, and every gate. Added in M1 and logged here late — REV-1 requires the row in the same commit as the change | `b976078523d` |
+| 2026-09-06 | add | `.github/dependabot.yml` | Dependabot reads config from `.github/` only. Scoped to `github-actions`; a `maven` entry at the root would auto-generate PRs editing upstream `pom.xml` files | `pending` |
 
 ### Edits
 
 **One permanent.** Everything else above is an `add`, and the card-script fixes below carry their own deletion
 condition.
 
-| Date       | Path        | Change            | Why                                                                                                                                                                | Conflict rule                                        |
-| ---------- | ----------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| Date | Path | Change | Why | Conflict rule |
+| --- | --- | --- | --- | --- |
 | 2026-09-07 | `README.md` | Replaced entirely | A fork's front page has to describe the fork. Upstream's README describes Forge, which is misleading as the landing page of a repository whose purpose is Crucible | **Always keep ours.** Never merge upstream's version |
 
 **The target is zero edits.** Accepting this one is a deliberate trade: the repository's front page is the single
@@ -58,10 +58,10 @@ An edit whose whole purpose is to disappear goes here: the same change open as a
 [Card-Forge/forge](https://github.com/Card-Forge/forge), with the row and the local edit both deleted once upstream
 merges it and a sync brings the identical content back.
 
-| Date       | Path                                                                                                           | Change                                                                                                                                                                                                                                                                                                                                                         | Upstream                                                          |
-| ---------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| 2026-10-02 | `forge-gui/res/cardsfolder/p/phenomenon_investigators.txt`                                                     | `TrigReturn`: drop `ChoiceOptional$ True` from a `DB$ ChangeZone`. `ChangeZoneEffect.java` never reads it (it is a `CountersPut`/`CountersRemove`/`Clone` param); a hidden-origin ChangeZone is already optional unless `Mandatory$` is set, so behavior is unchanged. Surfaced when ADR-0023's `AddTrigger$` made the SVar reachable to `apiscan -check -api` | branch `upstream-pr/card-script-unread-params`, PR not yet opened |
-| 2026-10-02 | `forge-gui/res/cardsfolder/a/ashlings_prerogative.txt`, `forge-gui/res/cardsfolder/g/gollum_riddle_master.txt` | `ChooseEvenOdd` SVar: drop `ListTitle$ Choose ODD or EVEN`. `ChooseEvenOddEffect.java` reads only `Notify`; `ListTitle$` belongs to `ChooseNumberEffect`, so the prompt text never appears. Surfaced when `K:ETBReplacement` of every layer began to compile its SVar (`etbReplacement`, `compile.go`) and `apiscan -check -api` reached these two             | branch `upstream-pr/card-script-unread-params`, PR not yet opened |
+| Date | Path | Change | Upstream |
+| --- | --- | --- | --- |
+| 2026-10-02 | `forge-gui/res/cardsfolder/p/phenomenon_investigators.txt` | `TrigReturn`: drop `ChoiceOptional$ True` from a `DB$ ChangeZone`. `ChangeZoneEffect.java` never reads it (it is a `CountersPut`/`CountersRemove`/`Clone` param); a hidden-origin ChangeZone is already optional unless `Mandatory$` is set, so behavior is unchanged. Surfaced when ADR-0023's `AddTrigger$` made the SVar reachable to `apiscan -check -api` | branch `upstream-pr/card-script-unread-params`, PR not yet opened |
+| 2026-10-02 | `forge-gui/res/cardsfolder/a/ashlings_prerogative.txt`, `forge-gui/res/cardsfolder/g/gollum_riddle_master.txt` | `ChooseEvenOdd` SVar: drop `ListTitle$ Choose ODD or EVEN`. `ChooseEvenOddEffect.java` reads only `Notify`; `ListTitle$` belongs to `ChooseNumberEffect`, so the prompt text never appears. Surfaced when `K:ETBReplacement` of every layer began to compile its SVar (`etbReplacement`, `compile.go`) and `apiscan -check -api` reached these two | branch `upstream-pr/card-script-unread-params`, PR not yet opened |
 
 Carried edits exist because the corpus gates run against the fork's own tree: a card the parser rejects fails the build
 whoever wrote it, and waiting for a merge would mean disabling a gate in the meantime.

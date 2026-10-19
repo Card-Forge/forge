@@ -28,11 +28,11 @@ Java read directly: `ManaReflectedEffect.java:32-147`, `CardUtil.java:234-367` (
 
 ### Corpus shapes
 
-| `ReflectProperty$` | Lines | Where                                                                             | Colors from                                                            |
-| ------------------ | ----: | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `Produced`         |    22 | `DB$` under a `Mode$ TapsForMana \| Static$ True` trigger, every one              | The triggering mana, `AbilityKey.Produced` (`CardUtil.java:295-307`)   |
-| `Produce`          |    15 | `A:AB$` mana abilities (Reflecting Pool, Exotic Orchard, Fellwar Stone)           | What `Valid$` cards' abilities could produce (`CardUtil.java:308-345`) |
-| `Is`               |    10 | 7 `A:AB$`; Omnath's `DB$` (`Produced$ Combo`); Tazri/Katilda `AddAbility$` grants | `Valid$` cards' colors (`CardUtil.java:283-294`)                       |
+| `ReflectProperty$` | Lines | Where | Colors from |
+| --- | ---: | --- | --- |
+| `Produced` | 22 | `DB$` under a `Mode$ TapsForMana \| Static$ True` trigger, every one | The triggering mana, `AbilityKey.Produced` (`CardUtil.java:295-307`) |
+| `Produce` | 15 | `A:AB$` mana abilities (Reflecting Pool, Exotic Orchard, Fellwar Stone) | What `Valid$` cards' abilities could produce (`CardUtil.java:308-345`) |
+| `Is` | 10 | 7 `A:AB$`; Omnath's `DB$` (`Produced$ Combo`); Tazri/Katilda `AddAbility$` grants | `Valid$` cards' colors (`CardUtil.java:283-294`) |
 
 Of the 22 `Produced` lines, 20 are the trigger's own `Execute$` and 2 are chained under it (Overabundance's
 `SubAbility$`, Sasaya's `RepeatEach`). `Defined$`: `You` 9, `TriggeredActivator` 12, `TriggeredCardController` 1.
@@ -47,11 +47,11 @@ be rejected.
 In place since ADR-0020 ([`static-triggers.md`](static-triggers.md)): `Static$ True` `TapsForMana` triggers resolve
 immediately, `Game` owns its registry, and `triggeredObjects` carries the produced mana, activator and card.
 
-| Gap                               | Where                                                                                                                                                                                                                                                        | Blocks        |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| Colorless as a choice             | `ColorOrType$ Type` adds colorless (`CardUtil.java:256`, `:303-305`, `:362-364`). `ChooseManaColor` (`control.go:387`) answers a `mana.Colors`, which has no colorless member; Java asks `chooseColorAllowColorless` (`ManaReflectedEffect.java:99`, `:108`) | `Type` lines  |
-| `ManaReflected` as a mana ability | `ActivateAbility` refuses only `Name == "Mana"` (`activateability.go:233`); registering `ManaReflected` would put Reflecting Pool on the stack. `ActivateManaAbility` accepts only `Mana` (`activatemanaability.go:244`)                                     | `A:AB$` lines |
-| `Valid$ Defined.*` names          | `definedCards` (`defined.go`) lacks `ExiledWith`, `ValidGraveyard ...`, and the cost-paid `Sacrificed`/`Untapped` lists                                                                                                                                      | 5 lines       |
+| Gap | Where | Blocks |
+| --- | --- | --- |
+| Colorless as a choice | `ColorOrType$ Type` adds colorless (`CardUtil.java:256`, `:303-305`, `:362-364`). `ChooseManaColor` (`control.go:387`) answers a `mana.Colors`, which has no colorless member; Java asks `chooseColorAllowColorless` (`ManaReflectedEffect.java:99`, `:108`) | `Type` lines |
+| `ManaReflected` as a mana ability | `ActivateAbility` refuses only `Name == "Mana"` (`activateability.go:233`); registering `ManaReflected` would put Reflecting Pool on the stack. `ActivateManaAbility` accepts only `Mana` (`activatemanaability.go:244`) | `A:AB$` lines |
+| `Valid$ Defined.*` names | `definedCards` (`defined.go`) lacks `ExiledWith`, `ValidGraveyard ...`, and the cost-paid `Sacrificed`/`Untapped` lists | 5 lines |
 
 `Static$ True` `TapsForMana` triggers are already a gap without this API: 56 of 72 corpus `Mode$ TapsForMana` lines are
 `Static$ True`, and 34 of them execute `DB$ Mana`. Those are stacked today. Other modes skip `Static$` lines outright

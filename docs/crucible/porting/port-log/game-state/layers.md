@@ -173,13 +173,13 @@ an effect is evaluated against, never the fold.
 (`StaticAbility.java:139-187`). `applyInDependencyOrder` applies one static at a time and re-chooses after each (CR
 613.8c):
 
-| Step             | Java                                                                              | Go                                                                                |
-| ---------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Step | Java | Go |
+| --- | --- | --- |
 | "S depends on O" | Apply O on trial; S's affected cards differ, in order (`Iterators.elementsEqual`) | `ops.mark`, `ops.apply(O)`, `ops.affected(S)`, `ops.undo` (each mod's `truncate`) |
-| Loops (613.8b)   | Remove every edge of every simple cycle (jgrapht)                                 | Drop edge S→O when O reaches S (`transitiveClosure`): the same edge set           |
-| Choice           | Earliest timestamp among statics with no edge left                                | Same; ties in effectOrder                                                         |
-| Shortcuts        | One static; first is from a resolved effect; first depends on nothing             | Same (`resolvedStatic`: an `IsEffect` host)                                       |
-| CDAs             | Applied in effectOrder place, no search                                           | Same                                                                              |
+| Loops (613.8b) | Remove every edge of every simple cycle (jgrapht) | Drop edge S→O when O reaches S (`transitiveClosure`): the same edge set |
+| Choice | Earliest timestamp among statics with no edge left | Same; ties in effectOrder |
+| Shortcuts | One static; first is from a resolved effect; first depends on nothing | Same (`resolvedStatic`: an `IsEffect` host) |
+| CDAs | Applied in effectOrder place, no search | Same |
 
 Kormus Bell ("All Swamps are 1/1 creatures") with an earlier timestamp than Urborg, Tomb of Yawgmoth ("each land is a
 Swamp") depends on it, so a Forest becomes a creature (`TestDependentLayerFourEffectAppliesAfterItsDependency`,
@@ -190,10 +190,10 @@ removes its ability (`TestBloodMoonRemovesUrborgsAbilityWhateverTheTimestamps`).
 
 Not ported:
 
-| Gap                    | Why                                                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| "Changes what it does" | Java tests only `GainControl$`'s player list; this port resolves only `You`                                           |
-| Layers 1 and 3         | Layer 1 has no static in Forge; Layer 3's two real lines cannot depend on each other ([`m5-layers.md`](m5-layers.md)) |
+| Gap | Why |
+| --- | --- |
+| "Changes what it does" | Java tests only `GainControl$`'s player list; this port resolves only `You` |
+| Layers 1 and 3 | Layer 1 has no static in Forge; Layer 3's two real lines cannot depend on each other ([`m5-layers.md`](m5-layers.md)) |
 
 `PT.Clear()` runs from `Move` the moment a card leaves the battlefield, the same list `Counters`, `Damage` and `Tapped`
 already clear there: a continuous effect that only applied on the battlefield does not survive the trip. That clear was
@@ -437,19 +437,19 @@ The corpus's own 317 real `S:Mode$ Continuous | Condition$` lines, tallied direc
 `meetsRequirementsOnTriggeredObjects` and SpellAbilityCondition.java handle separately -- a different switch on the same
 param name, not this port's problem here):
 
-| Value           | Real lines | Resolved | Player state read                                                                     |
-| --------------- | ---------: | :------: | ------------------------------------------------------------------------------------- |
-| `PlayerTurn`    |        141 |   yes    | `Game.ActivePlayer() == host.Controller()`                                            |
-| `Threshold`     |         61 |   yes    | `len(Zone(Graveyard, controller).Cards()) >= 7` (`Player.hasThreshold`)               |
-| `MaxSpeed`      |         40 |    no    | Alchemy's own speed counter -- tracked nowhere in this port                           |
-| `Delirium`      |         23 |   yes    | four-plus distinct core types unioned across the graveyard (below)                    |
-| `Metalcraft`    |         18 |   yes    | three-plus battlefield permanents whose `Type()` carries Artifact                     |
-| `Blessing`      |          9 |    no    | City's Blessing (ten-plus permanents, sticky) -- no such flag on `Player` yet         |
-| `NotPlayerTurn` |          8 |   yes    | the inverse of `PlayerTurn`                                                           |
-| `Hellbent`      |          8 |   yes    | `len(Zone(Hand, controller).Cards()) == 0` (`Player.hasHellbent`)                     |
-| `EnduringStory` |          4 |    no    | the Storied keyword's own flag; Sagas themselves are ported (`counters-and-sagas.md`) |
-| `FatefulHour`   |          3 |   yes    | `Player.Life <= 5`                                                                    |
-| `Monarch`       |          2 |   yes    | `Game.Monarch()` in `continuousConditionMet`                                          |
+| Value | Real lines | Resolved | Player state read |
+| --- | ---: | :---: | --- |
+| `PlayerTurn` | 141 | yes | `Game.ActivePlayer() == host.Controller()` |
+| `Threshold` | 61 | yes | `len(Zone(Graveyard, controller).Cards()) >= 7` (`Player.hasThreshold`) |
+| `MaxSpeed` | 40 | no | Alchemy's own speed counter -- tracked nowhere in this port |
+| `Delirium` | 23 | yes | four-plus distinct core types unioned across the graveyard (below) |
+| `Metalcraft` | 18 | yes | three-plus battlefield permanents whose `Type()` carries Artifact |
+| `Blessing` | 9 | no | City's Blessing (ten-plus permanents, sticky) -- no such flag on `Player` yet |
+| `NotPlayerTurn` | 8 | yes | the inverse of `PlayerTurn` |
+| `Hellbent` | 8 | yes | `len(Zone(Hand, controller).Cards()) == 0` (`Player.hasHellbent`) |
+| `EnduringStory` | 4 | no | the Storied keyword's own flag; Sagas themselves are ported (`counters-and-sagas.md`) |
+| `FatefulHour` | 3 | yes | `Player.Life <= 5` |
+| `Monarch` | 2 | yes | `Game.Monarch()` in `continuousConditionMet` |
 
 262 of 317 resolve. The four that do not (55 lines) are each its own untracked mechanic, so (the identical "cannot
 evaluate, so do not apply" rule an unresolved `Affected$` value already has, GO-7) the whole line is skipped, same as

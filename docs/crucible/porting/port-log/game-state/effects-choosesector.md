@@ -28,14 +28,14 @@ lines, both on one card (`forge-gui/res/cardsfolder/s/space_beleren.txt`); both 
 `Creature.ChosenSector` read — see below), which is correct until the read side lands. lines, both on one card
 (`forge-gui/res/cardsfolder/s/space_beleren.txt`); both resolve.
 
-| Step           | Go                                                                                | Java                                                                            |
-| -------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Condition gate | `subAbilityConditionMet`; `Condition$` rejected, as `ChooseEvenOdd` does          | `SpellAbilityEffect` shared gate                                                |
-| Decider        | host's controller, `g.Card(a.Source).Controller()`, not the activator             | `card.getController().getController()` (`:12`)                                  |
-| Options        | `["Alpha", "Beta", "Gamma"]`, that order, built per call (GO-2: no package slice) | `PlayerController.chooseSector(Card, String)` (`PlayerController.java:254-256`) |
-| Ask            | `PlayerController.ChooseSector(g, decider, NoCard, options)` → index              | `chooseSector(null, AILogic)`                                                   |
-| Answer check   | index outside `options` → `engine: ChooseSector: choice N out of range` (GO-7)    | none (GUI/AI always return a listed sector)                                     |
-| Record         | `Memory.SetChosenSector(options[i])` on the host; last pick wins                  | `card.setChosenSector(chosen)` (`:13`, `Card.java:2348-2350`)                   |
+| Step | Go | Java |
+| --- | --- | --- |
+| Condition gate | `subAbilityConditionMet`; `Condition$` rejected, as `ChooseEvenOdd` does | `SpellAbilityEffect` shared gate |
+| Decider | host's controller, `g.Card(a.Source).Controller()`, not the activator | `card.getController().getController()` (`:12`) |
+| Options | `["Alpha", "Beta", "Gamma"]`, that order, built per call (GO-2: no package slice) | `PlayerController.chooseSector(Card, String)` (`PlayerController.java:254-256`) |
+| Ask | `PlayerController.ChooseSector(g, decider, NoCard, options)` → index | `chooseSector(null, AILogic)` |
+| Answer check | index outside `options` → `engine: ChooseSector: choice N out of range` (GO-7) | none (GUI/AI always return a listed sector) |
+| Record | `Memory.SetChosenSector(options[i])` on the host; last pick wins | `card.setChosenSector(chosen)` (`:13`, `Card.java:2348-2350`) |
 
 Params: `AILogic$` (2 lines) is the AI's hint (`PlayerControllerAi.java:722-724` ignores it too, picks at random);
 `Ultimate$` (1) feeds only `AchievementTracker.java:23`; `Planeswalker$` (2) is the loyalty-ability marker
@@ -47,13 +47,13 @@ Params: `AILogic$` (2 lines) is the AI's hint (`PlayerControllerAi.java:722-724`
 `Memory.chosenSector string` (`memory.go`), `SetChosenSector`/`ChosenSector`. Java's `Card.chosenSector`
 (`Card.java:322`).
 
-| Question              | Answer                                                                                                                      |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Why `Memory`          | Every other `Card.setChosen*` value (even/odd, direction, type) lives there                                                 |
-| `Game.Clone`          | `Memory.clone` copies it; a string, so `TestCloneAllocationsStayBounded` is unaffected                                      |
-| Effect card copy      | Not copied by `copyChoicesFrom`: `EffectEffect.java:277-306` copies colors/cards/player/direction/type/number, never sector |
-| Cleared               | Never. Java has no clearing call; no `Cleanup` param names it                                                               |
-| Per-creature `sector` | Not added. That is Java's separate `Card.sector` (`assignSector`, `Card.java:2335-2344`), written by CR 704.5u's SBA        |
+| Question | Answer |
+| --- | --- |
+| Why `Memory` | Every other `Card.setChosen*` value (even/odd, direction, type) lives there |
+| `Game.Clone` | `Memory.clone` copies it; a string, so `TestCloneAllocationsStayBounded` is unaffected |
+| Effect card copy | Not copied by `copyChoicesFrom`: `EffectEffect.java:277-306` copies colors/cards/player/direction/type/number, never sector |
+| Cleared | Never. Java has no clearing call; no `Cleanup` param names it |
+| Per-creature `sector` | Not added. That is Java's separate `Card.sector` (`assignSector`, `Card.java:2335-2344`), written by CR 704.5u's SBA |
 
 ### New `PlayerController` method
 
@@ -75,12 +75,12 @@ can answer it without parsing option strings.
 
 The write happens; nothing reads it yet. Missing, all out of this API's scope:
 
-| Piece                           | Java                                                                  | Crucible today                                                             |
-| ------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Per-creature sector             | `Card.sector`, `assignSector` (`Card.java:2335-2344`)                 | no field                                                                   |
-| CR 704.5u sector assignment SBA | `stateBasedAction704_5u` (`GameAction.java:1801-1828`)                | no rule in `CheckStateBasedActions`                                        |
-| `Creature.ChosenSector`         | source's chosen sector vs card's sector (`CardProperty.java:119-122`) | no case in `valid.go`: falls through to a type check, false for every card |
-| `Creature.DifferentSector`      | `CardProperty.java:123-126`                                           | `blockerRelativeMatches` (`staticability.go`) skips the static             |
+| Piece | Java | Crucible today |
+| --- | --- | --- |
+| Per-creature sector | `Card.sector`, `assignSector` (`Card.java:2335-2344`) | no field |
+| CR 704.5u sector assignment SBA | `stateBasedAction704_5u` (`GameAction.java:1801-1828`) | no rule in `CheckStateBasedActions` |
+| `Creature.ChosenSector` | source's chosen sector vs card's sector (`CardProperty.java:119-122`) | no case in `valid.go`: falls through to a type check, false for every card |
+| `Creature.DifferentSector` | `CardProperty.java:123-126` | `blockerRelativeMatches` (`staticability.go`) skips the static |
 
 **Both real corpus lines are rejected, not silently resolved.** Without a guard, registering `ChooseSector` would have
 let both lines resolve: the -1's `DB$ PutCounterAll | ValidCards$ Creature.ChosenSector` would put its counter on

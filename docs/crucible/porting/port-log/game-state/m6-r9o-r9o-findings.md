@@ -23,13 +23,13 @@ forwards `hasParam`/`usesTargeting` to the trigger's `Execute$` (`WrappedAbility
 root counts. Go: `resolveTop` marks the popped item `stackRoot` and calls `rememberTargets` right after
 `targetsStillLegal`, before Ascend and `Registry.Resolve`.
 
-| Param                       | Does                                                                                     |
-| --------------------------- | ---------------------------------------------------------------------------------------- |
-| `RememberTargets$`          | root line with `ValidTgts$`: its legal targets join the host's remembered list, in order |
-| `ForgetOtherTargets$`       | clears the list first                                                                    |
-| `IncludeAllComponentCards$` | refused (merged/melded parts; one corpus line, You're in Command)                        |
-| `RememberCostMana$`         | refused (Ice Cauldron, Jeweled Amulet: a mana string no reader resolves)                 |
-| a stack-item target         | refused (Java remembers the `SpellAbility`; no `Remembered` reader here sees one)        |
+| Param | Does |
+| --- | --- |
+| `RememberTargets$` | root line with `ValidTgts$`: its legal targets join the host's remembered list, in order |
+| `ForgetOtherTargets$` | clears the list first |
+| `IncludeAllComponentCards$` | refused (merged/melded parts; one corpus line, You're in Command) |
+| `RememberCostMana$` | refused (Ice Cauldron, Jeweled Amulet: a mana string no reader resolves) |
+| a stack-item target | refused (Java remembers the `SpellAbility`; no `Remembered` reader here sees one) |
 
 A `RememberTargets$` line with `ValidTgts$` resolving off the stack root (sub-ability, Charm mode, `Choices$`) is an
 error in `Registry.resolve`: Java never remembers its targets, so the chain reading `Remembered` acts on nothing. Two
@@ -42,12 +42,12 @@ Nowhere never gave it back, Sylvan Smite dealt 0).
 
 Each mirrors its Java owner, is copied by `Game.Clone` (nil when empty) and resets where Java resets it.
 
-| Record                     | Java                                                  | Set                                                                                                  | Cleared                                 | Read by                           |
-| -------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------- |
-| `Game.countersRemoved`     | `Game.countersRemovedThisTurn` (`:114`, `:1306-1311`) | `emitCounterChanged` with delta < 0: card LKI just after the removal, or the player                  | cleanup (`Game.java:1230`)              | `Count$CountersRemovedThisTurn`   |
-| `Game.activatedThisTurn`   | `MagicStack.thisTurnActivated` (`:983-990`)           | `ActivateAbility` (`:310`), `ActivateManaAbility`, `TapLandForMana` (`:232-235`): ability + host LKI | next turn starts (`onNextTurn`, `:968`) | `Count$ThisTurnActivated_<valid>` |
-| `Card.regeneratedThisTurn` | `Card.regeneratedThisTurn` (`:3516-3523`)             | `regenerateBody`, both regeneration paths (`RegenerationEffect.java:41`)                             | cleanup (`Card.java:7275`), zone change | `Count$RegeneratedThisTurn`       |
-| static trigger `trigActs`  | `Trigger.triggerRun` (`TriggerHandler.java:539`)      | after a `Static$ True` trigger resolved (a stacked one: as pushed)                                   | as before                               | `Count$ActivatedThisGame`, limits |
+| Record | Java | Set | Cleared | Read by |
+| --- | --- | --- | --- | --- |
+| `Game.countersRemoved` | `Game.countersRemovedThisTurn` (`:114`, `:1306-1311`) | `emitCounterChanged` with delta < 0: card LKI just after the removal, or the player | cleanup (`Game.java:1230`) | `Count$CountersRemovedThisTurn` |
+| `Game.activatedThisTurn` | `MagicStack.thisTurnActivated` (`:983-990`) | `ActivateAbility` (`:310`), `ActivateManaAbility`, `TapLandForMana` (`:232-235`): ability + host LKI | next turn starts (`onNextTurn`, `:968`) | `Count$ThisTurnActivated_<valid>` |
+| `Card.regeneratedThisTurn` | `Card.regeneratedThisTurn` (`:3516-3523`) | `regenerateBody`, both regeneration paths (`RegenerationEffect.java:41`) | cleanup (`Card.java:7275`), zone change | `Count$RegeneratedThisTurn` |
+| static trigger `trigActs` | `Trigger.triggerRun` (`TriggerHandler.java:539`) | after a `Static$ True` trigger resolved (a stacked one: as pushed) | as before | `Count$ActivatedThisGame`, limits |
 
 `emitCounterChanged` is the single choke point: every counter change in the engine emits there after changing the
 counters. Three sites emitted the requested amount rather than what was removed; they now emit Java's delta
@@ -61,14 +61,14 @@ graveyard as its cost.
 
 ## Heads
 
-| Head                                           | Reads                                                                                                                                                                              |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Head | Reads |
+| --- | --- |
 | `Count$CountersRemovedThisTurn <type> <valid>` | `countersRemoved`: a card entry by `Matches` on its LKI, a player entry by `matchesPlayerSpec` only when the spec has a player base (Java's `Player.isValid` is false for `Card…`) |
-| `Count$ThisTurnActivated_<valid>`              | `activatedThisTurn` through `spellAbilityMatchesAs` with the LKI host; Java's part after the first `_`                                                                             |
-| `Count$ActivatedThisGame`                      | the resolving root's game count (`ActivationTable.getOriginal`): trigger → `trigActs`, activated → `activations`; a sub-ability is unresolved                                      |
-| `Count$RegeneratedThisTurn`                    | the host's count                                                                                                                                                                   |
-| `<player>$DamageToOppsThisTurn`                | sum of `DamageReceivedThisTurn` over the player's opponents still in the game (`Player.java:815-817`)                                                                              |
-| `Defined$ TargetedOrController`                | `Targeted` players, then `TargetedController` (`AbilityUtils.java:933-935`)                                                                                                        |
+| `Count$ThisTurnActivated_<valid>` | `activatedThisTurn` through `spellAbilityMatchesAs` with the LKI host; Java's part after the first `_` |
+| `Count$ActivatedThisGame` | the resolving root's game count (`ActivationTable.getOriginal`): trigger → `trigActs`, activated → `activations`; a sub-ability is unresolved |
+| `Count$RegeneratedThisTurn` | the host's count |
+| `<player>$DamageToOppsThisTurn` | sum of `DamageReceivedThisTurn` over the player's opponents still in the game (`Player.java:815-817`) |
+| `Defined$ TargetedOrController` | `Targeted` players, then `TargetedController` (`AbilityUtils.java:933-935`) |
 
 `Game.costPaymentStack` (`AbilityUtils.java:2810-2814`) is not modelled: the ability paying its costs is not counted.
 Only a `Type$ Ability` ReduceCost reads this head mid-payment (Professor Hojo, Tezzeret: `LE1`), and `costmod.go`
@@ -90,29 +90,29 @@ skip).
 
 `card-smoke -all -workers 8 -list`, same binary flags before and after:
 
-| Measure      | Before | After  |
-| ------------ | ------ | ------ |
-| plays        | 30,906 | 30,917 |
-| refused      | 2,712  | 2,701  |
-| placed       | 379    | 379    |
-| inconclusive | 81     | 81     |
-| hung         | 0      | 0      |
-| judged play  | 91.9%  | 92.0%  |
+| Measure | Before | After |
+| --- | --- | --- |
+| plays | 30,906 | 30,917 |
+| refused | 2,712 | 2,701 |
+| placed | 379 | 379 |
+| inconclusive | 81 | 81 |
+| hung | 0 | 0 |
+| judged play | 91.9% | 92.0% |
 
 Per-card lists: scratchpad `a250-smoke-before.txt`, `a250-smoke-after.txt`, diff `a250-smoke-diff.txt`.
 
-| Flip            | Cards                                                                                   | Why                                                                                                                    |
-| --------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| refused → plays | Choking Vines                                                                           | `RememberTargets$` resolves                                                                                            |
-| refused → plays | Churning Reservoir, Izzet Generatorium                                                  | `Count$CountersRemovedThisTurn`                                                                                        |
-| refused → plays | Kiora of Salt and Sand, Laboratory Drudge, The Chain Veil                               | `Count$ThisTurnActivated_`                                                                                             |
-| refused → plays | Telekinesis                                                                             | `Count$ActivatedThisGame` on a static trigger                                                                          |
-| refused → plays | Antagonism, Spiny Starfish                                                              | `DamageToOppsThisTurn`, `Count$RegeneratedThisTurn`                                                                    |
+| Flip | Cards | Why |
+| --- | --- | --- |
+| refused → plays | Choking Vines | `RememberTargets$` resolves |
+| refused → plays | Churning Reservoir, Izzet Generatorium | `Count$CountersRemovedThisTurn` |
+| refused → plays | Kiora of Salt and Sand, Laboratory Drudge, The Chain Veil | `Count$ThisTurnActivated_` |
+| refused → plays | Telekinesis | `Count$ActivatedThisGame` on a static trigger |
+| refused → plays | Antagonism, Spiny Starfish | `DamageToOppsThisTurn`, `Count$RegeneratedThisTurn` |
 | refused → plays | Acorn Catapult, Chain of Plasma, Rhystic Lightning, Rakdos's Return, Pulse of the Forge | `Defined$ TargetedOrController`; Pulse's `Defined$ Parent` return is still refused when its condition holds (deferred) |
-| cause changed   | Chain Lightning                                                                         | past `TargetedOrController` `UnlessPayer$`, now CopySpellAbility's `Defined$`                                          |
-| plays → refused | Ice Cauldron, Jeweled Amulet                                                            | `RememberCostMana$` loud; it was silently ignored                                                                      |
-| plays → refused | Volcanic Offering                                                                       | its sub-ability `RememberTargets$` never reaches Java's remember (script defect); it destroyed one land                |
-| cause changed   | Chef's Kiss                                                                             | past `RememberTargets$`, now `TargetValidTargeting$`                                                                   |
+| cause changed | Chain Lightning | past `TargetedOrController` `UnlessPayer$`, now CopySpellAbility's `Defined$` |
+| plays → refused | Ice Cauldron, Jeweled Amulet | `RememberCostMana$` loud; it was silently ignored |
+| plays → refused | Volcanic Offering | its sub-ability `RememberTargets$` never reaches Java's remember (script defect); it destroyed one land |
+| cause changed | Chef's Kiss | past `RememberTargets$`, now `TargetValidTargeting$` |
 
 Without a flip (they already "played"): the 100 root `RememberTargets$` cards now remember their targets (Cloudshift,
 Ephemerate, Journey to Nowhere, Sylvan Smite, ...; some still stop at another refusal), and Fealty to the Realm's
@@ -122,37 +122,37 @@ inline amount `costModAmount` does not parse (only an SVar name), so its reducti
 
 ## Deferred, with the reason
 
-| Head / shape                                                                        | Cards                                                                | Why not here                                                                                                                                                                                  |
-| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Count$TotalManaSpent <valid>` on an activated ability                              | Forsworn Paladin                                                     | an activation's paying mana is not recorded                                                                                                                                                   |
-| `SpellTargeted$CardManaCostLKI`, `Targeted$CastTotalManaSpent`, `TargetedByTarget$` | Reject Imperfection, Sound the Trumpets, Unravel, Bane's Contingency | targeted-spell LKI heads                                                                                                                                                                      |
-| `CastSA>Count$xPaid` for `Sac<X/…>`                                                 | Plumb the Forbidden                                                  | a cost's X is not the cast's `castX`                                                                                                                                                          |
-| `Count$SearchedLibrary`                                                             | Archive Trap                                                         | ChangeZone's library search (`ChangeZoneEffect.java:1067-1089`) records nothing and fires no `SearchedLibrary` mode                                                                           |
-| `PlaneswalkedToThisTurn`                                                            | Unyaro                                                               | planechase record                                                                                                                                                                             |
-| `PromisedGift`, `Doubles`, `RepeatCheckSVar$`                                       | Coiling Rebirth, Celebr-8000, Mana Clash, Sword of D&D               | Gift casting, RollDice doubles, Repeat's own gate                                                                                                                                             |
-| inline compare operand, `NonTargetedController`, `HighestSpeed`                     | Spikeshell Harrier                                                   | needs a compile change for one card                                                                                                                                                           |
-| `TriggeredAttackedTargetAndYou` in a trigger's `CheckSVar$`                         | Undercellar Sweep                                                    | Java passes the `Trigger` as ctb (`CardTraitBase.java:472`); `getDefinedPlayers`' `Triggered` branch needs a `SpellAbility` (`AbilityUtils.java:1013`), so what Java answers there is unclear |
-| `Defined$ Parent` on ChangeZone `Origin$ Stack`                                     | Pulse of the Forge (the probe's line never meets the condition)      | returning the resolving spell from the stack (`getDefinedSpellAbilities`, `AbilityUtils.java:1232-1233`); refused when reached                                                                |
-| `Game.costPaymentStack`                                                             | Professor Hojo, Tezzeret (Type$ Ability ReduceCost)                  | ability ReduceCost lines are not applied at all                                                                                                                                               |
+| Head / shape | Cards | Why not here |
+| --- | --- | --- |
+| `Count$TotalManaSpent <valid>` on an activated ability | Forsworn Paladin | an activation's paying mana is not recorded |
+| `SpellTargeted$CardManaCostLKI`, `Targeted$CastTotalManaSpent`, `TargetedByTarget$` | Reject Imperfection, Sound the Trumpets, Unravel, Bane's Contingency | targeted-spell LKI heads |
+| `CastSA>Count$xPaid` for `Sac<X/…>` | Plumb the Forbidden | a cost's X is not the cast's `castX` |
+| `Count$SearchedLibrary` | Archive Trap | ChangeZone's library search (`ChangeZoneEffect.java:1067-1089`) records nothing and fires no `SearchedLibrary` mode |
+| `PlaneswalkedToThisTurn` | Unyaro | planechase record |
+| `PromisedGift`, `Doubles`, `RepeatCheckSVar$` | Coiling Rebirth, Celebr-8000, Mana Clash, Sword of D&D | Gift casting, RollDice doubles, Repeat's own gate |
+| inline compare operand, `NonTargetedController`, `HighestSpeed` | Spikeshell Harrier | needs a compile change for one card |
+| `TriggeredAttackedTargetAndYou` in a trigger's `CheckSVar$` | Undercellar Sweep | Java passes the `Trigger` as ctb (`CardTraitBase.java:472`); `getDefinedPlayers`' `Triggered` branch needs a `SpellAbility` (`AbilityUtils.java:1013`), so what Java answers there is unclear |
+| `Defined$ Parent` on ChangeZone `Origin$ Stack` | Pulse of the Forge (the probe's line never meets the condition) | returning the resolving spell from the stack (`getDefinedSpellAbilities`, `AbilityUtils.java:1232-1233`); refused when reached |
+| `Game.costPaymentStack` | Professor Hojo, Tezzeret (Type$ Ability ReduceCost) | ability ReduceCost lines are not applied at all |
 
 ## Decisions
 
-| Decision                                                               | Why                                                                                               |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| One remember site in `resolveTop`, not per effect                      | Java has one (`MagicStack.java:646`); per-effect reads would differ on declined optional triggers |
-| Refuse a non-root `RememberTargets$` instead of mirroring Java's no-op | the card does not do what its text says in either engine; PORT-8 asks for the defect to surface   |
-| Record removals in `emitCounterChanged`                                | every change already emits there, after it happened; one site, as `Card.subtractCounter` is       |
-| Host snapshot before costs only when a cost moved the host             | Java's old card object freezes at the move; costs that do not move it show on it                  |
-| No `costPaymentStack`                                                  | no reader this port applies mid-payment; documented, not guessed                                  |
-| No new `PlayerController` method, no ADR                               | every piece mirrors a Java record or reads existing state                                         |
+| Decision | Why |
+| --- | --- |
+| One remember site in `resolveTop`, not per effect | Java has one (`MagicStack.java:646`); per-effect reads would differ on declined optional triggers |
+| Refuse a non-root `RememberTargets$` instead of mirroring Java's no-op | the card does not do what its text says in either engine; PORT-8 asks for the defect to surface |
+| Record removals in `emitCounterChanged` | every change already emits there, after it happened; one site, as `Card.subtractCounter` is |
+| Host snapshot before costs only when a cost moved the host | Java's old card object freezes at the move; costs that do not move it show on it |
+| No `costPaymentStack` | no reader this port applies mid-payment; documented, not guessed |
+| No new `PlayerController` method, no ADR | every piece mirrors a Java record or reads existing state |
 
 ## Forge defects (PORT-8)
 
-| Where                                                                    | Defect                                                                                                                                                                    |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `forge-gui/res/cardsfolder/v/volcanic_offering.txt:5`                    | `DBDestroyLand`'s `RememberTargets$` is on a sub-ability; `handleRemembering` only reads the root (`MagicStack.java:646`), so the opponent-chosen land is never destroyed |
-| `forge-gui/res/cardsfolder/u/urza_academy_headmaster.txt` (`Destroy11U`) | a `GenericChoice` choice's `RememberTargets$` never runs, so "return each card put into a graveyard this way" returns nothing                                             |
-| `forge-gui/res/cardsfolder/l/lobotomy.txt:5`                             | `ForgetOtherTargets$` on the `ChooseCard` sub-ability is read nowhere (harmless: nothing remembers targets there)                                                         |
+| Where | Defect |
+| --- | --- |
+| `forge-gui/res/cardsfolder/v/volcanic_offering.txt:5` | `DBDestroyLand`'s `RememberTargets$` is on a sub-ability; `handleRemembering` only reads the root (`MagicStack.java:646`), so the opponent-chosen land is never destroyed |
+| `forge-gui/res/cardsfolder/u/urza_academy_headmaster.txt` (`Destroy11U`) | a `GenericChoice` choice's `RememberTargets$` never runs, so "return each card put into a graveyard this way" returns nothing |
+| `forge-gui/res/cardsfolder/l/lobotomy.txt:5` | `ForgetOtherTargets$` on the `ChooseCard` sub-ability is read nowhere (harmless: nothing remembers targets there) |
 
 ## Tests
 

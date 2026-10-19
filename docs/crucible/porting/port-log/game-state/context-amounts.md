@@ -17,15 +17,15 @@ sub-ability reads its own (the chain copies targets, triggering objects and paid
 (`amountplayers.go`) sends the list heads to `listHeadCards` and measures them with `handlePaid` (`amountpaid.go`,
 [`m6-r9-amounts.md`](m6-r9-amounts.md)); the heads in `contextHeads` are unresolved (never 0) outside a resolution:
 
-| Head                                | Cards                                                                                                          |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `Targeted`                          | the card targets of the ability                                                                                |
-| `TriggeredCard`                     | the card the trigger recorded: the one that entered (`checkETBTriggers`), died, was discarded, tapped for mana |
-| `TriggeredAttacker`/`Blocker`       | the attacker or blocker an attack or block trigger recorded                                                    |
-| `TriggeredSource`                   | the card source a damage trigger recorded (none for a player source)                                           |
-| `TriggerRemembered`                 | the cards a delayed or reflexive trigger remembered                                                            |
-| `Remembered`, `Imprinted`           | the host's `Memory` lists                                                                                      |
-| `Sacrificed`, `Exiled`, `Discarded` | the cards the cost used up (`Ability.paid`)                                                                    |
+| Head | Cards |
+| --- | --- |
+| `Targeted` | the card targets of the ability |
+| `TriggeredCard` | the card the trigger recorded: the one that entered (`checkETBTriggers`), died, was discarded, tapped for mana |
+| `TriggeredAttacker`/`Blocker` | the attacker or blocker an attack or block trigger recorded |
+| `TriggeredSource` | the card source a damage trigger recorded (none for a player source) |
+| `TriggerRemembered` | the cards a delayed or reflexive trigger remembered |
+| `Remembered`, `Imprinted` | the host's `Memory` lists |
+| `Sacrificed`, `Exiled`, `Discarded` | the cards the cost used up (`Ability.paid`) |
 
 `Remembered`/`Imprinted` and `Valid <spec>` read the card the amount is evaluated for (`AbilityUtils.java:512-555`), so
 a trigger or layer check that runs while another ability resolves reads its own host. The ability-carried lists

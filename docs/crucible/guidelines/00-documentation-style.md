@@ -260,7 +260,7 @@ Never leave `Draft` on something the team already follows. Never leave `Active` 
 
 ---
 
-## DOC-14 — Prettier formats every Markdown file
+## DOC-14 — Prettier formats every Markdown file people read
 
 Config: `/.prettierrc` — `printWidth: 120`, `proseWrap: "always"` for `*.md`. Pinned version: **prettier 3.8.3**
 (ADR-0002). A local install at a different version is fine; CI is the authority.
@@ -270,8 +270,20 @@ prettier --write .      # respects .prettierignore
 prettier --check .      # CI gate
 ```
 
-`/.prettierignore` excludes all upstream Forge files. Only `CLAUDE.md` and `docs/crucible/**` are formatted. Reason:
-reformatting upstream `docs/*.md` produces guaranteed rebase conflicts on the next sync (REV-1).
+`/.prettierignore` excludes all upstream Forge files. Reason: reformatting upstream `docs/*.md` produces guaranteed
+rebase conflicts on the next sync (REV-1).
+
+It also excludes the Claude-only files: `CLAUDE.md`, `.claude/`, `docs/crucible/00-master-implementation-plan*.md` and
+`docs/crucible/porting/`. Claude Code reads them, tools rewrite them on most commits, people do not read them. Reason:
+prettier pads every table cell to the widest one in its column, and the padding is paid in tokens on every read. Write
+their tables compact, one space each side of each cell:
+
+```text
+Bad:  | Rule    | Violation looks like                    |
+Good: | Rule | Violation looks like |
+```
+
+Prose there is not wrapped; markdownlint still runs on them (DOC-15).
 
 What prettier decides, stop arguing about:
 

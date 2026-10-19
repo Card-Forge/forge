@@ -18,16 +18,16 @@
 Injected per-`Game` state, copied by `Game.Clone`, never package-level. Java's reset points kept: zone entries and
 counters at cleanup (`Player.onCleanupPhase`, `Game.onCleanupPhase`), life gained next to `lifeLostThisTurn`.
 
-| Head                                                               | State                                                                   | Reset   | Read by                  |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------- | ------- | ------------------------ |
-| `Count$ThisTurnEntered_<Dest>[_from_<Origin>]_<valid>`             | `Game.enteredThisTurn []zoneEntry`: last-known `Card` copy, from, to    | cleanup | `thisTurnEnteredCount`   |
-| `Count$LifeYouGainedThisTurn`                                      | `Player.LifeGainedThisTurn`, added in `Game.gainLife` after replacement | cleanup | `amountheads.go`         |
-| `Count$CreaturesAttackedThisTurn <valid>`                          | `Player.attackedThisTurn []CardID`, one per declaration                 | cleanup | `creaturesAttackedCount` |
-| `Count$CountersAddedThisTurn <type> <players> <valid>`             | `Game.countersAddedThisTurn []counterAddition`                          | cleanup | `countersAddedCount`     |
-| `DungeonsCompleted$Amount` / `DifferentCardNames` / `Valid <spec>` | existing `Player.completedDungeons`                                     | game    | `dungeonsCompletedValue` |
-| `Count$ManaPool:<All\|color>`                                      | existing `Player.ManaPool`                                              | phase   | `manaPoolCount`          |
-| `Count$UnlockedDoors`, `Count$DistinctUnlockedDoors`               | the controller's Room permanents' doors                                 | state   | `unlockedDoorNames`      |
-| `Count$Intensity`                                                  | `Card.Intensity` plus the `Starting intensity` keyword magnitude        | state   | `startingIntensity`      |
+| Head | State | Reset | Read by |
+| --- | --- | --- | --- |
+| `Count$ThisTurnEntered_<Dest>[_from_<Origin>]_<valid>` | `Game.enteredThisTurn []zoneEntry`: last-known `Card` copy, from, to | cleanup | `thisTurnEnteredCount` |
+| `Count$LifeYouGainedThisTurn` | `Player.LifeGainedThisTurn`, added in `Game.gainLife` after replacement | cleanup | `amountheads.go` |
+| `Count$CreaturesAttackedThisTurn <valid>` | `Player.attackedThisTurn []CardID`, one per declaration | cleanup | `creaturesAttackedCount` |
+| `Count$CountersAddedThisTurn <type> <players> <valid>` | `Game.countersAddedThisTurn []counterAddition` | cleanup | `countersAddedCount` |
+| `DungeonsCompleted$Amount` / `DifferentCardNames` / `Valid <spec>` | existing `Player.completedDungeons` | game | `dungeonsCompletedValue` |
+| `Count$ManaPool:<All\|color>` | existing `Player.ManaPool` | phase | `manaPoolCount` |
+| `Count$UnlockedDoors`, `Count$DistinctUnlockedDoors` | the controller's Room permanents' doors | state | `unlockedDoorNames` |
+| `Count$Intensity` | `Card.Intensity` plus the `Starting intensity` keyword magnitude | state | `startingIntensity` |
 
 Choices, each a Java rule kept:
 
@@ -55,10 +55,10 @@ needs a card that casts or fights; the module tests drive them with synthetic ca
 
 ## Keyword grants
 
-| Row                   | Landing                                                                                                                |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `SharedKeywordsZone$` | `layerSharedKeywords`: `CardFactoryUtil.getSharedKeywords` over the cards in the zones matching `SharedRestrictions$`  |
-| `CantHaveKeyword$`    | `KeywordEffect.CantHave`: `KeywordMod.fold` drops every line of the keyword after all effects (`Card.java:5198-5200`)  |
+| Row | Landing |
+| --- | --- |
+| `SharedKeywordsZone$` | `layerSharedKeywords`: `CardFactoryUtil.getSharedKeywords` over the cards in the zones matching `SharedRestrictions$` |
+| `CantHaveKeyword$` | `KeywordEffect.CantHave`: `KeywordMod.fold` drops every line of the keyword after all effects (`Card.java:5198-5200`) |
 | `AddSVar$` on a grant | Nothing to add: the granted body already reads the granting face's amounts and sub-abilities (`layersaddsvar_test.go`) |
 
 `SharedRestrictions$` naming `delved` (Soulflayer) grants nothing: `Matches` has no case for it and would read it as a
@@ -77,22 +77,22 @@ definition keeps its own amount (CR 707.2). Test: `textamounts_test.go`.
 
 ## Clone params
 
-| Param                             | Landing                                                                                                                                                                 |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PumpKeywords$` / `PumpDuration$` | `tokenPumpKeywords(a, "Clone")` shared with `Token`; an `animateRecord` at the copy's timestamp, permanent without `PumpDuration$`, until end of turn with it           |
-| `Embalm$`                         | `cloneDef` returns the plain copy while the card becoming a copy is not `Card.embalmed` (`CardFactory.java:555`); nothing sets the flag, Embalm is not ported           |
-| `RemoveCost$`                     | `mana.NoCost()` on every copied face, the color frozen first (Java stores a state's color apart from its cost)                                                          |
-| `Choices$ ...ThisTurnEntered*`    | `cloneSpec` accepts `ThisTurnEnteredFrom_<Z>`, bare `ThisTurnEntered` and `ThisTurnEntered[Your]<Z>` (`valid.go`, `validhistory.go`); one naming no zone stays rejected |
+| Param | Landing |
+| --- | --- |
+| `PumpKeywords$` / `PumpDuration$` | `tokenPumpKeywords(a, "Clone")` shared with `Token`; an `animateRecord` at the copy's timestamp, permanent without `PumpDuration$`, until end of turn with it |
+| `Embalm$` | `cloneDef` returns the plain copy while the card becoming a copy is not `Card.embalmed` (`CardFactory.java:555`); nothing sets the flag, Embalm is not ported |
+| `RemoveCost$` | `mana.NoCost()` on every copied face, the color frozen first (Java stores a state's color apart from its cost) |
+| `Choices$ ...ThisTurnEntered*` | `cloneSpec` accepts `ThisTurnEnteredFrom_<Z>`, bare `ThisTurnEntered` and `ThisTurnEntered[Your]<Z>` (`valid.go`, `validhistory.go`); one naming no zone stays rejected |
 
 Vizier of Many Faces' reachable behavior is the plain copy, since the embalmed token cannot exist yet. The Fourteenth
 Doctor resolves. Loose in the Park still needs `Draft` and `Defined$ ExiledWith`.
 
 **Forge bugs (PORT-8), not worked around:**
 
-| File                                                           | Bug                                                                                                                                                                                                  | Effect here                                                                                      |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `forge-gui/res/cardsfolder/t/taskmaster_mercenary_mimic.txt:6` | `RemoveCreatureTypes$ True`; `CardFactory.getCloneStates` (`CardFactory.java:579-581`) reads only `RemoveCardTypes$`/`RemoveSubTypes$`                                                               | fixed on this tree (`RemoveSubTypes$`), [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `forge-gui/res/cardsfolder/l/loose_in_the_park.txt:11`         | `PumpKeywords$ Haste` without `PumpDuration$`: `TokenEffectBase.addPumpUntil` (`:272`) returns when absent, so the haste outlives the `Duration$ UntilEndOfTurn` copy; Oracle says until end of turn | reproduced (PORT-7), `TestClonePumpKeywordsWithoutDurationStayPastTheCopy`                       |
+| File | Bug | Effect here |
+| --- | --- | --- |
+| `forge-gui/res/cardsfolder/t/taskmaster_mercenary_mimic.txt:6` | `RemoveCreatureTypes$ True`; `CardFactory.getCloneStates` (`CardFactory.java:579-581`) reads only `RemoveCardTypes$`/`RemoveSubTypes$` | fixed on this tree (`RemoveSubTypes$`), [#12193](https://github.com/Card-Forge/forge/pull/12193) |
+| `forge-gui/res/cardsfolder/l/loose_in_the_park.txt:11` | `PumpKeywords$ Haste` without `PumpDuration$`: `TokenEffectBase.addPumpUntil` (`:272`) returns when absent, so the haste outlives the `Duration$ UntilEndOfTurn` copy; Oracle says until end of turn | reproduced (PORT-7), `TestClonePumpKeywordsWithoutDurationStayPastTheCopy` |
 
 Both lines are fixed upstream ([#12193](https://github.com/Card-Forge/forge/pull/12193); `PumpDuration$ EOT` for Loose
 in the Park). The test keeps pinning Java's behavior for a script without the param.
@@ -110,11 +110,11 @@ the grant could never be used.
 
 ## Changes to shared helpers
 
-| Item                                    | Change                                                                                          |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `tokenPumpKeywords(a)`                  | now `tokenPumpKeywords(a, api string)`; the error names the effect                              |
-| `Pool.payWithSnow(cost, snow, snowAny)` | new unexported; `PayWithSnow` calls it with false                                               |
-| `KeywordEffect`                         | new field `CantHave []string`                                                                   |
-| `keywordLayerKeys` (`dependency.go`)    | gains `CantHaveKeyword`                                                                         |
-| `zoneEntry`, `counterAddition`          | new types in `game.go`; `Game` gains `enteredThisTurn`, `countersAddedThisTurn`, `snowAnyColor` |
-| `Card.embalmed`                         | new field, read by `cloneDef`, set by nothing yet                                               |
+| Item | Change |
+| --- | --- |
+| `tokenPumpKeywords(a)` | now `tokenPumpKeywords(a, api string)`; the error names the effect |
+| `Pool.payWithSnow(cost, snow, snowAny)` | new unexported; `PayWithSnow` calls it with false |
+| `KeywordEffect` | new field `CantHave []string` |
+| `keywordLayerKeys` (`dependency.go`) | gains `CantHaveKeyword` |
+| `zoneEntry`, `counterAddition` | new types in `game.go`; `Game` gains `enteredThisTurn`, `countersAddedThisTurn`, `snowAnyColor` |
+| `Card.embalmed` | new field, read by `cloneDef`, set by nothing yet |

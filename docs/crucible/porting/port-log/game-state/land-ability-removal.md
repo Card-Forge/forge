@@ -11,14 +11,14 @@ Java: `Card.hasRemoveIntrinsic` (`Card.java:3416-3422`) is true while any Layer 
 replacement effect, static ability and keyword accumulated so far — the printed ones and Layer 3's text-gained ones —
 and adds the basic land type's mana ability. Layer 6 grants come after it and still apply.
 
-| Trait                        | Go reader                                                                     | Under CR 305.7                                        |
-| ---------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------- |
-| Static abilities             | `continuousStatics` and every static scan, through `traitFaces`/`traitDef`    | Printed and text-gained lines gone                    |
-| Replacement effects          | Every watcher scan in `replacement.go`, `gameloss.go`, `regeneration.go`, ... | Gone                                                  |
-| Triggers                     | `triggerFaces`                                                                | Printed faces gone; grant rows and `traitGrants` kept |
-| Activated and mana abilities | `abilityAt`                                                                   | Printed indices not found; granted indices unchanged  |
-| Keywords                     | `KeywordLines`                                                                | Printed lines gone; `KeywordMod` grants kept          |
-| Basic land type mana ability | `TapLandForMana` (from the subtype)                                           | The new subtype's                                     |
+| Trait | Go reader | Under CR 305.7 |
+| --- | --- | --- |
+| Static abilities | `continuousStatics` and every static scan, through `traitFaces`/`traitDef` | Printed and text-gained lines gone |
+| Replacement effects | Every watcher scan in `replacement.go`, `gameloss.go`, `regeneration.go`, ... | Gone |
+| Triggers | `triggerFaces` | Printed faces gone; grant rows and `traitGrants` kept |
+| Activated and mana abilities | `abilityAt` | Printed indices not found; granted indices unchanged |
+| Keywords | `KeywordLines` | Printed lines gone; `KeywordMod` grants kept |
+| Basic land type mana ability | `TapLandForMana` (from the subtype) | The new subtype's |
 
 `TypeEffect.RemoveLandTypes` is set by `layerTypeChange` (statics) and `buildAnimateCharacteristics` (Animate). SVar
 amounts are not abilities and stay readable (`valid.go`'s amount lookup reads `Def` directly).

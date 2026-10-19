@@ -27,11 +27,11 @@ carry a local fix (`docs/crucible/porting/upstream-patches.md`, "Pending upstrea
 
 ## 2. Get what the card should do
 
-| Source                                                                  | Use                                                  |
-| ----------------------------------------------------------------------- | ---------------------------------------------------- |
-| Script's own `Oracle:` line                                             | Always available; `\n` separates abilities           |
+| Source | Use |
+| --- | --- |
+| Script's own `Oracle:` line | Always available; `\n` separates abilities |
 | Scryfall `https://api.scryfall.com/cards/named?exact=<name>` (WebFetch) | Current Oracle (errata), `oracle_text`, `card_faces` |
-| Scryfall `.../cards/<id>/rulings`                                       | Edge cases the script must get right                 |
+| Scryfall `.../cards/<id>/rulings` | Edge cases the script must get right |
 
 Scryfall may be blocked by the network policy (CONNECT 403). Then say so in the report and audit against the `Oracle:`
 line - it can lag errata, so name that as an unchecked risk rather than assuming it is current.
@@ -47,18 +47,18 @@ Follow every reference (`SubAbility$`, `Execute$`, `ReplaceWith$`, `ResultSubAbi
 
 For each clause, name the lines, then check the meaning, not just the presence. Phrases that most often go wrong:
 
-| Oracle wording                            | Script must say                                                                                                                                      |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "you may" / "up to"                       | Optional by that effect's own switch: `Optional$`, `OptionalDecider$` (triggers), absence of `Mandatory$` (hidden-origin ChangeZone), `TargetMin$ 0` |
-| "return/sacrifice/exile a ..." (no "may") | The forced form, e.g. `Mandatory$ True` on a hidden-origin ChangeZone (Kor Skyfisher)                                                                |
-| "target"                                  | `ValidTgts$` (targets: hexproof, fizzle). "choose" without "target" must not use `ValidTgts$`                                                        |
-| "you control" vs "you own"                | `YouCtrl` vs `YouOwn`                                                                                                                                |
-| "another" / "nontoken"                    | `.Other` / `+!token` (or `nonToken`)                                                                                                                 |
-| "If you do" / "if ... this way"           | `RememberChanged$`/`RememberObjects$` + `ConditionDefined$ Remembered`, then `DB$ Cleanup`                                                           |
-| "until end of turn" / durations           | `Duration$`, or the effect's default (Pump: until end of turn)                                                                                       |
-| Intervening "if" in a trigger             | `CheckSVar$`/`IsPresent$` on the `T:` line, checked on trigger and on resolution                                                                     |
-| "As ~ enters"                             | `K:ETBReplacement:<layer>:<SVar>`, not an ETB trigger                                                                                                |
-| "mana value"                              | `cmc...` properties                                                                                                                                  |
+| Oracle wording | Script must say |
+| --- | --- |
+| "you may" / "up to" | Optional by that effect's own switch: `Optional$`, `OptionalDecider$` (triggers), absence of `Mandatory$` (hidden-origin ChangeZone), `TargetMin$ 0` |
+| "return/sacrifice/exile a ..." (no "may") | The forced form, e.g. `Mandatory$ True` on a hidden-origin ChangeZone (Kor Skyfisher) |
+| "target" | `ValidTgts$` (targets: hexproof, fizzle). "choose" without "target" must not use `ValidTgts$` |
+| "you control" vs "you own" | `YouCtrl` vs `YouOwn` |
+| "another" / "nontoken" | `.Other` / `+!token` (or `nonToken`) |
+| "If you do" / "if ... this way" | `RememberChanged$`/`RememberObjects$` + `ConditionDefined$ Remembered`, then `DB$ Cleanup` |
+| "until end of turn" / durations | `Duration$`, or the effect's default (Pump: until end of turn) |
+| Intervening "if" in a trigger | `CheckSVar$`/`IsPresent$` on the `T:` line, checked on trigger and on resolution |
+| "As ~ enters" | `K:ETBReplacement:<layer>:<SVar>`, not an ETB trigger |
+| "mana value" | `cmc...` properties |
 
 ## 5. Check every param is read by the Java that runs it
 
@@ -90,14 +90,14 @@ git grep -h "you may return a nonland permanent" upstream/master -- forge-gui/re
 git grep -h "Hidden\$ True" upstream/master -- forge-gui/res/cardsfolder | grep -c "Mandatory\$ True"
 ```
 
-| Finding                                                                                           | Verdict                                                      |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Every clause implemented, every param read, siblings agree                                        | **Correct**                                                  |
-| Param no code reads, and the behavior is already right without it (siblings omit it)              | **Script: dead param** - remove it                           |
-| Param no code reads, and the card behaves wrong without it                                        | **Script: wrong param name** - rename to what the Java reads |
-| Clause missing, or implemented with the wrong meaning (owner/controller, may/must, target/choose) | **Script: wrong behavior** - name the rules difference       |
-| Many cards use a param the effect ignores, or the Java cannot express the clause at all           | **Java: missing support** - goes to `forge-java-defects.md`  |
-| Only prompt/description text differs                                                              | **Cosmetic** - say so; still fix if it is a dead param       |
+| Finding | Verdict |
+| --- | --- |
+| Every clause implemented, every param read, siblings agree | **Correct** |
+| Param no code reads, and the behavior is already right without it (siblings omit it) | **Script: dead param** - remove it |
+| Param no code reads, and the card behaves wrong without it | **Script: wrong param name** - rename to what the Java reads |
+| Clause missing, or implemented with the wrong meaning (owner/controller, may/must, target/choose) | **Script: wrong behavior** - name the rules difference |
+| Many cards use a param the effect ignores, or the Java cannot express the clause at all | **Java: missing support** - goes to `forge-java-defects.md` |
+| Only prompt/description text differs | **Cosmetic** - say so; still fix if it is a dead param |
 
 Give the counts that decided it (e.g. "98 of 128 hidden-origin battlefield ChangeZones use `Mandatory$ True`; 1 uses
 `ChoiceOptional$`").
