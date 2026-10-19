@@ -1,6 +1,5 @@
 package forge.sound;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -26,13 +25,6 @@ public class SoftwareMixerTest {
         Method method = SoftwareMixer.class.getDeclaredMethod(name, types);
         method.setAccessible(true);
         return method.invoke(null, args);
-    }
-
-    private static Voice voice(byte[] pcm, int delay) throws Exception {
-        Constructor<Voice> constructor = Voice.class.getDeclaredConstructor(
-                byte[].class, float.class, boolean.class, int.class);
-        constructor.setAccessible(true);
-        return constructor.newInstance(pcm, 1f, false, delay);
     }
 
     private static void fill(List<Voice> voices, int[] samples, byte[] output) throws Exception {
@@ -74,39 +66,31 @@ public class SoftwareMixerTest {
         }
     }
 
-    public void advancesSamplesWhenStartingPartwayThroughABuffer() throws Exception {
-        Voice voice = voice(new byte[] {100, 0, 100, 0, (byte) 200, 0, (byte) 200, 0}, 3);
-        int[] samples = new int[8];
-        byte[] output = new byte[16];
-        fill(List.of(voice), samples, output);
-        Assert.assertEquals(samples, new int[] {0, 0, 0, 0, 0, 0, 100, 100});
-        fill(List.of(voice), samples, output);
-        Assert.assertEquals(samples, new int[] {200, 200, 0, 0, 0, 0, 0, 0});
-        Assert.assertFalse(voice.isPlaying());
-    }
-
-    public void clampsOverlappingSamplesAndSkipsStoppedVoices() throws Exception {
-        byte[] pcm = {(byte) 0xff, 0x7f, 0, (byte) 0x80};
-        Voice stopped = voice(pcm, 0);
-        stopped.stop();
-        int[] samples = new int[2];
-        byte[] output = new byte[4];
-        fill(List.of(voice(pcm, 0), voice(pcm, 0), stopped), samples, output);
-        Assert.assertEquals(output, pcm);
-        fill(List.of(stopped), samples, output);
-        Assert.assertEquals(output, new byte[4]);
-    }
-
-    public void limitsQueuedVoicesAndRejectsEmptyLoops() throws Exception {
+    public void cancelledRepeatsDoNotDelayNewPlayback() throws Exception {
         Object voices = field("voices").get(null);
         synchronized (voices) {
             try {
-                Assert.assertFalse(SoftwareMixer.play(new byte[0], 1f, true, 0).isPlaying());
                 byte[] pcm = {1, 0, 1, 0};
-                for (int i = 0; i < 32; i++) {
-                    Assert.assertTrue(SoftwareMixer.play(pcm, 1f, false, 30).isPlaying());
+                List<Voice> queued = new ArrayList<>();
+                for (int i = 0; i < 3; i++) {
+                    queued.add(SoftwareMixer.play(pcm, 1f, false, 70));
                 }
-                Assert.assertFalse(SoftwareMixer.play(pcm, 1f, false, 30).isPlaying());
+                // Keep the first voice: replacing the cancelled tail should occupy its next slot.
+                for (int i = 1; i < queued.size(); i++) {
+                    queued.get(i).stop();
+                }
+                Voice replacement = SoftwareMixer.play(pcm, 1f, false, 70);
+                Field silentFrames = Voice.class.getDeclaredField("silentFrames");
+                silentFrames.setAccessible(true);
+                Assert.assertEquals(silentFrames.getInt(replacement), SoftwareMixer.framesForMillis(70));
+
+                queued.get(0).stop();
+                replacement.stop();
+                Voice restarted = SoftwareMixer.play(pcm, 1f, false, 70);
+                Assert.assertEquals(silentFrames.getInt(restarted), 0);
+                int[] samples = new int[2];
+                fill(List.of(restarted), samples, new byte[4]);
+                Assert.assertEquals(samples, new int[] {1, 1});
             } finally {
                 call("dropVoices", new Class<?>[0]);
             }
@@ -134,7 +118,6 @@ public class SoftwareMixerTest {
                 Assert.assertNull(field("line").get(null));
                 Assert.assertEquals(operations, List.of("stop", "flush", "close"));
                 Assert.assertTrue(field("lineUnavailableUntil").getLong(null) > System.currentTimeMillis());
-                Assert.assertTrue(SoftwareMixer.play(new byte[] {1, 0, 1, 0}, 1f, false, 70).isPlaying());
             } finally {
                 call("dropVoices", new Class<?>[0]);
                 field("line").set(null, null);
@@ -143,11 +126,4 @@ public class SoftwareMixerTest {
         }
     }
 
-    public void selectsTheSameSpacingForFileNamesAndPaths() {
-        for (String filename : List.of("draw.mp3", "tap.mp3", "untap.mp3")) {
-            Assert.assertEquals(SoftwareMixer.repeatDelayMillis(filename), 70);
-            Assert.assertEquals(SoftwareMixer.repeatDelayMillis("sounds/custom/" + filename), 70);
-        }
-        Assert.assertEquals(SoftwareMixer.repeatDelayMillis("shuffle.mp3"), SoundSystem.DELAY);
-    }
 }

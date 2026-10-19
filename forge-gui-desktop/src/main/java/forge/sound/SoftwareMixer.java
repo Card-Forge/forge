@@ -24,9 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -68,13 +66,11 @@ final class SoftwareMixer {
     private static final long LINE_IDLE_CLOSE_MS = 3_000L;
     /** A device that refused the line is asked again no more often than this. */
     private static final long LINE_RETRY_MS = 30_000L;
-    private static final int MAX_VOICES = 32;
     private static final Set<String> SLOW_REPEAT_SOUNDS = Set.of("draw.mp3", "tap.mp3", "untap.mp3");
 
     /** Voices still to be mixed. All access is synchronized on this list. */
     private static final List<Voice> voices = new ArrayList<>();
-    // Guarded by voices. Weak keys let disposed sound sets release their samples.
-    private static final Map<byte[], Long> nextStartFrame = new WeakHashMap<>();
+    // Guarded by voices.
     private static long frameCursor;
 
     // The fields below belong to the mixer thread alone.
@@ -96,17 +92,19 @@ final class SoftwareMixer {
         private final byte[] pcm;
         private final float volume;
         private final boolean loop;
+        private final long startFrame;
         /** Read cursor into {@link #pcm}; mixer thread only. */
         private int position;
         /** Frames of silence still owed before this voice sounds; mixer thread only. */
         private int silentFrames;
         private volatile boolean playing = true;
 
-        private Voice(byte[] pcm, float volume, boolean loop, int delayFrames) {
+        private Voice(byte[] pcm, float volume, boolean loop, int delayFrames, long startFrame) {
             this.pcm = pcm;
             this.volume = volume;
             this.loop = loop;
             this.silentFrames = delayFrames;
+            this.startFrame = startFrame;
         }
 
         void stop() {
@@ -152,17 +150,21 @@ final class SoftwareMixer {
     static Voice play(byte[] pcm, float volume, boolean loop, int repeatDelayMillis) {
         synchronized (voices) {
             voices.removeIf(voice -> !voice.isPlaying());
-            if (pcm.length == 0 || voices.size() >= MAX_VOICES) {
-                final Voice skipped = new Voice(pcm, volume, loop, 0);
+            if (pcm.length == 0) {
+                final Voice skipped = new Voice(pcm, volume, loop, 0, frameCursor);
                 skipped.stop();
                 return skipped;
             }
-            final long start = repeatDelayMillis == 0 ? frameCursor
-                    : Math.max(frameCursor, nextStartFrame.getOrDefault(pcm, frameCursor));
-            final Voice voice = new Voice(pcm, volume, loop, (int) (start - frameCursor));
+            long start = frameCursor;
             if (repeatDelayMillis > 0) {
-                nextStartFrame.put(pcm, start + framesForMillis(repeatDelayMillis));
+                // Cancelled voices must not reserve time ahead of the remaining repeats.
+                for (Voice active : voices) {
+                    if (active.pcm == pcm && !active.loop && active.isPlaying()) {
+                        start = Math.max(start, active.startFrame + framesForMillis(repeatDelayMillis));
+                    }
+                }
             }
+            final Voice voice = new Voice(pcm, volume, loop, (int) (start - frameCursor), start);
             voices.add(voice);
             voices.notifyAll();
             return voice;
@@ -227,7 +229,6 @@ final class SoftwareMixer {
                 voice.stop();
             }
             voices.clear();
-            nextStartFrame.clear();
         }
     }
 
