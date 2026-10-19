@@ -86,6 +86,30 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		}
 		return out, nil
 	}
+	if base, prop, dotted := strings.Cut(defined, "."); dotted && !strings.Contains(prop, ",") {
+		switch base {
+		case "Registered", "Remembered", "RememberedController", "RememberedOwner", "ImprintedController", "ImprintedOwner":
+			// The base list, then the trailing valid filter
+			// (AbilityUtils.java:1192-1198): Ludevic's
+			// PlayerCountDefinedRegistered.Other, The Second Doctor's
+			// EffectOwner$ RememberedOwner.Opponent.
+			all, err := definedPlayers(g, controller, host, base, refs)
+			if err != nil {
+				return nil, err
+			}
+			var out []PlayerID
+			for _, pid := range all {
+				matched, recognized := matchesPlayerSpec(g, pid, controller, host, "Player."+prop)
+				if !recognized {
+					return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+				}
+				if matched {
+					out = append(out, pid)
+				}
+			}
+			return out, nil
+		}
+	}
 	var candidates []PlayerID
 	switch defined {
 	case "Registered":

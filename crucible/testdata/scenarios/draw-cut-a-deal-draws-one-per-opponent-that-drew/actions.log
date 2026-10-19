@@ -1,0 +1,12 @@
+# RememberDrawn$ AllReplaced remembers the opponent's drawn card; X is
+# PlayerCountOpponents$HasPropertyIsRememberedOrController (PlayerProperty.java:
+# 215-232: a remembered card's controller counts), so the caster draws one.
+startturn human
+advance 3
+tapformana human 2 W
+tapformana human 3 W
+tapformana human 4 W
+queue paygeneric W
+queue paygeneric W
+castspell human 1
+resolvestack

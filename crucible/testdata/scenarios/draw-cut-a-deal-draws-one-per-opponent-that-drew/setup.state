@@ -1,0 +1,6 @@
+humanlife=20
+ailife=20
+humanhand=Cut a Deal|Id:1
+humanbattlefield=Plains|Id:2;Plains|Id:3;Plains|Id:4
+humanlibrary=Forest|Id:5
+ailibrary=Swamp|Id:6

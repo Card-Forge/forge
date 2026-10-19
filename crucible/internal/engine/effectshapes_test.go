@@ -353,3 +353,25 @@ func TestSkipPhaseCombatEachTurn(t *testing.T) {
 		t.Errorf("phase after Main1 = %v, want Main2 (combat skipped)", got)
 	}
 }
+
+// TestDefinedPlayersTrailingFilterOnRegisteredAndRemembered proves the
+// trailing valid filter on a list base (AbilityUtils.java:1192-1198):
+// Registered.Other (Ludevic) is every player but the controller, and
+// RememberedOwner.Opponent (The Second Doctor) the owners of remembered cards
+// who are opponents.
+func TestDefinedPlayersTrailingFilterOnRegisteredAndRemembered(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	g.NewCard(creatureDefPT(t, "1", "1"), other, engine.Library)
+	resolveLine(t, g, p, engine.NewScriptedController(),
+		"DB$ GainLife | Defined$ Registered.Other | LifeAmount$ 3 | SubAbility$ DBDraw",
+		"DBDraw", "DB$ Draw | Defined$ Opponent | RememberDrawn$ True | SubAbility$ DBOwner",
+		"DBOwner", "DB$ GainLife | Defined$ RememberedOwner.Opponent | LifeAmount$ 5")
+	if got := g.Player(other).Life; got != 20+3+5 {
+		t.Errorf("opponent life = %d, want 28 (Registered.Other, then RememberedOwner.Opponent)", got)
+	}
+	if got := g.Player(p).Life; got != 20 {
+		t.Errorf("controller life = %d, want 20", got)
+	}
+}

@@ -283,3 +283,14 @@ func TestDrawRememberDrawnRemembersTheCards(t *testing.T) {
 		t.Errorf("drew %d, remembered %d, want 2 and 2", got, n)
 	}
 }
+
+// TestDrawRevealIsInformational proves Reveal$ draws as usual: the engine is
+// omniscient, so showing the cards changes no state.
+func TestDrawRevealIsInformational(t *testing.T) {
+	t.Parallel()
+
+	_, _, _, got := drawHandSize(t, engine.NewScriptedController(), "DB$ Draw | Defined$ You | NumCards$ 2 | Reveal$ All")
+	if got != 2 {
+		t.Errorf("drew %d, want 2", got)
+	}
+}

@@ -1272,6 +1272,22 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 	case "IsCorrupted":
 		// PlayerProperty.java:277 (CR 702.xxx "corrupted"): three or more.
 		return g.Player(candidate).Counters.Count(Poison) >= 3, true
+	case "IsRememberedOrController":
+		// PlayerProperty.java:215-232: a remembered player is the candidate, or
+		// a remembered card is controlled by it (Cut a Deal's drawn cards).
+		sc, ok := sourceCard(g, source)
+		if !ok {
+			return false, true
+		}
+		for _, e := range sc.Memory.Remembered() {
+			if pid, isPlayer := e.AsPlayer(); isPlayer && pid == candidate {
+				return true, true
+			}
+			if cid, isCard := e.AsCard(); isCard && g.Card(cid).Controller() == candidate {
+				return true, true
+			}
+		}
+		return false, true
 	case "IsRemembered":
 		// PlayerProperty.java:209-212: source.isRemembered(player). No
 		// source recognizes the property and matches nobody.

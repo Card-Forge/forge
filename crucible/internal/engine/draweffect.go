@@ -26,8 +26,7 @@ import "fmt"
 //
 // Upto$ (the player chooses 0 to NumCards$), OptionalDecider$ (the drawing
 // player confirms; the value names no one, DrawEffect.java:67) and
-// RememberDrawn$ are resolved. Not ported: Reveal$ (no reveal event), which
-// fails loudly rather than drawing unrevealed.
+// RememberDrawn$ are resolved; Reveal$ is informational and ignored.
 //
 // SubAbility$ was never in this list -- Draw never blocked it -- but had
 // nowhere to go until resolveSubAbility (subability.go, effect.go's own
@@ -49,11 +48,8 @@ func (drawEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 		}
 		n = parsed
 	}
-	for _, key := range []string{"Reveal"} {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: Draw: %s$ not resolvable yet", key)
-		}
-	}
+	// Reveal$ (DrawEffect.java:91-93) only shows the drawn cards: the engine is
+	// omniscient and no trigger reads a reveal, so it changes nothing here.
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
