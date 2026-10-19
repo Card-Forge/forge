@@ -1,18 +1,16 @@
 package engine
 
-//enginelint:allow id card game ability defined condition control parts zone continuous controlcommands
+//enginelint:allow id card game ability defined condition control parts zone continuous controlcommands resolvechoice
 
 import "fmt"
 
 // gainControlUnresolvedParams are ControlGainEffect.java's params this port
-// cannot honour yet: the choice and sweep shapes (Choices$, Chooser$,
-// AllValid$). The target-selection restrictions (TargetsForEachPlayer$,
+// cannot honour yet: the sweep shape (AllValid$). The target-selection restrictions (TargetsForEachPlayer$,
 // MaxTotalTargetCMC$, TargetsWithControllerProperty$, TargetingPlayer$,
 // TargetingPlayerControls$ and the random pick, TargetsAtRandom$) are
 // targeting.go's.
 var gainControlUnresolvedParams = [...]string{
-	"Choices", "Chooser", "AllValid",
-	"Condition", "Ultimate",
+	"AllValid", "Condition", "Ultimate",
 }
 
 // gainControlEffect is ControlGainEffect.java's permanent shape: the
@@ -44,9 +42,26 @@ func (gainControlEffect) Resolve(g *Game, a *Ability, controller PlayerControlle
 			newController = players[0]
 		}
 	}
-	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
-	if err != nil {
-		return fmt.Errorf("engine: GainControl: %w", err)
+	var cards []CardID
+	if spec, ok := a.Params.Param("Choices"); ok {
+		// ControlGainEffect.java:106-120: Chooser$ (the activator) picks one
+		// battlefield permanent, never optionally; none to pick ends the effect.
+		chooser, err := choiceChooser(g, a, "GainControl")
+		if err != nil {
+			return err
+		}
+		offer, err := choiceCandidates(g, a, "GainControl", []ZoneType{Battlefield}, spec)
+		if err != nil {
+			return err
+		}
+		if cards, err = askChoiceCards(g, controller, a, "GainControl", chooser, offer, 1, 1); err != nil || len(cards) == 0 {
+			return err
+		}
+	} else {
+		var err error
+		if cards, err = targetedOrDefinedCards(source, a.Params, a.refs()); err != nil {
+			return fmt.Errorf("engine: GainControl: %w", err)
+		}
 	}
 	_, untap := a.Params.Param("Untap")
 	_, optional := a.Params.Param("Optional")

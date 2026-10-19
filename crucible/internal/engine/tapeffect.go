@@ -19,16 +19,13 @@
 
 package engine
 
-//enginelint:allow id card game ability defined condition control zone parts
+//enginelint:allow id card game ability defined condition control zone parts amount effecthelpers resolvechoice
 
 import "fmt"
 
 // tapUnresolvedParams names TapEffect's own params this port does not
 // evaluate. Every one fails the whole line loudly (PORT-8/GO-7):
-// CardChoices$/ChoiceAmount$/ChoicePrompt$/AnyNumber$ (10 combined) -- an
-// interactive "choose N battlefield permanents matching a spec" this port's
-// own PlayerController has no hook for past ChoosePermanentsToTap's own
-// fixed-candidate-list shape (taptype.go, a cost, not an effect); Tapper$
+// Tapper$
 // (2) -- a tap attributed to a player other than the activator, CR 701.21's
 // own "tapped by" distinction nothing downstream reads yet; Condition$/
 // ConditionDefined$ (0/7) -- condition.go's own subAbilityConditionMet
@@ -38,8 +35,7 @@ import "fmt"
 // line somehow combines it with a shape that reaches this path some other
 // way, rather than silently tapping-without-a-trigger the wrong permanent.
 var tapUnresolvedParams = [...]string{
-	"CardChoices", "ChoiceAmount", "ChoicePrompt", "AnyNumber", "Tapper",
-	"Condition", "ETB",
+	"Tapper", "Condition", "ETB",
 }
 
 // tapEffect resolves Mode$/DB$/AB$ Tap. ConditionPresent$/ConditionCompare$/
@@ -58,9 +54,19 @@ func (tapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
-	if err != nil {
-		return fmt.Errorf("engine: Tap: %w", err)
+	var cards []CardID
+	if spec, ok := a.Params.Param("CardChoices"); ok {
+		// TapEffect.java:37-47: the activator picks ChoiceAmount$ (1) battlefield
+		// permanents matching CardChoices$, none required with AnyNumber$.
+		var err error
+		if cards, err = tapChoice(g, a, controller, spec); err != nil {
+			return err
+		}
+	} else {
+		var err error
+		if cards, err = targetedOrDefinedCards(source, a.Params, a.refs()); err != nil {
+			return fmt.Errorf("engine: Tap: %w", err)
+		}
 	}
 	_, remTapped := a.Params.Param("RememberTapped")
 	_, alwaysRem := a.Params.Param("AlwaysRemember")
@@ -80,4 +86,43 @@ func (tapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error
 		}
 	}
 	return nil
+}
+
+// tapChoice is TapEffect's CardChoices$ pick (TapEffect.java:37-47).
+func tapChoice(g *Game, a *Ability, controller PlayerController, spec string) ([]CardID, error) {
+	n := 1
+	if raw, ok := a.Params.Param("ChoiceAmount"); ok {
+		var ok bool
+		if n, ok = resolveNamedAmount(g, a.Amounts, g.Card(a.Source), raw); !ok {
+			return nil, fmt.Errorf("engine: Tap: ChoiceAmount$ %q is not resolvable", raw)
+		}
+	}
+	lo := n
+	if _, anyNumber := a.Params.Param("AnyNumber"); anyNumber {
+		lo = 0
+	}
+	offer, err := choiceCandidates(g, a, "Tap", []ZoneType{Battlefield}, spec)
+	if err != nil {
+		return nil, err
+	}
+	hi := min(n, len(offer))
+	lo = max(min(lo, hi), 0)
+	if hi <= 0 {
+		return nil, nil
+	}
+	options := make([]EntityID, len(offer))
+	for i, id := range offer {
+		options[i] = CardEntity(id)
+	}
+	picked := controller.ChooseEntitiesForEffect(g, a.Controller, a.Source, options, lo, hi)
+	if err := checkChoice(picked, options, lo, hi); err != nil {
+		return nil, fmt.Errorf("engine: Tap: %w", err)
+	}
+	cards := make([]CardID, 0, len(picked))
+	for _, e := range picked {
+		if id, ok := e.AsCard(); ok {
+			cards = append(cards, id)
+		}
+	}
+	return cards, nil
 }

@@ -21,7 +21,7 @@
 
 package engine
 
-//enginelint:allow id card game player ability defined condition control parts event amount putcountereffect
+//enginelint:allow id card game player ability defined condition control parts event amount putcountereffect resolvechoice
 
 import (
 	"fmt"
@@ -50,7 +50,7 @@ import (
 // either, dealDamageEffect's own identical reasoning.
 var removeCounterUnresolvedParams = [...]string{
 	"ValidTgts", "TargetMin", "TargetMax",
-	"Choices", "ChoiceOptional", "TgtZone", "UpTo",
+	"TgtZone", "UpTo",
 	"Optional",
 	"RememberRemoved", "RememberAmount",
 	"Condition"}
@@ -65,7 +65,7 @@ var removeCounterUnresolvedParams = [...]string{
 // port, so the check would always pass, a real, narrow simplification.
 type removeCounterEffect struct{}
 
-func (removeCounterEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	for _, key := range removeCounterUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RemoveCounter: %s$ not resolvable yet", key)
@@ -94,10 +94,19 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 		}
 	}
 
-	defined, _ := a.Params.Param("Defined")
-	cards, players, err := definedCounterTargets(g, a.Controller, source, defined, a.refs())
-	if err != nil {
-		return fmt.Errorf("engine: RemoveCounter: %w", err)
+	var cards []CardID
+	var players []PlayerID
+	if spec, ok := a.Params.Param("Choices"); ok {
+		// CountersRemoveEffect.java:107-137: the activator picks the cards.
+		if cards, err = removeCounterChoice(g, a, controller, spec); err != nil {
+			return err
+		}
+	} else {
+		defined, _ := a.Params.Param("Defined")
+		cards, players, err = definedCounterTargets(g, a.Controller, source, defined, a.refs())
+		if err != nil {
+			return fmt.Errorf("engine: RemoveCounter: %w", err)
+		}
 	}
 
 	for _, cid := range cards {
@@ -159,4 +168,35 @@ func removeCounterType(a *compile.Ability) (t CounterType, allKinds bool, err er
 		return "", false, fmt.Errorf("engine: RemoveCounter: CounterType$ %q not resolvable yet", raw)
 	}
 	return CounterType(strings.ToUpper(raw)), false, nil
+}
+
+// removeCounterChoice is the Choices$ pick (CountersRemoveEffect.java:107-137):
+// one card of ChoiceZone$ matching Choices$ by default, ChoiceNum$ of them, or
+// any number with ChoiceOptional$; the effect does nothing when fewer than the
+// minimum exist (:128-130). The activator answers whoever Chooser$ names
+// (the class never reads it).
+func removeCounterChoice(g *Game, a *Ability, controller PlayerController, spec string) ([]CardID, error) {
+	zones, err := choiceZones(a, "RemoveCounter")
+	if err != nil {
+		return nil, err
+	}
+	offer, err := choiceCandidates(g, a, "RemoveCounter", zones, spec)
+	if err != nil {
+		return nil, err
+	}
+	lo, hi := 1, 1
+	if _, ok := a.Params.Param("ChoiceOptional"); ok {
+		lo, hi = 0, len(offer)
+	}
+	if raw, ok := a.Params.Param("ChoiceNum"); ok {
+		n, ok := resolveNamedAmount(g, a.Amounts, g.Card(a.Source), raw)
+		if !ok {
+			return nil, fmt.Errorf("engine: RemoveCounter: ChoiceNum$ %q is not resolvable", raw)
+		}
+		lo, hi = n, n
+	}
+	if len(offer) < lo {
+		return nil, nil
+	}
+	return askChoiceCards(g, controller, a, "RemoveCounter", a.Controller, offer, lo, hi)
 }

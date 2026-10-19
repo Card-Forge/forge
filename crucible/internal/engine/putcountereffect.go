@@ -18,7 +18,7 @@
 
 package engine
 
-//enginelint:allow id card game player ability event defined amount condition parts control
+//enginelint:allow id card game player ability event defined amount condition parts control resolvechoice
 
 import (
 	"fmt"
@@ -35,10 +35,9 @@ import (
 // each one chosen gets CounterNum$ counters. ETB$
 // (154) -- CR 614's own counters-added-simultaneously replacement table
 // (GameEntityCounterTable), the identical batching risk ChangesZoneAll's
-// own gap already documents (Not ported yet); Choices$ and its own
-// ChoiceTitle$/ChoiceAmount$/MinChoiceAmount$/ChoicesDesc$/ChoiceZone$/
-// ChoiceOptional$ (46 combined) -- an interactive multi-card choice this
-// port's own PlayerController has no hook for; DividedRandomly$/SplitAmount$
+// own gap already documents (Not ported yet); ChoiceOptional$ (2) -- Java
+// passes it as isOptional with the minimum unchanged, which this port's
+// ChooseCardsForEffect has no flag for; DividedRandomly$/SplitAmount$
 // -- each its own distribution mechanic (DividedAsYouChoose$ over the
 // line's own targets resolves: divideAmongTargets, dividedtargets.go);
 // Monstrosity$/Adapt$/Bolster$/Support$/PowerUp$/Exhaust$ -- each its own
@@ -69,14 +68,14 @@ import (
 // end to end.
 var putCounterUnresolvedParams = [...]string{
 	"ETB",
-	"Choices", "ChoiceTitle", "ChoiceAmount", "MinChoiceAmount", "ChoicesDesc", "ChoiceZone", "ChoiceOptional",
+	"ChoiceOptional",
 	"DividedRandomly", "SplitAmount",
 	"Bolster", "PowerUp",
 	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
 	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "SkipReceiveCounters", "RandomType",
 	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
 	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
-	"RememberCards", "RemovePhase", "Optional", "UpTo", "UpToMin",
+	"RemovePhase", "UpTo", "UpToMin",
 	"Condition", "ConditionZone", "ConditionPlayerTurn", "ConditionActivationLimit",
 	"ConditionPresent2", "ConditionCompare2",
 }
@@ -115,6 +114,13 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	placer, err := putCounterPlacer(g, a)
 	if err != nil {
 		return err
+	}
+	if _, ok := a.Params.Param("Optional"); ok && enter {
+		return fmt.Errorf("engine: PutCounter: Optional$ not resolvable yet")
+	}
+	if _, ok := a.Params.Param("Optional"); ok && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+		// CountersPutEffect.java:183-185: the activator may decline the lot.
+		return nil
 	}
 	if enter {
 		return g.putEnterCounters(a, source, placer)
@@ -156,14 +162,24 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	_, targeted := a.Params.Param("ValidTgts")
 	targeted = targeted || isSupport
 	divided := a.isDivided()
-	if divided && (!targeted || hasDefined) {
+	choicesSpec, hasChoices := a.Params.Param("Choices")
+	if divided && !hasChoices && (!targeted || hasDefined) {
 		// Untargeted, the division is asked card by card as the effect
 		// resolves (CountersPutEffect.java:470-483, Choices$-chosen cards);
 		// with Defined$ the cards read are not the targets the division was
 		// announced over.
 		return fmt.Errorf("engine: PutCounter: DividedAsYouChoose$ without its own targets not resolvable yet")
 	}
-	if targeted && !hasDefined {
+	var choiceShares []int
+	switch {
+	case hasChoices:
+		// Choices$ replaces Defined$ and the targets
+		// (CountersPutEffect.java:190 against :244).
+		var err error
+		if cards, choiceShares, err = g.putCounterChoice(controller, a, choicesSpec, counterType, amount, divided); err != nil {
+			return err
+		}
+	case targeted && !hasDefined:
 		// getDefinedEntitiesOrTargeted (SpellAbilityEffect.java:376-383):
 		// the chosen targets, a card or a player each -- every one of them,
 		// "each of up to N target creatures" (TargetMin$/TargetMax$) getting
@@ -176,7 +192,7 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 				players = append(players, pid)
 			}
 		}
-	} else {
+	default:
 		// Defined$ wins over the targets when both are named (definedFirst,
 		// SpellAbilityEffect.java:379): Drillworks Mole's "Self & Targeted".
 		// No Defined$ is the host (AbilityUtils.getDefinedEntities' "default
@@ -200,6 +216,10 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	amounts := make([]int, len(cards))
 	for i, cid := range cards {
 		amounts[i] = amount
+		if hasChoices && divided {
+			amounts[i] = choiceShares[i]
+			continue
+		}
 		if !divided {
 			continue
 		}
@@ -216,6 +236,12 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	// replacements have edited the table in place (ReplaceCounterEffect's
 	// setCount): the counters each object was to get, summed.
 	total := 0
+	// RememberCards$ remembers the cards that got counters (CountersPutEffect.
+	// java:658-660) and RememberPut$ every entity that did, a player too
+	// (GameEntityCounterTable.java:158-163).
+	_, rememberCards := a.Params.Param("RememberCards")
+	_, rememberPut := a.Params.Param("RememberPut")
+	remember := rememberCards || rememberPut
 	for i, cid := range cards {
 		// CountersPutEffect.java:485-489: Adapt skips a creature that has +1/+1
 		// counters (CanAdapt statics are not modelled), Monstrosity one that is
@@ -229,6 +255,10 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		}
 		total += n
 		g.addCardCounters(controller, placer, a.Source, cid, counterType, n)
+		if remember {
+			// CountersPutEffect.java:658-660: the cards that got counters.
+			source.Memory.Remember(CardEntity(cid))
+		}
 		if isMonstrosity {
 			// :543-548.
 			g.Card(cid).monstrous = true
@@ -247,6 +277,9 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 			continue
 		}
 		total += n
+		if rememberPut {
+			source.Memory.Remember(PlayerEntity(pid))
+		}
 		g.Player(pid).Counters.Add(counterType, n)
 		emitCounterChanged(g, a.Source, PlayerEntity(pid), counterType, n)
 	}
@@ -326,4 +359,72 @@ func definedCounterTargets(g *Game, controller PlayerID, host *Card, defined str
 		cards, err := definedCards(host, defined, refs)
 		return cards, nil, err
 	}
+}
+
+// putCounterChoice is the Choices$ branch of CountersPutEffect.resolvePerType
+// (:183-244, :470-483): Chooser$ picks MinChoiceAmount$..ChoiceAmount$ cards of
+// ChoiceZone$ matching Choices$ that can receive the counters, once, before
+// any counter is placed. With DividedAsYouChoose$ the activator then splits
+// the amount card by card (chooseNumber 1..remaining), the last card taking
+// what is left. shares is the amount each returned card gets.
+func (g *Game) putCounterChoice(controller PlayerController, a *Ability, spec string, ct CounterType, amount int, divided bool) (cards []CardID, shares []int, err error) {
+	chooser, err := choiceChooser(g, a, "PutCounter")
+	if err != nil {
+		return nil, nil, err
+	}
+	source := g.Card(a.Source)
+	n := 1
+	if raw, ok := a.Params.Param("ChoiceAmount"); ok {
+		if n, ok = resolveNamedAmount(g, a.Amounts, source, raw); !ok {
+			return nil, nil, fmt.Errorf("engine: PutCounter: ChoiceAmount$ %q is not resolvable", raw)
+		}
+	}
+	lo := n
+	if raw, ok := a.Params.Param("MinChoiceAmount"); ok {
+		if lo, ok = resolveNamedAmount(g, a.Amounts, source, raw); !ok {
+			return nil, nil, fmt.Errorf("engine: PutCounter: MinChoiceAmount$ %q is not resolvable", raw)
+		}
+	}
+	if n <= 0 {
+		return nil, nil, nil
+	}
+	zones, err := choiceZones(a, "PutCounter")
+	if err != nil {
+		return nil, nil, err
+	}
+	all, err := choiceCandidates(g, a, "PutCounter", zones, spec)
+	if err != nil {
+		return nil, nil, err
+	}
+	var offer []CardID
+	for _, cid := range all {
+		if !g.cantPutCounter(CardEntity(cid), ct) {
+			offer = append(offer, cid)
+		}
+	}
+	cards, err = askChoiceCards(g, controller, a, "PutCounter", chooser, offer, lo, n)
+	if err != nil || len(cards) == 0 {
+		return nil, nil, err
+	}
+	shares = make([]int, len(cards))
+	remaining := amount
+	for i := range cards {
+		shares[i] = amount
+		if !divided {
+			continue
+		}
+		switch {
+		case i == len(cards)-1 || remaining == 1:
+			shares[i] = remaining
+		case remaining <= 0:
+			shares[i] = 0
+		default:
+			shares[i] = controller.ChooseNumber(g, a.Controller, a.Source, 1, remaining)
+			if shares[i] < 1 || shares[i] > remaining {
+				return nil, nil, fmt.Errorf("engine: PutCounter: division %d is not within 1..%d", shares[i], remaining)
+			}
+		}
+		remaining -= shares[i]
+	}
+	return cards, shares, nil
 }
