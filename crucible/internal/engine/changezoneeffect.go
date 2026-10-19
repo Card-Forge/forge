@@ -389,6 +389,29 @@ func changeZoneMemory(a *Ability, source *Card, id CardID) {
 	}
 }
 
+// changeZoneKnownCards is what changeKnownOriginResolve moves: the targeted or
+// Defined$ cards. Defined$ Parent names the root ability, not a card
+// (getDefinedCards has no Parent case): Java moves it through the spells-on-
+// the-stack loop, the root's own card when the root is a spell still on the
+// stack, nothing when it is an activated or triggered ability
+// (ChangeZoneEffect.java:496-506, AbilityUtils.java:1232-1233). Here the
+// resolving spell's card stands in its Stack zone, so it moves as the host,
+// Pulse of the Forge's "return CARDNAME to its owner's hand". That loop reads
+// no Origin$; a Parent line whose Origin$ does not name the stack is refused
+// rather than filtered by it.
+func changeZoneKnownCards(a *Ability, source *Card, origin []ZoneType) ([]CardID, error) {
+	if defined, ok := a.Params.Param("Defined"); ok && defined == "Parent" && !hasParam(a, "ValidTgts") {
+		if !zoneIn(Stack, origin) {
+			return nil, fmt.Errorf("a Defined$ Parent line without Origin$ Stack not resolvable yet")
+		}
+		if (a.spell || a.rootSpell) && source.Zone == Stack {
+			return []CardID{source.ID}, nil
+		}
+		return nil, nil
+	}
+	return targetedOrDefinedCards(source, a.Params, a.refs())
+}
+
 // changeZonePreMemory applies Unimprint$/ForgetOtherRemembered$, which Java
 // runs before any card moves.
 func changeZonePreMemory(a *Ability, source *Card) {
@@ -417,7 +440,7 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 	if err != nil {
 		return err
 	}
-	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
+	cards, err := changeZoneKnownCards(a, source, origin)
 	if err != nil {
 		return fmt.Errorf("engine: ChangeZone: %w", err)
 	}
@@ -745,6 +768,12 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				}
 				fetchList = append(fetchList, g.Zone(z, player).Cards()...)
 			}
+		}
+		// ChangeZoneEffect.java:1067-1079: a search of the decider's own
+		// library (Searched$ counts as one) is counted on them, whether or not
+		// anything is found (Count$SearchedLibrary).
+		if (searchedLibrary || searchedParam) && decider == player {
+			g.Player(decider).librarySearched++
 		}
 		if !defined && changeType != "" {
 			fetchList = filterValid(g, fetchList, changeType, a.Controller, a.Source)

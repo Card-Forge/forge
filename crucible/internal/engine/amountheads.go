@@ -125,11 +125,14 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		turn, _ := g.Card(source).trigResolved.of(g.resolving.Params)
 		return turn, true
 	case "CardManaCost":
-		// Count$CardManaCost: the source card's own mana value (Cascade's X).
+		// Count$CardManaCost: the source card's own mana value (Cascade's X),
+		// the X paid included while it is on the stack (AbilityUtils.java:
+		// 2231-2243, Card.java:7348-7353).
 		if source == NoCard {
 			return 0, false
 		}
-		return g.Card(source).CMC(), true
+		m, _ := perCardMeasure("CardManaCost")
+		return m(g.Card(source)), true
 	case "CardPower", "CardToughness":
 		// AbilityUtils.java: the source's own net power/toughness.
 		if source == NoCard {
@@ -243,6 +246,20 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 			}
 		}
 		return n, true
+	case "TotalManaSpent":
+		// AbilityUtils.java:1856-1865: the mana the resolving ability's root
+		// paid whose source card matches the comma-separated restrictions,
+		// Forsworn Paladin's "if mana from a Treasure was spent to activate
+		// this ability". The root is a spell (its cast's paying mana) or an
+		// activation (paidLists.mana); any other root's paying mana is not
+		// recorded, unresolved (GO-7).
+		if count.Argument == "" {
+			return 0, false
+		}
+		spec := valid.Parse(count.Argument)
+		return g.rootPayingManaCount(source, func(from *Card) bool {
+			return Matches(g, from, spec, sourceController, source)
+		})
 	}
 	if sourceController == NoPlayer {
 		return 0, false

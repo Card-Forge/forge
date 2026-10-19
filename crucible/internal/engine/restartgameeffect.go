@@ -234,6 +234,7 @@ func (g *Game) resetPlayerForRestart(pid PlayerID) {
 	// RestartGameEffect.java:67 zeroes the life lost last turn.
 	p.drawnLastTurn, p.lifeLostLastTurn = p.CardsDrawnThisTurn, 0
 	p.scryThisTurn = 0
+	p.librarySearched = 0
 	p.CardsDrawnThisTurn = 0
 	p.DrawnThisDrawStep = 0
 	p.DescendedThisTurn, p.descended = false, 0

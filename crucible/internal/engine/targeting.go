@@ -1112,14 +1112,42 @@ func (g *Game) stackTargetRefs(a *Ability) []stackTargetRef {
 }
 
 // appendStackTargetRefs appends to out the stackTargetRef of each stack-item
-// entity of targets still on the stack.
+// entity of targets still on the stack, and of each card target that is a
+// spell on the stack (stackTargetRef's spell), in target order: Java's
+// getAllTargetChoices order, which SpellTargeted$ reads the first of.
 func (g *Game) appendStackTargetRefs(out []stackTargetRef, targets []EntityID) []stackTargetRef {
 	for _, e := range targets {
 		if ref, ok := g.stackTargetOf(e, nil); ok {
+			if item, onStack := g.stackItem(ref.item); onStack {
+				ref.targets = allTargetsOf(*item)
+			}
+			out = append(out, ref)
+			continue
+		}
+		if ref, ok := g.spellTargetRef(e); ok {
 			out = append(out, ref)
 		}
 	}
 	return out
+}
+
+// spellTargetRef is the stackTargetRef of e when e is a card on the stack as
+// a spell: its item, controller, cast record and own targets as they are now.
+func (g *Game) spellTargetRef(e EntityID) (stackTargetRef, bool) {
+	id, ok := e.AsCard()
+	if !ok || g.Card(id).Zone != Stack {
+		return stackTargetRef{}, false
+	}
+	itemID, ok := g.spellItemOf(id)
+	if !ok {
+		return stackTargetRef{}, false
+	}
+	item, _ := g.stackItem(itemID)
+	c := g.Card(id)
+	return stackTargetRef{item: itemID, controller: item.Controller, host: id, spell: true, stamp: c.zoneStamp,
+		cast: spellCastRecord{wasCast: c.wasCast, x: c.castX, manaSpent: c.castManaSpent, snow: c.castSnow,
+			sources: c.castPaidSources},
+		targets: allTargetsOf(*item)}, true
 }
 
 // stackTargetOf is the ability on the stack e names: read off the stack while

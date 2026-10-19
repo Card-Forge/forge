@@ -37,6 +37,18 @@ func opAwareValue(g *Game, amounts map[string]expr.Amount, sourceController Play
 		n, ok := playerXCount(g, amounts, sourceController, source, players, amt.Body, amt.Op, depth)
 		return n, ok, true
 	}
+	switch {
+	case head == "SpellTargeted":
+		n, ok := g.spellTargetedValue(amounts, sourceController, source, amt, depth)
+		return n, ok, true
+	case strings.HasPrefix(head, "TargetedByTarget"):
+		cards, ok := g.targetedByTargetCards(source)
+		if !ok {
+			return 0, false, true
+		}
+		n, ok := handlePaid(g, amounts, sourceController, source, cards, amt.Body, amt.Op, depth)
+		return n, ok, true
+	}
 	if cards, ok, isList := g.listHeadCards(sourceController, source, head); isList && !isAbilityPlayerHead(head) {
 		if !ok {
 			return 0, false, true
@@ -129,33 +141,6 @@ func triggeredPlayerKey(head string) string {
 		}
 	}
 	return head
-}
-
-// targetingPlayers is SpellAbility.getSATargetingPlayer's target players
-// (SpellAbility.java:2020-2032): the ability's own player targets, else those
-// of the nearest ancestor targeting a player. No targeting ancestor at all is
-// Java's null ability, no players. The engine sees only the nearest ancestor
-// that chose targets; when that one targets no player a further one might,
-// so that case is unresolved (GO-7).
-func targetingPlayers(refs abilityRefs) ([]PlayerID, bool) {
-	if own := playersIn(refs.targets); len(own) > 0 {
-		return own, true
-	}
-	if len(refs.parentTargets) == 0 {
-		return nil, !refs.ancestorTargeting
-	}
-	parent := playersIn(refs.parentTargets)
-	return parent, len(parent) > 0
-}
-
-func playersIn(entities []EntityID) []PlayerID {
-	var out []PlayerID
-	for _, e := range entities {
-		if pid, ok := e.AsPlayer(); ok && !slices.Contains(out, pid) {
-			out = append(out, pid)
-		}
-	}
-	return out
 }
 
 // playerCountPlayers is calculateAmount's PlayerCount<hType>$ player set

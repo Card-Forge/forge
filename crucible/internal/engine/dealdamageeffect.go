@@ -222,11 +222,6 @@ func damageSources(g *Game, a *Ability) ([]CardID, error) {
 		return []CardID{a.Source}, nil
 	}
 	if rest, ok := strings.CutPrefix(spec, "Valid "); ok {
-		if strings.Contains(rest, "IsCommander") {
-			// Matches has no IsCommander case and would read false for
-			// every card, a silent no-op (GO-7): no commander is modeled.
-			return nil, fmt.Errorf("engine: DealDamage: DamageSource$ %q: IsCommander not resolvable yet", spec)
-		}
 		parsed := valid.Parse(rest)
 		var out []CardID
 		for _, pid := range g.Players() {

@@ -34,13 +34,18 @@ func (g *Game) resolveAdditional(parent *Ability, controller PlayerController, s
 		return fmt.Errorf("engine: %s$ %s: no Registry is resolving", sub.Key, sub.SVar)
 	}
 	child := Ability{
-		API:               api,
-		Source:            parent.Source,
-		Controller:        parent.Controller,
-		Target:            parent.Target,
-		Targets:           parent.Targets,
-		Params:            sub.Ability,
-		Amounts:           parent.Amounts,
+		API:        api,
+		Source:     parent.Source,
+		Controller: parent.Controller,
+		Target:     parent.Target,
+		Targets:    parent.Targets,
+		Params:     sub.Ability,
+		Amounts:    parent.Amounts,
+		rootSpell:  parent.spell || parent.rootSpell,
+		// The root's targeted spells and abilities as last seen
+		// (getAllTargetChoices starts at getRootAbility), for a Branch or roll
+		// result under a counterspell.
+		stackTargets:      parent.stackTargets,
 		TriggerRemembered: parent.TriggerRemembered,
 		triggered:         parent.triggered,
 		hostTransforms:    parent.hostTransforms,

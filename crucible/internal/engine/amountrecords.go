@@ -74,6 +74,9 @@ func (g *Game) recordCountValue(sourceController PlayerID, source CardID, count 
 	case count.Head == "ActivatedThisGame":
 		n, ok = g.activatedThisGame(source)
 		return n, ok, true
+	case count.Head == "SearchedLibrary":
+		n, ok = g.searchedLibraryCount(sourceController, source, count)
+		return n, ok, true
 	case count.Head == "RegeneratedThisTurn":
 		// AbilityUtils.java:2130-2131: the host's Card.getRegeneratedThisTurn.
 		if source == NoCard {
@@ -123,6 +126,30 @@ func (g *Game) recordCountValue(sourceController PlayerID, source CardID, count 
 		return 0, false, true
 	}
 	return read(g.Player(sourceController)), true, true
+}
+
+// searchedLibraryCount is Count$SearchedLibrary.<DefinedPlayer> (AbilityUtils.
+// java:1941-1948): how many times this turn the defined players searched their
+// own libraries (Player.librarySearched), Archive Trap's "if an opponent
+// searched their library this turn". The players are read against the
+// resolving ability when it is source's own, else against none.
+func (g *Game) searchedLibraryCount(sourceController PlayerID, source CardID, count expr.Count) (int, bool) {
+	if len(count.Parameters) != 1 || sourceController == NoPlayer {
+		return 0, false
+	}
+	var refs abilityRefs
+	if a := g.resolving; a != nil && source != NoCard && a.Source == source {
+		refs = a.refs()
+	}
+	players, err := definedPlayers(g, sourceController, source, count.Parameters[0], refs)
+	if err != nil {
+		return 0, false
+	}
+	n := 0
+	for _, pid := range players {
+		n += g.Player(pid).librarySearched
+	}
+	return n, true
 }
 
 // activatedThisGame is Count$ActivatedThisGame (AbilityUtils.java:1848-1850):

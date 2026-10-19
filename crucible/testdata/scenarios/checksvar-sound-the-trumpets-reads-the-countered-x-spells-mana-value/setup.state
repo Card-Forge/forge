@@ -1,0 +1,7 @@
+humanlife=20
+ailife=20
+humanbattlefield=Forest|Id:2;Forest|Id:3;Forest|Id:4
+humanhand=Endless One|Id:1
+aibattlefield=Island|Id:30;Island|Id:31;Island|Id:32
+aihand=Sound the Trumpets|Id:33
+ailibrary=Plains|Id:40

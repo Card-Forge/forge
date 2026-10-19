@@ -1,0 +1,10 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Forest|Id:2|Tapped;Forest|Id:3|Tapped;Forest|Id:4|Tapped
+humangraveyard=Endless One
+ailife=20
+aibattlefield=Island|Id:30|Tapped;Island|Id:31|Tapped;Island|Id:32|Tapped
+aigraveyard=Sound the Trumpets
+ailibrary=Plains

@@ -7,6 +7,7 @@
 package engine
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -34,7 +35,13 @@ var costModParams = map[string]bool{
 // against the converted cost). Hosts are the battlefield and Command-zone
 // statics and the card itself (EffectZone$ All). An X in the cost is
 // untouched: only the generic part shrinks.
-func (g *Game) spellCost(pid PlayerID, card CardID, base mana.Cost) (mana.Cost, bool) {
+//
+// paying is the cost actually paid (payCastCost), after the X is announced and
+// the targets chosen, which a Relative$ amount may read; a ReduceCost Amount$
+// that does not resolve then refuses the cast. The probe before the announce
+// (announceXFor, which only asks whether an X is left) skips such a line: a
+// reduction never touches the X.
+func (g *Game) spellCost(pid PlayerID, card CardID, base mana.Cost, paying bool) (mana.Cost, bool) {
 	if base.IsNoCost() {
 		return base, true
 	}
@@ -53,8 +60,12 @@ func (g *Game) spellCost(pid PlayerID, card CardID, base mana.Cost) (mana.Cost, 
 		if h.Def == nil {
 			continue
 		}
-		for i := range h.traitFaces() {
-			face := &h.traitFaces()[i]
+		// The host's live faces only: a modal or transforming card's other face
+		// is not its state, and its statics do not apply (Extus, Oriq
+		// Overlord's back-face reduction while the creature is cast).
+		live := h.liveTraitFaces()
+		for i := range live {
+			face := &live[i]
 			for _, s := range face.Statics {
 				switch {
 				case strings.EqualFold(s.Name, "RaiseCost"):
@@ -100,11 +111,18 @@ func (g *Game) spellCost(pid PlayerID, card CardID, base mana.Cost) (mana.Cost, 
 	for _, r := range reduces {
 		raw, ok := r.s.Param("Amount")
 		if !ok {
+			// calculateAmount of no Amount$ is 0 (CostAdjustment.java:466-479).
 			continue
 		}
 		value, ok := costModAmount(g, r.face, r.host, raw)
-		if !ok {
+		if !ok && !paying {
 			continue
+		}
+		if !ok {
+			// Casting for more than Java would charge is as wrong as for less:
+			// the cast is refused, and why is kept (GO-7).
+			g.recordPendingError(fmt.Errorf("engine: ReduceCost: Amount$ %q is not resolvable", raw))
+			return base, false
 		}
 		minMana := 0
 		if raw, ok := r.s.Param("MinMana"); ok {

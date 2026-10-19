@@ -1,0 +1,24 @@
+# Sound the Trumpets recruits only if the countered spell's mana value was 2
+# or less (SVar:X:SpellTargeted$CardManaCostLKI, AbilityUtils.java:637-640,
+# :2231-2243). Java reads the target SpellAbility's host, the Card object that
+# was on the stack: Zone.remove leaves its zone Stack (Zone.java:162-167), so
+# getCMC still adds the X paid (Card.java:7350-7353). Endless One cast with
+# X=3 had mana value 3, so ai does not recruit and keeps its Plains in the
+# library; its printed mana value 0 would have recruited.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+tapformana human 4 G
+queue payx 3
+queue paygeneric G
+queue paygeneric G
+queue paygeneric G
+castspell human 1
+tapformana ai 30 U
+tapformana ai 31 U
+tapformana ai 32 U
+queue paygeneric U
+queue targets 1
+castspell ai 33
+resolvestack

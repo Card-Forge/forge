@@ -1,0 +1,15 @@
+# Pulse of the Forge deals 4 to ai (20 -> 16); ai then has more life than
+# human (10), so ReheatTheForge's ChangeZone | Defined$ Parent | Origin$ Stack
+# returns the resolving spell to its owner's hand. Defined$ Parent is the root
+# SpellAbility (AbilityUtils.java:1232-1233), moved off the stack by
+# ChangeZoneEffect's spells-on-the-stack loop (ChangeZoneEffect.java:496-506,
+# removeFromStack :1600-1624); the card never reaches the graveyard.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+queue paygeneric R
+queue targets ai
+castspell human 1
+resolvestack

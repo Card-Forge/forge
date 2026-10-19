@@ -137,6 +137,13 @@ func (g *Game) contextCards(source CardID, head string) ([]*Card, bool) {
 			return append([]*Card(nil), rec.revealedLKI...), true
 		}
 		ids = optionalList(rec, head)
+	case "Targeted":
+		// SpellAbility.findTargetedCards (SpellAbility.java:1961-1986).
+		a := g.resolving
+		if a == nil || source == NoCard || a.Source != source {
+			return nil, false
+		}
+		return g.targetedCards(a), true
 	default:
 		var ok bool
 		if ids, ok = g.abilityListIDs(source, head); !ok {
@@ -164,12 +171,6 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 	}
 	var ids []CardID
 	switch head {
-	case "Targeted":
-		for _, e := range a.Targets {
-			if id, ok := e.AsCard(); ok {
-				ids = append(ids, id)
-			}
-		}
 	case "ParentTargeted":
 		// AbilityUtils.java:688-693: the cards the nearest ancestor that
 		// targets a card targets (getParentTargetingCard). A targeting
@@ -252,6 +253,144 @@ func (g *Game) abilityListIDs(source CardID, head string) ([]CardID, bool) {
 		return nil, false
 	}
 	return ids, true
+}
+
+// targetedCards is SpellAbility.findTargetedCards for a (SpellAbility.java:
+// 1961-1986): its card targets when it targets any card, else the host of each
+// spell or ability on the stack it targets, in target order. Java targets a
+// spell as its SpellAbility, never as a card; here targeting offers a spell as
+// its card, so a card target recorded as a spell (stackTargetRef.spell) is
+// one of the second kind, read as Java's host object (spellTargetView). A
+// sub-ability carries its root's targets, Java's parent-targeting fallback.
+func (g *Game) targetedCards(a *Ability) []*Card {
+	var cards, hosts []*Card
+	for _, e := range a.Targets {
+		if ref, ok := g.stackTargetOf(e, a.stackTargets); ok {
+			hosts = append(hosts, g.Card(ref.host))
+			continue
+		}
+		id, ok := e.AsCard()
+		if !ok {
+			continue
+		}
+		if view, isSpell := g.spellTargetView(id, a.stackTargets); isSpell {
+			hosts = append(hosts, view)
+			continue
+		}
+		cards = append(cards, g.Card(id))
+	}
+	if len(cards) > 0 {
+		return cards
+	}
+	return hosts
+}
+
+// spellTargetView is the targeted spell card id as Java's target SpellAbility
+// reads its host (stackTargetRef's doc comment): the live card while it is
+// still that spell on the stack, else a copy carrying the zone, controller and
+// cast record it had there. false when refs records no spell on id.
+func (g *Game) spellTargetView(id CardID, refs []stackTargetRef) (*Card, bool) {
+	for i := range refs {
+		r := &refs[i]
+		if !r.spell || r.host != id {
+			continue
+		}
+		c := g.Card(id)
+		if c.Zone == Stack && c.zoneStamp == r.stamp {
+			return c, true
+		}
+		view := *c
+		view.Zone, view.controller = Stack, r.controller
+		view.wasCast, view.castX, view.castManaSpent = r.cast.wasCast, r.cast.x, r.cast.manaSpent
+		view.castSnow, view.castPaidSources = r.cast.snow, r.cast.sources
+		return &view, true
+	}
+	return nil, false
+}
+
+// spellTargetedValue is `SpellTargeted$<measure>` (AbilityUtils.java:637-640):
+// the first spell or ability on the stack the resolving ability's chain
+// targets (getDefinedSpellAbilities' Targeted branch over getAllTargetChoices,
+// :1264-1278), measured on its host card as xCount(sat.getHostCard(), ...,
+// sat) does; 0 when it targets none. Only the per-card measures are read
+// (liveCardMeasure); any other measure is unresolved (GO-7).
+func (g *Game) spellTargetedValue(amounts map[string]expr.Amount, sourceController PlayerID, source CardID, amt expr.Amount, depth int) (int, bool) {
+	a := g.resolving
+	if a == nil || source == NoCard || a.Source != source {
+		return 0, false
+	}
+	measure, ok := liveCardMeasure(amt.Body)
+	if !ok {
+		return 0, false
+	}
+	if len(a.stackTargets) == 0 {
+		return 0, true
+	}
+	ref := a.stackTargets[0]
+	host := g.Card(ref.host)
+	if ref.spell {
+		host, _ = g.spellTargetView(ref.host, a.stackTargets[:1])
+	}
+	n, ok := measure(host)
+	if !ok {
+		return 0, false
+	}
+	if amt.Op != nil {
+		return applyOperator(g, amounts, sourceController, source, n, amt.Op, depth)
+	}
+	return n, true
+}
+
+// targetedByTargetCards is the `TargetedByTarget$` list (AbilityUtils.java:
+// 615-623): for each spell or ability on the stack the resolving ability's
+// chain targets, the cards that one targets (getDefinedCards' Targeted over its
+// own getAllTargetChoices, :146-151), as they are now.
+func (g *Game) targetedByTargetCards(source CardID) ([]*Card, bool) {
+	a := g.resolving
+	if a == nil || source == NoCard || a.Source != source {
+		return nil, false
+	}
+	var cards []*Card
+	for _, ref := range a.stackTargets {
+		for _, e := range ref.targets {
+			// A card on the stack is a spell, which Java targets as its
+			// SpellAbility: not one of getTargetCards.
+			if id, ok := e.AsCard(); ok && g.Card(id).Zone != Stack {
+				cards = append(cards, g.Card(id))
+			}
+		}
+	}
+	return cards, true
+}
+
+// rootPayingManaCount is how many units of the mana the resolving ability's
+// root paid (SpellAbility.getRootAbility().getPayingMana()) came from a card
+// keep accepts: a spell's cast record, an activation's paidLists.mana, each
+// source read as it was when it made the mana (manaSourceCard). false outside
+// source's own resolution and for a root that recorded neither.
+func (g *Game) rootPayingManaCount(source CardID, keep func(*Card) bool) (int, bool) {
+	a := g.resolving
+	if a == nil || source == NoCard || a.Source != source {
+		return 0, false
+	}
+	sources := a.paid.mana
+	switch {
+	case a.paid.manaRecorded:
+	case a.spell || a.rootSpell:
+		sources = nil
+		if c := g.Card(source); c.wasCast {
+			sources = c.castPaidSources
+		}
+	default:
+		return 0, false
+	}
+	n := 0
+	for _, src := range sources {
+		if from := g.manaSourceCard(src); from != nil && keep(from) {
+			n++
+		}
+	}
+	return n, true
 }
 
 func nonNone(id CardID) []CardID {
@@ -347,6 +486,7 @@ func (g *Game) castSAValue(source CardID, amt expr.Amount) (n int, ok, cast bool
 	switch {
 	case amt.Count != nil && (amt.Count.Head == "OptionalGenericCostPaid" || amt.Count.Head == "Teamwork"):
 	case amt.Count != nil && strings.HasPrefix(amt.Count.Head, "Adamant"):
+	case amt.Count != nil && amt.Count.Head == "xPaid" && amt.Count.Argument == "":
 	case amt.Head == "Collected" || amt.Head == "Revealed":
 	default:
 		return 0, false, false
@@ -354,6 +494,12 @@ func (g *Game) castSAValue(source CardID, amt expr.Amount) (n int, ok, cast bool
 	rec, cast := g.castSARecord(source)
 	if !cast {
 		return 0, true, false
+	}
+	if amt.Count != nil && amt.Count.Head == "xPaid" {
+		// xCount's xPaid with the cast SpellAbility as ctb (AbilityUtils.java:
+		// 1890-1891): Card.getXManaCostPaid, the X the cast announced -- a
+		// Sac<X/…> part's X too (announceXFor), Plumb the Forbidden's count.
+		return g.Card(source).castX, true, true
 	}
 	if amt.Count != nil && strings.HasPrefix(amt.Count.Head, "Adamant") {
 		// The cast's own paying mana (castAdamant, amountrecords.go).

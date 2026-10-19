@@ -189,6 +189,11 @@ type Ability struct {
 	// zone is not enough to tell: a "when you cast this spell" trigger's
 	// Source is that same card, sitting above it (spellItemOf, stack.go).
 	spell bool
+	// rootSpell marks a sub-ability or additional ability whose root ability
+	// is a spell (SpellAbility.getRootAbility().isSpell()): set as the chain is
+	// built (resolveSubAbility, resolveAdditional). ChangeZone's Defined$
+	// Parent reads it (ChangeZoneEffect.java:496-506).
+	rootSpell bool
 	// probing marks a spell not yet cast asked about as though one optional
 	// cost were paid: SpellAbility.canPlay(checkOptionalCosts) tries the spell
 	// with each one added (SpellAbility.java:467-491). probeTeamwork is that
@@ -317,10 +322,37 @@ type chainTarget struct {
 
 // stackTargetRef is one targeted ability on the stack as it last was: its
 // stack item, controller (SpellAbility.getActivatingPlayer) and host card.
+//
+// A targeted spell (a card target on the stack, targeting offers a spell as
+// its card) is recorded too, with spell set: Java's target is the spell's
+// SpellAbility, whose host stays the Card object that was on the stack after
+// a Counter moved it -- Zone.remove does not reset that object's zone
+// (Zone.java:162-167), so Card.getCMC still adds the X paid (Card.java:
+// 7350-7353) and getCastSA still answers (Card.java:1630-1636). cast is that
+// object's cast record, read by Targeted$, SpellTargeted$ and
+// TargetedByTarget$ (amountcontext.go) once Game.Move cleared the live card's.
+// targets is the targeted item's own targets (allTargetsOf), what
+// TargetedByTarget$ reads (AbilityUtils.java:615-623). Neither is written
+// after it is recorded, so clones share them.
 type stackTargetRef struct {
 	item       StackItemID
 	controller PlayerID
 	host       CardID
+	spell      bool
+	stamp      uint64
+	cast       spellCastRecord
+	targets    []EntityID
+}
+
+// spellCastRecord is the part of a spell card's cast record a reader of the
+// targeted spell sees after the spell left the stack: Card.wasCast, castX,
+// castManaSpent, castSnow and castPaidSources as they were on the stack.
+type spellCastRecord struct {
+	wasCast   bool
+	x         int
+	manaSpent int
+	snow      int
+	sources   []manaSource
 }
 
 // dividedShare is one target's part of a DividedAsYouChoose$ amount.
@@ -633,7 +665,15 @@ func (a *Ability) stampOf(card CardID) (uint64, bool) {
 // path that does not (a spell's additional cost, an unless cost, a trigger's
 // Cost$) leaves them unrecorded, and the amount stays unresolved instead of
 // reading an empty list as 0.
+//
+// mana is the source of each unit of mana an activation paid from its
+// controller's pool (xAnnounced.sources, ADR-0042): the root ability's
+// SpellAbility.getPayingMana, which Count$TotalManaSpent <valid> reads
+// (AbilityUtils.java:1856-1865). manaRecorded marks an activation that wrote
+// it; replaced, never written in place.
 type paidLists struct {
 	sacrificed, exiled, discarded []CardID
 	recorded                      bool
+	mana                          []manaSource
+	manaRecorded                  bool
 }

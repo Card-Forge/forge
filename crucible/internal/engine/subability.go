@@ -77,6 +77,7 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		Targets:           parent.Targets,
 		parentTargets:     parentTargetsOf(parent),
 		ancestorTargeting: parent.ancestorTargeting || linkUsesTargeting(parent.Params),
+		rootSpell:         parent.spell || parent.rootSpell,
 		radiance:          parent.radianceSpec(),
 		Params:            sub.Ability,
 		Amounts:           parent.Amounts,

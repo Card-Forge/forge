@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=10
+humanbattlefield=Mountain|Id:2|Tapped;Mountain|Id:3|Tapped;Mountain|Id:4|Tapped
+humanhand=Pulse of the Forge
+ailife=16

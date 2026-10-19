@@ -385,6 +385,7 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	g.holdingCastExits, g.castExits = true, nil
 	x.setOn(&activated)
 	activated.paid.recorded = true
+	activated.paid.mana, activated.paid.manaRecorded = x.sources, true
 	if shape.Tap {
 		c.Tapped = true
 		g.checkTapsTriggers(controller, card, pid, false)

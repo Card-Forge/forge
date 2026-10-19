@@ -176,6 +176,9 @@ func (charmEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 		m := mode
 		m.hostTransforms, m.hasHostTransforms = a.hostTransforms, a.hasHostTransforms
 		m.damageMap = a.damageMap
+		// A mode is a sub-ability of the Charm in Java (chainAbilities): its
+		// root is the Charm's.
+		m.rootSpell = a.spell || a.rootSpell
 		r := g.registry
 		err := r.Resolve(g, &m, controller)
 		g.registry = r

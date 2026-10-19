@@ -1114,6 +1114,21 @@ func (c *Card) CMC() int {
 	return c.Def.Faces[0].ManaCost.CMC()
 }
 
+// stackX is the mana value the X its cast paid adds (Card.getXManaCostPaid
+// times the cost's X count, Card.java:7351-7353), 0 for a card not cast with
+// an X: castX is kept only on the stack and the battlefield.
+func (c *Card) stackX() int {
+	if c.Def == nil {
+		return 0
+	}
+	return c.castX * c.Def.Faces[0].ManaCost.CountX()
+}
+
+// isCommander is Card.isCommander: only Player.addCommander sets it, from a
+// Commander game setup or GameState's |IsCommander option, neither ported
+// (commanderCasts, castrecord.go), so no card here is a commander.
+func (*Card) isCommander() bool { return false }
+
 // shortManaCost is Card.getManaCost().getShortString(), what a granted
 // keyword's CardManaCost stands for (mana.Cost.ShortString).
 func (c *Card) shortManaCost() string {

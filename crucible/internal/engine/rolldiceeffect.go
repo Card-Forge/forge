@@ -165,33 +165,59 @@ func (g *Game) rollDiceFor(a *Ability, controller PlayerController, pid PlayerID
 	} else if err := g.resolveDiceResult(a, controller, total); err != nil {
 		return 0, err
 	}
-	if hasParam(a, "NoteDoubles") && doubles {
-		bind("Doubles", 1)
+	if hasParam(a, "NoteDoubles") {
+		// RollDiceEffect.java:526-533 sets Doubles only on a double; a sub-ability
+		// reading it unset gets calculateAmount's 0 for an undefined SVar
+		// (AbilityUtils.java:415-423), and a later player's roll never clears
+		// an earlier one's 1.
+		if doubles {
+			bind("Doubles", 1)
+		} else if _, set := a.Amounts["doubles"]; !set {
+			bind("Doubles", 0)
+		}
 	}
 	return total, nil
 }
 
-// resolveDiceResult is resolveSub: the ResultSubAbilities$ entry whose key
-// ("n" or "lo-hi") covers num, else Else$.
+// resolveDiceResult is resolveSub (RollDiceEffect.java:459-481): the
+// ResultSubAbilities$ entry whose key ("n" or "lo-hi") covers num, else the
+// Else ability. AbilityFactory.java:265-271 makes each ResultSubAbilities$
+// "key:SVar" pair an additional ability under its key, so an "Else:SVar"
+// pair there is that Else ability (Sword of Dungeons & Dragons'
+// "20:Win,Else:Lose").
 func (g *Game) resolveDiceResult(a *Ability, controller PlayerController, num int) error {
+	elseSVar := ""
 	if raw, ok := a.Params.Param("ResultSubAbilities"); ok {
 		for _, pair := range strings.Split(raw, ",") {
 			key, svar, ok := strings.Cut(strings.TrimSpace(pair), ":")
-			if !ok || !diceKeyCovers(strings.TrimSpace(key), num) {
+			key, svar = strings.TrimSpace(key), strings.TrimSpace(svar)
+			if ok && key == "Else" {
+				elseSVar = svar
+			}
+			if !ok || !diceKeyCovers(key, num) {
 				continue
 			}
-			for _, sub := range additionalAbilities(a.Params, "ResultSubAbilities") {
-				if sub.SVar == strings.TrimSpace(svar) {
-					return g.resolveAdditional(a, controller, sub)
-				}
-			}
-			return fmt.Errorf("engine: RollDice: result %s names no compiled SVar %q", key, svar)
+			return g.resolveDiceSub(a, controller, key, svar)
 		}
+	}
+	if elseSVar != "" {
+		return g.resolveDiceSub(a, controller, "Else", elseSVar)
 	}
 	if subs := additionalAbilities(a.Params, "Else"); len(subs) > 0 {
 		return g.resolveAdditional(a, controller, subs[0])
 	}
 	return nil
+}
+
+// resolveDiceSub resolves the ResultSubAbilities$ ability compiled from svar,
+// the one key names.
+func (g *Game) resolveDiceSub(a *Ability, controller PlayerController, key, svar string) error {
+	for _, sub := range additionalAbilities(a.Params, "ResultSubAbilities") {
+		if sub.SVar == svar {
+			return g.resolveAdditional(a, controller, sub)
+		}
+	}
+	return fmt.Errorf("engine: RollDice: result %s names no compiled SVar %q", key, svar)
 }
 
 func diceKeyCovers(key string, num int) bool {

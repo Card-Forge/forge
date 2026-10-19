@@ -1,0 +1,15 @@
+# Plumb the Forbidden's Cost$ 1 B Sac<X/Creature> announces X before the
+# sacrifice (PlaySpellAbility.announceValuesLikeX); its SpellCast trigger's
+# CheckSVar$ CastSA>Count$xPaid reads that X off the cast SpellAbility
+# (AbilityUtils.java:1890-1891 with the cast SA as ctb) and copies the spell
+# X times. Two Bears sacrificed: two copies and the original each draw one
+# and lose 1 life.
+startturn human
+advance 3
+tapformana human 2 B
+tapformana human 3 B
+queue payx 2
+queue paygeneric B
+queue sacrificechoice 4,5
+castspell human 1
+resolvestack

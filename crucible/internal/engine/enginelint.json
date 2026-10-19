@@ -122,7 +122,7 @@
       "controlcommands"
     ],
     "player": ["id", "parts", "mana"],
-    "ability": ["id", "damageresolveeffect", "replaceeffect"],
+    "ability": ["id", "mana", "damageresolveeffect", "replaceeffect"],
     "combat": ["id", "game", "valid", "effecthelpers", "card"],
     "game": [
       "id",

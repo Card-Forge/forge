@@ -525,7 +525,6 @@ func TestDealDamageRejectsUnportedParams(t *testing.T) {
 		{"CardChoices$ Creature", "CardChoices$"},
 		{"RememberAmount$ True", "RememberAmount$"},
 		{"NoRedirection$ True", "NoRedirection$"},
-		{"DamageSource$ Valid Card.IsCommander+YouCtrl", "IsCommander"},
 		{"DamageMap$ True | RememberDamaged$ True", "RememberDamaged$"},
 	} {
 		g, p, other := newTwoPlayerGame(t)

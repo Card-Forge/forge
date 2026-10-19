@@ -289,8 +289,32 @@ func (g *Game) sharesNameWith(a, b CardID) bool {
 // (applyContinuousPT, continuous.go), so reading it there would see a
 // half-folded value rather than the real one.
 func perCardMeasure(head string) (func(*Card) int, bool) {
-	if head == "CardManaCost" {
-		return func(c *Card) int { return c.CMC() }, true
+	switch head {
+	case "CardManaCost":
+		// Card.getCMC (Card.java:7348-7353): a card on the stack counts the X
+		// its cast paid.
+		return func(c *Card) int {
+			if c.Zone == Stack {
+				return c.CMC() + c.stackX()
+			}
+			return c.CMC()
+		}, true
+	case "CardManaCostLKI":
+		// AbilityUtils.java:2231-2243: off the stack the X paid is added too.
+		// Java takes that X from the measuring SpellAbility when it has one,
+		// else from the card's cast; every corpus line measures a spell through
+		// its own SpellAbility (SpellTargeted$, TriggeredSpellAbility$), whose
+		// X is the card's cast X read here.
+		return func(c *Card) int { return c.CMC() + c.stackX() }, true
+	case "CastTotalManaSpent":
+		// xCount per card (AbilityUtils.java:1896-1898): its cast's total mana
+		// spent, 0 for a card that was not cast.
+		return func(c *Card) int {
+			if !c.wasCast {
+				return 0
+			}
+			return c.castManaSpent
+		}, true
 	}
 	if head == "ExcessDamageReceivedThisTurn" {
 		// xCount per card (AbilityUtils.java:2406-2408): Card.logExcessDamage's

@@ -170,6 +170,11 @@ type Player struct {
 	// this turn (GameAction.java:2684, once per scrying player), reset at
 	// cleanup (Player.java:2486). Read by Count$YouScryThisTurn.
 	scryThisTurn int
+	// librarySearched is Player.numLibrarySearchedOwn: how many times this
+	// turn this player searched their own library (ChangeZoneEffect.java:
+	// 1070-1079), reset at cleanup (Player.java:2499). Read by
+	// Count$SearchedLibrary.
+	librarySearched int
 	// spellsCastThisGame is Player.spellsCastThisGame (Player.java:2313):
 	// every spell this player cast this game, reset only by a RestartGame.
 	// Read by Count$YouCastThisGame.

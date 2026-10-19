@@ -29,11 +29,11 @@ func (repeatEffect) Resolve(g *Game, a *Ability, controller PlayerController) er
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	if check, ok := a.Params.Param("RepeatCheckSVar"); ok {
-		if _, ok := resolveNamedAmount(g, a.Amounts, source, check); !ok {
-			return fmt.Errorf("engine: Repeat: RepeatCheckSVar$ %q not resolvable yet", check)
-		}
-	}
+	// RepeatCheckSVar$ is first read after the first repetition
+	// (RepeatEffect.java:39-52, checkRepeatConditions), by which time the
+	// repeated chain has usually stored it (StoreSVar, Mana Clash and Sword
+	// of Dungeons & Dragons): it is not read up front. One that does not
+	// resolve then is a pending error (checkSVarMatches).
 	maxRepeat := -1
 	if raw, ok := a.Params.Param("MaxRepeat"); ok {
 		n, ok := resolveNamedAmount(g, a.Amounts, source, raw)
