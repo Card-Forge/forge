@@ -19,7 +19,7 @@ For ApiType effects use the `port-effect` skill instead. Rules: `docs/crucible/g
 
    | Unit | Note |
    | --- | --- |
-   | Part of `internal/engine` | New `##` section in the matching `docs/crucible/porting/port-log/game-state/<topic>.md`, plus an index row in `game-state.md` |
+   | Part of `internal/engine` | New `##` section in the matching `docs/crucible/porting/port-log/game-state/<topic>.md` |
    | New package or standalone unit | New `docs/crucible/porting/port-log/<unit>.md` in PORT-4 format |
 
    Topic files: `state-based-actions`, `layers`, `turn-stack-combat`, `mana-and-casting`, `triggers`, `trigger-modes`,

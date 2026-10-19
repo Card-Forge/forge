@@ -138,8 +138,9 @@ in `docs/crucible/porting/port-log/game-state.md` and its topic files, never her
 | skill | `sync-upstream` | Merge `Card-Forge/forge`, verify the port still agrees with what moved |
 | skill | `check-card` | Audit a card script against Oracle text and the Java that runs it; upstream fix branch |
 
-Engine port-log lives in `docs/crucible/porting/port-log/game-state/<topic>.md`; `game-state.md` is the index plus
-`Not ported yet`.
+Engine port-log lives in `docs/crucible/porting/port-log/game-state/<topic>.md` (headings are the index); `game-state.md`
+holds `Not ported yet`. Topic files run to 80 KB: find the section with `rg -n`, then `Read` it with `offset`/`limit`, never
+the whole file.
 
 **Advisor:** call it at most twice per task: once before a non-obvious design choice (new contract, ADR, Forge defect),
 once before declaring a multi-file change done. Skip it for routine ports, doc edits and fixes whose next step the tool

@@ -22,7 +22,7 @@
 #
 # Conflicts resolved automatically:
 #   internal/engine/registry_gen.go   generated: take either side, regenerate
-#   append-only docs (index rows,     union of both sides: every porter adds
+#   append-only docs (Not ported,     union of both sides: every porter adds
 #   defect/patch tables)              rows, none edits another's
 #   CLAUDE.md                        HEAD's side; the count sentence is
 #                                     rewritten from the registry afterwards

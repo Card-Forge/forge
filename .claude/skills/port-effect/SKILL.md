@@ -144,7 +144,7 @@ Test every resolved param branch now: `internal/engine` has a 90% floor (TEST-12
 | File | Change |
 | --- | --- |
 | `docs/crucible/porting/port-log/game-state/effects-<batch>.md` | New file, one per batch (`<batch>` = kebab-case of its lead APIs). A `## <Apis> land` section: what resolves, what is rejected and why, shared engine pieces, Java `path:line`; then a `**Researched and deferred.**` table for APIs researched and not ported |
-| `docs/crucible/porting/port-log/game-state.md` | Index row for the new section; update the remaining-effects sentence in `## Not ported yet` (`M6's N remaining ...`) |
+| `docs/crucible/porting/port-log/game-state.md` | Update the remaining-effects sentence in `## Not ported yet` (`M6's N remaining ...`) |
 | `CLAUDE.md` | `M6 in progress: N of the corpus's 203` count and largest gaps (`unported-apis.sh` counts) |
 | `docs/crucible/porting/forge-java-defects.md` | A row per Forge Java bug found (PORT-8): site, defect, what Crucible does meanwhile, upstream status |
 
