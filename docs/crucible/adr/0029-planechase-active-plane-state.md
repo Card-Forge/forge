@@ -27,8 +27,8 @@ Forge-oracle research (full report cited throughout) found the surrounding mecha
 - `Game.activePlanes` is typed `List<Card>`. Game-mode setup and the default `planeswalk()` path (no `Defined$`) drive
   it to exactly one card; two real corpus lines do not — Spatial Merging's `Defined$ Remembered` and Norn's Seedcore's
   `Defined$ Remembered | DontPlaneswalkAway$ True` both call `planeswalkTo` needing more than one concurrent plane
-  (`docs/crucible/porting/port-log/game-state/effects-planeswalk.md`, "Corpus" table). A single-`CardID` state (below)
-  cannot represent this; those two lines are rejected rather than resolved, pending a superseding ADR.
+  (`effects-planeswalk.md` (git `624d87dba16`), "Corpus" table). A single-`CardID` state (below) cannot represent this;
+  those two lines are rejected rather than resolved, pending a superseding ADR.
 
 Corpus weight beyond the 4 APIs: 159 Plane + 14 Phenomenon card files (173 total) carry their own scripts once a
 Planechase deck exists; scoping their full ability surface is out of scope for this ADR (Related, below).
@@ -115,8 +115,9 @@ zone in isolation) cannot express that combination; no real scenario need surfac
 
 - ADR-0013 (event schema) — the 4 new trigger modes emit through the existing event pipeline, no new event kinds.
 - ADR-0017 (generated registry) — `Planeswalk`/`ChaosEnsues`/`RunChaos`/`RollPlanarDice` register the normal way.
-- `docs/crucible/porting/port-log/game-state/effects-batch-a.md`, `effects-batch-b.md`, `effects-batch-d.md` —
-  `Planeswalk`, `ChaosEnsues`, `RunChaos`, `RollPlanarDice`'s prior deferred rows, superseded by this ADR unblocking
-  them (those files stay closed per DOC-12's own discipline; the port-log index row for the landing batch says so).
+- `effects-batch-a.md` (git `624d87dba16`), `effects-batch-b.md` (git `624d87dba16`), `effects-batch-d.md` (git
+  `624d87dba16`) — `Planeswalk`, `ChaosEnsues`, `RunChaos`, `RollPlanarDice`'s prior deferred rows, superseded by this
+  ADR unblocking them (those files stay closed per DOC-12's own discipline; the port-log index row for the landing batch
+  says so).
 - Follow-up, not scoped here: the 173 Plane/Phenomenon cards' own non-`ApiType` ability surface (their `S:`/`T:` lines
   may use APIs already ported for other reasons, or may not — unmeasured).

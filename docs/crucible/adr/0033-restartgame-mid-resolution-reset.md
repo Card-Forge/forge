@@ -6,7 +6,7 @@
 
 ## Context
 
-`RestartGame` (Karn Liberated's ultimate, 1 real corpus line) is deferred (`effects-batch-d.md`).
+`RestartGame` (Karn Liberated's ultimate, 1 real corpus line) is deferred (`effects-batch-d.md` (git `624d87dba16`)).
 `RestartGameEffect.java` (read in full) does not spawn a new game — it mutates the **current** `Game`/`Player` state
 almost entirely in place, while still inside the resolution of the ability that caused it: every player's zones (except
 a `RestrictFromZone$` carve-out) shuffle back into a fresh library, the stack resets, all phase-boundary delayed
@@ -89,5 +89,5 @@ permanent limitation — a future corpus card needing it reopens this specific q
 
 ## Related
 
-ADR-0026 (turn driver, Decision 5's phase-jump gap — the precedent this generalizes),
-`docs/crucible/porting/port-log/game-state/effects-batch-d.md` (`RestartGame`'s prior deferred row, superseded here).
+ADR-0026 (turn driver, Decision 5's phase-jump gap — the precedent this generalizes), `effects-batch-d.md` (git
+`624d87dba16`) (`RestartGame`'s prior deferred row, superseded here).

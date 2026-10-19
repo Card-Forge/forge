@@ -84,4 +84,5 @@ New quirk or deviation → one row here, same commit (DOC-12). Landed work beyon
 | `Planeswalk` `Optional$ True` resolves through `ConfirmEffect` | — | ADR-0029 listed it to reject; 2 real lines |
 | `MayLookAt$` resolves to nothing | adds lookers | Engine is omniscient; `lookateffect.go` |
 | Aura that loses every ability stays legal; several `Enchant` keywords read the first; a reanimated host keeps the Aura on the same ID, no second `Attached` | `Card.java:6979`, every keyword must hold, new object | `cleanupDanglingAttachments`, `enchantSpec` |
+| A permanent under a copy effect cannot transform; Java still flips its backside flag, so the card shows its other face once the copy ends | `Card.changeCardState` | Not reproduced; `setstateeffect.go` |
 | A chained sub-ability is never optional (`OptionalDecider$` on a `DB$` SVar) | sub-ability's own "may" | Gap, `resolveSubAbility` |

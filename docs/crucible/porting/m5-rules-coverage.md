@@ -33,7 +33,7 @@ in places; the Rule cell flags each mismatch. Reason: citing a comment's stale l
 
 Go entry: `CheckStateBasedActions` (`action.go:109`). Java entry: `GameAction.checkStateEffects`
 (`GameAction.java:1400`) plus `Player.checkLoseCondition` (`player/Player.java:2022`). Design notes:
-[state-based-actions](port-log/game-state/state-based-actions.md).
+state-based-actions.
 
 | Rule | Java site | Go site | Fixture(s) | Status |
 | --- | --- | --- | --- | --- |
@@ -84,7 +84,7 @@ Go entry: `CheckStateBasedActions` (`action.go:109`). Java entry: `GameAction.ch
 Go entry: the rebuild block in `CheckStateBasedActions` (`action.go:195-210`). Java entry:
 `GameAction.checkStaticAbilities` (`GameAction.java:1076`), layer loop `:1120` over
 `StaticAbilityLayer.CONTINUOUS_LAYERS` (`staticability/StaticAbilityLayer.java:45-46`); per-layer bodies in
-`staticability/StaticAbilityContinuous.java`. Design notes: [layers](port-log/game-state/layers.md),
+`staticability/StaticAbilityContinuous.java`. Design notes: layers,
 [ADR-0025](../adr/0025-continuous-effect-evaluation-order.md).
 
 | Rule | Java site | Go site | Fixture(s) | Status |
@@ -131,7 +131,7 @@ Go entry: the rebuild block in `CheckStateBasedActions` (`action.go:195-210`). J
 Go entry: `beginPhase` (`turn.go:224`) runs mana-pool emptying, the step's action, `checkPhaseTriggers`
 (`trigger.go:1781`), then `CheckStateBasedActions`. Java entry: `PhaseHandler.onPhaseBegin`
 (`phase/PhaseHandler.java:240`), `onPhaseEnd` (`:453`), `mainLoopStep` (`:1039`). Design notes:
-[turn-stack-combat](port-log/game-state/turn-stack-combat.md).
+turn-stack-combat.
 
 **Two turn walks shape this table (ADR-0026).** `AdvancePhase` (fixture verb `advance`) is bookkeeping: no combat
 turn-based actions, no priority. The driver, `Game.Step`/`Game.Run` (`driver.go:32`, `:68`, fixture verbs `step`/`run`),

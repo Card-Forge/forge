@@ -66,7 +66,7 @@ resolve_conflicts() {
 		[ -n "$f" ] || continue
 		if [ "$f" = crucible/internal/engine/registry_gen.go ]; then
 			git checkout --theirs -- "$f"
-		elif grep -qxF "$f" <<<"$union_docs" || [[ $f == docs/crucible/porting/port-log/game-state/effects-*.md ]]; then
+		elif grep -qxF "$f" <<<"$union_docs"; then
 			local b o t
 			b=$(mktemp) o=$(mktemp) t=$(mktemp)
 			git show ":1:$f" >"$b" 2>/dev/null || : >"$b"

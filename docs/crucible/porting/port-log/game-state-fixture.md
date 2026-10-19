@@ -48,13 +48,13 @@ structural difference from Java (PORT-1), not a data one: the seating order a fi
 `EnchantingPlayer:HUMAN|AI|P<seat>` (`GameState.java:1388`) attaches an Aura to a player through `Game.AttachToPlayer`,
 in the same second pass as `AttachedTo:` and in declaration order; `Dump` writes `|EnchantingPlayer:P<seat>` where it
 would write `AttachedTo:` (`GameState.java:368`). An unknown player is an error here, where Java falls back to the first
-seat. [`game-state/player-attachment.md`](game-state/player-attachment.md).
+seat.
 
 `AttachedTo:`, `RememberedCards:`, `Imprinting:` and `ExiledWith:` can name a card declared later in the same fixture —
 Rancor attaching to a creature written after it in the file has to work. `ExiledWith:` (`GameState.java:1398`, applied
 at `:771-781`) marks the card as exiled with that host's current object through `Game.SetExiledWith`, listed on it
 whatever zone the host is in, as Java's `addExiledCard` is; `Dump` writes it on Exile entries only, ahead of `Counters:`
-(`GameState.java:407-410`). ADR-0034, `game-state/effects-restartgame.md`. `Load`'s `loader` type collects these as it
+(`GameState.java:407-410`). ADR-0034. `Load`'s `loader` type collects these as it
 creates cards and resolves them once every card in the fixture exists (`resolveRefs`), the same two-pass shape
 `GameState.applyGameOnThread` uses (`idToCard`, `cardToAttachId`, ...).
 
@@ -299,7 +299,7 @@ ask. Targets still come from the shared `queue targets` FIFO, in cast order. Fix
 `priority-active-player-passes-then-responds` (an explicit pass, then a response) and
 `priority-pyromancer-pings-in-response-to-bolt` (a non-active player's instant-speed activated ability as a response).
 
-`step` and `run` are the turn driver (ADR-0026, `turn-stack-combat.md`): unlike `advance`, a driven step runs combat's
+`step` and `run` are the turn driver (ADR-0026): unlike `advance`, a driven step runs combat's
 declarations and damage itself (so a scenario queues `attackers`/`blocks` answers instead of calling `declareattackers`)
 and opens a priority round wherever the step grants one, so a phase trigger resolves before `step` returns. A queued
 action is spent on the first round that asks its player — Upkeep included — so a scenario steps to the step it wants
@@ -380,8 +380,7 @@ battlefield position. `testdata/scenarios/ring-tempts-you-nazgul-becomes-ring-be
 battlefield through `Game.LoadUnlockedDoor`, no trigger (`GameState.java:1419`; Java suppresses every trigger during
 setup, `:617`); off the battlefield it lands in `Unapplied`. `Dump` writes one per unlocked door, last in the entry,
 left then right (`GameState.java:445-450`), and names a Room by its printed card (`Card.PrintedDef`), not its door view.
-`compareGames` compares unlocked doors. `testdata/scenarios/room-lock-or-unlock-fires-that-doors-trigger` is the example
-([`effects-unlockdoor.md`](game-state/effects-unlockdoor.md)).
+`compareGames` compares unlocked doors. `testdata/scenarios/room-lock-or-unlock-fires-that-doors-trigger` is the example.
 
 **`Protector:` is `lost=`/`won=`/`over=`'s own pattern applied to a single card field.** `Card.ProtectingPlayer` (CR
 704.5w, `game-state.md`'s "Combat") is Crucible state with no Java `GameState` key to diverge from at all — grep finds

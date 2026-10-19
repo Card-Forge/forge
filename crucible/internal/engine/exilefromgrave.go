@@ -31,7 +31,7 @@ func exileFromGraveyard(g *Game, controller PlayerController, id CardID) {
 // exileFromHand is exileFromGraveyard's own sibling for ExileFromHand<1/
 // CARDNAME|NICKNAME>: a card leaving the hand. This port has no walk for a
 // hand-origin ChangesZone trigger to a zone other than the battlefield, so
-// none fires (m5-t-triggers-animate.md's audit table).
+// none fires.
 func exileFromHand(g *Game, id CardID) {
 	c := g.Card(id)
 	g.Move(id, Exile, c.Owner)

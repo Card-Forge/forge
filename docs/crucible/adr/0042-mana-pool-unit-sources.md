@@ -66,4 +66,4 @@ which no valid string matches.
 
 ## Related
 
-ADR-0009, ADR-0005, [`m6-r9k-cast-mana-sources.md`](../porting/port-log/game-state/m6-r9k-cast-mana-sources.md)
+ADR-0009, ADR-0005, `m6-r9k-cast-mana-sources.md` (git `624d87dba16`)

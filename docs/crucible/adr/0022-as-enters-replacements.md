@@ -28,8 +28,8 @@ This port has four battlefield-entry paths, and each applies Moved replacements 
 
 That works only because the one resolved outcome, `Tapped = true` (`replacement.go:93`), is an idempotent flag. The
 engine expands no `ETBReplacement` keyword, and `compile` does not compile the SVar it names. This blocks Clone's
-largest shape — 62 of the 124 unresolved `Clone` lines (`effects-clone.md`, "Shapes not resolved") — and every as-enters
-choice.
+largest shape — 62 of the 124 unresolved `Clone` lines (`effects-clone.md` (git `624d87dba16`), "Shapes not resolved") —
+and every as-enters choice.
 
 ## Decision Drivers
 
@@ -76,5 +76,5 @@ the same `Tapped` result and the same events.
 
 ## Related
 
-ADR-0017 (registry), ADR-0020 (registry reachable from any entry point), `effects-clone.md`,
+ADR-0017 (registry), ADR-0020 (registry reachable from any entry point), `effects-clone.md` (git `624d87dba16`),
 [04-adr-process](../guidelines/04-adr-process.md)

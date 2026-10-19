@@ -43,7 +43,7 @@ func TestClonePumpKeywordsEndWithPumpDuration(t *testing.T) {
 // (PORT-7): Loose in the Park writes Duration$ UntilEndOfTurn and
 // PumpKeywords$ Haste but no PumpDuration$, and addPumpUntil registers no
 // removal without one, so the haste outlives the copy. The script is a Forge
-// bug against the Oracle text (reported in m5-r-ledgers.md, PORT-8).
+// bug against the Oracle text (card-script-defects.md, PORT-8).
 func TestClonePumpKeywordsWithoutDurationStayPastTheCopy(t *testing.T) {
 	t.Parallel()
 

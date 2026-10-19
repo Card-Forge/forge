@@ -39,8 +39,7 @@ type Count struct {
 	// answer (Tarmogoyf's own graveyard-card COUNT, not its distinct-type
 	// count) rather than a skip. 350 real corpus lines carry one of 23
 	// distinct properties (GreatestCardPower 67, GreatestCardManaCost 61,
-	// CardPower 43, Colors 32, ... -- port-log/game-state/
-	// layer7a-cda-amounts.md); the engine's own evaluator (paidMeasure,
+	// CardPower 43, Colors 32, ...); the engine's own evaluator (paidMeasure,
 	// engine/amountpaid.go) measures the subset it can and reports every
 	// other property unresolved (GO-7) rather than silently measuring
 	// Valid's own match count instead.

@@ -254,7 +254,7 @@ func TestPlanEditsAndBrief(t *testing.T) {
 	}
 	p, err := brief(root, "R9c", "slug")
 	if err != nil || !strings.Contains(p, "row R9c") || !strings.Contains(p, "third") ||
-		!strings.Contains(p, "m6-r9c-slug.md") || !strings.HasSuffix(p, "Never run git.\n") {
+		!strings.Contains(p, "quirks.md") || !strings.HasSuffix(p, "Never run git.\n") {
 		t.Fatalf("brief: %v\n%s", err, p)
 	}
 	if err := planRm(root, []string{"R9a", "R9c"}); err != nil {

@@ -29,7 +29,7 @@ This port has three different policies and none of them is Java's:
 | Any block requirement                          | Not checked                                           |
 
 ADR-0019 Decision 5 made "a controller's illegal answer is an error" the general rule, with checks that would need the
-full legal-action set deferred. `MustBlock`'s deferral (`effects-batches.md:696`) is that deferred case.
+full legal-action set deferred. `MustBlock`'s deferral (`effects-batches.md` (git `624d87dba16`)) is that deferred case.
 
 ## Decision Drivers
 
@@ -74,5 +74,5 @@ commit, together with any of the 286 scenarios queuing blocks that the new check
 
 ## Related
 
-ADR-0019 (Decision 5, refined here for combat), `effects-batches.md` (`MustBlock` deferral),
+ADR-0019 (Decision 5, refined here for combat), `effects-batches.md` (git `624d87dba16`) (`MustBlock` deferral),
 [04-adr-process](../guidelines/04-adr-process.md)

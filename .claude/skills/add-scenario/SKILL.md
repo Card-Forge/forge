@@ -66,6 +66,6 @@ regression test, TEST-2).
 
 ## 4. Commit
 
-No doc change needed for a scenario alone. If it pins a Java quirk, note it under `## Pinned quirks (PORT-7)` in
-`game-state-fixture.md` or the matching `port-log/game-state/<topic>.md` section. There is no Java-oracle scenario
+No doc change needed for a scenario alone. If it pins a Java quirk, add a row to `port-log/quirks.md` (fixture-format
+quirks: `game-state-fixture.md`'s `## Pinned quirks (PORT-7)`). There is no Java-oracle scenario
 runner yet (ADR-0010); do not claim oracle parity.

@@ -139,5 +139,5 @@ line never reaches them.
 ## Related
 
 ADR-0026 (turn driver, Decision 5's phase-jump gap — this generalizes it for one larger case, not a rewrite of ADR-0026
-itself), ADR-0019 ("no nested loops" — the reason Option 3 above is rejected),
-`docs/crucible/porting/port-log/game-state/effects-batch-d.md` (`RestartGame`'s original deferred row).
+itself), ADR-0019 ("no nested loops" — the reason Option 3 above is rejected), `effects-batch-d.md` (git `624d87dba16`)
+(`RestartGame`'s original deferred row).

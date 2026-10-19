@@ -250,7 +250,7 @@ func (g *Game) copySpell(controller PlayerController, orig Ability, copier Playe
 		// as-is would build a permanent copy of one bare half that can never be
 		// a Room again (enterRoom sees isRoomDef(Def) false), the identical
 		// "one-way loss of Room-ness" Clone and Discover are already rejected
-		// for (room.go, effects-unlockdoor.md) -- rejected here too rather than
+		// for (room.go) -- rejected here too rather than
 		// silently building a corrupted copy (GO-7/PORT-8).
 		return NoCard, copiedTargets{}, fmt.Errorf("engine: CopySpellAbility: copying a Room spell not resolvable yet")
 	}

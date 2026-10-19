@@ -74,5 +74,5 @@ application per effect pair per dependency layer on each pass; typical boards ha
 
 ## Related
 
-ADR-0009 (game state representation), ADR-0023 (ability grants, Layer 6), `layers.md`,
+ADR-0009 (game state representation), ADR-0023 (ability grants, Layer 6), `layers.md` (git `624d87dba16`),
 [04-adr-process](../guidelines/04-adr-process.md)

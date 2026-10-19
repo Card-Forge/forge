@@ -82,7 +82,9 @@ Step 2 is where structural decisions get made. Skipping it produces transliterat
 
 ## PORT-4 — port-log note format
 
-One file per ported unit: `docs/crucible/porting/port-log/<unit>.md`.
+One file per ported unit: `docs/crucible/porting/port-log/<unit>.md`. Exception, `internal/engine` (ADR-0043): no
+per-unit note; deviations and pinned quirks are rows in `port-log/quirks.md`, gaps are `game-state.md` "Not ported yet"
+rows, null decisions and Java provenance are Go comments.
 
 ```text
 # Port: GameAction.checkStateEffects

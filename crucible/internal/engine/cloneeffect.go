@@ -232,7 +232,7 @@ type cloneEffect struct{}
 // does not resolve: gaining another card's text (GainTextAbilities$,
 // GainTextOf$), mana cost and creature type rewriting, keyword removal,
 // loyalty, and RemoveCreatureTypes$ -- which getCloneStates never reads
-// (PORT-8, effects-clone.md).
+// (PORT-8, card-script-defects.md).
 var cloneUnresolvedParams = [...]string{
 	"GainTextAbilities", "GainTextOf",
 	"SetManaCost", "SetColorByManaCost",
@@ -701,7 +701,7 @@ func readCloneChanges(g *Game, a *Ability) (cloneChanges, error) {
 		var out mana.Colors
 		// ColorSet.fromNames(split(",")): Java reads a name it does not know
 		// as no color at all; this port refuses it instead (PORT-8,
-		// effects-clone.md).
+		// card-script-defects.md).
 		for _, name := range strings.Split(raw, ",") {
 			name = strings.TrimSpace(name)
 			if name == "" {

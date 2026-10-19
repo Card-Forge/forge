@@ -28,7 +28,7 @@ Read the changed code, then the rule text for anything you flag: `docs/crucible/
 | TEST-8 | mocking library or fake that a different DB / RNG / controller would replace |
 | tests | engine test with one player (game ends at first SBA check, CR 104.2a); ignored `error` returns |
 | REV-1 | edits outside `crucible/`, `docs/crucible/`, `.claude/`, `CLAUDE.md` not logged in `porting/upstream-patches.md` |
-| DOC-12 | new package without `architecture/module-map.md` row; new effect without `port-log/game-state.md` section |
+| DOC-12 | new package without `architecture/module-map.md` row; a reproduced Java quirk or deviation without a `port-log/quirks.md` row (ADR-0043) |
 
 Also flag plain correctness bugs you are confident of: wrong CR rule, off-by-one in counts, error swallowed, event not
 emitted where Java fires a trigger.

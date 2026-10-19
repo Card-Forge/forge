@@ -2,7 +2,7 @@
 name: port-effect
 description:
   Port one or more Forge ApiType effects (M6) to crucible/internal/engine - effect file, registry wiring, enginelint
-  group, engine_test test, port-log section and API counts, in one commit. Use when asked to port, implement or land an
+  group, engine_test test, quirks rows and API counts, in one commit. Use when asked to port, implement or land an
   effect such as "Play", "CopySpellAbility", "Clone", or "the next M6 effects".
 ---
 
@@ -16,13 +16,10 @@ per commit (memory: port in bigger packs), but every API gets every step.
 Pick by corpus use, among effects nobody has already ruled out:
 
 ```bash
-crucible/scripts/unported-apis.sh 30   # "<lines> <Api>[  deferred]", unregistered only, most-used first
+crucible/scripts/unported-apis.sh 30   # "<lines> <Api>", unregistered only, most-used first
 ```
 
-Skip any API the script marks `deferred` unless you are taking on the blocker its `**Researched and deferred.**` table
-row names (`grep -rn '<Api>' docs/crucible/porting/port-log/game-state/effects-*.md`). Reason: each row cost a full
-`forge-oracle` run to establish. An API you research and defer gets a row, with its blocker, in your own batch file's
-table (step 5); the script picks it up from there.
+An API you research and defer gets a `game-state.md` "Not ported yet" row naming its blocker.
 
 Routine or hard: routine = the dominant shape is a state change over pieces the engine already has. Hard = needs a new
 stack/casting mechanic, a Layer 1 copy, synthetic Command-zone cards with their own triggers, a new trigger mode, a new
@@ -143,12 +140,11 @@ Test every resolved param branch now: `internal/engine` has a 90% floor (TEST-12
 
 | File | Change |
 | --- | --- |
-| `docs/crucible/porting/port-log/game-state/effects-<batch>.md` | New file, one per batch (`<batch>` = kebab-case of its lead APIs). A `## <Apis> land` section: what resolves, what is rejected and why, shared engine pieces, Java `path:line`; then a `**Researched and deferred.**` table for APIs researched and not ported |
+| `docs/crucible/porting/port-log/quirks.md` | A row per Java quirk reproduced (PORT-7) or deviation from Java: behavior, Java site, Go site (ADR-0043). No narrative note |
 | `docs/crucible/porting/port-log/game-state.md` | Update the remaining-effects sentence in `## Not ported yet` (`M6's N remaining ...`) |
 | `CLAUDE.md` | `M6 in progress: N of the corpus's 203` count and largest gaps (`unported-apis.sh` counts) |
 | `docs/crucible/porting/forge-java-defects.md` | A row per Forge Java bug found (PORT-8): site, defect, what Crucible does meanwhile, upstream status |
 
-`effects-*.md` files are closed: one new file per batch.
 
 Count = registered APIs minus the three M5 casting entries. `genregistry -check` (in `gates.sh` and CI) prints it and
 fails when `CLAUDE.md` or the plan quotes a different number:

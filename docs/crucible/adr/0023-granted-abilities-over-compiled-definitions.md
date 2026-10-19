@@ -29,9 +29,9 @@ Layer-6 table (`PerpetualAbilities.java:14-16`).
 
 This port reads traits straight off the compiled definition: `Def.Faces[…].Triggers` in 41 range loops, `.Statics` in
 18, `.Replacements` in 15, `.Abilities` in 3. Layer 1 copies already swap `Def` for a per-game compiled definition
-(`effects-clone.md`), so copies are covered. Grants are not: `Animate` rejects every trait-granting param because "each
-needs a runtime-parsed trait, PORT-2" (`animate.go:143-157`), and a static `AddAbility$` line has no applier at all —
-the grant silently does not happen (`effects-manareflected.md`, "Caveat").
+(`effects-clone.md` (git `624d87dba16`)), so copies are covered. Grants are not: `Animate` rejects every trait-granting
+param because "each needs a runtime-parsed trait, PORT-2" (`animate.go:143-157`), and a static `AddAbility$` line has no
+applier at all — the grant silently does not happen (`effects-manareflected.md` (git `624d87dba16`), "Caveat").
 
 ## Decision Drivers
 
@@ -85,5 +85,5 @@ as Java's tables apply over the current `CardState`.
 
 ## Related
 
-ADR-0007 (card DSL representation), ADR-0011 (coverage gate), ADR-0017, `effects-clone.md`, `effects-manareflected.md`,
-[04-adr-process](../guidelines/04-adr-process.md)
+ADR-0007 (card DSL representation), ADR-0011 (coverage gate), ADR-0017, `effects-clone.md` (git `624d87dba16`),
+`effects-manareflected.md` (git `624d87dba16`), [04-adr-process](../guidelines/04-adr-process.md)

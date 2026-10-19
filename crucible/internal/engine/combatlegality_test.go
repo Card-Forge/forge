@@ -241,7 +241,7 @@ func TestMustAttackStaticNamesTheDefender(t *testing.T) {
 // MustAttack$ Player.Other names every player but the static's own
 // controller (matchesPlayerSpec's "Other", host = controller) --
 // definedPlayers' generic Player.<property> fallthrough, added porting
-// Subgame (effects-subgame.md), now reaches definedEntities the same way
+// Subgame, now reaches definedEntities the same way
 // every other MustAttack$ spelling does. 2 real corpus lines.
 func TestMustAttackStaticPlayerOtherNamesEveryOpponent(t *testing.T) {
 	t.Parallel()

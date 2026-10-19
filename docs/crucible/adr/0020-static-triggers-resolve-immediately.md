@@ -27,7 +27,8 @@ This port has no static-trigger path:
 
 Stacking a mana trigger is wrong in a way no test catches: the mana arrives after the cost it was tapped for is already
 paid or failed. Skipping the line is safe only because the effect is refused loudly elsewhere. Neither survives
-`ManaReflected` (`effects-manareflected.md`, "Smallest real design", step 1, which names this ADR as its prerequisite).
+`ManaReflected` (`effects-manareflected.md` (git `624d87dba16`), "Smallest real design", step 1, which names this ADR as
+its prerequisite).
 
 ## Decision Drivers
 
@@ -79,6 +80,5 @@ caller does, and the parameter can be dropped in a later cleanup.
 
 ## Related
 
-ADR-0017 (generated registry), ADR-0019 (priority — static triggers never enter it),
-[`effects-manareflected.md`](../porting/port-log/game-state/effects-manareflected.md),
-[04-adr-process](../guidelines/04-adr-process.md)
+ADR-0017 (generated registry), ADR-0019 (priority — static triggers never enter it), `effects-manareflected.md` (git
+`624d87dba16`), [04-adr-process](../guidelines/04-adr-process.md)

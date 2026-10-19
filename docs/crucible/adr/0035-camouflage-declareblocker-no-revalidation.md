@@ -141,4 +141,4 @@ other `Defined$` reader already has.
 
 ADR-0031 (the hook mechanism this keeps), ADR-0024 (combat declaration legality — the exception this scopes),
 `docs/crucible/porting/forge-java-defects.md` (the `ConcurrentModificationException` row, logged when implemented),
-`docs/crucible/porting/port-log/game-state/effects-batch-d.md` (`Camouflage`'s original deferred row).
+`effects-batch-d.md` (git `624d87dba16`) (`Camouflage`'s original deferred row).

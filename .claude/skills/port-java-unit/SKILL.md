@@ -15,16 +15,12 @@ For ApiType effects use the `port-effect` skill instead. Rules: `docs/crucible/g
 
 1. **Read the Java end to end.** Delegate the reading to `forge-oracle` ("forge-oracle: GameAction.checkStateEffects").
    Read inline only what it could not answer.
-2. **Port-log note first.** Decide where it goes:
+2. **Record first.** Decide where it goes:
 
    | Unit | Note |
    | --- | --- |
-   | Part of `internal/engine` | New `##` section in the matching `docs/crucible/porting/port-log/game-state/<topic>.md` |
+   | Part of `internal/engine` | No note (ADR-0043). A row in `docs/crucible/porting/port-log/quirks.md` per quirk reproduced (PORT-7) or deviation; what stays unported in `game-state.md` "Not ported yet"; Java `path:line` in the Go comments (GO-15) |
    | New package or standalone unit | New `docs/crucible/porting/port-log/<unit>.md` in PORT-4 format |
-
-   Topic files: `state-based-actions`, `layers`, `turn-stack-combat`, `mana-and-casting`, `triggers`, `trigger-modes`,
-   `replacement`, `activation`, `activation-costs`, `targeting-and-chaining`, `effects-*`. Content: what it does, real
-   inputs/outputs, Java scaffolding dropped, deviations, pinned quirks (PORT-7), `path:line` for every Java claim.
 
 3. **Public API** in the target package. Identity by ID (GO-9), no package-level mutable state (GO-2), no mutex (GO-3),
    no reflection (GO-4), no `any` (GO-8), ordered collections where order is visible (GO-12).

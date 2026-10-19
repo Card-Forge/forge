@@ -239,7 +239,8 @@ documents in which nothing was learned.
 ## DOC-12 — Docs land before code
 
 New Go package → entry in `architecture/module-map.md` in the **same** commit. New ADR-worthy decision → ADR merged
-**before** the implementing PR. Ported Java unit → `porting/port-log/<unit>.md` note before merge.
+**before** the implementing PR. Ported Java unit → `porting/port-log/<unit>.md` note before merge; in `internal/engine`,
+a `port-log/quirks.md` row per reproduced quirk or deviation instead (ADR-0043).
 
 CI enforces it. `crucible/tools/docgate` fails the build on a package with no module-map row, on a ported package whose
 row links to no port-log note, and on an `ADR-nnnn` reference in Go code with no matching ADR file.

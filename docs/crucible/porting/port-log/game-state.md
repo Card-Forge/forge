@@ -190,10 +190,9 @@ compared were never going to agree on those by number.
 
 ---
 
-## Finding a section
+## Where the rest is
 
-Sections live in topic files under [`game-state/`](game-state/). Other docs cite a section by its title. Find it with
-`rg -n '^## ' docs/crucible/porting/port-log/game-state/`; no index is kept here, the headings are the index.
+Reproduced quirks and deviations: [`quirks.md`](quirks.md). Forge defects: [`../forge-java-defects.md`](../forge-java-defects.md), [`../card-script-defects.md`](../card-script-defects.md). Java provenance: the Go files' `Ported from` comments. Per-batch landing notes were removed (ADR-0043); a comment citing a section of this file by title points into git history at `624d87dba16`.
 
 ## Not ported yet
 

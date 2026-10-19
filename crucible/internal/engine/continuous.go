@@ -397,7 +397,7 @@ func applyContinuousType(g *Game) {
 // resolve does nothing: the whole line, never a part of it, since applying
 // "is a Turtle" without the "loses its other creature types" it also asks
 // for would leave the card with both, an answer worse than the coverage
-// gap. port-log/game-state/layers-4-5-6.md has the corpus counts.
+// gap.
 func applyOneContinuousType(g *Game, host *Card, amounts map[string]expr.Amount, s *compile.Ability) {
 	if !strings.EqualFold(s.Name, "Continuous") {
 		return

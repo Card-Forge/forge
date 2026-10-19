@@ -10,7 +10,9 @@ import (
 const runbook = "docs/crucible/runbooks/subagent-worktrees.md"
 
 // brief builds the prompt for a worktree subagent that works open-plan row id.
-func brief(root, id, slug string) (string, error) {
+// The third argument (a slug) is kept for the CLI's argument order; ADR-0043
+// dropped the per-row note it named.
+func brief(root, id, _ string) (string, error) {
 	text, err := planRow(root, id)
 	if err != nil {
 		return "", err
@@ -35,8 +37,8 @@ func brief(root, id, slug string) (string, error) {
 
 %s
 
-Java research: if an "Oracle notes" section follows, use its file:line cites and read Java only for gaps; otherwise research first. Cite file:line for every behavior you port. Deliverables: module tests (package x_test), at most one scenario (add-scenario skill) and only if no module test can express it; port-log note docs/crucible/porting/port-log/game-state/m6-%s.md. Do NOT run card-smoke: the main session measures the corpus. Any Forge bug: report file:line in your final report (PORT-8), do not work around. Do NOT edit open-plan rows, smoke-probe.md measurements or the CLAUDE.md percentage.
+Java research: if an "Oracle notes" section follows, use its file:line cites and read Java only for gaps; otherwise research first. Cite file:line for every behavior you port. Deliverables: module tests (package x_test), at most one scenario (add-scenario skill) and only if no module test can express it; a row in docs/crucible/porting/port-log/quirks.md for every Java quirk reproduced or deviation from Java, and what stays unported in game-state.md "Not ported yet" (ADR-0043); no narrative note. Do NOT run card-smoke: the main session measures the corpus. Any Forge bug: report file:line in your final report (PORT-8), do not work around. Do NOT edit open-plan rows, smoke-probe.md measurements or the CLAUDE.md percentage.
 
 %s
-`, id, text, strings.ToLower(id)+"-"+slug, block), nil
+`, id, text, block), nil
 }

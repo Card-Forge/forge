@@ -14,11 +14,11 @@ spell or ability" (Willbender, Bolt Bend, Reroute, Spellskite) and of "copy targ
 (`MagicStack.java:753-755`).
 
 ADR-0009 types `EntityID` as "card or player, for targeting". A spell is targeted as its card on the stack
-(`CardEntity`, R9i `m6-r9i-stack-targets.md`), which works because a spell has a card in the Stack zone. An activated or
-triggered ability has no card of its own: its `Source` is its host, which may also have a spell, another ability or a
-permanent in play. `stackAbilityCandidates` (`targeting.go`) therefore errors whenever such an ability would be a legal
-target, so 66 corpus cards naming `TargetType$ Activated`/`Triggered`/`Ability`/`SpellAbility` either never cast or fail
-when they resolve.
+(`CardEntity`, R9i `m6-r9i-stack-targets.md` (git `624d87dba16`)), which works because a spell has a card in the Stack
+zone. An activated or triggered ability has no card of its own: its `Source` is its host, which may also have a spell,
+another ability or a permanent in play. `stackAbilityCandidates` (`targeting.go`) therefore errors whenever such an
+ability would be a legal target, so 66 corpus cards naming `TargetType$ Activated`/`Triggered`/`Ability`/`SpellAbility`
+either never cast or fail when they resolve.
 
 ## Decision Drivers
 
@@ -56,5 +56,4 @@ information, so an effect needing an ability that already left reads nothing, as
 
 ## Related
 
-ADR-0009, ADR-0018, ADR-0027, ADR-0028,
-[`m6-r25e-abilities-on-stack.md`](../porting/port-log/game-state/m6-r25e-abilities-on-stack.md)
+ADR-0009, ADR-0018, ADR-0027, ADR-0028, `m6-r25e-abilities-on-stack.md` (git `624d87dba16`)

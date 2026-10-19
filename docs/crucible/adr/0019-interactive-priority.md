@@ -15,13 +15,13 @@ Instant/Sorcery casting on top of that same assumption and explicitly deferred i
 This blocks:
 
 - `Play` (330 corpus lines) and `CopySpellAbility` (255 lines) — ADR-0018 unblocked their dominant shapes, but the
-  research doc's own table (`effects-play-copyspellability.md:14-18`) is explicit that a real response window is the
-  next thing both need past their dominant shape.
+  research doc's own table (`effects-play-copyspellability.md` (git `624d87dba16`)) is explicit that a real response
+  window is the next thing both need past their dominant shape.
 - Most of the ~57 real remaining `PlayerController` gaps: `chooseSpellAbilityToPlay`/`playChosenSpellAbility` (the ask
   loop itself), `chooseTargetsFor`/`chooseNewTargetsFor` for a response, `payManaCost` as a response, and everything
   else in the casting infrastructure that exists only to serve a real priority window.
-- `MustBlock`'s own deferred question (`effects-batches.md:696`): whether to trust, re-prompt, or error on a
-  controller's answer that turns out to violate a legality check discovered after the fact. This ADR decides that
+- `MustBlock`'s own deferred question (`effects-batches.md` (git `624d87dba16`)): whether to trust, re-prompt, or error
+  on a controller's answer that turns out to violate a legality check discovered after the fact. This ADR decides that
   question generally (Decision, point 5) — `MustBlock`'s own ADR applies it rather than re-deciding it.
 
 The general CR 608.2b fizzle check (ADR-0018 Decision point 3, narrowed to an Aura's own `Target`) stays out of scope
@@ -215,5 +215,5 @@ declines) — a deliberate CR 307.1 fix, not a regression, named as such in the 
 ADR-0027 (per-target CR 608.2b check), ADR-0026 (turn driver — wires this loop into the turn structure), ADR-0018
 (instant/sorcery spell object — this ADR removes the priority gap it deferred), ADR-0013 (event schema — no new event
 kind), ADR-0017 (`Registry` dispatch — a response still resolves through it, unchanged),
-`effects-play-copyspellability.md`, `effects-batches.md:696` (`MustBlock`'s own deferred question, answered generally
-here), [04-adr-process](../guidelines/04-adr-process.md)
+`effects-play-copyspellability.md` (git `624d87dba16`), `effects-batches.md` (git `624d87dba16`) (`MustBlock`'s own
+deferred question, answered generally here), [04-adr-process](../guidelines/04-adr-process.md)

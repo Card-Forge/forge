@@ -139,7 +139,7 @@ Equip's `ReduceCost$` and `AlternateCost$` extras are not read by any ability th
 (about 25) stay inert; an `ActivationLimit$` extra is carried as written. The engine side: `attachEffect` resolves an
 activated `AB$ Attach` (`attachActivated`, `castspell.go`) by attaching the source to its first creature target unless
 protection refuses; `Draw` defaults `Defined$` to You as `getTargetPlayers` does; Layer 7 reads
-`AffectedDefined$ Equipped/Enchanted` (`layers.md`). Granted keywords (`AddKeyword$ Prowess`) do not expand yet: they
+`AffectedDefined$ Equipped/Enchanted`. Granted keywords (`AddKeyword$ Prowess`) do not expand yet: they
 need ADR-0023's trait overlay. A bare `Flashback` (no cost) casts for the card's own mana cost. Persist and Undying
 needed `ChangeZone`'s `WithCountersType$`/`WithCountersAmount$` (the permanent enters with the counters before its enter
 replacements, `moveByEffect`'s `enterCounters`) and `Defined$ TriggeredNewCard[LKICopy]` (the card a dies or enters
@@ -150,16 +150,14 @@ carrying these keywords.
 `LoseLife` records the life lost (the amount asked for from each player still in the game: this port has no life-loss
 replacement to reduce it) where `AFLifeLost` reads it (`LifeLoseEffect.java:60`): on the source card's SVars, since
 Java's per-ability SVar has no home here. Fabricate's counters-or-Servos choice is the unless cost the way Java scripts
-it; the payer is asked through `ConfirmPayCost`
-([`mana-and-casting.md`](game-state/mana-and-casting.md#unlesscost-past-mana-and-ward)). Java scopes the value SVars of
+it; the payer is asked through `ConfirmPayCost`. Java scopes the value SVars of
 Mentor and Training (`X`) to the ability; the expansion names them `KWPower<n>` so they never shadow the card's own `X`,
 and `compileFace` refuses a synthesized SVar whose name the card already defines. A numeric valid property resolves a
 value SVar operand through the source card (`compareOperand`, `valid-strings.md`). Training's own `Training$ True` param
-is read by nothing in Forge and is dropped. `etbCounter` is a Forge pseudo-keyword (no `Keyword` enum value); the engine
-side is [`game-state/x-and-etb-counters.md`](game-state/x-and-etb-counters.md#enters-with-counters). Not expanded yet,
+is read by nothing in Forge and is dropped. `etbCounter` is a Forge pseudo-keyword (no `Keyword` enum value). Not expanded yet,
 each for a named reason: Rampage (`Count$Valid Creature.blockingTriggeredAttacker` needs `blocking<Defined>` in
-`CardProperty`) and Melee (`TriggeredPlayersDefenders$Amount`). Engine side:
-[`game-state/triggers.md`](game-state/triggers.md#keyword-triggers-adr-0038). Tests: `keywordtriggers_test.go`.
+`CardProperty`) and Melee (`TriggeredPlayersDefenders$Amount`).
+Tests: `keywordtriggers_test.go`.
 
 ### Flashback is casting infrastructure, not an expansion
 

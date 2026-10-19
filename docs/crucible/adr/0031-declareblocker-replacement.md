@@ -6,8 +6,8 @@
 
 ## Context
 
-`Camouflage` (1 real corpus line, `camouflage.txt`) is deferred (`effects-batch-d.md`): casting it creates a persistent
-Command-zone effect substituting the entire declare-blockers step for the rest of the turn
+`Camouflage` (1 real corpus line, `camouflage.txt`) is deferred (`effects-batch-d.md` (git `624d87dba16`)): casting it
+creates a persistent Command-zone effect substituting the entire declare-blockers step for the rest of the turn
 (`R:Event$ DeclareBlocker | ReplaceWith$ DBCamouflage`, CR 616 territory). `CamouflageEffect.java`'s own resolve (read
 in full) does not ask the normal defending player to declare blockers at all: it asks a `declarer` (`Optional$` or
 `Defined$`-controlled, not necessarily the defending player) to pile creatures into per-attacker groups, then
@@ -81,5 +81,5 @@ scripted/human-shaped controller today — consistent with every other effect's 
 
 ## Related
 
-ADR-0024 (combat declaration legality), `replacement.go`'s existing `Event$` dispatch,
-`docs/crucible/porting/port-log/game-state/effects-batch-d.md` (`Camouflage`'s prior deferred row, superseded here).
+ADR-0024 (combat declaration legality), `replacement.go`'s existing `Event$` dispatch, `effects-batch-d.md` (git
+`624d87dba16`) (`Camouflage`'s prior deferred row, superseded here).

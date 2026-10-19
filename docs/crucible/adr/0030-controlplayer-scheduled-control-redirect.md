@@ -7,7 +7,7 @@
 ## Context
 
 `ControlPlayer` (11 corpus lines, Mindslaver's own shape: "target player's decisions are made by another player's
-controller for their next turn") is deferred (`effects-batch-b.md`) on two missing pieces:
+controller for their next turn") is deferred (`effects-batch-b.md` (git `624d87dba16`)) on two missing pieces:
 
 1. **A per-player controller redirect.** `control.go`'s own doc comment: `PlayerController` methods take the deciding
    player as an explicit `PlayerID` rather than binding to one seat — there is no seam a control-changing effect could
@@ -122,6 +122,5 @@ helper both structs embed — not decided here, revisit if a third case appears.
 
 ## Related
 
-ADR-0013 (event schema), ADR-0019 Decision 5 (controller answers), `delayedtrigger.go`,
-`docs/crucible/porting/port-log/game-state/effects-batch-b.md` (`ControlPlayer`'s prior deferred row, superseded by this
-ADR unblocking it).
+ADR-0013 (event schema), ADR-0019 Decision 5 (controller answers), `delayedtrigger.go`, `effects-batch-b.md` (git
+`624d87dba16`) (`ControlPlayer`'s prior deferred row, superseded by this ADR unblocking it).

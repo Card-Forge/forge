@@ -242,8 +242,7 @@ func (g *Game) transform(id CardID) bool {
 	// only (CardFactory.getCloneStates' current-state branch), so it has no
 	// back face to turn to. Java still flips its own backside flag here
 	// (Card.changeCardState), so the underlying card shows its other face
-	// once the copy ends; this port does not reproduce that
-	// (effects-clone.md).
+	// once the copy ends; this port does not reproduce that (quirks.md).
 	if len(c.copies) > 0 {
 		return false
 	}

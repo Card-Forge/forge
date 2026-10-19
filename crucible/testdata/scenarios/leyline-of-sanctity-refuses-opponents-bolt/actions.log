@@ -1,5 +1,5 @@
 # ScriptedController.ChooseTargets never validates its queued answer against
-# the offered candidates (last pack's own header note, targeting-and-chaining.md).
+# the offered candidates.
 # CR 702.11b: Leyline of Sanctity's own continuous grant (`Affected$ You |
 # AddKeyword$ Hexproof`) puts Hexproof on human, not on any card --
 # applyOneContinuousKeyword's own new player branch (continuous.go) writes

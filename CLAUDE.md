@@ -65,7 +65,8 @@ Violated most often. Full reasoning in the guideline files.
 8. **`error` for anything a card script can cause. `panic` only on engine invariant breach**, recovered at the game
    boundary. One bad card must not kill a 100k-game batch. (GO-7)
 9. **Docs land in the same commit as code.** New package → row in `architecture/module-map.md`. Ported unit →
-   `porting/port-log/<unit>.md` note. ADR merges _before_ its implementing PR. (DOC-12, ADRP-4)
+   `porting/port-log/<unit>.md` note; in `internal/engine`, a `port-log/quirks.md` row per quirk or deviation instead
+   (ADR-0043). ADR merges _before_ its implementing PR. (DOC-12, ADRP-4)
 10. **Near-zero dependencies.** Non-stdlib import needs an ADR. Currently allowed: `github.com/google/go-cmp`, tests
     only. (GO-14)
 11. **A Forge bug is reported, never worked around.** Malformed script, param that never reaches its effect, method that
@@ -122,7 +123,7 @@ Everything left, easiest first: `docs/crucible/00-master-implementation-plan-ope
 exit gate:** fixture-count half met (≥300 scenarios), qualitative half not.
 
 Keep this section short — it loads every session. Every primitive, corpus count, design decision and Java citation goes
-in `docs/crucible/porting/port-log/game-state.md` and its topic files, never here.
+in `docs/crucible/porting/port-log/game-state.md`, `quirks.md` and Go comments, never here.
 
 ---
 
@@ -138,9 +139,9 @@ in `docs/crucible/porting/port-log/game-state.md` and its topic files, never her
 | skill | `sync-upstream` | Merge `Card-Forge/forge`, verify the port still agrees with what moved |
 | skill | `check-card` | Audit a card script against Oracle text and the Java that runs it; upstream fix branch |
 
-Engine port-log lives in `docs/crucible/porting/port-log/game-state/<topic>.md` (headings are the index); `game-state.md`
-holds `Not ported yet`. Topic files run to 80 KB: find the section with `rg -n`, then `Read` it with `offset`/`limit`, never
-the whole file.
+Engine port-log (ADR-0043): `port-log/game-state.md` (model, `Not ported yet`) and `port-log/quirks.md` (every reproduced
+Java quirk and deviation). No per-batch notes. Large files: find the section with `rg -n`, then `Read` with
+`offset`/`limit`, never whole.
 
 **Advisor:** call it at most twice per task: once before a non-obvious design choice (new contract, ADR, Forge defect),
 once before declaring a multi-file change done. Skip it for routine ports, doc edits and fixes whose next step the tool

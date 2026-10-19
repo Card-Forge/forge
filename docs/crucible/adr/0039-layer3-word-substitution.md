@@ -24,7 +24,8 @@ Java (`Card.addChangedTextColorWord/TypeWord`, `CardChangedWords`, `AbilityUtils
 
 Crucible compiles script text once (PORT-2). Params are still `Key$ Value` text on `compile.Ability`, typed on demand
 (`compile.ParseParams`), so a rewrite of values reaches every typed reader. Layer 1 copies and `GainTextOf$` already
-swap `Card.Def` for a per-game composite that every later layer folds over (`layers-text-and-rules.md`).
+swap `Card.Def` for a per-game composite that every later layer folds over (`layers-text-and-rules.md` (git
+`624d87dba16`)).
 
 ## Decision Drivers
 
@@ -76,4 +77,4 @@ cleanup.
 
 ## Related
 
-ADR-0007, ADR-0023, ADR-0025, [`layers-o-text.md`](../porting/port-log/game-state/layers-o-text.md)
+ADR-0007, ADR-0023, ADR-0025, `layers-o-text.md` (git `624d87dba16`)

@@ -6,9 +6,9 @@
 
 ## Context
 
-`Meld` (CR 712, 7 corpus lines) is deferred (`effects-batch-b.md`): "two cards become one permanent" — a `SplitMeld`
-card's own back face is the melded result (`Brisela, Voice of Nightmares` is Gisela's own back face), entered by
-`MeldEffect.java` exiling both named cards, transforming the primary to its `CardStateName.Meld` state
+`Meld` (CR 712, 7 corpus lines) is deferred (`effects-batch-b.md` (git `624d87dba16`)): "two cards become one permanent"
+— a `SplitMeld` card's own back face is the melded result (`Brisela, Voice of Nightmares` is Gisela's own back face),
+entered by `MeldEffect.java` exiling both named cards, transforming the primary to its `CardStateName.Meld` state
 (`primary.changeToState`), and marking the secondary as folded into it (`primary.setMeldedWith(secondary)`,
 `PlayerZoneBattlefield.addToMelded(secondary)`) before moving the primary onto the battlefield. CR 712.4c: if the melded
 permanent ever leaves the battlefield, it splits back into its two original cards, each going to its owner's appropriate
@@ -103,5 +103,5 @@ other such field.
 ## Related
 
 ADR-0009 (arena/ID identity), `setstateeffect.go`/`cloneeffect.go`/`facedown.go` (the reused `Def`-swap precedent),
-`becomemonarcheffect.go`'s `IsDesignationCard` (the reused synthetic-card-skip precedent),
-`docs/crucible/porting/port-log/game-state/effects-batch-b.md` (`Meld`'s prior deferred row, superseded here).
+`becomemonarcheffect.go`'s `IsDesignationCard` (the reused synthetic-card-skip precedent), `effects-batch-b.md` (git
+`624d87dba16`) (`Meld`'s prior deferred row, superseded here).

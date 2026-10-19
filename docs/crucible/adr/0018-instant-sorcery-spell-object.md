@@ -14,7 +14,7 @@ path at all: `CastSpell` returns `false` for one, the same as any other declined
 This blocks two of M6's largest remaining APIs by corpus lines, already researched and deferred (PORT-8: no Forge bug
 found, this is a genuine engine gap):
 
-- `Play` (330 lines) — `docs/crucible/porting/port-log/game-state/effects-play-copyspellability.md:23-41`
+- `Play` (330 lines) — `effects-play-copyspellability.md` (git `624d87dba16`)
 - `CopySpellAbility` (255 lines) — same file, lines 43-58
 
 It also blocks 29 of the ~57 real remaining gaps in `PlayerController` (`docs/crucible/porting/port-log/game-state.md`
@@ -22,14 +22,14 @@ It also blocks 29 of the ~57 real remaining gaps in `PlayerController` (`docs/cr
 `chooseNewTargetsFor`, `chooseModeForAbility`, cost-payment hooks and more all exist only to serve casting a real spell,
 which this port cannot do yet.
 
-The research doc's own step 4 (`effects-play-copyspellability.md:75-76`) is explicit: landing this changes
+The research doc's own step 4 (`effects-play-copyspellability.md` (git `624d87dba16`)) is explicit: landing this changes
 `ResolveStack`'s documented contract ("no `PlayerController` method lets a player respond to anything on the stack",
 `stack.go:52`) and `Ability`'s documented contract ("Nil for an ability naming no `ValidTgts$`", `ability.go:69` —
 `Ability` gains a new identity field here). Both are cross-cutting contracts (ADRP-1) — hence this ADR, before any
 implementing commit (ADRP-4).
 
 **Explicitly out of scope**, deferred to a later ADR: interactive priority (players responding to what is already on the
-stack). The research doc's own table (`effects-play-copyspellability.md:14-18`) shows neither `Play` nor
+stack). The research doc's own table (`effects-play-copyspellability.md` (git `624d87dba16`)) shows neither `Play` nor
 `CopySpellAbility`'s dominant shape needs it — `Play` casts during resolution with timing bypassed, and
 `CopySpellAbility`'s dominant `Defined$ TriggeredSpellAbility` shape sits above the spell in an all-pass `ResolveStack`.
 Bundling priority into this decision risks an unlandable ADR (ADRP-5's one-page target) for a need neither target API
@@ -98,7 +98,7 @@ Option 2 chosen.
    (`permanentEffect`/`attachEffect`/`PlayLand`) — not a general zone-change hook. `ReplaceGraveyard$` (CR 614's own
    "this would go to a graveyard, exile it instead" redirect) has no resolver in this port yet and is not solved by this
    ADR; it stays a real gap for `Play`'s own 35-line shape, tracked the same place it already is
-   (`effects-play-copyspellability.md:37`).
+   (`effects-play-copyspellability.md` (git `624d87dba16`)).
 4. **`ResolveStack`'s doc comment is corrected**, not the mechanism: "no `PlayerController` method lets a player respond
    to anything on the stack" still holds after this ADR — casting an Instant/Sorcery does not add a response window,
    only a second thing that can be _on_ the stack. Interactive priority stays a documented gap for a later ADR (see
@@ -107,16 +107,17 @@ Option 2 chosen.
 ## Consequences
 
 **Good:** `Play` and `CopySpellAbility`'s dominant shapes unblock once this lands — both were fully researched and only
-waiting on exactly this (`effects-play-copyspellability.md`). `CopySpellAbility`'s `Defined$ TriggeredSpellAbility`
-shape (164 of 255 lines) reads `ID` off the `SpellCast` event's ability, once the event carries it. `ReplaceGraveyard$`
-(Context) is not one of these — see Decision, point 3 — and stays its own follow-up. The stack-item identity is cheap:
-one field, one counter, no new type, no change to any existing `Ability` caller's signature.
+waiting on exactly this (`effects-play-copyspellability.md` (git `624d87dba16`)). `CopySpellAbility`'s
+`Defined$ TriggeredSpellAbility` shape (164 of 255 lines) reads `ID` off the `SpellCast` event's ability, once the event
+carries it. `ReplaceGraveyard$` (Context) is not one of these — see Decision, point 3 — and stays its own follow-up. The
+stack-item identity is cheap: one field, one counter, no new type, no change to any existing `Ability` caller's
+signature.
 
 **Bad:** `Ability` grows a field every existing literal `Ability{...}` construction site does not set (defaults to zero,
 which `PushAbility` overwrites) — a small, one-time textual diff, not a semantic one. `Game.Clone` (`cloneeffect.go`)
 needs to decide whether a cloned permanent's own stack-item history (if any) carries the original `ID` or gets a fresh
 one; this ADR does not resolve that — it is `CopySpellAbility`'s own implementing PR's job, scoped to the one shape that
-needs it (Layer 1 permanent-spell copies, `effects-play-copyspellability.md:55`).
+needs it (Layer 1 permanent-spell copies, `effects-play-copyspellability.md` (git `624d87dba16`)).
 
 **Neutral:** the fizzle check and post-resolution move both run unconditionally in `ResolveStack`'s loop, on every
 ability, not just spells — an activated or triggered ability's `Source` is never in the `Stack` zone when this runs
@@ -127,4 +128,4 @@ non-spell caller, at the cost of one `Card.Zone` read per resolution.
 
 ADR-0027 (per-target CR 608.2b check), ADR-0008 (dispatch, superseded in placement only by ADR-0017), ADR-0013 (event
 schema — `SpellCast` gains no new field; `ID` is read off the pushed `Ability`, not the event),
-`effects-play-copyspellability.md`, [04-adr-process](../guidelines/04-adr-process.md)
+`effects-play-copyspellability.md` (git `624d87dba16`), [04-adr-process](../guidelines/04-adr-process.md)

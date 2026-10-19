@@ -317,8 +317,8 @@ already answer `false` on an empty list. The two cases collapse to the same answ
 way `inZone` and `inRealZone` collapsed into each other one section up.
 
 **Bare form only, same reasoning as `EnchantedBy`'s own batch.** `attacking`'s suffixed forms alone run to
-`attackingYou` (ported: `game-state/m6-r25d-timing-restrictions.md`), `attackingAlone`, `attackingSame`,
-`attackingYouOrYourPW` (ported: `game-state/m6-r9l-combat-batches.md`), `attackingBattle` (refused there, a Forge bug),
+`attackingYou` (ported), `attackingAlone`, `attackingSame`,
+`attackingYouOrYourPW` (ported), `attackingBattle` (refused there, a Forge bug),
 and a generic `attacking <DefinedGameEntity>`; `blocking`'s add `blockingSource`, `blockingCreatureYouCtrl`, and a
 generic `blocking <DefinedCards>`. Each is a real, distinct check (an LKI comparison, a defined-entity lookup, a
 count-across-the-battlefield), not one shared mechanism the way the numeric comparisons or `EnchantedBy`'s four names
@@ -436,7 +436,7 @@ against, that gap is moot rather than a decision.
 
 | Java | When |
 | --- | --- |
-| `CardProperty.cardHasProperty` — the great majority of its branches; ported so far: `ChosenCard`/`ChosenCardStrict`/`nonChosenCard`, `IsRemembered`, `IsImprinted`, `EnchantedBy`/`EquippedBy`/`AttachedBy`/`FortifiedBy` (bare form), `inZone`/`inRealZone`, `attacking`/`blocking` (bare form), `attackingYou`, `attackedYouThisTurn`, `DefendingPlayer`/`DefendingPlayerCtrl` (`game-state/m6-r25d-timing-restrictions.md`), `HasCounters`, `counters_<op><n>_<type>`, `enchanted`/`equipped`/`modified`, `RememberedPlayerCtrl`/`RememberedPlayerOwn`, `ActivePlayerCtrl`, `Historic`, `YouCtrl`/`YouDontCtrl`/`OppCtrl`, `YouOwn`/`YouDontOwn`/`OppOwn`, `Self`/`Other`/`StrictlyOther`, `with`/`without`/`hasKeyword`, `tapped`/`untapped`, the numeric comparisons (`engine.Matches`) | M5-M6 |
+| `CardProperty.cardHasProperty` — the great majority of its branches; ported so far: `ChosenCard`/`ChosenCardStrict`/`nonChosenCard`, `IsRemembered`, `IsImprinted`, `EnchantedBy`/`EquippedBy`/`AttachedBy`/`FortifiedBy` (bare form), `inZone`/`inRealZone`, `attacking`/`blocking` (bare form), `attackingYou`, `attackedYouThisTurn`, `DefendingPlayer`/`DefendingPlayerCtrl`, `HasCounters`, `counters_<op><n>_<type>`, `enchanted`/`equipped`/`modified`, `RememberedPlayerCtrl`/`RememberedPlayerOwn`, `ActivePlayerCtrl`, `Historic`, `YouCtrl`/`YouDontCtrl`/`OppCtrl`, `YouOwn`/`YouDontOwn`/`OppOwn`, `Self`/`Other`/`StrictlyOther`, `with`/`without`/`hasKeyword`, `tapped`/`untapped`, the numeric comparisons (`engine.Matches`) | M5-M6 |
 | The `$`-suffixed `RememberedPlayerCtrl`/`RememberedPlayerOwn`/`TargetedPlayerCtrl` forms — need `Count$` resolution this port does not have | M5-M6 |
 | `enchanting`/`equipping` — the reverse direction, "is this card itself attached to something" filtered by its own subtype; zero corpus occurrences | M5-M6 |
 | `countersReceivedThisTurn_<op><n>_<type>_<player>` — per-turn counter-received tracking (`game.getCounterAddedThisTurn`) | M5-M6 |
@@ -446,7 +446,7 @@ against, that gap is moot rather than a decision.
 | `AbilityUtils.calculateAmount` for a numeric-comparison `Operand` that is not a plain integer — `X`, `Chosen`, an SVar name; needs an ability-context evaluator `internal/expr` does not have yet | M5-M6 |
 | `CardStateProperty.hasProperty` — the rest of it: `AllColors`, `MonoColor`, `AnyChosenColor`, `EnemyColor`, `AssociatedWithChosenColor`, `Worthy`, `HasSVar`, and everything past it (color, `Colorless`, `MultiColor`, `ChosenColor` for a single chosen color, `Outlaw`/`Party` and the generic `non<Type>` fallback are ported) | M5-M6 |
 | `SpellAbilityProperty` — the fourth property chain, untouched | M5-M6 |
-| `PlayerProperty.playerHasProperty` (517) — the rest of it: `Chosen`, `isMonarch`/`hasInitiative`/`hasBlessing`, `Attacking`, `wasDealtCombatDamageThisCombatBy`/`wasDealtDamageThisGameBy`, `attackedBySource...`, `wasAttackedThisTurnBy`, `Triggered...`, `Condition...`, `NotedFor`/`NotedDefender`, `counters_...` (ported: `matchesPlayerProperty` and `playerProperty`, `game-state/m6-r9a-player-properties.md`; `BeenAttackedThisCombat`, `game-state/m6-r25d-timing-restrictions.md`) | M5-M6 |
+| `PlayerProperty.playerHasProperty` (517) — the rest of it: `Chosen`, `isMonarch`/`hasInitiative`/`hasBlessing`, `Attacking`, `wasDealtCombatDamageThisCombatBy`/`wasDealtDamageThisGameBy`, `attackedBySource...`, `wasAttackedThisTurnBy`, `Triggered...`, `Condition...`, `NotedFor`/`NotedDefender`, `counters_...` (ported: `matchesPlayerProperty` and `playerProperty`; `BeenAttackedThisCombat`) | M5-M6 |
 | LKI-aware `YouCtrl`/`OppCtrl`, and a team-aware `OppCtrl` | M5-M6 |
 | Property heads as a closed vocabulary, for the P2 gate | M3 slice H |
 
