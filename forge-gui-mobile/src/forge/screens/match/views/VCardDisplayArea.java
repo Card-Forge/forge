@@ -385,13 +385,21 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        //room at the right end that something floating over the area (a zone box) covers: cards stay clear of it or can be scrolled clear
+        final float pad = Math.max(0f, getEndPadding());
+        final float usable = Math.max(1f, visibleWidth - pad);
         float x = layoutCards(0f, visibleHeight);
         final float align = getContentAlignment();
-        if (align > 0f && x > 0f && x < visibleWidth) { //fewer cards than fit: place them again, shifted
-            x = layoutCards(Math.round((visibleWidth - x) * align), visibleHeight);
+        if (align > 0f && x > 0f && x < usable) { //fewer cards than fit: place them again, shifted
+            x = layoutCards(Math.round((usable - x) * align), visibleHeight);
             return new ScrollBounds(visibleWidth, visibleHeight);
         }
-        return new ScrollBounds(x, visibleHeight);
+        return new ScrollBounds(Math.max(x + pad, visibleWidth), visibleHeight);
+    }
+
+    //@return width at the right end of the area that is covered by something else, 0 normally
+    protected float getEndPadding() {
+        return 0f;
     }
 
     //@return how far to the right (0 = left, 0.5 = centered, 1 = right) cards are placed when they don't fill the area

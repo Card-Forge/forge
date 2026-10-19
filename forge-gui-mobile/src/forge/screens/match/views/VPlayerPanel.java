@@ -1135,6 +1135,7 @@ public class VPlayerPanel extends FContainer {
         commandZone.setBounds(x + shrunkWidth - commandVisibleWidth, isFlipped() ? 0 : height - cmdHeight, cmdWidth, cmdHeight);
         field.setCommandZoneWidth(commandVisibleWidth > 0 ? commandVisibleWidth + 1 : 0);
         field.setBounds(x, 0, fieldWidth, height);
+        field.setEndPadding(isZoneOverlay() && selectedTab != null ? displayAreaWidth : 0f);
 
         float displayLeft = width - commonTabWidth - displayAreaWidth + (1f - slideProgress) * displayAreaWidth;
         for (InfoTab tab : tabs) {
@@ -1172,6 +1173,7 @@ public class VPlayerPanel extends FContainer {
             field.setBounds(x, 0, fieldRight - x - cmdReserve, height);
             field.setCommandZoneWidth(Math.max(0f, boxVisible - cmdReserve)); //only the outer row is shortened by the box
         }
+        field.setEndPadding(overlay ? Math.max(box ? boxWidth : sideWidth > 0 ? displayAreaWidth : 0f, commandProgress > 0 ? cmdWidth : 0f) : 0f);
 
         final float boxTop = isFlipped() ? 0 : height - boxHeight;
         final float boxLeft = x + regionWidth - boxWidth * slideProgress;
@@ -1219,6 +1221,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         field.setCommandZoneWidth(0);
+        field.setEndPadding(0f);
         if (isCompactAlternate()) {
             //the field keeps the middle of the screen: it leaves room for a column on both sides so its cards stay centered
             final float stops = phaseIndicator.getOpenWidth();
@@ -1261,6 +1264,9 @@ public class VPlayerPanel extends FContainer {
             field.setContentAlignment(isCompactRight() ? 1f : 0f);
             field.setBounds(x, 0, regionWidth, height);
         }
+        final boolean covers = selectedTab != null && isBoxDisplay(selectedTab.getDisplayArea());
+        final float cover = Math.max(covers ? boxWidth : 0f, commandProgress > 0 ? cmdWidth : 0f); //snapped, so the rows don't re-flow every animation frame
+        field.setEndPadding(Math.max(0f, field.getLeft() + field.getWidth() - (x + regionWidth - cover)));
         field.setFieldModifier(0);
     }
 

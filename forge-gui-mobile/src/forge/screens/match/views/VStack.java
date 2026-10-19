@@ -209,8 +209,9 @@ public class VStack extends FDropDown {
         clear();
         displayById.clear();
 
-        float x = MARGINS;
-        float y = MARGINS;
+        final float margins = VPlayerPanel.isCompactLayout() ? 0 : MARGINS; //compact: the cards fill the pane, no gaps above or beside them
+        float x = margins;
+        float y = margins;
         float totalWidth;
         if (Forge.isLandscapeMode()) {
             totalWidth = Forge.getScreenWidth() * 0.35f;
@@ -218,7 +219,7 @@ public class VStack extends FDropDown {
         else {
             totalWidth = maxWidth - MatchController.getView().getTopPlayerPanel().getTabs().iterator().next().getRight(); //keep avatar, life total, and hand tab visible to left of stack
         }
-        float width = totalWidth - 2 * MARGINS;
+        float width = totalWidth - 2 * margins;
 
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
@@ -226,7 +227,7 @@ public class VStack extends FDropDown {
 
             float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);
-            return new ScrollBounds(totalWidth, y + height + MARGINS);
+            return new ScrollBounds(totalWidth, y + height + margins);
         }
         else {
             //iterate stack in reverse so most recent items appear on bottom
@@ -262,7 +263,7 @@ public class VStack extends FDropDown {
             scrollIntoView(activeItem); //scroll active display into view
             revealTargetZones();
         }
-        return new ScrollBounds(totalWidth, y + MARGINS);
+        return new ScrollBounds(totalWidth, y + margins);
     }
 
     protected void updateSizeAndPosition() {
@@ -290,6 +291,15 @@ public class VStack extends FDropDown {
     @Override
     protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
+    }
+
+    //frosted cards sit on translucent glass over any battlefield, so the card name gets a thin dark outline
+    private static void drawStackText(Graphics g, String text, int nameLength, FSkinFont font, Color color, float x, float y, float w, float h, float visibleY, float visibleH, boolean wrap, int align, boolean center) {
+        if (VPlayerPanel.isFrosted()) {
+            textRenderer.drawTextShadowed(g, text, nameLength, font, color, x, y, w, h, visibleY, visibleH, wrap, align, center);
+        } else {
+            textRenderer.drawText(g, text, font, color, x, y, w, h, visibleY, visibleH, wrap, align, center);
+        }
     }
 
     private static Color glassTint(Color c, float k) {
@@ -561,7 +571,7 @@ public class VStack extends FDropDown {
                 newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
                 newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
                 newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
-                textRenderer.drawText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""),
+                drawStackText(g, name + " " + (name.length() > 1 ? cId : "") + optionalCostString + "\n" + (newtext.length() > 1 ? newtext : ""), name.length(),
                     FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
 
             } else {
@@ -571,7 +581,7 @@ public class VStack extends FDropDown {
                 newtext = TextUtil.fastReplace(trimSecond, " "+cId, name);
 
                 if(newtext.equals("\n"+name))
-                    textRenderer.drawText(g, name + " " + cId + optionalCostString, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                    drawStackText(g, name + " " + cId + optionalCostString, name.length(), FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 else {
                     newtext = TextUtil.fastReplace(newtext, "  ", " ");
                     newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext,name+" -","-"), "\n ", "\n");
@@ -580,7 +590,7 @@ public class VStack extends FDropDown {
                     newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
                     newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
                     newtext = TextUtil.fastReplace(newtext, name+name, name);
-                    textRenderer.drawText(g, name+" "+cId + optionalCostString +newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
+                    drawStackText(g, name+" "+cId + optionalCostString +newtext, name.length(), FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 }
             }
             if (!launched) { // replaces the early return
