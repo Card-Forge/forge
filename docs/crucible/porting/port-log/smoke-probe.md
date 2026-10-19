@@ -27,8 +27,7 @@ the plain, rich and tailored boards, the game is played with `Game.Step` from th
 Any card still not cast is then tried on staged boards (`internal/smoke/staged.go`), whose game state is played through
 the engine first: an Aura cast, a creature killed and another cast, two spells or a flashback spell left on the stack, a
 creature dealt 1 damage, tokens, a +1/+1 counter, an opponent's face-down creature, and six combat moments with the
-defender blocking with everything or not at all
-([`m6-r25f-probe-game-state.md`](game-state/m6-r25f-probe-game-state.md)).
+defender blocking with everything or not at all.
 
 | Outcome | Meaning |
 | --- | --- |

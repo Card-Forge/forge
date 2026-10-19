@@ -54,6 +54,15 @@ Rows start with the ChooseSource/Empower batch. Bugs noted before it are only in
 | `AbilityUtils.java:1129-1130` | `Defined$ DefendingPlayer` reads `getCombat()` unguarded, so it throws outside combat | An `error`; no corpus line reaches it | Not filed |
 | `SpellAbilityCondition.java:420-424` | A `ConditionLifeAmount` SVar other than `X` throws | An `error`; no corpus line reaches it | Not filed |
 | `mana_clash.txt:11`, `sword_of_dungeons_dragons.txt:12` | `SVar:RepeatCheck:Number$ 0` / `Number$ 1`: the space makes xCount's `Integer.parseInt` (`AbilityUtils.java:1585-1587`) throw if read. Latent: `RepeatEffect.java:39-52` reads it only after the repeated chain's `StoreSVar` rewrote it | Read after the first repetition as Java; the script value is never read | Not filed |
+| `TextBoxExchangeEffect.java:74-76` | Removes the exchanged traits when an `AsLongAsInPlay` exchange ends, but leaves the two `addEmpty` clear rows `Card.java:4895-4896` wrote, so word changes made before the exchange stay wiped after it (the source comment is a question) | The ending exchange drops its own rows, so earlier word changes return: differs from Java on this one sequence | Not filed |
+| `AbilityUtils.java:3090` | Text-change regex built from the unescaped word with no right boundary: `Red` also rewrites the front of `Reduce` | Reproduced (PORT-7), parity depends on it | Not filed |
+| `VoteEffect.java:93-94` | Removes `realVoter` (the `ControlVote$` player) from a `VotePlayer$ Other` ballot, not the voting player: under a controlled vote each player may vote for themselves and nobody for the controller | That combination returns an error citing the line | Not filed |
+| `SacrificeAllEffect.java:66` | `MayFlashSac` sacrifices by card id (`GameEntity.equals` is id only), so a countered and reanimated spell's new object is sacrificed too | Reproduced, not worked around | Not filed |
+| `AbilityUtils.java:3310,3321` | `playerXCount` Highest/Lowest pass the whole `s`, `/op` included, to `playerXProperty`: the operator applies twice. Latent, no corpus line | Refused, not reproduced | Not filed |
+| `AbilityUtils.java:3257` | `doXMath` `Mod` with a zero operand throws `ArithmeticException`. Latent | Refused | Not filed |
+| `AbilityUtils.java:1584` | `xCount` `Number$` with a non-integer body throws `NumberFormatException`. Latent | Refused | Not filed |
+| `TriggerDamageDoneOnce.java:67-70` | `AttackingPlayer` is the first source's controller of a `HashMap`: undetermined when one entity was hit by several controllers' sources in one damage table | Refused, not reproduced | Not filed |
+| `TriggerRolledDie.java:57-60` | `Number$` branch unboxes a missing `AbilityKey.Number` and throws on a planar roll (`PlanarDice.java:81,87` runs `RolledDie` with `Result` 0, no `Number`). Latent: 0 corpus lines | Planar die roll refused before the roll | Not filed |
 
 ### `ChooseSourceEffect.java:84-89` — `TargetControls$` throws on an empty player list
 

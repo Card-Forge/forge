@@ -1,0 +1,87 @@
+# Port Log — Quirks and deviations
+
+- **Parent:** [`game-state.md`](game-state.md) — `internal/engine`'s Java counterpart and `Not ported yet`
+- **Go:** [`internal/engine`](../../../../crucible/internal/engine)
+
+Every place the engine knowingly matches a Java oddity (PORT-7) or knowingly differs from Java. Reason: a scenario or
+replay that disagrees with the oracle is either one of these rows or a bug; nothing else explains it. A Forge defect
+itself lives in [`../forge-java-defects.md`](../forge-java-defects.md) or
+[`../card-script-defects.md`](../card-script-defects.md); a row here only says what the engine does about it.
+
+New quirk or deviation → one row here, same commit (DOC-12). Landed work beyond that is recorded in code comments
+(`Ported from <File>.java`), tests and `Not ported yet`, not in a narrative note.
+
+## Reproduced from Java (PORT-7)
+
+| Behavior | Java | Go |
+| --- | --- | --- |
+| FlipOntoBattlefield: a spot at index 0 with a right neighbor takes the right neighbor ("leftmost" quirk) | `FlipOntoBattlefieldEffect.java:125-129` | `flipNeighbor`, `flipontobattlefieldeffect.go` |
+| PeekAndReveal clamps `numPeek` to each library in place: a short library shrinks the peek for every later player | `PeekAndRevealEffect` | `peekandrevealeffect.go` |
+| Dig moves picks in reverse pick order before owner ordering | `Collections.reverse` in `DigEffect` | `digeffect.go` |
+| DigUntil "sequential" mode: found and revealed destinations in one zone move every revealed card in reveal order | `DigUntilEffect` | `diguntileffect.go` |
+| ChooseSource: the resolving ability counts as the first stack item, so an `SP$ ChooseSource` offers its own card | `MagicStack.java:572` | `choosesourceeffect.go` |
+| ChooseSource with several choosers: only the last pick stays chosen; `RememberChosen$` keeps all | `setChosenCards` (`:137`) | `choosesourceeffect.go` |
+| Camouflage reads every attacker in the game, not only the defender's (differs from printed text in 3+ players) | `combat.getAttackers()` | `camouflageeffect.go`, ADR-0035 |
+| ChangeTargets with no target at all: resolution ends | `ChangeTargetsEffect` `return` | `changetargetseffect.go` |
+| A lost player passes the initiative, then takes it back (no `return` after the recursive call) | `GameAction.java:2568-2573` | `takeinitiativeeffect.go` |
+| Block validation: the free-blocker loop takes every able free blocker on its first pass and consumes them; lure lines match by prefix in one check, exactly in the other | `validateBlocks`, `hasStartOfKeyword` vs `hasKeyword` | `validateBlocks`, `attackerLureSatisfied`, `blockvalidation.go`; ADR-0024 |
+| A phased-out card has no property unless it starts with `phasedOut`; a bare base type still matches; a negated property reads true | `CardProperty.java:50-56`, `Card.java:5751-5763` | `valid.go` |
+| RestartGame clears five phase command lists, never begin-of-combat's: a pending `Combat$` control grant survives | `RestartGameEffect.java:47-51` | `resetForRestart`, `restartgameeffect.go` |
+| RestartGame resets extra phases, extra turns and turn number only; the upkeep count runs on | `PhaseHandler.java:826-830` | `restartgameeffect.go` |
+| Text change regex: left `\b` only (`Red` rewrites `Reduce`), `non` prefix kept, nothing within 100 characters after `named`, color words lower case then as written, type words case sensitive, SVar/sub-ability names untouched, `LockInText$` locks | `AbilityUtils.java:3090`, `ChangeTextEffect.java:29` | `textwords.go`, `continuous.go` |
+| Layer 8 builds after Layer 7 in a pass: a CDA reading a hidden keyword grant sees the previous pass's | `StaticAbilityContinuous` order | `continuousStaticsAllZones`, `continuouslayers.go` |
+| `CheckSecondSVar$` read only beside `CheckSVar$`; `CharacteristicDefining$` tested for presence, not value | `StaticAbility.java:470-472` | `continuous.go` |
+| Unchosen `ChosenType`/`ChosenColor` token dropped, not the line; `SetColor$ ChosenColor` unchosen adds no color effect | `removeIf` in `StaticAbilityContinuous` | `continuous.go` |
+| `Remove*Types$` apply only when `AddType$` is absent or kept a token; `RemoveType$ ChosenType` dropped when unchosen, never substituted | `StaticAbilityContinuous.java:425-426` | `continuous.go` |
+| Goad never checks host validity: a host that already left leaves the goad in place (Pump and Animate check) | `PumpEffect.java:271`, `AnimateEffect.java:34`, `GoadEffect` | `registerHostBoundEnd`, `goadeffect.go` |
+| Soulbond: leaving frees the partner, but a token keeps its own `pairedWith` | `!c.isRealToken()` | `card.go` |
+| `PlayLand` counts the land drop and fires `LandPlayed` whether or not the land entered | `Player.java:1645-1650` | `PlayLand`, `game.go` |
+| `Count$Presence_<Type>` counts the battlefield as the amount is read, not as the spell was cast | `AbilityUtils.java:2180-2192` | `presenceCount`, `amountheads.go` |
+| `MayFlashSac` sacrifices by card id: a countered and reanimated spell's new object goes too | `SacrificeAllEffect.java:66` | `castoptions.go` |
+| `PumpKeywords$` without `PumpDuration$` on a token copy: the keyword outlives the copy (Loose in the Park) | `TokenEffectBase.java:272` | clone path, `TestClonePumpKeywordsWithoutDurationStayPastTheCopy` |
+| Dragon's Fire, Monstrous Emergence read the chosen or revealed card's power as the cost paid it | `CostPartWithList.java:136-138` | cost LKI list; `check-card` to confirm against rulings |
+| X-named SVar attack cost: Java appends an X shard paid as 0; Go drops the shard, same amount | `CombatUtil.java:266` | `attackcost.go` |
+| `RememberingAttacker$` also forgets an attacker the host remembered before | `removeRemembered` | `Memory.Forget`, `attackcost.go` |
+| Zero attack cost still asks `ConfirmPayCost` and still skips the pair in `legalAttack` | non-null `Cost` | `attackcost.go` |
+| Attack costs already paid are not refunded when the declaration turns illegal | `PhaseHandler.java:577` | `attackcost.go` |
+| `ExcessSVar$` unset (ability returned before `dealDamage`) reads 0 | `AbilityUtils.java:415-423` | `defaultExcessSVar`, `excessdamage.go` |
+| An entry replaced after enters-prepared keeps the copy castable | leaves-play command only | `castspell.go` |
+| Library of Leng, Nephalia Academy shuffle before topdecking (scripts lack `NoShuffle$`) | `ChangeZoneEffect.java:1259` | `changezoneeffect.go` |
+| `Defined$ Registered` keeps lost players | no filter | `defined.go` |
+| `Count$MaxCombatDamageThisTurn`/`MaxOppDamageThisTurn` read before the `DamageThisTurn` branch | `Player.java:822-831` | `amountheads.go` |
+| Target re-check shares one fizzle flag across the chain: one legal target on any link keeps the ability | `MagicStack` resolve | `chaintargets.go` |
+| `Surveil` fires with an empty library | `Player.java:1083` | `control.go` |
+| Param values never read where Java reads presence only: timing restrictions, `FirstCombat$`, `PlayerTurn$`/`NotPlayerTurn$` | `hasParam` | `turn.go`, `trigger.go` |
+| `AddType$ Food,Blood,...` with commas is one subtype named with the commas (Phyrexian Adapter) | `CardType.add` | `continuous.go` |
+
+## Deviations from Java
+
+| Deviation | Java | Why |
+| --- | --- | --- |
+| FlipOntoBattlefield on a non-Aura enchantment spot: error | `FlipOntoBattlefieldEffect.java:109` sweeps every permanent | Forge defect; `flipCandidates` |
+| ChaosEnsues `Defined$` naming two distinct planes: error | `TriggerChaosEnsues.java:43-48` fires neither | Suspected defect, no real card; `chaosEnsuesTriggerMatches` |
+| An ending `ExchangeTextBox` drops its own rows, so earlier word changes return | `TextBoxExchangeEffect.java:74-76` leaves them wiped | Forge defect; `exchangetextboxeffect.go` |
+| Controlled vote with `VotePlayer$ Other`: error | `VoteEffect.java:93-94` removes the wrong player | Forge defect; `voteeffect.go` |
+| SwitchBlock stray block or re-block `ValidBlocked$` trigger: error before anything moves | `SwitchBlockEffect.java:22-25,88,97,103,151,157` | Forge defects; `checkStrayBlocks`, `checkReblockTriggerKeys` |
+| UnlockDoor offers left then right | `Card.java:7991` `HashSet` order | No outcome depends on it; `unlockdooreffect.go` |
+| Power Play with several owners shuffles in seat order | `HashSet` copy shuffled | Java order undefined; `match.go` |
+| Opposition Agent's `FoundSearchingLibrary` line runs first; other `Moved` lines apply to the resulting move | one CR 616 walk | Every order exiles the card; library search replacement |
+| A copy of a sneaked permanent spell is not sneaked; Sneak offered from the hand only, not under a `MayPlay$` grant | copied `AlternativeCost.Sneak` | No corpus card reaches it; `sneak.go` |
+| Animate `Abilities$` grant applied before Layer 6 static grants and removals whatever the timestamps | `StaticAbilityContinuous.java:327-328` removes only older | `animateAbilities`, `animate.go` |
+| `Scry` with `n == 0` skips the player | gates on `cause != null` only | `scryeffect.go` |
+| Exert asked after attack costs, of attackers that paid | `PhaseHandler.java:564-578` folds Exert into the cost | Same outcome; `exertDeclaredAttackers` |
+| Attack re-validation failure returns `*IllegalDeclarationError` | re-prompts in `do ... while` | ADR-0024 |
+| Attack cost payment in declaration order | `Combat.getAttackers()` grouped by defender | Same order with one defender |
+| Attack requirement re-validation reuses pre-tap constraints | `initConstraints` restriction sets | Rebuilding would make tapped attackers unable to attack |
+| Nethergoyf pick short of four types exiles every valid card, no rollback | `HumanCostDecision.java:331-334` cancels the cast | Extra cost paid after mana; `payUnlessParts`, `collectEvidence` |
+| An ability a moved card's new object activates reads the old battlefield object for `ExiledWithSource` | host object per `SpellAbility` | `Ability` has no host object; no real line affected; `battlefieldStamp` |
+| `TriggeredDefender` reads the live combat | trigger-time defender | `defined.go` |
+| SBA deaths after combat damage order in the next APNAP pass | one frozen-stack list (`TriggerHandler.java:264`, `MagicStack.java:599`) | Per-event batches (R9j) |
+| A blocker blocking two attackers fires `Blocks` once per matching attacker | once total | Per-pair `checkBlocksTriggers` |
+| Ward counter target kept off `Targets` (`wardCounters`) | `Defined$ TriggeredSourceSA` | Keeps becomes-target triggers and 608.2b re-check off the spell |
+| Mana pools empty at the top of `beginPhase`; no mana burn | `PhaseHandler.onPhaseEnd` | Same cadence; mana burn left the rules in 2010; `emptyManaPools` |
+| Top of library is zone index 0 | design choice, no Java fact | `turn.go` |
+| `Planeswalk` `Optional$ True` resolves through `ConfirmEffect` | — | ADR-0029 listed it to reject; 2 real lines |
+| `MayLookAt$` resolves to nothing | adds lookers | Engine is omniscient; `lookateffect.go` |
+| Aura that loses every ability stays legal; several `Enchant` keywords read the first; a reanimated host keeps the Aura on the same ID, no second `Attached` | `Card.java:6979`, every keyword must hold, new object | `cleanupDanglingAttachments`, `enchantSpec` |
+| A chained sub-ability is never optional (`OptionalDecider$` on a `DB$` SVar) | sub-ability's own "may" | Gap, `resolveSubAbility` |

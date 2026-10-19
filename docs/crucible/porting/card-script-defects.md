@@ -22,8 +22,8 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `goblin_razerunners` | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
 | `flamewave_invoker` | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
 | `peace_talks` | `StaticAbilities$` names `STCantTargetPlayer`, never defined | Effect trait compilation | pending |
-| `ludevic_necrogenius_olag_ludevics_hubris` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color | Clone port (`effects-clone.md`) | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `taskmaster_mercenary_mimic` | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`) | Clone port (`effects-clone.md`) | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
+| `ludevic_necrogenius_olag_ludevics_hubris` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color | Clone port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
+| `taskmaster_mercenary_mimic` | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`) | Clone port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
 | `captured_by_the_consulate` | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`) | ChangeTargets port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
 | `mount_keralia` | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0 | Planeswalk port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
 | `tooth_claw_and_tail` | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
@@ -39,6 +39,7 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 | `wilt_leaf_liege` (line 8) | `DefinedPlayer$ ReplacedPlayer`: `ReplaceMoved.setReplacingObjects` (`ReplaceMoved.java:120-124`) sets no Player, so the hidden ChangeZone has no fetcher and moves nothing; the replaced discard leaves it in hand | Discard replacements (R9k) | Not filed |
 | `volcanic_offering` (line 5) | `RememberTargets$` on the `DBDestroyLand` sub-ability: `AbilityUtils.handleRemembering` runs on the stack's root alone (`MagicStack.java:646`), so the opponent-chosen land is never remembered or destroyed | `RememberTargets$` port (R9o) | Not filed |
 | `urza_academy_headmaster` (`Destroy11U`) | `RememberTargets$` on a `GenericChoice` choice: never remembered (same site), so "return each card put into a graveyard this way" returns nothing | `RememberTargets$` port (R9o) | Not filed |
+| `phyrexian_adapter` | `AddType$ Food,Blood,Clue,Treasure,Powerstone` (line 6): a comma list where every other line uses `" & "`; `CardType.add` stores one subtype named with the commas | Layer 4 port | Not filed |
 
 Every row but `peace_talks`, `____________trespasser`, `turtle_tracks` and the rows marked Not filed is merged upstream.
 Turtle Tracks, Library of Leng and Nephalia Academy are reproduced as Java runs them (oracle parity, the shuffle
