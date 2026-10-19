@@ -102,6 +102,15 @@ type unlessCost struct {
 	// type exiled from the payer's graveyard (CostExile).
 	exileGraveN    int
 	exileGraveSpec string
+	// exileGraveAll is ExileFromGrave<N/All>: the payer's whole graveyard,
+	// payable when empty (CostExile.canPay answers true for "All" before any
+	// count, CostExile.java:178-179). exileGraveTop is
+	// ExileFromGrave<1/Card.TopGraveyardCreature>: only the graveyard's last
+	// creature qualifies (CardProperty.java:582-587).
+	exileGraveAll, exileGraveTop bool
+	// discardRandomN is Discard<N/Random>: N cards of the hand at random, no
+	// choice (CostDiscard's "Random" type).
+	discardRandomN int
 	// exileTypesN/exileTypesSpec are ExileFromGrave<X/Type+withTypesGE<N>>:
 	// any number of the type, at least one, exiled from the payer's graveyard
 	// with N or more card types among them (Nethergoyf's escape). Only
@@ -217,6 +226,12 @@ func parseUnlessCostX(text string, x int, hasX bool) (unlessCost, bool) {
 			uc.energyN += n
 		case p.Name == "Discard" && p.Field(1) == "Card":
 			uc.discardN += n
+		case p.Name == "Discard" && p.Field(1) == "Random" && uc.discardRandomN == 0:
+			uc.discardRandomN = n
+		case p.Name == "ExileFromGrave" && p.Field(1) == "All" && !uc.exileGraveAll && uc.exileGraveN == 0:
+			uc.exileGraveAll = true
+		case p.Name == "ExileFromGrave" && p.Field(1) == "Card.TopGraveyardCreature" && uc.exileGraveN == 0 && !uc.exileGraveAll:
+			uc.exileGraveN, uc.exileGraveSpec, uc.exileGraveTop = n, "Creature", true
 		case p.Name == "Discard" && uc.discardTypeN == 0 && chosenCardSpecResolvable(p.Field(1)):
 			uc.discardTypeN, uc.discardTypeSpec = n, p.Field(1)
 		case p.Name == "SubCounter" && uc.subCounterN == 0 && p.Field(1) != "" && (p.Field(2) == "" || p.Field(2) == "CARDNAME" || p.Field(2) == "NICKNAME"):
@@ -449,7 +464,7 @@ func (g *Game) unlessPayable(pid PlayerID, source CardID, uc unlessCost) bool {
 	candidates := g.unlessSacCandidates(pid, source, uc)
 	returnable := g.unlessReturnCandidates(pid, source, uc)
 	return uc.lifeN <= g.Player(pid).Life && (uc.lifeN == 0 || !g.cantPayLife(pid, false, causeNone)) && uc.energyN <= g.Player(pid).Counters.Count(Energy) &&
-		uc.discardN <= len(hand) && uc.sacN <= len(candidates) && uc.returnN <= len(returnable) &&
+		uc.discardN <= len(hand) && uc.discardRandomN <= len(hand) && uc.sacN <= len(candidates) && uc.returnN <= len(returnable) &&
 		(uc.drawN == 0 || len(g.unlessDrawers(pid, source, uc)) > 0) && g.unlessRevealable(pid, source, uc) &&
 		g.unlessCounterable(source, uc) && g.unlessCardsPayable(pid, source, uc) && g.extraPartsPayable(pid, source, uc)
 }
@@ -535,7 +550,7 @@ func chosenCardSpecResolvable(spec string) bool {
 // graveyard cards to exile, permanents to tap, graveyard mana value for
 // evidence, a card to put the counters on and a player who may get counters.
 func (g *Game) unlessCardsPayable(pid PlayerID, source CardID, uc unlessCost) bool {
-	if uc.exileGraveN > 0 && len(g.costCandidates(pid, source, false, Graveyard, uc.exileGraveSpec)) < uc.exileGraveN {
+	if uc.exileGraveN > 0 && len(g.exileGraveOptions(pid, source, uc)) < uc.exileGraveN {
 		return false
 	}
 	if uc.exileTypesN > 0 {
@@ -706,6 +721,21 @@ func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid P
 			}
 		}
 	}
+	if uc.discardRandomN > 0 {
+		// Aggregates.random over the hand (PlaySpellAbility.java:335-339).
+		var chosen []CardID
+		for _, i := range g.randomSample(len(hand), uc.discardRandomN) {
+			chosen = append(chosen, hand[i])
+		}
+		discardCards(g, controller, chosen, pid)
+		if rec != nil {
+			for _, id := range chosen {
+				if g.Card(id).Zone != Hand {
+					rec.discarded = append(rec.discarded, id)
+				}
+			}
+		}
+	}
 	if uc.discardHand {
 		// Discard<N/Hand> (CostDiscard's "Hand" type): the payer discards the
 		// whole hand, no choice, and an empty hand pays it too.
@@ -731,8 +761,14 @@ func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid P
 		}
 	}
 	if uc.exileGraveN > 0 {
-		picks := g.chosenUnlessCards(controller, pid, a.Source, g.costCandidates(pid, a.Source, false, Graveyard, uc.exileGraveSpec), uc.exileGraveN, uc.exileGraveN)
+		picks := g.chosenUnlessCards(controller, pid, a.Source, g.exileGraveOptions(pid, a.Source, uc), uc.exileGraveN, uc.exileGraveN)
 		exiled := g.exileCostCards(controller, a.Source, picks)
+		if rec != nil {
+			rec.exiled = append(rec.exiled, exiled...)
+		}
+	}
+	if uc.exileGraveAll {
+		exiled := g.exileCostCards(controller, a.Source, slices.Clone(g.Zone(Graveyard, pid).Cards()))
 		if rec != nil {
 			rec.exiled = append(rec.exiled, exiled...)
 		}
@@ -896,6 +932,7 @@ func (uc unlessCost) times(n int) (unlessCost, bool) {
 	}
 	uc.lifeN *= n
 	uc.discardN *= n
+	uc.discardRandomN *= n
 	uc.sacN *= n
 	uc.energyN *= n
 	uc.damageN *= n
@@ -1194,4 +1231,15 @@ func (g *Game) nonManaXMax(pid PlayerID, source CardID, text string) int {
 		best = n
 	}
 	return best
+}
+
+// exileGraveOptions are the graveyard cards an ExileFromGrave part of uc may
+// exile: the last creature alone for TopGraveyardCreature, else every card of
+// the spec.
+func (g *Game) exileGraveOptions(pid PlayerID, source CardID, uc unlessCost) []CardID {
+	options := g.costCandidates(pid, source, false, Graveyard, uc.exileGraveSpec)
+	if uc.exileGraveTop && len(options) > 0 {
+		return options[len(options)-1:]
+	}
+	return options
 }

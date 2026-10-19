@@ -247,7 +247,7 @@ func (choice *optionalChoice) add(o optionalCostOption) {
 
 // hasParts reports whether uc names anything beyond mana.
 func (uc unlessCost) hasParts() bool {
-	return uc.lifeN > 0 || uc.energyN > 0 || uc.discardN > 0 || uc.discardHand || uc.sacN > 0 || uc.damageN > 0 ||
+	return uc.lifeN > 0 || uc.energyN > 0 || uc.discardN > 0 || uc.discardRandomN > 0 || uc.exileGraveAll || uc.discardHand || uc.sacN > 0 || uc.damageN > 0 ||
 		uc.drawN > 0 || uc.returnN > 0 || uc.revealN > 0 || uc.addCounterN > 0 || uc.exileGraveN > 0 || uc.tapN > 0 ||
 		uc.evidenceN > 0 || uc.youCounterN > 0 || uc.libN > 0 || uc.removeAnyN > 0 || uc.subCounterN > 0 ||
 		uc.discardTypeN > 0 || uc.movedToGraveN > 0 || uc.forage || uc.exileHandAll || uc.exileEitherN > 0 ||
