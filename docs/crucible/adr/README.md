@@ -55,10 +55,11 @@ Numbers are permanent. Files are never deleted. A superseded ADR keeps its numbe
 | [0042](0042-mana-pool-unit-sources.md)                      | The mana pool records each unit's source card             | Accepted                  |
 | [0043](0043-engine-port-log-records-state-only.md)          | Engine port log records state only                        | Accepted                  |
 | [0044](0044-sticker-state-and-decisions.md)                 | Stickers: compiled sheets, applied list, two decisions    | Accepted                  |
+| [0045](0045-dice-pt-exchange-decisions.md)                  | Dice P/T exchange: set-P/T list, two decisions            | Accepted                  |
 
 ## Numbering
 
-No gap and no missing number: 0001-0044, every number used exactly once. Numbers are allocated when an ADR is written,
+No gap and no missing number: 0001-0045, every number used exactly once. Numbers are allocated when an ADR is written,
 never reserved — the plan lists remaining subjects without numbers for that reason.
 
 The plan's M0 exit gate asked for ADR-0001 through ADR-0011 `Accepted`. The three subjects after it — ports and
