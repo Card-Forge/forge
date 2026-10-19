@@ -7,6 +7,7 @@ import forge.ai.AIOption;
 import forge.ai.AvailableActions;
 import forge.game.GameState;
 import forge.ai.PlayerControllerAi;
+import forge.game.undo.UndoManager;
 import forge.gamemodes.net.ProtocolGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -64,6 +65,7 @@ import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.DrawOfferCoordinator;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.*;
@@ -88,6 +90,7 @@ import forge.model.FModel;
 import forge.trackable.TrackableCollection;
 import forge.util.*;
 import forge.util.collect.FCollection;
+import forge.trackable.TrackableObject;
 import forge.util.collect.FCollectionView;
 
 import io.sentry.Sentry;
@@ -939,6 +942,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        getGame().getUndoManager().barrier("Information revealed");
         yieldController.maybeInterruptOnReveal();
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
@@ -990,7 +994,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         if (toTop.size() < cards.size()) { // the top isn't everything
             for (int i = result.size() - 1; i >= 0 && manipulable.contains(result.get(i)); i--) {
-                toBottom.add(result.get(i));
+                toBottom.add(0, result.get(i));
             }
         }
         return ImmutablePair.of(toTop, toBottom);
@@ -998,6 +1002,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForScry(final CardCollection topN) {
+        getGame().getUndoManager().barrier("Scry");
         final ImmutablePair<CardCollection, CardCollection> remembered = macros().consumeRememberedScry(topN);
         if (remembered != null) {
             return remembered;
@@ -1047,6 +1052,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(final CardCollection topN) {
+        getGame().getUndoManager().barrier("Surveil");
         CardCollection toGrave = null;
         CardCollection toTop = null;
 
@@ -1165,7 +1171,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return cards;
         }
         endTempShowCards();
-        if(topOfDeck)
+        // The card listed first goes nearest the chosen end of the deck, so it must be moved last
+        if(destinationZone.isDeck())
             Collections.reverse(choices);
         CardCollection result = new CardCollection();
         gameCacheMove.addToList(choices, result);
@@ -1600,7 +1607,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 && yieldController.getBoolPref(FPref.UI_SHOW_AUTOTAP_PREVIEW);
 
         if (!showActionable && !showAutoTap) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
 
@@ -1651,7 +1658,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push undeclared, legal attacker candidates. */
     public void pushAttackerCandidates(final Player attackingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
@@ -1667,7 +1674,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     /** Push defenders that could block at least one current attacker. */
     public void pushBlockerCandidates(final Player defendingPlayer, final Combat combat) {
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
-            getGui().clearWeaklySelectable();
+            clearActionableCards();
             return;
         }
         final Set<CardView> result = Sets.newHashSet();
@@ -1695,8 +1702,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
-        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
-                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
@@ -1753,20 +1758,40 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
             getGui().awaitNextInput();
-            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
-
-        netLog.trace("Creating InputPassPriority for player {}", player.getName());
+        final UndoManager undo = getGame().getUndoManager();
+        undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
+        if (!isMacroActive()) {
+            if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
+                undo.barrier("Opponent's turn");
+            } else {
+                undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
+            }
+        }
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
         netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
+        if (undo.consumeRequest()) {            // restore on the GAME thread, not the EDT
+            undo.undo(getGame());
+            return Collections.emptyList();     // mainLoopStep just prompts again
+        }
         return defaultInput.getChosenSa();
     }
 
     @Override
     public boolean playChosenSpellAbility(final SpellAbility chosenSa) {
-        return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
+        // what targeting marks as chosen stays marked until the cost is paid or the cast is cancelled
+        keepTargetsMarked = true;
+        try {
+            return PlaySpellAbility.playSpellAbility(this, player, chosenSa);
+        } finally {
+            keepTargetsMarked = false;
+            if (!keptMarks.isEmpty()) {
+                keptMarks.clear();
+                getGui().setSelection(Selection.NONE);
+            }
+        }
     }
 
     @Override
@@ -1919,6 +1944,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void notifyOfValue(final SpellAbility sa, final GameObject realtedTarget, final String value) {
+        getGame().getUndoManager().barrier("Information revealed");
         yieldController.maybeInterruptOnReveal();
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
@@ -2115,17 +2141,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
         if (getGui().isLibgdxPort()) {
-            CardView cardView;
+            CardView cardView = sa.getCardView();
             try {
-                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
+                //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
+                if (cardView != null && cardView.getImprintedCards().size() == 1)
+                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getTrackableImageKey()));
+                else if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
+                    cardView = CardView.get(sa.getTargetCard());
+                else if (cardView.getZone() == null || cardView.getZone().isHidden()) {
+                    if (!cardView.hasAlternateState()) //don't override if it has alternatestate since it maybe showing alternate view
+                        cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getTrackableImageKey()));
+                }
             } catch (Exception e) {
-                SpellAbilityView spellAbilityView = sa.getView();
-                if (spellAbilityView != null) //updated view
-                    cardView = spellAbilityView.getHostCard();
-                else //fallback
-                    cardView = sa.getCardView();
+                //prevent NPE when overriding the cardView, the getPaperCardFromImageKey can return null making the GUI freeze, reset the view if error happens
+                cardView = sa.getCardView();
             }
-            return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
+            return getGui().confirm(cardView, question.replaceAll("\n", " "));
         }
         final boolean result = InputConfirm.confirm(this, sa, question);
         if (result) {
@@ -2459,6 +2490,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean chooseTargetsFor(final SpellAbility currentAbility) {
+        final boolean result = chooseTargetsForStep(currentAbility);
+        // what was chosen stays marked while later targeting steps follow, and goes away after the last one or a failure;
+        // for a spell being cast it stays up through paying the cost instead (see playChosenSpellAbility)
+        if (result && keepTargetsMarked && !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
+            keptMarks.addAll(TargetingProgress.chosenTargets(currentAbility));
+            // the targeting input cleared its marks when it stopped, before they were kept
+            getGui().setSelection(Selection.ofChosen(keptMarks));
+        }
+        return result;
+    }
+
+    /** True while a spell is being cast: what targeting marks as chosen then stays marked until its cost is paid. */
+    private boolean keepTargetsMarked;
+    private final List<TrackableObject> keptMarks = new ArrayList<>();
+
+    public List<TrackableObject> getKeptMarks() {
+        return keptMarks;
+    }
+
+    private boolean chooseTargetsForStep(final SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(this, currentAbility);
         boolean canFilterMustTarget = true;
 
@@ -2738,12 +2789,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         AchievementCollection.updateAll(this);
     }
 
+    private static UndoManager.Mode undoModeFromPrefs() {
+        final String v = FModel.getPreferences().getPref(FPref.UI_UNDO_MODE);
+        if (ForgeConstants.UNDO_MODE_OFF.equals(v)) { return UndoManager.Mode.OFF; }
+        if (ForgeConstants.UNDO_MODE_SINGLE.equals(v)) { return UndoManager.Mode.SINGLE_STEP; }
+        return UndoManager.Mode.FREE;
+    }
+
     public boolean canUndoLastAction() {
-        if (!getGame().stack.canUndo(player)) {
-            return false;
-        }
-        final Player priorityPlayer = getGame().getPhaseHandler().getPriorityPlayer();
-        return priorityPlayer != null && priorityPlayer == player;
+        if (getGame().getPhaseHandler().getPriorityPlayer() != player) return false;
+        return getGame().getUndoManager().canUndo(player) && inputQueue.getInput() instanceof InputPassPriority;
     }
 
     @Override
@@ -2751,21 +2806,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tryUndoLastAction();
     }
 
+    /** Asks the game thread to rewind to the previous priority prompt; the actual restore happens in chooseSpellAbilityToPlay. */
     public boolean tryUndoLastAction() {
-        if (!canUndoLastAction()) {
-            return false;
-        }
-
-        if (getGame().getStack().undo()) {
-            final Input currentInput = inputQueue.getInput();
-            if (currentInput instanceof InputPassPriority) {
-                // ensure prompt updated if needed
-                currentInput.showMessageInitial();
-            }
-            sendToRemoteClients();
-            return true;
-        }
-        return false;
+        if (!canUndoLastAction()) return false;
+        if (!(inputQueue.getInput() instanceof InputPassPriority inp)) return false;
+        getGame().getUndoManager().requestUndo();
+        inp.restartPrompt();
+        return true;
     }
 
     @Override
@@ -2809,6 +2856,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             macros().addRememberedAction(new SelectCardAction(cardView));
         }
         return selected;
+    }
+
+    @Override
+    public void selectStackItem(final StackItemView item) {
+        if (item == null || !(inputProxy.getInput() instanceof InputSelectStackItems)) {
+            return;
+        }
+        // a stack entry was picked while stack targets are chosen; it is identified by its stack instance, and the
+        // input takes it as that instance's ability
+        for (final SpellAbilityStackInstance si : getGame().getStack()) {
+            if (si.getId() == item.getId()) {
+                inputProxy.selectAbility(si.getSpellAbility());
+                return;
+            }
+        }
     }
 
     @Override
@@ -2943,17 +3005,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
             final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
             invokeThenSend(() -> abMana.produceMana(null));
-        }
-
-        @Override
-        public void rollbackPhase() {
-            final Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
-            if (pPriority == null) {
-                getGui().message(localizer.getMessage("lblNoPlayerPriorityGameStateCannotBeSetup"));
-                return;
-            }
-            if (getGui().getGamestate() != null)
-                getGui().getGamestate().applyToGame(getGame());
         }
 
         private GameState createGameStateObject() {
@@ -3876,6 +3927,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public void autoPassUntilEndOfTurn() {
         yieldController.setAutoPassUntilEndOfTurn(true);
+        if (isRemoteClient()) getGui().applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(getLocalPlayerView(), true));
         getGui().updateAutoPassPrompt();
     }
 

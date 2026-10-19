@@ -52,6 +52,11 @@ public class VManaPool extends VDisplayArea {
         return totalMana;
     }
 
+    /** @return how many mana icons the pool shows, so the alternate layout can size its row */
+    public int getLabelCount() {
+        return manaLabels.size();
+    }
+
     @Override
     public void update() {
         totalMana = 0;
@@ -67,7 +72,17 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
-        if (Forge.isLandscapeMode() && (!Forge.altZoneTabs || !"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))) {
+        if (Forge.isLandscapeMode() && VPlayerPanel.isAltZoneLayout()) {
+            //alternate landscape layout: one horizontal row of icons, each with its count underneath
+            float labelWidth = visibleWidth / manaLabels.size();
+            if (VPlayerPanel.isCompactLayout()) { labelWidth = Math.min(labelWidth, visibleHeight); } //the compact box spans the panel, keep the icons together
+            float mod = labelWidth * 0.2f;
+            if (VPlayerPanel.isCompactLayout()) { x = Math.max(0f, (visibleWidth - labelWidth * manaLabels.size()) / 2); } //centered in the box
+            for (ManaLabel label : manaLabels) {
+                label.setBounds(x + mod, y + mod, labelWidth - mod, visibleHeight - mod);
+                x += labelWidth;
+            }
+        } else if (Forge.isLandscapeMode()) {
             float labelWidth = visibleWidth / 2;
             float labelHeight = visibleHeight / 3;
 
@@ -146,18 +161,17 @@ public class VManaPool extends VDisplayArea {
             if (h > maxImageHeight) {
                 h /= 2;
             }
-            float modifier = Forge.isHorizontalTabLayout() ? 0.7f : 1f;
-            float w = image.getWidth() * h * modifier / image.getHeight();
+            float w = image.getWidth() * h / image.getHeight();
             while (w > getWidth()) {
                 h /= 2;
-                w = image.getWidth() * h * modifier / image.getHeight();
+                w = image.getWidth() * h / image.getHeight();
             }
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
 
             if (isHovered())
                 g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, 0, getWidth(), getHeight());
-            g.drawImage(image, x, y, w, Forge.isHorizontalTabLayout() ? w : h);
+            g.drawImage(image, x, y, w, h);
 
             x = 0;
             y += h + gapY;

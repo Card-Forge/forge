@@ -127,6 +127,14 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
         percentMode = percentMode0;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     public int getMaximum() {
         return maximum;
     }

@@ -52,9 +52,9 @@ public class Dice3D implements Disposable {
     private static final float[] KEY_DIR = { -0.5f, -0.8f, -1f };   // direction the light travels (from upper right)
     private static final float FILL_LIGHT = 0.2f;                    // 0 = off; soft light from the other side
     private static final float[] FILL_DIR = { 0.7f, 0.2f, -0.5f };
-    private static final float SPECULAR = 0.15f;                     // 0 = fully matte, ~0.5 = polished
-    private static final float SHININESS = 12f;                      // low = broad sheen, high = tight glint
-    private static final float[] TINT = { 1f, 1f, 1f };              // multiplies the texture, e.g. 0.95, 0.9, 0.8 = warmer
+    private static final float SPECULAR = 0.05f;                     // 0 = fully matte, ~0.5 = polished
+    private static final float SHININESS = 5f;                      // low = broad sheen, high = tight glint
+    private static final float[] TINT = { 0.8f, 0.8f, 0.8f };              // multiplies the texture, e.g. 0.95, 0.9, 0.8 = warmer
 
     /** d6 value (index 0 = value 1) -> cube face index; opposite faces add up to 7. */
     public static final int[] D6_FACE = { 0, 2, 4, 5, 3, 1 };
@@ -190,7 +190,7 @@ public class Dice3D implements Disposable {
                 }
             } else {
                 // Safe fallback color tint if the .png file is accidentally deleted or missing
-                pm.setColor(0.96f, 0.96f, 0.96f, 1f);
+                pm.setColor(0.6f, 0.6f, 0.6f, 1f);
                 pm.fill();
             }
 
@@ -218,11 +218,11 @@ public class Dice3D implements Disposable {
                             Math.round(side), Math.round(side));
                 } else if (labels != null && labels[f] > 0) {
                     float glyphH = s.inRadius[f] * k * (loc.length == 3 ? 0.9f : 1.1f);
-                    pm.setColor(Color.BLACK);
+                    pm.setColor(Color.WHITE);
                     drawNumber(pm, labels[f], cx, cy, glyphH);
                 }
 
-                pm.setColor(0.65f, 0.65f, 0.65f, 1f);
+                pm.setColor(0.15f, 0.15f, 0.15f, 1f);
                 for (int i = 0; i < loc.length; i++) {
                     int j = (i + 1) % loc.length;
                     stroke(pm, px[2 * i], px[2 * i + 1], px[2 * j], px[2 * j + 1], line);

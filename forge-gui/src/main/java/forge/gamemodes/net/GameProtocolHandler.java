@@ -34,7 +34,10 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
-        netLog.info("Received: {}", msg);
+        // NetworkGuiGame.applyDelta logs each delta itself
+        if (!(msg instanceof GuiGameEvent delta && delta.getMethod() == ProtocolMethod.applyDelta)) {
+            netLog.info("Received: {}", msg);
+        }
         if (msg instanceof ReplyEvent event) {
             getReplyPool(ctx).complete(event.getIndex(), event.getReply());
         } else if (msg instanceof GuiGameEvent event) {
@@ -80,7 +83,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 final long queueDelayMs = startMs - receiveTimeMs;
                 if (returnType.equals(Void.TYPE)) {
                     try {
-                        method.invoke(toInvoke, args);
+                        method.invoke(protocolMethod.receiver(toInvoke), args);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
                         netLog.error("Unknown protocol method {} args={}", methodName, describeArgs(args));
                     } catch (final InvocationTargetException e) {
@@ -91,7 +94,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 } else {
                     Serializable reply = null;
                     try {
-                        final Object theReply = method.invoke(toInvoke, args);
+                        final Object theReply = method.invoke(protocolMethod.receiver(toInvoke), args);
                         if (theReply instanceof Serializable) {
                             protocolMethod.checkReturnValue(theReply);
                             reply = (Serializable) theReply;

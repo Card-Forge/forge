@@ -15,6 +15,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.TextBounds;
+import forge.util.Utils;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
@@ -574,6 +575,21 @@ public class TextRenderer {
         return textBounds;
     }
 
+    private static final Color SHADOW_COLOR =  new Color(50f, 50f, 50f, 0.4f);
+    private boolean shadow; //draws a thin dark outline behind the text, for text over translucent backgrounds
+    private int shadowLimit; //only the first this many characters get the outline
+    private boolean shadowNow; //the piece being drawn is inside that limit
+
+    public void drawTextShadowed(Graphics g, String text, int shadowChars, FSkinFont skinFont, Color color, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, int horzAlignment, boolean centerVertically) {
+        shadow = true;
+        shadowLimit = shadowChars;
+        try {
+            drawText(g, text, skinFont, color, x, y, w, h, visibleStartY, visibleHeight, wrap0, horzAlignment, centerVertically);
+        } finally {
+            shadow = false;
+        }
+    }
+
     public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, int horzAlignment, boolean centerVertically) {
         drawText(g, text, skinFont, skinColor.getColor(), x, y, w, h, visibleStartY, visibleHeight, wrap0, horzAlignment, centerVertically);
     }
@@ -605,13 +621,19 @@ public class TextRenderer {
             visibleStartY -= y; //subtract y to make calculation quicker
             float visibleEndY = visibleStartY + visibleHeight;
 
+            int consumed = 0;
             for (Piece piece : pieces) {
+                final int start = consumed;
+                if (piece instanceof TextPiece) {
+                    consumed += ((TextPiece) piece).text.length();
+                }
                 if (piece.y + piece.h < visibleStartY) {
                     continue;
                 }
                 if (piece.y >= visibleEndY) {
                     break;
                 }
+                shadowNow = shadow && start < shadowLimit;
                 piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
             }
         } catch (Exception e) {
@@ -653,6 +675,12 @@ public class TextRenderer {
             }
             else if (inReminderText) {
                 color = FSkinColor.alphaColor(color, ALPHA_COMPOSITE);
+            }
+            if (shadowNow) {
+                final float d = Math.max(1f, Utils.scale(0.75f));
+                g.drawText(text, font, SHADOW_COLOR, x + offsetX + d, y + offsetY + d, w, h, false, Align.left, false);
+                g.drawText(text, font, SHADOW_COLOR, x + offsetX - d, y + offsetY + d, w, h, false, Align.left, false);
+                g.drawText(text, font, SHADOW_COLOR, x + offsetX, y + offsetY - d, w, h, false, Align.left, false);
             }
             g.drawText(text, font, color, x + offsetX, y + offsetY, w, h, false, Align.left, false);
         }

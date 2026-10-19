@@ -104,6 +104,9 @@ public class Assets implements Disposable {
     private GifAnimation gifAnimation;
     private boolean isDisposed = false;
     private int miniMapID;
+    private String transformAtlasPath;
+    private TextureAtlas transformAtlas;
+    private boolean transformAtlasFailed;
     private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
     private static final String COUNTER_FONT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
 
@@ -152,7 +155,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, coinHead, coinTail,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture, transformAtlas);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -507,6 +510,45 @@ public class Assets implements Disposable {
             coinTail = getTexture(getDefaultSkinFile("coin_tails.png"));
         }
         return coinTail;
+    }
+
+    public TextureAtlas getTransformAtlas() {
+        if (isDisposed || transformAtlasFailed)
+            return null;
+        try {
+            if (transformAtlasPath == null && transformAtlas == null) {
+                FileHandle file = getDefaultSkinFile("sprite_transform.atlas");
+                if (file == null || !file.exists()) {
+                    transformAtlasFailed = true;
+                    return null;
+                }
+                if (FileType.Absolute.equals(file.type())) {
+                    transformAtlasPath = file.path();
+                } else { //inside an apk or jar, the asset manager can't see it
+                    transformAtlas = new TextureAtlas(file);
+                    smoothAtlas(transformAtlas);
+                }
+            }
+            if (transformAtlas != null)
+                return transformAtlas;
+            TextureAtlas atlas = manager().get(transformAtlasPath, TextureAtlas.class, false);
+            if (atlas == null) {
+                manager().load(transformAtlasPath, TextureAtlas.class);
+                manager().finishLoadingAsset(transformAtlasPath);
+                atlas = manager().get(transformAtlasPath, TextureAtlas.class);
+                smoothAtlas(atlas);
+            }
+            return atlas;
+        } catch (Exception e) {
+            transformAtlasFailed = true;
+            System.err.println("Failed to load sprite_transform.atlas: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private void smoothAtlas(TextureAtlas atlas) {
+        for (Texture t : atlas.getTextures())
+            t.setFilter(getTextureFilter().minFilter, getTextureFilter().magFilter);
     }
 
     public Texture getHolofoil() {

@@ -5,6 +5,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.DrawOfferMessage;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
@@ -83,6 +84,11 @@ public class NetGameController implements IGameController {
     @Override
     public void selectAbility(final SpellAbilityView sa) {
         send(ProtocolMethod.selectAbility, sa);
+    }
+
+    @Override
+    public void selectStackItem(final StackItemView item) {
+        send(ProtocolMethod.selectStackItem, item);
     }
 
     @Override
@@ -200,6 +206,8 @@ public class NetGameController implements IGameController {
         return macros;
     }
     public class NetMacroSystem implements IMacroSystem {
+        private volatile State state = new State(false, false, false);
+
         @Override
         public void addRememberedAction(PlayerAction action) {
             // DO i need to send this?
@@ -214,6 +222,25 @@ public class NetGameController implements IGameController {
         public void nextRememberedAction() {
             send(ProtocolMethod.nextRememberedAction);
         }
+
+        @Override
+        public void repeatRememberedActions() {
+            send(ProtocolMethod.repeatRememberedActions);
+        }
+
+        @Override
+        public void applyState(final State state) {
+            this.state = state;
+        }
+
+        @Override
+        public boolean isRecording() { return state.recording(); }
+
+        @Override
+        public boolean isReplaying() { return state.replaying(); }
+
+        @Override
+        public boolean hasRememberedActions() { return state.hasActions(); }
 
         @Override
         public String playbackText() {

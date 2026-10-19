@@ -5,9 +5,9 @@ public class NoSoundClip implements IAudioClip {
 
     @Override
     public void play(float value) { }
+
     @Override
     public boolean isDone() { return false; }
-
 
     @Override
     public void stop() { }

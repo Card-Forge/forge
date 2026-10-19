@@ -18,7 +18,7 @@ public class GoadAi extends SpellAbilityAi {
         final Game game = source.getGame();
 
         if (sa.usesTargeting()) {
-            List<Card> goadable = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+            List<Card> goadable = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
 
             if (goadable.isEmpty())
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -94,7 +94,10 @@ public class GoadAi extends SpellAbilityAi {
                     return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
                 }
             } else {
-                List<Card> list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+                List<Card> list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+                if (list.isEmpty()) {
+                    list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+                }
 
                 if (list.isEmpty())
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
