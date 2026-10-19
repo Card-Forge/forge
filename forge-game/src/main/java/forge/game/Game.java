@@ -234,13 +234,19 @@ public class Game {
     }
 
     public CardCollectionView copyLastState(ZoneType type) {
-        CardCollection result = new CardCollection();
-        Map<Integer, Card> cachedMap = Maps.newHashMap();
+        final CardCollection result = new CardCollection(0);
+        final Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Player p : getPlayers()) {
-            result.addAll(p.getZone(type).getLKICopy(cachedMap));
+            final Collection<Card> copy = p.getZone(type).getLKICopy(cachedMap).getCards();
+            final int s = copy.size();
+            if (s > 0) {
+                result.ensureCapacity(result.size() + s);
+                result.addAll(copy);
+            }
         }
         return result;
     }
+
 
     public CardCollectionView copyLastStateBattlefield() {
         return copyLastState(ZoneType.Battlefield);
@@ -626,32 +632,120 @@ public class Game {
             return getStackZone().getCards();
         }
 
-        CardCollection cards = new CardCollection();
-        for (final Player p : getPlayers()) {
-            cards.addAll(p.getCardsIn(zone, false));
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection cards = new CardCollection(0);
+
+        for (int pi = 0; pi < playerCount; pi++) {
+            final Collection<Card> pc = players.get(pi).getCardsIn(zone, false);
+            final int s = pc.size();
+            if (s > 0) {
+                cards.ensureCapacity(cards.size() + s);
+                cards.addAll(pc);
+            }
         }
         return cards;
     }
 
+    // cached: ZoneType.values() clones the array on every call
+    private static final ZoneType[] ALL_ZONE_TYPES = ZoneType.values();
+
+    private int estimateCardsIn(final ZoneType z, final PlayerCollection players, final int playerCount) {
+        if (z == ZoneType.Stack) {
+            return getStackZone().getCards().size();
+        }
+        int size = 0;
+        for (int i = 0; i < playerCount; i++) {
+            size += players.get(i).getCardsIn(z).size();
+        }
+        return size;
+    }
+
+    private void addCardsIn(final CardCollection cards, final ZoneType z, final PlayerCollection players, final int playerCount) {
+        if (z == ZoneType.Stack) {
+            cards.addAll(getStackZone().getCards());
+            return;
+        }
+        for (int i = 0; i < playerCount; i++) {
+            cards.addAll(players.get(i).getCardsIn(z));
+        }
+    }
+
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
-        CardCollection cards = new CardCollection();
+        if (zones == null) {
+            return CardCollection.EMPTY;
+        }
+
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+
+        if (zones instanceof EnumSet<?>) {
+            final Set<ZoneType> zoneSet = (Set<ZoneType>) zones;
+            int enumEstimate = 0;
+            for (final ZoneType z : ALL_ZONE_TYPES) {
+                if (zoneSet.contains(z)) {
+                    enumEstimate += estimateCardsIn(z, players, playerCount);
+                }
+            }
+            final CardCollection enumCards = new CardCollection(enumEstimate);
+            for (final ZoneType z : ALL_ZONE_TYPES) {
+                if (zoneSet.contains(z)) {
+                    addCardsIn(enumCards, z, players, playerCount);
+                }
+            }
+            return enumCards;
+        }
+
+        final CardCollection cards = new CardCollection(0);
+
         for (final ZoneType z : zones) {
             if (z == ZoneType.Stack) {
-                cards.addAll(getStackZone().getCards());
+                final Collection<Card> stack = getStackZone().getCards();
+                if (!stack.isEmpty()) {
+                    cards.ensureCapacity(cards.size() + stack.size());
+                    cards.addAll(stack);
+                }
                 continue;
             }
-            // adding each player's zone to the result directly avoids building a collection per zone
-            for (final Player p : getPlayers()) {
-                cards.addAll(p.getCardsIn(z));
+
+            for (int pi = 0; pi < playerCount; pi++) {
+                final Collection<Card> playerCards = players.get(pi).getCardsIn(z);
+                final int s = playerCards.size();
+                if (s > 0) {
+                    cards.ensureCapacity(cards.size() + s);
+                    cards.addAll(playerCards);
+                }
             }
         }
         return cards;
     }
 
     public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
-        CardCollection cards = new CardCollection();
+        if (p == null || zones == null) {
+            return CardCollection.EMPTY;
+        }
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection cards = new CardCollection(0);
+
         for (final ZoneType z : zones) {
-            cards.addAll(getCardsIncludePhasingIn(z));
+            if (z == ZoneType.Stack) {
+                final Collection<Card> stack = getStackZone().getCards();
+                if (!stack.isEmpty()) {
+                    cards.ensureCapacity(cards.size() + stack.size());
+                    cards.addAll(stack);
+                }
+                continue;
+            }
+
+            for (int pi = 0; pi < playerCount; pi++) {
+                final Collection<Card> pc = players.get(pi).getCardsIn(z, false);
+                final int s = pc.size();
+                if (s > 0) {
+                    cards.ensureCapacity(cards.size() + s);
+                    cards.addAll(pc);
+                }
+            }
         }
         return CardLists.filter(cards, CardPredicates.isOwner(p));
     }
@@ -669,9 +763,17 @@ public class Game {
     }
 
     public CardCollectionView getColoredCardsInPlay(final byte color) {
-        final CardCollection cards = new CardCollection();
-        for (Player p : getPlayers()) {
-            cards.addAll(p.getColoredCardsInPlay(color));
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection cards = new CardCollection(0);
+
+        for (int pi = 0; pi < playerCount; pi++) {
+            final Collection<Card> pc = players.get(pi).getColoredCardsInPlay(color);
+            final int s = pc.size();
+            if (s > 0) {
+                cards.ensureCapacity(cards.size() + s);
+                cards.addAll(pc);
+            }
         }
         return cards;
     }
@@ -794,15 +896,38 @@ public class Game {
         visitor.visitAll(getStackZone().getCards());
     }
     public CardCollectionView getCardsInGame() {
-        final CardCollection all = new CardCollection();
-        Visitor<Card> visitor = new Visitor<Card>() {
-            @Override
-            public boolean visit(Card card) {
-                all.add(card);
-                return true;
-            }
-        };
-        forEachCardInGame(visitor);
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection all = new CardCollection(0);
+
+        for (int pi = 0; pi < playerCount; pi++) {
+            Collection<Card> c;
+
+            c = players.get(pi).getZone(ZoneType.Graveyard).getCards();
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+
+            c = players.get(pi).getZone(ZoneType.Hand).getCards();
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+
+            c = players.get(pi).getZone(ZoneType.Library).getCards();
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+
+            c = players.get(pi).getZone(ZoneType.Battlefield).getCards(false);
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+
+            c = players.get(pi).getZone(ZoneType.Exile).getCards();
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+
+            c = players.get(pi).getCardsIn(ZoneType.PART_OF_COMMAND_ZONE);
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+
+            c = players.get(pi).getInboundTokens();
+            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+        }
+
+        final Collection<Card> stack = getStackZone().getCards();
+        if (!stack.isEmpty()) { all.ensureCapacity(all.size() + stack.size()); all.addAll(stack); }
+
         return all;
     }
 

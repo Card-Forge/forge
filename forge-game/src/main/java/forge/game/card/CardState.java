@@ -48,6 +48,7 @@ import forge.util.ITranslatable;
 import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.collect.FSnapshotTable;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -84,6 +85,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private FCollection<Trigger> triggers = new FCollection<>();
     private FCollection<ReplacementEffect> replacementEffects = new FCollection<>();
     private FCollection<StaticAbility> staticAbilities = new FCollection<>();
+    // bumped after every change of staticAbilities (see getStaticAbilities)
+    private int staticAbilitiesVersion = 0;
+    private volatile StaticAbilitiesCache staticCache = null;
+    // bumped after every change of replacementEffects (see getReplacementEffects)
+    private int replacementEffectsVersion = 0;
+    private volatile ReplacementEffectsCache replacementCacheRules = null;
+    private volatile ReplacementEffectsCache replacementCacheNoRules = null;
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
     private Map<String, SpellAbility> abilityForTrigger = Maps.newHashMap();
@@ -497,22 +505,22 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
         // SpellPermanent only for Original State
         switch(getStateName()) {
-        case Backside:
-            if (!getCard().isModal()) {
+            case Backside:
+                if (!getCard().isModal()) {
+                    return;
+                }
+                break;
+            case Original:
+            case LeftSplit:
+            case RightSplit:
+            case SpecializeB:
+            case SpecializeG:
+            case SpecializeR:
+            case SpecializeU:
+            case SpecializeW:
+                break;
+            default:
                 return;
-            }
-            break;
-        case Original:
-        case LeftSplit:
-        case RightSplit:
-        case SpecializeB:
-        case SpecializeG:
-        case SpecializeR:
-        case SpecializeU:
-        case SpecializeW:
-            break;
-        default:
-            return;
         }
         // if card has left or right split, disable intrinsic Spell for original
         if (getStateName().equals(CardStateName.Original) && (getCard().hasState(CardStateName.LeftSplit) || getCard().hasState(CardStateName.RightSplit))) {
@@ -530,7 +538,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         } else if (type.isPermanent()) {
             if (abilities.anyMatch(s -> (
                     s.isBasicSpell() && s.getSubAbility() == null && (ApiType.PermanentCreature.equals(s.getApi()) || ApiType.PermanentNoncreature.equals(s.getApi())))
-                )) {
+            )) {
                 return;
             }
 
@@ -564,12 +572,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 return list;
             }
             for (MagicColor.Color c : MagicColor.Color.values()) {
-               if (c.getBasicLandType() == null) {
-                   continue;
-               }
-               if (type.hasSubtype(c.getBasicLandType())) {
-                   list.add(state.getLandManaForColor(c));
-               }
+                if (c.getBasicLandType() == null) {
+                    continue;
+                }
+                if (type.hasSubtype(c.getBasicLandType())) {
+                    list.add(state.getLandManaForColor(c));
+                }
             }
             return list;
         }
@@ -715,7 +723,49 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return triggers.add(t);
     }
 
+    /**
+     * The merged static abilities are cached and re-validated on every read: the cache is only reused
+     * while all of its inputs are unchanged, so no caller has to invalidate anything. Inputs:
+     * this state's own list (and the split halves' lists for the Original state), the card's trait
+     * change tables (Layer 3 by text, Layer 6), whether a Layer 4 effect removes intrinsic abilities
+     * (land type changes), and the keyword collection.
+     */
     public final FCollectionView<StaticAbility> getStaticAbilities() {
+        final Object traits = FSnapshotTable.versionOf(card.getChangedCardTraits());
+        final Object traitsByText = FSnapshotTable.versionOf(card.getChangedCardTraitsByText());
+        if (traits == null || traitsByText == null) {
+            return buildStaticAbilities(); // unknown table implementation: never cache
+        }
+
+        CardState left = null;
+        CardState right = null;
+        if (getStateName().equals(CardStateName.Original)) {
+            if (getCard().hasState(CardStateName.LeftSplit))
+                left = getCard().getState(CardStateName.LeftSplit);
+            if (getCard().hasState(CardStateName.RightSplit))
+                right = getCard().getState(CardStateName.RightSplit);
+        }
+        final int leftVersion = left == null ? -1 : left.staticAbilitiesVersion;
+        final int rightVersion = right == null ? -1 : right.staticAbilitiesVersion;
+        final boolean removeIntrinsic = card.hasRemoveIntrinsic();
+        final KeywordCollection keywords = cachedKeywords;
+
+        final StaticAbilitiesCache cache = staticCache;
+        if (cache != null && cache.traits == traits && cache.traitsByText == traitsByText
+                && cache.keywords == keywords && cache.removeIntrinsic == removeIntrinsic
+                && cache.ownVersion == staticAbilitiesVersion
+                && cache.leftVersion == leftVersion && cache.rightVersion == rightVersion) {
+            return cache.value.shareCopy();
+        }
+
+        // the stamps above were taken before building, so a change during the build is caught on the next read
+        final FCollection<StaticAbility> result = buildStaticAbilities();
+        staticCache = new StaticAbilitiesCache(result, traits, traitsByText, keywords, removeIntrinsic,
+                staticAbilitiesVersion, leftVersion, rightVersion);
+        return result.shareCopy();
+    }
+
+    private FCollection<StaticAbility> buildStaticAbilities() {
         FCollection<StaticAbility> result = new FCollection<>(staticAbilities);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -726,17 +776,107 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         card.updateStaticAbilities(result, this);
         return result;
     }
+
+    /** Immutable holder so the cached list and the stamps it was built from are published together. */
+    private static final class StaticAbilitiesCache {
+        final FCollection<StaticAbility> value;
+        final Object traits;
+        final Object traitsByText;
+        final KeywordCollection keywords;
+        final boolean removeIntrinsic;
+        final int ownVersion;
+        final int leftVersion;
+        final int rightVersion;
+
+        StaticAbilitiesCache(FCollection<StaticAbility> value, Object traits, Object traitsByText,
+                             KeywordCollection keywords, boolean removeIntrinsic, int ownVersion, int leftVersion, int rightVersion) {
+            this.value = value;
+            this.traits = traits;
+            this.traitsByText = traitsByText;
+            this.keywords = keywords;
+            this.removeIntrinsic = removeIntrinsic;
+            this.ownVersion = ownVersion;
+            this.leftVersion = leftVersion;
+            this.rightVersion = rightVersion;
+        }
+    }
     public final boolean addStaticAbility(StaticAbility stab) {
-        return staticAbilities.add(stab);
+        final boolean changed = staticAbilities.add(stab);
+        staticAbilitiesVersion++;
+        return changed;
     }
     public final boolean removeStaticAbility(StaticAbility stab) {
-        return staticAbilities.remove(stab);
+        final boolean changed = staticAbilities.remove(stab);
+        staticAbilitiesVersion++;
+        return changed;
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
         return getReplacementEffects(true);
     }
+    /**
+     * Cached and re-validated on every read, like getStaticAbilities. Besides the stamps used there, the
+     * hidden inputs (type flags, counters, ...) are evaluated on every read as a small bitmask and compared.
+     */
     public FCollectionView<ReplacementEffect> getReplacementEffects(boolean rulesHost) {
+        final Object traits = FSnapshotTable.versionOf(card.getChangedCardTraits());
+        final Object traitsByText = FSnapshotTable.versionOf(card.getChangedCardTraitsByText());
+        if (traits == null || traitsByText == null) {
+            return buildReplacementEffects(rulesHost); // unknown table implementation: never cache
+        }
+
+        CardState left = null;
+        CardState right = null;
+        if (getStateName().equals(CardStateName.Original)) {
+            if (getCard().hasState(CardStateName.LeftSplit))
+                left = getCard().getState(CardStateName.LeftSplit);
+            if (getCard().hasState(CardStateName.RightSplit))
+                right = getCard().getState(CardStateName.RightSplit);
+        }
+        final int leftVersion = left == null ? -1 : left.replacementEffectsVersion;
+        final int rightVersion = right == null ? -1 : right.replacementEffectsVersion;
+        final int flags = replacementFlags(rulesHost);
+        final KeywordCollection keywords = cachedKeywords;
+
+        final ReplacementEffectsCache cache = rulesHost ? replacementCacheRules : replacementCacheNoRules;
+        if (cache != null && cache.traits == traits && cache.traitsByText == traitsByText
+                && cache.keywords == keywords && cache.flags == flags
+                && cache.ownVersion == replacementEffectsVersion
+                && cache.leftVersion == leftVersion && cache.rightVersion == rightVersion) {
+            return cache.value.shareCopy();
+        }
+
+        // the stamps above were taken before building, so a change during the build is caught on the next read
+        final FCollection<ReplacementEffect> result = buildReplacementEffects(rulesHost);
+        final ReplacementEffectsCache fresh = new ReplacementEffectsCache(result, traits, traitsByText, keywords,
+                flags, replacementEffectsVersion, leftVersion, rightVersion);
+        if (rulesHost) {
+            replacementCacheRules = fresh;
+        } else {
+            replacementCacheNoRules = fresh;
+        }
+        return result.shareCopy();
+    }
+
+    /** Everything besides the tables, lists and keywords that decides what buildReplacementEffects returns. */
+    private int replacementFlags(final boolean rulesHost) {
+        int flags = card.hasRemoveIntrinsic() ? 1 : 0; // LandTraitChanges
+        final CardTypeView typeWithChanges = getTypeWithChanges(); // LandTraitChanges
+        if (typeWithChanges.isPlaneswalker()) flags |= 2;
+        if (typeWithChanges.isBattle()) flags |= 4;
+        if (typeWithChanges.isSaga()) flags |= 8;
+        if (rulesHost) {
+            if (type.hasSubtype("Adventure")) flags |= 16;
+            if (type.hasSubtype("Omen")) flags |= 32;
+            // Card.updateReplacementEffects
+            if (card.getCounters(CounterEnumType.SHIELD) > 0) flags |= 64;
+            if (card.getCounters(CounterEnumType.STUN) > 0) flags |= 128;
+            if (card.getCounters(CounterEnumType.FINALITY) > 0) flags |= 256;
+        }
+        return flags;
+    }
+
+    private FCollection<ReplacementEffect> buildReplacementEffects(final boolean rulesHost) {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -774,8 +914,34 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
         return result;
     }
+
+    /** Immutable holder so the cached list and the stamps it was built from are published together. */
+    private static final class ReplacementEffectsCache {
+        final FCollection<ReplacementEffect> value;
+        final Object traits;
+        final Object traitsByText;
+        final KeywordCollection keywords;
+        final int flags;
+        final int ownVersion;
+        final int leftVersion;
+        final int rightVersion;
+
+        ReplacementEffectsCache(FCollection<ReplacementEffect> value, Object traits, Object traitsByText,
+                                KeywordCollection keywords, int flags, int ownVersion, int leftVersion, int rightVersion) {
+            this.value = value;
+            this.traits = traits;
+            this.traitsByText = traitsByText;
+            this.keywords = keywords;
+            this.flags = flags;
+            this.ownVersion = ownVersion;
+            this.leftVersion = leftVersion;
+            this.rightVersion = rightVersion;
+        }
+    }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
-        return replacementEffects.add(replacementEffect);
+        final boolean changed = replacementEffects.add(replacementEffect);
+        replacementEffectsVersion++;
+        return changed;
     }
 
     public final boolean hasReplacementEffect(final ReplacementEffect re) {
@@ -933,12 +1099,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
         }
 
+        replacementEffectsVersion++;
         staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
             if (sa.isIntrinsic()) {
                 staticAbilities.add(sa.copy(card, lki));
             }
         }
+        staticAbilitiesVersion++;
         if (lki) {
             this.changedType = source.changedType;
             if (source.landAbility != null) {
@@ -997,12 +1165,14 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 replacementEffects.add(re.copy(card, lki));
             }
         }
+        replacementEffectsVersion++;
 
         for (StaticAbility sa : source.staticAbilities) {
             if (sa.isIntrinsic()) {
                 staticAbilities.add(sa.copy(card, lki));
             }
         }
+        staticAbilitiesVersion++;
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
