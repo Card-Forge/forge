@@ -58,27 +58,27 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome | Cards |
 | --- | ---: |
-| plays | 31,441 |
-| refused | 2,128 |
+| plays | 31,505 |
+| refused | 2,063 |
 | panicked | 0 |
 | hung | 0 |
-| placed | 431 |
+| placed | 432 |
 | inconclusive | 78 |
 
-93.7% of the 33,569 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
+93.9% of the 33,568 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
-[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 95.2% of 8,652 judged.
+[`meta-gauntlet.md`](../../research/meta-gauntlet.md)) it is 95.3% of 8,652 judged.
 
 Largest refusal causes over the full corpus (cards blocked):
 
 | Cards | Refusal |
 | ---: | --- |
 | 34 | `Charm: Defined$ not resolvable` |
-| 30 | `PutCounter: PowerUp$ not resolvable` |
 | 25 | `illegal declaration (CR N.1c): must block an attacker, but has not been assigned to block any [N]` |
-| 23 | `RepeatEach: ChangeZoneTable$ not resolvable` |
-| 22 | `Charm: CanRepeatModes$ not resolvable` |
 | 19 | `ChangeZone: DifferentNames$ not resolvable` |
+| 19 | `ChangeZone: LibraryPosition$ not resolvable` |
+| 19 | `Dig: ExileFaceDown$ not resolvable` |
+| 18 | `Animate: RemoveAllAbilities$ not resolvable` |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 
