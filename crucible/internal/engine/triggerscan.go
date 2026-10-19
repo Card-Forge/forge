@@ -114,7 +114,7 @@ func (g *Game) abilityCastMatches(a *Ability) []Ability {
 				return triggeredObjects{}, false
 			}
 		}
-		return triggeredObjects{card: a.Source}, true
+		return triggeredObjects{card: a.Source, activator: a.Controller}, true
 	})
 	return matches
 }
@@ -142,6 +142,30 @@ func (g *Game) cycledMatches(card CardID, pid PlayerID, first bool) []Ability {
 		return triggeredObjects{card: card, player: pid}, true
 	})
 	return matches
+}
+
+// exploresParams are the params an Explores trigger may carry that are
+// evaluated.
+var exploresParams = map[string]bool{
+	"mode": true, "execute": true, "triggerdescription": true, "triggerzones": true, "optionaldecider": true,
+	"secondary": true, "validcard": true, "validexplored": true,
+}
+
+// exploresMatches is ExploreEffect.java:102-106's Explores trigger for one
+// explore of explorer: ValidCard$ the exploring card (even one that left the
+// battlefield), ValidExplored$ the revealed top card, which a library with
+// none cannot satisfy (TriggerExplores.performTest, a null object matches no
+// valid string).
+func (g *Game) exploresMatches(explorer, top CardID) []Ability {
+	return g.scanTriggers([]string{"Explores"}, func(h *Card, _ triggerFace, t *compile.Ability) (triggeredObjects, bool) {
+		if !paramsResolvable(t, exploresParams) || !g.triggerCardMatches(h, t, "ValidCard", g.Card(explorer)) {
+			return triggeredObjects{}, false
+		}
+		if _, ok := t.Param("ValidExplored"); ok && (top == NoCard || !g.triggerCardMatches(h, t, "ValidExplored", g.Card(top))) {
+			return triggeredObjects{}, false
+		}
+		return triggeredObjects{card: explorer}, true
+	})
 }
 
 var unblockedParams = map[string]bool{

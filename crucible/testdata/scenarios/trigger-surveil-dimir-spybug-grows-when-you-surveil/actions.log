@@ -1,0 +1,8 @@
+# Surveil: Consider surveils 1, so Dimir Spybug puts a +1/+1 counter on
+# itself; the surveil keeps Forest on top and Consider then draws it.
+startturn human
+advance 3
+tapformana human 2 U
+queue surveil 4
+castspell human 1
+resolvestack

@@ -1,0 +1,9 @@
+# SpellCastOrCopy (magecraft): casting Lightning Bolt triggers Archmage
+# Emeritus, which resolves above the Bolt and draws a card before the Bolt
+# deals 3 to the AI.
+startturn human
+advance 3
+tapformana human 2 R
+queue targets ai
+castspell human 1
+resolvestack

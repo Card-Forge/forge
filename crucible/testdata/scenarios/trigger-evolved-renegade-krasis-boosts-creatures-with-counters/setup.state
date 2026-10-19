@@ -1,0 +1,4 @@
+humanlife=20
+ailife=20
+humanhand=Hill Giant|Id:1
+humanbattlefield=Mountain|Id:2;Mountain|Id:3;Mountain|Id:4;Mountain|Id:5;Renegade Krasis|Id:6;Grizzly Bears|Id:7|Counters:P1P1=1

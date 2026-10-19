@@ -1,0 +1,9 @@
+# LandPlayed: the AI plays a land, so Burgeoning's controller may put a land
+# card from their hand onto the battlefield (CR 305.1 special action; the
+# trigger then goes on the stack and resolves).
+startturn ai
+advance 3
+queue optionaltrigger true
+queue cardchoice 2
+playland ai 3
+resolvestack

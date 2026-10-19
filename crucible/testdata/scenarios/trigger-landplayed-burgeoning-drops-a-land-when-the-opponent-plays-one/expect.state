@@ -1,0 +1,8 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humanbattlefield=Burgeoning;Forest|Id:2|SummonSick
+ailife=20
+ailandsplayed=1
+aibattlefield=Island|Id:3|SummonSick

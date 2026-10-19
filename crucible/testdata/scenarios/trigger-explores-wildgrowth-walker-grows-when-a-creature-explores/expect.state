@@ -1,0 +1,8 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=23
+humanhand=Plains
+humanbattlefield=Forest|Tapped;Forest|Tapped;Wildgrowth Walker|Counters:P1P1=1;Merfolk Branchwalker|SummonSick
+humanlibrary=Island
+ailife=20

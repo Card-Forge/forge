@@ -1,0 +1,10 @@
+# Explores: Merfolk Branchwalker enters and explores; the revealed Plains is a
+# land, so it goes to hand (no counter on the Branchwalker). Wildgrowth Walker
+# still triggers on the exploring creature: a +1/+1 counter on itself and 3 life.
+startturn human
+advance 3
+tapformana human 2 G
+tapformana human 3 G
+queue paygeneric G
+castspell human 1
+resolvestack

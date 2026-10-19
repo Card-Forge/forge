@@ -1,0 +1,7 @@
+turn=1
+activeplayer=human
+activephase=COMBAT_DECLARE_ATTACKERS
+humanlife=20
+humanbattlefield=Attentive Sunscribe|Tapped
+humanlibrary=Forest;Island
+ailife=20

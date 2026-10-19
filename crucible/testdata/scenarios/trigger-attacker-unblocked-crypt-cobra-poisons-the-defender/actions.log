@@ -1,0 +1,14 @@
+# AttackerUnblocked: Crypt Cobra attacks and is not blocked, so the defender
+# gets a poison counter (CR 508.1 declare blockers, then the trigger resolves);
+# the 3 combat damage still comes off the life total.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+resolvestack
+advance
+advance
+combatdamage

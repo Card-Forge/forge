@@ -1,0 +1,11 @@
+# Blocks: Elite Javelineer blocking deals 1 damage to target attacking
+# creature, which kills the 1/1 attacker before combat damage.
+startturn ai
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks 2=1
+queue targets 1
+declareblockers
+resolvestack

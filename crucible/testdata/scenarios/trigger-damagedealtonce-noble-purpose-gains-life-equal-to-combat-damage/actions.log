@@ -1,0 +1,13 @@
+# DamageDealtOnce: Grizzly Bears deals 2 combat damage, so Noble Purpose's
+# controller gains that much life (TriggerCount$DamageAmount).
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage
+resolvestack

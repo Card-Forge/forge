@@ -18,6 +18,25 @@ func isBecomeMonstrousTrigger(t *compile.Ability) bool {
 // that just became monstrous (CountersPutEffect.java:543-548), over the same
 // battlefield walk checkExertedTriggers makes.
 func (g *Game) checkMonstrousTriggers(controller PlayerController, card CardID) {
+	g.checkCardModeTriggers(controller, card, isBecomeMonstrousTrigger)
+}
+
+// isEvolvedTrigger reports whether t is CR 702.100b's "evolves" shape, Mode$
+// Evolved (TriggerEvolved.java): performTest reads only ValidCard$.
+func isEvolvedTrigger(t *compile.Ability) bool {
+	return strings.EqualFold(t.Name, "Evolved")
+}
+
+// checkEvolvedTriggers fires Mode$ Evolved for the creature that just evolved
+// (Card.java:1823: its evolve ability's +1/+1 counters were put on it).
+func (g *Game) checkEvolvedTriggers(controller PlayerController, card CardID) {
+	g.checkCardModeTriggers(controller, card, isEvolvedTrigger)
+}
+
+// checkCardModeTriggers is the battlefield walk both modes above share: every
+// trigger of mode (isMode) whose ValidCard$ the card satisfies goes on the
+// stack, the way checkExertedTriggers walks it.
+func (g *Game) checkCardModeTriggers(controller PlayerController, card CardID, isMode func(*compile.Ability) bool) {
 	var matches []Ability
 	c := g.Card(card)
 	for _, pid := range g.Players() {
@@ -28,7 +47,7 @@ func (g *Game) checkMonstrousTriggers(controller PlayerController, card CardID) 
 			}
 			for face := range h.triggerFaces {
 				for _, t := range face.Triggers {
-					if !isBecomeMonstrousTrigger(t) {
+					if !isMode(t) {
 						continue
 					}
 					if validCard, ok := t.Param("ValidCard"); ok && !Matches(g, c, valid.Parse(validCard), h.Controller(), host) {

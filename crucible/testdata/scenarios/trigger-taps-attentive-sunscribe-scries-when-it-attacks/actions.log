@@ -1,0 +1,8 @@
+# Taps: attacking taps Attentive Sunscribe (no vigilance), which becomes tapped
+# and scries 1; the scripted scry puts Forest above Island.
+startturn human
+advance 5
+queue scry 3,2
+queue attackers 1
+declareattackers
+resolvestack

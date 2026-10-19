@@ -19,8 +19,9 @@ var exploreUnresolvedParams = [...]string{
 // otherwise the controller may put it into the graveyard (ConfirmEffect)
 // and the explorer, if still on the battlefield, gets a +1/+1 counter.
 //
-// Not ported: the Explore replacement family, the Explores trigger mode,
-// and the per-player "explored this turn" count -- none exist yet.
+// Not ported: the Explore replacement family and the per-player "explored this
+// turn" count -- neither exists yet. Triggered objects: the Explorer is the
+// triggered card; Defined$ TriggeredExplored is not recorded (no corpus line).
 type exploreEffect struct{}
 
 func (exploreEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -54,8 +55,9 @@ func (exploreEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 		pl := c.Controller()
 		for i := 0; i < amount; i++ {
 			revealedLand := false
+			top := NoCard
 			if library := g.Zone(Library, pl).Cards(); len(library) > 0 {
-				top := library[0]
+				top = library[0]
 				if g.Card(top).Type().Has(cardtype.Land) {
 					g.moveByEffect(controller, top, Hand, 0, NoPlayer, false)
 					g.checkChangesZoneAllTriggers(controller, []CardID{top}, Library, Hand)
@@ -69,6 +71,7 @@ func (exploreEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 				// The explorer's controller places (ExploreEffect.java:63, :98).
 				g.addCardCounters(controller, pl, a.Source, id, P1P1, 1)
 			}
+			g.pushTriggeredAbilities(controller, g.exploresMatches(id, top))
 		}
 	}
 	return nil

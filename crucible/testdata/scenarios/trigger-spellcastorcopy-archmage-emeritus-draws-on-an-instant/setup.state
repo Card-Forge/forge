@@ -1,0 +1,5 @@
+humanlife=20
+ailife=20
+humanhand=Lightning Bolt|Id:1
+humanbattlefield=Mountain|Id:2;Archmage Emeritus|Id:3
+humanlibrary=Island|Id:4

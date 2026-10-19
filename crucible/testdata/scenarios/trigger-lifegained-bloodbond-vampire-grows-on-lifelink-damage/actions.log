@@ -1,0 +1,13 @@
+# LifeGained: Child of Night's lifelink damage gains its controller 2 life
+# (CR 702.15b), so Bloodbond Vampire puts a +1/+1 counter on itself.
+startturn human
+advance 5
+queue attackers 1
+declareattackers
+advance
+queue blocks none
+declareblockers
+advance
+advance
+combatdamage
+resolvestack

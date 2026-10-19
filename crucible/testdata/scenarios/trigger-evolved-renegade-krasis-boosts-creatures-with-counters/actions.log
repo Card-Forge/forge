@@ -1,0 +1,14 @@
+# Evolved: Hill Giant (3/3) entering beats Renegade Krasis (3/2) on toughness,
+# so the Krasis evolves and then puts a +1/+1 counter on each other creature
+# with one (Grizzly Bears), not on the Hill Giant that has none.
+startturn human
+advance 3
+tapformana human 2 R
+tapformana human 3 R
+tapformana human 4 R
+tapformana human 5 R
+queue paygeneric R
+queue paygeneric R
+queue paygeneric R
+castspell human 1
+resolvestack

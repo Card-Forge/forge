@@ -1,0 +1,8 @@
+# AbilityCast: activating Viscera Seer (not a mana ability) makes Burning Tree
+# Shaman deal 1 damage to the activator.
+startturn human
+advance 3
+queue sacrificechoice 2
+queue scry 4
+queue action human activate 1 0
+passpriority

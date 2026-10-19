@@ -1,0 +1,10 @@
+# BecomesTarget: the AI's Lightning Bolt targets the human's Grizzly Bears, so
+# Shapers' Sanctuary's controller may draw a card (accepted); the Bolt then
+# kills the Bears.
+startturn ai
+advance 3
+tapformana ai 4 R
+queue targets 1
+queue optionaltrigger true
+castspell ai 3
+resolvestack

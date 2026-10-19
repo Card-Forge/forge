@@ -259,6 +259,11 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 			// CountersPutEffect.java:658-660: the cards that got counters.
 			source.Memory.Remember(CardEntity(cid))
 		}
+		if a.evolve != NoCard && counterType == P1P1 {
+			// Card.java:1823: the evolve ability's +1/+1 counters made the
+			// creature evolve (CR 702.100b).
+			g.checkEvolvedTriggers(controller, cid)
+		}
 		if isMonstrosity {
 			// :543-548.
 			g.Card(cid).monstrous = true

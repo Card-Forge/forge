@@ -1,0 +1,8 @@
+# Sacrificed: Viscera Seer's "Sac<1/Creature>" cost sacrifices Grizzly Bears
+# (another creature), so Lightless Evangel puts a +1/+1 counter on itself.
+startturn human
+advance 3
+queue sacrificechoice 2
+queue scry 4
+queue action human activate 1 0
+passpriority

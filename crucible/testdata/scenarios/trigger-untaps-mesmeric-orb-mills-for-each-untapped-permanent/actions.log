@@ -1,0 +1,5 @@
+# Untaps: the untap step untaps Forest, so Mesmeric Orb makes its controller
+# mill a card (Island).
+startturn human
+advance 3
+resolvestack

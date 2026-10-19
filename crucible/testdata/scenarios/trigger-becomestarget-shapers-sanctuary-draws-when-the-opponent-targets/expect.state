@@ -1,0 +1,10 @@
+turn=1
+activeplayer=ai
+activephase=Main1
+humanlife=20
+humanhand=Island
+humangraveyard=Grizzly Bears
+humanbattlefield=Shapers' Sanctuary
+ailife=20
+aigraveyard=Lightning Bolt
+aibattlefield=Mountain|Tapped

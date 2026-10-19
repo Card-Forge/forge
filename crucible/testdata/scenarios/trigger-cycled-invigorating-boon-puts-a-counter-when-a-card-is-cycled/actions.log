@@ -1,0 +1,9 @@
+# Cycled: cycling Lonely Sandbar ({U}, discard it, draw a card) triggers
+# Invigorating Boon, which puts a +1/+1 counter on target creature.
+startturn human
+advance 3
+tapformana human 1 U
+queue optionaltrigger true
+queue targets 3
+queue action human activate 4 1
+passpriority

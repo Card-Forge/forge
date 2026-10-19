@@ -1,0 +1,6 @@
+turn=1
+activeplayer=human
+activephase=Main1
+humanlife=20
+humanbattlefield=Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Mountain|Tapped;Renegade Krasis|Counters:P1P1=1;Grizzly Bears|Counters:P1P1=2;Hill Giant|SummonSick
+ailife=20
