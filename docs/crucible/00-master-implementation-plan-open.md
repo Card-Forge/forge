@@ -11,7 +11,7 @@ M0-M4 are done; M5-M6 are in progress, their landed work recorded per topic in
 Sizes: **S** under a day, one sitting. **M** one porter batch, 1-3 days. **L** 1-2 weeks, a design call or several
 batches. No row is larger. Within a size the order is by value per effort. `R` numbers are this list's own; milestone
 items keep their numbers (24-41). The refusal figures come from `crucible card-smoke -all`
-([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 92.2% of the 33,617 judged corpus cards play, an upper bound,
+([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 92.4% of the 33,569 judged corpus cards play, an upper bound,
 since silent misses are invisible. Re-rank with the command before starting any M item, because the counts move with
 every port.
 
@@ -23,6 +23,7 @@ every port.
 | R12b | Findings of R12a: `ChangesZone` lines from a stack, exile or command origin to a non-battlefield zone fire nothing (34 `Origin$ Exile`/`Destination$ Any` lines, 3 `Origin$ Stack`), and a graveyard host with no `TriggerZones$` is never walked; `WithCountersType$` on the hidden-origin search path still refuses a non-battlefield destination | M5 | M | `card-smoke` re-rank |
 | R13 | Single-card scenarios for shapes that already play, untested: Assimilation Aegis (`Clone` `UntilUnattached`), Dinosaur Headdress (Craft), Curse of Leeches and Ludevic `Transform`, The Last Ronin's Technique (`Count$ValidStack`), Opposition Agent edge cases | M6 | M | `card-smoke` re-rank |
 | R15a | Leftovers of R15: stickers do not follow a merge, meld, unmeld or mutate (`takeStickersFrom`, `chooseCardToKeepStickers`, a new `PlayerController` method); the fixture has no `queue sticker` / `queue stickerpos` action; no deck loader calls `SeatStickerSheets`; ticket payment emits no counter-removed event; `GainsStickerAbilitiesOf` on a static with `AddKeyword$` is untested beside it | M6 | S | the game-from-deck loader (M7) |
+| R15b | Findings of R15: 5 sticker cards still refuse, each for another cause: `____ Trespasser` (`Pump KW$ HIDDEN` naming a blank, `"_"`), `Wolf in ____ Clothing` (`ImmediateTrigger RememberSVarAmount$`), Command Performance (`RollDice ToVisitYourAttractions$`), Lineprancers (`illegal declaration`: the pumped creature must block, the probe board cannot), Scampire (`ChangeZone SorcerySpeed$`) | M6 | S | card-smoke re-rank |
 | R16 | `RollDice` `DicePTExchanges` (Vedalken Squirrel-Whacker): `chooseRollToSwap` and `chooseRollSwapValue` are two new `PlayerController` methods | M6 | L | ADR first (ADRP-4); one card |
 | R25g | Cast-time cost shapes `parseUnlessCost` does not know (about 20 cards): `Discard<N/Random>` and typed `Discard<N/Creature>`, `tapXType` with an unlisted type, `Reveal<N/Creature.Colorless>`, `Exile<N/...>`, `Sac<All/...>`, `Announce$ X` | M6 | M | `forge-oracle` per part |
 | R25h | `RaiseCost` statics with a non-mana `Cost$` (about 25 cards): Aether Tide (`Discard<X/Creature>`), Crashing Wave, Foggy Swamp Visions, Waterbender's Restoration (`Waterbend<X>`), Tectonic Split, Liesa, Soul Immolation, the Behold family. `spellCost` refuses them today. Confirm Java's raw-cost X announce on these (a probable Forge bug, PORT-8) | M6 | M | R25g |
