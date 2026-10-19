@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
@@ -270,14 +271,18 @@ public class Forge implements ApplicationListener {
                 safeToClose = false;
                 ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
                 FModel.initialize(getSplashScreen().getProgressBar(), null);
+                int value = getSplashScreen().getProgressBar().getValue() / 100;
 
                 getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
+                getSplashScreen().getProgressBar().setValue(getSplashScreen().getProgressBar().getValue() + value);
                 FSkinFont.preloadAll(locale);
 
                 getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
+                getSplashScreen().getProgressBar().setValue(getSplashScreen().getProgressBar().getValue() + value);
                 CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
                 getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPrepareDatabase"));
+                getSplashScreen().getProgressBar().setValue(getSplashScreen().getProgressBar().getValue() + value);
                 Gdx.app.postRunnable(this::afterDbLoaded);
             };
             //see if app or assets need updating
@@ -438,9 +443,10 @@ public class Forge implements ApplicationListener {
     }
     protected void afterDbLoaded() {
         if (GuiBase.isAndroid() && autoCache)
-            getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+            getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + " - Detected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
         else
             getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
+        getSplashScreen().getProgressBar().setValue(1000);
         //override transition & title bg
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
@@ -465,62 +471,68 @@ public class Forge implements ApplicationListener {
 
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             //load skin full
-            FSkin.loadFull(splashScreen);
+            FSkin.loadFull(getSplashScreen());
             FThreads.invokeInBackgroundThread(() -> {
                 //load Drafts
                 preloadBoosterDrafts();
-                FThreads.invokeInEdtLater(() -> {
-                    if (selector.equals("Adventure")) {
-                        //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
-                        loadAdventureResources(false);
-                        isMobileAdventureMode = true;
-                    }
-                    //selection transition
-                    setTransitionScreen(new TransitionScreen(() -> {
-                        boolean openedRealScreen;
-                        if (createNewAdventureMap) {
-                            openAdventure();
-                            clearSplashScreen();
-                            openedRealScreen = true;
-                        } else {
-                            if (selector.equals("Classic")) {
-                                openHomeDefault();
-                                clearSplashScreen();
-                                openedRealScreen = true;
-                            } else if (selector.equals("Adventure")) {
-                                openAdventure();
-                                clearSplashScreen();
-                                openedRealScreen = true;
-                            } else if (splashScreen != null) {
-                                splashScreen.setShowModeSelector(true);
-                                openedRealScreen = false;
-                            } else {//default mode in case splashscreen is null at some point as seen on resume..
-                                openHomeDefault();
-                                clearSplashScreen();
-                                openedRealScreen = true;
+                Timer.schedule(new Timer.Task() {
+                    @Override public void run() {
+                        if (!getSplashScreen().isBarSettled()) { Timer.schedule(this, 0.03f); return; }
+                        Gdx.graphics.requestRendering();
+                        Gdx.app.postRunnable(() -> {
+                            if (selector.equals("Adventure")) {
+                                //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
+                                loadAdventureResources(false);
+                                isMobileAdventureMode = true;
                             }
-                        }
-                        safeToClose = true;
-                        clearTransitionScreen();
-                        if (openedRealScreen) {
-                            maybePromptForBulkCdnSync();
-                        }
-                        if (GuiBase.isIOS()) {
-                            // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
-                            // builds ~100k PaperCards + loads skin assets — a large transient
-                            // allocation spike that leaves ~200MB of freed-but-unmapped bytes in
-                            // the GC heap at idle home. Two full GCs return them to iOS (the GC
-                            // needs the second pass to unmap pages the first one freed) —
-                            // device-measured: GC heap 690→492MB before a game starts. Only
-                            // unreachable garbage is collected; iOS-gated because other
-                            // platforms don't sit against a per-process memory ceiling.
-                            FThreads.invokeInBackgroundThread(() -> {
-                                System.gc();
-                                System.gc();
-                            });
-                        }
-                    }, ScreenUtil.getInstance().takeScreenshot(), false, false, true, false));
-                });
+                            //selection transition
+                            setTransitionScreen(new TransitionScreen(() -> {
+                                boolean openedRealScreen;
+                                if (createNewAdventureMap) {
+                                    openAdventure();
+                                    clearSplashScreen();
+                                    openedRealScreen = true;
+                                } else {
+                                    if (selector.equals("Classic")) {
+                                        openHomeDefault();
+                                        clearSplashScreen();
+                                        openedRealScreen = true;
+                                    } else if (selector.equals("Adventure")) {
+                                        openAdventure();
+                                        clearSplashScreen();
+                                        openedRealScreen = true;
+                                    } else if (splashScreen != null) {
+                                        splashScreen.setShowModeSelector(true);
+                                        openedRealScreen = false;
+                                    } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                        openHomeDefault();
+                                        clearSplashScreen();
+                                        openedRealScreen = true;
+                                    }
+                                }
+                                safeToClose = true;
+                                clearTransitionScreen();
+                                if (openedRealScreen) {
+                                    maybePromptForBulkCdnSync();
+                                }
+                                if (GuiBase.isIOS()) {
+                                    // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
+                                    // builds ~100k PaperCards + loads skin assets — a large transient
+                                    // allocation spike that leaves ~200MB of freed-but-unmapped bytes in
+                                    // the GC heap at idle home. Two full GCs return them to iOS (the GC
+                                    // needs the second pass to unmap pages the first one freed) —
+                                    // device-measured: GC heap 690→492MB before a game starts. Only
+                                    // unreachable garbage is collected; iOS-gated because other
+                                    // platforms don't sit against a per-process memory ceiling.
+                                    FThreads.invokeInBackgroundThread(() -> {
+                                        System.gc();
+                                        System.gc();
+                                    });
+                                }
+                            }, ScreenUtil.getInstance().takeScreenshot(), false, false, true, false));
+                        });
+                    }
+                }, 0.03f);
             });
         }));
     }
