@@ -267,9 +267,18 @@ func (r *Registry) resolveUnlessCost(g *Game, a *Ability, controller PlayerContr
 		if err != nil {
 			return err
 		}
+		if text == "LifeTotalHalfUp" {
+			// Each payer's own cost, set below (AbilityUtils.java:1433-1436).
+			alternatives = append(alternatives, unlessCost{})
+			continue
+		}
 		uc, ok := parseUnlessCost(text)
 		if !ok {
 			return fmt.Errorf("engine: UnlessCost$ %q not resolvable yet", unlessCostText)
+		}
+		uc, err = uc.withTriggered(g, a)
+		if err != nil {
+			return err
 		}
 		alternatives = append(alternatives, uc.withTargets(a))
 	}
@@ -293,7 +302,13 @@ func (r *Registry) resolveUnlessCost(g *Game, a *Ability, controller PlayerContr
 
 	paid := false
 	for _, pid := range payers {
-		uc, ok := g.pickUnlessAlternative(controller, a, pid, alternatives)
+		alts := alternatives
+		if strings.TrimSpace(unlessCostText) == "LifeTotalHalfUp" {
+			// PayLife<ceil(life / 2)>, 0 for a payer at or below 0 life.
+			half, _ := parseUnlessCost(fmt.Sprintf("PayLife<%d>", max(0, (g.Player(pid).Life+1)/2)))
+			alts = []unlessCost{half}
+		}
+		uc, ok := g.pickUnlessAlternative(controller, a, pid, alts)
 		if !ok {
 			continue
 		}

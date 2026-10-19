@@ -62,6 +62,31 @@ func TestUnlessCostDrawTargetedByLimitsToTheAbilitysTargets(t *testing.T) {
 	}
 }
 
+// Internal: withTriggered and unlessDrawers are unexported and no public
+// ability constructor builds an unowned Draw cost (TEST-1).
+func TestUnlessCostDrawActivatorLimitsToTheHostsController(t *testing.T) {
+	t.Parallel()
+
+	g := targetCandidatesTestGame(t, "a", "b")
+	a, b := g.Players()[0], g.Players()[1]
+	src := g.NewCard(targetCandidatesTestCreature(t), b, Battlefield)
+
+	uc, ok := parseUnlessCost("Draw<1/Player.Activator>")
+	if !ok {
+		t.Fatal("parseUnlessCost rejects Draw<1/Player.Activator>")
+	}
+	bound, err := uc.withTriggered(g, &Ability{Controller: b, Source: src})
+	if err != nil {
+		t.Fatalf("withTriggered: %v", err)
+	}
+	if got := g.unlessDrawers(a, src, bound); len(got) != 1 || got[0] != b {
+		t.Errorf("Activator drawers = %v, want [b]", got)
+	}
+	if _, ok := parseUnlessCost("Draw<1/Player.TriggeredPlayer>"); !ok {
+		t.Error("parseUnlessCost rejects Draw<1/Player.TriggeredPlayer>")
+	}
+}
+
 func TestUnlessCostDiscardHandIsAlwaysPayableAndEmptiesTheHand(t *testing.T) {
 	t.Parallel()
 

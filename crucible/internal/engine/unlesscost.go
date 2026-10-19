@@ -108,6 +108,9 @@ type unlessCost struct {
 	// ExileFromGrave<1/Card.TopGraveyardCreature>: only the graveyard's last
 	// creature qualifies (CardProperty.java:582-587).
 	exileGraveAll, exileGraveTop bool
+	// exileStackSelf is ExileFromStack<1/Card.Self> (CostExileFromStack): the
+	// spell being resolved exiles itself, so it never reaches the graveyard.
+	exileStackSelf bool
 	// discardRandomN is Discard<N/Random>: N cards of the hand at random, no
 	// choice (CostDiscard's "Random" type).
 	discardRandomN int
@@ -215,8 +218,13 @@ func parseUnlessCostX(text string, x int, hasX bool) (unlessCost, bool) {
 		} else {
 			var err error
 			n, err = strconv.Atoi(p.Field(0))
-			if err != nil || n <= 0 {
+			if err != nil || n < 0 {
 				return unlessCost{}, false
+			}
+			if n == 0 {
+				// An SVar amount that expanded to 0 pays nothing
+				// (CostPart.getAbilityAmount is 0), like an announced X of 0.
+				continue
 			}
 		}
 		switch {
@@ -232,6 +240,8 @@ func parseUnlessCostX(text string, x int, hasX bool) (unlessCost, bool) {
 			uc.exileGraveAll = true
 		case p.Name == "ExileFromGrave" && p.Field(1) == "Card.TopGraveyardCreature" && uc.exileGraveN == 0 && !uc.exileGraveAll:
 			uc.exileGraveN, uc.exileGraveSpec, uc.exileGraveTop = n, "Creature", true
+		case p.Name == "ExileFromStack" && n == 1 && p.Field(1) == "Card.Self" && !uc.exileStackSelf:
+			uc.exileStackSelf = true
 		case p.Name == "Discard" && uc.discardTypeN == 0 && chosenCardSpecResolvable(p.Field(1)):
 			uc.discardTypeN, uc.discardTypeSpec = n, p.Field(1)
 		case p.Name == "SubCounter" && uc.subCounterN == 0 && p.Field(1) != "" && (p.Field(2) == "" || p.Field(2) == "CARDNAME" || p.Field(2) == "NICKNAME"):
@@ -317,6 +327,27 @@ func (uc unlessCost) withTargets(a *Ability) unlessCost {
 		}
 	}
 	return uc
+}
+
+// withTriggered binds a Draw<N/Player.Triggered...> or Player.Activator part
+// to the players the ability's trigger objects or its host card's controller
+// name (PlayerProperty.java:26-29, :440-443), so the draw does not fall on
+// every player. An alternative list is not bound: no corpus line mixes them.
+func (uc unlessCost) withTriggered(g *Game, a *Ability) (unlessCost, error) {
+	_, prop, ok := strings.Cut(uc.drawSpec, ".")
+	if !ok || strings.Contains(uc.drawSpec, ",") {
+		return uc, nil
+	}
+	defined, bound := boundDrawProp(prop)
+	if !bound {
+		return uc, nil
+	}
+	players, err := definedPlayers(g, a.Controller, a.Source, defined, a.refs())
+	if err != nil {
+		return uc, fmt.Errorf("engine: UnlessCost$ Draw: %w", err)
+	}
+	uc.hasTargeted, uc.targeted = true, players
+	return uc, nil
 }
 
 // unlessSacCandidates is what pid may sacrifice for the Sac part: the source
@@ -503,7 +534,8 @@ func (g *Game) unlessDrawers(pid PlayerID, source CardID, uc unlessCost) []Playe
 
 // drawSpecResolvable is whether every alternative of a Draw part's player spec
 // is one drawSpecMatches reads: a base (You, Opponent, Player) with at most a
-// property matchesPlayerSpec resolves, or Player.targetedBy.
+// property matchesPlayerSpec resolves, or Player.targetedBy, Player.Activator
+// and Player.Triggered* (withTriggered binds those).
 func drawSpecResolvable(spec string) bool {
 	if spec == "" || spec == "You" {
 		return false
@@ -519,11 +551,24 @@ func drawSpecResolvable(spec string) bool {
 			switch prop {
 			case "targetedBy", "You", "Opponent", "Other", "Active", "NonActive":
 			default:
-				return false
+				if _, bound := boundDrawProp(prop); !bound {
+					return false
+				}
 			}
 		}
 	}
 	return true
+}
+
+// boundDrawProp is whether a Draw part's player property names players only
+// the owning ability knows: PlayerProperty's Activator (the host card's
+// controller, :26-29) or any "Triggered..." (:440-443, getDefinedPlayers over
+// the trigger's recorded objects).
+func boundDrawProp(prop string) (defined string, ok bool) {
+	if prop == "Activator" {
+		return "You", true
+	}
+	return prop, strings.HasPrefix(prop, "Triggered")
 }
 
 // drawSpecMatches is Player.isValid(spec, payer, source, ability) for a Draw
@@ -532,6 +577,11 @@ func drawSpecResolvable(spec string) bool {
 // outside the ability's targets cannot be told apart.
 func drawSpecMatches(g *Game, cand, payer PlayerID, source CardID, spec string) bool {
 	spec = strings.ReplaceAll(spec, ".targetedBy", "")
+	if base, prop, ok := strings.Cut(spec, "."); ok {
+		if _, bound := boundDrawProp(prop); bound {
+			spec = base
+		}
+	}
 	matched, _ := matchesPlayerSpec(g, cand, payer, source, spec)
 	return matched
 }
@@ -550,6 +600,9 @@ func chosenCardSpecResolvable(spec string) bool {
 // graveyard cards to exile, permanents to tap, graveyard mana value for
 // evidence, a card to put the counters on and a player who may get counters.
 func (g *Game) unlessCardsPayable(pid PlayerID, source CardID, uc unlessCost) bool {
+	if uc.exileStackSelf && g.Card(source).Zone != Stack {
+		return false
+	}
 	if uc.exileGraveN > 0 && len(g.exileGraveOptions(pid, source, uc)) < uc.exileGraveN {
 		return false
 	}
@@ -765,6 +818,17 @@ func (g *Game) payUnlessPartsInto(controller PlayerController, a *Ability, pid P
 		exiled := g.exileCostCards(controller, a.Source, picks)
 		if rec != nil {
 			rec.exiled = append(rec.exiled, exiled...)
+		}
+	}
+	if uc.exileStackSelf && g.Card(a.Source).Zone == Stack {
+		// CostExileFromStack.payAsDecided: the resolving spell leaves the stack
+		// for exile, so moveResolvedSpellToGraveyard finds it gone.
+		g.removeSpellFromStack(a.Source)
+		g.Move(a.Source, Exile, g.Card(a.Source).Owner)
+		g.markExiledWith(a.Source, a.Source)
+		g.checkChangesZoneAllTriggers(controller, []CardID{a.Source}, Stack, Exile)
+		if rec != nil {
+			rec.exiled = append(rec.exiled, a.Source)
 		}
 	}
 	if uc.exileGraveAll {

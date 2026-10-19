@@ -313,3 +313,32 @@ func TestUnlessCostReveal(t *testing.T) {
 		}
 	})
 }
+
+// TestUnlessCostLifeTotalHalfUp proves LifeTotalHalfUp: each payer's cost is
+// PayLife<ceil(life / 2)> (AbilityUtils.handleUnlessCost).
+func TestUnlessCostLifeTotalHalfUp(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct{ life, want int }{{20, 10}, {7, 3}} {
+		g, p, c, cast := unlessCostGame(t, "LifeTotalHalfUp")
+		g.Player(p).Life = tc.life
+		c.QueueConfirmPayCost(true)
+		creature := cast()
+		if g.Card(creature).Zone != engine.Battlefield || g.Player(p).Life != tc.want {
+			t.Errorf("life %d: zone %v life %d, want Battlefield and %d", tc.life, g.Card(creature).Zone, g.Player(p).Life, tc.want)
+		}
+	}
+}
+
+// TestUnlessCostExileFromStackNeedsTheSpellOnTheStack proves
+// ExileFromStack<1/Card.Self> cannot be paid by a source that is not a spell
+// on the stack (CostExileFromStack.canPay).
+func TestUnlessCostExileFromStackNeedsTheSpellOnTheStack(t *testing.T) {
+	t.Parallel()
+
+	g, _, c, cast := unlessCostGame(t, "ExileFromStack<1/Card.Self>")
+	c.QueueConfirmPayCost(true)
+	if creature := cast(); g.Card(creature).Zone != engine.Graveyard {
+		t.Errorf("creature zone = %v, want Graveyard: nothing on the stack to exile", g.Card(creature).Zone)
+	}
+}
