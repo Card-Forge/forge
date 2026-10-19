@@ -256,7 +256,7 @@ var manaPoolLetters = [6]string{"W", "U", "B", "R", "G", "C"}
 // letter per unit of floating mana, in Breakdown's own order. Snow and plain
 // mana are indistinguishable here, the same as they are in setup.state's own
 // manapool= key: GameState.java's own processManaPool/updateManaPool iterate
-// ManaAtom.MANATYPES, which has no snow entry (game-state.md's "Mana pool and
+// ManaAtom.MANATYPES, which has no snow entry (the removed port log's "Mana pool and
 // payment" section), so Breakdown's already-summed total is exactly what
 // this format can say -- SnowBreakdown's finer split has nowhere to go.
 func dumpManaPool(pool engine.Pool) string {

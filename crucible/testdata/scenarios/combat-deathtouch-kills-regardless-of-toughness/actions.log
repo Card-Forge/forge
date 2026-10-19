@@ -3,7 +3,7 @@
 # point of damage is lethal to the Boars regardless of its 4 toughness --
 # CR 702.2b, destroyDamagedCreatures reading the deathtouch flag
 # dealPermanentDamage set on the mark, not the raw amount against toughness
-# (game-state.md's "Lethal and deathtouch damage" section). The Boars' 4
+# (the removed port log's "Lethal and deathtouch damage" section). The Boars' 4
 # damage back is ordinary-lethal to the Rats' own 1 toughness regardless --
 # both die to the same state-based-action check.
 startturn human

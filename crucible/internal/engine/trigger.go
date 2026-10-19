@@ -8,7 +8,7 @@
 // (Mode$ TapsForMana), a player casting a spell (Mode$ SpellCast), and the
 // beginning of a step or phase (Mode$ Phase, CR 500) -- plus, for every one
 // of those ten, CR 603.3b's own APNAP ordering when more than one triggers
-// off a single event (pushTriggeredAbilities, below). game-state.md's own
+// off a single event (pushTriggeredAbilities, below). the removed port log's own
 // trigger-firing section has every mode's own corpus-frequency count and
 // unresolved params.
 
@@ -2191,7 +2191,7 @@ func isPhaseTrigger(t *compile.Ability) bool {
 // happened to visit -- correct only when a single card's own trigger fires
 // alone, wrong the instant checkOtherETBTriggers (or any of its siblings)
 // makes more than one permanent trigger off the same event, which is a real
-// case now (game-state.md's own account of this gap, "Not ported yet").
+// case now (the removed port log's own account of this gap, "Not ported yet").
 //
 // Every check function collects its own matches into a []Ability first (its
 // own "own" and "other" halves both feed the same slice when it has both)

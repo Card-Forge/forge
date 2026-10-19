@@ -386,7 +386,7 @@ type Game struct {
 	// triggers actually read: 116 of 7,574 real Mode$ ChangesZone lines whose
 	// Destination$ permits Graveyard also name a ValidCard$ checking a
 	// power/toughness/counter/keyword property of the dying card itself
-	// (port-log/game-state.md's "Last-known-information" section) --
+	// (the removed port log's "Last-known-information" section) --
 	// Card.Def/Card.Controller() need no such lookup (Move's own doc comment
 	// already established why), so the LKI copy is a plain struct copy rather
 	// than Java's own field-by-field reconstruction. Overwritten whole, never
@@ -905,7 +905,7 @@ func (g *Game) LKI(id CardID) *Card {
 // at that same construction -- CR 121.5 puts loyalty nowhere near Layer 7,
 // so it has no computed accessor the way Power/Toughness do; it is exactly
 // its Loyalty counter count from the moment of entry, full stop
-// (game-state.md's "Loyalty is not a layer" section has the full citation).
+// (the removed port log's "Loyalty is not a layer" section has the full citation).
 // A CardID is stable across zone changes here instead (ADR-0009) — the same
 // struct persists, so a creature that dies with three +1/+1 counters would return
 // from the graveyard still carrying them unless this clears them, a Raise

@@ -4,7 +4,7 @@
 // corner case. Neither needs CR 613's layer system -- each is a plain
 // ValidCard/ValidAttacker/ValidBlocker match, same shape valid.go already
 // evaluates for everything else -- which is what makes both buildable ahead
-// of Mode$ Continuous itself (game-state.md's "Continuous effects" section
+// of Mode$ Continuous itself (the removed port log's "Continuous effects" section
 // has the reasoning in full).
 //
 // Ported from
@@ -710,7 +710,7 @@ func controllerControlsType(g *Game, pid PlayerID, typeSpec string, host *Card) 
 // Not ported: a line carrying IsPresent$/PresentCompare$ (2 of the 11 --
 // "if you control exactly two permanents named X") -- StaticAbility.java's
 // own checkConditions evaluates those generically for every static-ability
-// mode, a mechanism this port has not built for any mode yet (game-state.md's
+// mode, a mechanism this port has not built for any mode yet (the removed port log's
 // "Not ported yet"). Skipped rather than guessed at: an ability this port
 // cannot evaluate the condition for is treated as not currently active, the
 // same safe default an unresolvable Toughness leaves a creature alive under

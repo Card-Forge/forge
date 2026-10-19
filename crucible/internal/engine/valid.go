@@ -993,7 +993,7 @@ func matchesPlayerBase(candidate, host PlayerID, spec string) (matched, ok bool)
 // hasProperty/PlayerProperty.playerHasProperty. No real corpus line this
 // port's callers pass ever joins more than one property this way (SpellCast's
 // own ValidActivatingPlayer$ Opponent.NonActive is the single "+"-free
-// two-clause example, game-state.md's own count), so only Base.Property is
+// two-clause example, the removed port log's own count), so only Base.Property is
 // split within an alternative, not Base.Property1+Property2.
 //
 // An alternative whose base is none of You/Opponent/Player -- DamageDone's

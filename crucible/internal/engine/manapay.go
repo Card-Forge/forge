@@ -22,7 +22,7 @@ import "github.com/jczastkiewicz/crucible/internal/mana"
 // ChooseHybridManaColor, ChoosePayMonocoloredHybrid, ChoosePayColorlessHybrid,
 // ChoosePayPhyrexian, ChoosePayHybridPhyrexian, ChoosePayGeneric, ChoosePayX
 // and ChoosePaySnow are the first eight harder shapes this port resolves,
-// not necessarily the last (game-state.md's "Mana pool and payment"
+// not necessarily the last (the removed port log's "Mana pool and payment"
 // section).
 func (g *Game) PayManaCost(decider PlayerID, cost mana.Cost, controller PlayerController) bool {
 	_, ok := g.payManaCostX(decider, cost, controller)

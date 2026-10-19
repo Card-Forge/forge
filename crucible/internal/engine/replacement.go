@@ -37,7 +37,7 @@
 // their Replace* ReplaceWith$ lines through eachReplacement/runReplaceWith,
 // and DeclareBlocker (camouflage.txt's 1 real line, ADR-0035) through
 // declareBlockersReplaced, all below. Every other Event$ value (Counter, ...)
-// is a gap game-state.md's own trigger-firing-style account names, not a
+// is a gap the removed port log's own trigger-firing-style account names, not a
 // reason to have skipped the shapes that do resolve.
 //
 // Ported from
@@ -846,7 +846,7 @@ func damagePreventionMatches(g *Game, r *compile.Ability, source CardID, hostCon
 // Of the corpus's own 39 real `DB$ ReplaceDamage` SVar definitions, only 27
 // are ever named by a literal top-level `R:Event$ DamageDone` line at all --
 // the same `face.Replacements` walk every other dispatch in this file uses,
-// game-state.md's own "`Event$ DamageDone`" section has the other 12's own
+// the removed port log's own "`Event$ DamageDone`" section has the other 12's own
 // accounting (each blocked by an entirely different missing mechanism, not
 // by anything specific to this shape). 16 of those 27 resolve end to end
 // through this and replaceDamageEffect (replaceeffect.go): every real line naming
@@ -1323,7 +1323,7 @@ func drawPreventionMatches(g *Game, r *compile.Ability, host CardID, hostZone Zo
 // identical contract drawPrevented has for a different Event$.
 // gainLifeEffect (gainlifeeffect.go) checks this before applying each
 // player's own LifeAmount$, per player named by Defined$/ValidTgts$ -- CR
-// 119's own life-gain replacement family game-state.md's own "M6's fourth
+// 119's own life-gain replacement family the removed port log's own "M6's fourth
 // effect: GainLife" section already flagged as entirely unbuilt is real now
 // for its one directly resolvable real shape.
 //

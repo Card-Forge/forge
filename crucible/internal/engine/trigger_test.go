@@ -4404,7 +4404,7 @@ func TestPlayLandSkipsLandPlayedTriggerNamingStaticAndValidSA(t *testing.T) {
 // trigger's own body runs. checkLandPlayedTriggers never named OptionalDecider
 // in its own hasAnyParam call, so before this change these 3 real lines fired
 // unconditionally -- a real correctness fix, not just a new resolution
-// (game-state.md's own "CR 603.3d's own may triggered ability" section).
+// (the removed port log's own "CR 603.3d's own may triggered ability" section).
 func TestPlayLandFiresLandPlayedTriggerNamingOptionalDeciderWhenConfirmed(t *testing.T) {
 	t.Parallel()
 

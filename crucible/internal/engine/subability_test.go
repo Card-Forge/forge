@@ -101,7 +101,7 @@ func TestSubAbilityChainDrawThenDiscardResolvesBoth(t *testing.T) {
 // body run at all -- AbilityUtils.resolveApiAbility's own unconditional
 // "sa.resolve(); resolveSubAbilities(sa, game)" pairing, the real behavior
 // Sphinx Sovereign's own if/else split across a LoseLife and a chained
-// GainLife needs (ConditionDefined$ Self, unresolved here -- game-state.md's
+// GainLife needs (ConditionDefined$ Self, unresolved here -- the removed port log's
 // "Not ported yet" -- so this uses the zone-scan Condition family instead,
 // ConditionPresent$/ConditionCompare$, which IS resolved, to prove the
 // identical guarantee without depending on that gap). The parent's own

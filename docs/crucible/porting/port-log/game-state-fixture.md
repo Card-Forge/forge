@@ -23,7 +23,7 @@ every field the second `Loaded` produces against the first.
 
 `Turn`, `ActivePlayer` and `ActivePhase` used to live on `Loaded` rather than `engine.Game`, because M5's turn/phase
 loop had not landed and guessing its shape early was exactly the kind of speculative design CLAUDE.md rules out.
-`turn.go`'s `StartTurn`/`AdvancePhase` gave them a real home (`porting/port-log/game-state.md`'s "turn structure"
+`turn.go`'s `StartTurn`/`AdvancePhase` gave them a real home (the removed port log's "turn structure"
 section), so `Load` now calls `Game.SetTurnState` and `Dump` reads `Game.Turn`/`ActivePlayer`/`ActivePhase` back —
 `SetTurnState` is `Load`'s tool for this the same way `devAdvanceToPhase` is Java's: a state injection, not a step
 `AdvancePhase` would actually run.
@@ -192,7 +192,7 @@ queue optionaltrigger <bool>          ScriptedController.QueueConfirmOptionalTri
 
 `queue battleprotector` is a state-based action's own question, not tied to any combat verb:
 `Game.CheckStateBasedActions` asks it whenever a Battle has no protector (or its protector has left the game) and
-nothing is currently attacking it (`game-state.md`'s "Combat" section, `assignBattleProtector`). A fixture with a Battle
+nothing is currently attacking it (the removed port log's "Combat" section, `assignBattleProtector`). A fixture with a Battle
 in `setup.state` needs one queued before the first `startturn`/`advance`/`combatdamage`-family action that would run a
 state-based-action check, since that first check is what asks. The result is nameable in `expect.state` too —
 `Protector:<player>`, Crucible-only the same way `lost=`/`won=`/`over=` are (no Java `GameState` key exists to diverge
@@ -200,7 +200,7 @@ from), compared by name the same way everything else two independently loaded ga
 `testdata/scenarios/battle-protector-assigned-to-opponent` is the example.
 
 `queue discard` is needed only when `advance` reaches `Cleanup` with the active player's hand over `MaxHandSize` (7,
-`game-state.md`'s "Turn structure") — a hand already at or under that never asks. There is no `none` shortcut, the same
+the removed port log's "Turn structure") — a hand already at or under that never asks. There is no `none` shortcut, the same
 reasoning `queue damage` has none: `Game.cleanupStep` only asks when there is a nonzero, known count to discard
 (`hand.Len() - MaxHandSize`), so declining entirely was never a legal answer to make room for.
 
@@ -212,7 +212,7 @@ asked is simply left unread, the same as any other over-queued answer (`Scripted
 consumed" check of its own).
 
 A scenario with a first striker needs both `firststrikedamage` and `combatdamage`, with an `advance` between them: a
-first-strike kill has to actually happen (`CheckStateBasedActions` runs on every phase entry, `game-state.md`'s "Turn
+first-strike kill has to actually happen (`CheckStateBasedActions` runs on every phase entry, the removed port log's "Turn
 structure") before the regular step asks whether the dead creature still deals or receives anything, and `advance`ing
 from the `FirstStrikeDamage` phase into `CombatDamage` is what runs that check — no separate verb exists just for it. A
 scenario with nothing carrying "First Strike"/"Double Strike" can skip `firststrikedamage` entirely; calling it anyway
@@ -241,7 +241,7 @@ discarded, the same "the fixture already knows because it queued a fixed answer"
 without a single mulligan.
 
 `Game.StartTurn`/`AdvancePhase` take `controller` because `CheckStateBasedActions` does now too — the legend rule needs
-one (`game-state.md`'s "The legend rule needed `CheckStateBasedActions` to take a controller"), and every path that
+one (the removed port log's "The legend rule needed `CheckStateBasedActions` to take a controller"), and every path that
 reaches a state-based-action check had to gain the same parameter.
 
 `paymanacost` is not tied to any turn/phase/combat verb either, and needs none run first: `Game.PayManaCost` reads and
@@ -267,7 +267,7 @@ reuses `resolveManaColor` for its own `<color>` argument and `resolveCardIDs` (r
 the paid mana comes from a real card (a corpus `Plains`) rather than `manapool=`.
 
 `playland` is `tapformana`'s own shape — one action verb, no `queue`, `<id>` resolved the same way — for `Game.PlayLand`
-(CR 305, `game-state.md`'s own section on it). It is the first verb that moves a card from hand to the battlefield
+(CR 305, the removed port log's own section on it). It is the first verb that moves a card from hand to the battlefield
 through a real game action rather than `setup.state` placing it there directly: every existing combat/mana fixture's
 battlefield cards start on the battlefield already, and `mulligan-tucks-a-card` is the only other fixture that moves a
 card between zones at all before this. `land-played-then-tapped-for-mana` is the fixture: a Plains starts in hand,
@@ -275,7 +275,7 @@ card between zones at all before this. `land-played-then-tapped-for-mana` is the
 summoning-sickness check to get in the way, since CR 302.6 restricts a creature's own tap ability, not a land's mana
 ability.
 
-`castspell` and `resolvestack` are `Game.CastSpell`/`Game.ResolveStack` (CR 601, `game-state.md`'s "Casting a spell
+`castspell` and `resolvestack` are `Game.CastSpell`/`Game.ResolveStack` (CR 601, the removed port log's "Casting a spell
 needed the stack for real, for the first time"), the first verbs to drive the stack at all. `castspell <player> <id>`
 takes the same `<id>`-resolved-through-`Loaded.CardByFixtureID` shape as `playland`; its `bool` return is not asserted,
 the same "declined by the rules" convention every other bool-returning verb already carries. `resolvestack` is the one
@@ -313,7 +313,7 @@ meaningful to decide" convention `attacktarget`'s own lone-target case already h
 one at all. `cast-an-aura-spell-attaches-to-chosen-target` is the fixture: a real Pacifism cast at a lone Grizzly Bears
 on the battlefield, `resolvestack` moving it there and attaching it in the same call. Casting a Battle cannot go all the
 way through `resolvestack` the way the other four permanent types do: every Battle in the corpus carries its own ETB
-trigger (`checkETBTriggers`, `trigger.go`, `game-state.md`'s own section on it), which `resolvestack` correctly surfaces
+trigger (`checkETBTriggers`, `trigger.go`, the removed port log's own section on it), which `resolvestack` correctly surfaces
 as `ErrUnimplemented` once the Battle itself has resolved — `TestScenarios` has no way to assert an expected
 `RunActions` failure, so `cast-a-battle-spell-reaches-the-stack` stops one step earlier than its four siblings, at
 `castspell` alone.
@@ -383,7 +383,7 @@ left then right (`GameState.java:445-450`), and names a Room by its printed card
 `compareGames` compares unlocked doors. `testdata/scenarios/room-lock-or-unlock-fires-that-doors-trigger` is the example.
 
 **`Protector:` is `lost=`/`won=`/`over=`'s own pattern applied to a single card field.** `Card.ProtectingPlayer` (CR
-704.5w, `game-state.md`'s "Combat") is Crucible state with no Java `GameState` key to diverge from at all — grep finds
+704.5w, the removed port log's "Combat") is Crucible state with no Java `GameState` key to diverge from at all — grep finds
 nothing resembling one in `GameState.java`. `Load`'s case is `Owner:`'s own shape exactly (`playerSlot`, then
 `ld.slotToID[slot]`), gated to Battlefield-only in `Dump` the same way `Owner:`/`Tapped`/`Damage` are, since `Move`
 clears it on the same "left the battlefield" transition. Written only when set (`ProtectingPlayer != NoPlayer`), the
@@ -415,12 +415,12 @@ reading the rest of that same script.
 Getting a first-strike or gang-block scenario right needs the phase walk to be real, not shortcut: `declareattackers`
 and `declareblockers` each run while `AdvancePhase` has actually put the game in the matching phase
 (`Declare Attackers`, `Declare Blockers`), one `advance` apart, because nothing in either method reads `ActivePhase` to
-enforce that itself (game-state.md's "Combat" section) — a scenario that called them back-to-back without advancing
+enforce that itself (the removed port log's "Combat" section) — a scenario that called them back-to-back without advancing
 would still "work" mechanically but would end up asserting a phase that never happened. The state-based-action check
 between the first-strike and regular damage steps is the sharper version of the same discipline:
 `combat-first-strike-prevents-return-damage` only gets the right answer because `advance`ing from `First Strike Damage`
 into `Combat Damage` is what actually kills the lethally-struck blocker before `combatdamage` runs
-(`CheckStateBasedActions` runs on every phase entry, `game-state.md`'s "Turn structure") — skipping that `advance` would
+(`CheckStateBasedActions` runs on every phase entry, the removed port log's "Turn structure") — skipping that `advance` would
 leave the blocker alive to hit back, a different (wrong) scenario the fixture format makes easy to write by accident if
 the phase walk isn't respected.
 
@@ -436,7 +436,7 @@ each exercised alone, cannot catch.
 **`combat-deathtouch-kills-regardless-of-toughness`** is the first fixture to touch Deathtouch at all. Typhoid Rats
 (1/1, Deathtouch) attacks; Durkwood Boars (4/4, no keywords) blocks. A single point of damage is lethal to the Boars
 despite its 4 toughness — `destroyDamagedCreatures` reading the deathtouch flag `dealPermanentDamage` set on the mark
-(`game-state.md`'s "Lethal and deathtouch damage" section), not the raw amount against toughness a Go unit test
+(the removed port log's "Lethal and deathtouch damage" section), not the raw amount against toughness a Go unit test
 isolating that one function already proves correctly in isolation but which no scenario had exercised end to end through
 declare-attackers/declare-blockers/combat-damage/state-based-actions together.
 
@@ -461,7 +461,7 @@ shape `untap-and-draw` already uses to reach a real Draw step, but with no libra
 `equipment-falls-off-without-destroying` (the "cleanup" rule's other half —
 `aura-enchant-restriction-sends-illegal-aura-to-graveyard` already covers the Aura branch, nothing covered the
 Equipment/Fortification one, which unattaches instead of dying) and `battle-zero-defense-destroyed` (CR 704.5v with no
-`Counters:DEFENSE=` at all, `game-state.md`'s own CR 704.5v ETB gap). The last one needs `queue battleprotector` even
+`Counters:DEFENSE=` at all, the removed port log's own CR 704.5v ETB gap). The last one needs `queue battleprotector` even
 though the Battle is about to die the very next statement in the same pass — `assignBattleProtector` asks
 unconditionally for any Battle with no protector yet, run before `destroyZeroDefense` gets a chance to send it to the
 graveyard, so skipping the queued answer panics on an unread decision rather than skipping a question that was never
@@ -519,7 +519,7 @@ cost escalates rather than repeating (`mulligan-twice-tucks-cumulative`); and `P
 writing these: `destroyZeroLoyalty`/`destroyZeroDefense` (`action.go`) and two existing fixtures'
 (`battle-protector-assigned-to-opponent`, `battle-zero-defense-destroyed`) own comments still said nothing granted a
 planeswalker or Battle its starting counters, which stopped being true once `Move` gained that ETB handling
-(`game-state.md`'s "Loyalty is not a layer" section) — fixed in place rather than left to mislead the next reader
+(the removed port log's "Loyalty is not a layer" section) — fixed in place rather than left to mislead the next reader
 (DOC-16).
 
 ## Load-time state effects

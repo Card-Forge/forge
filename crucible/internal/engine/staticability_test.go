@@ -296,7 +296,7 @@ func TestCanBlockSkulkAppliesContinuousPowerBoost(t *testing.T) {
 // cantBlockByAuraDef builds a *compile.Card for an Aura carrying a real,
 // literal S:Mode$ CantBlockBy line written on the Aura itself rather than
 // synthesized from a keyword -- ValidAttacker$ Creature.EnchantedBy, the
-// second most common real shape after Creature.Self (game-state.md's "Block
+// second most common real shape after Creature.Self (the removed port log's "Block
 // legality" section has the corpus count) -- compiled through the real
 // pipeline the same reason etbTriggerCreatureDef (trigger_test.go) is.
 func cantBlockByAuraDef(t *testing.T) *compile.Card {

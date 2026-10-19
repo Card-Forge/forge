@@ -571,7 +571,7 @@ const MaxHandSize = 7
 // a later turn would still report the earlier combat's Attackers and
 // Blocks -- DeclareCombatAttackers/DeclareCombatBlockers only overwrite
 // `g.combat` on the branch where something is actually declared, and
-// neither returns early by clearing it (game-state.md's "Combat" section).
+// neither returns early by clearing it (the removed port log's "Combat" section).
 func (g *Game) endCombat() {
 	// PhaseHandler.endCombat's own first line (PhaseHandler.java:1262):
 	// getEndOfCombat().executeUntil(), ControlPlayer's Combat$ revokes

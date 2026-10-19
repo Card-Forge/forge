@@ -16,7 +16,7 @@ import (
 // Loaded is what Load produces: the engine.Game, plus the one directive that
 // still has no home in it. Turn, ActivePlayer and ActivePhase used to live
 // here too -- they moved onto Game itself once turn.go gave them one
-// (porting/port-log/game-state.md's "turn structure" section); read them
+// (the removed port log's "turn structure" section); read them
 // from Game.Turn, Game.ActivePlayer and Game.ActivePhase.
 type Loaded struct {
 	Game *engine.Game
@@ -332,7 +332,7 @@ func (ld *loader) card(entry string, kind engine.ZoneType, owner engine.PlayerID
 			c.Owner = ld.slotToID[slot]
 		case strings.HasPrefix(info, "Protector:"):
 			// Crucible-only, the same category as lost=/won=/over= -- CR
-			// 704.5w's protector (Card.ProtectingPlayer, game-state.md's
+			// 704.5w's protector (Card.ProtectingPlayer, the removed port log's
 			// "Combat") has no equivalent key in Java's own GameState text
 			// format at all, not even one this port chose to diverge from.
 			slot, ok := playerSlot(strings.ToLower(strings.TrimSpace(strings.TrimPrefix(info, "Protector:"))))

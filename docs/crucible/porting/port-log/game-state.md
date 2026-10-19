@@ -192,7 +192,7 @@ compared were never going to agree on those by number.
 
 ## Where the rest is
 
-Reproduced quirks and deviations: [`quirks.md`](quirks.md). Forge defects: [`../forge-java-defects.md`](../forge-java-defects.md), [`../card-script-defects.md`](../card-script-defects.md). Java provenance: the Go files' `Ported from` comments. Per-batch landing notes were removed (ADR-0043); a comment citing a section of this file by title points into git history at `624d87dba16`.
+Reproduced quirks and deviations: [`quirks.md`](quirks.md). Forge defects: [`../forge-java-defects.md`](../forge-java-defects.md), [`../card-script-defects.md`](../card-script-defects.md). Java provenance: the Go files' `Ported from` comments. Per-batch landing notes were removed (ADR-0043); a comment citing "the removed port log's" section points into git history at `624d87dba16`.
 
 ## Not ported yet
 

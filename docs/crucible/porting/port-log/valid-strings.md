@@ -94,7 +94,7 @@ result for that one property (`valid.Property.Negated`), independent of the base
 
 **`YouCtrl`/`OppCtrl` read `Card.Controller` directly, not Java's LKI-derived controller.**
 `CardProperty.cardHasProperty` compares against `game.getChangeZoneLKIInfo(card).getController()`, last-known
-information for a card whose own zone change might be mid-resolution. This port has no LKI tracking (`game-state.md`'s
+information for a card whose own zone change might be mid-resolution. This port has no LKI tracking (the removed port log's
 "Not ported yet"), so it reads the current `Controller` — correct except for the one moment a card's own leaving is what
 a property is trying to describe, the same category of gap `Move`'s missing LKI already is.
 
@@ -105,7 +105,7 @@ port reads it as "controlled by anyone other than `sourceController`" — right 
 `Matches` takes `sourceController PlayerID, source CardID` (plus, since the memory-based batch below, a `*Game`) rather
 than an `*Ability`: tying it to `Ability` specifically would assume every valid-string check happens during ability
 resolution, which CR 704.5's still-unbuilt Aura `Enchant`-restriction check will not (its source is the Aura itself, not
-anything on a stack — `game-state.md`'s "State-based actions" section has the full citation caveat: Java's own comments
+anything on a stack — the removed port log's "State-based actions" section has the full citation caveat: Java's own comments
 do not cleanly single-letter this rule).
 
 ## Color reaches `Matches` through a second chain, `CardStateProperty`
@@ -175,7 +175,7 @@ nested `if` (`property.startsWith("without") && ...` checked inside the outer `p
 checking the longer, more specific prefix first.
 
 **`tapped`/`untapped` read `Card.Tapped` directly** — the same battlefield-only field `Game.Move` already clears on
-leaving it (game-state.md's "The card's mutable parts").
+leaving it (the removed port log's "The card's mutable parts").
 
 ## Numeric comparisons land in `engine.Matches`
 
@@ -244,7 +244,7 @@ has, applied to a missing source card instead of a missing printed value.
 
 **`ChosenCardStrict` collapses to `ChosenCard`, the same way `StrictlyOther` collapses to `Other`.** Java's `Strict`
 suffix additionally checks `equalsWithGameTimestamp` — telling a chosen card from a same-named copy of itself apart
-across a zone change — which this port has no game-timestamp tracking for (`game-state.md`'s "Not ported yet", the same
+across a zone change — which this port has no game-timestamp tracking for (game-state.md's "Not ported yet", the same
 gap this doc's own "Ownership, identity and keyword properties" section already names for `StrictlyOther`).
 `nonChosenCard` is `ChosenCard`'s negation and its own named token in the corpus (27 occurrences) rather than a bare
 `!ChosenCard` — Forge exposes both spellings, so both are ported, and `nonChosenCard` shares `sourceCard`'s
@@ -352,7 +352,7 @@ segment with no underscore of its own — `countersReceivedThisTurn_GE1_P1P1_You
 `splitProperty[0].endsWith("ReceivedThisTurn")` is how Java's code tells it apart from the plain form — so it does not
 match `counters_` (with the underscore) either, and falls straight through to the same "false for every card" answer the
 type-name fallthrough gives anything else unrecognized. This port has no per-turn counter-received tracking to answer it
-with regardless (`game-state.md`'s "Not ported yet"); only one card in the corpus uses this form.
+with regardless (game-state.md's "Not ported yet"); only one card in the corpus uses this form.
 
 ## `enchanted`/`equipped`/`modified`: subtype-filtered attachment checks, and CR 707.9
 

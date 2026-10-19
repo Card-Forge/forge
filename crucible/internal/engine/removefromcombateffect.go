@@ -11,7 +11,7 @@
 // resolve. Java's own timestamp-staleness re-check
 // (game.getCardState/equalsWithGameTimestamp) is not ported, multiplyCounterEffect's
 // own identical reasoning; saveLKI is not ported either -- this port's own
-// Game.LKI (game-state.md's "Last-known-information lands") already covers
+// Game.LKI (the removed port log's "Last-known-information lands") already covers
 // the one subset the real corpus's own dies triggers read, and a card
 // merely leaving combat, still on the battlefield, needs no LKI copy at all.
 

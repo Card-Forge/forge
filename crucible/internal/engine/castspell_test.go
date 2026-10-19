@@ -100,7 +100,7 @@ func TestCastSpellMovesCreatureThroughStackToBattlefield(t *testing.T) {
 
 // CastSpell fires SpellCast on a successful cast -- the event schema
 // (ADR-0013) has named this kind since M4, with nothing to emit it until
-// now (game-state.md's "Not wired" list).
+// now (the removed port log's "Not wired" list).
 func TestCastSpellFiresSpellCast(t *testing.T) {
 	t.Parallel()
 

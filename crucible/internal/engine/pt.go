@@ -27,7 +27,7 @@ type PT struct {
 // HasPower and HasToughness matter only for LayerCharacteristic/LayerSetPT:
 // a real corpus SetPower/SetToughness line sets just one dimension far more
 // often than both together (68 SetPower-only, 9 SetToughness-only lines,
-// port-log/game-state.md's "Continuous effects" section), and the
+// the removed port log's "Continuous effects" section), and the
 // dimension it leaves alone must stay exactly what came before it, not
 // reset to zero -- foldPT (card.go) only overwrites a dimension one of
 // these two flags is true for. LayerModifyPT needs neither flag: adding

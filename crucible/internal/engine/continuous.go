@@ -1,7 +1,7 @@
 // Continuous effects: CR 613, four layers deep so far. Layer 7b/7c's own
 // power/toughness keys (SetPower$/SetToughness$/AddPower$/AddToughness$) are
 // the single most common real corpus shape (2,192 of 2,426 real S:Mode$
-// Continuous lines carrying one of these four keys, port-log/game-state.md's
+// Continuous lines carrying one of these four keys, the removed port log's
 // "Continuous effects" section); Layer 4's own type-changing keys (AddType$/
 // RemoveType$, applyContinuousType), Layer 5's own color-changing keys
 // (AddColor$/SetColor$, applyContinuousColor) and Layer 6's own
@@ -36,7 +36,7 @@ import (
 // happens every CheckStateBasedActions pass regardless of Condition$, so
 // this is evaluated fresh alongside them rather than latched once. A line
 // naming no Condition$ passes unconditionally. Ported for the real corpus's
-// own values on a Mode$ Continuous line (317 total, port-log/game-state.md's
+// own values on a Mode$ Continuous line (317 total, the removed port log's
 // "Continuous effects" section): PlayerTurn/NotPlayerTurn (141, 8 -- the
 // active player compared against host's own controller, Java's own
 // PhaseHandler.isPlayerTurn collapsed to that one comparison), Threshold (61
@@ -239,7 +239,7 @@ func setPTStatics(statics []layerStatic) []layerStatic {
 // can resolve. A line naming both Set and Add keys is applied in two calls,
 // its affected set fixed by the first (staticAffected, CR 613.6).
 //
-// Not resolved, each for a specific reason (game-state.md's "Continuous
+// Not resolved, each for a specific reason (the removed port log's "Continuous
 // effects" section has the corpus counts behind every number below):
 //   - A line layerStaticApplies turns off: a Condition$ value this port has
 //     no player-state for (MaxSpeed --

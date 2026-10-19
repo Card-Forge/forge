@@ -214,7 +214,7 @@ func TestPayManaCostResolvesPhyrexianWithColor(t *testing.T) {
 
 // The same shard resolved to life costs 2 life and spends no mana at all,
 // and fires LifeChanged the same way combat damage does (CounterChanged's
-// own "wired at every real call site" discipline, game-state.md's "Events,
+// own "wired at every real call site" discipline, the removed port log's "Events,
 // wired").
 func TestPayManaCostResolvesPhyrexianWithLife(t *testing.T) {
 	t.Parallel()

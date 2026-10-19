@@ -170,7 +170,7 @@ type Face struct {
 	// reference, which is why they stay text here rather than becoming an
 	// int at compile time (carddb.Face's own doc comment). Resolving one to
 	// a number, when it is a plain integer, is engine.Card.BasePower/
-	// BaseToughness's job (game-state.md's "Layer 0" section).
+	// BaseToughness's job (the removed port log's "Layer 0" section).
 	Power, Toughness string
 
 	// Loyalty is a planeswalker's printed starting loyalty, carried through
