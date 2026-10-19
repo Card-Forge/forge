@@ -194,22 +194,40 @@ public final class FModel {
         Lang.createInstance(getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
+        //the card, token and custom readers each report 0..total on their own, which made the bar fill up and start over.
+        //Every restart is treated as the next stage of one overall run, weighted by its usual share of the work, and the bar only moves forward.
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
+            private final float[] stageWeights = {0.8f, 0.1f, 0.05f, 0.05f}; //cards, tokens, custom cards, custom tokens
+            private int stage = 0;
+            private float lastFraction = 0f, shown = 0f;
+            private int lastPosted = -1; //the bar has few steps, so most reports change nothing and are not posted to the UI thread
+
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
                 FThreads.invokeInEdtLater(() -> {
                     progressBar.setDescription(name);
-                    progressBar.setPercentMode(usePercents);
+                    progressBar.setPercentMode(true);
                 });
             }
 
             @Override
-            public void report(final int current, final int total) {
-                FThreads.invokeInEdtLater(() -> {
-                    progressBar.setMaximum(total);
-                    progressBar.setValue(current);
-                });
+            public synchronized void report(final int current, final int total) {
+                final float fraction = total <= 0 ? 0f : Math.min(1f, (float) current / total);
+                if (fraction < lastFraction - 0.5f && stage < stageWeights.length - 1) {
+                    stage++; //a new reader started counting again from the beginning
+                }
+                lastFraction = fraction;
+                float base = 0f;
+                for (int i = 0; i < stage; i++) {
+                    base += stageWeights[i];
+                }
+                shown = Math.max(shown, base + stageWeights[stage] * fraction);
+                final int value = Math.round(shown * progressCeiling);
+                if (value != lastPosted) { //tens of thousands of cards report, only a few hundred bar steps are worth a UI post
+                    lastPosted = value;
+                    updateProgressBar(progressBar, value);
+                }
             }
         };
 
@@ -288,6 +306,16 @@ public final class FModel {
         if (loadDeckGen && !loadCardsLazily) {
             loadDeckGenMatrix();
         }
+    }
+
+    //mobile lowers this to leave room on the bar for its own startup steps after the card databases are loaded
+    public static volatile int progressCeiling = 1000;
+
+    private static void updateProgressBar(IProgressBar progressBar, int value) {
+        FThreads.invokeInEdtLater(() -> {
+            progressBar.setMaximum(1000);
+            progressBar.setValue(value);
+        });
     }
 
     /** Loads the data card-based deck generation draws on, when the preference asks for it. Needs every card read. */

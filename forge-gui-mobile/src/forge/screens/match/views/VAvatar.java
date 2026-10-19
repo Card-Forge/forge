@@ -188,11 +188,11 @@ public class VAvatar extends FDisplayObject {
             float alpha = displayPriority ? 1f : 0.8f;
             if (alphaModifier < 1)
                 alpha = alphaModifier;
-            g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.CYAN).alphaColor(alpha), 0, 0, w, h);
+            g.drawRect(ringWidth(w), FSkinColor.getStandardColor(Color.CYAN).alphaColor(alpha), 0, 0, w, h);
         }
         //priority indicator
         if (displayPriority && player.getHasPriority() && alphaModifier == 1) {
-            g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.LIME).alphaColor(0.6f), 0, 0, w, h);
+            g.drawRect(ringWidth(w), FSkinColor.getStandardColor(Color.LIME).alphaColor(0.6f), 0, 0, w, h);
         }
         //highlighted (chosen) or valid to choose
         if (MatchController.instance.isHighlighted(player)) {
@@ -208,6 +208,11 @@ public class VAvatar extends FDisplayObject {
                 }
             }
         }
+    }
+
+    //compact layout: a thin ring, so it does not swallow a small avatar
+    private static float ringWidth(float w) {
+        return VPlayerPanel.isCompactLayout() ? Math.max(Utils.scale(1.5f), w / 32f) : w / 16f;
     }
 
     @Override

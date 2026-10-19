@@ -246,7 +246,8 @@ public final class CardFlightOverlay {
         for (VPlayerPanel.InfoTab tab : pp.getTabs()) {
             if (tab instanceof VPlayerPanel.InfoTabZone && ((VPlayerPanel.InfoTabZone) tab).zoneType == zone) {
                 Rectangle r = tab.screenPos;
-                return (r != null && r.width > 0 && r.height > 0) ? r : null;
+                //a tab scrolled out of the compact layout's tab viewport isn't on screen
+                return (r != null && r.width > 0 && r.height > 0 && tab.isVisible()) ? r : null;
             }
         }
         return null;
