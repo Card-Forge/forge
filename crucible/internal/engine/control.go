@@ -509,6 +509,18 @@ type PlayerController interface {
 	// answer (GO-7).
 	ChooseSector(g *Game, decider PlayerID, assignee CardID, sectors []string) int
 
+	// ChooseSticker picks the sticker to place on target out of options (the
+	// ones the decider can afford and has not placed), answering with its
+	// index, or -1 for none -- allowed only when optional (Java's
+	// chooseSticker, PlayerController.java:256, ADR-0044). The caller checks
+	// the answer (GO-7).
+	ChooseSticker(g *Game, decider PlayerID, source, target CardID, options []StickerOption, optional bool) int
+
+	// ChooseStickerNamePosition picks which blank of target's name a Name
+	// sticker's word fills, answering with its index -- Java's
+	// chooseStickerNamePosition (PlayerController.java:260, ADR-0044).
+	ChooseStickerNamePosition(g *Game, decider PlayerID, target CardID, option StickerOption) int
+
 	// ChooseRoomDoor picks one of doors, doors of the Room room -- Java's
 	// chooseSingleCardState over the Room's LeftSplit/RightSplit states,
 	// asked by UnlockDoor's Mode$ Unlock ("Choose Room to unlock") and Mode$
@@ -630,6 +642,8 @@ type ScriptedController struct {
 	binary             []bool
 	option             []optionAnswer
 	sector             []int
+	sticker            []int
+	stickerPos         []int
 	roomDoor           []Door
 	replacementPick    []int
 	replacementConfirm []bool
@@ -1329,6 +1343,25 @@ func (c *ScriptedController) QueueSector(i int) { c.sector = append(c.sector, i)
 // ChooseSector returns the next answer QueueSector queued.
 func (c *ScriptedController) ChooseSector(_ *Game, _ PlayerID, _ CardID, _ []string) int {
 	return popQueue(&c.sector, "sector")
+}
+
+// QueueSticker appends the answer to the next ChooseSticker call: an index
+// into the options offered, -1 for none.
+func (c *ScriptedController) QueueSticker(i int) { c.sticker = append(c.sticker, i) }
+
+// ChooseSticker returns the next answer QueueSticker queued.
+func (c *ScriptedController) ChooseSticker(_ *Game, _ PlayerID, _, _ CardID, _ []StickerOption, _ bool) int {
+	return popQueue(&c.sticker, "sticker")
+}
+
+// QueueStickerNamePosition appends the answer to the next
+// ChooseStickerNamePosition call.
+func (c *ScriptedController) QueueStickerNamePosition(i int) { c.stickerPos = append(c.stickerPos, i) }
+
+// ChooseStickerNamePosition returns the next answer QueueStickerNamePosition
+// queued.
+func (c *ScriptedController) ChooseStickerNamePosition(_ *Game, _ PlayerID, _ CardID, _ StickerOption) int {
+	return popQueue(&c.stickerPos, "sticker name position")
 }
 
 // QueueRoomDoor appends the answer to the next ChooseRoomDoor call.

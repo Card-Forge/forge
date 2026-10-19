@@ -75,7 +75,9 @@ func NewProber(db *compile.DB) *Prober {
 const (
 	bears = "Grizzly Bears"
 	land  = "Forest"
-	bolt  = "Lightning Bolt"
+	// stickerSheet is the sheet every probe player owns.
+	stickerSheet = "Unstable Robot Dragon"
+	bolt         = "Lightning Bolt"
 )
 
 // richBoard is what the richer variant adds for each player, by card name, so
@@ -216,6 +218,12 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 		g.NewCard(bearsDef, who, engine.Battlefield)
 		g.NewCard(landDef, who, engine.Battlefield)
 		g.NewCard(bearsDef, who, engine.Graveyard)
+		// Every player owns a real sticker sheet and the tickets to use it, so a
+		// PutSticker card finds something to place.
+		if sheet, ok := p.db.Card(stickerSheet); ok {
+			g.NewCard(sheet, who, engine.StickerSheets)
+			g.Player(who).Counters.Add(engine.Ticket, 10)
+		}
 		if v.rich {
 			p.addRich(g, who)
 		}
@@ -292,8 +300,14 @@ func (p *Prober) run(name string, where *atomic.Value, v variant) (res Result) {
 
 	face := def.Faces[0].Type
 	if face.Has(cardtype.Stickers) {
-		res.Outcome, res.Stage = Refused, "setup"
-		res.Detail = "engine: sticker sheets are not ported (open plan R15)"
+		// A sheet is never cast: it sits in the StickerSheets zone, placed.
+		stage = "turns"
+		where.Store(stage)
+		g.NewCard(def, pid, engine.StickerSheets)
+		if err := settle(g.Run(p.registry, ctl, 3)); err != nil {
+			return fail(Refused, stage, err)
+		}
+		res.Outcome = Placed
 		return res
 	}
 	if isCommandType(face) {

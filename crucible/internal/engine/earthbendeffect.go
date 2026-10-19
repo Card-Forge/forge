@@ -119,6 +119,12 @@ func (g *Game) checkPlayerActionTriggers(controller PlayerController, actor Play
 // the matches instead of pushing them. gate, when not nil, is a further
 // mode-specific test a line must pass (Mode$ BecomeMonarch's BeginTurn$).
 func (g *Game) playerActionTriggerMatches(actor PlayerID, gate func(h *Card, t *compile.Ability) bool, modes ...string) []Ability {
+	return g.playerActionTriggerMatchesWith(actor, triggeredObjects{}, gate, modes...)
+}
+
+// playerActionTriggerMatchesWith is playerActionTriggerMatches with the
+// triggering objects the mode records (Mode$ StickerPlaced's Card).
+func (g *Game) playerActionTriggerMatchesWith(actor PlayerID, objs triggeredObjects, gate func(h *Card, t *compile.Ability) bool, modes ...string) []Ability {
 	var matches []Ability
 	for _, mode := range modes {
 		for _, pid := range g.Players() {
@@ -143,7 +149,7 @@ func (g *Game) playerActionTriggerMatches(actor PlayerID, gate func(h *Card, t *
 								continue
 							}
 							if sub, api, optional, ok := triggerEffectAPI(g, h, face.Amounts, t); ok {
-								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(triggeredObjects{}), staticTrigger: isStaticTrigger(t)})
+								matches = append(matches, Ability{API: api, Source: host, Controller: h.Controller(), Params: sub, Amounts: face.Amounts, Optional: optional, triggered: face.objects(objs), staticTrigger: isStaticTrigger(t)})
 							}
 						}
 					}

@@ -75,7 +75,7 @@ func validFamilyValue(g *Game, sourceController PlayerID, source CardID, count e
 // name one earlier branch would catch never reaches a later one.
 //
 // Not measured, each false (GO-7): TapPowerValue (CardLists.getTotalPower's
-// tap-for-power replacements), Sticker*, AllTypes, and CreatureType/
+// tap-for-power replacements), AllTypes, and CreatureType/
 // PlaneswalkerType/LandType (each needs the subtype vocabulary to tell a
 // creature type from any other subtype). A property this does not recognize
 // must not fall back to a plain match count: that would be a real but wrong
@@ -143,8 +143,11 @@ func handlePaid(g *Game, amounts map[string]expr.Amount, sourceController Player
 			return handlePaid(g, amounts, sourceController, source, filtered, nested, op, depth)
 		}
 		return math(len(filtered))
-	case strings.HasPrefix(def, "StickerPower"), strings.HasPrefix(def, "StickerToughness"),
-		strings.HasPrefix(def, "AllTypes"):
+	case strings.HasPrefix(def, "StickerPower"), strings.HasPrefix(def, "StickerToughness"):
+		// AbilityUtils.java:3784-3791: the PT stickers' numbers summed over the
+		// list, the operator applied once to the total.
+		return math(g.stickerPTSum(cards, strings.HasPrefix(def, "StickerPower")))
+	case strings.HasPrefix(def, "AllTypes"):
 		return 0, false
 	case strings.HasPrefix(def, "CardTypes"):
 		permanent := strings.HasPrefix(def, "CardTypesPermanent")

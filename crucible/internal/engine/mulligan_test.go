@@ -513,6 +513,14 @@ func (c *scriptedMulliganController) ChooseSector(_ *engine.Game, _ engine.Playe
 	panic("scriptedMulliganController: ChooseSector was not expected to be called")
 }
 
+func (c *scriptedMulliganController) ChooseSticker(_ *engine.Game, _ engine.PlayerID, _, _ engine.CardID, _ []engine.StickerOption, _ bool) int {
+	panic("scriptedMulliganController: ChooseSticker was not expected to be called")
+}
+
+func (c *scriptedMulliganController) ChooseStickerNamePosition(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, _ engine.StickerOption) int {
+	panic("scriptedMulliganController: ChooseStickerNamePosition was not expected to be called")
+}
+
 func (c *scriptedMulliganController) DivideAmongTargets(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, _ []engine.EntityID, _ int) []int {
 	panic("scriptedMulliganController: DivideAmongTargets was not expected to be called")
 }

@@ -19,7 +19,7 @@ import (
 // its declaration order.
 type Section uint8
 
-// The ten deck sections.
+// The eleven deck sections.
 const (
 	Main Section = iota
 	Sideboard
@@ -31,8 +31,9 @@ const (
 	Dungeon
 	Attractions
 	Contraptions
+	Stickers
 
-	numSections = int(Contraptions) + 1
+	numSections = int(Stickers) + 1
 )
 
 var sectionNames = [numSections]string{
@@ -46,6 +47,7 @@ var sectionNames = [numSections]string{
 	Dungeon:      "Dungeon",
 	Attractions:  "Attractions",
 	Contraptions: "Contraptions",
+	Stickers:     "Stickers",
 }
 
 // String returns the section's name as a decklist writes it.

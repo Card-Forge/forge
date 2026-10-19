@@ -368,6 +368,12 @@ type Card struct {
 	// Card.getName): the last overwrite in timestamp order, "" for none.
 	// Rebuilt every pass by applyContinuousNames; read through Name.
 	changedName string
+	// stickerName is the name the card's Name stickers make of its printed one
+	// (Card.recomputeStickerName, Card.java:4677-4693), "" with none. Kept
+	// apart from changedName because a sticker's name holds in every public
+	// zone, a SetName$ result only on the battlefield. Rebuilt every pass by
+	// applyStickerNames.
+	stickerName string
 
 	// text is Layer 3's own text-changing effect on this permanent (CR
 	// 613.1c): GainTextOf$ (applyContinuousText, continuous.go). While it
@@ -416,6 +422,10 @@ type Card struct {
 	// 262), never by a zone change: the host is one object from stack to
 	// battlefield. Held by ID, as a card keeps its ID through Exile.
 	delved []CardID
+	// stickers is Card.stickers (Card.java:4617): what has been placed on this
+	// card, in placement order (ADR-0044). A move into a hidden zone clears it
+	// (put); one into a public zone keeps it (GameAction.java:268-270).
+	stickers []appliedSticker
 	// haunting is Card.haunting (Card.java:1392, CR 702.55): the creature
 	// this exiled card haunts, set by Haunt (haunteffect.go) and read by the
 	// HauntedBy valid property. The zero value haunts nothing.
@@ -599,6 +609,9 @@ type traitGrant struct {
 func (c *Card) Name() string {
 	if c.changedName != "" && c.Zone == Battlefield {
 		return c.changedName
+	}
+	if c.stickerName != "" {
+		return c.stickerName
 	}
 	if c.Def == nil {
 		return ""

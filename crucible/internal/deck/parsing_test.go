@@ -71,6 +71,7 @@ func TestSectionHeaders(t *testing.T) {
 		{" Sideboard ", deck.Sideboard, true},
 		{"COMMANDER", deck.Commander, true},
 		{"Contraptions", deck.Contraptions, true},
+		{"Stickers", deck.Stickers, true},
 		{"quest", 0, false},
 		{"shop", 0, false},
 	} {

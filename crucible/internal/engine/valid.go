@@ -223,6 +223,13 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		}
 		stamp, _ := g.hostObjectStamp(source)
 		return ew.stamp == stamp
+	case name == "stickered":
+		// CardProperty.java:1337-1339: Card.isStickered.
+		return len(c.stickers) > 0
+	case strings.HasPrefix(name, "stickeredWith "):
+		// CardProperty.java:1340-1344: a sticker of the named kind is on c;
+		// an unknown kind name matches no card (smartValueOf is null).
+		return g.hasStickerKindNamed(c, strings.TrimPrefix(name, "stickeredWith "))
 	case strings.HasPrefix(name, "delved"):
 		// CardProperty.java:1367-1369 (startsWith, so any suffix matches):
 		// c is among the cards source's own last delve exiled.

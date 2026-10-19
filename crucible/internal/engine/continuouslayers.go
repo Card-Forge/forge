@@ -606,6 +606,15 @@ func layerKeywordChange(g *Game, host *Card, amounts map[string]expr.Amount, s *
 			k.add = shared
 		}
 	}
+	// GainsStickerAbilitiesOf$ (StaticAbilityContinuous.java:316-331): the
+	// keywords of the Ability stickers on the cards it names, as printed.
+	stickers, ok := g.gainedStickers(host, s)
+	if !ok {
+		return layerKeywords{}, false
+	}
+	for _, st := range stickers {
+		k.add = append(k.add, st.def.Keywords...)
+	}
 	if len(k.add) == 0 && k.remove == nil && !k.removeAll && k.cantHave == nil {
 		return layerKeywords{}, false
 	}

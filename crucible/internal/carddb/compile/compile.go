@@ -215,6 +215,10 @@ type Face struct {
 	Statics      []*Ability
 	Replacements []*Ability
 
+	// Stickers is a sticker sheet's slots, in `K:StickerSheet:` order
+	// (sticker.go); nil on every other face.
+	Stickers []Sticker
+
 	// Amounts is every SVar this face defines that is NOT itself an ability
 	// (one of the four slices above, reached through a Sub reference when a
 	// param names it) -- most commonly a `SVar:X:Count$...` line, the value
@@ -298,6 +302,14 @@ func compileFace(face *carddb.Face) (Face, error) {
 			if r != nil {
 				out.Replacements = append(out.Replacements, r)
 			}
+			continue
+		}
+		if slots, ok := strings.CutPrefix(kw, "StickerSheet:"); ok {
+			stickers, err := c.stickerSheet(slots)
+			if err != nil {
+				return Face{}, err
+			}
+			out.Stickers = stickers
 			continue
 		}
 		rooms, ok := strings.CutPrefix(kw, "Dungeon:")

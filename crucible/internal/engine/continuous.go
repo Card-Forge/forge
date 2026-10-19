@@ -202,6 +202,7 @@ func applyContinuousPT(g *Game) {
 	// battlefield is rebuilt too.
 	forEachOffBattlefieldCard(g, func(c *Card) { c.PT.Clear() })
 	animatePT(g)
+	stickerPT(g)
 	pumpPT(g)
 	statics := continuousStaticsAllZones(g)
 	for _, ls := range statics {
@@ -472,6 +473,7 @@ func applyContinuousKeyword(g *Game) {
 	forEachOffBattlefieldCard(g, func(c *Card) { c.KeywordMod.Clear() })
 	animateKeywords(g)
 	animateAbilities(g)
+	stickerAbilities(g)
 	pumpLayerKeywords(g)
 	applyInDependencyOrder(g, staticsWithAny(continuousStaticsAllZones(g), keywordLayerKeys...), abilitiesLayerOps(g))
 }
@@ -550,10 +552,11 @@ func applyOneContinuousKeyword(g *Game, host *Card, amounts map[string]expr.Amou
 // (Card.hasNonLegendaryCreatureNames, Card.java:997-1007), so the statics apply
 // in effectOrder here and the last write wins.
 func applyContinuousNames(g *Game) {
+	applyStickerNames(g)
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
 			g.Card(id).HasNonLegendaryCreatureNames = false
-			g.Card(id).changedName = ""
+			g.Card(id).changedName = g.Card(id).stickerName
 		}
 	}
 	for _, ls := range continuousStatics(g) {
@@ -1545,7 +1548,14 @@ func applyOneContinuousTraits(g *Game, host *Card, amounts map[string]expr.Amoun
 	case hasParamOn(s, "RemoveNonManaAbilities"):
 		removal = removalNonMana
 	}
-	granting := len(grant.triggers) > 0 || len(grant.abilities) > 0 || len(grant.statics) > 0 || len(grant.replacements) > 0
+	// GainsStickerAbilitiesOf$/OfDefined$: the traits of the Ability stickers on
+	// other cards, each read against its own sheet's SVars
+	// (StaticAbilityContinuous.java:316-330, :800-812).
+	stickerGrants, ok := g.gainedStickerGrants(host, s)
+	if !ok {
+		return nil
+	}
+	granting := len(grant.triggers) > 0 || len(grant.abilities) > 0 || len(grant.statics) > 0 || len(grant.replacements) > 0 || len(stickerGrants) > 0
 	if !granting && removal == removalNone {
 		return nil
 	}
@@ -1573,6 +1583,12 @@ func applyOneContinuousTraits(g *Game, host *Card, amounts map[string]expr.Amoun
 			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), cg)
 			for _, st := range cg.statics {
 				added = append(added, layerStatic{host: id, def: c.Def, face: -1, s: st, amounts: amounts})
+			}
+			for _, sg := range stickerGrants {
+				c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), sg)
+				for _, st := range sg.statics {
+					added = append(added, layerStatic{host: id, def: c.Def, face: -1, s: st, amounts: sg.amounts})
+				}
 			}
 		}
 	}

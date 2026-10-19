@@ -224,7 +224,7 @@ Reproduced quirks and deviations: [`quirks.md`](quirks.md). Forge defects: [`../
 | `Card.damageDealtThisTurn` survives a zone change | Java gives a new object a fresh `CardDamageHistory` |
 | Fixture `NewCard` setup cards have no zone entry | `GameState.java:1218-1223` sets their turn-in-zone to the current turn, so a `ThisTurnEntered` scenario on setup cards disagrees with the oracle |
 | Rebound keyword | Not expanded (`CardFactoryUtil.java:2423`); Staggershock and Ephemerate play without it, silently |
-| Sticker sheets (`StickerSheet` keyword, `PutSticker`, `StickerPlaced`, `ZoneType.StickerSheets`): corpus parses, engine ignores | M6 |
+| Stickers (ADR-0044): compiled sheets, `PutSticker`, `StickerPlaced`, all four kinds, `CardStickers`, `StickerPower`/`StickerToughness`, `stickered`/`stickeredWith`, `GainsStickerAbilitiesOf*` and `SeatStickerSheets` resolve. Open: no deck loader calls `SeatStickerSheets`, so a real game starts with no sheets; stickers do not follow a merge, meld, unmeld or mutate (`takeStickersFrom`, `chooseCardToKeepStickers`); the fixture has no `queue sticker` action; ticket payment emits no counter-removed event; `HasAttackEffect` (an AI hint) is not set; a sticker granting an ability to a card in a hidden zone is moot | M6 |
 | Payments outside priority (attack costs, `UnlessCost$` at resolution) | Pool only; no CR 508.1i mana-ability window, so a taxed attacker without floating mana stays home |
 | `Mode$ CantBlockUnless` (10 corpus lines) | Ignored; blockers block free |
 | Amounts read before targets are chosen: Monstrous Onslaught `GreatestCardPower` (needs a "layers being applied" flag), Wildfire Howl `PromisedGift`, Geth's Summons (other cause) | Open plan R25i-R25k |

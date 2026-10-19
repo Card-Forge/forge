@@ -91,6 +91,12 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 			return 0, false
 		}
 		return g.Card(source).Intensity + startingIntensity(g.Card(source)), true
+	case "CardStickers":
+		// AbilityUtils.java:2107-2109: the host's own stickers.
+		if source == NoCard {
+			return 0, false
+		}
+		return g.countStickers(g.Card(source), count.Parameters)
 	case "CardCounters":
 		if source == NoCard || len(count.Parameters) == 0 {
 			return 0, false

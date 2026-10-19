@@ -101,10 +101,10 @@ func TestProbeClassifiesCards(t *testing.T) {
 		// Never castable on any board or moment: the last condition reads a
 		// red spell that dealt damage this turn.
 		{"Suffocation", smoke.Inconclusive},
-		// Command-zone types are placed, not cast; a sticker sheet is refused.
+		// Command-zone types are placed, not cast; a sticker sheet sits in its zone.
 		{"Akoum", smoke.Placed},
 		{"Backup Plan", smoke.Placed},
-		{"Ancestral Hot Dog Minotaur", smoke.Refused},
+		{"Ancestral Hot Dog Minotaur", smoke.Placed},
 	} {
 		t.Run(tc.card, func(t *testing.T) {
 			t.Parallel()

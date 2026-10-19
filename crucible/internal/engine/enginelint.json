@@ -80,6 +80,7 @@
     "returncost": ["returncost.go"],
     "exertcost": ["exertcost.go"],
     "exploit": ["exploit.go"],
+    "sticker": ["sticker.go"],
     "gameloss": ["gameloss.go"],
     "castoptions": ["castoptions.go"],
     "castrecord": ["castrecord.go"],
@@ -109,6 +110,7 @@
     "layer": [],
     "parts": ["id", "layer"],
     "card": [
+      "sticker",
       "id",
       "zone",
       "parts",
@@ -125,6 +127,7 @@
     "ability": ["id", "mana", "damageresolveeffect", "replaceeffect"],
     "combat": ["id", "game", "valid", "effecthelpers", "card"],
     "game": [
+      "sticker",
       "id",
       "zone",
       "parts",
@@ -156,7 +159,7 @@
     ],
     "phase": [],
     "event": ["id", "zone", "phase", "parts"],
-    "control": ["id", "game", "combat", "zone", "priority", "room"],
+    "control": ["id", "game", "combat", "zone", "priority", "room", "sticker"],
     "action": [
       "id",
       "zone",
@@ -397,6 +400,7 @@
     ],
     "statictrigger": ["id", "game", "card", "ability", "control", "effect"],
     "continuous": [
+      "sticker",
       "ignoreeffect",
       "presentcheck",
       "id",
@@ -522,6 +526,7 @@
     "returncost": ["id", "zone", "card", "game", "control", "valid", "trigger", "ability"],
     "exertcost": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger", "statictrigger"],
     "exploit": ["id", "zone", "card", "game", "control", "valid", "ability", "trigger", "statictrigger"],
+    "sticker": ["id", "zone", "parts", "layer", "card", "game", "defined", "ability", "valid"],
     "gameloss": ["id", "zone", "card", "game", "player", "valid", "replacement", "parts", "effecthelpers"],
     "castoptions": [
       "id",

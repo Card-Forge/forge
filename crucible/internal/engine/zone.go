@@ -28,6 +28,7 @@ const (
 	AttractionDeck
 	Junkyard
 	ContraptionDeck
+	StickerSheets
 	Subgame
 	ExtraHand
 	None
@@ -40,7 +41,7 @@ var zoneNames = [numZoneTypes]string{
 	Exile: "Exile", Flashback: "Flashback", Command: "Command", Stack: "Stack",
 	Sideboard: "Sideboard", Ante: "Ante", Merged: "Merged", SchemeDeck: "SchemeDeck",
 	PlanarDeck: "PlanarDeck", AttractionDeck: "AttractionDeck", Junkyard: "Junkyard",
-	ContraptionDeck: "ContraptionDeck", Subgame: "Subgame", ExtraHand: "ExtraHand",
+	ContraptionDeck: "ContraptionDeck", StickerSheets: "StickerSheets", Subgame: "Subgame", ExtraHand: "ExtraHand",
 	None: "None",
 }
 

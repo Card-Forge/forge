@@ -384,6 +384,19 @@ func (*Controller) ChooseOption(*engine.Game, engine.PlayerID, engine.CardID, []
 // ChooseSector picks the first sector.
 func (*Controller) ChooseSector(*engine.Game, engine.PlayerID, engine.CardID, []string) int { return 0 }
 
+// ChooseSticker places the first sticker offered.
+func (*Controller) ChooseSticker(_ *engine.Game, _ engine.PlayerID, _, _ engine.CardID, options []engine.StickerOption, _ bool) int {
+	if len(options) == 0 {
+		return -1
+	}
+	return 0
+}
+
+// ChooseStickerNamePosition fills the first blank.
+func (*Controller) ChooseStickerNamePosition(*engine.Game, engine.PlayerID, engine.CardID, engine.StickerOption) int {
+	return 0
+}
+
 // ChooseRoomDoor picks the first door.
 func (*Controller) ChooseRoomDoor(_ *engine.Game, _ engine.PlayerID, _ engine.CardID, doors []engine.Door) engine.Door {
 	return doors[0]
