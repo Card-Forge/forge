@@ -74,7 +74,7 @@ public class PlayerOutcome {
             case Poisoned: return localizer.getMessage("lblLostBecauseOfObtainingTenPoisonCounters");
             case OpponentWon: return localizer.getMessage("lblLostBecauseAnOpponentHasWonBySpell").replace("%s", loseConditionSpell);
             case SpellEffect: return localizer.getMessage("lblLostDueToEffectOfSpell").replace("%s", loseConditionSpell);
-            case CommanderDamage: return localizer.getMessage("lblLostDueToAccumulationOf21DamageFromGenerals");
+            case CommanderDamage: return localizer.getMessage("lblLostDueToAccumulationOfNDamageFromGenerals").replace("%s", loseConditionSpell);
             case IntentionalDraw: return localizer.getMessage("lblAcceptedThatTheGameIsADraw");
         }
         return localizer.getMessage("lblLostForUnknownReasonBug");
