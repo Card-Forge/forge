@@ -54,7 +54,7 @@ func TestGenericChoiceEffectEachPlayerTempRemember(t *testing.T) {
 }
 
 // TestGenericChoiceEffectRejectsBadShapes proves AtRandom$ Urza, an
-// out-of-range answer, and a choice carrying UnlessCost$ fail closed.
+// out-of-range answer, and a choice whose UnlessCost$ is past the cost reader fail closed.
 func TestGenericChoiceEffectRejectsBadShapes(t *testing.T) {
 	t.Parallel()
 
@@ -75,9 +75,50 @@ func TestGenericChoiceEffectRejectsBadShapes(t *testing.T) {
 		def := etbChainDef(t, "Test Choice Bad", tc.line,
 			"DBA", "DB$ GainLife | Defined$ You | LifeAmount$ 1",
 			"DBB", "DB$ GainLife | Defined$ You | LifeAmount$ 5",
-			"DBC", "DB$ GainLife | Defined$ You | LifeAmount$ 5 | UnlessCost$ 1")
+			"DBC", "DB$ GainLife | Defined$ You | LifeAmount$ 5 | UnlessCost$ T")
 		if _, err := castETBChain(t, g, p, def, c); err == nil {
 			t.Errorf("%q: ResolveStack succeeded, want an error", tc.line)
 		}
+	}
+}
+
+// TestGenericChoiceEffectDropsUnpayableUnlessChoices proves a choice whose
+// UnlessCost$ the chooser cannot pay is not offered (ChooseGenericEffect.java:
+// 69-80), so the only payable one resolves, and with none payable the
+// FallbackAbility$ resolves (:128-137); a mana part is never filtered.
+func TestGenericChoiceEffectDropsUnpayableUnlessChoices(t *testing.T) {
+	t.Parallel()
+
+	cases := []struct {
+		name string
+		line string
+		a, b string
+		life int
+	}{
+		{"only payable is offered", "DB$ GenericChoice | Defined$ You | Choices$ DBA,DBB",
+			"DB$ GainLife | Defined$ You | LifeAmount$ 7 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True",
+			"DB$ GainLife | Defined$ You | LifeAmount$ 5", 25},
+		{"none payable falls back", "DB$ GenericChoice | Defined$ You | Choices$ DBA,DBB | FallbackAbility$ DBF",
+			"DB$ GainLife | Defined$ You | LifeAmount$ 7 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True",
+			"DB$ GainLife | Defined$ You | LifeAmount$ 5 | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True", 23},
+		{"none payable, no fallback", "DB$ GenericChoice | Defined$ You | Choices$ DBA,DBB",
+			"DB$ GainLife | Defined$ You | LifeAmount$ 7 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True",
+			"DB$ GainLife | Defined$ You | LifeAmount$ 5 | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True", 20},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			g, p, _ := newTwoPlayerGame(t)
+			c := engine.NewScriptedController()
+			c.QueueAbilityChoice([]int{0})
+			def := etbChainDef(t, "Test Choice Unless", tc.line,
+				"DBA", tc.a, "DBB", tc.b, "DBF", "DB$ GainLife | Defined$ You | LifeAmount$ 3")
+			if _, err := castETBChain(t, g, p, def, c); err != nil {
+				t.Fatalf("ResolveStack: %v", err)
+			}
+			if got := g.Player(p).Life; got != tc.life {
+				t.Errorf("life = %d, want %d", got, tc.life)
+			}
+		})
 	}
 }

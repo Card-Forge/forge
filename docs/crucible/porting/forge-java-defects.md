@@ -528,3 +528,15 @@ refunded (Java's own TODO at `PhaseHandler.java:577`). Reproduce: two creatures 
 the other where a requirement forces both to attack together.
 
 **Crucible meanwhile:** the port keeps the payments too (PORT-7), so parity holds until upstream fixes it.
+
+### `ChooseGenericEffect.java:69-80`, `:134-136` — an unpaid, non-switched choice with no fallback does nothing
+
+Found while porting the `UnlessCost$` filter (open plan R25g). Not filed.
+
+Choices whose `UnlessCost$` the chooser cannot pay are dropped (`:73-77`). When none is left and the script has no
+`FallbackAbility$`, Java prints a stderr warning and resolves nothing (`:134-136`). Zoyowa's Lava-Tongue,
+Osseous Sticktwister, Forbidden Ritual and Fear My Authority are non-switched ("X unless you pay") with no fallback, so
+a chooser with no permanents and no cards in hand escapes the effect. Script-side fix: add a `FallbackAbility$` doing
+the effect. `CostPartMana.java:118-120` (`canPay` always true, "for now") makes the 13 mana choices unfiltered, and `:75`
+builds the cost from the raw string, skipping `AbilityUtils.calculateUnlessCost` (`AbilityUtils.java:1447`).
+Crucible reproduces both (`quirks.md`).
