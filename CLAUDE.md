@@ -78,52 +78,19 @@ Violated most often. Full reasoning in the guideline files.
 
 ## Testing — module first
 
-**Default: test the whole package through its public API.** Use `package x_test`, not `package x`. Compiler then blocks
-reaching into internals. (TEST-1)
-
-Reason: port work rewrites internals constantly. Tests bound to functions lock structure and block the refactors the
-port needs. Tests bound to package behavior survive rewrites.
-
-Drop below module level only per this table (TEST-2):
-
-| Situation                                                              | Level                                           |
-| ---------------------------------------------------------------------- | ----------------------------------------------- |
-| Behavior visible through public API                                    | **Module** — `package x_test`. Default          |
-| Pure function, huge input space (parsers, mana cost, valid strings)    | File-level table test + `testing.F` fuzz        |
-| Invariant not observable from outside (layer ordering, solver pruning) | Internal test — `package x`, with a why-comment |
-| Whole-engine rules behavior                                            | **Fixture directory**, not a Go func            |
-| Bug fix                                                                | Module-level regression first                   |
-
-Also:
-
-- Rules tests are **data**: `testdata/scenarios/<case>/{setup.state,actions.log,expect.state,expect.events}`. One Go
-  test walks the tree. Adding a test = adding a directory. (TEST-5)
-- `setup.state` uses Forge's `GameState` text format so the same fixture runs against the Java oracle.
-- `t.Parallel()` by default. CI runs `go test -race ./...` every commit. (TEST-7)
-- **No mocking library.** Pass in a different DB / RNG / controller. Needing a mock = wrong seam. (TEST-8)
-- Test files named for behavior (`layers_test.go`), never mirroring source files (`card_test.go`). (TEST-3)
+Default: test the whole package through its public API, `package x_test` (TEST-1). Rules tests are fixture directories
+`testdata/scenarios/<case>/` (TEST-5). `t.Parallel()` by default, CI runs `go test -race ./...` (TEST-7). No mocking
+library: pass a different DB / RNG / controller (TEST-8). Test files are named for behavior, never mirroring source
+files (TEST-3). Level table and reasons: `guidelines/03-testing-standards.md` (TEST-2).
 
 ---
 
 ## Doc style
 
-All docs use the compressed style in `guidelines/00-documentation-style.md`:
-
-- Drop articles, filler, hedging, pleasantries. Fragments fine.
-- **Never** drop technical content — identifiers, paths with line numbers, numbers with units, error strings stay exact.
-  (DOC-2)
-- Every rule carries a reason. (DOC-4)
-- 3+ parallel items → table. (DOC-5)
-- Code blocks and code comments stay normal English, uncompressed. (DOC-7)
-- Show Bad → Good pairs. (DOC-8)
-- Write in full sentences for destructive steps, ordered procedures, security and licensing. (DOC-9)
-- **State, never history.** No `Correction` / `Update` / changelog sections, no "this previously said". Fix the fact in
-  place; git holds the diff. Same for ADRs — a new decision supersedes, everything else is edited in place. (DOC-16,
-  ADRP-3)
-- **Run `prettier --write .` before every commit.** Config `/.prettierrc`, `printWidth: 120`, `proseWrap: always`.
-  Prettier owns table alignment and wrapping — do not hand-align. (DOC-14)
-
-Audience is an IT engineer. Compress grammar, not substance.
+Compressed style, full rules in `guidelines/00-documentation-style.md`. Never drop technical content (DOC-2); every rule
+carries a reason (DOC-4); code and code comments stay normal English (DOC-7). **State, never history**: no `Correction`
+/ `Update` / changelog sections, fix the fact in place (DOC-16, ADRP-3). **Run `prettier --write .` before every
+commit** (DOC-14).
 
 ---
 
