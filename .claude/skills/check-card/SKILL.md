@@ -41,19 +41,7 @@ return a nonland permanent you own to your hand", "If you do, draw a card".
 
 ## 3. Build the script's graph
 
-Every line kind and what it references:
-
-| Line                          | References other lines through                                                                                   |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `A:` / `SVar:...:DB$/AB$/SP$` | `SubAbility$`, `Execute$`, `Choices$`, `ReplaceWith$`, `UnlessCost$`, `RepeatSubAbility$`, `ResultSubAbilities$` |
-| `T:`                          | `Execute$`                                                                                                       |
-| `R:`                          | `ReplaceWith$`                                                                                                   |
-| `S:`                          | `AddTrigger$`, `AddStaticAbility$`, `AddAbility$`, `AddReplacementEffect$`, `AddSVar$`                           |
-| `K:` with an SVar argument    | `ETBReplacement:<layer>:<SVar>`, `etbCounter`, ...                                                               |
-| `SVar:X:Count$...`            | Read wherever `X` appears as an amount                                                                           |
-
-Report every **dangling reference** (names an SVar that does not exist) and every **orphan SVar** (nothing references
-it; `AIPreference`, `PlayMain1`, `DeckHas`/`DeckHints`/`DeckNeeds`, `AI:` metadata excepted).
+Follow every reference (`SubAbility$`, `Execute$`, `ReplaceWith$`, `ResultSubAbilities$`, `AddTrigger$` and the like; SVars read as amounts). Report every **dangling reference** (names a missing SVar) and **orphan SVar** (nothing references it; `AIPreference`, `PlayMain1`, `Deck*`, `AI:` excepted).
 
 ## 4. Map each clause to the lines that implement it
 
@@ -124,13 +112,4 @@ When asked to fix (PORT-8 - never compensate in Go):
 1. Record it: `docs/crucible/porting/card-script-defects.md` (script) or `forge-java-defects.md` (Java).
 2. If Crucible's gates need it now: carry the edit in the fork and add a row to `upstream-patches.md`, "Pending upstream
    fixes", in the same commit (REV-1).
-3. Upstream branch, cards only, from upstream's tip - never from the fork's `master`:
-
-   ```bash
-   git fetch upstream master
-   git checkout -B upstream-pr/<slug> upstream/master
-   # edit only the card files; commit message cites the Java file:line that proves the change
-   git push -u origin upstream-pr/<slug>
-   ```
-
-   Do not open the PR: the user opens it against `Card-Forge/forge`. Record the branch name in the pending row.
+3. Upstream branch `upstream-pr/<slug>`, cards only, from `upstream/master` (never the fork's `master`); commit message cites the Java file:line that proves it; push to `origin`. Do not open the PR; record the branch in the pending row.

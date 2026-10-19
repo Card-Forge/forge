@@ -78,9 +78,7 @@ Rules that bite here:
 | PORT-8 | Forge bug found -> stop, report file:line, do not compensate in Go                                                                                                                               |
 | GO-7   | A valid-string property `Matches` has no case for reads false for every card, silently. Check each `Choices$`/`Valid*$` property the dominant shape uses in `valid.go`; reject the unported ones |
 
-Reuse helpers before writing new ones: `targetedOrDefinedCards`, `targetedOrDefinedPlayers` (`defined.go`),
-`resolveNamedAmount` (`amount.go`), `optionalAmount`, `checkChoice` (`effecthelpers.go`), `moveByEffect`
-(`zonemove.go`).
+Reuse helpers: `targetedOrDefinedCards`, `targetedOrDefinedPlayers` (`defined.go`), `resolveNamedAmount`, `optionalAmount`, `checkChoice`, `moveByEffect`.
 
 ## 2. Regenerate the registry
 
@@ -135,26 +133,11 @@ func Test<Api>Effect<WhatItProves>(t *testing.T) {
 }
 ```
 
-Helpers: `newTwoPlayerGame`, `resolveLine` (fails the test on error), `resolveNow` (returns the error; use it to assert
-a rejected param), `creatureDefPT`, `libraryCards`, `etbChainDef` + `castETBChain` for a `SubAbility$` chain. Queue
-controller answers on `engine.NewScriptedController()` (`QueueEntityChoice`, `QueueAbilityChoice`, ...). `newTokenGame`
-is a two-player game whose DB holds `testTokens` (`tokens_test.go`; add a script there). In `pack4effects_test.go`:
-`offerRecorder` records every card pool `ChooseCardsForEffect` is offered (assert on pool contents and order),
-`firstPicker` picks the first cards offered (for cards the effect itself creates), and `pushStackAbility` leaves an
-ability waiting on the stack under the one being tested.
+Helpers: `newTwoPlayerGame`, `resolveLine`, `resolveNow` (returns the error), `creatureDefPT`, `libraryCards`, `etbChainDef` + `castETBChain`, `newTokenGame`, `offerRecorder`, `firstPicker`, `pushStackAbility`; controller answers on `engine.NewScriptedController()`. Find each in `internal/engine/*_test.go`.
 
 Add one test per rejected param shape that matters: assert `resolveNow` returns the `not resolvable yet` error.
 
-Write a test for every resolved param branch now, not after the covergate fails. `internal/engine` has a 90% floor
-(TEST-12) and a batch of effects tested only on their main shape lands below it. Check the new files before moving on to
-the docs:
-
-```bash
-cd crucible && go test -count=1 -coverprofile=/tmp/eff.out ./internal/engine \
-  && go tool cover -func=/tmp/eff.out | grep -E '/(<api1>|<api2>)effect\.go:' | awk '$3+0 < 90'
-```
-
-Every function it prints is under 90%; cover its missing branches (`go tool cover -html=/tmp/eff.out` shows which).
+Test every resolved param branch now: `internal/engine` has a 90% floor (TEST-12). Check with `go test -coverprofile` and `go tool cover -func`.
 
 ## 5. Docs, same commit (DOC-12)
 
@@ -166,9 +149,7 @@ Every function it prints is under 90%; cover its missing branches (`go tool cove
 | `CLAUDE.md`                                                      | `M6 in progress: N of the corpus's 203` count and largest gaps (`unported-apis.sh` counts)                                                                                             |
 | `docs/crucible/porting/forge-java-defects.md`                    | A row per Forge Java bug found (PORT-8): site, defect, what Crucible does meanwhile, upstream status                                                                                   |
 
-`effects-batches.md` and the other existing `effects-*.md` files are closed: never append to them. Reason: parallel
-porters appending to one file conflict on every merge; a new file per batch never does, and the index rows it adds merge
-as a union (`scripts/merge-porters.sh`).
+`effects-*.md` files are closed: one new file per batch.
 
 Count = registered APIs minus the three M5 casting entries. `genregistry -check` (in `gates.sh` and CI) prints it and
 fails when `CLAUDE.md` or the plan quotes a different number:

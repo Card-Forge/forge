@@ -142,6 +142,10 @@ Engine port-log lives in `docs/crucible/porting/port-log/game-state/<topic>.md`;
 `Not ported yet`. Each new M6 batch gets its own `game-state/effects-<batch>.md`; existing `effects-*.md` files are
 closed.
 
+**Advisor:** call it at most twice per task: once before a non-obvious design choice (new contract, ADR, Forge defect),
+once before declaring a multi-file change done. Skip it for routine ports, doc edits and fixes whose next step the tool
+output dictates.
+
 Work happens in the main session: subagents cost more tokens than the same work inline (cold start, worktree one-command
 rule). Only `forge-oracle` is used, for Java research. `landporter`, `merge-porters.sh` and
 `runbooks/subagent-worktrees.md` remain for a rare worktree run.
