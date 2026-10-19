@@ -1,6 +1,6 @@
 # ADR-0004 — Java to Go Translation Patterns
 
-- **Status:** Accepted
+- **Status:** Accepted; per-unit port-log notes for `internal/engine` superseded by ADR-0043
 - **Date:** 2026-09-07
 - **Deciders:** `jc@archlab.pl`
 
