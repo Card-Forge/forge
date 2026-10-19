@@ -2996,8 +2996,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             getZone(ZoneType.PlanarDeck).shuffle();
         }
 
-        // Commander
-        if (!registeredPlayer.getCommanders().isEmpty()) {
+        // Commander. A game restarted by Karn Liberated keeps the commanders it has
+        final boolean addCommanders = getCommanders().isEmpty();
+        if (addCommanders && !registeredPlayer.getCommanders().isEmpty()) {
             for (PaperCard pc : registeredPlayer.getCommanders()) {
                 Card cmd = Card.fromPaperCard(pc, this);
                 initCommanderColor(cmd);
@@ -3006,7 +3007,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.addCommander(cmd);
             }
         }
-        else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
+        else if (addCommanders && registeredPlayer.getPlaneswalker() != null) { // Planeswalker
             Card cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
             cmd.setCollectible(true);
             cmd.setCommander(true);
