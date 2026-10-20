@@ -665,6 +665,8 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 			return err == nil && slices.Contains(players, c.Controller())
 		}
 		return ok && matched
+	case strings.HasPrefix(name, "leastPower"), strings.HasPrefix(name, "leastToughness"):
+		return leastStatMatches(g, c, name, sourceController, source)
 	// canBeBeamedUp: no CantBeBeamedUp static covers c (Marooned).
 	case name == "canBeBeamedUp":
 		return !g.cantBeBeamedUp(c)
@@ -1842,4 +1844,51 @@ func (g *Game) cantBeBeamedUp(c *Card) bool {
 		}
 	}
 	return false
+}
+
+// leastStatMatches is CardProperty.java:1233-1262's leastPower/leastToughness:
+// no creature on the battlefield has less power (toughness) than c. A
+// "ControlledBy<player spec>" suffix narrows the creatures compared to that
+// player's and requires c to be among them (Bolster's
+// "Creature.leastToughnessControlledByYou"). A spec Defined$ cannot read
+// matches nothing.
+func leastStatMatches(g *Game, c *Card, name string, sourceController PlayerID, source CardID) bool {
+	stat := (*Card).Power
+	prefix := "leastPower"
+	if strings.HasPrefix(name, "leastToughness") {
+		stat, prefix = (*Card).Toughness, "leastToughness"
+	}
+	var owners []PlayerID
+	limited := false
+	if _, spec, ok := strings.Cut(strings.TrimPrefix(name, prefix), "ControlledBy"); ok {
+		var refs abilityRefs
+		if a := g.resolving; a != nil && source != NoCard && a.Source == source {
+			refs = a.refs()
+		}
+		players, err := definedPlayers(g, sourceController, source, spec, refs)
+		if err != nil {
+			return false
+		}
+		owners, limited = players, true
+	}
+	mine, _ := stat(c)
+	inScope := !limited
+	for _, pid := range g.Players() {
+		if limited && !slices.Contains(owners, pid) {
+			continue
+		}
+		for _, id := range g.Zone(Battlefield, pid).Cards() {
+			other := g.Card(id)
+			if !other.Type().Has(cardtype.Creature) {
+				continue
+			}
+			if id == c.ID {
+				inScope = true
+			}
+			if v, _ := stat(other); v < mine {
+				return false
+			}
+		}
+	}
+	return inScope
 }

@@ -40,12 +40,12 @@ import (
 // ChooseCardsForEffect has no flag for; DividedRandomly$/SplitAmount$
 // -- each its own distribution mechanic (DividedAsYouChoose$ over the
 // line's own targets resolves: divideAmongTargets, dividedtargets.go);
-// Monstrosity$/Adapt$/Bolster$/Support$/PowerUp$/Exhaust$ -- each its own
+// Monstrosity$/Adapt$/Support$/PowerUp$/Exhaust$ -- each its own
 // further keyword-ability mechanic buildSpellAbility itself rewrites into
 // this shape from a simpler keyword line; EachFromSource$/PutOnEachOther$/
 // PutOnDefined$/ChooseDifferent$/EachExistingCounter$/UniqueType$/
 // CounterTypePerDefined$/CounterNumPerDefined$/OnlyNewKind$/
-// SkipReceiveCounters$/RandomType$ -- each its own further per-target
+// RandomType$ -- each its own further per-target
 // mechanic; CounterTypes$ (17, plural) -- a different multi-type shape,
 // not this one; ForColor$/SharedKeywords$/SharedKeywordsDefined$/
 // SharedKeywordsZone$/SharedRestrictions$/TriggeredCounterMap$/
@@ -70,9 +70,8 @@ var putCounterUnresolvedParams = [...]string{
 	"ETB",
 	"ChoiceOptional",
 	"DividedRandomly", "SplitAmount",
-	"Bolster",
 	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
-	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "SkipReceiveCounters", "RandomType",
+	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "RandomType",
 	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
 	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
 	"RemovePhase", "UpTo", "UpToMin",
@@ -132,6 +131,7 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	monstrosity, isMonstrosity := a.Params.Param("Monstrosity")
 	adapt, isAdapt := a.Params.Param("Adapt")
 	_, isSupport := a.Params.Param("Support")
+	bolster, isBolster := a.Params.Param("Bolster")
 	var counterType CounterType
 	var counterNum string
 	switch {
@@ -141,6 +141,8 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		counterType, counterNum = P1P1, adapt
 	case isSupport:
 		counterType, counterNum = P1P1, "1"
+	case isBolster:
+		counterType, counterNum = P1P1, bolster
 	default:
 		var err error
 		if counterType, err = putCounterType(a.Params); err != nil {
@@ -163,6 +165,12 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	targeted = targeted || isSupport
 	divided := a.isDivided()
 	choicesSpec, hasChoices := a.Params.Param("Choices")
+	if isBolster {
+		// CountersPutEffect.java:750-756: Bolster rewrites the line into a
+		// Choices$ over the controller's least-toughness creatures, and
+		// SkipReceiveCounters$ lifts the canReceiveCounters filter (:215).
+		choicesSpec, hasChoices = "Creature.leastToughnessControlledByYou", true
+	}
 	if divided && !hasChoices && (!targeted || hasDefined) {
 		// Untargeted, the division is asked card by card as the effect
 		// resolves (CountersPutEffect.java:470-483, Choices$-chosen cards);
@@ -401,9 +409,13 @@ func (g *Game) putCounterChoice(controller PlayerController, a *Ability, spec st
 	if err != nil {
 		return nil, nil, err
 	}
+	// SkipReceiveCounters$ lifts the canReceiveCounters filter
+	// (CountersPutEffect.java:215), which Bolster's rewrite always sets (:756).
+	_, skipReceive := a.Params.Param("SkipReceiveCounters")
+	_, bolster := a.Params.Param("Bolster")
 	var offer []CardID
 	for _, cid := range all {
-		if !g.cantPutCounter(CardEntity(cid), ct) {
+		if skipReceive || bolster || !g.cantPutCounter(CardEntity(cid), ct) {
 			offer = append(offer, cid)
 		}
 	}

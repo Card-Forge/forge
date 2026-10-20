@@ -42,6 +42,11 @@ type animateRecord struct {
 	AddKeywords    []string
 	RemoveKeywords []string
 	RemoveAllKW    bool
+	// removeAbilities is RemoveAllAbilities$ (every trait, and every keyword,
+	// AnimateEffectBase.java:80-82) or RemoveNonManaAbilities$ (:83-85),
+	// removalNone otherwise. animateAbilities applies it before the record's
+	// own grants.
+	removeAbilities abilityRemoval
 
 	Power, Toughness       int
 	HasPower, HasToughness bool
@@ -137,6 +142,9 @@ func animateKeywords(g *Game) {
 // statics' own Layer 6 grants and removals, which then apply over it.
 func animateAbilities(g *Game) {
 	liveAnimates(g, func(c *Card, r *animateRecord) {
+		if r.removeAbilities != removalNone {
+			c.removeTraits(r.removeAbilities)
+		}
 		if len(r.abilities) > 0 || len(r.triggers) > 0 {
 			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), traitGrant{abilities: r.abilities, triggers: r.triggers, amounts: r.abilityAmounts})
 		}
@@ -218,14 +226,14 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 // yet, PORT-2 -- Triggers$, Replacements$ and Abilities$ are,
 // animateTriggerGrants and animateAbilityGrants), TransferActivator$'s
 // "only you may activate" on a granted ability (Martyrdom), hidden keywords,
-// "can't have" keywords, removing abilities, all creature types, a
+// "can't have" keywords, removing one named ability, all creature types, a
 // renaming, mana-cost changes, a revert cost, a leave-the-battlefield
 // replacement, what the animated card remembers or imprints, an Optional$
 // confirmation. Condition$ is
 // the two effects' own (rejectUnreadCondition, then subAbilityConditionMet).
 var animateUnresolvedParams = [...]string{
 	"staticAbilities", "sVars", "HiddenKeywords", "TransferActivator",
-	"CantHaveKeyword", "RemoveAllAbilities", "RemoveNonManaAbilities", "RemoveThisAbility",
+	"CantHaveKeyword", "RemoveThisAbility",
 	"AddAllCreatureTypes", "Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
 	"RememberObjects", "ImprintCards", "Optional", "OptionQuestion", "TgtZone",
 	"ConditionDefined",
@@ -368,13 +376,19 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 	if raw, ok := a.Params.Param("RemoveKeywords"); ok {
 		r.RemoveKeywords = strings.Split(raw, " & ")
 	}
+	switch {
+	case hasParam(a, "RemoveAllAbilities"):
+		r.removeAbilities, r.RemoveAllKW = removalAll, true
+	case hasParam(a, "RemoveNonManaAbilities"):
+		r.removeAbilities, r.RemoveAllKW = removalNonMana, true
+	}
 	return r, nil
 }
 
 // empty reports whether r changes nothing at all.
 func (r *animateRecord) empty() bool {
 	return !r.changesTypes() && !r.HasColors && len(r.AddKeywords) == 0 && len(r.RemoveKeywords) == 0 &&
-		!r.RemoveAllKW && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0
+		!r.RemoveAllKW && r.removeAbilities == removalNone && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0
 }
 
 // animateCards applies template to each card on the battlefield under one

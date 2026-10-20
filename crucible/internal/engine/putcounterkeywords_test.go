@@ -99,3 +99,38 @@ func TestExhaustLimitsAnAbilityToOneActivationPerGame(t *testing.T) {
 		t.Errorf("activations after cleanup = %d, want 0", got)
 	}
 }
+
+// TestBolsterOffersOnlyTheControllersLeastToughnessCreatures proves Bolster$ N
+// (CountersPutEffect.java:750-756): a Choices$ over
+// Creature.leastToughnessControlledByYou, so a tie is the controller's pick, a
+// sturdier creature or an opponent's smaller one is not offered
+// (CardProperty.java:1247-1262).
+func TestBolsterOffersOnlyTheControllersLeastToughnessCreatures(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	// resolveNow's host is a 1/1 of p's: it ties with tied2.
+	tied2 := g.NewCard(creatureDefPT(t, "3", "1"), p, engine.Battlefield)
+	sturdy := g.NewCard(creatureDefPT(t, "2", "4"), p, engine.Battlefield)
+	theirs := g.NewCard(creatureDefPT(t, "1", "0"), other, engine.Battlefield)
+	c := engine.NewScriptedController()
+	c.QueueCardChoice([]engine.CardID{tied2})
+	host, err := resolveNow(t, g, p, c, nil, "DB$ PutCounter | Bolster$ 2")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for id, want := range map[engine.CardID]int{host: 0, tied2: 2, sturdy: 0, theirs: 0} {
+		if got := p1p1(g, id); got != want {
+			t.Errorf("card %d has %d counters, want %d", id, got, want)
+		}
+	}
+
+	// The sturdy creature is not a legal pick.
+	g, p, _ = newTwoPlayerGame(t)
+	sturdy = g.NewCard(creatureDefPT(t, "2", "4"), p, engine.Battlefield)
+	c = engine.NewScriptedController()
+	c.QueueCardChoice([]engine.CardID{sturdy})
+	if _, err := resolveNow(t, g, p, c, nil, "DB$ PutCounter | Bolster$ 1"); err == nil {
+		t.Error("choosing a creature with more toughness than the least was accepted")
+	}
+}
