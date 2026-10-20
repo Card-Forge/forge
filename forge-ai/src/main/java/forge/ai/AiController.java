@@ -23,6 +23,7 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.simulation.FlatMonteCarloPicker;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -45,6 +46,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -97,6 +99,16 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
+    // flat Monte Carlo bookkeeping: time spent on rollouts during one turn, to keep slow devices responsive
+    private int flatMcTurn = -1;
+    private long flatMcTurnSpentNanos;
+    private FlatMonteCarloPicker.Result lastFlatMcResult;
+    /** Circuit breaker: Monte Carlo switches itself off for this player after repeated errors or hopeless slowness. */
+    private int flatMcErrors;
+    private int flatMcSlowStreak;
+    private boolean flatMcTripped;
+    /** Per player switch for comparisons and tests: null follows the game-wide setting. */
+    private Boolean flatMcOverride;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1656,7 +1668,24 @@ public class AiController {
         //update LivingEndPlayer
         useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
-        SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+        SpellAbility chosenSa;
+        lastFlatMcResult = null;
+        if (usesFlatMonteCarlo(mustRespond)) {
+            // Same heuristics as always, but keep the first few plays they approve of and let rollouts compare them.
+            final FlatMonteCarloPicker.Config mcCfg = flatMonteCarloConfig();
+            final List<SpellAbility> approved = chooseSpellAbilitiesToPlayFromList(saList, true, mcCfg == null ? 1 : mcCfg.maxCandidates);
+            try {
+                chosenSa = refineWithFlatMonteCarlo(approved, mcCfg);
+            } catch (final AITimeoutTracker.Expired e) {
+                throw e;
+            } catch (final RuntimeException e) {
+                // Monte Carlo is a refinement: never let it break a turn, fall back to the heuristic choice.
+                noteFlatMcOutcome("error");
+                chosenSa = approved.isEmpty() ? null : approved.get(0);
+            }
+        } else {
+            chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+        }
 
         if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {
             return null; // not planning to copy the spell and not marked as something the AI would respond to
@@ -1666,8 +1695,117 @@ public class AiController {
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
-        if (all == null || all.isEmpty())
+        final List<SpellAbility> chosen = chooseSpellAbilitiesToPlayFromList(all, skipCounter, 1);
+        return chosen.isEmpty() ? null : chosen.get(0);
+    }
+
+    /** Result of the last flat Monte Carlo decision (null if the last choice was made by the heuristics alone). */
+    public FlatMonteCarloPicker.Result getLastFlatMonteCarloResult() {
+        return lastFlatMcResult;
+    }
+
+    private boolean usesFlatMonteCarlo(final boolean mustRespond) {
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond || simMode != null
+                || !getBoolProperty(AiProps.FLAT_MC_ENABLED)) {
+            return false; // off, forced responses, or one of the simulation modes which do their own lookahead
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        // Only sorcery-timing decisions on the AI's own turn: that is where the lines to compare are, and the
+        // rollout ends at the second main phase. Everything reactive stays with the heuristics (and is cheap).
+        return ph.getPlayerTurn() == player && game.getStack().isEmpty()
+                && (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2));
+    }
+
+    private FlatMonteCarloPicker.Config flatMonteCarloConfig() {
+        final int turn = game.getPhaseHandler().getTurn();
+        if (turn != flatMcTurn) {
+            flatMcTurn = turn;
+            flatMcTurnSpentNanos = 0;
+        }
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(this, player);
+        final long left = cfg.turnBudgetNanos - flatMcTurnSpentNanos;
+        if (left <= 0 || cfg.budgetNanos <= 0) {
             return null;
+        }
+        cfg.budgetNanos = Math.min(cfg.budgetNanos, left);
+        return cfg;
+    }
+
+    private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approved, final FlatMonteCarloPicker.Config cfg) {
+        if (approved.isEmpty()) {
+            return null;
+        }
+        if (cfg == null || approved.size() < 2 && !FlatMonteCarloPicker.isHoldPossible(player)) {
+            return approved.get(0); // out of budget, or nothing to compare
+        }
+        final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, cfg,
+                sa -> playDecision(sa) == AiPlayDecision.WillPlay);
+        lastFlatMcResult = result;
+        flatMcTurnSpentNanos += result.elapsedNanos;
+        noteFlatMcOutcome(result.reason);
+        if (result.hold) {
+            return null; // pass priority with the mana still available
+        }
+        // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
+        // fall back to the other approved plays in heuristic order if the heuristics no longer like it.
+        final List<SpellAbility> order = new ArrayList<>();
+        order.add(result.choice);
+        for (final SpellAbility sa : approved) {
+            if (sa != result.choice) {
+                order.add(sa);
+            }
+        }
+        for (final SpellAbility sa : order) {
+            if (playDecision(sa) == AiPlayDecision.WillPlay) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    /** Forces Monte Carlo on or off for this player only (null: follow the game setting). Used for A/B comparisons. */
+    public void setFlatMonteCarloOverride(final Boolean enabled) {
+        flatMcOverride = enabled;
+    }
+
+    void noteFlatMcOutcome(final String reason) {
+        if ("error".equals(reason)) {
+            if (++flatMcErrors >= 3) {
+                flatMcTripped = true;
+            }
+        } else if ("too-slow".equals(reason) || "no-time".equals(reason)) {
+            if (++flatMcSlowStreak >= 4) {
+                flatMcTripped = true; // this device cannot afford even two rollouts per decision
+            }
+        } else {
+            flatMcSlowStreak = 0;
+        }
+    }
+
+    /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
+    public boolean isFlatMonteCarloTripped() {
+        return flatMcTripped;
+    }
+
+    /** The heuristic verdict on one play, the way the spell choice loop asks for it. */
+    private AiPlayDecision playDecision(final SpellAbility sa) {
+        sa.setActivatingPlayer(player);
+        final SpellAbility root = sa.getRootAbility();
+        if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
+        }
+        try {
+            return canPlayAndPayFor(sa);
+        } finally {
+            sa.clearLastState();
+        }
+    }
+
+    /** Like {@link #chooseSpellAbilityToPlayFromList} but keeps looking until {@code maxResults} plays are approved. */
+    private List<SpellAbility> chooseSpellAbilitiesToPlayFromList(final List<SpellAbility> all, boolean skipCounter, final int maxResults) {
+        if (all == null || all.isEmpty())
+            return Collections.emptyList();
 
         try {
             all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
@@ -1682,7 +1820,8 @@ public class AiController {
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(aiId, timeoutNanos);
         final long deadlineNanos = AITimeoutTracker.deadlineNanos(aiId, timeoutNanos);
-        FutureTask<SpellAbility> future = new FutureTask<>(() -> {
+        FutureTask<List<SpellAbility>> future = new FutureTask<>(() -> {
+            final List<SpellAbility> approvedPlays = new ArrayList<>();
             // the eval thread aborts itself at the shared deadline (or when cancelled) instead of running on as a zombie
             final Object evalLimit = AITimeoutTracker.arm(deadlineNanos, true);
             try {
@@ -1764,12 +1903,15 @@ public class AiController {
                     }
 
                     // TODO could continue to try find another with higher rating (weighted by priority ordering)
-                    return sa;
+                    approvedPlays.add(sa);
+                    if (approvedPlays.size() >= maxResults) {
+                        break;
+                    }
                 }
 
-                return null;
+                return approvedPlays;
             } catch (AITimeoutTracker.Expired e) {
-                return null;
+                return approvedPlays; // whatever was approved before time ran out
             } finally {
                 AITimeoutTracker.disarm(evalLimit); // matters as soon as this runs on a pooled thread
             }
@@ -1814,7 +1956,7 @@ public class AiController {
                 }
             }
             // TODO mark some as skipped to increase chance to find something playable next priority
-            return null;
+            return Collections.emptyList();
         } finally {
             AITimeoutTracker.end(aiId);
         }

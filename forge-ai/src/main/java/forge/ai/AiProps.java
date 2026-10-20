@@ -147,7 +147,21 @@ public enum AiProps {
     SIDEBOARDING_CHANCE_ON_WIN("0"),
     SIDEBOARDING_IN_LIMITED_FORMATS("false"),
     SIDEBOARDING_SHARED_TYPE_ONLY("false"),
-    SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false");
+    SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false"),
+    // Flat Monte Carlo refinement of main phase plays (only used when the "AI flat Monte Carlo" match preference is on).
+    // See FlatMonteCarloPicker for how these are used.
+    FLAT_MC_MAX_CANDIDATES("5"),
+    FLAT_MC_ROLLOUTS_PER_CANDIDATE("4"),
+    FLAT_MC_MAX_PLAYOUT_PLAYS("6"),
+    FLAT_MC_COMBO_PLAYOUT_PLAYS("14"),
+    FLAT_MC_DECISION_BUDGET_MS("450"),
+    FLAT_MC_TURN_BUDGET_MS("2000"),
+    FLAT_MC_HEURISTIC_BONUS("80"),
+    FLAT_MC_CONSIDER_HOLDING("true"),
+    FLAT_MC_HOLD_MANA_WEIGHT("100"),
+    FLAT_MC_RISK_WEIGHT("100"),
+    FLAT_MC_OVERRIDE_MAJORITY("50"),
+    FLAT_MC_ENABLED("true");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

@@ -74,6 +74,23 @@ public class GameSimulator {
         debugLines = null;
     }
 
+    /**
+     * Lightweight constructor for Monte Carlo rollouts. It only copies the game: unlike the full constructor it
+     * neither scores the original game (which can cost a second game copy to simulate the upcoming combat) nor
+     * verifies that the copy scores identically. {@link #getScoreForOrigGame()} is therefore null for such a
+     * simulator, and it is meant to be used with {@link #applySpellAbility(SpellAbility)} and
+     * {@link #getSimulatedGameState()} only.
+     */
+    public GameSimulator(Game origGame, Player origAiPlayer) {
+        this.controller = new SimulationController(new Score(0), 0);
+        copier = new GameCopier(origGame);
+        simGame = copier.makeCopy(null, origAiPlayer);
+
+        aiPlayer = copier.find(origAiPlayer);
+        eval = new GameStateEvaluator();
+        origLines = new ArrayList<>();
+    }
+
     private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
         eval.setDebugging(true);
         List<String> simLines = new ArrayList<>();
@@ -258,6 +275,43 @@ public class GameSimulator {
         }
 
         return score;
+    }
+
+    /**
+     * Plays the given ability (an ability of the original game) in the simulated game and resolves the stack,
+     * like {@link #simulateSpellAbility(SpellAbility)} does, but without scoring or recursing. The caller scores
+     * the resulting {@link #getSimulatedGameState()} itself, possibly after more plays.
+     *
+     * @return false if the ability could not be found or played in the simulated game
+     */
+    public boolean applySpellAbility(SpellAbility origSa) {
+        if (origSa.isLandAbility()) {
+            if (!origSa.canPlay()) {
+                return false;
+            }
+            Card hostCard = copier.find(origSa.getHostCard());
+            aiPlayer.playLand(hostCard, origSa);
+        } else {
+            SpellAbility sa = findSaInSimGame(origSa);
+            if (sa == null) {
+                return false;
+            }
+            sa.setActivatingPlayer(aiPlayer);
+
+            simGame.copyLastState();
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa,
+                    playingSa -> SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find));
+            if (!success) {
+                return false;
+            }
+        }
+        resolveStack(simGame, aiPlayer.getWeakestOpponent());
+        return true;
+    }
+
+    /** The copy of the AI player (given to the constructor) living in the simulated game. */
+    public Player getSimulatedAiPlayer() {
+        return aiPlayer;
     }
 
     public static void resolveStack(final Game game, final Player opponent) {
