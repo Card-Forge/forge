@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Cable
+Title=Cable
+Icon=Cable.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Hunter_Lind_-_Abzan_Lifegain_(Standard,_#901746).dck
+Deck Type=constructed
+
+[Main]
+4 Godless Shrine
+4 Starting Town
+4 Temple Garden
+2 Blooming Marsh
+2 Concealed Courtyard
+1 Plains
+1 Multiversal Passage
+1 Cavern of Souls
+4 Amalia Benavides Aguirre
+4 Haliya, Guided by Light
+4 Virulent Emissary
+4 Enlightened Confidant
+3 Liliana the Faultless
+2 Moseo, Vein's New Dean
+2 Starscape Cleric
+2 Essence Channeler
+1 Leonardo, Cutting Edge
+1 Hinterland Sanctifier
+4 Ajani Resolute
+4 Case of the Uneaten Feast
+3 Lunar Convocation
+2 Vigorbloom Charm
+1 Erode
+[Sideboard]
+2 Voice of Victory
+2 Requisition Raid
+2 Sheltered by Ghosts
+1 Solarium Sentry
+1 Avatar's Wrath
+2 Germinate Recruits
+1 Authority of the Consuls
+2 Curious Farm Animals
+2 Rest in Peace

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Hard
+Description=./Modern/Reality_Fracture/Daniel33331_-_Dimir_Control_(Modern,_#899039).dck
+Deck Type=constructed
+
+[Main]
+1 Requiting Hex
+1 Logic Knot
+3 Cling to Dust
+4 Consult the Star Charts
+4 Counterspell
+4 Fatal Push
+4 Sheoldred's Edict
+4 Spell Snare
+2 Snapcaster Mage
+2 Orcish Bowmasters
+3 Subtlety
+4 Wan Shi Tong, Librarian
+1 Bloodstained Mire
+1 Swamp
+1 Theorist's Sanctum
+3 Flooded Strand
+3 Undercity Sewers
+3 Watery Grave
+4 Field of Ruin
+4 Island
+4 Polluted Delta
+[Sideboard]
+1 Thoughtseize
+1 Nihil Spellbomb
+1 Force of Negation
+2 Dress Down
+2 Damnation
+4 Mystical Dispute
+4 Consign to Memory

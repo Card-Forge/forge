@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Gold
+Title=Dungeon Crawling Gold
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Christos_Vizekas_-_Dimir_Excrutiator_(Standard,_#901735).dck
+Deck Type=constructed
+
+[Main]
+3 Doomsday Excruciator
+2 Harvester of Misery
+4 Requiting Hex
+4 Deceit
+1 Oildeep Gearhulk
+4 Superior Spider-Man
+1 Deadly Cover-Up
+2 Duress
+3 Stock Up
+3 Winternight Stories
+4 Bitter Triumph
+2 Spell Snare
+1 Strategic Betrayal
+3 Gloomlake Verge
+2 Multiversal Passage
+4 Restless Reef
+3 Shipwreck Marsh
+9 Swamp
+1 Undercity Sewers
+4 Watery Grave
+[Sideboard]
+3 Oildeep Gearhulk
+2 Deadly Cover-Up
+1 Duress
+1 Spell Snare
+3 Strategic Betrayal
+1 Disdainful Stroke
+2 Flashfreeze
+1 Stab
+1 Terminal Criticism

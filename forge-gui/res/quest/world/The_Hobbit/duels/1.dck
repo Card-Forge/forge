@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Kettlewhip_-_Red_Deck_Wins_(Standard,_#889729).dck
+Deck Type=constructed
+
+[Main]
+4 Hired Claw
+4 Magda, the Hoardmaster
+4 Magmatic Hellkite
+4 Nova Hellkite
+4 Sarkhan, Dragon Ascendant
+4 Smaug the Magnificent
+2 Sunspine Lynx
+1 Generous Plunderer
+4 Burst Lightning
+4 Shock
+2 Channeled Dragonfire
+20 Mountain
+3 Soulstone Sanctuary
+[Sideboard]
+2 Sunspine Lynx
+3 Magebane Lizard
+2 Ghost Vacuum
+2 Scorching Shot
+2 Sear
+2 Slagstorm
+2 The Legend of Roku

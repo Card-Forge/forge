@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Andrew_Cappy_-_Jund_Sacrifice_(Standard,_#891248).dck
+Deck Type=constructed
+
+[Main]
+4 Biotech Specialist
+4 Blazemire Verge
+1 Blood Crypt
+3 Overgrown Tomb
+4 Callous Inspector
+1 Deadly Precision
+2 Fanatical Offering
+1 Forest
+4 Gene Pollinator
+4 Greedy Freebooter
+2 Mutagen Man, Living Ooze
+4 Obsessive Pursuit
+3 Stomping Ground
+2 Requiting Hex
+4 Rottenmouth Viper
+4 Starting Town
+1 Swamp
+4 The Sackville-Bagginses
+1 Umbral Collar Zealot
+2 Vinereap Mentor
+1 Wastewood Verge
+4 Blooming Marsh
+[Sideboard]
+2 Requiting Hex
+2 The Ooze
+2 Guerrilla Gorilla
+3 Professor Dellian Fel
+4 Strategic Betrayal
+2 Duress

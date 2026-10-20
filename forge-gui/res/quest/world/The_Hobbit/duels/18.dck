@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Aguch0_-_Mono_Green_Landfall_(Standard,_#891974).dck
+Deck Type=constructed
+
+[Main]
+2 Ba Sing Se
+1 Demolition Field
+4 Fabled Passage
+4 Esper Origins
+3 Escape Tunnel
+1 Elven Passage
+4 Earthbender Ascension
+4 Icetill Explorer
+4 Llanowar Elves
+4 Mightform Harmonizer
+4 Sazh's Chocobo
+14 Forest
+2 Surrak, Elusive Hunter
+4 Frenzied Baloth
+2 Keen-Eyed Curator
+2 Bristly Bill, Spine Sower
+1 Smuggler's Surprise
+[Sideboard]
+1 Origin of Metalbending
+3 Meltstrider's Resolve
+3 Mossborn Hydra
+3 Torpor Orb
+1 Warg Tactics
+3 Sapling Nursery
+1 Leatherhead, Swamp Stalker
