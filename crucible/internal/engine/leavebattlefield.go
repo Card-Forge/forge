@@ -1,3 +1,5 @@
+// LeaveBattlefield$ and Incorporate$ of the Animate family.
+//
 // LeaveBattlefield$ (SpellAbilityEffect.addLeaveBattlefieldReplacement,
 // SpellAbilityEffect.java:618-650): "if it would leave the battlefield, exile it
 // instead of putting it anywhere else", for the card an Animate, Pump or
@@ -13,9 +15,11 @@ package engine
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/carddb/vocab"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
 // leaveBattlefieldZone reads LeaveBattlefield$: the zone the card goes to
@@ -66,6 +70,26 @@ func (g *Game) leaveBattlefieldFor(a *Ability, api string, cards []CardID) error
 	}
 	for _, id := range cards {
 		g.addLeaveBattlefieldReplacement(a, id, zone)
+	}
+	return nil
+}
+
+// incorporateInto is AnimateEffectBase.doAnimate's Incorporate$ (:92-98, an
+// Alchemy "incorporate" cost): each card still in a zone gains the cost for
+// good, its mana cost the printed one plus it and its colors the cost's.
+func (g *Game) incorporateInto(a *Ability, api string, cards []CardID) error {
+	raw, ok := a.Params.Param("Incorporate")
+	if !ok {
+		return nil
+	}
+	inc, err := mana.Parse(raw)
+	if err != nil {
+		return fmt.Errorf("engine: %s: Incorporate$ %q: %w", api, raw, err)
+	}
+	for _, id := range cards {
+		if c := g.Card(id); c.Zone != None && !c.IsPhasedOut() {
+			c.incorporated = append(slices.Clone(c.incorporated), inc)
+		}
 	}
 	return nil
 }

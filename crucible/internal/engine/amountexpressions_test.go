@@ -361,7 +361,7 @@ func TestListMeasuresRefuseWhatTheyCannotRead(t *testing.T) {
 	if got := gainedFrom(t, nil, "Remembered$Amount/Plus.4"); got != 4 {
 		t.Errorf("empty Remembered$Amount/Plus.4 gained %d, want 4", got)
 	}
-	for _, x := range []string{"Remembered$Colors/Twice", "Remembered$TapPowerValue", "Remembered$CreatureType", "Remembered$Valid", "Convoked$Amount"} {
+	for _, x := range []string{"Remembered$Colors/Twice", "Remembered$TapPowerValue", "Remembered$CreatureType", "Remembered$Valid", "Crewed$Amount"} {
 		t.Run(x, func(t *testing.T) {
 			t.Parallel()
 			g, p, other := newTwoPlayerGame(t)

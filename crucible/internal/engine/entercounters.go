@@ -38,6 +38,16 @@ import (
 // Self or ReplacedCard, an amount that does not resolve.
 func (g *Game) applyEnterCounters(controller PlayerController, moved CardID, origin ZoneType) {
 	movedCard := g.Card(moved)
+	// The state the entry's amounts count (Count$LastStateBattlefield): what
+	// was in play and in the graveyards before this card arrived.
+	last := g.castSnapshotNow()
+	last.battlefield = slices.DeleteFunc(last.battlefield, func(id CardID) bool { return id == moved })
+	if origin == Graveyard && !slices.Contains(last.graveyard, moved) {
+		last.graveyard = append(last.graveyard, moved)
+	}
+	prevLast := g.enterLast
+	g.enterLast = &last
+	defer func() { g.enterLast = prevLast }()
 	// Java puts every ETB$ counter into one counter table and runs the
 	// AddCounter replacements on it once, so the amounts of one kind are summed
 	// first (Hardened Scales adds one for the lot, not one per line).

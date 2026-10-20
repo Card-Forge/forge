@@ -181,6 +181,10 @@ type Game struct {
 	// previous turn's castThisTurn, rotated as a new turn starts. The
 	// Werewolf trigger conditions read it (amountrecords.go).
 	castLastTurn []castRecord
+	// enterLast is the battlefield and graveyards as an entering permanent's
+	// counters are put (applyEnterCounters): the LastStateBattlefield and
+	// LastStateGraveyard its replacement ability reads, nil outside one.
+	enterLast *castSnapshot
 	// startingPlayer is Game.startingPlayer (Game.java:128): who took the
 	// game's first turn, set by StartTurn (GameAction.java:2395 sets it just
 	// before startFirstTurn) or by a turn-1 SetTurnState. NoPlayer when

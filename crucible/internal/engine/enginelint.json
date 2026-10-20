@@ -459,7 +459,8 @@
       "defined",
       "effecthelpers",
       "devour",
-      "emerge"
+      "emerge",
+      "zonemove"
     ],
     "replacement": [
       "id",

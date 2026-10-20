@@ -76,6 +76,15 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		}
 		return g.thisTurnEnteredCount(sourceController, source, text)
 	}
+	if name, _, _ := strings.Cut(count.Head, "."); name == "DraftNotesHighest" || name == "DraftNotesCount" {
+		// AbilityUtils.java:2460-2488, read off sq[0]: a deck "without draft
+		// notes" counts none; no player here has any (the default note of the
+		// highest is "0").
+		return 0, true
+	}
+	if zones, ok := strings.CutPrefix(count.Head, "ExactManaCost"); ok && count.Argument != "" {
+		return g.exactManaCostCount(sourceController, source, zones, count.Argument)
+	}
 	// Before the DamageThisTurn branch: xCount reads MaxOppDamageThisTurn and
 	// MaxCombatDamageThisTurn ahead of it (AbilityUtils.java:2410-2416).
 	if n, ok, handled := g.recordCountValue(sourceController, source, count); handled {
@@ -321,6 +330,25 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		return g.Card(lib[0]).CMC(), true
 	case "LastStateBattlefieldWithFallback", "LastStateGraveyardWithFallback":
 		return g.lastStateCount(sourceController, source, count)
+	case "LastStateBattlefield", "LastStateGraveyard":
+		// AbilityUtils.java:1802-1845 without the fallback: the ability's own last
+		// state, here an entering permanent's (enterLast); none elsewhere, which
+		// this port does not carry.
+		if g.enterLast == nil || count.Argument == "" {
+			return 0, false
+		}
+		snapshot := g.enterLast.battlefield
+		if count.Head == "LastStateGraveyard" {
+			snapshot = g.enterLast.graveyard
+		}
+		spec := valid.Parse(count.Argument)
+		n := 0
+		for _, id := range snapshot {
+			if Matches(g, g.Card(id), spec, sourceController, source) {
+				n++
+			}
+		}
+		return n, true
 	case "TotalDamageDoneByThisTurn":
 		// Card.getTotalDamageDoneBy: what the host dealt this turn.
 		if source == NoCard {
@@ -533,7 +561,7 @@ func shardsOfColor(g *Game, cards []CardID, mask mana.Colors) int {
 		if c.Def == nil {
 			continue
 		}
-		for _, s := range c.Def.Faces[0].ManaCost.Shards() {
+		for _, s := range c.manaCost().Shards() {
 			if s.Colors().HasAny(mask) {
 				n++
 			}
@@ -888,4 +916,33 @@ func (g *Game) damageThisTurnCount(sourceController PlayerID, source CardID, cou
 		}
 	}
 	return n, true
+}
+
+// exactManaCostCount is Count$ExactManaCost[<zones>] <valid> (AbilityUtils.java:
+// 2723-2739): how many different mana costs the matching cards of those zones
+// (the battlefield by default) have, a card without one counting none.
+func (g *Game) exactManaCostCount(sourceController PlayerID, source CardID, zones, spec string) (int, bool) {
+	list := []ZoneType{Battlefield}
+	if zones != "" {
+		var err error
+		if list, err = parseZoneList(zones); err != nil {
+			return 0, false
+		}
+	}
+	parsed := valid.Parse(spec)
+	seen := map[string]bool{}
+	for _, z := range list {
+		for _, pid := range g.Players() {
+			for _, id := range g.Zone(z, pid).Cards() {
+				c := g.Card(id)
+				if c.Def == nil || !Matches(g, c, parsed, sourceController, source) {
+					continue
+				}
+				if cost := c.manaCost(); !cost.IsNoCost() {
+					seen[cost.String()] = true
+				}
+			}
+		}
+	}
+	return len(seen), true
 }

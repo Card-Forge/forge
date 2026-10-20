@@ -415,10 +415,10 @@ func (g *Game) flashbackCost(pid PlayerID, c *Card) (mana.Cost, bool) {
 		if text == "" {
 			// A bare Flashback (granted by AddKeyword$) is cast for the card's
 			// own mana cost (GameActionUtil.getGraveyardSpellByKeyword).
-			if c.Def.Faces[0].ManaCost.IsNoCost() {
+			if c.manaCost().IsNoCost() {
 				return mana.Cost{}, false
 			}
-			return c.Def.Faces[0].ManaCost, true
+			return c.manaCost(), true
 		}
 		if parsed := cost.Parse(text); !parsed.IsPureMana() {
 			return mana.Cost{}, false
@@ -624,7 +624,7 @@ func (g *Game) castSpellChosen(controller PlayerController, pid PlayerID, card C
 // alternative) cost with the chosen kicker costs added, then every cost
 // modification applied (spellCost; paying as there).
 func (g *Game) castCost(pid PlayerID, c *Card, opts castOpts, paying bool) (mana.Cost, bool) {
-	base := c.Def.Faces[0].ManaCost
+	base := c.manaCost()
 	switch {
 	case opts.withoutManaCost:
 		// A free cast still pays the optional costs chosen (CR 118.9d).

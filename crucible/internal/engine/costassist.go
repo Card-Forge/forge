@@ -52,6 +52,7 @@ func (g *Game) assistCost(controller PlayerController, pid PlayerID, c *Card, to
 		}
 	}
 	if c.HasKeyword("Convoke") {
+		c.convoked = nil
 		var candidates []CardID
 		for _, id := range g.Zone(Battlefield, pid).Cards() {
 			if p := g.Card(id); p.Type().Has(cardtype.Creature) && !p.Tapped && id != c.ID {
@@ -63,6 +64,7 @@ func (g *Game) assistCost(controller PlayerController, pid PlayerID, c *Card, to
 			if g2, s2, ok := convokePay(g, picks, candidates, generic, shards); ok {
 				generic, shards = g2, s2
 				assist.tap = append(assist.tap, picks...)
+				c.convoked = slices.Clone(picks)
 			}
 		}
 	}

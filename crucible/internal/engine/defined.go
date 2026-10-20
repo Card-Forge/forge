@@ -840,6 +840,9 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement of a card's entry", defined)
 		}
 		return []CardID{refs.replaced}, nil
+	case "Convoked":
+		// AbilityUtils.java:303-304: the creatures that convoked the host.
+		return append([]CardID(nil), host.convoked...), nil
 	case "Imprinted", "ImprintedLKI":
 		// ImprintedLKI reads the cards as they were (AbilityUtils.java:268-270);
 		// a CardID is one card across zones.

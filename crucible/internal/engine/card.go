@@ -437,6 +437,13 @@ type Card struct {
 	// 262), never by a zone change: the host is one object from stack to
 	// battlefield. Held by ID, as a card keeps its ID through Exile.
 	delved []CardID
+	// convoked is Card.getConvoked: the creatures the last convoke payment of
+	// this card tapped, read by Defined$ Convoked and Count$Convoked.
+	convoked []CardID
+	// incorporated are the mana costs Animate's Incorporate$ added to this card
+	// for good (PerpetualIncorporate, kept across zones): its mana cost is the
+	// printed one plus each, its colors include theirs.
+	incorporated []mana.Cost
 	// stickers is Card.stickers (Card.java:4617): what has been placed on this
 	// card, in placement order (ADR-0044). A move into a hidden zone clears it
 	// (put); one into a public zone keeps it (GameAction.java:268-270).
@@ -967,7 +974,26 @@ func (c *Card) Colors() mana.Colors {
 	if f.HasColors {
 		base = f.Colors
 	}
+	for _, inc := range c.incorporated {
+		base |= inc.Colors()
+	}
 	return foldColor(base, c.ColorMod.effects)
+}
+
+// manaCost is Card.getManaCost: the printed cost with every incorporated cost
+// added (Card.addChangedManaCost, additional).
+func (c *Card) manaCost() mana.Cost {
+	base := c.Def.Faces[0].ManaCost
+	if len(c.incorporated) == 0 {
+		return base
+	}
+	shards := append([]mana.Shard(nil), base.Shards()...)
+	generic := base.Generic()
+	for _, inc := range c.incorporated {
+		shards = append(shards, inc.Shards()...)
+		generic += inc.Generic()
+	}
+	return mana.FromShards(shards, generic)
 }
 
 // textChange is one permanent's Layer 3 text change: Java's
@@ -1150,7 +1176,7 @@ func (c *Card) CMC() int {
 	if c.Def == nil {
 		return 0
 	}
-	return c.Def.Faces[0].ManaCost.CMC()
+	return c.manaCost().CMC()
 }
 
 // stackX is the mana value the X its cast paid adds (Card.getXManaCostPaid
@@ -1174,7 +1200,7 @@ func (c *Card) shortManaCost() string {
 	if c.Def == nil {
 		return ""
 	}
-	return c.Def.Faces[0].ManaCost.ShortString()
+	return c.manaCost().ShortString()
 }
 
 // foldPT applies Layers 7a and 7b in order (CR 613.4a-b): each effect

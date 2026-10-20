@@ -63,7 +63,13 @@ func (g *Game) listHeadCards(sourceController PlayerID, source CardID, head stri
 			return nil, false, true
 		}
 		return g.emergedCards(g.Card(source)), true, true
-	case strings.HasPrefix(head, "Convoked"), strings.HasPrefix(head, "Crewed"):
+	case strings.HasPrefix(head, "Convoked"):
+		// AbilityUtils.java:3070: Card.getConvoked, the creatures that paid for it.
+		if source == NoCard {
+			return nil, false, true
+		}
+		return g.cardsOf(g.Card(source).convoked, false), true, true
+	case strings.HasPrefix(head, "Crewed"):
 		return nil, false, true
 	case strings.HasPrefix(head, "ChosenCard"):
 		if source == NoCard {
@@ -431,7 +437,7 @@ func liveCardMeasure(head string) (func(*Card) (int, bool), bool) {
 		return func(c *Card) (int, bool) {
 			n := 0
 			if c.Def != nil {
-				for _, s := range c.Def.Faces[0].ManaCost.Shards() {
+				for _, s := range c.manaCost().Shards() {
 					if s.Colors().HasAny(mana.AllColors) {
 						n++
 					}

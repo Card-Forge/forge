@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
 // LeaveBattlefield$ Exile (Animate, Pump, ChangeZone) makes the card go to
@@ -37,5 +38,31 @@ func TestLeaveBattlefieldExilesInsteadOfAnyDestination(t *testing.T) {
 				t.Errorf("the card is in %v, want %v", got, tc.want)
 			}
 		})
+	}
+}
+
+// Animate Incorporate$ adds a mana cost and its colors to the card for good
+// (PerpetualIncorporate): the mana value and colors change, in any zone.
+func TestIncorporateAddsCostAndColors(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	card := g.NewCard(creatureDefCost(t, "Plain", "2"), p, engine.Hand)
+	if got := g.Card(card).CMC(); got != 2 {
+		t.Fatalf("mana value before = %d, want 2", got)
+	}
+	if _, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(card)},
+		"DB$ Animate | Defined$ Targeted | Incorporate$ 1 G | Duration$ Perpetual"); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Card(card).CMC(); got != 4 {
+		t.Errorf("mana value after = %d, want 4", got)
+	}
+	if !g.Card(card).Colors().Has(mana.Green) {
+		t.Errorf("colors = %v, want green", g.Card(card).Colors())
+	}
+	g.Move(card, engine.Graveyard, p)
+	if got := g.Card(card).CMC(); got != 4 {
+		t.Errorf("mana value after a zone change = %d, want it kept", got)
 	}
 }

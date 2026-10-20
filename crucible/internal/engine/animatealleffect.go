@@ -67,5 +67,8 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			return err
 		}
 	}
-	return g.leaveBattlefieldFor(a, "AnimateAll", cards)
+	if err := g.leaveBattlefieldFor(a, "AnimateAll", cards); err != nil {
+		return err
+	}
+	return g.incorporateInto(a, "AnimateAll", cards)
 }
