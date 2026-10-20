@@ -269,8 +269,21 @@ public class FButton extends FDisplayObject implements IButton {
         return false;
     }
 
+    //frosted button: a rounded slate pill with a faint edge, washed with the accent colour when toggled or pressed
+    private void drawFrosted(Graphics g) {
+        final float w = getWidth(), h = getHeight();
+        Frost.drawButton(g, w, h, isHovered() || isToggled(), pressed);
+        if (!StringUtils.isEmpty(text)) {
+            g.drawText(text, font, isEnabled() ? Frost.TEXT : Frost.TEXT_DIM, PADDING, 0, w - 2 * PADDING, h, false, Align.center, true);
+        }
+    }
+
     @Override
     public void draw(Graphics g) {
+        if (Frost.isOn() && corner == Corner.None) {
+            drawFrosted(g);
+            return;
+        }
         float x = 0;
         float y = 0;
         float w = getWidth();

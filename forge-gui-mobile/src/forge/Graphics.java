@@ -969,7 +969,9 @@ public class Graphics implements Disposable {
         shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + cornerRadius, 0), cornerRadius, 0f, 90f);
         shapeRenderer.arc(adjustX(x) + w - cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 270, 90f);
         shapeRenderer.arc(adjustX(x) + cornerRadius, adjustY(y + h - cornerRadius, 0), cornerRadius, 180, 90f);
-        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), w, h - cornerRadius * 2);
+        //the pieces must not overlap: translucent colours would show the overlap as a brighter square
+        shapeRenderer.rect(adjustX(x), adjustY(y + cornerRadius, h - cornerRadius * 2), cornerRadius, h - cornerRadius * 2);
+        shapeRenderer.rect(adjustX(x + w - cornerRadius), adjustY(y + cornerRadius, h - cornerRadius * 2), cornerRadius, h - cornerRadius * 2);
         shapeRenderer.rect(adjustX(x + cornerRadius), adjustY(y, h), w - cornerRadius * 2, h);
 
         endShape();
