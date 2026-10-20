@@ -42,6 +42,9 @@ type animateRecord struct {
 	AddKeywords    []string
 	RemoveKeywords []string
 	RemoveAllKW    bool
+	// Name is Name$ (AnimateEffect.java:178-180, addChangedName): the card's
+	// name on the battlefield, applied after the Layer 3 statics' (applyContinuousNames).
+	Name string
 	// Hidden is HiddenKeywords$ (" & " lines, AnimateEffectBase.java:122-126),
 	// put on the card every rules pass beside the pump records' own
 	// (pumpHiddenKeywords). Shared, never edited.
@@ -248,16 +251,17 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 }
 
 // animateUnresolvedParams are the doAnimate/AnimateEffect params this port
-// does not model: SVars (sVars$), TransferActivator$'s "only you may activate"
-// on a granted ability (Martyrdom), hidden keywords, "can't have" keywords,
-// removing one named ability, a renaming, mana-cost changes (Incorporate$ and
-// ManaCost$), a revert cost, a leave-the-battlefield replacement, and what the
-// animated card remembers or imprints. Condition$ is the two effects' own
+// does not model: TransferActivator$'s "only you may activate" on a granted
+// ability (Martyrdom), "can't have" keywords, removing one named ability,
+// mana-cost changes (Incorporate$ and ManaCost$), a revert cost, a
+// leave-the-battlefield replacement, and what the animated card remembers or
+// imprints. sVars$ is read as nothing: the SVars it copies are the AI markers
+// (MustAttack:True) and the ones the granted traits already carry compiled. Condition$ is the two effects' own
 // (rejectUnreadCondition, then subAbilityConditionMet).
 var animateUnresolvedParams = [...]string{
-	"sVars", "TransferActivator",
+	"TransferActivator",
 	"CantHaveKeyword", "RemoveThisAbility",
-	"Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
+	"ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
 	"RememberObjects", "ImprintCards",
 }
 
@@ -419,6 +423,7 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 	if raw, ok := a.Params.Param("RemoveKeywords"); ok {
 		r.RemoveKeywords = strings.Split(raw, " & ")
 	}
+	r.Name, _ = a.Params.Param("Name")
 	if raw, ok := a.Params.Param("HiddenKeywords"); ok {
 		for _, line := range strings.Split(raw, " & ") {
 			line = strings.TrimSpace(line)
@@ -440,7 +445,7 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 // empty reports whether r changes nothing at all.
 func (r *animateRecord) empty() bool {
 	return !r.changesTypes() && !r.HasColors && len(r.AddKeywords) == 0 && len(r.RemoveKeywords) == 0 &&
-		!r.RemoveAllKW && len(r.Hidden) == 0 && r.removeAbilities == removalNone && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0 && len(r.statics) == 0
+		!r.RemoveAllKW && len(r.Hidden) == 0 && r.Name == "" && r.removeAbilities == removalNone && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0 && len(r.statics) == 0
 }
 
 // animateCards applies template to each card on the battlefield under one

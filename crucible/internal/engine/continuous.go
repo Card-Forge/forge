@@ -566,6 +566,13 @@ func applyContinuousNames(g *Game) {
 		}
 		applyOneContinuousNames(g, g.Card(ls.host), ls.amounts, ls.s)
 	}
+	// Animate's Name$: the newest name wins, which for a record is read after
+	// the statics (their timestamps are not compared with it).
+	liveAnimates(g, func(c *Card, r *animateRecord) {
+		if r.Name != "" {
+			c.changedName = r.Name
+		}
+	})
 }
 
 // setNameOf is the name a SetName$ line gives (StaticAbilityContinuous.java:647-655):

@@ -129,3 +129,20 @@ func TestDefinedValidReachesPump(t *testing.T) {
 		}
 	}
 }
+
+// Animate's Name$ renames the permanent for as long as the record lives
+// (AnimateEffect.java:178-180).
+func TestAnimateNameRenamesThePermanent(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	victim := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	if _, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(victim)},
+		"DB$ Animate | ValidTgts$ Creature | Name$ Vitu-Ghazi | Duration$ Permanent"); err != nil {
+		t.Fatal(err)
+	}
+	sba(g)
+	if got := g.Card(victim).Name(); got != "Vitu-Ghazi" {
+		t.Errorf("name = %q, want Vitu-Ghazi", got)
+	}
+}
