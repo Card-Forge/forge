@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
+	"github.com/jczastkiewicz/crucible/internal/mana"
 )
 
 // Pump KWChoice$ has the activator pick one keyword for the target, and
@@ -40,5 +41,33 @@ func TestPumpKeywordChoiceAndOptional(t *testing.T) {
 				t.Errorf("%s granted = %v, want %v", tc.wantKW, got, !tc.wantNone)
 			}
 		})
+	}
+}
+
+// Pump with TgtZone$ Graveyard targets a card there and PumpZone$ Graveyard
+// pumps it: "target instant card in your graveyard gains flashback" (Flashback).
+func TestPumpTargetsACardInTheGraveyard(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
+	bolt := g.NewCard(corpusCard(t, "Lightning Bolt"), p, engine.Graveyard)
+	if g.Card(bolt).HasKeyword("Flashback") {
+		t.Fatal("the bolt has flashback before the grant")
+	}
+	c := engine.NewScriptedController()
+	if _, err := resolveNow(t, g, p, c, []engine.EntityID{engine.CardEntity(bolt)},
+		"DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtZone$ Graveyard | KW$ Flashback | PumpZone$ Graveyard"); err != nil {
+		t.Fatal(err)
+	}
+	if !g.Card(bolt).HasKeyword("Flashback") {
+		t.Fatal("the bolt did not gain flashback")
+	}
+	// the granted flashback casts it for its mana cost, and Move drops the
+	// grant with the zone change
+	cast := engine.NewScriptedController()
+	cast.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
+	g.Player(p).ManaPool.Add(mana.Red, 1)
+	if !g.CastSpell(p, bolt, cast) {
+		t.Fatal("the bolt could not be cast from the graveyard with its granted flashback")
 	}
 }

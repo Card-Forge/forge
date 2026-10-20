@@ -503,22 +503,22 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		candidates = g.stackSpellCandidates(a.Controller, a.Source, validTgts)
 	default:
 		zones := []ZoneType{Battlefield}
-		if a.API == APIPlay || a.API == APIRemoveCounter {
-			// Scoped to Play alone (and RemoveCounter, whose Resolve reads counters
-			// off any zone's card: Hex Parasite-style "or a suspended card") (Pass the Torch's own TrigPlay, 27 real
-			// corpus DB$ Play | TgtZone$ Graveyard lines): every other API
-			// reaching this branch (ChangeZone, Pump, Effect, PutCounter,
-			// MakeCard, Clone, RepeatEach, ...) has its own Resolve written
-			// against a battlefield target only, unaudited against a
-			// graveyard/exile one -- widening TgtZone$ reading to all of
-			// them here would make roughly 190 more corpus lines newly
-			// reachable with no review of what each Resolve does with a
-			// non-battlefield target (GO-7). charmeffect.go's own
-			// canOfferMode also stays correct only because of this scoping:
-			// it probes with targetCandidates (battlefield-only) to decide
-			// whether a Charm mode not named Play (e.g. Trystan's Command's
-			// ChangeZone mode) can be offered at all, and that probe must
-			// keep agreeing with what actually resolves the mode's targets.
+		if a.API == APIPlay || a.API == APIRemoveCounter || a.API == APIPump || a.API == APIEffect {
+			// Scoped to the APIs whose Resolve reads a target in any zone: Play
+			// (Pass the Torch's own TrigPlay, 27 real DB$ Play | TgtZone$ Graveyard
+			// lines), RemoveCounter (counters off a suspended card in exile), Pump
+			// (PumpZone$ Graveyard: Flashback, Recoup) and Effect (RememberObjects$
+			// Targeted over a graveyard card: Sins of the Past). Every other API
+			// reaching this branch (ChangeZone, PutCounter, MakeCard, Clone,
+			// RepeatEach, ...) has its own Resolve written against a battlefield
+			// target only, unaudited against a graveyard/exile one -- widening
+			// TgtZone$ reading to all of them here would make roughly 150 more
+			// corpus lines newly reachable with no review of what each Resolve
+			// does with a non-battlefield target (GO-7). charmeffect.go's own
+			// canOfferMode probes with targetCandidates (battlefield-only) to
+			// decide whether a Charm mode of another API can be offered at all,
+			// and that probe must keep agreeing with what actually resolves the
+			// mode's targets.
 			if raw, ok := a.Params.Param("TgtZone"); ok {
 				parsed, err := parseZoneList(raw)
 				if err != nil {

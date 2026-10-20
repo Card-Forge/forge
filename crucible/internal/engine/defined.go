@@ -610,7 +610,9 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return []CardID{id}, nil
 		}
 		return nil, nil
-	case "Targeted", "TargetedCard", "ThisTargetedCard":
+	case "Targeted", "TargetedCard", "TargetedSource", "ThisTargetedCard":
+		// TargetedSource is the host card of each targeted spell
+		// (AbilityUtils.java:150-155); a targeted spell is its card here.
 		var cards []CardID
 		for _, e := range refs.targets {
 			if id, ok := e.AsCard(); ok {

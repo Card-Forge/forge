@@ -466,6 +466,12 @@ type pumpRecord struct {
 	// perpetual, re-applied by GameAction.java:265-266). clearPumps keeps it.
 	// Always Permanent too, so cleanup keeps it.
 	Perpetual bool
+	// InZone is the zone a pump of a card outside the battlefield was made in
+	// (PumpZone$ Graveyard: a card gaining flashback), meaningful with
+	// OffBattlefield; the record lives while the card stays there and Move drops
+	// it with the zone change (clearPumps).
+	InZone         ZoneType
+	OffBattlefield bool
 }
 
 // endPumpsUntilTurnOf ends every Duration$ UntilYourNextTurn pump p made, as

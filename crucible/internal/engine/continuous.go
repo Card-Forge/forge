@@ -819,7 +819,8 @@ func applyPumpEffects(g *Game) {
 }
 
 // livePumps calls fn for every pump record whose card is on the
-// battlefield and phased in; a Perpetual record applies in every zone, as the
+// battlefield and phased in (or, for a PumpZone$ pump, still in the zone it was
+// made in); a Perpetual record applies in every zone, as the
 // boost and keywords it stores sit on the card itself (Card.addPTBoost).
 func livePumps(g *Game, fn func(c *Card, p *pumpRecord)) {
 	for i := range g.pumps {
@@ -828,7 +829,8 @@ func livePumps(g *Game, fn func(c *Card, p *pumpRecord)) {
 			continue
 		}
 		c := g.Card(p.Card)
-		if (c.Zone != Battlefield && !p.Perpetual) || c.IsPhasedOut() {
+		inZone := c.Zone == Battlefield || p.Perpetual || (p.OffBattlefield && c.Zone == p.InZone)
+		if !inZone || c.IsPhasedOut() {
 			continue
 		}
 		fn(c, p)
