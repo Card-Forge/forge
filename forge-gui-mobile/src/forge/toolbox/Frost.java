@@ -42,7 +42,7 @@ public final class Frost {
     public static void drawButton(Graphics g, float w, float h, boolean hover, boolean pressed) {
         final float radius = Utils.scale(2);//Math.min(h * 0.32f, Utils.scale(14));
         final float e = Math.max(1f, h * 0.05f);
-        final float k = pressed ? 0.8f : hover ? 1.22f : 1f;
+        final float k = pressed ? 1.8f : hover ? 1.22f : 1f;
         g.fillRoundRect(hover && !pressed ? accentShade(1.7f, 1f) : accentShade(0.5f, 0.95f), 0, 0, w, h, radius);
         g.fillRoundRect(accentShade(0.85f * k, 0.97f), e, e, w - 2 * e, h - 2 * e, Math.max(0f, radius - e));
         final float inset = radius * 0.7f, ih = h - 2 * e;

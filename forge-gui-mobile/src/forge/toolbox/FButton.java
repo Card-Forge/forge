@@ -274,13 +274,16 @@ public class FButton extends FDisplayObject implements IButton {
         final float w = getWidth(), h = getHeight();
         Frost.drawButton(g, w, h, isHovered() || isToggled(), pressed);
         if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, isEnabled() ? Frost.TEXT : Frost.TEXT_DIM, PADDING, 0, w - 2 * PADDING, h, false, Align.center, true);
+            String displayText = text;
+            if (corner == Corner.BottomLeft || corner == Corner.BottomRight)
+                displayText = displayText.replaceFirst(" ", "\n");
+            g.drawText(displayText, font, isEnabled() ? Frost.TEXT : Frost.TEXT_DIM, PADDING, 0, w - 2 * PADDING, h, false, Align.center, true);
         }
     }
 
     @Override
     public void draw(Graphics g) {
-        if (Frost.isOn() && corner == Corner.None) {
+        if (Frost.isOn() /*&& corner == Corner.None*/) {
             drawFrosted(g);
             return;
         }
