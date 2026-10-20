@@ -369,7 +369,9 @@ func definedCounterTargets(g *Game, controller PlayerID, host *Card, defined str
 		players, err := definedPlayers(g, controller, host.ID, defined, refs)
 		return nil, players, err
 	default:
-		cards, err := definedCards(host, defined, refs)
+		// "Valid <spec>" and "Valid<Zone> <spec>" scan the game
+		// (definedCardsInGame); every other form is definedCards'.
+		cards, err := definedCardsInGame(g, controller, host, defined, refs)
 		return cards, nil, err
 	}
 }

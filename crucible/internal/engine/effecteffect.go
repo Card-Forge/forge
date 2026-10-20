@@ -26,9 +26,9 @@ import (
 // SpellAbilityCondition shapes subAbilityConditionMet does not cover
 // (ConditionZone$, and a Condition$ value rejectUnreadCondition refuses).
 var effectUnresolvedParams = [...]string{
-	"Abilities", "RememberSpell", "RememberLKI", "RememberKeywords", "SharedKeywordsZone", "SharedRestrictions",
-	"ForgetCounter", "ExileOnCounter", "NoteCounterDefined", "ExileOnLost",
-	"Boon", "ImprintOnHost", "Adventure",
+	"RememberSpell", "RememberLKI", "RememberKeywords", "SharedKeywordsZone", "SharedRestrictions",
+	"ExileOnCounter", "NoteCounterDefined", "ExileOnLost",
+	"Adventure",
 }
 
 // effectEffect is EffectEffect.java: for each EffectOwner$ player (default
@@ -93,6 +93,22 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		// Java arms the phase-in watch only on a remembered list
 		// (EffectEffect.java:247-249).
 		life.forgetOnPhasedIn = hasParam(a, "ForgetOnPhasedIn")
+		if kind, ok := a.Params.Param("ForgetCounter"); ok {
+			// :86-98: only the remembered cards that carry the counter are
+			// kept, and with none left no effect is made; :250-252 arms the
+			// watch for the counter running out or the card phasing out.
+			life.forgetCounter, life.hasForgetCounter = CounterType(strings.ToUpper(kind)), true
+			var kept []EntityID
+			for _, e := range remember {
+				if id, ok := e.AsCard(); ok && g.Card(id).Counters.Count(life.forgetCounter) > 0 {
+					kept = append(kept, e)
+				}
+			}
+			remember = kept
+			if len(remember) == 0 {
+				return nil
+			}
+		}
 	}
 	if !hasRemember && (hasParam(a, "ForgetOnMoved") || hasParam(a, "ExileOnMoved")) {
 		// Java only arms either watch on a remembered list.
@@ -116,6 +132,9 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	name, ok := a.Params.Param("Name")
 	if !ok {
 		name = effectHostName(source) + "'s Effect"
+		if hasParam(a, "Boon") {
+			name = effectHostName(source) + "'s Boon"
+		}
 	}
 	owners := []PlayerID{a.Controller}
 	if spec, ok := a.Params.Param("EffectOwner"); ok {
@@ -133,6 +152,17 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		owners = kept
 	}
 
+	if raw, ok := a.Params.Param("Abilities"); ok {
+		granted := 0
+		for _, sub := range a.Params.Subs {
+			if strings.EqualFold(sub.Key, "Abilities") {
+				granted++
+			}
+		}
+		if names := len(strings.Split(raw, ",")); granted != names {
+			return fmt.Errorf("engine: Effect: Abilities$ %q grants an ability that regrants itself, not resolvable yet", raw)
+		}
+	}
 	def := effectCardDef(a, name)
 	for _, pid := range owners {
 		id := g.NewCard(def, pid, Command)
@@ -145,6 +175,10 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			life.armed = g.ActivePlayer() == pid
 		}
 		eff.effectLife = life
+		if hasParam(a, "Boon") {
+			eff.isBoon = true
+			eff.boons = boonTriggers(eff.Def)
+		}
 		// EffectEffect.java:312-314: AtEOT$ acts on the host card, once per
 		// effect made.
 		if err := registerAtEOT(g, a, []CardID{a.Source}); err != nil {
@@ -167,8 +201,58 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		if hasChosenNumber {
 			eff.Memory.SetChosenNumber(chosenNumber)
 		}
+		if hasParam(a, "ImprintOnHost") {
+			// EffectEffect.java:322-324.
+			g.Card(a.Source).Memory.Imprint(id)
+		}
 	}
 	return nil
+}
+
+// boonTrigger is one trigger of a Boon$ effect card: the ability its Execute$
+// runs and the BoonAmount$ firings after which the card goes away.
+type boonTrigger struct {
+	exec   *compile.Ability
+	amount string
+}
+
+// boonTriggers lists the BoonAmount$ triggers of an effect card's definition.
+func boonTriggers(def *compile.Card) []boonTrigger {
+	var out []boonTrigger
+	for _, t := range def.Faces[0].Triggers {
+		raw, ok := t.Param("BoonAmount")
+		if !ok {
+			continue
+		}
+		for _, sub := range t.Subs {
+			if strings.EqualFold(sub.Key, "Execute") {
+				out = append(out, boonTrigger{exec: sub.Ability, amount: raw})
+			}
+		}
+	}
+	return out
+}
+
+// afterEffectTrigger is TriggerHandler.runSingleTriggerInternal's ending
+// (TriggerHandler.java:539-547), run once a trigger of an effect card went on
+// the stack or resolved: a Boon$ effect goes out of the Command zone with its
+// first firing, or, with BoonAmount$ on the trigger, after that many firings
+// of its ability this game.
+func (g *Game) afterEffectTrigger(a *Ability) {
+	e := g.Card(a.Source)
+	if !e.isBoon || e.Zone != Command {
+		return
+	}
+	for _, b := range e.boons {
+		if b.exec != a.Params {
+			continue
+		}
+		x, ok := resolveNamedAmount(g, e.Def.Faces[0].Amounts, e, b.amount)
+		if _, game := e.trigActs.of(b.exec); ok && game < x {
+			return
+		}
+	}
+	g.exileEffect(a.Source)
 }
 
 // effectCardDef is the effect card's definition: name, the host's SVars,
@@ -182,6 +266,8 @@ func effectCardDef(a *Ability, name string) *compile.Card {
 	face.Amounts = a.Amounts
 	for _, sub := range a.Params.Subs {
 		switch strings.ToLower(sub.Key) {
+		case "abilities":
+			face.Abilities = append(face.Abilities, sub.Ability)
 		case "staticabilities":
 			face.Statics = append(face.Statics, sub.Ability)
 		case "triggers":
@@ -270,6 +356,10 @@ type effectLifetime struct {
 	// forgetOnPhasedIn forgets a remembered card as it phases in
 	// (effectCardsSeePhaseIn, phasing.go).
 	forgetOnPhasedIn bool
+	// forgetCounter is ForgetCounter$: a remembered card whose last counter of
+	// that kind goes, or that phases out, is forgotten (effectCardsSeeCounterGone).
+	forgetCounter    CounterType
+	hasForgetCounter bool
 }
 
 // effectDurationOf reads Duration$ and applies checkValidDuration: a
@@ -485,6 +575,27 @@ func (g *Game) endEffectsAtEndOfCombat() {
 	for _, id := range g.effectCards() {
 		if g.Card(id).effectLife.duration == effectUntilEndOfCombat {
 			g.exileEffect(id)
+		}
+	}
+}
+
+// effectCardsSeeCounterGone is ForgetCounter$'s watch
+// (SpellAbilityEffect.addForgetCounterTrigger, :597-612): an effect card
+// remembering id forgets it when the last counter of kind is removed, or when
+// it phases out (phasedOut), and is exiled once it remembers no card
+// (getForgetSpellAbility).
+func (g *Game) effectCardsSeeCounterGone(id CardID, kind CounterType, phasedOut bool) {
+	for _, eid := range g.effectCards() {
+		e := g.Card(eid)
+		if e.Zone != Command || !e.effectLife.hasForgetCounter || !effectRemembers(e, id) {
+			continue
+		}
+		if !phasedOut && e.effectLife.forgetCounter != kind {
+			continue
+		}
+		e.Memory.Forget(CardEntity(id))
+		if !effectRemembersAnyCard(e) {
+			g.exileEffect(eid)
 		}
 	}
 }

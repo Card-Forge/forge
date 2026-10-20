@@ -124,6 +124,8 @@ func (g *Game) endPhasing(controller PlayerController, b *phasing, phasedOutAll 
 	inHosts := b.hosts
 	for _, ev := range b.events {
 		if !ev.in {
+			// ForgetCounter$'s second trigger (SpellAbilityEffect.java:599-604).
+			g.effectCardsSeeCounterGone(ev.card, "", true)
 			continue
 		}
 		g.effectCardsSeePhaseIn(ev.card)

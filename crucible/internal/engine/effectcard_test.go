@@ -451,10 +451,10 @@ func TestEffectRejectsUnportedParams(t *testing.T) {
 	t.Parallel()
 
 	for _, line := range []string{
-		"DB$ Effect | Abilities$ ABPump",
-		"DB$ Effect | Boon$ True",
+		"DB$ Effect | ExileOnCounter$ P1P1",
+		"DB$ Effect | Adventure$ True",
 		"DB$ Effect | Duration$ UntilFacedown",
-		"DB$ Effect | ForgetCounter$ P1P1 | RememberObjects$ Self",
+		"DB$ Effect | RememberKeywords$ Flying",
 	} {
 		g, p, _ := newTwoPlayerGame(t)
 		_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil, line)

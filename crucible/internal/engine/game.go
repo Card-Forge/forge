@@ -799,6 +799,9 @@ func (g *Game) CounterTypeOf(d CounterDetail) (CounterType, bool) {
 func emitCounterChanged(g *Game, source CardID, target EntityID, t CounterType, delta int) {
 	if delta < 0 {
 		g.recordCountersRemoved(target, t, -delta)
+		if id, ok := target.AsCard(); ok && g.Card(id).Counters.Count(t) == 0 {
+			g.effectCardsSeeCounterGone(id, t, false)
+		}
 	}
 	g.sink.Emit(Event{Kind: CounterChanged, Source: source, Target: target, Amount: int32(delta), Detail: uint32(g.counterDetailFor(t))})
 }

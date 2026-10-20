@@ -697,7 +697,7 @@ func (c *faceCompiler) line(text string, want Record) (*Ability, error) {
 		for _, name := range names {
 			sub, err := c.reference(p.Key, name)
 			if err != nil {
-				if isAnimateGrant(ability, p) && c.regrants(err, name) {
+				if (isAnimateGrant(ability, p) || isEffectAbilityGrant(ability, p)) && c.regrants(err, name) {
 					continue
 				}
 				return nil, err
@@ -773,6 +773,14 @@ func (e *cycleError) Unwrap() error { return ErrCycle }
 func isAnimateGrant(a *Ability, p vocab.Param) bool {
 	return (strings.EqualFold(p.Key, "Triggers") || strings.EqualFold(p.Key, "Replacements") ||
 		p.Key == "Abilities") && animateAPIs[a.Name]
+}
+
+// isEffectAbilityGrant reports whether p is an Effect's `Abilities$`, whose
+// ability may lead back into the Effect that grants it (Discord, Lord of
+// Disharmony's ImmediateTrigger re-runs ChooseName): left unfollowed like an
+// Animate grant that regrants itself, and refused by the engine when applied.
+func isEffectAbilityGrant(a *Ability, p vocab.Param) bool {
+	return strings.EqualFold(p.Key, "Abilities") && a.Name == "Effect"
 }
 
 // regrants reports whether err, from following grant, is a granted trigger
@@ -927,6 +935,7 @@ var subAbilityKeys = map[string]bool{
 // reason `Choices$` is gated: Animate and others write `Triggers$` too, and
 // their values are not all SVar lists this compiler can follow yet.
 var effectTraitKeys = map[string]bool{
+	"abilities":          true,
 	"staticabilities":    true,
 	"triggers":           true,
 	"replacementeffects": true,

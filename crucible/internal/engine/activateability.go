@@ -255,6 +255,12 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 			return false
 		}
 		fromHand = true
+	case "Command":
+		// An effect card's own ability (an emblem's): its controller activates
+		// it from the Command zone.
+		if !c.IsEffect || c.Zone != Command || c.Controller() != pid {
+			return false
+		}
 	default:
 		return false
 	}

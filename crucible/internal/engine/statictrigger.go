@@ -65,6 +65,7 @@ func (g *Game) resolveStaticTriggers(controller PlayerController, matches []Abil
 		if a.Params != nil {
 			g.Card(a.Source).trigActs.note(a.Params)
 		}
+		g.afterEffectTrigger(a)
 	}
 }
 

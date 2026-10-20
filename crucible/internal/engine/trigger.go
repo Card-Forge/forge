@@ -2266,6 +2266,7 @@ func (g *Game) pushTriggeredAbilities(controller PlayerController, matches []Abi
 				g.Card(matches[i].Source).trigActs.note(matches[i].Params)
 			}
 			g.PushAbility(matches[i])
+			g.afterEffectTrigger(&matches[i])
 			pushed := g.stack[len(g.stack)-1]
 			// Every target of the chain, a Charm mode's and a link's included
 			// (MagicStack.java:410, getAllTargetChoices).

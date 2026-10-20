@@ -168,6 +168,10 @@ type Card struct {
 	// effectLife is when an effect card stops existing: its Duration$ and
 	// its ExileOnMoved$/ForgetOnMoved$ watch. Zero on every other card.
 	effectLife effectLifetime
+	// isBoon is Card.isBoon: a Boon$ effect card, which leaves the Command zone
+	// after its triggers have fired; boons holds the BoonAmount$ ones.
+	isBoon bool
+	boons  []boonTrigger
 	// CurrentRoom is the room a dungeon's venture marker is on (CR 309.4,
 	// Card.currentRoom), its RoomName$; empty before the first venture and
 	// on every card that is not a dungeon (ventureeffect.go).
