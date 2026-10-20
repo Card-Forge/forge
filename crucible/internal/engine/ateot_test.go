@@ -92,3 +92,60 @@ func TestExileFaceDownTurnsTheExiledCardFaceDown(t *testing.T) {
 		}
 	}
 }
+
+// TestAtEOTExilesWhatChangeZoneReturned proves AtEOT$ on ChangeZone
+// (ChangeZoneEffect.java:861): the creature returned from the graveyard is
+// exiled at the end step.
+func TestAtEOTExilesWhatChangeZoneReturned(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	libraryCards(t, g, p, 5)
+	libraryCards(t, g, other, 5)
+	dead := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Graveyard)
+	c := engine.NewScriptedController()
+	c.QueueTargets([]engine.EntityID{engine.CardEntity(dead)})
+	def := etbChainDef(t, "Test Eot Reanimate",
+		"DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | AtEOT$ Exile")
+	if _, err := castETBChain(t, g, p, def, c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if z := g.Card(dead).Zone; z != engine.Battlefield {
+		t.Fatalf("creature zone before the end step = %v, want Battlefield", z)
+	}
+	advanceUntil(t, g, c, func() bool { return g.ActivePhase() == engine.EndOfTurn })
+	if z := g.Card(dead).Zone; z != engine.Exile {
+		t.Errorf("creature zone after the end step = %v, want Exile", z)
+	}
+}
+
+// TestAtEOTReturnsWhatChangeZoneAllMoved proves AtEOT$ on ChangeZoneAll
+// (ChangeZoneAllEffect.java:202): every creature it put onto the battlefield
+// goes back to hand at the end step.
+func TestAtEOTReturnsWhatChangeZoneAllMoved(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	libraryCards(t, g, p, 5)
+	libraryCards(t, g, other, 5)
+	a := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Graveyard)
+	b := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Graveyard)
+	c := engine.NewScriptedController()
+	c.QueueCardOrder([]engine.CardID{a, b})
+	def := etbChainDef(t, "Test Eot Mass Reanimate",
+		"DB$ ChangeZoneAll | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | AtEOT$ Hand")
+	if _, err := castETBChain(t, g, p, def, c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	for _, id := range []engine.CardID{a, b} {
+		if z := g.Card(id).Zone; z != engine.Battlefield {
+			t.Fatalf("creature zone before the end step = %v, want Battlefield", z)
+		}
+	}
+	advanceUntil(t, g, c, func() bool { return g.ActivePhase() == engine.EndOfTurn })
+	for _, id := range []engine.CardID{a, b} {
+		if z := g.Card(id).Zone; z != engine.Hand {
+			t.Errorf("creature zone after the end step = %v, want Hand", z)
+		}
+	}
+}

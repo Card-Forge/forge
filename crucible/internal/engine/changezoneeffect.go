@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement controlcommands changecombatantseffect combat valid
+//enginelint:allow id card game player ability defined condition control amount parts zone effecthelpers zonemove scheduledaction replacement controlcommands changecombatantseffect combat valid ateot
 
 import (
 	"fmt"
@@ -12,8 +12,7 @@ import (
 // cannot honour yet, grouped by the mechanism each needs: an entering-state
 // modifier (Transformed$, FaceDown$, AttachedTo$ ...; WithCountersType$ and
 // WithCountersAmount$ resolve, changeZoneEnter; Attacking$/Blocking$ resolve,
-// changeZoneJoinCombat), a delayed follow-up (AtEOT$,
-// LeaveBattlefield$, StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
+// changeZoneJoinCombat), a delayed follow-up (LeaveBattlefield$, StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
 // changeZoneDuration, but not its ReturnAbility$/ReturnValid$ delayed
 // trigger), an alternative destination prompt (DestinationAlternative$), a
 // non-default search loop (Different*$, WithTotal*$, Exactly$, Reorder$; and
@@ -37,7 +36,7 @@ import (
 var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
 	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown",
-	"LeaveBattlefield", "AtEOT", "StaticEffect",
+	"LeaveBattlefield", "StaticEffect",
 	"Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
@@ -494,7 +493,7 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 	_, optional := a.Params.Param("Optional")
 	_, tapped := a.Params.Param("Tapped")
 	moved := map[ZoneType][]CardID{}
-	var movedOrigins []ZoneType
+	var movedOrigins, movedAll = []ZoneType(nil), []CardID(nil)
 	_, rememberLKI := a.Params.Param("RememberLKI")
 	for _, id := range cards {
 		c := g.Card(id)
@@ -552,10 +551,15 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 			movedOrigins = append(movedOrigins, from)
 		}
 		moved[from] = append(moved[from], id)
+		movedAll = append(movedAll, id)
 		changeZoneMemory(a, source, id)
 	}
 	for _, from := range movedOrigins {
 		g.checkChangesZoneAllTriggers(controller, moved[from], from, dest)
+	}
+	// ChangeZoneEffect.java:861-862: one delayed trigger for everything moved.
+	if err := registerAtEOT(g, a, movedAll); err != nil {
+		return err
 	}
 	if until {
 		var cmds []cardCommand
@@ -862,6 +866,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 	for _, pick := range picks {
 		moved := map[ZoneType][]CardID{}
 		var movedOrigins []ZoneType
+		var movedAll []CardID
 		for _, id := range pick.chosen {
 			from := g.Card(id).Zone
 			joined, err := g.changeZoneJoinCombat(controller, a, id, dest, newController)
@@ -898,6 +903,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				movedOrigins = append(movedOrigins, from)
 			}
 			moved[from] = append(moved[from], id)
+			movedAll = append(movedAll, id)
 			changeZoneMemory(a, source, id)
 		}
 		for _, from := range movedOrigins {
@@ -905,6 +911,10 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			if until {
 				returns = g.untilReturns(returns, a.Source, from, moved[from])
 			}
+		}
+		// ChangeZoneEffect.java:1527-1528: per fetcher, after its moves.
+		if err := registerAtEOT(g, a, movedAll); err != nil {
+			return err
 		}
 		if (zoneIn(Library, pick.origin) && dest != Library && !defined && pick.shuffleMandatory) || shuffleParam == "True" {
 			g.Shuffle(Library, pick.player)

@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow id card game ability defined condition control parts zone effecthelpers zonemove
+//enginelint:allow id card game ability defined condition control parts zone effecthelpers zonemove ateot
 
 import "fmt"
 
@@ -8,7 +8,7 @@ import "fmt"
 // port cannot honour yet (same mechanisms as changeZoneUnresolvedParams).
 var changeZoneAllUnresolvedParams = [...]string{
 	"Duration", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
-	"WithCountersType", "StaticEffect", "TypeLimit", "AtEOT", "OptionQuestion",
+	"WithCountersType", "StaticEffect", "TypeLimit", "OptionQuestion",
 	"Hidden", "ChangeNum", "Pawprint", "Random",
 	"Ultimate",
 }
@@ -149,6 +149,14 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	}
 	for _, from := range movedOrigins {
 		g.checkChangesZoneAllTriggers(controller, moved[from], from, dest)
+	}
+	// ChangeZoneAllEffect.java:202-203: one delayed trigger for everything moved.
+	var movedAll []CardID
+	for _, from := range movedOrigins {
+		movedAll = append(movedAll, moved[from]...)
+	}
+	if err := registerAtEOT(g, a, movedAll); err != nil {
+		return err
 	}
 	if shuffle {
 		for _, pid := range players {
