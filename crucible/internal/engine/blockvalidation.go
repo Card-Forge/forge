@@ -50,6 +50,13 @@ type blockCheck struct {
 	eachCombat map[CardID]bool
 }
 
+// BlocksLegal reports whether blocks, the whole declaration so far, pass
+// CombatUtil.validateBlocks for defending: a controller that must satisfy a
+// "must block" or "must be blocked" requirement tests candidate answers with it.
+func (g *Game) BlocksLegal(defending PlayerID, blocks []Block) bool {
+	return g.validateBlocks(defending, blocks) == nil
+}
+
 // validateBlocks is CombatUtil.validateBlocks (CombatUtil.java:637) for
 // defending, over blocks -- every defender's declaration so far, this one
 // included. The first failure, in Java's order, is the error.

@@ -68,6 +68,10 @@ func TestProbeClassifiesCards(t *testing.T) {
 		// ValidTgts$ no generic board satisfies: the probe places a card that
 		// the spec accepts, or casts one for a TargetType$ Spell target.
 		{"Clear a Path", smoke.Plays},
+		// A block requirement makes the probe's default no-block declaration
+		// illegal: it blocks with every eligible creature instead.
+		{"Alluring Scent", smoke.Plays},
+		{"Compelled Duel", smoke.Plays},
 		{"Celestial Purge", smoke.Plays},
 		{"Annul", smoke.Plays},
 		// An Aura's host is its Enchant spec: a card in a graveyard, a black

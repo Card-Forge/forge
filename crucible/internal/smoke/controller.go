@@ -121,7 +121,7 @@ func (*Controller) ChooseAttackTarget(_ *engine.Game, _ engine.PlayerID, _ engin
 // attacker is blocked by the next eligible creature; or blockEvery: then each
 // eligible creature blocks, the first the first attacker, the second the
 // second, wrapping round.
-func (c *Controller) DeclareCombatBlockers(_ *engine.Game, _ engine.PlayerID, attackers []engine.CardID, eligible []engine.CardID) []engine.Block {
+func (c *Controller) DeclareCombatBlockers(g *engine.Game, defender engine.PlayerID, attackers []engine.CardID, eligible []engine.CardID) []engine.Block {
 	var out []engine.Block
 	if c.blockEvery && len(attackers) > 0 {
 		for i, b := range eligible {
@@ -130,7 +130,10 @@ func (c *Controller) DeclareCombatBlockers(_ *engine.Game, _ engine.PlayerID, at
 		return out
 	}
 	if !c.blockAll {
-		return nil
+		// No block is the default; a block requirement (Alluring Scent's "all
+		// creatures able to block", Compelled Duel) makes it illegal, and every
+		// eligible creature blocking then satisfies it.
+		return c.forcedBlocks(g, defender, attackers, eligible)
 	}
 	for i, a := range attackers {
 		if i < len(eligible) {
@@ -138,6 +141,22 @@ func (c *Controller) DeclareCombatBlockers(_ *engine.Game, _ engine.PlayerID, at
 		}
 	}
 	return out
+}
+
+// forcedBlocks is the empty declaration when it is legal, else every eligible
+// creature blocking, the attackers taken in turn, when that is legal.
+func (*Controller) forcedBlocks(g *engine.Game, defender engine.PlayerID, attackers, eligible []engine.CardID) []engine.Block {
+	if g.BlocksLegal(defender, nil) || len(attackers) == 0 {
+		return nil
+	}
+	var all []engine.Block
+	for i, b := range eligible {
+		all = append(all, engine.Block{Blocker: b, Attacker: attackers[i%len(attackers)]})
+	}
+	if g.BlocksLegal(defender, all) {
+		return all
+	}
+	return nil
 }
 
 // AssignCombatDamage assigns one damage to each blocker.
