@@ -58,8 +58,8 @@ Measured on the full corpus (34,078 cards):
 
 | Outcome      |  Cards |
 | ------------ | -----: |
-| plays        | 32,257 |
-| refused      |  1,314 |
+| plays        | 32,265 |
+| refused      |  1,306 |
 | panicked     |      0 |
 | hung         |      0 |
 | placed       |    434 |
@@ -79,8 +79,6 @@ Largest refusal causes over the full corpus (cards blocked):
 |    15 | `Counter: Defined$ not resolvable`           |
 |    15 | `DelayedTrigger: Mode$ not resolvable`       |
 |    14 | `ChangeZone: AtRandom$ not resolvable`       |
-|    14 | `Charm: ChoiceRestriction$ not resolvable`   |
-|    13 | `ChangeZone: StaticEffect$ not resolvable`   |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 

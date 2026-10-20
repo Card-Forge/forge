@@ -642,10 +642,11 @@ func (g *Game) castCost(pid PlayerID, c *Card, opts castOpts, paying bool) (mana
 	}
 	total, ok := g.spellCost(pid, c.ID, base, paying)
 	total = opts.optional.reduced(total)
+	staticType, staticColor := g.manaConvertForSpell(pid, c.ID)
 	switch {
-	case opts.anyType:
+	case opts.anyType || staticType:
 		total = anyTypeCost(total)
-	case opts.anyColor:
+	case opts.anyColor || staticColor:
 		total = anyColorCost(total)
 	}
 	return total, ok

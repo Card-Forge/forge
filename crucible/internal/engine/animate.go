@@ -560,10 +560,12 @@ func animateAbilityGrants(a *Ability, api string) ([]*compile.Ability, error) {
 // animateStaticModes are the static modes a granted staticAbilities$ line may
 // have: the ones some walk of a card's statics reads through traitFaces. Any
 // other would be granted and never read, so it is refused (GO-7); ManaConvert
-// (spend mana as though any color) and the MayPlay grants have no reader.
+// is allowed only in the shapes manaConvertSupported reads, and the MayPlay
+// grants have no reader.
 var animateStaticModes = map[string]bool{
 	"continuous": true, "mustattack": true, "minmaxblocker": true, "cantsacrifice": true,
 	"cantblockby": true, "combatdamagetoughness": true, "reducecost": true, "raisecost": true,
+	"manaconvert": true,
 }
 
 // animateStaticGrants reads staticAbilities$ (AnimateEffect.java:129-133): the
@@ -591,7 +593,8 @@ func animateStaticGrants(a *Ability, api string) ([]*compile.Ability, error) {
 		return nil, fmt.Errorf("engine: %s: staticAbilities$ %q grants a static that regrants itself, not resolvable yet", api, raw)
 	}
 	for _, st := range out {
-		if !animateStaticModes[strings.ToLower(st.Name)] || hasParamOn(st, "MayPlay") {
+		if !animateStaticModes[strings.ToLower(st.Name)] || hasParamOn(st, "MayPlay") ||
+			(strings.EqualFold(st.Name, "ManaConvert") && !manaConvertSupported(st)) {
 			return nil, fmt.Errorf("engine: %s: staticAbilities$ %q (Mode$ %s) not resolvable yet", api, raw, st.Name)
 		}
 	}

@@ -615,6 +615,7 @@
     "effecthelpers": ["id", "card", "game", "valid", "parts", "ability", "zone", "amount"],
     "animate": [
       "ability",
+      "manaconvert",
       "card",
       "controlcommands",
       "effecthelpers",
