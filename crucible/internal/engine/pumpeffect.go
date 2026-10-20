@@ -38,8 +38,7 @@ import (
 // interactive choice and a random draw, neither of which this port's own KW$
 // handling (below) does (DefinedKW$ is pumpDefinedKeywords'); SharedKeywordsZone$/
 // SharedRestrictions$ (2/2) -- CardFactoryUtil.sharedKeywords' own zone scan,
-// a further mechanic; AtEOT$ (9) -- registerDelayedTrigger, a new
-// trigger this effect would silently fail to create; DefinedLandwalk$/
+// a further mechanic; DefinedLandwalk$/
 // RememberPumped$/LeaveBattlefield$ (0/0) -- each its own further
 // tracking mechanic; NoteCards$/NoteCardsFor$/ClearNotedCardsFor$/
 // NoteNumber$ (0/0/0/0) -- Player.noteNumberForName's own tracking, nothing
@@ -76,7 +75,7 @@ var pumpUnresolvedParams = [...]string{
 	"Condition", "ConditionZone", "ConditionPlayerTurn",
 	"ConditionActivationLimit",
 	"CanBlockAmount", "CanBlockAny", "KWChoice", "RandomKeyword", "RandomKWNum",
-	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions", "AtEOT",
+	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
 	"DefinedLandwalk", "RememberPumped", "LeaveBattlefield",
 	"NoteCards", "NoteCardsFor", "ClearNotedCardsFor",
 	"NoteNumber", "Optional", "OptionQuestion",
@@ -217,6 +216,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if power == 0 && toughness == 0 && grant.empty() && !multiplied {
 		// Java has no such return: replaceDying (PumpEffect.java:506) still
 		// runs, so an X=0 Necrotic Wound still exiles a creature dying this turn.
+		if hasParam(a, "AtEOT") {
+			return fmt.Errorf("engine: Pump: AtEOT$ on a line that pumps nothing not resolvable yet")
+		}
 		return g.replaceDying(a, "Pump")
 	}
 
@@ -229,6 +231,10 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			return fmt.Errorf("engine: Pump: %w", err)
 		}
 		cards = nil
+	}
+	// PumpEffect.java:485: AtEOT$ remembers the targets only, not Radiance's.
+	if err := registerAtEOT(g, a, cards); err != nil {
+		return err
 	}
 	// Radiance$ (PumpEffect.java:489): the permanents sharing a color with a
 	// target are pumped with it.

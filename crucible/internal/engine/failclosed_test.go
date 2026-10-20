@@ -198,7 +198,7 @@ func TestFiftyPackFailsClosed(t *testing.T) {
 		"DB$ MakeCard | Booster$ True",
 		"DB$ MakeCard | Name$ X | Zone$ Nowhere",
 		"DB$ Learn | Condition$ Kicked",
-		"DB$ CopyPermanent | Defined$ Self | AtEOT$ Exile",
+		"DB$ CopyPermanent | Defined$ Self | AtEOTTrig$ Exile",
 		"DB$ CopyPermanent | Defined$ ChosenMap",
 		"DB$ CopyPermanent | Defined$ Self | SetPower$ Bogus",
 		"DB$ Counter | Defined$ Parent",

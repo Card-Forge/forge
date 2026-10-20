@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow ability animate card condition control controlcommands defined effecthelpers game id parts zone
+//enginelint:allow ability animate card condition control controlcommands defined effecthelpers game id parts zone ateot
 
 import "fmt"
 
@@ -41,9 +41,8 @@ func (animateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if grants != nil {
 		g.grantPerpetualTriggers(cards, grants, a.Amounts)
 	}
-	if template.empty() {
-		return nil
+	if !template.empty() {
+		g.animateCards(template, cards)
 	}
-	g.animateCards(template, cards)
-	return nil
+	return registerAtEOT(g, a, cards)
 }

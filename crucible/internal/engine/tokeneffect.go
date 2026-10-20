@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow ability action animate card condition control defined effecthelpers game id parts player token valid zone changecombatantseffect
+//enginelint:allow ability action animate card condition control defined effecthelpers game id parts player token valid zone changecombatantseffect ateot
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ import (
 var tokenUnresolvedParams = [...]string{
 	"WithCountersType",
 	"WithCountersAmount", "AddTriggersFrom", "TokenTypes", "TokenColors", "TokenRemembered",
-	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable", "AtEOT", "AtEOTTrig",
+	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable", "AtEOTTrig",
 	"Condition"}
 
 // tokenEffect is TokenEffect.java: TokenAmount$ (default 1) of every
@@ -129,7 +129,7 @@ func (tokenEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 		}
 	}
 	g.checkCreatedZoneAllTriggers(controller, created)
-	return nil
+	return registerAtEOT(g, a, created)
 }
 
 // tokenOwners is getDefinedPlayersOrTargeted(sa, "TokenOwner").

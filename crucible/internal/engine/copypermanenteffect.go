@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect
+//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect ateot
 
 import (
 	"fmt"
@@ -29,7 +29,7 @@ import (
 type copyPermanentEffect struct{}
 
 func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "CopyPermanent", "Condition", "AtEOT", "AtEOTTrig", "AddTypes", "PumpKeywords",
+	if err := rejectParams(a, "CopyPermanent", "Condition", "AtEOTTrig", "AddTypes", "PumpKeywords",
 		"AddKeywords", "NonLegendary", "Populate", "SetColor", "SetCreatureTypes",
 		"PumpDuration", "AddSVars", "RemoveCardTypes", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
 		"RemoveSubTypes", "RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
@@ -115,7 +115,7 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	if len(created) > 0 {
 		g.checkCreatedZoneAllTriggers(controller, created)
 	}
-	return nil
+	return registerAtEOT(g, a, created)
 }
 
 // copyOriginal is what a token copy copies: the card definition and the
