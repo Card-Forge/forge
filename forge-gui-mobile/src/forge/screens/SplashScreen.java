@@ -374,15 +374,15 @@ public class SplashScreen extends FContainer {
         final float sw = getWidth(), sh = getHeight();
         final float scale = Math.max(sw / w, sh / h);
         final float cw = w * scale, ch = h * scale;
-        g.drawImage(splashTexture, (sw - cw) / 2, (sh - ch) / 2, cw, ch);
-        final Color dim = new Color(0f, 0f, 0f, 0.62f), clear = new Color(0f, 0f, 0f, 0f);
-        g.fillRect(dim, 0, 0, sw, sh);
+        //g.drawImage(splashTexture, (sw - cw) / 2, (sh - ch) / 2, cw, ch);
+        final Color /*dim = new Color(0f, 0f, 0f, 0.62f),*/ clear = new Color(0f, 0f, 0f, 0f);
+        //g.fillRect(dim, 0, 0, sw, sh);
         g.drawImage(splashTexture, x, y, w, h);
         final float fade = Math.min(w * 0.18f, Math.max(0f, x)); //only where the artwork doesn't reach the screen edge
-        if (fade > 0) {
+        /*if (fade > 0) {
             g.fillGradientRect(dim, clear, false, x, y, fade, h);
             g.fillGradientRect(clear, dim, false, x + w - fade, y, fade, h);
-        }
+        }*/
         g.fillGradientRect(new Color(0f, 0f, 0f, 0.35f), clear, true, 0, 0, sw, sh * 0.25f);
         g.fillGradientRect(clear, new Color(0f, 0f, 0f, 0.55f), true, 0, sh * 0.6f, sw, sh * 0.4f);
     }
