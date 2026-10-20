@@ -284,7 +284,7 @@ func TestMustAttackStaticRejectsUnportedShapes(t *testing.T) {
 		{"Mode$ MustAttack | ValidCreature$ Card.Self | ValidPlayer$ Opponent", "ValidPlayer$ not resolvable yet"},
 		{"Mode$ MustAttack | ValidCreature$ Card.Self | Condition$ MaxSpeed", `Condition$ "MaxSpeed" not resolvable yet`},
 		{"Mode$ MustAttack | ValidCreature$ Card.Self | AffectedZone$ Graveyard", `AffectedZone$ "Graveyard" not resolvable yet`},
-		{"Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ CardOwner", "MustAttack$"},
+		{"Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Player.Allies", "MustAttack$"},
 		{"Mode$ AttackRequirement | ValidCard$ Creature | ValidAttacker$ Creature", "Mode$ AttackRequirement static not resolvable yet"},
 		{"Mode$ PlayerMustAttack | ValidPlayer$ Player | MustAttack$ Player", "Mode$ PlayerMustAttack static not resolvable yet"},
 	} {

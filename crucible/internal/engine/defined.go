@@ -260,6 +260,11 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		if pid := g.Card(host).Memory.ChosenPlayer(); pid != NoPlayer {
 			candidates = []PlayerID{pid}
 		}
+	case "SourceController", "CardController":
+		// AbilityUtils.java:1146-1149: the host's controller.
+		candidates = []PlayerID{g.Card(host).Controller()}
+	case "CardOwner":
+		candidates = []PlayerID{g.Card(host).Owner}
 	case "RememberedPlayer":
 		// AbilityUtils.java:994-995: the players among the remembered objects
 		// (a remembered card names none: the "...Remembered" recursion is for
@@ -705,6 +710,16 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q: no cost recorded what it sacrificed", defined)
 		}
 		return append([]CardID(nil), refs.paid.sacrificed...), nil
+	case "Discarded", "Exiled":
+		// getPaidCards (AbilityUtils.java:306-310): what the cost discarded or
+		// exiled, recorded alike.
+		if !refs.paid.recorded {
+			return nil, fmt.Errorf("engine: Defined$ %q: no cost recorded what it used up", defined)
+		}
+		if defined == "Discarded" {
+			return append([]CardID(nil), refs.paid.discarded...), nil
+		}
+		return append([]CardID(nil), refs.paid.exiled...), nil
 	case "Collected":
 		// The evidence the spell's own cast collected (CostCollectEvidence's
 		// paid list): only a spell is its cast SpellAbility (spellOptional).
@@ -825,7 +840,9 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return nil, fmt.Errorf("engine: Defined$ %q outside a replacement of a card's entry", defined)
 		}
 		return []CardID{refs.replaced}, nil
-	case "Imprinted":
+	case "Imprinted", "ImprintedLKI":
+		// ImprintedLKI reads the cards as they were (AbilityUtils.java:268-270);
+		// a CardID is one card across zones.
 		return append([]CardID(nil), host.Memory.Imprinted()...), nil
 	case "ChosenCard":
 		return append([]CardID(nil), host.Memory.Chosen()...), nil
