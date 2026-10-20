@@ -36,7 +36,7 @@ import (
 // flag here and at the discard sites.
 var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
-	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown", "ExileFaceDown",
+	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown",
 	"LeaveBattlefield", "AtEOT", "StaticEffect",
 	"Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
@@ -543,6 +543,7 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		}
 		if dest == Exile {
 			g.markExiledWith(id, a.Source)
+			g.exileFaceDown(a, id)
 			if melded != NoCard {
 				g.markExiledWith(melded, a.Source)
 			}
@@ -876,6 +877,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				// move fired its zone-change triggers.
 				if dest == Exile {
 					g.markExiledWith(id, a.Source)
+					g.exileFaceDown(a, id)
 				}
 				changeZoneMemory(a, source, id)
 				if until {
@@ -887,6 +889,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			g.changeZoneLeftCombat(id, joined)
 			if dest == Exile {
 				g.markExiledWith(id, a.Source)
+				g.exileFaceDown(a, id)
 				if melded != NoCard {
 					g.markExiledWith(melded, a.Source)
 				}

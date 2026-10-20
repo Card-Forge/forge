@@ -244,3 +244,24 @@ func (manifestDreadEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	}
 	return nil
 }
+
+// turnFaceDownInExile is Card.turnFaceDown(true) for a card in exile: it has
+// no characteristics at all (a blank FaceDown state, unlike a face-down
+// permanent's 2/2) and turns face up when it leaves exile (Game.Move).
+func (g *Game) turnFaceDownInExile(id CardID) {
+	c := g.Card(id)
+	if c.faceUpDef == nil {
+		c.faceUpDef = c.Def
+	}
+	c.Def = &compile.Card{}
+}
+
+// exileFaceDown is ExileFaceDown$ on Dig, ChangeZone and ChangeZoneAll
+// (DigEffect.java:420, ChangeZoneEffect.java:1429, ChangeZoneAllEffect.java:
+// 163): the card just exiled turns face down. Java's WithMayLook$ (the
+// exiler may look) has no hidden-information model to record in.
+func (g *Game) exileFaceDown(a *Ability, id CardID) {
+	if hasParam(a, "ExileFaceDown") && g.Card(id).Zone == Exile {
+		g.turnFaceDownInExile(id)
+	}
+}

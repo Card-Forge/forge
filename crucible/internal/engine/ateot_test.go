@@ -1,6 +1,7 @@
 package engine_test
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
@@ -52,5 +53,42 @@ func TestAtEOTHandReturnsThePumpedCreature(t *testing.T) {
 	advanceUntil(t, g, c, func() bool { return g.ActivePhase() == engine.EndOfTurn })
 	if z := g.Card(mine).Zone; z != engine.Hand {
 		t.Errorf("creature zone after the end step = %v, want Hand", z)
+	}
+}
+
+// TestExileFaceDownTurnsTheExiledCardFaceDown proves ExileFaceDown$ on Dig
+// and ChangeZoneAll: the card lands in exile with no characteristics, and a
+// line without the param leaves it face up.
+func TestExileFaceDownTurnsTheExiledCardFaceDown(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		line string
+		down bool
+	}{
+		{"DB$ Dig | DigNum$ 1 | DestinationZone$ Exile | SkipReorder$ True | ExileFaceDown$ True", true},
+		{"DB$ Dig | DigNum$ 1 | DestinationZone$ Exile | SkipReorder$ True", false},
+		{"DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile | ExileFaceDown$ True", true},
+	} {
+		g, p, other := newTwoPlayerGame(t)
+		libraryCards(t, g, p, 1)
+		libraryCards(t, g, other, 1)
+		c := engine.NewScriptedController()
+		if strings.HasPrefix(tc.line, "DB$ Dig") {
+			c.QueueCardChoice(g.Zone(engine.Library, p).Cards()[:1])
+		}
+		def := etbChainDef(t, "Test Face Down", tc.line)
+		if _, err := castETBChain(t, g, p, def, c); err != nil {
+			t.Fatalf("%q: ResolveStack: %v", tc.line, err)
+		}
+		exiled := g.Zone(engine.Exile, p).Cards()
+		if len(exiled) == 0 {
+			t.Fatalf("%q: nothing exiled", tc.line)
+		}
+		for _, id := range exiled {
+			if got := g.Card(id).IsFaceDown(); got != tc.down {
+				t.Errorf("%q: exiled card face down = %v, want %v", tc.line, got, tc.down)
+			}
+		}
 	}
 }

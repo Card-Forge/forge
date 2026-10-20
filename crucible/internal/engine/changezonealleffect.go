@@ -7,7 +7,7 @@ import "fmt"
 // changeZoneAllUnresolvedParams are ChangeZoneAllEffect.java's params this
 // port cannot honour yet (same mechanisms as changeZoneUnresolvedParams).
 var changeZoneAllUnresolvedParams = [...]string{
-	"Duration", "ExileFaceDown", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
+	"Duration", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
 	"WithCountersType", "StaticEffect", "TypeLimit", "AtEOT", "OptionQuestion",
 	"Hidden", "ChangeNum", "Pawprint", "Random",
 	"Ultimate",
@@ -126,6 +126,7 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped)
 		if dest == Exile {
 			g.markExiledWith(id, a.Source)
+			g.exileFaceDown(a, id)
 			if melded != NoCard {
 				g.markExiledWith(melded, a.Source)
 			}

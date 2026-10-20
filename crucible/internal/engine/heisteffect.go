@@ -5,7 +5,6 @@ package engine
 import (
 	"fmt"
 
-	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 )
 
@@ -80,11 +79,8 @@ func (heistEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 		if melded != NoCard {
 			g.markExiledWith(melded, a.Source)
 		}
+		g.turnFaceDownInExile(id)
 		c := g.Card(id)
-		if c.faceUpDef == nil {
-			c.faceUpDef = c.Def
-		}
-		c.Def = &compile.Card{}
 		heisted = append(heisted, id)
 		g.exileGrants = append(g.exileGrants, ExilePlayGrant{
 			Card: id, Timestamp: c.Timestamp, Player: heister, AnyManaType: true,

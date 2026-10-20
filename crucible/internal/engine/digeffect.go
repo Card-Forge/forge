@@ -12,14 +12,14 @@ import (
 // different chooser (Choser$), the alternative selection loops
 // (WithTotalCMC$, ForEachColorPair$, WithDifferentPowers$, RandomChange$),
 // entering-state modifiers (FaceDown*$, WithCounters$, Attacking$), exile
-// bookkeeping this port has no concept of (ExileFaceDown$,
-// ExileWithCounters$, DefinedExiler$), and GainControl$'s Cybership reorder.
+// bookkeeping this port has no concept of (ExileWithCounters$,
+// DefinedExiler$), and GainControl$'s Cybership reorder.
 var digUnresolvedParams = [...]string{
 	"SourceZone", "FromBottom", "Choser", "SetChosenPlayer", "WithTotalCMC",
 	"ForEachColorPair", "WithDifferentPowers", "RandomChange", "GainControl",
 	"FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
 	"WithCounters", "WithCountersAmount", "Attacking", "Blocking",
-	"ExileFaceDown", "ExileWithCounters", "DefinedExiler", "StaticEffect",
+	"ExileWithCounters", "DefinedExiler", "StaticEffect",
 	"Pawprint", "Boast", "UnlessResolveSubs",
 	"Condition", "Ultimate", "ModeCost",
 }
@@ -170,6 +170,7 @@ func (digEffect) Resolve(g *Game, a *Ability, controller PlayerController) error
 			melded := g.moveByEffect(controller, id, dest1, libPos1, NoPlayer, tapped)
 			if dest1 == Exile {
 				g.markExiledWith(id, a.Source)
+				g.exileFaceDown(a, id)
 				if melded != NoCard {
 					g.markExiledWith(melded, a.Source)
 				}
