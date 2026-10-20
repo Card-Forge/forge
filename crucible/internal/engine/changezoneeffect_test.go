@@ -1,6 +1,7 @@
 package engine_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/jczastkiewicz/crucible/internal/engine"
@@ -138,6 +139,31 @@ func TestChangeZoneEffectOptionalDeclineKeepsCard(t *testing.T) {
 	}
 }
 
+// TestChangeZoneLibraryPositionCountsDown proves LibraryPosition$ N puts the
+// card N cards below the top (zone.add(card, N)), and a position past the end
+// of the library is the bottom.
+func TestChangeZoneLibraryPositionCountsDown(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		pos, want int
+	}{{1, 1}, {2, 2}, {9, 3}} {
+		g, p, _ := newTwoPlayerGame(t)
+		lib := libraryCards(t, g, p, 3)
+		victim := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+		c := engine.NewScriptedController()
+		c.QueueTargets([]engine.EntityID{engine.CardEntity(victim)})
+		line := fmt.Sprintf("DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ %d", tc.pos)
+		if _, err := castETBChain(t, g, p, etbChainDef(t, "Test Second From Top", line), c); err != nil {
+			t.Fatalf("pos %d: ResolveStack: %v", tc.pos, err)
+		}
+		cards := g.Zone(engine.Library, p).Cards()
+		if len(cards) != 4 || cards[tc.want] != victim {
+			t.Errorf("pos %d: library = %v, want %d at index %d (original %v)", tc.pos, cards, victim, tc.want, lib)
+		}
+	}
+}
+
 // TestChangeZoneEffectRejectsUnresolvedShapes proves the fail-closed
 // params and zones (PORT-8).
 func TestChangeZoneEffectRejectsUnresolvedShapes(t *testing.T) {
@@ -147,7 +173,7 @@ func TestChangeZoneEffectRejectsUnresolvedShapes(t *testing.T) {
 		"DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | Transformed$ True",
 		"DB$ ChangeZone | Defined$ Self | Origin$ Flashback | Destination$ Hand",
 		"DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Command",
-		"DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2",
+		"DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ Bogus",
 		"DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ EACH Creature",
 	} {
 		g, p, _ := newTwoPlayerGame(t)

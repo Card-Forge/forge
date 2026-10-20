@@ -86,6 +86,9 @@ func (g *Game) moveByEffectOnly(controller PlayerController, id CardID, dest Zon
 			melded = g.MoveToLibraryTop(id, c.Owner)
 		} else {
 			melded = g.Move(id, Library, c.Owner)
+			if libPos > 0 {
+				g.sinkInLibrary(id, c.Owner, libPos)
+			}
 		}
 	case Graveyard:
 		dest, melded = g.moveToGraveyard(controller, id)
@@ -173,15 +176,29 @@ func zoneIn(z ZoneType, zones []ZoneType) bool {
 	return false
 }
 
-// libraryPosition reads LibraryPosition$ (default 0, the top). Only the top
-// and the bottom (-1) are resolvable: Game has no insert-at-depth move yet.
+// sinkInLibrary moves id, just put on the bottom of owner's library, up to
+// index pos (counted from the top, clamped to the library size): Java's
+// zone.add(card, index) for LibraryPosition$ N.
+func (g *Game) sinkInLibrary(id CardID, owner PlayerID, pos int) {
+	cards := g.Zone(Library, owner).cards
+	i := cards.Len() - 1
+	if i < 0 || cards.All()[i] != id {
+		return
+	}
+	for ; i > pos; i-- {
+		cards.Swap(i, i-1)
+	}
+}
+
+// libraryPosition reads LibraryPosition$ (default 0, the top; -1 the bottom;
+// N the Nth card down, ChangeZone and ChangeZoneAll only).
 func libraryPosition(g *Game, a *Ability, host *Card) (int, error) {
 	raw, ok := a.Params.Param("LibraryPosition")
 	if !ok {
 		return 0, nil
 	}
 	n, ok := resolveNamedAmount(g, a.Amounts, host, raw)
-	if !ok || (n != 0 && n != libraryBottom) {
+	if !ok || n < libraryBottom {
 		return 0, fmt.Errorf("LibraryPosition$ %q not resolvable yet", raw)
 	}
 	return n, nil

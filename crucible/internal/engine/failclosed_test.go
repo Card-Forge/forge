@@ -23,7 +23,7 @@ func TestEffectsFailClosedOnUnresolvedShapes(t *testing.T) {
 		"DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Nowhere",
 		"DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Nowhere | Destination$ Hand",
 		"DB$ ChangeZoneAll | ChangeType$ Card | Defined$ TriggeredPlayer | Origin$ Hand | Destination$ Graveyard",
-		"DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | LibraryPosition$ 3",
+		"DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | LibraryPosition$ Bogus",
 		"DB$ Dig | DigNum$ 2 | DestinationZone$ Nowhere",
 		"DB$ Dig | DigNum$ 2 | DestinationZone2$ Nowhere",
 		"DB$ Dig | DigNum$ 2 | LibraryPosition2$ 5",
