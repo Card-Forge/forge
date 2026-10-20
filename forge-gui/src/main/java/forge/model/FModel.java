@@ -161,6 +161,14 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> stickerSheetPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_STICKER_SHEET)), PaperCard.class));
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
+        initialize(progressBar, adjustPrefs, true);
+    }
+
+    /**
+     * With loadDeckGen false, the data card-based deck generation draws on is left for the caller to load later with
+     * {@link #loadDeckGenMatrix()}, so starting up does not wait on it.
+     */
+    public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs, final boolean loadDeckGen) {
         ImageKeys.initializeDirs(
             ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
             ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
@@ -295,12 +303,8 @@ public final class FModel {
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
-        if(getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED) && !loadCardsLazily) {
-            boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
-            deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
-            if(!commanderDeckGenMatrixLoaded){
-                deckGenMatrixLoaded=false;
-            }
+        if (loadDeckGen && !loadCardsLazily) {
+            loadDeckGenMatrix();
         }
     }
 
@@ -314,7 +318,18 @@ public final class FModel {
         });
     }
 
-    private static boolean deckGenMatrixLoaded = false;
+    /** Loads the data card-based deck generation draws on, when the preference asks for it. Needs every card read. */
+    public static synchronized void loadDeckGenMatrix() {
+        if (deckGenMatrixLoaded || !getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+            return;
+        }
+        final boolean commanderLoaded = CardRelationMatrixGenerator.initialize();
+        final boolean archetypesLoaded = CardArchetypeLDAGenerator.initialize();
+        // Set last, so a thread that sees it also sees the data
+        deckGenMatrixLoaded = commanderLoaded && archetypesLoaded;
+    }
+
+    private static volatile boolean deckGenMatrixLoaded = false;
 
     public static boolean isdeckGenMatrixLoaded(){
         return deckGenMatrixLoaded;

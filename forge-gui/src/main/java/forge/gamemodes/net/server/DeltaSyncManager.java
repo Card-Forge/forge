@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.ObjIntConsumer;
 
 /**
  * Manages delta synchronization between server and clients.
@@ -124,7 +125,7 @@ public class DeltaSyncManager implements IHasForgeLog {
             Set<Integer> visited = new HashSet<>();
             try {
                 authoritativeInstances.clear();
-                preScanZoneCollections(gameView);
+                preScanZoneCollections(gameView, authoritativeInstances);
                 walkAndCollect(gameView, objectDeltas, newObjects, visited);
                 currentObjectIds = visited;
                 break;
@@ -297,17 +298,17 @@ public class DeltaSyncManager implements IHasForgeLog {
     }
 
     /**
-     * Pre-scan zone collections across all players to seed authoritativeInstances.
+     * Pre-scan zone collections across all players to seed the authoritative map.
      * Provides cross-player coverage for stale Commander references.
      */
-    private void preScanZoneCollections(GameView gameView) {
+    private void preScanZoneCollections(GameView gameView, Map<Integer, CardView> authoritative) {
         if (gameView == null || gameView.getPlayers() == null) return;
         for (PlayerView player : gameView.getPlayers()) {
             for (TrackableProperty zoneProp : ZONE_COLLECTIONS) {
                 if (((Map<TrackableProperty, Object>) player.getProps()).get(zoneProp) instanceof TrackableCollection<?> tc) {
                     for (Object item : tc) {
                         if (item instanceof CardView cv) {
-                            authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
+                            authoritative.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
                         }
                     }
                 }
@@ -473,39 +474,40 @@ public class DeltaSyncManager implements IHasForgeLog {
             return;
         }
         int before = registeredByKey.size();
-        walkAndRegister(gameView, new HashSet<>());
+        // registeredByKey is left alone, so collectDeltas still treats each object as new and sends it in full.
+        // The authoritative map is empty because this walk sends nothing.
+        walk(gameView, new HashSet<>(), Collections.emptyMap(), (obj, deltaKey) -> {
+            if (!registeredByKey.containsKey(deltaKey)) {
+                obj.registerConsumer(consumerId);
+            }
+        });
         int added = registeredByKey.size() - before;
         if (added > 0) {
             netLog.info("[DeltaSync] Registered {} new objects (total {})", added, registeredByKey.size());
         }
     }
 
-    private void walkAndRegister(TrackableObject obj, Set<Integer> visited) {
+    /** Visits one object per delta key, parent before children. Unlike walkAndCollect, it skips a second instance of a key already visited. */
+    private void walk(TrackableObject obj, Set<Integer> visited, Map<Integer, CardView> authoritative, ObjIntConsumer<TrackableObject> visit) {
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) return;
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
+        TrackableObject auth = authoritative.get(deltaKey);
+        if (auth != null && auth != obj) return;
         if (!visited.add(deltaKey)) return;
 
-        // Only register consumer if not already tracked — don't add to
-        // registeredByKey so collectDeltas' new-object path still fires and
-        // sends the full property map to the client.
-        if (!registeredByKey.containsKey(deltaKey)) {
-            obj.registerConsumer(consumerId);
-        }
+        visit.accept(obj, deltaKey);
 
-        // Same skip guards as walkAndCollect. No auth check needed here:
-        // walkAndRegister only registers consumers (no data sent), and the
-        // first collectDeltas corrects any stale registrations.
         boolean parentIsGameEntityView = obj instanceof GameEntityView;
         for (Object value : ((Map<TrackableProperty, Object>) obj.getProps()).values()) {
             if (value instanceof TrackableObject to) {
                 if (parentIsGameEntityView && to instanceof GameEntityView) {
                     continue;
                 }
-                walkAndRegister(to, visited);
+                walk(to, visited, authoritative, visit);
             } else if (value instanceof TrackableCollection<?> tc) {
                 for (TrackableObject to : tc) {
-                    walkAndRegister(to, visited);
+                    walk(to, visited, authoritative, visit);
                 }
             }
         }
@@ -596,6 +598,29 @@ public class DeltaSyncManager implements IHasForgeLog {
         // mismatch the client is reporting.
         lastChecksumBreakdown = null;
         lastChecksumDetail = null;
+    }
+
+    /**
+     * Returns the full property map of every object reachable from the view, keyed and converted as collectDeltas does.
+     * It registers no consumer, because registering writes an object's consumer map while set() on another thread may iterate it.
+     * Returns null if the view is null or every walk attempt hit a concurrent modification.
+     */
+    public Map<Integer, Map<TrackableProperty, Object>> snapshot(GameView gameView) {
+        if (gameView == null) {
+            return null;
+        }
+        for (int attempt = 1; attempt <= MAX_WALK_ATTEMPTS; attempt++) {
+            Map<Integer, Map<TrackableProperty, Object>> objects = new LinkedHashMap<>();
+            try {
+                Map<Integer, CardView> authoritative = new HashMap<>();
+                preScanZoneCollections(gameView, authoritative);
+                walk(gameView, new HashSet<>(), authoritative, (obj, deltaKey) -> objects.put(deltaKey, buildPropertyMap(obj, null)));
+                return objects;
+            } catch (ConcurrentModificationException e) {
+                netLog.warn(e, "[DeltaSync] Snapshot attempt {} of {} failed", attempt, MAX_WALK_ATTEMPTS);
+            }
+        }
+        return null;
     }
 
     /**

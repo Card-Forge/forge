@@ -43,6 +43,12 @@ public final class DeckUrlLoader {
         return new DeckProxy(deck, localizer.getMessage("lblUrlDeck"), GameType.Constructed, storage);
     }
 
+    /** Fetches a deck from a supported site without saving it. */
+    public static DeckUrlProvider.RemoteDeck fetch(final String deckUrl) throws IOException {
+        final String normalizedUrl = normalizeUrl(deckUrl);
+        return getProvider(normalizedUrl).load(normalizedUrl, getStorage());
+    }
+
     public static String loadImportText(final String deckUrl) throws IOException {
         final String normalizedUrl = normalizeUrl(deckUrl);
         final DeckUrlProvider provider = getProvider(normalizedUrl);
@@ -97,7 +103,8 @@ public final class DeckUrlLoader {
         return deck;
     }
 
-    private static String[] getRecognizableImportLines(final DeckRecognizer recognizer, final String importText) {
+    /** Splits a deck list into lines. A card line that is recognized only without its set and collector number is reduced to the card name. */
+    public static String[] getRecognizableImportLines(final DeckRecognizer recognizer, final String importText) {
         final String[] lines = importText.split("\n");
         DeckSection section = null;
         for (int i = 0; i < lines.length; i++) {
@@ -163,7 +170,7 @@ public final class DeckUrlLoader {
         }
     }
 
-    private static StorageImmediatelySerialized<Deck> getStorage() {
+    public static StorageImmediatelySerialized<Deck> getStorage() {
         return new StorageImmediatelySerialized<>("URL decks",
                 new DeckStorage(new File(ForgeConstants.DECK_BASE_DIR + URL_DECK_DIR_NAME + ForgeConstants.PATH_SEPARATOR),
                         ForgeConstants.DECK_BASE_DIR));

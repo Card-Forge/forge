@@ -1426,10 +1426,13 @@ public class CardView extends GameEntityView {
             } else {
                 num = c.getNetPower();
             }
+            int base = c.getBasePower();
             if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
                 num = num - c.getBasePower() + c.getAlternateState().getBasePower();
+                base = c.getAlternateState().getBasePower();
             }
             set(TrackableProperty.Power, num);
+            set(TrackableProperty.BasePower, base);
             // isLethalDamageByPower() cards use power. so this needs update too for VAssignCombatDamage dialog -> auto
             CardView.this.updateLethalDamage(c);
         }
@@ -1440,6 +1443,7 @@ public class CardView extends GameEntityView {
                 return;
             }
             set(TrackableProperty.Power, c.getBasePower());
+            set(TrackableProperty.BasePower, c.getBasePower());
         }
 
         public int getToughness() {
@@ -1453,10 +1457,13 @@ public class CardView extends GameEntityView {
             } else {
                 num = c.getNetToughness();
             }
+            int base = c.getBaseToughness();
             if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
                 num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
+                base = c.getAlternateState().getBaseToughness();
             }
             set(TrackableProperty.Toughness, num);
+            set(TrackableProperty.BaseToughness, base);
             CardView.this.updateLethalDamage(c);
         }
         void updateToughness(CardState c) {
@@ -1466,6 +1473,7 @@ public class CardView extends GameEntityView {
                 return;
             }
             set(TrackableProperty.Toughness, c.getBaseToughness());
+            set(TrackableProperty.BaseToughness, c.getBaseToughness());
         }
 
         public String getLoyalty() {

@@ -40,7 +40,7 @@ public class DeckSerializer {
         return null;
     }
 
-    private static List<String> serializeDeck(Deck d) {
+    public static List<String> serializeDeck(Deck d) {
         final List<String> out = new ArrayList<>();
         out.add(TextUtil.enclosedBracket("metadata"));
     

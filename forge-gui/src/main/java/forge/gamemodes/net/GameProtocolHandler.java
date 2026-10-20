@@ -117,11 +117,15 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 }
             };
 
-            if (shouldDispatchToGuiThread(protocolMethod)) {
-                FThreads.invokeInEdtNowOrLater(toRun);
-            } else {
-                FThreads.invokeInBackgroundThread(toRun);
-            }
+            dispatch(protocolMethod, toRun);
+        }
+    }
+
+    protected void dispatch(final ProtocolMethod protocolMethod, final Runnable toRun) {
+        if (shouldDispatchToGuiThread(protocolMethod)) {
+            FThreads.invokeInEdtNowOrLater(toRun);
+        } else {
+            FThreads.invokeInBackgroundThread(toRun);
         }
     }
 
