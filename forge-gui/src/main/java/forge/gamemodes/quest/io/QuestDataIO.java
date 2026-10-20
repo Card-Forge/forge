@@ -27,6 +27,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -768,7 +769,7 @@ public class QuestDataIO {
                     final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
                     final String nodename = reader.getNodeName();
                     if ("string".equals(nodename)) {
-                        pool.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
+                        pool.add(StaticData.instance().fetchCard(reader.getValue()));
                     } else if ("card".equals(nodename)) { // new format
                         PaperCard pc = this.readCardPrinted(reader);
                         if (pc != null) {
@@ -876,6 +877,7 @@ public class QuestDataIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
+                    //legacy code
                     result.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
@@ -937,7 +939,7 @@ public class QuestDataIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            PaperCard card = FModel.getMagicDb().getOrLoadCommonCard(name, set, index, foil);
+            PaperCard card = FModel.getMagicDb().getOrLoadCard(name, set, index, foil);
             if (null == card) {
                 System.err.println("Warning: Unsupported card found in quest save: " + name + " from edition " + set +". It will be removed from the quest save.");
             }

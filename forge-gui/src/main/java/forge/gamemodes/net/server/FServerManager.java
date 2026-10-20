@@ -8,9 +8,11 @@ import forge.game.GameView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAddLog;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputSynchronized;
 import forge.gamemodes.net.server.HostingServer.AfkTimeout;
 import forge.gamemodes.net.ChatMessage;
@@ -149,7 +151,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         }, deadline, TimeUnit.SECONDS);
     }
 
-    private volatile boolean isHosting = false;
     // Created by startServer: an offline game reaches getInstance() but never needs the selectors
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
@@ -157,11 +158,10 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
     private IDraftEventHandler draftHandler;
-    private boolean UPnPMapped = false;
     private int port;
     private static final Localizer localizer = Localizer.getInstance();
     private final Thread shutdownHook = new Thread(() -> {
-        if (isHosting()) {
+        if (HostingServer.isHosting()) {
             stopServer(false);
         }
     });
@@ -278,7 +278,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                 mapNatPort();
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
-            isHosting = true;
             HostingServer.set(this);
         } catch (final InterruptedException e) {
             netLog.error(e, "Server start interrupted");
@@ -311,10 +310,9 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
     public void stopServer() {
         stopServer(true);
     }
-
     private synchronized void stopServer(final boolean removeShutdownHook) {
         // The shutdown hook and the channel-close thread both stop the server; only the first does the work
-        if (!isHosting) {
+        if (!HostingServer.isHosting()) {
             return;
         }
         // Cancel all reconnect timers
@@ -346,18 +344,8 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
-        isHosting = false;
         HostingServer.set(null);
-        UPnPMapped = false;
         NetworkLogConfig.deactivateNetworkLogging();
-    }
-
-    public boolean isHosting() {
-        return isHosting;
-    }
-
-    public boolean isUPnPMapped() {
-        return UPnPMapped;
     }
 
     public int getTotalSendErrors() {
@@ -421,7 +409,7 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
      */
     @Override
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!isHosting() || localLobby == null) {
+        if (!HostingServer.isHosting() || localLobby == null) {
             return AfkTimeout.NOOP;
         }
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
@@ -591,6 +579,17 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
             }
         }
         return null;
+    }
+
+    /** The client holding a removed slot loses it. The slots above move down, and their clients move with them. */
+    public void slotRemoved(final int index) {
+        for (final RemoteClient client : clients.values()) {
+            if (client.getIndex() == index) {
+                client.setIndex(RemoteClient.UNASSIGNED_SLOT);
+            } else if (client.getIndex() > index) {
+                client.setIndex(client.getIndex() - 1);
+            }
+        }
     }
 
     public void clearPlayerGuis() {
@@ -829,7 +828,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
             super.deviceAdded(registry, device);
             if (!completed && !activePortMappings.isEmpty()) {
                 completed = true;
-                UPnPMapped = true;
                 onUPnPResult(true);
             }
         }
@@ -961,6 +959,13 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         // Replay current prompt
         final PlayerControllerHuman pch = findRemoteController(slotIndex);
         if (pch != null) {
+            // openView gives the client new controllers with empty yield caches, so resend the active yields
+            final PlayerView local = pch.getLocalPlayerView();
+            if (local != null) {
+                for (final YieldUpdate u : pch.getYieldController().activeYieldUpdates(local)) {
+                    netGui.applyYieldUpdate(u);
+                }
+            }
             pch.getInputQueue().updateObservers();
             netLog.info("[Reconnect] Replayed current prompt for slot {}", slotIndex);
         }
@@ -1000,11 +1005,14 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
         final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
         final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
         p.dangerouslySetController(aiCtrl);
+        // The match's later games seat players from here
+        p.getRegisteredPlayer().setPlayer(aiLobbyPlayer);
         netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
 
         // Clear InputQueue to unblock the game thread (waiting on cdlDone)
         pch.getInputQueue().clearInputs();
         netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
+        hostedMatch.tallyNextGameDecisions();
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
@@ -1109,7 +1117,6 @@ public final class FServerManager implements IHasForgeLog, HostingServer.Server 
                     clients.put(ctx.channel(), disconnected);
                     netLog.info("[Reconnect] Channel swapped for {} (slot {})", username, disconnected.getIndex());
 
-                    // Resume and resync
                     resumeAndResync(disconnected);
 
                     // Draft-side resync: re-send the current pack and clear grace state.

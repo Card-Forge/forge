@@ -2,7 +2,6 @@ package forge.screens.match.views;
 
 import java.util.*;
 
-import forge.Forge;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
@@ -23,7 +22,12 @@ public class VField extends FContainer {
     private boolean flipped;
     private float commandZoneWidth;
     private float fieldModifier;
+    private float endPadding;
+    private float contentAlignment; //0 cards start on the left, 0.5 they are centered, 1 they end on the right
     private final boolean stackNonTokenCreatures;
+    private final List<CardView> creatures = new ArrayList<>();
+    private final List<CardView> lands = new ArrayList<>();
+    private final List<CardView> otherPermanents = new ArrayList<>();
 
     public VField(PlayerView player0) {
         player = player0;
@@ -63,6 +67,9 @@ public class VField extends FContainer {
         @Override
         public void run() {
             clear();
+            creatures.clear();
+            lands.clear();
+            otherPermanents.clear();
 
             FCollectionView<CardView> battlefield = player.getBattlefield();
             if (battlefield.isEmpty()) {
@@ -79,10 +86,7 @@ public class VField extends FContainer {
                 cardPanel.setPrevPanelInStack(null);
             }
 
-            List<CardView> creatures = new ArrayList<>();
-            List<CardView> lands = new ArrayList<>();
             List<CardView> contraptions = null; //Usually not used; create on demand.
-            List<CardView> otherPermanents = new ArrayList<>();
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
@@ -228,6 +232,22 @@ public class VField extends FContainer {
         commandZoneWidth = commandZoneWidth0;
     }
 
+    void setContentAlignment(float alignment) {
+        if (contentAlignment == alignment) { return; }
+        contentAlignment = alignment;
+        row1.revalidate(true);
+        row2.revalidate(true);
+    }
+
+    //compact zone tabs: the zone box covers the field's right end, so the rows keep (or can scroll) their cards clear of it
+    void setEndPadding(float padding) {
+        padding = Math.round(Math.max(0f, padding));
+        if (endPadding == padding) { return; }
+        endPadding = padding;
+        row1.revalidate(true);
+        row2.revalidate(true);
+    }
+
     void setFieldModifier(float fieldModifierWidth) {
         fieldModifier = fieldModifierWidth;
     }
@@ -249,13 +269,8 @@ public class VField extends FContainer {
             y1 = 0;
             y2 = cardSize;
         }
-        if (Forge.isHorizontalTabLayout()) {
-            row1.setBounds(0, y1, width, cardSize);
-            row2.setBounds(0, y2, width, cardSize);
-        } else {
-            row1.setBounds(0, y1, width - fieldModifier, cardSize);
-            row2.setBounds(0, y2, (width - commandZoneWidth) - fieldModifier, cardSize);
-        }
+        row1.setBounds(0, y1, width - fieldModifier, cardSize);
+        row2.setBounds(0, y2, (width - commandZoneWidth) - fieldModifier, cardSize);
     }
 
     public class FieldRow extends VCardDisplayArea {
@@ -264,6 +279,22 @@ public class VField extends FContainer {
 
         private FieldRow() {
             setVisible(true); //make visible by default unlike other display areas
+        }
+
+        @Override
+        protected void drawBackground(forge.Graphics g) { } //battlefield rows never get the zone backing
+
+        @Override
+        protected boolean animateEntry() { return true; }
+
+        @Override
+        protected float getContentAlignment() {
+            return contentAlignment;
+        }
+
+        @Override
+        protected float getEndPadding() {
+            return endPadding;
         }
 
         @Override

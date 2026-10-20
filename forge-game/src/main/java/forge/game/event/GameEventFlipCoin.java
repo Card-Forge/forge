@@ -1,17 +1,15 @@
 package forge.game.event;
 
-public record GameEventFlipCoin() implements GameEvent {
+import forge.game.player.PlayerView;
 
+public record GameEventFlipCoin(PlayerView flipper, boolean heads, boolean startingToss) implements GameEvent {
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "Flipped coin";
+        return flipper + (heads ? " flipped heads" : " flipped tails");
     }
 }

@@ -112,8 +112,12 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
+        // Detect commander draft: human deck has a Commander section with cards
+        final boolean isCommanderDraft = humanDeck.getDeck().getTags().contains("CommanderDraft");
+        final GameType effectiveGameType = isCommanderDraft ? GameType.CommanderDraft : gameType;
+
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
+            final String errorMessage = effectiveGameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
@@ -132,9 +136,11 @@ public enum CSubmenuDraft implements ICDoc {
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
                 final int rounds = opponentDecks.getAiDecks().size();
-                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
+                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), effectiveGameType);
             } else if ("Tournament".equals(duelType)) {
                 // TODO Allow for tournament style draft, instead of always a gauntlet
+                // Most of the time this will be a single elimination bracket
+                // But for Commander and Conspiracy its two 4 player matches, into a head to head finals
             }
             return;
         }
@@ -181,19 +187,29 @@ public enum CSubmenuDraft implements ICDoc {
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
         // Human is 0
-        final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        final RegisteredPlayer human = isCommanderDraft
+                ? RegisteredPlayer.forCommander(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer())
+                : new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         human.setId(0);
         human.assignConspiracies();
         for(Map.Entry<Integer, Deck> aiDeck : aiMap.entrySet()) {
-            RegisteredPlayer aiPlayer = new RegisteredPlayer(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer());
+            final RegisteredPlayer aiPlayer = isCommanderDraft
+                    ? RegisteredPlayer.forCommander(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer())
+                    : new RegisteredPlayer(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer());
             aiPlayer.setId(aiDeck.getKey());
             starter.add(aiPlayer);
             aiPlayer.assignConspiracies();
         }
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        if (isCommanderDraft) {
+            hostedMatch.startMatch(GameType.CommanderDraft,
+                    java.util.EnumSet.of(GameType.Commander),
+                    starter, human, GuiBase.getInterface().getNewGuiGame());
+        } else {
+            hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+        }
 
         SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }

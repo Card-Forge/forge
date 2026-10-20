@@ -802,6 +802,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isOmen() {
         return getCardStateName() == CardStateName.Secondary && getCardState().getType().hasSubtype("Omen");
     }
+    public boolean isVengeance() {
+        return getCardStateName() == CardStateName.Secondary && getCardState().getType().hasSubtype("Vengeance");
+    }
 
     public final boolean isCurse() {
         return hasParam("IsCurse");
@@ -819,10 +822,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPayCosts(final Cost abCost) {
         payCosts = abCost;
-    }
-
-    public boolean costHasX() {
-        return getPayCosts().hasXInAnyCostPart();
     }
 
     public boolean costHasManaX() {
@@ -1350,7 +1349,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return triggerObj;
     }
-
     public void setTrigger(final Trigger t) {
         triggerObj = t;
     }
@@ -1711,6 +1709,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isUndoable() {
         return undoable && payCosts.isUndoable() && getHostCard().isInPlay();
     }
+    public void setUndoable(boolean b) {
+        undoable = b;
+    }
 
     public boolean undo() {
         if (isUndoable() && getActivatingPlayer().getManaPool().accountFor(getManaPart())) {
@@ -1718,10 +1719,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
         return false;
-    }
-
-    public void setUndoable(boolean b) {
-        undoable = b;
     }
 
     public boolean isCastFromPlayEffect() {
@@ -2407,14 +2404,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
         } else {
             String mana = manaPart.mana(this);
-            if (!mana.equals("Any")) {
+            if (mana.equals("Any")) {
+                score += 7;
+            } else {
                 score += mana.length();
                 if (!canProduce("C")) {
                     // Producing colorless should produce a slightly lower score
                     score += 1;
                 }
-            } else {
-                score += 7;
             }
         }
 

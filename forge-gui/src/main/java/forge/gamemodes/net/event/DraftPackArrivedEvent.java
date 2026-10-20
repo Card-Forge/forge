@@ -33,4 +33,9 @@ public final class DraftPackArrivedEvent implements NetEvent {
 
     @Override
     public void updateForClient(RemoteClient client) { }
+
+    @Override
+    public String toString() {
+        return String.format("DraftPackArrived: seat %d, pack %d pick %d, %d cards, %d s", seatIndex, packNumber, pickNumber, pack.size(), timerDurationSeconds);
+    }
 }
