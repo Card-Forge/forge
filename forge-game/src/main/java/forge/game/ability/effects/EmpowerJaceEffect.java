@@ -24,22 +24,21 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
-public class EmpowerEffect extends TokenEffectBase {
+public class EmpowerJaceEffect extends TokenEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder("Empower ");
+        final StringBuilder sb = new StringBuilder("Empower Jace ");
         final Card card = sa.getHostCard();
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
-        final String type = sa.getParam("Type");
 
-        sb.append(type).append(" ").append(amount).append(" (Put ");
+        sb.append(amount).append(" (Put ");
 
         sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
 
         // TODO fix reminder after CR
-        sb.append(" on a ").append(type).append(" token you control.");
-        sb.append(" If you don't control one, first create a blue ").append(type).append(" planeswalker token with \"-1: Surveil 1.\" and \"-3: Draw a card.\")");
+        sb.append(" on a Jace token you control.");
+        sb.append(" If you don't control one, first create a blue Jace planeswalker token with \"-1: Surveil 1.\" and \"-3: Draw a card.\")");
 
         return sb.toString();
     }
@@ -53,21 +52,12 @@ public class EmpowerEffect extends TokenEffectBase {
             return;
         }
         final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
-        final String type = sa.getParam("Type");
 
-        if (!p.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType(type).and(CardPredicates.TOKEN))) {
+        if (!p.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType("Jace").and(CardPredicates.TOKEN))) {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 
-            StringBuilder sb = new StringBuilder("u_empower_");
-            sb.append(sa.getOriginalParam("Type").toLowerCase());
-
-            Card result = TokenInfo.getProtoType(sb.toString(), sa, p, false);
-            if (result == null) //Custom Empower type.
-                result = TokenInfo.getProtoType("u_empower", sa, p, false);
-            // need to alter the token to add the Type from the Parameter
-            result.addType(type);
-            result.setName(type + " Token");
+            Card result = TokenInfo.getProtoType("u_empower_jace", sa, p, false);
             result.setTokenSpawningAbility(sa);
 
             makeTokenTable(makeTokenTableInternal(p, result, 1), false, triggerList, combatChanged, sa);
@@ -82,7 +72,7 @@ public class EmpowerEffect extends TokenEffectBase {
             }
         }
 
-        CardCollectionView tgtCards = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type).and(CardPredicates.TOKEN));
+        CardCollectionView tgtCards = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Jace").and(CardPredicates.TOKEN));
         if (tgtCards.isEmpty()) {
             return;
         }
