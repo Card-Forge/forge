@@ -58,10 +58,8 @@ An edit whose whole purpose is to disappear goes here: the same change open as a
 [Card-Forge/forge](https://github.com/Card-Forge/forge), with the row and the local edit both deleted once upstream
 merges it and a sync brings the identical content back.
 
-| Date       | Path                                                                                                           | Change                                                                                                                                                                                                                                                                                                                                                         | Upstream                                                          |
-| ---------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| 2026-10-02 | `forge-gui/res/cardsfolder/p/phenomenon_investigators.txt`                                                     | `TrigReturn`: drop `ChoiceOptional$ True` from a `DB$ ChangeZone`. `ChangeZoneEffect.java` never reads it (it is a `CountersPut`/`CountersRemove`/`Clone` param); a hidden-origin ChangeZone is already optional unless `Mandatory$` is set, so behavior is unchanged. Surfaced when ADR-0023's `AddTrigger$` made the SVar reachable to `apiscan -check -api` | branch `upstream-pr/card-script-unread-params`, PR not yet opened |
-| 2026-10-02 | `forge-gui/res/cardsfolder/a/ashlings_prerogative.txt`, `forge-gui/res/cardsfolder/g/gollum_riddle_master.txt` | `ChooseEvenOdd` SVar: drop `ListTitle$ Choose ODD or EVEN`. `ChooseEvenOddEffect.java` reads only `Notify`; `ListTitle$` belongs to `ChooseNumberEffect`, so the prompt text never appears. Surfaced when `K:ETBReplacement` of every layer began to compile its SVar (`etbReplacement`, `compile.go`) and `apiscan -check -api` reached these two             | branch `upstream-pr/card-script-unread-params`, PR not yet opened |
+| Date       | Path                                                                                                           | Change                                                                                                                                                                                             | Upstream                                                                  |
+| ---------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | 2026-10-20 | `forge-gui/res/cardsfolder/**` (40 `SP$`/`AB$ Charm` scripts, e.g. `ulgrotha_charm.txt`, `umezawas_jitte.txt`) | Drop the dead `Defined$ You` from the Charm line. `CharmEffect.java` and `CharmAi.java` read no `Defined` param; the chooser is the activating player. Crucible's param check flags it on 34 cards | branch `upstream-pr/charm-defined-you` (`069ac62185f`), PR not yet opened |
 
 Carried edits exist because the corpus gates run against the fork's own tree: a card the parser rejects fails the build
@@ -74,17 +72,19 @@ written under the wrong name (Sanctum Lurker's `Affected$` where `StaticAbilityI
 PORT-8: a param that never reaches its effect, a sub-ability chain broken by name, or a line that is not a script line
 at all is a Forge bug, reported and fixed here rather than exempted from either gate.
 
-Twenty-seven rows have retired this way — #12193 (seven card scripts in one pull request:
-`captured_by_the_consulate.txt`, `loose_in_the_park.txt`, `ludevic_necrogenius_olag_ludevics_hubris.txt`,
-`mount_keralia.txt`, `taskmaster_mercenary_mimic.txt`, `tooth_claw_and_tail.txt`, `your_will_is_not_your_own.txt`) and
-the pull requests #11846, #11848, #11850, #11851, #11852, #11854, #11859, #12035, #12038 (`the_disciple_of_vess.txt` and
+Thirty rows have retired this way — #12193 (seven card scripts in one pull request: `captured_by_the_consulate.txt`,
+`loose_in_the_park.txt`, `ludevic_necrogenius_olag_ludevics_hubris.txt`, `mount_keralia.txt`,
+`taskmaster_mercenary_mimic.txt`, `tooth_claw_and_tail.txt`, `your_will_is_not_your_own.txt`) and the pull
+requests #11846, #11848, #11850, #11851, #11852, #11854, #11859, #12035, #12038 (`the_disciple_of_vess.txt` and
 `ginger_queen_of_sweets.txt`, merged with the reviewers' edits: the card's reminder text restored, a redundant
 `Controller$ You` dropped), and the 2026-09-19 batch (`clash_of_elements.txt` at upstream `913081c68d6`,
 `dack_fayden_helping_hand.txt` at `#11990`, `living_library.txt` at `24546a4a121`, `venser_fervent_forger.txt` at
 `45baeffbf21`, `sanctum_lurker.txt` at `#12035`). `nascent_metamorph.txt` and `peace_talks.txt` retired without a pull
-request of ours: `#11958` (Command the Stage) fixed both in passing. In every case a sync brought the identical content
-back, which is exactly the condition each row named. None has ever graduated into a permanent edit, which is the outcome
-that would need an ADR. The list works by emptying itself.
+request of ours: `#11958` (Command the Stage) fixed both in passing. `phenomenon_investigators.txt`,
+`ashlings_prerogative.txt` and `gollum_riddle_master.txt` retired the same way: `#12111` removed their unread params
+upstream, and the branch `upstream-pr/card-script-unread-params` never became a pull request of ours. In every case a
+sync brought the identical content back, which is exactly the condition each row named. None has ever graduated into a
+permanent edit, which is the outcome that would need an ADR. The list works by emptying itself.
 
 **Conflict rule while one is open: always take upstream.** If upstream applies the identical change, git merges both
 sides silently and there is nothing to resolve. If upstream fixes it differently, upstream's version wins without
