@@ -1,0 +1,10 @@
+Name:Captain Michael Burnham
+ManaCost:2 R
+Types:Legendary Creature Officer
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land you control enters, NICKNAME deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2
+SVar:Resolved:Count$ResolvedThisTurn
+Oracle:Trample\nLandfall — Whenever a land you control enters, Captain Burnham deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, put a +1/+1 counter on Captain Burnham.
