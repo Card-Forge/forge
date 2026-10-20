@@ -1,6 +1,10 @@
 package forge.ai;
 
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardView;
 import forge.game.player.Player;
@@ -10,6 +14,7 @@ import org.tinylog.Logger;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
@@ -44,10 +49,29 @@ public final class AvailableActions {
      *  dispatches don't prompt (mirrors InputPayMana auto-pay). */
     private static <T> T withAiController(Player player, Supplier<T> body) {
         AtomicReference<T> result = new AtomicReference<>();
-        player.runWithController(
-                () -> result.set(body.get()),
-                new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer()));
+        player.runWithController(() -> result.set(body.get()), new MechanicalPaymentController(player));
         return result.get();
+    }
+
+    /** An AI controller with the AI's strategic layer stripped out of payment choices, keeping only the mechanical
+     *  layer: what the player can pay, not what the AI would choose to tap. */
+    private static final class MechanicalPaymentController extends PlayerControllerAi {
+        MechanicalPaymentController(Player player) {
+            super(player.getGame(), player, player.getOriginalLobbyPlayer());
+        }
+
+        // The AI's version holds creatures back for combat
+        @Override
+        public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost,
+                CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
+            // A card with a mana ability already counts as a mana source
+            CardCollection usable = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
+            // Waterbend limits how many cards can pay
+            if (maxReduction != null && usable.size() > maxReduction) {
+                usable = new CardCollection(usable.subList(0, maxReduction));
+            }
+            return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, usable, artifacts, creatures);
+        }
     }
 
     private static Set<CardView> walk(Player player, long timeoutMs, boolean earlyExit) {
