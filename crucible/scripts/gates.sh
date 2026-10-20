@@ -105,7 +105,7 @@ gate "apiscan -check -api" go run ./tools/apiscan -check -api
 if [ "$mode" = full ]; then
 	gate "go test -race" go test -race -coverprofile="$tmp/cover.out" ./...
 	[ -s "$tmp/cover.out" ] && gate covergate go run ./tools/covergate -profile "$tmp/cover.out"
-	gate javacycles go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 87
+	gate javacycles go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 88
 	gate "prettier --check" sh -c 'cd .. && prettier --check . --log-level warn'
 	gate markdownlint sh -c 'cd .. && npx --yes markdownlint-cli2 "CLAUDE.md" "docs/crucible/**/*.md"'
 fi

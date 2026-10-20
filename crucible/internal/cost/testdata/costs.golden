@@ -22,7 +22,7 @@ part	GainLife	3
 part	Mana	10
 part	Mill	8
 part	PayEnergy	96
-part	PayLife	238
+part	PayLife	239
 part	PutCardToLibFromBattlefield	1
 part	PutCardToLibFromGrave	3
 part	PutCardToLibFromHand	3
@@ -36,7 +36,7 @@ part	RevealOrChoose	2
 part	RollDice	1
 part	Sac	2256
 part	SubCounter	947
-part	T	5568
+part	T	5571
 part	Unattach	9
 part	Waterbend	25
 part	tapXType	232

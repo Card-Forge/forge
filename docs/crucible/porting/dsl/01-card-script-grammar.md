@@ -39,7 +39,7 @@ there are four separate mechanisms — not one.
 on a face has nothing to attach to.
 
 **`AlternateMode:` does not switch faces.** It records how the faces relate — `DoubleFaced`, `Adventure`, `Split`,
-`Modal`, `Prepare`, `Flip`, `Specialize`, `Omen`, `Meld` — and nothing else. An earlier version of this document said
+`Modal`, `Prepare`, `Flip`, `Specialize`, `Omen`, `Vengeance`, `Meld` — and nothing else. An earlier version of this document said
 `AlternateMode:` performed the face switch, which would have put the wrong face on roughly 875 cards.
 
 ## Keys

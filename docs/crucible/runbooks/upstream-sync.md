@@ -47,7 +47,7 @@ The pull request runs the same checks as any other. Eight of them can be broken 
 | `internal/keyword` corpus golden  | `TestCorpusKeywords` — more cards using a keyword kind it knows       |
 | `internal/expr` corpus golden     | `TestCorpusExpressions` — a new or more-used amount head/operator     |
 | `tools/apiscan` corpus golden     | `TestParamKinds` — a new or more-used (API, key) pair                 |
-| `javacycles -expect 87`           | The coupling in `forge-game` moved — ADR-0003's premise               |
+| `javacycles -expect 88`           | The coupling in `forge-game` moved — ADR-0003's premise               |
 | `tools/metrics`                   | A measured figure in the documents no longer matches the tree         |
 
 The four corpus goldens added after ADR-0015 was written follow the identical procedure as `internal/mana`/
@@ -101,10 +101,10 @@ what tells you which.
 
 ## When `javacycles` fails
 
-**Do not change `-expect 87` to make the check agree.** That number is the baseline of
-[ADR-0003](../adr/0003-go-project-layout.md): direct two-package cycles in `forge-game` (82 at design time, 87 since the
-sticker package) are why `internal/engine` is a single Go package. If the count moved, find out what changed upstream,
-record it in ADR-0003, and only then re-baseline.
+**Do not change `-expect 88` to make the check agree.** That number is the baseline of
+[ADR-0003](../adr/0003-go-project-layout.md): direct two-package cycles in `forge-game` (82 at design time, 88 since the
+sticker and undo packages) are why `internal/engine` is a single Go package. If the count moved, find out what changed
+upstream, record it in ADR-0003, and only then re-baseline.
 
 Run it directly to see the current figure, then open an issue quoting both numbers and the commits between the two
 syncs:
@@ -178,7 +178,7 @@ Optional — CI runs all of it on the pull request — but it turns a red check 
 ```bash
 cd crucible
 go test -race -count=1 ./...
-go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 87
+go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -expect 88
 ```
 
 ## Never
@@ -187,7 +187,7 @@ go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game -
 - Rebase Crucible commits onto a moving upstream (ADR-0001).
 - Edit an upstream file to resolve a conflict.
 - Regenerate a golden without reading the diff.
-- Change `-expect 87` to make a check pass without finding out what moved.
+- Change `-expect 88` to make a check pass without finding out what moved.
 
 ## Related
 

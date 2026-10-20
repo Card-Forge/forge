@@ -77,7 +77,7 @@ commit, so the next merge re-resolves everything already resolved, and the ances
 | --------------------------------- | ------------------------------------------------------------------------- |
 | `internal/mana` corpus golden     | A new mana symbol, or a changed cost on an existing card                  |
 | `internal/cardtype` corpus golden | A new subtype, or a `TypeLists.txt` edit                                  |
-| `javacycles -expect 87`           | ADR-0003's premise: the coupling that forces a single-package engine core |
+| `javacycles -expect 88`           | ADR-0003's premise: the coupling that forces a single-package engine core |
 | `tools/metrics`                   | The measured figures the documents state                                  |
 | `covergate`, `docgate`            | Unaffected by upstream, run because every PR runs them                    |
 

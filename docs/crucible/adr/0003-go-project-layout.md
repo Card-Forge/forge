@@ -10,21 +10,25 @@
 Java tolerates package cycles. Go forbids them. That single difference decides this ADR, and it decides it much more
 forcefully than expected.
 
-Measured across `forge-game/src/main/java/forge/game`, 22 packages, counting only `forge.game.*` imports.
+Measured across `forge-game/src/main/java/forge/game`, 23 packages, counting only `forge.game.*` imports.
 `crucible/tools/javacycles` re-runs the count, so the premise can be checked after an upstream sync rather than trusted:
 
 ```console
 $ cd crucible && go run ./tools/javacycles -root ../forge-game/src/main/java -prefix forge.game
-packages: 22
-direct two-package cycles: 87
+packages: 23
+direct two-package cycles: 88
 ```
 
-Pass `-expect 87` to turn a change in the premise into a build failure.
+Pass `-expect 88` to turn a change in the premise into a build failure.
 
 The design-time measurement was 21 packages and 82 cycles. The five extra cycles come from the `forge.game.card.sticker`
 package (Unfinity stickers, upstream `7e3b22b44f5`), which couples to `ability`, `card`, `player`, `staticability` and
 `trigger`. The premise holds: one more package joins the same tangle. The 82 in the rest of this ADR is the design-time
 measurement.
+
+One more cycle comes from `forge.game.undo` (netplay undo, `UndoManager` and `GameMemento`, upstream `78b4334393e`),
+which couples back to `forge.game`. Same tangle, same premise: the package that snapshots a `Game` reads and writes the
+objects `Game` owns.
 
 Every significant package cycles with nearly every other: `card` with `game`, `player`, `zone`, `spellability`,
 `combat`, `cost`, `mana`, `keyword`, `trigger`, `replacement`, `staticability`, `event`. The root `forge.game` package

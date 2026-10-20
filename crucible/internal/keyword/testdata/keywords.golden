@@ -1,6 +1,6 @@
-kind	Unknown	1509
-kind	Simple	9783
-kind	Amount	650
+kind	Unknown	1510
+kind	Simple	9786
+kind	Amount	651
 kind	Cost	1884
 kind	Type	1339
 kind	CostAndAmount	32
@@ -216,5 +216,5 @@ pseudo	MustBeBlockedByAll	2
 pseudo	Prize	1
 pseudo	StickerSheet	48
 pseudo	Visit	23
-pseudo	etbCounter	477
+pseudo	etbCounter	478
 textKeywords	35 distinct

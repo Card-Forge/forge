@@ -601,7 +601,7 @@ func cloneSpec(raw string) (valid.Spec, error) {
 // to every state copied.
 //
 // Which states are copied follows getCloneStates' own branches: a flip,
-// split, adventure, omen or prepare card copies all its faces; anything
+// split, adventure, omen, vengeance or prepare card copies all its faces; anything
 // else -- a transforming, modal or melded card included, since Clone is not
 // CopyPermanent -- copies its current face alone, as a single-faced card.
 // This port's current face is always Faces[0] (a transformed card's Def is
@@ -610,7 +610,7 @@ func cloneDef(g *Game, a *Ability, origin cloneOrigin, out *Card) (*compile.Card
 	base := origin.vals.def
 	def := &compile.Card{Filename: base.Filename, Name: base.Name}
 	switch base.SplitType {
-	case carddb.SplitFlip, carddb.SplitSplit, carddb.SplitAdventure, carddb.SplitOmen, carddb.SplitPrepare:
+	case carddb.SplitFlip, carddb.SplitSplit, carddb.SplitAdventure, carddb.SplitOmen, carddb.SplitVengeance, carddb.SplitPrepare:
 		def.SplitType = base.SplitType
 		def.Faces = base.Faces
 	default:

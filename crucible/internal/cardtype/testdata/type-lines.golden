@@ -2632,6 +2632,7 @@ Legendary Creature Alien Human Hero	Legendary Creature - Alien Human Hero
 Legendary Creature Alien Insect Scout	Legendary Creature - Alien Insect Scout
 Legendary Creature Alien Shapeshifter	Legendary Creature - Alien Shapeshifter
 Legendary Creature Alien Warrior	Legendary Creature - Alien Warrior
+Legendary Creature Alien Warrior Hero	Legendary Creature - Alien Warrior Hero
 Legendary Creature Angel	Legendary Creature - Angel
 Legendary Creature Angel Ally	Legendary Creature - Angel Ally
 Legendary Creature Angel Artificer	Legendary Creature - Angel Artificer
@@ -2836,6 +2837,7 @@ Legendary Creature Elder Dragon	Legendary Creature - Elder Dragon
 Legendary Creature Elder Fungus	Legendary Creature - Elder Fungus
 Legendary Creature Elder Giant	Legendary Creature - Elder Giant
 Legendary Creature Elder Giant Dog	Legendary Creature - Elder Giant Dog
+Legendary Creature Elder God Horror	Legendary Creature - Elder God Horror
 Legendary Creature Elder Human Noble	Legendary Creature - Elder Human Noble
 Legendary Creature Elder Nephilim	Legendary Creature - Elder Nephilim
 Legendary Creature Elder Sable Judge	Legendary Creature - Elder Sable Judge
@@ -3201,6 +3203,7 @@ Legendary Creature Human Soldier Scientist	Legendary Creature - Human Soldier Sc
 Legendary Creature Human Soldier Villain	Legendary Creature - Human Soldier Villain
 Legendary Creature Human Soldier Warrior	Legendary Creature - Human Soldier Warrior
 Legendary Creature Human Sorcerer	Legendary Creature - Human Sorcerer
+Legendary Creature Human Sorcerer Hero	Legendary Creature - Human Sorcerer Hero
 Legendary Creature Human Sorcerer Villain	Legendary Creature - Human Sorcerer Villain
 Legendary Creature Human Spellshaper	Legendary Creature - Human Spellshaper
 Legendary Creature Human Spirit Dragon	Legendary Creature - Human Spirit Dragon
@@ -3333,6 +3336,7 @@ Legendary Creature Mutant Advisor	Legendary Creature - Mutant Advisor
 Legendary Creature Mutant Berserker	Legendary Creature - Mutant Berserker
 Legendary Creature Mutant Berserker Hero	Legendary Creature - Mutant Berserker Hero
 Legendary Creature Mutant Berserker Turtle	Legendary Creature - Mutant Berserker Turtle
+Legendary Creature Mutant Demon Sorcerer	Legendary Creature - Mutant Demon Sorcerer
 Legendary Creature Mutant Frog Turtle	Legendary Creature - Mutant Frog Turtle
 Legendary Creature Mutant Hero	Legendary Creature - Mutant Hero
 Legendary Creature Mutant Inhuman Hero	Legendary Creature - Mutant Inhuman Hero
@@ -3351,6 +3355,7 @@ Legendary Creature Mutant Ninja Turtle Lizard	Legendary Creature - Mutant Ninja 
 Legendary Creature Mutant Ninja Turtle Samurai	Legendary Creature - Mutant Ninja Turtle Samurai
 Legendary Creature Mutant Noble Hero	Legendary Creature - Mutant Noble Hero
 Legendary Creature Mutant Scientist Hero	Legendary Creature - Mutant Scientist Hero
+Legendary Creature Mutant Sorcerer Hero	Legendary Creature - Mutant Sorcerer Hero
 Legendary Creature Mutant Villain	Legendary Creature - Mutant Villain
 Legendary Creature Mutant Warlock Hero	Legendary Creature - Mutant Warlock Hero
 Legendary Creature Mutant Warrior	Legendary Creature - Mutant Warrior
@@ -3973,6 +3978,7 @@ Sorcery Arcane	Sorcery - Arcane
 Sorcery Chorus	Sorcery - Chorus
 Sorcery Lesson	Sorcery - Lesson
 Sorcery Omen	Sorcery - Omen
+Sorcery Vengeance	Sorcery - Vengeance
 Stickers	Stickers
 Vanguard	Vanguard
 World Enchantment	World Enchantment

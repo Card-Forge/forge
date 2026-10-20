@@ -41,7 +41,7 @@ const (
 // maps to [SplitTransform], which is Java's one special case in smartValueOf.
 type SplitType uint8
 
-// The ten split types, in Java's declaration order.
+// The eleven split types, in Java's declaration order.
 const (
 	SplitNone SplitType = iota
 	SplitTransform
@@ -50,6 +50,7 @@ const (
 	SplitFlip
 	SplitAdventure
 	SplitOmen
+	SplitVengeance
 	SplitModal
 	SplitPrepare
 	SplitSpecialize
@@ -65,6 +66,7 @@ var splitTypeNames = [numSplitTypes]string{
 	SplitFlip:       "Flip",
 	SplitAdventure:  "Adventure",
 	SplitOmen:       "Omen",
+	SplitVengeance:  "Vengeance",
 	SplitModal:      "Modal",
 	SplitPrepare:    "Prepare",
 	SplitSpecialize: "Specialize",
