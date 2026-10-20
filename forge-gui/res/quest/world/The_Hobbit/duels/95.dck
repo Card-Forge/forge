@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=White Knight
+Title=White Knight
+Icon=White Knight.jpg
+Difficulty=Hard
+Description=./Modern/The_Hobbit/CmP4nk_-_UrzaTron_(Modern,_#893940).dck
+Deck Type=constructed
+
+[Main]
+1 Abstergo Entertainment
+4 Eldrazi Temple
+2 Forest
+4 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+4 Devourer of Destiny
+4 Sowing Mycospawn
+2 Ulamog, the Ceaseless Hunger
+2 Dismember
+4 Kozilek's Command
+4 Expedition Map
+3 Giant's Boulder
+4 Karn, the Great Creator
+4 Talisman of Resilience
+2 Trinisphere
+4 Ugin, Eye of the Storms
+[Sideboard]
+1 Trinisphere
+1 Chalice of the Void
+1 Cityscape Leveler
+3 Cursed Totem
+1 Disruptor Flute
+1 Ensnaring Bridge
+1 Extinguisher Battleship
+2 Grafdigger's Cage
+1 Liquimetal Coating
+1 The Filigree Sylex
+1 Tormod's Crypt
+1 Walking Ballista

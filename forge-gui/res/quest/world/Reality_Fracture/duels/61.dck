@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Hard
+Description=./Modern/Reality_Fracture/Koshimo_Masaru_-_Esper_Blink_(Modern,_#902220).dck
+Deck Type=constructed
+
+[Main]
+3 Flickerwisp
+4 Solitude
+4 Phelia, Exuberant Shepherd
+2 Emperor of Bones
+4 Witch Enchanter
+1 Boggart Trawler
+4 Overlord of the Balemurk
+4 Quantum Riddler
+4 Fatal Push
+3 Ephemerate
+1 Consign to Memory
+4 Thoughtseize
+2 Teferi, Time Raveler
+1 The Theorist, Jace Beleren
+2 Plains
+1 Swamp
+1 Hallowed Fountain
+2 Godless Shrine
+1 Watery Grave
+4 Flooded Strand
+1 Polluted Delta
+4 Marsh Flats
+1 Meticulous Archive
+1 Shadowy Backstreet
+1 Undercity Sewers
+[Sideboard]
+3 Consign to Memory
+2 Ashiok, Dream Render
+2 Mystical Dispute
+2 High Noon
+2 White Orchid Phantom
+2 Wrath of the Skies
+2 Clarion Conqueror
