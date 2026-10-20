@@ -20,10 +20,9 @@
 //
 // Java sources this port has none of, each read as its absent default: block
 // costs (getBlockCost, Mode$ CantBlockUnless -- nil, so no requirement is
-// excused by one), StaticAbilityBlockRestrict's per-player blocker limit,
-// "can block an additional creature" (canBlockAny/canBlockAdditional -- so
-// canBlockMoreCreatures is true only for a creature blocking nothing yet),
-// and Mode$ CanBlockTapped.
+// excused by one), StaticAbilityBlockRestrict's per-player blocker limit
+// and Mode$ CanBlockTapped. "Can block an additional creature" is read
+// (Card.canBlockMoreCreatures).
 
 package engine
 
@@ -93,7 +92,7 @@ func (g *Game) validateBlocks(defending PlayerID, blocks []Block) error {
 					}
 				}
 				if potential >= additional && !containsCard(blockedSoFar, card) &&
-					(canBlockMoreCreatures(blockedSoFar) || containsCard(free, blocker)) &&
+					(g.Card(blocker).canBlockMoreCreatures(blockedSoFar) || containsCard(free, blocker)) &&
 					g.combat.isAttacking(card) && g.CanBlock(card, blocker) {
 					return illegal("CR 509.1c", "must still block", blocker, card)
 				}
@@ -308,14 +307,16 @@ func (v blockCheck) allBlockers() []CardID {
 
 func (v blockCheck) minBlockers(attacker CardID) int { return v.minMax[attacker][0] }
 
-// canBlockMoreCreatures is CombatUtil.canBlockMoreCreatures with no
-// "can block an additional creature" source: only a creature blocking
-// nothing yet can block more.
-func canBlockMoreCreatures(blockedBy []CardID) bool { return len(blockedBy) == 0 }
+// canBlockMoreCreatures is CombatUtil.canBlockMoreCreatures (CombatUtil.java:
+// 495-501): a creature blocking nothing yet, one that can block any number, or
+// one whose "additional creatures" cover those it already blocks.
+func (c *Card) canBlockMoreCreatures(blockedBy []CardID) bool {
+	return len(blockedBy) == 0 || c.canBlockAny || c.canBlockMore >= len(blockedBy)
+}
 
 // canBlockInCombat is CombatUtil.canBlock(blocker, combat).
 func (v blockCheck) canBlockInCombat(blocker CardID) bool {
-	return canBlockMoreCreatures(v.attackersBlockedBy(blocker)) && v.g.canBlockAtAll(blocker)
+	return v.g.Card(blocker).canBlockMoreCreatures(v.attackersBlockedBy(blocker)) && v.g.canBlockAtAll(blocker)
 }
 
 // canBeBlockedInCombat is CombatUtil.canBeBlocked(attacker, combat,
@@ -421,7 +422,7 @@ func (v blockCheck) findFreeBlockers(army []CardID) []CardID {
 		change := len(blocked) == 0
 		for _, attacker := range blocked {
 			reduced := withoutCards(v.blockersOf(attacker), []CardID{blocker})
-			if canBlockMoreCreatures(blocked) || v.canBeBlockedBy(attacker, reduced) {
+			if v.g.Card(blocker).canBlockMoreCreatures(blocked) || v.canBeBlockedBy(attacker, reduced) {
 				change = true
 				break
 			}

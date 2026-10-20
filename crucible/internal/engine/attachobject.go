@@ -20,7 +20,7 @@ import (
 // attachment that left the battlefield is skipped; the equipment legality
 // checks are the activated shape's (a creature host, Protection).
 func (g *Game) attachObject(a *Ability, controller PlayerController) error {
-	for _, key := range [...]string{"PlayerChoices", "Chooser", "Move"} {
+	for _, key := range [...]string{"PlayerChoices", "Chooser"} {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Attach: %s$ with Object$ not resolvable yet", key)
 		}
@@ -130,6 +130,11 @@ func (g *Game) attachObjectToChoice(a *Ability, controller PlayerController, att
 			}
 			ok := true
 			for _, att := range attachments {
+				// AttachEffect.java:96-100: Move$ takes the host it is on off the
+				// list of places to move it to.
+				if cur, attached := g.Card(att).AttachedTo(); attached && cur == id && hasParam(a, "Move") {
+					ok = false
+				}
 				ok = ok && g.canBeAttached(g.Card(att), id)
 			}
 			if ok {

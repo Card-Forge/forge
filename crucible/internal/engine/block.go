@@ -23,9 +23,9 @@ func (g *Game) Blocks() []Block { return g.combat.Blocks }
 //     the blocker is one it was offered, the pair is not repeated, CanBlock
 //     accepts it (CR 509.1b: CantBlockBy statics, flying/reach, Fear,
 //     Horsemanship, Landwalk, Protection, Skulk -- staticability.go), and
-//     the blocker is not already blocking another attacker
-//     (CombatUtil.canBlockMoreCreatures -- no "can block an additional
-//     creature" source exists in this port, so every blocker blocks one).
+//     the blocker is not already blocking more attackers than it may
+//     (CombatUtil.canBlockMoreCreatures: one, unless "can block any number" or
+//     "an additional creature" is in force, Card.canBlockMoreCreatures).
 //   - The whole declaration, with every earlier defender's blocks in it the
 //     way Java's Combat holds them: validateBlocks (blockvalidation.go),
 //     Java's CombatUtil.validateBlocks -- block requirements (MustBlock,
@@ -243,13 +243,17 @@ func (g *Game) checkBlockPairing(blk Block, earlier []Block, attackers, eligible
 	if !containsCard(eligible, blk.Blocker) {
 		return illegal("CR 509.1a", "not an eligible blocker", blk.Blocker)
 	}
+	var blockedSoFar []CardID
 	for _, e := range earlier {
 		if e == blk {
 			return illegal("CR 509.1a", "declared blocking the same attacker twice", blk.Blocker, blk.Attacker)
 		}
 		if e.Blocker == blk.Blocker {
-			return illegal("CR 509.1a", "cannot block more than one attacker", blk.Blocker)
+			blockedSoFar = append(blockedSoFar, e.Attacker)
 		}
+	}
+	if !g.Card(blk.Blocker).canBlockMoreCreatures(blockedSoFar) {
+		return illegal("CR 509.1a", "cannot block more than one attacker", blk.Blocker)
 	}
 	if !g.CanBlock(blk.Attacker, blk.Blocker) {
 		return illegal("CR 509.1b", "cannot block this attacker", blk.Blocker, blk.Attacker)

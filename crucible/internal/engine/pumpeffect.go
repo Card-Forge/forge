@@ -73,7 +73,7 @@ import (
 // spell's targets resolve (ADR-0018).
 var pumpUnresolvedParams = [...]string{
 	"ConditionActivationLimit",
-	"CanBlockAmount", "CanBlockAny", "KWChoice", "RandomKeyword", "RandomKWNum",
+	"KWChoice", "RandomKeyword", "RandomKWNum",
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
 	"DefinedLandwalk", "RememberPumped", "LeaveBattlefield",
 	"NoteCards", "NoteCardsFor", "ClearNotedCardsFor",
@@ -208,6 +208,16 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	}
 
 	// NumAtt$/NumDef$ Double or Triple is read per target (pumpMultiplier).
+	// CanBlockAny$ and CanBlockAmount$ ride the record (PumpEffect.java:78-84).
+	canBlockAny := hasParam(a, "CanBlockAny")
+	canBlockMore := 0
+	if raw, ok := a.Params.Param("CanBlockAmount"); ok {
+		n, ok := resolveNamedAmount(g, a.Amounts, source, raw)
+		if !ok {
+			return fmt.Errorf("engine: Pump: CanBlockAmount$ %q is not resolvable", raw)
+		}
+		canBlockMore = n
+	}
 	multiplied := false
 	for _, key := range [...]string{"NumAtt", "NumDef"} {
 		if v, _ := a.Params.Param(key); v == "Double" || v == "Triple" {
@@ -219,7 +229,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		// amount (PumpEffect.java:489-496); no corpus line combines them.
 		return fmt.Errorf("engine: Pump: Radiance$ with a Double/Triple amount not resolvable yet")
 	}
-	if power == 0 && toughness == 0 && grant.empty() && !multiplied {
+	if power == 0 && toughness == 0 && grant.empty() && !multiplied && !canBlockAny && canBlockMore == 0 {
 		// Java has no such return: replaceDying (PumpEffect.java:506) still
 		// runs, so an X=0 Necrotic Wound still exiles a creature dying this turn.
 		// PumpEffect.java:485 registers AtEOT$ whether or not anything was
@@ -281,6 +291,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			Card: cid, Timestamp: timestamp, Power: power, Toughness: toughness,
 			Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
 			HasUntil: untilNextTurn, UntilTurnOf: a.Controller, Perpetual: perpetual,
+			CanBlockAny: canBlockAny, CanBlockMore: canBlockMore,
 		})
 		if until != "" {
 			if err := g.addUntilCommand(a, until, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}); err != nil {

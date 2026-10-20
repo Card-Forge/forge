@@ -12,7 +12,7 @@ Sizes: **S** under a day, one sitting. **M** one porter batch, 1-3 days. **L** 1
 batches. No row is larger. Within a size the order is by value per effort. `R` numbers are this list's own; `B1`-`B5`
 are packs that absorb the small refusal and findings rows (their old `R` ids stay inside, so references still resolve);
 milestone items keep their numbers (24-41). The refusal figures come from `crucible card-smoke -all`
-([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 94.9% of the 33,567 judged corpus cards play, an upper bound,
+([`smoke-probe.md`](porting/port-log/smoke-probe.md)): 95.7% of the 33,567 judged corpus cards play, an upper bound,
 since silent misses are invisible. Re-rank with the command before starting any M item, because the counts move with
 every port.
 

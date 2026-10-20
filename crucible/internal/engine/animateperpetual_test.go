@@ -109,3 +109,23 @@ func TestAnimateOptionalCanBeDeclined(t *testing.T) {
 		}
 	}
 }
+
+// Defined$ Valid <spec> (AbilityUtils.java:287-303) reaches every effect that
+// reads its cards through the ability's refs: a Pump of every creature you
+// control.
+func TestDefinedValidReachesPump(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	mine := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	theirs := g.NewCard(creatureDefPT(t, "1", "1"), other, engine.Battlefield)
+	if _, err := resolveNow(t, g, p, engine.NewScriptedController(), nil,
+		"DB$ Pump | Defined$ Valid Creature.YouCtrl | NumAtt$ +2"); err != nil {
+		t.Fatal(err)
+	}
+	for id, want := range map[engine.CardID]int{mine: 3, theirs: 1} {
+		if got, _ := g.Card(id).Power(); got != want {
+			t.Errorf("card %d: power = %d, want %d", id, got, want)
+		}
+	}
+}

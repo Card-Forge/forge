@@ -180,6 +180,38 @@ func (g *Game) removeFromCombat(id CardID) {
 	}
 }
 
+// unblockAttackersBlockedOnlyBy is the loop of RemoveFromCombatEffect.java:
+// 47-65: every attacker blocker blocks, and nothing else blocks, becomes
+// unblocked (Combat.setBlocked(attacker, false)); its block with blocker is
+// dropped so removing blocker from combat afterwards leaves it unblocked, not
+// "blocked, no blocker".
+func (g *Game) unblockAttackersBlockedOnlyBy(blocker CardID) {
+	var unblocked []CardID
+	for _, b := range g.combat.Blocks {
+		if b.Blocker != blocker || containsCard(unblocked, b.Attacker) {
+			continue
+		}
+		only := true
+		for _, other := range g.combat.Blocks {
+			if other.Attacker == b.Attacker && other.Blocker != blocker {
+				only = false
+				break
+			}
+		}
+		if only {
+			unblocked = append(unblocked, b.Attacker)
+		}
+	}
+	var blocks []Block
+	for _, b := range g.combat.Blocks {
+		if !containsCard(unblocked, b.Attacker) {
+			blocks = append(blocks, b)
+		}
+	}
+	g.combat.Blocks = blocks
+	g.combat.ForcedBlocked = withoutCards(g.combat.ForcedBlocked, unblocked)
+}
+
 // clone is Combat's half of Game.Clone: a shared backing array would let a
 // declaration on the clone alias the original, the same reasoning PT's own
 // clone has.

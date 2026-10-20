@@ -22,15 +22,8 @@ package engine
 import "fmt"
 
 // removeFromCombatUnresolvedParams names RemoveFromCombatEffect's own
-// params this port does not evaluate. Every one fails the whole line loudly
-// (PORT-8/GO-7): UnblockCreaturesBlockedOnlyBy$ (3) -- a further
-// "unblock what this attacker was blocking alone" mechanic distinct from
-// removing the named card itself from combat; Condition$/ConditionDefined$
-// (0/1) -- condition.go's own subAbilityConditionMet would otherwise
-// silently no-op a card naming either without ConditionPresent$ alongside
-// it, dealDamageEffect's own identical reasoning.
-var removeFromCombatUnresolvedParams = [...]string{
-	"UnblockCreaturesBlockedOnlyBy"}
+// params this port does not evaluate: none now. UnblockCreaturesBlockedOnlyBy$
+// is unblockAttackersBlockedOnlyBy.
 
 // removeFromCombatEffect resolves Mode$/DB$/AB$ RemoveFromCombat.
 // ConditionPresent$/ConditionCompare$/ConditionCheckSVar$/
@@ -41,11 +34,6 @@ type removeFromCombatEffect struct{}
 func (removeFromCombatEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
 		return err
-	}
-	for _, key := range removeFromCombatUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: RemoveFromCombat: %s$ not resolvable yet", key)
-		}
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
@@ -60,6 +48,17 @@ func (removeFromCombatEffect) Resolve(g *Game, a *Ability, _ PlayerController) e
 	for _, id := range cards {
 		if g.Card(id).Zone != Battlefield {
 			continue
+		}
+		if spec, ok := a.Params.Param("UnblockCreaturesBlockedOnlyBy"); ok {
+			// RemoveFromCombatEffect.java:47-65: the attackers the named creature
+			// alone was blocking become unblocked (Ydwen Efreet, False Orders).
+			named, err := definedCards(source, spec, a.refs())
+			if err != nil {
+				return fmt.Errorf("engine: RemoveFromCombat: UnblockCreaturesBlockedOnlyBy$: %w", err)
+			}
+			if len(named) > 0 {
+				g.unblockAttackersBlockedOnlyBy(named[0])
+			}
 		}
 		g.removeFromCombat(id)
 		if remember {

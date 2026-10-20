@@ -444,9 +444,14 @@ type pumpRecord struct {
 	// Hidden is KW$'s "HIDDEN " lines, prefix stripped
 	// (Card.addHiddenExtrinsicKeywords), put on the card every rules pass
 	// (pumpHiddenKeywords). Never edited in place: Clone shares it.
-	Hidden    []string
-	Switched  bool // KW$ HIDDEN switchPTKeyword: a Layer 7d switch
-	Permanent bool
+	Hidden   []string
+	Switched bool // KW$ HIDDEN switchPTKeyword: a Layer 7d switch
+	// CanBlockAny and CanBlockMore are Pump's CanBlockAny$ and CanBlockAmount$
+	// (PumpEffect.java:78-84): the card can block any number of creatures, or
+	// this many more, for as long as the record lives.
+	CanBlockAny  bool
+	CanBlockMore int
+	Permanent    bool
 	// OnPlayer marks a keyword pump of a player (PumpEffect.applyPump(player),
 	// Player.addChangedKeywords): Player holds the keywords, Card is NoCard.
 	OnPlayer bool

@@ -764,6 +764,11 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 	case "ChosenCard":
 		return append([]CardID(nil), host.Memory.Chosen()...), nil
 	default:
+		if refs.game != nil {
+			if cards, ok := refs.game.definedValidCards(refs.activator, host, defined); ok {
+				return cards, nil
+			}
+		}
 		return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
 	}
 }
@@ -847,29 +852,44 @@ func definedCardsInGame(g *Game, activator PlayerID, host *Card, defined string,
 		// AbilityUtils.java:304-305: the cards the host exiled (Card.getExiledCards).
 		return g.exiledWithCards(host.ID), nil
 	}
+	if cards, ok := g.definedValidCards(activator, host, defined); ok {
+		return cards, nil
+	}
+	head, _, found := strings.Cut(defined, " ")
+	if _, isValid := strings.CutPrefix(head, "Valid"); found && isValid {
+		return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+	}
+	return definedCards(host, defined, refs)
+}
+
+// definedValidCards is the "Valid <spec>" and "Valid<Zone> <spec>" forms of
+// AbilityUtils.getDefinedCards (:287-303): the cards of that zone (the
+// battlefield for a bare Valid) across every player in seat order, filtered
+// with the activator as You. ok is false for any other spelling, or a zone
+// this port does not know.
+func (g *Game) definedValidCards(activator PlayerID, host *Card, defined string) (cards []CardID, ok bool) {
 	head, spec, found := strings.Cut(defined, " ")
 	zoneName, isValid := strings.CutPrefix(head, "Valid")
 	if !found || !isValid {
-		return definedCards(host, defined, refs)
+		return nil, false
 	}
 	zone := Battlefield
 	if zoneName != "" {
-		z, ok := ZoneByName(zoneName)
-		if !ok {
-			return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
+		z, known := ZoneByName(zoneName)
+		if !known {
+			return nil, false
 		}
 		zone = z
 	}
 	parsed := valid.Parse(spec)
-	var out []CardID
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(zone, pid).Cards() {
 			if Matches(g, g.Card(id), parsed, activator, host.ID) {
-				out = append(out, id)
+				cards = append(cards, id)
 			}
 		}
 	}
-	return out, nil
+	return cards, true
 }
 
 // definedEntities is AbilityUtils.getDefinedEntities: the players def names,

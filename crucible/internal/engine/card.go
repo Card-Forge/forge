@@ -168,6 +168,13 @@ type Card struct {
 	// effectLife is when an effect card stops existing: its Duration$ and
 	// its ExileOnMoved$/ForgetOnMoved$ watch. Zero on every other card.
 	effectLife effectLifetime
+	// canBlockAny and canBlockMore are Card.canBlockAny() and
+	// Card.canBlockAdditional(): "can block any number of creatures" and the
+	// sum of the "can block an additional creature" amounts in force. Rebuilt
+	// every rules pass from the live pump records and Mode$ Continuous
+	// CanBlockAny$/CanBlockAmount$ statics (applyContinuousCanBlock).
+	canBlockAny  bool
+	canBlockMore int
 	// isBoon is Card.isBoon: a Boon$ effect card, which leaves the Command zone
 	// after its triggers have fired; boons holds the BoonAmount$ ones.
 	isBoon bool

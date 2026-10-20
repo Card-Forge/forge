@@ -971,6 +971,7 @@ func applyContinuousRules(g *Game) {
 	}
 	clearHiddenKeywords(g)
 	pumpHiddenKeywords(g)
+	pumpCanBlock(g)
 	g.mayPlay = nil
 	for _, ls := range continuousStaticsAllZones(g) {
 		if !g.staticLive(g.Card(ls.host), ls.s) {
@@ -980,7 +981,59 @@ func applyContinuousRules(g *Game) {
 		applyOneContinuousRules(g, h, ls.amounts, ls.s)
 		grantIgnoreEffect(g, h, ls.amounts, ls.s)
 		applyOneContinuousHiddenKeyword(g, h, ls.s)
+		applyOneContinuousCanBlock(g, h, ls.amounts, ls.s)
 		applyOneContinuousMayPlay(g, h, ls.amounts, ls.s, ls.index)
+	}
+}
+
+// pumpCanBlock resets every card's "can block any number of creatures" and
+// "an additional creature" amounts, then adds what the live Pump records give
+// (PumpEffect.java:78-84, undone by removeCanBlockAny/Additional at the end).
+func pumpCanBlock(g *Game) {
+	for i := 1; i < len(g.cards); i++ {
+		g.cards[i].canBlockAny, g.cards[i].canBlockMore = false, 0
+	}
+	for _, r := range g.pumps {
+		if r.OnPlayer || (!r.CanBlockAny && r.CanBlockMore == 0) {
+			continue
+		}
+		if c := g.Card(r.Card); c.Zone == Battlefield && !c.IsPhasedOut() {
+			c.canBlockAny = c.canBlockAny || r.CanBlockAny
+			c.canBlockMore += r.CanBlockMore
+		}
+	}
+}
+
+// applyOneContinuousCanBlock is Layer 8's CanBlockAny$/CanBlockAmount$
+// (StaticAbilityContinuous.java:920-926): the cards a Mode$ Continuous line
+// affects can block any number of creatures, or that many more.
+func applyOneContinuousCanBlock(g *Game, host *Card, amounts map[string]expr.Amount, s *compile.Ability) {
+	if !strings.EqualFold(s.Name, "Continuous") {
+		return
+	}
+	blockAny := hasParamOn(s, "CanBlockAny")
+	raw, hasAmount := s.Param("CanBlockAmount")
+	if !blockAny && !hasAmount {
+		return
+	}
+	if !layerStaticApplies(g, host, amounts, s) {
+		return
+	}
+	affected, ok := g.staticAffected(host, s)
+	if !ok {
+		return
+	}
+	more := 0
+	if hasAmount {
+		if more, ok = resolveNamedAmount(g, amounts, host, raw); !ok {
+			g.recordPendingError(fmt.Errorf("engine: CanBlockAmount$ %q is not resolvable", raw))
+			return
+		}
+	}
+	for _, id := range affected {
+		c := g.Card(id)
+		c.canBlockAny = c.canBlockAny || blockAny
+		c.canBlockMore += more
 	}
 }
 

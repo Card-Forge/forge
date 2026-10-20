@@ -47,6 +47,11 @@ func APIByName(name string) (APIType, bool) {
 // and for the one target CastSpell's own Aura branch chooses at cast time
 // (CR 601.2c).
 type Ability struct {
+	// game is the game the ability is resolving in, set as it resolves
+	// (Registry.resolve) so a Defined$ that scans the game ("Valid <spec>")
+	// reaches it through abilityRefs; nil outside a resolution.
+	game *Game
+
 	// ID is this stack item's own identity (ADR-0018, StackItemID's doc
 	// comment, id.go) -- set by PushAbility, NoStackItem until then. Distinct
 	// from Source: CopySpellAbility's copy and the spell it copies share no
@@ -406,13 +411,18 @@ type abilityRefs struct {
 	// (ReplaceDamage.setReplacingObjects, ReplaceDamage.java:145: AbilityKey.
 	// Target from Affected; Defined$ ReplacedTarget); NoEntity otherwise.
 	replacedTarget EntityID
+	// game and activator are the resolving ability's game and controller, for
+	// the Defined$ forms that scan it (definedValidCards); nil/NoPlayer when
+	// the refs were built outside a resolution.
+	game      *Game
+	activator PlayerID
 }
 
 // refs is a's own abilityRefs.
 func (a *Ability) refs() abilityRefs {
 	r := abilityRefs{targets: a.Targets, parentTargets: a.parentTargets, ancestorTargeting: a.ancestorTargeting,
 		triggerRemembered: a.TriggerRemembered, triggered: a.triggered, paid: a.paid, replaced: a.replacedCard(),
-		stackTargets: a.stackTargets}
+		stackTargets: a.stackTargets, game: a.game, activator: a.Controller}
 	if a.replacing != nil {
 		r.replacedPlayer, r.replacedDefendingPlayer = a.replacing.player, a.replacing.defendingPlayer
 		if a.replacing.amountName == "DamageAmount" {

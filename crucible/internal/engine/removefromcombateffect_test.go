@@ -157,20 +157,3 @@ func TestRemoveFromCombatEffectBlockerLeavesAttackerBlocked(t *testing.T) {
 		t.Errorf("defender life = %d, want 20 (a blocked attacker deals no damage to the player)", life)
 	}
 }
-
-// TestRemoveFromCombatEffectRejectsUnresolvedParam proves
-// removeFromCombatUnresolvedParams' own fail-loud contract (PORT-8/GO-7).
-func TestRemoveFromCombatEffectRejectsUnresolvedParam(t *testing.T) {
-	t.Parallel()
-
-	g := newGame(t, "a", "b")
-	p := g.Players()[0]
-	g.SetTurnState(1, p, engine.Main1)
-	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
-
-	c := engine.NewScriptedController()
-	_, err := castETBRemoveFromCombat(t, g, p, etbRemoveFromCombatTriggerDefParams(t, "Test RemoveFromCombat Unblock", "Defined$ Self | UnblockCreaturesBlockedOnlyBy$ Self"), c)
-	if err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved UnblockCreaturesBlockedOnlyBy$")
-	}
-}
