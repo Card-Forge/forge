@@ -45,7 +45,7 @@
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="232.407" y="351.717">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Gratuitous Violence|ons&quot;, &quot;Sunbird's Invocation|xln&quot; ] }"/>
-    <property name="enemy" value="Márton Stromgald"/>
+    <property name="enemy" value="Maraxus"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
@@ -55,7 +55,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;The very air in this place is thick with red mana, filling you with overwhelming heat and passion. In front of the lava pools ahead, a lone knight sits atop his steed, the infamous mox ruby hung around his neck. 
+   &quot;text&quot;: &quot;The very air in this place is thick with red mana, filling you with overwhelming heat and passion. In front of the lava pools ahead, an insanely muscular man stands, the infamous mox ruby hung around his neck.
 
 Your manasight stone blazes with power, near-blindingly bright.&quot;,
    &quot;options&quot;: [{
@@ -77,7 +77,7 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
   <object id="93" template="../../../../common/maps/obj/enemy.tx" x="233.667" y="351.667">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sunbird's Invocation|xln&quot; ] }"/>
-    <property name="enemy" value="Márton Stromgald"/>
+    <property name="enemy" value="Maraxus"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>

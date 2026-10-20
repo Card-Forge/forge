@@ -668,6 +668,11 @@ public class CardDetailUtil {
                 area.append(Localizer.getInstance().getMessage("lblOmen") + " — " + getAlternateStateDesc(card));
             }
 
+            if (card.getAlternateState().getType().hasSubtype("Vengeance")) {
+                area.append("\n\n");
+                area.append(Localizer.getInstance().getMessage("lblVengeance") + " — " + getAlternateStateDesc(card));
+            }
+
             if (card.hasPreparedSpell()) {
                 area.append("\n\n");
                 area.append(Localizer.getInstance().getMessage("lblPrepared") + " — " + getAlternateStateDesc(card));

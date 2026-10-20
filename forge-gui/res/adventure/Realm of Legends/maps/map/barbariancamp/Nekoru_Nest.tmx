@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="95">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragon Egg&quot;, &quot;Dragon Egg&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="8" name="Tilelaag 4" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztk0EKACEIRdvOskvN/S8URIuYCAkSQWVe8BYa1PuIrZbSAAAAAADgV7zPxzhr7e2mzTHrte/tp8my58qaRZpDtiy7++k+MtKOZETaEW+nW3fJO8Ou3/pFzKJ1ijQbC48IWaz+t3inA7sHY8w=
+  </data>
+ </layer>
+ <layer id="7" name="Background" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKg0AMBdDZSCldeYbe1aVn6WlcexGhiIghTDOfMWOSovApiNT/TKSdupSmQj4PLEtvl5KBOyy7ajmsu551WHe8HfEciEX7fsPzyFUOje+XDk1LrWM90OcuOWot/P4tHNSAOLTmQnvX7hTvvveXLK3eldqgz19zr1r2Rxxj5nqPBuqQ9syLQ7LM6Yg0Ky8ObtnPvV+bYf3k13l+z3OhhsiWnIPPz+N+oQ7qoQ7rvpIDsXg2oDOJkn9xRNgZqfuvWHc70z2KpfTfKZfRmaf0+3zVbL7fu+gX
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztl01uwjAQRk2DhOMde3aIlHN0XanrUpSjdImgR+gFK372LVRInWmw8mXqOBJI9Sxi6YmQIPI9j+0457Ex556enp4bec6MWRDc+Ph9WMPnU+drAxvnPhHHS/5T1rx+zPS6YL9z7lXejlYXrMHO1sj8ezp3sPrqguNeOqBH4YzZ0vcHyj51TZfvxB6h/vf4fsdaoMtbnt4D50DIYeaa/S5d7om5qxxe6D++EnjEasCs88rhw9Z5cW7LlmxMRRwY7G85TzR5fNJ9lx0uMTStVyEXHuflJc/jqPosxe8KF16vUruUAM/V10F1bTdqd/bjjn00rb3I5O6vR1v92EfD2htDemD9vE+hYO3tYkM5nwIuWBvftDrEaiJrUyp34Gcle2jY/12THfeLa1u/e2h/b5LZY03L/jzk0JU95MLOqbOHHPxeg5/Rexv3QJ/UDr+AwyZvMnX/6/IDpXXl5A==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdl8sJwkAQhlc8+MKDtqCnnCxD8CBagNpAcjKmAcvxgSVYgJXYgoITNGRcN+xOsq/4w5AF4z//x2R1w5gbPQe/5bq/7voHBhsslH7UTDZZbPmbZHH5/JryrqoEla2eOjwTSan21iWqnyx/GRYdPBQfCoNtFpkHn2sRMLYM9DDg/iY5RLlCYIiC4nt84qDk8uGZwl6yXEUSfWabAfvxOXBt+2pe2d5J7z901Pqa5EglmsW+8X3lle2dIzCcoMYKZzVdUvWj9Jx1GbvC/RdgORfMpU4cc7huhtX6qkr3+0MI2VeQfQ1178r76lIVjrJ71fQ5m8JBnZfNd6qyoszUV4ZRL1/XIX+I9uytla8xB69H01weqvj/8gkwRO33eir5ri8ckeB3E88iU/xhlZ1FXChGc9ihtYjDlF68USMz
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="352" y="435.172" width="64" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/treasure.tx" x="487.74" y="229.356">
+   <properties>
+    <property name="reward">[
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/gold.tx" x="401.404" y="198.409"/>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="369.677" y="236.144">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;brg_3_3_cat_dragon_flying&quot;]}"/>
+    <property name="enemy" value="Wasitora"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/manashards.tx" x="493.373" y="283.747"/>
+  <object id="68" template="../../../../common/maps/obj/gold.tx" x="351.948" y="198.615"/>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="160" y="432" width="480" height="16"/>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="371.25" y="365.75" width="46.5" height="20.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An island stands ahead, a thin layer of obviously magical water keeping it from being consumed by the overwhelming heat of the seat of lava around it. A loud, rumbling purr echoes from ahead, a huge cat dragon guarding a nest of kitten-eggs.
+
+Your manasight stone glows, sensing the power of the legend here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="369.091" y="238.818">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;brg_3_3_cat_dragon_flying&quot;, &quot;Crucible of Fire&quot;]}"/>
+    <property name="enemy" value="Wasitora"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

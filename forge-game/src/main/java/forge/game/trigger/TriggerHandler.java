@@ -172,9 +172,18 @@ public class TriggerHandler {
     }
 
     public void collectTriggerForWaiting() {
+        collectTriggerForWaiting(false);
+    }
+    public void collectTriggerForWaiting(final boolean exceptEntering) {
         for (final TriggerWaiting wt : waitingTriggers) {
             if (wt.getTriggers() != null)
                 continue;
+
+            // CR 603.6a what sees a permanent enter is decided once everything entering with it has
+            if (exceptEntering && wt.getMode() == TriggerType.ChangesZone
+                    && ZoneType.Battlefield.name().equals(wt.getParams().get(AbilityKey.Destination))) {
+                continue;
+            }
 
             // TODO we don't seem to handle Static ones from this,
             // so they shouldn't be checked for performance in the first place

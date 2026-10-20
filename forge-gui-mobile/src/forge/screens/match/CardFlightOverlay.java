@@ -117,6 +117,8 @@ public final class CardFlightOverlay {
         private float fromCx, fromCy, toCx, toCy, fromH, toH;
         private Style style = Style.ROTATE;
         private boolean moved; // ENTER: a card already on the battlefield changing rows
+        private boolean toHidden;   // ENTER: destination is scrolled out of view, so the flight stops at the edge and fades out
+        private boolean fromHidden; // ENTER: a moved card started out of view, so the flight fades in from the edge
 
         private Flight(CardView card, Rectangle from, boolean fromExact, Rectangle to, float tappedAngle, boolean leave) {
             this.card = card; this.from = from; this.fromExact = fromExact; this.to = to;
@@ -244,7 +246,8 @@ public final class CardFlightOverlay {
         for (VPlayerPanel.InfoTab tab : pp.getTabs()) {
             if (tab instanceof VPlayerPanel.InfoTabZone && ((VPlayerPanel.InfoTabZone) tab).zoneType == zone) {
                 Rectangle r = tab.screenPos;
-                return (r != null && r.width > 0 && r.height > 0) ? r : null;
+                //a tab scrolled out of the compact layout's tab viewport isn't on screen
+                return (r != null && r.width > 0 && r.height > 0 && tab.isVisible()) ? r : null;
             }
         }
         return null;
@@ -334,9 +337,38 @@ public final class CardFlightOverlay {
             }
         }
 
+        // landscape: keep the card between the player's tab columns, so a card headed for a spot that's scrolled out of
+        // view (far left of a crowded field) flies to the edge and fades instead of passing over the zone tabs
+        VPlayerPanel panel = MatchScreen.getPlayerPanel(f.card.getController());
+        Rectangle area = panel == null ? null : panel.getFlightArea();
+        if (area != null) {
+            float toHalf = (f.tappedAngle != 0f ? toH : toH / FCardPanel.ASPECT_RATIO) / 2f;
+            float clampedTo = clampToArea(toCx, toHalf, area);
+            if (clampedTo != toCx) {
+                toCx = clampedTo;
+                f.toHidden = true;
+            }
+            if (f.moved && f.from != null && !f.fromExact) { // a card changing rows can also start out of view
+                float fromHalf = (f.tappedAngle != 0f ? fromH : fromH / FCardPanel.ASPECT_RATIO) / 2f;
+                float clampedFrom = clampToArea(fromCx, fromHalf, area);
+                if (clampedFrom != fromCx) {
+                    fromCx = clampedFrom;
+                    f.fromHidden = true;
+                }
+            }
+        }
+
         f.fromCx = fromCx; f.fromCy = fromCy; f.fromH = fromH;
         f.toCx = toCx; f.toCy = toCy; f.toH = toH;
         f.resolved = true;
+    }
+
+    // moves a card centre so a card with the given half width sits fully inside the area (horizontally)
+    private static float clampToArea(float cx, float half, Rectangle area) {
+        float lo = area.x + half;
+        float hi = area.x + area.width - half;
+        if (hi < lo) { return area.x + area.width / 2f; }
+        return MathUtils.clamp(cx, lo, hi);
     }
 
     /** Resolves a LEAVE flight once: where the card was, which zone it went to, and where that zone's tab is. */
@@ -353,6 +385,15 @@ public final class CardFlightOverlay {
             cy = y + h - w / 2;
         }
         f.fromCx = cx; f.fromCy = cy; f.fromH = h;
+
+        // a card that was scrolled out of view when it left was never visible, so there is nothing to animate
+        VPlayerPanel fieldPanel = MatchScreen.getPlayerPanel(f.card.getController());
+        Rectangle area = fieldPanel == null ? null : fieldPanel.getFlightArea();
+        if (area != null && (cx < area.x || cx > area.x + area.width)) {
+            f.cancelled = true;
+            f.resolved = true;
+            return;
+        }
 
         ZoneType zone = zoneOf(f.card);
         if (zone == null && isOnBattlefield(f.card)) { // e.g. control change: it didn't leave, it moved rows
@@ -435,6 +476,8 @@ public final class CardFlightOverlay {
         float cx, cy, h, angle;
         float alpha = 1f;
 
+        if (f.toHidden && f.style == Style.POPUP) { return; } // it would pop up out of view, so show nothing
+
         switch (f.style) {
             case POPUP: { // appears in place, scales up with a small overshoot and fades in
                 float e = Interpolation.swingOut.apply(t);
@@ -463,11 +506,19 @@ public final class CardFlightOverlay {
             }
         }
 
+        if (f.toHidden) { // heading out of view: fade away over the last part of the flight
+            alpha *= 1f - MathUtils.clamp((t - 0.55f) / 0.45f, 0f, 1f);
+        }
+        if (f.fromHidden) { // coming from out of view: fade in over the first part of the flight
+            alpha *= MathUtils.clamp(t / 0.4f, 0f, 1f);
+        }
+        if (alpha <= 0.01f) { return; }
+
         float w = h / FCardPanel.ASPECT_RATIO;
         if (alpha < 1f) { g.setAlphaComposite(alpha); }
         g.startRotateTransform(cx, cy, angle);
         CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h,
-                CardStackPosition.Top, false, false, false, true);
+                CardStackPosition.Top, false, false, true);
         g.endTransform();
         if (alpha < 1f) { g.resetAlphaComposite(); }
     }
@@ -504,7 +555,7 @@ public final class CardFlightOverlay {
         if (angle != 0f) { g.startRotateTransform(cx, cy, angle); }
 
         CardRenderer.drawCard(g, f.card, cx - w / 2, cy - h / 2, w, h,
-                CardStackPosition.Top, false, false, false, true);
+                CardStackPosition.Top, false, false, true);
         if (redAlpha > 0f) {
             RED.a = redAlpha;
             g.fillRect(RED, cx - w / 2, cy - h / 2, w, h);

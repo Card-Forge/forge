@@ -4116,6 +4116,16 @@ public class CardFactoryUtil {
         return re;
     }
 
+    public static ReplacementEffect setupVengeanceAbility(CardState card) {
+        String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile "
+                + "| ValidStackSa$ Spell.Vengeance | Secondary$ True | Description$ Vengeance";
+        String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | StackDescription$ None";
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
+        re.setOverridingAbility(AbilityFactory.getAbility(abExile, card));
+        return re;
+    }
+
     public static void setFaceDownState(Card c, SpellAbility sa) {
         final Card source = sa.getHostCard();
         CardState faceDown = c.getFaceDownState();

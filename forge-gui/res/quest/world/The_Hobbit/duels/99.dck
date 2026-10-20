@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Hobbit/Dirk_Kleinemeier_-_Hammer_(Modern,_#883791).dck
+Deck Type=constructed
+
+[Main]
+4 Urza's Saga
+3 Inkmoth Nexus
+1 Super-Soldier Serum
+1 Skateboard
+1 Cryptic Coat
+1 Shadowspear
+4 Mox Opal
+4 Colossus Hammer
+4 Leyline Axe
+4 Metallic Rebuke
+1 Ornithopter
+3 Esper Sentinel
+4 Memnite
+4 Stoneforge Mystic
+4 Puresteel Paladin
+4 Kíli the Resourceful
+1 Meticulous Archive
+2 Plains
+2 Arid Mesa
+2 Marsh Flats
+2 Flooded Strand
+2 Windswept Heath
+2 Hallowed Fountain
+[Sideboard]
+2 March of Otherworldly Light
+1 Pithing Needle
+1 Teferi, Time Raveler
+1 Grafdigger's Cage
+1 Sanctifier en-Vec
+2 Blacksmith's Skill
+1 Tormod's Crypt
+3 Consign to Memory
+1 Vexing Bauble
+1 Containment Priest
+1 Cursed Totem

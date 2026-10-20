@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.google.common.collect.Maps;
 import forge.animation.FlipOntoBattlefieldAnimation;
+import forge.game.ability.effects.FlipOntoBattlefieldEffect;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FOverlay;
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +49,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
@@ -67,6 +69,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VPhaseIndicator;
@@ -85,16 +88,16 @@ import forge.util.collect.FCollectionView;
 
 public class MatchController extends NetworkGuiGame {
     private MatchController() { }
+    static {
+        // the mobile board knows where the cards are, so it can handle 3-4 card corner hits
+        FlipOntoBattlefieldEffect.boardDecidesHits = true;
+    }
     public static final MatchController instance = new MatchController();
 
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
     private static GameState phaseGameState;
     private static boolean introShowing;      // EDT only
-
-    private GameState getPhaseGameState() {
-        return phaseGameState;
-    }
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
     private Map<PlayerView, Object> selectionZonesBackup;
@@ -203,11 +206,6 @@ public class MatchController extends NetworkGuiGame {
         refreshCardDetails(null);
     }
 
-    @Override
-    public GameState getGamestate() {
-        return getPhaseGameState();
-    }
-
     public boolean hotSeatMode() {
         return FModel.getPreferences().getPrefBoolean(FPref.MATCH_HOT_SEAT_MODE);
     }
@@ -241,7 +239,7 @@ public class MatchController extends NetworkGuiGame {
         if(GuiBase.isNetPlay(this))
             view.resetFields();
         selectionZonesBackup = null;
-        clearSelectables();  //fix uncleared selection
+        setSelection(Selection.NONE);  //fix uncleared selection
 
         if (noHumans) {
             //add special object that pauses game if screen touched
@@ -272,7 +270,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
-        cancelWaitingTimer();
+        cancelAwaitNextInput();
         view.getPrompt(player).setMessage(message, card);
     }
 
@@ -322,6 +320,11 @@ public class MatchController extends NetworkGuiGame {
                 latch.countDown();
             }
         }, 300));
+        try {
+            latch.await();   // block the game thread until the overlay is dismissed
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     @Override
@@ -429,6 +432,16 @@ public class MatchController extends NetworkGuiGame {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);
         }
+    }
+
+    @Override
+    public boolean canPickStackTargets() {
+        return true; // stack entries are tapped in the stack view (VStack)
+    }
+
+    @Override
+    public void onSnapshotRestored() {
+        VCardDisplayArea.CardAreaPanel.resetForUndo();
     }
 
     @Override
@@ -572,9 +585,27 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        super.setSelectables(cards, min, max);
-        final PlayerZoneUpdates zones = max > 0 ? getZonesHolding(cards) : new PlayerZoneUpdates();
+    public void setSelection(final Selection selection) {
+        final Selection prev = getSelection();
+        super.setSelection(selection);
+        final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
+        FThreads.invokeInEdtLater(() -> {
+            if (stackOffered && !view.getStack().isVisible()) { // stack items are picked in the stack view, so bring it up
+                view.getStack().show();
+            }
+            if (selection.offersStackItems()) {
+                view.getStack().update();
+            }
+            Gdx.graphics.requestRendering();
+        });
+        if (prev.cards().equals(selection.cards())) {
+            return;
+        }
+        if (selection.cards().isEmpty()) {
+            clearSelectableCards();
+            return;
+        }
+        final PlayerZoneUpdates zones = selection.max() > 0 ? getZonesHolding(selection.cards()) : new PlayerZoneUpdates();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
@@ -598,16 +629,14 @@ public class MatchController extends NetworkGuiGame {
             }
             updateZones(zones);
             openZones(getCurrentPlayer(), zoneTypes, players);
-            // showMessage re-issues setSelectables as picks narrow the choices; the first backup is the one to keep
+            // the selectable cards can change while one prompt is open; the first backup is the one to keep
             if (selectionZonesBackup == null) {
                 selectionZonesBackup = players;
             }
         });
     }
 
-    @Override
-    public void clearSelectables() {
-        super.clearSelectables();
+    private void clearSelectableCards() {
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
