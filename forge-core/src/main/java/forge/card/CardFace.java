@@ -37,8 +37,8 @@ final class CardFace implements ICardFace, Cloneable {
     private String initialLoyalty = "";
     private String defense = "";
     private Set<Integer> attractionLights = null;
-    private String powerModifier = "";
-    private String toughnessModifier = "";
+    private String powerModifier = null;
+    private String toughnessModifier = null;
 
     private String nonAbilityText = null;
     private List<String> keywords = null;

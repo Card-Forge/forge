@@ -437,6 +437,10 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBeCreature() {
+        //augments don't have PT so they can't be a commander
+        if (mainPart.getPowerModifier() != null) {
+            return false;
+        }
         CardType type = mainPart.getType();
         if (type.isCreature()) {
             return true;
