@@ -90,3 +90,30 @@ func TestPumpZoneGrantEndsWithTheZoneChange(t *testing.T) {
 		t.Error("the bolt kept the flashback grant through a trip to the hand")
 	}
 }
+
+// Sins of the Past: the Effect lets its controller cast the targeted instant
+// from the graveyard without paying (MayPlay$ over Affected$ Card.IsRemembered).
+func TestEffectLetsYouCastATargetedCardFromTheGraveyardForFree(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGameOn(t, scenarioDB(t))
+	bolt := g.NewCard(corpusCard(t, "Lightning Bolt"), p, engine.Graveyard)
+	c := engine.NewScriptedController()
+	if _, err := resolveNow(t, g, p, c, []engine.EntityID{engine.CardEntity(bolt)},
+		"DB$ Effect | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtZone$ Graveyard | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard",
+		"Play", "Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card."); err != nil {
+		t.Fatal(err)
+	}
+	sba(g)
+	cast := engine.NewScriptedController()
+	cast.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
+	if !g.CastSpell(p, bolt, cast) {
+		t.Fatal("the bolt could not be cast from the graveyard for free")
+	}
+	if err := g.ResolveStack(engine.NewRegistry(), cast); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Player(other).Life; got != 17 {
+		t.Errorf("the bolt's target has %d life, want 17", got)
+	}
+}
