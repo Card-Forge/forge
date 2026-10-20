@@ -567,7 +567,7 @@ func cloneDefinedCards(g *Game, a *Ability, source *Card, raw string) ([]CardID,
 // cloneUnportedProperties are valid-string properties Clone's corpus names
 // that Matches has no case for: it would read each as a type and match
 // nothing, silently (GO-7).
-var cloneUnportedProperties = [...]string{"token", "NotDefinedTargeted", "TriggeredCards"}
+var cloneUnportedProperties = [...]string{"NotDefinedTargeted", "TriggeredCards"}
 
 // cloneSpec parses a Choices$/Valid spec, rejecting the properties
 // Matches cannot answer: cloneUnportedProperties, a ThisTurnEntered* name

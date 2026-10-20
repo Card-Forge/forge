@@ -559,3 +559,11 @@ parameters and returns an error for the empty list.
 so the "your next end step" text of Gut, Fanatical Priestess is not enforced: the token is sacrificed at the next end
 step of any player. In practice the tokens appear in the controller's own turn, so the first end step is theirs.
 Crucible reproduces it (`quirks.md`). Fix upstream: `ValidPlayer$ You` in place of `Player$ You`.
+
+## `FirstUpkeep$` and `FirstUpkeepThisGame$` never fire
+
+`PhaseHandler.onPhaseBegin` increments `nUpkeepsThisTurn` and `nUpkeepsThisGame` as the upkeep begins
+(`PhaseHandler.java:257-258`), before the phase triggers are checked, while `isFirstUpkeep` and `isFirstUpkeepThisGame`
+test for the counter being 0 (`:980-986`). A Phase trigger carrying `FirstUpkeep$` (one card) or `FirstUpkeepThisGame$`
+(two Command-zone cards) therefore never fires: "at the beginning of the first upkeep" does nothing. Crucible reproduces
+it (`triggerPhasesCheck` answers false). Fix upstream: compare against 1, or read the counters before the increment.

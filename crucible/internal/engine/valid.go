@@ -665,8 +665,17 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 			return err == nil && slices.Contains(players, c.Controller())
 		}
 		return ok && matched
-	case strings.HasPrefix(name, "leastPower"), strings.HasPrefix(name, "leastToughness"):
-		return leastStatMatches(g, c, name, sourceController, source)
+	case strings.HasPrefix(name, "leastPower"), strings.HasPrefix(name, "leastToughness"), strings.HasPrefix(name, "greatestPower"):
+		return extremeStatMatches(g, c, name, sourceController, source)
+	case strings.HasPrefix(name, "YourTeamCtrl"):
+		// CardProperty.java:182-185: the controller's team is the source
+		// controller's. This port has no team games, so a team is one player.
+		return c.Controller() == sourceController
+	case name == "NotedColor", name == "BorderColorSilver":
+		// CardProperty.java:1998-2007 reads the controller's draft notes, which
+		// a game here never has: no card carries the noted color. A card's border
+		// color is not in the database: none is silver-bordered.
+		return false
 	// canBeBeamedUp: no CantBeBeamedUp static covers c (Marooned).
 	case name == "canBeBeamedUp":
 		return !g.cantBeBeamedUp(c)
@@ -842,6 +851,10 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		return !c.Colors().IsColorless()
 	case "MultiColor":
 		return c.Colors().Count() > 1
+	}
+	if strings.HasPrefix(name, "MonoColor") {
+		// CardStateProperty.java:56-57: exactly one color.
+		return c.Colors().Count() == 1
 	}
 	if rest, ok := strings.CutPrefix(name, "non"); ok {
 		// CardStateProperty.java's own generic tail, reached once none of
@@ -1846,17 +1859,21 @@ func (g *Game) cantBeBeamedUp(c *Card) bool {
 	return false
 }
 
-// leastStatMatches is CardProperty.java:1233-1262's leastPower/leastToughness:
-// no creature on the battlefield has less power (toughness) than c. A
+// extremeStatMatches is CardProperty.java:1211-1262's greatestPower,
+// leastPower and leastToughness: no creature on the battlefield has more
+// (greatestPower) or less (the others) power or toughness than c. A
 // "ControlledBy<player spec>" suffix narrows the creatures compared to that
 // player's and requires c to be among them (Bolster's
 // "Creature.leastToughnessControlledByYou"). A spec Defined$ cannot read
 // matches nothing.
-func leastStatMatches(g *Game, c *Card, name string, sourceController PlayerID, source CardID) bool {
+func extremeStatMatches(g *Game, c *Card, name string, sourceController PlayerID, source CardID) bool {
 	stat := (*Card).Power
-	prefix := "leastPower"
-	if strings.HasPrefix(name, "leastToughness") {
+	prefix, greatest := "leastPower", false
+	switch {
+	case strings.HasPrefix(name, "leastToughness"):
 		stat, prefix = (*Card).Toughness, "leastToughness"
+	case strings.HasPrefix(name, "greatestPower"):
+		prefix, greatest = "greatestPower", true
 	}
 	var owners []PlayerID
 	limited := false
@@ -1885,7 +1902,7 @@ func leastStatMatches(g *Game, c *Card, name string, sourceController PlayerID, 
 			if id == c.ID {
 				inScope = true
 			}
-			if v, _ := stat(other); v < mine {
+			if v, _ := stat(other); (!greatest && v < mine) || (greatest && v > mine) {
 				return false
 			}
 		}

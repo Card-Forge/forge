@@ -4,7 +4,7 @@
 
 package engine
 
-//enginelint:allow id zone card game ability defined condition control effecthelpers
+//enginelint:allow id zone card game ability defined condition control effecthelpers resolvechoice
 
 import "fmt"
 
@@ -67,9 +67,8 @@ func (g *Game) endMustBlocks(endOfCombatOnly bool) {
 // A creature no longer on the battlefield is skipped (Java's
 // equalsWithGameTimestamp: a card that changed zones is a new object).
 //
-// Rejected: Choices$/Chooser$/ChoiceTitle$ (1 corpus line, its chooser
-// TriggeredDefendingPlayer not recorded by Mode$ Attacks here), and
-// Duration$ values other than UntilEndOfCombat (none in the corpus).
+// Choices$ with Chooser$ (Crashing Boars) lets the chooser pick the blocker.
+// Rejected: Duration$ values other than UntilEndOfCombat (none in the corpus).
 // DefinedAttacker$ ParentTarget and "Valid ..." fail in definedCards: a
 // sub-ability is not targeted separately from its parent (subability.go),
 // and definedCards has no valid-string form.
@@ -78,10 +77,7 @@ func (g *Game) endMustBlocks(endOfCombatOnly bool) {
 // resolve.
 type mustBlockEffect struct{}
 
-func (mustBlockEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "MustBlock", "Choices", "Chooser", "ChoiceTitle"); err != nil {
-		return err
-	}
+func (mustBlockEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
@@ -107,9 +103,37 @@ func (mustBlockEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if !hasParam(a, "BlockAllDefined") {
 		attackers = attackers[:1]
 	}
-	blockers, err := targetedOrDefinedCards(source, a.Params, a.refs())
-	if err != nil {
-		return fmt.Errorf("engine: MustBlock: %w", err)
+	var blockers []CardID
+	if spec, ok := a.Params.Param("Choices"); ok {
+		// MustBlockEffect.java:39-58: Chooser$ (default the activator) picks one
+		// battlefield card matching Choices$; none to pick is no requirement.
+		chooser := a.Controller
+		if raw, ok := a.Params.Param("Chooser"); ok {
+			players, err := definedPlayers(g, a.Controller, a.Source, raw, a.refs())
+			if err != nil {
+				return fmt.Errorf("engine: MustBlock: Chooser$: %w", err)
+			}
+			if len(players) == 0 {
+				return fmt.Errorf("engine: MustBlock: Chooser$ %q names no player", raw)
+			}
+			chooser = players[0]
+		}
+		choices, err := choiceCandidates(g, a, "MustBlock", []ZoneType{Battlefield}, spec)
+		if err != nil {
+			return err
+		}
+		if len(choices) > 0 {
+			picked, err := askChoiceCards(g, controller, a, "MustBlock", chooser, choices, 1, 1)
+			if err != nil {
+				return err
+			}
+			blockers = picked
+		}
+	} else {
+		var err error
+		if blockers, err = targetedOrDefinedCards(source, a.Params, a.refs()); err != nil {
+			return fmt.Errorf("engine: MustBlock: %w", err)
+		}
 	}
 	for _, id := range blockers {
 		c := g.Card(id)

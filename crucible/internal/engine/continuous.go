@@ -865,6 +865,9 @@ func pumpHiddenKeywords(g *Game) {
 	livePumps(g, func(c *Card, p *pumpRecord) {
 		c.hiddenKeywords = append(c.hiddenKeywords, p.Hidden...)
 	})
+	liveAnimates(g, func(c *Card, r *animateRecord) {
+		c.hiddenKeywords = append(c.hiddenKeywords, r.Hidden...)
+	})
 }
 
 // endNextUntapStepKeyword is Untap.doUntap's cleanup (Untap.java:157-161):

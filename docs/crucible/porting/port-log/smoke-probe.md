@@ -71,14 +71,14 @@ Measured on the full corpus (34,078 cards):
 
 Largest refusal causes over the full corpus (cards blocked):
 
-| Cards | Refusal |
-| ---: | --- |
-| 34 | `Charm: Defined$ not resolvable` |
-| 19 | `ChangeZone: DifferentNames$ not resolvable` |
-| 16 | `RepeatEach: DamageMap$ not resolvable` |
-| 15 | `ChangeZone: Defined$ not resolvable` |
-| 15 | `Counter: Defined$ not resolvable` |
-| 15 | `DelayedTrigger: Mode$ not resolvable` |
+| Cards | Refusal                                      |
+| ----: | -------------------------------------------- |
+|    34 | `Charm: Defined$ not resolvable`             |
+|    19 | `ChangeZone: DifferentNames$ not resolvable` |
+|    16 | `RepeatEach: DamageMap$ not resolvable`      |
+|    15 | `ChangeZone: Defined$ not resolvable`        |
+|    15 | `Counter: Defined$ not resolvable`           |
+|    15 | `DelayedTrigger: Mode$ not resolvable`       |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 

@@ -124,3 +124,19 @@ func TestAttachMoveOffersOnlyOtherHosts(t *testing.T) {
 		}
 	}
 }
+
+// Animate's HiddenKeywords$ (AnimateEffectBase.java:122-126) puts the hidden
+// keyword on the card for as long as the record lives.
+func TestAnimateHiddenKeywordsStopsABlocker(t *testing.T) {
+	t.Parallel()
+
+	g, a, _, blocker, attackers, pump := twoAttackerBlock(t)
+	g.SetTurnState(1, a, engine.Main1)
+	if !g.CanBlock(attackers[0], blocker) {
+		t.Fatal("the blocker cannot block before the animation")
+	}
+	pump("DB$ Animate | ValidTgts$ Creature | HiddenKeywords$ CARDNAME can't block.")
+	if g.CanBlock(attackers[0], blocker) {
+		t.Error("the animated blocker can still block")
+	}
+}

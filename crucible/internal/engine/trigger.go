@@ -2721,11 +2721,13 @@ func lifeTotalMatches(g *Game, host *Card, amounts map[string]expr.Amount, t *co
 // param's value is not read, as Java does not read it.
 //
 // Not resolved, each skipping the whole line rather than guessing (GO-7):
-// FirstUpkeep$ (1) / FirstUpkeepThisGame$ (2, both Mode$ Phase only) --
-// PhaseHandler.isFirstUpkeep/isFirstUpkeepThisGame's own per-turn/per-game
-// upkeep-step counters, unlike FirstCombat$ genuinely reachable as false on
-// any turn after the first even without a new mechanism, and this port
-// tracks neither; TurnCount$ (0 real lines, dormant).
+// FirstUpkeep$ (1) / FirstUpkeepThisGame$ (2, both Mode$ Phase only) are never
+// met, as in Java: PhaseHandler.onPhaseBegin increments nUpkeepsThisTurn and
+// nUpkeepsThisGame before the phase triggers are checked (PhaseHandler.java:
+// 257-258), and isFirstUpkeep/isFirstUpkeepThisGame ask for the counter to be 0
+// (:980-986), so no Phase trigger carrying either fires -- a Forge defect
+// (forge-java-defects.md) reproduced for parity; TurnCount$ (0 real lines,
+// dormant) skips the line the same way.
 func triggerPhasesCheck(g *Game, host *Card, t *compile.Ability) bool {
 	for _, key := range [...]string{"FirstUpkeep", "FirstUpkeepThisGame", "TurnCount"} {
 		if _, ok := t.Param(key); ok {

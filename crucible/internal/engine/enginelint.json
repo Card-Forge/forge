@@ -625,7 +625,8 @@
       "valid",
       "zone",
       "untilcommand",
-      "continuouslayers"
+      "continuouslayers",
+      "continuous"
     ],
     "delayedtrigger": ["ability", "card", "game", "id", "player", "trigger", "valid", "zone"],
     "ateot": ["ability", "delayedtrigger", "effecthelpers", "game", "id", "animate", "becomemonarcheffect", "card"],

@@ -469,10 +469,37 @@ func TestMustBlockFromAnAttackTriggerEndsWithCombat(t *testing.T) {
 	}
 }
 
+// Choices$ with Chooser$ TriggeredDefendingPlayer (Crashing Boars): the
+// defending player picks which of their untapped creatures must block it
+// (MustBlockEffect.java:39-58).
+func TestMustBlockChoicesLetsTheDefenderPickTheBlocker(t *testing.T) {
+	t.Parallel()
+	g, a, b := combatGame(t)
+	def := combatCreatureDef(t, "Boars", nil,
+		[]string{"Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMustBlock"},
+		"TrigMustBlock", "DB$ MustBlock | Choices$ Creature.untapped+DefenderCtrl | Chooser$ TriggeredDefendingPlayer | Duration$ UntilEndOfCombat")
+	attacker := g.NewCard(def, a, engine.Battlefield)
+	first := g.NewCard(creatureDefPT(t, "2", "2"), b, engine.Battlefield)
+	second := g.NewCard(creatureDefPT(t, "2", "2"), b, engine.Battlefield)
+
+	ac := engine.NewScriptedController()
+	ac.QueueAttackers([]engine.CardID{attacker})
+	ac.QueueCardChoice([]engine.CardID{second})
+	declareAttackers(t, g, ac)
+	if err := g.ResolveStack(engine.NewRegistry(), ac); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if got := g.Card(second).MustBlockAttackers(); len(got) != 1 || got[0] != attacker {
+		t.Errorf("the chosen creature must block = %v, want the attacker", got)
+	}
+	if got := g.Card(first).MustBlockAttackers(); got != nil {
+		t.Errorf("the other creature must block = %v, want none", got)
+	}
+}
+
 func TestMustBlockEffectRejectsUnportedShapes(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct{ line, want string }{
-		{"DB$ MustBlock | Choices$ Creature | Chooser$ TriggeredDefendingPlayer", "Choices$ not resolvable yet"},
 		{"DB$ MustBlock | ValidTgts$ Creature | Duration$ UntilYourNextTurn", `Duration$ "UntilYourNextTurn" not resolvable yet`},
 		{"DB$ MustBlock | ValidTgts$ Creature | DefinedAttacker$ ParentTarget", "DefinedAttacker$"},
 	} {

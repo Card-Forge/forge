@@ -18,14 +18,16 @@
 
 package engine
 
-//enginelint:allow id card game player ability event defined amount condition parts control resolvechoice
+//enginelint:allow id card game player ability event defined amount condition parts control resolvechoice attackconstraints continuouslayers effecthelpers valid zone
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 	"github.com/jczastkiewicz/crucible/internal/keyword"
+	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
 // putCounterUnresolvedParams names CountersPutEffect's own params past
@@ -66,13 +68,11 @@ import (
 // end to end.
 var putCounterUnresolvedParams = [...]string{
 	"ETB",
-	"ChoiceOptional",
-	"DividedRandomly", "SplitAmount",
-	"EachFromSource", "PutOnEachOther", "PutOnDefined", "ChooseDifferent", "EachExistingCounter", "UniqueType",
-	"CounterTypePerDefined", "CounterNumPerDefined", "OnlyNewKind", "RandomType",
-	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
+	"DividedRandomly",
+	"EachFromSource", "ChooseDifferent",
+	"ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
 	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
-	"RemovePhase", "UpTo", "UpToMin",
+	"RemovePhase",
 	"ConditionActivationLimit",
 }
 
@@ -144,15 +144,20 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	case isBolster:
 		counterType, counterNum = P1P1, bolster
 	default:
-		var err error
-		if counterType, err = putCounterType(a.Params); err != nil {
-			return err
+		// CounterTypes$, ExistingCounter and the per-object type choices pick the
+		// kind per target (counterKindPlan); no single kind is read here.
+		if !counterKindsPerObject(a.Params) {
+			var err error
+			if counterType, err = putCounterType(a.Params); err != nil {
+				return err
+			}
 		}
 		var ok bool
 		if counterNum, ok = a.Params.Param("CounterNum"); !ok {
 			counterNum = "1"
 		}
 	}
+	plan := g.counterKindPlan(controller, a, counterType)
 	amount, ok := resolveNamedAmount(g, a.Amounts, source, counterNum)
 	if !ok {
 		return fmt.Errorf("engine: PutCounter: CounterNum$ %q is not resolvable", counterNum)
@@ -252,30 +257,36 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	remember := rememberCards || rememberPut
 	for i, cid := range cards {
 		// CountersPutEffect.java:485-489: Adapt skips a creature that has +1/+1
-		// counters (CanAdapt statics are not modelled), Monstrosity one that is
-		// already monstrous.
-		if isAdapt && g.Card(cid).Counters.Count(P1P1) > 0 || isMonstrosity && g.Card(cid).monstrous {
+		// counters unless a Mode$ CanAdapt static lets it adapt anyway,
+		// Monstrosity one that is already monstrous.
+		if isAdapt && g.Card(cid).Counters.Count(P1P1) > 0 && !g.anyWithAdapt(cid) || isMonstrosity && g.Card(cid).monstrous {
 			continue
 		}
-		n := g.countersReplaced(controller, placer, CardEntity(cid), counterType, amounts[i])
-		if n <= 0 {
-			continue
+		kinds, err := plan(CardEntity(cid), amounts[i])
+		if err != nil {
+			return err
 		}
-		total += n
-		g.addCardCounters(controller, placer, a.Source, cid, counterType, n)
-		if remember {
-			// CountersPutEffect.java:658-660: the cards that got counters.
-			source.Memory.Remember(CardEntity(cid))
-		}
-		if a.evolve != NoCard && counterType == P1P1 {
-			// Card.java:1823: the evolve ability's +1/+1 counters made the
-			// creature evolve (CR 702.100b).
-			g.checkEvolvedTriggers(controller, cid)
-		}
-		if isMonstrosity {
-			// :543-548.
-			g.Card(cid).monstrous = true
-			g.checkMonstrousTriggers(controller, cid)
+		for _, k := range kinds {
+			n := g.countersReplaced(controller, placer, CardEntity(cid), k.kind, k.n)
+			if n <= 0 {
+				continue
+			}
+			total += n
+			g.addCardCounters(controller, placer, a.Source, cid, k.kind, n)
+			if remember {
+				// CountersPutEffect.java:658-660: the cards that got counters.
+				source.Memory.Remember(CardEntity(cid))
+			}
+			if a.evolve != NoCard && k.kind == P1P1 {
+				// Card.java:1823: the evolve ability's +1/+1 counters made the
+				// creature evolve (CR 702.100b).
+				g.checkEvolvedTriggers(controller, cid)
+			}
+			if isMonstrosity {
+				// :543-548.
+				g.Card(cid).monstrous = true
+				g.checkMonstrousTriggers(controller, cid)
+			}
 		}
 	}
 	if keyword.Parse(a.Params.Keyword).Name == "Renown" {
@@ -285,16 +296,22 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		}
 	}
 	for _, pid := range players {
-		n := g.countersReplaced(controller, placer, PlayerEntity(pid), counterType, amount)
-		if n <= 0 {
-			continue
+		kinds, err := plan(PlayerEntity(pid), amount)
+		if err != nil {
+			return err
 		}
-		total += n
-		if rememberPut {
-			source.Memory.Remember(PlayerEntity(pid))
+		for _, k := range kinds {
+			n := g.countersReplaced(controller, placer, PlayerEntity(pid), k.kind, k.n)
+			if n <= 0 {
+				continue
+			}
+			total += n
+			if rememberPut {
+				source.Memory.Remember(PlayerEntity(pid))
+			}
+			g.Player(pid).Counters.Add(k.kind, n)
+			emitCounterChanged(g, a.Source, PlayerEntity(pid), k.kind, n)
 		}
-		g.Player(pid).Counters.Add(counterType, n)
-		emitCounterChanged(g, a.Source, PlayerEntity(pid), counterType, n)
 	}
 	if rememberAmount && total > 0 {
 		// GameEntityCounterTable.java:181-184: the host remembers the total as
@@ -400,6 +417,11 @@ func (g *Game) putCounterChoice(controller PlayerController, a *Ability, spec st
 			return nil, nil, fmt.Errorf("engine: PutCounter: MinChoiceAmount$ %q is not resolvable", raw)
 		}
 	}
+	if hasParam(a, "ChoiceOptional") {
+		// chooseCardsForEffect(..., optional, ...) (CountersPutEffect.java:241):
+		// the chooser may pick none.
+		lo = 0
+	}
 	if n <= 0 {
 		return nil, nil, nil
 	}
@@ -446,4 +468,243 @@ func (g *Game) putCounterChoice(controller PlayerController, a *Ability, spec st
 		remaining -= shares[i]
 	}
 	return cards, shares, nil
+}
+
+// counterKindsPerObject reports whether the line chooses the counter kind for
+// each object it puts counters on: CounterTypes$, CounterType$ ExistingCounter,
+// and a CounterType$ list under CounterTypePerDefined$ or UniqueType$.
+func counterKindsPerObject(a *compile.Ability) bool {
+	if hasParamOn(a, "CounterTypes") || hasParamOn(a, "CounterTypePerDefined") || hasParamOn(a, "UniqueType") {
+		return true
+	}
+	raw, _ := a.Param("CounterType")
+	return raw == "ExistingCounter"
+}
+
+// counterKind is one kind of counter an object is to get, and how many.
+type counterKind struct {
+	kind CounterType
+	n    int
+}
+
+// counterKindPlan is CountersPutEffect.resolvePerType's per-object choice of
+// kinds (:300-470): given the entity and the amount it is to get, the counters
+// to place. Without a per-object shape it is the one counterType, amount times.
+//
+//   - CounterTypes$ lists the kinds, each getting the amount; ChosenFromList
+//     names one the activator picks from TypeList$; SplitAmount$ lets them split
+//     the amount (all but the last choose a number, the last takes the rest). An
+//     EachType_ entry reads the counters in play and is not resolved.
+//   - CounterType$ ExistingCounter picks among the kinds the object already has:
+//     every one under EachExistingCounter$, the only one, or the activator's
+//     choice. PutOnEachOther$ puts the picked kind on every other card its valid
+//     string names, PutOnDefined$ on the cards Defined names (OnlyNewKind$:
+//     those without it), and the object itself gets nothing.
+//   - CounterTypePerDefined$/UniqueType$ choose a kind from the CounterType$
+//     list for each object (UniqueType$: only one it has none of, RandomType$:
+//     at random), CounterNumPerDefined$ reading the amount off the target card.
+//
+// UpTo$ asks the activator for the amount of a card (UpToMin$ down to).
+func (g *Game) counterKindPlan(controller PlayerController, a *Ability, counterType CounterType) func(target EntityID, amount int) ([]counterKind, error) {
+	source := g.Card(a.Source)
+	placer, _ := putCounterPlacer(g, a)
+	listChoice := func(list string, target EntityID) (CounterType, bool) {
+		var choices []CounterType
+		for _, s := range strings.Split(list, ",") {
+			if s == "" {
+				continue
+			}
+			ct := CounterType(strings.ToUpper(s))
+			if hasParam(a, "UniqueType") && g.entityCounters(target).Count(ct) != 0 {
+				continue
+			}
+			if !slices.Contains(choices, ct) {
+				choices = append(choices, ct)
+			}
+		}
+		if len(choices) == 0 {
+			return "", false
+		}
+		if hasParam(a, "RandomType") {
+			return choices[g.rand.Int32n(int32(len(choices)))], true
+		}
+		names := make([]string, len(choices))
+		for i, c := range choices {
+			names[i] = string(c)
+		}
+		pick := controller.ChooseOption(g, a.Controller, a.Source, names)
+		if pick < 0 || pick >= len(choices) {
+			pick = 0
+		}
+		return choices[pick], true
+	}
+	return func(target EntityID, amount int) ([]counterKind, error) {
+		card, isCard := target.AsCard()
+		if raw, ok := a.Params.Param("CounterNumPerDefined"); ok && isCard {
+			n, ok := resolveNamedAmount(g, a.Amounts, g.Card(card), raw)
+			if !ok {
+				return nil, fmt.Errorf("engine: PutCounter: CounterNumPerDefined$ %q is not resolvable", raw)
+			}
+			amount = n
+		}
+		if hasParam(a, "UpTo") && isCard {
+			lo := 0
+			if raw, ok := a.Params.Param("UpToMin"); ok {
+				if lo, ok = resolveNamedAmount(g, a.Amounts, source, raw); !ok {
+					return nil, fmt.Errorf("engine: PutCounter: UpToMin$ %q is not resolvable", raw)
+				}
+			}
+			if amount > lo {
+				picked := controller.ChooseNumber(g, a.Controller, a.Source, lo, amount)
+				if picked < lo || picked > amount {
+					return nil, fmt.Errorf("engine: PutCounter: %d is not within %d..%d", picked, lo, amount)
+				}
+				amount = picked
+			}
+		}
+		switch {
+		case hasParam(a, "CounterTypes"):
+			list, _ := a.Params.Param("CounterTypes")
+			var kinds []CounterType
+			if strings.Contains(list, "ChosenFromList") {
+				typeList, _ := a.Params.Param("TypeList")
+				if ct, ok := listChoice(typeList, target); ok {
+					kinds = append(kinds, ct)
+				}
+				list = strings.ReplaceAll(list, "ChosenFromList", "")
+			}
+			for _, word := range strings.Split(list, ",") {
+				if word == "" {
+					continue
+				}
+				if strings.Contains(word, "EachType") {
+					return nil, fmt.Errorf("engine: PutCounter: CounterTypes$ %q not resolvable yet", word)
+				}
+				kinds = append(kinds, CounterType(strings.ToUpper(word)))
+			}
+			remaining := amount
+			out := make([]counterKind, 0, len(kinds))
+			for i, ct := range kinds {
+				n := amount
+				if hasParam(a, "SplitAmount") {
+					if len(kinds)-i > 1 {
+						n = controller.ChooseNumber(g, a.Controller, a.Source, 0, remaining)
+						if n < 0 || n > remaining {
+							return nil, fmt.Errorf("engine: PutCounter: %d is not within 0..%d", n, remaining)
+						}
+						if n == 0 {
+							continue
+						}
+						remaining -= n
+					} else {
+						n = remaining
+					}
+				}
+				out = append(out, counterKind{ct, n})
+			}
+			return out, nil
+		case counterKindsPerObject(a.Params) && !hasParam(a, "CounterTypePerDefined") && !hasParam(a, "UniqueType"):
+			// CounterType$ ExistingCounter.
+			var choices []CounterType
+			for _, ct := range g.entityCounters(target).Kinds() {
+				if g.entityCounters(target).Count(ct) > 0 && (!g.cantPutCounter(target, ct) || hasParam(a, "PutOnEachOther")) {
+					choices = append(choices, ct)
+				}
+			}
+			if hasParam(a, "EachExistingCounter") {
+				out := make([]counterKind, len(choices))
+				for i, ct := range choices {
+					out[i] = counterKind{ct, amount}
+				}
+				return out, nil
+			}
+			var chosen CounterType
+			switch len(choices) {
+			case 0:
+				return nil, nil
+			case 1:
+				chosen = choices[0]
+			default:
+				names := make([]string, len(choices))
+				for i, c := range choices {
+					names[i] = string(c)
+				}
+				pick := controller.ChooseOption(g, a.Controller, a.Source, names)
+				if pick < 0 || pick >= len(choices) {
+					pick = 0
+				}
+				chosen = choices[pick]
+			}
+			if spec, ok := a.Params.Param("PutOnEachOther"); ok {
+				parsed := valid.Parse(spec)
+				for _, pid := range g.Players() {
+					for _, other := range append([]CardID(nil), g.Zone(Battlefield, pid).Cards()...) {
+						if CardEntity(other) == target || !Matches(g, g.Card(other), parsed, a.Controller, a.Source) {
+							continue
+						}
+						g.putOneKind(controller, placer, a, other, chosen, amount)
+					}
+				}
+				return nil, nil
+			}
+			if spec, ok := a.Params.Param("PutOnDefined"); ok {
+				defs, err := definedCards(source, spec, a.refs())
+				if err != nil {
+					return nil, fmt.Errorf("engine: PutCounter: PutOnDefined$: %w", err)
+				}
+				for _, other := range defs {
+					if !hasParam(a, "OnlyNewKind") || g.Card(other).Counters.Count(chosen) < 1 {
+						g.putOneKind(controller, placer, a, other, chosen, amount)
+					}
+				}
+				return nil, nil
+			}
+			return []counterKind{{chosen, amount}}, nil
+		case hasParam(a, "CounterTypePerDefined") || hasParam(a, "UniqueType"):
+			list, _ := a.Params.Param("CounterType")
+			ct, ok := listChoice(list, target)
+			if !ok {
+				return nil, nil
+			}
+			return []counterKind{{ct, amount}}, nil
+		}
+		return []counterKind{{counterType, amount}}, nil
+	}
+}
+
+// putOneKind puts amount counters of kind on card through the AddCounter
+// replacements, as the per-object loop does for its own targets.
+func (g *Game) putOneKind(controller PlayerController, placer PlayerID, a *Ability, card CardID, kind CounterType, amount int) {
+	if n := g.countersReplaced(controller, placer, CardEntity(card), kind, amount); n > 0 {
+		g.addCardCounters(controller, placer, a.Source, card, kind, n)
+	}
+}
+
+// entityCounters is the counter table of a card or a player.
+func (g *Game) entityCounters(e EntityID) *Counters {
+	if id, ok := e.AsCard(); ok {
+		return &g.Card(id).Counters
+	}
+	pid, _ := e.AsPlayer()
+	return &g.Player(pid).Counters
+}
+
+// anyWithAdapt is StaticAbilityAdapt.anyWithAdapt: a Mode$ CanAdapt static in
+// play whose ValidCard$ names card lets it adapt as though it had no +1/+1
+// counters. A ValidSA$ on the static is not evaluated and reads as no match.
+func (g *Game) anyWithAdapt(card CardID) bool {
+	for _, pid := range g.Players() {
+		for _, host := range g.traitHosts(pid) {
+			h := g.Card(host)
+			for _, face := range h.traitFaces() {
+				for _, s := range face.Statics {
+					if strings.EqualFold(s.Name, "CanAdapt") && !hasParamOn(s, "ValidSA") &&
+						g.staticConditionsMet(h, s) && staticValidMatches(g, h, s, "ValidCard", card) {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
 }
