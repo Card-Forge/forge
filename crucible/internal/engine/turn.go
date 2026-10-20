@@ -657,7 +657,9 @@ func (g *Game) cleanupStep(controller PlayerController) {
 	// (PhaseHandler.java:400, Game.java:1236) -- ADR-0021's cleanup opt-in.
 	for _, pid := range g.Players() {
 		for _, id := range g.Zone(Battlefield, pid).CardsIncludingPhasedOut() {
-			g.Card(id).Damage.Clear()
+			if !g.damageNotRemoved(id) {
+				g.Card(id).Damage.Clear()
+			}
 			g.Card(id).AttacksThisTurn = 0
 			g.Card(id).BecameTargetThisTurn = false
 			g.Card(id).blockedByThisTurn = nil

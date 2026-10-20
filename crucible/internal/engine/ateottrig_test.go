@@ -146,3 +146,29 @@ func TestConditionActivationLimitCountsTheRootAbility(t *testing.T) {
 		}
 	}
 }
+
+// CopyPermanent's AddStaticAbilities$ gives the copy a static the original
+// lacks (CardFactory.java:633-682, as Clone's except does).
+func TestCopyPermanentAddsAStaticToTheCopy(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTokenGame(t)
+	orig := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	host, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(orig)},
+		"DB$ CopyPermanent | ValidTgts$ Creature | AddStaticAbilities$ Big | RememberTokens$ True",
+		"Big", "Mode$ Continuous | Affected$ Card.Self | AddPower$ 4")
+	if err != nil {
+		t.Fatal(err)
+	}
+	copyID, ok := g.Card(host).Memory.Remembered()[0].AsCard()
+	if !ok {
+		t.Fatal("no copy remembered")
+	}
+	sba(g)
+	if got, _ := g.Card(copyID).Power(); got != 5 {
+		t.Errorf("copy power = %d, want 5", got)
+	}
+	if got, _ := g.Card(orig).Power(); got != 1 {
+		t.Errorf("original power = %d, want 1", got)
+	}
+}

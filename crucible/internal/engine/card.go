@@ -444,6 +444,10 @@ type Card struct {
 	// for good (PerpetualIncorporate, kept across zones): its mana cost is the
 	// printed one plus each, its colors include theirs.
 	incorporated []mana.Cost
+	// costOverride is a Duration$ Perpetual Animate's ManaCost$ (PerpetualManaCost):
+	// the cost the card has instead of its printed one, nil for none. Colors stay
+	// the printed cost's, as Java keeps them apart.
+	costOverride *mana.Cost
 	// stickers is Card.stickers (Card.java:4617): what has been placed on this
 	// card, in placement order (ADR-0044). A move into a hidden zone clears it
 	// (put); one into a public zone keeps it (GameAction.java:268-270).
@@ -984,6 +988,9 @@ func (c *Card) Colors() mana.Colors {
 // added (Card.addChangedManaCost, additional).
 func (c *Card) manaCost() mana.Cost {
 	base := c.Def.Faces[0].ManaCost
+	if c.costOverride != nil {
+		base = *c.costOverride
+	}
 	if len(c.incorporated) == 0 {
 		return base
 	}

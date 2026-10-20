@@ -650,16 +650,7 @@ func cloneDef(g *Game, a *Ability, origin cloneOrigin, out *Card) (*compile.Card
 	// AddTriggers$, AddAbilities$, AddStaticAbilities$, then
 	// GainThisAbility$ (CardFactory.java:633-682).
 	f := &def.Faces[0]
-	for _, sub := range a.Params.Subs {
-		switch {
-		case strings.EqualFold(sub.Key, "AddTriggers"):
-			f.Triggers = append(append([]*compile.Ability(nil), f.Triggers...), sub.Ability)
-		case strings.EqualFold(sub.Key, "AddAbilities"):
-			f.Abilities = append(append([]*compile.Ability(nil), f.Abilities...), sub.Ability)
-		case strings.EqualFold(sub.Key, "AddStaticAbilities"):
-			f.Statics = append(append([]*compile.Ability(nil), f.Statics...), sub.Ability)
-		}
-	}
+	addGainedTraits(f, a)
 	if ch.gain != nil {
 		switch ch.gainKind {
 		case compile.Trigger:
@@ -980,4 +971,20 @@ func abilityTreeHolds(root, target *compile.Ability) bool {
 		}
 	}
 	return false
+}
+
+// addGainedTraits adds the traits AddTriggers$, AddAbilities$ and
+// AddStaticAbilities$ name (compile followed them as Subs) to f, in Java's
+// order (CardFactory.java:633-682).
+func addGainedTraits(f *compile.Face, a *Ability) {
+	for _, sub := range a.Params.Subs {
+		switch {
+		case strings.EqualFold(sub.Key, "AddTriggers"):
+			f.Triggers = append(append([]*compile.Ability(nil), f.Triggers...), sub.Ability)
+		case strings.EqualFold(sub.Key, "AddAbilities"):
+			f.Abilities = append(append([]*compile.Ability(nil), f.Abilities...), sub.Ability)
+		case strings.EqualFold(sub.Key, "AddStaticAbilities"):
+			f.Statics = append(append([]*compile.Ability(nil), f.Statics...), sub.Ability)
+		}
+	}
 }

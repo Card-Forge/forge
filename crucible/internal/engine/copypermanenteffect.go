@@ -33,9 +33,9 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		return err
 	}
 	if err := rejectParams(a, "CopyPermanent",
-		"AttachedTo", "AddTriggers", "ValidSupportedCopy",
+		"AttachedTo", "ValidSupportedCopy",
 		"RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
-		"ChangeZoneTable", "AddAbilities", "AddStaticAbilities", "ChosenMapIndex",
+		"ChangeZoneTable", "ChosenMapIndex",
 		"RemoveCreatureTypes", "SetCardTypes", "GainThisAbility", "AddTypesTo",
 		"CopyIsColor", "SetManaCost", "SetImageKey"); err != nil {
 		return err
@@ -241,7 +241,8 @@ func copyBaseValue(g *Game, a *Ability, source *Card, key string) (int, bool, er
 func copyExceptDef(g *Game, a *Ability, base *compile.Card) (*compile.Card, error) {
 	excepting := false
 	for _, key := range [...]string{"AddTypes", "AddKeywords", "NonLegendary", "SetColor", "AddColors",
-		"RemoveCardTypes", "AddSVars", "NewName", "SetPower", "SetToughness", "RemoveCost", "SetCreatureTypes"} {
+		"RemoveCardTypes", "AddSVars", "NewName", "SetPower", "SetToughness", "RemoveCost", "SetCreatureTypes",
+		"AddTriggers", "AddAbilities", "AddStaticAbilities"} {
 		excepting = excepting || hasParam(a, key)
 	}
 	if !excepting {
@@ -254,6 +255,7 @@ func copyExceptDef(g *Game, a *Ability, base *compile.Card) (*compile.Card, erro
 	def := &compile.Card{Filename: base.Filename, Name: base.Name}
 	def.Faces[0] = base.Faces[0]
 	ch.apply(&def.Faces[0], nil, &base.Faces[0])
+	addGainedTraits(&def.Faces[0], a)
 	if ch.hasNewName {
 		def.Name = ch.newName
 	}

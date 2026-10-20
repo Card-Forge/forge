@@ -246,3 +246,43 @@ func (g *Game) cantPlayLandApplies(pid PlayerID, c, host *Card, s *compile.Abili
 	}
 	return true
 }
+
+// damageNotRemoved is StaticAbilityNoCleanupDamage.damageNotRemoved: some
+// Mode$ NoCleanupDamage static names card (ValidCard$, every card when absent),
+// so the cleanup step leaves its damage on it. The card's own statics count
+// (staticHostsWith). A line carrying a param other than ValidCard$ and the
+// cosmetic ones is not applied (GO-7).
+func (g *Game) damageNotRemoved(card CardID) bool {
+	c := g.Card(card)
+	for _, host := range g.staticHostsWith(card) {
+		h := g.Card(host)
+		if h.Def == nil {
+			continue
+		}
+		for _, face := range h.traitFaces() {
+			for _, s := range face.Statics {
+				if !strings.EqualFold(s.Name, "NoCleanupDamage") || !g.staticConditionsMet(h, s) {
+					continue
+				}
+				if !onlyStaticParams(s, "mode", "validcard", "description", "secondary", "effectzone", "condition") {
+					continue
+				}
+				if v, ok := s.Param("ValidCard"); ok && !Matches(g, c, valid.Parse(v), h.Controller(), h.ID) {
+					continue
+				}
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// onlyStaticParams reports whether every param of s is one of keys (folded).
+func onlyStaticParams(s *compile.Ability, keys ...string) bool {
+	for _, p := range s.Params {
+		if !slices.Contains(keys, strings.ToLower(p.Key)) {
+			return false
+		}
+	}
+	return true
+}

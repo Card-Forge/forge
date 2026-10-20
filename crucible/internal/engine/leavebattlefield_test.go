@@ -66,3 +66,24 @@ func TestIncorporateAddsCostAndColors(t *testing.T) {
 		t.Errorf("mana value after a zone change = %d, want it kept", got)
 	}
 }
+
+// A Perpetual Animate's ManaCost$ replaces the card's mana cost for good and
+// leaves its colors (Thought Partition); without Perpetual it does nothing.
+func TestAnimateManaCostIsPerpetualOnly(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		duration string
+		want     int
+	}{{"Perpetual", 5}, {"Permanent", 2}} {
+		g, p, _ := newTwoPlayerGame(t)
+		card := g.NewCard(creatureDefCost(t, "Plain", "2"), p, engine.Hand)
+		if _, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(card)},
+			"DB$ Animate | Defined$ Targeted | ManaCost$ 5 | Duration$ "+tc.duration); err != nil {
+			t.Fatal(err)
+		}
+		if got := g.Card(card).CMC(); got != tc.want {
+			t.Errorf("%s: mana value = %d, want %d", tc.duration, got, tc.want)
+		}
+	}
+}

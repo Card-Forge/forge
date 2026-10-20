@@ -826,7 +826,7 @@ func (c *faceCompiler) references(a *Ability, p vocab.Param) ([]string, bool) {
 		return splitTrim(p.Value, ","), true
 	case effectTraitKeys[strings.ToLower(p.Key)] && a.Name == "Effect":
 		return splitTrim(p.Value, ","), true
-	case cloneTraitKeys[strings.ToLower(p.Key)] && a.Name == "Clone":
+	case cloneTraitKeys[strings.ToLower(p.Key)] && (a.Name == "Clone" || a.Name == "CopyPermanent"):
 		return splitTrim(p.Value, ","), true
 	case isAnimateGrant(a, p):
 		return splitTrim(p.Value, ","), true
@@ -947,7 +947,8 @@ var effectTraitKeys = map[string]bool{
 // out of the host's SVars (CardFactory.java:633-665). Compiled here so the
 // engine adds compiled abilities to the copy instead of reparsing script
 // text at resolution (PORT-2). Gated on Clone for the reason effectTraitKeys
-// is gated on Effect.
+// is gated on Effect. CopyPermanent reads the same keys for its copies'
+// "except" (copyExceptDef).
 var cloneTraitKeys = map[string]bool{
 	"addtriggers":        true,
 	"addabilities":       true,

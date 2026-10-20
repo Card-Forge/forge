@@ -74,10 +74,25 @@ func (g *Game) leaveBattlefieldFor(a *Ability, api string, cards []CardID) error
 	return nil
 }
 
-// incorporateInto is AnimateEffectBase.doAnimate's Incorporate$ (:92-98, an
-// Alchemy "incorporate" cost): each card still in a zone gains the cost for
+// incorporateInto is AnimateEffectBase.doAnimate's ManaCost$ (:103-110) and
+// Incorporate$ (:92-98, an Alchemy "incorporate" cost): each card still in a zone gains the cost for
 // good, its mana cost the printed one plus it and its colors the cost's.
 func (g *Game) incorporateInto(a *Ability, api string, cards []CardID) error {
+	if raw, ok := a.Params.Param("ManaCost"); ok {
+		// AnimateEffectBase.java:103-110: only a Perpetual Animate changes the
+		// cost; any other Duration$ does nothing with it.
+		if d, _ := a.Params.Param("Duration"); d == "Perpetual" {
+			cost, err := mana.Parse(raw)
+			if err != nil {
+				return fmt.Errorf("engine: %s: ManaCost$ %q: %w", api, raw, err)
+			}
+			for _, id := range cards {
+				if c := g.Card(id); c.Zone != None && !c.IsPhasedOut() {
+					c.costOverride = &cost
+				}
+			}
+		}
+	}
 	raw, ok := a.Params.Param("Incorporate")
 	if !ok {
 		return nil
