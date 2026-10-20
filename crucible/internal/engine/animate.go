@@ -57,6 +57,18 @@ type animateRecord struct {
 	// never edited: Clone copies the record by value.
 	abilities      []*compile.Ability
 	abilityAmounts map[string]expr.Amount
+	// statics are the continuous and rule statics a staticAbilities$ grants
+	// (AnimateEffectBase.java:171-179): layer-6 trait rows like abilities, in
+	// whatever zone the card is (a ReduceCost on a card in hand), compiled at
+	// load (PORT-2). Shared, never edited.
+	statics []*compile.Ability
+	// Perpetual is Duration$ Perpetual on a characteristic, ability or static
+	// change (PerpetualPTBoost, PerpetualTypes, ... AnimateEffectBase.java:
+	// 51-235): the record survives every zone change (clearAnimates), and is
+	// Permanent so cleanup keeps it. Its characteristic halves read the card
+	// only on the battlefield, where this port evaluates layers; its trait half
+	// (abilities, triggers, statics) in every zone.
+	Perpetual bool
 	// triggers are the triggers a Triggers$ without Duration$ Perpetual
 	// grants (AnimateEffect.java:127-130): read through traitGrants while the
 	// record lives, so they end with it (cleanup, or Permanent: never) and
@@ -141,14 +153,22 @@ func animateKeywords(g *Game) {
 // like the continuous ones). It runs where animateKeywords does, before the
 // statics' own Layer 6 grants and removals, which then apply over it.
 func animateAbilities(g *Game) {
-	liveAnimates(g, func(c *Card, r *animateRecord) {
-		if r.removeAbilities != removalNone {
+	for i := range g.animates {
+		r := &g.animates[i]
+		c := g.Card(r.Card)
+		// The trait half reads the card in any zone (a ReduceCost on a card in
+		// hand is read by spellCost), the removals only where layers run.
+		if c.IsPhasedOut() || c.Zone == None {
+			continue
+		}
+		if r.removeAbilities != removalNone && c.Zone == Battlefield {
 			c.removeTraits(r.removeAbilities)
 		}
-		if len(r.abilities) > 0 || len(r.triggers) > 0 {
-			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...), traitGrant{abilities: r.abilities, triggers: r.triggers, amounts: r.abilityAmounts})
+		if len(r.abilities) > 0 || len(r.triggers) > 0 || len(r.statics) > 0 {
+			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...),
+				traitGrant{abilities: r.abilities, triggers: r.triggers, statics: r.statics, amounts: r.abilityAmounts})
 		}
-	})
+	}
 }
 
 // animatePT is applyAnimateEffects' Layer 7b half.
@@ -179,11 +199,13 @@ func (g *Game) addAnimate(r animateRecord) {
 
 // clearAnimates drops every animateRecord naming id -- clearPumps' own
 // reason (game.go): a CardID survives a zone change here, so a Permanent
-// record would otherwise reapply to the card when it returns.
+// record would otherwise reapply to the card when it returns. A Perpetual
+// record is the exception: Java re-applies the card's perpetual list to the
+// new object (GameAction.java:265-266).
 func (g *Game) clearAnimates(id CardID) {
 	kept := g.animates[:0]
 	for _, r := range g.animates {
-		if r.Card != id {
+		if r.Card != id || r.Perpetual {
 			kept = append(kept, r)
 		}
 	}
@@ -222,21 +244,17 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 }
 
 // animateUnresolvedParams are the doAnimate/AnimateEffect params this port
-// does not model: granted statics and SVars (neither is compiled at load
-// yet, PORT-2 -- Triggers$, Replacements$ and Abilities$ are,
-// animateTriggerGrants and animateAbilityGrants), TransferActivator$'s
-// "only you may activate" on a granted ability (Martyrdom), hidden keywords,
-// "can't have" keywords, removing one named ability, all creature types, a
-// renaming, mana-cost changes, a revert cost, a leave-the-battlefield
-// replacement, what the animated card remembers or imprints, an Optional$
-// confirmation. Condition$ is
-// the two effects' own (rejectUnreadCondition, then subAbilityConditionMet).
+// does not model: SVars (sVars$), TransferActivator$'s "only you may activate"
+// on a granted ability (Martyrdom), hidden keywords, "can't have" keywords,
+// removing one named ability, a renaming, mana-cost changes (Incorporate$ and
+// ManaCost$), a revert cost, a leave-the-battlefield replacement, and what the
+// animated card remembers or imprints. Condition$ is the two effects' own
+// (rejectUnreadCondition, then subAbilityConditionMet).
 var animateUnresolvedParams = [...]string{
-	"staticAbilities", "sVars", "HiddenKeywords", "TransferActivator",
+	"sVars", "HiddenKeywords", "TransferActivator",
 	"CantHaveKeyword", "RemoveThisAbility",
-	"AddAllCreatureTypes", "Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
-	"RememberObjects", "ImprintCards", "Optional", "OptionQuestion", "TgtZone",
-	"ConditionDefined",
+	"Name", "ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
+	"RememberObjects", "ImprintCards",
 }
 
 // animateDuration reads Duration$ for an Animate-shaped record: absent ends at
@@ -284,10 +302,10 @@ func buildAnimate(g *Game, a *Ability, api string) (animateRecord, []*compile.Ab
 		return r, nil, err
 	}
 	r.triggers = timed
-	if grants == nil {
-		if r.Permanent, r.until, err = animateDuration(a, api); err != nil {
-			return r, nil, err
-		}
+	if d, _ := a.Params.Param("Duration"); d == "Perpetual" {
+		r.Permanent, r.Perpetual = true, true
+	} else if r.Permanent, r.until, err = animateDuration(a, api); err != nil {
+		return r, nil, err
 	}
 	r, err = buildAnimateCharacteristics(g, a, api, r)
 	if err != nil {
@@ -297,11 +315,8 @@ func buildAnimate(g *Game, a *Ability, api string) (animateRecord, []*compile.Ab
 		return r, nil, err
 	}
 	r.abilityAmounts = a.Amounts
-	if grants != nil && !r.empty() {
-		// PerpetualPTBoost/PerpetualTypes/... (AnimateEffectBase.java:51-235)
-		// each need a zone-surviving store of their own; an ordinary record
-		// would be dropped by clearAnimates at the card's next zone change.
-		return r, nil, fmt.Errorf("engine: %s: Duration$ Perpetual on a characteristic change not resolvable yet", api)
+	if r.statics, err = animateStaticGrants(a, api); err != nil {
+		return r, nil, err
 	}
 	return r, grants, nil
 }
@@ -328,8 +343,16 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 		var line cardtype.Line
 		for _, word := range strings.Split(raw, ",") {
 			word = strings.TrimSpace(word)
-			if strings.HasPrefix(word, "ChosenType") {
-				return r, fmt.Errorf("engine: %s: %s$ %q not resolvable yet", api, key, raw)
+			if word == "ChosenType" || word == "ChosenType2" {
+				// "allow ChosenType - overrides anything else specified"
+				// (AnimateEffect.java:80-85): the list is just the host's
+				// chosen type, nothing at all when it chose none.
+				chosen := g.Card(a.Source).Memory.ChosenType(word == "ChosenType2")
+				line = cardtype.Line{}
+				if chosen != "" {
+					line = cardtype.ParseToken(chosen)
+				}
+				break
 			}
 			line = line.Union(cardtype.ParseToken(word))
 		}
@@ -338,6 +361,15 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 		} else {
 			r.Types.RemoveTypes = line
 		}
+	}
+	if hasParam(a, "AddAllCreatureTypes") {
+		// AnimateEffectBase.java:60, CardType.allCreatureTypes: every creature
+		// type of the DB's vocabulary, as the Layer 4 static does.
+		every, ok := g.allCreatureTypes()
+		if !ok {
+			return r, fmt.Errorf("engine: %s: AddAllCreatureTypes$ needs the creature type vocabulary, which this game's DB lacks", api)
+		}
+		r.Types.AddTypes = r.Types.AddTypes.Union(every)
 	}
 	r.Types.RemoveCardTypes = hasParam(a, "RemoveCardTypes")
 	r.Types.RemoveSuperTypes = hasParam(a, "RemoveSuperTypes")
@@ -395,7 +427,7 @@ func buildAnimateCharacteristics(g *Game, a *Ability, api string, r animateRecor
 // empty reports whether r changes nothing at all.
 func (r *animateRecord) empty() bool {
 	return !r.changesTypes() && !r.HasColors && len(r.AddKeywords) == 0 && len(r.RemoveKeywords) == 0 &&
-		!r.RemoveAllKW && r.removeAbilities == removalNone && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0
+		!r.RemoveAllKW && r.removeAbilities == removalNone && !r.HasPower && !r.HasToughness && len(r.abilities) == 0 && len(r.triggers) == 0 && len(r.statics) == 0
 }
 
 // animateCards applies template to each card on the battlefield under one
@@ -405,8 +437,9 @@ func (g *Game) animateCards(a *Ability, template animateRecord, cards []CardID) 
 	ts := g.timestamp
 	for _, id := range cards {
 		// A phased-out permanent is not animated at all
-		// (AnimateEffect.java:168, :176).
-		if c := g.Card(id); c.Zone != Battlefield || c.IsPhasedOut() {
+		// (AnimateEffect.java:168, :176). Any other zone is: a card in hand or a
+		// graveyard takes the grant (TgtZone$, Zone$).
+		if c := g.Card(id); c.Zone == None || c.IsPhasedOut() {
 			continue
 		}
 		r := template
@@ -502,6 +535,47 @@ func animateAbilityGrants(a *Ability, api string) ([]*compile.Ability, error) {
 	}
 	if len(out) != names {
 		return nil, fmt.Errorf("engine: %s: Abilities$ %q grants an ability that regrants itself, not resolvable yet", api, raw)
+	}
+	return out, nil
+}
+
+// animateStaticModes are the static modes a granted staticAbilities$ line may
+// have: the ones some walk of a card's statics reads through traitFaces. Any
+// other would be granted and never read, so it is refused (GO-7); ManaConvert
+// (spend mana as though any color) and the MayPlay grants have no reader.
+var animateStaticModes = map[string]bool{
+	"continuous": true, "mustattack": true, "minmaxblocker": true, "cantsacrifice": true,
+	"cantblockby": true, "combatdamagetoughness": true, "reducecost": true, "raisecost": true,
+}
+
+// animateStaticGrants reads staticAbilities$ (AnimateEffect.java:129-133): the
+// compiled statics the resolution grants, nil when it names none. A name compile
+// left unfollowed (a grant that regrants itself), a mode nothing reads and a
+// Continuous static that grants play permission are refused.
+func animateStaticGrants(a *Ability, api string) ([]*compile.Ability, error) {
+	raw, ok := a.Params.Param("staticAbilities")
+	if !ok {
+		return nil, nil
+	}
+	var out []*compile.Ability
+	for _, sub := range a.Params.Subs {
+		if strings.EqualFold(sub.Key, "staticAbilities") {
+			out = append(out, sub.Ability)
+		}
+	}
+	names := 0
+	for _, name := range strings.Split(raw, ",") {
+		if strings.TrimSpace(name) != "" {
+			names++
+		}
+	}
+	if len(out) != names {
+		return nil, fmt.Errorf("engine: %s: staticAbilities$ %q grants a static that regrants itself, not resolvable yet", api, raw)
+	}
+	for _, st := range out {
+		if !animateStaticModes[strings.ToLower(st.Name)] || hasParamOn(st, "MayPlay") {
+			return nil, fmt.Errorf("engine: %s: staticAbilities$ %q (Mode$ %s) not resolvable yet", api, raw, st.Name)
+		}
 	}
 	return out, nil
 }

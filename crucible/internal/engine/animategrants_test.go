@@ -86,15 +86,14 @@ func TestAnimateAbilitiesEndAtCleanup(t *testing.T) {
 }
 
 // The shapes left unported are refused before anything changes (GO-7):
-// TransferActivator$ (Martyrdom's "only you may activate"), and a Perpetual
-// grant, whose zone-surviving store holds triggers only.
+// TransferActivator$ (Martyrdom's "only you may activate"), and a duration
+// nothing registers.
 func TestAnimateAbilitiesRejectsUnportedShapes(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ line, want string }{
 		{"DB$ Animate | ValidTgts$ Creature | Abilities$ ABGain | TransferActivator$ True", "TransferActivator$"},
-		{"DB$ Animate | ValidTgts$ Creature | Abilities$ ABGain | Duration$ Perpetual", "Perpetual"},
-		{"DB$ Animate | ValidTgts$ Creature | Abilities$ ABGain | Triggers$ TrigX | Duration$ Perpetual", "Perpetual"},
+		{"DB$ Animate | ValidTgts$ Creature | Abilities$ ABGain | Duration$ UntilTheEndOfTargetedNextTurn", "UntilTheEndOfTargetedNextTurn"},
 	} {
 		g, p, _ := newTwoPlayerGame(t)
 		creature := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)

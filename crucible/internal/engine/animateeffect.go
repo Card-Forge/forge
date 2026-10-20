@@ -12,7 +12,7 @@ import "fmt"
 // RememberAnimated$ remembers each one on the host.
 type animateEffect struct{}
 
-func (animateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+func (animateEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectUnreadCondition(a, "Animate"); err != nil {
 		return err
 	}
@@ -31,6 +31,10 @@ func (animateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
 	if err != nil {
 		return fmt.Errorf("engine: Animate: %w", err)
+	}
+	if hasParam(a, "Optional") && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+		// AnimateEffect.java:155-163: the activator may decline the lot.
+		return nil
 	}
 	if hasParam(a, "RememberAnimated") {
 		for _, id := range cards {

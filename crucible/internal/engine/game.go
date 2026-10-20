@@ -1028,6 +1028,11 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		c.TypeMod.Clear()
 		c.ColorMod.Clear()
 		c.KeywordMod.Clear()
+		// A grant made to the card in hand, a graveyard or on the stack ends
+		// with that object too (CR 400.7); a Perpetual one stays.
+		if from != Battlefield {
+			g.clearAnimates(id)
+		}
 	}
 	// melded is the other card of a melded permanent leaving the battlefield
 	// (CR 712.4c), split off after this move's own event, below.

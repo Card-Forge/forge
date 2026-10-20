@@ -51,6 +51,13 @@ face 0
     param staticAbilities$ "BeornStatic"
     param Duration$ "Permanent"
     param SpellDescription$ "This enchantment becomes a Bear creature in addition to its other types and gains \"This creature's power and toughness are each equal to the number of lands you control.\" (This effect doesn't end.)"
+    sub staticAbilities BeornStatic
+      StaticEffect Continuous svar=BeornStatic
+        param Mode$ "Continuous"
+        param AffectedDefined$ "Self"
+        param SetPower$ "X"
+        param SetToughness$ "X"
+        param Description$ "This creature's power and toughness are each equal to the number of lands you control."
   Trigger ChangesZone
     param Mode$ "ChangesZone"
     param Destination$ "Battlefield"

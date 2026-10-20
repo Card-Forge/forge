@@ -213,18 +213,6 @@ func TestAnimateTriggerGrantShapesThatFail(t *testing.T) {
 			want:  "Replacements$ not resolvable yet",
 		},
 		{
-			name: "a perpetual characteristic change",
-			line: "DB$ Animate | Defined$ Self | Power$ 3 | Triggers$ Grant | Duration$ Perpetual",
-			svars: []string{"Grant", "Mode$ Attacks | ValidCard$ Card.Self | Execute$ Gain",
-				"Gain", "DB$ GainLife | LifeAmount$ 1"},
-			want: "Duration$ Perpetual on a characteristic change",
-		},
-		{
-			name: "perpetual with nothing granted",
-			line: "DB$ Animate | Defined$ Self | Power$ 3 | Duration$ Perpetual",
-			want: `Duration$ "Perpetual" not resolvable yet`,
-		},
-		{
 			name:  "a trigger that regrants itself (Snarlfang Vermin)",
 			line:  "DB$ Animate | Defined$ Self | Triggers$ Grant | Duration$ Perpetual",
 			svars: []string{"Grant", "Mode$ Attacks | ValidCard$ Card.Self | Execute$ Trig"},

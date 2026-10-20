@@ -769,10 +769,10 @@ func (e *cycleError) Error() string {
 func (e *cycleError) Unwrap() error { return ErrCycle }
 
 // isAnimateGrant reports whether p is an Animate/AnimateAll `Triggers$`,
-// `Replacements$` or `Abilities$`: the traits it grants (animateAPIs).
+// `Replacements$`, `staticAbilities$` or `Abilities$`: the traits it grants (animateAPIs).
 func isAnimateGrant(a *Ability, p vocab.Param) bool {
 	return (strings.EqualFold(p.Key, "Triggers") || strings.EqualFold(p.Key, "Replacements") ||
-		p.Key == "Abilities") && animateAPIs[a.Name]
+		strings.EqualFold(p.Key, "staticAbilities") || p.Key == "Abilities") && animateAPIs[a.Name]
 }
 
 // isEffectAbilityGrant reports whether p is an Effect's `Abilities$`, whose
