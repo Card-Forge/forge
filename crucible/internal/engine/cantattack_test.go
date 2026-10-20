@@ -125,3 +125,24 @@ func TestCantBlockStatics(t *testing.T) {
 		})
 	}
 }
+
+// An Animate granting staticAbilities$ Mode$ CantBlock gives the animated
+// creature the static, read like a printed one (Traumatic Prank).
+func TestAnimateGrantsACantBlockStatic(t *testing.T) {
+	t.Parallel()
+
+	g, a, b := combatGame(t)
+	attacker := g.NewCard(creatureDefPT(t, "2", "2"), a, engine.Battlefield)
+	blocker := g.NewCard(creatureDefPT(t, "2", "2"), b, engine.Battlefield)
+	if !g.CanBlock(attacker, blocker) {
+		t.Fatal("the blocker cannot block before the grant")
+	}
+	if _, err := resolveNow(t, g, b, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(blocker)},
+		"DB$ Animate | ValidTgts$ Creature | staticAbilities$ NoBlock | Duration$ Permanent",
+		"NoBlock", "Mode$ CantBlock | ValidCard$ Card.Self"); err != nil {
+		t.Fatal(err)
+	}
+	if g.CanBlock(attacker, blocker) {
+		t.Error("the blocker can still block after the grant")
+	}
+}

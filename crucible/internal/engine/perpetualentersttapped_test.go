@@ -48,18 +48,40 @@ func TestPerpetualEntersTappedReplacementTapsTheCardAsItEnters(t *testing.T) {
 	}
 }
 
-// A perpetual replacement nothing reads would be inert, so only the
-// enters-tapped shape is granted; anything else fails when it is applied
-// (GO-7).
+// A perpetual replacement of an event nothing reads off a granted card would
+// be inert, so it is refused when granted (GO-7).
 func TestPerpetualReplacementOfAnotherShapeFailsClosed(t *testing.T) {
 	t.Parallel()
 
 	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
 	err := resolveWith(t, g, p, engine.NewScriptedController(),
 		"DB$ Animate | Defined$ Self | Duration$ Perpetual | Replacements$ Rep",
-		"Rep", "Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exiled",
-		"Exiled", "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Graveyard | Destination$ Exile")
+		"Rep", "Event$ DamageDone | ValidSource$ Card.Self | ReplaceWith$ Exiled",
+		"Exiled", "DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Plus.2")
 	if err == nil {
 		t.Error("granted a perpetual replacement no consumer reads")
+	}
+}
+
+// A Permanent (not Perpetual) Animate granting "if this creature would die,
+// exile it instead" (Can't Stay Away): the creature that is destroyed ends up
+// in exile.
+func TestAnimateGrantsADiesReplacement(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
+	bears := g.NewCard(corpusCard(t, "Grizzly Bears"), p, engine.Battlefield)
+	c := engine.NewScriptedController()
+	if _, err := resolveNow(t, g, p, c, []engine.EntityID{engine.CardEntity(bears)},
+		"DB$ Animate | ValidTgts$ Creature | Replacements$ ReplaceDies | Duration$ Permanent",
+		"ReplaceDies", "Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ Exile",
+		"Exile", "DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard"); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := resolveNow(t, g, p, c, []engine.EntityID{engine.CardEntity(bears)}, "DB$ Destroy | ValidTgts$ Creature"); err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Card(bears).Zone; got != engine.Exile {
+		t.Errorf("destroyed creature is in %v, want Exile", got)
 	}
 }

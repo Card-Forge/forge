@@ -172,8 +172,18 @@ func animateAbilities(g *Game) {
 			c.removeTraits(r.removeAbilities)
 		}
 		if len(r.abilities) > 0 || len(r.triggers) > 0 || len(r.statics) > 0 {
+			// Triggers$ and Replacements$ ride one list (animateTriggerGrants); the
+			// grant row keeps them apart.
+			var triggers, replacements []*compile.Ability
+			for _, tr := range r.triggers {
+				if tr.Record == compile.Replacement {
+					replacements = append(replacements, tr)
+				} else {
+					triggers = append(triggers, tr)
+				}
+			}
 			c.traitGrants = append(append([]traitGrant(nil), c.traitGrants...),
-				traitGrant{abilities: r.abilities, triggers: r.triggers, statics: r.statics, amounts: r.abilityAmounts})
+				traitGrant{abilities: r.abilities, triggers: triggers, replacements: replacements, statics: r.statics, amounts: r.abilityAmounts})
 		}
 	}
 }
@@ -477,10 +487,10 @@ func (g *Game) animateCards(a *Ability, template animateRecord, cards []CardID) 
 // (AnimateEffectBase.java:221-233): a grant that never ends and survives zone
 // changes (grantedTriggers, card.go), returned as perpetual. Any other
 // Triggers$ is a trigger that lives as the animateRecord does -- until end of
-// turn, or Permanent -- returned as timed (animateAbilities reads it). A
-// Replacements$ without Perpetual is refused, as is a grant compile left
-// unfollowed because the trigger regrants itself (Snarlfang Vermin,
-// compile.go's regrants). An Execute$ naming TgtZone$ (Pass the Torch's own
+// turn, or Permanent -- returned as timed (animateAbilities reads it), a
+// Replacements$ line riding the same list (grantedReplacementSupported names
+// the events read). A grant compile left unfollowed because the trigger
+// regrants itself (Snarlfang Vermin, compile.go's regrants) is refused. An Execute$ naming TgtZone$ (Pass the Torch's own
 // TrigPlay) needs no refusal of its own here: pushTriggeredAbilities calls
 // resolveTargets uniformly for every pushed ability, granted trigger
 // included, and targetChoiceFor (targeting.go) reads TgtZone$ there the same
@@ -491,9 +501,6 @@ func animateTriggerGrants(a *Ability, api string) (perpetual, timed []*compile.A
 		raw, ok := a.Params.Param(key)
 		if !ok {
 			continue
-		}
-		if d != "Perpetual" && key == "Replacements" {
-			return nil, nil, fmt.Errorf("engine: %s: %s$ not resolvable yet", api, key)
 		}
 		var subs []compile.SubRef
 		for _, sub := range a.Params.Subs {
@@ -512,10 +519,10 @@ func animateTriggerGrants(a *Ability, api string) (perpetual, timed []*compile.A
 		}
 		for _, sub := range subs {
 			switch {
+			case key == "Replacements" && !grantedReplacementSupported(sub.Ability):
+				return nil, nil, fmt.Errorf("engine: %s: Replacements$ %q (Event$ %s) is not a replacement a granted card is read for, not resolvable yet", api, raw, sub.Ability.Name)
 			case d != "Perpetual":
 				timed = append(timed, sub.Ability)
-			case key == "Replacements" && !perpetualReplacementSupported(sub.Ability):
-				return nil, nil, fmt.Errorf("engine: %s: Replacements$ %q is not an enters-tapped replacement, not resolvable yet", api, raw)
 			default:
 				perpetual = append(perpetual, sub.Ability)
 			}
@@ -565,7 +572,8 @@ func animateAbilityGrants(a *Ability, api string) ([]*compile.Ability, error) {
 var animateStaticModes = map[string]bool{
 	"continuous": true, "mustattack": true, "minmaxblocker": true, "cantsacrifice": true,
 	"cantblockby": true, "combatdamagetoughness": true, "reducecost": true, "raisecost": true,
-	"manaconvert": true,
+	"manaconvert": true, "cantblock": true, "cantattack": true, "cantattackunless": true,
+	"canattackdefender": true, "cantregenerate": true,
 }
 
 // animateStaticGrants reads staticAbilities$ (AnimateEffect.java:129-133): the
@@ -601,28 +609,13 @@ func animateStaticGrants(a *Ability, api string) ([]*compile.Ability, error) {
 	return out, nil
 }
 
-// perpetualReplacementSupported reports whether r is the one granted
-// replacement shape something reads: "this permanent enters tapped" (Event$
-// Moved, ValidCard$ Card.Self, Destination$ Battlefield, ReplaceWith$ a DB$
-// Tap), which checkMovedReplacement applies from the entering card's own
-// grant rows. Any other granted replacement would be inert, so it is refused
-// when granted (GO-7).
-func perpetualReplacementSupported(r *compile.Ability) bool {
-	if !strings.EqualFold(r.Name, "Moved") {
-		return false
-	}
-	if v, ok := r.Param("ValidCard"); !ok || v != "Card.Self" {
-		return false
-	}
-	if v, ok := r.Param("Destination"); !ok || v != "Battlefield" {
-		return false
-	}
-	for _, sub := range r.Subs {
-		if strings.EqualFold(sub.Key, "ReplaceWith") {
-			return strings.EqualFold(sub.Ability.Name, "Tap")
-		}
-	}
-	return false
+// grantedReplacementSupported reports whether r is a replacement shape the
+// walkers read off a granted card: Event$ Moved (enters, dies, leaves: the
+// entry, zone-change and enters-with-counters walks read traitFaces, which
+// holds a grant's row) and Event$ Untap (the untap step's CantHappen).
+// Any other event would be granted and never read, so it is refused (GO-7).
+func grantedReplacementSupported(r *compile.Ability) bool {
+	return strings.EqualFold(r.Name, "Moved") || strings.EqualFold(r.Name, "Untap")
 }
 
 // grantPerpetualTriggers gives each of cards one grant row holding triggers,

@@ -207,10 +207,10 @@ func TestAnimateTriggerGrantShapesThatFail(t *testing.T) {
 		want  string
 	}{
 		{
-			name:  "a replacement grant that ends",
+			name:  "a replacement of an event nothing reads",
 			line:  "DB$ Animate | Defined$ Self | Replacements$ Grant",
-			svars: []string{"Grant", "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap", "DBTap", "DB$ Tap | Defined$ Self"},
-			want:  "Replacements$ not resolvable yet",
+			svars: []string{"Grant", "Event$ DamageDone | ValidSource$ Card.Self | ReplaceWith$ DBTap", "DBTap", "DB$ Tap | Defined$ Self"},
+			want:  "not a replacement a granted card is read for",
 		},
 		{
 			name:  "a trigger that regrants itself (Snarlfang Vermin)",
