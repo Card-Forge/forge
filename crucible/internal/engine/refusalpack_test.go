@@ -39,6 +39,29 @@ func TestDestinationAlternativeLetsTheDeciderChoose(t *testing.T) {
 	}
 }
 
+// A hidden origin runs handleAltDest after the search has chosen
+// (ChangeZoneEffect.java:1252-1256): the searched creature goes to the hand on
+// a confirm and to the graveyard on a decline.
+func TestDestinationAlternativeOnASearch(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		confirm bool
+		want    engine.ZoneType
+	}{{true, engine.Hand}, {false, engine.Graveyard}} {
+		g, p, _ := newTwoPlayerGame(t)
+		fetched := g.NewCard(creatureDef(t), p, engine.Library)
+		c := engine.NewScriptedController()
+		c.QueueCardChoice([]engine.CardID{fetched})
+		c.QueueConfirmEffect(tc.confirm)
+		resolveLine(t, g, p, c,
+			"DB$ ChangeZone | Origin$ Library | Destination$ Hand | DestinationAlternative$ Graveyard | ChangeType$ Creature | ChangeNum$ 1")
+		if got := g.Card(fetched).Zone; got != tc.want {
+			t.Errorf("confirm %v: creature in %v, want %v", tc.confirm, got, tc.want)
+		}
+	}
+}
+
 // TestRememberLKIKeepsTheDestroyedCreaturesController proves RememberLKI$ on
 // Destroy (DestroyEffect.java:102-104): RememberedController reads the
 // controller the creature had on the battlefield.

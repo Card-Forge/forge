@@ -94,7 +94,7 @@ func TestReportSummarisesTheProbe(t *testing.T) {
 		{Card: "F", Outcome: smoke.Hung, Stage: "turns", Detail: "no result after 1s"},
 		{Card: "G", Outcome: smoke.Inconclusive, Stage: "cast"},
 	}
-	out := report("a test set", results, 1, true)
+	out := report("a test set", results, 1, true, false)
 	for _, want := range []string{
 		"a test set: 7 cards", "plays             1", "refused           3", "hung              1",
 		"16.7% of the 6 judged", "    2  resolve: engine: Pump", "e.g. B, C",

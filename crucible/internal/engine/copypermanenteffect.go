@@ -30,7 +30,7 @@ type copyPermanentEffect struct{}
 
 func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectParams(a, "CopyPermanent", "Condition", "PumpKeywords",
-		"Populate", "SetCreatureTypes",
+		"SetCreatureTypes",
 		"PumpDuration", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
 		"RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
 		"ChangeZoneTable", "AddAbilities", "AddStaticAbilities", "ChosenMapIndex",
@@ -151,7 +151,13 @@ func copyPermanentOriginals(g *Game, a *Ability, controller PlayerController, so
 		}
 		return []copyOriginal{{def: def}}, nil
 	}
-	if spec, ok := a.Params.Param("Choices"); ok {
+	spec, ok := a.Params.Param("Choices")
+	if hasParam(a, "Populate") {
+		// CopyPermanentEffect.buildSpellAbility (:312-316): Populate$ is a
+		// Choices$ over the controller's creature tokens.
+		spec, ok = "Creature.token+YouCtrl", true
+	}
+	if ok {
 		chooser := a.Controller
 		if raw, ok := a.Params.Param("Chooser"); ok {
 			ps, err := definedPlayers(g, a.Controller, a.Source, raw, a.refs())

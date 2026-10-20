@@ -63,3 +63,22 @@ func TestAtEOTReachesTheHostFromEffectAndEmptyPump(t *testing.T) {
 		}
 	}
 }
+
+// Populate$ (CopyPermanentEffect.java:312-316) copies a creature token its
+// controller picks; a non-token creature is not offered.
+func TestCopyPermanentPopulateCopiesAChosenCreatureToken(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTokenGame(t)
+	g.NewCard(creatureDefPT(t, "4", "4"), p, engine.Battlefield)
+	c := engine.NewScriptedController()
+	src := resolveLine(t, g, p, c,
+		"DB$ Token | TokenScript$ w_1_1_soldier | TokenPower$ 5 | TokenToughness$ 5 | RememberTokens$ True")
+	tok, _ := g.Card(src).Memory.Remembered()[0].AsCard()
+	c.QueueCardChoice([]engine.CardID{tok})
+	made := resolveLine(t, g, p, c, "DB$ CopyPermanent | Populate$ True | RememberTokens$ True")
+	copyID, ok := g.Card(made).Memory.Remembered()[0].AsCard()
+	if !ok || copyID == tok || !g.Card(copyID).IsToken {
+		t.Fatalf("populate made %v (ok %v), want a new token", copyID, ok)
+	}
+}

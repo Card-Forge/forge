@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow card game ability defined condition control parts effecthelpers id zone valid amount copypermanenteffect effecteffect player room animate tokeneffect
+//enginelint:allow card game ability defined condition control parts effecthelpers id zone valid amount copypermanenteffect effecteffect player room animate tokeneffect controlcommands untilcommand
 
 import (
 	"fmt"
@@ -40,6 +40,10 @@ type copyEffect struct {
 	// brings no replacement the permanent did not already have, so it is not a
 	// new generation of its entry replacements (copyReplacementCandidates).
 	ofSelf bool
+	// until is a Duration$ addUntilCommand puts the ending command on
+	// (UntilTargetedUntaps, UntilUnattached, ...); life.duration is then
+	// effectPermanent, which no cleanup or turn-start end reads.
+	until string
 }
 
 // UncopiedDef is c's definition under every copy effect and any Layer 3
@@ -249,6 +253,9 @@ func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 		return nil
 	}
 	template, ok, err := cloneDuration(a, source)
+	if err == nil && ok && template.until != "" && !g.checkValidDuration(a, template.until) {
+		return nil
+	}
 	if err != nil || !ok {
 		return err
 	}
@@ -335,6 +342,11 @@ func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 			e.remembered = append([]EntityID(nil), t.Memory.Remembered()...)
 		}
 		t.addCopy(e)
+		if e.until != "" {
+			if err := g.addUntilCommand(a, e.until, cardCommand{Kind: commandEndCopy, Target: p.id, Timestamp: ts}); err != nil {
+				return err
+			}
+		}
 		if hasParam(a, "IntoPlayTapped") {
 			t.Tapped = true
 		}
@@ -354,8 +366,8 @@ func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 
 // cloneDuration is checkValidDuration plus the copy effect's lifetime: no
 // Duration$ is permanent; the corpus's other Clone durations
-// (UntilUnattached, UntilTargetedUntaps, UntilNextEndStep) need an ending
-// this port does not track. ok is false when a host-bound
+// (UntilUnattached, UntilTargetedUntaps, UntilNextEndStep, ...) ride addUntilCommand
+// (until). ok is false when a host-bound
 // duration's host is neither on the battlefield nor on the stack, which
 // resolves to nothing at all.
 func cloneDuration(a *Ability, source *Card) (copyEffect, bool, error) {
@@ -381,7 +393,14 @@ func cloneDuration(a *Ability, source *Card) (copyEffect, bool, error) {
 		// down (endCopiesOnFaceDown); checkValidDuration has no zone gate for it.
 		e.life.duration = effectUntilFacedown
 	default:
-		return e, false, fmt.Errorf("engine: Clone: Duration$ %q not resolvable yet", d)
+		if err := durationRefused("Clone", d); err != nil {
+			return e, false, err
+		}
+		if endsAtCleanup(d) {
+			e.life.duration = effectUntilEndOfTurn
+		} else {
+			e.life.duration, e.until = effectPermanent, d
+		}
 	}
 	return e, true, nil
 }

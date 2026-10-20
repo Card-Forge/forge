@@ -136,6 +136,9 @@ func checkStateBasedActions(g *Game, controller PlayerController) (over, perform
 			break
 		}
 	}
+	// GameAction.java:1667: the commands Duration$ UntilStateBasedActionChecked
+	// queued.
+	g.runPhaseCommands(controller, untilSBAChecked, NoPlayer)
 	return false, performed
 }
 

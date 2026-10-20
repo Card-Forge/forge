@@ -616,6 +616,10 @@ func changeZoneShufflers(g *Game, a *Ability, cards []CardID) ([]PlayerID, error
 type hiddenChoice struct {
 	player PlayerID
 	chosen []CardID
+	// dest and libPos are the destination this fetcher's cards go to, after a
+	// DestinationAlternative$ prompt (handleAltDest).
+	dest   ZoneType
+	libPos int
 	// shuffleMandatory is this fetcher's own flag (ChangeZoneEffect.java:999,
 	// declared per fetcher): a blocked search turns it to
 	// !ShuffleNonMandatory$.
@@ -666,11 +670,6 @@ func (g *Game) canSearchLibraryWith(decider, target, activator PlayerID) bool {
 // ControlOpponentsSearchingLibrary$ grant applies only to a fetcher deciding
 // their own search (:1071).
 func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *Card, origin []ZoneType, dest ZoneType, newController PlayerID, until bool) error {
-	if _, ok := a.Params.Param("DestinationAlternative"); ok {
-		// handleAltDest runs after the search has chosen its cards
-		// (ChangeZoneEffect.java:1252-1256); only the known-origin call is ported.
-		return fmt.Errorf("engine: ChangeZone: DestinationAlternative$ with a hidden origin not resolvable yet")
-	}
 	enter, err := changeZoneEnter(g, a, dest, false)
 	if err != nil {
 		return err
@@ -852,11 +851,18 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 				}
 			}
 		}
+		if _, ok := a.Params.Param("DestinationAlternative"); ok {
+			// ChangeZoneEffect.java:1252-1256: once the search has chosen its
+			// cards. Java keeps the new destination for the next fetcher too.
+			if dest, libPos, err = g.changeZoneAltDest(controller, a, source, dest, libPos, decider); err != nil {
+				return err
+			}
+		}
 		if zoneIn(Library, searched) && dest == Library && fetcherShuffle {
 			g.Shuffle(Library, player)
 		}
 		picks = append(picks, hiddenChoice{player: player, chosen: chosen, shuffleMandatory: fetcherShuffle,
-			found: searchedLibrary && !searchedParam, origin: searched})
+			found: searchedLibrary && !searchedParam, origin: searched, dest: dest, libPos: libPos})
 	}
 
 	_, tapped := a.Params.Param("Tapped")
@@ -864,6 +870,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 	// moves (ChangeZoneEffect.java:1538), armed once they are all done.
 	var returns []cardCommand
 	for _, pick := range picks {
+		dest, libPos := pick.dest, pick.libPos
 		moved := map[ZoneType][]CardID{}
 		var movedOrigins []ZoneType
 		var movedAll []CardID

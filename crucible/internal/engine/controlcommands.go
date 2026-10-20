@@ -14,7 +14,7 @@
 
 package engine
 
-//enginelint:allow id card game zone player control ability amount valid
+//enginelint:allow id card game zone player control ability amount valid untilcommand
 
 import (
 	"fmt"
@@ -39,6 +39,9 @@ const (
 	commandEndPump
 	commandEndAnimate
 	commandEndGoad
+	// commandEndCopy is CloneEffect's unclone command: the copy effect made at
+	// Timestamp on Target ends.
+	commandEndCopy
 	// commandReturnExiled is changeZoneUntilCommand's closure for one card
 	// (SpellAbilityEffect.java:853-907, Duration$ UntilHostLeavesPlay): Target,
 	// still the object it became at zone stamp Timestamp, goes back to Zone.
@@ -120,6 +123,15 @@ func (g *Game) runCommand(controller PlayerController, cmd cardCommand) {
 			}
 		}
 		g.animates = kept
+	case commandEndCopy:
+		if c := g.Card(cmd.Target); c.Zone == Battlefield {
+			for _, e := range c.copies {
+				if e.Timestamp == cmd.Timestamp {
+					g.uncopy(cmd.Target, e)
+					break
+				}
+			}
+		}
 	case commandEndGoad:
 		c := g.Card(cmd.Target)
 		kept := c.goadedBy[:0]
@@ -326,14 +338,34 @@ func (g *Game) runEndOfTurnCommands(controller PlayerController) {
 	}
 	g.endOfNextTurnCmds = kept
 	g.runCommands(controller, due)
+
+	// :409: what an end-of-combat "your next turn" duration registered waits
+	// for that turn's end of combat now; and ThisTurnAndNextTurn's outer
+	// command moves its inner one onto the list for the next cleanup.
+	g.disarmPhaseCommands(untilEndCombat, g.activePlayer)
+	var deferred []phaseCommand
+	rest := g.phaseCmds[:0:0]
+	for _, pc := range g.phaseCmds {
+		if pc.When == untilCleanupDefer {
+			deferred = append(deferred, pc)
+			continue
+		}
+		rest = append(rest, pc)
+	}
+	g.phaseCmds = rest
+	for _, pc := range deferred {
+		g.endOfTurnCmds = append(g.endOfTurnCmds, pc.cardCommand)
+	}
 }
 
-// runEndOfCombatCommands is EndOfCombat.executeUntil() (PhaseHandler.
-// endCombat, java:1262): the until-end-of-combat list.
+// runEndOfCombatCommands is EndOfCombat.executeUntil() then
+// executeUntilEndOfPhase(playerTurn) (PhaseHandler.endCombat, java:1266-1267):
+// the until-end-of-combat list, then the active player's registered durations.
 func (g *Game) runEndOfCombatCommands(controller PlayerController) {
 	cmds := g.endOfCombatCmds
 	g.endOfCombatCmds = nil
 	g.runCommands(controller, cmds)
+	g.runPhaseCommands(controller, untilEndCombat, g.activePlayer)
 }
 
 // loseControlTokens are the LoseControl$ values ControlGainEffect registers

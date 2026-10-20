@@ -39,6 +39,17 @@ const (
 	// untilEndStepAt is getEndOfTurn().addAt: the next end step of any turn
 	// begins (:366).
 	untilEndStepAt
+	// untilEndCombat is getEndOfCombat().registerUntilEnd(player): Player's
+	// next end of combat after the turn it was made in is over
+	// (PhaseHandler.java:409, :1267).
+	untilEndCombat
+	// untilCleanupDefer is getEndOfTurn().addUntil(() -> addUntil(cmd)): the
+	// command moves to the until-end-of-turn list at this cleanup and runs at
+	// the next one.
+	untilCleanupDefer
+	// untilSBAChecked is Game.addSBACheckedCommand: after the next
+	// state-based-action check (GameAction.java:1667).
+	untilSBAChecked
 )
 
 // phaseCommand is one pending GameCommand on a Phase list. Player is the list
@@ -74,8 +85,7 @@ func endsAtCleanup(d string) bool { return !untilDurations[d] }
 // cannot register: the error says which, never a silent end-of-turn (GO-7).
 func durationRefused(api, d string) error {
 	switch d {
-	case "UntilEndOfCombatYourNextTurn", "UntilTheEndOfTargetedNextTurn", "ThisTurnAndNextTurn",
-		"UntilStateBasedActionChecked", "UntilFacedown":
+	case "UntilTheEndOfTargetedNextTurn", "UntilFacedown":
 		return fmt.Errorf("engine: %s: Duration$ %q not resolvable yet", api, d)
 	}
 	return nil
@@ -149,6 +159,12 @@ func (g *Game) addUntilCommandFor(a *Ability, d string, cmd cardCommand, you Pla
 		phase(untilUpkeepBegin, you, false)
 	case "UntilTheEndOfYourNextUpkeep":
 		phase(untilUpkeepEnd, you, g.activePhase == Upkeep)
+	case "UntilEndOfCombatYourNextTurn":
+		phase(untilEndCombat, you, true)
+	case "ThisTurnAndNextTurn":
+		phase(untilCleanupDefer, NoPlayer, false)
+	case "UntilStateBasedActionChecked":
+		phase(untilSBAChecked, NoPlayer, false)
 	case "UntilTheEndOfYourNextUntap":
 		phase(untilUntapEnd, you, false)
 	case "UntilNextEndStep":

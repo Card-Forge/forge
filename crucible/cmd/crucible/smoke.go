@@ -34,6 +34,7 @@ func cardSmoke(args []string) error {
 	workers := fs.Int("workers", 4, "games probed in parallel")
 	top := fs.Int("top", 25, "refusal causes to print")
 	list := fs.Bool("list", false, "print one line per card")
+	raw := fs.Bool("raw", false, "with -list, print each refusal's first line as the engine wrote it, quoted values kept")
 	timeout := fs.Duration("timeout", 20*time.Second, "limit per card before it is reported hung")
 	if err := fs.Parse(args); err != nil {
 		return err
@@ -55,7 +56,7 @@ func cardSmoke(args []string) error {
 	}
 
 	results := probeAll(smoke.NewProber(db), names, *workers, *timeout)
-	fmt.Print(report(source, results, *top, *list))
+	fmt.Print(report(source, results, *top, *list, *raw))
 	return nil
 }
 
@@ -145,7 +146,7 @@ func probeAll(p *smoke.Prober, names []string, workers int, limit time.Duration)
 }
 
 // report renders the summary, the refusal causes by weight, and every panic.
-func report(source string, results []smoke.Result, top int, list bool) string {
+func report(source string, results []smoke.Result, top int, list, raw bool) string {
 	var out strings.Builder
 	var count [6]int
 	causes := map[string][]string{}
@@ -160,7 +161,11 @@ func report(source string, results []smoke.Result, top int, list bool) string {
 			panics = append(panics, r)
 		}
 		if list {
-			fmt.Fprintf(&out, "%-12s %-45s %-16s %s\n", r.Outcome, r.Card, r.Stage, smoke.Reason(r.Detail))
+			reason := smoke.Reason(r.Detail)
+			if raw {
+				reason, _, _ = strings.Cut(r.Detail, "\n")
+			}
+			fmt.Fprintf(&out, "%-12s %-45s %-16s %s\n", r.Outcome, r.Card, r.Stage, reason)
 		}
 	}
 	judged := count[smoke.Plays] + count[smoke.Refused] + count[smoke.Panicked] + count[smoke.Hung]

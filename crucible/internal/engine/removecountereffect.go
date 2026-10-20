@@ -21,10 +21,11 @@
 
 package engine
 
-//enginelint:allow id card game player ability defined condition control parts event amount putcountereffect resolvechoice
+//enginelint:allow id card game player ability defined condition control parts event amount putcountereffect resolvechoice effecthelpers zone
 
 import (
 	"fmt"
+	"math"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -49,8 +50,7 @@ import (
 // own subAbilityConditionMet would otherwise silently no-op a card naming
 // either, dealDamageEffect's own identical reasoning.
 var removeCounterUnresolvedParams = [...]string{
-	"ValidTgts", "TargetMin", "TargetMax",
-	"TgtZone", "UpTo",
+	"TgtZone",
 	"Condition"}
 
 // removeCounterEffect resolves Mode$/DB$/AB$ RemoveCounter for the Defined$
@@ -78,7 +78,7 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		// CountersRemoveEffect.java:84-88.
 		return nil
 	}
-	counterType, allKinds, err := removeCounterType(a.Params)
+	counterType, allKinds, anyKind, err := removeCounterType(a.Params)
 	if err != nil {
 		return err
 	}
@@ -88,13 +88,15 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		counterNumParam = "1"
 	}
 	allAmount := strings.EqualFold(counterNumParam, "All")
+	anyAmount := strings.EqualFold(counterNumParam, "Any")
 	var amount int
-	if !allAmount && !allKinds {
+	if !allAmount && !anyAmount && !allKinds {
 		amount, ok = resolveNamedAmount(g, a.Amounts, source, counterNumParam)
 		if !ok {
 			return fmt.Errorf("engine: RemoveCounter: CounterNum$ %q is not resolvable", counterNumParam)
 		}
 	}
+	_, upTo := a.Params.Param("UpTo")
 
 	var cards []CardID
 	var players []PlayerID
@@ -103,8 +105,23 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		if cards, err = removeCounterChoice(g, a, controller, spec); err != nil {
 			return err
 		}
+	} else if _, targeted := a.Params.Param("ValidTgts"); targeted && !hasParam(a, "Defined") {
+		// getDefinedEntitiesOrTargeted: the chosen targets, a card or a player
+		// each.
+		for _, e := range a.Targets {
+			if id, ok := e.AsCard(); ok {
+				cards = append(cards, id)
+			} else if pid, ok := e.AsPlayer(); ok {
+				players = append(players, pid)
+			}
+		}
 	} else {
-		defined, _ := a.Params.Param("Defined")
+		// No Defined$ is the host (AbilityUtils.getDefinedEntities' default to
+		// Self).
+		defined, ok := a.Params.Param("Defined")
+		if !ok {
+			defined = "Self"
+		}
 		cards, players, err = definedCounterTargets(g, a.Controller, source, defined, a.refs())
 		if err != nil {
 			return fmt.Errorf("engine: RemoveCounter: %w", err)
@@ -117,17 +134,72 @@ func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	_, rememberRemoved := a.Params.Param("RememberRemoved")
 	_, rememberAmount := a.Params.Param("RememberAmount")
 	total := 0
+	for _, pid := range players {
+		if g.Player(pid).Lost {
+			continue
+		}
+		if anyKind {
+			n := amount
+			if anyAmount {
+				n = math.MaxInt
+			} else if allAmount {
+				n = g.Player(pid).Counters.Count(counterType)
+			}
+			total += g.removeAnyCounterType(controller, a, PlayerEntity(pid), &g.Player(pid).Counters, n, upTo || anyAmount)
+			continue
+		}
+		total += removeCounters(g, a.Source, PlayerEntity(pid), &g.Player(pid).Counters, counterType, allKinds, allAmount, amount)
+	}
 	for _, cid := range cards {
-		removed := removeCounters(g, a.Source, CardEntity(cid), &g.Card(cid).Counters, counterType, allKinds, allAmount, amount)
+		c := g.Card(cid)
+		if anyKind {
+			n := amount
+			if anyAmount {
+				n = math.MaxInt
+			}
+			total += g.removeAnyCounterType(controller, a, CardEntity(cid), &c.Counters, n, upTo || anyAmount)
+			continue
+		}
+		n := amount
+		if anyAmount {
+			n = c.Counters.Count(counterType)
+		}
+		if !allKinds && !allAmount && !anyAmount {
+			if _, shared := a.Params.Param("CounterNumShared"); shared {
+				// CountersRemoveEffect.java:200-205: what earlier cards gave up
+				// comes off the amount.
+				if n -= total; n < 1 {
+					break
+				}
+			}
+		}
+		if !allKinds && (upTo || anyAmount) && (c.Zone == Battlefield || c.Zone == Exile) {
+			// :213-219: the activator names how many, down to none.
+			have := c.Counters.Count(counterType)
+			hi := min(n, have)
+			if allAmount {
+				hi = have
+			}
+			picked := controller.ChooseNumber(g, a.Controller, a.Source, 0, hi)
+			if picked < 0 || picked > hi {
+				return fmt.Errorf("engine: RemoveCounter: %d is not within 0..%d", picked, hi)
+			}
+			removed := removeCounters(g, a.Source, CardEntity(cid), &c.Counters, counterType, false, false, picked)
+			total += removed
+			if rememberRemoved {
+				for i := range removed {
+					source.Memory.RememberRemovedCounter(counterType, i)
+				}
+			}
+			continue
+		}
+		removed := removeCounters(g, a.Source, CardEntity(cid), &c.Counters, counterType, allKinds, allAmount || anyAmount, n)
 		total += removed
 		if rememberRemoved && !allKinds {
 			for i := range removed {
 				source.Memory.RememberRemovedCounter(counterType, i)
 			}
 		}
-	}
-	for _, pid := range players {
-		total += removeCounters(g, a.Source, PlayerEntity(pid), &g.Player(pid).Counters, counterType, allKinds, allAmount, amount)
 	}
 	if rememberAmount && total > 0 {
 		source.Memory.RememberNumber(total)
@@ -176,18 +248,75 @@ func removeCounters(g *Game, source CardID, target EntityID, counters *Counters,
 // comma-separated list and the literal "Any" (an interactive
 // chooseCounterType prompt) fail loudly, putCounterType's own identical
 // rejection.
-func removeCounterType(a *compile.Ability) (t CounterType, allKinds bool, err error) {
+func removeCounterType(a *compile.Ability) (t CounterType, allKinds, anyKind bool, err error) {
 	raw, ok := a.Param("CounterType")
 	if !ok {
-		return "", false, fmt.Errorf("engine: RemoveCounter: CounterType$ missing")
+		return "", false, false, fmt.Errorf("engine: RemoveCounter: CounterType$ missing")
 	}
 	if strings.EqualFold(raw, "All") {
-		return "", true, nil
+		return "", true, false, nil
 	}
-	if strings.Contains(raw, ",") || strings.EqualFold(raw, "Any") {
-		return "", false, fmt.Errorf("engine: RemoveCounter: CounterType$ %q not resolvable yet", raw)
+	if strings.EqualFold(raw, "Any") {
+		return "", false, true, nil
 	}
-	return CounterType(strings.ToUpper(raw)), false, nil
+	if strings.Contains(raw, ",") {
+		return "", false, false, fmt.Errorf("engine: RemoveCounter: CounterType$ %q not resolvable yet", raw)
+	}
+	return CounterType(strings.ToUpper(raw)), false, false, nil
+}
+
+// removeAnyCounterType is CountersRemoveEffect.removeAnyType (:241-275): the
+// activator names a kind among those the entity has, then how many of it, until
+// cntToRemove are gone or no kind is left. Java's "remove selection so player
+// can't cheat" is Multiset.remove(kind), one occurrence, so a kind with several
+// counters stays on offer and the minimum counts what the others still hold
+// less that one occurrence (quirks.md). It returns how many came off.
+func (g *Game) removeAnyCounterType(controller PlayerController, a *Ability, target EntityID, counters *Counters, cntToRemove int, upTo bool) int {
+	removed := 0
+	pool := map[CounterType]int{}
+	size := 0
+	for _, k := range counters.Kinds() {
+		pool[k] = counters.Count(k)
+		size += pool[k]
+	}
+	for cntToRemove > 0 && size > 0 {
+		var kinds []CounterType
+		var names []string
+		for _, k := range counters.Kinds() {
+			if pool[k] > 0 {
+				kinds = append(kinds, k)
+				names = append(names, string(k))
+			}
+		}
+		pick := controller.ChooseOption(g, a.Controller, a.Source, names)
+		if pick < 0 || pick >= len(kinds) {
+			pick = 0
+		}
+		chosen := kinds[pick]
+		hi := min(cntToRemove, pool[chosen])
+		pool[chosen]--
+		size--
+		lo := 0
+		if !upTo {
+			lo = max(1, hi-size)
+		}
+		n := controller.ChooseNumber(g, a.Controller, a.Source, lo, hi)
+		n = max(lo, min(n, hi))
+		if n > 0 {
+			counters.Add(chosen, -n)
+			emitCounterChanged(g, a.Source, target, chosen, -n)
+			if _, ok := a.Params.Param("RememberRemoved"); ok {
+				for i := range n {
+					g.Card(a.Source).Memory.RememberRemovedCounter(chosen, i)
+				}
+			}
+			removed += n
+			cntToRemove -= n
+		} else if upTo {
+			break
+		}
+	}
+	return removed
 }
 
 // removeCounterChoice is the Choices$ pick (CountersRemoveEffect.java:107-137):

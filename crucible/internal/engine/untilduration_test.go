@@ -239,3 +239,82 @@ func TestChangeZoneAllUntilHostLeavesPlayReturnsTheCards(t *testing.T) {
 		}
 	}
 }
+
+// The Effect durations that ride the remaining lists: after the next
+// state-based-action check, this turn and next, and the end of combat of the
+// owner's next turn (SpellAbilityEffect.java:985-998, GameAction.java:1667).
+func TestEffectDurationsOnTheRemainingLists(t *testing.T) {
+	t.Parallel()
+
+	const effect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Unblockable | Duration$ "
+	const static = "Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered"
+	for _, tc := range []struct {
+		duration string
+		// present lists where the effect card must still be, gone where not.
+		present, gone []struct {
+			turn  int
+			phase engine.PhaseType
+		}
+	}{
+		{"UntilStateBasedActionChecked", nil, []struct {
+			turn  int
+			phase engine.PhaseType
+		}{{1, engine.Main1}}},
+		{"ThisTurnAndNextTurn", []struct {
+			turn  int
+			phase engine.PhaseType
+		}{{1, engine.Main2}, {2, engine.Main1}}, []struct {
+			turn  int
+			phase engine.PhaseType
+		}{{3, engine.Untap}}},
+		{"UntilEndOfCombatYourNextTurn", []struct {
+			turn  int
+			phase engine.PhaseType
+		}{{1, engine.CombatEnd}, {3, engine.CombatBegin}}, []struct {
+			turn  int
+			phase engine.PhaseType
+		}{{3, engine.Main2}}},
+	} {
+		g, p, _ := newTwoPlayerGame(t)
+		c := engine.NewScriptedController()
+		resolveLine(t, g, p, c, effect+tc.duration, "Unblockable", static)
+		sba(g)
+		for _, w := range tc.present {
+			advanceToPhase(t, g, c, w.turn, w.phase)
+			if n := len(commandEffects(g, p)); n != 1 {
+				t.Errorf("%s: %d effects at turn %d %v, want 1", tc.duration, n, w.turn, w.phase)
+			}
+		}
+		for _, w := range tc.gone {
+			if w.turn > 1 || w.phase != engine.Main1 {
+				advanceToPhase(t, g, c, w.turn, w.phase)
+			}
+			if n := len(commandEffects(g, p)); n != 0 {
+				t.Errorf("%s: %d effects at turn %d %v, want 0", tc.duration, n, w.turn, w.phase)
+			}
+		}
+	}
+}
+
+// Clone rides the table too: UntilNextEndStep ends the copy as the next end
+// step begins (SpellAbilityEffect.java:975-976, EndOfTurn.addAt).
+func TestCloneUntilNextEndStepEndsTheCopy(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	giant := g.NewCard(giantDef(t), other, engine.Battlefield)
+	c := engine.NewScriptedController()
+	host := shifter(t, g, p, "Clone | ValidTgts$ Creature | Duration$ UntilNextEndStep")
+	mustActivate(t, g, p, c, host, giant)
+	if !g.Card(host).IsCopy() {
+		t.Fatal("the host did not become a copy")
+	}
+	advanceToPhase(t, g, c, 1, engine.Main2)
+	if !g.Card(host).IsCopy() {
+		t.Error("the copy ended before the end step")
+	}
+	advanceToPhase(t, g, c, 1, engine.EndOfTurn)
+	if g.Card(host).IsCopy() {
+		t.Error("the copy outlived the end step's beginning")
+	}
+}

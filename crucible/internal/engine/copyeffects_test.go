@@ -737,7 +737,7 @@ func TestCloneRejectsUnportedShapes(t *testing.T) {
 	for _, tc := range []struct{ line, want string }{
 		{"Clone | ValidTgts$ Creature | SetManaCost$ 1 R", "SetManaCost$ not resolvable yet"},
 		{"Clone | ValidTgts$ Creature | RemoveCreatureTypes$ True", "RemoveCreatureTypes$ not resolvable yet"},
-		{"Clone | ValidTgts$ Creature | Duration$ UntilUnattached", `Duration$ "UntilUnattached" not resolvable yet`},
+		{"Clone | ValidTgts$ Creature | Duration$ UntilTheEndOfTargetedNextTurn", `Duration$ "UntilTheEndOfTargetedNextTurn" not resolvable yet`},
 		{"Clone | Choices$ Card.token+YouCtrl", `valid property "token"`},
 		{"Clone | Choices$ Creature.cmcLEX", `valid property "cmcLEX"`},
 		{"Clone | Choices$ Creature.ThisTurnEnteredNowhere", `valid property "ThisTurnEnteredNowhere"`},

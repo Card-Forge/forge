@@ -179,7 +179,8 @@
       "token",
       "animate",
       "saga",
-      "gameloss"
+      "gameloss",
+      "untilcommand"
     ],
     "turn": [
       "id",
