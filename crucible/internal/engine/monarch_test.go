@@ -337,7 +337,7 @@ func TestCantBecomeMonarchStaticShapes(t *testing.T) {
 	}
 
 	g, p, _ = newTwoPlayerGame(t)
-	resolveLine(t, g, p, c, "DB$ Effect | StaticAbilities$ STCant", "STCant", "Mode$ CantBecomeMonarch | ValidPlayer$ Player.Chosen")
+	resolveLine(t, g, p, c, "DB$ Effect | StaticAbilities$ STCant", "STCant", "Mode$ CantBecomeMonarch | ValidPlayer$ Player.Allies")
 	if _, err := resolveNow(t, g, p, c, nil, "DB$ BecomeMonarch"); err == nil {
 		t.Error("err = nil, want an unreadable ValidPlayer$ rejected")
 	}

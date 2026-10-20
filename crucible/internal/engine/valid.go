@@ -1205,6 +1205,10 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 	if rest, ok := strings.CutPrefix(property, "controls"); ok {
 		return controlsMatches(g, candidate, host, source, rest)
 	}
+	// PlayerProperty.java:258-261: the player the source card chose.
+	if property == "Chosen" && source != NoCard {
+		return g.Card(source).Memory.ChosenPlayer() == candidate, true
+	}
 	// PlayerProperty.java:493-502: the candidate noted the source card under
 	// that key.
 	if key, ok := strings.CutPrefix(property, "NotedFor"); ok && source != NoCard {

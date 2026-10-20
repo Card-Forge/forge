@@ -260,6 +260,40 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		if pid := g.Card(host).Memory.ChosenPlayer(); pid != NoPlayer {
 			candidates = []PlayerID{pid}
 		}
+	case "RememberedPlayer":
+		// AbilityUtils.java:994-995: the players among the remembered objects
+		// (a remembered card names none: the "...Remembered" recursion is for
+		// the Remembered spellings alone).
+		candidates = rememberedPlayers(g, defined, g.Card(host).Memory.Remembered(), false, g.Card(host))
+	case "TriggeredAttackerController", "TriggeredAttackerOwner", "TriggeredBlockerController", "TriggeredBlockerOwner":
+		// The "...Controller"/"...Owner" branches over AbilityKey.Attacker and
+		// Blocker (AbilityUtils.java:1020-1059): the recorded creature's
+		// controller or owner.
+		id := refs.triggered.attacker
+		if strings.HasPrefix(defined, "TriggeredBlocker") {
+			id = refs.triggered.blocker
+		}
+		if id == NoCard {
+			return nil, fmt.Errorf("engine: Defined$ %q: the trigger recorded no creature", defined)
+		}
+		if strings.HasSuffix(defined, "Owner") {
+			candidates = []PlayerID{g.Card(id).Owner}
+		} else {
+			candidates = []PlayerID{g.lkiOrLive(id).Controller()}
+		}
+	case "TriggeredDefender":
+		// AbilityKey.Defender of Mode$ Attacks: a player defender is itself, a
+		// planeswalker or battle names no player (triggeredDefender's cards are
+		// definedCards' half).
+		ents, err := triggeredDefender(g, refs)
+		if err != nil {
+			return nil, err
+		}
+		for _, e := range ents {
+			if pid, ok := e.AsPlayer(); ok {
+				candidates = append(candidates, pid)
+			}
+		}
 	case "ChosenCardController", "ChosenCardOwner":
 		// AbilityUtils.java:1142-1143: addPlayer over the chosen cards.
 		for _, id := range g.Card(host).Memory.Chosen() {
@@ -620,6 +654,21 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 		// is identity here, as valid.go's StrictlySelf already reads it; the
 		// ChangeZone's Origin$ keeps a card that left that zone where it is.
 		return []CardID{host.ID}, nil
+	case "EffectSource":
+		// AbilityUtils.java:92-95, :342-350: for an effect card, the card whose
+		// ability made it, following effects made by effects to the first real
+		// card; none for a card that is no effect.
+		if !host.IsEffect || refs.game == nil {
+			return nil, nil
+		}
+		cur := host
+		for cur.IsEffect {
+			if cur.effectLife.host == NoCard || cur.effectLife.host == cur.ID {
+				return nil, nil
+			}
+			cur = refs.game.Card(cur.effectLife.host)
+		}
+		return []CardID{cur.ID}, nil
 	case "Enchanted", "Equipped":
 		if id, ok := host.AttachedTo(); ok {
 			return []CardID{id}, nil
@@ -780,6 +829,24 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 		return append([]CardID(nil), host.Memory.Imprinted()...), nil
 	case "ChosenCard":
 		return append([]CardID(nil), host.Memory.Chosen()...), nil
+	case "TopOfLibrary", "BottomOfLibrary", "TopOfGraveyard":
+		// AbilityUtils.java:117-141: the activator's library top (first card) or
+		// bottom (last) card, or graveyard top (last); none when it is empty.
+		if refs.game == nil {
+			return nil, fmt.Errorf("engine: Defined$ %q needs the game", defined)
+		}
+		zone, top := Library, defined != "BottomOfLibrary"
+		if defined == "TopOfGraveyard" {
+			zone, top = Graveyard, false
+		}
+		cards := refs.game.Zone(zone, refs.activator).Cards()
+		if len(cards) == 0 {
+			return nil, nil
+		}
+		if top {
+			return []CardID{cards[0]}, nil
+		}
+		return []CardID{cards[len(cards)-1]}, nil
 	case "RememberedFirst", "RememberedLast":
 		// AbilityUtils.java:245-256: the first or last remembered object, when
 		// it is a card.
@@ -799,6 +866,10 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 		if refs.game != nil {
 			if cards, ok := refs.game.definedValidCards(refs.activator, host, defined); ok {
 				return cards, nil
+			}
+			if defined == "ExiledWith" {
+				// AbilityUtils.java:304-305: the cards the host exiled.
+				return refs.game.exiledWithCards(host.ID), nil
 			}
 			if cards, ok, err := refs.game.definedAttachCards(host, defined, refs); ok {
 				return cards, err

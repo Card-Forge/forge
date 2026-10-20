@@ -96,3 +96,42 @@ func TestDefinedCasterNamesWhoCastTheHost(t *testing.T) {
 		t.Errorf("life = %d, want 23 (the caster gained 3)", got)
 	}
 }
+
+// Defined$ TopOfLibrary names the activator's top card (index 0), and
+// RememberedPlayer the players among the host's remembered objects.
+func TestDefinedTopOfLibraryAndRememberedPlayer(t *testing.T) {
+	t.Parallel()
+
+	t.Run("top of library", func(t *testing.T) {
+		t.Parallel()
+
+		g, p, _ := newTwoPlayerGame(t)
+		g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Library)
+		g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Library)
+		lib := g.Zone(engine.Library, p).Cards()
+		top, under := lib[0], lib[1]
+		if _, err := resolveNow(t, g, p, engine.NewScriptedController(), nil,
+			"DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | Defined$ TopOfLibrary"); err != nil {
+			t.Fatal(err)
+		}
+		if g.Card(top).Zone != engine.Graveyard || g.Card(under).Zone != engine.Library {
+			t.Errorf("top card in %v, the one under it in %v; want Graveyard and Library", g.Card(top).Zone, g.Card(under).Zone)
+		}
+	})
+	t.Run("remembered player", func(t *testing.T) {
+		t.Parallel()
+
+		g, p, other := newTwoPlayerGame(t)
+		if _, err := resolveNow(t, g, p, engine.NewScriptedController(), nil,
+			"DB$ Pump | Defined$ Self | RememberObjects$ Opponent | SubAbility$ DBGain",
+			"DBGain", "DB$ GainLife | Defined$ RememberedPlayer | LifeAmount$ 4"); err != nil {
+			t.Fatal(err)
+		}
+		if got := g.Player(other).Life; got != 24 {
+			t.Errorf("the remembered opponent's life = %d, want 24", got)
+		}
+		if got := g.Player(p).Life; got != 20 {
+			t.Errorf("the activator's life = %d, want 20", got)
+		}
+	})
+}
