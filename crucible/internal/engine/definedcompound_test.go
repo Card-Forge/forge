@@ -79,3 +79,20 @@ func TestDefinedAttachedByAndAttachedTo(t *testing.T) {
 		})
 	}
 }
+
+// Defined$ Caster is the player who cast the host (AbilityUtils.java:1165).
+func TestDefinedCasterNamesWhoCastTheHost(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
+	def := scriptDef(t, "Caster Reader", "Creature Elf",
+		"T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGain",
+		"SVar:TrigGain:DB$ GainLife | Defined$ Caster | LifeAmount$ 3")
+	card := g.NewCard(def, p, engine.Hand)
+	if err := castEntrant(t, g, p, card, engine.NewScriptedController()); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if got := g.Player(p).Life; got != 23 {
+		t.Errorf("life = %d, want 23 (the caster gained 3)", got)
+	}
+}

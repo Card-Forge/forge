@@ -260,6 +260,21 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 		if pid := g.Card(host).Memory.ChosenPlayer(); pid != NoPlayer {
 			candidates = []PlayerID{pid}
 		}
+	case "ChosenCardController", "ChosenCardOwner":
+		// AbilityUtils.java:1142-1143: addPlayer over the chosen cards.
+		for _, id := range g.Card(host).Memory.Chosen() {
+			if defined == "ChosenCardController" {
+				candidates = append(candidates, g.Card(id).Controller())
+			} else {
+				candidates = append(candidates, g.Card(id).Owner)
+			}
+		}
+	case "Caster":
+		// AbilityUtils.java:1165-1168: who cast the host, nobody if it was not
+		// cast.
+		if c := g.Card(host); c.wasCast {
+			candidates = []PlayerID{c.castBy}
+		}
 	case "Remembered", "RememberedController", "RememberedOwner":
 		candidates = rememberedPlayers(g, defined, g.Card(host).Memory.Remembered(), true, g.Card(host))
 	case "ImprintedController", "ImprintedOwner":

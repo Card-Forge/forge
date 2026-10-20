@@ -51,5 +51,34 @@ func (animateEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 			return err
 		}
 	}
+	// AnimateEffect.java:194-201: each animated card remembers RememberObjects$'
+	// objects and imprints ImprintCards$' cards, read with the host as source.
+	remember, hasRemember := a.Params.Param("RememberObjects")
+	imprint, hasImprint := a.Params.Param("ImprintCards")
+	if hasRemember || hasImprint {
+		var objects []EntityID
+		var imprinted []CardID
+		if hasRemember {
+			if objects, err = definedEntities(g, a.Controller, source, remember, a.refs()); err != nil {
+				return fmt.Errorf("engine: Animate: RememberObjects$: %w", err)
+			}
+		}
+		if hasImprint {
+			if imprinted, err = definedCards(source, imprint, a.refs()); err != nil {
+				return fmt.Errorf("engine: Animate: ImprintCards$: %w", err)
+			}
+		}
+		for _, id := range cards {
+			if c := g.Card(id); c.Zone == None || c.IsPhasedOut() {
+				continue
+			}
+			for _, e := range objects {
+				g.Card(id).Memory.Remember(e)
+			}
+			for _, im := range imprinted {
+				g.Card(id).Memory.Imprint(im)
+			}
+		}
+	}
 	return registerAtEOT(g, a, cards)
 }

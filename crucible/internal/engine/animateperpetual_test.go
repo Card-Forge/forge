@@ -147,3 +147,26 @@ func TestAnimateNameRenamesThePermanent(t *testing.T) {
 		t.Errorf("name = %q, want Vitu-Ghazi", got)
 	}
 }
+
+// Animate's RememberObjects$ and ImprintCards$ go on the animated card, not on
+// the host (AnimateEffect.java:194-201).
+func TestAnimateRemembersAndImprintsOnTheAnimatedCard(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	victim := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	host, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(victim)},
+		"DB$ Animate | ValidTgts$ Creature | Power$ 2 | Duration$ Permanent | RememberObjects$ Opponent | ImprintCards$ Self")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := g.Card(victim).Memory.Remembered(); len(got) != 1 || got[0] != engine.PlayerEntity(other) {
+		t.Errorf("animated card remembers %v, want the opponent", got)
+	}
+	if got := g.Card(victim).Memory.Imprinted(); len(got) != 1 || got[0] != host {
+		t.Errorf("animated card imprints %v, want the host %v", got, host)
+	}
+	if got := g.Card(host).Memory.Remembered(); len(got) != 0 {
+		t.Errorf("the host remembers %v, want nothing", got)
+	}
+}
