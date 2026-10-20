@@ -113,9 +113,24 @@ func (flipOntoBattlefieldEffect) Resolve(g *Game, a *Ability, controller PlayerC
 	const (
 		chanceToFlip        = 0.85
 		chanceToHitTwoCards = 0.20
-		chanceToHit         = 0.70
 		maxFlipTimes        = 2
 	)
+
+	// chanceToHit = min(1, 0.45 + 0.07 * rowSize) in float32 (java:41-42, #12183):
+	// rowSize counts tgtLoc's controller's permanents sharing a core type with
+	// tgtLoc, itself included. Variables, not constants, so Go rounds each step
+	// to float32 as Java does.
+	rowSize := 0
+	for _, pid := range g.Players() {
+		for _, cid := range g.Zone(Battlefield, pid).Cards() {
+			card := g.Card(cid)
+			if card.Controller() == tgtLoc.Controller() && sharesCoreType(card.Type(), tgtLoc.Type()) {
+				rowSize++
+			}
+		}
+	}
+	base, perCard := float32(0.45), float32(0.07)
+	chanceToHit := min(float32(1), base+perCard*float32(rowSize))
 
 	if g.rand.Float32() > chanceToFlip {
 		// Did not turn over even once: no effect at all (java:52-55).

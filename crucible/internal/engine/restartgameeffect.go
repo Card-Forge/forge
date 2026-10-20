@@ -56,9 +56,10 @@ var restartVariantDecks = [...]ZoneType{SchemeDeck, PlanarDeck, AttractionDeck, 
 //     over another spell -- or as a spell -- leaves Java nothing to put
 //     that card anywhere.
 //   - a Command-zone card that is neither an effect card nor a dungeon
-//     (commander, vanguard, scheme, plane, conspiracy): Java puts a
-//     commander into the library and rebuilds the variant cards through
-//     Player.initVariantsZones, neither ported; NewGame triggers
+//     (commander, vanguard, scheme, plane, conspiracy): Java moves a
+//     commander through the library back to the command zone (Karn Liberated ruling,
+//     RestartGameEffect.java) and rebuilds the variant cards
+//     through Player.initVariantsZones, neither ported; NewGame triggers
 //     (TriggerZones$ Command on every real line) live only on such cards,
 //     so refusing them is also what keeps ResumeAfterRestart's skipped
 //     NewGame trigger from dropping anything.

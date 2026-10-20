@@ -342,3 +342,23 @@ func TestFlipOntoBattlefieldAttachedLocationSibling(t *testing.T) {
 		t.Fatalf("resolve: %v", err)
 	}
 }
+
+// TestFlipOntoBattlefieldHitChanceGrowsWithRowSize is seed 8: the hit draw is
+// 0.5969, which a flat 0.70 would turn into a one-card hit. The location and the
+// host creature give min(1, 0.45 + 0.07*2) = 0.59, so the flip misses
+// (FlipOntoBattlefieldEffect.java:41-42, #12183).
+func TestFlipOntoBattlefieldHitChanceGrowsWithRowSize(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newSeededTwoPlayerGame(t, 8)
+	loc := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+	c := engine.NewScriptedController()
+	c.QueueCardChoice([]engine.CardID{loc})
+	host, err := resolveNow(t, g, p, c, nil, "DB$ FlipOntoBattlefield")
+	if err != nil {
+		t.Fatalf("resolve: %v", err)
+	}
+	if got := remembered(t, g, host); len(got) != 0 {
+		t.Errorf("remembered = %v, want none (hit chance is 0.59 for a row of two)", got)
+	}
+}
