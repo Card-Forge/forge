@@ -26,7 +26,7 @@ import java.util.stream.Stream;
  *
  * <p>Uses a Dual-Threshold strategy:
  * 1. LAZY_HASH_THRESHOLD (64): Lookup operations (contains/get) build the hashtable on demand.
- * 2. AUTO_HASH_THRESHOLD (128): Growth operations (add/addAll) build the table automatically
+ * 2. AUTO_HASH_THRESHOLD (8): Growth operations (add/addAll) build the table automatically.
  *    to prevent O(N^2) linear lookup cost on large collections.</p>
  *
  * <p>{@link #shareCopy()} returns a cheap copy-on-write copy: it shares the backing list with its source
@@ -45,7 +45,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     private static final int LAZY_HASH_THRESHOLD = 64;
 
     /** Continuous add()/addAll() auto-builds table past this size to prevent O(N^2) slowdown. */
-    private static final int AUTO_HASH_THRESHOLD = 128;
+    private static final int AUTO_HASH_THRESHOLD = 8; // was 128, 8 was a good on benchmark though
 
     /** Keep the compact table below 75% occupancy. */
     private static final int MIN_HASH_CAPACITY = 32;
@@ -135,7 +135,9 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
      */
     @Override
     public boolean equals(final Object obj) {
-        return obj instanceof FCollection && hashCode() == obj.hashCode();
+        // FCollection implements List, so equality must follow List's ordered-element
+        // semantics. Comparing hash codes alone can report unrelated lists as equal.
+        return obj == this || (obj instanceof List<?> && list.equals(obj));
     }
 
     /**
