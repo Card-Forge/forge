@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect ateot
+//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect ateot cloneeffect
 
 import (
 	"fmt"
@@ -29,12 +29,12 @@ import (
 type copyPermanentEffect struct{}
 
 func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "CopyPermanent", "Condition", "AtEOTTrig", "AddTypes", "PumpKeywords",
-		"AddKeywords", "NonLegendary", "Populate", "SetColor", "SetCreatureTypes",
-		"PumpDuration", "AddSVars", "RemoveCardTypes", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
-		"RemoveSubTypes", "RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
-		"ChangeZoneTable", "AddAbilities", "AddStaticAbilities", "AddColors", "ChosenMapIndex",
-		"RemoveCreatureTypes", "SetCardTypes", "GainThisAbility", "NewName", "AddTypesTo",
+	if err := rejectParams(a, "CopyPermanent", "Condition", "PumpKeywords",
+		"Populate", "SetCreatureTypes",
+		"PumpDuration", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
+		"RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
+		"ChangeZoneTable", "AddAbilities", "AddStaticAbilities", "ChosenMapIndex",
+		"RemoveCreatureTypes", "SetCardTypes", "GainThisAbility", "AddTypesTo",
 		"CopyIsColor", "SetManaCost", "SetImageKey"); err != nil {
 		return err
 	}
@@ -87,7 +87,11 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 			if t.Has(cardtype.Instant) || t.Has(cardtype.Sorcery) {
 				continue
 			}
-			spec := tokenSpec{Def: orig.def, Owner: owner, Tapped: hasParam(a, "TokenTapped"),
+			def, err := copyExceptDef(g, a, orig.def)
+			if err != nil {
+				return err
+			}
+			spec := tokenSpec{Def: def, Owner: owner, Tapped: hasParam(a, "TokenTapped"),
 				Power: orig.power, HasPower: orig.hasPower, Toughness: orig.toughness, HasToughness: orig.hasToughness}
 			if hasSetPower {
 				spec.Power, spec.HasPower = setPower, true
@@ -98,6 +102,11 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 			for i := 0; i < num; i++ {
 				id := g.createToken(controller, spec)
 				created = append(created, id)
+				if loc, ok := a.Params.Param("AtEOTTrig"); ok {
+					if err := g.addSelfTrigger(a, loc, id); err != nil {
+						return err
+					}
+				}
 				// TokenEffectBase.makeTokenTable's addToCombat (TokenEffectBase.java:188),
 				// which CopyPermanentEffect inherits.
 				if err := g.addToCombatAttacking(controller, a, id, "TokenAttacking"); err != nil {
@@ -200,4 +209,33 @@ func copyBaseValue(g *Game, a *Ability, source *Card, key string) (int, bool, er
 		return 0, false, fmt.Errorf("engine: CopyPermanent: %s$ %q not resolvable", key, raw)
 	}
 	return n, true, nil
+}
+
+// copyExceptDef is the copy's definition once the line's "except" params have
+// been applied to the copied face (CardFactory.getCloneStates, the same
+// function Clone's cloneDef runs: AddTypes$, AddKeywords$ (IfNew), NonLegendary$,
+// SetColor$/AddColors$, RemoveCardTypes$/RemoveSubTypes$, SetPower$/SetToughness$,
+// AddSVars$, NewName$). A line with none of them copies the definition itself.
+// Like cloneDef it copies the current face alone and never writes through the
+// shared definition. The traits a copy gains (AddTriggers$, ...) are not read.
+func copyExceptDef(g *Game, a *Ability, base *compile.Card) (*compile.Card, error) {
+	excepting := false
+	for _, key := range [...]string{"AddTypes", "AddKeywords", "NonLegendary", "SetColor", "AddColors",
+		"RemoveCardTypes", "AddSVars", "NewName", "SetPower", "SetToughness", "RemoveCost"} {
+		excepting = excepting || hasParam(a, key)
+	}
+	if !excepting {
+		return base, nil
+	}
+	ch, err := readCloneChanges(g, a)
+	if err != nil {
+		return nil, err
+	}
+	def := &compile.Card{Filename: base.Filename, Name: base.Name}
+	def.Faces[0] = base.Faces[0]
+	ch.apply(&def.Faces[0], nil, &base.Faces[0])
+	if ch.hasNewName {
+		def.Name = ch.newName
+	}
+	return def, nil
 }

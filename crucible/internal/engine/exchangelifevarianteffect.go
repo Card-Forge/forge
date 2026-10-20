@@ -55,6 +55,5 @@ func (exchangeLifeVariantEffect) Resolve(g *Game, a *Ability, controller PlayerC
 	} else {
 		r.Toughness, r.HasToughness = life, true
 	}
-	g.animateCards(r, []CardID{a.Source})
-	return nil
+	return g.animateCards(a, r, []CardID{a.Source})
 }

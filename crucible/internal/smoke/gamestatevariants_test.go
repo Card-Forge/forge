@@ -80,10 +80,10 @@ func TestProbeReportsWhatTheStagedBoardReveals(t *testing.T) {
 	}{
 		// Aura Graft's ReEnchant: Attach Move$ with Object$ ParentTarget.
 		{"Aura Graft", smoke.Refused},
-		// A Wall that blocks: Pump AtEOT$.
-		{"Glyph of Destruction", smoke.Refused},
-		// PumpAll AtEOT$.
-		{"Tears of Rage", smoke.Refused},
+		// A Wall that blocks: Pump AtEOT$ and the Wall's own pump resolve.
+		{"Glyph of Destruction", smoke.Plays},
+		// PumpAll AtEOT$ resolves.
+		{"Tears of Rage", smoke.Plays},
 		// Its second target, "blockedByValidThisTurn ParentTarget", is a
 		// Defined$ list the valid evaluator is not given.
 		{"Glyph of Delusion", smoke.Inconclusive},

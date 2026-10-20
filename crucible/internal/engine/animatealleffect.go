@@ -36,6 +36,5 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if template.empty() {
 		return nil
 	}
-	g.animateCards(template, cards)
-	return nil
+	return g.animateCards(a, template, cards)
 }

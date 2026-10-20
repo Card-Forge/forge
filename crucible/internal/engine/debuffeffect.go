@@ -19,7 +19,7 @@ func (debuffEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if err := rejectParams(a, "Debuff", "AllSuffixKeywords", "Condition"); err != nil {
 		return err
 	}
-	permanent, err := animateDuration(a, "Debuff")
+	permanent, until, err := animateDuration(a, "Debuff")
 	if err != nil {
 		return err
 	}
@@ -48,6 +48,5 @@ func (debuffEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			}
 		}
 	}
-	g.animateCards(animateRecord{Permanent: permanent, RemoveKeywords: kws}, cards)
-	return nil
+	return g.animateCards(a, animateRecord{Permanent: permanent, until: until, RemoveKeywords: kws}, cards)
 }

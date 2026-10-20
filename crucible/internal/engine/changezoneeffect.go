@@ -71,7 +71,7 @@ func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	until, err := changeZoneDuration(a)
+	until, err := changeZoneDuration(a, "ChangeZone")
 	if err != nil {
 		return err
 	}
@@ -133,16 +133,16 @@ func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController
 }
 
 // changeZoneDuration reads Duration$. UntilHostLeavesPlay, the only value
-// the corpus's ChangeZone lines name (112 of 112), is changeZoneUntilCommand
+// the corpus's ChangeZone and ChangeZoneAll lines name (119 of 119), is changeZoneUntilCommand
 // (SpellAbilityEffect.java:833-915): the moved cards come back when the host
 // leaves the battlefield. Any other value is not resolvable yet (GO-7).
-func changeZoneDuration(a *Ability) (bool, error) {
+func changeZoneDuration(a *Ability, api string) (bool, error) {
 	d, ok := a.Params.Param("Duration")
 	if !ok {
 		return false, nil
 	}
 	if d != "UntilHostLeavesPlay" {
-		return false, fmt.Errorf("engine: ChangeZone: Duration$ %q not resolvable yet", d)
+		return false, fmt.Errorf("engine: %s: Duration$ %q not resolvable yet", api, d)
 	}
 	return true, nil
 }

@@ -132,24 +132,28 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	// ends it with a command on the host (addUntilCommand,
 	// SpellAbilityEffect.java:1007-1017); checkValidDuration runs first
 	// (PumpEffect.java:271).
-	permanent, hostBound, untilNextTurn, perpetual := false, "", false, false
+	permanent, untilNextTurn, perpetual := false, false, false
+	until := ""
 	if d, ok := a.Params.Param("Duration"); ok {
-		switch {
-		case d == "Permanent":
+		switch d {
+		case "Permanent":
 			permanent = true
-		case d == "Perpetual":
+		case "Perpetual":
 			permanent, perpetual = true, true
-		case d == "UntilYourNextTurn":
+		case "UntilYourNextTurn":
 			// SpellAbilityEffect.addUntilCommand: the untap phase of the
 			// activator's next turn (PhaseHandler.java:252).
 			permanent, untilNextTurn = true, true
-		case hostBoundDuration(d):
-			if !validHostDuration(a, source, d) {
+		default:
+			if err := durationRefused("Pump", d); err != nil {
+				return err
+			}
+			if !g.checkValidDuration(a, d) {
 				return nil
 			}
-			permanent, hostBound = true, d
-		default:
-			return fmt.Errorf("engine: Pump: Duration$ %q not resolvable yet", d)
+			if !endsAtCleanup(d) {
+				permanent, until = true, d
+			}
 		}
 	}
 
@@ -216,21 +220,21 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if power == 0 && toughness == 0 && grant.empty() && !multiplied {
 		// Java has no such return: replaceDying (PumpEffect.java:506) still
 		// runs, so an X=0 Necrotic Wound still exiles a creature dying this turn.
-		if hasParam(a, "AtEOT") {
-			return fmt.Errorf("engine: Pump: AtEOT$ on a line that pumps nothing not resolvable yet")
+		// PumpEffect.java:485 registers AtEOT$ whether or not anything was
+		// pumped (Brackwater Elemental's 0/0 pump).
+		cards, err := pumpTargetCards(g, a, source)
+		if err != nil {
+			return err
+		}
+		if err := registerAtEOT(g, a, cards); err != nil {
+			return err
 		}
 		return g.replaceDying(a, "Pump")
 	}
 
-	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
+	cards, err := pumpTargetCards(g, a, source)
 	if err != nil {
-		// A Defined$ that names players (You) names no card (AbilityUtils.
-		// getDefinedCards skips it); only a spec neither side knows is an error.
-		spec, _ := a.Params.Param("Defined")
-		if ps, perr := definedPlayers(g, a.Controller, a.Source, spec, a.refs()); perr != nil || len(ps) == 0 {
-			return fmt.Errorf("engine: Pump: %w", err)
-		}
-		cards = nil
+		return err
 	}
 	// PumpEffect.java:485: AtEOT$ remembers the targets only, not Radiance's.
 	if err := registerAtEOT(g, a, cards); err != nil {
@@ -276,13 +280,33 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
 			HasUntil: untilNextTurn, UntilTurnOf: a.Controller, Perpetual: perpetual,
 		})
-		if hostBound != "" {
-			g.registerHostBoundEnd(source, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}, hostBound)
+		if until != "" {
+			if err := g.addUntilCommand(a, until, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}); err != nil {
+				return err
+			}
 		}
 	}
 	// PumpEffect.java:506: Bleed Dry's "if that creature would die this turn,
 	// exile it instead" (replacedying.go).
 	return g.replaceDying(a, "Pump")
+}
+
+// pumpTargetCards is the cards a Pump line reaches: its targets or Defined$
+// cards. A Defined$ that names players (You) names no card
+// (AbilityUtils.getDefinedCards skips it); only a spec neither side knows is an
+// error.
+func pumpTargetCards(g *Game, a *Ability, source *Card) ([]CardID, error) {
+	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
+	if err != nil {
+		// A Defined$ that names players (You) names no card (AbilityUtils.
+		// getDefinedCards skips it); only a spec neither side knows is an error.
+		spec, _ := a.Params.Param("Defined")
+		if ps, perr := definedPlayers(g, a.Controller, a.Source, spec, a.refs()); perr != nil || len(ps) == 0 {
+			return nil, fmt.Errorf("engine: Pump: %w", err)
+		}
+		cards = nil
+	}
+	return cards, nil
 }
 
 // pumpPlayers is the players a keyword pump reaches: PumpEffect.java's

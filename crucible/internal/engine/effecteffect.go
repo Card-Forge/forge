@@ -3,7 +3,7 @@
 
 package engine
 
-//enginelint:allow id zone card game player ability defined condition control parts amount effecthelpers controlcommands
+//enginelint:allow id zone card game player ability defined condition control parts amount effecthelpers controlcommands ateot untilcommand
 
 import (
 	"fmt"
@@ -21,14 +21,14 @@ import (
 // exile trigger (ExileOnLost$), a
 // standalone forget-on-cast (ForgetOnCast$ without RememberObjects$), the
 // Boon one-shot (Boon$, TriggerHandler removes the effect after its first
-// trigger), the delayed end-of-turn trigger (AtEOT$), imprinting the effect
+// trigger), imprinting the effect
 // on its host (ImprintOnHost$), the Adventure name, and the
 // SpellAbilityCondition shapes subAbilityConditionMet does not cover
 // (ConditionZone$, and a Condition$ value rejectUnreadCondition refuses).
 var effectUnresolvedParams = [...]string{
 	"Abilities", "RememberSpell", "RememberLKI", "RememberKeywords", "SharedKeywordsZone", "SharedRestrictions",
 	"ForgetCounter", "ExileOnCounter", "NoteCounterDefined", "ExileOnLost",
-	"Boon", "AtEOT", "ImprintOnHost", "Adventure",
+	"Boon", "ImprintOnHost", "Adventure",
 	"ConditionZone",
 }
 
@@ -64,7 +64,7 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	life, ok, err := effectDurationOf(a, source)
+	life, ok, err := effectDurationOf(g, a)
 	if err != nil || !ok {
 		return err
 	}
@@ -143,9 +143,16 @@ func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			life.armed = g.ActivePlayer() == pid
 		}
 		eff.effectLife = life
-		if life.hostBound != "" {
-			// Re-read: NewCard may have grown the arena under source.
-			g.registerEffectEnd(g.Card(a.Source), id, life.hostBound)
+		// EffectEffect.java:312-314: AtEOT$ acts on the host card, once per
+		// effect made.
+		if err := registerAtEOT(g, a, []CardID{a.Source}); err != nil {
+			return err
+		}
+		if life.until != "" {
+			// EffectEffect.java:318-320, keyed to the effect's owner.
+			if err := g.addUntilCommandFor(a, life.until, cardCommand{Kind: commandEndEffect, Target: id}, pid); err != nil {
+				return err
+			}
 		}
 		for _, e := range remember {
 			eff.Memory.Remember(e)
@@ -250,10 +257,11 @@ type effectLifetime struct {
 	player   PlayerID
 	armed    bool
 	host     CardID
-	// hostBound is Duration$ UntilLoseControlOfHost or AsLongAsControl: the
-	// effect is permanent until a command on the host ends it
-	// (registerEffectEnd), not a lifetime this struct's duration tracks.
-	hostBound     string
+	// until is a Duration$ addUntilCommand puts the ending command on
+	// (AsLongAsControl, UntilUntaps, UntilYourNextEndStep, ...): the effect is
+	// permanent until that command runs, not a lifetime this struct's
+	// duration tracks.
+	until         string
 	exileOnMoved  zoneMask
 	forgetOnMoved zoneMask
 	forgetOnCast  bool
@@ -263,15 +271,15 @@ type effectLifetime struct {
 }
 
 // effectDurationOf reads Duration$ and applies checkValidDuration: a
-// host-bound duration whose host is neither on the battlefield nor on the
-// stack creates no effect at all (ok false). Every Duration$ corpus value
-// besides the ones below is rejected (GO-7).
-func effectDurationOf(a *Ability, source *Card) (life effectLifetime, ok bool, err error) {
+// duration whose host or target is not in the state it needs creates no effect
+// at all (ok false). The durations this struct tracks itself are the first
+// cases; every other value addUntilCommand names rides a command (until), and
+// one it does not name ends at cleanup, its final else.
+func effectDurationOf(g *Game, a *Ability) (life effectLifetime, ok bool, err error) {
 	d, has := a.Params.Param("Duration")
 	life.host = a.Source
 	switch {
-	case !has, d == "EndOfTurn", d == "UntilEndOfTurn":
-		// Not values addUntilCommand names: its default branch, end of turn.
+	case !has:
 		life.duration = effectUntilEndOfTurn
 	case d == "Permanent":
 		life.duration = effectPermanent
@@ -285,29 +293,20 @@ func effectDurationOf(a *Ability, source *Card) (life effectLifetime, ok bool, e
 		life.duration = effectUntilHostLeavesPlay
 	case d == "UntilHostLeavesPlayOrEOT":
 		life.duration = effectUntilHostLeavesPlayOrEOT
-	case d == "UntilLoseControlOfHost", d == "AsLongAsControl":
-		life.duration = effectPermanent
-		life.hostBound = d
 	default:
-		return life, false, fmt.Errorf("engine: Effect: Duration$ %q not resolvable yet", d)
-	}
-	if life.duration == effectUntilHostLeavesPlay || life.duration == effectUntilHostLeavesPlayOrEOT {
-		if source.Zone != Battlefield && source.Zone != Stack {
-			return life, false, nil
+		if err := durationRefused("Effect", d); err != nil {
+			return life, false, err
+		}
+		if endsAtCleanup(d) {
+			life.duration = effectUntilEndOfTurn
+		} else {
+			life.duration, life.until = effectPermanent, d
 		}
 	}
-	if life.hostBound != "" && !validHostDuration(a, source, life.hostBound) {
+	if has && !g.checkValidDuration(a, d) {
 		return life, false, nil
 	}
 	return life, true, nil
-}
-
-// registerEffectEnd is addUntilCommand's UntilLoseControlOfHost and
-// AsLongAsControl branches (SpellAbilityEffect.java:1008-1017): the command
-// that ends effect id goes on the host's leaves-play and change-controller
-// lists, and for AsLongAsControl its phase-out list too.
-func (g *Game) registerEffectEnd(host *Card, id CardID, hostBound string) {
-	g.registerHostBoundEnd(host, cardCommand{Kind: commandEndEffect, Target: id}, hostBound)
 }
 
 // effectMoveWatch reads ExileOnMoved$ and ForgetOnMoved$ (each a comma list

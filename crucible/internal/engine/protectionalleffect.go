@@ -14,7 +14,7 @@ func (protectionAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	if err := rejectParams(a, "ProtectionAll", "ValidPlayers", "Condition"); err != nil {
 		return err
 	}
-	permanent, err := animateDuration(a, "ProtectionAll")
+	permanent, until, err := animateDuration(a, "ProtectionAll")
 	if err != nil {
 		return err
 	}
@@ -35,6 +35,8 @@ func (protectionAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		cards = append(cards, g.Zone(Battlefield, p).Cards()...)
 	}
 	cards = filterValid(g, cards, spec, a.Controller, a.Source)
-	g.animateCards(animateRecord{Permanent: permanent, AddKeywords: protectionKeywords(gains, false)}, cards)
+	if err := g.animateCards(a, animateRecord{Permanent: permanent, until: until, AddKeywords: protectionKeywords(gains, false)}, cards); err != nil {
+		return err
+	}
 	return nil
 }

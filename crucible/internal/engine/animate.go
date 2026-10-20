@@ -28,10 +28,10 @@ type animateRecord struct {
 	Card      CardID
 	Timestamp uint64
 	Permanent bool
-	// endBound is a host-bound Duration$ (AsLongAsControl) whose end is a
-	// command on endHost, registered per card by animateCards.
-	endBound string
-	endHost  CardID
+	// until is a Duration$ addUntilCommand puts the record's ending command
+	// on (AsLongAsControl, UntilYourNextTurn, ...), registered per card by
+	// animateCards. Permanent is set with it so cleanup keeps the record.
+	until string
 
 	Types TypeEffect
 
@@ -239,19 +239,30 @@ var animateUnresolvedParams = [...]string{
 	"ConditionDefined",
 }
 
-// animateDuration reads Duration$: absent is until end of turn, Permanent
-// never ends; every other duration (UntilHostLeavesPlay, UntilYourNextTurn,
-// Perpetual on anything but a trigger grant, ...) needs a lifetime this port
-// does not track.
-func animateDuration(a *Ability, api string) (bool, error) {
+// animateDuration reads Duration$ for an Animate-shaped record: absent ends at
+// cleanup, Permanent never ends, and any other value addUntilCommand names
+// ends it by a command (until, with the record kept past cleanup). A value the
+// table does not name falls through to cleanup, as Java's final else does.
+// Perpetual on anything but a trigger grant needs a zone-surviving store for
+// its characteristics, and the values nothing registers are refused
+// (durationRefused).
+func animateDuration(a *Ability, api string) (permanent bool, until string, err error) {
 	d, ok := a.Params.Param("Duration")
-	if !ok {
-		return false, nil
+	switch {
+	case !ok:
+		return false, "", nil
+	case d == "Permanent":
+		return true, "", nil
+	case d == "Perpetual":
+		return false, "", fmt.Errorf("engine: %s: Duration$ %q not resolvable yet", api, d)
 	}
-	if d != "Permanent" {
-		return false, fmt.Errorf("engine: %s: Duration$ %q not resolvable yet", api, d)
+	if err := durationRefused(api, d); err != nil {
+		return false, "", err
 	}
-	return true, nil
+	if endsAtCleanup(d) {
+		return false, "", nil
+	}
+	return true, d, nil
 }
 
 // buildAnimate is AnimateEffect.resolve's and AnimateAllEffect.resolve's
@@ -273,12 +284,8 @@ func buildAnimate(g *Game, a *Ability, api string) (animateRecord, []*compile.Ab
 		return r, nil, err
 	}
 	r.triggers = timed
-	if d, _ := a.Params.Param("Duration"); grants == nil && api == "Animate" && hostBoundDuration(d) {
-		// AnimateEffectBase's unanimate closure goes through addUntilCommand,
-		// so the record outlives cleanup and a command on the host ends it.
-		r.Permanent, r.endBound, r.endHost = true, d, a.Source
-	} else if grants == nil {
-		if r.Permanent, err = animateDuration(a, api); err != nil {
+	if grants == nil {
+		if r.Permanent, r.until, err = animateDuration(a, api); err != nil {
 			return r, nil, err
 		}
 	}
@@ -393,7 +400,7 @@ func (r *animateRecord) empty() bool {
 
 // animateCards applies template to each card on the battlefield under one
 // fresh timestamp (every Animate event takes getNextTimestamp once).
-func (g *Game) animateCards(template animateRecord, cards []CardID) {
+func (g *Game) animateCards(a *Ability, template animateRecord, cards []CardID) error {
 	g.timestamp++
 	ts := g.timestamp
 	for _, id := range cards {
@@ -405,10 +412,13 @@ func (g *Game) animateCards(template animateRecord, cards []CardID) {
 		r := template
 		r.Card, r.Timestamp = id, ts
 		g.addAnimate(r)
-		if r.endBound != "" {
-			g.registerHostBoundEnd(g.Card(r.endHost), cardCommand{Kind: commandEndAnimate, Target: id, Timestamp: ts}, r.endBound)
+		if r.until != "" {
+			if err := g.addUntilCommand(a, r.until, cardCommand{Kind: commandEndAnimate, Target: id, Timestamp: ts}); err != nil {
+				return err
+			}
 		}
 	}
+	return nil
 }
 
 // animateTriggerGrants reads Triggers$ and Replacements$ (ADR-0023's trigger

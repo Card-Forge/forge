@@ -551,3 +551,12 @@ also unread by RemoveCounter (it reads `ChoiceNum$`), and `ChoiceOptional$` by T
 five. `ControlGainEffect.java:109` and `MustBlockEffect.java:44` call `.get(0)` on `Chooser$` with no empty check (an
 empty list throws; `CountersPutEffect:198` returns). Crucible reproduces the ignored parameters and returns an error
 for the empty list.
+
+## `AtEOTTrig$ You_Sacrifice` never restricts to your end step
+
+`SpellAbilityEffect.addSelfTrigger` (`SpellAbilityEffect.java:498-526`) splits `You_Sacrifice` and appends
+`| Player$ You` to the Phase trigger. `TriggerPhase.performTest` reads `ValidPlayer$` only (`TriggerPhase.java:50-55`),
+so the "your next end step" text of Gut, Fanatical Priestess is not enforced: the token is sacrificed at the next end
+step of any player. In practice the tokens appear in the controller's own turn, so the first end step is theirs.
+Crucible reproduces it (`quirks.md`). Fix upstream: `ValidPlayer$ You` in place of `Player$ You`.
+

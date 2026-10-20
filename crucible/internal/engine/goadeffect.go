@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game ability control controlcommands effecthelpers card condition defined zone id parts
+//enginelint:allow game ability control controlcommands effecthelpers card condition defined zone id parts untilcommand
 
 import "fmt"
 
@@ -24,9 +24,15 @@ func (goadEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if !ok {
 		duration = "UntilYourNextTurn"
 	}
-	hostBound := hostBoundDuration(duration)
-	if duration != "UntilYourNextTurn" && duration != "Permanent" && !hostBound {
-		return fmt.Errorf("engine: Goad: Duration$ %q not resolvable yet", duration)
+	until := ""
+	if duration != "UntilYourNextTurn" && duration != "Permanent" {
+		if err := durationRefused("Goad", duration); err != nil {
+			return err
+		}
+		if endsAtCleanup(duration) {
+			return fmt.Errorf("engine: Goad: Duration$ %q not resolvable yet", duration)
+		}
+		until = duration
 	}
 	// GoadEffect never calls checkValidDuration: a host that already left
 	// play registers a command nothing runs, and the goad stays (Java quirk,
@@ -46,9 +52,11 @@ func (goadEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			c.goadedBy = nil
 			continue
 		}
-		c.goadedBy = append(c.goadedBy, goad{By: a.Controller, Permanent: duration == "Permanent" || hostBound, Timestamp: ts})
-		if hostBound {
-			g.registerHostBoundEnd(source, cardCommand{Kind: commandEndGoad, Target: id, Timestamp: ts}, duration)
+		c.goadedBy = append(c.goadedBy, goad{By: a.Controller, Permanent: duration == "Permanent" || until != "", Timestamp: ts})
+		if until != "" {
+			if err := g.addUntilCommand(a, until, cardCommand{Kind: commandEndGoad, Target: id, Timestamp: ts}); err != nil {
+				return err
+			}
 		}
 		if hasParam(a, "RememberGoaded") {
 			source.Memory.Remember(CardEntity(id))

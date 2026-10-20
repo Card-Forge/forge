@@ -24,7 +24,7 @@ func (protectionEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	if err := rejectParams(a, "Protection", "Choser", "Condition"); err != nil {
 		return err
 	}
-	permanent, err := animateDuration(a, "Protection")
+	permanent, until, err := animateDuration(a, "Protection")
 	if err != nil {
 		return err
 	}
@@ -42,7 +42,9 @@ func (protectionEffect) Resolve(g *Game, a *Ability, controller PlayerController
 	}
 	// Radiance$ (ProtectEffect.java:141).
 	cards = append(cards, g.radianceCards(a)...)
-	g.animateCards(animateRecord{Permanent: permanent, AddKeywords: protectionKeywords(gains, true)}, cards)
+	if err := g.animateCards(a, animateRecord{Permanent: permanent, until: until, AddKeywords: protectionKeywords(gains, true)}, cards); err != nil {
+		return err
+	}
 	return nil
 }
 

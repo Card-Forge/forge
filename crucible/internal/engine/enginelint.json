@@ -157,7 +157,8 @@
       "scheduledaction",
       "ignoreeffect",
       "textwords",
-      "textrewrite"
+      "textrewrite",
+      "untilcommand"
     ],
     "phase": [],
     "event": ["id", "zone", "phase", "parts"],
@@ -197,7 +198,8 @@
       "mustblockeffect",
       "phasing",
       "scheduledaction",
-      "textwords"
+      "textwords",
+      "untilcommand"
     ],
     "mulligan": ["id", "zone", "game", "control"],
     "match": ["id", "zone", "game", "control"],
@@ -505,7 +507,8 @@
       "control",
       "controlcommands",
       "continuouslayers",
-      "replacedying"
+      "replacedying",
+      "untilcommand"
     ],
     "sacrificeeffect": [
       "id",
@@ -596,9 +599,21 @@
       "regenerationeffect"
     ],
     "effecthelpers": ["id", "card", "game", "valid", "parts", "ability", "zone", "amount"],
-    "animate": ["ability", "card", "controlcommands", "effecthelpers", "game", "id", "layer", "parts", "valid", "zone"],
+    "animate": [
+      "ability",
+      "card",
+      "controlcommands",
+      "effecthelpers",
+      "game",
+      "id",
+      "layer",
+      "parts",
+      "valid",
+      "zone",
+      "untilcommand"
+    ],
     "delayedtrigger": ["ability", "card", "game", "id", "player", "trigger", "valid", "zone"],
-    "ateot": ["ability", "delayedtrigger", "effecthelpers", "game", "id"],
+    "ateot": ["ability", "delayedtrigger", "effecthelpers", "game", "id", "animate", "becomemonarcheffect", "card"],
     "random": ["game"],
     "token": ["card", "control", "event", "game", "id", "parts", "zone", "zonemove", "prepare"],
     "facedown": ["card", "id", "game", "control", "zone", "ability", "effecthelpers", "condition", "parts", "defined"],

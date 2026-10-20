@@ -87,8 +87,14 @@ func (g *Game) AdvancePhase(controller PlayerController) {
 // driver back to bookkeeping mode. It returns the entered step's priority
 // grant (beginStep).
 func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, error) {
-	if g.activePhase == Upkeep {
+	switch g.activePhase {
+	case Upkeep:
 		g.endUpkeep()
+		// PhaseHandler.java:485-486.
+		g.endPhaseCommands(controller, untilUpkeepEnd, g.activePlayer)
+	case Untap:
+		// PhaseHandler.java:490.
+		g.endPhaseCommands(controller, untilUntapEnd, g.activePlayer)
 	}
 	if g.activePhase == CombatEnd {
 		// PhaseHandler.onPhaseEnd's COMBAT_END case (PhaseHandler.java:492-501):
@@ -132,6 +138,8 @@ func (g *Game) advanceStep(controller PlayerController, driven bool) (bool, erro
 			g.endDetains(g.activePlayer)
 			g.endGoads(g.activePlayer)
 			g.endPumpsUntilTurnOf(g.activePlayer)
+			// PhaseHandler.java:518: Game.getCleanup().executeUntil(playerTurn).
+			g.runPhaseCommands(controller, untilTurnStart, g.activePlayer)
 			// PhaseHandler.java:515-518: the cleanup Phase's until lists,
 			// unkeyed first (ControlPlayer's revokes), then those keyed to
 			// the incoming active player (its grants), ADR-0030.
@@ -303,9 +311,14 @@ func (g *Game) beginStep(controller PlayerController, driven bool) (bool, error)
 		// PhaseHandler.java:257: nUpkeepsThisTurn++, a begun upkeep only (a
 		// skipped one never reaches beginStep).
 		g.upkeepsThisTurn++
+		// PhaseHandler.java:259-260: executeUntil(playerTurn), executeAt().
+		g.runPhaseCommands(controller, untilUpkeepBegin, g.activePlayer)
 	case EndOfTurn:
 		// PhaseHandler.java:362: nEndOfTurnsThisTurn++.
 		g.endOfTurnsThisTurn++
+		// :363-366: executeUntil(playerTurn), then executeAt().
+		g.runPhaseCommands(controller, untilEndStepBegin, g.activePlayer)
+		g.runPhaseCommands(controller, untilEndStepAt, NoPlayer)
 	case Draw:
 		g.drawStep(controller)
 	case Main1:

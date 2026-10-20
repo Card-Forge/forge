@@ -286,6 +286,10 @@ type Game struct {
 	// EndOfTurn.addUntilEnd/registerUntilEnd hold (controlcommands.go).
 	endOfTurnCmds, endOfCombatCmds []cardCommand
 	endOfNextTurnCmds              []playerCommand
+	// phaseCmds are the other Phase command lists addUntilCommand fills:
+	// cleanup, upkeep, untap and end-step ones keyed to a player
+	// (untilcommand.go).
+	phaseCmds []phaseCommand
 	// pendingReturns are the Duration$ UntilHostLeavesPlay returns a host's
 	// leaving has run but no controller has carried out yet
 	// (returnUntilCards, controlcommands.go). Empty between steps.
@@ -1517,6 +1521,7 @@ func (g *Game) Clone() *Game {
 		endOfTurnCmds:     append([]cardCommand(nil), g.endOfTurnCmds...),
 		endOfCombatCmds:   append([]cardCommand(nil), g.endOfCombatCmds...),
 		endOfNextTurnCmds: append([]playerCommand(nil), g.endOfNextTurnCmds...),
+		phaseCmds:         append([]phaseCommand(nil), g.phaseCmds...),
 		pendingReturns:    append([]cardCommand(nil), g.pendingReturns...),
 
 		animates:  append([]animateRecord(nil), g.animates...),

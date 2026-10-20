@@ -1,13 +1,13 @@
 package engine
 
-//enginelint:allow id card game ability defined condition control parts zone effecthelpers zonemove ateot
+//enginelint:allow id card game ability defined condition control parts zone effecthelpers zonemove ateot changezoneeffect controlcommands
 
 import "fmt"
 
 // changeZoneAllUnresolvedParams are ChangeZoneAllEffect.java's params this
 // port cannot honour yet (same mechanisms as changeZoneUnresolvedParams).
 var changeZoneAllUnresolvedParams = [...]string{
-	"Duration", "FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
+	"FaceDown", "FaceDownPower", "FaceDownToughness", "FaceDownSetType",
 	"WithCountersType", "StaticEffect", "TypeLimit", "OptionQuestion",
 	"Hidden", "ChangeNum", "Pawprint", "Random",
 	"Ultimate",
@@ -36,6 +36,15 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
+		return nil
+	}
+	until, err := changeZoneDuration(a, "ChangeZoneAll")
+	if err != nil {
+		return err
+	}
+	// ChangeZoneAllEffect.java:52: a host no longer in play or on the stack
+	// makes the whole effect do nothing.
+	if until && source.Zone != Battlefield && source.Zone != Stack {
 		return nil
 	}
 	destName, _ := a.Params.Param("Destination")
@@ -157,6 +166,14 @@ func (changeZoneAllEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	}
 	if err := registerAtEOT(g, a, movedAll); err != nil {
 		return err
+	}
+	if until {
+		// :206, changeZoneUntilCommand.
+		var cmds []cardCommand
+		for _, from := range movedOrigins {
+			cmds = g.untilReturns(cmds, a.Source, from, moved[from])
+		}
+		g.armUntilHostLeaves(controller, a.Source, cmds)
 	}
 	if shuffle {
 		for _, pid := range players {

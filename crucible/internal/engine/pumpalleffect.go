@@ -37,10 +37,7 @@ import (
 // blanket multi-card grant; SharedKeywordsZone$/SharedRestrictions$ (4/4) --
 // CardFactoryUtil.sharedKeywords' own zone scan, a further mechanic;
 // ModeCost$ (3) and Exhaust$ (4) -- each its own further activation
-// mechanic; AtEOT$ (0 real PumpAll lines, kept for symmetry with Pump's own
-// list and in case a future corpus update adds one) --
-// registerDelayedTrigger, a new trigger this effect would silently fail to
-// create.
+// mechanic. AtEOT$ resolves (registerAtEOT) over every matched card.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
 // through Registry.Resolve (effect.go) once this effect's own body
@@ -62,7 +59,7 @@ var pumpAllUnresolvedParams = [...]string{
 	"Condition", "ConditionZone", "ConditionPlayerTurn",
 	"ConditionManaSpent", "ConditionManaNotSpent", "ValidTgts",
 	"RememberPumped", "SharedKeywordsZone", "SharedRestrictions",
-	"ModeCost", "Exhaust", "AtEOT",
+	"ModeCost", "Exhaust",
 }
 
 // pumpAllEffect resolves Mode$/DB$/AB$ PumpAll for the blanket shape --
@@ -86,6 +83,7 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	}
 
 	permanent, untilNextTurn, perpetual := false, false, false
+	until := ""
 	if d, ok := a.Params.Param("Duration"); ok {
 		switch d {
 		case "Permanent":
@@ -96,7 +94,16 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			// SpellAbilityEffect.addUntilCommand (:980-981), as Pump's.
 			permanent, untilNextTurn = true, true
 		default:
-			return fmt.Errorf("engine: PumpAll: Duration$ %q not resolvable yet", d)
+			// PumpAllEffect.java:122, then :92's addUntilCommand per card.
+			if err := durationRefused("PumpAll", d); err != nil {
+				return err
+			}
+			if !g.checkValidDuration(a, d) {
+				return nil
+			}
+			if !endsAtCleanup(d) {
+				permanent, until = true, d
+			}
 		}
 	}
 
@@ -115,7 +122,8 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if perpetual && (len(grant.hidden) > 0 || grant.switched) {
 		return fmt.Errorf("engine: PumpAll: Duration$ Perpetual with a HIDDEN keyword not resolvable yet")
 	}
-	if power == 0 && toughness == 0 && grant.empty() {
+	pumpsNothing := power == 0 && toughness == 0 && grant.empty()
+	if pumpsNothing && !hasParam(a, "AtEOT") {
 		return nil
 	}
 
@@ -137,10 +145,15 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 
 	g.timestamp++
 	timestamp := g.timestamp
+	var matched []CardID
 	for _, pid := range players {
 		for _, z := range pumpAllZones(a.Params) {
 			for _, cid := range g.Zone(z, pid).Cards() {
 				if !Matches(g, g.Card(cid), spec, source.Controller(), a.Source) {
+					continue
+				}
+				matched = append(matched, cid)
+				if pumpsNothing {
 					continue
 				}
 				g.pumps = append(g.pumps, pumpRecord{
@@ -148,10 +161,16 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 					Keywords: grant.keywords, Hidden: grant.hidden, Switched: grant.switched, Permanent: permanent,
 					HasUntil: untilNextTurn, UntilTurnOf: a.Controller, Perpetual: perpetual,
 				})
+				if until != "" {
+					if err := g.addUntilCommand(a, until, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}); err != nil {
+						return err
+					}
+				}
 			}
 		}
 	}
-	return nil
+	// PumpAllEffect.java:98-100: AtEOT$ remembers every pumped card.
+	return registerAtEOT(g, a, matched)
 }
 
 // pumpAllZones reads PumpZone$ as the comma list of zones to scan --

@@ -24,7 +24,8 @@ func (animateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	if template.endBound != "" && !validHostDuration(a, source, template.endBound) {
+	if d, ok := a.Params.Param("Duration"); ok && !g.checkValidDuration(a, d) {
+		// AnimateEffect.java:34.
 		return nil
 	}
 	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
@@ -42,7 +43,9 @@ func (animateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		g.grantPerpetualTriggers(cards, grants, a.Amounts)
 	}
 	if !template.empty() {
-		g.animateCards(template, cards)
+		if err := g.animateCards(a, template, cards); err != nil {
+			return err
+		}
 	}
 	return registerAtEOT(g, a, cards)
 }

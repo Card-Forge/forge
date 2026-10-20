@@ -19,9 +19,13 @@ func (exchangePowerEffect) Resolve(g *Game, a *Ability, _ PlayerController) erro
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
 	}
-	permanent, err := animateDuration(a, "ExchangePower")
+	permanent, until, err := animateDuration(a, "ExchangePower")
 	if err != nil {
 		return err
+	}
+	if until != "" {
+		d, _ := a.Params.Param("Duration")
+		return fmt.Errorf("engine: ExchangePower: Duration$ %q not resolvable yet", d)
 	}
 	cards, err := targetedOrDefinedCards(source, a.Params, a.refs())
 	if err != nil {

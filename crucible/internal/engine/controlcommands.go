@@ -336,38 +336,6 @@ func (g *Game) runEndOfCombatCommands(controller PlayerController) {
 	g.runCommands(controller, cmds)
 }
 
-// hostBoundDuration reports whether d is a Duration$ whose end is a command
-// on the host card (addUntilCommand's UntilLoseControlOfHost and
-// AsLongAsControl branches, SpellAbilityEffect.java:1007-1013).
-func hostBoundDuration(d string) bool {
-	return d == "UntilLoseControlOfHost" || d == "AsLongAsControl"
-}
-
-// validHostDuration is checkValidDuration for a host-bound d
-// (SpellAbilityEffect.java:1036-1054): the host is in play or on the stack, not
-// phased out for AsLongAsControl, and controlled by the activator. false means
-// the effect does not apply at all.
-func validHostDuration(a *Ability, host *Card, d string) bool {
-	if host.Zone != Battlefield && host.Zone != Stack {
-		return false
-	}
-	if d == "AsLongAsControl" && host.IsPhasedOut() {
-		return false
-	}
-	return host.Controller() == a.Controller
-}
-
-// registerHostBoundEnd puts cmd on the host lists addUntilCommand names for d:
-// leaves play and change controller, plus phase-out for AsLongAsControl.
-func (g *Game) registerHostBoundEnd(host *Card, cmd cardCommand, d string) {
-	cmd.Host = host.ID
-	host.leavesPlayCmds = append(host.leavesPlayCmds, cmd)
-	host.changeControllerCmds = append(host.changeControllerCmds, cmd)
-	if d == "AsLongAsControl" {
-		host.phaseOutCmds = append(host.phaseOutCmds, cmd)
-	}
-}
-
 // loseControlTokens are the LoseControl$ values ControlGainEffect registers
 // a command for, in the order its resolve checks them.
 var loseControlTokens = map[string]bool{

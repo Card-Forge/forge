@@ -453,7 +453,7 @@ func TestEffectRejectsUnportedParams(t *testing.T) {
 	for _, line := range []string{
 		"DB$ Effect | Abilities$ ABPump",
 		"DB$ Effect | Boon$ True",
-		"DB$ Effect | Duration$ UntilHostLeavesPlayOrEndOfCombat",
+		"DB$ Effect | Duration$ UntilFacedown",
 		"DB$ Effect | ForgetCounter$ P1P1 | RememberObjects$ Self",
 	} {
 		g, p, _ := newTwoPlayerGame(t)

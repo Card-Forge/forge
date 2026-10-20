@@ -20,7 +20,7 @@ import (
 var tokenUnresolvedParams = [...]string{
 	"WithCountersType",
 	"WithCountersAmount", "AddTriggersFrom", "TokenTypes", "TokenColors", "TokenRemembered",
-	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable", "AtEOTTrig",
+	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable",
 	"Condition"}
 
 // tokenEffect is TokenEffect.java: TokenAmount$ (default 1) of every
@@ -101,6 +101,11 @@ func (tokenEffect) Resolve(g *Game, a *Ability, controller PlayerController) err
 		}
 		id := g.createToken(controller, spec)
 		created = append(created, id)
+		if loc, ok := a.Params.Param("AtEOTTrig"); ok {
+			if err := g.addSelfTrigger(a, loc, id); err != nil {
+				return err
+			}
+		}
 		if hasAttach && attachTo != NoCard && tokenCanAttach(g, a, spec, attachTo) && g.Card(id).Zone == Battlefield {
 			g.attachTo(controller, id, attachTo)
 		}
