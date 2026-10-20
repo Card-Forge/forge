@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Reality Fractured #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/10/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Draconic Visitor;Eriette's Tempting Apple;Burner Rocket;Mox Jasper;HYDRA Assault Robot;Mouser Foundry
+p0battlefield=Tenured Tethermage|Counters:P1P1=2;Ravenous Robots;Mountain;Mountain;Mountain;Mountain;T:rg_a_heartwood;T:rg_a_heartwood;T:rg_a_heartwood
+p1life=19
+p1battlefield=Kona, Rescue Beastie;T:cadet
