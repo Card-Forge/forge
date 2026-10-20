@@ -124,6 +124,29 @@ func TestAnimateAllEffectAffectsEveryMatch(t *testing.T) {
 	}
 }
 
+// TestAnimateAllEffectValidTgtsScopesToThePlayer proves a targeting AnimateAll
+// reads only the targeted player's cards (AnimateAllEffect.java:136-140).
+func TestAnimateAllEffectValidTgtsScopesToThePlayer(t *testing.T) {
+	t.Parallel()
+
+	g, p, other := newTwoPlayerGame(t)
+	mine := g.NewCard(landDef(t, "Test Forest", "Land Forest"), p, engine.Battlefield)
+	theirs := g.NewCard(landDef(t, "Test Forest", "Land Forest"), other, engine.Battlefield)
+	def := etbChainDef(t, "Test Awaken Theirs",
+		"DB$ AnimateAll | ValidTgts$ Player | ValidCards$ Land | Power$ 2 | Toughness$ 2 | Types$ Creature")
+	c := engine.NewScriptedController()
+	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
+	if _, err := castETBChain(t, g, p, def, c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if !g.Card(theirs).Type().Has(cardtype.Creature) {
+		t.Error("the targeted player's land was not animated")
+	}
+	if g.Card(mine).Type().Has(cardtype.Creature) {
+		t.Error("the other player's land was animated")
+	}
+}
+
 // TestDebuffEffectRemovesKeywordUntilEndOfTurn proves Debuff takes a
 // printed keyword away for the turn.
 func TestDebuffEffectRemovesKeywordUntilEndOfTurn(t *testing.T) {

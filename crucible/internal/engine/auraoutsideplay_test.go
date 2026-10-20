@@ -124,7 +124,6 @@ func TestAttachDefinedRefusals(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ line, want string }{
-		{"DB$ Attach | Defined$ Self | Optional$ True", "Optional$"},
 		{"DB$ Attach | Defined$ Self | Chooser$ Opponent", "Chooser$"},
 		{"DB$ Attach | Defined$ Player", "choosing among 2"},
 		{"DB$ Attach | Defined$ You", "player host"},
@@ -135,6 +134,30 @@ func TestAttachDefinedRefusals(t *testing.T) {
 		_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil, tc.line)
 		if err == nil || !strings.Contains(err.Error(), tc.want) {
 			t.Errorf("%q: err = %v, want one naming %q", tc.line, err, tc.want)
+		}
+	}
+}
+
+// Attach with Choices$ and Defined$ has the activator pick the attachment among
+// the matching permanents and attach it to the defined host; Optional$ asks
+// first (AttachEffect.java:45-65, :144).
+func TestAttachChoicesWithDefinedAndOptional(t *testing.T) {
+	t.Parallel()
+
+	for _, confirm := range []bool{true, false} {
+		g, p, _ := newTwoPlayerGame(t)
+		creature := g.NewCard(creatureDef(t), p, engine.Battlefield)
+		equipment := g.NewCard(equipmentDef(t), p, engine.Battlefield)
+		c := engine.NewScriptedController()
+		c.QueueCardChoice([]engine.CardID{equipment})
+		c.QueueConfirmEffect(confirm)
+		if _, err := resolveNow(t, g, p, c, []engine.EntityID{engine.CardEntity(creature)},
+			"DB$ Attach | Choices$ Equipment | Defined$ Targeted | Optional$ True"); err != nil {
+			t.Fatal(err)
+		}
+		host, attached := g.Card(equipment).AttachedTo()
+		if attached != confirm || (confirm && host != creature) {
+			t.Errorf("confirm=%v: equipment attached to %v (%v), want attached=%v to the creature", confirm, host, attached, confirm)
 		}
 	}
 }

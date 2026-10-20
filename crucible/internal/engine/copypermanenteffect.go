@@ -1,6 +1,6 @@
 package engine
 
-//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect ateot cloneeffect
+//enginelint:allow game control ability effecthelpers card condition id defined player token parts zone valid amount changecombatantseffect ateot cloneeffect animate tokeneffect
 
 import (
 	"fmt"
@@ -32,9 +32,8 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
 		return err
 	}
-	if err := rejectParams(a, "CopyPermanent", "PumpKeywords",
-		"SetCreatureTypes",
-		"PumpDuration", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
+	if err := rejectParams(a, "CopyPermanent",
+		"AttachedTo", "AddTriggers", "ValidSupportedCopy",
 		"RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",
 		"ChangeZoneTable", "AddAbilities", "AddStaticAbilities", "ChosenMapIndex",
 		"RemoveCreatureTypes", "SetCardTypes", "GainThisAbility", "AddTypesTo",
@@ -70,6 +69,12 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 		return err
 	}
 	setTough, hasSetTough, err := copyBaseValue(g, a, source, "SetToughness")
+	if err != nil {
+		return err
+	}
+	// PumpKeywords$ and PumpDuration$ (TokenEffectBase.java:102, :272): keywords
+	// each copy gains, as the Token effect's (tokenPumpKeywords).
+	pump, err := tokenPumpKeywords(a, "CopyPermanent")
 	if err != nil {
 		return err
 	}
@@ -109,6 +114,12 @@ func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerControl
 					if err := g.addSelfTrigger(a, loc, id); err != nil {
 						return err
 					}
+				}
+				if pump != nil {
+					g.timestamp++
+					g.addAnimate(animateRecord{
+						Card: id, Timestamp: g.timestamp, Permanent: pump.permanent, AddKeywords: pump.keywords,
+					})
 				}
 				// TokenEffectBase.makeTokenTable's addToCombat (TokenEffectBase.java:188),
 				// which CopyPermanentEffect inherits.
@@ -230,7 +241,7 @@ func copyBaseValue(g *Game, a *Ability, source *Card, key string) (int, bool, er
 func copyExceptDef(g *Game, a *Ability, base *compile.Card) (*compile.Card, error) {
 	excepting := false
 	for _, key := range [...]string{"AddTypes", "AddKeywords", "NonLegendary", "SetColor", "AddColors",
-		"RemoveCardTypes", "AddSVars", "NewName", "SetPower", "SetToughness", "RemoveCost"} {
+		"RemoveCardTypes", "AddSVars", "NewName", "SetPower", "SetToughness", "RemoveCost", "SetCreatureTypes"} {
 		excepting = excepting || hasParam(a, key)
 	}
 	if !excepting {

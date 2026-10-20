@@ -240,7 +240,7 @@ type cloneEffect struct{}
 var cloneUnresolvedParams = [...]string{
 	"GainTextAbilities", "GainTextOf",
 	"SetManaCost", "SetColorByManaCost",
-	"RemoveCreatureTypes", "SetCreatureTypes", "RemoveKeywords",
+	"RemoveCreatureTypes", "RemoveKeywords",
 	"SetLoyalty"}
 
 func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
@@ -703,20 +703,32 @@ type cloneChanges struct {
 	// becoming the copy is an embalmed token (CardFactory.java:555).
 	removeCost, embalmGate bool
 	addTypes               []string
-	addKeywords            []string
-	keywordsIfNew          bool
-	setPower, setTough     bool
-	power, toughness       int
-	addAmounts             map[string]expr.Amount
-	addAmountNames         []string
-	gain                   *compile.Ability
-	gainKind               compile.Record
+	// setCreatureTypes is SetCreatureTypes$ (CardFactory.java:585): the copy's
+	// creature types become exactly these, dropCreature naming the old ones.
+	setCreatureTypes   []string
+	dropCreature       func(string) bool
+	addKeywords        []string
+	keywordsIfNew      bool
+	setPower, setTough bool
+	power, toughness   int
+	addAmounts         map[string]expr.Amount
+	addAmountNames     []string
+	gain               *compile.Ability
+	gainKind           compile.Record
 }
 
 func readCloneChanges(g *Game, a *Ability) (cloneChanges, error) {
 	var ch cloneChanges
 	ch.keepName = hasParam(a, "KeepName")
 	ch.newName, ch.hasNewName = a.Params.Param("NewName")
+	if raw, ok := a.Params.Param("SetCreatureTypes"); ok {
+		ch.setCreatureTypes = strings.Fields(raw)
+		drop, ok := subtypeCategoryDrop(g, false, true, false, false)
+		if !ok {
+			return ch, fmt.Errorf("engine: SetCreatureTypes$ %q has no type vocabulary to replace creature types against", raw)
+		}
+		ch.dropCreature = drop
+	}
 	parseColors := func(key string) (mana.Colors, error) {
 		raw, _ := a.Params.Param(key)
 		var out mana.Colors
@@ -818,6 +830,28 @@ func (ch *cloneChanges) apply(f, out, printed *compile.Face) {
 	}
 	for _, t := range ch.addTypes {
 		f.Type = f.Type.Union(cardtype.ParseToken(t))
+	}
+	if ch.dropCreature != nil {
+		f.Type = f.Type.WithoutSubtypesWhere(ch.dropCreature)
+		for _, t := range ch.setCreatureTypes {
+			f.Type = f.Type.Union(cardtype.ParseToken(t))
+		}
+		// CardFactory.java:742-744: the copy loses Changeling, and a
+		// characteristic-defining all-creature-types static (:733).
+		var kws []string
+		for _, k := range f.Keywords {
+			if keyword.Parse(k).Name != "Changeling" {
+				kws = append(kws, k)
+			}
+		}
+		f.Keywords = kws
+		var statics []*compile.Ability
+		for _, s := range f.Statics {
+			if _, all := s.Param("AddAllCreatureTypes"); !all {
+				statics = append(statics, s)
+			}
+		}
+		f.Statics = statics
 	}
 	if len(ch.addKeywords) > 0 {
 		kws := append([]string(nil), f.Keywords...)

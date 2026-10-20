@@ -63,6 +63,10 @@ type Player struct {
 	// and damageReceivedLastTurn lists (GameEntity.java:57), summed per kind.
 	// The turn rotation moves this turn's into last turn's (turn.go).
 	damageThisTurn, damageLastTurn [2]int
+	// notes and notedNumbers are what Pump NoteCards$/NoteNumber$ recorded on
+	// this player (Player.addNoteForName, noteNumberForName); see playernotes.go.
+	notes        []playerNote
+	notedNumbers []playerNotedNumber
 	// surveilThisTurn is Player.surveilThisTurn: how many times this player has
 	// surveiled this turn, read by Mode$ Surveil's FirstTime$ (Player.java:1084).
 	surveilThisTurn int

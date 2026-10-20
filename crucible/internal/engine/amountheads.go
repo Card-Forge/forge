@@ -407,6 +407,13 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 			n--
 		}
 		return n, true
+	case "NotedNumber":
+		// Count$NotedNumber (AbilityUtils.java:2456): what Pump NoteNumber$
+		// noted for the host's name on its controller.
+		if source == NoCard || g.Card(source).Def == nil {
+			return 0, true
+		}
+		return g.Player(sourceController).notedNumber(g.Card(source).Def.Name), true
 	case "YourTurns":
 		// Count$YourTurns (AbilityUtils.java:2438): Player.getTurn() of the
 		// host's controller, the turns it has taken, this one included.

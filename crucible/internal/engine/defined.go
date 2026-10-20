@@ -610,7 +610,7 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 			return []CardID{id}, nil
 		}
 		return nil, nil
-	case "Targeted", "ThisTargetedCard":
+	case "Targeted", "TargetedCard", "ThisTargetedCard":
 		var cards []CardID
 		for _, e := range refs.targets {
 			if id, ok := e.AsCard(); ok {
@@ -782,6 +782,9 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 		if refs.game != nil {
 			if cards, ok := refs.game.definedValidCards(refs.activator, host, defined); ok {
 				return cards, nil
+			}
+			if cards, ok, err := refs.game.definedAttachCards(host, defined, refs); ok {
+				return cards, err
 			}
 			if cards, ok, err := refs.game.definedCompoundCards(host, defined, refs); ok {
 				return cards, err
@@ -974,4 +977,39 @@ func definedEntities(g *Game, controller PlayerID, host *Card, def string, refs 
 		return nil, cerr
 	}
 	return out, nil
+}
+
+// definedAttachCards is the "AttachedBy <defined>" and "AttachedTo <defined>"
+// forms (AbilityUtils.java:96-117): the card each defined attachment is
+// attached to (read from its last-known information once it has left, so a
+// sacrificed Aura still names what it enchanted), or what is attached to each
+// defined card or player. ok is false for any other spelling.
+func (g *Game) definedAttachCards(host *Card, defined string, refs abilityRefs) (cards []CardID, ok bool, err error) {
+	if v, found := strings.CutPrefix(defined, "AttachedBy "); found {
+		atts, err := definedCards(host, strings.Fields(v)[0], refs)
+		if err != nil {
+			return nil, true, err
+		}
+		for _, att := range atts {
+			if to, attached := g.lkiOrLive(att).AttachedTo(); attached {
+				cards = append(cards, to)
+			}
+		}
+		return cards, true, nil
+	}
+	if v, found := strings.CutPrefix(defined, "AttachedTo "); found {
+		ents, err := definedEntities(g, refs.activator, host, strings.Fields(v)[0], refs)
+		if err != nil {
+			return nil, true, err
+		}
+		for _, e := range ents {
+			if id, isCard := e.AsCard(); isCard {
+				cards = append(cards, g.lkiOrLive(id).Attachments()...)
+			} else if pid, isPlayer := e.AsPlayer(); isPlayer {
+				cards = append(cards, g.Player(pid).Attachments()...)
+			}
+		}
+		return cards, true, nil
+	}
+	return nil, false, nil
 }

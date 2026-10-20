@@ -74,13 +74,13 @@ var playUnresolvedParams = [...]string{
 // false for every card, silently emptying the pool (GO-7): ExiledWith and
 // its ExiledWithSourceLKI/ExiledWithEffectSource forms -- the exact
 // ExiledWithSource is answered (playSpecGap) --, TargetedPlayerCtrl (6), OwnedBy/ControlledBy <Defined> (8),
-// sharesCardTypeWith, faceUp, NotedFor..., CanPayManaCost.
+// sharesCardTypeWith, faceUp, CanPayManaCost.
 // sharesNameWith is answered in the forms Matches evaluates without the
 // ability that names them (playSharesNameWithForms); the corpus's Play lines
 // use only ThisTurnCast and TriggeredCard, which stay refused.
 var playUnportedProperties = [...]string{
 	"ExiledWith", "TargetedPlayerCtrl", "OwnedBy", "ControlledBy", "sharesCardTypeWith",
-	"faceUp", "NotedFor", "CanPayManaCost",
+	"faceUp", "CanPayManaCost",
 }
 
 // playSharesNameWithForms are the `sharesNameWith <restriction>` restrictions

@@ -155,6 +155,10 @@ func (g *Game) orderCardsByTheirOwners(controller PlayerController, cards []Card
 
 // parseZoneList reads a comma-separated zone list (Origin$, ChoiceZone$).
 func parseZoneList(raw string) ([]ZoneType, error) {
+	if raw == "All" {
+		// ZoneType.listValueOf("All"), ZoneType.java:77-79.
+		return []ZoneType{Battlefield, Hand, Graveyard, Exile, Stack, Library, Command}, nil
+	}
 	var zones []ZoneType
 	for _, name := range strings.Split(raw, ",") {
 		z, ok := ZoneByName(strings.TrimSpace(name))

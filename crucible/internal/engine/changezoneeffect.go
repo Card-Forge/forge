@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/jczastkiewicz/crucible/internal/valid"
 )
 
 // changeZoneUnresolvedParams are ChangeZoneEffect.java's params this port
@@ -35,7 +37,7 @@ import (
 // flag here and at the discard sites.
 var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
-	"AttachedTo", "AttachedToPlayer", "AttachAfter", "FaceDown",
+	"AttachAfter", "FaceDown",
 	"LeaveBattlefield", "StaticEffect",
 	"Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
@@ -530,12 +532,20 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 			// exist and a flashback card going to exile inside Move.
 			g.removeSpellFromStack(id)
 		}
+		attach, skip, err := g.changeZonePlanAttach(controller, a.Controller, a, source, id, dest)
+		if err != nil {
+			return err
+		}
+		if skip {
+			continue
+		}
 		joined, err := g.changeZoneJoinCombat(controller, a, id, dest, newController)
 		if err != nil {
 			return err
 		}
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 		g.changeZoneLeftCombat(id, joined)
+		g.changeZoneAttach(controller, id, attach)
 		if dest != Battlefield {
 			// The counters go on the moved card after it arrives, the
 			// activator placing them (ChangeZoneEffect.java:751-755).
@@ -879,6 +889,13 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 		var movedAll []CardID
 		for _, id := range pick.chosen {
 			from := g.Card(id).Zone
+			attach, skip, err := g.changeZonePlanAttach(controller, pick.player, a, source, id, dest)
+			if err != nil {
+				return err
+			}
+			if skip {
+				continue
+			}
 			joined, err := g.changeZoneJoinCombat(controller, a, id, dest, newController)
 			if err != nil {
 				return err
@@ -902,6 +919,7 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			}
 			melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 			g.changeZoneLeftCombat(id, joined)
+			g.changeZoneAttach(controller, id, attach)
 			if dest == Exile {
 				g.markExiledWith(id, a.Source)
 				g.exileFaceDown(a, id)
@@ -1010,4 +1028,90 @@ func (g *Game) changeZoneAltDest(controller PlayerController, a *Ability, host *
 		return alt, altPos, nil
 	}
 	return dest, libPos, nil
+}
+
+// attachPlan is where a card AttachedTo$/AttachedToPlayer$ puts onto the
+// battlefield attaches to: a card host, a player host, or none.
+type attachPlan struct {
+	card   CardID
+	player PlayerID
+	kind   uint8 // 0 none, 1 card, 2 player
+}
+
+// changeZonePlanAttach is ChangeZoneEffect.java:632-668 (known origin) and
+// :1352-1387 (hidden origin): AttachedTo$ names the hosts (Defined$, else the
+// Valid cards of the battlefield, as Java's getDefinedCards answers nothing for
+// a Valid string), only those the card could be attached to remain, and the
+// decider picks one; an Aura with none stays where it is (skip). AttachedToPlayer$
+// picks among players the same way and skips the card when it names none. The
+// card is attached after it arrives (changeZoneAttach), where Java attaches it
+// first, so its "enters" triggers see the attachment already there either way.
+func (g *Game) changeZonePlanAttach(controller PlayerController, decider PlayerID, a *Ability, source *Card, id CardID, dest ZoneType) (plan attachPlan, skip bool, err error) {
+	spec, hasCard := a.Params.Param("AttachedTo")
+	playerSpec, hasPlayer := a.Params.Param("AttachedToPlayer")
+	if !hasCard && !hasPlayer {
+		return plan, false, nil
+	}
+	if dest != Battlefield {
+		return plan, false, fmt.Errorf("engine: ChangeZone: AttachedTo$ with Destination$ %v not resolvable yet", dest)
+	}
+	c := g.Card(id)
+	if hasCard {
+		t := c.Type()
+		if !t.HasSubtype("Aura") && !t.HasSubtype("Equipment") && !t.HasSubtype("Fortification") {
+			// ChangeZoneEffect.java:1352 reads AttachedTo$ for an attachment only.
+			return plan, false, nil
+		}
+		list, derr := definedCards(source, spec, a.refs())
+		if derr != nil || len(list) == 0 {
+			list = nil
+			parsed := valid.Parse(strings.TrimPrefix(spec, "Valid "))
+			for _, pid := range g.Players() {
+				for _, h := range g.Zone(Battlefield, pid).Cards() {
+					if Matches(g, g.Card(h), parsed, source.Controller(), source.ID) {
+						list = append(list, h)
+					}
+				}
+			}
+		}
+		var choices []CardID
+		for _, h := range list {
+			if g.canBeAttached(c, h) {
+				choices = append(choices, h)
+			}
+		}
+		if len(choices) == 0 {
+			return plan, c.Type().HasSubtype("Aura"), nil
+		}
+		chosen := controller.ChooseCardsForEffect(g, decider, a.Source, choices, 1, 1)
+		if err := checkChoice(chosen, choices, 1, 1); err != nil {
+			return plan, false, fmt.Errorf("engine: ChangeZone: AttachedTo$: %w", err)
+		}
+		return attachPlan{card: chosen[0], kind: 1}, false, nil
+	}
+	players, perr := definedPlayers(g, a.Controller, a.Source, playerSpec, a.refs())
+	if perr != nil {
+		return plan, false, fmt.Errorf("engine: ChangeZone: AttachedToPlayer$: %w", perr)
+	}
+	if len(players) == 0 {
+		return plan, true, nil
+	}
+	pick := players[0]
+	if len(players) > 1 {
+		pick = controller.ChoosePlayerForEffect(g, decider, a.Source, players)
+	}
+	return attachPlan{player: pick, kind: 2}, false, nil
+}
+
+// changeZoneAttach attaches a card that arrived on the battlefield to the host
+// changeZonePlanAttach picked.
+func (g *Game) changeZoneAttach(controller PlayerController, id CardID, plan attachPlan) {
+	if plan.kind == 0 || g.Card(id).Zone != Battlefield {
+		return
+	}
+	if plan.kind == 1 {
+		g.attachTo(controller, id, plan.card)
+		return
+	}
+	g.attachToPlayer(controller, id, plan.player)
 }

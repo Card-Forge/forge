@@ -671,6 +671,10 @@ func propertyMatches(g *Game, c *Card, p valid.Property, sourceController Player
 		// CardProperty.java:182-185: the controller's team is the source
 		// controller's. This port has no team games, so a team is one player.
 		return c.Controller() == sourceController
+	case strings.HasPrefix(name, "NotedFor"):
+		// CardProperty.java:1986-1996: the source controller noted this card
+		// under that key.
+		return g.Player(sourceController).notedCard(strings.TrimPrefix(name, "NotedFor"), c)
 	case name == "NotedColor", name == "BorderColorSilver":
 		// CardProperty.java:1998-2007 reads the controller's draft notes, which
 		// a game here never has: no card carries the noted color. A card's border
@@ -1200,6 +1204,11 @@ func matchesPlayerPropertyIn(g *Game, candidate, host PlayerID, source CardID, p
 	}
 	if rest, ok := strings.CutPrefix(property, "controls"); ok {
 		return controlsMatches(g, candidate, host, source, rest)
+	}
+	// PlayerProperty.java:493-502: the candidate noted the source card under
+	// that key.
+	if key, ok := strings.CutPrefix(property, "NotedFor"); ok && source != NoCard {
+		return g.Player(candidate).notedCard(key, g.Card(source)), true
 	}
 	// PlayerProperty.java:140-175 for the "LastTurn" forms: wasDealtDamageLastTurn,
 	// wasDealtCombatDamageLastTurn and wasDealtNonCombatDamageLastTurn compare

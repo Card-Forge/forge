@@ -1,16 +1,16 @@
 package engine
 
-//enginelint:allow ability animate card condition control effecthelpers game id zone zonemove
+//enginelint:allow defined ability animate card condition control effecthelpers game id zone zonemove
 
 import "fmt"
 
 // animateAllEffect is AnimateAllEffect.java: every card of Zone$ (the
 // battlefield by default) matching ValidCards$ takes buildAnimate's
-// characteristics. The player-scoped ValidTgts$/Defined$ form fails closed.
+// characteristics; ValidTgts$/Defined$ scope it to those players' cards.
 type animateAllEffect struct{}
 
 func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "AnimateAll", "ValidTgts", "Defined", "RememberAnimated"); err != nil {
+	if err := rejectParams(a, "AnimateAll", "RememberAnimated"); err != nil {
 		return err
 	}
 	if err := rejectUnreadCondition(a, "AnimateAll"); err != nil {
@@ -34,9 +34,25 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			return fmt.Errorf("engine: AnimateAll: Zone$: %w", err)
 		}
 	}
+	// AnimateAllEffect.java:136-140: a targeting or Defined$ line reads the cards
+	// of the targeted or defined players only.
+	players := g.Players()
+	if _, targeting := a.Params.Param("ValidTgts"); targeting {
+		players = nil
+		for _, e := range a.refs().targets {
+			if pid, ok := e.AsPlayer(); ok {
+				players = append(players, pid)
+			}
+		}
+	} else if defined, ok := a.Params.Param("Defined"); ok {
+		var err error
+		if players, err = definedPlayers(g, a.Controller, a.Source, defined, a.refs()); err != nil {
+			return fmt.Errorf("engine: AnimateAll: %w", err)
+		}
+	}
 	var cards []CardID
 	for _, z := range zones {
-		for _, p := range g.Players() {
+		for _, p := range players {
 			cards = append(cards, g.Zone(z, p).Cards()...)
 		}
 	}

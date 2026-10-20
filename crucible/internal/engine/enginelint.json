@@ -125,7 +125,7 @@
       "room",
       "controlcommands"
     ],
-    "player": ["id", "parts", "mana"],
+    "player": ["id", "parts", "mana", "playernotes"],
     "ability": ["id", "mana", "damageresolveeffect", "replaceeffect", "game"],
     "combat": ["id", "game", "valid", "effecthelpers", "card"],
     "game": [
@@ -504,6 +504,7 @@
       "playerstate"
     ],
     "pumpeffect": [
+      "playernotes",
       "ateot",
       "effecthelpers",
       "id",

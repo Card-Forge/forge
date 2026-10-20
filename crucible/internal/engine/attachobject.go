@@ -29,9 +29,6 @@ func (g *Game) attachObject(a *Ability, controller PlayerController) error {
 		return fmt.Errorf("engine: Attach: ChoiceZone$ %q with Object$ not resolvable yet", z)
 	}
 	_, hasChoices := a.Params.Param("Choices")
-	if _, optional := a.Params.Param("Optional"); optional && !hasChoices {
-		return fmt.Errorf("engine: Attach: Optional$ with Object$ and no Choices$ not resolvable yet")
-	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
@@ -62,6 +59,10 @@ func (g *Game) attachObject(a *Ability, controller PlayerController) error {
 		if g.Card(id).Zone != Battlefield || id == host || hostRefusesAttach(g, g.Card(id), host) {
 			continue
 		}
+		// AttachEffect.java:144: Optional$ asks per attachment.
+		if hasParam(a, "Optional") && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+			continue
+		}
 		g.attachTo(controller, id, host)
 	}
 	return nil
@@ -76,7 +77,7 @@ func (g *Game) attachObject(a *Ability, controller PlayerController) error {
 // attachment goes through Card.attachToEntity's canBeAttached gate (canBeAttached,
 // below) and is skipped when the source has left the battlefield.
 func (g *Game) attachDefined(a *Ability, controller PlayerController) error {
-	for _, key := range [...]string{"Choices", "PlayerChoices", "Optional", "Chooser", "Move"} {
+	for _, key := range [...]string{"PlayerChoices", "Chooser", "Move"} {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Attach: %s$ with Defined$ not resolvable yet", key)
 		}
@@ -84,6 +85,35 @@ func (g *Game) attachDefined(a *Ability, controller PlayerController) error {
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {
 		return nil
+	}
+	attachment := a.Source
+	if spec, ok := a.Params.Param("Choices"); ok {
+		// AttachEffect.java:45-65: the activator picks the attachment among the
+		// ChoiceZone$ (battlefield) cards matching Choices$; none picked ends it.
+		zone := Battlefield
+		if z, ok := a.Params.Param("ChoiceZone"); ok {
+			var known bool
+			if zone, known = ZoneByName(z); !known {
+				return fmt.Errorf("engine: Attach: ChoiceZone$ %q not resolvable yet", z)
+			}
+		}
+		parsed := valid.Parse(spec)
+		var choices []CardID
+		for _, pid := range g.Players() {
+			for _, id := range g.Zone(zone, pid).Cards() {
+				if Matches(g, g.Card(id), parsed, a.Controller, a.Source) {
+					choices = append(choices, id)
+				}
+			}
+		}
+		if len(choices) == 0 {
+			return nil
+		}
+		picked := controller.ChooseCardsForEffect(g, a.Controller, a.Source, choices, 1, 1)
+		if err := checkChoice(picked, choices, 1, 1); err != nil {
+			return fmt.Errorf("engine: Attach: %w", err)
+		}
+		attachment = picked[0]
 	}
 	targets, err := targetedOrDefinedEntities(g, a)
 	if err != nil {
@@ -99,12 +129,16 @@ func (g *Game) attachDefined(a *Ability, controller PlayerController) error {
 	if !ok {
 		return fmt.Errorf("engine: Attach: a player host via Defined$ not resolvable yet")
 	}
-	if source.Zone != Battlefield || !g.canBeAttached(source, host) {
+	att := g.Card(attachment)
+	if att.Zone != Battlefield || !g.canBeAttached(att, host) {
 		return nil
 	}
-	g.attachTo(controller, a.Source, host)
-	if cur, ok := source.AttachedTo(); ok && cur == host && hasParam(a, "RememberAttached") {
-		source.Memory.Remember(CardEntity(a.Source))
+	if hasParam(a, "Optional") && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+		return nil
+	}
+	g.attachTo(controller, attachment, host)
+	if cur, ok := att.AttachedTo(); ok && cur == host && hasParam(a, "RememberAttached") {
+		source.Memory.Remember(CardEntity(attachment))
 	}
 	return nil
 }

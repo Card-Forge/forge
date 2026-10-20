@@ -38,3 +38,44 @@ func TestDefinedCardsFilterAndJoin(t *testing.T) {
 		})
 	}
 }
+
+// Defined$ "AttachedBy <x>" names what each of x is attached to, and
+// "AttachedTo <x>" what is attached to each of x (AbilityUtils.java:96-117).
+func TestDefinedAttachedByAndAttachedTo(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		name    string
+		defined string
+		target  func(creature, aura engine.CardID) engine.CardID
+		pumped  string
+	}{
+		{"the creature an aura enchants", "AttachedBy Targeted", func(_, aura engine.CardID) engine.CardID { return aura }, "creature"},
+		{"what is attached to a creature", "AttachedTo Targeted", func(creature, _ engine.CardID) engine.CardID { return creature }, "aura"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
+			g, p, _ := newTwoPlayerGame(t)
+			creature := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+			aura := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+			g.Attach(aura, creature)
+			if _, err := resolveNow(t, g, p, engine.NewScriptedController(),
+				[]engine.EntityID{engine.CardEntity(tc.target(creature, aura))},
+				"DB$ Pump | Defined$ "+tc.defined+" | NumAtt$ +2 | Duration$ Permanent"); err != nil {
+				t.Fatal(err)
+			}
+			sba(g)
+			pumped, other := creature, aura
+			if tc.pumped == "aura" {
+				pumped, other = aura, creature
+			}
+			if got, _ := g.Card(pumped).Power(); got != 3 {
+				t.Errorf("%s power = %d, want 3", tc.pumped, got)
+			}
+			if got, _ := g.Card(other).Power(); got != 1 {
+				t.Errorf("the other card's power = %d, want 1", got)
+			}
+		})
+	}
+}

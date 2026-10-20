@@ -256,7 +256,6 @@ func TestAttachObjectRefusals(t *testing.T) {
 
 	for _, tc := range []struct{ line, want string }{
 		{"DB$ Attach | Object$ Self | Choices$ Creature | ChoiceZone$ Graveyard", "ChoiceZone$"},
-		{"DB$ Attach | Object$ Self | Defined$ Self | Optional$ True", "Optional$"},
 		{"DB$ Attach | Object$ Self | Choices$ Creature | Chooser$ Opponent", "Chooser$"},
 	} {
 		g, p, _ := newTwoPlayerGame(t)

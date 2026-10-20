@@ -82,3 +82,36 @@ func TestCopyPermanentPopulateCopiesAChosenCreatureToken(t *testing.T) {
 		t.Fatalf("populate made %v (ok %v), want a new token", copyID, ok)
 	}
 }
+
+// SetCreatureTypes$ makes the copy exactly a Zombie (its Elf type gone), and
+// PumpKeywords$ with PumpDuration$ EOT gives it haste until the turn ends
+// (CardFactory.java:585, TokenEffectBase.java:102).
+func TestCopyPermanentSetCreatureTypesAndPumpKeywords(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
+	orig := g.NewCard(corpusCard(t, "Llanowar Elves"), p, engine.Battlefield)
+	host, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(orig)},
+		"DB$ CopyPermanent | ValidTgts$ Creature | SetCreatureTypes$ Zombie | PumpKeywords$ Haste | PumpDuration$ EOT | RememberTokens$ True")
+	if err != nil {
+		t.Fatal(err)
+	}
+	copyID, ok := g.Card(host).Memory.Remembered()[0].AsCard()
+	if !ok {
+		t.Fatal("no copy remembered")
+	}
+	typ := g.Card(copyID).Type()
+	if !typ.HasSubtype("Zombie") || typ.HasSubtype("Elf") {
+		t.Errorf("copy type = %v, want a Zombie and no Elf", typ)
+	}
+	if !g.Card(copyID).HasKeyword("Haste") {
+		t.Error("copy has no haste")
+	}
+	if !g.Card(orig).Type().HasSubtype("Elf") {
+		t.Error("the original lost its Elf type")
+	}
+	advanceToPhase(t, g, engine.NewScriptedController(), 1, engine.Cleanup)
+	if g.Card(copyID).HasKeyword("Haste") {
+		t.Error("the copy kept haste past the turn")
+	}
+}

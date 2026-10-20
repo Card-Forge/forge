@@ -69,8 +69,6 @@ var pumpUnresolvedParams = [...]string{
 	"RandomKeyword", "RandomKWNum",
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
 	"DefinedLandwalk", "LeaveBattlefield",
-	"NoteCards", "NoteCardsFor", "ClearNotedCardsFor",
-	"NoteNumber",
 }
 
 // pumpImprint is PumpEffect.java:431-437: ImprintCards$ adds the defined
@@ -196,6 +194,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 	// ForgetObjects$, whether or not the line pumps anything (Stolen
 	// Uniform's Pump only remembers its target).
 	if err := pumpRememberObjects(g, a, source, "RememberObjects", false); err != nil {
+		return err
+	}
+	if err := g.pumpNotes(a, source); err != nil {
 		return err
 	}
 	if err := pumpRememberObjects(g, a, source, "ForgetObjects", true); err != nil {
@@ -607,5 +608,70 @@ func (g *Game) pumpChooseKeyword(controller PlayerController, a *Ability, source
 		return fmt.Errorf("engine: Pump: KWChoice$ %q not resolvable yet", tok)
 	}
 	grant.keywords = append(grant.keywords, tok)
+	return nil
+}
+
+// pumpNotes is PumpEffect.java:405-425: NoteCards$ names the cards each target
+// player notes under NoteCardsFor$, ClearNotedCardsFor$ wipes those names, and
+// NoteNumber$ notes a number under the host's name (read back by the NotedFor
+// properties and Count$NotedNumber). The players are getTargetPlayers': the
+// targeted ones, or Defined$ (You when it names none).
+func (g *Game) pumpNotes(a *Ability, source *Card) error {
+	_, forName := a.Params.Param("NoteCardsFor")
+	clearNames, hasClear := a.Params.Param("ClearNotedCardsFor")
+	numRaw, hasNum := a.Params.Param("NoteNumber")
+	if !forName && !hasClear && !hasNum {
+		return nil
+	}
+	var players []PlayerID
+	if _, ok := a.Params.Param("ValidTgts"); ok {
+		for _, e := range a.refs().targets {
+			if p, ok := e.AsPlayer(); ok {
+				players = append(players, p)
+			}
+		}
+	} else {
+		spec, ok := a.Params.Param("Defined")
+		if !ok {
+			spec = "You"
+		}
+		ps, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+		if err != nil {
+			return fmt.Errorf("engine: Pump: %w", err)
+		}
+		players = ps
+	}
+	if forName {
+		name, _ := a.Params.Param("NoteCardsFor")
+		spec, ok := a.Params.Param("NoteCards")
+		if !ok {
+			return fmt.Errorf("engine: Pump: NoteCardsFor$ without NoteCards$")
+		}
+		cards, err := definedCards(source, spec, a.refs())
+		if err != nil {
+			return fmt.Errorf("engine: Pump: NoteCards$: %w", err)
+		}
+		for _, id := range cards {
+			for _, p := range players {
+				g.Player(p).addNote(name, noteID(id))
+			}
+		}
+	}
+	if hasClear {
+		for _, name := range strings.Split(clearNames, ",") {
+			for _, p := range players {
+				g.Player(p).clearNotes(name)
+			}
+		}
+	}
+	if hasNum {
+		n, ok := resolveNamedAmount(g, a.Amounts, source, numRaw)
+		if !ok {
+			return fmt.Errorf("engine: Pump: NoteNumber$ %q is not resolvable", numRaw)
+		}
+		for _, p := range players {
+			g.Player(p).noteNumber(source.Def.Name, n)
+		}
+	}
 	return nil
 }
