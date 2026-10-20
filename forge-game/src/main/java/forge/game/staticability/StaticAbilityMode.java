@@ -61,9 +61,6 @@ public enum StaticAbilityMode {
     // StaticAbilityNoCleanupDamage
     NoCleanupDamage,
 
-    // StaticAbilityBlockRestrict
-    BlockRestrict,
-
     // StaticAbilityCantGainLosePayLife
     CantGainLife,
     CantLoseLife,
@@ -79,8 +76,11 @@ public enum StaticAbilityMode {
     IgnoreHexproof,
     IgnoreShroud,
 
-    // StaticAbilityAttackRestrict
+    // StaticAbilityAttackBlockRestrict
     AttackRestrict,
+    BlockRestrict,
+    AttackRestrictNum,
+    BlockRestrictNum,
 
     // StaticAbilityAssignNoCombatDamage
     AssignNoCombatDamage,
