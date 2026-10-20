@@ -614,7 +614,7 @@
       "event",
       "replacement"
     ],
-    "additional": ["game", "ability", "control"],
+    "additional": ["game", "ability", "control", "subability"],
     "regeneration": [
       "id",
       "card",

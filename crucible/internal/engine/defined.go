@@ -56,7 +56,12 @@ func definedPlayers(g *Game, controller PlayerID, host CardID, defined string, r
 	if strings.Contains(defined, "&") {
 		var all []PlayerID
 		for _, part := range strings.Split(defined, "&") {
-			ps, err := definedPlayers(g, controller, host, strings.TrimSpace(part), refs)
+			part = strings.TrimSpace(part)
+			if strings.HasPrefix(part, "Valid") {
+				// A card spec (AbilityUtils.getDefinedCards' "Valid ..."): no players.
+				continue
+			}
+			ps, err := definedPlayers(g, controller, host, part, refs)
 			if err != nil {
 				return nil, err
 			}
@@ -914,6 +919,11 @@ func (g *Game) definedCompoundCards(host *Card, defined string, refs abilityRefs
 		for _, part := range parts {
 			got, err := definedCards(host, strings.TrimSpace(part), refs)
 			if err != nil {
+				// A piece naming players (You) names no card (getDefinedCards
+				// skips it), as pumpTargetCards reads a bare player Defined$.
+				if _, perr := definedPlayers(g, refs.activator, host.ID, strings.TrimSpace(part), refs); perr == nil {
+					continue
+				}
 				return nil, true, err
 			}
 			for _, id := range got {

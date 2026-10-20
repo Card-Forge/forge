@@ -82,6 +82,34 @@ func countValue(g *Game, sourceController PlayerID, source CardID, count expr.Co
 		// highest is "0").
 		return 0, true
 	}
+	if rest, ok := strings.CutPrefix(count.Head, "DifferentCounterKinds_"); ok {
+		// AbilityUtils.java:2873-2881: how many kinds of counter the battlefield
+		// cards matching the valid string (the head after the underscore, the
+		// dotted parameters and the argument put back) carry between them.
+		text := rest
+		if len(count.Parameters) > 0 {
+			text += "." + strings.Join(count.Parameters, ".")
+		}
+		if count.Argument != "" {
+			text += " " + count.Argument
+		}
+		spec := valid.Parse(text)
+		var kinds []CounterType
+		for _, pid := range g.Players() {
+			for _, id := range g.Zone(Battlefield, pid).Cards() {
+				c := g.Card(id)
+				if !Matches(g, c, spec, sourceController, source) {
+					continue
+				}
+				for _, k := range c.Counters.Kinds() {
+					if c.Counters.Count(k) > 0 && !slices.Contains(kinds, k) {
+						kinds = append(kinds, k)
+					}
+				}
+			}
+		}
+		return len(kinds), true
+	}
 	if zones, ok := strings.CutPrefix(count.Head, "ExactManaCost"); ok && count.Argument != "" {
 		return g.exactManaCostCount(sourceController, source, zones, count.Argument)
 	}

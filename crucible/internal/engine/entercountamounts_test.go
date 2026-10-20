@@ -76,3 +76,46 @@ func TestConvokedCreaturesAreRememberedOnTheCard(t *testing.T) {
 		t.Errorf("+1/+1 counters = %d, want 2 (one per convoking creature)", got)
 	}
 }
+
+// Count$DifferentCounterKinds_<valid> counts the kinds of counter the matching
+// permanents carry between them (Perrie, the Pulverizer).
+func TestDifferentCounterKindsAmount(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	a := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	b := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	g.Card(a).Counters.Add(engine.P1P1, 2)
+	g.Card(b).Counters.Add(engine.P1P1, 1)
+	g.Card(b).Counters.Add("SHIELD", 1)
+	if _, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(a)},
+		"DB$ Pump | ValidTgts$ Creature | NumAtt$ +X | Duration$ Permanent",
+		"X", "Count$DifferentCounterKinds_Permanent.YouCtrl"); err != nil {
+		t.Fatal(err)
+	}
+	sba(g)
+	// 1/1 with two +1/+1 counters is 3/3, and two kinds of counter add 2
+	if got, _ := g.Card(a).Power(); got != 5 {
+		t.Errorf("power = %d, want 5", got)
+	}
+}
+
+// A Pump naming "You & Valid ..." pumps the player and the cards the valid
+// string names: the player half names no card and the card half no player.
+func TestPumpDefinedJoinsAPlayerAndValidCards(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	mine := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	if _, err := resolveNow(t, g, p, engine.NewScriptedController(), nil,
+		"DB$ Pump | Defined$ You & Valid Creature.YouCtrl | KW$ Hexproof | Duration$ Permanent"); err != nil {
+		t.Fatal(err)
+	}
+	sba(g)
+	if !g.Card(mine).HasKeyword("Hexproof") {
+		t.Error("the creature did not gain hexproof")
+	}
+	if !g.Player(p).HasKeyword("Hexproof") {
+		t.Error("the player did not gain hexproof")
+	}
+}

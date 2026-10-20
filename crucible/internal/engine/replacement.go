@@ -731,6 +731,9 @@ func (g *Game) damagePrevented(source, target CardID, isCombat bool, amount int)
 		return true
 	}
 	targetCard := g.Card(target)
+	if g.keywordPreventsDamage(source, targetCard, isCombat) {
+		return true
+	}
 	toughness, hasToughness := targetCard.Toughness()
 	for _, pid := range g.Players() {
 		for _, z := range replacementZones {
@@ -763,6 +766,9 @@ func (g *Game) damagePrevented(source, target CardID, isCombat bool, amount int)
 // through matchesPlayerSpec rather than Matches.
 func (g *Game) damagePreventedPlayer(source CardID, target PlayerID, isCombat bool, amount int) bool {
 	if isCombat && g.combatDamagePrevented {
+		return true
+	}
+	if g.keywordPreventsDamage(source, nil, isCombat) {
 		return true
 	}
 	for _, pid := range g.Players() {
@@ -2350,4 +2356,43 @@ func damageRedirectAllowed(g *Game, r *compile.Ability, h *Card, affected Entity
 		}
 	}
 	return true
+}
+
+// preventDamageKeywords are the damage prevention keywords CardFactoryUtil.java
+// :2541-2570 turns into Prevent$ True replacements: "dealt by CARDNAME" (from),
+// "dealt to CARDNAME" (to), both, each with a combat-only form.
+var preventDamageKeywords = [...]struct {
+	text     string
+	combat   bool
+	from, to bool
+}{
+	{"Prevent all combat damage that would be dealt to and dealt by CARDNAME.", true, true, true},
+	{"Prevent all combat damage that would be dealt by CARDNAME.", true, true, false},
+	{"Prevent all combat damage that would be dealt to CARDNAME.", true, false, true},
+	{"Prevent all damage that would be dealt to and dealt by CARDNAME.", false, true, true},
+	{"Prevent all damage that would be dealt by CARDNAME.", false, true, false},
+	{"Prevent all damage that would be dealt to CARDNAME.", false, false, true},
+}
+
+// keywordPreventsDamage reports whether a damage prevention keyword stops source
+// dealing damage to target (a nil target is a player): the source's "dealt by"
+// forms, the target card's "dealt to" forms, the combat-only ones only for
+// combat damage.
+func (g *Game) keywordPreventsDamage(source CardID, target *Card, isCombat bool) bool {
+	var src *Card
+	if source != NoCard {
+		src = g.Card(source)
+	}
+	for _, k := range preventDamageKeywords {
+		if k.combat && !isCombat {
+			continue
+		}
+		if k.from && src != nil && src.HasKeyword(k.text) {
+			return true
+		}
+		if k.to && target != nil && target.HasKeyword(k.text) {
+			return true
+		}
+	}
+	return false
 }

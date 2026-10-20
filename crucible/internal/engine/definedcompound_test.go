@@ -135,3 +135,24 @@ func TestDefinedTopOfLibraryAndRememberedPlayer(t *testing.T) {
 		}
 	})
 }
+
+// Defined$ ParentTarget reaches through an additional ability: a GenericChoice
+// option reads the targets of the line that led to it.
+func TestParentTargetReachesThroughAnAdditionalAbility(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGame(t)
+	victim := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	c := engine.NewScriptedController()
+	c.QueueAbilityChoice([]int{0})
+	if _, err := resolveNow(t, g, p, c, []engine.EntityID{engine.CardEntity(victim)},
+		"DB$ Pump | ValidTgts$ Creature | KW$ Flying | Duration$ Permanent | SubAbility$ DBChoose",
+		"DBChoose", "DB$ GenericChoice | Choices$ DBBoost",
+		"DBBoost", "DB$ Pump | Defined$ ParentTarget | NumAtt$ +2 | Duration$ Permanent"); err != nil {
+		t.Fatal(err)
+	}
+	sba(g)
+	if got, _ := g.Card(victim).Power(); got != 3 {
+		t.Errorf("power = %d, want 3 (the option boosted the parent's target)", got)
+	}
+}

@@ -39,9 +39,15 @@ func (g *Game) resolveAdditional(parent *Ability, controller PlayerController, s
 		Controller: parent.Controller,
 		Target:     parent.Target,
 		Targets:    parent.Targets,
-		Params:     sub.Ability,
-		Amounts:    parent.Amounts,
-		rootSpell:  parent.spell || parent.rootSpell,
+		// SpellAbility.getParentTargetingCard walks up from an additional
+		// ability through the ability that holds it.
+		parentTargets:     parentTargetsOf(parent),
+		ancestorTargeting: parent.ancestorTargeting || linkUsesTargeting(parent.Params),
+		paid:              parent.paid,
+		activationIndex:   parent.activationIndex,
+		Params:            sub.Ability,
+		Amounts:           parent.Amounts,
+		rootSpell:         parent.spell || parent.rootSpell,
 		// The root's targeted spells and abilities as last seen
 		// (getAllTargetChoices starts at getRootAbility), for a Branch or roll
 		// result under a counterspell.

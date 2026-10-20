@@ -33,8 +33,8 @@ import (
 // SpellAbilityCondition's own shapes subAbilityConditionMet does not cover,
 // the identical Pump-shaped gap; SharedKeywordsZone$/SharedRestrictions$ (4/4) --
 // CardFactoryUtil.sharedKeywords' own zone scan, a further mechanic;
-// ModeCost$ (3) and Exhaust$ (4) -- each its own further activation
-// mechanic. AtEOT$ resolves (registerAtEOT) over every matched card.
+// ModeCost$ (3) -- a further activation mechanic (Exhaust$ is an activation
+// limit, activationLimitsMet, never read here). AtEOT$ resolves (registerAtEOT) over every matched card.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
 // through Registry.Resolve (effect.go) once this effect's own body
@@ -54,7 +54,7 @@ import (
 // neither resolvable here regardless.
 var pumpAllUnresolvedParams = [...]string{
 	"SharedKeywordsZone", "SharedRestrictions",
-	"ModeCost", "Exhaust",
+	"ModeCost",
 }
 
 // pumpAllEffect resolves Mode$/DB$/AB$ PumpAll for the blanket shape --

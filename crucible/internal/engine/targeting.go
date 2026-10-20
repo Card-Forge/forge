@@ -524,7 +524,7 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 				if err != nil {
 					return targetChoice{min: targetMin, max: targetMax, err: fmt.Errorf("TgtZone$: %w", err)}, true, true
 				}
-				if zoneIn(Stack, parsed) {
+				if zoneIn(Stack, parsed) && a.API != APIEffect {
 					// No real Play line names the stack, and Play's Resolve
 					// is unaudited against a spell target: fail closed
 					// rather than guess. (ChangeZone's Origin$ Stack is
