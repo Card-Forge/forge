@@ -9,8 +9,7 @@ import "fmt"
 // card-and-player reading, ClearCoinFlips$ FlipCoin, Log$ a random-log event -- none built.
 var cleanupUnresolvedParams = [...]string{
 	"Defined", "ForgetDefined", "ClearCoinFlips",
-	"Log",
-	"Condition"}
+	"Log"}
 
 // cleanupEffect is CleanUpEffect.java: it wipes the host card's own Memory
 // lists (memory.go) at the end of a chain that wrote to them. 3,011 real
@@ -19,6 +18,9 @@ var cleanupUnresolvedParams = [...]string{
 type cleanupEffect struct{}
 
 func (cleanupEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range cleanupUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Cleanup: %s$ not resolvable yet", key)

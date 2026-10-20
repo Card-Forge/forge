@@ -53,11 +53,9 @@ import (
 // Optional$/UpTo$/UpToMin$ -- each its own further mechanic. Placer$ resolves
 // (putCounterPlacer).
 //
-// Condition$ itself and ConditionDefined$/ConditionZone$/
-// ConditionPlayerTurn$/ConditionActivationLimit$/ConditionPresent2$/
-// ConditionCompare2$ -- SpellAbilityCondition's own shapes
-// subAbilityConditionMet does not cover, the identical Pump/GainLife-shaped
-// gap.
+// Condition$ values conditionValueRead does not name, and
+// ConditionActivationLimit$ -- SpellAbilityCondition's own shapes
+// subAbilityConditionMet does not cover.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
 // through Registry.Resolve (effect.go) once this effect's own body
@@ -75,8 +73,7 @@ var putCounterUnresolvedParams = [...]string{
 	"CounterTypes", "ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
 	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
 	"RemovePhase", "UpTo", "UpToMin",
-	"Condition", "ConditionZone", "ConditionPlayerTurn", "ConditionActivationLimit",
-	"ConditionPresent2", "ConditionCompare2",
+	"ConditionActivationLimit",
 }
 
 // putCounterEffect resolves Mode$/DB$/AB$ PutCounter for the Defined$
@@ -87,6 +84,9 @@ var putCounterUnresolvedParams = [...]string{
 type putCounterEffect struct{}
 
 func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, "PutCounter"); err != nil {
+		return err
+	}
 	// ETB$ inside a replacement of a card's entry puts the counters into the
 	// entry itself (putEnterCounters); anywhere else it is still the counter
 	// table this port does not batch.

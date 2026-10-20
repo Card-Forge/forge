@@ -35,7 +35,7 @@ import "fmt"
 // line somehow combines it with a shape that reaches this path some other
 // way, rather than silently tapping-without-a-trigger the wrong permanent.
 var tapUnresolvedParams = [...]string{
-	"Tapper", "Condition", "ETB",
+	"Tapper", "ETB",
 }
 
 // tapEffect resolves Mode$/DB$/AB$ Tap. ConditionPresent$/ConditionCompare$/
@@ -45,6 +45,9 @@ var tapUnresolvedParams = [...]string{
 type tapEffect struct{}
 
 func (tapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range tapUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Tap: %s$ not resolvable yet", key)

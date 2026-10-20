@@ -475,7 +475,7 @@ func TestBargainGatesAnAnimate(t *testing.T) {
 	}
 
 	g, p, _ := newTwoPlayerGame(t)
-	def := etbChainDef(t, "Test Animate", "DB$ Animate | Defined$ Self | Power$ 4 | Condition$ Metalcraft")
+	def := etbChainDef(t, "Test Animate", "DB$ Animate | Defined$ Self | Power$ 4 | Condition$ Teamwork")
 	if _, err := castETBChain(t, g, p, def, engine.NewScriptedController()); err == nil ||
 		!strings.Contains(err.Error(), "Condition$") {
 		t.Errorf("err = %v, want Condition$ not resolvable", err)

@@ -8,8 +8,7 @@ import "fmt"
 // honour yet: Random$ (Aggregates.random), OptionalDecider$ and
 // BecomeStartingPlayer$ (1 line each).
 var revealUnresolvedParams = [...]string{
-	"Random", "OptionalDecider", "BecomeStartingPlayer",
-	"Condition"}
+	"Random", "OptionalDecider", "BecomeStartingPlayer"}
 
 // revealEffect is RevealEffect.java: each player (Defined$/ValidTgts$,
 // default You) with a non-empty hand reveals RevealDefined$'s cards,
@@ -22,6 +21,9 @@ var revealUnresolvedParams = [...]string{
 type revealEffect struct{}
 
 func (revealEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range revealUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Reveal: %s$ not resolvable yet", key)

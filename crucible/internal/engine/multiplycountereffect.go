@@ -34,15 +34,6 @@ import (
 	"strings"
 )
 
-// multiplyCounterUnresolvedParams names CountersMultiplyEffect's own params
-// this port does not evaluate. Every one fails the whole line loudly
-// (PORT-8/GO-7): Condition$/ConditionDefined$ (0/1) -- condition.go's own
-// subAbilityConditionMet would otherwise silently no-op a card naming
-// either without ConditionPresent$ alongside it, dealDamageEffect's own
-// identical reasoning.
-var multiplyCounterUnresolvedParams = [...]string{
-	"Condition"}
-
 // multiplyCounterEffect resolves Mode$/DB$/AB$ MultiplyCounter.
 // ConditionPresent$/ConditionCompare$/ConditionCheckSVar$/
 // ConditionSVarCompare$ are resolved through subAbilityConditionMet
@@ -50,10 +41,8 @@ var multiplyCounterUnresolvedParams = [...]string{
 type multiplyCounterEffect struct{}
 
 func (multiplyCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	for _, key := range multiplyCounterUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: MultiplyCounter: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

@@ -25,7 +25,7 @@ import "fmt"
 // subAbilityConditionMet would otherwise silently no-op a card naming
 // either, dealDamageEffect's own identical reasoning.
 var shuffleUnresolvedParams = [...]string{
-	"Optional", "Condition"}
+	"Optional"}
 
 // shuffleEffect resolves Mode$/DB$/AB$ Shuffle. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -34,6 +34,9 @@ var shuffleUnresolvedParams = [...]string{
 type shuffleEffect struct{}
 
 func (shuffleEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range shuffleUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Shuffle: %s$ not resolvable yet", key)

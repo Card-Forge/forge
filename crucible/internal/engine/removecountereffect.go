@@ -50,8 +50,7 @@ import (
 // own subAbilityConditionMet would otherwise silently no-op a card naming
 // either, dealDamageEffect's own identical reasoning.
 var removeCounterUnresolvedParams = [...]string{
-	"TgtZone",
-	"Condition"}
+	"TgtZone"}
 
 // removeCounterEffect resolves Mode$/DB$/AB$ RemoveCounter for the Defined$
 // Self/Enchanted/Equipped/You shape. ConditionPresent$/ConditionCompare$/
@@ -64,6 +63,9 @@ var removeCounterUnresolvedParams = [...]string{
 type removeCounterEffect struct{}
 
 func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range removeCounterUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RemoveCounter: %s$ not resolvable yet", key)

@@ -8,7 +8,10 @@ package engine
 type reverseTurnOrderEffect struct{}
 
 func (reverseTurnOrderEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "ReverseTurnOrder", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "ReverseTurnOrder"); err != nil {
 		return err
 	}
 	if !subAbilityConditionMet(g, g.Card(a.Source), a.Amounts, a.Params) {

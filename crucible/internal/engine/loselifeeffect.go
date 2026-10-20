@@ -83,10 +83,12 @@ type loseLifeEffect struct{}
 
 var loseLifeUnresolvedParams = [...]string{
 	"NumCards", "ModeCost",
-	"Condition", "ConditionZone",
 }
 
 func (loseLifeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range loseLifeUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: LoseLife: %s$ not resolvable yet", key)

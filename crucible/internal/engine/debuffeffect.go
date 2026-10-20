@@ -16,7 +16,10 @@ import (
 type debuffEffect struct{}
 
 func (debuffEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "Debuff", "AllSuffixKeywords", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Debuff", "AllSuffixKeywords"); err != nil {
 		return err
 	}
 	permanent, until, err := animateDuration(a, "Debuff")

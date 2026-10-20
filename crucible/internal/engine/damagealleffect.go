@@ -47,8 +47,7 @@ import (
 // a card naming either, dealDamageEffect's own identical reasoning.
 var damageAllUnresolvedParams = [...]string{
 	"ValidTgts", "TargetUnique", "ModeCost",
-	"Ultimate", "Remembered", "SVar", "XColor", "TriggeredSpellAbility",
-	"Condition"}
+	"Ultimate", "Remembered", "SVar", "XColor", "TriggeredSpellAbility"}
 
 // damageAllEffect resolves Mode$/DB$/AB$ DamageAll. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -59,6 +58,9 @@ var damageAllUnresolvedParams = [...]string{
 type damageAllEffect struct{}
 
 func (damageAllEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range damageAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: DamageAll: %s$ not resolvable yet", key)

@@ -306,7 +306,9 @@ func conditionManaSpentMet(g *Game, host *Card, a *compile.Ability) bool {
 }
 
 // conditionValueMet is SpellAbilityCondition's Condition$ for the values this
-// port reads (conditionValueRead): the Kicked family, and OptionalCost --
+// port reads (conditionValueRead): the Kicked family, the activator's Threshold,
+// Metalcraft, Delirium, Hellbent, Revolt, Blessing and EnduringStory, AltCost,
+// and OptionalCost --
 // the spell was cast with a Mode$ OptionalCost static's Generic cost paid,
 // or with ConditionOptionalPaid$ False was not (SpellAbilityCondition.java:
 // 118-128, :283-284; the flag defaults to true and parses as
@@ -326,6 +328,28 @@ func conditionValueMet(g *Game, host *Card, a *compile.Ability, value string) bo
 		// SpellAbilityCondition.java:122-123, :280: the spell was cast for its
 		// foretell cost.
 		return g.spellOptional(host.ID).foretold
+	case "AltCost":
+		// :119-120, :278: the spell's own Mode$ AlternativeCost was paid.
+		return g.spellOptional(host.ID).has(optAltCost)
+	case "Threshold", "Metalcraft", "Delirium", "Hellbent", "Revolt", "Blessing", "EnduringStory":
+		// :266-272: the activator's own state, the host's controller here.
+		you := host.Controller()
+		switch value {
+		case "Threshold":
+			return len(g.Zone(Graveyard, you).Cards()) >= 7
+		case "Metalcraft":
+			return battlefieldArtifactCount(g, you) >= 3
+		case "Delirium":
+			return graveyardCoreTypeCount(g, you) >= 4
+		case "Hellbent":
+			return len(g.Zone(Hand, you).Cards()) == 0
+		case "Revolt":
+			return g.hasRevolt(you)
+		case "Blessing":
+			return g.Player(you).Blessing
+		default:
+			return g.Player(you).EnduringStory
+		}
 	}
 	return kickedConditionMet(host, value)
 }
@@ -333,7 +357,8 @@ func conditionValueMet(g *Game, host *Card, a *compile.Ability, value string) bo
 // conditionValueRead reports whether conditionValueMet evaluates value.
 func conditionValueRead(value string) bool {
 	switch value {
-	case "Kicked", "Kicked 1", "Kicked 2", "OptionalCost", "Bargain", "Foretold":
+	case "Kicked", "Kicked 1", "Kicked 2", "OptionalCost", "Bargain", "Foretold", "AltCost",
+		"Threshold", "Metalcraft", "Delirium", "Hellbent", "Revolt", "Blessing", "EnduringStory":
 		return true
 	}
 	return false

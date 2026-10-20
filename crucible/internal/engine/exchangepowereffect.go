@@ -12,7 +12,10 @@ import "fmt"
 type exchangePowerEffect struct{}
 
 func (exchangePowerEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "ExchangePower", "Condition", "BasePower"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "ExchangePower", "BasePower"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

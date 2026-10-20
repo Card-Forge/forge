@@ -66,11 +66,12 @@ import "fmt"
 // own count already tracks that half of the question.
 type gainLifeEffect struct{}
 
-var gainLifeUnresolvedParams = [...]string{
-	"ConditionZone",
-}
+var gainLifeUnresolvedParams = [...]string{}
 
 func (gainLifeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range gainLifeUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: GainLife: %s$ not resolvable yet", key)

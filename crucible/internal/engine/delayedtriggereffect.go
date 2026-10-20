@@ -23,8 +23,11 @@ import (
 type delayedTriggerEffect struct{}
 
 func (delayedTriggerEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "DelayedTrigger", "RememberNumber", "RememberSVarAmount", "Static",
-		"ValidTgts", "Condition"); err != nil {
+		"ValidTgts"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

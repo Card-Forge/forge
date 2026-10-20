@@ -34,7 +34,7 @@ import "fmt"
 // otherwise silently no-op a card naming either, dealDamageEffect's own
 // identical reasoning.
 var exchangeLifeUnresolvedParams = [...]string{
-	"RememberOwnLoss", "RememberDifference", "Condition"}
+	"RememberOwnLoss", "RememberDifference"}
 
 // exchangeLifeEffect resolves Mode$/DB$/AB$ ExchangeLife. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -43,6 +43,9 @@ var exchangeLifeUnresolvedParams = [...]string{
 type exchangeLifeEffect struct{}
 
 func (exchangeLifeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range exchangeLifeUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ExchangeLife: %s$ not resolvable yet", key)

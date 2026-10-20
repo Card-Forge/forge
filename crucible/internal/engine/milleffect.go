@@ -39,7 +39,7 @@ import "fmt"
 // SpellDescription$/TgtPrompt$ already get everywhere.
 var millUnresolvedParams = [...]string{
 	"Destination", "Optional", "Ultimate", "ReduceCost",
-	"ModeCost", "Condition"}
+	"ModeCost"}
 
 // millEffect resolves Mode$/DB$/AB$ Mill. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -48,6 +48,9 @@ var millUnresolvedParams = [...]string{
 type millEffect struct{}
 
 func (millEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range millUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Mill: %s$ not resolvable yet", key)

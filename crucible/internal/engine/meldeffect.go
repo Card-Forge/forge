@@ -27,7 +27,10 @@ import (
 type meldEffect struct{}
 
 func (meldEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Meld", "Condition", "Blocking"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Meld", "Blocking"); err != nil {
 		return err
 	}
 	if attacking, ok := a.Params.Param("Attacking"); ok && attacking != "True" {

@@ -282,7 +282,7 @@ func TestSubgameRejectsUnresolvableShapes(t *testing.T) {
 	for _, tc := range []struct {
 		name, line, want string
 	}{
-		{"condition", "DB$ Subgame | Condition$ Kicked", "Condition$ not resolvable yet"},
+		{"condition", "DB$ Subgame | Condition$ Teamwork", `Condition$ "Teamwork" not resolvable yet`},
 		{"remember", "DB$ Subgame | RememberPlayers$ Losers", `RememberPlayers$ "Losers" not resolvable yet`},
 		{"life", "DB$ Subgame | StartingLife$ X", `StartingLife$ "X" is not an integer`},
 	} {

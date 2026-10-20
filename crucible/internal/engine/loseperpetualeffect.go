@@ -25,7 +25,10 @@ package engine
 type losePerpetualEffect struct{}
 
 func (losePerpetualEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "LosePerpetual", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "LosePerpetual"); err != nil {
 		return err
 	}
 	host := g.Card(a.Source)

@@ -64,7 +64,10 @@ func (g *Game) MayPlayFromExile(p PlayerID, card CardID) (ExilePlayGrant, bool) 
 type airbendEffect struct{}
 
 func (airbendEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Airbend", "TgtZone", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Airbend", "TgtZone"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

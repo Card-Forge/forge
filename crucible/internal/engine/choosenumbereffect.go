@@ -17,8 +17,7 @@ var chooseNumberUnresolvedParams = [...]string{
 	"Secretly", "KeepSecret", "Highest", "Lowest", "NotLowest",
 	"MatchedAbility", "UnmatchedAbility", "Guesser", "GuessCorrect",
 	"GuessWrong", "RememberHighest", "RemoveChoices", "RememberChosen",
-	"ChooseNumberSubAbility",
-	"Condition"}
+	"ChooseNumberSubAbility"}
 
 // chooseNumberEffect is ChooseNumberEffect.java's open (non-secret) shape:
 // each chooser (Defined$, default You) picks an integer between Min$
@@ -28,6 +27,9 @@ var chooseNumberUnresolvedParams = [...]string{
 type chooseNumberEffect struct{}
 
 func (chooseNumberEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range chooseNumberUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ChooseNumber: %s$ not resolvable yet", key)

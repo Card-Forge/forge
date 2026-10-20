@@ -19,15 +19,6 @@ package engine
 
 import "fmt"
 
-// losesGameUnresolvedParams names GameLossEffect's own params this port
-// does not evaluate. Every one fails the whole line loudly (PORT-8/GO-7):
-// Condition$/ConditionDefined$ (0/3) -- condition.go's own
-// subAbilityConditionMet would otherwise silently no-op a card naming
-// either without ConditionPresent$ alongside it, dealDamageEffect's own
-// identical reasoning.
-var losesGameUnresolvedParams = [...]string{
-	"Condition"}
-
 // losesGameEffect resolves Mode$/DB$/AB$ LosesGame. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
 // through subAbilityConditionMet (condition.go), the identical way every
@@ -35,10 +26,8 @@ var losesGameUnresolvedParams = [...]string{
 type losesGameEffect struct{}
 
 func (losesGameEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	for _, key := range losesGameUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: LosesGame: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

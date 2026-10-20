@@ -38,13 +38,13 @@ rather than as silence.
 **Alternation is shallow**, over the 44,051 strings in the eight most common valid-typed keys:
 
 | Alternatives | Occurrences | Share |
-| ---: | ---: | ---: |
-| 1 | 40,887 | 92.8% |
-| 2 | 2,858 | 6.5% |
-| 3 | 233 | 0.5% |
-| 4 | 59 | |
-| 5 | 8 | |
-| 6 | 1 | |
+| -----------: | ----------: | ----: |
+|            1 |      40,887 | 92.8% |
+|            2 |       2,858 |  6.5% |
+|            3 |         233 |  0.5% |
+|            4 |          59 |       |
+|            5 |           8 |       |
+|            6 |           1 |       |
 
 **252 distinct base tokens.** Most common: `Card`, `Creature`, `You`, `Player`, `Permanent`, `Artifact`, `Land`,
 `Opponent`, `Any`, `Sorcery`, `Instant`, `Planeswalker`, `Enchantment`, `Spell`, `Emblem`.
@@ -60,9 +60,9 @@ A base is a card type, a supertype, a specific card name, or a player selector. 
 
 They are not interchangeable:
 
-| Form | Uses | Example | Meaning |
-| --- | ---: | --- | --- |
-| `!` prefix on a property | 459 | `Card.!token` | Negates that property |
+| Form                      |  Uses | Example             | Meaning                             |
+| ------------------------- | ----: | ------------------- | ----------------------------------- |
+| `!` prefix on a property  |   459 | `Card.!token`       | Negates that property               |
 | `non` baked into the name | 1,424 | `Permanent.nonLand` | A distinct property in Java's table |
 
 The `!` prefix also applies to a **base** — `ValidCard$ !Ongoing` is "not an Ongoing scheme". Java consumes the sign
@@ -77,16 +77,16 @@ operator would produce different results for properties where Java defines only 
 The properties group into recognisable families, which is how the Go port subdivides an otherwise flat 2,135-line
 switch:
 
-| Family | Examples |
-| --- | --- |
-| Control and ownership | `YouCtrl`, `OppCtrl`, `YouOwn`, `YouDontCtrl` |
-| Self reference | `Self`, `Other`, `IsRemembered`, `IsImprinted` |
-| Attachment | `EnchantedBy`, `EquippedBy`, `AttachedBy` |
-| Zone | `inZoneBattlefield`, `inZoneGraveyard` |
-| Combat | `attacking`, `blocking`, `blocked` |
-| Type negation | `nonLand`, `nonCreature`, `nonToken` |
-| Numeric comparison | `powerGE1`, `cmcLE3` — property name encodes operator and operand |
-| Colour | `Red`, `White`, `Monocolored`, `MultiColor` |
+| Family                | Examples                                                          |
+| --------------------- | ----------------------------------------------------------------- |
+| Control and ownership | `YouCtrl`, `OppCtrl`, `YouOwn`, `YouDontCtrl`                     |
+| Self reference        | `Self`, `Other`, `IsRemembered`, `IsImprinted`                    |
+| Attachment            | `EnchantedBy`, `EquippedBy`, `AttachedBy`                         |
+| Zone                  | `inZoneBattlefield`, `inZoneGraveyard`                            |
+| Combat                | `attacking`, `blocking`, `blocked`                                |
+| Type negation         | `nonLand`, `nonCreature`, `nonToken`                              |
+| Numeric comparison    | `powerGE1`, `cmcLE3` — property name encodes operator and operand |
+| Colour                | `Red`, `White`, `Monocolored`, `MultiColor`                       |
 
 Numeric comparison properties are the family most likely to be mis-ported, because the operator is inside the token:
 `powerGE1` is _power greater than or equal to 1_, and the suffix may itself be a count expression reference.

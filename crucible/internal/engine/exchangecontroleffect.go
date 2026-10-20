@@ -12,8 +12,7 @@ import "fmt"
 // refuse here.
 var exchangeControlUnresolvedParams = [...]string{
 	"TargetsWithSameCardType", "TargetsWithDifferentControllers",
-	"ModeCost",
-	"Condition"}
+	"ModeCost"}
 
 // exchangeControlEffect is ControlExchangeEffect.java: two permanents trade
 // controllers. With targets, the first target is object1 and either the
@@ -23,6 +22,9 @@ var exchangeControlUnresolvedParams = [...]string{
 type exchangeControlEffect struct{}
 
 func (exchangeControlEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range exchangeControlUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ExchangeControl: %s$ not resolvable yet", key)

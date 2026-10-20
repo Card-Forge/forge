@@ -14,7 +14,7 @@ import (
 // regeneration shield (regeneration.go) from replacing the destruction.
 var destroyAllUnresolvedParams = [...]string{
 	"Optional", "RememberAllObjects", "Zone", "Hidden",
-	"Condition", "ModeCost",
+	"ModeCost",
 }
 
 // destroyAllEffect is DestroyAllEffect.java: every battlefield permanent
@@ -30,6 +30,9 @@ var destroyAllUnresolvedParams = [...]string{
 type destroyAllEffect struct{}
 
 func (destroyAllEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range destroyAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: DestroyAll: %s$ not resolvable yet", key)

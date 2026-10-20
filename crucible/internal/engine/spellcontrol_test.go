@@ -387,7 +387,7 @@ func TestControlSpellFailsClosed(t *testing.T) {
 		{"DB$ ControlSpell | Defined$ Remembered | Mode$ Gain", `Defined$ "Remembered" not resolvable yet`},
 		{"DB$ ControlSpell | Defined$ TriggeredSpellAbility | Mode$ Gain", "no triggering spell recorded"},
 		{"DB$ ControlSpell | Defined$ Targeted | NewController$ Player.NotedDefender | Mode$ Gain", `NewController$: engine: Defined$ "Player.NotedDefender"`},
-		{"DB$ ControlSpell | Defined$ Targeted | Mode$ Gain | Condition$ Kicked", "Condition$ not resolvable yet"},
+		{"DB$ ControlSpell | Defined$ Targeted | Mode$ Gain | Condition$ Teamwork", `Condition$ "Teamwork" not resolvable yet`},
 	} {
 		g, p, _ := newTwoPlayerGame(t)
 		gain := g.NewCard(gainInstant(t, "Gain", "W", "3"), p, engine.Hand)

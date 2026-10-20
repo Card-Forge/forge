@@ -41,9 +41,7 @@ import (
 // ConditionPresent$ alongside it, dealDamageEffect's own identical
 // reasoning.
 var untapAllUnresolvedParams = [...]string{
-	"Planeswalker", "ModeCost",
-	"ConditionPlayerTurn", "ConditionManaSpent",
-	"Condition"}
+	"Planeswalker", "ModeCost"}
 
 // untapAllEffect resolves Mode$/DB$/AB$ UntapAll. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -52,6 +50,9 @@ var untapAllUnresolvedParams = [...]string{
 type untapAllEffect struct{}
 
 func (untapAllEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range untapAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: UntapAll: %s$ not resolvable yet", key)

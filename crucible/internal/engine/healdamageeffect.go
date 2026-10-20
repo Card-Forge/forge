@@ -9,10 +9,8 @@ import "fmt"
 type healDamageEffect struct{}
 
 func (healDamageEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	for _, key := range [...]string{"Condition"} {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: HealDamage: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

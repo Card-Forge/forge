@@ -9,7 +9,7 @@ import "fmt"
 // Archenemy scheme restriction (NoSchemes$).
 var addTurnUnresolvedParams = [...]string{
 	"ExtraTurnDelayedTrigger", "ExtraTurnDelayedTriggerExecute", "SkipUntap", "NoSchemes",
-	"Condition", "Ultimate",
+	"Ultimate",
 }
 
 // addTurnEffect is AddTurnEffect.java: each target player (default You)
@@ -18,6 +18,9 @@ var addTurnUnresolvedParams = [...]string{
 type addTurnEffect struct{}
 
 func (addTurnEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range addTurnUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: AddTurn: %s$ not resolvable yet", key)

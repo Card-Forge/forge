@@ -19,7 +19,10 @@ import (
 type addOrRemoveCounterEffect struct{}
 
 func (addOrRemoveCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "AddOrRemoveCounter", "Condition", "RemoveConditionSVar", "TgtZone"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "AddOrRemoveCounter", "RemoveConditionSVar", "TgtZone"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

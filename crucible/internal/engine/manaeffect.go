@@ -49,8 +49,7 @@ import (
 // would otherwise silently no-op a card naming either, dealDamageEffect's
 // own identical reasoning.
 var manaUnresolvedParams = [...]string{
-	"RestrictValid", "Each", "CombatMana", "Optional",
-	"Condition"}
+	"RestrictValid", "Each", "CombatMana", "Optional"}
 
 // manaEffect resolves Mode$/DB$/SP$ Mana. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -59,6 +58,9 @@ var manaUnresolvedParams = [...]string{
 type manaEffect struct{}
 
 func (manaEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range manaUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Mana: %s$ not resolvable yet", key)

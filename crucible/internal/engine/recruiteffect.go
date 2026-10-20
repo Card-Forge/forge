@@ -15,7 +15,10 @@ import (
 type recruitEffect struct{}
 
 func (recruitEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Recruit", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Recruit"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

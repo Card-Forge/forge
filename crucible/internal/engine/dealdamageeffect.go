@@ -86,7 +86,7 @@ type dealDamageEffect struct{}
 // be set on the DamageResolve that deals the batch (GameAction.dealDamage's
 // cause), not on this ability.
 var dealDamageUnresolvedParams = [...]string{
-	"Condition", "TriggeredSpellAbility", "CounterNum", "Optional",
+	"TriggeredSpellAbility", "CounterNum", "Optional",
 	"NoPrevention", "NoRedirection",
 	"DivideEvenly", "DividerOnResolution",
 	"CardChoices", "PlayerChoices", "Random",
@@ -95,6 +95,9 @@ var dealDamageUnresolvedParams = [...]string{
 }
 
 func (dealDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "DealDamage", dealDamageUnresolvedParams[:]...); err != nil {
 		return err
 	}

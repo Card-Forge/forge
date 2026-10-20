@@ -9,8 +9,7 @@ import "fmt"
 // variant, entering-state/combat modifiers (AttachedTo$, Attacking$), and
 // the ShuffleCondition$ values other than NoneFound.
 var digUntilUnresolvedParams = [...]string{
-	"DigZone", "MinTotalCMC", "AttachedTo", "Attacking", "Blocking", "ValidPlayer",
-	"Condition"}
+	"DigZone", "MinTotalCMC", "AttachedTo", "Attacking", "Blocking", "ValidPlayer"}
 
 // digUntilEffect is DigUntilEffect.java: each target player (default You)
 // reveals cards from the top of their library until Amount$ (default 1)
@@ -25,6 +24,9 @@ var digUntilUnresolvedParams = [...]string{
 type digUntilEffect struct{}
 
 func (digUntilEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range digUntilUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: DigUntil: %s$ not resolvable yet", key)

@@ -14,7 +14,7 @@ import "fmt"
 var choosePlayerUnresolvedParams = [...]string{
 	"Protect", "Optional",
 	"ChooseSubAbility", "CantChooseSubAbility",
-	"Condition", "OrOtherConditionSVarCompare",
+	"OrOtherConditionSVarCompare",
 }
 
 // choosePlayerEffect is ChoosePlayerEffect.java: each chooser
@@ -25,6 +25,9 @@ var choosePlayerUnresolvedParams = [...]string{
 type choosePlayerEffect struct{}
 
 func (choosePlayerEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range choosePlayerUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ChoosePlayer: %s$ not resolvable yet", key)

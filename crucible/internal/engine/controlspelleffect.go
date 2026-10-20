@@ -42,7 +42,7 @@ type controlSpellEffect struct{}
 // SpellAbilityCondition shapes subAbilityConditionMet reads as never met,
 // which would skip the steal silently.
 var controlSpellUnresolvedParams = [...]string{
-	"TargetValidTargeting", "DefinedExchange", "Condition"}
+	"TargetValidTargeting", "DefinedExchange"}
 
 // namedSpell is one spell getTargetSpells names: its stack item, or
 // NoStackItem once it has left the stack (Java's null stack instance), and
@@ -53,6 +53,9 @@ type namedSpell struct {
 }
 
 func (controlSpellEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "ControlSpell", controlSpellUnresolvedParams[:]...); err != nil {
 		return err
 	}

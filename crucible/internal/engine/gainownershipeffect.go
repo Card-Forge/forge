@@ -12,7 +12,10 @@ import "fmt"
 type gainOwnershipEffect struct{}
 
 func (gainOwnershipEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "GainOwnership", "Condition", "TgtZone"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "GainOwnership", "TgtZone"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

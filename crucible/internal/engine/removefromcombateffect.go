@@ -30,8 +30,7 @@ import "fmt"
 // silently no-op a card naming either without ConditionPresent$ alongside
 // it, dealDamageEffect's own identical reasoning.
 var removeFromCombatUnresolvedParams = [...]string{
-	"UnblockCreaturesBlockedOnlyBy",
-	"Condition"}
+	"UnblockCreaturesBlockedOnlyBy"}
 
 // removeFromCombatEffect resolves Mode$/DB$/AB$ RemoveFromCombat.
 // ConditionPresent$/ConditionCompare$/ConditionCheckSVar$/
@@ -40,6 +39,9 @@ var removeFromCombatUnresolvedParams = [...]string{
 type removeFromCombatEffect struct{}
 
 func (removeFromCombatEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range removeFromCombatUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RemoveFromCombat: %s$ not resolvable yet", key)

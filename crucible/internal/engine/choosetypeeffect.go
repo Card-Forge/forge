@@ -23,7 +23,10 @@ import (
 type chooseTypeEffect struct{}
 
 func (chooseTypeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "ChooseType", "Condition", "TypesFromDefined", "MostPrevalentInDefinedZone",
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "ChooseType", "TypesFromDefined", "MostPrevalentInDefinedZone",
 		"Note", "ChooseNoted"); err != nil {
 		return err
 	}

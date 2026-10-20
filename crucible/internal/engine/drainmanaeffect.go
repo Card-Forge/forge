@@ -12,7 +12,10 @@ import "fmt"
 type drainManaEffect struct{}
 
 func (drainManaEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	for _, key := range [...]string{"RememberDrainedMana", "Condition"} {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	for _, key := range [...]string{"RememberDrainedMana"} {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: DrainMana: %s$ not resolvable yet", key)
 		}

@@ -33,16 +33,6 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 )
 
-// conniveUnresolvedParams names ConniveEffect's own params this port does
-// not evaluate. Every one fails the whole line loudly (PORT-8/GO-7):
-// Condition$/ConditionDefined$ (0/0,
-// defensive) -- condition.go's own subAbilityConditionMet would otherwise
-// silently no-op a card naming either without ConditionPresent$ alongside
-// it, dealDamageEffect's own identical reasoning.
-var conniveUnresolvedParams = [...]string{
-
-	"Condition"}
-
 // conniveEffect resolves Mode$/DB$/AB$ Connive. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
 // through subAbilityConditionMet (condition.go), the identical way every
@@ -50,10 +40,8 @@ var conniveUnresolvedParams = [...]string{
 type conniveEffect struct{}
 
 func (conniveEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	for _, key := range conniveUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: Connive: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

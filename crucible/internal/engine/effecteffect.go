@@ -29,7 +29,6 @@ var effectUnresolvedParams = [...]string{
 	"Abilities", "RememberSpell", "RememberLKI", "RememberKeywords", "SharedKeywordsZone", "SharedRestrictions",
 	"ForgetCounter", "ExileOnCounter", "NoteCounterDefined", "ExileOnLost",
 	"Boon", "ImprintOnHost", "Adventure",
-	"ConditionZone",
 }
 
 // effectEffect is EffectEffect.java: for each EffectOwner$ player (default
@@ -54,6 +53,9 @@ var effectUnresolvedParams = [...]string{
 type effectEffect struct{}
 
 func (effectEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "Effect", effectUnresolvedParams[:]...); err != nil {
 		return err
 	}

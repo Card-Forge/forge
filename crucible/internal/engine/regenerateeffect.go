@@ -8,8 +8,7 @@ import "fmt"
 // the shield is used), RememberObjects$ (extra remembered objects on the
 // shield effect), and bare activation gates.
 var regenerateUnresolvedParams = [...]string{
-	"RegenerationAbility", "RememberObjects",
-	"Condition"}
+	"RegenerationAbility", "RememberObjects"}
 
 // regenerateEffect is RegenerateEffect.java: each targeted or Defined$
 // permanent (default Self) still on the battlefield gets one regeneration
@@ -20,6 +19,9 @@ var regenerateUnresolvedParams = [...]string{
 type regenerateEffect struct{}
 
 func (regenerateEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range regenerateUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Regenerate: %s$ not resolvable yet", key)

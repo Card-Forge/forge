@@ -9,7 +9,10 @@ package engine
 type gameDrawnEffect struct{}
 
 func (gameDrawnEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "GameDrawn", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "GameDrawn"); err != nil {
 		return err
 	}
 	if !subAbilityConditionMet(g, g.Card(a.Source), a.Amounts, a.Params) {

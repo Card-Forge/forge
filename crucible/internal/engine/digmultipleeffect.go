@@ -22,7 +22,10 @@ import (
 type digMultipleEffect struct{}
 
 func (digMultipleEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "DigMultiple", "Condition", "ChooseAmount", "ChosenZone", "ChangeLater",
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "DigMultiple", "ChooseAmount", "ChosenZone", "ChangeLater",
 		"ExileFaceDown", "Imprint", "ForgetOtherRemembered", "Tapped"); err != nil {
 		return err
 	}

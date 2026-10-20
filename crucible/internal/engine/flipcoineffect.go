@@ -24,8 +24,10 @@ import (
 type flipCoinEffect struct{}
 
 func (flipCoinEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "FlipCoin", "ForEachPlayer", "RememberResult", "RememberNumber",
-		"Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "FlipCoin", "ForEachPlayer", "RememberResult", "RememberNumber"); err != nil {
 		return err
 	}
 	if flipCoinModInPlay(g) {

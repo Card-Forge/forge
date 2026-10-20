@@ -12,7 +12,7 @@ import (
 // (a parent RepeatEach/GenericChoice collecting damage) and the planeswalker
 // ultimate gate.
 var eachDamageUnresolvedParams = [...]string{
-	"Condition", "Ultimate",
+	"Ultimate",
 }
 
 // eachDamageEffect is DamageEachEffect.java: every damage source --
@@ -27,6 +27,9 @@ var eachDamageUnresolvedParams = [...]string{
 type eachDamageEffect struct{}
 
 func (eachDamageEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range eachDamageUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: EachDamage: %s$ not resolvable yet", key)

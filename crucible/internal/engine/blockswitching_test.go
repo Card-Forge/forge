@@ -533,7 +533,7 @@ func TestSwitchBlockRejectsCondition(t *testing.T) {
 
 	f := newCombatFixture(t)
 	_, err := resolveNow(t, f.g, f.p, engine.NewScriptedController(), nil,
-		"DB$ SwitchBlock | DefinedAttacker$ Targeted | DefinedBlocker$ Targeted | Condition$ Kicked")
+		"DB$ SwitchBlock | DefinedAttacker$ Targeted | DefinedBlocker$ Targeted | Condition$ Teamwork")
 	if err == nil || !strings.Contains(err.Error(), "Condition$") {
 		t.Fatalf("error = %v, want Condition$ rejected", err)
 	}

@@ -13,7 +13,10 @@ import "fmt"
 type endureEffect struct{}
 
 func (endureEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Endure", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Endure"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

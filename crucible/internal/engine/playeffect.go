@@ -67,8 +67,7 @@ type playEffect struct{}
 var playUnresolvedParams = [...]string{
 	"ReplaceGraveyard", "ReplaceGraveyardValid", "CopyFromChosenName", "AnySupportedCard", "RandomCopied",
 	"RandomNum", "ChoiceNum", "CastFaceDown", "CastTransformed", "ReplaceIlluMask", "PlayReduceCost",
-	"PlayRaiseCost", "ManaConversion", "ControlledByPlayer", "WithTotalCMC", "ShowCards", "ZoneRegardless",
-	"Condition"}
+	"PlayRaiseCost", "ManaConversion", "ControlledByPlayer", "WithTotalCMC", "ShowCards", "ZoneRegardless"}
 
 // playUnportedProperties are card-property prefixes in the corpus's Play
 // valid strings that Matches (valid.go) has no case for and would read as
@@ -90,6 +89,9 @@ var playUnportedProperties = [...]string{
 var playSharesNameWithForms = [...]string{"YourGraveyard", "Graveyard", "Battlefield", "NonToken", "Remembered", "Imprinted"}
 
 func (playEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "Play", playUnresolvedParams[:]...); err != nil {
 		return err
 	}

@@ -10,21 +10,21 @@ The used column is what the corpus writes. The supported column is what the engi
 answer it: the other vocabularies are consumed by code that has no registry to count yet, and a zero there would read as
 a measurement rather than an absence.
 
-| Kind | Defined in Java | Used in scripts | Supported in Go |
-| --- | ---: | ---: | ---: |
-| Ability API (`ApiType`) | 202 | 193 | 0 |
-| Ability param key | — | 1,177 | — |
-| Keyword head | 203 | 252 | — |
-| Trigger and static mode | 153 | 256 | — |
-| Replacement event | 45 | 38 | — |
-| Cost part | ~45 | 88 | — |
-| Count head | — | 271 | — |
-| Count operator | — | 17 | — |
-| Amount-expression head | — | 88 | — |
-| Amount-expression property | — | 374 | — |
-| Valid base | — | 253 | — |
-| Valid property | — | 1,271 | — |
-| AI hint key | — | 29 | — |
+| Kind                       | Defined in Java | Used in scripts | Supported in Go |
+| -------------------------- | --------------: | --------------: | --------------: |
+| Ability API (`ApiType`)    |             202 |             193 |               0 |
+| Ability param key          |               — |           1,177 |               — |
+| Keyword head               |             203 |             252 |               — |
+| Trigger and static mode    |             153 |             256 |               — |
+| Replacement event          |              45 |              38 |               — |
+| Cost part                  |             ~45 |              88 |               — |
+| Count head                 |               — |             271 |               — |
+| Count operator             |               — |              17 |               — |
+| Amount-expression head     |               — |              88 |               — |
+| Amount-expression property |               — |             374 |               — |
+| Valid base                 |               — |             253 |               — |
+| Valid property             |               — |           1,271 |               — |
+| AI hint key                |               — |              29 |               — |
 
 Two rows read higher than their Java definition count because the script vocabulary is not the enum: keyword heads
 include the ones `CardFactoryUtil` expands without a `Keyword` constant, and modes count triggers and statics together
@@ -36,8 +36,8 @@ Read by `tools/apiscan -check`, which fails on any param key nothing reads that 
 both the item and its kind, so a row cannot silence a token of a different vocabulary by accident.
 
 | Item | Kind | Reason | Revisit |
-| --- | --- | --- | --- |
-| — | — | none | — |
+| ---- | ---- | ------ | ------- |
+| —    | —    | none   | —       |
 
 **Empty, and that is the target.** An exclusion is not "this token is fine"; it is "this token fails the gate and
 someone decided to ship anyway". Every dead param the scan found was fixed instead —

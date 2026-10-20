@@ -37,7 +37,7 @@ import "fmt"
 // either, dealDamageEffect's own identical reasoning.
 var setLifeUnresolvedParams = [...]string{
 	"Redistribute", "PlayerChoices", "ChoicePrompt", "ChoiceAmount",
-	"Ultimate", "Condition"}
+	"Ultimate"}
 
 // setLifeEffect resolves Mode$/DB$/AB$ SetLife for the plain, non-
 // Redistribute$ shape. ConditionPresent$/ConditionCompare$/
@@ -47,6 +47,9 @@ var setLifeUnresolvedParams = [...]string{
 type setLifeEffect struct{}
 
 func (setLifeEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range setLifeUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: SetLife: %s$ not resolvable yet", key)

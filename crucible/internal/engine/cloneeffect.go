@@ -241,10 +241,12 @@ var cloneUnresolvedParams = [...]string{
 	"GainTextAbilities", "GainTextOf",
 	"SetManaCost", "SetColorByManaCost",
 	"RemoveCreatureTypes", "SetCreatureTypes", "RemoveKeywords",
-	"SetLoyalty", "Condition",
-}
+	"SetLoyalty"}
 
 func (cloneEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "Clone", cloneUnresolvedParams[:]...); err != nil {
 		return err
 	}

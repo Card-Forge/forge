@@ -11,7 +11,10 @@ import "fmt"
 type detainEffect struct{}
 
 func (detainEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "Detain", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Detain"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

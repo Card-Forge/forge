@@ -4,11 +4,6 @@ package engine
 
 import "fmt"
 
-// proliferateUnresolvedParams are CountersProliferateEffect.java's params
-// this port cannot honour yet.
-var proliferateUnresolvedParams = [...]string{
-	"Condition"}
-
 // proliferateEffect is CountersProliferateEffect.java: Amount$ times
 // (default 1), the activator chooses any number of players and battlefield
 // permanents that have a counter (ChooseEntitiesForEffect), and each chosen
@@ -22,10 +17,8 @@ var proliferateUnresolvedParams = [...]string{
 type proliferateEffect struct{}
 
 func (proliferateEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	for _, key := range proliferateUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: Proliferate: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

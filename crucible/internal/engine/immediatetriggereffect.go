@@ -21,8 +21,11 @@ import (
 type immediateTriggerEffect struct{}
 
 func (immediateTriggerEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "ImmediateTrigger", "RememberSVarAmount", "Static",
-		"AfterReplacement", "RememberDiscarded", "Condition"); err != nil {
+		"AfterReplacement", "RememberDiscarded"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

@@ -84,7 +84,7 @@ func TestUnattachEffectRejectsUnresolvedParam(t *testing.T) {
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 	g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
-	aura := g.NewCard(etbUnattachAuraDef(t, "Test Unattach Condition", "Defined$ Self | Condition$ Threshold"), p, engine.Hand)
+	aura := g.NewCard(etbUnattachAuraDef(t, "Test Unattach Condition", "Defined$ Self | Condition$ Teamwork"), p, engine.Hand)
 
 	c := engine.NewScriptedController()
 	if !g.CastSpell(p, aura, c) {

@@ -26,7 +26,10 @@ func (g *Game) DayTime() DayTime { return g.dayTime }
 type dayTimeEffect struct{}
 
 func (dayTimeEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "DayTime", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "DayTime"); err != nil {
 		return err
 	}
 	if !subAbilityConditionMet(g, g.Card(a.Source), a.Amounts, a.Params) {

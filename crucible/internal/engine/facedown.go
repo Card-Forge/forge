@@ -81,7 +81,7 @@ type manifestEffect struct {
 }
 
 func (e manifestEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, e.api, "Condition"); err != nil {
+	if err := rejectParams(a, e.api); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)
@@ -196,7 +196,10 @@ func manifestPlayers(g *Game, a *Ability) ([]PlayerID, error) {
 type manifestDreadEffect struct{}
 
 func (manifestDreadEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "ManifestDread", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "ManifestDread"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

@@ -352,7 +352,7 @@ func TestDealDamageEffectRejectsConditionItself(t *testing.T) {
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(other).Life = 20, 20
 
-	def := etbDealDamageTriggerDefParams(t, "Test Condition Flag", "Defined$ You | NumDmg$ 1 | Condition$ Threshold", nil)
+	def := etbDealDamageTriggerDefParams(t, "Test Condition Flag", "Defined$ You | NumDmg$ 1 | Condition$ Teamwork", nil)
 	err := castETBDealDamage(t, g, p, def)
 	if err == nil {
 		t.Fatal("ResolveStack: got nil error, want one naming Condition")

@@ -17,7 +17,7 @@ import (
 var repeatEachUnresolvedParams = [...]string{
 	"RepeatSpellAbilities", "RepeatTypesFrom", "NextTurnForEachPlayer", "AmountFromVotes",
 	"DamageMap", "LoseLifeMap", "ChooseOrder", "StartingWith",
-	"Condition", "Ultimate",
+	"Ultimate",
 }
 
 // repeatEachEffect is RepeatEachEffect.java: RepeatSubAbility$ resolves
@@ -31,6 +31,9 @@ var repeatEachUnresolvedParams = [...]string{
 type repeatEachEffect struct{}
 
 func (repeatEachEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range repeatEachUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RepeatEach: %s$ not resolvable yet", key)

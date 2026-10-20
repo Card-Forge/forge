@@ -56,8 +56,7 @@ import (
 // RememberedController and a non-mana UnlessCost$ (Mandatory PayEnergy<X>),
 // neither resolvable here regardless.
 var pumpAllUnresolvedParams = [...]string{
-	"Condition", "ConditionZone", "ConditionPlayerTurn",
-	"ConditionManaSpent", "ConditionManaNotSpent", "ValidTgts",
+	"ValidTgts",
 	"RememberPumped", "SharedKeywordsZone", "SharedRestrictions",
 	"ModeCost", "Exhaust",
 }
@@ -72,6 +71,9 @@ var pumpAllUnresolvedParams = [...]string{
 type pumpAllEffect struct{}
 
 func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range pumpAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: PumpAll: %s$ not resolvable yet", key)

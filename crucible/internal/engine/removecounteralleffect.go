@@ -41,8 +41,7 @@ import (
 // either without ConditionPresent$ alongside it, dealDamageEffect's own
 // identical reasoning.
 var removeCounterAllUnresolvedParams = [...]string{
-	"ValidZone", "AllCounterTypes",
-	"Condition"}
+	"ValidZone", "AllCounterTypes"}
 
 // removeCounterAllEffect resolves Mode$/DB$/AB$ RemoveCounterAll.
 // ConditionPresent$/ConditionCompare$/ConditionCheckSVar$/
@@ -51,6 +50,9 @@ var removeCounterAllUnresolvedParams = [...]string{
 type removeCounterAllEffect struct{}
 
 func (removeCounterAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range removeCounterAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RemoveCounterAll: %s$ not resolvable yet", key)

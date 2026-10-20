@@ -8,11 +8,6 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/cardtype"
 )
 
-// exploreUnresolvedParams are ExploreEffect.java's params this port cannot
-// honour yet.
-var exploreUnresolvedParams = [...]string{
-	"Condition"}
-
 // exploreEffect is ExploreEffect.java (CR 701.44): each exploring permanent
 // (targetedOrDefinedCards, default Self) Num$ times (default 1) has its
 // controller reveal the top card of their library. A land goes to hand;
@@ -25,10 +20,8 @@ var exploreUnresolvedParams = [...]string{
 type exploreEffect struct{}
 
 func (exploreEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	for _, key := range exploreUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: Explore: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

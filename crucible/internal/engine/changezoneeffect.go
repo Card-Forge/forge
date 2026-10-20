@@ -42,7 +42,7 @@ var changeZoneUnresolvedParams = [...]string{
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
 	"ShuffleChangedPile", "Reorder", "Exactly", "RememberSearched",
 	"ImprintLast", "Unearth",
-	"Condition", "Ultimate", "ModeCost",
+	"Ultimate", "ModeCost",
 	// ExiledWithEffectSource$ marks the effect card's own source as the
 	// exiler instead of the host (SpellAbilityEffect.java:1092-1094).
 	"ExiledWithEffectSource",
@@ -62,6 +62,9 @@ var anyZoneOrigin = [...]ZoneType{Hand, Library, Graveyard, Battlefield, Exile, 
 type changeZoneEffect struct{}
 
 func (changeZoneEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range changeZoneUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ChangeZone: %s$ not resolvable yet", key)

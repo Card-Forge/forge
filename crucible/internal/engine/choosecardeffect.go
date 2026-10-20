@@ -26,8 +26,8 @@ var chooseCardUnresolvedParams = [...]string{
 	"AllCards", "IncludeSpellsOnStack", "TargetControls",
 	"ChosenMap", "ChoiceTitleAppend", "StartingWith", "Optional",
 	"UnlessResolveSubs", "LockInText", "OrString",
-	"Condition", "ModeCost",
-	"ConditionManaNotSpent", "ConditionGameTypes",
+	"ModeCost",
+	"ConditionGameTypes",
 }
 
 // chooseCardEffect is ChooseCardEffect.java's default shape: each chooser
@@ -42,6 +42,9 @@ var chooseCardUnresolvedParams = [...]string{
 type chooseCardEffect struct{}
 
 func (chooseCardEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range chooseCardUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ChooseCard: %s$ not resolvable yet", key)

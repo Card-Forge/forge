@@ -146,7 +146,7 @@ func TestMultiplyCounterEffectRejectsUnresolvedParam(t *testing.T) {
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 
-	def := etbMultiplyCounterTriggerDefParams(t, "Test Multiply Condition", "Defined$ Self | CounterType$ P1P1 | Condition$ Threshold")
+	def := etbMultiplyCounterTriggerDefParams(t, "Test Multiply Condition", "Defined$ Self | CounterType$ P1P1 | Condition$ Teamwork")
 	_, err := castETBMultiplyCounterSelf(t, g, p, def, func(c *engine.Card) { c.Counters.Add(engine.P1P1, 1) })
 	if err == nil {
 		t.Fatal("ResolveStack succeeded, want an error for unresolved Condition$")

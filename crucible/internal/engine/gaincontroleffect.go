@@ -10,7 +10,7 @@ import "fmt"
 // TargetingPlayerControls$ and the random pick, TargetsAtRandom$) are
 // targeting.go's.
 var gainControlUnresolvedParams = [...]string{
-	"AllValid", "Condition", "Ultimate",
+	"AllValid", "Ultimate",
 }
 
 // gainControlEffect is ControlGainEffect.java's permanent shape: the
@@ -23,6 +23,9 @@ var gainControlUnresolvedParams = [...]string{
 type gainControlEffect struct{}
 
 func (gainControlEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range gainControlUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: GainControl: %s$ not resolvable yet", key)

@@ -29,14 +29,14 @@ the engine first: an Aura cast, a creature killed and another cast, two spells o
 creature dealt 1 damage, tokens, a +1/+1 counter, an opponent's face-down creature, and six combat moments with the
 defender blocking with everything or not at all.
 
-| Outcome | Meaning |
-| --- | --- |
-| `plays` | No error surfaced on that path |
-| `refused` | The engine returned an error or left a pending one (GO-7): the loud half, and the M6 backlog |
-| `panicked` | An engine invariant breach, recovered at the probe boundary. Always a bug |
-| `hung` | No result within `-timeout` (default 20 s). The engine loops on this card. Always a bug |
-| `placed` | A Command-zone type (plane, scheme, Vanguard, conspiracy, phenomenon): put in the zone, three turns run, statics and triggers live. Abilities that need the game mode (set in motion, chaos, planeswalk) are not exercised, so it is counted apart from `plays` |
-| `inconclusive` | The card could not be cast on any board variant (an extra cost, an X or a target the variants lack) |
+| Outcome        | Meaning                                                                                                                                                                                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `plays`        | No error surfaced on that path                                                                                                                                                                                                                                  |
+| `refused`      | The engine returned an error or left a pending one (GO-7): the loud half, and the M6 backlog                                                                                                                                                                    |
+| `panicked`     | An engine invariant breach, recovered at the probe boundary. Always a bug                                                                                                                                                                                       |
+| `hung`         | No result within `-timeout` (default 20 s). The engine loops on this card. Always a bug                                                                                                                                                                         |
+| `placed`       | A Command-zone type (plane, scheme, Vanguard, conspiracy, phenomenon): put in the zone, three turns run, statics and triggers live. Abilities that need the game mode (set in motion, chaos, planeswalk) are not exercised, so it is counted apart from `plays` |
+| `inconclusive` | The card could not be cast on any board variant (an extra cost, an X or a target the variants lack)                                                                                                                                                             |
 
 The refusal causes are grouped by the first line of the error with card names, numbers and ids blanked, so one missing
 param counts once however many cards carry it. That table, ordered by cards blocked, is the backlog.
@@ -56,14 +56,14 @@ Pain's Reward, Dance with Calamity) answered yes forever loops by the controller
 
 Measured on the full corpus (34,078 cards):
 
-| Outcome | Cards |
-| --- | ---: |
-| plays | 31,843 |
-| refused | 1,724 |
-| panicked | 0 |
-| hung | 0 |
-| placed | 433 |
-| inconclusive | 78 |
+| Outcome      |  Cards |
+| ------------ | -----: |
+| plays        | 31,843 |
+| refused      |  1,724 |
+| panicked     |      0 |
+| hung         |      0 |
+| placed       |    433 |
+| inconclusive |     78 |
 
 94.9% of the 33,567 judged cards play. On the 8,668 distinct cards of the 505 quest preconstructed decks under
 `forge-gui/res/quest/precons` (a proxy, not a metagame: the real gauntlet decklists are not supplied,
@@ -71,14 +71,14 @@ Measured on the full corpus (34,078 cards):
 
 Largest refusal causes over the full corpus (cards blocked):
 
-| Cards | Refusal |
-| ---: | --- |
-| 34 | `Charm: Defined$ not resolvable` |
-| 19 | `ChangeZone: DifferentNames$ not resolvable` |
-| 18 | `Animate: staticAbilities$ not resolvable` |
-| 17 | `Effect: Boon$ not resolvable` |
-| 16 | `RepeatEach: DamageMap$ not resolvable` |
-| 15 | `ChangeZone: Defined$ not resolvable` |
+| Cards | Refusal                                      |
+| ----: | -------------------------------------------- |
+|    34 | `Charm: Defined$ not resolvable`             |
+|    19 | `ChangeZone: DifferentNames$ not resolvable` |
+|    18 | `Animate: staticAbilities$ not resolvable`   |
+|    17 | `Effect: Boon$ not resolvable`               |
+|    16 | `RepeatEach: DamageMap$ not resolvable`      |
+|    15 | `ChangeZone: Defined$ not resolvable`        |
 
 Run `crucible card-smoke -all` for the current table; these counts move with every port.
 

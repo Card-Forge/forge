@@ -10,7 +10,10 @@ package engine
 type investigateEffect struct{}
 
 func (investigateEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Investigate", "Optional", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Investigate", "Optional"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

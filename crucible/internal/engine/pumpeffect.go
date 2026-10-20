@@ -72,7 +72,6 @@ import (
 // wild_might.txt's own spell-level ValidTgts$, reachable since a cast
 // spell's targets resolve (ADR-0018).
 var pumpUnresolvedParams = [...]string{
-	"Condition", "ConditionZone", "ConditionPlayerTurn",
 	"ConditionActivationLimit",
 	"CanBlockAmount", "CanBlockAny", "KWChoice", "RandomKeyword", "RandomKWNum",
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
@@ -115,6 +114,9 @@ func pumpImprint(a *Ability, host *Card, key string, forget bool) error {
 type pumpEffect struct{}
 
 func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range pumpUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Pump: %s$ not resolvable yet", key)

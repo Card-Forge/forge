@@ -9,7 +9,7 @@ import "fmt"
 // hands the "again?" question to another player.
 var repeatUnresolvedParams = [...]string{
 	"RepeatDefined", "RepeatOptionalDecider",
-	"Condition", "Ultimate",
+	"Ultimate",
 }
 
 // repeatEffect is RepeatEffect.java: RepeatSubAbility$ resolves at least
@@ -20,6 +20,9 @@ var repeatUnresolvedParams = [...]string{
 type repeatEffect struct{}
 
 func (repeatEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range repeatUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Repeat: %s$ not resolvable yet", key)

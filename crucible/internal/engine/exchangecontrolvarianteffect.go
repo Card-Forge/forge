@@ -16,7 +16,10 @@ import (
 type exchangeControlVariantEffect struct{}
 
 func (exchangeControlVariantEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "ExchangeControlVariant", "Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "ExchangeControlVariant"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

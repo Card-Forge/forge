@@ -16,7 +16,7 @@ import "fmt"
 var genericChoiceUnresolvedParams = [...]string{
 	"NumRandomChoices", "Guess",
 	"DamageMap", "ChangeZoneTable",
-	"Condition", "Ultimate",
+	"Ultimate",
 }
 
 // genericChoiceEffect is ChooseGenericEffect.java: each Defined$/ValidTgts$
@@ -34,6 +34,9 @@ var genericChoiceUnresolvedParams = [...]string{
 type genericChoiceEffect struct{}
 
 func (genericChoiceEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range genericChoiceUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: GenericChoice: %s$ not resolvable yet", key)

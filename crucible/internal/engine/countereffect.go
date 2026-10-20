@@ -21,7 +21,10 @@ import "fmt"
 type counterEffect struct{}
 
 func (counterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Counter", "Condition", "Defined", "DestinationChoice", "RememberCounteredCMC",
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Counter", "Defined", "DestinationChoice", "RememberCounteredCMC",
 		"RememberCounteredSA", "RememberSplicedOntoCounteredSpell", "ConditionWouldDestroy"); err != nil {
 		return err
 	}

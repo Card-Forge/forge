@@ -13,8 +13,7 @@ import (
 // model: rerolls, attraction visits, stored rolls, a chosen result, and
 // the per-roll sub-abilities.
 var rollDiceUnresolvedParams = [...]string{
-	"RerollResults", "ToVisitYourAttractions", "StoreResults", "ChosenSVar", "OtherSVar",
-	"Condition"}
+	"RerollResults", "ToVisitYourAttractions", "StoreResults", "ChosenSVar", "OtherSVar"}
 
 // rollDiceEffect is RollDiceEffect.java (CR 706): each target or Defined$
 // player (default You) rolls Amount$ (default 1) Sides$-sided dice (default
@@ -36,6 +35,9 @@ var rollDiceUnresolvedParams = [...]string{
 type rollDiceEffect struct{}
 
 func (rollDiceEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "RollDice", rollDiceUnresolvedParams[:]...); err != nil {
 		return err
 	}

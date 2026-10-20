@@ -13,7 +13,7 @@ import (
 // cannot honour yet; a bare CheckSVar$/SVarCompare$ is the activation gate
 // activationLimitsMet's sibling otherRestrictionsMet enforces.
 var chooseColorUnresolvedParams = [...]string{
-	"Condition", "InstantSpeed", "Forecast",
+	"InstantSpeed", "Forecast",
 }
 
 // chooseColorEffect is ChooseColorEffect.java: each chooser (Defined$,
@@ -28,6 +28,9 @@ var chooseColorUnresolvedParams = [...]string{
 type chooseColorEffect struct{}
 
 func (chooseColorEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range chooseColorUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: ChooseColor: %s$ not resolvable yet", key)

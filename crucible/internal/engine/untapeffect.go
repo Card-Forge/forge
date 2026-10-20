@@ -35,7 +35,7 @@ import "fmt"
 // loudly here rather than silently untap-without-a-trigger the wrong
 // permanent.
 var untapUnresolvedParams = [...]string{
-	"UntapUpTo", "UntapExactly", "UntapType", "Amount", "Condition", "ETB",
+	"UntapUpTo", "UntapExactly", "UntapType", "Amount", "ETB",
 }
 
 // untapEffect resolves Mode$/DB$/AB$ Untap for the plain ValidTgts$/
@@ -47,6 +47,9 @@ var untapUnresolvedParams = [...]string{
 type untapEffect struct{}
 
 func (untapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range untapUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Untap: %s$ not resolvable yet", key)

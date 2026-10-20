@@ -27,8 +27,7 @@ import "fmt"
 // either without ConditionPresent$ alongside it, dealDamageEffect's own
 // identical reasoning.
 var poisonUnresolvedParams = [...]string{
-	"Ultimate", "Planeswalker",
-	"Condition"}
+	"Ultimate", "Planeswalker"}
 
 // poisonEffect resolves Mode$/DB$/AB$ Poison. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -37,6 +36,9 @@ var poisonUnresolvedParams = [...]string{
 type poisonEffect struct{}
 
 func (poisonEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range poisonUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Poison: %s$ not resolvable yet", key)

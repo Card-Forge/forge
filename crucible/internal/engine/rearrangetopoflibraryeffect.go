@@ -7,7 +7,7 @@ import "fmt"
 // rearrangeTopOfLibraryUnresolvedParams: RearrangePlayer$ (1 real line) has
 // someone other than the activator order the cards.
 var rearrangeTopOfLibraryUnresolvedParams = [...]string{
-	"RearrangePlayer", "Condition"}
+	"RearrangePlayer"}
 
 // rearrangeTopOfLibraryEffect is RearrangeTopOfLibraryEffect.java: for each
 // target player (default You) the activator orders the top NumCards$ cards
@@ -17,6 +17,9 @@ var rearrangeTopOfLibraryUnresolvedParams = [...]string{
 type rearrangeTopOfLibraryEffect struct{}
 
 func (rearrangeTopOfLibraryEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range rearrangeTopOfLibraryUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RearrangeTopOfLibrary: %s$ not resolvable yet", key)

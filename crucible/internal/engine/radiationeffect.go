@@ -29,8 +29,7 @@ import "fmt"
 // otherwise silently no-op a card naming either without ConditionPresent$
 // alongside it, dealDamageEffect's own identical reasoning.
 var radiationUnresolvedParams = [...]string{
-	"TriggeredCard",
-	"Condition"}
+	"TriggeredCard"}
 
 // radiationEffect resolves Mode$/DB$/AB$ Radiation. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -39,6 +38,9 @@ var radiationUnresolvedParams = [...]string{
 type radiationEffect struct{}
 
 func (radiationEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range radiationUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Radiation: %s$ not resolvable yet", key)

@@ -327,7 +327,7 @@ func TestControlPlayerRejectsUnportedShapes(t *testing.T) {
 	t.Parallel()
 
 	for _, tc := range []struct{ line, want string }{
-		{"DB$ ControlPlayer | ValidTgts$ Opponent | Condition$ Threshold | Combat$ True", "Condition$ \"Threshold\" not resolvable yet"},
+		{"DB$ ControlPlayer | ValidTgts$ Opponent | Condition$ Teamwork | Combat$ True", "Condition$ \"Teamwork\" not resolvable yet"},
 		{"DB$ ControlPlayer | ValidTgts$ Player | TargetUnique$ True | Controller$ Player.Chosen", "TargetUnique$ not resolvable yet"},
 		{"DB$ ControlPlayer | Defined$ Opponent | Controller$ ParentTarget", "Controller$"},
 		{"DB$ ControlPlayer | Defined$ Opponent | Controller$ Player.Chosen", "Controller$"},

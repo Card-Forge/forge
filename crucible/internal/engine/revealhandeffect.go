@@ -35,8 +35,7 @@ import (
 // either without ConditionPresent$ alongside it, dealDamageEffect's own
 // identical reasoning.
 var revealHandUnresolvedParams = [...]string{
-	"Optional", "ImprintRevealed",
-	"Condition"}
+	"Optional", "ImprintRevealed"}
 
 // revealHandEffect resolves Mode$/DB$/AB$ RevealHand. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -45,6 +44,9 @@ var revealHandUnresolvedParams = [...]string{
 type revealHandEffect struct{}
 
 func (revealHandEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range revealHandUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: RevealHand: %s$ not resolvable yet", key)

@@ -9,8 +9,7 @@ import "fmt"
 // the library); a bare CheckSVar$ is an activation gate otherRestrictionsMet
 // enforces.
 var peekAndRevealUnresolvedParams = [...]string{
-	"SourceZone",
-	"Condition"}
+	"SourceZone"}
 
 // peekAndRevealEffect is PeekAndRevealEffect.java: the activator looks at
 // the top PeekAmount$ (default 1) cards of each Defined$/ValidTgts$
@@ -27,6 +26,9 @@ var peekAndRevealUnresolvedParams = [...]string{
 type peekAndRevealEffect struct{}
 
 func (peekAndRevealEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range peekAndRevealUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: PeekAndReveal: %s$ not resolvable yet", key)

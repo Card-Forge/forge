@@ -45,7 +45,10 @@ type voteOption struct {
 }
 
 func (voteEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "Vote", "Condition", "UpTo"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "Vote", "UpTo"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

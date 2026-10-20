@@ -32,7 +32,10 @@ import (
 type setStateEffect struct{}
 
 func (setStateEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "SetState", "Condition", "RevealFirst", "ValidNewFace", "NewState",
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "SetState", "RevealFirst", "ValidNewFace", "NewState",
 		"FaceDownPower", "FaceDownToughness", "FaceDownSetType", "ETB"); err != nil {
 		return err
 	}

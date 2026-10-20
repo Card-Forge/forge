@@ -9,39 +9,39 @@ Each was found by a gate rather than by reading: a parser or scanner that treats
 
 ## Status
 
-| Card | Defect | Found by | Upstream |
-| --- | --- | --- | --- |
-| `the_dawning_archaic` | `ODeckHints:` for `DeckHints:` | Unknown-key rejection | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
-| `spirit_of_resilience` | `DBCleanup:` for `SVar:DBCleanup:` | Unknown-key rejection | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
-| `favor_of_jukai` | Missing `\|` fuses `ValidTgts$` and `NumAtt$` | Valid-base vocabulary | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
-| `casey_raph_hotheads` | `SVar:DBCleanup` never written | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `circadian_struggle` | Cleanup chains to a `DBEffect` that does not exist | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `withering_curse` | Chains to a `DBPutCounter` that does not exist | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `worzel_the_protector` | Chains to a `DBAttach` that does not exist | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `typhoid_mary_fractured` | Chains to a `DBCharm` that does not exist | Sub-ability resolution | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
-| `goblin_razerunners` | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
-| `flamewave_invoker` | `ValidTgts$ Player, Planeswalker` — a space after the comma | Valid-string parsing | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
-| `peace_talks` | `StaticAbilities$` names `STCantTargetPlayer`, never defined | Effect trait compilation | pending |
-| `ludevic_necrogenius_olag_ludevics_hubris` | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color | Clone port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `taskmaster_mercenary_mimic` | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`) | Clone port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `captured_by_the_consulate` | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`) | ChangeTargets port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `mount_keralia` | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0 | Planeswalk port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `tooth_claw_and_tail` | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `your_will_is_not_your_own` | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up | SetInMotion port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `loose_in_the_park` | `Clone` with `PumpKeywords$ Haste` but no `PumpDuration$`: Haste outlasts the turn | Clone port | [#12193](https://github.com/Card-Forge/forge/pull/12193) |
-| `____________trespasser` (line 7) | `KW$ HIDDEN Unblockable`: no Java code reads `Unblockable`, so the Oracle's "can't be blocked" never applies | Pump `KW$` hidden lines (R9) | Not filed |
-| `turtle_tracks` (line 4) | "Any number of target players may each search" with no `DefinedPlayer$ Targeted`: only the first target searches and the activator picks (`ChangeZoneEffect.java:919-926`) | ChangeZone `Chooser$` (R9) | Not filed |
-| `bringer_of_green_zeniths_twilight` | Line 6 writes `no condition`; `makeEtbCounter` compares `"no Condition"` case-sensitively (`CardFactoryUtil.java:557`) | Review of the R9d port | Not filed |
-| 40 `A:SP$ Charm` / `DB$ Charm` lines (e.g. `riverwalk_technique`) | `Defined$ You`: `CharmEffect.java` never reads `Defined`, and the sub-modes are cloned with their own params, so the key is dead (the activator chooses, `CharmEffect.java:264`). Crucible refuses the lines (`charmUnresolvedParams`) until the scripts drop it, or an upstream patch carries the removal | Charm port review (open-plan top-refusal pass) | Not filed |
-| `jin_sakai_ghost_of_tsushima` | Line 7 puts `ConditionCheckSVar$ X \| ConditionSVarCompare$ EQ0` on the `DB$ Charm` itself; the chosen modes are chained as sub-abilities and still resolve (`CharmEffect.java:293-317`, `AbilityUtils.java:1395-1403`) | Review of the R9g port | Not filed |
-| `overclocked_electromancer` (line 9) | Oracle says "deals combat damage to a creature", but the `Mode$ DamageDone` trigger has no `CombatDamage$ True`, so noncombat damage fires it too | Review of the R9j port | Not filed |
-| `library_of_leng` (line 6) | `ChangeZone \| Origin$ All \| Destination$ Library` with no `NoShuffle$ True`: `ChangeZoneEffect.java:1259` shuffles the library before the discarded card goes on top; Oracle says no shuffle | Discard replacements (R9k) | Not filed |
-| `nephalia_academy` (line 7) | Same missing `NoShuffle$ True` as `library_of_leng`: the library is shuffled before the revealed card goes on top | Discard replacements (R9k) | Not filed |
-| `wilt_leaf_liege` (line 8) | `DefinedPlayer$ ReplacedPlayer`: `ReplaceMoved.setReplacingObjects` (`ReplaceMoved.java:120-124`) sets no Player, so the hidden ChangeZone has no fetcher and moves nothing; the replaced discard leaves it in hand | Discard replacements (R9k) | Not filed |
-| `volcanic_offering` (line 5) | `RememberTargets$` on the `DBDestroyLand` sub-ability: `AbilityUtils.handleRemembering` runs on the stack's root alone (`MagicStack.java:646`), so the opponent-chosen land is never remembered or destroyed | `RememberTargets$` port (R9o) | Not filed |
-| `urza_academy_headmaster` (`Destroy11U`) | `RememberTargets$` on a `GenericChoice` choice: never remembered (same site), so "return each card put into a graveyard this way" returns nothing | `RememberTargets$` port (R9o) | Not filed |
-| `phyrexian_adapter` | `AddType$ Food,Blood,Clue,Treasure,Powerstone` (line 6): a comma list where every other line uses `" & "`; `CardType.add` stores one subtype named with the commas | Layer 4 port | Not filed |
-| `hollow_marauder` | `Y:TargetedPlayer$Amount/Minus.Remembered$Valid Card.cmcGE4` (line 11): `doXMath` splits the operator on `.` (`AbilityUtils.java:3278-3287`), gets three parts and leaves the operand 0, so the subtraction never happens | Amounts port (R9) | Not filed |
+| Card                                                              | Defect                                                                                                                                                                                                                                                                                                     | Found by                                       | Upstream                                                         |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------- |
+| `the_dawning_archaic`                                             | `ODeckHints:` for `DeckHints:`                                                                                                                                                                                                                                                                             | Unknown-key rejection                          | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
+| `spirit_of_resilience`                                            | `DBCleanup:` for `SVar:DBCleanup:`                                                                                                                                                                                                                                                                         | Unknown-key rejection                          | [#11831](https://github.com/Card-Forge/forge/pull/11831), merged |
+| `favor_of_jukai`                                                  | Missing `\|` fuses `ValidTgts$` and `NumAtt$`                                                                                                                                                                                                                                                              | Valid-base vocabulary                          | [#11836](https://github.com/Card-Forge/forge/pull/11836), merged |
+| `casey_raph_hotheads`                                             | `SVar:DBCleanup` never written                                                                                                                                                                                                                                                                             | Sub-ability resolution                         | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `circadian_struggle`                                              | Cleanup chains to a `DBEffect` that does not exist                                                                                                                                                                                                                                                         | Sub-ability resolution                         | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `withering_curse`                                                 | Chains to a `DBPutCounter` that does not exist                                                                                                                                                                                                                                                             | Sub-ability resolution                         | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `worzel_the_protector`                                            | Chains to a `DBAttach` that does not exist                                                                                                                                                                                                                                                                 | Sub-ability resolution                         | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `typhoid_mary_fractured`                                          | Chains to a `DBCharm` that does not exist                                                                                                                                                                                                                                                                  | Sub-ability resolution                         | [#11840](https://github.com/Card-Forge/forge/pull/11840), merged |
+| `goblin_razerunners`                                              | `ValidTgts$ Player, Planeswalker` — a space after the comma                                                                                                                                                                                                                                                | Valid-string parsing                           | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
+| `flamewave_invoker`                                               | `ValidTgts$ Player, Planeswalker` — a space after the comma                                                                                                                                                                                                                                                | Valid-string parsing                           | [#11841](https://github.com/Card-Forge/forge/pull/11841), merged |
+| `peace_talks`                                                     | `StaticAbilities$` names `STCantTargetPlayer`, never defined                                                                                                                                                                                                                                               | Effect trait compilation                       | pending                                                          |
+| `ludevic_necrogenius_olag_ludevics_hubris`                        | `AddColors$ Blue & Black`; `CardFactory.java:497` splits on `,`, so Olag gains no color                                                                                                                                                                                                                    | Clone port                                     | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `taskmaster_mercenary_mimic`                                      | Clone's `RemoveCreatureTypes$` is read by nothing in `getCloneStates` (`CardFactory.java:579-581`)                                                                                                                                                                                                         | Clone port                                     | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `captured_by_the_consulate`                                       | `TriggeredSourceSA` under `Mode$ SpellCast`: never set (`TriggerSpellAbilityCastOrCopy.java:232`)                                                                                                                                                                                                          | ChangeTargets port                             | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `mount_keralia`                                                   | `TriggeredCard$` under `Mode$ PlaneswalkedFrom`, which sets only `Cards`: X is 0                                                                                                                                                                                                                           | Planeswalk port                                | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `tooth_claw_and_tail`                                             | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up                                                                                                                                                                                             | SetInMotion port                               | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `your_will_is_not_your_own`                                       | `Mode$ SetInMotion` line 4 lacks `ValidCard$ Card.Self`: fires on any scheme set in motion while it is face up                                                                                                                                                                                             | SetInMotion port                               | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `loose_in_the_park`                                               | `Clone` with `PumpKeywords$ Haste` but no `PumpDuration$`: Haste outlasts the turn                                                                                                                                                                                                                         | Clone port                                     | [#12193](https://github.com/Card-Forge/forge/pull/12193)         |
+| `____________trespasser` (line 7)                                 | `KW$ HIDDEN Unblockable`: no Java code reads `Unblockable`, so the Oracle's "can't be blocked" never applies                                                                                                                                                                                               | Pump `KW$` hidden lines (R9)                   | Not filed                                                        |
+| `turtle_tracks` (line 4)                                          | "Any number of target players may each search" with no `DefinedPlayer$ Targeted`: only the first target searches and the activator picks (`ChangeZoneEffect.java:919-926`)                                                                                                                                 | ChangeZone `Chooser$` (R9)                     | Not filed                                                        |
+| `bringer_of_green_zeniths_twilight`                               | Line 6 writes `no condition`; `makeEtbCounter` compares `"no Condition"` case-sensitively (`CardFactoryUtil.java:557`)                                                                                                                                                                                     | Review of the R9d port                         | Not filed                                                        |
+| 40 `A:SP$ Charm` / `DB$ Charm` lines (e.g. `riverwalk_technique`) | `Defined$ You`: `CharmEffect.java` never reads `Defined`, and the sub-modes are cloned with their own params, so the key is dead (the activator chooses, `CharmEffect.java:264`). Crucible refuses the lines (`charmUnresolvedParams`) until the scripts drop it, or an upstream patch carries the removal | Charm port review (open-plan top-refusal pass) | Not filed                                                        |
+| `jin_sakai_ghost_of_tsushima`                                     | Line 7 puts `ConditionCheckSVar$ X \| ConditionSVarCompare$ EQ0` on the `DB$ Charm` itself; the chosen modes are chained as sub-abilities and still resolve (`CharmEffect.java:293-317`, `AbilityUtils.java:1395-1403`)                                                                                    | Review of the R9g port                         | Not filed                                                        |
+| `overclocked_electromancer` (line 9)                              | Oracle says "deals combat damage to a creature", but the `Mode$ DamageDone` trigger has no `CombatDamage$ True`, so noncombat damage fires it too                                                                                                                                                          | Review of the R9j port                         | Not filed                                                        |
+| `library_of_leng` (line 6)                                        | `ChangeZone \| Origin$ All \| Destination$ Library` with no `NoShuffle$ True`: `ChangeZoneEffect.java:1259` shuffles the library before the discarded card goes on top; Oracle says no shuffle                                                                                                             | Discard replacements (R9k)                     | Not filed                                                        |
+| `nephalia_academy` (line 7)                                       | Same missing `NoShuffle$ True` as `library_of_leng`: the library is shuffled before the revealed card goes on top                                                                                                                                                                                          | Discard replacements (R9k)                     | Not filed                                                        |
+| `wilt_leaf_liege` (line 8)                                        | `DefinedPlayer$ ReplacedPlayer`: `ReplaceMoved.setReplacingObjects` (`ReplaceMoved.java:120-124`) sets no Player, so the hidden ChangeZone has no fetcher and moves nothing; the replaced discard leaves it in hand                                                                                        | Discard replacements (R9k)                     | Not filed                                                        |
+| `volcanic_offering` (line 5)                                      | `RememberTargets$` on the `DBDestroyLand` sub-ability: `AbilityUtils.handleRemembering` runs on the stack's root alone (`MagicStack.java:646`), so the opponent-chosen land is never remembered or destroyed                                                                                               | `RememberTargets$` port (R9o)                  | Not filed                                                        |
+| `urza_academy_headmaster` (`Destroy11U`)                          | `RememberTargets$` on a `GenericChoice` choice: never remembered (same site), so "return each card put into a graveyard this way" returns nothing                                                                                                                                                          | `RememberTargets$` port (R9o)                  | Not filed                                                        |
+| `phyrexian_adapter`                                               | `AddType$ Food,Blood,Clue,Treasure,Powerstone` (line 6): a comma list where every other line uses `" & "`; `CardType.add` stores one subtype named with the commas                                                                                                                                         | Layer 4 port                                   | Not filed                                                        |
+| `hollow_marauder`                                                 | `Y:TargetedPlayer$Amount/Minus.Remembered$Valid Card.cmcGE4` (line 11): `doXMath` splits the operator on `.` (`AbilityUtils.java:3278-3287`), gets three parts and leaves the operand 0, so the subtraction never happens                                                                                  | Amounts port (R9)                              | Not filed                                                        |
 
 Every row but `peace_talks`, `____________trespasser`, `turtle_tracks` and the rows marked Not filed is merged upstream.
 Turtle Tracks, Library of Leng and Nephalia Academy are reproduced as Java runs them (oracle parity, the shuffle
@@ -73,14 +73,14 @@ file in the repository returns zero.
 Recovering "every key Forge reads" is the hard half. Forge reads a param six ways, and a scan that knows only the first
 reports 326 keys as dead that Forge reads perfectly well:
 
-| Shape | Example |
-| --- | --- |
-| The accessors on an ability | `sa.getParam("NumDmg")` |
-| The raw map, before an ability object exists | `mapParams.containsKey("Layer")` |
-| A helper taking the key as an argument | `getDefinedPlayersOrTargeted(sa, "TokenOwner")` |
-| A key bound to a variable first | `final String key = "ResultSubAbilities"` |
-| Triggers and replacements matching against the event | `matchesValidParam("ValidExplorer", …)` |
-| A list literal with no call site | `additionalAbilityKeys` |
+| Shape                                                | Example                                         |
+| ---------------------------------------------------- | ----------------------------------------------- |
+| The accessors on an ability                          | `sa.getParam("NumDmg")`                         |
+| The raw map, before an ability object exists         | `mapParams.containsKey("Layer")`                |
+| A helper taking the key as an argument               | `getDefinedPlayersOrTargeted(sa, "TokenOwner")` |
+| A key bound to a variable first                      | `final String key = "ResultSubAbilities"`       |
+| Triggers and replacements matching against the event | `matchesValidParam("ValidExplorer", …)`         |
+| A list literal with no call site                     | `additionalAbilityKeys`                         |
 
 Each candidate rename was then checked four ways, because a plausible rename is not evidence: the effect's own source
 and its default when the key is absent, `git log -S` over the Java for the commit that stopped reading it, the sibling
@@ -88,15 +88,15 @@ cards that write the candidate key, and the card's printed Oracle text.
 
 ### Seven that change what a card does
 
-| Card | Defect | Consequence | Upstream |
-| --- | --- | --- | --- |
-| `leader_super_genius` | `ValidConniver$` for `ValidCard$` | Replacement fires on **every** connive | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
-| `mindblaze` | `PeekNum$` for `PeekAmount$` | Reveals 1 card, not the whole library | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
-| `mob_verdict` | `Secret$` for `Secretly$` | Secret council votes cast openly | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
-| `beorns_hospitality` | `ValidTgtDesc$` for `ValidTgtsDesc$` | Prompt reads `Select target Creature.YouCtrl` | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
-| `generous_revival` | `ValidTgtDesc$` for `ValidTgtsDesc$` | Prompt reads the raw valid string | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
-| `galion_elvenkings_butler` | `ValidTgtsDes$` for `ValidTgtsDesc$` | Prompt reads the raw valid string | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
-| `shuttle_crew` | `ValidTgtsDes$` for `ValidTgtsDesc$` | Prompt reads the raw valid string | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| Card                       | Defect                               | Consequence                                   | Upstream                                                       |
+| -------------------------- | ------------------------------------ | --------------------------------------------- | -------------------------------------------------------------- |
+| `leader_super_genius`      | `ValidConniver$` for `ValidCard$`    | Replacement fires on **every** connive        | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| `mindblaze`                | `PeekNum$` for `PeekAmount$`         | Reveals 1 card, not the whole library         | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| `mob_verdict`              | `Secret$` for `Secretly$`            | Secret council votes cast openly              | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| `beorns_hospitality`       | `ValidTgtDesc$` for `ValidTgtsDesc$` | Prompt reads `Select target Creature.YouCtrl` | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| `generous_revival`         | `ValidTgtDesc$` for `ValidTgtsDesc$` | Prompt reads the raw valid string             | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| `galion_elvenkings_butler` | `ValidTgtsDes$` for `ValidTgtsDesc$` | Prompt reads the raw valid string             | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
+| `shuttle_crew`             | `ValidTgtsDes$` for `ValidTgtsDesc$` | Prompt reads the raw valid string             | [#11846](https://github.com/Card-Forge/forge/pull/11846), open |
 
 `ValidConniver` is the sharpest. `ReplaceConnive.canReplace` reads only `"ValidCard"`, and
 `CardTraitBase.matchesValidParam` returns `!hasParam("Invert" + param)` — true — when the param is absent. The
@@ -106,17 +106,17 @@ else, so a valid string carrying properties reaches the player verbatim.
 
 ### Nine that change nothing
 
-| Card | Key | Why it is dead |
-| --- | --- | --- |
-| `orochi_hatchery` | `TokenController$` | `TokenOwner` defaults to `You`; no targeting on the ability |
-| `spawning_pit` | `TokenController$` | Same |
-| `tomb_of_urami` | `TokenController$` | Same |
-| `faerie_dragon`, twice | `RememberRandomChoice$` | `DamageDealEffect` already remembers unconditionally |
-| `dance_of_the_dead` | `OverwriteSpells$` | Reader deleted by `25900ee10cd` (#6996) |
-| `natural_order` | `AISearchGoal$` | Reader deleted by `0ba88f3ce5c` |
-| `invasion_of_arcavios_invocation_...` | `AlternativeMessage$` | Reader deleted by `da0db2282c1`, which missed this card |
-| `explosive_getaway` | `SpeTgtPrompt$` | Never existed in Java, any revision |
-| `nihiloor` | `TrigDescReminderDefined$` | Never existed in Java, any revision |
+| Card                                  | Key                        | Why it is dead                                              |
+| ------------------------------------- | -------------------------- | ----------------------------------------------------------- |
+| `orochi_hatchery`                     | `TokenController$`         | `TokenOwner` defaults to `You`; no targeting on the ability |
+| `spawning_pit`                        | `TokenController$`         | Same                                                        |
+| `tomb_of_urami`                       | `TokenController$`         | Same                                                        |
+| `faerie_dragon`, twice                | `RememberRandomChoice$`    | `DamageDealEffect` already remembers unconditionally        |
+| `dance_of_the_dead`                   | `OverwriteSpells$`         | Reader deleted by `25900ee10cd` (#6996)                     |
+| `natural_order`                       | `AISearchGoal$`            | Reader deleted by `0ba88f3ce5c`                             |
+| `invasion_of_arcavios_invocation_...` | `AlternativeMessage$`      | Reader deleted by `da0db2282c1`, which missed this card     |
+| `explosive_getaway`                   | `SpeTgtPrompt$`            | Never existed in Java, any revision                         |
+| `nihiloor`                            | `TrigDescReminderDefined$` | Never existed in Java, any revision                         |
 
 Deleted rather than corrected, in [#11848](https://github.com/Card-Forge/forge/pull/11848). `TokenController` never
 appeared in Java in any revision and predates the 2013 module re-org; 2,198 corpus lines write `TokenOwner$ You`.
@@ -143,11 +143,11 @@ Which behaviour is right is settled by CR 608.2, not by the card:
 comparison between both targets. With one illegal, that information cannot be determined, so the destruction does not
 happen and the survivor lives. `EQ2` does that; `GE1` destroys the survivor.
 
-| Behaviour | One target removed in response | Verdict |
-| --- | --- | --- |
-| `GE1` — today, by accident | Destroys the survivor | Wrong |
-| `ConditionCompare$ EQ2` — intended in 2024 | Spell does nothing | **Correct under CR 608.2** |
-| Pre-2024 `RememberOriginalTargets$` | Compares the original pair | Wrong — reads an illegal target's colour |
+| Behaviour                                  | One target removed in response | Verdict                                  |
+| ------------------------------------------ | ------------------------------ | ---------------------------------------- |
+| `GE1` — today, by accident                 | Destroys the survivor          | Wrong                                    |
+| `ConditionCompare$ EQ2` — intended in 2024 | Spell does nothing             | **Correct under CR 608.2**               |
+| Pre-2024 `RememberOriginalTargets$`        | Compares the original pair     | Wrong — reads an illegal target's colour |
 
 Fixed in [#11850](https://github.com/Card-Forge/forge/pull/11850). The two Gatherer rulings, both 2004-10-04, cover only
 the both-targets-legal case and are already implemented by `ConditionNoDifferentColors$ Targeted`; neither is affected.
@@ -174,22 +174,22 @@ list and against the card's printed text. All 39 are fixed.
 Nine shared one root cause. `DigEffect` and `ChangeZoneEffect` use **opposite names for the same two concepts**, and
 cards written for one API reach for the other's:
 
-| Concept | `Dig` reads | `ChangeZone` reads |
-| --- | --- | --- |
-| Who chooses | `Choser` | `Chooser` |
-| Prompt shown to them | `PrimaryPrompt` | `SelectPrompt` |
+| Concept              | `Dig` reads     | `ChangeZone` reads |
+| -------------------- | --------------- | ------------------ |
+| Who chooses          | `Choser`        | `Chooser`          |
+| Prompt shown to them | `PrimaryPrompt` | `SelectPrompt`     |
 
 `Choser` is Forge's misspelling and it is load-bearing on `Dig`: the corpus writes `Chooser$` 278 times against
 `Choser$` 12 times, so the cards that lose the setting are mostly the ones spelling it correctly on a `Dig` line.
 
 #### Four that change what a card does
 
-| Card | Fix | Effect today |
-| --- | --- | --- |
-| `reality_shaping` | `Choser$` → `Chooser$` | One player picks the card every player puts down |
-| `mirkwood_trapper` | `Chooser$` → `Defined$` | The wrong player chooses the creature |
-| `echocasting_symposium` | `TokenOwner$` → `Controller$` | The caster gets the token, not the target player |
-| `my_followers_ascend` | `RememberChosen$` → `RememberCards$` | The creature never gains flying and vigilance |
+| Card                    | Fix                                  | Effect today                                     |
+| ----------------------- | ------------------------------------ | ------------------------------------------------ |
+| `reality_shaping`       | `Choser$` → `Chooser$`               | One player picks the card every player puts down |
+| `mirkwood_trapper`      | `Chooser$` → `Defined$`              | The wrong player chooses the creature            |
+| `echocasting_symposium` | `TokenOwner$` → `Controller$`        | The caster gets the token, not the target player |
+| `my_followers_ascend`   | `RememberChosen$` → `RememberCards$` | The creature never gains flying and vigilance    |
 
 `ChooseCardEffect` takes its choosers from `Defined$` and reads no `Chooser` at all, which is why Mirkwood Trapper's fix
 is a different key rather than a spelling. `CopyPermanentEffect` reads `Controller` and defaults to the activating

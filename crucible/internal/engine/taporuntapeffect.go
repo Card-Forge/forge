@@ -8,8 +8,7 @@ import "fmt"
 // cannot honour yet: Tapper$ (1 real line, a non-activator decider).
 // TargetingPlayer$ is targeting.go's (targetingPlayerOf).
 var tapOrUntapUnresolvedParams = [...]string{
-	"Tapper", "PresentCompare",
-	"Condition"}
+	"Tapper", "PresentCompare"}
 
 // tapOrUntapEffect is TapOrUntapEffect.java: for each target
 // (targetedOrDefinedCards -- 38 of 41 real lines name ValidTgts$) still on
@@ -20,6 +19,9 @@ var tapOrUntapUnresolvedParams = [...]string{
 type tapOrUntapEffect struct{}
 
 func (tapOrUntapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range tapOrUntapUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: TapOrUntap: %s$ not resolvable yet", key)

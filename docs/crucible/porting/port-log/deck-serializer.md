@@ -16,21 +16,21 @@ Nothing here resolves a card. Matching a name to the database is the caller's jo
 
 ## Deviations from Java
 
-| Java | Go |
-| --- | --- |
-| `Deck` holds a `CardPool`, which resolves names against `CardDb` | `Deck` holds entries as written. Resolution needs the database, and the format does not |
-| A non-section header is skipped silently | Recorded in `UnknownSections`, so a `[quest]` block answers "why is that card missing" without opening the file |
-| `Parse` throws on nothing | Returns no error at all, for the same reason: nothing in the format can fail |
+| Java                                                             | Go                                                                                                              |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `Deck` holds a `CardPool`, which resolves names against `CardDb` | `Deck` holds entries as written. Resolution needs the database, and the format does not                         |
+| A non-section header is skipped silently                         | Recorded in `UnknownSections`, so a `[quest]` block answers "why is that card missing" without opening the file |
+| `Parse` throws on nothing                                        | Returns no error at all, for the same reason: nothing in the format can fail                                    |
 
 ## Quirks reproduced rather than fixed (PORT-7)
 
 Each of these is a case where being stricter than Forge would refuse a decklist Forge opens.
 
-| Behaviour | Where it comes from |
-| --- | --- |
-| A bare `4` on its own line is a card **named** "4" | `((\d+)\s+)?(.*?)` needs whitespace after the digits, so with none they fall into the name group |
-| A metadata line with no `=` is a key with an empty value | `FileSection.parse` does `v.length > 1 ? v[1] : ""`. 1,945 decklists have a multi-line `Description` |
-| Section headers and metadata keys match without case | `smartValueOf` compares with `compareToIgnoreCase`; the metadata map is a `TreeMap` with `CASE_INSENSITIVE_ORDER` |
+| Behaviour                                                | Where it comes from                                                                                               |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| A bare `4` on its own line is a card **named** "4"       | `((\d+)\s+)?(.*?)` needs whitespace after the digits, so with none they fall into the name group                  |
+| A metadata line with no `=` is a key with an empty value | `FileSection.parse` does `v.length > 1 ? v[1] : ""`. 1,945 decklists have a multi-line `Description`              |
+| Section headers and metadata keys match without case     | `smartValueOf` compares with `compareToIgnoreCase`; the metadata map is a `TreeMap` with `CASE_INSENSITIVE_ORDER` |
 
 ## Name lookup, which is `CardDb`'s and not this package's
 

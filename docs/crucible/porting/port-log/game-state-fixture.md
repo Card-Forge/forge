@@ -23,10 +23,10 @@ every field the second `Loaded` produces against the first.
 
 `Turn`, `ActivePlayer` and `ActivePhase` used to live on `Loaded` rather than `engine.Game`, because M5's turn/phase
 loop had not landed and guessing its shape early was exactly the kind of speculative design CLAUDE.md rules out.
-`turn.go`'s `StartTurn`/`AdvancePhase` gave them a real home (the removed port log's "turn structure"
-section), so `Load` now calls `Game.SetTurnState` and `Dump` reads `Game.Turn`/`ActivePlayer`/`ActivePhase` back —
-`SetTurnState` is `Load`'s tool for this the same way `devAdvanceToPhase` is Java's: a state injection, not a step
-`AdvancePhase` would actually run.
+`turn.go`'s `StartTurn`/`AdvancePhase` gave them a real home (the removed port log's "turn structure" section), so
+`Load` now calls `Game.SetTurnState` and `Dump` reads `Game.Turn`/`ActivePlayer`/`ActivePhase` back — `SetTurnState` is
+`Load`'s tool for this the same way `devAdvanceToPhase` is Java's: a state injection, not a step `AdvancePhase` would
+actually run.
 
 `Loaded` keeps only what still has no `Game` equivalent: `ActivePhaseAdvance`/`PhaseAdvanced`, a fixture-only "advance
 once more after setup" directive that is parsed but not yet applied, and `Unapplied`.
@@ -54,9 +54,9 @@ seat.
 Rancor attaching to a creature written after it in the file has to work. `ExiledWith:` (`GameState.java:1398`, applied
 at `:771-781`) marks the card as exiled with that host's current object through `Game.SetExiledWith`, listed on it
 whatever zone the host is in, as Java's `addExiledCard` is; `Dump` writes it on Exile entries only, ahead of `Counters:`
-(`GameState.java:407-410`). ADR-0034. `Load`'s `loader` type collects these as it
-creates cards and resolves them once every card in the fixture exists (`resolveRefs`), the same two-pass shape
-`GameState.applyGameOnThread` uses (`idToCard`, `cardToAttachId`, ...).
+(`GameState.java:407-410`). ADR-0034. `Load`'s `loader` type collects these as it creates cards and resolves them once
+every card in the fixture exists (`resolveRefs`), the same two-pass shape `GameState.applyGameOnThread` uses
+(`idToCard`, `cardToAttachId`, ...).
 
 The lists are ordered slices, not maps keyed by card, because two auras naming the same host must attach in the order
 the fixture wrote them: that order is what breaks a tie between their continuous effects when both share a timestamp
@@ -192,15 +192,15 @@ queue optionaltrigger <bool>          ScriptedController.QueueConfirmOptionalTri
 
 `queue battleprotector` is a state-based action's own question, not tied to any combat verb:
 `Game.CheckStateBasedActions` asks it whenever a Battle has no protector (or its protector has left the game) and
-nothing is currently attacking it (the removed port log's "Combat" section, `assignBattleProtector`). A fixture with a Battle
-in `setup.state` needs one queued before the first `startturn`/`advance`/`combatdamage`-family action that would run a
-state-based-action check, since that first check is what asks. The result is nameable in `expect.state` too —
+nothing is currently attacking it (the removed port log's "Combat" section, `assignBattleProtector`). A fixture with a
+Battle in `setup.state` needs one queued before the first `startturn`/`advance`/`combatdamage`-family action that would
+run a state-based-action check, since that first check is what asks. The result is nameable in `expect.state` too —
 `Protector:<player>`, Crucible-only the same way `lost=`/`won=`/`over=` are (no Java `GameState` key exists to diverge
 from), compared by name the same way everything else two independently loaded games disagree on numerically is.
 `testdata/scenarios/battle-protector-assigned-to-opponent` is the example.
 
-`queue discard` is needed only when `advance` reaches `Cleanup` with the active player's hand over `MaxHandSize` (7,
-the removed port log's "Turn structure") — a hand already at or under that never asks. There is no `none` shortcut, the same
+`queue discard` is needed only when `advance` reaches `Cleanup` with the active player's hand over `MaxHandSize` (7, the
+removed port log's "Turn structure") — a hand already at or under that never asks. There is no `none` shortcut, the same
 reasoning `queue damage` has none: `Game.cleanupStep` only asks when there is a nonzero, known count to discard
 (`hand.Len() - MaxHandSize`), so declining entirely was never a legal answer to make room for.
 
@@ -212,11 +212,11 @@ asked is simply left unread, the same as any other over-queued answer (`Scripted
 consumed" check of its own).
 
 A scenario with a first striker needs both `firststrikedamage` and `combatdamage`, with an `advance` between them: a
-first-strike kill has to actually happen (`CheckStateBasedActions` runs on every phase entry, the removed port log's "Turn
-structure") before the regular step asks whether the dead creature still deals or receives anything, and `advance`ing
-from the `FirstStrikeDamage` phase into `CombatDamage` is what runs that check — no separate verb exists just for it. A
-scenario with nothing carrying "First Strike"/"Double Strike" can skip `firststrikedamage` entirely; calling it anyway
-is a safe no-op.
+first-strike kill has to actually happen (`CheckStateBasedActions` runs on every phase entry, the removed port log's
+"Turn structure") before the regular step asks whether the dead creature still deals or receives anything, and
+`advance`ing from the `FirstStrikeDamage` phase into `CombatDamage` is what runs that check — no separate verb exists
+just for it. A scenario with nothing carrying "First Strike"/"Double Strike" can skip `firststrikedamage` entirely;
+calling it anyway is a safe no-op.
 
 `queue blocks`' pairs are `blocker=attacker`, both `Id:` numbers — `1=2` means the card with `Id:1` blocks the card with
 `Id:2`; `1=3,2=3` is a gang block, two blockers on one attacker. `queue damage`'s pairs are `blocker=amount` and, unlike
@@ -299,12 +299,12 @@ ask. Targets still come from the shared `queue targets` FIFO, in cast order. Fix
 `priority-active-player-passes-then-responds` (an explicit pass, then a response) and
 `priority-pyromancer-pings-in-response-to-bolt` (a non-active player's instant-speed activated ability as a response).
 
-`step` and `run` are the turn driver (ADR-0026): unlike `advance`, a driven step runs combat's
-declarations and damage itself (so a scenario queues `attackers`/`blocks` answers instead of calling `declareattackers`)
-and opens a priority round wherever the step grants one, so a phase trigger resolves before `step` returns. A queued
-action is spent on the first round that asks its player — Upkeep included — so a scenario steps to the step it wants
-before queueing: on turn 1, `step` from Untap stops in Upkeep and the next step is Main1 (the driver skips turn 1's draw
-step, CR 103.7a). Fixtures: `testdata/scenarios/driver-*`.
+`step` and `run` are the turn driver (ADR-0026): unlike `advance`, a driven step runs combat's declarations and damage
+itself (so a scenario queues `attackers`/`blocks` answers instead of calling `declareattackers`) and opens a priority
+round wherever the step grants one, so a phase trigger resolves before `step` returns. A queued action is spent on the
+first round that asks its player — Upkeep included — so a scenario steps to the step it wants before queueing: on turn
+1, `step` from Untap stops in Upkeep and the next step is Main1 (the driver skips turn 1's draw step, CR 103.7a).
+Fixtures: `testdata/scenarios/driver-*`.
 
 `queue enchanttarget` answers `ChooseEnchantTarget` (`castspell.go`'s own Aura branch, CR 601.2c) the same
 `queue legendarykeep` shape — a bare id, no color or bool vocabulary — needed only when an Aura's own `Enchant`
@@ -313,8 +313,8 @@ meaningful to decide" convention `attacktarget`'s own lone-target case already h
 one at all. `cast-an-aura-spell-attaches-to-chosen-target` is the fixture: a real Pacifism cast at a lone Grizzly Bears
 on the battlefield, `resolvestack` moving it there and attaching it in the same call. Casting a Battle cannot go all the
 way through `resolvestack` the way the other four permanent types do: every Battle in the corpus carries its own ETB
-trigger (`checkETBTriggers`, `trigger.go`, the removed port log's own section on it), which `resolvestack` correctly surfaces
-as `ErrUnimplemented` once the Battle itself has resolved — `TestScenarios` has no way to assert an expected
+trigger (`checkETBTriggers`, `trigger.go`, the removed port log's own section on it), which `resolvestack` correctly
+surfaces as `ErrUnimplemented` once the Battle itself has resolved — `TestScenarios` has no way to assert an expected
 `RunActions` failure, so `cast-a-battle-spell-reaches-the-stack` stops one step earlier than its four siblings, at
 `castspell` alone.
 
@@ -380,11 +380,12 @@ battlefield position. `testdata/scenarios/ring-tempts-you-nazgul-becomes-ring-be
 battlefield through `Game.LoadUnlockedDoor`, no trigger (`GameState.java:1419`; Java suppresses every trigger during
 setup, `:617`); off the battlefield it lands in `Unapplied`. `Dump` writes one per unlocked door, last in the entry,
 left then right (`GameState.java:445-450`), and names a Room by its printed card (`Card.PrintedDef`), not its door view.
-`compareGames` compares unlocked doors. `testdata/scenarios/room-lock-or-unlock-fires-that-doors-trigger` is the example.
+`compareGames` compares unlocked doors. `testdata/scenarios/room-lock-or-unlock-fires-that-doors-trigger` is the
+example.
 
 **`Protector:` is `lost=`/`won=`/`over=`'s own pattern applied to a single card field.** `Card.ProtectingPlayer` (CR
-704.5w, the removed port log's "Combat") is Crucible state with no Java `GameState` key to diverge from at all — grep finds
-nothing resembling one in `GameState.java`. `Load`'s case is `Owner:`'s own shape exactly (`playerSlot`, then
+704.5w, the removed port log's "Combat") is Crucible state with no Java `GameState` key to diverge from at all — grep
+finds nothing resembling one in `GameState.java`. `Load`'s case is `Owner:`'s own shape exactly (`playerSlot`, then
 `ld.slotToID[slot]`), gated to Battlefield-only in `Dump` the same way `Owner:`/`Tapped`/`Damage` are, since `Move`
 clears it on the same "left the battlefield" transition. Written only when set (`ProtectingPlayer != NoPlayer`), the
 same "say nothing when there's nothing to say" discipline `Owner:` already follows for when owner equals controller.
@@ -415,14 +416,14 @@ reading the rest of that same script.
 Getting a first-strike or gang-block scenario right needs the phase walk to be real, not shortcut: `declareattackers`
 and `declareblockers` each run while `AdvancePhase` has actually put the game in the matching phase
 (`Declare Attackers`, `Declare Blockers`), one `advance` apart, because nothing in either method reads `ActivePhase` to
-enforce that itself (the removed port log's "Combat" section) — a scenario that called them back-to-back without advancing
-would still "work" mechanically but would end up asserting a phase that never happened. The state-based-action check
-between the first-strike and regular damage steps is the sharper version of the same discipline:
+enforce that itself (the removed port log's "Combat" section) — a scenario that called them back-to-back without
+advancing would still "work" mechanically but would end up asserting a phase that never happened. The state-based-action
+check between the first-strike and regular damage steps is the sharper version of the same discipline:
 `combat-first-strike-prevents-return-damage` only gets the right answer because `advance`ing from `First Strike Damage`
 into `Combat Damage` is what actually kills the lethally-struck blocker before `combatdamage` runs
-(`CheckStateBasedActions` runs on every phase entry, the removed port log's "Turn structure") — skipping that `advance` would
-leave the blocker alive to hit back, a different (wrong) scenario the fixture format makes easy to write by accident if
-the phase walk isn't respected.
+(`CheckStateBasedActions` runs on every phase entry, the removed port log's "Turn structure") — skipping that `advance`
+would leave the blocker alive to hit back, a different (wrong) scenario the fixture format makes easy to write by
+accident if the phase walk isn't respected.
 
 **`combat-mixed-first-strike-gang-block`** covers a combination the original seven didn't: one gang-blocked attacker
 with blockers on both sides of the first-strike line, not one fixture per keyword. Durkwood Boars (4/4, no keywords) is
@@ -461,8 +462,8 @@ shape `untap-and-draw` already uses to reach a real Draw step, but with no libra
 `equipment-falls-off-without-destroying` (the "cleanup" rule's other half —
 `aura-enchant-restriction-sends-illegal-aura-to-graveyard` already covers the Aura branch, nothing covered the
 Equipment/Fortification one, which unattaches instead of dying) and `battle-zero-defense-destroyed` (CR 704.5v with no
-`Counters:DEFENSE=` at all, the removed port log's own CR 704.5v ETB gap). The last one needs `queue battleprotector` even
-though the Battle is about to die the very next statement in the same pass — `assignBattleProtector` asks
+`Counters:DEFENSE=` at all, the removed port log's own CR 704.5v ETB gap). The last one needs `queue battleprotector`
+even though the Battle is about to die the very next statement in the same pass — `assignBattleProtector` asks
 unconditionally for any Battle with no protector yet, run before `destroyZeroDefense` gets a chance to send it to the
 graveyard, so skipping the queued answer panics on an unread decision rather than skipping a question that was never
 going to be asked.
@@ -518,9 +519,8 @@ cost escalates rather than repeating (`mulligan-twice-tucks-cumulative`); and `P
 (`land-play-limit-one-per-turn`, `cleanup-resets-lands-played-for-next-turn`). Two long-stale doc comments came out of
 writing these: `destroyZeroLoyalty`/`destroyZeroDefense` (`action.go`) and two existing fixtures'
 (`battle-protector-assigned-to-opponent`, `battle-zero-defense-destroyed`) own comments still said nothing granted a
-planeswalker or Battle its starting counters, which stopped being true once `Move` gained that ETB handling
-(the removed port log's "Loyalty is not a layer" section) — fixed in place rather than left to mislead the next reader
-(DOC-16).
+planeswalker or Battle its starting counters, which stopped being true once `Move` gained that ETB handling (the removed
+port log's "Loyalty is not a layer" section) — fixed in place rather than left to mislead the next reader (DOC-16).
 
 ## Load-time state effects
 
@@ -550,14 +550,14 @@ in `Loaded.Unapplied`. Scenarios: `sba-token-dies-and-ceases-to-exist`,
 
 ## Deviations from Java
 
-| Java | Go |
-| --- | --- |
-| `splitLine` throws on a blank line (`line.charAt(0)`) | A blank line is skipped. Reproducing a crash would make blank lines unwritable in Crucible's own fixtures for no benefit |
-| Unrecognised category prints to stderr and is dropped | Returned in `Unknown` (top-level keys) or `Loaded.Unapplied` (card annotations and player fields with no engine home), so a fixture silently testing nothing is a test failure instead of a log line |
-| A malformed number (`humanlife=twenty`) throws and dies | Returned as an `error` naming the line, not a panic — a card script cannot cause this, but a typo in a hand-written fixture is exactly the kind of caller mistake `error` is for (GO-7) |
+| Java                                                                                                         | Go                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `splitLine` throws on a blank line (`line.charAt(0)`)                                                        | A blank line is skipped. Reproducing a crash would make blank lines unwritable in Crucible's own fixtures for no benefit                                                                                                                                                                       |
+| Unrecognised category prints to stderr and is dropped                                                        | Returned in `Unknown` (top-level keys) or `Loaded.Unapplied` (card annotations and player fields with no engine home), so a fixture silently testing nothing is a test failure instead of a log line                                                                                           |
+| A malformed number (`humanlife=twenty`) throws and dies                                                      | Returned as an `error` naming the line, not a panic — a card script cannot cause this, but a typo in a hand-written fixture is exactly the kind of caller mistake `error` is for (GO-7)                                                                                                        |
 | `PhaseType.smartValueOf` matches the script name or the enum constant name, case-insensitively, off one list | `phaseByName` tries `engine.PhaseByName` (script name, case-sensitive) first, then a second table of Java's enum constant names, because `engine.PhaseByName`'s contract is specifically the script vocabulary and `GameState.toString`'s own dump (bare `Enum#toString`) writes the other one |
-| `RemoveSummoningSickness` is state `GameState` remembers | It is a one-time load directive. By the time `Load` returns, every card it applied to already has `SummonSick` false, and `Dump` writes that per card; re-emitting the directive would assert something `Dump` cannot actually know |
-| `Id:` is arbitrary, chosen by whoever wrote the fixture | Always the card's own `CardID` (see above) |
+| `RemoveSummoningSickness` is state `GameState` remembers                                                     | It is a one-time load directive. By the time `Load` returns, every card it applied to already has `SummonSick` false, and `Dump` writes that per card; re-emitting the directive would assert something `Dump` cannot actually know                                                            |
+| `Id:` is arbitrary, chosen by whoever wrote the fixture                                                      | Always the card's own `CardID` (see above)                                                                                                                                                                                                                                                     |
 
 ## Pinned quirks (PORT-7)
 
@@ -573,12 +573,12 @@ in `Loaded.Unapplied`. Scenarios: `sba-token-dies-and-ceases-to-exist`,
 
 ## Not ported yet
 
-| Missing | Lands |
-| --- | --- |
-| Java `t:` token snapshots (`TokenInfo`: name, P/T, types, keywords, image key; no abilities) — reported in `Loaded.Unapplied`, not loaded. `T:<script>` is loaded and dumped (see `## Tokens`) | M5-M6 |
-| The rest of the per-card annotation grammar: `Renowned`, `Solved`, `Saddled`, `Suspected`, `Monstrous`, `PhasedOut`, `FaceDown`, `Transformed`/`Modal`/`Flipped`/`Meld`, `OnAdventure`, `IsCommander`, `Ability:`, `ChosenColor:`/`ChosenType:`/`ChosenType2:`, `ChosenCards:`, `MergedCards:`, `NamedCard:`, `ExecuteScript:`, `ExiledWith:`, `Attacking`, `NoETBTrigs`, `Foretold`/`ForetoldThisTurn`, `IsToken`, `ClassLevel:`, `UnlockedRoom:` — each needs a mechanic or a type (`CardState`, `SpellAbility`, combat) this port has not reached | M5-M6, mechanic by mechanic |
-| Player-level `PersistentMana:`, `Speed:` — `engine.Player` has neither field yet. `NumRingTemptedYou:` is applied (`Game.SetRingTemptedYou`, since `RingTemptsYou`). `Counters:` is applied (`Player.Counters`, since M5's SBA work), `ManaPool:` (`Player.ManaPool`, `applyManaPool`, since M5's mana-payment work), and `LandsPlayed:`/`LandsPlayedLastTurn:` (`Player.LandsPlayed`/`LandsPlayedLastTurn`, since `PlayLand`) are all applied now | M5-M6, as each field lands on `Player` |
-| `ability<key>=` string values are stored verbatim in `AbilityStrings`; nothing parses or resolves them (puzzle-mode precast targeting) | Puzzle mode, if ever |
-| `[metadata]` section (puzzle-mode name/description) | Puzzle mode, if ever |
-| `actions.log` verbs for casting anything an instant or sorcery needs — nothing downstream of `ScriptedController` can answer what one resolves into yet. Combat, mana payment (`paymanacost` and every `queue` kind `PayManaCost` can ask), the one mana ability this port has (`tapformana`), playing a land (`playland` — not casting a spell at all, CR 305.1) and casting/resolving a permanent spell including an Aura's own cast-time target (`castspell`/`resolvestack`/`queue enchanttarget`) all have verbs | M5-M6 |
-| `expect.events` — the Plan's own fixture shape names it (Section 3.5) alongside `setup.state`/`actions.log`/`expect.state`, but `TestScenarios` (`internal/engine/scenario_test.go`) never reads a fourth file: `runScenario` loads only `setup.state` and `expect.state` and calls `compareGames`, which does not touch `Game`'s event sink at all. A fixture proving `LifeChanged`/`CounterChanged` actually fired (not just that life or a counter ended up at the right number) has nowhere to assert that yet | M5-M6 |
+| Missing                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Lands                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Java `t:` token snapshots (`TokenInfo`: name, P/T, types, keywords, image key; no abilities) — reported in `Loaded.Unapplied`, not loaded. `T:<script>` is loaded and dumped (see `## Tokens`)                                                                                                                                                                                                                                                                                                                                                       | M5-M6                                  |
+| The rest of the per-card annotation grammar: `Renowned`, `Solved`, `Saddled`, `Suspected`, `Monstrous`, `PhasedOut`, `FaceDown`, `Transformed`/`Modal`/`Flipped`/`Meld`, `OnAdventure`, `IsCommander`, `Ability:`, `ChosenColor:`/`ChosenType:`/`ChosenType2:`, `ChosenCards:`, `MergedCards:`, `NamedCard:`, `ExecuteScript:`, `ExiledWith:`, `Attacking`, `NoETBTrigs`, `Foretold`/`ForetoldThisTurn`, `IsToken`, `ClassLevel:`, `UnlockedRoom:` — each needs a mechanic or a type (`CardState`, `SpellAbility`, combat) this port has not reached | M5-M6, mechanic by mechanic            |
+| Player-level `PersistentMana:`, `Speed:` — `engine.Player` has neither field yet. `NumRingTemptedYou:` is applied (`Game.SetRingTemptedYou`, since `RingTemptsYou`). `Counters:` is applied (`Player.Counters`, since M5's SBA work), `ManaPool:` (`Player.ManaPool`, `applyManaPool`, since M5's mana-payment work), and `LandsPlayed:`/`LandsPlayedLastTurn:` (`Player.LandsPlayed`/`LandsPlayedLastTurn`, since `PlayLand`) are all applied now                                                                                                   | M5-M6, as each field lands on `Player` |
+| `ability<key>=` string values are stored verbatim in `AbilityStrings`; nothing parses or resolves them (puzzle-mode precast targeting)                                                                                                                                                                                                                                                                                                                                                                                                               | Puzzle mode, if ever                   |
+| `[metadata]` section (puzzle-mode name/description)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Puzzle mode, if ever                   |
+| `actions.log` verbs for casting anything an instant or sorcery needs — nothing downstream of `ScriptedController` can answer what one resolves into yet. Combat, mana payment (`paymanacost` and every `queue` kind `PayManaCost` can ask), the one mana ability this port has (`tapformana`), playing a land (`playland` — not casting a spell at all, CR 305.1) and casting/resolving a permanent spell including an Aura's own cast-time target (`castspell`/`resolvestack`/`queue enchanttarget`) all have verbs                                 | M5-M6                                  |
+| `expect.events` — the Plan's own fixture shape names it (Section 3.5) alongside `setup.state`/`actions.log`/`expect.state`, but `TestScenarios` (`internal/engine/scenario_test.go`) never reads a fourth file: `runScenario` loads only `setup.state` and `expect.state` and calls `compareGames`, which does not touch `Game`'s event sink at all. A fixture proving `LifeChanged`/`CounterChanged` actually fired (not just that life or a counter ended up at the right number) has nowhere to assert that yet                                   | M5-M6                                  |

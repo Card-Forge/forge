@@ -29,7 +29,10 @@ import (
 type copyPermanentEffect struct{}
 
 func (copyPermanentEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "CopyPermanent", "Condition", "PumpKeywords",
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "CopyPermanent", "PumpKeywords",
 		"SetCreatureTypes",
 		"PumpDuration", "AttachedTo", "AddTriggers", "ValidSupportedCopy",
 		"RandomNum", "RandomCopied", "ForEach", "OptionalForEach", "WithDifferentNames",

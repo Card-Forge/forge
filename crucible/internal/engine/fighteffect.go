@@ -33,7 +33,7 @@ import (
 // silently no-op a card naming either, dealDamageEffect's own identical
 // reasoning.
 var fightUnresolvedParams = [...]string{
-	"Optional", "Condition"}
+	"Optional"}
 
 // fightEffect resolves Mode$/DB$/AB$ Fight. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -47,6 +47,9 @@ var fightUnresolvedParams = [...]string{
 type fightEffect struct{}
 
 func (fightEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range fightUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Fight: %s$ not resolvable yet", key)

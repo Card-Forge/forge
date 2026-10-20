@@ -48,7 +48,6 @@ var putCounterAllUnresolvedParams = [...]string{
 	"ValidZone", "ValidCards2", "CounterType2", "CounterNum2",
 	"AmountByChosenMap", "TargetUnique", "IsCurse",
 	"Ultimate", "ModeCost",
-	"Condition", "ConditionPlayerTurn", "ConditionPhases",
 }
 
 // putCounterAllEffect resolves Mode$/DB$/AB$ PutCounterAll. ConditionPresent$/
@@ -58,6 +57,9 @@ var putCounterAllUnresolvedParams = [...]string{
 type putCounterAllEffect struct{}
 
 func (putCounterAllEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range putCounterAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: PutCounterAll: %s$ not resolvable yet", key)

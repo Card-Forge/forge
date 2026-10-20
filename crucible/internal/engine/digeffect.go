@@ -21,7 +21,7 @@ var digUnresolvedParams = [...]string{
 	"WithCounters", "WithCountersAmount", "Attacking", "Blocking",
 	"ExileWithCounters", "DefinedExiler", "StaticEffect",
 	"Pawprint", "Boast", "UnlessResolveSubs",
-	"Condition", "Ultimate", "ModeCost",
+	"Ultimate", "ModeCost",
 }
 
 // digEffect is DigEffect.java: each Defined$/ValidTgts$ player (default
@@ -38,6 +38,9 @@ var digUnresolvedParams = [...]string{
 type digEffect struct{}
 
 func (digEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range digUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: Dig: %s$ not resolvable yet", key)

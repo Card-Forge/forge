@@ -20,8 +20,7 @@ import (
 var tokenUnresolvedParams = [...]string{
 	"WithCountersType",
 	"WithCountersAmount", "AddTriggersFrom", "TokenTypes", "TokenColors", "TokenRemembered",
-	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable",
-	"Condition"}
+	"CleanupForEach", "RememberOriginalTokens", "ChangeZoneTable"}
 
 // tokenEffect is TokenEffect.java: TokenAmount$ (default 1) of every
 // TokenScript$ script for every TokenOwner$ player (getDefinedPlayersOrTargeted:
@@ -31,6 +30,9 @@ var tokenUnresolvedParams = [...]string{
 type tokenEffect struct{}
 
 func (tokenEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "Token", tokenUnresolvedParams[:]...); err != nil {
 		return err
 	}

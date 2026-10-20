@@ -141,8 +141,8 @@ func TestChooseSectorRejectsCondition(t *testing.T) {
 	t.Parallel()
 
 	g, p, _ := newTwoPlayerGame(t)
-	_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil, "DB$ ChooseSector | Condition$ Kicked")
-	if err == nil || !strings.Contains(err.Error(), "Condition$ not resolvable yet") {
+	_, err := resolveNow(t, g, p, engine.NewScriptedController(), nil, "DB$ ChooseSector | Condition$ Teamwork")
+	if err == nil || !strings.Contains(err.Error(), `Condition$ "Teamwork" not resolvable yet`) {
 		t.Errorf("err = %v, want Condition$ rejected", err)
 	}
 }

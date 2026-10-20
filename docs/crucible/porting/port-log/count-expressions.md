@@ -19,12 +19,12 @@ three are one type.
 
 It is not obvious and it is load-bearing:
 
-| Step | Rule | Consequence |
-| --- | --- | --- |
-| 1 | A leading `+` or `-` is stripped and kept as a multiplier | `-Count$X` negates the whole expression, not its head |
-| 2 | `StringUtils.isNumeric` — digits only, no sign | The sign is already gone, so this still matches |
-| 3 | `amount.indexOf('$') > 0` means a raw expression | **Strictly greater than zero.** A value starting with `$` is a name, and will not be found |
-| 4 | Otherwise an SVar name, looked up on the ability then the card | A miss prints to stderr and yields zero |
+| Step | Rule                                                           | Consequence                                                                                |
+| ---- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 1    | A leading `+` or `-` is stripped and kept as a multiplier      | `-Count$X` negates the whole expression, not its head                                      |
+| 2    | `StringUtils.isNumeric` — digits only, no sign                 | The sign is already gone, so this still matches                                            |
+| 3    | `amount.indexOf('$') > 0` means a raw expression               | **Strictly greater than zero.** A value starting with `$` is a name, and will not be found |
+| 4    | Otherwise an SVar name, looked up on the ability then the card | A miss prints to stderr and yields zero                                                    |
 
 ## Only the first operator applies
 
@@ -60,17 +60,17 @@ whole `Valid` family behaves this way, and other heads take a space-separated ar
 
 ## Deviations from Java
 
-| Java | Go |
-| --- | --- |
-| The string is re-parsed on every evaluation, per card, per game | Parsed once at load (ADR-0007) |
-| A missing SVar prints to stderr and yields 0 | Not decided here. This package parses; resolution is the evaluator's, and it can see the card |
-| Sign, literal and reference are all `int` at the end | `Kind` says which of the three a value is, so a caller cannot mistake a name for a number |
+| Java                                                            | Go                                                                                            |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| The string is re-parsed on every evaluation, per card, per game | Parsed once at load (ADR-0007)                                                                |
+| A missing SVar prints to stderr and yields 0                    | Not decided here. This package parses; resolution is the evaluator's, and it can see the card |
+| Sign, literal and reference are all `int` at the end            | `Kind` says which of the three a value is, so a caller cannot mistake a name for a number     |
 
 ## Not ported yet
 
-| Java | When |
-| --- | --- |
-| `xCount` — what each of the 226 count heads measures | M5 |
-| `playerXCount` — the `PlayerCount*` family | M5 |
-| `doXMath`'s arithmetic itself | M5 |
-| Wiring `valid.Compare.Operand` through this parser | M5. `valid` cannot import `expr`, since `expr` imports `valid`; the evaluator calls both |
+| Java                                                 | When                                                                                     |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `xCount` — what each of the 226 count heads measures | M5                                                                                       |
+| `playerXCount` — the `PlayerCount*` family           | M5                                                                                       |
+| `doXMath`'s arithmetic itself                        | M5                                                                                       |
+| Wiring `valid.Compare.Operand` through this parser   | M5. `valid` cannot import `expr`, since `expr` imports `valid`; the evaluator calls both |

@@ -16,8 +16,10 @@ import (
 type addPhaseEffect struct{}
 
 func (addPhaseEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
-	if err := rejectParams(a, "AddPhase", "ExtraPhaseDelayedTrigger", "BeforeFirstPostCombatMainEnd",
-		"Condition"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "AddPhase", "ExtraPhaseDelayedTrigger", "BeforeFirstPostCombatMainEnd"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

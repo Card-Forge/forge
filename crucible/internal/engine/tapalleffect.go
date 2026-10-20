@@ -38,8 +38,7 @@ import (
 // either without ConditionPresent$ alongside it, dealDamageEffect's own
 // identical reasoning.
 var tapAllUnresolvedParams = [...]string{
-	"TapperController", "Ultimate", "Planeswalker",
-	"Condition"}
+	"TapperController", "Ultimate", "Planeswalker"}
 
 // tapAllEffect resolves Mode$/DB$/AB$ TapAll. ConditionPresent$/
 // ConditionCompare$/ConditionCheckSVar$/ConditionSVarCompare$ are resolved
@@ -48,6 +47,9 @@ var tapAllUnresolvedParams = [...]string{
 type tapAllEffect struct{}
 
 func (tapAllEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	for _, key := range tapAllUnresolvedParams {
 		if _, ok := a.Params.Param(key); ok {
 			return fmt.Errorf("engine: TapAll: %s$ not resolvable yet", key)

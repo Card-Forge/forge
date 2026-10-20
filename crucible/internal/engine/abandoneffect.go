@@ -20,18 +20,6 @@ package engine
 
 //enginelint:allow card game ability condition control zone parts id
 
-import "fmt"
-
-// abandonUnresolvedParams names Condition$/ConditionDefined$ (1 real line,
-// i_am_duskmourn.txt's own `ConditionDefined$ Remembered | ConditionPresent$
-// Card`) -- subAbilityConditionMet's own isPresentMatches (condition.go,
-// trigger.go) fails closed on ConditionDefined$ (treats the condition as
-// never met, silently), which would quietly drop this line's own
-// SubAbility$ rather than resolving it, the identical reasoning every other
-// M6 effect naming these two already has (destroyeffect.go, cleanupeffect.go,
-// ...). Rejected loudly instead (PORT-8/GO-7).
-var abandonUnresolvedParams = [...]string{"Condition"}
-
 // abandonEffect resolves Mode$/DB$/AB$ Abandon. SubAbility$ chains through
 // resolveSubAbility (subability.go) once this effect's own body finishes;
 // UnlessCost$/UnlessPayer$/UnlessSwitched$/ConditionCheckSVar$/
@@ -44,10 +32,8 @@ var abandonUnresolvedParams = [...]string{"Condition"}
 type abandonEffect struct{}
 
 func (abandonEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	for _, key := range abandonUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: Abandon: %s$ not resolvable yet", key)
-		}
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

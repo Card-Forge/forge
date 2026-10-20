@@ -19,7 +19,10 @@ import (
 type changeCombatantsEffect struct{}
 
 func (changeCombatantsEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
-	if err := rejectParams(a, "ChangeCombatants", "Condition", "TargetsWithDefinedController", "Blocking"); err != nil {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
+	if err := rejectParams(a, "ChangeCombatants", "TargetsWithDefinedController", "Blocking"); err != nil {
 		return err
 	}
 	source := g.Card(a.Source)

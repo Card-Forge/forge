@@ -34,9 +34,12 @@ type changeXEffect struct{}
 // corpus line uses, each rejected before acting (PORT-8, GO-7): a targeted
 // spell (ValidTgts$/TargetType$) and Condition$/ConditionDefined$, which
 // subAbilityConditionMet reads as never met, silently.
-var changeXUnresolvedParams = [...]string{"ValidTgts", "TargetType", "Condition"}
+var changeXUnresolvedParams = [...]string{"ValidTgts", "TargetType"}
 
 func (changeXEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
+		return err
+	}
 	if err := rejectParams(a, "ChangeX", changeXUnresolvedParams[:]...); err != nil {
 		return err
 	}

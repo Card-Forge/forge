@@ -489,7 +489,20 @@
     ],
     "playerstate": ["id", "zone", "card", "game"],
     "defined": ["id", "game", "player", "card", "ability", "parts", "valid", "zone"],
-    "condition": ["presentcheck", "id", "card", "game", "ability", "trigger", "phase", "amount", "valid", "defined"],
+    "condition": [
+      "presentcheck",
+      "id",
+      "card",
+      "game",
+      "ability",
+      "trigger",
+      "phase",
+      "amount",
+      "valid",
+      "defined",
+      "zone",
+      "playerstate"
+    ],
     "pumpeffect": [
       "ateot",
       "effecthelpers",
