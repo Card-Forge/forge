@@ -1,6 +1,6 @@
 Name:Selenia, the Cursed Heart
 ManaCost:4 W B
-Types:Legendary Creature Human Angel Warrior
+Types:Legendary Creature Angel Warrior
 PT:2/5
 K:Flying
 K:Lifelink
