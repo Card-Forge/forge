@@ -1044,8 +1044,9 @@ type attachPlan struct {
 // a Valid string), only those the card could be attached to remain, and the
 // decider picks one; an Aura with none stays where it is (skip). AttachedToPlayer$
 // picks among players the same way and skips the card when it names none. The
-// card is attached after it arrives (changeZoneAttach), where Java attaches it
-// first, so its "enters" triggers see the attachment already there either way.
+// card is attached just after it arrives (changeZoneAttach), where Java
+// attaches it first: a trigger the move itself fires (an Aura's own "enters")
+// has already been checked against the unattached card.
 func (g *Game) changeZonePlanAttach(controller PlayerController, decider PlayerID, a *Ability, source *Card, id CardID, dest ZoneType) (plan attachPlan, skip bool, err error) {
 	spec, hasCard := a.Params.Param("AttachedTo")
 	playerSpec, hasPlayer := a.Params.Param("AttachedToPlayer")

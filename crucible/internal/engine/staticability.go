@@ -1265,15 +1265,22 @@ func paramsResolvable(s *compile.Ability, known map[string]bool) bool {
 // keeps a card's own statics (a host the callers add for EffectZone$ All lines)
 // from applying while it sits in hand.
 func staticHostZoneOK(host *Card, s *compile.Ability) bool {
+	return staticZoneOK(host.Zone, s)
+}
+
+// staticZoneOK is staticHostZoneOK for a host taken to be in zone: a spell
+// being cast is not in the Stack zone Go-side yet, so its own statics are read
+// as if it were (manaConvertApplies).
+func staticZoneOK(zone ZoneType, s *compile.Ability) bool {
 	zones, ok := s.Param("EffectZone")
 	if !ok {
-		return host.Zone == Battlefield || host.Zone == Command
+		return zone == Battlefield || zone == Command
 	}
 	if strings.EqualFold(zones, "All") {
 		return true
 	}
 	list, err := parseZoneList(zones)
-	return err == nil && slices.Contains(list, host.Zone)
+	return err == nil && slices.Contains(list, zone)
 }
 
 // canDamagePrevented is Card.canDamagePrevented: damage from source is

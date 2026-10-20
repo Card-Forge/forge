@@ -71,3 +71,22 @@ func TestPumpTargetsACardInTheGraveyard(t *testing.T) {
 		t.Fatal("the bolt could not be cast from the graveyard with its granted flashback")
 	}
 }
+
+// A grant a Pump made to a card in the graveyard ends when the card leaves
+// that zone: back in the graveyard the same turn it has no flashback.
+func TestPumpZoneGrantEndsWithTheZoneChange(t *testing.T) {
+	t.Parallel()
+
+	g, p, _ := newTwoPlayerGameOn(t, scenarioDB(t))
+	bolt := g.NewCard(corpusCard(t, "Lightning Bolt"), p, engine.Graveyard)
+	if _, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(bolt)},
+		"DB$ Pump | ValidTgts$ Instant.YouOwn | TgtZone$ Graveyard | KW$ Flashback | PumpZone$ Graveyard"); err != nil {
+		t.Fatal(err)
+	}
+	g.Move(bolt, engine.Hand, p)
+	g.Move(bolt, engine.Graveyard, p)
+	sba(g)
+	if g.Card(bolt).HasKeyword("Flashback") {
+		t.Error("the bolt kept the flashback grant through a trip to the hand")
+	}
+}

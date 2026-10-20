@@ -1043,6 +1043,9 @@ func (g *Game) Move(id CardID, kind ZoneType, owner PlayerID) CardID {
 		// with that object too (CR 400.7); a Perpetual one stays.
 		if from != Battlefield {
 			g.clearAnimates(id)
+			// A PumpZone$ pump of a card in another zone ends with the object
+			// too (pumpRecord.InZone); a Perpetual one stays.
+			g.clearPumps(id)
 		}
 	}
 	// melded is the other card of a melded permanent leaving the battlefield
@@ -1176,6 +1179,10 @@ func (g *Game) MoveToLibraryTop(id CardID, owner PlayerID) CardID {
 	}
 	before := *c
 	g.clearTextRecords(id)
+	if from != Battlefield && from != Library {
+		// The new object has none of a PumpZone$ pump made in the zone it left.
+		g.clearPumps(id)
+	}
 	if from == Stack {
 		c.controller = c.Owner
 		c.tempControllers = nil

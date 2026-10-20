@@ -1091,6 +1091,9 @@ func definedEntities(g *Game, controller PlayerID, host *Card, def string, refs 
 // defined card or player. ok is false for any other spelling.
 func (g *Game) definedAttachCards(host *Card, defined string, refs abilityRefs) (cards []CardID, ok bool, err error) {
 	if v, found := strings.CutPrefix(defined, "AttachedBy "); found {
+		if len(strings.Fields(v)) == 0 {
+			return nil, true, fmt.Errorf("engine: Defined$ %q names nothing attached", defined)
+		}
 		atts, err := definedCards(host, strings.Fields(v)[0], refs)
 		if err != nil {
 			return nil, true, err
@@ -1103,6 +1106,9 @@ func (g *Game) definedAttachCards(host *Card, defined string, refs abilityRefs) 
 		return cards, true, nil
 	}
 	if v, found := strings.CutPrefix(defined, "AttachedTo "); found {
+		if len(strings.Fields(v)) == 0 {
+			return nil, true, fmt.Errorf("engine: Defined$ %q names nothing attached", defined)
+		}
 		ents, err := definedEntities(g, refs.activator, host, strings.Fields(v)[0], refs)
 		if err != nil {
 			return nil, true, err

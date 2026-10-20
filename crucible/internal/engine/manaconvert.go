@@ -98,7 +98,14 @@ func (g *Game) manaConvertForSpell(pid PlayerID, card CardID) (anyType, anyColor
 // ValidPlayer$, ValidCard$ and ValidSA$ each match when absent, and the line's
 // Condition$ holds. A spec this port cannot recognize leaves the line unread.
 func (g *Game) manaConvertApplies(pid PlayerID, c, host *Card, s *compile.Ability, spell *Ability) bool {
-	if !g.staticConditionsMet(host, s) {
+	// The card being cast is on the stack when its mana is paid, though Go-side
+	// it is still in hand until the spell is put there; its own statics are read
+	// from the Stack, every other host from where it is.
+	zone := host.Zone
+	if host.ID == c.ID {
+		zone = Stack
+	}
+	if !staticZoneOK(zone, s) || !g.staticOtherConditionsMet(host, s) {
 		return false
 	}
 	if spec, ok := s.Param("ValidPlayer"); ok {
