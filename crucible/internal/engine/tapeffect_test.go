@@ -150,22 +150,33 @@ func TestTapEffectRememberTappedWritesMemory(t *testing.T) {
 	}
 }
 
-// TestTapEffectRejectsUnresolvedParam proves tapUnresolvedParams' own
-// fail-loud contract (PORT-8/GO-7).
-func TestTapEffectRejectsUnresolvedParam(t *testing.T) {
+// TestTapEffectTapperIsTheTapsTriggersPlayer proves Tapper$ names the player a
+// "whenever an opponent taps" trigger sees: the activator by default, the
+// defined player otherwise (TapEffect.java:50-52, Card.tap's Player param).
+func TestTapEffectTapperIsTheTapsTriggersPlayer(t *testing.T) {
 	t.Parallel()
 
-	g := newGame(t, "a", "b")
-	p := g.Players()[0]
-	g.SetTurnState(1, p, engine.Main1)
-	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
-	target := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+	for _, tc := range []struct {
+		name, line string
+		wantLife   int
+	}{
+		{"activator taps", "DB$ Tap | ValidTgts$ Creature", 20},
+		{"opponent taps", "DB$ Tap | ValidTgts$ Creature | Tapper$ Opponent", 23},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
 
-	c := engine.NewScriptedController()
-	c.QueueTargets([]engine.EntityID{engine.CardEntity(target)})
-
-	_, err := castETBTap(t, g, p, etbTapTriggerDefParams(t, "Test Tap Tapper", "ValidTgts$ Creature | Tapper$ You"), c)
-	if err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved Tapper$")
+			g, p, _ := newTwoPlayerGame(t)
+			g.NewCard(scriptDef(t, "Tap Watcher", "Enchantment",
+				"T:Mode$ Taps | ValidCard$ Creature | ValidPlayer$ Opponent | Execute$ TrigGain | TriggerZones$ Battlefield",
+				"SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ 3"), p, engine.Battlefield)
+			target := g.NewCard(creatureDefPT(t, "2", "2"), p, engine.Battlefield)
+			if _, err := resolveNow(t, g, p, engine.NewScriptedController(), []engine.EntityID{engine.CardEntity(target)}, tc.line); err != nil {
+				t.Fatal(err)
+			}
+			if got := g.Player(p).Life; got != tc.wantLife {
+				t.Errorf("life = %d, want %d", got, tc.wantLife)
+			}
+		})
 	}
 }

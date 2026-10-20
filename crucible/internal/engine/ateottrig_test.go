@@ -115,3 +115,34 @@ func TestCopyPermanentSetCreatureTypesAndPumpKeywords(t *testing.T) {
 		t.Error("the copy kept haste past the turn")
 	}
 }
+
+// ConditionActivationLimit$ counts the root ability's activations this turn,
+// this one included (Dragon Whelp: "if this ability has been activated four or
+// more times this turn, sacrifice it at the next end step").
+func TestConditionActivationLimitCountsTheRootAbility(t *testing.T) {
+	t.Parallel()
+
+	for _, tc := range []struct {
+		activations int
+		gone        bool
+	}{{1, false}, {2, true}, {3, true}} {
+		g, p, _ := newTwoPlayerGame(t)
+		whelp := g.NewCard(scriptDef(t, "Test Whelp", "Artifact Creature Dragon",
+			"A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | SubAbility$ DBPump",
+			"SVar:DBPump:DB$ Pump | Defined$ Self | AtEOT$ Sacrifice | ConditionActivationLimit$ GE2"),
+			p, engine.Battlefield)
+		c := engine.NewScriptedController()
+		for range tc.activations {
+			if !g.ActivateAbility(p, whelp, 0, c) {
+				t.Fatal("ActivateAbility refused the first ability")
+			}
+			if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+				t.Fatal(err)
+			}
+		}
+		advanceToPhase(t, g, c, 1, engine.Cleanup)
+		if gone := g.Card(whelp).Zone != engine.Battlefield; gone != tc.gone {
+			t.Errorf("%d activations: sacrificed = %v, want %v", tc.activations, gone, tc.gone)
+		}
+	}
+}

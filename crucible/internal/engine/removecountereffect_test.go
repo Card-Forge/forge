@@ -142,20 +142,3 @@ func TestRemoveCounterEffectRemovesFromPlayer(t *testing.T) {
 		t.Errorf("p Energy count = %d, want 2 (3 - 1)", n)
 	}
 }
-
-// TestRemoveCounterEffectRejectsUnresolvedParam proves
-// removeCounterUnresolvedParams' own fail-loud contract (PORT-8/GO-7).
-func TestRemoveCounterEffectRejectsUnresolvedParam(t *testing.T) {
-	t.Parallel()
-
-	g := newGame(t, "a", "b")
-	p := g.Players()[0]
-	g.SetTurnState(1, p, engine.Main1)
-	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
-
-	def := etbRemoveCounterTriggerDefParams(t, "Test Remove TgtZone", "CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | TgtZone$ Graveyard")
-	_, err := castETBRemoveCounterSelf(t, g, p, def, func(c *engine.Card) { c.Counters.Add(engine.P1P1, 1) })
-	if err == nil {
-		t.Fatal("ResolveStack succeeded, want an error for unresolved TgtZone$")
-	}
-}

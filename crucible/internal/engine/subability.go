@@ -90,6 +90,7 @@ func (r *Registry) resolveSubAbility(g *Game, parent *Ability, controller Player
 		xManaCostPaid:    parent.xManaCostPaid,
 		hasXManaCostPaid: parent.hasXManaCostPaid,
 		paid:             parent.paid,
+		activationIndex:  parent.activationIndex,
 		// The parent's targeted abilities on the stack as last seen (ADR-0041),
 		// for a link read after the parent countered one.
 		stackTargets: parent.stackTargets,

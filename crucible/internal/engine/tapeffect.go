@@ -25,17 +25,14 @@ import "fmt"
 
 // tapUnresolvedParams names TapEffect's own params this port does not
 // evaluate. Every one fails the whole line loudly (PORT-8/GO-7):
-// Tapper$
-// (2) -- a tap attributed to a player other than the activator, CR 701.21's
-// own "tapped by" distinction nothing downstream reads yet; Condition$/
-// ConditionDefined$ (0/7) -- condition.go's own subAbilityConditionMet
+// Condition$/ConditionDefined$ (0/7) -- condition.go's own subAbilityConditionMet
 // would otherwise silently no-op a card naming either, dealDamageEffect's
 // own identical reasoning; ETB$ (0 reaching here -- the file doc comment
 // above has the reason) is listed anyway, a defensive reject in case a real
 // line somehow combines it with a shape that reaches this path some other
 // way, rather than silently tapping-without-a-trigger the wrong permanent.
 var tapUnresolvedParams = [...]string{
-	"Tapper", "ETB",
+	"ETB",
 }
 
 // tapEffect resolves Mode$/DB$/AB$ Tap. ConditionPresent$/ConditionCompare$/
@@ -73,6 +70,16 @@ func (tapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error
 	}
 	_, remTapped := a.Params.Param("RememberTapped")
 	_, alwaysRem := a.Params.Param("AlwaysRemember")
+	// TapEffect.java:50-52: the tapper is the activator unless Tapper$ names
+	// another player; it is the Player of the Taps trigger (ValidPlayer$).
+	tapper := a.Controller
+	if spec, ok := a.Params.Param("Tapper"); ok {
+		ps, err := definedPlayers(g, a.Controller, a.Source, spec, a.refs())
+		if err != nil || len(ps) == 0 {
+			return fmt.Errorf("engine: Tap: Tapper$ %q names no player", spec)
+		}
+		tapper = ps[0]
+	}
 	for _, id := range cards {
 		c := g.Card(id)
 		// A phased-out permanent is skipped (TapEffect.java:56).
@@ -85,7 +92,7 @@ func (tapEffect) Resolve(g *Game, a *Ability, controller PlayerController) error
 		}
 		if wasUntapped {
 			c.Tapped = true
-			g.checkTapsTriggers(controller, id, c.Controller(), false)
+			g.checkTapsTriggers(controller, id, tapper, false)
 		}
 	}
 	return nil

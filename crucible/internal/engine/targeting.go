@@ -503,8 +503,9 @@ func (g *Game) targetChoiceFor(a *Ability) (choice targetChoice, named, ok bool)
 		candidates = g.stackSpellCandidates(a.Controller, a.Source, validTgts)
 	default:
 		zones := []ZoneType{Battlefield}
-		if a.API == APIPlay {
-			// Scoped to Play alone (Pass the Torch's own TrigPlay, 27 real
+		if a.API == APIPlay || a.API == APIRemoveCounter {
+			// Scoped to Play alone (and RemoveCounter, whose Resolve reads counters
+			// off any zone's card: Hex Parasite-style "or a suspended card") (Pass the Torch's own TrigPlay, 27 real
 			// corpus DB$ Play | TgtZone$ Graveyard lines): every other API
 			// reaching this branch (ChangeZone, Pump, Effect, PutCounter,
 			// MakeCard, Clone, RepeatEach, ...) has its own Resolve written

@@ -128,6 +128,10 @@ type Ability struct {
 	// paid are the cards the activation cost used up, read back by Sacrificed$,
 	// Exiled$ and Discarded$ amounts. Sub-abilities inherit them.
 	paid paidLists
+	// activationIndex is 1 + the index of the A: line whose activation put this
+	// ability on the stack, 0 for any other; sub-abilities inherit it
+	// (SpellAbility.getRootAbility, which ActivationTable counts by).
+	activationIndex int
 	// parentTargets are the targets of the nearest ancestor ability that chose
 	// some (Defined$ ParentTarget); a sub-ability that chooses its own keeps
 	// the parent's here while Targets holds its own.

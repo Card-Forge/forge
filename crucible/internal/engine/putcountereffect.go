@@ -56,9 +56,8 @@ import (
 // Optional$/UpTo$/UpToMin$ -- each its own further mechanic. Placer$ resolves
 // (putCounterPlacer).
 //
-// Condition$ values conditionValueRead does not name, and
-// ConditionActivationLimit$ -- SpellAbilityCondition's own shapes
-// subAbilityConditionMet does not cover.
+// Condition$ values conditionValueRead does not name -- SpellAbilityCondition's
+// own shapes subAbilityConditionMet does not cover.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
 // through Registry.Resolve (effect.go) once this effect's own body
@@ -74,7 +73,6 @@ var putCounterUnresolvedParams = [...]string{
 	"ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
 	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
 	"RemovePhase",
-	"ConditionActivationLimit",
 }
 
 // putCounterEffect resolves Mode$/DB$/AB$ PutCounter for the Defined$

@@ -30,9 +30,7 @@ import (
 // sacrificeUnresolvedParams names SacrificeEffect.resolve's own params this
 // port does not evaluate. Every one fails the whole line loudly rather than
 // sacrificing the wrong permanent, the wrong count, or silently skipping a
-// choice (PORT-8/GO-7): ConditionActivationLimit$ (0) --
-// SpellAbilityCondition's own shape subAbilityConditionMet does not cover;
-// ChangeNum$ (5) --
+// choice (PORT-8/GO-7): ChangeNum$ (5) --
 // SacrificeAll's own param, never read by this ApiType at all, so its
 // presence marks a line this port would misclassify rather than one it can
 // safely ignore; ValidCard$ (3) -- SacrificeEffect.java
@@ -75,7 +73,6 @@ import (
 // is not a built continuous-effect param, so the trigger it would grant
 // never exists in this port's own game at all.
 var sacrificeUnresolvedParams = [...]string{
-	"ConditionActivationLimit",
 	"ChangeNum", "ValidCard",
 	"SacEachValid", "Random", "Destroy",
 }

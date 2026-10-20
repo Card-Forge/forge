@@ -31,27 +31,6 @@ import (
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
 )
 
-// removeCounterUnresolvedParams names CountersRemoveEffect's own params
-// this port does not evaluate. Every one fails the whole line loudly:
-// ValidTgts$/TargetMin$/TargetMax$ (36/3/3) -- this port's own targeting
-// gap, putCounterEffect's own identical scope; Choices$/ChoiceOptional$/
-// TgtZone$ (9/5/4) -- an interactive battlefield-wide pick, no
-// PlayerController hook; UpTo$ (5) -- chooseNumber's own interactive
-// prompt, the identical gap;
-// Optional$ (2) -- an interactive "would you like to remove" confirm, the
-// identical gap Sacrifice's/Discard's/Mill's own Optional$ already
-// document; RememberRemoved$/RememberAmount$ (28/13) -- CountersRemoveEffect.
-// java's own `source.addRemembered(Pair.of(counterType, i))`/
-// `source.addRemembered(totalRemoved)` remember a (type, index) pair and a
-// raw integer respectively, neither an EntityID Memory.Remember (memory.go)
-// has anywhere to put, and the Java source's own "TODO might need to be
-// more specific" on the first suggests this is not even a clean shape in
-// the oracle itself; Condition$/ConditionDefined$ (0/2) -- condition.go's
-// own subAbilityConditionMet would otherwise silently no-op a card naming
-// either, dealDamageEffect's own identical reasoning.
-var removeCounterUnresolvedParams = [...]string{
-	"TgtZone"}
-
 // removeCounterEffect resolves Mode$/DB$/AB$ RemoveCounter for the Defined$
 // Self/Enchanted/Equipped/You shape. ConditionPresent$/ConditionCompare$/
 // ConditionCheckSVar$/ConditionSVarCompare$ are resolved through
@@ -65,11 +44,6 @@ type removeCounterEffect struct{}
 func (removeCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
 		return err
-	}
-	for _, key := range removeCounterUnresolvedParams {
-		if _, ok := a.Params.Param(key); ok {
-			return fmt.Errorf("engine: RemoveCounter: %s$ not resolvable yet", key)
-		}
 	}
 	source := g.Card(a.Source)
 	if !subAbilityConditionMet(g, source, a.Amounts, a.Params) {

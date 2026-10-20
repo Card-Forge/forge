@@ -28,7 +28,7 @@ import (
 // NumAtt$/NumDef$/KW$/Duration$/PumpZone$/Defined$ this port does not
 // evaluate. Every one fails the whole line loudly rather than applying half
 // of it and guessing at the rest (PORT-8/GO-7): Condition$/ConditionDefined$/ConditionZone$/
-// ConditionPlayerTurn$/ConditionActivationLimit$ (0/19/0/0/4) --
+// ConditionPlayerTurn$ (0/19/0/0) --
 // SpellAbilityCondition's own shapes subAbilityConditionMet does not cover,
 // the identical DealDamage/GainLife-shaped gap;
 // RandomKeyword$/RandomKWNum$/NoRepetition$ -- a random draw this port's own
@@ -65,7 +65,6 @@ import (
 // wild_might.txt's own spell-level ValidTgts$, reachable since a cast
 // spell's targets resolve (ADR-0018).
 var pumpUnresolvedParams = [...]string{
-	"ConditionActivationLimit",
 	"RandomKeyword", "RandomKWNum",
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
 	"DefinedLandwalk", "LeaveBattlefield",

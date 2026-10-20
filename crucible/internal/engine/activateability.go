@@ -372,6 +372,7 @@ func (g *Game) ActivateAbility(pid PlayerID, card CardID, index int, controller 
 	activated := Ability{
 		API: apiType, Source: card, Controller: pid,
 		Params: ability, Amounts: c.abilityAmounts(ability), costPaid: true, activated: true,
+		activationIndex: index + 1,
 	}
 	// CR 602.2b / 601.2c: modes and targets are chosen before any cost is paid
 	// (PlaySpellAbility.java:675-683 runs setupTargets ahead of CostPayment), so

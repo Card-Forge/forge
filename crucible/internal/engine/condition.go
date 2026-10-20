@@ -46,7 +46,6 @@ import (
 // (SpellAbilityCondition.java:184-185, :354).
 var subAbilityUnresolvedParams = [...]string{
 	"Condition",
-	"ConditionActivationLimit",
 	"ConditionGameTypes", "ConditionSorcerySpeed", "ConditionTargetValidTargeting",
 	"ConditionTargetsSingleTarget",
 }
@@ -72,6 +71,23 @@ var subAbilityUnresolvedParams = [...]string{
 // triggerCommonRequirementsMet) reading its own host rather than the
 // sub-ability's.
 func subAbilityConditionMet(g *Game, host *Card, amounts map[string]expr.Amount, a *compile.Ability) bool {
+	if v, ok := a.Param("ConditionActivationLimit"); ok {
+		// SpellAbilityCondition.java:321-328: how often the root ability has been
+		// activated this turn (this one included) against a comparison like GE4.
+		if g.resolving == nil || g.resolving.activationIndex == 0 || len(v) < 3 {
+			g.recordPendingError(fmt.Errorf("engine: ConditionActivationLimit$ %q outside an activated ability not resolvable yet", v))
+			return false
+		}
+		right, err := strconv.Atoi(v[2:])
+		if err != nil {
+			g.recordPendingError(fmt.Errorf("engine: ConditionActivationLimit$ %q is not a comparison", v))
+			return false
+		}
+		turn, _ := host.activations.of(g.resolving.activationIndex - 1)
+		if !compareOp(turn, v[:2], right) {
+			return false
+		}
+	}
 	for _, key := range subAbilityUnresolvedParams {
 		v, ok := a.Param(key)
 		if !ok {
