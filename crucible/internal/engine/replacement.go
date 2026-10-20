@@ -258,6 +258,13 @@ func (g *Game) moveToGraveyard(controller PlayerController, id CardID) (ZoneType
 	} else {
 		melded = g.Move(id, dest, owner)
 	}
+	g.finishMoved(controller, id, owner, post, melded)
+	return dest, melded
+}
+
+// finishMoved is what a Moved replacement's ReplaceWith$ adds once the card
+// has been moved: the shuffle, the exiler's mark and the SubAbility$ chain.
+func (g *Game) finishMoved(controller PlayerController, id CardID, owner PlayerID, post *movedPost, melded CardID) {
 	if post != nil {
 		if post.shuffle {
 			g.Shuffle(Library, owner)
@@ -270,7 +277,6 @@ func (g *Game) moveToGraveyard(controller PlayerController, id CardID) (ZoneType
 		}
 		g.runMovedChain(controller, post)
 	}
-	return dest, melded
 }
 
 // movedPost is what a Moved replacement's ReplaceWith$ ChangeZone adds to
@@ -318,17 +324,33 @@ func (g *Game) runMovedChain(controller PlayerController, post *movedPost) {
 // game's pending error is set (GO-7), never a half-replacement. The first
 // match wins, CR 616's simplification this file already makes.
 func (g *Game) movedGraveyardDestination(id CardID) (ZoneType, *movedPost) {
+	return g.movedDestination(id, Graveyard)
+}
+
+// movedDestination is movedGraveyardDestination for a card about to go to
+// dest: a line names its Destination$ (or, with an Origin$ and no Destination$,
+// every destination -- "if it would leave the battlefield") less its
+// ExcludeDestination$ zones (the LeaveBattlefield$ effect's own, Exile).
+func (g *Game) movedDestination(id CardID, dest ZoneType) (ZoneType, *movedPost) {
 	c := g.Card(id)
-	dest := Graveyard
+	result := dest
 	var post *movedPost
 	g.eachReplacement("Moved", func(h *Card, amounts map[string]expr.Amount, r *compile.Ability) bool {
-		if _, ok := r.Param("Destination"); !ok || !replacementZoneMatches(r, "Destination", Graveyard) {
+		_, hasDest := r.Param("Destination")
+		_, hasOrigin := r.Param("Origin")
+		if !hasDest && !hasOrigin {
+			return false
+		}
+		if hasDest && !replacementZoneMatches(r, "Destination", dest) {
+			return false
+		}
+		if _, ok := r.Param("ExcludeDestination"); ok && replacementZoneMatches(r, "ExcludeDestination", dest) {
 			return false
 		}
 		if !replacementZoneMatches(r, "Origin", c.Zone) {
 			return false
 		}
-		if !onlyParams(r, "destination", "origin", "validcard", "validlki") {
+		if !onlyParams(r, "destination", "origin", "validcard", "validlki", "excludedestination") {
 			g.recordPendingError(fmt.Errorf("engine: %q: Event$ Moved to the graveyard: a param not resolvable yet", h.Def.Name))
 			return false
 		}
@@ -387,10 +409,10 @@ func (g *Game) movedGraveyardDestination(id CardID) (ZoneType, *movedPost) {
 				p.chain = s.Ability
 			}
 		}
-		dest, post = z, p
+		result, post = z, p
 		return true
 	})
-	return dest, post
+	return result, post
 }
 
 // onlyKeys reports whether every param of a is one of keys (folded).

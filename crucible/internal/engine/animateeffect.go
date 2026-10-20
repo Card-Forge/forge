@@ -51,6 +51,9 @@ func (animateEffect) Resolve(g *Game, a *Ability, controller PlayerController) e
 			return err
 		}
 	}
+	if err := g.leaveBattlefieldFor(a, "Animate", cards); err != nil {
+		return err
+	}
 	// AnimateEffect.java:194-201: each animated card remembers RememberObjects$'
 	// objects and imprints ImprintCards$' cards, read with the host as source.
 	remember, hasRemember := a.Params.Param("RememberObjects")

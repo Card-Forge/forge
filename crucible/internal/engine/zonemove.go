@@ -52,6 +52,13 @@ func (g *Game) moveByEffectOnly(controller PlayerController, id CardID, dest Zon
 	c := g.Card(id)
 	origin := c.Zone
 	var melded CardID
+	// A Moved replacement for leaving the battlefield (LeaveBattlefield$'s
+	// effect card, Realmbreaker's "exile it instead") redirects any destination
+	// but the graveyard, whose moves moveToGraveyard reads it for.
+	var redirected *movedPost
+	if origin == Battlefield && dest != Battlefield && dest != Graveyard {
+		dest, redirected = g.movedDestination(id, dest)
+	}
 	switch dest {
 	case Battlefield:
 		if newController == NoPlayer {
@@ -95,6 +102,7 @@ func (g *Game) moveByEffectOnly(controller PlayerController, id CardID, dest Zon
 	default:
 		melded = g.Move(id, dest, c.Owner)
 	}
+	g.finishMoved(controller, id, c.Owner, redirected, melded)
 	if origin == Graveyard && dest != Battlefield {
 		// Where the card ended up, a Moved replacement included; the
 		// graveyard itself fires nothing here.

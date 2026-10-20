@@ -263,15 +263,14 @@ func subtypeCategoryDrop(g *Game, land, creature, artifact, enchantment bool) (f
 // animateUnresolvedParams are the doAnimate/AnimateEffect params this port
 // does not model: TransferActivator$'s "only you may activate" on a granted
 // ability (Martyrdom), "can't have" keywords, removing one named ability,
-// mana-cost changes (Incorporate$ and ManaCost$), a revert cost and a
-// leave-the-battlefield replacement. RememberObjects$ and ImprintCards$ are
+// mana-cost changes (Incorporate$ and ManaCost$) and a revert cost. RememberObjects$ and ImprintCards$ are
 // Animate's own (animateEffect.Resolve); AnimateAllEffect never reads them. sVars$ is read as nothing: the SVars it copies are the AI markers
 // (MustAttack:True) and the ones the granted traits already carry compiled. Condition$ is the two effects' own
 // (rejectUnreadCondition, then subAbilityConditionMet).
 var animateUnresolvedParams = [...]string{
 	"TransferActivator",
 	"CantHaveKeyword", "RemoveThisAbility",
-	"ManaCost", "Incorporate", "RevertCost", "LeaveBattlefield",
+	"ManaCost", "Incorporate", "RevertCost",
 }
 
 // animateDuration reads Duration$ for an Animate-shaped record: absent ends at

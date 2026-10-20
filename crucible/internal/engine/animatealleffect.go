@@ -62,8 +62,10 @@ func (animateAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	if grants != nil {
 		g.grantPerpetualTriggers(cards, grants, a.Amounts)
 	}
-	if template.empty() {
-		return nil
+	if !template.empty() {
+		if err := g.animateCards(a, template, cards); err != nil {
+			return err
+		}
 	}
-	return g.animateCards(a, template, cards)
+	return g.leaveBattlefieldFor(a, "AnimateAll", cards)
 }

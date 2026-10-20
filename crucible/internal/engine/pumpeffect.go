@@ -35,8 +35,7 @@ import (
 // KW$ handling (below) does not do (KWChoice$ is pumpChooseKeyword's, DefinedKW$
 // is pumpDefinedKeywords'); SharedKeywordsZone$/SharedRestrictions$ --
 // CardFactoryUtil.sharedKeywords' own zone scan, a further mechanic;
-// DefinedLandwalk$/LeaveBattlefield$ -- each its own further tracking
-// mechanic; NoteCards$/NoteCardsFor$/ClearNotedCardsFor$/NoteNumber$ --
+// DefinedLandwalk$ -- its own further tracking mechanic; NoteCards$/NoteCardsFor$/ClearNotedCardsFor$/NoteNumber$ --
 // Player.noteNumberForName's own tracking, nothing downstream reads yet.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
@@ -67,7 +66,7 @@ import (
 var pumpUnresolvedParams = [...]string{
 	"RandomKeyword", "RandomKWNum",
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
-	"DefinedLandwalk", "LeaveBattlefield",
+	"DefinedLandwalk",
 }
 
 // pumpImprint is PumpEffect.java:431-437: ImprintCards$ adds the defined
@@ -296,6 +295,11 @@ func (pumpEffect) Resolve(g *Game, a *Ability, controller PlayerController) erro
 			CanBlockAny: canBlockAny, CanBlockMore: canBlockMore,
 			InZone: c.Zone, OffBattlefield: c.Zone != Battlefield,
 		})
+		if zone, has, err := leaveBattlefieldZone(a, "Pump"); err != nil {
+			return err
+		} else if has {
+			g.addLeaveBattlefieldReplacement(a, cid, zone)
+		}
 		// PumpEffect.java:90-92: the host remembers each pumped card.
 		if hasParam(a, "RememberPumped") {
 			source.Memory.Remember(CardEntity(cid))

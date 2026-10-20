@@ -14,7 +14,7 @@ import (
 // cannot honour yet, grouped by the mechanism each needs: an entering-state
 // modifier (Transformed$, FaceDown$, AttachedTo$ ...; WithCountersType$ and
 // WithCountersAmount$ resolve, changeZoneEnter; Attacking$/Blocking$ resolve,
-// changeZoneJoinCombat), a delayed follow-up (LeaveBattlefield$, StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
+// changeZoneJoinCombat), a delayed follow-up (StaticEffect$; Duration$ UntilHostLeavesPlay resolves,
 // changeZoneDuration, but not its ReturnAbility$/ReturnValid$ delayed
 // trigger), an alternative destination prompt (DestinationAlternative$), a
 // non-default search loop (Different*$, WithTotal*$, Exactly$, Reorder$; and
@@ -38,7 +38,7 @@ import (
 var changeZoneUnresolvedParams = [...]string{
 	"Transformed", "WithNotedCounters", "ReturnAbility", "ReturnValid",
 	"AttachAfter", "FaceDown",
-	"LeaveBattlefield", "StaticEffect",
+	"StaticEffect",
 	"Champion", "Foretold", "ForetoldCost", "WithMayLook",
 	"RandomOrder", "AtRandom", "DifferentNames", "DifferentCMC", "DifferentPower",
 	"ShareLandType", "WithTotalCMC", "WithTotalPower", "WithTotalCardTypes",
@@ -546,6 +546,9 @@ func changeZoneKnown(g *Game, a *Ability, controller PlayerController, source *C
 		melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 		g.changeZoneLeftCombat(id, joined)
 		g.changeZoneAttach(controller, id, attach)
+		if err := g.leaveBattlefieldFor(a, "ChangeZone", []CardID{id}); err != nil {
+			return err
+		}
 		if dest != Battlefield {
 			// The counters go on the moved card after it arrives, the
 			// activator placing them (ChangeZoneEffect.java:751-755).
@@ -920,6 +923,9 @@ func changeZoneHidden(g *Game, a *Ability, controller PlayerController, source *
 			melded := g.moveByEffect(controller, id, dest, libPos, newController, tapped, enter...)
 			g.changeZoneLeftCombat(id, joined)
 			g.changeZoneAttach(controller, id, attach)
+			if err := g.leaveBattlefieldFor(a, "ChangeZone", []CardID{id}); err != nil {
+				return err
+			}
 			if dest == Exile {
 				g.markExiledWith(id, a.Source)
 				g.exileFaceDown(a, id)
