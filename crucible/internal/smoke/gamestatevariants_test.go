@@ -80,8 +80,8 @@ func TestProbeReportsWhatTheStagedBoardReveals(t *testing.T) {
 	}{
 		// Aura Graft's ReEnchant: Attach Move$ with Object$ ParentTarget now plays.
 		{"Aura Graft", smoke.Plays},
-		// Its PutCounter reads Defined$ "Targeted.!ChosenCard", which is not read.
-		{"Cannibalize", smoke.Refused},
+		// Its PutCounter reads Defined$ "Targeted.!ChosenCard", a filtered Defined$.
+		{"Cannibalize", smoke.Plays},
 		// A Wall that blocks: Pump AtEOT$ and the Wall's own pump resolve.
 		{"Glyph of Destruction", smoke.Plays},
 		// PumpAll AtEOT$ resolves.

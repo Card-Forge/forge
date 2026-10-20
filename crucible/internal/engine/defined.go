@@ -763,14 +763,76 @@ func definedCards(host *Card, defined string, refs abilityRefs) ([]CardID, error
 		return append([]CardID(nil), host.Memory.Imprinted()...), nil
 	case "ChosenCard":
 		return append([]CardID(nil), host.Memory.Chosen()...), nil
+	case "RememberedFirst", "RememberedLast":
+		// AbilityUtils.java:245-256: the first or last remembered object, when
+		// it is a card.
+		rem := host.Memory.Remembered()
+		if len(rem) == 0 {
+			return nil, nil
+		}
+		e := rem[0]
+		if defined == "RememberedLast" {
+			e = rem[len(rem)-1]
+		}
+		if id, ok := e.AsCard(); ok {
+			return []CardID{id}, nil
+		}
+		return nil, nil
 	default:
 		if refs.game != nil {
 			if cards, ok := refs.game.definedValidCards(refs.activator, host, defined); ok {
 				return cards, nil
 			}
+			if cards, ok, err := refs.game.definedCompoundCards(host, defined, refs); ok {
+				return cards, err
+			}
 		}
 		return nil, fmt.Errorf("engine: Defined$ %q not resolvable yet", defined)
 	}
+}
+
+// definedCompoundCards is the two spellings that wrap another Defined$: "A & B"
+// (SpellAbilityEffect.getCards splits on " & " and joins the results, each card
+// once) and "Base.Prop,Prop2" (AbilityUtils.getDefinedCards' trailing filter,
+// each property read as "Card.<prop>" against the base's cards, :319-327). ok is
+// false for any other spelling, and for a "Valid ..." form, whose own dots are
+// part of its spec.
+func (g *Game) definedCompoundCards(host *Card, defined string, refs abilityRefs) (cards []CardID, ok bool, err error) {
+	if parts := strings.Split(defined, " & "); len(parts) > 1 {
+		seen := map[CardID]bool{}
+		for _, part := range parts {
+			got, err := definedCards(host, strings.TrimSpace(part), refs)
+			if err != nil {
+				return nil, true, err
+			}
+			for _, id := range got {
+				if !seen[id] {
+					seen[id] = true
+					cards = append(cards, id)
+				}
+			}
+		}
+		return cards, true, nil
+	}
+	base, filter, found := strings.Cut(defined, ".")
+	if !found || base == "" || strings.HasPrefix(base, "Valid") {
+		return nil, false, nil
+	}
+	got, err := definedCards(host, base, refs)
+	if err != nil {
+		return nil, true, err
+	}
+	var alts []string
+	for _, f := range strings.Split(filter, ",") {
+		alts = append(alts, "Card."+f)
+	}
+	parsed := valid.Parse(strings.Join(alts, ","))
+	for _, id := range got {
+		if Matches(g, g.Card(id), parsed, refs.activator, host.ID) {
+			cards = append(cards, id)
+		}
+	}
+	return cards, true, nil
 }
 
 // targetedOrDefinedCards is SpellAbilityEffect.getTargetCards(sa)'s own

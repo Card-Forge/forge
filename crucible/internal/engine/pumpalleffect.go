@@ -31,10 +31,7 @@ import (
 // Condition$/ConditionDefined$/ConditionZone$/ConditionPlayerTurn$/
 // ConditionManaSpent$/ConditionManaNotSpent$ (4/5/3/1/4/0) --
 // SpellAbilityCondition's own shapes subAbilityConditionMet does not cover,
-// the identical Pump-shaped gap; ValidTgts$ (12) -- a real target past a
-// blanket ValidCards$ match, this port's own targeting gap; RememberPumped$
-// (8) -- Card.Memory has no writer wired to a
-// blanket multi-card grant; SharedKeywordsZone$/SharedRestrictions$ (4/4) --
+// the identical Pump-shaped gap; SharedKeywordsZone$/SharedRestrictions$ (4/4) --
 // CardFactoryUtil.sharedKeywords' own zone scan, a further mechanic;
 // ModeCost$ (3) and Exhaust$ (4) -- each its own further activation
 // mechanic. AtEOT$ resolves (registerAtEOT) over every matched card.
@@ -56,8 +53,7 @@ import (
 // RememberedController and a non-mana UnlessCost$ (Mandatory PayEnergy<X>),
 // neither resolvable here regardless.
 var pumpAllUnresolvedParams = [...]string{
-	"ValidTgts",
-	"RememberPumped", "SharedKeywordsZone", "SharedRestrictions",
+	"SharedKeywordsZone", "SharedRestrictions",
 	"ModeCost", "Exhaust",
 }
 
@@ -125,7 +121,7 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		return fmt.Errorf("engine: PumpAll: Duration$ Perpetual with a HIDDEN keyword not resolvable yet")
 	}
 	pumpsNothing := power == 0 && toughness == 0 && grant.empty()
-	if pumpsNothing && !hasParam(a, "AtEOT") {
+	if pumpsNothing && !hasParam(a, "AtEOT") && !hasParam(a, "RememberPumped") {
 		return nil
 	}
 
@@ -136,7 +132,15 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 	spec := valid.Parse(validCards)
 
 	var players []PlayerID
-	if defined, ok := a.Params.Param("Defined"); ok {
+	if _, targeting := a.Params.Param("ValidTgts"); targeting {
+		// PumpAllEffect.java:133-137: a targeting line pumps what the targeted
+		// players have (getTargetPlayers).
+		for _, e := range a.refs().targets {
+			if pid, ok := e.AsPlayer(); ok {
+				players = append(players, pid)
+			}
+		}
+	} else if defined, ok := a.Params.Param("Defined"); ok {
 		players, err = definedPlayers(g, a.Controller, a.Source, defined, a.refs())
 		if err != nil {
 			return fmt.Errorf("engine: PumpAll: %w", err)
@@ -155,6 +159,9 @@ func (pumpAllEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 					continue
 				}
 				matched = append(matched, cid)
+				if hasParam(a, "RememberPumped") {
+					source.Memory.Remember(CardEntity(cid))
+				}
 				if pumpsNothing {
 					continue
 				}

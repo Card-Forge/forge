@@ -31,20 +31,13 @@ import (
 // ConditionPlayerTurn$/ConditionActivationLimit$ (0/19/0/0/4) --
 // SpellAbilityCondition's own shapes subAbilityConditionMet does not cover,
 // the identical DealDamage/GainLife-shaped gap;
-// CanBlockAmount$/CanBlockAny$ (4/0) -- an additional-blocker grant this
-// port's own block-legality gate
-// (staticability.go) has nowhere to consult a one-shot record from;
-// KWChoice$/RandomKeyword$/RandomKWNum$/NoRepetition$ (3/1/0/0) -- an
-// interactive choice and a random draw, neither of which this port's own KW$
-// handling (below) does (DefinedKW$ is pumpDefinedKeywords'); SharedKeywordsZone$/
-// SharedRestrictions$ (2/2) -- CardFactoryUtil.sharedKeywords' own zone scan,
-// a further mechanic; DefinedLandwalk$/
-// RememberPumped$/LeaveBattlefield$ (0/0) -- each its own further
-// tracking mechanic; NoteCards$/NoteCardsFor$/ClearNotedCardsFor$/
-// NoteNumber$ (0/0/0/0) -- Player.noteNumberForName's own tracking, nothing
-// downstream reads yet;
-// Optional$/OptionQuestion$ (0/0) -- a "may" confirmation this port's own
-// PlayerController has no hook for.
+// RandomKeyword$/RandomKWNum$/NoRepetition$ -- a random draw this port's own
+// KW$ handling (below) does not do (KWChoice$ is pumpChooseKeyword's, DefinedKW$
+// is pumpDefinedKeywords'); SharedKeywordsZone$/SharedRestrictions$ --
+// CardFactoryUtil.sharedKeywords' own zone scan, a further mechanic;
+// DefinedLandwalk$/LeaveBattlefield$ -- each its own further tracking
+// mechanic; NoteCards$/NoteCardsFor$/ClearNotedCardsFor$/NoteNumber$ --
+// Player.noteNumberForName's own tracking, nothing downstream reads yet.
 //
 // SubAbility$ no longer blocks: resolveSubAbility (subability.go) chains it
 // through Registry.Resolve (effect.go) once this effect's own body
@@ -73,11 +66,11 @@ import (
 // spell's targets resolve (ADR-0018).
 var pumpUnresolvedParams = [...]string{
 	"ConditionActivationLimit",
-	"KWChoice", "RandomKeyword", "RandomKWNum",
+	"RandomKeyword", "RandomKWNum",
 	"NoRepetition", "SharedKeywordsZone", "SharedRestrictions",
-	"DefinedLandwalk", "RememberPumped", "LeaveBattlefield",
+	"DefinedLandwalk", "LeaveBattlefield",
 	"NoteCards", "NoteCardsFor", "ClearNotedCardsFor",
-	"NoteNumber", "Optional", "OptionQuestion",
+	"NoteNumber",
 }
 
 // pumpImprint is PumpEffect.java:431-437: ImprintCards$ adds the defined
@@ -113,7 +106,7 @@ func pumpImprint(a *Ability, host *Card, key string, forget bool) error {
 // (condition.go), the identical way DealDamage's/GainLife's own do.
 type pumpEffect struct{}
 
-func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
+func (pumpEffect) Resolve(g *Game, a *Ability, controller PlayerController) error {
 	if err := rejectUnreadCondition(a, a.Params.Name); err != nil {
 		return err
 	}
@@ -159,6 +152,12 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		}
 	}
 
+	// PumpEffect.java:280-288: Optional$ asks the activator first (OptionQuestion$
+	// only words the question).
+	if hasParam(a, "Optional") && !controller.ConfirmEffect(g, a.Controller, a.Source) {
+		return nil
+	}
+
 	power, err := pumpAmount(g, "Pump", a, source, "NumAtt")
 	if err != nil {
 		return err
@@ -170,6 +169,9 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 
 	grant, err := pumpKeywords("Pump", a.Params)
 	if err != nil {
+		return err
+	}
+	if err := g.pumpChooseKeyword(controller, a, source, &grant); err != nil {
 		return err
 	}
 	keywords, proceed, err := g.pumpDefinedKeywords(a, source, grant.keywords)
@@ -229,7 +231,7 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 		// amount (PumpEffect.java:489-496); no corpus line combines them.
 		return fmt.Errorf("engine: Pump: Radiance$ with a Double/Triple amount not resolvable yet")
 	}
-	if power == 0 && toughness == 0 && grant.empty() && !multiplied && !canBlockAny && canBlockMore == 0 {
+	if power == 0 && toughness == 0 && grant.empty() && !multiplied && !canBlockAny && canBlockMore == 0 && !hasParam(a, "RememberPumped") {
 		// Java has no such return: replaceDying (PumpEffect.java:506) still
 		// runs, so an X=0 Necrotic Wound still exiles a creature dying this turn.
 		// PumpEffect.java:485 registers AtEOT$ whether or not anything was
@@ -293,6 +295,10 @@ func (pumpEffect) Resolve(g *Game, a *Ability, _ PlayerController) error {
 			HasUntil: untilNextTurn, UntilTurnOf: a.Controller, Perpetual: perpetual,
 			CanBlockAny: canBlockAny, CanBlockMore: canBlockMore,
 		})
+		// PumpEffect.java:90-92: the host remembers each pumped card.
+		if hasParam(a, "RememberPumped") {
+			source.Memory.Remember(CardEntity(cid))
+		}
 		if until != "" {
 			if err := g.addUntilCommand(a, until, cardCommand{Kind: commandEndPump, Target: cid, Timestamp: timestamp}); err != nil {
 				return err
@@ -572,4 +578,34 @@ func pumpKeywords(effect string, a *compile.Ability) (pumpGrant, error) {
 		grant.keywords = append(grant.keywords, tok)
 	}
 	return grant, nil
+}
+
+// pumpChooseKeyword is PumpEffect.java:296-301: a line with KWChoice$ and no KW$
+// has its activator choose one of the comma-separated keywords, for the first
+// target card, and grants that one. Several targets all get the same choice.
+func (g *Game) pumpChooseKeyword(controller PlayerController, a *Ability, source *Card, grant *pumpGrant) error {
+	raw, ok := a.Params.Param("KWChoice")
+	if !ok || hasParam(a, "KW") {
+		return nil
+	}
+	options := strings.Split(raw, ",")
+	cards, err := pumpTargetCards(g, a, source)
+	if err != nil {
+		return err
+	}
+	if len(cards) == 0 {
+		// Java's tgtCards.get(0) would throw (a Forge defect for a target that
+		// went away); a line with nothing to pump grants nothing.
+		return nil
+	}
+	i := controller.ChooseOption(g, a.Controller, a.Source, options)
+	if i < 0 || i >= len(options) {
+		return fmt.Errorf("engine: Pump: KWChoice$ answer %d is out of range", i)
+	}
+	tok := options[i]
+	if keywordTokenDynamic(tok) {
+		return fmt.Errorf("engine: Pump: KWChoice$ %q not resolvable yet", tok)
+	}
+	grant.keywords = append(grant.keywords, tok)
+	return nil
 }

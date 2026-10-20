@@ -23,6 +23,7 @@ package engine
 import (
 	"fmt"
 	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -69,7 +70,7 @@ import (
 var putCounterUnresolvedParams = [...]string{
 	"ETB",
 	"DividedRandomly",
-	"EachFromSource", "ChooseDifferent",
+	"EachFromSource",
 	"ForColor", "SharedKeywords", "SharedKeywordsDefined", "SharedKeywordsZone",
 	"SharedRestrictions", "TriggeredCounterMap", "CounterMapValues", "SpecifyCounter",
 	"RemovePhase",
@@ -148,7 +149,7 @@ func (putCounterEffect) Resolve(g *Game, a *Ability, controller PlayerController
 		// kind per target (counterKindPlan); no single kind is read here.
 		if !counterKindsPerObject(a.Params) {
 			var err error
-			if counterType, err = putCounterType(a.Params); err != nil {
+			if counterType, err = g.putCounterTypeChosen(controller, a, placer); err != nil {
 				return err
 			}
 		}
@@ -472,9 +473,11 @@ func (g *Game) putCounterChoice(controller PlayerController, a *Ability, spec st
 
 // counterKindsPerObject reports whether the line chooses the counter kind for
 // each object it puts counters on: CounterTypes$, CounterType$ ExistingCounter,
-// and a CounterType$ list under CounterTypePerDefined$ or UniqueType$.
+// and a CounterType$ list under CounterTypePerDefined$, UniqueType$ or
+// ChooseDifferent$.
 func counterKindsPerObject(a *compile.Ability) bool {
-	if hasParamOn(a, "CounterTypes") || hasParamOn(a, "CounterTypePerDefined") || hasParamOn(a, "UniqueType") {
+	if hasParamOn(a, "CounterTypes") || hasParamOn(a, "CounterTypePerDefined") || hasParamOn(a, "UniqueType") ||
+		hasParamOn(a, "ChooseDifferent") {
 		return true
 	}
 	raw, _ := a.Param("CounterType")
@@ -563,6 +566,9 @@ func (g *Game) counterKindPlan(controller PlayerController, a *Ability, counterT
 			}
 		}
 		switch {
+		case hasParam(a, "ChooseDifferent"):
+			kinds, err := g.chooseDifferentKinds(controller, a, placer, amount)
+			return kinds, err
 		case hasParam(a, "CounterTypes"):
 			list, _ := a.Params.Param("CounterTypes")
 			var kinds []CounterType
@@ -707,4 +713,71 @@ func (g *Game) anyWithAdapt(card CardID) bool {
 		}
 	}
 	return false
+}
+
+// counterTypeList is a CounterType$ comma list as chooseTypeFromList reads it:
+// each kind once, in order, empty entries dropped.
+func counterTypeList(raw string) []CounterType {
+	var out []CounterType
+	for _, s := range strings.Split(raw, ",") {
+		ct := CounterType(strings.ToUpper(s))
+		if s != "" && !slices.Contains(out, ct) {
+			out = append(out, ct)
+		}
+	}
+	return out
+}
+
+// chooseCounterKind is the PlayerController.chooseCounterType half of
+// CountersPutEffect.chooseTypeFromList (:690-716): decider picks one of
+// options (the only one when there is just one).
+func (g *Game) chooseCounterKind(controller PlayerController, decider PlayerID, source CardID, options []CounterType) CounterType {
+	if len(options) == 1 {
+		return options[0]
+	}
+	names := make([]string, len(options))
+	for i, c := range options {
+		names[i] = string(c)
+	}
+	pick := controller.ChooseOption(g, decider, source, names)
+	if pick < 0 || pick >= len(options) {
+		pick = 0
+	}
+	return options[pick]
+}
+
+// putCounterTypeChosen is CounterType$ for a line with one kind for all its
+// objects: a literal name, or a comma list the placer picks from once, before
+// any counter is put (CountersPutEffect.java:620-629). ExistingCounter and
+// Any are not literal kinds and stay refused.
+func (g *Game) putCounterTypeChosen(controller PlayerController, a *Ability, placer PlayerID) (CounterType, error) {
+	raw, _ := a.Params.Param("CounterType")
+	if !strings.Contains(raw, ",") {
+		return putCounterType(a.Params)
+	}
+	options := counterTypeList(raw)
+	if len(options) == 0 {
+		return "", fmt.Errorf("engine: PutCounter: CounterType$ %q names no kind", raw)
+	}
+	return g.chooseCounterKind(controller, placer, a.Source, options), nil
+}
+
+// chooseDifferentKinds is ChooseDifferent$ N (:292-314): the placer picks N
+// kinds of the CounterType$ list, one after another with each pick struck from
+// the options, and every kind gets the amount.
+func (g *Game) chooseDifferentKinds(controller PlayerController, a *Ability, placer PlayerID, amount int) ([]counterKind, error) {
+	rawN, _ := a.Params.Param("ChooseDifferent")
+	n, err := strconv.Atoi(strings.TrimSpace(rawN))
+	if err != nil {
+		return nil, fmt.Errorf("engine: PutCounter: ChooseDifferent$ %q is not a number", rawN)
+	}
+	list, _ := a.Params.Param("CounterType")
+	options := counterTypeList(list)
+	var out []counterKind
+	for i := 0; i < n && len(options) > 0; i++ {
+		ct := g.chooseCounterKind(controller, placer, a.Source, options)
+		out = append(out, counterKind{ct, amount})
+		options = slices.DeleteFunc(options, func(o CounterType) bool { return o == ct })
+	}
+	return out, nil
 }

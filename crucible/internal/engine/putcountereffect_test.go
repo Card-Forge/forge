@@ -183,10 +183,9 @@ func TestPutCounterEffectMissingCounterTypeErrors(t *testing.T) {
 	}
 }
 
-// TestPutCounterEffectRejectsCommaListCounterType proves a multi-type list
-// (an interactive choice among several kinds, this port's own missing
-// PlayerController hook) fails loudly rather than picking the first one.
-func TestPutCounterEffectRejectsCommaListCounterType(t *testing.T) {
+// TestPutCounterEffectRejectsAnyCounterType proves CounterType$ Any, which
+// names no kind the placer could pick, fails loudly rather than guessing one.
+func TestPutCounterEffectRejectsAnyCounterType(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
@@ -194,7 +193,7 @@ func TestPutCounterEffectRejectsCommaListCounterType(t *testing.T) {
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(g.Players()[1]).Life = 20, 20
 
-	creature, err := castETBPutCounter(t, g, p, etbPutCounterTriggerDefParams(t, "Test Comma List", "CounterType$ P1P1,M1M1 | CounterNum$ 1", nil))
+	creature, err := castETBPutCounter(t, g, p, etbPutCounterTriggerDefParams(t, "Test Any Kind", "CounterType$ Any | CounterNum$ 1", nil))
 	if err == nil {
 		t.Fatal("ResolveStack: got nil error, want one naming CounterType")
 	}

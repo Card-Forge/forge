@@ -36,17 +36,14 @@ import (
 // CounterNum$ pass, above; AmountByChosenMap$ (1) -- a ChosenMap-indexed
 // amount, this port's own Card.ChosenMap gap; TargetUnique$ (2) -- an extra
 // battlefield-ownership filter this file has nowhere to route through,
-// damageAllEffect's own identical gap; IsCurse$ (5) -- a display-only flag
-// on a Curse-subtype enchantment's own SpellDescription, never read by
-// resolve itself, listed anyway rather than silently assuming so;
-// Ultimate$/ModeCost$ (3/1) -- tapAllEffect's/untapAllEffect's own
+// damageAllEffect's own identical gap; Ultimate$/ModeCost$ (3/1) -- tapAllEffect's/untapAllEffect's own
 // identical gaps; Condition$/ConditionDefined$/ConditionPlayerTurn$/
 // ConditionPhases$ (2/5/1/1) -- ConditionZone$'s/ConditionPlayerTurn$'s own
 // identical putCounterEffect gap, SpellAbilityCondition shapes
 // subAbilityConditionMet does not cover.
 var putCounterAllUnresolvedParams = [...]string{
 	"ValidZone", "ValidCards2", "CounterType2", "CounterNum2",
-	"AmountByChosenMap", "TargetUnique", "IsCurse",
+	"AmountByChosenMap", "TargetUnique",
 	"Ultimate", "ModeCost",
 }
 

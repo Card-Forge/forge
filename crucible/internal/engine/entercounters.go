@@ -10,12 +10,14 @@
 // at the permanent (enterBattlefieldReplacements), through countersReplaced so
 // an AddCounter replacement (Hardened Scales) still changes them.
 
-//enginelint:allow id zone card game valid ability replacement replaceeffect amount putcountereffect control event parts effecthelpers defined
+//enginelint:allow id zone card game valid ability replacement replaceeffect amount putcountereffect control event parts effecthelpers defined continuouslayers
 
 package engine
 
 import (
 	"fmt"
+	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/jczastkiewicz/crucible/internal/carddb/compile"
@@ -97,15 +99,16 @@ func (g *Game) applyEnterCounters(controller PlayerController, moved CardID, ori
 			chains = append(chains, chain{host: h, amounts: amounts, sub: sub})
 			return false
 		}
-		ct, n, err := g.enterCounterAmount(moved, h, amounts, sub)
+		kinds, err := g.enterCounterKinds(controller, moved, h, amounts, sub)
 		if err != nil {
 			g.recordPendingError(err)
 			return false
 		}
-		if n <= 0 {
-			return false
+		for _, k := range kinds {
+			if k.n > 0 {
+				addPile(enterPile{ct: k.kind, n: k.n, source: h.ID, placer: h.Controller()})
+			}
 		}
-		addPile(enterPile{ct: ct, n: n, source: h.ID, placer: h.Controller()})
 		return false
 	})
 	for _, c := range chains {
@@ -230,25 +233,28 @@ func (g *Game) putEnterCounters(a *Ability, source *Card, placer PlayerID) error
 	return nil
 }
 
-// enterCounterAmount reads one ETB$ PutCounter's counter kind and amount for
-// moved, 0 amount for a line that puts nothing on it (a watcher's own "Self").
-func (g *Game) enterCounterAmount(moved CardID, host *Card, amounts map[string]expr.Amount, sub *compile.Ability) (CounterType, int, error) {
+// enterCounterKinds reads one ETB$ PutCounter's counters for moved: the kinds
+// and amounts, none for a line that puts nothing on it (a watcher's own
+// "Self"). Defined$ defaults to Self (getDefinedCards' own default); CounterType$
+// may be a comma list the host's controller picks from, or ChooseDifferent$ N
+// of them, and UpTo$ lets that player take fewer than CounterNum$
+// (CountersPutEffect.java:292-314, :620-629).
+func (g *Game) enterCounterKinds(controller PlayerController, moved CardID, host *Card, amounts map[string]expr.Amount, sub *compile.Ability) ([]counterKind, error) {
 	name := host.Def.Name
-	if !onlyKeys(sub, "DB", "Defined", "CounterType", "CounterNum", "ETB", "SpellDescription") {
-		return "", 0, fmt.Errorf("engine: %q: ETB$ PutCounter: a param past Defined$/CounterType$/CounterNum$ not resolvable yet", name)
+	if !onlyKeys(sub, "DB", "Defined", "CounterType", "CounterNum", "ETB", "SpellDescription", "UpTo", "ChooseDifferent") {
+		return nil, fmt.Errorf("engine: %q: ETB$ PutCounter: a param past Defined$/CounterType$/CounterNum$ not resolvable yet", name)
 	}
-	defined, _ := sub.Param("Defined")
+	defined, ok := sub.Param("Defined")
+	if !ok {
+		defined = "Self"
+	}
 	switch {
 	case defined == "Self" && host.ID == moved, defined == "ReplacedCard":
 	case defined == "Self":
 		// A watcher's own "Self" is the watcher, not what entered.
-		return "", 0, nil
+		return nil, nil
 	default:
-		return "", 0, fmt.Errorf("engine: %q: ETB$ PutCounter: Defined$ %q not resolvable yet", name, defined)
-	}
-	counterType, err := putCounterType(sub)
-	if err != nil {
-		return "", 0, fmt.Errorf("engine: %q: %w", name, err)
+		return nil, fmt.Errorf("engine: %q: ETB$ PutCounter: Defined$ %q not resolvable yet", name, defined)
 	}
 	counterNum, ok := sub.Param("CounterNum")
 	if !ok {
@@ -256,7 +262,50 @@ func (g *Game) enterCounterAmount(moved CardID, host *Card, amounts map[string]e
 	}
 	amount, ok := resolveNamedAmount(g, amounts, host, counterNum)
 	if !ok {
-		return "", 0, fmt.Errorf("engine: %q: ETB$ PutCounter: CounterNum$ %q is not resolvable", name, counterNum)
+		return nil, fmt.Errorf("engine: %q: ETB$ PutCounter: CounterNum$ %q is not resolvable", name, counterNum)
 	}
-	return counterType, amount, nil
+	if hasParamOn(sub, "UpTo") && amount > 0 {
+		picked := controller.ChooseNumber(g, host.Controller(), host.ID, 0, amount)
+		if picked < 0 || picked > amount {
+			return nil, fmt.Errorf("engine: %q: ETB$ PutCounter: %d is not within 0..%d", name, picked, amount)
+		}
+		amount = picked
+	}
+	kinds, err := g.enterKindChoice(controller, host.Controller(), host.ID, sub, amount)
+	if err != nil {
+		return nil, fmt.Errorf("engine: %q: %w", name, err)
+	}
+	return kinds, nil
+}
+
+// enterKindChoice is the kinds one ETB$ PutCounter puts: ChooseDifferent$ N
+// picks, a CounterType$ list's pick, or the literal kind, each with amount.
+func (g *Game) enterKindChoice(controller PlayerController, decider PlayerID, source CardID, a *compile.Ability, amount int) ([]counterKind, error) {
+	raw, _ := a.Param("CounterType")
+	if rawN, ok := a.Param("ChooseDifferent"); ok {
+		n, err := strconv.Atoi(strings.TrimSpace(rawN))
+		if err != nil {
+			return nil, fmt.Errorf("engine: PutCounter: ChooseDifferent$ %q is not a number", rawN)
+		}
+		options := counterTypeList(raw)
+		var out []counterKind
+		for i := 0; i < n && len(options) > 0; i++ {
+			ct := g.chooseCounterKind(controller, decider, source, options)
+			out = append(out, counterKind{ct, amount})
+			options = slices.DeleteFunc(options, func(o CounterType) bool { return o == ct })
+		}
+		return out, nil
+	}
+	if strings.Contains(raw, ",") {
+		options := counterTypeList(raw)
+		if len(options) == 0 {
+			return nil, fmt.Errorf("engine: PutCounter: CounterType$ %q names no kind", raw)
+		}
+		return []counterKind{{g.chooseCounterKind(controller, decider, source, options), amount}}, nil
+	}
+	ct, err := putCounterType(a)
+	if err != nil {
+		return nil, err
+	}
+	return []counterKind{{ct, amount}}, nil
 }

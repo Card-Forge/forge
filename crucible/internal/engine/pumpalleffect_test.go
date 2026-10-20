@@ -205,34 +205,39 @@ func TestPumpAllEffectChainsIntoSubAbility(t *testing.T) {
 	}
 }
 
-// TestPumpAllEffectRejectsValidTgts proves pumpAllEffect itself still
-// rejects a real target past the blanket ValidCards$ match:
-// resolveTargets (targeting.go) now resolves ValidTgts$ generically before
-// this ability is even pushed, so the target is chosen without issue, but
-// pumpAllEffect has not been extended to consume Targeted (defined.go) yet
-// -- its own blocked-param list still names ValidTgts$, and this proves
-// that check still fires.
-func TestPumpAllEffectRejectsValidTgts(t *testing.T) {
+// TestPumpAllEffectValidTgtsPumpsOnlyTheTargetedPlayersCards proves a PumpAll
+// naming ValidTgts$ Player reads the chosen players' cards, not everyone's
+// (PumpAllEffect.java:133-137), and RememberPumped$ records each pumped card.
+func TestPumpAllEffectValidTgtsPumpsOnlyTheTargetedPlayersCards(t *testing.T) {
 	t.Parallel()
 
 	g := newGame(t, "a", "b")
 	p, other := g.Players()[0], g.Players()[1]
 	g.SetTurnState(1, p, engine.Main1)
 	g.Player(p).Life, g.Player(other).Life = 20, 20
+	mine := g.NewCard(creatureDefPT(t, "1", "1"), p, engine.Battlefield)
+	theirs := g.NewCard(creatureDefPT(t, "1", "1"), other, engine.Battlefield)
 
-	def := etbPumpAllTriggerDefParams(t, "Test PumpAll ValidTgts", "ValidCards$ Creature | NumAtt$ 1 | NumDef$ 1 | ValidTgts$ Player", nil)
+	def := etbPumpAllTriggerDefParams(t, "Test PumpAll ValidTgts", "ValidCards$ Creature | NumAtt$ 1 | NumDef$ 1 | ValidTgts$ Player | RememberPumped$ True", nil)
 	g.Player(p).ManaPool.Add(mana.Green, 1)
 	creature := g.NewCard(def, p, engine.Hand)
 	c := engine.NewScriptedController()
-	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(p)})
+	c.QueueTargets([]engine.EntityID{engine.PlayerEntity(other)})
 	if !g.CastSpell(p, creature, c) {
 		t.Fatal("CastSpell failed casting a creature with exactly enough mana")
 	}
-	err := g.ResolveStack(engine.NewRegistry(), c)
-	if err == nil {
-		t.Fatal("ResolveStack: got nil error, want one naming ValidTgts")
-	} else if !strings.Contains(err.Error(), "ValidTgts") {
-		t.Errorf("ResolveStack error = %q, want it to name ValidTgts$", err.Error())
+	if err := g.ResolveStack(engine.NewRegistry(), c); err != nil {
+		t.Fatalf("ResolveStack: %v", err)
+	}
+	if got, _ := g.Card(theirs).Power(); got != 2 {
+		t.Errorf("the targeted player's creature power = %d, want 2", got)
+	}
+	if got, _ := g.Card(mine).Power(); got != 1 {
+		t.Errorf("the other player's creature power = %d, want 1", got)
+	}
+	remembered := g.Card(creature).Memory.Remembered()
+	if len(remembered) != 1 || remembered[0] != engine.CardEntity(theirs) {
+		t.Errorf("remembered = %v, want only the pumped creature", remembered)
 	}
 }
 
