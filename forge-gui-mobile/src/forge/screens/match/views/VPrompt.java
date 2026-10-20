@@ -141,7 +141,7 @@ public class VPrompt extends FContainer {
             g.fillCircle(pressed || isHovered() ? MENU_BTN_ON : MENU_BTN_OFF, cx, cy, r);
             g.drawCircle(Utils.scale(1), GLASS_EDGE, cx, cy, r);
             final float lineW = r * 1.0f, lineH = Math.max(1.5f, r * 0.14f), gap = r * 0.36f;
-            final com.badlogic.gdx.graphics.Color c = com.badlogic.gdx.graphics.Color.WHITE;
+            final Color c = Color.WHITE;
             for (int i = -1; i <= 1; i++) { //three bars
                 g.fillRect(c, cx - lineW / 2, cy + i * gap - lineH / 2, lineW, lineH);
             }
