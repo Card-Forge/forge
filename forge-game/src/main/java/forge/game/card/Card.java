@@ -34,6 +34,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.perpetual.PerpetualInterface;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.Sticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
@@ -72,6 +75,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.Math.max;
 
@@ -457,7 +462,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updatePTforView() {
-        getView().updateLethalDamage(this);
         currentState.getView().updatePower(this);
         currentState.getView().updateToughness(this);
     }
@@ -601,6 +605,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         currentStateName = state;
         currentState = getState(state);
+        // CR 123.6c - name stickers apply to the name the object has now, face-down included
+        if (isStickered()) {
+            recomputeStickerName();
+        }
 
         updateTypeCache();
         if (updateView) {
@@ -1715,11 +1723,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public final boolean canReceiveCounters(final CounterType type) {
+    public final boolean canReceiveCounters(final CounterType type, Map<AbilityKey, Object> params) {
         if (isPhasedOut()) {
             return false;
         }
-        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
+        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type, params)) {
             return false;
         }
         return true;
@@ -1749,13 +1757,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
-        int addAmount = n;
-
-        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
-            // CR 107.1b
+    public void addCounterInternal(final CounterType counterType, int addAmount, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
+        if (addAmount <= 0) {
             return;
         }
+        // ETB counters are checked after moving
+        if (params != null && params.containsKey(AbilityKey.InternalTriggerTable) && !canReceiveCounters(counterType, params)) {
+            return;
+        }
+
         final int oldValue = getCounters(counterType);
 
         Integer max = getCounterMax(counterType);
@@ -1807,15 +1817,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 runParams.put(AbilityKey.CounterAmount, addAmount);
                 runParams.put(AbilityKey.FirstTime, addedThisTurn == 0);
                 getGame().getTriggerHandler().runTrigger(
-                        TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
+                        TriggerType.CounterAddedOnce, runParams, false);
                 if (cause != null) {
-                    // 702.100b A creature “evolves” when one or more +1/+1 counters are put on it as a result of its evolve ability resolving.
+                    // CR 702.100b A creature “evolves” when one or more +1/+1 counters are put on it as a result of its evolve ability resolving.
                     if (cause.isKeyword(Keyword.EVOLVE) && counterType.is(CounterEnumType.P1P1)) {
                         getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, AbilityKey.mapFromCard(this), false);
                     }
 
-                    // 702.149c Some creatures with training have abilities that trigger when they train.
-                    // “When this creature trains” means “When a resolving training ability puts a +1/+1 counter on this creature.”
+                    // CR 702.149c “When this creature trains” means “When a resolving training ability puts a +1/+1 counter on this creature.”
                     if (cause.isKeyword(Keyword.TRAINING) && counterType.is(CounterEnumType.P1P1)) {
                         getGame().getTriggerHandler().runTrigger(TriggerType.Trains, AbilityKey.mapFromCard(this), false);
                     }
@@ -1969,7 +1978,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void putEtbCounters(Map<Optional<Player>, Multiset<CounterType>> etbCounters) {
+    public final void putEtbCounters(Map<Optional<Player>, Multiset<CounterType>> etbCounters, Map<AbilityKey, Object> params) {
         if (etbCounters == null) {
             return;
         }
@@ -1977,7 +1986,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         for (Multiset<CounterType> m : etbCounters.values()) {
             for (Multiset.Entry<CounterType> e : m.entrySet()) {
                 CounterType ct = e.getElement();
-                if (canReceiveCounters(ct)) {
+                if (canReceiveCounters(ct, params)) {
                     setCounters(ct, getCounters(ct) + e.getCount());
                 }
             }
@@ -2025,6 +2034,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void addChangedSVars(Map<String, String> map, long timestamp, long staticId) {
+        Map<String, String> existing = this.changedSVars.get(timestamp, staticId);
+        if (existing != null && !existing.isEmpty()) {
+            Map<String, String> merged = Maps.newHashMap(existing);
+            merged.putAll(map);
+            map = merged;
+        }
         this.changedSVars.put(timestamp, staticId, map);
     }
     public final void removeChangedSVars(long timestamp, long staticId) {
@@ -2431,8 +2446,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!mayPlay.isEmpty()) {
             PlayerCollection players = new PlayerCollection();
             for (CardPlayOption o : mayPlay.values()) {
-                if (getController() == o.getPlayer() || o.grantsZonePermissions())
-                    players.add(o.getPlayer());
+                if (o.grantsZonePermissions()) {
+                    players.addAll(o.getPlayers());
+                } else if (o.appliesTo(getController())) {
+                    players.add(getController());
+                }
             }
             if (!players.isEmpty()) {
                 sb.append("May be played by: ");
@@ -2690,6 +2708,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Chapter")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap") || keyword.startsWith("ETBReplacement")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
+                        || keyword.startsWith("StickerSheet")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Web-slinging")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous") || keyword.startsWith("Firebending")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
@@ -3809,14 +3828,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final List<CardPlayOption> mayPlay(final Player player) {
         List<CardPlayOption> result = Lists.newArrayList();
         for (CardPlayOption o : mayPlay.values()) {
-            if (o.getPlayer().equals(player)) {
+            if (o.appliesTo(player)) {
                 result.add(o);
             }
         }
         return result;
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
-        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
+    public final void setMayPlay(final PlayerCollection players, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
+        this.mayPlay.put(sta, new CardPlayOption(players, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);
@@ -4205,6 +4224,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final int getCurrentLoyalty() {
         return getCounters(CounterEnumType.LOYALTY);
     }
+    public final String getBaseLoyalty() { return currentState.getBaseLoyalty(); }
     public final void setBaseLoyalty(final int n) {
         currentState.setBaseLoyalty(Integer.toString(n));
     }
@@ -4593,6 +4613,105 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void setIntensity(final int n) { intensity = n; }
     public final boolean hasIntensity() {
         return intensity > 0;
+    }
+
+    private List<AppliedSticker> stickers = new ArrayList<>();
+    private List<Sticker> sheetStickers;
+
+    public final List<Sticker> getSheetStickers() {
+        return sheetStickers;
+    }
+    public final void setSheetStickers(final List<Sticker> read) {
+        sheetStickers = read;
+    }
+
+    // CR 123.4
+    public final boolean isStickered() {
+        return !stickers.isEmpty();
+    }
+    public final List<AppliedSticker> getStickers() {
+        return stickers;
+    }
+    public final void addSticker(final AppliedSticker s) {
+        stickers.add(s);
+        s.applyEffect(this);
+        updateStickersForView();
+    }
+    // CR 123.5
+    public final void setStickers(final Card oldCard) {
+        stickers = new ArrayList<>(oldCard.getStickers());
+        for (AppliedSticker s : stickers) {
+            s.applyEffect(this);
+        }
+        updateStickersForView();
+    }
+    // CR 123.5b/c
+    public final void takeStickersFrom(final Card other) {
+        for (AppliedSticker s : other.getStickers()) {
+            s.removeEffect(other);
+            stickers.add(s);
+            s.applyEffect(this);
+        }
+        other.stickers = new ArrayList<>();
+        other.view.updateStickers(other);
+        updateStickersForView();
+    }
+
+    private void updateStickersForView() {
+        view.updateStickers(this);
+        refreshSheetViews(getOwner());
+    }
+
+    public static void refreshSheetViews(final Player p) {
+        if (p == null) {
+            return;
+        }
+        for (Card sheet : p.getCardsIn(ZoneType.StickerSheets)) {
+            sheet.view.updateStickers(sheet);
+        }
+    }
+
+    /**
+     * CR 123.6c - name stickers apply in timestamp order. Each fills the leftmost blank still
+     * empty (CR 123.6a); with none left it goes after its chosen number of words.
+     */
+    public final void recomputeStickerName() {
+        List<AppliedSticker> nameStickers = new ArrayList<>();
+        for (AppliedSticker s : stickers) {
+            if (s.getKind() == StickerKind.NAME) {
+                nameStickers.add(s);
+            }
+        }
+        if (nameStickers.isEmpty()) {
+            return;
+        }
+        nameStickers.sort(Comparator.comparingLong(AppliedSticker::getTimestamp));
+
+        String name = StringUtils.defaultString(currentState.getName());
+        for (AppliedSticker s : nameStickers) {
+            name = addStickerWord(name, s.getSticker().getWord(), s.getNamePosition());
+        }
+        addChangedName(name, false, nameStickers.get(nameStickers.size() - 1).getTimestamp(), 0);
+    }
+
+    private static final Pattern NAME_BLANK = Pattern.compile("_{2,}");
+
+    public static String addStickerWord(final String name, final String word, final int position) {
+        Matcher blank = NAME_BLANK.matcher(name);
+        if (blank.find()) {
+            return name.substring(0, blank.start()) + word + name.substring(blank.end());
+        }
+        List<String> words = new ArrayList<>();
+        if (StringUtils.isNotBlank(name)) {
+            Collections.addAll(words, name.split(" "));
+        }
+        words.add(Math.min(position, words.size()), word);
+        return String.join(" ", words);
+    }
+
+    public final boolean stickerWouldFillBlank() {
+        String name = getName();
+        return StringUtils.isNotEmpty(name) && NAME_BLANK.matcher(name).find();
     }
 
     private List<PerpetualInterface> perpetual = new ArrayList<>();

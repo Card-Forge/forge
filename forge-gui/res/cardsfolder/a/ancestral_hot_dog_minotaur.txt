@@ -1,0 +1,15 @@
+Name:Ancestral Hot Dog Minotaur
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Ancestral
+SVar:STK2:Kind$ Name | Word$ Hot Dog
+SVar:STK3:Kind$ Name | Word$ Minotaur
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Afflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.) | Keywords$ Afflict:2
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Flying | Keywords$ Flying
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 1 | Toughness$ 4
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 8 | Toughness$ 6
+Oracle:{TK}{TK} — Afflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.)\n{TK}{TK}{TK} — Flying\n{TK}{TK} — 1/4\n{TK}{TK}{TK}{TK}{TK} — 8/6

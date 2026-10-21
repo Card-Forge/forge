@@ -6,8 +6,26 @@ Type=Commander
 ScryfallCode=TRC
 
 [cards]
+1 M The Borg Queen @Jodie Muir
+2 M Commander Spock @Sam Kennedy
+3 M Jean-Luc Picard, Luminary @Jason Pastrana
+4 M Worf, Defiant Commander @Flavio Greco Paglia
+5 M The Borg Queen @Jodie Muir
+6 M Commander Spock @Sam Kennedy
+7 M Jean-Luc Picard, Luminary @Jason Pastrana
+8 M Worf, Defiant Commander @Flavio Greco Paglia
+17 R Guinan, Ancient Advisor @Nicky Barkla
+20 R Join the Collective @Lordigan
+29 R Spot, Felis catus @Leesha Hannigan
+72 R Koloth, Tribble Hunter @Eric Wilkerson
 78 R Christine Chapel, Combat Medic @Pauline Voss
 85 M Captain Kirk, Boldly Going @Josh Newton
+97 M Locutus of Borg @Anton Solovianchyk
+111 R Command Chair @Jason Smith
+121 R Starfleet Communicator @Wero Gallo
+122 R Starship Enterprise @Dofresh
+123 R The Sword of Kahless @Enora Mercier
+131 R Borg Queen, One Who Is Many @Erion Makuo
 132 C Evasive Maneuvers @Evan Shipard
 133 C Head of Security @Alexey Kot
 137 U Shuttle Crew @Pierre Raveneau
@@ -43,7 +61,16 @@ ScryfallCode=TRC
 199 R Klingon Strike Force @Fahmi Fauzi
 200 M Benjamin Sisko, Besieged @Josu Hernaiz
 201 R Tenacious Tosk @Filipe Pagliuso
+209 M Locutus of Borg @Mintautas Šukys
+211 R Starship Enterprise @Maxim Ruabtsev
+223 R Guinan, Ancient Advisor @Nicky Barkla
+226 R Join the Collective @Lordigan
+237 R Spot, Felis catus @Leesha Hannigan
+289 R Koloth, Tribble Hunter @Eric Wilkerson
 300 R Christine Chapel, Combat Medic @Pauline Voss
+340 R Command Chair @Jason Smith
+356 R Starfleet Communicator @Wero Gallo
+357 R The Sword of Kahless @Enora Mercier
 579 C Refute @Mark Spears
 580 C Last Gasp @Arthur Haas
 582 C Run Amok @Carlos C Diaz

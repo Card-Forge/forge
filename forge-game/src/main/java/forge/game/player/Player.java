@@ -24,6 +24,7 @@ import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.deck.DeckFormat;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -57,6 +58,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -76,7 +78,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck,
-            ZoneType.Junkyard, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+            ZoneType.Junkyard, ZoneType.StickerSheets, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
     private int life = 20;
     private int startingLife = 20;
@@ -308,8 +310,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateFlashbackForView() {
+        final FCollectionView<CardView> before = view.getFlashback();
         view.updateFlashback(this);
-        game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
+        if (!before.equals(view.getFlashback())) {
+            game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
+        }
     }
 
     //get single opponent for player if only one, otherwise returns null
@@ -533,6 +538,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         boolean firstLost = lifeLostThisTurn == 0;
         lifeLostThisTurn += toLose;
+        // a chain of triggers that costs life ends by itself
+        game.getStack().clearTriggerRepeats();
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, toLose);
@@ -827,7 +834,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(game.getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
     }
 
-    public final boolean canReceiveCounters(final CounterType type) {
+    public final boolean canReceiveCounters(final CounterType type, Map<AbilityKey, Object> params) {
         if (!isInGame()) {
             return false;
         }
@@ -846,9 +853,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
-        int addAmount = n;
-        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
+    public void addCounterInternal(final CounterType counterType, final int addAmount, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
+        if (addAmount <= 0) {
             // As per rule 107.1b
             return;
         }
@@ -1130,6 +1136,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             return drawn;
         }
 
+        // A card is about to leave a hidden library: whoever draws it learns something, so no undo past this point
+        game.getUndoManager().barrier("Card drawn");
+
         // always allow drawing cards before the game actually starts (e.g. Maralen of the Mornsong Avatar)
         final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
 
@@ -1197,7 +1206,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (!library.isEmpty()) {
             Card c;
-            if (hasKeyword("You draw cards from the bottom of your library instead of the top of your library.")) {
+
+            if (drawsFromBottom()) {
                 c = library.get(library.size() - 1);
             } else {
                 c = library.get(0);
@@ -1576,6 +1586,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             milled = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
         }
 
+        game.getUndoManager().barrier("Cards milled");
         for (Card m : milled) {
             Card moved = game.getAction().moveTo(destination, m, sa, params);
             moved.setMilled(true);
@@ -2456,6 +2467,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return StaticAbilityTurnPhaseReversed.isPhaseReversed(this);
     }
 
+    public boolean drawsFromBottom() {
+        return StaticAbilityDrawFromBottom.drawsFromBottom(this);
+    }
+
     public void onCleanupPhase() {
         for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);
@@ -2980,8 +2995,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             getZone(ZoneType.PlanarDeck).shuffle();
         }
 
-        // Commander
-        if (!registeredPlayer.getCommanders().isEmpty()) {
+        // Commander. A game restarted by Karn Liberated keeps the commanders it has
+        final boolean addCommanders = getCommanders().isEmpty();
+        if (addCommanders && !registeredPlayer.getCommanders().isEmpty()) {
             for (PaperCard pc : registeredPlayer.getCommanders()) {
                 Card cmd = Card.fromPaperCard(pc, this);
                 initCommanderColor(cmd);
@@ -2990,7 +3006,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.addCommander(cmd);
             }
         }
-        else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
+        else if (addCommanders && registeredPlayer.getPlaneswalker() != null) { // Planeswalker
             Card cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
             cmd.setCollectible(true);
             cmd.setCommander(true);
@@ -3035,6 +3051,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (!attractionDeck.isEmpty())
             attractionDeck.shuffle();
+
+        // Sticker sheets - CR 123.2a/c: only the three chosen are kept
+        PlayerZone stickerSheets = getZone(ZoneType.StickerSheets);
+        for (IPaperCard cp : Aggregates.random(registeredPlayer.getStickerSheets(), DeckFormat.CHOSEN_STICKER_SHEETS)) {
+            Card sheet = Card.fromPaperCard(cp, this);
+            sheet.setCollectible(false);
+            stickerSheets.add(sheet);
+        }
+        Card.refreshSheetViews(this);
 
         // Contraptions
         PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);

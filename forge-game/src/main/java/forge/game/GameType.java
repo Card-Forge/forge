@@ -19,6 +19,7 @@ public enum GameType {
 
     Sealed              (DeckFormat.Limited, true, true, true, "lblSealed", ""),
     Draft               (DeckFormat.Limited, true, true, true, "lblDraft", ""),
+    CommanderDraft      (DeckFormat.CommanderDraft, true, true, true, "lblCommanderDraft", "lblCommanderDraftDesc"),
     Winston             (DeckFormat.Limited, true, true, true, "lblWinston", ""),
     Gauntlet            (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
     Tournament          (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
@@ -70,7 +71,7 @@ public enum GameType {
         return deck;
     });
 
-    private static final EnumSet<GameType> DRAFT_FORMATS = EnumSet.of(Draft, QuestDraft, AdventureEvent);
+    private static final EnumSet<GameType> DRAFT_FORMATS = EnumSet.of(Draft, CommanderDraft, QuestDraft, AdventureEvent);
 
     private final DeckFormat deckFormat;
     private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame;
@@ -157,11 +158,12 @@ public enum GameType {
         if(!deckFormat.getPrimaryDeckSections().contains(DeckSection.Main))
             return EnumSet.noneOf(DeckSection.class); //Already an extra deck, like a dedicated Scheme or Planar deck.
         if(deckFormat == DeckFormat.Limited)
-            return EnumSet.of(DeckSection.Conspiracy, DeckSection.Contraptions, DeckSection.Attractions);
+            return EnumSet.of(DeckSection.Conspiracy, DeckSection.Contraptions, DeckSection.Attractions,
+                    DeckSection.Stickers);
         if(this == Constructed || this == Commander)
             return EnumSet.of(DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
-                    DeckSection.Attractions, DeckSection.Contraptions);
-        return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions);
+                    DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
+        return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions, DeckSection.Stickers);
     }
 
     public static GameType smartValueOf(String name) {

@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 import org.jupnp.UpnpServiceConfiguration;
 
 public interface IGuiBase {
+
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();
@@ -29,7 +30,7 @@ public interface IGuiBase {
     void invokeInEdtAndWait(Runnable proc);
     void runBackgroundTask(String message, Runnable task);
     boolean isGuiThread();
-
+    default boolean isMatchInProgress() { return false; }
     String getAssetsDir();
     ImageFetcher getImageFetcher();
     ISkinImage getSkinIcon(FSkinProp skinProp);

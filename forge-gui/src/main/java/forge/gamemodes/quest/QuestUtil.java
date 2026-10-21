@@ -164,6 +164,7 @@ public class QuestUtil {
      * readExtraCard.
      * </p>
      * Creates single card for a string read from unique event properties.
+     * Used for creating the starting cards on the battlefield
      *
      * @param name
      *            the name

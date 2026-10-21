@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Finn the Human
+Title=Finn the Human
+Icon=Finn the Human.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/KingHairy_-_Mono_Green_Landfall_(Standard,_#888406).dck
+Deck Type=constructed
+
+[Main]
+4 Earthbender Ascension
+4 Mightform Harmonizer
+2 Meltstrider's Resolve
+4 Escape Tunnel
+4 Sazh's Chocobo
+3 Ba Sing Se
+4 Llanowar Elves
+4 Icetill Explorer
+4 Fabled Passage
+2 Surrak, Elusive Hunter
+1 Cavern of Souls
+1 Promising Vein
+2 Glimpse the Core
+1 Royal Treatment
+13 Forest
+4 Esper Origins
+3 Sapling Nursery
+[Sideboard]
+2 Meltstrider's Resolve
+1 Surrak, Elusive Hunter
+1 Royal Treatment
+3 Torpor Orb
+2 Soul-Guide Lantern
+2 Warg Tactics
+4 Mossborn Hydra

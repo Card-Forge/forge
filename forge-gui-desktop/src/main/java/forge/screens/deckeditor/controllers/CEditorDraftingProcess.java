@@ -256,6 +256,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         Deck humanDeck = (Deck) player.getDeck().copyTo(s);
 
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
+        if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
+            humanDeck.getTags().add("CommanderDraft");
+        }
         finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
@@ -267,8 +270,18 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         FScreen.DRAFTING_PROCESS.close();
 
         //open draft pool in Draft Deck Editor right away
-        Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
+        if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                    new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
+                            FScreen.DECK_EDITOR_DRAFT, getCDetailPicture(),
+                            ((BoosterDraft) boosterDraft).getFreeCommanderName()));
+        } else {
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
+        }
+
+
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
     }
 

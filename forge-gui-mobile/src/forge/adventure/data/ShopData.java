@@ -18,8 +18,8 @@ public class ShopData {
     public Array<RewardData> rewards;
     public String overlaySprite = "";
 
-
-
-
-
+    public String getDescription() {
+        return forge.Forge.getLocalizer().getMessageorUseDefault(
+            "adv.shop." + name + ".description", description);
+    }
 }
