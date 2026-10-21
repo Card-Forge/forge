@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | Descrip
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAssimilate | TriggerDescription$ When NICKNAME enters, assimilate target creature card from an opponent's graveyard. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
 SVar:TrigAssimilate:DB$ Assimilate | TgtZone$ Graveyard | ValidTgts$ Creature.OppOwn | ValidTgtsDesc$ creature card in an opponent's graveyard
 DeckHas:Ability$Graveyard|Counters
+SVar:PlayMain1:TRUE
 Oracle:Artifact creatures you control get +2/+0.\nWhen Borg Queen enters, assimilate target creature card from an opponent's graveyard. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
