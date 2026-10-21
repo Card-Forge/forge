@@ -5,6 +5,6 @@ PT:0/4
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your first main phase, draw a card. Then discard a card unless you control five or more differently named lands.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5
-A:AB$ Animate | Defined$ Self | Power$ 7 | Toughness$ 9 | CheckSVar$ X | SVarCompare$ GE7 | Duration$ Permanent | SpellDescription$ NICKNAME's base power and toughness become 7/9. Activate only if you control seven or more differently named lands.
+A:AB$ Animate | Cost$ 6 U | Defined$ Self | Power$ 7 | Toughness$ 9 | CheckSVar$ X | SVarCompare$ GE7 | Duration$ Permanent | SpellDescription$ NICKNAME's base power and toughness become 7/9. Activate only if you control seven or more differently named lands.
 SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
 Oracle:At the beginning of your first main phase, draw a card. Then discard a card unless you control five or more differently named lands.\n{6}{U}: Seven of Nine's base power and toughness become 7/9. Activate only if you control seven or more differently named lands.
