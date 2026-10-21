@@ -1,0 +1,8 @@
+Name:Khan, Vengeful Heart
+ManaCost:2 B B
+Types:Legendary Creature Human Warrior
+PT:5/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When Khan enters, you may sacrifice another creature or artifact. If you do, draw two cards.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | NumCards$ 2
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast this card from exile.
+Oracle:When Khan enters, you may sacrifice another creature or artifact. If you do, draw two cards.\nYou may cast this card from exile.
