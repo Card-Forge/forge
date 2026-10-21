@@ -231,9 +231,7 @@ public class AdventureQuestData implements Serializable {
                 stage.setTargetPOI(poiTokens, this.name);
         }
 
-        if (stage.getTargetPOI() != null
-                && ("cave".equalsIgnoreCase( stage.getTargetPOI().getData().type)
-                || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
+        if (stage.getTargetPOI() != null && stage.getTargetPOI().getData().isDungeon()) {
             //todo: decide how to handle this in "anyPOI" scenarios
             WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID()).clearDeletedObjects();
         }
