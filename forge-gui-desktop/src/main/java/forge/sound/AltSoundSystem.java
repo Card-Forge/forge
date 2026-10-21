@@ -25,8 +25,8 @@ import forge.sound.SoftwareMixer.Voice;
  * @author Agetian
  */
 public final class AltSoundSystem {
-    /** How many copies of one sound may overlap. */
-    private static final int MAX_SOUND_ITERATIONS = 5;
+    /** How many copies of one sound may overlap, including scheduled repeats. */
+    private static final int MAX_SOUND_ITERATIONS = 16;
 
     private static final Map<String, Sound> sounds = new ConcurrentHashMap<>();
 
@@ -50,7 +50,7 @@ public final class AltSoundSystem {
             return;
         }
         final float volume = FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS) / 100f;
-        sound.voices.add(SoftwareMixer.play(sound.pcm, volume, false, 0));
+        sound.voices.add(SoftwareMixer.play(sound.pcm, volume, false, SoftwareMixer.repeatDelayMillis(filename)));
     }
 
     private static Sound load(final String filename) {
