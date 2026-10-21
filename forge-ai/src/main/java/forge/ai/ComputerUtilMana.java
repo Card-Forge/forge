@@ -1494,11 +1494,12 @@ public class ComputerUtilMana {
             for (SpellAbility ma : src.getManaAbilities()) {
                 ma.setActivatingPlayer(p);
                 if (!checkPlayable || ma.canPlay()) {
-                    int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
-                    int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
-                    int producedAmount = AbilityUtils.calculateAmount(src, ma.getParamOrDefault("Amount", "1"), ma);
-
-                    int producedTotal = producedMana * producedAmount - costsToActivate;
+                    int costsToActivate = getManaToActivate(ma);
+                    int producedTotal = -costsToActivate;
+                    // a sub-ability can make the mana instead, when the first part's condition isn't met
+                    for (SpellAbility part = ma; part != null; part = part.getSubAbility()) {
+                        producedTotal += part.amountOfManaGenerated(true);
+                    }
 
                     if (costsToActivate > 0) {
                         producedWithCost += producedTotal;

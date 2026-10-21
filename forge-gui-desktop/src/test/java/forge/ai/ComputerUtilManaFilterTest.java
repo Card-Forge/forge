@@ -116,4 +116,21 @@ public class ComputerUtilManaFilterTest extends AITest {
 
         AssertJUnit.assertTrue(payForReal(firstWing, ai));
     }
+
+    @Test
+    public void manaEstimateCountsAChoiceOfColorsOnce() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Plains", ai);
+        addCard("Azorius Guildgate", ai); // Add {W} or {U}
+        addCard("Mystic Gate", ai); // {W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U}
+        addCard("Azorius Signet", ai); // {1}, {T}: Add {W}{U}
+        addCard("Crystal Quarry", ai); // {T}: Add {C}, or {5}, {T}: Add {W}{U}{B}{R}{G}
+        addCard("River of Tears", ai); // Add {U}, or {B} instead after a land drop
+        ai.setLandsPlayedThisTurn(1);
+
+        AssertJUnit.assertEquals("each of the six makes one mana more than it costs", 6,
+                ComputerUtilMana.getAvailableManaEstimate(ai));
+    }
 }
