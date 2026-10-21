@@ -2,8 +2,10 @@ package forge.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import forge.Forge;
 import forge.Graphics;
 import forge.screens.FScreen.Header;
@@ -12,6 +14,12 @@ import forge.screens.match.MatchController;
 public class FMenuBar extends Header {
     private final List<FMenuTab> tabs = new ArrayList<>();
     private int selected = -1;
+    private BooleanSupplier glass = () -> false;
+    private static final Color GLASS = new Color(35 / 255f, 40 / 255f, 44 / 255f, 0.88f);
+
+    /** Frosted look used by the match screen's compact layout. */
+    public void setGlass(BooleanSupplier glass0) { glass = glass0; }
+    public boolean isGlass() { return glass.getAsBoolean(); }
 
     public FMenuTab addTab(String text0, FDropDown dropDown0) {
         return addTab(text0, dropDown0, false);
@@ -76,7 +84,7 @@ public class FMenuBar extends Header {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.fillRect(getBackColor(), 0, 0, w, h);
+        g.fillRect(isGlass() ? GLASS : getBackColor().getColor(), 0, 0, w, h);
     }
 
     @Override
@@ -120,6 +128,23 @@ public class FMenuBar extends Header {
         for (FMenuTab fMenuTab : tabs) {
             fMenuTab.hideDropDown();
         }
+    }
+
+    /** closes every drop-down except the given one (e.g. the stack, which must outlive a popup bar) */
+    public void closeAllExcept(FDropDown keep) {
+        for (FMenuTab fMenuTab : tabs) {
+            if (fMenuTab.getDropDown() != keep)
+                fMenuTab.hideDropDown();
+        }
+    }
+
+    /** true when a drop-down other than the given one is open */
+    public boolean isShowingMenuExcept(FDropDown skip) {
+        for (FMenuTab fMenuTab : tabs) {
+            if (fMenuTab.getDropDown() != skip && fMenuTab.getDropDown().isVisible())
+                return true;
+        }
+        return false;
     }
 
     public boolean isShowingMenu(boolean anyDropdown) {

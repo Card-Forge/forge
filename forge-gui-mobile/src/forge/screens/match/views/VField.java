@@ -22,6 +22,8 @@ public class VField extends FContainer {
     private boolean flipped;
     private float commandZoneWidth;
     private float fieldModifier;
+    private float endPadding;
+    private float contentAlignment; //0 cards start on the left, 0.5 they are centered, 1 they end on the right
     private final boolean stackNonTokenCreatures;
     private final List<CardView> creatures = new ArrayList<>();
     private final List<CardView> lands = new ArrayList<>();
@@ -230,6 +232,22 @@ public class VField extends FContainer {
         commandZoneWidth = commandZoneWidth0;
     }
 
+    void setContentAlignment(float alignment) {
+        if (contentAlignment == alignment) { return; }
+        contentAlignment = alignment;
+        row1.revalidate(true);
+        row2.revalidate(true);
+    }
+
+    //compact zone tabs: the zone box covers the field's right end, so the rows keep (or can scroll) their cards clear of it
+    void setEndPadding(float padding) {
+        padding = Math.round(Math.max(0f, padding));
+        if (endPadding == padding) { return; }
+        endPadding = padding;
+        row1.revalidate(true);
+        row2.revalidate(true);
+    }
+
     void setFieldModifier(float fieldModifierWidth) {
         fieldModifier = fieldModifierWidth;
     }
@@ -264,7 +282,20 @@ public class VField extends FContainer {
         }
 
         @Override
+        protected void drawBackground(forge.Graphics g) { } //battlefield rows never get the zone backing
+
+        @Override
         protected boolean animateEntry() { return true; }
+
+        @Override
+        protected float getContentAlignment() {
+            return contentAlignment;
+        }
+
+        @Override
+        protected float getEndPadding() {
+            return endPadding;
+        }
 
         @Override
         protected float getCardWidth(float cardHeight) {

@@ -95,7 +95,7 @@ public class ReplacementHandler {
             // need to apply Counters to check its future state on the battlefield
             @SuppressWarnings("unchecked")
             Map<Optional<Player>, Multiset<CounterType>> etbCounters = (Map<Optional<Player>, Multiset<CounterType>>) runParams.get(AbilityKey.CounterMap);
-            affectedLKI.putEtbCounters(etbCounters);
+            affectedLKI.putEtbCounters(etbCounters, runParams);
             preList.add(affectedLKI);
             // CR 614.12 only continuous effects that already exist apply
             Set<Card> entering = null;

@@ -2,10 +2,17 @@ package forge.screens.match;
 
 import static forge.Forge.getLocalizer;
 
+import com.badlogic.gdx.utils.Timer;
 import forge.screens.match.views.*;
 import forge.toolbox.FOptionPane;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
@@ -118,6 +125,8 @@ public class MatchScreen extends FScreen {
                 e -> getGameController().selectButtonOk(),
                 e -> getGameController().selectButtonCancel()));
 
+        bottomPlayerPrompt.setOverMatch(true);
+
         if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetPlay(MatchController.instance))
             topPlayerPrompt = null;
         else {
@@ -125,6 +134,7 @@ public class MatchScreen extends FScreen {
             topPlayerPrompt = add(new VPrompt("", "",
                     e -> getGameController().selectButtonOk(),
                     e -> getGameController().selectButtonCancel()));
+            topPlayerPrompt.setOverMatch(true);
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
             getHeader().setRotate90(true);
@@ -177,6 +187,42 @@ public class MatchScreen extends FScreen {
         endpoints = new HashMap<>();
         cardsonBattlefield  = new HashSet<>();
         playerViewSet = new HashSet<>();
+
+        if (topPlayerPrompt == null) {
+            //the menu bar pops up over the top of the field in the compact layout, so it must draw above everything else
+            remove(getHeader());
+            add(getHeader());
+            bottomPlayerPrompt.setMenuButton(VPlayerPanel.isMenuHidden(), this::toggleMenuBar);
+        }
+    }
+
+    //compact layout with a hidden top menu: the bar slides over the top of the field for a few seconds when the menu button
+    //is pressed, and closes by itself once no menu of it is open
+    private static final float MENU_BAR_SECONDS = 5f;
+    private boolean menuBarShown;
+    private final Timer.Task menuBarHideTask = new Timer.Task() {
+        @Override
+        public void run() {
+            if (((FMenuBar) getHeader()).isShowingMenuExcept(stack)) { //a menu is open: keep the bar until it closes
+                Timer.schedule(this, 2f);
+                return;
+            }
+            setMenuBarShown(false);
+        }
+    };
+
+    private void toggleMenuBar() {
+        setMenuBarShown(!menuBarShown);
+    }
+
+    private void setMenuBarShown(boolean shown) {
+        menuBarHideTask.cancel();
+        if (shown) { Timer.schedule(menuBarHideTask, MENU_BAR_SECONDS); }
+        if (menuBarShown != shown) {
+            menuBarShown = shown;
+            if (!shown) { ((FMenuBar) getHeader()).closeAllExcept(stack); } //an open stack stays up
+            revalidate();
+        }
     }
 
     private VPlayerPanel liveTop() { return playerPanelsList.get(0); }
@@ -323,6 +369,19 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        ((FMenuBar) getHeader()).setGlass(VPlayerPanel::isFrosted);
+        if (topPlayerPrompt == null) {
+            final boolean hidden = VPlayerPanel.isMenuHidden();
+            bottomPlayerPrompt.setMenuButton(hidden, this::toggleMenuBar);
+            if (hidden) { //the field takes the height of the bar; the bar floats over it while shown, or waits just above the screen
+                final float barHeight = getHeader().getHeight();
+                getHeader().setBounds(0, menuBarShown ? 0 : -barHeight, width, barHeight);
+                startY = 0;
+            } else if (menuBarShown) {
+                menuBarShown = false;
+                menuBarHideTask.cancel();
+            }
+        }
         float scrollerWidth = width;
         if (topPlayerPrompt != null) {
             topPlayerPrompt.setBounds(0, 0, width, VPrompt.HEIGHT);
@@ -481,7 +540,20 @@ public class MatchScreen extends FScreen {
 
             Rectangle a = anchor.screenPos;
             float x, y;
-            if (sideDisplay != null) {
+            if (sideDisplay != null && VPlayerPanel.isCompactLayout()) {
+                //compact layout: zones are boxes along the panel's outer edge, so the preview goes on the field side of the box,
+                //over the card being inspected (or over the middle of the box while scrubbing, so it doesn't jump)
+                Rectangle d = sideDisplay.screenPos;
+                float cardCenter = d.x + d.width / 2;
+                if (!dragging && anchor instanceof FCardPanel) {
+                    cardCenter = a.x + a.width / 2;
+                } else if (sideDisplay instanceof VCardDisplayArea cardArea && cardArea.getDragPanel() != null) {
+                    cardCenter = cardArea.getDragPanel().screenPos.x + cardArea.getDragPanel().screenPos.width / 2;
+                }
+                x = Math.max(left, Math.min(cardCenter - w / 2, right - w));
+                boolean outerEdgeAtTop = owner != null && owner.isFlipped();
+                y = outerEdgeAtTop ? d.y + d.height + PREVIEW_GAP : d.y - h - PREVIEW_GAP;
+            } else if (sideDisplay != null) {
                 Rectangle d = sideDisplay.screenPos;
                 x = Math.max(left, d.x - w - PREVIEW_GAP); //may cover other open displays while previewing
                 y = d.y + d.height / 2 - h / 2;            //centered on the display so it doesn't jump while scrubbing
@@ -894,7 +966,7 @@ public class MatchScreen extends FScreen {
     }
 
     private float getPlayerBgHeight(float midField, float y) {
-        return (midField + liveBottom().getField().getHeight() * liveMultiplier()) - y;
+        return (midField + liveBottom().getBackgroundHeight() * liveMultiplier()) - y;
     }
 
     private class BGAnimation extends ForgeAnimation {
@@ -952,9 +1024,9 @@ public class MatchScreen extends FScreen {
                         if (!recomputed) {
                             float midField = liveTop().getBottom();
                             float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-                            float xx = liveTop().getField().getLeft();
-                            float yy = midField - liveTop().getField().getHeight() - promptHeight;
-                            float ww = getWidth() - xx;
+                            float xx = liveTop().getBackgroundLeft();
+                            float yy = midField - liveTop().getBackgroundHeight() - promptHeight;
+                            float ww = getWidth() - xx - liveTop().getBackgroundRightInset();
                             float bgFullWidth, scaledbgHeight;
                             int multiplier = liveMultiplier();
                             float bgHeight = getPlayerBgHeight(midField, yy);
@@ -1013,9 +1085,9 @@ public class MatchScreen extends FScreen {
             }
             final float midField = liveTop().getBottom();
             final float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-            float x = liveTop().getField().getLeft();
-            float y = midField - liveTop().getField().getHeight() - promptHeight;
-            float w = getWidth() - x;
+            float x = liveTop().getBackgroundLeft();
+            float y = midField - liveTop().getBackgroundHeight() - promptHeight;
+            float w = getWidth() - x - liveTop().getBackgroundRightInset();
             float bgFullWidth, scaledbgHeight;
             final int multiplier = liveMultiplier();
             float bgHeight = getPlayerBgHeight(midField, y);
@@ -1121,6 +1193,15 @@ public class MatchScreen extends FScreen {
                         }
                     }
                     losers.clear();
+                    //whoever now sits at the bottom takes the bottom layout (field rows and zones), everyone else stays mirrored
+                    for (int i = 0; i < playerPanelsList.size(); i++) {
+                        VPlayerPanel panel = playerPanelsList.get(i);
+                        boolean flip = i != playerPanelsList.size() - 1;
+                        if (panel.isFlipped() != flip) {
+                            panel.setFlipped(flip);
+                            panel.revalidate(true);
+                        }
+                    }
                     if (playerPanelsList.size() == 2) {
                         //reset avatar size
                         for (VPlayerPanel playerPanel : playerPanelsList) {

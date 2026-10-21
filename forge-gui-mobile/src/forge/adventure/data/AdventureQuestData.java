@@ -290,7 +290,7 @@ public class AdventureQuestData implements Serializable {
         }
         for (Enumeration<String> enemy = enemyTokens.keys(); enemy.hasMoreElements();){
             String enemyKey = enemy.nextElement();
-            data = data.replace(enemyKey, enemyTokens.get(enemyKey).getName());
+            data = data.replace(enemyKey, enemyTokens.get(enemyKey).getDisplayName());
         }
         for (Enumeration<String> other = otherTokens.keys(); other.hasMoreElements();){
             String key = other.nextElement();
@@ -317,8 +317,8 @@ public class AdventureQuestData implements Serializable {
 
         for (Enumeration<String> e = enemyTokens.keys(); e.hasMoreElements();){
             String key = e.nextElement();
-            data.text = data.text.replace(key, enemyTokens.get(key).getName());
-            data.name = data.name.replace(key, enemyTokens.get(key).getName());
+            data.text = data.text.replace(key, enemyTokens.get(key).getDisplayName());
+            data.name = data.name.replace(key, enemyTokens.get(key).getDisplayName());
         }
 
         for (Enumeration<String> other = otherTokens.keys(); other.hasMoreElements();){

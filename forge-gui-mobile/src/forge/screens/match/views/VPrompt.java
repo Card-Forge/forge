@@ -1,5 +1,6 @@
 package forge.screens.match.views;
 
+import com.badlogic.gdx.graphics.Color;
 import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,6 +38,13 @@ public class VPrompt extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
     public static final float PADDING = Utils.scale(2);
+    private static final Color COMPACT_SCRIM = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.62f);
+    private static final Color MENU_BTN_ON = new Color(1f, 1f, 1f, 0.28f);
+    private static final Color MENU_BTN_OFF = new Color(1f, 1f, 1f, 0.14f);
+    private static final java.util.regex.Pattern FROSTED_BREAKS = java.util.regex.Pattern.compile("\\s*\\n+\\s*");
+    private String frostedSource, frostedText; //the frosted message block is fitted once per message and size, not every frame
+    private float frostedW, frostedH;
+    private FSkinFont frostedFont;
     public static final FSkinFont FONT = FSkinFont.get(14);
     public static FSkinColor getBackColor() {
         if (Forge.isMobileAdventureMode)
@@ -57,6 +65,9 @@ public class VPrompt extends FContainer {
     private static final float UNDO_SIZE = HEIGHT * 0.62f;
     private static final float UNDO_GAP = Utils.scale(10);
     private final UndoButton btnUndo;
+    private final MenuButton btnMenu;
+    private boolean menuShown;       //the compact layout hides the top menu, so this prompt carries the button that shows it
+    private Runnable menuAction;
     private boolean undoShown;      //whether the undo button is currently part of the layout
     private boolean undoRequested;  //the game labelled Cancel as Undo, so there is something to undo
 
@@ -84,6 +95,59 @@ public class VPrompt extends FContainer {
         return undoIcon;
     }
 
+    private boolean overMatch; //the match screen's own prompts float over the background in the compact layout, a dialog's prompt does not
+
+    public void setOverMatch(boolean value) { overMatch = value; }
+
+    /** @return true while the match screen is showing in the compact layout, so its prompts and dialogs use the frosted look */
+    public static boolean isFrostedMatch() {
+        return VPlayerPanel.isFrosted() && Forge.getCurrentScreen() instanceof forge.screens.match.MatchScreen;
+    }
+
+    public static final Color GLASS_SOLID = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.95f);
+    public static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.14f);
+
+    /** Shows or hides the round menu button beside the OK button; pressing it runs the action. */
+    public void setMenuButton(boolean shown, Runnable action) {
+        menuAction = action;
+        if (menuShown != shown) {
+            menuShown = shown;
+            revalidate();
+        }
+    }
+
+    private class MenuButton extends FDisplayObject {
+        boolean pressed;
+
+        @Override
+        public boolean press(float x, float y) { pressed = true; return true; }
+
+        @Override
+        public boolean release(float x, float y) {
+            if (pressed) { pressed = false; return true; }
+            return false;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (menuAction != null) { menuAction.run(); }
+            return true;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            final float cx = getWidth() / 2, cy = getHeight() / 2;
+            final float r = Math.min(getWidth(), getHeight()) / 2f * 0.9f;
+            g.fillCircle(pressed || isHovered() ? MENU_BTN_ON : MENU_BTN_OFF, cx, cy, r);
+            g.drawCircle(Utils.scale(1), GLASS_EDGE, cx, cy, r);
+            final float lineW = r * 1.0f, lineH = Math.max(1.5f, r * 0.14f), gap = r * 0.36f;
+            final Color c = Color.WHITE;
+            for (int i = -1; i <= 1; i++) { //three bars
+                g.fillRect(c, cx - lineW / 2, cy + i * gap - lineH / 2, lineW, lineH);
+            }
+        }
+    }
+
     public void setCardView(final CardView card) {
         this.card = card;
     }
@@ -95,6 +159,8 @@ public class VPrompt extends FContainer {
         btnOk = add(new FButton(okText, okCommand));
         btnCancel = add(new CancelButton(cancelText, e -> onCancelPressed(cancelCommand, e)));
         btnUndo = add(new UndoButton());
+        btnMenu = add(new MenuButton());
+        btnMenu.setVisible(false);
         btnOk.setSize(BTN_WIDTH, HEIGHT);
         btnCancel.setSize(BTN_WIDTH, HEIGHT);
         btnOk.setCorner(Corner.BottomLeft);
@@ -291,13 +357,25 @@ public class VPrompt extends FContainer {
             btnCancel.setLeft(width - BTN_WIDTH);
             undoX = width - BTN_WIDTH - UNDO_GAP - UNDO_SIZE;
         }
+        final boolean showMenu = menuShown;
+        btnMenu.setVisible(showMenu);
+        final float menuSpace = showMenu ? UNDO_SIZE + 2 * UNDO_GAP : 0;
+        float menuX;
+        if (Forge.reversedPrompt) { menuX = width - BTN_WIDTH - UNDO_GAP - UNDO_SIZE; }
+        else { menuX = BTN_WIDTH + UNDO_GAP; labelLeft += menuSpace; }
+        btnMenu.setBounds(menuX, (height - UNDO_SIZE) / 2, UNDO_SIZE, UNDO_SIZE);
         lblMessage.setLeft(labelLeft);
-        lblMessage.setWidth(width - 2 * BTN_WIDTH - undoSpace);
+        lblMessage.setWidth(width - 2 * BTN_WIDTH - undoSpace - menuSpace);
         btnUndo.setBounds(undoX, (height - UNDO_SIZE) / 2, UNDO_SIZE, UNDO_SIZE);
     }
 
     @Override
     protected void drawBackground(Graphics g) {
+        if (isFrostedMatch()) {
+            //the match's own prompt lets the background show through, a dialog's prompt must hide what is behind it
+            g.fillRect(overMatch ? COMPACT_SCRIM : GLASS_SOLID, 0, 0, getWidth(), getHeight());
+            return;
+        }
         g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
     }
     
@@ -339,6 +417,22 @@ public class VPrompt extends FContainer {
                 float y = PADDING;
                 float w = getWidth() - 2 * PADDING;
                 float h = getHeight() - 2 * PADDING;
+                if (isFrostedMatch()) { //one tidy block: the biggest font that fits two lines, centred
+                    if (!message.equals(frostedSource) || w != frostedW || h != frostedH) {
+                        frostedSource = message;
+                        frostedW = w;
+                        frostedH = h;
+                        frostedText = FROSTED_BREAKS.matcher(message.trim()).replaceAll("  \u00b7  ");
+                        FSkinFont font = FONT;
+                        for (int size = 14; size >= 11; size--) {
+                            font = FSkinFont.get(size);
+                            if (renderer.getWrappedBounds(frostedText, font, w).height <= Math.min(h, font.getLineHeight() * 2.1f)) { break; }
+                        }
+                        frostedFont = font;
+                    }
+                    renderer.drawText(g, frostedText, frostedFont, getForeColor(), x, y, w, h, y, h, true, Align.center, true);
+                    return;
+                }
                 renderer.drawText(g, message, FONT, getForeColor(), x, y, w, h, y, h, true, Align.center, true);
             }
         }

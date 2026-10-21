@@ -336,6 +336,53 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }
             }, 1);
+        VPlayerPanel.reloadCompactLayout(); //also converts the old on/off value of this setting
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_COMPACT_LANDSCAPE_LAYOUT,
+            Forge.getLocalizer().getMessage("lblCompactLayout"),
+            Forge.getLocalizer().getMessage("nlCompactLayout"),
+            new String[] { "Off", "Left", "Right", "Alternate" }) {
+                @Override
+                public void valueChanged(String newValue) {
+                    super.valueChanged(newValue);
+                    VPlayerPanel.reloadCompactLayout();
+                    if (MatchController.instance != null) {
+                        MatchController.instance.resetPlayerPanels();
+                    }
+                }
+            }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_HIDE_MENU,
+            Forge.getLocalizer().getMessageorUseDefault("lblCompactHideMenu", "Hide Top Menu (Compact Layout)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCompactHideMenu", "Hides the Game, Players, Log and other menus to give the battlefield more height. A menu button next to the prompt buttons shows them for a few seconds.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPlayerPanel.reloadMenuHidden();
+                if (MatchController.getView() != null) {
+                    MatchController.getView().revalidate();
+                }
+            }
+        }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_ZONE_TABS,
+            Forge.getLocalizer().getMessageorUseDefault("lblCompactZoneTabs", "Compact Zone Tabs (Landscape Mode)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlCompactZoneTabs", "When a zone tab is opened, the zone is shown over the battlefield instead of shrinking it.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPlayerPanel.reloadZoneOverlay();
+                if (MatchController.instance != null) {
+                    MatchController.instance.resetPlayerPanels();
+                }
+            }
+        }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_FROSTED_STYLE,
+            Forge.getLocalizer().getMessageorUseDefault("lblFrostedStyle", "Frosted Style (Match Screen)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlFrostedStyle", "Gives the match screen a modern frosted glass look in any layout. The compact layout always uses it.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPlayerPanel.reloadFrosted();
+            }
+        }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_PHASESTOP,
             Forge.getLocalizer().getMessageorUseDefault("lblHidePhaseStop", "Hide Phase stop (Landscape Mode)"),
             Forge.getLocalizer().getMessageorUseDefault("nlHidePhaseStop", "When enabled, Phase stop is covered by Phase name label. Tap the label to access Phase stop.")) {

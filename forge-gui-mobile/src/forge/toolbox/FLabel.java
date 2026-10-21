@@ -115,18 +115,28 @@ public class FLabel extends FDisplayObject implements IButton {
         return FSkinColor.get(Colors.CLR_INACTIVE);
     }
     private static FSkinColor getD50() {
+        if (Frost.isOn())
+            return FSkinColor.getStandardColor(Frost.slate(0.9f)).stepColor(-50);
         return getClrMain().stepColor(-50);
     }
     private static FSkinColor getD30() {
+        if (Frost.isOn())
+            return FSkinColor.getStandardColor(Frost.slate(0.9f)).stepColor(-30);
         return getClrMain().stepColor(-30);
     }
     private static FSkinColor getD10() {
+        if (Frost.isOn())
+            return FSkinColor.getStandardColor(Frost.slate(0.9f)).stepColor(-10);
         return getClrMain().stepColor(-10);
     }
     private static FSkinColor getL10() {
+        if (Frost.isOn())
+            return FSkinColor.getStandardColor(Frost.slate(0.9f)).stepColor(10);
         return getClrMain().stepColor(10);
     }
     private static FSkinColor getL20() {
+        if (Frost.isOn())
+            return FSkinColor.getStandardColor(Frost.slate(0.9f)).stepColor(20);
         return getClrMain().stepColor(20);
     }
     public static final float BORDER_THICKNESS = Utils.scale(1);
@@ -334,7 +344,12 @@ public class FLabel extends FDisplayObject implements IButton {
         else if (selectable) {
             g.drawRect(BORDER_THICKNESS, getL10(), 0, 0, w, h);
         }
-
+        if (Frost.isOn()) {
+            if (pressed)
+                g.fillRect(FSkinColor.getStandardColor(Frost.HOVER_FILL), 0, 0, w, h);
+            /*else if (isHovered()) // TODO: check if FLabel is button mode
+                g.fillRect(FSkinColor.getStandardColor(Frost.HOVER), 0, 0, w, h);*/
+        }
         drawContent(g, w, h, pressed);
 
         if (applyAlphaComposite) {

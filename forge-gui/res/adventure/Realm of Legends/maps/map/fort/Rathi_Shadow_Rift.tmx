@@ -64,7 +64,7 @@
   {
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 15,
-    &quot;cardTypes&quot;: [ &quot;creature&quot; ],
+    &quot;cardTypes&quot;: [ &quot;Creature&quot; ],
     &quot;cardText&quot;: &quot;Shadow&quot;
   }
 ]

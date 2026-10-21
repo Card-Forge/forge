@@ -1,5 +1,5 @@
 Name:The Scholar of Seas
-ManaCost:1 W B G
+ManaCost:1 W U G
 Types:Legendary Creature Merfolk Advisor
 PT:2/2
 S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk you control get +1/+1.

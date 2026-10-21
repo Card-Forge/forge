@@ -2494,7 +2494,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // what was chosen stays marked while later targeting steps follow, and goes away after the last one or a failure;
         // for a spell being cast it stays up through paying the cost instead (see playChosenSpellAbility)
         if (result && keepTargetsMarked && !TargetingProgress.hasLaterTargetingStep(currentAbility)) {
-            keptMarks.addAll(TargetingProgress.chosenTargets(currentAbility));
+            final List<TrackableObject> marks = new ArrayList<>(TargetingProgress.chosenTargets(currentAbility));
+            // a targeted spell is a Card target on the Stack, so its stack entry has to be marked separately
+            for (final Card c : currentAbility.getTargets().getTargetCards()) {
+                if (!c.isInZone(ZoneType.Stack)) { continue; }
+                for (final SpellAbilityStackInstance si : getGame().getStack()) {
+                    final SpellAbility onStack = si.getSpellAbility();
+                    if (onStack.isSpell() && c.equals(onStack.getHostCard()) && !marks.contains(si.getView())) {
+                        marks.add(si.getView());
+                        break;
+                    }
+                }
+            }
+            keptMarks.addAll(marks);
             // the targeting input cleared its marks when it stopped, before they were kept
             getGui().setSelection(Selection.ofChosen(keptMarks));
         }
@@ -2860,7 +2872,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectStackItem(final StackItemView item) {
-        if (item == null || !(inputProxy.getInput() instanceof InputSelectStackItems)) {
+        // stack entries can be picked by the stack-only input, and by the normal targeting input when a spell
+        // may target a spell or a permanent (Chaoslace and the like)
+        final Input current = inputProxy.getInput();
+        if (item == null
+                || !(current instanceof InputSelectStackItems || current instanceof InputSelectTargets)) {
             return;
         }
         // a stack entry was picked while stack targets are chosen; it is identified by its stack instance, and the
