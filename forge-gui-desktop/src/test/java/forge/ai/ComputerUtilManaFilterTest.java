@@ -9,6 +9,8 @@ import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 /**
  * Mana abilities that cost mana themselves ("{1}, {T}: Add {W}{U}" on the Signets, "{W/U}, {T}: Add {W}{W}, {W}{U},
  * or {U}{U}" on the Shadowmoor filter lands) used to be invisible to ComputerUtilMana, for the AI and for the human's auto-pay.
@@ -132,5 +134,18 @@ public class ComputerUtilManaFilterTest extends AITest {
 
         AssertJUnit.assertEquals("each of the six makes one mana more than it costs", 6,
                 ComputerUtilMana.getAvailableManaEstimate(ai));
+    }
+
+    @Test
+    public void firstLandForAOneDropIsNotAFilterLand() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCardToZone("Mystic Gate", ai, ZoneType.Hand);
+        Card plains = addCardToZone("Plains", ai, ZoneType.Hand);
+        addCardToZone("Savannah Lions", ai, ZoneType.Hand); // {W}
+
+        List<SpellAbility> play = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
+        AssertJUnit.assertEquals("the Gate alone can't make {W}", plains, play.get(0).getHostCard());
     }
 }
