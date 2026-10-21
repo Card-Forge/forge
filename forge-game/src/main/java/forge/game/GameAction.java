@@ -1530,6 +1530,8 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction704_5r(c);
 
+                checkAgainCard |= stateBasedAction_Augment(c, mapParams);
+
                 if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
                     int beeble = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), "Beeble.YouCtrl", c.getController(), c, null);
                     int loyal = c.getCounters(CounterEnumType.LOYALTY);
@@ -1944,6 +1946,18 @@ public class GameAction {
             }
         }
         return checkAgain;
+    }
+
+    private boolean stateBasedAction_Augment(Card c, Map<AbilityKey, Object> mapParams) {
+        if (!c.isAugment()) {
+            return false;
+        }
+        final Zone zoneFrom = game.getZoneOf(c);
+        if (zoneFrom.is(ZoneType.Battlefield)) {
+            moveTo(c.getOwner().getZone(ZoneType.Graveyard), c, null, mapParams);
+            return true;
+        }
+        return false;
     }
 
     public void checkGameOverCondition() {

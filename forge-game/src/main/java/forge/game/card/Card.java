@@ -1533,6 +1533,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void setAugmentedWith(Card augmentedWith) { this.augmentedWith = augmentedWith; }
     public final Card getAugmenting() { return augmenting; }
     public void setAugmenting(Card augmenting) { this.augmenting = augmenting; }
+    public boolean isAugment() { return hasKeyword(Keyword.AUGMENT) && !hasKeyword(Keyword.AUGMENT_HOST); }
 
     public final long getAugmentedTimestamp() {
         return augmentedTimeStamp;
