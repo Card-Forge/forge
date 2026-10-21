@@ -135,29 +135,29 @@ ScryfallCode=TRK
 267 R Replicator @William Phifer
 270 C Tricorder @Tony Foti
 273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
-275 C Andoria @Josu Hernaiz
-277 C Bajor @John Di Giovanni
+275 L Andoria @Josu Hernaiz
+277 L Bajor @John Di Giovanni
 278 R Blood Crypt @Jonas De Ro
 279 R Breeding Pool @Cliff Nielsen
-280 C Cardassia Prime @Alex Negrea
-281 C Earth, Sector 001 @Colin Searle
+280 L Cardassia Prime @Alex Negrea
+281 L Earth, Sector 001 @Colin Searle
 282 R Federation Outpost @Edouard
-283 C Ferenginar @Colin Searle
+283 L Ferenginar @Colin Searle
 285 R Godless Shrine @John Thacker
 286 R Hallowed Fountain @Piotr Dura
-288 C Orion @Simon Dominic
+288 L Orion @Simon Dominic
 289 R Overgrown Tomb @Pavel Kolomeyets
-291 C Qo'noS @Rockey Chen
+291 L Qo'noS @Rockey Chen
 292 R Quark's Bar @Robin Olausson
-293 C Risa @Colin Searle
-294 C Romulus @Carlos Dattoli
+293 L Risa @Colin Searle
+294 L Romulus @Carlos Dattoli
 295 R Sacred Foundry @Jessica Rossier
 297 M Starfleet Academy @Robin Olausson
 298 R Steam Vents @Shahab Alizadeh
 299 R Stomping Ground @Arthur Haas
 301 R Temple Garden @Shahab Alizadeh
 304 R The Unicomplex @JB Casacop
-305 C Vulcan @John Di Giovanni
+305 L Vulcan @John Di Giovanni
 306 R Watery Grave @Raymond Bonilla
 307 L Plains @Paulius Daščioras
 308 L Island @Guglielmo Bonis
