@@ -20,7 +20,7 @@ ManaCost:3 B R
 Types:Legendary Creature Mutant Demon Sorcerer
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDigUntil | TriggerDescription$ At the beginning of your upkeep, exile cards from the top of your library until you exile a nonland card. You may play those cards this turn.
-SVar:TrigDigUntil:DB$ DigUntil | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBEffect
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | RememberFound$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
