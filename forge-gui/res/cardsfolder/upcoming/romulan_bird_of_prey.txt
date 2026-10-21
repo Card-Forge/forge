@@ -1,0 +1,10 @@
+Name:Romulan Bird-of-Prey
+ManaCost:1 U
+Types:Artifact Spacecraft
+PT:4/4
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.nonCreature | AddKeyword$ Hexproof | Description$ Cloaking Device — As long as this Spacecraft isn't a creature, it has hexproof.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+nonCreature | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, if this Spacecraft isn't a creature, put two charge counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 2
+K:Station:8
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 8+ Flying
+Oracle:Cloaking Device — As long as this Spacecraft isn't a creature, it has hexproof.\nWhenever you cast a noncreature spell, if this Spacecraft isn't a creature, put two charge counters on it.\nStation\nSTATION 8+\nFlying
