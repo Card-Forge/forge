@@ -1252,6 +1252,14 @@ public final class CMatchUI
         actuateMatchPreferences();
 
         Singletons.getControl().setCurrentScreen(screen);
+        // after the screen switch, which clears the image cache
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_PRELOAD_DECK_IMAGES) && myPlayers != null) {
+            final List<Deck> decks = new ArrayList<>();
+            for (final PlayerView pv : myPlayers) {
+                decks.add(gameView.getDeck(pv));
+            }
+            ImageCache.preloadCache(decks);
+        }
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
         SOverlayUtils.hideOverlay();

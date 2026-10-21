@@ -103,6 +103,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_ACTIONABLE_HIGHLIGHT_COLOR ("66CCFF"),
         UI_SHOW_LINKED_EXILE_CARDS ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),
+        UI_PRELOAD_DECK_IMAGES ("false"),
         UI_RANDOM_ART_IN_POOLS ("true"),
         UI_COMPACT_PROMPT ("false"),
         UI_COMPACT_TABS ("false"),
