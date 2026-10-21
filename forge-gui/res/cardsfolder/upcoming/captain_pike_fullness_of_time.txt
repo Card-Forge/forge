@@ -1,0 +1,9 @@
+Name:Captain Pike, Fullness of Time
+ManaCost:1 G G
+Types:Legendary Creature Human Officer Scout
+PT:*/*
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Strange new worlds — NICKNAME's power and toughness are each equal to the number of differently named lands you control.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands from the top of your library.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:Strange new worlds — Captain Pike's power and toughness are each equal to the number of differently named lands you control.\nYou may look at the top card of your library any time.\nYou may play lands from the top of your library.
