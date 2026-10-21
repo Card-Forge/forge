@@ -2,19 +2,118 @@ package forge.ai.ability;
 
 import forge.ai.AITest;
 import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellApiToAi;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ChangeZoneAiTest extends AITest {
+
+    @DataProvider(name = "etbSearches")
+    public Object[][] etbSearches() {
+        return new Object[][] {
+                {"Oreskos Explorer", null},
+                {"Oreskos Explorer", "Plains"},
+                {"Imperial Recruiter", null},
+                {"Imperial Recruiter", "Grizzly Bears"}
+        };
+    }
+
+    @Test(dataProvider = "etbSearches")
+    public void testCreatureSearchPayoffIsNotRequiredToCast(final String name, final String find) {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCards("Mountain", 3, ai);
+        addCard("Plains", ai);
+        addCards("Forest", 5, game.getPlayers().get(0));
+        // A nonempty library with no matching cards exercises the search filter, not just an empty zone.
+        for (int i = 0; i < 5; i++) {
+            addCardToZone("Island", ai, ZoneType.Library);
+        }
+        if (find != null) {
+            addCardToZone(find, ai, ZoneType.Library);
+        }
+        Card creature = addCardToZone(name, ai, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        game.getTriggerHandler().resetActiveTriggers();
+        game.copyLastState();
+
+        var controller = ((PlayerControllerAi) ai.getController()).getAi();
+        SpellAbility search = creature.getTriggers().get(0).ensureAbility().copy(ai);
+        search.setTrigger(creature.getTriggers().get(0));
+        AssertJUnit.assertEquals("Trigger assessment still distinguishes a search with a payoff",
+                find != null, controller.doTrigger(search, false));
+        var choices = controller.chooseSpellAbilityToPlay();
+        AssertJUnit.assertNotNull("A harmless search with nothing to find must not veto the creature", choices);
+        AssertJUnit.assertTrue(choices.stream().anyMatch(sa -> sa.getHostCard() == creature));
+
+        SpellAbility spell = creature.getFirstSpellAbility();
+        spell.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue(ComputerUtil.playStack(spell, ai, game));
+        game.getStack().resolveStack();
+        game.getTriggerHandler().runWaitingTriggers();
+        game.getStack().addAllTriggeredAbilitiesToStack();
+        for (int i = 0; i < 8 && !game.getStack().isEmpty(); i++) {
+            game.getStack().resolveStack();
+        }
+        AssertJUnit.assertTrue("The creature and its search should finish resolving", game.getStack().isEmpty());
+        AssertJUnit.assertEquals(1, countCardsWithName(game, name));
+        AssertJUnit.assertEquals(find == null ? 0 : 1, ai.getCardsIn(ZoneType.Hand).size());
+        if (find != null) {
+            AssertJUnit.assertEquals(find, ai.getCardsIn(ZoneType.Hand).get(0).getName());
+        }
+    }
+
+    @Test
+    public void testEmptySearchDoesNotHideCostsOrFollowUps() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCardToZone("Island", ai, ZoneType.Library);
+        Card creature = addCardToZone("Imperial Recruiter", ai, ZoneType.Hand);
+        SpellAbility spell = creature.getFirstSpellAbility();
+        spell.setActivatingPlayer(ai);
+        SpellAbility search = creature.getTriggers().get(0).ensureAbility();
+        var controller = ((PlayerControllerAi) ai.getController()).getAi();
+
+        search.setPayCosts(new Cost("PayLife<19>", true));
+        AssertJUnit.assertFalse("An empty search must not excuse a trigger's cost",
+                controller.checkETBEffects(creature, spell, null));
+
+        search.setPayCosts(Cost.Zero);
+        search.setSubAbility((AbilitySub) AbilityFactory.getAbility(
+                "DB$ LoseLife | Defined$ You | LifeAmount$ 20", creature));
+        AssertJUnit.assertFalse("An empty search must not hide a harmful follow-up",
+                controller.checkETBEffects(creature, spell, null));
+    }
+
+    @Test
+    public void testStandaloneTutorStillNeedsSomethingToFind() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        addCard("Forest", ai);
+        fillLibrary(ai, 5);
+        Card tutor = addCardToZone("Lay of the Land", ai, ZoneType.Hand);
+        SpellAbility spell = tutor.getFirstSpellAbility();
+        spell.setActivatingPlayer(ai);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertFalse("Casting a tutor without a payoff still wastes the spell and mana",
+                SpellApiToAi.Converter.get(spell).canPlayWithSubs(ai, spell).willingToPlay());
+    }
 
     @Test
     public void testXTargetCountIgnoresTheAisOwnPermanents() {
