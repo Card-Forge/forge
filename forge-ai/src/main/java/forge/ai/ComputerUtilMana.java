@@ -935,10 +935,14 @@ public class ComputerUtilMana {
         payMultipleMana(remaining, predictMana(filter, ai, toPay), ai);
 
         final ManaCost toActivate = getManaCostToActivate(filter);
-        ManaCostBeingPaid toFloat = new ManaCostBeingPaid(toActivate);
-        payMultipleMana(toFloat, floatingMana(manapool, filter), ai);
         final Set<SpellAbility> tried = new HashSet<>();
-        while (!toFloat.isPaid()) {
+        while (true) {
+            // what the floating mana leaves of the filter's cost; it stays in the pool to pay that cost
+            final ManaCostBeingPaid toFloat = new ManaCostBeingPaid(toActivate);
+            payMultipleMana(toFloat, floatingMana(manapool, filter), ai);
+            if (toFloat.isPaid()) {
+                return true;
+            }
             final ManaCostShard shard = getNextShardToPay(toFloat, sourcesForShards);
             SpellAbility chosen = null;
             for (final SpellAbility m : sourcesForShards.get(shard)) {
@@ -989,10 +993,7 @@ public class ComputerUtilMana {
             if (!used.canPlay()) {
                 sourcesForShards.values().removeIf(s -> s == used || (s.getHostCard().equals(used.getHostCard()) && !s.canPlay()));
             }
-            toFloat = new ManaCostBeingPaid(toActivate);
-            payMultipleMana(toFloat, floatingMana(manapool, filter), ai);
         }
-        return true;
     }
 
     /**
