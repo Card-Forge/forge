@@ -83,6 +83,7 @@ public class MatchScreen extends FScreen {
     private final VChat chat;
     private final VStack stack;
     private final VUnifiedPhase unifiedPhase; //compact layout: one phase label for all players, right of the stack menu
+    private boolean iconTabsShown; //whether the top menu tabs were last laid out as icons
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
@@ -163,17 +164,18 @@ public class MatchScreen extends FScreen {
 
         FMenuBar menuBar = (FMenuBar) getHeader();
         if (topPlayerPrompt == null) {
+            menuBar.setIconMode(VPlayerPanel::isCompactLayout); //compact layout: equal width tabs with icons from the topmenu atlas
             menuBar.addTab("", revealed, true);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu).setTopIcon("vmenu", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players).setTopIcon("vplayers", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log).setTopIcon("vlog", false);
             if (chat != null) {
-                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat).setTopIcon("vchat", false);
             }
             if (!MatchController.instance.isReplay()) {
-                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu).setTopIcon("vdev", false);
             }
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack).setTopIcon("vstack", true);
         } else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
@@ -390,9 +392,13 @@ public class MatchScreen extends FScreen {
         if (topPlayerPrompt == null) { //compact layout: one phase label right of the stack menu, the bar gives up the room for it
             final boolean unified = VPlayerPanel.isUnifiedPhase();
             final float barHeight = getHeader().getHeight();
-            final float buttonWidth = unified ? Math.min(unifiedPhase.getPreferredWidth(), width / 3f) : 0f;
+            final float buttonWidth = unified ? Math.min(unifiedPhase.getPreferredWidth(), width * 0.4f) : 0f;
             if (getHeader().getWidth() != width - buttonWidth) {
                 getHeader().setBounds(getHeader().getLeft(), getHeader().getTop(), width - buttonWidth, barHeight);
+            }
+            if (iconTabsShown != VPlayerPanel.isCompactLayout()) { //the tabs switch between text and icons
+                iconTabsShown = VPlayerPanel.isCompactLayout();
+                getHeader().revalidate();
             }
             unifiedPhase.setVisible(unified);
             if (unified) {
@@ -433,6 +439,10 @@ public class MatchScreen extends FScreen {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) {
             return;
+        }
+
+        if (topPlayerPrompt == null) { //the reveal tab is as wide as the player panels' control column
+            ((FMenuBar) getHeader()).setRevealWidth(VPlayerPanel.isCompactLayout() ? liveBottom().getColumnWidth() : 0f);
         }
 
         if (gameMenu != null) {
