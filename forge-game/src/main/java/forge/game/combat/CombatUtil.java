@@ -67,7 +67,8 @@ public class CombatUtil {
         final Game game = playerWhoAttacks.getGame();
         final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
         for (Card battle : battles) {
-            if (battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
+            final Player protector = battle.getProtectingPlayer();
+            if (protector != null && protector.isOpponentOf(playerWhoAttacks)) {
                 defenders.add(battle);
             }
         }
