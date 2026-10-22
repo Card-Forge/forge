@@ -1,6 +1,6 @@
 Name:Tarnation Vista
 ManaCost:no cost
-Types:Land Cave
+Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:ETBReplacement:Other:ChooseColor

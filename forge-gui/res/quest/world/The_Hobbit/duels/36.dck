@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Deguchi_Daisuke_-_Boros_Dwarves_(Standard,_#889356).dck
+Deck Type=constructed
+
+[Main]
+4 The Lonely Mountain
+1 Multiversal Passage
+4 Sunbillow Verge
+4 Sacred Foundry
+2 Cavern of Souls
+4 Inspiring Vantage
+4 Plains
+3 Doc Ock's Tentacles
+4 Dragonfire Blade
+4 Leyline Axe
+4 Lavaspur Boots
+2 Dwalin, Weaponmaster
+4 Dáin's Company
+4 Thorin, Mountain-king
+4 Dwarven Mauler
+4 Kíli the Resourceful
+2 Raubahn, Bull of Ala Mhigo
+2 Voice of Victory
+[Sideboard]
+2 Dawn's Truce
+3 Shattered Acolyte
+2 Erode
+1 Adelbert Steiner
+2 Chainsaw
+2 Vengeful Tracker
+3 Rest in Peace

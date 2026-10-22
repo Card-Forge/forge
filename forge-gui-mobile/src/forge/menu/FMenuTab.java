@@ -132,7 +132,11 @@ public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
         }
     }
 
-    boolean isGlass() { return menuBar.isGlass(); }
+    boolean isGlass() {
+        if (menuBar == null)
+            return false;
+        return menuBar.isGlass();
+    }
 
     public float getMinWidth() {
         if (iconOnly) {
