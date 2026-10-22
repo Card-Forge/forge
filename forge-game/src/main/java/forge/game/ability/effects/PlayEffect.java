@@ -310,6 +310,9 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (sas.isEmpty()) {
+                if (sa.hasParam("AllowRepeats")) {
+                    amount--;
+                }
                 continue;
             }
 
@@ -363,6 +366,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // illegal action, cancel early
             if (altCost && tgtSA.costHasManaX() && tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
+                if (sa.hasParam("AllowRepeats")) {
+                    amount--;
+                }
                 continue;
             }
 
@@ -386,6 +392,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA = tgtSA.copyWithManaCostReplaced(tgtSA.getActivatingPlayer(), abCost);
             } else if (tgtSA.getPayCosts().hasManaCost() && tgtSA.getPayCosts().getCostMana().getMana().isNoCost()) {
                 // unpayable
+                if (sa.hasParam("AllowRepeats")) {
+                    amount--;
+                }
                 continue;
             }
 
