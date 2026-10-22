@@ -1,0 +1,9 @@
+Name:Worf, Honor-Bound Warrior
+ManaCost:RW RW
+Types:Legendary Creature Klingon Warrior Officer
+PT:1/1
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | CheckSVar$ X | SVarCompare$ GE8 | NoResolvingCheck$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack while creatures you control have total power 8 or greater, double NICKNAME's power until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ Double
+A:AB$ PutCounter | Cost$ tapXType<2/Artifact;Creature/artifacts and/or creatures> | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on NICKNAME. Activate only as a sorcery.
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
+Oracle:Whenever you attack while creatures you control have total power 8 or greater, double Worf's power until end of turn.\nTap two untapped artifacts and/or creatures you control: Put a +1/+1 counter on Worf. Activate only as a sorcery.
