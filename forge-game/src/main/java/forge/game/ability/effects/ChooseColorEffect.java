@@ -41,7 +41,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
         List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
         if (sa.hasParam("Choices")) {
             String[] restrictedChoices = sa.getParam("Choices").split(",");
-            colorChoices = Arrays.asList(restrictedChoices);
+            colorChoices = new ArrayList<>(Arrays.asList(restrictedChoices));
         }
         if (sa.hasParam("ColorsFrom")) {
             ColorSet cs = CardUtil.getColorsFromCards(AbilityUtils.getDefinedCards(card, sa.getParam("ColorsFrom"), sa));
