@@ -161,7 +161,14 @@ public enum AiProps {
     FLAT_MC_HOLD_MANA_WEIGHT("100"),
     FLAT_MC_RISK_WEIGHT("100"),
     FLAT_MC_OVERRIDE_MAJORITY("50"),
-    FLAT_MC_ENABLED("true");
+    FLAT_MC_ENABLED("true"),
+    // Sampling efficiency and deck-agnostic valuation. Setting PRUNING/CATEGORY_HOLD/ADAPTIVE_PLAYOUT to false and
+    // EXTRA_ROUNDS to 0 reproduces the original flat Monte Carlo, which is what the A/B benchmark uses as baseline.
+    FLAT_MC_EXTRA_ROUNDS("2"),
+    FLAT_MC_PRUNING("true"),
+    FLAT_MC_CATEGORY_HOLD("true"),
+    FLAT_MC_ADAPTIVE_PLAYOUT("true"),
+    FLAT_MC_TARGET_VARIANTS("2");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

@@ -24,6 +24,7 @@ import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.FlatMonteCarloPicker;
+import forge.ai.simulation.FlatMonteCarloStats;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -1674,6 +1675,7 @@ public class AiController {
             // Same heuristics as always, but keep the first few plays they approve of and let rollouts compare them.
             final FlatMonteCarloPicker.Config mcCfg = flatMonteCarloConfig();
             final List<SpellAbility> approved = chooseSpellAbilitiesToPlayFromList(saList, true, mcCfg == null ? 1 : mcCfg.maxCandidates);
+            FlatMonteCarloStats.noteDecisionPoint(approved.size(), mcCfg == null);
             try {
                 chosenSa = refineWithFlatMonteCarlo(approved, mcCfg);
             } catch (final AITimeoutTracker.Expired e) {
@@ -1681,6 +1683,7 @@ public class AiController {
             } catch (final RuntimeException e) {
                 // Monte Carlo is a refinement: never let it break a turn, fall back to the heuristic choice.
                 noteFlatMcOutcome("error");
+                FlatMonteCarloStats.noteFailure("controller: " + e);
                 chosenSa = approved.isEmpty() ? null : approved.get(0);
             }
         } else {
@@ -1741,6 +1744,7 @@ public class AiController {
         final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, cfg,
                 sa -> playDecision(sa) == AiPlayDecision.WillPlay);
         lastFlatMcResult = result;
+        FlatMonteCarloStats.record(result);
         flatMcTurnSpentNanos += result.elapsedNanos;
         noteFlatMcOutcome(result.reason);
         if (result.hold) {
@@ -1757,6 +1761,10 @@ public class AiController {
         }
         for (final SpellAbility sa : order) {
             if (playDecision(sa) == AiPlayDecision.WillPlay) {
+                if (sa == result.choice && result.target != null && !FlatMonteCarloPicker.applyTarget(sa, result.target)
+                        && playDecision(sa) != AiPlayDecision.WillPlay) {
+                    continue; // the other target is no longer legal and the heuristics gave the play up as well
+                }
                 return sa;
             }
         }
@@ -1899,6 +1907,9 @@ public class AiController {
                     // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
                     if (opinion != AiPlayDecision.WillPlay) {
+                        if (maxResults > 1) {
+                            FlatMonteCarloStats.noteRejected(opinion.name());
+                        }
                         continue;
                     }
 

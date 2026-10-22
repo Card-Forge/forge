@@ -7,6 +7,8 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;
@@ -14,6 +16,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
+import forge.ai.ComputerUtilCard;
 import forge.game.zone.ZoneType;
 import forge.util.AITimeoutTracker;
 import forge.util.MyRandom;
@@ -78,6 +82,9 @@ public final class FlatMonteCarloPicker {
     /** Decks full of cheap creatures and burn hold up less, they would rather spend the mana. */
     private static final double AGGRO_HOLD_FACTOR = 0.5;
 
+    /** Why the last rollout that returned null did so, for the statistics (only read right after such a rollout). */
+    private static volatile String lastRolloutProblem = "?";
+
     private static final AtomicInteger TOTAL_ROLLOUTS = new AtomicInteger();
     private static final AtomicInteger TOTAL_FAILURES = new AtomicInteger();
 
@@ -122,6 +129,16 @@ public final class FlatMonteCarloPicker {
         public int riskWeightPercent = 100;
         /** Rounds in which another line has to beat the heuristic line, as a share of rounds (percent, 50 = more than half). */
         public int overrideMajorityPercent = 50;
+        /** Rounds beyond {@link #rolloutsPerCandidate} that lines still in the race may get (needs {@link #pruning}). */
+        public int extraRounds = 2;
+        /** Drop lines that are clearly behind after every round, so the budget goes to the lines still in contention. */
+        public boolean pruning = true;
+        /** Value held-up cards by what they do (counter, removal, trick, flash creature) instead of mana cost alone. */
+        public boolean categoryHold = true;
+        /** Long hands get longer playouts even when they do not look like a combo hand. */
+        public boolean adaptivePlayout = true;
+        /** Other targets tried in addition to the one the heuristics chose, for plays with a single target (0 = off). */
+        public int targetVariants = 2;
 
         public static Config fromProfile(final AiController ai, final Player player) {
             final Config cfg = new Config();
@@ -136,7 +153,12 @@ public final class FlatMonteCarloPicker {
             cfg.holdManaWeightPercent = intProp(ai, AiProps.FLAT_MC_HOLD_MANA_WEIGHT, 0, 1000);
             cfg.riskWeightPercent = intProp(ai, AiProps.FLAT_MC_RISK_WEIGHT, 0, 1000);
             cfg.overrideMajorityPercent = intProp(ai, AiProps.FLAT_MC_OVERRIDE_MAJORITY, 0, 99);
-            cfg.controlFactor = controlFactor(player);
+            cfg.extraRounds = intProp(ai, AiProps.FLAT_MC_EXTRA_ROUNDS, 0, 10);
+            cfg.pruning = ai.getBoolProperty(AiProps.FLAT_MC_PRUNING);
+            cfg.categoryHold = ai.getBoolProperty(AiProps.FLAT_MC_CATEGORY_HOLD);
+            cfg.adaptivePlayout = ai.getBoolProperty(AiProps.FLAT_MC_ADAPTIVE_PLAYOUT);
+            cfg.targetVariants = intProp(ai, AiProps.FLAT_MC_TARGET_VARIANTS, 0, 4);
+            cfg.controlFactor = controlFactor(player, cfg.categoryHold);
             return cfg;
         }
 
@@ -164,9 +186,26 @@ public final class FlatMonteCarloPicker {
         public final long elapsedNanos;
         /** Short machine readable explanation, e.g. "override", "kept-heuristic", "hold", "too-slow", "error". */
         public final String reason;
+        /** How many lines were dropped from the race early because they were clearly behind. */
+        public final int pruned;
+        /** When rollouts preferred other targets for {@link #choice} than the heuristics picked: the target to use, else null. */
+        public final GameObject target;
 
         Result(final SpellAbility choice, final boolean hold, final boolean decidedByRollouts,
                final int candidatesEvaluated, final int rollouts, final long elapsedNanos, final String reason) {
+            this(choice, hold, decidedByRollouts, candidatesEvaluated, rollouts, elapsedNanos, reason, 0);
+        }
+
+        Result(final SpellAbility choice, final boolean hold, final boolean decidedByRollouts,
+               final int candidatesEvaluated, final int rollouts, final long elapsedNanos, final String reason,
+               final int pruned) {
+            this(choice, hold, decidedByRollouts, candidatesEvaluated, rollouts, elapsedNanos, reason, pruned, null);
+        }
+
+        Result(final SpellAbility choice, final boolean hold, final boolean decidedByRollouts,
+               final int candidatesEvaluated, final int rollouts, final long elapsedNanos, final String reason,
+               final int pruned, final GameObject target) {
+            this.target = target;
             this.choice = choice;
             this.hold = hold;
             this.decidedByRollouts = decidedByRollouts;
@@ -174,6 +213,7 @@ public final class FlatMonteCarloPicker {
             this.rollouts = rollouts;
             this.elapsedNanos = elapsedNanos;
             this.reason = reason;
+            this.pruned = pruned;
         }
 
         /** A result that simply keeps the heuristic choice without having sampled anything. */
@@ -185,6 +225,7 @@ public final class FlatMonteCarloPicker {
         public String toString() {
             return "FlatMC[" + reason + ", " + (hold ? "HOLD" : String.valueOf(choice))
                     + ", candidates=" + candidatesEvaluated + ", rollouts=" + rollouts
+                    + (pruned > 0 ? ", pruned=" + pruned : "")
                     + ", ms=" + TimeUnit.NANOSECONDS.toMillis(elapsedNanos) + "]";
         }
     }
@@ -192,18 +233,35 @@ public final class FlatMonteCarloPicker {
     private static final class Candidate {
         /** The play, or null for the hold option. */
         final SpellAbility sa;
+        /** For a target variant: the target to use instead of the one the heuristics chose, else null. */
+        final GameObject target;
 
         Candidate(final SpellAbility sa) {
+            this(sa, null);
+        }
+
+        Candidate(final SpellAbility sa, final GameObject target) {
             this.sa = sa;
+            this.target = target;
         }
 
         boolean isHold() {
             return sa == null;
         }
 
+        /** Name for statistics: the card of the play, or HOLD. */
+        String label() {
+            if (isHold()) {
+                return "HOLD";
+            }
+            final Card host = sa.getHostCard();
+            final String name = host == null ? String.valueOf(sa) : host.getName();
+            return target == null ? name : name + " -> " + target;
+        }
+
         @Override
         public String toString() {
-            return isHold() ? "HOLD" : String.valueOf(sa);
+            return isHold() ? "HOLD" : target == null ? String.valueOf(sa) : sa + " -> " + target;
         }
     }
 
@@ -238,7 +296,7 @@ public final class FlatMonteCarloPicker {
     private static Result chooseImpl(final Player player, final List<SpellAbility> approved, final Config cfg,
                                      final Predicate<SpellAbility> revalidate, final long start) {
         final SpellAbility heuristicChoice = approved.get(0);
-        final List<Candidate> cands = buildCandidates(player, approved, cfg);
+        final List<Candidate> cands = buildCandidates(player, approved, cfg, revalidate);
         if (cands.size() < 2) {
             return Result.keepHeuristic(heuristicChoice, "single-candidate");
         }
@@ -251,27 +309,43 @@ public final class FlatMonteCarloPicker {
         final long hardDeadline = start + HARD_DEADLINE_FACTOR * budget;
         final long baseSeed = MyRandom.getRandom().nextLong();
 
-        final int playoutPlays = isComboLike(player) ? Math.max(cfg.maxPlayoutPlays, cfg.comboPlayoutPlays) : cfg.maxPlayoutPlays;
+        final int playoutPlays = playoutLength(player, cfg);
         final int n = cands.size();
+        // With pruning, lines that are clearly behind stop costing time, and the lines still in the race may take
+        // some extra rounds beyond the base number. Without it this is exactly the original round-robin.
+        final int maxRounds = cfg.rolloutsPerCandidate + (cfg.pruning ? Math.max(0, cfg.extraRounds) : 0);
         final long[] sum = new long[n];
         final int[] count = new int[n];
         final boolean[] invalid = new boolean[n];
-        final long[][] vals = new long[n][cfg.rolloutsPerCandidate];
+        final boolean[] pruned = new boolean[n];
+        final long[][] vals = new long[n][maxRounds];
         int evaluated = 0;
         int rollouts = 0;
+        int prunedCount = 0;
         long maxRolloutNanos = 0;
         boolean tooSlow = false;
 
         rounds:
-        for (int r = 0; r < cfg.rolloutsPerCandidate; r++) {
+        for (int r = 0; r < maxRounds; r++) {
             final long seed = baseSeed + r * SEED_STEP;
             final int active = r == 0 ? n : evaluated;
-            // Only start another round if all of it fits, so that every candidate gets the same samples.
-            if (r > 0 && System.nanoTime() + maxRolloutNanos * active > (r == 1 ? hardDeadline : softDeadline)) {
-                break;
+            int racing = 0;
+            for (int c = 0; c < active; c++) {
+                if (!invalid[c] && !pruned[c]) {
+                    racing++;
+                }
+            }
+            if (r > 0) {
+                if (racing < 2) {
+                    break; // nothing left to compare
+                }
+                // Only start another round if all of it fits, so that every candidate gets the same samples.
+                if (System.nanoTime() + maxRolloutNanos * racing > (r == 1 ? hardDeadline : softDeadline)) {
+                    break;
+                }
             }
             for (int c = 0; c < active; c++) {
-                if (invalid[c]) {
+                if (invalid[c] || pruned[c]) {
                     continue;
                 }
                 AITimeoutTracker.check();
@@ -285,12 +359,14 @@ public final class FlatMonteCarloPicker {
                 }
                 final long t0 = System.nanoTime();
                 final Candidate cand = cands.get(c);
-                final Long value = !cand.isHold() && revalidate != null && !revalidate.test(cand.sa)
-                        ? null : rollout(player, cand, seed, cfg, playoutPlays);
+                final boolean stillWanted = cand.isHold() || revalidate == null || revalidate.test(cand.sa);
+                final boolean aimed = stillWanted && (cand.target == null || applyTarget(cand.sa, cand.target));
+                final Long value = !aimed ? null : rollout(player, cand, seed, cfg, playoutPlays);
                 maxRolloutNanos = Math.max(maxRolloutNanos, System.nanoTime() - t0);
                 rollouts++;
                 if (value == null) {
                     invalid[c] = true;
+                    FlatMonteCarloStats.noteUnsimulatable(cand.label() + (!stillWanted ? " [revalidate]" : !aimed ? " [target]" : " [" + lastRolloutProblem + "]"));
                 } else {
                     sum[c] += value;
                     vals[c][count[c]] = value;
@@ -298,28 +374,33 @@ public final class FlatMonteCarloPicker {
                     if (value == WIN_VALUE && !cand.isHold()) {
                         // This line wins the game outright: nothing needs comparing, and waiting only wastes time.
                         return new Result(cand.sa, false, true, Math.max(evaluated, c + 1), rollouts,
-                                System.nanoTime() - start, "wins");
+                                System.nanoTime() - start, "wins", prunedCount, cand.target);
                     }
                 }
                 if (r == 0) {
                     evaluated = c + 1;
                 }
             }
+            if (cfg.pruning && r >= 1) {
+                prunedCount += pruneBehind(vals, count, invalid, pruned, evaluated, cfg.heuristicBonus);
+            }
         }
 
         final long elapsed = System.nanoTime() - start;
         if (evaluated < 2) {
-            return new Result(heuristicChoice, false, false, evaluated, rollouts, elapsed, tooSlow ? "too-slow" : "no-time");
+            return new Result(heuristicChoice, false, false, evaluated, rollouts, elapsed, tooSlow ? "too-slow" : "no-time", prunedCount);
         }
         if (invalid[0] || count[0] == 0) {
             // We cannot even simulate what the heuristics want to do, so there is nothing to compare against.
-            return new Result(heuristicChoice, false, false, evaluated, rollouts, elapsed, "heuristic-unsimulatable");
+            return new Result(heuristicChoice, false, false, evaluated, rollouts, elapsed, "heuristic-unsimulatable", prunedCount);
         }
 
+        // Only lines still in the race can win: a pruned line was behind when it stopped, and its few samples must not
+        // be compared with the many samples of the survivors.
         int best = 0;
         double bestValue = Double.NEGATIVE_INFINITY;
         for (int c = 0; c < evaluated; c++) {
-            if (invalid[c] || count[c] == 0) {
+            if (invalid[c] || pruned[c] || count[c] == 0) {
                 continue;
             }
             final double value = (double) sum[c] / count[c] + (c == 0 ? cfg.heuristicBonus : 0);
@@ -332,24 +413,111 @@ public final class FlatMonteCarloPicker {
         if (best != 0 && count[best] > 0 && count[0] > 0) {
             // Overriding the heuristics needs more than a higher mean: the line must also win a majority of the
             // paired rounds (same seed = same hidden cards), or one lucky sample could talk the AI out of a fine play.
-            final int rounds = Math.min(count[0], count[best]);
+            final int pairs = Math.min(count[0], count[best]);
             int wins = 0;
-            for (int i = 0; i < rounds; i++) {
+            for (int i = 0; i < pairs; i++) {
                 if (vals[best][i] > vals[0][i] + cfg.heuristicBonus / 4) {
                     wins++;
                 }
             }
-            if (rounds >= 2 && wins * 100 <= rounds * cfg.overrideMajorityPercent) {
+            if (pairs >= 2 && wins * 100 <= pairs * cfg.overrideMajorityPercent) {
                 best = 0;
-            } else if (rounds < 2 && (double) sum[best] / count[best] < (double) sum[0] / count[0] + 2.0 * cfg.heuristicBonus) {
+            } else if (pairs < 2 && (double) sum[best] / count[best] < (double) sum[0] / count[0] + 2.0 * cfg.heuristicBonus) {
                 // One sample per line is only noise: leave the heuristic choice unless the gap is large.
                 best = 0;
             }
         }
 
         final Candidate chosen = cands.get(best);
-        final String reason = chosen.isHold() ? "hold" : best == 0 ? "kept-heuristic" : "override";
-        return new Result(chosen.sa, chosen.isHold(), true, evaluated, rollouts, elapsed, reason);
+        final String reason = chosen.isHold() ? "hold" : best == 0 ? "kept-heuristic"
+                : chosen.target != null ? "target-override" : "override";
+        return new Result(chosen.sa, chosen.isHold(), true, evaluated, rollouts, elapsed, reason, prunedCount, chosen.target);
+    }
+
+    /** Fewest paired samples before a line may be dropped; one sample has no spread to judge it by. */
+    private static final int PRUNE_MIN_SAMPLES = 2;
+    /** How many standard errors a line must be behind the leader (on paired samples) to be dropped for good. */
+    private static final double PRUNE_Z = 1.5;
+    /** Smallest lead, in evaluator points, that is worth dropping a line for. */
+    private static final double PRUNE_MIN_GAP = 25;
+
+    /**
+     * Successive elimination: marks lines that are clearly behind the current leader as pruned, so the remaining
+     * time goes to the lines that are still close. "Clearly behind" means the paired difference to the leader
+     * (same seed, so the same hidden cards) is above {@link #PRUNE_MIN_GAP} even after subtracting
+     * {@link #PRUNE_Z} standard errors, which keeps the chance of dropping the truly best line small. The leader
+     * itself is never pruned, and the heuristic line (index 0) gets its bonus like it does in the final decision.
+     *
+     * @param vals  the sampled values, {@code vals[candidate][round]}, valid up to {@code count[candidate]}
+     * @return how many lines were pruned by this call
+     */
+    static int pruneBehind(final long[][] vals, final int[] count, final boolean[] invalid, final boolean[] pruned,
+                           final int candidates, final int heuristicBonus) {
+        int leader = -1;
+        double leaderMean = Double.NEGATIVE_INFINITY;
+        int live = 0;
+        for (int c = 0; c < candidates; c++) {
+            if (invalid[c] || pruned[c] || count[c] < PRUNE_MIN_SAMPLES) {
+                continue;
+            }
+            live++;
+            long total = 0;
+            for (int i = 0; i < count[c]; i++) {
+                total += vals[c][i];
+            }
+            final double mean = (double) total / count[c] + (c == 0 ? heuristicBonus : 0);
+            if (mean > leaderMean) {
+                leaderMean = mean;
+                leader = c;
+            }
+        }
+        if (live < 2) {
+            return 0;
+        }
+        int dropped = 0;
+        for (int c = 0; c < candidates; c++) {
+            if (c == leader || invalid[c] || pruned[c] || count[c] < PRUNE_MIN_SAMPLES) {
+                continue;
+            }
+            final int pairs = Math.min(count[c], count[leader]);
+            double diffSum = 0;
+            double diffSquares = 0;
+            for (int i = 0; i < pairs; i++) {
+                final double d = (vals[leader][i] + (leader == 0 ? heuristicBonus : 0))
+                        - (vals[c][i] + (c == 0 ? heuristicBonus : 0));
+                diffSum += d;
+                diffSquares += d * d;
+            }
+            final double mean = diffSum / pairs;
+            final double variance = Math.max(0.0, (diffSquares - pairs * mean * mean) / (pairs - 1));
+            final double stdErr = Math.sqrt(variance / pairs);
+            if (mean - PRUNE_Z * stdErr > PRUNE_MIN_GAP) {
+                pruned[c] = true;
+                dropped++;
+            }
+        }
+        return dropped;
+    }
+
+    /**
+     * How many plays the heuristic AI may make while a rollout continues the turn. Hands that look like combo hands
+     * get the long limit; with {@link Config#adaptivePlayout} a hand with many spells in it gets a limit that fits its
+     * size too, so that a full grip is not cut short just because it does not look like a combo.
+     */
+    static int playoutLength(final Player player, final Config cfg) {
+        if (isComboLike(player)) {
+            return Math.max(cfg.maxPlayoutPlays, cfg.comboPlayoutPlays);
+        }
+        if (!cfg.adaptivePlayout) {
+            return cfg.maxPlayoutPlays;
+        }
+        int spells = 0;
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            if (!c.isLand()) {
+                spells++;
+            }
+        }
+        return Math.max(cfg.maxPlayoutPlays, Math.min(cfg.comboPlayoutPlays, spells + 2));
     }
 
     /**
@@ -372,7 +540,7 @@ public final class FlatMonteCarloPicker {
     }
 
     private static List<Candidate> buildCandidates(final Player player, final List<SpellAbility> approvedPlays,
-                                                   final Config cfg) {
+                                                   final Config cfg, final Predicate<SpellAbility> revalidate) {
         final List<SpellAbility> approved = dedupePlays(approvedPlays);
         final List<Candidate> cands = new ArrayList<>();
         cands.add(new Candidate(approved.get(0))); // index 0 is always the heuristic choice
@@ -383,7 +551,109 @@ public final class FlatMonteCarloPicker {
         for (int i = 1; i < plays; i++) {
             cands.add(new Candidate(approved.get(i)));
         }
+        // Other targets for the plays that have one: the heuristics pick a target by rules of thumb, rollouts can tell
+        // whether another one (the face instead of a creature, the second best creature) is better in this position.
+        // They come last so that the indexes of the plays do not move, and their number is capped for the decision.
+        int variantsLeft = cfg.targetVariants;
+        for (int i = 0; i < plays && variantsLeft > 0; i++) {
+            final SpellAbility sa = approved.get(i);
+            if (revalidate != null && !revalidate.test(sa)) {
+                continue; // the heuristics have set the target up again, or no longer want the play
+            }
+            for (final GameObject target : alternativeTargets(player, sa, variantsLeft)) {
+                cands.add(new Candidate(sa, target));
+                variantsLeft--;
+            }
+        }
+        FlatMonteCarloStats.noteTargetVariants(cfg.targetVariants - variantsLeft);
         return cands;
+    }
+
+    /** The only ability of the play (itself or a sub ability) that has targets, or null if there is none or several. */
+    static SpellAbility singleTargetingAbility(final SpellAbility sa) {
+        SpellAbility found = null;
+        for (SpellAbility ability = sa; ability != null; ability = ability.getSubAbility()) {
+            if (ability.usesTargeting()) {
+                if (found != null) {
+                    return null;
+                }
+                found = ability;
+            }
+        }
+        return found;
+    }
+
+    /**
+     * Other legal targets for a play the heuristics have already set up with exactly one target, of the same kind:
+     * if the heuristics aim at an opponent's permanent or at an opponent, only opposing targets are offered, and if they
+     * aim at the AI's own, only its own (so a burn spell is never tried on the AI's own creature). Opposing players
+     * come first, then permanents by their value, best first.
+     */
+    public static List<GameObject> alternativeTargets(final Player player, final SpellAbility sa, final int max) {
+        final List<GameObject> result = new ArrayList<>();
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null || max <= 0 || ts.isDividedAsYouChoose() || ts.getTargets().size() != 1) {
+            return result;
+        }
+        final TargetRestrictions tr = ts.getTargetRestrictions();
+        if (tr == null || tr.getMaxTargets(sa.getHostCard(), ts) != 1) {
+            return result;
+        }
+        final GameObject current = ts.getTargets().iterator().next();
+        final Boolean wantsOwn = isOwnSide(player, current);
+        if (wantsOwn == null) {
+            return result;
+        }
+        sa.setActivatingPlayer(player);
+        final List<GameEntity> candidates = new ArrayList<>(tr.getAllCandidates(ts));
+        final List<GameEntity> usable = new ArrayList<>();
+        for (final GameEntity e : candidates) {
+            if (e != current && wantsOwn == isOwnSide(player, e)) {
+                usable.add(e);
+            }
+        }
+        usable.sort((a, b) -> Integer.compare(targetRank(player, b), targetRank(player, a)));
+        for (int i = 0; i < usable.size() && result.size() < max; i++) {
+            result.add(usable.get(i));
+        }
+        return result;
+    }
+
+    /** True for the AI itself and its permanents, false for opponents and theirs, null for anything else. */
+    private static Boolean isOwnSide(final Player player, final GameObject o) {
+        if (o instanceof Player) {
+            return o == player || !((Player) o).isOpponentOf(player);
+        }
+        if (o instanceof Card) {
+            final Player controller = ((Card) o).getController();
+            return controller == player || controller != null && !controller.isOpponentOf(player);
+        }
+        return null;
+    }
+
+    private static int targetRank(final Player player, final GameEntity e) {
+        if (e instanceof Player) {
+            return 100000; // the face first: damage and drain are often best aimed there
+        }
+        final Card c = (Card) e;
+        if (c.isCreature()) {
+            return ComputerUtilCard.evaluateCreature(c);
+        }
+        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0);
+    }
+
+    /**
+     * Aims the play at the given target in place of what the heuristics chose.
+     *
+     * @return false (leaving the targets alone) if the play has no single target or this one is not legal for it
+     */
+    public static boolean applyTarget(final SpellAbility sa, final GameObject target) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null || !(target instanceof GameEntity) || !ts.canTarget((GameEntity) target)) {
+            return false;
+        }
+        ts.resetTargets();
+        return ts.getTargets().add(target);
     }
 
     /** Holding is only an option if there is something to hold mana up for, and it will not force a discard. */
@@ -444,14 +714,27 @@ public final class FlatMonteCarloPicker {
 
     /** 1.0, or {@link #CONTROL_HOLD_FACTOR} for a deck with several counterspells or many reactive spells. */
     static double controlFactor(final Player player) {
+        return controlFactor(player, true);
+    }
+
+    /**
+     * @param refined false for the original rule, which takes every deck with 30% instants for a control deck. That
+     *                is wrong for burn: Lightning Bolt and Shock are instants too, and a burn deck wants to spend them,
+     *                not to sit on them. The refined rule needs the deck to be light on creatures as well.
+     */
+    static double controlFactor(final Player player, final boolean refined) {
         int spells = 0;
         int reactive = 0;
         int counters = 0;
+        int creatures = 0;
         for (final Card c : player.getAllCards()) {
             if (c.isLand() || c.isToken() || c.isImmutable()) {
                 continue;
             }
             spells++;
+            if (c.isCreature()) {
+                creatures++;
+            }
             final boolean counter = isCounterspell(c);
             if (counter) {
                 counters++;
@@ -463,10 +746,12 @@ public final class FlatMonteCarloPicker {
         if (spells == 0) {
             return 1.0;
         }
-        if (counters >= 3 || reactive * 100 / spells >= 30) {
+        final int reactivePercent = reactive * 100 / spells;
+        final boolean creatureLight = creatures * 100 / spells <= 40;
+        if (counters >= 3 || reactivePercent >= 30 && (creatureLight || !refined)) {
             return CONTROL_HOLD_FACTOR;
         }
-        return reactive * 100 / spells <= 5 ? AGGRO_HOLD_FACTOR : 1.0;
+        return reactivePercent <= 5 ? AGGRO_HOLD_FACTOR : 1.0;
     }
 
     /**
@@ -490,6 +775,7 @@ public final class FlatMonteCarloPicker {
 
             if (!cand.isHold()) {
                 if (!sim.applySpellAbility(cand.sa)) {
+                    lastRolloutProblem = "apply";
                     return null;
                 }
                 playOut(simGame, simAi, playoutPlays);
@@ -517,10 +803,12 @@ public final class FlatMonteCarloPicker {
             throw e;
         } catch (final RuntimeException e) {
             reportFailure(e);
+            lastRolloutProblem = "error";
             return null;
         } catch (final StackOverflowError | OutOfMemoryError e) {
             // A runaway copy must not kill the real game either (Android has small heaps).
             reportFailure(new RuntimeException(e));
+            lastRolloutProblem = "error";
             return null;
         } finally {
             MyRandom.setRandom(savedRandom);
@@ -541,6 +829,105 @@ public final class FlatMonteCarloPicker {
             }
             pc.playChosenSpellAbility(next.get(0));
             GameSimulator.resolveStack(simGame, simAi.getWeakestOpponent());
+        }
+    }
+
+    /** What a held-up instant-speed card is for. Decides how much it is worth to keep the mana open for it. */
+    enum HoldKind { COUNTER, REMOVAL, TRICK, FLASH_CREATURE, OTHER }
+
+    /** Per mana value, in evaluator points. Removal and tricks only matter when there is something to use them on. */
+    private static final int HOLD_REMOVAL_PER_CMC = 16;
+    private static final int HOLD_TRICK_PER_CMC = 10;
+    private static final int HOLD_FLASH_CREATURE_PER_CMC = 12;
+    private static final int HOLD_OTHER_PER_CMC = 7;
+
+    /**
+     * Classifies an instant-speed card by looking at its abilities, not its name, so that it works for any card of any
+     * deck: counterspells, removal (destroy, damage, fight, edict, bounce or exile from the battlefield, shrink),
+     * tricks (pump, protection), flash creatures, and everything else (draw spells, utility).
+     */
+    static HoldKind holdKind(final Card c) {
+        boolean removal = false;
+        boolean trick = false;
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            final ApiType api = sa.getApi();
+            if (api == null) {
+                continue;
+            }
+            switch (api) {
+                case Counter:
+                    return HoldKind.COUNTER;
+                case Destroy:
+                case DestroyAll:
+                case DealDamage:
+                case DamageAll:
+                case Fight:
+                case Sacrifice:
+                case SacrificeAll:
+                    removal = true;
+                    break;
+                case ChangeZone:
+                case ChangeZoneAll:
+                    if (sa.getParamOrDefault("Origin", "").contains("Battlefield")) {
+                        removal = true; // bounce or exile
+                    }
+                    break;
+                case Pump:
+                case PumpAll:
+                    if (sa.getParamOrDefault("NumAtt", "").startsWith("-")
+                            || sa.getParamOrDefault("NumDef", "").startsWith("-")) {
+                        removal = true; // a shrink effect kills like removal does
+                    } else {
+                        trick = true;
+                    }
+                    break;
+                case Protection:
+                case ProtectionAll:
+                    trick = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (removal) {
+            return HoldKind.REMOVAL;
+        }
+        if (trick) {
+            return HoldKind.TRICK;
+        }
+        return c.isCreature() ? HoldKind.FLASH_CREATURE : HoldKind.OTHER;
+    }
+
+    /**
+     * Worth of keeping mana open for one card in hand, 0 if it is of no use right now. With {@code categories} off this
+     * is the original valuation (mana value only, counterspells a little higher).
+     */
+    private static int heldCardValue(final Card c, final Player simAi, final Player opponent, final int opponentCards,
+                                     final boolean categories) {
+        final int cmc = Math.max(1, c.getCMC());
+        if (!categories) {
+            final boolean counter = isCounterspell(c);
+            if (counter && opponentCards == 0) {
+                return 0; // nothing to counter, and nothing will be cast into it
+            }
+            final int value = (counter ? HOLD_COUNTER_VALUE_PER_CMC : HOLD_VALUE_PER_CMC) * cmc;
+            return opponentCards == 0 ? value / 2 : value; // can still be used on what is already on the table
+        }
+        final boolean opponentHasCreatures = opponent != null && !opponent.getCreaturesInPlay().isEmpty();
+        final boolean aiHasCreatures = !simAi.getCreaturesInPlay().isEmpty();
+        switch (holdKind(c)) {
+            case COUNTER:
+                // nothing to counter when the opponent has no cards, and nothing will be cast into the open mana
+                return opponentCards == 0 ? 0 : HOLD_COUNTER_VALUE_PER_CMC * cmc;
+            case REMOVAL:
+                // damage and exile also work on the face or the table later, so it is never worth nothing
+                return HOLD_REMOVAL_PER_CMC * cmc / (opponentHasCreatures ? 1 : 2);
+            case TRICK:
+                return aiHasCreatures ? HOLD_TRICK_PER_CMC * cmc : HOLD_TRICK_PER_CMC * cmc / 3;
+            case FLASH_CREATURE:
+                return HOLD_FLASH_CREATURE_PER_CMC * cmc;
+            default:
+                return HOLD_OTHER_PER_CMC * cmc;
         }
     }
 
@@ -567,14 +954,9 @@ public final class FlatMonteCarloPicker {
             if (!isInstantSpeedSpell(c) || c.getCMC() > mana) {
                 continue;
             }
-            final boolean counter = isCounterspell(c);
-            if (counter && opponentCards == 0) {
-                continue; // nothing to counter, and nothing will be cast into it
-            }
-            final int perCmc = counter ? HOLD_COUNTER_VALUE_PER_CMC : HOLD_VALUE_PER_CMC;
-            int value = perCmc * Math.max(1, c.getCMC());
-            if (opponentCards == 0) {
-                value /= 2; // can still be used on what is already on the table
+            final int value = heldCardValue(c, simAi, opponent, opponentCards, cfg.categoryHold);
+            if (value <= 0) {
+                continue;
             }
             options.add(new int[] { value, Math.max(1, c.getCMC()) });
         }
@@ -630,8 +1012,13 @@ public final class FlatMonteCarloPicker {
 
     private static void reportFailure(final RuntimeException e) {
         // A few lines are plenty to notice a systematic problem without flooding the log of a long game.
+        final StackTraceElement[] trace = e.getStackTrace();
+        FlatMonteCarloStats.noteFailure(String.valueOf(e) + (trace.length > 0 ? " @ " + trace[0] : ""));
         if (TOTAL_FAILURES.incrementAndGet() <= 5) {
             System.err.println("Flat Monte Carlo rollout failed, using the heuristic choice instead: " + e);
+            for (int i = 0; i < Math.min(8, trace.length); i++) {
+                System.err.println("\tat " + trace[i]);
+            }
         }
     }
 }
