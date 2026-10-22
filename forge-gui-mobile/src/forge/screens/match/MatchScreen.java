@@ -408,7 +408,10 @@ public class MatchScreen extends FScreen {
         }
         final float width = getWidth();
         final float available = getHeight() - VPrompt.HEIGHT - coachTop;
-        final float panelWidth = Math.min(width * 0.72f, Utils.scale(560));
+        final boolean portrait = getHeight() > width;
+        coach.setCompact(portrait);
+        // portrait is narrow, so the note takes nearly the full width there
+        final float panelWidth = portrait ? width - 2 * Utils.scale(4) : Math.min(width * 0.72f, Utils.scale(560));
         coach.setBounds((width - panelWidth) / 2, coachTop + Utils.scale(4), panelWidth, coach.preferredHeight(available));
     }
 

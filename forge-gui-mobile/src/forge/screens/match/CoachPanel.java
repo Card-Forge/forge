@@ -23,12 +23,13 @@ public class CoachPanel extends FContainer {
     private static final float BUTTON_WIDTH = Utils.scale(74);
     private static final float TITLE_HEIGHT = Utils.scale(22);
     private static final float RADIUS = Utils.scale(8);
-    private static final Color BACKDROP = new Color(20 / 255f, 26 / 255f, 34 / 255f, 0.93f);
-    private static final Color EDGE = new Color(1f, 1f, 1f, 0.22f);
+    private static final float BORDER = Math.max(1f, Utils.scale(1));
+    private static final Color BACKDROP = new Color(20 / 255f, 26 / 255f, 34 / 255f, 0.95f);
+    private static final Color EDGE = new Color(0.45f, 0.52f, 0.62f, 0.95f);
     private static final Color TITLE_COLOR = new Color(1f, 0.82f, 0.35f, 1f);
 
     // fonts come from the loaded skin, so they are made with the panel rather than when the class loads
-    private final FSkinFont titleFont = FSkinFont.get(15);
+    private FSkinFont titleFont = FSkinFont.get(15);
     private final FTextArea body = add(new FTextArea(false));
     private final FButton btnNext = add(new FButton("Next"));
     private final FButton btnHide = add(new FButton("Hide"));
@@ -36,6 +37,7 @@ public class CoachPanel extends FContainer {
     private final Runnable relayout;
     private String title = "";
     private boolean collapsed;
+    private boolean compact; // portrait: a taller panel with smaller text, since the screen is narrow
     private Runnable onNext;
 
     /** @param relayout0 asks the match screen to size this panel again, which it does when the panel's height changes */
@@ -76,12 +78,29 @@ public class CoachPanel extends FContainer {
         return collapsed;
     }
 
+    /**
+     * Switches between the landscape and portrait looks. Portrait is narrow, so the text is smaller and the panel
+     * taller to keep a whole note readable without scrolling.
+     */
+    public void setCompact(final boolean compact0) {
+        if (compact == compact0) {
+            return;
+        }
+        compact = compact0;
+        titleFont = FSkinFont.get(compact ? 13 : 15);
+        body.setFont(FSkinFont.get(compact ? 10 : 12));
+        btnNext.setFont(FSkinFont.get(compact ? 12 : 13));
+        btnHide.setFont(FSkinFont.get(compact ? 12 : 13));
+    }
+
     /** How tall the panel wants to be in a space of the given height: a bar when collapsed, else a share of the screen. */
     public float preferredHeight(final float availableHeight) {
         if (collapsed) {
             return BUTTON_HEIGHT + 2 * PAD;
         }
-        return Math.min(availableHeight * 0.42f, Utils.scale(210));
+        return compact
+                ? Math.min(availableHeight * 0.5f, Utils.scale(270))
+                : Math.min(availableHeight * 0.42f, Utils.scale(210));
     }
 
     private void updateButtons() {
@@ -112,8 +131,10 @@ public class CoachPanel extends FContainer {
 
     @Override
     protected void drawBackground(final Graphics g) {
-        g.fillRoundRect(BACKDROP, 0, 0, getWidth(), getHeight(), RADIUS);
-        g.drawRoundRect(1, EDGE, 0, 0, getWidth(), getHeight(), RADIUS);
+        // The border is a slightly larger filled shape behind the backdrop. Graphics.drawRoundRect would outline its
+        // three corner pieces separately and leave stray lines across the inside of the panel.
+        g.fillRoundRect(EDGE, 0, 0, getWidth(), getHeight(), RADIUS);
+        g.fillRoundRect(BACKDROP, BORDER, BORDER, getWidth() - 2 * BORDER, getHeight() - 2 * BORDER, RADIUS - BORDER);
         final float titleWidth = getWidth() - 2 * (BUTTON_WIDTH + PAD) - 2 * PAD;
         if (collapsed) {
             g.drawText(title, titleFont, TITLE_COLOR, PAD, getHeight() - PAD - BUTTON_HEIGHT, titleWidth,

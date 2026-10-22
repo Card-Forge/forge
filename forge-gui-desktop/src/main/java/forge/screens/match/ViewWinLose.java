@@ -130,7 +130,8 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         btnRestart.setText(tutorial ? HowToPlay.restartLabel()
                 : puzzle ? "Restart puzzle" : localizer.getMessage("btnStartNewMatch"));
         btnRestart.setFont(FSkin.getRelativeFont(22));
-        btnQuit.setText(replay ? "Close replay" : puzzle ? "Quit puzzle" : localizer.getMessage("btnQuitMatch"));
+        btnQuit.setText(replay ? "Close replay" : tutorial ? HowToPlay.quitLabel()
+                : puzzle ? "Quit puzzle" : localizer.getMessage("btnQuitMatch"));
         btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
 

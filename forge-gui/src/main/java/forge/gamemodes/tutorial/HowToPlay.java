@@ -55,6 +55,11 @@ public final class HowToPlay implements IHasForgeLog {
         return playedMode == Mode.WATCH ? "Try it yourself" : "Play again";
     }
 
+    /** What the end screen's quit button says; the tutorial should not read like a puzzle. */
+    public static String quitLabel() {
+        return "Back to the menu";
+    }
+
     /** Called when the demo has been watched to the end: restarting now starts the player's own attempt. */
     static void demoFinished() {
         nextMode = Mode.TRY;

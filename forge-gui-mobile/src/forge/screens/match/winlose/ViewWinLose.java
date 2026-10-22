@@ -91,8 +91,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         } else if (game0.getGameType() == GameType.Puzzle) {
             // a puzzle is one fixed game: no next game and no new match, only trying it again
             btnContinue.setEnabled(false);
-            btnRestart.setText(HowToPlay.isTutorialGame(game0) ? HowToPlay.restartLabel() : "Restart puzzle");
-            btnQuit.setText("Quit puzzle");
+            final boolean tutorial = HowToPlay.isTutorialGame(game0);
+            btnRestart.setText(tutorial ? HowToPlay.restartLabel() : "Restart puzzle");
+            btnQuit.setText(tutorial ? HowToPlay.quitLabel() : "Quit puzzle");
         }
 
         // Control of the win/lose is handled differently for various game modes
