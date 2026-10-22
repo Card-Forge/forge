@@ -85,6 +85,7 @@ Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
+Denobulan:Denobulans
 Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
