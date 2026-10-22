@@ -3324,6 +3324,9 @@ public class AbilityUtils {
             }
             return num / secondaryNum;
         } else if (s[0].contains("Mod")) {
+            if (secondaryNum == 0) {
+                return 0;
+            }
             return num % secondaryNum;
         } else if (s[0].contains("Abs")) {
             return Math.abs(num);
