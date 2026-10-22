@@ -155,6 +155,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Config.instance().saveSettings();
                     }
                 }, 0);
+            lstSettings.addItem(new BooleanSetting(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN,
+                Forge.getLocalizer().getMessage("lblKeepMouseInFullscreen"),
+                Forge.getLocalizer().getMessage("nlKeepMouseInFullscreen")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        Forge.updateMouseConfine();
+                    }
+                }, 0);
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
                 Forge.getLocalizer().getMessage("lblVideoMode"),
                 Forge.getLocalizer().getMessage("nlVideoMode"),

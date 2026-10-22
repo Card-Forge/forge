@@ -259,6 +259,8 @@ public class Forge implements ApplicationListener {
             if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 600 Cache size, 400 Cache size for morethan 5GB RAM
                 cacheSize = totalDeviceRAM > 10000 ? 600 : 400;
         }
+        updateMouseConfine();
+
         if (!initialized) {
             initialized = true;
 
@@ -282,6 +284,19 @@ public class Forge implements ApplicationListener {
         }
     }
 
+    /**
+     * Confine the mouse to the window when fullscreen and the preference is on.
+     * Uses GLFW_CURSOR_CAPTURED (visible cursor) rather than setCursorCatched.
+     */
+    public static void updateMouseConfine() {
+        if (GuiBase.isAndroid() || deviceAdapter == null || Gdx.graphics == null) {
+            return;
+        }
+        boolean confine = Gdx.graphics.isFullscreen()
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN);
+        deviceAdapter.setMouseConfined(confine);
+    }
+
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {
@@ -297,6 +312,8 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setWindowFocus(focused);
         if (!focused) {
             haltControllerInput();
+        } else {
+            updateMouseConfine();
         }
     }
 
