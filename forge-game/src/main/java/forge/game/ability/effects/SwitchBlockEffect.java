@@ -9,6 +9,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatChanged;
@@ -24,6 +25,12 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Blocker, blocker);
         game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams, false);
         game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+    }
+
+    // Same record BlockEffect and PhaseHandler keep for a declared block; Sorrow's Path finds its attackers through it.
+    private void recordBlock(final Card attacker, final Card blocker) {
+        blocker.addBlockedThisTurn(CardCopyService.getLKICopy(attacker));
+        attacker.addBlockedByThisTurn(CardCopyService.getLKICopy(blocker));
     }
 
     @Override
@@ -150,12 +157,14 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
                 final Card attacker = attackers.get(i);
                 if ((blockingStates[i] & 1) == 1) {
                     combat.addBlocker(attacker, blocker2);
+                    recordBlock(attacker, blocker2);
                     if (isReblock) {
                         runTriggers(game, attacker, blocker2);
                     }
                 }
                 if ((blockingStates[i] & 2) == 2) {
                     combat.addBlocker(attacker, blocker1);
+                    recordBlock(attacker, blocker1);
                     if (isReblock) {
                         runTriggers(game, attacker, blocker1);
                     }
