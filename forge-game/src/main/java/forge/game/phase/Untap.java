@@ -139,6 +139,8 @@ public class Untap extends Phase {
                 }
                 untapList.add(chosen);
                 restrictList.remove(chosen);
+            } else {
+                break;
             }
         }
 
