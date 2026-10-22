@@ -1,0 +1,10 @@
+Name:Miles O'Brien, Transporter Ops
+ManaCost:2 W
+Types:Legendary Creature Human Artificer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When Miles O'Brien enters, return up to one other target creature or artifact you control to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Other+YouCtrl,Artifact.Other+YouCtrl | ValidTgtsDesc$ another creature or artifact you control | Origin$ Battlefield | Destination$ Hand
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDraw | CheckSVar$ X | TriggerDescription$ At the beginning of each end step, if a permanent was returned to your hand from the battlefield this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$ThisTurnEntered_Hand_from_Battlefield_Permanent.YouOwn
+Oracle:When Miles O'Brien enters, return up to one other target creature or artifact you control to its owner's hand.\nAt the beginning of each end step, if a permanent was returned to your hand from the battlefield this turn, draw a card.
