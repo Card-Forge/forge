@@ -112,6 +112,7 @@ Employee:Employees
 Eternal:Eternals
 Eye:Eyes
 Faerie:Faeries
+Ferengi:Ferengi
 Ferret:Ferrets
 Fish:Fish
 Flagbearer:Flagbearers
