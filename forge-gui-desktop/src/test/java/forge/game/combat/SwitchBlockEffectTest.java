@@ -87,4 +87,31 @@ public class SwitchBlockEffectTest extends AITest {
         game.getStack().addAllTriggeredAbilitiesToStack();
         assertFalse("blocking an Orc again triggers Dwarven Soldier", game.getStack().isEmpty());
     }
+
+    /**
+     * Sorrow's Path finds the attackers it moves through the blocked-by record of the targeted blockers. A
+     * blocker that was switched onto another attacker must be on that record, or a second activation
+     * misses the attacker it now blocks.
+     */
+    @Test
+    public void sorrowsPathSecondSwitchSeesTheBlockTheFirstOneMade() {
+        startCombat();
+        Card attacker1 = attacker("Grizzly Bears");
+        Card attacker2 = attacker("Runeclaw Bear");
+        Card attacker3 = attacker("Hill Giant");
+        Card blocker1 = blocker("Goblin Chariot", attacker1);
+        Card blocker2 = blocker("Savannah Lions", attacker2);
+        Card blocker3 = blocker("Pearled Unicorn", attacker3);
+
+        activate("Sorrow's Path", attackerPlayer, blocker1, blocker2);
+        assertTrue("first switch: blocker1 now blocks attacker2", combat.isBlocking(blocker1, attacker2));
+        assertTrue("first switch: blocker2 now blocks attacker1", combat.isBlocking(blocker2, attacker1));
+
+        activate("Sorrow's Path", attackerPlayer, blocker1, blocker3);
+
+        assertTrue("blocker1 takes over attacker3", combat.isBlocking(blocker1, attacker3));
+        assertTrue("blocker3 takes over the attacker blocker1 was blocking", combat.isBlocking(blocker3, attacker2));
+        assertFalse(combat.isBlocking(blocker1, attacker2));
+        assertFalse(combat.isBlocking(blocker3, attacker3));
+    }
 }
