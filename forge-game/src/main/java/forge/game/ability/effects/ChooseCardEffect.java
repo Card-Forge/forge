@@ -254,6 +254,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
                     CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
                             ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
+                    // only the cards actually searched can be found (Aven Mindcensor), none if searching is not allowed (Leonin Arbiter)
+                    final CardCollection searchable = p.canSearchLibraryWith(sa, searched) ? new CardCollection(shown) : new CardCollection();
+                    pChoices = CardLists.filter(pChoices, searchable::contains);
                     DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
                             host.getTranslatedName() + " - " +
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
