@@ -407,15 +407,10 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) No Way Out
 1. (Uk) Pursued by Something
 1. (Uk) Raiders' Allegiance
-1. (Uk) The Bean
-1. (Uk) The Windy City
-1. (Uk) Asmoranomardicadaistinaculdacar's Kitchen
-1. (Uk) Elvish Impersonation Contest
-1. (Uk) Omenpath Instability - (Phenomenon)
 1. (Uk) That's Enough Slices - (Phenomenon)
 1. (Uk) Ghirapur Grand Prix
 1. (Uk) Preston's Stage
-1. (Uk) Circus of the Sun
+1. (Uk) Circus of the Sun (returns card to its owners hand instead of yours)
 
 ### Tier 0.5: Done*
 
@@ -456,6 +451,14 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Gnome-Made Engine
 1. Labro Bot
 1. Voracious Vacuum
+
+#### Planes
+(These have significant chances between their printings and might be worth to implement them as a variant)
+1. (Uk) The Bean (version from MagicCon Chicago 2025)
+1. (Uk) The Windy City (version from MagicCon Chicago 2025)
+1. (Uk) Asmoranomardicadaistinaculdacar's Kitchen (version from MagicCon Vegas 2024)
+1. (Uk) Elvish Impersonation Contest (version from MagicCon Vegas 2024)
+1. (Uk) Omenpath Instability - (Phenomenon) (version from MagicCon Vegas 2024)
 
 #### Keyword or Mechanic Recreated via Card Script
 (These cards have unique un-keywords or mechanics which haven't been implemented within the engine, but have been scripted such that they should work the same way for the most part. Edge case interactions may exist however, and a "keyword-matters" un-effect wouldn't be able to include them.)
