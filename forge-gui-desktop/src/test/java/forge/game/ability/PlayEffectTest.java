@@ -23,9 +23,16 @@ public class PlayEffectTest extends AITest {
     /** Counts how often a card is offered, and fails the test if the same one keeps coming back. */
     private static class CountingController extends PlayerControllerAi {
         int offered = 0;
+        private final boolean alwaysPick;
 
         CountingController(Game game, Player p) {
+            this(game, p, false);
+        }
+
+        /** @param alwaysPick take the first offered card instead of leaving the choice to the AI */
+        CountingController(Game game, Player p, boolean alwaysPick) {
             super(game, p, p.getLobbyPlayer());
+            this.alwaysPick = alwaysPick;
         }
 
         @Override
@@ -34,6 +41,9 @@ public class PlayEffectTest extends AITest {
                 Player targetedPlayer, Map<String, Object> params) {
             if (++offered > 10) {
                 throw new AssertionError("offered " + offered + " times");
+            }
+            if (alwaysPick) {
+                return optionList.iterator().next();
             }
             return super.chooseSingleEntityForEffect(optionList, delayedReveal, sa, title, isOptional,
                     targetedPlayer, params);
@@ -56,5 +66,25 @@ public class PlayEffectTest extends AITest {
         AbilityUtils.resolve(sa);
 
         assertTrue("offered " + controller.offered + " times for Amount$ 2", controller.offered <= 2);
+    }
+
+    /**
+     * The shape of Mnemonic Deluge: a copy is cast for free, and a spell with "X can't be 0" cannot be, so the
+     * try has to be spent or the same card comes back every time.
+     */
+    @Test(timeOut = 60000)
+    public void aFreeCopyOfAnXMinSpellIsOfferedNoMoreThanAmountTimes() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        CountingController controller = new CountingController(game, p, true);
+        p.dangerouslySetController(controller);
+        Card grind = addCardToZone("Mind Grind", p, ZoneType.Graveyard);
+        SpellAbility sa = AbilityFactory.getAbility("DB$ Play | Defined$ Self | CopyCard$ True | Amount$ 3"
+                + " | AllowRepeats$ True | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell", grind);
+        sa.setActivatingPlayer(p);
+
+        AbilityUtils.resolve(sa);
+
+        assertTrue("offered " + controller.offered + " times for Amount$ 3", controller.offered <= 3);
     }
 }
