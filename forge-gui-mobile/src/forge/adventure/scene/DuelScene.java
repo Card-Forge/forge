@@ -114,7 +114,7 @@ public class DuelScene extends ForgeScene {
             float h = getHeight();
             float w = h / FCardPanel.ASPECT_RATIO;
             float xPos = (getWidth() - w) / 2;
-            CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top, true);
+            CardRenderer.drawCard(g, cardView, xPos, 0, w, h, CardStackPosition.Top);
         }
     }
 
@@ -225,7 +225,7 @@ public class DuelScene extends ForgeScene {
                 String lookupKey = insultKeysMap.get(randomKey);
 
                 String bossInsultMsg = insult != null ? insult : Forge.getLocalizer().getMessage(lookupKey);
-                bossDialogue = createFOption(bossInsultMsg, enemyName, fb, () -> {
+                bossDialogue = createFOption(bossInsultMsg, enemy.getDisplayName(), fb, () -> {
                     exitChain.run();
                 });
                 FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
@@ -486,7 +486,7 @@ public class DuelScene extends ForgeScene {
             if (deck == null) {
                 isDeckMissing = true;
                 boolean canUseGeneticAI = Config.instance().getConfigData().enableGeneticAI;
-                isDeckMissingMsg = localizer.getMessage("advDeckMissingForEnemy", currentEnemy.getName())
+                isDeckMissingMsg = localizer.getMessage("advDeckMissingForEnemy", currentEnemy.getDisplayName())
                         + (this.eventData == null ? (canUseGeneticAI ? localizer.getMessage("advGeneticAiDeckWillBeUsed") : localizer.getMessage("advPlayerDeckWillBeUsed")) : localizer.getMessage("advPlayerDeckWillBeUsed"));
                 System.err.println(isDeckMissingMsg);
                 deck = this.eventData == null && canUseGeneticAI ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
@@ -494,7 +494,7 @@ public class DuelScene extends ForgeScene {
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
             LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai));
-            enemyPlayer.setName(enemy.getName()); //Override name if defined in the map.(only supported for 1 enemy atm)
+            enemyPlayer.setName(enemy.getDisplayName()); //Override name if defined in the map.(only supported for 1 enemy atm)
             TextureRegion enemyAvatar = enemy.getAvatar(i);
             enemyAvatar.flip(true, false); //flip facing left
             FSkin.getAvatars().put(enemyAvatarKey + i, enemyAvatar);
@@ -574,13 +574,13 @@ public class DuelScene extends ForgeScene {
             final Runnable introDone = () -> MatchController.setIntroShowing(false);
             String Intro = enemy.getBossIntro();
             if (Intro != null) {
-                bossDialogue = createFOption((Intro), enemy.getName(), fb, introDone);
+                bossDialogue = createFOption((Intro), enemy.getDisplayName(), fb, introDone);
             } else {
                 int randomKey = Aggregates.randomInt(1, 35);
                 String lookupKey = introKeysMap.get(randomKey);
 
                 bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : localizer.getMessage(lookupKey),
-                    enemy.getName(), fb, introDone);
+                        enemy.getDisplayName(), fb, introDone);
             }
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
                     bossDialogue.show())), false, true);

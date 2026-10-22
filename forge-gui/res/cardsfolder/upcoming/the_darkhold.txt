@@ -1,0 +1,11 @@
+Name:The Darkhold
+ManaCost:1 B B
+Types:Legendary Artifact Book
+A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ SIN | CounterNum$ 1 | SubAbility$ DBDraw | AILogic$ TheOneRing | SpellDescription$ Put a sin counter on CARDNAME. Draw a card for each sin counter on it, then you lose 1 life for each card in your hand.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ Y
+A:AB$ SetLife | Cost$ 6 B B T | Defined$ Player | LifeAmount$ Z | SorcerySpeed$ True | SpellDescription$ Each player's life total becomes the lowest life total among all players. Activate only as a sorcery.
+SVar:X:Count$CardCounters.SIN
+SVar:Y:Count$ValidHand Card.YouOwn
+SVar:Z:PlayerCountPlayers$LowestLifeTotal
+Oracle:{T}: Put a sin counter on The Darkhold. Draw a card for each sin counter on it, then you lose 1 life for each card in your hand.\n{6}{B}{B}, {T}: Each player's life total becomes the lowest life total among all players. Activate only as a sorcery.

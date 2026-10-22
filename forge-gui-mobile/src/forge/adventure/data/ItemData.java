@@ -80,13 +80,11 @@ public class ItemData implements Serializable, Cloneable {
             "adv.item." + makeKey(name) + ".displayName", name);
     }
 
-    //Builds a .properties key from this item's English name by dropping the
-    //characters that would otherwise break a properties key (space, ':'),
-    //keeping everything else (letters, digits, apostrophes, hyphens...) as-is.
-    //e.g. "Silver Challenge Coin" -> "SilverChallengeCoin"
+    //Builds a .properties key from this item's English name, keeping only
+    //letters and digits. e.g. "Sir Donovan's Amulet" -> "SirDonovansAmulet"
     private static String makeKey(String text) {
         if (text == null) return "";
-        return text.replace(":", "").replace(" ", "");
+        return text.replaceAll("[^A-Za-z0-9]", "");
     }
 
     @Override

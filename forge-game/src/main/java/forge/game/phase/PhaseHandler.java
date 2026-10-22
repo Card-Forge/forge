@@ -241,6 +241,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         boolean skipped = false;
 
         game.getTriggerHandler().resetActiveTriggers();
+        game.getUndoManager().barrier("Phase Begin.");
         if (isSkippingPhase(phase)) {
             skipped = true;
             givePriorityToPlayer = false;
@@ -526,6 +527,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 planarDiceSpecialActionThisTurn = 0;
                 // Play the End Turn sound
                 game.fireEvent(new GameEventTurnEnded());
+                game.getUndoManager().barrier("Turn Ended.");
                 break;
             default: // no action
         }
@@ -541,6 +543,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     return;
                 }
 
+                if (!game.getUndoManager().isOwner(whoDeclares)) {
+                    game.getUndoManager().barrier("Opponent declared attackers");
+                }
                 whoDeclares.getController().declareAttackers(playerTurn, combat);
                 combat.removeAbsentCombatants();
 
@@ -667,6 +672,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     repRunParams.put(AbilityKey.Player, whoDeclaresBlockers);
                     ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
                     if (repres == ReplacementResult.NotReplaced) {
+                        if (!game.getUndoManager().isOwner(whoDeclaresBlockers)) {
+                            game.getUndoManager().barrier("Opponent declared blockers");
+                        }
                         // If not replaced, run normal declare blockers
                         whoDeclaresBlockers.getController().declareBlockers(p, combat);
                     }
@@ -1067,6 +1075,12 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 if (chosenSa == null) {
                     break; // that means 'I pass'
                 }
+
+                // An opponent (AI or remote human) acted: the player now knows something, so no undo past this point
+                if (!game.getUndoManager().isOwner(pPlayerPriority)) {
+                    game.getUndoManager().barrier("Opponent acted");
+                }
+
                 if (DEBUG_PHASES) {
                     System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
                 }
@@ -1177,7 +1191,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
-            allAffectedCards.clear();
             // Update flashback views after static abilities have been recalculated,
             // so play-from-zone abilities (e.g. Bolas's Citadel) are reflected
             game.getPlayers().forEach(Player::updateFlashbackForView);

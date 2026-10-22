@@ -84,7 +84,7 @@ public class BiomeData implements Serializable {
         }
         ArrayList<PointOfInterestData> cavesDungeon = new ArrayList<>();
         for (PointOfInterestData data : pointOfInterestList) {
-            if ("cave".equalsIgnoreCase(data.type) || "dungeon".equalsIgnoreCase(data.type)) {
+            if (data.isDungeon()) {
                 cavesDungeon.add(data);
             }
         }

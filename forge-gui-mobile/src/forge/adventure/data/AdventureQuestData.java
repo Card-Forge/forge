@@ -231,9 +231,7 @@ public class AdventureQuestData implements Serializable {
                 stage.setTargetPOI(poiTokens, this.name);
         }
 
-        if (stage.getTargetPOI() != null
-                && ("cave".equalsIgnoreCase( stage.getTargetPOI().getData().type)
-                || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
+        if (stage.getTargetPOI() != null && stage.getTargetPOI().getData().isDungeon()) {
             //todo: decide how to handle this in "anyPOI" scenarios
             WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID()).clearDeletedObjects();
         }
@@ -290,7 +288,7 @@ public class AdventureQuestData implements Serializable {
         }
         for (Enumeration<String> enemy = enemyTokens.keys(); enemy.hasMoreElements();){
             String enemyKey = enemy.nextElement();
-            data = data.replace(enemyKey, enemyTokens.get(enemyKey).getName());
+            data = data.replace(enemyKey, enemyTokens.get(enemyKey).getDisplayName());
         }
         for (Enumeration<String> other = otherTokens.keys(); other.hasMoreElements();){
             String key = other.nextElement();
@@ -317,8 +315,8 @@ public class AdventureQuestData implements Serializable {
 
         for (Enumeration<String> e = enemyTokens.keys(); e.hasMoreElements();){
             String key = e.nextElement();
-            data.text = data.text.replace(key, enemyTokens.get(key).getName());
-            data.name = data.name.replace(key, enemyTokens.get(key).getName());
+            data.text = data.text.replace(key, enemyTokens.get(key).getDisplayName());
+            data.name = data.name.replace(key, enemyTokens.get(key).getDisplayName());
         }
 
         for (Enumeration<String> other = otherTokens.keys(); other.hasMoreElements();){

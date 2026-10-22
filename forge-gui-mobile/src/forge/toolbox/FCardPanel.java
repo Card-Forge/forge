@@ -171,7 +171,7 @@ public class FCardPanel extends FDisplayObject {
         } else {
             CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
             if (Forge.hasGamepad() && isHovered())
-                g.drawRect(3f, Color.LIME, x, y, w, h);
+                FSelectionBox.draw(g, Color.LIME, 3f, x, y, w, h);
         }
         if (tapped) {
             g.endTransform();

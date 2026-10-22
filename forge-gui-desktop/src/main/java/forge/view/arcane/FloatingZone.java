@@ -782,8 +782,8 @@ public class FloatingZone extends FloatingCardArea {
         if (digit == 0) {
             // Ctrl+0: auto-pick the first N selectables that haven't been picked yet.
             // Selection progress is tracked client-side via the highlighted set — both
-            // InputSelectTargets and InputSelectManyBase call setHighlighted(true/false)
-            // on add/remove, so highlighted ∩ selectable == cards picked so far.
+            // InputSelectTargets and InputSelectManyBase mark each pick as chosen in their
+            // selection, so highlighted ∩ selectable == cards picked so far.
             // Batched into one selectCard so the server processes atomically — separate
             // messages race (a thread spawned per message).
             for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {

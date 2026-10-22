@@ -222,6 +222,24 @@ public class TargetingOverlay {
         drawArrowStyled(g, start, end, connects, FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION), false);
     }
 
+    /**
+     * Arrow between two items of the stack view. They sit close together in one column, so a plain arrow would be a short
+     * straight line hidden over the card art; this one always bows out to the left of the column so it reads as a curve.
+     */
+    public static void drawStackArrow(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects) {
+        if (start == null || end == null) { return; }
+        final String style = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ARROW_OPTION);
+        if ("Point".equals(style) || "Line".equals(style)) {
+            drawArrowStyled(g, start, end, connects, style, false);
+            return;
+        }
+        final FSkinColor color = connects == ArcConnection.FoesStackTargeting ? foeDefColor : friendColor;
+        final float side = end.y >= start.y ? 1f : -1f; // keeps the bow on the left whichever way the arrow points
+        g.drawCurvedArrow(Utils.scale(3), color.alphaColor(0.8f).getColor(),
+                FSkinColor.getStandardColor(Color.WHITE).alphaColor(0.9f).getColor(),
+                start.x, start.y, end.x, end.y, false, side * Utils.scale(60));
+    }
+
     private static void drawArrowStyled(final Graphics g, final Vector2 start, final Vector2 end, final ArcConnection connects, final String style, final boolean solid) {
         if (start == null || end == null) { return; }
 

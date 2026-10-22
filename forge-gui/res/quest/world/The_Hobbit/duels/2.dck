@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/AndySCWilson_-_Jund_Sacrifice_(Standard,_#901767).dck
+Deck Type=constructed
+
+[Main]
+1 Swamp
+1 Wolverine, Fierce Fighter
+2 Deadly Precision
+4 Lively Dirge
+4 Obsessive Pursuit
+2 Formidable Speaker
+4 Greedy Freebooter
+4 Gene Pollinator
+3 Umbral Collar Zealot
+1 Callous Inspector
+4 The Sackville-Bagginses
+4 Biotech Specialist
+1 Forest
+2 Blood Crypt
+2 Wastewood Verge
+4 Starting Town
+4 Overgrown Tomb
+4 Stomping Ground
+4 Blooming Marsh
+1 Smaug the Magnificent
+2 Llanowar Elves
+2 Shoot the Sheriff
+[Sideboard]
+3 Requiting Hex
+3 Strategic Betrayal
+4 Professor Dellian Fel
+1 M.O.D.O.K.
+3 Duress
+1 Ral Zarek, Guest Lecturer

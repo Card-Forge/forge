@@ -44,6 +44,7 @@ import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.AITimeoutTracker;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
@@ -174,11 +175,10 @@ public class AiBlockController {
             }
         }
 
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (!sortedAttackers.isEmpty() && !firstAttacker.isEmpty() && ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // add creatures attacking the Player to the front of the list
             sortedAttackers.addAll(0, firstAttacker);
         } else {
-            // add creatures attacking the Player to the back of the list
             sortedAttackers.addAll(firstAttacker);
         }
         return sortedAttackers;
@@ -186,7 +186,9 @@ public class AiBlockController {
 
     // Good Blocks means a good trade or no trade
     private void makeGoodBlocks(final Combat combat) {
+        AITimeoutTracker.check();
         for (final Card attacker : Lists.newArrayList(attackersLeft)) {
+            AITimeoutTracker.check();
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
                 continue;
             }
@@ -298,6 +300,7 @@ public class AiBlockController {
 
         // 6. Blockers that don't survive until the next turn anyway
         for (final Card attacker : Lists.newArrayList(attackersLeft)) {
+            AITimeoutTracker.check();
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
                 continue;
             }
@@ -365,11 +368,13 @@ public class AiBlockController {
      * @param combat a {@link forge.game.combat.Combat} object.
      */
     private void makeGangBlocks(final Combat combat) {
+        AITimeoutTracker.check();
         List<Card> currentAttackers = CardLists.filter(attackersLeft, rampagesOrNeedsManyToBlock(combat).negate());
         List<Card> blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : attackersLeft) {
+            AITimeoutTracker.check();
             if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
                 continue;
@@ -417,6 +422,7 @@ public class AiBlockController {
 
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : attackersLeft) {
+            AITimeoutTracker.check();
             if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
                 continue;
@@ -455,6 +461,7 @@ public class AiBlockController {
             boolean foundDoubleBlock = false;
             // consider a double block
             for (final Card blocker : usableBlockers) {
+                AITimeoutTracker.check();
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal the remaining damage
                 final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang);
@@ -496,6 +503,7 @@ public class AiBlockController {
             // consider a triple block if a double block was not found
             blockerLoop:
             for (final Card secondBlocker : usableBlockers) {
+                AITimeoutTracker.check();
                 // consider the properties of the second blocker
                 final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang);
                 final int additionalDamage2 = ComputerUtilCombat.dealsDamageAsBlocker(attacker, secondBlocker);
@@ -547,10 +555,12 @@ public class AiBlockController {
     }
 
     private void makeGangNonLethalBlocks(final Combat combat) {
+        AITimeoutTracker.check();
         List<Card> blockers;
 
         // Try to block a Menace attacker with two blockers, neither of which will die
         for (final Card attacker : Lists.newArrayList(attackersLeft)) {
+            AITimeoutTracker.check();
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) != 2) {
                 continue;
             }
@@ -569,6 +579,7 @@ public class AiBlockController {
 
             // consider a double block
             for (final Card blocker : usableBlockers) {
+                AITimeoutTracker.check();
                 final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(blocker, attacker.getNetCombatDamage(), attacker, true);
                 // only do it if neither blocking creature will die
                 if (absorbedDamage > attacker.getNetCombatDamage() && absorbedDamage2 > attacker.getNetCombatDamage()) {
@@ -593,10 +604,12 @@ public class AiBlockController {
      * @param combat a {@link forge.game.combat.Combat} object.
      */
     private void makeTradeBlocks(final Combat combat) {
+        AITimeoutTracker.check();
         List<Card> killingBlockers;
         boolean needsRefresh = false;
 
         for (final Card attacker : Lists.newArrayList(attackersLeft)) {
+            AITimeoutTracker.check();
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
                 continue;
             }
@@ -644,6 +657,7 @@ public class AiBlockController {
     // re-evaluate it when a blocker was assigned since the last check - skipping
     // an attacker leaves the combat unchanged and the previous result still holds
     private void makeChumpBlocks(final Combat combat, List<Card> attackers, boolean recheckDanger) {
+        AITimeoutTracker.check();
         if (recheckDanger && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
             lifeInDanger = false;
             return;
@@ -701,7 +715,9 @@ public class AiBlockController {
 
     // Block creatures with "can't be blocked except by two or more creatures"
     private void makeMultiChumpBlocks(final Combat combat) {
+        AITimeoutTracker.check();
         for (final Card attacker : Lists.newArrayList(attackersLeft)) {
+            AITimeoutTracker.check();
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) <= 1) {
                 continue;
             }
@@ -729,6 +745,7 @@ public class AiBlockController {
 
     /** Reinforce blockers blocking attackers with trample (should only be made if life is in danger) */
     private void reinforceBlockersAgainstTrample(final Combat combat) {
+        AITimeoutTracker.check();
         List<Card> chumpBlockers;
 
         List<Card> tramplingAttackers = CardLists.getKeyword(attackers, Keyword.TRAMPLE);
@@ -739,6 +756,7 @@ public class AiBlockController {
         tramplingAttackers = CardLists.filter(tramplingAttackers, changesPTWhenBlocked(true).negate());
 
         for (final Card attacker : tramplingAttackers) {
+            AITimeoutTracker.check();
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()) {
                 continue;
             }
@@ -785,6 +803,7 @@ public class AiBlockController {
 
     /** Support blockers not destroying the attacker with more blockers to try to kill the attacker */
     private void reinforceBlockersToKill(final Combat combat) {
+        AITimeoutTracker.check();
         List<Card> safeBlockers;
         List<Card> blockers;
         List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, rampagesOrNeedsManyToBlock(combat).negate());
@@ -794,6 +813,7 @@ public class AiBlockController {
         targetAttackers = CardLists.filter(targetAttackers, changesPTWhenBlocked(false).negate());
 
         for (final Card attacker : targetAttackers) {
+            AITimeoutTracker.check();
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             blockers.removeAll(combat.getBlockers(attacker));
 
@@ -850,6 +870,7 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocksToSavePW(Combat combat) {
+        AITimeoutTracker.check();
         if (lifeInDanger) {
             // most likely not worth trying to protect planeswalkers when at threateningly low life
             return;
@@ -990,6 +1011,64 @@ public class AiBlockController {
     /** Assigns blockers for the provided combat instance (in favor of player passes to ctor) */
     public void assignBlockersForCombat(final Combat combat) {
         assignBlockersForCombat(combat, null);
+    }
+
+    /**
+     * Fallback used when the AI ran out of time mid-assignment: make sure creatures that MUST block
+     * (lure effects, "blocks each combat if able", must-block-this-creature) still do, using whatever
+     * blockers are not already blocking. Cheap and deliberately not subject to the AI deadline.
+     */
+    public void completeRequiredBlocks(final Combat combat) {
+        attackers = sortPotentialAttackers(combat);
+        if (attackers.isEmpty()) {
+            removeIllegalBlocks(combat);
+            return;
+        }
+        // makeRequiredBlocks/makeChumpBlocks iterate attackersLeft, which assignBlockersForCombat has not (fully) set up
+        attackersLeft = new ArrayList<>(attackers);
+        final CardCollectionView alreadyBlocking = combat.getAllBlockers();
+        blockersLeft = new ArrayList<>();
+        for (final Card b : ai.getCreaturesInPlay()) {
+            if (!alreadyBlocking.contains(b) && CombatUtil.canBlock(b, combat)) {
+                blockersLeft.add(b);
+            }
+        }
+        makeRequiredBlocks(combat);
+
+        // Out of time while still facing lethal damage: at least chump the unblocked attackers greedily.
+        // Cheap, and deliberately runs outside the AI deadline (the caller disarmed it).
+        final List<Card> unblocked = new ArrayList<>();
+        for (final Card a : attackers) {
+            if (!combat.isBlocked(a)) {
+                unblocked.add(a);
+            }
+        }
+        attackersLeft = unblocked;
+        lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
+        if (lifeInDanger && !unblocked.isEmpty()) {
+            makeChumpBlocks(combat, new ArrayList<>(unblocked));
+        }
+
+        // makeRequiredBlocks, makeChumpBlocksToSavePW and the trample attacker switch add single blockers without looking at the
+        // attacker's block restrictions; master repairs that at the end of assignBlockers, but an Expired thrown earlier skips it
+        // and the engine does not validate AI blocks for blocker count.
+        removeIllegalBlocks(combat);
+    }
+
+    /** Same repair as the "Check for validity of blocks" loop at the end of assignBlockers (menace, "no more than N blockers" ...). */
+    private void removeIllegalBlocks(final Combat combat) {
+        for (final Card attacker : combat.getAttackers()) {
+            final List<Card> mine = CardLists.filterControlledBy(combat.getBlockers(attacker), ai);
+            if (mine.isEmpty()) {
+                continue;
+            }
+            if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
+                for (final Card blocker : mine) {
+                    // don't touch other player's blockers
+                    combat.removeFromCombat(blocker);
+                }
+            }
+        }
     }
     public void assignBlockersForCombat(final Combat combat, final CardCollection excludedBlockers) {
         List<Card> possibleBlockers = ai.getCreaturesInPlay();

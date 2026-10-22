@@ -394,6 +394,9 @@ public class GameHUD extends Stage {
                 break;
             case "dungeon":
             case "cave":
+            case "sidebosseasy":
+            case "sidebossmoderate":
+            case "sidebosshard":
             case "castle":
                 if (fromWorldMap) {
                     addNotification(TileMapScene.instance().rootPoint.getDisplayName());
@@ -589,6 +592,9 @@ public class GameHUD extends Stage {
                     break;
                 case "dungeon":
                 case "cave":
+                case "sidebosseasy":
+                case "sidebossmoderate":
+                case "sidebosshard":
                     changeBGM(MusicPlaylist.CAVE);
                     break;
                 case "castle":

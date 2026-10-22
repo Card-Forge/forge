@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="162">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+pTWeaood09JONyhms0BgmDi17SFGDIQB9GlS1w==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1VVEOgjAM5c9xG72EfgFmFwWFW4nKEWyDjc0o27rNJgtkWd/ra99gMlXV1vK6wsqJxsHrGN4D3ieB+w57zwzeHvIXhjXXWzz7R05f31DzaFbdEifiDLDesH8zYV7q4Z5O6bzEGVN7DJYm3Pm/IjXzwNq1ORiuL5E7tucYNrHePc/HYPE5leT2zdv1RkluHy/3NeWl3tHQnZPO4xnKy/E4xysV5PlU76fw4d1YvrNfMvT0kd82yXdt/dM9KLVb5l1fLs5qFrxKurX/ROkbF+IfzZZf6/29/oVqbzI4qX7ev8tp3T/D83D051FOp+SUcDRhC/z/Obdb/wdyRYsf
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9VEsKwkAMrZuWLroTwRNZ0PPYsd7KhR7DnkFwYU9hBxv6yCTpjBUfiCX/vCSTZRO68vPfg+wuyDKmr8fvtgr1j5XiGAkp7z7CLybvLrUYANV1Gns+GLaeH+Ix1of8UuQEaQ6SvitDmYc26xig72tBHCuuB3HAd8FBHzhf7i/1SBy4SpZLOM9wjfEasJ2boQZpZ1Nj4d6hb8/0yFFj9Nn+oK8lwNviwB6wTj5jC/5OcM+kvU69GayFdujb92jOD3fUejslTqgvilErtjh33K8UXqTaNP9Uvi17mmdn7NG/YN0Sv0GaicQbyfA2Yt4qAs3wmA952c/lk52mP+ZhTMdkTyP/ughlm8LWXwfZTZFbQI6svJ6Ty/C9BRvfg8RBM/b6BuyrQ6M=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="-17.3172" y="-30.1212" width="520.513" height="28.1212"/>
+  <object id="125" template="../../../../common/maps/obj/collision.tx" x="-26.1505" y="-24" width="24.301" height="384"/>
+  <object id="152" template="../../../../common/maps/obj/collision.tx" x="-12.2565" y="317.939" width="520.513" height="28.1212"/>
+  <object id="153" template="../../../../common/maps/obj/collision.tx" x="479.849" y="-26.6667" width="24.301" height="384"/>
+  <object id="154" template="../../../../common/maps/obj/entry_up.tx" x="237.917" y="320.667" width="61.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/dialog.tx" x="222.167" y="288.061" width="96.3333" height="14.5455" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A barren expanse of sand stretched before you. Not a soul in sight. The gleam of some mana shards can be seen ahead, but little else, though you do get an ominous feeling of something lurking underground.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="157" template="../../../../common/maps/obj/manashards.tx" x="293.5" y="139.5"/>
+  <object id="158" template="../../../../common/maps/obj/manashards.tx" x="244.5" y="137.5"/>
+  <object id="160" template="../../../../common/maps/obj/enemy.tx" x="269" y="169.5">
+   <properties>
+    <property name="enemy" value="Sandwurm"/>
+    <property name="pursueRange" type="int" value="80"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="80"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="161" template="../../../../common/maps/obj/manashards.tx" x="266.5" y="131.5"/>
+ </objectgroup>
+</map>

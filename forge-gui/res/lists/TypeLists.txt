@@ -23,6 +23,7 @@ Aetherborn:Aetherborn
 Alien:Aliens
 Ally:Allies
 Andorian:Andorians
+Android:Androids
 Angel:Angels
 Antelope:Antelopes
 Ape:Apes
@@ -191,6 +192,7 @@ Masticore:Masticores
 Mercenary:Mercenaries
 Merfolk:Merfolk
 Metathran:Metathrans
+Mindless-One:Mindless-Ones
 Minion:Minions
 Minotaur:Minotaurs
 Mite:Mites
@@ -366,6 +368,7 @@ Chorus
 Lesson
 Omen
 Trap
+Vengeance
 [EnchantmentTypes]
 Aura:Auras
 Background

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Capitano_CL_-_Jund_Aggro_(Standard,_#888387).dck
+Deck Type=constructed
+
+[Main]
+2 Witherbloom Charm
+3 Requiting Hex
+3 Lively Dirge
+3 Deadly Precision
+4 Obsessive Pursuit
+2 Ouroboroid
+2 Tersa Lightshatter
+4 Gene Pollinator
+4 Greedy Freebooter
+4 Biotech Specialist
+4 The Sackville-Bagginses
+4 Umbral Collar Zealot
+1 Swamp
+1 Forest
+1 Blood Crypt
+2 Wastewood Verge
+4 Overgrown Tomb
+4 Starting Town
+4 Blooming Marsh
+4 Stomping Ground
+[Sideboard]
+3 Duress
+1 Chandra, Spark Hunter
+2 Shoot the Sheriff
+2 Vicious Rivalry
+2 Professor Dellian Fel
+4 Strategic Betrayal
+1 Lively Dirge
