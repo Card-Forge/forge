@@ -136,4 +136,33 @@ public class SwitchBlockEffectTest extends AITest {
         assertTrue("the other blocker moved to attacker1", combat.isBlocking(other, attacker1));
         assertEquals(1, combat.getBlockers(attacker1).size());
     }
+
+    /**
+     * After General Jarkeld the damage assignment orders have to match the new blocks: each attacker hurts
+     * the creature that blocks it now, and nobody is hurt by a creature that stopped blocking it.
+     */
+    @Test
+    public void generalJarkeldDamageGoesToTheCreaturesNowBlocking() {
+        startCombat();
+        Card attacker1 = attacker("Grizzly Bears");   // 2/2
+        Card attacker2 = attacker("Runeclaw Bear");   // 2/2
+        Card attacker3 = attacker("Hill Giant");      // 3/3
+        Card multiBlocker = blocker("Goblin Chariot", attacker1, attacker3);   // 2/2
+        Card other = blocker("Savannah Lions", attacker2);                     // 2/1
+        for (Card a : new Card[] {attacker1, attacker2, attacker3}) {
+            combat.setBlocked(a, true);
+        }
+        combat.orderBlockersForDamageAssignment();
+        combat.orderAttackersForDamageAssignment();
+
+        activate("General Jarkeld", defenderPlayer, attacker1, attacker2);
+        combat.assignCombatDamage(false);
+        combat.dealAssignedDamage();
+
+        assertEquals("Runeclaw Bear (2) and Hill Giant (3) both hit the Chariot", 5, multiBlocker.getDamage());
+        assertEquals("Grizzly Bears hits the Lions now blocking it", 2, other.getDamage());
+        assertEquals("the Lions hit Grizzly Bears", 2, attacker1.getDamage());
+        assertEquals("the Chariot's 2 damage goes to the two attackers it blocks, none to Grizzly Bears' side", 2,
+                attacker2.getDamage() + attacker3.getDamage());
+    }
 }
