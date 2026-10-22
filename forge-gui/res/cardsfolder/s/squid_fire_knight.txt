@@ -1,0 +1,20 @@
+Name:Squid Fire Knight
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Squid
+SVar:STK2:Kind$ Name | Word$ Fire
+SVar:STK3:Kind$ Name | Word$ Knight
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {T}: The next time target player would roll one or more dice this turn, instead they roll that many dice plus one, then you choose one of those rolls to ignore. | Ability$ STK7Roll
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Protection from odd mana values | Keywords$ Protection:Card.cmcM21:odd mana values
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 1
+SVar:STK10:Kind$ PT | Tickets$ 4 | Power$ 6 | Toughness$ 6
+SVar:STK7Roll:AB$ Effect | Cost$ T | ValidTgts$ Player | ReplacementEffects$ STK7RigRoll | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next time target player would roll one or more dice this turn, instead they roll that many dice plus one, then you choose one of those rolls to ignore.
+SVar:STK7RigRoll:Event$ RollDice | ValidPlayer$ Player.IsRemembered | ReplaceWith$ STK7PlusRoll | Description$ The next time target player would roll one or more dice this turn, instead they roll that many dice plus one, then you choose one of those rolls to ignore.
+SVar:STK7PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ STK7IgnoreRoll
+SVar:STK7IgnoreRoll:DB$ ReplaceEffect | VarName$ IgnoreChosen | VarType$ Map | VarKey$ You | VarValue$ 1 | SubAbility$ STK7ExileEffect
+SVar:STK7ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{TK}{TK} — {T}: The next time target player would roll one or more dice this turn, instead they roll that many dice plus one, then you choose one of those rolls to ignore.\n{TK}{TK}{TK} — Protection from odd mana values\n{TK}{TK} — 4/1\n{TK}{TK}{TK}{TK} — 6/6

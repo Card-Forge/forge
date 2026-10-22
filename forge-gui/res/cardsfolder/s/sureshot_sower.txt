@@ -1,0 +1,7 @@
+Name:Sureshot Sower
+ManaCost:1 G
+Types:Creature Human Archer
+PT:3/1
+K:Reach
+A:AB$ Destroy | Cost$ 3 G Discard<1/CARDNAME/this card> | ActivationZone$ Hand | ValidTgts$ Creature.withFlying | ValidTgtsDesc$ creature with flying | SpellDescription$ Destroy target creature with flying.
+Oracle:Reach\n{3}{G}, Discard this card: Destroy target creature with flying.

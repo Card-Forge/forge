@@ -171,3 +171,13 @@ ScryfallCode=SPG
 157 M Codie, Vociferous Codex @Andreia Ugrai
 158 M Library of Leng @Cynthia Sheppard
 158a M Library of Alexandria @Bruce Brenneise
+159 M Eye of Ugin @Marina Banker
+160 M Austere Command @Marina Banker
+161 M Flesh Duplicate @Marina Banker
+162 M Consign to Memory @Marina Banker
+163 M Sublime Epiphany @Marina Banker
+164 M Consider @Marina Banker
+165 M Necrodominance @Marina Banker
+166 M Mind Twist @Marina Banker
+167 M Splinter Twin @Marina Banker
+168 M Root Maze @Marina Banker

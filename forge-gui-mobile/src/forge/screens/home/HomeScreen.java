@@ -15,6 +15,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
+import forge.gamemodes.replay.ReplayLauncher;
 import forge.gui.FThreads;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
@@ -27,6 +28,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.Frost;
 import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
@@ -110,6 +112,7 @@ public class HomeScreen extends FScreen {
             Forge.lastButtonIndex = activeButtonIndex;
             SettingsScreen.show(true);
         });
+        addButton("Replays", e -> ReplayLauncher.chooseAndPlay());
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
             try {
                 if (Forge.getDeviceAdapter().isConnectedToInternet()) {
@@ -274,6 +277,21 @@ public class HomeScreen extends FScreen {
                 }
             }
 
+            if (Frost.isOn()) { //frosted navigation column: slate glass, the active entry washed with the accent and a bar on the left
+                g.fillGradientRect(Frost.slate(0.90f), Frost.slate(0.70f), false, 0, 0, w, h);
+                g.drawLine(1, Frost.EDGE, w, 0, w, h);
+                if (activeButtonIndex != -1) {
+                    final MenuButton active = buttons.get(activeButtonIndex);
+                    final float top = Math.max(buttonScroller.getTop() + active.getTop(), buttonScroller.getTop());
+                    final float bottom = Math.min(buttonScroller.getTop() + active.getBottom(), h);
+                    if (bottom > top) {
+                        g.fillGradientRect(Frost.accent(0.32f), Frost.accent(0.04f), false, 0, top, w, bottom - top);
+                        g.fillRect(Frost.accent(1f), 0, top, Math.max(2f, Utils.scale(3)), bottom - top);
+                    }
+                }
+                return;
+            }
+
             float w1 = w * 0.66f;
             float w2 = w - w1;
             g.fillRect(l00, 0, y1, w1, h1);
@@ -311,6 +329,15 @@ public class HomeScreen extends FScreen {
         public void draw(Graphics g) {
             if (Forge.isLandscapeMode()) {
                 //draw text only for Landscape mode
+                if (Frost.isOn()) { //frosted: white text, brighter for the active entry, indented from the accent bar
+                    final boolean active = buttons.indexOf(this) == activeButtonIndex;
+                    final float indent = PADDING * 3;
+                    if (isHovered() && !active) {
+                        g.fillRect(Frost.HOVER, -2 * PADDING, 0, getWidth() + 2 * PADDING, getHeight());
+                    }
+                    g.drawText(getText(), isHovered() && getFont().canIncrease() ? getFont().increase() : getFont(), active ? Frost.TEXT : Frost.TEXT_DIM, indent, 0, getWidth() - indent, getHeight(), false, Align.left, true);
+                    return;
+                }
                 g.drawText(getText(), isHovered() && getFont().canIncrease() ? getFont().increase() : getFont(), getForeColor(), 0, 0, getWidth(), getHeight(), false, Align.left, true);
             }
             else { //draw buttons normally for portrait mode

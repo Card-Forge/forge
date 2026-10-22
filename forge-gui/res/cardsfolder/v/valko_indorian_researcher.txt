@@ -1,0 +1,9 @@
+Name:Valko Indorian, Researcher
+ManaCost:W U
+Types:Legendary Creature Human Wizard
+PT:2/2
+DeckRule:ColorIdentity:Exempt$ Artifact,Enchantment | ActiveSection$ Commander | Description$ Rulebreaker — If CARDNAME is your commander, you may include all artifacts and enchantments in your deck regardless of color identity.
+S:Mode$ Continuous | Affected$ Artifact.YouOwn,Enchantment.YouOwn | AffectedZone$ All | AddType$ Artifact & Enchantment | Description$ Artifacts and enchantments you own everywhere become both types. (This applies to your library, hand, battlefield, and so on.)
+T:Mode$ SpellCast | ValidCard$ Artifact,Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast an artifact or enchantment spell, put a +1/+1 counter on NICKNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Rulebreaker — If Valko Indorian, Researcher is your commander, you may include all artifacts and enchantments in your deck regardless of color identity.\nArtifacts and enchantments you own everywhere become both types. (This applies to your library, hand, battlefield, and so on.)\nWhenever you cast an artifact or enchantment spell, put a +1/+1 counter on Valko Indorian.

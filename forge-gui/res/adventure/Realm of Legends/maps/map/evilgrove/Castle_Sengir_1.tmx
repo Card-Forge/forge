@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="147">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="148">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -72,7 +72,10 @@
   </object>
   <object id="118" template="../../../../common/maps/obj/enemy.tx" x="608.5" y="306.333">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arrogant Vampire&quot;, &quot;Drudge Spell&quot;, &quot;Bad Moon&quot;]}"/>
     <property name="enemy" value="Grandmother Sengir"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -154,5 +157,15 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="144" template="../../../../common/maps/obj/collision.tx" x="257.815" y="545.605" width="108.703" height="14.4571"/>
   <object id="145" template="../../../../common/maps/obj/collision.tx" x="561.482" y="483.938" width="29.3697" height="21.1238"/>
   <object id="146" template="../../../../common/maps/obj/collision.tx" x="529.315" y="528.438" width="44.703" height="27.7905"/>
+  <object id="147" template="../../../../common/maps/obj/enemy.tx" x="609.304" y="305.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sengir Autocrat&quot;, &quot;Drudge Spell&quot;, &quot;Bad Moon&quot;]}"/>
+    <property name="enemy" value="Grandmother Sengir"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

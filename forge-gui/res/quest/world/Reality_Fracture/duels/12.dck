@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Edel_-_Rakdos_Aggro_(Standard,_#897588).dck
+Deck Type=constructed
+
+[Main]
+4 Hired Claw
+4 Burst Lightning
+4 Blood Crypt
+3 Valley Flamecaller
+2 Cavern of Souls
+3 Haunted Ridge
+4 Swamp
+3 Gev, Scaled Scorch
+4 Flamecache Gecko
+4 Fireglass Mentor
+4 Iridescent Vinelasher
+2 Rockface Village
+3 Ingris Stingerquill
+4 Stingerquill Charm
+4 Master of Barbs
+4 Blazemire Verge
+4 Mountain
+[Sideboard]
+3 Magebane Lizard
+2 Vengeful Tracker
+2 Laughing Jasper Flint
+3 Requiting Hex
+3 Duress
+2 Bitter Triumph

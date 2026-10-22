@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingLabel;
+import forge.Adventure;
 import forge.Forge;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.AdventureQuestStage;
@@ -226,6 +227,7 @@ public class QuestLogScene extends UIScene {
 
     @Override
     public boolean back(){
+        Adventure.getInstance().renderTransitionScreen = true;
         //Needed so long as quest log and stats are separate scenes that link to each other
         Forge.switchScene(lastGameScene==null ? GameScene.instance() : lastGameScene);
         return true;

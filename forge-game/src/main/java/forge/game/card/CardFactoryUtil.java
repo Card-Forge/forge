@@ -29,6 +29,7 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.IllegalAbilityException;
 import forge.game.cost.*;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardForetold;
@@ -480,7 +481,7 @@ public class CardFactoryUtil {
                 Sentry.addBreadcrumb(bread);
 
                 // rethrow the exception with card Name for the user
-                throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
+                throw new IllegalAbilityException("crash in raw Ability, check card script of " + card.getName(), e, card.getRules() != null && card.getRules().isCustom());
             }
         }
     }
@@ -1448,8 +1449,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
-            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
-                    + " | MiracleCost$ " + manacost;
+            final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self";
             String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
             if (k.length > 2) {
                 abStrPlay += " | PlayReduceCost$ " + k[2];
@@ -3789,7 +3789,7 @@ public class CardFactoryUtil {
 
             inst.addStaticAbility(st);
         } else if (keyword.equals("Changeling")) {
-            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            String effect = "Mode$ Continuous | EffectZone$ All" +
                     " | CharacteristicDefining$ True | AddAllCreatureTypes$ True | Secondary$ True" +
                     " | Description$ Changeling (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -3875,7 +3875,7 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantAttack | ValidCard$ Card.Self | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Devoid")) {
-            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            String effect = "Mode$ Continuous | EffectZone$ All" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
                     " | Description$ Devoid (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -3894,7 +3894,7 @@ public class CardFactoryUtil {
 
             String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
-                    + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+                    + " | Description$ " + sb + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Enlist")) {
             String effect = "Mode$ OptionalAttackCost | ValidCard$ Card.Self | Cost$ Enlist<1/CARDNAME/creature> | Secondary$ True" +
@@ -3991,6 +3991,14 @@ public class CardFactoryUtil {
             String effect = "Mode$ DisableTriggers | ValidCard$ Card.Self+ThisTurnEntered | ValidTrigger$ Triggered.ChapterNotLore | Secondary$ True" +
                     " | Description$ Chapter abilities of this Saga can't trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Shadow")) {
+            String desc = "Shadow (" + inst.getReminderText() + ")";
+            String effect1 = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutShadow | Secondary$ True" +
+                    " | Description$ " + desc;
+            String effect2 = "Mode$ CantBlockBy | ValidAttacker$ Creature.withoutShadow | ValidBlocker$ Creature.Self | Secondary$ True" +
+                    " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect1, state.getCard(), state, intrinsic));
+            inst.addStaticAbility(StaticAbility.create(effect2, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | ValidTarget$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
@@ -4105,6 +4113,16 @@ public class CardFactoryUtil {
 
         re.setOverridingAbility(saShuffle);
 
+        return re;
+    }
+
+    public static ReplacementEffect setupVengeanceAbility(CardState card) {
+        String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile "
+                + "| ValidStackSa$ Spell.Vengeance | Secondary$ True | Description$ Vengeance";
+        String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | StackDescription$ None";
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
+        re.setOverridingAbility(AbilityFactory.getAbility(abExile, card));
         return re;
     }
 

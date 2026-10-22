@@ -39,6 +39,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
@@ -144,7 +145,7 @@ public class CardFactory {
         }
 
         copySA.setCopied(true);
-        // 707.10b
+        // CR 707.10b
         if (targetSA.isAbility()) {
             copySA.setOriginalAbility(targetSA);
         }
@@ -413,6 +414,10 @@ public class CardFactory {
 
             // add spells only after
             CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+
+            if (c.getType().hasSubtype("Vengeance")) {
+                c.getFirstSpellAbility().getRestrictions().setZone(ZoneType.Graveyard);
+            }
         }
     }
 

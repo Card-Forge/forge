@@ -28,6 +28,12 @@ public class TriggerDiscardedAll extends Trigger {
             return false;
         }
 
+        if (hasParam("Random")) {
+            if (!(boolean) runParams.getOrDefault(AbilityKey.Random, false)) {
+                return false;
+            }
+        }
+
         if (hasParam("FirstTime")) {
             List<Card> discardedBefore = (List<Card>) runParams.get(AbilityKey.DiscardedBefore);
             if (hasParam("ValidCard")) {

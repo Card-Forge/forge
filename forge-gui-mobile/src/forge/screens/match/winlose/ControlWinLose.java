@@ -32,6 +32,16 @@ public class ControlWinLose {
 
     /** */
     public void addListeners() {
+        if (MatchController.instance.isReplay()) {
+            view.getBtnQuit().setCommand(e -> {
+                view.hide();
+                // the replay player listens where a live game's controllers would be
+                for (final forge.interfaces.IGameController c : MatchController.instance.getOriginalGameControllers()) {
+                    c.nextGameDecision(forge.gamemodes.match.NextGameDecision.QUIT);
+                }
+            });
+            return;
+        }
         view.getBtnContinue().setCommand(e -> actionOnContinue());
 
         view.getBtnRestart().setCommand(e -> actionOnRestart());

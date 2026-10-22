@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Shroud | Description$ Enchanted creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy
 Oracle:Enchant creature\nEnchanted creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)

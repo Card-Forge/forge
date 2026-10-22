@@ -1,0 +1,10 @@
+Name:Goblin Airbrusher
+ManaCost:1 R
+Types:Creature Goblin Employee
+PT:2/1
+T:Mode$ StickerPlaced | ValidPlayer$ You | StickerKind$ Name,Ability,PT | TriggerZones$ Battlefield | Execute$ TrigOne | TriggerDescription$ Whenever you place a sticker, create a Treasure token. If it's an art sticker, instead create two Treasure tokens.
+T:Mode$ StickerPlaced | ValidPlayer$ You | StickerKind$ Art | TriggerZones$ Battlefield | Execute$ TrigTwo | Secondary$ True | TriggerDescription$ Whenever you place an art sticker, create two Treasure tokens.
+SVar:TrigOne:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:TrigTwo:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenAmount$ 2
+DeckHas:Ability$Token|Sacrifice
+Oracle:Whenever you place a sticker, create a Treasure token. If it's an art sticker, instead create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")

@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameType;
 import forge.game.GameView;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
@@ -77,7 +78,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
-        switch (game0.getGameType()) {
+        // a recording only shows what happened: no rewards, no saving results, no next game
+        final boolean replay = matchUI.isReplay();
+        switch (replay ? GameType.Constructed : game0.getGameType()) {
             case Quest:
                 control = new QuestWinLose(this, game0, matchUI);
                 break;
@@ -122,7 +125,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         btnContinue.setFont(FSkin.getRelativeFont(22));
         btnRestart.setText(localizer.getMessage("btnStartNewMatch"));
         btnRestart.setFont(FSkin.getRelativeFont(22));
-        btnQuit.setText(localizer.getMessage("btnQuitMatch"));
+        btnQuit.setText(replay ? "Close replay" : localizer.getMessage("btnQuitMatch"));
         btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
 
@@ -166,8 +169,10 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlButtons.setOpaque(false);
 
         final String constraints = "w 300px!, h 50px!, gap 0 0 20px 0";
-        pnlButtons.add(btnContinue, constraints);
-        pnlButtons.add(btnRestart, constraints);
+        if (!replay) {
+            pnlButtons.add(btnContinue, constraints);
+            pnlButtons.add(btnRestart, constraints);
+        }
         pnlButtons.add(btnQuit, constraints);
         pnlLeft.add(pnlButtons, "w 100%!");
 
@@ -183,7 +188,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
-        lblTitle.setText(composeTitle(game0));
+        lblTitle.setText((replay ? "Replay: " : "") + composeTitle(game0));
     }
 
     public final void show() {

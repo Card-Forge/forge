@@ -1,7 +1,7 @@
 package forge;
 
 import com.github.tommyettinger.textra.TypingLabel;
-import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.GameScene;
 import org.apache.commons.lang3.StringUtils;
 
 import static forge.adventure.util.Controls.newTypingLabel;
@@ -35,20 +35,19 @@ public class OverlayText {
     void render(float delta) {
         if (!render)
             return;
-        //TODO: Add detection check to be used on other needed scenes..
-        if (Forge.currentScene instanceof TileMapScene) {
-            update("");
-            return;
+        // render only on GameScenes
+        if (Forge.currentScene instanceof GameScene) {
+            Forge.getGraphics().setProjectionMatrix(Forge.camera.combined);
+            alpha = Math.min(alpha + delta * 0.75f, 1f);
+            float oldAlpha = Forge.getGraphics().getfloatAlphaComposite();
+            Forge.getGraphics().setAlphaComposite(alpha);
+            Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
+            Forge.getGraphics().getBatch().draw(Forge.getAssets().getBackropTexture(), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            Forge.getGraphics().setAlphaComposite(oldAlpha);
+            label.draw(Forge.getGraphics().getBatch(), 1f);
+            label.act(delta);
+            Forge.getGraphics().end();
         }
-        alpha = Math.min(alpha + delta * 0.75f, 1f);
-        float oldAlpha = Forge.getGraphics().getfloatAlphaComposite();
-        Forge.getGraphics().setAlphaComposite(alpha);
-        Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
-        Forge.getGraphics().getBatch().draw(Forge.getGraphics().getBackropTexture(), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-        Forge.getGraphics().setAlphaComposite(oldAlpha);
-        label.draw(Forge.getGraphics().getBatch(), 1f);
-        label.act(delta);
-        Forge.getGraphics().end();
     }
 
 }

@@ -1,0 +1,9 @@
+Name:Oteclán
+ManaCost:no cost
+Types:Plane Ixalan
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigChaos | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, chaos ensues.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChaos | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, chaos ensues.
+SVar:TrigChaos:DB$ ChaosEnsues
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDiscover | TriggerDescription$ Whenever chaos ensues, discover 3.
+SVar:TrigDiscover:DB$ Discover | Num$ 3
+Oracle:When you planeswalk to Oteclán and at the beginning of your upkeep, chaos ensues.\nWhenever chaos ensues, discover 3. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

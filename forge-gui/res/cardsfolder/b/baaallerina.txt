@@ -1,0 +1,9 @@
+Name:Baaallerina
+ManaCost:3 U
+Types:Creature Sheep Performer
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on a nonland permanent you own.
+SVar:TrigSticker:DB$ PutSticker | Kind$ Name | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True
+A:AB$ Pump | Cost$ 2 U | ValidTgts$ Creature.Other+stickeredWith Name | TgtPrompt$ Select another target creature with a name sticker on it | KW$ Flying | SpellDescription$ Another target creature with a name sticker on it gains flying until end of turn.
+Oracle:Flying\nWhen this creature enters, you may put a name sticker on a nonland permanent you own.\n{2}{U}: Another target creature with a name sticker on it gains flying until end of turn.

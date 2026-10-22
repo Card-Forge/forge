@@ -21,6 +21,12 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
+        if (MatchController.instance.isReplay()) {
+            // a recording has nothing to concede, undo, yield or cheat with: only a way out
+            addItem(new FMenuItem("Close replay", FSkinImage.CONCEDE, e ->
+                    forge.gamemodes.net.client.ReplayPlayer.stopFor(MatchController.instance, true)));
+            return;
+        }
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, e ->
                 ThreadUtil.invokeInGameThread(MatchController.instance::concede)
         ));
@@ -58,10 +64,6 @@ public class VGameMenu extends FDropDownMenu {
                             final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
                             boolean abilityScope = MatchController.instance.getGameController().getYieldController().isAbilityScope();
                             MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
-                            if (!autoYield && MatchController.instance.getGameController().shouldAutoYield(key)) {
-                                //auto-pass priority if ability is on top of stack
-                                MatchController.instance.getGameController().passPriority();
-                            }
                         }
                     }
                 };

@@ -154,7 +154,8 @@ public final class CardRules implements ICardCharacteristics {
             return false; //Type line isn't fully generated, and we need it to determine if this is a variant type
         CardType t = getType();
         return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon()
-                || t.isConspiracy() || t.isDungeon() || t.isAttraction() || t.isContraption();
+                || t.isConspiracy() || t.isDungeon() || t.isAttraction() || t.isContraption()
+                || t.isStickers();
     }
 
     public CardSplitType getSplitType() {
@@ -335,10 +336,15 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
-    public boolean canBePartnerCommanders(CardRules b) {
-        if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
-            return false;
+    public boolean canBePartnerCommanders(CardRules b, boolean impliedPartnership) {
+        if (impliedPartnership) {
+            // Imply partnership for Commander Draft. (Really only Commander Masters)
+            if (this.canBeCommander() && (this.hasKeyword("Partner") || this.getColorIdentity().countColors() <= 1)
+             && b.canBeCommander() && (b.hasKeyword("Partner") || b.getColorIdentity().countColors() <= 1)) {
+                return true;
+            }
         }
+
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
             return true; // normal partner commander
         }
@@ -359,6 +365,10 @@ public final class CardRules implements ICardCharacteristics {
             return true; // Doctor Who partner commander
         }
         return false;
+    }
+
+    public boolean canBePartnerCommanders(CardRules b) {
+        return canBePartnerCommanders(b, false);
     }
 
     public boolean canBePartnerCommander() {
@@ -443,6 +453,11 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean getAddsWildCardColor() {
         return mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.");
+    }
+
+    /** Raw, unparsed {@code DeckRule:} lines carried by this card's main face. See forge.deck.DeckRule. */
+    public Iterable<String> getDeckRules() {
+        return mainPart.getDeckRules();
     }
 
     public int getSetColorID() {
@@ -531,6 +546,10 @@ public final class CardRules implements ICardCharacteristics {
      */
     boolean hasPlaceholderFaces() {
         return this.placeholderFaces != null;
+    }
+
+    public Collection<String> getPlaceholderFaceNames() {
+        return placeholderFaces == null ? Collections.emptyList() : placeholderFaces.values();
     }
 
     void supplyPlaceholderFaces(Map<String, ICardFace> facesByName) {
@@ -740,6 +759,8 @@ public final class CardRules implements ICardCharacteristics {
                         needs = new DeckHints(value);
                     } else if ("DeckHas".equals(key)) {
                         has = new DeckHints(value);
+                    } else if ("DeckRule".equals(key)) {
+                        face.addDeckRule(value);
                     } else if ("Defense".equals(key)) {
                         face.setDefense(value);
                     } else if ("Draft".equals(key)) {

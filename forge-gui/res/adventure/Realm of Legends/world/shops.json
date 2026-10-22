@@ -825,6 +825,53 @@
 		
 		},
   {
+    "name":"ThievesItems",
+    "description":"Thieves Guild Gear",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"ItemShop",
+    "rewards": [
+      { "type": "item","count":1, "itemName": "Vectis Boots"  },
+      { "type": "item","count":1, "itemName": "Bane Alley Boots"  },
+      { "type": "item","count":1, "itemName": "Swindler Shoes"  },
+      { "type": "item","count":1, "itemName": "High Merchant's Shirt"},
+      { "type": "item","count":1, "itemName": "Throwing Knife"  },
+      { "type": "item","count":1, "itemName": "Whispersteel Dagger"  },
+      { "type": "item","count":1, "itemName": "Thought Dissector"  },
+      { "type": "item","count":1, "itemName": "Skulker's Hood"  }
+    ]
+
+  },
+  {
+    "name":"JandorItems1",
+    "description":"Exotic Silks for Sale",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"ItemShop",
+    "rewards": [
+      { "type": "item","count":1, "itemName": "Armor of Wak-Wak"  },
+      { "type": "item","count":1, "itemName": "Gladiator Armor"  },
+      { "type": "item","count":1, "itemName": "Armor of Safety"  },
+      { "type": "item","count":1, "itemName": "Armor of Sorrow"},
+      { "type": "item","count":1, "itemName": "Icy Armor"  },
+      { "type": "item","count":1, "itemName": "Oasis Outfit"  }
+    ]
+
+  },
+  {
+    "name":"JandorItems2",
+    "description":"Banding is the New Black",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"ItemShop",
+    "rewards": [
+      { "type": "item","count":1, "itemName": "Rainbow Armor"  },
+      { "type": "item","count":1, "itemName": "Adventurer's Outfit"  },
+      { "type": "item","count":1, "itemName": "Armor of Serra"  },
+      { "type": "item","count":1, "itemName": "Unholy Armor"},
+      { "type": "item","count":1, "itemName": "Seafarer's Outfit"  },
+      { "type": "item","count":1, "itemName": "Stronghold Armor"  }
+    ]
+
+  },
+  {
     "name":"BloomburrowBoosters",
     "description":"Bumbleflower's Boosters",
     "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -948,8 +995,8 @@
       {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
       {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
       {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
-      {"type": "cardPackShop", "count": 1, "editions": ["CON"] },
-      {"type": "cardPackShop", "count": 1, "editions": ["CON"] }
+      {"type": "cardPackShop", "count": 1, "editions": ["CFX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CFX"] }
     ]
   },
   {
@@ -1004,7 +1051,7 @@
     "name":"40KShop",
     "description":"Grimdark Armory",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"UBShop",
+    "sprite":"SpaceMarineShop",
     "rewards": [
       {
         "count":4,
@@ -1230,6 +1277,18 @@
       {
         "count":8,
         "sourceDeck": "decks/rewards/SLD_Exclusives.dck"
+      }]
+
+  },
+  {
+    "name":"AlchemyShop",
+    "description":"Wonders of Alchemy",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"WandShop",
+    "rewards": [
+      {
+        "count":8,
+        "sourceDeck": "decks/rewards/digital_exclusives.dck"
       }]
 
   },

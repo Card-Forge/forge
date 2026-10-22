@@ -98,8 +98,9 @@ public class Main {
             if (RestartUtil.prepareForRestart()) {
                 // Calls dispose()
                 Gdx.app.exit();
-                // Note: exit code -1073740791 (0xC0000409), don't use System.exit(0) on android
-                System.exit(0);
+                // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
+                // while disposing assets. Non daemon threads and System.exit(0) will cause the exit code -1073740791 (0xC0000409)
+                //System.exit(0);
             }
         }
 
@@ -107,8 +108,9 @@ public class Main {
         public void exit() {
             // Calls dispose()
             Gdx.app.exit();
-            // Note: exit code -1073740791 (0xC0000409) don't use System.exit(0) on android
-            System.exit(0);
+            // Commented out System.exit(0) since the thread are set to daemon so the game will gracefully exit
+            // while disposing assets. Non daemon threads and System.exit(0) will cause the exit code -1073740791 (0xC0000409)
+            //System.exit(0);
         }
 
         @Override

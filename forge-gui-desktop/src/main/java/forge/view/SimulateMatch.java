@@ -69,6 +69,11 @@ public class SimulateMatch {
             }
         }
 
+        String deckDir = null;
+        if (params.containsKey("D")) {
+            deckDir = params.get("D").get(0);
+        }
+
         int nGames = 1;
         if (params.containsKey("n")) {
             // Number of games should only be a single string
@@ -128,7 +133,7 @@ public class SimulateMatch {
 
         if (params.containsKey("d")) {
             for (String deck : params.get("d")) {
-                Deck d = deckFromCommandLineParameter(deck, type);
+                Deck d = deckFromCommandLineParameter(deck, type, deckDir);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
@@ -165,7 +170,7 @@ public class SimulateMatch {
             sb.append(" seed ").append(seed);
         }
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
 
         Match mc = new Match(rules, pp, "Test");
 
@@ -207,6 +212,7 @@ public class SimulateMatch {
         sw.start();
 
         final Game g1 = mc.createGame();
+        g1.setNoGUIUser();
         // will run match in the same thread
         try {
             TimeLimitedCodeBlock.runWithTimeout(() -> {
@@ -253,7 +259,7 @@ public class SimulateMatch {
         int numPlayers = 0;
         if (params.containsKey("d")) {
             for (String deck : params.get("d")) {
-                Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
+                Deck d = deckFromCommandLineParameter(deck, rules.getGameType(), null);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
@@ -266,7 +272,7 @@ public class SimulateMatch {
         }
 
         if (params.containsKey("D")) {
-            // Direc
+            // Load decks from the specified directory
             String foldName = params.get("D").get(0);
             File folder = new File(foldName);
             if (!folder.isDirectory()) {
@@ -374,11 +380,15 @@ public class SimulateMatch {
         return null;
     }
 
-    private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
+    private static Deck deckFromCommandLineParameter(String deckname, GameType type, String deckDir) {
         int dotpos = deckname.lastIndexOf('.');
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
-            String baseDir = type.equals(GameType.Commander) ?
-                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
+            String baseDir = deckDir != null ? deckDir : (type.equals(GameType.Commander) ?
+                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR);
+
+            if (!baseDir.endsWith(File.separator)) {
+                baseDir += File.separator;
+            }
 
             File f = new File(baseDir + deckname);
             if (!f.exists()) {

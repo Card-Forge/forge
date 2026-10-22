@@ -2,6 +2,7 @@ package forge.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
@@ -14,7 +15,7 @@ import forge.assets.FSkinImage;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
-public class FMenuTab extends FDisplayObject {
+public class FMenuTab extends FDisplayObject implements IUnreadIndicator {
     public static final FSkinFont FONT = FSkinFont.get(12);
     boolean iconOnly = false;
     boolean active = false;
@@ -71,6 +72,7 @@ public class FMenuTab extends FDisplayObject {
         }
         return true;
     }
+    public FDropDown getDropDown() { return dropDown; }
     public void hideDropDown() {
         if (dropDown.isVisible())
             dropDown.hide();
@@ -130,6 +132,12 @@ public class FMenuTab extends FDisplayObject {
         }
     }
 
+    boolean isGlass() {
+        if (menuBar == null)
+            return false;
+        return menuBar.isGlass();
+    }
+
     public float getMinWidth() {
         if (iconOnly) {
             float multiplier = Forge.isLandscapeMode() ? 2.5f : 1.8f;
@@ -138,11 +146,59 @@ public class FMenuTab extends FDisplayObject {
         return minWidth;
     }
 
+    //scratch and constant colours for drawGlass, so a frame allocates nothing (render thread only)
+    private static final Color GLASS_HOVER = new Color(1f, 1f, 1f, 0.08f);
+    private static final Color GLASS_DIVIDER = new Color(1f, 1f, 1f, 0.10f);
+    private static final Color GLASS_TEXT_DIM = new Color(1f, 1f, 1f, 0.6f);
+    private static final Color GLASS_GLOW_TOP = new Color(), GLASS_GLOW_BOTTOM = new Color(), GLASS_LINE = new Color();
+
+    //frosted look: no filled block or border, a soft glow under the open tab with a thin accent line
+    private void drawGlass(Graphics g) {
+        final float w = getWidth(), h = getHeight();
+        final boolean open = dropDown.isVisible();
+        final Color accent = getSelBackColor().getColor();
+        if (open) {
+            GLASS_GLOW_TOP.set(accent.r, accent.g, accent.b, 0f);
+            GLASS_GLOW_BOTTOM.set(accent.r, accent.g, accent.b, 0.45f);
+            GLASS_LINE.set(accent.r, accent.g, accent.b, 1f);
+            g.fillGradientRect(GLASS_GLOW_TOP, GLASS_GLOW_BOTTOM, true, 0, 0, w, h);
+            g.fillRect(GLASS_LINE, 0, h - Utils.scale(2), w, Utils.scale(2));
+        } else if (isHovered()) {
+            g.fillRect(GLASS_HOVER, 0, 0, w, h);
+        }
+        if (flashStartMs > 0) { //unread message flash
+            long elapsed = System.currentTimeMillis() - flashStartMs;
+            if (elapsed < FLASH_DURATION_MS) {
+                g.fillRect(BADGE_COLOR.alphaColor(0.55f * (1f - (float) elapsed / FLASH_DURATION_MS)), 0, 0, w, h);
+                Gdx.graphics.requestRendering();
+            } else {
+                flashStartMs = 0;
+            }
+        }
+        if (index < menuBar.getTabCount() - 1) { //faint divider
+            g.drawLine(SEPARATOR_WIDTH, GLASS_DIVIDER, w, h / 4, w, h - h / 4);
+        }
+        final float x = PADDING, y = PADDING, tw = w - 2 * PADDING, th = h - 2 * PADDING;
+        if (iconOnly) {
+            FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
+            float scaleW = tw * 0.8f;
+            float scaleH = scaleW * 0.6f;
+            g.drawImage(icon, x + tw / 2 - scaleW / 2, y + th / 2 - scaleH / 2, scaleW, scaleH);
+        } else {
+            g.drawText(text, FONT, open ? Color.WHITE : GLASS_TEXT_DIM, x, y, tw, th, false, Align.center, true);
+        }
+        drawUnreadBadge(g, unreadCount, w);
+    }
+
     @Override
     public void draw(Graphics g) {
         float x, y, w, h;
 
         FSkinColor foreColor;
+        if (menuBar.isGlass()) {
+            drawGlass(g);
+            return;
+        }
         if (dropDown.isVisible()) {
             x = PADDING; //round so lines show up reliably
             y = PADDING;
@@ -195,16 +251,19 @@ public class FMenuTab extends FDisplayObject {
         } else
             g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
 
-        //unread badge in the top-right corner
-        if (unreadCount > 0) {
-            String label = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
-            float textW = BADGE_FONT.getBounds(label).width;
-            float diameter = Math.max(BADGE_FONT.getLineHeight(), textW + 2 * Utils.scale(4));
-            float bx = getWidth() - diameter - PADDING;
-            float by = PADDING;
-            g.fillRect(BADGE_COLOR, bx, by, diameter, diameter);
-            g.drawText(label, BADGE_FONT, BADGE_TEXT_COLOR, bx, by, diameter, diameter, false, Align.center, true);
-        }
+        drawUnreadBadge(g, unreadCount, getWidth());
+    }
+
+    /** Draws the unread-message count badge in the top-right corner of a widget of the given width. */
+    public static void drawUnreadBadge(Graphics g, int unreadCount, float widgetWidth) {
+        if (unreadCount <= 0) { return; }
+        String label = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
+        float textW = BADGE_FONT.getBounds(label).width;
+        float diameter = Math.max(BADGE_FONT.getLineHeight(), textW + 2 * Utils.scale(4));
+        float bx = widgetWidth - diameter - PADDING;
+        float by = PADDING;
+        g.fillRect(BADGE_COLOR, bx, by, diameter, diameter);
+        g.drawText(label, BADGE_FONT, BADGE_TEXT_COLOR, bx, by, diameter, diameter, false, Align.center, true);
     }
     public boolean isShowingDropdownMenu(boolean any) {
         if (dropDown == null)

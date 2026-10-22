@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -429,8 +430,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void editDeck() {
-        DeckEditScene.getInstance().loadEvent(currentEvent);
-        Forge.switchScene(DeckEditScene.getInstance());
+        TextureRegion textureRegion = null;
+        if (lastGameScene instanceof UIScene uiScene)
+            textureRegion = uiScene.getUIBackground();
+        DeckEditScene.getInstance(textureRegion).loadEvent(currentEvent);
+        Forge.switchScene(DeckEditScene.getInstance(textureRegion));
     }
 
     public void advance() {
@@ -526,11 +530,14 @@ public class EventScene extends MenuScene implements IAfterMatch {
             EnemySprite enemy = humanMatch.p2.getSprite();
             currentEvent.nextOpponent = humanMatch.p2;
             advance.setDisabled(true);
-            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+            TransitionScreen transitionScreen = new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, false, currentEvent);
                 advance.setDisabled(false);
                 Forge.switchScene(duelScene);
-            }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord())));
+            }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false,"",
+            Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord());
+            transitionScreen.eventDuel = true;
+            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(transitionScreen));
         } else {
             finishRound();
             advance.setDisabled(false);

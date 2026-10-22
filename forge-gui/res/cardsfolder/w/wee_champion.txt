@@ -1,0 +1,10 @@
+Name:Wee Champion
+ManaCost:R
+Types:Creature Minotaur Child Guest
+PT:0/1
+T:Mode$ StickerPlaced | ValidPlayer$ You | StickerKind$ Name,Ability,PT | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you place a sticker, CARDNAME gets +1/+1 until end of turn. If it's an art sticker, instead put a +1/+1 counter on CARDNAME.
+T:Mode$ StickerPlaced | ValidPlayer$ You | StickerKind$ Art | TriggerZones$ Battlefield | Execute$ TrigCounter | Secondary$ True | TriggerDescription$ Whenever you place an art sticker, put a +1/+1 counter on CARDNAME.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever you place a sticker, this creature gets +1/+1 until end of turn. If it's an art sticker, instead put a +1/+1 counter on this creature.

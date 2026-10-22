@@ -6,4 +6,8 @@ Type=Collector_Edition
 ScryfallCode=SDS
 
 [cards]
+3 M Kenrith, the Returned King @Eddie Holly ${"flavorName": "General Picard, Earth Warlord"}
 11 M Sheoldred, the Apocalypse @Nicky Barkla ${"flavorName": "Khan, Engineered Evil"}
+15 M Bristly Bill, Spine Sower @Eddie Holly ${"flavorName": "Leonard McCoy, Country Doctor"}
+24 M Prosper, Tome-Bound @Vance Kelly ${"flavorName": "Spock, Mirror Malefactor"}
+27 M Minamo, School at Water's Edge @Jaroslav Kosmina ${"flavorName": "Academy on the Bay"}

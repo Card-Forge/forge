@@ -1,7 +1,7 @@
 Name:Chaotic Transformation
 ManaCost:5 R
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Artifact | Imprint$ True | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ Creature | IsCurse$ True | StackDescription$ None | SpellDescription$ Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land.
+A:SP$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ Creature | IsCurse$ True | StackDescription$ None | SpellDescription$ Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land.
 SVar:Creature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ Enchantment | StackDescription$ None
 SVar:Enchantment:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select up to one target enchantment | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ Planeswalker | StackDescription$ None
 SVar:Planeswalker:DB$ Pump | ValidTgts$ Planeswalker | TgtPrompt$ Select up to one target planeswalker | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ Land | StackDescription$ None

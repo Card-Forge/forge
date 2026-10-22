@@ -1,0 +1,11 @@
+Name:Theorist's Proxy
+ManaCost:1 U
+Types:Creature Illusion
+PT:0/3
+K:Flash
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEmpower | TriggerDescription$ When this creature enters, empower Jace 3. (Put three loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ 3
+A:AB$ DelayedTrigger | Cost$ U Sac<1/CARDNAME/this creature> | Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ DBEffect | ThisTurn$ True | Static$ True | SpellDescription$ The next spell you cast this turn can't be countered.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ AntiMagic | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack
+SVar:AntiMagic:Event$ Counter | ValidCard$ Card.IsRemembered | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+Oracle:Flash\nWhen this creature enters, empower Jace 3. (Put three loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\n{U}, Sacrifice this creature: The next spell you cast this turn can't be countered.
