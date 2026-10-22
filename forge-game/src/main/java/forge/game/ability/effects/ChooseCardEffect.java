@@ -259,14 +259,13 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
                     Card choice = p.getController().chooseSingleEntityForEffect(pChoices, delayedReveal, sa, title,
                             !sa.hasParam("Mandatory"), p, null);
+                    if (controlTimestamp != null) {
+                        p.removeController(controlTimestamp);
+                    }
                     if (choice == null) {
                         return;
                     }
                     chosen.add(choice);
-
-                    if (controlTimestamp != null) {
-                        p.removeController(controlTimestamp);
-                    }
                 } else {
                     chosen.addAll(p.getController().chooseCardsForEffect(pChoices, sa, title, minAmount, validAmount,
                             !sa.hasParam("Mandatory"), null));
