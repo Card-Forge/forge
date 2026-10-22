@@ -7,29 +7,39 @@ ScryfallCode=TRK
 
 [cards]
 1 U 70,000 Light-Years from Home @Ariel Orea
+3 R Antagonist Incorporator @Miklós Ligeti
 5 U Brad Boimler, Eager Ensign @Andreas Zafiratos
 6 R Captain Benjamin Sisko @Chris Rallis
 7 M Captain Jean-Luc Picard @Anna Pavleeva
 8 C Command Decision @Raymond Bonilla
+10 U Conquest Mission @Mark Spears
 12 C DOT-7 Repair Squad @Colin Searle
 13 M Dr. Beverly Crusher @Mattia Rangoni
+14 U Dr. McCoy, Surly Surgeon @David Robert Hovey
 15 C Emergency Medical Hologram @Kirk DouPonce
 17 C Federation Field Medic @Zoltan Boros
 19 C Free Borg Revolutionaries @Smirtouille
 22 C Malfunctioning Holodeck @Pablo Mendoza
+24 R Miles O'Brien, Transporter Ops @John Tyler Christopher
 27 R Peace in Our Time @Elizabeth Peiró
 29 U Picard, Leading by Example @Julie Dillon
+31 C Pure Energy @Evan Shipard
 33 U Saavik, Stoic Student @Mushk Rizvi
 34 C Set Phasers to . . . @Elizabeth Peiró
 35 C Shields Up! @Raymond Swanland
 36 C Shuttle Ace @Joan Piqué Llorens
 38 C Tactical Officer @Elizabeth Peiró
+39 U Test of Conviction @John Tyler Christopher
+40 U There's Coffee in that Nebula @Pauline Voss
 41 R Troubling Tribbles @Filipe Pagliuso
+42 U Una Chin-Riley, Number One @Josu Hernaiz
 43 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
+45 C Vexing Drone @Kristina WermoongRey
 50 C Cloistered Telepath @Monztre
 51 C Consider the Prime Directive @Zoltan Boros
 53 R Deep Space Scan @Andreia Ugrai
 54 U Dominion Saboteur @Alex Negrea
+56 U Energize @Carlos C Diaz
 59 C Federation Probe @Racrufi
 60 C Guidance Failure @David Álvarez
 62 U Highly Illogical @Joel Chaim Holtzman
@@ -51,7 +61,9 @@ ScryfallCode=TRK
 95 C Battle-Scarred Survivalist @John Di Giovanni
 97 C Cha'DIch Investigator @Javier Charro
 99 U Collective Drone @José Parodi
+102 M Death Is Irrelevant @Narendra Bintara Adi
 105 C Eject the Warp Core @Pierre Raveneau
+106 R Elim Garak, Simple Tailor @Alexander Gering
 109 R General Chang, Cold Warrior @Cliff Nielsen
 111 C A Good Day to Die @Monztre
 114 C He's Dead, Jim @Crystal Fae
@@ -70,6 +82,7 @@ ScryfallCode=TRK
 143 U Captain Michael Burnham @Romana Kendelic
 144 C Captain's Tutelage @Mark Spears
 145 R D-7 Battle Cruiser @Kevin Glint
+146 C Dahar Master @Grant Griffin
 152 C Horta @Arthur Haas
 154 U Khaaaaaaaaaaaannn! @Evan Shipard
 156 U La'An Noonien-Singh, Security @Pauline Voss
@@ -93,12 +106,14 @@ ScryfallCode=TRK
 195 C Dominion Supervisor @Kevin Glint
 196 M Dr. Joseph M'Benga @Romana Kendelic
 199 C First Contact @Kieran Yanner
+202 U Hologram Stalker @Hector Ortiz
 203 C I'm a Doctor, Not a . . . @Joel Chaim Holtzman
 207 C Moopsy @Brooklyn Smith
 208 U Mugato @Chuck Lukacs
 213 C Saurian Explorer @Bartek Fedyczak
 216 U Support Mission @Nadia Hurianova
 218 U Syndicate Liquidators @Carlos C Diaz
+220 U Test of Courage @Zoltan Boros
 221 R U.S.S. Discovery, at Black Alert @Kevin Glint
 224 C Xenobotanist @Marta Nael
 225 C Xindi Surveyors @Joan Piqué Llorens
@@ -120,6 +135,7 @@ ScryfallCode=TRK
 245 U Locutus, the One Who Speaks @Ariel Orea
 246 U Lore, Positronic Provocateur @Wei Guan
 247 U L'Rell, Fierce Visionary @Patricia Pria
+248 R Mirror Universe Intrusion @John Tyler Christopher
 250 U Phlox, Unorthodox Doctor @Jason Seiler
 252 U Seven of Nine @Bastien L. Deharme
 253 U Spock, Always Your Friend @Chris Rallis
@@ -133,8 +149,10 @@ ScryfallCode=TRK
 264 R Engineered Explosives @David Álvarez
 265 R The Holodeck @Jessica Rossier
 267 R Replicator @William Phifer
+269 C Tea, Earl Grey, Hot @Raymond Bonilla
 270 C Tricorder @Tony Foti
 273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
+274 C Warp Core @Leon Tukker
 275 L Andoria @Josu Hernaiz
 277 L Bajor @John Di Giovanni
 278 R Blood Crypt @Jonas De Ro
@@ -156,6 +174,7 @@ ScryfallCode=TRK
 298 R Steam Vents @Shahab Alizadeh
 299 R Stomping Ground @Arthur Haas
 301 R Temple Garden @Shahab Alizadeh
+303 C Unexplored Territory @Raymond Bonilla
 304 R The Unicomplex @JB Casacop
 305 L Vulcan @John Di Giovanni
 306 R Watery Grave @Raymond Bonilla
@@ -184,7 +203,9 @@ ScryfallCode=TRK
 336 M Starfleet Academy @Rimas Valeikis
 337 R The Unicomplex @Eugene Maslovski
 338 U Resistance Is Futile @Gal Or
+339 U Test of Courage @Gal Or
 340 M Captain Kathryn Janeway @Gal Or
+342 U Conquest Mission @Gal Or
 343 U Seven of Nine @Gal Or
 344 R Captain Benjamin Sisko @Marija Tiurina
 345 U Dominion Saboteur @Marija Tiurina
@@ -193,17 +214,21 @@ ScryfallCode=TRK
 348 U Constable Odo @Marija Tiurina
 350 R Quark's Bar @Marija Tiurina
 353 M Mr. Spock, Science Officer @Mark Spears
+354 R Mirror Universe Intrusion @Mark Spears
 355 U Kirk, Commanding Officer @Mark Spears
 358 R Nyota Uhura, Communications @Mark Spears
 359 M Lieutenant Commander Data @Nicky Barkla
 360 U Locutus, the One Who Speaks @Nicky Barkla
+362 M Death Is Irrelevant @Nicky Barkla
 363 M Captain Jean-Luc Picard @Erikas Perl
 366 M Dr. Beverly Crusher @Anna Czeszejko
 367 R Peace in Our Time @Mintautas Šukys
+369 U There's Coffee in that Nebula @Anna Czeszejko
 370 R Deep Space Scan @Maxim Ruabtsev
 371 M Lieutenant Commander Data @Mintautas Šukys
 372 R Lt. Cmdr. Geordi La Forge @Vlad Petruchik
 373 M Seven of Nine, Unassimilated @Anna Czeszejko
+375 M Death Is Irrelevant @Paulius Daščioras
 376 U Organic Avulsion Unit @Gintas Galvanauskas
 378 U Resistance Is Futile @Jurijus Chitrovas
 383 M Q, Stacking the Deck @Viktor Fetsch
@@ -221,6 +246,7 @@ ScryfallCode=TRK
 399 R Overgrown Tomb @Sam Burley
 400 R Sacred Foundry @Eliz Roxs
 401 R Breeding Pool @Josu Solano
+402 U Dr. McCoy, Surly Surgeon @Chuck Lukacs
 406 U Saavik, Stoic Student @Jack Hughes
 408 R Troubling Tribbles @Jason Raish
 410 M Kobayashi Maru Scenario @Oliver Barrett
@@ -231,6 +257,7 @@ ScryfallCode=TRK
 417 R Salt Vampire @Simon Dominic
 418 M Captain James T. Kirk @Josh Newton
 423 R Live Long and Prosper @Jack Hughes
+424 R Mirror Universe Intrusion @Chuck Lukacs
 426 U Bat'leth @Eugene Maslovski
 427 R General Chang, Cold Warrior @Julia Vasilyeva
 428 C A Good Day to Die @Darius Zablockis
@@ -247,8 +274,11 @@ ScryfallCode=TRK
 443 R Gowron, Eager for Battle @Gintas Galvanauskas
 444 U L'Rell, Fierce Visionary @Julia Vasilyeva
 445 U Worf, Honor-Bound Warrior @Rimas Valeikis
+446 R Antagonist Incorporator @Miklós Ligeti
 448 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
 452 R Romulan Bird-of-Prey @Edouard
+456 R Elim Garak, Simple Tailor @Alexander Gering
+457 M Georgiou, Terran Emperor @Julia Metzger
 461 R U.S.S. Reliant, From Hell's Heart @Dofresh
 463 R D-7 Battle Cruiser @Kevin Glint
 467 R Captain Jonathan Archer @Julia Metzger
@@ -279,10 +309,12 @@ ScryfallCode=TRK
 497 M Captain Jean-Luc Picard @Erikas Perl
 500 M Dr. Beverly Crusher @Anna Czeszejko
 501 R Peace in Our Time @Mintautas Šukys
+503 U There's Coffee in that Nebula @Anna Czeszejko
 504 R Deep Space Scan @Maxim Ruabtsev
 505 M Lieutenant Commander Data @Mintautas Šukys
 506 R Lt. Cmdr. Geordi La Forge @Vlad Petruchik
 507 M Seven of Nine, Unassimilated @Anna Czeszejko
+509 M Death Is Irrelevant @Paulius Daščioras
 510 U Organic Avulsion Unit @Gintas Galvanauskas
 512 U Resistance Is Futile @Jurijus Chitrovas
 517 M Q, Stacking the Deck @Viktor Fetsch
@@ -290,6 +322,7 @@ ScryfallCode=TRK
 523 U Locutus, the One Who Speaks @Erikas Perl
 524 U Worf, Honor-Bound Warrior @Vlad Petruchik
 525 R Replicator @Vilhelmas Banys
+526 U Dr. McCoy, Surly Surgeon @Chuck Lukacs
 530 U Saavik, Stoic Student @Jack Hughes
 532 R Troubling Tribbles @Jason Raish
 534 M Kobayashi Maru Scenario @Oliver Barrett
@@ -300,6 +333,7 @@ ScryfallCode=TRK
 541 R Salt Vampire @Simon Dominic
 542 M Captain James T. Kirk @Josh Newton
 547 R Live Long and Prosper @Jack Hughes
+548 R Mirror Universe Intrusion @Chuck Lukacs
 550 M U.S.S. Enterprise-A, Free Spirit @Scott Okumura
 552 R U.S.S. Reliant, From Hell's Heart @Scott Okumura
 553 R D-7 Battle Cruiser @Scott Okumura
@@ -307,6 +341,7 @@ ScryfallCode=TRK
 555 M Borg Cube @Scott Okumura
 556 M Deep Space 9 @Scott Okumura
 557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura
+570 U Conquest Mission @Mark Spears
 571 C Malfunctioning Holodeck @Pablo Mendoza
 572 C Cha'DIch Investigator @Javier Charro
 573 U Hive Mind Coprocessor @Andrey Kuzinskiy
