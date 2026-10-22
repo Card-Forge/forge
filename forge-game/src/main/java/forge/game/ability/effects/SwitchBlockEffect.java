@@ -93,7 +93,12 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
                 final boolean blocking1 = combat.isBlocking(blocker, attacker1);
                 final boolean blocking2 = combat.isBlocking(blocker, attacker2);
                 blockingStates[i] = (blocking1 ? 1 : 0) + (blocking2 ? 2 : 0);
-                combat.removeFromCombat(blocker);
+                if (blocking1) {
+                    combat.removeBlockAssignment(attacker1, blocker);
+                }
+                if (blocking2) {
+                    combat.removeBlockAssignment(attacker2, blocker);
+                }
             }
             // Unregister so it won't ask for damage assignment order when adding each blocker
             combat.unregisterAttacker(attacker1, combat.getBandOfAttacker(attacker1));
