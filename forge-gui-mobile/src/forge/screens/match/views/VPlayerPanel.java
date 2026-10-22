@@ -120,6 +120,21 @@ public class VPlayerPanel extends FContainer {
         menuHiddenCache = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_HIDE_MENU) ? 1 : 0;
     }
 
+    private static int unifiedPhaseCache = -1;
+    private static final float COMPACT_PHASE_MAX_RATIO = 0.12f; //a panel's own phase button is never taller than this share of a short panel
+
+    /** @return true when one phase label next to the stack menu replaces the per panel phase labels (compact layout only) */
+    public static boolean isUnifiedPhase() {
+        if (!isCompactLayout()) { return false; }
+        if (unifiedPhaseCache < 0) { reloadUnifiedPhase(); }
+        return unifiedPhaseCache > 0;
+    }
+
+    /** Call when the Unified Phase Label setting changes. */
+    public static void reloadUnifiedPhase() {
+        unifiedPhaseCache = FModel.getPreferences().getPrefBoolean(FPref.UI_UNIFIED_PHASE_LABEL) ? 1 : 0;
+    }
+
     private static int zoneOverlayCache = -1;
 
     /** @return true when zone tabs open over the battlefield instead of shrinking it (the Compact Zone Tabs setting) */
@@ -775,15 +790,16 @@ public class VPlayerPanel extends FContainer {
             y += lblLife.getHeight();
 
         final boolean compact = isCompactLayout();
-        if (compact) { //the phase button sits right under the life total, the tab scroller takes the rest
-            compactPhaseTop = y + TAB_COLUMN_PAD;
+        final boolean phaseButtonShown = compact && !isUnifiedPhase();
+        if (compact) { //the phase button sits right under the life total (unless the unified label replaces it), the tab scroller takes the rest
             compactPhaseHeight = getCompactPhaseHeight();
+            compactPhaseTop = y + (phaseButtonShown ? TAB_COLUMN_PAD : 0f);
             y = compactPhaseTop + compactPhaseHeight;
         }
         tabColTop = y;
         tabColHeight = height - y;
         tabStrip.setVisible(compact);
-        phaseButton.setVisible(compact);
+        phaseButton.setVisible(phaseButtonShown);
         layoutTabsLandscape();
         updateTabLayout(width, height);
     }
@@ -800,7 +816,17 @@ public class VPlayerPanel extends FContainer {
     }
 
     private float getCompactPhaseHeight() {
-        return Math.round(Math.max(Utils.scale(18), INFO2_FONT.getLineHeight() * 1.4f));
+        if (isUnifiedPhase()) { return 0f; } //the unified label next to the stack menu replaces the panel button
+        //a tad shorter than before, and never more than a slice of a short panel, so the zone tabs keep their room in 3-4 player games
+        final float wanted = Math.max(Utils.scale(14), INFO2_FONT.getLineHeight());
+        final float cap = initH > 0 ? Math.max(Utils.scale(12), initH * COMPACT_PHASE_MAX_RATIO) : wanted;
+        return Math.round(Math.min(wanted, cap));
+    }
+
+    //vertical room the panel's phase button takes including its gap, nothing when the unified label replaces it
+    private float getCompactPhaseSpace() {
+        final float h = getCompactPhaseHeight();
+        return h > 0 ? TAB_COLUMN_PAD + h : 0f;
     }
 
     //Shrinks the avatar on short panels (long phones, where a finger sized avatar is huge) so at least three zone tabs
@@ -811,7 +837,7 @@ public class VPlayerPanel extends FContainer {
         }
         final float lifeHeight = Forge.altPlayerLayout ? (adjustHeight > 2 ? INFO_FONT.getLineHeight() / 2 : 0) : LIFE_FONT.getLineHeight();
         final float minCell = Math.max(COMPACT_MIN_CELL, getCompactMinColumnWidth() * COMPACT_MIN_CELL_RATIO);
-        final float budget = height - COMPACT_PANEL_PAD_TOP - lifeHeight - TAB_COLUMN_PAD - getCompactPhaseHeight() - 2 * TAB_COLUMN_PAD - COMPACT_MAX_VISIBLE_TABS * minCell;
+        final float budget = height - COMPACT_PANEL_PAD_TOP - lifeHeight - getCompactPhaseSpace() - 2 * TAB_COLUMN_PAD - COMPACT_MAX_VISIBLE_TABS * minCell;
         final float limit = Math.min(compactAvatarNatural * 0.8f, Math.min(budget, height * COMPACT_MAX_AVATAR_RATIO));
         final float size = Math.round(Math.max(Math.min(COMPACT_MIN_AVATAR, compactAvatarNatural), limit));
         if (Math.abs(avatar.getWidth() - size) > 0.5f || avatar.getHeight() != avatar.getWidth()) {
@@ -1010,14 +1036,7 @@ public class VPlayerPanel extends FContainer {
             compactHintColor.set(c.r, c.g, c.b, 1f);
             g.fillRoundRect(compactHintColor, barX, thumbY, barW, thumbH, barW / 2);
 
-            final float size = Utils.scale(5);
-            final float cx = getCompactGutter() + (w - getCompactGutter()) / 2;
-            if (compactScroll > 0.05f) {
-                g.fillTriangle(compactHintColor, cx - size, 1 + size, cx + size, 1 + size, cx, 1);
-            }
-            if (compactScroll < max - 0.05f) {
-                g.fillTriangle(compactHintColor, cx - size, h - 1 - size, cx + size, h - 1 - size, cx, h - 1);
-            }
+            //no arrows: the scroll bar already shows that more tabs wait above or below
         }
 
         @Override
