@@ -965,6 +965,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return showPriceInfo;
     }
 
+    /** The symbol drawn before an item's price in the image view. Credits by default; override for another currency. */
+    public String getPriceSymbol() {
+        return "{CS}";
+    }
+
     public boolean getAllowGroupIdentical() {
         return allowGroupIdentical;
     }
