@@ -1,14 +1,18 @@
 package forge.game.staticability;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class StaticAbilityCantAttach {
 
-    public static StaticAbility cantAttach(final GameEntity target, final Card card, boolean checkSBA) {
+    public static StaticAbility cantAttach(final GameEntity target, final Card card, boolean checkSBA, final Map<AbilityKey, Object> params) {
         for (final Card ca : target.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            if (target.getGame().isEnteringTogether(ca)) {
+            if (CardZoneTable.isEntering(ca, params)) {
                 continue;
             }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {

@@ -109,6 +109,17 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return entered;
     }
 
+    // CR 614.12 a permanent entering in this event doesn't have its abilities yet
+    public boolean isEntering(final Card c) {
+        return lastStateBattlefield != CardCollection.EMPTY && c.isInPlay() && !lastStateBattlefield.contains(c);
+    }
+    public static boolean isEntering(final Card c, final Map<AbilityKey, Object> params) {
+        return params != null && params.get(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table && table.isEntering(c);
+    }
+    public static boolean isEntering(final Card c, final SpellAbility sa) {
+        return sa != null && sa.getReplacingObject(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table && table.isEntering(c);
+    }
+
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
         if (cause != null && cause.getReplacingObject(AbilityKey.InternalTriggerTable) == this) {
