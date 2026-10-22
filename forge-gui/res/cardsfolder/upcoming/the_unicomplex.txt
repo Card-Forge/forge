@@ -3,10 +3,9 @@ ManaCost:no cost
 Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control two or more other lands.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl+Other | ConditionCompare$ LT2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigCharm | OptionalDecider$ You | TriggerDescription$ When this land enters untapped, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigCharm | TriggerDescription$ When this land enters untapped, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBChangeZone,DBSurveil
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Creature.YouOwn | ValidTgtsDesc$ creature card in your graveyard | SpellDescription$ Put target creature card from your graveyard on top of your library.
 SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-Oracle:This land enters tapped unless you control two or more other lands.\nWhen this land enters untapped, choose one —\n• Put target creature card from your graveyard on top of your library.\n• Surveil 1.
-{T}: Add {B}.
+Oracle:This land enters tapped unless you control two or more other lands.\nWhen this land enters untapped, choose one —\n• Put target creature card from your graveyard on top of your library.\n• Surveil 1.\n{T}: Add {B}.
