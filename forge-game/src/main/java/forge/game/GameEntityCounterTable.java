@@ -146,6 +146,9 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             // Add ETB flag
             Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cause, cause);
+            if (etb) {
+                runParams.put(AbilityKey.ETB, true);
+            }
             if (params != null) {
                 runParams.putAll(params);
             }

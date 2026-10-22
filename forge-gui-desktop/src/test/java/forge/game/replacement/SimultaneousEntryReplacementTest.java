@@ -45,6 +45,20 @@ public class SimultaneousEntryReplacementTest extends AITest {
     }
 
     @Test
+    public void darkDepthsPlayedWithSolemnityOutGetsNoCounters() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        addCard("Solemnity", p);
+        Card depths = addCardToZone("Dark Depths", p, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+
+        p.playLand(depths, null);
+
+        AssertJUnit.assertEquals(0, game.getCardState(depths).getCounters(CounterEnumType.ICE));
+    }
+
+    @Test
     public void doublingSeasonDoesNotDoubleCountersSolemnityStops() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
