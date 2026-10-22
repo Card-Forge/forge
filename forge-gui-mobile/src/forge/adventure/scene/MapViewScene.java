@@ -238,7 +238,7 @@ public class MapViewScene extends UIScene {
         List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
         for (PointOfInterest poi : allPois) {
             if (WorldSave.getCurrentSave().getPointOfInterestChanges(poi.getID()).isVisited()) {
-                if ("cave".equalsIgnoreCase(poi.getData().type) || "dungeon".equalsIgnoreCase(poi.getData().type) || "castle".equalsIgnoreCase(poi.getData().type)) {
+                if (poi.getData().isDungeon() || "castle".equalsIgnoreCase(poi.getData().type)) {
                     TypingLabel label = Controls.newTypingLabel("[%?BLACKEN] " + poi.getDisplayName());
                     table.addActor(label);
                     details.add(label);
