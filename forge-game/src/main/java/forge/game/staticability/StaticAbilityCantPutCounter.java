@@ -1,21 +1,26 @@
 package forge.game.staticability;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
+import java.util.Map;
+
 public class StaticAbilityCantPutCounter {
 
-    public static boolean anyCantPutCounter(final Card card, final CounterType type) {
+    public static boolean anyCantPutCounter(final Card card, final CounterType type, final Map<AbilityKey, Object> params) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            if (game.isEnteringTogether(ca)) {
-                continue;
-            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPutCounter)) {
+                    continue;
+                }
+                if (stAb.getHostCard().isInPlay() && params != null && params.get(AbilityKey.InternalTriggerTable) instanceof CardZoneTable czt
+                        && !czt.getLastStateBattlefield().contains(stAb.getHostCard())) {
                     continue;
                 }
                 if (applyCantPutCounter(stAb, card, type)) {
@@ -29,9 +34,6 @@ public class StaticAbilityCantPutCounter {
     public static boolean anyCantPutCounter(final Player player, final CounterType type) {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            if (game.isEnteringTogether(ca)) {
-                continue;
-            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPutCounter)) {
                     continue;

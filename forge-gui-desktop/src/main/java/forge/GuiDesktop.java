@@ -84,6 +84,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public String getUserAgent() {
+        return "Forge/" + getCurrentVersion() + " (gui-desktop)";
+    }
+
+    @Override
     public String getAssetsDir() {
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ?
                 // FIXME: replace this hardcoded value!!
@@ -358,7 +363,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
-        new AltSoundSystem(filename, isSynchronized).start();
+        AltSoundSystem.play(filename, isSynchronized);
     }
 
     @Override

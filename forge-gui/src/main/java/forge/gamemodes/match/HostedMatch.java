@@ -226,6 +226,7 @@ public class HostedMatch {
                 } else {
                     game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 }
+                game.subscribeToEvents(humanController.getYieldController());
                 playersPerGui.put(gui, p.getView());
 
                 if (gameControllers != null) {
@@ -477,6 +478,7 @@ public class HostedMatch {
                         gui.setGameView(null);
                         gui.setGameView(gameView);
                         event.subgame().subscribeToEvents(new FControlGameEventHandler(humanController));
+                        event.subgame().subscribeToEvents(humanController.getYieldController());
                         gui.message(event.message());
                     }
                 }

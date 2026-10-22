@@ -19,6 +19,7 @@ import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.util.IHasForgeLog;
 import forge.gui.control.GameEventForwarder;
 import forge.gui.interfaces.IGuiGame;
+import forge.interfaces.IMacroSystem;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.trackable.TrackableCollection;
@@ -310,6 +311,11 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
         send(ProtocolMethod.applyYieldUpdate, update);
+    }
+
+    @Override
+    public void applyMacroState(final IMacroSystem.State state) {
+        send(ProtocolMethod.applyMacroState, state);
     }
 
     @Override

@@ -14,6 +14,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.gamemodes.match.Selection;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -50,13 +51,16 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     @Override
     protected Selection getSelection() {
         final List<CardView> cards = new ArrayList<>();
+        final List<TrackableObject> players = new ArrayList<>();
         for (T v : validChoices) {
             if (v instanceof Card c) {
                 // a last-state copy is shown where the card is now
                 cards.add(c.getGame().getCardState(c).getView());
+            } else if (v instanceof Player p) {
+                players.add(p.getView());
             }
         }
-        return new Selection(cards, min, max, List.of(), new ArrayList<>(GameEntityView.getEntityCollection(selected)));
+        return new Selection(cards, min, max, players, new ArrayList<>(GameEntityView.getEntityCollection(selected)));
     }
 
     @Override

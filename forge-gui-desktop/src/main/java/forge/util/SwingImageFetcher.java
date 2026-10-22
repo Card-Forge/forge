@@ -1,5 +1,6 @@
 package forge.util;
 
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 
 import javax.imageio.ImageIO;
@@ -54,7 +55,7 @@ public class SwingImageFetcher extends ImageFetcher {
             // code - without it a 429 is indistinguishable from any other failure and we keep asking.
             final URLConnection connection = url.openConnection();
             connection.setRequestProperty("Accept", "*/*");
-            connection.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            connection.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
             if (connection instanceof HttpURLConnection httpConnection) {
                 final int responseCode = httpConnection.getResponseCode();
                 if (responseCode != HttpURLConnection.HTTP_OK) {
@@ -112,7 +113,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+                conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

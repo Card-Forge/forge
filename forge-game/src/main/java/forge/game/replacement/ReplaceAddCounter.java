@@ -87,8 +87,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
                 if (hasParam("ValidCounterType") && !ct.equals(CounterType.getType(getParam("ValidCounterType")))) {
                     continue;
                 }
-                // CR 614.17c counters that can't be put can't be replaced
-                if (affected.canReceiveCounters(ct)) {
+                if (!runParams.containsKey(AbilityKey.InternalTriggerTable) || affected.canReceiveCounters(ct, runParams)) {
                     return true;
                 }
             }
@@ -99,12 +98,9 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
     @Override
     public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
-        if (super.modeCheck(event, runParams)) {
-            return true;
-        }
         if (event.equals(ReplacementType.Moved) && runParams.containsKey(AbilityKey.CounterMap)) {
             return true;
         }
-        return false;
+        return super.modeCheck(event, runParams);
     }
 }

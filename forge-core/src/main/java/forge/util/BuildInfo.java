@@ -80,10 +80,6 @@ public class BuildInfo {
         return DateUtil.getElapsedHours(getTimestamp(), updateTimestamp) > 23;
     }
 
-    public static String getUserAgent() {
-        return "Forge/" + getVersionString();
-    }
-
     private static String readFromInputStream(InputStream inputStream) throws IOException {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {

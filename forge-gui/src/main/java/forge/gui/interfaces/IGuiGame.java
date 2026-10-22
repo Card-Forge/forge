@@ -22,6 +22,7 @@ import forge.gamemodes.net.DeltaPacket;
 import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
@@ -308,6 +309,8 @@ public interface IGuiGame {
     default void refreshYieldUi(PlayerView player) {}
     /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
     void applyYieldUpdate(YieldUpdate update);
+    /** Apply the macro state of the current player's controller. A local controller holds its own, so only a netplay client is sent one. */
+    void applyMacroState(IMacroSystem.State state);
 
     /**
      * Apply a delta update packet to the local game state.
