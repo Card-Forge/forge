@@ -286,6 +286,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Pinchy McStingbutt
 1. (HTR) Mr. Monopoly, On the Go
 1. Fluros of Myra's Marvels
+1. GO TO JAIL
+1. (Uk) Genevieve, Conniving Dragon
+1. Squirrel-Powered Scheme
 
 #### Functional Variants
 1. Sly Spy F
@@ -434,7 +437,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 **Either works within the rules, or could be scripted without engine changes.**
 
 1. Gerrymandering
-1. GO TO JAIL
 1. The Big Idea
 1. Krark's Other Thumb
 1. (P) Baneslayer Aspirant
@@ -671,7 +673,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Kindly Cognician - Text matters, but only the Oracle text, not the printed text like most Un-cards.
 1. Socketed Sprocketer - Already have diceroll storage from Centaur of Attention; need uninstall as a cost and a Monitor Monitor-esque dice replacement that uses the uninstalled die as the replacement value.
 1. Spike, Tournament Grinder - Wishes for banned cards.
-1. Squirrel-Powered Scheme - +2 to all dice rolls. Might be possible with current replacement effects?
 1. Far Out - Makes Modal Choices into "Choose one or more". Maybe just a replacement effect on Charm?
 1. Animate Object - Effect doesn't really care what the object is. Could just be a token. Might be fun to have a selection of images of random household items to represent the token. (But also Stickers)
 1. Pie-Eating Contest - Can't physically eat food to pay the X-cost, but can still sacrifice food tokens.
@@ -730,7 +731,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Sprinkler of Stardust - There's probably some reason Magar couldn't be written this way...
 1. (Uk) The Pleasant Taxer - Taxes searching a library.
 1. (Uk) The Karst, Enchanted - Different toughness and different card types while searching.
-1. (Uk) Genevieve, Conniving Dragon - Party die. X-Math for number of sides on a regular die roll?
 1. (Uk) The Art of Magic - (Plane) Choose card with favorite art. Would have to work on the honor system. AI can pick randomly. Originally named "Artist Alley", renamed after name collision.
 1. (Uk) Quest Compleated Beast - Fear of Sleep Paralysis brought some "can't remove counters" support, but doesn't yet include players.
 1. (Uk) The Tokenator - Token's power and toughness is any combination that totals a certain value.

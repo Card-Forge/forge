@@ -229,6 +229,15 @@ public class RollDiceEffect extends SpellAbilityEffect {
             resultsList.add(new DieRollResult(unmodified, unmodified));
         }
 
+        //replacement effects that affect die results
+        int diceResultModifier = (int) repParams.get(AbilityKey.DiceResultModifier);
+        if (diceResultModifier != 0) {
+            for (DieRollResult roll : resultsList) {
+                    roll.setModifiedValue(roll.getModifiedValue() + diceResultModifier);
+            }
+            hasBeenModified = true;
+        }
+
         // Vedalken Exchange
         CardCollection vedalkenSwaps = new CardCollection(dicePTExchanges);
         if (!vedalkenSwaps.isEmpty()) {
@@ -409,6 +418,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         repParams.put(AbilityKey.Ignore, ignore);
         repParams.put(AbilityKey.DicePTExchanges, dicePTExchanges);
         repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
+        repParams.put(AbilityKey.DiceResultModifier, 0);
         switch (player.getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams)) {
             case NotReplaced:
                 break;
