@@ -20,6 +20,7 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
     private void runTriggers(final Game game, final Card attacker, final Card blocker) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Attacker, attacker);
+        runParams.put(AbilityKey.Attackers, attacker);
         runParams.put(AbilityKey.Blocker, blocker);
         game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams, false);
         game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
