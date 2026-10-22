@@ -447,7 +447,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                     }
                 }
 
-                abSub = sa.getSubAbility();
+                abSub = abSub.getSubAbility();
             }
 
             if (!result) {
