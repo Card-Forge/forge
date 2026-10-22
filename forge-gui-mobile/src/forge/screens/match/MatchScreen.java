@@ -82,6 +82,7 @@ public class MatchScreen extends FScreen {
     private final VLog log;
     private final VChat chat;
     private final VStack stack;
+    private final VUnifiedPhase unifiedPhase; //compact layout: one phase label for all players, right of the stack menu
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
@@ -120,6 +121,7 @@ public class MatchScreen extends FScreen {
         playerPanelsList.remove(bottomPlayerPanel);
         playerPanelsList.add(bottomPlayerPanel);
         selectedPlayer = playerPanelsList.size() - 1;
+        unifiedPhase = new VUnifiedPhase(this::getPlayerPanelsList);
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 e -> getGameController().selectButtonOk(),
@@ -193,6 +195,8 @@ public class MatchScreen extends FScreen {
             remove(getHeader());
             add(getHeader());
             bottomPlayerPrompt.setMenuButton(VPlayerPanel.isMenuHidden(), this::toggleMenuBar);
+            add(unifiedPhase);
+            add(unifiedPhase.getMenu()); //above the header, so it opens over the field
         }
     }
 
@@ -305,6 +309,7 @@ public class MatchScreen extends FScreen {
         if (topPlayerPrompt == null) {
             devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
         }
+        revalidate(); //the compact layout and unified phase settings may have changed in Settings
     }
 
     public boolean isTopHumanPlayerActive() {
@@ -380,6 +385,21 @@ public class MatchScreen extends FScreen {
             } else if (menuBarShown) {
                 menuBarShown = false;
                 menuBarHideTask.cancel();
+            }
+        }
+        if (topPlayerPrompt == null) { //compact layout: one phase label right of the stack menu, the bar gives up the room for it
+            final boolean unified = VPlayerPanel.isUnifiedPhase();
+            final float barHeight = getHeader().getHeight();
+            final float buttonWidth = unified ? Math.min(unifiedPhase.getPreferredWidth(), width / 3f) : 0f;
+            if (getHeader().getWidth() != width - buttonWidth) {
+                getHeader().setBounds(getHeader().getLeft(), getHeader().getTop(), width - buttonWidth, barHeight);
+            }
+            unifiedPhase.setVisible(unified);
+            if (unified) {
+                unifiedPhase.setBounds(width - buttonWidth, 0, buttonWidth, barHeight);
+                unifiedPhase.getMenu().layoutFor(width, barHeight, height - VPrompt.HEIGHT - barHeight);
+            } else {
+                unifiedPhase.getMenu().close();
             }
         }
         float scrollerWidth = width;
