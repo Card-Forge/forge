@@ -114,4 +114,26 @@ public class SwitchBlockEffectTest extends AITest {
         assertFalse(combat.isBlocking(blocker1, attacker2));
         assertFalse(combat.isBlocking(blocker3, attacker3));
     }
+
+    /**
+     * General Jarkeld: a creature blocking exactly one of the two targets stops blocking it and blocks the
+     * other. A block on a third attacker is none of its business.
+     */
+    @Test
+    public void generalJarkeldLeavesABlockOnAThirdAttackerAlone() {
+        startCombat();
+        Card attacker1 = attacker("Grizzly Bears");
+        Card attacker2 = attacker("Runeclaw Bear");
+        Card attacker3 = attacker("Hill Giant");
+        Card multiBlocker = blocker("Goblin Chariot", attacker1, attacker3);
+        Card other = blocker("Savannah Lions", attacker2);
+
+        activate("General Jarkeld", defenderPlayer, attacker1, attacker2);
+
+        assertTrue("multiBlocker moved from attacker1 to attacker2", combat.isBlocking(multiBlocker, attacker2));
+        assertFalse(combat.isBlocking(multiBlocker, attacker1));
+        assertTrue("its block on the third attacker stays", combat.isBlocking(multiBlocker, attacker3));
+        assertTrue("the other blocker moved to attacker1", combat.isBlocking(other, attacker1));
+        assertEquals(1, combat.getBlockers(attacker1).size());
+    }
 }
