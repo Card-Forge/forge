@@ -348,6 +348,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     if (MatchController.instance != null) {
                         MatchController.instance.resetPlayerPanels();
                     }
+                    if (MatchController.getView() != null) {
+                        MatchController.getView().revalidate();
+                    }
                 }
             }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_HIDE_MENU,
@@ -357,6 +360,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void select() {
                 super.select();
                 VPlayerPanel.reloadMenuHidden();
+                if (MatchController.getView() != null) {
+                    MatchController.getView().revalidate();
+                }
+            }
+        }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_UNIFIED_PHASE_LABEL,
+            Forge.getLocalizer().getMessageorUseDefault("lblUnifiedPhaseLabel", "Unified Phase Label (Compact Layout)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlUnifiedPhaseLabel", "Shows one phase label next to the Stack menu instead of one on each player panel. Tap it to see and change every player's phase stops.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPlayerPanel.reloadUnifiedPhase();
+                if (MatchController.instance != null) {
+                    MatchController.instance.resetPlayerPanels();
+                }
                 if (MatchController.getView() != null) {
                     MatchController.getView().revalidate();
                 }
