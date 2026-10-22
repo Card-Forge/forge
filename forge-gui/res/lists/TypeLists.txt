@@ -149,6 +149,7 @@ Hellion:Hellions
 Hero:Heroes
 Hippo:Hippos
 Hippogriff:Hippogriffs
+Hirogen:Hirogens
 Homarid:Homarids
 Homunculus:Homunculi
 Horror:Horrors
