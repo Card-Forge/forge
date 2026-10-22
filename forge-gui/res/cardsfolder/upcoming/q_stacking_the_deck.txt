@@ -7,5 +7,5 @@ SVar:TrigShuffle:DB$ Shuffle | SubAbility$ DBDigUntil
 SVar:DBDigUntil:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Abilities$ ABPlay | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:ABPlay:AB$ Play | Cost$ ExileFromHand<1/Card> | ActivationZone$ Exile | PlayerTurn$ True | Valid$ Card.Self | ValidZone$ Exile | Amount$ All | ValidSA$ Spell | Optional$ True | CopyCard$ True | SpellDescription$ Create a copy of this card. You may cast the copy. Activate only during your turn and only if this card is exiled.
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:When Q enters, shuffle your library, then exile cards from the top of your library until you exile a nonland card. That nonland card gains "Exile a card from your hand: Create a copy of this card. You may cast the copy. Activate only during your turn and only if this card is exiled."
