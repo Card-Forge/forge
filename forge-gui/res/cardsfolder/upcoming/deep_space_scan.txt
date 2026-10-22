@@ -1,7 +1,7 @@
 Name:Deep Space Scan
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ Draw | NumCards$ X | SubAbility$ DBEffect
+A:SP$ Draw | NumCards$ X | SubAbility$ DBEffect | SpellDescription$ Strange new worlds — Draw X cards, where X is the number of differently named lands you control. You have no maximum hand size until your next turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
 SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
