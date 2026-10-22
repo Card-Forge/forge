@@ -2622,10 +2622,9 @@ public class GameAction {
             switch (game.getReplacementHandler().run(ReplacementType.Scry, repParams)) {
                 case NotReplaced:
                     break;
-                case Updated: {
+                case Updated:
                     playerScry = (int) repParams.get(AbilityKey.Num);
                     break;
-                }
                 default:
                     continue;
             }
