@@ -1275,7 +1275,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                     else {
                         if (cardPrice != null)
-                            drawCardLabel(g, "{CS} " + cardPrice, Color.GOLD, x, y, w, h);
+                            drawCardLabel(g, itemManager.getPriceSymbol() + " " + cardPrice, Color.GOLD, x, y, w, h);
                     }
                 }
                 // spire colors
