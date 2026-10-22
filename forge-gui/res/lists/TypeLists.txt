@@ -102,6 +102,7 @@ Dwarf:Dwarves
 Echidna:Echidnas
 Efreet:Efreets
 Egg:Eggs
+El-Aurian:El-Aurians
 Elder:Elders
 Eldrazi:Eldrazi
 Elemental:Elementals
