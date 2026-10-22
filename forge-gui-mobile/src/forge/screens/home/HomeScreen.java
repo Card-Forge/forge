@@ -16,6 +16,7 @@ import forge.assets.FSkinImage;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.gamemodes.replay.ReplayLauncher;
+import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.FThreads;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
@@ -112,6 +113,7 @@ public class HomeScreen extends FScreen {
             Forge.lastButtonIndex = activeButtonIndex;
             SettingsScreen.show(true);
         });
+        addButton("How to Play", e -> HowToPlay.chooseAndStart());
         addButton("Replays", e -> ReplayLauncher.chooseAndPlay());
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
             try {

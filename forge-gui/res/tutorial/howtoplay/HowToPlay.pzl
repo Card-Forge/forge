@@ -1,0 +1,25 @@
+[metadata]
+Name:How to Play - Your First Game
+URL:https://www.cardforge.org
+Goal:Win
+Turns:12
+Difficulty:Common
+Description:A fixed practice game that teaches the basics: playing a land, casting a spell and paying its mana, attacking, blocking, and winning. Nothing here is random, so the demo and your own attempt play out the same way.
+[state]
+humanlife=20
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Mountain;Mountain;Raging Goblin;Mountain
+humanlibrary=Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain;Mountain
+humangraveyard=
+humanbattlefield=Hill Giant
+humanexile=
+humancommand=
+aihand=
+ailibrary=Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp
+aigraveyard=
+aibattlefield=Goblin Brigand
+aiexile=
+aicommand=

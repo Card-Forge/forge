@@ -32,6 +32,18 @@ public interface IGuiBase {
     void runBackgroundTask(String message, Runnable task);
     boolean isGuiThread();
     default boolean isMatchInProgress() { return false; }
+
+    /**
+     * Shows a tutorial note on the match screen without dimming or blocking it, so the cards it talks about stay in
+     * view. {@code onNext} runs when the player presses the note's button. Returns false when this GUI has no such
+     * panel, in which case the caller shows a dialog instead. Safe to call from any thread.
+     */
+    default boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        return false;
+    }
+
+    /** Removes the note shown by {@link #showCoach}, if any. Safe to call from any thread. */
+    default void hideCoach() { }
     String getAssetsDir();
     ImageFetcher getImageFetcher();
     ISkinImage getSkinIcon(FSkinProp skinProp);
