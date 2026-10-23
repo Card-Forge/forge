@@ -68,6 +68,43 @@ public class SplashScreen extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        layoutButtons();
+    }
+
+    private void layoutButtons() {
+        if (!init || btnHome == null || btnAdventure == null || splashTexture == null) {
+            return;
+        }
+        float x, y, w, h;
+        float backgroundRatio = (float) splashTexture.getRegionWidth() / splashTexture.getRegionHeight();
+        float screenRatio = getWidth() / getHeight();
+        if (backgroundRatio > screenRatio) {
+            x = 0;
+            w = getWidth();
+            h = getWidth() / backgroundRatio;
+            y = (getHeight() - h) / 2;
+        } else {
+            y = 0;
+            h = getHeight();
+            w = getHeight() * backgroundRatio;
+            x = (getWidth() - w) / 2;
+        }
+        y += h * 295f / 450f;
+        float padding = 20f / 450f * w * 0.6f;
+        float height = 57f / 450f * h * 0.6f;
+        float modw = Frost.isOn() ? 0.6f : 1f;
+        float btn_w = Math.min((w - 2 * padding) * modw, 600f);
+        float btn_x = Frost.isOn() ? getWidth() / 2 - btn_w / 2 : (getWidth() - btn_w) / 2;
+        float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
+        float btn_y = (y + padding) * multiplier;
+        height = Frost.isOn() ? height * 1.2f : height;
+        float mody = Frost.isOn() ? height / 4 : 0;
+        float totalBtnHeight = 2 * height + padding + mody / 1.4f;
+        if (btn_y + totalBtnHeight > getHeight() - 20) {
+            btn_y = getHeight() - totalBtnHeight - 20;
+        }
+        btnHome.setBounds(btn_x, btn_y + mody, btn_w, height);
+        btnAdventure.setBounds(btn_x, btn_y + height + padding + mody / 1.4f, btn_w, height);
     }
 
     //prepare for showing dialogs on top of splash screen if needed
@@ -133,12 +170,12 @@ public class SplashScreen extends FContainer {
             if (backgroundRatio > screenRatio) {
                 x = 0;
                 w = getWidth();
-                h = getWidth() * backgroundRatio;
+                h = getWidth() / backgroundRatio;
                 y = (getHeight() - h) / 2;
             } else {
                 y = 0;
                 h = getHeight();
-                w = getHeight() / backgroundRatio;
+                w = getHeight() * backgroundRatio;
                 x = (getWidth() - w) / 2;
             }
             float hmod = Forge.isLandscapeMode() ? 1f : 1.3f;
@@ -275,12 +312,12 @@ public class SplashScreen extends FContainer {
         if (backgroundRatio > screenRatio) {
             x = 0;
             w = getWidth();
-            h = getWidth() * backgroundRatio;
+            h = getWidth() / backgroundRatio;
             y = (getHeight() - h) / 2;
         } else {
             y = 0;
             h = getHeight();
-            w = getHeight() / backgroundRatio;
+            w = getHeight() * backgroundRatio;
             x = (getWidth() - w) / 2;
         }
         if (FSkin.getLogo() != null) {
@@ -289,10 +326,6 @@ public class SplashScreen extends FContainer {
         } else {
             g.drawImage(FSkinImage.LOGO, getWidth() / 2 - (FSkinImage.LOGO.getWidth() * 2f) / 2, getHeight() / 2 - (FSkinImage.LOGO.getHeight() * 2f) / 1.3f, FSkinImage.LOGO.getWidth() * 2f, FSkinImage.LOGO.getHeight() * 2f);
         }
-        y += h * 295f / 450f;
-        float padding = 20f / 450f * w * 0.6f;
-        float height = 57f / 450f * h * 0.6f;
-
         if (!init) {
             init = true;
             btnAdventure = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
@@ -323,19 +356,11 @@ public class SplashScreen extends FContainer {
                     bgAnimation.openAdventure = false;
                 }
             });
-            float modw = Frost.isOn() ? 0.6f : 1f;
-            float btn_w = (w - 2 * padding) * modw;
-            float btn_x = Frost.isOn() ? getWidth() / 2 - btn_w / 2 : x + padding;
-            float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
-            float btn_y = (y + padding) * multiplier;
-            height = Frost.isOn() ? height * 1.2f : height;
-            float mody = Frost.isOn() ? height / 4 : 0;
             btnHome.setFont(FSkinFont.get(22));
             btnAdventure.setFont(FSkinFont.get(22));
-            btnHome.setBounds(btn_x, btn_y, btn_w, height);
             add(btnHome);
-            btnAdventure.setBounds(btn_x, btn_y + height + padding + mody / 1.4f, btn_w, height);
             add(btnAdventure);
+            layoutButtons();
         }
     }
 
@@ -404,12 +429,12 @@ public class SplashScreen extends FContainer {
         if (backgroundRatio > screenRatio) {
             x = 0;
             w = getWidth();
-            h = getWidth() * backgroundRatio;
+            h = getWidth() / backgroundRatio;
             y = (getHeight() - h) / 2;
         } else {
             y = 0;
             h = getHeight();
-            w = getHeight() / backgroundRatio;
+            w = getHeight() * backgroundRatio;
             x = (getWidth() - w) / 2;
         }
         drawSplashBackdrop(g, x, y, w, h);

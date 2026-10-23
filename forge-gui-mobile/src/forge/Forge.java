@@ -215,12 +215,21 @@ public class Forge implements ApplicationListener {
         //screenWidth and screenHeight should be set initially and only change upon restarting the app
         screenWidth = Gdx.app.getGraphics().getWidth();
         screenHeight = Gdx.app.getGraphics().getHeight();
+        Utils.updateScreenDimensions(screenWidth, screenHeight);
         //set Classic Mode camera and position
         camera = new OrthographicCamera(screenWidth, screenHeight);
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
-        // Desktop default: auto-detect from initial window/backbuffer aspect ratio
-        if (!GuiBase.isAndroid() && desktopAutoOrientation) {
+        // Desktop default: auto-detect from initial window/backbuffer aspect ratio;
+        // Foldable Android: detect from initial aspect ratio / fold state
+        if (deviceAdapter != null && (deviceAdapter.isFoldable() || deviceAdapter.isFoldableUnfolded())) {
+            isTabletDevice = deviceAdapter.isTablet();
+            if (isTabletDevice) {
+                isPortraitMode = screenHeight > screenWidth * 1.3f;
+            } else {
+                isPortraitMode = screenHeight > screenWidth;
+            }
+        } else if (!GuiBase.isAndroid() && desktopAutoOrientation) {
             isPortraitMode = screenHeight > screenWidth;
         }
         //update landscape mode preference if it doesn't match what the app loaded as
@@ -470,12 +479,14 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.MENU, true);
 
         afterDBloaded = true;
+        Utils.updateScreenDimensions(screenWidth, screenHeight);
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
 
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             //load skin full
             FSkin.loadFull(getSplashScreen());
+            Utils.updateScreenDimensions(screenWidth, screenHeight);
             FThreads.invokeInBackgroundThread(() -> {
                 //load Drafts
                 preloadBoosterDrafts();
@@ -668,7 +679,13 @@ public class Forge implements ApplicationListener {
             } else if (aspectratio > 1.7f) {/* wide */
                 setHeightModifier(100.0f);
                 extrawide = "wide";
+            } else {
+                setHeightModifier(0.0f);
+                extrawide = "default";
             }
+        } else {
+            setHeightModifier(0.0f);
+            extrawide = "default";
         }
     }
 
@@ -1018,13 +1035,62 @@ public class Forge implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         try {
+            if (width <= 0 || height <= 0) {
+                return;
+            }
+            screenWidth = width;
+            screenHeight = height;
+            if (camera != null) {
+                camera.viewportWidth = width;
+                camera.viewportHeight = height;
+                camera.position.set(width / 2f, height / 2f, 0);
+                camera.update();
+            }
+            boolean oldPortrait = isPortraitMode;
+            if (deviceAdapter != null) {
+                float aspect = (float) Math.max(width, height) / Math.min(width, height);
+                if (deviceAdapter.isFoldable() || deviceAdapter.isFoldableUnfolded() || aspect < 1.45f) {
+                    isTabletDevice = (deviceAdapter.isTablet() && aspect < 1.7f) || aspect < 1.45f;
+                    if (isTabletDevice) {
+                        isPortraitMode = screenHeight > screenWidth * 1.3f;
+                    } else {
+                        isPortraitMode = screenHeight > screenWidth;
+                    }
+                }
+            } else {
+                isPortraitMode = screenHeight > screenWidth;
+            }
+            boolean orientationChanged = (oldPortrait != isPortraitMode);
+            if (orientationChanged) {
+                try {
+                    getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
+                    getForgePreferences().save();
+                } catch (Exception ignored) {
+                }
+            }
+            Utils.updateScreenDimensions(width, height);
+            adjustHeightModifier(width, height);
+            ScreenUtil.getInstance().resize(width, height);
+            FSkinFont.updateAll();
+
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
+                currentScreen.revalidate(true);
             } else if (splashScreen != null) {
                 splashScreen.setSize(width, height);
+                splashScreen.revalidate(true);
             }
-            if (currentScene != null)
+            if (currentScene != null) {
                 currentScene.resize(width, height);
+                if (orientationChanged) {
+                    currentScene.onOrientationChanged();
+                }
+            }
+            if (orientationChanged && !isMobileAdventureMode) {
+                if (onHomeScreen() && isLandscapeMode()) {
+                    HomeScreen.instance.openMenu(0);
+                }
+            }
         } catch (Exception ex) {
             //graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
@@ -1150,11 +1216,22 @@ public class Forge implements ApplicationListener {
             storeScreen();
         Adventure.getInstance().sceneWasSwapped = true;
         currentScene = newScene;
-
+        currentScene.resize(screenWidth, screenHeight);
         currentScene.enter();
         if (currentScene instanceof DuelScene)
             Forge.clearTransitionScreen(true);
         return true;
+    }
+
+    public static void replaceCurrentScene(Scene newScene) {
+        if (currentScene != null && currentScene != newScene) {
+            currentScene.leave();
+        }
+        currentScene = newScene;
+        if (currentScene != null) {
+            currentScene.resize(screenWidth, screenHeight);
+            currentScene.enter();
+        }
     }
 
     protected static void storeScreen() {
@@ -1167,6 +1244,7 @@ public class Forge implements ApplicationListener {
         if (lastScene.size != 0) {
             storeScreen();
             currentScene = lastScene.get(lastScene.size - 1);
+            currentScene.resize(screenWidth, screenHeight);
             currentScene.enter();
             Adventure.getInstance().sceneWasSwapped = true;
             lastScene.removeIndex(lastScene.size - 1);

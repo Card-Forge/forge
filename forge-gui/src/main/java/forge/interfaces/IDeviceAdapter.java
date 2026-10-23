@@ -32,6 +32,12 @@ public interface IDeviceAdapter {
     UpnpServiceConfiguration getUpnpPlatformService();
     boolean needFileAccess();
     void requestFileAcces();
+    default boolean isFoldable() {
+        return false;
+    }
+    default boolean isFoldableUnfolded() {
+        return false;
+    }
 
     Set<String> LWJGL_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg");
     default boolean isSupportedAudioFormat(File file) {

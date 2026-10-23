@@ -242,9 +242,57 @@ public class NewGameScene extends MenuScene {
     private static NewGameScene object;
 
     public static NewGameScene instance() {
-        if (object == null)
-            object = new NewGameScene();
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            reload();
+        }
         return object;
+    }
+
+    public static void reload() {
+        if (object != null) {
+            String name = object.selectedName != null ? object.selectedName.getText() : null;
+            int genderIdx = object.gender != null ? object.gender.getCurrentIndex() : 0;
+            int raceIdx = object.race != null ? object.race.getCurrentIndex() : 0;
+            int colorIdx = object.colorId != null ? object.colorId.getCurrentIndex() : 0;
+            int modeIdx = object.mode != null ? object.mode.getCurrentIndex() : 0;
+            int diffIdx = object.difficulty != null ? object.difficulty.getCurrentIndex() : 0;
+            int editionIdx = object.starterEdition != null ? object.starterEdition.getCurrentIndex() : 0;
+            int avIdx = object.avatarIndex;
+
+            clearInstance();
+            object = new NewGameScene();
+            if (name != null && !name.isEmpty() && object.selectedName != null) {
+                object.selectedName.setText(name);
+            }
+            if (object.gender != null) object.gender.setCurrentIndex(genderIdx);
+            if (object.race != null) object.race.setCurrentIndex(raceIdx);
+            if (object.colorId != null) object.colorId.setCurrentIndex(colorIdx);
+            if (object.mode != null) {
+                object.mode.setCurrentIndex(modeIdx);
+                if (modeIdx >= 0 && modeIdx < object.modes.size) {
+                    object.updateModeSelectionState(object.modes.get(modeIdx));
+                }
+            }
+            if (object.difficulty != null) object.difficulty.setCurrentIndex(diffIdx);
+            if (object.starterEdition != null) object.starterEdition.setCurrentIndex(editionIdx);
+            object.avatarIndex = avIdx;
+            object.updateAvatar();
+        } else {
+            object = new NewGameScene();
+        }
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        reload();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
     float avatarT = 1f, avatarTT = 1f;

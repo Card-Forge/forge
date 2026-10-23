@@ -128,11 +128,22 @@ public class PlayerStatisticScene extends UIScene {
     private static PlayerStatisticScene object;
 
     public static PlayerStatisticScene instance(Scene lastGameScene) {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode())
             object = new PlayerStatisticScene();
         if (lastGameScene != null)
             object.lastGameScene=lastGameScene;
         return object;
+    }
+
+    public static void clearInstance() {
+        object = null;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        Scene last = this.lastGameScene;
+        clearInstance();
+        Forge.replaceCurrentScene(instance(last));
     }
 
     @Override

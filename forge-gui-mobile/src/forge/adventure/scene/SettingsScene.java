@@ -518,9 +518,29 @@ public class SettingsScene extends UIScene {
     private static SettingsScene object;
 
     public static SettingsScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            clearInstance();
             object = new SettingsScene();
+        }
         return object;
+    }
+
+    public static void reload() {
+        clearInstance();
+        object = new SettingsScene();
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        reload();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
 
