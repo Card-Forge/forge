@@ -1927,7 +1927,7 @@ public class AiController {
             return approved.get(0); // nothing to compare
         }
         final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, extras, cfg,
-                sa -> playDecision(sa) == AiPlayDecision.WillPlay, mode);
+                sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay, mode);
         lastFlatMcResult = result;
         FlatMonteCarloStats.record(result);
         flatMcTurnSpentNanos += result.elapsedNanos;
@@ -1954,14 +1954,29 @@ public class AiController {
             }
         }
         for (final SpellAbility sa : order) {
-            if (sa == result.choice && !sa.usesTargeting() && playDecision(sa) != AiPlayDecision.WillPlay && isStillCastable(sa)) {
-                // The heuristics are not deterministic (several of them roll dice) and said yes a moment ago when they
-                // approved this play. With nothing to aim there is nothing to set up again: Monte Carlo's verdict stands.
-                return sa;
+            // What the heuristics aimed at when they approved the play: a refusal below clears the targets again.
+            GameEntity approvedTarget = null;
+            int approvedTargets = 0;
+            if (sa == result.choice && sa.usesTargeting() && sa.getTargets() != null) {
+                for (final GameEntity e : sa.getTargets().getTargetEntities()) {
+                    approvedTarget = e;
+                    approvedTargets++;
+                }
             }
-            if (playDecision(sa) == AiPlayDecision.WillPlay) {
+            final boolean willPlay = playDecisionStable(sa) == AiPlayDecision.WillPlay; // asked once: the answer can roll dice
+            if (!willPlay && sa == result.choice) {
+                // The heuristics are not deterministic (several of them roll dice, some remember what they planned) and
+                // said yes a moment ago when they approved this play, and the rollouts confirmed it: Monte Carlo's
+                // verdict stands, aimed where it was (a single target, still legal) if the play aims at all.
+                final boolean aimOk = !sa.usesTargeting()
+                        || (result.target == null && approvedTargets == 1 && FlatMonteCarloPicker.applyTarget(sa, approvedTarget));
+                if (aimOk && isStillCastable(sa)) {
+                    return sa;
+                }
+            }
+            if (willPlay) {
                 if (sa == result.choice && result.target != null && !FlatMonteCarloPicker.applyTarget(sa, result.target)
-                        && playDecision(sa) != AiPlayDecision.WillPlay) {
+                        && playDecisionStable(sa) != AiPlayDecision.WillPlay) {
                     continue; // the other target is no longer legal and the heuristics gave the play up as well
                 }
                 return sa;
@@ -2028,6 +2043,18 @@ public class AiController {
         } catch (final RuntimeException e) {
             return false;
         }
+    }
+
+    /**
+     * Like {@link #playDecision} for a play the heuristics approved a moment ago: several of them roll dice, so one
+     * "no" proves little. WillPlay if any of a few asks says so (which also re-aims the play's targets).
+     */
+    private AiPlayDecision playDecisionStable(final SpellAbility sa) {
+        AiPlayDecision decision = playDecision(sa);
+        for (int i = 0; i < 3 && decision != AiPlayDecision.WillPlay; i++) {
+            decision = playDecision(sa);
+        }
+        return decision;
     }
 
     /** The heuristic verdict on one play, the way the spell choice loop asks for it. */

@@ -94,6 +94,7 @@ public class FlatMonteCarloStrategyTest extends AITest {
     @Test(timeOut = LONG_TIMEOUT_MS)
     public void drawsACardAtTheOpponentsEndStep() {
         final Game game = newGame(true);
+        game.AI_FLAT_MONTE_CARLO_MAX = true; // a whole simulated turn per sample: generous budget, so a busy machine cannot starve it
         final Player ai = game.getPlayers().get(1);
         final Player opp = game.getPlayers().get(0);
         addCards("Island", 3, ai);
@@ -291,7 +292,7 @@ public class FlatMonteCarloStrategyTest extends AITest {
 
     // ------------------------------------------------------------------ tempo at the end step
 
-    @Test(timeOut = LONG_TIMEOUT_MS) // TODO: Sometimes this test fails - rollouts is rejected as “unsimulatable" resulting to heuristics result, find out why..
+    @Test(timeOut = LONG_TIMEOUT_MS) // TODO: verify if this is always deterministic now with the updated patch
     public void bouncesABlockerAtTheEndStepToAttackIntoAnOpenBoard() {
         final Game game = newGame(true);
         // A whole simulated turn per sample is the heaviest rollout there is: use the generous desktop budget so that a
@@ -317,7 +318,7 @@ public class FlatMonteCarloStrategyTest extends AITest {
 
     // ------------------------------------------------------------------ lethal
 
-    @Test(timeOut = LONG_TIMEOUT_MS) // TODO: Sometimes this test fails - rollouts is rejected as “unsimulatable" resulting to heuristics result, find out why..
+    @Test(timeOut = LONG_TIMEOUT_MS) // TODO: verify if this is always deterministic now with the updated patch
     public void takesLethalDamageOverEverythingElse() {
         final Game game = newGame(true);
         final Player ai = game.getPlayers().get(1);

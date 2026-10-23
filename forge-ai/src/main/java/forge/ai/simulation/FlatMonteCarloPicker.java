@@ -509,12 +509,19 @@ public final class FlatMonteCarloPicker {
             // paired rounds (same seed = same hidden cards), or one lucky sample could talk the AI out of a fine play.
             final int pairs = Math.min(count[0], count[best]);
             int wins = 0;
+            int losses = 0;
             for (int i = 0; i < pairs; i++) {
                 if (vals[best][i] > vals[0][i] + bonus0 / 4) {
                     wins++;
+                } else if (vals[best][i] + bonus0 / 4 < vals[0][i]) {
+                    losses++;
                 }
             }
-            if (pairs >= 2 && wins * 100 <= pairs * cfg.overrideMajorityPercent) {
+            // A line that is never worse in any paired round and clearly better on average (a cantrip: often only a
+            // small gain, when it draws a land, but it costs nothing) does not have to win a majority outright.
+            final boolean neverWorse = pairs >= 3 && losses == 0 && wins >= 1
+                    && (double) sum[best] / count[best] > (double) sum[0] / count[0] + bonus0;
+            if (pairs >= 2 && !neverWorse && wins * 100 <= pairs * cfg.overrideMajorityPercent) {
                 best = 0;
             } else if (pairs < 2 && (double) sum[best] / count[best] < (double) sum[0] / count[0] + 2.0 * bonus0) {
                 // One sample per line is only noise: leave the heuristic choice unless the gap is large.
