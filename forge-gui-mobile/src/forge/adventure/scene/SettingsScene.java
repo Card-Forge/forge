@@ -208,6 +208,8 @@ public class SettingsScene extends UIScene {
                     FModel.getPreferences().save();
                 }
             });
+            addCheckBox(localizer.getMessage("lblKeepMouseInFullscreen"),
+                    ForgePreferences.FPref.UI_KEEP_MOUSE_IN_FULLSCREEN, Forge::updateMouseConfine);
         }
         addSettingField(localizer.getMessage("lblDay") + " | " + localizer.getMessage("lblNight") + " " + localizer.getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
             @Override

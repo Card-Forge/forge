@@ -175,7 +175,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final PlayerController pc = activator.getController();
         final boolean etbcounter = sa.hasParam("ETB");
 
-        boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
+        boolean existingCounter = "ExistingCounter".equals(sa.getParam("CounterType"));
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
         boolean putOnEachOther = sa.hasParam("PutOnEachOther");
         boolean putOnDefined = sa.hasParam("PutOnDefined");

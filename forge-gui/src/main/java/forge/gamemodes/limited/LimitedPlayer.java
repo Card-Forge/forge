@@ -165,7 +165,6 @@ public class LimitedPlayer {
             recordRemoveFromDraft(bestPick, choice);
         }
 
-
         LimitedPlayer fromPlayer = chooseFrom.getPassedFrom();
         // If the previous player has an active Cogwork Spy, show them this card
         if (fromPlayer != null && (fromPlayer.playerFlags & SpyNextCardDrafted) == SpyNextCardDrafted) {

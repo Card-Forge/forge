@@ -1,14 +1,17 @@
 package forge.screens.match.views;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
-import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.game.GameView;
@@ -37,6 +40,7 @@ public class VUnifiedPhase extends FDisplayObject {
     private static final FSkinFont CAPTION_FONT = FSkinFont.get(11);
     private static final FSkinFont PLAYER_FONT = FSkinFont.get(12);
     private static final float OPEN_SECONDS = 0.16f;
+    private static final float PAD_X = Utils.scale(14); //space left and right of the phase name
 
     private static final Color GLASS = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.62f); //same glass as the player panels
     private static final Color BAND = new Color(1f, 1f, 1f, 0.07f);
@@ -61,8 +65,20 @@ public class VUnifiedPhase extends FDisplayObject {
         return menu;
     }
 
+    private static final Map<PhaseType, String> NAMES = new EnumMap<>(PhaseType.class);
+
+    /** The phase name in the current language: key lblPhase + the PhaseType name (lblPhaseMAIN1...), English when there is none. */
     static String getPhaseName(PhaseType phase) {
         if (phase == null) { return "--"; }
+        String name = NAMES.get(phase);
+        if (name == null) {
+            name = Forge.getLocalizer().getMessageorUseDefault("lblPhase" + phase.name(), getDefaultPhaseName(phase));
+            NAMES.put(phase, name);
+        }
+        return name;
+    }
+
+    private static String getDefaultPhaseName(PhaseType phase) {
         return switch (phase) {
             case UNTAP -> "Untap";
             case UPKEEP -> "Upkeep";
@@ -91,7 +107,7 @@ public class VUnifiedPhase extends FDisplayObject {
         for (PhaseType phase : ORDER) {
             max = Math.max(max, NAME_FONT.getBounds(getPhaseName(phase)).width);
         }
-        return Math.round(max + 3 * Utils.scale(8) + 2 * getArrowSize());
+        return Math.round(Math.max(Utils.scale(170), max + 3 * PAD_X + 2 * getArrowSize()));
     }
 
     private VPlayerPanel findPanel(PlayerView player) {
@@ -131,7 +147,7 @@ public class VUnifiedPhase extends FDisplayObject {
             final VPhaseIndicator.PhaseLabel label = panel == null ? null : panel.getPhaseIndicator().getLabel(phase);
             textColor = VPhaseIndicator.getPhaseColor(true, label != null && label.getStopAtPhase()).getColor();
         }
-        final float padX = Utils.scale(8);
+        final float padX = PAD_X;
         final float arrow = getArrowSize();
         g.drawText(getPhaseName(phase), NAME_FONT, textColor, padX, 0, w - 3 * padX - 2 * arrow, h, false, Align.center, true);
 
@@ -153,7 +169,6 @@ public class VUnifiedPhase extends FDisplayObject {
         private final List<VPlayerPanel> built = new ArrayList<>();
         private boolean openTarget;
         private float progress; //0 closed, 1 fully open
-        private MenuAnimation animation;
         private float areaW, top, maxH;
         private float rowH = Utils.scale(30), avatarW = Utils.scale(26), nameW = Utils.scale(60);
 
@@ -181,10 +196,7 @@ public class VUnifiedPhase extends FDisplayObject {
                 applyBounds();
                 setVisible(true);
             }
-            if (animation == null) {
-                animation = new MenuAnimation();
-                animation.start();
-            }
+            Gdx.graphics.requestRendering(); //the dropdown advances its own animation while it draws
         }
 
         /**
@@ -251,34 +263,36 @@ public class VUnifiedPhase extends FDisplayObject {
             g.drawLine(1, EDGE, 0, h, w, h);
         }
 
+        //The animation is driven from draw instead of a ForgeAnimation: nothing can end it early or leave it half done when it is
+        //tapped again mid-way, and the state it draws is always the state it was just advanced to.
+        private void advance() {
+            final float target = openTarget ? 1f : 0f;
+            if (progress == target) { return; }
+            final float dt = Math.min(Gdx.graphics.getDeltaTime(), 1f / 30f); //a frame after a pause must not jump the whole animation
+            final float step = dt / OPEN_SECONDS;
+            progress = openTarget ? Math.min(1f, progress + step) : Math.max(0f, progress - step);
+            Gdx.graphics.requestRendering();
+        }
+
         @Override
         public void draw(Graphics g) {
-            if (progress <= 0f || !VPlayerPanel.isUnifiedPhase()) { return; }
+            if (!VPlayerPanel.isUnifiedPhase()) { return; }
+            advance();
+            if (progress <= 0f) {
+                if (!openTarget) { setVisible(false); }
+                return;
+            }
             if (progress >= 1f) {
                 super.draw(g);
                 return;
             }
-            g.startClip(0, 0, getWidth(), getHeight() * progress); //unfolds downwards from the label
+            final float reveal = getHeight() * progress;
+            if (reveal < 2f) { return; } //a clip this thin is not a valid scissor, and the whole menu would draw for a frame
+            g.startClip(0, 0, getWidth(), reveal); //unfolds downwards from the label
             try {
                 super.draw(g);
             } finally {
                 g.endClip();
-            }
-        }
-
-        private class MenuAnimation extends ForgeAnimation {
-            @Override
-            protected boolean advance(float dt) {
-                final float step = dt / OPEN_SECONDS;
-                progress = openTarget ? Math.min(1f, progress + step) : Math.max(0f, progress - step);
-                return openTarget ? progress < 1f : progress > 0f;
-            }
-
-            @Override
-            protected void onEnd(boolean endingAll) {
-                animation = null;
-                if (endingAll) { progress = openTarget ? 1f : 0f; }
-                if (!openTarget && progress <= 0f) { setVisible(false); }
             }
         }
 
