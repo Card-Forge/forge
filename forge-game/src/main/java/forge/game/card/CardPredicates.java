@@ -296,6 +296,7 @@ public final class CardPredicates {
     public static final Predicate<Card> CAN_TAP = Card::canTap;
     public static final Predicate<Card> CAN_CREW = Card::canCrew;
     public static final Predicate<Card> CREATURES = Card::isCreature;
+    public static final Predicate<Card> CREATURES_WITH_PT = c -> c.isCreature() && !c.isAugment();
     public static final Predicate<Card> NON_CREATURES = c -> !c.isCreature();
     public static final Predicate<Card> ENCHANTMENTS = Card::isEnchantment;
     public static final Predicate<Card> FORTIFICATION = Card::isFortification;

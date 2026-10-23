@@ -4484,7 +4484,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final StatBreakdown getUnswitchedPowerBreakdown() {
         // 208.3 A noncreature permanent has no power or toughness
-        if (isInPlay() && !isCreature()) {
+        if (isInPlay() && (!isCreature() || hasKeyword(Keyword.AUGMENT))) {
             return new StatBreakdown();
         }
         return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());
