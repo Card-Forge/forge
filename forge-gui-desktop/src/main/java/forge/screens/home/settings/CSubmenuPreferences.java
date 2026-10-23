@@ -23,6 +23,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
+import forge.screens.home.quest.DialogChooseSets;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
@@ -181,6 +182,9 @@ public enum CSubmenuPreferences implements ICDoc {
             FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
         });
 
+        updateExcludedSetsButton();
+        view.getBtnExcludedSets().setCommand((UiCommand) CSubmenuPreferences.this::chooseExcludedSets);
+
         view.getBtnReset().setCommand((UiCommand) CSubmenuPreferences.this::resetForgeSettingsToDefault);
 
         view.getBtnDeleteEditorUI().setCommand((UiCommand) CSubmenuPreferences.this::resetDeckEditorLayout);
@@ -302,6 +306,18 @@ public enum CSubmenuPreferences implements ICDoc {
             update();
             Singletons.getControl().restartForge();
         }
+    }
+
+    private void updateExcludedSetsButton() {
+        view.getBtnExcludedSets().setText(localizer.getMessage("lblExcludedSetsCount", FModel.getExcludedEditionCodes().size()));
+    }
+
+    private void chooseExcludedSets() {
+        DialogChooseSets.forExcludedSets(FModel.getExcludedEditionCodes(),
+                FModel.getExcludedTags(), (ticked, tags) -> {
+                    if (FModel.setExcludedEditions(ticked, tags))
+                        updateExcludedSetsButton();
+                });
     }
 
     private void resetDeckEditorLayout() {

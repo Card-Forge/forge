@@ -3,12 +3,15 @@ package forge.screens.home.quest;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 import javax.swing.*;
 
 import forge.Singletons;
 import forge.toolbox.*;
 import forge.card.CardEdition;
+import forge.card.SetExclusions;
 import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
 import forge.localinstance.skin.FSkinProp;
@@ -26,6 +29,20 @@ public class DialogChooseSets {
 
 	private final FCheckBox cbWantReprints = new FCheckBox(Localizer.getInstance().getMessage("lblDisplayRecentSetReprints"));
 	private final FCheckBoxTree checkBoxTree = new FCheckBoxTree();
+	// one per edition tag, only when the dialog picks the sets the player excludes
+	private final Map<String, FCheckBox> tagBoxes = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+	private final FTextField txtSearch = new FTextField.Builder().ghostText(Localizer.getInstance().getMessage("lblSearch")).build();
+	// every edition, so a search can rebuild the tree from it and ticks on hidden editions are kept
+	private TreeMap<FTreeNodeData, List<FTreeNodeData>> editionTreeData;
+	private boolean forExclusions;
+
+	/** Opens the dialog for the sets the player excludes. onOk receives the ticked set codes and tags. */
+	public static void forExcludedSets(Collection<String> excludedSets, Set<String> excludedTags,
+									   BiConsumer<List<String>, Set<String>> onOk) {
+		DialogChooseSets dialog = new DialogChooseSets(new ArrayList<>(excludedSets), null, null, false, false,
+				excludedTags);
+		dialog.setOkCallback(() -> onOk.accept(dialog.getSelectedSets(), dialog.getTickedTags()));
+	}
 
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
 							boolean showWantReprintsCheckbox) {
@@ -44,6 +61,14 @@ public class DialogChooseSets {
 
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
 							Collection<String> limitedSets, boolean showWantReprintsCheckbox, boolean allowReprints) {
+		this(preselectedSets, unselectableSets, limitedSets, showWantReprintsCheckbox, allowReprints, null);
+	}
+
+	// null excludedTags opens the ordinary dialog, a set opens the excluded-sets mode with those tags ticked
+	private DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
+							 Collection<String> limitedSets, boolean showWantReprintsCheckbox, boolean allowReprints,
+							 Set<String> excludedTags) {
+		forExclusions = excludedTags != null;
 
 		if (limitedSets != null && limitedSets.size() == 0)
 			limitedSets = null;
@@ -125,6 +150,8 @@ public class DialogChooseSets {
 				boolean isSelected = null != preselectedSets && preselectedSets.contains(code);
 				boolean isEnabled = null == unselectableSets || !unselectableSets.contains(code);
 				FTreeNodeData editionNode = new FTreeNodeData(ce, ce.getName(), ce.getCode());
+				if (forExclusions)
+					editionNode.detail = ce.getTags().stream().map(FModel::getTagName).collect(Collectors.joining(", "));
 				editionNode.isEnabled = isEnabled;
 				editionNode.isSelected = isSelected;
 				if (isEnabled)
@@ -135,6 +162,7 @@ public class DialogChooseSets {
 			allEditionTypes.put(editionType, enabledEditionsOfTypeCounter);
 		}
 		this.checkBoxTree.setTreeData(editionTypeTreeData);
+		editionTreeData = editionTypeTreeData;
 
 		// === 0. MAIN PANEL WINDOW ===
 		// ===================================================================
@@ -421,9 +449,20 @@ public class DialogChooseSets {
 		// Selected Editions Panel
 		JPanel editionSelectionPanel = new JPanel(new MigLayout("insets 10, gap 25 5, wrap 1, align left"));
 		editionSelectionPanel.setOpaque(false);
-		editionSelectionPanel.add(new FLabel.Builder().text(
-				Localizer.getInstance().getMessage("lblCardEditionTypeList")).fontSize(14)
-				.fontStyle(Font.BOLD).build(), "h 40!, w 100%, center, span 1");
+		if (forExclusions) {
+			txtSearch.addChangeListener(new FTextField.ChangeListener() {
+				@Override
+				public void textChanged() {
+					showMatchingEditions();
+				}
+			});
+			editionSelectionPanel.add(txtSearch, "w 100%, h 25!");
+			checkBoxTree.setVisibleRowCount(15);
+		} else {
+			editionSelectionPanel.add(new FLabel.Builder().text(
+					Localizer.getInstance().getMessage("lblCardEditionTypeList")).fontSize(14)
+					.fontStyle(Font.BOLD).build(), "h 40!, w 100%, center, span 1");
+		}
 		this.checkBoxTree.setOpaque(false);
 		FScrollPane selectionScroller = new FScrollPane(checkBoxTree, true);
 		editionSelectionPanel.add(selectionScroller, "span 1, w 100%");
@@ -477,11 +516,16 @@ public class DialogChooseSets {
 
 		// ===================================================================
 
-		mainDialogPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblChooseSets"))
-				.fontSize(20).build(), "center, span, wrap, gaptop 10");
-		mainDialogPanel.add(editionSelectionPanel, "aligny top, w 50%, span 1");
-		mainDialogPanel.add(randomSelectionPanel, "aligny top, w 50%, span 1");
-		mainDialogPanel.add(optionsPanel, "center, w 100, span 2");
+		mainDialogPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage(
+				forExclusions ? "lblExcludedSets" : "lblChooseSets")).fontSize(20).build(), "center, span, wrap, gaptop 10");
+		if (forExclusions) {
+			mainDialogPanel.add(buildExclusionPanel(excludedTags), "w 100%, span 2");
+			mainDialogPanel.add(editionSelectionPanel, "w 100%, span 2");
+		} else {
+			mainDialogPanel.add(editionSelectionPanel, "aligny top, w 50%, span 1");
+			mainDialogPanel.add(randomSelectionPanel, "aligny top, w 50%, span 1");
+			mainDialogPanel.add(optionsPanel, "center, w 100, span 2");
+		}
 
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
@@ -537,6 +581,79 @@ public class DialogChooseSets {
 	}
 
 
+	private JPanel buildExclusionPanel(Set<String> excludedTags) {
+		Localizer localizer = Localizer.getInstance();
+		JPanel panel = new JPanel(new MigLayout("insets 10 10 0 10, gap 15 5, fillx"));
+		panel.setOpaque(false);
+		panel.add(new FTextArea(localizer.getMessage("lblExcludedSetsHelp")), "span, growx, wrap, gapbottom 5");
+
+		for (String tag : FModel.getEditionTags()) {
+			FCheckBox box = new FCheckBox(localizer.getMessage("lblExcludeTag", FModel.getTagName(tag)), excludedTags.contains(tag));
+			Set<String> tagged = FModel.getEditionCodesWithTag(tag);
+			box.addItemListener(e -> {
+				for (FTreeNodeData edition : getEditionNodes()) {
+					if (!tagged.contains((String) edition.key))
+						continue;
+					FTreeNode node = checkBoxTree.getNodeByKey(edition.key);
+					if (node != null)
+						checkBoxTree.setNodeCheckStatus(node, box.isSelected());
+					else
+						edition.isSelected = box.isSelected();
+				}
+				checkBoxTree.repaint();
+			});
+			tagBoxes.put(tag, box);
+			panel.add(box, "h 30!");
+		}
+
+		FButton clearButton = new FButton(localizer.getMessage("lblClearSelection"));
+		clearButton.addActionListener(e -> {
+			tagBoxes.values().forEach(box -> box.setSelected(false));
+			getEditionNodes().forEach(edition -> edition.isSelected = false);
+			checkBoxTree.resetCheckingState();
+			checkBoxTree.repaint();
+		});
+		panel.add(clearButton, "gapleft push, w 200!, h 26!");
+		return panel;
+	}
+
+	private List<FTreeNodeData> getEditionNodes() {
+		return editionTreeData.values().stream().flatMap(List::stream).collect(Collectors.toList());
+	}
+
+	// copies the ticks shown in the tree onto its editions, which outlive the tree a search rebuilds
+	private void storeTicks() {
+		Set<Object> ticked = new HashSet<>(Arrays.asList(checkBoxTree.getCheckedValues(true)));
+		for (FTreeNodeData edition : getEditionNodes())
+			if (checkBoxTree.getNodeByKey(edition.key) != null)
+				edition.isSelected = ticked.contains(edition.item);
+	}
+
+	private void showMatchingEditions() {
+		storeTicks();
+		String pattern = txtSearch.getText().trim().toLowerCase();
+		TreeMap<FTreeNodeData, List<FTreeNodeData>> shown = new TreeMap<>();
+		editionTreeData.forEach((type, editions) -> {
+			List<FTreeNodeData> matches = editions.stream().filter(edition -> edition.label.toLowerCase().contains(pattern)
+					|| edition.detail.toLowerCase().contains(pattern)).collect(Collectors.toList());
+			if (!matches.isEmpty())
+				shown.put(type, matches);
+		});
+		checkBoxTree.setTreeData(shown);
+		if (!pattern.isEmpty())
+			for (int row = 0; row < checkBoxTree.getRowCount(); row++)
+				checkBoxTree.expandRow(row);
+	}
+
+	private Set<String> getTickedTags() {
+		Set<String> ticked = SetExclusions.newCodeSet();
+		tagBoxes.forEach((tag, box) -> {
+			if (box.isSelected())
+				ticked.add(tag);
+		});
+		return ticked;
+	}
+
 	public void setOkCallback(Runnable onOk) {
 		okCallback = onOk;
 	}
@@ -550,10 +667,17 @@ public class DialogChooseSets {
 	}
 
 	private void handleOk() {
-		Object[] checkedValues = this.checkBoxTree.getCheckedValues(true);
-		for (Object data: checkedValues){
-			CardEdition edition = (CardEdition) data;
-			selectedSets.add(edition.getCode());
+		if (forExclusions) {
+			storeTicks();
+			for (FTreeNodeData edition : getEditionNodes())
+				if (edition.isSelected)
+					selectedSets.add((String) edition.key);
+		} else {
+			Object[] checkedValues = this.checkBoxTree.getCheckedValues(true);
+			for (Object data: checkedValues){
+				CardEdition edition = (CardEdition) data;
+				selectedSets.add(edition.getCode());
+			}
 		}
 		wantReprints = cbWantReprints.isSelected();
 

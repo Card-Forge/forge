@@ -109,8 +109,9 @@ public class MultiSetSelect extends FScreen {
         lstSets.setListItemRenderer(new SetRenderer());
     }
 
-    protected String getLabel(CardEdition set) {
-        return set.toString();
+    // drawn as a second column beside the set name when not null
+    protected String getTagText(CardEdition set) {
+        return null;
     }
 
     @Override
@@ -161,7 +162,14 @@ public class MultiSetSelect extends FScreen {
             float textHeight = h;
             h *= 0.66f;
 
-            g.drawText(getLabel(value), font, foreColor, x, y, w - h - FList.PADDING, textHeight, false, Align.left, true);
+            float textWidth = w - h - FList.PADDING;
+            String tagText = getTagText(value);
+            if (tagText != null) {
+                float tagWidth = textWidth * 0.35f;
+                textWidth -= tagWidth;
+                g.drawText(tagText, font, SettingsScreen.DESC_COLOR, x + textWidth, y, tagWidth, textHeight, false, Align.left, true);
+            }
+            g.drawText(value.toString(), font, foreColor, x, y, textWidth - FList.PADDING, textHeight, false, Align.left, true);
 
             x += w - h;
             y += (textHeight - h) / 2;
