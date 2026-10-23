@@ -1,0 +1,13 @@
+Name:The Borg Queen
+ManaCost:4 W U B
+Types:Legendary Artifact Creature Borg Noble
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Artifact creatures you control get +2/+2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Whenever CARDNAME enters or attacks, target opponent exiles cards from the top of their library until they exile a creature card. Assimilate that card. They put the rest on the bottom in a random order. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDigUntil | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, target opponent exiles cards from the top of their library until they exile a creature card. Assimilate that card. They put the rest on the bottom in a random order. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+SVar:TrigDigUntil:DB$ DigUntil | ValidTgts$ Opponent | Valid$ Creature | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintRevealed$ True | RememberFound$ True | SubAbility$ DBAssimilate
+SVar:DBAssimilate:DB$ Assimilate | Defined$ Remembered | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Counters
+Oracle:Artifact creatures you control get +2/+2.\nWhenever The Borg Queen enters or attacks, target opponent exiles cards from the top of their library until they exile a creature card. Assimilate that card. They put the rest on the bottom in a random order. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)

@@ -1764,7 +1764,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return;
         }
         // ETB counters are checked after moving
-        if (params != null && params.containsKey(AbilityKey.InternalTriggerTable) && !canReceiveCounters(counterType, params)) {
+        if (params != null && params.containsKey(AbilityKey.Destination) && !canReceiveCounters(counterType, params)) {
             return;
         }
 

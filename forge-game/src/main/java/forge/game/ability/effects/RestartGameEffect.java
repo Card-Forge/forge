@@ -47,6 +47,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
         game.getPhaseHandler().restart();
         game.getUntap().clearCommands();
+        game.getBeginOfCombat().clearCommands();
         game.getUpkeep().clearCommands();
         game.getEndOfCombat().clearCommands();
         game.getEndOfTurn().clearCommands();

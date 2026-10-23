@@ -3324,6 +3324,9 @@ public class AbilityUtils {
             }
             return num / secondaryNum;
         } else if (s[0].contains("Mod")) {
+            if (secondaryNum == 0) {
+                return 0;
+            }
             return num % secondaryNum;
         } else if (s[0].contains("Abs")) {
             return Math.abs(num);
@@ -3377,7 +3380,7 @@ public class AbilityUtils {
         // methods for getting the highest/lowest playerXCount from a range of players
         if (l[0].startsWith("Highest")) {
             for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Highest", ""), source, ctb);
+                final int current = playerXProperty(player, TextUtil.fastReplace(l[0], "Highest", ""), source, ctb);
                 if (current > n) {
                     n = current;
                 }
@@ -3389,7 +3392,7 @@ public class AbilityUtils {
         if (l[0].startsWith("Lowest")) {
             n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
             for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Lowest", ""), source, ctb);
+                final int current = playerXProperty(player, TextUtil.fastReplace(l[0], "Lowest", ""), source, ctb);
                 if (current < n) {
                     n = current;
                 }
