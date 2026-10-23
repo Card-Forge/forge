@@ -1,0 +1,11 @@
+Name:Blastoneuron
+ManaCost:3 B
+Types:Creature Jellyfish Leech
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile target creature card with mana value 3 or less from your graveyard. Create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouOwn+cmcLE3 | ValidTgtsDesc$ creature card with mana value 3 or less in your graveyard | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | PumpKeywords$ Haste | AtEOT$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardToughness
+Oracle:Flying\nWhen this creature enters, exile target creature card with mana value 3 or less from your graveyard. Create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.\nWhenever one or more cards leave your graveyard, each opponent loses 1 life and you gain 1 life.
