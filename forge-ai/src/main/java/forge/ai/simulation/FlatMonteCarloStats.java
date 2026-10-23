@@ -53,6 +53,10 @@ public final class FlatMonteCarloStats {
             java.util.Arrays.fill(POINTS_BY_APPROVED, 0);
             pointsOutOfBudget = 0;
             targetVariantCandidates = 0;
+            extraCandidatesTotal = 0;
+            REACTIVE.clear();
+            landDecisions = 0;
+            landChanges = 0;
             latencyCount = 0;
             decisions = 0;
             decidedByRollouts = 0;
@@ -117,6 +121,83 @@ public final class FlatMonteCarloStats {
             synchronized (LOCK) {
                 targetVariantCandidates += count;
             }
+        }
+    }
+
+    private static long extraCandidatesTotal;
+    private static long landDecisions;
+    private static long landChanges;
+
+    /** A land choice made with rollouts, and whether it differed from the heuristics' land. */
+    public static void noteLandChoice(final boolean byRollouts, final boolean changed) {
+        synchronized (LOCK) {
+            landDecisions++;
+            if (byRollouts && changed) {
+                landChanges++;
+            }
+        }
+    }
+
+    public static long getLandChanges() {
+        synchronized (LOCK) {
+            return landChanges;
+        }
+    }
+    /** Opponent-turn decisions by mode: {points with something to decide, decisions, changed from the heuristics, passes, rollouts, nanos}. */
+    private static final Map<String, long[]> REACTIVE = new TreeMap<>();
+
+    /** An opponent-turn priority where there was at least one candidate; {@code candidates} excludes passing. */
+    public static void noteReactivePoint(final FlatMonteCarloPicker.Mode mode, final int candidates) {
+        synchronized (LOCK) {
+            final long[] row = REACTIVE.computeIfAbsent(mode.name(), k -> new long[7]);
+            row[candidates > 0 ? 0 : 6]++;
+        }
+    }
+
+    /** The result of a decision on the opponent's turn; {@code heuristicChoice} is what the heuristics alone would do. */
+    public static void noteReactiveResult(final FlatMonteCarloPicker.Mode mode, final FlatMonteCarloPicker.Result result,
+                                          final forge.game.spellability.SpellAbility heuristicChoice) {
+        synchronized (LOCK) {
+            final long[] row = REACTIVE.computeIfAbsent(mode.name(), k -> new long[7]);
+            row[1]++;
+            if (result.decidedByRollouts && (result.hold ? heuristicChoice != null : result.choice != heuristicChoice)) {
+                row[2]++; // differs from what the heuristics would have done
+            }
+            if (result.hold) {
+                row[3]++;
+            }
+            row[4] += result.rollouts;
+            row[5] += result.elapsedNanos;
+        }
+    }
+
+    public static long getReactiveDecisions(final FlatMonteCarloPicker.Mode mode) {
+        synchronized (LOCK) {
+            final long[] row = REACTIVE.get(mode.name());
+            return row == null ? 0 : row[1];
+        }
+    }
+
+    /** How many opponent-turn decisions in this mode ended differently from what the heuristics alone would do. */
+    public static long getReactiveChanges(final FlatMonteCarloPicker.Mode mode) {
+        synchronized (LOCK) {
+            final long[] row = REACTIVE.get(mode.name());
+            return row == null ? 0 : row[2];
+        }
+    }
+
+    /** How many discovered plays one decision added to the comparison. */
+    public static void noteExtraCandidates(final int count) {
+        if (count > 0) {
+            synchronized (LOCK) {
+                extraCandidatesTotal += count;
+            }
+        }
+    }
+
+    public static long getExtraCandidates() {
+        synchronized (LOCK) {
+            return extraCandidatesTotal;
         }
     }
 
@@ -235,9 +316,16 @@ public final class FlatMonteCarloStats {
                     decisions, decidedByRollouts, rollouts, rolloutsPerDecision, rolloutsPerSecond, prunedLines, avgMs,
                     p50, p95, p99, maxNanos / 1e6, failureTotalLocked(), UNSIMULATABLE.size()));
             sb.append('\n').append(String.format(java.util.Locale.ROOT,
-                    "FLATMC-POINTS approved0=%d approved1=%d approved2=%d approved3plus=%d outOfBudget=%d targetVariants=%d",
+                    "FLATMC-POINTS approved0=%d approved1=%d approved2=%d approved3plus=%d outOfBudget=%d targetVariants=%d extras=%d",
                     POINTS_BY_APPROVED[0], POINTS_BY_APPROVED[1], POINTS_BY_APPROVED[2], POINTS_BY_APPROVED[3], pointsOutOfBudget,
-                    targetVariantCandidates));
+                    targetVariantCandidates, extraCandidatesTotal));
+            sb.append('\n').append(String.format(java.util.Locale.ROOT, "FLATMC-LANDS decisions=%d changed=%d", landDecisions, landChanges));
+            for (final Map.Entry<String, long[]> e : REACTIVE.entrySet()) {
+                final long[] r = e.getValue();
+                sb.append('\n').append(String.format(java.util.Locale.ROOT,
+                        "FLATMC-REACTIVE mode=%s points=%d empty=%d decisions=%d changed=%d passes=%d rollouts=%d avgMs=%.2f",
+                        e.getKey(), r[0], r[6], r[1], r[2], r[3], r[4], r[1] == 0 ? 0 : r[5] / 1e6 / r[1]));
+            }
             sb.append('\n').append("FLATMC-REJECTED ").append(render(REJECTED, Integer.MAX_VALUE));
             sb.append('\n').append("FLATMC-REASONS ").append(render(BY_REASON, Integer.MAX_VALUE));
             if (!UNSIMULATABLE.isEmpty()) {

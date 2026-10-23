@@ -16,6 +16,7 @@ import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 /**
@@ -48,6 +49,168 @@ public class FlatMonteCarloEnhancementTest extends AITest {
             count[i] = vals[i].length;
         }
         return FlatMonteCarloPicker.pruneBehind(vals, count, new boolean[n], pruned, n, bonus);
+    }
+
+    // ------------------------------------------------------------------ strategic evaluation terms
+
+    private Game strategicGame() {
+        final Game g = initAndCreateGame();
+        g.getPlayers().get(1).setTeam(0);
+        g.getPlayers().get(0).setTeam(1);
+        return g;
+    }
+
+    private static int strategic(final Player ai) {
+        return StrategicEvaluator.adjust(ai, new FlatMonteCarloPicker.Config());
+    }
+
+    @Test
+    public void extraCardInHandIsAGainAndAnExtraCardForTheOpponentADebt() {
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        final Player opp = g.getPlayers().get(0);
+        addCards("Island", 4, ai);
+        addCardToZone("Divination", ai, ZoneType.Hand);
+        final int one = strategic(ai);
+        addCardToZone("Air Elemental", ai, ZoneType.Hand);
+        final int two = strategic(ai);
+        AssertJUnit.assertTrue("a second card in hand must count for something: " + one + " -> " + two, two > one);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Hand);
+        AssertJUnit.assertTrue("a card in the opponent's hand counts against the AI", strategic(ai) < two);
+    }
+
+    @Test
+    public void cantripCostsLessThanItDraws() {
+        // casting Opt (leaving the hand) and drawing a card must not look like a loss, or the AI never casts it
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        addCards("Island", 3, ai);
+        final Card opt = addCardToZone("Opt", ai, ZoneType.Hand);
+        final int withOpt = strategic(ai);
+        ai.getZone(ZoneType.Hand).remove(opt);
+        addCardToZone("Island", ai, ZoneType.Hand); // the card it would draw
+        final int afterCasting = strategic(ai);
+        AssertJUnit.assertTrue("Opt for a land must not be worse than keeping Opt: " + withOpt + " vs " + afterCasting,
+                afterCasting >= withOpt - 10);
+    }
+
+    @Test
+    public void answerInHandIsWorthMoreWhenThereIsAThreatButNeverMoreThanTheCap() {
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        final Player opp = g.getPlayers().get(0);
+        addCards("Swamp", 3, ai);
+        addCardToZone("Doom Blade", ai, ZoneType.Hand);
+        final int noThreat = strategic(ai);
+        addCard("Serra Angel", opp);
+        final int threat = strategic(ai);
+        AssertJUnit.assertTrue("an answer to a real threat is worth something: " + noThreat + " -> " + threat, threat > noThreat);
+        AssertJUnit.assertTrue("but a bounded amount: using it must always beat keeping it", threat - noThreat <= 100);
+    }
+
+    @Test
+    public void plainSmallCreatureOutclassedByTheOpponentIsWorthLessThanItsStats() {
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        final Player opp = g.getPlayers().get(0);
+        final Card body = addCard("Merfolk of the Pearl Trident", ai);
+        System.out.println("weak body value=" + forge.ai.ComputerUtilCard.evaluateCreature(body) + " keywords=" + body.getKeywords()
+                + " triggers=" + body.getTriggers().size() + " statics=" + body.getStaticAbilities().size()
+                + " abilities=" + body.getNonManaAbilities().size());
+        final int open = strategic(ai);
+        addCard("Serra Angel", opp);
+        final int outclassed = strategic(ai);
+        AssertJUnit.assertTrue("a 1/1 next to a 4/4 flyer must be worth less: " + open + " -> " + outclassed, outclassed < open);
+    }
+
+    @Test
+    public void selectionBonusOnlyForScryAndSurveilAndDig() {
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        addCardToZone("Opt", ai, ZoneType.Hand);
+        addCardToZone("Shock", ai, ZoneType.Hand);
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        for (final Card c : ai.getZone(ZoneType.Hand).getCards()) {
+            final int bonus = StrategicEvaluator.selectionBonus(c.getSpellAbilities().get(0), cfg);
+            if (c.getName().equals("Opt")) {
+                AssertJUnit.assertTrue(bonus > 0);
+            } else {
+                AssertJUnit.assertEquals(0, bonus);
+            }
+        }
+    }
+
+    @Test
+    public void strategicTermsCanBeSwitchedOff() {
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        addCardToZone("Divination", ai, ZoneType.Hand);
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        cfg.strategicWeightPercent = 0;
+        AssertJUnit.assertEquals(0, StrategicEvaluator.adjust(ai, cfg));
+    }
+
+    @Test
+    public void diversifyKeepsTheHeuristicChoiceAndMixesKinds() {
+        final Game g = strategicGame();
+        final Player ai = g.getPlayers().get(1);
+        addCards("Island", 6, ai);
+        addCardToZone("Grizzly Bears", ai, ZoneType.Hand);
+        addCardToZone("Hill Giant", ai, ZoneType.Hand);
+        addCardToZone("Runeclaw Bear", ai, ZoneType.Hand);
+        addCardToZone("Divination", ai, ZoneType.Hand);
+        addCardToZone("Doom Blade", ai, ZoneType.Hand);
+        final java.util.List<SpellAbility> plays = new java.util.ArrayList<>();
+        for (final Card c : ai.getZone(ZoneType.Hand).getCards()) {
+            plays.add(c.getSpellAbilities().get(0));
+        }
+        final java.util.List<SpellAbility> picked = FlatMonteCarloPicker.diversify(plays, 3);
+        AssertJUnit.assertEquals(3, picked.size());
+        AssertJUnit.assertSame("the heuristic favourite stays first", plays.get(0), picked.get(0));
+        boolean draw = false;
+        boolean removal = false;
+        for (final SpellAbility sa : picked) {
+            draw |= sa.getHostCard().getName().equals("Divination");
+            removal |= sa.getHostCard().getName().equals("Doom Blade");
+        }
+        AssertJUnit.assertTrue("card draw must not be crowded out by creatures", draw);
+        AssertJUnit.assertTrue("neither must removal", removal);
+    }
+
+    @Test
+    public void maximizedConfigRaisesSearchButKeepsJudgement() {
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        cfg.maxCandidates = 3;
+        cfg.rolloutsPerCandidate = 2;
+        cfg.heuristicBonus = 123;
+        cfg.holdManaWeightPercent = 77;
+        cfg.maximized();
+        AssertJUnit.assertEquals(FlatMonteCarloPicker.MAX_CANDIDATES_DESKTOP, cfg.maxCandidates);
+        AssertJUnit.assertEquals(FlatMonteCarloPicker.MAX_ROLLOUTS_DESKTOP, cfg.rolloutsPerCandidate);
+        AssertJUnit.assertEquals(FlatMonteCarloPicker.MAX_EXTRA_ROUNDS_DESKTOP, cfg.extraRounds);
+        AssertJUnit.assertTrue(cfg.budgetNanos >= 1_500_000_000L);
+        AssertJUnit.assertTrue(cfg.turnBudgetNanos >= 6_000_000_000L);
+        AssertJUnit.assertTrue(cfg.pruning && cfg.targetVariants >= 3);
+        AssertJUnit.assertEquals(123, cfg.heuristicBonus); // judgement settings are the profile's business
+        AssertJUnit.assertEquals(77, cfg.holdManaWeightPercent);
+    }
+
+    @Test
+    public void maximizedConfigNeverLowersAProfileThatAsksForMore() {
+        final FlatMonteCarloPicker.Config cfg = new FlatMonteCarloPicker.Config();
+        cfg.maxCandidates = 8;
+        cfg.rolloutsPerCandidate = 10;
+        cfg.budgetNanos = 5_000_000_000L;
+        cfg.maximized();
+        AssertJUnit.assertEquals(10, cfg.rolloutsPerCandidate);
+        AssertJUnit.assertEquals(5_000_000_000L, cfg.budgetNanos);
+    }
+
+    @Test
+    public void gameDoesNotStartMaximized() {
+        // The Match sets the flag from the platform; a plain Game (and so every copy used for rollouts) must not have it.
+        final Game g = initAndCreateGame();
+        AssertJUnit.assertFalse(g.getAIFlatMonteCarloMax());
     }
 
     @Test

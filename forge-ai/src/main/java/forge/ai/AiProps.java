@@ -168,7 +168,17 @@ public enum AiProps {
     FLAT_MC_PRUNING("true"),
     FLAT_MC_CATEGORY_HOLD("true"),
     FLAT_MC_ADAPTIVE_PLAYOUT("true"),
-    FLAT_MC_TARGET_VARIANTS("2");
+    FLAT_MC_TARGET_VARIANTS("2"),
+    // Strategic play: how far beyond "the heuristics' favourite plays, on my own turn" Monte Carlo looks.
+    // STRATEGIC_WEIGHT scales the card advantage / answers / threat quality terms of the evaluation (0 = off),
+    // DISCOVERY adds legal card draw and selection plays the heuristics ranked low and keeps the candidates varied,
+    // LAND_CHOICE compares the lands that can be played, REACTIVE extends Monte Carlo to the opponent's turn
+    // (responses to spells on the stack and instant-speed plays at the opponent's end step).
+    FLAT_MC_STRATEGIC_WEIGHT("100"),
+    FLAT_MC_DISCOVERY("true"),
+    FLAT_MC_EXTRA_CANDIDATES("3"),
+    FLAT_MC_LAND_CHOICE("true"),
+    FLAT_MC_REACTIVE("true");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

@@ -67,6 +67,18 @@ public final class FlatMonteCarloPicker {
     private static final long SEED_STEP = 0x9E3779B97F4A7C15L;
     /** The second rollout (needed to compare anything) may take this many budgets in total. */
     private static final int HARD_DEADLINE_FACTOR = 2;
+    /** -Dflatmc.trace=true prints the rollout values of every decision to stderr, for diagnosing the AI. */
+    private static final boolean TRACE = Boolean.getBoolean("flatmc.trace");
+    // Maximum strength (desktop) settings, see Config.maximized().
+    static final int MAX_CANDIDATES_DESKTOP = 8;
+    static final int MAX_ROLLOUTS_DESKTOP = 8;
+    static final int MAX_EXTRA_ROUNDS_DESKTOP = 6;
+    static final int MAX_PLAYOUT_DESKTOP = 10;
+    static final int MAX_COMBO_PLAYOUT_DESKTOP = 20;
+    static final int MAX_TARGET_VARIANTS_DESKTOP = 3;
+    static final int MAX_DECISION_MS_DESKTOP = 1500;
+    static final int MAX_TURN_MS_DESKTOP = 6000;
+    static final int MAX_EXTRA_CANDIDATES_DESKTOP = 5;
 
     private static final int HOLD_VALUE_PER_CMC = 14;
     private static final int HOLD_COUNTER_VALUE_PER_CMC = 22;
@@ -139,6 +151,16 @@ public final class FlatMonteCarloPicker {
         public boolean adaptivePlayout = true;
         /** Other targets tried in addition to the one the heuristics chose, for plays with a single target (0 = off). */
         public int targetVariants = 2;
+        /** Scale (percent) of the strategic evaluation terms added to the position score, 0 = off. */
+        public int strategicWeightPercent = 100;
+        /** Add legal card draw / selection plays the heuristics did not approve, and keep the candidates varied. */
+        public boolean discovery = true;
+        /** How many such plays may be added to the comparison. */
+        public int extraCandidates = 3;
+        /** Compare the lands that can be played instead of taking the heuristic's land. */
+        public boolean landChoice = true;
+        /** Also decide on the opponent's turn: responses on the stack and instant-speed plays at their end step. */
+        public boolean reactive = true;
 
         public static Config fromProfile(final AiController ai, final Player player) {
             final Config cfg = new Config();
@@ -158,8 +180,37 @@ public final class FlatMonteCarloPicker {
             cfg.categoryHold = ai.getBoolProperty(AiProps.FLAT_MC_CATEGORY_HOLD);
             cfg.adaptivePlayout = ai.getBoolProperty(AiProps.FLAT_MC_ADAPTIVE_PLAYOUT);
             cfg.targetVariants = intProp(ai, AiProps.FLAT_MC_TARGET_VARIANTS, 0, 4);
+            cfg.strategicWeightPercent = intProp(ai, AiProps.FLAT_MC_STRATEGIC_WEIGHT, 0, 300);
+            cfg.discovery = ai.getBoolProperty(AiProps.FLAT_MC_DISCOVERY);
+            cfg.extraCandidates = intProp(ai, AiProps.FLAT_MC_EXTRA_CANDIDATES, 0, 8);
+            cfg.landChoice = ai.getBoolProperty(AiProps.FLAT_MC_LAND_CHOICE);
+            cfg.reactive = ai.getBoolProperty(AiProps.FLAT_MC_REACTIVE);
             cfg.controlFactor = controlFactor(player, cfg.categoryHold);
             return cfg;
+        }
+
+        /**
+         * Raises this configuration to the maximum strength used on desktops: more lines, more samples per line,
+         * longer playouts and several times the time budget. Values already above the maximum (a profile that asks for
+         * more) are kept, and the profile's judgement settings (bonus, weights, majority) are left alone, so only the
+         * amount of search changes. The hard limits stay in force: the AI timeout still caps every decision and the
+         * circuit breaker still switches Monte Carlo off if it errors or cannot keep up.
+         */
+        public Config maximized() {
+            maxCandidates = Math.max(maxCandidates, MAX_CANDIDATES_DESKTOP);
+            rolloutsPerCandidate = Math.max(rolloutsPerCandidate, MAX_ROLLOUTS_DESKTOP);
+            extraRounds = Math.max(extraRounds, MAX_EXTRA_ROUNDS_DESKTOP);
+            maxPlayoutPlays = Math.max(maxPlayoutPlays, MAX_PLAYOUT_DESKTOP);
+            comboPlayoutPlays = Math.max(comboPlayoutPlays, MAX_COMBO_PLAYOUT_DESKTOP);
+            targetVariants = Math.max(targetVariants, MAX_TARGET_VARIANTS_DESKTOP);
+            budgetNanos = Math.max(budgetNanos, TimeUnit.MILLISECONDS.toNanos(MAX_DECISION_MS_DESKTOP));
+            turnBudgetNanos = Math.max(turnBudgetNanos, TimeUnit.MILLISECONDS.toNanos(MAX_TURN_MS_DESKTOP));
+            pruning = true;
+            categoryHold = true;
+            adaptivePlayout = true;
+            considerHolding = true;
+            extraCandidates = Math.max(extraCandidates, MAX_EXTRA_CANDIDATES_DESKTOP);
+            return this;
         }
 
         private static int intProp(final AiController ai, final AiProps prop, final int min, final int max) {
@@ -218,7 +269,7 @@ public final class FlatMonteCarloPicker {
 
         /** A result that simply keeps the heuristic choice without having sampled anything. */
         public static Result keepHeuristic(final SpellAbility heuristicChoice, final String reason) {
-            return new Result(heuristicChoice, false, false, 0, 0, 0, reason);
+            return new Result(heuristicChoice, heuristicChoice == null, false, 0, 0, 0, reason);
         }
 
         @Override
@@ -235,14 +286,21 @@ public final class FlatMonteCarloPicker {
         final SpellAbility sa;
         /** For a target variant: the target to use instead of the one the heuristics chose, else null. */
         final GameObject target;
+        /** A play the heuristics did not approve, added by discovery: it cannot be revalidated by them. */
+        final boolean extra;
 
         Candidate(final SpellAbility sa) {
-            this(sa, null);
+            this(sa, null, false);
         }
 
         Candidate(final SpellAbility sa, final GameObject target) {
+            this(sa, target, false);
+        }
+
+        Candidate(final SpellAbility sa, final GameObject target, final boolean extra) {
             this.sa = sa;
             this.target = target;
+            this.extra = extra;
         }
 
         boolean isHold() {
@@ -275,28 +333,57 @@ public final class FlatMonteCarloPicker {
      */
     public static Result choose(final Player player, final List<SpellAbility> approved, final Config cfg,
                                 final Predicate<SpellAbility> revalidate) {
+        return choose(player, approved, java.util.Collections.emptyList(), cfg, revalidate);
+    }
+
+    /**
+     * As {@link #choose(Player, List, Config, Predicate)}, with plays the heuristics did <em>not</em> approve but that
+     * are legal and strategically relevant (card draw, card selection, ...). They are compared like the others, but
+     * need no heuristic approval to be chosen. {@code approved} may be empty when there are extras.
+     */
+    public static Result choose(final Player player, final List<SpellAbility> approved, final List<SpellAbility> extras,
+                                final Config cfg, final Predicate<SpellAbility> revalidate) {
+        return choose(player, approved, extras, cfg, revalidate, Mode.MAIN);
+    }
+
+    /** Which kind of decision is being made, which decides how far a rollout plays on from the candidate. */
+    public enum Mode {
+        /** The AI's own main phase: play on, fight the combat, score at the second main phase. */
+        MAIN,
+        /** Priority with something on the stack or in combat on the opponent's turn: respond, let it resolve, score at their end of turn. */
+        RESPOND,
+        /** The opponent's end step, empty stack: act now or pass, then play the AI's whole next turn and score at its second main phase. */
+        END_STEP
+    }
+
+    public static Result choose(final Player player, final List<SpellAbility> approved, final List<SpellAbility> extras,
+                                final Config cfg, final Predicate<SpellAbility> revalidate, final Mode mode) {
         final long start = System.nanoTime();
-        final SpellAbility heuristicChoice = approved.get(0);
+        final SpellAbility heuristicChoice = approved.isEmpty() ? null : approved.get(0);
         try {
-            final Result result = chooseImpl(player, approved, cfg, revalidate, start);
+            final Result result = chooseImpl(player, approved, extras, cfg, revalidate, start, mode);
             if (DEBUG) {
                 System.err.println(player + " " + result);
             }
             return result;
         } catch (final AITimeoutTracker.Expired e) {
-            return new Result(heuristicChoice, false, false, 0, 0, System.nanoTime() - start, "deadline");
+            return new Result(heuristicChoice, heuristicChoice == null, false, 0, 0, System.nanoTime() - start, "deadline");
         } catch (final RuntimeException e) {
             // Rollouts only ever run on copies of the game, so whatever went wrong in there must not take the real
             // game down: play what the heuristics wanted to play anyway.
             reportFailure(e);
-            return new Result(heuristicChoice, false, false, 0, 0, System.nanoTime() - start, "error");
+            return new Result(heuristicChoice, heuristicChoice == null, false, 0, 0, System.nanoTime() - start, "error");
         }
     }
 
-    private static Result chooseImpl(final Player player, final List<SpellAbility> approved, final Config cfg,
-                                     final Predicate<SpellAbility> revalidate, final long start) {
-        final SpellAbility heuristicChoice = approved.get(0);
-        final List<Candidate> cands = buildCandidates(player, approved, cfg, revalidate);
+    private static Result chooseImpl(final Player player, final List<SpellAbility> approved, final List<SpellAbility> extras,
+                                     final Config cfg, final Predicate<SpellAbility> revalidate, final long start,
+                                     final Mode mode) {
+        final SpellAbility heuristicChoice = approved.isEmpty() ? null : approved.get(0);
+        // When the heuristics approved nothing, "what they would do" is just passing: a discovered play then needs a
+        // smaller margin than a play that has to beat the heuristics' own favourite.
+        final int bonus0 = approved.isEmpty() ? cfg.heuristicBonus / 4 : cfg.heuristicBonus;
+        final List<Candidate> cands = buildCandidates(player, approved, extras, cfg, revalidate, mode);
         if (cands.size() < 2) {
             return Result.keepHeuristic(heuristicChoice, "single-candidate");
         }
@@ -359,9 +446,9 @@ public final class FlatMonteCarloPicker {
                 }
                 final long t0 = System.nanoTime();
                 final Candidate cand = cands.get(c);
-                final boolean stillWanted = cand.isHold() || revalidate == null || revalidate.test(cand.sa);
+                final boolean stillWanted = cand.isHold() || cand.extra || revalidate == null || revalidate.test(cand.sa);
                 final boolean aimed = stillWanted && (cand.target == null || applyTarget(cand.sa, cand.target));
-                final Long value = !aimed ? null : rollout(player, cand, seed, cfg, playoutPlays);
+                final Long value = !aimed ? null : rollout(player, cand, seed, cfg, playoutPlays, mode);
                 maxRolloutNanos = Math.max(maxRolloutNanos, System.nanoTime() - t0);
                 rollouts++;
                 if (value == null) {
@@ -382,19 +469,26 @@ public final class FlatMonteCarloPicker {
                 }
             }
             if (cfg.pruning && r >= 1) {
-                prunedCount += pruneBehind(vals, count, invalid, pruned, evaluated, cfg.heuristicBonus);
+                prunedCount += pruneBehind(vals, count, invalid, pruned, evaluated, bonus0);
             }
         }
 
         final long elapsed = System.nanoTime() - start;
         if (evaluated < 2) {
-            return new Result(heuristicChoice, false, false, evaluated, rollouts, elapsed, tooSlow ? "too-slow" : "no-time", prunedCount);
+            return new Result(heuristicChoice, heuristicChoice == null, false, evaluated, rollouts, elapsed, tooSlow ? "too-slow" : "no-time", prunedCount);
         }
         if (invalid[0] || count[0] == 0) {
             // We cannot even simulate what the heuristics want to do, so there is nothing to compare against.
-            return new Result(heuristicChoice, false, false, evaluated, rollouts, elapsed, "heuristic-unsimulatable", prunedCount);
+            return new Result(heuristicChoice, heuristicChoice == null, false, evaluated, rollouts, elapsed, "heuristic-unsimulatable", prunedCount);
         }
 
+        if (TRACE) {
+            for (int c = 0; c < evaluated; c++) {
+                System.err.println("\t[flatmc " + mode + "] " + cands.get(c) + ": n=" + count[c] + " mean="
+                        + (count[c] == 0 ? "-" : String.valueOf(sum[c] / count[c])) + (invalid[c] ? " INVALID" : "")
+                        + (pruned[c] ? " pruned" : "") + " values=" + java.util.Arrays.toString(java.util.Arrays.copyOf(vals[c], count[c])));
+            }
+        }
         // Only lines still in the race can win: a pruned line was behind when it stopped, and its few samples must not
         // be compared with the many samples of the survivors.
         int best = 0;
@@ -403,7 +497,7 @@ public final class FlatMonteCarloPicker {
             if (invalid[c] || pruned[c] || count[c] == 0) {
                 continue;
             }
-            final double value = (double) sum[c] / count[c] + (c == 0 ? cfg.heuristicBonus : 0);
+            final double value = (double) sum[c] / count[c] + (c == 0 ? bonus0 : 0);
             if (value > bestValue) {
                 bestValue = value;
                 best = c;
@@ -416,13 +510,13 @@ public final class FlatMonteCarloPicker {
             final int pairs = Math.min(count[0], count[best]);
             int wins = 0;
             for (int i = 0; i < pairs; i++) {
-                if (vals[best][i] > vals[0][i] + cfg.heuristicBonus / 4) {
+                if (vals[best][i] > vals[0][i] + bonus0 / 4) {
                     wins++;
                 }
             }
             if (pairs >= 2 && wins * 100 <= pairs * cfg.overrideMajorityPercent) {
                 best = 0;
-            } else if (pairs < 2 && (double) sum[best] / count[best] < (double) sum[0] / count[0] + 2.0 * cfg.heuristicBonus) {
+            } else if (pairs < 2 && (double) sum[best] / count[best] < (double) sum[0] / count[0] + 2.0 * bonus0) {
                 // One sample per line is only noise: leave the heuristic choice unless the gap is large.
                 best = 0;
             }
@@ -431,6 +525,10 @@ public final class FlatMonteCarloPicker {
         final Candidate chosen = cands.get(best);
         final String reason = chosen.isHold() ? "hold" : best == 0 ? "kept-heuristic"
                 : chosen.target != null ? "target-override" : "override";
+        if (TRACE) {
+            System.err.println("\t[flatmc " + mode + "] => " + reason + " " + chosen + " (heuristic: " + cands.get(0) + ", turn "
+                    + player.getGame().getPhaseHandler().getTurn() + " " + player.getGame().getPhaseHandler().getPhase() + ")");
+        }
         return new Result(chosen.sa, chosen.isHold(), true, evaluated, rollouts, elapsed, reason, prunedCount, chosen.target);
     }
 
@@ -540,11 +638,16 @@ public final class FlatMonteCarloPicker {
     }
 
     private static List<Candidate> buildCandidates(final Player player, final List<SpellAbility> approvedPlays,
-                                                   final Config cfg, final Predicate<SpellAbility> revalidate) {
-        final List<SpellAbility> approved = dedupePlays(approvedPlays);
+                                                   final List<SpellAbility> extras, final Config cfg,
+                                                   final Predicate<SpellAbility> revalidate, final Mode mode) {
+        final List<SpellAbility> approved = approvedPlays.isEmpty() ? approvedPlays : dedupePlays(approvedPlays);
         final List<Candidate> cands = new ArrayList<>();
-        cands.add(new Candidate(approved.get(0))); // index 0 is always the heuristic choice
-        if (cfg.considerHolding && !cfg.holdForbidden && isHoldPossible(player)) {
+        // Index 0 is always what the heuristics would do: their favourite play, or passing when they approved nothing.
+        cands.add(approved.isEmpty() ? new Candidate(null) : new Candidate(approved.get(0)));
+        // On the opponent's turn passing is always an option, and the plays are compared against it; on the AI's own
+        // turn holding is only worth comparing when there is an instant to keep the mana up for.
+        final boolean passOption = mode != Mode.MAIN || cfg.considerHolding && !cfg.holdForbidden && isHoldPossible(player);
+        if (!approved.isEmpty() && passOption) {
             cands.add(new Candidate(null));
         }
         final int plays = Math.min(approved.size(), cfg.maxCandidates);
@@ -566,7 +669,195 @@ public final class FlatMonteCarloPicker {
             }
         }
         FlatMonteCarloStats.noteTargetVariants(cfg.targetVariants - variantsLeft);
+        // Plays the heuristics did not approve, found by discovery: they come last and are limited in number.
+        int extrasLeft = cfg.extraCandidates;
+        final Set<String> seen = new HashSet<>();
+        for (final Candidate c : cands) {
+            if (!c.isHold()) {
+                seen.add(playKey(c.sa));
+            }
+        }
+        for (final SpellAbility sa : extras) {
+            if (extrasLeft <= 0) {
+                break;
+            }
+            if (!seen.add(playKey(sa))) {
+                continue;
+            }
+            GameObject target = null;
+            final SpellAbility targeting = singleTargetingAbility(sa);
+            if (targeting != null && targeting.getApi() == ApiType.Counter) {
+                // aimed at the spell on the stack by the caller, which no GameEntity target can express
+                if (targeting.getTargets().isEmpty()) {
+                    continue;
+                }
+            } else if (targeting != null) {
+                target = hostileTarget(player, sa);
+                if (target == null) {
+                    continue; // a targeted play with nothing sensible to aim at is not worth a rollout
+                }
+            }
+            cands.add(new Candidate(sa, target, true));
+            extrasLeft--;
+        }
+        FlatMonteCarloStats.noteExtraCandidates(cfg.extraCandidates - extrasLeft);
         return cands;
+    }
+
+    private static String playKey(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return (host == null ? "" : host.getName()) + "|" + sa.getDescription();
+    }
+
+    /** What a play is for, for keeping the candidates varied and for deciding what discovery may add. */
+    enum PlayKind { STRATEGIC, INTERACTION, CREATURE, OTHER }
+
+    static PlayKind playKind(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host != null && sa.isSpell() && host.isCreature()) {
+            return PlayKind.CREATURE;
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api == null) {
+                continue;
+            }
+            switch (api) {
+                case Draw:
+                case Dig:
+                case Scry:
+                case Surveil:
+                case Investigate:
+                case GainLife:
+                    return PlayKind.STRATEGIC;
+                case Counter:
+                case Destroy:
+                case DestroyAll:
+                case DamageAll:
+                case DealDamage:
+                case Fight:
+                case Tap:
+                case TapAll:
+                    return PlayKind.INTERACTION;
+                case ChangeZone:
+                    if (a.usesTargeting()) {
+                        return PlayKind.INTERACTION; // bounce, exile
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return PlayKind.OTHER;
+    }
+
+    /**
+     * Whether discovery may add this play although the heuristics did not approve it: card draw, card selection, life
+     * gain and clues without targets, and bounce, removal and tapping of an opposing permanent. Plays with an X in
+     * the cost, lands and mana abilities never are.
+     */
+    public static boolean isDiscoverable(final SpellAbility sa) {
+        if (sa == null || sa.isLandAbility() || sa.isManaAbility() || sa.getHostCard() == null) {
+            return false;
+        }
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
+            return false;
+        }
+        final PlayKind kind = playKind(sa);
+        if (kind == PlayKind.STRATEGIC) {
+            return singleTargetingAbility(sa) == null && !hasTargeting(sa);
+        }
+        if (kind == PlayKind.INTERACTION) {
+            final SpellAbility ts = singleTargetingAbility(sa);
+            if (ts == null) {
+                return false;
+            }
+            final ApiType api = ts.getApi();
+            return api == ApiType.ChangeZone || api == ApiType.Destroy || api == ApiType.Tap;
+        }
+        return false;
+    }
+
+    /** Removal, bounce, tapping and counterspells: the plays that are worth an instant in the middle of combat. */
+    public static boolean isInteraction(final SpellAbility sa) {
+        return sa != null && (sa.getApi() == ApiType.Counter || playKind(sa) == PlayKind.INTERACTION);
+    }
+
+    private static boolean hasTargeting(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.usesTargeting()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Keeps the first (the heuristics' choice) and then fills up to {@code cap} plays taking turns between the kinds
+     * of play, so that a hand full of creature spells cannot push out the card draw or the removal spell the heuristics
+     * ranked a little lower. Within a kind the heuristic order is kept.
+     */
+    public static List<SpellAbility> diversify(final List<SpellAbility> approved, final int cap) {
+        if (approved.size() <= cap) {
+            return approved;
+        }
+        final List<SpellAbility> out = new ArrayList<>();
+        out.add(approved.get(0));
+        final List<List<SpellAbility>> buckets = new ArrayList<>();
+        for (int i = 0; i < PlayKind.values().length; i++) {
+            buckets.add(new ArrayList<>());
+        }
+        for (int i = 1; i < approved.size(); i++) {
+            buckets.get(playKind(approved.get(i)).ordinal()).add(approved.get(i));
+        }
+        // strategic and interaction plays first: they are the ones that a creature-first ordering buries
+        final int[] order = { PlayKind.STRATEGIC.ordinal(), PlayKind.INTERACTION.ordinal(), PlayKind.CREATURE.ordinal(),
+                PlayKind.OTHER.ordinal() };
+        boolean added = true;
+        while (out.size() < cap && added) {
+            added = false;
+            for (final int k : order) {
+                if (out.size() < cap && !buckets.get(k).isEmpty()) {
+                    out.add(buckets.get(k).remove(0));
+                    added = true;
+                }
+            }
+        }
+        return out;
+    }
+
+    /**
+     * The best opposing target for a play that has a single target and is meant to be used against the opponent
+     * (bounce, removal, tap), or null if it is not such a play or nothing legal is there. Targets are ranked like the
+     * target variants: opposing permanents by their value.
+     */
+    public static GameObject hostileTarget(final Player player, final SpellAbility sa) {
+        final SpellAbility ts = singleTargetingAbility(sa);
+        if (ts == null || ts.isDividedAsYouChoose()) {
+            return null;
+        }
+        final TargetRestrictions tr = ts.getTargetRestrictions();
+        if (tr == null || tr.getMaxTargets(sa.getHostCard(), ts) != 1) {
+            return null;
+        }
+        final ApiType api = ts.getApi();
+        if (api != ApiType.ChangeZone && api != ApiType.Destroy && api != ApiType.Tap && api != ApiType.DealDamage) {
+            return null;
+        }
+        sa.setActivatingPlayer(player);
+        GameEntity best = null;
+        int bestRank = Integer.MIN_VALUE;
+        for (final GameEntity e : tr.getAllCandidates(ts)) {
+            if (!(e instanceof Card) || !Boolean.FALSE.equals(isOwnSide(player, e))) {
+                continue;
+            }
+            final int rank = targetRank(player, e);
+            if (rank > bestRank) {
+                bestRank = rank;
+                best = e;
+            }
+        }
+        return best != null && applyTarget(sa, best) ? best : null;
     }
 
     /** The only ability of the play (itself or a sub ability) that has targets, or null if there is none or several. */
@@ -760,45 +1051,32 @@ public final class FlatMonteCarloPicker {
      * @return the value of the position reached, or null if this candidate cannot be simulated
      */
     private static Long rollout(final Player player, final Candidate cand, final long seed, final Config cfg,
-                                final int playoutPlays) {
+                                final int playoutPlays, final Mode mode) {
         TOTAL_ROLLOUTS.incrementAndGet();
         final Random savedRandom = MyRandom.getRandom();
         try {
             // MyRandom is global state; this is safe because the game thread is waiting for this AI decision.
             MyRandom.setRandom(new Random(seed));
 
-            final GameSimulator sim = new GameSimulator(player.getGame(), player);
+            final GameSimulator sim = new GameSimulator(player.getGame(), player, mode == Mode.RESPOND);
             final Game simGame = sim.getSimulatedGameState();
             final Player simAi = sim.getSimulatedAiPlayer();
             simGame.AI_TIMEOUT = Math.min(simGame.AI_TIMEOUT, ROLLOUT_AI_TIMEOUT_SECONDS);
             HiddenInfoShuffler.shuffle(simGame, sim.getGameCopier(), player, new Random(seed ^ HIDDEN_INFO_SALT));
 
-            if (!cand.isHold()) {
-                if (!sim.applySpellAbility(cand.sa)) {
-                    lastRolloutProblem = "apply";
-                    return null;
-                }
-                playOut(simGame, simAi, playoutPlays);
+            final Long value;
+            switch (mode) {
+                case RESPOND:
+                    value = rolloutRespond(sim, simGame, simAi, cand, cfg, playoutPlays);
+                    break;
+                case END_STEP:
+                    value = rolloutEndStep(sim, simGame, simAi, cand, cfg, playoutPlays);
+                    break;
+                default:
+                    value = rolloutMain(sim, simGame, simAi, cand, cfg, playoutPlays);
+                    break;
             }
-
-            final PhaseHandler ph = simGame.getPhaseHandler();
-            if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
-                // Run the combat of this turn, so that plays before and after it are told apart.
-                ph.devAdvanceToPhase(PhaseType.MAIN2,
-                        () -> GameSimulator.resolveStack(simGame, simAi.getWeakestOpponent()));
-                if (!cand.isHold()) {
-                    playOut(simGame, simAi, playoutPlays);
-                }
-            }
-
-            if (simGame.isGameOver() || !simAi.isInGame()) {
-                return simAi.hasWon() ? WIN_VALUE : LOSS_VALUE;
-            }
-            // At the second main phase the evaluator needs no further game copy for combat.
-            final Score score = new GameStateEvaluator().getScoreForGameState(simGame, simAi);
-            // Ordinary positions stay strictly between the terminal values, so only a real win equals WIN_VALUE.
-            final long value = (long) score.value + holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
-            return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
+            return value;
         } catch (final AITimeoutTracker.Expired e) {
             throw e;
         } catch (final RuntimeException e) {
@@ -812,6 +1090,137 @@ public final class FlatMonteCarloPicker {
             return null;
         } finally {
             MyRandom.setRandom(savedRandom);
+        }
+    }
+
+    private static Long rolloutMain(final GameSimulator sim, final Game simGame, final Player simAi, final Candidate cand,
+                                    final Config cfg, final int playoutPlays) {
+        if (!cand.isHold()) {
+            if (!sim.applySpellAbility(cand.sa)) {
+                lastRolloutProblem = "apply";
+                return null;
+            }
+            playOut(simGame, simAi, playoutPlays);
+        }
+
+        final PhaseHandler ph = simGame.getPhaseHandler();
+        if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
+            // Run the combat of this turn, so that plays before and after it are told apart.
+            ph.devAdvanceToPhase(PhaseType.MAIN2,
+                    () -> GameSimulator.resolveStack(simGame, simAi.getWeakestOpponent()));
+            if (!cand.isHold()) {
+                playOut(simGame, simAi, playoutPlays);
+            }
+        }
+        return valueAtSecondMain(simGame, simAi, cand, cfg, true);
+    }
+
+    /**
+     * The value of the position at the second main phase (or wherever the AI's turn ended up): the board score plus
+     * the terms for open mana, the crack-back and the strategic ones. A finished game is a win or a loss.
+     */
+    private static Long valueAtSecondMain(final Game simGame, final Player simAi, final Candidate cand, final Config cfg,
+                                          final boolean holdAndRisk) {
+        if (simGame.isGameOver() || !simAi.isInGame()) {
+            return simAi.hasWon() ? WIN_VALUE : LOSS_VALUE;
+        }
+        // At the second main phase the evaluator needs no further game copy for combat.
+        final Score score = new GameStateEvaluator().getScoreForGameState(simGame, simAi);
+        // Ordinary positions stay strictly between the terminal values, so only a real win equals WIN_VALUE.
+        long value = (long) score.value + StrategicEvaluator.adjust(simAi, cfg);
+        if (TRACE) {
+            final Player o = simAi.getWeakestOpponent();
+            System.err.println("\t\t[flatmc value] " + (cand == null ? "?" : cand) + " turn=" + simGame.getPhaseHandler().getTurn() + " "
+                    + simGame.getPhaseHandler().getPhase() + " board=" + score.value + " strategic=" + StrategicEvaluator.adjust(simAi, cfg)
+                    + " myLife=" + simAi.getLife() + " oppLife=" + (o == null ? "-" : String.valueOf(o.getLife()))
+                    + " oppBF=" + (o == null ? "-" : o.getCardsIn(ZoneType.Battlefield).toString()) + " oppHand=" + (o == null ? 0 : o.getCardsIn(ZoneType.Hand).size())
+                    + " myHand=" + simAi.getCardsIn(ZoneType.Hand));
+        }
+        if (holdAndRisk) {
+            value += holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
+        }
+        if (cand != null && !cand.isHold()) {
+            value += StrategicEvaluator.selectionBonus(cand.sa, cfg);
+        }
+        return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
+    }
+
+    /**
+     * A decision with priority on the opponent's turn (a spell on the stack, or their attack): play the candidate on
+     * top of what is there, let the AI follow up if its own heuristics want to (a counterspell found by a cantrip),
+     * then let the rest resolve and play the turn on to its end step.
+     */
+    private static Long rolloutRespond(final GameSimulator sim, final Game simGame, final Player simAi,
+                                       final Candidate cand, final Config cfg, final int playoutPlays) {
+        final Player simOpp = simAi.getWeakestOpponent();
+        if (!cand.isHold()) {
+            if (!sim.applySpellAbility(cand.sa, false)) {
+                lastRolloutProblem = "apply";
+                return null;
+            }
+            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
+            playOutResponding(simGame, simAi, simOpp, Math.min(RESPONSE_FOLLOW_UPS, playoutPlays));
+        }
+        // Mana and instants still open for the rest of the turn are worth something, but the turn is nearly over.
+        final long held = simGame.isGameOver() ? 0 : holdUpBonus(simAi, cfg) / 2;
+        if (!simGame.isGameOver()) {
+            GameSimulator.resolveStack(simGame, simOpp);
+        }
+        final PhaseHandler ph = simGame.getPhaseHandler();
+        if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.END_OF_TURN)) {
+            ph.devAdvanceToPhase(PhaseType.END_OF_TURN, () -> GameSimulator.resolveStack(simGame, simOpp));
+        }
+        final Long base = valueAtSecondMain(simGame, simAi, cand, cfg, false);
+        return base == null || base == WIN_VALUE || base == LOSS_VALUE ? base
+                : Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, base + held));
+    }
+
+    /**
+     * The opponent's end step: act now or pass, then play on into the AI's own next turn (untap, draw, main phase
+     * with what it has, combat) and score at its second main phase. This is what makes drawing a card at the end of
+     * the opponent's turn worth more than the same mana wasted, while a play that taps mana the AI needed on its own
+     * turn shows up as a worse turn.
+     */
+    private static Long rolloutEndStep(final GameSimulator sim, final Game simGame, final Player simAi,
+                                       final Candidate cand, final Config cfg, final int playoutPlays) {
+        final Player simOpp = simAi.getWeakestOpponent();
+        if (!cand.isHold() && !sim.applySpellAbility(cand.sa)) {
+            lastRolloutProblem = "apply";
+            return null;
+        }
+        final PhaseHandler ph = simGame.getPhaseHandler();
+        if (!simGame.isGameOver()
+                && !ph.devAdvanceThroughTurnEnd(PhaseType.MAIN1, () -> GameSimulator.resolveStack(simGame, simOpp))
+                && !simGame.isGameOver()) {
+            lastRolloutProblem = "advance";
+            return null;
+        }
+        if (!simGame.isGameOver() && ph.getPlayerTurn() == simAi) {
+            playOut(simGame, simAi, playoutPlays);
+            if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
+                ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));
+                playOut(simGame, simAi, playoutPlays);
+            }
+        }
+        return valueAtSecondMain(simGame, simAi, cand, cfg, true);
+    }
+
+    /** Follow-up plays the AI may make after its response while the opponent's spell is still on the stack. */
+    private static final int RESPONSE_FOLLOW_UPS = 3;
+
+    private static void playOutResponding(final Game simGame, final Player simAi, final Player simOpp, final int maxPlays) {
+        if (!(simAi.getController() instanceof PlayerControllerAi)) {
+            return;
+        }
+        final PlayerControllerAi pc = (PlayerControllerAi) simAi.getController();
+        for (int i = 0; i < maxPlays && !simGame.isGameOver() && !simGame.getStack().isEmpty(); i++) {
+            AITimeoutTracker.check();
+            final List<SpellAbility> next = pc.chooseSpellAbilityToPlay();
+            if (next == null || next.isEmpty()) {
+                return;
+            }
+            pc.playChosenSpellAbility(next.get(0));
+            GameSimulator.resolveOwnTop(simGame, simAi, simOpp);
         }
     }
 

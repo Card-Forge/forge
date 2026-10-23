@@ -91,6 +91,17 @@ public class GameSimulator {
         origLines = new ArrayList<>();
     }
 
+    /** As the lightweight constructor, optionally copying the spells on the stack (for decisions made in response to one). */
+    public GameSimulator(Game origGame, Player origAiPlayer, boolean copyStack) {
+        this.controller = new SimulationController(new Score(0), 0);
+        copier = new GameCopier(origGame).withStack(copyStack);
+        simGame = copier.makeCopy(null, origAiPlayer);
+
+        aiPlayer = copier.find(origAiPlayer);
+        eval = new GameStateEvaluator();
+        origLines = new ArrayList<>();
+    }
+
     private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
         eval.setDebugging(true);
         List<String> simLines = new ArrayList<>();
@@ -285,6 +296,14 @@ public class GameSimulator {
      * @return false if the ability could not be found or played in the simulated game
      */
     public boolean applySpellAbility(SpellAbility origSa) {
+        return applySpellAbility(origSa, true);
+    }
+
+    /**
+     * @param resolveStack false to leave the play on the stack: used when responding to a spell, where only what the AI
+     *                     put there should resolve before it gets priority again (see {@link #resolveOwnTop})
+     */
+    public boolean applySpellAbility(SpellAbility origSa, boolean resolveStack) {
         if (origSa.isLandAbility()) {
             if (!origSa.canPlay()) {
                 return false;
@@ -305,8 +324,30 @@ public class GameSimulator {
                 return false;
             }
         }
-        resolveStack(simGame, aiPlayer.getWeakestOpponent());
+        if (resolveStack) {
+            resolveStack(simGame, aiPlayer.getWeakestOpponent());
+        }
         return true;
+    }
+
+    /**
+     * Resolves the top of the stack for as long as it belongs to {@code owner}, then stops: the rest (what the
+     * opponent put there earlier) stays for the owner to respond to or let resolve.
+     */
+    public static void resolveOwnTop(final Game game, final Player owner, final Player opponent) {
+        PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
+        sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
+        opponent.runWithController(() -> {
+            final Set<Card> allAffectedCards = new HashSet<>();
+            game.getAction().checkStateEffects(false, allAffectedCards);
+            game.getStack().addAllTriggeredAbilitiesToStack();
+            while (!game.getStack().isEmpty() && !game.isGameOver()
+                    && owner.equals(game.getStack().peekAbility().getActivatingPlayer())) {
+                game.getStack().resolveStack();
+                game.getAction().checkStateEffects(false, allAffectedCards);
+                game.getStack().addAllTriggeredAbilitiesToStack();
+            }
+        }, sim);
     }
 
     /** The copy of the AI player (given to the constructor) living in the simulated game. */

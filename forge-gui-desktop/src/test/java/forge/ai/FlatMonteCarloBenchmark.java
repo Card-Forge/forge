@@ -38,7 +38,8 @@ import forge.util.MyRandom;
  * <p>
  * Arms: {@code H} the plain heuristic AI, {@code MCorig} Monte Carlo as first proposed (no pruning, mana-cost-only
  * hold values, fixed playout length, no target variants), {@code MCnew} Monte Carlo with the refinements, and
- * {@code MCnoTV} the refinements without trying other targets.
+ * {@code MCnoTV} the refinements without trying other targets, {@code MCmax} the refinements at the maximum
+ * (desktop) strength.
  * <p>
  * Every pair of decks is played in blocks of four games in which both the deck each arm plays and the seat (who goes
  * first) alternate, so that neither a lopsided matchup nor the first player advantage can favour an arm. A few hundred
@@ -60,11 +61,17 @@ public class FlatMonteCarloBenchmark extends AITest {
         final String label;
         final String profile;
         final Boolean monteCarlo;
+        final Boolean max;
 
         Arm(final String label, final String profile, final Boolean monteCarlo) {
+            this(label, profile, monteCarlo, Boolean.FALSE);
+        }
+
+        Arm(final String label, final String profile, final Boolean monteCarlo, final Boolean max) {
             this.label = label;
             this.profile = profile;
             this.monteCarlo = monteCarlo;
+            this.max = max;
         }
     }
 
@@ -78,8 +85,10 @@ public class FlatMonteCarloBenchmark extends AITest {
                 return new Arm("MCnoTV", "FlatMcNoTargets", true);
             case "MCnew":
                 return new Arm("MCnew", "FlatMcNew", true);
+            case "MCmax":
+                return new Arm("MCmax", "FlatMcNew", true, true);
             default:
-                throw new IllegalArgumentException("unknown arm " + name + " (use H, MCorig, MCnoTV or MCnew)");
+                throw new IllegalArgumentException("unknown arm " + name + " (use H, MCorig, MCnoTV, MCnew or MCmax)");
         }
     }
 
@@ -129,6 +138,7 @@ public class FlatMonteCarloBenchmark extends AITest {
         for (final Player p : game.getPlayers()) {
             final int idx = p.getName().startsWith("P0") ? 0 : 1;
             ((PlayerControllerAi) p.getController()).getAi().setFlatMonteCarloOverride(arms[idx].monteCarlo);
+            ((PlayerControllerAi) p.getController()).getAi().setFlatMonteCarloMaxOverride(arms[idx].max);
         }
         final Future<?> running = pool.submit(() -> match.startGame(game));
         try {
