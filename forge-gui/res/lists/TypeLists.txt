@@ -157,6 +157,7 @@ Human:Humans
 Hydra:Hydras
 Hyena:Hyenas
 Illusion:Illusions
+Illyrian:Illyrians
 Imp:Imps
 Incarnation:Incarnations
 Inhuman:Inhumans
