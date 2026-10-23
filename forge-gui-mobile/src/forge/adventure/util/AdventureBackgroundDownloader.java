@@ -3,7 +3,6 @@ package forge.adventure.util;
 import com.badlogic.gdx.files.FileHandle;
 import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
-import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 
@@ -232,7 +231,7 @@ public final class AdventureBackgroundDownloader {
         HttpURLConnection connection = (HttpURLConnection) source.openConnection();
         try {
             connection.setRequestProperty("Accept", "*/*");
-            connection.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            connection.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
             connection.setConnectTimeout(10000);
             connection.setReadTimeout(30000);
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
