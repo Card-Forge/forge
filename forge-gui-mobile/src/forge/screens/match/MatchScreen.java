@@ -82,6 +82,9 @@ public class MatchScreen extends FScreen {
     private final VLog log;
     private final VChat chat;
     private final VStack stack;
+    private final VUnifiedPhase unifiedPhase; //compact layout: one phase label for all players, right of the stack menu
+    private boolean iconTabsShown; //whether the top menu tabs were last laid out as icons
+    private boolean stackSuspended, prevMenuOpen, prevStackShown; //see syncStackWithMenus
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
@@ -120,6 +123,7 @@ public class MatchScreen extends FScreen {
         playerPanelsList.remove(bottomPlayerPanel);
         playerPanelsList.add(bottomPlayerPanel);
         selectedPlayer = playerPanelsList.size() - 1;
+        unifiedPhase = new VUnifiedPhase(this::getPlayerPanelsList);
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 e -> getGameController().selectButtonOk(),
@@ -161,17 +165,18 @@ public class MatchScreen extends FScreen {
 
         FMenuBar menuBar = (FMenuBar) getHeader();
         if (topPlayerPrompt == null) {
+            menuBar.setIconMode(VPlayerPanel::isCompactLayout); //compact layout: equal width tabs with icons from the topmenu atlas
             menuBar.addTab("", revealed, true);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu).setTopIcon("vmenu", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players).setTopIcon("vplayers", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log).setTopIcon("vlog", false);
             if (chat != null) {
-                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat).setTopIcon("vchat", false);
             }
             if (!MatchController.instance.isReplay()) {
-                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu).setTopIcon("vdev", false);
             }
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack).setTopIcon("vstack", true);
         } else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
@@ -193,6 +198,8 @@ public class MatchScreen extends FScreen {
             remove(getHeader());
             add(getHeader());
             bottomPlayerPrompt.setMenuButton(VPlayerPanel.isMenuHidden(), this::toggleMenuBar);
+            add(unifiedPhase);
+            add(unifiedPhase.getMenu()); //above the header, so it opens over the field
         }
     }
 
@@ -223,6 +230,36 @@ public class MatchScreen extends FScreen {
             if (!shown) { ((FMenuBar) getHeader()).closeAllExcept(stack); } //an open stack stays up
             revalidate();
         }
+    }
+
+    //Compact layout: the stack display, the unified phase dropdown and the dev menu all open at the top right, so they take turns.
+    //Opening the phase dropdown or the dev menu tucks an open stack display away and brings it back when they close; opening the
+    //stack (by hand, or a new stack item showing it) closes them.
+    private void syncStackWithMenus() {
+        if (topPlayerPrompt != null || !VPlayerPanel.isCompactLayout()) {
+            stackSuspended = false;
+            prevMenuOpen = false;
+            prevStackShown = stack.isVisible();
+            return;
+        }
+        boolean menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible();
+        if (menuOpen && !prevMenuOpen && stack.isVisible()) {
+            stack.hide();
+            stackSuspended = true;
+        } else if (menuOpen && stack.isVisible() && !prevStackShown) {
+            unifiedPhase.getMenu().close();
+            devMenu.hide();
+        }
+        menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible(); //read again, a menu that was just closed may still report open
+        if (stackSuspended && !menuOpen) {
+            stackSuspended = false;
+            final GameView game = MatchController.instance.getGameView();
+            if (!stack.isVisible() && game != null && !game.getStack().isEmpty()) {
+                stack.show();
+            }
+        }
+        prevMenuOpen = menuOpen;
+        prevStackShown = stack.isVisible();
     }
 
     private VPlayerPanel liveTop() { return playerPanelsList.get(0); }
@@ -305,6 +342,7 @@ public class MatchScreen extends FScreen {
         if (topPlayerPrompt == null) {
             devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
         }
+        revalidate(); //the compact layout and unified phase settings may have changed in Settings
     }
 
     public boolean isTopHumanPlayerActive() {
@@ -382,6 +420,25 @@ public class MatchScreen extends FScreen {
                 menuBarHideTask.cancel();
             }
         }
+        if (topPlayerPrompt == null) { //compact layout: one phase label right of the stack menu, the bar gives up the room for it
+            final boolean unified = VPlayerPanel.isUnifiedPhase();
+            final float barHeight = getHeader().getHeight();
+            final float buttonWidth = unified ? Math.min(unifiedPhase.getPreferredWidth(), width * 0.4f) : 0f;
+            if (getHeader().getWidth() != width - buttonWidth) {
+                getHeader().setBounds(getHeader().getLeft(), getHeader().getTop(), width - buttonWidth, barHeight);
+            }
+            if (iconTabsShown != VPlayerPanel.isCompactLayout()) { //the tabs switch between text and icons
+                iconTabsShown = VPlayerPanel.isCompactLayout();
+                getHeader().revalidate();
+            }
+            unifiedPhase.setVisible(unified);
+            if (unified) {
+                unifiedPhase.setBounds(width - buttonWidth, 0, buttonWidth, barHeight);
+                unifiedPhase.getMenu().layoutFor(width, barHeight, height - VPrompt.HEIGHT - barHeight);
+            } else {
+                unifiedPhase.getMenu().close();
+            }
+        }
         float scrollerWidth = width;
         if (topPlayerPrompt != null) {
             topPlayerPrompt.setBounds(0, 0, width, VPrompt.HEIGHT);
@@ -414,6 +471,11 @@ public class MatchScreen extends FScreen {
         if (game == null) {
             return;
         }
+
+        if (topPlayerPrompt == null) { //the reveal tab is as wide as the player panels' control column
+            ((FMenuBar) getHeader()).setRevealWidth(VPlayerPanel.isCompactLayout() ? liveBottom().getColumnWidth() : 0f);
+        }
+        syncStackWithMenus();
 
         if (gameMenu != null) {
             // Index trailing items from end — entries inserted before Settings don't shift them

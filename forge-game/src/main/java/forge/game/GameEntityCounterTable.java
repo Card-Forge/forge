@@ -19,6 +19,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 
 public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, GameEntity, Multiset<CounterType>> {
 
@@ -49,9 +50,8 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         }
         if (value > 0) {
             return map.add(type, value);
-        } else {
-            return map.remove(type, -value);
         }
+        return map.remove(type, -value);
     }
 
     public int get(Player putter, GameEntity object, CounterType type) {
@@ -126,7 +126,6 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                 repParams.put(AbilityKey.Cause, cause);
                 repParams.put(AbilityKey.EffectOnly, effect);
                 repParams.put(AbilityKey.CounterMap, values);
-                repParams.put(AbilityKey.ETB, etb);
                 if (params != null) {
                     repParams.putAll(params);
                 }
@@ -134,29 +133,24 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                 switch (game.getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
                 case NotReplaced:
                     break;
-                case Updated: {
+                case Updated:
                     values = (Map<Optional<Player>, Multiset<CounterType>>) repParams.get(AbilityKey.CounterMap);
                     break;
-                }
                 default:
                     continue;
                 }
             }
 
-            // Add ETB flag
             Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cause, cause);
             if (etb) {
-                runParams.put(AbilityKey.ETB, true);
+                runParams.put(AbilityKey.Destination, ZoneType.Battlefield);
             }
             if (params != null) {
                 runParams.putAll(params);
             }
 
-            boolean firstTime = false;
-            if (gm.getKey() instanceof Card c) {
-                firstTime = game.getCounterAddedThisTurn(null, c) == 0;
-            }
+            boolean firstTime = gm.getKey() instanceof Card c && game.getCounterAddedThisTurn(null, c) == 0;
 
             // Apply counter after replacement effect
             for (Map.Entry<Optional<Player>, Multiset<CounterType>> e : values.entrySet()) {

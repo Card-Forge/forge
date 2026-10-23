@@ -7,6 +7,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -75,5 +76,10 @@ public class PointOfInterestData implements Serializable {
             return name!=null?name:"";
         }
         return displayName;
+    }
+
+    private static final Set<String> DUNGEON_TYPES = Set.of("cave", "dungeon", "sidebosseasy", "sidebossmoderate", "sidebosshard");
+    public boolean isDungeon() {
+        return type != null && DUNGEON_TYPES.contains(type.toLowerCase());
     }
 }
