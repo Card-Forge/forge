@@ -1,0 +1,9 @@
+Name:Cleveland Booker, Empath
+ManaCost:2 RG RG
+Types:Legendary Creature Kwejian Rogue
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 2/2 red and green Worm creature token with "This token can't block."
+A:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+SVar:TrigToken:DB$ Token | TokenScript$ rg_2_2_worm_noblock | TokenOwner$ You
+Oracle:Landfall — Whenever a land you control enters, create a 2/2 red and green Worm creature token with "This token can't block."\n{8}: Creatures you control get +2/+0 until end of turn.
