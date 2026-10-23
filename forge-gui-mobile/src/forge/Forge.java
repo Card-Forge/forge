@@ -410,6 +410,7 @@ public class Forge implements ApplicationListener {
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
+        GuiBase.setAdventureCacheDirectory(null);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -428,6 +429,7 @@ public class Forge implements ApplicationListener {
         startContinuousRendering();
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(ForgeConstants.ADVENTURE_COMMON_DIR);
+        GuiBase.setAdventureCacheDirectory(null);
         advStartup = false;
         isMobileAdventureMode = true;
         //pixl cursor for adventure
@@ -892,6 +894,7 @@ public class Forge implements ApplicationListener {
             isMobileAdventureMode = false;
             FSkinTexture.invalidateAdventureTextures();
             GuiBase.setAdventureDirectory(null);
+            GuiBase.setAdventureCacheDirectory(null);
             setCursor(FSkin.getCursor().get(0), "0");
             Gdx.input.setInputProcessor(getInputProcessor());
             clearTransitionScreen();
