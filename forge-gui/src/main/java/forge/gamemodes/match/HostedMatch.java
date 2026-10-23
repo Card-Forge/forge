@@ -124,7 +124,6 @@ public class HostedMatch {
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
         sortedPlayers.sort((p1, p2) -> {
-
             final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             return Integer.compare(v1, v2);
@@ -304,7 +303,7 @@ public class HostedMatch {
                 throw ex;
             }
             // this function waits?
-            if (endGameHook != null){
+            if (endGameHook != null) {
                 endGameHook.run();
             }
 

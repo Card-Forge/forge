@@ -1346,6 +1346,9 @@ public class VPlayerPanel extends FContainer {
 
     public float getCommonTabWidth() { return commonTabWidth; }
 
+    /** @return the width of the control column in the compact layout, 0 before the first layout */
+    public float getColumnWidth() { return tabColWidth; }
+
     /**
      * @return the screen rect cards can visibly fly through in landscape mode, which is the panel without its two tab
      * columns, or null in portrait mode or before the first layout

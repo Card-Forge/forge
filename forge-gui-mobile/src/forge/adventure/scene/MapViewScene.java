@@ -104,19 +104,6 @@ public class MapViewScene extends UIScene {
             }
         });
         stage.setScrollFocus(ui);
-
-    }
-
-    public void test() {
-        img.setPosition((scroll.getScrollPercentX()*2334 +233)*0.1f + 0.9f*img.getX(),(2544-scroll.getScrollPercentY()*2544 +128)*0.1f + 0.9f*img.getY());
-        img.setScale(img.getScaleX()*0.9f);
-        miniMapPlayer.setPosition((scroll.getScrollPercentX()*2334 +233)*0.1f + 0.9f*miniMapPlayer.getX(),(2544-scroll.getScrollPercentY()*2544 +128)*0.1f + 0.9f*miniMapPlayer.getY());
-        miniMapPlayer.setScale(miniMapPlayer.getScaleX()*0.9f);
-        for(Actor actor : table.getChildren()) {
-            if (actor instanceof TypingLabel) {
-                actor.setPosition((scroll.getScrollPercentX() * 2334 + 233) * 0.1f + 0.9f * actor.getX(), (2544 - scroll.getScrollPercentY() * 2544 + 128) * 0.1f + 0.9f * actor.getY());
-            }
-        }
     }
 
     public boolean done() {
@@ -164,7 +151,6 @@ public class MapViewScene extends UIScene {
         }
         return true;
     }
-
 
     private void setOverlayButtonStates(int mode) {
         String[] buttons = {"details", "events", "reputation", "names"};
@@ -256,7 +242,6 @@ public class MapViewScene extends UIScene {
             table.removeActor(detail);
         }
         details.clear();
-
     }
 
     public void zoomOut() {
