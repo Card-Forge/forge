@@ -63,6 +63,7 @@ C'tan:C'tan
 Caitian:Caitians
 Camel:Camels
 Capybara:Capybaras
+Cardassian:Cardassians
 Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
