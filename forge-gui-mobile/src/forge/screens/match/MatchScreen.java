@@ -84,6 +84,7 @@ public class MatchScreen extends FScreen {
     private final VStack stack;
     private final VUnifiedPhase unifiedPhase; //compact layout: one phase label for all players, right of the stack menu
     private boolean iconTabsShown; //whether the top menu tabs were last laid out as icons
+    private boolean stackSuspended, prevMenuOpen, prevStackShown; //see syncStackWithMenus
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
@@ -229,6 +230,36 @@ public class MatchScreen extends FScreen {
             if (!shown) { ((FMenuBar) getHeader()).closeAllExcept(stack); } //an open stack stays up
             revalidate();
         }
+    }
+
+    //Compact layout: the stack display, the unified phase dropdown and the dev menu all open at the top right, so they take turns.
+    //Opening the phase dropdown or the dev menu tucks an open stack display away and brings it back when they close; opening the
+    //stack (by hand, or a new stack item showing it) closes them.
+    private void syncStackWithMenus() {
+        if (topPlayerPrompt != null || !VPlayerPanel.isCompactLayout()) {
+            stackSuspended = false;
+            prevMenuOpen = false;
+            prevStackShown = stack.isVisible();
+            return;
+        }
+        boolean menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible();
+        if (menuOpen && !prevMenuOpen && stack.isVisible()) {
+            stack.hide();
+            stackSuspended = true;
+        } else if (menuOpen && stack.isVisible() && !prevStackShown) {
+            unifiedPhase.getMenu().close();
+            devMenu.hide();
+        }
+        menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible(); //read again, a menu that was just closed may still report open
+        if (stackSuspended && !menuOpen) {
+            stackSuspended = false;
+            final GameView game = MatchController.instance.getGameView();
+            if (!stack.isVisible() && game != null && !game.getStack().isEmpty()) {
+                stack.show();
+            }
+        }
+        prevMenuOpen = menuOpen;
+        prevStackShown = stack.isVisible();
     }
 
     private VPlayerPanel liveTop() { return playerPanelsList.get(0); }
@@ -444,6 +475,7 @@ public class MatchScreen extends FScreen {
         if (topPlayerPrompt == null) { //the reveal tab is as wide as the player panels' control column
             ((FMenuBar) getHeader()).setRevealWidth(VPlayerPanel.isCompactLayout() ? liveBottom().getColumnWidth() : 0f);
         }
+        syncStackWithMenus();
 
         if (gameMenu != null) {
             // Index trailing items from end — entries inserted before Settings don't shift them
