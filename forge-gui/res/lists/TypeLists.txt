@@ -178,6 +178,7 @@ Kobold:Kobolds
 Kor:Kors
 Kraken:Krakens
 Kree:Kree
+Kwejian:Kwejians
 Lamia:Lamias
 Lammasu:Lammasus
 Lanthanite:Lanthanites
