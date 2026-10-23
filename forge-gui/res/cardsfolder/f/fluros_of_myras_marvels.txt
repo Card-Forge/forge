@@ -1,0 +1,12 @@
+Name:Fluros of Myra's Marvels
+ManaCost:2 U U
+Types:Legendary Creature Merfolk Performer
+PT:3/4
+K:ETBReplacement:Other:ChooseNum
+K:Partner
+T:Mode$ SpellCast | ValidCard$ Card.powerEQX,Card.toughnessEQX,Card.baseLoyaltyEQX | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnim | TriggerDescription$ Whenever you cast a spell with power, toughness, or loyalty equal to the chosen number, target artifact or creature becomes an artifact creature with base power and toughness X/X until end of turn, where X is the chosen number.
+SVar:ChooseNum:DB$ ChooseNumber | Min$ 1 | SpellDescription$ As Fluros of Myra’s Marvels enters, choose a number greater than 0.
+SVar:TrigAnim:DB$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Types$ Artifact,Creature | Power$ X | Toughness$ X
+SVar:X:Count$ChosenNumber
+AI:RemoveDeck:All
+Oracle:As Fluros of Myra’s Marvels enters, choose a number greater than 0.\nWhenever you cast a spell with power, toughness, or loyalty equal to the chosen number, target artifact or creature becomes an artifact creature with base power and toughness X/X until end of turn, where X is the chosen number.\nPartner

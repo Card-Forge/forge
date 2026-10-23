@@ -106,6 +106,23 @@ public final class CardEdition implements Comparable<CardEdition> {
         MODERN // 8th Edition and newer
     }
 
+    /** The draft-mode variant for this edition (e.g. Normal limited or Commander draft). */
+    public enum DraftType {
+        Normal,
+        Commander;
+
+        public static DraftType fromString(String value) {
+            if (value == null || value.isEmpty()) {
+                return Normal;
+            }
+            try {
+                return DraftType.valueOf(value);
+            } catch (IllegalArgumentException e) {
+                return Normal;
+            }
+        }
+    }
+
     public enum BorderColor {
         WHITE,
         BLACK,
@@ -301,6 +318,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     // Draft options
     private DraftOptions draftOptions = null;
+    private DraftType draftType = DraftType.Normal;
     private String[] chaosDraftThemes = new String[0];
 
     private final ListMultimap<String, EditionEntry> cardMap;
@@ -395,6 +413,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getSheetReplaceCardFromSheet() { return sheetReplaceCardFromSheet; }
     public String getSheetReplaceCardFromSheet2() { return sheetReplaceCardFromSheet2; }
     public String[] getChaosDraftThemes() { return chaosDraftThemes; }
+    public DraftType getDraftType() { return draftType; }
 
     public List<EditionEntry> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<EditionEntry> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
@@ -468,6 +487,29 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
+
+    // lower case collector numbers of the prints in the main "cards" section, built on first use
+    private volatile Set<String> traditionalCollectorNumbers;
+
+    /**
+     * True if the print with the given collector number has the traditional frame, that is, it is listed in the
+     * main "cards" section of the edition rather than in a special one (borderless, extended art, showcase,
+     * etched, full art, promo, buy a box...).
+     */
+    public boolean isTraditionalFrame(String collectorNumber) {
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return false;
+        Set<String> numbers = traditionalCollectorNumbers;
+        if (numbers == null) {
+            numbers = new HashSet<>();
+            for (EditionEntry entry : getCards()) {
+                if (entry.collectorNumber() != null)
+                    numbers.add(entry.collectorNumber().toLowerCase(Locale.ROOT));
+            }
+            traditionalCollectorNumbers = numbers;
+        }
+        return numbers.contains(collectorNumber.toLowerCase(Locale.ROOT));
+    }
 
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
 
@@ -847,21 +889,25 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.borderColor = BorderColor.valueOf(metadata.get("border", "Black").toUpperCase(Locale.ENGLISH));
             res.prerelease = metadata.get("Prerelease", null);
 
+            // DraftType: governs the deck-building mode for this edition's draft (e.g. Normal or Commander)
+            res.draftType = DraftType.fromString(metadata.get("DraftType", "Normal"));
+
             // Draft options
             String doublePick = metadata.get("DoublePick", "Never");
             int maxPodSize = metadata.getInt("MaxPodSize", 8);
             int recommendedPodSize = metadata.getInt("RecommendedPodSize", 8);
             int maxMatchPlayers = metadata.getInt("MaxMatchPlayers", 2);
-            String deckType = metadata.get("DeckType", "Normal");
-            String freeCommander = metadata.get("FreeCommander", "");
+            String freeCommander = metadata.get("DraftFreeCommander", "");
+            String impliedPartner = metadata.get("DraftImpliedPartnership", "");
 
             res.draftOptions = new DraftOptions(
                     doublePick,
                     maxPodSize,
                     recommendedPodSize,
                     maxMatchPlayers,
-                    deckType,
-                    freeCommander
+                    res.draftType,
+                    freeCommander,
+                    impliedPartner
             );
 
             return res;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Iterables;
+import forge.gamemodes.net.server.HostingServer;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +32,6 @@ import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
-import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.ILobbyView;
@@ -943,8 +943,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     public void setStartButtonAvailability() {
-        if (lobby.isAllowNetworking() && FServerManager.getInstance() != null)
-            btnStart.setVisible(FServerManager.getInstance().isHosting());
+        if (lobby.isAllowNetworking())
+            btnStart.setVisible(HostingServer.isHosting());
         else
             btnStart.setVisible(true);
     }

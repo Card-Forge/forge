@@ -1,0 +1,9 @@
+Name:Command Chair
+ManaCost:6
+Types:Artifact
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This artifact enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the greatest mana value among commanders you control.
+SVar:X:Count$Valid Permanent.IsCommander+YouCtrl$GreatestCardManaCost
+Oracle:This artifact enters tapped.\n{T}: Add three mana of any one color.\n{T}: Add X mana of any one color, where X is the greatest mana value among commanders you control.

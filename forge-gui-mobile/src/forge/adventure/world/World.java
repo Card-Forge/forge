@@ -51,6 +51,7 @@ public class World implements Disposable, SaveFileContent {
     private Texture globalTexture = null;
     private final ArrayList<DrawingInformation> drawingInfoCache = new ArrayList<>(32);
     private Pixmap globalTileDrawing = null;
+    private Pixmap emptyTile = null;
 
     public Random getRandom() {
         return random;
@@ -163,7 +164,12 @@ public class World implements Disposable, SaveFileContent {
 
     public Pixmap getBiomeSprite(int x, int y) {
         if (x < 0 || y <= 0 || x >= width || y > height) {
-            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+            if (emptyTile == null) {
+                emptyTile = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+                emptyTile.setColor(0, 0, 0, 0);
+                emptyTile.fill();
+            }
+            return emptyTile;
         }
 
         // init exactly once on demand
@@ -947,7 +953,7 @@ public class World implements Disposable, SaveFileContent {
 
     public void dispose() {
         drawingInfoCache.clear();
-        Forge.safeDispose(biomeImage, globalTileDrawing, globalTexture);
+        Forge.safeDispose(biomeImage, globalTileDrawing, globalTexture, emptyTile);
     }
 
     public void setSeed(long seedOffset) {

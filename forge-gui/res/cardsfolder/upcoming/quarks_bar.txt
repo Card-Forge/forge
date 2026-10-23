@@ -1,0 +1,11 @@
+Name:Quark's Bar
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control two or more other lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl+Other | ConditionCompare$ LT2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigCharm | TriggerDescription$ When this land enters untapped, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBSurveil
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ This land deals 1 damage to each opponent.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:This land enters tapped unless you control two or more other lands.\nWhen this land enters untapped, choose one —\n• This land deals 1 damage to each opponent.\n• Surveil 1.\n{T}: Add {R}.

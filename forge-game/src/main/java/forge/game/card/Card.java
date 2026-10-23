@@ -462,7 +462,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updatePTforView() {
-        getView().updateLethalDamage(this);
         currentState.getView().updatePower(this);
         currentState.getView().updateToughness(this);
     }
@@ -1724,11 +1723,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public final boolean canReceiveCounters(final CounterType type) {
+    public final boolean canReceiveCounters(final CounterType type, Map<AbilityKey, Object> params) {
         if (isPhasedOut()) {
             return false;
         }
-        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
+        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type, params)) {
             return false;
         }
         return true;
@@ -1758,13 +1757,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
-        int addAmount = n;
-
-        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
-            // CR 107.1b
+    public void addCounterInternal(final CounterType counterType, int addAmount, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
+        if (addAmount <= 0) {
             return;
         }
+        // ETB counters are checked after moving
+        if (params != null && params.containsKey(AbilityKey.Destination) && !canReceiveCounters(counterType, params)) {
+            return;
+        }
+
         final int oldValue = getCounters(counterType);
 
         Integer max = getCounterMax(counterType);
@@ -1816,15 +1817,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 runParams.put(AbilityKey.CounterAmount, addAmount);
                 runParams.put(AbilityKey.FirstTime, addedThisTurn == 0);
                 getGame().getTriggerHandler().runTrigger(
-                        TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
+                        TriggerType.CounterAddedOnce, runParams, false);
                 if (cause != null) {
-                    // 702.100b A creature “evolves” when one or more +1/+1 counters are put on it as a result of its evolve ability resolving.
+                    // CR 702.100b A creature “evolves” when one or more +1/+1 counters are put on it as a result of its evolve ability resolving.
                     if (cause.isKeyword(Keyword.EVOLVE) && counterType.is(CounterEnumType.P1P1)) {
                         getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, AbilityKey.mapFromCard(this), false);
                     }
 
-                    // 702.149c Some creatures with training have abilities that trigger when they train.
-                    // “When this creature trains” means “When a resolving training ability puts a +1/+1 counter on this creature.”
+                    // CR 702.149c “When this creature trains” means “When a resolving training ability puts a +1/+1 counter on this creature.”
                     if (cause.isKeyword(Keyword.TRAINING) && counterType.is(CounterEnumType.P1P1)) {
                         getGame().getTriggerHandler().runTrigger(TriggerType.Trains, AbilityKey.mapFromCard(this), false);
                     }
@@ -1978,7 +1978,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void putEtbCounters(Map<Optional<Player>, Multiset<CounterType>> etbCounters) {
+    public final void putEtbCounters(Map<Optional<Player>, Multiset<CounterType>> etbCounters, Map<AbilityKey, Object> params) {
         if (etbCounters == null) {
             return;
         }
@@ -1986,7 +1986,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         for (Multiset<CounterType> m : etbCounters.values()) {
             for (Multiset.Entry<CounterType> e : m.entrySet()) {
                 CounterType ct = e.getElement();
-                if (canReceiveCounters(ct)) {
+                if (canReceiveCounters(ct, params)) {
                     setCounters(ct, getCounters(ct) + e.getCount());
                 }
             }
@@ -2446,8 +2446,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!mayPlay.isEmpty()) {
             PlayerCollection players = new PlayerCollection();
             for (CardPlayOption o : mayPlay.values()) {
-                if (getController() == o.getPlayer() || o.grantsZonePermissions())
-                    players.add(o.getPlayer());
+                if (o.grantsZonePermissions()) {
+                    players.addAll(o.getPlayers());
+                } else if (o.appliesTo(getController())) {
+                    players.add(getController());
+                }
             }
             if (!players.isEmpty()) {
                 sb.append("May be played by: ");
@@ -3829,14 +3832,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final List<CardPlayOption> mayPlay(final Player player) {
         List<CardPlayOption> result = Lists.newArrayList();
         for (CardPlayOption o : mayPlay.values()) {
-            if (o.getPlayer().equals(player)) {
+            if (o.appliesTo(player)) {
                 result.add(o);
             }
         }
         return result;
     }
-    public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
-        this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
+    public final void setMayPlay(final PlayerCollection players, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
+        this.mayPlay.put(sta, new CardPlayOption(players, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);
@@ -4225,6 +4228,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final int getCurrentLoyalty() {
         return getCounters(CounterEnumType.LOYALTY);
     }
+    public final String getBaseLoyalty() { return currentState.getBaseLoyalty(); }
     public final void setBaseLoyalty(final int n) {
         currentState.setBaseLoyalty(Integer.toString(n));
     }

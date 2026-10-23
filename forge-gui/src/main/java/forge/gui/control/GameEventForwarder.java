@@ -4,6 +4,8 @@ import com.google.common.eventbus.Subscribe;
 import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventCardChangeZone;
+import forge.game.event.GameEventPlayerPriority;
+import forge.game.event.GameEventTurnEnded;
 import forge.gui.interfaces.IGuiGame;
 
 import java.util.ArrayList;
@@ -17,8 +19,11 @@ import java.util.stream.Collectors;
  *
  * <p>Flush triggers (all on the game thread):
  * <ul>
- *   <li>Size threshold: 50+ buffered events in {@link #receiveGameEvent}</li>
- *   <li>Time threshold: 500ms+ since last flush in {@link #receiveGameEvent}</li>
+ *   <li>Priority: a player receives it once the game has settled, so a batch holds whole actions
+ *       and what one player did is sent before anyone chooses what to do next. A pass with nothing
+ *       but redraw hints since the last batch sends nothing</li>
+ *   <li>End of turn: normally no player receives priority in the cleanup step, so what happened in
+ *       it is sent before the turn ends and never travels with the next turn's start</li>
  *   <li>Input queue change: registered as {@link Observer} on player InputQueues,
  *       ensuring events are delivered before the game thread blocks for input</li>
  *   <li>Sync points: explicit {@link #flush()} from {@code flushPendingEvents()}</li>
@@ -27,12 +32,10 @@ import java.util.stream.Collectors;
  * <p>No daemon thread — all delta collection runs on the game thread to avoid race issues.
  */
 public class GameEventForwarder implements Observer {
-    private static final long FLUSH_INTERVAL_NS = 500_000_000L;
-    private static final int FLUSH_SIZE_THRESHOLD = 50;
-
     private final IGuiGame gui;
     private final List<GameEvent> pendingEvents = new ArrayList<>();
-    private long lastFlushTime = System.nanoTime();
+    /** Whether anything but a redraw hint is waiting, which is what makes a pass of priority worth a batch. */
+    private boolean somethingHappened;
 
     public GameEventForwarder(IGuiGame gui) {
         this.gui = gui;
@@ -40,10 +43,13 @@ public class GameEventForwarder implements Observer {
 
     @Subscribe
     public void receiveGameEvent(GameEvent ev) {
+        if (ev instanceof GameEventTurnEnded && somethingHappened) {
+            flush();
+        }
         pendingEvents.add(ev);
-        boolean sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
-        boolean timeThreshold = (System.nanoTime() - lastFlushTime) >= FLUSH_INTERVAL_NS;
-        if (timeThreshold || sizeThreshold) {
+        if (!(ev instanceof GameEventPlayerPriority)) {
+            somethingHappened |= !ev.isRedrawHint();
+        } else if (somethingHappened) {
             flush();
         }
     }
@@ -54,7 +60,7 @@ public class GameEventForwarder implements Observer {
         }
         List<GameEvent> batch = new ArrayList<>(pendingEvents);
         pendingEvents.clear();
-        lastFlushTime = System.nanoTime();
+        somethingHappened = false;
         gui.handleGameEvents(batch);
     }
 

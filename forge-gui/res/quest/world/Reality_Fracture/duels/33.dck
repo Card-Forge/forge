@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bushwhacked
+Title=Bushwhacked
+Icon=Bushwhacked.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/MacIsaac_-_UR_Aggro_(Standard,_#901509).dck
+Deck Type=constructed
+
+[Main]
+1 Shore Up
+2 Full Bore
+2 Turn Inside Out
+2 Secret Identity
+3 Opt
+4 Wild Ride
+4 Sleight of Hand
+4 Ancestral Anger
+1 Balmor, Battlemage Captain
+2 Drake Hatcher
+4 Callous Sell-Sword
+4 Elusive Otter
+4 Slickshot Show-Off
+4 Pompous Battlemage
+1 Mountain
+3 Riverpyre Verge
+3 Multiversal Passage
+4 Spirebluff Canal
+4 Starting Town
+4 Steam Vents
+[Sideboard]
+4 Spell Pierce
+2 Dreadmaw's Ire
+3 Octopus Form
+1 Poison Dart Frog
+1 Into the Flood Maw
+1 Soul-Guide Lantern
+1 Shore Up
+1 Full Bore
+1 Secret Identity

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Horus
+Title=Horus
+Icon=Horus.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Jon_Schneck_-_Grixis_Planeswalkers_(Standard,_#897579).dck
+Deck Type=constructed
+
+[Main]
+4 Watery Grave
+4 Gloomlake Verge
+4 Starting Town
+3 Steam Vents
+2 Island
+2 Riverpyre Verge
+2 Blazemire Verge
+1 Undercity Sewers
+1 Theorist's Sanctum
+1 Swamp
+1 Petrified Hamlet
+4 Requiting Hex
+3 Ajani Unrelenting
+3 The Theorist, Jace Beleren
+3 Stock Up
+3 Way of the Pyromancer
+3 Deadly Cover-Up
+3 Countersculpt
+3 Chandra, Chill of Compliance
+2 Shoot the Sheriff
+2 Bitter Triumph
+2 Jace, Reality Sculptor
+2 Jace's Machinations
+1 Day of Black Sun
+1 Nowhere to Run
+[Sideboard]
+1 Day of Black Sun
+2 Strategic Betrayal
+2 Qarsi Revenant
+2 Flashfreeze
+2 Essence Burn
+3 Duress
+1 Disdainful Stroke
+2 Terminal Criticism

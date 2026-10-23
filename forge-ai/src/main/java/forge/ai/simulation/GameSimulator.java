@@ -74,6 +74,34 @@ public class GameSimulator {
         debugLines = null;
     }
 
+    /**
+     * Lightweight constructor for Monte Carlo rollouts. It only copies the game: unlike the full constructor it
+     * neither scores the original game (which can cost a second game copy to simulate the upcoming combat) nor
+     * verifies that the copy scores identically. {@link #getScoreForOrigGame()} is therefore null for such a
+     * simulator, and it is meant to be used with {@link #applySpellAbility(SpellAbility)} and
+     * {@link #getSimulatedGameState()} only.
+     */
+    public GameSimulator(Game origGame, Player origAiPlayer) {
+        this.controller = new SimulationController(new Score(0), 0);
+        copier = new GameCopier(origGame);
+        simGame = copier.makeCopy(null, origAiPlayer);
+
+        aiPlayer = copier.find(origAiPlayer);
+        eval = new GameStateEvaluator();
+        origLines = new ArrayList<>();
+    }
+
+    /** As the lightweight constructor, optionally copying the spells on the stack (for decisions made in response to one). */
+    public GameSimulator(Game origGame, Player origAiPlayer, boolean copyStack) {
+        this.controller = new SimulationController(new Score(0), 0);
+        copier = new GameCopier(origGame).withStack(copyStack);
+        simGame = copier.makeCopy(null, origAiPlayer);
+
+        aiPlayer = copier.find(origAiPlayer);
+        eval = new GameStateEvaluator();
+        origLines = new ArrayList<>();
+    }
+
     private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
         eval.setDebugging(true);
         List<String> simLines = new ArrayList<>();
@@ -153,11 +181,42 @@ public class GameSimulator {
             result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
         }
 
+        if (result == null || !desc.equals(result.getDescription())) {
+            // Only the printed ability was found (or nothing): a play paid with an alternative cost (Force of Will,
+            // Daze, Fireblast, evoke...) is built on demand from the printed one, so build it in the simulated game too.
+            final SpellAbility alt = findAlternativeCostSa(hostCard, desc);
+            if (alt != null) {
+                result = alt;
+            }
+        }
+        if (result == null && Boolean.getBoolean("flatmc.trace")) {
+            System.err.println("[sim] no match for: " + desc + " in " + hostCard.getAllPossibleAbilities(aiPlayer, true) + " / unfiltered "
+                    + hostCard.getAllPossibleAbilities(aiPlayer, false));
+        }
         if (result != null) {
             result = SpellAbilityChoiceCopier.copyCastChoices(sa, result, aiPlayer);
         }
 
         return result;
+    }
+
+    private SpellAbility findAlternativeCostSa(final Card hostCard, final String desc) {
+        try {
+            for (final SpellAbility printed : hostCard.getSpellAbilities()) {
+                if (!printed.isSpell()) {
+                    continue;
+                }
+                printed.setActivatingPlayer(aiPlayer);
+                for (final SpellAbility alt : forge.game.GameActionUtil.getAlternativeCosts(printed, aiPlayer, false)) {
+                    if (desc.equals(alt.getDescription())) {
+                        return alt;
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // not available in the copy: the caller treats it as not found
+        }
+        return null;
     }
 
     private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {
@@ -258,6 +317,79 @@ public class GameSimulator {
         }
 
         return score;
+    }
+
+    /**
+     * Plays the given ability (an ability of the original game) in the simulated game and resolves the stack,
+     * like {@link #simulateSpellAbility(SpellAbility)} does, but without scoring or recursing. The caller scores
+     * the resulting {@link #getSimulatedGameState()} itself, possibly after more plays.
+     *
+     * @return false if the ability could not be found or played in the simulated game
+     */
+    public boolean applySpellAbility(SpellAbility origSa) {
+        return applySpellAbility(origSa, true);
+    }
+
+    /**
+     * @param resolveStack false to leave the play on the stack: used when responding to a spell, where only what the AI
+     *                     put there should resolve before it gets priority again (see {@link #resolveOwnTop})
+     */
+    public boolean applySpellAbility(SpellAbility origSa, boolean resolveStack) {
+        if (origSa.isLandAbility()) {
+            if (!origSa.canPlay()) {
+                return false;
+            }
+            Card hostCard = copier.find(origSa.getHostCard());
+            aiPlayer.playLand(hostCard, origSa);
+        } else {
+            SpellAbility sa = findSaInSimGame(origSa);
+            if (sa == null) {
+                if (Boolean.getBoolean("flatmc.trace")) {
+                    System.err.println("[sim] applySpellAbility: not found " + origSa);
+                }
+                return false;
+            }
+            sa.setActivatingPlayer(aiPlayer);
+
+            simGame.copyLastState();
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa,
+                    playingSa -> SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find));
+            if (!success) {
+                if (Boolean.getBoolean("flatmc.trace")) {
+                    System.err.println("[sim] applySpellAbility: could not pay/play " + sa + " cost=" + sa.getPayCosts());
+                }
+                return false;
+            }
+        }
+        if (resolveStack) {
+            resolveStack(simGame, aiPlayer.getWeakestOpponent());
+        }
+        return true;
+    }
+
+    /**
+     * Resolves the top of the stack for as long as it belongs to {@code owner}, then stops: the rest (what the
+     * opponent put there earlier) stays for the owner to respond to or let resolve.
+     */
+    public static void resolveOwnTop(final Game game, final Player owner, final Player opponent) {
+        PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
+        sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
+        opponent.runWithController(() -> {
+            final Set<Card> allAffectedCards = new HashSet<>();
+            game.getAction().checkStateEffects(false, allAffectedCards);
+            game.getStack().addAllTriggeredAbilitiesToStack();
+            while (!game.getStack().isEmpty() && !game.isGameOver()
+                    && owner.equals(game.getStack().peekAbility().getActivatingPlayer())) {
+                game.getStack().resolveStack();
+                game.getAction().checkStateEffects(false, allAffectedCards);
+                game.getStack().addAllTriggeredAbilitiesToStack();
+            }
+        }, sim);
+    }
+
+    /** The copy of the AI player (given to the constructor) living in the simulated game. */
+    public Player getSimulatedAiPlayer() {
+        return aiPlayer;
     }
 
     public static void resolveStack(final Game game, final Player opponent) {

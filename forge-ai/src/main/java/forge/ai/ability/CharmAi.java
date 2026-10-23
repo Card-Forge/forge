@@ -302,8 +302,12 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     private void handleDependentModes(SpellAbility sa, List<AbilitySub> chosen, AbilitySub sub) {
-        if (sub.hasParam("TargetUnique") && !chosen.isEmpty()) {
-            // support "Each mode must target a different..."
+        // ensure once one mode found a viable X others reuse it to avoid screwing up
+        if (chosen.isEmpty() && sa.costHasManaX()) {
+            sa.setXManaCostPaid(null);
+        }
+        // support "Each mode must target a different..."
+        if (!chosen.isEmpty() && sub.hasParam("TargetUnique")) {
             sa.setSubAbility(null);
             CharmEffect.chainAbilities(sa, chosen);
             sa.appendSubAbility(sub);

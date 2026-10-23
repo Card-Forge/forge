@@ -1,0 +1,5 @@
+Name:Borg Token
+ManaCost:no cost
+Types:Artifact Creature Borg
+PT:1/1
+Oracle:

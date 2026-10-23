@@ -15,7 +15,7 @@ Name:Oko, Shadowmoor Scion
 ManaCost:no cost
 Colors:green
 Types:Legendary Planeswalker Oko
-Loyalty:0
+Loyalty:3
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {U}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ U | Defined$ Self | Mode$ Transform
 A:AB$ Mill | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards. You may put a permanent card from among them into your hand.

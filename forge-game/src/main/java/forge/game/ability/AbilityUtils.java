@@ -1370,7 +1370,7 @@ public class AbilityUtils {
             for (Card lki : sa.getRootAbility().getLastStateBattlefield()) {
                 game.getTriggerHandler().registerActiveLTBTrigger(lki);
             }
-            game.getTriggerHandler().collectTriggerForWaiting();
+            game.getTriggerHandler().collectTriggerForWaiting(true);
         } else {
             game.getTriggerHandler().resetActiveTriggers();
         }
@@ -1661,20 +1661,23 @@ public class AbilityUtils {
                         if (TriggerType.ChangesZone.equals(t.getMode()) && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
                            int x = isUnlinkedFromCastSA(ctb, c) ? 0 : c.getXManaCostPaid();
                            return doXMath(x, expr, c, ctb);
-                        } else if (TriggerType.SpellCast.equals(t.getMode())) {
+                        }
+                        if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like Hydroid Krasis
                             SpellAbility castSA = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
                             if (castSA == null || castSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(castSA.getXManaCostPaid(), expr, c, ctb);
-                        } else if (TriggerType.Cycled.equals(t.getMode())) {
+                        }
+                        if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(cycleSA.getXManaCostPaid(), expr, c, ctb);
-                        } else if (TriggerType.TurnFaceUp.equals(t.getMode())) {
+                        }
+                        if (TriggerType.TurnFaceUp.equals(t.getMode())) {
                             SpellAbility turnupSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (turnupSA == null || turnupSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
@@ -3321,6 +3324,9 @@ public class AbilityUtils {
             }
             return num / secondaryNum;
         } else if (s[0].contains("Mod")) {
+            if (secondaryNum == 0) {
+                return 0;
+            }
             return num % secondaryNum;
         } else if (s[0].contains("Abs")) {
             return Math.abs(num);
@@ -3374,7 +3380,7 @@ public class AbilityUtils {
         // methods for getting the highest/lowest playerXCount from a range of players
         if (l[0].startsWith("Highest")) {
             for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Highest", ""), source, ctb);
+                final int current = playerXProperty(player, TextUtil.fastReplace(l[0], "Highest", ""), source, ctb);
                 if (current > n) {
                     n = current;
                 }
@@ -3386,7 +3392,7 @@ public class AbilityUtils {
         if (l[0].startsWith("Lowest")) {
             n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
             for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Lowest", ""), source, ctb);
+                final int current = playerXProperty(player, TextUtil.fastReplace(l[0], "Lowest", ""), source, ctb);
                 if (current < n) {
                     n = current;
                 }

@@ -3,7 +3,7 @@ Name=Mabel
 [Commander]
 1 Mabel, Heir to Cragflame|blb
 [Main]
-1 short bow|blb
+1 Short Bow|blb
 1 Arcane Signet|blc
 1 Arena of Glory|mh3
 1 Armory Mice|woe
@@ -11,12 +11,13 @@ Name=Mabel
 1 Battlefield Forge|otc
 1 Beza, the Bounding Spring|blb
 1 Boros Charm|otc
-1 Boros Signet|blc
+1 Mabel, Valley Hero|fra
 1 Brambleguard Captain|blb
 1 Brave-Kin Duo|blb
 1 Canyon Jerboa|znr
 1 Chaos Warp|blc
 1 Cheeky House-Mouse|woe
+1 Starforged Sword|blb
 1 Clifftop Retreat|otc
 1 Command Tower|otc
 1 Crumb and Get It|blb
@@ -25,7 +26,6 @@ Name=Mabel
 1 Dewdrop Cure|blb
 1 Emberheart Challenger|blb
 1 Enduring Innocence|dsk
-1 Ensnaring Bridge|a25
 1 Ferocification|otj
 1 Flowerfoot Swordmaster|blb
 1 Generous Gift|blc
@@ -38,7 +38,7 @@ Name=Mabel
 1 Manifold Mouse|blb
 1 Mentor of the Meek|moc
 1 Might of the Meek|blb
-6 Mountain|blb
+7 Mountain|blb
 1 Mouse Trapper|blb
 1 Nettle Guard|blb
 1 Parting Gust|blb
@@ -77,7 +77,6 @@ Name=Mabel
 1 Tempt with Bunnies|blc
 1 Thistledown Players|blb
 1 Three Blind Mice|woe
-1 Three Tree City|blb
 1 Tocasia's Welcome|bro
 1 Valley Flamecaller|blb
 1 Valley Questcaller|blb

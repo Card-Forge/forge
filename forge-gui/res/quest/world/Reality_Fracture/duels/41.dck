@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Gold Finger
+Title=Gold Finger
+Icon=Gold Finger.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/CuteChandra19_-_Jeskai_Control_(Standard,_#894759).dck
+Deck Type=constructed
+
+[Main]
+1 Thrór's Map
+1 Soul-Guide Lantern
+1 Solitary Cell
+1 Candy Trail
+2 Chandra, Chill of Compliance
+2 Dusk Rose Reliquary
+2 Tezzeret, Cruel Captain
+2 Spring-Loaded Sawblades
+4 United Battlefront
+4 Legion Extruder
+4 Cryogen Relic
+4 Pinnacle Starcage
+4 Aang's Iceberg
+4 Weapons Manufacturing
+1 Plains
+1 Cori Mountain Monastery
+1 Mountain
+1 Island
+2 Mystic Monastery
+3 Sacred Foundry
+3 Steam Vents
+4 Starting Town
+4 Floodfarm Verge
+4 Hallowed Fountain
+[Sideboard]
+2 Seam Rip
+1 Scene of the Crime
+4 Torpor Orb
+4 Page, Loose Leaf
+2 Chandra, Chill of Compliance
+2 Tezzeret, Cruel Captain

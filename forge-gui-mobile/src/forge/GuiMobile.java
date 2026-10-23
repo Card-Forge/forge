@@ -10,6 +10,7 @@ import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
+import forge.game.GameView;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -71,6 +72,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public String getUserAgent() {
+        return "Forge/" + getCurrentVersion() + " (gui-mobile)";
+    }
+
+    @Override
     public String getAssetsDir() {
         return assetsDir;
     }
@@ -115,6 +121,13 @@ public class GuiMobile implements IGuiBase {
     @Override
     public boolean isGuiThread() {
         return Thread.currentThread() == glThread;
+    }
+
+    @Override
+    public boolean isMatchInProgress() {
+        final MatchController mc = MatchController.instance;
+        final GameView gv = mc.getGameView();
+        return gv != null && !mc.isReplay() && !gv.isGameOver();
     }
 
     @Override
