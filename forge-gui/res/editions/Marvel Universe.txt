@@ -3,6 +3,7 @@ Code=MAR
 Date=2025-09-26
 Name=Marvel Universe
 Type=Collector_Edition
+Tags=UniversesBeyond
 ScryfallCode=MAR
 
 [cards]

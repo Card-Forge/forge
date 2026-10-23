@@ -3,6 +3,7 @@ Code=PSS5
 Date=2025-06-13
 Name=FIN Standard Showdown
 Type=Promo
+Tags=UniversesBeyond
 ScryfallCode=PSS5
 
 [cards]

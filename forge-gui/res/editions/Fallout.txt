@@ -3,6 +3,7 @@ Code=PIP
 Date=2024-03-08
 Name=Fallout
 Type=Commander
+Tags=UniversesBeyond
 ScryfallCode=PIP
 
 [cards]

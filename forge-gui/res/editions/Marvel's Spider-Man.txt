@@ -3,6 +3,7 @@ Code=SPM
 Date=2025-09-26
 Name=Marvel's Spider-Man
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=SPM
 DoublePick=WhenPodSizeIs4
 RecommendedPodSize=4

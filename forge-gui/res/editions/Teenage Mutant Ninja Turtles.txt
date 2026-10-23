@@ -3,6 +3,7 @@ Code=TMT
 Date=2026-03-06
 Name=Teenage Mutant Ninja Turtles
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=TMT
 DoublePick=WhenPodSizeIs4
 RecommendedPodSize=4

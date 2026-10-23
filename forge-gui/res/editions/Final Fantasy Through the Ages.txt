@@ -3,6 +3,7 @@ Code=FCA
 Date=2025-06-13
 Name=Final Fantasy: Through the Ages
 Type=Collector_Edition
+Tags=UniversesBeyond
 ScryfallCode=FCA
 
 [cards]

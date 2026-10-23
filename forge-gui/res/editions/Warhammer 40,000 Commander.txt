@@ -3,6 +3,7 @@ Code=40K
 Date=2022-10-07
 Name=Warhammer 40,000 Commander
 Type=Commander
+Tags=UniversesBeyond
 ScryfallCode=40K
 
 [cards]

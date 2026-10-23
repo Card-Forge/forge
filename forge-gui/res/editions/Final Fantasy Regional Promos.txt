@@ -3,6 +3,7 @@ Code=RFIN
 Date=2025-06-13
 Name=Final Fantasy Regional Promos
 Type=Promo
+Tags=UniversesBeyond
 ScryfallCode=RFIN
 CardLang=ja
 

@@ -3,6 +3,7 @@ Code=HOB
 Date=2026-08-14
 Name=The Hobbit
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=HOB
 #https://mtgscribe.com/2026/07/21/the-hobbit-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Scene,Uncommon,Uncommon-Special,RareMythic,Land,Wildcard,WildcardFoil

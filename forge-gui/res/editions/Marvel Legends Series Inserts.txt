@@ -3,6 +3,7 @@ Code=LMAR
 Date=2025-09-30
 Name=Marvel Legends Series Inserts
 Type=Promo
+Tags=UniversesBeyond
 ScryfallCode=LMAR
 
 [cards]

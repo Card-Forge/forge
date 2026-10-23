@@ -3,6 +3,7 @@ Code=BOT
 Date=2022-11-18
 Name=Transformers
 Type=Promo
+Tags=UniversesBeyond
 ScryfallCode=BOT
 
 [cards]

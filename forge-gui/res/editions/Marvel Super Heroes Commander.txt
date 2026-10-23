@@ -3,6 +3,7 @@ Code=MSC
 Date=2026-06-26
 Name=Marvel Super Heroes Commander
 Type=Commander
+Tags=UniversesBeyond
 ScryfallCode=MSC
 
 [cards]
