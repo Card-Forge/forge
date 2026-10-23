@@ -7,7 +7,7 @@ ScryfallCode=PURL
 
 [cards]
 1 R Steward of Valeron @Greg Staples
-2 R Counterspell @Pauline Voss
+2 R Counterspell @Pauline Voss ${"tags": "UniversesBeyond"}
 3 R Bloodthrone Vampire @Steve Argyle
 4 R Merfolk Mesmerist @Jana Schirmer & Johannes Voss
 5 R Chandra's Fury @Volkan Baǵa
@@ -18,9 +18,9 @@ ScryfallCode=PURL
 324 R White Orchid Phantom @Richard Kane Ferguson
 445 M Ral, Monsoon Mage @Borja Pindado
 2025-1 M Hylda of the Icy Crown @Yakotakos
-2025-3 R Katara, the Fearless @Yueko
-2025-4 M Behold the Sinister Six! @Jonas De Ro
-2025-5 R Unbreakable Formation @Xavier Ribeiro
-2026-1 R Tom, Bert, and William @Narendra Bintara Adi
-2026-2 M Kirk, Enterprising Captain @Nathaniel Himawan
-2026-3 M Borg Queen, Perfection Manifest @PINDURSKI
+2025-3 R Katara, the Fearless @Yueko ${"tags": "UniversesBeyond"}
+2025-4 M Behold the Sinister Six! @Jonas De Ro ${"tags": "UniversesBeyond"}
+2025-5 R Unbreakable Formation @Xavier Ribeiro ${"tags": "UniversesBeyond"}
+2026-1 R Tom, Bert, and William @Narendra Bintara Adi ${"tags": "UniversesBeyond"}
+2026-2 M Kirk, Enterprising Captain @Nathaniel Himawan ${"tags": "UniversesBeyond"}
+2026-3 M Borg Queen, Perfection Manifest @PINDURSKI ${"tags": "UniversesBeyond"}

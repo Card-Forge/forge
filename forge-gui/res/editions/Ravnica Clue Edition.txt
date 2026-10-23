@@ -6,27 +6,27 @@ Type=Draft
 ScryfallCode=CLU
 
 [cards]
-1 R Apothecary White @Anna Steinbauer
-2 R Senator Peacock @Aurore Folny
-3 R Mastermind Plum @Bryan Sola
-4 R Headliner Scarlett @Heonhwa
-5 R Emissary Green @Heonhwa
-6 R Commander Mustard @Jake Murray
-7 U Wrench @Clint Lockwood
-8 U Candlestick @Clint Lockwood
-9 U Lead Pipe @Clint Lockwood
-10 U Knife @Clint Lockwood
-11 U Rope @Clint Lockwood
-12 U Ballroom @Arthur Yuan
-13 U Billiard Room @Arthur Yuan
-14 U Conservatory @Arthur Yuan
-15 U Dining Room @Arthur Yuan
-16 U Hall @Arthur Yuan
-17 U Kitchen @Arthur Yuan
-18 U Library @Arthur Yuan
-19 U Lounge @Arthur Yuan
-20 U Secret Passage @Arthur Yuan
-21 U Study @Arthur Yuan
+1 R Apothecary White @Anna Steinbauer ${"tags": "UniversesBeyond"}
+2 R Senator Peacock @Aurore Folny ${"tags": "UniversesBeyond"}
+3 R Mastermind Plum @Bryan Sola ${"tags": "UniversesBeyond"}
+4 R Headliner Scarlett @Heonhwa ${"tags": "UniversesBeyond"}
+5 R Emissary Green @Heonhwa ${"tags": "UniversesBeyond"}
+6 R Commander Mustard @Jake Murray ${"tags": "UniversesBeyond"}
+7 U Wrench @Clint Lockwood ${"tags": "UniversesBeyond"}
+8 U Candlestick @Clint Lockwood ${"tags": "UniversesBeyond"}
+9 U Lead Pipe @Clint Lockwood ${"tags": "UniversesBeyond"}
+10 U Knife @Clint Lockwood ${"tags": "UniversesBeyond"}
+11 U Rope @Clint Lockwood ${"tags": "UniversesBeyond"}
+12 U Ballroom @Arthur Yuan ${"tags": "UniversesBeyond"}
+13 U Billiard Room @Arthur Yuan ${"tags": "UniversesBeyond"}
+14 U Conservatory @Arthur Yuan ${"tags": "UniversesBeyond"}
+15 U Dining Room @Arthur Yuan ${"tags": "UniversesBeyond"}
+16 U Hall @Arthur Yuan ${"tags": "UniversesBeyond"}
+17 U Kitchen @Arthur Yuan ${"tags": "UniversesBeyond"}
+18 U Library @Arthur Yuan ${"tags": "UniversesBeyond"}
+19 U Lounge @Arthur Yuan ${"tags": "UniversesBeyond"}
+20 U Secret Passage @Arthur Yuan ${"tags": "UniversesBeyond"}
+21 U Study @Arthur Yuan ${"tags": "UniversesBeyond"}
 22 R Aegis of the Legion @Alexandre Honoré
 23 U Afterlife Insurance @Elizabeth Peiró
 24 R Amzu, Swarm's Hunger @Slawomir Maniak
