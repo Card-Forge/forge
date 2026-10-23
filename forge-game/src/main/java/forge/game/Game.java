@@ -244,12 +244,8 @@ public class Game {
         final CardCollection result = new CardCollection(0);
         final Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Player p : getPlayers()) {
-            final Collection<Card> copy = p.getZone(type).getLKICopy(cachedMap).getCards();
-            final int s = copy.size();
-            if (s > 0) {
-                result.ensureCapacity(result.size() + s);
-                result.addAll(copy);
-            }
+            // the LKI copies of different players' cards are distinct: no duplicate check needed
+            result.addAllUnique(p.getZone(type).getLKICopy(cachedMap).getCards());
         }
         return result;
     }
@@ -644,12 +640,8 @@ public class Game {
         final CardCollection cards = new CardCollection(0);
 
         for (int pi = 0; pi < playerCount; pi++) {
-            final Collection<Card> pc = players.get(pi).getCardsIn(zone, false);
-            final int s = pc.size();
-            if (s > 0) {
-                cards.ensureCapacity(cards.size() + s);
-                cards.addAll(pc);
-            }
+            // a card is in one zone of one player only: no duplicate check needed
+            cards.addAllUnique(players.get(pi).getCardsIn(zone, false));
         }
         return cards;
     }
@@ -657,24 +649,14 @@ public class Game {
     // cached: ZoneType.values() clones the array on every call
     private static final ZoneType[] ALL_ZONE_TYPES = ZoneType.values();
 
-    private int estimateCardsIn(final ZoneType z, final PlayerCollection players, final int playerCount) {
-        if (z == ZoneType.Stack) {
-            return getStackZone().getCards().size();
-        }
-        int size = 0;
-        for (int i = 0; i < playerCount; i++) {
-            size += players.get(i).getCardsIn(z).size();
-        }
-        return size;
-    }
-
+    // z is a single zone type, so the cards of the different players (and the stack) are all distinct
     private void addCardsIn(final CardCollection cards, final ZoneType z, final PlayerCollection players, final int playerCount) {
         if (z == ZoneType.Stack) {
-            cards.addAll(getStackZone().getCards());
+            cards.addAllUnique(getStackZone().getCards());
             return;
         }
         for (int i = 0; i < playerCount; i++) {
-            cards.addAll(players.get(i).getCardsIn(z));
+            cards.addAllUnique(players.get(i).getCardsIn(z));
         }
     }
 
@@ -688,13 +670,8 @@ public class Game {
 
         if (zones instanceof EnumSet<?>) {
             final Set<ZoneType> zoneSet = (Set<ZoneType>) zones;
-            int enumEstimate = 0;
-            for (final ZoneType z : ALL_ZONE_TYPES) {
-                if (zoneSet.contains(z)) {
-                    enumEstimate += estimateCardsIn(z, players, playerCount);
-                }
-            }
-            final CardCollection enumCards = new CardCollection(enumEstimate);
+            // one pass: a separate sizing pass would call getCardsIn(z) twice per player and zone (it can allocate)
+            final CardCollection enumCards = new CardCollection(0);
             for (final ZoneType z : ALL_ZONE_TYPES) {
                 if (zoneSet.contains(z)) {
                     addCardsIn(enumCards, z, players, playerCount);
@@ -775,12 +752,8 @@ public class Game {
         final CardCollection cards = new CardCollection(0);
 
         for (int pi = 0; pi < playerCount; pi++) {
-            final Collection<Card> pc = players.get(pi).getColoredCardsInPlay(color);
-            final int s = pc.size();
-            if (s > 0) {
-                cards.ensureCapacity(cards.size() + s);
-                cards.addAll(pc);
-            }
+            // a permanent is on one player's battlefield only: no duplicate check needed
+            cards.addAllUnique(players.get(pi).getColoredCardsInPlay(color));
         }
         return cards;
     }
@@ -907,33 +880,20 @@ public class Game {
         final int playerCount = players.size();
         final CardCollection all = new CardCollection(0);
 
+        // Same zones and order as forEachCardInGame (PerfPatchFollowUpRulesTest compares them). Every card is in
+        // exactly one of these places, so the duplicate check (and the hash table it builds) is skipped.
         for (int pi = 0; pi < playerCount; pi++) {
-            Collection<Card> c;
-
-            c = players.get(pi).getZone(ZoneType.Graveyard).getCards();
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
-
-            c = players.get(pi).getZone(ZoneType.Hand).getCards();
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
-
-            c = players.get(pi).getZone(ZoneType.Library).getCards();
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
-
-            c = players.get(pi).getZone(ZoneType.Battlefield).getCards(false);
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
-
-            c = players.get(pi).getZone(ZoneType.Exile).getCards();
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
-
-            c = players.get(pi).getCardsIn(ZoneType.PART_OF_COMMAND_ZONE);
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
-
-            c = players.get(pi).getInboundTokens();
-            if (!c.isEmpty()) { all.ensureCapacity(all.size() + c.size()); all.addAll(c); }
+            final Player player = players.get(pi);
+            all.addAllUnique(player.getZone(ZoneType.Graveyard).getCards());
+            all.addAllUnique(player.getZone(ZoneType.Hand).getCards());
+            all.addAllUnique(player.getZone(ZoneType.Library).getCards());
+            all.addAllUnique(player.getZone(ZoneType.Battlefield).getCards(false));
+            all.addAllUnique(player.getZone(ZoneType.Exile).getCards());
+            all.addAllUnique(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE));
+            all.addAllUnique(player.getInboundTokens());
         }
 
-        final Collection<Card> stack = getStackZone().getCards();
-        if (!stack.isEmpty()) { all.ensureCapacity(all.size() + stack.size()); all.addAll(stack); }
+        all.addAllUnique(getStackZone().getCards());
 
         return all;
     }

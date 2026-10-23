@@ -77,6 +77,18 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     /** true = {@link #list} may also be referenced by other FCollections (copy-on-write). */
     private transient boolean sharedList;
 
+    /** Bumped by every structural change (and by listIterator(), which can change the list unnoticed); part of {@link #version()}. */
+    private transient int modCount;
+
+    /**
+     * Number of snapshot iterators that were started on the current {@link #list} and not run to their end yet.
+     * While it is above zero the list must not be modified in place (see {@link #ownList()}).
+     */
+    private transient int liveIterators;
+
+    /** Bumped by every in-place content change that is not structural (set, replace, sort). */
+    private transient int contentVersion;
+
     private FCollection(final ArrayList<T> sharedBacking, final boolean shared) {
         this.list = sharedBacking;
         this.sharedList = shared;
@@ -92,12 +104,34 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         return new FCollection<>(list, true);
     }
 
-    /** Must be called before every structural change of {@link #list}. */
+    /**
+     * A stamp that changes after EVERY change of this collection's content or order (add, remove, set, replace,
+     * sort, clear, ...). Equal stamps of the same instance mean "unchanged", which lets callers validate caches
+     * derived from this collection with a plain int comparison instead of bumping their own counters.
+     * Stamps of different instances are not comparable.
+     */
+    public final int version() {
+        return modCount + contentVersion;
+    }
+
+    /**
+     * Must be called before every change of {@link #list}. Detaches (copies) the list if other collections share it
+     * or if an iterator is still walking it, so that neither ever sees a half-modified list.
+     */
     private void ownList() {
-        if (sharedList) {
+        if (sharedList || liveIterators > 0) {
             list = new ArrayList<>(list);
             sharedList = false;
+            liveIterators = 0;
         }
+    }
+
+    /**
+     * Creates an empty collection with room for {@code initialCapacity} elements.
+     * Use this instead of a public int constructor, which would hijack {@code new FCollection<Integer>(5)}.
+     */
+    public static <T> FCollection<T> withCapacity(final int initialCapacity) {
+        return new FCollection<>(initialCapacity);
     }
 
     @SuppressWarnings("unchecked")
@@ -281,13 +315,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         if (list.isEmpty()) {
             return Collections.emptyIterator();
         }
-        if (sharedList) {
-            return new SharedIterator(list);       // ArrayList's own iterator.remove() would modify the shared list
-        }
-        if (hashTable != null || list.size() > LAZY_HASH_THRESHOLD) {
-            return new HashSyncIterator(list.iterator());   // iterator.remove() must also update the hash table
-        }
-        return list.iterator();
+        return new Itr();
     }
 
     /**
@@ -326,6 +354,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
             }
 
             list.add(e);
+            modCount++;
 
             // Auto-detect threshold: build table if size exceeds safety limit
             if (list.size() > AUTO_HASH_THRESHOLD) {
@@ -340,6 +369,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         }
 
         list.add(e);
+        modCount++;
         return true;
     }
 
@@ -363,6 +393,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
                 return false;
             }
             list.remove(index);
+            modCount++;
             return true;
         }
 
@@ -374,6 +405,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         @SuppressWarnings("unchecked")
         final T stored = (T) hashTable[hashIndex];
         removeHashEntryAt(hashIndex);
+        modCount++;
 
         final int listIndex = list.indexOf(stored);
         if (listIndex >= 0) {
@@ -388,35 +420,40 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         if (filter == null) {
             throw new NullPointerException("filter");
         }
-        if (list.isEmpty()) {
+        final int originalSize = list.size();
+        if (originalSize == 0) {
+            return false;
+        }
+
+        // Evaluate the predicate for every element BEFORE touching the list, like ArrayList.removeIf:
+        // if the filter throws, the collection is left exactly as it was (and nothing is allocated
+        // when nothing matches).
+        long[] removeBits = null;
+        int firstRemoved = -1;
+        for (int i = 0; i < originalSize; i++) {
+            if (filter.test(list.get(i))) {
+                if (removeBits == null) {
+                    removeBits = new long[((originalSize - 1) >> 6) + 1];
+                    firstRemoved = i;
+                }
+                removeBits[i >> 6] |= 1L << (i & 63);
+            }
+        }
+        if (removeBits == null) {
             return false;
         }
         ownList();
 
-        final int originalSize = list.size();
-        int writeIndex = 0;
-        boolean changed = false;
-
-        // Compact in place to avoid Iterator allocations
-        for (int readIndex = 0; readIndex < originalSize; readIndex++) {
-            final T value = list.get(readIndex);
-            if (filter.test(value)) {
-                changed = true;
-            } else {
-                if (writeIndex != readIndex) {
-                    list.set(writeIndex, value);
-                }
-                writeIndex++;
+        int writeIndex = firstRemoved;
+        for (int readIndex = firstRemoved + 1; readIndex < originalSize; readIndex++) {
+            if ((removeBits[readIndex >> 6] & (1L << (readIndex & 63))) == 0) {
+                list.set(writeIndex++, list.get(readIndex));
             }
         }
-
-        if (!changed) {
-            return false;
-        }
-
         for (int i = originalSize - 1; i >= writeIndex; i--) {
             list.remove(i);
         }
+        modCount++;
 
         if (hashTable != null) {
             rebuildHashTable();
@@ -461,6 +498,64 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
      */
     @Override
     public boolean addAll(final Collection<? extends T> c) {
+        final boolean changed = addAllInternal(c);
+        if (changed) {
+            modCount++;
+        }
+        return changed;
+    }
+
+    /**
+     * Appends every non-null element of {@code c} WITHOUT a duplicate check.
+     *
+     * <p>Only for callers that can guarantee that {@code c} has no duplicates and shares no element with this
+     * collection - e.g. merging the cards of different zones or of different players, where a card is in
+     * exactly one place. That skips the per-element membership probe and, for large results, the hash table
+     * build that {@link #addAll(Collection)} does. The table is kept consistent if it already exists;
+     * otherwise it is built lazily on the first contains()/get()/add(). Violating the guarantee silently
+     * breaks the uniqueness invariant, so use {@link #addAll(Collection)} when in doubt.</p>
+     *
+     * @return whether anything was added.
+     */
+    public boolean addAllUnique(final Collection<? extends T> c) {
+        if (c == null || c.isEmpty() || c == this) {
+            return false;
+        }
+        ownList();
+
+        list.ensureCapacity(list.size() + c.size());
+        boolean changed = false;
+        if (c instanceof FCollection<?> || (c instanceof RandomAccess && c instanceof List<?>)) {
+            final List<? extends T> src = (List<? extends T>) c;
+            for (int i = 0, n = src.size(); i < n; i++) {
+                changed |= appendUnchecked(src.get(i));
+            }
+        } else {
+            for (final T element : c) {
+                changed |= appendUnchecked(element);
+            }
+        }
+        if (changed) {
+            modCount++;
+        }
+        return changed;
+    }
+
+    private boolean appendUnchecked(final T element) {
+        if (element == null) {
+            return false;
+        }
+        list.add(element);
+        if (hashTable != null) {
+            if (hashSize + 1 > hashTable.length - (hashTable.length >>> 2)) {
+                resizeHashTable(hashTable.length << 1);
+            }
+            insertHashNoResize(element, hashTable);
+        }
+        return true;
+    }
+
+    private boolean addAllInternal(final Collection<? extends T> c) {
         if (c == null || c.isEmpty()) {
             return false;
         }
@@ -590,6 +685,9 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
                 changed = true;
             }
         }
+        if (changed) {
+            modCount++;
+        }
         return changed;
     }
 
@@ -669,6 +767,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         for (int i = originalSize - 1; i >= writeIndex; i--) {
             list.remove(i);
         }
+        modCount++;
 
         if (hashTable != null) {
             rebuildHashTable();
@@ -730,6 +829,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         for (int i = originalSize - 1; i >= writeIndex; i--) {
             list.remove(i);
         }
+        modCount++;
 
         if (hashTable != null) {
             rebuildHashTable();
@@ -744,12 +844,14 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
             return;
         }
 
-        if (sharedList) {
+        if (sharedList || liveIterators > 0) {
             list = new ArrayList<>();      // detach instead of copying what is about to be thrown away
             sharedList = false;
+            liveIterators = 0;
         } else {
             list.clear();
         }
+        modCount++;
         clearHashTable();
     }
 
@@ -767,9 +869,16 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
      * elements in this collection is invariant.
      */
     @Override
-    public T set(final int index, final T element) { //assume this isn't called except when changing list order, so don't worry about updating set
+    public T set(final int index, final T element) {
         ownList();
-        return list.set(index, element);
+        final T old = list.set(index, element);
+        contentVersion++;
+        if (hashTable != null && old != element) {
+            // set() may introduce or drop a member (and permutations pass through states with a duplicate),
+            // so do not try to patch the table: drop it, it is rebuilt lazily by the next lookup/add
+            clearHashTable();
+        }
+        return old;
     }
 
     /**
@@ -784,6 +893,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         ownList();
 
         final T old = list.set(index, element);
+        contentVersion++;
         if (old != element && hashTable != null) {
             removeFromHashTable(old);
             addToHashTable(element);
@@ -818,6 +928,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
 
         if (!exists) {
             list.add(index, element);
+            modCount++;
             if (hashTable == null && list.size() > AUTO_HASH_THRESHOLD) {
                 buildHashTable(list.size());
             } else if (hashTable != null) {
@@ -838,6 +949,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
 
         final T old = list.remove(oldIndex);
         list.add(targetIndex, element);
+        modCount++;
         if (hashTable != null && old != element) {
             removeFromHashTable(old);
             addToHashTable(element);
@@ -852,6 +964,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     public T remove(final int index) {
         ownList();
         final T removedItem = list.remove(index);
+        modCount++;
         if (removedItem != null && hashTable != null) {
             removeFromHashTable(removedItem);
         }
@@ -881,6 +994,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     public ListIterator<T> listIterator() {
         ownList();                                  // rarely used: detach so set/add/remove are safe...
         clearHashTable();                           // ...and drop the table (rebuilt lazily) since the iterator bypasses it
+        modCount++;                                 // ...and assume it will change the list (invalidates derived caches)
         return list.listIterator();
     }
 
@@ -891,6 +1005,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     public ListIterator<T> listIterator(final int index) {
         ownList();
         clearHashTable();
+        modCount++;
         return list.listIterator(index);
     }
 
@@ -913,6 +1028,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     @Override
     public void sort(final Comparator<? super T> comparator) {
         ownList();
+        contentVersion++;
         try {
             list.sort(comparator);
         } catch (final Exception e) {
@@ -1116,73 +1232,65 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
     // Set facade
     // -------------------------------------------------------------------------
 
-    /** Wraps ArrayList's fail-fast iterator and keeps the membership table in sync on remove(). */
-    private final class HashSyncIterator implements Iterator<T> {
-        private final Iterator<T> delegate;
-        private T lastReturned;
-
-        HashSyncIterator(final Iterator<T> delegate) {
-            this.delegate = delegate;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return delegate.hasNext();
-        }
-
-        @Override
-        public T next() {
-            lastReturned = delegate.next();
-            return lastReturned;
-        }
-
-        @Override
-        public void remove() {
-            delegate.remove();
-            if (lastReturned != null && hashTable != null) {
-                removeFromHashTable(lastReturned);
-            }
-            lastReturned = null;
-        }
-    }
-
-    /** Iterator used while the backing list is shared: walks the shared snapshot, detaches on remove(). */
-    private final class SharedIterator implements Iterator<T> {
-        private final ArrayList<T> snapshot;
+    /**
+     * Snapshot iterator. It walks the list exactly as it was when the iterator was created and never throws a
+     * ConcurrentModificationException: if the collection is changed while an iterator is unfinished, the collection
+     * detaches (copies) its list first ({@link #ownList()}), so the iterator keeps walking the unchanged old one.
+     * Like a CopyOnWriteArrayList iterator it therefore does not see later additions and still returns elements
+     * that were removed meanwhile.
+     *
+     * <p>Cost: one int increment when it is created and one decrement when it runs to its end. A copy is only made
+     * if the collection is changed while an iterator is unfinished (this includes iterators abandoned by an early
+     * break/return, which cost one copy at the next change and are then forgotten). remove() removes the last
+     * returned element from the live collection.</p>
+     */
+    private final class Itr implements Iterator<T> {
+        private final ArrayList<T> snapshot = list;
+        private final int size = snapshot.size();       // constant: the collection never modifies a list that has live iterators
         private int cursor;
-        private int lastReturned = -1;
-        private int removed;
+        private T lastReturned;
+        private boolean released;
 
-        SharedIterator(final ArrayList<T> snapshot) {
-            this.snapshot = snapshot;
+        Itr() {
+            liveIterators++;
         }
 
         @Override
         public boolean hasNext() {
-            return cursor < snapshot.size();
+            if (cursor < size) {
+                return true;
+            }
+            release();
+            return false;
         }
 
         @Override
         public T next() {
-            if (cursor >= snapshot.size()) {
+            if (cursor >= size) {
+                release();
                 throw new NoSuchElementException();
             }
-            lastReturned = cursor;
-            return snapshot.get(cursor++);
+            return lastReturned = snapshot.get(cursor++);
         }
 
         @Override
         public void remove() {
-            if (lastReturned < 0) {
+            if (lastReturned == null) {
                 throw new IllegalStateException();
             }
-            ownList();
-            final T gone = list.remove(lastReturned - removed);
-            removed++;
-            if (gone != null && hashTable != null) {
-                removeFromHashTable(gone);
+            final T gone = lastReturned;
+            lastReturned = null;
+            FCollection.this.remove((Object) gone);     // detaches the list first because this iterator is live
+        }
+
+        private void release() {
+            if (!released) {
+                released = true;
+                // only if the collection still uses the list this iterator registered with: a detach has reset the count
+                if (list == snapshot && liveIterators > 0) {
+                    liveIterators--;
+                }
             }
-            lastReturned = -1;
         }
     }
 
@@ -1212,6 +1320,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
             ownList();
 
             final T removed = list.remove(lastReturned);
+            modCount++;
             if (removed != null && hashTable != null) {
                 removeFromHashTable(removed);
             }
@@ -1285,6 +1394,8 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         @Override public final boolean addAll(final int index, final Collection<? extends T> c) { return false; }
         @Override public final boolean addAll(final Iterable<? extends T> i) { return false; }
         @Override public final boolean addAll(final T[] c) { return false; }
+        @Override public final boolean addAllUnique(final Collection<? extends T> c) { return false; }
+        @Override public final void ensureCapacity(final int minCapacity) { }
         @Override public final void clear() { }
         @Override public final boolean contains(final Object o) { return false; }
         @Override public final boolean containsAll(final Collection<?> c) { return c != null && c.isEmpty(); }
@@ -1346,7 +1457,8 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
         this.list = new ArrayList<>();
     }
 
-    public FCollection(final int initialCapacity) {
+    /** Not public on purpose: a public int overload would hijack {@code new FCollection<Integer>(5)}. Use {@link #withCapacity(int)}. */
+    protected FCollection(final int initialCapacity) {
         this.list = new ArrayList<>(initialCapacity);
     }
 
@@ -1388,6 +1500,7 @@ public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, S
      * without further resizing.
      */
     public void ensureCapacity(final int minCapacity) {
+        ownList();                      // growing a list that other copy-on-write copies still share would disturb them
         list.ensureCapacity(minCapacity);
     }
 }

@@ -32,12 +32,8 @@ public class PlayerCollection extends FCollection<Player> {
     public final CardCollection getCardsIn(ZoneType zone) {
         final CardCollection result = new CardCollection(0);
         for (Player p : this) {
-            final Collection<Card> cards = p.getCardsIn(zone);
-            final int s = cards.size();
-            if (s > 0) {
-                result.ensureCapacity(result.size() + s);
-                result.addAll(cards);
-            }
+            // one zone type: the cards of different players are distinct, no duplicate check needed
+            result.addAllUnique(p.getCardsIn(zone));
         }
         return result;
     }
@@ -58,12 +54,7 @@ public class PlayerCollection extends FCollection<Player> {
     public final CardCollection getCreaturesInPlay() {
         final CardCollection result = new CardCollection(0);
         for (Player p : this) {
-            final Collection<Card> creatures = p.getCreaturesInPlay();
-            final int s = creatures.size();
-            if (s > 0) {
-                result.ensureCapacity(result.size() + s);
-                result.addAll(creatures);
-            }
+            result.addAllUnique(p.getCreaturesInPlay());
         }
         return result;
     }

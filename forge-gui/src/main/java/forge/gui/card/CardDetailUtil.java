@@ -270,7 +270,6 @@ public class CardDetailUtil {
         return showCurColors ? curColors : "";
     }
 
-    private static final StringBuilder area = new StringBuilder(1024);
     public static String composeCardText(final CardStateView state, final GameView gameView, final boolean canShow) {
         if (!canShow || state == null) {
             return "";
@@ -281,7 +280,8 @@ public class CardDetailUtil {
             return "";
         }
 
-        area.setLength(0);
+        // a local builder: a shared static one is corrupted when two threads (UI, netplay, AI) compose text at once
+        final StringBuilder area = new StringBuilder(512);
 
         // Token / Emblem / Effect Types
         if (card.isToken()) {
@@ -525,10 +525,10 @@ public class CardDetailUtil {
 
         // a card is attached to something
         if (card.getAttachedTo() != null) {
-            area.append("\nAttached to ").append(card.getAttachedTo()).append("");
+            area.append("\n*Attached to ").append(card.getAttachedTo()).append("*");
         }
         if (card.getEnchantedPlayer() != null) {
-            area.append("\nEnchanting ").append(card.getEnchantedPlayer()).append("");
+            area.append("\n*Enchanting ").append(card.getEnchantedPlayer()).append("*");
         }
 
         // controlling

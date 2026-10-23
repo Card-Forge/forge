@@ -676,8 +676,11 @@ public class ImageCache {
         try {
             TextureData data = t.getTextureData();
             if (!data.isPrepared()) data.prepare();
+            // Sample the same spot as before the optimization: just inside the cropped card border. The raw corner
+            // (1,1) is transparent or scan-white on images with rounded corners and misclassifies the border color.
+            final com.badlogic.gdx.graphics.g2d.TextureRegion region = croppedBorderImage(t);
             Pixmap pixmap = data.consumePixmap();
-            Color color = new Color(pixmap.getPixel(1, 1)); // sample once
+            Color color = new Color(pixmap.getPixel(region.getRegionX() + 1, region.getRegionY() + 1));
             pixmap.dispose();
             return color.toString();
         } catch (Exception e) {

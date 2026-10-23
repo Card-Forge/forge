@@ -745,15 +745,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             if (getCard().hasState(CardStateName.RightSplit))
                 right = getCard().getState(CardStateName.RightSplit);
         }
-        final int leftVersion = left == null ? -1 : left.staticAbilitiesVersion;
-        final int rightVersion = right == null ? -1 : right.staticAbilitiesVersion;
+        final int leftVersion = left == null ? -1 : left.staticAbilitiesStamp();
+        final int rightVersion = right == null ? -1 : right.staticAbilitiesStamp();
+        final int ownVersion = staticAbilitiesStamp();
         final boolean removeIntrinsic = card.hasRemoveIntrinsic();
         final KeywordCollection keywords = cachedKeywords;
 
         final StaticAbilitiesCache cache = staticCache;
         if (cache != null && cache.traits == traits && cache.traitsByText == traitsByText
                 && cache.keywords == keywords && cache.removeIntrinsic == removeIntrinsic
-                && cache.ownVersion == staticAbilitiesVersion
+                && cache.ownVersion == ownVersion
                 && cache.leftVersion == leftVersion && cache.rightVersion == rightVersion) {
             return cache.value.shareCopy();
         }
@@ -761,8 +762,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         // the stamps above were taken before building, so a change during the build is caught on the next read
         final FCollection<StaticAbility> result = buildStaticAbilities();
         staticCache = new StaticAbilitiesCache(result, traits, traitsByText, keywords, removeIntrinsic,
-                staticAbilitiesVersion, leftVersion, rightVersion);
+                ownVersion, leftVersion, rightVersion);
         return result.shareCopy();
+    }
+
+    /**
+     * Cache stamp of the static ability list: the manual counter plus the list's own change stamp, so the cache
+     * also notices a mutation that bypasses addStaticAbility/removeStaticAbility/copyFrom (both only ever grow).
+     */
+    private int staticAbilitiesStamp() {
+        return staticAbilitiesVersion + staticAbilities.version();
     }
 
     private FCollection<StaticAbility> buildStaticAbilities() {
@@ -833,15 +842,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             if (getCard().hasState(CardStateName.RightSplit))
                 right = getCard().getState(CardStateName.RightSplit);
         }
-        final int leftVersion = left == null ? -1 : left.replacementEffectsVersion;
-        final int rightVersion = right == null ? -1 : right.replacementEffectsVersion;
+        final int leftVersion = left == null ? -1 : left.replacementEffectsStamp();
+        final int rightVersion = right == null ? -1 : right.replacementEffectsStamp();
+        final int ownVersion = replacementEffectsStamp();
         final int flags = replacementFlags(rulesHost);
         final KeywordCollection keywords = cachedKeywords;
 
         final ReplacementEffectsCache cache = rulesHost ? replacementCacheRules : replacementCacheNoRules;
         if (cache != null && cache.traits == traits && cache.traitsByText == traitsByText
                 && cache.keywords == keywords && cache.flags == flags
-                && cache.ownVersion == replacementEffectsVersion
+                && cache.ownVersion == ownVersion
                 && cache.leftVersion == leftVersion && cache.rightVersion == rightVersion) {
             return cache.value.shareCopy();
         }
@@ -849,13 +859,18 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         // the stamps above were taken before building, so a change during the build is caught on the next read
         final FCollection<ReplacementEffect> result = buildReplacementEffects(rulesHost);
         final ReplacementEffectsCache fresh = new ReplacementEffectsCache(result, traits, traitsByText, keywords,
-                flags, replacementEffectsVersion, leftVersion, rightVersion);
+                flags, ownVersion, leftVersion, rightVersion);
         if (rulesHost) {
             replacementCacheRules = fresh;
         } else {
             replacementCacheNoRules = fresh;
         }
         return result.shareCopy();
+    }
+
+    /** Same as staticAbilitiesStamp(), for the replacement effect list. */
+    private int replacementEffectsStamp() {
+        return replacementEffectsVersion + replacementEffects.version();
     }
 
     /** Everything besides the tables, lists and keywords that decides what buildReplacementEffects returns. */
