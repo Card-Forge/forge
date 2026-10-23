@@ -123,6 +123,7 @@ public class ComputerUtil {
         // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
+        final boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack(sa);
 
         final CostPayment pay = new CostPayment(cost, sa);
@@ -135,6 +136,9 @@ public class ComputerUtil {
         }
         // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        if (!refreeze) {
+            game.getStack().unfreezeStack();
+        }
         sa.setSkip(true);
         if (host != null && hz != null && hz.is(ZoneType.Stack)) {
             Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
