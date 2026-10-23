@@ -1594,7 +1594,7 @@ public class AbilityUtils {
         if (l[0].startsWith("SVar$")) {
             String n = l[0].substring(5);
             String v = ctb == null ? c.getSVar(n) : ctb.getSVar(n);
-            return doXMath(xCount(c, v, ctb), expr, c, ctb);
+            return doXMath(StringUtils.isNumeric(v) ? Integer.parseInt(v) : xCount(c, v, ctb), expr, c, ctb);
         }
 
         final String[] sq;
