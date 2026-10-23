@@ -748,6 +748,27 @@ public class CardUtil {
         return ret;
     }
 
+    /** Swaps each excluded print for an allowed print in the plane's editions, and drops the cards without one. */
+    public static List<PaperCard> withAllowedPrints(List<PaperCard> cards) {
+        if (!Config.instance().appliesUserExclusions())
+            return cards;
+        CardDb cardDb = FModel.getMagicDb().getCommonCards();
+        Predicate<PaperCard> usable = print -> !cardDb.isPrintExcluded(print) && Config.instance().isPlaneEdition(print.getEdition());
+        List<PaperCard> allowed = new ArrayList<>();
+        for (PaperCard card : cards) {
+            if (!cardDb.isPrintExcluded(card)) {
+                allowed.add(card);
+                continue;
+            }
+            PaperCard print = cardDb.getCard(card.getName());
+            if (print == null || !usable.test(print))
+                print = cardDb.getAllCards(card.getName()).stream().filter(usable).findFirst().orElse(null);
+            if (print != null)
+                allowed.add(card.isFoil() ? print.getFoiled() : print);
+        }
+        return allowed;
+    }
+
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme,
             boolean useGeneticAI) {
         return getDeck(path, forAI, isFantasyMode, colors, isTheme, useGeneticAI, null, true);
@@ -866,6 +887,10 @@ public class CardUtil {
             if (Config.instance().getSettingData().excludeAlchemyVariants) {
                 combined_predicate = editionFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
             }
+            if (Config.instance().appliesUserExclusions()) {
+                CardDb cardDb = FModel.getMagicDb().getCommonCards();
+                combined_predicate = combined_predicate.and(card -> !cardDb.isPrintExcluded(card));
+            }
             validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName, combined_predicate);
         } else {
             validCards = List.of(FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt(cardName));
@@ -896,6 +921,13 @@ public class CardUtil {
 
                 validCards = new ArrayList<>(filteredCardList);
             }
+        }
+        if (validCards.isEmpty() && Config.instance().appliesUserExclusions()) {
+            // a card named by the plane is still given when only the player's exclusions rule it out
+            Predicate<PaperCard> planeFilter = card -> Config.instance().isPlaneEdition(card.getEdition());
+            if (Config.instance().getSettingData().excludeAlchemyVariants)
+                planeFilter = planeFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
+            validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName, planeFilter);
         }
         if (validCards.isEmpty()) {
             return getReplacement(cardName, "Wastes");
@@ -947,12 +979,21 @@ public class CardUtil {
                 if (allowed.contains(card.getEdition())) {
                     filtered.add(card);
                 } else {
+                    // an excluded print is used only when the card has no other print in the plane's editions
+                    boolean skipExcluded = Config.instance().appliesUserExclusions();
+                    PaperCard replacement = null;
                     for (PaperCard p : FModel.getMagicDb().getCommonCards().getAllCards(card)) {
-                        if (allowed.contains(p.getEdition())) {
-                            filtered.add(p);
+                        if (!allowed.contains(p.getEdition()))
+                            continue;
+                        if (replacement == null)
+                            replacement = p;
+                        if (!skipExcluded || !FModel.getMagicDb().getCommonCards().isPrintExcluded(p)) {
+                            replacement = p;
                             break;
                         }
                     }
+                    if (replacement != null)
+                        filtered.add(replacement);
                 }
             }
             return filtered;
