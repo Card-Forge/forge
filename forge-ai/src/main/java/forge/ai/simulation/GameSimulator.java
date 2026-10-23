@@ -181,11 +181,42 @@ public class GameSimulator {
             result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
         }
 
+        if (result == null || !desc.equals(result.getDescription())) {
+            // Only the printed ability was found (or nothing): a play paid with an alternative cost (Force of Will,
+            // Daze, Fireblast, evoke...) is built on demand from the printed one, so build it in the simulated game too.
+            final SpellAbility alt = findAlternativeCostSa(hostCard, desc);
+            if (alt != null) {
+                result = alt;
+            }
+        }
+        if (result == null && Boolean.getBoolean("flatmc.trace")) {
+            System.err.println("[sim] no match for: " + desc + " in " + hostCard.getAllPossibleAbilities(aiPlayer, true) + " / unfiltered "
+                    + hostCard.getAllPossibleAbilities(aiPlayer, false));
+        }
         if (result != null) {
             result = SpellAbilityChoiceCopier.copyCastChoices(sa, result, aiPlayer);
         }
 
         return result;
+    }
+
+    private SpellAbility findAlternativeCostSa(final Card hostCard, final String desc) {
+        try {
+            for (final SpellAbility printed : hostCard.getSpellAbilities()) {
+                if (!printed.isSpell()) {
+                    continue;
+                }
+                printed.setActivatingPlayer(aiPlayer);
+                for (final SpellAbility alt : forge.game.GameActionUtil.getAlternativeCosts(printed, aiPlayer, false)) {
+                    if (desc.equals(alt.getDescription())) {
+                        return alt;
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // not available in the copy: the caller treats it as not found
+        }
+        return null;
     }
 
     private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {
@@ -313,6 +344,9 @@ public class GameSimulator {
         } else {
             SpellAbility sa = findSaInSimGame(origSa);
             if (sa == null) {
+                if (Boolean.getBoolean("flatmc.trace")) {
+                    System.err.println("[sim] applySpellAbility: not found " + origSa);
+                }
                 return false;
             }
             sa.setActivatingPlayer(aiPlayer);
@@ -321,6 +355,9 @@ public class GameSimulator {
             boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa,
                     playingSa -> SpellAbilityChoiceCopier.copyTargets(origSa, playingSa, copier::find));
             if (!success) {
+                if (Boolean.getBoolean("flatmc.trace")) {
+                    System.err.println("[sim] applySpellAbility: could not pay/play " + sa + " cost=" + sa.getPayCosts());
+                }
                 return false;
             }
         }

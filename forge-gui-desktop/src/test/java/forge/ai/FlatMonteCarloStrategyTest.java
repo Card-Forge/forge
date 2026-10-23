@@ -52,6 +52,13 @@ public class FlatMonteCarloStrategyTest extends AITest {
         return chosen == null || chosen.isEmpty() ? null : chosen.get(0).getHostCard().getName();
     }
 
+    /** Like {@link #nextPlay}: the host card and how it is paid for, or null when the AI passes. */
+    private static String nextPlayWithCost(final Player ai) {
+        final List<SpellAbility> chosen = ((PlayerControllerAi) ai.getController()).chooseSpellAbilityToPlay();
+        return chosen == null || chosen.isEmpty() ? null
+                : chosen.get(0).getHostCard().getName() + " [" + chosen.get(0).getPayCosts().getTotalMana() + " | " + chosen.get(0).getPayCosts() + "]";
+    }
+
     @Test(timeOut = LONG_TIMEOUT_MS)
     public void cantripIsCastWithSpareMana() {
         final Game game = newGame(true);
@@ -71,12 +78,21 @@ public class FlatMonteCarloStrategyTest extends AITest {
 
     /** Makes the opponent (the other player) cast the card for real, leaving the spell on the stack. */
     private static void opponentCasts(final Game game, final Player opp, final String cardName) {
+        opponentCasts(game, opp, cardName, null);
+    }
+
+    /** As above, aimed at the given target when the spell needs one. */
+    private static void opponentCasts(final Game game, final Player opp, final String cardName, final forge.game.GameEntity target) {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, opp);
         game.getAction().checkStateEffects(true);
         final PlayerControllerAi pc = (PlayerControllerAi) opp.getController();
         for (final SpellAbility sa : forge.ai.ComputerUtilAbility.getSpellAbilities(forge.ai.ComputerUtilAbility.getAvailableCards(game, opp), opp)) {
             if (sa.getHostCard().getName().equals(cardName) && sa.isSpell()) {
                 sa.setActivatingPlayer(opp);
+                if (target != null && sa.usesTargeting()) {
+                    sa.resetTargets();
+                    sa.getTargets().add(target);
+                }
                 pc.playChosenSpellAbility(sa);
                 return;
             }
@@ -314,6 +330,100 @@ public class FlatMonteCarloStrategyTest extends AITest {
         final String play = nextPlay(ai);
         System.out.println("bouncesABlockerAtTheEndStep -> " + play);
         AssertJUnit.assertEquals("bouncing their only flyer clears the way for the attack next turn", "Unsummon", play);
+    }
+
+    // ------------------------------------------------------------------ alternative costs
+
+    /** The opponent casts the spell into the AI's open hand; the AI has the given lands, hand and life. */
+    private String respondsTo(final boolean monteCarlo, final String oppSpell, final int oppLands, final String oppLandName,
+                              final int life, final int islands, final String... hand) {
+        final Game game = newGame(monteCarlo);
+        game.AI_FLAT_MONTE_CARLO_MAX = monteCarlo; // the reactive search must not be starved by a busy machine
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        ai.setLife(life, null);
+        if (islands > 0) {
+            addCards("Island", islands, ai);
+        }
+        for (final String h : hand) {
+            addCardToZone(h, ai, ZoneType.Hand);
+        }
+        fill(ai, "Island");
+        addCards(oppLandName, oppLands, opp);
+        addCardToZone(oppSpell, opp, ZoneType.Hand);
+        fill(opp, oppLandName);
+        opponentCasts(game, opp, oppSpell, ai);
+        AssertJUnit.assertFalse("the spell must be on the stack", game.getStack().isEmpty());
+        final String play = nextPlayWithCost(ai);
+        System.out.println("respondsTo(" + oppSpell + ", life " + life + ", " + islands + " Islands, " + java.util.Arrays.toString(hand) + ") -> " + play);
+        return play;
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void forceOfWillStopsLethalBurnForItsAlternativeCost() {
+        // No mana at all, at 3 life: Lightning Bolt kills. The heuristics only counter spells worth three mana or more,
+        // and the printed cost cannot be paid: only rollouts of the alternative cost (a life and a blue card) see the way out.
+        final String play = respondsTo(true, "Lightning Bolt", 3, "Mountain", 3, 0, "Force of Will", "Brainstorm");
+        AssertJUnit.assertNotNull("the AI must not let lethal burn resolve", play);
+        AssertJUnit.assertTrue(play, play.startsWith("Force of Will [{0}"));
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void keepsForceOfWillAndTheCardAgainstHarmlessBurn() {
+        AssertJUnit.assertNull("two cards for a Bolt at 20 life is a bad trade",
+                respondsTo(true, "Lightning Bolt", 3, "Mountain", 20, 0, "Force of Will", "Brainstorm"));
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void forceOfWillCountersABigSpellWithoutMana() {
+        final String play = respondsTo(true, "Serra Angel", 5, "Plains", 20, 0, "Force of Will", "Brainstorm");
+        AssertJUnit.assertNotNull(play);
+        AssertJUnit.assertTrue(play, play.startsWith("Force of Will"));
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void paysManaForForceOfWillWhenItHasTheMana() {
+        final String play = respondsTo(true, "Serra Angel", 5, "Plains", 20, 5, "Force of Will", "Brainstorm");
+        AssertJUnit.assertNotNull(play);
+        AssertJUnit.assertTrue("with five Islands there is no reason to also lose a card: " + play, play.startsWith("Force of Will [{3}{U}{U}"));
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void dazeCountersLethalBurnWhenTheOpponentCannotPay() {
+        // The opponent tapped its only Mountain for the Bolt: it cannot pay for Daze.
+        final String play = respondsTo(true, "Lightning Bolt", 1, "Mountain", 3, 1, "Daze");
+        AssertJUnit.assertNotNull(play);
+        AssertJUnit.assertTrue(play, play.startsWith("Daze"));
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void fireblastFinishesTheOpponentOffForItsAlternativeCost() {
+        final String play = probeMain(true, 4, new String[] { "Mountain", "Mountain" }, new String[] { "Fireblast" });
+        AssertJUnit.assertNotNull(play);
+        AssertJUnit.assertTrue(play, play.startsWith("Fireblast"));
+    }
+
+    @Test(timeOut = LONG_TIMEOUT_MS)
+    public void keepsFireblastAndTheLandsWhenItIsNotLethal() {
+        AssertJUnit.assertNull("sacrificing two lands for four damage at 20 life is a bad trade",
+                probeMain(true, 20, new String[] { "Mountain", "Mountain" }, new String[] { "Fireblast" }));
+    }
+
+    private String probeMain(final boolean monteCarlo, final int oppLife, final String[] lands, final String[] hand) {
+        final Game game = newGame(monteCarlo);
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        opp.setLife(oppLife, null);
+        for (final String l : lands) {
+            addCard(l, ai).setSickness(false);
+        }
+        for (final String h : hand) {
+            addCardToZone(h, ai, ZoneType.Hand);
+        }
+        fill(ai, "Island");
+        fill(opp, "Plains");
+        setPhase(game, PhaseType.MAIN2, ai);
+        return nextPlayWithCost(ai);
     }
 
     // ------------------------------------------------------------------ lethal

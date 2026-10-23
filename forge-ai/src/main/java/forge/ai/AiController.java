@@ -1838,8 +1838,23 @@ public class AiController {
                 discover ? cfg.maxCandidates * 2 : cfg.maxCandidates, discover ? extras : null));
         // counterspells the heuristics did not want to use are still worth a look against a big spell
         if (top != null && discover && mode == FlatMonteCarloPicker.Mode.RESPOND) {
-            for (final SpellAbility counter : getPlayableCounters(cards)) {
-                if (counter == heuristicCounter || approved.contains(counter)) {
+            // Counterspells with an alternative cost (Force of Will, Daze, Force of Negation...) are separate plays that
+            // only exist once the alternative costs are expanded: the printed ones are not castable without the mana.
+            final List<SpellAbility> counterBases = new ArrayList<>(getPlayableCounters(cards));
+            for (final SpellAbility sa : saList) {
+                if (sa.getApi() == ApiType.Counter && sa.isSpell() && !counterBases.contains(sa)) {
+                    counterBases.add(sa);
+                }
+            }
+            final List<SpellAbility> taken = new ArrayList<>(approved);
+            if (heuristicCounter != null) {
+                taken.add(heuristicCounter);
+            }
+            taken.addAll(extras);
+            for (final SpellAbility counter : ComputerUtilAbility.getOriginalAndAltCostAbilities(counterBases, player)) {
+                if (taken.stream().anyMatch(t -> t == counter || (t.getHostCard() == counter.getHostCard()
+                        && t.getPayCosts().toString().equals(counter.getPayCosts().toString())
+                        && String.valueOf(t.getDescription()).equals(String.valueOf(counter.getDescription()))))) {
                     continue;
                 }
                 counter.setActivatingPlayer(player);
