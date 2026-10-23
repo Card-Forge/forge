@@ -1,0 +1,8 @@
+Name:Obsidian Order Operative
+ManaCost:3 B
+Types:Creature Cardassian Officer Spy
+PT:2/5
+T:Mode$ FacesDilemma | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you face a dilemma, draw a card. (You face a dilemma as you choose one or more modes for a spell or ability.)
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Whenever you face a dilemma, each opponent loses 1 life and you gain 1 life. (You face a dilemma as you choose one or more modes for a spell or ability.)
