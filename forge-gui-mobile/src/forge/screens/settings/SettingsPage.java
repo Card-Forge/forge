@@ -665,6 +665,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART));
                 }
             }, 4);
+        lstSettings.addItem(new Setting(FPref.UI_EXCLUDED_SETS,
+            Forge.getLocalizer().getMessage("lblExcludedSets"),
+            Forge.getLocalizer().getMessage("nlExcludedSets")) {
+                private String count = String.valueOf(FModel.getExcludedEditionCodes().size());
+
+                @Override
+                public void select() {
+                    Forge.openScreen(new ExcludedSetsScreen(() -> count = String.valueOf(FModel.getExcludedEditionCodes().size())));
+                }
+                @Override
+                public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color,
+                                          float x, float y, float w, float h) {
+                    g.drawText(count, font, color, x, y, w, h, false, Align.right, false);
+                }
+            }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
             Forge.getLocalizer().getMessage("cbDisplayFoil"),
             Forge.getLocalizer().getMessage("nlDisplayFoil")), 4);

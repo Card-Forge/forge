@@ -8,4 +8,4 @@ ScryfallCode=PLG20
 
 [cards]
 1 R Reliquary Tower @Daniel Ljunggren
-2 R Hangarback Walker @Nicholas Gregory ${"flavorName": "Mechagodzilla, Battle Fortress"}
+2 R Hangarback Walker @Nicholas Gregory ${"flavorName": "Mechagodzilla, Battle Fortress", "tags": "UniversesBeyond"}

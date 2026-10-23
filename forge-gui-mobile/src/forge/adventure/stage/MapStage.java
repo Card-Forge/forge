@@ -745,6 +745,15 @@ public class MapStage extends GameStage {
                         if (shops.size == 0) continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
+                        // picking again only on a miss keeps every other town's shops when the exclusions change
+                        if (data.sellsOnlyExcludedCards()) {
+                            Array<ShopData> allowed = new Array<>();
+                            for (ShopData candidate : new Array.ArrayIterator<>(shops))
+                                if (!candidate.sellsOnlyExcludedCards())
+                                    allowed.add(candidate);
+                            if (allowed.size == 0) continue;
+                            data = allowed.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allowed.size));
+                        }
                         shopsAlreadyPresent.add(data.name);
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));

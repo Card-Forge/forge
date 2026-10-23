@@ -3,6 +3,7 @@ Code=PLTC
 Date=2024-10-16
 Name=Tales of Middle-earth Deluxe Commander Kit
 Type=Promo
+Tags=UniversesBeyond
 ScryfallCode=PLTC
 
 [cards]

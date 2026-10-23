@@ -3,6 +3,7 @@ Code=HOC
 Date=2026-08-14
 Name=The Hobbit Eternal
 Type=Commander
+Tags=UniversesBeyond
 ScryfallCode=HOC
 
 [cards]

@@ -3,6 +3,7 @@ Code=TMC
 Date=2026-03-06
 Name=Teenage Mutant Ninja Turtles Eternal
 Type=Expansion
+Tags=UniversesBeyond
 
 [cards]
 1 M Leonardo, the Balance @Inkognit

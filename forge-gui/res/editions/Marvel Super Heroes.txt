@@ -3,6 +3,7 @@ Code=MSH
 Date=2026-06-26
 Name=Marvel Super Heroes
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=MSH
 #https://mtgscribe.com/2026/06/03/marvel-super-heroes-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Scene,Common-SourceMaterial,Uncommon,UncommonScene,RareMythic,Land,Wildcard,WildcardFoil

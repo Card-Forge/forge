@@ -3,6 +3,7 @@ Code=TLE
 Date=2025-11-21
 Name=Avatar: The Last Airbender Eternal
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=TLE
 
 [cards]

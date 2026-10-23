@@ -292,6 +292,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     private String name;
     private String alias = null;
     private BorderColor borderColor = BorderColor.BLACK;
+    private Set<String> tags = Collections.emptySet();
 
     // SealedProduct
     private String prerelease = null;
@@ -509,6 +510,62 @@ public final class CardEdition implements Comparable<CardEdition> {
             traditionalCollectorNumbers = numbers;
         }
         return numbers.contains(collectorNumber.toLowerCase(Locale.ROOT));
+    }
+
+    // tag -> lower case collector numbers of the entries carrying it, built on first use
+    private volatile Map<String, Set<String>> taggedCollectorNumbers;
+
+    /** The tags of the whole edition. */
+    public Set<String> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /** The tags carried by single entries of the edition. */
+    public Set<String> getPrintTags() {
+        return Collections.unmodifiableSet(getTaggedCollectorNumbers().keySet());
+    }
+
+    public boolean hasTag(String tag) {
+        return tags.contains(tag);
+    }
+
+    /** True if the whole edition carries the tag, or the entry with the given collector number does. */
+    public boolean hasTag(String tag, String collectorNumber) {
+        if (hasTag(tag))
+            return true;
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return false;
+        Set<String> tagged = getTaggedCollectorNumbers().get(tag);
+        // a back face listed as "123☇" shares the tags of its front, 123
+        String number = collectorNumber.endsWith("☇") ? collectorNumber.substring(0, collectorNumber.length() - 1) : collectorNumber;
+        return tagged != null && (tagged.contains(collectorNumber.toLowerCase(Locale.ROOT))
+                || tagged.contains(number.toLowerCase(Locale.ROOT)));
+    }
+
+    private Map<String, Set<String>> getTaggedCollectorNumbers() {
+        Map<String, Set<String>> numbers = taggedCollectorNumbers;
+        if (numbers == null) {
+            numbers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+            for (EditionEntry entry : cardsInSet) {
+                if (entry.extraParams() == null || entry.collectorNumber() == null)
+                    continue;
+                for (String t : parseTags(entry.extraParams().get("tags")))
+                    numbers.computeIfAbsent(t, k -> new HashSet<>()).add(entry.collectorNumber().toLowerCase(Locale.ROOT));
+            }
+            taggedCollectorNumbers = numbers;
+        }
+        return numbers;
+    }
+
+    // case-insensitive, keeping the spelling the file uses
+    private static Set<String> parseTags(String text) {
+        Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        if (StringUtils.isBlank(text))
+            return result;
+        for (String t : text.split(","))
+            if (!t.isBlank())
+                result.add(t.trim());
+        return result;
     }
 
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
@@ -803,6 +860,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.tokensCode = metadata.get("TokensCode", "T" + res.scryfallCode);
             res.tokenFallbackCode = metadata.get("TokenFallbackCode");
             res.cardsLanguage = metadata.get("CardLang", "en");
+            res.tags = parseTags(metadata.get("Tags"));
             res.boosterArts = metadata.getInt("BoosterCovers", 1);
 
             res.otherMap = otherMap;

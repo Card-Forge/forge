@@ -3,6 +3,7 @@ Code=ACR
 Date=2024-07-05
 Name=Assassin's Creed
 Type=Draft
+Tags=UniversesBeyond
 ScryfallCode=ACR
 
 [cards]

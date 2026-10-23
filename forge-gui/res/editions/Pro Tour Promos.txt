@@ -22,6 +22,6 @@ ScryfallCode=PPRO
 2022-1 R Lava Spike @Igor Kieryluk
 2022-2 M Teferi, Hero of Dominaria @Chris Rallis
 2022-3 R Nykthos, Shrine to Nyx @Alayna Danner
-2025-1 M Cloud, Midgar Mercenary @Tetsuya Nomura
-2025-3 R Aerith Gainsborough @Susumu Kuroi
-2026-1 R Quicksilver, Brash Blur @Junggeun Yoon
+2025-1 M Cloud, Midgar Mercenary @Tetsuya Nomura ${"tags": "UniversesBeyond"}
+2025-3 R Aerith Gainsborough @Susumu Kuroi ${"tags": "UniversesBeyond"}
+2026-1 R Quicksilver, Brash Blur @Junggeun Yoon ${"tags": "UniversesBeyond"}

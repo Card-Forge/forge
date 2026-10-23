@@ -3,6 +3,7 @@ Code=TLA
 Date=2025-11-21
 Name=Avatar: The Last Airbender
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=TLA
 #https://mtgscribe.com/2025/11/08/avatar-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,WildcardFoil

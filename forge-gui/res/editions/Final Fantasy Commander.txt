@@ -3,6 +3,7 @@ Code=FIC
 Date=2025-06-13
 Name=Final Fantasy Commander
 Type=Commander
+Tags=UniversesBeyond
 ScryfallCode=FIC
 
 [cards]

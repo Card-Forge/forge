@@ -9,14 +9,14 @@ ScryfallCode=PSPL
 1 R Terror of the Peaks @Richard Kane Ferguson
 2 M Kaldra Compleat @Monztre
 3 M Sword of Forge and Frontier @Sam Guay
-4 M Cloud, Midgar Mercenary @Tetsuya Nomura
+4 M Cloud, Midgar Mercenary @Tetsuya Nomura ${"tags": "UniversesBeyond"}
 5 R Get Lost @Dominik Mayer
-6 R Spectacular Spider-Man @Julian Totino Tedesco
-7 R Day of Black Sun @Dom Lay
+6 R Spectacular Spider-Man @Julian Totino Tedesco ${"tags": "UniversesBeyond"}
+7 R Day of Black Sun @Dom Lay ${"tags": "UniversesBeyond"}
 8 R Vendilion Clique @Jason A. Engle
-9 M Super Shredder @Chris Seaman
+9 M Super Shredder @Chris Seaman ${"tags": "UniversesBeyond"}
 10 M Liliana Vess @Justyna Dura
-11 R Elektra, Daughter of the Hand @Alessandra Pisano
-12 R Riddles in the Dark @Tomas Duchek
+11 R Elektra, Daughter of the Hand @Alessandra Pisano ${"tags": "UniversesBeyond"}
+12 R Riddles in the Dark @Tomas Duchek ${"tags": "UniversesBeyond"}
 13 M Jace Beleren @Cristi Balanescu
-14 M Jean-Luc Picard, Luminary @Alexander Mokhov
+14 M Jean-Luc Picard, Luminary @Alexander Mokhov ${"tags": "UniversesBeyond"}

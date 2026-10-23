@@ -3,6 +3,7 @@ Code=FIN
 Date=2025-06-13
 Name=Final Fantasy
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=FIN
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
