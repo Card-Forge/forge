@@ -449,6 +449,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (!(ge instanceof Card c)) {
                 return false;
             }
+            // a card as it last was isn't where it can be pointed at
+            if (c.isLKI()) {
+                return false;
+            }
             final Zone cz = c.getZone();
             // Don't try to draw the UI point of a card if it doesn't exist in any zone.
             if (cz == null) {

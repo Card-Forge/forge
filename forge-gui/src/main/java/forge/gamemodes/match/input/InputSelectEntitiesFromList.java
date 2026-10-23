@@ -54,8 +54,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         final List<TrackableObject> players = new ArrayList<>();
         for (T v : validChoices) {
             if (v instanceof Card c) {
-                // a last-state copy is shown where the card is now
-                cards.add(c.getGame().getCardState(c).getView());
+                cards.add(c.getView());
             } else if (v instanceof Player p) {
                 players.add(p.getView());
             }
