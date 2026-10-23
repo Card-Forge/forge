@@ -78,12 +78,12 @@ public class StaticData {
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false, null);
+        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false, null, null);
     }
     public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
-        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, enableSmartCardArtSelection, null);
+        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, enableSmartCardArtSelection, null, null);
     }
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, BiPredicate<String, String> preferredLanguageAvailability) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, BiPredicate<String, String> preferredLanguageAvailability, BiPredicate<CardEdition, String> printExclusion) {
         this.cardReader = cardReader;
         this.customCardReader = customCardReader;
         this.tokenReader = tokenReader;
@@ -136,6 +136,8 @@ public class StaticData {
             variantCards.setCardArtPreference(cardArtPreference);
             commonCards.setPreferredLanguageAvailability(preferredLanguageAvailability);
             variantCards.setPreferredLanguageAvailability(preferredLanguageAvailability);
+            commonCards.setPrintExclusion(printExclusion);
+            variantCards.setPrintExclusion(printExclusion);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards);
@@ -845,7 +847,7 @@ public class StaticData {
             legal = (Predicate<PaperCard>) commonCards.isLegal(allowedSetCodes);
         List<PaperCard> candidates = new ArrayList<>();
         for (PaperCard pc : commonCards.getAllCardsNoAlt(card.getName())) {
-            if (pc.getRarity() == CardRarity.Special)
+            if (pc.getRarity() == CardRarity.Special || commonCards.isPrintExcluded(pc))
                 continue;
             CardEdition ed = editions.get(pc.getEdition());
             if (ed == null || ed.getDate() == null || (border != null && ed.getBorderColor() != border))
@@ -962,6 +964,11 @@ public class StaticData {
         Predicate<PaperCard> filter = null;
         if (allowedSetCodes != null && !allowedSetCodes.isEmpty())
             filter = (Predicate<PaperCard>) this.commonCards.isLegal(allowedSetCodes);
+        if (commonCards.hasPrintExclusion()) {
+            // no fallback here: without an allowed alternative the deck keeps the print it already has
+            Predicate<PaperCard> allowed = pc -> !commonCards.isPrintExcluded(pc);
+            filter = filter == null ? allowed : filter.and(allowed);
+        }
 
         CardDb.CardArtPreference userPreference = this.commonCards.getCardArtPreference();
         if (userPreference.blackBorderOnly) {
@@ -1389,6 +1396,11 @@ public class StaticData {
     public void setPreferredLanguageAvailability(BiPredicate<String, String> availability) {
         this.commonCards.setPreferredLanguageAvailability(availability);
         this.variantCards.setPreferredLanguageAvailability(availability);
+    }
+
+    public void setPrintExclusion(BiPredicate<CardEdition, String> exclusion) {
+        this.commonCards.setPrintExclusion(exclusion);
+        this.variantCards.setPrintExclusion(exclusion);
     }
 
     public boolean isEnabledCardArtSmartSelection() {
