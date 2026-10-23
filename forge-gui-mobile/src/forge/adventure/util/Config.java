@@ -41,6 +41,9 @@ public class Config {
     private final String commonPrefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<>();
     private ConfigData configData;
+    private String[] planeRestrictedEditions, planeAllowedEditions;
+    private boolean planeIgnoresUserExclusions, resourcesLoaded;
+    private Set<String> excludedEditionCodes = Collections.emptySet();
     private final String[] adventures;
     private SettingData settingsData;
     private String Lang = "en-us";
@@ -142,6 +145,49 @@ public class Config {
 
     public ConfigData getConfigData() {
         return configData;
+    }
+
+    /** False on a plane made only of editions the player excluded, which keeps its cards rather than being emptied. */
+    public boolean appliesUserExclusions() {
+        return !planeIgnoresUserExclusions && FModel.getMagicDb().getCommonCards().hasPrintExclusion();
+    }
+
+    /** The editions the player excludes as a whole, kept from the last change so card choices need not scan every edition. */
+    public Set<String> getExcludedEditionCodes() {
+        return excludedEditionCodes;
+    }
+
+    /** Whether the plane's own edition lists allow the edition, leaving the player's exclusions aside. */
+    public boolean isPlaneEdition(String code) {
+        if (planeAllowedEditions != null && planeAllowedEditions.length > 0)
+            return Arrays.asList(planeAllowedEditions).contains(code);
+        return planeRestrictedEditions == null || !Arrays.asList(planeRestrictedEditions).contains(code);
+    }
+
+    // The player's whole-edition exclusions join the plane's own lists, which every Adventure source already honours
+    private void applyUserExclusions() {
+        if (planeRestrictedEditions == null) {
+            planeRestrictedEditions = configData.restrictedEditions == null ? new String[0] : configData.restrictedEditions;
+            planeAllowedEditions = configData.allowedEditions;
+        }
+        Set<String> playerExcluded = FModel.getExcludedEditionCodes();
+        excludedEditionCodes = playerExcluded;
+        boolean hasWhitelist = planeAllowedEditions != null && planeAllowedEditions.length > 0;
+        planeIgnoresUserExclusions = hasWhitelist && Arrays.stream(planeAllowedEditions).allMatch(playerExcluded::contains);
+        Set<String> excluded = planeIgnoresUserExclusions ? Collections.emptySet() : playerExcluded;
+        Set<String> restricted = new LinkedHashSet<>(Arrays.asList(planeRestrictedEditions));
+        restricted.addAll(excluded);
+        configData.restrictedEditions = restricted.toArray(new String[0]);
+        if (hasWhitelist)
+            configData.allowedEditions = Arrays.stream(planeAllowedEditions).filter(code -> !excluded.contains(code)).toArray(String[]::new);
+    }
+
+    public static void onExclusionChanged() {
+        if (currentConfig == null || !currentConfig.resourcesLoaded)
+            return;  // Adventure has not loaded yet, and loadResources applies them
+        currentConfig.applyUserExclusions();
+        currentConfig.applyTokenEditionFilter();
+        RewardData.invalidateCardPool();
     }
 
     // Push the plane's allowed/restricted editions and restricted token pairs into TokenDb.
@@ -617,7 +663,9 @@ public class Config {
 
     public void loadResources() {
         AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions(), configData);
+        applyUserExclusions();
         applyTokenEditionFilter();
+        resourcesLoaded = true;
         RewardData.getAllCards();//initialize before loading custom cards
         final CardRules.Reader rulesReader = new CardRules.Reader();
         ImageKeys.ADVENTURE_CARD_PICS_DIR = Config.currentConfig.getCommonFilePath(forge.adventure.util.Paths.CUSTOM_CARDS_PICS);// not the cleanest solution
