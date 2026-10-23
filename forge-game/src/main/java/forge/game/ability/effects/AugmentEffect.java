@@ -85,6 +85,14 @@ public class AugmentEffect  extends SpellAbilityEffect {
         hostCreature.setAugmentedTimeStamp(ts);
         hostCreature.addCloneState(cloneState, ts);
 
+        if (augmentCreature.isStickered()) {
+           if (augmentCreature.getOwner().equals(hostCreature.getOwner())) {
+               hostCreature.takeStickersFrom(augmentCreature);
+           } else {
+               augmentCreature.removeAllStickers();
+           }
+        }
+
         // Re-register triggers for target card
         game.getTriggerHandler().clearActiveTriggers(hostCreature, null);
         game.getTriggerHandler().registerActiveTrigger(hostCreature, false);

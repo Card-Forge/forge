@@ -419,7 +419,8 @@ public class GameAction {
             }
             // CR 123.5c
             if (copied.isStickered()) {
-                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(mergedCards);
+                CardCollection sameOwnerMergedCards = mergedCards.filter(cm -> cm.getOwner().equals(c.getOwner()));
+                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(sameOwnerMergedCards);
                 if (keeper != copied) {
                     keeper.takeStickersFrom(copied);
                 }
