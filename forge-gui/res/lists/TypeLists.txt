@@ -111,6 +111,7 @@ Elf:Elves
 Elk:Elks
 Employee:Employees
 Eternal:Eternals
+Excalbian:Excalbians
 Eye:Eyes
 Faerie:Faeries
 Ferret:Ferrets
