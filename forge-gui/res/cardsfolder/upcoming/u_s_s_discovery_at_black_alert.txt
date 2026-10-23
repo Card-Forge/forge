@@ -1,0 +1,11 @@
+Name:U.S.S. Discovery, at Black Alert
+ManaCost:3 G G
+Types:Legendary Artifact Spacecraft
+PT:5/5
+K:Station:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscover | TriggerDescription$ Whenever NICKNAME enters or attacks, discover 5. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscover | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, discover 5. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:TrigDiscover:DB$ Discover | Num$ 5
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 6+ Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever U.S.S. Discovery enters or attacks, discover 5. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)\nStation\nSTATION 6+\nFlying
