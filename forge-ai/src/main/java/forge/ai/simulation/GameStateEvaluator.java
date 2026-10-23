@@ -2,7 +2,7 @@ package forge.ai.simulation;
 
 import forge.ai.AiDeckStatistics;
 import forge.ai.CreatureEvaluator;
-import forge.card.mana.ManaAtom;
+import forge.ai.ManaResourceEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
@@ -161,10 +161,13 @@ public class GameStateEvaluator {
 
         // evaluate mana base quality
         AiDeckStatistics statistics = AiDeckStatistics.fromPlayer(aiPlayer);
-        int availableManaScore = evalManaBase(aiPlayer, statistics, false);
+        int availableManaScore = ManaResourceEvaluator.evaluateManaBase(
+                aiPlayer, statistics, false, GameStateEvaluator::phasesInNormally);
         int strategicManaScore = aiPlayer.getCardsIn(ZoneType.Battlefield, false).stream()
                 .anyMatch(c -> c.isPhasedOut() && phasesInNormally(c) && !c.getManaAbilities().isEmpty())
-                ? evalManaBase(aiPlayer, statistics, true) : availableManaScore;
+                ? ManaResourceEvaluator.evaluateManaBase(
+                        aiPlayer, statistics, true, GameStateEvaluator::phasesInNormally)
+                : availableManaScore;
         int availableScore = score + availableManaScore;
         score += strategicManaScore;
         // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
@@ -202,52 +205,6 @@ public class GameStateEvaluator {
 
         debugPrint("Score = " + score);
         return new Score(score, availableScore);
-    }
-
-    private int evalManaBase(Player player, AiDeckStatistics statistics, boolean includeNormalPhasing) {
-        // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
-        int value = 0;
-        // get the colors of mana we can produce and the maximum number of pips
-        int max_total = 0;
-        // this logic taken from ManaCost.getColorShardCounts()
-        int[] counts = new int[6]; // in WUBRGC order
-
-        // Strategic evaluation includes lands guaranteed to phase in normally; availability does not.
-        for (Card c : player.getCardsIn(ZoneType.Battlefield, false)) {
-            if (c.isPhasedOut() && (!includeNormalPhasing || !phasesInNormally(c))) {
-                continue;
-            }
-            int max_produced = 0;
-            for (SpellAbility m: c.getManaAbilities()) {
-                m.setActivatingPlayer(c.getController());
-                int mana_cost = m.getPayCosts().getTotalMana().getCMC();
-                max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
-                for (AbilityManaPart mp : m.getAllManaParts()) {
-                    for (String part : mp.mana(m).split(" ")) {
-                        // TODO handle any
-                        int index = ManaAtom.getIndexFromName(part);
-                        if (index != -1) {
-                            counts[index] += 1;
-                        }
-                    }
-                }
-            }
-            max_total += max_produced;
-        }
-
-        // Compare against the maximums in the deck and in the hand
-        // TODO check number of castable cards in hand
-        for (int i = 0; i < counts.length; i++) {
-            // for each color pip, add 100
-            value += Math.min(counts[i], statistics.maxPips[i]) * 100;
-        }
-        // value for being able to cast all the cards in your deck
-        value += min(max_total, statistics.maxCost) * 100;
-
-        // excess mana is valued less than getting enough to use everything
-        value += max(0, max_total - statistics.maxCost) * 5;
-
-        return value;
     }
 
     public int evalCard(Game game, Player aiPlayer, Card c) {
