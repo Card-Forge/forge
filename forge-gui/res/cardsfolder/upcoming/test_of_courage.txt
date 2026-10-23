@@ -1,0 +1,8 @@
+Name:Test of Courage
+ManaCost:G
+Types:Instant
+A:SP$ Charm | Choices$ DBAlterThePast,DBObliterateTheTranswarpNetwork
+SVar:DBAlterThePast:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | ValidTgtsDesc$ card in a graveyard | SubAbility$ DBGainLife | SpellDescription$ Alter the Past — Exile target card from a graveyard. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBObliterateTheTranswarpNetwork:DB$ Destroy | ValidTgts$ Artifact.cmcLE3,Enchantment.cmcLE3 | ValidTgtsDesc$ artifact or enchantment with mana value 3 or less | SpellDescription$ Obliterate the Transwarp Network — Destroy target artifact or enchantment with mana value 3 or less.
+Oracle:Choose one —\n• Alter the Past — Exile target card from a graveyard. You gain 2 life.\n• Obliterate the Transwarp Network — Destroy target artifact or enchantment with mana value 3 or less.
