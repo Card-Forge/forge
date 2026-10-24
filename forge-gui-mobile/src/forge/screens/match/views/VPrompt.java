@@ -287,6 +287,22 @@ public class VPrompt extends FContainer {
         separateUndoCache = FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_UNDO_BUTTON) ? 1 : 0;
     }
 
+    /** Sets whether the current Cancel button represents an available undo action. */
+    public void setUndoAvailable(boolean available) {
+        boolean requested = available
+                && !ForgeConstants.UNDO_MODE_OFF.equals(
+                        FModel.getPreferences().getPref(FPref.UI_UNDO_MODE));
+        boolean showUndo = requested && isSeparateUndo();
+
+        if (undoRequested == requested && undoShown == showUndo) {
+            return;
+        }
+
+        undoRequested = requested;
+        undoShown = showUndo;
+        revalidate();
+    }
+
     /**
      * The Cancel button. While an undo is possible the game labels it "Undo (n)"; with the separate undo button that
      * turns into the round undo button and Cancel stays End Turn.
@@ -306,30 +322,24 @@ public class VPrompt extends FContainer {
 
         @Override
         public void setText(String text0) {
-            String undoLabel = null;
-            if (text0 != null && isSeparateUndo()
+            if (undoRequested && isSeparateUndo()
                     && !ForgeConstants.UNDO_MODE_OFF.equals(FModel.getPreferences().getPref(FPref.UI_UNDO_MODE))) {
-                undoLabel = msg("lblUndo");
-            }
-            boolean undo = undoLabel != null && text0.startsWith(undoLabel);
-            if (undo) {
                 String endTurn = msg("lblEndTurn");
-                text0 = endTurn != null ? endTurn : text0;
-            }
-            super.setText(text0);
-            if (undoRequested != undo) {
-                undoRequested = undo;
-                if (btnUndo != null) { //not while the prompt is still being built
-                    undoShown = undo;
-                    VPrompt.this.revalidate();
+                if (endTurn != null) {
+                    text0 = endTurn;
                 }
             }
+            super.setText(text0);
         }
     }
 
     private void onCancelPressed(FEventHandler command, FEvent e) {
-        if (undoRequested) { //the game still treats Cancel as Undo here, but this button is End Turn
+        if (undoRequested && isSeparateUndo()) {
+            // With a separate Undo button, Cancel has been repurposed as End Turn.
             YieldController.endTurn(MatchController.instance.getGameController(), MatchController.instance.getCurrentPlayer());
+        } else if (undoRequested) {
+            // Without a separate Undo button, Cancel itself performs Undo.
+            MatchController.instance.getGameController().undoLastAction();
         } else if (command != null) {
             command.handleEvent(e);
         }
