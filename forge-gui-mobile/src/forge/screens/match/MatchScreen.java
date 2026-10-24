@@ -631,6 +631,9 @@ public class MatchScreen extends FScreen {
                 y = a.y + a.height / 2 - h / 2;
             }
             y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
+            //open dropdowns draw over the preview, so it moves to their left instead of ending up under them
+            if (getStack().isVisible()) { x = moveLeftOfObstacle(getStack().screenPos, x, y, w, h, a, left); }
+            if (unifiedPhase.getMenu().isOpen()) { x = moveLeftOfObstacle(unifiedPhase.getMenu().screenPos, x, y, w, h, a, left); }
 
             if (Forge.magnifyShowDetails) {
                 CardImageRenderer.drawDetails(g, card, MatchController.instance.getGameView(), false, x, y, w, h);
@@ -643,6 +646,17 @@ public class MatchScreen extends FScreen {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //if the preview would sit under the obstacle (an open dropdown), returns an x left of both the obstacle and the hovered card
+    //so neither is covered; when there is no room on that side the preview stays where it was
+    private static float moveLeftOfObstacle(Rectangle obstacle, float x, float y, float w, float h, Rectangle anchor, float left) {
+        if (obstacle.width <= 0 || x >= obstacle.x + obstacle.width || x + w <= obstacle.x
+                || y >= obstacle.y + obstacle.height || y + h <= obstacle.y) {
+            return x;
+        }
+        final float moved = Math.min(obstacle.x, anchor.x) - w - PREVIEW_GAP;
+        return moved >= left ? moved : x;
     }
 
     void drawArcs(Graphics g) {
