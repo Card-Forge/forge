@@ -201,15 +201,19 @@ public class GameSimulator {
     }
 
     private SpellAbility findAlternativeCostSa(final Card hostCard, final String desc) {
+        // The same expansion the AI uses to pick its plays: additional-cost choices (Bitter Triumph: discard or pay
+        // life), optional costs (kicker) and alternative costs (Force of Will, Daze, evoke) are separate plays, and
+        // the description tells which one was meant.
         try {
             for (final SpellAbility printed : hostCard.getSpellAbilities()) {
                 if (!printed.isSpell()) {
                     continue;
                 }
                 printed.setActivatingPlayer(aiPlayer);
-                for (final SpellAbility alt : forge.game.GameActionUtil.getAlternativeCosts(printed, aiPlayer, false)) {
-                    if (desc.equals(alt.getDescription())) {
-                        return alt;
+                for (final SpellAbility variant : forge.ai.ComputerUtilAbility.getOriginalAndAltCostAbilities(
+                        Collections.singletonList(printed), aiPlayer)) {
+                    if (desc.equals(variant.getDescription())) {
+                        return variant;
                     }
                 }
             }

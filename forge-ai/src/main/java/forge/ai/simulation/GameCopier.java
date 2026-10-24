@@ -305,6 +305,44 @@ public class GameCopier {
             }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
+
+        copyLeftThisTurn(newGame, aiPlayer);
+    }
+
+    /**
+     * What left the battlefield and the graveyard this turn: revolt (Fatal Push, Narnam Renegade), morbid and the like
+     * read it. Without it a play that depends on it is judged in a game where nothing has happened this turn.
+     */
+    private void copyLeftThisTurn(Game newGame, Player aiPlayer) {
+        for (int pass = 0; pass < 2; pass++) {
+            final List<Card> origList = pass == 0 ? origGame.getLeftBattlefieldThisTurn() : origGame.getLeftGraveyardThisTurn();
+            for (Card lki : new ArrayList<>(origList)) {
+                try {
+                    final Card now = origGame.findById(lki.getId());
+                    Card base = now == null ? null : cardMap.get(now);
+                    if (base == null) {
+                        // a token (it ceased to exist): rebuild it from the last known information
+                        final Player owner = playerMap.get(lki.getOwner());
+                        if (owner == null) {
+                            continue;
+                        }
+                        base = createCardCopy(newGame, owner, lki, aiPlayer);
+                    }
+                    final Card copy = CardCopyService.getLKICopy(base);
+                    final Player controller = lki.getController() == null ? null : playerMap.get(lki.getController());
+                    if (controller != null && !controller.equals(copy.getController())) {
+                        copy.setController(controller, copy.getGameTimestamp());
+                    }
+                    if (pass == 0) {
+                        newGame.addLeftBattlefieldThisTurn(copy);
+                    } else {
+                        newGame.addLeftGraveyardThisTurn(copy);
+                    }
+                } catch (final RuntimeException e) {
+                    // history is a refinement: a card that cannot be rebuilt is left out
+                }
+            }
+        }
     }
 
     private static PaperCard hidden_info_card = new PaperCard(CardRules.fromScript(Lists.newArrayList("Name:hidden", "Types:Artifact", "Oracle:")), "", CardRarity.Common);
