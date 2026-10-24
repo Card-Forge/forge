@@ -1515,13 +1515,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (augment == null) {
             if (this.augmentedWith != null) {
                 this.augmentedWith.augmenting = null;
-            } else {
                 this.augmentedWith = null;
+            } else {
+                return false;
             }
             view.updateAugment(this);
             return false;
         }
-        if (this.augmentedWith != null || augment.augmenting != null) {
+        if (this.augmentedWith != null && !this.augmentedWith.equals(augment)) {
             return false;
         }
         this.augmentedWith = augment;
@@ -1534,6 +1535,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Card getAugmenting() { return augmenting; }
     public void setAugmenting(Card augmenting) { this.augmenting = augmenting; }
     public boolean isAugment() { return hasKeyword(Keyword.AUGMENT) && !hasKeyword(Keyword.AUGMENT_HOST); }
+    public boolean isAugmented() { return augmentedTimeStamp != -1; }
 
     public final long getAugmentedTimestamp() {
         return augmentedTimeStamp;
@@ -4484,7 +4486,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final StatBreakdown getUnswitchedPowerBreakdown() {
         // 208.3 A noncreature permanent has no power or toughness
-        if (isInPlay() && (!isCreature() || hasKeyword(Keyword.AUGMENT))) {
+        if (isInPlay() && !isCreature()) {
             return new StatBreakdown();
         }
         return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());

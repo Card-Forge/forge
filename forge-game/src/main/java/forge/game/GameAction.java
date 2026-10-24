@@ -541,8 +541,16 @@ public class GameAction {
                 card.setZone(ownerZoneTo);
             }
             copied.clearMergedCards();
-            copied.attachAugment(null);
         } else {
+            //Augment link gets broken on second zone change so flicker effects still work
+            if (!fromBattlefield && !zoneTo.is(ZoneType.Merged) && !copied.isAugmented()) {
+                if (copied.getAugmentedWith() != null) {
+                    copied.attachAugment(null);
+                }
+                if (copied.getAugmenting() != null) {
+                    copied.getAugmenting().attachAugment(null);
+                }
+            }
             if (!suppress) {
                 storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
             }

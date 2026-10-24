@@ -544,6 +544,22 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
             }
         }
+        // Flicker it and the whole Host and Augment return connected as a singular creature.
+        if (destination.equals(ZoneType.Battlefield)
+                && (sa.getParamOrDefault("Defined", "").contains("Remembered")
+                || sa.getParamOrDefault("Defined", "").contains("Triggered"))) {
+            for (Card c: tgtCards.threadSafeIterable()) {
+                Card augment = c.getAugmentedWith();
+                if (augment != null && tgtCards.contains(c) && tgtCards.contains(augment)) {
+                    Card augmentedCard = AugmentEffect.augment(sa, c, augment);
+                    if (augmentedCard != null) {
+                        tgtCards.remove(c);
+                        tgtCards.remove(augment);
+                        tgtCards.add(augmentedCard);
+                    }
+                }
+            }
+        }
 
         for (final Card tgtC : tgtCards) {
             if (sa.hasSVar("StaticEffectUntilCardID") && sa.getSVarInt("StaticEffectUntilCardID") == tgtC.getId()) {
@@ -835,6 +851,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             if (c == gameCard) continue;
                             hostCard.addRemembered(c);
                         }
+                    }
+                    if (gameCard.getAugmentedWith() != null) {
+                        hostCard.addRemembered(gameCard.getAugmentedWith());
                     }
                 }
                 if (forget != null) {

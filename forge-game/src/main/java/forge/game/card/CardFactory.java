@@ -763,7 +763,7 @@ public class CardFactory {
         final Card top = card.getTopMergedCard();
         final CardStateName state = top.getCurrentStateName();
         CardState ret;
-        if (top.isCloned()) {
+        if (top.isCloned() || top.isAugmented()) {
             ret = top.getState(state).copy(card, sa);
         } else {
             ret = top.getOriginalState(state).copy(card, sa);
@@ -794,36 +794,48 @@ public class CardFactory {
         if (augment == null) {
             return null;
         }
-        final CardState state = host.getCurrentState().copy(host, sa);
+        final CardStateName state = host.getCurrentStateName();
+        CardState ret;
+        if (host.isCloned() || host.isMutated()) {
+            ret = host.getState(state).copy(host, sa);
+        } else {
+            ret = host.getOriginalState(state).copy(host, sa);
+        }
         final CardState augmentState = augment.getCurrentState();
-        state.addAbilitiesFrom(augmentState, false);
-        Augment augmentKeyword = (Augment) state.getIntrinsicKeywords().stream()
+        ret.addAbilitiesFrom(augmentState, false);
+        Augment augmentKeyword = (Augment) ret.getIntrinsicKeywords().stream()
                 .filter(k -> k.getKeyword() == Keyword.AUGMENT).findFirst().orElse(null);
         if (augmentKeyword == null) {
             return null;
         }
-        AugmentHost hostKeyword = (AugmentHost) state.getIntrinsicKeywords().stream()
+        AugmentHost hostKeyword = (AugmentHost) ret.getIntrinsicKeywords().stream()
                 .filter(k -> k.getKeyword() == Keyword.AUGMENT_HOST).findFirst().orElse(null);
         if (hostKeyword == null) {
             return null;
         }
-        state.setBasePower(state.getBasePower() + Integer.parseInt(augmentState.getPowerModifier()));
-        state.setBaseToughness(state.getBaseToughness() + Integer.parseInt(augmentState.getToughnessModifier()));
+        ret.setBasePower(ret.getBasePower() + Integer.parseInt(augmentState.getPowerModifier()));
+        ret.setBaseToughness(ret.getBaseToughness() + Integer.parseInt(augmentState.getToughnessModifier()));
+        ret.setBasePowerString(String.valueOf(ret.getBasePower()));
+        ret.setBaseToughnessString(String.valueOf(ret.getBaseToughness()));
         String augmentName = augmentState.getName();
         if (!augmentName.endsWith("-")) {
             augmentName += " ";
         }
-        state.setName(augmentName + hostKeyword.getRightSideName());
-        state.addColor(augmentState.getColor());
-        state.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getName).collect(Collectors.toList()));
-        state.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getName).collect(Collectors.toList()));
-        state.addType(augmentState.getType().getSubtypes());
-        state.addRarity(augmentState.getRarity());
-        state.addSetCode(augmentState.getSetCode());
-        state.removeType(CardType.Supertype.Host);
+        ret.setName(augmentName + hostKeyword.getRightSideName());
+        ret.addColor(augmentState.getColor());
+        ret.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getName).collect(Collectors.toList()));
+        ret.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getName).collect(Collectors.toList()));
+        ret.addType(augmentState.getType().getSubtypes());
+        ret.addRarity(augmentState.getRarity());
+        ret.addSetCode(augmentState.getSetCode());
+        ret.removeType(CardType.Supertype.Host);
         hostKeyword.combine(augmentKeyword);
         final CardCloneStates result = new CardCloneStates(host, sa);
-        result.put(CardStateName.Original, state);
+        result.put(state, ret);
+        // For face down, flipped, transformed, melded or MDFC card, also copy the original state to avoid crash
+        if (state != CardStateName.Original) {
+            result.add(host.getState(CardStateName.Original).copy(host, sa));
+        }
         return result;
     }
 }
