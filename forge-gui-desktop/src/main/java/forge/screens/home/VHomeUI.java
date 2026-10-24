@@ -68,6 +68,7 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.util.Localizer;
 import forge.view.FView;
 import net.miginfocom.swing.MigLayout;
 
@@ -101,8 +102,8 @@ public enum VHomeUI implements IVTopLevelUI {
 
     /** Starts the guided practice game that teaches a newcomer the basics. */
     private final JLabel lblHowToPlay = new FLabel.Builder()
-        .text("How to Play").fontAlign(SwingConstants.CENTER).fontSize(14)
-        .tooltip("Learn the basics in a short guided practice game")
+        .text(Localizer.getInstance().getMessage("lblHowToPlay")).fontAlign(SwingConstants.CENTER).fontSize(14)
+        .tooltip(Localizer.getInstance().getMessage("lblHowToPlayTooltip"))
         .opaque().hoverable().cmdClick(() -> HowToPlay.chooseAndStart()).build();
 
     VHomeUI() {

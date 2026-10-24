@@ -41,7 +41,11 @@ public interface IGuiBase {
     default boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
         return false;
     }
-
+    /**
+     * True when this GUI shows one phase label instead of a box per phase (the compact mobile layout), so the
+     * tutorial's notes point at the label rather than at "the phase boxes".
+     */
+    default boolean usesUnifiedPhaseLabel() { return false; }
     /** Removes the note shown by {@link #showCoach}, if any. Safe to call from any thread. */
     default void hideCoach() { }
     String getAssetsDir();

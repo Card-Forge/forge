@@ -19,6 +19,7 @@ import forge.gui.util.SOptionPane;
 import forge.player.PlayerControllerHuman;
 import forge.util.IHasForgeLog;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,16 +39,21 @@ import java.util.function.Supplier;
  * every time. After a short tour of the board the lessons are: play a land, cast a spell and pay its mana, attack,
  * pass the turn, block, then attack until the opponent is out of life.
  *
- * <p>Each lesson is explained in a dialog while the card to use is spotlighted: the game's own selection marking is
+ * <p>Each lesson is explained in a note while the card to use is spotlighted: the game's own selection marking is
  * pointed at it, which makes the card glow and dims everything else. In {@code WATCH} mode the director then makes
  * the move itself, slowly, through the same entry points a mouse click uses (as Forge's macro replay does), and says
  * what changed. In {@code TRY} mode it keeps the spotlight on and waits for the player, repeating the hint if nothing
  * happens for a while.
  *
+ * <p>All text shown to the player comes from the language files (keys starting with lblTut, msgTut and btnTut), so
+ * it can be translated. Card names inside those texts are part of the translated sentence; the names used to find
+ * the cards in the game ({@link #LAND} and friends) are the English card names and are never shown.
+ *
  * <p>One daemon thread runs the script and polls the game state; it never touches the game from the game thread and
  * only clicks on the UI thread. Anything unexpected ends the tutorial quietly rather than leaving a stuck game.
  */
 final class TutorialDirector implements Runnable, IHasForgeLog {
+    // English card names, used only to find the cards in the game
     private static final String LAND = "Mountain";
     private static final String GOBLIN = "Raging Goblin";
     private static final String GIANT = "Hill Giant";
@@ -95,6 +101,11 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     private final Player me;
     private final Player opp;
     private final boolean watch;
+    /**
+     * True when this GUI shows one phase label instead of a box per phase (the compact mobile layout), so the notes
+     * that point at "the phase boxes" must point at the label instead.
+     */
+    private final boolean unifiedPhase;
     private final int oppStartLife;
     /** Phases already explained, as "turn:phase"; only touched by the director thread. */
     private final Set<String> explained = new HashSet<>();
@@ -115,6 +126,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
         opp = other;
         watch = mode == HowToPlay.Mode.WATCH;
+        unifiedPhase = GuiBase.getInterface().usesUnifiedPhaseLabel();
         oppStartLife = opp.getLife();
     }
 
@@ -136,6 +148,16 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     void stop() {
         stopped = true;
         human.setTutorialInputLocked(false);
+    }
+
+    /** Looks up a language-file text; {0}, {1}... in it are filled from {@code args}. */
+    private static String t(final String key, final Object... args) {
+        return Localizer.getInstance().getMessage(key, args);
+    }
+
+    /** The key of a text that differs between the per-phase boxes and the unified phase label. */
+    private String phaseKey(final String key) {
+        return unifiedPhase ? key + "Unified" : key;
     }
 
     @Override
@@ -186,69 +208,28 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
 
     /** A short look around the board: the glowing cards are what each page is about. */
     private void tour() throws InterruptedException {
-        if (!watch && !SOptionPane.showConfirmDialog("You saw the tour in the demo. Show it again?",
-                "Board tour", "Show the tour", "Skip it", false)) {
+        if (!watch && !SOptionPane.showConfirmDialog(t("msgTutTourSkip"), t("lblTutTourTitle"),
+                t("btnTutTourShow"), t("btnTutTourSkip"), false)) {
             return;
         }
 
-        say("Welcome to Magic (1 of 6)",
-                "Two players take turns. You have " + STARTING_LIFE + " life; your opponent, at the top, has "
-                        + oppStartLife + " in this practice game. Reduce your opponent's life to 0 to win. If yours "
-                        + "reaches 0 first, you lose.\n\n"
-                        + "Creatures are the main way to deal damage. This tour shows where everything is. "
-                        + "Whenever cards glow, those are the ones being talked about.");
+        say(t("lblTutTour1"), t("msgTutTour1", STARTING_LIFE, oppStartLife));
 
-        spotlightAndSay(zone(me, ZoneType.Hand), "Your hand (2 of 6)",
-                "The glowing cards are your HAND: cards you've drawn but not played yet. Only you can see them. "
-                        + "Everything else is dimmed while something is being pointed out.\n\n"
-                        + "Your hand holds three Mountains (lands) and a Raging Goblin (a creature).");
+        spotlightAndSay(zone(me, ZoneType.Hand), t("lblTutTour2"), t("msgTutTour2"));
 
         final List<Card> battlefield = new ArrayList<>(zone(me, ZoneType.Battlefield));
         battlefield.addAll(zone(opp, ZoneType.Battlefield));
-        spotlightAndSay(battlefield, "The battlefield (3 of 6)",
-                "The glowing cards are on the BATTLEFIELD: cards that are in play. Lands and creatures live here.\n\n"
-                        + "You control the " + GIANT + " (3/3). Your opponent controls the " + BRIGAND + " (2/2). The "
-                        + "two numbers on a creature are POWER (the damage it deals) and TOUGHNESS (the damage it "
-                        + "takes to destroy it).");
+        spotlightAndSay(battlefield, t("lblTutTour3"), t("msgTutTour3"));
 
-        say("The other zones (4 of 6)",
-                "A zone is a place cards can be.\n\n"
-                        + "- LIBRARY: your deck, face down. You draw from the top. Drawing from an empty library "
-                        + "loses the game.\n"
-                        + "- GRAVEYARD: where spells you've used and creatures that died go, face up.\n"
-                        + "- EXILE: cards removed from the game.\n"
-                        + "- STACK: spells waiting to resolve (more on this soon).\n\n"
-                        + "Forge shows zones as tabs with a name and a card count. Click one to look inside.");
+        say(t("lblTutTour4"), t("msgTutTour4"));
 
-        say("The turn, phase by phase (5 of 6)",
-                "A turn is split into phases. The small boxes on the screen light up the current one:\n\n"
-                        + "UP upkeep, DR draw, M1 main phase 1, BC beginning of combat, DA declare attackers, "
-                        + "DB declare blockers, FS/CD combat damage, EC end of combat, M2 main phase 2, ET end "
-                        + "step, CL cleanup.\n\n"
-                        + "In short: untap, draw, play lands and cast spells, fight, cast more spells, end. I'll "
-                        + "explain each phase when we reach it.");
+        say(t("lblTutTour5"), t(phaseKey("msgTutTour5")));
 
-        say("The prompt and OK button (6 of 6)",
-                "The prompt message (by default on the left) always says what the game wants from you.\n\n"
-                        + "OK means \"I'm done, continue.\" It is also how you pass priority: when you have nothing "
-                        + "more to do in a phase, press OK and the game moves on. Cancel backs out of a choice "
-                        + "you're in the middle of.\n\n"
-                        + (watch
-                        ? "Now the demo starts. Each note is shown first, and nothing moves until you press Next, "
-                        + "so take your time. Then the demo points at the card, clicks it for you, and says what "
-                        + "changed.\n\nWhile the demo plays, your own taps on the cards and the OK / End Turn "
-                        + "buttons are paused, so it can't get out of step. Use Next, and Hide if a note covers "
-                        + "something you want to see."
-                        : "Now it's your turn to play. Each step glows the card to click and tells you what to do."));
+        say(t("lblTutTour6"), t("msgTutTour6") + "\n\n" + t(watch ? "msgTutTour6Watch" : "msgTutTour6Try"));
     }
 
     private boolean landLesson() throws InterruptedException {
-        final boolean landed = step("Step 1 of 6: Play a land",
-                "It's your MAIN PHASE 1 (M1). This is when you play a land and cast spells.\n\n"
-                        + "Lands produce mana, the resource you spend on spells. You may play ONE land per turn, "
-                        + "and only in a main phase.",
-                "Click the glowing Mountain in your hand to play it.",
-                "Watch: the Mountain in your hand will be clicked to play it.",
+        final boolean landed = step(t("lblTutLand"), t("msgTutLand"), t("msgTutLandTry"), t("msgTutLandWatch"),
                 () -> cards(find(me, ZoneType.Hand, LAND)),
                 () -> click(find(me, ZoneType.Hand, LAND)),
                 this::hasLand,
@@ -258,34 +239,23 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             return false;
         }
         if (!landed) {
-            restartPractice("You moved past your main phase without playing a land, so there's no mana for "
-                    + "the next step.");
+            restartPractice(t("msgTutLandMissed"));
             return false;
         }
-        spotlightAndSay(cards(untappedLand()), "Your Mountain is in play",
-                "The Mountain moved from your HAND to the BATTLEFIELD.\n\n"
-                        + "Lands untap at the start of each of your turns. TAPPING a land (turning it sideways) "
-                        + "gives one mana; a Mountain gives red mana. You've used your land drop for this turn.");
+        spotlightAndSay(cards(untappedLand()), t("lblTutLandDone"), t("msgTutLandDone"));
         return alive();
     }
 
     private boolean castLesson() throws InterruptedException {
         if (!castAndPay()) {
             if (!stopped) {
-                restartPractice("The spell wasn't cast this turn.");
+                restartPractice(t("msgTutCastMissed"));
             }
             return false;
         }
 
         if (waitUntil(() -> !game.getStack().isEmpty() && myPriority(), 5_000)) {
-            step("The stack",
-                    "Your Raging Goblin isn't in play yet. Spells wait on the STACK first (see the Stack tab), so "
-                            + "your opponent gets a chance to respond. When both players pass in a row, the top "
-                            + "spell resolves.\n\n"
-                            + "You have priority now, which means you may act again. You have nothing else to do, "
-                            + "so pass.",
-                    "Press OK to pass priority and let your spell resolve.",
-                    "Watch: OK will be pressed to let the spell resolve.",
+            step(t("lblTutStack"), t("msgTutStack"), t("msgTutStackTry"), t("msgTutStackWatch"),
                     NOTHING,
                     this::ok,
                     () -> has(me, ZoneType.Battlefield, GOBLIN),
@@ -295,34 +265,19 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
                 return false;
             }
         }
-        spotlightAndSay(cards(find(me, ZoneType.Battlefield, GOBLIN)), "Raging Goblin resolved",
-                "It left the stack and entered the BATTLEFIELD. It's a 1/1: power 1, toughness 1.\n\n"
-                        + "A creature that just arrived normally can't attack until your next turn (\"summoning "
-                        + "sickness\"). Raging Goblin has HASTE, which skips that wait, so it can attack right "
-                        + "now.");
+        spotlightAndSay(cards(find(me, ZoneType.Battlefield, GOBLIN)), t("lblTutResolved"), t("msgTutResolved"));
         return alive();
     }
 
     private void attackLesson() throws InterruptedException {
-        passStep("Step 3 of 6: Attack!",
-                "Combat is how you hurt your opponent. It has several phases: BEGINNING OF COMBAT (BC), DECLARE "
-                        + "ATTACKERS (DA), DECLARE BLOCKERS (DB), COMBAT DAMAGE (CD) and END OF COMBAT (EC).\n\n"
-                        + "First leave your main phase and head into combat.",
-                "Press OK to move to combat.",
-                "Watch: OK will be pressed to move to combat.",
+        passStep(t("lblTutAttack"), t("msgTutAttack"), t("msgTutToCombatTry"), t("msgTutToCombatWatch"),
                 () -> attackPrompt() || !myTurn(),
                 20_000);
         if (!alive() || !attackPrompt()) {
             return;
         }
 
-        step("Declare attackers",
-                "This is the DECLARE ATTACKERS phase (DA): you choose which creatures attack. Click a creature to "
-                        + "mark it, then press OK.\n\n"
-                        + "An attacking creature TAPS (turns sideways) and can't block until your next turn. That's "
-                        + "why Hill Giant stays home: it will defend you later.",
-                "Click the glowing Raging Goblin, then press OK.",
-                "Watch: the Raging Goblin will be marked as an attacker, then OK pressed.",
+        step(t("lblTutDeclare"), t("msgTutDeclare"), t("msgTutDeclareTry"), t("msgTutDeclareWatch"),
                 () -> cards(find(me, ZoneType.Battlefield, GOBLIN)),
                 () -> {
                     click(find(me, ZoneType.Battlefield, GOBLIN));
@@ -338,53 +293,32 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
 
         waitUntil(() -> opp.getLife() < oppStartLife || !myTurn() || phase() == PhaseType.MAIN2, 15_000);
         final int dealt = oppStartLife - opp.getLife();
-        spotlightAndSay(cards(find(me, ZoneType.Battlefield, GOBLIN)), "Combat damage",
-                dealt > 0
-                        ? "Your opponent had no creature that could block, so Raging Goblin was unblocked and dealt "
-                        + dealt + " damage. Your opponent is now at " + opp.getLife() + " life.\n\nThe Goblin is "
-                        + "tapped (sideways) until your next untap step."
-                        : "Combat is over.");
+        spotlightAndSay(cards(find(me, ZoneType.Battlefield, GOBLIN)), t("lblTutDamage"),
+                dealt > 0 ? t("msgTutDamageDealt", dealt, opp.getLife()) : t("msgTutCombatOver"));
     }
 
     private void passLesson() throws InterruptedException {
-        passStep("Step 4 of 6: End your turn",
-                "After combat you get MAIN PHASE 2 (M2), a second chance to play a land or cast spells; then the "
-                        + "END STEP (ET) and CLEANUP (CL). You've nothing left to do, so pass priority each time "
-                        + "the game gives it to you until your opponent's turn begins.",
-                "Press OK each time the game waits for you, until it's your opponent's turn.",
-                "Watch: OK will be pressed through the rest of your turn.",
+        passStep(t("lblTutPass"), t("msgTutPass"), t("msgTutPassTry"), t("msgTutPassWatch"),
                 () -> !myTurn(),
                 25_000);
         if (!alive()) {
             return;
         }
-        say("Your opponent's turn",
-                "Now your opponent takes a turn. They untap, upkeep, draw a card, and play a land. Then their "
-                        + BRIGAND + " (2/2) attacks, because it has to attack each combat.\n\n"
-                        + "Watch the phase boxes; they light up as the turn goes by. When it's time to defend, "
-                        + "the game will ask you to declare blockers.");
+        say(t("lblTutOppTurn"), t(phaseKey("msgTutOppTurn")));
     }
 
     private void blockLesson() throws InterruptedException {
-        final String waitHint = "Your opponent's turn is in progress. Press OK whenever the game asks for it.";
+        final String waitHint = t("msgTutWaitHint");
         advanceTo(() -> blockPrompt() || myTurn() && phase() == PhaseType.MAIN1, 120_000, waitHint);
         if (!alive()) {
             return;
         }
         if (!blockPrompt()) {
-            say("No attack this time", "Your opponent didn't attack, so there was nothing to block. When "
-                    + "they do, you choose which of your untapped creatures blocks which attacker.");
+            say(t("lblTutNoAttack"), t("msgTutNoAttack"));
             return;
         }
 
-        step("Step 5 of 6: Block",
-                "The " + BRIGAND + " (2/2) is attacking you. This is the DECLARE BLOCKERS phase (DB), and now YOU "
-                        + "choose.\n\n"
-                        + "BLOCKING means putting one of your untapped creatures in the attacker's way. The two "
-                        + "fight each other and you take no damage. Hill Giant is 3/3: it takes 2 damage and "
-                        + "survives (toughness 3), while the Brigand takes 3 and dies (toughness 2).",
-                "Click the glowing Hill Giant to block the Brigand, then press OK.",
-                "Watch: the Hill Giant will be clicked to block, then OK pressed.",
+        step(t("lblTutBlock"), t("msgTutBlock"), t("msgTutBlockTry"), t("msgTutBlockWatch"),
                 () -> cards(find(me, ZoneType.Battlefield, GIANT)),
                 () -> {
                     click(find(me, ZoneType.Battlefield, GIANT));
@@ -399,38 +333,26 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
         waitUntil(() -> !has(opp, ZoneType.Battlefield, BRIGAND) || me.getLife() < STARTING_LIFE, 12_000);
         if (!has(opp, ZoneType.Battlefield, BRIGAND)) {
-            spotlightAndSay(cards(find(me, ZoneType.Battlefield, GIANT)), "Blocked!",
-                    "In COMBAT DAMAGE, Hill Giant and Goblin Brigand hit each other at the same time. The Brigand "
-                            + "took 3 damage and was destroyed (it went to the GRAVEYARD). Hill Giant took 2 but has "
-                            + "3 toughness, so it lived. Damage wears off at the end of the turn.");
+            spotlightAndSay(cards(find(me, ZoneType.Battlefield, GIANT)), t("lblTutBlocked"), t("msgTutBlocked"));
         } else {
-            say("Not blocked", "You took " + (STARTING_LIFE - me.getLife()) + " damage. Blocking is optional, "
-                    + "but a good block like this one saves life and can destroy the attacker.");
+            say(t("lblTutNotBlocked"), t("msgTutNotBlocked", STARTING_LIFE - me.getLife()));
         }
     }
 
     private void winLesson() throws InterruptedException {
-        final String waitHint = "Your opponent's turn is in progress. Press OK whenever the game asks for it.";
+        final String waitHint = t("msgTutWaitHint");
         advanceTo(this::inMain1, 120_000, waitHint);
         for (int round = 0; round < 3 && alive(); round++) {
             final int oppLife = opp.getLife();
-            passStep("Step 6 of 6: Win the game",
-                    "It's your turn again: you untapped and drew a card. Your opponent is at " + oppLife
-                            + " life. Attack with every creature you can; the game is won when a player's life "
-                            + "reaches 0.\n\nFirst move to combat.",
-                    "Press OK to move to combat.",
-                    "Watch: OK will be pressed to move to combat.",
+            passStep(t("lblTutWin"), t("msgTutWin", oppLife), t("msgTutToCombatTry"), t("msgTutToCombatWatch"),
                     () -> attackPrompt() || !myTurn(),
                     20_000);
             if (!alive()) {
                 return;
             }
             if (attackPrompt()) {
-                step("Attack with everything",
-                        "Click every creature you want to attack with, then press OK. Your opponent has no "
-                                + "untapped creatures to block with, so all the damage goes through.",
-                        "Click the glowing creatures (Raging Goblin and Hill Giant), then press OK.",
-                        "Watch: both creatures will be marked as attackers, then OK pressed.",
+                step(t("lblTutAllAttack"), t("msgTutAllAttack"), t("msgTutAllAttackTry"),
+                        t("msgTutAllAttackWatch"),
                         this::readyAttackers,
                         () -> {
                             for (final Card c : readyAttackers()) {
@@ -450,7 +372,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             if (game.isGameOver() || opp.getLife() <= 0) {
                 break;
             }
-            say("Not quite", "Your opponent survived at " + opp.getLife() + " life. Pass the turn and attack again.");
+            say(t("lblTutNotQuite"), t("msgTutNotQuite", opp.getLife()));
             advanceTo(this::inMain1, 120_000, waitHint);
         }
 
@@ -460,26 +382,15 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
                 HowToPlay.demoFinished();
             }
             GuiBase.getInterface().hideCoach();
-            SOptionPane.showMessageDialog(watch
-                            ? "That's a whole game: play a land, cast a spell and pay for it, attack, block, "
-                            + "and win.\n\nOn the next screen choose \"Try it yourself\" to play the same game "
-                            + "with the cards glowing for you."
-                            : "You played a land, cast a spell and paid for it, attacked, blocked, and won.\n\n"
-                            + "From here, try a real match from the home screen. You can always come back to "
-                            + "How to Play.",
-                    "You win!", SOptionPane.INFORMATION_ICON);
+            SOptionPane.showMessageDialog(t(watch ? "msgTutYouWinWatch" : "msgTutYouWinTry"), t("lblTutYouWin"),
+                    SOptionPane.INFORMATION_ICON);
         }
     }
 
     /** Casts the Goblin and pays for it; a cancelled payment sends the spell back to hand, so ask again. */
     private boolean castAndPay() throws InterruptedException {
         for (int attempt = 0; attempt < 3 && alive(); attempt++) {
-            final boolean cast = step("Step 2 of 6: Cast a spell",
-                    "Spells cost mana, shown in the top corner of the card. Raging Goblin costs {R}: one red "
-                            + "mana, which the Mountain you just played makes.\n\n"
-                            + "Creature spells are cast the same way lands are played: by clicking them in your hand.",
-                    "Click the glowing Raging Goblin in your hand.",
-                    "Watch: the Raging Goblin in your hand will be clicked to cast it.",
+            final boolean cast = step(t("lblTutCast"), t("msgTutCast"), t("msgTutCastTry"), t("msgTutCastWatch"),
                     () -> cards(find(me, ZoneType.Hand, GOBLIN)),
                     () -> click(find(me, ZoneType.Hand, GOBLIN)),
                     () -> !has(me, ZoneType.Hand, GOBLIN),
@@ -491,11 +402,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             if (!waitUntil(this::payPrompt, 4_000)) {
                 return true; // paid for automatically
             }
-            final boolean paid = step("Pay the mana",
-                    "Casting asks you to pay the cost. You pay by TAPPING lands for mana. Tapping the Mountain "
-                            + "gives {R}, which pays the whole cost and sends the spell onto the stack.",
-                    "Click the glowing Mountain on your battlefield to tap it for red mana.",
-                    "Watch: the Mountain will be clicked to tap it for red mana.",
+            final boolean paid = step(t("lblTutPay"), t("msgTutPay"), t("msgTutPayTry"), t("msgTutPayWatch"),
                     () -> cards(untappedLand()),
                     () -> click(untappedLand()),
                     () -> !payPrompt(),
@@ -507,7 +414,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             if (paid) {
                 return true;
             }
-            say("No problem", "Cancelling puts the spell back in your hand. Let's cast it again.");
+            say(t("lblTutNoProblem"), t("msgTutNoProblem"));
         }
         return false;
     }
@@ -549,7 +456,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
         // The player does this one: the note stays up until they do it or press "Got it", and goes away by itself
         // once the move is made.
-        say(title, body + "\n\n" + tryLine, "Got it", over);
+        say(title, body + "\n\n" + tryLine, t("btnTutGotIt"), over);
         long idle = 0;
         while (alive()) {
             spotlight(spot); // set again now and then: the game redraws its own marks as the prompt changes
@@ -560,7 +467,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             idle += 2_500;
             if (idle >= NUDGE_MS) {
                 idle = 0;
-                say("Need a hand?", tryLine, "Got it", over);
+                say(t("lblTutNeedHand"), tryLine, t("btnTutGotIt"), over);
             }
         }
         clearSpotlight();
@@ -576,7 +483,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         if (watch) {
             say(title, body + "\n\n" + watchLine);
         } else {
-            say(title, body + "\n\n" + tryLine, "Got it", done);
+            say(title, body + "\n\n" + tryLine, t("btnTutGotIt"), done);
         }
         if (!alive()) {
             return false;
@@ -618,7 +525,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             if (!watch && !hint.isEmpty() && System.currentTimeMillis() - lastNudge > NUDGE_MS
                     && safe(this::myPriority)) {
                 lastNudge = System.currentTimeMillis();
-                say("Keep going", hint, "Got it", target);
+                say(t("lblTutKeepGoing"), hint, t("btnTutGotIt"), target);
             }
             Thread.sleep(POLL_MS);
         }
@@ -639,7 +546,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     }
 
     private void say(final String title, final String text) {
-        say(title, text, "Next", null);
+        say(title, text, t("btnTutNext"), null);
     }
 
     /**
@@ -676,13 +583,12 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     }
 
     private void desync() {
-        say("The demo got out of sync", "Something unexpected happened, so the demo stops here. You can still "
-                + "choose \"Try it yourself\" from How to Play.");
+        say(t("lblTutDesync"), t("msgTutDesync"));
         stopped = true;
     }
 
     private void restartPractice(final String why) {
-        say("Let's try that again", why + "\n\nThe practice game starts over from the beginning.");
+        say(t("lblTutRestart"), t("msgTutRestart", why));
         if (!stopped) {
             stopped = true;
             FThreads.invokeInEdtLater(hosted::restartMatch);
@@ -701,11 +607,11 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
         final String note = phaseNote(p, mine);
         if (note != null && explained.add(game.getPhaseHandler().getTurn() + ":" + p)) {
-            final String heading = p.nameForUi + (mine ? "" : " (opponent's turn)");
+            final String heading = mine ? p.nameForUi : t("lblTutPhaseOpp", p.nameForUi);
             if (watch) {
                 say(heading, note);
             } else {
-                say(heading, note, "Got it", () -> !myPriority()); // pressing OK in the game also dismisses it
+                say(heading, note, t("btnTutGotIt"), () -> !myPriority()); // pressing OK in the game also dismisses it
             }
         }
     }
@@ -713,24 +619,19 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     private static String phaseNote(final PhaseType phase, final boolean mine) {
         switch (phase) {
             case UPKEEP:
-                return "UPKEEP (UP): the first stop of the turn. Some cards say \"at the beginning of your upkeep\"; "
-                        + "none matter here.";
+                return t("msgTutPhaseUpkeep");
             case DRAW:
-                return "DRAW (DR): " + (mine ? "you draw" : "your opponent draws")
-                        + " a card from the top of the library.";
+                return t(mine ? "msgTutPhaseDrawMine" : "msgTutPhaseDrawOpp");
             case COMBAT_BEGIN:
-                return "BEGINNING OF COMBAT (BC): the last moment to act before attackers are chosen.";
+                return t("msgTutPhaseCombatBegin");
             case COMBAT_DAMAGE:
-                return "COMBAT DAMAGE (CD): attackers and blockers deal their damage at the same time.";
+                return t("msgTutPhaseCombatDamage");
             case COMBAT_END:
-                return "END OF COMBAT (EC): combat is over. Creatures that attacked stay tapped.";
+                return t("msgTutPhaseCombatEnd");
             case MAIN2:
-                return "MAIN PHASE 2 (M2): a second chance to play a land (if you haven't) or cast spells. Players "
-                        + "often cast creatures here so the opponent has seen less before blocking.";
+                return t("msgTutPhaseMain2");
             case END_OF_TURN:
-                return "END STEP (ET): \"at the beginning of the end step\" effects happen here. Next is CLEANUP "
-                        + "(CL): damage on creatures wears off, and a player with more than seven cards in hand "
-                        + "discards down to seven.";
+                return t("msgTutPhaseEnd");
             default:
                 return null;
         }

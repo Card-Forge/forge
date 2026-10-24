@@ -15,6 +15,7 @@ import forge.player.GamePlayerUtil;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IHasForgeLog;
+import forge.util.Localizer;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import java.util.List;
  * nothing in it is random. A {@link TutorialDirector} plays it in one of two modes: {@code WATCH}, where the director
  * makes the moves for the player with explanations, and {@code TRY}, where the same game starts again and the player
  * makes the moves, guided by the same explanations.
+ *
+ * <p>All text shown to the player lives in the language files (keys starting with lblTut, msgTut and btnTut).
  */
 public final class HowToPlay implements IHasForgeLog {
     public enum Mode { WATCH, TRY }
@@ -42,6 +45,10 @@ public final class HowToPlay implements IHasForgeLog {
     private HowToPlay() {
     }
 
+    private static String t(final String key, final Object... args) {
+        return Localizer.getInstance().getMessage(key, args);
+    }
+
     /** True if {@code view} is the practice game, so the end screen can offer the right buttons. */
     public static boolean isTutorialGame(final GameView view) {
         return view != null && currentGame.get() == view;
@@ -50,14 +57,14 @@ public final class HowToPlay implements IHasForgeLog {
     /** What the end screen's restart button says: after the demo it leads to the player's own attempt. */
     public static String restartLabel() {
         if (nextMode == Mode.WATCH) {
-            return "Watch the demo again";
+            return t("lblTutWatchAgain");
         }
-        return playedMode == Mode.WATCH ? "Try it yourself" : "Play again";
+        return playedMode == Mode.WATCH ? t("btnTutTryYourself") : t("lblTutPlayAgain");
     }
 
     /** What the end screen's quit button says; the tutorial should not read like a puzzle. */
     public static String quitLabel() {
-        return "Back to the menu";
+        return t("lblTutBackToMenu");
     }
 
     /** Called when the demo has been watched to the end: restarting now starts the player's own attempt. */
@@ -69,20 +76,16 @@ public final class HowToPlay implements IHasForgeLog {
     public static void chooseAndStart() {
         FThreads.invokeInBackgroundThread(() -> {
             if (GuiBase.getInterface().isMatchInProgress()) {
-                SOptionPane.showMessageDialog("Finish or leave your current match before starting the tutorial.",
-                        "How to Play", SOptionPane.INFORMATION_ICON);
+                SOptionPane.showMessageDialog(t("msgTutFinishMatchFirst"), t("lblHowToPlay"),
+                        SOptionPane.INFORMATION_ICON);
                 return;
             }
             final List<String> options = new ArrayList<>();
-            options.add("Watch the demo");
-            options.add("Try it yourself");
-            options.add("Cancel");
-            final int choice = SOptionPane.showOptionDialog(
-                    "Learn the basics of Magic in a short practice game: play a land, cast a spell and pay for it, "
-                            + "attack, block, and win.\n\n"
-                            + "Watch the demo first and see every move explained, then choose \"Try it yourself\" "
-                            + "to play the same game with hints.",
-                    "How to Play", SOptionPane.QUESTION_ICON, options, 0);
+            options.add(t("btnTutWatchDemo"));
+            options.add(t("btnTutTryYourself"));
+            options.add(t("lblCancel"));
+            final int choice = SOptionPane.showOptionDialog(t("msgTutIntro"), t("lblHowToPlay"),
+                    SOptionPane.QUESTION_ICON, options, 0);
             if (choice == 0) {
                 start(Mode.WATCH);
             } else if (choice == 1) {
@@ -101,8 +104,7 @@ public final class HowToPlay implements IHasForgeLog {
             } catch (final RuntimeException e) {
                 netLog.error(e, "Could not start the tutorial");
                 FThreads.invokeInBackgroundThread(() ->
-                        SOptionPane.showErrorDialog("The tutorial could not be started.\n" + e.getMessage(),
-                                "How to Play"));
+                        SOptionPane.showErrorDialog(t("msgTutStartError", e.getMessage()), t("lblHowToPlay")));
             }
         });
     }

@@ -3,6 +3,7 @@ package forge.screens.match;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -16,6 +17,7 @@ import forge.util.Utils;
  * the cards it talks about stay in view, and the player can collapse it to a thin bar to see the whole board.
  *
  * <p>Pressing Next hands control back to the tutorial, which then shows the next note or makes the next move.
+ * Button texts come from the language files (btnTutNext, btnTutHide, btnTutShow).
  */
 public class CoachPanel extends FContainer {
     private static final float PAD = Utils.scale(6);
@@ -31,14 +33,18 @@ public class CoachPanel extends FContainer {
     // fonts come from the loaded skin, so they are made with the panel rather than when the class loads
     private FSkinFont titleFont = FSkinFont.get(15);
     private final FTextArea body = add(new FTextArea(false));
-    private final FButton btnNext = add(new FButton("Next"));
-    private final FButton btnHide = add(new FButton("Hide"));
+    private final FButton btnNext = add(new FButton(msg("btnTutNext")));
+    private final FButton btnHide = add(new FButton(msg("btnTutHide")));
 
     private final Runnable relayout;
     private String title = "";
     private boolean collapsed;
     private boolean compact; // portrait: a taller panel with smaller text, since the screen is narrow
     private Runnable onNext;
+
+    private static String msg(final String key) {
+        return Forge.getLocalizer().getMessage(key);
+    }
 
     /** @param relayout0 asks the match screen to size this panel again, which it does when the panel's height changes */
     public CoachPanel(final Runnable relayout0) {
@@ -62,7 +68,7 @@ public class CoachPanel extends FContainer {
         onNext = onNext0;
         collapsed = false;
         body.setText(text == null ? "" : text);
-        btnNext.setText(nextLabel == null || nextLabel.isEmpty() ? "Next" : nextLabel);
+        btnNext.setText(nextLabel == null || nextLabel.isEmpty() ? msg("btnTutNext") : nextLabel);
         btnNext.setEnabled(true);
         updateButtons();
         setVisible(true);
@@ -104,7 +110,7 @@ public class CoachPanel extends FContainer {
     }
 
     private void updateButtons() {
-        btnHide.setText(collapsed ? "Show" : "Hide");
+        btnHide.setText(msg(collapsed ? "btnTutShow" : "btnTutHide"));
     }
 
     private void next() {

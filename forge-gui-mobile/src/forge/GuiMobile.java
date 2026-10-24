@@ -24,6 +24,7 @@ import forge.localinstance.skin.ISkinImage;
 import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
+import forge.screens.match.views.VPlayerPanel;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.GuiDownloader;
 import forge.sound.*;
@@ -145,7 +146,13 @@ public class GuiMobile implements IGuiBase {
         });
         return true;
     }
-
+    @Override
+    public boolean usesUnifiedPhaseLabel() {
+        // TODO: use the real names from the unified phase label patch (compact landscape check + its preference)
+        return Forge.getCurrentScreen() instanceof MatchScreen
+            && VPlayerPanel.isCompactLayout()
+            && VPlayerPanel.isUnifiedPhase();
+    }
     @Override
     public void hideCoach() {
         FThreads.invokeInEdtNowOrLater(() -> {
