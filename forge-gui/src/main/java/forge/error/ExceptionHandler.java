@@ -65,7 +65,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     private static OutputStream logFileStream;
     private static File activeLogFile;
     private static FileChannel logChannel;
-    private static FileLock logLock;
 
     /** The log file this JVM is writing to, null until {@link #registerErrorHandling()} has run */
     public static File getActiveLogFile() {
@@ -149,7 +148,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
                 FileLock lock = ch.tryLock();
                 if (lock != null) {
                     logChannel = ch;
-                    logLock = lock;
                     logFileStream = Channels.newOutputStream(ch);
                     activeLogFile = slot;
                     break;
@@ -220,7 +218,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
                 logChannel = null;
             }
             // lock is auto-released when its channel closes
-            logLock = null;
         }
     }
 

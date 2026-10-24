@@ -61,6 +61,7 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.collect.FSnapshotTable;
 
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
@@ -73,6 +74,7 @@ import org.tinylog.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -105,7 +107,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // Hidden keywords won't be displayed on the card
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = TreeBasedTable.create();
+    private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = FSnapshotTable.createTree();
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, imprintedCards,
@@ -130,47 +132,47 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // changes by AF animate and continuous static effects
 
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, ICardChangedType> changedCardTypesByText = TreeBasedTable.create(); // Layer 3
-    private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = TreeBasedTable.create(); // Layer 4 CDA
-    private final Table<Long, Long, ICardChangedType> changedCardTypes = TreeBasedTable.create(); // Layer 4
+    private final Table<Long, Long, ICardChangedType> changedCardTypesByText = FSnapshotTable.createTree(); // Layer 3
+    private final Table<Long, Long, ICardChangedType> changedCardTypesCharacterDefining = FSnapshotTable.createTree(); // Layer 4 CDA
+    private final Table<Long, Long, ICardChangedType> changedCardTypes = FSnapshotTable.createTree(); // Layer 4
 
-    private final Table<Long, Long, CardChangedName> changedCardNames = TreeBasedTable.create(); // Layer 3
-    private final Table<Long, Long, IKeywordsChange> changedCardKeywordsByText = TreeBasedTable.create(); // Layer 3 by Text Change
+    private final Table<Long, Long, CardChangedName> changedCardNames = FSnapshotTable.createTree(); // Layer 3
+    private final Table<Long, Long, IKeywordsChange> changedCardKeywordsByText = FSnapshotTable.createTree(); // Layer 3 by Text Change
     protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), false); // Layer 3 by Word Change
-    private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
+    private final Table<Long, Long, KeywordsChange> changedCardKeywords = FSnapshotTable.createTree(); // Layer 6
 
     // stores the keywords created by static abilities
     private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywords = Maps.newHashMap();
 
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    private final Table<Long, Long, ICardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
+    private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = FSnapshotTable.createTree(); // Layer 3 by Text Change
+    private final Table<Long, Long, ICardTraitChanges> changedCardTraits = FSnapshotTable.createTree(); // Layer 6
 
     // stores the card traits created by static abilities
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
-    private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
-    private final Table<StaticAbility, SpellAbility, SpellAbility> storedAbilityForTrigger = HashBasedTable.create();
-    private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
-    private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = FSnapshotTable.createTree();
+    private final Table<StaticAbility, String, Trigger> storedTrigger = FSnapshotTable.createTree();
+    private final Table<StaticAbility, SpellAbility, SpellAbility> storedAbilityForTrigger = FSnapshotTable.createHash();
+    private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = FSnapshotTable.createTree();
+    private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = FSnapshotTable.createTree();
 
-    private final Table<StaticAbility, SpellAbility, SpellAbility> storedSpellAbililityByText = HashBasedTable.create();
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbililityGainedByText = TreeBasedTable.create();
-    private final Table<StaticAbility, Trigger, Trigger> storedTriggerByText = HashBasedTable.create();
-    private final Table<StaticAbility, ReplacementEffect, ReplacementEffect> storedReplacementEffectByText = HashBasedTable.create();
-    private final Table<StaticAbility, StaticAbility, StaticAbility> storedStaticAbilityByText = HashBasedTable.create();
+    private final Table<StaticAbility, SpellAbility, SpellAbility> storedSpellAbililityByText = FSnapshotTable.createHash();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbililityGainedByText = FSnapshotTable.createTree();
+    private final Table<StaticAbility, Trigger, Trigger> storedTriggerByText = FSnapshotTable.createHash();
+    private final Table<StaticAbility, ReplacementEffect, ReplacementEffect> storedReplacementEffectByText = FSnapshotTable.createHash();
+    private final Table<StaticAbility, StaticAbility, StaticAbility> storedStaticAbilityByText = FSnapshotTable.createHash();
 
     private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywordByText = Maps.newHashMap();
 
     // x=timestamp y=StaticAbility id
-    private final Table<Long, Long, CardColor> changedCardColorsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    private final Table<Long, Long, CardColor> changedCardColorsCharacterDefining = TreeBasedTable.create(); // Layer 5 CDA
-    private final Table<Long, Long, CardColor> changedCardColors = TreeBasedTable.create(); // Layer 5
+    private final Table<Long, Long, CardColor> changedCardColorsByText = FSnapshotTable.createTree(); // Layer 3 by Text Change
+    private final Table<Long, Long, CardColor> changedCardColorsCharacterDefining = FSnapshotTable.createTree(); // Layer 5 CDA
+    private final Table<Long, Long, CardColor> changedCardColors = FSnapshotTable.createTree(); // Layer 5
 
-    protected final Table<Long, Long, CardManaCost> changedCardManaCost = TreeBasedTable.create(); // Layer 3
+    protected final Table<Long, Long, CardManaCost> changedCardManaCost = FSnapshotTable.createTree(); // Layer 3
 
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap(); // Layer 1
 
-    private final Table<Long, Long, Map<String, String>> changedSVars = TreeBasedTable.create();
+    private final Table<Long, Long, Map<String, String>> changedSVars = FSnapshotTable.createTree();
 
     private Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
@@ -281,10 +283,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // stack of set power/toughness
     // x=timestamp y=StaticAbility id
-    private Table<Long, Long, Pair<Integer,Integer>> newPTText = TreeBasedTable.create(); // Text Change Layer 3
-    private Table<Long, Long, Pair<Integer,Integer>> newPTCharacterDefining = TreeBasedTable.create(); // Layer 7a
-    private Table<Long, Long, Pair<Integer,Integer>> newPT = TreeBasedTable.create(); // Layer 7b
-    private Table<Long, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create(); // Layer 7c
+    private Table<Long, Long, Pair<Integer,Integer>> newPTText = FSnapshotTable.createTree(); // Text Change Layer 3
+    private Table<Long, Long, Pair<Integer,Integer>> newPTCharacterDefining = FSnapshotTable.createTree(); // Layer 7a
+    private Table<Long, Long, Pair<Integer,Integer>> newPT = FSnapshotTable.createTree(); // Layer 7b
+    private Table<Long, Long, Pair<Integer,Integer>> boostPT = FSnapshotTable.createTree(); // Layer 7c
 
     private CardDamageHistory damageHistory = new CardDamageHistory();
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
@@ -374,10 +376,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Map<SpellAbility, List<String>> chosenModesYourCombat = Maps.newHashMap();
     private final Map<SpellAbility, List<String>> chosenModesYourLastCombat = Maps.newHashMap();
 
-    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
-    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
-    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourCombatStatic = HashBasedTable.create();
-    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourLastCombatStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = FSnapshotTable.createHash();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = FSnapshotTable.createHash();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourCombatStatic = FSnapshotTable.createHash();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourLastCombatStatic = FSnapshotTable.createHash();
 
     private ReplacementEffect shieldCounterReplaceDamage = null;
     private ReplacementEffect shieldCounterReplaceDestroy = null;
@@ -1762,7 +1764,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return;
         }
         // ETB counters are checked after moving
-        if (params != null && params.containsKey(AbilityKey.InternalTriggerTable) && !canReceiveCounters(counterType, params)) {
+        if (params != null && params.containsKey(AbilityKey.Destination) && !canReceiveCounters(counterType, params)) {
             return;
         }
 
@@ -3437,7 +3439,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         // CR 305.7 only Layer 4 are affected, and it's never intrinsic
-        return changedCardTypes.values().stream().anyMatch(ICardChangedType::isRemoveLandTypes);
+        for (ICardChangedType t : changedCardTypes.values()) {
+            if (t.isRemoveLandTypes()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean hasNoAbilities() {
@@ -5831,48 +5838,82 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return false;
     }
 
+    private static final class ParsedRestriction {
+        private static final int MAX_CACHE_SIZE = 8192;
+        private static final ConcurrentHashMap<String, ParsedRestriction> CACHE = new ConcurrentHashMap<>();
+
+        /** The card type part, without a leading '!'. */
+        final String type;
+        /** True if the restriction started with '!'. */
+        final boolean negated;
+        /** The exclusive restrictions split on '+', or null if the restriction has no '.' part. */
+        final String[] props;
+
+        private ParsedRestriction(final String restriction) {
+            final int dot = restriction.indexOf('.');
+            String t = dot < 0 ? restriction : restriction.substring(0, dot);
+            if (t.startsWith("!")) {
+                negated = true;
+                t = t.substring(1); // consume negation sign
+            } else {
+                negated = false;
+            }
+            type = t;
+            props = dot < 0 ? null : restriction.substring(dot + 1).split("\\+");
+        }
+
+        static ParsedRestriction get(final String restriction) {
+            ParsedRestriction p = CACHE.get(restriction);
+            if (p == null) {
+                if (CACHE.size() >= MAX_CACHE_SIZE) {
+                    CACHE.clear(); // restrictions are script strings, so this should practically never happen
+                }
+                p = new ParsedRestriction(restriction);
+                CACHE.put(restriction, p);
+            }
+            return p;
+        }
+    }
+
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
-        // Inclusive restrictions are Card types
-        final String[] incR = restriction.split("\\.", 2);
-
-        boolean testFailed = false;
-        if (incR[0].startsWith("!")) {
-            testFailed = true; // a bit counter logical))
-            incR[0] = incR[0].substring(1); // consume negation sign
-        }
+        // Inclusive restrictions are Card types.
+        // The parsed form is cached: this runs extremely often and splitting allocated several objects per call.
+        final ParsedRestriction parsed = ParsedRestriction.get(restriction);
+        final String type = parsed.type;
+        final boolean testFailed = parsed.negated; // a bit counter logical))
 
         // need to filter out prepared spells for other cards
         if (getCurrentStateName() == CardStateName.PreparedSpell && isInZone(ZoneType.Exile)) {
             return testFailed;
         }
 
-        if (incR[0].equals("Spell")) {
+        if (type.equals("Spell")) {
             if (!isSpell()) {
                 return testFailed;
             }
-        } else if (incR[0].equals("Permanent")) {
+        } else if (type.equals("Permanent")) {
             if (!isPermanent()) {
                 return testFailed;
             }
-        } else if (incR[0].equals("Effect")) {
+        } else if (type.equals("Effect")) {
             if (!isImmutable()) {
                 return testFailed;
             }
-        } else if (incR[0].equals("Emblem")) {
+        } else if (type.equals("Emblem")) {
             if (!isEmblem()) {
                 return testFailed;
             }
-        } else if (incR[0].equals("Boon")) {
+        } else if (type.equals("Boon")) {
             if (!isBoon()) {
                 return testFailed;
             }
-        } else if (incR[0].equals("card") || incR[0].equals("Card")) {
+        } else if (type.equals("card") || type.equals("Card")) {
             if (isImmutable()) {
                 return testFailed;
             }
-        } else if (incR[0].equals("Any")) {
+        } else if (type.equals("Any")) {
             if (!(isCreature() || isPlaneswalker() || isBattle())) {
                 return false;
             }
@@ -5882,13 +5923,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             ApiType apiType = ((SpellAbility) spellAbility).getApi();
             if (!(ApiType.DealDamage.equals(apiType) || ApiType.PreventDamage.equals(apiType)))
                 return false;*/
-        } else if (!getType().hasStringType(incR[0])) {
+        } else if (!getType().hasStringType(type)) {
             return testFailed; // Check for wrong type
         }
 
-        if (incR.length > 1) {
-            final String excR = incR[1];
-            final String[] exRs = excR.split("\\+"); // Exclusive Restrictions are ...
+        if (parsed.props != null) {
+            final String[] exRs = parsed.props; // Exclusive Restrictions are ...
             for (String exR : exRs) {
                 if (!hasProperty(exR, sourceController, source, spellAbility)) {
                     return testFailed;

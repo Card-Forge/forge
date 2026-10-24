@@ -5,6 +5,7 @@ import static forge.assets.FSkin.getDefaultSkinFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.ImageKeys;
@@ -198,13 +199,8 @@ public class CardImageRenderer {
         }
         //space for artist
         textBoxHeight -= 2 * getCapHeight(PT_FONT);
-        PaperCard paperCard = null;
-        try {
-            paperCard = ImageUtil.getPaperCardFromImageKey(state.getImageKey());
-        } catch (Exception e) {}
-        String artist = "WOTC";
-        if (paperCard != null && !paperCard.getArtist().isEmpty())
-            artist = paperCard.getArtist();
+        // the artist is only needed (and only looked up in the card database) when it is actually shown
+        String artist = showArtist ? getArtist(state.getImageKey()) : "WOTC";
         float minTextBoxHeight = 2 * headerHeight;
         if (textBoxHeight < minTextBoxHeight) {
             artHeight -= (minTextBoxHeight - textBoxHeight); //subtract from art height if text box not big enough otherwise
@@ -290,6 +286,33 @@ public class CardImageRenderer {
         if (showArtist)
             g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (getCapHeight(TYPE_FONT) / 2), y + (getCapHeight(TYPE_FONT) / 2), w, h, false, Align.left, false);
     }
+    // drawCardImage() ran a carddb search for every card on every frame just to find the artist's name, so cache it
+    private static final ConcurrentHashMap<String, String> artistByImageKey = new ConcurrentHashMap<>();
+
+    private static String getArtist(String imageKey) {
+        if (imageKey == null) {
+            return "WOTC";
+        }
+        final String cached = artistByImageKey.get(imageKey);
+        if (cached != null) {
+            return cached;
+        }
+        String artist = "WOTC";
+        try {
+            final PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (paperCard != null && !paperCard.getArtist().isEmpty()) {
+                artist = paperCard.getArtist();
+            }
+        } catch (Exception e) {
+            return artist; // not remembered, so a lookup that failed once is tried again
+        }
+        if (artistByImageKey.size() > 500) {
+            artistByImageKey.clear(); // stays bounded
+        }
+        artistByImageKey.put(imageKey, artist);
+        return artist;
+    }
+
     private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
         if (colors == null)
             return;

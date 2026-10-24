@@ -1,0 +1,9 @@
+Name:Gray and Adira, Forever Joined
+ManaCost:2 UR UR
+Types:Legendary Creature Trill Human Officer
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigCopy | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a token that's a copy of target creature you control, except it isn't legendary. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NonLegendary$ True | PumpKeywords$ Haste | PumpDuration$ EOT | AtEOT$ Sacrifice
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, if you've cast a noncreature spell this turn, create a token that's a copy of target creature you control, except it isn't legendary. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.

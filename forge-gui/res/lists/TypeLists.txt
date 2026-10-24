@@ -19,10 +19,12 @@ Town:Towns
 Urza's
 [CreatureTypes]
 Advisor:Advisors
+Aenar:Aenars
 Aetherborn:Aetherborn
 Alien:Aliens
 Ally:Allies
 Andorian:Andorians
+Android:Androids
 Angel:Angels
 Antelope:Antelopes
 Ape:Apes
@@ -328,6 +330,7 @@ Tosk:Tosks
 Toy:Toys
 Treefolk:Treefolk
 Tribble:Tribbles
+Trill:Trills
 Trilobite:Trilobites
 Triskelavite:Triskelavites
 Troll:Trolls

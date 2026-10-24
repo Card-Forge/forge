@@ -1,0 +1,16 @@
+topmenu.png
+size:1024,1024
+filter:MipMapLinearLinear,MipMapLinearLinear
+repeat:none
+vchat
+bounds:2,2,350,270
+vdev
+bounds:354,546,350,270
+vlog
+bounds:2,546,350,270
+vmenu
+bounds:354,2,350,270
+vplayers
+bounds:354,274,350,270
+vstack
+bounds:2,274,350,270
