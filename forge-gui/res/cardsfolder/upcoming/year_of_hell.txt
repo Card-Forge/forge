@@ -1,0 +1,7 @@
+Name:Year of Hell
+ManaCost:1 U R
+Types:Enchantment Saga
+K:Chapter:3:DBDraw,DBDraw,DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBDamage | SpellDescription$ Each player draws a card. This Saga deals 2 damage to each player.
+SVar:DBDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 2
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II, III — Each player draws a card. This Saga deals 2 damage to each player.

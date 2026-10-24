@@ -1,0 +1,12 @@
+Name:Storied Veteran
+ManaCost:B
+Types:Creature Klingon Advisor
+PT:2/1
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | Description$ You may cast this card from your graveyard. If you do, it enters with a finality counter on it.
+T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.MayPlaySource | Static$ True | Execute$ ReplEffAddCounter | TriggerZones$ Stack | Secondary$ True | TriggerDescription$ You may cast this card from your graveyard. If you do, it enters with a finality counter on it.
+SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard
+SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1
+DeckHas:Ability$Graveyard|Counters
+Oracle:This creature can't block.\nYou may cast this card from your graveyard. If you do, it enters with a finality counter on it.

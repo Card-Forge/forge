@@ -1,0 +1,7 @@
+Name:Warp Core
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this artifact enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ShuffleNonMandatory$ True
+A:AB$ PutCounter | Cost$ 1 T | ValidTgts$ Spacecraft | CounterType$ CHARGE | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two charge counters on target Spacecraft. Activate only as a sorcery.
+Oracle:When this artifact enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{1}, {T}: Put two charge counters on target Spacecraft. Activate only as a sorcery.
