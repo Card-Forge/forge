@@ -1,11 +1,11 @@
 Name:Tell Me What You See
 ManaCost:1 B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAskOpponent | TriggerDescription$ When this enchantment enters, target opponent may have you draw a card. If they don't, they lost 4 life and you surveil 1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAskOpponent | TriggerDescription$ When this enchantment enters, target opponent may have you draw a card. If they don't, they lose 4 life and you surveil 1.
 SVar:TrigAskOpponent:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ DBDraw,DBLoseLife
 SVar:DBDraw:DB$ Draw | SpellDescription$ CARDNAME's controller draws a card.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 4 | SubAbility$ DBSurveil | SpellDescription$ You lose 4 life and CARDNAME's controller surveils 1.
 SVar:DBSurveil:DB$ Surveil | Amount$ 1
 T:Mode$ FacesDilemma | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you face a dilemma, you may return this enchantment to its owner's hand. (You face a dilemma as you choose one or more modes for a spell or ability.)
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
-Oracle:When this enchantment enters, target opponent may have you draw a card. If they don't, they lost 4 life and you surveil 1.\nWhenever you face a dilemma, you may return this enchantment to its owner's hand. (You face a dilemma as you choose one or more modes for a spell or ability.)
+Oracle:When this enchantment enters, target opponent may have you draw a card. If they don't, they lose 4 life and you surveil 1.\nWhenever you face a dilemma, you may return this enchantment to its owner's hand. (You face a dilemma as you choose one or more modes for a spell or ability.)
