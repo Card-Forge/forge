@@ -1,9 +1,8 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.AssertJUnit;
@@ -139,7 +138,7 @@ public class FlatMonteCarloScenarioTest extends AITest {
         boolean oppHandChangedAtLeastOnce = false;
         Set<Integer> oppHandBefore = idsIn(copyOpp, ZoneType.Hand);
         for (long seed = 1; seed <= 30; seed++) {
-            HiddenInfoShuffler.shuffle(copy, sim.getGameCopier(), ai, new java.util.Random(seed));
+            HiddenInfoShuffler.shuffle(copy, sim.getGameCopier(), ai, new Random(seed));
             AssertJUnit.assertEquals("the AI's own hand is known to it and must stay as it is", aiHandBefore,
                     idsIn(copyAi, ZoneType.Hand));
             AssertJUnit.assertEquals(oppHandSize, copyOpp.getZone(ZoneType.Hand).size());
@@ -586,14 +585,14 @@ public class FlatMonteCarloScenarioTest extends AITest {
 
     @Test
     public void testHarderProfilesAreValidAndStrongerThanDefault() throws Exception {
-        java.io.File dir = new java.io.File("../forge-gui/res/ai");
+        File dir = new File("../forge-gui/res/ai");
         if (!dir.isDirectory()) {
             return; // run from an unexpected directory: nothing to check
         }
-        java.util.Map<String, java.util.Properties> profiles = new java.util.HashMap<>();
+        Map<String, Properties> profiles = new HashMap<>();
         for (String name : new String[] { "Default", "Hard", "Hardest" }) {
-            java.util.Properties props = new java.util.Properties();
-            try (java.io.FileInputStream in = new java.io.FileInputStream(new java.io.File(dir, name + ".ai"))) {
+            Properties props = new Properties();
+            try (FileInputStream in = new FileInputStream(new File(dir, name + ".ai"))) {
                 props.load(in);
             }
             profiles.put(name, props);

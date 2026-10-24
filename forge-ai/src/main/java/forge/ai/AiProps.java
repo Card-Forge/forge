@@ -178,9 +178,11 @@ public enum AiProps {
     FLAT_MC_DISCOVERY("true"),
     FLAT_MC_EXTRA_CANDIDATES("3"),
     FLAT_MC_BROAD_DISCOVERY("false"),
+    /** Compare attack sets with rollouts (the opponent blocks in the copy) instead of taking the heuristic attack. */
+    FLAT_MC_ATTACK("false"),
     FLAT_MC_OPPONENT_LOOKAHEAD("0"),
     /** off, auto (read the deck) or one of aggro, burn, control, combo, ramp, midrange. */
-    FLAT_MC_DECK_PLAN("off"),
+    FLAT_MC_DECK_PLAN("auto"),
     FLAT_MC_LAND_CHOICE("true"),
     FLAT_MC_REACTIVE("true");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting

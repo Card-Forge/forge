@@ -230,6 +230,20 @@ public final class FlatMonteCarloStats {
         }
     }
 
+    /** An attack decision: how many were made by rollouts, and how many changed what the heuristics would attack with. */
+    public static void noteAttackResult(final FlatMonteCarloPicker.Result result, final boolean changed) {
+        synchronized (LOCK) {
+            final long[] row = REACTIVE.computeIfAbsent("ATTACK", k -> new long[7]);
+            row[0]++;
+            row[1]++;
+            if (changed) {
+                row[2]++;
+            }
+            row[4] += result.rollouts;
+            row[5] += result.elapsedNanos;
+        }
+    }
+
     public static void noteRejected(final String decision) {
         synchronized (LOCK) {
             bumpBounded(REJECTED, decision);
