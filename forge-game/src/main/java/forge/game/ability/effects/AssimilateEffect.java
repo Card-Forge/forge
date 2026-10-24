@@ -40,7 +40,7 @@ public class AssimilateEffect extends SpellAbilityEffect {
         final Player controller = sa.getActivatingPlayer();
         final CounterType p1p1 = CounterEnumType.P1P1;
 
-        final CardZoneTable triggerList = new CardZoneTable();
+        final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
         final GameEntityCounterTable alreadyInPlay = new GameEntityCounterTable();
 
         for (final Card tgt : getCardsfromTargets(sa)) {
