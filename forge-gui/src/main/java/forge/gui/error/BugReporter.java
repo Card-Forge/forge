@@ -82,13 +82,17 @@ public class BugReporter {
         }
         if ((!(exception instanceof IllegalAbilityException iae) || !iae.isCustom()) && isSentryEnabled()) {
             sendSentry();
-        } else {
+        } else if (!java.awt.GraphicsEnvironment.isHeadless()) {
             GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("lblReportCrash", "Report a Crash"), sb.toString(), true);
         }
     }
 
     public static boolean isSentryEnabled() {
-        return FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.USE_SENTRY);
+        try {
+            return FModel.getPreferences() != null && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.USE_SENTRY);
+        } catch (Throwable ignored) {
+            return false;
+        }
     }
     /**
      * Alias for reportException(ex, null).
@@ -117,7 +121,7 @@ public class BugReporter {
 
         if (isSentryEnabled()) {
             sendSentry();
-        } else {
+        } else if (!java.awt.GraphicsEnvironment.isHeadless()) {
             GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("btnReportBug", "Report a Bug"), message, false);
         }
     }
