@@ -360,6 +360,7 @@ public class GameAction {
                     }
                 } else if (toBattlefield && !c.isInPlay()) {
                     // was replaced with another Zone Change
+                    cleanStaticEffect(staticEff, copied);
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
