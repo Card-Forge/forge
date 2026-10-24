@@ -635,7 +635,8 @@ public class AiController {
                             return land;
                         }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            if (m.canProduce(color.getShortName())) {
+                            // before the first land drop there is usually nothing to pay for a filter
+                            if (!m.getPayCosts().hasManaCost() && m.canProduce(color.getShortName())) {
                                 return land;
                             }
                         }
