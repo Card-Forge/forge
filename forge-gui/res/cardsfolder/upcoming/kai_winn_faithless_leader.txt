@@ -4,6 +4,6 @@ Types:Legendary Creature Bajoran Cleric
 PT:3/1
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As NICKNAME enters, choose a nonland card name.
-T:Mode$ SpellAbilityCast | ValidCard$ Card.NamedCard | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent casts a spell with the chosen name or activates an ability of a source with the chosen name, that player loses 3 life.
+T:Mode$ SpellAbilityCast | ValidCard$ Card.NamedCard | ValidSA$ Spell,Activated | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent casts a spell with the chosen name or activates an ability of a source with the chosen name, that player loses 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 3
 Oracle:As Kai Winn enters, choose a nonland card name.\nWhenever an opponent casts a spell with the chosen name or activates an ability of a source with the chosen name, that player loses 3 life.
