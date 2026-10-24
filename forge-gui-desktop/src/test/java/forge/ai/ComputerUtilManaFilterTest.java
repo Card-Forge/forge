@@ -148,4 +148,45 @@ public class ComputerUtilManaFilterTest extends AITest {
         List<SpellAbility> play = ((PlayerControllerAi) ai.getController()).getAi().chooseSpellAbilityToPlay();
         AssertJUnit.assertEquals("the Gate alone can't make {W}", plains, play.get(0).getHostCard());
     }
+
+    @Test
+    public void oneSignetPaysForAnother() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Plains", ai);
+        Card azorius = addCard("Azorius Signet", ai);
+        Card dimir = addCard("Dimir Signet", ai);
+        Card cancel = addCardToZone("Cancel", ai, ZoneType.Hand); // {1}{U}{U}
+
+        AssertJUnit.assertTrue("one Signet's mana pays for the other without taking a blue", payForReal(cancel, ai));
+        AssertJUnit.assertTrue(azorius.isTapped() && dimir.isTapped());
+    }
+
+    @Test
+    public void twoSignetsEachFedByALand() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Plains", ai);
+        addCard("Island", ai);
+        Card azorius = addCard("Azorius Signet", ai);
+        Card dimir = addCard("Dimir Signet", ai);
+        Card inspiration = addCardToZone("Inspiration", ai, ZoneType.Hand); // {3}{U}
+
+        AssertJUnit.assertTrue(payForReal(inspiration, ai));
+        AssertJUnit.assertTrue(azorius.isTapped() && dimir.isTapped());
+    }
+
+    @Test
+    public void oneFilterLandPaysForAnother() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Plains", ai);
+        addCards("Mystic Gate", 2, ai);
+        Card sanity = addCardToZone("Fractured Sanity", ai, ZoneType.Hand); // {U}{U}{U}
+
+        AssertJUnit.assertTrue(payForReal(sanity, ai));
+    }
 }
