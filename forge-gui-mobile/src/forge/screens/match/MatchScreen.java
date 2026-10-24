@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.adventure.scene.GameScene;
+import forge.adventure.util.AdventureBackgroundResolver;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
@@ -631,6 +631,9 @@ public class MatchScreen extends FScreen {
                 y = a.y + a.height / 2 - h / 2;
             }
             y = Math.max(scroller.screenPos.y, Math.min(y, bottomPlayerPrompt.screenPos.y - h));
+            //open dropdowns draw over the preview, so it moves to their left instead of ending up under them
+            if (getStack().isVisible()) { x = moveLeftOfObstacle(getStack().screenPos, x, y, w, h, a, left); }
+            if (unifiedPhase.getMenu().isOpen()) { x = moveLeftOfObstacle(unifiedPhase.getMenu().screenPos, x, y, w, h, a, left); }
 
             if (Forge.magnifyShowDetails) {
                 CardImageRenderer.drawDetails(g, card, MatchController.instance.getGameView(), false, x, y, w, h);
@@ -643,6 +646,17 @@ public class MatchScreen extends FScreen {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //if the preview would sit under the obstacle (an open dropdown), returns an x left of both the obstacle and the hovered card
+    //so neither is covered; when there is no room on that side the preview stays where it was
+    private static float moveLeftOfObstacle(Rectangle obstacle, float x, float y, float w, float h, Rectangle anchor, float left) {
+        if (obstacle.width <= 0 || x >= obstacle.x + obstacle.width || x + w <= obstacle.x
+                || y >= obstacle.y + obstacle.height || y + h <= obstacle.y) {
+            return x;
+        }
+        final float moved = Math.min(obstacle.x, anchor.x) - w - PREVIEW_GAP;
+        return moved >= left ? moved : x;
     }
 
     void drawArcs(Graphics g) {
@@ -1011,18 +1025,7 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            return switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
-                case "green" -> FSkinTexture.ADV_BG_FOREST;
-                case "black" -> FSkinTexture.ADV_BG_SWAMP;
-                case "red" -> FSkinTexture.ADV_BG_MOUNTAIN;
-                case "blue" -> FSkinTexture.ADV_BG_ISLAND;
-                case "white" -> FSkinTexture.ADV_BG_PLAINS;
-                case "waste" -> FSkinTexture.ADV_BG_WASTE;
-                case "cave" -> FSkinTexture.ADV_BG_CAVE;
-                case "dungeon" -> FSkinTexture.ADV_BG_DUNGEON;
-                case "castle" -> FSkinTexture.ADV_BG_CASTLE;
-                default -> FSkinTexture.ADV_BG_COMMON;
-            };
+            return AdventureBackgroundResolver.getBattleBackground();
         }
         return FSkinTexture.BG_MATCH;
     }

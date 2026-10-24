@@ -331,6 +331,8 @@ public enum CounterEnumType implements CounterType {
 
     PARALYZATION("PRLYZ", 220, 201, 0, CounterAiCategory.Negative),
 
+    PEACE("PEACE", 255, 255, 255, CounterAiCategory.Positive),
+
     PETAL("PETAL", 255, 162, 216, CounterAiCategory.Positive),
 
     PETRIFICATION("PETRI", 185, 201, 208, CounterAiCategory.Neutral),

@@ -1201,6 +1201,38 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     public final boolean devAdvanceToPhase(PhaseType targetPhase) {
         return devAdvanceToPhase(targetPhase, null);
     }
+
+    /**
+     * For AI simulation on a copy of the game: plays on from the current phase through the end of this turn into the
+     * given phase of the next turn (upkeep, draw step and so on all really happen, so the next player draws their
+     * card). Like {@link #devAdvanceToPhase(PhaseType, Runnable)} it does not hand out priority.
+     *
+     * @return false if the game ended, state based effects ended it, or the turn order is reversed (not simulated)
+     */
+    public final boolean devAdvanceThroughTurnEnd(PhaseType targetPhase, Runnable resolver) {
+        if (playerTurn.isPhasesReversed()) {
+            return false;
+        }
+        final int startTurn = turn;
+        int guard = 0;
+        while (turn == startTurn || phase.isBefore(targetPhase, false)) {
+            if (++guard > 60 || game.isGameOver() || checkStateBasedEffects()) {
+                return false;
+            }
+            if (resolver != null) {
+                resolver.run();
+            }
+            onPhaseEnd();
+            // ending a phase (end of turn effects, cleanup) can put triggers on the stack: they must be gone before the next one
+            for (int i = 0; resolver != null && i < 3 && !game.getStack().isEmpty() && !game.isGameOver(); i++) {
+                resolver.run();
+            }
+            advanceToNextPhase();
+            onPhaseBegin();
+        }
+        checkStateBasedEffects();
+        return !game.isGameOver();
+    }
     public final boolean devAdvanceToPhase(PhaseType targetPhase, Runnable resolver) {
         boolean isTopsy = playerTurn.isPhasesReversed();
         while (phase.isBefore(targetPhase, isTopsy)) {

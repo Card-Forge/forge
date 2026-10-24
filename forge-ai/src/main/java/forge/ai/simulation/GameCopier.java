@@ -49,12 +49,21 @@ public class GameCopier {
     private BiMap<Card, Card> cardMap = HashBiMap.create();
     private CopiedGameObjectMap gameObjectMap;
     private GameSnapshot snapshot = null;
+    /** Copy the spells on the stack too (see {@link GameSimulator#COPY_STACK}); decided per copier. */
+    private boolean copyStack = GameSimulator.COPY_STACK;
+    private final java.util.Map<SpellAbility, SpellAbility> stackMap = new java.util.HashMap<>();
 
     public GameCopier(Game origGame) {
         this.origGame = origGame;
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
             this.snapshot = new GameSnapshot(origGame);
         }
+    }
+
+    /** Makes {@link #makeCopy} copy the spells on the stack, so that a decision with a spell on the stack can be simulated. */
+    public GameCopier withStack(final boolean copy) {
+        this.copyStack = copy;
+        return this;
     }
 
     public Game getOriginalGame() {
@@ -148,6 +157,11 @@ public class GameCopier {
                         if (o instanceof Card && ((Card)o).getZone() == null) {
                            continue;
                         }
+                        // The same for an ability (a spell remembering itself or the ability that created it): the copy of
+                        // the stack is only made below, so there is nothing to map it to yet.
+                        if (o instanceof SpellAbility) {
+                            continue;
+                        }
                         c.addRemembered(find((GameObject) o));
                     } else {
                         System.err.println(c + " Remembered: " + o + "/" + o.getClass());
@@ -175,7 +189,7 @@ public class GameCopier {
         newGame.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
         newGame.getTriggerHandler().resetActiveTriggers();
 
-        if (GameSimulator.COPY_STACK)
+        if (copyStack)
             copyStack(origGame, newGame, gameObjectMap);
 
         // TODO update thisTurnCast
@@ -187,7 +201,7 @@ public class GameCopier {
         return newGame;
     }
 
-    private static void copyStack(Game origGame, Game newGame, IEntityMap map) {
+    private void copyStack(Game origGame, Game newGame, IEntityMap map) {
         for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
             SpellAbility origSa = origEntry.getSpellAbility();
             Card origHostCard = origSa.getHostCard();
@@ -204,6 +218,7 @@ public class GameCopier {
                     }
                 }
                 newGame.getStack().add(newSa);
+                stackMap.put(origSa, newSa);
             }
         } 
     }
@@ -509,6 +524,11 @@ public class GameCopier {
             }
         } else if (o instanceof Player) {
             result = (T) playerMap.get(o);
+            if (result != null)
+                return result;
+        } else if (o instanceof SpellAbility) {
+            // a spell on the stack (the target of a counterspell), only known when the stack was copied
+            result = (T) stackMap.get(o);
             if (result != null)
                 return result;
         }

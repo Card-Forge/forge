@@ -147,7 +147,38 @@ public enum AiProps {
     SIDEBOARDING_CHANCE_ON_WIN("0"),
     SIDEBOARDING_IN_LIMITED_FORMATS("false"),
     SIDEBOARDING_SHARED_TYPE_ONLY("false"),
-    SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false");
+    SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false"),
+    // Flat Monte Carlo refinement of main phase plays (only used when the "AI flat Monte Carlo" match preference is on).
+    // See FlatMonteCarloPicker for how these are used.
+    FLAT_MC_MAX_CANDIDATES("5"),
+    FLAT_MC_ROLLOUTS_PER_CANDIDATE("4"),
+    FLAT_MC_MAX_PLAYOUT_PLAYS("6"),
+    FLAT_MC_COMBO_PLAYOUT_PLAYS("14"),
+    FLAT_MC_DECISION_BUDGET_MS("450"),
+    FLAT_MC_TURN_BUDGET_MS("2000"),
+    FLAT_MC_HEURISTIC_BONUS("80"),
+    FLAT_MC_CONSIDER_HOLDING("true"),
+    FLAT_MC_HOLD_MANA_WEIGHT("100"),
+    FLAT_MC_RISK_WEIGHT("100"),
+    FLAT_MC_OVERRIDE_MAJORITY("50"),
+    FLAT_MC_ENABLED("true"),
+    // Sampling efficiency and deck-agnostic valuation. Setting PRUNING/CATEGORY_HOLD/ADAPTIVE_PLAYOUT to false and
+    // EXTRA_ROUNDS to 0 reproduces the original flat Monte Carlo, which is what the A/B benchmark uses as baseline.
+    FLAT_MC_EXTRA_ROUNDS("2"),
+    FLAT_MC_PRUNING("true"),
+    FLAT_MC_CATEGORY_HOLD("true"),
+    FLAT_MC_ADAPTIVE_PLAYOUT("true"),
+    FLAT_MC_TARGET_VARIANTS("2"),
+    // Strategic play: how far beyond "the heuristics' favourite plays, on my own turn" Monte Carlo looks.
+    // STRATEGIC_WEIGHT scales the card advantage / answers / threat quality terms of the evaluation (0 = off),
+    // DISCOVERY adds legal card draw and selection plays the heuristics ranked low and keeps the candidates varied,
+    // LAND_CHOICE compares the lands that can be played, REACTIVE extends Monte Carlo to the opponent's turn
+    // (responses to spells on the stack and instant-speed plays at the opponent's end step).
+    FLAT_MC_STRATEGIC_WEIGHT("100"),
+    FLAT_MC_DISCOVERY("true"),
+    FLAT_MC_EXTRA_CANDIDATES("3"),
+    FLAT_MC_LAND_CHOICE("true"),
+    FLAT_MC_REACTIVE("true");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

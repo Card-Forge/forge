@@ -43,6 +43,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
         UI_FULLSCREEN_MODE ("false"),
+        UI_KEEP_MOUSE_IN_FULLSCREEN ("false"),
         UI_VIDEO_MODE ("720p"),
         UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
@@ -211,6 +212,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_CURRENT_AI_PROFILE ("Default"),
         MATCH_AI_SIDEBOARDING_MODE("Human For AI"),
         MATCH_AI_TIMEOUT("5"),
+        MATCH_AI_FLAT_MONTE_CARLO("true"),
         UI_ENABLE_AI_CHEATS ("false"),
         //MATCH_EXPERIMENTAL_RESTORE("false"),
 

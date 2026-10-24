@@ -1,0 +1,8 @@
+Name:The Duras Sisters
+ManaCost:BR BR
+Types:Legendary Creature Klingon Warrior
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME die, create a 2/1 red Klingon Warrior creature token with haste.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_1_klingon_warrior_haste | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When The Duras Sisters die, create a 2/1 red Klingon Warrior creature token with haste.
