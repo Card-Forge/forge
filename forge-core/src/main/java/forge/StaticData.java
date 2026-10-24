@@ -88,6 +88,7 @@ public class StaticData {
         this.customCardReader = customCardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
+        editions.loadPrintTags(new File(blockDataFolder, "printtags.txt"));
         this.blockDataFolder = blockDataFolder;
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
