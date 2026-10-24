@@ -4,6 +4,7 @@ import forge.ai.AITest;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -36,21 +37,41 @@ public class SimultaneousEntryTriggerTest extends AITest {
 
     @Test
     public void kodamaSeesMoxDiamondThatEntersWithItButMovesFirst() {
-        Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(0);
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
-        addCardToZone("Island", p, ZoneType.Hand);
-        addCardToZone("Mox Diamond", p, ZoneType.Graveyard);
-        addCardToZone("Kodama of the East Tree", p, ZoneType.Graveyard);
-        game.getAction().checkStateEffects(true);
-
-        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Battlefield", addCard("Forest", p));
-        sa.setActivatingPlayer(p);
-        AbilityUtils.resolve(sa);
-        game.getAction().checkStateEffects(true);
-        game.getStack().addAllTriggeredAbilitiesToStack();
+        Game game = returnTogether("Mox Diamond", "Kodama of the East Tree");
 
         AssertJUnit.assertEquals(1, game.getStack().size());
         AssertJUnit.assertEquals("Kodama of the East Tree", game.getStack().peekAbility().getHostCard().getName());
+    }
+
+    @Test
+    public void titaniaDoesNotSeeTheLandSacrificedToLakeOfTheDeadEnteringWithHer() {
+        Game game = returnTogether("Titania, Protector of Argoth", "Lake of the Dead", "Swamp");
+
+        // only her own enters trigger
+        AssertJUnit.assertEquals(1, game.getStack().size());
+        AssertJUnit.assertTrue(game.getStack().peekAbility().usesTargeting());
+    }
+
+    private Game returnTogether(String movesFirst, String movesSecond, String... alreadyThere) {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        Card host = addCard("Forest", p);
+        for (String name : alreadyThere) {
+            addCard(name, p);
+        }
+        addCardToZone("Island", p, ZoneType.Hand);
+        addCardToZone(movesFirst, p, ZoneType.Graveyard);
+        addCardToZone(movesSecond, p, ZoneType.Graveyard);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = AbilityFactory.getAbility("DB$ ChangeZoneAll | ChangeType$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Battlefield", host);
+        sa.setActivatingPlayer(p);
+        game.getStack().freezeStack(sa);
+        AbilityUtils.resolve(sa);
+        game.getStack().unfreezeStack();
+        game.getAction().checkStateEffects(true);
+        game.getStack().addAllTriggeredAbilitiesToStack();
+        return game;
     }
 }

@@ -442,7 +442,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
-        if (!canGainLife() || lifeGain <= 0) {
+        if (!canGainLife(sa) || lifeGain <= 0) {
             return false;
         }
 
@@ -493,14 +493,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canGainLife() {
-        return isInGame() && !StaticAbilityCantGainLosePayLife.anyCantGainLife(this);
+        return canGainLife(null);
+    }
+    public final boolean canGainLife(final SpellAbility cause) {
+        return isInGame() && !StaticAbilityCantGainLosePayLife.anyCantGainLife(this, cause);
     }
 
     public final int loseLife(int toLose, final boolean damage, final boolean manaBurn, final SpellAbility cause) {
         // Rule 118.4
         // this is for players being able to pay 0 life nothing to do
         // no trigger for lost no life
-        if (toLose <= 0 || !canLoseLife()) {
+        if (toLose <= 0 || !canLoseLife(cause)) {
             return 0;
         }
         int oldLife = life;
@@ -551,7 +554,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        return isInGame() && !StaticAbilityCantGainLosePayLife.anyCantLoseLife(this);
+        return canLoseLife(null);
+    }
+    public final boolean canLoseLife(final SpellAbility cause) {
+        return isInGame() && !StaticAbilityCantGainLosePayLife.anyCantLoseLife(this, cause);
     }
 
     public final boolean canPayLife(final int lifePayment, final boolean effect, SpellAbility cause) {
