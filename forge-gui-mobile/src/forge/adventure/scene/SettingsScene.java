@@ -9,8 +9,10 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.RewardData;
+import forge.adventure.util.AdventureBackgroundDownloader;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.assets.FSkinTexture;
 import forge.assets.ImageCache;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -206,6 +208,8 @@ public class SettingsScene extends UIScene {
                     FModel.getPreferences().save();
                 }
             });
+            addCheckBox(localizer.getMessage("lblKeepMouseInFullscreen"),
+                    ForgePreferences.FPref.UI_KEEP_MOUSE_IN_FULLSCREEN, Forge::updateMouseConfine);
         }
         addSettingField(localizer.getMessage("lblDay") + " | " + localizer.getMessage("lblNight") + " " + localizer.getMessage("lblBackgroundImage"), Config.instance().getSettingData().dayNightBG, new ChangeListener() {
             @Override
@@ -215,6 +219,59 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
                 if (value) {
                     updateBG(true);
+                }
+            }
+        });
+        String off = localizer.getMessage("lblOff");
+        String planeDefault = localizer.getMessage("lblPlaneDefault");
+        String customSource = localizer.getMessage("lblCustomSource");
+        boolean useCustomSource = Config.instance().isUsingCustomBattleBackgroundSource();
+        String configuredSource = Config.instance().getCustomBattleBackgroundSource();
+        SelectBox<String> backgroundSource = Controls.newComboBox();
+        backgroundSource.setItems(off, planeDefault, customSource);
+        backgroundSource.setSelected(!Config.instance().isExtraBattleBackgroundsEnabled()
+                ? off : useCustomSource ? customSource : planeDefault);
+        TextField backgroundSourceUrl = Controls.newTextField(configuredSource == null ? "" : configuredSource);
+        addLabel(localizer.getMessage("lblBattleBackgrounds", Config.instance().getPlane()));
+        settingGroup.add(backgroundSource).align(Align.right).pad(2);
+        Cell<TextraLabel> backgroundUrlLabelCell = addLabel(localizer.getMessage("lblBattleBackgroundIndexUrl"));
+        TextraLabel backgroundUrlLabel = backgroundUrlLabelCell.getActor();
+        Cell<TextField> backgroundUrlCell = settingGroup.add(backgroundSourceUrl).align(Align.right).pad(2);
+        Runnable updateBackgroundUrlVisibility = () -> {
+            boolean custom = customSource.equals(backgroundSource.getSelected());
+            backgroundUrlLabel.setVisible(custom);
+            backgroundSourceUrl.setVisible(custom);
+            backgroundUrlLabelCell.height(custom ? Value.prefHeight : Value.zero)
+                    .padTop(custom ? 2 : 0).padBottom(custom ? 2 : 0)
+                    .spaceTop(custom ? 5 : 0).spaceBottom(custom ? 5 : 0);
+            backgroundUrlCell.height(custom ? Value.prefHeight : Value.zero)
+                    .padTop(custom ? 2 : 0).padBottom(custom ? 2 : 0)
+                    .spaceTop(custom ? 5 : 0).spaceBottom(custom ? 5 : 0);
+            settingGroup.invalidateHierarchy();
+        };
+        updateBackgroundUrlVisibility.run();
+        backgroundSource.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean custom = customSource.equals(((SelectBox<?>) actor).getSelected());
+                boolean enabled = !off.equals(backgroundSource.getSelected());
+                updateBackgroundUrlVisibility.run();
+                Config.instance().setExtraBattleBackgroundsEnabled(enabled);
+                if (enabled) {
+                    Config.instance().setUseCustomBattleBackgroundSource(custom);
+                }
+                Config.instance().saveSettings();
+                AdventureBackgroundDownloader.cancel();
+                FSkinTexture.invalidateAdventureTextures();
+            }
+        });
+        backgroundSourceUrl.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (customSource.equals(backgroundSource.getSelected())) {
+                    Config.instance().setBattleBackgroundSource(((TextField) actor).getText());
+                    Config.instance().saveSettings();
+                    AdventureBackgroundDownloader.cancel();
                 }
             }
         });
@@ -420,6 +477,9 @@ public class SettingsScene extends UIScene {
 
 
     public boolean back() {
+        GuiBase.setAdventureCacheDirectory(Config.instance().getCachePrefix());
+        FSkinTexture.invalidateAdventureTextures();
+        AdventureBackgroundDownloader.start();
         Forge.switchToLast();
         return true;
     }
@@ -477,12 +537,13 @@ public class SettingsScene extends UIScene {
         settingGroup.add(slide).align(Align.right);
     }
 
-    private void addSettingField(String name, boolean value, ChangeListener change) {
+    private CheckBox addSettingField(String name, boolean value, ChangeListener change) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+        return box;
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {
@@ -493,12 +554,12 @@ public class SettingsScene extends UIScene {
         settingGroup.add(text).align(Align.right);
     }
 
-    void addLabel(String name) {
+    Cell<TextraLabel> addLabel(String name) {
         TextraLabel label = Controls.newTextraLabel(name);
         label.setWrap(true);
         settingGroup.row().space(5);
         int w = Forge.isLandscapeMode() ? 160 : 80;
-        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
+        return settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
     }
 
     private void restartForge() {

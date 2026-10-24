@@ -147,6 +147,12 @@ NobleShop
 BoosterShop
   xy: 384,944
   size:16, 16
+NinjaShop
+  xy: 384, 976
+  size:16, 16
+FaerieShop
+  xy: 370, 976
+  size:16, 16
 MerfolkShop
   xy: 368, 768
   size: 16, 16

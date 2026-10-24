@@ -124,7 +124,6 @@ public class HostedMatch {
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
         sortedPlayers.sort((p1, p2) -> {
-
             final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             return Integer.compare(v1, v2);
@@ -160,6 +159,9 @@ public class HostedMatch {
         game = match.createGame();
         //game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
         game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        game.AI_FLAT_MONTE_CARLO = FModel.getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO);
+        // Desktop auto-detection: phones and tablets keep the light settings, a PC gets the maximum strength.
+        game.AI_FLAT_MONTE_CARLO_MAX = !forge.gui.GuiBase.isMobile();
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
@@ -301,7 +303,7 @@ public class HostedMatch {
                 throw ex;
             }
             // this function waits?
-            if (endGameHook != null){
+            if (endGameHook != null) {
                 endGameHook.run();
             }
 

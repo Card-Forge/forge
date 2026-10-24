@@ -100,6 +100,13 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
     public int AI_TIMEOUT = 5;
+    // Whether heuristic AI players may refine their main phase choices with flat Monte Carlo rollouts.
+    // False here on purpose: it is really set by the Match/Preferences (MATCH_AI_FLAT_MONTE_CARLO, default true),
+    // and games copied for AI simulation never inherit it, so rollouts cannot recurse into themselves.
+    public boolean AI_FLAT_MONTE_CARLO = false;
+    // Whether Monte Carlo may use its maximum strength settings (bigger budgets, more lines and samples). Set by the
+    // Match when it runs on a desktop; mobile ports keep the conservative profile values. Never inherited by copies.
+    public boolean AI_FLAT_MONTE_CARLO_MAX = false;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
     // While this is false here, its really set by the Match/Preferences
@@ -1442,6 +1449,12 @@ public class Game {
 
     public int getAITimeout() {
         return AI_TIMEOUT;
+    }
+    public boolean getAIFlatMonteCarlo() {
+        return AI_FLAT_MONTE_CARLO;
+    }
+    public boolean getAIFlatMonteCarloMax() {
+        return AI_FLAT_MONTE_CARLO_MAX;
     }
     public boolean isNoGUIUser() {
         return noGUIUser;

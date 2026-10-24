@@ -87,6 +87,11 @@ public interface IGuiGame {
     }
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
+    /** Updates buttons while explicitly identifying whether Cancel represents Undo. */
+    default void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1, boolean undoAvailable) {
+        updateButtons(owner, label1, label2, enable1, enable2, focus1);
+    }
+
     /** Plays a coin flip animation and blocks until it finishes. No-op by default. */
     default void showCoinFlip(boolean heads, String caption, boolean waitForTap) {}
     default void showFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, List<CardView> battlefield, int timesFlipped) {}

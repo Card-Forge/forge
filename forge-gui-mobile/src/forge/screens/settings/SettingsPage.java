@@ -155,6 +155,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Config.instance().saveSettings();
                     }
                 }, 0);
+            lstSettings.addItem(new BooleanSetting(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN,
+                Forge.getLocalizer().getMessage("lblKeepMouseInFullscreen"),
+                Forge.getLocalizer().getMessage("nlKeepMouseInFullscreen")) {
+                    @Override
+                    public void select() {
+                        super.select();
+                        Forge.updateMouseConfine();
+                    }
+                }, 0);
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
                 Forge.getLocalizer().getMessage("lblVideoMode"),
                 Forge.getLocalizer().getMessage("nlVideoMode"),
@@ -213,6 +222,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
             Forge.getLocalizer().getMessage("cbEnableAICheats"),
             Forge.getLocalizer().getMessage("nlEnableAICheats")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_AI_FLAT_MONTE_CARLO,
+            Forge.getLocalizer().getMessage("cbAiFlatMonteCarlo"),
+            Forge.getLocalizer().getMessage("nlAiFlatMonteCarlo")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.LEGACY_MANABURN,
             Forge.getLocalizer().getMessage("cbManaBurn"),
             Forge.getLocalizer().getMessage("nlManaBurn")), 1);
@@ -348,6 +360,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     if (MatchController.instance != null) {
                         MatchController.instance.resetPlayerPanels();
                     }
+                    if (MatchController.getView() != null) {
+                        MatchController.getView().revalidate();
+                    }
                 }
             }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_HIDE_MENU,
@@ -357,6 +372,21 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void select() {
                 super.select();
                 VPlayerPanel.reloadMenuHidden();
+                if (MatchController.getView() != null) {
+                    MatchController.getView().revalidate();
+                }
+            }
+        }, 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_UNIFIED_PHASE_LABEL,
+            Forge.getLocalizer().getMessageorUseDefault("lblUnifiedPhaseLabel", "Unified Phase Label (Compact Layout)"),
+            Forge.getLocalizer().getMessageorUseDefault("nlUnifiedPhaseLabel", "Shows one phase label next to the Stack menu instead of one on each player panel. Tap it to see and change every player's phase stops.")) {
+            @Override
+            public void select() {
+                super.select();
+                VPlayerPanel.reloadUnifiedPhase();
+                if (MatchController.instance != null) {
+                    MatchController.instance.resetPlayerPanels();
+                }
                 if (MatchController.getView() != null) {
                     MatchController.getView().revalidate();
                 }
