@@ -1,0 +1,10 @@
+Name:Kai Winn, Faithless Leader
+ManaCost:1 B
+Types:Legendary Creature Bajoran Cleric
+PT:3/1
+K:ETBReplacement:Other:DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As NICKNAME enters, choose a nonland card name.
+T:Mode$ SpellCast | ValidCard$ Card.NamedCard | ValidActivatingPlayer$ Opponent | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell with the chosen name or activates an ability of a source with the chosen name, that player loses 3 life.
+T:Mode$ AbilityCast | ValidCard$ Card.NamedCard | ValidSA$ Activated.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever an opponent casts a spell with the chosen name or activates an ability of a source with the chosen name, that player loses 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 3
+Oracle:As Kai Winn enters, choose a nonland card name.\nWhenever an opponent casts a spell with the chosen name or activates an ability of a source with the chosen name, that player loses 3 life.
