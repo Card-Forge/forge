@@ -1,0 +1,10 @@
+Name:All Good Things . . .
+ManaCost:3 G U
+Types:Enchantment Saga
+K:Chapter:4:DBDraw,DBDraw,DBDraw,DBGainLife
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBExile | SpellDescription$ Draw two cards, then exile a card from your hand.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 10 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQY | SpellDescription$ If all cards exiled with this Saga share a card type, you gain 10 life.
+SVar:X:ExiledWith$SharedCardTypes
+SVar:Y:ExiledWith$Amount
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Draw two cards, then exile a card from your hand.\nIV — If all cards exiled with this Saga share a card type, you gain 10 life.
