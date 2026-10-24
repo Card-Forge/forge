@@ -28,6 +28,7 @@ import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -235,7 +236,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             flushPendingEvents();
             return;
         }
-        DeltaPacket delta = syncManager.collectDeltas(gameView);
+        DeltaPacket delta = syncManager.collectDeltas(gameView, deltaViewers());
         if (!delta.isEmpty()) {
             if (flush) {
                 sender.send(ProtocolMethod.applyDelta, delta);
@@ -244,6 +245,25 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             }
             onDeltaSent(delta, List.of(), gameView);
         }
+    }
+
+    /**
+     * Null (unfiltered) for a proxy holding the spectator controller with no local players, and for a mobile client
+     * once the game is over; otherwise a copy of the local players taken at the start of each walk by the thread
+     * running it; empty before the players are registered, which withholds every library card.
+     */
+    private Collection<PlayerView> deltaViewers() {
+        if (!hasLocalPlayers() && getGameController((PlayerView) null) != null) {
+            return null;
+        }
+        // The mobile port's post-game overlay browses every zone through AbstractGuiGame.mayView, which is open to
+        // every card once a mobile game is over, so a mobile client is sent its library cards in full then. The
+        // desktop mayView has no game-over case, so a desktop client keeps its placeholders.
+        // Read live: a game-over set inside a tracker freeze takes effect from the first walk after the unfreeze
+        if (isLibgdxPort() && getGameView() != null && getGameView().isGameOver()) {
+            return null;
+        }
+        return List.copyOf(getLocalPlayers());
     }
 
     /**
@@ -568,7 +588,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
             if (gameView != null) {
-                DeltaPacket delta = syncManager.collectDeltas(gameView);
+                DeltaPacket delta = syncManager.collectDeltas(gameView, deltaViewers());
                 delta.setEvents(encodeEvents(events, gameView.getTracker()));
                 sender.send(ProtocolMethod.applyDelta, delta);
                 onDeltaSent(delta, events, gameView);
