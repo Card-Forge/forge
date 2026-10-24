@@ -429,7 +429,12 @@ public class FTextField extends FDisplayObject implements ITextField {
         float h = getHeight();
         boolean drawBackground = !readOnly; //don't draw background or border if read-only
 
-        if (drawBackground) {
+        final boolean frost = drawBackground && Frost.isOn();
+        if (frost) { //frosted: a rounded slate field with a faint light edge
+            final float radius = Utils.scale(2);//Math.min(h * 0.22f, Utils.scale(8));
+            g.fillRoundRect(Frost.EDGE, 0, 0, w, h, radius);
+            g.fillRoundRect(Frost.slate(0.62f), 1, 1, w - 2, h - 2, Math.max(0, radius - 1));
+        } else if (drawBackground) {
             g.fillRect(getBackColor(), 0, 0, w, h);
         }
 
@@ -470,7 +475,7 @@ public class FTextField extends FDisplayObject implements ITextField {
             drawText(g, w, h);
         }
 
-        if (drawBackground) {
+        if (drawBackground && !frost) {
             g.drawRect(BORDER_THICKNESS, getForeColor(), BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
         }
     }

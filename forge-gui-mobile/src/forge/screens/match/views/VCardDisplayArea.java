@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.FlipOntoBattlefieldAnimation;
@@ -35,6 +36,7 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FSelectionBox;
 import forge.util.ThreadUtil;
+import forge.util.Utils;
 import io.sentry.Sentry;
 
 public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
@@ -94,16 +96,81 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             dragPanel = null;
             Gdx.graphics.requestRendering();
         }
+        if (panMode == PAN_INSPECT) {
+            inspectEndMillis = System.currentTimeMillis();
+        }
+        panMode = PAN_NONE;
+        panSumX = panSumY = 0;
         dragging = false;
         lastDragMillis = System.currentTimeMillis();
     }
 
+    // horizontal strip gestures: a mostly horizontal drag scrolls, a vertical-first drag inspects cards
+    private static final int PAN_NONE = 0, PAN_SCROLL = 1, PAN_INSPECT = 2;
+    private static final float PAN_LOCK_DISTANCE = Utils.scale(8);
+    private static final float INSPECT_STEEPNESS = 1.5f; //a touch drag must be this much more vertical than horizontal to inspect
+    private int panMode = PAN_NONE;
+    private float panSumX, panSumY;
+    private long inspectEndMillis;
+
+    /** Horizontal single-row display in landscape: drag scrolls, a vertical-first drag inspects cards. */
+    protected boolean isHorizontalStrip() { return false; }
+
+    //FScrollPane.pan gives the drag away as soon as a single event is more vertical than horizontal, which a mouse
+    //does all the time; once a drag has been recognised as a scroll it stays one
+    private boolean scrollRow(float deltaX) {
+        if (getMaxScrollLeft() <= 0) { return false; } //nothing to scroll
+        setScrollLeft(getScrollLeft() - deltaX);
+        return true;
+    }
+
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
-        if (Forge.isLandscapeMode()) {
-            updateDragPanel(x, y);
-        }
         return super.pan(x, y, deltaX, deltaY, moreVertical);
+        // TODO for touch
+        /*if (!Forge.isLandscapeMode()) {
+            return super.pan(x, y, deltaX, deltaY, moreVertical);
+        }
+        if (!isHorizontalStrip()) { //vertical column layout keeps the old behaviour
+            updateDragPanel(x, y);
+            return super.pan(x, y, deltaX, deltaY, moreVertical);
+        }
+        if (panMode == PAN_NONE) { //decide once per gesture, after a small slop
+            panSumX += deltaX;
+            panSumY += deltaY;
+            if (Math.max(Math.abs(panSumX), Math.abs(panSumY)) < PAN_LOCK_DISTANCE) { return true; }
+            //a mouse always scrolls: hovering and right click already show the preview, and it can't aim a steep drag
+            boolean inspect = !GuiBase.getInterface().isRunningOnDesktop()
+                    && Math.abs(panSumY) > Math.abs(panSumX) * INSPECT_STEEPNESS;
+            panMode = inspect ? PAN_INSPECT : PAN_SCROLL;
+            if (panMode == PAN_SCROLL) {
+                return scrollRow(panSumX); //hand over what was accumulated
+            }
+        }
+        if (panMode == PAN_INSPECT) {
+            updateDragPanel(x, y); //preview follows the finger, no scrolling
+            return true;
+        }
+        return scrollRow(deltaX); //scrolling never shows the preview*/
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        if (panMode == PAN_INSPECT || System.currentTimeMillis() - inspectEndMillis < 200) {
+            return true; //finishing an inspect drag must not throw the strip
+        }
+        return super.fling(velocityX, velocityY);
+    }
+
+    @Override
+    public boolean zoom(float x, float y, float amount) {
+        //mouse wheel over a horizontal row that overflows scrolls it sideways; pinch, or nothing to scroll, goes on to the field zoom
+        if (isHorizontalStrip() && GuiBase.getInterface().isRunningOnDesktop() && getScrollWidth() > getWidth() + 1) {
+            float step = Utils.scale(48);
+            setScrollLeft(getScrollLeft() + (amount > 0 ? step : -step)); //flip the sign here if the wheel feels backwards
+            return true;
+        }
+        return super.zoom(x, y, amount);
     }
 
     @Override
@@ -318,10 +385,34 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        //room at the right end that something floating over the area (a zone box) covers: cards stay clear of it or can be scrolled clear
+        final float pad = Math.max(0f, getEndPadding());
+        final float usable = Math.max(1f, visibleWidth - pad);
+        float x = layoutCards(0f, visibleHeight);
+        final float align = getContentAlignment();
+        if (align > 0f && x > 0f && x < usable) { //fewer cards than fit: place them again, shifted
+            x = layoutCards(Math.round((usable - x) * align), visibleHeight);
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+        return new ScrollBounds(Math.max(x + pad, visibleWidth), visibleHeight);
+    }
+
+    //@return width at the right end of the area that is covered by something else, 0 normally
+    protected float getEndPadding() {
+        return 0f;
+    }
+
+    //@return how far to the right (0 = left, 0.5 = centered, 1 = right) cards are placed when they don't fill the area
+    protected float getContentAlignment() {
+        return 0f;
+    }
+
+    //lays the cards out from startX, returns the x the last one ends at
+    private float layoutCards(float startX, float visibleHeight) {
         orderedCards.get().clear();
         infoGhostCardIds.get().clear();
 
-        float x = 0;
+        float x = startX;
         float y = 0;
         float cardHeight = visibleHeight;
         float cardWidth = getCardWidth(cardHeight);
@@ -332,8 +423,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 x += cardWidth + (count - 1) * cardWidth * getCardStackOffset();
             }
         }
-
-        return new ScrollBounds(x, visibleHeight);
+        return x;
     }
 
     @Override
@@ -390,8 +480,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         private boolean hasFieldRect;
         private boolean leaveOriginLocked;
         private VCardDisplayArea lastFieldRow;
-        private static final Set<Integer> animatedIds = ConcurrentHashMap.newKeySet();
-        private static final Set<Integer> movedIds = ConcurrentHashMap.newKeySet();
+        private static final Set<Integer> animatedIds = Sets.newConcurrentHashSet();
+        private static final Set<Integer> movedIds = Sets.newConcurrentHashSet();
         public static void markMoved(CardView c) { movedIds.add(c.getId()); }
         public static Rectangle takeHandStart(CardView card) {
             return handStarts.remove(card.getId());

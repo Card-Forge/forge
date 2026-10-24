@@ -20,6 +20,7 @@ import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.net.NetworkGameEventListener;
 import forge.gamemodes.net.server.HostingServer;
+import forge.gamemodes.replay.ReplaySession;
 import forge.gamemodes.quest.QuestController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -123,7 +124,6 @@ public class HostedMatch {
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
         sortedPlayers.sort((p1, p2) -> {
-
             final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             return Integer.compare(v1, v2);
@@ -159,6 +159,9 @@ public class HostedMatch {
         game = match.createGame();
         //game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
         game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        game.AI_FLAT_MONTE_CARLO = FModel.getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO);
+        // Desktop auto-detection: phones and tablets keep the light settings, a PC gets the maximum strength.
+        game.AI_FLAT_MONTE_CARLO_MAX = !forge.gui.GuiBase.isMobile();
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
@@ -219,12 +222,13 @@ public class HostedMatch {
                 gui.setOriginalGameController(p.getView(), humanController);
 
                 if (gui instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                    forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
+                    GameEventForwarder forwarder = new GameEventForwarder(gui);
                     ngg.setForwarder(forwarder);
                     game.subscribeToEvents(forwarder);
                 } else {
                     game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 }
+                game.subscribeToEvents(humanController.getYieldController());
                 playersPerGui.put(gui, p.getView());
 
                 if (gameControllers != null) {
@@ -242,7 +246,7 @@ public class HostedMatch {
         // before it blocks for input (e.g. host plays a land and retains priority).
         for (PlayerControllerHuman hc : humanControllers) {
             if (hc.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().addObserver(fwd);
@@ -250,6 +254,8 @@ public class HostedMatch {
                 }
             }
         }
+
+        final ReplaySession replay = ReplaySession.begin(game, humanControllers);
 
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
@@ -288,9 +294,16 @@ public class HostedMatch {
                 currentGame.subscribeToEvents(playbackControl);
             }
             // Actually start the game!
-            match.startGame(currentGame, startGameHook);
+            try {
+                match.startGame(currentGame, startGameHook);
+            } catch (final RuntimeException | Error ex) {
+                if (replay != null) {
+                    replay.abort();
+                }
+                throw ex;
+            }
             // this function waits?
-            if (endGameHook != null){
+            if (endGameHook != null) {
                 endGameHook.run();
             }
 
@@ -298,11 +311,15 @@ public class HostedMatch {
             // GameEventGameOutcome and GameEventGameFinished before we proceed.
             for (PlayerControllerHuman hc : humanControllers) {
                 if (hc.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                    forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                    GameEventForwarder fwd = ngg.getForwarder();
                     if (fwd != null) {
                         fwd.flush();
                     }
                 }
+            }
+
+            if (replay != null) {
+                replay.finish();
             }
 
             // After game is over...
@@ -368,7 +385,7 @@ public class HostedMatch {
 
         for (final PlayerControllerHuman humanController : humanControllers) {
             if (humanController.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
-                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().deleteObserver(fwd);
@@ -463,6 +480,7 @@ public class HostedMatch {
                         gui.setGameView(null);
                         gui.setGameView(gameView);
                         event.subgame().subscribeToEvents(new FControlGameEventHandler(humanController));
+                        event.subgame().subscribeToEvents(humanController.getYieldController());
                         gui.message(event.message());
                     }
                 }

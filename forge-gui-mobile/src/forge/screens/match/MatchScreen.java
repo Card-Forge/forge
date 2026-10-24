@@ -2,14 +2,21 @@ package forge.screens.match;
 
 import static forge.Forge.getLocalizer;
 
+import com.badlogic.gdx.utils.Timer;
 import forge.screens.match.views.*;
 import forge.toolbox.FOptionPane;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.adventure.scene.GameScene;
+import forge.adventure.util.AdventureBackgroundResolver;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
@@ -75,6 +82,9 @@ public class MatchScreen extends FScreen {
     private final VLog log;
     private final VChat chat;
     private final VStack stack;
+    private final VUnifiedPhase unifiedPhase; //compact layout: one phase label for all players, right of the stack menu
+    private boolean iconTabsShown; //whether the top menu tabs were last laid out as icons
+    private boolean stackSuspended, prevMenuOpen, prevStackShown; //see syncStackWithMenus
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
@@ -113,10 +123,13 @@ public class MatchScreen extends FScreen {
         playerPanelsList.remove(bottomPlayerPanel);
         playerPanelsList.add(bottomPlayerPanel);
         selectedPlayer = playerPanelsList.size() - 1;
+        unifiedPhase = new VUnifiedPhase(this::getPlayerPanelsList);
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 e -> getGameController().selectButtonOk(),
                 e -> getGameController().selectButtonCancel()));
+
+        bottomPlayerPrompt.setOverMatch(true);
 
         if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetPlay(MatchController.instance))
             topPlayerPrompt = null;
@@ -125,6 +138,7 @@ public class MatchScreen extends FScreen {
             topPlayerPrompt = add(new VPrompt("", "",
                     e -> getGameController().selectButtonOk(),
                     e -> getGameController().selectButtonCancel()));
+            topPlayerPrompt.setOverMatch(true);
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
             getHeader().setRotate90(true);
@@ -151,15 +165,18 @@ public class MatchScreen extends FScreen {
 
         FMenuBar menuBar = (FMenuBar) getHeader();
         if (topPlayerPrompt == null) {
+            menuBar.setIconMode(VPlayerPanel::isCompactLayout); //compact layout: equal width tabs with icons from the topmenu atlas
             menuBar.addTab("", revealed, true);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu).setTopIcon("vmenu", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players).setTopIcon("vplayers", false);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log).setTopIcon("vlog", false);
             if (chat != null) {
-                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat).setTopIcon("vchat", false);
             }
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
-            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
+            if (!MatchController.instance.isReplay()) {
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu).setTopIcon("vdev", false);
+            }
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack).setTopIcon("vstack", true);
         } else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
@@ -175,6 +192,74 @@ public class MatchScreen extends FScreen {
         endpoints = new HashMap<>();
         cardsonBattlefield  = new HashSet<>();
         playerViewSet = new HashSet<>();
+
+        if (topPlayerPrompt == null) {
+            //the menu bar pops up over the top of the field in the compact layout, so it must draw above everything else
+            remove(getHeader());
+            add(getHeader());
+            bottomPlayerPrompt.setMenuButton(VPlayerPanel.isMenuHidden(), this::toggleMenuBar);
+            add(unifiedPhase);
+            add(unifiedPhase.getMenu()); //above the header, so it opens over the field
+        }
+    }
+
+    //compact layout with a hidden top menu: the bar slides over the top of the field for a few seconds when the menu button
+    //is pressed, and closes by itself once no menu of it is open
+    private static final float MENU_BAR_SECONDS = 5f;
+    private boolean menuBarShown;
+    private final Timer.Task menuBarHideTask = new Timer.Task() {
+        @Override
+        public void run() {
+            if (((FMenuBar) getHeader()).isShowingMenuExcept(stack)) { //a menu is open: keep the bar until it closes
+                Timer.schedule(this, 2f);
+                return;
+            }
+            setMenuBarShown(false);
+        }
+    };
+
+    private void toggleMenuBar() {
+        setMenuBarShown(!menuBarShown);
+    }
+
+    private void setMenuBarShown(boolean shown) {
+        menuBarHideTask.cancel();
+        if (shown) { Timer.schedule(menuBarHideTask, MENU_BAR_SECONDS); }
+        if (menuBarShown != shown) {
+            menuBarShown = shown;
+            if (!shown) { ((FMenuBar) getHeader()).closeAllExcept(stack); } //an open stack stays up
+            revalidate();
+        }
+    }
+
+    //Compact layout: the stack display, the unified phase dropdown and the dev menu all open at the top right, so they take turns.
+    //Opening the phase dropdown or the dev menu tucks an open stack display away and brings it back when they close; opening the
+    //stack (by hand, or a new stack item showing it) closes them.
+    private void syncStackWithMenus() {
+        if (topPlayerPrompt != null || !VPlayerPanel.isCompactLayout()) {
+            stackSuspended = false;
+            prevMenuOpen = false;
+            prevStackShown = stack.isVisible();
+            return;
+        }
+        boolean menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible();
+        if (menuOpen && !prevMenuOpen && stack.isVisible()) {
+            stack.hide();
+            stackSuspended = true;
+        } else if (menuOpen && stack.isVisible() && !prevStackShown) {
+            unifiedPhase.getMenu().close();
+            devMenu.hide();
+        }
+        menuOpen = unifiedPhase.getMenu().isOpen() || devMenu.isVisible(); //read again, a menu that was just closed may still report open
+        if (stackSuspended && !menuOpen) {
+            stackSuspended = false;
+            final GameView game = MatchController.instance.getGameView();
+            if (!stack.isVisible() && game != null && !game.getStack().isEmpty()) {
+                stack.show();
+            }
+        }
+        prevMenuOpen = menuOpen;
+        prevStackShown = stack.isVisible();
     }
 
     private VPlayerPanel liveTop() { return playerPanelsList.get(0); }
@@ -257,6 +342,7 @@ public class MatchScreen extends FScreen {
         if (topPlayerPrompt == null) {
             devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
         }
+        revalidate(); //the compact layout and unified phase settings may have changed in Settings
     }
 
     public boolean isTopHumanPlayerActive() {
@@ -321,6 +407,38 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        ((FMenuBar) getHeader()).setGlass(VPlayerPanel::isFrosted);
+        if (topPlayerPrompt == null) {
+            final boolean hidden = VPlayerPanel.isMenuHidden();
+            bottomPlayerPrompt.setMenuButton(hidden, this::toggleMenuBar);
+            if (hidden) { //the field takes the height of the bar; the bar floats over it while shown, or waits just above the screen
+                final float barHeight = getHeader().getHeight();
+                getHeader().setBounds(0, menuBarShown ? 0 : -barHeight, width, barHeight);
+                startY = 0;
+            } else if (menuBarShown) {
+                menuBarShown = false;
+                menuBarHideTask.cancel();
+            }
+        }
+        if (topPlayerPrompt == null) { //compact layout: one phase label right of the stack menu, the bar gives up the room for it
+            final boolean unified = VPlayerPanel.isUnifiedPhase();
+            final float barHeight = getHeader().getHeight();
+            final float buttonWidth = unified ? Math.min(unifiedPhase.getPreferredWidth(), width * 0.4f) : 0f;
+            if (getHeader().getWidth() != width - buttonWidth) {
+                getHeader().setBounds(getHeader().getLeft(), getHeader().getTop(), width - buttonWidth, barHeight);
+            }
+            if (iconTabsShown != VPlayerPanel.isCompactLayout()) { //the tabs switch between text and icons
+                iconTabsShown = VPlayerPanel.isCompactLayout();
+                getHeader().revalidate();
+            }
+            unifiedPhase.setVisible(unified);
+            if (unified) {
+                unifiedPhase.setBounds(width - buttonWidth, 0, buttonWidth, barHeight);
+                unifiedPhase.getMenu().layoutFor(width, barHeight, height - VPrompt.HEIGHT - barHeight);
+            } else {
+                unifiedPhase.getMenu().close();
+            }
+        }
         float scrollerWidth = width;
         if (topPlayerPrompt != null) {
             topPlayerPrompt.setBounds(0, 0, width, VPrompt.HEIGHT);
@@ -353,6 +471,11 @@ public class MatchScreen extends FScreen {
         if (game == null) {
             return;
         }
+
+        if (topPlayerPrompt == null) { //the reveal tab is as wide as the player panels' control column
+            ((FMenuBar) getHeader()).setRevealWidth(VPlayerPanel.isCompactLayout() ? liveBottom().getColumnWidth() : 0f);
+        }
+        syncStackWithMenus();
 
         if (gameMenu != null) {
             // Index trailing items from end — entries inserted before Settings don't shift them
@@ -479,7 +602,20 @@ public class MatchScreen extends FScreen {
 
             Rectangle a = anchor.screenPos;
             float x, y;
-            if (sideDisplay != null) {
+            if (sideDisplay != null && VPlayerPanel.isCompactLayout()) {
+                //compact layout: zones are boxes along the panel's outer edge, so the preview goes on the field side of the box,
+                //over the card being inspected (or over the middle of the box while scrubbing, so it doesn't jump)
+                Rectangle d = sideDisplay.screenPos;
+                float cardCenter = d.x + d.width / 2;
+                if (!dragging && anchor instanceof FCardPanel) {
+                    cardCenter = a.x + a.width / 2;
+                } else if (sideDisplay instanceof VCardDisplayArea cardArea && cardArea.getDragPanel() != null) {
+                    cardCenter = cardArea.getDragPanel().screenPos.x + cardArea.getDragPanel().screenPos.width / 2;
+                }
+                x = Math.max(left, Math.min(cardCenter - w / 2, right - w));
+                boolean outerEdgeAtTop = owner != null && owner.isFlipped();
+                y = outerEdgeAtTop ? d.y + d.height + PREVIEW_GAP : d.y - h - PREVIEW_GAP;
+            } else if (sideDisplay != null) {
                 Rectangle d = sideDisplay.screenPos;
                 x = Math.max(left, d.x - w - PREVIEW_GAP); //may cover other open displays while previewing
                 y = d.y + d.height / 2 - h / 2;            //centered on the display so it doesn't jump while scrubbing
@@ -875,24 +1011,13 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            return switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
-                case "green" -> FSkinTexture.ADV_BG_FOREST;
-                case "black" -> FSkinTexture.ADV_BG_SWAMP;
-                case "red" -> FSkinTexture.ADV_BG_MOUNTAIN;
-                case "blue" -> FSkinTexture.ADV_BG_ISLAND;
-                case "white" -> FSkinTexture.ADV_BG_PLAINS;
-                case "waste" -> FSkinTexture.ADV_BG_WASTE;
-                case "cave" -> FSkinTexture.ADV_BG_CAVE;
-                case "dungeon" -> FSkinTexture.ADV_BG_DUNGEON;
-                case "castle" -> FSkinTexture.ADV_BG_CASTLE;
-                default -> FSkinTexture.ADV_BG_COMMON;
-            };
+            return AdventureBackgroundResolver.getBattleBackground();
         }
         return FSkinTexture.BG_MATCH;
     }
 
     private float getPlayerBgHeight(float midField, float y) {
-        return (midField + liveBottom().getField().getHeight() * liveMultiplier()) - y;
+        return (midField + liveBottom().getBackgroundHeight() * liveMultiplier()) - y;
     }
 
     private class BGAnimation extends ForgeAnimation {
@@ -950,9 +1075,9 @@ public class MatchScreen extends FScreen {
                         if (!recomputed) {
                             float midField = liveTop().getBottom();
                             float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-                            float xx = liveTop().getField().getLeft();
-                            float yy = midField - liveTop().getField().getHeight() - promptHeight;
-                            float ww = getWidth() - xx;
+                            float xx = liveTop().getBackgroundLeft();
+                            float yy = midField - liveTop().getBackgroundHeight() - promptHeight;
+                            float ww = getWidth() - xx - liveTop().getBackgroundRightInset();
                             float bgFullWidth, scaledbgHeight;
                             int multiplier = liveMultiplier();
                             float bgHeight = getPlayerBgHeight(midField, yy);
@@ -1011,9 +1136,9 @@ public class MatchScreen extends FScreen {
             }
             final float midField = liveTop().getBottom();
             final float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
-            float x = liveTop().getField().getLeft();
-            float y = midField - liveTop().getField().getHeight() - promptHeight;
-            float w = getWidth() - x;
+            float x = liveTop().getBackgroundLeft();
+            float y = midField - liveTop().getBackgroundHeight() - promptHeight;
+            float w = getWidth() - x - liveTop().getBackgroundRightInset();
             float bgFullWidth, scaledbgHeight;
             final int multiplier = liveMultiplier();
             float bgHeight = getPlayerBgHeight(midField, y);
@@ -1119,6 +1244,15 @@ public class MatchScreen extends FScreen {
                         }
                     }
                     losers.clear();
+                    //whoever now sits at the bottom takes the bottom layout (field rows and zones), everyone else stays mirrored
+                    for (int i = 0; i < playerPanelsList.size(); i++) {
+                        VPlayerPanel panel = playerPanelsList.get(i);
+                        boolean flip = i != playerPanelsList.size() - 1;
+                        if (panel.isFlipped() != flip) {
+                            panel.setFlipped(flip);
+                            panel.revalidate(true);
+                        }
+                    }
                     if (playerPanelsList.size() == 2) {
                         //reset avatar size
                         for (VPlayerPanel playerPanel : playerPanelsList) {
@@ -1260,6 +1394,10 @@ public class MatchScreen extends FScreen {
     }
 
     private void confirmUserConcedes() {
+        if (MatchController.instance.isReplay()) {
+            forge.gamemodes.net.client.ReplayPlayer.stopFor(MatchController.instance, true); // just leave a recording
+            return;
+        }
         final Consumer<Boolean> callback = result -> {
             if (result) {
                 getGameController().concede();

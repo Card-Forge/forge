@@ -1273,9 +1273,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         else
                             drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                     }
-                    else {
-                        if (cardPrice != null)
-                            drawCardLabel(g, "{CS} " + cardPrice, Color.GOLD, x, y, w, h);
+                    else if (cardPrice != null) {
+                        drawCardLabel(g, "{CS} " + cardPrice, Color.GOLD, x, y, w, h);
                     }
                 }
                 // spire colors

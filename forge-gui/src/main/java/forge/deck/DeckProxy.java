@@ -602,6 +602,7 @@ public class DeckProxy implements InventoryItem {
             final Deck deck = new Deck();
             final StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
+            deck.optimiseCardArt(null); // follow the Card Art Preference, coherent era and border
             if (errorBuilder.length() > 0) {
                 throw new RuntimeException(errorBuilder.toString());
             }

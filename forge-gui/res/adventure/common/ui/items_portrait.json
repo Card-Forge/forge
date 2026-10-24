@@ -27,7 +27,7 @@
     {
       "type": "TextButton",
       "name": "detail",
-      "text": "Detail",
+      "text": "tr(lblDetail)",
       "width": 128,
       "height": 32,
       "x": 140,

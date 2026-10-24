@@ -7,7 +7,10 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.model.FModel;
 import forge.util.Utils;
+
+import static forge.localinstance.properties.ForgePreferences.FPref;
 
 /**
  * The one selection box of the match screen: a dashed outline whose dashes slide around the edge ("marching ants").
@@ -60,6 +63,8 @@ public final class FSelectionBox {
 
     /** Same box in another colour (cursor boxes). The dashes alternate between {@code color} and {@link #CHOSEN_COLOR}. */
     public static void draw(final Graphics g, final Color color, final float thickness, final float x, final float y, final float w, final float h) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_TARGET_BOX))
+            return;
         syncFrame();
         g.drawAlternatingDashedRect(thickness, color, CHOSEN_COLOR, x, y, w, h, DASH, framePhase);
     }

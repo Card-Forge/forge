@@ -306,7 +306,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                 enemyData = WorldData.getEnemy(data.enemyPool[rand.nextInt(data.enemyPool.length)]);
             EnemySprite enemy = new EnemySprite(enemyData);
             enemies.add(enemy);
-            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.getName()));
+            fighters.add(new ArenaRecord(new Image(enemy.getAvatar()), enemyData.getDisplayName()));
         }
         fighters.add(new ArenaRecord(new Image(Current.player().avatar()), Current.player().getName()));
         player = fighters.get(fighters.size - 1).actor;
