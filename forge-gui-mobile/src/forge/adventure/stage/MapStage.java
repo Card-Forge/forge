@@ -1010,6 +1010,7 @@ public class MapStage extends GameStage {
 
     protected void getReward() {
         isLoadingMatch = false;
+        TileMapScene.instance().getPointOfInterestChanges().recordEnemyDefeat(currentMob.getData().name);
         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
         Forge.switchScene(RewardScene.instance());
         if (currentMob.defeatDialog == null) {
