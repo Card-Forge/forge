@@ -21,6 +21,7 @@ import java.util.*;
 import static forge.adventure.util.AdventureQuestController.QuestStatus.*;
 
 public class AdventureQuestData implements Serializable {
+    private static final long serialVersionUID = -859190699184917225L;
 
     private int id;
 
@@ -31,6 +32,7 @@ public class AdventureQuestData implements Serializable {
         return id;
     }
     public boolean isTemplate = false;
+    public boolean oneTime = false;
     public String name = "";
     public String description = "";
     public String synopsis =""; //Intended for Dev Mode only at most
@@ -75,6 +77,7 @@ public class AdventureQuestData implements Serializable {
     public AdventureQuestData(AdventureQuestData data){
         id = data.id;
         isTemplate = false; //Anything being copied is by definition not a template
+        oneTime = data.oneTime;
         name = data.name;
         description = data.description;
         synopsis = data.synopsis;
@@ -231,7 +234,7 @@ public class AdventureQuestData implements Serializable {
                 stage.setTargetPOI(poiTokens, this.name);
         }
 
-        if (stage.getTargetPOI() != null
+        if (stage.getTargetPOI() != null && !stage.hasRequiredEnemy()
                 && ("cave".equalsIgnoreCase( stage.getTargetPOI().getData().type)
                 || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
             //todo: decide how to handle this in "anyPOI" scenarios

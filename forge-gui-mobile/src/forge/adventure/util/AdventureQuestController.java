@@ -198,7 +198,7 @@ public class AdventureQuestController implements Serializable {
                 dialogQueue.add(epilogue);
             }
             finishedQuests.add(quest);
-            Current.player().getQuestHistory().record(quest.getID());
+            Current.player().recordQuestCompletion(quest);
             updateQuestComplete(quest);
         }
 
@@ -287,7 +287,6 @@ public class AdventureQuestController implements Serializable {
 
     public static void clear(){
         object = null;
-        AdventureQuestEligibility.clear();
     }
 
     public boolean hasClearQuestActive() {
@@ -332,10 +331,6 @@ public class AdventureQuestController implements Serializable {
         {
             allQuests = json.fromJson(Array.class, AdventureQuestData.class, handle);
         }
-
-        // Separate rules preserve the quest editor format and serialized active-quest layout.
-        FileHandle rules = Config.instance().getFile("world/quest_rules.json");
-        AdventureQuestEligibility.loadRules(rules == null ? "[]" : rules.readString());
 
         for (AdventureQuestData q : allQuests){
             if (q.storyQuest) continue;
@@ -526,15 +521,21 @@ public class AdventureQuestController implements Serializable {
     public AdventureQuestData generateQuest(int id){
         AdventureQuestData generated = null;
         for (AdventureQuestData template: allQuests) {
-            if (template.isTemplate && template.getID() == id
-                    && AdventureQuestEligibility.current().isEligible(template, Current.player().getQuests(),
-                    Current.player().getQuestHistory(), AdventureQuestEligibility.current()::isTargetEnemyDefeated)) {
+            if (template.isTemplate && template.getID() == id && isQuestAvailable(template)) {
                 generated = new AdventureQuestData(template);
                 generated.initialize();
                 break;
             }
         }
         return generated;
+    }
+
+    public boolean isQuestAvailable(AdventureQuestData quest) {
+        if (!Current.player().canAcceptQuest(quest)) return false;
+        for (AdventureQuestStage stage : quest.stages) {
+            if (stage.hasRequiredEnemy() && stage.getAvailablePOIs().isEmpty()) return false;
+        }
+        return true;
     }
 
     public void addQuestSprites(AdventureQuestStage stage){
@@ -621,9 +622,13 @@ public class AdventureQuestController implements Serializable {
             return ret;
         }
         //todo - Should quest availability be weighted instead of uniform?
-        Array<AdventureQuestData> validSideQuests = AdventureQuestEligibility.current().offers(
-                allSideQuests, questOrigin, Current.player().getQuests(),
-                Current.player().getQuestHistory(), AdventureQuestEligibility.current()::isTargetEnemyDefeated);
+        Array<AdventureQuestData> validSideQuests = new Array<>();
+        for (AdventureQuestData quest : allSideQuests) {
+            if ((quest.questSourceTags.length == 0 || Arrays.asList(quest.questSourceTags).contains(questOrigin))
+                    && isQuestAvailable(quest)) {
+                validSideQuests.add(quest);
+            }
+        }
         if (validSideQuests.isEmpty()) {
             DialogData response = new DialogData();
             response.text = localizer.getMessage("advQuestComeBackTomorrow");

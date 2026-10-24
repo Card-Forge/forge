@@ -74,7 +74,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final HashMap<String, Long> equippedItems = new HashMap<>();
     private final ArrayList<HashMap<String, Long>> deckLoadouts = new ArrayList<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
-    private transient AdventureQuestHistory questHistory = new AdventureQuestHistory();
     private final List<AdventureEventData> events = new ArrayList<>();
     private final Set<PaperCard> unsupportedCards = new HashSet<>();
     private final Predicate<PaperCard> isUnsupported = pc -> pc != null && pc.getRules() != null && pc.getRules().isUnsupported();
@@ -136,7 +135,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         characterFlags.clear();
         questFlags.clear();
         quests.clear();
-        questHistory.clear();
         events.clear();
         cards.clear();
         statistic.clear();
@@ -398,7 +396,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         boolean migration = false;
         clear(); // Reset player data.
         this.statistic.load(data.readSubData("statistic"));
-        questHistory.load(data.readSubData("questHistory"));
         this.difficultyData.startingLife = data.readInt("startingLife");
         // Support for old typo
         if (data.containsKey("staringMoney")) {
@@ -601,7 +598,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     quests.add((AdventureQuestData) itsReallyAQuest);
             }
         }
-        AdventureQuestEligibility.current().reconcile(quests);
         if (data.containsKey("events")) {
             events.clear();
             Object[] q = (Object[]) data.readObject("events");
@@ -803,7 +799,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         SaveFileData data = new SaveFileData();
 
         data.store("statistic", this.statistic.save());
-        data.store("questHistory", questHistory.save());
         data.store("startingLife", this.difficultyData.startingLife);
         data.store("startingMoney", this.difficultyData.startingMoney);
         data.store("startingDifficulty", this.difficultyData.startingDifficulty);
@@ -1516,10 +1511,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 break;
             }
         }
-        if (!AdventureQuestEligibility.current().accept(q, quests, questHistory,
-                AdventureQuestEligibility.current()::isTargetEnemyDefeated)) {
+        if (!AdventureQuestController.instance().isQuestAvailable(q)) {
             return;
         }
+        quests.add(q);
         if (noTrackedQuests || q.autoTrack)
             AdventureQuestController.trackQuest(q);
         q.activateNextStages();
@@ -1527,8 +1522,22 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
     }
 
-    public AdventureQuestHistory getQuestHistory() {
-        return questHistory;
+    /** Repeatable templates may coexist, but the same acceptance callback is always idempotent. */
+    public boolean canAcceptQuest(AdventureQuestData quest) {
+        if (quests.contains(quest)) return false;
+        if (!quest.oneTime) return true;
+        if (checkQuestFlag("questCompleted:" + quest.getID())) return false;
+        for (AdventureQuestData active : quests) {
+            if (active.getID() == quest.getID() && !active.failed) return false;
+        }
+        return true;
+    }
+
+    public void recordQuestCompletion(AdventureQuestData quest) {
+        if (quest.oneTime && quest.completed && !quest.failed) {
+            // Engine bookkeeping, not a scripted flag event (which could re-enter quest updates).
+            questFlags.put("questCompleted:" + quest.getID(), (byte) 1);
+        }
     }
 
     public List<AdventureQuestData> getQuests() {

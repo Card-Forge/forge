@@ -127,6 +127,8 @@ public class QuestStageEdit extends FormPanel {
     private JTabbedPane poiPane = new JTabbedPane();
     private final QuestTagSelector poiSelector = new QuestTagSelector("Destination Tags", false,true);
     private final QuestTagSelector enemySelector = new QuestTagSelector("Enemy Tags", true,false);
+    private final JComboBox<String> requiredEnemy = new JComboBox<>();
+    private final FormPanel requiredEnemyPanel = new FormPanel();
     private final JTextField poiTokenInput = new JTextField(25);
 
     private final JLabel poiTokenLabel = new JLabel();
@@ -486,6 +488,7 @@ public class QuestStageEdit extends FormPanel {
         }
 
         specificPOI.setVisible(anyPOI.isVisible());
+        requiredEnemyPanel.setVisible(poiPane.isVisible());
     }
 
     private void changeObjective(){
@@ -582,6 +585,10 @@ public class QuestStageEdit extends FormPanel {
         center.add(specificPOI);
         center.add(mixedEnemies);
         center.add(enemySelector);
+        requiredEnemy.setEditable(true);
+        requiredEnemy.setToolTipText("Leave blank for no requirement. Otherwise the enemy must remain undefeated at this stage's target location.");
+        requiredEnemyPanel.add("Required undefeated enemy:", requiredEnemy);
+        center.add(requiredEnemyPanel);
         center.add(count1Description);
         center.add(count1Spinner);
         center.add(count2Description);
@@ -688,6 +695,8 @@ public class QuestStageEdit extends FormPanel {
             poiSelector.load(selectedPOI);
         }
         here.getModel().setSelected(currentData.here);
+        requiredEnemy.setModel(new DefaultComboBoxModel<>(QuestController.getInstance().getEnemyNames()));
+        requiredEnemy.setSelectedItem(currentData.requiredEnemy == null ? "" : currentData.requiredEnemy);
         anyPOI.getModel().setSelected(currentData.anyPOI);
         specificPOI.getModel().setSelected(!currentData.anyPOI);
         poiTokenInput.setText(currentData.POIToken);
@@ -731,6 +740,7 @@ public class QuestStageEdit extends FormPanel {
         currentData.mixedEnemies = mixedEnemies.getModel().isSelected();
         currentData.here = here.getModel().isSelected();
         currentData.POIToken = poiTokenInput.getText();
+        currentData.requiredEnemy = requiredEnemy.getSelectedItem() == null ? "" : requiredEnemy.getSelectedItem().toString().trim();
 
         rebuildPOIList();
         rebuildEnemyList();
@@ -761,6 +771,7 @@ public class QuestStageEdit extends FormPanel {
     }
 
     private void addListeners(){
+        requiredEnemy.addActionListener(q -> QuestStageEdit.this.updateStage());
         deliveryItem.getDocument().addDocumentListener(new DocumentChangeListener(QuestStageEdit.this::updateStage));
         mapFlag.getDocument().addDocumentListener(new DocumentChangeListener(QuestStageEdit.this::updateStage));
         flagSpinner.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
