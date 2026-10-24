@@ -60,6 +60,7 @@ public class VStack extends FDropDown {
     private static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.18f);
     private static final Color GLASS_PANE = new Color(35 / 255f, 40 / 255f, 44 / 255f, 0.6f);
     private static final TextRenderer textRenderer = new TextRenderer(true);
+    private static final float LANDSCAPE_MAX_HEIGHT_RATIO = 0.4f; //landscape: a long stack takes at most this share of the screen height and scrolls
 
     private StackInstanceDisplay activeItem;
     private StackItemView activeStackInstance;
@@ -269,6 +270,12 @@ public class VStack extends FDropDown {
     protected void updateSizeAndPosition() {
         if (!getRotate90()) {
             super.updateSizeAndPosition();
+            if (Forge.isLandscapeMode()) { //a long stack scrolls instead of covering the match
+                final float limit = Math.round(Forge.getScreenHeight() * LANDSCAPE_MAX_HEIGHT_RATIO);
+                if (getHeight() > limit) {
+                    setBounds(getLeft(), getTop(), getWidth(), limit);
+                }
+            }
             if (slides()) { //shift what the drop down placed by how far it has slid in
                 compactRestX = getLeft();
                 applyCompactSlide();
@@ -290,6 +297,14 @@ public class VStack extends FDropDown {
 
     @Override
     protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+        if (Forge.isLandscapeMode() && activeItem != null && paneSize != null) {
+            //scroll to the active item: the newest one, the last in the list, unless another item was tapped
+            final float max = Math.max(0f, paneSize.getHeight() - getHeight());
+            float top = Math.max(0f, Math.min(activeItem.getBottom() - getHeight(), max));
+            if (activeItem.getTop() < top) { top = activeItem.getTop(); } //an item taller than the view shows its start
+            super.setScrollPositionsAfterLayout(0, top);
+            return;
+        }
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
     }
 
@@ -320,7 +335,24 @@ public class VStack extends FDropDown {
 
     @Override
     protected void drawOverlay(Graphics g) {
-        if (!VPlayerPanel.isCompactLayout()) { super.drawOverlay(g); }
+        if (!VPlayerPanel.isCompactLayout()) {
+            super.drawOverlay(g);
+            return;
+        }
+        //compact layout: no frame, but a long stack still shows that there is more above or below
+        try {
+            if (getScrollTop() > 0) {
+                final float x = getWidth() / 2;
+                final float y = getIndicatorMargin();
+                g.fillTriangle(getIndicatorColor(), x, y, x - getIndicatorSize(), y + getIndicatorSize(), x + getIndicatorSize(), y + getIndicatorSize());
+            }
+            if (getScrollTop() < getMaxScrollTop()) {
+                final float x = getWidth() / 2;
+                final float y = getHeight() - getIndicatorSize();
+                g.fillTriangle(getIndicatorColor(), x, y, x - getIndicatorSize(), y - getIndicatorSize(), x + getIndicatorSize(), y - getIndicatorSize());
+            }
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -332,7 +364,10 @@ public class VStack extends FDropDown {
                     activeItem.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING + VStack.BORDER_THICKNESS);
 
             PlayerView activator = activeStackInstance == null ? null : activeStackInstance.getActivatingPlayer();
-            arrowOrigin = arrowOrigin.add(screenPos.x, screenPos.y);
+            arrowOrigin = arrowOrigin.add(screenPos.x - getScrollLeft(), screenPos.y - getScrollTop()); //the items scroll, the arrows follow them
+            if (arrowOrigin.y < screenPos.y || arrowOrigin.y > screenPos.y + getHeight()) {
+                return; //the active item is scrolled out of view, so its arrows would start from nothing
+            }
 
             // one arrow per targeted stack entry, however many modes aim at it; created on first use, as this runs every frame
             Set<Integer> drawnStackTargets = null;
@@ -361,7 +396,8 @@ public class VStack extends FDropDown {
                         if (td == null || td == activeItem || !drawnStackTargets.add(targeted.getId())) { continue; }
                         // aim at the visible top part of the entry, the lower part is covered by the next item
                         final Vector2 to = new Vector2(edge + td.getLeft(),
-                                screenPos.y + td.getTop() + BORDER_THICKNESS + PADDING + CARD_HEIGHT * 0.25f);
+                                screenPos.y - getScrollTop() + td.getTop() + BORDER_THICKNESS + PADDING + CARD_HEIGHT * 0.25f);
+                        if (to.y < screenPos.y || to.y > screenPos.y + getHeight()) { continue; } //that entry is scrolled out of view
                         final PlayerView owner = targeted.getActivatingPlayer();
                         final TargetingOverlay.ArcConnection conn = activator != null && owner != null && activator.isOpponentOf(owner)
                                 ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
@@ -560,8 +596,8 @@ public class VStack extends FDropDown {
             yy = y;
             if (!launched && !stackInstance.isAbility()) { // record the rect only while the card is really here
                 CardFlightOverlay.noteStackRect(sourceCard.getId(),
-                    VStack.this.screenPos.x + getLeft() + cardBounds.x,
-                    VStack.this.screenPos.y + getTop() + cardBounds.y,
+                    VStack.this.screenPos.x - VStack.this.getScrollLeft() + getLeft() + cardBounds.x,
+                    VStack.this.screenPos.y - VStack.this.getScrollTop() + getTop() + cardBounds.y,
                     cardBounds.width, cardBounds.height);
             }
             x += CARD_WIDTH + PADDING;
