@@ -1,0 +1,9 @@
+Name:Quark, Humble Proprietor
+ManaCost:2 R
+Types:Legendary Creature Ferengi Rogue
+PT:1/2
+S:Mode$ CantSacrifice | ValidCard$ Treasure.token+YouCtrl | Description$ You can't sacrifice Treasure tokens.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:You can't sacrifice Treasure tokens.\nAt the beginning of each upkeep, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
