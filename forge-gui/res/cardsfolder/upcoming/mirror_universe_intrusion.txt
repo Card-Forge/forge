@@ -1,0 +1,9 @@
+Name:Mirror Universe Intrusion
+ManaCost:1 U B
+Types:Sorcery
+K:Kicker:4 U B
+A:SP$ CopyPermanent | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | TargetMin$ X | TargetMax$ X | AddKeywords$ Menace | SubAbility$ DBCopy | SpellDescription$ Create a token that's a copy of target creature an opponent controls, except it has menace. If this spell was kicked, instead for each creature target opponent controls, create a token that's a copy of that creature, except it has menace.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Opponent | Defined$ Valid Creature.TargetedPlayerCtrl | TargetMin$ Y | TargetMax$ Y | AddKeywords$ Menace
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Kicked.1.0
+Oracle:Kicker {4}{U}{B} (You may pay an additional {4}{U}{B} as you cast this spell.)\nCreate a token that's a copy of target creature an opponent controls, except it has menace. If this spell was kicked, instead for each creature target opponent controls, create a token that's a copy of that creature, except it has menace.
