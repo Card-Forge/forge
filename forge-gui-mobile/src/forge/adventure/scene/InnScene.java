@@ -27,8 +27,10 @@ public class InnScene extends UIScene {
     }
 
     public static InnScene instance(Scene lastGameScene, String pointOfInterestId, PointOfInterestChanges localChanges, int objectId){
-        if(object==null)
-            object=new InnScene();
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            clearInstance();
+            object = new InnScene();
+        }
 
         changes = localChanges;
         localPointOfInterestId = pointOfInterestId;
@@ -38,6 +40,20 @@ public class InnScene extends UIScene {
         initLocalEvent();
 
         return object;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        Scene last = this.lastGameScene;
+        clearInstance();
+        Forge.replaceCurrentScene(instance(last, localPointOfInterestId, changes, localObjectId));
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
 
