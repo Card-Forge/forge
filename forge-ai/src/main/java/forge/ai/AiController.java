@@ -2032,6 +2032,19 @@ public class AiController {
         }
     }
 
+    private forge.ai.simulation.DeckPlan flatMcDeckPlan;
+
+    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
+    public forge.ai.simulation.DeckPlan deckPlan(final Player p) {
+        if (flatMcDeckPlan == null) {
+            flatMcDeckPlan = forge.ai.simulation.DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
+            if (flatMcDeckPlan != forge.ai.simulation.DeckPlan.NONE) {
+                forge.ai.simulation.FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
+            }
+        }
+        return flatMcDeckPlan;
+    }
+
     /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
     public boolean isFlatMonteCarloTripped() {
         return flatMcTripped;
@@ -2049,7 +2062,7 @@ public class AiController {
             default:
                 break;
         }
-        if (!FlatMonteCarloPicker.isDiscoverable(sa)) {
+        if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY))) {
             return false;
         }
         try {

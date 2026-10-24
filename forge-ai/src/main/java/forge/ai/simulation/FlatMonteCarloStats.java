@@ -49,6 +49,8 @@ public final class FlatMonteCarloStats {
             BY_REASON.clear();
             UNSIMULATABLE.clear();
             FAILURES.clear();
+            SLOW.clear();
+            PLANS.clear();
             REJECTED.clear();
             java.util.Arrays.fill(POINTS_BY_APPROVED, 0);
             pointsOutOfBudget = 0;
@@ -208,6 +210,26 @@ public final class FlatMonteCarloStats {
     }
 
     /** The heuristics looked at a play at a Monte Carlo decision point and did not approve it; why (AiPlayDecision). */
+    private static final List<String> SLOW = new ArrayList<>();
+
+    /** A decision that took too long: kept (a few of them) with where the time went. */
+    public static void noteSlow(final String text) {
+        synchronized (LOCK) {
+            if (SLOW.size() < 12) {
+                SLOW.add(text);
+            }
+        }
+    }
+
+    private static final Map<String, int[]> PLANS = new TreeMap<>();
+
+    /** Which deck plan a player ended up with (counted per game, for the benchmark report). */
+    public static void notePlan(final String plan) {
+        synchronized (LOCK) {
+            PLANS.computeIfAbsent(plan, k -> new int[1])[0]++;
+        }
+    }
+
     public static void noteRejected(final String decision) {
         synchronized (LOCK) {
             bumpBounded(REJECTED, decision);
@@ -333,6 +355,12 @@ public final class FlatMonteCarloStats {
             }
             if (!FAILURES.isEmpty()) {
                 sb.append('\n').append("FLATMC-FAILURES ").append(render(FAILURES, 10));
+            }
+            if (!PLANS.isEmpty()) {
+                sb.append('\n').append("FLATMC-PLANS ").append(render(PLANS, 10));
+            }
+            if (!SLOW.isEmpty()) {
+                sb.append('\n').append("FLATMC-SLOW ").append(String.join(" | ", SLOW));
             }
         }
         return sb.toString();

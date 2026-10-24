@@ -605,8 +605,16 @@ public class FlatMonteCarloScenarioTest extends AITest {
                 }
             }
             for (AiProps p : AiProps.values()) {
-                if (p.name().startsWith("FLAT_MC_") && !"true".equals(props.getProperty(p.name())) && !"false".equals(props.getProperty(p.name()))) {
-                    Integer.parseInt(props.getProperty(p.name(), p.getDefault()).trim());
+                if (!p.name().startsWith("FLAT_MC_")) {
+                    continue;
+                }
+                // the kind of a setting is the kind of its default: a switch, a number, or a word (FLAT_MC_DECK_PLAN)
+                final String def = p.getDefault().trim();
+                final String value = props.getProperty(p.name(), def).trim();
+                if ("true".equals(def) || "false".equals(def)) {
+                    AssertJUnit.assertTrue(name + ".ai: " + p.name() + " must be true or false", "true".equals(value) || "false".equals(value));
+                } else if (def.matches("-?\\d+")) {
+                    Integer.parseInt(value);
                 }
             }
         }
