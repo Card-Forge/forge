@@ -1,0 +1,10 @@
+Name:U.S.S. Enterprise-A, Free Spirit
+ManaCost:3 W W
+Types:Legendary Artifact Spacecraft
+PT:5/5
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create three 1/1 red Officer creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_officer | TokenOwner$ You
+K:Station:6
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying & Lifelink | Description$ STATION 6+ Flying, lifelink
+Oracle:Ward {2}\nWhen U.S.S. Enterprise-A enters, create three 1/1 red Officer creature tokens.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.)\nSTATION 6+\nFlying, lifelink
