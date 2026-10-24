@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +30,21 @@ public final class DeckUrlLoader {
     private static final Pattern PRINTING_HINT = Pattern.compile(
             "^(\\s*\\d+\\s+.+?)\\s+\\[[A-Z0-9_]{2,7}\\](?:\\s+\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)?\\s*$");
     private static final String URL_DECK_DIR_NAME = "URL";
-    private static final String SUPPORTED_PROVIDERS = "Moxfield, Archidekt, TappedOut, MTGGoldfish";
+    /** Same order/names as {@code lblOnlySupportedDeckUrls}. */
+    private static final List<String> SUPPORTED_PROVIDER_NAMES = List.of(
+            "Moxfield", "Archidekt", "TappedOut", "MTGGoldfish", "Deckbox");
+    private static final String SUPPORTED_PROVIDERS = String.join(", ", SUPPORTED_PROVIDER_NAMES);
     private static final Localizer localizer = Localizer.getInstance();
+
+    /** Providers listed in the unsupported-URL error message. */
+    public static List<String> getSupportedProviderNames() {
+        return Collections.unmodifiableList(SUPPORTED_PROVIDER_NAMES);
+    }
+
+    /** Bulk Online Deck Library sync is only implemented for Deckbox today. */
+    public static boolean supportsBulkLibrarySync(final String providerName) {
+        return DeckboxDeckUrlProvider.PROVIDER_NAME.equals(providerName);
+    }
 
     public static DeckProxy load(final String deckUrl) throws IOException {
         final String normalizedUrl = normalizeUrl(deckUrl);
@@ -72,10 +86,13 @@ public final class DeckUrlLoader {
         if (host.endsWith("mtggoldfish.com")) {
             return new MtgGoldfishDeckUrlProvider();
         }
+        if (host.endsWith("deckbox.org")) {
+            return new DeckboxDeckUrlProvider();
+        }
         throw new IOException(localizer.getMessage("lblOnlySupportedDeckUrls", SUPPORTED_PROVIDERS));
     }
 
-    private static Deck importDeck(final DeckUrlProvider.RemoteDeck remoteDeck) throws IOException {
+    static Deck importDeck(final DeckUrlProvider.RemoteDeck remoteDeck) throws IOException {
         final DeckRecognizer recognizer = new DeckRecognizer();
         recognizer.forceImportBannedAndRestrictedCards();
         final List<Token> tokens = recognizer.parseCardList(getRecognizableImportLines(recognizer, remoteDeck.importText()));
@@ -186,6 +203,9 @@ public final class DeckUrlLoader {
         }
         if (host.endsWith("mtggoldfish.com")) {
             return "mtggoldfish:" + MtgGoldfishDeckUrlProvider.getDeckId(normalizedUrl);
+        }
+        if (host.endsWith("deckbox.org")) {
+            return "deckbox:" + DeckboxDeckUrlProvider.getSetId(normalizedUrl);
         }
         return null;
     }

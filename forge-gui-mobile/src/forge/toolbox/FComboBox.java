@@ -3,6 +3,7 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -19,6 +20,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private String label = "";
     private final DropDown dropDown = new DropDown();
     private FEventHandler dropDownItemTap, dropDownChangeHandler;
+    private Predicate<T> itemEnabledCheck;
     private boolean autoClose = true;
 
     public FComboBox() {
@@ -41,6 +43,15 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
 
     public void setAutoClose(boolean autoClose) {
         this.autoClose = autoClose;
+    }
+
+    /** When set, items that fail the predicate are shown grayed out and cannot be selected. */
+    public void setItemEnabledCheck(Predicate<T> itemEnabledCheck0) {
+        itemEnabledCheck = itemEnabledCheck0;
+    }
+
+    private boolean isItemEnabled(T item) {
+        return itemEnabledCheck == null || item == null || itemEnabledCheck.test(item);
     }
 
     private void initialize() {
@@ -139,11 +150,11 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         if (selectedItem == item) { return; }
 
         if (item != null) {
-            if (items.contains(item)) {
-                selectedItem = item;
-                super.setText(label + getDisplayText(item));
+            if (!items.contains(item) || !isItemEnabled(item)) {
+                return;
             }
-            else { return; }
+            selectedItem = item;
+            super.setText(label + getDisplayText(item));
         }
         else {
             selectedItem = null;
@@ -260,7 +271,11 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         @Override
         protected void buildMenu() {
             for (final T item : FComboBox.this.items) {
+                final boolean enabled = isItemEnabled(item);
                 FMenuItem menuItem = new FMenuItem(getDisplayText(item), e -> {
+                    if (!isItemEnabled(item)) {
+                        return;
+                    }
                     if (dropDownItemTap != null) {
                         dropDownItemTap.handleEvent(new FEvent(FComboBox.this, FEventType.TAP, item));
                     }
@@ -270,7 +285,10 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
                             dropDownChangeHandler.handleEvent(new FEvent(FComboBox.this, FEventType.CHANGE, item));
                         }
                     }
-                });
+                }, enabled);
+                if (!enabled) {
+                    menuItem.setTextColor(140, 140, 140);
+                }
                 if (selectedItem == item) {
                     menuItem.setSelected(true);
                 }
