@@ -399,6 +399,16 @@ public class GameAction {
         CardCollection mergedCards = null;
         if (fromBattlefield && !toBattlefield && c.hasMergedCard()) {
             mergedCards = new CardCollection(c.getMergedCards());
+        }
+        if (fromBattlefield && !toBattlefield && c.getAugmentedWith() != null) {
+            if(mergedCards == null) {
+                mergedCards = new CardCollection(c);
+            } else {
+                mergedCards.add(c);
+            }
+            mergedCards.add(c.getAugmentedWith());
+        }
+        if (mergedCards != null) {
             // replace top card with copied card for correct name for human to choose
             mergedCards.set(mergedCards.indexOf(c), copied);
             // CR 725.3b
@@ -409,7 +419,8 @@ public class GameAction {
             }
             // CR 123.5c
             if (copied.isStickered()) {
-                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(mergedCards);
+                CardCollection sameOwnerMergedCards = mergedCards.filter(cm -> cm.getOwner().equals(c.getOwner()));
+                Card keeper = c.getOwner().getController().chooseCardToKeepStickers(sameOwnerMergedCards);
                 if (keeper != copied) {
                     keeper.takeStickersFrom(copied);
                 }
@@ -495,6 +506,10 @@ public class GameAction {
             // when running replacement effects here
             c.setZone(zoneTo);
             for (final Card card : mergedCards) {
+                Zone ownerZoneTo = zoneTo;
+                if (!c.getOwner().equals(card.getOwner())) {
+                    ownerZoneTo = card.getOwner().getZone(zoneTo.getZoneType());
+                }
                 if (card.isRealCommander()) {
                     card.setMoveToCommandZone(true);
                 }
@@ -504,7 +519,7 @@ public class GameAction {
                     repParams.put(AbilityKey.CardLKI, card);
                     repParams.put(AbilityKey.Cause, cause);
                     repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
-                    repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
+                    repParams.put(AbilityKey.Destination, ownerZoneTo.getZoneType());
 
                     if (params != null) {
                         repParams.putAll(params);
@@ -514,18 +529,19 @@ public class GameAction {
                     if (repres != ReplacementResult.NotReplaced) continue;
                 }
                 if (card == c) {
-                    storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
-                    zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+                    storeChangesZoneAll(copied, zoneFrom, ownerZoneTo, params);
+                    ownerZoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
-                    storeChangesZoneAll(card, zoneFrom, zoneTo, params);
-                    zoneTo.add(card, position, CardCopyService.getLKICopy(card));
+                    storeChangesZoneAll(card, zoneFrom, ownerZoneTo, params);
+                    ownerZoneTo.add(card, position, CardCopyService.getLKICopy(card));
                     card.setState(CardStateName.Original, false);
                     card.setBackSide(false);
                     card.updateStateForView();
                 }
-                card.setZone(zoneTo);
+                card.setZone(ownerZoneTo);
             }
             copied.clearMergedCards();
+            copied.attachAugment(null);
         } else {
             if (!suppress) {
                 storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
@@ -1515,6 +1531,8 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction704_5r(c);
 
+                checkAgainCard |= stateBasedAction_Augment(c, mapParams);
+
                 if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
                     int beeble = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), "Beeble.YouCtrl", c.getController(), c, null);
                     int loyal = c.getCounters(CounterEnumType.LOYALTY);
@@ -1929,6 +1947,18 @@ public class GameAction {
             }
         }
         return checkAgain;
+    }
+
+    private boolean stateBasedAction_Augment(Card c, Map<AbilityKey, Object> mapParams) {
+        if (!c.isAugment()) {
+            return false;
+        }
+        final Zone zoneFrom = game.getZoneOf(c);
+        if (zoneFrom.is(ZoneType.Battlefield)) {
+            moveTo(c.getOwner().getZone(ZoneType.Graveyard), c, null, mapParams);
+            return true;
+        }
+        return false;
     }
 
     public void checkGameOverCondition() {

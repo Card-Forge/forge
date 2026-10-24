@@ -1,0 +1,10 @@
+Name:Surgeon General Commander
+ManaCost:3 G
+Types:Legendary Creature Wombat Bat Chameleon
+PT:3/3
+A:AB$ Mana | Cost$ T | Produced$ Combo W U B R G | SpellDescription$ Add {W}, {U}, {B}, {R}, or {G}.
+T:Mode$ Mutates | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you augment, enchant, or mutate a creature you control, draw a card.
+T:Mode$ Attached | ValidSource$ Enchantment |  ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you augment, enchant, or mutate a creature you control, draw a card.
+T:Mode$ Augments | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you augment, enchant, or mutate a creature you control, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you augment, enchant, or mutate a creature you control, draw a card.\n{T}: Add {W}, {U}, {B}, {R}, or {G}.

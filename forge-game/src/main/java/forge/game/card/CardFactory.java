@@ -29,6 +29,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Augment;
+import forge.game.keyword.AugmentHost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -392,6 +394,9 @@ public class CardFactory {
         c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setAttractionLights(face.getAttractionLights());
+
+        c.getCurrentState().setPowerModifier(face.getPowerModifier());
+        c.getCurrentState().setToughnessModifier(face.getToughnessModifier());
 
         // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
@@ -784,4 +789,41 @@ public class CardFactory {
         return result;
     }
 
+    public static CardCloneStates getAugmentedCloneState(final Card host, final CardTraitBase sa) {
+        final Card augment = host.getAugmentedWith();
+        if (augment == null) {
+            return null;
+        }
+        final CardState state = host.getCurrentState().copy(host, sa);
+        final CardState augmentState = augment.getCurrentState();
+        state.addAbilitiesFrom(augmentState, false);
+        Augment augmentKeyword = (Augment) state.getIntrinsicKeywords().stream()
+                .filter(k -> k.getKeyword() == Keyword.AUGMENT).findFirst().orElse(null);
+        if (augmentKeyword == null) {
+            return null;
+        }
+        AugmentHost hostKeyword = (AugmentHost) state.getIntrinsicKeywords().stream()
+                .filter(k -> k.getKeyword() == Keyword.AUGMENT_HOST).findFirst().orElse(null);
+        if (hostKeyword == null) {
+            return null;
+        }
+        state.setBasePower(state.getBasePower() + Integer.parseInt(augmentState.getPowerModifier()));
+        state.setBaseToughness(state.getBaseToughness() + Integer.parseInt(augmentState.getToughnessModifier()));
+        String augmentName = augmentState.getName();
+        if (!augmentName.endsWith("-")) {
+            augmentName += " ";
+        }
+        state.setName(augmentName + hostKeyword.getRightSideName());
+        state.addColor(augmentState.getColor());
+        state.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getName).collect(Collectors.toList()));
+        state.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getName).collect(Collectors.toList()));
+        state.addType(augmentState.getType().getSubtypes());
+        state.addRarity(augmentState.getRarity());
+        state.addSetCode(augmentState.getSetCode());
+        state.removeType(CardType.Supertype.Host);
+        hostKeyword.combine(augmentKeyword);
+        final CardCloneStates result = new CardCloneStates(host, sa);
+        result.put(CardStateName.Original, state);
+        return result;
+    }
 }

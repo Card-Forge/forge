@@ -1,0 +1,10 @@
+Name:Bat-
+ManaCost:no cost
+Types:Creature Bat
+Colors:black
+PTModifier:+1/+1
+K:Flying
+K:Augment:1 B:LeftSide
+SVar:LeftSide:T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ At the beginning of each end step, if an opponent lost 3 or more life this turn,
+SVar:X:PlayerCountRegisteredOpponents$HighestLifeLostThisTurn
+Oracle:Flying\nAt the beginning of each end step, if an opponent lost 3 or more life this turn,\nAugment {1}{B} ({1}{B}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

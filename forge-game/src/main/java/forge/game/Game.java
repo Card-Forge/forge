@@ -791,6 +791,9 @@ public class Game {
             if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
                 return;
             }
+            if (!visitor.visitAll(player.getZone(ZoneType.Merged).getCards())) {
+                return;
+            }
             if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }

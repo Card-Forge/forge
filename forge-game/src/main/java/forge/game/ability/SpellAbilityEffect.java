@@ -302,7 +302,7 @@ public abstract class SpellAbilityEffect {
         if (resultUnique == null)
             return null;
         if (sa.hasParam("IncludeAllComponentCards")) {
-            for (Card c : resultUnique) {
+            for (Card c : resultUnique.clone()) {
                 resultUnique.addAll(c.getAllComponentCards(false));
             }
         }

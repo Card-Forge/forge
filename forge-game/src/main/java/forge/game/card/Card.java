@@ -112,6 +112,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             exiledCards, encodedCards;
     private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
+    private Card augmentedWith;
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
@@ -121,6 +122,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
     private Card mergedTo;
+    private Card augmenting;
 
     private SpellAbility effectSourceAbility;
     private SpellAbility tokenSpawningAbility;
@@ -275,6 +277,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private long prototypeTimestamp = -1;
     private long mutatedTimestamp = -1;
     private int timesMutated = 0;
+    private long augmentedTimeStamp = -1;
 
     private long gameTimestamp = -1; // permanents on the battlefield
     private long layerTimestamp = -1; // order for Static Abilities
@@ -1151,7 +1154,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public boolean isCloned() {
         return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp
-                && clonedStates.lastEntry().getKey() != prototypeTimestamp;
+                && clonedStates.lastEntry().getKey() != prototypeTimestamp
+                && clonedStates.lastEntry().getKey() != augmentedTimeStamp;
     }
 
     public final boolean isFaceDown() {
@@ -1463,7 +1467,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         mergedCards.remove(c);
     }
     public final void clearMergedCards() {
-        mergedCards.clear();
+        if (mergedCards != null) {
+            mergedCards.clear();
+        }
     }
 
     public final Card getMergedToCard() {
@@ -1505,6 +1511,37 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
+    public final boolean attachAugment(Card augment) {
+        if (augment == null) {
+            if (this.augmentedWith != null) {
+                this.augmentedWith.augmenting = null;
+            } else {
+                this.augmentedWith = null;
+            }
+            view.updateAugment(this);
+            return false;
+        }
+        if (this.augmentedWith != null || augment.augmenting != null) {
+            return false;
+        }
+        this.augmentedWith = augment;
+        augment.augmenting = this;
+        view.updateAugment(this);
+        return true;
+    }
+    public final Card getAugmentedWith() { return augmentedWith; }
+    public void setAugmentedWith(Card augmentedWith) { this.augmentedWith = augmentedWith; }
+    public final Card getAugmenting() { return augmenting; }
+    public void setAugmenting(Card augmenting) { this.augmenting = augmenting; }
+    public boolean isAugment() { return hasKeyword(Keyword.AUGMENT) && !hasKeyword(Keyword.AUGMENT_HOST); }
+
+    public final long getAugmentedTimestamp() {
+        return augmentedTimeStamp;
+    }
+    public final void setAugmentedTimeStamp(long ts) {
+        augmentedTimeStamp = ts;
+    }
+
     /**
      * Gives a collection of all cards that are melded, merged, or are otherwise representing
      * a single permanent alongside this one.
@@ -1520,6 +1557,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             out.addAll(mergedTo.getAllComponentCards(true));
         if(this.hasMergedCard())
             out.addAll(mergedCards);
+        if (this.augmentedWith != null) {
+            out.addAll(this.augmentedWith.getAllComponentCards(true));
+        }
         if(!includeSelf) //mergedCards includes self.
             out.remove(this);
         return out;
@@ -2714,7 +2754,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
                         || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")
-                        || keyword.startsWith("Affinity")) {
+                        || keyword.startsWith("Affinity") || keyword.startsWith("Augment")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -4446,7 +4486,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final StatBreakdown getUnswitchedPowerBreakdown() {
         // 208.3 A noncreature permanent has no power or toughness
-        if (isInPlay() && !isCreature()) {
+        if (isInPlay() && (!isCreature() || hasKeyword(Keyword.AUGMENT))) {
             return new StatBreakdown();
         }
         return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());
@@ -4654,6 +4694,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         other.stickers = new ArrayList<>();
         other.view.updateStickers(other);
+        updateStickersForView();
+    }
+
+    public final void removeAllStickers() {
+        for (AppliedSticker s : getStickers()) {
+            s.removeEffect(this);
+        }
+        stickers.clear();
         updateStickersForView();
     }
 

@@ -707,6 +707,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 attachedPanels.add(newGhost(prepared, GhostKind.CASTABLE));
                 cap--;
             }
+            final CardView augmented = card.getAugment();
+            if (augmented != null) {
+                attachedPanels.add(newGhost(augmented, GhostKind.INFO));
+                cap--;
+            }
             for (final CardView exiled : card.getUntilLeavesBattlefield()) {
                 if (cap <= 0) {
                     break;
