@@ -784,7 +784,7 @@ public class Game {
     }
     public Card getCardState(final Card card, final Card notFound) {
         CardStateVisitor visit = new CardStateVisitor(card);
-        this.forEachCardInGame(visit);
+        this.forEachCardInGame(visit, true);
         return visit.getFound(notFound);
     }
 
