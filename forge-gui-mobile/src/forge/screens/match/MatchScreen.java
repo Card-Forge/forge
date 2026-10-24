@@ -450,6 +450,41 @@ public class MatchScreen extends FScreen {
         }
         scroller.setBounds(0, startY, scrollerWidth, height - VPrompt.HEIGHT - startY);
         bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        coachTop = startY;
+        layoutCoach();
+    }
+
+    // The "How to Play" tutorial's note. It floats over the top of the field, not over the player's hand or prompt,
+    // and dims nothing, so the cards it talks about stay in view.
+    private CoachPanel coach;
+    private float coachTop;
+
+    private void layoutCoach() {
+        if (coach == null) {
+            return;
+        }
+        final float width = getWidth();
+        final float available = getHeight() - VPrompt.HEIGHT - coachTop;
+        final boolean portrait = getHeight() > width;
+        coach.setCompact(portrait);
+        // portrait is narrow, so the note takes nearly the full width there
+        final float panelWidth = portrait ? width - 2 * Utils.scale(4) : Math.min(width * 0.72f, Utils.scale(560));
+        coach.setBounds((width - panelWidth) / 2, coachTop + Utils.scale(4), panelWidth, coach.preferredHeight(available));
+    }
+
+    /** Shows a tutorial note; runs {@code onNext} when the player presses its button. Call on the UI thread. */
+    public void showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        if (coach == null) {
+            coach = add(new CoachPanel(this::layoutCoach)); // added last, so it draws above the field
+        }
+        coach.show(title, text, nextLabel, onNext);
+    }
+
+    /** Removes the tutorial note, if shown. Call on the UI thread. */
+    public void hideCoach() {
+        if (coach != null) {
+            coach.hidePanel();
+        }
     }
 
     @Override

@@ -23,6 +23,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.GuiDownloader;
 import forge.sound.*;
@@ -128,6 +129,30 @@ public class GuiMobile implements IGuiBase {
         final MatchController mc = MatchController.instance;
         final GameView gv = mc.getGameView();
         return gv != null && !mc.isReplay() && !gv.isGameOver();
+    }
+
+    @Override
+    public boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        if (!(Forge.getCurrentScreen() instanceof MatchScreen)) {
+            return false; // nothing to draw on; the caller shows a dialog instead
+        }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (Forge.getCurrentScreen() instanceof MatchScreen screen) {
+                screen.showCoach(title, text, nextLabel, onNext);
+            } else {
+                onNext.run(); // the match screen went away meanwhile; don't leave the tutorial waiting
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public void hideCoach() {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (Forge.getCurrentScreen() instanceof MatchScreen screen) {
+                screen.hideCoach();
+            }
+        });
     }
 
     @Override
