@@ -84,7 +84,9 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Card host = sa.getHostCard();
-        final Zone hz = host.isCopiedSpell() ? null : host.getZone();
+        // where a spell goes back to if it can't be cast
+        final Zone hz = sa.isSpell() && !host.isCopiedSpell() ? host.getZone() : null;
+        final int zonePosition = hz == null ? 0 : hz.getCards().indexOf(host);
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -112,12 +114,12 @@ public class ComputerUtil {
 
         if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
             // 603.3c If no mode is chosen, the ability is removed from the stack.
-            return false;
+            return rollback(sa, hz, zonePosition, null, host);
         }
         if (chooseTargets != null) {
             chooseTargets.accept(sa);
             if (!sa.isTargetNumberValid()) {
-                return false;
+                return rollback(sa, hz, zonePosition, null, host);
             }
         }
         // Spell Permanents inherit their cost from Mana Cost
@@ -133,14 +135,16 @@ public class ComputerUtil {
             }
             return true;
         }
-        // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        return rollback(sa, hz, zonePosition, pay, host);
+    }
+
+    private static boolean rollback(SpellAbility sa, Zone fromZone, int zonePosition, CostPayment pay, Card oldCard) {
+        GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay == null ? new CostPayment(sa.getPayCosts(), sa) : pay, oldCard);
+        // don't try the same play again this priority
         sa.setSkip(true);
-        if (host != null && hz != null && hz.is(ZoneType.Stack)) {
-            Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
-            for (SpellAbility csa : c.getSpellAbilities()) {
-                csa.setSkip(true);
-            }
+        for (SpellAbility csa : sa.getHostCard().getSpellAbilities()) {
+            csa.setSkip(true);
         }
         return false;
     }
