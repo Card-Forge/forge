@@ -98,7 +98,17 @@ public class Combat {
                 newBand.setBlocked(blocked);
             }
             bandsMap.put(origBand, newBand);
-            attackedByBands.get().put(map.map(entry.getKey()), newBand);
+            final GameEntity defender = entry.getKey();
+            if (defender instanceof Card && ((Card) defender).getId() == -1) {
+                // the stand-in for a planeswalker or battle that left combat (rule 506.4c, see removeFromCombat): it is
+                // in no zone, so it cannot be mapped, but the creatures attacking it stay in combat in the copy too
+                final Card fake = new Card(-1, map.getGame());
+                fake.setName(defender.getName());
+                fake.setController(map.map(((Card) defender).getController()), 0);
+                attackedByBands.get().put(fake, newBand);
+            } else {
+                attackedByBands.get().put(map.map(defender), newBand);
+            }
         }
         for (Entry<AttackingBand, Card> entry : combat.blockedBands.get().entries()) {
             blockedBands.get().put(bandsMap.get(entry.getKey()), map.map(entry.getValue()));
