@@ -3,6 +3,7 @@ Code=TRK
 Date=2026-11-13
 Name=Star Trek
 Type=Expansion
+Tags=UniversesBeyond
 ScryfallCode=TRK
 
 [cards]

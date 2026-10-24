@@ -72,6 +72,15 @@ public class PrintExclusionTest extends CardMockTestCase {
     }
 
     @Test
+    public void aTagEntryExcludesTaggedSetsAndPrintsExceptKeptSets() {
+        SetExclusions exclusions = new SetExclusions(List.of("#UniversesBeyond", "!LTR"));
+        assertTrue(exclusions.excludes(edition("FIN"), null));
+        assertFalse(exclusions.excludes(edition("LTR"), null));
+        assertFalse(exclusions.excludes(edition("SLD"), null));  // only some of its prints are tagged
+        assertTrue(exclusions.excludes(edition("SLD"), "143"));  // Rick, Steadfast Leader, a UB print
+    }
+
+    @Test
     public void anExclusionThatExcludesNothingChangesNoPrint() {
         PaperCard[] unique = new PaperCard[CARD_NAMES.length];
         PaperCard[] requested = new PaperCard[CARD_NAMES.length];
@@ -103,6 +112,17 @@ public class PrintExclusionTest extends CardMockTestCase {
             assertNotNull(cardDb.getUniqueByName(name), name);
             assertNotNull(cardDb.getCard(name), name);
         }
+    }
+
+    @Test
+    public void universesBeyondTagsAreReadForSetsAndSinglePrints() {
+        CardEdition sld = edition("SLD");
+        assertTrue(sld.hasTag(UB, "143"));  // Rick, Steadfast Leader
+        assertFalse(sld.hasTag(UB, "1"));   // Snow-Covered Plains
+        // Death Baron's back face, listed as 1458☇, shares the tag of its front, 1458
+        assertTrue(sld.hasTag(UB, "1458☇"));
+        assertFalse(sld.hasTag(UB));  // SLD is tagged per print, not as a whole
+        assertTrue(edition("LTR").hasTag(UB));
     }
 
     @Test
