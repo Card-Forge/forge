@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 import forge.StaticData;
 import forge.card.*;
+import forge.deck.DeckgenUtil;
 import forge.item.*;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -537,6 +538,14 @@ public final class BoosterUtils {
         }
 
         return rewards;
+    }
+
+    public static List<PaperCard> generatePlanarDeck() {
+        return DeckgenUtil.generatePlanarPool(10).toFlatList();
+    }
+
+    public static List<PaperCard> generateSchemeDeck() {
+        return Aggregates.random(FModel.getArchenemyCards().toFlatList(), 20);
     }
 
     public static void sort(List<PaperCard> cards) {
