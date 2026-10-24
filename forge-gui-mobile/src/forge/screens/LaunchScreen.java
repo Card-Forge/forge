@@ -2,10 +2,8 @@ package forge.screens;
 
 import com.badlogic.gdx.Input.Keys;
 
-import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.menu.FPopupMenu;
 import forge.toolbox.FDisplayObject;
@@ -50,7 +48,6 @@ public abstract class LaunchScreen extends FScreen {
 
     protected class StartButton extends FDisplayObject {
         private boolean pressed;
-        FSkinFont fSkinFont = FSkinFont.get(22);
 
         /**
          * Instantiates a new FButton.
@@ -83,8 +80,7 @@ public abstract class LaunchScreen extends FScreen {
         public void draw(Graphics g) {
             if (Frost.isOn()) {
                 final float w = getWidth(), h = getHeight();
-                Frost.drawButton(g, w, h * 0.6f, isHovered(), pressed);
-                g.drawText(Forge.getLocalizer().getMessage("lblStart"), fSkinFont, isEnabled() ? Frost.TEXT : Frost.TEXT_DIM, PADDING, fSkinFont.getLineHeight() / 2f, w - 2 * PADDING, h, false, Align.center, false);
+                Frost.drawButton(g, w, h * 0.6f, isHovered(), pressed, isEnabled(), Forge.getLocalizer().getMessage("lblStart"));
             } else if (Forge.hdstart) {
                 g.drawImage(pressed ? FSkinImage.HDBTN_START_DOWN :
                     isHovered() ? FSkinImage.HDBTN_START_OVER : FSkinImage.HDBTN_START_UP,

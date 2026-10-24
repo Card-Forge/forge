@@ -1,0 +1,7 @@
+Name:Tribble Token
+ManaCost:no cost
+Colors:white
+Types:Creature Tribble
+PT:1/1
+S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ This token can't block.
+Oracle:This token can't block.

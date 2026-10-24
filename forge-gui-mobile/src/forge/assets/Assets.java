@@ -107,6 +107,9 @@ public class Assets implements Disposable {
     private String transformAtlasPath;
     private TextureAtlas transformAtlas;
     private boolean transformAtlasFailed;
+    private String topMenuAtlasPath;
+    private TextureAtlas topMenuAtlas;
+    private boolean topMenuAtlasFailed;
     private static final String COUNTER_FONT_FILE = "Roboto-Bold.ttf";
     private static final String COUNTER_FONT_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890./-+:'!—";
 
@@ -155,7 +158,7 @@ public class Assets implements Disposable {
         }
         Forge.safeDispose(
             defaultImage, blackTexture, whiteTexture, backdropTexture, grayTexture, coinHead, coinTail,
-            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture, transformAtlas);
+            cardFrameBuffer, itemFrameBuffer, gifAnimation, miniMapTexture, transformAtlas, topMenuAtlas);
         if (cardArtCache != null)
             cardArtCache.clear();
         if (avatarImages != null)
@@ -542,6 +545,41 @@ public class Assets implements Disposable {
         } catch (Exception e) {
             transformAtlasFailed = true;
             System.err.println("Failed to load sprite_transform.atlas: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /** Icons of the match screen's top menu in the compact layout: topmenu.atlas next to sprite_transform.atlas in the default skin folder. */
+    public TextureAtlas getTopMenuAtlas() {
+        if (isDisposed || topMenuAtlasFailed)
+            return null;
+        try {
+            if (topMenuAtlasPath == null && topMenuAtlas == null) {
+                FileHandle file = getDefaultSkinFile("topmenu.atlas");
+                if (file == null || !file.exists()) {
+                    topMenuAtlasFailed = true;
+                    return null;
+                }
+                if (FileType.Absolute.equals(file.type())) {
+                    topMenuAtlasPath = file.path();
+                } else { //inside an apk or jar, the asset manager can't see it
+                    topMenuAtlas = new TextureAtlas(file);
+                    smoothAtlas(topMenuAtlas);
+                }
+            }
+            if (topMenuAtlas != null)
+                return topMenuAtlas;
+            TextureAtlas atlas = manager().get(topMenuAtlasPath, TextureAtlas.class, false);
+            if (atlas == null) {
+                manager().load(topMenuAtlasPath, TextureAtlas.class);
+                manager().finishLoadingAsset(topMenuAtlasPath);
+                atlas = manager().get(topMenuAtlasPath, TextureAtlas.class);
+                smoothAtlas(atlas);
+            }
+            return atlas;
+        } catch (Exception e) {
+            topMenuAtlasFailed = true;
+            System.err.println("Failed to load topmenu.atlas: " + e.getMessage());
             return null;
         }
     }

@@ -1,0 +1,10 @@
+Name:Hemmer, Fixing What Is Broken
+ManaCost:W U
+Types:Legendary Creature Aenar Artificer
+PT:2/3
+S:Mode$ Continuous | Affected$ Spacecraft.YouCtrl | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ During your turn, Spacecraft you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME becomes tapped, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHints:Ability$Counters
+Oracle:During your turn, Spacecraft you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)\nWhenever Hemmer becomes tapped, draw a card, then discard a card.

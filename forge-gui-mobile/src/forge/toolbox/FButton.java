@@ -272,7 +272,7 @@ public class FButton extends FDisplayObject implements IButton {
     //frosted button: a rounded slate pill with a faint edge, washed with the accent colour when toggled or pressed
     private void drawFrosted(Graphics g) {
         final float w = getWidth(), h = getHeight();
-        Frost.drawButton(g, w, h, isHovered() || isToggled(), pressed);
+        Frost.drawButton(g, w, h, isHovered() || isToggled(), pressed, isEnabled(), null);
         if (!StringUtils.isEmpty(text)) {
             String displayText = text;
             if (corner == Corner.BottomLeft || corner == Corner.BottomRight)

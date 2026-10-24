@@ -1,10 +1,12 @@
 package forge.app;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.UpnpServiceConfiguration;
+import org.lwjgl.glfw.GLFW;
 
 import javax.imageio.ImageIO;
 import java.awt.Desktop;
@@ -174,6 +176,16 @@ public class Main {
         @Override
         public void requestFileAcces() {
 
+        }
+
+        @Override
+        public void setMouseConfined(boolean confined) {
+            if (!(Gdx.graphics instanceof Lwjgl3Graphics)) {
+                return;
+            }
+            long handle = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getWindowHandle();
+            GLFW.glfwSetInputMode(handle, GLFW.GLFW_CURSOR,
+                    confined ? GLFW.GLFW_CURSOR_CAPTURED : GLFW.GLFW_CURSOR_NORMAL);
         }
     }
 }

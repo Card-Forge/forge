@@ -1,0 +1,16 @@
+Name:Borg Cube
+ManaCost:5 W B
+Types:Artifact Spacecraft
+PT:6/6
+K:Affinity:Creature.Artifact:artifact creature
+K:Station:12
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseCard | TriggerDescription$ Whenever this Spacecraft enters or attacks, assimilate a creature card exiled with it. If you can't, exile up to one target creature. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChooseCard | Secondary$ True | TriggerDescription$ Whenever this Spacecraft enters or attacks, assimilate a creature card exiled with it. If you can't, exile up to one target creature. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+SVar:TrigChooseCard:DB$ ChooseCard | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | Mandatory$ True | SubAbility$ DBAssimilate
+SVar:DBAssimilate:DB$ Assimilate | Defined$ ChosenCard | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE12_CHARGE | AddType$ Creature | AddStaticAbility$ DBStatic | Description$ STATION 12+ Artifact creatures you control have flying.
+SVar:DBStatic:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Flying | Description$ Artifact creatures you control have flying.
+SVar:HasAttackEffect:TRUE
+Oracle:Affinity for artifact creatures\nWhenever this Spacecraft enters or attacks, assimilate a creature card exiled with it. If you can't, exile up to one target creature. (To assimilate a card, put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)\nStation\nSTATION 12+\nArtifact creatures you control have flying.

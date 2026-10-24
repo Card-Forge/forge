@@ -17,6 +17,7 @@ import forge.assets.FSkinTexture;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import forge.toolbox.Frost;
 
 public class SplashScreen extends FContainer {
     private TextureRegion splashTexture;
@@ -322,15 +323,18 @@ public class SplashScreen extends FContainer {
                     bgAnimation.openAdventure = false;
                 }
             });
-            float btn_w = (w - 2 * padding);
-            float btn_x = x + padding;
+            float modw = Frost.isOn() ? 0.6f : 1f;
+            float btn_w = (w - 2 * padding) * modw;
+            float btn_x = Frost.isOn() ? getWidth() / 2 - btn_w / 2 : x + padding;
             float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
             float btn_y = (y + padding) * multiplier;
+            height = Frost.isOn() ? height * 1.2f : height;
+            float mody = Frost.isOn() ? height / 4 : 0;
             btnHome.setFont(FSkinFont.get(22));
             btnAdventure.setFont(FSkinFont.get(22));
             btnHome.setBounds(btn_x, btn_y, btn_w, height);
             add(btnHome);
-            btnAdventure.setBounds(btn_x, btn_y + height + padding / 1.4f, btn_w, height);
+            btnAdventure.setBounds(btn_x, btn_y + height + padding + mody / 1.4f, btn_w, height);
             add(btnAdventure);
         }
     }
