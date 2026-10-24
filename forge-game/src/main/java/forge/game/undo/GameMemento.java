@@ -17,6 +17,15 @@ import java.util.concurrent.ConcurrentHashMap;
  *  - a {@link Recorder} keeps the latest snapshot of every object, and a new capture reuses (shares) the previous
  *    snapshot of any object that did not change, so consecutive mementos only pay for what changed,
  *  - scratch buffers are reused, and nothing is allocated for debugging unless asked to.
+ *
+ * Correctness notes for the changes:
+ *  - capture fails fast if a field cannot be read instead of recording a false null/zero;
+ *  - restore fails fast if a field/container cannot be restored;
+ *  - mutable maps and collections are always rebuilt after fields are restored, avoiding
+ *    stale hash buckets / sort order when keys or elements have mutable equality semantics.
+ *
+ * This is still a reflective snapshot, not a universal transaction mechanism. The WALK/SKIP
+ * policy and final-field policy must be validated against the exact game engine.
  */
 public final class GameMemento {
     private static final String[] WALK = { "forge.game.", "forge.trackable.", "forge.card.CardType" };
@@ -130,7 +139,8 @@ public final class GameMemento {
                 if (ci.pk[i] == P_REF) { fs[i].set(o, s.refs[ri++]); }
                 else { writePrim(fs[i], ci.pk[i], o, s.prims[pi++]); }
             } catch (Exception ex) {
-                problems.add("write " + fs[i]);   // indexes were already advanced by the argument expressions
+                problems.add("write " + fs[i] + ": " + ex);
+                throw new IllegalStateException("Could not restore field " + fs[i], ex);
             }
         }
     }
@@ -150,7 +160,8 @@ public final class GameMemento {
                 case MAP: {
                     final Map<Object, Object> m = (Map<Object, Object>) c;
                     final Object[] kv = ((SeqSnap) snap).items;
-                    if (sameMap(m, kv)) { break; }
+                    // Always rebuild maps after restoring object fields. Identity equality of entries is
+                    // insufficient when a key's hashCode/equals depends on fields that have just changed.
                     m.clear();
                     for (int i = 0; i < kv.length; i += 2) { m.put(kv[i], kv[i + 1]); }
                     break;
@@ -172,7 +183,8 @@ public final class GameMemento {
                 case COLLECTION: {
                     final Collection<Object> col = (Collection<Object>) c;
                     final Object[] items = ((SeqSnap) snap).items;
-                    if (sameElements(col, items)) { break; }
+                    // Always rebuild collections. Sets and sorted collections can be internally invalid
+                    // if an element's hashCode/ordering changed while it was stored in the container.
                     col.clear();
                     Collections.addAll(col, items);
                     break;
@@ -182,24 +194,8 @@ public final class GameMemento {
             }
         } catch (RuntimeException ex) {
             problems.add("container " + c.getClass().getName() + ": " + ex);
+            throw new IllegalStateException("Could not restore container " + c.getClass().getName(), ex);
         }
-    }
-
-    private static boolean sameElements(Collection<?> col, Object[] arr) {
-        if (col.size() != arr.length) { return false; }
-        int i = 0;
-        for (Object x : col) { if (x != arr[i++]) { return false; } }
-        return true;
-    }
-
-    private static boolean sameMap(Map<?, ?> m, Object[] kv) {
-        if (m.size() * 2 != kv.length) { return false; }
-        int i = 0;
-        for (Map.Entry<?, ?> e : m.entrySet()) {
-            if (e.getKey() != kv[i] || e.getValue() != kv[i + 1]) { return false; }
-            i += 2;
-        }
-        return true;
     }
 
     /** Content equality of two primitive arrays of the same type (no allocation). */
@@ -364,6 +360,16 @@ public final class GameMemento {
 
         int registrySize() { return registry.size(); }   // tests
 
+        /** Forget every remembered snapshot (frees the heap they pin); the next capture simply starts from scratch. */
+        public void reset() {
+            registry.clear();
+            queue.clear();
+            order.clear();
+            Arrays.fill(sRefs, null);
+            highWater = 0;
+            current = null;
+        }
+
         public GameMemento capture(Object root) {
             final int g = ++gen;
             final GameMemento m = new GameMemento();
@@ -482,7 +488,12 @@ public final class GameMemento {
                 final boolean stored = ci.stored[i];
                 if (ci.pk[i] == P_REF) {
                     Object v = null;
-                    try { v = fs[i].get(o); } catch (IllegalAccessException e) { current.problems.add("read " + fs[i]); }
+                    try {
+                        v = fs[i].get(o);
+                    } catch (IllegalAccessException e) {
+                        current.problems.add("read " + fs[i] + ": " + e);
+                        throw new IllegalStateException("Could not capture field " + fs[i], e);
+                    }
                     if (stored) { sRefs[ri++] = v; }
                     if (v != null) {
                         if (debugBlindSpots && kindOf(v.getClass()) == Kind.LEAF) { noteBlind(fs[i], v); }
@@ -490,7 +501,12 @@ public final class GameMemento {
                     }
                 } else if (stored) {
                     long v = 0L;
-                    try { v = readPrim(fs[i], ci.pk[i], o); } catch (IllegalAccessException e) { current.problems.add("read " + fs[i]); }
+                    try {
+                        v = readPrim(fs[i], ci.pk[i], o);
+                    } catch (IllegalAccessException e) {
+                        current.problems.add("read " + fs[i] + ": " + e);
+                        throw new IllegalStateException("Could not capture field " + fs[i], e);
+                    }
                     sPrims[pi++] = v;
                 }
             }
