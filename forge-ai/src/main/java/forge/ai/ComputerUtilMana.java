@@ -775,13 +775,17 @@ public class ComputerUtilMana {
             }
 
             final int manaCostToActivate = getManaToActivate(saPayment);
-            if (!test && manaCostToActivate > 0) {
+            if (manaCostToActivate > 0) {
+                if (test && !paymentList.isEmpty() && getManaToActivate(paymentList.get(paymentList.size() - 1)) > 0) {
+                    // chaining filters risks misplay
+                    saExcludeList.add(saPayment);
+                    continue;
+                }
                 // A Signet-like source is about to be activated: float the mana for its own cost first,
                 // from a source the remaining cost can spare, so that its cost payment doesn't grab a
                 // land that's needed for a colored shard.
-                if (!prepayFilterManaAbility(cost, sa, ai, saPayment, toPay, sourcesForShards, paymentList, effect)) {
+                if (!test && !prepayFilterManaAbility(cost, sa, ai, saPayment, toPay, sourcesForShards, paymentList, effect)) {
                     saPayment.getManaPart().clearExpressChoice();
-                    saList.remove(saPayment);
                     saExcludeList.add(saPayment);
                     continue;
                 }
