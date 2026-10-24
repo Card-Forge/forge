@@ -57,6 +57,10 @@ public enum ReplacementType {
         clasz = cls;
     }
 
+    public Class<? extends ReplacementEffect> getReplacementClass() {
+        return clasz;
+    }
+
     public static ReplacementType smartValueOf(String value) {
         final String valToCompate = value.trim();
         for (final ReplacementType v : ReplacementType.values()) {
