@@ -1,8 +1,10 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
@@ -265,6 +267,16 @@ public class SettingsScene extends UIScene {
                 RewardData.invalidateCardPool();
             }
         });
+        TextraButton excludedSets = Controls.newTextButton(String.valueOf(FModel.getExcludedEditionCodes().size()));
+        excludedSets.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Forge.switchScene(ExcludedSetsScene.getInstance(
+                    () -> excludedSets.setText(String.valueOf(FModel.getExcludedEditionCodes().size()))));
+            }
+        });
+        addLabel(localizer.getMessage("lblExcludedSets") + " (" + localizer.getMessage("lblExcludedSetsNote") + ")");
+        settingGroup.add(excludedSets).align(Align.right).pad(2);
         addCheckBox(localizer.getMessage("lblEnableUnknownCards") + " (" +
             localizer.getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
         addCheckBox(localizer.getMessage("lblEnableNonLegalCards") + " (" +
