@@ -1707,9 +1707,10 @@ public final class FlatMonteCarloPicker {
         }
         int adj = 0;
         try {
-            if (ComputerUtil.predictNextCombatsRemainingLife(simAi, true, false, 0, null) == Integer.MIN_VALUE) {
+            final int danger = ComputerUtil.predictNextCombatsDanger(simAi, simAi.getOpponents());
+            if (danger == 2) {
                 adj -= RISK_SERIOUS_DANGER;
-            } else if (ComputerUtil.predictNextCombatsRemainingLife(simAi, false, false, 0, null) == Integer.MIN_VALUE) {
+            } else if (danger == 1) {
                 adj -= RISK_DANGER;
             }
             final Player opp = simAi.getWeakestOpponent();

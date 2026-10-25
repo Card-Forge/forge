@@ -147,4 +147,41 @@ public class FlatMonteCarloFidelityTest extends AITest {
         }
         throw new IllegalStateException(p + " cannot cast " + name);
     }
+
+    /** The one-prediction danger check must say what the two separate predictions it replaces said. */
+    private static int oldDanger(final Player ai) {
+        if (ComputerUtil.predictNextCombatsRemainingLife(ai, true, false, 0, null) == Integer.MIN_VALUE) {
+            return 2;
+        }
+        return ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, null) == Integer.MIN_VALUE ? 1 : 0;
+    }
+
+    private void assertSameDanger(final String what, final Player ai) {
+        AssertJUnit.assertEquals(what, oldDanger(ai), ComputerUtil.predictNextCombatsDanger(ai, ai.getOpponents()));
+    }
+
+    @Test
+    public void dangerCheckAgreesWithTheTwoPredictionsItReplaces() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        assertSameDanger("no attackers", ai);
+        addCards("Grizzly Bears", 2, opp);
+        assertSameDanger("two small attackers, healthy", ai);
+        for (final int life : new int[] {20, 12, 8, 5, 4, 3, 2, 1}) {
+            ai.setLife(life, null);
+            assertSameDanger("two bears at " + life + " life", ai);
+        }
+        addCards("Serra Angel", 2, opp);
+        addCard("Grizzly Bears", ai);
+        for (final int life : new int[] {20, 14, 10, 7, 5, 3}) {
+            ai.setLife(life, null);
+            assertSameDanger("bears and angels against one bear at " + life + " life", ai);
+        }
+        addCards("Air Elemental", 3, opp);
+        for (final int life : new int[] {20, 9, 6}) {
+            ai.setLife(life, null);
+            assertSameDanger("a big board at " + life + " life", ai);
+        }
+    }
 }

@@ -2009,6 +2009,21 @@ public class AiController {
                 && !FlatMonteCarloPicker.isHoldPossible(player)) {
             return approved.get(0); // nothing to compare
         }
+        // What the heuristics aimed each approved play at, noted before the rollouts: asking the heuristics again
+        // (as the rollouts do to check a line is still approved) clears the targets of a play they turn down on the
+        // dice, and the aim they gave it a moment ago is then the only record of where the play was meant to go.
+        final Map<SpellAbility, GameEntity> approvedAim = new HashMap<>();
+        for (final SpellAbility sa : approved) {
+            if (sa.usesTargeting() && sa.getTargets() != null) {
+                final List<GameEntity> aimed = new ArrayList<>();
+                for (final GameEntity e : sa.getTargets().getTargetEntities()) {
+                    aimed.add(e);
+                }
+                if (aimed.size() == 1) {
+                    approvedAim.put(sa, aimed.get(0));
+                }
+            }
+        }
         final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, extras, cfg,
                 sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay, mode);
         lastFlatMcResult = result;
@@ -2040,7 +2055,10 @@ public class AiController {
             // What the heuristics aimed at when they approved the play: a refusal below clears the targets again.
             GameEntity approvedTarget = null;
             int approvedTargets = 0;
-            if (sa == result.choice && sa.usesTargeting() && sa.getTargets() != null) {
+            if (sa == result.choice && sa.usesTargeting() && approvedAim.containsKey(sa)) {
+                approvedTarget = approvedAim.get(sa);
+                approvedTargets = 1;
+            } else if (sa == result.choice && sa.usesTargeting() && sa.getTargets() != null) {
                 for (final GameEntity e : sa.getTargets().getTargetEntities()) {
                     approvedTarget = e;
                     approvedTargets++;

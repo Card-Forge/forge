@@ -184,7 +184,7 @@ public enum AiProps {
     /** off, auto (read the deck) or one of aggro, burn, control, combo, ramp, midrange. */
     FLAT_MC_DECK_PLAN("auto"),
     /** Mulligan and bottom cards by the deck plan (see OpeningHand); also part of maximum strength. */
-    FLAT_MC_MULLIGAN("false"),
+    FLAT_MC_MULLIGAN("true"),
     FLAT_MC_LAND_CHOICE("true"),
     FLAT_MC_REACTIVE("true");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
