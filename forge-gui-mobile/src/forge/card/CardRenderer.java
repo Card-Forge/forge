@@ -827,11 +827,11 @@ public class CardRenderer {
                 FSelectionBox.draw(g, cx, cy, cw, ch);
             }
             if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
-                    && MatchController.instance.isWeaklySelectable(card)) {
+                    && MatchController.instance.isActionable(card)) {
                 g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW)
-                    && MatchController.instance.getWeakSelectableStrength(card) >= 2) {
+                    && MatchController.instance.getActionableStrength(card) >= 2) {
                 drawAutoTapGlow(g, cx, cy, cw, ch);
             }
         }
