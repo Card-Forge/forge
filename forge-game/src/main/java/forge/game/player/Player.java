@@ -109,6 +109,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int investigatedThisTurn;
     private int scryThisTurn;
     private int surveilThisTurn;
+    private int dilemmasFacedThisTurn;
     private int committedCrimeThisTurn;
     private int numFlipsThisTurn;
     private int numRollsThisTurn;
@@ -1105,6 +1106,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void incScryThisTurn() {
         scryThisTurn++;
+    }
+
+    public int getDilemmasFacedThisTurn() {
+        return dilemmasFacedThisTurn;
+    }
+    public void incDilemmasFacedThisTurn() {
+        dilemmasFacedThisTurn++;
     }
 
     public boolean canMulligan() {
@@ -2492,6 +2500,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
         scryThisTurn = 0;
         surveilThisTurn = 0;
+        dilemmasFacedThisTurn = 0;
         resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
