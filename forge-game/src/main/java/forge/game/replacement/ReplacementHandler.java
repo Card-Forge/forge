@@ -117,6 +117,11 @@ public class ReplacementHandler {
             // only when not prelist
             boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
 
+            // most cards have no replacement effects: skip them before the zone lookup
+            if (noLKIstate && !c.hasReplacementEffects()) {
+                return true;
+            }
+
             Zone cardZone = game.getZoneOf(c);
 
             // all tap/untap/produce mana replacements are active from the battlefield or the

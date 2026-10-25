@@ -891,6 +891,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return result;
     }
 
+    public boolean hasRuleReplacementEffects() {
+        return type.hasSubtype("Adventure") || type.hasSubtype("Omen") || type.hasSubtype("Vengeance");
+    }
+
     public Stream<ReplacementEffect> streamReplacementEffects() {
         Stream<ReplacementEffect> result = getReplacementEffects().stream();
 

@@ -7235,6 +7235,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getUnhiddenKeywords(state).applyReplacementEffect(list);
     }
 
+    /** Whether the card has any replacement effect, counting those its subtypes and counters add. */
+    public boolean hasReplacementEffects() {
+        return hasRuleReplacementEffects() || !currentState.getReplacementEffects().isEmpty();
+    }
+
+    public boolean hasRuleReplacementEffects() {
+        if (currentState.hasRuleReplacementEffects()) {
+            return true;
+        }
+        return getCounters(CounterEnumType.SHIELD) > 0 || getCounters(CounterEnumType.STUN) > 0
+                || getCounters(CounterEnumType.FINALITY) > 0;
+    }
+
     /**
      * Returns what zone this card was cast from (from what zone it was moved to the stack).
      */
