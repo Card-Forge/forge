@@ -172,10 +172,6 @@ public final class GameActionUtil {
                             continue;
                         }
 
-                        if (keyword.equals("Beam me up") && source.getManaCost().isNoCost()) {
-                            continue;
-                        }
-
                         final SpellAbility beamSA = getGraveyardSpellByKeyword(inst, sa, activator,
                                 AlternativeCost.BeamMeUp);
                         // "if you also return a creature you control to its owner's hand" is an
