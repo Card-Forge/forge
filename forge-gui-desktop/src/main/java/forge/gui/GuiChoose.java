@@ -277,7 +277,7 @@ public class GuiChoose {
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
         final Selection before = gui.getSelection();
-        gui.setSelection(new Selection(Lists.newArrayList(manipulable), 0, 0, before.targets(), before.chosen()));
+        gui.setSelection(new Selection(Lists.newArrayList(manipulable), 0, 0, before.targets(), before.chosen(), before.actionable()));
         @SuppressWarnings("Convert2Lambda") // Avoid lambdas to maintain compatibility with Android 5 API
         final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
             @Override
