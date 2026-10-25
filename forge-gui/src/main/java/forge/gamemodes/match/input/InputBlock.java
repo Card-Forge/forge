@@ -26,7 +26,6 @@ import forge.game.event.GameEventCombatUpdate;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.Selection;
-import forge.gui.FThreads;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -61,8 +60,7 @@ public class InputBlock extends InputSyncronizedBase {
         for (final Card attacker : combat.getAttackers()) {
             for (final Card c : defender.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
-                    //must set current attacker on EDT
-                    FThreads.invokeInEdtNowOrLater(() -> currentAttacker = attacker);
+                    currentAttacker = attacker;
                     return;
                 }
             }
