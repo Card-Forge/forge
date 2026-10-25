@@ -1726,7 +1726,12 @@ public final class FlatMonteCarloPicker {
     private static void reportFailure(final RuntimeException e) {
         // A few lines are plenty to notice a systematic problem without flooding the log of a long game.
         final StackTraceElement[] trace = e.getStackTrace();
-        FlatMonteCarloStats.noteFailure(String.valueOf(e) + (trace.length > 0 ? " @ " + trace[0] : ""));
+        final StringBuilder where = new StringBuilder();
+        for (int i = 0; i < Math.min(3, trace.length); i++) {
+            where.append(i == 0 ? " @ " : " < ").append(trace[i].getClassName().replaceAll(".*\\.", "")).append('.')
+                    .append(trace[i].getMethodName()).append(':').append(trace[i].getLineNumber());
+        }
+        FlatMonteCarloStats.noteFailure(String.valueOf(e) + where);
         if (TOTAL_FAILURES.incrementAndGet() <= 5) {
             System.err.println("Flat Monte Carlo rollout failed, using the heuristic choice instead: " + e);
             for (int i = 0; i < Math.min(8, trace.length); i++) {

@@ -1250,6 +1250,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             }
             if (resolver != null) {
                 resolver.run();
+                if (game.isGameOver()) {
+                    // resolving the stack ended the game, leaving effects on it that nothing will ever resolve
+                    return false;
+                }
             }
             onPhaseEnd();
             advanceToNextPhase();
