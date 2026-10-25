@@ -24,7 +24,6 @@ import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.PlayEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
@@ -228,7 +227,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isManaAbility()) {
             // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
             game.getAction().checkStaticAbilities();
-            CharmEffect.faceDeferredDilemma(sp);
 
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
@@ -371,8 +369,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stack.size() - 1));
 
         if (!sp.isCopied()) {
-            CharmEffect.faceDeferredDilemma(sp);
-
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 

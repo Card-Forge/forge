@@ -8,7 +8,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
 import forge.util.Expressions;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
@@ -206,22 +205,6 @@ public class CharmEffect extends SpellAbilityEffect {
         return "";
     }
 
-    private static void faceDilemma(final SpellAbility sa, final Player chooser, final boolean random) {
-        // a spell or activated ability can still be backed out of, so it faces the dilemma once it's on the stack
-        if (!sa.isTrigger()) {
-            sa.setDilemma(Pair.of(chooser, random));
-            return;
-        }
-        faceDilemma(chooser, random);
-    }
-
-    public static void faceDeferredDilemma(final SpellAbility sa) {
-        if (sa.getDilemma() != null) {
-            faceDilemma(sa.getDilemma().getLeft(), sa.getDilemma().getRight());
-            sa.setDilemma(null);
-        }
-    }
-
     private static void faceDilemma(final Player chooser, final boolean random) {
         chooser.incDilemmasFacedThisTurn();
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(chooser);
@@ -236,7 +219,6 @@ public class CharmEffect extends SpellAbilityEffect {
         if (sa.isCopied()) {
             return true;
         }
-        sa.setDilemma(null);
 
         // reset all previous choices
         sa.setSubAbility(null);
@@ -280,7 +262,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 List<AbilitySub> randomChosen = Aggregates.random(choices, num);
                 chainAbilities(sa, randomChosen);
                 if (!randomChosen.isEmpty()) {
-                    faceDilemma(sa, activator, true);
+                    faceDilemma(activator, true);
                 }
                 return true;
             }
@@ -302,7 +284,7 @@ public class CharmEffect extends SpellAbilityEffect {
         chainAbilities(sa, chosen);
 
         if (chosen != null && !chosen.isEmpty()) {
-            faceDilemma(sa, chooser, false);
+            faceDilemma(chooser, false);
         }
 
         // trigger without chosen modes are removed from stack
