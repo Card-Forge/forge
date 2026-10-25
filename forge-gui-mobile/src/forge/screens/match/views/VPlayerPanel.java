@@ -95,6 +95,7 @@ public class VPlayerPanel extends FContainer {
     private static int compactLayoutCache = -1; //0 off, 1 controls on the left, 2 on the right, 3 alternating: bottom player right, the others left
     private static final float COMPACT_ZONE_INSET = Utils.scale(5);   //room between an open zone's cards and the rounded box around them
     private static final float COMPACT_BOX_RADIUS = Utils.scale(4);
+    private static final float COMPACT_ZONE_GAP = Utils.scale(3);    //space between the card zone box and the command zone box
     private static final Color COMPACT_BOX_EDGE = new Color(1f, 1f, 1f, 0.26f);
     private static final int COMPACT_DOUBLE_ROWS = 4;                 //tabs per column in the double tab layout
 
@@ -275,6 +276,7 @@ public class VPlayerPanel extends FContainer {
     private boolean commandOpen;              //landscape only, stays true while empty
     private float commandProgress = 0f;       //0 hidden, 1 fully slid out
     private float commandVisibleWidth = 0f;
+    private float commandBoxVisibleWidth = 0f, commandBoxLeft = 0f; //compact layout: the command zone's rounded box, which is wider than its cards by the inset
     private CommandSlideAnimation commandAnimation;
     private boolean commandUserClosed; //closed by hand, stays closed until the zone empties
     private static final float TAB_ICON_RATIO = 0.6f;        //icon box as a fraction of tab height, the rest is top/bottom padding
@@ -294,7 +296,7 @@ public class VPlayerPanel extends FContainer {
     private float compactScroll, compactScrollTarget; //in tabs, 0 shows the first three tabs
     private float compactCell, compactViewTop, compactViewHeight;
     private float compactSingleWidth; //width of one control column: the double tab layout is two cells wide, the reveal tab keeps this width
-    private final List<InfoTab> compactInner = new ArrayList<>(), compactOuter = new ArrayList<>(); //double tab columns: next to the field, and outer
+    private final List<InfoTab> compactGrid = new ArrayList<>(); //double tab layout: the tabs in grid order, two per row
     private int compactVisible = COMPACT_MAX_VISIBLE_TABS; //tabs shown at once
     private float compactPhaseTop, compactPhaseHeight, compactAvatarSize = -1f, compactAvatarNatural; //phase button under the life total, avatar fitted to the panel
     private CompactScrollAnimation compactScrollAnimation;
@@ -931,43 +933,46 @@ public class VPlayerPanel extends FContainer {
         return Math.max(Math.round(avatar.getWidth() * 0.9f), Math.round(TAB_MIN_ICON * 2f));
     }
 
-    //Double tab layout: every zone tab at once in two columns, like the desktop version, so nothing scrolls. The common zones (hand,
-    //library, graveyard, exile) are in the column next to the field, the others (flashback, mana pool, command, extra) in the outer one.
+    //Double tab layout: every zone tab at once in two columns, in the order of the desktop version, so nothing scrolls:
+    //  hand       | library
+    //  graveyard  | exile
+    //  flashback  | command
+    //  extra      | mana pool
+    //The grid is read left to right whichever side the controls are on, and a tab that isn't shown leaves its cell empty
+    //so every other tab stays where the desktop puts it.
     private void layoutDoubleColumns() {
         compactTabs.clear();
         compactViewHeight = 0f; //nothing is clipped to a scroller
-        compactInner.clear();
-        compactOuter.clear();
-        for (InfoTab tab : getCompactOrder()) {
-            if (!tab.isTabShown()) {
-                tab.setVisible(false);
-                continue;
-            }
-            (tab.isCommonZone() ? compactInner : compactOuter).add(tab);
+        final List<InfoTab> grid = getCompactGridOrder();
+        for (InfoTab tab : grid) {
+            if (tab != null && !tab.isTabShown()) { tab.setVisible(false); }
         }
         if (tabColWidth <= 0 || initH <= 0) { return; }
         final float cellW = tabColWidth / 2;
         final float top = Math.round(tabColTop + TAB_COLUMN_PAD);
         final float cellH = Math.max(1f, (float) Math.floor(Math.min((tabColHeight - 2 * TAB_COLUMN_PAD) / COMPACT_DOUBLE_ROWS, cellW * 1.2f)));
-        //both columns span the height of the taller one, so a column with fewer tabs (no command zone yet) stretches its cells instead of leaving a hole
-        final float columnHeight = cellH * Math.max(1, Math.max(compactInner.size(), compactOuter.size()));
         final float x = getColumnX();
-        final boolean right = isCompactRight();
-        placeDoubleColumn(compactInner, right ? x : x + cellW, top, cellW, columnHeight);
-        placeDoubleColumn(compactOuter, right ? x + cellW : x, top, cellW, columnHeight);
+        for (int i = 0; i < grid.size(); i++) {
+            final InfoTab tab = grid.get(i);
+            if (tab == null || !tab.isTabShown()) { continue; }
+            final int col = i % 2, row = i / 2;
+            tab.setBounds(x + col * cellW, top + row * cellH, cellW, cellH);
+            tab.setVisible(true);
+        }
         phaseButton.setBounds(x + TAB_COLUMN_PAD, compactPhaseTop, tabColWidth - 2 * TAB_COLUMN_PAD, compactPhaseHeight);
     }
 
-    //the tabs of one column share its height equally
-    private void placeDoubleColumn(List<InfoTab> column, float x, float top, float w, float height) {
-        final int n = column.size();
-        for (int i = 0; i < n; i++) {
-            final float y0 = Math.round(top + height * i / n);
-            final float y1 = Math.round(top + height * (i + 1) / n);
-            final InfoTab tab = column.get(i);
-            tab.setBounds(x, y0, w, y1 - y0);
-            tab.setVisible(true);
+    //the desktop's tab grid, row by row: the extra zones tab and the mana pool are always the last row
+    private List<InfoTab> getCompactGridOrder() {
+        if (compactGrid.isEmpty()) {
+            for (ZoneType zoneType : new ZoneType[] { ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Flashback }) {
+                compactGrid.add(zoneTabs.get(zoneType));
+            }
+            compactGrid.add(commandTab);
+            compactGrid.add(extraTab);
+            compactGrid.add(tabManaPool);
         }
+        return compactGrid;
     }
 
     //compact layout: avatar and life on top, the phase button under them and the three tab scroller below
@@ -1298,15 +1303,20 @@ public class VPlayerPanel extends FContainer {
         final float bandHeight = stripHeight * Math.max(boxReveal, commandProgress);
         final float fieldBand = isZoneOverlay() ? 0f : bandHeight; //compact zone tabs: the band covers the field instead of shrinking it
 
-        final float cmdWidth = Math.max(1, Math.min(commandZone.getCount(), 2)) * commandZone.getCardWidth(stripHeight);
-        commandVisibleWidth = cmdWidth * commandProgress;
+        //the command zone is boxed exactly like the card zone: same band, same inset, so cards match in height and the boxes never overlap
+        final float inset = COMPACT_ZONE_INSET;
+        final float cmdCardsWidth = Math.max(1, Math.min(commandZone.getCount(), 2)) * commandZone.getCardWidth(stripHeight - 2 * inset);
+        final float cmdBoxWidth = cmdCardsWidth + 2 * inset;
+        commandVisibleWidth = cmdCardsWidth * commandProgress; //the part of the cards slid out
+        commandBoxVisibleWidth = cmdBoxWidth * commandProgress;
+        commandBoxLeft = right ? x : width - commandBoxVisibleWidth;
         //slides in from the screen edge facing away from the controls
-        commandZone.setBounds(right ? x - (cmdWidth - commandVisibleWidth) : width - commandVisibleWidth, stripTop, cmdWidth, stripHeight);
+        commandZone.setBounds(right ? x + inset - (cmdCardsWidth - commandVisibleWidth) : width - commandBoxVisibleWidth + inset, stripTop + inset, cmdCardsWidth, stripHeight - 2 * inset);
 
-        final float boxWidth = Math.max(1f, regionWidth - commandVisibleWidth); //expands up to the command zone
-        final float boxX = right ? x + commandVisibleWidth : x;
+        final float gap = commandBoxVisibleWidth > 0 ? COMPACT_ZONE_GAP : 0f; //air between the two boxes
+        final float boxWidth = Math.max(1f, regionWidth - commandBoxVisibleWidth - gap); //expands up to the command zone box
+        final float boxX = right ? x + commandBoxVisibleWidth + gap : x;
         final float hidden = (1f - slideProgress) * stripHeight * (flipped ? -1f : 1f); //beyond the edge while sliding
-        final float inset = COMPACT_ZONE_INSET; //the cards are a little smaller than the band, so the rounded box drawn around them has room
         for (InfoTab tab : tabs) {
             tab.setDisplayBounds(boxX + inset, stripTop + hidden + inset, Math.max(1f, boxWidth - 2 * inset), stripHeight - 2 * inset);
         }
@@ -1337,9 +1347,12 @@ public class VPlayerPanel extends FContainer {
         final float boxTop = flipped ? 0 : height - boxHeight;
         final float boxLeft = x + regionWidth - boxWidth * slideProgress; //slides in from the right edge
 
-        final float cmdWidth = Math.max(1, Math.min(commandZone.getCount(), 2)) * commandZone.getCardWidth(boxHeight);
-        commandVisibleWidth = cmdWidth * commandProgress;
-        commandZone.setBounds(x + regionWidth - commandVisibleWidth, flipped ? height - boxHeight : 0, cmdWidth, boxHeight);
+        final float cmdCardsWidth = Math.max(1, Math.min(commandZone.getCount(), 2)) * commandZone.getCardWidth(boxHeight - 2 * inset);
+        final float cmdWidth = cmdCardsWidth + 2 * inset; //the outer box, as wide as the card zone box is for the same cards
+        commandVisibleWidth = cmdCardsWidth * commandProgress;
+        commandBoxVisibleWidth = cmdWidth * commandProgress;
+        commandBoxLeft = x + regionWidth - commandBoxVisibleWidth;
+        commandZone.setBounds(commandBoxLeft + inset, (flipped ? height - boxHeight : 0) + inset, cmdCardsWidth, boxHeight - 2 * inset);
 
         for (InfoTab tab : tabs) {
             tab.setDisplayBounds(boxLeft + inset, boxTop + inset, boxWidth - 2 * inset, boxHeight - 2 * inset);
@@ -1580,32 +1593,20 @@ public class VPlayerPanel extends FContainer {
             }
         }
         if (Forge.isLandscapeMode() && commandVisibleWidth > 0 && commandZone.isVisible()) {
-            if (Forge.isLandscapeMode()
-                    && commandVisibleWidth > 0
-                    && commandZone.isVisible()) {
-                final float cx = commandZone.getLeft();
-                final float cy = commandZone.getTop();
-                final float ch = commandZone.getHeight();
-
-                if (isCompactLayout()) {
-                    final float inset = COMPACT_ZONE_INSET;
-
-                    drawZoneBox(g,
-                            cx - inset,
-                            cy - inset,
-                            commandVisibleWidth + 2f * inset,
-                            ch + 2f * inset);
-                } else {
-                    g.fillRect(getDisplayAreaBackColor(),
-                            cx, cy, commandVisibleWidth, ch);
-
-                    g.drawLine(1, MatchScreen.getBorderColor(),
-                            cx, cy, cx, cy + ch);
-
-                    final float edgeY = isFlipped() ? cy + ch : cy;
-                    g.drawLine(1, MatchScreen.getBorderColor(),
-                            cx, edgeY, cx + commandVisibleWidth, edgeY);
-                }
+            if (isCompactLayout()) { //the same rounded box as the card zone, its height and inset taken from the layout
+                final float inset = COMPACT_ZONE_INSET;
+                drawZoneBox(g, commandBoxLeft, commandZone.getTop() - inset, commandBoxVisibleWidth, commandZone.getHeight() + 2 * inset);
+            } else {
+                //the visible part of the zone: its left side normally, its right side when it slides in from the left edge
+                float cx = isCompactRight() ? commandZone.getLeft() + commandZone.getWidth() - commandVisibleWidth : commandZone.getLeft();
+                float cy = commandZone.getTop();
+                float ch = commandZone.getHeight();
+                fillZone(g, cx, cy, commandVisibleWidth, ch);
+                float sideX = isCompactRight() ? cx + commandVisibleWidth : cx; //the edge facing the field
+                zoneLine(g, sideX, cy, sideX, cy + ch);
+                //edge facing the field (the alternate layout puts the command zone on the inner side)
+                float edgeY = isFlipped() != isAltZoneLayout() ? cy + ch : cy;
+                zoneLine(g, cx, edgeY, cx + commandVisibleWidth, edgeY);
             }
         }
     }
