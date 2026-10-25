@@ -681,16 +681,19 @@ public final class CMatchUI
         final Selection prev = getSelection();
         super.setSelection(selection);
         final boolean cardsChanged = !prev.cards().equals(selection.cards());
+        final boolean actionableChanged = !prev.actionable().equals(selection.actionable());
         final boolean stackOffered = selection.offersStackItems() && !prev.offersStackItems();
         // a maximum of 0 marks display-only highlighting, whose caller shows its own window
         final PlayerZoneUpdates zones = cardsChanged && selection.max() > 0 ? getZonesHolding(selection.cards()) : new PlayerZoneUpdates();
         FThreads.invokeInEdtNowOrLater(() -> {
-            if (cardsChanged) {
+            if (cardsChanged || actionableChanged) {
                 // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
                 for (final PlayerView p : getGameView().getPlayers()) {
                     updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                     updateCardsNetSafe(p.getCards(ZoneType.Hand));
                 }
+            }
+            if (cardsChanged) {
                 if (selection.cards().isEmpty()) {
                     hideZones(selectionZonesShown);
                     selectionZonesShown.clear();
@@ -699,6 +702,8 @@ public final class CMatchUI
                     updateZones(zones);
                     selectionZonesShown.addAll(tempShowZones(zones));
                 }
+            }
+            if (cardsChanged || actionableChanged) {
                 FloatingZone.refreshAll();
             }
             if (stackOffered) { // stack entries are picked in the stack panel, so bring it up
@@ -747,30 +752,6 @@ public final class CMatchUI
             }
         }
         getCStack().getView().repaintSelection();
-    }
-
-    @Override
-    public void setWeaklySelectable(final Iterable<CardView> cards) {
-        super.setWeaklySelectable(cards);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
-    }
-
-    @Override
-    public void clearWeaklySelectable() {
-        super.clearWeaklySelectable();
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-            FloatingZone.refreshAll();
-        });
     }
 
     @Override
