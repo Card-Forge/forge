@@ -67,6 +67,7 @@ public class LoadSealedScreen extends LaunchScreen {
         cbGamesInMatch.addItem("1");
         cbGamesInMatch.addItem("3");
         cbGamesInMatch.addItem("5");
+        cbGamesInMatchBinder.bind();
     }
 
     @Override
