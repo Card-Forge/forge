@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Cycling:3
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 5 | Description$ Enchanted creature gets +2/+5.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 2 | AddToughness$ 5 | Description$ Enchanted creature gets +2/+5.
 Oracle:Enchant creature\nEnchanted creature gets +2/+5.\nCycling {3} ({3}, Discard this card: Draw a card.)

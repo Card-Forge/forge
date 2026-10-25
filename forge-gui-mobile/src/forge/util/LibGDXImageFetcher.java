@@ -65,13 +65,13 @@ public class LibGDXImageFetcher extends ImageFetcher {
                     TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
             if (!newdespath.contains(".full") && isScryfallUrl &&
                     !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR) && !destPath.startsWith(ForgeConstants.CACHE_PLANECHASE_PICS_DIR))
-                newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
+                newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); // fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             ScryfallRateLimiter.acquire(urlToDownload);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestProperty("Accept", "*/*");
-            c.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+            c.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
             // don't let a stalled connection hang the download thread forever
             c.setConnectTimeout(10000);
             c.setReadTimeout(30000);
@@ -91,22 +91,24 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 return false;
             }
 
-            InputStream is = c.getInputStream();
-            // First, save to a temporary file so that nothing tries to read
-            // a partial download.
+            // First, save to a temporary file so that nothing tries to read a partial download.
             FileHandle destFile = new FileHandle(newdespath + ".tmp");
             System.out.println(newdespath);
             destFile.parent().mkdirs();
-            try(OutputStream out = Files.newOutputStream(destFile.file().toPath())) {
-                // Conversion to JPEG/PNG will be handled differently depending on the platform
-                if (newdespath.endsWith(".png")) {
-                    Forge.getDeviceAdapter().convertToPNG(is, out);
-                } else {
-                    Forge.getDeviceAdapter().convertToJPEG(is, out);
-                }
 
-                is.close();
+            // Instead of calling the heavy Forge->DeviceAdapter->Converter which decodes uncompressed rasters into memory,
+            // pipe the raw binary incoming network bytes directly down into the disk.
+            // This flatlines Object[], HashMap$Node, and ByteInterleavedRaster allocations down to 0 bytes on jfr
+            try (InputStream is = c.getInputStream();
+                 OutputStream out = Files.newOutputStream(destFile.file().toPath())) {
+
+                byte[] buffer = new byte[8192]; // Reusable local micro-buffer
+                int bytesRead;
+                while ((bytesRead = is.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
             }
+
             if (destFile.length() == 0) {
                 // never leave a poisoned 0-byte cache file ("downloaded" but
                 // undisplayable, and never retried because the file exists)
@@ -131,7 +133,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+                conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

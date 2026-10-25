@@ -31,7 +31,6 @@ import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListChooser;
-import forge.gui.CardListViewer;
 import forge.gui.FThreads;
 import forge.gui.GuiChoose;
 import forge.gui.download.GuiDownloadService;
@@ -82,6 +81,11 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public String getCurrentVersion() {
         return BuildInfo.getVersionString();
+    }
+
+    @Override
+    public String getUserAgent() {
+        return "Forge/" + getCurrentVersion() + " (gui-desktop)";
     }
 
     @Override
@@ -232,7 +236,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void showCardList(final String title, final String message, final List<PaperCard> list) {
-        final CardListViewer cardView = new CardListViewer(title, message, list);
+        final CardListChooser cardView = new CardListChooser(title, message, list, false);
         cardView.setVisible(true);
         cardView.dispose();
     }
@@ -247,7 +251,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public PaperCard chooseCard(String title, String message, List<PaperCard> list) {
-        final CardListChooser cardListChooser = new CardListChooser(title, message, list);
+        final CardListChooser cardListChooser = new CardListChooser(title, message, list, true);
         cardListChooser.setVisible(true);
         cardListChooser.dispose();
         return cardListChooser.getSelectedCard();
@@ -359,7 +363,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
-        new AltSoundSystem(filename, isSynchronized).start();
+        AltSoundSystem.play(filename, isSynchronized);
     }
 
     @Override

@@ -1,0 +1,9 @@
+Name:_____ Goblin
+ManaCost:2 R
+Types:Creature Goblin Guest
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ StickerUniqueVowels
+DeckHas:Ability$Mana
+Oracle:When this creature enters, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)

@@ -3,5 +3,5 @@ ManaCost:3
 Types:Artifact Equipment
 K:Indestructible
 K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Indestructible | Description$ Equipped creature has indestructible.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Indestructible | Description$ Equipped creature has indestructible.
 Oracle:Indestructible\nEquipped creature has indestructible.\nEquip {2}

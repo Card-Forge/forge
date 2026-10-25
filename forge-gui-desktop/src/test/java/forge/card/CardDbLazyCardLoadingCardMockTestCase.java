@@ -31,7 +31,7 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
         // each test, since the checks above need it to start with nothing loaded.
         StaticData data = CardDatabaseHelper.createStaticData("CardDbLazyCardLoadingCardMockTestCase", true);
         data.resetLazyLoadedCards();
-        fModelMock.when(FModel::getMagicDb).thenReturn(data);
+        useStaticData(data);
         this.cardDb = data.getCommonCards();
     }
 

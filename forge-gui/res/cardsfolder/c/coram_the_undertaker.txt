@@ -2,7 +2,7 @@ Name:Coram, the Undertaker
 ManaCost:1 B R G
 Types:Legendary Creature Human Warrior
 PT:0/5
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the greatest power among creature cards in all graveyards.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the greatest power among creature cards in all graveyards.
 SVar:X:Count$ValidGraveyard Creature$GreatestCardPower
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, each player mills a card.
 SVar:TrigMill:DB$ Mill | Defined$ Player | NumCards$ 1

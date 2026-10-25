@@ -173,6 +173,7 @@ public enum FSkinImage implements FSkinImageInterface {
     MENU_SEALED       (FSkinProp.ICO_MENU_SEALED),
     MENU_DRAFT        (FSkinProp.ICO_MENU_DRAFT),
     MENU_CONSTRUCTED  (FSkinProp.ICO_MENU_CONSTRUCTED),
+    DECKSTATS         (FSkinProp.ICO_DECKSTATS),
 
     //Interface icons
     QUESTION        (FSkinProp.ICO_QUESTION),

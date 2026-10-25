@@ -5,8 +5,8 @@ K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your draw step, draw an additional card, then discard a card.
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeDragons | AddStaticAbility$ DragonsST | Description$ • Dragons — Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your draw step, draw an additional card, then discard a card.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeDragons | AddStaticAbility$ DragonsST | Description$ • Dragons — Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
 SVar:KhansTrigger:Mode$ Phase | Phase$ Draw | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Filter | Secondary$ True | TriggerDescription$ At the beginning of your draw step, draw an additional card, then discard a card.
 SVar:Filter:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1

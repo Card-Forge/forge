@@ -10,6 +10,7 @@ import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
+import forge.game.GameView;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -71,6 +72,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public String getUserAgent() {
+        return "Forge/" + getCurrentVersion() + " (gui-mobile)";
+    }
+
+    @Override
     public String getAssetsDir() {
         return assetsDir;
     }
@@ -118,6 +124,13 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public boolean isMatchInProgress() {
+        final MatchController mc = MatchController.instance;
+        final GameView gv = mc.getGameView();
+        return gv != null && !mc.isReplay() && !gv.isGameOver();
+    }
+
+    @Override
     public ISkinImage getSkinIcon(final FSkinProp skinProp) {
         if (skinProp == null) { return null; }
         return FSkin.getImages().get(skinProp);
@@ -156,7 +169,7 @@ public class GuiMobile implements IGuiBase {
                 } else if (paperCard != null) {
                     Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
                     if (cardImage != null)
-                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, paperCard.isFoil());
+                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, 0);
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away

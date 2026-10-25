@@ -6,5 +6,5 @@ S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Flash | IsPresen
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When you cast this spell, tap up to two target creatures you don't control.
 SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures you don't control | ValidTgts$ Creature.YouDontCtrl
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2.
 Oracle:This spell has flash as long as you control a Spirit.\nWhen you cast this spell, tap up to two target creatures you don't control.\nEnchant creature\nEnchanted creature gets +1/+2.

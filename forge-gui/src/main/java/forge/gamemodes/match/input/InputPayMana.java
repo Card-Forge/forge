@@ -66,7 +66,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-        getController().clearActionableCards();
         if (!isFinished()) {
             // Clear current Mana cost being paid for SA
             saPaidFor.setManaCostBeingPaid(null);
@@ -405,15 +404,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
-        // Drop just-tapped sources from the highlight set; emphasize the AI's auto-tap plan.
-        getController().pushActionableCards(true, getAutoTapPreviewViews());
+        // Just-tapped sources leave the highlights, and the AI's auto-tap plan is emphasized
+        showSelection();
         showMessage(getMessage(), saPaidFor.getView());
     }
 
     @Override
     public void showMessage() {
         if (isFinished()) { return; }
-        getController().pushActionableCards(true);
         updateButtons();
         onStateChanged();
     }
@@ -449,6 +447,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         runAsAi(proc);
         autoPayManaSources = proc.getResult();
         autoPayManaSourcesKnown = true;
+    }
+
+    @Override
+    protected List<CardView> getActionable() {
+        return getController().getActionableCards(true, getAutoTapPreviewViews());
     }
 
     /** Cards the Auto button would tap, for emphasized highlighting; null when unavailable. */

@@ -1,7 +1,6 @@
 package forge.gui.interfaces;
 
 import forge.LobbyPlayer;
-import forge.game.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
@@ -16,16 +15,17 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.DrawOfferMessage;
+import forge.gamemodes.match.Selection;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
-import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -34,10 +34,13 @@ import forge.util.collect.FCollectionView;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 public interface IGuiGame {
+
     record OrderResult<T>(List<T> ordered, boolean rememberDecision) implements Serializable {}
 
     /**
@@ -84,30 +87,41 @@ public interface IGuiGame {
     }
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
-    void flashIncorrectAction();
+    /** Updates buttons while explicitly identifying whether Cancel represents Undo. */
+    default void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1, boolean undoAvailable) {
+        updateButtons(owner, label1, label2, enable1, enable2, focus1);
+    }
 
+    /** Plays a coin flip animation and blocks until it finishes. No-op by default. */
+    default void showCoinFlip(boolean heads, String caption, boolean waitForTap) {}
+    default void showFlipOntoBattlefield(CardView flipped, CardView target, List<CardView> hit, List<CardView> battlefield, int timesFlipped) {}
+    default void endFlipOntoBattlefield(CardView flipped) {}
+
+    void flashIncorrectAction();
     void alertUser();
 
-    void updatePhase(boolean saveState);
+    default void updatePhase(boolean saveState) {}
+    default void updateTurn(PlayerView player) {}
 
-    void updateTurn(PlayerView player);
+    default void updatePlayerControl() {}
 
-    void updatePlayerControl();
-
-    void enableOverlay();
-    void disableOverlay();
+    default void enableOverlay() {}
+    default void disableOverlay() {}
 
     void finishGame();
 
-    void showManaPool(PlayerView player);
-    void hideManaPool(PlayerView player);
+    default void showManaPool(PlayerView player) {}
+    default void hideManaPool(PlayerView player) {}
 
-    void updateStack();
+    default void updateStack() {}
 
-    void notifyStackAddition(final GameEventSpellAbilityCast event);
-    void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
+    /** The game was rewound in place by undo: drop any animation/transient UI state tied to the old timeline. Called on the EDT before the refresh. */
+    default void onSnapshotRestored() {}
 
-    void handleLandPlayed(CardView land);
+    default void notifyStackAddition(final GameEventSpellAbilityCast event) {}
+    default void notifyStackRemoval(final GameEventSpellRemovedFromStack event) {}
+
+    default void handleLandPlayed(CardView land) {}
 
     void handleGameEvent(GameEvent event);
     default void handleGameEvents(List<GameEvent> events) {
@@ -116,31 +130,26 @@ public interface IGuiGame {
         }
     }
 
-    Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
+    default void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {}
 
-    void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
-
-    void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
-
-    void updateSingleCard(CardView card);
-
-    void updateCards(Iterable<CardView> cards);
+    default void updateCard(final CardView card) {
+        updateCards(Collections.singleton(card));
+    }
+    default void updateCards(Iterable<CardView> cards) {}
     default void updateCardsNetSafe(FCollectionView<CardView> cards) { updateCards(isNetGame() ? cards.threadSafeIterable() : cards); }
 
     void updateRevealedCards(TrackableCollection<CardView> collection);
 
-    void refreshCardDetails(Iterable<CardView> cards);
+    default void refreshCardDetails(Iterable<CardView> cards) {}
+    default void refreshField() {}
 
-    void refreshField();
+    default void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {}
+    default void updateLives(Iterable<PlayerView> livesUpdate) {}
 
-    GameState getGamestate();
+    // adventure only
+    default void updateShards(Iterable<PlayerView> shardsUpdate) {}
 
-    void updateManaPool(Iterable<PlayerView> manaPoolUpdate);
-
-    void updateLives(Iterable<PlayerView> livesUpdate);
-    void updateShards(Iterable<PlayerView> shardsUpdate);
-
-    void updateDependencies();
+    default void updateDependencies() {}
 
     void setPanelSelection(CardView hostCard);
 
@@ -258,23 +267,27 @@ public interface IGuiGame {
 
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
 
-    PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players, boolean backupLastZones);
-
-    void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
-
-    void setHighlighted(Iterable<GameEntityView> entities, boolean b);
+    default void openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players) {}
 
     /**
-     * Mark {@code cards} as selectable and publish the active selection's
-     * minimum / maximum required count for client-side use (e.g.,
-     * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
+     * Replaces what the active prompt marks. A selection with a maximum of {@code 0} only highlights its cards, for which
+     * the GUI opens no zones.
      */
-    void setSelectables(Iterable<CardView> cards, int min, int max);
-    void clearSelectables();
+    void setSelection(Selection selection);
+    /**
+     * Whether this GUI lets the player pick stack items as targets by tapping or clicking them in its stack view.
+     * Otherwise targets on the stack are chosen in a dialog. A GUI that forwards the selection to a remote client
+     * returns true only if that client can handle it.
+     */
+    default boolean canPickStackTargets() { return false; }
     boolean isSelecting();
 
-    void setWeaklySelectable(final Iterable<CardView> cards);
-    void clearWeaklySelectable();
+    /**
+     * Cards revealed to the player for the current prompt, until {@link #hideRevealedCards()}; the GUI chooses how
+     * to display them. Unrelated to {@link #updateRevealedCards}, which records the match's reveal history.
+     */
+    default void showRevealedCards(Iterable<CardView> cards) {}
+    default void hideRevealedCards() {}
 
     boolean isGamePaused();
     void setGamePause(boolean pause);
@@ -288,26 +301,34 @@ public interface IGuiGame {
     void awaitNextInput();
     void cancelAwaitNextInput();
 
-    /** Signal to start a client-side elapsed timer for waiting display. */
-    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
-
-    boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
-
     void updateAutoPassPrompt();
 
     void setCurrentPlayer(PlayerView player);
 
-    /**
-     * Apply a delta update packet to the local game state.
-     * @param packet the delta packet containing changes
-     */
-    void applyDelta(DeltaPacket packet);
+    boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
 
     /** Repaint marker chevron / stack-yield UI for the given player. */
     default void refreshYieldUi(PlayerView player) {}
-
     /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
     void applyYieldUpdate(YieldUpdate update);
+    /** Apply the macro state of the current player's controller. A local controller holds its own, so only a netplay client is sent one. */
+    void applyMacroState(IMacroSystem.State state);
+
+    /**
+     * Apply a delta update packet to the local game state.
+     * No-op for offline games - network implementation is in {@link NetworkGuiGame}.
+     * @param packet the delta packet containing changes
+     */
+    default void applyDelta(DeltaPacket packet) {}
+
+    /**
+     * Blocks the game thread until a synchronized input is done. Answers normally arrive on
+     * another thread. A GUI whose peer can only answer on this thread (a single-threaded host)
+     * overrides this to take those answers here until {@code done} opens.
+     */
+    default void awaitInput(final CountDownLatch done) throws InterruptedException {
+        done.await();
+    }
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

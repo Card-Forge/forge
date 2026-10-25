@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAITgts:Creature.withFlying
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.EnchantedBy | Execute$ TrigPumpAttacker | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.EnchantedBy | ValidBlocker$ Creature | Execute$ TrigPumpBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
 SVar:TrigPumpAttacker:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ First Strike

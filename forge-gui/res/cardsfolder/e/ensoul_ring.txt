@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant:Permanent.nonLand:nonland permanent
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | SetColor$ Colorless | AddType$ Artifact | RemoveCardTypes$ True | RemoveArtifactTypes$ True | AddAbility$ SolMana | SetName$ Sol Ring | RemoveAllAbilities$ True | Description$ Enchanted permanent is a Sol Ring. (It's no longer anything else.)
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Permanent | SetColor$ Colorless | AddType$ Artifact | RemoveCardTypes$ True | RemoveArtifactTypes$ True | AddAbility$ SolMana | SetName$ Sol Ring | RemoveAllAbilities$ True | Description$ Enchanted permanent is a Sol Ring. (It's no longer anything else.)
 SVar:SolMana:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant nonland permanent.\nEnchanted permanent is a Sol Ring. (It's no longer anything else.)

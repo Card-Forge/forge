@@ -6,5 +6,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescript
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDigUntil | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, target opponent reveals cards from the top of their library until they reveal a creature card. CARDNAME becomes a copy of that card until end of turn. Then that player puts all cards revealed this way on the bottom of their library in a random order.
 SVar:TrigDigUntil:DB$ DigUntil | ValidTgts$ Opponent | IsCurse$ True | Valid$ Creature | ValidDescription$ creature card | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | RevealRandomOrder$ True | SubAbility$ DBClone
 SVar:DBClone:DB$ Clone | Defined$ Remembered | CloneTarget$ Self | Duration$ UntilEndOfTurn | SubAbility$ DBCleanup
-SVar:DBCleanupOne:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever Nascent Metamorph attacks or blocks, target opponent reveals cards from the top of their library until they reveal a creature card. Nascent Metamorph becomes a copy of that card until end of turn. Then that player puts all cards revealed this way on the bottom of their library in a random order.

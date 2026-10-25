@@ -26,7 +26,9 @@ public final class DrawOfferCoordinator {
             final boolean offererPresent = game.getPlayers().contains(existing.getOfferer());
             final boolean anyResponderPresent = existing.getVotes().keySet().stream().anyMatch(game.getPlayers()::contains);
             if (offererPresent && anyResponderPresent) {
-                return; // a viable offer is already in flight
+                // a viable offer is already in flight: show it again to whoever still has to answer
+                broadcast(game, existing);
+                return;
             }
             game.setDrawOffer(null); // stale (offerer/responders left) — supersede it
         }

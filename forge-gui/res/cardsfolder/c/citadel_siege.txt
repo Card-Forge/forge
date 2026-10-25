@@ -5,8 +5,8 @@ K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
-S:Mode$ Continuous | Affected$ Card.Self+ChosenModeDragons | AddTrigger$ DragonsTrigger | Description$ • Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeDragons | AddTrigger$ DragonsTrigger | Description$ • Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.
 SVar:KhansTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Boost | Secondary$ True | TriggerDescription$ At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
 SVar:Boost:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
 SVar:DragonsTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TapCreature | Secondary$ True | TriggerDescription$ At the beginning of combat on each opponent's turn, tap target creature that player controls.

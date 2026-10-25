@@ -17,7 +17,6 @@
  */
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -31,7 +30,6 @@ import forge.game.zone.ZoneType;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
 /**
  * <p>
@@ -54,9 +52,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (doTgt(ai, sa, false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
         return super.checkApiLogic(ai, sa);
     }
@@ -102,7 +99,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
             if (!countersList.isEmpty()) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+                boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
                 if (maritEmpty) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
                             CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterType.getType("ICE")));
@@ -188,9 +185,8 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 // if we can target, then we can play it
                 if (sa.isTargetNumberValid()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             } else {
                 // if we can't target, then we can't play it
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -199,10 +195,9 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         if (mandatory) {
             // if mandatory, just play it
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // if not mandatory, check if we can play it
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        // if not mandatory, check if we can play it
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*
@@ -245,7 +240,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             // this counters are treat first to be removed
             if ("Dark Depths".equals(tgt.getName()) && options.contains(ice)) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+                boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
 
                 if (maritEmpty) {
                     return ice;
@@ -293,7 +288,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
             if (type == ice && "Dark Depths".equals(tgt.getName())) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+                boolean maritEmpty = marit.isEmpty() || marit.get(0).ignoreLegendRule();
 
                 if (maritEmpty) {
                     return false;

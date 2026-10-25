@@ -49,14 +49,24 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
-        encodeInto(msg, out, this.tracker, this.consumerId, this.byteTracker);
+        encodeInto(msg, out, this.tracker, this.consumerId, this.byteTracker, 0);
     }
 
     /** Caller passes the returned buffer to writeAndFlush, which takes ownership. */
     public ByteBuf encodeToBuf(Serializable msg, ByteBufAllocator alloc) throws Exception {
+        return encodeToBuf(msg, alloc, 0);
+    }
+
+    /**
+     * Same as {@link #encodeToBuf(Serializable, ByteBufAllocator)} with a chosen LZ4 block size ({@code 0} = the
+     * library default of 64 KiB). Each message gets its own LZ4 stream, and the stream allocates its buffers per block
+     * size, so small messages are cheaper with a smaller block. The decoder reads the block size from each block, so
+     * frames from any block size decode alike.
+     */
+    public ByteBuf encodeToBuf(Serializable msg, ByteBufAllocator alloc, int lz4BlockSize) throws Exception {
         ByteBuf out = alloc.buffer();
         try {
-            encodeInto(msg, out, this.tracker, this.consumerId, this.byteTracker);
+            encodeInto(msg, out, this.tracker, this.consumerId, this.byteTracker, lz4BlockSize);
         } catch (Exception e) {
             out.release();
             throw e;
@@ -65,7 +75,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
     }
 
     private static void encodeInto(Serializable msg, ByteBuf out, Tracker tracker, int consumerId,
-                                   NetworkByteTracker byteTracker) throws Exception {
+                                   NetworkByteTracker byteTracker, int lz4BlockSize) throws Exception {
         int startIdx = out.writerIndex();
         ByteBufOutputStream byteOut = new ByteBufOutputStream(out);
         ObjectOutputStream objectOut = null;
@@ -74,7 +84,9 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
         try {
             byteOut.write(LENGTH_PLACEHOLDER);
-            objectOut = new CObjectOutputStream(new LZ4BlockOutputStream(byteOut), replace, tracker, consumerId, false);
+            objectOut = new CObjectOutputStream(
+                    lz4BlockSize > 0 ? new LZ4BlockOutputStream(byteOut, lz4BlockSize) : new LZ4BlockOutputStream(byteOut),
+                    replace, tracker, consumerId, false);
             objectOut.writeObject(msg);
             objectOut.flush();
         } finally {
@@ -112,7 +124,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
     private static boolean shouldReplaceTrackables(Serializable msg) {
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
-            return method != ProtocolMethod.setGameView
+            return event.replaceTrackables() && method != ProtocolMethod.setGameView
                     && method != ProtocolMethod.openView;
         }
         return true;

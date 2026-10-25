@@ -352,7 +352,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } else {
                 list = new FCollection<>();
                 for (final ZoneType zone : getPresentZones()) {
-                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                    if (!sa.isReplacementAbility() || (!zone.equals(ZoneType.Battlefield) && !zone.equals(ZoneType.Graveyard))) {
                         list.addAll(game.getCardsIn(zone));
                     } else if (zone.equals(ZoneType.Battlefield)) {
                         list.addAll(sa.getRootAbility().getLastStateBattlefield());
@@ -380,7 +380,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } else {
                 list = new FCollection<>();
                 for (final ZoneType zone : getPresentZones()) {
-                    if (!sa.isReplacementAbility() || !zone.equals(ZoneType.Battlefield) || !zone.equals(ZoneType.Graveyard)) {
+                    if (!sa.isReplacementAbility() || (!zone.equals(ZoneType.Battlefield) && !zone.equals(ZoneType.Graveyard))) {
                         list.addAll(game.getCardsIn(zone));
                     } else if (zone.equals(ZoneType.Battlefield)) {
                         list.addAll(sa.getRootAbility().getLastStateBattlefield());
@@ -447,7 +447,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                     }
                 }
 
-                abSub = sa.getSubAbility();
+                abSub = abSub.getSubAbility();
             }
 
             if (!result) {
@@ -462,7 +462,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
 
             Set<GameObject> targets = new HashSet<>();
-            for (TargetChoices tc : sa.getAllTargetChoices()) {
+            for (TargetChoices tc : matchTgt.getFirstTargetedSpell().getAllTargetChoices()) {
                 targets.addAll(tc);
                 if (targets.size() > 1) {
                     return false;

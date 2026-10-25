@@ -319,15 +319,16 @@ public class AttackConstraints {
             }
         }
 
-        Collections.sort(result, Comparator.reverseOrder());
+        result.sort(Comparator.reverseOrder());
 
         Multimap<GameEntity, StaticAbility> playerReqs = MultimapBuilder.hashKeys().arrayListValues().build(playerRequirements);
         CardCollection usedAttackers = new CardCollection();
         while (!playerReqs.isEmpty()) {
             Map.Entry<GameEntity, Collection<StaticAbility>> playerReq = playerReqs.asMap().entrySet().stream()
                     .max(Comparator.comparing(e -> e.getValue().size())).orElse(null);
-            // find best attack to also fulfill the additional requirements
-            Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())).findFirst().orElse(null);
+            // find best attack to also fulfill the additional requirements, one with a cost would be skipped later
+            Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())
+                    && CombatUtil.getAttackCost(att.attacker.getGame(), att.attacker, att.defender) == null).findFirst().orElse(null);
             if (bestMatch != null) {
                 bestMatch.requirements += playerReq.getValue().size();
                 usedAttackers.add(bestMatch.attacker);
@@ -339,7 +340,7 @@ public class AttackConstraints {
         }
         if (!usedAttackers.isEmpty()) {
             // order could have changed
-            Collections.sort(result, Comparator.reverseOrder());
+            result.sort(Comparator.reverseOrder());
         }
 
         return result;

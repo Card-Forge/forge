@@ -20,8 +20,16 @@ public class PortalActor extends EntryActor {
     private PortalAnimationTypes currentAnimationType = PortalAnimationTypes.Closed;
 
     float timer;
-
     float transitionTimer;
+
+    private static final Color batchColor = new Color();
+    private static final HashMap<String, PortalAnimationTypes> animationTypeMap = new HashMap<>(16);
+
+    static {
+        for (PortalAnimationTypes type : PortalAnimationTypes.values()) {
+            animationTypeMap.put(type.name().toLowerCase(), type);
+        }
+    }
 
     public PortalActor(MapStage stage, int id, String targetMap, float x, float y, float w, float h, String direction, String currentMap, int portalTargetObject, String path) {
         super(stage, id, targetMap, x, y, w, h, direction, currentMap, portalTargetObject);
@@ -78,7 +86,7 @@ public class PortalActor extends EntryActor {
             Array<Sprite> anim = Config.instance().getAnimatedSprites(path, stand.toString());
             if (anim.size != 0) {
                 animations.put(stand, new Animation<>(0.2f, anim));
-                if (getWidth() == 0.0)//init size onload
+                if (getWidth() == 0.0f)//init size onload
                 {
                     setWidth(anim.first().getWidth());
                     setHeight(anim.first().getHeight());
@@ -98,22 +106,11 @@ public class PortalActor extends EntryActor {
     }
 
     public void setAnimation(String typeName) {
-        switch (typeName.toLowerCase()) {
-            case "active":
-                setAnimation(PortalAnimationTypes.Active);
-                break;
-            case "inactive":
-                setAnimation(PortalAnimationTypes.Inactive);
-                break;
-            case "closed":
-                setAnimation(PortalAnimationTypes.Closed);
-                break;
-            case "opening":
-                setAnimation(PortalAnimationTypes.Opening);
-                break;
-            case "closing":
-                setAnimation(PortalAnimationTypes.Closing);
-                break;
+        if (typeName == null) return;
+
+        PortalAnimationTypes animationType = animationTypeMap.get(typeName.toLowerCase());
+        if (animationType != null) {
+            setAnimation(animationType);
         }
     }
 
@@ -161,12 +158,14 @@ public class PortalActor extends EntryActor {
 
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
-        Color oldColor = batch.getColor().cpy();
+
+        Color oldColor = batch.getColor();
+        batchColor.set(oldColor.r, oldColor.g, oldColor.b, oldColor.a);
+
         batch.setColor(getColor());
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
-        batch.setColor(oldColor);
+        batch.setColor(batchColor);
+
         super.draw(batch, parentAlpha);
-        //batch.draw(getDebugTexture(),getX(),getY());
     }
 }
-

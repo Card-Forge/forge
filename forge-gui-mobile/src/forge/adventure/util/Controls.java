@@ -26,13 +26,15 @@ import forge.card.ColorSet;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
+import java.util.HashMap;
 import java.util.function.Function;
 
 /**
  * Class to create ui elements in the correct style
  */
 public class Controls {
-
+    private static final Rectangle boundingBox = new Rectangle();
+    private static final HashMap<String, String> currencyStringsMap = new HashMap<>(256);
     static public Label.LabelStyle getLabelStyle(String name) {
         return getSkin().get(name, Label.LabelStyle.class);
     }
@@ -285,40 +287,44 @@ public class Controls {
     }
 
     static public Rectangle getBoundingRect(Actor actor) {
-        return new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
+        if (actor == null) {
+            boundingBox.set(0, 0, 0, 0);
+            return boundingBox;
+        }
+        boundingBox.set(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
+        return boundingBox;
     }
 
     static public boolean actorContainsVector(Actor actor, float stageX, float stageY) {
-        if (actor == null)
+        if (actor == null || !actor.isVisible()) {
             return false;
-        if (!actor.isVisible())
-            return false;
+        }
         return getBoundingRect(actor).contains(stageX, stageY);
     }
 
     static public boolean actorContainsVector(Actor actor, Vector2 point) {
-        if (actor == null)
+        if (actor == null || !actor.isVisible() || point == null) {
             return false;
-        if (!actor.isVisible())
-            return false;
+        }
         return getBoundingRect(actor).contains(point);
     }
 
     static public boolean actorContainsVector(Array<TextraButton> buttons, Vector2 point) {
-        boolean value = false;
-        if (buttons == null)
+        if (buttons == null || buttons.isEmpty() || point == null) {
             return false;
-        if (buttons.isEmpty())
-            return false;
-        for (Actor actor : buttons) {
-            if (actor == null)
-                return false;
-            if (!actor.isVisible())
-                return false;
-            if (getBoundingRect(actor).contains(point))
-                value = true;
         }
-        return value;
+
+        int buttonCount = buttons.size;
+        for (int i = 0; i < buttonCount; i++) {
+            Actor actor = buttons.get(i);
+            if (actor == null || !actor.isVisible()) {
+                continue;
+            }
+            if (getBoundingRect(actor).contains(point)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static public SelectBox<String> newComboBox(String[] text, String item, Function<Object, Void> func) {
@@ -774,6 +780,16 @@ public class Controls {
         }
 
         private String getLabelText(int amount, String updateText) {
+            if (updateText == null || updateText.isEmpty()) {
+                String cachedBase = currencyStringsMap.get(amount + currencyIcon);
+                if (cachedBase == null) {
+                    cachedBase = amount + " " + currencyIcon;
+                    currencyStringsMap.put(amount + currencyIcon, cachedBase);
+                }
+                return cachedBase;
+            }
+
+            // This only executes for a brief second while the update or animation started
             return amount + " " + currencyIcon + updateText;
         }
 

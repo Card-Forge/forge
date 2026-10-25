@@ -1,0 +1,9 @@
+[metadata]
+Code=PF27
+Date=2027-01-01
+Name=MagicFest 2027
+Type=Promo
+ScryfallCode=PF27
+
+[cards]
+1 R Farseek @Flavio Greco Paglia

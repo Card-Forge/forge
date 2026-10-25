@@ -21,6 +21,7 @@ import forge.screens.home.HomeScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.Frost;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -177,6 +178,10 @@ public abstract class FScreen extends FContainer {
         float w = getWidth();
         float h = getHeight();
         g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+        if (Frost.isOn()) { //frosted: the background shows through a dark slate wash instead of the theme colour
+            g.fillRect(Frost.slate(0.78f), 0, 0, w, h);
+            return;
+        }
         g.fillRect(getTextureOverlayColor(), 0, 0, w, h);
     }
 
@@ -265,6 +270,7 @@ public abstract class FScreen extends FContainer {
         public void drawOverlay(Graphics g) {
             if (Forge.isLandscapeMode() && displaySidebarForLandscapeMode()) {
                 //in landscape mode, draw left border for header
+                if (Frost.isOn()) { return; }
                 g.drawLine(LINE_THICKNESS, getLineColor(), 0, 0, 0, getHeight());
                 return;
             }

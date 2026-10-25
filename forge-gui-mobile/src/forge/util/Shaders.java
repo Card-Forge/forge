@@ -173,149 +173,136 @@ public class Shaders {
                     "uniform vec2 u_resolution;\n" +
                     "uniform float edge_radius;\n" +
                     "uniform float u_gray;\n" +
-                    "uniform float u_isHolo;\n" +
-                    "uniform float u_time;\n" +
-                    "uniform vec2 u_cardPosition; // x component is bind to effect\n" +
-                    "uniform vec2 u_foilTilt;\n" +
-
-                    "float hash21(vec2 p) {\n" +
-                    "    p = fract(p * vec2(123.34, 456.21));\n" +
-                    "    p += dot(p, p + 45.32);\n" +
-                    "    return fract(p.x * p.y);\n" +
-                    "}\n" +
-
-                    "float noise(vec2 p) {\n" +
-                    "    vec2 i = floor(p);\n" +
-                    "    vec2 f = fract(p);\n" +
-                    "    f = f * f * (3.0 - 2.0 * f);\n" +
-                    "    float a = hash21(i);\n" +
-                    "    float b = hash21(i + vec2(1.0, 0.0));\n" +
-                    "    float c = hash21(i + vec2(0.0, 1.0));\n" +
-                    "    float d = hash21(i + vec2(1.0, 1.0));\n" +
-                    "    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);\n" +
-                    "}\n" +
-
-                    "vec3 spectralColor(float x) {\n" +
-                    "    x = fract(x);\n" +
-                    "    vec3 c1 = vec3(1.00, 0.10, 0.20); // Pink-Red\n" +
-                    "    vec3 c2 = vec3(1.00, 0.85, 0.00); // Gold\n" +
-                    "    vec3 c3 = vec3(0.00, 1.00, 0.45); // Neon Green\n" +
-                    "    vec3 c4 = vec3(0.00, 0.60, 1.00); // Electric Cyan\n" +
-                    "    vec3 c5 = vec3(0.65, 0.00, 1.00); // Deep Violet\n" +
-                    "    vec3 c;\n" +
-                    "    if (x < 0.25) {\n" +
-                    "        c = mix(c1, c2, x * 4.0);\n" +
-                    "    } else if (x < 0.50) {\n" +
-                    "        c = mix(c2, c3, (x - 0.25) * 4.0);\n" +
-                    "    } else if (x < 0.75) {\n" +
-                    "        c = mix(c3, c4, (x - 0.50) * 4.0);\n" +
-                    "    } else {\n" +
-                    "        c = mix(c4, c5, (x - 0.75) * 4.0);\n" +
-                    "    }\n" +
-                    "    return c;\n" +
-                    "}\n" +
 
                     "void main() {\n" +
                     "    vec2 uv = v_texCoords;\n" +
                     "    vec4 col = texture2D(u_texture, uv) * v_color;\n" +
 
-                    "    if (u_isHolo > 0.0) {\n" +
-                    "        vec2 p = uv;\n" +
-                    "        float aspect = u_resolution.x / max(u_resolution.y, 1.0);\n" +
-                    "        p.x *= aspect;\n" +
-
-                    "        vec2 tilt = u_foilTilt * 1.5;\n" +
-                    "        \n" +
-                    "        // --- SINGLE INT SEEDING SYSTEM ---\n" +
-                    "        // Mixes the input ID with large constants to split indices into wildly varying outputs\n" +
-                    "        float idInput = u_cardPosition.x;\n" +
-                    "        float cardSeed = hash21(vec2(idInput * 12.83, idInput * 91.43));\n" +
-                    "        float colorSeed = hash21(vec2(idInput * 37.11, idInput * 54.19));\n" +
-                    "        \n" +
-                    "        // Offset the timing loop so cards don't cycle colors together in sync\n" +
-                    "        float slowTime = (u_time * 0.03) + (cardSeed * 50.0);\n" +
-
-                    "        // Organic background distribution\n" +
-                    "        float warpX = noise(p * 6.0 + tilt);\n" +
-                    "        float warpY = noise(p * 9.0 - tilt + vec2(slowTime));\n" +
-                    "        vec2 warpedUV = p + vec2(warpX, warpY) * 0.15;\n" +
-
-                    "        // Crystalline micro-facets + variation seed\n" +
-                    "        vec2 facetUV = p * 45.0 + tilt * 8.0 + vec2(cardSeed * 25.5);\n" +
-                    "        float sharpFlakes = abs(fract(facetUV.x + facetUV.y) - 0.5) * \n" +
-                    "                            abs(fract(facetUV.x - facetUV.y * 1.5) - 0.5) * 4.0;\n" +
-                    "        \n" +
-                    "        float flakeGrain = noise(uv * 220.0 + tilt * 4.0) * 0.25;\n" +
-
-                    "        // Wave glitter calculation\n" +
-                    "        float shimmer1 = sin((warpedUV.x * 25.0 + warpedUV.y * 35.0) + (tilt.x + tilt.y) * 5.0);\n" +
-                    "        float shimmer2 = cos((warpedUV.x * 45.0 - warpedUV.y * 20.0) - (tilt.x - tilt.y) * 3.5);\n" +
-                    "        float waveGlint = (shimmer1 * shimmer2) * 0.5 + 0.5;\n" +
-
-                    "        float finalGlint = pow(waveGlint, 1.8) * (0.4 + sharpFlakes * 0.6) + flakeGrain;\n" +
-                    "        finalGlint = clamp(finalGlint, 0.0, 1.0);\n" +
-
-                    "        // Adjusts the color loop shift based on the seed value\n" +
-                    "        float hue = (warpedUV.x * 0.5 + warpedUV.y * 0.3) \n" +
-                    "                  + (tilt.x + tilt.y) * 1.1 \n" +
-                    "                  + sharpFlakes * 0.08\n" +
-                    "                  + slowTime\n" +
-                    "                  + (colorSeed * 7.5); // randomize per seed\n" +
-                    "        \n" +
-                    "        vec3 foilColor = spectralColor(hue);\n" +
-
-                    "        // Luminance math for text and shadow shielding\n" +
-                    "        float luminance = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
-                    "        \n" +
-                    "        // Tightened protection curve: Completely blocks effect on pure dark values (black ink)\n" +
-                    "        float inkProtection = smoothstep(0.05, 0.30, luminance);\n" +
-
-                    "        // We generate the raw intensity color layer\n" +
-                    "        vec3 targetFoil = foilColor * finalGlint * 1.35;\n" +
-                    "        \n" +
-                    "        // Overlay Blend: \n" +
-                    "        vec3 blendLayer;\n" +
-                    "        blendLayer.r = col.r < 0.5 ? (2.0 * col.r * targetFoil.r) : (1.0 - 2.0 * (1.0 - col.r) * (1.0 - targetFoil.r));\n" +
-                    "        blendLayer.g = col.g < 0.5 ? (2.0 * col.g * targetFoil.g) : (1.0 - 2.0 * (1.0 - col.g) * (1.0 - targetFoil.g));\n" +
-                    "        blendLayer.b = col.b < 0.5 ? (2.0 * col.b * targetFoil.b) : (1.0 - 2.0 * (1.0 - col.b) * (1.0 - targetFoil.b));\n" +
-
-                    "        // Add a micro-specular punch on top to make the sparkles catch light\n" +
-                    "        vec3 metallicSpecular = vec3(pow(finalGlint, 3.0) * 0.35);\n" +
-
-                    "        // Pushes color heavily into the card surface without burning out text\n" +
-                    "        vec3 finalMix = mix(col.rgb, blendLayer, 0.35) + metallicSpecular;\n" +
-                    "        \n" +
-                    "        // Apply the ink mask protection so the text font doesn't shift color\n" +
-                    "        col.rgb = mix(col.rgb, finalMix, inkProtection);\n" +
-                    "        col.rgb = clamp(col.rgb, 0.0, 1.0);\n" +
-                    "    }\n" +
-
-                    "    // Grayscale\n" +
                     "    if (u_gray > 0.0) {\n" +
-                    "        float gray = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
-                    "        col.rgb = vec3(gray);\n" +
+                    "        col.rgb = vec3(dot(col.rgb, vec3(0.299, 0.587, 0.114)));\n" +
                     "    }\n" +
 
-                    "    // Rounded corners\n" +
-                    "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
-                    "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
-                    "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
+                    "    vec2 half_res = u_resolution * 0.5;\n" +
+                    "    vec2 abs_pixel_coord = abs((uv * 2.0 - 1.0) * half_res);\n" +
+                    "    vec2 abs_rounded_center = half_res - edge_radius;\n" +
 
-                    "    vec2 abs_pixel_coord = vec2(\n" +
-                    "        abs(uv_base_center.x * half_resolution.x),\n" +
-                    "        abs(uv_base_center.y * half_resolution.y)\n" +
-                    "    );\n" +
-
-                    "    float alpha = 1.0;\n" +
-                    "    if (abs_pixel_coord.x > abs_rounded_center.x &&\n" +
-                    "        abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+                    "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
                     "        float r = length(abs_pixel_coord - abs_rounded_center);\n" +
-                    "        alpha = smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
+                    "        col.a *= smoothstep(edge_radius, edge_radius - 0.5, r);\n" +
                     "    }\n" +
 
-                    "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
+                    "    gl_FragColor = col;\n" +
                     "}";
 
+    public static final String fragCardShaderHolo =
+            "#ifdef GL_ES\n" +
+                    "precision mediump float;\n" +
+                    "#ifdef GL_FRAGMENT_PRECISION_HIGH\n" +
+                    "#define HP highp\n" +
+                    "#else\n" +
+                    "#define HP mediump\n" +
+                    "#endif\n" +
+                    "#else\n" +
+                    "#define HP\n" +
+                    "#endif\n" +
+
+                    "varying vec4 v_color;\n" +
+                    "varying HP vec2 v_texCoords;\n" +
+
+                    "uniform sampler2D u_texture;\n" +
+                    "uniform vec2 u_resolution;\n" +
+                    "uniform float edge_radius;\n" +
+                    "uniform HP float u_time;\n" +
+                    "uniform HP vec2 u_cardPosition;\n" +
+                    "uniform vec2 u_foilTilt;\n" +
+
+                    "// ---- look tuning ----\n" +
+                    "#define FOIL_STRENGTH 0.85\n" +
+                    "#define INK_FLOOR 0.02\n" +
+                    "#define VIVID 0.35\n" +
+                    "#define STREAK_DENSITY 1.15\n" +
+                    "#define STREAK_WIDTH 0.27\n" +
+                    "#define ARCH -2.9\n" +
+                    "#define KINK 0.95\n" +
+                    "#define SERRATION 0.04\n" +
+                    "#define HAIR 0.75\n" +
+                    "#define WIDTH_VAR 2.1\n" +
+                    "#define GLOW 0.25\n" +
+                    "#define WHITE_MIX 0.35\n" +
+                    "#define HUE_TOP 0.55\n" +
+                    "#define HUE_SPAN 0.95\n" +
+
+                    "vec3 spectrum(float h) {\n" +
+                    "    vec3 c = abs(fract(h + vec3(0.0, 0.6667, 0.3333)) * 6.0 - 3.0) - 1.0;\n" +
+                    "    return clamp(c, 0.0, 1.0);\n" +
+                    "}\n" +
+
+                    "float tri(float x) {\n" +
+                    "    return abs(fract(x) - 0.5) * 2.0;\n" +
+                    "}\n" +
+
+                    "float wave(float x) {\n" +
+                    "    return (tri(x) - 0.5) * 2.0;\n" +
+                    "}\n" +
+
+                    "void main() {\n" +
+                    "    vec4 coll = texture2D(u_texture, v_texCoords) * v_color;\n" +
+                    "    vec3 rgbb = coll.rgb * 1.25 - 0.12;\n" + // slight contrast
+                    "    vec4 col = vec4(clamp(rgbb, 0.0, 1.0), coll.a);\n" +
+
+                    "    HP float id = u_cardPosition.x;\n" +
+                    "    HP float seed = fract(id * 0.61803399);\n" +
+                    "    HP float seed2 = fract(id * 0.75487767 + 0.31);\n" +
+                    "    HP float ph = fract(u_time * 0.02);\n" +
+
+                    "    vec2 q = vec2((v_texCoords.x - 0.5) * u_resolution.x / max(u_resolution.y, 1.0), v_texCoords.y - 0.5);\n" +
+
+                    "    float s0 = dot(q, vec2(0.796, 0.605)) * STREAK_DENSITY + dot(u_foilTilt, vec2(2.2, 1.2));\n" +
+                    "    float t = dot(q, vec2(0.605, -0.796)) + ph;\n" +
+
+                    "    float zone = 0.18 + 0.82 * (1.0 - smoothstep(0.25, 0.90, v_texCoords.y));\n" +
+                    "    float envA = 0.30 + 0.70 * tri(s0 * 0.09 + seed2 * 4.0 + t);\n" +
+                    "    float low = zone * envA * ARCH * (0.62 * wave(t * 2.0 + s0 * 0.11 + seed2 * 3.0) + 0.38 * wave(t * 3.0 - s0 * 0.17 + seed * 5.0))\n" +
+                    "              + KINK * (smoothstep(0.35, 0.65, tri(t * 2.0 + s0 * 0.07 + seed * 2.0)) - 0.5);\n" +
+                    "    float teeth = (fract(t * 23.0 + s0 * 0.41 + seed2 * 7.0) - 0.5) * (0.55 + 0.45 * wave(t * 5.0 + s0 * 0.29));\n" +
+                    "    float disp = low + SERRATION * (0.35 + 0.65 * tri(s0 * 0.37 + seed)) * teeth * 2.0;\n" +
+                    "    float sd = s0 + seed + disp;\n" +
+                    "    float c = floor(sd);\n" +
+                    "    float f = sd - c;\n" +
+
+                    "    float r = tri(c * 0.75487767 + seed2);\n" +
+                    "    float r2 = tri(c * 0.56984029 + seed);\n" +
+                    "    float dist = abs(f - 0.5);\n" +
+                    "    float hw = STREAK_WIDTH * 0.5 * (1.0 - WIDTH_VAR * 0.5 + WIDTH_VAR * r2);\n" +
+                    "    float line = 1.0 - smoothstep(hw - 0.07, hw + 0.05, dist);\n" +
+                    "    float amp = smoothstep(0.08, 0.40, r) * (0.55 + 0.45 * tri(t * 2.0 + r * 5.0));\n" +
+
+                    "    float sh = s0 * 2.31 + seed2 * 5.0 + low * 2.31 + (fract(t * 31.0 + s0 * 0.7) - 0.5) * 0.10;\n" +
+                    "    float ch = floor(sh);\n" +
+                    "    float fh = sh - ch;\n" +
+                    "    float rh = tri(ch * 0.6180339 + seed);\n" +
+                    "    float hair = (1.0 - smoothstep(0.03, 0.13, abs(fh - 0.5))) * smoothstep(0.50, 0.90, rh) * (0.45 + 0.55 * tri(t * 3.0 + rh * 5.0));\n" +
+
+                    "    float hue = HUE_TOP - HUE_SPAN * v_texCoords.y + dot(u_foilTilt, vec2(0.40, 0.55)) + (f - 0.5) * 0.24;\n" +
+                    "    vec3 rb = mix(spectrum(hue), vec3(1.0), WHITE_MIX);\n" +
+                    "    float glow = 1.0 - smoothstep(0.0, 0.5, dist);\n" +
+                    "    float cov = line * amp + glow * amp * GLOW + hair * HAIR;\n" +
+                    "    vec3 foil = rb * cov;\n" +
+
+                    "    float lum = dot(col.rgb, vec3(0.299, 0.587, 0.114));\n" +
+                    "    float mask = INK_FLOOR + (1.0 - INK_FLOOR) * smoothstep(0.03, 0.34, lum);\n" +
+                    "    foil = mix(vec3(dot(foil, vec3(0.3333))), foil, smoothstep(0.06, 0.30, lum));\n" +
+                    "    vec3 lit = 1.0 - (1.0 - col.rgb) * (1.0 - clamp(foil, 0.0, 1.0));\n" +
+                    "    lit = mix(lit, rb, clamp(cov, 0.0, 1.0) * VIVID * smoothstep(0.06, 0.30, lum));\n" +
+                    "    col.rgb = clamp(mix(col.rgb, lit, FOIL_STRENGTH * mask), 0.0, 1.0);\n" +
+
+                    "    HP vec2 halfRes = u_resolution * 0.5;\n" +
+                    "    HP vec2 d = abs(v_texCoords * 2.0 - 1.0) * halfRes - (halfRes - edge_radius);\n" +
+                    "    HP float inCorner = step(0.0, min(d.x, d.y));\n" +
+                    "    HP float alpha = 1.0 - inCorner * smoothstep(edge_radius - 0.5, edge_radius, length(d));\n" +
+
+                    "    gl_FragColor = vec4(col.rgb, col.a * alpha);\n" +
+                    "}\n";
 
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +

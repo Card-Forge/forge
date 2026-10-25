@@ -10,6 +10,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
 import forge.gamemodes.match.YieldUpdate;
+import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.client.NetGameController;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -48,14 +49,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         // Log with game context for easier correlation
         String activePlayerName = getGameView().getPlayerTurn() != null ? getGameView().getPlayerTurn().getName() : "?";
         String phaseName = getGameView().getPhase() != null ? getGameView().getPhase().name() : "?";
-        netLog.info("[DeltaSync] === START applyDelta seq={} (Turn {}, {}, Active={}) ===",
-                packet.getSequenceNumber(), getGameView().getTurn(), phaseName, activePlayerName);
+        int turn = getGameView().getTurn();
 
         boolean hasEvents = packet.hasEvents();
-        if (hasEvents) {
-            netLog.info("[DeltaSync] {} events received with delta seq={}",
-                    packet.getEvents().size(), packet.getSequenceNumber());
-        }
 
         int newObjectCount = 0;
         int appliedCount = 0;
@@ -104,20 +100,16 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                     netLog.error(e, "[DeltaSync] Error creating new object type={} id={}", objectType, objectId);
                 }
             }
-            netLog.info("[DeltaSync] Created {} new objects (phase 1a)", newObjectCount);
 
             // STEP 2: Populate new objects now that all exist for cross-references
-            int propsApplied = 0;
             for (Map.Entry<TrackableObject, Map<TrackableProperty, Object>> pending : pendingPropertyApplications) {
                 try {
                     applyPropertyMap(pending.getKey(), pending.getValue(), tracker, csvRegistry);
-                    propsApplied++;
                 } catch (Exception e) {
                     netLog.error("[DeltaSync] Error applying properties to object {}: {}",
                             pending.getKey().getId(), e.getMessage());
                 }
             }
-            netLog.trace("[DeltaSync] Applied properties to {} objects (phase 1b)", propsApplied);
         }
 
         // STEP 3: Apply property deltas to existing objects
@@ -156,15 +148,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
             }
         }
 
-        // Log summary with timing
-        long elapsed = System.currentTimeMillis() - startTime;
-        if (newObjectCount > 0 || appliedCount > 0 || skippedCount > 0) {
-            netLog.info("[DeltaSync] === END seq={} ({}ms, {} new, {} deltas, {} skipped) ===",
-                    packet.getSequenceNumber(), elapsed, newObjectCount, appliedCount, skippedCount);
-        } else {
-            netLog.info("[DeltaSync] === END seq={} ({}ms, no changes) ===",
-                    packet.getSequenceNumber(), elapsed);
-        }
+        netLog.info("[DeltaSync] Applied seq={} (Turn {}, {}, Active={}): {} new, {} deltas, {} skipped, {} events, {}ms",
+                packet.getSequenceNumber(), turn, phaseName, activePlayerName, newObjectCount, appliedCount, skippedCount,
+                hasEvents ? packet.getEvents().size() : 0, System.currentTimeMillis() - startTime);
 
         // Unwrap and dispatch events now that new objects are in the tracker.
         if (hasEvents) {
@@ -438,7 +424,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                 // when the ability went on the stack).
                 CardView replacement = new CardView(objectId, tracker);
                 tracker.putObj(TrackableTypes.CardViewType, objectId, replacement);
-                netLog.trace("[DeltaSync] CardView ID={} replaced with new instance", objectId);
                 return replacement;
             }
             // Non-CardView types: clear and reuse (PlayerView identity must be preserved
@@ -458,7 +443,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
             case DeltaPacket.TYPE_CARD_VIEW:
                 obj = new CardView(objectId, tracker);
                 tracker.putObj(TrackableTypes.CardViewType, objectId, (CardView) obj);
-                netLog.trace("[DeltaSync] Created CardView ID={}, registered in tracker", objectId);
                 break;
             case DeltaPacket.TYPE_PLAYER_VIEW:
                 obj = new PlayerView(objectId, tracker);
@@ -585,6 +569,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
 
     protected void afterDeltaApplied() {
         // Override in GUI subclasses to refresh views after delta application.
+    }
+
+    /**
+     * Notified on client-side reconnect state transitions. GUI subclasses override
+     * to drive the banner or modal; non-GUI subclasses (server-side proxy, headless
+     * test helper) can leave the default no-op.
+     */
+    public void onReconnectStateChanged(FGameClient.ReconnectState state, int attemptIndex, int nextDelaySeconds) {
     }
 
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {

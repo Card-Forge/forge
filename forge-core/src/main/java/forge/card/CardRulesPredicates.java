@@ -629,9 +629,8 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
     public static final Predicate<CardRules> NOT_BASIC_LAND = subject -> !subject.getType().isBasicLand();
     /** Matches only Plains, Island, Swamp, Mountain, or Forest. */
-    public static final Predicate<CardRules> IS_TRUE_BASIC_LAND = subject -> !subject.getName().equals("Wastes")&&subject.getType().isBasicLand();
+    public static final Predicate<CardRules> IS_TRUE_BASIC_LAND = subject -> !subject.getName().equals("Wastes") && subject.getType().isBasicLand();
     /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
-    public static final Predicate<CardRules> NOT_TRUE_BASIC_LAND = subject -> !subject.getType().isBasicLand() || subject.getName().equals("Wastes");
     public static final Predicate<CardRules> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();
     public static final Predicate<CardRules> CAN_BE_COMMANDER = CardRules::canBeCommander;
     public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = CardRules::canBePartnerCommander;
@@ -655,6 +654,7 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(CardType.CoreType.Vanguard);
     public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(CardType.CoreType.Conspiracy);
     public static final Predicate<CardRules> IS_DUNGEON = CardRulesPredicates.coreType(CardType.CoreType.Dungeon);
+    public static final Predicate<CardRules> IS_STICKER_SHEET = CardRulesPredicates.coreType(CardType.CoreType.Stickers);
     public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(CardType.CoreType.Land);
     public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(MagicColor.WHITE);
     public static final Predicate<CardRules> IS_BLUE = CardRulesPredicates.isColor(MagicColor.BLUE);

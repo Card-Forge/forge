@@ -6,39 +6,62 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.Graphics;
+import forge.animation.FlipOntoBattlefieldAnimation;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
+import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.screens.match.CardFlightOverlay;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FSelectionBox;
 import forge.util.ThreadUtil;
+import forge.util.Utils;
 import io.sentry.Sentry;
 
 public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
     private static final float CARD_STACK_OFFSET = 0.2f;
-
     protected Supplier<List<CardView>> orderedCards = Suppliers.memoize(ArrayList::new);
     protected Supplier<List<CardAreaPanel>> cardPanels = Suppliers.memoize(ArrayList::new);
     // Cards shown only as informational exile ghosts here, so the zoom carousel doesn't act on them
     private final Supplier<Set<Integer>> infoGhostCardIds = Suppliers.memoize(HashSet::new);
     private boolean rotateCards180;
+    // what the previous refresh showed. The row's cardPanels is already emptied before refreshCardPanels runs
+    // (so it can't be used to find departed cards), which is why we keep our own list.
+    private final List<CardAreaPanel> shownLastRefresh = new ArrayList<>();
+    private final List<CardAreaPanel> shownScratch = new ArrayList<>();
+    private final Set<CardView> knownScratch = new HashSet<>();
+    private final Set<CardView> currentScratch = new HashSet<>();
+    private int shownGeneration;
+    private static int generation; // bumped on every new game so the old board never counts as "departures"
+    private static final float SELECTION_BOX_THICKNESS = 3f;
+    private CardAreaPanel dragPanel; //card currently under the finger while touch dragging, null when not dragging
+    private static long lastDragMillis;
+    private static boolean dragging;
 
+    public static boolean isDragGestureActive() {
+        return dragging || System.currentTimeMillis() - lastDragMillis < 250;
+    }
     public Iterable<CardView> getOrderedCards() {
         return orderedCards.get();
     }
@@ -46,7 +69,143 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     public Iterable<CardAreaPanel> getCardPanels() {
         return cardPanels.get();
     }
+    /** @return the card under the finger while touch dragging over this area in landscape mode, or null */
+    public CardView getDragCard() {
+        return dragPanel == null ? null : dragPanel.getCard();
+    }
 
+    public CardAreaPanel getDragPanel() {
+        return dragPanel;
+    }
+
+    protected void updateDragPanel(float x, float y) {
+        //children also include attached and stacked cards, which cardPanels doesn't
+        for (int i = getChildCount() - 1; i >= 0; i--) { //later children are drawn on top, so check them first
+            final FDisplayObject child = getChildAt(i);
+            if (child instanceof CardAreaPanel panel && child.contains(x, y)) {
+                dragPanel = panel; //if the finger crosses a gap between cards, keep the last card selected
+                break;
+            }
+        }
+        Gdx.graphics.requestRendering();
+        dragging = true;
+    }
+
+    private void clearDragPanel() {
+        if (dragPanel != null) {
+            dragPanel = null;
+            Gdx.graphics.requestRendering();
+        }
+        if (panMode == PAN_INSPECT) {
+            inspectEndMillis = System.currentTimeMillis();
+        }
+        panMode = PAN_NONE;
+        panSumX = panSumY = 0;
+        dragging = false;
+        lastDragMillis = System.currentTimeMillis();
+    }
+
+    // horizontal strip gestures: a mostly horizontal drag scrolls, a vertical-first drag inspects cards
+    private static final int PAN_NONE = 0, PAN_SCROLL = 1, PAN_INSPECT = 2;
+    private static final float PAN_LOCK_DISTANCE = Utils.scale(8);
+    private static final float INSPECT_STEEPNESS = 1.5f; //a touch drag must be this much more vertical than horizontal to inspect
+    private int panMode = PAN_NONE;
+    private float panSumX, panSumY;
+    private long inspectEndMillis;
+
+    /** Horizontal single-row display in landscape: drag scrolls, a vertical-first drag inspects cards. */
+    protected boolean isHorizontalStrip() { return false; }
+
+    //FScrollPane.pan gives the drag away as soon as a single event is more vertical than horizontal, which a mouse
+    //does all the time; once a drag has been recognised as a scroll it stays one
+    private boolean scrollRow(float deltaX) {
+        if (getMaxScrollLeft() <= 0) { return false; } //nothing to scroll
+        setScrollLeft(getScrollLeft() - deltaX);
+        return true;
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        return super.pan(x, y, deltaX, deltaY, moreVertical);
+        // TODO for touch
+        /*if (!Forge.isLandscapeMode()) {
+            return super.pan(x, y, deltaX, deltaY, moreVertical);
+        }
+        if (!isHorizontalStrip()) { //vertical column layout keeps the old behaviour
+            updateDragPanel(x, y);
+            return super.pan(x, y, deltaX, deltaY, moreVertical);
+        }
+        if (panMode == PAN_NONE) { //decide once per gesture, after a small slop
+            panSumX += deltaX;
+            panSumY += deltaY;
+            if (Math.max(Math.abs(panSumX), Math.abs(panSumY)) < PAN_LOCK_DISTANCE) { return true; }
+            //a mouse always scrolls: hovering and right click already show the preview, and it can't aim a steep drag
+            boolean inspect = !GuiBase.getInterface().isRunningOnDesktop()
+                    && Math.abs(panSumY) > Math.abs(panSumX) * INSPECT_STEEPNESS;
+            panMode = inspect ? PAN_INSPECT : PAN_SCROLL;
+            if (panMode == PAN_SCROLL) {
+                return scrollRow(panSumX); //hand over what was accumulated
+            }
+        }
+        if (panMode == PAN_INSPECT) {
+            updateDragPanel(x, y); //preview follows the finger, no scrolling
+            return true;
+        }
+        return scrollRow(deltaX); //scrolling never shows the preview*/
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        if (panMode == PAN_INSPECT || System.currentTimeMillis() - inspectEndMillis < 200) {
+            return true; //finishing an inspect drag must not throw the strip
+        }
+        return super.fling(velocityX, velocityY);
+    }
+
+    @Override
+    public boolean zoom(float x, float y, float amount) {
+        //mouse wheel over a horizontal row that overflows scrolls it sideways; pinch, or nothing to scroll, goes on to the field zoom
+        if (isHorizontalStrip() && GuiBase.getInterface().isRunningOnDesktop() && getScrollWidth() > getWidth() + 1) {
+            float step = Utils.scale(48);
+            setScrollLeft(getScrollLeft() + (amount > 0 ? step : -step)); //flip the sign here if the wheel feels backwards
+            return true;
+        }
+        return super.zoom(x, y, amount);
+    }
+
+    @Override
+    public boolean panStop(float x, float y) {
+        clearDragPanel();
+        return super.panStop(x, y);
+    }
+
+    @Override
+    public boolean release(float x, float y) {
+        clearDragPanel();
+        return super.release(x, y);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
+        if (dragPanel == null || !Forge.isLandscapeMode()) { return; }
+
+        //surround the selected card with a box, matching how the card is drawn (tapped cards are turned sideways)
+        final float padding = FCardPanel.PADDING;
+        float w = dragPanel.getWidth() - 2 * padding;
+        float h = dragPanel.getHeight() - 2 * padding;
+        if (w == h) { //adjust width if needed to match how the card itself is drawn
+            w = h / FCardPanel.ASPECT_RATIO;
+        }
+        float top = dragPanel.getTop() + padding;
+        if (dragPanel.isTapped()) {
+            top += h - w;
+            float temp = w;
+            w = h;
+            h = temp;
+        }
+        FSelectionBox.draw(g, Color.LIME, SELECTION_BOX_THICKNESS, dragPanel.getLeft() + padding, top, w, h);
+    }
     @Override
     public int getCount() {
         return cardPanels.get().size();
@@ -59,29 +218,68 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     private float getCardStackOffset() {
-        if (Forge.isHorizontalTabLayout())
-            return 0.125f;
         return CARD_STACK_OFFSET;
     }
 
-    protected void refreshCardPanels(Iterable<CardView> model) {
-        clear();
+    protected boolean animateEntry() { return false; }
 
+    protected void refreshCardPanels(Iterable<CardView> model) {
+        final boolean animate = animateEntry();
+        Set<CardView> known = null, current = null;
+        if (animate) {
+            if (shownGeneration != generation) { // new game started: forget the old board
+                shownLastRefresh.clear();
+                shownGeneration = generation;
+            }
+            shownScratch.clear();
+            knownScratch.clear();
+            knownScratch.addAll(orderedCards.get());
+            currentScratch.clear();
+            known = knownScratch;
+            current = currentScratch;
+        }
+
+        clear();
         CardAreaPanel newCardPanel = null;
         if (model != null) {
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                addCardPanelToDisplayArea(cardPanel);
+                if (animate) {
+                    current.add(card);
+                    shownScratch.add(cardPanel);
+                }
+                boolean isNew = known != null ? !known.contains(card)
+                        : (newCardPanel == null && !orderedCards.get().contains(card));
+                addCardPanelToDisplayArea(cardPanel, known);
                 cardPanels.get().add(cardPanel);
-                if (newCardPanel == null && !orderedCards.get().contains(card)) {
+                if (newCardPanel == null && isNew) {
                     newCardPanel = cardPanel;
                 }
             }
         }
-        if (isVisible()) { //only revalidate if currently visible
-            revalidate();
 
-            if (newCardPanel != null) { //if new cards added, ensure first new card is scrolled into view
+        if (animate) { // cards shown last refresh but not now have left this row
+            for (int i = 0; i < shownLastRefresh.size(); i++) {
+                CardAreaPanel p = shownLastRefresh.get(i);
+                if (current.contains(p.getCard())) { continue; }
+                if (p.getCard().getZone() == ZoneType.Battlefield) {
+                    // if the new row already took this panel, it has handled the move
+                    if (p.getDisplayArea() == null || p.getDisplayArea() == this) {
+                        CardAreaPanel.markMoved(p.getCard());
+                        CardAreaPanel.forgetAnimated(p.getCard());
+                    }
+                    continue;
+                }
+                CardAreaPanel.forgetAnimated(p.getCard());
+                p.playLeaveAnimation();
+            }
+            shownLastRefresh.clear();
+            shownLastRefresh.addAll(shownScratch);
+        }
+
+        if (isVisible()) {
+            revalidate();
+            if (newCardPanel != null) {
                 scrollIntoView(newCardPanel);
             }
         }
@@ -90,6 +288,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     @Override
     public void setVisible(boolean b0) {
         if (isVisible() == b0) {
+            if (!b0) { dragPanel = null; }
             return;
         }
         super.setVisible(b0);
@@ -102,20 +301,18 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     }
 
     //support adding card panel and attached panels to display area recursively
-    private void addCardPanelToDisplayArea(CardAreaPanel cardPanel) {
+    private void addCardPanelToDisplayArea(CardAreaPanel cardPanel, Set<CardView> known) {
         do {
             List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
-            if (!attachedPanels.isEmpty()) {
-                for (int i = attachedPanels.size() - 1; i >= 0; i--) {
-                    addCardPanelToDisplayArea(attachedPanels.get(i));
-                }
+            for (int i = attachedPanels.size() - 1; i >= 0; i--) {
+                addCardPanelToDisplayArea(attachedPanels.get(i), known);
             }
-
-            if (isVisible()) { //only set display area for card if area is visible
-                cardPanel.displayArea = this;
+            // ghosts are fresh throwaway panels for exiled/prepared cards, so never animate them
+            if (known != null && !cardPanel.isGhost() && !known.contains(cardPanel.getCard())) {
+                cardPanel.playEntryAnimation(this);
             }
+            if (isVisible()) { cardPanel.displayArea = this; }
             add(cardPanel);
-
             cardPanel = cardPanel.getNextPanelInStack();
         } while (cardPanel != null);
     }
@@ -188,10 +385,34 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        //room at the right end that something floating over the area (a zone box) covers: cards stay clear of it or can be scrolled clear
+        final float pad = Math.max(0f, getEndPadding());
+        final float usable = Math.max(1f, visibleWidth - pad);
+        float x = layoutCards(0f, visibleHeight);
+        final float align = getContentAlignment();
+        if (align > 0f && x > 0f && x < usable) { //fewer cards than fit: place them again, shifted
+            x = layoutCards(Math.round((usable - x) * align), visibleHeight);
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+        return new ScrollBounds(Math.max(x + pad, visibleWidth), visibleHeight);
+    }
+
+    //@return width at the right end of the area that is covered by something else, 0 normally
+    protected float getEndPadding() {
+        return 0f;
+    }
+
+    //@return how far to the right (0 = left, 0.5 = centered, 1 = right) cards are placed when they don't fill the area
+    protected float getContentAlignment() {
+        return 0f;
+    }
+
+    //lays the cards out from startX, returns the x the last one ends at
+    private float layoutCards(float startX, float visibleHeight) {
         orderedCards.get().clear();
         infoGhostCardIds.get().clear();
 
-        float x = 0;
+        float x = startX;
         float y = 0;
         float cardHeight = visibleHeight;
         float cardWidth = getCardWidth(cardHeight);
@@ -202,8 +423,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 x += cardWidth + (count - 1) * cardWidth * getCardStackOffset();
             }
         }
-
-        return new ScrollBounds(x, visibleHeight);
+        return x;
     }
 
     @Override
@@ -249,7 +469,82 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     public static class CardAreaPanel extends FCardPanel {
         private static Map<Integer, CardAreaPanel> allCardPanels = new HashMap<>();
+        private static final Map<Integer, Rectangle> handStarts = new ConcurrentHashMap<>();
+        private static long matchStartTime = System.currentTimeMillis();
+        private long entryStart = -1;
+        private CardFlightOverlay.Flight flight;
+        private final Rectangle lastHandRect = new Rectangle();
+        private boolean hasHandRect;
+        private final Rectangle lastFieldRect = new Rectangle();
+        private float lastFieldAngle;
+        private boolean hasFieldRect;
+        private boolean leaveOriginLocked;
+        private VCardDisplayArea lastFieldRow;
+        private static final Set<Integer> animatedIds = Sets.newConcurrentHashSet();
+        private static final Set<Integer> movedIds = Sets.newConcurrentHashSet();
+        public static void markMoved(CardView c) { movedIds.add(c.getId()); }
+        public static Rectangle takeHandStart(CardView card) {
+            return handStarts.remove(card.getId());
+        }
+        public static void forgetAnimated(CardView card) {
+            animatedIds.remove(card.getId());
+        }
+        public static CardAreaPanel peek(CardView card) {
+            CardAreaPanel p = allCardPanels.get(card.getId());
+            return (p != null && p.getCard() == card) ? p : null;
+        }
+        public void setLeaveOrigin(float x, float y, float w, float h, float angle) {
+            lastFieldRect.set(x, y, w, h);
+            lastFieldAngle = angle;
+            hasFieldRect = true;
+            leaveOriginLocked = true;
+        }
+        public void clearLeaveOrigin() { leaveOriginLocked = false; }
+        public void playEntryAnimation() { playEntryAnimation(null); }
 
+        public void playEntryAnimation(VCardDisplayArea target) {
+            if (CardFlightOverlay.style() == CardFlightOverlay.Style.OFF) { return; }
+            if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
+
+            final int id = getCard().getId();
+
+            // the new row refreshed before the old row could mark the move, so detect it here
+            if (target != null && lastFieldRow != null && lastFieldRow != target && hasFieldRect
+                    && getCard().getZone() == ZoneType.Battlefield) {
+                movedIds.add(id);
+                animatedIds.remove(id);
+            }
+
+            if (!animatedIds.add(id)) { return; }
+
+            if (movedIds.contains(id)) {
+                if (hasFieldRect) { // slide from where it was on the field
+                    handStarts.put(id, new Rectangle(lastFieldRect));
+                }
+            } else if (hasHandRect && !handStarts.containsKey(id) && isHandShownFor(getCard())) {
+                handStarts.put(id, new Rectangle(lastHandRect));
+            }
+            hasHandRect = false;
+
+            entryStart = System.currentTimeMillis();
+            Gdx.graphics.requestRendering();
+        }
+        // card left the battlefield row (destroyed, exiled, bounced...): animate it leaving from its last spot
+        public void playLeaveAnimation() {
+            if (!hasFieldRect) { return; }
+            hasFieldRect = false;
+            leaveOriginLocked = false;
+            if (CardFlightOverlay.style() == CardFlightOverlay.Style.OFF) { return; }
+            if (System.currentTimeMillis() - matchStartTime < 2000) { return; }
+            CardFlightOverlay.startLeave(getCard(), new Rectangle(lastFieldRect), lastFieldAngle);
+            FlipOntoBattlefieldAnimation.leaveStarted(getCard());
+        }
+        private static boolean isHandShownFor(CardView card) {
+            VPlayerPanel pp = MatchScreen.getPlayerPanel(card.getController());
+            if (pp == null) { return false; }
+            VPlayerPanel.InfoTab tab = pp.getSelectedTab();
+            return tab instanceof VPlayerPanel.InfoTabZone z && z.zoneType == ZoneType.Hand;
+        }
         public static CardAreaPanel get(CardView card0) {
             CardAreaPanel cardPanel = allCardPanels.get(card0.getId());
             if (cardPanel == null || cardPanel.getCard() != card0) { //replace card panel if card copied
@@ -257,6 +552,27 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 allCardPanels.put(card0.getId(), cardPanel);
             }
             return cardPanel;
+        }
+
+        /**
+         * Undo rewinds the game in place: cards that were copied to a new zone after the checkpoint no longer exist,
+         * and the restored originals come back with no events. Everything remembered about the old timeline
+         * (who already animated, who "moved rows", where a card was in hand/field) would misfire, so start clean.
+         */
+        public static void resetForUndo() {
+            movedIds.clear();
+            handStarts.clear();
+            animatedIds.clear();
+            CardFlightOverlay.clear();
+            for (CardAreaPanel p : allCardPanels.values()) {
+                p.flight = null;
+                p.entryStart = -1;
+                p.hasHandRect = false;
+                p.hasFieldRect = false;
+                p.leaveOriginLocked = false;
+                p.lastFieldRow = null;
+            }
+            generation++; // field rows drop their remembered board, so nothing counts as a departure
         }
 
         public static void resetForNewGame() {
@@ -272,6 +588,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             } else {
                 allCardPanels = new HashMap<>();
             }
+            matchStartTime = System.currentTimeMillis();
+            handStarts.clear();
+            animatedIds.clear();
+            CardFlightOverlay.clear();
+            generation++; // field rows drop their remembered board on their next refresh
         }
 
         private VCardDisplayArea displayArea;
@@ -457,6 +778,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
+            if (displayArea != null && getCard().getZone() == ZoneType.Hand && screenPos.width > 0) {
+                handStarts.put(getCard().getId(), new Rectangle(screenPos));
+            }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 Gdx.graphics.requestRendering();
                 return true;
@@ -481,6 +805,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public boolean longPress(float x, float y) {
+            if (VCardDisplayArea.isDragGestureActive()) { return true; }
             if (renderedCardContains(x, y)) {
                 showZoom();
                 return true;
@@ -579,6 +904,37 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public void draw(Graphics g) {
+            if (CardFlightOverlay.isEnabled() && getWidth() > 0) {
+                if (displayArea != null && flight == null && displayArea.animateEntry() && !leaveOriginLocked) {
+                    lastFieldRect.set(screenPos);
+                    lastFieldAngle = isTapped() ? getTappedAngle() : 0f;
+                    hasFieldRect = true;
+                    lastFieldRow = displayArea;
+                }
+                if (getCard().getZone() == ZoneType.Hand) {
+                    lastHandRect.set(screenPos);
+                    hasHandRect = true;
+                }
+            }
+            if (entryStart >= 0) {
+                if (System.currentTimeMillis() - entryStart > 1500) {
+                    entryStart = -1; // never became visible (scrolled away), drop it
+                } else if (flight == null) {
+                    boolean moved = movedIds.remove(getCard().getId());
+                    boolean viaStack = !moved && !getCard().getCurrentState().isLand();
+                    Rectangle handStart = takeHandStart(getCard());
+                    flight = CardFlightOverlay.start(getCard(), handStart, new Rectangle(screenPos),
+                            isTapped() ? getTappedAngle() : 0f, viaStack, moved);
+                    entryStart = -1;
+                }
+            }
+            if (flight != null) {
+                if (!flight.isDone()) {
+                    Gdx.graphics.requestRendering();
+                    return; // hide the real card while the flying copy is on screen
+                }
+                flight = null;
+            }
             if (displayArea != null && displayArea.rotateCards180) {
                 float padding = getPadding();
                 float x = padding;
@@ -589,8 +945,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     w = h / ASPECT_RATIO;
                 }
                 g.startRotateTransform(x + w / 2, y + h / 2, 180);
-                super.draw(g);
-                g.endTransform();
+                try {
+                    super.draw(g);
+                } finally {
+                    g.endTransform(); // never leave a transform open if drawing the card throws
+                }
             } else {
                 super.draw(g);
             }

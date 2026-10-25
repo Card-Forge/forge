@@ -9,6 +9,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatChanged;
@@ -20,9 +21,16 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
     private void runTriggers(final Game game, final Card attacker, final Card blocker) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Attacker, attacker);
+        runParams.put(AbilityKey.Attackers, attacker);
         runParams.put(AbilityKey.Blocker, blocker);
         game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams, false);
         game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+    }
+
+    // Same record BlockEffect and PhaseHandler keep for a declared block; Sorrow's Path finds its attackers through it.
+    private void recordBlock(final Card attacker, final Card blocker) {
+        blocker.addBlockedThisTurn(CardCopyService.getLKICopy(attacker));
+        attacker.addBlockedByThisTurn(CardCopyService.getLKICopy(blocker));
     }
 
     @Override
@@ -85,7 +93,12 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
                 final boolean blocking1 = combat.isBlocking(blocker, attacker1);
                 final boolean blocking2 = combat.isBlocking(blocker, attacker2);
                 blockingStates[i] = (blocking1 ? 1 : 0) + (blocking2 ? 2 : 0);
-                combat.removeFromCombat(blocker);
+                if (blocking1) {
+                    combat.removeBlockAssignment(attacker1, blocker);
+                }
+                if (blocking2) {
+                    combat.removeBlockAssignment(attacker2, blocker);
+                }
             }
             // Unregister so it won't ask for damage assignment order when adding each blocker
             combat.unregisterAttacker(attacker1, combat.getBandOfAttacker(attacker1));
@@ -149,12 +162,14 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
                 final Card attacker = attackers.get(i);
                 if ((blockingStates[i] & 1) == 1) {
                     combat.addBlocker(attacker, blocker2);
+                    recordBlock(attacker, blocker2);
                     if (isReblock) {
                         runTriggers(game, attacker, blocker2);
                     }
                 }
                 if ((blockingStates[i] & 2) == 2) {
                     combat.addBlocker(attacker, blocker1);
+                    recordBlock(attacker, blocker1);
                     if (isReblock) {
                         runTriggers(game, attacker, blocker1);
                     }

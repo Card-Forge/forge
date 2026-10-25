@@ -1,151 +1,79 @@
 package forge.sound;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Mixer;
-import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.sound.SoftwareMixer.Voice;
 
 /**
+ * The alternate sound system: sounds addressed by file path and capped per file, rather than a
+ * clip per effect. It exists for people whose sound used to disappear on the pooled-{@code Clip}
+ * path, and the preference switches it on without a restart.
  *
- * @author agetian
+ * <p>It plays through {@link SoftwareMixer} like {@link AudioClip} does. It used to start a thread
+ * per sound, each opening an audio line of its own -- which is the freeze this system was offered
+ * as a workaround for, so the workaround reproduced it.
+ *
+ * @author Agetian
  */
-class AsyncSoundRegistry {
-    static Map<String, Integer> soundsPlayed = new HashMap<>();
+public final class AltSoundSystem {
+    /** How many copies of one sound may overlap. */
+    private static final int MAX_SOUND_ITERATIONS = 5;
 
-    public synchronized static void registerSound(String soundName) {
-        soundsPlayed.merge(soundName, 1, Integer::sum);
-        //System.out.println("Register: Count for " + soundName + " = " + soundsPlayed.get(soundName));
+    private static final Map<String, Sound> sounds = new ConcurrentHashMap<>();
+
+    private AltSoundSystem() {
     }
 
-    public synchronized static void unregisterSound(String soundName) {
-        if (soundsPlayed.containsKey(soundName) && soundsPlayed.get(soundName) > 1) {
-            soundsPlayed.merge(soundName, -1, Integer::sum);
-        } else {
-            soundsPlayed.remove(soundName);
-        }
-        //System.out.println("Unregister: Count for " + soundName + " = " + soundsPlayed.get(soundName));
-    }
-
-    public synchronized static boolean isRegistered(String soundName) {
-        return soundsPlayed.containsKey(soundName);
-    }
-
-    public synchronized static int getNumIterations(String soundName) {
-        return soundsPlayed.getOrDefault(soundName, 0);
-    }
-}
-
-public class AltSoundSystem extends Thread {
-
-    private String filename;
-    private boolean isSync;
-
-    private final int EXTERNAL_BUFFER_SIZE = 524288;
-    private final int MAX_SOUND_ITERATIONS = 5;
-
-    public AltSoundSystem(String wavfile, boolean synced) {
-        filename = wavfile;
-        isSync = synced;
-    }
-
-    @Override
-    public void run() {
-        if (isSync && AsyncSoundRegistry.getNumIterations(filename) >= 1) {
+    /**
+     * Start a sound, unless enough copies of it are already sounding. Synchronized play means one
+     * copy at a time.
+     *
+     * <p>Runs on the caller's thread: handing a voice to the mixer is a list insertion, and only
+     * the first play of a file decodes it.
+     */
+    public static synchronized void play(final String filename, final boolean isSynchronized) {
+        final Sound sound = sounds.computeIfAbsent(filename, AltSoundSystem::load);
+        if (sound.pcm == null) {
             return;
         }
-        if (AsyncSoundRegistry.getNumIterations(filename) >= MAX_SOUND_ITERATIONS) {
+        sound.voices.removeIf(voice -> !voice.isPlaying());
+        if (sound.voices.size() >= (isSynchronized ? 1 : MAX_SOUND_ITERATIONS)) {
             return;
         }
+        final float volume = FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS) / 100f;
+        sound.voices.add(SoftwareMixer.play(sound.pcm, volume, false, 0));
+    }
 
-        File soundFile = new File(filename);
-        if (!soundFile.exists()) {
-            return;
+    private static Sound load(final String filename) {
+        final File file = new File(filename);
+        if (!file.exists()) {
+            return new Sound(null);
         }
-
-        AudioInputStream audioInputStream = null;
         try {
-            ByteArrayInputStream bis = new ByteArrayInputStream(AudioClip.getAudioClips(soundFile));
-            audioInputStream = AudioSystem.getAudioInputStream(bis);
-        } catch (UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
-            return;
+            return new Sound(AudioClip.samplesOf(file));
+        } catch (IOException | UnsupportedAudioFileException ex) {
+            System.err.println("Unable to load sound file: " + filename + " - " + ex.getMessage());
+            return new Sound(null);
         }
+    }
 
-        AudioFormat format = audioInputStream.getFormat();
-        SourceDataLine audioLine = null;
-        DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
+    /** One sound file: its samples, and the voices of it that may still be sounding. */
+    private static final class Sound {
+        /** Samples in {@link SoftwareMixer#FORMAT}, or null if the file could not be loaded. */
+        private final byte[] pcm;
+        private final List<Voice> voices = new CopyOnWriteArrayList<>();
 
-        Mixer.Info selectedMixer = null;
-
-        try {
-            for (Mixer.Info mixerInfo : AudioSystem.getMixerInfo()) {
-                Mixer mixer = AudioSystem.getMixer(mixerInfo);
-                if (mixer.isLineSupported(info)) {
-                    selectedMixer = mixerInfo;
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            System.err.println(e.getMessage()); // print a warning but don't crash
-            return;
-        }
-
-        if (selectedMixer == null)
-            return;
-
-        try {
-            audioLine = AudioSystem.getSourceDataLine(format, selectedMixer);
-            audioLine.open(format);
-        } catch (Exception e) {
-            return;
-        }
-
-        if (audioLine.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-            float vol = FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS) / 100f;
-            FloatControl gain = (FloatControl) audioLine.getControl(FloatControl.Type.MASTER_GAIN);
-            float dB = (float) (20.0 * Math.log10(Math.max(vol, 0.0001)));
-            dB = Math.max(dB, gain.getMinimum());
-            dB = Math.min(dB, gain.getMaximum());
-            gain.setValue(dB);
-        }
-
-        audioLine.start();
-        AsyncSoundRegistry.registerSound(filename);
-
-        int nBytesRead = 0;
-        byte[] audioBufData = new byte[EXTERNAL_BUFFER_SIZE];
-
-        try {
-            while (nBytesRead != -1) {
-                nBytesRead = audioInputStream.read(audioBufData, 0, audioBufData.length);
-                if (nBytesRead >= 0)
-                    audioLine.write(audioBufData, 0, nBytesRead);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        } finally {
-            audioLine.drain();
-            audioLine.close();
-            try {
-                audioInputStream.close();
-            } catch (IOException e) {
-                // Can't do much if closing it fails.
-            }
-            AsyncSoundRegistry.unregisterSound(filename);
+        private Sound(final byte[] pcm) {
+            this.pcm = pcm;
         }
     }
 }
