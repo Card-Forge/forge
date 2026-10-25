@@ -1513,7 +1513,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void rebuildAugmentedStates(final CardTraitBase sa) {
         if (!isFaceDown()) {
             final CardCloneStates augmentedStates = CardFactory.getAugmentedCloneState(this, sa);
-            addCloneState(augmentedStates, getAugmentedTimestamp());
+            if (augmentedStates != null) {
+                addCloneState(augmentedStates, getAugmentedTimestamp());
+            } else {
+                setAugmentedTimeStamp(-1);
+            }
         }
     }
 
