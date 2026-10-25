@@ -148,7 +148,7 @@ ScryfallCode=TRK
 221 R U.S.S. Discovery, at Black Alert @Kevin Glint
 224 C Xenobotanist @Marta Nael
 225 C Xindi Surveyors @Joan Piqué Llorens
-226 R All Good Things... @Lazare Gvimradze
+226 R All Good Things . . . @Lazare Gvimradze
 227 M Borg Cube @Alexander Forssberg
 228 R The City on the Edge of Forever @Peter Diamond
 229 U Cleveland Booker, Empath @Kaitlyn McCulley
