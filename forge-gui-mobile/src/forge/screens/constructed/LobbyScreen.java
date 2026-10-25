@@ -146,6 +146,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbGamesInMatch.addItem("1");
         cbGamesInMatch.addItem("3");
         cbGamesInMatch.addItem("5");
+        cbGamesInMatchBinder.bind();
 
         add(lblVariants);
         add(cbVariants);
