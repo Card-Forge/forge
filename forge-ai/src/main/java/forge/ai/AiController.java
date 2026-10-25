@@ -2075,6 +2075,12 @@ public class AiController {
 
     private Boolean flatMcAttackOverride;
 
+    /** Mulligans and bottoms cards by the deck plan: asked for in the profile, or part of maximum strength. */
+    public boolean useSmartMulligan() {
+        return getBoolProperty(AiProps.FLAT_MC_MULLIGAN)
+                || isFlatMonteCarloMax() && (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo());
+    }
+
     /** Maximum strength (desktop matches): the attack search and broad discovery are part of it. */
     private boolean isFlatMonteCarloMax() {
         return flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax();
