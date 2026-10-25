@@ -63,9 +63,11 @@ public class AugmentHost extends SimpleKeyword {
             } else {
                 augmentTrigger.setOverridingAbility(hostAbility);
             }
-            augmentTrigger.putParam("TriggerDescription", augmentTrigger.getParam("TriggerDescription") + " " + hostAbility.getDescription());
+            String description = augmentTrigger.getParam("TriggerDescription") + " " + hostAbility.getDescription();
+            augmentTrigger.getOriginalMapParams().put("TriggerDescription", description);
+            augmentTrigger.putParam("TriggerDescription", description);
             for (String key : transferredParams.keySet()) {
-                augmentTrigger.putParam(key, transferredParams.get(key));
+                augmentTrigger.getOriginalMapParams().put(key, transferredParams.get(key));
             }
             augmentTrigger.setHostCard(getHostCard());
             augmentTrigger.setCardState(getHostCard().getCurrentState());
@@ -81,7 +83,9 @@ public class AugmentHost extends SimpleKeyword {
                 sub = sub.getSubAbility();
             }
             sub.appendSubAbility(hostAbility);
-            augmentActivated.putParam("SpellDescription", augmentActivated.getParam("SpellDescription") + hostAbility.getDescription());
+            String description = augmentActivated.getParam("SpellDescription") + hostAbility.getDescription();
+            augmentActivated.getOriginalMapParams().put("SpellDescription", description);
+            augmentActivated.putParam("SpellDescription", description);
             augmentActivated.setHostCard(getHostCard());
             augmentActivated.setCardState(getHostCard().getCurrentState());
             getTriggers().clear();

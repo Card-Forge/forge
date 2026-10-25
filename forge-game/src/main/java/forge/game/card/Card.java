@@ -1510,6 +1510,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             addCloneState(mutatedStates, getMutatedTimestamp());
         }
     }
+    public final void rebuildAugmentedStates(final CardTraitBase sa) {
+        if (!isFaceDown()) {
+            final CardCloneStates augmentedStates = CardFactory.getAugmentedCloneState(this, sa);
+            addCloneState(augmentedStates, getAugmentedTimestamp());
+        }
+    }
 
     public final boolean attachAugment(Card augment) {
         if (augment == null) {
@@ -1542,6 +1548,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setAugmentedTimeStamp(long ts) {
         augmentedTimeStamp = ts;
+    }
+    public final void removeAugmentedStates() {
+        if (isAugmented()) {
+            removeCloneState(getAugmentedTimestamp());
+        }
     }
 
     /**

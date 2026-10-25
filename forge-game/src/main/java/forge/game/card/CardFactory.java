@@ -763,7 +763,11 @@ public class CardFactory {
         final Card top = card.getTopMergedCard();
         final CardStateName state = top.getCurrentStateName();
         CardState ret;
-        if (top.isCloned() || top.isAugmented()) {
+        if (top.isAugmented()) {
+            top.removeAugmentedStates();
+            top.rebuildAugmentedStates(sa);
+            ret = top.getState(state).copy(card, sa);
+        } else if (top.isCloned()) {
             ret = top.getState(state).copy(card, sa);
         } else {
             ret = top.getOriginalState(state).copy(card, sa);
@@ -774,6 +778,10 @@ public class CardFactory {
             if (first) {
                 first = false;
                 continue;
+            }
+            if (c.isAugmented()) {
+                c.removeAugmentedStates();
+                c.rebuildAugmentedStates(sa);
             }
             ret.addAbilitiesFrom(c.getCurrentState(), false);
         }
