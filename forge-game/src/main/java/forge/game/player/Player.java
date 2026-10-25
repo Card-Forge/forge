@@ -2947,6 +2947,11 @@ public class Player extends GameEntity implements Comparable<Player> {
                         String keyword = inst.getOriginal();
                         try {
                             if (keyword.startsWith("etbCounter")) {
+                                // Honor ValidCard / CheckSVar conditions on the keyword's
+                                // replacement (e.g. "escapes with" counters require escaped).
+                                if (!startingCardEtbCounterApplies(c, inst)) {
+                                    continue;
+                                }
                                 final String[] p = keyword.split(":");
                                 c.addCounterInternal(CounterType.getType(p[1]), Integer.parseInt(p[2]), null, false, null, null);
                             }
@@ -3095,6 +3100,45 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
+    }
+
+    // Unconditional etbCounters apply on startBattleWithCard; escape/kicker/etc. conditions do not.
+    private boolean startingCardEtbCounterApplies(final Card c, final KeywordInterface inst) {
+        final String[] parts = inst.getOriginal().split(":");
+        // No condition, or explicit "no Condition" → always apply (fixed or X amount).
+        if (parts.length <= 3 || "no Condition".equals(parts[3])) {
+            return true;
+        }
+        // Prefer the keyword's already-built replacement effects when present.
+        Collection<ReplacementEffect> replacements = inst.getReplacements();
+        if (replacements.isEmpty() && !inst.hasTraits()) {
+            inst.createTraits(c, true);
+            replacements = inst.getReplacements();
+        }
+        if (!replacements.isEmpty()) {
+            for (ReplacementEffect re : replacements) {
+                if (re.hasParam("ValidCard") && !c.isValid(re.getParam("ValidCard"), this, c, null)) {
+                    return false;
+                }
+                if (!re.requirementsCheck(getGame())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        // Fallback: parse the condition string the same way makeEtbCounter stores it.
+        for (String part : parts[3].split("\\|")) {
+            part = part.trim();
+            if (part.startsWith("ValidCard$")) {
+                final String valid = part.substring("ValidCard$".length()).trim();
+                if (!c.isValid(valid, this, c, null)) {
+                    return false;
+                }
+            } else if (part.startsWith("CheckSVar$") || part.startsWith("Bloodthirst$")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void initCommanderColor(Card cmd) {
