@@ -1630,6 +1630,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
+    public final void moveAugmentToSubgame(SpellAbility cause) {
+        if (this.getAugmenting() != null) {
+            Card host = this.getAugmenting();
+            host.attachAugment(null);
+            host.removeAugmentedStates();
+            host.setAugmentedTimeStamp(-1);
+        } else if (this.getAugmentedWith() != null) {
+            Card augment = this.getAugmentedWith();
+            this.attachAugment(null);
+            this.removeAugmentedStates();
+            this.setAugmentedTimeStamp(-1);
+            Zone zone = getZone();
+            augment.getZone().remove(augment);
+            zone.add(augment);
+            augment.setZone(zone);
+        }
+    }
+
     public final void retainPaidList(final SpellAbility cause, final String list) {
         for (Card craft : cause.getPaidList(list)) {
             if (!craft.equals(this) && !craft.isToken()) {

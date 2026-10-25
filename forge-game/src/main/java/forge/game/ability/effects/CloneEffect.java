@@ -10,7 +10,7 @@ import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
@@ -199,10 +199,12 @@ public class CloneEffect extends SpellAbilityEffect {
                             }
                             //the augmentation failed and the augment pops off
                             if (cloneCard.getAugmentedWith() != null && !cloneCard.isAugmented()) {
-                                game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                                game.getAction().moveTo(cloneCard.getController().getZone(ZoneType.Battlefield),
-                                        cloneCard.getAugmentedWith(), sa);
-                                game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                                Card augment = cloneCard.getAugmentedWith();
+                                cloneCard.attachAugment(null);
+                                Zone zone = cloneCard.getZone();
+                                augment.getZone().remove(augment);
+                                zone.add(augment);
+                                augment.setZone(zone);
                             }
                             cloneCard.updateStateForView();
                             game.fireEvent(new GameEventCardStatsChanged(cloneCard));

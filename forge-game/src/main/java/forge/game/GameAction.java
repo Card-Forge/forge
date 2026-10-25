@@ -825,6 +825,9 @@ public class GameAction {
         // String prevName = prev != null ? prev.getZoneName() : "";
 
         // Handle the case that one component of a merged permanent got take to the subgame
+        if (zoneTo.is(ZoneType.Subgame) && (c.isAugmented() || c.getAugmenting() != null)) {
+            c.moveAugmentToSubgame(cause);
+        }
         if (zoneTo.is(ZoneType.Subgame) && (c.hasMergedCard() || c.isMerged())) {
             c.moveMergedToSubgame(cause);
         }
