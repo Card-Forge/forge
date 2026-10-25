@@ -31,6 +31,10 @@ public class ComputerUtilManaTest extends SimulationTest {
      * name stay untapped. Land specs look like "Swamp:4".
      */
     private Map<String, Integer> payAndCountUntapped(final String cost, final int expectedTapped, final String... landSpecs) {
+        return payAndCountUntapped(cost, expectedTapped, new String[0], landSpecs);
+    }
+
+    private Map<String, Integer> payAndCountUntapped(final String cost, final int expectedTapped, final String[] hand, final String... landSpecs) {
         Game game = initAndCreateGame();
         final Player p = game.getPlayers().get(1);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -40,9 +44,14 @@ public class ComputerUtilManaTest extends SimulationTest {
             final String[] parts = spec.split(":");
             final int count = Integer.parseInt(parts[1]);
             for (int i = 0; i < count; i++) {
-                addCard(parts[0], p);
+                // creatures that make mana must be able to tap right away
+                addCard(parts[0], p).setSickness(false);
             }
             untapped.put(parts[0], count);
+        }
+
+        for (final String name : hand) {
+            addCardToZone(name, p, ZoneType.Hand);
         }
 
         // any spell will do as the host, only the cost matters
@@ -95,6 +104,16 @@ public class ComputerUtilManaTest extends SimulationTest {
     public void threeColoursAreAllKept() {
         // {2}{R} with 2 of each of three types: one Mountain for R, the generic from Forest and Plains
         assertLeft(payAndCountUntapped("2 R", 3, "Mountain:2", "Forest:2", "Plains:2"), "Mountain", "Forest", "Plains");
+    }
+
+    @Test
+    public void multiColourSourcesKeepWhatTheHandNeeds() {
+        // {X}{G}{G} with X=2: Vigorbloom Charm {G}{W} is in hand, so a Plains and a green source must stay
+        final Map<String, Integer> untapped = payAndCountUntapped("2 G G", 4, new String[] { "Vigorbloom Charm" },
+                "Plains:2", "Forest:1", "Formidable Commons:2", "Greenhouse Propagator:1");
+        assertLeft(untapped, "Plains");
+        assertTrue(untapped.get("Forest") + untapped.get("Formidable Commons") + untapped.get("Greenhouse Propagator") >= 1,
+                "expected a green source to stay untapped, got " + untapped);
     }
 
     @Test

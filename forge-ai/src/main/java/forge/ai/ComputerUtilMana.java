@@ -721,7 +721,7 @@ public class ComputerUtilMana {
             saList.removeAll(saExcludeList);
 
             if (!hasConverge && !sa.hasParam("AIManaPref") && !sa.getHostCard().hasSVar("AIManaPref")) {
-                saList = sparingSourcesFirst(saList, sourcesForShards);
+                saList = sparingSourcesFirst(saList, sourcesForShards, sa, ai);
                 if (toPay == ManaCostShard.GENERIC) {
                     saList = requiredSourcesFirst(saList, cost, sa);
                 }
@@ -974,6 +974,74 @@ public class ComputerUtilMana {
 
         // stable sort: ties keep the existing order, including the hand colour tie-break
         list.subList(0, end).sort(Comparator.comparingInt(exhausted));
+        return list;
+    }
+
+    /**
+     * Among the sources for a shard, prefer those whose use leaves every colour with an untapped source.
+     * This never changes how many sources get tapped, only which.
+     * A colour that a card in hand needs outranks the source scores, so a held spell stays castable;
+     * leaving a colour untapped just to hide information only reorders equally scored sources.
+     */
+    private static Collection<SpellAbility> sparingSourcesFirst(final Collection<SpellAbility> candidates,
+            final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final SpellAbility sa, final Player ai) {
+        if (candidates.size() < 2) {
+            return candidates;
+        }
+
+        // untapped sources per colour; a card counts once for every colour it can make
+        final Map<Card, Integer> colorsOf = new HashMap<>();
+        for (final SpellAbility ma : sourcesForShards.values()) {
+            colorsOf.merge(ma.getHostCard(), producedColors(ma), (a, b) -> a | b);
+        }
+        final int[] perColor = new int[MagicColor.WUBRG.length];
+        for (final int mask : colorsOf.values()) {
+            for (int i = 0; i < perColor.length; i++) {
+                if ((mask & MagicColor.WUBRG[i]) != 0) {
+                    perColor[i]++;
+                }
+            }
+        }
+
+        // the colours that would have no untapped source left after using this one
+        final ToIntFunction<SpellAbility> drained = ma -> {
+            final int mask = colorsOf.getOrDefault(ma.getHostCard(), 0);
+            int res = 0;
+            for (int i = 0; i < perColor.length; i++) {
+                if ((mask & MagicColor.WUBRG[i]) != 0 && perColor[i] <= 1) {
+                    res |= MagicColor.WUBRG[i];
+                }
+            }
+            return res;
+        };
+
+        final List<SpellAbility> list = new ArrayList<>(candidates);
+        final int firstDrained = drained.applyAsInt(list.get(0));
+        if (list.stream().allMatch(ma -> drained.applyAsInt(ma) == firstDrained)) {
+            return candidates;
+        }
+
+        int handColors = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c != sa.getHostCard()) {
+                handColors |= c.getColor().getColor();
+            }
+        }
+        final int held = handColors;
+        final Comparator<SpellAbility> byHeld = Comparator.comparingInt(ma -> Integer.bitCount(drained.applyAsInt(ma) & held));
+        final Comparator<SpellAbility> byAny = Comparator.comparingInt(ma -> Integer.bitCount(drained.applyAsInt(ma)));
+
+        // stable sorts: ties keep the existing order, including the hand colour tie-break
+        list.sort(byHeld);
+
+        final int lead = scoreManaProducingCard(list.get(0).getHostCard());
+        int end = 1;
+        while (end < list.size() && scoreManaProducingCard(list.get(end).getHostCard()) == lead) {
+            end++;
+        }
+        if (end > 1) {
+            list.subList(0, end).sort(byHeld.thenComparing(byAny));
+        }
         return list;
     }
 
