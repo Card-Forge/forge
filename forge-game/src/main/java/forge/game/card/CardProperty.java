@@ -1890,7 +1890,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("canBeBeamedUp")) {
-            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card)) {
+            if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card, spellAbility)) {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {
