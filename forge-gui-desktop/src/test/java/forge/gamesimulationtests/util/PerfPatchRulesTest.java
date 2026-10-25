@@ -293,19 +293,19 @@ public class PerfPatchRulesTest extends GameSimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
         Card bears = addCard("Grizzly Bears", p);
-        int base = bears.getReplacementEffects().size();
+        long base = bears.streamReplacementEffects().count();
         assertCoherent(bears, "baseline");
 
         for (CounterEnumType type : new CounterEnumType[]{CounterEnumType.SHIELD, CounterEnumType.STUN, CounterEnumType.FINALITY}) {
-            int before = bears.getReplacementEffects().size();
+            long before = bears.streamReplacementEffects().count();
             bears.addCounterInternal(type, 1, p, false, null, null);                    // ADAPT: counter API
-            Assert.assertTrue(bears.getReplacementEffects().size() > before, type + " counter must add a replacement effect");
+            Assert.assertTrue(bears.streamReplacementEffects().count() > before, type + " counter must add a replacement effect");
             assertCoherent(bears, "with " + type);
             bears.subtractCounter(type, 1, p);                                          // ADAPT: counter API
-            Assert.assertEquals(bears.getReplacementEffects().size(), before, type + " removal must remove it again");
+            Assert.assertEquals(bears.streamReplacementEffects().count(), before, type + " removal must remove it again");
             assertCoherent(bears, "without " + type);
         }
-        Assert.assertEquals(bears.getReplacementEffects().size(), base);
+        Assert.assertEquals(bears.streamReplacementEffects().count(), base);
     }
 
     // =====================================================================================
