@@ -2,6 +2,7 @@ Name:Stockpiling Celebrant
 ManaCost:2 W
 Types:Creature Dwarf Knight
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2.
-SVar:TrigScry:AB$ Scry | ScryNum$ 2 | Cost$ Return<1/Permanent.nonLand+Other/another nonland permanent>
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand+Other+YouCtrl | TgtPrompt$ Select another target nonland permanent you control | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:When Stockpiling Celebrant enters, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2.
