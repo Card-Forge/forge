@@ -5,13 +5,14 @@ PT:3/3
 K:Flying
 K:Prowess
 A:AB$ SetState | Cost$ 2 R W W | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 Oracle:Flying, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{2}{R}{W}{W}: Transform Monica Rambeau. Activate only as a sorcery.
 
 ALTERNATE
 
 Name:Photon, Living Light
-ManaCost:2 R W W
+ManaCost:no cost
+Colors:red,white
 Types:Legendary Creature Elemental Hero
 PT:4/4
 K:Flying

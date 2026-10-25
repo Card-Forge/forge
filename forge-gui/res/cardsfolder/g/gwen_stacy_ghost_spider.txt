@@ -3,7 +3,7 @@ Variant:UniversesWithin:FlavorName:Nia, Skysail Storyteller
 ManaCost:1 R
 Types:Legendary Creature Human Performer Hero
 PT:2/1
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile the top card of your library. You may play that card for as long as you control this creature.
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ AsLongAsControl | SubAbility$ DBCleanup
@@ -16,7 +16,8 @@ ALTERNATE
 
 Name:Ghost-Spider
 Variant:UniversesWithin:FlavorName:Nia, Fabled Skyclimber
-ManaCost:2 U R W
+ManaCost:no cost
+Colors:blue,red,white
 Types:Legendary Creature Spider Human Hero
 PT:4/4
 K:Flying

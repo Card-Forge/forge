@@ -4,14 +4,15 @@ Types:Legendary Creature Human Advisor Hero
 PT:2/3
 S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
 A:AB$ SetState | Cost$ 3 G W W | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 SVar:PlayMain1:TRUE
 Oracle:Your opponents can't cast spells during your turn.\n{3}{G}{W}{W}: Transform Jennifer Walters. Activate only as a sorcery.
 
 ALTERNATE
 
 Name:The Sensational She-Hulk
-ManaCost:3 G W W
+ManaCost:no cost
+Colors:green,white
 Types:Legendary Creature Gamma Hero
 PT:6/6
 K:Reach

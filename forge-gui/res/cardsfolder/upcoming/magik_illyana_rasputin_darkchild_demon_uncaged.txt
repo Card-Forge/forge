@@ -10,13 +10,14 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE2 | OptionalDecider$ You | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you've sacrificed two or more permanents this turn, you may transform NICKNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 Oracle:At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.\nAt the beginning of your end step, if you've sacrificed two or more permanents this turn, you may transform Magik.
 
 ALTERNATE
 
 Name:Darkchild, Demon Uncaged
-ManaCost:3 B R
+ManaCost:no cost
+Colors:black,red
 Types:Legendary Creature Mutant Demon Sorcerer
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDigUntil | TriggerDescription$ At the beginning of your upkeep, exile cards from the top of your library until you exile a nonland card. You may play those cards this turn.

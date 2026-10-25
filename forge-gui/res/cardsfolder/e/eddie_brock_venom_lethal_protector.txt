@@ -3,7 +3,7 @@ Variant:UniversesWithin:FlavorName:Viggo, Enforcer of Ig's Crossing
 ManaCost:2 B
 Types:Legendary Creature Human Hero Villain
 PT:3/3
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target creature card with mana value 1 or less from your graveyard to the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.cmcLE1+YouOwn | TgtPrompt$ Select target creature card with mana value 1 or less in your graveyard
 A:AB$ SetState | Cost$ 3 B R G | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
@@ -14,7 +14,8 @@ ALTERNATE
 
 Name:Venom, Lethal Protector
 Variant:UniversesWithin:FlavorName:Viggo, End of Ig's Crossing
-ManaCost:3 B R G
+ManaCost:no cost
+Colors:black,red,green
 Types:Legendary Creature Symbiote Hero Villain
 PT:5/5
 K:Menace

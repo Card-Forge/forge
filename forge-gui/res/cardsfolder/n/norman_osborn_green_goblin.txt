@@ -3,7 +3,7 @@ Variant:UniversesWithin:FlavorName:Goben, Gene-Splice Savant
 ManaCost:1 U
 Types:Legendary Creature Human Scientist Villain
 PT:1/1
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigConnive | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 SVar:TrigConnive:DB$ Connive
@@ -14,7 +14,8 @@ ALTERNATE
 
 Name:Green Goblin
 Variant:UniversesWithin:FlavorName:Fleem, Goben's Creation
-ManaCost:1 U B R
+ManaCost:no cost
+Colors:blue,black,red
 Types:Legendary Creature Goblin Human Villain
 PT:3/3
 K:Flying

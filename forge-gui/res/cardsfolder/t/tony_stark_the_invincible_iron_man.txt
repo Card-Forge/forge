@@ -4,13 +4,14 @@ Types:Legendary Creature Human Artificer Hero
 PT:1/3
 A:AB$ Dig | Cost$ 1 T | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 A:AB$ SetState | Cost$ 4 U R | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery.
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 Oracle:{1}, {T}: Look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\n{4}{U}{R}: Transform Tony Stark. Activate only as a sorcery.
 
 ALTERNATE
 
 Name:The Invincible Iron Man
-ManaCost:4 U R
+ManaCost:no cost
+Colors:blue,red
 Types:Legendary Artifact Creature Human Hero
 PT:5/5
 K:Flying

@@ -6,13 +6,14 @@ K:Flash
 T:Mode$ Drawn | ValidPlayer$ Player | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player draws their second card each turn, you draw a card.
 SVar:TrigDraw:DB$ Draw
 A:AB$ SetState | Cost$ 4 W U | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 Oracle:Flash\nWhenever a player draws their second card each turn, you draw a card.\n{4}{W}{U}: Transform King T'Challa. Activate only as a sorcery.
 
 ALTERNATE
 
 Name:Black Panther, Hope Enduring
-ManaCost:4 W U
+ManaCost:no cost
+Colors:white,blue
 Types:Legendary Creature Human Warrior Hero
 PT:3/3
 K:Flash

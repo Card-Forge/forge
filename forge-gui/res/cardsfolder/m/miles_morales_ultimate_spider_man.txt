@@ -3,7 +3,7 @@ Variant:UniversesWithin:FlavorName:Cren, Undercity Dreamer
 ManaCost:1 G
 Types:Legendary Creature Human Citizen Hero
 PT:1/2
-AlternateMode:Modal
+AlternateMode:DoubleFaced
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on each of up to two target creatures.
 SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures
 A:AB$ SetState | Cost$ 3 R G W | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
@@ -13,7 +13,8 @@ ALTERNATE
 
 Name:Ultimate Spider-Man
 Variant:UniversesWithin:FlavorName:Cren of the Spider Brood
-ManaCost:3 R G W
+ManaCost:no cost
+Colors:red,green,white
 Types:Legendary Creature Spider Human Hero
 PT:4/3
 K:First Strike
