@@ -84,6 +84,7 @@ A test should fail without your change and protect a behaviour a player would no
 - For a large change, it can be helpful to seek feedback on Discord before opening a PR.
 - Keep each PR to one goal or feature. Avoid lumping different features that could be separated into the same PR.
 - For a change that may affect performance, you should profile the impact on different board states (e.g. 1v1, 4v4 Commander, wide token decks) and give before and after performance numbers in the PR description.
+- If your PR involves a visual or UI change, include a screenshot or video in the PR description.
 - Build and run the tests before you open a PR. CI runs `mvn clean test`, and Checkstyle fails the build on unused or redundant imports.
 
 ## Art and UI
