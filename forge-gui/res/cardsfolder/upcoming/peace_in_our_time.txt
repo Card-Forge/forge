@@ -1,0 +1,12 @@
+Name:Peace in Our Time
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ TriggeredPlayer | TriggerDescription$ At the beginning of combat on each player's turn, that player may draw a card. If they do, they can't attack this turn and you put a peace counter on this enchantment.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CantAttack | RememberObjects$ TriggeredPlayer | SubAbility$ DBPutCounter
+SVar:CantAttack:Mode$ CantAttack | ValidCard$ Creature.RememberedPlayerCtrl | Description$ That player can't attack this turn.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PEACE | CounterNum$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE12_PEACE | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if this enchantment has twelve or more peace counters on it, you win the game.
+SVar:TrigWin:DB$ WinsGame | Defined$ You
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on each player's turn, that player may draw a card. If they do, they can't attack this turn and you put a peace counter on this enchantment.\nAt the beginning of your upkeep, if this enchantment has twelve or more peace counters on it, you win the game.

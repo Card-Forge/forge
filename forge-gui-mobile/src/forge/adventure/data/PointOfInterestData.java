@@ -15,12 +15,14 @@ import java.util.Set;
  * contains the information for the point of interests like towns and dungeons
  */
 public class PointOfInterestData implements Serializable {
+    private static final long serialVersionUID = -986253670258331930L;
     public String name;
     public String type;
     public int count;
     public String spriteAtlas;
     public String sprite;
     public String map;
+    public String battleBackground;
     public float radiusFactor;
     public float offsetX=0f;
     public float offsetY=0f;
@@ -62,6 +64,7 @@ public class PointOfInterestData implements Serializable {
         spriteAtlas=other.spriteAtlas;
         sprite=other.sprite;
         map=other.map;
+        battleBackground=other.battleBackground;
         radiusFactor=other.radiusFactor;
         offsetX=other.offsetX;
         offsetY=other.offsetY;
