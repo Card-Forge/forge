@@ -20,6 +20,7 @@ package forge.gamemodes.match.input;
 import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -64,11 +65,6 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
-    }
-
-    @Override
-    protected void onStop() {
-        getController().clearActionableCards();
     }
 
     @Override
@@ -164,11 +160,16 @@ public class InputPassPriority extends InputSyncronizedBase {
         getController().getGui().alertUser();
     }
 
+    @Override
+    protected List<CardView> getActionable() {
+        return pendingSuggestion == null ? getController().getActionableCards(false, null) : List.of();
+    }
+
     private void showNormalPrompt() {
         pendingSuggestion = null;
         pendingSuggestionMessage = null;
 
-        getController().pushActionableCards(false);
+        showSelection();
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
