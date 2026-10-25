@@ -95,6 +95,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player activatingPlayer;
     private Player targetingPlayer;
     private Player choosingPlayer;
+    private Pair<Player, Boolean> dilemma;
     private Pair<Long, Player> controlledByPlayer;
 
     private ManaCostBeingPaid manaCostBeingPaid;
@@ -536,6 +537,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setChoosingPlayer(Player choosingPlayer0) {
         choosingPlayer = choosingPlayer0;
+    }
+
+    public Pair<Player, Boolean> getDilemma() {
+        return dilemma;
+    }
+    public void setDilemma(Pair<Player, Boolean> dilemma0) {
+        dilemma = dilemma0;
     }
 
     /**

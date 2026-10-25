@@ -1114,6 +1114,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void incDilemmasFacedThisTurn() {
         dilemmasFacedThisTurn++;
     }
+    public void setDilemmasFacedThisTurn(int v) {
+        dilemmasFacedThisTurn = v;
+    }
 
     public boolean canMulligan() {
         return !getZone(ZoneType.Hand).isEmpty();

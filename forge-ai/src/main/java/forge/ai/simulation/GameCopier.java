@@ -104,6 +104,7 @@ public class GameCopier {
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
             newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
+            newPlayer.setDilemmasFacedThisTurn(origPlayer.getDilemmasFacedThisTurn());
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
