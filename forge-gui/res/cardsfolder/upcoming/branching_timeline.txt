@@ -1,6 +1,6 @@
 Name:Branching Timeline
 ManaCost:6 G G
 Types:Sorcery
-A:SP$ Dig | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Permanent | DestinationZone$ Battlefield | Tapped$ True | RememberChanged$ True | RestRandomOrder$ True | SpellDescription$ Strange new worlds — Reveal the top X cards of your library, where X is the number of differently named lands you control. Put all permanent cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Permanent | DestinationZone$ Battlefield | Tapped$ True | RestRandomOrder$ True | SpellDescription$ Strange new worlds — Reveal the top X cards of your library, where X is the number of differently named lands you control. Put all permanent cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order.
 SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
 Oracle:Strange new worlds — Reveal the top X cards of your library, where X is the number of differently named lands you control. Put all permanent cards revealed this way onto the battlefield tapped and the rest on the bottom of your library in a random order.
