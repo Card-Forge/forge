@@ -94,6 +94,16 @@ import static java.lang.Math.max;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITranslatable {
+    private static final Set<StaticAbilityMode> PREPARED_SPELL_CASTING_STATIC_MODES = Sets.immutableEnumSet(
+            StaticAbilityMode.CastWithFlash,
+            StaticAbilityMode.ReduceCost,
+            StaticAbilityMode.RaiseCost,
+            StaticAbilityMode.SetCost,
+            StaticAbilityMode.AlternativeCost,
+            StaticAbilityMode.OptionalCost,
+            StaticAbilityMode.CantBeCast
+    );
+
     private Game game;
     private final IPaperCard paperCard;
 
@@ -5884,9 +5894,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         final String type = parsed.type;
         final boolean testFailed = parsed.negated; // a bit counter logical))
 
-        // need to filter out prepared spells for other cards
+        // need to filter out prepared spells for other cards, unless evaluated by a static ability affecting spell casting (flash, cost adjustments)
         if (getCurrentStateName() == CardStateName.PreparedSpell && isInZone(ZoneType.Exile)) {
-            return testFailed;
+            if (spellAbility instanceof StaticAbility stAb
+                    && !Collections.disjoint(stAb.getMode(), PREPARED_SPELL_CASTING_STATIC_MODES)) {
+                // allow evaluating characteristics of the prepared spell when casting it
+            } else {
+                return testFailed;
+            }
         }
 
         if (type.equals("Spell")) {
@@ -7001,6 +7016,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         if (isPhasedOut()) {
+            return false;
+        }
+
+        if (getCurrentStateName() == CardStateName.PreparedSpell && isInZone(ZoneType.Exile)) {
             return false;
         }
 
