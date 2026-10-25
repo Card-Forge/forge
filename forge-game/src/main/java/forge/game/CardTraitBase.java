@@ -287,6 +287,45 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         return this.suppressed;
     }
 
+    /**
+     * Cards that currently match {@code IsPresent}. Empty when that parameter is absent.
+     * Uses the same controller, zones, and defined cards as {@link #meetsCommonRequirements}.
+     */
+    public final CardCollection getPresentCards(Map<String, String> params) {
+        if (!params.containsKey("IsPresent")) {
+            return new CardCollection();
+        }
+        Player hostController = this.getHostCard().getController();
+        final Game game = hostController.getGame();
+        // intervening if check, make sure to use right controller
+        if (!game.getStack().isEmpty() && game.getStack().isResolving(getHostCard())) {
+            SpellAbility sa = game.getStack().peek().getSpellAbility();
+            if (sa.isTrigger()) {
+                hostController = sa.getActivatingPlayer();
+            }
+        }
+
+        final String sIsPresent = params.get("IsPresent");
+        final String presentPlayer = getParamOrDefault("PresentPlayer", "Any");
+        CardCollection list;
+        if (params.containsKey("PresentDefined")) {
+            list = AbilityUtils.getDefinedCards(getHostCard(), params.get("PresentDefined"), this);
+        } else {
+            List<ZoneType> presentZones = params.containsKey("PresentZone") ? ZoneType.listValueOf(params.get("PresentZone")) : List.of(ZoneType.Battlefield);
+            list = new CardCollection();
+            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
+                list.addAll(hostController.getCardsIn(presentZones));
+            }
+            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
+                list.addAll(hostController.getOpponents().getCardsIn(presentZones));
+            }
+            if (presentPlayer.equals("Any")) {
+                list.addAll(hostController.getAllies().getCardsIn(presentZones));
+            }
+        }
+        return CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
+    }
+
     protected boolean meetsCommonRequirements(Map<String, String> params) {
         Player hostController = this.getHostCard().getController();
         final Game game = hostController.getGame();
@@ -401,26 +440,8 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         if (params.containsKey("IsPresent")) {
-            final String sIsPresent = params.get("IsPresent");
             final String presentCompare = getParamOrDefault("PresentCompare", "GE1");
-            final String presentPlayer = getParamOrDefault("PresentPlayer", "Any");
-            CardCollection list;
-            if (params.containsKey("PresentDefined")) {
-                list = AbilityUtils.getDefinedCards(getHostCard(), params.get("PresentDefined"), this);
-            } else {
-                List<ZoneType> presentZones = params.containsKey("PresentZone") ? ZoneType.listValueOf(params.get("PresentZone")) : List.of(ZoneType.Battlefield);
-                list = new CardCollection();
-                if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                    list.addAll(hostController.getCardsIn(presentZones));
-                }
-                if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                    list.addAll(hostController.getOpponents().getCardsIn(presentZones));
-                }
-                if (presentPlayer.equals("Any")) {
-                    list.addAll(hostController.getAllies().getCardsIn(presentZones));
-                }
-            }
-            list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
+            final CardCollection list = getPresentCards(params);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
