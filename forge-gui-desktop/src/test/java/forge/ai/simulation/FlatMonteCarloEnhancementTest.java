@@ -2,9 +2,7 @@ package forge.ai.simulation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -160,11 +158,11 @@ public class FlatMonteCarloEnhancementTest extends AITest {
         addCardToZone("Runeclaw Bear", ai, ZoneType.Hand);
         addCardToZone("Divination", ai, ZoneType.Hand);
         addCardToZone("Doom Blade", ai, ZoneType.Hand);
-        final java.util.List<SpellAbility> plays = new java.util.ArrayList<>();
+        final List<SpellAbility> plays = new ArrayList<>();
         for (final Card c : ai.getZone(ZoneType.Hand).getCards()) {
             plays.add(c.getSpellAbilities().get(0));
         }
-        final java.util.List<SpellAbility> picked = FlatMonteCarloPicker.diversify(plays, 3);
+        final List<SpellAbility> picked = FlatMonteCarloPicker.diversify(plays, 3);
         AssertJUnit.assertEquals(3, picked.size());
         AssertJUnit.assertSame("the heuristic favourite stays first", plays.get(0), picked.get(0));
         boolean draw = false;

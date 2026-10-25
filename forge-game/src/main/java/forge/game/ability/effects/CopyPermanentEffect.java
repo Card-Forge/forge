@@ -287,7 +287,14 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
             int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
             // need to create a physical card first, i need the original card faces
-            copy = CardFactory.getCard(original.getPaperCard(), newOwner, id, host.getGame());
+            if (original.getPaperCard() == null) {
+                // a token made from its own characteristics (not from a card script) has no paper card to rebuild
+                // the faces from; the states copied below carry everything the copy needs
+                copy = new Card(id, host.getGame());
+                copy.setOwner(newOwner);
+            } else {
+                copy = CardFactory.getCard(original.getPaperCard(), newOwner, id, host.getGame());
+            }
 
             copy.setStates(CardFactory.getCloneStates(original, copy, sa));
             // force update the now set State

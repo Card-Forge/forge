@@ -788,11 +788,28 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        if (brains.useSmartMulligan()) {
+            try {
+                return forge.ai.simulation.OpeningHand.keep(player, player.getCardsIn(ZoneType.Hand), cardsToReturn,
+                        firstPlayer == player, brains.deckPlan(player), brains.getIntProperty(AiProps.MULLIGAN_THRESHOLD));
+            } catch (final RuntimeException e) {
+                // fall back to the standard rule below
+            }
+        }
         return !ComputerUtil.wantMulligan(player, cardsToReturn);
     }
 
     @Override
     public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
+        if (brains.useSmartMulligan()) {
+            try {
+                return CardCollection.getView(forge.ai.simulation.OpeningHand.toBottom(player, hand, cardsToReturn,
+                        player.getGame().getStartingPlayer() == player,
+                        brains.deckPlan(player)));
+            } catch (final RuntimeException e) {
+                // fall back to the standard rule below
+            }
+        }
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
         int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
