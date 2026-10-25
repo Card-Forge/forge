@@ -64,7 +64,9 @@ ScryfallCode=TRK
 77 R Romulan Bird-of-Prey @Edouard
 79 M Scotty, Miracle Worker @Sam Kennedy
 80 M Seven of Nine, Unassimilated @Toraji
+82 R Subcommander T'Pol @Kieran Yanner
 83 C Suurok-Class Science Vessel @Pace Wilder
+85 U Test of Priorities @Paolo Puggioni
 86 U Those Old Scientists @Gregg Schigiel
 87 U V'Ger, the Intruder @Jessica Rossier
 92 C Assault Drone @Filipe Pagliuso
@@ -83,6 +85,7 @@ ScryfallCode=TRK
 111 C A Good Day to Die @Monztre
 114 C He's Dead, Jim @Crystal Fae
 115 U Hive Mind Coprocessor @Andrey Kuzinskiy
+116 U Impossible Choice @Douglas Shuler
 117 U In the Pale Moonlight @Charles Chaisson
 119 M Khan, Vengeful Heart @Sam Kennedy
 120 C Obsidian Order Operative @Wero Gallo
@@ -101,9 +104,13 @@ ScryfallCode=TRK
 144 C Captain's Tutelage @Mark Spears
 145 R D-7 Battle Cruiser @Kevin Glint
 146 C Dahar Master @Grant Griffin
+149 U Erica Ortegas, Plucky Pilot @Romana Kendelic
+150 U Exploratory Mission @Jason Pastrana
 152 C Horta @Arthur Haas
+153 M Infinite Diversity @Julie Dillon
 154 U Khaaaaaaaaaaaannn! @Evan Shipard
 156 U La'An Noonien-Singh, Security @Pauline Voss
+157 R Lwaxana Troi, Charming Guest @Marta Nael
 158 U Munitions Enthusiast @Lucio Parrillo
 161 C Perils of the Past @Zoltan Boros
 163 C Planetary Patrol @Runa I. Rosenberger
@@ -115,7 +122,9 @@ ScryfallCode=TRK
 172 C Silicate Surveyor @Joan Piqué Llorens
 180 R Worf, Intelligence Contractor @Jodie Muir
 181 R The Wrath of Khan @Kirk DouPonce
+182 U Adversary by Algorithm @Tony Foti
 183 U Amok Time @Jason Raish
+185 R Branching Timeline @Borja Pindado
 186 R Captain Jonathan Archer @Julia Metzger
 187 M Captain Kathryn Janeway @Jason Pastrana
 188 R Captain Pike, Fullness of Time @Joel Chaim Holtzman
@@ -127,6 +136,7 @@ ScryfallCode=TRK
 199 C First Contact @Kieran Yanner
 202 U Hologram Stalker @Hector Ortiz
 203 C I'm a Doctor, Not a . . . @Joel Chaim Holtzman
+204 M Jadzia Dax, Living Legacy @John Tyler Christopher
 205 U Jake Sisko, War Correspondent @Ariel Orea
 207 C Moopsy @Brooklyn Smith
 208 U Mugato @Chuck Lukacs
@@ -240,6 +250,7 @@ ScryfallCode=TRK
 347 M Quark, Humble Proprietor @Marija Tiurina
 348 U Constable Odo @Marija Tiurina
 350 R Quark's Bar @Marija Tiurina
+352 M Jadzia Dax, Living Legacy @Marija Tiurina
 353 M Mr. Spock, Science Officer @Mark Spears
 354 R Mirror Universe Intrusion @Mark Spears
 355 U Kirk, Commanding Officer @Mark Spears
@@ -311,10 +322,12 @@ ScryfallCode=TRK
 446 R Antagonist Incorporator @Miklós Ligeti
 448 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
 452 R Romulan Bird-of-Prey @Edouard
+453 R Subcommander T'Pol @Kieran Yanner
 456 R Elim Garak, Simple Tailor @Alexander Gering
 457 M Georgiou, Terran Emperor @Julia Metzger
 461 R U.S.S. Reliant, From Hell's Heart @Dofresh
 463 R D-7 Battle Cruiser @Kevin Glint
+466 R Branching Timeline @Borja Pindado
 467 R Captain Jonathan Archer @Julia Metzger
 468 R Captain Pike, Fullness of Time @Joel Chaim Holtzman
 469 M Dr. Joseph M'Benga @Romana Kendelic
