@@ -114,6 +114,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         pnlStart.add(gamesInMatchFrame, "cell 1 0, alignx center, aligny top");
 
         pnlStart.add(btnStart, "cell 1 2, alignx center, aligny bottom");
+        gamesInMatchBinder.bind();                          // loads stored pref, then listens
     }
 
     /* (non-Javadoc)

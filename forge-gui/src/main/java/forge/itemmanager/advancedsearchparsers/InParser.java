@@ -1,9 +1,12 @@
 package forge.itemmanager.advancedsearchparsers;
 
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardEdition.EditionEntry;
 import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
@@ -15,24 +18,20 @@ public abstract class InParser {
      * @return Predicate
      */
     public static Predicate<PaperCard> handle(String tokenValue) {
-        Predicate<PaperCard> predicate = null;
         CardRarity rarity = RarityParser.ParseRarityFromStr(tokenValue);
-
-        if (rarity == null) {
-             // Not a rarity. Assume it is a set
-            predicate = c -> {
-                    CardEdition e = StaticData.instance().getEditions().get(tokenValue);
-                    
-                    if (e == null) {
-                        return false;
-                    }
-
-                    return e.isCardObtainable(c.getName());
-                };
-        } else {
-            predicate = PaperCardPredicates.printedWithRarity(rarity);
+        if (rarity != null) {
+            return PaperCardPredicates.printedWithRarity(rarity);
         }
-        
-        return predicate;
+
+        CardEdition edition = StaticData.instance().getEditions().get(tokenValue);
+        if (edition == null) {
+            return card -> false;
+        }
+
+        Set<String> obtainableNames = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        for (EditionEntry entry : edition.getObtainableCards()) {
+            obtainableNames.add(entry.name());
+        }
+        return card -> obtainableNames.contains(card.getName());
     }
 }

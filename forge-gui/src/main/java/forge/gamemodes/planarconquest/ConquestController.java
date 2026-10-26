@@ -43,13 +43,16 @@ import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
+import forge.util.collect.FCollectionView;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ConquestController {
     private ConquestData model;
@@ -187,6 +190,30 @@ public class ConquestController {
 
         activeBattle.onFinished(model, view);
         activeBattle = null;
+    }
+
+    /** Returns null unless this is the event's first win and it completes the region. */
+    public ConquestReward awardRegionCommander(ConquestLocation loc) {
+        ConquestPlaneData planeData = model.getCurrentPlaneData();
+        if (planeData.getEventRecord(loc).getTotalWins() != 1 || !planeData.hasConqueredRegion(loc.getRegionIndex())) {
+            return null;
+        }
+
+        // The plane keeps one printing of each commander, but boosters can unlock any printing
+        Set<String> owned = new HashSet<>();
+        model.getUnlockedCards().forEach(c -> owned.add(c.getName()));
+        FCollectionView<PaperCard> pool = loc.getRegion().getCommanders();
+        List<PaperCard> locked = pool.stream().filter(c -> !owned.contains(c.getName())).collect(Collectors.toList());
+        PaperCard commander = Aggregates.random(locked.isEmpty() ? pool : locked);
+        if (commander == null) { return null; }
+
+        if (locked.isEmpty()) {
+            int shards = ConquestUtil.getShardValue(commander, CQPref.AETHER_BASE_DUPLICATE_VALUE);
+            model.rewardAEtherShards(shards);
+            return new ConquestReward(commander, shards);
+        }
+        model.unlockCard(commander);
+        return new ConquestReward(commander, 0);
     }
 
     public List<ConquestReward> awardBooster(ConquestAwardPool pool) {

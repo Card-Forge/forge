@@ -321,6 +321,7 @@ public class VLobby implements ILobbyView {
         gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
+        gamesInMatchBinder.bind();                          // loads stored pref, then listens
     }
 
     private void addConstructedStartControls() {

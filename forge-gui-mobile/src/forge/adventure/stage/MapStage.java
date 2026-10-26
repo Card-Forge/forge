@@ -26,6 +26,7 @@ import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
@@ -746,12 +747,10 @@ public class MapStage extends GameStage {
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         shopsAlreadyPresent.add(data.name);
-                        Array<Reward> ret = new Array<>();
-                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false, false));
-                        }
-                        ShopActor actor = new ShopActor(this, id, ret, data);
+                        //Make sure the seed exists now (it is created from the world random the first time), but don't
+                        //generate the shop's cards until the player actually opens it. See ShopActor.getRewardData.
+                        changes.getShopSeed(id);
+                        ShopActor actor = new ShopActor(this, id, data, changes);
                         addMapActor(obj, actor);
                         if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
@@ -789,8 +788,8 @@ public class MapStage extends GameStage {
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
         if (mustClearOnExit) {
             mustClearOnExit = false;
-
-            this.resetMapRecursive(AdventureQuestController.instance().mostRecentPOI.getData().map, new HashSet<>());
+            PointOfInterest poi = AdventureQuestController.instance().mostRecentPOI;
+            PointOfInterestChanges.resetDeletedObjectsRecursive(poi.getID(), poi.getData().map);
         }
 
         AdventureQuestController.instance().updateQuestsLeave();
@@ -806,48 +805,6 @@ public class MapStage extends GameStage {
         isPlayerLeavingDungeon = false;
         dialogOnlyInput = false;
         return true;
-    }
-
-    /**
-     * Recursively clears map objects for the current map and all connected maps to reset the state of the dungeon when exiting from it.
-     * @param currentMap The filename of the map to clear and check for connected maps from.
-     * @param clearedMaps A set of maps that have already been cleared to avoid infinite recursion from circular connections between maps.
-     */
-    private void resetMapRecursive(String currentMap, HashSet<String> clearedMaps) {
-        if (clearedMaps.contains(currentMap)) {
-            return;
-        }
-
-        clearedMaps.add(currentMap);
-
-        // Clear the current map's deleted objects.
-        TileMapScene.instance().getPointOfInterestChanges(currentMap).clearDeletedObjects();
-        
-        TiledMap currentTiledMap = loadMapFile(currentMap);
-        
-        for (MapLayer layer : currentTiledMap.getLayers()) {
-            if (layer.getProperties().containsKey("spriteLayer") || layer instanceof TiledMapTileLayer) {
-                continue;
-            }
-            
-            // Attemps to find connected maps through "entry" type MapObjects and recursively clear them as well.
-            for (MapObject obj : layer.getObjects()) {
-                MapProperties prop = obj.getProperties();
-                String type = prop.get("type", String.class);
-                
-                if (type != null && type.equals("entry")) {
-                    String targetMap = prop.containsKey("teleport") ? prop.get("teleport").toString() : "";
-                    
-                    if (targetMap != null && !targetMap.isEmpty()) {
-                        resetMapRecursive(targetMap, clearedMaps);
-                    }
-                }
-            }
-        }
-    }
-
-    private TiledMap loadMapFile(String mapName) {
-        return new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(mapName));
     }
 
     @Override

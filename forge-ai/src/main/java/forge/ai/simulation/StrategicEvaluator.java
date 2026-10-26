@@ -60,10 +60,37 @@ final class StrategicEvaluator {
             adj += handTerm(simAi);
             adj += answerTerm(simAi);
             adj += threatQualityTerm(simAi);
+            adj += planTerm(simAi, cfg.plan);
         } catch (final RuntimeException e) {
             return 0; // a refinement only: never let it break a rollout
         }
         return (int) Math.round(adj * (cfg.strategicWeightPercent / 100.0));
+    }
+
+    /**
+     * What the deck is for (see {@link DeckPlan}): damage dealt to the opponent counts more for an aggro or burn deck,
+     * the AI's own life more for a control deck, and a ramp deck values the lands and mana creatures it has beyond four.
+     */
+    private static int planTerm(final Player simAi, final DeckPlan plan) {
+        if (plan == null || plan == DeckPlan.NONE) {
+            return 0;
+        }
+        int adj = 0;
+        final Player opp = simAi.getWeakestOpponent();
+        if (opp != null) {
+            adj += plan.opponentLifeExtra * Math.max(0, Math.min(20, 20 - opp.getLife()));
+        }
+        adj -= plan.ownLifeExtra * Math.max(0, Math.min(20, 20 - simAi.getLife()));
+        if (plan.manaDevelopmentExtra > 0) {
+            int sources = 0;
+            for (final Card c : simAi.getCardsIn(ZoneType.Battlefield)) {
+                if (c.isLand() || !c.getManaAbilities().isEmpty()) {
+                    sources++;
+                }
+            }
+            adj += plan.manaDevelopmentExtra * Math.max(0, Math.min(4, sources - 4));
+        }
+        return adj;
     }
 
     /** What the card would be worth if it were deployed, by the same rules of thumb as the board evaluator. */

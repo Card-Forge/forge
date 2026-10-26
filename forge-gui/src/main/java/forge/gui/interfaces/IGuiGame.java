@@ -282,9 +282,6 @@ public interface IGuiGame {
     default boolean canPickStackTargets() { return false; }
     boolean isSelecting();
 
-    void setWeaklySelectable(final Iterable<CardView> cards);
-    void clearWeaklySelectable();
-
     /**
      * Cards revealed to the player for the current prompt, until {@link #hideRevealedCards()}; the GUI chooses how
      * to display them. Unrelated to {@link #updateRevealedCards}, which records the match's reveal history.

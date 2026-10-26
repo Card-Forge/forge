@@ -144,4 +144,43 @@ public class DeckManaBaseTest extends AITest {
         add(deck, "Lightning Bolt", 4);
         AssertJUnit.assertEquals(0, DeckManaBase.uncastable(deck.getMain()).size());
     }
+
+    /** The ramp deck seen in play: Urza lands, Karn, Ancient Stirrings, and Chromatic Star/Sphere that the AI never casts. */
+    private Deck rampWithCardsTheAiNeverPlays() {
+        initAndCreateGame();
+        final Deck deck = new Deck("ramp");
+        add(deck, "Urza's Mine", 4);
+        add(deck, "Urza's Tower", 4);
+        add(deck, "Urza's Power Plant", 4);
+        add(deck, "Forest", 6);
+        add(deck, "Chromatic Star", 4);
+        add(deck, "Chromatic Sphere", 3);
+        add(deck, "Ancient Stirrings", 4);
+        add(deck, "Karn Liberated", 2);
+        add(deck, "Wurmcoil Engine", 4);
+        add(deck, "Mind Stone", 4);
+        add(deck, "Wayfarer's Bauble", 4);
+        add(deck, "Oblivion Stone", 3);
+        return deck;
+    }
+
+    @Test
+    public void cardsTheAiNeverPlaysAreCountedAsDead() {
+        final Deck deck = rampWithCardsTheAiNeverPlays();
+        final List<String> dead = DeckManaBase.uncastable(deck.getMain()).stream().map(PaperCard::getName).collect(Collectors.toList());
+        AssertJUnit.assertTrue(dead.toString(), dead.contains("Chromatic Star"));
+        AssertJUnit.assertTrue(dead.toString(), dead.contains("Chromatic Sphere"));
+        AssertJUnit.assertFalse("Mind Stone is a normal card for the AI: " + dead, dead.contains("Mind Stone"));
+    }
+
+    @Test
+    public void fixSwapsThemForCardsTheAiPlaysAndKeepsTheSize() {
+        final Deck deck = rampWithCardsTheAiNeverPlays();
+        final int size = deck.getMain().countAll();
+        DeckManaBase.fix(deck);
+        AssertJUnit.assertEquals(size, deck.getMain().countAll());
+        AssertJUnit.assertEquals(0, deck.getMain().count(card("Chromatic Star")));
+        AssertJUnit.assertEquals(0, deck.getMain().count(card("Chromatic Sphere")));
+        AssertJUnit.assertTrue("nothing the AI cannot play is left", DeckManaBase.uncastable(deck.getMain()).isEmpty());
+    }
 }

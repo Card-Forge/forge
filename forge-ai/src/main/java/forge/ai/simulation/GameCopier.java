@@ -7,6 +7,7 @@ import forge.ai.LobbyPlayerAi;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
+import forge.card.CardStateName;
 import forge.game.*;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
@@ -30,6 +31,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -104,6 +106,7 @@ public class GameCopier {
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
             newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
+            newPlayer.setDilemmasFacedThisTurn(origPlayer.getDilemmasFacedThisTurn());
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
@@ -202,7 +205,14 @@ public class GameCopier {
     }
 
     private void copyStack(Game origGame, Game newGame, IEntityMap map) {
+        // The stack is listed from the top; copy it from the bottom up, because a spell that targets another spell
+        // (a counterspell) can only be pointed at the copy of that spell once the copy exists.
+        final List<SpellAbilityStackInstance> entries = new ArrayList<>();
         for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
+            entries.add(origEntry);
+        }
+        Collections.reverse(entries);
+        for (SpellAbilityStackInstance origEntry : entries) {
             SpellAbility origSa = origEntry.getSpellAbility();
             Card origHostCard = origSa.getHostCard();
             Card newCard = map.map(origHostCard);
@@ -213,8 +223,15 @@ public class GameCopier {
             if (newSa != null) {
                 newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
-                    for (GameObject o : origSa.getTargets()) {
-                        newSa.getTargets().add(map.map(o));
+                    try {
+                        for (GameObject o : origSa.getTargets()) {
+                            newSa.getTargets().add(map.map(o));
+                        }
+                    } catch (final RuntimeException e) {
+                        // a target that is not in the copy (it left the game meanwhile): leave this entry out rather
+                        // than lose the whole copy
+                        newSa.resetTargets();
+                        continue;
                     }
                 }
                 newGame.getStack().add(newSa);
@@ -352,6 +369,15 @@ public class GameCopier {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner, c.getId());
             new CardCopyService(c).copyCopiableCharacteristics(result, null, null);
+            // a token copy of a transforming (or otherwise multi-faced) permanent has its other faces too, and may be
+            // showing one of them: without them it cannot be put back in the state it is in
+            for (final CardStateName state : c.getStates()) {
+                if (!result.hasState(state)) {
+                    result.addAlternateState(state, false);
+                    result.getState(state).copyFrom(c.getState(state), false);
+                }
+            }
+            result.setBackSide(c.isBackSide());
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {

@@ -136,6 +136,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_COMPACT_ZONE_TABS ("true"),
         UI_COMPACT_HIDE_MENU ("false"),
         UI_UNIFIED_PHASE_LABEL ("true"),
+        UI_COMPACT_DOUBLE_TABS ("true"),
         YIELD_INTERRUPT_ON_ATTACKERS ("true"),
         YIELD_INTERRUPT_ON_OPPONENT_SPELL ("true"),
         YIELD_INTERRUPT_ON_TARGETING ("false"),

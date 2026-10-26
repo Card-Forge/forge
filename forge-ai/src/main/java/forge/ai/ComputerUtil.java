@@ -123,6 +123,7 @@ public class ComputerUtil {
         // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
+        final boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack(sa);
 
         final CostPayment pay = new CostPayment(cost, sa);
@@ -135,6 +136,9 @@ public class ComputerUtil {
         }
         // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        if (!refreeze) {
+            game.getStack().unfreezeStack();
+        }
         sa.setSkip(true);
         if (host != null && hz != null && hz.is(ZoneType.Stack)) {
             Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
@@ -3210,6 +3214,60 @@ public class ComputerUtil {
         return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
                 List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
+    /**
+     * The combat the opponent could attack with at the next opportunity and how the AI would block it, or null when
+     * the opponent has nothing that can attack.
+     */
+    private static Combat predictNextCombat(Player ai, Player opp, final CardCollection excludedBlockers) {
+        Combat combat = new Combat(opp);
+        boolean containsAttacker = false;
+        boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
+
+        // TODO !thisCombat should include cards that will phase in
+        for (Card att : opp.getCreaturesInPlay()) {
+            // TODO should be limited based on how much getAttackCost the opp can pay
+            if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
+                // TODO need to copy the card
+                // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
+                combat.addAttacker(att, ai);
+                containsAttacker = true;
+            }
+        }
+        if (!containsAttacker) {
+            return null;
+        }
+        // TODO if it's next turn ignore mustBlockCards
+        AiBlockController block = new AiBlockController(ai, false);
+        // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
+        block.assignBlockersForCombat(combat, excludedBlockers);
+        return combat;
+    }
+
+    /**
+     * How threatened the AI's life is by the opponents' next attacks, both questions answered from one blocking
+     * prediction (asking them one after the other builds and blocks the same combat twice):
+     * 2 = in serious danger (would lose), 1 = in danger, 0 = neither.
+     */
+    public static int predictNextCombatsDanger(Player ai, final List<Player> opps) {
+        if (ai.cantLose()) {
+            return 0;
+        }
+        int level = 0;
+        for (Player opp : opps) {
+            final Combat combat = predictNextCombat(ai, opp, null);
+            if (combat == null) {
+                continue;
+            }
+            if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, 0)) {
+                return 2;
+            }
+            if (level == 0 && ComputerUtilCombat.lifeInDanger(ai, combat, 0)) {
+                level = 1;
+            }
+        }
+        return level;
+    }
+
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
@@ -3226,31 +3284,10 @@ public class ComputerUtil {
         // TODO should also consider them as teams (with increased likelihood to be attacked by multiple if ai is biggest threat)
         // TODO worth it to sort by creature amount for chance to terminate earlier?
         for (Player opp: opps) {
-            Combat combat = new Combat(opp);
-            boolean containsAttacker = false;
-            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
-
-            // TODO !thisCombat should include cards that will phase in
-            for (Card att : opp.getCreaturesInPlay()) {
-                // TODO should be limited based on how much getAttackCost the opp can pay
-                if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
-                    // TODO need to copy the card
-                    // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
-                    combat.addAttacker(att, ai);
-                    containsAttacker = true;
-                }
-            }
-            if (!containsAttacker) {
+            final Combat combat = predictNextCombat(ai, opp, excludedBlockers);
+            if (combat == null) {
                 continue;
             }
-            // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
-            // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
-            block.assignBlockersForCombat(combat, excludedBlockers);
-
-            // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
-            // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
-            // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
             if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;

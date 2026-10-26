@@ -25,7 +25,8 @@ import java.util.regex.Pattern;
  * Colours come from the lands (including fetch lands, for the basic land types that really are in the deck) and from
  * mana creatures and rocks. A spell whose colours are not all available is uncastable. A colour that several spells
  * need becomes a real colour of the deck (basic lands of it are added in place of the most plentiful basics), otherwise
- * the few spells are swapped out for more of what the deck can cast.
+ * the few spells are swapped out for more of what the deck can cast. Cards the AI is scripted never to play
+ * ({@code AI:RemoveDeck:All}) count as uncastable too.
  */
 public final class DeckManaBase {
     private DeckManaBase() { }
@@ -88,7 +89,7 @@ public final class DeckManaBase {
                     continue;
                 }
                 final byte produced = producedColors(rules);
-                if ((produced & ~colors) != 0 && rules.canCastWithAvailable(colors)) {
+                if ((produced & ~colors) != 0 && !isUnplayableByAi(rules) && rules.canCastWithAvailable(colors)) {
                     colors |= produced;
                     grew = true;
                 }
@@ -103,7 +104,7 @@ public final class DeckManaBase {
         final List<PaperCard> result = new ArrayList<>();
         for (final Map.Entry<PaperCard, Integer> e : main) {
             final CardRules rules = e.getKey().getRules();
-            if (!rules.getType().isLand() && !rules.canCastWithAvailable(available)) {
+            if (!rules.getType().isLand() && (isUnplayableByAi(rules) || !rules.canCastWithAvailable(available))) {
                 result.add(e.getKey());
             }
         }
@@ -125,6 +126,9 @@ public final class DeckManaBase {
             final byte available = availableColors(main);
             final int[] needed = new int[5];
             for (final PaperCard card : uncastable(main)) {
+                if (isUnplayableByAi(card.getRules())) {
+                    continue; // no lands will help: the AI never plays it
+                }
                 final byte missing = (byte) (card.getRules().getManaCost().getColorProfile() & ~available);
                 for (int i = 0; i < 5; i++) {
                     if ((missing & (1 << i)) != 0) {
@@ -171,6 +175,15 @@ public final class DeckManaBase {
     }
 
     // ------------------------------------------------------------------------------------------------ helpers
+
+    /**
+     * Cards scripted with {@code AI:RemoveDeck:All} are ones the AI does not know how to play: its play loop drops them
+     * from the options (Chromatic Star and Sphere, which need their mana ability used with a cost of its own, are such
+     * cards), so a copy in an AI deck is a dead card for the whole game.
+     */
+    static boolean isUnplayableByAi(final CardRules rules) {
+        return rules.getAiHints().getRemAIDecks();
+    }
 
     private static boolean isFetchLand(final CardRules rules) {
         final String text = rules.getMainPart().getOracleText();
@@ -288,7 +301,7 @@ public final class DeckManaBase {
         int bestCount = 0;
         for (final Map.Entry<PaperCard, Integer> e : main) {
             final CardRules rules = e.getKey().getRules();
-            if (rules.getType().isLand() || !rules.canCastWithAvailable(available)) {
+            if (rules.getType().isLand() || isUnplayableByAi(rules) || !rules.canCastWithAvailable(available)) {
                 continue;
             }
             final int count = main.countByName(e.getKey());

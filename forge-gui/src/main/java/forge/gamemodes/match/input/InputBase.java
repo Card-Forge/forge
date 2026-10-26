@@ -78,7 +78,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = false;
         controller.cancelAwaitNextInput();
         showMessage();
-        showSelection();
+        // showMessage can finish the input, which has already reset the selection
+        if (!isFinished()) {
+            showSelection();
+        }
     }
 
     protected abstract void showMessage();
@@ -88,9 +91,14 @@ public abstract class InputBase implements java.io.Serializable, Input {
         return Selection.NONE;
     }
 
+    /** The cards this prompt highlights as worth acting on. */
+    protected List<CardView> getActionable() {
+        return List.of();
+    }
+
     /** Sends this prompt's marks, with the targets kept marked while a spell's cost is paid. */
     protected final void showSelection() {
-        controller.getGui().setSelection(getSelection().withChosen(controller.getKeptMarks()));
+        controller.getGui().setSelection(getSelection().withChosen(controller.getKeptMarks()).withActionable(getActionable()));
     }
 
     @Override

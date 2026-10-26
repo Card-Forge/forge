@@ -635,7 +635,8 @@ public class AiController {
                             return land;
                         }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            if (m.canProduce(color.getShortName())) {
+                            // before the first land drop there is usually nothing to pay for a filter
+                            if (!m.getPayCosts().hasManaCost() && m.canProduce(color.getShortName())) {
                                 return land;
                             }
                         }
@@ -1364,7 +1365,65 @@ public class AiController {
         }
     }
 
+    /** In a simulated game: the attack to declare instead of asking the heuristics (set by a rollout, used once). */
+    private java.util.Map<Card, GameEntity> attackOverride;
+
+    public void setAttackOverride(final java.util.Map<Card, GameEntity> attackers) {
+        attackOverride = attackers;
+    }
+
+    private void declareOverriddenAttackers(final Combat combat) {
+        final java.util.Map<Card, GameEntity> attackers = attackOverride;
+        attackOverride = null;
+        for (final java.util.Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
+    /**
+     * Monte Carlo for the attack: only on the AI's own declaration in the real game, with the heuristics' attack
+     * already in {@code combat}. Replaces it by another attack set when rollouts clearly prefer one.
+     */
+    private void refineAttackWithFlatMonteCarlo(final Player attacker, final Combat combat) {
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || simMode != null
+                || !getBoolProperty(AiProps.FLAT_MC_ENABLED)
+                || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax())
+                || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return;
+        }
+        final FlatMonteCarloPicker.Config cfg = flatMonteCarloConfig();
+        if (cfg == null) {
+            return;
+        }
+        final java.util.Map<Card, GameEntity> before = new java.util.LinkedHashMap<>();
+        for (final Card c : combat.getAttackers()) {
+            before.put(c, combat.getDefenderByAttacker(c));
+        }
+        final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.chooseAttack(player, combat, cfg);
+        lastFlatMcResult = result;
+        FlatMonteCarloStats.record(result);
+        flatMcTurnSpentNanos += result.elapsedNanos;
+        noteFlatMcOutcome(result.reason);
+        final boolean changed = result.decidedByRollouts && result.attackers != null && !result.attackers.equals(before);
+        FlatMonteCarloStats.noteAttackResult(result, changed);
+        if (!changed) {
+            return;
+        }
+        combat.clearAttackers();
+        for (final java.util.Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
     public void declareAttackers(Player attacker, Combat combat) {
+        if (attackOverride != null) {
+            declareOverriddenAttackers(combat);
+            return;
+        }
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         final AiAttackController aiAtk = new AiAttackController(attacker);
         final long id = AITimeoutTracker.key(game.getId(), player.getId());
@@ -1376,6 +1435,7 @@ public class AiController {
             lastAttackAggression = aiAtk.declareAttackers(combat);
 
             aiAtk.reinforceWithBanding(combat);
+            refineAttackWithFlatMonteCarlo(attacker, combat);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: attack with what was decided so far; the validity check below repairs an illegal declaration
         } finally {
@@ -1949,6 +2009,21 @@ public class AiController {
                 && !FlatMonteCarloPicker.isHoldPossible(player)) {
             return approved.get(0); // nothing to compare
         }
+        // What the heuristics aimed each approved play at, noted before the rollouts: asking the heuristics again
+        // (as the rollouts do to check a line is still approved) clears the targets of a play they turn down on the
+        // dice, and the aim they gave it a moment ago is then the only record of where the play was meant to go.
+        final Map<SpellAbility, GameEntity> approvedAim = new HashMap<>();
+        for (final SpellAbility sa : approved) {
+            if (sa.usesTargeting() && sa.getTargets() != null) {
+                final List<GameEntity> aimed = new ArrayList<>();
+                for (final GameEntity e : sa.getTargets().getTargetEntities()) {
+                    aimed.add(e);
+                }
+                if (aimed.size() == 1) {
+                    approvedAim.put(sa, aimed.get(0));
+                }
+            }
+        }
         final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, extras, cfg,
                 sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay, mode);
         lastFlatMcResult = result;
@@ -1980,7 +2055,10 @@ public class AiController {
             // What the heuristics aimed at when they approved the play: a refusal below clears the targets again.
             GameEntity approvedTarget = null;
             int approvedTargets = 0;
-            if (sa == result.choice && sa.usesTargeting() && sa.getTargets() != null) {
+            if (sa == result.choice && sa.usesTargeting() && approvedAim.containsKey(sa)) {
+                approvedTarget = approvedAim.get(sa);
+                approvedTargets = 1;
+            } else if (sa == result.choice && sa.usesTargeting() && sa.getTargets() != null) {
                 for (final GameEntity e : sa.getTargets().getTargetEntities()) {
                     approvedTarget = e;
                     approvedTargets++;
@@ -2013,6 +2091,24 @@ public class AiController {
         flatMcOverride = enabled;
     }
 
+    private Boolean flatMcAttackOverride;
+
+    /** Mulligans and bottoms cards by the deck plan: asked for in the profile, or part of maximum strength. */
+    public boolean useSmartMulligan() {
+        return getBoolProperty(AiProps.FLAT_MC_MULLIGAN)
+                || isFlatMonteCarloMax() && (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo());
+    }
+
+    /** Maximum strength (desktop matches): the attack search and broad discovery are part of it. */
+    private boolean isFlatMonteCarloMax() {
+        return flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax();
+    }
+
+    /** Forces the attack search on or off for this player; null follows the profile (FLAT_MC_ATTACK). */
+    public void setFlatMonteCarloAttackOverride(final Boolean enabled) {
+        flatMcAttackOverride = enabled;
+    }
+
     /** Forces maximum strength on or off for this player; null follows the game (on for desktop matches). */
     public void setFlatMonteCarloMaxOverride(final Boolean enabled) {
         flatMcMaxOverride = enabled;
@@ -2032,6 +2128,19 @@ public class AiController {
         }
     }
 
+    private forge.ai.simulation.DeckPlan flatMcDeckPlan;
+
+    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
+    public forge.ai.simulation.DeckPlan deckPlan(final Player p) {
+        if (flatMcDeckPlan == null) {
+            flatMcDeckPlan = forge.ai.simulation.DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
+            if (flatMcDeckPlan != forge.ai.simulation.DeckPlan.NONE) {
+                forge.ai.simulation.FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
+            }
+        }
+        return flatMcDeckPlan;
+    }
+
     /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
     public boolean isFlatMonteCarloTripped() {
         return flatMcTripped;
@@ -2049,7 +2158,7 @@ public class AiController {
             default:
                 break;
         }
-        if (!FlatMonteCarloPicker.isDiscoverable(sa)) {
+        if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())) {
             return false;
         }
         try {
