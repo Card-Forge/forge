@@ -747,12 +747,10 @@ public class MapStage extends GameStage {
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         shopsAlreadyPresent.add(data.name);
-                        Array<Reward> ret = new Array<>();
-                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false, false));
-                        }
-                        ShopActor actor = new ShopActor(this, id, ret, data);
+                        //Make sure the seed exists now (it is created from the world random the first time), but don't
+                        //generate the shop's cards until the player actually opens it. See ShopActor.getRewardData.
+                        changes.getShopSeed(id);
+                        ShopActor actor = new ShopActor(this, id, data, changes);
                         addMapActor(obj, actor);
                         if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
