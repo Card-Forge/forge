@@ -898,6 +898,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public Stream<ReplacementEffect> streamReplacementEffects() {
         Stream<ReplacementEffect> result = getReplacementEffects().stream();
 
+        if (!hasRuleReplacementEffects()) {
+            return result;
+        }
+
         Stream.Builder<ReplacementEffect> sb = Stream.builder();
 
         // below are global rules

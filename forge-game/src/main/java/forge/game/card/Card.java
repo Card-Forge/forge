@@ -7174,6 +7174,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public Stream<ReplacementEffect> streamReplacementEffects() {
         Stream<ReplacementEffect> result = currentState.streamReplacementEffects();
 
+        if (!hasCounterReplacementEffects()) {
+            return result;
+        }
+
         Stream.Builder<ReplacementEffect> sb = Stream.builder();
 
         // Shield Counter aren't affected by Changed Card Traits
@@ -7244,6 +7248,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (currentState.hasRuleReplacementEffects()) {
             return true;
         }
+        return hasCounterReplacementEffects();
+    }
+
+    public boolean hasCounterReplacementEffects() {
         return getCounters(CounterEnumType.SHIELD) > 0 || getCounters(CounterEnumType.STUN) > 0
                 || getCounters(CounterEnumType.FINALITY) > 0;
     }
