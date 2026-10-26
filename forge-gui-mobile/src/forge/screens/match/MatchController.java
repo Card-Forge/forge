@@ -276,8 +276,14 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
+        updateButtons(owner, label1, label2, enable1, enable2, focus1, false);
+    }
+
+    @Override
+    public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1, final boolean undoAvailable) {
         final VPrompt prompt = view.getPrompt(owner);
         final FButton btn1 = prompt.getBtnOk(), btn2 = prompt.getBtnCancel();
+        prompt.setUndoAvailable(undoAvailable);
         btn1.setText(label1);
         btn2.setText(label2);
         btn1.setEnabled(enable1);
@@ -599,6 +605,14 @@ public class MatchController extends NetworkGuiGame {
             Gdx.graphics.requestRendering();
         });
         if (prev.cards().equals(selection.cards())) {
+            if (!prev.actionable().equals(selection.actionable())) {
+                FThreads.invokeInEdtNowOrLater(() -> {
+                    for (final PlayerView p : getGameView().getPlayers()) {
+                        updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
+                        updateCardsNetSafe(p.getCards(ZoneType.Hand));
+                    }
+                });
+            }
             return;
         }
         if (selection.cards().isEmpty()) {
@@ -646,28 +660,6 @@ public class MatchController extends NetworkGuiGame {
             if (selectionZonesBackup != null) {
                 restoreOldZones(selectionZonesBackup);
                 selectionZonesBackup = null;
-            }
-        });
-    }
-
-    @Override
-    public void setWeaklySelectable(final Iterable<CardView> cards) {
-        super.setWeaklySelectable(cards);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
-            }
-        });
-    }
-
-    @Override
-    public void clearWeaklySelectable() {
-        super.clearWeaklySelectable();
-        FThreads.invokeInEdtNowOrLater(() -> {
-            for (final PlayerView p : getGameView().getPlayers()) {
-                updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
-                updateCardsNetSafe(p.getCards(ZoneType.Hand));
             }
         });
     }

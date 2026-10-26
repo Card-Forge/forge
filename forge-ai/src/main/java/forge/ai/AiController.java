@@ -23,6 +23,9 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.simulation.FlatMonteCarloPicker;
+import forge.ai.simulation.SimAudit;
+import forge.ai.simulation.FlatMonteCarloStats;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -45,6 +48,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -97,6 +101,17 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
+    // flat Monte Carlo bookkeeping: time spent on rollouts during one turn, to keep slow devices responsive
+    private int flatMcTurn = -1;
+    private long flatMcTurnSpentNanos;
+    private FlatMonteCarloPicker.Result lastFlatMcResult;
+    /** Circuit breaker: Monte Carlo switches itself off for this player after repeated errors or hopeless slowness. */
+    private int flatMcErrors;
+    private int flatMcSlowStreak;
+    private boolean flatMcTripped;
+    /** Per player switch for comparisons and tests: null follows the game-wide setting. */
+    private Boolean flatMcOverride;
+    private Boolean flatMcMaxOverride;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -620,7 +635,8 @@ public class AiController {
                             return land;
                         }
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
-                            if (m.canProduce(color.getShortName())) {
+                            // before the first land drop there is usually nothing to pay for a filter
+                            if (!m.getPayCosts().hasManaCost() && m.canProduce(color.getShortName())) {
                                 return land;
                             }
                         }
@@ -1349,7 +1365,65 @@ public class AiController {
         }
     }
 
+    /** In a simulated game: the attack to declare instead of asking the heuristics (set by a rollout, used once). */
+    private java.util.Map<Card, GameEntity> attackOverride;
+
+    public void setAttackOverride(final java.util.Map<Card, GameEntity> attackers) {
+        attackOverride = attackers;
+    }
+
+    private void declareOverriddenAttackers(final Combat combat) {
+        final java.util.Map<Card, GameEntity> attackers = attackOverride;
+        attackOverride = null;
+        for (final java.util.Map.Entry<Card, GameEntity> e : attackers.entrySet()) {
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
+    /**
+     * Monte Carlo for the attack: only on the AI's own declaration in the real game, with the heuristics' attack
+     * already in {@code combat}. Replaces it by another attack set when rollouts clearly prefer one.
+     */
+    private void refineAttackWithFlatMonteCarlo(final Player attacker, final Combat combat) {
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || simMode != null
+                || !getBoolProperty(AiProps.FLAT_MC_ENABLED)
+                || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax())
+                || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return;
+        }
+        final FlatMonteCarloPicker.Config cfg = flatMonteCarloConfig();
+        if (cfg == null) {
+            return;
+        }
+        final java.util.Map<Card, GameEntity> before = new java.util.LinkedHashMap<>();
+        for (final Card c : combat.getAttackers()) {
+            before.put(c, combat.getDefenderByAttacker(c));
+        }
+        final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.chooseAttack(player, combat, cfg);
+        lastFlatMcResult = result;
+        FlatMonteCarloStats.record(result);
+        flatMcTurnSpentNanos += result.elapsedNanos;
+        noteFlatMcOutcome(result.reason);
+        final boolean changed = result.decidedByRollouts && result.attackers != null && !result.attackers.equals(before);
+        FlatMonteCarloStats.noteAttackResult(result, changed);
+        if (!changed) {
+            return;
+        }
+        combat.clearAttackers();
+        for (final java.util.Map.Entry<Card, GameEntity> e : result.attackers.entrySet()) {
+            if (CombatUtil.canAttack(e.getKey(), e.getValue())) {
+                combat.addAttacker(e.getKey(), e.getValue());
+            }
+        }
+    }
+
     public void declareAttackers(Player attacker, Combat combat) {
+        if (attackOverride != null) {
+            declareOverriddenAttackers(combat);
+            return;
+        }
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         final AiAttackController aiAtk = new AiAttackController(attacker);
         final long id = AITimeoutTracker.key(game.getId(), player.getId());
@@ -1361,6 +1435,7 @@ public class AiController {
             lastAttackAggression = aiAtk.declareAttackers(combat);
 
             aiAtk.reinforceWithBanding(combat);
+            refineAttackWithFlatMonteCarlo(attacker, combat);
         } catch (AITimeoutTracker.Expired e) {
             // out of time: attack with what was decided so far; the validity check below repairs an illegal declaration
         } finally {
@@ -1422,13 +1497,79 @@ public class AiController {
         AITimeoutTracker.begin(id, timeoutNanos);
         final Object limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
         try {
-            return chooseSpellAbilityToPlayImpl();
+            if (SimAudit.ENABLED) {
+                SimAudit.checkpoint(game, player);
+            }
+            final List<SpellAbility> chosen = chooseSpellAbilityToPlayImpl();
+            if (SimAudit.ENABLED) {
+                SimAudit.afterChoice(game, player, chosen);
+            }
+            return chosen;
         } catch (AITimeoutTracker.Expired e) {
             return null; // out of time: pass priority
         } finally {
             AITimeoutTracker.disarm(limit);
             AITimeoutTracker.end(id);
         }
+    }
+
+    /**
+     * Which land to play, decided by rollouts when there is a real choice (two or more different lands in hand that
+     * can be played): an untapped land when something can be cast with it this turn, a tapped one when the turn has
+     * no use for the mana, the colour the hand needs. The heuristic land stays the default and needs a clear margin to
+     * be replaced.
+     */
+    private List<SpellAbility> refineLandChoice(final CardCollection playable, final List<SpellAbility> heuristicAbilities) {
+        if (!usesFlatMonteCarlo(false) || playable.size() < 2) {
+            return heuristicAbilities;
+        }
+        final FlatMonteCarloPicker.Config cfg = flatMonteCarloConfig();
+        if (cfg == null || !cfg.landChoice) {
+            return heuristicAbilities;
+        }
+        final Set<String> names = new HashSet<>();
+        final List<SpellAbility> candidates = new ArrayList<>();
+        final Card heuristicLand = heuristicAbilities.get(0).getHostCard();
+        names.add(heuristicLand.getName());
+        candidates.add(heuristicAbilities.get(0));
+        for (final Card land : playable) {
+            if (candidates.size() >= 3 || !names.add(land.getName())) {
+                continue;
+            }
+            for (final SpellAbility sa : land.getAllPossibleAbilities(player, true)) {
+                if (sa.isLandAbility()) {
+                    candidates.add(sa);
+                    break;
+                }
+            }
+        }
+        if (candidates.size() < 2) {
+            return heuristicAbilities; // all the same land
+        }
+        cfg.holdForbidden = true;
+        cfg.considerHolding = false;
+        cfg.targetVariants = 0;
+        cfg.extraCandidates = 0;
+        try {
+            final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, candidates, Collections.emptyList(), cfg, null,
+                    FlatMonteCarloPicker.Mode.MAIN);
+            lastFlatMcResult = result;
+            FlatMonteCarloStats.record(result);
+            FlatMonteCarloStats.noteLandChoice(result.decidedByRollouts, result.choice != candidates.get(0));
+            flatMcTurnSpentNanos += result.elapsedNanos;
+            noteFlatMcOutcome(result.reason);
+            if (result.choice != null && result.choice != candidates.get(0)) {
+                final List<SpellAbility> chosen = new ArrayList<>();
+                chosen.add(result.choice);
+                return chosen;
+            }
+        } catch (final AITimeoutTracker.Expired e) {
+            throw e;
+        } catch (final RuntimeException e) {
+            noteFlatMcOutcome("error");
+            FlatMonteCarloStats.noteFailure("land: " + e);
+        }
+        return heuristicAbilities;
     }
 
     private List<SpellAbility> chooseSpellAbilityToPlayImpl() {
@@ -1471,7 +1612,7 @@ public class AiController {
 
                     if (!abilities.isEmpty()) {
                         // TODO extend this logic to evaluate MDFC with both sides land
-                        return abilities;
+                        return refineLandChoice(landsWannaPlay, abilities);
                     }
                 }
             }
@@ -1631,9 +1772,14 @@ public class AiController {
             }
         }
 
+        // Monte Carlo on the opponent's turn (or in response to their spell): then the heuristic counter is only one of
+        // the candidates, to be compared with passing and with what else the AI could do with the mana.
+        final FlatMonteCarloPicker.Mode reactiveMode = reactiveMonteCarloMode(mustRespond);
+        SpellAbility heuristicCounter = null;
         if (!game.getStack().isEmpty()) {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
-            if (counter != null) return counter;
+            if (counter != null && reactiveMode == null) return counter;
+            heuristicCounter = counter;
 
             SpellAbility counterETB = chooseSpellAbilityToPlayFromList(getPossibleETBCounters(), false);
             if (counterETB != null)
@@ -1656,7 +1802,34 @@ public class AiController {
         //update LivingEndPlayer
         useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
-        SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+        SpellAbility chosenSa;
+        lastFlatMcResult = null;
+        if (reactiveMode != null) {
+            chosenSa = chooseReactively(reactiveMode, saList, heuristicCounter, cards, top);
+        } else if (usesFlatMonteCarlo(mustRespond)) {
+            // Same heuristics as always, but keep the first few plays they approve of and let rollouts compare them.
+            final FlatMonteCarloPicker.Config mcCfg = flatMonteCarloConfig();
+            final boolean discover = mcCfg != null && mcCfg.discovery && mcCfg.extraCandidates > 0;
+            final List<SpellAbility> extras = new ArrayList<>();
+            List<SpellAbility> approved = chooseSpellAbilitiesToPlayFromList(saList, true,
+                    mcCfg == null ? 1 : discover ? mcCfg.maxCandidates * 2 : mcCfg.maxCandidates, discover ? extras : null);
+            if (discover) {
+                approved = FlatMonteCarloPicker.diversify(approved, mcCfg.maxCandidates);
+            }
+            FlatMonteCarloStats.noteDecisionPoint(approved.size(), mcCfg == null);
+            try {
+                chosenSa = refineWithFlatMonteCarlo(approved, extras, mcCfg, FlatMonteCarloPicker.Mode.MAIN);
+            } catch (final AITimeoutTracker.Expired e) {
+                throw e;
+            } catch (final RuntimeException e) {
+                // Monte Carlo is a refinement: never let it break a turn, fall back to the heuristic choice.
+                noteFlatMcOutcome("error");
+                FlatMonteCarloStats.noteFailure("controller: " + e);
+                chosenSa = approved.isEmpty() ? null : approved.get(0);
+            }
+        } else {
+            chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+        }
 
         if (topOwnedByAI && !mustRespond && chosenSa != ComputerUtilAbility.getFirstCopySASpell(saList)) {
             return null; // not planning to copy the spell and not marked as something the AI would respond to
@@ -1666,8 +1839,384 @@ public class AiController {
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
-        if (all == null || all.isEmpty())
+        final List<SpellAbility> chosen = chooseSpellAbilitiesToPlayFromList(all, skipCounter, 1);
+        return chosen.isEmpty() ? null : chosen.get(0);
+    }
+
+    /** Result of the last flat Monte Carlo decision (null if the last choice was made by the heuristics alone). */
+    public FlatMonteCarloPicker.Result getLastFlatMonteCarloResult() {
+        return lastFlatMcResult;
+    }
+
+    /**
+     * Whether this priority is one Monte Carlo decides on the opponent's turn: with a spell of theirs on the stack
+     * (also on the AI's own turn), when they attack, or in their end step. Null when it is not, or when Monte Carlo is
+     * off. Only plain spells on the stack can be simulated, so a stack with abilities on it is left to the heuristics.
+     */
+    private FlatMonteCarloPicker.Mode reactiveMonteCarloMode(final boolean mustRespond) {
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond
+                || simMode != null || !getBoolProperty(AiProps.FLAT_MC_ENABLED) || !getBoolProperty(AiProps.FLAT_MC_REACTIVE)) {
             return null;
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        if (!game.getStack().isEmpty()) {
+            boolean onlySpells = true;
+            for (final SpellAbilityStackInstance si : game.getStack()) {
+                onlySpells &= si.getSpellAbility().isSpell();
+            }
+            final SpellAbility top = game.getStack().peekAbility();
+            return onlySpells && top != null && top.getActivatingPlayer() != null && top.getActivatingPlayer().isOpponentOf(player)
+                    ? FlatMonteCarloPicker.Mode.RESPOND : null;
+        }
+        if (ph.getPlayerTurn() == player) {
+            return null;
+        }
+        if (ph.is(PhaseType.END_OF_TURN) && game.getPlayers().size() == 2) {
+            return FlatMonteCarloPicker.Mode.END_STEP;
+        }
+        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.getCombat() != null && !ph.getCombat().getAttackersOf(player).isEmpty()) {
+            return FlatMonteCarloPicker.Mode.RESPOND;
+        }
+        return null;
+    }
+
+    /**
+     * Monte Carlo on the opponent's turn. The candidates are the response the heuristics would make (a counterspell,
+     * removal, a trick), the other plays they approve, and discovered plays: a counterspell they rejected, card draw
+     * in response to a big spell or at the end step, flash plays, bounce. Passing is always compared as well. With
+     * nothing castable there is nothing to decide and no rollout is spent.
+     */
+    private SpellAbility chooseReactively(final FlatMonteCarloPicker.Mode mode, final List<SpellAbility> saList,
+                                          final SpellAbility heuristicCounter, final CardCollection cards, final SpellAbility top) {
+        final FlatMonteCarloPicker.Config cfg = flatMonteCarloConfig();
+        if (cfg == null || !cfg.reactive) {
+            return heuristicCounter != null ? heuristicCounter : chooseSpellAbilityToPlayFromList(saList, true);
+        }
+        if (mode == FlatMonteCarloPicker.Mode.END_STEP) {
+            // each sample plays a whole turn on (untap, draw, main phase, combat), several times a main phase rollout
+            cfg.budgetNanos *= 2;
+        }
+        final boolean discover = cfg.discovery && cfg.extraCandidates > 0;
+        final List<SpellAbility> extras = new ArrayList<>();
+        final List<SpellAbility> approved = new ArrayList<>();
+        if (heuristicCounter != null) {
+            approved.add(heuristicCounter);
+        }
+        approved.addAll(chooseSpellAbilitiesToPlayFromList(saList, true,
+                discover ? cfg.maxCandidates * 2 : cfg.maxCandidates, discover ? extras : null));
+        // counterspells the heuristics did not want to use are still worth a look against a big spell
+        if (top != null && discover && mode == FlatMonteCarloPicker.Mode.RESPOND) {
+            // Counterspells with an alternative cost (Force of Will, Daze, Force of Negation...) are separate plays that
+            // only exist once the alternative costs are expanded: the printed ones are not castable without the mana.
+            final List<SpellAbility> counterBases = new ArrayList<>(getPlayableCounters(cards));
+            for (final SpellAbility sa : saList) {
+                if (sa.getApi() == ApiType.Counter && sa.isSpell() && !counterBases.contains(sa)) {
+                    counterBases.add(sa);
+                }
+            }
+            final List<SpellAbility> taken = new ArrayList<>(approved);
+            if (heuristicCounter != null) {
+                taken.add(heuristicCounter);
+            }
+            taken.addAll(extras);
+            for (final SpellAbility counter : ComputerUtilAbility.getOriginalAndAltCostAbilities(counterBases, player)) {
+                if (taken.stream().anyMatch(t -> t == counter || (t.getHostCard() == counter.getHostCard()
+                        && t.getPayCosts().toString().equals(counter.getPayCosts().toString())
+                        && String.valueOf(t.getDescription()).equals(String.valueOf(counter.getDescription()))))) {
+                    continue;
+                }
+                counter.setActivatingPlayer(player);
+                try {
+                    if (counter.canPlay() && counter.canTargetSpellAbility(top) && ComputerUtilCost.canPayCost(counter, player, false)) {
+                        counter.resetTargets();
+                        counter.getTargets().add(top);
+                        extras.add(counter);
+                    }
+                } catch (final RuntimeException e) {
+                    // not castable after all
+                }
+            }
+        }
+        // Card draw and selection only make sense in response to a spell or at the end step; during combat only
+        // interaction is worth an instant.
+        if (mode == FlatMonteCarloPicker.Mode.RESPOND && game.getStack().isEmpty()) {
+            extras.removeIf(sa -> !FlatMonteCarloPicker.isInteraction(sa));
+        }
+        final List<SpellAbility> shown = FlatMonteCarloPicker.diversify(approved, cfg.maxCandidates);
+        FlatMonteCarloStats.noteReactivePoint(mode, shown.size() + extras.size());
+        if (shown.isEmpty() && extras.isEmpty()) {
+            return null; // nothing to do with this priority: pass, at no cost
+        }
+        try {
+            final SpellAbility chosen = refineWithFlatMonteCarlo(shown, extras, cfg, mode);
+            if (lastFlatMcResult != null) {
+                FlatMonteCarloStats.noteReactiveResult(mode, lastFlatMcResult, shown.isEmpty() ? null : shown.get(0));
+            }
+            for (final SpellAbility extra : extras) {
+                if (extra != chosen && extra.getApi() == ApiType.Counter) {
+                    extra.resetTargets(); // aimed at the stack for the rollouts only
+                }
+            }
+            return chosen;
+        } catch (final AITimeoutTracker.Expired e) {
+            throw e;
+        } catch (final RuntimeException e) {
+            noteFlatMcOutcome("error");
+            FlatMonteCarloStats.noteFailure("reactive: " + e);
+            return shown.isEmpty() ? null : shown.get(0);
+        }
+    }
+
+    private boolean usesFlatMonteCarlo(final boolean mustRespond) {
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond || simMode != null
+                || !getBoolProperty(AiProps.FLAT_MC_ENABLED)) {
+            return false; // off, forced responses, or one of the simulation modes which do their own lookahead
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        // Only sorcery-timing decisions on the AI's own turn: that is where the lines to compare are, and the
+        // rollout ends at the second main phase. Everything reactive stays with the heuristics (and is cheap).
+        return ph.getPlayerTurn() == player && game.getStack().isEmpty()
+                && (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2));
+    }
+
+    private FlatMonteCarloPicker.Config flatMonteCarloConfig() {
+        final int turn = game.getPhaseHandler().getTurn();
+        if (turn != flatMcTurn) {
+            flatMcTurn = turn;
+            flatMcTurnSpentNanos = 0;
+        }
+        final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(this, player);
+        if (flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax()) {
+            cfg.maximized();
+        }
+        final long left = cfg.turnBudgetNanos - flatMcTurnSpentNanos;
+        if (left <= 0 || cfg.budgetNanos <= 0) {
+            return null;
+        }
+        cfg.budgetNanos = Math.min(cfg.budgetNanos, left);
+        return cfg;
+    }
+
+    private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approved, final List<SpellAbility> extras,
+                                                  final FlatMonteCarloPicker.Config cfg, final FlatMonteCarloPicker.Mode mode) {
+        if (approved.isEmpty() && extras.isEmpty()) {
+            return null;
+        }
+        if (cfg == null) { // out of budget
+            return approved.isEmpty() ? null : approved.get(0); // out of budget
+        }
+        if (mode == FlatMonteCarloPicker.Mode.MAIN && extras.isEmpty() && approved.size() < 2
+                && !FlatMonteCarloPicker.isHoldPossible(player)) {
+            return approved.get(0); // nothing to compare
+        }
+        // What the heuristics aimed each approved play at, noted before the rollouts: asking the heuristics again
+        // (as the rollouts do to check a line is still approved) clears the targets of a play they turn down on the
+        // dice, and the aim they gave it a moment ago is then the only record of where the play was meant to go.
+        final Map<SpellAbility, GameEntity> approvedAim = new HashMap<>();
+        for (final SpellAbility sa : approved) {
+            if (sa.usesTargeting() && sa.getTargets() != null) {
+                final List<GameEntity> aimed = new ArrayList<>();
+                for (final GameEntity e : sa.getTargets().getTargetEntities()) {
+                    aimed.add(e);
+                }
+                if (aimed.size() == 1) {
+                    approvedAim.put(sa, aimed.get(0));
+                }
+            }
+        }
+        final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, extras, cfg,
+                sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay, mode);
+        lastFlatMcResult = result;
+        FlatMonteCarloStats.record(result);
+        flatMcTurnSpentNanos += result.elapsedNanos;
+        noteFlatMcOutcome(result.reason);
+        if (result.hold) {
+            return null; // pass priority with the mana still available
+        }
+        if (extras.contains(result.choice)) {
+            // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
+            // it is still aimed where the rollouts liked it, and that it can still be paid for.
+            if (result.target != null && !FlatMonteCarloPicker.applyTarget(result.choice, result.target)) {
+                return approved.isEmpty() ? null : approved.get(0);
+            }
+            result.choice.setActivatingPlayer(player);
+            return result.choice;
+        }
+        // Whatever was evaluated afterwards may have disturbed the targets of the chosen play: set them up again, and
+        // fall back to the other approved plays in heuristic order if the heuristics no longer like it.
+        final List<SpellAbility> order = new ArrayList<>();
+        order.add(result.choice);
+        for (final SpellAbility sa : approved) {
+            if (sa != result.choice) {
+                order.add(sa);
+            }
+        }
+        for (final SpellAbility sa : order) {
+            // What the heuristics aimed at when they approved the play: a refusal below clears the targets again.
+            GameEntity approvedTarget = null;
+            int approvedTargets = 0;
+            if (sa == result.choice && sa.usesTargeting() && approvedAim.containsKey(sa)) {
+                approvedTarget = approvedAim.get(sa);
+                approvedTargets = 1;
+            } else if (sa == result.choice && sa.usesTargeting() && sa.getTargets() != null) {
+                for (final GameEntity e : sa.getTargets().getTargetEntities()) {
+                    approvedTarget = e;
+                    approvedTargets++;
+                }
+            }
+            final boolean willPlay = playDecisionStable(sa) == AiPlayDecision.WillPlay; // asked once: the answer can roll dice
+            if (!willPlay && sa == result.choice) {
+                // The heuristics are not deterministic (several of them roll dice, some remember what they planned) and
+                // said yes a moment ago when they approved this play, and the rollouts confirmed it: Monte Carlo's
+                // verdict stands, aimed where it was (a single target, still legal) if the play aims at all.
+                final boolean aimOk = !sa.usesTargeting()
+                        || (result.target == null && approvedTargets == 1 && FlatMonteCarloPicker.applyTarget(sa, approvedTarget));
+                if (aimOk && isStillCastable(sa)) {
+                    return sa;
+                }
+            }
+            if (willPlay) {
+                if (sa == result.choice && result.target != null && !FlatMonteCarloPicker.applyTarget(sa, result.target)
+                        && playDecisionStable(sa) != AiPlayDecision.WillPlay) {
+                    continue; // the other target is no longer legal and the heuristics gave the play up as well
+                }
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    /** Forces Monte Carlo on or off for this player only (null: follow the game setting). Used for A/B comparisons. */
+    public void setFlatMonteCarloOverride(final Boolean enabled) {
+        flatMcOverride = enabled;
+    }
+
+    private Boolean flatMcAttackOverride;
+
+    /** Mulligans and bottoms cards by the deck plan: asked for in the profile, or part of maximum strength. */
+    public boolean useSmartMulligan() {
+        return getBoolProperty(AiProps.FLAT_MC_MULLIGAN)
+                || isFlatMonteCarloMax() && (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo());
+    }
+
+    /** Maximum strength (desktop matches): the attack search and broad discovery are part of it. */
+    private boolean isFlatMonteCarloMax() {
+        return flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax();
+    }
+
+    /** Forces the attack search on or off for this player; null follows the profile (FLAT_MC_ATTACK). */
+    public void setFlatMonteCarloAttackOverride(final Boolean enabled) {
+        flatMcAttackOverride = enabled;
+    }
+
+    /** Forces maximum strength on or off for this player; null follows the game (on for desktop matches). */
+    public void setFlatMonteCarloMaxOverride(final Boolean enabled) {
+        flatMcMaxOverride = enabled;
+    }
+
+    void noteFlatMcOutcome(final String reason) {
+        if ("error".equals(reason)) {
+            if (++flatMcErrors >= 3) {
+                flatMcTripped = true;
+            }
+        } else if ("too-slow".equals(reason) || "no-time".equals(reason)) {
+            if (++flatMcSlowStreak >= 4) {
+                flatMcTripped = true; // this device cannot afford even two rollouts per decision
+            }
+        } else {
+            flatMcSlowStreak = 0;
+        }
+    }
+
+    private forge.ai.simulation.DeckPlan flatMcDeckPlan;
+
+    /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
+    public forge.ai.simulation.DeckPlan deckPlan(final Player p) {
+        if (flatMcDeckPlan == null) {
+            flatMcDeckPlan = forge.ai.simulation.DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
+            if (flatMcDeckPlan != forge.ai.simulation.DeckPlan.NONE) {
+                forge.ai.simulation.FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
+            }
+        }
+        return flatMcDeckPlan;
+    }
+
+    /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
+    public boolean isFlatMonteCarloTripped() {
+        return flatMcTripped;
+    }
+
+    /**
+     * A play the heuristics turned down that Monte Carlo may still compare: it is of a strategic kind and can really
+     * be cast or activated right now (timing, restrictions and cost), so the only thing against it is the heuristics'
+     * rule of thumb. Nothing is decided here; rollouts judge it against the alternatives.
+     */
+    private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
+        switch (opinion) {
+            case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
+                return false;
+            default:
+                break;
+        }
+        if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())) {
+            return false;
+        }
+        try {
+            return sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    private boolean isStillCastable(final SpellAbility sa) {
+        sa.setActivatingPlayer(player);
+        try {
+            return sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Like {@link #playDecision} for a play the heuristics approved a moment ago: several of them roll dice, so one
+     * "no" proves little. WillPlay if any of a few asks says so (which also re-aims the play's targets).
+     */
+    private AiPlayDecision playDecisionStable(final SpellAbility sa) {
+        AiPlayDecision decision = playDecision(sa);
+        for (int i = 0; i < 3 && decision != AiPlayDecision.WillPlay; i++) {
+            decision = playDecision(sa);
+        }
+        return decision;
+    }
+
+    /** The heuristic verdict on one play, the way the spell choice loop asks for it. */
+    private AiPlayDecision playDecision(final SpellAbility sa) {
+        sa.setActivatingPlayer(player);
+        final SpellAbility root = sa.getRootAbility();
+        if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
+            sa.setLastStateBattlefield(game.getLastStateBattlefield());
+            sa.setLastStateGraveyard(game.getLastStateGraveyard());
+        }
+        try {
+            return canPlayAndPayFor(sa);
+        } finally {
+            sa.clearLastState();
+        }
+    }
+
+    /** Like {@link #chooseSpellAbilityToPlayFromList} but keeps looking until {@code maxResults} plays are approved. */
+    private List<SpellAbility> chooseSpellAbilitiesToPlayFromList(final List<SpellAbility> all, boolean skipCounter, final int maxResults) {
+        return chooseSpellAbilitiesToPlayFromList(all, skipCounter, maxResults, null);
+    }
+
+    /**
+     * @param extrasOut when not null, legal plays of a strategic kind (card draw, selection, ...) that the heuristics
+     *                  turned down are added here, for Monte Carlo to consider anyway
+     */
+    private List<SpellAbility> chooseSpellAbilitiesToPlayFromList(final List<SpellAbility> all, boolean skipCounter, final int maxResults,
+                                                                  final List<SpellAbility> extrasOut) {
+        if (all == null || all.isEmpty())
+            return Collections.emptyList();
 
         try {
             all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
@@ -1682,7 +2231,8 @@ public class AiController {
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(aiId, timeoutNanos);
         final long deadlineNanos = AITimeoutTracker.deadlineNanos(aiId, timeoutNanos);
-        FutureTask<SpellAbility> future = new FutureTask<>(() -> {
+        FutureTask<List<SpellAbility>> future = new FutureTask<>(() -> {
+            final List<SpellAbility> approvedPlays = new ArrayList<>();
             // the eval thread aborts itself at the shared deadline (or when cancelled) instead of running on as a zombie
             final Object evalLimit = AITimeoutTracker.arm(deadlineNanos, true);
             try {
@@ -1760,16 +2310,25 @@ public class AiController {
                     // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
                     if (opinion != AiPlayDecision.WillPlay) {
+                        if (maxResults > 1) {
+                            FlatMonteCarloStats.noteRejected(opinion.name());
+                        }
+                        if (extrasOut != null && isLegalDiscovery(sa, opinion)) {
+                            extrasOut.add(sa);
+                        }
                         continue;
                     }
 
                     // TODO could continue to try find another with higher rating (weighted by priority ordering)
-                    return sa;
+                    approvedPlays.add(sa);
+                    if (approvedPlays.size() >= maxResults) {
+                        break;
+                    }
                 }
 
-                return null;
+                return approvedPlays;
             } catch (AITimeoutTracker.Expired e) {
-                return null;
+                return approvedPlays; // whatever was approved before time ran out
             } finally {
                 AITimeoutTracker.disarm(evalLimit); // matters as soon as this runs on a pooled thread
             }
@@ -1814,7 +2373,7 @@ public class AiController {
                 }
             }
             // TODO mark some as skipped to increase chance to find something playable next priority
-            return null;
+            return Collections.emptyList();
         } finally {
             AITimeoutTracker.end(aiId);
         }

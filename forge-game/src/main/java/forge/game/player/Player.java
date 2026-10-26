@@ -109,6 +109,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int investigatedThisTurn;
     private int scryThisTurn;
     private int surveilThisTurn;
+    private int dilemmasFacedThisTurn;
     private int committedCrimeThisTurn;
     private int numFlipsThisTurn;
     private int numRollsThisTurn;
@@ -834,7 +835,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(game.getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
     }
 
-    public final boolean canReceiveCounters(final CounterType type) {
+    public final boolean canReceiveCounters(final CounterType type, Map<AbilityKey, Object> params) {
         if (!isInGame()) {
             return false;
         }
@@ -853,9 +854,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
-        int addAmount = n;
-        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
+    public void addCounterInternal(final CounterType counterType, final int addAmount, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
+        if (addAmount <= 0) {
             // As per rule 107.1b
             return;
         }
@@ -1106,6 +1106,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void incScryThisTurn() {
         scryThisTurn++;
+    }
+
+    public int getDilemmasFacedThisTurn() {
+        return dilemmasFacedThisTurn;
+    }
+    public void incDilemmasFacedThisTurn() {
+        dilemmasFacedThisTurn++;
+    }
+    public void setDilemmasFacedThisTurn(int v) {
+        dilemmasFacedThisTurn = v;
     }
 
     public boolean canMulligan() {
@@ -2493,6 +2503,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
         scryThisTurn = 0;
         surveilThisTurn = 0;
+        dilemmasFacedThisTurn = 0;
         resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
@@ -2934,27 +2945,22 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void initVariantsZones(RegisteredPlayer registeredPlayer) {
-        PlayerZone bf = getZone(ZoneType.Battlefield);
         Iterable<? extends IPaperCard> cards = registeredPlayer.getCardsOnBattlefield();
         if (cards != null) {
             for (final IPaperCard cp : cards) {
                 Card c = Card.fromPaperCard(cp, this);
-                bf.add(c);
                 c.setCollectible(false); //Some nuance may be appropriate here someday.
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);
                 if (registeredPlayer.hasEnableETBCountersEffect()) {
-                    for (KeywordInterface inst : c.getKeywords()) {
-                        String keyword = inst.getOriginal();
-                        try {
-                            if (keyword.startsWith("etbCounter")) {
-                                final String[] p = keyword.split(":");
-                                c.addCounterInternal(CounterType.getType(p[1]), Integer.parseInt(p[2]), null, false, null, null);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    // Route through changeZone so Moved replacements (etbCounter, etc.) apply.
+                    // A token in None can't leave it (rule 111.8); a zoneless non-token skips replacements.
+                    if (!c.isToken()) {
+                        getZone(ZoneType.None).add(c);
                     }
+                    getGame().getAction().moveToPlay(c, this, null, null);
+                } else {
+                    getZone(ZoneType.Battlefield).add(c);
                 }
             }
         }
@@ -2996,8 +3002,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             getZone(ZoneType.PlanarDeck).shuffle();
         }
 
-        // Commander
-        if (!registeredPlayer.getCommanders().isEmpty()) {
+        // Commander. A game restarted by Karn Liberated keeps the commanders it has
+        final boolean addCommanders = getCommanders().isEmpty();
+        if (addCommanders && !registeredPlayer.getCommanders().isEmpty()) {
             for (PaperCard pc : registeredPlayer.getCommanders()) {
                 Card cmd = Card.fromPaperCard(pc, this);
                 initCommanderColor(cmd);
@@ -3006,7 +3013,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.addCommander(cmd);
             }
         }
-        else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
+        else if (addCommanders && registeredPlayer.getPlaneswalker() != null) { // Planeswalker
             Card cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
             cmd.setCollectible(true);
             cmd.setCommander(true);

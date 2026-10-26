@@ -64,7 +64,7 @@ public class CostMill extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        return getAbilityAmount(ability) < payer.getZone(ZoneType.Library).size();
+        return getAbilityAmount(ability) <= payer.getZone(ZoneType.Library).size();
     }
 
     /*

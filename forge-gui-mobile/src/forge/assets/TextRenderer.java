@@ -575,7 +575,7 @@ public class TextRenderer {
         return textBounds;
     }
 
-    private static final Color SHADOW_COLOR =  new Color(50f, 50f, 50f, 0.4f);
+    private static final Color SHADOW_COLOR = new Color(150 / 255f, 150 / 255f, 150 / 255f, 0.6f); //libGDX colours are 0..1, 50f overflows into the other channels
     private boolean shadow; //draws a thin dark outline behind the text, for text over translucent backgrounds
     private int shadowLimit; //only the first this many characters get the outline
     private boolean shadowNow; //the piece being drawn is inside that limit

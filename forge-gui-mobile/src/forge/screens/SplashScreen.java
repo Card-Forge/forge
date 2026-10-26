@@ -17,6 +17,7 @@ import forge.assets.FSkinTexture;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import forge.toolbox.Frost;
 
 public class SplashScreen extends FContainer {
     private TextureRegion splashTexture;
@@ -289,8 +290,8 @@ public class SplashScreen extends FContainer {
             g.drawImage(FSkinImage.LOGO, getWidth() / 2 - (FSkinImage.LOGO.getWidth() * 2f) / 2, getHeight() / 2 - (FSkinImage.LOGO.getHeight() * 2f) / 1.3f, FSkinImage.LOGO.getWidth() * 2f, FSkinImage.LOGO.getHeight() * 2f);
         }
         y += h * 295f / 450f;
-        float padding = 20f / 450f * w;
-        float height = 57f / 450f * h;
+        float padding = 20f / 450f * w * 0.6f;
+        float height = 57f / 450f * h * 0.6f;
 
         if (!init) {
             init = true;
@@ -322,15 +323,18 @@ public class SplashScreen extends FContainer {
                     bgAnimation.openAdventure = false;
                 }
             });
-            float btn_w = (w - 2 * padding);
-            float btn_x = x + padding;
+            float modw = Frost.isOn() ? 0.6f : 1f;
+            float btn_w = (w - 2 * padding) * modw;
+            float btn_x = Frost.isOn() ? getWidth() / 2 - btn_w / 2 : x + padding;
             float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
             float btn_y = (y + padding) * multiplier;
+            height = Frost.isOn() ? height * 1.2f : height;
+            float mody = Frost.isOn() ? height / 4 : 0;
             btnHome.setFont(FSkinFont.get(22));
             btnAdventure.setFont(FSkinFont.get(22));
             btnHome.setBounds(btn_x, btn_y, btn_w, height);
             add(btnHome);
-            btnAdventure.setBounds(btn_x, btn_y + height + padding / 2, btn_w, height);
+            btnAdventure.setBounds(btn_x, btn_y + height + padding + mody / 1.4f, btn_w, height);
             add(btnAdventure);
         }
     }
@@ -374,15 +378,15 @@ public class SplashScreen extends FContainer {
         final float sw = getWidth(), sh = getHeight();
         final float scale = Math.max(sw / w, sh / h);
         final float cw = w * scale, ch = h * scale;
-        g.drawImage(splashTexture, (sw - cw) / 2, (sh - ch) / 2, cw, ch);
-        final Color dim = new Color(0f, 0f, 0f, 0.62f), clear = new Color(0f, 0f, 0f, 0f);
-        g.fillRect(dim, 0, 0, sw, sh);
+        //g.drawImage(splashTexture, (sw - cw) / 2, (sh - ch) / 2, cw, ch);
+        final Color /*dim = new Color(0f, 0f, 0f, 0.62f),*/ clear = new Color(0f, 0f, 0f, 0f);
+        //g.fillRect(dim, 0, 0, sw, sh);
         g.drawImage(splashTexture, x, y, w, h);
         final float fade = Math.min(w * 0.18f, Math.max(0f, x)); //only where the artwork doesn't reach the screen edge
-        if (fade > 0) {
+        /*if (fade > 0) {
             g.fillGradientRect(dim, clear, false, x, y, fade, h);
             g.fillGradientRect(clear, dim, false, x + w - fade, y, fade, h);
-        }
+        }*/
         g.fillGradientRect(new Color(0f, 0f, 0f, 0.35f), clear, true, 0, 0, sw, sh * 0.25f);
         g.fillGradientRect(clear, new Color(0f, 0f, 0f, 0.55f), true, 0, sh * 0.6f, sw, sh * 0.4f);
     }

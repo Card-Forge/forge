@@ -8,6 +8,7 @@ import forge.assets.FSkinImage;
 import forge.menu.FPopupMenu;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.Frost;
 import forge.util.Utils;
 
 public abstract class LaunchScreen extends FScreen {
@@ -77,13 +78,17 @@ public abstract class LaunchScreen extends FScreen {
 
         @Override
         public void draw(Graphics g) {
-            if (Forge.hdstart)
+            if (Frost.isOn()) {
+                final float w = getWidth(), h = getHeight();
+                Frost.drawButton(g, w, h * 0.6f, isHovered(), pressed, isEnabled(), Forge.getLocalizer().getMessage("lblStart"));
+            } else if (Forge.hdstart) {
                 g.drawImage(pressed ? FSkinImage.HDBTN_START_DOWN :
-                        isHovered() ? FSkinImage.HDBTN_START_OVER : FSkinImage.HDBTN_START_UP,
-                        isHovered() ? -2 : 0, 0, getWidth(), getHeight());
-            else
+                    isHovered() ? FSkinImage.HDBTN_START_OVER : FSkinImage.HDBTN_START_UP,
+                    isHovered() ? -2 : 0, 0, getWidth(), getHeight());
+            } else
                 g.drawImage(pressed ? FSkinImage.BTN_START_DOWN :
-                        isHovered() ? FSkinImage.BTN_START_OVER : FSkinImage.BTN_START_UP, 0, 0, getWidth(), getHeight());
+                    isHovered() ? FSkinImage.BTN_START_OVER :
+                    FSkinImage.BTN_START_UP, 0, 0, getWidth(), getHeight());
             //its must be enabled or you can't start any game modes
             if (!Forge.isLoadingaMatch()) {
                 if(!btnStart.isEnabled())

@@ -223,6 +223,23 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     protected boolean animateEntry() { return false; }
 
+    /**
+     * Adds the cards of the last layout to {@code out} without allocating. orderedCards is cleared and refilled
+     * by layout, so an iterator (or addAll) throws ConcurrentModificationException if a relayout lands
+     * mid-copy. Reading by index cannot; if the list shrinks under us the rest is simply skipped, which at
+     * worst costs one entry animation.
+     */
+    private void collectOrderedCards(Set<CardView> out) {
+        final List<CardView> ordered = orderedCards.get();
+        try {
+            for (int i = 0, n = ordered.size(); i < n; i++) {
+                out.add(ordered.get(i));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            // list shrank during the copy, keep what was read
+        }
+    }
+
     protected void refreshCardPanels(Iterable<CardView> model) {
         final boolean animate = animateEntry();
         Set<CardView> known = null, current = null;
@@ -233,7 +250,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
             shownScratch.clear();
             knownScratch.clear();
-            knownScratch.addAll(orderedCards.get());
+            collectOrderedCards(knownScratch);
             currentScratch.clear();
             known = knownScratch;
             current = currentScratch;

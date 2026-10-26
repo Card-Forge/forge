@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Aj_Grenke_-_Dimir_Aggro_(Standard,_#889440).dck
+Deck Type=constructed
+
+[Main]
+4 Spyglass Siren
+3 Deep-Cavern Bat
+3 Enduring Curiosity
+3 Floodpits Drowner
+2 Cecil, Dark Knight
+2 Dream Beavers
+2 Preacher of the Schism
+4 Requiting Hex
+2 Bitter Triumph
+2 Shoot the Sheriff
+2 We Say Thee Nay!
+1 Spell Pierce
+1 Spell Snare
+4 Kaito, Bane of Nightmares
+4 Gloomlake Verge
+4 Island
+4 Swamp
+4 Watery Grave
+2 Demolition Field
+2 Hidden Lair
+2 Restless Reef
+2 Soulstone Sanctuary
+2 Wan Shi Tong, Librarian
+[Sideboard]
+1 Spell Pierce
+3 Duress
+3 Strategic Betrayal
+2 Flashfreeze
+1 Annul
+1 Day of Black Sun
+1 Disdainful Stroke
+1 Head of the Hunt
+1 Negate
+1 Tishana's Tidebinder

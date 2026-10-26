@@ -243,7 +243,11 @@ public class VField extends FContainer {
     void setEndPadding(float padding) {
         padding = Math.round(Math.max(0f, padding));
         if (endPadding == padding) { return; }
+        final boolean wasOpen = endPadding > 0;
         endPadding = padding;
+        //the rows scroll their cards out from under the box when it opens, and back when it closes
+        row1.followEndPadding(wasOpen, padding > 0);
+        row2.followEndPadding(wasOpen, padding > 0);
         row1.revalidate(true);
         row2.revalidate(true);
     }
@@ -276,9 +280,45 @@ public class VField extends FContainer {
     public class FieldRow extends VCardDisplayArea {
         private int selected = -1;
         private FDisplayObject selectedChild;
+        private float savedScrollLeft = -1f, revealedScrollLeft = -1f; //where the row was before a zone box covered it, and where it was moved to
+        private boolean pendingReveal, pendingRestore;
 
         private FieldRow() {
             setVisible(true); //make visible by default unlike other display areas
+        }
+
+        //a zone box opened, changed size or closed over the end of the row: keep the cards clear of it
+        private void followEndPadding(boolean wasOpen, boolean isOpen) {
+            final boolean atRevealed = revealedScrollLeft >= 0 && Math.abs(getScrollLeft() - revealedScrollLeft) < 2f; //not moved by hand since
+            if (isOpen) {
+                if (!wasOpen) {
+                    savedScrollLeft = getScrollLeft();
+                    pendingReveal = true;
+                } else if (atRevealed) {
+                    pendingReveal = true; //it was at the end, so it stays at the end
+                }
+            } else if (wasOpen) {
+                pendingReveal = false;
+                if (atRevealed) {
+                    pendingRestore = true;
+                } else {
+                    revealedScrollLeft = -1f;
+                }
+            }
+        }
+
+        @Override
+        protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+            super.setScrollPositionsAfterLayout(scrollLeft0, scrollTop0);
+            if (pendingReveal) {
+                pendingReveal = false;
+                revealedScrollLeft = getMaxScrollLeft();
+                setScrollLeft(revealedScrollLeft);
+            } else if (pendingRestore) {
+                pendingRestore = false;
+                setScrollLeft(savedScrollLeft);
+                revealedScrollLeft = -1f;
+            }
         }
 
         @Override

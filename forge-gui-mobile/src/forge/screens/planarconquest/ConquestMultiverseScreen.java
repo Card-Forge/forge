@@ -69,6 +69,7 @@ public class ConquestMultiverseScreen extends FScreen {
     private final BattleBar battleBar;
     private ConquestData model;
     private ConquestBattle activeBattle;
+    private ConquestReward regionCommander;
 
     public ConquestMultiverseScreen() {
         super("", ConquestMenu.getMenu());
@@ -96,6 +97,7 @@ public class ConquestMultiverseScreen extends FScreen {
                     if (record.getWins(activeBattle.getTier()) == 1 && record.getHighestConqueredTier() == activeBattle.getTier()) {
                         //if first time conquering event at the selected tier, show animation of new badge being positioned on location
                         model.rewardPlaneswalkEmblems(FModel.getConquestPreferences().getPrefInt(CQPref.PLANESWALK_CONQUER_EMBLEMS));
+                        regionCommander = FModel.getConquest().awardRegionCommander(loc);
                         model.saveData();
                         planeGrid.animateBadgeIntoPosition(loc, activeBattle.getTier());
                     }
@@ -125,6 +127,15 @@ public class ConquestMultiverseScreen extends FScreen {
         planeGrid.scrollPlaneswalkerIntoView();
 
         battleBar.update();
+    }
+
+    private void showRegionCommander() {
+        if (regionCommander == null) {
+            spinChaosWheel();
+            return;
+        }
+        String title = Forge.getLocalizer().getMessage("lblConqueredNReceivedCommander", model.getCurrentLocation().getRegion().getName());
+        ConquestRewardDialog.show(title, List.of(regionCommander), this::spinChaosWheel);
     }
 
     private void spinChaosWheel() {
@@ -591,7 +602,7 @@ public class ConquestMultiverseScreen extends FScreen {
             protected void onEnd(boolean endingAll) {
                 activeBadgeAnimation = null;
                 if (!endingAll) {
-                    spinChaosWheel(); //spin Chaos Wheel after badge positioned
+                    showRegionCommander();
                 }
             }
         }

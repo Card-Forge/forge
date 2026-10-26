@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.GameScene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
@@ -12,7 +13,6 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.AdventureQuestEvent;
 import forge.adventure.util.Current;
-import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -231,11 +231,11 @@ public class AdventureQuestData implements Serializable {
                 stage.setTargetPOI(poiTokens, this.name);
         }
 
-        if (stage.getTargetPOI() != null
-                && ("cave".equalsIgnoreCase( stage.getTargetPOI().getData().type)
-                || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
+        if (stage.getTargetPOI() != null && stage.getTargetPOI().getData().isDungeon()) {
             //todo: decide how to handle this in "anyPOI" scenarios
-            WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID()).clearDeletedObjects();
+            // Reset root and all connected floors so previously cleared dungeons respawn for the quest
+            PointOfInterest target = stage.getTargetPOI();
+            PointOfInterestChanges.resetDeletedObjectsRecursive(target.getID(), target.getData().map);
         }
 
         PointOfInterest temp = stage.getTargetPOI();

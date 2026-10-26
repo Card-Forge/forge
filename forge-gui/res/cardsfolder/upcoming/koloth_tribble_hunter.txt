@@ -1,0 +1,9 @@
+Name:Koloth, Tribble Hunter
+ManaCost:3 R
+Types:Legendary Creature Klingon Warrior Officer
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, each player creates two 1/1 white Tribble creature tokens with "This token can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_tribble_noblock | TokenOwner$ Player
+S:Mode$ Continuous | Affected$ Tribble | AddPower$ 1 | Goad$ True | Description$ All Tribbles get +1/+0 and are goaded. (They attack each combat if able and attack a player other than you if able.)
+DeckHas:Ability$Token
+Oracle:At the beginning of your end step, each player creates two 1/1 white Tribble creature tokens with "This token can't block."\nAll Tribbles get +1/+0 and are goaded. (They attack each combat if able and attack a player other than you if able.)

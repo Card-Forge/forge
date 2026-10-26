@@ -1,0 +1,14 @@
+Name:Commander Spock
+ManaCost:2 G W U
+Types:Legendary Creature Vulcan Human Scientist
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ Strange new worlds — Whenever CARDNAME enters or attacks, reveal the top card of your library. You may cast that card without paying its mana cost if that spell's mana value is equal to or less than the number of differently named lands you control. If it's a land card, you may put it onto the battlefield tapped. If that card is still on top of your library, draw a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReveal | Secondary$ True | TriggerDescription$ Strange new worlds — Whenever CARDNAME enters or attacks, reveal the top card of your library. You may cast that card without paying its mana cost if that spell's mana value is equal to or less than the number of differently named lands you control. If it's a land card, you may put it onto the battlefield tapped. If that card is still on top of your library, draw a card.
+SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | ValidAfterStack$ Spell.cmcLEX | ForgetPlayed$ True | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | Optional$ True | Tapped$ True | ForgetChanged$ True | ConditionDefined$ Remembered | ConditionPresent$ Land | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+SVar:HasAttackEffect:TRUE
+Oracle:Strange new worlds — Whenever Commander Spock enters or attacks, reveal the top card of your library. You may cast that card without paying its mana cost if that spell's mana value is equal to or less than the number of differently named lands you control. If it's a land card, you may put it onto the battlefield tapped. If that card is still on top of your library, draw a card.

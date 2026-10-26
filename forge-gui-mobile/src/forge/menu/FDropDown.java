@@ -204,7 +204,10 @@ public abstract class FDropDown extends FScrollPane {
     private static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.14f);
 
     private boolean isGlass() {
-        return getDropDownOwner() instanceof FMenuTab && ((FMenuTab) getDropDownOwner()).isGlass();
+        if (getDropDownOwner() instanceof FMenuTab) {
+            return ((FMenuTab) getDropDownOwner()).isGlass();
+        }
+        return forge.toolbox.Frost.isOn(); //menus and combo box lists in the frosted style
     }
 
     protected boolean drawAboveOverlay() {

@@ -78,6 +78,7 @@ public class VPhaseIndicator extends FContainer {
 
     /** Compact layout: opens the phase stops if they are hidden, hides them if they are showing. */
     public void toggleStops() {
+        if (VPlayerPanel.isUnifiedPhase()) { return; } //the unified phase label owns the stops
         setExpanded(!expandTarget);
     }
 
@@ -99,7 +100,7 @@ public class VPhaseIndicator extends FContainer {
 
     /** The stops column only takes touches while it is open, so it never blocks the field underneath. */
     public void syncCompactVisibility() {
-        setVisible(!isCompact() || expand > 0f || expandTarget);
+        setVisible(!isCompact() || (!VPlayerPanel.isUnifiedPhase() && (expand > 0f || expandTarget)));
     }
 
     //the colours a phase stop label uses: whether it is the current phase, and whether the game stops at it
@@ -107,8 +108,9 @@ public class VPhaseIndicator extends FContainer {
     private static final Color COMPACT_STOPS_EDGE = new Color(1f, 1f, 1f, 0.12f);
     private static final Color COMPACT_BAND_ON = new Color(1f, 1f, 1f, 0.16f);
     private static final Color COMPACT_BAND = new Color(1f, 1f, 1f, 0.07f);
+    private static final Color FROST_FILL = new Color(), FROST_TEXT = new Color(); //scratch colours for the stop labels, render thread only
 
-    private static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
+    static FSkinColor getPhaseColor(boolean active, boolean stopAtPhase) {
         final boolean adv = Forge.isMobileAdventureMode;
         if (active) {
             return FSkinColor.get(stopAtPhase ? (adv ? Colors.ADV_CLR_PHASE_ACTIVE_ENABLED : Colors.CLR_PHASE_ACTIVE_ENABLED)
@@ -155,7 +157,7 @@ public class VPhaseIndicator extends FContainer {
     private void setExpanded(boolean open) {
         expandTarget = open;
         idleTime = 0;
-        if (open && isCompact()) { setVisible(true); }
+        if (open && isCompact() && !VPlayerPanel.isUnifiedPhase()) { setVisible(true); }
         if (expandAnimation == null) {
             expandAnimation = new ExpandAnimation();
             expandAnimation.start();
@@ -306,11 +308,15 @@ public class VPhaseIndicator extends FContainer {
             final boolean more;
             if (expandTarget) {
                 expand = Math.min(1f, expand + step);
-                if (expand >= 1f) {
-                    idleTime += dt;
-                    if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
+                if (isCompact()) { //compact layout: the stops stay open until the phase button closes them
+                    more = expand < 1f;
+                } else {
+                    if (expand >= 1f) {
+                        idleTime += dt;
+                        if (idleTime >= IDLE_SECONDS) { expandTarget = false; }
+                    }
+                    more = true;
                 }
-                more = true;
             } else {
                 expand = Math.max(0f, expand - step);
                 if (expand <= 0f && isCompact()) { setVisible(false); }
@@ -433,6 +439,24 @@ public class VPhaseIndicator extends FContainer {
             this.yieldMarked = v;
         }
 
+        /** The short caption of the label (UP, DR, M1...). */
+        public String getCaption() {
+            return caption;
+        }
+
+        /** Flips the stop exactly like a tap on the label does, for the unified phase label's dropdown. */
+        public void toggleStop() {
+            stopAtPhase = !stopAtPhase;
+            if (onToggled != null) { onToggled.run(); }
+        }
+
+        /** Runs the long press action (yield marking) like a long press on the label does. @return false if there is none */
+        public boolean fireLongPress() {
+            if (onLongPress == null) { return false; }
+            onLongPress.run();
+            return true;
+        }
+
         /** Fires after the user toggles this label by tapping. */
         public void setOnToggled(Runnable r) {
             onToggled = r;
@@ -475,15 +499,16 @@ public class VPhaseIndicator extends FContainer {
                 // Skip the caption when marked — chevron replaces the phase abbreviation.
             } else if (VPlayerPanel.isFrosted()) { //modern: soft translucent cells, the stop colour tints them
                 final Color tint = getPhaseColor(active, stopAtPhase).getColor();
-                final Color fill;
-                if (active && stopAtPhase) { fill = new Color(tint.r, tint.g, tint.b, 0.90f); }
-                else if (stopAtPhase) { fill = new Color(tint.r, tint.g, tint.b, 0.40f); }
-                else if (active) { fill = new Color(1f, 1f, 1f, 0.28f); }
-                else { fill = new Color(1f, 1f, 1f, 0.07f); }
+                if (isHovered()) { FROST_FILL.set(1f, 1f, 1f, 0.18f); }
+                else if (active && stopAtPhase) { FROST_FILL.set(tint.r, tint.g, tint.b, 0.90f); }
+                else if (stopAtPhase) { FROST_FILL.set(tint.r, tint.g, tint.b, 0.40f); }
+                else if (active) { FROST_FILL.set(1f, 1f, 1f, 0.28f); }
+                else { FROST_FILL.set(1f, 1f, 1f, 0.07f); }
                 final float gap = Math.max(1f, Utils.scale(1));
-                g.fillRect(isHovered() ? new Color(1f, 1f, 1f, 0.18f) : fill, x, gap, w, h - 2 * gap);
-                final Color text = active && stopAtPhase ? Color.BLACK : new Color(1f, 1f, 1f, active || stopAtPhase ? 0.95f : 0.55f);
-                g.drawText(caption, font, text, x, 0, w, h, false, Align.center, true);
+                g.fillRect(FROST_FILL, x, gap, w, h - 2 * gap);
+                if (active && stopAtPhase) { FROST_TEXT.set(Color.BLACK); }
+                else { FROST_TEXT.set(1f, 1f, 1f, active || stopAtPhase ? 0.95f : 0.55f); }
+                g.drawText(caption, font, FROST_TEXT, x, 0, w, h, false, Align.center, true);
             } else {
                 FSkinColor backColor;
                 if (active && stopAtPhase) {

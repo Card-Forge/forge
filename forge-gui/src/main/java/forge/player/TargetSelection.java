@@ -177,7 +177,7 @@ public class TargetSelection {
             }
             return ability.getTargets().add(validTargets.get(0));
         }
-        if (!zones.contains(ZoneType.Stack)) {
+        if (!zones.contains(ZoneType.Stack) || controller.getGui().canPickStackTargets()) {
             InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, numTargets, divisionValues, filter, mustTargetFiltered);
             inp.showAndWait();
             choiceResult = !inp.hasCancelled();
