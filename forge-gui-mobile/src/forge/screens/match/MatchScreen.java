@@ -2,6 +2,7 @@ package forge.screens.match;
 
 import static forge.Forge.getLocalizer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import forge.screens.match.views.*;
 import forge.toolbox.FOptionPane;
@@ -459,17 +460,38 @@ public class MatchScreen extends FScreen {
     private CoachPanel coach;
     private float coachTop;
 
-    private void layoutCoach() {
-        if (coach == null) {
-            return;
-        }
+    public void layoutCoach() {
+        if (coach == null) { return; }
         final float width = getWidth();
-        final float available = getHeight() - VPrompt.HEIGHT - coachTop;
+        final float bottomLimit = getHeight() - VPrompt.HEIGHT;
         final boolean portrait = getHeight() > width;
+        final float gap = Utils.scale(4);
         coach.setCompact(portrait);
-        // portrait is narrow, so the note takes nearly the full width there
-        final float panelWidth = portrait ? width - 2 * Utils.scale(4) : Math.min(width * 0.72f, Utils.scale(560));
-        coach.setBounds((width - panelWidth) / 2, coachTop + Utils.scale(4), panelWidth, coach.preferredHeight(available));
+
+        float panelWidth = portrait ? width - 2 * gap : Math.min(width * 0.72f, Utils.scale(560));
+        final float panelHeight = coach.preferredHeight(bottomLimit - coachTop);
+        float x = (width - panelWidth) / 2;
+        float y = coachTop + gap;
+
+        // landscape: the stack list hangs from the top right. While it is showing, the note keeps its size and sits below it.
+        final VStack stack = getStack(); // TODO: the real reference
+        if (!portrait && stack != null) {
+            final float stackBottom = stack.getShownBottom();
+            if (stackBottom > 0 && x + panelWidth > stack.getLeft()) {
+                if (stackBottom + gap + panelHeight <= bottomLimit - gap) {
+                    y = stackBottom + gap;
+                } else { // a long stack leaves no room below it: stay at the top, left of the list
+                    panelWidth = Math.max(Utils.scale(240), stack.getLeft() - 2 * gap);
+                    x = gap;
+                }
+            }
+        }
+
+        final float rx = Math.round(x), ry = Math.round(y), rw = Math.round(panelWidth), rh = Math.round(panelHeight);
+        if (coach.getLeft() != rx || coach.getTop() != ry || coach.getWidth() != rw || coach.getHeight() != rh) {
+            coach.setBounds(rx, ry, rw, rh);
+            Gdx.graphics.requestRendering();
+        }
     }
 
     /** Shows a tutorial note; runs {@code onNext} when the player presses its button. Call on the UI thread. */

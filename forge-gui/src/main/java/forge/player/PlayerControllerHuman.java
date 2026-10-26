@@ -158,37 +158,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return inputQueue;
     }
 
-    // The How to Play demo plays the game itself, so the player's own taps must not change it underneath the script.
-    private volatile boolean tutorialInputLocked;
-    private volatile boolean scriptedInput;
-
-    /** While locked, the player's own clicks, OK, End Turn and the like are ignored; see {@link #runScripted}. */
-    public final void setTutorialInputLocked(final boolean locked) {
-        tutorialInputLocked = locked;
-    }
-
-    /** Runs {@code input} as the demo's own move: the lock does not apply to what it sends. Call on the UI thread. */
-    public final void runScripted(final Runnable input) {
-        scriptedInput = true;
-        try {
-            input.run();
-        } finally {
-            scriptedInput = false;
-        }
-    }
-
-    private boolean playerInputBlocked() {
-        return tutorialInputLocked && !scriptedInput;
-    }
-
-    /** Whether a yield change would make the game skip ahead on its own, which the demo must not allow. */
-    private static boolean startsSkippingAhead(final YieldUpdate update) {
-        return update instanceof YieldUpdate.SetMarker
-                || update instanceof YieldUpdate.StackYield s && s.active()
-                || update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn e && e.active()
-                || update instanceof YieldUpdate.SkipPhase p && p.skip();
-    }
-
     public InputProxy getInputProxy() {
         return inputProxy;
     }
@@ -2831,9 +2800,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void undoLastAction() {
-        if (playerInputBlocked()) {
-            return;
-        }
         tryUndoLastAction();
     }
 
@@ -2848,17 +2814,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectButtonOk() {
-        if (playerInputBlocked()) {
-            return;
-        }
         inputProxy.selectButtonOK();
     }
 
     @Override
     public void selectButtonCancel() {
-        if (playerInputBlocked()) {
-            return;
-        }
         if (macros().isReplaying()) {
             macros().cancelPlayback();
             return;
@@ -2872,9 +2832,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void useMana(final byte mana) {
-        if (playerInputBlocked()) {
-            return;
-        }
         if (inputQueue.getInput() instanceof InputPayMana ipm) {
             ipm.useManaFromPool(mana);
         }
@@ -2882,9 +2839,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
-        if (playerInputBlocked()) {
-            return;
-        }
         // TODO Also record input type and wait for that input to be present before sending select player
         macros().addRememberedAction(new SelectPlayerAction(playerView));
 
@@ -2894,9 +2848,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect,
                               final ITriggerEvent triggerEvent) {
-        if (playerInputBlocked()) {
-            return false;
-        }
         final boolean selected = inputProxy.selectCard(cardView, otherCardViewsToSelect, triggerEvent);
         if (selected) {
             macros().addRememberedAction(new SelectCardAction(cardView));
@@ -2906,9 +2857,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectStackItem(final StackItemView item) {
-        if (playerInputBlocked()) {
-            return;
-        }
         // stack entries can be picked by the stack-only input, and by the normal targeting input when a spell
         // may target a spell or a permanent (Chaoslace and the like)
         final Input current = inputProxy.getInput();
@@ -2928,9 +2876,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectAbility(final SpellAbilityView sa) {
-        if (playerInputBlocked()) {
-            return;
-        }
         if (spellViewCache == null || spellViewCache.isEmpty()) {
             return;
         }
@@ -2941,9 +2886,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void alphaStrike() {
-        if (playerInputBlocked()) {
-            return;
-        }
         inputProxy.alphaStrike();
     }
 
@@ -3985,9 +3927,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public void autoPassUntilEndOfTurn() {
-        if (playerInputBlocked()) {
-            return;
-        }
         yieldController.setAutoPassUntilEndOfTurn(true);
         if (isRemoteClient()) getGui().applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(getLocalPlayerView(), true));
         getGui().updateAutoPassPrompt();
@@ -4049,9 +3988,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
-        if (playerInputBlocked() && startsSkippingAhead(update)) {
-            return;
-        }
         if (update instanceof YieldUpdate.ClearAbilityOrders) {
             orderedSALookup.clear();
             rememberedKeys.clear();

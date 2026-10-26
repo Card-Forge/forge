@@ -5,6 +5,7 @@ import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.Selection;
@@ -101,6 +102,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     private final Player me;
     private final Player opp;
     private final boolean watch;
+    private final TutorialGameController gate;
     /**
      * True when this GUI shows one phase label instead of a box per phase (the compact mobile layout), so the notes
      * that point at "the phase boxes" must point at the label instead.
@@ -126,6 +128,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
         opp = other;
         watch = mode == HowToPlay.Mode.WATCH;
+        gate = new TutorialGameController(human0, watch);
         unifiedPhase = GuiBase.getInterface().usesUnifiedPhaseLabel();
         oppStartLife = opp.getLife();
     }
@@ -137,8 +140,6 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             return null;
         }
         final TutorialDirector director = new TutorialDirector(hosted, humans.get(0), mode);
-        // In the demo the director makes every move, so the player's own taps would only knock it out of step.
-        director.human.setTutorialInputLocked(director.watch);
         final Thread t = new Thread(director, "Forge-HowToPlay");
         t.setDaemon(true);
         t.start();
@@ -147,7 +148,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
 
     void stop() {
         stopped = true;
-        human.setTutorialInputLocked(false);
+        gate.setLocked(false);
     }
 
     /** Looks up a language-file text; {0}, {1}... in it are filled from {@code args}. */
@@ -171,7 +172,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         } finally {
             clearSpotlight();
             GuiBase.getInterface().hideCoach();
-            human.setTutorialInputLocked(false);
+            gate.setLocked(false);
         }
     }
 
@@ -183,7 +184,10 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         if (!waitUntil(this::inMain1, 40_000)) {
             return;
         }
-
+        if (watch) {
+            final PlayerView pv = me.getView();
+            FThreads.invokeInEdtNowOrLater(() -> human.getGui().setGameController(pv, gate));
+        }
         tour();
         if (!alive()) {
             return;
@@ -661,7 +665,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             views.add(c.getView());
         }
         spotlit = true;
-        human.getGui().setSelection(new Selection(views, 1, views.size(), List.of(), List.of()));
+        human.getGui().setSelection(new Selection(views, 1, views.size(), List.of(), List.of(), List.of()));
     }
 
     private void clearSpotlight() {
@@ -780,16 +784,13 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     // Clicking, the way the player would
     // ---------------------------------------------------------------------------------------------------------
 
-    // The demo's own moves go through runScripted, which is the only way past the input lock the demo puts on the
-    // player's taps (see PlayerControllerHuman.setTutorialInputLocked).
     private void click(final Card card) {
         if (card != null) {
-            FThreads.invokeInEdtNowOrLater(() ->
-                    human.runScripted(() -> human.selectCard(card.getView(), null, LEFT_CLICK)));
+            FThreads.invokeInEdtNowOrLater(() -> human.selectCard(card.getView(), null, LEFT_CLICK));
         }
     }
 
     private void ok() {
-        FThreads.invokeInEdtNowOrLater(() -> human.runScripted(human::selectButtonOk));
+        FThreads.invokeInEdtNowOrLater(human::selectButtonOk);
     }
 }
