@@ -9,6 +9,7 @@ import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
 import forge.game.Game;
+import forge.GameCommand;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -121,6 +122,52 @@ public class PhasesEffect extends SpellAbilityEffect {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, phasedOut);
             game.getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
+        }
+
+        if (!phasedOut.isEmpty() && sa.hasParam("Duration")) {
+            phasesUntilCommand(phasedOut, sa);
+        }
+    }
+
+    private static void phasesUntilCommand(final CardCollection phasedOut, final SpellAbility sa) {
+        final Card hostCard = sa.getHostCard();
+        final Game game = hostCard.getGame();
+        final boolean phaseInTapped = sa.hasParam("PhaseInTapped");
+        final boolean phaseInUntapped = sa.hasParam("PhaseInUntapped");
+        final CardCollection cardsToReturn = new CardCollection(phasedOut);
+
+        final GameCommand gc = new GameCommand() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void run() {
+                for (Card c : cardsToReturn) {
+                    Card gameCard = game.getCardState(c, null);
+                    if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
+                        continue;
+                    }
+                    if (gameCard.isPhasedOut()) {
+                        gameCard.setWontPhaseInNormal(false);
+                        if (StaticAbilityCantPhase.cantPhaseIn(gameCard)) {
+                            continue;
+                        }
+                        gameCard.phase(false);
+                        if (!gameCard.isPhasedOut()) {
+                            if (phaseInTapped) {
+                                gameCard.setTapped(true);
+                            } else if (phaseInUntapped) {
+                                gameCard.setTapped(false);
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        if (sa.getParam("Duration").contains("UntilHostLeavesPlay") && !hostCard.isInPlay()) {
+            gc.run();
+        } else {
+            addUntilCommand(sa, gc);
         }
     }
 }
