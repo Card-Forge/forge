@@ -2097,9 +2097,11 @@ ScryfallCode=PRM
 89974 R Leonin Lightscribe @Steven Belledin
 89976 R Nils, Discipline Enforcer @Magali Villeneuve
 89978 R Strict Proctor @Jokubas Uogintas
+89980 R Scholarship Sponsor @Tomas Duchek
 89982 R Sparring Regimen @Tomasz Jedruszek
 89984 R Combat Calligrapher @Joseph Weston
 89986 R Semester's End @Alayna Danner
+89988 R Guardian Archon @Scott M. Fischer
 89990 R Devastating Mastery @Jake Murray
 89992 R Elite Spellbinder @Ryan Pancoast
 89994 R Promise of Loyalty @Sara Winters

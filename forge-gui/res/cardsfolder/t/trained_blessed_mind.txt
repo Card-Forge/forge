@@ -1,0 +1,17 @@
+Name:Trained Blessed Mind
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Trained
+SVar:STK2:Kind$ Name | Word$ Blessed
+SVar:STK3:Kind$ Name | Word$ Mind
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ {T}: Exile target card from a graveyard. | Ability$ STK7Exile
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Threshold — As long as seven or more cards are in your graveyard, this creature gets +4/+0 and has trample. | Statics$ STK8Threshold
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 2
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 6 | Toughness$ 9
+SVar:STK7Exile:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | SpellDescription$ Exile target card from a graveyard.
+SVar:STK8Threshold:Mode$ Continuous | AffectedDefined$ Self | AddPower$ 4 | AddKeyword$ Trample | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, this creature gets +4/+0 and has trample.
+Oracle:{TK}{TK} — {T}: Exile target card from a graveyard.\n{TK}{TK}{TK} — Threshold — As long as seven or more cards are in your graveyard, this creature gets +4/+0 and has trample.\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK}{TK} — 6/9

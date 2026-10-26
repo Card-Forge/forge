@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gimli
+Title=Gimli
+Icon=Gimli.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/MohammedbinSalman_-_Izzet_Spellementals_(Standard,_#898280).dck
+Deck Type=constructed
+
+[Main]
+4 Opt
+4 Eddymurk Crab
+4 Flow State
+2 Get Out
+4 Hearth Elemental
+2 Impractical Joke
+6 Island
+4 Sleight of Hand
+4 Prismari Charm
+4 Riverpyre Verge
+2 Seasoned Cryomancer
+2 Spell Snare
+4 Spirebluff Canal
+4 Steam Vents
+2 Stormcarved Coast
+4 Sunderflock
+1 Traumatic Critique
+3 Burst Lightning
+[Sideboard]
+2 Spell Snare
+3 Colorstorm Stallion
+2 Avengers Disassembled
+2 Broadside Barrage
+2 Spell Pierce
+2 Disdainful Stroke
+2 Annul

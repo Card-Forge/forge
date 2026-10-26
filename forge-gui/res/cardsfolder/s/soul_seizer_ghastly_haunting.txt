@@ -18,6 +18,6 @@ Colors:blue
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | GainControl$ You | Description$ You control enchanted creature.
 AI:RemoveDeck:All
 Oracle:Enchant creature\nYou control enchanted creature.

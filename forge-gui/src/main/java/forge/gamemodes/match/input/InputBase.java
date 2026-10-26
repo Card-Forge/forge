@@ -25,6 +25,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
+import forge.gamemodes.match.Selection;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -77,9 +78,28 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = false;
         controller.cancelAwaitNextInput();
         showMessage();
+        // showMessage can finish the input, which has already reset the selection
+        if (!isFinished()) {
+            showSelection();
+        }
     }
 
     protected abstract void showMessage();
+
+    /** What this prompt marks. */
+    protected Selection getSelection() {
+        return Selection.NONE;
+    }
+
+    /** The cards this prompt highlights as worth acting on. */
+    protected List<CardView> getActionable() {
+        return List.of();
+    }
+
+    /** Sends this prompt's marks, with the targets kept marked while a spell's cost is paid. */
+    protected final void showSelection() {
+        controller.getGui().setSelection(getSelection().withChosen(controller.getKeptMarks()).withActionable(getActionable()));
+    }
 
     @Override
     public final void selectPlayer(final Player player, final ITriggerEvent triggerEvent) {

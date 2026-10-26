@@ -14,6 +14,9 @@ import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
+import forge.game.card.sticker.AppliedSticker;
+import forge.game.card.sticker.Sticker;
+import forge.game.card.sticker.StickerKind;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
 import forge.game.keyword.Keyword;
@@ -1367,7 +1370,7 @@ public class AbilityUtils {
             for (Card lki : sa.getRootAbility().getLastStateBattlefield()) {
                 game.getTriggerHandler().registerActiveLTBTrigger(lki);
             }
-            game.getTriggerHandler().collectTriggerForWaiting();
+            game.getTriggerHandler().collectTriggerForWaiting(true);
         } else {
             game.getTriggerHandler().resetActiveTriggers();
         }
@@ -1658,20 +1661,23 @@ public class AbilityUtils {
                         if (TriggerType.ChangesZone.equals(t.getMode()) && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
                            int x = isUnlinkedFromCastSA(ctb, c) ? 0 : c.getXManaCostPaid();
                            return doXMath(x, expr, c, ctb);
-                        } else if (TriggerType.SpellCast.equals(t.getMode())) {
+                        }
+                        if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like Hydroid Krasis
                             SpellAbility castSA = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
                             if (castSA == null || castSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(castSA.getXManaCostPaid(), expr, c, ctb);
-                        } else if (TriggerType.Cycled.equals(t.getMode())) {
+                        }
+                        if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
                             return doXMath(cycleSA.getXManaCostPaid(), expr, c, ctb);
-                        } else if (TriggerType.TurnFaceUp.equals(t.getMode())) {
+                        }
+                        if (TriggerType.TurnFaceUp.equals(t.getMode())) {
                             SpellAbility turnupSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (turnupSA == null || turnupSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
@@ -1731,6 +1737,12 @@ public class AbilityUtils {
                         }
                     }
                     return count;
+                }
+                // Count$TriggeredManaCostGeneric
+                if (sq[0].startsWith("TriggeredManaCostGeneric")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    Card triggeringObject = (Card) root.getTriggeringObject(AbilityKey.Card);
+                    return triggeringObject.getManaCost().getGenericCost();
                 }
                 // Count$TriggeredManaCostDevotion.<Color>
                 if (sq[0].startsWith("TriggeredManaCostDevotion")) {
@@ -1989,28 +2001,6 @@ public class AbilityUtils {
             return doXMath(num, expr, c, ctb);
         }
 
-        if (sq[0].startsWith("RememberedWithSharedCardType")) {
-            int maxNum = 1;
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Card) {
-                    int num = 1;
-                    Card firstCard = (Card) o;
-                    for (final Object p : c.getRemembered()) {
-                        if (p instanceof Card) {
-                            Card secondCard = (Card) p;
-                            if (!firstCard.equals(secondCard) && firstCard.sharesCardTypeWith(secondCard)) {
-                                num++;
-                            }
-                        }
-                    }
-                    if (num > maxNum) {
-                        maxNum = num;
-                    }
-                }
-            }
-            return doXMath(maxNum, expr, c, ctb);
-        }
-
         // might get called from editor
         if (game != null) {
             // CR 608.2h
@@ -2093,6 +2083,11 @@ public class AbilityUtils {
 
         if (sq[0].equals("Intensity")) {
             return doXMath(c.getIntensity(true), expr, c, ctb);
+        }
+
+        // CardStickers[.<Kind>|.NameMinLetters.N|.NameMaxLetters.N|.NameLetter.x|.NameStartsWith.x]
+        if (sq[0].startsWith("CardStickers")) {
+            return doXMath(countStickers(c, sq), expr, c, ctb);
         }
 
         if (sq[0].startsWith("CardCounters")) {
@@ -2309,6 +2304,14 @@ public class AbilityUtils {
         if (sq[0].startsWith("YouRolledThisTurn")) {
             int n = calculateAmount(c, sq[0].substring(17), ctb);
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YouFaceDilemmaThisTurn")) {
+            return doXMath(player.getDilemmasFacedThisTurn(), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YouScryThisTurn")) {
+            return doXMath(player.getScryThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("YouSurveilThisTurn")) {
@@ -2876,6 +2879,59 @@ public class AbilityUtils {
         return doXMath(num, expr, c, ctb);
     }
 
+    private static int countStickers(Card c, String[] sq) {
+        String kind = sq.length > 1 ? sq[1] : null;
+        if (kind == null || kind.isEmpty()) {
+            return c.getStickers().size();
+        }
+        String arg = sq.length > 2 ? sq[2] : null;
+        int count = 0;
+        for (AppliedSticker applied : c.getStickers()) {
+            Sticker s = applied.getSticker();
+            if (s.getKind() == StickerKind.NAME && arg != null) {
+                String letters = s.getLetters();
+                switch (kind) {
+                    case "NameStartsWith" -> {
+                        String wanted = "ChosenType".equals(arg) ? c.getChosenType() : arg;
+                        if (!letters.isEmpty() && StringUtils.isNotEmpty(wanted)
+                                && Character.toUpperCase(letters.charAt(0))
+                                        == Character.toUpperCase(wanted.charAt(0))) {
+                            count++;
+                        }
+                        continue;
+                    }
+                    case "NameLetter" -> {
+                        char wanted = Character.toUpperCase(arg.charAt(0));
+                        for (int i = 0; i < letters.length(); i++) {
+                            if (Character.toUpperCase(letters.charAt(i)) == wanted) {
+                                count++;
+                            }
+                        }
+                        continue;
+                    }
+                    case "NameMinLetters" -> {
+                        if (letters.length() >= Integer.parseInt(arg)) {
+                            count++;
+                        }
+                        continue;
+                    }
+                    case "NameMaxLetters" -> {
+                        if (letters.length() <= Integer.parseInt(arg)) {
+                            count++;
+                        }
+                        continue;
+                    }
+                    default -> {
+                    }
+                }
+            }
+            if (s.getKind() == StickerKind.smartValueOf(kind)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
         for (String pair : conversion.split(" ")) {
             // Check if conversion is additive or restrictive and how to split
@@ -2919,6 +2975,9 @@ public class AbilityUtils {
         }
         if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Backside)) {
             collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Backside), controller, withAltCost);
+        }
+        if (tgtCard.hasState(CardStateName.Secondary)) {
+            collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Secondary), controller, withAltCost);
         }
 
         for (SpellAbility s : list) {
@@ -3247,6 +3306,9 @@ public class AbilityUtils {
             }
             return num / secondaryNum;
         } else if (s[0].contains("Mod")) {
+            if (secondaryNum == 0) {
+                return 0;
+            }
             return num % secondaryNum;
         } else if (s[0].contains("Abs")) {
             return Math.abs(num);
@@ -3300,7 +3362,7 @@ public class AbilityUtils {
         // methods for getting the highest/lowest playerXCount from a range of players
         if (l[0].startsWith("Highest")) {
             for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Highest", ""), source, ctb);
+                final int current = playerXProperty(player, TextUtil.fastReplace(l[0], "Highest", ""), source, ctb);
                 if (current > n) {
                     n = current;
                 }
@@ -3312,7 +3374,7 @@ public class AbilityUtils {
         if (l[0].startsWith("Lowest")) {
             n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
             for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Lowest", ""), source, ctb);
+                final int current = playerXProperty(player, TextUtil.fastReplace(l[0], "Lowest", ""), source, ctb);
                 if (current < n) {
                     n = current;
                 }
@@ -3707,6 +3769,19 @@ public class AbilityUtils {
             return doXMath(filtered.size(), splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
+        if (def.startsWith("StickerPower") || def.startsWith("StickerToughness")) {
+            final boolean power = def.startsWith("StickerPower");
+            int total = 0;
+            for (Card c : paidList) {
+                for (AppliedSticker applied : c.getStickers()) {
+                    if (applied.getKind() == StickerKind.PT) {
+                        total += power ? applied.getSticker().getPower() : applied.getSticker().getToughness();
+                    }
+                }
+            }
+            return doXMath(total, CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         if (def.startsWith("AllTypes")) {
             return countCardTypesFromList(paidList, false) +
                     countSuperTypesFromList(paidList) +
@@ -3717,6 +3792,22 @@ public class AbilityUtils {
             return doXMath(countCardTypesFromList(paidList, def.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
+        if (def.startsWith("SharesCardTypes")) {
+            int maxNum = 1;
+            for (final Card c1 : paidList) {
+                int num = 1;
+                for (final Card c2 : paidList) {
+                    if (!c1.equals(c2) && c1.sharesCardTypeWith(c2)) {
+                        num++;
+                    }
+                }
+                if (num > maxNum) {
+                    maxNum = num;
+                }
+            }
+            return doXMath(maxNum, CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
         if (def.startsWith("CreatureType")) {
             final Set<String> creatTypes = Sets.newHashSet();
             for (Card card : paidList) {
@@ -3724,6 +3815,15 @@ public class AbilityUtils {
             }
             // filter out fun types?
             return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
+        }
+
+        if (def.startsWith("PlaneswalkerType")) {
+            final Set<String> walkerTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                walkerTypes.addAll(card.getType().getPlaneswalkerTypes());
+            }
+
+            return doXMath(walkerTypes.size(), CardFactoryUtil.extractOperators(def), source, ctb);
         }
 
         //Per request for custom cards.

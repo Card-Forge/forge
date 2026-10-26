@@ -46,6 +46,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbilityCantChangeDayTime;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.game.undo.UndoManager;
 import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.*;
@@ -99,7 +100,13 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
     public int AI_TIMEOUT = 5;
-    public boolean AI_CAN_USE_TIMEOUT = true;
+    // Whether heuristic AI players may refine their main phase choices with flat Monte Carlo rollouts.
+    // False here on purpose: it is really set by the Match/Preferences (MATCH_AI_FLAT_MONTE_CARLO, default true),
+    // and games copied for AI simulation never inherit it, so rollouts cannot recurse into themselves.
+    public boolean AI_FLAT_MONTE_CARLO = false;
+    // Whether Monte Carlo may use its maximum strength settings (bigger budgets, more lines and samples). Set by the
+    // Match when it runs on a desktop; mobile ports keep the conservative profile values. Never inherited by copies.
+    public boolean AI_FLAT_MONTE_CARLO_MAX = false;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
     // While this is false here, its really set by the Match/Preferences
@@ -144,6 +151,7 @@ public class Game {
     private final Game maingame;
     private final GameView view;
     private final Tracker tracker = new Tracker();
+    private final UndoManager undoManager = new UndoManager();
 
     /**
      * Gets the id.
@@ -200,6 +208,10 @@ public class Game {
         return lastStateGraveyard;
     }
 
+    public UndoManager getUndoManager() {
+        return undoManager;
+    }
+
     public void stashGameState() {
         // Take a snapshot of the current state to restore to previous state
         if (EXPERIMENTAL_RESTORE_SNAPSHOT) {
@@ -229,13 +241,15 @@ public class Game {
     }
 
     public CardCollectionView copyLastState(ZoneType type) {
-        CardCollection result = new CardCollection();
-        Map<Integer, Card> cachedMap = Maps.newHashMap();
+        final CardCollection result = new CardCollection(0);
+        final Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Player p : getPlayers()) {
-            result.addAll(p.getZone(type).getLKICopy(cachedMap));
+            // the LKI copies of different players' cards are distinct: no duplicate check needed
+            result.addAllUnique(p.getZone(type).getLKICopy(cachedMap).getCards());
         }
         return result;
     }
+
 
     public CardCollectionView copyLastStateBattlefield() {
         return copyLastState(ZoneType.Battlefield);
@@ -416,7 +430,11 @@ public class Game {
     }
 
     public final PlayerCollection getPlayersInTurnOrder(Player p) {
-        final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
+        // with at most two players left, either direction gives the same list once rotated to start
+        // at p, so the turn order check, which scans every card for a reversal effect, cannot matter
+        final boolean directionIrrelevant = ingamePlayers.size() <= 2 && ingamePlayers.contains(p);
+        final PlayerCollection players = new PlayerCollection(
+                directionIrrelevant ? ingamePlayers : getPlayersInTurnOrder());
 
         int i = players.indexOf(p);
         Collections.rotate(players, -i);
@@ -605,7 +623,7 @@ public class Game {
         return card == null ? null : card.getLastKnownZone();
     }
 
-    public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
+    public CardCollectionView getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
@@ -617,25 +635,101 @@ public class Game {
             return getStackZone().getCards();
         }
 
-        CardCollection cards = new CardCollection();
-        for (final Player p : getPlayers()) {
-            cards.addAll(p.getCardsIn(zone, false));
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection cards = new CardCollection(0);
+
+        for (int pi = 0; pi < playerCount; pi++) {
+            // a card is in one zone of one player only: no duplicate check needed
+            cards.addAllUnique(players.get(pi).getCardsIn(zone, false));
         }
         return cards;
     }
 
+    // cached: ZoneType.values() clones the array on every call
+    private static final ZoneType[] ALL_ZONE_TYPES = ZoneType.values();
+
+    // z is a single zone type, so the cards of the different players (and the stack) are all distinct
+    private void addCardsIn(final CardCollection cards, final ZoneType z, final PlayerCollection players, final int playerCount) {
+        if (z == ZoneType.Stack) {
+            cards.addAllUnique(getStackZone().getCards());
+            return;
+        }
+        for (int i = 0; i < playerCount; i++) {
+            cards.addAllUnique(players.get(i).getCardsIn(z));
+        }
+    }
+
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
-        CardCollection cards = new CardCollection();
+        if (zones == null) {
+            return CardCollection.EMPTY;
+        }
+
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+
+        if (zones instanceof EnumSet<?>) {
+            final Set<ZoneType> zoneSet = (Set<ZoneType>) zones;
+            // one pass: a separate sizing pass would call getCardsIn(z) twice per player and zone (it can allocate)
+            final CardCollection enumCards = new CardCollection(0);
+            for (final ZoneType z : ALL_ZONE_TYPES) {
+                if (zoneSet.contains(z)) {
+                    addCardsIn(enumCards, z, players, playerCount);
+                }
+            }
+            return enumCards;
+        }
+
+        final CardCollection cards = new CardCollection(0);
+
         for (final ZoneType z : zones) {
-            cards.addAll(getCardsIn(z));
+            if (z == ZoneType.Stack) {
+                final Collection<Card> stack = getStackZone().getCards();
+                if (!stack.isEmpty()) {
+                    cards.ensureCapacity(cards.size() + stack.size());
+                    cards.addAll(stack);
+                }
+                continue;
+            }
+
+            for (int pi = 0; pi < playerCount; pi++) {
+                final Collection<Card> playerCards = players.get(pi).getCardsIn(z);
+                final int s = playerCards.size();
+                if (s > 0) {
+                    cards.ensureCapacity(cards.size() + s);
+                    cards.addAll(playerCards);
+                }
+            }
         }
         return cards;
     }
 
     public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
-        CardCollection cards = new CardCollection();
+        if (p == null || zones == null) {
+            return CardCollection.EMPTY;
+        }
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection cards = new CardCollection(0);
+
         for (final ZoneType z : zones) {
-            cards.addAll(getCardsIncludePhasingIn(z));
+            if (z == ZoneType.Stack) {
+                final Collection<Card> stack = getStackZone().getCards();
+                if (!stack.isEmpty()) {
+                    cards.ensureCapacity(cards.size() + stack.size());
+                    cards.addAll(stack);
+                }
+                continue;
+            }
+
+            for (int pi = 0; pi < playerCount; pi++) {
+                final Collection<Card> pc = players.get(pi).getCardsIn(z, false);
+                final int s = pc.size();
+                if (s > 0) {
+                    cards.ensureCapacity(cards.size() + s);
+                    cards.addAll(pc);
+                }
+            }
         }
         return CardLists.filter(cards, CardPredicates.isOwner(p));
     }
@@ -653,9 +747,13 @@ public class Game {
     }
 
     public CardCollectionView getColoredCardsInPlay(final byte color) {
-        final CardCollection cards = new CardCollection();
-        for (Player p : getPlayers()) {
-            cards.addAll(p.getColoredCardsInPlay(color));
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection cards = new CardCollection(0);
+
+        for (int pi = 0; pi < playerCount; pi++) {
+            // a permanent is on one player's battlefield only: no duplicate check needed
+            cards.addAllUnique(players.get(pi).getColoredCardsInPlay(color));
         }
         return cards;
     }
@@ -686,7 +784,7 @@ public class Game {
     }
     public Card getCardState(final Card card, final Card notFound) {
         CardStateVisitor visit = new CardStateVisitor(card);
-        this.forEachCardInGame(visit);
+        this.forEachCardInGame(visit, true);
         return visit.getFound(notFound);
     }
 
@@ -778,15 +876,25 @@ public class Game {
         visitor.visitAll(getStackZone().getCards());
     }
     public CardCollectionView getCardsInGame() {
-        final CardCollection all = new CardCollection();
-        Visitor<Card> visitor = new Visitor<Card>() {
-            @Override
-            public boolean visit(Card card) {
-                all.add(card);
-                return true;
-            }
-        };
-        forEachCardInGame(visitor);
+        final PlayerCollection players = getPlayers();
+        final int playerCount = players.size();
+        final CardCollection all = new CardCollection(0);
+
+        // Same zones and order as forEachCardInGame (PerfPatchFollowUpRulesTest compares them). Every card is in
+        // exactly one of these places, so the duplicate check (and the hash table it builds) is skipped.
+        for (int pi = 0; pi < playerCount; pi++) {
+            final Player player = players.get(pi);
+            all.addAllUnique(player.getZone(ZoneType.Graveyard).getCards());
+            all.addAllUnique(player.getZone(ZoneType.Hand).getCards());
+            all.addAllUnique(player.getZone(ZoneType.Library).getCards());
+            all.addAllUnique(player.getZone(ZoneType.Battlefield).getCards(false));
+            all.addAllUnique(player.getZone(ZoneType.Exile).getCards());
+            all.addAllUnique(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE));
+            all.addAllUnique(player.getInboundTokens());
+        }
+
+        all.addAllUnique(getStackZone().getCards());
+
         return all;
     }
 
@@ -1427,10 +1535,12 @@ public class Game {
     public int getAITimeout() {
         return AI_TIMEOUT;
     }
-    public boolean canUseTimeout() {
-        return AI_CAN_USE_TIMEOUT;
+    public boolean getAIFlatMonteCarlo() {
+        return AI_FLAT_MONTE_CARLO;
     }
-
+    public boolean getAIFlatMonteCarloMax() {
+        return AI_FLAT_MONTE_CARLO_MAX;
+    }
     public boolean isNoGUIUser() {
         return noGUIUser;
     }

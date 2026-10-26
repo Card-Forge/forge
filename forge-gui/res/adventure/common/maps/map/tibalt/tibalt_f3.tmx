@@ -72,9 +72,11 @@
     <property name="defeatDialog">[
 	{
 		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open.&quot;,
+		&quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.119.x.n0.text&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
 				&quot;action&quot;: [
 					{ &quot;deleteMapObject&quot;: 201 },
 					{ &quot;deleteMapObject&quot;: -1 }
@@ -189,8 +191,9 @@
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.201.d.n0.text&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; } 
     ]
 }]</property>
    </properties>
@@ -224,13 +227,16 @@
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked.&quot;,
+    &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.204.d.n0.text&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave&quot; },
+    { &quot;name&quot;:&quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
     {      
-        &quot;name&quot;:&quot;Unlock with Torturer's key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Torturer's key&quot;,
+        &quot;locname&quot;: &quot;adv.tibalt_tibalt_f3.204.d.n3.name&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked, though the key breaks as you open the door.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+        &quot;loctext&quot;: &quot;adv.tibalt_tibalt_f3.204.d.n2.text&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;locname&quot;: &quot;adv.shared.continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
     }
     ]
 }]</property>

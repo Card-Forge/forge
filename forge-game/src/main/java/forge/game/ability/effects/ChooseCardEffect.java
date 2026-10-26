@@ -191,6 +191,23 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     chosenPool.add(choice);
                 }
                 chosen.addAll(chosenPool);
+            } else if (sa.hasParam("WithDifferentManaValues") || sa.hasParam("WithDifferentCMC")) {
+                CardCollection chosenPool = new CardCollection();
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCreature");
+                while (!pChoices.isEmpty() && chosenPool.size() < validAmount) {
+                    boolean optional = chosenPool.size() >= minAmount;
+                    if (!chosenPool.isEmpty() && !sa.hasParam("ChoiceTitle")) {
+                        title = "Choose a creature with a different mana value";
+                    }
+                    Card choice = p.getController().chooseSingleEntityForEffect(pChoices, sa, title, optional, null);
+                    if (choice == null) {
+                        break;
+                    }
+                    chosenPool.add(choice);
+                    final int cmc = choice.getCMC();
+                    pChoices = CardLists.filter(pChoices, c -> c.getCMC() != cmc);
+                }
+                chosen.addAll(chosenPool);
             } else if (sa.hasParam("EachDifferentPower")) {
                 List<Integer> powers = new ArrayList<>();
                 CardCollection chosenPool = new CardCollection();

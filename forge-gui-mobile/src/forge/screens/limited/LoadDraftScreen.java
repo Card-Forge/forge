@@ -16,9 +16,11 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.net.EventFormat;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
+import forge.toolbox.Frost;
 import forge.util.GuiPrefBinders;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -65,11 +67,18 @@ public class LoadDraftScreen extends LaunchScreen {
         cbGamesInMatch.addItem("1");
         cbGamesInMatch.addItem("3");
         cbGamesInMatch.addItem("5");
+        cbGamesInMatchBinder.bind();
     }
 
     @Override
     public void onActivate() {
-        lstDecks.setPool(DeckProxy.getAllDraftDecks());
+        List<DeckProxy> combined = new ArrayList<>(DeckProxy.getAllDraftDecks());
+        for (DeckProxy p : DeckProxy.getAllNetworkEventDecks()) {
+            if (EventFormat.BOOSTER_DRAFT.name().equals(DeckProxy.getEventTag(p.getDeck(), "eventFormat"))) {
+                combined.add(p);
+            }
+        }
+        lstDecks.setPool(combined);
         lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
         cbGamesInMatchBinder.load();
     }
@@ -105,6 +114,7 @@ public class LoadDraftScreen extends LaunchScreen {
         lstDecks.setBounds(x, y, w, listHeight);
         y += listHeight + FDeckChooser.PADDING;
         lblTip.setBounds(x, y, w, labelHeight);
+        lblTip.setVisible(!Frost.isOn());
         y += labelHeight + FDeckChooser.PADDING;
     }
 
@@ -117,6 +127,15 @@ public class LoadDraftScreen extends LaunchScreen {
                     FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingDeck"),
                         Forge.getLocalizer().getMessage("lblNoDeck"));
                 });
+                return;
+            }
+
+            // Event decks lack a DeckGroup for gauntlet/AI play
+            if (FModel.getDecks().getDraft().get(humanDeck.getName()) == null) {
+                FThreads.invokeInEdtLater(() ->
+                    FOptionPane.showErrorDialog(
+                        Forge.getLocalizer().getMessage("lblEventDeckEditOnly"),
+                        Forge.getLocalizer().getMessage("lblNoOpponentsForEventDeck")));
                 return;
             }
 

@@ -1,0 +1,8 @@
+Name:Park Bleater
+ManaCost:2 W
+Types:Creature Goat Employee
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigTicket | TriggerDescription$ Whenever another creature you own enters, you get {TK}.
+SVar:TrigTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1
+A:AB$ PutSticker | Cost$ W T | Choices$ Creature.YouOwn+ThisTurnEntered | ChoiceTitle$ Choose a creature you own that entered this turn | Optional$ True | SpellDescription$ You may put a sticker on a creature you own that entered this turn.
+Oracle:Whenever another creature you own enters, you get {TK}.\n{W}, {T}: You may put a sticker on a creature you own that entered this turn.

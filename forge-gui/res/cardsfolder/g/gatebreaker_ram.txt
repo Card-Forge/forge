@@ -2,8 +2,8 @@ Name:Gatebreaker Ram
 ManaCost:2 G
 Types:Creature Sheep
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Gate you control.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance & Trample | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as you control two or more Gates, CARDNAME has vigilance and trample.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Gate you control.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Vigilance & Trample | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as you control two or more Gates, CARDNAME has vigilance and trample.
 SVar:X:Count$Valid Land.Gate+YouCtrl
 SVar:BuffedBy:Land.Gate
 DeckNeeds:Type$Gate

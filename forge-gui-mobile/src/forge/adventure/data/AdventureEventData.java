@@ -791,7 +791,7 @@ public class AdventureEventData implements Serializable {
             }
         }
         if (ret.size > 0) {
-            RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
+            RewardScene.instance().loadRewards(ret, RewardScene.Type.EventReward, null);
             Forge.switchScene(RewardScene.instance());
         }
 
@@ -951,7 +951,7 @@ public class AdventureEventData implements Serializable {
         public String getName() {
             EnemyData enemyData = WorldData.getEnemy(enemyDataName);
             if (enemyData != null)
-                return enemyData.getName();
+                return enemyData.getDisplayName();
             return "";
         }
 

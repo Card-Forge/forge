@@ -1,0 +1,9 @@
+Name:Graft Surgeon
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/2
+K:etbCounter:P1P1:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature dies, put its counters on up to one target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHas:Ability$Counters
+Oracle:This creature enters with a +1/+1 counter on it.\nWhen this creature dies, put its counters on up to one target creature you control.

@@ -1,0 +1,8 @@
+Name:Overwrite the Multiverse
+ManaCost:4 B B
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile |  RememberChanged$ True | SubAbility$ DBEmpower | SpellDescription$ Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Exile all creatures. Empower Jace X, where X is the number of creatures exiled this way. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

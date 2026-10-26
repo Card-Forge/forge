@@ -1,0 +1,6 @@
+Name:Restore with Empathy
+ManaCost:2 G
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | ValidTgtsDesc$ permanent card in your graveyard | SubAbility$ DBGainLife | SpellDescription$ Return target permanent card from your graveyard to your hand. You gain 4 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+Oracle:Return target permanent card from your graveyard to your hand. You gain 4 life.

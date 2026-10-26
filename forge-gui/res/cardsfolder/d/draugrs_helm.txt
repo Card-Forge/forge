@@ -2,7 +2,7 @@ Name:Draugr's Helm
 ManaCost:1 B
 Types:Artifact Equipment
 K:Equip:4
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+2 and has menace.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+2 and has menace.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters, you may pay {2}{B}. If you do, create a 2/2 black Zombie Berserker creature token, then attach CARDNAME to it.
 SVar:TrigToken:AB$ Token | Cost$ 2 B | TokenScript$ b_2_2_zombie_berserker | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Self | Defined$ Remembered | SubAbility$ DBCleanup

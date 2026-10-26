@@ -205,6 +205,15 @@ public class CharmEffect extends SpellAbilityEffect {
         return "";
     }
 
+    private static void faceDilemma(final Player chooser, final boolean random) {
+        chooser.incDilemmasFacedThisTurn();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(chooser);
+        if (random) {
+            runParams.put(AbilityKey.Random, true);
+        }
+        chooser.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);
+    }
+
     public static boolean makeChoices(SpellAbility sa) {
         // CR 700.2g
         if (sa.isCopied()) {
@@ -250,7 +259,11 @@ public class CharmEffect extends SpellAbilityEffect {
                 random = Expressions.compare(value, compare.substring(0, 2), Integer.parseInt(compare.substring(2)));
             }
             if (random) {
-                chainAbilities(sa, Aggregates.random(choices, num));
+                List<AbilitySub> randomChosen = Aggregates.random(choices, num);
+                chainAbilities(sa, randomChosen);
+                if (!randomChosen.isEmpty()) {
+                    faceDilemma(activator, true);
+                }
                 return true;
             }
         }
@@ -271,8 +284,7 @@ public class CharmEffect extends SpellAbilityEffect {
         chainAbilities(sa, chosen);
 
         if (chosen != null && !chosen.isEmpty()) {
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(chooser);
-            chooser.getGame().getTriggerHandler().runTrigger(TriggerType.FacesDilemma, runParams, false);
+            faceDilemma(chooser, false);
         }
 
         // trigger without chosen modes are removed from stack

@@ -51,10 +51,12 @@
     <property name="dialog">[
 	{
 		&quot;text&quot;: &quot;A big gate is blocking the path.&quot;,
+		&quot;loctext&quot;: &quot;adv.main_story_castles_wastetown.55.d.n0.text&quot;,
 		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave&quot; },
+			{ &quot;name&quot;: &quot;Leave&quot;, &quot;locname&quot;: &quot;adv.shared.leave&quot; },
 			{
 				&quot;name&quot;: &quot;Unlock with the five colored keys.&quot;,
+				&quot;locname&quot;: &quot;adv.main_story_castles_wastetown.55.d.n3.name&quot;,
 				&quot;condition&quot;: [
 					{ &quot;item&quot;: &quot;Blue Key&quot; },
 					{ &quot;item&quot;: &quot;Green Key&quot; },
@@ -63,9 +65,11 @@
 					{ &quot;item&quot;: &quot;Red Key&quot; }
 				],
 				&quot;text&quot;: &quot;The gate is unlocked&quot;,
+				&quot;loctext&quot;: &quot;adv.main_story_castles_wastetown.55.d.n2.text&quot;,
 				&quot;options&quot;: [
 					{
 						&quot;name&quot;: &quot;Continue&quot;,
+						&quot;locname&quot;: &quot;adv.shared.continue&quot;,
 						&quot;action&quot;: [
 							{ &quot;deleteMapObject&quot;: -1 },
 							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },

@@ -8,10 +8,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.util.ThreadUtil;
 import org.tinylog.Logger;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,11 +83,10 @@ public final class CdnUuidCache {
     }
 
     /** Cache: setCode → (collectorNumber → (lang → LangUuids)) */
-    private static final ConcurrentHashMap<String, Map<String, Map<String, LangUuids>>> setCache =
-            new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Map<String, Map<String, LangUuids>>> setCache = new ConcurrentHashMap<>();
 
     /** Set codes a lookup couldn't answer locally, waiting for {@link #syncPendingSets}. */
-    private static final Set<String> pendingSyncs = ConcurrentHashMap.newKeySet();
+    private static final Set<String> pendingSyncs = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     /** Submits {@link #syncPendingSets} to the shared pool; tests disable this. */
     static volatile boolean autoSyncEnabled = true;
@@ -348,12 +344,18 @@ public final class CdnUuidCache {
     /** Queues {@code setCode} and, unless a test disabled it, submits {@link #syncPendingSets} to the shared pool. */
     private static void queueSync(String setCode) {
         if (pendingSyncs.add(setCode) && autoSyncEnabled) {
-            ThreadUtil.getServicePool().submit(CdnUuidCache::syncPendingSets);
+            ThreadUtil.getServicePool().submit(() -> {
+                try {
+                    syncPendingSets();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
     /** Syncs every queued set from Scryfall. Meant to run off the EDT/render thread. */
-    public static void syncPendingSets() {
+    public static void syncPendingSets() throws UnsupportedEncodingException {
         for (String setCode : pendingSyncs) {
             if (!pendingSyncs.remove(setCode)) continue; // another thread already claimed it
             ScryfallSetSync.sync(setCode);
@@ -429,7 +431,7 @@ public final class CdnUuidCache {
      * Conflux's Scryfall set code is "con". Prefix the handful of set codes that collide so their
      * cache files can actually be written; every other set code is untouched.
      */
-    private static final java.util.Set<String> WINDOWS_RESERVED_NAMES = new java.util.HashSet<>(java.util.Arrays.asList(
+    private static final Set<String> WINDOWS_RESERVED_NAMES = new java.util.HashSet<>(java.util.Arrays.asList(
             "con", "prn", "aux", "nul",
             "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9",
             "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9"));

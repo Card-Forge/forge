@@ -119,6 +119,15 @@ public class FComboBoxPanel<E> extends JPanel {
         comboBox.setSelectedIndex(index);
     }
 
+    /** JPanel.setEnabled does not reach children, so forward it to the combo box. */
+    @Override
+    public void setEnabled(final boolean enabled) {
+        super.setEnabled(enabled);
+        if (comboBox != null) {
+            comboBox.setEnabled(enabled);
+        }
+    }
+
     private void refreshSkin() {
         comboBox = FComboBoxWrapper.refreshComboBoxSkin(comboBox);
     }

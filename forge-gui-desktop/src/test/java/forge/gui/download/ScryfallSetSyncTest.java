@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -130,7 +131,7 @@ public class ScryfallSetSyncTest {
     }
 
     /** Triggers a cold lookup, (cdn) syncs (operation) synchronously, then re-queries for the result. */
-    private static String resolveAfterSync(String set, String cn, String lang, String face, String size) {
+    private static String resolveAfterSync(String set, String cn, String lang, String face, String size) throws UnsupportedEncodingException {
         CdnUuidCache.getCdnUrl(set, cn, lang, face, size);
         CdnUuidCache.syncPendingSets();
         return CdnUuidCache.getCdnUrl(set, cn, lang, face, size);
@@ -139,7 +140,7 @@ public class ScryfallSetSyncTest {
     // -------------------------------------------------------------------------
 
     @Test
-    public void singleFacedCard_resolvesViaCdnUuidCache() {
+    public void singleFacedCard_resolvesViaCdnUuidCache() throws UnsupportedEncodingException {
         pages.put(1, page(false, 1,
                 singleFaced("11111111-1111-1111-1111-111111111111", "1", "en")));
 
@@ -151,7 +152,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void dfcWithDistinctArtworkUuids_bothFacesResolveIndependently() {
+    public void dfcWithDistinctArtworkUuids_bothFacesResolveIndependently() throws UnsupportedEncodingException {
         pages.put(1, page(false, 1,
                 doubleFaced("22222222-2222-2222-2222-222222222222", "5", "en",
                         "aaaaaaaa-0000-0000-0000-000000000001",
@@ -167,7 +168,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void dfcWithSharedArtworkUuid_backResolvesToSameUuid() {
+    public void dfcWithSharedArtworkUuid_backResolvesToSameUuid() throws UnsupportedEncodingException {
         pages.put(1, page(false, 1,
                 doubleFaced("33333333-3333-3333-3333-333333333333", "6", "en",
                         "cccccccc-0000-0000-0000-000000000003",
@@ -179,7 +180,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void multiplePages_paginatesViaNextPageAndMergesAll() {
+    public void multiplePages_paginatesViaNextPageAndMergesAll() throws UnsupportedEncodingException {
         pages.put(1, page(true, 1, singleFaced("dddddddd-0000-0000-0000-000000000001", "1", "en")));
         pages.put(2, page(false, 2, singleFaced("eeeeeeee-0000-0000-0000-000000000002", "2", "en")));
 
@@ -192,7 +193,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void unknownSet_returns404_lookupIsNullWithoutThrowing() {
+    public void unknownSet_returns404_lookupIsNullWithoutThrowing() throws UnsupportedEncodingException {
         // No page registered for "xyz" -> handle() serves a 404, same as Scryfall for no matches.
         String url = resolveAfterSync("xyz", "1", "en", "front", "normal");
 
@@ -201,7 +202,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void sync_neverOverwritesExistingPrecomputedEntry() {
+    public void sync_neverOverwritesExistingPrecomputedEntry() throws UnsupportedEncodingException {
         // Pre-existing, precise data (e.g. from a prior manifest sync).
         Map<String, Map<String, String[]>> existing = new HashMap<>();
         Map<String, String[]> cn1 = new HashMap<>();
@@ -219,7 +220,7 @@ public class ScryfallSetSyncTest {
     }
 
     @Test
-    public void searchQuery_scopesToSetAndEnglish() {
+    public void searchQuery_scopesToSetAndEnglish() throws UnsupportedEncodingException {
         pages.put(1, page(false, 1, singleFaced("11111111-2222-3333-4444-555555555555", "1", "en")));
 
         resolveAfterSync("ltr", "1", "en", "front", "normal");

@@ -19,14 +19,12 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.net.NetworkGameEventListener;
-import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.HostingServer;
+import forge.gamemodes.replay.ReplaySession;
 import forge.gamemodes.quest.QuestController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.gui.control.FControlGameEventHandler;
-import forge.gui.control.FControlGamePlayback;
-import forge.gui.control.PlaybackSpeed;
-import forge.gui.control.WatchLocalGame;
+import forge.gui.control.*;
 import forge.gui.events.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
@@ -126,7 +124,6 @@ public class HostedMatch {
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
         sortedPlayers.sort((p1, p2) -> {
-
             final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             return Integer.compare(v1, v2);
@@ -160,11 +157,11 @@ public class HostedMatch {
         SoundSystem.instance.setBackgroundMusic(this.matchPlaylist == null ? MusicPlaylist.MATCH : this.matchPlaylist);
 
         game = match.createGame();
-        game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
+        //game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
         game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
-        // Android API 31 and above can use completeOnTimeout -> CompletableFuture:
-        //https://developer.android.com/reference/java/util/concurrent/CompletableFuture#completeOnTimeout(T,%20long,%20java.util.concurrent.TimeUnit)
-        game.AI_CAN_USE_TIMEOUT = !GuiBase.isAndroid() || GuiBase.getAndroidAPILevel() > 30;
+        game.AI_FLAT_MONTE_CARLO = FModel.getPreferences().getPrefBoolean(FPref.MATCH_AI_FLAT_MONTE_CARLO);
+        // Desktop auto-detection: phones and tablets keep the light settings, a PC gets the maximum strength.
+        game.AI_FLAT_MONTE_CARLO_MAX = !forge.gui.GuiBase.isMobile();
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
@@ -183,7 +180,7 @@ public class HostedMatch {
         // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
 
         // This logs game actions to NetworkLogConfig for debugging network games
-        if (FServerManager.getInstance().isHosting()) {
+        if (HostingServer.isHosting()) {
             game.subscribeToEvents(new NetworkGameEventListener());
         }
 
@@ -224,13 +221,14 @@ public class HostedMatch {
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
-                if (gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
-                    forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
+                if (gui instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
+                    GameEventForwarder forwarder = new GameEventForwarder(gui);
                     ngg.setForwarder(forwarder);
                     game.subscribeToEvents(forwarder);
                 } else {
                     game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 }
+                game.subscribeToEvents(humanController.getYieldController());
                 playersPerGui.put(gui, p.getView());
 
                 if (gameControllers != null) {
@@ -247,8 +245,8 @@ public class HostedMatch {
         // players' InputQueues. This ensures events are flushed on the game thread
         // before it blocks for input (e.g. host plays a land and retains priority).
         for (PlayerControllerHuman hc : humanControllers) {
-            if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
-                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+            if (hc.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
+                GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().addObserver(fwd);
@@ -256,6 +254,8 @@ public class HostedMatch {
                 }
             }
         }
+
+        final ReplaySession replay = ReplaySession.begin(game, humanControllers);
 
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
@@ -294,21 +294,32 @@ public class HostedMatch {
                 currentGame.subscribeToEvents(playbackControl);
             }
             // Actually start the game!
-            match.startGame(currentGame, startGameHook);
+            try {
+                match.startGame(currentGame, startGameHook);
+            } catch (final RuntimeException | Error ex) {
+                if (replay != null) {
+                    replay.abort();
+                }
+                throw ex;
+            }
             // this function waits?
-            if (endGameHook != null){
+            if (endGameHook != null) {
                 endGameHook.run();
             }
 
             // Flush any buffered game events to remote clients so they receive
             // GameEventGameOutcome and GameEventGameFinished before we proceed.
             for (PlayerControllerHuman hc : humanControllers) {
-                if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
-                    forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                if (hc.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
+                    GameEventForwarder fwd = ngg.getForwarder();
                     if (fwd != null) {
                         fwd.flush();
                     }
                 }
+            }
+
+            if (replay != null) {
+                replay.finish();
             }
 
             // After game is over...
@@ -373,8 +384,8 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
-            if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
-                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+            if (humanController.getGui() instanceof forge.gamemodes.net.ProtocolGuiGame ngg) {
+                GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().deleteObserver(fwd);
@@ -432,7 +443,7 @@ public class HostedMatch {
         @Override
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.getGui().updateSingleCard(event.blocker());
+                humanController.getGui().updateCard(event.blocker());
             }
             return null;
         }
@@ -440,7 +451,7 @@ public class HostedMatch {
         @Override
         public Void visit(final UiEventAttackerDeclared event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
-                humanController.getGui().updateSingleCard(event.attacker());
+                humanController.getGui().updateCard(event.attacker());
             }
             return null;
         }
@@ -469,6 +480,7 @@ public class HostedMatch {
                         gui.setGameView(null);
                         gui.setGameView(gameView);
                         event.subgame().subscribeToEvents(new FControlGameEventHandler(humanController));
+                        event.subgame().subscribeToEvents(humanController.getYieldController());
                         gui.message(event.message());
                     }
                 }
@@ -534,7 +546,12 @@ public class HostedMatch {
         }
     }
 
-    private void addNextGameDecision(final PlayerControllerHuman controller, final NextGameDecision decision) {
+    private static boolean stillPlaying(final PlayerControllerHuman controller) {
+        // A spectator's controller has no player
+        return controller.getPlayer() == null || controller.getPlayer().getOriginalLobbyPlayer() == controller.getLobbyPlayer();
+    }
+
+    private synchronized void addNextGameDecision(final PlayerControllerHuman controller, final NextGameDecision decision) {
         if (decision == NextGameDecision.QUIT) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 endCurrentGame();
@@ -547,7 +564,13 @@ public class HostedMatch {
         }
 
         nextGameDecisions.put(controller, decision);
-        if (nextGameDecisions.size() < humanControllers.size()) {
+        tallyNextGameDecisions();
+    }
+
+    /** Starts the next game once every human still playing has chosen. A seat the AI took over is not waited for. */
+    public synchronized void tallyNextGameDecisions() {
+        nextGameDecisions.keySet().removeIf(c -> c != null && !stillPlaying(c));
+        if (nextGameDecisions.isEmpty() || nextGameDecisions.size() < humanControllers.stream().filter(HostedMatch::stillPlaying).count()) {
             return;
         }
 

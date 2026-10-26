@@ -27,7 +27,6 @@ import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IProgressBar;
 import forge.gui.interfaces.ITextField;
 import forge.localinstance.properties.ForgeConstants;
-import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.ScryfallRateLimiter;
@@ -267,7 +266,7 @@ public abstract class GuiDownloadService implements Runnable {
                     URL imageUrl = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(p);
                     // Scryfall asks for a descriptive User-Agent and rate-limits harder without one.
-                    conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+                    conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                     // don't allow redirections here -- they indicate 'file not found' on the server
                     // only allow redirections to consume Scryfall API
                     if (ScryfallRateLimiter.isApiUrl(url)) {
@@ -286,6 +285,7 @@ public abstract class GuiDownloadService implements Runnable {
                         url = TextUtil.fastReplace(url, ".full.jpg", ".fullborder.jpg");
                         imageUrl = new URL(url);
                         conn = (HttpURLConnection) imageUrl.openConnection(p);
+                        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                         conn.setInstanceFollowRedirects(false);
                         conn.connect();
                     }
@@ -302,6 +302,7 @@ public abstract class GuiDownloadService implements Runnable {
                         url = url.substring(0,url.length() - 4) + ".png";
                         imageUrl = new URL(TextUtil.fastReplace(url, ".fullborder.", ".full."));
                         conn = (HttpURLConnection) imageUrl.openConnection(p);
+                        conn.setRequestProperty("User-Agent", GuiBase.getInterface().getUserAgent());
                         conn.setInstanceFollowRedirects(false);
                         conn.connect();
                     }
@@ -395,7 +396,7 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     public abstract String getTitle();
-    protected abstract Map<String, String> getNeededFiles();
+    protected abstract Map<String, String> getNeededFiles() throws UnsupportedEncodingException;
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
         addMissingItems(list, nameUrlFile, dir, false);

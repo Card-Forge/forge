@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Dustin_Doing_-_Boros_Goblins_(Standard,_#891546).dck
+Deck Type=constructed
+
+[Main]
+4 Burst Lightning
+4 Practiced Offense
+2 Krenko, Mob Boss
+3 Greasewrench Goblin
+4 Burnout Bashtronaut
+4 Hexing Squelcher
+4 Howlsquad Heavy
+4 Searslicer Goblin
+4 The Great Goblin
+4 Stadium Headliner
+1 Plains
+1 Restless Bivouac
+1 Abandoned Air Temple
+2 Starting Town
+4 Sacred Foundry
+4 Cavern of Souls
+4 Inspiring Vantage
+6 Mountain
+[Sideboard]
+1 Soul-Guide Lantern
+2 Sear
+3 Seam Rip
+2 Rest in Peace
+1 Erode
+4 Dawn's Truce
+2 Case of the Crimson Pulse

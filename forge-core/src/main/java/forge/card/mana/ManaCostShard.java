@@ -306,6 +306,11 @@ public enum ManaCostShard {
         return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 2;
     }
 
+    // CR 107.4 hybrid, incl. {2/W}, {C/W} and hybrid Phyrexian; used by Providence of Night
+    public boolean isHybrid() {
+        return isMultiColor() || (isMonoColor() && (isOr2Generic() || isColorless()));
+    }
+
     public boolean isColorless() {
         return isOfKind(ManaAtom.COLORLESS);
     }

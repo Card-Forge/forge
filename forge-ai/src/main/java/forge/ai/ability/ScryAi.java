@@ -23,7 +23,6 @@ public class ScryAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
-            // ability is targeted
             sa.resetTargets();
 
             if (sa.canTarget(ai)) {
@@ -63,7 +62,7 @@ public class ScryAi extends SpellAbilityAi {
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-    } // scryTargetAI()
+    }
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
@@ -179,7 +178,6 @@ public class ScryAi extends SpellAbilityAi {
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
-            sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
         if (randomReturn) {

@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "{B}: This creature gets +1/+1 until end of turn."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddAbility$ Pump | Description$ Enchanted creature has "{B}: This creature gets +1/+1 until end of turn."
 SVar:Pump:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 Oracle:Enchant creature\nEnchanted creature has "{B}: This creature gets +1/+1 until end of turn."

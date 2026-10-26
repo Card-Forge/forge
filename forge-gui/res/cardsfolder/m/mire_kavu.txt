@@ -2,7 +2,7 @@ Name:Mire Kavu
 ManaCost:3 R
 Types:Creature Kavu
 PT:3/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Swamp.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Swamp.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
 SVar:BuffedBy:Swamp
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black

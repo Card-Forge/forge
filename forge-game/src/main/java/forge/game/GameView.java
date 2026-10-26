@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -220,9 +221,11 @@ public class GameView extends TrackableObject {
         }
 
         final CombatView combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
+        // one pass over the combat instead of a scan per band: this runs on every addAttacker
+        final Map<AttackingBand, GameEntity> defenders = combat.getDefenderByBand();
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
-            final GameEntity defender = combat.getDefenderByAttacker(b);
+            final GameEntity defender = defenders.get(b);
             final List<Card> blockers = combat.getBlockers(b);
             final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
             combatView.addAttackingBand(

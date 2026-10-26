@@ -1,8 +1,16 @@
 package forge.adventure.pointofintrest;
 
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
+import forge.adventure.util.TemplateTmxMapLoader;
+import forge.adventure.world.WorldSave;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -178,6 +186,49 @@ public class PointOfInterestChanges implements SaveFileContent  {
         // reset map when assigning as a quest target that needs enemies
         deletedObjects.clear();
     }
+
+    /**
+     * Clears deleted map objects for a dungeon POI and all connected floors.
+     * Does not depend on the player currently being inside that POI (quest accept from town).
+     * Uses the same change-key rules as {@code TileMapScene.getPointOfInterestChanges(targetMap)}.
+     */
+    public static void resetDeletedObjectsRecursive(String poiRootId, String rootMapPath) {
+        if (poiRootId == null || rootMapPath == null || rootMapPath.isEmpty()) {
+            return;
+        }
+        resetDeletedObjectsRecursive(poiRootId, rootMapPath, new HashSet<>());
+    }
+
+    private static void resetDeletedObjectsRecursive(String poiRootId, String currentMap, HashSet<String> clearedMaps) {
+        if (currentMap == null || currentMap.isEmpty() || !clearedMaps.add(currentMap)) {
+            return;
+        }
+
+        String changesKey = poiRootId.endsWith(currentMap) ? poiRootId : poiRootId + currentMap;
+        WorldSave.getCurrentSave().getPointOfInterestChanges(changesKey).clearDeletedObjects();
+
+        TiledMap currentTiledMap = new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(currentMap));
+        for (MapLayer layer : currentTiledMap.getLayers()) {
+            if (layer.getProperties().containsKey("spriteLayer") || layer instanceof TiledMapTileLayer) {
+                continue;
+            }
+
+            // Find connected maps through "entry" type MapObjects and recursively clear them as well.
+            for (MapObject obj : layer.getObjects()) {
+                MapProperties prop = obj.getProperties();
+                String type = prop.get("type", String.class);
+
+                if (type != null && type.equals("entry")) {
+                    String targetMap = prop.containsKey("teleport") ? prop.get("teleport").toString() : "";
+
+                    if (targetMap != null && !targetMap.isEmpty()) {
+                        resetDeletedObjectsRecursive(poiRootId, targetMap, clearedMaps);
+                    }
+                }
+            }
+        }
+    }
+
     public boolean isVisited() {
         if (isVisited ==null)
             return false;
