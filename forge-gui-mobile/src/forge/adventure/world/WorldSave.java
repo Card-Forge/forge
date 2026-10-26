@@ -268,69 +268,92 @@ public class WorldSave {
                 "auto save" + SaveLoadScene.instance().getSaveFileSuffix();
 
         final WorldSaveHeader saveHeader;
-        final SaveFileData mainData;
+        final SaveFileData playerData;
+        final SaveFileData worldStageData;
+        final SaveFileData poiData;
+        final World.AsyncSaveSnapshot worldSnapshot;
 
+        World.AsyncSaveSnapshot capturedWorld = null;
         try {
-            // Capture the live state on the calling thread.
+            // Capture all live game state on the calling thread. The world snapshot
+            // copies the biome Pixmap and serializes the maps, but defers PNG encoding.
             header.name = text;
+            playerData = currentSave.player.save();
+            capturedWorld = currentSave.world.snapshotForAsyncSave();
+            worldStageData = WorldStage.getInstance().save();
+            poiData = currentSave.pointOfInterestChanges.save();
 
-            SaveFileData playerData = currentSave.player.save();
-            SaveFileData worldData = currentSave.world.save();
-            SaveFileData worldStageData = WorldStage.getInstance().save();
-            SaveFileData poiData = currentSave.pointOfInterestChanges.save();
-
-            String message = getExceptionMessage(
-                    playerData, worldData, worldStageData, poiData);
-
+            String message = getExceptionMessage(playerData, worldStageData, poiData);
             if (!message.isEmpty()) {
+                capturedWorld.dispose();
                 finish(message);
                 return false;
             }
 
-            mainData = new SaveFileData();
-            mainData.store("player", playerData);
-            mainData.store("world", worldData);
-            mainData.store("worldStage", worldStageData);
-            mainData.store("pointOfInterestChanges", poiData);
-
-            if (mainData.readString("IOException") != null) {
-                finish("Please check forge.log for errors.");
-                return false;
-            }
-
-            // Snapshot the header and its native Pixmap while still on
-            // the calling thread. Never read the original Pixmap in the worker.
+            // Snapshot the header on the calling thread; the worker must not read
+            // the live header or its native Pixmap.
             header.saveDate = new Date();
             saveHeader = header.snapshotForAsyncSave();
-
+            worldSnapshot = capturedWorld;
         } catch (Exception e) {
+            if (capturedWorld != null) {
+                capturedWorld.dispose();
+            }
             e.printStackTrace();
             finish("Please check forge.log for errors.");
             return false;
         }
 
-        // Only detached data is passed to the background task.
-        SAVE_EXECUTOR.execute(() -> {
-            String error = null;
+        // Only detached snapshots and serialized data cross onto the worker thread.
+        try {
+            SAVE_EXECUTOR.execute(() -> {
+                String error = null;
+                try {
+                    // PNG encoding is the expensive part; do it off the UI/game thread.
+                    SaveFileData worldData = worldSnapshot.encode();
+                    String message = getExceptionMessage(
+                            playerData, worldData, worldStageData, poiData);
+                    if (!message.isEmpty()) {
+                        throw new IOException(message);
+                    }
 
-            try {
-                writeSaveSnapshot(text, slot, saveHeader, mainData);
-            } catch (Exception e) {
-                e.printStackTrace();
-                error = "Please check forge.log for errors.";
-            }
+                    SaveFileData mainData = new SaveFileData();
+                    mainData.store("player", playerData);
+                    mainData.store("world", worldData);
+                    mainData.store("worldStage", worldStageData);
+                    mainData.store("pointOfInterestChanges", poiData);
 
-            final String result = error;
-            Gdx.app.postRunnable(() -> {
-                if (result == null) {
-                    Config.instance().getSettingData().lastActiveSave =
-                            WorldSave.filename(slot);
-                    Config.instance().saveSettings();
+                    if (mainData.readString("IOException") != null) {
+                        throw new IOException("Could not assemble save data.");
+                    }
+
+                    writeSaveSnapshot(text, slot, saveHeader, mainData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    error = "Please check forge.log for errors.";
+                } finally {
+                    // encode() normally consumes the Pixmap; dispose() is also safe
+                    // if encoding failed before consuming it.
+                    worldSnapshot.dispose();
                 }
 
-                finish(result);
+                final String result = error;
+                Gdx.app.postRunnable(() -> {
+                    if (result == null) {
+                        Config.instance().getSettingData().lastActiveSave =
+                                WorldSave.filename(slot);
+                        Config.instance().saveSettings();
+                    }
+                    finish(result);
+                });
             });
-        });
+        } catch (RuntimeException e) {
+            // For example, the executor may reject the task during shutdown.
+            worldSnapshot.dispose();
+            e.printStackTrace();
+            finish("Please check forge.log for errors.");
+            return false;
+        }
 
         // Means the save was queued, not that disk writing has finished.
         return true;
