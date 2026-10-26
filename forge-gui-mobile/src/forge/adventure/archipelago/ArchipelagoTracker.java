@@ -6,14 +6,12 @@ import forge.card.CardEdition;
 
 import java.util.*;
 
-/**
- * Read-only summary of the networked Archipelago progress, used by the tracker screen.
- */
+// Read-only summary of the networked Archipelago progress, used by the tracker screen.
 public final class ArchipelagoTracker {
 
     public enum Icon { BOSS, EQUIPMENT_SHOP, ITEM_SHOP, TOWN_QUESTS, INN_EVENTS, BATTLES }
 
-    /** One tile in a "region" row. */
+    // One tile in a "region" row.
     public static final class Entry {
         public final Icon icon;
         public final String enemy; // enemy data name used for the portrait (bosses only)

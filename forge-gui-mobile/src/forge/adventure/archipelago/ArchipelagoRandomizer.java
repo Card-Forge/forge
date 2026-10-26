@@ -181,7 +181,6 @@ public class ArchipelagoRandomizer {
                     }
                 }
                 case WIN_CONDITION_CLEARED -> Archipelago.getInstance().goal();
-                // Boss checks: the location id comes from the shared boss table
                 default -> {
                     ArchipelagoUtil.Boss boss = ArchipelagoUtil.findBossByCheck(type);
                     if (boss != null && boss.locationId != ArchipelagoUtil.NO_LOCATION) {
@@ -264,8 +263,7 @@ public class ArchipelagoRandomizer {
     }
 
     /**
-     * Applies the locations the server reports as checked for our slot (on connect and on room updates) to this save:
-     * shop items are marked as bought and the other progress is raised, never lowered, so progress that is still queued
+     * Applies the locations the server reports as checked for our slot to this save, progress that is still queued
      * for sending survives. Called from the client thread, so the work is done on the game thread.
      */
     public void applyServerCheckedLocations(Collection<Long> locationIds) {
@@ -330,8 +328,8 @@ public class ArchipelagoRandomizer {
         }
     }
 
-    // Raises a region's town quests or inn events (counts per town) to the server's total. The server doesn't know
-    // which towns those were in, so the missing amount is put under a placeholder town.
+    // Raises a region's town quests or inn events per town to the server's total. The server doesn't know
+    // which towns the checks were in, so the missing amount is put under a placeholder town.
     private static void syncTownQuestOrInnEventCount(Map<String, Long> localTownQuestOrInnEventCount, long serverTotal) {
         long missing = serverTotal - localTownQuestOrInnEventCount.values().stream().mapToLong(Long::longValue).sum();
         if (missing > 0) {

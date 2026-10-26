@@ -273,11 +273,7 @@ public class ArchipelagoData implements SaveFileContent {
         unlockRemainingSetsIfAllReceived();
     }
 
-    /**
-     * Once every set unlock check was received, unlocks the sets that rounding left locked, without gift packs.
-     * Also repairs saves that received their set unlocks before the slot's set_unlock_count was known (they were split
-     * over the default of 100 checks), which is why this also runs on connect.
-     */
+    // Unlocks the sets that rounding left locked, without gift packs. Runs on connect to cover some edge cases.
     public void unlockRemainingSetsIfAllReceived() {
         if (totalAmountOfSetUnlockChecks <= 0 || receivedAmountOfSetUnlockChecks < totalAmountOfSetUnlockChecks) return;
         List<String> remainingSets = new ArrayList<>(allCardSets);
@@ -301,7 +297,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     /**
      * Records a miniboss defeat and sends its check.
-     * Returns true if this name wasn't recorded as defeated before.
+     * Returns true if this boss wasn't defeated before.
      */
     public boolean addMiniBossDefeated(String miniBossName) {
         boolean result = miniBossesDefeatedByName.add(miniBossName.toLowerCase());
@@ -313,9 +309,8 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     /**
-     * Records a castle boss defeat and sends its check. Bosses that aren't castle bosses in ArchipelagoUtil.BOSSES (like
-     * Wounded Sliver, whose deck is also in decks/boss) are ignored.
-     * Returns true if this name wasn't recorded as defeated before.
+     * Records a castle boss defeat and sends its check. Bosses that aren't castle bosses in ArchipelagoUtil.BOSSES are ignored.
+     * Returns true if this boss wasn't defeated before.
      */
     public boolean addBossDefeated(String bossName) {
         ArchipelagoUtil.Boss boss = ArchipelagoUtil.findBoss(bossName);
@@ -392,8 +387,7 @@ public class ArchipelagoData implements SaveFileContent {
         return false;
     }
 
-    // Castle bosses (the five colored castles and Emrakul) this save has defeated, i.e. the progress towards the goal.
-    // Counted from the BOSSES table, so a stray name in bossesDefeatedByName (e.g. from an older save) doesn't count.
+    // Returns how many bosses from the ArchipelagoUtil.BOSSES list are defeated.
     public int getCastleBossesDefeatedCount() {
         int count = 0;
         for (ArchipelagoUtil.Boss boss : ArchipelagoUtil.BOSSES) {
@@ -582,7 +576,7 @@ public class ArchipelagoData implements SaveFileContent {
         Collections.addAll(set, values);
     }
 
-    // Regions are stored by their biome name, the same strings older saves used.
+    // Regions are stored by their biome name.
     private static void saveRegionSet(SaveFileData parent, String key, Set<ArchipelagoRegion> regions) {
         parent.storeObject(key, regions.stream().map(region -> region.biomeName).toArray(String[]::new));
     }

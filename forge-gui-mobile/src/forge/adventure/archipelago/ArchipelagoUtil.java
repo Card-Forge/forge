@@ -107,8 +107,7 @@ public class ArchipelagoUtil {
             miniBoss("Scarecrow Captain", "Scarecrow Captain", ArchipelagoRegion.GREEN, ArchipelagoCheckTypes.SCARECROW_CAPTAIN_DEFEATED, 602L));
 
     /**
-     * Looks up which boss a defeated enemy's name belongs to (the name DuelScene passes to addBossDefeated /
-     * addMiniBossDefeated).
+     * Looks up which boss a defeated enemy's name belongs to (the name DuelScene passes to addBossDefeated/addMiniBossDefeated).
      * Returns null if that enemy doesn't give a check.
      */
     public static Boss findBoss(String recordedName) {

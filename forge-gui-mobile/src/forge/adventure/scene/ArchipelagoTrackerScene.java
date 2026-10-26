@@ -54,7 +54,7 @@ public class ArchipelagoTrackerScene extends UIScene {
     private TextureRegion checkIcon;
     private TextField setSearch;
     private List<String[]> unlockedSets = Collections.emptyList();
-    // Scroll position when the tracker was last left, restored when it's opened again in this session (not saved).
+    // Scroll position when the tracker was last left, restored when it's opened again in this session.
     private static float lastScrollY = 0;
 
     private ArchipelagoTrackerScene() {
@@ -69,7 +69,6 @@ public class ArchipelagoTrackerScene extends UIScene {
 
         content.top().left().pad(4);
         contentPane = ui.findActor("content");
-        // Give the details text the same dark panel as the content so it stays readable over the background art.
         Table detailsPanel = new Table();
         detailsPanel.setBackground(contentPane.getStyle().background);
         detailsPanel.setBounds(detailsLabel.getX(), detailsLabel.getY(), detailsLabel.getWidth(), detailsLabel.getHeight());
