@@ -121,9 +121,7 @@ public class GameAction {
         boolean wasFacedown = c.isFaceDown();
 
         // Rule 111.8: A token that has left the battlefield can't move to another zone
-        // (ZoneType.None is used from the MR https://github.com/Card-Forge/forge/pull/12419 f0r startBattleCards,
-        // without this exclusion, then tokens will not appear anymore)
-        if (!c.isSpell() && c.isToken() && !fromBattlefield && zoneFrom != null && (!zoneFrom.is(ZoneType.Stack) && !zoneFrom.is(ZoneType.None))
+        if (!c.isSpell() && c.isToken() && !fromBattlefield && zoneFrom != null && !zoneFrom.is(ZoneType.Stack)
                 && (cause == null || !(cause instanceof SpellPermanent || cause.isCastFaceDown()) || !cause.isCastFromPlayEffect())) {
             return c;
         }
