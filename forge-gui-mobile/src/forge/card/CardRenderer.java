@@ -1041,7 +1041,9 @@ public class CardRenderer {
             }
 
             font.setColor(color);
-            font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, true);
+            // no wrapping: counter names and values are short and already sized to their box, and
+            // GlyphLayout.wrap throws IndexOutOfBoundsException on runs it cannot break
+            font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, false);
 
             if (color.a < 1) {
                 Gdx.gl.glDisable(GL_BLEND);

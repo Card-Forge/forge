@@ -294,6 +294,17 @@ public class Combat {
     public final GameEntity getDefenderByAttacker(final Card c) {
         return getDefenderByAttacker(getBandOfAttacker(c));
     }
+    /**
+     * Defender of every attacking band, found in a single pass over the multimap. Use this instead of calling
+     * {@link #getDefenderByAttacker(AttackingBand)} once per band, which is quadratic in the number of bands.
+     */
+    public final Map<AttackingBand, GameEntity> getDefenderByBand() {
+        final Map<AttackingBand, GameEntity> result = new IdentityHashMap<>();
+        for (Entry<GameEntity, AttackingBand> e : attackedByBands.get().entries()) {
+            result.put(e.getValue(), e.getKey());
+        }
+        return result;
+    }
     public final GameEntity getDefenderByAttacker(final AttackingBand c) {
         for (Entry<GameEntity, AttackingBand> e : attackedByBands.get().entries()) {
             if (e.getValue() == c) {
