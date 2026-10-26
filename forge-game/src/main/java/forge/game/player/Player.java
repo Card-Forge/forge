@@ -3783,6 +3783,21 @@ public class Player extends GameEntity implements Comparable<Player> {
                 || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
     }
 
+    /**
+     * The cards of targetPlayer's library this player looks at when searching it with sa: the top four under
+     * Aven Mindcensor, none when searching is not allowed (Leonin Arbiter).
+     */
+    public CardCollectionView getSearchableLibrary(SpellAbility sa, Player targetPlayer) {
+        if (!canSearchLibraryWith(sa, targetPlayer)) {
+            return CardCollection.EMPTY;
+        }
+        if (hasKeyword("LimitSearchLibrary")) {
+            final int fetchNum = Math.min(targetPlayer.getCardsIn(ZoneType.Library).size(), 4);
+            return targetPlayer.getCardsIn(ZoneType.Library, fetchNum);
+        }
+        return targetPlayer.getCardsIn(ZoneType.Library);
+    }
+
     public void addAdditionalVote(long timestamp, int value) {
         additionalVotes.put(timestamp, value);
         getView().updateAdditionalVote(this);

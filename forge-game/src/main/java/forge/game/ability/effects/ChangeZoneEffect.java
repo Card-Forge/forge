@@ -1022,11 +1022,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
                         fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                        final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                        if (fetchNum == 0) {
+                        final CardCollectionView searchable = decider.getSearchableLibrary(sa, player);
+                        if (searchable.isEmpty()) {
                             searchedLibrary = false;
                         } else {
-                            fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                            fetchList.addAll(searchable);
                         }
                     }
                     if (!decider.canSearchLibraryWith(sa, player)) {
@@ -1045,9 +1045,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Set<ZoneType> revealZones = Sets.newHashSet();
                 Iterable<Card> toReveal = null;
                 if (origin.contains(ZoneType.Library) && searchedLibrary) {
-                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                     // Look at whole library before moving onto choosing a card
-                    toReveal = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
+                    toReveal = decider.getSearchableLibrary(sa, player);
                     revealZones.add(ZoneType.Library);
                 }
                 if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
