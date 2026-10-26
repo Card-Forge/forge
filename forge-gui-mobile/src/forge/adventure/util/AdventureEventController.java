@@ -88,8 +88,16 @@ public class AdventureEventController implements Serializable {
         object = null;
     }
 
+    /**
+     * Cheap check (no generation) for whether {@link #createEvent(String)} would currently return nothing for this
+     * point because its next event isn't available yet.
+     */
+    public boolean isEventOnCooldown(String pointID) {
+        return nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay();
+    }
+
     public AdventureEventData createEvent(String pointID) {
-        if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()) {
+        if (isEventOnCooldown(pointID)) {
             // No event currently available here
             return null;
         }
