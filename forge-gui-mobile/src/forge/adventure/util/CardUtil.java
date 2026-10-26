@@ -22,7 +22,10 @@ import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
+import forge.item.generation.BoosterGenerator;
+import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
+import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -32,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -475,7 +479,7 @@ public class CardUtil {
                 for (SealedTemplate template : StaticData.instance().getSpecialBoosters()) {
                     if (!editionCodes.contains(template.getEdition().split("\\s", 2)[0]))
                         continue;
-                    List<PaperCard> packContents = new UnOpenedProduct(template).get();
+                    List<PaperCard> packContents = createRestrictedAwareBooster(template).get();
                     if (packContents.size() < 18 | packContents.size() > 25)
                         continue;
                     if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >= 3)
@@ -791,6 +795,57 @@ public class CardUtil {
     private static final Predicate<CardEdition> filterVintage = formats.getVintage().editionLegalPredicate;
     private static final Predicate<CardEdition> filterStandard = formats.getStandard().editionLegalPredicate;
 
+    /**
+     * Names from the plane's {@code restrictedCards} list. Empty when unset.
+     * Used so Adventure boosters can omit restricted cards without banning the pack.
+     */
+    public static Set<String> getRestrictedCardNames() {
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.restrictedCards == null || configData.restrictedCards.length == 0) {
+            return Collections.emptySet();
+        }
+        return new HashSet<>(Arrays.asList(configData.restrictedCards));
+    }
+
+    /**
+     * Open a sealed template while excluding the plane's restricted card names.
+     */
+    public static UnOpenedProduct createRestrictedAwareBooster(SealedTemplate template) {
+        return new UnOpenedProduct(template, getRestrictedCardNames());
+    }
+
+    /**
+     * Roll a booster pack while excluding the plane's restricted card names.
+     */
+    public static List<PaperCard> generateRestrictedAwareBoosterPack(SealedTemplate template) {
+        return BoosterGenerator.getBoosterPack(template, getRestrictedCardNames());
+    }
+
+    /**
+     * Temporarily install a booster resolver on {@code block} that excludes
+     * restricted card names, run {@code action}, then restore the previous resolver.
+     */
+    public static void withRestrictedAwareBoosterResolver(CardBlock block, Runnable action) {
+        if (block == null) {
+            action.run();
+            return;
+        }
+        Function<String, IUnOpenedProduct> previous = block.getBoosterResolver();
+        Set<String> excluded = getRestrictedCardNames();
+        block.setBoosterResolver(code -> {
+            SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(code);
+            if (template == null) {
+                return null;
+            }
+            return new UnOpenedProduct(template, excluded);
+        });
+        try {
+            action.run();
+        } finally {
+            block.setBoosterResolver(previous);
+        }
+    }
+
     public static Deck generateStandardBoosterAsDeck() {
         return generateRandomBoosterPackAsDeck(filterStandard);
     }
@@ -822,14 +877,21 @@ public class CardUtil {
             System.err.println("Set code '" + code + "' not found.");
             return new Deck();
         }
-        BoosterPack cards = BoosterPack.fromSet(edition);
         return generateBoosterPackAsDeck(edition);
     }
 
     public static Deck generateBoosterPackAsDeck(CardEdition edition) {
         Deck d = new Deck("Booster pack");
         d.setComment(edition.getCode());
-        d.getMain().add(BoosterPack.fromSet(edition).getCards());
+        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(edition.getCode());
+        if (template == null) {
+            BoosterPack pack = BoosterPack.fromSet(edition);
+            if (pack == null) {
+                return d;
+            }
+            template = pack.getSealedTemplate();
+        }
+        d.getMain().add(generateRestrictedAwareBoosterPack(template));
         return d;
     }
 

@@ -8,11 +8,11 @@ import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.AdventureOverrides;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.card.CardEdition;
-import forge.card.PrintSheet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -23,7 +23,6 @@ import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedDeckBuilder;
 import forge.item.SealedTemplate;
 import forge.item.generation.IUnOpenedProduct;
-import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
@@ -159,9 +158,12 @@ public class AdventureEventData implements Serializable {
         Random placeholder = MyRandom.getRandom();
         MyRandom.setRandom(getEventRandom());
         if (draft == null && (eventStatus == AdventureEventController.EventStatus.Available || eventStatus == AdventureEventController.EventStatus.Entered)) {
-            draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration, participants.length);
-            registeredDeck = draft.getHumanPlayer().getDeck();
-            assignPlayerNames(draft);
+            CardBlock block = getCardBlock();
+            CardUtil.withRestrictedAwareBoosterResolver(block, () -> {
+                draft = BoosterDraft.createDraft(LimitedPoolType.Block, block, packConfiguration, participants.length);
+                registeredDeck = draft.getHumanPlayer().getDeck();
+                assignPlayerNames(draft);
+            });
         }
         if (packConfiguration == null) {
             packConfiguration = getBoosterConfiguration(getCardBlock());
@@ -202,8 +204,6 @@ public class AdventureEventData implements Serializable {
         }
         return rolledFilter;
     }
-
-    private static final Set<String> POWER_NINE = Set.of("Black Lotus", "Mox Emerald", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Mox Jet", "Ancestral Recall", "Timetwister", "Time Walk");
 
     private static CardBlock pickWeightedCardBlock() {
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
@@ -268,11 +268,6 @@ public class AdventureEventData implements Serializable {
                 return false;
             if(c.getBoosterTemplate().getNumberOfCardsExpected() <= 7)
                 return false;
-            for (PrintSheet ps : c.getPrintSheetsBySection()) {
-                //exclude block with sets containing P9 cards.
-                if(!Collections.disjoint(ps.toNameLookup().keySet(), POWER_NINE))
-                    return false;
-            }
         }
         return true;
     }
@@ -317,27 +312,14 @@ public class AdventureEventData implements Serializable {
         if (cardBlock == null) return;
 
         try {
-            // Open all boosters
+            // Open all boosters; restricted cards are excluded from non-meta packs.
             CardPool humanPool = new CardPool();
 
             for (String setCode : packConfiguration) {
-                boolean isMetaSet = false;
-                for (String metaSetName : cardBlock.getMetaSetNames()) {
-                    if (metaSetName.equals(setCode)) {
-                        isMetaSet = true;
-                        break;
-                    }
+                IUnOpenedProduct booster = openSealedBooster(setCode);
+                if (booster == null) {
+                    continue;
                 }
-
-                IUnOpenedProduct booster;
-                if (isMetaSet) {
-                    booster = cardBlock.getBooster(setCode);
-                } else {
-                    SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
-                    if (template == null) continue;
-                    booster = new UnOpenedProduct(template);
-                }
-
                 humanPool.addAllFlat(booster.get());
             }
 
@@ -359,23 +341,10 @@ public class AdventureEventData implements Serializable {
 
                 CardPool aiPool = new CardPool();
                 for (String setCode : packConfiguration) {
-                    boolean isMetaSet = false;
-                    for (String metaSetName : cardBlock.getMetaSetNames()) {
-                        if (metaSetName.equals(setCode)) {
-                            isMetaSet = true;
-                            break;
-                        }
+                    IUnOpenedProduct booster = openSealedBooster(setCode);
+                    if (booster == null) {
+                        continue;
                     }
-
-                    IUnOpenedProduct booster;
-                    if (isMetaSet) {
-                        booster = cardBlock.getBooster(setCode);
-                    } else {
-                        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
-                        if (template == null) continue;
-                        booster = new UnOpenedProduct(template);
-                    }
-
                     aiPool.addAllFlat(booster.get());
                 }
 
@@ -392,6 +361,19 @@ public class AdventureEventData implements Serializable {
         } catch (Exception e) {
             System.err.println("Error generating Sealed pool: " + e.getMessage());
         }
+    }
+
+    private IUnOpenedProduct openSealedBooster(String setCode) {
+        for (String metaSetName : cardBlock.getMetaSetNames()) {
+            if (metaSetName.equals(setCode)) {
+                return cardBlock.getBooster(setCode);
+            }
+        }
+        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
+        if (template == null) {
+            return null;
+        }
+        return CardUtil.createRestrictedAwareBooster(template);
     }
 
     private void setupDraftRewards() {
