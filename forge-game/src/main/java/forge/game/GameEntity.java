@@ -105,6 +105,9 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
         }
 
         for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (!ca.hasReplacementEffects()) {
+                continue;
+            }
             Stream<ReplacementEffect> filteredStream = ca.streamReplacementEffects().filter(re -> {
                 if (!re.getMode().equals(ReplacementType.DamageDone) ||
                         (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
