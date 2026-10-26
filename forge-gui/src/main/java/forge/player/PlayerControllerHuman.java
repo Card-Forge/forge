@@ -1638,11 +1638,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return weighted;
     }
 
+    /** Runs on the EDT while the game thread may be tapping sources, so it must stay read-only.
+     *  Card#getAllPossibleAbilities is not: for spells it can run a full checkStaticAbilities
+     *  (stack look-ahead in GameActionUtil#getAlternativeCosts), which walks the zone lists and
+     *  rewrites layer state. Use the same mana-ability predicate the payment input uses for clicks. */
     private boolean cardHasPlayableManaAbility(Card c) {
-        for (SpellAbility sa : c.getAllPossibleAbilities(player, true)) {
-            if (sa.isManaAbility()) return true;
-        }
-        return false;
+        return !InputPayMana.getAllManaAbilities(c, player).isEmpty();
     }
 
     /** Undeclared, legal attacker candidates. */
