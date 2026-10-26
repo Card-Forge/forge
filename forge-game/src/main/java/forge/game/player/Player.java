@@ -2954,7 +2954,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                 c.setStartsGameInPlay(true);
                 if (registeredPlayer.hasEnableETBCountersEffect()) {
                     // Route through changeZone so Moved replacements (etbCounter, etc.) apply.
-                    getZone(ZoneType.None).add(c);
+                    // A token in None can't leave it (rule 111.8); a zoneless non-token skips replacements.
+                    if (!c.isToken()) {
+                        getZone(ZoneType.None).add(c);
+                    }
                     getGame().getAction().moveToPlay(c, this, null, null);
                 } else {
                     getZone(ZoneType.Battlefield).add(c);
