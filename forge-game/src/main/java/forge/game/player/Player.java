@@ -3784,8 +3784,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
-     * The cards of targetPlayer's library this player looks at when searching it with sa: the top four under
-     * Aven Mindcensor, none when searching is not allowed (Leonin Arbiter).
+     * The cards of targetPlayer's library this player looks at when searching it with sa: only the top four
+     * while a search is limited, none while searching is not allowed.
      */
     public CardCollectionView getSearchableLibrary(SpellAbility sa, Player targetPlayer) {
         if (!canSearchLibraryWith(sa, targetPlayer)) {
