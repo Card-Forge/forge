@@ -18,6 +18,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.phase.PhaseType;
@@ -49,6 +50,23 @@ public class QuasiLibrarySearchTest extends AITest {
                 DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional,
                 Player targetedPlayer, Map<String, Object> params) {
             offered = optionList.size();
+            return null;
+        }
+    }
+
+    /** Declines every zone-change choice and remembers how many cards it was offered. */
+    private static class DecliningFetcher extends PlayerControllerAi {
+        int offered = -1;
+
+        DecliningFetcher(Game game, Player p) {
+            super(game, p, p.getLobbyPlayer());
+        }
+
+        @Override
+        public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa,
+                CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional,
+                Player decider) {
+            offered = fetchList.size();
             return null;
         }
     }
@@ -134,6 +152,51 @@ public class QuasiLibrarySearchTest extends AITest {
         searcher.dangerouslySetController(controller);
 
         AbilityUtils.resolve(search(host, searcher));
+
+        assertEquals("no card may be offered", 0, Math.max(controller.offered, 0));
+    }
+
+    private static final String FETCH = "DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card"
+            + " | ChangeNum$ 1";
+
+    /** The ordinary search shares the restriction rules: Aven Mindcensor offers the top four of six. */
+    @Test
+    public void anOrdinarySearchOffersOnlyTheTopFourCardsUnderAvenMindcensor() {
+        Game game = initAndCreateGame();
+        Player searcher = game.getPlayers().get(1);
+        for (int i = 0; i < 6; i++) {
+            addCardToZone("Grizzly Bears", searcher, ZoneType.Library);
+        }
+        Card host = addCard("Grizzly Bears", searcher);
+        searcher.addChangedKeywords(Lists.newArrayList("LimitSearchLibrary"), Lists.newArrayList(),
+                game.getNextTimestamp(), 0);
+        DecliningFetcher controller = new DecliningFetcher(game, searcher);
+        searcher.dangerouslySetController(controller);
+        SpellAbility sa = AbilityFactory.getAbility(FETCH, host);
+        sa.setActivatingPlayer(searcher);
+
+        AbilityUtils.resolve(sa);
+
+        assertEquals("four cards of the six are searched", 4, controller.offered);
+    }
+
+    /** The ordinary search shares the restriction rules: Leonin Arbiter offers nothing. */
+    @Test
+    public void anOrdinarySearchOffersNothingWhenLibrariesCannotBeSearched() {
+        Game game = initAndCreateGame();
+        Player searcher = game.getPlayers().get(1);
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Grizzly Bears", searcher, ZoneType.Library);
+        }
+        Card host = addCard("Grizzly Bears", searcher);
+        searcher.addChangedKeywords(Lists.newArrayList("CantSearchLibrary"), Lists.newArrayList(),
+                game.getNextTimestamp(), 0);
+        DecliningFetcher controller = new DecliningFetcher(game, searcher);
+        searcher.dangerouslySetController(controller);
+        SpellAbility sa = AbilityFactory.getAbility(FETCH, host);
+        sa.setActivatingPlayer(searcher);
+
+        AbilityUtils.resolve(sa);
 
         assertEquals("no card may be offered", 0, Math.max(controller.offered, 0));
     }
