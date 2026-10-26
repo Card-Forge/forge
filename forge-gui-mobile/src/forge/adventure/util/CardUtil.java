@@ -340,7 +340,7 @@ public class CardUtil {
                     if (allCardVariants) {
                         // Get a random variant, preserving edition when specified
                         PaperCard finalCandidate = CardUtil.getCardByNameAndEdition(candidate.getCardName(), candidate.getEdition());
-                        if (finalCandidate.getRules().getName().equals(candidate.getRules().getName())) {
+                        if (finalCandidate.getRules().equals(candidate.getRules())) {
                             result.add(finalCandidate);
                         } else { // something went wrong use previous candidate instead
                             result.add(candidate);
