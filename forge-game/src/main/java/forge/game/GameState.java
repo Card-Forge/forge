@@ -829,16 +829,16 @@ public class GameState {
         Player ai = game.getPlayers().get(1);
 
         if (tgtID != TARGET_NONE) {
-            switch (tgtID) {
-                case TARGET_HUMAN:
-                    sa.getTargets().add(human);
-                    break;
-                case TARGET_AI:
-                    sa.getTargets().add(ai);
-                    break;
-                default:
-                    sa.getTargets().add(idToCard.get(tgtID));
-                    break;
+            final GameObject tgt = switch (tgtID) {
+                case TARGET_HUMAN -> human;
+                case TARGET_AI -> ai;
+                default -> idToCard.get(tgtID);
+            };
+            // also works out the amount a divided spell splits among its targets
+            sa.clearTargets();
+            sa.getTargets().add(tgt);
+            if (sa.isDividedAsYouChoose()) {
+                sa.addDividedAllocation(tgt, sa.getStillToDivide());
             }
         }
 
