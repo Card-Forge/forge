@@ -5,4 +5,6 @@ Colors:green
 PTModifier:+4/+4
 K:Augment:4 G:LeftSide
 SVar:LeftSide:T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ Count$YouRollThisTurn | TriggerDescription$ At the beginning of each end step, if you rolled a die this turn,
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
 Oracle:At the beginning of each end step, if you rolled a die this turn,\nAugment {4}{G} ({4}{G}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

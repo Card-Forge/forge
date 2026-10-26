@@ -84,6 +84,7 @@ public class AugmentEffect  extends SpellAbilityEffect {
         final long ts = game.getNextTimestamp();
         hostCreature.setAugmentedTimeStamp(ts);
         hostCreature.addCloneState(cloneState, ts);
+        augmentCreature.setController(hostCreature.getController(), ts);
 
         if (augmentCreature.isStickered()) {
            if (augmentCreature.getOwner().equals(hostCreature.getOwner())) {

@@ -12,4 +12,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCause$ SpellAbility.Self InvertValidCause$ True | ValidCard$ Card.IsImprinted | Static$ True | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:CleanImprinted:DB$ Cleanup | ClearImprinted$ True
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, you may exile target non-Horse creature you control that wasn’t put onto the battlefield with this ability this turn, then return it to the battlefield under its owner’s control.

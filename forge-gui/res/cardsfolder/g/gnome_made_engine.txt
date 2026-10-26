@@ -5,4 +5,5 @@ PT:2/2
 K:Augment Host:Engine:LeftSide:TrigToken
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 colorless Gnome artifact creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_gnome | TokenOwner$ You | SpellDescription$ create a 1/1 colorless Gnome artifact creature token.
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, create a 1/1 colorless Gnome artifact creature token.

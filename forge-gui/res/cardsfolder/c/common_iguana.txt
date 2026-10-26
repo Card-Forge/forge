@@ -6,4 +6,5 @@ K:Augment Host:Iguana:LeftSide:TrigDiscard
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, you may discard a card. If you do, draw a card.
 SVar:TrigDiscard:DB$ Draw | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | SpellDescription$ you may discard a card. If you do, draw a card.
 DeckHas:Ability$Discard
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, you may discard a card. If you do, draw a card.

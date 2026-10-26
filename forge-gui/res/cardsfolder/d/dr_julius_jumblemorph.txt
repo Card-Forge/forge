@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddAll
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Host.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ Whenever a host you control enters, you may search your library and/or graveyard for a card with augment and combine it with that host. If you search your library this way, shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Battlefield | ChangeType$ Card.YouOwn+withAugment | CombinedWith$ Host
 AI:RemoveDeck:Random
+DeckNeeds:Keyword$Augment
 Oracle:Dr. Julius Jumblemorph is every creature type (even if this card isn’t on the battlefield).\nWhenever a host you control enters, you may search your library and/or graveyard for a card with augment and combine it with that host. If you search your library this way, shuffle.

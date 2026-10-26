@@ -5,4 +5,6 @@ Colors:blue
 PTModifier:+3/+3
 K:Augment:5 U:LeftSide
 SVar:LeftSide:T:Mode$ Phase | Phase$ Upkeep |  ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep,
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
 Oracle:At the beginning of your upkeep,\nAugment {5}{U} ({5}{U}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

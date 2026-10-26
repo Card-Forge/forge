@@ -6,4 +6,5 @@ K:Flying
 K:Augment Host:Rocket:LeftSide:TrigDestroy
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may destroy target nonland permanent.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | SpellDescription$ you may destroy target nonland permanent.
+DeckHints:Keyword$Augment
 Oracle:Flying\nWhen this creature enters, you may destroy target nonland permanent.

@@ -6,4 +6,5 @@ K:Augment Host:Camel:LeftSide:TrigPumpAll
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, creatures you control get +1/+1 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ creatures you control get +1/+1 until end of turn.
 SVar:PlayMain1:TRUE
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, creatures you control get +1/+1 until end of turn.

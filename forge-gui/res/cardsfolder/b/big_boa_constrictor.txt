@@ -6,4 +6,5 @@ K:Augment Host:Constrictor:LeftSide:TrigRoll
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ When this creature enters, roll a six-sided die. Target opponent loses life equal to the result.
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBLife | SpellDescription$ roll a six-sided die. Target opponent loses life equal to the result.
 SVar:DBLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ Result
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, roll a six-sided die. Target opponent loses life equal to the result.

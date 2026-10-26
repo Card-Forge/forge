@@ -10,4 +10,5 @@ SVar:Augment:DB$ Augment | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Defi
 SVar:NonAugment:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | RememberChanged$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.withAugment
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, exile target creature card with mana value 2 or less from your graveyard. If it has augment, combine it with a host you control. Otherwise, put it onto the battlefield.

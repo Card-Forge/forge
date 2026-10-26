@@ -32,6 +32,7 @@ public enum SpellApiToAi {
             .put(ApiType.Attach, AttachAi.class)
             .put(ApiType.AssembleContraption, AssembleContraptionAi.class)
             .put(ApiType.AssignGroup, AssignGroupAi.class)
+            .put(ApiType.Augment, AugmentAi.class)
             .put(ApiType.Balance, BalanceAi.class)
             .put(ApiType.BecomeMonarch, BecomeMonarchAi.class)
             .put(ApiType.BecomesBlocked, BecomesBlockedAi.class)

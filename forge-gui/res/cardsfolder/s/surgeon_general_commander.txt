@@ -7,4 +7,6 @@ T:Mode$ Mutates | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Exec
 T:Mode$ Attached | ValidSource$ Enchantment |  ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you augment, enchant, or mutate a creature you control, draw a card.
 T:Mode$ Augments | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you augment, enchant, or mutate a creature you control, draw a card.
 SVar:TrigDraw:DB$ Draw
+AI:RemoveDeck:Random
+DeckNeeds:Keyword$Augment|Mutate
 Oracle:Whenever you augment, enchant, or mutate a creature you control, draw a card.\n{T}: Add {W}, {U}, {B}, {R}, or {G}.

@@ -5,4 +5,5 @@ PT:2/2
 K:Augment Host:Pangolin:LeftSide:TrigDestroy
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may destroy target artifact.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ you may destroy target artifact.
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, you may destroy target artifact.

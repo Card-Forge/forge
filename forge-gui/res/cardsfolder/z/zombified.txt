@@ -6,4 +6,6 @@ PTModifier:+2/+2
 K:Augment:4 B:LeftSide
 A:AB$ Augment | Cost$ 4 B | Choices$ Card.Self | ChoiceZone$ Graveyard | ValidTgts$ Host | ActivationZone$ Graveyard | SpellDescription$ Combine this card from your graveyard with target host.
 SVar:LeftSide:A:AB$ Effect | Cost$ 2 B ExileFromGrave<1/Creature> | SpellDescription$
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
 Oracle:{4}{B}: Combine this card from your graveyard with target host.\n{2}{B}, Exile a creature card from your graveyard:\nAugment {4}{B} ({4}{B}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

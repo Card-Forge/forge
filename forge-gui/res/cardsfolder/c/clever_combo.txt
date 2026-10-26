@@ -3,4 +3,5 @@ ManaCost:1 G
 Types:Sorcery
 A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Host,Creature.withAugment | ChangeNum$ 1 | SpellDescription$ Search your library for a host card or a card with augment, reveal it, put it into your hand, then shuffle.
 AI:RemoveDeck:Random
+DeckNeeds:Type$Host
 Oracle:Search your library for a host card or a card with augment, reveal it, put it into your hand, then shuffle.

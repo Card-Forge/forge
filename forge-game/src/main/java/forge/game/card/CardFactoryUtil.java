@@ -2629,7 +2629,7 @@ public class CardFactoryUtil {
             }
             final String manacost = k[1];
 
-            final String effect = "AB$ Augment | Cost$ " + manacost + " Reveal<1/CARDNAME> | ValidTgts$ Host | ActivationZone$ Hand"
+            final String effect = "AB$ Augment | Cost$ " + manacost + " | ValidTgts$ Host | ActivationZone$ Hand"
                     + "| SorcerySpeed$ True | PrecostDesc$ Augment | CostDesc$ " + ManaCostParser.parse(manacost)
                     + " | StackDescription$ SpellDescription | SpellDescription$ (" + inst.getReminderText() + ")";;
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);

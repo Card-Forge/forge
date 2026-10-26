@@ -6,4 +6,6 @@ PTModifier:+1/+0
 K:Augment:2 B:LeftSide
 S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Activated.Augment | Caster$ You | EffectZone$ All | Description$ You may activate this card’s augment ability any time you could cast an instant
 SVar:LeftSide:T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player,
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
 Oracle:You may activate this card’s augment ability any time you could cast an instant.\nWhenever this creature deals combat damage to a player,\nAugment {2}{B} ({2}{B}, Reveal this card from your hand: Combine it with target host. Augment only as—oh, never mind.)

@@ -5,4 +5,5 @@ PT:1/1
 K:Augment Host:Crocodile:LeftSide:TrigChange
 SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | SpellDescription$ search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+DeckHints:Keyword$Augment
 Oracle:When this creature enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
