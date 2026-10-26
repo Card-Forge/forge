@@ -11,10 +11,7 @@ import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.scene.DuelScene;
-import forge.adventure.scene.RewardScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.TileMapScene;
+import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
@@ -139,7 +136,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                                 Forge.switchScene(duelScene);
                             }, ScreenUtil.getInstance().takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
-                            WorldSave.getCurrentSave().autoSave();
+                            WorldSave.getCurrentSave().autoSaveAsync();
                         });
                     });
                     break;
@@ -242,7 +239,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
             // Lock this POI before any scene transition.
             collidingPoint = point;
-            WorldSave.getCurrentSave().autoSave();
+            WorldSave.getCurrentSave().autoSaveAsync();
             WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
             point.getMapSprite().checkOut();
 
