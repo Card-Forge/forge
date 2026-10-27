@@ -669,6 +669,7 @@ public class ComputerUtilMana {
         List<SpellAbility> saExcludeList = new ArrayList<>();
 
         // Loop over mana needed
+        boolean planBroken = false;
         while (!cost.isPaid()) {
             while (!cost.isPaid() && !manapool.isEmpty()) {
                 // would we ever not want to use pool mana?
@@ -784,9 +785,14 @@ public class ComputerUtilMana {
                 // A Signet-like source is about to be activated: float the mana for its own cost first,
                 // from a source the remaining cost can spare, so that its cost payment doesn't grab a
                 // land that's needed for a colored shard. Planning picks those sources the same way.
+                final PlanState before = new PlanState(cost, sourcesForShards, paymentList);
                 if (!prepayFilterManaAbility(cost, cost, sa, ai, saPayment, toPay, sourcesForShards, paymentList, effect,
                         new HashSet<>(Collections.singleton(sa.getHostCard())), test)) {
                     saPayment.getManaPart().clearExpressChoice();
+                    if (test && !before.equals(new PlanState(cost, sourcesForShards, paymentList))) {
+                        planBroken = true;
+                        break;
+                    }
                     saExcludeList.add(saPayment);
                     continue;
                 }
@@ -836,7 +842,7 @@ public class ComputerUtilMana {
             }
         }
 
-        CostPayment.handleOfferings(sa, test, cost.isPaid());
+        CostPayment.handleOfferings(sa, test, cost.isPaid() && !planBroken);
 
 //        if (DEBUG_MANA_PAYMENT) {
 //            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n",
@@ -845,7 +851,7 @@ public class ComputerUtilMana {
 //        }
 
         // The cost is still unpaid, so refund the mana and report
-        if (!cost.isPaid()) {
+        if (!cost.isPaid() || planBroken) {
             manapool.refundMana(manaSpentToPay);
             if (test) {
                 resetPayment(paymentList);
@@ -1059,6 +1065,12 @@ public class ComputerUtilMana {
         }
     }
 
+    private record PlanState(String unpaid, int sources, int planned) {
+        PlanState(final ManaCostBeingPaid cost, final Multimap<ManaCostShard, SpellAbility> sourcesForShards, final List<SpellAbility> paymentList) {
+            this(cost.toString(), sourcesForShards.size(), paymentList.size());
+        }
+    }
+
     /**
      * Before a filter mana ability (e.g. Azorius Signet) is activated for real, tap ordinary sources
      * for the mana it costs so that mana is floating when the ability's own cost gets paid.
@@ -1167,7 +1179,7 @@ public class ComputerUtilMana {
             }
             if ((chosen == null || !leavesEnoughMana(remaining, sourcesForShards, chain, chosen.getHostCard(), sa))
                     && (!manapool.isEmpty() || canStartChain(sourcesForShards, chain))) {
-                for (final SpellAbility m : sourcesForShards.get(shard)) {
+                for (final SpellAbility m : new ArrayList<>(sourcesForShards.get(shard))) {
                     if (chain.contains(m.getHostCard()) || getManaToActivate(m) == 0 || !tried.add(m)) {
                         continue;
                     }
@@ -1177,6 +1189,7 @@ public class ComputerUtilMana {
                     }
                     final ManaCostBeingPaid feeds = new ManaCostBeingPaid(remaining);
                     feeds.addManaCost(toFloat.toManaCost());
+                    final PlanState before = new PlanState(cost, sourcesForShards, paymentList);
                     if (prepayFilterManaAbility(cost, feeds, sa, ai, m, shard, sourcesForShards, paymentList, effect, chain, test)) {
                         if (chosen != null) {
                             chosen.getManaPart().clearExpressChoice();
@@ -1185,6 +1198,10 @@ public class ComputerUtilMana {
                         break;
                     }
                     m.getManaPart().clearExpressChoice();
+                    if (test && !before.equals(new PlanState(cost, sourcesForShards, paymentList))) {
+                        // it set sources aside for its own cost before it failed, so nothing planned from here on would add up
+                        return false;
+                    }
                 }
             }
             if (chosen == null) {
