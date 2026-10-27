@@ -2,7 +2,7 @@ Name:Commander Raffi Musiker
 ManaCost:2 B
 Types:Legendary Creature Human Officer
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBExile,DBInvestigate
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | ValidTgtsDesc$ card in a graveyard. | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBGainLife | SpellDescription$ Exile up to one target card from a graveyard. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
