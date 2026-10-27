@@ -639,6 +639,20 @@ public class ComputerUtil {
             return null;
         }
 
+        if (ai.getController() instanceof PlayerControllerAi) {
+            // never pay with the win card of the deck (Grief's evoke must not exile Living End): without anything
+            // else to pay with, a cost is not paid at all
+            final CardCollection safe = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.withoutProtected(typeList);
+            if (safe.size() < typeList.size()) {
+                if (safe.size() < amount && !effect) {
+                    return null;
+                }
+                if (safe.size() >= amount) {
+                    typeList = safe;
+                }
+            }
+        }
+
         CardLists.sortByPowerAsc(typeList);
         if (sa.isCraft()) {
             // remove anything above 3 CMC so that high tier stuff doesn't get exiled with this

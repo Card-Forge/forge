@@ -75,7 +75,8 @@ final class StrategicEvaluator {
         if (plan == null || plan == DeckPlan.NONE) {
             return 0;
         }
-        int adj = 0;
+        // progress towards the combos the deck is built around (cycling a creature for Living End, a pair assembled)
+        int adj = plan.combos.term(simAi);
         final Player opp = simAi.getWeakestOpponent();
         if (opp != null) {
             adj += plan.opponentLifeExtra * Math.max(0, Math.min(20, 20 - opp.getLife()));

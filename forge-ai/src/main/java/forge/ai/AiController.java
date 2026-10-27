@@ -23,11 +23,14 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.simulation.ComboGuard;
+import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.FlatMonteCarloPicker;
-import forge.ai.simulation.SimAudit;
 import forge.ai.simulation.FlatMonteCarloStats;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.OnePlaySafetyChecker;
+import forge.ai.simulation.SimAudit;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -148,6 +151,12 @@ public class AiController {
 
     public AiCardMemory getCardMemory() {
         return memory;
+    }
+
+    /** Whether Flat Monte Carlo is switched on for this player. */
+    public boolean flatMonteCarloActive() {
+        return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcTripped
+                && simMode == null && getBoolProperty(AiProps.FLAT_MC_ENABLED);
     }
 
     public Combat getPredictedCombat() {
@@ -1107,7 +1116,24 @@ public class AiController {
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
 
-    public CardCollection getCardsToDiscard(int min, final int max, final CardCollection validCards, final SpellAbility sa) {
+    public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
+        if (validCards.size() > min) {
+            final ComboPlan combos = deckPlan(player).combos;
+            // a deck that wants creatures in the graveyard throws away the right ones
+            final CardCollection forCombo = combos.preferredDiscards(player, validCards, min);
+            if (forCombo != null) {
+                return forCombo;
+            }
+            // and no deck throws away its win card while something else will do
+            final CardCollection safe = combos.withoutProtected(validCards);
+            if (safe.size() >= min && safe.size() < validCards.size()) {
+                return chooseCardsToDiscard(min, max, safe, sa);
+            }
+        }
+        return chooseCardsToDiscard(min, max, validCards, sa);
+    }
+
+    private CardCollection chooseCardsToDiscard(int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() <= min) {
             return validCards; //return all valid cards since they will be discarded without filtering needed
         }
@@ -1790,17 +1816,25 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
+        // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
+        // Flat MC compares them with rollouts, the heuristics still decide for every other card
+        final ComboPlan comboPlan = flatMonteCarloActive()
+            ? deckPlan(player).combos : ComboPlan.EMPTY;
         saList.removeIf(spellAbility -> {
-            // don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
-            // TODO allow when experimental profile?
-            return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
+            if (spellAbility.isLandAbility()) {
+                return true;
+            }
+            final Card h = spellAbility.getHostCard();
+            return h != null && ComputerUtilCard.isCardRemAIDeck(h) && !comboPlan.isKeyCard(h);
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
-        //update LivingEndPlayer
-        useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
+        //update LivingEndPlayer: a deck that plays Living End by name, or any deck the scan found to be built around
+        //a mass reanimation (Living Death, Rise of the Dark Realms, ...) whose payoff is still in the library
+        useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"))
+                || deckPlan(player).combos.wantsCyclingPriority(player);
 
         SpellAbility chosenSa;
         lastFlatMcResult = null;
@@ -1813,6 +1847,7 @@ public class AiController {
             final List<SpellAbility> extras = new ArrayList<>();
             List<SpellAbility> approved = chooseSpellAbilitiesToPlayFromList(saList, true,
                     mcCfg == null ? 1 : discover ? mcCfg.maxCandidates * 2 : mcCfg.maxCandidates, discover ? extras : null);
+            approved = fuelPlaysFirst(approved, extras);
             if (discover) {
                 approved = FlatMonteCarloPicker.diversify(approved, mcCfg.maxCandidates);
             }
@@ -1997,23 +2032,30 @@ public class AiController {
         return cfg;
     }
 
-    private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approved, final List<SpellAbility> extras,
+    /**
+     * Plays that Flat Monte Carlo never spends a card on (see {@link forge.ai.simulation.ComboGuard}): bringing back
+     * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
+     * and a cantrip while the AI is confident to win this turn or the next. Returns the reason, or null for a fine play.
+     */
+    private String guardProblem(final SpellAbility sa, final GameEntity aim, final boolean saveCantrips) {
+        final ComboPlan plan = deckPlan(player).combos;
+        final String problem = ComboGuard.problem(player, sa, aim, plan);
+        if (problem != null) {
+            return problem;
+        }
+        return saveCantrips && ComboGuard.isCantrip(sa) ? "cantrip-saved" : null;
+    }
+
+    private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approvedIn, final List<SpellAbility> extras,
                                                   final FlatMonteCarloPicker.Config cfg, final FlatMonteCarloPicker.Mode mode) {
-        if (approved.isEmpty() && extras.isEmpty()) {
+        if (approvedIn.isEmpty() && extras.isEmpty()) {
             return null;
-        }
-        if (cfg == null) { // out of budget
-            return approved.isEmpty() ? null : approved.get(0); // out of budget
-        }
-        if (mode == FlatMonteCarloPicker.Mode.MAIN && extras.isEmpty() && approved.size() < 2
-                && !FlatMonteCarloPicker.isHoldPossible(player)) {
-            return approved.get(0); // nothing to compare
         }
         // What the heuristics aimed each approved play at, noted before the rollouts: asking the heuristics again
         // (as the rollouts do to check a line is still approved) clears the targets of a play they turn down on the
         // dice, and the aim they gave it a moment ago is then the only record of where the play was meant to go.
         final Map<SpellAbility, GameEntity> approvedAim = new HashMap<>();
-        for (final SpellAbility sa : approved) {
+        for (final SpellAbility sa : approvedIn) {
             if (sa.usesTargeting() && sa.getTargets() != null) {
                 final List<GameEntity> aimed = new ArrayList<>();
                 for (final GameEntity e : sa.getTargets().getTargetEntities()) {
@@ -2024,8 +2066,39 @@ public class AiController {
                 }
             }
         }
+        // Plays that waste a card are taken out before anything is compared, the heuristics' favourite included: the
+        // next play in line then stands for "what the heuristics would do". Nothing left means passing.
+        final boolean saveCantrips = ComboGuard.winLikelySoon(player, deckPlan(player).combos);
+        final List<SpellAbility> approved = new ArrayList<>(approvedIn.size());
+        for (final SpellAbility sa : approvedIn) {
+            final String problem = guardProblem(sa, approvedAim.get(sa), saveCantrips);
+            if (problem == null) {
+                approved.add(sa);
+            } else {
+                FlatMonteCarloStats.noteRejected("ComboGuard:" + problem);
+            }
+        }
+        for (final SpellAbility sa : new ArrayList<>(extras)) {
+            final String problem = guardProblem(sa, null, saveCantrips);
+            if (problem != null) {
+                extras.remove(sa);
+                FlatMonteCarloStats.noteRejected("ComboGuard:" + problem);
+            }
+        }
+        if (approved.isEmpty() && extras.isEmpty()) {
+            return null;
+        }
+        if (cfg == null) { // out of budget
+            return approved.isEmpty() ? null : approved.get(0); // out of budget
+        }
+        if (mode == FlatMonteCarloPicker.Mode.MAIN && extras.isEmpty() && approved.size() < 2
+                && !FlatMonteCarloPicker.isHoldPossible(player)) {
+            return approved.get(0); // nothing to compare
+        }
+        // The heuristics are asked again before a line is rolled out, and that can aim the play somewhere else (at the
+        // legend that is already in play): such a line is not simulated, and never played either (see below).
         final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, extras, cfg,
-                sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay, mode);
+                sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay && guardProblem(sa, null, saveCantrips) == null, mode);
         lastFlatMcResult = result;
         FlatMonteCarloStats.record(result);
         flatMcTurnSpentNanos += result.elapsedNanos;
@@ -2037,6 +2110,9 @@ public class AiController {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
             // it is still aimed where the rollouts liked it, and that it can still be paid for.
             if (result.target != null && !FlatMonteCarloPicker.applyTarget(result.choice, result.target)) {
+                return approved.isEmpty() ? null : approved.get(0);
+            }
+            if (guardProblem(result.choice, null, saveCantrips) != null) {
                 return approved.isEmpty() ? null : approved.get(0);
             }
             result.choice.setActivatingPlayer(player);
@@ -2071,7 +2147,7 @@ public class AiController {
                 // verdict stands, aimed where it was (a single target, still legal) if the play aims at all.
                 final boolean aimOk = !sa.usesTargeting()
                         || (result.target == null && approvedTargets == 1 && FlatMonteCarloPicker.applyTarget(sa, approvedTarget));
-                if (aimOk && isStillCastable(sa)) {
+                if (aimOk && isStillCastable(sa) && guardProblem(sa, null, saveCantrips) == null) {
                     return sa;
                 }
             }
@@ -2080,10 +2156,24 @@ public class AiController {
                         && playDecisionStable(sa) != AiPlayDecision.WillPlay) {
                     continue; // the other target is no longer legal and the heuristics gave the play up as well
                 }
+                if (guardProblem(sa, null, saveCantrips) != null && !reaimedWithoutProblem(sa, saveCantrips)) {
+                    FlatMonteCarloStats.noteRejected("ComboGuard:late");
+                    continue; // the heuristics aimed it at the legend that is already in play, and nothing else will do
+                }
                 return sa;
             }
         }
         return null;
+    }
+
+    /** Another target for a play the heuristics aimed at a legend the AI already has: the first one the guard accepts. */
+    private boolean reaimedWithoutProblem(final SpellAbility sa, final boolean saveCantrips) {
+        for (final GameObject target : FlatMonteCarloPicker.alternativeTargets(player, sa, 3)) {
+            if (FlatMonteCarloPicker.applyTarget(sa, target) && guardProblem(sa, null, saveCantrips) == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Forces Monte Carlo on or off for this player only (null: follow the game setting). Used for A/B comparisons. */
@@ -2128,17 +2218,49 @@ public class AiController {
         }
     }
 
-    private forge.ai.simulation.DeckPlan flatMcDeckPlan;
+    private DeckPlan flatMcDeckPlan;
 
     /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
-    public forge.ai.simulation.DeckPlan deckPlan(final Player p) {
+    public DeckPlan deckPlan(final Player p) {
         if (flatMcDeckPlan == null) {
-            flatMcDeckPlan = forge.ai.simulation.DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
-            if (flatMcDeckPlan != forge.ai.simulation.DeckPlan.NONE) {
-                forge.ai.simulation.FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
+            flatMcDeckPlan = DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
+            if (flatMcDeckPlan.archetype != DeckPlan.Archetype.MIDRANGE || !flatMcDeckPlan.combos.isEmpty()) {
+                FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
+            }
+            for (final ComboPlan.Combo combo : flatMcDeckPlan.combos.getCombos()) {
+                FlatMonteCarloStats.notePlan("combo:" + combo.kind);
             }
         }
         return flatMcDeckPlan;
+    }
+
+    /**
+     * For a deck built around the graveyard (Living End and its kin, reanimator) the plays that put cards there on
+     * purpose (cycling, discard and looting) come first: they are what the combo needs before anything else, and a
+     * creature-first ordering would bury them. Fuel plays the heuristics turned down are brought in from the extras.
+     * Other decks, and decks whose payoff is gone, get the list back unchanged.
+     */
+    private List<SpellAbility> fuelPlaysFirst(final List<SpellAbility> approved, final List<SpellAbility> extras) {
+        final ComboPlan combos = deckPlan(player).combos;
+        if (combos.isEmpty() || !combos.fuelFirst(player)) {
+            return approved;
+        }
+        final List<SpellAbility> fuel = new ArrayList<>();
+        final List<SpellAbility> rest = new ArrayList<>();
+        for (final SpellAbility sa : approved) {
+            (combos.isFuelPlay(sa) ? fuel : rest).add(sa);
+        }
+        for (final SpellAbility sa : new ArrayList<>(extras)) {
+            if (combos.isFuelPlay(sa) && !fuel.contains(sa)) {
+                fuel.add(sa);
+                extras.remove(sa);
+            }
+        }
+        if (fuel.isEmpty()) {
+            return approved;
+        }
+        fuel.addAll(rest);
+        return fuel;
     }
 
     /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
@@ -2158,7 +2280,11 @@ public class AiController {
             default:
                 break;
         }
-        if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())) {
+        final Card host = sa.getHostCard();
+        final ComboPlan combos = deckPlan(player).combos;
+        if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
+                && !combos.isFuelPlay(sa)
+                && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))) {
             return false;
         }
         try {
@@ -2227,6 +2353,8 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
+        // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game
+        final ComboPlan combos = deckPlan(player).combos;
         final long aiId = AITimeoutTracker.key(game.getId(), player.getId());
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(aiId, timeoutNanos);
@@ -2261,7 +2389,7 @@ public class AiController {
                     // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
                     AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
                     if (useLivingEnd) {
-                        if (sa.isCycling() && sa.canCastTiming(player)
+                        if ((sa.isCycling() || combos.isFuelPlay(sa)) && sa.canCastTiming(player)
                                 && player.getCardsIn(ZoneType.Library).size() >= 10) {
                             if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                                 if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
@@ -2278,7 +2406,7 @@ public class AiController {
                                         : AiPlayDecision.WillPlay;
                             } else if (CardLists
                                     .filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.CREATURES)
-                                    .size() > 4) {
+                                    .size() > 4 || combos.swapIsWorthIt(player)) {
                                 if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
                                     continue;
                                 else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player)
@@ -2881,6 +3009,22 @@ public class AiController {
                                                    CardCollection fetchList, Player player2, Player decider) {
         if (usesFullSimulation()) {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+        }
+
+        if (decider == player && sa.getApi() != ApiType.Learn) {
+            // the win card of a cheating spell, the creature to put into the graveyard: what the deck is built for
+            final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
+            if (forCombo != null) {
+                return forCombo;
+            }
+            if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Hand)
+                    && !sa.hasParam("AILogic") && !fetchList.isEmpty()) {
+                // whatever the deck, a cheating spell is not for a land when anything else can be put onto the battlefield
+                final CardCollection nonLands = CardLists.filter(fetchList, c -> !c.isLand());
+                if (!nonLands.isEmpty() && nonLands.size() < fetchList.size()) {
+                    return ComputerUtilCard.getBestAI(nonLands);
+                }
+            }
         }
 
         if (sa.getApi() == ApiType.Learn) {
