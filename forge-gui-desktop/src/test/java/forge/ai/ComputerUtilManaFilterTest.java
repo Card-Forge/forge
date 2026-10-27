@@ -179,6 +179,33 @@ public class ComputerUtilManaFilterTest extends AITest {
     }
 
     @Test
+    public void solRingPaysForTheSignetAndTheSpell() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Sol Ring", ai);
+        Card dimir = addCard("Dimir Signet", ai);
+        Card divination = addCardToZone("Divination", ai, ZoneType.Hand); // {2}{U}
+
+        AssertJUnit.assertTrue("Sol Ring's other {C} goes to the spell", payForReal(divination, ai));
+        AssertJUnit.assertTrue(dimir.isTapped());
+    }
+
+    @Test
+    public void theFeedingSignetKeepsTheColorTheSpellNeeds() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+
+        addCard("Clifftop Retreat", ai);
+        addCard("Talisman of Indulgence", ai);
+        addCard("Dimir Signet", ai);
+        addCard("Izzet Signet", ai);
+        Card nephilim = addCardToZone("Yore-Tiller Nephilim", ai, ZoneType.Hand); // {W}{U}{B}{R}
+
+        AssertJUnit.assertTrue("Izzet Signet's {R} goes to the spell, its {U} to Dimir Signet", payForReal(nephilim, ai));
+    }
+
+    @Test
     public void oneFilterLandPaysForAnother() {
         Game game = initAndCreateGame();
         Player ai = game.getPlayers().get(1);
