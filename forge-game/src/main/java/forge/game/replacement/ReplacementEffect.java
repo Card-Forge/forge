@@ -20,8 +20,6 @@ package forge.game.replacement;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.*;
-
 import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
 

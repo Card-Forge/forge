@@ -338,8 +338,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             CardCollectionView list = p.getCardsIn(origin);
 
             // remove cards that won't be seen if library can't be searched
-            if (!ai.canSearchLibraryWith(sa, p)) {
-                list = CardLists.filter(list, CardPredicates.inZone(ZoneType.Library).negate());
+            if (origin.contains(ZoneType.Library)) {
+                CardCollectionView searchable = ai.getSearchableLibrary(sa, p);
+                list = CardLists.filter(list, c -> !c.isInZone(ZoneType.Library) || (searchable != null && searchable.contains(c)));
             }
 
             if (type != null && p == ai) {
