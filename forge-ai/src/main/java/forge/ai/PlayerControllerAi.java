@@ -1549,8 +1549,44 @@ public class PlayerControllerAi extends PlayerController {
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
         // TODO check if profile detection set to Auto
         setupAutoProfile(myDeck);
+        return keepComboPieces(myDeck, brains.complainCardsCantPlayWell(myDeck));
+    }
 
-        return brains.complainCardsCantPlayWell(myDeck);
+    /** Flat Monte Carlo can try a card the heuristics cannot play, so the pieces of the deck's combos stay in the deck. */
+    private Map<DeckSection, List<? extends PaperCard>> keepComboPieces(final Deck deck, final Map<DeckSection, List<? extends PaperCard>> complaints) {
+        if (complaints == null || complaints.isEmpty() || !brains.flatMonteCarloActive()) {
+            return complaints;
+        }
+        final Set<String> pieces;
+        try {
+            final List<Card> cards = new ArrayList<>();
+            for (final DeckSection section : new DeckSection[] { DeckSection.Main, DeckSection.Commander }) {
+                if (deck.has(section)) {
+                    for (final PaperCard pc : deck.get(section).toFlatList()) {
+                        cards.add(Card.fromPaperCard(pc, player));
+                    }
+                }
+            }
+            pieces = forge.ai.simulation.ComboPlan.scan(cards).pieceNames();
+        } catch (final RuntimeException e) {
+            return complaints;
+        }
+        if (pieces.isEmpty()) {
+            return complaints;
+        }
+        final Map<DeckSection, List<? extends PaperCard>> kept = new LinkedHashMap<>(); // never edit the deck's own map
+        for (final Map.Entry<DeckSection, List<? extends PaperCard>> e : complaints.entrySet()) {
+            final List<PaperCard> rest = new ArrayList<>();
+            for (final PaperCard pc : e.getValue()) {
+                if (!pieces.contains(pc.getName())) {
+                    rest.add(pc);
+                }
+            }
+            if (!rest.isEmpty()) {
+                kept.put(e.getKey(), rest);
+            }
+        }
+        return kept;
     }
 
     @Override

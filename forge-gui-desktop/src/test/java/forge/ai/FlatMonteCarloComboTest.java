@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.deck.Deck;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -173,5 +174,136 @@ public class FlatMonteCarloComboTest extends AITest {
         final SideboardAdvisor.Result vsCreatures = SideboardAdvisor.advise(p, main, side, Arrays.asList(creatures),
                 Arrays.asList("Creatures"), SideboardAdvisor.maxSwapsFor(main.size()));
         AssertJUnit.assertEquals("Anger of the Gods", vsCreatures.swaps.get(0).in.getName());
+    }
+
+    private static final String[] REANIMATOR_DECK = { "Reanimate", "4", "Animate Dead", "4", "Exhume", "2", "Entomb", "4",
+            "Griselbrand", "4", "Archon of Cruelty", "3", "Faithless Looting", "4", "Careful Study", "2",
+            "Thoughtseize", "4", "Cabal Therapy", "2", "Swamp", "12" };
+
+    private Player reanimatorPlayer(final Game game) {
+        final Object[] args = new Object[REANIMATOR_DECK.length];
+        for (int i = 0; i < args.length; i += 2) {
+            args[i] = REANIMATOR_DECK[i];
+            args[i + 1] = Integer.valueOf(REANIMATOR_DECK[i + 1]);
+        }
+        return deal(game, args);
+    }
+
+    @org.testng.annotations.DataProvider(name = "fuelCards")
+    public Object[][] fuelCards() {
+        return new Object[][] { { "Faithless Looting" }, { "Careful Study" } };
+    }
+
+    @Test(dataProvider = "fuelCards")
+    public void selfDiscardAndLootSpellsAreFuelForReanimator(final String name) {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertTrue(plan.combos.has(ComboPlan.Kind.REANIMATOR));
+        final Card card = addCardToZone(name, p, ZoneType.Hand);
+        AssertJUnit.assertTrue(name, plan.combos.isFuelPlay(card.getSpellAbilities().get(0)));
+    }
+
+    @Test
+    public void removeDeckAllDoesNotHideAComboPieceFromFlatMc() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final Card looting = addCardToZone("Faithless Looting", p, ZoneType.Hand);
+        if (looting.getRules().getAiHints().getRemAIDecks()) { // true while the script says AI:RemoveDeck:All
+            AssertJUnit.assertTrue(plan.combos.overridesRemAi(looting));
+        }
+        // a card that is not a piece is never let through
+        final Card swamp = addCardToZone("Swamp", p, ZoneType.Hand);
+        AssertJUnit.assertFalse(plan.combos.overridesRemAi(swamp));
+    }
+
+    @Test
+    public void thoughtseizeOnYourselfOnlyWhenABigCreatureAndAReanimationSpellAreInHand() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final Card seize = addCardToZone("Thoughtseize", p, ZoneType.Hand);
+        AssertJUnit.assertTrue(seize.getSpellAbilities().get(0).canTarget(p));
+
+        AssertJUnit.assertFalse(plan.combos.selfDiscardWanted(p)); // nothing to throw away
+        addCardToZone("Griselbrand", p, ZoneType.Hand);
+        AssertJUnit.assertFalse(plan.combos.selfDiscardWanted(p)); // no way to bring it back
+        addCardToZone("Reanimate", p, ZoneType.Hand);
+        AssertJUnit.assertTrue(plan.combos.selfDiscardWanted(p));
+        AssertJUnit.assertTrue(plan.combos.isFuelPlay(seize.getSpellAbilities().get(0)));
+
+        p.setLife(3, null); // Thoughtseize costs 2 life
+        AssertJUnit.assertFalse(plan.combos.selfDiscardWanted(p));
+    }
+
+    @Test
+    public void millAffinityAndDredgeDecksAreRead() {
+        Game game = initAndCreateGame();
+        Player p = deal(game, "Hedron Crab", 4, "Ruin Crab", 3, "Mind Funeral", 4, "Glimpse the Unthinkable", 4,
+                "Tome Scour", 4, "Fractured Sanity", 2, "Island", 20);
+        AssertJUnit.assertTrue(DeckPlan.forSetting("auto", p).combos.has(ComboPlan.Kind.MILL));
+
+        game = initAndCreateGame();
+        p = deal(game, "Frogmite", 4, "Myr Enforcer", 4, "Ornithopter", 4, "Memnite", 4, "Springleaf Drum", 4,
+                "Mox Opal", 4, "Signal Pest", 4, "Cranial Plating", 4, "Island", 4);
+        AssertJUnit.assertTrue(DeckPlan.forSetting("auto", p).combos.has(ComboPlan.Kind.AFFINITY));
+
+        game = initAndCreateGame();
+        p = deal(game, "Stinkweed Imp", 4, "Golgari Thug", 4, "Bridge from Below", 4, "Narcomoeba", 4,
+                "Prized Amalgam", 4, "Faithless Looting", 4, "Cathartic Reunion", 4, "Swamp", 12);
+        AssertJUnit.assertTrue(DeckPlan.forSetting("auto", p).combos.has(ComboPlan.Kind.DREDGE));
+    }
+
+    @Test
+    public void dredgeTermPunishesDeckingTheAiItself() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        final Object[] spells = { "Stinkweed Imp", 4, "Golgari Thug", 4, "Bridge from Below", 4, "Narcomoeba", 4,
+                "Prized Amalgam", 4, "Faithless Looting", 4, "Cathartic Reunion", 4 };
+        for (int i = 0; i < spells.length; i += 2) {
+            for (int n = 0; n < (Integer) spells[i + 1]; n++) {
+                addCardToZone((String) spells[i], p, ZoneType.Hand);
+            }
+        }
+        for (int n = 0; n < 8; n++) {
+            addCardToZone("Swamp", p, ZoneType.Library);
+        }
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertTrue(plan.combos.has(ComboPlan.Kind.DREDGE)); // premise
+        AssertJUnit.assertTrue(plan.combos.term(p) < 0); // 8 or fewer cards left in the library
+    }
+
+    @Test
+    public void removeAiLootingIsAKeyCardOfTheReanimatorDeck() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final Card looting = addCardToZone("Faithless Looting", p, ZoneType.Hand);
+        AssertJUnit.assertTrue(ComputerUtilCard.isCardRemAIDeck(looting)); // the premise of the bypass
+        AssertJUnit.assertTrue(plan.combos.isKeyCard(looting));
+        AssertJUnit.assertFalse(plan.combos.isKeyCard(addCardToZone("Swamp", p, ZoneType.Hand)));
+    }
+
+    @Test
+    public void comboPiecesAreNotRemovedFromTheDeckWhenFlatMcIsOn() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        final PlayerControllerAi pc = (PlayerControllerAi) p.getController();
+        final Deck deck = new Deck();
+        for (final PaperCard c : papers("Reanimate", 4, "Animate Dead", 4, "Exhume", 2, "Entomb", 4, "Griselbrand", 4,
+                "Archon of Cruelty", 3, "Faithless Looting", 4, "Careful Study", 2, "Thoughtseize", 4, "Swamp", 12)) {
+            deck.getMain().add(c, 1);
+        }
+        AssertJUnit.assertTrue(deck.getUnplayableAICards().unplayable.values().stream()
+                .anyMatch(l -> l.stream().anyMatch(c -> c.getName().equals("Faithless Looting")))); // premise
+
+        pc.getAi().setFlatMonteCarloOverride(false);
+        AssertJUnit.assertTrue(pc.complainCardsCantPlayWell(deck).values().stream()
+                .anyMatch(l -> l.stream().anyMatch(c -> c.getName().equals("Faithless Looting"))));
+
+        pc.getAi().setFlatMonteCarloOverride(true);
+        AssertJUnit.assertTrue(pc.complainCardsCantPlayWell(deck).values().stream()
+                .noneMatch(l -> l.stream().anyMatch(c -> c.getName().equals("Faithless Looting"))));
     }
 }

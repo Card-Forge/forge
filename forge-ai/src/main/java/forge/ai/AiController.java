@@ -150,6 +150,12 @@ public class AiController {
         return memory;
     }
 
+    /** Whether Flat Monte Carlo is switched on for this player. */
+    public boolean flatMonteCarloActive() {
+        return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcTripped
+                && simMode == null && getBoolProperty(AiProps.FLAT_MC_ENABLED);
+    }
+
     public Combat getPredictedCombat() {
         if (predictedCombat == null) {
             AiAttackController aiAtk = new AiAttackController(player);
@@ -1807,10 +1813,16 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
+        // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
+        // Flat MC compares them with rollouts, the heuristics still decide for every other card
+        final forge.ai.simulation.ComboPlan comboPlan = flatMonteCarloActive()
+            ? deckPlan(player).combos : forge.ai.simulation.ComboPlan.EMPTY;
         saList.removeIf(spellAbility -> {
-            // don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
-            // TODO allow when experimental profile?
-            return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
+            if (spellAbility.isLandAbility()) {
+                return true;
+            }
+            final Card h = spellAbility.getHostCard();
+            return h != null && ComputerUtilCard.isCardRemAIDeck(h) && !comboPlan.isKeyCard(h);
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
@@ -2210,8 +2222,11 @@ public class AiController {
             default:
                 break;
         }
+        final Card host = sa.getHostCard();
+        final forge.ai.simulation.ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
-                && !deckPlan(player).combos.isFuelPlay(sa)) {
+                && !combos.isFuelPlay(sa)
+                && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))) {
             return false;
         }
         try {

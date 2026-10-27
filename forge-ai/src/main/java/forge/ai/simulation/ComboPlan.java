@@ -47,7 +47,8 @@ import forge.game.zone.ZoneType;
  * kind needs a minimum of pieces before it is reported.
  */
 public final class ComboPlan {
-    public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE }
+    public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
+        MILL, AFFINITY, DREDGE }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -70,6 +71,41 @@ public final class ComboPlan {
     private static final int SWAP_WORTH_MIN = 220;
     private static final int ASSEMBLED_BONUS = 150;
     private static final int ONE_PIECE_BONUS = 40;
+
+    /** AI:RemoveDeck:All says "the heuristic AI can't play this"; for a combo piece Flat MC may still try it. */
+    public boolean overridesRemAi(final Card c) {
+        if (c == null || !c.getRules().getAiHints().getRemAIDecks()) {
+            return false;
+        }
+        for (final Combo combo : combos) {
+            if (combo.enablers.contains(c.getName()) || combo.payoffs.contains(c.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Hand attack aimed at yourself is fuel only when it throws away a big creature that a reanimation spell can use. */
+    public boolean selfDiscardWanted(final Player ai) {
+        final Combo re = find(Kind.REANIMATOR);
+        if (re == null || ai == null || ai.getLife() <= 4) {
+            return false; // Thoughtseize costs 2 life
+        }
+        boolean big = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            big |= c.isCreature() && isBigTarget(c);
+        }
+        return big && reanimationReady(ai, re);
+    }
+
+    static boolean isTargetedDiscard(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.getApi() == ApiType.Discard && a.usesTargeting()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /** Where the cards of a deck are while a game is on (the sideboard is not part of the deck). */
     static final List<ZoneType> DECK_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
@@ -188,6 +224,9 @@ public final class ComboPlan {
         addIfFound(found, cascadePayoff(spells));
         addIfFound(found, cheatFatty(spells));
         addIfFound(found, goWide(spells));
+        addIfFound(found, mill(spells));
+        addIfFound(found, affinity(spells));
+        addIfFound(found, dredge(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -304,7 +343,17 @@ public final class ComboPlan {
             return true;
         }
         final Card host = sa.getHostCard();
-        return host != null && sa.isSpell() && (host.isInstant() || host.isSorcery()) && isSelfFuelSpell(sa);
+        if (host == null || !sa.isSpell() || !(host.isInstant() || host.isSorcery())) {
+            return false;
+        }
+        if (isSelfFuelSpell(sa)) {
+            return true;
+        }
+        Player who = sa.getActivatingPlayer();
+        if (who == null) {
+            who = host.getController();
+        }
+        return isTargetedDiscard(sa) && selfDiscardWanted(who);
     }
 
     /**
@@ -360,6 +409,15 @@ public final class ComboPlan {
                     break;
                 case GO_WIDE:
                     sum += goWideTerm(ai, combo);
+                    break;
+                case MILL:
+                    sum += millTerm(ai);
+                    break;
+                case AFFINITY:
+                    sum += affinityTerm(ai, combo);
+                    break;
+                case DREDGE:
+                    sum += dredgeTerm(ai, combo);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -577,6 +635,121 @@ public final class ComboPlan {
                 + (safe ? " (finds only the payoff)" : ""));
     }
 
+    private static final Set<String> MILL_PAYOFF_NAMES = names("Hedron Crab", "Ruin Crab", "Fractured Sanity",
+            "Bruvac the Grandiloquent", "Maddening Cacophony", "Mind Funeral", "Traumatize", "Glimpse the Unthinkable",
+            "Tome Scour", "Magus of the Mind", "Increasing Confusion");
+
+    private static Combo mill(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int pieces = 0;
+        for (final Card c : spells) {
+            if (MILL_PAYOFF_NAMES.contains(c.getName())) {
+                payoffs.add(c.getName());
+                pieces++;
+            } else if (millsOpponent(c)) {
+                enablers.add(c.getName());
+                pieces++;
+            }
+        }
+        if (payoffs.isEmpty() || pieces < 8) {
+            return null;
+        }
+        return new Combo(Kind.MILL, 20 + 3 * Math.min(pieces, 14) + 5 * Math.min(payoffs.size(), 4), payoffs, enablers,
+                Collections.<String>emptySet(), false, "mill pieces=" + pieces + ", payoffs=" + payoffs);
+    }
+
+    private static boolean millsOpponent(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if (a.getApi() == ApiType.Mill && (a.usesTargeting() || a.getParamOrDefault("Defined", "").contains("Opponent"))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private int millTerm(final Player ai) {
+        final Player opp = ai.getWeakestOpponent();
+        if (opp == null) {
+            return 0;
+        }
+        final int lib = opp.getCardsIn(ZoneType.Library).size();
+        return Math.min(200, Math.max(0, (40 - lib) * 5)) + (lib <= 10 ? 100 : 0);
+    }
+
+    private static Combo affinity(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> artifacts = new LinkedHashSet<>();
+        int payoffCopies = 0;
+        int cheapArtifacts = 0;
+        for (final Card c : spells) {
+            if (c.hasKeyword(Keyword.AFFINITY)) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+            } else if (c.isArtifact() && c.getCMC() <= 2) {
+                artifacts.add(c.getName());
+                cheapArtifacts++;
+            }
+        }
+        if (payoffCopies < 4 || cheapArtifacts < 12) {
+            return null;
+        }
+        return new Combo(Kind.AFFINITY, 25 + 3 * Math.min(payoffCopies, 8) + 2 * Math.min(cheapArtifacts, 16), payoffs,
+                artifacts, Collections.<String>emptySet(), false, "affinity=" + payoffCopies + ", artifacts=" + cheapArtifacts);
+    }
+
+    private int affinityTerm(final Player ai, final Combo combo) {
+        int artifacts = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            artifacts += c.isArtifact() ? 1 : 0;
+        }
+        final boolean payoffInHand = anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs);
+        return Math.min(180, artifacts * (payoffInHand ? 25 : 10));
+    }
+
+    private static Combo dredge(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int dredgers = 0;
+        int fuel = 0;
+        for (final Card c : spells) {
+            if (c.hasKeyword(Keyword.DREDGE)) {
+                enablers.add(c.getName());
+                dredgers++;
+            } else if (isSelfFuelCard(c) || hasCycling(c)) {
+                enablers.add(c.getName());
+                fuel++;
+            }
+            if (names("Bridge from Below", "Narcomoeba", "Prized Amalgam", "Ichorid", "Dread Return",
+                    "Creeping Chill").contains(c.getName())) {
+                payoffs.add(c.getName());
+            }
+        }
+        if (dredgers < 4 || fuel < 4 || payoffs.isEmpty()) {
+            return null;
+        }
+        return new Combo(Kind.DREDGE, 25 + 5 * Math.min(dredgers, 8) + 3 * Math.min(fuel, 8), payoffs, enablers,
+                Collections.<String>emptySet(), false, "dredge=" + dredgers + ", fuel=" + fuel + ", payoffs=" + payoffs);
+    }
+
+    private int dredgeTerm(final Player ai, final Combo combo) {
+        final int lib = ai.getCardsIn(ZoneType.Library).size();
+        if (lib <= 8) {
+            return -200; // the deck must not dredge itself out
+        }
+        int sum = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (c.hasKeyword(Keyword.DREDGE)) {
+                sum += 30;
+            } else if (combo.payoffs.contains(c.getName())) {
+                sum += 60;
+            }
+        }
+        return Math.min(250, sum);
+    }
+
     private static Combo reanimator(final List<Card> spells) {
         final Set<String> payoffs = new LinkedHashSet<>(); // the big creatures
         final Set<String> enablers = new LinkedHashSet<>();
@@ -593,7 +766,7 @@ public final class ComboPlan {
             } else if (c.isCreature() && isBigTarget(c)) {
                 big++;
                 payoffs.add(c.getName());
-            } else if (isSelfFuelCard(c) || hasCycling(c) && !c.isCreature()) {
+            } else if (isSelfFuelCard(c) || isTargetedDiscardCard(c) || hasCycling(c) && !c.isCreature()) {
                 fuelCards++;
                 enablers.add(c.getName());
             }
@@ -999,6 +1172,17 @@ public final class ComboPlan {
         }
         return false;
     }
+    private static boolean isTargetedDiscardCard(final Card c) {
+        if (c.isLand() || !(c.isInstant() || c.isSorcery())) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isSpell() && isTargetedDiscard(sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private static boolean isSelfFuelSpell(final SpellAbility sa) {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
@@ -1024,6 +1208,17 @@ public final class ComboPlan {
 
     private static Set<String> names(final String... names) {
         return Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(names)));
+    }
+
+    /** Names of every card that is a piece of one of the combos. */
+    public Set<String> pieceNames() {
+        final Set<String> all = new LinkedHashSet<>();
+        for (final Combo c : combos) {
+            all.addAll(c.payoffs);
+            all.addAll(c.enablers);
+            all.addAll(c.cascaders);
+        }
+        return all;
     }
 
     @Override
