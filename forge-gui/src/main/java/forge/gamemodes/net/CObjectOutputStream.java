@@ -33,6 +33,7 @@ public class CObjectOutputStream extends ObjectOutputStream {
     private final Tracker tracker;
     private final int consumerId;
     private final boolean eventMode;
+    private boolean wroteCardRef;
 
     CObjectOutputStream(OutputStream out, boolean replaceTrackables, Tracker tracker, int consumerId, boolean eventMode) throws IOException {
         super(out);
@@ -52,6 +53,14 @@ public class CObjectOutputStream extends ObjectOutputStream {
 
     @Override
     protected Object replaceObject(Object obj) throws IOException {
-        return TrackableSerializer.replace(obj, tracker, consumerId, eventMode);
+        Object replaced = TrackableSerializer.replace(obj, tracker, consumerId, eventMode);
+        if (replaced instanceof TrackableSerializer.IdRef ref && ref.typeTag() == TrackableSerializer.TYPE_CARD_VIEW) {
+            wroteCardRef = true;
+        }
+        return replaced;
+    }
+
+    boolean wroteCardRef() {
+        return wroteCardRef;
     }
 }

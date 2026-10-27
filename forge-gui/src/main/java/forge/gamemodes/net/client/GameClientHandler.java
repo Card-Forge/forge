@@ -6,11 +6,13 @@ import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.GameProtocolHandler;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
+import forge.gamemodes.net.TrackableSerializer;
 import forge.gamemodes.net.event.LoginEvent;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gui.interfaces.IGuiGame;
@@ -25,6 +27,8 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.EnumMap;
 import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasForgeLog {
 
@@ -52,6 +56,25 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     @Override
     protected IGuiGame getToInvoke(final ChannelHandlerContext ctx) {
         return gui;
+    }
+
+    @Override
+    protected Object[] decodeArgs(final ProtocolMethod protocolMethod, final byte[] encodedArgs) {
+        // Deltas are applied on the GUI thread in arrival order, so a prompt handled on another thread decodes there too
+        final FutureTask<Object[]> decode = new FutureTask<>(() -> {
+            final Object[] args = TrackableSerializer.decodeArgs(encodedArgs, tracker);
+            protocolMethod.checkArgs(args);
+            updateTrackers(args);
+            return args;
+        });
+        FThreads.invokeInEdtNowOrLater(decode);
+        try {
+            return decode.get();
+        } catch (final InterruptedException | ExecutionException e) {
+            // Handled like a failed call, so the host still gets its reply
+            netLog.error(e instanceof ExecutionException ? e.getCause() : e, "Failed to decode args for {}", protocolMethod);
+            return null;
+        }
     }
 
     @Override
