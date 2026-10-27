@@ -1,0 +1,8 @@
+Name:Maturation Chamber
+ManaCost:1 W
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast an artifact spell, put a charge counter on this artifact.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Token | Cost$ 4 T | TokenAmount$ X | TokenScript$ c_1_1_a_borg | SorcerySpeed$ True | SpellDescription$ Create a 1/1 colorless Borg artifact creature token for each charge counter on this artifact. Activate only as a sorcery.
+SVar:X:Count$CardCounters.CHARGE
+Oracle:Whenever you cast an artifact spell, put a charge counter on this artifact.\n{4}, {T}: Create a 1/1 colorless Borg artifact creature token for each charge counter on this artifact. Activate only as a sorcery.
