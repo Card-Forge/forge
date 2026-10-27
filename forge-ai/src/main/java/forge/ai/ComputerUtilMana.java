@@ -921,63 +921,6 @@ public class ComputerUtilMana {
     }
 
     /**
-     * Among the best-scored sources for a shard (the ones sortManaAbilities considers equal), prefer those whose
-     * use leaves every colour with an untapped source. This never changes how many sources get tapped, only which.
-     */
-    private static Collection<SpellAbility> sparingSourcesFirst(final Collection<SpellAbility> candidates,
-            final Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
-        if (candidates.size() < 2) {
-            return candidates;
-        }
-
-        // untapped sources per colour; a card counts once for every colour it can make
-        final Map<Card, Integer> colorsOf = new HashMap<>();
-        for (final SpellAbility ma : sourcesForShards.values()) {
-            colorsOf.merge(ma.getHostCard(), producedColors(ma), (a, b) -> a | b);
-        }
-        final int[] perColor = new int[MagicColor.WUBRG.length];
-        for (final int mask : colorsOf.values()) {
-            for (int i = 0; i < perColor.length; i++) {
-                if ((mask & MagicColor.WUBRG[i]) != 0) {
-                    perColor[i]++;
-                }
-            }
-        }
-
-        // how many colours would have no untapped source left after using this one
-        final ToIntFunction<SpellAbility> exhausted = ma -> {
-            final int mask = colorsOf.getOrDefault(ma.getHostCard(), 0);
-            int count = 0;
-            for (int i = 0; i < perColor.length; i++) {
-                if ((mask & MagicColor.WUBRG[i]) != 0 && perColor[i] <= 1) {
-                    count++;
-                }
-            }
-            return count;
-        };
-
-        final List<SpellAbility> list = new ArrayList<>(candidates);
-        final int first = exhausted.applyAsInt(list.get(0));
-        if (list.stream().allMatch(ma -> exhausted.applyAsInt(ma) == first)) {
-            return candidates;
-        }
-
-        // only reorder the leading run of equally scored sources, so utility lands and creatures stay last
-        final int lead = scoreManaProducingCard(list.get(0).getHostCard());
-        int end = 1;
-        while (end < list.size() && scoreManaProducingCard(list.get(end).getHostCard()) == lead) {
-            end++;
-        }
-        if (end < 2) {
-            return candidates;
-        }
-
-        // stable sort: ties keep the existing order, including the hand colour tie-break
-        list.subList(0, end).sort(Comparator.comparingInt(exhausted));
-        return list;
-    }
-
-    /**
      * Among the sources for a shard, prefer those whose use leaves every colour with an untapped source.
      * This never changes how many sources get tapped, only which.
      * A colour that a card in hand needs outranks the source scores, so a held spell stays castable;

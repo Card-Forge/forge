@@ -1017,23 +1017,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             else {
                 fetchList = new CardCollection(player.getCardsIn(origin));
-                // "for each ..., search": with nothing to name, no search takes place
-                final boolean nothingToName = sa.hasParam("SameNameAsEach")
-                        && AbilityUtils.getDefinedCards(source, sa.getParam("SameNameAsEach"), sa).isEmpty();
-                if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking") && !nothingToName) {
+                if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                     searchedLibrary = true;
 
-                    if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
-                        fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                        final CardCollectionView searchable = decider.getSearchableLibrary(sa, player);
-                        if (searchable.isEmpty()) {
-                            searchedLibrary = false;
-                        } else {
-                            fetchList.addAll(searchable);
-                        }
-                    }
-                    if (!decider.canSearchLibraryWith(sa, player)) {
-                        fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                    final CardCollectionView searchable = decider.getSearchableLibrary(sa, player);
+                    fetchList.removeIf(c -> c.isInZone(ZoneType.Library) && (searchable == null || !searchable.contains(c)));
+
+                    if (searchable == null) {
                         // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param.
                         // "then shuffle" is mandatory
                         shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
@@ -1066,9 +1056,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             Long controlTimestamp = null;
-            if (!searchedLibrary && sa.hasParam("Searched")) {
-                searchedLibrary = true;
-            }
             if (searchedLibrary) {
                 if (decider.equals(player)) {
                     Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
@@ -1082,15 +1069,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     handleCastWhileSearching(fetchList, decider);
                 }
-                if (sa.hasParam("RememberSearched")) {
+                if (sa.hasParam("RememberSearcher")) {
                     source.addRemembered(player);
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, player);
                 game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
-            }
-            if (searchedLibrary && sa.hasParam("Searched")) {
-                searchedLibrary = false;
             }
 
             if (!defined && !changeType.isEmpty() && !changeType.startsWith("EACH")) {

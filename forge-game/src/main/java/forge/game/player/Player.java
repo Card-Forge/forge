@@ -3781,29 +3781,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !StaticAbilityCantDiscard.cantDiscard(this, sa, effect);
     }
 
-    public boolean canSearchLibraryWith(SpellAbility sa, Player targetPlayer) {
-        if (sa == null) {
-            return true;
-        }
-
-        if (hasKeyword("CantSearchLibrary")) {
-            return false;
-        }
-        return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
-                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
-    }
-
     /**
      * The cards of targetPlayer's library this player looks at when searching it with sa: only the top four
      * while a search is limited, none while searching is not allowed.
      */
     public CardCollectionView getSearchableLibrary(SpellAbility sa, Player targetPlayer) {
-        if (!canSearchLibraryWith(sa, targetPlayer)) {
-            return CardCollection.EMPTY;
+        if (hasKeyword("CantSearchLibrary") ||
+                (targetPlayer.equals(sa.getActivatingPlayer()) && hasKeyword("Spells and abilities you control can't cause you to search your library."))) {
+            return null;
         }
         if (hasKeyword("LimitSearchLibrary")) {
-            final int fetchNum = Math.min(targetPlayer.getCardsIn(ZoneType.Library).size(), 4);
-            return targetPlayer.getCardsIn(ZoneType.Library, fetchNum);
+            return targetPlayer.getCardsIn(ZoneType.Library, 4);
         }
         return targetPlayer.getCardsIn(ZoneType.Library);
     }
