@@ -9,4 +9,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE3_CHARGE | AddAbility$ TranswarpUnblockability | Description$ STATION 3+ {T}: Target creature can't be blocked this turn.
 SVar:TranswarpUnblockability:AB$ Effect | Cost$ T | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | SpellDescription$ Target creature can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHints:Type$Artifact
 Oracle:When this Spacecraft enters, mill five cards. You may put up to two artifact cards from among them into your hand.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery.)\nSTATION 3+\n{T}: Target creature can't be blocked this turn.
