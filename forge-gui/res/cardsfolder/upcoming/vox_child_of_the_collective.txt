@@ -1,0 +1,11 @@
+Name:Võx, Child of the Collective
+ManaCost:4 U
+Types:Legendary Artifact Creature Borg
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When NICKNAME enters and at the beginning of your first main phase, the next artifact creature spell and the next Spacecraft spell you cast this turn have undaunted. (They cost {1} less to cast for each opponent.)
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ GrantUndauntedCreature | ForgetOnCast$ Creature.Artifact+YouCtrl | SubAbility$ DBEffect
+SVar:GrantUndauntedCreature:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AffectedZone$ Stack | AddKeyword$ Undaunted | Description$ The next artifact creature spell you cast this turn has undaunted. (It costs {1} less to cast for each opponent.)
+SVar:DBEffect:DB$ Effect | StaticAbilities$ GrantUndauntedSpacecraft | ForgetOnCast$ Spacecraft.YouCtrl
+SVar:GrantUndauntedSpacecraft:Mode$ Continuous | Affected$ Spacecraft.YouCtrl | AffectedZone$ Stack | AddKeyword$ Undaunted | Description$ The next Spacecraft spell you cast this turn has undaunted. (It costs {1} less to cast for each opponent.)
+DeckHints:Type$Spacecraft
+Oracle:When Võx enters and at the beginning of your first main phase, the next artifact creature spell and the next Spacecraft spell you cast this turn have undaunted. (They cost {1} less to cast for each opponent.)
