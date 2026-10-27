@@ -50,7 +50,7 @@
     &quot;text&quot;: &quot;'I happen to have come across some extremely rare items. Spell packs of a most ancient kind - Beta. Contained within are many spells the smiths of today can't make - sixteen of them in total. This is the only place to find most of them, and those you can get elsewhere are fiercely guarded indeed. There are also many other powerful spells within. Who knows what treasures you'll find? Care to test your luck?'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 25,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 25,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 25000 }
         ],
@@ -376,7 +376,7 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 25,0000 gold)&quot;,
+        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 25,000 gold)&quot;,
         &quot;condition&quot;: [
           { &quot;hasGold&quot;: 25000, &quot;not&quot;: true }
         ],
