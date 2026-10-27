@@ -55,6 +55,7 @@ public class SameNameSearchTest extends AITest {
     /** Takes the first card it is offered each time and counts the choices it was asked for. */
     private static class TakingController extends PlayerControllerAi {
         int choices;
+        int reveals;
 
         TakingController(Game game, Player p) {
             super(game, p, p.getLobbyPlayer());
@@ -65,6 +66,9 @@ public class SameNameSearchTest extends AITest {
                 CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional,
                 Player decider) {
             choices++;
+            if (delayedReveal != null) {
+                reveals++;
+            }
             return fetchList.isEmpty() ? null : fetchList.get(0);
         }
     }
@@ -120,6 +124,7 @@ public class SameNameSearchTest extends AITest {
         AbilityUtils.resolve(search(host, p));
 
         assertEquals("one choice per named card", 3, controller.choices);
+        assertEquals("the library is shown once", 1, controller.reveals);
         assertEquals("two Grizzly Bears found", 2, count(p, ZoneType.Hand, "Grizzly Bears"));
         assertEquals("one Elvish Mystic found", 1, count(p, ZoneType.Hand, "Elvish Mystic"));
         assertEquals("the third Bears stays", 1, count(p, ZoneType.Library, "Grizzly Bears"));
@@ -257,5 +262,22 @@ public class SameNameSearchTest extends AITest {
             }
         }
         assertEquals("the found copy is tapped", 1, tappedBears);
+    }
+
+    /** With no card to name nothing is searched: no search is counted, no choice is asked for. */
+    @Test
+    public void nothingIsSearchedWhenThereIsNoCardToName() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        addCardToZone("Grizzly Bears", p, ZoneType.Library);
+        Card host = addCardToZone("Doubling Chant", p, ZoneType.Hand);
+        TakingController controller = new TakingController(game, p);
+        p.dangerouslySetController(controller);
+        int searched = p.getLibrarySearched();
+
+        AbilityUtils.resolve(search(host, p));
+
+        assertEquals("no choice asked for", 0, controller.choices);
+        assertEquals("no search counted", searched, p.getLibrarySearched());
     }
 }
