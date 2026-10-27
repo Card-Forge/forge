@@ -1,0 +1,9 @@
+[metadata]
+Code=PW27
+Date=2027-01-01
+Name=Wizards Play Network 2027
+Type=Promo
+ScryfallCode=PW27
+
+[cards]
+1 M Vivien Reid @Eli Minaya

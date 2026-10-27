@@ -15,6 +15,7 @@ ScryfallCode=TRK
 8 C Command Decision @Raymond Bonilla
 9 U Command Subadjunct @Alex Negrea
 10 U Conquest Mission @Mark Spears
+11 R Deanna Troi, Psychic Counsel @Lie Setiawan
 12 C DOT-7 Repair Squad @Colin Searle
 13 M Dr. Beverly Crusher @Mattia Rangoni
 14 U Dr. McCoy, Surly Surgeon @David Robert Hovey
@@ -22,6 +23,7 @@ ScryfallCode=TRK
 16 M Excalbian Gamemaster @Charles Chaisson
 17 C Federation Field Medic @Zoltan Boros
 19 C Free Borg Revolutionaries @Smirtouille
+21 U Hologram Janeway @Khadijah Khatib
 22 C Malfunctioning Holodeck @Pablo Mendoza
 24 R Miles O'Brien, Transporter Ops @John Tyler Christopher
 27 R Peace in Our Time @Elizabeth Peiró
@@ -40,6 +42,7 @@ ScryfallCode=TRK
 41 R Troubling Tribbles @Filipe Pagliuso
 42 U Una Chin-Riley, Number One @Josu Hernaiz
 43 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
+44 U U.S.S. Excelsior, Cutting Edge @Jetfreak-7
 45 C Vexing Drone @Kristina WermoongRey
 46 U Anthropological Mission @Pablo Mendoza
 47 R The Caretaker @Sam Kennedy
@@ -51,6 +54,7 @@ ScryfallCode=TRK
 54 U Dominion Saboteur @Alex Negrea
 56 U Energize @Carlos C Diaz
 57 U Ensign Pavel Chekov @Gal Or
+58 U Enterprise NX-01 @Colin Searle
 59 C Federation Probe @Racrufi
 60 C Guidance Failure @David Álvarez
 62 U Highly Illogical @Joel Chaim Holtzman
@@ -90,6 +94,7 @@ ScryfallCode=TRK
 102 M Death Is Irrelevant @Narendra Bintara Adi
 105 C Eject the Warp Core @Pierre Raveneau
 106 R Elim Garak, Simple Tailor @Alexander Gering
+108 U Gabriel Lorca, Mirror Menace @Kevin Glint
 109 R General Chang, Cold Warrior @Cliff Nielsen
 110 M Georgiou, Terran Emperor @Julia Metzger
 111 C A Good Day to Die @Monztre
@@ -137,6 +142,8 @@ ScryfallCode=TRK
 167 U Ravenous Cosmozoan @Bruce Brenneise
 168 C Reckless Impulse @Simon Dominic
 172 C Silicate Surveyor @Joan Piqué Llorens
+175 U Targ Wrangler @Harkalé Linaï
+176 R Tasha Yar, Out of Time @Patricia Pria
 179 R Will Riker, First in the Field @Zezhou Chen
 180 R Worf, Intelligence Contractor @Jodie Muir
 181 R The Wrath of Khan @Kirk DouPonce
@@ -282,6 +289,7 @@ ScryfallCode=TRK
 362 M Death Is Irrelevant @Nicky Barkla
 363 M Captain Jean-Luc Picard @Erikas Perl
 364 U Command Subadjunct @Michael MacRae
+365 R Deanna Troi, Psychic Counsel @Eglė Mosakaitė
 366 M Dr. Beverly Crusher @Anna Czeszejko
 367 R Peace in Our Time @Mintautas Šukys
 368 R Primary Unimatrix Adjunct @Julia Vasilyeva
@@ -388,6 +396,7 @@ ScryfallCode=TRK
 496 R Breeding Pool @Josu Solano
 497 M Captain Jean-Luc Picard @Erikas Perl
 498 U Command Subadjunct @Michael MacRae
+499 R Deanna Troi, Psychic Counsel @Eglė Mosakaitė
 500 M Dr. Beverly Crusher @Anna Czeszejko
 501 R Peace in Our Time @Mintautas Šukys
 502 R Primary Unimatrix Adjunct @Julia Vasilyeva
@@ -400,6 +409,7 @@ ScryfallCode=TRK
 510 U Organic Avulsion Unit @Gintas Galvanauskas
 512 U Resistance Is Futile @Jurijus Chitrovas
 517 M Q, Stacking the Deck @Viktor Fetsch
+518 R Tasha Yar, Out of Time @Vilhelmas Banys
 519 R Will Riker, First in the Field @Vilhelmas Banys
 520 M Captain Kathryn Janeway @Jurijus Chitrovas
 523 U Locutus, the One Who Speaks @Erikas Perl
@@ -429,6 +439,12 @@ ScryfallCode=TRK
 555 M Borg Cube @Scott Okumura
 556 M Deep Space 9 @Scott Okumura
 557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura
+559 L Plains @Bastien Grivet
+560 L Plains @Leon Tukker
+561 L Island @Bastien Grivet
+562 L Island @Leon Tukker
+563 L Swamp @Bastien Grivet
+564 L Swamp @Leon Tukker
 569 U Command Subadjunct @Alex Negrea
 570 U Conquest Mission @Mark Spears
 571 C Malfunctioning Holodeck @Pablo Mendoza
@@ -437,9 +453,9 @@ ScryfallCode=TRK
 574 C Cold-Blooded Crew @John Tyler Christopher
 575 U Syndicate Liquidators @Carlos C Diaz
 576 U Locutus, the One Who Speaks @Ariel Orea
-577 C Earth, Sector 001 @Colin Searle
-578 C Risa @Colin Searle
-579 C Vulcan @John Di Giovanni
+577 L Earth, Sector 001 @Colin Searle
+578 L Risa @Colin Searle
+579 L Vulcan @John Di Giovanni
 1701 M Captain James T. Kirk @Chris Rallis
 1702 M Mr. Spock, Science Officer @Gal Or
 1703 M Lieutenant Commander Data @Tyler Jacobson
