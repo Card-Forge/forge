@@ -93,8 +93,73 @@ public class PlayerControllerAi extends PlayerController {
         return true;
     }
 
+    /** What this AI changed the last time it sideboarded by itself; see {@link #getSideboardingReport()}. */
+    private List<String> sideboardingReport = Collections.emptyList();
+
+    /**
+     * Flat Monte Carlo AIs read the deck of their opponent and sideboard against it, so nobody needs to do it for them.
+     * The AI sideboarding rule of the match still decides whether there is any sideboarding for AIs at all.
+     */
+    private boolean sideboardsAgainstOpponentDeck() {
+        return brains.getGame().getRules().getAISideboardingEnabled() && brains.getGame().getAIFlatMonteCarlo()
+                && brains.getBoolProperty(AiProps.FLAT_MC_ENABLED);
+    }
+
+    @Override
+    public boolean sideboardsByItself() {
+        return sideboardsAgainstOpponentDeck();
+    }
+
+    @Override
+    public List<String> getSideboardingReport() {
+        return sideboardingReport;
+    }
+
+    /**
+     * The sideboard plan of an AI that knows what it plays against: the decks its opponents played last game are
+     * read, and cards that do nothing against them are swapped for cards from the sideboard that do (see
+     * {@link SideboardAdvisor}). Returns the new main deck, or null to leave the deck as it is.
+     */
+    private List<PaperCard> sideboardAgainstOpponents(final List<PaperCard> main, final List<PaperCard> sideboard) {
+        final Match match = brains.getGame().getMatch();
+        final RegisteredPlayer me = player.getRegisteredPlayer();
+        final List<List<PaperCard>> opponentMains = new ArrayList<>();
+        final List<String> opponentNames = new ArrayList<>();
+        for (final RegisteredPlayer rp : match.getPlayers()) {
+            if (rp == me) {
+                continue;
+            }
+            List<PaperCard> known = match.getPlayedMain(rp);
+            if (known == null && rp.getDeck() != null) {
+                known = rp.getDeck().getMain().toFlatList();
+            }
+            if (known != null && !known.isEmpty()) {
+                opponentMains.add(known);
+                opponentNames.add(rp.getPlayer().getName());
+            }
+        }
+        if (opponentMains.isEmpty()) {
+            return null;
+        }
+        final SideboardAdvisor.Result plan = SideboardAdvisor.advise(player, main, sideboard, opponentMains,
+                opponentNames, SideboardAdvisor.maxSwapsFor(main.size()));
+        sideboardingReport = Collections.unmodifiableList(plan.report);
+        if (plan.swaps.isEmpty()) {
+            return null;
+        }
+        final List<PaperCard> newMain = new ArrayList<>(main);
+        for (final SideboardAdvisor.Swap swap : plan.swaps) {
+            // the overall content of the deck (Main+Sideboard) must not change, or the AI may cheat
+            if (newMain.remove(swap.out)) {
+                newMain.add(swap.in);
+            }
+        }
+        return newMain;
+    }
+
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
+        sideboardingReport = Collections.emptyList();
         if (!brains.getGame().getRules().getAISideboardingEnabled() || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
@@ -129,6 +194,10 @@ public class PlayerControllerAi extends PlayerController {
             if (!sideboardPlan.isEmpty()) {
                 definedSideboardPlan = true;
             }
+        }
+
+        if (!definedSideboardPlan && sideboardsAgainstOpponentDeck()) {
+            return sideboardAgainstOpponents(main, sideboard);
         }
 
         boolean sbLimitedFormats = getAi().getBoolProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);

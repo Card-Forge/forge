@@ -1,6 +1,11 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -31,34 +36,80 @@ public final class DeckPlan {
     public final int manaDevelopmentExtra;
     /** Long playouts always, not only when the hand looks like a combo. */
     public final boolean longPlayouts;
+    /**
+     * The combos the deck is built around (none for most decks), read once together with the rest of the plan. Never
+     * null; check {@link ComboPlan#isScanComplete()} to know whether the deck has been read.
+     */
+    public final ComboPlan combos;
 
     private DeckPlan(final Archetype archetype, final int oppLife, final int ownLife, final int risk, final int mana,
-                     final boolean longPlayouts) {
+                     final boolean longPlayouts, final ComboPlan combos) {
         this.archetype = archetype;
         this.opponentLifeExtra = oppLife;
         this.ownLifeExtra = ownLife;
         this.riskPercent = risk;
         this.manaDevelopmentExtra = mana;
         this.longPlayouts = longPlayouts;
+        this.combos = combos == null ? ComboPlan.EMPTY : combos;
     }
 
-    public static final DeckPlan NONE = new DeckPlan(Archetype.MIDRANGE, 0, 0, 100, 0, false);
+    public static final DeckPlan NONE = new DeckPlan(Archetype.MIDRANGE, 0, 0, 100, 0, false, ComboPlan.EMPTY);
+
+    /**
+     * This plan, keeping its archetype, together with the result of reading the deck for combos. The result is kept
+     * even when no combo was found, so the plan knows that the deck has been read ({@link ComboPlan#isScanComplete()})
+     * and the scan is never repeated.
+     */
+    DeckPlan withScan(final ComboPlan found) {
+        if (found == null) {
+            return this;
+        }
+        return new DeckPlan(archetype, opponentLifeExtra, ownLifeExtra, riskPercent, manaDevelopmentExtra,
+                longPlayouts || !found.isEmpty(), found);
+    }
 
     static DeckPlan of(final Archetype a) {
         switch (a) {
             case AGGRO:
-                return new DeckPlan(a, 4, 1, 70, 0, false);
+                return new DeckPlan(a, 4, 1, 70, 0, false, ComboPlan.EMPTY);
             case BURN:
-                return new DeckPlan(a, 6, 0, 60, 0, false);
+                return new DeckPlan(a, 6, 0, 60, 0, false, ComboPlan.EMPTY);
             case CONTROL:
-                return new DeckPlan(a, 0, 3, 130, 0, false);
+                return new DeckPlan(a, 0, 3, 130, 0, false, ComboPlan.EMPTY);
             case COMBO:
-                return new DeckPlan(a, 1, 1, 100, 0, true);
+                return new DeckPlan(a, 1, 1, 100, 0, true, ComboPlan.EMPTY);
             case RAMP:
-                return new DeckPlan(a, 0, 1, 100, 8, false);
+                return new DeckPlan(a, 0, 1, 100, 8, false, ComboPlan.EMPTY);
             default:
                 return NONE;
         }
+    }
+
+    /**
+     * Plans already worked out, by setting and deck list. A plan is only names and numbers (never a card or a game), so
+     * the copies of a game that Monte Carlo plays out, each with a controller of its own, share the plan of the real
+     * game instead of reading the same sixty cards again.
+     */
+    private static final Map<String, DeckPlan> KNOWN = Collections.synchronizedMap(
+            new LinkedHashMap<String, DeckPlan>(16, 0.75f, true) {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                protected boolean removeEldestEntry(final Map.Entry<String, DeckPlan> eldest) {
+                    return size() > 48;
+                }
+            });
+
+    /** The deck as a sorted list of card names: the same list, wherever its cards are, gives the same key. */
+    private static String deckKey(final Player player) {
+        final List<String> names = new ArrayList<>();
+        for (final Card c : player.getAllCards()) {
+            if (!c.isToken() && !c.isImmutable()) {
+                names.add(c.getName());
+            }
+        }
+        Collections.sort(names);
+        return String.join("|", names);
     }
 
     /** The plan for a profile setting: "off", "auto" or the name of an archetype. */
@@ -67,14 +118,28 @@ public final class DeckPlan {
         if (s.isEmpty() || s.equals("off") || s.equals("false")) {
             return NONE;
         }
+        final String key = s + "#" + deckKey(player);
+        DeckPlan plan = KNOWN.get(key);
+        if (plan == null) {
+            plan = read(s, player);
+            KNOWN.put(key, plan);
+        }
+        return plan;
+    }
+
+    private static DeckPlan read(final String s, final Player player) {
         if (!s.equals("auto") && !s.equals("true")) {
             for (final Archetype a : Archetype.values()) {
                 if (a.name().toLowerCase(Locale.ROOT).equals(s)) {
-                    return of(a);
+                    // the archetype is forced, but the combos of the deck are still read: they are facts about the list
+                    return of(a).withScan(ComboPlan.scan(player));
                 }
             }
         }
-        return of(classify(player));
+        // one read of the whole deck: the combos (at most three) first, because a deck built around one is a combo deck
+        // whatever its cheap spells look like to the archetype counters below
+        final ComboPlan combos = ComboPlan.scan(player);
+        return of(combos.isEmpty() ? classify(player) : Archetype.COMBO).withScan(combos);
     }
 
     /** Reads the player's whole deck (every card the player owns, wherever it is now). */
@@ -144,6 +209,11 @@ public final class DeckPlan {
             return Archetype.AGGRO;
         }
         return Archetype.MIDRANGE;
+    }
+
+    /** Archetype and combos, for statistics and the game log ("COMBO[MASS_REANIMATION(52: ...)]"). */
+    public String describe() {
+        return combos.isEmpty() ? archetype.name() : archetype.name() + combos;
     }
 
     @Override
