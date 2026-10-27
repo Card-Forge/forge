@@ -2,7 +2,7 @@ Name:Will Riker, First in the Field
 ManaCost:3 R
 Types:Legendary Creature Human Officer
 PT:4/3
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDigUntil | TriggerDescription$ At the beginning of combat on your turn, reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield and the rest on the bottom of your library in a random order. Sacrifice those lands at the beginning of your next end step.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDigUntil | TriggerDescription$ At the beginning of combat on your turn, reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield and the rest on the bottom of your library in a random order. Sacrifice those lands at the beginning of your next end step.
 SVar:TrigDigUntil:DB$ DigUntil | Valid$ Land | ValidDescription$ land | Amount$ 2 | FoundDestination$ Battlefield | Tapped$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBDelTrig | RememberFound$ True
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Sacrifice those lands at the beginning of your next end step.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
