@@ -1,0 +1,8 @@
+Name:Khan, Despot by Design
+ManaCost:4 R
+Types:Legendary Creature Human Rogue
+PT:5/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When NICKNAME enters, he deals 1 damage to each opponent and each creature your opponents control.
+SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidPlayers$ Opponent | ValidCards$ Creature.OppCtrl
+Oracle:Trample\nWhen Khan enters, he deals 1 damage to each opponent and each creature your opponents control.
