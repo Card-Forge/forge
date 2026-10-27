@@ -1115,7 +1115,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             int totCardTypes = AbilityUtils.calculateAmount(source, totalCardTypes, sa);
 
             CardCollection chosenCards = new CardCollection();
-            if (changeType.startsWith("EACH")) {
+            if (sa.hasParam("SameNameAsEach")) {
+                // one search, one card per named card: "for each ..., search for a card with the same name"
+                for (final Card named : AbilityUtils.getDefinedCards(source, sa.getParam("SameNameAsEach"), sa)) {
+                    CardCollection thisList = CardLists.filter(fetchList, CardPredicates.sharesNameWith(named));
+                    thisList.removeAll(chosenCards);
+                    Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
+                            thisList, delayedReveal, selectPrompt, !mandatory, decider);
+                    if (c != null) {
+                        chosenCards.add(c);
+                    }
+                }
+            } else if (changeType.startsWith("EACH")) {
                 String[] eachTypes = changeType.substring(5).split(" & ");
                 for (String thisType : eachTypes) {
                     for (int i = 0; i < changeNum; i++) {
