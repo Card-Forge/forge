@@ -40,8 +40,9 @@ import java.util.function.Supplier;
  * every time. After a short tour of the board the lessons are: play a land, cast a spell and pay its mana, attack,
  * pass the turn, block, then attack until the opponent is out of life.
  *
- * <p>Each lesson is explained in a note while the card to use is spotlighted: the game's own selection marking is
- * pointed at it, which makes the card glow and dims everything else. In {@code WATCH} mode the director then makes
+ * <p>Each lesson is explained in a note while the relevant card is highlighted using the game's normal selection
+ * marking. On mobile, the selected card may remain at normal brightness while unrelated cards are dimmed. In
+ * {@code WATCH} mode the director then makes
  * the move itself, slowly, through the same entry points a mouse click uses (as Forge's macro replay does), and says
  * what changed. In {@code TRY} mode it keeps the spotlight on and waits for the player, repeating the hint if nothing
  * happens for a while.
@@ -210,7 +211,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         winLesson();
     }
 
-    /** A short look around the board: the glowing cards are what each page is about. */
+    /** A short look around the board: highlighted cards show what each page is about. */
     private void tour() throws InterruptedException {
         if (!watch && !SOptionPane.showConfirmDialog(t("msgTutTourSkip"), t("lblTutTourTitle"),
                 t("btnTutTourShow"), t("btnTutTourSkip"), false)) {
@@ -295,10 +296,31 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             return;
         }
 
-        waitUntil(() -> opp.getLife() < oppStartLife || !myTurn() || phase() == PhaseType.MAIN2, 15_000);
+        // Wait for combat to finish, not just for life to change. An unblocked attack changes life during
+        // combat damage, before the end-of-combat phase and main phase 2 have been reached.
+        if (!waitUntil(() -> game.isGameOver() || !myTurn() || phase() == PhaseType.MAIN2, 30_000)) {
+            if (alive()) {
+                desync();
+            }
+            return;
+        }
         final int dealt = oppStartLife - opp.getLife();
-        spotlightAndSay(cards(find(me, ZoneType.Battlefield, GOBLIN)), t("lblTutDamage"),
-                dealt > 0 ? t("msgTutDamageDealt", dealt, opp.getLife()) : t("msgTutCombatOver"));
+        final Card goblin = find(me, ZoneType.Battlefield, GOBLIN);
+        final Card brigand = find(opp, ZoneType.Battlefield, BRIGAND);
+        final List<Card> resultCards;
+        final String result;
+        if (dealt > 0) {
+            resultCards = cards(goblin);
+            result = t("msgTutDamageDealt", dealt, opp.getLife());
+        } else if (goblin == null && brigand != null) {
+            // In this fixed practice game, the surviving Brigand blocked and destroyed the 1/1 Goblin.
+            resultCards = cards(brigand);
+            result = t("msgTutDamageBlocked", opp.getLife());
+        } else {
+            resultCards = cards(goblin);
+            result = t("msgTutCombatOver", opp.getLife());
+        }
+        spotlightAndSay(resultCards, t("lblTutDamage"), result);
     }
 
     private void passLesson() throws InterruptedException {
@@ -428,7 +450,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     // ---------------------------------------------------------------------------------------------------------
 
     /**
-     * Explains a lesson with the card to use glowing, then either performs it (WATCH) or waits for the player to
+     * Explains a lesson with the relevant card highlighted, then either performs it (WATCH) or waits for the player to
      * (TRY).
      *
      * @return true when {@code done} came true; false when {@code missed} did first, or when the tutorial ended
@@ -437,7 +459,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
                          final Supplier<List<Card>> spot, final Demo demo, final BooleanSupplier done,
                          final BooleanSupplier missed, final long watchTimeoutMs) throws InterruptedException {
         final BooleanSupplier over = () -> safe(done) || safe(missed);
-        spotlight(spot); // glowing while the note is up, so the player sees what it is about
+        spotlight(spot); // highlight while the note is up, so the player sees what it is about
         if (watch) {
             say(title, body + "\n\n" + watchLine);
             if (!alive()) {
@@ -655,7 +677,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         spotlightNow(cards);
     }
 
-    /** Makes the cards glow and dims the rest, as when the game asks the player to pick one of them. */
+    /** Applies the game's normal selection marking to the relevant cards. */
     private void spotlightNow(final List<Card> cards) {
         if (cards.isEmpty() || stopped) {
             return;

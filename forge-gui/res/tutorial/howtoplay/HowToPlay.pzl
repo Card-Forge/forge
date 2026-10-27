@@ -5,7 +5,7 @@ Goal:Win
 Turns:12
 HideGoal:true
 Difficulty:Common
-Description:A fixed practice game that teaches the basics: playing a land, casting a spell and paying its mana, attacking, blocking, and winning. Nothing here is random, so the demo and your own attempt play out the same way.
+Description:A fixed practice game that teaches Forge's match controls and the basics of playing a land, casting a spell, attacking, blocking, and winning. Goblin Brigand can block your first attack; it must attack during its controller's combat if able.
 [state]
 humanlife=20
 ailife=5
