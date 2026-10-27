@@ -1,0 +1,10 @@
+Name:The Best of Both Worlds
+ManaCost:4 W U
+Types:Enchantment Saga
+K:Chapter:3:DBAssimilate,DBPumpAll,DBExile
+SVar:DBAssimilate:DB$ Assimilate | ValidTgts$ Creature.nonArtifact+OppCtrl | ValidTgtsDesc$ nonartifact creature an opponent controls | RememberTargets$ True | SpellDescription$ Assimilate target nonartifact creature an opponent controls. (Gain control of it and put a +1/+1 counter on it. It's a Borg artifact creature and loses all other creature types.)
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.Artifact+YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Artifact creatures you control get +2/+2 until end of turn.
+SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | Imprint$ True | SubAbility$ DBReturn | SpellDescription$ Exile the Borg assimilated with this Saga, then return it to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Assimilate target nonartifact creature an opponent controls. (Gain control of it and put a +1/+1 counter on it. It's a Borg artifact creature and loses all other creature types.)\nII — Artifact creatures you control get +2/+2 until end of turn.\nIII — Exile the Borg assimilated with this Saga, then return it to the battlefield under its owner's control.
