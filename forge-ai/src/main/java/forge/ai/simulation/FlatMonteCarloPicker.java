@@ -1005,7 +1005,8 @@ public final class FlatMonteCarloPicker {
         final List<GameEntity> candidates = new ArrayList<>(tr.getAllCandidates(ts));
         final List<GameEntity> usable = new ArrayList<>();
         for (final GameEntity e : candidates) {
-            if (e != current && wantsOwn == isOwnSide(player, e)) {
+            // never offer the legend the AI already has working as a target to bring back: the legend rule ends it
+            if (e != current && wantsOwn == isOwnSide(player, e) && !ComboGuard.wouldBreakLegendRule(player, ts, e)) {
                 usable.add(e);
             }
         }

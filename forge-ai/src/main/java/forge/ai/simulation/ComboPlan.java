@@ -480,7 +480,8 @@ public final class ComboPlan {
     private int reanimatorTerm(final Player ai, final Combo combo) {
         int best = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
-            if (c.isCreature() && isBigTarget(c)) {
+            // a legend whose namesake is already in play and working cannot be brought back to any use
+            if (c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
                 best = Math.max(best, ComputerUtilCard.evaluateCreature(c));
             }
         }
@@ -488,7 +489,7 @@ public final class ComboPlan {
         final boolean ready = reanimationReady(ai, combo);
         if (ready && opp != null) {
             for (final Card c : opp.getCardsIn(ZoneType.Graveyard)) {
-                if (c.isCreature() && isBigTarget(c)) {
+                if (c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
                     best = Math.max(best, ComputerUtilCard.evaluateCreature(c) * 3 / 4);
                 }
             }
@@ -542,8 +543,8 @@ public final class ComboPlan {
         for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
             if (combo.enablers.contains(c.getName()) && c.getCMC() <= lands + 1) {
                 spell = true;
-            } else if (combo.payoffs.contains(c.getName())) {
-                fatty = true;
+            } else if (combo.payoffs.contains(c.getName()) && !ComboGuard.duplicatesWinPiece(ai, c, this)) {
+                fatty = true; // not a second copy of what is already in play: that is no step closer
             }
         }
         return spell && fatty ? ASSEMBLED_BONUS : spell || fatty ? ONE_PIECE_BONUS / 2 : 0;
@@ -948,9 +949,14 @@ public final class ComboPlan {
         Card best = null;
         int bestValue = Integer.MIN_VALUE;
         if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Hand)) {
+            Card land = null;
             for (final Card c : options) {
                 if (c.isLand()) {
-                    continue; // a land is never what a cheating spell is for
+                    land = land == null ? c : land; // a land is never what a cheating spell is for: only when nothing else is left
+                    continue;
+                }
+                if (ComboGuard.duplicatesWinPiece(ai, c, this)) {
+                    continue; // a legend that is already in play, a second Omniscience: it would add nothing
                 }
                 final int v = cheatValue(c);
                 if (v > bestValue) {
@@ -958,14 +964,16 @@ public final class ComboPlan {
                     best = c;
                 }
             }
-            return best;
+            return best != null ? best : land;
         }
         if (destination == ZoneType.Graveyard && origin.contains(ZoneType.Library) && wantsGraveyardFuel()) {
             for (final Card c : options) {
                 if (!c.isCreature()) {
                     continue;
                 }
-                final int v = (isBigTarget(c) ? 1000 : 0) + ComputerUtilCard.evaluateCreature(c);
+                // a legend that is already in play and working is no use in the graveyard either
+                final int v = (isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c) ? 1000 : 0)
+                        + ComputerUtilCard.evaluateCreature(c);
                 if (v > bestValue) {
                     bestValue = v;
                     best = c;
@@ -1208,6 +1216,21 @@ public final class ComboPlan {
 
     private static Set<String> names(final String... names) {
         return Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(names)));
+    }
+
+    /**
+     * Whether the card is a win card of the deck: the big creature of a reanimator or cheating deck, the engine of a
+     * copy deck, or one of the well known huge creatures. Used to keep a second copy out of play.
+     */
+    public boolean isWinCard(final Card c) {
+        final String n = c.getName();
+        for (final Combo combo : combos) {
+            if ((combo.kind == Kind.CHEAT_FATTY || combo.kind == Kind.REANIMATOR || combo.kind == Kind.CREATURE_COPY)
+                    && combo.payoffs.contains(n)) {
+                return true;
+            }
+        }
+        return BIG_TARGET_NAMES.contains(n) || CHEAT_TARGET_NAMES.contains(n);
     }
 
     /** Names of every card that is a piece of one of the combos. */

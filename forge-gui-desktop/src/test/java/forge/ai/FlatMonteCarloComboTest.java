@@ -7,6 +7,7 @@ import forge.deck.Deck;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.simulation.ComboGuard;
 import forge.ai.simulation.ComboPlan;
 import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.OpeningHand;
@@ -14,6 +15,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -305,5 +307,150 @@ public class FlatMonteCarloComboTest extends AITest {
         pc.getAi().setFlatMonteCarloOverride(true);
         AssertJUnit.assertTrue(pc.complainCardsCantPlayWell(deck).values().stream()
                 .noneMatch(l -> l.stream().anyMatch(c -> c.getName().equals("Faithless Looting"))));
+    }
+
+    // ---------------------------------------------------------------------------------------- ComboGuard
+
+    private static final Object[] CHEAT_DECK = { "Show and Tell", 4, "Sneak Attack", 3, "Through the Breach", 2,
+            "Emrakul, the Aeons Torn", 3, "Griselbrand", 3, "Inferno Titan", 3, "Ponder", 4, "Brainstorm", 4,
+            "Island", 12, "Mountain", 6, "Counterspell", 4, "Lightning Bolt", 4 };
+
+    @Test
+    public void reanimationNeverTargetsALegendThatIsAlreadyWorking() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCardToZone("Griselbrand", p, ZoneType.Battlefield);
+        final Card spare = addCardToZone("Griselbrand", p, ZoneType.Graveyard);
+        final Card archon = addCardToZone("Archon of Cruelty", p, ZoneType.Graveyard);
+        for (final String spell : new String[] { "Reanimate", "Animate Dead" }) {
+            final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getSpellAbilities().get(0);
+            sa.setActivatingPlayer(p);
+            AssertJUnit.assertEquals(spell, "legend-rule", ComboGuard.problem(p, sa, spare, plan.combos));
+            AssertJUnit.assertNull(spell, ComboGuard.problem(p, sa, archon, plan.combos));
+        }
+    }
+
+    @Test
+    public void aLegendThatIsUselessMayBeReplaced() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final Card inPlay = addCardToZone("Griselbrand", p, ZoneType.Battlefield);
+        final Card spare = addCardToZone("Griselbrand", p, ZoneType.Graveyard);
+        AssertJUnit.assertTrue(ComboGuard.duplicatesWorkingLegend(p, spare));
+        inPlay.setBasePower(0); // shrunk to nothing: not working any more
+        AssertJUnit.assertFalse(ComboGuard.duplicatesWorkingLegend(p, spare));
+    }
+
+    @Test
+    public void aLegendTheOpponentHasDoesNotCount() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final Player opp = game.getPlayers().get(0);
+        addCardToZone("Griselbrand", opp, ZoneType.Battlefield);
+        final Card spare = addCardToZone("Griselbrand", p, ZoneType.Graveyard);
+        AssertJUnit.assertFalse(ComboGuard.duplicatesWorkingLegend(p, spare));
+    }
+
+    @Test
+    public void reanimatorTermIgnoresTheLegendThatIsAlreadyInPlay() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCardToZone("Reanimate", p, ZoneType.Hand);
+        addCardToZone("Griselbrand", p, ZoneType.Graveyard);
+        final int before = plan.combos.term(p);
+        AssertJUnit.assertTrue(before > 0);
+        addCardToZone("Griselbrand", p, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(plan.combos.term(p) < before);
+    }
+
+    @Test
+    public void cheatingChoiceTakesAnotherCreatureWhenTheLegendIsAlreadyInPlay() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, CHEAT_DECK);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCardToZone("Emrakul, the Aeons Torn", p, ZoneType.Battlefield);
+        final CardCollection options = new CardCollection();
+        options.add(addCardToZone("Emrakul, the Aeons Torn", p, ZoneType.Hand));
+        final Card griselbrand = addCardToZone("Griselbrand", p, ZoneType.Hand);
+        options.add(griselbrand);
+        AssertJUnit.assertEquals(griselbrand, plan.combos.choose(p, ZoneType.Battlefield, Arrays.asList(ZoneType.Hand), options));
+    }
+
+    @Test
+    public void aSecondOmnisciencePutIntoPlayIsNotChosenAndShowAndTellIsNotCastForIt() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, CHEAT_DECK);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertTrue(plan.combos.has(ComboPlan.Kind.CHEAT_FATTY));
+        addCardToZone("Omniscience", p, ZoneType.Battlefield);
+        final SpellAbility showAndTell = addCardToZone("Show and Tell", p, ZoneType.Hand).getSpellAbilities().get(0);
+        showAndTell.setActivatingPlayer(p);
+        final Card secondOmniscience = addCardToZone("Omniscience", p, ZoneType.Hand);
+        AssertJUnit.assertEquals("cheat-redundant", ComboGuard.problem(p, showAndTell, null, plan.combos));
+        // casting the second Omniscience itself is just as pointless
+        final SpellAbility cast = secondOmniscience.getSpellAbilities().get(0);
+        cast.setActivatingPlayer(p);
+        AssertJUnit.assertEquals("duplicate-engine", ComboGuard.problem(p, cast, null, plan.combos));
+
+        // with a win card in the hand next to it the spell is fine again, and the win card is what comes in
+        final Card emrakul = addCardToZone("Emrakul, the Aeons Torn", p, ZoneType.Hand);
+        AssertJUnit.assertNull(ComboGuard.problem(p, showAndTell, null, plan.combos));
+        final CardCollection options = new CardCollection();
+        options.add(secondOmniscience);
+        options.add(emrakul);
+        AssertJUnit.assertEquals(emrakul, plan.combos.choose(p, ZoneType.Battlefield, Arrays.asList(ZoneType.Hand), options));
+    }
+
+    @Test
+    public void cantripsAreToldApartFromLootingAndOtherSpells() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, CHEAT_DECK);
+        for (final String name : new String[] { "Brainstorm", "Ponder", "Preordain", "Opt" }) {
+            AssertJUnit.assertTrue(name, ComboGuard.isCantrip(addCardToZone(name, p, ZoneType.Hand).getSpellAbilities().get(0)));
+        }
+        for (final String name : new String[] { "Lightning Bolt", "Faithless Looting", "Thoughtseize", "Counterspell", "Divination" }) {
+            AssertJUnit.assertFalse(name, ComboGuard.isCantrip(addCardToZone(name, p, ZoneType.Hand).getSpellAbilities().get(0)));
+        }
+    }
+
+    @Test
+    public void cantripsAreSavedOnlyWhenTheWinIsNear() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final Player opp = game.getPlayers().get(0);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        AssertJUnit.assertFalse(ComboGuard.winLikelySoon(p, plan.combos)); // nothing on the table
+        addCardToZone("Griselbrand", p, ZoneType.Battlefield);
+        AssertJUnit.assertFalse(ComboGuard.winLikelySoon(p, plan.combos)); // 7 damage against 20 life
+        opp.setLife(5, null);
+        AssertJUnit.assertTrue(ComboGuard.winLikelySoon(p, plan.combos));
+        addCardToZone("Serra Angel", opp, ZoneType.Battlefield); // Griselbrand flies: only a flyer can take it
+        AssertJUnit.assertFalse(ComboGuard.winLikelySoon(p, plan.combos));
+    }
+
+    @Test
+    public void aBlockerThatCannotBlockTheAttackerDoesNotStopTheWin() {
+        final Game game = initAndCreateGame();
+        final Player p = reanimatorPlayer(game);
+        final Player opp = game.getPlayers().get(0);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCardToZone("Griselbrand", p, ZoneType.Battlefield);
+        opp.setLife(5, null);
+        addCardToZone("Grizzly Bears", opp, ZoneType.Battlefield); // no flying or reach
+        AssertJUnit.assertTrue(ComboGuard.winLikelySoon(p, plan.combos));
+    }
+
+    @Test
+    public void aWorkingOmniscienceWithAWinCardInHandIsAConfidentWin() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, CHEAT_DECK);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCardToZone("Emrakul, the Aeons Torn", p, ZoneType.Hand);
+        AssertJUnit.assertFalse(ComboGuard.winLikelySoon(p, plan.combos));
+        addCardToZone("Omniscience", p, ZoneType.Battlefield);
+        AssertJUnit.assertTrue(ComboGuard.winLikelySoon(p, plan.combos));
     }
 }

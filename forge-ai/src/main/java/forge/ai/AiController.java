@@ -23,11 +23,14 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.simulation.ComboGuard;
+import forge.ai.simulation.ComboPlan;
+import forge.ai.simulation.DeckPlan;
 import forge.ai.simulation.FlatMonteCarloPicker;
-import forge.ai.simulation.SimAudit;
 import forge.ai.simulation.FlatMonteCarloStats;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.OnePlaySafetyChecker;
+import forge.ai.simulation.SimAudit;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -1115,7 +1118,7 @@ public class AiController {
 
     public CardCollection getCardsToDiscard(final int min, final int max, final CardCollection validCards, final SpellAbility sa) {
         if (validCards.size() > min) {
-            final forge.ai.simulation.ComboPlan combos = deckPlan(player).combos;
+            final ComboPlan combos = deckPlan(player).combos;
             // a deck that wants creatures in the graveyard throws away the right ones
             final CardCollection forCombo = combos.preferredDiscards(player, validCards, min);
             if (forCombo != null) {
@@ -1815,8 +1818,8 @@ public class AiController {
 
         // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
         // Flat MC compares them with rollouts, the heuristics still decide for every other card
-        final forge.ai.simulation.ComboPlan comboPlan = flatMonteCarloActive()
-            ? deckPlan(player).combos : forge.ai.simulation.ComboPlan.EMPTY;
+        final ComboPlan comboPlan = flatMonteCarloActive()
+            ? deckPlan(player).combos : ComboPlan.EMPTY;
         saList.removeIf(spellAbility -> {
             if (spellAbility.isLandAbility()) {
                 return true;
@@ -2029,23 +2032,30 @@ public class AiController {
         return cfg;
     }
 
-    private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approved, final List<SpellAbility> extras,
+    /**
+     * Plays that Flat Monte Carlo never spends a card on (see {@link forge.ai.simulation.ComboGuard}): bringing back
+     * a legend that is already in play and working, a second Omniscience, Show and Tell with nothing worth putting in,
+     * and a cantrip while the AI is confident to win this turn or the next. Returns the reason, or null for a fine play.
+     */
+    private String guardProblem(final SpellAbility sa, final GameEntity aim, final boolean saveCantrips) {
+        final ComboPlan plan = deckPlan(player).combos;
+        final String problem = ComboGuard.problem(player, sa, aim, plan);
+        if (problem != null) {
+            return problem;
+        }
+        return saveCantrips && ComboGuard.isCantrip(sa) ? "cantrip-saved" : null;
+    }
+
+    private SpellAbility refineWithFlatMonteCarlo(final List<SpellAbility> approvedIn, final List<SpellAbility> extras,
                                                   final FlatMonteCarloPicker.Config cfg, final FlatMonteCarloPicker.Mode mode) {
-        if (approved.isEmpty() && extras.isEmpty()) {
+        if (approvedIn.isEmpty() && extras.isEmpty()) {
             return null;
-        }
-        if (cfg == null) { // out of budget
-            return approved.isEmpty() ? null : approved.get(0); // out of budget
-        }
-        if (mode == FlatMonteCarloPicker.Mode.MAIN && extras.isEmpty() && approved.size() < 2
-                && !FlatMonteCarloPicker.isHoldPossible(player)) {
-            return approved.get(0); // nothing to compare
         }
         // What the heuristics aimed each approved play at, noted before the rollouts: asking the heuristics again
         // (as the rollouts do to check a line is still approved) clears the targets of a play they turn down on the
         // dice, and the aim they gave it a moment ago is then the only record of where the play was meant to go.
         final Map<SpellAbility, GameEntity> approvedAim = new HashMap<>();
-        for (final SpellAbility sa : approved) {
+        for (final SpellAbility sa : approvedIn) {
             if (sa.usesTargeting() && sa.getTargets() != null) {
                 final List<GameEntity> aimed = new ArrayList<>();
                 for (final GameEntity e : sa.getTargets().getTargetEntities()) {
@@ -2056,8 +2066,39 @@ public class AiController {
                 }
             }
         }
+        // Plays that waste a card are taken out before anything is compared, the heuristics' favourite included: the
+        // next play in line then stands for "what the heuristics would do". Nothing left means passing.
+        final boolean saveCantrips = ComboGuard.winLikelySoon(player, deckPlan(player).combos);
+        final List<SpellAbility> approved = new ArrayList<>(approvedIn.size());
+        for (final SpellAbility sa : approvedIn) {
+            final String problem = guardProblem(sa, approvedAim.get(sa), saveCantrips);
+            if (problem == null) {
+                approved.add(sa);
+            } else {
+                FlatMonteCarloStats.noteRejected("ComboGuard:" + problem);
+            }
+        }
+        for (final SpellAbility sa : new ArrayList<>(extras)) {
+            final String problem = guardProblem(sa, null, saveCantrips);
+            if (problem != null) {
+                extras.remove(sa);
+                FlatMonteCarloStats.noteRejected("ComboGuard:" + problem);
+            }
+        }
+        if (approved.isEmpty() && extras.isEmpty()) {
+            return null;
+        }
+        if (cfg == null) { // out of budget
+            return approved.isEmpty() ? null : approved.get(0); // out of budget
+        }
+        if (mode == FlatMonteCarloPicker.Mode.MAIN && extras.isEmpty() && approved.size() < 2
+                && !FlatMonteCarloPicker.isHoldPossible(player)) {
+            return approved.get(0); // nothing to compare
+        }
+        // The heuristics are asked again before a line is rolled out, and that can aim the play somewhere else (at the
+        // legend that is already in play): such a line is not simulated, and never played either (see below).
         final FlatMonteCarloPicker.Result result = FlatMonteCarloPicker.choose(player, approved, extras, cfg,
-                sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay, mode);
+                sa -> playDecisionStable(sa) == AiPlayDecision.WillPlay && guardProblem(sa, null, saveCantrips) == null, mode);
         lastFlatMcResult = result;
         FlatMonteCarloStats.record(result);
         flatMcTurnSpentNanos += result.elapsedNanos;
@@ -2069,6 +2110,9 @@ public class AiController {
             // A discovered play: the heuristics never approved it, so there is nothing for them to re-check. Make sure
             // it is still aimed where the rollouts liked it, and that it can still be paid for.
             if (result.target != null && !FlatMonteCarloPicker.applyTarget(result.choice, result.target)) {
+                return approved.isEmpty() ? null : approved.get(0);
+            }
+            if (guardProblem(result.choice, null, saveCantrips) != null) {
                 return approved.isEmpty() ? null : approved.get(0);
             }
             result.choice.setActivatingPlayer(player);
@@ -2103,7 +2147,7 @@ public class AiController {
                 // verdict stands, aimed where it was (a single target, still legal) if the play aims at all.
                 final boolean aimOk = !sa.usesTargeting()
                         || (result.target == null && approvedTargets == 1 && FlatMonteCarloPicker.applyTarget(sa, approvedTarget));
-                if (aimOk && isStillCastable(sa)) {
+                if (aimOk && isStillCastable(sa) && guardProblem(sa, null, saveCantrips) == null) {
                     return sa;
                 }
             }
@@ -2112,10 +2156,24 @@ public class AiController {
                         && playDecisionStable(sa) != AiPlayDecision.WillPlay) {
                     continue; // the other target is no longer legal and the heuristics gave the play up as well
                 }
+                if (guardProblem(sa, null, saveCantrips) != null && !reaimedWithoutProblem(sa, saveCantrips)) {
+                    FlatMonteCarloStats.noteRejected("ComboGuard:late");
+                    continue; // the heuristics aimed it at the legend that is already in play, and nothing else will do
+                }
                 return sa;
             }
         }
         return null;
+    }
+
+    /** Another target for a play the heuristics aimed at a legend the AI already has: the first one the guard accepts. */
+    private boolean reaimedWithoutProblem(final SpellAbility sa, final boolean saveCantrips) {
+        for (final GameObject target : FlatMonteCarloPicker.alternativeTargets(player, sa, 3)) {
+            if (FlatMonteCarloPicker.applyTarget(sa, target) && guardProblem(sa, null, saveCantrips) == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Forces Monte Carlo on or off for this player only (null: follow the game setting). Used for A/B comparisons. */
@@ -2160,17 +2218,17 @@ public class AiController {
         }
     }
 
-    private forge.ai.simulation.DeckPlan flatMcDeckPlan;
+    private DeckPlan flatMcDeckPlan;
 
     /** What the deck is for, worked out once from the whole list and kept for the game; see {@link forge.ai.simulation.DeckPlan}. */
-    public forge.ai.simulation.DeckPlan deckPlan(final Player p) {
+    public DeckPlan deckPlan(final Player p) {
         if (flatMcDeckPlan == null) {
-            flatMcDeckPlan = forge.ai.simulation.DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
-            if (flatMcDeckPlan.archetype != forge.ai.simulation.DeckPlan.Archetype.MIDRANGE || !flatMcDeckPlan.combos.isEmpty()) {
-                forge.ai.simulation.FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
+            flatMcDeckPlan = DeckPlan.forSetting(getProperty(AiProps.FLAT_MC_DECK_PLAN), p);
+            if (flatMcDeckPlan.archetype != DeckPlan.Archetype.MIDRANGE || !flatMcDeckPlan.combos.isEmpty()) {
+                FlatMonteCarloStats.notePlan(flatMcDeckPlan.toString());
             }
-            for (final forge.ai.simulation.ComboPlan.Combo combo : flatMcDeckPlan.combos.getCombos()) {
-                forge.ai.simulation.FlatMonteCarloStats.notePlan("combo:" + combo.kind);
+            for (final ComboPlan.Combo combo : flatMcDeckPlan.combos.getCombos()) {
+                FlatMonteCarloStats.notePlan("combo:" + combo.kind);
             }
         }
         return flatMcDeckPlan;
@@ -2183,7 +2241,7 @@ public class AiController {
      * Other decks, and decks whose payoff is gone, get the list back unchanged.
      */
     private List<SpellAbility> fuelPlaysFirst(final List<SpellAbility> approved, final List<SpellAbility> extras) {
-        final forge.ai.simulation.ComboPlan combos = deckPlan(player).combos;
+        final ComboPlan combos = deckPlan(player).combos;
         if (combos.isEmpty() || !combos.fuelFirst(player)) {
             return approved;
         }
@@ -2223,7 +2281,7 @@ public class AiController {
                 break;
         }
         final Card host = sa.getHostCard();
-        final forge.ai.simulation.ComboPlan combos = deckPlan(player).combos;
+        final ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
                 && !combos.isFuelPlay(sa)
                 && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))) {
@@ -2296,7 +2354,7 @@ public class AiController {
         }
 
         // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game
-        final forge.ai.simulation.ComboPlan combos = deckPlan(player).combos;
+        final ComboPlan combos = deckPlan(player).combos;
         final long aiId = AITimeoutTracker.key(game.getId(), player.getId());
         final long timeoutNanos = TimeUnit.SECONDS.toNanos(game.getAITimeout());
         AITimeoutTracker.begin(aiId, timeoutNanos);
