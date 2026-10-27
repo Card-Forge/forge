@@ -14,17 +14,48 @@ ScryfallCode=TRC
 6 M Commander Spock @Sam Kennedy
 7 M Jean-Luc Picard, Luminary @Jason Pastrana
 8 M Worf, Defiant Commander @Flavio Greco Paglia
+12 R Borg Incursion @Pierre Loyvet
+14 R Emergency Regeneration @Grant Griffin
 17 R Guinan, Ancient Advisor @Nicky Barkla
 20 R Join the Collective @Lordigan
+22 R Korok, Liberated Rage @Ariel Orea
+24 R Maturation Chamber @Jonas De Ro
 29 R Spot, Felis catus @Leesha Hannigan
+30 R Stratagem Emulator @Grant Griffin
+31 R Supplementation Node @Piotr Foksowicz
+33 R Type-03 Borg Vessel @Florent Lebrun
+35 R Ambulatory Reactor @David Auden Nash
+36 R Borg Scout Sphere @Lordigan
+39 R Co-Option Adjutant @Aaron J. Riley
+42 R Geordi La Forge, Innovator @Ryan Valle
+44 R Gift of Perfection @Alexander Mokhov
+48 R Optimization Annex @Filipe Pagliuso
+50 R Seven of Nine, Tertiary Adjunct @Bastien L. Deharme
+52 R Transwarp Hub @David Frasheski
+54 R Võx, Child of the Collective @Carissa Susilo
+55 R Assimilate the Wounded @Bryan Sola
+56 R Assimilation Assessor @Miklós Ligeti
+57 R Battle of Wolf 359 @Henry Peters
+59 R Extraction Integrant @Smirtouille
+62 R Reclamation Specialist @Sean Vo
 72 R Koloth, Tribble Hunter @Eric Wilkerson
 78 R Christine Chapel, Combat Medic @Pauline Voss
+83 R The Best of Both Worlds @Marko Manev
 85 M Captain Kirk, Boldly Going @Josh Newton
+90 R Collective Override @Pierre Loyvet
+93 R Deliver from Chaos @Bastien L. Deharme
+94 R Hugh, First of Many @Carlos Dattoli
+95 R Jurati, Cordial Queen @Martina Fačková
 97 M Locutus of Borg @Anton Solovianchyk
+100 R One, Borg Evolved @Lixin Yin
+110 R Class-4 Tactical Cube @Jetfreak-7
 111 R Command Chair @Jason Smith
+118 R Queen's Diamond @Raymond Bonilla
+119 R Reconnaissance Partition @Camille Alquier
 121 R Starfleet Communicator @Wero Gallo
 122 R Starship Enterprise @Dofresh
 123 R The Sword of Kahless @Enora Mercier
+130 R Shore Leave Planet @Arthur Haas
 131 R Borg Queen, One Who Is Many @Erion Makuo
 132 C Evasive Maneuvers @Evan Shipard
 133 C Head of Security @Alexey Kot
@@ -71,6 +102,60 @@ ScryfallCode=TRC
 340 R Command Chair @Jason Smith
 356 R Starfleet Communicator @Wero Gallo
 357 R The Sword of Kahless @Enora Mercier
+421 U Dispatch @Pablo Mendoza
+427 U Return to Dust @Lordigan
+430 R Tempered Steel @Camille Alquier
+436 R Disallow @Kristina WermoongRey
+443 U Thirst for Knowledge @Bartek Fedyczak
+444 C Thoughtcast @Camille Alquier
+445 U Bitter Triumph @Narendra Bintara Adi
+448 R Toxic Deluge @Brian Valenzuela
+472 R Anguished Unmaking @Uzuri
+485 U Arcane Signet @Tomáš Honz
+486 R Astral Cornucopia @Arthur Yuan
+487 C Commander's Sphere @Eric Wilkerson
+488 R Darksteel Plate @Miklós Ligeti
+489 R Door of Destinies @Nadia Hurianova
+490 C Everflowing Chalice @Jodie Muir
+491 M Forsaken Monument @Florent Lebrun
+495 M The Immortal Sun @Leon Tukker
+498 R Skullclamp @Anna Pavleeva
+499 U Sol Ring @Hector Ortiz
+500 U Stonespeaker Crystal @Fajareka Setiawan
+501 U Swiftfoot Boots @Arthur Yuan
+505 U Talisman of Dominance @Piotr Foksowicz
+506 U Talisman of Hierarchy @David Szabo
+508 U Talisman of Progress @Racrufi
+510 R Unwinding Clock @Miklós Ligeti
+511 C Wayfarer's Bauble @David Álvarez
+512 R Academy Ruins @Anthony Devine
+513 U Arcane Sanctum @Bastien Grivet
+517 R Choked Estuary @Jessica Rossier
+521 C Command Tower @Arthur Yuan
+522 C Contaminated Landscape @Enora Mercier
+525 R Drowned Catacomb @Lordigan
+526 R Eclipsed Steppe @Bastien Grivet
+527 C Evolving Wilds @Hector Ortiz
+528 R Exotic Orchard @Leon Tukker
+530 R Fetid Pools @Bastien Grivet
+535 R Glacial Fortress @Nadia Hurianova
+538 R Irrigated Farmland @Jonas De Ro
+539 R Isolated Chapel @Arthur Yuan
+540 R Morphic Pool @Pierre Loyvet
+545 C Path of Ancestry @Arthur Yuan
+547 R Port Town @Edouard
+548 R Prairie Stream @Carlos Dattoli
+552 U Rogue's Passage @John Thacker
+558 R Shineshadow Snarl @Raymond Swanland
+559 R Skycloud Expanse @Arthur Yuan
+560 L Plains @Bastien Grivet
+561 L Island @Leon Tukker
+562 R Spire of Industry @Florent Lebrun
+563 L Swamp @Leon Tukker
+564 R Sunken Hollow @Nadia Hurianova
+571 C Terramorphic Expanse @Tomáš Honz
+574 R Umbral Expanse @Raymond Bonilla
+575 R Underground River @Piotr Dura
 579 C Refute @Mark Spears
 580 C Last Gasp @Arthur Haas
 582 C Run Amok @Carlos C Diaz
