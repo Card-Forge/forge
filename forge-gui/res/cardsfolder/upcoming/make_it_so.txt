@@ -1,0 +1,10 @@
+Name:Make It So
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Charm | Choices$ DBUntap,DBToken
+SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent.YouCtrl | ValidTgtsDesc$ permanent you control | SubAbility$ DBDraw1 | SpellDescription$ Untap target permanent you control. Target player draws two cards.
+SVar:DBDraw1:DB$ Draw | NumCards$ 2 | ValidTgts$ Player
+SVar:DBToken:DB$ Token | TokenScript$ r_1_1_officer | SubAbility$ DBDraw2 | SpellDescription$ Create a 1/1 red Officer creature token and draw two cards.
+SVar:DBDraw2:DB$ Draw | NumCards$ 2
+AI:RemoveDeck:All
+Oracle:Choose one —\n• Untap target permanent you control. Target player draws two cards.\n• Create a 1/1 red Officer creature token and draw two cards.
