@@ -208,6 +208,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
     private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
+    //needed for subgames
+    private final List<IPaperCard> remainingStickerSheets = new ArrayList<>();
 
     private int crankCounter = 3;
 
@@ -1986,6 +1988,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             speedEffect.setState(CardStateName.Original, true);
     }
 
+    public List<IPaperCard> getRemainingStickerSheets() {return remainingStickerSheets; }
+
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
             return;
@@ -3060,11 +3064,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             attractionDeck.shuffle();
 
         // Sticker sheets - CR 123.2a/c: only the three chosen are kept
-        PlayerZone stickerSheets = getZone(ZoneType.StickerSheets);
-        for (IPaperCard cp : Aggregates.random(registeredPlayer.getStickerSheets(), DeckFormat.CHOSEN_STICKER_SHEETS)) {
+        registeredPlayer.getStickerSheets().forEach(remainingStickerSheets::add);
+        PlayerZone stickerSheetZone = getZone(ZoneType.StickerSheets);
+        for (IPaperCard cp : Aggregates.random(remainingStickerSheets, DeckFormat.CHOSEN_STICKER_SHEETS)) {
             Card sheet = Card.fromPaperCard(cp, this);
             sheet.setCollectible(false);
-            stickerSheets.add(sheet);
+            stickerSheetZone.add(sheet);
+            remainingStickerSheets.remove(cp);
         }
         Card.refreshSheetViews(this);
 

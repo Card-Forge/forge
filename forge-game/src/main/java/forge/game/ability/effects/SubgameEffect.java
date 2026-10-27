@@ -5,12 +5,14 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.deck.DeckFormat;
 import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.sticker.AppliedSticker;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventSubgameEnd;
@@ -20,8 +22,11 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.Aggregates;
 import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
 
@@ -117,6 +122,24 @@ public class SubgameEffect extends SpellAbilityEffect {
             // Attractions
             setCardsInZone(player, ZoneType.AttractionDeck, maingamePlayer.getCardsIn(ZoneType.AttractionDeck), false);
 
+            //Stickers
+            /* Since starting a subgame counts as starting a new game we have to go
+             * through all the steps which includes choosing new sticker-sheets at random.
+             */
+            player.getRemainingStickerSheets().addAll(maingamePlayer.getRemainingStickerSheets());
+            Zone stickerZone = player.getZone(ZoneType.StickerSheets);
+            for (IPaperCard cp: Aggregates.random(player.getRemainingStickerSheets(), DeckFormat.CHOSEN_STICKER_SHEETS)) {
+                Card newCard = Card.fromPaperCard(cp, player);
+                stickerZone.add(newCard);
+            }
+            for (Card c: player.getZone(ZoneType.Sideboard).getCards()) {
+                Card maingameCard = player.getMappingMaingameCard(c);
+                for (AppliedSticker sticker: maingameCard.getStickers()) {
+                    c.addSticker(sticker);
+                }
+            }
+            Card.refreshSheetViews(player);
+
             // Contraptions
             setCardsInZone(player, ZoneType.ContraptionDeck, maingamePlayer.getCardsIn(ZoneType.ContraptionDeck), false);
 
@@ -207,6 +230,7 @@ public class SubgameEffect extends SpellAbilityEffect {
             final CardCollectionView movedCards = player.getCardsIn(ZoneType.Subgame);
             PlayerZone library = player.getZone(ZoneType.Library);
             for (final Card card : movedCards) {
+                card.removeAllStickers();
                 library.add(card);
             }
             player.getZone(ZoneType.Subgame).removeAllCards(true);
