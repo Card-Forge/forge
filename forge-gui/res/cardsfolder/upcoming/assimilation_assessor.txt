@@ -1,0 +1,12 @@
+Name:Assimilation Assessor
+ManaCost:4 B
+Types:Artifact Creature Borg
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile target opponent's graveyard.
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChooseCard | TriggerDescription$ Whenever this creature attacks, assimilate a creature card exiled with it. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
+SVar:TrigChooseCard:DB$ ChooseCard | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | Mandatory$ True | SubAbility$ DBAssimilate
+SVar:DBAssimilate:DB$ Assimilate | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:HasAttackEffect:TRUE
+Oracle:When this creature enters, exile target opponent's graveyard.\nWhenever this creature attacks, assimilate a creature card exiled with it. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)
