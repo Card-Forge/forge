@@ -11,7 +11,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
-import forge.util.collect.FCollectionView;
 
 import java.util.*;
 
@@ -172,23 +171,9 @@ public class GameSimulator {
         Card origHostCard = sa.getHostCard();
         Card hostCard = copier.find(origHostCard);
         String desc = sa.getDescription();
-        // TODO tests fail if this isn't checked first
-        FCollectionView<SpellAbility> candidates = hostCard.getSpellAbilities();
 
-        SpellAbility result = saMatcher(candidates, desc);
-        if (result == null) {
-            // could try and reimplement this so a quick match doesn't require building the rest first
-            result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
-        }
+        SpellAbility result = saMatcher(hostCard.getAllPossibleAbilities(aiPlayer, true), desc);
 
-        if (result == null || !desc.equals(result.getDescription())) {
-            // Only the printed ability was found (or nothing): a play paid with an alternative cost (Force of Will,
-            // Daze, Fireblast, evoke...) is built on demand from the printed one, so build it in the simulated game too.
-            final SpellAbility alt = findAlternativeCostSa(hostCard, desc);
-            if (alt != null) {
-                result = alt;
-            }
-        }
         if (result == null && Boolean.getBoolean("flatmc.trace")) {
             System.err.println("[sim] no match for: " + desc + " in " + hostCard.getAllPossibleAbilities(aiPlayer, true) + " / unfiltered "
                     + hostCard.getAllPossibleAbilities(aiPlayer, false));
@@ -198,29 +183,6 @@ public class GameSimulator {
         }
 
         return result;
-    }
-
-    private SpellAbility findAlternativeCostSa(final Card hostCard, final String desc) {
-        // The same expansion the AI uses to pick its plays: additional-cost choices (Bitter Triumph: discard or pay
-        // life), optional costs (kicker) and alternative costs (Force of Will, Daze, evoke) are separate plays, and
-        // the description tells which one was meant.
-        try {
-            for (final SpellAbility printed : hostCard.getSpellAbilities()) {
-                if (!printed.isSpell()) {
-                    continue;
-                }
-                printed.setActivatingPlayer(aiPlayer);
-                for (final SpellAbility variant : forge.ai.ComputerUtilAbility.getOriginalAndAltCostAbilities(
-                        Collections.singletonList(printed), aiPlayer)) {
-                    if (desc.equals(variant.getDescription())) {
-                        return variant;
-                    }
-                }
-            }
-        } catch (final RuntimeException e) {
-            // not available in the copy: the caller treats it as not found
-        }
-        return null;
     }
 
     private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {

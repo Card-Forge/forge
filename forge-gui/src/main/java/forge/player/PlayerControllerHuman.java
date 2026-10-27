@@ -1651,14 +1651,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             return List.of();
         }
-        final Set<CardView> result = Sets.newHashSet();
+        final List<CardView> result = Lists.newArrayList();
         for (final Card c : attackingPlayer.getCreaturesInPlay()) {
             if (!CombatUtil.canAttack(c)) continue;
             // Drop already-declared attackers.
             if (combat != null && combat.isAttacking(c)) continue;
             result.add(c.getView());
         }
-        return Lists.newArrayList(result);
+        return result;
     }
 
     /** Defenders that could block at least one current attacker. */
@@ -1666,7 +1666,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS) || combat == null) {
             return List.of();
         }
-        final Set<CardView> result = Sets.newHashSet();
+        final List<CardView> result = Lists.newArrayList();
         final Iterable<Card> attackers = combat.getAttackers();
         for (final Card blocker : defendingPlayer.getCreaturesInPlay()) {
             if (!CombatUtil.canBlock(blocker)) continue;
@@ -1682,7 +1682,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 result.add(blocker.getView());
             }
         }
-        return Lists.newArrayList(result);
+        return result;
     }
 
     @Override

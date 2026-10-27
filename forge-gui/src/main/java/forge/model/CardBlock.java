@@ -296,4 +296,11 @@ public final class CardBlock implements Comparable<CardBlock> {
     public void setBoosterResolver(Function<String, IUnOpenedProduct> resolver) {
         this.boosterResolver = resolver;
     }
+
+    /**
+     * @return the currently installed booster resolver, or {@code null} if none.
+     */
+    public Function<String, IUnOpenedProduct> getBoosterResolver() {
+        return boosterResolver;
+    }
 }
