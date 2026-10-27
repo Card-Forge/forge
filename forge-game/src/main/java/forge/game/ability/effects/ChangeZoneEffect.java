@@ -1128,7 +1128,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         continue;
                     }
                     Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
-                            thisList, shouldReveal ? delayedReveal : null, selectPrompt, !mandatory, decider);
+                            thisList, shouldReveal ? delayedReveal : null, selectPrompt + " (" + named.getName() + ")", !mandatory, decider);
                     shouldReveal = false;
                     if (c != null) {
                         chosenCards.add(c);
