@@ -33,7 +33,7 @@ import java.util.Locale;
  */
 public final class ReplayStore {
     static final int MAGIC = 0x46525031; // "FRP1"
-    static final int FORMAT = 1;
+    static final int FORMAT = 2;
     static final String EXTENSION = ".frp";
 
     /** Replays kept on disk; the oldest go first, so storage stays small on a phone. */

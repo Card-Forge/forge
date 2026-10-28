@@ -82,7 +82,6 @@ public final class ReplaySession implements IHasForgeLog {
 
     /** Wires the hidden GUI in the way {@code HostedMatch} wires a remote client's. */
     private void attach() {
-        gui.setGameView(null); // clear out any old view first, as for every GUI
         gui.setGameView(game.getView());
         gui.setForwarder(forwarder);
         game.subscribeToEvents(forwarder);

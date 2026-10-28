@@ -5,7 +5,10 @@ import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventPlayerControl;
+import forge.game.event.GameEventSnapshotRestored;
 import forge.game.GameView;
+import forge.game.GameLogEntry;
+import forge.game.event.GameEventAddLog;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -59,7 +62,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
-    private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
+    private int boundGameId = -1;
     private volatile boolean paused;
     private volatile boolean resyncPending;
 
@@ -101,14 +104,15 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     }
 
     /**
-     * Reset delta sync state for reconnection.
-     * After a client reconnects, it has no prior delta baseline,
-     * so we must send a full state before resuming delta sync.
+     * Reset delta sync state. After a reconnect or at the start of a new game
+     * the client has no delta baseline, so {@link #openView} sends a full state again.
      */
-    public void resetForReconnect() {
+    public void resetSync() {
         initialSyncSent = false;
-        fallbackLogged = false;
         syncManager.reset();
+        // Only a game that has not begun will fire the GameEventGameStarted that registers its objects
+        final GameView gameView = getGameView();
+        objectsRegistered = gameView != null && gameView.getTurn() > 0;
         // the client has none of the marks sent before
         super.setSelection(Selection.NONE);
     }
@@ -186,11 +190,10 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     /**
      * Push pending state to the client. Flushes the event queue if any events
      * are queued; otherwise walks the trackable graph for state changes that
-     * didn't fire an event and sends an applyDelta. Falls back to a full
-     * setGameView before delta sync is established. Game-thread-only.
+     * didn't fire an event and sends an applyDelta. Sends nothing before the
+     * first full state, which {@link #openView} sends. Game-thread-only.
      *
-     * <p>Called internally by {@link #syncAndSend} and {@link #syncAndSendAndWait};
-     * also invoked directly from the reconnect handshake.
+     * <p>Called internally by {@link #syncAndSend} and {@link #syncAndSendAndWait}.
      */
     public void updateGameView() {
         updateGameView(true);
@@ -202,31 +205,14 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             return;
         }
 
-        if (!useDeltaSync || !initialSyncSent) {
-            if (!fallbackLogged) {
-                netLog.debug("[DeltaSync] {}: Fallback to full state - useDeltaSync={}, initialSyncSent={}",
-                    this, useDeltaSync, initialSyncSent);
-                fallbackLogged = true;
-            }
-            // Batch flush already emits setGameView; skip the duplicate.
-            if (forwarder != null && forwarder.hasPendingEvents()) {
-                flushPendingEvents();
-                return;
-            }
-            if (flush) {
-                send(ProtocolMethod.setGameView, gameView, -1L);
-            } else {
-                sender.write(ProtocolMethod.setGameView, gameView, -1L);
-            }
+        if (!initialSyncSent) {
             return;
         }
 
-        // Resync requested by client (checksum mismatch) — send full state
-        // from the game thread where the gameView is consistent.
-        if (resyncPending) {
+        // A checksum mismatch, or delta sync turned off, re-sends every object instead of only the changes
+        if (resyncPending || !useDeltaSync) {
             resyncPending = false;
-            sendFullState();
-            return;
+            syncManager.resendAll();
         }
 
         // If events are pending, the batch flush bundles dirty props with
@@ -247,7 +233,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     }
 
     /**
-     * Request a full state resync on the next updateGameView call.
+     * Request that the next sync re-send every object.
      * Called from the Netty thread; the actual send happens on the game thread.
      */
     public void setResyncPending() {
@@ -256,15 +242,10 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     }
 
     /**
-     * Send the full game state to the client.
-     * Used for initial connection and reconnection.
+     * Send the full game state to the client, once per game and after a reconnect.
      */
-    public void sendFullState() {
+    private void sendFullState() {
         GameView gameView = getGameView();
-        if (gameView == null) {
-            return;
-        }
-
         long seq = syncManager.getCurrentSequence();
         send(ProtocolMethod.setGameView, gameView, seq);
         initialSyncSent = true;
@@ -281,21 +262,43 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
-        // Each game owns a Tracker and restarts card ids at 1, so client IdRefs must resolve
-        // against the current game's. A null view is a transient clear between games — leave
-        // the codec on the outgoing game so its in-flight messages still resolve.
-        if (gameView != null) {
-            onTrackerBound(gameView.getTracker(), syncManager.getConsumerId());
+        if (gameView == null) {
+            return;
         }
-        updateGameView();
+        // Each game owns a Tracker and restarts card ids at 1, so a new game starts delta sync again.
+        // A subgame switch sets the same game's view again after openView, which must not reset.
+        final boolean newGame = gameView.getId() != boundGameId;
+        if (newGame) {
+            boundGameId = gameView.getId();
+            resetSync();
+        }
+        onTrackerBound(gameView.getTracker(), syncManager.getConsumerId());
+        // A new game's full state goes out with the openView that always follows
+        if (!newGame) {
+            updateGameView();
+        }
     }
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
-        send(ProtocolMethod.openView, myPlayers);
-        updateGameView();
-        // Initialize delta sync by sending the initial full state
+        final GameView gameView = getGameView();
+        // A reconnect before the first game starts has no view yet, and that game sends its own view and openView
+        if (gameView == null) {
+            return;
+        }
+        // The client builds its screen from the view, so the full state goes first
         sendFullState();
+        send(ProtocolMethod.openView, myPlayers);
+        // The client's new view starts with an empty log, so a game under way (reconnect, subgame) replays it
+        if (gameView.getGameLog() != null) {
+            final List<GameEvent> logEvents = new ArrayList<>();
+            for (final GameLogEntry entry : gameView.getGameLog().getAllEntries()) {
+                logEvents.add(new GameEventAddLog(entry.type(), entry.message(), entry.sourceCard()));
+            }
+            if (!logEvents.isEmpty()) {
+                sendEventsOnly(logEvents);
+            }
+        }
     }
 
     @Override
@@ -544,14 +547,17 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
                 }
             }
         }
-        // Undo rewinds the game in place and writes fields directly, bypassing the dirty tracking the delta
-        // sync relies on, so the client would never hear about most of the changes. Re-send the whole view
-        // (the same thing a checksum resync does) before the events that tell the client's GUI to rebuild.
-        if (useDeltaSync && initialSyncSent && objectsRegistered && events.stream()
-                .anyMatch(e -> e instanceof forge.game.event.GameEventSnapshotRestored r && !r.start())) {
-            sendFullState();
+        // Before openView's full state, events are dropped as while paused
+        if (!initialSyncSent) {
+            return;
         }
-        if (useDeltaSync && initialSyncSent && objectsRegistered) {
+        // Undo writes fields directly, bypassing dirty tracking, so like a resync it re-sends every object.
+        // This path calls collectDeltas itself, so it checks for a resend as updateGameView does.
+        if (resyncPending || !useDeltaSync || events.stream().anyMatch(e -> e instanceof GameEventSnapshotRestored r && !r.start())) {
+            resyncPending = false;
+            syncManager.resendAll();
+        }
+        if (objectsRegistered) {
             // Bundle events with delta so they're applied atomically:
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
@@ -563,9 +569,7 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
             }
         } else {
             updateGameView(false);
-            GameView gameView = getGameView();
-            forge.trackable.Tracker tracker = gameView != null ? gameView.getTracker() : null;
-            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(encodeEvents(events, tracker)));
+            sendEventsOnly(events);
         }
     }
 
@@ -592,9 +596,9 @@ public class ProtocolGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     /**
      * Send events as a standalone applyDelta without running {@link DeltaSyncManager#collectDeltas},
-     * which is game-thread-only and would also redundantly re-send the full graph right after a reconnect's sendFullState.
+     * which is game-thread-only and would also redundantly re-send the full graph right after {@link #openView}'s full state.
      */
-    public void replayEvents(final List<GameEvent> events) {
+    private void sendEventsOnly(final List<GameEvent> events) {
         if (paused) { return; }
         final GameView gameView = getGameView();
         final Tracker tracker = gameView != null ? gameView.getTracker() : null;
