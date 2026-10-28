@@ -342,6 +342,7 @@ Unicorn:Unicorns
 Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
+Vau-N'Akat:Vau-N'Akat
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
