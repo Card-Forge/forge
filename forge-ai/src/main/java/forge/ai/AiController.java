@@ -366,12 +366,14 @@ public class AiController {
                 continue;
             }
 
+            SpellAbility exSA = tr.ensureAbility();
+
             // if trigger is not mandatory - no problem
-            if (tr.hasParam("OptionalDecider") && api == null) {
+            // (either the trigger asks its controller or the effect itself is a "you may", e.g. Optional$ True)
+            if (api == null && (tr.hasParam("OptionalDecider") || "True".equals(exSA.getParam("Optional")))) {
                 continue;
             }
 
-            SpellAbility exSA = tr.ensureAbility();
             if (exSA.getApi() == api) {
                 rightapi = true;
             } else if (api != null) {
