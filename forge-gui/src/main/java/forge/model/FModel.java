@@ -23,7 +23,9 @@ import com.google.common.collect.Maps;
 import forge.*;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ai.AiProfileUtil;
+import forge.card.CardEdition;
 import forge.card.CardRulesPredicates;
+import forge.card.SetExclusions;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
@@ -63,8 +65,10 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -89,7 +93,73 @@ public final class FModel {
             getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
             getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
             getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART),
-            buildPreferredLanguageAvailability()));
+            buildPreferredLanguageAvailability(),
+            buildPrintExclusion()));
+
+    private static SetExclusions getSetExclusions() {
+        return new SetExclusions(getPreferences().getPrefSet(FPref.UI_EXCLUDED_SETS));
+    }
+
+    // must not reach getMagicDb(): it runs while the card database is still being built
+    private static BiPredicate<CardEdition, String> buildPrintExclusion() {
+        SetExclusions exclusions = getSetExclusions();
+        return exclusions.isEmpty() ? null : exclusions::excludes;
+    }
+
+    public static Set<String> getExcludedEditionCodes() {
+        SetExclusions exclusions = getSetExclusions();
+        Set<String> codes = SetExclusions.newCodeSet();
+        for (CardEdition edition : getMagicDb().getEditions()) {
+            if (exclusions.excludes(edition, null)) {
+                codes.add(edition.getCode());
+            }
+        }
+        return codes;
+    }
+
+    public static Set<String> getExcludedTags() {
+        return getSetExclusions().getTags();
+    }
+
+    /** Every tag in the edition files, on whole editions or on single prints. */
+    public static Set<String> getEditionTags() {
+        Set<String> tags = SetExclusions.newCodeSet();
+        for (CardEdition edition : getMagicDb().getEditions()) {
+            tags.addAll(edition.getTags());
+            tags.addAll(edition.getPrintTags());
+        }
+        return tags;
+    }
+
+    /** The editions carrying the tag as a whole. */
+    public static Set<String> getEditionCodesWithTag(String tag) {
+        Set<String> codes = SetExclusions.newCodeSet();
+        for (CardEdition edition : getMagicDb().getEditions()) {
+            if (edition.hasTag(tag)) {
+                codes.add(edition.getCode());
+            }
+        }
+        return codes;
+    }
+
+    /** The name a tag is shown by, from {@code lblTag<Tag>} if the language file has it. */
+    public static String getTagName(String tag) {
+        return Localizer.getInstance().getMessageorUseDefault("lblTag" + tag, tag);
+    }
+
+    /**
+     * Stores the sets and tags ticked in a set picker and applies them to the card database. Returns false when that
+     * leaves the preference as it was.
+     */
+    public static boolean setExcludedEditions(Collection<String> ticked, Collection<String> excludedTags) {
+        Set<String> entries = SetExclusions.entriesFor(ticked, excludedTags, FModel::getEditionCodesWithTag);
+        if (entries.equals(getPreferences().getPrefSet(FPref.UI_EXCLUDED_SETS))) {
+            return false;
+        }
+        getPreferences().setPrefSet(FPref.UI_EXCLUDED_SETS, entries);
+        getMagicDb().setPrintExclusion(buildPrintExclusion());
+        return true;
+    }
 
     private static BiPredicate<String, String> buildPreferredLanguageAvailability() {
         if (!getPreferences().getPrefBoolean(FPref.UI_PREFER_LANG_FOR_UNIQUE_CARDS)) {

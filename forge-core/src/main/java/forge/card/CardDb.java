@@ -158,6 +158,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // Placeholder to setup default art Preference - to be moved from Static Data!
     private CardArtPreference defaultCardArtPreference;
     private BiPredicate<String, String> preferredLanguageAvailability;
+    // (edition, collector number) of prints to avoid when the card has another print
+    private BiPredicate<CardEdition, String> printExclusion;
+    private int printExclusionVersion;
     private boolean initialized;
 
     public static class CardRequest {
@@ -773,6 +776,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         List<PaperCard> traditional = getTraditionalFramePrints(pc);
         if (traditional.isEmpty())
             return pc;  // the card has no traditional print in this edition
+        if (hasPrintExclusion() && !isPrintExcluded(pc) && traditional.stream().allMatch(this::isPrintExcluded))
+            return pc;  // the frame never wins over the player's exclusion
         PaperCard result = traditional.get((Math.max(pc.getArtIndex(), 1) - 1) % traditional.size());
         return pc.isFoil() ? result.getFoiled() : result;
     }
@@ -794,6 +799,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     && Objects.equals(other.getFunctionalVariant(), pc.getFunctionalVariant()))
                 traditional.add(other);
         }
+        if (canExcludePrints(traditional))
+            traditional.removeIf(this::isPrintExcluded);
         if (!pc.getRules().getType().isBasicLand()) {
             /* Some products (Universes Beyond, Secret Lair, Commander decks...) list the special versions of a card
                in the main section too, with much higher collector numbers (e.g. 79 / 171 / 265). The standard
@@ -834,7 +841,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return false;
     }
 
-    private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
+    private PaperCard getBestUniquePrint(final Collection<PaperCard> prints) {
+        final Collection<PaperCard> cards = canExcludePrints(prints)
+                ? prints.stream().filter(pc -> !isPrintExcluded(pc)).collect(Collectors.toList())
+                : prints;
         return cards.stream()
                 .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
                 // A Black Border preference is a hard requirement: a translated white-bordered print must not
@@ -900,6 +910,37 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (initialized) {
             reIndex();
         }
+    }
+
+    public void setPrintExclusion(BiPredicate<CardEdition, String> exclusion) {
+        if (exclusion == null && printExclusion == null)
+            return;  // keeps the version at 0, so decks loaded with nothing excluded never resolve again
+        this.printExclusion = exclusion;
+        printExclusionVersion++;
+        if (initialized) {
+            reIndex();
+        }
+    }
+
+    /** Changes whenever the print exclusion is replaced, so cached print choices can tell they are stale. */
+    public int getPrintExclusionVersion() {
+        return printExclusionVersion;
+    }
+
+    public boolean hasPrintExclusion() {
+        return printExclusion != null;
+    }
+
+    public boolean isPrintExcluded(PaperCard pc) {
+        if (printExclusion == null)
+            return false;
+        CardEdition edition = editions.get(pc.getEdition());
+        return edition != null && printExclusion.test(edition, pc.getCollectorNumber());
+    }
+
+    /** True when an exclusion is set and at least one of the prints passes it, so the excluded ones can be dropped. */
+    public boolean canExcludePrints(Collection<PaperCard> prints) {
+        return printExclusion != null && prints.stream().anyMatch(pc -> !isPrintExcluded(pc));
     }
 
     /**
@@ -1161,6 +1202,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if(!matchingNames.isEmpty())
                 cards.retainAll(matchingNames);
         }
+        if (canExcludePrints(cards))
+            cards.removeIf(this::isPrintExcluded);
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */

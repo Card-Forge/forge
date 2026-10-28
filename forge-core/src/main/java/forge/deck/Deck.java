@@ -68,6 +68,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private String sourceUrl;
     private String lastCardArtPreferenceUsed = "";
     private Boolean lastCardArtOptimisationOptionUsed = null;
+    private transient int lastPrintExclusionVersion;
     private boolean includeCardsFromUnspecifiedSet = false;
     private String sleeveArtKey = "";
     private int sleeveArtOffset = DEFAULT_SLEEVE_OFFSET;
@@ -299,12 +300,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         String cardArtPreference = StaticData.instance().getCardArtPreferenceName();
         boolean smartCardArtSelection = StaticData.instance().isEnabledCardArtSmartSelection();
+        int printExclusionVersion = StaticData.instance().getCommonCards().getPrintExclusionVersion();
 
         if (lastCardArtOptimisationOptionUsed == null)  // first time here
             lastCardArtOptimisationOptionUsed = smartCardArtSelection;
 
         if (loadedSections != null && cardArtPreference.equals(lastCardArtPreferenceUsed) &&
-                lastCardArtOptimisationOptionUsed == smartCardArtSelection)
+                lastCardArtOptimisationOptionUsed == smartCardArtSelection &&
+                lastPrintExclusionVersion == printExclusionVersion)
             return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
 
         Map<String, List<String>> referenceDeckLoadingMap;
@@ -317,6 +320,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         loadedSections = new HashMap<>();
         lastCardArtPreferenceUsed = cardArtPreference;
         lastCardArtOptimisationOptionUsed = smartCardArtSelection;
+        lastPrintExclusionVersion = printExclusionVersion;
         Map<DeckSection, ArrayList<String>> cardsWithNoEdition = null;
         if (smartCardArtSelection)
              cardsWithNoEdition = new EnumMap<>(DeckSection.class);
