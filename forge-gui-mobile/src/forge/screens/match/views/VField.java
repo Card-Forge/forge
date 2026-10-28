@@ -21,6 +21,7 @@ public class VField extends FContainer {
     private final FieldRow row1, row2;
     private boolean flipped;
     private float commandZoneWidth;
+    private float innerCover; //compact zone tabs: width at the end of the inner row that the command zone box covers
     private float fieldModifier;
     private float endPadding;
     private float contentAlignment; //0 cards start on the left, 0.5 they are centered, 1 they end on the right
@@ -230,6 +231,21 @@ public class VField extends FContainer {
 
     void setCommandZoneWidth(float commandZoneWidth0) {
         commandZoneWidth = commandZoneWidth0;
+        innerCover = 0f; //only the compact zone tabs layout covers the inner row
+    }
+
+    //Compact zone tabs: the zone boxes float over the right end of the field, so each row ends where the box over it begins instead
+    //of its cards running under the box. The card zone box is over the outer row, the command zone box over the inner one.
+    void setZoneCovers(float outer, float inner) {
+        outer = Math.round(Math.max(0f, outer));
+        inner = Math.round(Math.max(0f, inner));
+        if (commandZoneWidth == outer && innerCover == inner) { return; }
+        final boolean outerWas = commandZoneWidth > 0, innerWas = innerCover > 0;
+        commandZoneWidth = outer;
+        innerCover = inner;
+        row2.followEndPadding(outerWas, outer > 0); //the rows scroll their cards clear of the box when it opens, and back when it closes
+        row1.followEndPadding(innerWas, inner > 0);
+        revalidate();
     }
 
     void setContentAlignment(float alignment) {
@@ -273,7 +289,7 @@ public class VField extends FContainer {
             y1 = 0;
             y2 = cardSize;
         }
-        row1.setBounds(0, y1, width - fieldModifier, cardSize);
+        row1.setBounds(0, y1, (width - innerCover) - fieldModifier, cardSize);
         row2.setBounds(0, y2, (width - commandZoneWidth) - fieldModifier, cardSize);
     }
 
