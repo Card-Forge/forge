@@ -6,8 +6,33 @@ Type=Collector_Edition
 ScryfallCode=SDS
 
 [cards]
+1 M Mikaeus, the Lunarch @Jason Raish ${"flavorName": "Benny Russell, Dreamer"}
+2 M Flare of Fortitude @Eddie Holly
 3 M Kenrith, the Returned King @Eddie Holly ${"flavorName": "General Picard, Earth Warlord"}
+4 M Sisay, Weatherlight Captain @Vance Kelly ${"flavorName": "Kirk, Alluring Upstart"}
+5 M Thada Adel, Acquisitor @Jason Raish ${"flavorName": "Carol Marcus, Scientist Sleuth"}
+6 M Empress Galina @Oliver Barrett ${"flavorName": "Empress Sato, Terran Tyrant"}
+7 M Arcum Dagsson @Alexander Mokhov ${"flavorName": "Scotty, Transwarp Transporter"}
+8 M Bruvac the Grandiloquent @Oliver Barrett ${"flavorName": "Spock, Completely Logical"}
+9 M Decree of Pain @Jonathan Bartlett
+10 M Drivnod, Carnage Dominus @Jason Pastrana ${"flavorName": "Intendant Kira Nerys"}
 11 M Sheoldred, the Apocalypse @Nicky Barkla ${"flavorName": "Khan, Engineered Evil"}
+12 M Torbran, Thane of Red Fell @Jack Hughes ${"flavorName": "Michael Burnham, Enforcer"}
+13 M Loot, Exuberant Explorer @Nicky Barkla ${"flavorName": "Hikaru Sulu, Peerless Pilot"}
+14 M Rishkar, Peema Renegade @Vance Kelly ${"flavorName": "Keenser, Scotty's Spotter"}
 15 M Bristly Bill, Spine Sower @Eddie Holly ${"flavorName": "Leonard McCoy, Country Doctor"}
+16 M Sen Triplets @Jaroslav Kosmina ${"flavorName": "Borg Queen, Hateful Legacy"}
+17 M Tatyova, Benthic Druid @Jonathan Bartlett ${"flavorName": "Chekov, Young Wayfinder"}
+18 M Hull Breach @Sam Kennedy
+19 M Isshin, Two Heavens as One @Oliver Barrett ${"flavorName": "Janeway, Cracked Mirror"}
+20 M Ertai Resurrected @Vance Kelly ${"flavorName": "Nero, Last of the Empire"}
+21 M Jhoira, Weatherlight Captain @Lie Setiawan ${"flavorName": "Nyota Uhura, Endless Insight"}
+22 M Captain Sisay @Nicky Barkla ${"flavorName": "Pike, Unrelenting Mentor"}
+23 M Riku of Many Paths @Sam Kennedy ${"flavorName": "Spock, Cross-Time Captain"}
 24 M Prosper, Tome-Bound @Vance Kelly ${"flavorName": "Spock, Mirror Malefactor"}
+25 M Stella Lee, Wild Card @Oliver Barrett ${"flavorName": "Spock, Strangely Human"}
+26 M Mogis, God of Slaughter @Oliver Barrett ${"flavorName": "Worf, Regent of Terok Nor"}
 27 M Minamo, School at Water's Edge @Jaroslav Kosmina ${"flavorName": "Academy on the Bay"}
+28 M Talon Gates of Madara @Jonathan Bartlett ${"flavorName": "Starbase Yorktown"}
+29 M Phyrexian Tower @Sam Kennedy ${"flavorName": "Starfleet HQ, Under Assault"}
+30 M Shizo, Death's Storehouse @Jack Hughes ${"flavorName": "Terran Throne Room"}
