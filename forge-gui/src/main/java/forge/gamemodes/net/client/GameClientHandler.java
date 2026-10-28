@@ -27,7 +27,6 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasForgeLog {
@@ -60,19 +59,18 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
 
     @Override
     protected Object[] decodeArgs(final ProtocolMethod protocolMethod, final byte[] encodedArgs) {
-        // Deltas are applied on the GUI thread in arrival order, so a prompt handled on another thread decodes there too
-        final FutureTask<Object[]> decode = new FutureTask<>(() -> {
+        try {
+            // Deltas are applied on the GUI thread in arrival order, so a prompt handled on another thread waits for the ones before it
+            final FutureTask<Void> deltasApplied = new FutureTask<>(() -> {}, null);
+            FThreads.invokeInEdtNowOrLater(deltasApplied);
+            deltasApplied.get();
             final Object[] args = TrackableSerializer.decodeArgs(encodedArgs, tracker);
             protocolMethod.checkArgs(args);
             updateTrackers(args);
             return args;
-        });
-        FThreads.invokeInEdtNowOrLater(decode);
-        try {
-            return decode.get();
-        } catch (final InterruptedException | ExecutionException e) {
+        } catch (final Exception e) {
             // Handled like a failed call, so the host still gets its reply
-            netLog.error(e instanceof ExecutionException ? e.getCause() : e, "Failed to decode args for {}", protocolMethod);
+            netLog.error(e, "Failed to decode args for {}", protocolMethod);
             return null;
         }
     }
