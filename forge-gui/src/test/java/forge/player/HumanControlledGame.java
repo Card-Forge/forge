@@ -27,15 +27,15 @@ import java.util.List;
  * are created from inline script text, so each test states exactly the card characteristics it
  * relies on.
  */
-final class HumanControlledGame {
+public final class HumanControlledGame {
 
-    final Game game;
-    final Player human;
+    public final Game game;
+    public final Player human;
     final Player opponent;
     final PlayerControllerHuman controller;
     final FakeGuiGame gui = new FakeGuiGame();
 
-    HumanControlledGame() {
+    public HumanControlledGame() {
         // The engine reads localized strings and keyword descriptions from these singletons.
         Localizer.getInstance().initialize("en-US", "res/languages/");
         Lang.createInstance("en-US");
@@ -52,7 +52,7 @@ final class HumanControlledGame {
     }
 
     /** Creates a card from script lines, e.g. {@code "Types:Creature Beast", "PT:5/5", "K:Trample"}. */
-    Card card(final Player owner, final String name, final String... scriptLines) {
+    public Card card(final Player owner, final String name, final String... scriptLines) {
         final List<String> script = Lists.newArrayList("Name:" + name, "ManaCost:1");
         script.addAll(List.of(scriptLines));
         final PaperCard paperCard = new PaperCard(CardRules.fromScript(script), "", CardRarity.Common);
