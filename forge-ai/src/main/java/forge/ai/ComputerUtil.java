@@ -83,8 +83,22 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        if (!sa.isCopied() && !sa.isTrigger() && ai.getController() instanceof PlayerControllerAi pc) {
+            if (pc.getAi().hasFailedToCast(sa)) {
+                return false;
+            }
+            // Costs must not be paid for something that can't go on the stack: if the targets are not legal now, they
+            // won't be after paying either. A caller that chooses the targets itself (chooseTargets) does that later.
+            if (chooseTargets == null && !game.getStack().hasLegalTargeting(sa)) {
+                pc.getAi().noteFailedCast(AiController.castKey(sa));
+                game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
+                        source + " - [AI did not cast, no legal targets] - " + sa.getDescription()));
+                return false;
+            }
+        }
         final Card host = sa.getHostCard();
         final Zone hz = host.isCopiedSpell() ? null : host.getZone();
+        boolean movedToStack = false;
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -101,6 +115,7 @@ public class ComputerUtil {
             }
 
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            movedToStack = true;
         }
 
         if (!sa.isCopied()) {
@@ -112,11 +127,14 @@ public class ComputerUtil {
 
         if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
             // 603.3c If no mode is chosen, the ability is removed from the stack.
+            abandonCast(game, sa, hz, movedToStack, new CostPayment(sa.getPayCosts(), sa));
             return false;
         }
         if (chooseTargets != null) {
             chooseTargets.accept(sa);
             if (!sa.isTargetNumberValid()) {
+                // the spell is already in the stack zone: it has to go back, or it is lost
+                abandonCast(game, sa, hz, movedToStack, new CostPayment(sa.getPayCosts(), sa));
                 return false;
             }
         }
@@ -134,19 +152,36 @@ public class ComputerUtil {
             }
             return true;
         }
-        // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
+        // Should not arrive here: the costs could not be paid after all. What was paid is given back and the card goes
+        // back to where it was cast from (it used to stay in the stack zone, gone from the game).
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
         sa.setSkip(true);
-        if (host != null && hz != null && hz.is(ZoneType.Stack)) {
-            Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
-            for (SpellAbility csa : c.getSpellAbilities()) {
+        final Card back = abandonCast(game, sa, hz, movedToStack, pay);
+        if (back != null) {
+            for (SpellAbility csa : back.getSpellAbilities()) {
                 csa.setSkip(true);
             }
         }
         return false;
+    }
+
+    /**
+     * Takes back a cast that stops before the spell is on the stack: what was paid is refunded, and a spell that was
+     * already moved to the stack zone goes back to the zone it came from.
+     *
+     * @return the card as it is now
+     */
+    private static Card abandonCast(final Game game, final SpellAbility sa, final Zone fromZone,
+                                    final boolean movedToStack, final CostPayment pay) {
+        pay.refundPayment();
+        final Card onStack = sa.getHostCard();
+        if (movedToStack && fromZone != null && onStack != null && onStack.isInZone(ZoneType.Stack)) {
+            return game.getStack().returnStrandedSpell(onStack, fromZone);
+        }
+        return onStack;
     }
 
     private static boolean hasDiscardHandCost(final Cost cost) {

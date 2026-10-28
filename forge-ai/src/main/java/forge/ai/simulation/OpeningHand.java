@@ -234,7 +234,7 @@ public final class OpeningHand {
             if (c.getCMC() <= w.playCmc) {
                 early += colorCredit(c, colors, lib);
             }
-            if (isKeyCard(c, arch) || plan != null && plan.combos.isKeyCard(c)) {
+            if (isKeyCard(c, arch) || plan != null && (plan.combos.isKeyCard(c) || plan.commander.isKeyCard(c))) {
                 keys++;
             }
         }

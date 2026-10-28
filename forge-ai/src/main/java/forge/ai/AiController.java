@@ -116,6 +116,37 @@ public class AiController {
     private Boolean flatMcOverride;
     private Boolean flatMcMaxOverride;
 
+    /**
+     * Casts and activations that could not be put on the stack this turn (illegal targets), by card and ability, to
+     * the turn number. It lives here and not in the game on purpose: a rollback restores the game and would forget it.
+     */
+    private final Map<String, Integer> failedCasts = new HashMap<>();
+
+    public static String castKey(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return (host == null ? "?" : String.valueOf(host.getId())) + "|" + sa.getDescription();
+    }
+
+    /** Remember that this cast failed: it is not tried again this turn. */
+    public void noteFailedCast(final String key) {
+        failedCasts.put(key, game.getPhaseHandler().getTurn());
+    }
+
+    public boolean hasFailedToCast(final SpellAbility sa) {
+        if (failedCasts.isEmpty()) {
+            return false;
+        }
+        final Integer turn = failedCasts.get(castKey(sa));
+        if (turn == null) {
+            return false;
+        }
+        if (turn != game.getPhaseHandler().getTurn()) {
+            failedCasts.remove(castKey(sa));
+            return false;
+        }
+        return true;
+    }
+
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
@@ -915,6 +946,9 @@ public class AiController {
     }
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
+        if (hasFailedToCast(sa)) {
+            return AiPlayDecision.CantPlayAi; // it could not be put on the stack earlier this turn
+        }
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
@@ -1125,7 +1159,8 @@ public class AiController {
                 return forCombo;
             }
             // and no deck throws away its win card while something else will do
-            final CardCollection safe = combos.withoutProtected(validCards);
+            final CardCollection safe = deckPlan(player).commander.withoutProtected(player,
+                    combos.withoutProtected(validCards));
             if (safe.size() >= min && safe.size() < validCards.size()) {
                 return chooseCardsToDiscard(min, max, safe, sa);
             }

@@ -47,6 +47,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import forge.game.undo.UndoManager;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -943,9 +944,50 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerAction(sa));
+            playWithRollback(sa, getDeferredTargetingPlayerAction(sa));
         }
         return true;
+    }
+
+    /** Whether any part of the ability chain has targets: only those can fail to go on the stack for lack of them. */
+    private static boolean usesTargeting(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.usesTargeting()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Casts or activates the ability. As a last resort against an illegal cast (costs paid, then the targets turn out
+     * not to be legal, "Couldn't add to stack, failed to target"), a snapshot is taken first, only for abilities that
+     * have targets and only in the real game, and the cast is taken back if it failed: lands untap, sacrificed or
+     * discarded cards come back, the card returns to where it was. The AI then does not try it again this turn.
+     *
+     * @return whether the ability was put on the stack (or resolved) without a rollback
+     */
+    public boolean playWithRollback(final SpellAbility sa, final Consumer<SpellAbility> chooseTargets) {
+        final Game game = player.getGame();
+        final boolean guarded = !game.isSimulationCopy() && !sa.isCopied() && !sa.isTrigger() && usesTargeting(sa);
+        final UndoManager.Mark mark = guarded ? game.getUndoManager().markForRollback(game) : null;
+        final int hostId = sa.getHostCard().getId();
+        final int failedBefore = game.getStack().getIllegalAdditionCount(sa.getHostCard());
+        final String key = AiController.castKey(sa);
+
+        final boolean played = ComputerUtil.handlePlayingSpellAbility(player, sa, chooseTargets);
+
+        if (guarded && game.getStack().getIllegalAdditionCount(sa.getHostCard()) > failedBefore) {
+            getAi().noteFailedCast(key); // before the restore: this memory is not part of the game
+            final boolean restored = game.getUndoManager().rollbackTo(game, mark);
+            game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
+                    "AI cast of card #" + hostId + " was taken back" + (restored ? "" : " (no snapshot, the card was returned by hand)")));
+            return false;
+        }
+        if (!played && !sa.isCopied() && !sa.isTrigger()) {
+            getAi().noteFailedCast(key); // it did not go on the stack: not again this turn, or the AI picks it forever
+        }
+        return played;
     }
 
     /**
