@@ -317,6 +317,7 @@ Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
 Talosian:Talosians
+Tamarian:Tamarians
 Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
