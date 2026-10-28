@@ -5,6 +5,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CombatData;
@@ -297,6 +298,8 @@ public class DeltaSyncManager implements IHasForgeLog {
     /**
      * Pre-scan zone collections across all players to seed authoritativeInstances.
      * Provides cross-player coverage for stale Commander references.
+     * A spell's card is in no zone collection while it is on the stack, so its stack item's source is seeded after them.
+     * Any other instance at that key, such as the one the reveal history or the commander list keeps, is stale.
      */
     private void preScanZoneCollections(GameView gameView) {
         if (gameView == null || gameView.getPlayers() == null) return;
@@ -309,6 +312,12 @@ public class DeltaSyncManager implements IHasForgeLog {
                         }
                     }
                 }
+            }
+        }
+        for (StackItemView si : gameView.getStack()) {
+            CardView source = si.getSourceCard();
+            if (source != null) {
+                authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(source), source);
             }
         }
     }
