@@ -3,11 +3,11 @@ ManaCost:1 B B
 Types:Sorcery
 A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBReveal | StackDescription$ SpellDescription | SpellDescription$ Each player reveals their hand, chooses one card of each color from it, then discards all other nonland cards.
 SVar:DBReveal:DB$ RevealHand | Defined$ Player.IsRemembered | SubAbility$ DBChooseW
-SVar:DBChooseW:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+White | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseG
-SVar:DBChooseG:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Green | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseR
-SVar:DBChooseR:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Red | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseB
-SVar:DBChooseB:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Black | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseU
-SVar:DBChooseU:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBDiscard
+SVar:DBChooseW:DB$ ChooseCard | Mandatory$ True | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+White | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseG
+SVar:DBChooseG:DB$ ChooseCard | Mandatory$ True | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Green | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseR
+SVar:DBChooseR:DB$ ChooseCard | Mandatory$ True | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Red | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseB
+SVar:DBChooseB:DB$ ChooseCard | Mandatory$ True | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Black | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseU
+SVar:DBChooseU:DB$ ChooseCard | Mandatory$ True | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Player.IsRemembered | DefinedCards$ ValidHand Card.!IsRemembered+nonLand+RememberedPlayerCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
