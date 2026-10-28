@@ -4664,14 +4664,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateStickersForView();
     }
 
-    public final void removeAllStickers() {
-        for (AppliedSticker s : getStickers()) {
-            s.removeEffect(this);
-        }
-        stickers.clear();
-        updateStickersForView();
-    }
-
     private void updateStickersForView() {
         view.updateStickers(this);
         refreshSheetViews(getOwner());
