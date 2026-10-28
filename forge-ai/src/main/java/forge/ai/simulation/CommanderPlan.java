@@ -67,51 +67,43 @@ public final class CommanderPlan {
 
     // ------------------------------------------------------------------------------------------ the known combos
 
+    /** At most this many combos are kept for a deck: every one is looked at in every rollout. */
+    static final int MAX_KNOWN_COMBOS = 40;
+
     /**
-     * A combo of the format: the {@code required} cards and one of the {@code anyOf} cards make it (the "any of" list
-     * is for combos that work with several partners).
+     * A two card combo of the format, from the lists read by {@link AiCardLists} (the Commander bracket combos and
+     * the combos that only the AI knows). Both cards make it.
      */
     public static final class KnownCombo {
         public final String name;
-        final Set<String> required;
-        final Set<String> anyOf;
+        private final AiCardLists.Pair pair;
 
-        KnownCombo(final String name, final Set<String> required, final Set<String> anyOf) {
-            this.name = name;
-            this.required = required;
-            this.anyOf = anyOf;
+        KnownCombo(final AiCardLists.Pair pair) {
+            this.pair = pair;
+            this.name = pair.toString();
         }
 
         /** Whether the card is a piece of this combo. */
         public boolean isPiece(final Card c) {
-            return required.contains(c.getName()) || anyOf.contains(c.getName());
+            final String k = AiCardLists.normalize(c.getName());
+            return k.equals(AiCardLists.normalize(pair.first)) || k.equals(AiCardLists.normalize(pair.second));
         }
 
         Set<String> pieces() {
-            final Set<String> all = new LinkedHashSet<>(required);
-            all.addAll(anyOf);
+            final Set<String> all = new LinkedHashSet<>();
+            all.add(pair.first);
+            all.add(pair.second);
             return all;
         }
 
-        /** How many of the pieces are among these names, and whether one more would complete it. */
-        int have(final Set<String> names) {
-            int n = 0;
-            for (final String r : required) {
-                if (names.contains(r)) {
-                    n++;
-                }
-            }
-            for (final String a : anyOf) {
-                if (names.contains(a)) {
-                    n++;
-                    break; // one partner is as good as three
-                }
-            }
-            return n;
+        /** How many of the two cards are among these (already normalized) names. */
+        int have(final Set<String> normalizedNames) {
+            return (normalizedNames.contains(AiCardLists.normalize(pair.first)) ? 1 : 0)
+                    + (normalizedNames.contains(AiCardLists.normalize(pair.second)) ? 1 : 0);
         }
 
         int needed() {
-            return required.size() + (anyOf.isEmpty() ? 0 : 1);
+            return 2;
         }
 
         @Override
@@ -119,46 +111,6 @@ public final class CommanderPlan {
             return name;
         }
     }
-
-    private static Set<String> names(final String... names) {
-        final Set<String> out = new LinkedHashSet<>();
-        Collections.addAll(out, names);
-        return Collections.unmodifiableSet(out);
-    }
-
-    private static KnownCombo combo(final String name, final String[] required, final String... anyOf) {
-        return new KnownCombo(name, names(required), names(anyOf));
-    }
-
-    private static String[] req(final String... names) {
-        return names;
-    }
-
-    /** The combos that win or break the game on their own, in the usual Commander lists. */
-    static final List<KnownCombo> KNOWN = Collections.unmodifiableList(java.util.Arrays.asList(
-            combo("Oracle win", req("Thassa's Oracle"), "Demonic Consultation", "Tainted Pact"),
-            combo("Lab Man win", req("Laboratory Maniac"), "Demonic Consultation", "Tainted Pact"),
-            combo("Kiki-Jiki copies", req("Kiki-Jiki, Mirror Breaker"), "Zealous Conscripts", "Pestermite",
-                    "Deceiver Exarch", "Restoration Angel", "Felidar Guardian", "Village Bell-Ringer",
-                    "Combat Celebrant"),
-            combo("Splinter Twin copies", req("Splinter Twin"), "Pestermite", "Deceiver Exarch"),
-            combo("Dualcaster loop", req("Dualcaster Mage"), "Twinflame", "Heat Shimmer"),
-            combo("Scepter loop", req("Isochron Scepter", "Dramatic Reversal")),
-            combo("Basalt mana", req("Basalt Monolith"), "Rings of Brighthearth", "Power Artifact"),
-            combo("Heliod drain", req("Heliod, Sun-Crowned", "Walking Ballista")),
-            combo("Blood drain", req("Exquisite Blood"), "Sanguine Bond", "Vito, Thorn of the Dusk Rose"),
-            combo("Druid mana", req("Devoted Druid"), "Vizier of Remedies", "Melira, Sylvok Outcast"),
-            combo("Navigator mana", req("Deadeye Navigator"), "Peregrine Drake", "Palinchron", "Great Whale"),
-            combo("Palinchron mana", req("Palinchron", "Peregrine Drake")),
-            combo("Painter mill", req("Painter's Servant", "Grindstone")),
-            combo("Foundry thopters", req("Thopter Foundry", "Sword of the Meek")),
-            combo("Food Chain mana", req("Food Chain"), "Eternal Scourge", "Misthollow Griffin",
-                    "Squee, the Immortal"),
-            combo("Niv-Mizzet draw", req("Niv-Mizzet, Parun"), "Curiosity", "Ophidian Eye", "Tandem Lookout"),
-            combo("Firemind draw", req("Niv-Mizzet, the Firemind"), "Curiosity", "Ophidian Eye", "Tandem Lookout"),
-            combo("Sabertooth mana", req("Dockside Extortionist", "Temur Sabertooth")),
-            combo("Sieve turns", req("Time Sieve", "Thopter Assembly")),
-            combo("Worldgorger loop", req("Worldgorger Dragon"), "Animate Dead", "Dance of the Dead", "Necromancy")));
 
     // ------------------------------------------------------------------------------------------------- the plan
 
@@ -265,11 +217,13 @@ public final class CommanderPlan {
             deckNames.add(c.getName());
         }
 
+        // the combos of the lists whose two cards are both in the deck (the commander is part of it)
         final List<KnownCombo> found = new ArrayList<>();
-        for (final KnownCombo k : KNOWN) {
-            if (k.have(deckNames) >= k.needed()) {
-                found.add(k);
+        for (final AiCardLists.Pair pair : AiCardLists.combosIn(AiCardLists.deckKeys(deckNames))) {
+            if (found.size() >= MAX_KNOWN_COMBOS) {
+                break;
             }
+            found.add(new KnownCombo(pair));
         }
         final Set<String> cmdTypes = new LinkedHashSet<>();
         for (final Card cmd : cmds) {
@@ -467,12 +421,12 @@ public final class CommanderPlan {
         return all;
     }
 
-    /** What the cards of the player that are in play, in hand or in the command zone say about its combos. */
+    /** The normalized names of the cards of the player that are in play, in hand or in the command zone. */
     private static Set<String> available(final Player ai) {
         final Set<String> names = new LinkedHashSet<>();
         for (final ZoneType z : new ZoneType[] { ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command }) {
             for (final Card c : ai.getCardsIn(z)) {
-                names.add(c.getName());
+                names.addAll(AiCardLists.deckKeys(Collections.singletonList(c.getName())));
             }
         }
         return names;
