@@ -353,7 +353,7 @@ public final class NetworkChecksumUtil {
             eligibleProperties.add(prop);
         }
         eligibleProperties.removeAll(EnumSet.of(TrackableProperty.NeedsTapAnimation, TrackableProperty.NeedsUntapAnimation,
-                TrackableProperty.NeedsTransformAnimation, TrackableProperty.AvatarLifeDifference));
+                TrackableProperty.NeedsTransformAnimation, TrackableProperty.AvatarLifeDifference, TrackableProperty.WasDestroyed));
         return eligibleProperties;
     }
 
