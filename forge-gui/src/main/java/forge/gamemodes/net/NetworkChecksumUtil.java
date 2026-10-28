@@ -334,6 +334,8 @@ public final class NetworkChecksumUtil {
      *   <li>{@code IPaperCardType} — server-side card definition reference,
      *       not sent to or used by the client</li>
      * </ul>
+     * Also excludes the GUI animation hints, which the mobile GUI clears on its own
+     * copies after animating, so a client and a host without that GUI can differ.
      */
     public static Set<TrackableProperty> getEligibleProperties() {
         if (eligibleProperties != null) {
@@ -350,6 +352,8 @@ public final class NetworkChecksumUtil {
             }
             eligibleProperties.add(prop);
         }
+        eligibleProperties.removeAll(EnumSet.of(TrackableProperty.NeedsTapAnimation, TrackableProperty.NeedsUntapAnimation,
+                TrackableProperty.NeedsTransformAnimation, TrackableProperty.AvatarLifeDifference));
         return eligibleProperties;
     }
 
