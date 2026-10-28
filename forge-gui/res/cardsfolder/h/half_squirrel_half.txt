@@ -1,0 +1,10 @@
+Name:Half-Squirrel, Half-
+ManaCost:no cost
+Types:Creature Squirrel
+Colors:green
+PTModifier:-1/-0
+K:Augment:G:LeftSide
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.!token | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature enters,
+AI:RemoveDeck:Random
+DeckNeeds:Type$Host
+Oracle:Whenever a nontoken creature enters,\nAugment {G} ({G}, Reveal this card from your hand: Combine it with target host. Augment only as a sorcery.)

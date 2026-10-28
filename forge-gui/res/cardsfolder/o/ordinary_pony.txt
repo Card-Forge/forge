@@ -1,0 +1,16 @@
+Name:Ordinary Pony
+ManaCost:2 W
+Types:Host Creature Horse
+PT:2/3
+K:Augment Host:Pony:LeftSide:TrigBlink
+SVar:LeftSide:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBlink | TriggerDescription$ When this creature enters, you may exile target non-Horse creature you control that wasn’t put onto the battlefield with this ability this turn, then return it to the battlefield under its owner’s control.
+SVar:TrigBlink:DB$ ChangeZone | ValidTgts$ Creature.!Horse+YouCtrl+!IsImprinted | Origin$ Battlefield | Optional$ True | Destination$ Exile | TgtPrompt$ Select another target creature you control | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$  you may exile target non-Horse creature you control that wasn’t put onto the battlefield with this ability this turn, then return it to the battlefield under its owner’s control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Imprint$ True | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ Cleanup | Static$ True | Execute$ CleanImprinted
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Static$ True | Execute$ CleanImprinted
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCause$ SpellAbility.Self InvertValidCause$ True | ValidCard$ Card.IsImprinted | Static$ True | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:CleanImprinted:DB$ Cleanup | ClearImprinted$ True
+DeckHints:Keyword$Augment
+Oracle:When this creature enters, you may exile target non-Horse creature you control that wasn’t put onto the battlefield with this ability this turn, then return it to the battlefield under its owner’s control.

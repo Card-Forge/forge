@@ -29,6 +29,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Augment;
+import forge.game.keyword.AugmentHost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -392,6 +394,9 @@ public class CardFactory {
         c.getCurrentState().setBaseDefense(face.getDefense());
 
         c.setAttractionLights(face.getAttractionLights());
+
+        c.getCurrentState().setPowerModifier(face.getPowerModifier());
+        c.getCurrentState().setToughnessModifier(face.getToughnessModifier());
 
         // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
@@ -758,7 +763,11 @@ public class CardFactory {
         final Card top = card.getTopMergedCard();
         final CardStateName state = top.getCurrentStateName();
         CardState ret;
-        if (top.isCloned()) {
+        if (top.isAugmented()) {
+            top.removeAugmentedStates();
+            top.rebuildAugmentedStates(sa);
+            ret = top.getState(state).copy(card, sa);
+        } else if (top.isCloned()) {
             ret = top.getState(state).copy(card, sa);
         } else {
             ret = top.getOriginalState(state).copy(card, sa);
@@ -769,6 +778,10 @@ public class CardFactory {
             if (first) {
                 first = false;
                 continue;
+            }
+            if (c.isAugmented()) {
+                c.removeAugmentedStates();
+                c.rebuildAugmentedStates(sa);
             }
             ret.addAbilitiesFrom(c.getCurrentState(), false);
         }
@@ -784,4 +797,53 @@ public class CardFactory {
         return result;
     }
 
+    public static CardCloneStates getAugmentedCloneState(final Card host, final CardTraitBase sa) {
+        final Card augment = host.getAugmentedWith();
+        if (augment == null) {
+            return null;
+        }
+        final CardStateName state = host.getCurrentStateName();
+        CardState ret;
+        if (host.isCloned() || host.isMutated()) {
+            ret = host.getState(state).copy(host, sa);
+        } else {
+            ret = host.getOriginalState(state).copy(host, sa);
+        }
+        final CardState augmentState = augment.getCurrentState();
+        ret.addAbilitiesFrom(augmentState, false);
+        Augment augmentKeyword = (Augment) ret.getIntrinsicKeywords().stream()
+                .filter(k -> k.getKeyword() == Keyword.AUGMENT).findFirst().orElse(null);
+        if (augmentKeyword == null) {
+            return null;
+        }
+        AugmentHost hostKeyword = (AugmentHost) ret.getIntrinsicKeywords().stream()
+                .filter(k -> k.getKeyword() == Keyword.AUGMENT_HOST).findFirst().orElse(null);
+        if (hostKeyword == null) {
+            return null;
+        }
+        ret.setBasePower(ret.getBasePower() + Integer.parseInt(augmentState.getPowerModifier()));
+        ret.setBaseToughness(ret.getBaseToughness() + Integer.parseInt(augmentState.getToughnessModifier()));
+        ret.setBasePowerString(String.valueOf(ret.getBasePower()));
+        ret.setBaseToughnessString(String.valueOf(ret.getBaseToughness()));
+        String augmentName = augmentState.getName();
+        if (!augmentName.endsWith("-")) {
+            augmentName += " ";
+        }
+        ret.setName(augmentName + hostKeyword.getRightSideName());
+        ret.addColor(augmentState.getColor());
+        ret.addType(augmentState.getType().getCoreTypes().stream().map(CardType.CoreType::getName).collect(Collectors.toList()));
+        ret.addType(augmentState.getType().getSupertypes().stream().map(CardType.Supertype::getName).collect(Collectors.toList()));
+        ret.addType(augmentState.getType().getSubtypes());
+        ret.addRarity(augmentState.getRarity());
+        ret.addSetCode(augmentState.getSetCode());
+        ret.removeType(CardType.Supertype.Host);
+        hostKeyword.combine(augmentKeyword);
+        final CardCloneStates result = new CardCloneStates(host, sa);
+        result.put(state, ret);
+        // For face down, flipped, transformed, melded or MDFC card, also copy the original state to avoid crash
+        if (state != CardStateName.Original) {
+            result.add(host.getState(CardStateName.Original).copy(host, sa));
+        }
+        return result;
+    }
 }

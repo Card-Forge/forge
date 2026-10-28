@@ -1,0 +1,8 @@
+Name:Really Epic Punch
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | Duration$ Permanent | ConditionDefined$ Targeted | ConditionPresent$ Host,Creature.withAugment | AILogic$ Fight | SubAbility$ DBFight | SpellDescription$ Target creature you control gets +2/+2 if it’s a host or has augment. Then it fights target creature you don’t control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+AI:RemoveDeck:Random
+DeckHints:Type$Host
+Oracle:Target creature you control gets +2/+2 if it’s a host or has augment. Then it fights target creature you don’t control.

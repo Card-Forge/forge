@@ -1051,7 +1051,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             sPt = state.getPower() + "/" + state.getToughness() +
                     " (" + state.getLoyalty() + ")";
         }
-        else if (state.isCreature()) {
+        else if (state.isAugment()) {
+            sPt = state.getPowerModifier() + "/" + state.getToughnessModifier();
+        } else if (state.isCreature()) {
             sPt = state.getPower() + "/" + state.getToughness();
         }
         else if (state.isVehicle()) {

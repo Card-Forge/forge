@@ -2622,6 +2622,19 @@ public class CardFactoryUtil {
             origSA.setAftermath(true);
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
             // The Exile part is done by the System itself
+        } else if (keyword.startsWith("Augment")) {
+            final String[] k = keyword.split(":");
+            if (!k[0].equals("Augment")) {
+                return;
+            }
+            final String manacost = k[1];
+
+            final String effect = "AB$ Augment | Cost$ " + manacost + " | ValidTgts$ Host | ActivationZone$ Hand"
+                    + "| SorcerySpeed$ True | PrecostDesc$ Augment | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | StackDescription$ SpellDescription | SpellDescription$ (" + inst.getReminderText() + ")";;
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Aura swap")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

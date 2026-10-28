@@ -579,7 +579,11 @@ public class CardRenderer {
         }
         String type = CardDetailUtil.formatCardType(card.getCurrentState(), true);
         if (cardCurrentState.isCreature()) { //include P/T or Loyalty at end of type
-            type += " (" + power + " / " + toughness + ")";
+            if (cardCurrentState.isAugment()) {
+                type += " (" + cardCurrentState.getPowerModifier() + " / " + cardCurrentState.getToughnessModifier() + ")";
+            } else {
+                type += " (" + power + " / " + toughness + ")";
+            }
         } else if (cardCurrentState.isPlaneswalker()) {
             type += " (" + loyalty + ")";
         } else if (cardCurrentState.isVehicle()) {
@@ -1117,8 +1121,11 @@ public class CardRenderer {
 
     private static void drawPtBox(Graphics g, CardView card, CardStateView details, Color color, float x, float y, float w, float h) {
         listItemPtPieces.clear();
-
-        if (details.isCreature()) {
+        if (details.isAugment()) {
+            listItemPtPieces.add(String.valueOf(details.getPowerModifier()));
+            listItemPtPieces.add("/");
+            listItemPtPieces.add(String.valueOf(details.getToughnessModifier()));
+        } else if (details.isCreature()) {
             listItemPtPieces.add(String.valueOf(details.getPower()));
             listItemPtPieces.add("/");
             listItemPtPieces.add(String.valueOf(details.getToughness()));

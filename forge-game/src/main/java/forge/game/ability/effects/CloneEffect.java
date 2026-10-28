@@ -10,6 +10,7 @@ import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
@@ -188,6 +189,23 @@ public class CloneEffect extends SpellAbilityEffect {
                             cloneCard.addImprintedCards(IterableUtil.filter(clonedImprinted, CardPredicates.ownerLives()));
                             cloneCard.addRemembered(IterableUtil.filter(clonedRemembered, Player.class));
                             cloneCard.addRemembered(IterableUtil.filter(IterableUtil.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
+                            if (cloneCard.isMutated()) {
+                                cloneCard.removeMutatedStates();
+                                cloneCard.rebuildMutatedStates(sa);
+                            //if its both augmented and mutated, mutate takes care of it
+                            } else if (cloneCard.isAugmented()) {
+                                cloneCard.removeAugmentedStates();
+                                cloneCard.rebuildAugmentedStates(sa);
+                            }
+                            //the augmentation failed and the augment pops off
+                            if (cloneCard.getAugmentedWith() != null && !cloneCard.isAugmented()) {
+                                Card augment = cloneCard.getAugmentedWith();
+                                cloneCard.attachAugment(null);
+                                Zone zone = cloneCard.getZone();
+                                augment.getZone().remove(augment);
+                                zone.add(augment);
+                                augment.setZone(zone);
+                            }
                             cloneCard.updateStateForView();
                             game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                         }

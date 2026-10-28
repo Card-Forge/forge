@@ -143,6 +143,11 @@ public class TrackableTypes {
         return (TrackableType<E>)enumTypes.computeIfAbsent(enumType, (t) -> new TrackableType<E>(null));
     }
 
+    @SuppressWarnings("unchecked")
+    public static <E extends Enum<E>> TrackableType<List<E>> EnumListType(final Class<E> enumType) {
+        return (TrackableType<List<E>>)enumTypes.computeIfAbsent(enumType, (t) -> new TrackableType<List<E>>(null));
+    }
+
     public static final TrackableObjectType<CardView> CardViewType = new TrackableObjectType<CardView>();
 
     public static final TrackableType<IPaperCard> IPaperCardType = new TrackableType<IPaperCard>(null);

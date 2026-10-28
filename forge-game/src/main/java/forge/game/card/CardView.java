@@ -29,6 +29,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
@@ -761,6 +762,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.PreparedSpell, CardView.get(c.getPreparedSpell()));
     }
 
+    public CardView getAugment() {
+        return get(TrackableProperty.Augment);
+    }
+    void updateAugment(Card c) {
+        set(TrackableProperty.Augment, CardView.get(c.getAugmentedWith()));
+    }
+
     public FCollectionView<CardView> getImprintedCards() {
         return Objects.requireNonNullElse(get(TrackableProperty.ImprintedCards), FCollection.getEmpty());
     }
@@ -942,6 +950,11 @@ public class CardView extends GameEntityView {
         String mergedCards = get(TrackableProperty.MergedCards);
         if (!mergedCards.isEmpty()) {
             sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
+        }
+
+        CardView augmentedWith = getAugment();
+        if (augmentedWith != null) {
+            sb.append("\r\n\r\nAugmented With: ").append(augmentedWith);
         }
 
         return sb.toString().trim()
@@ -1533,6 +1546,15 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.AttractionLights, c.getAttractionLights());
         }
 
+        public String getPowerModifier() { return get(TrackableProperty.PowerModifier); }
+        void updatePowerModifier(CardState c) {
+            set(TrackableProperty.PowerModifier, c.getPowerModifier());
+        }
+        public String getToughnessModifier() { return get(TrackableProperty.ToughnessModifier); }
+        void updateToughnessModifier(CardState c) {
+            set(TrackableProperty.ToughnessModifier, c.getToughnessModifier());
+        }
+
         public boolean hasPrintedPT() {
             return get(TrackableProperty.HasPrintedPT);
         }
@@ -1543,15 +1565,44 @@ public class CardView extends GameEntityView {
         public String getSetCode() {
             return get(TrackableProperty.SetCode);
         }
+        public String getAdditionalSetCodes() {
+            List<String> allSetCode = get(TrackableProperty.AdditionalSetCodes);
+            if (allSetCode != null) {
+                return String.join(", ", allSetCode);
+            }
+            return null;
+        }
+        public boolean hasAdditionalSetCodes() {
+            List<String> allSetCodes = get(TrackableProperty.AdditionalSetCodes);
+            return allSetCodes != null && !allSetCodes.isEmpty();
+        }
         void updateSetCode(CardState c) {
             set(TrackableProperty.SetCode, c.getSetCode());
+            if (c.getAdditionalSetCodes() != null) {
+                set(TrackableProperty.AdditionalSetCodes, c.getAdditionalSetCodes());
+            }
         }
 
         public CardRarity getRarity() {
             return get(TrackableProperty.Rarity);
         }
+        public String getAdditionalRarities() {
+            List<CardRarity> allRarities = get(TrackableProperty.AdditionalRarities);
+            if (allRarities != null) {
+                List<String> stringList = allRarities.stream().map(CardRarity::getLongName).collect(Collectors.toList());
+                return String.join(", ", stringList);
+            }
+            return null;
+        }
+        public boolean hasAdditionalRarities() {
+            List<CardRarity> allRarities = get(TrackableProperty.AdditionalRarities);
+            return allRarities != null && !allRarities.isEmpty();
+        }
         void updateRarity(CardState c) {
             set(TrackableProperty.Rarity, c.getRarity());
+            if (c.getAdditionalRarities() != null) {
+                set(TrackableProperty.AdditionalRarities, c.getAdditionalRarities());
+            }
         }
 
         private int foilIndexOverride = -1;
@@ -1710,6 +1761,7 @@ public class CardView extends GameEntityView {
         public boolean isSorcery() {
             return getType().isSorcery();
         }
+        public boolean isAugment() {return hasKeyword(Keyword.AUGMENT) && !hasKeyword(Keyword.AUGMENT_HOST); }
 
         @Override
         public String getTranslationKey() {

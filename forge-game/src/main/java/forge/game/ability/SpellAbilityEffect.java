@@ -11,6 +11,7 @@ import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.effects.AugmentEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
@@ -302,7 +303,7 @@ public abstract class SpellAbilityEffect {
         if (resultUnique == null)
             return null;
         if (sa.hasParam("IncludeAllComponentCards")) {
-            for (Card c : resultUnique) {
+            for (Card c : resultUnique.clone()) {
                 resultUnique.addAll(c.getAllComponentCards(false));
             }
         }
@@ -865,6 +866,7 @@ public abstract class SpellAbilityEffect {
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
                 moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
+                    CardCollection tgtCards = new CardCollection();
                     for (Card c : cell.getValue()) {
                         // check if card is still in the until host leaves play list
                         if (!untilCards.contains(c)) {
@@ -897,8 +899,26 @@ public abstract class SpellAbilityEffect {
                             // Delayed Trigger should only happen once, no need for cleanup?
                             trigHandler.registerThisTurnDelayedTrigger(trig);
                         }
+                        tgtCards.add(newCard);
+                    }
+                    if (cell.getRowKey().equals(ZoneType.Battlefield)) {
+                        // Flicker it and the whole Host and Augment return connected as a singular creature.
+                        for (Card c: tgtCards.threadSafeIterable()) {
+                            Card augment = c.getAugmentedWith();
+                            if (augment != null && tgtCards.contains(augment)) {
+                                Card augmentedCard = AugmentEffect.augment(sa, c, augment);
+                                if (augmentedCard != null) {
+                                    tgtCards.remove(c);
+                                    tgtCards.remove(augment);
+                                    tgtCards.add(augmentedCard);
+                                }
+                            }
+                        }
+                        moveParams.put(AbilityKey.SimultaneousETB, tgtCards);
+                    }
+                    for (Card c: tgtCards) {
                         // no cause there?
-                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, 0, null, moveParams);
+                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), c, 0, null, moveParams);
                         game.getUntilHostLeavesPlayTriggerList().put(cell.getColumnKey(), cell.getRowKey(), movedCard);
                     }
                 }

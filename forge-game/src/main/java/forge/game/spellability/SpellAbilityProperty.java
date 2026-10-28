@@ -140,6 +140,8 @@ public class SpellAbilityProperty {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
+        } else if (property.equals("Augment")) {
+            return sa.isKeyword(Keyword.AUGMENT);
         } else if (property.equals("SameKeyword")) {
             if (sa.getKeyword() == null || spellAbility == null) {
                 return false;
