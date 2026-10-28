@@ -7,7 +7,7 @@ T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell.OppCtrl | Tr
 SVar:TrigChoose:DB$ Charm | Choices$ DBDamage,DBExilePlay
 SVar:DBDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
 SVar:DBExilePlay:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.
-SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBEffect
+SVar:DBChoose:DB$ ChooseCard | Mandatory$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCard | ForgetOnMoved$ Exile | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
 SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play this card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
