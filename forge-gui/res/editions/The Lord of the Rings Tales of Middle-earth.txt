@@ -880,4 +880,4 @@ A-246 M A-The One Ring @Veli Nyström
 12 c_a_treasure_sac @Valera Lutfullina
 
 [other]
-13 the_ring @Viko Menezes
+H13 the_ring @Viko Menezes
