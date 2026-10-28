@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -29,6 +30,7 @@ import org.jupnp.UpnpServiceConfiguration;
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.tutorial.TutorialTarget;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListChooser;
 import forge.gui.FThreads;
@@ -386,9 +388,43 @@ public class GuiDesktop implements IGuiBase {
         Singletons.getView().getFrame().validate();
     }
 
+    /** The match screen most recently created; the tutorial draws its note and outline on it. */
+    private volatile CMatchUI currentMatchUI;
+
     @Override
     public IGuiGame getNewGuiGame() {
-        return new CMatchUI();
+        final CMatchUI matchUI = new CMatchUI();
+        currentMatchUI = matchUI;
+        return matchUI;
+    }
+
+    @Override
+    public boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        final CMatchUI matchUI = currentMatchUI;
+        if (matchUI == null || matchUI.getGameView() == null) {
+            return false; // nothing to draw on; the caller shows a dialog instead
+        }
+        FThreads.invokeInEdtNowOrLater(() -> matchUI.showTutorialCoach(title, text, nextLabel, onNext));
+        return true;
+    }
+
+    @Override
+    public void hideCoach() {
+        final CMatchUI matchUI = currentMatchUI;
+        if (matchUI != null) {
+            FThreads.invokeInEdtNowOrLater(matchUI::hideTutorialCoach);
+        }
+    }
+
+    @Override
+    public void highlightGui(final Collection<TutorialTarget> targets) {
+        final CMatchUI matchUI = currentMatchUI;
+        if (matchUI == null) {
+            return;
+        }
+        final EnumSet<TutorialTarget> copy = EnumSet.noneOf(TutorialTarget.class);
+        copy.addAll(targets);
+        FThreads.invokeInEdtNowOrLater(() -> matchUI.highlightTutorial(copy));
     }
 
     @Override

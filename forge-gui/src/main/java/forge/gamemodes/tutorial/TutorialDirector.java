@@ -24,6 +24,7 @@ import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -104,11 +105,6 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     private final Player opp;
     private final boolean watch;
     private final TutorialGameController gate;
-    /**
-     * True when this GUI shows one phase label instead of a box per phase (the compact mobile layout), so the notes
-     * that point at "the phase boxes" must point at the label instead.
-     */
-    private final boolean unifiedPhase;
     private final int oppStartLife;
     /** Phases already explained, as "turn:phase"; only touched by the director thread. */
     private final Set<String> explained = new HashSet<>();
@@ -130,7 +126,6 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         opp = other;
         watch = mode == HowToPlay.Mode.WATCH;
         gate = new TutorialGameController(human0, watch);
-        unifiedPhase = GuiBase.getInterface().usesUnifiedPhaseLabel();
         oppStartLife = opp.getLife();
     }
 
@@ -157,9 +152,14 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         return Localizer.getInstance().getMessage(key, args);
     }
 
+    /** Which match screen layout the player is looking at right now (they may turn the device mid-tutorial). */
+    private TutorialLayout layout() {
+        return GuiBase.getInterface().getTutorialLayout();
+    }
+
     /** The key of a text that differs between the per-phase boxes and the unified phase label. */
     private String phaseKey(final String key) {
-        return unifiedPhase ? key + "Unified" : key;
+        return layout() == TutorialLayout.MOBILE_COMPACT_UNIFIED ? key + "Unified" : key;
     }
 
     @Override
@@ -172,6 +172,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             netLog.error(e, "The tutorial stopped");
         } finally {
             clearSpotlight();
+            GuiBase.getInterface().highlightGui(Collections.emptySet());
             GuiBase.getInterface().hideCoach();
             gate.setLocked(false);
         }
@@ -189,6 +190,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             final PlayerView pv = me.getView();
             FThreads.invokeInEdtNowOrLater(() -> human.getGui().setGameController(pv, gate));
         }
+        // First the screen itself (where things are, what the controls do), then the practice game that uses them.
         tour();
         if (!alive()) {
             return;
@@ -211,26 +213,65 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         winLesson();
     }
 
-    /** A short look around the board: highlighted cards show what each page is about. */
+    /** One stop of the interface tour: what is pointed at, and the language keys of its text. */
+    private record TourStop(String key, EnumSet<TutorialTarget> targets) {
+        static TourStop of(final String key, final TutorialTarget first, final TutorialTarget... rest) {
+            return new TourStop(key, EnumSet.of(first, rest));
+        }
+    }
+
+    private static final List<TourStop> TOUR = List.of(
+            TourStop.of("Players", TutorialTarget.YOUR_PLAYER, TutorialTarget.OPPONENT),
+            TourStop.of("Hand", TutorialTarget.HAND),
+            TourStop.of("Battlefield", TutorialTarget.BATTLEFIELD),
+            TourStop.of("Zones", TutorialTarget.ZONES),
+            TourStop.of("Stack", TutorialTarget.STACK),
+            TourStop.of("Phases", TutorialTarget.PHASES),
+            TourStop.of("Prompt", TutorialTarget.PROMPT, TutorialTarget.BUTTONS),
+            TourStop.of("Menu", TutorialTarget.MENU),
+            TourStop.of("CardInfo", TutorialTarget.CARD_INFO));
+
+    /**
+     * Welcomes the player and walks round the screen: each part is outlined while its note explains what it is for
+     * and how to use it on this player's layout (desktop, mobile upright, mobile sideways, compact). The practice
+     * game comes after this, so the controls are known before they are needed.
+     */
     private void tour() throws InterruptedException {
-        if (!watch && !SOptionPane.showConfirmDialog(t("msgTutTourSkip"), t("lblTutTourTitle"),
-                t("btnTutTourShow"), t("btnTutTourSkip"), false)) {
+        if (!watch && !SOptionPane.showConfirmDialog(t("msgTutTourAsk"), t("lblTutTourTitle"),
+                t("btnTutTourShow"), t("btnTutTourSkip"), true)) {
             return;
         }
 
-        say(t("lblTutTour1"), t("msgTutTour1", STARTING_LIFE, oppStartLife));
+        say(t("lblTutWelcome"), t("msgTutWelcome") + "\n\n" + t(watch ? "msgTutWelcomeWatch" : "msgTutWelcomeTry"));
 
-        spotlightAndSay(zone(me, ZoneType.Hand), t("lblTutTour2"), t("msgTutTour2"));
+        final int total = TOUR.size();
+        for (int i = 0; i < total && alive(); i++) {
+            final TourStop stop = TOUR.get(i);
+            final String title = t("lblTutGui" + stop.key()) + " " + t("lblTutTourProgress", i + 1, total);
+            pointAndSay(stop.targets(), title, guiText("msgTutGui" + stop.key()));
+        }
+        if (!alive()) {
+            return;
+        }
 
-        final List<Card> battlefield = new ArrayList<>(zone(me, ZoneType.Battlefield));
-        battlefield.addAll(zone(opp, ZoneType.Battlefield));
-        spotlightAndSay(battlefield, t("lblTutTour3"), t("msgTutTour3"));
+        say(t("lblTutPlayTitle"), t("msgTutPlayIntro") + "\n\n" + t(watch ? "msgTutTour6Watch" : "msgTutTour6Try"));
+    }
 
-        say(t("lblTutTour4"), t("msgTutTour4"));
+    /** A tour text plus, where this layout has one, the extra line about where that part is and how to use it here. */
+    private String guiText(final String key) {
+        final String base = t(key);
+        final String extra = Localizer.getInstance().getMessageorUseDefault(key + layout().suffix(), "");
+        return extra.isEmpty() ? base : base + "\n\n" + extra;
+    }
 
-        say(t("lblTutTour5"), t(phaseKey("msgTutTour5")));
-
-        say(t("lblTutTour6"), t("msgTutTour6") + "\n\n" + t(watch ? "msgTutTour6Watch" : "msgTutTour6Try"));
+    /** Outlines parts of the screen while the note about them is up. */
+    private void pointAndSay(final EnumSet<TutorialTarget> targets, final String title, final String text) {
+        GuiBase.getInterface().highlightGui(targets);
+        try {
+            say(title, text);
+        } finally {
+            GuiBase.getInterface().highlightGui(Collections.emptySet());
+        }
     }
 
     private boolean landLesson() throws InterruptedException {

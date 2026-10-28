@@ -12,6 +12,8 @@ import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
 import forge.game.GameView;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.tutorial.TutorialLayout;
+import forge.gamemodes.tutorial.TutorialTarget;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadService;
@@ -24,7 +26,6 @@ import forge.localinstance.skin.ISkinImage;
 import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
-import forge.screens.match.views.VPlayerPanel;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.GuiDownloader;
 import forge.sound.*;
@@ -33,6 +34,7 @@ import forge.toolbox.GuiChoose;
 import forge.util.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -147,12 +149,23 @@ public class GuiMobile implements IGuiBase {
         return true;
     }
     @Override
-    public boolean usesUnifiedPhaseLabel() {
-        // TODO: use the real names from the unified phase label patch (compact landscape check + its preference)
-        return Forge.getCurrentScreen() instanceof MatchScreen
-            && VPlayerPanel.isCompactLayout()
-            && VPlayerPanel.isUnifiedPhase();
+    public TutorialLayout getTutorialLayout() {
+        if (Forge.getCurrentScreen() instanceof MatchScreen screen) {
+            return screen.getTutorialLayout();
+        }
+        return Forge.isLandscapeMode() ? TutorialLayout.MOBILE_LANDSCAPE : TutorialLayout.MOBILE_PORTRAIT;
     }
+
+    @Override
+    public void highlightGui(final Collection<TutorialTarget> targets) {
+        final List<TutorialTarget> copy = new ArrayList<>(targets);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (Forge.getCurrentScreen() instanceof MatchScreen screen) {
+                screen.highlightTutorial(copy);
+            }
+        });
+    }
+
     @Override
     public void hideCoach() {
         FThreads.invokeInEdtNowOrLater(() -> {
