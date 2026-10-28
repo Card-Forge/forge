@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Legendary Creature Human Pilot
 PT:2/2
 S:Mode$ TapPowerValue | ValidSA$ Activated.Station+Spacecraft,Activated.Crew+Vehicle | ValidCard$ Card.Self | Value$ X | Description$ NICKNAME stations Spacecraft and crews Vehicles as though his power were tripled.
-#SVar to be added
+SVar:X:Count$CardPower/Twice
 Oracle:Sulu stations Spacecraft and crews Vehicles as though his power were tripled.
