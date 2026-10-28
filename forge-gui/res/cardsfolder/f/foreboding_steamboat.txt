@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Artifact Vehicle
 PT:5/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCataclysm | TriggerDescription$ When CARDNAME enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until CARDNAME leaves the battlefield.
-SVar:ChooseArtf:DB$ ChooseCard | Mandatory$ True | Defined$ Player | Amount$ 2 | ControlledByPlayer$ Chooser | Choices$ Creature.!token+nonVehicle | ChoiceTitle$ Choose two nontoken, non-Vehicle creatures you control | SubAbility$ ExileChosen
+SVar:TrigCataclysm:DB$ ChooseCard | Mandatory$ True | Defined$ Player | Amount$ 2 | ControlledByPlayer$ Chooser | Choices$ Creature.!token+nonVehicle | ChoiceTitle$ Choose two nontoken, non-Vehicle creatures you control | SubAbility$ ExileChosen
 SVar:ExileChosen:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.
