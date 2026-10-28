@@ -1,0 +1,9 @@
+Name:Collective Override
+ManaCost:2 W U
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare X GE1.2.1 | Choices$ DBToken,DBDraw | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_1_1_a_borg | SpellDescription$ Create a 1/1 colorless Borg artifact creature token for each attacking creature.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SpellDescription$ Draw a card for each attacking creature.
+SVar:X:Count$Valid Card.IsCommander+YouCtrl
+SVar:Y:Count$Valid Creature.attacking
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Create a 1/1 colorless Borg artifact creature token for each attacking creature.\n• Draw a card for each attacking creature.
