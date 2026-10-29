@@ -18,6 +18,9 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class DrawEffect extends SpellAbilityEffect {
+    public static final String[] OPTIONAL_PARAMS = {
+        "Defined", "IfDesc", "NumCards", "NumCardsDesc", "OptionalDecider", "Reveal", "Upto",
+    };
 
     @Override
     public boolean movesCardToOrFromLibrary(final SpellAbility sa) {
