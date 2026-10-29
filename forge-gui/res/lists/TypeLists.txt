@@ -57,6 +57,7 @@ Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
 Borg:Borg
+Brikar:Brikars
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
