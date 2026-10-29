@@ -220,6 +220,9 @@ public final class TrackableSerializer implements IHasForgeLog {
      * Returns null when the args hold no card id.
      */
     static byte[] encodeArgs(Object[] args, Tracker tracker, int consumerId) throws IOException {
+        if (!mayHoldCardRef(args)) {
+            return null;
+        }
         ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
         try (CObjectOutputStream out = new CObjectOutputStream(baos, true, tracker, consumerId, false)) {
             out.writeObject(args);
@@ -228,6 +231,17 @@ public final class TrackableSerializer implements IHasForgeLog {
             }
         }
         return baos.toByteArray();
+    }
+
+    private static boolean mayHoldCardRef(Object[] args) {
+        for (Object arg : args) {
+            // A PlayerView is always sent as an id, and an enum by name only
+            if (!(arg == null || arg instanceof String || arg instanceof Number || arg instanceof Boolean
+                    || arg instanceof Enum || arg instanceof PlayerView)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Object[] decodeArgs(byte[] data, Tracker tracker) throws IOException, ClassNotFoundException {

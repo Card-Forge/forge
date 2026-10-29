@@ -66,6 +66,20 @@ public class NetworkReferenceResolutionShould {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
+    public void resolveACardInAListAfterEarlierDeltas() throws Exception {
+        CardView onHost = new CardView(CARD_ID, host);
+        onHost.registerConsumer(CONSUMER);
+        client.putObj(TrackableTypes.CardViewType, CARD_ID, new CardView(CARD_ID, client));
+
+        GuiGameEvent received = send(new GuiGameEvent(ProtocolMethod.showRevealedCards, List.of(onHost)));
+        CardView replacement = new CardView(CARD_ID, client);
+        client.putObj(TrackableTypes.CardViewType, CARD_ID, replacement);
+
+        assertThat((List<Object>) TrackableSerializer.decodeArgs(received.getEncodedObjects(), client)[0]).containsExactly(replacement);
+    }
+
+    @Test
     public void resolveAHostMessageWithoutACardWhenTheClientReadsIt() throws Exception {
         PlayerView onClient = new PlayerView(PLAYER_ID, client);
         client.putObj(TrackableTypes.PlayerViewType, PLAYER_ID, onClient);
