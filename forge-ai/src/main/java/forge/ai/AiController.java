@@ -1885,6 +1885,13 @@ public class AiController {
         useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"))
                 || deckPlan(player).combos.wantsCyclingPriority(player);
 
+        if (flatMonteCarloActive() && game.getStack().isEmpty()) {
+            final SpellAbility sure = deckPlan(player).combos.sureMadnessPlay(player, saList);
+            if (sure != null) {
+                return sure; // safe and sure: no rollouts needed
+            }
+        }
+
         SpellAbility chosenSa;
         lastFlatMcResult = null;
         if (reactiveMode != null) {

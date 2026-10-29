@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.card.mana.ManaCost;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -18,6 +20,9 @@ import forge.game.cost.CostExile;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordWithCost;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -318,9 +323,11 @@ public final class ComboPlan {
             return false;
         }
         final Combo mad = find(Kind.MADNESS);
-        if (mad != null && isDiscardOutletPlay(sa) && madnessReady(sa.getActivatingPlayer() != null
-                ? sa.getActivatingPlayer() : sa.getHostCard().getController(), mad)) {
-            return true; // discarding a madness card is the play: it comes back as a cheap spell
+        if (mad != null && isDiscardOutletPlay(sa)) {
+            final Player who = sa.getActivatingPlayer() != null ? sa.getActivatingPlayer() : sa.getHostCard().getController();
+            if (madnessWindowOpen(who, sa) && !castableMadness(who, sa).isEmpty()) {
+                return true; // the right moment, and the madness card can really be cast afterwards
+            }
         }
         final boolean mass = find(Kind.MASS_REANIMATION) != null;
         if (!mass && find(Kind.REANIMATOR) == null) {
@@ -350,8 +357,9 @@ public final class ComboPlan {
      */
     public boolean fuelFirst(final Player player) {
         final Combo mad = find(Kind.MADNESS);
-        if (mad != null && madnessReady(player, mad)) {
-            return true;
+        if (mad != null && madnessReady(player, mad) && player.getGame().getPhaseHandler().isPlayerTurn(player)
+                && player.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+            return true; // only the Main 2 outlets are brought forward
         }
         if (find(Kind.MASS_REANIMATION) != null) {
             return wantsCyclingPriority(player);
@@ -848,25 +856,142 @@ public final class ComboPlan {
      * cost right away: the best one that can be paid for. Null when there is none, and the normal choice is made.
      */
     public Card madnessDiscard(final Player ai, final CardCollection valid) {
-        final Combo combo = find(Kind.MADNESS);
-        if (combo == null || ai == null || valid == null) {
+        if (find(Kind.MADNESS) == null || ai == null || valid == null) {
             return null;
         }
-        final int mana = forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai, true);
         Card best = null;
         int bestScore = -1;
         for (final Card c : valid) {
-            if (!c.hasKeyword(Keyword.MADNESS)) {
+            if (!c.hasKeyword(Keyword.MADNESS) || !canCastForMadness(ai, c)) {
                 continue;
             }
-            final int m = madnessCost(c);
-            if (m < 0 || m > mana) {
+            final int v = madnessValue(c);
+            if (v > bestScore) { bestScore = v; best = c; }
+        }
+        return best;
+    }
+
+    private static int madnessValue(final Card c) {
+        return c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 100 + 20 * c.getCMC();
+    }
+
+    private static ManaCost madnessMana(final Card c) {
+        try {
+            for (final KeywordInterface ki : c.getKeywords(Keyword.MADNESS)) {
+                if (ki instanceof KeywordWithCost) {
+                    final forge.game.cost.Cost cost = ((KeywordWithCost) ki).getCost();
+                    if (cost != null) {
+                        return cost.getTotalMana();
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // unreadable: no opinion
+        }
+        return null;
+    }
+
+    /** The madness cost alone can be paid with the untapped sources, colours included. */
+    private static boolean canCastForMadness(final Player ai, final Card c) {
+        final ManaCost m = madnessMana(c);
+        if (m == null) {
+            return false;
+        }
+        if (m.isZero()) {
+            return true;
+        }
+        final SpellAbility sa = c.getFirstSpellAbility();
+        if (sa == null) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        return forge.ai.ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(m), sa, ai, false);
+    }
+
+    private static boolean isInstantSpeed(final SpellAbility sa) {
+        final Card h = sa.getHostCard();
+        if (sa.isSpell()) {
+            return h.isInstant() || h.hasKeyword(Keyword.FLASH);
+        }
+        return !sa.getRestrictions().isSorcerySpeed();
+    }
+
+    /** How many cards the outlet throws away (99 for "your hand"): only single discards are planned. */
+    private static int discardAmount(final SpellAbility sa) {
+        if (sa.isActivatedAbility() && sa.getPayCosts() != null) {
+            final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+            if (d != null) {
+                return "Hand".equals(d.getType()) ? 99 : d.getAbilityAmount(sa);
+            }
+        }
+        return 1;
+    }
+
+    /**
+     * When the AI may use a discard outlet for madness. Instant-speed outlets wait for the opponent's end step (the
+     * mana would be wasted anyway, the card dodges sorcery-speed removal, and the opponent has no time to answer);
+     * sorcery-speed outlets go in the AI's own Main 2. Never with something on the stack, never aimed at anything.
+     */
+    public boolean madnessWindowOpen(final Player ai, final SpellAbility outlet) {
+        if (ai == null || outlet == null || outlet.usesTargeting() || !ai.getGame().getStack().isEmpty()) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai)) {
+            return ph.is(PhaseType.MAIN2) && !isInstantSpeed(outlet);
+        }
+        return ph.is(PhaseType.END_OF_TURN) && isInstantSpeed(outlet);
+    }
+
+    /** Madness cards in hand whose madness cost can be paid on top of the outlet's own mana cost. */
+    CardCollection castableMadness(final Player ai, final SpellAbility outlet) {
+        final CardCollection out = new CardCollection();
+        if (discardAmount(outlet) != 1) {
+            return out;
+        }
+        final ManaCost outletMana = outlet.getPayCosts() == null ? ManaCost.NO_COST : outlet.getPayCosts().getTotalMana();
+        outlet.setActivatingPlayer(ai);
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            final ManaCost m = c == outlet.getHostCard() || !c.hasKeyword(Keyword.MADNESS) ? null : madnessMana(c);
+            if (m == null) {
                 continue;
             }
-            final int v = c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 100 + 20 * c.getCMC();
-            if (v > bestScore) {
-                bestScore = v;
-                best = c;
+            final ManaCostBeingPaid total = new ManaCostBeingPaid(outletMana);
+            total.addManaCost(m);
+            if (forge.ai.ComputerUtilMana.canPayManaCost(total, outlet, ai, false)) {
+                out.add(c);
+            }
+        }
+        return out;
+    }
+
+    /** A discard cost may be paid with a madness card only inside the window (see checkDiscardCost). */
+    public boolean madnessDiscardAllowed(final Player ai, final SpellAbility sa) {
+        return find(Kind.MADNESS) == null || madnessWindowOpen(ai, sa);
+    }
+
+    /** The outlet play that is safe and sure right now, or null. The AI plays it without asking Monte Carlo. */
+    public SpellAbility sureMadnessPlay(final Player ai, final List<SpellAbility> candidates) {
+        if (find(Kind.MADNESS) == null || ai == null || candidates == null) {
+            return null;
+        }
+        SpellAbility best = null;
+        int bestValue = -1;
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || !isDiscardOutletPlay(sa)) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            if (!madnessWindowOpen(ai, sa)) {
+                continue;
+            }
+            int value = -1;
+            for (final Card c : castableMadness(ai, sa)) {
+                value = Math.max(value, madnessValue(c));
+            }
+            if (value > bestValue && sa.canPlay() && ComputerUtilCost.canPayCost(sa, ai, false)) {
+                bestValue = value;
+                best = sa;
             }
         }
         return best;
