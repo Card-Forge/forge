@@ -19,8 +19,7 @@ public class StaticAbilityCantPutCounter {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPutCounter)) {
                     continue;
                 }
-                if (stAb.getHostCard().isInPlay() && params != null && params.get(AbilityKey.InternalTriggerTable) instanceof CardZoneTable czt
-                        && !czt.getLastStateBattlefield().contains(stAb.getHostCard())) {
+                if (CardZoneTable.isEntering(stAb.getHostCard(), params)) {
                     continue;
                 }
                 if (applyCantPutCounter(stAb, card, type)) {

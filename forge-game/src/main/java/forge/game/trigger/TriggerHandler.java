@@ -598,6 +598,11 @@ public class TriggerHandler {
     public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
         List<Trigger> trigger = Lists.newArrayList();
         for (final Trigger t : activeTriggers) {
+            // CR 603.10a a permanent still entering wasn't there to see what left before it
+            if (t.looksBackInTime() && runParams.get(AbilityKey.Cause) instanceof SpellAbility cause
+                    && CardZoneTable.isEntering(t.getHostCard(), cause)) {
+                continue;
+            }
             if (canRunTrigger(t, mode, runParams)) {
                 trigger.add(t);
             }

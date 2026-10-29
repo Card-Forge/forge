@@ -6,6 +6,7 @@ package forge.game.card;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -19,6 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 
 import java.util.Map;
+import java.util.Set;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist
@@ -95,6 +97,27 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     @Override
     protected Table<ZoneType, ZoneType, CardCollection> delegate() {
         return dataMap;
+    }
+
+    // CR 614.12 the other permanents that entered in this event
+    public Set<Card> enteredWith(final Card c) {
+        final Set<Card> entered = Sets.newHashSet();
+        if (containsColumn(ZoneType.Battlefield)) {
+            Iterables.addAll(entered, Iterables.concat(column(ZoneType.Battlefield).values()));
+            entered.remove(c);
+        }
+        return entered;
+    }
+
+    // CR 614.12 a permanent entering in this event doesn't have its abilities yet
+    public boolean isEntering(final Card c) {
+        return lastStateBattlefield != CardCollection.EMPTY && c.isInPlay() && !lastStateBattlefield.contains(c);
+    }
+    public static boolean isEntering(final Card c, final Map<AbilityKey, Object> params) {
+        return params != null && params.get(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table && table.isEntering(c);
+    }
+    public static boolean isEntering(final Card c, final SpellAbility sa) {
+        return sa != null && sa.getReplacingObject(AbilityKey.InternalTriggerTable) instanceof CardZoneTable table && table.isEntering(c);
     }
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
