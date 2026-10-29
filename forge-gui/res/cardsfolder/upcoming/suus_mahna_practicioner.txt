@@ -1,0 +1,7 @@
+Name:Suus Mahna Practicioner
+ManaCost:2 U
+Types:Creature Vulcan Officer
+PT:3/2
+A:AB$ Tap | PrecostDesc$ Strange new worlds — | Cost$ 4 U T | ReduceCost$ X | ValidTgts$ Creature | SpellDescription$ Tap target creature. This ability costs {X} less to activate, where X is the number of differently named lands you control.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:Strange new worlds — {4}{U}, {T}: Tap target creature. This ability costs {X} less to activate, where X is the number of differently named lands you control.
