@@ -426,7 +426,7 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) && ComputerUtil.protectRecursion(sa,
+            if (PhaseType.COMBAT_DECLARE_BLOCKERS.equals(game.getPhaseHandler().getPhase()) && ComputerUtil.protectRecursion(sa,
                         () -> ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat()), false)) {
                 final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
                 if (!nonCreatures.isEmpty()) {

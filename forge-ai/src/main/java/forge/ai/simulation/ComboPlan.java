@@ -828,6 +828,15 @@ public final class ComboPlan {
                 || anyNamed(ai.getCardsIn(ZoneType.Battlefield), combo.enablers);
     }
 
+    /** A discard outlet play must wait: a castable madness card would be the one thrown away, and the moment is wrong. */
+    public boolean outletMustWait(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || find(Kind.MADNESS) == null || !isDiscardOutletPlay(sa)) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        return !castableMadness(ai, sa).isEmpty() && !madnessWindowOpen(ai, sa);
+    }
+
     /**
      * A card with madness is in the hand, a way to discard it is at hand, and there is mana for the discard and the
      * madness cost together (counting the land that can still be played).
@@ -1010,6 +1019,105 @@ public final class ComboPlan {
             sum += value * (ready ? 45 : outlet ? 25 : 12) / 100;
         }
         return Math.min(250, sum);
+    }
+
+    // ------------------------------------------------------------------------------------------------- tutors
+
+    /**
+     * What to search the library for, for a madness or Psychatog deck: the piece that is missing (a discard outlet when
+     * a madness card waits in hand, a madness card when an outlet is out, the atog while there is none), then cards
+     * that are not yet in hand, and a land while the AI is short of them. When the opponent picks one of the cards
+     * (Intuition) the best {@code n} different cards are asked for, so that the one the opponent leaves is still good.
+     * Null when the deck is neither, or nothing clearly worth fetching is in the pool: the normal choice is made.
+     */
+    public CardCollection tutorPicks(final Player ai, final Iterable<Card> pool, final int n) {
+        final Combo mad = find(Kind.MADNESS);
+        final Combo atog = find(Kind.ATOG);
+        if (mad == null && atog == null || ai == null || pool == null || n <= 0) {
+            return null;
+        }
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final java.util.Map<Card, Integer> score = new java.util.HashMap<>();
+        final List<Card> ranked = new ArrayList<>();
+        for (final Card c : pool) {
+            score.put(c, tutorScore(ai, c, mad, atog, hand, board));
+            ranked.add(c);
+        }
+        ranked.sort((a, b) -> Integer.compare(score.get(b), score.get(a)));
+        final CardCollection picks = new CardCollection();
+        final Set<String> names = new LinkedHashSet<>();
+        for (final Card c : ranked) { // different cards first
+            if (picks.size() < n && score.get(c) > 0 && names.add(c.getName())) {
+                picks.add(c);
+            }
+        }
+        for (final Card c : ranked) { // then copies, if there are fewer than n different good cards
+            if (picks.size() < n && score.get(c) > 0 && !picks.contains(c)) {
+                picks.add(c);
+            }
+        }
+        return picks.size() == n ? picks : null;
+    }
+
+    /** The one card to search for, or null for no opinion. */
+    public Card tutorPick(final Player ai, final Iterable<Card> pool) {
+        final CardCollection picks = tutorPicks(ai, pool, 1);
+        return picks == null ? null : picks.getFirst();
+    }
+
+    private int tutorScore(final Player ai, final Card c, final Combo mad, final Combo atog,
+                           final CardCollectionView hand, final CardCollectionView board) {
+        int lands = 0;
+        for (final Card x : hand) {
+            lands += x.isLand() ? 1 : 0;
+        }
+        for (final Card x : board) {
+            lands += x.isLand() ? 1 : 0;
+        }
+        if (c.isLand()) {
+            return lands < 4 ? 45 : -40;
+        }
+        int s = 0;
+        if (mad != null) {
+            boolean madInHand = false;
+            for (final Card x : hand) {
+                madInHand |= x.hasKeyword(Keyword.MADNESS);
+            }
+            final boolean outlet = hasOutlet(ai, mad);
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                s += 70 + (outlet && !madInHand ? 50 : 0) - (madInHand ? 30 : 0);
+            } else if (isDiscardOutlet(c)) {
+                s += 70 + (!outlet && madInHand ? 60 : 0) - (outlet ? 25 : 0);
+            }
+        }
+        if (atog != null) {
+            boolean atogOut = false;
+            for (final Card x : hand) {
+                atogOut |= atog.payoffs.contains(x.getName());
+            }
+            for (final Card x : board) {
+                atogOut |= atog.payoffs.contains(x.getName());
+            }
+            if (atog.payoffs.contains(c.getName())) {
+                s += atogOut ? 20 : 90;
+            } else if (c.isInstant() || c.isSorcery()) {
+                s += 25;
+            }
+        }
+        if (s <= 0) {
+            return 0;
+        }
+        for (final Card x : hand) {
+            if (x.getName().equals(c.getName())) {
+                s -= 60; // one is already at hand
+                break;
+            }
+        }
+        if (c.isCreature()) {
+            s += Math.min(20, ComputerUtilCard.evaluateCreature(c) / 20);
+        }
+        return Math.max(s, 1);
     }
 
     // ------------------------------------------------------------------------------------------------- Psychatog
@@ -1339,6 +1447,20 @@ public final class ComboPlan {
      * opinion and the normal choice should be made.
      */
     public CardCollection preferredDiscards(final Player ai, final CardCollection valid, final int min) {
+        if (min > 0 && valid != null && ai != null && find(Kind.MADNESS) != null) {
+            // A forced discard (cleanup, an opponent's spell, Careful Study) is a free madness trigger: throw away the
+            // madness cards that can be cast right now, the best first.
+            final List<Card> castable = new ArrayList<>();
+            for (final Card c : valid) {
+                if (c.hasKeyword(Keyword.MADNESS) && canCastForMadness(ai, c)) {
+                    castable.add(c);
+                }
+            }
+            if (castable.size() >= min) {
+                castable.sort((a, b) -> Integer.compare(madnessValue(b), madnessValue(a)));
+                return new CardCollection(castable.subList(0, min));
+            }
+        }
         if (min <= 0 || valid == null || valid.size() < min || !wantsGraveyardFuel()) {
             return null;
         }

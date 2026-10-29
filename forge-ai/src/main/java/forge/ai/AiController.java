@@ -117,9 +117,12 @@ public class AiController {
     /** Slowness: Monte Carlo sits out a few turns, then comes back with a smaller search (see {@link #flatMonteCarloConfig}). */
     private int flatMcSlowTrips;
     private int flatMcPausedUntilTurn = -1;
+    private int flatMcGoodStreak;
     private static final int FLAT_MC_PAUSE_TURNS = 3;
-    /** After this many pauses the device is taken to be too slow for Monte Carlo and it stays off. */
+    /** The search shrinks and the pause grows for this many slow spells in a row; further ones change nothing. */
     private static final int FLAT_MC_MAX_SLOW_TRIPS = 3;
+    /** Good decisions in a row that give back one step of the search a slow spell took away. */
+    private static final int FLAT_MC_RECOVER_DECISIONS = 25;
     /** Per player switch for comparisons and tests: null follows the game-wide setting. */
     private Boolean flatMcOverride;
     private Boolean flatMcMaxOverride;
@@ -962,6 +965,9 @@ public class AiController {
     public AiPlayDecision canPlaySa(SpellAbility sa) {
         if (hasFailedToCast(sa)) {
             return AiPlayDecision.CantPlayAi; // it could not be put on the stack earlier this turn
+        }
+        if (deckPlan(player).combos.outletMustWait(player, sa)) {
+            return AiPlayDecision.AnotherTime; // a madness card would be thrown away at the wrong moment
         }
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
@@ -2285,14 +2291,18 @@ public class AiController {
                 // collection, another app), so sit out a few turns and come back with a smaller search; only a device
                 // that keeps failing stays off for the game.
                 flatMcSlowStreak = 0;
-                if (++flatMcSlowTrips >= FLAT_MC_MAX_SLOW_TRIPS) {
-                    flatMcTripped = true;
-                } else {
-                    flatMcPausedUntilTurn = game.getPhaseHandler().getTurn() + FLAT_MC_PAUSE_TURNS;
-                }
+                flatMcGoodStreak = 0;
+                // Slowness never switches Monte Carlo off for good: each further failure pauses it a little longer
+                // (3, 6, then 9 turns) and shrinks the search further, and a run of good decisions earns the size back.
+                flatMcSlowTrips = Math.min(flatMcSlowTrips + 1, FLAT_MC_MAX_SLOW_TRIPS);
+                flatMcPausedUntilTurn = game.getPhaseHandler().getTurn() + FLAT_MC_PAUSE_TURNS * flatMcSlowTrips;
             }
         } else {
             flatMcSlowStreak = 0;
+            if (flatMcSlowTrips > 0 && ++flatMcGoodStreak >= FLAT_MC_RECOVER_DECISIONS) {
+                flatMcGoodStreak = 0;
+                flatMcSlowTrips--;
+            }
         }
     }
 

@@ -1523,6 +1523,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             break;
         }
 
+        if (keycardFound == null && player == decider && ZoneType.Hand.equals(destination)
+                && player.getController() instanceof PlayerControllerAi) {
+            // no key card named by the deck file: the deck plan (madness, Psychatog) knows what is missing
+            keycardFound = ((PlayerControllerAi) player.getController()).getAi().deckPlan(player).combos
+                    .tutorPick(player, fetchList);
+        }
+
         if (sa.hasParam("AILogic")) {
             String logic = sa.getParamOrDefault("AILogic", "");
             if ("NeverBounceItself".equals(logic)) {

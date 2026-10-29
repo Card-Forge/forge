@@ -173,6 +173,11 @@ public final class FlatMonteCarloPicker {
         public int overrideMajorityPercent = 50;
         /** Rounds beyond {@link #rolloutsPerCandidate} that lines still in the race may get (needs {@link #pruning}). */
         public int extraRounds = 2;
+        /**
+         * Time the first rollout and cut the candidate list to what the budget can pay for (at least two samples each),
+         * so a slow device keeps a real, if smaller, comparison instead of one sample per line and no pairs.
+         */
+        public boolean scaleToDevice = true;
         /** Drop lines that are clearly behind after every round, so the budget goes to the lines still in contention. */
         public boolean pruning = true;
         /** Value held-up cards by what they do (counter, removal, trick, flash creature) instead of mana cost alone. */
@@ -527,6 +532,7 @@ public final class FlatMonteCarloPicker {
         final boolean[] invalid = new boolean[n];
         final boolean[] pruned = new boolean[n];
         final long[][] vals = new long[n][maxRounds];
+        int limitN = n; // how many lines this device can afford to compare, found out by timing the first rollout
         int evaluated = 0;
         int rollouts = 0;
         int prunedCount = 0;
@@ -536,7 +542,7 @@ public final class FlatMonteCarloPicker {
         rounds:
         for (int r = 0; r < maxRounds; r++) {
             final long seed = baseSeed + r * SEED_STEP;
-            final int active = r == 0 ? n : evaluated;
+            final int active = r == 0 ? limitN : evaluated;
             int racing = 0;
             for (int c = 0; c < active; c++) {
                 if (!invalid[c] && !pruned[c]) {
@@ -572,6 +578,10 @@ public final class FlatMonteCarloPicker {
                 final Long value = !aimed ? null : rollout(player, cand, seed, rcfg, playoutPlays, mode);
                 maxRolloutNanos = Math.max(maxRolloutNanos, System.nanoTime() - t0);
                 rollouts++;
+                if (rollouts == 1 && value != null && cfg.scaleToDevice) {
+                    limitN = Math.min(limitN, affordableLines(softDeadline - System.nanoTime(), maxRolloutNanos,
+                            cfg.rolloutsPerCandidate, n));
+                }
                 if (value == null) {
                     invalid[c] = true;
                     FlatMonteCarloStats.noteUnsimulatable(cand.label() + (!stillWanted ? " [revalidate]" : !aimed ? " [target]" : " [" + lastRolloutProblem + "]"));
@@ -665,6 +675,18 @@ public final class FlatMonteCarloPicker {
         final Result decided = new Result(chosen.sa, chosen.isHold(), true, evaluated, rollouts, elapsed, reason, prunedCount, chosen.target);
         decided.attackers = chosen.attackers;
         return decided;
+    }
+
+    /**
+     * How many lines fit in the time that is left when one rollout took {@code rolloutNanos}: every line should get
+     * at least {@code rounds} samples (two at the least, or nothing can be compared), and the first line has had its
+     * first already. Never fewer than two lines, never more than {@code n}.
+     */
+    static int affordableLines(final long leftNanos, final long rolloutNanos, final int rounds, final int n) {
+        final long perRollout = Math.max(1, rolloutNanos);
+        final long fit = Math.max(0, leftNanos) / perRollout + 1;
+        final long lines = fit / Math.max(2, rounds);
+        return (int) Math.max(2, Math.min(n, lines));
     }
 
     /** Fewest paired samples before a line may be dropped; one sample has no spread to judge it by. */
