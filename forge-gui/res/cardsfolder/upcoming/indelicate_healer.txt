@@ -1,0 +1,9 @@
+Name:Indelicate Healer
+ManaCost:2 W
+Types:Creature Klingon Warrior Doctor
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Klingon.Other+YouCtrl,Warrior.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature or another Klingon or Warrior you control enters, creatures you control gain lifelink until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink
+SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain
+Oracle:Whenever this creature or another Klingon or Warrior you control enters, creatures you control gain lifelink until end of turn.
