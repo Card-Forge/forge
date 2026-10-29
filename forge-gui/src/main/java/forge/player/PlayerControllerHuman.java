@@ -120,6 +120,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean mayLookAtAllCards = false;
 
     private IGuiGame gui;
+    // the hidden GUI recording a replay of this player's game, which keeps their reveals as their own GUI does
+    private IGuiGame replayGui;
 
     private final YieldController yieldController = new YieldController(this);
 
@@ -139,6 +141,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public PlayerControllerHuman(final Player p, final LobbyPlayer lp, final PlayerControllerHuman owner) {
         super(owner.getGame(), p, lp);
         gui = owner.gui;
+        replayGui = owner.replayGui;
         inputProxy = owner.inputProxy;
         inputQueue = owner.getInputQueue();
     }
@@ -148,6 +151,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
     public final void setGui(final IGuiGame gui) {
         this.gui = gui;
+    }
+    public final void setReplayGui(final IGuiGame replayGui) {
+        this.replayGui = replayGui;
     }
 
     public YieldController getYieldController() {
@@ -957,6 +963,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
             getGui().showRevealedCards(collection);
+            if (replayGui != null) {
+                replayGui.showRevealedCards(collection);
+                replayGui.hideRevealedCards();
+            }
             // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
             final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
