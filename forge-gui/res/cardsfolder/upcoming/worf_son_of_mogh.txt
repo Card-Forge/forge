@@ -1,0 +1,11 @@
+Name:Worf, Son of Mogh
+ManaCost:1 R W
+Types:Legendary Creature Klingon Warrior Officer
+PT:3/3
+K:Menace
+S:Mode$ Continuous | Affected$ Officer.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Officers you control get +1/+1.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Seek out — Whenever you draw your second card each turn, create a 1/1 red Officer creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_officer
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Officer
+Oracle:Menace\nOther Officers you control get +1/+1.\nSeek out — Whenever you draw your second card each turn, create a 1/1 red Officer creature token.
