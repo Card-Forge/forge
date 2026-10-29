@@ -87,7 +87,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         } else if (mapParams.containsKey("ThisTurn")) {
             trigHandler.registerThisTurnDelayedTrigger(delTrig);
         } else if (mapParams.containsKey("NextTurn")) {
-            game.getCleanup().addUntil(() -> trigHandler.registerThisTurnDelayedTrigger(delTrig));
+            trigHandler.registerNextTurnDelayedTrigger(delTrig);
         }  else if (mapParams.containsKey("UpcomingTurn")) {
             game.getCleanup().addUntil(() -> trigHandler.registerDelayedTrigger(delTrig));
         } else {
