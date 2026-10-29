@@ -186,6 +186,8 @@ public enum AiProps {
     /** Mulligan and bottom cards by the deck plan (see OpeningHand); also part of maximum strength. */
     FLAT_MC_MULLIGAN("true"),
     FLAT_MC_LAND_CHOICE("true"),
+    /** Plan the next land drops against the colours and costs of the hand and the commander (see LandPlanner). */
+    LAND_PLANNER("true"),
     FLAT_MC_REACTIVE("true");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->

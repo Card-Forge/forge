@@ -112,7 +112,14 @@ public class AiController {
     /** Circuit breaker: Monte Carlo switches itself off for this player after repeated errors or hopeless slowness. */
     private int flatMcErrors;
     private int flatMcSlowStreak;
+    /** Errors switch Monte Carlo off for the rest of the game (a bug will not go away); slowness only pauses it. */
     private boolean flatMcTripped;
+    /** Slowness: Monte Carlo sits out a few turns, then comes back with a smaller search (see {@link #flatMonteCarloConfig}). */
+    private int flatMcSlowTrips;
+    private int flatMcPausedUntilTurn = -1;
+    private static final int FLAT_MC_PAUSE_TURNS = 3;
+    /** After this many pauses the device is taken to be too slow for Monte Carlo and it stays off. */
+    private static final int FLAT_MC_MAX_SLOW_TRIPS = 3;
     /** Per player switch for comparisons and tests: null follows the game-wide setting. */
     private Boolean flatMcOverride;
     private Boolean flatMcMaxOverride;
@@ -187,7 +194,7 @@ public class AiController {
 
     /** Whether Flat Monte Carlo is switched on for this player. */
     public boolean flatMonteCarloActive() {
-        return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcTripped
+        return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcOff()
                 && simMode == null && getBoolProperty(AiProps.FLAT_MC_ENABLED);
     }
 
@@ -543,6 +550,32 @@ public class AiController {
         return landList;
     }
 
+    /** Whether the land would enter the battlefield tapped right now (a replacement effect that taps it, with its condition met). */
+    private boolean landEntersTapped(final Card land) {
+        // check replacement effects if land would enter tapped or not
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
+        repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
+        repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+
+        // add Params for AddCounter Replacements
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(land));
+
+        for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+            SpellAbility reSA = re.ensureAbility();
+            if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
+                continue;
+            }
+            reSA.setActivatingPlayer(reSA.getHostCard().getController());
+            if (reSA.metConditions()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private Card chooseBestLandToPlay(CardCollection landList) {
         if (landList.isEmpty()) {
             return null;
@@ -588,36 +621,21 @@ public class AiController {
             landList = unreflectedLands;
         }
 
+        // Plan the next land drops against the spells in hand (and the commander): which colours are needed when, and
+        // whether a land that enters tapped costs anything this turn. It answers only when one land is clearly better.
+        if (landList.size() > 1 && getBoolProperty(AiProps.LAND_PLANNER)) {
+            final Card planned = LandPlanner.choose(player, landList, this::landEntersTapped);
+            if (planned != null) {
+                return planned;
+            }
+        }
+
         // try to skip lands that enter the battlefield tapped if we might want to play something this turn
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
-                // check replacement effects if land would enter tapped or not
-                final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
-                repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
-                repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
-
-                // add Params for AddCounter Replacements
-                GameEntityCounterTable table = new GameEntityCounterTable();
-                repParams.put(AbilityKey.EffectOnly, true);
-                repParams.put(AbilityKey.CounterTable, table);
-                repParams.put(AbilityKey.CounterMap, table.column(land));
-
-                boolean foundTapped = false;
-                for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
-                    SpellAbility reSA = re.ensureAbility();
-                    if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
-                        continue;
-                    }
-                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
-                    if (reSA.metConditions()) {
-                        foundTapped = true;
-                        break;
-                    }
-                }
-
                 // TODO if this is the only source for a color we need badly prioritize it instead
-                if (foundTapped) {
+                if (landEntersTapped(land)) {
                     continue;
                 }
 
@@ -1444,9 +1462,9 @@ public class AiController {
      * already in {@code combat}. Replaces it by another attack set when rollouts clearly prefer one.
      */
     private void refineAttackWithFlatMonteCarlo(final Player attacker, final Combat combat) {
-        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || simMode != null
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || simMode != null
                 || !getBoolProperty(AiProps.FLAT_MC_ENABLED)
-                || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax())
+                || !(flatMcAttackOverride != null ? flatMcAttackOverride : getBoolProperty(AiProps.FLAT_MC_ATTACK) || isFlatMonteCarloMax() || isFlatMonteCarloLite())
                 || attacker != player || !game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return;
         }
@@ -1920,7 +1938,7 @@ public class AiController {
      * off. Only plain spells on the stack can be simulated, so a stack with abilities on it is left to the heuristics.
      */
     private FlatMonteCarloPicker.Mode reactiveMonteCarloMode(final boolean mustRespond) {
-        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || mustRespond
                 || simMode != null || !getBoolProperty(AiProps.FLAT_MC_ENABLED) || !getBoolProperty(AiProps.FLAT_MC_REACTIVE)) {
             return null;
         }
@@ -2034,7 +2052,7 @@ public class AiController {
     }
 
     private boolean usesFlatMonteCarlo(final boolean mustRespond) {
-        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcTripped || mustRespond || simMode != null
+        if (!(flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) || flatMcOff() || mustRespond || simMode != null
                 || !getBoolProperty(AiProps.FLAT_MC_ENABLED)) {
             return false; // off, forced responses, or one of the simulation modes which do their own lookahead
         }
@@ -2054,6 +2072,15 @@ public class AiController {
         final FlatMonteCarloPicker.Config cfg = FlatMonteCarloPicker.Config.fromProfile(this, player);
         if (flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax()) {
             cfg.maximized();
+        } else if (game.getAIFlatMonteCarloLite()) {
+            cfg.mobileLite();
+        }
+        if (flatMcSlowTrips > 0) {
+            // Back after a pause for slowness: a smaller search, and no look at the opponent's turn, which costs most.
+            cfg.maxCandidates = Math.max(3, cfg.maxCandidates - 2 * flatMcSlowTrips);
+            cfg.rolloutsPerCandidate = Math.max(2, cfg.rolloutsPerCandidate - flatMcSlowTrips);
+            cfg.extraRounds = Math.min(cfg.extraRounds, 1);
+            cfg.opponentLookaheadPercent = 0;
         }
         final long left = cfg.turnBudgetNanos - flatMcTurnSpentNanos;
         if (left <= 0 || cfg.budgetNanos <= 0) {
@@ -2225,6 +2252,11 @@ public class AiController {
         return flatMcMaxOverride != null ? flatMcMaxOverride : game.getAIFlatMonteCarloMax();
     }
 
+    /** Phone and tablet matches: the attack search is part of it too, within the small time limits. */
+    private boolean isFlatMonteCarloLite() {
+        return game.getAIFlatMonteCarloLite();
+    }
+
     /** Forces the attack search on or off for this player; null follows the profile (FLAT_MC_ATTACK). */
     public void setFlatMonteCarloAttackOverride(final Boolean enabled) {
         flatMcAttackOverride = enabled;
@@ -2242,11 +2274,24 @@ public class AiController {
             }
         } else if ("too-slow".equals(reason) || "no-time".equals(reason)) {
             if (++flatMcSlowStreak >= 4) {
-                flatMcTripped = true; // this device cannot afford even two rollouts per decision
+                // This device could not afford two rollouts per decision just now. A phone has hiccups (a garbage
+                // collection, another app), so sit out a few turns and come back with a smaller search; only a device
+                // that keeps failing stays off for the game.
+                flatMcSlowStreak = 0;
+                if (++flatMcSlowTrips >= FLAT_MC_MAX_SLOW_TRIPS) {
+                    flatMcTripped = true;
+                } else {
+                    flatMcPausedUntilTurn = game.getPhaseHandler().getTurn() + FLAT_MC_PAUSE_TURNS;
+                }
             }
         } else {
             flatMcSlowStreak = 0;
         }
+    }
+
+    /** Monte Carlo is off for this player: tripped by errors, or paused after slowness. */
+    private boolean flatMcOff() {
+        return flatMcTripped || game.getPhaseHandler().getTurn() < flatMcPausedUntilTurn;
     }
 
     private DeckPlan flatMcDeckPlan;
@@ -2296,7 +2341,7 @@ public class AiController {
 
     /** True once Monte Carlo has switched itself off for this player (repeated errors or slowness). */
     public boolean isFlatMonteCarloTripped() {
-        return flatMcTripped;
+        return flatMcOff();
     }
 
     /**

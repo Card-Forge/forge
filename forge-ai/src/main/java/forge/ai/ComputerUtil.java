@@ -438,6 +438,13 @@ public class ComputerUtil {
             }
         }
         else if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
+            if (ai.getController() instanceof PlayerControllerAi) {
+                final Card madness = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                        .madnessDiscard(ai, typeList);
+                if (madness != null) {
+                    return madness; // it comes back as a cheap spell
+                }
+            }
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
                 final int priority = 6 - ip;
                 for (Card c : typeList) {
@@ -615,6 +622,10 @@ public class ComputerUtil {
 
         while (count < amount) {
             Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
+            if (prefCard == null && ability.isManaAbility()) {
+                // paying for mana: give up what the AI would miss least (a token, a creature that comes back)
+                prefCard = ManaSacrifice.chooseFodder(ai, typeList);
+            }
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }
