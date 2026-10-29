@@ -90,6 +90,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public byte getExpectedPayingColors(SpellAbility sa) {
+        return ComputerUtilMana.getExpectedConvergeColors(sa, player);
+    }
+
+    @Override
     public boolean isAI() {
         return true;
     }
