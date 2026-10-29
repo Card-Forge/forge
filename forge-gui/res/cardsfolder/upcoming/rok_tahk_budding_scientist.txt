@@ -1,0 +1,9 @@
+Name:Rok-Tahk, Budding Scientist
+ManaCost:4 G G
+Types:Legendary Creature Brikar Scientist
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ Mana | Description$ Creatures you control have "{T}: Add {G}{G}."
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create Murf, a legendary 0/1 green Ooze Slug creature token with indestructible.
+SVar:TrigToken:DB$ Token | TokenScript$ murf | TokenOwner$ You
+Oracle:Creatures you control have "{T}: Add {G}{G}."\nWhen Rok-Tahk enters, create Murf, a legendary 0/1 green Ooze Slug creature token with indestructible.
