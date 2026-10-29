@@ -77,6 +77,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -801,13 +802,8 @@ public class AiController {
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
-        try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
+            reportSortFallback(all);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -2365,6 +2361,17 @@ public class AiController {
         }
     }
 
+    private static final AtomicBoolean sortFallbackReported = new AtomicBoolean();
+
+    /** The spell ability evaluator contradicted itself and a stable fallback sort was used instead; report it once per run. */
+    private static void reportSortFallback(final List<SpellAbility> all) {
+        if (!sortFallbackReported.compareAndSet(false, true)) {
+            return; // the O(n^3) check below is only worth running once
+        }
+        final String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
+        Sentry.captureMessage("saEvaluator broke the Comparator contract, used stable fallback sort\nverifyTransitivity: " + assertex);
+    }
+
     /** Like {@link #chooseSpellAbilityToPlayFromList} but keeps looking until {@code maxResults} plays are approved. */
     private List<SpellAbility> chooseSpellAbilitiesToPlayFromList(final List<SpellAbility> all, boolean skipCounter, final int maxResults) {
         return chooseSpellAbilitiesToPlayFromList(all, skipCounter, maxResults, null);
@@ -2379,13 +2386,8 @@ public class AiController {
         if (all == null || all.isEmpty())
             return Collections.emptyList();
 
-        try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
+            reportSortFallback(all);
         }
 
         // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game
