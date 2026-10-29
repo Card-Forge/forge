@@ -103,13 +103,19 @@ public abstract class NetDeckStorageBase extends StorageBase<Deck> {
         switch (gameType) {
         case Constructed:
         case Gauntlet:
-            Map<String, T> categories = (Map<String, T>) categoryCache.computeIfAbsent(listFile,
-                    file -> loadCategories(file, factory));
-            return selectAndLoad(categories, name, forceDownload,
-                    "Select a Net Deck Archive " + formatName + " category");
+            return loadArchive(name, forceDownload, listFile, formatName, factory);
         default:
             return null;
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static <T extends NetDeckStorageBase> T loadArchive(final String name, final boolean forceDownload,
+            final String listFile, final String formatName, final Factory<T> factory) {
+        Map<String, T> categories = (Map<String, T>) categoryCache.computeIfAbsent(listFile,
+                file -> loadCategories(file, factory));
+        return selectAndLoad(categories, name, forceDownload,
+                "Select a Net Deck Archive " + formatName + " category");
     }
 
     protected final void loadCachedDecks() {
