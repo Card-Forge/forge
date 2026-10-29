@@ -3,5 +3,5 @@ ManaCost:no cost
 Colors:white
 Types:Creature Beast
 PT:4/4
-K:CARDNAME can't attack or block alone.
+S:Mode$ AttackRestrict,BlockRestrict | ValidCard$ Card.Self | Description$ CARDNAME can't attack or block alone.
 Oracle:This creature can't attack or block alone.
