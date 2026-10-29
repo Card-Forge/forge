@@ -32,6 +32,8 @@ import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
+import forge.game.card.CounterAiCategory;
+import forge.game.card.CounterListType;
 import forge.game.spellability.Spell;
 import forge.gamemodes.gauntlet.GauntletData;
 import forge.gui.GuiBase;
@@ -381,6 +383,7 @@ public final class FModel {
     }
 
     private static boolean keywordsLoaded = false;
+    private static boolean countersLoaded = false;
 
     /**
      * Load dynamic gamedata.
@@ -395,6 +398,13 @@ public final class FModel {
             }
 
             CardType.Constant.LOADED.set();
+        }
+        if (!countersLoaded) {
+            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(ForgeConstants.COUNTER_LIST_FILE));
+            for (String sectionName: contents.keySet()) {
+                CounterListType.parseTypes(CounterAiCategory.valueOf(sectionName), contents.get(sectionName));
+            }
+            countersLoaded = true;
         }
 
         if (!keywordsLoaded) {
