@@ -94,10 +94,6 @@ public enum TrackableProperty {
     ExiledWith(TrackableTypes.CardViewType),
     PreparedSpell(TrackableTypes.CardViewType),
 
-    WasDestroyed(TrackableTypes.BooleanType),
-    NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     MarkedColors(TrackableTypes.ColorSetType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
@@ -206,8 +202,6 @@ public enum TrackableProperty {
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
     HasAvailableActions(TrackableTypes.BooleanType),
-
-    AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
 
     NumManaShards(TrackableTypes.IntegerType),
 
