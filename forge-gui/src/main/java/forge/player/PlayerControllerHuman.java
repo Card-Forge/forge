@@ -956,24 +956,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
+            getGui().showRevealedCards(collection);
             // State the revealed cards and let the GUI show them, instead of listing their names in a dialog
             final boolean revealInPrompt = zone == ZoneType.Hand
                     && owner != getLocalPlayerView()
                     && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
                     && !getGui().isLibgdxPort();
             if (revealInPrompt) {
-                getGui().showRevealedCards(collection);
                 final InputConfirm inp = new InputConfirm(this, fm,
                         localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
                 inp.showAndWait();
                 if (!inp.getResult()) {
                     FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
                 }
-                getGui().hideRevealedCards();
             } else {
                 getGui().reveal(fm, collection);
             }
-            getGui().updateRevealedCards(collection);
+            getGui().hideRevealedCards();
             endTempShowCards();
         }
     }

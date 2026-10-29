@@ -25,7 +25,6 @@ import forge.game.spellability.StackItemView;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.MagicStack;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollection;
@@ -177,13 +176,6 @@ public class GameView extends TrackableObject {
     /** Initialize the game log for network-deserialized GameViews (transient field is null after deserialization). */
     public void initGameLog() {
         this.gameLog = new GameLog();
-    }
-
-    public TrackableCollection<CardView> getRevealedCollection() {
-        return get(TrackableProperty.RevealedCardsCollection);
-    }
-    public void updateRevealedCards(TrackableCollection<CardView> collection) {
-        set(TrackableProperty.RevealedCardsCollection, collection);
     }
 
     public String getDependencies() {
