@@ -74,7 +74,7 @@ public class CardRendererUtils {
     public static boolean drawGray(final CardView card) {
         if (card == null)
             return false;
-        return card.wasDestroyed() || card.isPhasedOut();
+        return card.isPhasedOut();
     }
     public static int getFoilIndex(final CardView card) {
         if (card == null)

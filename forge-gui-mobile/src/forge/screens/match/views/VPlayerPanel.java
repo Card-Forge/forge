@@ -1644,7 +1644,7 @@ public class VPlayerPanel extends FContainer {
 
         private void update() {
             int delta = player.getLife() - life;
-            player.setAvatarLifeDifference(player.getAvatarLifeDifference() + delta);
+            avatar.addLifeDifference(delta);
             if (delta != 0) {
                 life = player.getLife();
                 lifeStr = String.valueOf(life);

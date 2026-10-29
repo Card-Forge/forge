@@ -2632,7 +2632,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateAvatar() {
         view.updateAvatarIndex(this);
         view.updateAvatarCardImageKey(this);
-        view.setAvatarLifeDifference(0);
         view.setHasLost(false);
     }
 
