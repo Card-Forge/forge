@@ -77,6 +77,61 @@ public final class UndoManager {
         }
     }
 
+    /**
+     * A snapshot taken just before an action of a player whose actions are not on the undo stack (the AI), so that the
+     * action can be taken back if it turns out to be illegal. It is not part of the human undo history.
+     */
+    public record Mark(GameMemento memento, int logSize) {}
+
+    /**
+     * Game thread. Takes a snapshot to roll one action back to with {@link #rollbackTo}, or null when undo is off or
+     * the snapshot could not be taken (the caller then has no safety net and must not count on one). A fresh recorder
+     * is used on purpose: it shares nothing with the human history and keeps nothing alive once the mark is dropped,
+     * which matters on phones. Take it only for actions that can fail, it reads the whole game.
+     */
+    public Mark markForRollback(final Game game) {
+        if (mode() == Mode.OFF) {
+            return null;
+        }
+        try {
+            return new Mark(new GameMemento.Recorder().capture(game), game.getGameLog().size());
+        } catch (final RuntimeException ex) {
+            System.err.println("Could not take a rollback snapshot: " + ex);
+            return null;
+        }
+    }
+
+    /**
+     * Game thread. Puts the game back as it was at {@code mark}. Returns false when nothing was restored or the
+     * restore reported problems (the game may then be only partly restored).
+     */
+    public boolean rollbackTo(final Game game, final Mark mark) {
+        if (mark == null) {
+            return false;
+        }
+        boolean clean;
+        try {
+            game.fireEvent(new GameEventSnapshotRestored(true));
+            mark.memento().restore();
+            game.getGameLog().truncateTo(mark.logSize());
+            clean = mark.memento().problems.isEmpty();
+            if (!clean) {
+                System.err.println("Rollback problems: " + mark.memento().problems);
+            }
+            refreshViews(game);
+            game.fireEvent(new GameEventSnapshotRestored(false));
+        } catch (final RuntimeException ex) {
+            System.err.println("Rollback failed: " + ex);
+            return false;
+        }
+        synchronized (this) {
+            randomMark = MyRandom.callCount();
+            stack.clear();                       // whatever a human could undo to is older than this now
+            barrierReason = "An action was taken back";
+        }
+        return clean;
+    }
+
     /** Anything that reveals hidden info or makes the opponent act. */
     public synchronized void barrier(String why) { stack.clear(); barrierReason = why; }
 

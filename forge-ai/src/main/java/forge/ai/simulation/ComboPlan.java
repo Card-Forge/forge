@@ -111,29 +111,6 @@ public final class ComboPlan {
     static final List<ZoneType> DECK_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command));
 
-    private static final Set<String> MASS_PAYOFF_NAMES = names("Living End", "Living Death", "Rise of the Dark Realms",
-            "Mass Reanimation", "Patriarch's Bidding", "Twilight's Call", "Pyrrhic Revival");
-    private static final Set<String> REANIMATION_SPELL_NAMES = names("Reanimate", "Animate Dead", "Exhume",
-            "Necromancy", "Unburial Rites", "Dance of the Dead", "Dance of the Manse", "Goryo's Vengeance",
-            "Shallow Grave", "Zombify", "Rise from the Grave", "Persist", "Footsteps of the Goryo", "Priest of Gix");
-    private static final Set<String> BIG_TARGET_NAMES = names("Griselbrand", "Sheoldred, the Apocalypse",
-            "Archon of Cruelty", "Atraxa, Grand Unifier", "Bringer of the Last Gift", "Elesh Norn, Grand Cenobite");
-    private static final Set<String> STORM_PAYOFF_NAMES = names("Grapeshot", "Tendrils of Agony", "Brain Freeze",
-            "Empty the Warrens", "Mind's Desire", "Hellkite Tyrant");
-    private static final Set<String> CHEAT_SPELL_NAMES = names("Show and Tell", "Sneak Attack", "Through the Breach",
-            "Natural Order", "Elvish Piper", "Hypergenesis", "Eureka", "Tooth and Nail", "Quicksilver Amulet",
-            "Prime Time", "Dream Halls", "Sneak Attack", "Emergence Zone", "Neoform");
-    private static final Set<String> CHEAT_TARGET_NAMES = names("Emrakul, the Aeons Torn", "Griselbrand",
-            "Inferno Titan", "Ulamog, the Ceaseless Hunger", "Ulamog, the Infinite Gyre", "Kozilek, Butcher of Truth",
-            "Archon of Cruelty", "Elesh Norn, Grand Cenobite", "Atraxa, Grand Unifier", "Craterhoof Behemoth",
-            "Terastodon", "Woodfall Primus", "Blightsteel Colossus", "Sundering Titan", "Void Winnower");
-    private static final Set<String> OVERRUN_NAMES = names("Craterhoof Behemoth", "Overrun", "Triumph of the Hordes",
-            "Tooth and Claw", "Rally the Ranks", "Coat of Arms", "Mutagenic Growth", "Finale of Devastation",
-            "Warstorm Surge", "Hall of Triumph");
-    private static final Set<String> COPY_ENGINE_NAMES = names("Splinter Twin", "Kiki-Jiki, Mirror Breaker");
-    private static final Set<String> COPY_TARGET_NAMES = names("Pestermite", "Deceiver Exarch", "Zealous Conscripts",
-            "Restoration Angel", "Felidar Guardian", "Village Bell-Ringer");
-
     /** One combo the deck is built around. */
     public static final class Combo {
         public final Kind kind;
@@ -636,16 +613,12 @@ public final class ComboPlan {
                 + (safe ? " (finds only the payoff)" : ""));
     }
 
-    private static final Set<String> MILL_PAYOFF_NAMES = names("Hedron Crab", "Ruin Crab", "Fractured Sanity",
-            "Bruvac the Grandiloquent", "Maddening Cacophony", "Mind Funeral", "Traumatize", "Glimpse the Unthinkable",
-            "Tome Scour", "Magus of the Mind", "Increasing Confusion");
-
     private static Combo mill(final List<Card> spells) {
         final Set<String> payoffs = new LinkedHashSet<>();
         final Set<String> enablers = new LinkedHashSet<>();
         int pieces = 0;
         for (final Card c : spells) {
-            if (MILL_PAYOFF_NAMES.contains(c.getName())) {
+            if (AiCardLists.has(AiCardLists.Role.MILL_PAYOFF, c.getName())) {
                 payoffs.add(c.getName());
                 pieces++;
             } else if (millsOpponent(c)) {
@@ -723,8 +696,7 @@ public final class ComboPlan {
                 enablers.add(c.getName());
                 fuel++;
             }
-            if (names("Bridge from Below", "Narcomoeba", "Prized Amalgam", "Ichorid", "Dread Return",
-                    "Creeping Chill").contains(c.getName())) {
+            if (AiCardLists.has(AiCardLists.Role.DREDGE_PAYOFF, c.getName())) {
                 payoffs.add(c.getName());
             }
         }
@@ -787,7 +759,7 @@ public final class ComboPlan {
         int rituals = 0;
         int cantrips = 0;
         for (final Card c : spells) {
-            if (c.hasKeyword(Keyword.STORM) || STORM_PAYOFF_NAMES.contains(c.getName())) {
+            if (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName())) {
                 payoffs.add(c.getName());
                 payoffCopies++;
             } else if (c.getCMC() <= 2 && !c.isCreature() && hasApi(c, ApiType.Mana)) {
@@ -811,9 +783,9 @@ public final class ComboPlan {
         final Set<String> targets = new LinkedHashSet<>();
         int targetCopies = 0;
         for (final Card c : spells) {
-            if (COPY_ENGINE_NAMES.contains(c.getName())) {
+            if (AiCardLists.has(AiCardLists.Role.COPY_ENGINE, c.getName())) {
                 engines.add(c.getName());
-            } else if (COPY_TARGET_NAMES.contains(c.getName())) {
+            } else if (AiCardLists.has(AiCardLists.Role.COPY_TARGET, c.getName())) {
                 targets.add(c.getName());
                 targetCopies++;
             }
@@ -862,7 +834,7 @@ public final class ComboPlan {
             if (isCheatSpell(c)) {
                 cheaters.add(c.getName());
                 cheatCopies++;
-            } else if (c.isCreature() && (CHEAT_TARGET_NAMES.contains(c.getName()) || c.getCMC() >= 7)) {
+            } else if (c.isCreature() && (AiCardLists.has(AiCardLists.Role.CHEAT_TARGET, c.getName()) || c.getCMC() >= 7)) {
                 fatties.add(c.getName());
                 fattyCopies++;
             }
@@ -879,7 +851,7 @@ public final class ComboPlan {
         if (c.isLand()) {
             return false;
         }
-        if (CHEAT_SPELL_NAMES.contains(c.getName())) {
+        if (AiCardLists.has(AiCardLists.Role.CHEAT_SPELL, c.getName())) {
             return true; // by name first: Elvish Piper is a creature
         }
         if (c.isCreature()) {
@@ -903,7 +875,7 @@ public final class ComboPlan {
         int finisherCopies = 0;
         int cheapBodies = 0;
         for (final Card c : spells) {
-            if (OVERRUN_NAMES.contains(c.getName()) || isOverrun(c)) {
+            if (AiCardLists.has(AiCardLists.Role.OVERRUN, c.getName()) || isOverrun(c)) {
                 finishers.add(c.getName());
                 finisherCopies++;
             } else if (c.getCMC() <= 3 && (c.isCreature() || hasApi(c, ApiType.Token))) {
@@ -1100,7 +1072,7 @@ public final class ComboPlan {
         if (c.isLand() || !(c.isInstant() || c.isSorcery())) {
             return false;
         }
-        if (MASS_PAYOFF_NAMES.contains(c.getName())) {
+        if (AiCardLists.has(AiCardLists.Role.MASS_PAYOFF, c.getName())) {
             return true;
         }
         for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -1116,7 +1088,7 @@ public final class ComboPlan {
         if (c.isLand() || isMassPayoff(c)) {
             return false;
         }
-        if (REANIMATION_SPELL_NAMES.contains(c.getName())) {
+        if (AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName())) {
             return true;
         }
         if (c.isCreature() || !(c.isInstant() || c.isSorcery())) {
@@ -1135,7 +1107,7 @@ public final class ComboPlan {
 
     /** A creature that is worth more brought back than cast: a big one, or one of the well known targets. */
     static boolean isBigTarget(final Card c) {
-        return BIG_TARGET_NAMES.contains(c.getName()) || c.getCMC() >= 6 || c.getNetPower() >= 6;
+        return AiCardLists.has(AiCardLists.Role.BIG_TARGET, c.getName()) || c.getCMC() >= 6 || c.getNetPower() >= 6;
     }
 
     private static boolean hasCycling(final Card c) {
@@ -1214,9 +1186,6 @@ public final class ComboPlan {
         return false;
     }
 
-    private static Set<String> names(final String... names) {
-        return Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(names)));
-    }
 
     /**
      * Whether the card is a win card of the deck: the big creature of a reanimator or cheating deck, the engine of a
@@ -1230,7 +1199,7 @@ public final class ComboPlan {
                 return true;
             }
         }
-        return BIG_TARGET_NAMES.contains(n) || CHEAT_TARGET_NAMES.contains(n);
+        return AiCardLists.has(AiCardLists.Role.BIG_TARGET, n) || AiCardLists.has(AiCardLists.Role.CHEAT_TARGET, n);
     }
 
     /** Names of every card that is a piece of one of the combos. */

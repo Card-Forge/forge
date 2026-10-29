@@ -212,6 +212,10 @@ public class GameStateEvaluator {
         // this logic taken from ManaCost.getColorShardCounts()
         int[] counts = new int[6]; // in WUBRGC order
 
+        // Signets and filter lands (Mystic Gate) only make mana, or only make their colors, when something else pays
+        // for them: a lone one is not a source, so it must not be counted as one
+        final ManaConversion.Profile conversion = ManaConversion.analyzeIfNeeded(player, true);
+
         // Strategic evaluation includes lands guaranteed to phase in normally; availability does not.
         for (Card c : player.getCardsIn(ZoneType.Battlefield, false)) {
             if (c.isPhasedOut() && (!includeNormalPhasing || !phasesInNormally(c))) {
@@ -220,6 +224,9 @@ public class GameStateEvaluator {
             int max_produced = 0;
             for (SpellAbility m: c.getManaAbilities()) {
                 m.setActivatingPlayer(c.getController());
+                if (conversion.isLocked(m)) {
+                    continue;
+                }
                 int mana_cost = m.getPayCosts().getTotalMana().getCMC();
                 max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
                 for (AbilityManaPart mp : m.getAllManaParts()) {

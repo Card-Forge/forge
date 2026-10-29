@@ -109,6 +109,16 @@ public class Game {
     public boolean AI_FLAT_MONTE_CARLO_MAX = false;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
+
+    // True for the games the AI copies to play out its choices (rollouts): nothing that only matters for the real
+    // game (like taking a snapshot to roll an AI cast back) has to be done there.
+    private boolean simulationCopy = false;
+    public boolean isSimulationCopy() {
+        return simulationCopy;
+    }
+    public void markAsSimulationCopy() {
+        simulationCopy = true;
+    }
     // While this is false here, its really set by the Match/Preferences
 
     // If this merges with LKI In the future, it will need to change forms

@@ -41,9 +41,19 @@ public final class DeckPlan {
      * null; check {@link ComboPlan#isScanComplete()} to know whether the deck has been read.
      */
     public final ComboPlan combos;
+    /**
+     * What a Commander deck is about (strategies of the commander, known combos); {@link CommanderPlan#EMPTY} in a
+     * game without commanders. Never null.
+     */
+    public final CommanderPlan commander;
 
     private DeckPlan(final Archetype archetype, final int oppLife, final int ownLife, final int risk, final int mana,
                      final boolean longPlayouts, final ComboPlan combos) {
+        this(archetype, oppLife, ownLife, risk, mana, longPlayouts, combos, CommanderPlan.EMPTY);
+    }
+
+    private DeckPlan(final Archetype archetype, final int oppLife, final int ownLife, final int risk, final int mana,
+                     final boolean longPlayouts, final ComboPlan combos, final CommanderPlan commander) {
         this.archetype = archetype;
         this.opponentLifeExtra = oppLife;
         this.ownLifeExtra = ownLife;
@@ -51,6 +61,7 @@ public final class DeckPlan {
         this.manaDevelopmentExtra = mana;
         this.longPlayouts = longPlayouts;
         this.combos = combos == null ? ComboPlan.EMPTY : combos;
+        this.commander = commander == null ? CommanderPlan.EMPTY : commander;
     }
 
     public static final DeckPlan NONE = new DeckPlan(Archetype.MIDRANGE, 0, 0, 100, 0, false, ComboPlan.EMPTY);
@@ -65,7 +76,16 @@ public final class DeckPlan {
             return this;
         }
         return new DeckPlan(archetype, opponentLifeExtra, ownLifeExtra, riskPercent, manaDevelopmentExtra,
-                longPlayouts || !found.isEmpty(), found);
+                longPlayouts || !found.isEmpty(), found, commander);
+    }
+
+    /** This plan together with the Commander plan of the deck (a no-op for a game without commanders). */
+    DeckPlan withCommander(final CommanderPlan cmd) {
+        if (cmd == null || !cmd.isActive()) {
+            return this;
+        }
+        return new DeckPlan(archetype, opponentLifeExtra, ownLifeExtra, riskPercent, manaDevelopmentExtra,
+                longPlayouts || cmd.hasCombos(), combos, cmd);
     }
 
     static DeckPlan of(final Archetype a) {
@@ -109,7 +129,9 @@ public final class DeckPlan {
             }
         }
         Collections.sort(names);
-        return String.join("|", names);
+        // the same list is a different deck in a Commander game, where the commander is part of it
+        final boolean cmd = !player.getCommanders().isEmpty();
+        return (cmd ? "cmd#" : "") + String.join("|", names);
     }
 
     /** The plan for a profile setting: "off", "auto" or the name of an archetype. */
@@ -132,14 +154,20 @@ public final class DeckPlan {
             for (final Archetype a : Archetype.values()) {
                 if (a.name().toLowerCase(Locale.ROOT).equals(s)) {
                     // the archetype is forced, but the combos of the deck are still read: they are facts about the list
-                    return of(a).withScan(ComboPlan.scan(player));
+                    return of(a).withScan(ComboPlan.scan(player)).withCommander(CommanderPlan.scan(player));
                 }
             }
         }
         // one read of the whole deck: the combos (at most three) first, because a deck built around one is a combo deck
         // whatever its cheap spells look like to the archetype counters below
         final ComboPlan combos = ComboPlan.scan(player);
-        return of(combos.isEmpty() ? classify(player) : Archetype.COMBO).withScan(combos);
+        final CommanderPlan cmd = CommanderPlan.scan(player);
+        Archetype arch = combos.isEmpty() ? classify(player) : Archetype.COMBO;
+        if (arch == Archetype.MIDRANGE && cmd.archetypeHint() != null) {
+            // 99 singleton cards never look like aggro or control to the counters of classify: the commander says
+            arch = cmd.archetypeHint();
+        }
+        return of(arch).withScan(combos).withCommander(cmd);
     }
 
     /** Reads the player's whole deck (every card the player owns, wherever it is now). */
@@ -213,7 +241,8 @@ public final class DeckPlan {
 
     /** Archetype and combos, for statistics and the game log ("COMBO[MASS_REANIMATION(52: ...)]"). */
     public String describe() {
-        return combos.isEmpty() ? archetype.name() : archetype.name() + combos;
+        final String base = combos.isEmpty() ? archetype.name() : archetype.name() + combos;
+        return commander.isActive() ? base + "/CMD" + commander : base;
     }
 
     @Override
