@@ -151,3 +151,12 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d "{\"content\": \"🔴 Snapshot Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}
+
+  native-installers:
+    needs: build
+    uses: ./.github/workflows/native-installers.yml
+    with:
+      tag: daily-snapshots
+    secrets: inherit
+    permissions:
+      contents: write
