@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self,Klingon.Other+YouCtrl,Warrior.Other+Y
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink
 SVar:PlayMain1:TRUE
 DeckHas:Ability$LifeGain
+DeckHints:Type$Klingon|Warrior
 Oracle:Whenever this creature or another Klingon or Warrior you control enters, creatures you control gain lifelink until end of turn.
