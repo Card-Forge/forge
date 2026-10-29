@@ -1,0 +1,6 @@
+Name:Immersturm Battlefield
+ManaCost:1 R
+Types:Enchantment Realm
+K:Host:1 R
+S:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 2 | AddToughness$ 0 | AddKeyword$ Haste | Description$ Hosted creatures get +2/+0 and have haste.
+Oracle:Hosted creatures get +2/+0 and have haste.\nHost {1}{R} ({1}{R}: Host target creature at this Realm. A Realm can host any number of creatures. Host only as a sorcery.)

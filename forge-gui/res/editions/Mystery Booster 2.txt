@@ -396,6 +396,8 @@ F621 R Value Town @Hélio Frazão
 
 [CreatureTypes]
 Armored:Armored
+[EnchantmentTypes]
+Realm:Realms
 [LandTypes]
 Omenpath:Omenpaths
 [WalkerTypes]
