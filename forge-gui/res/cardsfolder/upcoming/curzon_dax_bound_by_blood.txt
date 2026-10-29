@@ -2,8 +2,8 @@ Name:Curzon Dax, Bound by Blood
 ManaCost:2 R W
 Types:Legendary Creature Trill Warrior
 PT:4/3
-T:Mode$ ChangesZone | ValidCard$ Klingon.Other+YouCtrl,Warrior.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Klingon or Warrior you control dies, NICKNAME deals 1 damage to each opponent.
-SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
+T:Mode$ ChangesZone | ValidCard$ Klingon.Other+YouCtrl,Warrior.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another Klingon or Warrior you control dies, NICKNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME dies, you may put a creature card with mana value 3 or less from your hand onto the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.cmcLE3 | ChangeNum$ 1
 DeckHints:Type$Klingon|Warrior
