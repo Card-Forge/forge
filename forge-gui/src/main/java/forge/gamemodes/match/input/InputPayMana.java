@@ -340,31 +340,38 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         locked = true;
         game.getAction().invoke(() -> {
-            if (PlaySpellAbility.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
-                final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
-                boolean restrictionsMet = true;
+            try {
+                if (PlaySpellAbility.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
+                    final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
+                    boolean restrictionsMet = true;
 
-                for (AbilityManaPart sa : manaAbilities) {
-                    if (!sa.meetsManaRestrictions(saPaidFor)) {
-                        restrictionsMet = false;
-                        break;
+                    for (AbilityManaPart sa : manaAbilities) {
+                        if (!sa.meetsManaRestrictions(saPaidFor)) {
+                            restrictionsMet = false;
+                            break;
+                        }
+                    }
+
+                    if (restrictionsMet && !player.getController().isFullControl(FullControlFlag.NoPaymentFromManaAbility)) {
+                        player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
+                    }
+                    if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
+                        // force refresh in case too much mana got spent
+                        invalidateAutoPayManaSources();
                     }
                 }
-
-                if (restrictionsMet && !player.getController().isFullControl(FullControlFlag.NoPaymentFromManaAbility)) {
-                    player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
-                }
-                if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
-                    // force refresh in case too much mana got spent
-                    updateButtons();
-                    invalidateAutoPayManaSources();
-                }
+            } finally {
+                // Need to call this to unlock, and to set the buttons if a render was skipped while busy
+                showMessage();
             }
-            // Need to call this to unlock
-            onStateChanged();
         });
 
         return true;
+    }
+
+    @Override
+    protected boolean isBusy() {
+        return locked;
     }
 
     protected boolean isAlreadyPaid() {

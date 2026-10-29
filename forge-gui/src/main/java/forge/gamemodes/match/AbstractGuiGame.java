@@ -26,7 +26,6 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -255,16 +254,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         spectator = null;
         currentPlayer = null;
         selection = Selection.NONE;
-    }
-
-    @Override
-    public void updateRevealedCards(TrackableCollection<CardView> collection) {
-        if (gameView != null) {
-            TrackableCollection<CardView> existing = gameView.getRevealedCollection();
-            if (existing != null)
-                collection.addAll(existing);
-            gameView.updateRevealedCards(collection);
-        }
     }
 
     @Override

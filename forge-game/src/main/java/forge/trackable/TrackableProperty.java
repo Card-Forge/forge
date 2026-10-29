@@ -252,7 +252,6 @@ public enum TrackableProperty {
     StormCount(TrackableTypes.IntegerType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
     Object(TrackableTypes.ObjectType, FreezeMode.IgnoresFreeze),
-    RevealedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);
 
     public enum FreezeMode {
