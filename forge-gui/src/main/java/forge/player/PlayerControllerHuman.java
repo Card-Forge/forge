@@ -1546,9 +1546,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean mulliganKeepHand(final Player mulliganingPlayer, int cardsToReturn) {
         // TODO we should be passing tuckCards into Confirmation Dialog
-        final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
-        inp.showAndWait();
-        return inp.isKeepHand();
+        while (true) {
+            final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, mulliganingPlayer);
+            inp.showAndWait();
+            if (!inp.hasUsedSerumPowder()) {
+                return inp.isKeepHand();
+            }
+            final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+            final int handSize = hand.size();
+            for (final Card c : hand.threadSafeIterable()) {
+                getGame().getAction().exile(c, null, null);
+            }
+            player.drawCards(handSize);
+        }
     }
 
     @Override
