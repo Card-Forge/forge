@@ -106,7 +106,7 @@ public class MainWorldDuelReader extends StorageReaderFolder<QuestEventDuel> {
             qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));
             qc.setDescription(sectionMeta.get("Description", "").replace("\\n", "\n"));
             qc.setCardReward(sectionMeta.get("Card Reward"));
-            qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
+            qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon", WILD_DEFAULT_ICON_NAME));
             if (sectionMeta.contains("Profile")) {
                 qc.setProfile(sectionMeta.get("Profile"));
             }            
@@ -114,7 +114,7 @@ public class MainWorldDuelReader extends StorageReaderFolder<QuestEventDuel> {
             qc.setDifficulty(QuestEventDifficulty.WILD);
             qc.setTitle(sectionMeta.get("Title") != null ? sectionMeta.get("Title") : qc.getName());
             qc.setDescription(sectionMeta.get("Description") != null ? sectionMeta.get("Description") : "Wild opponent");
-            qc.setIconImageKey(ImageKeys.ICON_PREFIX + (sectionMeta.get("Icon") != null ? sectionMeta.get("Icon") : WILD_DEFAULT_ICON_NAME));           
+            qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon", WILD_DEFAULT_ICON_NAME));
         }
 
         // Deck
