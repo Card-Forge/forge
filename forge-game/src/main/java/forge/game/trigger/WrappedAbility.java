@@ -149,18 +149,6 @@ public class WrappedAbility extends Ability {
         return sa.getSATargetingCard();
     }
 
-    // key for autoyield - if there is a trigger use its description as the wrapper now has triggering information in its description
-    @Override
-    public String yieldKey() {
-        if (getTrigger() != null) {
-            if (getHostCard() != null) {
-                return getHostCard().toString() + ": " + getTrigger().toString();
-            }
-            return getTrigger().toString();
-        }
-        return super.yieldKey();
-    }
-
     // include triggering information so that different effects look different
     // this information is in the stack description so just use that
     // a real solution would include only the triggering information that actually is used, but that's a major change
