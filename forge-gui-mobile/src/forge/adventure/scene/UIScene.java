@@ -199,10 +199,13 @@ public class UIScene extends Scene {
         getPossibleSelection().clear();
     }
 
+    public boolean isLandscape;
+
     public UIScene(String uiFilePath) {
         textboxOpen = false;
         uiFile = uiFilePath;
-        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight()), Forge.getGraphics().getBatch()) {
+        isLandscape = Forge.isLandscapeMode();
+        stage = new Stage(new ScalingViewport(Scaling.fit, getIntendedWidth(), getIntendedHeight()), Forge.getGraphics().getBatch()) {
             @Override
             public boolean keyUp(int keycode) {
                 keyReleased(keycode);
@@ -652,6 +655,7 @@ public class UIScene extends Scene {
 
     @Override
     public void enter() {
+        resize(Forge.getScreenWidth(), Forge.getScreenHeight());
         if (screenImage != null) {
             try {
                 if (Forge.lastPreview != null) {
@@ -774,6 +778,7 @@ public class UIScene extends Scene {
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().setWorldSize(getIntendedWidth(), getIntendedHeight());
         stage.getViewport().update(width, height, true);
     }
 }

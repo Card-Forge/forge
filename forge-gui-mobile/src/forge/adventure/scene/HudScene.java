@@ -49,6 +49,10 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     @Override
     public void enter() {
         Gdx.input.setInputProcessor(this);
+        if (hud == null || hud.isLandscape != Forge.isLandscapeMode()) {
+            reloadHud();
+        }
+        resize(Forge.getScreenWidth(), Forge.getScreenHeight());
         stage.enter();
         hud.enter();
         super.enter();
@@ -68,7 +72,13 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (stage != null && stage.getViewport() != null) {
+            stage.getViewport().apply();
+        }
         stage.draw();
+        if (hud != null && hud.getViewport() != null) {
+            hud.getViewport().apply(true);
+        }
         hud.draw();
     }
 
@@ -198,5 +208,61 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     public Batch getBatch() {
         return stage.getBatch();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        float worldW = getWorldWidth(width, height);
+        float worldH = getWorldHeight(width, height);
+        if (stage != null && stage.getViewport() != null) {
+            stage.getViewport().setWorldSize(worldW, worldH);
+            stage.getViewport().update(width, height, false);
+        }
+        if (hud != null && hud.getViewport() != null) {
+            hud.getViewport().setWorldSize(worldW, worldH);
+            hud.getViewport().update(width, height, true);
+            hud.layoutHud(worldW, worldH);
+        }
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        int sw = Forge.getScreenWidth();
+        int sh = Forge.getScreenHeight();
+        float worldW = getWorldWidth(sw, sh);
+        float worldH = getWorldHeight(sw, sh);
+        if (stage != null && stage.getViewport() != null) {
+            stage.getViewport().setWorldSize(worldW, worldH);
+            stage.getViewport().update(sw, sh, false);
+        }
+        reloadHud();
+    }
+
+    public void reloadHud() {
+        boolean wasDialogShowing = stage != null && stage.isDialogOnlyInput();
+        if (hud != null) {
+            hud.dispose();
+            hud = null;
+        }
+        hud = GameHUD.reload(stage);
+        int sw = Forge.getScreenWidth();
+        int sh = Forge.getScreenHeight();
+        float worldW = getWorldWidth(sw, sh);
+        float worldH = getWorldHeight(sw, sh);
+        if (hud != null && hud.getViewport() != null) {
+            hud.getViewport().setWorldSize(worldW, worldH);
+            hud.getViewport().update(sw, sh, true);
+            hud.layoutHud(worldW, worldH);
+        }
+        if (stage != null) {
+            stage.setDialogStage(hud);
+            if (wasDialogShowing) {
+                stage.showDialog();
+            }
+        }
+    }
+
+    public GameStage getStage() {
+        return stage;
     }
 }

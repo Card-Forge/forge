@@ -391,6 +391,10 @@ public class EventScene extends MenuScene implements IAfterMatch {
         return object;
     }
 
+    public static void clearInstance() {
+        object = null;
+    }
+
     private void nextPage(boolean reverse) {
         //todo: add translations
         headerTable.clear();

@@ -36,9 +36,19 @@ public class SpellSmithScene extends UIScene {
     private static SpellSmithScene object;
 
     public static SpellSmithScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode())
             object = new SpellSmithScene();
         return object;
+    }
+
+    public static void clearInstance() {
+        object = null;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        clearInstance();
+        Forge.replaceCurrentScene(instance());
     }
 
     private List<PaperCard> cardPool = new ArrayList<>();

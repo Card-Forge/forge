@@ -319,7 +319,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()), Forge.getGraphics().getBatch());
+        super(new ScalingViewport(Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()), Forge.getGraphics().getBatch());
         WorldSave.getCurrentSave().onLoad(() -> {
             if (player == null)
                 return;
@@ -342,8 +342,20 @@ public abstract class GameStage extends Stage {
     public void setWinner(boolean b, boolean a) {
     }
 
+    private float mapWidth;
+    private float mapHeight;
+
     public void setBounds(float width, float height) {
-        getViewport().setWorldSize(width, height);
+        this.mapWidth = width;
+        this.mapHeight = height;
+    }
+
+    public float getMapWidth() {
+        return mapWidth > 0 ? mapWidth : getViewport().getWorldWidth();
+    }
+
+    public float getMapHeight() {
+        return mapHeight > 0 ? mapHeight : getViewport().getWorldHeight();
     }
 
     public PlayerSprite getPlayerSprite() {
@@ -436,8 +448,18 @@ public abstract class GameStage extends Stage {
             }
         }
 
-        camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
-        camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
+        float viewW = getViewport() != null ? getViewport().getWorldWidth() : Scene.getIntendedWidth();
+        float viewH = getViewport() != null ? getViewport().getWorldHeight() : Scene.getIntendedHeight();
+        if (getMapWidth() <= viewW) {
+            camera.position.x = getMapWidth() / 2f;
+        } else {
+            camera.position.x = Math.min(Math.max(viewW / 2f, player.pos().x), getMapWidth() - viewW / 2f);
+        }
+        if (getMapHeight() <= viewH) {
+            camera.position.y = getMapHeight() / 2f;
+        } else {
+            camera.position.y = Math.min(Math.max(viewH / 2f, player.pos().y), getMapHeight() - viewH / 2f);
+        }
 
         onActing(delta);
     }
