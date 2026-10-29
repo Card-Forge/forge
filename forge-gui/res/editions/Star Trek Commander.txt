@@ -22,10 +22,15 @@ ScryfallCode=TRC
 15 R Ensign Harry Kim, Operations @Lixin Yin
 16 R Ezri Dax, Newly Joined @Lius Lasahido
 17 R Guinan, Ancient Advisor @Nicky Barkla
+18 R Imperial Hullbreachers @Joan Piqué Llorens
+19 R Indelicate Healer @Monztre
 20 R Join the Collective @Lordigan
 21 R Julian Bashir, Frontier Doctor @Alexander Mokhov
 22 R Korok, Liberated Rage @Ariel Orea
+23 R Martok, Hero of the Empire @Pavel Kolomeyets
 24 R Maturation Chamber @Jonas De Ro
+25 R Merciful Mandate @Aaron J. Riley
+27 R Right of Vengeance @Albert Cordero
 29 R Spot, Felis catus @Leesha Hannigan
 30 R Stratagem Emulator @Grant Griffin
 31 R Supplementation Node @Piotr Foksowicz
@@ -49,31 +54,54 @@ ScryfallCode=TRC
 55 R Assimilate the Wounded @Bryan Sola
 56 R Assimilation Assessor @Miklós Ligeti
 57 R Battle of Wolf 359 @Henry Peters
+58 R Blood-Sport Champion @Johann Bodin
 59 R Extraction Integrant @Smirtouille
+60 R Kurn, Son of Mogh @Kieran Yanner
+61 R The Promise of Kahless @Zezhou Chen
 62 R Reclamation Specialist @Sean Vo
+63 R Voq, Torchbearer @Rémi Jacquot
+64 R The Beacon of Kahless @Colin Searle
+65 R Ferocious Colonist @Thanh Tuấn
+66 R Gagh Slinger @Pavel Kolomeyets
+67 R Galvanizing Tenor @Wonchun Choi
+68 R Glory to the Empire! @Andrey Kuzinskiy
+69 R Gnarling Targ @Borja Pindado
+70 R Grilka, Widowed Warrior @Lucio Parrillo
+71 R Kang, Suspicious Captain @Javier Charro
 72 R Koloth, Tribble Hunter @Eric Wilkerson
+73 R Own the Day @Tomáš Honz
+74 R Qo'noS Quartermaster @Lordigan
 75 R Ro Laren, Double Agent @David Auden Nash
 76 R Rom and Leeta, Unlikely Pair @Nikki Dawes
 78 R Christine Chapel, Combat Medic @Pauline Voss
+81 R Alexander, Ship's Fool @Javier Charro
 82 R B'Elanna Torres, Scrapper @Ana Teresa Rivera
 83 R The Best of Both Worlds @Marko Manev
 84 M Captain Janeway, Endgame @Jason Pastrana
 85 M Captain Kirk, Boldly Going @Josh Newton
+86 R Chancellor Gorkon @Chris Rallis
 89 R Cmdr. Troi, Outgoing Empath @Justyna Dura
 90 R Collective Override @Pierre Loyvet
 91 R Commander William Riker @Jake Murray
+92 R Curzon Dax, Bound by Blood @Wonchun Choi
 93 R Deliver from Chaos @Bastien L. Deharme
 94 R Hugh, First of Many @Carlos Dattoli
 95 R Jurati, Cordial Queen @Martina Fačková
+96 M Kor, Cause of Vengeance @Eric Wilkerson
 97 M Locutus of Borg @Anton Solovianchyk
 100 R One, Borg Evolved @Lixin Yin
 102 R Reg Barclay, Fidgety Fantasist @Ryan Valle
+103 R Rite of Ascension @Lordigan
+104 R Sins of the Father @Peter Diamond
 105 R Tom Paris, Risk-Taker @Borja Pindado
 107 R Unification @Uzuri
 108 R Vic Fontaine, One Night Only @Tony Foti
 109 R Worf, Son of Mogh @Borja Pindado
 110 R Class-4 Tactical Cube @Jetfreak-7
 111 R Command Chair @Jason Smith
+113 R I.K.S. Negh'Var, Imperial Flagship @Jetfreak-7
+115 R K't'inga-Class Battle Cruiser @Dofresh
+116 R K'Vort-Class Raider @Jetfreak-7
 118 R Queen's Diamond @Raymond Bonilla
 119 R Reconnaissance Partition @Camille Alquier
 121 R Starfleet Communicator @Wero Gallo
@@ -134,31 +162,41 @@ ScryfallCode=TRC
 201 R Tenacious Tosk @Filipe Pagliuso
 202 R Data, Exploring Humanity @Eglė Mosakaitė
 203 R Battle of Wolf 359 @Eugene Maslovski
+204 R Grilka, Widowed Warrior @Vlad Petruchik
 205 M Captain Janeway, Endgame @Uzuri
 207 R Commander William Riker @Darius Zablockis
+208 M Kor, Cause of Vengeance @Rimas Valeikis
 209 M Locutus of Borg @Mintautas Šukys
 211 R Starship Enterprise @Maxim Ruabtsev
 212 R Ambassador K'Ehleyr @Lius Lasahido
 214 R Beverly Crusher, Ship's Doctor @Alex Negrea
 215 R Borg Incursion @Pierre Loyvet
+216 R Concerted Effort @John Di Giovanni
 217 R Dr. Pulaski, Cynical Clinician @Justyna Dura
+218 R Duelist's Heritage @Bartek Fedyczak
 219 R Emergency Regeneration @Grant Griffin
 220 R Ensign Harry Kim, Operations @Lixin Yin
 221 R Ezri Dax, Newly Joined @Lius Lasahido
 222 R Grand Crescendo @Pablo Mendoza
 223 R Guinan, Ancient Advisor @Nicky Barkla
+224 R Imperial Hullbreachers @Joan Piqué Llorens
+225 R Indelicate Healer @Monztre
 226 R Join the Collective @Lordigan
 227 R Julian Bashir, Frontier Doctor @Alexander Mokhov
 228 R Korok, Liberated Rage @Ariel Orea
-229 R Loran of the Third Path @John Tyler Christopher
+229 R Loran of the Third Path @John Tyler Christopher ${"flavorName": "Sonya Gomez, Learning Together"}
+230 R Martok, Hero of the Empire @Pavel Kolomeyets
 231 R Maturation Chamber @Jonas De Ro
+232 R Merciful Mandate @Aaron J. Riley
 234 R Promise of Loyalty @Fajareka Setiawan
+235 R Right of Vengeance @Albert Cordero
 237 R Spot, Felis catus @Leesha Hannigan
 238 R Stratagem Emulator @Grant Griffin
 240 R Supplementation Node @Piotr Foksowicz
 241 R Tempered Steel @Camille Alquier
 243 R Type-03 Borg Vessel @Florent Lebrun
 244 R U.S.S. Enterprise-E, Sovereign @Jetfreak-7
+245 R Vanquish the Horde @Tomáš Honz
 247 R Ambulatory Reactor @David Auden Nash
 248 R Borg Scout Sphere @Lordigan
 249 R Chief Miles O'Brien @Alex Negrea
@@ -177,30 +215,57 @@ ScryfallCode=TRC
 268 R Võx, Child of the Collective @Carissa Susilo
 269 R Assimilate the Wounded @Bryan Sola
 270 R Assimilation Assessor @Miklós Ligeti
+271 R Blood-Sport Champion @Johann Bodin
 272 R Extraction Integrant @Smirtouille
+273 R Kurn, Son of Mogh @Kieran Yanner
+274 R Painful Truths @David Szabo
+275 R The Promise of Kahless @Zezhou Chen
 276 R Reclamation Specialist @Sean Vo
 277 R Toxic Deluge @Brian Valenzuela
+278 R Voq, Torchbearer @Rémi Jacquot
+279 R The Beacon of Kahless @Colin Searle
 280 R Chain Reaction @Leon Tukker
+281 M Combat Celebrant @Lordigan
+282 R Disrupt Decorum @Monztre
+283 R Ferocious Colonist @Thanh Tuấn
+284 R Gagh Slinger @Pavel Kolomeyets
+285 R Galvanizing Tenor @Wonchun Choi
+286 R Glory to the Empire! @Andrey Kuzinskiy
+287 R Gnarling Targ @Borja Pindado
+288 R Kang, Suspicious Captain @Javier Charro
 289 R Koloth, Tribble Hunter @Eric Wilkerson
+290 R Own the Day @Tomáš Honz
+291 R Professional Face-Breaker @Thanh Tuấn
+292 R Qo'noS Quartermaster @Lordigan
 293 R Ro Laren, Double Agent @David Auden Nash
 294 R Rom and Leeta, Unlikely Pair @Nikki Dawes
+295 R Shared Animosity @Ariel Orea
+296 R World at War @Evan Shipard
 300 R Christine Chapel, Combat Medic @Pauline Voss
+309 R Alexander, Ship's Fool @Javier Charro
 310 R Anguished Unmaking @Uzuri
 311 R B'Elanna Torres, Scrapper @Ana Teresa Rivera
+312 R Chancellor Gorkon @Chris Rallis
 315 R Cmdr. Troi, Outgoing Empath @Justyna Dura
 316 R Collective Override @Pierre Loyvet
+317 R Curzon Dax, Bound by Blood @Wonchun Choi
 318 R Deliver from Chaos @Bastien L. Deharme
 319 R Fevered Visions @Wei Guan
 320 R Fractured Identity @Borja Pindado
 321 R Hugh, First of Many @Carlos Dattoli
 322 R Jurati, Cordial Queen @Martina Fačková
 324 R One, Borg Evolved @Lixin Yin
+326 M Pest Control @Carlos C Diaz
 327 R Reg Barclay, Fidgety Fantasist @Ryan Valle
+328 R Rite of Ascension @Lordigan
+329 R Ruinous Ultimatum @Carlos Dattoli
 330 R Supreme Verdict @David Robert Hovey
 331 R Tom Paris, Risk-Taker @Borja Pindado
 333 R Vic Fontaine, One Night Only @Tony Foti
+334 R Vindicate @Tony Foti
+335 R Warleader's Call @Wero Gallo
 336 R Worf, Son of Mogh @Borja Pindado
-337 M Alhammarret's Archive @Jonas De Ro
+337 M Alhammarret's Archive @Jonas De Ro ${"flavorName": "Orb of the Emissary"}
 338 R Astral Cornucopia @Arthur Yuan
 339 R Class-4 Tactical Cube @Jetfreak-7
 340 R Command Chair @Jason Smith
@@ -208,12 +273,16 @@ ScryfallCode=TRC
 342 R Door of Destinies @Nadia Hurianova
 343 M Forsaken Monument @Florent Lebrun
 345 R Howling Mine @Kevin Glint
-347 M The Immortal Sun @Leon Tukker
+346 R I.K.S. Negh'Var, Imperial Flagship @Jetfreak-7
+347 M The Immortal Sun @Leon Tukker ${"flavorName": "Central Plexus Core"}
+349 R K't'inga-Class Battle Cruiser @Dofresh
+350 R K'Vort-Class Raider @Jetfreak-7
 352 R Queen's Diamond @Raymond Bonilla
 353 R Reconnaissance Partition @Camille Alquier
 354 R Skullclamp @Anna Pavleeva
 356 R Starfleet Communicator @Wero Gallo
 357 R The Sword of Kahless @Enora Mercier
+358 M Sword of Light and Shadow @Julia Metzger
 359 R Unwinding Clock @Miklós Ligeti
 361 R U.S.S. Defiant, Tough Little Ship @John Di Giovanni
 362 R U.S.S. Enterprise-C, Time-Tossed @Dofresh
@@ -221,16 +290,19 @@ ScryfallCode=TRC
 365 R U.S.S. Stargazer, Here and There @Alexander Forssberg
 366 R Academy Ruins @Anthony Devine
 367 R Battlefield Forge @Dofresh
+369 R Canyon Slough @Rémi Jacquot
 370 R Choked Estuary @Jessica Rossier
 371 R Clifftop Retreat @David Frasheski
 372 R Coastal Peak @Randy Gallegos
 373 R Command Beacon @Lazare Gvimradze
 374 R Desolate Lighthouse @Jessica Rossier
+375 R Dragonskull Summit @Nadia Hurianova
 376 R Drowned Catacomb @Lordigan
 377 R Eclipsed Steppe @Bastien Grivet
 378 R Exotic Orchard @Leon Tukker
 379 R Fabled Passage @Arthur Yuan
 380 R Fetid Pools @Bastien Grivet
+381 R Foreboding Ruins @Dofresh
 383 R Frostboil Snarl @Shahab Alizadeh
 384 R Furycalm Snarl @Bastien Grivet
 385 R Glacial Fortress @Nadia Hurianova
@@ -245,20 +317,28 @@ ScryfallCode=TRC
 400 R Shineshadow Snarl @Raymond Swanland
 401 R Shore Leave Planet @Arthur Haas
 402 R Skycloud Expanse @Arthur Yuan
+403 R Smoldering Marsh @Enora Mercier
 405 R Spire of Industry @Florent Lebrun
 406 R Sulfur Falls @Henry Wong
 407 R Sunken Hollow @Nadia Hurianova
+410 R Temple of Malice @John Di Giovanni
 413 R Training Center @Arthur Yuan
 414 R Umbral Expanse @Raymond Bonilla
 415 R Underground River @Piotr Dura
+416 R Vault of Champions @Pavel Kolomeyets
 419 U Chronomantic Escape @Irina Nordsol
+420 R Concerted Effort @John Di Giovanni
 421 U Dispatch @Pablo Mendoza
+422 R Duelist's Heritage @Bartek Fedyczak
 423 R Grand Crescendo @Pablo Mendoza
-424 R Loran of the Third Path @John Tyler Christopher
+424 R Loran of the Third Path @John Tyler Christopher ${"flavorName": "Sonya Gomez, Learning Together"}
+425 U Path to Exile @Pierre Raveneau
 426 R Promise of Loyalty @Fajareka Setiawan
 427 U Return to Dust @Lordigan
 429 U Swords to Plowshares @Pablo Mendoza
 430 R Tempered Steel @Camille Alquier
+431 U Valorous Stance @Andrey Kuzinskiy
+432 R Vanquish the Horde @Tomáš Honz
 435 R Cryptic Command @Randy Gallegos
 436 R Disallow @Kristina WermoongRey
 438 C Frantic Search @Leonardo Santanna
@@ -267,16 +347,29 @@ ScryfallCode=TRC
 443 U Thirst for Knowledge @Bartek Fedyczak
 444 C Thoughtcast @Camille Alquier
 445 U Bitter Triumph @Narendra Bintara Adi
+446 C Night's Whisper @Runa I. Rosenberger
+447 R Painful Truths @David Szabo
 448 R Toxic Deluge @Brian Valenzuela
 449 U Abrade @Bartek Fedyczak
 450 R Chain Reaction @Leon Tukker
+451 M Combat Celebrant @Lordigan
+452 R Disrupt Decorum @Monztre
+453 R Professional Face-Breaker @Thanh Tuấn
+454 R Shared Animosity @Ariel Orea
 455 C Thrill of Possibility @Julie Dillon
+456 R World at War @Evan Shipard
 472 R Anguished Unmaking @Uzuri
 473 U Faithful Mending @John Tyler Christopher
 474 R Fevered Visions @Wei Guan
 475 R Fractured Identity @Borja Pindado
+477 M Pest Control @Carlos C Diaz
+478 U Rite of Oblivion @Tomáš Honz
+479 R Ruinous Ultimatum @Carlos Dattoli
 480 R Supreme Verdict @David Robert Hovey
-484 M Alhammarret's Archive @Jonas De Ro
+481 C Terminate @Douglas Shuler
+482 R Vindicate @Tony Foti
+483 R Warleader's Call @Wero Gallo
+484 M Alhammarret's Archive @Jonas De Ro ${"flavorName": "Orb of the Emissary"}
 485 U Arcane Signet @Tomáš Honz
 486 R Astral Cornucopia @Arthur Yuan
 487 C Commander's Sphere @Eric Wilkerson
@@ -285,17 +378,21 @@ ScryfallCode=TRC
 490 C Everflowing Chalice @Jodie Muir
 491 M Forsaken Monument @Florent Lebrun
 492 U Hedron Archive @Paolo Puggioni
+493 U Herald's Horn @Sam Kennedy
 494 R Howling Mine @Kevin Glint
-495 M The Immortal Sun @Leon Tukker
+495 M The Immortal Sun @Leon Tukker ${"flavorName": "Central Plexus Core"}
+496 U Lightning Greaves @Borja Pindado
 497 U Mind Stone @Racrufi
 498 R Skullclamp @Anna Pavleeva
 499 U Sol Ring @Hector Ortiz
 500 U Stonespeaker Crystal @Fajareka Setiawan
 501 U Swiftfoot Boots @Arthur Yuan
+502 M Sword of Light and Shadow @Julia Metzger
 503 U Talisman of Conviction @Pauline Voss
 504 U Talisman of Creativity @Elizabeth Peiró
 505 U Talisman of Dominance @Piotr Foksowicz
 506 U Talisman of Hierarchy @David Szabo
+507 U Talisman of Indulgence @Bartek Fedyczak
 508 U Talisman of Progress @Racrufi
 509 U Thought Vessel @Leesha Hannigan
 510 R Unwinding Clock @Miklós Ligeti
@@ -303,6 +400,7 @@ ScryfallCode=TRC
 512 R Academy Ruins @Anthony Devine
 513 U Arcane Sanctum @Bastien Grivet
 514 R Battlefield Forge @Dofresh
+516 R Canyon Slough @Rémi Jacquot
 517 R Choked Estuary @Jessica Rossier
 518 R Clifftop Retreat @David Frasheski
 519 R Coastal Peak @Randy Gallegos
@@ -310,12 +408,14 @@ ScryfallCode=TRC
 521 C Command Tower @Arthur Yuan
 522 C Contaminated Landscape @Enora Mercier
 523 R Desolate Lighthouse @Jessica Rossier
+524 R Dragonskull Summit @Nadia Hurianova
 525 R Drowned Catacomb @Lordigan
 526 R Eclipsed Steppe @Bastien Grivet
 527 C Evolving Wilds @Hector Ortiz
 528 R Exotic Orchard @Leon Tukker
 529 R Fabled Passage @Arthur Yuan
 530 R Fetid Pools @Bastien Grivet
+531 R Foreboding Ruins @Dofresh
 533 R Frostboil Snarl @Shahab Alizadeh
 534 R Furycalm Snarl @Bastien Grivet
 535 R Glacial Fortress @Nadia Hurianova
@@ -324,6 +424,7 @@ ScryfallCode=TRC
 539 R Isolated Chapel @Arthur Yuan
 540 R Morphic Pool @Pierre Loyvet
 543 U Mystic Monastery @Enora Mercier
+544 U Nomad Outpost @Jessica Rossier
 545 C Path of Ancestry @Arthur Yuan
 546 C Perilous Landscape @Flavio Greco Paglia
 547 R Port Town @Edouard
@@ -332,15 +433,19 @@ ScryfallCode=TRC
 551 U Reliquary Tower @William Phifer
 552 U Rogue's Passage @John Thacker
 554 R Scorched Geyser @David Frasheski
+557 C Shattered Landscape @Rémi Jacquot
 558 R Shineshadow Snarl @Raymond Swanland
 559 R Skycloud Expanse @Arthur Yuan
+560 R Smoldering Marsh @Enora Mercier
 562 R Spire of Industry @Florent Lebrun
 563 R Sulfur Falls @Henry Wong
 564 R Sunken Hollow @Nadia Hurianova
+567 R Temple of Malice @John Di Giovanni
 571 C Terramorphic Expanse @Tomáš Honz
 572 R Training Center @Arthur Yuan
 574 R Umbral Expanse @Raymond Bonilla
 575 R Underground River @Piotr Dura
+576 R Vault of Champions @Pavel Kolomeyets
 579 C Refute @Mark Spears
 580 C Last Gasp @Arthur Haas
 582 C Run Amok @Carlos C Diaz
