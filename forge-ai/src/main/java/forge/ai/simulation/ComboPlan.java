@@ -906,15 +906,41 @@ public final class ComboPlan {
         if (m == null) {
             return false;
         }
-        if (m.isZero()) {
-            return true;
-        }
         final SpellAbility sa = c.getFirstSpellAbility();
         if (sa == null) {
             return false;
         }
         sa.setActivatingPlayer(ai);
+        if (!madnessHasLegalTarget(sa)) {
+            return false;
+        }
+        if (m.isZero()) {
+            return true;
+        }
         return forge.ai.ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(m), sa, ai, false);
+    }
+
+    /**
+     * A madness card that needs a target (a counterspell with nothing to counter, removal with nothing to hit) is
+     * exiled and then put into the graveyard when the madness trigger resolves: the cast is impossible, so it must
+     * never be thrown away for madness. Only asks; no target is chosen or left behind.
+     */
+    private static boolean madnessHasLegalTarget(final SpellAbility sa) {
+        try {
+            if (!sa.usesTargeting()) {
+                return true;
+            }
+            final forge.game.spellability.TargetRestrictions tr = sa.getTargetRestrictions();
+            if (tr == null) {
+                return true;
+            }
+            if (tr.getZone().contains(ZoneType.Stack)) {
+                return tr.getNumCandidates(sa) > 0; // hasCandidates says yes to every stack target
+            }
+            return tr.hasCandidates(sa);
+        } catch (final RuntimeException e) {
+            return true; // cannot tell: the old behaviour
+        }
     }
 
     private static boolean isInstantSpeed(final SpellAbility sa) {
@@ -964,6 +990,13 @@ public final class ComboPlan {
             final ManaCost m = c == outlet.getHostCard() || !c.hasKeyword(Keyword.MADNESS) ? null : madnessMana(c);
             if (m == null) {
                 continue;
+            }
+            final SpellAbility cast = c.getFirstSpellAbility();
+            if (cast != null) {
+                cast.setActivatingPlayer(ai);
+                if (!madnessHasLegalTarget(cast)) {
+                    continue; // nothing to aim it at: the card would only be lost
+                }
             }
             final ManaCostBeingPaid total = new ManaCostBeingPaid(outletMana);
             total.addManaCost(m);
