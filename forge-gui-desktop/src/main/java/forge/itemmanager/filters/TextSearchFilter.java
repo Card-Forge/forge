@@ -46,6 +46,10 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         return txtSearch;
     }
 
+    public String getSearchText() {
+        return txtSearch == null ? "" : txtSearch.getText();
+    }
+
     /**
      * Merge the given filter with this filter if possible
      * @param filter
@@ -78,9 +82,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
                         break;
                     case KeyEvent.VK_ENTER:
                         if (e.getModifiersEx() == 0) {
-                            if (changeTimer.isRunning()) {
-                                applyChange(); //apply change now if currently delayed
-                            }
+                            applyChange(); //apply change now if currently delayed or waiting for Enter
                         }
                         break;
                 }
@@ -90,9 +92,15 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         txtSearch.addChangeListener(new FTextField.ChangeListener() {
             @Override
             public void textChanged() {
-                changeTimer.restart();
+                if (applyOnTextChange()) {
+                    changeTimer.restart();
+                }
             }
         });
+    }
+
+    protected boolean applyOnTextChange() {
+        return true;
     }
 
     @Override

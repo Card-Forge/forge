@@ -1,13 +1,6 @@
 package forge.screens.deckeditor.controllers;
 
-import forge.deck.DeckBase;
-import forge.deck.DeckFormat;
-import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
-import forge.item.InventoryItem;
-import forge.itemmanager.DeckManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VAllDecks;
 
 /**
@@ -36,7 +29,7 @@ public enum CAllDecks implements ICDoc {
     }
 
     public void refresh() {
-        refreshDeckManager(view.getLstDecks(), DeckProxy.getAllConstructedDecks());
+        view.refreshBrowser();
     }
 
     /* (non-Javadoc)
@@ -44,30 +37,6 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void update() {
-        updateDeckManager(view.getLstDecks());
-    }
-
-    public static void refreshDeckManager(DeckManager dm, Iterable<DeckProxy> deckList){
-        dm.setPool(deckList);
-    }
-
-    public static void updateDeckManager(DeckManager dm){
-        final ItemManagerConfig config = dm.getGameType().getDeckFormat() == DeckFormat.Commander
-                ? ItemManagerConfig.COMMANDER_DECKS
-                : ItemManagerConfig.CONSTRUCTED_DECKS;
-        dm.setup(config);
-        if (dm.getSelectedIndex() == 0) {
-            // This may be default and so requiring potential update!
-            ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl =
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-            if (editorCtrl != null) {
-                String currentDeckName = editorCtrl.getDeckController().getModelName();
-                if (currentDeckName != null && currentDeckName.length() > 0) {
-                    DeckProxy deckProxy = dm.stringToItem(currentDeckName);
-                    if (deckProxy != null && !dm.getSelectedItem().equals(deckProxy))
-                        dm.setSelectedItem(deckProxy);
-                }
-            }
-        }
+        view.refreshBrowser();
     }
 }
