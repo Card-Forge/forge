@@ -127,6 +127,17 @@ public class DeckController<T extends DeckBase> {
         this.setModel((T) currentDeck, isStored);
     }
 
+    /**
+     * Load a copy of the deck as a new unsaved deck, named so that saving it cannot overwrite a stored deck
+     */
+    public void loadCopy(Deck deck) {
+        String name = deck.getName();
+        for (int number = 2; rootFolder.contains(name); number++) {
+            name = deck.getName() + " (" + number + ")";
+        }
+        this.loadDeck((Deck) deck.copyTo(name));
+    }
+
     public Deck getCurrentDeckInEditor(){
         try{
             return this.getModel().getHumanDeck();
