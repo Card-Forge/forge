@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,18 +13,23 @@ import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.IntSet;
 import com.badlogic.gdx.utils.TimeUtils;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
+import forge.gui.control.PlaybackSpeed;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
 import forge.util.collect.FCollectionView;
+
+import static forge.assets.FSkin.getDefaultSkinFile;
 
 /**
  * Draws short card animations on top of the match screen:
@@ -113,6 +119,7 @@ public final class CardFlightOverlay {
         private boolean resolved;  // geometry computed (once, on the first draw)
         private boolean jitter;    // LEAVE: shake in place before flying
         private boolean tint;      // LEAVE: color flash over the card
+        private Texture splatter;  // LEAVE: drawn over a destroyed card
         private boolean cancelled; // LEAVE: turned out not to be a departure (e.g. control change)
         private float fromCx, fromCy, toCx, toCy, fromH, toH;
         private Style style = Style.ROTATE;
@@ -268,8 +275,9 @@ public final class CardFlightOverlay {
     }
 
     // true if the card is still on somebody's battlefield (a control change is not a departure)
-    private static boolean isOnBattlefield(CardView card) {
-        FCollectionView<PlayerView> players = MatchController.instance.getGameView().getPlayers();
+    public static boolean isOnBattlefield(CardView card) {
+        GameView gameView = MatchController.instance.getGameView();
+        FCollectionView<PlayerView> players = gameView == null ? null : gameView.getPlayers();
         if (players == null) { return false; }
         for (PlayerView p : players) {
             FCollectionView<CardView> bf = p.getCards(ZoneType.Battlefield);
@@ -419,6 +427,10 @@ public final class CardFlightOverlay {
         boolean destroyed = zone == ZoneType.Graveyard || zone == null;
         f.jitter = LEAVE_SHAKE && destroyed;
         f.tint = LEAVE_TINT && destroyed;
+        // A token that left the battlefield no longer exists, so it has no zone. A card with no zone went elsewhere, such as the command zone
+        boolean splatter = (zone == ZoneType.Graveyard || zone == null && f.card.isToken()) && Forge.animatedCardTapUntap
+                && MatchController.instance.getGameSpeed() != PlaybackSpeed.FAST;
+        f.splatter = splatter ? Forge.getAssets().getTexture(getDefaultSkinFile("splatter.png")) : null;
         f.durationNanos = f.jitter ? LEAVE_GLITCH_NANOS : LEAVE_MOVE_NANOS;
 
         if (dest != null) {
@@ -560,8 +572,12 @@ public final class CardFlightOverlay {
             RED.a = redAlpha;
             g.fillRect(RED, cx - w / 2, cy - h / 2, w, h);
         }
+        if (f.splatter != null) {
+            g.setAlphaComposite(alpha * 0.6f);
+            g.drawCardImage(f.splatter, null, cx - w / 2, cy - h / 2, w, h, true, false, 0);
+        }
 
         if (angle != 0f) { g.endTransform(); }
-        if (alpha < 1f) { g.resetAlphaComposite(); }
+        if (alpha < 1f || f.splatter != null) { g.resetAlphaComposite(); }
     }
 }

@@ -77,6 +77,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -115,6 +116,37 @@ public class AiController {
     /** Per player switch for comparisons and tests: null follows the game-wide setting. */
     private Boolean flatMcOverride;
     private Boolean flatMcMaxOverride;
+
+    /**
+     * Casts and activations that could not be put on the stack this turn (illegal targets), by card and ability, to
+     * the turn number. It lives here and not in the game on purpose: a rollback restores the game and would forget it.
+     */
+    private final Map<String, Integer> failedCasts = new HashMap<>();
+
+    public static String castKey(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        return (host == null ? "?" : String.valueOf(host.getId())) + "|" + sa.getDescription();
+    }
+
+    /** Remember that this cast failed: it is not tried again this turn. */
+    public void noteFailedCast(final String key) {
+        failedCasts.put(key, game.getPhaseHandler().getTurn());
+    }
+
+    public boolean hasFailedToCast(final SpellAbility sa) {
+        if (failedCasts.isEmpty()) {
+            return false;
+        }
+        final Integer turn = failedCasts.get(castKey(sa));
+        if (turn == null) {
+            return false;
+        }
+        if (turn != game.getPhaseHandler().getTurn()) {
+            failedCasts.remove(castKey(sa));
+            return false;
+        }
+        return true;
+    }
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -770,13 +802,8 @@ public class AiController {
 
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
-        try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
+            reportSortFallback(all);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -915,6 +942,9 @@ public class AiController {
     }
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
+        if (hasFailedToCast(sa)) {
+            return AiPlayDecision.CantPlayAi; // it could not be put on the stack earlier this turn
+        }
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
@@ -1125,7 +1155,8 @@ public class AiController {
                 return forCombo;
             }
             // and no deck throws away its win card while something else will do
-            final CardCollection safe = combos.withoutProtected(validCards);
+            final CardCollection safe = deckPlan(player).commander.withoutProtected(player,
+                    combos.withoutProtected(validCards));
             if (safe.size() >= min && safe.size() < validCards.size()) {
                 return chooseCardsToDiscard(min, max, safe, sa);
             }
@@ -2330,6 +2361,17 @@ public class AiController {
         }
     }
 
+    private static final AtomicBoolean sortFallbackReported = new AtomicBoolean();
+
+    /** The spell ability evaluator contradicted itself and a stable fallback sort was used instead; report it once per run. */
+    private static void reportSortFallback(final List<SpellAbility> all) {
+        if (!sortFallbackReported.compareAndSet(false, true)) {
+            return; // the O(n^3) check below is only worth running once
+        }
+        final String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
+        Sentry.captureMessage("saEvaluator broke the Comparator contract, used stable fallback sort\nverifyTransitivity: " + assertex);
+    }
+
     /** Like {@link #chooseSpellAbilityToPlayFromList} but keeps looking until {@code maxResults} plays are approved. */
     private List<SpellAbility> chooseSpellAbilitiesToPlayFromList(final List<SpellAbility> all, boolean skipCounter, final int maxResults) {
         return chooseSpellAbilitiesToPlayFromList(all, skipCounter, maxResults, null);
@@ -2344,13 +2386,8 @@ public class AiController {
         if (all == null || all.isEmpty())
             return Collections.emptyList();
 
-        try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        if (ComputerUtilAbility.sortSpellAbilities(all)) { // put best spells first
+            reportSortFallback(all);
         }
 
         // read on this thread, before the evaluation thread starts: the plan is fixed for the whole game

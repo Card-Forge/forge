@@ -41,18 +41,6 @@ public final class ComboGuard {
     private ComboGuard() {
     }
 
-    /** Permanents of which a second copy does nothing (they do not stack, or the first one is already the combo). */
-    private static final Set<String> ENGINE_NAMES = names("Omniscience", "Dream Halls", "Sneak Attack",
-            "Quicksilver Amulet", "Aluren", "Splinter Twin", "Food Chain");
-
-    /**
-     * Spells that put cards from the hand onto the battlefield when they resolve, for the ones whose script is not
-     * recognised by its shape. Not the engines (Sneak Attack, Elvish Piper, Quicksilver Amulet): casting those is the
-     * setup, and only their activated ability puts a card in.
-     */
-    private static final Set<String> HAND_CHEAT_NAMES = names("Show and Tell", "Through the Breach", "Eureka",
-            "Hypergenesis");
-
     /** Effects a cantrip may have besides drawing: seeing or arranging the top of the library, a mana, a look at a hand. */
     private static final Set<String> CANTRIP_APIS = names("Draw", "Dig", "Scry", "Surveil", "RearrangeTopOfLibrary",
             "Mana", "RevealHand", "Reveal");
@@ -107,7 +95,7 @@ public final class ComboGuard {
             return "cheat-redundant";
         }
         // a second Omniscience or Sneak Attack
-        if (sa.isSpell() && host.isPermanent() && !host.isLand() && ENGINE_NAMES.contains(host.getName())
+        if (sa.isSpell() && host.isPermanent() && !host.isLand() && AiCardLists.has(AiCardLists.Role.COMBO_ENGINE, host.getName())
                 && controlsWorkingCopy(ai, host)) {
             return "duplicate-engine";
         }
@@ -225,7 +213,7 @@ public final class ComboGuard {
     }
 
     private static boolean isWinPiece(final Card c, final ComboPlan plan) {
-        return ENGINE_NAMES.contains(c.getName()) || plan != null && plan.isWinCard(c);
+        return AiCardLists.has(AiCardLists.Role.COMBO_ENGINE, c.getName()) || plan != null && plan.isWinCard(c);
     }
 
     private static boolean controlsWorkingCopy(final Player ai, final Card c) {
@@ -240,7 +228,7 @@ public final class ComboGuard {
     /** Show and Tell, Sneak Attack and the like: puts a card from the hand onto the battlefield. */
     static boolean isHandCheat(final SpellAbility sa) {
         final Card host = sa.getHostCard();
-        if (host != null && sa.isSpell() && HAND_CHEAT_NAMES.contains(host.getName())) {
+        if (host != null && sa.isSpell() && AiCardLists.has(AiCardLists.Role.HAND_CHEAT, host.getName())) {
             return true;
         }
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
@@ -377,7 +365,7 @@ public final class ComboGuard {
         if (plan != null) {
             boolean engine = false;
             for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-                engine |= ENGINE_NAMES.contains(c.getName()) && isWorking(c);
+                engine |= AiCardLists.has(AiCardLists.Role.COMBO_ENGINE, c.getName()) && isWorking(c);
             }
             if (engine) {
                 for (final Card c : ai.getCardsIn(ZoneType.Hand)) {

@@ -94,6 +94,7 @@ public class GameCopier {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
+        newGame.markAsSimulationCopy();
         newGame.setNoGUIUser();
         newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 

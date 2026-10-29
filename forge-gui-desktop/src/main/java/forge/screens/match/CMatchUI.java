@@ -718,7 +718,7 @@ public final class CMatchUI
 
     @Override
     public void showRevealedCards(final Iterable<CardView> cards) {
-        // the host sends these only for a hand reveal, so other zones of mixed cards stay closed
+        // only hands open: cards revealed from any other zone show in the reveal dialog
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerZoneUpdate update : getZonesHolding(cards)) {
             if (update.getZones().contains(ZoneType.Hand)) {
