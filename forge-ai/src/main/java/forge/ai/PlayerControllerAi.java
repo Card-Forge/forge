@@ -64,6 +64,9 @@ public class PlayerControllerAi extends PlayerController {
 
     private boolean pilotsNonAggroDeck = false;
 
+    /** Snapshot the whole game before a targeted AI cast so it can be taken back. Heavy on memory, so off. */
+    public static final boolean AI_ROLLBACK = false;
+
     public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
@@ -970,7 +973,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     public boolean playWithRollback(final SpellAbility sa, final Consumer<SpellAbility> chooseTargets) {
         final Game game = player.getGame();
-        final boolean guarded = !game.isSimulationCopy() && !sa.isCopied() && !sa.isTrigger() && usesTargeting(sa);
+        final boolean guarded = AI_ROLLBACK && !game.isSimulationCopy() && !sa.isCopied() && !sa.isTrigger() && usesTargeting(sa);
         final UndoManager.Mark mark = guarded ? game.getUndoManager().markForRollback(game) : null;
         final int hostId = sa.getHostCard().getId();
         final int failedBefore = game.getStack().getIllegalAdditionCount(sa.getHostCard());
@@ -978,11 +981,14 @@ public class PlayerControllerAi extends PlayerController {
 
         final boolean played = ComputerUtil.handlePlayingSpellAbility(player, sa, chooseTargets);
 
-        if (guarded && game.getStack().getIllegalAdditionCount(sa.getHostCard()) > failedBefore) {
-            getAi().noteFailedCast(key); // before the restore: this memory is not part of the game
-            final boolean restored = game.getUndoManager().rollbackTo(game, mark);
-            game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
-                    "AI cast of card #" + hostId + " was taken back" + (restored ? "" : " (no snapshot, the card was returned by hand)")));
+        if (!sa.isCopied() && !sa.isTrigger() && game.getStack().getIllegalAdditionCount(sa.getHostCard()) > failedBefore) {
+            // MagicStack already refunded the mana and returned the card; remember it so the AI does not pick it again
+            getAi().noteFailedCast(key); // before any restore: this memory is not part of the game
+            if (guarded) {
+                final boolean restored = game.getUndoManager().rollbackTo(game, mark);
+                game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
+                        "AI cast of card #" + hostId + " was taken back" + (restored ? "" : " (no snapshot, the card was returned by hand)")));
+            }
             return false;
         }
         if (!played && !sa.isCopied() && !sa.isTrigger()) {
