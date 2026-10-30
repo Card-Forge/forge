@@ -201,6 +201,9 @@ public class ConquestPlane {
             editions.add(edition);
 
             for (EditionEntry card : edition.getObtainableCards()) {
+                if (edition.isRebalanced(card.name())) {
+                    continue;
+                }
                 if (bannedCardSet == null || !bannedCardSet.contains(card.name())) {
                     addCard(commonCards.getCard(card.name(), setCode));
                 }

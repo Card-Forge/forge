@@ -21,6 +21,7 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.sticker.Sticker;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -1531,6 +1532,13 @@ public class PlayerControllerAi extends PlayerController {
         boolean optional = !tgtSA.getPayCosts().isMandatory();
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell spell) { // Isn't it ALWAYS a spell?
+
+            // PlayEffect marks the spell with the madness alternative cost; the madness keyword itself sits on the
+            // trigger's ability, never on the card's own spell, so isKeyword(MADNESS) is always false here
+            if (tgtSA.isMadness() && !tgtSA.usesTargeting()
+                    && ComputerUtilCost.canPayCost(tgtSA, player, false)) {
+                return ComputerUtil.playStack(tgtSA, player, getGame()); // otherwise the card is just lost
+            }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
@@ -1649,18 +1657,12 @@ public class PlayerControllerAi extends PlayerController {
         // Filter out mana sources that will interfere with payManaCost()
         CardCollection untapped = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
 
-        // Filter out creatures if AI hasn't attacked yet
+        // before the AI attacks, any of its creatures may still be needed for combat, so they pay last
+        final CardCollection kept = new CardCollection();
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            if (!creatures) {
-                untapped = CardLists.filter(untapped, c -> !c.isCreature());
-            } else {
-                // TODO AI needs to learn how to use Convoke or Waterbend
-                return new HashMap<>();
-            }
-        }
-
-        if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
-                (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
+            kept.addAll(CardLists.filter(untapped, CardPredicates.CREATURES));
+            untapped.removeAll(kept);
+        } else if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Do not convoke potential blockers until after opponent's attack
             final CardCollectionView blockers = ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(ai, null), CardCollection.EMPTY);
             untapped.removeAll(blockers);
@@ -1677,7 +1679,32 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
         }
-        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
+        final Map<Card, ManaCostShard> chosen = ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
+        // improvise and waterbend don't record the cards they tap, which the AI checks before casting
+        if (kept.isEmpty() || !creatures || artifacts) {
+            return chosen;
+        }
+        // an X spell would size X to include the creatures kept for combat
+        if (sa.costHasManaX()) {
+            return chosen;
+        }
+        // creatures kept for combat pay only what mana can't, those that can't attack first, then the weakest
+        final ManaCostBeingPaid rest = new ManaCostBeingPaid(manaCost);
+        chosen.values().forEach(shard -> rest.decreaseShard(shard, 1));
+        if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+            return chosen;
+        }
+        kept.sort(Comparator.comparing((Card c) -> CombatUtil.canAttack(c)).thenComparing(ComputerUtilCard.getCachedCreatureComparator()));
+        for (final Card c : kept) {
+            ComputerUtilMana.getConvokeOrImproviseFromList(rest.toManaCost(), Lists.newArrayList(c), artifacts, creatures).forEach((card, shard) -> {
+                chosen.put(card, shard);
+                rest.decreaseShard(shard, 1);
+            });
+            if (rest.isPaid() || ComputerUtilMana.canPayManaCost(rest, sa, ai, false)) {
+                break;
+            }
+        }
+        return chosen;
     }
 
     @Override
