@@ -2002,7 +2002,7 @@ public class AiController {
         approved.addAll(chooseSpellAbilitiesToPlayFromList(saList, true,
                 discover ? cfg.maxCandidates * 2 : cfg.maxCandidates, discover ? extras : null));
         // counterspells the heuristics did not want to use are still worth a look against a big spell
-        if (top != null && discover && mode == FlatMonteCarloPicker.Mode.RESPOND) {
+        if (top != null && mode == FlatMonteCarloPicker.Mode.RESPOND) {
             // Counterspells with an alternative cost (Force of Will, Daze, Force of Negation...) are separate plays that
             // only exist once the alternative costs are expanded: the printed ones are not castable without the mana.
             final List<SpellAbility> counterBases = new ArrayList<>(getPlayableCounters(cards));
@@ -2023,14 +2023,26 @@ public class AiController {
                     continue;
                 }
                 counter.setActivatingPlayer(player);
+                // AILogic$ Never: out, unless it is one of the kinds that can be judged and discovery or a ramp deck's
+                // key card asks for it (Kozilek, the Great Distortion's counter)
+                final boolean guarded = GuardedAbilities.isNeverLogic(counter);
+                if (guarded ? !GuardedAbilities.mayConsider(player, counter, discover) : !discover) {
+                    continue; // without discovery only a ramp deck's key card gets this far
+                }
                 try {
-                    if (counter.canPlay() && counter.canTargetSpellAbility(top) && ComputerUtilCost.canPayCost(counter, player, false)) {
+                    if (counter.canPlay() && counter.canTargetSpellAbility(top)) {
+                        // aim first: a cost that depends on the target (a discard of its mana value) cannot be checked before
                         counter.resetTargets();
                         counter.getTargets().add(top);
-                        extras.add(counter);
+                        if (ComputerUtilCost.canPayCost(counter, player, false)
+                                && (!guarded || GuardedAbilities.worthIt(player, counter, top))) {
+                            extras.add(counter);
+                        } else {
+                            counter.resetTargets();
+                        }
                     }
                 } catch (final RuntimeException e) {
-                    // not castable after all
+                    counter.resetTargets(); // not castable after all
                 }
             }
         }
@@ -2367,6 +2379,9 @@ public class AiController {
      * rule of thumb. Nothing is decided here; rollouts judge it against the alternatives.
      */
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
+        if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
+            return false; // the script says the AI never plays it, and nothing makes an exception
+        }
         switch (opinion) {
             case CantPlaySa, CantAfford, CantAffordX, TimingRestrictions, WouldDestroyLegend, WouldBecomeZeroToughnessCreature:
                 return false;

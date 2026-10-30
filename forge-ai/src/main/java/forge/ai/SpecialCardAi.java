@@ -982,8 +982,8 @@ public class SpecialCardAi {
             lib.sort(CardLists.CmcComparatorInv);
 
             if (ai.getController() instanceof PlayerControllerAi) {
-                // A madness or Psychatog deck knows what it is missing: ask for that, whatever the profile says.
-                final CardCollection planned = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                // A deck built around a combo (madness, Psychatog, storm...) knows what it is missing: ask for that, whatever the profile says.
+                final CardCollection planned = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai)
                         .tutorPicks(ai, lib, changeNum);
                 if (planned != null) {
                     return planned;
