@@ -959,6 +959,15 @@ public class AiController {
             return AiPlayDecision.CantAfford;
         }
 
+        // convoking would tap a creature the AI means to attack or block with, so it keeps it for combat
+        final CardCollection convoked = new CardCollection(sa.getTappedForConvoke());
+        if (!convoked.isEmpty() && game.getPhaseHandler().isPlayerTurn(player)
+                && game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && (convoked.anyMatch(c -> getPredictedCombat().isAttacking(c))
+                || ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(player, null), CardCollection.EMPTY).anyMatch(convoked::contains))) {
+            return AiPlayDecision.AnotherTime;
+        }
+
         return AiPlayDecision.WillPlay;
     }
 
