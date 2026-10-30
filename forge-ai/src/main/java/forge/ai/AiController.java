@@ -168,6 +168,10 @@ public class AiController {
     public boolean usesHybridSimulation() {
         return simMode == AIOption.USE_HYBRID_SIMULATION;
     }
+    /** Whether any simulation search (full or hybrid) takes the decisions of this AI. */
+    public boolean usesSimulation() {
+        return simMode != null;
+    }
     public boolean usesFullSimulation() {
         return simMode == AIOption.USE_FULL_SIMULATION;
     }
