@@ -144,9 +144,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
 
         CardCollection result = aic.getCardsToDiscard(c, type.split(";"), ability, discarded);
-        if (result != null) {
-            discarded.addAll(result);
+        if (result == null || result.size() < c) {
+            // not enough valid cards (e.g. Kozilek, the Great Distortion without a card of mana value X):
+            // the cost can't be paid, so don't return an empty or partial payment
+            return null;
         }
+        discarded.addAll(result);
         return PaymentDecision.card(result);
     }
 
