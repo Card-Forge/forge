@@ -122,7 +122,8 @@ public final class ManaSacrifice {
     /**
      * Whether a test payment may use this mana ability again. A test sacrifices nothing, so the fodder of each use is
      * set aside in the memory of an AI controller instead, and the ability can be used again while enough fodder is
-     * left. An AI's fodder is already set aside by {@link ComputerUtilCost#checkForManaSacrificeCost}.
+     * left. An AI's fodder is already set aside by {@link ComputerUtilCost#checkForManaSacrificeCost}. That method skips
+     * a human, because the Auto button also pays under a temporary AI controller, so a human's fodder is set aside here.
      */
     public static boolean canUseAgainInTest(final Player p, final SpellAbility ma) {
         final CostSacrifice part = sacrificePart(ma);
