@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -121,5 +122,23 @@ public class ComputerUtilManaTest extends SimulationTest {
         // {2}{B} with 2 Swamp + 2 Island taps 3 of 4 lands, so one colour is gone either way
         final Map<String, Integer> untapped = payAndCountUntapped("2 B", 3, "Swamp:2", "Island:2");
         assertEquals(untapped.get("Swamp") + untapped.get("Island"), 1);
+    }
+
+    @Test
+    public void sacrificeSourceIsUsedOncePerFodder() {
+        // Phyrexian Altar with three tokens pays for a three-drop on its own, but not for a four-drop
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        addCard("Phyrexian Altar", p);
+        addTokens("b_2_2_zombie", 3, p);
+
+        final SpellAbility courser = addCardToZone("Centaur Courser", p, ZoneType.Hand).getFirstSpellAbility();
+        courser.setActivatingPlayer(p);
+        assertTrue(ComputerUtilMana.canPayManaCost(courser, p, 0, false), "{2}{G} with three tokens to sacrifice");
+
+        final SpellAbility giant = addCardToZone("Hill Giant", p, ZoneType.Hand).getFirstSpellAbility();
+        giant.setActivatingPlayer(p);
+        assertFalse(ComputerUtilMana.canPayManaCost(giant, p, 0, false), "{3}{R} needs a fourth token");
     }
 }
