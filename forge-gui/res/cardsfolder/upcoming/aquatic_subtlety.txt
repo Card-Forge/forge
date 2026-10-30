@@ -1,0 +1,7 @@
+Name:Aquatic Subtlety
+ManaCost:U U U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.Blue+YouCtrl | PumpZone$ Hand | KW$ Evoke:ExileFromHand<1/Card.Blue+Other/blue card> | Duration$ Perpetual | SpellDescription$ Blue creature cards in your hand perpetually gain "Evoke—Exile a blue card from your hand."
+Oracle:Draw two cards, then discard two cards. Blue creature cards in your hand perpetually gain "Evoke—Exile a blue card from your hand."
