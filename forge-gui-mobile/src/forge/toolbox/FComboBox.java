@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.gui.interfaces.IComboBox;
+import forge.gui.util.ListHeading;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.util.Utils;
 
 public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private final List<T> items = new ArrayList<>();
@@ -136,7 +141,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     }
 
     public void setSelectedItem(T item) {
-        if (selectedItem == item) { return; }
+        if (selectedItem == item || item instanceof ListHeading) { return; }
 
         if (item != null) {
             if (items.contains(item)) {
@@ -244,10 +249,101 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         return getDivotWidth() + 2 * PADDING;
     }
 
+    /** A group label in a grouped list, with a divider above every group but the first. Tapping it does nothing. */
+    private static class HeadingMenuItem extends FMenuItem {
+        private static final FSkinFont FONT = FSkinFont.get(12);
+        private final boolean divider;
+
+        private HeadingMenuItem(final String text, final boolean divider0) {
+            // Enabled, because a disabled item is drawn faded
+            super(text, null, true);
+            divider = divider0;
+        }
+
+        @Override
+        public boolean tap(final float x, final float y, final int count) {
+            return true;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return HEIGHT * 0.7f;
+        }
+
+        @Override
+        public void draw(final Graphics g) {
+            final float w = getWidth();
+            final float h = getHeight();
+            if (divider) {
+                g.drawLine(1, getForeColor().alphaColor(0.3f), 0, 0, w, 0);
+            }
+            g.drawText(getText(), FONT, getForeColor(), GAP_X, h * 0.2f, w - 2 * GAP_X, h * 0.8f, false, Align.left, true);
+        }
+    }
+
+    /** A choice in a grouped list: indented under its heading, with a check when it is the current choice and no divider of its own. */
+    private static class GroupedMenuItem extends FMenuItem {
+        private static final FSkinFont FONT = FSkinFont.get(11);
+        private final boolean indented, checked;
+
+        private GroupedMenuItem(final String text, final FEventHandler handler, final boolean indented0, final boolean checked0) {
+            super(text, handler);
+            indented = indented0;
+            checked = checked0;
+        }
+
+        @Override
+        public void draw(final Graphics g) {
+            final float w = getWidth();
+            if (showPressedColor()) {
+                g.fillRect(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE).alphaColor(0.9f), 0, 0, w, HEIGHT);
+            }
+            final float x = indented ? GAP_X * 4 : GAP_X;
+            final float textWidth = FONT.getBounds(getText()).width;
+            g.drawText(getText(), FONT, getForeColor(), x, 0, w - x - GAP_X, HEIGHT, false, Align.left, true);
+            if (checked) {
+                final float size = HEIGHT * 0.25f;
+                final float cx = x + textWidth + GAP_X * 2;
+                final float cy = HEIGHT / 2;
+                g.drawLine(2, getForeColor(), cx, cy, cx + size * 0.35f, cy + size * 0.35f);
+                g.drawLine(2, getForeColor(), cx + size * 0.35f, cy + size * 0.35f, cx + size, cy - size * 0.4f);
+            }
+        }
+    }
+
     private class DropDown extends FDropDownMenu {
+        private static final Color GROUPED_BACK = new Color(35 / 255f, 40 / 255f, 44 / 255f, 1f);
+
+        private boolean isGrouped() {
+            return FComboBox.this.items.stream().anyMatch(ListHeading.class::isInstance);
+        }
+
         @Override
         protected boolean autoHide() {
             return autoClose;
+        }
+
+        @Override
+        protected void drawBackground(final Graphics g) {
+            super.drawBackground(g);
+            // The frosted background lets the screen show through, which hides the dimmed headings
+            if (isGrouped()) {
+                g.fillRect(GROUPED_BACK, 0, 0, getWidth(), getHeight());
+            }
+        }
+
+        @Override
+        protected void drawOverlay(final Graphics g) {
+            super.drawOverlay(g);
+            if (!isGrouped() || getMaxScrollTop() <= 0) {
+                return;
+            }
+            final float trackHeight = getHeight();
+            final float thumbHeight = Math.max(trackHeight * trackHeight / getScrollHeight(), trackHeight / 8);
+            final float thumbTop = (trackHeight - thumbHeight) * getScrollTop() / getMaxScrollTop();
+            final float thumbWidth = Utils.scale(4);
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.CLR_TEXT).alphaColor(0.45f),
+                    getWidth() - thumbWidth - Utils.scale(2), thumbTop, thumbWidth, thumbHeight);
         }
 
         @Override
@@ -259,8 +355,15 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
 
         @Override
         protected void buildMenu() {
+            final boolean grouped = isGrouped();
+            boolean underHeading = false;
             for (final T item : FComboBox.this.items) {
-                FMenuItem menuItem = new FMenuItem(getDisplayText(item), e -> {
+                if (item instanceof ListHeading) {
+                    addItem(new HeadingMenuItem(item.toString(), item != FComboBox.this.items.get(0)));
+                    underHeading = true;
+                    continue;
+                }
+                final FEventHandler onTap = e -> {
                     if (dropDownItemTap != null) {
                         dropDownItemTap.handleEvent(new FEvent(FComboBox.this, FEventType.TAP, item));
                     }
@@ -270,7 +373,12 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
                             dropDownChangeHandler.handleEvent(new FEvent(FComboBox.this, FEventType.CHANGE, item));
                         }
                     }
-                });
+                };
+                if (grouped) {
+                    addItem(new GroupedMenuItem(getDisplayText(item), onTap, underHeading, selectedItem == item));
+                    continue;
+                }
+                FMenuItem menuItem = new FMenuItem(getDisplayText(item), onTap);
                 if (selectedItem == item) {
                     menuItem.setSelected(true);
                 }
