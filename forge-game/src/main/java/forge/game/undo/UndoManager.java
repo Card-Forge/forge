@@ -32,6 +32,35 @@ public final class UndoManager {
     private Player owner;
     private int undosLeft = UNDOS_PER_PHASE;
     private long budgetPhase = -1;
+    /** Objects captured by the last snapshot: predicts what the next one will cost. */
+    private long lastObjects;
+    /** Rough peak bytes per captured object while a capture runs (an estimate; tune from real logs). */
+    private static final long BYTES_PER_OBJECT = 220;
+    /** Objects the human undo history may hold in total (a few tens of MB of arrays). */
+    private static final long MAX_RETAINED_OBJECTS = 6_000_000L;
+
+    /** False when the heap is too full to take another snapshot safely. */
+    private boolean heapAllows() {
+        if (lastObjects == 0) { return true; }
+        final Runtime rt = Runtime.getRuntime();
+        final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
+        return free > lastObjects * BYTES_PER_OBJECT;
+    }
+
+    /** Game thread. Frees the undo history and the recorder's registry. */
+    private synchronized void dropHistory(String why) {
+        stack.clear();
+        barrierReason = why;
+        justRestored = false;
+        recorder.reset();
+    }
+
+    private synchronized long retainedObjects() {
+        long n = 0;
+        for (Entry e : stack) { n += e.memento().objectCount(); }
+        return n;
+    }
+
     public synchronized Mode mode() { return mode; }
 
     /** Game thread; safe to call every prompt. Turning undo off drops the history. */
@@ -65,10 +94,25 @@ public final class UndoManager {
             long phaseKey = ph.getTurn() * 100L + (ph.getPhase() == null ? 0 : ph.getPhase().ordinal());
             if (phaseKey > budgetPhase) { budgetPhase = phaseKey; undosLeft = UNDOS_PER_PHASE; }
             final int cap = mode == Mode.SINGLE_STEP ? 2 : MAX;
-            while (stack.size() >= cap) stack.removeLast();
+            while (stack.size() >= cap
+                    || (stack.size() > 1 && retainedObjects() + lastObjects > MAX_RETAINED_OBJECTS)) {
+                stack.removeLast();
+            }
         }
 
-        final Entry entry = new Entry(recorder.capture(game), game.getGameLog().size());   // slow part, no lock held
+        if (!heapAllows()) {
+            dropHistory("Low memory");
+            if (!heapAllows()) { return; }
+        }
+        final Entry entry;
+        try {
+            final GameMemento m = recorder.capture(game);   // slow part, no lock held
+            lastObjects = m.objectCount();
+            entry = new Entry(m, game.getGameLog().size());
+        } catch (final RuntimeException | OutOfMemoryError ex) {
+            dropHistory("Low memory");
+            return;
+        }
 
         synchronized (this) {
             stack.push(entry);
@@ -93,9 +137,18 @@ public final class UndoManager {
         if (mode() == Mode.OFF) {
             return null;
         }
+        if (!heapAllows()) {
+            dropHistory("Low memory");   // the human history is the big freeable chunk
+            if (!heapAllows()) {
+                return null;
+            }
+        }
         try {
-            return new Mark(new GameMemento.Recorder().capture(game), game.getGameLog().size());
-        } catch (final RuntimeException ex) {
+            final GameMemento m = new GameMemento.Recorder().capture(game);
+            lastObjects = m.objectCount();
+            return new Mark(m, game.getGameLog().size());
+        } catch (final RuntimeException | OutOfMemoryError ex) {
+            dropHistory("Low memory");
             System.err.println("Could not take a rollback snapshot: " + ex);
             return null;
         }

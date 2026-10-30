@@ -102,6 +102,15 @@ public final class GameMemento {
     /** Number of objects held by this memento (for logging / tuning). */
     public int objectCount() { return targets.length; }
 
+    /** Object count per class, biggest first (to see what dominates the graph). */
+    public List<Map.Entry<String, Integer>> histogram() {
+        final Map<String, Integer> h = new HashMap<>();
+        for (Object t : targets) { h.merge(t.getClass().getName(), 1, Integer::sum); }
+        final List<Map.Entry<String, Integer>> out = new ArrayList<>(h.entrySet());
+        out.sort((a, b) -> b.getValue() - a.getValue());
+        return out;
+    }
+
     /** How many of this memento's snapshots are the very same instances as in another one (tests / tuning). */
     int sharedWith(GameMemento other) {
         final int n = Math.min(snaps.length, other.snaps.length);
@@ -363,6 +372,18 @@ public final class GameMemento {
         public int lastAllocated, lastReused;
 
         int registrySize() { return registry.size(); }   // tests
+
+        /** Forgets every snapshot (frees memory); the next capture starts from scratch. */
+        public void reset() {
+            registry.clear();
+            queue.clear();
+            order.clear();
+            sRefs = new Object[256];
+            sPrims = new long[64];
+            sn = 0;
+            highWater = 0;
+            current = null;
+        }
 
         public GameMemento capture(Object root) {
             final int g = ++gen;
