@@ -1,0 +1,9 @@
+Name:Infinite Diversity
+ManaCost:7 R R
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant.YouOwn,Sorcery.YoupOwn | ValidTgtsDesc$ instant or sorcery card in your graveyard | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Federation — Exile target instant or sorcery card from your graveyard. Copy that card X times, where X is the number of creature types among non-Borg creatures you control. You may cast the copies without paying their mana costs. Exile CARDNAME.
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ Exile | Amount$ X | AllowRepeats$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.nonBorg+YouCtrl$CreatureType
+Oracle:Federation — Exile target instant or sorcery card from your graveyard. Copy that card X times, where X is the number of creature types among non-Borg creatures you control. You may cast the copies without paying their mana costs. Exile Infinite Diversity.

@@ -1,0 +1,11 @@
+Name:Jadzia Dax, Living Legacy
+ManaCost:1 G
+Types:Legendary Creature Trill Scientist
+PT:0/1
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your first main phase, put a +1/+1 counter on NICKNAME, then add an amount of {G} equal to the number of counters on her.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ G | Amount$ X
+SVar:X:Count$CardCounters.ALL
+A:AB$ PutCounter | PrecostDesc$ Transfer Symbiont — | Cost$ 2 G Discard<1/CARDNAME/this card> | ActivationZone$ Hand | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
+DeckHints:Ability$Counters
+Oracle:At the beginning of your first main phase, put a +1/+1 counter on Jadzia Dax, then add an amount of {G} equal to the number of counters on her.\nTransfer Symbiont — {2}{G}, Discard this card: Put two +1/+1 counters on target creature.
