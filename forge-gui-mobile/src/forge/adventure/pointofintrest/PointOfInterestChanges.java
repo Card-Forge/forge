@@ -99,6 +99,15 @@ public class PointOfInterestChanges implements SaveFileContent  {
         return mapFlags;
     }
 
+    /** Recorded on the root location, including victories in its connected submaps. */
+    public void recordEnemyDefeat(String enemyName) {
+        mapFlags.put("enemyDefeated:" + enemyName, (byte) 1);
+    }
+
+    public boolean isEnemyDefeated(String enemyName) {
+        return mapFlags.containsKey("enemyDefeated:" + enemyName);
+    }
+
     public void buyCard(int objectID, int cardIndex) {
         if( !cardsBought.containsKey(objectID)) {
             cardsBought.put(objectID,new HashSet<>());
