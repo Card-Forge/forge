@@ -251,12 +251,12 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
 
     /** A group label in a grouped list, with a divider above every group but the first. Tapping it does nothing. */
     private static class HeadingMenuItem extends FMenuItem {
-        private static final FSkinFont FONT = FSkinFont.get(12);
+        private static final FSkinFont FONT = FSkinFont.get(10);
         private final boolean divider;
 
         private HeadingMenuItem(final String text, final boolean divider0) {
             // Enabled, because a disabled item is drawn faded
-            super(text, null, true);
+            super(text.toUpperCase(), null, true);
             divider = divider0;
         }
 
@@ -277,18 +277,18 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
             if (divider) {
                 g.drawLine(1, getForeColor().alphaColor(0.3f), 0, 0, w, 0);
             }
-            g.drawText(getText(), FONT, getForeColor(), GAP_X, h * 0.2f, w - 2 * GAP_X, h * 0.8f, false, Align.left, true);
+            // Brightened, because the grouped list draws on a fixed dark background whatever the skin
+            g.drawText(getText(), FONT, Frost.accentShade(1.4f, 1f), GAP_X, h * 0.2f, w - 2 * GAP_X, h * 0.8f, false, Align.left, true);
         }
     }
 
-    /** A choice in a grouped list: indented under its heading, with a check when it is the current choice and no divider of its own. */
+    /** A choice in a grouped list: tinted with a check at the right edge when it is the current choice, and no divider of its own. */
     private static class GroupedMenuItem extends FMenuItem {
         private static final FSkinFont FONT = FSkinFont.get(11);
-        private final boolean indented, checked;
+        private final boolean checked;
 
-        private GroupedMenuItem(final String text, final FEventHandler handler, final boolean indented0, final boolean checked0) {
+        private GroupedMenuItem(final String text, final FEventHandler handler, final boolean checked0) {
             super(text, handler);
-            indented = indented0;
             checked = checked0;
         }
 
@@ -297,16 +297,17 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
             final float w = getWidth();
             if (showPressedColor()) {
                 g.fillRect(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE).alphaColor(0.9f), 0, 0, w, HEIGHT);
+            } else if (checked) {
+                g.fillRect(Frost.accent(0.2f), 0, 0, w, HEIGHT);
             }
-            final float x = indented ? GAP_X * 4 : GAP_X;
-            final float textWidth = FONT.getBounds(getText()).width;
-            g.drawText(getText(), FONT, getForeColor(), x, 0, w - x - GAP_X, HEIGHT, false, Align.left, true);
+            g.drawText(getText(), FONT, getForeColor(), GAP_X, 0, w - 2 * GAP_X, HEIGHT, false, Align.left, true);
             if (checked) {
                 final float size = HEIGHT * 0.25f;
-                final float cx = x + textWidth + GAP_X * 2;
+                final float cx = w - size - GAP_X * 2;
                 final float cy = HEIGHT / 2;
-                g.drawLine(2, getForeColor(), cx, cy, cx + size * 0.35f, cy + size * 0.35f);
-                g.drawLine(2, getForeColor(), cx + size * 0.35f, cy + size * 0.35f, cx + size, cy - size * 0.4f);
+                final Color tick = Frost.accentShade(1.4f, 1f);
+                g.drawLine(2, tick, cx, cy, cx + size * 0.35f, cy + size * 0.35f);
+                g.drawLine(2, tick, cx + size * 0.35f, cy + size * 0.35f, cx + size, cy - size * 0.4f);
             }
         }
     }
@@ -356,11 +357,9 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         @Override
         protected void buildMenu() {
             final boolean grouped = isGrouped();
-            boolean underHeading = false;
             for (final T item : FComboBox.this.items) {
                 if (item instanceof ListHeading) {
                     addItem(new HeadingMenuItem(item.toString(), item != FComboBox.this.items.get(0)));
-                    underHeading = true;
                     continue;
                 }
                 final FEventHandler onTap = e -> {
@@ -375,7 +374,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
                     }
                 };
                 if (grouped) {
-                    addItem(new GroupedMenuItem(getDisplayText(item), onTap, underHeading, selectedItem == item));
+                    addItem(new GroupedMenuItem(getDisplayText(item), onTap, selectedItem == item));
                     continue;
                 }
                 FMenuItem menuItem = new FMenuItem(getDisplayText(item), onTap);
