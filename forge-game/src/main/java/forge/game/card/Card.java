@@ -79,6 +79,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static java.lang.Math.max;
 
@@ -3449,7 +3450,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!getStaticAbilities().isEmpty()) {
             return false;
         }
-        if (!currentState.getReplacementEffects(false).isEmpty()) {
+        if (!currentState.getReplacementEffects().isEmpty()) {
             return false;
         }
         if (!getTriggers().isEmpty()) {
@@ -7159,22 +7160,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return currentState.getReplacementEffects();
     }
 
-    public ReplacementEffect addReplacementEffect(final ReplacementEffect replacementEffect) {
-        currentState.addReplacementEffect(replacementEffect);
-        return replacementEffect;
-    }
+    public Stream<ReplacementEffect> streamReplacementEffects() {
+        Stream<ReplacementEffect> result = currentState.streamReplacementEffects();
 
-    public void updateReplacementEffects(List<ReplacementEffect> list, CardState state, boolean rulesHost) {
-        for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
-            ck.applyReplacementEffect(list);
+        if (!hasCounterReplacementEffects()) {
+            return result;
         }
 
-        // Keywords are already sorted by Layer
-        getUnhiddenKeywords(state).applyReplacementEffect(list);
-
-        if (!rulesHost) {
-            return;
-        }
+        Stream.Builder<ReplacementEffect> sb = Stream.builder();
 
         // Shield Counter aren't affected by Changed Card Traits
         if (getCounters(CounterEnumType.SHIELD) > 0) {
@@ -7192,8 +7185,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
 
-            list.add(shieldCounterReplaceDamage);
-            list.add(shieldCounterReplaceDestroy);
+            sb.add(shieldCounterReplaceDamage);
+            sb.add(shieldCounterReplaceDestroy);
         }
         if (getCounters(CounterEnumType.STUN) > 0) {
             String sa = "DB$ RemoveCounter | Defined$ Self | CounterType$ Stun | CounterNum$ 1";
@@ -7204,7 +7197,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 stunCounterReplaceUntap = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 stunCounterReplaceUntap.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
-            list.add(stunCounterReplaceUntap);
+            sb.add(stunCounterReplaceUntap);
         }
         if (getCounters(CounterEnumType.FINALITY) > 0) {
             if (finalityCounterReplaceDying == null) {
@@ -7215,19 +7208,41 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 finalityCounterReplaceDying = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 finalityCounterReplaceDying.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
-            list.add(finalityCounterReplaceDying);
+            sb.add(finalityCounterReplaceDying);
         }
+
+        return Stream.concat(result, sb.build());
     }
 
-    public boolean hasReplacementEffect(final ReplacementEffect re) {
-        return currentState.hasReplacementEffect(re);
-    }
-    public boolean hasReplacementEffect(final int id) {
-        return currentState.hasReplacementEffect(id);
+    public ReplacementEffect addReplacementEffect(final ReplacementEffect replacementEffect) {
+        currentState.addReplacementEffect(replacementEffect);
+        return replacementEffect;
     }
 
-    public ReplacementEffect getReplacementEffect(final int id) {
-        return currentState.getReplacementEffect(id);
+    public void updateReplacementEffects(List<ReplacementEffect> list, CardState state) {
+        for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
+            ck.applyReplacementEffect(list);
+        }
+
+        // Keywords are already sorted by Layer
+        getUnhiddenKeywords(state).applyReplacementEffect(list);
+    }
+
+    /** Whether the card has any replacement effect, counting those its subtypes and counters add. */
+    public boolean hasReplacementEffects() {
+        return hasRuleReplacementEffects() || !currentState.getReplacementEffects().isEmpty();
+    }
+
+    public boolean hasRuleReplacementEffects() {
+        if (currentState.hasRuleReplacementEffects()) {
+            return true;
+        }
+        return hasCounterReplacementEffects();
+    }
+
+    public boolean hasCounterReplacementEffects() {
+        return getCounters(CounterEnumType.SHIELD) > 0 || getCounters(CounterEnumType.STUN) > 0
+                || getCounters(CounterEnumType.FINALITY) > 0;
     }
 
     /**
