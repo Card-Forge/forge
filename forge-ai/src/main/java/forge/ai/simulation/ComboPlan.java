@@ -1061,12 +1061,15 @@ public final class ComboPlan {
      * a madness card waits in hand, a madness card when an outlet is out, the atog while there is none), then cards
      * that are not yet in hand, and a land while the AI is short of them. When the opponent picks one of the cards
      * (Intuition) the best {@code n} different cards are asked for, so that the one the opponent leaves is still good.
-     * Null when the deck is neither, or nothing clearly worth fetching is in the pool: the normal choice is made.
+     * Every other combo is served the same way: the piece that is missing first (a payoff when the enablers are
+     * there and the other way round), a second copy last. Decks that want cards in the graveyard are left alone when
+     * the cards that are not picked go there (Intuition): the normal logic knows what to put in the graveyard.
+     * Null when the deck has no combo, or nothing clearly worth fetching is in the pool: the normal choice is made.
      */
     public CardCollection tutorPicks(final Player ai, final Iterable<Card> pool, final int n) {
         final Combo mad = find(Kind.MADNESS);
         final Combo atog = find(Kind.ATOG);
-        if (mad == null && atog == null || ai == null || pool == null || n <= 0) {
+        if (combos.isEmpty() || ai == null || pool == null || n <= 0) {
             return null;
         }
         final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
@@ -1074,7 +1077,7 @@ public final class ComboPlan {
         final java.util.Map<Card, Integer> score = new java.util.HashMap<>();
         final List<Card> ranked = new ArrayList<>();
         for (final Card c : pool) {
-            score.put(c, tutorScore(ai, c, mad, atog, hand, board));
+            score.put(c, tutorScore(ai, c, mad, atog, hand, board, n > 1));
             ranked.add(c);
         }
         ranked.sort((a, b) -> Integer.compare(score.get(b), score.get(a)));
@@ -1099,8 +1102,51 @@ public final class ComboPlan {
         return picks == null ? null : picks.getFirst();
     }
 
+    /**
+     * A piece of any other combo: wanted most when its other half is already there, then when nothing is, and hardly
+     * when the same kind of piece is already at hand. Storm payoffs wait for a few rituals, go-wide finishers for a board.
+     */
+    private int pieceScore(final Card c, final Combo combo, final CardCollectionView hand, final CardCollectionView board,
+                           final boolean graveyardRest) {
+        final String n = c.getName();
+        final boolean payoff = combo.payoffs.contains(n);
+        final boolean enabler = combo.enablers.contains(n) || combo.cascaders.contains(n);
+        if (!payoff && !enabler) {
+            return 0;
+        }
+        if (graveyardRest && (combo.kind == Kind.MASS_REANIMATION || combo.kind == Kind.REANIMATOR
+                || combo.kind == Kind.DREDGE || combo.kind == Kind.MILL)) {
+            return 0; // what is left over goes to the graveyard, which is where these decks want cards
+        }
+        boolean havePayoff = false;
+        boolean haveEnabler = false;
+        int enablersInHand = 0;
+        int creatures = 0;
+        for (final Card x : hand) {
+            havePayoff |= combo.payoffs.contains(x.getName());
+            final boolean e = combo.enablers.contains(x.getName()) || combo.cascaders.contains(x.getName());
+            haveEnabler |= e;
+            enablersInHand += e ? 1 : 0;
+        }
+        for (final Card x : board) {
+            havePayoff |= combo.payoffs.contains(x.getName());
+            haveEnabler |= combo.enablers.contains(x.getName());
+            creatures += x.isCreature() ? 1 : 0;
+        }
+        int s;
+        if (payoff) {
+            s = havePayoff ? 15 : haveEnabler ? 100 : 70;
+            if (combo.kind == Kind.STORM && enablersInHand < 2 || combo.kind == Kind.GO_WIDE && creatures < 3) {
+                s = Math.min(s, 20); // not yet: the payoff is wasted without the rituals or the board
+            }
+        } else {
+            s = haveEnabler ? 15 : havePayoff ? 100 : 70;
+        }
+        return s * (50 + combo.strength / 2) / 100;
+    }
+
     private int tutorScore(final Player ai, final Card c, final Combo mad, final Combo atog,
-                           final CardCollectionView hand, final CardCollectionView board) {
+                           final CardCollectionView hand, final CardCollectionView board, final boolean graveyardRest) {
         int lands = 0;
         for (final Card x : hand) {
             lands += x.isLand() ? 1 : 0;
@@ -1112,6 +1158,11 @@ public final class ComboPlan {
             return lands < 4 ? 45 : -40;
         }
         int s = 0;
+        for (final Combo combo : combos) {
+            if (combo.kind != Kind.MADNESS && combo.kind != Kind.ATOG) {
+                s += pieceScore(c, combo, hand, board, graveyardRest);
+            }
+        }
         if (mad != null) {
             boolean madInHand = false;
             for (final Card x : hand) {

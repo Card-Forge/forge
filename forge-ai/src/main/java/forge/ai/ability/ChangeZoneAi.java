@@ -1526,7 +1526,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (keycardFound == null && player == decider && ZoneType.Hand.equals(destination)
                 && player.getController() instanceof PlayerControllerAi) {
             // no key card named by the deck file: the deck plan (madness, Psychatog) knows what is missing
-            keycardFound = ((PlayerControllerAi) player.getController()).getAi().deckPlan(player).combos
+            keycardFound = ((PlayerControllerAi) player.getController()).getAi().deckPlan(player)
                     .tutorPick(player, fetchList);
         }
 
