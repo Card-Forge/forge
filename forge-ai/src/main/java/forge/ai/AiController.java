@@ -1991,6 +1991,9 @@ public class AiController {
                         && String.valueOf(t.getDescription()).equals(String.valueOf(counter.getDescription()))))) {
                     continue;
                 }
+                if ("Never".equals(counter.getParam("AILogic"))) {
+                    continue; // the script says the AI must not use it, same as checkAiLogic on the canPlaySa path
+                }
                 counter.setActivatingPlayer(player);
                 try {
                     if (counter.canPlay() && counter.canTargetSpellAbility(top) && ComputerUtilCost.canPayCost(counter, player, false)) {
