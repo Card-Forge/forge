@@ -3,7 +3,6 @@ Code=MDD
 Date=2027-04-09
 Name=Marvel: Darkhold Destiny
 Type=Expansion
-Tags=UniversesBeyond
 ScryfallCode=MDD
 
 [cards]

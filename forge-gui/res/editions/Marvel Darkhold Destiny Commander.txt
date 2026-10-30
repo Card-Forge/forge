@@ -3,7 +3,6 @@ Code=MDC
 Date=2027-04-09
 Name=Marvel: Darkhold Destiny Commander
 Type=Commander
-Tags=UniversesBeyond
 ScryfallCode=MDC
 
 [cards]
