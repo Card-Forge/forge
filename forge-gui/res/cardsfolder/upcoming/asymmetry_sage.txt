@@ -1,0 +1,8 @@
+Name:Asymmetry Sage
+ManaCost:U
+Types:Creature Human Wizard
+PT:0/2
+K:Flying
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast or copy an instant or sorcery spell, target creature you control has base power 3 until end of turn.
+SVar:TrigAnimate:DB$ Animate | TgtPrompt$ Select up to one target creature you control | ValidTgts$ Creature.YouCtrl | Defined$ Targeted | Power$ 3 
+Oracle:Flying\nMagecraft — Whenever you cast or copy an instant or sorcery spell, target creature you control has base power 3 until end of turn.
