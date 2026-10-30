@@ -824,8 +824,10 @@ public class ComputerUtilMana {
                     cost.addManaCost(getManaCostToActivate(saPayment));
                 }
 
-                // remove to prevent re-usage since resources don't get consumed
-                sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+                // remove to prevent re-usage since resources don't get consumed, unless a sacrifice source has fodder left
+                if (!ManaSacrifice.canUseAgainInTest(ai, saPayment)) {
+                    sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+                }
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
                 if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect, true))) {
