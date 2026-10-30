@@ -25,6 +25,7 @@ ScryfallCode=TRK
 17 C Federation Field Medic @Zoltan Boros
 18 R Federation Resupply @Ryan Valle
 19 C Free Borg Revolutionaries @Smirtouille
+20 U Ghost of Illyria @Pace Wilder
 21 U Hologram Janeway @Khadijah Khatib
 22 C Malfunctioning Holodeck @Pablo Mendoza
 23 U The Measure of a Man @Lazare Gvimradze
@@ -59,6 +60,7 @@ ScryfallCode=TRK
 52 U Data, New Life @Kieran Yanner
 53 R Deep Space Scan @Andreia Ugrai
 54 U Dominion Saboteur @Alex Negrea
+55 C Emergency Holographic Crew @Thanh Tuấn
 56 U Energize @Carlos C Diaz
 57 U Ensign Pavel Chekov @Gal Or
 58 U Enterprise NX-01 @Colin Searle
@@ -76,6 +78,7 @@ ScryfallCode=TRK
 70 R Lt. Cmdr. Geordi La Forge @Julie Dillon
 71 C Make It So @Javier Charro
 72 C Marooned @Joel Chaim Holtzman
+73 C Melkotian Adjudicator @Jason Raish
 74 M Mr. Spock, Science Officer @Colin Boyer
 75 R Nyota Uhura, Communications @Charles Chaisson
 76 C Open Communications @David Robert Hovey
@@ -100,6 +103,7 @@ ScryfallCode=TRK
 95 C Battle-Scarred Survivalist @John Di Giovanni
 96 U Blastoneuron @Bastien L. Deharme
 97 C Cha'DIch Investigator @Javier Charro
+98 R Collation Trimatrix @Bryan Sola
 99 U Collective Drone @José Parodi
 100 U Commander Raffi Musiker @Runa I. Rosenberger
 101 U D'Ghor Bloodletter @Patricia Pria
@@ -114,6 +118,7 @@ ScryfallCode=TRK
 110 M Georgiou, Terran Emperor @Julia Metzger
 111 C A Good Day to Die @Monztre
 112 R Grand Nagus Zek @Wei Guan
+113 M Gul Dukat, Colonial Prefect @Joel Chaim Holtzman
 114 C He's Dead, Jim @Crystal Fae
 115 U Hive Mind Coprocessor @Andrey Kuzinskiy
 116 U Impossible Choice @Douglas Shuler
@@ -130,7 +135,10 @@ ScryfallCode=TRK
 127 R Salt Vampire @Bastien L. Deharme
 128 R Sela, Tal Shiar Paradox @Tony Foti
 129 U Storied Veteran @Ana Teresa Rivera
+130 C Stray from History @Joel Chaim Holtzman
+131 C Tal Shiar Operative @Irina Nordsol
 132 U Tell Me What You See @Douglas Shuler
+133 C Tenacious Drone @Anton Solovianchyk
 134 U Test of Loyalty @Bartek Fedyczak
 135 R U.S.S. Reliant, From Hell's Heart @Dofresh
 136 U Vengeance Mission @Daarken
@@ -156,6 +164,7 @@ ScryfallCode=TRK
 156 U La'An Noonien-Singh, Security @Pauline Voss
 157 R Lwaxana Troi, Charming Guest @Marta Nael
 158 U Munitions Enthusiast @Lucio Parrillo
+159 U The Naked Time @Jason Raish
 160 R Pah-Wraith @Nino Vecia
 161 C Perils of the Past @Zoltan Boros
 162 C Planetary Bombardment @Smirtouille
@@ -167,10 +176,13 @@ ScryfallCode=TRK
 168 C Reckless Impulse @Simon Dominic
 169 U Red Alert! @Carlos C Diaz
 170 U Sarcophagus, Ship of the Dead @Joan Piqué Llorens
+171 C Savvy Profiteer @Andreia Ugrai
 172 C Silicate Surveyor @Joan Piqué Llorens
+173 C Starfleet Security @Edouard
 174 C Tal Shiar Analyst @Lucas Durham
 175 U Targ Wrangler @Harkalé Linaï
 176 R Tasha Yar, Out of Time @Patricia Pria
+177 U Test of Identity @Andrey Kuzinskiy
 178 U Transporter Malfunction @Bartek Fedyczak
 179 R Will Riker, First in the Field @Zezhou Chen
 180 R Worf, Intelligence Contractor @Jodie Muir
@@ -187,6 +199,7 @@ ScryfallCode=TRK
 191 U Culber and Stamets, Star-Crossed @Harkalé Linaï
 192 C Dathon and Picard at El-Adrel @Bartek Fedyczak
 193 U David and Carol Marcus, Creators @KarrahE
+194 C Dominion Assault Force @Ioannis Fiore
 195 C Dominion Supervisor @Kevin Glint
 196 M Dr. Joseph M'Benga @Romana Kendelic
 197 R Dr. Leonard "Bones" McCoy @Sam Kennedy
@@ -201,6 +214,7 @@ ScryfallCode=TRK
 206 R MACO Strike Team @Aaron J. Riley
 207 C Moopsy @Brooklyn Smith
 208 U Mugato @Chuck Lukacs
+209 U Neelix, Moral Support @JB Casacop
 210 C Photosynthetic Physician @Stella Spente
 211 M Rok-Tahk, Budding Scientist @Andreas Zafiratos
 212 U Saru, Unthreatened @Ron Lemen
@@ -251,6 +265,7 @@ ScryfallCode=TRK
 257 R Year of Hell @Jonathan Bartlett
 258 U Zero, Incorporeal Sensate @Racrufi
 259 C Class-F Shuttlecraft @William Phifer
+260 U Combadge @Paolo Puggioni
 261 M Crystalline Entity @David Álvarez
 262 C Cybernetic Specialist @Joan Piqué Llorens
 263 M Deep Space 9 @Paolo Puggioni
@@ -258,9 +273,11 @@ ScryfallCode=TRK
 265 R The Holodeck @Jessica Rossier
 266 U Isolinear Processor @David Álvarez
 267 R Replicator @William Phifer
+268 U Sickbay @Joel Chaim Holtzman
 269 C Tea, Earl Grey, Hot @Raymond Bonilla
 270 C Tricorder @Tony Foti
 271 U Type-2 Phaser @Wero Gallo
+272 U U.S.S. Cerritos, Following Up @Bruce Brenneise
 273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
 274 C Warp Core @Leon Tukker
 275 L Andoria @Josu Hernaiz
@@ -272,11 +289,13 @@ ScryfallCode=TRK
 281 L Earth, Sector 001 @Colin Searle
 282 R Federation Outpost @Edouard
 283 L Ferenginar @Colin Searle
+284 U Gaseous Anomaly @Racrufi
 285 R Godless Shrine @John Thacker
 286 R Hallowed Fountain @Piotr Dura
 287 R Ni'Var Science Academy @Raphael Lacoste
 288 L Orion @Simon Dominic
 289 R Overgrown Tomb @Pavel Kolomeyets
+290 R Q Continuum @Jonas De Ro
 291 L Qo'noS @Rockey Chen
 292 R Quark's Bar @Robin Olausson
 293 L Risa @Colin Searle
@@ -288,6 +307,7 @@ ScryfallCode=TRK
 299 R Stomping Ground @Arthur Haas
 300 U Subspace Anomaly @Bruce Brenneise
 301 R Temple Garden @Shahab Alizadeh
+302 U Temporal Anomaly @Neil Blevins
 303 C Unexplored Territory @Raymond Bonilla
 304 R The Unicomplex @JB Casacop
 305 L Vulcan @John Di Giovanni
@@ -314,6 +334,7 @@ ScryfallCode=TRK
 326 L Forest @Leon Tukker
 332 R Federation Outpost @Paulius Daščioras
 333 R Ni'Var Science Academy @Rimas Valeikis
+334 R Q Continuum @Vlad Petruchik
 335 R Quark's Bar @Vlad Petruchik
 336 M Starfleet Academy @Rimas Valeikis
 337 R The Unicomplex @Eugene Maslovski
@@ -426,6 +447,7 @@ ScryfallCode=TRK
 444 U L'Rell, Fierce Visionary @Julia Vasilyeva
 445 U Worf, Honor-Bound Warrior @Rimas Valeikis
 446 R Antagonist Incorporator @Miklós Ligeti
+447 R Miles O'Brien, Transporter Ops @John Tyler Christopher
 448 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
 449 R The Caretaker @Sam Kennedy
 450 R Gwyndala, the Progeny @Pierre Raveneau
@@ -433,9 +455,11 @@ ScryfallCode=TRK
 452 R Romulan Bird-of-Prey @Edouard
 453 R Subcommander T'Pol @Kieran Yanner
 454 R Armus, Skin of Evil @Camille Alquier
+455 R Collation Trimatrix @Bryan Sola
 456 R Elim Garak, Simple Tailor @Alexander Gering
 457 M Georgiou, Terran Emperor @Julia Metzger
 458 R Grand Nagus Zek @Wei Guan
+459 M Gul Dukat, Colonial Prefect @Joel Chaim Holtzman
 460 R Kai Winn, Faithless Leader @Wei Guan
 461 R U.S.S. Reliant, From Hell's Heart @Dofresh
 462 R Brazen Bluff @Filipe Pagliuso
@@ -543,6 +567,8 @@ ScryfallCode=TRK
 564 L Swamp @Leon Tukker
 565 L Mountain @Bastien Grivet
 566 L Mountain @Leon Tukker
+567 L Forest @Bastien Grivet
+568 L Forest @Leon Tukker
 569 U Command Subadjunct @Alex Negrea
 570 U Conquest Mission @Mark Spears
 571 C Malfunctioning Holodeck @Pablo Mendoza
@@ -555,6 +581,7 @@ ScryfallCode=TRK
 578 L Risa @Colin Searle
 579 L Vulcan @John Di Giovanni
 1701 M Captain James T. Kirk @Chris Rallis
+1701D M Captain Jean-Luc Picard @Irvin Rodriguez
 1702 M Mr. Spock, Science Officer @Gal Or
 1703 M Lieutenant Commander Data @Tyler Jacobson
 1704 M Captain Kathryn Janeway @Lie Setiawan
@@ -563,3 +590,29 @@ ScryfallCode=TRK
 
 [tokens]
 1 w_0_1_human_nophasingin @David Álvarez
+2 b_2_2_romulan @Ariel Orea
+3 r_2_1_klingon_warrior_haste @Ariel Orea
+4 r_2_1_klingon_warrior_haste @Carlos C Diaz
+5 r_2_1_klingon_warrior_haste @Henry Peters
+6 r_1_1_officer @Arthur Yuan
+7 r_1_1_officer @Nia Kovalevski
+8 r_1_1_officer @Nathaniel Himawan
+9 r_1_1_officer @Carlos Dattoli
+10 r_1_1_officer @Benjamin Ee
+11 r_1_1_officer @Charles Chaisson
+12 r_1_1_officer @Mushk Rizvi
+13 r_1_1_officer @Gregg Schigiel
+14 r_1_1_officer @Mushk Rizvi
+15 r_1_1_officer @Carlos Dattoli
+16 murf @Leesha Hannigan
+17 porthos @Brooklyn Smith
+18 rg_2_2_worm_noblock @Leesha Hannigan
+19 c_1_1_a_borg @Edouard
+20 c_1_1_a_borg @Henry Peters
+21 c_a_clue_draw @Joel Chaim Holtzman
+22 c_a_clue_draw @Flavio Greco Paglia
+23 c_a_food_sac @Flavio Greco Paglia
+24 c_3_3_a_illusion @Flavio Greco Paglia
+25 neuroflux_heirloom @David Frasheski
+26 c_a_treasure_sac @David Frasheski
+27 new_planet @David Frasheski
