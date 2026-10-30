@@ -1531,6 +1531,13 @@ public class PlayerControllerAi extends PlayerController {
         boolean optional = !tgtSA.getPayCosts().isMandatory();
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell spell) { // Isn't it ALWAYS a spell?
+
+            // PlayEffect marks the spell with the madness alternative cost; the madness keyword itself sits on the
+            // trigger's ability, never on the card's own spell, so isKeyword(MADNESS) is always false here
+            if (tgtSA.isMadness() && !tgtSA.usesTargeting()
+                    && ComputerUtilCost.canPayCost(tgtSA, player, false)) {
+                return ComputerUtil.playStack(tgtSA, player, getGame()); // otherwise the card is just lost
+            }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());

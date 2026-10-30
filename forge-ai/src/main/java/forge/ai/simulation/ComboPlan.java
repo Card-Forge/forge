@@ -8,13 +8,21 @@ import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
+import forge.card.mana.ManaCost;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.CostDiscard;
+import forge.game.cost.CostExile;
+import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithCost;
 import forge.game.keyword.Keyword;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -48,7 +56,7 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -204,6 +212,8 @@ public final class ComboPlan {
         addIfFound(found, mill(spells));
         addIfFound(found, affinity(spells));
         addIfFound(found, dredge(spells));
+        addIfFound(found, madness(spells));
+        addIfFound(found, atog(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -312,6 +322,13 @@ public final class ComboPlan {
         if (sa == null) {
             return false;
         }
+        final Combo mad = find(Kind.MADNESS);
+        if (mad != null && isDiscardOutletPlay(sa)) {
+            final Player who = sa.getActivatingPlayer() != null ? sa.getActivatingPlayer() : sa.getHostCard().getController();
+            if (madnessWindowOpen(who, sa) && !castableMadness(who, sa).isEmpty()) {
+                return true; // the right moment, and the madness card can really be cast afterwards
+            }
+        }
         final boolean mass = find(Kind.MASS_REANIMATION) != null;
         if (!mass && find(Kind.REANIMATOR) == null) {
             return false;
@@ -339,6 +356,11 @@ public final class ComboPlan {
      * or a big creature still to be found.
      */
     public boolean fuelFirst(final Player player) {
+        final Combo mad = find(Kind.MADNESS);
+        if (mad != null && madnessReady(player, mad) && player.getGame().getPhaseHandler().isPlayerTurn(player)
+                && player.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+            return true; // only the Main 2 outlets are brought forward
+        }
         if (find(Kind.MASS_REANIMATION) != null) {
             return wantsCyclingPriority(player);
         }
@@ -395,6 +417,12 @@ public final class ComboPlan {
                     break;
                 case DREDGE:
                     sum += dredgeTerm(ai, combo);
+                    break;
+                case MADNESS:
+                    sum += madnessTerm(ai, combo);
+                    break;
+                case ATOG:
+                    sum += atogTerm(ai, combo);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -723,6 +751,478 @@ public final class ComboPlan {
         return Math.min(250, sum);
     }
 
+    // ------------------------------------------------------------------------------------------------- madness
+
+    /** The mana value of the madness cost of the card, or -1 when it has none the AI can read. */
+    static int madnessCost(final Card c) {
+        try {
+            for (final KeywordInterface ki : c.getKeywords(Keyword.MADNESS)) {
+                if (ki instanceof KeywordWithCost) {
+                    final forge.game.cost.Cost cost = ((KeywordWithCost) ki).getCost();
+                    if (cost != null) {
+                        return cost.getTotalMana().getCMC();
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // an unreadable cost: no opinion
+        }
+        return -1;
+    }
+
+    /** A card that throws away another card of its controller: an outlet that turns on madness (and fuels an atog). */
+    private static boolean isDiscardOutlet(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (isDiscardOutletPlay(sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isDiscardOutletPlay(final SpellAbility sa) {
+        if (sa == null || sa.isCycling()) {
+            return false;
+        }
+        if (sa.isActivatedAbility()) {
+            if (sa.getPayCosts() == null || !sa.getPayCosts().hasSpecificCostType(CostDiscard.class)) {
+                return false;
+            }
+            final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+            return d != null && !d.payCostFromSource();
+        }
+        if (!sa.isSpell()) {
+            return false;
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.getApi() == ApiType.Discard && a.getParamOrDefault("Defined", "").contains("You")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Combo madness(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int madnessCards = 0;
+        int outlets = 0;
+        for (final Card c : spells) {
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                payoffs.add(c.getName());
+                madnessCards++;
+            } else if (isDiscardOutlet(c)) {
+                enablers.add(c.getName());
+                outlets++;
+            }
+        }
+        if (madnessCards < 3 || outlets < 3) {
+            return null;
+        }
+        return new Combo(Kind.MADNESS, 25 + 6 * Math.min(madnessCards, 8) + 5 * Math.min(outlets, 8), payoffs, enablers,
+                Collections.<String>emptySet(), false, "madness=" + madnessCards + ", outlets=" + outlets);
+    }
+
+    private static boolean hasOutlet(final Player ai, final Combo combo) {
+        return anyNamed(ai.getCardsIn(ZoneType.Hand), combo.enablers)
+                || anyNamed(ai.getCardsIn(ZoneType.Battlefield), combo.enablers);
+    }
+
+    /** A discard outlet play must wait: a castable madness card would be the one thrown away, and the moment is wrong. */
+    public boolean outletMustWait(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || find(Kind.MADNESS) == null || !isDiscardOutletPlay(sa)) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        return !castableMadness(ai, sa).isEmpty() && !madnessWindowOpen(ai, sa);
+    }
+
+    /**
+     * A card with madness is in the hand, a way to discard it is at hand, and there is mana for the discard and the
+     * madness cost together (counting the land that can still be played).
+     */
+    boolean madnessReady(final Player ai, final Combo combo) {
+        if (ai == null || !hasOutlet(ai, combo)) {
+            return false;
+        }
+        int cheapest = Integer.MAX_VALUE;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                final int m = madnessCost(c);
+                if (m >= 0) {
+                    cheapest = Math.min(cheapest, m);
+                }
+            }
+        }
+        if (cheapest == Integer.MAX_VALUE) {
+            return false;
+        }
+        return forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai, true) >= cheapest + 1;
+    }
+
+    /**
+     * The madness card to throw away when the cost or effect asks for a discard and it can be cast for its madness
+     * cost right away: the best one that can be paid for. Null when there is none, and the normal choice is made.
+     */
+    public Card madnessDiscard(final Player ai, final CardCollection valid) {
+        if (find(Kind.MADNESS) == null || ai == null || valid == null) {
+            return null;
+        }
+        Card best = null;
+        int bestScore = -1;
+        for (final Card c : valid) {
+            if (!c.hasKeyword(Keyword.MADNESS) || !canCastForMadness(ai, c)) {
+                continue;
+            }
+            final int v = madnessValue(c);
+            if (v > bestScore) { bestScore = v; best = c; }
+        }
+        return best;
+    }
+
+    private static int madnessValue(final Card c) {
+        return c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 100 + 20 * c.getCMC();
+    }
+
+    private static ManaCost madnessMana(final Card c) {
+        try {
+            for (final KeywordInterface ki : c.getKeywords(Keyword.MADNESS)) {
+                if (ki instanceof KeywordWithCost) {
+                    final forge.game.cost.Cost cost = ((KeywordWithCost) ki).getCost();
+                    if (cost != null) {
+                        return cost.getTotalMana();
+                    }
+                }
+            }
+        } catch (final RuntimeException e) {
+            // unreadable: no opinion
+        }
+        return null;
+    }
+
+    /** The madness cost alone can be paid with the untapped sources, colours included. */
+    private static boolean canCastForMadness(final Player ai, final Card c) {
+        final ManaCost m = madnessMana(c);
+        if (m == null) {
+            return false;
+        }
+        final SpellAbility sa = c.getFirstSpellAbility();
+        if (sa == null) {
+            return false;
+        }
+        sa.setActivatingPlayer(ai);
+        if (!madnessHasLegalTarget(sa)) {
+            return false;
+        }
+        if (m.isZero()) {
+            return true;
+        }
+        return forge.ai.ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(m), sa, ai, false);
+    }
+
+    /**
+     * A madness card that needs a target (a counterspell with nothing to counter, removal with nothing to hit) is
+     * exiled and then put into the graveyard when the madness trigger resolves: the cast is impossible, so it must
+     * never be thrown away for madness. Only asks; no target is chosen or left behind.
+     */
+    private static boolean madnessHasLegalTarget(final SpellAbility sa) {
+        try {
+            if (!sa.usesTargeting()) {
+                return true;
+            }
+            final forge.game.spellability.TargetRestrictions tr = sa.getTargetRestrictions();
+            if (tr == null) {
+                return true;
+            }
+            if (tr.getZone().contains(ZoneType.Stack)) {
+                return tr.getNumCandidates(sa) > 0; // hasCandidates says yes to every stack target
+            }
+            return tr.hasCandidates(sa);
+        } catch (final RuntimeException e) {
+            return true; // cannot tell: the old behaviour
+        }
+    }
+
+    private static boolean isInstantSpeed(final SpellAbility sa) {
+        final Card h = sa.getHostCard();
+        if (sa.isSpell()) {
+            return h.isInstant() || h.hasKeyword(Keyword.FLASH);
+        }
+        return !sa.getRestrictions().isSorcerySpeed();
+    }
+
+    /** How many cards the outlet throws away (99 for "your hand"): only single discards are planned. */
+    private static int discardAmount(final SpellAbility sa) {
+        if (sa.isActivatedAbility() && sa.getPayCosts() != null) {
+            final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+            if (d != null) {
+                return "Hand".equals(d.getType()) ? 99 : d.getAbilityAmount(sa);
+            }
+        }
+        return 1;
+    }
+
+    /**
+     * When the AI may use a discard outlet for madness. Instant-speed outlets wait for the opponent's end step (the
+     * mana would be wasted anyway, the card dodges sorcery-speed removal, and the opponent has no time to answer);
+     * sorcery-speed outlets go in the AI's own Main 2. Never with something on the stack, never aimed at anything.
+     */
+    public boolean madnessWindowOpen(final Player ai, final SpellAbility outlet) {
+        if (ai == null || outlet == null || outlet.usesTargeting() || !ai.getGame().getStack().isEmpty()) {
+            return false;
+        }
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai)) {
+            return ph.is(PhaseType.MAIN2) && !isInstantSpeed(outlet);
+        }
+        return ph.is(PhaseType.END_OF_TURN) && isInstantSpeed(outlet);
+    }
+
+    /** Madness cards in hand whose madness cost can be paid on top of the outlet's own mana cost. */
+    CardCollection castableMadness(final Player ai, final SpellAbility outlet) {
+        final CardCollection out = new CardCollection();
+        if (discardAmount(outlet) != 1) {
+            return out;
+        }
+        final ManaCost outletMana = outlet.getPayCosts() == null ? ManaCost.NO_COST : outlet.getPayCosts().getTotalMana();
+        outlet.setActivatingPlayer(ai);
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            final ManaCost m = c == outlet.getHostCard() || !c.hasKeyword(Keyword.MADNESS) ? null : madnessMana(c);
+            if (m == null) {
+                continue;
+            }
+            final SpellAbility cast = c.getFirstSpellAbility();
+            if (cast != null) {
+                cast.setActivatingPlayer(ai);
+                if (!madnessHasLegalTarget(cast)) {
+                    continue; // nothing to aim it at: the card would only be lost
+                }
+            }
+            final ManaCostBeingPaid total = new ManaCostBeingPaid(outletMana);
+            total.addManaCost(m);
+            if (forge.ai.ComputerUtilMana.canPayManaCost(total, outlet, ai, false)) {
+                out.add(c);
+            }
+        }
+        return out;
+    }
+
+    /** A discard cost may be paid with a madness card only inside the window (see checkDiscardCost). */
+    public boolean madnessDiscardAllowed(final Player ai, final SpellAbility sa) {
+        return find(Kind.MADNESS) == null || madnessWindowOpen(ai, sa);
+    }
+
+    /** The outlet play that is safe and sure right now, or null. The AI plays it without asking Monte Carlo. */
+    public SpellAbility sureMadnessPlay(final Player ai, final List<SpellAbility> candidates) {
+        if (find(Kind.MADNESS) == null || ai == null || candidates == null) {
+            return null;
+        }
+        SpellAbility best = null;
+        int bestValue = -1;
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || !isDiscardOutletPlay(sa)) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            if (!madnessWindowOpen(ai, sa)) {
+                continue;
+            }
+            int value = -1;
+            for (final Card c : castableMadness(ai, sa)) {
+                value = Math.max(value, madnessValue(c));
+            }
+            if (value > bestValue && sa.canPlay() && ComputerUtilCost.canPayCost(sa, ai, false)) {
+                bestValue = value;
+                best = sa;
+            }
+        }
+        return best;
+    }
+
+    /** What the madness cards in the hand are worth: a lot when they can be cast cheaply, little as plain cards. */
+    private int madnessTerm(final Player ai, final Combo combo) {
+        final boolean outlet = hasOutlet(ai, combo);
+        final boolean ready = madnessReady(ai, combo);
+        int sum = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (!c.hasKeyword(Keyword.MADNESS)) {
+                continue;
+            }
+            final int value = c.isCreature() ? ComputerUtilCard.evaluateCreature(c) : 50 + 30 * c.getCMC();
+            sum += value * (ready ? 45 : outlet ? 25 : 12) / 100;
+        }
+        return Math.min(250, sum);
+    }
+
+    // ------------------------------------------------------------------------------------------------- tutors
+
+    /**
+     * What to search the library for, for a madness or Psychatog deck: the piece that is missing (a discard outlet when
+     * a madness card waits in hand, a madness card when an outlet is out, the atog while there is none), then cards
+     * that are not yet in hand, and a land while the AI is short of them. When the opponent picks one of the cards
+     * (Intuition) the best {@code n} different cards are asked for, so that the one the opponent leaves is still good.
+     * Null when the deck is neither, or nothing clearly worth fetching is in the pool: the normal choice is made.
+     */
+    public CardCollection tutorPicks(final Player ai, final Iterable<Card> pool, final int n) {
+        final Combo mad = find(Kind.MADNESS);
+        final Combo atog = find(Kind.ATOG);
+        if (mad == null && atog == null || ai == null || pool == null || n <= 0) {
+            return null;
+        }
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final java.util.Map<Card, Integer> score = new java.util.HashMap<>();
+        final List<Card> ranked = new ArrayList<>();
+        for (final Card c : pool) {
+            score.put(c, tutorScore(ai, c, mad, atog, hand, board));
+            ranked.add(c);
+        }
+        ranked.sort((a, b) -> Integer.compare(score.get(b), score.get(a)));
+        final CardCollection picks = new CardCollection();
+        final Set<String> names = new LinkedHashSet<>();
+        for (final Card c : ranked) { // different cards first
+            if (picks.size() < n && score.get(c) > 0 && names.add(c.getName())) {
+                picks.add(c);
+            }
+        }
+        for (final Card c : ranked) { // then copies, if there are fewer than n different good cards
+            if (picks.size() < n && score.get(c) > 0 && !picks.contains(c)) {
+                picks.add(c);
+            }
+        }
+        return picks.size() == n ? picks : null;
+    }
+
+    /** The one card to search for, or null for no opinion. */
+    public Card tutorPick(final Player ai, final Iterable<Card> pool) {
+        final CardCollection picks = tutorPicks(ai, pool, 1);
+        return picks == null ? null : picks.getFirst();
+    }
+
+    private int tutorScore(final Player ai, final Card c, final Combo mad, final Combo atog,
+                           final CardCollectionView hand, final CardCollectionView board) {
+        int lands = 0;
+        for (final Card x : hand) {
+            lands += x.isLand() ? 1 : 0;
+        }
+        for (final Card x : board) {
+            lands += x.isLand() ? 1 : 0;
+        }
+        if (c.isLand()) {
+            return lands < 4 ? 45 : -40;
+        }
+        int s = 0;
+        if (mad != null) {
+            boolean madInHand = false;
+            for (final Card x : hand) {
+                madInHand |= x.hasKeyword(Keyword.MADNESS);
+            }
+            final boolean outlet = hasOutlet(ai, mad);
+            if (c.hasKeyword(Keyword.MADNESS)) {
+                s += 70 + (outlet && !madInHand ? 50 : 0) - (madInHand ? 30 : 0);
+            } else if (isDiscardOutlet(c)) {
+                s += 70 + (!outlet && madInHand ? 60 : 0) - (outlet ? 25 : 0);
+            }
+        }
+        if (atog != null) {
+            boolean atogOut = false;
+            for (final Card x : hand) {
+                atogOut |= atog.payoffs.contains(x.getName());
+            }
+            for (final Card x : board) {
+                atogOut |= atog.payoffs.contains(x.getName());
+            }
+            if (atog.payoffs.contains(c.getName())) {
+                s += atogOut ? 20 : 90;
+            } else if (c.isInstant() || c.isSorcery()) {
+                s += 25;
+            }
+        }
+        if (s <= 0) {
+            return 0;
+        }
+        for (final Card x : hand) {
+            if (x.getName().equals(c.getName())) {
+                s -= 60; // one is already at hand
+                break;
+            }
+        }
+        if (c.isCreature()) {
+            s += Math.min(20, ComputerUtilCard.evaluateCreature(c) / 20);
+        }
+        return Math.max(s, 1);
+    }
+
+    // ------------------------------------------------------------------------------------------------- Psychatog
+
+    /** A creature that grows by throwing away cards from the hand or exiling cards from the graveyard. */
+    private static boolean isAtog(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (!sa.isActivatedAbility() || sa.getPayCosts() == null || sa.getApi() != ApiType.Pump) {
+                continue;
+            }
+            if (isDiscardOutletPlay(sa)) {
+                return true;
+            }
+            if (sa.getPayCosts().hasSpecificCostType(CostExile.class)) {
+                final CostExile e = sa.getPayCosts().getCostPartByType(CostExile.class);
+                if (e != null && e.getFrom().contains(ZoneType.Graveyard)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Combo atog(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int atogs = 0;
+        int fillers = 0;
+        for (final Card c : spells) {
+            if (isAtog(c)) {
+                payoffs.add(c.getName());
+                atogs++;
+            } else if (c.isInstant() || c.isSorcery()) {
+                enablers.add(c.getName());
+                fillers++;
+            } else if (isSelfFuelCard(c) || hasCycling(c)) {
+                enablers.add(c.getName());
+                fillers++;
+            }
+        }
+        if (atogs < 3 || fillers < 10) {
+            return null;
+        }
+        return new Combo(Kind.ATOG, 20 + 6 * Math.min(atogs, 8) + 2 * Math.min(fillers, 15), payoffs, enablers,
+                Collections.<String>emptySet(), false, "atogs=" + atogs + ", fillers=" + fillers);
+    }
+
+    /**
+     * An atog turns the graveyard (two cards for +1/+1) and the hand (one card for +1/+1) into power: a full
+     * graveyard is worth something even before the atog is out, and a lot while it is on the battlefield.
+     */
+    private int atogTerm(final Player ai, final Combo combo) {
+        boolean onBoard = false;
+        boolean inHand = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            onBoard |= combo.payoffs.contains(c.getName());
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            inHand |= combo.payoffs.contains(c.getName());
+        }
+        final int graveyard = Math.min(12, ai.getCardsIn(ZoneType.Graveyard).size());
+        int sum = graveyard * (onBoard ? 10 : inHand ? 6 : 2);
+        if (onBoard) {
+            sum += Math.min(4, ai.getCardsIn(ZoneType.Hand).size()) * 6;
+        }
+        return Math.min(160, sum);
+    }
+
+
     private static Combo reanimator(final List<Card> spells) {
         final Set<String> payoffs = new LinkedHashSet<>(); // the big creatures
         final Set<String> enablers = new LinkedHashSet<>();
@@ -980,6 +1480,20 @@ public final class ComboPlan {
      * opinion and the normal choice should be made.
      */
     public CardCollection preferredDiscards(final Player ai, final CardCollection valid, final int min) {
+        if (min > 0 && valid != null && ai != null && find(Kind.MADNESS) != null) {
+            // A forced discard (cleanup, an opponent's spell, Careful Study) is a free madness trigger: throw away the
+            // madness cards that can be cast right now, the best first.
+            final List<Card> castable = new ArrayList<>();
+            for (final Card c : valid) {
+                if (c.hasKeyword(Keyword.MADNESS) && canCastForMadness(ai, c)) {
+                    castable.add(c);
+                }
+            }
+            if (castable.size() >= min) {
+                castable.sort((a, b) -> Integer.compare(madnessValue(b), madnessValue(a)));
+                return new CardCollection(castable.subList(0, min));
+            }
+        }
         if (min <= 0 || valid == null || valid.size() < min || !wantsGraveyardFuel()) {
             return null;
         }
@@ -1015,6 +1529,9 @@ public final class ComboPlan {
     private boolean isProtected(final Card c) {
         for (final Combo combo : combos) {
             final String n = c.getName();
+            if (combo.kind == Kind.MADNESS || combo.kind == Kind.ATOG) {
+                continue; // a madness card is meant to be discarded; the atog's fuel is its hand
+            }
             if (combo.payoffs.contains(n) && !(c.isCreature() && isBigTarget(c)) || combo.cascaders.contains(n)
                     || combo.kind == Kind.REANIMATOR && combo.enablers.contains(n) && isReanimationSpell(c)) {
                 return true;

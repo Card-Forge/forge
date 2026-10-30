@@ -178,6 +178,10 @@ public class ComputerUtilCost {
                     if (pref == null) {
                         return false;
                     }
+                    if (pref.hasKeyword(Keyword.MADNESS) && ai.getController() instanceof PlayerControllerAi
+                            && !((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.madnessDiscardAllowed(ai, sa)) {
+                        return false; // a madness card is only thrown away inside the madness window
+                    }
                     typeList.remove(pref);
                     hand.remove(pref);
                 }
