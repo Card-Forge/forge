@@ -1,0 +1,8 @@
+Name:The Traveler
+ManaCost:G U
+Types:Legendary Creature Scout
+PT:*/3
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ Strange new worlds — CARDNAME's power is equal to the number of differently named lands you control.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+AI:RemoveDeck:Random
+Oracle:Reach, vigilance\nStrange new worlds — The Traveler's power is equal to the number of differently named lands you control.
