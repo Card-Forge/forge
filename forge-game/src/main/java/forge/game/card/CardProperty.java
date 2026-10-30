@@ -1894,7 +1894,9 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("FromStartingDeck")) {
-            return sourceController.getCardsFromStartingDeck().contains(card.getId());
+            if (!sourceController.getCardsFromStartingDeck().contains(card.getId())) {
+                return false;
+            }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
                 return false;
