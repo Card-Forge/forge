@@ -1,14 +1,6 @@
 package forge.screens.match;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.Area;
@@ -37,7 +29,6 @@ import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton;
-import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.view.FView;
@@ -343,6 +334,8 @@ class TutorialOverlayPanel extends JPanel {
         private final JScrollPane scroll = new JScrollPane(body);
         private final FButton btnNext = new FButton();
         private final FButton btnHide = new FButton();
+        private Font titleFont;
+        private Font bodyFont;
         private String title = "";
         private boolean collapsed;
         private Runnable onNext;
@@ -351,8 +344,6 @@ class TutorialOverlayPanel extends JPanel {
         Coach() {
             setOpaque(false);
             setLayout(null);
-            body.setFont(FSkin.getRelativeFont(2));
-            body.setForeground(Color.WHITE);
             scroll.setOpaque(false);
             scroll.getViewport().setOpaque(false);
             scroll.setBorder(null);
@@ -365,6 +356,11 @@ class TutorialOverlayPanel extends JPanel {
                 updateButtons();
                 place();
             });
+            final float ref = Math.max(14f, btnNext.getFont().getSize2D());
+            titleFont = btnNext.getFont().deriveFont(Font.BOLD, ref);
+            bodyFont = btnNext.getFont().deriveFont(Font.PLAIN, Math.max(14f, ref - 2f));
+            body.setFont(bodyFont);
+            body.setForeground(Color.WHITE);
             add(scroll);
             add(btnNext);
             add(btnHide);
@@ -416,7 +412,7 @@ class TutorialOverlayPanel extends JPanel {
                 return;
             }
             final int width = Math.max(300, Math.min(460, areaW / 3));
-            final FontMetrics tm = getFontMetrics(FSkin.getBoldFont(2).getBaseFont());
+            final FontMetrics tm = getFontMetrics(titleFont);
             final int titleH = tm.getHeight() + 4;
             final int textW = width - 2 * PAD;
             int height;
@@ -504,7 +500,7 @@ class TutorialOverlayPanel extends JPanel {
                 g2.setColor(BACKDROP);
                 g2.fillRoundRect(1, 1, w - 2, h - 2, 13, 13);
                 g2.setColor(TITLE);
-                g2.setFont(FSkin.getBoldFont(2).getBaseFont());
+                g2.setFont(titleFont);
                 final FontMetrics fm = g2.getFontMetrics();
                 final int titleWidth = collapsed ? w - 2 * (PAD + BUTTON_W) - PAD : w - 2 * PAD;
                 final int y = collapsed ? h - PAD - BUTTON_H / 2 + fm.getAscent() / 2 - 2 : PAD + fm.getAscent();
