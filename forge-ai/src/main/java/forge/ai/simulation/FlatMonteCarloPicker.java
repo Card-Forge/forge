@@ -1243,17 +1243,10 @@ public final class FlatMonteCarloPicker {
             // MyRandom is global state; this is safe because the game thread is waiting for this AI decision.
             MyRandom.setRandom(new Random(seed));
 
-            final GameSimulator sim = new GameSimulator(player.getGame(), player, mode == Mode.RESPOND);
+            final GameSimulator sim = GameSimulator.forRollout(player.getGame(), player, mode == Mode.RESPOND);
             final Game simGame = sim.getSimulatedGameState();
             final Player simAi = sim.getSimulatedAiPlayer();
             simGame.AI_TIMEOUT = Math.min(simGame.AI_TIMEOUT, ROLLOUT_AI_TIMEOUT_SECONDS);
-            // A human's stand-in in the copy searches with full simulation (GameCopier.clonePlayer), which costs many
-            // times a heuristic decision and ignores this decision's deadline. Rollouts play every side by the heuristics.
-            for (final Player p : simGame.getPlayers()) {
-                if (p.getController() instanceof PlayerControllerAi pc) {
-                    pc.getAi().setUseSimulation(null);
-                }
-            }
             HiddenInfoShuffler.shuffle(simGame, sim.getGameCopier(), player, new Random(seed ^ HIDDEN_INFO_SALT));
 
             final Long value;

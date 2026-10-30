@@ -6,6 +6,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.util.AITimeoutTracker;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -99,6 +100,32 @@ public class GameSimulator {
         aiPlayer = copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
         origLines = new ArrayList<>();
+    }
+
+    /**
+     * The simulator of a Monte Carlo rollout: the copy as the lightweight constructor makes it, with every player
+     * playing by the heuristics. {@link GameCopier} gives the stand-in of a human player (any player that is not a
+     * {@link forge.ai.LobbyPlayerAi}) the full simulation AI, which searches in copies of its own, many times the
+     * cost of a heuristic decision and outside of the deadline of the decision that is being made: against a human
+     * one decision was seen to run for 50 s and then end with the AI passing. A rollout plays the opponent's turn by
+     * the same rules whether the real opponent is a human or an AI, which is what its budgets are tuned for.
+     */
+    public static GameSimulator forRollout(final Game origGame, final Player origAiPlayer, final boolean copyStack) {
+        final GameSimulator sim = new GameSimulator(origGame, origAiPlayer, copyStack);
+        playByHeuristics(sim.getSimulatedGameState());
+        return sim;
+    }
+
+    /** Takes the simulation search away from every AI in this game; returns how many were using it. */
+    public static int playByHeuristics(final Game game) {
+        int changed = 0;
+        for (final Player p : game.getPlayers()) {
+            if (p.getController() instanceof PlayerControllerAi pc && pc.getAi().usesSimulation()) {
+                pc.getAi().setUseSimulation(null);
+                changed++;
+            }
+        }
+        return changed;
     }
 
     private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
@@ -338,6 +365,7 @@ public class GameSimulator {
      * opponent put there earlier) stays for the owner to respond to or let resolve.
      */
     public static void resolveOwnTop(final Game game, final Player owner, final Player opponent) {
+        AITimeoutTracker.check(); // a phase advance of a rollout comes through here: it must not outlive its decision
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
         sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
         opponent.runWithController(() -> {
@@ -346,6 +374,7 @@ public class GameSimulator {
             game.getStack().addAllTriggeredAbilitiesToStack();
             while (!game.getStack().isEmpty() && !game.isGameOver()
                     && owner.equals(game.getStack().peekAbility().getActivatingPlayer())) {
+                AITimeoutTracker.check();
                 game.getStack().resolveStack();
                 game.getAction().checkStateEffects(false, allAffectedCards);
                 game.getStack().addAllTriggeredAbilitiesToStack();
@@ -359,6 +388,7 @@ public class GameSimulator {
     }
 
     public static void resolveStack(final Game game, final Player opponent) {
+        AITimeoutTracker.check(); // a phase advance of a rollout comes through here: it must not outlive its decision
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
         sim.getAi().setUseSimulation(AIOption.USE_FULL_SIMULATION);
@@ -367,6 +397,7 @@ public class GameSimulator {
             game.getAction().checkStateEffects(false, allAffectedCards);
             game.getStack().addAllTriggeredAbilitiesToStack();
             while (!game.getStack().isEmpty() && !game.isGameOver()) {
+                AITimeoutTracker.check();
                 debugPrint("Resolving:" + game.getStack().peekAbility());
 
                 // Resolve the top effect on the stack.
