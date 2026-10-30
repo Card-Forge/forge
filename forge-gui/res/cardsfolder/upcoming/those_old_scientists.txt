@@ -1,0 +1,9 @@
+Name:Those Old Scientists
+ManaCost:2 U
+Types:Enchantment Saga
+K:Chapter:3:DBDraw,DBReturn,DBShuffle
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard two cards.
+SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouOwn,Instant.YouOwn,Sorcery.YouOwn | ValidTgtsDesc$ artifact, instant, or sorcery card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Return up to one target artifact, instant, or sorcery card from your graveyard to your hand.
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 2 | SubAbility$ DBGainLife | SpellDescription$ Choose up to two target cards in graveyards. The owners of those cards shuffle them into their libraries.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Draw two cards, then discard two cards.\nII — Return up to one target artifact, instant, or sorcery card from your graveyard to your hand.\nIII — Choose up to two target cards in graveyards. The owners of those cards shuffle them into their libraries.

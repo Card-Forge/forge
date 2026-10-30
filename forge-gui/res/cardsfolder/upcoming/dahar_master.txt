@@ -1,0 +1,8 @@
+Name:Dahar Master
+ManaCost:3 R
+Types:Creature Klingon Warrior
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature enters, you may sacrifice another nonland permanent. When you do, this creature deals 2 damage to any target.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Permanent.Other+nonLand/another nonland permanent> | Execute$ TrigDealDamage | TriggerDescription$ When you do, this creature deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+Oracle:When this creature enters, you may sacrifice another nonland permanent. When you do, this creature deals 2 damage to any target.

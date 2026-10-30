@@ -1,0 +1,13 @@
+Name:The Inner Light
+ManaCost:3 G W
+Types:Enchantment Saga
+K:Chapter:3:DBChangeZone,DBEffect,DBGainLife
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Green+YouOwn,Creature.White+YouOwn | SpellDescription$ Return target green or white creature card from your graveyard to the battlefield.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | Triggers$ DamageTrig | SpellDescription$ Choose target creature. Whenever it deals combat damage to a player this turn, you draw that many cards.
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever it deals combat damage to a player this turn, you draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBToken | SpellDescription$ You gain life equal to the greatest power among creatures you control. Create a Treasure token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+SVar:Y:Count$Valid Creature.YouCtrl$GreatestCardPower
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target green or white creature card from your graveyard to the battlefield.\nII — Choose target creature. Whenever it deals combat damage to a player this turn, you draw that many cards.\nIII — You gain life equal to the greatest power among creatures you control. Create a Treasure token.
