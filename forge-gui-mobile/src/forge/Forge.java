@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
@@ -54,12 +55,7 @@ import forge.screens.match.MatchScreen;
 import forge.screens.settings.CardImageBrowserScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDialog;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FGestureAdapter;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FOverlay;
+import forge.toolbox.*;
 import forge.util.*;
 import io.sentry.ScopeType;
 import io.sentry.Sentry;
@@ -263,26 +259,42 @@ public class Forge implements ApplicationListener {
             if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 600 Cache size, 400 Cache size for morethan 5GB RAM
                 cacheSize = totalDeviceRAM > 10000 ? 600 : 400;
         }
+        updateMouseConfine();
+
         if (!initialized) {
             initialized = true;
 
             Runnable runnable = () -> {
                 safeToClose = false;
                 ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
+                FModel.progressCeiling = 850; //the card databases fill the bar to 85%, the steps below take it from there
                 FModel.initialize(getSplashScreen().getProgressBar(), null);
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
+                splashStep(getLocalizer().getMessage("lblLoadingFonts"), 850);
                 FSkinFont.preloadAll(locale);
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
+                splashStep(getLocalizer().getMessage("lblLoadingCardTranslations"), 900);
                 CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPrepareDatabase"));
+                splashStep(getLocalizer().getMessage("lblPrepareDatabase"), 940);
                 Gdx.app.postRunnable(this::afterDbLoaded);
             };
             //see if app or assets need updating
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
         }
+    }
+
+    /**
+     * Confine the mouse to the window when fullscreen and the preference is on.
+     * Uses GLFW_CURSOR_CAPTURED (visible cursor) rather than setCursorCatched.
+     */
+    public static void updateMouseConfine() {
+        if (GuiBase.isAndroid() || deviceAdapter == null || Gdx.graphics == null) {
+            return;
+        }
+        boolean confine = Gdx.graphics.isFullscreen()
+                && FModel.getPreferences().getPrefBoolean(FPref.UI_KEEP_MOUSE_IN_FULLSCREEN);
+        deviceAdapter.setMouseConfined(confine);
     }
 
     public static boolean hasGamepad() {
@@ -300,6 +312,8 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setWindowFocus(focused);
         if (!focused) {
             haltControllerInput();
+        } else {
+            updateMouseConfine();
         }
     }
 
@@ -396,6 +410,7 @@ public class Forge implements ApplicationListener {
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(null);
+        GuiBase.setAdventureCacheDirectory(null);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -414,6 +429,7 @@ public class Forge implements ApplicationListener {
         startContinuousRendering();
         FSkinTexture.invalidateAdventureTextures();
         GuiBase.setAdventureDirectory(ForgeConstants.ADVENTURE_COMMON_DIR);
+        GuiBase.setAdventureCacheDirectory(null);
         advStartup = false;
         isMobileAdventureMode = true;
         //pixl cursor for adventure
@@ -436,11 +452,24 @@ public class Forge implements ApplicationListener {
             e.printStackTrace();
         }
     }
+    //Moves the splash bar forward (never back). Goes through the EDT so it stays in order with the FModel progress
+    //updates, which are posted there too, instead of racing them from the loader thread. A null description keeps the old one.
+    private void splashStep(final String description, final int value) {
+        FThreads.invokeInEdtLater(() -> {
+            final SplashScreen splash = getSplashScreen();
+            if (splash == null) { return; }
+            final FProgressBar bar = splash.getProgressBar();
+            if (description != null) { bar.setDescription(description); }
+            bar.setMaximum(1000);
+            if (value > bar.getValue()) { bar.setValue(value); }
+        });
+    }
     protected void afterDbLoaded() {
         if (GuiBase.isAndroid() && autoCache)
-            getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+            getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + " - Detected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
         else
             getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
+        splashStep(null, 970); //skin and drafts still have to load, so do not show 100% yet
         //override transition & title bg
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
@@ -465,62 +494,71 @@ public class Forge implements ApplicationListener {
 
         FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             //load skin full
-            FSkin.loadFull(splashScreen);
+            FSkin.loadFull(getSplashScreen());
             FThreads.invokeInBackgroundThread(() -> {
                 //load Drafts
                 preloadBoosterDrafts();
-                FThreads.invokeInEdtLater(() -> {
-                    if (selector.equals("Adventure")) {
-                        //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
-                        loadAdventureResources(false);
-                        isMobileAdventureMode = true;
-                    }
-                    //selection transition
-                    setTransitionScreen(new TransitionScreen(() -> {
-                        boolean openedRealScreen;
-                        if (createNewAdventureMap) {
-                            openAdventure();
-                            clearSplashScreen();
-                            openedRealScreen = true;
-                        } else {
-                            if (selector.equals("Classic")) {
-                                openHomeDefault();
-                                clearSplashScreen();
-                                openedRealScreen = true;
-                            } else if (selector.equals("Adventure")) {
+                splashStep(null, 1000);
+                final long giveUpAt = System.currentTimeMillis() + 2000; //never hold the splash if the bar cannot settle (no frames drawn, odd maximum)
+                Timer.schedule(new Timer.Task() {
+                    @Override public void run() {
+                    final SplashScreen splash = getSplashScreen();
+                    if (splash != null && !splash.isBarSettled() && System.currentTimeMillis() < giveUpAt) { Timer.schedule(this, 0.03f); return; }
+                    Gdx.graphics.requestRendering();
+                    Gdx.app.postRunnable(() -> {
+                        if (selector.equals("Adventure")) {
+                            //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
+                            loadAdventureResources(false);
+                            isMobileAdventureMode = true;
+                        }
+                        //selection transition
+                        setTransitionScreen(new TransitionScreen(() -> {
+                            boolean openedRealScreen;
+                            if (createNewAdventureMap) {
                                 openAdventure();
                                 clearSplashScreen();
                                 openedRealScreen = true;
-                            } else if (splashScreen != null) {
-                                splashScreen.setShowModeSelector(true);
-                                openedRealScreen = false;
-                            } else {//default mode in case splashscreen is null at some point as seen on resume..
-                                openHomeDefault();
-                                clearSplashScreen();
-                                openedRealScreen = true;
+                            } else {
+                                if (selector.equals("Classic")) {
+                                    openHomeDefault();
+                                    clearSplashScreen();
+                                    openedRealScreen = true;
+                                } else if (selector.equals("Adventure")) {
+                                    openAdventure();
+                                    clearSplashScreen();
+                                    openedRealScreen = true;
+                                } else if (splashScreen != null) {
+                                    splashScreen.setShowModeSelector(true);
+                                    openedRealScreen = false;
+                                } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                    openHomeDefault();
+                                    clearSplashScreen();
+                                    openedRealScreen = true;
+                                }
                             }
-                        }
-                        safeToClose = true;
-                        clearTransitionScreen();
-                        if (openedRealScreen) {
-                            maybePromptForBulkCdnSync();
-                        }
-                        if (GuiBase.isIOS()) {
-                            // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
-                            // builds ~100k PaperCards + loads skin assets — a large transient
-                            // allocation spike that leaves ~200MB of freed-but-unmapped bytes in
-                            // the GC heap at idle home. Two full GCs return them to iOS (the GC
-                            // needs the second pass to unmap pages the first one freed) —
-                            // device-measured: GC heap 690→492MB before a game starts. Only
-                            // unreachable garbage is collected; iOS-gated because other
-                            // platforms don't sit against a per-process memory ceiling.
-                            FThreads.invokeInBackgroundThread(() -> {
-                                System.gc();
-                                System.gc();
-                            });
-                        }
-                    }, ScreenUtil.getInstance().takeScreenshot(), false, false, true, false));
-                });
+                            safeToClose = true;
+                            clearTransitionScreen();
+                            if (openedRealScreen) {
+                                maybePromptForBulkCdnSync();
+                            }
+                            if (GuiBase.isIOS()) {
+                                // POST-LOAD memory reclaim (iOS): booting parses ~32k card rules +
+                                // builds ~100k PaperCards + loads skin assets — a large transient
+                                // allocation spike that leaves ~200MB of freed-but-unmapped bytes in
+                                // the GC heap at idle home. Two full GCs return them to iOS (the GC
+                                // needs the second pass to unmap pages the first one freed) —
+                                // device-measured: GC heap 690→492MB before a game starts. Only
+                                // unreachable garbage is collected; iOS-gated because other
+                                // platforms don't sit against a per-process memory ceiling.
+                                FThreads.invokeInBackgroundThread(() -> {
+                                    System.gc();
+                                    System.gc();
+                                 });
+                            }
+                        }, ScreenUtil.getInstance().takeScreenshot(), false, false, true, false));
+                    });
+                    }
+                }, 0.03f);
             });
         }));
     }
@@ -856,6 +894,7 @@ public class Forge implements ApplicationListener {
             isMobileAdventureMode = false;
             FSkinTexture.invalidateAdventureTextures();
             GuiBase.setAdventureDirectory(null);
+            GuiBase.setAdventureCacheDirectory(null);
             setCursor(FSkin.getCursor().get(0), "0");
             Gdx.input.setInputProcessor(getInputProcessor());
             clearTransitionScreen();

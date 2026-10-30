@@ -159,7 +159,7 @@ public final class QuestUtilCards {
      * @return the array list
      */
     public List<PaperCard> generateQuestBooster(final Predicate<PaperCard> fSets) {
-        return new UnOpenedProduct(getBoosterTemplate(), questController.getAllAllowedCards().filter(fSets).toList()).get();
+        return new UnOpenedProduct(getBoosterTemplate(), questController.getAllAllowedCards().filter(fSets).collect(Collectors.toList())).get();
     }
 
     /**
@@ -503,7 +503,7 @@ public final class QuestUtilCards {
                 // Unopened product based on format of the cards?
                 questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate,
                         questController.getAllAllowedCards().filter(questController.getFormat().getFilterPrinted())
-                                .toList()).get());
+                                .collect(Collectors.toList())).get());
             }
         }
     }
@@ -791,7 +791,7 @@ public final class QuestUtilCards {
 
         // get all cards in the specified edition
         Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition);
-        Iterable<PaperCard> editionCards = questController.getAllAllowedCards().filter(filter).toList();
+        Iterable<PaperCard> editionCards = questController.getAllAllowedCards().filter(filter).collect(Collectors.toList());
 
         // For editions such as MB1 which only contains PLST cards.
         if (!editionCards.iterator().hasNext()) {

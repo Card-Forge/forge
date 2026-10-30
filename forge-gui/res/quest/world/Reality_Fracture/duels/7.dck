@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Morenothings_-_Orzhov_Aggro_(Standard,_#901766).dck
+Deck Type=constructed
+
+[Main]
+4 Hinterland Sanctifier
+2 Liliana the Faultless
+1 Shattered Sanctum
+3 Erode
+3 Moseo, Vein's New Dean
+4 Concealed Courtyard
+2 Bleachbone Verge
+4 Starting Town
+1 Emptiness
+1 Dalkovan Encampment
+1 Zoraline, Cosmos Caller
+4 Haliya, Guided by Light
+4 Enlightened Confidant
+2 Multiversal Passage
+4 Amalia Benavides Aguirre
+4 Case of the Uneaten Feast
+2 Bitter Triumph
+2 Starscape Cleric
+4 Lunar Convocation
+3 Plains
+4 Godless Shrine
+1 Swamp
+[Sideboard]
+2 Starscape Cleric
+1 Decorum Dissertation
+1 Elspeth, Storm Slayer
+1 Requisition Raid
+3 Strategic Betrayal
+2 Voice of Victory
+2 Curious Farm Animals
+3 Duress

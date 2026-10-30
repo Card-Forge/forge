@@ -12,6 +12,7 @@ import forge.deck.DeckgenUtil;
 import forge.deck.NetDeckCategory;
 import forge.game.GameType;
 import forge.model.FModel;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class GauntletUtil {
@@ -24,8 +25,6 @@ public class GauntletUtil {
         Deck deck;
         final List<String> eventNames = new ArrayList<>();
         final List<Deck> decks = new ArrayList<>();
-
-        final Object[] netDeckNames = netDecks != null ? netDecks.getItemNames().toArray() : null;
 
         for (int i = 0; i < numOpponents; i++) {
             int randType = (int)Math.floor(MyRandom.getRandom().nextDouble() * allowedDeckTypes.size());
@@ -93,8 +92,7 @@ public class GauntletUtil {
                 eventNames.add(deck.getName());
                 break;
             case NET_DECK:
-                int deckIndex = (int)Math.floor(MyRandom.getRandom().nextDouble() * netDeckNames.length);
-                deck = netDecks.get((String) netDeckNames[deckIndex]);
+                deck = Aggregates.random(netDecks);
                 eventNames.add(deck.getName());
                 break;
             default:
@@ -120,8 +118,6 @@ public class GauntletUtil {
         Deck deck;
         final List<String> eventNames = new ArrayList<>();
         final List<Deck> decks = new ArrayList<>();
-
-        final Object[] netDeckNames = netDecks != null ? netDecks.getItemNames().toArray() : null;
 
         for (int i = 0; i < numOpponents; i++) {
             int randType = (int)Math.floor(MyRandom.getRandom().nextDouble() * allowedDeckTypes.size());

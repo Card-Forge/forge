@@ -83,8 +83,22 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, Consumer<SpellAbility> chooseTargets) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        if (!sa.isCopied() && !sa.isTrigger() && ai.getController() instanceof PlayerControllerAi pc) {
+            if (pc.getAi().hasFailedToCast(sa)) {
+                return false;
+            }
+            // Costs must not be paid for something that can't go on the stack: if the targets are not legal now, they
+            // won't be after paying either. A caller that chooses the targets itself (chooseTargets) does that later.
+            if (chooseTargets == null && !game.getStack().hasLegalTargeting(sa)) {
+                pc.getAi().noteFailedCast(AiController.castKey(sa));
+                game.fireEvent(new forge.game.event.GameEventAddLog(forge.game.GameLogEntryType.STACK_ADD,
+                        source + " - [AI did not cast, no legal targets] - " + sa.getDescription()));
+                return false;
+            }
+        }
         final Card host = sa.getHostCard();
         final Zone hz = host.isCopiedSpell() ? null : host.getZone();
+        boolean movedToStack = false;
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -101,6 +115,7 @@ public class ComputerUtil {
             }
 
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            movedToStack = true;
         }
 
         if (!sa.isCopied()) {
@@ -112,17 +127,21 @@ public class ComputerUtil {
 
         if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
             // 603.3c If no mode is chosen, the ability is removed from the stack.
+            abandonCast(game, sa, hz, movedToStack, new CostPayment(sa.getPayCosts(), sa));
             return false;
         }
         if (chooseTargets != null) {
             chooseTargets.accept(sa);
             if (!sa.isTargetNumberValid()) {
+                // the spell is already in the stack zone: it has to go back, or it is lost
+                abandonCast(game, sa, hz, movedToStack, new CostPayment(sa.getPayCosts(), sa));
                 return false;
             }
         }
         // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
+        final boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack(sa);
 
         final CostPayment pay = new CostPayment(cost, sa);
@@ -133,16 +152,36 @@ public class ComputerUtil {
             }
             return true;
         }
-        // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
+        // Should not arrive here: the costs could not be paid after all. What was paid is given back and the card goes
+        // back to where it was cast from (it used to stay in the stack zone, gone from the game).
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        if (!refreeze) {
+            game.getStack().unfreezeStack();
+        }
         sa.setSkip(true);
-        if (host != null && hz != null && hz.is(ZoneType.Stack)) {
-            Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
-            for (SpellAbility csa : c.getSpellAbilities()) {
+        final Card back = abandonCast(game, sa, hz, movedToStack, pay);
+        if (back != null) {
+            for (SpellAbility csa : back.getSpellAbilities()) {
                 csa.setSkip(true);
             }
         }
         return false;
+    }
+
+    /**
+     * Takes back a cast that stops before the spell is on the stack: what was paid is refunded, and a spell that was
+     * already moved to the stack zone goes back to the zone it came from.
+     *
+     * @return the card as it is now
+     */
+    private static Card abandonCast(final Game game, final SpellAbility sa, final Zone fromZone,
+                                    final boolean movedToStack, final CostPayment pay) {
+        pay.refundPayment();
+        final Card onStack = sa.getHostCard();
+        if (movedToStack && fromZone != null && onStack != null && onStack.isInZone(ZoneType.Stack)) {
+            return game.getStack().returnStrandedSpell(onStack, fromZone);
+        }
+        return onStack;
     }
 
     private static boolean hasDiscardHandCost(final Cost cost) {
@@ -387,7 +426,7 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) && ComputerUtil.protectRecursion(sa,
+            if (PhaseType.COMBAT_DECLARE_BLOCKERS.equals(game.getPhaseHandler().getPhase()) && ComputerUtil.protectRecursion(sa,
                         () -> ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat()), false)) {
                 final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
                 if (!nonCreatures.isEmpty()) {
@@ -399,6 +438,13 @@ public class ComputerUtil {
             }
         }
         else if (pref.contains("DiscardCost")) { // search for permanents with DiscardMe
+            if (ai.getController() instanceof PlayerControllerAi) {
+                final Card madness = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                        .madnessDiscard(ai, typeList);
+                if (madness != null) {
+                    return madness; // it comes back as a cheap spell
+                }
+            }
             for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
                 final int priority = 6 - ip;
                 for (Card c : typeList) {
@@ -576,6 +622,10 @@ public class ComputerUtil {
 
         while (count < amount) {
             Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
+            if (prefCard == null && ability.isManaAbility()) {
+                // paying for mana: give up what the AI would miss least (a token, a creature that comes back)
+                prefCard = ManaSacrifice.chooseFodder(ai, typeList);
+            }
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }
@@ -633,6 +683,20 @@ public class ComputerUtil {
 
         if (typeList.size() < amount) {
             return null;
+        }
+
+        if (ai.getController() instanceof PlayerControllerAi) {
+            // never pay with the win card of the deck (Grief's evoke must not exile Living End): without anything
+            // else to pay with, a cost is not paid at all
+            final CardCollection safe = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos.withoutProtected(typeList);
+            if (safe.size() < typeList.size()) {
+                if (safe.size() < amount && !effect) {
+                    return null;
+                }
+                if (safe.size() >= amount) {
+                    typeList = safe;
+                }
+            }
         }
 
         CardLists.sortByPowerAsc(typeList);
@@ -2868,6 +2932,8 @@ public class ComputerUtil {
             }
         }
 
+        // TODO remember most painful card for priority removal
+
         return damage;
     }
 
@@ -3208,6 +3274,60 @@ public class ComputerUtil {
         return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
                 List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
+    /**
+     * The combat the opponent could attack with at the next opportunity and how the AI would block it, or null when
+     * the opponent has nothing that can attack.
+     */
+    private static Combat predictNextCombat(Player ai, Player opp, final CardCollection excludedBlockers) {
+        Combat combat = new Combat(opp);
+        boolean containsAttacker = false;
+        boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
+
+        // TODO !thisCombat should include cards that will phase in
+        for (Card att : opp.getCreaturesInPlay()) {
+            // TODO should be limited based on how much getAttackCost the opp can pay
+            if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
+                // TODO need to copy the card
+                // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
+                combat.addAttacker(att, ai);
+                containsAttacker = true;
+            }
+        }
+        if (!containsAttacker) {
+            return null;
+        }
+        // TODO if it's next turn ignore mustBlockCards
+        AiBlockController block = new AiBlockController(ai, false);
+        // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
+        block.assignBlockersForCombat(combat, excludedBlockers);
+        return combat;
+    }
+
+    /**
+     * How threatened the AI's life is by the opponents' next attacks, both questions answered from one blocking
+     * prediction (asking them one after the other builds and blocks the same combat twice):
+     * 2 = in serious danger (would lose), 1 = in danger, 0 = neither.
+     */
+    public static int predictNextCombatsDanger(Player ai, final List<Player> opps) {
+        if (ai.cantLose()) {
+            return 0;
+        }
+        int level = 0;
+        for (Player opp : opps) {
+            final Combat combat = predictNextCombat(ai, opp, null);
+            if (combat == null) {
+                continue;
+            }
+            if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, 0)) {
+                return 2;
+            }
+            if (level == 0 && ComputerUtilCombat.lifeInDanger(ai, combat, 0)) {
+                level = 1;
+            }
+        }
+        return level;
+    }
+
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
         return predictNextCombatsRemainingLife(ai, serious, checkDiff, payment, excludedBlockers, ai.getOpponents());
     }
@@ -3224,31 +3344,10 @@ public class ComputerUtil {
         // TODO should also consider them as teams (with increased likelihood to be attacked by multiple if ai is biggest threat)
         // TODO worth it to sort by creature amount for chance to terminate earlier?
         for (Player opp: opps) {
-            Combat combat = new Combat(opp);
-            boolean containsAttacker = false;
-            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
-
-            // TODO !thisCombat should include cards that will phase in
-            for (Card att : opp.getCreaturesInPlay()) {
-                // TODO should be limited based on how much getAttackCost the opp can pay
-                if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
-                    // TODO need to copy the card
-                    // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
-                    combat.addAttacker(att, ai);
-                    containsAttacker = true;
-                }
-            }
-            if (!containsAttacker) {
+            final Combat combat = predictNextCombat(ai, opp, excludedBlockers);
+            if (combat == null) {
                 continue;
             }
-            // TODO if it's next turn ignore mustBlockCards
-            AiBlockController block = new AiBlockController(ai, false);
-            // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
-            block.assignBlockersForCombat(combat, excludedBlockers);
-
-            // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
-            // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
-            // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
             if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return Integer.MIN_VALUE;

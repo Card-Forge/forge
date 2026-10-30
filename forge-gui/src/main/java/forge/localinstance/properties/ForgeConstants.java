@@ -76,6 +76,8 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
     public static final String COMMANDER_BRACKET_COMBOS_FILE         = LISTS_DIR + "commander-bracket-combos.txt";
+    public static final String AI_COMMANDER_COMBOS_FILE              = LISTS_DIR + "ai-commander-combos.txt";
+    public static final String AI_CARD_ROLES_FILE                    = LISTS_DIR + "ai-card-roles.txt";
     public static final String COMMANDER_BRACKET_GAMECHANGERS_FILE   = LISTS_DIR + "gamechangers.txt";
     public static final String COMMANDER_BRACKET_MASS_LAND_DENIAL_FILE = LISTS_DIR + "mass-land-denial.txt";
     public static final String COMMANDER_BRACKET_EXTRA_TURNS_FILE    = LISTS_DIR + "extra-turns.txt";
@@ -246,6 +248,7 @@ public final class ForgeConstants {
     public static final String USER_CONQUEST_DIR          = USER_DIR + "conquest" + PATH_SEPARATOR;
     public static final String USER_PREFS_DIR             = USER_DIR + "preferences" + PATH_SEPARATOR;
     public static final String USER_GAMES_DIR             = USER_DIR + "games" + PATH_SEPARATOR;
+    public static final String USER_REPLAYS_DIR           = USER_DIR + "replays" + PATH_SEPARATOR;
     public static final String USER_PUZZLE_DIR            = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE                   = USER_DIR + "forge.log";
     public static final String NETWORK_LOGS_DIR           = USER_DIR + "networklogs" + PATH_SEPARATOR;
@@ -367,6 +370,10 @@ public final class ForgeConstants {
     public static final String GRAVEYARD_ORDERING_NEVER = "Never";
     public static final String GRAVEYARD_ORDERING_OWN_CARDS = "With Relevant Cards";
     public static final String GRAVEYARD_ORDERING_ALWAYS = "Always";
+
+    public static final String UNDO_MODE_OFF = "Off";
+    public static final String UNDO_MODE_SINGLE = "Single step";
+    public static final String UNDO_MODE_FREE = "Free";
 
     // Constants for Stack effect addition notification policy
     public static final String STACK_EFFECT_NOTIFICATION_NEVER = "Never";

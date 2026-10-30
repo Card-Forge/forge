@@ -1,7 +1,7 @@
 Name:Umezawa's Charm
 ManaCost:1 B
 Types:Instant
-A:SP$ Charm | Choices$ CharmPump,CharmCurse,CharmLife | Defined$ You
+A:SP$ Charm | Choices$ CharmPump,CharmCurse,CharmLife
 SVar:CharmPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:CharmCurse:DB$ Pump | ValidTgts$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:CharmLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ You gain 2 life.

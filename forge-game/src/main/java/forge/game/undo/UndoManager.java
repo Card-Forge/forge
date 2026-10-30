@@ -17,8 +17,8 @@ public final class UndoManager {
     /** Tunable: false = unlimited undos; true = limited to UNDOS_PER_PHASE each phase. */
     public static final boolean LIMITED = false;
     public static final int UNDOS_PER_PHASE = 2;
-    /** Tunable: true = after an undo the player can't chain further back until they act again. */
-    public static final boolean SINGLE_STEP = false;
+    /** OFF: nothing is recorded (no cost). SINGLE_STEP: one undo, then act again. FREE: chain back until a barrier. */
+    public enum Mode { OFF, SINGLE_STEP, FREE }
     public static final boolean OWN_TURN_ONLY = false;
     private record Entry(GameMemento memento, int logSize) {}
 
@@ -27,10 +27,21 @@ public final class UndoManager {
     private boolean justRestored;
     private volatile boolean requested;
     private String barrierReason;
+    private Mode mode = Mode.FREE;
     /** The player whose priority prompts the stack was recorded for. Only they may undo. */
     private Player owner;
     private int undosLeft = UNDOS_PER_PHASE;
     private long budgetPhase = -1;
+    public synchronized Mode mode() { return mode; }
+
+    /** Game thread; safe to call every prompt. Turning undo off drops the history. */
+    public synchronized void setMode(Mode m) {
+        if (m == mode) { return; }
+        mode = m;
+        stack.clear();
+        justRestored = false;
+        barrierReason = m == Mode.OFF ? "Undo is off" : null;
+    }
     public synchronized int depth() { return Math.max(0, stack.size() - 1); }
 
     /** True if {@code p} is the player whose actions are currently recorded (or nobody is recorded yet). */
@@ -40,6 +51,7 @@ public final class UndoManager {
     public void checkpoint(Game game, Player who) {
         synchronized (this) {
             requested = false;
+            if (mode == Mode.OFF) { return; }
             if (owner != null && owner != who) {      // another human is now acting: their history is not ours to rewind
                 stack.clear();
                 barrierReason = "Another player had priority";
@@ -52,7 +64,7 @@ public final class UndoManager {
             var ph = game.getPhaseHandler();
             long phaseKey = ph.getTurn() * 100L + (ph.getPhase() == null ? 0 : ph.getPhase().ordinal());
             if (phaseKey > budgetPhase) { budgetPhase = phaseKey; undosLeft = UNDOS_PER_PHASE; }
-            final int cap = SINGLE_STEP ? 2 : MAX;
+            final int cap = mode == Mode.SINGLE_STEP ? 2 : MAX;
             while (stack.size() >= cap) stack.removeLast();
         }
 
@@ -65,14 +77,70 @@ public final class UndoManager {
         }
     }
 
+    /**
+     * A snapshot taken just before an action of a player whose actions are not on the undo stack (the AI), so that the
+     * action can be taken back if it turns out to be illegal. It is not part of the human undo history.
+     */
+    public record Mark(GameMemento memento, int logSize) {}
+
+    /**
+     * Game thread. Takes a snapshot to roll one action back to with {@link #rollbackTo}, or null when undo is off or
+     * the snapshot could not be taken (the caller then has no safety net and must not count on one). A fresh recorder
+     * is used on purpose: it shares nothing with the human history and keeps nothing alive once the mark is dropped,
+     * which matters on phones. Take it only for actions that can fail, it reads the whole game.
+     */
+    public Mark markForRollback(final Game game) {
+        if (mode() == Mode.OFF) {
+            return null;
+        }
+        try {
+            return new Mark(new GameMemento.Recorder().capture(game), game.getGameLog().size());
+        } catch (final RuntimeException ex) {
+            System.err.println("Could not take a rollback snapshot: " + ex);
+            return null;
+        }
+    }
+
+    /**
+     * Game thread. Puts the game back as it was at {@code mark}. Returns false when nothing was restored or the
+     * restore reported problems (the game may then be only partly restored).
+     */
+    public boolean rollbackTo(final Game game, final Mark mark) {
+        if (mark == null) {
+            return false;
+        }
+        boolean clean;
+        try {
+            game.fireEvent(new GameEventSnapshotRestored(true));
+            mark.memento().restore();
+            game.getGameLog().truncateTo(mark.logSize());
+            clean = mark.memento().problems.isEmpty();
+            if (!clean) {
+                System.err.println("Rollback problems: " + mark.memento().problems);
+            }
+            refreshViews(game);
+            game.fireEvent(new GameEventSnapshotRestored(false));
+        } catch (final RuntimeException ex) {
+            System.err.println("Rollback failed: " + ex);
+            return false;
+        }
+        synchronized (this) {
+            randomMark = MyRandom.callCount();
+            stack.clear();                       // whatever a human could undo to is older than this now
+            barrierReason = "An action was taken back";
+        }
+        return clean;
+    }
+
     /** Anything that reveals hidden info or makes the opponent act. */
     public synchronized void barrier(String why) { stack.clear(); barrierReason = why; }
 
     public synchronized boolean canUndo(Player who) { return isOwner(who) && canUndo(); }
-    public synchronized boolean canUndo() { return stack.size() >= 2 && (!LIMITED || undosLeft > 0); }
+    public synchronized boolean canUndo() { return mode != Mode.OFF && stack.size() >= 2 && (!LIMITED || undosLeft > 0); }
     public synchronized int undosLeft() { return LIMITED ? undosLeft : 0; }   // 0 = no count shown on the button
     public synchronized String whyNot() {
         if (canUndo()) return null;
+        if (mode == Mode.OFF) return "Undo is off";
         return stack.size() >= 2 ? "No undos left this phase" : barrierReason;
     }
     public void    requestUndo()  { requested = true; }
@@ -86,7 +154,7 @@ public final class UndoManager {
             stack.pop();
             if (LIMITED) undosLeft--;
             target = stack.peek();
-            if (SINGLE_STEP) {          // forget everything older than the state we are restoring
+            if (mode == Mode.SINGLE_STEP) {          // forget everything older than the state we are restoring
                 stack.clear();
                 stack.push(target);
             }

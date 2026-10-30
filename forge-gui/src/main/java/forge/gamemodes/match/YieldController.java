@@ -1,9 +1,13 @@
 package forge.gamemodes.match;
 
+import com.google.common.eventbus.Subscribe;
 import forge.game.GameView;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -490,6 +494,23 @@ public class YieldController {
     public void maybeInterruptOnReveal() {
         if (!getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return;
         applyInterrupt();
+    }
+
+    /** Also runs with no yield active, so APINA with respects-interrupts can set autoPassInterrupted. */
+    @Subscribe
+    public void receiveGameEvent(final GameEvent ev) {
+        if (ev instanceof GameEventSpellAbilityCast cast) {
+            if (!shouldEvaluateInterrupts()) return;
+            for (SpellAbilityStackInstance si : owner.getGame().getStack()) {
+                if (si.getId() == cast.si().getId()) {
+                    onSpellAbilityCast(si);
+                    return;
+                }
+            }
+        } else if (ev instanceof GameEventAttackersDeclared) {
+            final CombatView combat = owner.getGame().getView().getCombat();
+            if (combat != null) onAttackersDeclared(combat);
+        }
     }
 
     public void onSpellAbilityCast(SpellAbilityStackInstance si) {

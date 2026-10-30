@@ -1,6 +1,7 @@
 package forge.gamemodes.match.input;
 
 import forge.game.GameEntity;
+import forge.game.GameEntityView;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -11,7 +12,9 @@ import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.match.Selection;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -43,13 +46,20 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (min > validChoices.size()) { // pfps does this really do anything useful??
             System.out.printf("Trying to choose at least %d things from a list with only %d things!%n", min, validChoices.size());
         }
-        ArrayList<CardView> vCards = new ArrayList<>();
-        for (T v : validChoices0) {
+    }
+
+    @Override
+    protected Selection getSelection() {
+        final List<CardView> cards = new ArrayList<>();
+        final List<TrackableObject> players = new ArrayList<>();
+        for (T v : validChoices) {
             if (v instanceof Card c) {
-                vCards.add(c.getView());
+                cards.add(c.getView());
+            } else if (v instanceof Player p) {
+                players.add(p.getView());
             }
         }
-        getController().getGui().setSelectables(vCards, this.min, this.max);
+        return new Selection(cards, min, max, players, new ArrayList<>(GameEntityView.getEntityCollection(selected)), List.of());
     }
 
     @Override
@@ -62,6 +72,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 selectEntity(other);
             }
         }
+        showSelection();
         refresh();
         return true;
     }
@@ -82,6 +93,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (!selectEntity(p)) {
             return;
         }
+        showSelection();
         refresh();
     }
 
@@ -106,7 +118,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         } else {
             selected.add((T)c);
         }
-        onSelectStateChanged(c, !entityWasSelected);
 
         return true;
     }
@@ -147,12 +158,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         }
 
         return msg.toString();
-    }
-
-    @Override
-    protected void onStop() {
-        getController().getGui().clearSelectables();
-        super.onStop();
     }
 
     /**
@@ -196,9 +201,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             massSelectMode = massSelectMode.next();
             updateMassSelectButton();
             // Remove all current selections
-            this.getSelected().forEach(selected -> {
-                onSelectStateChanged(selected, false);
-            });
             this.getSelected().clear();
             if (massSelectMode == MassSelectMode.MINE) { // Select all valid targets owned by player
                 for (T v : validChoices) {
@@ -208,7 +210,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                     if (v instanceof Card c) {
                         if (c.getController().equals(getController().getPlayer())) {
                             selected.add(v);
-                            onSelectStateChanged(v, true);
                         }
                     }
                 }
@@ -218,9 +219,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                         break;
                     }
                     selected.add(c);
-                    onSelectStateChanged(c, true);
                 }
             }
+            showSelection();
         }
     }
 }

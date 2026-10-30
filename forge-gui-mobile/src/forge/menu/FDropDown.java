@@ -1,5 +1,6 @@
 package forge.menu;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 
 import forge.Forge;
@@ -191,8 +192,22 @@ public abstract class FDropDown extends FScrollPane {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
+        if (isGlass()) { //frosted slate, the same as the compact player panels
+            g.fillRect(GLASS, 0, 0, w, h);
+            return;
+        }
         g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
         g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
+    }
+
+    private static final Color GLASS = new Color(35 / 255f, 40 / 255f, 44 / 255f, 0.92f);
+    private static final Color GLASS_EDGE = new Color(1f, 1f, 1f, 0.14f);
+
+    private boolean isGlass() {
+        if (getDropDownOwner() instanceof FMenuTab) {
+            return ((FMenuTab) getDropDownOwner()).isGlass();
+        }
+        return forge.toolbox.Frost.isOn(); //menus and combo box lists in the frosted style
     }
 
     protected boolean drawAboveOverlay() {
@@ -204,7 +219,11 @@ public abstract class FDropDown extends FScrollPane {
         super.drawOverlay(g);
         float w = getWidth();
         float h = getHeight();
-        g.drawRect(2, getBorderColor(), 0, 0, w, h); //ensure border shows up on all sides
+        if (isGlass()) {
+            g.drawRect(1, GLASS_EDGE, 0, 0, w, h);
+        } else {
+            g.drawRect(2, getBorderColor(), 0, 0, w, h); //ensure border shows up on all sides
+        }
         if (getDropDownOwner() instanceof FMenuTab) {
             try {
                 if (getScrollLeft() > 0) {
