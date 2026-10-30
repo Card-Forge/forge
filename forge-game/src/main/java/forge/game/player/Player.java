@@ -1844,14 +1844,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final List<Card> getCreaturesAttackedThisTurn() {
-        List<Card> result = Lists.newArrayList();
-        Multimap<Card, Card> seen = ArrayListMultimap.create();
-        for (Card c : Iterables.concat(attackedThisTurn.values())) {
-            if (seen.get(c).stream().noneMatch(c::equalsWithGameTimestamp)) {
-                seen.put(c, c);
-                result.add(c);
-            }
-        }
+        List<Card> result = Lists.newArrayList(Iterables.concat(attackedThisTurn.values()));
         return result;
     }
     public final List<Card> getCreaturesAttackedThisTurn(final GameEntity e) {

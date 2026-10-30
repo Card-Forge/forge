@@ -2495,14 +2495,15 @@ public class AbilityUtils {
 
         // Count$AttackersDeclared
         if (sq[0].startsWith("AttackersDeclared")) {
-            return doXMath(player.getCreaturesAttackedThisTurn().size(), expr, c, ctb);
+            return doXMath(getDifferentAttackers(player.getCreaturesAttackedThisTurn()).size(), expr, c, ctb);
         }
 
         // Count$CardAttackedThisTurn <Valid>
         if (sq[0].startsWith("CreaturesAttackedThisTurn")) {
             final String[] workingCopy = l[0].split(" ", 2);
             final String validFilter = workingCopy[1];
-            return doXMath(CardLists.getValidCardCount(player.getCreaturesAttackedThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
+            final List<Card> attackers = CardLists.getValidCardsAsList(player.getCreaturesAttackedThisTurn(), validFilter, player, c, ctb);
+            return doXMath(getDifferentAttackers(attackers).size(), expr, c, ctb);
         }
 
         // Count$LeftBattlefieldThisTurn <Valid>
@@ -3460,6 +3461,17 @@ public class AbilityUtils {
         return doXMath(n, m, source, ctb);
     }
 
+    // a creature that attacked in several combats of the turn is in the list once per attack
+    private static List<Card> getDifferentAttackers(final Iterable<Card> attackers) {
+        List<Card> result = new ArrayList<>();
+        for (Card attacker : attackers) {
+            if (result.stream().noneMatch(attacker::equalsWithGameTimestamp)) {
+                result.add(attacker);
+            }
+        }
+        return result;
+    }
+
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
@@ -3625,7 +3637,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("AttackersDeclared")) {
-            return doXMath(player.getCreaturesAttackedThisTurn().size(), m, source, ctb);
+            return doXMath(getDifferentAttackers(player.getCreaturesAttackedThisTurn()).size(), m, source, ctb);
         }
 
         if (value.contains("DamageToOppsThisTurn")) {
