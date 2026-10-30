@@ -1,0 +1,8 @@
+Name:Commander William Riker
+ManaCost:1 R W
+Types:Legendary Creature Human Officer
+PT:3/3
+K:Vigilance
+K:Haste
+A:AB$ Draw | Cost$ 1 T | ValidTgts$ Opponent | Defined$ TargetedAndYou | NumCards$ 2 | SpellDescription$ You and target opponent each draw two cards.
+Oracle:Vigilance, haste\n{1}, {T}: You and target opponent each draw two cards.
