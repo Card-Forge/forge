@@ -4,7 +4,7 @@ Types:Creature Boar
 PT:4/5
 K:Trample
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, Klingons and Warriors you control get +2/+0 and gain trample until end of turn.
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Klingon.YouCtrl,Warrior.YouCtrl | NumAtt$ +2 | KW$ Trample
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Klingon.YouCtrl,Warrior.YouCtrl | NumAtt$ +2 | KW$ Trample
 SVar:PlayMain1:TRUE
 DeckHints:Type$Klingon|Warrior
 Oracle:Trample\nWhenever you attack, Klingons and Warriors you control get +2/+0 and gain trample until end of turn.
