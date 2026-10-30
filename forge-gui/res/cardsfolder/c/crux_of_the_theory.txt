@@ -1,0 +1,8 @@
+Name:Crux of the Theory
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHeist | TriggerDescription$ When this enchantment enters, heist target opponent’s library
+SVar:TrigHeist:DB$ Heist | ValidTgts$ Opponent
+T:Mode$ SpellCast | ValidCard$ Card.!FromStartingDeck | ValidActivatingPlayer$ You | Execute$ TrigEmpower | TriggerZones$ Battlefield | TriggerDescription$ Actualize — Whenever you cast a spell that isn’t from your starting deck, empower Jace 2.
+SVar:TrigEmpower:DB$ Empower | Type$ Jace | Num$ 2
+Oracle:When this enchantment enters, heist target opponent’s library.\nActualize — Whenever you cast a spell that isn’t from your starting deck, empower Jace 2.

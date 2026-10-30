@@ -86,12 +86,15 @@ public class RestartGameEffect extends SpellAbilityEffect {
             final PlayerZone command = p.getZone(ZoneType.Command);
             command.setCards(CardLists.filter(command.getCards(), Card::isCommander));
 
+            List<Integer> ids = new ArrayList<>();
             for (Card c : newLibrary) {
                 if (c.getIntensity(false) > 0) {
                     c.setIntensity(0);
                 }
                 action.moveToLibrary(c, 0, sa);
+                ids.add(c.getId());
             }
+            p.setCardsFromStartingDeck(ids);
             p.initVariantsZones(p.getRegisteredPlayer());
 
             p.shuffle(null);

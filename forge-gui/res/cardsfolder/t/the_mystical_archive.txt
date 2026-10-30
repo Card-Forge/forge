@@ -1,0 +1,14 @@
+Name:The Mystical Archive
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBDraft
+SVar:DBDraft:DB$ Draft | Spellbook$ Abrade,Ad Nauseam,Armageddon,Berserk,Big Score,Bulk Up,Crackle with Power,Deduce,Disdainful Stroke,Empty the Warrens,Force of Will,Giant Growth,Hop to It,Knockout Maneuver,Pick Your Poison,Pongify,Prismatic Ending,Reprieve,Requisition Raid,Shamanic Revelation,Sheoldred's Edict,Smallpox,Stargaze,Stock Up,Zombify | RememberDrafted$ True | SubAbility$ DBExile | StackDescription$ REP Draft_{p:You} drafts & exile_they exile | SpellDescription$ As this land enters, draft a card from CARDNAME’s spellbook and exile it face down
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | Defined$ Remembered | StackDescription$ None
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.!FromStartingDeck | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast spells that aren’t from your starting deck | StackDescription$ SpellDescription
+A:AB$ ChooseCard | Cost$ 2 T | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Mandatory$ True | SubAbility$ DBChangeZone | SpellDescription$ Put a card exiled with this land into its owner’s hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBCleanup | ForgetMoved$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBClearRemembered
+SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
+Oracle:As this land enters, draft a card from The Mystical Archive’s spellbook and exile it face down.\n{T}: Add {C}.\n{1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast spells that aren’t from your starting deck.\n{2}, {T}: Put a card exiled with this land into its owner’s hand.

@@ -350,7 +350,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             final Card lki = sp.equals(source.getCastSA()) ? source.getCastSA().getHostCard() : CardCopyService.getLKICopy(source);
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(sp.equals(source.getCastSA()) ? source.getCastSA() : sp.copy(lki, true));
-            sp.getActivatingPlayer().addSpellCastThisTurn();
+            sp.getActivatingPlayer().addSpellCastThisTurn(sp);
 
             // Add expend mana
             Map<Player, Long> expendPlayers = sp.getPayingMana().stream().collect(Collectors.groupingBy(Mana::getPlayer, Collectors.counting()));

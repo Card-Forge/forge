@@ -1,0 +1,7 @@
+Name:Willbound Quill
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ SpellCast | ValidCard$ Card.!FromStartingDeck | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Actualize — Whenever you cast a spell that isn’t from your starting deck, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:{T}: Add one mana of any color.\nActualize — Whenever you cast a spell that isn’t from your starting deck, copy that spell. You may choose new targets for the copy.

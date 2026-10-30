@@ -1893,6 +1893,8 @@ public class CardProperty {
             if (StaticAbilityCantBeBeamedUp.cantBeBeamedUp(card, spellAbility)) {
                 return false;
             }
+        } else if (property.equals("FromStartingDeck")) {
+            return sourceController.getCardsFromStartingDeck().contains(card.getId());
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
                 return false;
