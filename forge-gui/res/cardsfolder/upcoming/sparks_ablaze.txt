@@ -1,0 +1,7 @@
+Name:Sparks Ablaze
+ManaCost:R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | NumDmg$ 2 | ReplaceDyingDefined$ Targeted | SubAbility$ DBReduce | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | ForgetOnCast$ Planeswalker.YouCtrl | Duration$ Permanent
+SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | Activator$ You | Amount$ 1 | Description$ The next planeswalker spell you cast costs {1} less to cast.
+Oracle:Sparks Ablaze deals 2 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.\nThe next planeswalker spell you cast costs {1} less to cast.

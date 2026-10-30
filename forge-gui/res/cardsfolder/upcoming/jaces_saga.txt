@@ -6,7 +6,7 @@ SVar:Animate1:DB$ Animate | Defined$ Self | Abilities$ ABMana | Duration$ Perman
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 SVar:Animate2:DB$ Animate | Defined$ Self | Abilities$ ABConjure | Duration$ Permanent | SpellDescription$ This Saga gains "{U}, {T}: Conjure a card named Jace's Sentinel onto the battlefield."
 SVar:ABConjure:AB$ MakeCard | Cost$ T U | Conjure$ True | Name$ Jace's Sentinel | Zone$ Battlefield | SpellDescription$ Conjure a card named Jace's Sentinel onto the battlefield.
-SVar:Empower:DB$ Empower | Type$ Jace | Num$ X | SpellDescription$ Empower Jace X, where X is the number of Islands you control.
+SVar:EmpowerJace:DB$ Empower | Type$ Jace | Num$ X | SpellDescription$ Empower Jace X, where X is the number of Islands you control.
 SVar:X:Count$Valid Island.YouCtrl
 DeckHas:Type$Merfolk|Warrior|Planeswalker
 DeckHints:Type$Jace

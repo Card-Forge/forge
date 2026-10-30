@@ -6,9 +6,7 @@ K:Vigilance
 K:Haste
 K:Protection:Instant:instants
 K:ETBReplacement:Other:RepeatOpp
-SVar:RepeatOpp:DB$ RepeatEach | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac | SpellDescription$ Each opponent sacrifices a creature with the greatest power among creatures that player controls.
-SVar:ChooseOpp:DB$ ChoosePlayer | Choices$ Opponent | ChoiceTitle$ Choose an opponent | AILogic$ Curse | SubAbility$ DBChooseType | SpellDescription$ As this creature enters, for each opponent, note the most prevalent creature type in their library.
-SVar:DBChooseType:DB$ ChooseType | Type$ Creature | MostPrevalentInDefinedZone$ ChosenPlayer_Library | Note$ True | SubAbility$ DBCleanupChosen
-SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
+SVar:RepeatOpp:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChooseType | SpellDescription$ As this creature enters, for each opponent, note the most prevalent creature type in their library.
+SVar:DBChooseType:DB$ ChooseType | Type$ Creature | MostPrevalentInDefinedZone$ RememberedPlayer_Library | Note$ True
 S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Protection:Creature.NotedType| Description$ This creature has protection from each of the noted creature types.
 Oracle:Vigilance\nHaste\nProtection from instants\nAs this creature enters, for each opponent, note the most prevalent creature type in their library.\nThis creature has protection from each of the noted creature types.
