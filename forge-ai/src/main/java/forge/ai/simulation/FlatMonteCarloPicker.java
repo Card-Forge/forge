@@ -1247,6 +1247,13 @@ public final class FlatMonteCarloPicker {
             final Game simGame = sim.getSimulatedGameState();
             final Player simAi = sim.getSimulatedAiPlayer();
             simGame.AI_TIMEOUT = Math.min(simGame.AI_TIMEOUT, ROLLOUT_AI_TIMEOUT_SECONDS);
+            // A human's stand-in in the copy searches with full simulation (GameCopier.clonePlayer), which costs many
+            // times a heuristic decision and ignores this decision's deadline. Rollouts play every side by the heuristics.
+            for (final Player p : simGame.getPlayers()) {
+                if (p.getController() instanceof PlayerControllerAi pc) {
+                    pc.getAi().setUseSimulation(null);
+                }
+            }
             HiddenInfoShuffler.shuffle(simGame, sim.getGameCopier(), player, new Random(seed ^ HIDDEN_INFO_SALT));
 
             final Long value;
