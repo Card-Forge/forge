@@ -23,6 +23,7 @@ import com.google.common.collect.Maps;
 import forge.*;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ai.AiProfileUtil;
+import forge.ai.simulation.AiCardLists;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -292,6 +293,12 @@ public final class FModel {
 
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+
+        // Card lists of the AI's combo logic: roles of cards, and the two card combos of Commander (the bracket list first)
+        AiCardLists.configure(
+                () -> forge.util.FileUtil.readFile(ForgeConstants.AI_CARD_ROLES_FILE),
+                () -> forge.util.FileUtil.readFile(ForgeConstants.COMMANDER_BRACKET_COMBOS_FILE),
+                () -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMMANDER_COMBOS_FILE));
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix

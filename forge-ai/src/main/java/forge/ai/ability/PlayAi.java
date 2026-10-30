@@ -196,6 +196,11 @@ public class PlayAi extends SpellAbilityAi {
 
                     spell = (Spell) spell.copyWithManaCostReplaced(spell.getActivatingPlayer(), abCost);
                 }
+                if (sa.isKeyword(Keyword.MADNESS) && !spell.usesTargeting()) {
+                    // The card is already in exile and goes to the graveyard if it is not cast: the usual "is this a
+                    // good moment" heuristics have nothing left to decide, only whether the madness cost can be paid
+                    return ComputerUtilCost.canPayCost(spell, ai, true);
+                }
                 if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !(isOptional || sa.hasParam("Optional")), true)) {
                     // Before accepting, see if the spell has a valid number of targets (it should at this point).
                     // Proceeding past this point if the spell is not correctly targeted will result

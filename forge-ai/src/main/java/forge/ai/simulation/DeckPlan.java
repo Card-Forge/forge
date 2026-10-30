@@ -1,6 +1,11 @@
 package forge.ai.simulation;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -31,34 +36,102 @@ public final class DeckPlan {
     public final int manaDevelopmentExtra;
     /** Long playouts always, not only when the hand looks like a combo. */
     public final boolean longPlayouts;
+    /**
+     * The combos the deck is built around (none for most decks), read once together with the rest of the plan. Never
+     * null; check {@link ComboPlan#isScanComplete()} to know whether the deck has been read.
+     */
+    public final ComboPlan combos;
+    /**
+     * What a Commander deck is about (strategies of the commander, known combos); {@link CommanderPlan#EMPTY} in a
+     * game without commanders. Never null.
+     */
+    public final CommanderPlan commander;
 
     private DeckPlan(final Archetype archetype, final int oppLife, final int ownLife, final int risk, final int mana,
-                     final boolean longPlayouts) {
+                     final boolean longPlayouts, final ComboPlan combos) {
+        this(archetype, oppLife, ownLife, risk, mana, longPlayouts, combos, CommanderPlan.EMPTY);
+    }
+
+    private DeckPlan(final Archetype archetype, final int oppLife, final int ownLife, final int risk, final int mana,
+                     final boolean longPlayouts, final ComboPlan combos, final CommanderPlan commander) {
         this.archetype = archetype;
         this.opponentLifeExtra = oppLife;
         this.ownLifeExtra = ownLife;
         this.riskPercent = risk;
         this.manaDevelopmentExtra = mana;
         this.longPlayouts = longPlayouts;
+        this.combos = combos == null ? ComboPlan.EMPTY : combos;
+        this.commander = commander == null ? CommanderPlan.EMPTY : commander;
     }
 
-    public static final DeckPlan NONE = new DeckPlan(Archetype.MIDRANGE, 0, 0, 100, 0, false);
+    public static final DeckPlan NONE = new DeckPlan(Archetype.MIDRANGE, 0, 0, 100, 0, false, ComboPlan.EMPTY);
+
+    /**
+     * This plan, keeping its archetype, together with the result of reading the deck for combos. The result is kept
+     * even when no combo was found, so the plan knows that the deck has been read ({@link ComboPlan#isScanComplete()})
+     * and the scan is never repeated.
+     */
+    DeckPlan withScan(final ComboPlan found) {
+        if (found == null) {
+            return this;
+        }
+        return new DeckPlan(archetype, opponentLifeExtra, ownLifeExtra, riskPercent, manaDevelopmentExtra,
+                longPlayouts || !found.isEmpty(), found, commander);
+    }
+
+    /** This plan together with the Commander plan of the deck (a no-op for a game without commanders). */
+    DeckPlan withCommander(final CommanderPlan cmd) {
+        if (cmd == null || !cmd.isActive()) {
+            return this;
+        }
+        return new DeckPlan(archetype, opponentLifeExtra, ownLifeExtra, riskPercent, manaDevelopmentExtra,
+                longPlayouts || cmd.hasCombos(), combos, cmd);
+    }
 
     static DeckPlan of(final Archetype a) {
         switch (a) {
             case AGGRO:
-                return new DeckPlan(a, 4, 1, 70, 0, false);
+                return new DeckPlan(a, 4, 1, 70, 0, false, ComboPlan.EMPTY);
             case BURN:
-                return new DeckPlan(a, 6, 0, 60, 0, false);
+                return new DeckPlan(a, 6, 0, 60, 0, false, ComboPlan.EMPTY);
             case CONTROL:
-                return new DeckPlan(a, 0, 3, 130, 0, false);
+                return new DeckPlan(a, 0, 3, 130, 0, false, ComboPlan.EMPTY);
             case COMBO:
-                return new DeckPlan(a, 1, 1, 100, 0, true);
+                return new DeckPlan(a, 1, 1, 100, 0, true, ComboPlan.EMPTY);
             case RAMP:
-                return new DeckPlan(a, 0, 1, 100, 8, false);
+                return new DeckPlan(a, 0, 1, 100, 8, false, ComboPlan.EMPTY);
             default:
                 return NONE;
         }
+    }
+
+    /**
+     * Plans already worked out, by setting and deck list. A plan is only names and numbers (never a card or a game), so
+     * the copies of a game that Monte Carlo plays out, each with a controller of its own, share the plan of the real
+     * game instead of reading the same sixty cards again.
+     */
+    private static final Map<String, DeckPlan> KNOWN = Collections.synchronizedMap(
+            new LinkedHashMap<String, DeckPlan>(16, 0.75f, true) {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                protected boolean removeEldestEntry(final Map.Entry<String, DeckPlan> eldest) {
+                    return size() > 48;
+                }
+            });
+
+    /** The deck as a sorted list of card names: the same list, wherever its cards are, gives the same key. */
+    private static String deckKey(final Player player) {
+        final List<String> names = new ArrayList<>();
+        for (final Card c : player.getAllCards()) {
+            if (!c.isToken() && !c.isImmutable()) {
+                names.add(c.getName());
+            }
+        }
+        Collections.sort(names);
+        // the same list is a different deck in a Commander game, where the commander is part of it
+        final boolean cmd = !player.getCommanders().isEmpty();
+        return (cmd ? "cmd#" : "") + String.join("|", names);
     }
 
     /** The plan for a profile setting: "off", "auto" or the name of an archetype. */
@@ -67,14 +140,34 @@ public final class DeckPlan {
         if (s.isEmpty() || s.equals("off") || s.equals("false")) {
             return NONE;
         }
+        final String key = s + "#" + deckKey(player);
+        DeckPlan plan = KNOWN.get(key);
+        if (plan == null) {
+            plan = read(s, player);
+            KNOWN.put(key, plan);
+        }
+        return plan;
+    }
+
+    private static DeckPlan read(final String s, final Player player) {
         if (!s.equals("auto") && !s.equals("true")) {
             for (final Archetype a : Archetype.values()) {
                 if (a.name().toLowerCase(Locale.ROOT).equals(s)) {
-                    return of(a);
+                    // the archetype is forced, but the combos of the deck are still read: they are facts about the list
+                    return of(a).withScan(ComboPlan.scan(player)).withCommander(CommanderPlan.scan(player));
                 }
             }
         }
-        return of(classify(player));
+        // one read of the whole deck: the combos (at most three) first, because a deck built around one is a combo deck
+        // whatever its cheap spells look like to the archetype counters below
+        final ComboPlan combos = ComboPlan.scan(player);
+        final CommanderPlan cmd = CommanderPlan.scan(player);
+        Archetype arch = combos.isEmpty() ? classify(player) : Archetype.COMBO;
+        if (arch == Archetype.MIDRANGE && cmd.archetypeHint() != null) {
+            // 99 singleton cards never look like aggro or control to the counters of classify: the commander says
+            arch = cmd.archetypeHint();
+        }
+        return of(arch).withScan(combos).withCommander(cmd);
     }
 
     /** Reads the player's whole deck (every card the player owns, wherever it is now). */
@@ -144,6 +237,103 @@ public final class DeckPlan {
             return Archetype.AGGRO;
         }
         return Archetype.MIDRANGE;
+    }
+
+    /** Archetype and combos, for statistics and the game log ("COMBO[MASS_REANIMATION(52: ...)]"). */
+    /**
+     * What to search the library for, for any kind of deck: the combo's missing piece first (see
+     * {@link ComboPlan#tutorPicks}), then what the commander plan is built around, then for a ramp deck the mana it
+     * is short of or the big spell it can now cast. Null for no opinion: the normal choice is made.
+     */
+    public forge.game.card.CardCollection tutorPicks(final Player ai, final Iterable<forge.game.card.Card> pool, final int n) {
+        if (ai == null || pool == null || n <= 0) {
+            return null;
+        }
+        final forge.game.card.CardCollection fromCombo = combos.tutorPicks(ai, pool, n);
+        if (fromCombo != null) {
+            return fromCombo;
+        }
+        if (n != 1) {
+            return null;
+        }
+        final forge.game.card.CardCollectionView hand = ai.getCardsIn(forge.game.zone.ZoneType.Hand);
+        final forge.game.card.CardCollectionView board = ai.getCardsIn(forge.game.zone.ZoneType.Battlefield);
+        for (final forge.game.card.Card c : pool) {
+            if (!c.isLand() && commander.isKeyCard(c) && !hand.contains(c) && !named(hand, board, c.getName())) {
+                return new forge.game.card.CardCollection(c);
+            }
+        }
+        final forge.game.card.Card ramp = archetype == Archetype.RAMP ? rampPick(pool, hand, board) : null;
+        return ramp == null ? null : new forge.game.card.CardCollection(ramp);
+    }
+
+    /** The one card to search for, or null for no opinion. */
+    public forge.game.card.Card tutorPick(final Player ai, final Iterable<forge.game.card.Card> pool) {
+        final forge.game.card.CardCollection picks = tutorPicks(ai, pool, 1);
+        return picks == null ? null : picks.getFirst();
+    }
+
+    private static boolean named(final forge.game.card.CardCollectionView hand, final forge.game.card.CardCollectionView board,
+                                 final String name) {
+        for (final forge.game.card.Card x : hand) {
+            if (x.getName().equals(name)) {
+                return true;
+            }
+        }
+        for (final forge.game.card.Card x : board) {
+            if (x.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A ramp deck short of mana (or stuck with a big spell in hand) fetches the cheapest mana source it can cast now;
+     * with the mana it fetches the biggest spell it can cast within a turn or two, the one it was built for.
+     */
+    private static forge.game.card.Card rampPick(final Iterable<forge.game.card.Card> pool,
+                                                 final forge.game.card.CardCollectionView hand,
+                                                 final forge.game.card.CardCollectionView board) {
+        int sources = 0;
+        for (final forge.game.card.Card x : board) {
+            if (x.isLand() || !x.getManaAbilities().isEmpty()) {
+                sources++;
+            }
+        }
+        int stuckAt = 0;
+        for (final forge.game.card.Card x : hand) {
+            if (!x.isLand()) {
+                stuckAt = Math.max(stuckAt, x.getCMC());
+            }
+        }
+        forge.game.card.Card best = null;
+        int bestScore = 0;
+        for (final forge.game.card.Card c : pool) {
+            if (c.isLand()) {
+                continue;
+            }
+            final boolean source = !c.getManaAbilities().isEmpty();
+            int score = 0;
+            if (source && sources < 7 && c.getCMC() <= sources + 1) {
+                score = 100 - 10 * c.getCMC() + (stuckAt > sources + 1 ? 50 : 0);
+            } else if (!source && sources >= 4 && c.getCMC() <= sources + 2) {
+                score = 60 + 8 * c.getCMC() + (c.isCreature() ? forge.ai.ComputerUtilCard.evaluateCreature(c) / 20 : 0);
+            }
+            if (score > 0 && named(hand, board, c.getName())) {
+                score -= 60; // one is already at hand
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                best = c;
+            }
+        }
+        return best;
+    }
+
+    public String describe() {
+        final String base = combos.isEmpty() ? archetype.name() : archetype.name() + combos;
+        return commander.isActive() ? base + "/CMD" + commander : base;
     }
 
     @Override

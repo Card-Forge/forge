@@ -60,6 +60,24 @@ public class PrintSheet {
             cardsWithWeights.add(card, weight);
     }
 
+    /**
+     * Returns a new sheet with the same weights for every card whose name is not
+     * in {@code excludedNames}. Does not mutate this sheet. If {@code excludedNames}
+     * is null or empty, returns this sheet.
+     */
+    public PrintSheet copyWithoutNames(Collection<String> excludedNames) {
+        if (excludedNames == null || excludedNames.isEmpty()) {
+            return this;
+        }
+        PrintSheet copy = new PrintSheet(name);
+        for (Entry<PaperCard, Integer> entry : cardsWithWeights) {
+            if (!excludedNames.contains(entry.getKey().getName())) {
+                copy.add(entry.getKey(), entry.getValue());
+            }
+        }
+        return copy;
+    }
+
     /** Cuts cards out of a sheet - they won't be printed again.
     * Please use mutable sheets for cubes only.*/
     public void removeAll(Iterable<PaperCard> cards) {

@@ -338,8 +338,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             CardCollectionView list = p.getCardsIn(origin);
 
             // remove cards that won't be seen if library can't be searched
-            if (!ai.canSearchLibraryWith(sa, p)) {
-                list = CardLists.filter(list, CardPredicates.inZone(ZoneType.Library).negate());
+            if (origin.contains(ZoneType.Library)) {
+                CardCollectionView searchable = ai.getSearchableLibrary(sa, p);
+                list = CardLists.filter(list, c -> !c.isInZone(ZoneType.Library) || (searchable != null && searchable.contains(c)));
             }
 
             if (type != null && p == ai) {
@@ -1520,6 +1521,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             keycardFound = withKeyCard.getFirst();
             break;
+        }
+
+        if (keycardFound == null && player == decider && ZoneType.Hand.equals(destination)
+                && player.getController() instanceof PlayerControllerAi) {
+            // no key card named by the deck file: the deck plan (madness, Psychatog) knows what is missing
+            keycardFound = ((PlayerControllerAi) player.getController()).getAi().deckPlan(player)
+                    .tutorPick(player, fetchList);
         }
 
         if (sa.hasParam("AILogic")) {

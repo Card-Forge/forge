@@ -92,8 +92,36 @@ public final class OpeningHand {
         }
         final CardCollection kept = new CardCollection(hand);
         kept.removeAll(bottom(ai, hand, cardsToReturn, onPlay, plan, lib));
+        if (!playable(kept, finalSize)) {
+            return false; // no key card, combo piece or good score makes up for a hand that cannot cast anything
+        }
         final double score = score(kept, lib, onPlay, plan);
         return score >= keepBar(finalSize);
+    }
+
+    /**
+     * The rules no hand may break, whatever its spells are worth: at least one land that makes mana (two for a
+     * 6 or 7 card hand unless a cheap mana source helps the single land) and not nearly all lands.
+     */
+    static boolean playable(final CardCollectionView kept, final int size) {
+        int lands = 0;
+        int cheapSources = 0;
+        for (final Card c : kept) {
+            if (c.isLand()) {
+                if (CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
+                    lands++;
+                }
+            } else if (isCheapManaSource(c)) {
+                cheapSources++;
+            }
+        }
+        if (lands == 0) {
+            return false;
+        }
+        if (lands == 1 && size >= 6 && cheapSources < 2) {
+            return false;
+        }
+        return !(size >= 6 && lands >= size - 1);
     }
 
     /** The cards to put on the bottom so that the rest scores best (London mulligan). */
@@ -206,7 +234,7 @@ public final class OpeningHand {
             if (c.getCMC() <= w.playCmc) {
                 early += colorCredit(c, colors, lib);
             }
-            if (isKeyCard(c, arch)) {
+            if (isKeyCard(c, arch) || plan != null && (plan.combos.isKeyCard(c) || plan.commander.isKeyCard(c))) {
                 keys++;
             }
         }
@@ -216,7 +244,7 @@ public final class OpeningHand {
         double score = 100 * (0.55 * hit + 0.45 * quality) * Math.sqrt(hit);
 
         if (lands == 0) {
-            score -= 15;
+            score -= 60; // bottoming and mulligan rules must never leave a hand without a land
         }
         if (size >= 5 && lands >= size - 1) {
             score -= 35; // flooded: nothing to spend the mana on

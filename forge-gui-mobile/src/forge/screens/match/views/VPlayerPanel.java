@@ -1410,7 +1410,6 @@ public class VPlayerPanel extends FContainer {
         for (InfoTab tab : tabs) {
             tab.setDisplayBounds(boxLeft + inset, boxTop + inset, boxWidth - 2 * inset, boxHeight - 2 * inset);
         }
-        field.setCommandZoneWidth(0);
         if (isCompactAlternate()) {
             final float stops = phaseIndicator.getOpenWidth();
             final boolean rightSide = isCompactRight();
@@ -1423,8 +1422,15 @@ public class VPlayerPanel extends FContainer {
             field.setBounds(x, 0, regionWidth, height);
         }
         final boolean covers = selectedTab != null && isBoxDisplay(selectedTab.getDisplayArea());
-        final float cover = Math.max(covers ? boxWidth : 0f, commandProgress > 0 ? cmdWidth : 0f); //snapped, so the rows don't re-flow every animation frame
-        field.setEndPadding(Math.max(0f, field.getLeft() + field.getWidth() - (x + regionWidth - cover)));
+        //The rows end where the boxes begin, so the boxes are never covered by field cards and nothing of them is clipped: the card zone
+        //box sits over the outer row, the command zone box over the inner one. Both use the full width of their box, so the rows
+        //don't re-flow every animation frame.
+        final float fieldRight = field.getLeft() + field.getWidth();
+        final float boxEdge = x + regionWidth;
+        final float outerCover = covers ? Math.max(0f, fieldRight - (boxEdge - boxWidth - COMPACT_ZONE_GAP)) : 0f;
+        final float innerCover = commandProgress > 0 ? Math.max(0f, fieldRight - (boxEdge - cmdWidth - COMPACT_ZONE_GAP)) : 0f;
+        field.setEndPadding(0f);
+        field.setZoneCovers(outerCover, innerCover);
         field.setFieldModifier(0);
     }
 
@@ -1691,7 +1697,7 @@ public class VPlayerPanel extends FContainer {
 
         private void update() {
             int delta = player.getLife() - life;
-            player.setAvatarLifeDifference(player.getAvatarLifeDifference() + delta);
+            avatar.addLifeDifference(delta);
             if (delta != 0) {
                 life = player.getLife();
                 lifeStr = String.valueOf(life);

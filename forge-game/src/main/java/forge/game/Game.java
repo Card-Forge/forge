@@ -107,8 +107,21 @@ public class Game {
     // Whether Monte Carlo may use its maximum strength settings (bigger budgets, more lines and samples). Set by the
     // Match when it runs on a desktop; mobile ports keep the conservative profile values. Never inherited by copies.
     public boolean AI_FLAT_MONTE_CARLO_MAX = false;
+    // Whether Monte Carlo uses the phone/tablet settings: attack search and a cheap look at the opponent's next turn on
+    // top of the conservative profile values. Set by the Match on mobile ports; ignored when MAX is on. Never inherited.
+    public boolean AI_FLAT_MONTE_CARLO_LITE = false;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
+
+    // True for the games the AI copies to play out its choices (rollouts): nothing that only matters for the real
+    // game (like taking a snapshot to roll an AI cast back) has to be done there.
+    private boolean simulationCopy = false;
+    public boolean isSimulationCopy() {
+        return simulationCopy;
+    }
+    public void markAsSimulationCopy() {
+        simulationCopy = true;
+    }
     // While this is false here, its really set by the Match/Preferences
 
     // If this merges with LKI In the future, it will need to change forms
@@ -1540,6 +1553,9 @@ public class Game {
     }
     public boolean getAIFlatMonteCarloMax() {
         return AI_FLAT_MONTE_CARLO_MAX;
+    }
+    public boolean getAIFlatMonteCarloLite() {
+        return AI_FLAT_MONTE_CARLO_LITE;
     }
     public boolean isNoGUIUser() {
         return noGUIUser;

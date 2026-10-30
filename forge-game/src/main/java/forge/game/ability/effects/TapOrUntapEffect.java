@@ -70,7 +70,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                         !gameCard.getController().equals(tapper));
             }
             if (tap) {
-                if (gameCard.tap(true, sa, tapper)) tapped.add(gameCard);
+                if (gameCard.tap(sa, tapper)) tapped.add(gameCard);
             } else if (gameCard.untap()) {
                 untapMap.computeIfAbsent(tapper, i -> new CardCollection()).add(gameCard);
             }

@@ -279,7 +279,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             for (int i = 0; i < shownLastRefresh.size(); i++) {
                 CardAreaPanel p = shownLastRefresh.get(i);
                 if (current.contains(p.getCard())) { continue; }
-                if (p.getCard().getZone() == ZoneType.Battlefield) {
+                // A network client replaces a moved card's view, so the panel's copy can still say battlefield
+                if (CardFlightOverlay.isOnBattlefield(p.getCard())) {
                     // if the new row already took this panel, it has handled the move
                     if (p.getDisplayArea() == null || p.getDisplayArea() == this) {
                         CardAreaPanel.markMoved(p.getCard());
@@ -685,7 +686,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public void updateCard(final CardView card) {
-            setTapped(card.isTapped());
+            showOnBattlefield(card);
 
             attachedPanels.clear();
 

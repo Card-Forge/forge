@@ -135,6 +135,7 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPrinted();
     }
+
     protected Predicate<PaperCard> buildFilter(boolean printed) {
         Predicate<PaperCard> p = PaperCardPredicates.names(this.getBannedCardNames()).negate();
 

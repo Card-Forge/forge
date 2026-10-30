@@ -75,6 +75,16 @@ public final class FlatMonteCarloPicker {
     static final int MAX_DECISION_MS_DESKTOP = 1500;
     static final int MAX_TURN_MS_DESKTOP = 6000;
     static final int MAX_EXTRA_CANDIDATES_DESKTOP = 5;
+    /** Share of a rollout's value that comes from the position after the opponent's next turn (desktop). */
+    static final int LOOKAHEAD_PERCENT_DESKTOP = 50;
+    // Phone and tablet settings, see Config.mobileLite().
+    static final int MAX_CANDIDATES_MOBILE = 5;
+    static final int MIN_ROLLOUTS_MOBILE = 3;
+    static final int MOBILE_DECISION_MS = 600;
+    static final int MOBILE_TURN_MS = 2500;
+    static final int LOOKAHEAD_PERCENT_MOBILE = 35;
+    /** On a phone the (expensive) look at the opponent's turn is only done for decisions with at most this many lines. */
+    static final int MOBILE_LOOKAHEAD_MAX_CANDIDATES = 3;
 
     private static final int HOLD_VALUE_PER_CMC = 14;
     private static final int HOLD_COUNTER_VALUE_PER_CMC = 22;
@@ -134,7 +144,7 @@ public final class FlatMonteCarloPicker {
     }
 
     /** Tunable parameters, normally read from the AI profile with {@link #fromProfile}. */
-    public static final class Config {
+    public static final class Config implements Cloneable {
         /** How many of the heuristic-approved plays are compared (the hold option comes on top). */
         public int maxCandidates = 5;
         /** Samples per candidate, at most; fewer when the time budget runs out. */
@@ -163,6 +173,11 @@ public final class FlatMonteCarloPicker {
         public int overrideMajorityPercent = 50;
         /** Rounds beyond {@link #rolloutsPerCandidate} that lines still in the race may get (needs {@link #pruning}). */
         public int extraRounds = 2;
+        /**
+         * Time the first rollout and cut the candidate list to what the budget can pay for (at least two samples each),
+         * so a slow device keeps a real, if smaller, comparison instead of one sample per line and no pairs.
+         */
+        public boolean scaleToDevice = true;
         /** Drop lines that are clearly behind after every round, so the budget goes to the lines still in contention. */
         public boolean pruning = true;
         /** Value held-up cards by what they do (counter, removal, trick, flash creature) instead of mana cost alone. */
@@ -185,6 +200,26 @@ public final class FlatMonteCarloPicker {
          * against the AI's blockers). Catches crack-backs and removal that the end-of-turn estimate only guesses.
          */
         public int opponentLookaheadPercent = 0;
+        /**
+         * When above 0, the opponent's turn is only played out for decisions with at most this many candidates
+         * (every line of such a decision gets it, so the lines stay comparable); bigger decisions are scored at the end
+         * of the AI's own turn. 0 = always. This is what keeps the extra turn affordable on a phone.
+         */
+        public int lookaheadMaxCandidates = 0;
+
+        /** This configuration for a decision with this many candidates: the lookahead is dropped when it is too many. */
+        Config forDecision(final int candidates) {
+            if (opponentLookaheadPercent <= 0 || lookaheadMaxCandidates <= 0 || candidates <= lookaheadMaxCandidates) {
+                return this;
+            }
+            try {
+                final Config copy = (Config) clone();
+                copy.opponentLookaheadPercent = 0;
+                return copy;
+            } catch (final CloneNotSupportedException e) {
+                return this;
+            }
+        }
         /** What the deck is for; tilts the valuation a little (see {@link DeckPlan}). */
         public DeckPlan plan = DeckPlan.NONE;
         /** Compare the lands that can be played instead of taking the heuristic's land. */
@@ -245,6 +280,30 @@ public final class FlatMonteCarloPicker {
             considerHolding = true;
             extraCandidates = Math.max(extraCandidates, MAX_EXTRA_CANDIDATES_DESKTOP);
             broadDiscovery = true;
+            // Look at the opponent's next turn too (their plays and their attack into the AI's blockers): this is what
+            // turns the end-of-turn guess about crack-backs and removal into something the rollouts actually saw.
+            opponentLookaheadPercent = Math.max(opponentLookaheadPercent, LOOKAHEAD_PERCENT_DESKTOP);
+            return this;
+        }
+
+        /**
+         * The strength used on phones and tablets: the profile's search size is kept (the number of samples already
+         * shrinks with the speed of the device), but the two things that matter most against a player who is not a
+         * beginner are added at a price a phone can pay: attack sets are compared (at most
+         * {@link FlatMonteCarloPicker#MAX_ATTACK_CANDIDATES}, once per turn), and the opponent's next turn is
+         * played out for the best few lines only. The time limits are raised a little, never above what a phone can
+         * spend without the game feeling stuck.
+         */
+        public Config mobileLite() {
+            maxCandidates = Math.max(maxCandidates, MAX_CANDIDATES_MOBILE);
+            rolloutsPerCandidate = Math.max(rolloutsPerCandidate, MIN_ROLLOUTS_MOBILE);
+            budgetNanos = Math.max(budgetNanos, TimeUnit.MILLISECONDS.toNanos(MOBILE_DECISION_MS));
+            turnBudgetNanos = Math.max(turnBudgetNanos, TimeUnit.MILLISECONDS.toNanos(MOBILE_TURN_MS));
+            pruning = true;
+            categoryHold = true;
+            adaptivePlayout = true;
+            opponentLookaheadPercent = Math.max(opponentLookaheadPercent, LOOKAHEAD_PERCENT_MOBILE);
+            lookaheadMaxCandidates = MOBILE_LOOKAHEAD_MAX_CANDIDATES;
             return this;
         }
 
@@ -463,6 +522,8 @@ public final class FlatMonteCarloPicker {
 
         final int playoutPlays = playoutLength(player, cfg);
         final int n = cands.size();
+        // One setting for every line of this decision, so that the lines are compared like with like.
+        final Config rcfg = cfg.forDecision(n);
         // With pruning, lines that are clearly behind stop costing time, and the lines still in the race may take
         // some extra rounds beyond the base number. Without it this is exactly the original round-robin.
         final int maxRounds = cfg.rolloutsPerCandidate + (cfg.pruning ? Math.max(0, cfg.extraRounds) : 0);
@@ -471,6 +532,7 @@ public final class FlatMonteCarloPicker {
         final boolean[] invalid = new boolean[n];
         final boolean[] pruned = new boolean[n];
         final long[][] vals = new long[n][maxRounds];
+        int limitN = n; // how many lines this device can afford to compare, found out by timing the first rollout
         int evaluated = 0;
         int rollouts = 0;
         int prunedCount = 0;
@@ -480,7 +542,7 @@ public final class FlatMonteCarloPicker {
         rounds:
         for (int r = 0; r < maxRounds; r++) {
             final long seed = baseSeed + r * SEED_STEP;
-            final int active = r == 0 ? n : evaluated;
+            final int active = r == 0 ? limitN : evaluated;
             int racing = 0;
             for (int c = 0; c < active; c++) {
                 if (!invalid[c] && !pruned[c]) {
@@ -513,9 +575,13 @@ public final class FlatMonteCarloPicker {
                 final Candidate cand = cands.get(c);
                 final boolean stillWanted = cand.isHold() || cand.extra || revalidate == null || revalidate.test(cand.sa);
                 final boolean aimed = stillWanted && (cand.target == null || applyTarget(cand.sa, cand.target));
-                final Long value = !aimed ? null : rollout(player, cand, seed, cfg, playoutPlays, mode);
+                final Long value = !aimed ? null : rollout(player, cand, seed, rcfg, playoutPlays, mode);
                 maxRolloutNanos = Math.max(maxRolloutNanos, System.nanoTime() - t0);
                 rollouts++;
+                if (rollouts == 1 && value != null && cfg.scaleToDevice) {
+                    limitN = Math.min(limitN, affordableLines(softDeadline - System.nanoTime(), maxRolloutNanos,
+                            cfg.rolloutsPerCandidate, n));
+                }
                 if (value == null) {
                     invalid[c] = true;
                     FlatMonteCarloStats.noteUnsimulatable(cand.label() + (!stillWanted ? " [revalidate]" : !aimed ? " [target]" : " [" + lastRolloutProblem + "]"));
@@ -609,6 +675,18 @@ public final class FlatMonteCarloPicker {
         final Result decided = new Result(chosen.sa, chosen.isHold(), true, evaluated, rollouts, elapsed, reason, prunedCount, chosen.target);
         decided.attackers = chosen.attackers;
         return decided;
+    }
+
+    /**
+     * How many lines fit in the time that is left when one rollout took {@code rolloutNanos}: every line should get
+     * at least {@code rounds} samples (two at the least, or nothing can be compared), and the first line has had its
+     * first already. Never fewer than two lines, never more than {@code n}.
+     */
+    static int affordableLines(final long leftNanos, final long rolloutNanos, final int rounds, final int n) {
+        final long perRollout = Math.max(1, rolloutNanos);
+        final long fit = Math.max(0, leftNanos) / perRollout + 1;
+        final long lines = fit / Math.max(2, rounds);
+        return (int) Math.max(2, Math.min(n, lines));
     }
 
     /** Fewest paired samples before a line may be dropped; one sample has no spread to judge it by. */
@@ -1005,7 +1083,8 @@ public final class FlatMonteCarloPicker {
         final List<GameEntity> candidates = new ArrayList<>(tr.getAllCandidates(ts));
         final List<GameEntity> usable = new ArrayList<>();
         for (final GameEntity e : candidates) {
-            if (e != current && wantsOwn == isOwnSide(player, e)) {
+            // never offer the legend the AI already has working as a target to bring back: the legend rule ends it
+            if (e != current && wantsOwn == isOwnSide(player, e) && !ComboGuard.wouldBreakLegendRule(player, ts, e)) {
                 usable.add(e);
             }
         }

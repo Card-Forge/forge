@@ -193,7 +193,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.tap(true, ability, payer);
+        targetCard.tap(ability, payer);
         return targetCard;
     }
 
@@ -206,7 +206,7 @@ public class CostTapType extends CostPartWithList {
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
         CardCollection tapped = new CardCollection();
         for (Card c : targetCards) {
-            if (c.tap(true, ability, payer)) tapped.add(c);
+            if (c.tap(ability, payer)) tapped.add(c);
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

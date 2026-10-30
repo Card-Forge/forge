@@ -7,9 +7,7 @@ SVar:TrigReveal:DB$ RevealHand | Defined$ Player.Opponent | ImprintRevealed$ Tru
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBExile | SubAbility$ DBCleanup
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Remembered | ChangeType$ Creature.IsImprinted | ChangeNum$ 1 | AlreadyRevealed$ True | Chooser$ You | Duration$ UntilHostLeavesPlay
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-A:AB$ ChooseCard | Cost$ X | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource+cmcEQX | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Valki with mana value X | SubAbility$ DBClone | AILogic$ Never | StackDescription$ {p:You} chooses a card exiled with NICKNAME with mana value X. NICKNAME becomes a copy of that card. | SpellDescription$ Choose a card exiled with NICKNAME with mana value X. NICKNAME becomes a copy of that card.
-SVar:DBClone:DB$ Clone | Defined$ ChosenCard | SubAbility$ DBClearChosen
-SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ Clone | Cost$ X | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource+cmcEQX | ChoiceTitle$ Choose a card exiled with Valki with mana value X | AILogic$ Never | StackDescription$ SpellDescription | SpellDescription$ Choose a creature card exiled with NICKNAME with mana value X. NICKNAME becomes a copy of that card.
 SVar:X:Count$xPaid
 SVar:PlayMain1:TRUE
 AlternateMode:Modal

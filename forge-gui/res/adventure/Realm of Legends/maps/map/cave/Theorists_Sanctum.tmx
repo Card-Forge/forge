@@ -93,7 +93,7 @@ With that, he is finally dead.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arena Rector&quot;, &quot;Sanctum Lurker&quot;, &quot;Plan for All Outcomes&quot;, &quot;Way of the Mind Sculptor&quot; ]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;The Theorist, Jace Beleren&quot;, &quot;Sanctum Lurker&quot;, &quot;Way of the Mind Sculptor&quot; ]}"/>
     <property name="enemy" value="The Theorist"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
@@ -175,7 +175,7 @@ With that, he is finally dead.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Fog Bank&quot;, &quot;Sanctum Lurker&quot;, &quot;Plan for All Outcomes&quot;, &quot;Way of the Mind Sculptor&quot; ]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;The Theorist, Jace Beleren&quot;, &quot;Way of the Mind Sculptor&quot; ]}"/>
     <property name="enemy" value="The Theorist"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="false"/>

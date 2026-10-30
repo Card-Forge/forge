@@ -75,7 +75,10 @@ final class StrategicEvaluator {
         if (plan == null || plan == DeckPlan.NONE) {
             return 0;
         }
-        int adj = 0;
+        // progress towards the combos the deck is built around (cycling a creature for Living End, a pair assembled)
+        int adj = plan.combos.term(simAi);
+        // commander on the table, commander damage, the combos of the format and what the commander's strategy likes
+        adj += plan.commander.term(simAi);
         final Player opp = simAi.getWeakestOpponent();
         if (opp != null) {
             adj += plan.opponentLifeExtra * Math.max(0, Math.min(20, 20 - opp.getLife()));
@@ -83,8 +86,10 @@ final class StrategicEvaluator {
         adj -= plan.ownLifeExtra * Math.max(0, Math.min(20, 20 - simAi.getLife()));
         if (plan.manaDevelopmentExtra > 0) {
             int sources = 0;
+            // a Signet or a filter land that nothing can pay for is no mana development
+            final ManaConversion.Profile conversion = ManaConversion.analyzeIfNeeded(simAi, true);
             for (final Card c : simAi.getCardsIn(ZoneType.Battlefield)) {
-                if (c.isLand() || !c.getManaAbilities().isEmpty()) {
+                if ((c.isLand() || !c.getManaAbilities().isEmpty()) && !conversion.isDead(c)) {
                     sources++;
                 }
             }
@@ -191,7 +196,8 @@ final class StrategicEvaluator {
         if (threat < THREAT_THRESHOLD) {
             return 0;
         }
-        final int mana = landsInPlay(simAi) + 1;
+        // the mana rocks and Signets count too, not only the lands (and the land drop of next turn)
+        final int mana = ManaConversion.usableManaOr(simAi, landsInPlay(simAi)) + 1;
         final int oppCards = opp.getCardsIn(ZoneType.Hand).size();
         final List<Card> answers = new ArrayList<>();
         for (final Card c : simAi.getCardsIn(ZoneType.Hand)) {

@@ -7,6 +7,7 @@ ScryfallCode=TRK
 
 [cards]
 1 U 70,000 Light-Years from Home @Ariel Orea
+2 C Andromedan Automatons @Uzuri
 3 R Antagonist Incorporator @Miklós Ligeti
 4 U Assembly Specialist @Sean Vo
 5 U Brad Boimler, Eager Ensign @Andreas Zafiratos
@@ -15,15 +16,21 @@ ScryfallCode=TRK
 8 C Command Decision @Raymond Bonilla
 9 U Command Subadjunct @Alex Negrea
 10 U Conquest Mission @Mark Spears
+11 R Deanna Troi, Psychic Counsel @Lie Setiawan
 12 C DOT-7 Repair Squad @Colin Searle
 13 M Dr. Beverly Crusher @Mattia Rangoni
 14 U Dr. McCoy, Surly Surgeon @David Robert Hovey
 15 C Emergency Medical Hologram @Kirk DouPonce
 16 M Excalbian Gamemaster @Charles Chaisson
 17 C Federation Field Medic @Zoltan Boros
+18 R Federation Resupply @Ryan Valle
 19 C Free Borg Revolutionaries @Smirtouille
+21 U Hologram Janeway @Khadijah Khatib
 22 C Malfunctioning Holodeck @Pablo Mendoza
+23 U The Measure of a Man @Lazare Gvimradze
 24 R Miles O'Brien, Transporter Ops @John Tyler Christopher
+25 R The Needs of the Many @Carlos C Diaz
+26 C Oberth-Class Starship @Jessica Rossier
 27 R Peace in Our Time @Elizabeth Peiró
 28 C Pet Sehlat @Narendra Bintara Adi
 29 U Picard, Leading by Example @Julie Dillon
@@ -34,16 +41,19 @@ ScryfallCode=TRK
 34 C Set Phasers to . . . @Elizabeth Peiró
 35 C Shields Up! @Raymond Swanland
 36 C Shuttle Ace @Joan Piqué Llorens
+37 R Sulu, Space Swashbuckler @Micah Epstein
 38 C Tactical Officer @Elizabeth Peiró
 39 U Test of Conviction @John Tyler Christopher
 40 U There's Coffee in that Nebula @Pauline Voss
 41 R Troubling Tribbles @Filipe Pagliuso
 42 U Una Chin-Riley, Number One @Josu Hernaiz
 43 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
+44 U U.S.S. Excelsior, Cutting Edge @Jetfreak-7
 45 C Vexing Drone @Kristina WermoongRey
 46 U Anthropological Mission @Pablo Mendoza
 47 R The Caretaker @Sam Kennedy
 48 C Cetacean Ops @Arthur Haas
+49 U Cloak and Phaser @David Szabo
 50 C Cloistered Telepath @Monztre
 51 C Consider the Prime Directive @Zoltan Boros
 52 U Data, New Life @Kieran Yanner
@@ -51,8 +61,10 @@ ScryfallCode=TRK
 54 U Dominion Saboteur @Alex Negrea
 56 U Energize @Carlos C Diaz
 57 U Ensign Pavel Chekov @Gal Or
+58 U Enterprise NX-01 @Colin Searle
 59 C Federation Probe @Racrufi
 60 C Guidance Failure @David Álvarez
+61 R Gwyndala, the Progeny @Pierre Raveneau
 62 U Highly Illogical @Joel Chaim Holtzman
 63 R H.M.S. Bounty, Unlikely Timeship @Jetfreak-7
 64 U Hoshi Sato, Exolinguist @Jason Seiler
@@ -71,11 +83,15 @@ ScryfallCode=TRK
 78 U Rules of Acquisition @Racrufi
 79 M Scotty, Miracle Worker @Sam Kennedy
 80 M Seven of Nine, Unassimilated @Toraji
+81 C Starfleet Spanner Jockey @Chris Rallis
 82 R Subcommander T'Pol @Kieran Yanner
 83 C Suurok-Class Science Vessel @Pace Wilder
+84 C Suus Mahna Practitioner @Lucas Durham
 85 U Test of Priorities @Paolo Puggioni
 86 U Those Old Scientists @Gregg Schigiel
 87 U V'Ger, the Intruder @Jessica Rossier
+88 U Vulcan Mind-Meld @Pavel Kolomeyets
+89 R Wesley Crusher, Starfleet Cadet @Nia Kovalevski
 90 U Zefram Cochrane, Warp Pioneer @Kieran Yanner
 91 R Armus, Skin of Evil @Camille Alquier
 92 C Assault Drone @Filipe Pagliuso
@@ -88,8 +104,12 @@ ScryfallCode=TRK
 100 U Commander Raffi Musiker @Runa I. Rosenberger
 101 U D'Ghor Bloodletter @Patricia Pria
 102 M Death Is Irrelevant @Narendra Bintara Adi
+103 R The Destruction of Praxis @Pace Wilder
+104 U De-evolve @Néstor Ossandón Leal
 105 C Eject the Warp Core @Pierre Raveneau
 106 R Elim Garak, Simple Tailor @Alexander Gering
+107 C Fugitive Listener @Bastien L. Deharme
+108 U Gabriel Lorca, Mirror Menace @Kevin Glint
 109 R General Chang, Cold Warrior @Cliff Nielsen
 110 M Georgiou, Terran Emperor @Julia Metzger
 111 C A Good Day to Die @Monztre
@@ -103,23 +123,32 @@ ScryfallCode=TRK
 120 C Obsidian Order Operative @Wero Gallo
 121 U Organic Avulsion Unit @Andrey Kuzinskiy
 122 R Overflow Submatrix @Carlos Dattoli
+123 C Pattern Buffer Preservation @Alex Negrea
 124 C Relentless Drednok @Edouard
 125 U Resistance Is Futile @Matt Stewart
 126 C Rogue Artificial Intelligence @José Parodi
 127 R Salt Vampire @Bastien L. Deharme
+128 R Sela, Tal Shiar Paradox @Tony Foti
 129 U Storied Veteran @Ana Teresa Rivera
 132 U Tell Me What You See @Douglas Shuler
 134 U Test of Loyalty @Bartek Fedyczak
 135 R U.S.S. Reliant, From Hell's Heart @Dofresh
+136 U Vengeance Mission @Daarken
+137 U Academy Instructor @Josu Hernaiz
 138 U Beckett Mariner, Impetuous Ensign @Lucas Durham
+139 C Boarding Action @Douglas Shuler
+140 R Brazen Bluff @Filipe Pagliuso
 141 C Cantankerous Captain @Edouard
 142 M Captain James T. Kirk @Jason Pastrana
 143 U Captain Michael Burnham @Romana Kendelic
 144 C Captain's Tutelage @Mark Spears
 145 R D-7 Battle Cruiser @Kevin Glint
 146 C Dahar Master @Grant Griffin
+147 R Dominion Infiltration @Jonathan Bartlett
+148 R Encounter the Unknown @Neil Blevins
 149 U Erica Ortegas, Plucky Pilot @Romana Kendelic
 150 U Exploratory Mission @Jason Pastrana
+151 C Genesis Effect @Anthony Devine
 152 C Horta @Arthur Haas
 153 M Infinite Diversity @Julie Dillon
 154 U Khaaaaaaaaaaaannn! @Evan Shipard
@@ -136,36 +165,56 @@ ScryfallCode=TRK
 166 M Quark, Humble Proprietor @Alex Negrea
 167 U Ravenous Cosmozoan @Bruce Brenneise
 168 C Reckless Impulse @Simon Dominic
+169 U Red Alert! @Carlos C Diaz
+170 U Sarcophagus, Ship of the Dead @Joan Piqué Llorens
 172 C Silicate Surveyor @Joan Piqué Llorens
+174 C Tal Shiar Analyst @Lucas Durham
+175 U Targ Wrangler @Harkalé Linaï
+176 R Tasha Yar, Out of Time @Patricia Pria
+178 U Transporter Malfunction @Bartek Fedyczak
 179 R Will Riker, First in the Field @Zezhou Chen
 180 R Worf, Intelligence Contractor @Jodie Muir
 181 R The Wrath of Khan @Kirk DouPonce
 182 U Adversary by Algorithm @Tony Foti
 183 U Amok Time @Jason Raish
+184 C Astute Terraformer @Andreia Ugrai
 185 R Branching Timeline @Borja Pindado
 186 R Captain Jonathan Archer @Julia Metzger
 187 M Captain Kathryn Janeway @Jason Pastrana
 188 R Captain Pike, Fullness of Time @Joel Chaim Holtzman
 189 C Cold-Blooded Crew @John Tyler Christopher
 190 C Common Goal @Ioannis Fiore
+191 U Culber and Stamets, Star-Crossed @Harkalé Linaï
 192 C Dathon and Picard at El-Adrel @Bartek Fedyczak
+193 U David and Carol Marcus, Creators @KarrahE
 195 C Dominion Supervisor @Kevin Glint
 196 M Dr. Joseph M'Benga @Romana Kendelic
+197 R Dr. Leonard "Bones" McCoy @Sam Kennedy
 198 C Final Frontier @Jessica Rossier
 199 C First Contact @Kieran Yanner
+200 R Genesis Device @Cliff Nielsen
+201 R Holo-Engineer @Josu Hernaiz
 202 U Hologram Stalker @Hector Ortiz
 203 C I'm a Doctor, Not a . . . @Joel Chaim Holtzman
 204 M Jadzia Dax, Living Legacy @John Tyler Christopher
 205 U Jake Sisko, War Correspondent @Ariel Orea
+206 R MACO Strike Team @Aaron J. Riley
 207 C Moopsy @Brooklyn Smith
 208 U Mugato @Chuck Lukacs
+210 C Photosynthetic Physician @Stella Spente
+211 M Rok-Tahk, Budding Scientist @Andreas Zafiratos
+212 U Saru, Unthreatened @Ron Lemen
 213 C Saurian Explorer @Bartek Fedyczak
+214 U Species 8472 @Néstor Ossandón Leal
+215 R Stable Wormhole @Bruce Brenneise
 216 U Support Mission @Nadia Hurianova
 217 U Sylvia Tilly, Joy of Discovery @Ron Lemen
 218 U Syndicate Liquidators @Carlos C Diaz
 219 C Temporal Conqueror @Douglas Shuler
 220 U Test of Courage @Zoltan Boros
 221 R U.S.S. Discovery, at Black Alert @Kevin Glint
+222 U U.S.S. Voyager, Lone Wanderer @Hector Ortiz
+223 U Warp Speed @Raymond Swanland
 224 C Xenobotanist @Marta Nael
 225 C Xindi Surveyors @Joan Piqué Llorens
 226 R All Good Things . . . @Lazare Gvimradze
@@ -175,6 +224,7 @@ ScryfallCode=TRK
 230 U Constable Odo @Jason Rainville
 231 U Dal R'El, Augment Orphan @Stella Spente
 232 U Daniels, Temporal Agent @Kaitlyn McCulley
+233 R Dathon, His Heart Open @Dmitry Burmak
 234 U The Doctor, EMH @David Robert Hovey
 235 U The Duras Sisters @Harkalé Linaï
 236 U D'Vana Tendi, Optimistic Ensign @Micah Epstein
@@ -190,7 +240,9 @@ ScryfallCode=TRK
 246 U Lore, Positronic Provocateur @Wei Guan
 247 U L'Rell, Fierce Visionary @Patricia Pria
 248 R Mirror Universe Intrusion @John Tyler Christopher
+249 R Nog, Ambitious Cadet @Darren Tan
 250 U Phlox, Unorthodox Doctor @Jason Seiler
+251 R Sarek, Federation Ambassador @Darren Tan
 252 U Seven of Nine @Bastien L. Deharme
 253 U Spock, Always Your Friend @Chris Rallis
 254 U The Traveler @Ioannis Fiore
@@ -198,11 +250,13 @@ ScryfallCode=TRK
 256 U Worf, Honor-Bound Warrior @Alexander Mokhov
 257 R Year of Hell @Jonathan Bartlett
 258 U Zero, Incorporeal Sensate @Racrufi
+259 C Class-F Shuttlecraft @William Phifer
 261 M Crystalline Entity @David Álvarez
 262 C Cybernetic Specialist @Joan Piqué Llorens
 263 M Deep Space 9 @Paolo Puggioni
 264 R Engineered Explosives @David Álvarez
 265 R The Holodeck @Jessica Rossier
+266 U Isolinear Processor @David Álvarez
 267 R Replicator @William Phifer
 269 C Tea, Earl Grey, Hot @Raymond Bonilla
 270 C Tricorder @Tony Foti
@@ -210,6 +264,7 @@ ScryfallCode=TRK
 273 R U.S.S. Enterprise-D, Galaxy-Class @Pablo Mendoza
 274 C Warp Core @Leon Tukker
 275 L Andoria @Josu Hernaiz
+276 U Artificial Anomaly @Jonas De Ro
 277 L Bajor @John Di Giovanni
 278 R Blood Crypt @Jonas De Ro
 279 R Breeding Pool @Cliff Nielsen
@@ -219,6 +274,7 @@ ScryfallCode=TRK
 283 L Ferenginar @Colin Searle
 285 R Godless Shrine @John Thacker
 286 R Hallowed Fountain @Piotr Dura
+287 R Ni'Var Science Academy @Raphael Lacoste
 288 L Orion @Simon Dominic
 289 R Overgrown Tomb @Pavel Kolomeyets
 291 L Qo'noS @Rockey Chen
@@ -257,6 +313,7 @@ ScryfallCode=TRK
 325 L Forest @Bastien Grivet
 326 L Forest @Leon Tukker
 332 R Federation Outpost @Paulius Daščioras
+333 R Ni'Var Science Academy @Rimas Valeikis
 335 R Quark's Bar @Vlad Petruchik
 336 M Starfleet Academy @Rimas Valeikis
 337 R The Unicomplex @Eugene Maslovski
@@ -271,17 +328,23 @@ ScryfallCode=TRK
 346 R The Holodeck @Marija Tiurina
 347 M Quark, Humble Proprietor @Marija Tiurina
 348 U Constable Odo @Marija Tiurina
+349 R Dominion Infiltration @Marija Tiurina
 350 R Quark's Bar @Marija Tiurina
+351 R Nog, Ambitious Cadet @Marija Tiurina
 352 M Jadzia Dax, Living Legacy @Marija Tiurina
 353 M Mr. Spock, Science Officer @Mark Spears
 354 R Mirror Universe Intrusion @Mark Spears
 355 U Kirk, Commanding Officer @Mark Spears
+356 R Sulu, Space Swashbuckler @Mark Spears
+357 U Transporter Malfunction @Mark Spears
 358 R Nyota Uhura, Communications @Mark Spears
 359 M Lieutenant Commander Data @Nicky Barkla
 360 U Locutus, the One Who Speaks @Nicky Barkla
+361 M Infinite Diversity @Nicky Barkla
 362 M Death Is Irrelevant @Nicky Barkla
 363 M Captain Jean-Luc Picard @Erikas Perl
 364 U Command Subadjunct @Michael MacRae
+365 R Deanna Troi, Psychic Counsel @Eglė Mosakaitė
 366 M Dr. Beverly Crusher @Anna Czeszejko
 367 R Peace in Our Time @Mintautas Šukys
 368 R Primary Unimatrix Adjunct @Julia Vasilyeva
@@ -290,13 +353,21 @@ ScryfallCode=TRK
 371 M Lieutenant Commander Data @Mintautas Šukys
 372 R Lt. Cmdr. Geordi La Forge @Vlad Petruchik
 373 M Seven of Nine, Unassimilated @Anna Czeszejko
+374 R Wesley Crusher, Starfleet Cadet @Rimas Valeikis
 375 M Death Is Irrelevant @Paulius Daščioras
 376 U Organic Avulsion Unit @Gintas Galvanauskas
 377 R Overflow Submatrix @Viktor Fetsch
 378 U Resistance Is Futile @Jurijus Chitrovas
+379 R Sela, Tal Shiar Paradox @Jurijus Chitrovas
+380 R Dominion Infiltration @Darius Zablockis
+381 R Encounter the Unknown @Eugene Maslovski
+382 M Infinite Diversity @Eglė Mosakaitė
 383 M Q, Stacking the Deck @Viktor Fetsch
+384 R Tasha Yar, Out of Time @Vilhelmas Banys
 385 R Will Riker, First in the Field @Vilhelmas Banys
 386 M Captain Kathryn Janeway @Jurijus Chitrovas
+387 U Warp Speed @Maxim Ruabtsev
+388 R Dathon, His Heart Open @Vilhelmas Banys
 389 U Locutus, the One Who Speaks @Erikas Perl
 390 U Worf, Honor-Bound Warrior @Vlad Petruchik
 391 R Replicator @Vilhelmas Banys
@@ -312,24 +383,33 @@ ScryfallCode=TRK
 401 R Breeding Pool @Josu Solano
 402 U Dr. McCoy, Surly Surgeon @Chuck Lukacs
 403 M Excalbian Gamemaster @Chuck Lukacs
+404 R Federation Resupply @Jason Raish
+405 R The Needs of the Many @Jack Hughes
 406 U Saavik, Stoic Student @Jack Hughes
+407 R Sulu, Space Swashbuckler @Jason Raish
 408 R Troubling Tribbles @Jason Raish
 409 U Ensign Pavel Chekov @Marc Aspinall
 410 M Kobayashi Maru Scenario @Oliver Barrett
 411 M Mr. Spock, Science Officer @Grant Griffin
 412 R Nyota Uhura, Communications @Jack Hughes
 413 M Scotty, Miracle Worker @Marc Aspinall
+414 R The Destruction of Praxis @Oliver Barrett
 415 R General Chang, Cold Warrior @Oliver Barrett
 416 M Khan, Vengeful Heart @Grant Griffin
 417 R Salt Vampire @Simon Dominic
 418 M Captain James T. Kirk @Josh Newton
 419 U Khan, Despot by Design @Jack Hughes
+420 U David and Carol Marcus, Creators @Jason Raish
+421 R Dr. Leonard "Bones" McCoy @Jack Hughes
+422 R Genesis Device @Oliver Barrett
 423 R Live Long and Prosper @Jack Hughes
 424 R Mirror Universe Intrusion @Chuck Lukacs
+425 R Sarek, Federation Ambassador @Oliver Barrett
 426 U Bat'leth @Eugene Maslovski
 427 R General Chang, Cold Warrior @Julia Vasilyeva
 428 C A Good Day to Die @Darius Zablockis
 429 U Storied Veteran @Darius Zablockis
+430 U Vengeance Mission @Viktor Fetsch
 431 R Worf, Intelligence Contractor @Gintas Galvanauskas
 432 U The Duras Sisters @Michael MacRae
 433 R Gowron, Eager for Battle @Gintas Galvanauskas
@@ -339,6 +419,7 @@ ScryfallCode=TRK
 437 R General Chang, Cold Warrior @Julia Vasilyeva
 438 C A Good Day to Die @Darius Zablockis
 439 U Storied Veteran @Darius Zablockis
+440 U Vengeance Mission @Viktor Fetsch
 441 R Worf, Intelligence Contractor @Gintas Galvanauskas
 442 U The Duras Sisters @Michael MacRae
 443 R Gowron, Eager for Battle @Gintas Galvanauskas
@@ -347,6 +428,7 @@ ScryfallCode=TRK
 446 R Antagonist Incorporator @Miklós Ligeti
 448 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
 449 R The Caretaker @Sam Kennedy
+450 R Gwyndala, the Progeny @Pierre Raveneau
 451 R H.M.S. Bounty, Unlikely Timeship @Jetfreak-7
 452 R Romulan Bird-of-Prey @Edouard
 453 R Subcommander T'Pol @Kieran Yanner
@@ -356,6 +438,7 @@ ScryfallCode=TRK
 458 R Grand Nagus Zek @Wei Guan
 460 R Kai Winn, Faithless Leader @Wei Guan
 461 R U.S.S. Reliant, From Hell's Heart @Dofresh
+462 R Brazen Bluff @Filipe Pagliuso
 463 R D-7 Battle Cruiser @Kevin Glint
 464 R Lwaxana Troi, Charming Guest @Marta Nael
 465 R Pah-Wraith @Nino Vecia
@@ -363,6 +446,10 @@ ScryfallCode=TRK
 467 R Captain Jonathan Archer @Julia Metzger
 468 R Captain Pike, Fullness of Time @Joel Chaim Holtzman
 469 M Dr. Joseph M'Benga @Romana Kendelic
+470 R Holo-Engineer @Josu Hernaiz
+471 R MACO Strike Team @Aaron J. Riley
+472 M Rok-Tahk, Budding Scientist @Andreas Zafiratos
+473 R Stable Wormhole @Bruce Brenneise
 474 R U.S.S. Discovery, at Black Alert @Kevin Glint
 475 M Borg Cube @Alexander Forssberg
 476 R Hit It! @Aaron J. Riley
@@ -388,6 +475,7 @@ ScryfallCode=TRK
 496 R Breeding Pool @Josu Solano
 497 M Captain Jean-Luc Picard @Erikas Perl
 498 U Command Subadjunct @Michael MacRae
+499 R Deanna Troi, Psychic Counsel @Eglė Mosakaitė
 500 M Dr. Beverly Crusher @Anna Czeszejko
 501 R Peace in Our Time @Mintautas Šukys
 502 R Primary Unimatrix Adjunct @Julia Vasilyeva
@@ -396,31 +484,48 @@ ScryfallCode=TRK
 505 M Lieutenant Commander Data @Mintautas Šukys
 506 R Lt. Cmdr. Geordi La Forge @Vlad Petruchik
 507 M Seven of Nine, Unassimilated @Anna Czeszejko
+508 R Wesley Crusher, Starfleet Cadet @Rimas Valeikis
 509 M Death Is Irrelevant @Paulius Daščioras
 510 U Organic Avulsion Unit @Gintas Galvanauskas
+511 R Overflow Submatrix @Viktor Fetsch
 512 U Resistance Is Futile @Jurijus Chitrovas
+513 R Sela, Tal Shiar Paradox @Jurijus Chitrovas
+514 R Dominion Infiltration @Darius Zablockis
+515 R Encounter the Unknown @Eugene Maslovski
+516 M Infinite Diversity @Eglė Mosakaitė
 517 M Q, Stacking the Deck @Viktor Fetsch
+518 R Tasha Yar, Out of Time @Vilhelmas Banys
 519 R Will Riker, First in the Field @Vilhelmas Banys
 520 M Captain Kathryn Janeway @Jurijus Chitrovas
+521 U Warp Speed @Maxim Ruabtsev
+522 R Dathon, His Heart Open @Vilhelmas Banys
 523 U Locutus, the One Who Speaks @Erikas Perl
 524 U Worf, Honor-Bound Warrior @Vlad Petruchik
 525 R Replicator @Vilhelmas Banys
 526 U Dr. McCoy, Surly Surgeon @Chuck Lukacs
 527 M Excalbian Gamemaster @Chuck Lukacs
+528 R Federation Resupply @Jason Raish
+529 R The Needs of the Many @Jack Hughes
 530 U Saavik, Stoic Student @Jack Hughes
+531 R Sulu, Space Swashbuckler @Jason Raish
 532 R Troubling Tribbles @Jason Raish
 533 U Ensign Pavel Chekov @Marc Aspinall
 534 M Kobayashi Maru Scenario @Oliver Barrett
 535 M Mr. Spock, Science Officer @Grant Griffin
 536 R Nyota Uhura, Communications @Jack Hughes
 537 M Scotty, Miracle Worker @Marc Aspinall
+538 R The Destruction of Praxis @Oliver Barrett
 539 R General Chang, Cold Warrior @Oliver Barrett
 540 M Khan, Vengeful Heart @Grant Griffin
 541 R Salt Vampire @Simon Dominic
 542 M Captain James T. Kirk @Josh Newton
 543 U Khan, Despot by Design @Jack Hughes
+544 U David and Carol Marcus, Creators @Jason Raish
+545 R Dr. Leonard "Bones" McCoy @Jack Hughes
+546 R Genesis Device @Oliver Barrett
 547 R Live Long and Prosper @Jack Hughes
 548 R Mirror Universe Intrusion @Chuck Lukacs
+549 R Sarek, Federation Ambassador @Oliver Barrett
 550 M U.S.S. Enterprise-A, Free Spirit @Scott Okumura
 551 R H.M.S. Bounty, Unlikely Timeship @Scott Okumura
 552 R U.S.S. Reliant, From Hell's Heart @Scott Okumura
@@ -429,6 +534,15 @@ ScryfallCode=TRK
 555 M Borg Cube @Scott Okumura
 556 M Deep Space 9 @Scott Okumura
 557 R U.S.S. Enterprise-D, Galaxy-Class @Scott Okumura
+558 R Dr. Leonard "Bones" McCoy @Jason Raish
+559 L Plains @Bastien Grivet
+560 L Plains @Leon Tukker
+561 L Island @Bastien Grivet
+562 L Island @Leon Tukker
+563 L Swamp @Bastien Grivet
+564 L Swamp @Leon Tukker
+565 L Mountain @Bastien Grivet
+566 L Mountain @Leon Tukker
 569 U Command Subadjunct @Alex Negrea
 570 U Conquest Mission @Mark Spears
 571 C Malfunctioning Holodeck @Pablo Mendoza
@@ -437,9 +551,9 @@ ScryfallCode=TRK
 574 C Cold-Blooded Crew @John Tyler Christopher
 575 U Syndicate Liquidators @Carlos C Diaz
 576 U Locutus, the One Who Speaks @Ariel Orea
-577 C Earth, Sector 001 @Colin Searle
-578 C Risa @Colin Searle
-579 C Vulcan @John Di Giovanni
+577 L Earth, Sector 001 @Colin Searle
+578 L Risa @Colin Searle
+579 L Vulcan @John Di Giovanni
 1701 M Captain James T. Kirk @Chris Rallis
 1702 M Mr. Spock, Science Officer @Gal Or
 1703 M Lieutenant Commander Data @Tyler Jacobson
