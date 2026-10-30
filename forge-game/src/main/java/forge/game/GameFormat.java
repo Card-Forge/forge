@@ -40,7 +40,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 
-
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     public enum FormatType {
@@ -136,6 +135,7 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPrinted();
     }
+
     protected Predicate<PaperCard> buildFilter(boolean printed) {
         Predicate<PaperCard> p = PaperCardPredicates.names(this.getBannedCardNames()).negate();
 

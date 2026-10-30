@@ -19,9 +19,6 @@ package forge.game.replacement;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-
-import com.google.common.collect.*;
 
 import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
@@ -306,11 +303,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
         return this.getId() == ((ReplacementEffect) o).getId();
     }
-
+    private static final int CLASS_HASH = ReplacementEffect.class.hashCode();
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return Objects.hash(ReplacementEffect.class, getId());
+        return 31 * (31 + CLASS_HASH) + getId();
     }
 
     public ReplacementType getMode() {

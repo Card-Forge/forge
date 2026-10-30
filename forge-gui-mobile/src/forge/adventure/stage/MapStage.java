@@ -26,6 +26,7 @@ import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
@@ -69,6 +70,8 @@ public class MapStage extends GameStage {
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
+    private String battleBackground;       //Optional battle background folder for this map or floor.
+    private String currentMap;
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
 
     public InputEvent eventTouchDown, eventTouchUp;
@@ -104,6 +107,8 @@ public class MapStage extends GameStage {
     public void clearIsInMap() {
         isInMap = false;
         effect = null; //Reset effect so battles outside the dungeon don't use the last visited dungeon's effects.
+        battleBackground = null;
+        currentMap = null;
         preventEscape = false;
         GameHUD.getInstance().showHideMap(true);
     }
@@ -223,6 +228,7 @@ public class MapStage extends GameStage {
         createNewWorld();
         isLoadingMatch = false;
         isInMap = true;
+        currentMap = targetMap;
         GameHUD.getInstance().showHideMap(false);
         this.tiledMap = map;
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
@@ -251,6 +257,7 @@ public class MapStage extends GameStage {
         if (MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()) {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
         }
+        battleBackground = MP.get("battleBackground", String.class);
         if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
             respawnEnemies = true;
         } else {
@@ -520,6 +527,10 @@ public class MapStage extends GameStage {
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.nameOverride = dialogObject.toString();
                             }
+                            dialogObject = prop.get("battleBackground"); //Check for battle background override.
+                            if (dialogObject != null && !dialogObject.toString().isEmpty()) {
+                                mob.battleBackground = dialogObject.toString();
+                            }
                             dialogObject = prop.get("effect"); //Check for special effects.
                             if (dialogObject != null && !dialogObject.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, dialogObject.toString(), "");
@@ -736,12 +747,10 @@ public class MapStage extends GameStage {
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         shopsAlreadyPresent.add(data.name);
-                        Array<Reward> ret = new Array<>();
-                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false, false));
-                        }
-                        ShopActor actor = new ShopActor(this, id, ret, data);
+                        //Make sure the seed exists now (it is created from the world random the first time), but don't
+                        //generate the shop's cards until the player actually opens it. See ShopActor.getRewardData.
+                        changes.getShopSeed(id);
+                        ShopActor actor = new ShopActor(this, id, data, changes);
                         addMapActor(obj, actor);
                         if (prop.containsKey("hasSign") && (boolean) prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
@@ -779,8 +788,8 @@ public class MapStage extends GameStage {
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
         if (mustClearOnExit) {
             mustClearOnExit = false;
-
-            this.resetMapRecursive(AdventureQuestController.instance().mostRecentPOI.getData().map, new HashSet<>());
+            PointOfInterest poi = AdventureQuestController.instance().mostRecentPOI;
+            PointOfInterestChanges.resetDeletedObjectsRecursive(poi.getID(), poi.getData().map);
         }
 
         AdventureQuestController.instance().updateQuestsLeave();
@@ -796,48 +805,6 @@ public class MapStage extends GameStage {
         isPlayerLeavingDungeon = false;
         dialogOnlyInput = false;
         return true;
-    }
-
-    /**
-     * Recursively clears map objects for the current map and all connected maps to reset the state of the dungeon when exiting from it.
-     * @param currentMap The filename of the map to clear and check for connected maps from.
-     * @param clearedMaps A set of maps that have already been cleared to avoid infinite recursion from circular connections between maps.
-     */
-    private void resetMapRecursive(String currentMap, HashSet<String> clearedMaps) {
-        if (clearedMaps.contains(currentMap)) {
-            return;
-        }
-
-        clearedMaps.add(currentMap);
-
-        // Clear the current map's deleted objects.
-        TileMapScene.instance().getPointOfInterestChanges(currentMap).clearDeletedObjects();
-        
-        TiledMap currentTiledMap = loadMapFile(currentMap);
-        
-        for (MapLayer layer : currentTiledMap.getLayers()) {
-            if (layer.getProperties().containsKey("spriteLayer") || layer instanceof TiledMapTileLayer) {
-                continue;
-            }
-            
-            // Attemps to find connected maps through "entry" type MapObjects and recursively clear them as well.
-            for (MapObject obj : layer.getObjects()) {
-                MapProperties prop = obj.getProperties();
-                String type = prop.get("type", String.class);
-                
-                if (type != null && type.equals("entry")) {
-                    String targetMap = prop.containsKey("teleport") ? prop.get("teleport").toString() : "";
-                    
-                    if (targetMap != null && !targetMap.isEmpty()) {
-                        resetMapRecursive(targetMap, clearedMaps);
-                    }
-                }
-            }
-        }
-    }
-
-    private TiledMap loadMapFile(String mapName) {
-        return new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(mapName));
     }
 
     @Override
@@ -1222,6 +1189,14 @@ public class MapStage extends GameStage {
 
     public boolean isInMap() {
         return isInMap;
+    }
+
+    public String getBattleBackground() {
+        return battleBackground;
+    }
+
+    public String getCurrentMap() {
+        return currentMap;
     }
 
     public void onBeginLeavingDungeon() {

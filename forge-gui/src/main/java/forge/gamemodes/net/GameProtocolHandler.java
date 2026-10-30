@@ -31,6 +31,11 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
         return runInEdt;
     }
 
+    /** Resolves encoded args against every message received before this one. Only the host encodes args. */
+    protected Object[] decodeArgs(final ProtocolMethod protocolMethod, final byte[] encodedArgs) {
+        throw new IllegalStateException("Received encoded args for " + protocolMethod);
+    }
+
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
@@ -81,20 +86,21 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             final Runnable toRun = () -> {
                 final long startMs = System.currentTimeMillis();
                 final long queueDelayMs = startMs - receiveTimeMs;
+                final Object[] callArgs = event.getEncodedObjects() == null ? args : decodeArgs(protocolMethod, event.getEncodedObjects());
                 if (returnType.equals(Void.TYPE)) {
                     try {
-                        method.invoke(toInvoke, args);
+                        method.invoke(protocolMethod.receiver(toInvoke), callArgs);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        netLog.error("Unknown protocol method {} args={}", methodName, describeArgs(args));
+                        netLog.error("Unknown protocol method {} args={}", methodName, describeArgs(callArgs));
                     } catch (final InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
-                        netLog.error(e.getTargetException(), "InvocationTargetException in {} args={}", methodName, describeArgs(args));
+                        netLog.error(e.getTargetException(), "InvocationTargetException in {} args={}", methodName, describeArgs(callArgs));
                     }
                 } else {
                     Serializable reply = null;
                     try {
-                        final Object theReply = method.invoke(toInvoke, args);
+                        final Object theReply = method.invoke(protocolMethod.receiver(toInvoke), callArgs);
                         if (theReply instanceof Serializable) {
                             protocolMethod.checkReturnValue(theReply);
                             reply = (Serializable) theReply;
@@ -102,12 +108,12 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                             netLog.warn("Non-serializable return type {} for method {}, returning null", returnType.getName(), methodName);
                         }
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        netLog.error("Unknown protocol method {} args={}, replying with null", methodName, describeArgs(args));
+                        netLog.error("Unknown protocol method {} args={}, replying with null", methodName, describeArgs(callArgs));
                     } catch (final NullPointerException | InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();
                         SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
-                        netLog.error("Exception in protocol method {} args={}: {}", methodName, describeArgs(args), e.toString());
+                        netLog.error("Exception in protocol method {} args={}: {}", methodName, describeArgs(callArgs), e.toString());
                     }
                     getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
                 }

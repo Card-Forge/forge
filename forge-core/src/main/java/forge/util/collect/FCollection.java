@@ -1,30 +1,138 @@
 package forge.util.collect;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.RandomAccess;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
-
 /**
- * Collection with unique elements ({@link Set}) that maintains the order in
- * which the elements are added to it ({@link List}).
+ * Ordered collection with unique elements.
  *
- * This object is serializable if all elements it contains are.
+ * <p>This implementation is intentionally optimized for Forge/Android workloads:
+ * small and short-lived collections stay as a plain ArrayList, while larger collections
+ * use a compact open-addressed object table instead of java.util.HashSet/HashMap.
+ * The latter avoids one HashMap.Node allocation per element.</p>
  *
- * @param <T> the type of the elements this collection contains.
- * @see FCollectionView
+ * <p>Uses a Dual-Threshold strategy:
+ * 1. LAZY_HASH_THRESHOLD (64): Lookup operations (contains/get) build the hashtable on demand.
+ * 2. AUTO_HASH_THRESHOLD (8): Growth operations (add/addAll) build the table automatically.
+ *    to prevent O(N^2) linear lookup cost on large collections.</p>
+ *
+ * <p>{@link #shareCopy()} returns a cheap copy-on-write copy: it shares the backing list with its source
+ * until either side is modified, then the modifying side copies the list first. Used for cached instances
+ * (CardState caches) so every caller gets a normal mutable collection without paying for a full copy.</p>
+ *
+ * @param <T> element type
  */
-public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, Cloneable, Serializable {
+public class FCollection<T> implements List<T>, FCollectionView<T>, Cloneable, Serializable {
     private static final long serialVersionUID = -1664555336364294106L;
 
     private static final FCollection<?> EMPTY = new EmptyFCollection<>();
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+    /** Querying contains()/get() builds table above this size. */
+    private static final int LAZY_HASH_THRESHOLD = 64;
+
+    /** Continuous add()/addAll() auto-builds table past this size to prevent O(N^2) slowdown. */
+    private static final int AUTO_HASH_THRESHOLD = 8; // was 128, 8 was a good on benchmark though
+
+    /** Keep the compact table below 75% occupancy. */
+    private static final int MIN_HASH_CAPACITY = 32;
+
+    /** Used by sort() without allocating a Comparator on every invocation. */
+    private static final Comparator<Object> TO_STRING_COMPARATOR = new Comparator<Object>() {
+        @Override
+        public int compare(final Object a, final Object b) {
+            return a.toString().compareTo(b.toString());
+        }
+    };
+
+    /** Ordered representation. */
+    private ArrayList<T> list;
+
+    /**
+     * Compact membership table. Null means the collection is currently using
+     * linear ArrayList scans. Non-null entries are stored directly in this
+     * array using linear probing; no HashMap.Node objects are created.
+     */
+    private transient Object[] hashTable;
+
+    private transient int hashSize;
+    private transient int hashMask;
+
+    /** Optional Set facade, allocated only if asSet() is actually requested. */
+    private transient Set<T> setView;
+
+    /** true = {@link #list} may also be referenced by other FCollections (copy-on-write). */
+    private transient boolean sharedList;
+
+    /** Bumped by every structural change (and by listIterator(), which can change the list unnoticed); part of {@link #version()}. */
+    private transient int modCount;
+
+    /**
+     * Number of snapshot iterators that were started on the current {@link #list} and not run to their end yet.
+     * While it is above zero the list must not be modified in place (see {@link #ownList()}).
+     */
+    private transient int liveIterators;
+
+    /** Bumped by every in-place content change that is not structural (set, replace, sort). */
+    private transient int contentVersion;
+
+    private FCollection(final ArrayList<T> sharedBacking, final boolean shared) {
+        this.list = sharedBacking;
+        this.sharedList = shared;
+    }
+
+    /**
+     * Cheap copy-on-write copy: the returned (fully mutable) collection shares this one's backing list until
+     * either of them is modified; the modifying side then copies the list first, so neither ever sees the
+     * other's changes. Costs one small object instead of a full copy.
+     */
+    public final FCollection<T> shareCopy() {
+        sharedList = true;
+        return new FCollection<>(list, true);
+    }
+
+    /**
+     * A stamp that changes after EVERY change of this collection's content or order (add, remove, set, replace,
+     * sort, clear, ...). Equal stamps of the same instance mean "unchanged", which lets callers validate caches
+     * derived from this collection with a plain int comparison instead of bumping their own counters.
+     * Stamps of different instances are not comparable.
+     */
+    public final int version() {
+        return modCount + contentVersion;
+    }
+
+    /**
+     * Must be called before every change of {@link #list}. Detaches (copies) the list if other collections share it
+     * or if an iterator is still walking it, so that neither ever sees a half-modified list.
+     */
+    private void ownList() {
+        if (sharedList || liveIterators > 0) {
+            list = new ArrayList<>(list);
+            sharedList = false;
+            liveIterators = 0;
+        }
+    }
+
+    /**
+     * Creates an empty collection with room for {@code initialCapacity} elements.
+     * Use this instead of a public int constructor, which would hijack {@code new FCollection<Integer>(5)}.
+     */
+    public static <T> FCollection<T> withCapacity(final int initialCapacity) {
+        return new FCollection<>(initialCapacity);
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> FCollection<T> getEmpty() {
@@ -32,94 +140,17 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     /**
-     * Size at which uniqueness starts being enforced with a hash set rather than by scanning the
-     * list. Below it the scan is cheaper than the set costs to build, and the great majority of
-     * these collections - trait rebuilds create tens of millions of one- and two-element ones per
-     * game - never grow past a handful of entries or get looked up by value at all.
-     */
-    private static final int HASH_THRESHOLD = 8;
-
-    /**
-     * The {@link Set} representation of this collection. Materialized on demand; while it is
-     * {@code null} the list alone is authoritative.
-     */
-    private transient Set<T> set;
-
-    /**
-     * The {@link List} representation of this collection.
-     */
-    private final List<T> list = new ArrayList<>();
-
-    /**
-     * Build the {@link Set} representation, if it isn't built already.
-     */
-    private Set<T> hashed() {
-        if (set == null) {
-            set = new HashSet<>(list);
-        }
-        return set;
-    }
-
-    /**
-     * Create an empty {@link FCollection}.
-     */
-    public FCollection() {
-    }
-
-    /**
-     * Create an {@link FCollection} containing a single element.
-     *
-     * @param e the single element the new collection contains.
-     */
-    public FCollection(final T e) {
-        add(e);
-    }
-
-    /**
-     * Create an {@link FCollection} from an array. The order of the elements in
-     * the array is preserved in the new collection.
-     *
-     * @param c an array, whose elements will be in the collection upon its
-     *            creation.
-     */
-    public FCollection(final T[] c) {
-        this.addAll(Arrays.asList(c));
-    }
-
-    /**
-     * Create an {@link FCollection} from an {@link Iterable}. The order of the
-     * elements in the iterable is preserved in the new collection.
-     *
-     * @param i an iterable, whose elements will be in the collection upon its
-     *            creation.
-     */
-    public FCollection(final Iterable<? extends T> i) {
-        if (i instanceof FCollection) {
-            // The source already enforces uniqueness, so there is nothing for a dedup pass to
-            // find - copy the backing list straight across.
-            list.addAll(((FCollection<? extends T>) i).list);
-            return;
-        }
-        this.addAll(i);
-    }
-
-    /**
-     * Create an {@link FCollection} from an {@link FCollectionReader}.
-     *
-     * @param reader a reader used to populate collection
-     */
-    public FCollection(final FCollectionReader<T> reader) {
-        reader.readAll(this);
-    }
-
-    /**
-     * Check whether an {@link Iterable} contains any iterable, silently
-     * returning {@code false} when {@code null} is passed as an argument.
-     *
-     * @param iterable a card collection.
+     * Returns whether an iterable contains at least one item without creating
+     * a temporary array or collection.
      */
     public static boolean hasElements(final Iterable<?> iterable) {
-        return iterable != null && !Iterables.isEmpty(iterable);
+        if (iterable == null) {
+            return false;
+        }
+        if (iterable instanceof Collection<?>) {
+            return !((Collection<?>) iterable).isEmpty();
+        }
+        return iterable.iterator().hasNext();
     }
 
     /**
@@ -138,7 +169,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean equals(final Object obj) {
-        return obj instanceof FCollection && hashCode() == obj.hashCode();
+        // FCollection implements List, so equality must follow List's ordered-element
+        // semantics. Comparing hash codes alone can report unrelated lists as equal.
+        return obj == this || (obj instanceof List<?> && list.equals(obj));
     }
 
     /**
@@ -162,34 +195,31 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     /**
-     * Create a new {@link FCollection} containing the same objects as this
-     * instance, in the same order. Note that objects are shallowly copied.
+     * Creates a shallow copy of this collection (always mutable, even if this one is frozen).
      */
     @Override
     public final FCollection<T> clone() {
-        return new FCollection<>(list);
+        return new FCollection<>(this);
     }
 
     /**
      * Get the first object in this {@link FCollection}.
      */
-    @Override
     public T getFirst() {
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             return null;
+        }
         return list.get(0);
-        //return list.getFirst();
     }
 
     /**
      * Get the last object in this {@link FCollection}.
      */
-    @Override
     public T getLast() {
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             return null;
+        }
         return list.get(list.size() - 1);
-        //return list.getLast();
     }
 
     /**
@@ -208,8 +238,14 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         return list.isEmpty();
     }
 
+    /**
+     * Returns a live Set facade over this collection.
+     */
     public Set<T> asSet() {
-        return hashed();
+        if (setView == null) {
+            setView = new SetView();
+        }
+        return setView;
     }
 
     /**
@@ -219,9 +255,55 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean contains(final Object o) {
-        if (o == null)
+        // Preserve the original FCollection contract: contains(null) is false.
+        if (o == null) {
             return false;
-        return set == null ? list.contains(o) : set.contains(o);
+        }
+
+        // Lazy threshold: build hashtable on query if size > LAZY_HASH_THRESHOLD
+        if (hashTable == null && list.size() > LAZY_HASH_THRESHOLD) {
+            buildHashTable(list.size());
+        }
+
+        if (hashTable != null) {
+            return findHashIndex(o) >= 0;
+        }
+
+        return list.contains(o);
+    }
+
+    /**
+     * Returns the actual stored object equal to obj, or obj when not found,
+     * matching the original implementation.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public T get(final T obj) {
+        if (obj == null) {
+            return null;
+        }
+
+        // Lazy threshold: build hashtable on query if size > LAZY_HASH_THRESHOLD
+        if (hashTable == null && list.size() > LAZY_HASH_THRESHOLD) {
+            buildHashTable(list.size());
+        }
+
+        if (hashTable != null) {
+            final int index = findHashIndex(obj);
+            if (index >= 0) {
+                return (T) hashTable[index];
+            }
+            return obj;
+        }
+
+        final int targetSize = list.size();
+        for (int i = 0; i < targetSize; i++) {
+            final T x = list.get(i);
+            if (x != null && x.equals(obj)) {
+                return x;
+            }
+        }
+        return obj;
     }
 
     /**
@@ -229,7 +311,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public Iterator<T> iterator() {
-        return list.iterator();
+        // ArrayList.iterator() allocates even when empty; for-each over empty collections is very common
+        if (list.isEmpty()) {
+            return Collections.emptyIterator();
+        }
+        return new Itr();
     }
 
     /**
@@ -244,8 +330,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("hiding")
-    public <T> T[] toArray(final T[] a) {
+    public <E> E[] toArray(final E[] a) {
         return list.toArray(a);
     }
 
@@ -258,23 +343,34 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean add(final T e) {
-        if (e == null)
+        if (e == null) {
             return false;
-        if (set == null) {
+        }
+        ownList();
+
+        if (hashTable == null) {
             if (list.contains(e)) {
                 return false;
             }
+
             list.add(e);
-            if (list.size() > HASH_THRESHOLD) {
-                hashed();
+            modCount++;
+
+            // Auto-detect threshold: build table if size exceeds safety limit
+            if (list.size() > AUTO_HASH_THRESHOLD) {
+                buildHashTable(list.size());
             }
+
             return true;
         }
-        if (set.add(e)) {
-            list.add(e);
-            return true;
+
+        if (!addToHashTable(e)) {
+            return false;
         }
-        return false;
+
+        list.add(e);
+        modCount++;
+        return true;
     }
 
     /**
@@ -286,27 +382,84 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean remove(final Object o) {
-        if (o == null)
+        if (o == null) {
             return false;
-        if (set == null) {
-            return list.remove(o);
         }
-        if (set.remove(o)) {
-            list.remove(o);
+        ownList();
+
+        if (hashTable == null) {
+            final int index = list.indexOf(o);
+            if (index < 0) {
+                return false;
+            }
+            list.remove(index);
+            modCount++;
             return true;
         }
-        return false;
+
+        final int hashIndex = findHashIndex(o);
+        if (hashIndex < 0) {
+            return false;
+        }
+
+        @SuppressWarnings("unchecked")
+        final T stored = (T) hashTable[hashIndex];
+        removeHashEntryAt(hashIndex);
+        modCount++;
+
+        final int listIndex = list.indexOf(stored);
+        if (listIndex >= 0) {
+            list.remove(listIndex);
+        }
+
+        return true;
     }
 
     @Override
-    public boolean removeIf(Predicate<? super T> filter) {
-        if (list.removeIf(filter)) {
-            if (set != null) {
-                set.removeIf(filter);
-            }
-            return true;
+    public boolean removeIf(final Predicate<? super T> filter) {
+        if (filter == null) {
+            throw new NullPointerException("filter");
         }
-        return false;
+        final int originalSize = list.size();
+        if (originalSize == 0) {
+            return false;
+        }
+
+        // Evaluate the predicate for every element BEFORE touching the list, like ArrayList.removeIf:
+        // if the filter throws, the collection is left exactly as it was (and nothing is allocated
+        // when nothing matches).
+        long[] removeBits = null;
+        int firstRemoved = -1;
+        for (int i = 0; i < originalSize; i++) {
+            if (filter.test(list.get(i))) {
+                if (removeBits == null) {
+                    removeBits = new long[((originalSize - 1) >> 6) + 1];
+                    firstRemoved = i;
+                }
+                removeBits[i >> 6] |= 1L << (i & 63);
+            }
+        }
+        if (removeBits == null) {
+            return false;
+        }
+        ownList();
+
+        int writeIndex = firstRemoved;
+        for (int readIndex = firstRemoved + 1; readIndex < originalSize; readIndex++) {
+            if ((removeBits[readIndex >> 6] & (1L << (readIndex & 63))) == 0) {
+                list.set(writeIndex++, list.get(readIndex));
+            }
+        }
+        for (int i = originalSize - 1; i >= writeIndex; i--) {
+            list.remove(i);
+        }
+        modCount++;
+
+        if (hashTable != null) {
+            rebuildHashTable();
+        }
+
+        return true;
     }
 
     /**
@@ -314,7 +467,30 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean containsAll(final Collection<?> c) {
-        return set == null ? list.containsAll(c) : set.containsAll(c);
+        if (c == null) {
+            throw new NullPointerException("collection");
+        }
+        if (c.isEmpty()) {
+            return true;
+        }
+        if (c == this) {
+            return true;
+        }
+        if (c instanceof FCollection<?> || (c instanceof RandomAccess && c instanceof List<?>)) {
+            final List<?> src = (List<?>) c;
+            for (int i = 0; i < src.size(); i++) {
+                if (!contains(src.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        for (final Object value : c) {
+            if (!contains(value)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -322,28 +498,151 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean addAll(final Collection<? extends T> c) {
-        return addAll((Iterable<? extends T>) c);
+        final boolean changed = addAllInternal(c);
+        if (changed) {
+            modCount++;
+        }
+        return changed;
     }
 
     /**
-     * Add all the elements in the specified {@link Iterator} to this
-     * collection, in the order in which they appear.
+     * Appends every non-null element of {@code c} WITHOUT a duplicate check.
      *
-     * @param i an iterator.
+     * <p>Only for callers that can guarantee that {@code c} has no duplicates and shares no element with this
+     * collection - e.g. merging the cards of different zones or of different players, where a card is in
+     * exactly one place. That skips the per-element membership probe and, for large results, the hash table
+     * build that {@link #addAll(Collection)} does. The table is kept consistent if it already exists;
+     * otherwise it is built lazily on the first contains()/get()/add(). Violating the guarantee silently
+     * breaks the uniqueness invariant, so use {@link #addAll(Collection)} when in doubt.</p>
      *
-     * @return whether this collection changed as a result of this method call.
-     * @see #addAll(Collection)
+     * @return whether anything was added.
      */
-    public boolean addAll(final Iterable<? extends T> i) {
+    public boolean addAllUnique(final Collection<? extends T> c) {
+        if (c == null || c.isEmpty() || c == this) {
+            return false;
+        }
+        ownList();
+
+        list.ensureCapacity(list.size() + c.size());
         boolean changed = false;
-        if (i == null)
+        if (c instanceof FCollection<?> || (c instanceof RandomAccess && c instanceof List<?>)) {
+            final List<? extends T> src = (List<? extends T>) c;
+            for (int i = 0, n = src.size(); i < n; i++) {
+                changed |= appendUnchecked(src.get(i));
+            }
+        } else {
+            for (final T element : c) {
+                changed |= appendUnchecked(element);
+            }
+        }
+        if (changed) {
+            modCount++;
+        }
+        return changed;
+    }
+
+    private boolean appendUnchecked(final T element) {
+        if (element == null) {
             return false;
-        // Trait rebuilds pour a lot of empty collections into these; skip allocating an iterator
-        // just to discover there is nothing to add.
-        if (i instanceof Collection && ((Collection<?>) i).isEmpty())
+        }
+        list.add(element);
+        if (hashTable != null) {
+            if (hashSize + 1 > hashTable.length - (hashTable.length >>> 2)) {
+                resizeHashTable(hashTable.length << 1);
+            }
+            insertHashNoResize(element, hashTable);
+        }
+        return true;
+    }
+
+    private boolean addAllInternal(final Collection<? extends T> c) {
+        if (c == null || c.isEmpty()) {
             return false;
-        for (final T e : i) {
-            changed |= add(e);
+        }
+        ownList();
+
+        final int expectedSize = list.size() + c.size();
+        list.ensureCapacity(expectedSize);
+
+        // Indexed access avoids allocating an Iterator (hot path: Game.getCardsIn -> addAll).
+        if (c instanceof FCollection<?> || (c instanceof RandomAccess && c instanceof List<?>)) {
+            final List<? extends T> src = (List<? extends T>) c;
+            boolean changed = false;
+
+            // Fast path: target is empty and untabled, and the source is an FCollection
+            // (unique elements), so no per-element duplicate check is needed.
+            if (c instanceof FCollection<?> && list.isEmpty() && hashTable == null) {
+                for (int i = 0; i < src.size(); i++) {
+                    final T element = src.get(i);
+                    if (element != null) {
+                        list.add(element);
+                        changed = true;
+                    }
+                }
+                /*if (list.size() > AUTO_HASH_THRESHOLD) {
+                    buildHashTable(list.size());
+                }*///would be waste. Needs bench.
+                return changed;
+            }
+
+            if (hashTable == null && expectedSize > AUTO_HASH_THRESHOLD) {
+                buildHashTable(expectedSize);
+            }
+            for (int i = 0; i < src.size(); i++) {
+                final T element = src.get(i);
+                if (element != null && addIfAbsent(element)) {
+                    changed = true;
+                }
+            }
+            return changed;
+        }
+
+        // Auto-detect threshold for bulk additions
+        if (hashTable == null && expectedSize > AUTO_HASH_THRESHOLD) {
+            buildHashTable(expectedSize);
+        }
+
+        boolean changed = false;
+        for (final T element : c) {
+            if (element != null && addIfAbsent(element)) {
+                changed = true;
+            }
+        }
+
+        return changed;
+    }
+
+    private boolean addIfAbsent(final T element) {
+        if (hashTable != null) {
+            if (addToHashTable(element)) {
+                list.add(element);
+                return true;
+            }
+            return false;
+        }
+        if (!list.contains(element)) {
+            list.add(element);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addAll(final Iterable<? extends T> i) {
+        if (i == null) {
+            return false;
+        }
+
+        if (i instanceof Collection<?>) {
+            @SuppressWarnings("unchecked")
+            final Collection<? extends T> collection = (Collection<? extends T>) i;
+            return addAll(collection);
+        }
+
+        boolean changed = false;
+        for (final T element : i) {
+            if (add(element)) {
+                changed = true;
+            }
         }
         return changed;
     }
@@ -357,9 +656,37 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * @return whether this collection changed as a result of this method call.
      */
     public boolean addAll(final T[] c) {
+        if (c == null || c.length == 0) {
+            return false;
+        }
+        ownList();
+
+        final int expectedSize = list.size() + c.length;
+        list.ensureCapacity(expectedSize);
+
+        // Auto-detect threshold for bulk array additions
+        if (hashTable == null && expectedSize > AUTO_HASH_THRESHOLD) {
+            buildHashTable(expectedSize);
+        }
+
         boolean changed = false;
-        for (final T e : c) {
-            changed |= add(e);
+        for (final T element : c) {
+            if (element == null) {
+                continue;
+            }
+
+            if (hashTable != null) {
+                if (addToHashTable(element)) {
+                    list.add(element);
+                    changed = true;
+                }
+            } else if (!list.contains(element)) {
+                list.add(element);
+                changed = true;
+            }
+        }
+        if (changed) {
+            modCount++;
         }
         return changed;
     }
@@ -367,23 +694,37 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     public boolean addAll(final int index, final Collection<? extends T> c) {
-        if (c == null) {
+        if (c == null || c.isEmpty()) {
             return false;
         }
 
-        final List<? extends T> list;
-        if (c instanceof List) {
-            list = (List<T>) c;
-        } else {
-            list = Lists.newArrayList(c);
+        if (index < 0 || index > list.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + list.size());
+        }
+
+        if (c instanceof List<?>) {
+            @SuppressWarnings("unchecked")
+            final List<? extends T> source = (List<? extends T>) c;
+            boolean changed = false;
+
+            for (int i = source.size() - 1; i >= 0; i--) {
+                changed |= insert(index, source.get(i));
+            }
+            return changed;
+        }
+
+        final ArrayList<T> source = new ArrayList<>(c.size());
+        for (final T element : c) {
+            @SuppressWarnings("unchecked")
+            final T value = (T) element;
+            source.add(value);
         }
 
         boolean changed = false;
-        for (int i = list.size() - 1; i >= 0; i--) { //must add in reverse order so they show up in the right place
-            changed |= insert(index, list.get(i));
+        for (int i = source.size() - 1; i >= 0; i--) {
+            changed |= insert(index, source.get(i));
         }
         return changed;
     }
@@ -393,20 +734,58 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean removeAll(final Collection<?> c) {
-        return removeAll((Iterable<?>) c);
+        if (c == null || c.isEmpty() || list.isEmpty()) {
+            return false;
+        }
+
+        if (c == this) {
+            clear();
+            return true;
+        }
+        ownList();
+
+        final int originalSize = list.size();
+        int writeIndex = 0;
+        boolean changed = false;
+
+        for (int readIndex = 0; readIndex < originalSize; readIndex++) {
+            final T value = list.get(readIndex);
+            if (c.contains(value)) {
+                changed = true;
+            } else {
+                if (writeIndex != readIndex) {
+                    list.set(writeIndex, value);
+                }
+                writeIndex++;
+            }
+        }
+
+        if (!changed) {
+            return false;
+        }
+
+        for (int i = originalSize - 1; i >= writeIndex; i--) {
+            list.remove(i);
+        }
+        modCount++;
+
+        if (hashTable != null) {
+            rebuildHashTable();
+        }
+
+        return true;
     }
 
-    /**
-     * Remove all objects appearing in an {@link Iterable}.
-     *
-     * @param c an iterable.
-     *
-     * @return whether this collection changed as a result of this method call.
-     */
     public boolean removeAll(final Iterable<?> c) {
-        boolean changed = false;
-        if (c == null)
+        if (c == null || list.isEmpty()) {
             return false;
+        }
+
+        if (c instanceof Collection<?>) {
+            return removeAll((Collection<?>) c);
+        }
+
+        boolean changed = false;
         for (final Object o : c) {
             changed |= remove(o);
         }
@@ -418,25 +797,62 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean retainAll(final Collection<?> c) {
-        if (list.retainAll(c)) {
-            if (set != null) {
-                set.retainAll(c);
-            }
-            return true;
+        if (c == null) {
+            throw new NullPointerException("collection");
         }
-        return false;
+
+        if (c == this || list.isEmpty()) {
+            return false;
+        }
+        ownList();
+
+        final int originalSize = list.size();
+        int writeIndex = 0;
+        boolean changed = false;
+
+        for (int readIndex = 0; readIndex < originalSize; readIndex++) {
+            final T value = list.get(readIndex);
+            if (c.contains(value)) {
+                if (writeIndex != readIndex) {
+                    list.set(writeIndex, value);
+                }
+                writeIndex++;
+            } else {
+                changed = true;
+            }
+        }
+
+        if (!changed) {
+            return false;
+        }
+
+        for (int i = originalSize - 1; i >= writeIndex; i--) {
+            list.remove(i);
+        }
+        modCount++;
+
+        if (hashTable != null) {
+            rebuildHashTable();
+        }
+
+        return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void clear() {
-        if (list.isEmpty()) { return; }
-        if (set != null) {
-            set.clear();
+        if (list.isEmpty()) {
+            return;
         }
-        list.clear();
+
+        if (sharedList || liveIterators > 0) {
+            list = new ArrayList<>();      // detach instead of copying what is about to be thrown away
+            sharedList = false;
+            liveIterators = 0;
+        } else {
+            list.clear();
+        }
+        modCount++;
+        clearHashTable();
     }
 
     /**
@@ -453,8 +869,16 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * elements in this collection is invariant.
      */
     @Override
-    public T set(final int index, final T element) { //assume this isn't called except when changing list order, so don't worry about updating set
-        return list.set(index, element);
+    public T set(final int index, final T element) {
+        ownList();
+        final T old = list.set(index, element);
+        contentVersion++;
+        if (hashTable != null && old != element) {
+            // set() may introduce or drop a member (and permutations pass through states with a duplicate),
+            // so do not try to patch the table: drop it, it is rebuilt lazily by the next lookup/add
+            clearHashTable();
+        }
+        return old;
     }
 
     /**
@@ -463,10 +887,16 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * in sync with the list.
      */
     public T replace(final int index, final T element) {
+        if (element == null) {
+            throw new NullPointerException("FCollection does not allow null elements");
+        }
+        ownList();
+
         final T old = list.set(index, element);
-        if (old != element && set != null) {
-            set.remove(old);
-            set.add(element);
+        contentVersion++;
+        if (old != element && hashTable != null) {
+            removeFromHashTable(old);
+            addToHashTable(element);
         }
         return old;
     }
@@ -479,34 +909,51 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         insert(index, element);
     }
 
-    /**
-     * Helper method to insert an element at a particular index.
-     *
-     * @param index the index to insert the element at.
-     *
-     * @param element the element to insert.
-     *
-     * @return whether this collection changed as a result of this method call.
-     */
-    private boolean insert(int index, final T element) {
-        if (set == null ? !list.contains(element) : set.add(element)) {
+    private boolean insert(final int index, final T element) {
+        if (element == null) {
+            return false;
+        }
+
+        if (index < 0 || index > list.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + list.size());
+        }
+        ownList();
+
+        final boolean exists;
+        if (hashTable == null) {
+            exists = list.contains(element);
+        } else {
+            exists = findHashIndex(element) >= 0;
+        }
+
+        if (!exists) {
             list.add(index, element);
-            if (set == null && list.size() > HASH_THRESHOLD) {
-                hashed();
+            modCount++;
+            if (hashTable == null && list.size() > AUTO_HASH_THRESHOLD) {
+                buildHashTable(list.size());
+            } else if (hashTable != null) {
+                addToHashTable(element);
             }
             return true;
         }
-        //re-position in list if needed
+
         final int oldIndex = list.indexOf(element);
         if (index == oldIndex) {
             return false;
         }
 
-        if (index > oldIndex) {
-            index--; //account for being removed
+        int targetIndex = index;
+        if (targetIndex > oldIndex) {
+            targetIndex--;
         }
-        list.remove(oldIndex);
-        list.add(index, element);
+
+        final T old = list.remove(oldIndex);
+        list.add(targetIndex, element);
+        modCount++;
+        if (hashTable != null && old != element) {
+            removeFromHashTable(old);
+            addToHashTable(element);
+        }
         return true;
     }
 
@@ -515,9 +962,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T remove(final int index) {
+        ownList();
         final T removedItem = list.remove(index);
-        if (removedItem != null && set != null) {
-            set.remove(removedItem);
+        modCount++;
+        if (removedItem != null && hashTable != null) {
+            removeFromHashTable(removedItem);
         }
         return removedItem;
     }
@@ -543,6 +992,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public ListIterator<T> listIterator() {
+        ownList();                                  // rarely used: detach so set/add/remove are safe...
+        clearHashTable();                           // ...and drop the table (rebuilt lazily) since the iterator bypasses it
+        modCount++;                                 // ...and assume it will change the list (invalidates derived caches)
         return list.listIterator();
     }
 
@@ -551,65 +1003,37 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public ListIterator<T> listIterator(final int index) {
+        ownList();
+        clearHashTable();
+        modCount++;
         return list.listIterator(index);
     }
 
-    /**
-     * <p>
-     * <b>Note</b> This method breaks the contract of {@link List#subList(int, int)}
-     * by returning a static collection, rather than a view, of the sublist.
-     * </p>
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public List<T> subList(final int fromIndex, final int toIndex) {
-        return ImmutableList.copyOf(list.subList(fromIndex, toIndex));
-    }
-
-    /**
-     * Sort this collection on the string representations of the resepctive
-     * elements.
-     *
-     * @see Object#toString()
-     * @see #sort(Comparator)
-     * @see Ordering#usingToString()
-     */
-    public void sort() {
-        sort(Ordering.usingToString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void sort(final Comparator<? super T> comparator) {
-        try {
-            list.sort(comparator);
-        } catch (Exception e) {
-            System.err.println("FCollection failed to sort: \n" + comparator + "\n" + e.getMessage());
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterable<T> threadSafeIterable() {
-        //create a new list for iterating to make it thread safe and avoid concurrent modification exceptions
-        return Iterables.unmodifiableIterable(new ArrayList<>(list));
+        return Collections.unmodifiableList(new ArrayList<>(list));
     }
 
     @Override
-    public T get(final T obj) {
-        if (obj == null) {
-            return null;
+    public List<T> subList(final int fromIndex, final int toIndex) {
+        return Collections.unmodifiableList(new ArrayList<>(list.subList(fromIndex, toIndex)));
+    }
+
+    public void sort() {
+        @SuppressWarnings({ "unchecked", "rawtypes" })
+        final Comparator<? super T> comparator = (Comparator) TO_STRING_COMPARATOR;
+        sort(comparator);
+    }
+
+    @Override
+    public void sort(final Comparator<? super T> comparator) {
+        ownList();
+        contentVersion++;
+        try {
+            list.sort(comparator);
+        } catch (final Exception e) {
+            System.err.println("FCollection failed to sort: \n" + comparator + "\n" + e.getMessage());
         }
-        for(T x : this) {
-            if (x.equals(obj)) {
-                return x;
-            }
-        }
-        return obj;
     }
 
     @Override
@@ -618,128 +1042,465 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     @Override
-    public boolean anyMatch(Predicate<? super T> test) {
-        return list.stream().anyMatch(test);
+    public boolean anyMatch(final Predicate<? super T> test) {
+        for (int i = 0; i < list.size(); i++) {
+            if (test.test(list.get(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public boolean allMatch(Predicate<? super T> test) {
-        return list.stream().allMatch(test);
+    public boolean allMatch(final Predicate<? super T> test) {
+        for (int i = 0; i < list.size(); i++) {
+            if (!test.test(list.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
+    // -------------------------------------------------------------------------
+    // Compact open-addressed membership table
+    // -------------------------------------------------------------------------
+
+    private static int spreadHash(final Object value) {
+        final int h = value.hashCode();
+        return h ^ (h >>> 16);
+    }
+
+    private static int nextPowerOfTwo(final int requested) {
+        int capacity = MIN_HASH_CAPACITY;
+        while (capacity < requested && capacity < (1 << 30)) {
+            capacity <<= 1;
+        }
+        return capacity;
+    }
+
+    private void buildHashTable(final int expectedSize) {
+        final int requested = Math.max(
+                MIN_HASH_CAPACITY,
+                expectedSize + (expectedSize >>> 1) + 1
+        );
+
+        final int capacity = nextPowerOfTwo(requested);
+        final Object[] table = new Object[capacity];
+
+        this.hashTable = table;
+        this.hashMask = capacity - 1;
+        this.hashSize = 0;
+
+        for (int i = 0, size = list.size(); i < size; i++) {
+            final T value = list.get(i);
+            if (value != null) {
+                insertHashNoResize(value, table);
+            }
+        }
+    }
+
+    private void rebuildHashTable() {
+        if (hashTable == null) {
+            return;
+        }
+
+        final Object[] table = hashTable;
+        Arrays.fill(table, null);
+        hashSize = 0;
+
+        for (int i = 0, size = list.size(); i < size; i++) {
+            final T value = list.get(i);
+            if (value != null) {
+                insertHashNoResize(value, table);
+            }
+        }
+    }
+
+    private void clearHashTable() {
+        hashTable = null;
+        hashSize = 0;
+        hashMask = 0;
+    }
+
+    private boolean hashContains(final Object value) {
+        return findHashIndex(value) >= 0;
+    }
+
+    private int findHashIndex(final Object value) {
+        if (hashTable == null || value == null) {
+            return -1;
+        }
+
+        final Object[] table = hashTable;
+        final int mask = hashMask;
+        int index = spreadHash(value) & mask;
+
+        while (true) {
+            final Object current = table[index];
+            if (current == null) {
+                return -1;
+            }
+            if (current == value || value.equals(current)) {
+                return index;
+            }
+            index = (index + 1) & mask;
+        }
+    }
+
+    private boolean addToHashTable(final T value) {
+        if (value == null) {
+            return false;
+        }
+
+        if (hashTable == null) {
+            buildHashTable(Math.max(list.size() + 1, LAZY_HASH_THRESHOLD + 1));
+        }
+
+        if (hashContains(value)) {
+            return false;
+        }
+
+        if (hashSize + 1 > hashTable.length - (hashTable.length >>> 2)) {
+            resizeHashTable(hashTable.length << 1);
+        }
+
+        insertHashNoResize(value, hashTable);
+        return true;
+    }
+
+    private void insertHashNoResize(final Object value, final Object[] table) {
+        final int mask = table.length - 1;
+        int index = spreadHash(value) & mask;
+
+        while (table[index] != null) {
+            index = (index + 1) & mask;
+        }
+
+        table[index] = value;
+        hashSize++;
+    }
+
+    private void resizeHashTable(final int requestedCapacity) {
+        final int newCapacity = nextPowerOfTwo(Math.max(MIN_HASH_CAPACITY, requestedCapacity));
+        final Object[] oldTable = hashTable;
+        final Object[] newTable = new Object[newCapacity];
+
+        hashTable = newTable;
+        hashMask = newCapacity - 1;
+        hashSize = 0;
+
+        if (oldTable != null) {
+            for (int i = 0; i < oldTable.length; i++) {
+                final Object value = oldTable[i];
+                if (value != null) {
+                    insertHashNoResize(value, newTable);
+                }
+            }
+        }
+    }
+
+    private boolean removeFromHashTable(final Object value) {
+        if (hashTable == null || value == null) {
+            return false;
+        }
+
+        final int index = findHashIndex(value);
+        if (index < 0) {
+            return false;
+        }
+
+        removeHashEntryAt(index);
+        return true;
+    }
+
+    private void removeHashEntryAt(final int removeIndex) {
+        final Object[] table = hashTable;
+        table[removeIndex] = null;
+        hashSize--;
+
+        int index = (removeIndex + 1) & hashMask;
+        while (table[index] != null) {
+            final Object value = table[index];
+            table[index] = null;
+            hashSize--;
+            insertHashNoResize(value, table);
+            index = (index + 1) & hashMask;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Set facade
+    // -------------------------------------------------------------------------
+
     /**
-     * An unmodifiable, empty {@link FCollection}. Overrides all methods with
-     * default implementations suitable for an empty collection, to improve
-     * performance.
+     * Snapshot iterator. It walks the list exactly as it was when the iterator was created and never throws a
+     * ConcurrentModificationException: if the collection is changed while an iterator is unfinished, the collection
+     * detaches (copies) its list first ({@link #ownList()}), so the iterator keeps walking the unchanged old one.
+     * Like a CopyOnWriteArrayList iterator it therefore does not see later additions and still returns elements
+     * that were removed meanwhile.
+     *
+     * <p>Cost: one int increment when it is created and one decrement when it runs to its end. A copy is only made
+     * if the collection is changed while an iterator is unfinished (this includes iterators abandoned by an early
+     * break/return, which cost one copy at the next change and are then forgotten). remove() removes the last
+     * returned element from the live collection.</p>
      */
+    private final class Itr implements Iterator<T> {
+        private final ArrayList<T> snapshot = list;
+        private final int size = snapshot.size();       // constant: the collection never modifies a list that has live iterators
+        private int cursor;
+        private T lastReturned;
+        private boolean released;
+
+        Itr() {
+            liveIterators++;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (cursor < size) {
+                return true;
+            }
+            release();
+            return false;
+        }
+
+        @Override
+        public T next() {
+            if (cursor >= size) {
+                release();
+                throw new NoSuchElementException();
+            }
+            return lastReturned = snapshot.get(cursor++);
+        }
+
+        @Override
+        public void remove() {
+            if (lastReturned == null) {
+                throw new IllegalStateException();
+            }
+            final T gone = lastReturned;
+            lastReturned = null;
+            FCollection.this.remove((Object) gone);     // detaches the list first because this iterator is live
+        }
+
+        private void release() {
+            if (!released) {
+                released = true;
+                // only if the collection still uses the list this iterator registered with: a detach has reset the count
+                if (list == snapshot && liveIterators > 0) {
+                    liveIterators--;
+                }
+            }
+        }
+    }
+
+    private final class SetIterator implements Iterator<T> {
+        private int cursor;
+        private int lastReturned = -1;
+
+        @Override
+        public boolean hasNext() {
+            return cursor < list.size();
+        }
+
+        @Override
+        public T next() {
+            if (cursor >= list.size()) {
+                throw new NoSuchElementException();
+            }
+            lastReturned = cursor;
+            return list.get(cursor++);
+        }
+
+        @Override
+        public void remove() {
+            if (lastReturned < 0) {
+                throw new IllegalStateException();
+            }
+            ownList();
+
+            final T removed = list.remove(lastReturned);
+            modCount++;
+            if (removed != null && hashTable != null) {
+                removeFromHashTable(removed);
+            }
+
+            cursor = lastReturned;
+            lastReturned = -1;
+        }
+    }
+
+    private final class SetView extends AbstractSet<T> {
+        @Override
+        public int size() {
+            return FCollection.this.size();
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return FCollection.this.isEmpty();
+        }
+
+        @Override
+        public boolean contains(final Object o) {
+            return FCollection.this.contains(o);
+        }
+
+        @Override
+        public Iterator<T> iterator() {
+            return new SetIterator();
+        }
+
+        @Override
+        public boolean add(final T value) {
+            return FCollection.this.add(value);
+        }
+
+        @Override
+        public boolean remove(final Object o) {
+            return FCollection.this.remove(o);
+        }
+
+        @Override
+        public void clear() {
+            FCollection.this.clear();
+        }
+
+        @Override
+        public Object[] toArray() {
+            return FCollection.this.toArray();
+        }
+
+        @Override
+        public <E> E[] toArray(final E[] a) {
+            return FCollection.this.toArray(a);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Empty FCollection
+    // -------------------------------------------------------------------------
+
     public static class EmptyFCollection<T> extends FCollection<T> {
         private static final long serialVersionUID = 8667965158891635997L;
+
         public EmptyFCollection() {
             super();
         }
-        @Override public final void add(final int index, final T element) {
-        }
-        @Override public final boolean add(final T e) {
-            return false;
-        }
-        @Override public final boolean addAll(final Collection<? extends T> c) {
-            return false;
-        }
-        @Override public final boolean addAll(final int index, final Collection<? extends T> c) {
-            return false;
-        }
-        @Override public final boolean addAll(final Iterable<? extends T> i) {
-            return false;
-        }
-        @Override public final boolean addAll(final T[] c) {
-            return false;
-        }
-        @Override public final void clear() {
-        }
-        @Override public final boolean contains(final Object o) {
-            return false;
-        }
-        @Override public final boolean containsAll(final Collection<?> c) {
-            return c.isEmpty();
-        }
+
+        @Override public final void add(final int index, final T element) { }
+        @Override public final boolean add(final T e) { return false; }
+        @Override public final boolean addAll(final Collection<? extends T> c) { return false; }
+        @Override public final boolean addAll(final int index, final Collection<? extends T> c) { return false; }
+        @Override public final boolean addAll(final Iterable<? extends T> i) { return false; }
+        @Override public final boolean addAll(final T[] c) { return false; }
+        @Override public final boolean addAllUnique(final Collection<? extends T> c) { return false; }
+        @Override public final void ensureCapacity(final int minCapacity) { }
+        @Override public final void clear() { }
+        @Override public final boolean contains(final Object o) { return false; }
+        @Override public final boolean containsAll(final Collection<?> c) { return c != null && c.isEmpty(); }
         @Override public final T get(final int index) {
+
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final T getFirst() {
-            throw new NoSuchElementException("Collection is empty");
-        }
-        @Override public final T getLast() {
-            throw new NoSuchElementException("Collection is empty");
-        }
-        @Override public final int indexOf(final Object o) {
-            return -1;
-        }
-        @Override public final boolean isEmpty() {
-            return true;
-        }
-        @Override public final Iterator<T> iterator() {
-            return Collections.emptyIterator();
-        }
-        @Override public final int lastIndexOf(final Object o) {
-            return -1;
-        }
-        @Override public final ListIterator<T> listIterator() {
-            return Collections.emptyListIterator();
-        }
-        @Override public final ListIterator<T> listIterator(final int index) {
-            return Collections.emptyListIterator();
-        }
+        @Override public final T getFirst() { throw new NoSuchElementException("Collection is empty"); }
+        @Override public final T getLast() { throw new NoSuchElementException("Collection is empty"); }
+        @Override public final int indexOf(final Object o) { return -1; }
+        @Override public final boolean isEmpty() { return true; }
+        @Override public final Iterator<T> iterator() { return Collections.emptyIterator(); }
+        @Override public final int lastIndexOf(final Object o) { return -1; }
+        @Override public final ListIterator<T> listIterator() { return Collections.emptyListIterator(); }
+        @Override public final ListIterator<T> listIterator(final int index) { return Collections.emptyListIterator(); }
         @Override public final T remove(final int index) {
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final boolean remove(final Object o) {
-            return false;
-        }
-        @Override public boolean removeAll(final Collection<?> c) {
-            return false;
-        }
-        @Override public final boolean removeAll(final Iterable<?> c) {
-            return false;
-        }
-        @Override public final boolean retainAll(final Collection<?> c) {
-            return false;
-        }
+        @Override public final boolean remove(final Object o) { return false; }
+        @Override public final boolean removeAll(final Collection<?> c) { return false; }
+        @Override public final boolean removeAll(final Iterable<?> c) { return false; }
+        @Override public final boolean retainAll(final Collection<?> c) { return false; }
         @Override public final T set(final int index, final T element) {
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final int size() {
-            return 0;
-        }
-        @Override public final void sort() {
-        }
-        @Override public final void sort(final Comparator<? super T> comparator) {
-        }
+        @Override public final int size() { return 0; }
+        @Override public final void sort() { }
+        @Override public final void sort(final Comparator<? super T> comparator) { }
         @Override public final List<T> subList(final int fromIndex, final int toIndex) {
             if (fromIndex == 0 && toIndex == 0) {
                 return this;
             }
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final Iterable<T> threadSafeIterable() {
-            return this;
-        }
-        @Override public final Object[] toArray() { return ArrayUtils.EMPTY_OBJECT_ARRAY; }
-        @Override
-        @SuppressWarnings("hiding")
-        public final <T> T[] toArray(final T[] a) {
+        @Override public final Iterable<T> threadSafeIterable() { return this; }
+        @Override public final Object[] toArray() { return EMPTY_OBJECT_ARRAY; }
+        @Override public final <E> E[] toArray(final E[] a) {
             if (a.length > 0) {
                 a[0] = null;
             }
             return a;
         }
-
-        @Override public Stream<T> stream() {return Stream.empty();}
-        @Override public boolean anyMatch(Predicate<? super T> test) {return false;}
-        @Override public boolean allMatch(Predicate<? super T> test) {return true;}
+        @Override public final Stream<T> stream() { return Stream.empty(); }
+        @Override public final boolean anyMatch(final Predicate<? super T> test) { return false; }
+        @Override public final boolean allMatch(final Predicate<? super T> test) { return true; }
+        @Override public final Set<T> asSet() { return Collections.emptySet(); }
 
         @Override
         public final String toString() {
             return "[]";
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructors
+    // -------------------------------------------------------------------------
+
+    public FCollection() {
+        this.list = new ArrayList<>();
+    }
+
+    /** Not public on purpose: a public int overload would hijack {@code new FCollection<Integer>(5)}. Use {@link #withCapacity(int)}. */
+    protected FCollection(final int initialCapacity) {
+        this.list = new ArrayList<>(initialCapacity);
+    }
+
+    public FCollection(final T e) {
+        this.list = new ArrayList<>(1);
+        add(e);
+    }
+
+    public FCollection(final T[] c) {
+        this.list = new ArrayList<>(c != null ? c.length : 10);
+        addAll(c);
+    }
+
+    @SuppressWarnings("unchecked")
+    public FCollection(final Iterable<? extends T> i) {
+        if (i instanceof FCollection<?>) {
+            final FCollection<T> source = (FCollection<T>) i;
+            this.list = new ArrayList<>(source.list);
+            return;
+        }
+
+        if (i instanceof Collection<?>) {
+            final Collection<?> collection = (Collection<?>) i;
+            this.list = new ArrayList<>(collection.size());
+            addAll((Iterable<? extends T>) i);
+            return;
+        }
+
+        this.list = new ArrayList<>();
+        addAll(i);
+    }
+
+    public FCollection(final FCollectionReader<T> reader) {
+        this.list = new ArrayList<>();
+        reader.readAll(this);
+    }
+    /**
+     * Ensure the internal backing list can hold at least minCapacity elements
+     * without further resizing.
+     */
+    public void ensureCapacity(final int minCapacity) {
+        ownList();                      // growing a list that other copy-on-write copies still share would disturb them
+        list.ensureCapacity(minCapacity);
     }
 }

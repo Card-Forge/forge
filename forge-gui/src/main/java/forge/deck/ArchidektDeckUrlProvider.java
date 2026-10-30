@@ -131,7 +131,8 @@ final class ArchidektDeckUrlProvider implements DeckUrlProvider {
         return switch (number.intValue()) {
             case 3, 11, 12 -> DeckFormat.Commander;
             case 6 -> DeckFormat.Pauper;
-            case 13 -> DeckFormat.Brawl;
+            // 13 is the old 60-card Brawl, 20 Historic Brawl and 26 Arena's Competitive Brawl
+            case 13, 20, 26 -> DeckFormat.Brawl;
             default -> DeckFormat.Constructed;
         };
     }

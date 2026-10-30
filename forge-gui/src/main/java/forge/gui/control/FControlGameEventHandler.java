@@ -8,9 +8,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.YieldController;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.properties.ForgeConstants;
@@ -305,8 +303,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        evaluateYieldInterruptForSpellCast(event);
-
         needStackUpdate = true;
         if (matchController.isLibgdxPort() ||
                 ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY))) {
@@ -319,23 +315,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
         }
         return null;
-    }
-
-    private void evaluateYieldInterruptForSpellCast(GameEventSpellAbilityCast event) {
-        if (humanController == null) return;
-        YieldController yc = humanController.getYieldController();
-        // isYieldActive() only covers explicit yields; APINA-with-respects-interrupts
-        // also wants to be told about casts so it can set autoPassInterrupted.
-        if (!yc.shouldEvaluateInterrupts()) return;
-        GameView gv = matchController.getGameView();
-        if (gv == null || gv.getGame() == null) return;
-        // Look up the actual SpellAbilityStackInstance by id (host-side; client gv.getGame() is null).
-        for (SpellAbilityStackInstance candidate : gv.getGame().getStack()) {
-            if (candidate.getId() == event.si().getId()) {
-                yc.onSpellAbilityCast(candidate);
-                return;
-            }
-        }
     }
 
     /** Undo rewinds the game in place without emitting the individual events the GUI normally reacts to; resync everything. */
@@ -442,14 +421,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventAttackersDeclared event) {
-        if (humanController != null) {
-            YieldController yc = humanController.getYieldController();
-            // APINA-with-respects-interrupts wants the attackers signal too, not just explicit yields.
-            if (yc.shouldEvaluateInterrupts()) {
-                GameView gv = matchController.getGameView();
-                if (gv != null && gv.getCombat() != null) yc.onAttackersDeclared(gv.getCombat());
-            }
-        }
         return processCards(event.attackersMap().values(), cardsUpdate);
     }
 

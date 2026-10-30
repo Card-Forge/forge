@@ -52,6 +52,11 @@ public class VManaPool extends VDisplayArea {
         return totalMana;
     }
 
+    /** @return how many mana icons the pool shows, so the alternate layout can size its row */
+    public int getLabelCount() {
+        return manaLabels.size();
+    }
+
     @Override
     public void update() {
         totalMana = 0;
@@ -67,7 +72,17 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && VPlayerPanel.isAltZoneLayout()) {
+            //alternate landscape layout: one horizontal row of icons, each with its count underneath
+            float labelWidth = visibleWidth / manaLabels.size();
+            if (VPlayerPanel.isCompactLayout()) { labelWidth = Math.min(labelWidth, visibleHeight); } //the compact box spans the panel, keep the icons together
+            float mod = labelWidth * 0.2f;
+            if (VPlayerPanel.isCompactLayout()) { x = Math.max(0f, (visibleWidth - labelWidth * manaLabels.size()) / 2); } //centered in the box
+            for (ManaLabel label : manaLabels) {
+                label.setBounds(x + mod, y + mod, labelWidth - mod, visibleHeight - mod);
+                x += labelWidth;
+            }
+        } else if (Forge.isLandscapeMode()) {
             float labelWidth = visibleWidth / 2;
             float labelHeight = visibleHeight / 3;
 

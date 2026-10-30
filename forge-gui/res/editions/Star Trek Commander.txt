@@ -6,10 +6,136 @@ Type=Commander
 ScryfallCode=TRC
 
 [cards]
+1 M The Borg Queen @Jodie Muir
+2 M Commander Spock @Sam Kennedy
+3 M Jean-Luc Picard, Luminary @Jason Pastrana
+4 M Worf, Defiant Commander @Flavio Greco Paglia
+5 M The Borg Queen @Jodie Muir
+6 M Commander Spock @Sam Kennedy
+7 M Jean-Luc Picard, Luminary @Jason Pastrana
+8 M Worf, Defiant Commander @Flavio Greco Paglia
+9 R Ambassador K'Ehleyr @Lius Lasahido
+10 R Balance of Terror @Jason Raish
+11 R Beverly Crusher, Ship's Doctor @Alex Negrea
+12 R Borg Incursion @Pierre Loyvet
+13 R Dr. Pulaski, Cynical Clinician @Justyna Dura
+14 R Emergency Regeneration @Grant Griffin
+15 R Ensign Harry Kim, Operations @Lixin Yin
+16 R Ezri Dax, Newly Joined @Lius Lasahido
+17 R Guinan, Ancient Advisor @Nicky Barkla
+18 R Imperial Hullbreachers @Joan Piqué Llorens
+19 R Indelicate Healer @Monztre
 20 R Join the Collective @Lordigan
+21 R Julian Bashir, Frontier Doctor @Alexander Mokhov
+22 R Korok, Liberated Rage @Ariel Orea
+23 R Martok, Hero of the Empire @Pavel Kolomeyets
+24 R Maturation Chamber @Jonas De Ro
+25 R Merciful Mandate @Aaron J. Riley
+26 R M'Ress, Crew Coordinator @Pauline Voss
+27 R Right of Vengeance @Albert Cordero
+28 R Shuttlecraft Galileo @Pierre Raveneau
+29 R Spot, Felis catus @Leesha Hannigan
+30 R Stratagem Emulator @Grant Griffin
+31 R Supplementation Node @Piotr Foksowicz
+32 R Tribble Cluster @Leesha Hannigan
+33 R Type-03 Borg Vessel @Florent Lebrun
+34 R U.S.S. Enterprise-E, Sovereign @Jetfreak-7
+35 R Ambulatory Reactor @David Auden Nash
+36 R Borg Scout Sphere @Lordigan
+37 R Chief Miles O'Brien @Alex Negrea
+38 R Colossal Clone Master @Joel Chaim Holtzman
+39 R Co-Option Adjutant @Aaron J. Riley
+40 R Data, Exploring Humanity @Borja Pindado
+41 R Fleet Captain Christopher Pike @Romana Kendelic
+42 R Geordi La Forge, Innovator @Ryan Valle
+43 R Giant Space Amoeba @Arthur Haas
+44 R Gift of Perfection @Alexander Mokhov
+45 R Kes, Evolving Telepath @Ariel Orea
+46 R Lieutenant Nyota Uhura @Lie Setiawan
+47 R On the Shoulders of Giants @Nadia Hurianova
+48 R Optimization Annex @Filipe Pagliuso
+49 R Sam Kirk, Xenoanthropologist @Charles Chaisson
+50 R Seven of Nine, Tertiary Adjunct @Bastien L. Deharme
+51 R Temporal Tribulation @Nikki Dawes
+52 R Transwarp Hub @David Frasheski
+53 R Tuvok, Chief Tactical Officer @Flavio Greco Paglia
+54 R Võx, Child of the Collective @Carissa Susilo
+55 R Assimilate the Wounded @Bryan Sola
+56 R Assimilation Assessor @Miklós Ligeti
+57 R Battle of Wolf 359 @Henry Peters
+58 R Blood-Sport Champion @Johann Bodin
+59 R Extraction Integrant @Smirtouille
+60 R Kurn, Son of Mogh @Kieran Yanner
+61 R The Promise of Kahless @Zezhou Chen
+62 R Reclamation Specialist @Sean Vo
+63 R Voq, Torchbearer @Rémi Jacquot
+64 R The Beacon of Kahless @Colin Searle
+65 R Ferocious Colonist @Thanh Tuấn
+66 R Gagh Slinger @Pavel Kolomeyets
+67 R Galvanizing Tenor @Wonchun Choi
+68 R Glory to the Empire! @Andrey Kuzinskiy
+69 R Gnarling Targ @Borja Pindado
+70 R Grilka, Widowed Warrior @Lucio Parrillo
+71 R Kang, Suspicious Captain @Javier Charro
+72 R Koloth, Tribble Hunter @Eric Wilkerson
+73 R Own the Day @Tomáš Honz
+74 R Qo'noS Quartermaster @Lordigan
+75 R Ro Laren, Double Agent @David Auden Nash
+76 R Rom and Leeta, Unlikely Pair @Nikki Dawes
+77 R Amanda Grayson, Logic's Link @Kevin Glint
 78 R Christine Chapel, Combat Medic @Pauline Voss
+79 R Janice Rand, Essential Aide @Ana Teresa Rivera
+80 R Lieutenant Hikaru Sulu @Charles Chaisson
+81 R Alexander, Ship's Fool @Javier Charro
+82 R B'Elanna Torres, Scrapper @Ana Teresa Rivera
+83 R The Best of Both Worlds @Marko Manev
+84 M Captain Janeway, Endgame @Jason Pastrana
 85 M Captain Kirk, Boldly Going @Josh Newton
+86 R Chancellor Gorkon @Chris Rallis
+87 R Chief Kyle, Transporter Tech @Ariel Orea
+88 R Chief Montgomery Scott @Mark Spears
+89 R Cmdr. Troi, Outgoing Empath @Justyna Dura
+90 R Collective Override @Pierre Loyvet
+91 R Commander William Riker @Jake Murray
+92 R Curzon Dax, Bound by Blood @Wonchun Choi
+93 R Deliver from Chaos @Bastien L. Deharme
+94 R Hugh, First of Many @Carlos Dattoli
+95 R Jurati, Cordial Queen @Martina Fačková
+96 M Kor, Cause of Vengeance @Eric Wilkerson
+97 M Locutus of Borg @Anton Solovianchyk
+98 R Lt. Arex, Ever-Adapting @Uzuri
+99 R McCoy, Not a Bricklayer @Randy Gallegos
+100 R One, Borg Evolved @Lixin Yin
+101 R Pavel Chekov, First Posting @Matt Stewart
+102 R Reg Barclay, Fidgety Fantasist @Ryan Valle
+103 R Rite of Ascension @Lordigan
+104 R Sins of the Father @Peter Diamond
+105 R Tom Paris, Risk-Taker @Borja Pindado
+106 R T'Pring, Never Parted @Jason Pastrana
+107 R Unification @Uzuri
+108 R Vic Fontaine, One Night Only @Tony Foti
+109 R Worf, Son of Mogh @Borja Pindado
+110 R Class-4 Tactical Cube @Jetfreak-7
+111 R Command Chair @Jason Smith
+112 R The Guardian of Forever @Uzuri
+113 R I.K.S. Negh'Var, Imperial Flagship @Jetfreak-7
+114 R Jefferies Tube @Edouard
+115 R K't'inga-Class Battle Cruiser @Dofresh
+116 R K'Vort-Class Raider @Jetfreak-7
+117 R Planet Killer @Raymond Swanland
+118 R Queen's Diamond @Raymond Bonilla
+119 R Reconnaissance Partition @Camille Alquier
+120 R S.S. Botany Bay @Miguel Iglesias
 121 R Starfleet Communicator @Wero Gallo
+122 R Starship Enterprise @Dofresh
+123 R The Sword of Kahless @Enora Mercier
+124 R U.S.S. Defiant, Mirror Migrant @Arthur Yuan
+125 R U.S.S. Defiant, Tough Little Ship @John Di Giovanni
+126 R U.S.S. Enterprise-C, Time-Tossed @Dofresh
+127 R U.S.S. Farragut, Bold Explorer @Raymond Bonilla
+128 R U.S.S. Prometheus, Prototype @Jetfreak-7
+129 R U.S.S. Stargazer, Here and There @Alexander Forssberg
+130 R Shore Leave Planet @Arthur Haas
 131 R Borg Queen, One Who Is Many @Erion Makuo
 132 C Evasive Maneuvers @Evan Shipard
 133 C Head of Security @Alexey Kot
@@ -36,6 +162,18 @@ ScryfallCode=TRC
 173 U Gumato @Raymond Swanland
 175 C Talarian Hook Spider @Zoltan Boros
 177 C Disruptor Pistol @Jason Smith
+180 R Kirk, Man of Action @JB Casacop
+181 R Spock, Voice of Reason @JB Casacop
+182 R Uhura, Xenolinguist @JB Casacop
+183 R Chekov and McCoy @JB Casacop
+184 R Scotty, Chief Engineer @JB Casacop
+185 R Sulu, Heroic Helmsman @JB Casacop
+186 R Worf, Still Not Merry @Alexander Gering
+187 R Q, Your Illustrious Host @Alexander Gering
+188 R La Forge, Thoughtful as Ever @Alexander Gering
+189 R Data, Professor of Humanities @Alexander Gering
+190 R Jean-Luc, Mon Capitaine @Alexander Gering
+191 R Troi, Winging It @Alexander Gering
 192 R Operations Officer @Ioannis Fiore
 193 M Picard, Steadfast Captain @Mark Spears
 194 M Spock, Logical Choice @Bastien Jez
@@ -46,7 +184,400 @@ ScryfallCode=TRC
 199 R Klingon Strike Force @Fahmi Fauzi
 200 M Benjamin Sisko, Besieged @Josu Hernaiz
 201 R Tenacious Tosk @Filipe Pagliuso
+202 R Data, Exploring Humanity @Eglė Mosakaitė
+203 R Battle of Wolf 359 @Eugene Maslovski
+204 R Grilka, Widowed Warrior @Vlad Petruchik
+205 M Captain Janeway, Endgame @Uzuri
+206 M Captain Kirk, Boldly Going @Mintautas Šukys
+207 R Commander William Riker @Darius Zablockis
+208 M Kor, Cause of Vengeance @Rimas Valeikis
+209 M Locutus of Borg @Mintautas Šukys
+210 R McCoy, Not a Bricklayer @Gintas Galvanauskas
+211 R Starship Enterprise @Maxim Ruabtsev
+212 R Ambassador K'Ehleyr @Lius Lasahido
+213 R Austere Command @Cliff Nielsen
+214 R Beverly Crusher, Ship's Doctor @Alex Negrea
+215 R Borg Incursion @Pierre Loyvet
+216 R Concerted Effort @John Di Giovanni
+217 R Dr. Pulaski, Cynical Clinician @Justyna Dura
+218 R Duelist's Heritage @Bartek Fedyczak
+219 R Emergency Regeneration @Grant Griffin
+220 R Ensign Harry Kim, Operations @Lixin Yin
+221 R Ezri Dax, Newly Joined @Lius Lasahido
+222 R Grand Crescendo @Pablo Mendoza
+223 R Guinan, Ancient Advisor @Nicky Barkla
+224 R Imperial Hullbreachers @Joan Piqué Llorens
+225 R Indelicate Healer @Monztre
+226 R Join the Collective @Lordigan
+227 R Julian Bashir, Frontier Doctor @Alexander Mokhov
+228 R Korok, Liberated Rage @Ariel Orea
+229 R Loran of the Third Path @John Tyler Christopher ${"flavorName": "Sonya Gomez, Learning Together"}
+230 R Martok, Hero of the Empire @Pavel Kolomeyets
+231 R Maturation Chamber @Jonas De Ro
+232 R Merciful Mandate @Aaron J. Riley
+233 R M'Ress, Crew Coordinator @Pauline Voss
+234 R Promise of Loyalty @Fajareka Setiawan
+235 R Right of Vengeance @Albert Cordero
+236 R Shuttlecraft Galileo @Pierre Raveneau
+237 R Spot, Felis catus @Leesha Hannigan
+238 R Stratagem Emulator @Grant Griffin
+239 M Sun Titan @Joel Chaim Holtzman
+240 R Supplementation Node @Piotr Foksowicz
+241 R Tempered Steel @Camille Alquier
+242 R Tribble Cluster @Leesha Hannigan
+243 R Type-03 Borg Vessel @Florent Lebrun
+244 R U.S.S. Enterprise-E, Sovereign @Jetfreak-7
+245 R Vanquish the Horde @Tomáš Honz
+246 R Wrath of God @Pablo Mendoza
+247 R Ambulatory Reactor @David Auden Nash
+248 R Borg Scout Sphere @Lordigan
+249 R Chief Miles O'Brien @Alex Negrea
+250 R Colossal Clone Master @Joel Chaim Holtzman
+251 R Co-Option Adjutant @Aaron J. Riley
+252 R Cryptic Command @Randy Gallegos
+253 R Disallow @Kristina WermoongRey
+254 M Echo of Eons @Néstor Ossandón Leal
+255 R Fleet Captain Christopher Pike @Romana Kendelic
+256 R Geordi La Forge, Innovator @Ryan Valle
+257 R Giant Space Amoeba @Arthur Haas
+258 R Gift of Perfection @Alexander Mokhov
+259 R Kes, Evolving Telepath @Ariel Orea
+260 R Lieutenant Nyota Uhura @Lie Setiawan
+261 R On the Shoulders of Giants @Nadia Hurianova
+262 R Optimization Annex @Filipe Pagliuso
+263 R Sam Kirk, Xenoanthropologist @Charles Chaisson
+264 R Seven of Nine, Tertiary Adjunct @Bastien L. Deharme
+265 R Temporal Tribulation @Nikki Dawes
+266 R Transwarp Hub @David Frasheski
+267 R Tuvok, Chief Tactical Officer @Flavio Greco Paglia
+268 R Võx, Child of the Collective @Carissa Susilo
+269 R Assimilate the Wounded @Bryan Sola
+270 R Assimilation Assessor @Miklós Ligeti
+271 R Blood-Sport Champion @Johann Bodin
+272 R Extraction Integrant @Smirtouille
+273 R Kurn, Son of Mogh @Kieran Yanner
+274 R Painful Truths @David Szabo
+275 R The Promise of Kahless @Zezhou Chen
+276 R Reclamation Specialist @Sean Vo
+277 R Toxic Deluge @Brian Valenzuela
+278 R Voq, Torchbearer @Rémi Jacquot
+279 R The Beacon of Kahless @Colin Searle
+280 R Chain Reaction @Leon Tukker
+281 M Combat Celebrant @Lordigan
+282 R Disrupt Decorum @Monztre
+283 R Ferocious Colonist @Thanh Tuấn
+284 R Gagh Slinger @Pavel Kolomeyets
+285 R Galvanizing Tenor @Wonchun Choi
+286 R Glory to the Empire! @Andrey Kuzinskiy
+287 R Gnarling Targ @Borja Pindado
+288 R Kang, Suspicious Captain @Javier Charro
+289 R Koloth, Tribble Hunter @Eric Wilkerson
+290 R Own the Day @Tomáš Honz
+291 R Professional Face-Breaker @Thanh Tuấn
+292 R Qo'noS Quartermaster @Lordigan
+293 R Ro Laren, Double Agent @David Auden Nash
+294 R Rom and Leeta, Unlikely Pair @Nikki Dawes
+295 R Shared Animosity @Ariel Orea
+296 R World at War @Evan Shipard
+297 R Amanda Grayson, Logic's Link @Kevin Glint
+298 M Ancient Greenwarden @Daarken
+299 R Augur of Autumn @Mushk Rizvi
 300 R Christine Chapel, Combat Medic @Pauline Voss
+301 R Exploration @Jonas De Ro
+302 R Guardian Project @Gal Or
+303 R Heroic Intervention @Carlos C Diaz
+304 R Janice Rand, Essential Aide @Ana Teresa Rivera
+305 R Lieutenant Hikaru Sulu @Charles Chaisson
+306 R Lotus Cobra @Joel Chaim Holtzman
+307 R Scute Swarm @Joel Chaim Holtzman
+308 R Tireless Tracker @Greg Staples
+309 R Alexander, Ship's Fool @Javier Charro
+310 R Anguished Unmaking @Uzuri
+311 R B'Elanna Torres, Scrapper @Ana Teresa Rivera
+312 R Chancellor Gorkon @Chris Rallis
+313 R Chief Kyle, Transporter Tech @Ariel Orea
+314 R Chief Montgomery Scott @Mark Spears
+315 R Cmdr. Troi, Outgoing Empath @Justyna Dura
+316 R Collective Override @Pierre Loyvet
+317 R Curzon Dax, Bound by Blood @Wonchun Choi
+318 R Deliver from Chaos @Bastien L. Deharme
+319 R Fevered Visions @Wei Guan
+320 R Fractured Identity @Borja Pindado
+321 R Hugh, First of Many @Carlos Dattoli
+322 R Jurati, Cordial Queen @Martina Fačková
+323 R Lt. Arex, Ever-Adapting @Uzuri
+324 R One, Borg Evolved @Lixin Yin
+325 R Pavel Chekov, First Posting @Matt Stewart
+326 M Pest Control @Carlos C Diaz
+327 R Reg Barclay, Fidgety Fantasist @Ryan Valle
+328 R Rite of Ascension @Lordigan
+329 R Ruinous Ultimatum @Carlos Dattoli
+330 R Supreme Verdict @David Robert Hovey
+331 R Tom Paris, Risk-Taker @Borja Pindado
+332 R T'Pring, Never Parted @Jason Pastrana
+333 R Vic Fontaine, One Night Only @Tony Foti
+334 R Vindicate @Tony Foti
+335 R Warleader's Call @Wero Gallo
+336 R Worf, Son of Mogh @Borja Pindado
+337 M Alhammarret's Archive @Jonas De Ro ${"flavorName": "Orb of the Emissary"}
+338 R Astral Cornucopia @Arthur Yuan
+339 R Class-4 Tactical Cube @Jetfreak-7
+340 R Command Chair @Jason Smith
+341 R Darksteel Plate @Miklós Ligeti
+342 R Door of Destinies @Nadia Hurianova
+343 M Forsaken Monument @Florent Lebrun
+344 R The Guardian of Forever @Uzuri
+345 R Howling Mine @Kevin Glint
+346 R I.K.S. Negh'Var, Imperial Flagship @Jetfreak-7
+347 M The Immortal Sun @Leon Tukker ${"flavorName": "Central Plexus Core"}
+348 R Jefferies Tube @Edouard
+349 R K't'inga-Class Battle Cruiser @Dofresh
+350 R K'Vort-Class Raider @Jetfreak-7
+351 R Planet Killer @Raymond Swanland
+352 R Queen's Diamond @Raymond Bonilla
+353 R Reconnaissance Partition @Camille Alquier
+354 R Skullclamp @Anna Pavleeva
+355 R S.S. Botany Bay @Miguel Iglesias
+356 R Starfleet Communicator @Wero Gallo
+357 R The Sword of Kahless @Enora Mercier
+358 M Sword of Light and Shadow @Julia Metzger
+359 R Unwinding Clock @Miklós Ligeti
+360 R U.S.S. Defiant, Mirror Migrant @Arthur Yuan
+361 R U.S.S. Defiant, Tough Little Ship @John Di Giovanni
+362 R U.S.S. Enterprise-C, Time-Tossed @Dofresh
+363 R U.S.S. Farragut, Bold Explorer @Raymond Bonilla
+364 R U.S.S. Prometheus, Prototype @Jetfreak-7
+365 R U.S.S. Stargazer, Here and There @Alexander Forssberg
+366 R Academy Ruins @Anthony Devine
+367 R Battlefield Forge @Dofresh
+368 R Canopy Vista @John Thacker
+369 R Canyon Slough @Rémi Jacquot
+370 R Choked Estuary @Jessica Rossier
+371 R Clifftop Retreat @David Frasheski
+372 R Coastal Peak @Randy Gallegos
+373 R Command Beacon @Lazare Gvimradze
+374 R Desolate Lighthouse @Jessica Rossier
+375 R Dragonskull Summit @Nadia Hurianova
+376 R Drowned Catacomb @Lordigan
+377 R Eclipsed Steppe @Bastien Grivet
+378 R Exotic Orchard @Leon Tukker
+379 R Fabled Passage @Arthur Yuan
+380 R Fetid Pools @Bastien Grivet
+381 R Foreboding Ruins @Dofresh
+382 R Fortified Village @Nadia Hurianova
+383 R Frostboil Snarl @Shahab Alizadeh
+384 R Furycalm Snarl @Bastien Grivet
+385 R Glacial Fortress @Nadia Hurianova
+386 R Glittering Massif @Rutger van de Steeg
+387 R Hinterland Harbor @Runa I. Rosenberger
+388 R Irrigated Farmland @Jonas De Ro
+389 R Isolated Chapel @Arthur Yuan
+390 R Morphic Pool @Pierre Loyvet
+391 R Mosswort Bridge @Joan Piqué Llorens
+392 R Mutavault @Pace Wilder
+393 R Port Town @Edouard
+394 R Prairie Stream @Carlos Dattoli
+395 R Radiant Summit @Pablo Mendoza
+396 R Rain-Slicked Copse @Randy Gallegos
+397 R Scattered Groves @Racrufi
+398 R Scorched Geyser @David Frasheski
+399 R Sea of Clouds @Bruce Brenneise
+400 R Shineshadow Snarl @Raymond Swanland
+401 R Shore Leave Planet @Arthur Haas
+402 R Skycloud Expanse @Arthur Yuan
+403 R Smoldering Marsh @Enora Mercier
+404 R Sodden Verdure @John Thacker
+405 R Spire of Industry @Florent Lebrun
+406 R Sulfur Falls @Henry Wong
+407 R Sunken Hollow @Nadia Hurianova
+408 R Sunpetal Grove @Harkalé Linaï
+409 R Temple of Enlightenment @David Álvarez
+410 R Temple of Malice @John Di Giovanni
+411 R Temple of Mystery @Rutger van de Steeg
+412 R Temple of Plenty @Pace Wilder
+413 R Training Center @Arthur Yuan
+414 R Umbral Expanse @Raymond Bonilla
+415 R Underground River @Piotr Dura
+416 R Vault of Champions @Pavel Kolomeyets
+417 R Vineglimmer Snarl @Andrey Kuzinskiy
+418 R Austere Command @Cliff Nielsen
+419 U Chronomantic Escape @Irina Nordsol
+420 R Concerted Effort @John Di Giovanni
+421 U Dispatch @Pablo Mendoza
+422 R Duelist's Heritage @Bartek Fedyczak
+423 R Grand Crescendo @Pablo Mendoza
+424 R Loran of the Third Path @John Tyler Christopher ${"flavorName": "Sonya Gomez, Learning Together"}
+425 U Path to Exile @Pierre Raveneau
+426 R Promise of Loyalty @Fajareka Setiawan
+427 U Return to Dust @Lordigan
+428 M Sun Titan @Joel Chaim Holtzman
+429 U Swords to Plowshares @Pablo Mendoza
+430 R Tempered Steel @Camille Alquier
+431 U Valorous Stance @Andrey Kuzinskiy
+432 R Vanquish the Horde @Tomáš Honz
+433 R Wrath of God @Pablo Mendoza
+434 C Brainstorm @Andreas Zafiratos
+435 R Cryptic Command @Randy Gallegos
+436 R Disallow @Kristina WermoongRey
+437 M Echo of Eons @Néstor Ossandón Leal
+438 C Frantic Search @Leonardo Santanna
+439 C Negate @Jetfreak-7
+440 C Ponder @Berto Martinez
+441 U Pongify @Andreia Ugrai
+442 U Reality Shift @Berto Martinez
+443 U Thirst for Knowledge @Bartek Fedyczak
+444 C Thoughtcast @Camille Alquier
+445 U Bitter Triumph @Narendra Bintara Adi
+446 C Night's Whisper @Runa I. Rosenberger
+447 R Painful Truths @David Szabo
+448 R Toxic Deluge @Brian Valenzuela
+449 U Abrade @Bartek Fedyczak
+450 R Chain Reaction @Leon Tukker
+451 M Combat Celebrant @Lordigan
+452 R Disrupt Decorum @Monztre
+453 R Professional Face-Breaker @Thanh Tuấn
+454 R Shared Animosity @Ariel Orea
+455 C Thrill of Possibility @Julie Dillon
+456 R World at War @Evan Shipard
+457 M Ancient Greenwarden @Daarken
+458 R Augur of Autumn @Mushk Rizvi
+459 U Beast Within @Filipe Pagliuso
+460 U Cultivate @Ariel Orea
+461 R Exploration @Jonas De Ro
+462 C Farseek @Piotr Dura
+463 R Guardian Project @Gal Or
+464 U Harmonize @Tony Foti
+465 R Heroic Intervention @Carlos C Diaz
+466 R Lotus Cobra @Joel Chaim Holtzman
+467 U Nature's Lore @Monztre
+468 C Rampant Growth @Raymond Bonilla
+469 C Satyr Wayfinder @Gal Or
+470 R Scute Swarm @Joel Chaim Holtzman
+471 R Tireless Tracker @Greg Staples
+472 R Anguished Unmaking @Uzuri
+473 U Faithful Mending @John Tyler Christopher
+474 R Fevered Visions @Wei Guan
+475 R Fractured Identity @Borja Pindado
+476 C Growth Spiral @David Álvarez
+477 M Pest Control @Carlos C Diaz
+478 U Rite of Oblivion @Tomáš Honz
+479 R Ruinous Ultimatum @Carlos Dattoli
+480 R Supreme Verdict @David Robert Hovey
+481 C Terminate @Douglas Shuler
+482 R Vindicate @Tony Foti
+483 R Warleader's Call @Wero Gallo
+484 M Alhammarret's Archive @Jonas De Ro ${"flavorName": "Orb of the Emissary"}
+485 U Arcane Signet @Tomáš Honz
+486 R Astral Cornucopia @Arthur Yuan
+487 C Commander's Sphere @Eric Wilkerson
+488 R Darksteel Plate @Miklós Ligeti
+489 R Door of Destinies @Nadia Hurianova
+490 C Everflowing Chalice @Jodie Muir
+491 M Forsaken Monument @Florent Lebrun
+492 U Hedron Archive @Paolo Puggioni
+493 U Herald's Horn @Sam Kennedy
+494 R Howling Mine @Kevin Glint
+495 M The Immortal Sun @Leon Tukker ${"flavorName": "Central Plexus Core"}
+496 U Lightning Greaves @Borja Pindado
+497 U Mind Stone @Racrufi
+498 R Skullclamp @Anna Pavleeva
+499 U Sol Ring @Hector Ortiz
+500 U Stonespeaker Crystal @Fajareka Setiawan
+501 U Swiftfoot Boots @Arthur Yuan
+502 M Sword of Light and Shadow @Julia Metzger
+503 U Talisman of Conviction @Pauline Voss
+504 U Talisman of Creativity @Elizabeth Peiró
+505 U Talisman of Dominance @Piotr Foksowicz
+506 U Talisman of Hierarchy @David Szabo
+507 U Talisman of Indulgence @Bartek Fedyczak
+508 U Talisman of Progress @Racrufi
+509 U Thought Vessel @Leesha Hannigan
+510 R Unwinding Clock @Miklós Ligeti
+511 C Wayfarer's Bauble @David Álvarez
+512 R Academy Ruins @Anthony Devine
+513 U Arcane Sanctum @Bastien Grivet
+514 R Battlefield Forge @Dofresh
+515 R Canopy Vista @John Thacker
+516 R Canyon Slough @Rémi Jacquot
+517 R Choked Estuary @Jessica Rossier
+518 R Clifftop Retreat @David Frasheski
+519 R Coastal Peak @Randy Gallegos
+520 R Command Beacon @Lazare Gvimradze
+521 C Command Tower @Arthur Yuan
+522 C Contaminated Landscape @Enora Mercier
+523 R Desolate Lighthouse @Jessica Rossier
+524 R Dragonskull Summit @Nadia Hurianova
+525 R Drowned Catacomb @Lordigan
+526 R Eclipsed Steppe @Bastien Grivet
+527 C Evolving Wilds @Hector Ortiz
+528 R Exotic Orchard @Leon Tukker
+529 R Fabled Passage @Arthur Yuan
+530 R Fetid Pools @Bastien Grivet
+531 R Foreboding Ruins @Dofresh
+532 R Fortified Village @Nadia Hurianova
+533 R Frostboil Snarl @Shahab Alizadeh
+534 R Furycalm Snarl @Bastien Grivet
+535 R Glacial Fortress @Nadia Hurianova
+536 R Glittering Massif @Rutger van de Steeg
+537 R Hinterland Harbor @Runa I. Rosenberger
+538 R Irrigated Farmland @Jonas De Ro
+539 R Isolated Chapel @Arthur Yuan
+540 R Morphic Pool @Pierre Loyvet
+541 R Mosswort Bridge @Joan Piqué Llorens
+542 R Mutavault @Pace Wilder ${"flavorName": "Galactic Menagerie"}
+543 U Mystic Monastery @Enora Mercier
+544 U Nomad Outpost @Jessica Rossier
+545 C Path of Ancestry @Arthur Yuan
+546 C Perilous Landscape @Flavio Greco Paglia
+547 R Port Town @Edouard
+548 R Prairie Stream @Carlos Dattoli
+549 R Radiant Summit @Pablo Mendoza
+550 R Rain-Slicked Copse @Randy Gallegos
+551 U Reliquary Tower @William Phifer
+552 U Rogue's Passage @John Thacker
+553 R Scattered Groves @Racrufi
+554 R Scorched Geyser @David Frasheski
+555 R Sea of Clouds @Bruce Brenneise
+556 U Seaside Citadel @Paolo Puggioni
+557 C Shattered Landscape @Rémi Jacquot
+558 R Shineshadow Snarl @Raymond Swanland
+559 R Skycloud Expanse @Arthur Yuan
+560 R Smoldering Marsh @Enora Mercier
+561 R Sodden Verdure @John Thacker
+562 R Spire of Industry @Florent Lebrun
+563 R Sulfur Falls @Henry Wong
+564 R Sunken Hollow @Nadia Hurianova
+565 R Sunpetal Grove @Harkalé Linaï
+566 R Temple of Enlightenment @David Álvarez
+567 R Temple of Malice @John Di Giovanni
+568 R Temple of Mystery @Rutger van de Steeg
+569 R Temple of Plenty @Pace Wilder
+570 U Temple of the False God @Raphael Lacoste
+571 C Terramorphic Expanse @Tomáš Honz
+572 R Training Center @Arthur Yuan
+573 C Tranquil Landscape @Enora Mercier
+574 R Umbral Expanse @Raymond Bonilla
+575 R Underground River @Piotr Dura
+576 R Vault of Champions @Pavel Kolomeyets
+577 R Vineglimmer Snarl @Andrey Kuzinskiy
 579 C Refute @Mark Spears
 580 C Last Gasp @Arthur Haas
 582 C Run Amok @Carlos C Diaz
+
+[tokens]
+2 w_1_1_tribble_noblock @Kevin Glint
+3 g_3_3_ape @Brooklyn Smith
+4 g_3_3_beast @Arthur Yuan
+5 g_1_1_insect @Kevin Glint
+6 gw_1_1_citizen @Charles Chaisson
+7 c_4_3_a_spacecraft_illusion_flying @Enora Mercier
+9 w_1_1_tribble_noblock @Kevin Glint
+10 g_3_3_ape @Brooklyn Smith
+11 g_3_3_beast @Arthur Yuan
+12 g_1_1_insect @Kevin Glint
+13 gw_1_1_citizen @Charles Chaisson
+14 c_4_3_a_spacecraft_illusion_flying @Enora Mercier
+
+[other]
+1 copy @Nicky Barkla
+8 copy @Nicky Barkla

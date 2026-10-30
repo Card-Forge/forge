@@ -72,7 +72,7 @@ public class CostTap extends CostPart {
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         Card hostCard = ability.getHostCard();
-        if (hostCard.tap(true, ability, payer)) {
+        if (hostCard.tap(ability, payer)) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardCollection(hostCard));
             payer.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);

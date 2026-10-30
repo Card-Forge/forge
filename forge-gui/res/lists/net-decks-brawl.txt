@@ -5,7 +5,6 @@ Card Preview | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/de
 Commander Clash | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commanderclash-brawl.zip
 Commander VS | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandervs-brawl.zip
 Current Brawl Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentbrawlmetagame.zip
-Current Historic Brawl Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenthistoricbrawlmetagame.zip
 Dear Azami | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dearazami-brawl.zip
 EDHREC Columns | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/edhrec-brawl.zip
 Feature Article | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/feature-brawl.zip

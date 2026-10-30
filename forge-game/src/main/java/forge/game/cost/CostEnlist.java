@@ -74,7 +74,7 @@ public class CostEnlist extends CostPartWithTrigger {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        if (targetCard.tap(true, ability, payer)) {
+        if (targetCard.tap(ability, payer)) {
             ability.getHostCard().setEnlistedThisCombat(true);
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardCollection(targetCard));

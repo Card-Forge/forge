@@ -27,6 +27,7 @@ import forge.util.FileUtil;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -202,6 +203,69 @@ public class Config {
         return Lang;
     }
 
+    public boolean isExtraBattleBackgroundsEnabled() {
+        Boolean enabled = settingsData.extraBattleBackgroundsByPlane == null ? null
+                : settingsData.extraBattleBackgroundsByPlane.get(plane);
+        if (enabled != null) {
+            return enabled;
+        }
+        if (settingsData.enableExtraBattleBackgrounds != null) {
+            return settingsData.enableExtraBattleBackgrounds;
+        }
+        return !GuiBase.isMobile() && configData.enableExtraBattleBackgroundsByDefault;
+    }
+
+    public void setExtraBattleBackgroundsEnabled(boolean enabled) {
+        if (settingsData.extraBattleBackgroundsByPlane == null) {
+            settingsData.extraBattleBackgroundsByPlane = new HashMap<>();
+        }
+        settingsData.extraBattleBackgroundsByPlane.put(plane, enabled);
+    }
+
+    public String getCachePrefix() {
+        String safePlane = getPlane().replaceAll("[^A-Za-z0-9._-]", "_");
+        String planeKey = safePlane + "-" + UUID.nameUUIDFromBytes(
+                plane.getBytes(StandardCharsets.UTF_8));
+        String source = getBattleBackgroundSource();
+        String sourceKey = source == null ? "plane-default" : source;
+        return ForgeConstants.CACHE_DIR + "adventure" + ForgeConstants.PATH_SEPARATOR
+                + planeKey + ForgeConstants.PATH_SEPARATOR
+                + UUID.nameUUIDFromBytes(sourceKey.getBytes(StandardCharsets.UTF_8))
+                + ForgeConstants.PATH_SEPARATOR;
+    }
+
+    public String getBattleBackgroundSource() {
+        if (!isUsingCustomBattleBackgroundSource()) {
+            return null;
+        }
+        String source = getCustomBattleBackgroundSource();
+        return source == null ? "" : source;
+    }
+
+    public String getCustomBattleBackgroundSource() {
+        return settingsData.battleBackgroundSources == null ? null
+                : settingsData.battleBackgroundSources.get(plane);
+    }
+
+    public void setBattleBackgroundSource(String source) {
+        if (settingsData.battleBackgroundSources == null) {
+            settingsData.battleBackgroundSources = new HashMap<>();
+        }
+        settingsData.battleBackgroundSources.put(plane, source == null ? "" : source.trim());
+    }
+
+    public boolean isUsingCustomBattleBackgroundSource() {
+        return settingsData.useCustomBattleBackgroundSources != null
+                && Boolean.TRUE.equals(settingsData.useCustomBattleBackgroundSources.get(plane));
+    }
+
+    public void setUseCustomBattleBackgroundSource(boolean useCustomSource) {
+        if (settingsData.useCustomBattleBackgroundSources == null) {
+            settingsData.useCustomBattleBackgroundSources = new HashMap<>();
+        }
+        settingsData.useCustomBattleBackgroundSources.put(plane, useCustomSource);
+    }
+
     public String getFilePath(String path) {
         return prefix + path;
     }
@@ -253,9 +317,10 @@ public class Config {
         System.out.print("Looking for resource " + path + "... ");
         String fullPath = (prefix + path).replace("//", "/");
         String langFile = langFilePath(fullPath, prefix);
+        boolean isUI = path.startsWith("ui/");
 
         for (int iter = 1; iter <= 2; iter++) {
-            if (Files.exists(Paths.get(langFile))) {
+            if (!isUI && Files.exists(Paths.get(langFile))) {
                 System.out.println("Found!");
                 Cache.put(path, new FileHandle(langFile));
                 break;

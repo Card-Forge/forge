@@ -1,0 +1,189 @@
+package forge.ai;
+
+import forge.ai.simulation.SimulationTest;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
+import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.gamesimulationtests.util.PlayerControllerForTests;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
+/**
+ * Auto payment should not tap every untapped source of one colour when the same cost can be paid
+ * while leaving at least one source of each colour untapped. The number of sources used never changes.
+ * A test payment counts a mana ability that sacrifices another permanent once for each permanent it can sacrifice.
+ */
+public class ComputerUtilManaTest extends SimulationTest {
+
+    /**
+     * Pays the cost in test mode with the given basic lands and returns how many of each land
+     * name stay untapped. Land specs look like "Swamp:4".
+     */
+    private Map<String, Integer> payAndCountUntapped(final String cost, final int expectedTapped, final String... landSpecs) {
+        return payAndCountUntapped(cost, expectedTapped, new String[0], landSpecs);
+    }
+
+    private Map<String, Integer> payAndCountUntapped(final String cost, final int expectedTapped, final String[] hand, final String... landSpecs) {
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        final Map<String, Integer> untapped = new HashMap<>();
+        for (final String spec : landSpecs) {
+            final String[] parts = spec.split(":");
+            final int count = Integer.parseInt(parts[1]);
+            for (int i = 0; i < count; i++) {
+                // creatures that make mana must be able to tap right away
+                addCard(parts[0], p).setSickness(false);
+            }
+            untapped.put(parts[0], count);
+        }
+
+        for (final String name : hand) {
+            addCardToZone(name, p, ZoneType.Hand);
+        }
+
+        // any spell will do as the host, only the cost matters
+        final Card host = addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        final SpellAbility sa = host.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        final ManaCostBeingPaid toPay = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(cost)));
+        final CardCollection used = ComputerUtilMana.getManaSourcesToPayCost(toPay, sa, p, false);
+        assertNotNull(used, "cost " + cost + " should be payable");
+        assertEquals(used.size(), expectedTapped, "number of sources tapped for " + cost);
+
+        for (final Card c : used) {
+            untapped.merge(c.getName(), -1, Integer::sum);
+        }
+        return untapped;
+    }
+
+    private static void assertLeft(final Map<String, Integer> untapped, final String... lands) {
+        for (final String land : lands) {
+            assertTrue(untapped.get(land) >= 1, "expected at least one untapped " + land + ", got " + untapped);
+        }
+    }
+
+    @Test
+    public void genericPartKeepsBothColoursAvailable() {
+        // {3}{B} with 4 Swamp + 2 Island: 3 Swamp + 1 Island leaves one of each
+        assertLeft(payAndCountUntapped("3 B", 4, "Swamp:4", "Island:2"), "Swamp", "Island");
+    }
+
+    @Test
+    public void genericPartPrefersTheOtherColour() {
+        // {1}{B} with 2 Swamp + 4 Island: must not use both Swamps
+        assertLeft(payAndCountUntapped("1 B", 2, "Swamp:2", "Island:4"), "Swamp", "Island");
+    }
+
+    @Test
+    public void hybridShardLeavesBothColoursAvailable() {
+        // {U/B} with 1 Swamp + 2 Island: pay with an Island so the Swamp stays
+        assertLeft(payAndCountUntapped("U/B", 1, "Swamp:1", "Island:2"), "Swamp", "Island");
+    }
+
+    @Test
+    public void coloredShardDoesNotDrainItsColour() {
+        // {3}{W} with 2 Plains + 4 Island: only one Plains is needed
+        assertLeft(payAndCountUntapped("3 W", 4, "Plains:2", "Island:4"), "Plains", "Island");
+    }
+
+    @Test
+    public void threeColoursAreAllKept() {
+        // {2}{R} with 2 of each of three types: one Mountain for R, the generic from Forest and Plains
+        assertLeft(payAndCountUntapped("2 R", 3, "Mountain:2", "Forest:2", "Plains:2"), "Mountain", "Forest", "Plains");
+    }
+
+    @Test
+    public void multiColourSourcesKeepWhatTheHandNeeds() {
+        // {X}{G}{G} with X=2: Vigorbloom Charm {G}{W} is in hand, so a Plains and a green source must stay
+        final Map<String, Integer> untapped = payAndCountUntapped("2 G G", 4, new String[] { "Vigorbloom Charm" },
+                "Plains:2", "Forest:1", "Formidable Commons:2", "Greenhouse Propagator:1");
+        assertLeft(untapped, "Plains");
+        assertTrue(untapped.get("Forest") + untapped.get("Formidable Commons") + untapped.get("Greenhouse Propagator") >= 1,
+                "expected a green source to stay untapped, got " + untapped);
+    }
+
+    @Test
+    public void unavoidableDrainStillPaysWithSameNumberOfLands() {
+        // {2}{B} with 2 Swamp + 2 Island taps 3 of 4 lands, so one colour is gone either way
+        final Map<String, Integer> untapped = payAndCountUntapped("2 B", 3, "Swamp:2", "Island:2");
+        assertEquals(untapped.get("Swamp") + untapped.get("Island"), 1);
+    }
+
+    /** A player with these permanents and this many 2/2 tokens, in their own main phase. */
+    private Player sacrificeBoard(final int tokens, final String... permanents) {
+        Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        for (final String name : permanents) {
+            addCard(name, p);
+        }
+        addTokens("b_2_2_zombie", tokens, p);
+        return p;
+    }
+
+    private boolean canPay(final Player p, final String spell) {
+        final SpellAbility sa = addCardToZone(spell, p, ZoneType.Hand).getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        return ComputerUtilMana.canPayManaCost(sa, p, 0, false);
+    }
+
+    @Test
+    public void sacrificeSourceIsUsedOncePerFodder() {
+        // Phyrexian Altar with three tokens pays for a three-drop on its own, but not for a four-drop
+        final Player p = sacrificeBoard(3, "Phyrexian Altar");
+        assertTrue(canPay(p, "Centaur Courser"), "{2}{G} with three tokens to sacrifice");
+        assertFalse(canPay(p, "Hill Giant"), "{3}{R} needs a fourth token");
+    }
+
+    @Test
+    public void sacrificeSourceNeedsFodderForEachUse() {
+        assertFalse(canPay(sacrificeBoard(2, "Phyrexian Altar"), "Centaur Courser"), "{2}{G} needs a third token");
+    }
+
+    @Test
+    public void sacrificeSourceMakingTwoManaIsUsedOncePerFodder() {
+        // Ashnod's Altar makes {C}{C} per token
+        final Player p = sacrificeBoard(2, "Ashnod's Altar");
+        assertTrue(canPay(p, "Juggernaut"), "{4} with two tokens to sacrifice");
+        assertFalse(canPay(p, "Gilded Lotus"), "{5} needs a third token");
+    }
+
+    @Test
+    public void selfSacrificeSourceIsNotAlsoFodder() {
+        // Blood Pet makes mana by sacrificing itself, so it can't also be sacrificed to Phyrexian Altar
+        final Player p = sacrificeBoard(2, "Phyrexian Altar", "Blood Pet");
+        assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
+        assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
+    }
+
+    @Test
+    public void humanScannedByAiCountsSacrificeMana() {
+        final Player p = sacrificeBoard(2, "Phyrexian Altar", "Blood Pet");
+        p.dangerouslySetController(new PlayerControllerForTests(p.getGame(), p, p.getLobbyPlayer()));
+        assertFalse(canPay(p, "Hill Giant"), "without an AI controller the Altar is used once");
+
+        // the available actions scan runs a human's payment under a temporary AI controller
+        p.runWithController(() -> {
+            assertFalse(p.isAI());
+            assertTrue(canPay(p, "Centaur Courser"), "{2}{G} from two tokens and Blood Pet");
+            assertFalse(canPay(p, "Hill Giant"), "{3}{R} would count Blood Pet twice");
+        }, new PlayerControllerAi(p.getGame(), p, p.getLobbyPlayer()));
+    }
+}

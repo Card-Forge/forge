@@ -23,7 +23,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 
 import forge.card.CardEdition;
@@ -643,7 +642,7 @@ public class QuestController {
     }
 
     public List<CardEdition> getAvailableLandSets() {
-        List<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
+        Collection<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : FModel.getMagicDb().getEditions().getItemNames();
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
         return availableEditionCodes.stream()
                 .map(editions::get)

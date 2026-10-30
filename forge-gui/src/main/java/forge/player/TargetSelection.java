@@ -31,6 +31,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.input.InputSelectStackItems;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -98,6 +99,10 @@ public class TargetSelection {
         if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
+            if (controller.getGui().canPickStackTargets()) {
+                // stack items can be picked by tapping them in the stack view, like any other target
+                return chooseStackItemsInView(mandatory, numTargets);
+            }
             return chooseCardFromStack(mandatory, numTargets);
         }
 
@@ -172,7 +177,7 @@ public class TargetSelection {
             }
             return ability.getTargets().add(validTargets.get(0));
         }
-        if (!zones.contains(ZoneType.Stack)) {
+        if (!zones.contains(ZoneType.Stack) || controller.getGui().canPickStackTargets()) {
             InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, numTargets, divisionValues, filter, mustTargetFiltered);
             inp.showAndWait();
             choiceResult = !inp.hasCancelled();
@@ -263,10 +268,11 @@ public class TargetSelection {
         }
 
         if (chosen instanceof CardView) {
-            if (!gameCacheChooseCard.containsKey(chosen)) {
+            final Card chosenCard = gameCacheChooseCard.get(chosen);
+            if (chosenCard == null) {
                 return false;
             }
-            if (((CardView) chosen).getZone().equals(ZoneType.Stack)) {
+            if (chosenCard.isInZone(ZoneType.Stack)) {
                 for (final SpellAbilityStackInstance si : game.getStack()) {
                     SpellAbility abilityOnStack = si.getSpellAbility();
                     // make sure we're not accidentally finding a cast trigger of this card first
@@ -279,9 +285,50 @@ public class TargetSelection {
                     }
                 }
             } else {
-                ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
+                ability.getTargets().add(chosenCard);
             }
         }
+        return true;
+    }
+
+    /**
+     * Targets items on the stack (spells, triggered and activated abilities) by tapping them in the stack view.
+     * Items are picked by stack instance, so abilities that share a source card are told apart.
+     */
+    private boolean chooseStackItemsInView(final boolean mandatory, final Integer numTargets) {
+        final Game game = ability.getActivatingPlayer().getGame();
+        final List<SpellAbilityStackInstance> choices = new ArrayList<>();
+
+        for (final SpellAbilityStackInstance si : game.getStack()) {
+            final SpellAbility onStack = si.getSpellAbility();
+            if (ability.canTargetSpellAbility(onStack) && !ability.getTargets().contains(onStack)) {
+                choices.add(si);
+            }
+        }
+
+        final int chosenSoFar = ability.getTargets().size();
+        final int wantMin = numTargets != null ? numTargets : ability.getMinTargets();
+        final int wantMax = numTargets != null ? numTargets : ability.getMaxTargets();
+        final int max = Math.min(wantMax - chosenSoFar, choices.size());
+        final int min = Math.min(Math.max(0, wantMin - chosenSoFar), max);
+
+        if (max <= 0) {
+            bTargetingDone = true;
+            return ability.isMinTargetChosen(); // nothing left to pick: fine only if enough are chosen
+        }
+
+        final InputSelectStackItems inp = new InputSelectStackItems(controller, min, max, choices, ability);
+        inp.setMessage(TextUtil.fastReplace(getTgt().getVTSelection(), "CARDNAME", ability.getHostCard().toString()));
+        inp.setCancelAllowed(!mandatory);
+        inp.showAndWait();
+
+        if (inp.hasCancelled()) {
+            return false;
+        }
+        for (final SpellAbilityStackInstance si : inp.getSelected()) {
+            ability.getTargets().add(si.getSpellAbility());
+        }
+        bTargetingDone = true;
         return true;
     }
 

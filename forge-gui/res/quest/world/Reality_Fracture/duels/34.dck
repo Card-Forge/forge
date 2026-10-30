@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Apu Nahasapeemapetilon
+Title=Apu Nahasapeemapetilon
+Icon=Apu Nahasapeemapetilon.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/Lukas_Schwendinger_-_Mono_Red_(Standard,_#901736).dck
+Deck Type=constructed
+
+[Main]
+3 Fanatical Firebrand
+20 Mountain
+3 Soulstone Sanctuary
+4 Hired Claw
+3 Stingerquill Voxmancer
+2 Hexing Squelcher
+2 Tomik, Izzet Sparkmage
+4 Razorkin Needlehead
+1 Magebane Lizard
+3 Ojer Axonil, Deepest Might
+4 Hearthborn Battler
+3 Nova Hellkite
+4 Burst Lightning
+2 Shock
+2 Lightning Strike
+[Sideboard]
+3 Magebane Lizard
+1 Shock
+4 Sunspine Lynx
+2 Sear
+2 Soul-Guide Lantern
+3 Vengeful Tracker

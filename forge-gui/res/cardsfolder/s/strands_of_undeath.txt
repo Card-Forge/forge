@@ -1,7 +1,6 @@
 Name:Strands of Undeath
 ManaCost:3 B
 Types:Enchantment Aura
-PT:2/2
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, target player discards two cards.

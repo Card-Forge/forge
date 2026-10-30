@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,7 +25,6 @@ import forge.game.spellability.StackItemView;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.MagicStack;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollection;
@@ -178,13 +178,6 @@ public class GameView extends TrackableObject {
         this.gameLog = new GameLog();
     }
 
-    public TrackableCollection<CardView> getRevealedCollection() {
-        return get(TrackableProperty.RevealedCardsCollection);
-    }
-    public void updateRevealedCards(TrackableCollection<CardView> collection) {
-        set(TrackableProperty.RevealedCardsCollection, collection);
-    }
-
     public String getDependencies() {
         return get(TrackableProperty.Dependencies);
     }
@@ -220,9 +213,11 @@ public class GameView extends TrackableObject {
         }
 
         final CombatView combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
+        // one pass over the combat instead of a scan per band: this runs on every addAttacker
+        final Map<AttackingBand, GameEntity> defenders = combat.getDefenderByBand();
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
-            final GameEntity defender = combat.getDefenderByAttacker(b);
+            final GameEntity defender = defenders.get(b);
             final List<Card> blockers = combat.getBlockers(b);
             final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
             combatView.addAttackingBand(

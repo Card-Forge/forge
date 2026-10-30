@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Pinky and the Brain
+Title=Pinky and the Brain
+Icon=Pinky and the Brain.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Christopher_Smith_-_Mono_R_Dragons_(Standard,_#887386).dck
+Deck Type=constructed
+
+[Main]
+4 Burst Lightning
+2 Channeled Dragonfire
+1 Generous Plunderer
+4 Hired Claw
+4 Magda, the Hoardmaster
+4 Magmatic Hellkite
+4 Nova Hellkite
+4 Sarkhan, Dragon Ascendant
+4 Shock
+4 Smaug the Magnificent
+2 Sunspine Lynx
+20 Mountain
+3 Soulstone Sanctuary
+[Sideboard]
+2 Sunspine Lynx
+2 Ghost Vacuum
+3 Magebane Lizard
+2 Scorching Shot
+2 Sear
+2 Slagstorm
+2 The Legend of Roku

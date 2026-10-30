@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Predrag133_-_Abzan_Amalia_(Standard,_#894466).dck
+Deck Type=constructed
+
+[Main]
+1 Professor Dellian Fel
+1 Way of the Mentor
+1 Case of the Uneaten Feast
+2 Elspeth, Storm Slayer
+3 Erode
+4 Lunar Convocation
+4 Way of the Paradox
+4 Ajani Resolute
+1 Essence Channeler
+4 Amalia Benavides Aguirre
+4 Hinterland Sanctifier
+4 Haliya, Guided by Light
+4 Liliana the Faultless
+1 Shattered Sanctum
+1 Hushwood Verge
+1 Plains
+1 Swamp
+1 Forest
+1 Bleachbone Verge
+2 Concealed Courtyard
+3 Overgrown Tomb
+4 Godless Shrine
+4 Starting Town
+4 Temple Garden
+[Sideboard]
+1 Strategic Betrayal
+2 Ghost Vacuum
+2 Pyrrhic Strike
+2 Starscape Cleric
+2 Duress
+3 Seam Rip
+1 Requisition Raid
+2 Curious Farm Animals

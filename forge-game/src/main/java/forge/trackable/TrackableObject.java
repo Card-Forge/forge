@@ -68,9 +68,8 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return o.hashCode() == hashCode() && o.getClass().equals(getClass());
     }
 
-    // don't know if this is really needed, but don't know a better way
-    public <T> T getProps() {
-        return (T)props;
+    public Map<TrackableProperty, Object> getProps() {
+        return props;
     }
 
     @SuppressWarnings("unchecked")

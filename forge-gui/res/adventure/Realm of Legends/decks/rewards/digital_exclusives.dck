@@ -1,0 +1,657 @@
+[metadata]
+Name=Digital Exclusives
+[Main]
+1 Absorb Energy|YMID
+1 Accident-Prone Apprentice|YWOE
+1 Ace Flockbringer|YBLB
+1 Adaptive Armorer|YECL
+1 Adherent's Heirloom|YECL
+1 Advanced Floral Invocations|YSOS
+1 Agent of Raffine|YSNC
+1 A Golden Opportunity|YWOE
+1 Albiorix, Goose Tyrant|YOTJ
+1 Algorithmic Ferocity|YSOS
+1 Ambassador of Evendo|YEOE
+1 Amber-Plate Ainok|YTDM
+1 Angel of Eternal Dawn|YMID
+1 Angel of Unity|YMID
+1 Anguished Recollection|YDSK
+1 Anina, Natural Parallelist|YSOS
+1 Antique Collector|YMID
+1 Aquatic Subtlety|YECL
+1 Archaeomancer's Spade|YSOS
+1 Archival Whorl|YBLB
+1 Arek, False Goldwarden|YONE
+1 Argivian Welcome|YBRO
+1 Argothian Uprooting|YBRO
+1 Arius, Flyby Trawler|YDFT
+1 Arming Gala|YSNC
+1 Arms Scavenger|YMID
+1 Artillery Enthusiast|YNEO
+1 Arvad, Weatherlight Smuggler|YDMU
+1 Assemble from Parts|YMID
+1 Assemble the Team|YBRO
+1 Audacious Knuckleblade|YTDM
+1 Awestruck Cygnet|YBLB
+1 Axavar, Fate Thief|YEOE
+1 Back-Alley Gardener|YSNC
+1 Bail Out|YDFT
+1 Bank Job|YSNC
+1 Begin Anew|YMID
+1 Bellowsbreath Ogre|YNEO
+1 Benalish Knight-Counselor|YDMU
+1 Better Offer|YNEO
+1 Big Spender|YSNC
+1 Bind to Secrecy|YSNC
+1 Bladehold Cleaver|YONE
+1 Blighted Nightmare|YECL
+1 Blightwing Whelp|YONE
+1 Blood Age Muster|YSOS
+1 Bloodrage Alpha|YMID
+1 Bloodsprout Talisman|YDMU
+1 Blooming Cactusfolk|YOTJ
+1 Boseiju Pathlighter|YNEO
+1 Bramblearmor Brawler|YBLB
+1 Brave Meadowguard|YBLB
+1 Brazen Boarding|YLCI
+1 Break Expectations|YMID
+1 Brittle Blast|YMID
+1 Brokers' Safeguard|YSNC
+1 Brood Astronomer|YEOE
+1 Buxton, Decorated Host|YBLB
+1 By Elspeth's Command|YBRO
+1 Cabaretti Revels|YSNC
+1 Cackling Observer|YMKM
+1 Caldera Breaker|YLCI
+1 Call the Crash|YTDM
+1 Candela, Aegis of Adagia|YEOE
+1 Cantor of the Refrain|YEOE
+1 Captain Eberhart|YMID
+1 Captivating Crossroads|YWOE
+1 Case of the Market Melee|YMKM
+1 Cathartic Operation|YOTJ
+1 Celestial Vault|YSNC
+1 Cerise, Slayer of Fear|YWOE
+1 Charged Conjuration|YBLB
+1 Chitinous Crawler|YLCI
+1 Chittering Illuminator|YDSK
+1 Chittering Skullspeaker|YBLB
+1 Choice of Fortunes|YSNC
+1 Chomping Mastasaur|YDFT
+1 Chronicler of Worship|YNEO
+1 Cindercone Smite|YBLB
+1 Circadian Struggle|YECL
+1 Citystalker Connoisseur|YMID
+1 Clone Crafter|YMID
+1 Cloudsculpt Armorer|YEOE
+1 Coalition Construct|YDMU
+1 Cogwork Progenitor|YLCI
+1 Colossal Chorus|YLCI
+1 Concert Kaboomist|YMKM
+1 Conductive Current|YMID
+1 Construction Arsonist|YMKM
+1 Consumed by History|YSOS
+1 Consuming Oni|YNEO
+1 Contagion Dispenser|YONE
+1 Corpseweaver Prodigy|YSOS
+1 Cosmic Sovereign|YEOE
+1 Cottontail Caretaker|YBLB
+1 Craterous Stomp|YECL
+1 Crescendo Conductor|YSOS
+1 Crucias, Titan of the Waves|YBRO
+1 Crude Abattoir|YDSK
+1 Cunning Azurescale|YTDM
+1 Current Curriculum|YECL
+1 Cursebound Witch|YMID
+1 Dalkovan Outrider|YTDM
+1 Darigaaz, Shivan Champion|YDMU
+1 Darigaaz's Whelp|YDMU
+1 Darkstar Banisher|YBLB
+1 Darksteel Hydra|YONE
+1 Dazzling Flameweaver|YBLB
+1 Dedicated Dollmaker|YWOE
+1 Desert Cenote|YTDM
+1 Deviant Skytech|YDFT
+1 Diminished Returner|YDMU
+1 Discover the Formula|YMID
+1 Distracted Botanist|YSOS
+1 Divine Purge|YMID
+1 Diviner of Fates|YSNC
+1 Draconic Debut|YWOE
+1 Draconic Fealty|YTDM
+1 Dragonblood Twins|YTDM
+1 Dragonfly Pilot|YNEO
+1 Dragonsoul Prodigy|YTDM
+1 Dragon Typhoon|YTDM
+1 Dragonweave Tapestry|YTDM
+1 Drix Interlacer|YEOE
+1 Drover of the Swine|YWOE
+1 Dunbarrow Revivalist|YWOE
+1 Dusk's Landing|YLCI
+1 Eager Flameguide|YDSK
+1 Echoing Cavern|YECL
+1 Effie, Fast Learner|YDSK
+1 Effluence Devourer|YSNC
+1 Electrostatic Blast|YMID
+1 Elvish Elegy|YECL
+1 Emmara, Voice of the Conclave|YMKM
+1 Emperor Apatzec Intli IV|YOTJ
+1 Emporium Thopterist|YMKM
+1 Enduring Friendship|YDSK
+1 Ethereal Escort|YMID
+1 Ethrimik, Imagined Fiend|YDSK
+1 Eumidian Lifeseed|YEOE
+1 Excogitator Sphinx|YMKM
+1 Expansive Reapplication|YSOS
+1 Expedition Supplier|YMID
+1 Experimental Pilot|YNEO
+1 Faithful Disciple|YMID
+1 Fallaji Antiquarian|YBRO
+1 Fear of Change|YDSK
+1 Fear of Ridicule|YDSK
+1 Fearsome Whelp|YMID
+1 Feed the Bog|YSOS
+1 First Little Pig|YWOE
+1 Forceful Cultivator|YNEO
+1 Forgeborn Phoenix|YNEO
+1 Forgefire Automaton|YBRO
+1 Forsaken Crossroads|YMID
+1 Foundry Beetle|YNEO
+1 Foundry Groundbreaker|YBRO
+1 Fountainport Charmer|YBLB
+1 Fragment Reality|YNEO
+1 Frenzied Geistblaster|YMID
+1 Fuel Tank Feaster|YDFT
+1 Furgul, Quag Nurturer|YMKM
+1 Futurist Spellthief|YNEO
+1 Galathul Galecaller|YSOS
+1 Garruk, Wrath of the Wilds|YMID
+1 Geistchanneler|YMID
+1 Geist of Regret|YMID
+1 Geistpack Alpha|YMID
+1 Ghalma the Shaper|YONE
+1 Ghitu Embercoiler|YDMU
+1 Giant Regrowth|YSNC
+1 Gilded Ambusher|YDSK
+1 Gilt-Leaf Alchemist|YECL
+1 Gitrog, Horror of Zhava|YMID
+1 Gixian Recycler|YBRO
+1 Glimmer Hoarder|YDSK
+1 Glistening Extractor|YONE
+1 Glorifying Verse|YSOS
+1 Goblin Crash Pilot|YDFT
+1 Goblin Influx Array|YDMU
+1 Goblin Morale Sergeant|YDMU
+1 Golden Sidekick|YDSK
+1 Grave Expectations|YOTJ
+1 Graven Archfiend|YSNC
+1 Grave Studies|YSOS
+1 Gravitic Herald|YEOE
+1 Great Desert Hellion|YBRO
+1 Great Fang Chroniclers|YDFT
+1 Grenzo, Crooked Jailer|YOTJ
+1 Grizzled Huntmaster|YMID
+1 Grow Old Together|YWOE
+1 Guildpact Greenwalker|YMKM
+1 Gutmorn, Pactbound Servant|YMID
+1 Gyox, Brutal Carnivora|YONE
+1 Hamza, Might of the Yathan|YTDM
+1 Hangarback Assembler|YDFT
+1 Hardened Bonds|YTDM
+1 Harrowing Swarm|YDSK
+1 Head of the Class|YSOS
+1 Heir to Dragonfire|YWOE
+1 Herald of Vengeance|YSNC
+1 Herald's Reveille|YLCI
+1 Hexgold Sledge|YONE
+1 Hex, Kellan's Companion|YWOE
+1 High Fae Prankster|YWOE
+1 High Marshal Arguel|YLCI
+1 Highway Reaver|YDFT
+1 Hinterland Chef|YMID
+1 Hollowhenge Wrangler|YMID
+1 Holographic Double|YNEO
+1 Honor the Past|YSOS
+1 Housemeld|YDSK
+1 Hurkyl's Prodigy|YBRO
+1 Hydroponics Architect|YEOE
+1 Hymn to the Ages|YLCI
+1 Ichor Aberration|YONE
+1 Illuminating Lash|YTDM
+1 Imperial Blademaster|YNEO
+1 Impetuous Lootmonger|YOTJ
+1 Impose Hierarchy|YSOS
+1 Improvising Aerialist|YDSK
+1 Inchblade Companion|YNEO
+1 Indris, the Hydrostatic Surge|YBLB
+1 Infestation|YECL
+1 Innovative Metatect|YONE
+1 Inquisitor Captain|YMID
+1 Inspiring Easel|YSOS
+1 Interdisciplinary Studies|YSOS
+1 Intruder's Inquisition|YOTJ
+1 Ishkanah, Broodmother|YMID
+1 Izzet Polarizer|YMKM
+1 Jarsyl, Dark Age Scion|YBRO
+1 Jessie Zane, Fangbringer|YOTJ
+1 Jewel Mine Overseer|YWOE
+1 Juggernaut Peddler|YDMU
+1 Juggle the Performance|YMKM
+1 Jukai Liberator|YNEO
+1 Junkyard Scrapper|YNEO
+1 Kamachal, Ship's Mascot|YLCI
+1 Kami of Bamboo Groves|YNEO
+1 Kami of Mourning|YNEO
+1 Kami of Transmutation|YNEO
+1 Kari Zev, Crew of Two|YDFT
+1 Kavaron Consumed|YEOE
+1 Kayla's Kindling|YBRO
+1 Kemba's Outfitter|YONE
+1 Key to the Archive|YMID
+1 Kindred Denial|YMID
+1 Kithkin Brinefarer|YECL
+1 Lam, Storm Crane Elder|YTDM
+1 Landlore Navigator|YLCI
+1 Leaf-Leap Guide|YBLB
+1 Legion of Clay|YBRO
+1 Legion Reconsecrator|YLCI
+1 Legion's Chant|YLCI
+1 Limitless Rekindling|YECL
+1 Loch Larent|YWOE
+1 Lonely End|YBRO
+1 Loose in the Park|YSNC
+1 Lupine Harbingers|YMID
+1 Lurker in the Deep|YDSK
+1 Lurking Spinecrawler|YMKM
+1 Machinist's Dismissal|YEOE
+1 Magmatic Scorchwing|YONE
+1 Mangled Soulrager|YDSK
+1 Mapping the Maze|YMKM
+1 March Toward Perfection|YONE
+1 Mardu Thunderkite|YTDM
+1 Marshland Hordemaster|YBLB
+1 Marwyn's Kindred|YDMU
+1 Masterpiece Vault|YDFT
+1 Melt Through|YBRO
+1 Menagerie Curator|YSNC
+1 Mephidross Slime|YONE
+1 Merfolk Tunnel-Guide|YLCI
+1 Mine Security|YEOE
+1 Mischievous Lookout|YDSK
+1 Mitotic Ultimus|YDFT
+1 Molten Impact|YNEO
+1 Monoist Gravliner|YEOE
+1 Mothlight Processionist|YDSK
+1 Mothrider Cavalry|YNEO
+1 Motivated Muralist|YDFT
+1 Mutable Pupa|YEOE
+1 Mycelic Ballad|YLCI
+1 Mycoid Resurrection|YLCI
+1 Mythweaver Poq|YLCI
+1 Naktamun Shines Again|YDFT
+1 Nantuko Slicer|YDMU
+1 Nashi, Illusion Gadgeteer|YOTJ
+1 Nettling Host|YONE
+1 Network Marauder|YEOE
+1 Niambi, Beloved Protector|YDMU
+1 Nightclub Bouncer|YSNC
+1 Norn's Disassembly|YBRO
+1 Norn's Fetchling|YONE
+1 Oasis of Renewal|YTDM
+1 Obscura Polymorphist|YSNC
+1 Obsessive Collector|YMID
+1 Oglor, Devoted Assistant|YMID
+1 Ominous Lockbox|YMKM
+1 Ominous Traveler|YMID
+1 Opulent Clomper|YECL
+1 Oracle of the Alpha|YDMU
+1 Ornate Imitations|YDFT
+1 Oura, the Imitator|YECL
+1 Outfitted Jouster|YWOE
+1 Painful Bond|YNEO
+1 Pampered Loamfrill|YTDM
+1 Paradigm Shifter|YSOS
+1 Pass the Torch|YSNC
+1 Patchplate Resolute|YBRO
+1 Paths of Tuinvale|YWOE
+1 Patient Zero|YMID
+1 Pearl Lake Warden|YTDM
+1 Penregon Besieged|YBRO
+1 Pep, Raucous Raider|YECL
+1 Perennial Gravewarden|YECL
+1 Perilous Iteration|YBRO
+1 Phantasmal Extraction|YLCI
+1 Phoenix of Iteration|YSOS
+1 Phyresis Roach|YONE
+1 Phyrexian Harvester|YONE
+1 Phyrexian Scrapyard|YONE
+1 Piece It Together|YBRO
+1 Pirate's Landing|YLCI
+1 Plunderer's Prize|YLCI
+1 Polterheist|YDSK
+1 Pool Resources|YBLB
+1 Porcine Portent|YWOE
+1 Prairie Survivalist|YOTJ
+1 Predatory Sludge|YMID
+1 Preponderant Pearl|YECL
+1 Priest of Possibility|YDMU
+1 Propagator Primordium|YLCI
+1 Protean War Engine|YDMU
+1 Prototype X-8|YEOE
+1 Providence of Night|YECL
+1 Pull of the Mist Moon|YDMU
+1 Puppet Raiser|YMID
+1 Putrefying Rotboar|YBLB
+1 Putrid Hexhag|YECL
+1 Quickbeast Amulet|YDFT
+1 Quicksilver Lapidary|YONE
+1 Quicksilver Servitor|YONE
+1 Racketeer Boss|YSNC
+1 Raddic, Tal Zealot|YBRO
+1 Radiant Smite|YLCI
+1 Rahilda, Wanted Cutthroat|YMID
+1 Rampaging Ursaguana|YMKM
+1 Rankle, Pitiless Trickster|YOTJ
+1 Ravenous Pursuit|YMID
+1 Razor Demon|YDSK
+1 Recruit Instructor|YBLB
+1 Reezug, the Bonecobbler|YDMU
+1 Reflection Net|YLCI
+1 Reflective Rimekin|YECL
+1 Relics of the Rubblebelt|YMKM
+1 Replicating Terror|YDSK
+1 Resolute Rejection|YOTJ
+1 Resourceful Collector|YBLB
+1 Ribald Shanty|YLCI
+1 Richlau, Headmaster|YBRO
+1 Rimewall Protector|YMID
+1 Rising Chicane|YDFT
+1 Riveteers Provocateur|YSNC
+1 Roalesk, Prime Specimen|YMKM
+1 Rope Line Attendant|YSNC
+1 Rothga, Bonded Engulfer|YONE
+1 Routeway Moose|YDFT
+1 Runaway Growth|YNEO
+1 Runeblade Raiser|YTDM
+1 Runecarved Obelisk|YOTJ
+1 Rusko, Clockmaker|YBRO
+1 Saiba Syphoner|YNEO
+1 Saint Elenda|YOTJ
+1 Salacinder and Soot, Rascals|YECL
+1 Sala, Deck Boss|YDFT
+1 Sandcloud Harbinger|YBLB
+1 Sanguine Brushstroke|YMID
+1 Sanguine Soothsayer|YBLB
+1 Sap Vitality|YMID
+1 Scalar Scholar|YSOS
+1 Scalesoul Gnome|YLCI
+1 Scalespeaker Shepherd|YLCI
+1 Scintillating Encore|YSOS
+1 Scour the Scene|YMKM
+1 Scrutiny of the Guildpact|YMKM
+1 Second Little Pig|YWOE
+1 Seething Skitter-Priest|YONE
+1 Semblance Scanner|YNEO
+1 Settle the Wilds|YMID
+1 Shattering Finale|YSNC
+1 Shellfish Scholar|YBLB
+1 Sheoldred's Assimilator|YONE
+1 Shove Aside|YMKM
+1 Sibsig's Artisan|YTDM
+1 Sigardian Evangel|YMID
+1 Silent Extraction|YOTJ
+1 Sinister Reflections|YMID
+1 Skullpiercer Gnat|YONE
+1 Skyline Savior|YSNC
+1 Skywriter Djinn|YDMU
+1 Slayer's Bounty|YMID
+1 Sleuth Instructor|YMKM
+1 Slimefoot, Thallid Transplant|YDMU
+1 Sliver Weftwinder|YEOE
+1 Smogbelcher Chariot|YDMU
+1 Smog Smasher|YDFT
+1 Snarlfang Vermin|YMKM
+1 Solitary Defiance|YOTJ
+1 Solitary Study|YDSK
+1 Song of Point Prime|YEOE
+1 Song of Seasons|YTDM
+1 Soovril, Patient Antiquarian|YSOS
+1 Soul Servitude|YNEO
+1 Soul Shredder|YDSK
+1 Soulstealer Axe|YMID
+1 Spara's Bodyguard|YSNC
+1 Spawning Pod|YONE
+1 Spectacle of Destruction|YDFT
+1 Speedbrood Stalker|YDFT
+1 Spellchain Scatter|YDMU
+1 Spelldrain Assassin|YSNC
+1 Spirited Simulacrum|YEOE
+1 Spotlight Falcon|YMKM
+1 Sproutwatch Dryad|YMKM
+1 Squadron Carrier|YEOE
+1 Stalwart Realmwarden|YOTJ
+1 Stalwart Speartail|YLCI
+1 Steady Tortoise|YWOE
+1 Stoic Star-Captain|YEOE
+1 Stonehide Ancient|YTDM
+1 Stormforged Armor|YTDM
+1 Stormkeld Curator|YWOE
+1 Summitfest Closing Ceremony|YSOS
+1 Sundering Sentinel|YSOS
+1 Suntail Squadron|YMID
+1 Support Skyforge|YDFT
+1 Surge of Acclaim|YDFT
+1 Surgical Metamorph|YONE
+1 Swarm Saboteur|YNEO
+1 Swiftspear's Teachings|YTDM
+1 Swine Rebellion|YWOE
+1 Switchgrass Grazer|YOTJ
+1 Sylvan Smite|YBRO
+1 Syndicate Recruiter|YSNC
+1 Syr Joshua and Syr Saxon|YWOE
+1 Tajic, Legion's Valor|YMKM
+1 Talion's Throneguard|YWOE
+1 Tan Jolom, the Worldwalker|YLCI
+1 Tasteful Offering|YBLB
+1 Tawnos Endures|YBRO
+1 Teferi's Contingency|YDMU
+1 Tempest Trapper|YBLB
+1 Tenacious Pup|YMID
+1 Tend to the Kiln|YECL
+1 Territorial Strike|YTDM
+1 Terrors of the Track|YDFT
+1 Teysa of the Ghost Council|YOTJ
+1 Tezzeret's Reckoning|YONE
+1 The Conundrum of Bowls|YWOE
+1 The Grand Goatnapper|YECL
+1 The Mystical Archive|YSOS
+1 Thendar, the Overminer|YEOE
+1 Thieving Aven|YOTJ
+1 Third Little Pig|YWOE
+1 Thorna and Twigtooth|YECL
+1 Thought Partition|YEOE
+1 Thought Rattle|YBLB
+1 Thoughtsteal Sprites|YECL
+1 Thought-String Analyst|YMKM
+1 Thoughtweft's Call|YECL
+1 Three Tree Battalion|YBLB
+1 Thunderbond Vanguard|YTDM
+1 Tiana, Angelic Mechanic|YDMU
+1 Tibalt, Wicked Tormentor|YMID
+1 Tireless Angler|YMID
+1 Tomakul Phoenix|YBRO
+1 Tome of Gadwick|YWOE
+1 Topsoil Turner|YECL
+1 Toralf's Disciple|YMID
+1 Town-Razer Tyrant|YMID
+1 Trackhand Trainer|YDFT
+1 Traumatic Prank|YSNC
+1 Traverse Valley|YBLB
+1 Triumphant Getaway|YOTJ
+1 Trove Mage|YDMU
+1 Turbocharged Escape|YDFT
+1 Unbreakable Remnant|YSOS
+1 Underbridge Warlock|YWOE
+1 Undercity Plunder|YNEO
+1 Unexpected Conversion|YMID
+1 Unforgiving Overtake|YDFT
+1 Unnatural Summons|YDSK
+1 Ureni's Counsel|YTDM
+1 Ursine Guide|YSOS
+1 Urza's Construction Drone|YBRO
+1 Valiant Batrider|YLCI
+1 Valiant Emberkin|YDSK
+1 Val, Marooned Surveyor|YEOE
+1 Variable Solutions|YSOS
+1 Veko, Death's Doorkeeper|YMKM
+1 Verdant Dread|YDSK
+1 Vesuvan Mist|YDMU
+1 Veteran Ghoulcaller|YMID
+1 Vexyr, Ich-Tekik's Heir|YONE
+1 Victory of the Pyrohammer|YWOE
+1 Vigorous Farming|YBLB
+1 Vinesoul Spider|YDMU
+1 Vodalian Tide Mage|YDMU
+1 Voidcalled Devotee|YEOE
+1 Volatile Orbit|YEOE
+1 Volatile Rift|YECL
+1 Vona de Iedo, the Antifex|YOTJ
+1 Vv'viza, Orbital Overseer|YEOE
+1 Wagon Wrecker|YOTJ
+1 Wandering Treefolk|YDMU
+1 Wary Zone Guard|YDSK
+1 Warzone Duplicator|YBRO
+1 Waystone's Guidance|YTDM
+1 Weave the Nightmare|YOTJ
+1 Welcome the Darkness|YDSK
+1 Wickerwing Effigy|YMID
+1 Wildgrove Summoner|YECL
+1 Wingbane Vantasaur|YLCI
+1 Wingbright Thief|YDSK
+1 Wish Good Luck|YDFT
+1 Woodland Investigation|YMKM
+1 Worldweave|YEOE
+1 Xander's Wake|YSNC
+1 Xho Cai, Flickering Talon|YTDM
+1 Yotian Courier|YBRO
+1 Alora, Rogue Companion|HBG
+1 Ambergris, Citadel Agent|HBG
+1 Arcane Archery|HBG
+1 Boareskyr Tollkeeper|HBG
+1 Calim, Djinn Emperor|HBG
+1 Champions of Tyr|HBG
+1 Chaos Balor|HBG
+1 Craving of Yeenoghu|HBG
+1 Dragonborn Immolator|HBG
+1 Favored Enemy|HBG
+1 Flames of Moradin|HBG
+1 Flaming Fist Duskguard|HBG
+1 Follow the Tracks|HBG
+1 Gale, Conduit of the Arcane|HBG
+1 Gate of the Black Dragon|HBG
+1 Gate to Manorborn|HBG
+1 Gate to Seatower|HBG
+1 Gate to the Citadel|HBG
+1 Gate to Tumbledown|HBG
+1 Genasi Rabble-Rouser|HBG
+1 Giant Fire Beetles|HBG
+1 Gnoll Hunting Party|HBG
+1 Goblin Trapfinder|HBG
+1 Grave Choice|HBG
+1 Gut, Fanatical Priestess|HBG
+1 Hook Horror|HBG
+1 Hypnotic Pattern|HBG
+1 Imoen, Trickster Friend|HBG
+1 Incessant Provocation|HBG
+1 Jaheira, Harper Emissary|HBG
+1 Jon Irenicus, the Exile|HBG
+1 Kardum, Patron of Flames|HBG
+1 Karlach, Raging Tiefling|HBG
+1 Klement, Novice Acolyte|HBG
+1 Kobold Warcaller|HBG
+1 Lae'zel, Githyanki Warrior|HBG
+1 Liara of the Flaming Fist|HBG
+1 Lizardfolk Librarians|HBG
+1 Lukamina, Moon Druid|HBG
+1 Lulu, Forgetful Hollyphant|HBG
+1 Mace of Disruption|HBG
+1 Mephit's Enthusiasm|HBG
+1 Mind Spike|HBG
+1 Minthara of the Absolute|HBG
+1 Moradin's Disciples|HBG
+1 Oyaminartok, Polar Werebear|HBG
+1 Patriar's Humiliation|HBG
+1 Ranger Squadron|HBG
+1 Rasaad, Monk of Selûne|HBG
+1 Sarevok the Usurper|HBG
+1 Seatower Imprisonment|HBG
+1 Seek New Knowledge|HBG
+1 Sewer Plague|HBG
+1 Shadowheart, Sharran Cleric|HBG
+1 Signature Spells|HBG
+1 Skanos, Dragon Vassal|HBG
+1 Snowborn Simulacra|HBG
+1 Soldiers of the Watch|HBG
+1 Stroke of Luck|HBG
+1 Sune's Intervention|HBG
+1 Sworn to the Legion|HBG
+1 Tasha, Unholy Archmage|HBG
+1 Thayan Evokers|HBG
+1 The Hourglass Coven|HBG
+1 Tiefling Outcasts|HBG
+1 Ulder Ravengard, Marshal|HBG
+1 Undersimplify|HBG
+1 Unexpected Allies|HBG
+1 Uthgardt Fury|HBG
+1 Valiant Farewell|HBG
+1 Verdant Rejuvenation|HBG
+1 Vhal, Eager Scholar|HBG
+1 Viconia, Nightsinger's Disciple|HBG
+1 Vladimir and Godfrey|HBG
+1 Warriors of Tiamat|HBG
+1 Water Weird|HBG
+1 Wilson, Bear Comrade|HBG
+1 Wizened Githzerai|HBG
+1 Wyll, Pact-Bound Duelist|HBG
+1 You Line Up the Shot|HBG
+1 Yuan-Ti Scaleshield|HBG
+1 Aswan Jaguar|PAST
+1 Call from the Grave|PAST
+1 Faerie Dragon|PAST
+1 Gem Bazaar|PAST
+1 Goblin Polka Band|PAST
+1 Necropolis of Azar|PAST
+1 Orcish Catapult|PAST
+1 Pandora's Box|PAST
+1 Power Struggle|PAST
+1 Prismatic Dragon|PAST
+1 Rainbow Knights|PAST
+1 Whimsy|PAST
+1 Arden Angel|PSDG
+1 Ashuza's Breath|PSDG
+1 Camato Scout|PSDG
+1 Hapato's Might|PSDG
+1 Lydari Druid|PSDG
+1 Lydari Elephant|PSDG
+1 Murgish Cemetery|PSDG
+1 Saji's Torrent|PSDG
+1 Tornellan Protector|PSDG
+1 Velukan Dragon|PSDG
+1 Baloth Packhunter|ANB
+1 Compound Fracture|ANB
+1 Cruel Cut|ANB
+1 Goblin Gang Leader|ANB
+1 Hallowed Priest|ANB
+1 Mardu Outrider|ANB
+1 Nimble Pilferer|ANB
+1 Soulhunter Rakshasa|ANB
+1 Tin Street Cadet|ANB
+1 Angelic Reward|OANA
+1 Confront the Assault|OANA
+1 Feral Roar|OANA
+1 Inspiring Commander|OANA
+1 River's Favor|OANA
+1 Shrine Keeper|OANA
+1 Tactical Advantage|OANA
+1 Treetop Warden|OANA
+1 Zephyr Gull|OANA
