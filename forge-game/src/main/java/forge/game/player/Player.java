@@ -892,6 +892,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public int subtractCounter(CounterType counterName, int num, final Player remover) {
+        GameEntityCounterTable tempTable = new GameEntityCounterTable();
+        int result = subtractCounter(counterName, num, remover, tempTable);
+        tempTable.replaceRemoveCounterEffect(getGame(), null);
+        return result;
+    }
+
+    @Override
+    public int subtractCounter(CounterType counterName, int num, final Player remover, GameEntityCounterTable table) {
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - num, 0);
 
@@ -902,16 +910,18 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         getGame().addCounterRemovedThisTurn(counterName, this, delta);
 
-        /* TODO Run triggers when something cares
-        int curCounters = oldValue;
-        for (int i = 0; i < delta && curCounters != 0; i++) {
-            final Map<String, Object> runParams = new TreeMap<>();
-            runParams.put("Card", this);
-            runParams.put("CounterType", counterName);
-            runParams.put("NewCounterAmount", --curCounters);
-            getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Object, this);
+        runParams.put(AbilityKey.CounterType, counterName);
+        runParams.put(AbilityKey.CounterAmount, delta);
+        runParams.put(AbilityKey.NewCounterAmount, newValue);
+
+        getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
+
+        if (table != null) {
+            table.put(remover, this, counterName, delta);
         }
-        */
+
         return delta;
     }
 

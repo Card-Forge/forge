@@ -68,6 +68,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         final boolean eachExisting = sa.hasParam("EachExistingCounter");
 
         GameEntityCounterTable table = new GameEntityCounterTable();
+        GameEntityCounterTable removeTable = new GameEntityCounterTable();
 
         for (final Card tgtCard : getDefinedCardsOrTargeted(sa)) {
             Card gameCard = game.getCardState(tgtCard, null);
@@ -85,20 +86,21 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             if (gameCard.hasCounters()) {
                 if (eachExisting) {
                     for (CounterType listType : Lists.newArrayList(gameCard.getCounters().elementSet())) {
-                        addOrRemoveCounter(sa, gameCard, listType, counterAmount, table, pl);
+                        addOrRemoveCounter(sa, gameCard, listType, counterAmount, table, removeTable, pl);
                     }
                 } else {
-                    addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table, pl);
+                    addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table, removeTable, pl);
                 }
             } else if (!eachExisting && ctype != null) {
                 gameCard.addCounter(ctype, counterAmount, pl, table);
             }
         }
         table.replaceCounterEffect(game, sa);
+        removeTable.replaceRemoveCounterEffect(game, sa);
     }
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,
-            final int counterAmount, GameEntityCounterTable table, final Player pl) {
+            final int counterAmount, GameEntityCounterTable table, GameEntityCounterTable removeTable, final Player pl) {
         final PlayerController pc = pl.getController();
 
         Map<String, Object> params = Maps.newHashMap();
@@ -142,7 +144,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         if (putCounter) {
             tgtCard.addCounter(chosenType, counterAmount, pl, table);
         } else {
-            tgtCard.subtractCounter(chosenType, counterAmount, pl);
+            tgtCard.subtractCounter(chosenType, counterAmount, pl, removeTable);
             if (sa.hasParam("RememberRemovedCards")) {
                 sa.getHostCard().addRemembered(tgtCard);
             }
