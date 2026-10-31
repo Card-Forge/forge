@@ -1,0 +1,9 @@
+Name:K'Vort-Class Raider
+ManaCost:4
+Types:Artifact Spacecraft
+PT:5/3
+K:Station:4
+S:Mode$ Continuous | Condition$ PlayerTurn | Affected$ Card.Self,Creature.YouCtrl | AddKeyword$ Hexproof | Description$ During your turn, this Spacecraft and creatures you control have hexproof.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE4_CHARGE | AddType$ Creature | AddKeyword$ Flying & Menace & Haste | Description$ STATION 4+ Flying, menace, haste
+SVar:PlayMain1:TRUE
+Oracle:During your turn, this Spacecraft and creatures you control have hexproof.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.)\nSTATION 4+\nFlying, menace, haste
