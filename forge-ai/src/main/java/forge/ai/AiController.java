@@ -2407,6 +2407,16 @@ public class AiController {
     }
 
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
+        if (sa == null) {
+            return false;
+        }
+
+        sa.setActivatingPlayer(player);
+
+        if (!sa.checkRestrictions(player)) {
+            return false;
+        }
+
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
         }
@@ -2434,7 +2444,7 @@ public class AiController {
     private boolean isStillCastable(final SpellAbility sa) {
         sa.setActivatingPlayer(player);
         try {
-            return sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
+            return sa.checkRestrictions(player) && sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
         } catch (final RuntimeException e) {
             return false;
         }
