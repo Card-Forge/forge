@@ -1521,7 +1521,7 @@ public final class FlatMonteCarloPicker {
             value += holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
         }
         if (cand != null && cand.sa != null) {
-            value += StrategicEvaluator.selectionBonus(cand.sa, cfg);
+            value += StrategicEvaluator.selectionBonus(cand.sa, cfg) + TutorPlan.bonus(cand.sa, cfg);
         }
         return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
     }
