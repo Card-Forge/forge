@@ -3,8 +3,9 @@ ManaCost:2 G U
 Types:Legendary Creature Human Artificer
 PT:3/3
 A:AB$ ChooseCard | Cost$ 6 T | ChoiceZone$ Hand | Choices$ Creature.YouOwn,Spacecraft.YouOwn | ChoiceTitle$ You may select a creature or Spacecraft card | Optional$ True | SubAbility$ DBPutCreature | SpellDescription$ Strange new worlds — You may put a creature or Spacecraft card from your hand onto the battlefield. It enters with X additional +1/+1 counters on it if it's a creature and X additional charge counters on it if it's a Spacecraft, where X is the number of differently named lands you control.
-SVar:DBPutCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | WithCountersType$ P1P1 | WithCountersAmount$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | SubAbility$ DBPutSpacecraft
-SVar:DBPutSpacecraft:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | WithCountersType$ CHARGE | WithCountersAmount$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Spacecraft | SubAbility$ DBCleanup
+SVar:DBPutCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | WithCountersType$ P1P1 | WithCountersAmount$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Creature.nonSpacecraft | SubAbility$ DBPutSpacecraft
+SVar:DBPutSpacecraft:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | WithCountersType$ CHARGE | WithCountersAmount$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Spacecraft.nonCreature | SubAbility$ DBPutBoth
+SVar:DBPutBoth:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | WithCountersType$ P1P1,CHARGE | WithCountersAmount$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Creature.Spacecraft | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
 DeckHas:Ability$Counters
