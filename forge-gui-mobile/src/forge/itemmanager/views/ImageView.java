@@ -1253,6 +1253,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             if (item instanceof PaperCard pc) {
                 CardRenderer.drawCard(g, pc, x, y, w, h, pos);
+                HoverPreview.report(pc, group.screenPos.x + x, group.screenPos.y + y, w, h, getScroller().screenPos);
                 if (showRanking) {
                     float rankSize = w / 2;
                     float y2 = y + (rankSize - (rankSize * 0.1f));
