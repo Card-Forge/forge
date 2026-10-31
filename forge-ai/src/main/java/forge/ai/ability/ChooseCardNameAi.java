@@ -72,7 +72,8 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (mandatory) {
+        // like canPlay, a naming AILogic means the AI knows what to name (e.g. as a permanent with a naming ETB replacement enters)
+        if (mandatory || !aiLogic.isEmpty()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
