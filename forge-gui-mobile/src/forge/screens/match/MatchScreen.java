@@ -2,11 +2,14 @@ package forge.screens.match;
 
 import static forge.Forge.getLocalizer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import forge.screens.match.views.*;
 import forge.toolbox.FOptionPane;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +26,8 @@ import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.tutorial.TutorialLayout;
+import forge.gamemodes.tutorial.TutorialTarget;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
@@ -210,7 +215,7 @@ public class MatchScreen extends FScreen {
     private final Timer.Task menuBarHideTask = new Timer.Task() {
         @Override
         public void run() {
-            if (((FMenuBar) getHeader()).isShowingMenuExcept(stack)) { //a menu is open: keep the bar until it closes
+            if (tutorialHoldsMenuBar || ((FMenuBar) getHeader()).isShowingMenuExcept(stack)) { //a menu is open (or the tutorial is pointing at the bar): keep it until it closes
                 Timer.schedule(this, 2f);
                 return;
             }
@@ -450,6 +455,236 @@ public class MatchScreen extends FScreen {
         }
         scroller.setBounds(0, startY, scrollerWidth, height - VPrompt.HEIGHT - startY);
         bottomPlayerPrompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        coachTop = startY;
+        if (tutorialOverlay != null) { tutorialOverlay.setBounds(0, 0, width, height); }
+        layoutCoach();
+    }
+
+    // The "How to Play" tutorial: a note (the coach) that floats over the field without dimming it, and an overlay that
+    // outlines the part of the screen the note is about. Neither covers the player's hand or the prompt bar.
+    private CoachPanel coach;
+    private TutorialOverlay tutorialOverlay;
+    private float coachTop;
+    private EnumSet<TutorialTarget> tutorialTargets = EnumSet.noneOf(TutorialTarget.class);
+    private final List<Rectangle> tutorialRects = new ArrayList<>();
+    private final List<Rectangle> coachObstacles = new ArrayList<>();
+    private boolean tutorialOpenedPhaseList, tutorialHoldsMenuBar;
+
+    /** The overlay goes in before the coach, so the note is drawn above the dimming. */
+    private void ensureTutorialViews() {
+        if (tutorialOverlay == null) {
+            tutorialOverlay = add(new TutorialOverlay(this));
+            tutorialOverlay.setBounds(0, 0, getWidth(), getHeight());
+        }
+        if (coach == null) {
+            coach = add(new CoachPanel(this::layoutCoach));
+        }
+    }
+
+    /** Which layout the player is looking at, so the tutorial can say where things are on this screen. */
+    public TutorialLayout getTutorialLayout() {
+        if (VPlayerPanel.isCompactLayout()) {
+            return VPlayerPanel.isUnifiedPhase() ? TutorialLayout.MOBILE_COMPACT_UNIFIED : TutorialLayout.MOBILE_COMPACT;
+        }
+        return Forge.isLandscapeMode() ? TutorialLayout.MOBILE_LANDSCAPE : TutorialLayout.MOBILE_PORTRAIT;
+    }
+
+    /**
+     * Outlines the given parts of the screen (an empty collection clears the outline). Parts that fold away are opened
+     * for as long as they are outlined: the phase stops, the hand, and the top menu bar when it is hidden.
+     * Call on the UI thread.
+     */
+    public void highlightTutorial(final Collection<TutorialTarget> targets) {
+        ensureTutorialViews();
+        final EnumSet<TutorialTarget> next = targets.isEmpty()
+                ? EnumSet.noneOf(TutorialTarget.class) : EnumSet.copyOf(targets);
+        tutorialTargets = next;
+
+        final VPlayerPanel me = liveBottom(), opp = liveTop();
+        if (next.contains(TutorialTarget.HAND)) {
+            me.showHandForTutorial();
+        }
+
+        final boolean phases = next.contains(TutorialTarget.PHASES);
+        if (VPlayerPanel.isUnifiedPhase()) {
+            if (phases) {
+                tutorialOpenedPhaseList |= !unifiedPhase.getMenu().isOpen();
+                unifiedPhase.getMenu().setOpen(true);
+            } else if (tutorialOpenedPhaseList) {
+                tutorialOpenedPhaseList = false;
+                unifiedPhase.getMenu().close();
+            }
+        } else {
+            me.getPhaseIndicator().setTutorialOpen(phases);
+            opp.getPhaseIndicator().setTutorialOpen(phases);
+        }
+
+        // a hidden top menu bar slides in for a few seconds; keep it down while the stack or the menu is the subject
+        final boolean wantsBar = VPlayerPanel.isMenuHidden()
+                && (next.contains(TutorialTarget.STACK) || next.contains(TutorialTarget.MENU));
+        if (wantsBar) {
+            tutorialHoldsMenuBar = true;
+            setMenuBarShown(true);
+        } else if (tutorialHoldsMenuBar) {
+            tutorialHoldsMenuBar = false;
+            setMenuBarShown(true); // restarts the usual few seconds, after which it slides away again
+        }
+
+        tutorialOverlay.setVisible(!next.isEmpty());
+        layoutCoach();
+        Gdx.graphics.requestRendering();
+    }
+
+    /** The screen rectangles of the parts the tutorial points at right now, as last drawn. */
+    List<Rectangle> getTutorialRects() {
+        return tutorialRects;
+    }
+
+    private void collectTutorialRects(final List<Rectangle> out) {
+        out.clear();
+        if (tutorialTargets.isEmpty()) {
+            return;
+        }
+        final VPlayerPanel me = liveBottom(), opp = liveTop();
+        for (final TutorialTarget target : tutorialTargets) {
+            switch (target) {
+                case YOUR_PLAYER -> me.addTutorialBadgeBounds(out);
+                case OPPONENT -> opp.addTutorialBadgeBounds(out);
+                case HAND -> me.addTutorialHandBounds(out);
+                case BATTLEFIELD -> addTutorialBounds(out, me.getField());
+                case ZONES -> me.addTutorialTabBounds(out);
+                case STACK -> {
+                    final FDisplayObject tab = stack.getMenuTab();
+                    if (tab != null && tab.screenPos.y + tab.screenPos.height > 0) { addTutorialBounds(out, tab); }
+                }
+                case PHASES -> {
+                    if (VPlayerPanel.isUnifiedPhase()) {
+                        addTutorialBounds(out, unifiedPhase);
+                        if (unifiedPhase.getMenu().isOpen()) { addTutorialBounds(out, unifiedPhase.getMenu()); }
+                    } else {
+                        me.addTutorialPhaseBounds(out);
+                        opp.addTutorialPhaseBounds(out);
+                    }
+                }
+                case PROMPT, BUTTONS -> addTutorialBounds(out, bottomPlayerPrompt);
+                case MENU -> {
+                    if (getHeader().screenPos.y + getHeader().screenPos.height > 0) { addTutorialBounds(out, getHeader()); }
+                }
+                default -> { } // CARD_INFO: mobile has no panel for it, long pressing a card is explained in the text
+            }
+        }
+    }
+
+    private static void addTutorialBounds(final List<Rectangle> out, final FDisplayObject o) {
+        if (o == null || !o.isVisible() || o.getWidth() <= 0 || o.getHeight() <= 0) { return; }
+        final Rectangle r = new Rectangle(o.screenPos);
+        for (final Rectangle known : out) {
+            if (known.equals(r)) { return; }
+        }
+        out.add(r);
+    }
+
+    /**
+     * Called every frame while the tutorial is up: reads where the outlined parts and the lists that hang over the
+     * field are, and places the note again when any of them moved.
+     */
+    void syncTutorialLayout() {
+        final List<Rectangle> targets = new ArrayList<>();
+        collectTutorialRects(targets);
+
+        final List<Rectangle> obstacles = new ArrayList<>(targets);
+        if (stack.isVisible()) { obstacles.add(new Rectangle(stack.screenPos)); }
+        final VUnifiedPhase.Menu phaseList = unifiedPhase.getMenu();
+        if (phaseList.isOpen() && phaseList.isVisible()) { obstacles.add(new Rectangle(phaseList.screenPos)); }
+
+        final boolean changed = !obstacles.equals(coachObstacles);
+        tutorialRects.clear();
+        tutorialRects.addAll(targets);
+        if (changed) {
+            coachObstacles.clear();
+            coachObstacles.addAll(obstacles);
+            layoutCoach();
+        }
+    }
+
+    /**
+     * Places the note over the field where it covers neither an outlined part nor a list that hangs over the field: the
+     * stack list, or the phase stops list. It starts at the top; where something is in the way it goes below it (as
+     * the stack always had it), else to the bottom of the field or to the side, else it overlaps as little as it can.
+     */
+    public void layoutCoach() {
+        if (coach == null) { return; }
+        final float width = getWidth();
+        final float bottomLimit = getHeight() - VPrompt.HEIGHT;
+        final boolean portrait = getHeight() > width;
+        final float gap = Utils.scale(4);
+        coach.setCompact(portrait);
+
+        final float fullWidth = portrait ? width - 2 * gap : Math.min(width * 0.72f, Utils.scale(560));
+        final float narrowWidth = portrait ? fullWidth : Math.min(fullWidth, Utils.scale(300));
+        final float panelHeight = coach.preferredHeight(bottomLimit - coachTop);
+
+        final List<Rectangle> obstacles = new ArrayList<>(coachObstacles);
+
+        // candidate heights, in the order they are preferred: the top, below each obstacle, the bottom, above each obstacle
+        final List<Float> ys = new ArrayList<>();
+        ys.add(coachTop + gap);
+        final List<Rectangle> byBottom = new ArrayList<>(obstacles);
+        byBottom.sort((a, b) -> Float.compare(a.y + a.height, b.y + b.height));
+        for (final Rectangle o : byBottom) { ys.add(o.y + o.height + gap); }
+        ys.add(bottomLimit - gap - panelHeight);
+        for (final Rectangle o : byBottom) { ys.add(o.y - gap - panelHeight); }
+
+        float bestX = (width - fullWidth) / 2, bestY = coachTop + gap, bestW = fullWidth;
+        float bestOverlap = Float.MAX_VALUE;
+        boolean found = false;
+        final float[] widths = portrait ? new float[] { fullWidth } : new float[] { fullWidth, narrowWidth };
+        search:
+        for (final float w : widths) {
+            final float[] xs = portrait ? new float[] { gap }
+                    : new float[] { (width - w) / 2, gap, width - w - gap };
+            for (final float y : ys) {
+                if (y < coachTop + gap - 0.5f || y + panelHeight > bottomLimit - gap + 0.5f) { continue; }
+                for (final float x : xs) {
+                    final Rectangle candidate = new Rectangle(x, y, w, panelHeight);
+                    float overlap = 0f;
+                    for (final Rectangle o : obstacles) { overlap += overlapArea(candidate, o); }
+                    if (overlap <= 0f) {
+                        bestX = x; bestY = y; bestW = w; found = true;
+                        break search;
+                    }
+                    if (w == fullWidth && overlap < bestOverlap) {
+                        bestOverlap = overlap; bestX = x; bestY = y; bestW = w;
+                    }
+                }
+            }
+        }
+        if (!found && portrait) { bestX = gap; }
+
+        final float rx = Math.round(bestX), ry = Math.round(bestY), rw = Math.round(bestW), rh = Math.round(panelHeight);
+        if (coach.getLeft() != rx || coach.getTop() != ry || coach.getWidth() != rw || coach.getHeight() != rh) {
+            coach.setBounds(rx, ry, rw, rh);
+            Gdx.graphics.requestRendering();
+        }
+    }
+
+    private static float overlapArea(final Rectangle a, final Rectangle b) {
+        final float w = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x);
+        final float h = Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y);
+        return w > 0f && h > 0f ? w * h : 0f;
+    }
+
+    /** Shows a tutorial note; runs {@code onNext} when the player presses its button. Call on the UI thread. */
+    public void showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        ensureTutorialViews();
+        coach.show(title, text, nextLabel, onNext);
+    }
+
+    /** Removes the tutorial note, if shown. Call on the UI thread. */
+    public void hideCoach() {
+        if (coach != null) {
+            coach.hidePanel();
+        }
     }
 
     @Override
