@@ -932,9 +932,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             frameBuffer.begin();
             Gdx.gl.glClearColor(0, 0, 0, 0);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            boolean batchStarted = false;
             try {
                 m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
                 Forge.getGraphics().begin(preview_w, preview_h);
+                batchStarted = true;
                 Forge.getGraphics().setProjectionMatrix(m);
                 Forge.getGraphics().startClip();
                 Forge.getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
@@ -970,7 +972,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 e.printStackTrace();
             } finally {
                 // end the shared batch even when drawing failed, otherwise the next begin() throws
-                Forge.getGraphics().end();
+                if (batchStarted) {
+                    Forge.getGraphics().end();
+                }
                 frameBuffer.end();
                 generatedTooltip = frameBuffer.getColorBufferTexture();
                 generatedTooltip.bind();
