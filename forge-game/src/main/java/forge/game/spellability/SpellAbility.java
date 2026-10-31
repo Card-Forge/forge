@@ -2159,6 +2159,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 } else {
                     targetingPlayer = getActivatingPlayer();
                 }
+                if (targetingPlayer == null) {
+                    // nobody to choose the targets, so they cannot be chosen
+                    return false;
+                }
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied
                 currentAbility.setTargetingPlayer(targetingPlayer);
