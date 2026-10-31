@@ -1,0 +1,10 @@
+Name:Lieutenant Nyota Uhura
+ManaCost:2 U
+Types:Legendary Creature Human Officer
+PT:2/3
+A:AB$ Dig | PrecostDesc$ Strange New Worlds — | Cost$ 4 T | ValidTgts$ Opponent | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent exiles the top X cards of their library, where X is the number of differently named lands you control. You may cast an instant or sorcery spell from among them without paying its mana cost. Then that player puts the rest on the bottom of their library in a random order.
+SVar:DBPlay:DB$ Play | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | ValidSA$ Spell | WithoutManaCost$ True | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ 1 | ForgetPlayed$ True | SubAbility$ RestRandomOrder
+SVar:RestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:Strange new worlds — {4}, {T}: Target opponent exiles the top X cards of their library, where X is the number of differently named lands you control. You may cast an instant or sorcery spell from among them without paying its mana cost. Then that player puts the rest on the bottom of their library in a random order.

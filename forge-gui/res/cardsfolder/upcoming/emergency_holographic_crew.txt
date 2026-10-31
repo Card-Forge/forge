@@ -1,0 +1,10 @@
+Name:Emergency Holographic Crew
+ManaCost:3 U
+Types:Artifact Creature Illusion Officer
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBReturn,DBSurveil
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spacecraft.YouOwn | ValidTgtsDesc$ Spacecraft card in your graveyard | SpellDescription$  Return target Spacecraft card from your graveyard to your hand.
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+DeckHints:Type$Spacecraft
+Oracle:When this creature enters, choose one —\n• Return target Spacecraft card from your graveyard to your hand.\n• Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

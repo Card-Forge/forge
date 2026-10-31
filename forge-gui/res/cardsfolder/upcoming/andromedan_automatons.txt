@@ -1,0 +1,8 @@
+Name:Andromedan Automatons
+ManaCost:2 W
+Types:Artifact Creature Android
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for any number of cards named Andromedan Automatons, reveal them, put them into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedAndromedan Automatons | ChangeNum$ X | ShuffleNonMandatory$ True
+SVar:X:Count$ValidLibrary Card.YouOwn+namedAndromedan Automatons
+Oracle:When this creature enters, you may search your library for any number of cards named Andromedan Automatons, reveal them, put them into your hand, then shuffle.
