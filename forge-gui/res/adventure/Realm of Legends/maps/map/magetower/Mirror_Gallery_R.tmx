@@ -93,7 +93,7 @@
   <object id="97" template="../../../../common/maps/obj/enemy.tx" x="116" y="410">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mox Ruby&quot;, &quot;Ruby Medallion&quot;, &quot;Ruby Collector&quot;, &quot;Gratuitous Violence|ons&quot;, &quot;Sunbird's Invocation|xln&quot; ] }"/>
-    <property name="enemy" value="Márton Stromgald"/>
+    <property name="enemy" value="Maraxus"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
