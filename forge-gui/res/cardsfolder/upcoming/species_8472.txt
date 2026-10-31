@@ -1,0 +1,11 @@
+Name:Species 8472
+ManaCost:4 G G
+Types:Creature Insect Beast
+PT:7/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Strange new worlds — When this creature enters, you gain life equal to the number of differently named lands you control.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Artifact.Creature | Description$ This creature can't be blocked by artifact creatures.
+S:Mode$ CantTarget | ValidTarget$ Card.Self | ValidSource$ Artifact | ValidSA$ Activated,Triggered | Activator$ Player.Opponent | Description$ CARDNAME can't be the target of abilities your opponents control.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+DeckHas:Ability$LifeGain
+Oracle:Strange new worlds — When this creature enters, you gain life equal to the number of differently named lands you control.\nThis creature can't be blocked by artifact creatures.\nThis creature can't be the target of abilities from artifact sources your opponents control.
