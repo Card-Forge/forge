@@ -86,6 +86,7 @@ Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
+Denobulan:Denobulans
 Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
@@ -113,6 +114,7 @@ Employee:Employees
 Eternal:Eternals
 Eye:Eyes
 Faerie:Faeries
+Ferengi:Ferengi
 Ferret:Ferrets
 Fish:Fish
 Flagbearer:Flagbearers

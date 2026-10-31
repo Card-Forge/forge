@@ -1,0 +1,10 @@
+Name:L'Rell, Fierce Visionary
+ManaCost:1 B R
+Types:Legendary Creature Klingon Warrior
+PT:1/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_1_klingon_warrior_haste | AtEOT$ Sacrifice
+A:AB$ Surveil | Cost$ T | Amount$ 2 Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:At the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.\n{2}, Sacrifice another creature or artifact: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
