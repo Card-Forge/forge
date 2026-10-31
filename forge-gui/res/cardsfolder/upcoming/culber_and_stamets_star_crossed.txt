@@ -1,4 +1,4 @@
-Name:Culbert and Stamets, Star-Crossed
+Name:Culber and Stamets, Star-Crossed
 ManaCost:3 G
 Types:Legendary Creature Human Doctor Artificer
 PT:3/4
