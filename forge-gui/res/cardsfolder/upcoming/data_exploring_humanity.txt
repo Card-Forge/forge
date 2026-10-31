@@ -1,0 +1,7 @@
+Name:Data, Exploring Humanity
+ManaCost:4 U
+Types:Legendary Artifact Creature Android Scientist
+PT:4/4
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDiscover | TriggerDescription$ Seek out — Whenever you draw your second card each turn, discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:TrigDiscover:DB$ Discover | Num$ 4
+Oracle:Seek out — Whenever you draw your second card each turn, discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

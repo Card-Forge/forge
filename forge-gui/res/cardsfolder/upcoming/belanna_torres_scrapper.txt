@@ -1,0 +1,14 @@
+Name:B'Elanna Torres, Scrapper
+ManaCost:1 U R
+Types:Legendary Creature Klingon Human Artificer
+PT:2/2
+K:Vigilance
+K:Trample
+A:AB$ Surveil | Cost$ 2 T | Amount$ 2 | SubAbility$ DBPeek | SpellDescription$ Surveil 2, then you may reveal the top card of your library. Draw a card if it's an artifact card. If you don't draw a card this way, put two +1/+1 counters on CARDNAME.
+SVar:DBPeek:DB$ PeekAndReveal | RevealOptional$ True | RememberRevealed$ True | NoPeek$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ GE1 | RememberDrawn$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.YouOwn+inZoneHand
+DeckHas:Ability$Surveil|Graveyard|Counters
+Oracle:Vigilance, trample\n{2}, {T}: Surveil 2, then you may reveal the top card of your library. Draw a card if it's an artifact card. If you don't draw a card this way, put two +1/+1 counters on B'Elanna Torres.
