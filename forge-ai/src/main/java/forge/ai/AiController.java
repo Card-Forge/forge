@@ -2039,6 +2039,9 @@ public class AiController {
                         && String.valueOf(t.getDescription()).equals(String.valueOf(counter.getDescription()))))) {
                     continue;
                 }
+                if ("Never".equals(counter.getParam("AILogic"))) {
+                    continue; // the script says the AI must not use it, same as checkAiLogic on the canPlaySa path
+                }
                 counter.setActivatingPlayer(player);
                 // AILogic$ Never: out, unless it is one of the kinds that can be judged and discovery or a ramp deck's
                 // key card asks for it (Kozilek, the Great Distortion's counter)
