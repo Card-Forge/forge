@@ -428,12 +428,16 @@ public class SpellSmithScene extends UIScene {
         lockedPrice = currentPrice;
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
         currentReward = null;
-        if (Config.instance().getSettingData().useAllCardVariants) {
-            if (!edition.isEmpty()) {
-                currentReward = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
-            } else {
-                currentReward = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
-            }
+        if (!edition.isEmpty()) {
+            // When a set filter is applied, always give that set's printing.
+            // Without variants, getCardByNameAndEdition only looks at the card's single default printing, so ask the card database directly.
+            PaperCard printing = Config.instance().getSettingData().useAllCardVariants
+                    ? CardUtil.getCardByNameAndEdition(P.getCardName(), edition)
+                    : FModel.getMagicDb().getCommonCards().getCard(P.getCardName(), edition);
+            currentReward = new Reward(printing != null ? printing : P);
+        } else if (Config.instance().getSettingData().useAllCardVariants) {
+            // Grab any random variant if no set filter is specified
+            currentReward = new Reward(CardUtil.getCardByName(P.getCardName()));
         } else {
             currentReward = new Reward(P);
         }
