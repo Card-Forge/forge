@@ -178,7 +178,7 @@ public abstract class GameLobby implements IHasGameType {
                 otherSlot.setIsArchenemy(becomesArchenemy);
             }
         }
-        applyArchenemyTeams();
+        applyVariantTeams();
 
         if (event.getType() != null) {
             //refresh decklist for slot
@@ -230,7 +230,7 @@ public abstract class GameLobby implements IHasGameType {
             slot.setIsArchenemy(true);
             lastArchenemy = 0;
         }
-        applyArchenemyTeams();
+        applyVariantTeams();
         updateView(true);
     }
     private String randomName() {
@@ -276,7 +276,7 @@ public abstract class GameLobby implements IHasGameType {
             lastArchenemy--;
         }
         data.slots.remove(index);
-        applyArchenemyTeams();
+        applyVariantTeams();
         updateView(false);
     }
 
@@ -288,12 +288,27 @@ public abstract class GameLobby implements IHasGameType {
         switch (variant) {
         case Archenemy:
             data.appliedVariants.remove(GameType.ArchenemyRumble);
-            applyArchenemyTeams();
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
+            applyVariantTeams();
             break;
         case ArchenemyRumble:
             data.appliedVariants.remove(GameType.Archenemy);
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
+            break;
+        case TwoHeadedGiant:
+            // the Commander variants and Vanguard set their own life totals, and Planechase has its own team rules (CR 901.12)
+            data.appliedVariants.remove(GameType.Vanguard);
+            data.appliedVariants.remove(GameType.Planechase);
+            data.appliedVariants.remove(GameType.Archenemy);
+            data.appliedVariants.remove(GameType.ArchenemyRumble);
+            data.appliedVariants.remove(GameType.Commander);
+            data.appliedVariants.remove(GameType.Oathbreaker);
+            data.appliedVariants.remove(GameType.TinyLeaders);
+            data.appliedVariants.remove(GameType.Brawl);
+            applyVariantTeams();
             break;
         case Commander:
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
@@ -301,6 +316,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case Oathbreaker:
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
@@ -308,6 +324,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case TinyLeaders:
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.Brawl);
@@ -315,13 +332,18 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case Brawl:
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.MomirBasic);
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
+        case Planechase:
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
+            break;
         case Vanguard:
+            data.appliedVariants.remove(GameType.TwoHeadedGiant);
             data.appliedVariants.remove(GameType.MomirBasic);
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
@@ -390,8 +412,14 @@ public abstract class GameLobby implements IHasGameType {
         return false;
     }
 
-    /** Under Archenemy a seat's team follows its archenemy flag. */
-    private void applyArchenemyTeams() {
+    /** Under Archenemy a seat's team follows its archenemy flag. Under Two-Headed Giant seats pair up in order, so teammates sit together (CR 805.1). */
+    private void applyVariantTeams() {
+        if (hasVariant(GameType.TwoHeadedGiant)) {
+            for (int i = 0; i < data.slots.size(); i++) {
+                data.slots.get(i).setTeam(i / 2);
+            }
+            return;
+        }
         if (!hasVariant(GameType.Archenemy)) {
             return;
         }
@@ -434,6 +462,11 @@ public abstract class GameLobby implements IHasGameType {
 
         if (activeSlots.size() < 2) {
             SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblRequiredLeastTwoPlayerStartGame"));
+            return null;
+        }
+
+        if (hasVariant(GameType.TwoHeadedGiant) && (activeSlots.size() != 4 || data.slots.size() != 4)) {
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblTwoHeadedGiantNeedsFourPlayers"));
             return null;
         }
 

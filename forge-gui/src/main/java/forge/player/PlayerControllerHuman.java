@@ -1767,7 +1767,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final UndoManager undo = getGame().getUndoManager();
         undo.setMode(undoModeFromPrefs());      // the host's setting decides, for every player in the game
         if (!isMacroActive()) {
-            if (UndoManager.OWN_TURN_ONLY && getGame().getPhaseHandler().getPlayerTurn() != player) {
+            if (UndoManager.OWN_TURN_ONLY && !getGame().getPhaseHandler().isPlayerTurn(player)) {
                 undo.barrier("Opponent's turn");
             } else {
                 undo.checkpoint(getGame(), player);      // must come BEFORE the prompt is built
@@ -2460,6 +2460,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<SpellAbility> orderedSAs = orderSimultaneousSa(activePlayerSAs);
         for (int i = orderedSAs.size() - 1; i >= 0; i--) {
             final SpellAbility next = orderedSAs.get(i);
+            if (playedByTeammate(next)) {
+                continue;
+            }
             if (next.isTrigger() && !next.isCopied()) {
                 PlaySpellAbility.playSpellAbility(this, player, next);
             } else {
@@ -3997,6 +4000,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (macros != null && macros.isReplaying()) {
             return false;
         }
+        // a team that shares its turns stops where any of its players has a stop
+        if (getGui().getGameView() != null) {
+            return getGui().getGameView().getPlayers().stream().filter(turnPlayer::sharesTeamWith).allMatch(p -> playerSkipsPhase(p, phase));
+        }
+        return playerSkipsPhase(turnPlayer, phase);
+    }
+
+    private boolean playerSkipsPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
             return yieldController.isSkippingPhase(turnPlayer, phase);
         }

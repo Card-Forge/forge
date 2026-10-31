@@ -157,5 +157,7 @@ public abstract class AbstractPreferences<T extends Enum<T> & IPreferences.IPref
             result.add(GameType.Archenemy);
         else if (gameType.equals("Archenemy Rumble"))
             result.add(GameType.ArchenemyRumble);
+        else if (gameType.equals("Two-Headed Giant"))
+            result.add(GameType.TwoHeadedGiant);
     }
 }

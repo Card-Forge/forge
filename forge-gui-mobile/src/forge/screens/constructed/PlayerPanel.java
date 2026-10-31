@@ -831,7 +831,7 @@ public class PlayerPanel extends FContainer {
             }
             if (!isArchenemyApplied) {
                 cbTeam.setVisible(true);
-                cbTeam.setEnabled(mayEdit);
+                cbTeam.setEnabled(mayEdit && !screen.hasVariant(GameType.TwoHeadedGiant));
                 cbArchenemyTeam.setVisible(false);
             } else {
                 cbTeam.setVisible(false);

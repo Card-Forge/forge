@@ -85,8 +85,9 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
+    private final VariantCheckBox vntTwoHeadedGiant = new VariantCheckBox(GameType.TwoHeadedGiant);
     private final ImmutableList<VariantCheckBox> vntBoxes  =
-            ImmutableList.of(vntPlanechase, vntArchenemy, vntArchenemyRumble, vntVanguard);
+            ImmutableList.of(vntPlanechase, vntArchenemy, vntArchenemyRumble, vntVanguard, vntTwoHeadedGiant);
 
     private final FComboBoxPanel<Object> cboFormatPanel =
             new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblFormat") + ":", FormatChoices.get(true));
@@ -902,6 +903,9 @@ public class VLobby implements ILobbyView {
             } else {
                 populateDeckPanel(GameType.Constructed);
             }
+            break;
+        case TwoHeadedGiant:
+            populateDeckPanel(GameType.Constructed);
             break;
         case Commander:
         case Oathbreaker:
