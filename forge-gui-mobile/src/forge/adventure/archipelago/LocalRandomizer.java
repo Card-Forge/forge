@@ -144,7 +144,7 @@ public class LocalRandomizer {
     private void generateRandomizedReward(String notificationMessage) {
         Random random = new Random();
         int roll;
-        if (archipelagoDataInstance.lockedWorldRegionsByName.isEmpty()) {
+        if (archipelagoDataInstance.lockedWorldRegions.isEmpty()) {
             // Skip the region reward chance if the pool is empty.
             roll = random.nextInt(regionUnlockChance, 100);
         } else {
@@ -152,7 +152,7 @@ public class LocalRandomizer {
         }
 
         // Guarantee a region reward after X checks where X is regionUnlockBreakpoint.
-        if (!archipelagoDataInstance.lockedWorldRegionsByName.isEmpty() && (roll < regionUnlockChance || checksSinceLastRegionReward >= regionUnlockBreakpoint)) {
+        if (!archipelagoDataInstance.lockedWorldRegions.isEmpty() && (roll < regionUnlockChance || checksSinceLastRegionReward >= regionUnlockBreakpoint)) {
             unlockRandomRegion(notificationMessage);
             checksSinceLastRegionReward = 0;
         } else {
@@ -279,37 +279,18 @@ public class LocalRandomizer {
     }
 
     // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
+    // shopName is the shop's map name from the game, e.g. "white equipment" or "blue items". The Wastes have no item shop.
     public Object[] getItemsForEquipmentShop(String shopName) {
-        if (shopName.toLowerCase().contains("items")) {
-            // Items shop name
-            if (shopName.toLowerCase().contains("white")) {
-                return whiteItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("blue")) {
-                return blueItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("black")) {
-                return blackItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("red")) {
-                return redItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("green")) {
-                return greenItemShopList.toArray();
-            }
-        } else {
-            // Equipment shop name
-            if (shopName.toLowerCase().contains("white")) {
-                return whiteEquipmentShopList.toArray();
-            } else if (shopName.toLowerCase().contains("blue")) {
-                return blueEquipmentShopList.toArray();
-            } else if (shopName.toLowerCase().contains("black")) {
-                return blackEquipmentShopList.toArray();
-            } else if (shopName.toLowerCase().contains("red")) {
-                return redEquipmentShopList.toArray();
-            } else if (shopName.toLowerCase().contains("green")) {
-                return greenEquipmentShopList.toArray();
-            } else {
-                return colorlessEquipmentShopList.toArray();
-            }
-        }
-        return null;
+        boolean itemShop = shopName.toLowerCase().contains("items");
+        Set<String> shop = switch (ArchipelagoRegion.fromShopName(shopName)) {
+            case WASTE -> itemShop ? null : colorlessEquipmentShopList;
+            case WHITE -> itemShop ? whiteItemShopList : whiteEquipmentShopList;
+            case BLUE -> itemShop ? blueItemShopList : blueEquipmentShopList;
+            case BLACK -> itemShop ? blackItemShopList : blackEquipmentShopList;
+            case RED -> itemShop ? redItemShopList : redEquipmentShopList;
+            case GREEN -> itemShop ? greenItemShopList : greenEquipmentShopList;
+        };
+        return shop != null ? shop.toArray() : null;
     }
 
     public void unlockCardPackReward(String boosterPackName) {
@@ -342,23 +323,14 @@ public class LocalRandomizer {
     }
 
     public void unlockRandomRegion(String notificationMessage) {
-        if (archipelagoDataInstance.lockedWorldRegionsByName.isEmpty()) {
+        if (archipelagoDataInstance.lockedWorldRegions.isEmpty()) {
             return;
         }
 
-        int targetRegionIndex = new Random().nextInt(archipelagoDataInstance.lockedWorldRegionsByName.size());
-        int setIndex = 0;
-        for (String region : archipelagoDataInstance.lockedWorldRegionsByName) {
-            if (setIndex++ == targetRegionIndex) {
-                for (String runeName : archipelagoDataInstance.regionTeleportingRunes) {
-                    if (runeName.toLowerCase().contains(region.toLowerCase())) {
-                        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\nRegion Rune: %s%s{RESET}", ArchipelagoColors.Cyan, runeName));
-                        Current.player().addItem(runeName);
-                        return;
-                    }
-                }
-            }
-        }
+        List<ArchipelagoRegion> lockedRegions = new ArrayList<>(archipelagoDataInstance.lockedWorldRegions);
+        ArchipelagoRegion region = lockedRegions.get(new Random().nextInt(lockedRegions.size()));
+        archipelagoDataInstance.generateGameNotification(String.format(notificationMessage + ":\nRegion Rune: %s%s{RESET}", ArchipelagoColors.Cyan, region.runeItemName));
+        Current.player().addItem(region.runeItemName);
     }
 }
 /// --- End ---

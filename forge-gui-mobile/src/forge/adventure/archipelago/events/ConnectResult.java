@@ -51,7 +51,13 @@ public class ConnectResult {
                     locations.addAll(APClient.getLocationManager().getCheckedLocations());
                     APClient.scoutLocations(locations);
                 }
+                // Must be known before the received items are processed, which happens right after this event: set unlocks
+                // are split over this many checks. Also repairs saves whose set unlocks were split over the default of 100.
+                ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(APClient.slotData.SetUnlockCount);
+                ArchipelagoData.getInstance().unlockRemainingSetsIfAllReceived();
                 APRandomizer.sendQueuedLocations();
+                // Take over what the server already knows was checked for our slot (other saves/devices, release on goal).
+                APRandomizer.applyServerCheckedLocations(APClient.getLocationManager().getCheckedLocations());
                 // The goal status is not queued like location checks, so re-send it in case it was reached while disconnected.
                 if (ArchipelagoData.getInstance().isGoalReached()) {
                     Archipelago.getInstance().goal();

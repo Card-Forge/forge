@@ -1,4 +1,5 @@
 package forge.adventure.archipelago;
+import com.badlogic.gdx.Gdx;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.ArchipelagoSettingsScene;
 import forge.adventure.util.Current;
@@ -68,22 +69,22 @@ public class ArchipelagoRandomizer {
                         switch (entry.getKey()) {
                             case "C" -> {
                                 if (entry.getValue() > 0 && entry.getValue() % slotData.CommonCardsPerLocation == 0 && entry.getValue() / slotData.CommonCardsPerLocation <= slotData.CommonCardLocations) {
-                                    Archipelago.getInstance().checkLocation(4999L + entry.getValue() / slotData.CommonCardsPerLocation);
+                                    Archipelago.getInstance().checkLocation(ArchipelagoUtil.COMMON_CARD_LOCATION_BASE + entry.getValue() / slotData.CommonCardsPerLocation);
                                 }
                             }
                             case "U" -> {
                                 if (entry.getValue() > 0 && entry.getValue() % slotData.UncommonCardsPerLocation == 0 && entry.getValue() / slotData.UncommonCardsPerLocation <= slotData.UncommonCardLocations) {
-                                    Archipelago.getInstance().checkLocation(5099L + entry.getValue() / slotData.UncommonCardsPerLocation);
+                                    Archipelago.getInstance().checkLocation(ArchipelagoUtil.UNCOMMON_CARD_LOCATION_BASE + entry.getValue() / slotData.UncommonCardsPerLocation);
                                 }
                             }
                             case "R" -> {
                                 if (entry.getValue() > 0 && entry.getValue() % slotData.RareCardsPerLocation == 0 && entry.getValue() / slotData.RareCardsPerLocation <= slotData.RareCardLocations) {
-                                    Archipelago.getInstance().checkLocation(5199L + entry.getValue() / slotData.RareCardsPerLocation);
+                                    Archipelago.getInstance().checkLocation(ArchipelagoUtil.RARE_CARD_LOCATION_BASE + entry.getValue() / slotData.RareCardsPerLocation);
                                 }
                             }
                             case "M" -> {
                                 if (entry.getValue() > 0 && entry.getValue() % slotData.MythicRareCardsPerLocation == 0 && entry.getValue() / slotData.MythicRareCardsPerLocation <= slotData.MythicRareCardLocations) {
-                                    Archipelago.getInstance().checkLocation(5299L + entry.getValue() / slotData.MythicRareCardsPerLocation);
+                                    Archipelago.getInstance().checkLocation(ArchipelagoUtil.MYTHIC_RARE_CARD_LOCATION_BASE + entry.getValue() / slotData.MythicRareCardsPerLocation);
                                 }
                             }
                         }
@@ -91,124 +92,101 @@ public class ArchipelagoRandomizer {
                 }
                 case COLORLESS_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonColorless > 0 && archipelagoDataInstance.totalBattlesWonColorless % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonColorless / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(9999L + archipelagoDataInstance.totalBattlesWonColorless / slotData.FightsPerLocation);
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getBattleLocationBase(ArchipelagoRegion.WASTE) + archipelagoDataInstance.totalBattlesWonColorless / slotData.FightsPerLocation);
                     }
                 }
                 case WHITE_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonWhite > 0 && archipelagoDataInstance.totalBattlesWonWhite % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonWhite / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(19999L + archipelagoDataInstance.totalBattlesWonWhite / slotData.FightsPerLocation);
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getBattleLocationBase(ArchipelagoRegion.WHITE) + archipelagoDataInstance.totalBattlesWonWhite / slotData.FightsPerLocation);
                     }
                 }
                 case BLUE_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonBlue > 0 && archipelagoDataInstance.totalBattlesWonBlue % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonBlue / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(29999L + archipelagoDataInstance.totalBattlesWonBlue / slotData.FightsPerLocation);
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getBattleLocationBase(ArchipelagoRegion.BLUE) + archipelagoDataInstance.totalBattlesWonBlue / slotData.FightsPerLocation);
                     }
                 }
                 case BLACK_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonBlack > 0 && archipelagoDataInstance.totalBattlesWonBlack % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonBlack / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(39999L + archipelagoDataInstance.totalBattlesWonBlack / slotData.FightsPerLocation);
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getBattleLocationBase(ArchipelagoRegion.BLACK) + archipelagoDataInstance.totalBattlesWonBlack / slotData.FightsPerLocation);
                     }
                 }
                 case RED_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonRed > 0 && archipelagoDataInstance.totalBattlesWonRed % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonRed / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(49999L + archipelagoDataInstance.totalBattlesWonRed / slotData.FightsPerLocation);
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getBattleLocationBase(ArchipelagoRegion.RED) + archipelagoDataInstance.totalBattlesWonRed / slotData.FightsPerLocation);
                     }
                 }
                 case GREEN_BATTLE_WON -> {
                     if (archipelagoDataInstance.totalBattlesWonGreen > 0 && archipelagoDataInstance.totalBattlesWonGreen % slotData.FightsPerLocation == 0 && archipelagoDataInstance.totalBattlesWonGreen / slotData.FightsPerLocation <= slotData.FightLocations) {
-                        Archipelago.getInstance().checkLocation(59999L + archipelagoDataInstance.totalBattlesWonGreen / slotData.FightsPerLocation);
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getBattleLocationBase(ArchipelagoRegion.GREEN) + archipelagoDataInstance.totalBattlesWonGreen / slotData.FightsPerLocation);
                     }
                 }
                 case COLORLESS_TOWN_EVENTS -> {
                     if (!archipelagoDataInstance.colorlessCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
-                        Archipelago.getInstance().checkLocation(10999L + archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getInnEventLocationBase(ArchipelagoRegion.WASTE) + archipelagoDataInstance.colorlessCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case WHITE_TOWN_EVENTS -> {
                     if (!archipelagoDataInstance.whiteCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
-                        Archipelago.getInstance().checkLocation(20999L + archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getInnEventLocationBase(ArchipelagoRegion.WHITE) + archipelagoDataInstance.whiteCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLUE_TOWN_EVENTS -> {
                     if (!archipelagoDataInstance.blueCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
-                        Archipelago.getInstance().checkLocation(30999L + archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getInnEventLocationBase(ArchipelagoRegion.BLUE) + archipelagoDataInstance.blueCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLACK_TOWN_EVENTS -> {
                     if (!archipelagoDataInstance.blackCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
-                        Archipelago.getInstance().checkLocation(40999L + archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getInnEventLocationBase(ArchipelagoRegion.BLACK) + archipelagoDataInstance.blackCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case RED_TOWN_EVENTS -> {
                     if (!archipelagoDataInstance.redCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
-                        Archipelago.getInstance().checkLocation(50999L + archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getInnEventLocationBase(ArchipelagoRegion.RED) + archipelagoDataInstance.redCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case GREEN_TOWN_EVENTS -> {
                     if (!archipelagoDataInstance.greenCompletedTownInnEvents.isEmpty() && archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum() <= slotData.EventLocations) {
-                        Archipelago.getInstance().checkLocation(60999L + archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getInnEventLocationBase(ArchipelagoRegion.GREEN) + archipelagoDataInstance.greenCompletedTownInnEvents.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case COLORLESS_TOWN_QUESTS -> {
                     if (!archipelagoDataInstance.colorlessCompletedTownQuests.isEmpty() && archipelagoDataInstance.colorlessCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(11999L + archipelagoDataInstance.colorlessCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getTownQuestLocationBase(ArchipelagoRegion.WASTE) + archipelagoDataInstance.colorlessCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case WHITE_TOWN_QUESTS -> {
                     if (!archipelagoDataInstance.whiteCompletedTownQuests.isEmpty() && archipelagoDataInstance.whiteCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(21999L + archipelagoDataInstance.whiteCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getTownQuestLocationBase(ArchipelagoRegion.WHITE) + archipelagoDataInstance.whiteCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLUE_TOWN_QUESTS -> {
                     if (!archipelagoDataInstance.blueCompletedTownQuests.isEmpty() && archipelagoDataInstance.blueCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(31999L + archipelagoDataInstance.blueCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getTownQuestLocationBase(ArchipelagoRegion.BLUE) + archipelagoDataInstance.blueCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case BLACK_TOWN_QUESTS -> {
                     if (!archipelagoDataInstance.blackCompletedTownQuests.isEmpty() && archipelagoDataInstance.blackCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(41999L + archipelagoDataInstance.blackCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getTownQuestLocationBase(ArchipelagoRegion.BLACK) + archipelagoDataInstance.blackCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case RED_TOWN_QUESTS -> {
                     if (!archipelagoDataInstance.redCompletedTownQuests.isEmpty() && archipelagoDataInstance.redCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(51999L + archipelagoDataInstance.redCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getTownQuestLocationBase(ArchipelagoRegion.RED) + archipelagoDataInstance.redCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
                 case GREEN_TOWN_QUESTS -> {
                     if (!archipelagoDataInstance.greenCompletedTownQuests.isEmpty() && archipelagoDataInstance.greenCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum() <= slotData.QuestLocations) {
-                        Archipelago.getInstance().checkLocation(61999L + archipelagoDataInstance.greenCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
+                        Archipelago.getInstance().checkLocation(ArchipelagoUtil.getTownQuestLocationBase(ArchipelagoRegion.GREEN) + archipelagoDataInstance.greenCompletedTownQuests.values().stream().mapToLong(Long::longValue).sum());
                     }
                 }
-                case SLIME_MOTHER_DEFEATED -> Archipelago.getInstance().checkLocation(100L);
-                case SLOBAD_DEFEATED -> Archipelago.getInstance().checkLocation(101L);
-                case XIRA_DEFEATED -> Archipelago.getInstance().checkLocation(102L);
-                case NAHIRI_DEFEATED -> Archipelago.getInstance().checkLocation(200L);
-                case VALYX_DEFEATED -> Archipelago.getInstance().checkLocation(201L);
-                case JACE_DEFEATED -> Archipelago.getInstance().checkLocation(300L);
-                case KIORA_DEFEATED -> Archipelago.getInstance().checkLocation(301L);
-                case MYR_SUPERION_DEFEATED -> Archipelago.getInstance().checkLocation(302L);
-                case SLIVER_QUEEN_DEFEATED -> Archipelago.getInstance().checkLocation(303L);
-                case TEFERI_DEFEATED -> Archipelago.getInstance().checkLocation(304L);
-                case GROLNOK_DEFEATED -> Archipelago.getInstance().checkLocation(400L);
-                case GUARDIAN_ANGEL_DEFEATED -> Archipelago.getInstance().checkLocation(401L);
-                case LILIANA_DEFEATED -> Archipelago.getInstance().checkLocation(402L);
-                case SLIMEFOOT_DEFEATED -> Archipelago.getInstance().checkLocation(403L);
-                case SORIN_DEFEATED -> Archipelago.getInstance().checkLocation(404L);
-                case CHANDRA_DEFEATED -> Archipelago.getInstance().checkLocation(500L);
-                case TIBALTS_TORTURER_DEFEATED -> Archipelago.getInstance().checkLocation(501L);
-                case TIBALT_DEFEATED -> Archipelago.getInstance().checkLocation(502L);
-                case ZEDRUUS_COOK_DEFEATED -> Archipelago.getInstance().checkLocation(503L);
-                case CONJURER_DEFEATED -> Archipelago.getInstance().checkLocation(504L);
-                case ZEDRUU_DEFEATED -> Archipelago.getInstance().checkLocation(505L);
-                case GARRUK_DEFEATED -> Archipelago.getInstance().checkLocation(600L);
-                case HYDRA_OF_SHANDALAAR_DEFEATED -> Archipelago.getInstance().checkLocation(601L);
-                case SCARECROW_CAPTAIN_DEFEATED -> Archipelago.getInstance().checkLocation(602L);
-                case BOSS_WHITE_DEFEATED -> Archipelago.getInstance().checkLocation(1L);
-                case BOSS_BLUE_DEFEATED -> Archipelago.getInstance().checkLocation(2L);
-                case BOSS_BLACK_DEFEATED -> Archipelago.getInstance().checkLocation(3L);
-                case BOSS_RED_DEFEATED -> Archipelago.getInstance().checkLocation(4L);
-                case BOSS_GREEN_DEFEATED -> Archipelago.getInstance().checkLocation(5L);
                 case WIN_CONDITION_CLEARED -> Archipelago.getInstance().goal();
+                default -> {
+                    ArchipelagoUtil.Boss boss = ArchipelagoUtil.findBossByCheck(type);
+                    if (boss != null && boss.locationId != ArchipelagoUtil.NO_LOCATION) {
+                        Archipelago.getInstance().checkLocation(boss.locationId);
+                    }
+                }
             }
         }
     }
@@ -284,37 +262,103 @@ public class ArchipelagoRandomizer {
         ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(slotData.SetUnlockCount);
     }
 
-    public Set<ItemData> getShopItems(String shopName) {
-        if (shopName.toLowerCase().contains("items")) {
-            // Items shop name
-            if (shopName.toLowerCase().contains("white")) {
-                return whiteItemShopList;
-            } else if (shopName.toLowerCase().contains("blue")) {
-                return blueItemShopList;
-            } else if (shopName.toLowerCase().contains("black")) {
-                return blackItemShopList;
-            } else if (shopName.toLowerCase().contains("red")) {
-                return redItemShopList;
-            } else if (shopName.toLowerCase().contains("green")) {
-                return greenItemShopList;
+    /**
+     * Applies the locations the server reports as checked for our slot to this save, progress that is still queued
+     * for sending survives. Called from the client thread, so the work is done on the game thread.
+     */
+    public void applyServerCheckedLocations(Collection<Long> locationIds) {
+        if (locationIds == null || locationIds.isEmpty()) {
+            return;
+        }
+        Set<Long> checked = new HashSet<>(locationIds);
+        Gdx.app.postRunnable(() -> {
+            if (slotData == null || archipelagoDataInstance.getArchipelagoMode() != ArchipelagoMode.networked_archipelago) {
+                return;
             }
-        } else {
-            // Equipment shop name
-            if (shopName.toLowerCase().contains("white")) {
-                return whiteEquipmentShopList;
-            } else if (shopName.toLowerCase().contains("blue")) {
-                return blueEquipmentShopList;
-            } else if (shopName.toLowerCase().contains("black")) {
-                return blackEquipmentShopList;
-            } else if (shopName.toLowerCase().contains("red")) {
-                return redEquipmentShopList;
-            } else if (shopName.toLowerCase().contains("green")) {
-                return greenEquipmentShopList;
-            } else {
-                return colorlessEquipmentShopList;
+            for (Set<ItemData> shop : List.of(colorlessEquipmentShopList, whiteEquipmentShopList, blueEquipmentShopList,
+                    blackEquipmentShopList, redEquipmentShopList, greenEquipmentShopList, whiteItemShopList, blueItemShopList,
+                    blackItemShopList, redItemShopList, greenItemShopList)) {
+                for (ItemData item : shop) {
+                    if (checked.contains(item.archilepagoLocationId)) {
+                        item.archipelagoAlreadyChecked = true;
+                    }
+                }
+            }
+            syncLocalProgress(checked);
+        });
+    }
+
+    // Raises the save's bosses, battles, inn events, town quests and cards to what the server reports as checked.
+    private void syncLocalProgress(Set<Long> checked) {
+        for (ArchipelagoUtil.Boss boss : ArchipelagoUtil.BOSSES) {
+            if (boss.locationId != ArchipelagoUtil.NO_LOCATION && checked.contains(boss.locationId) && !archipelagoDataInstance.isBossOrMinibossDefeated(boss)) {
+                (boss.castleBoss ? archipelagoDataInstance.bossesDefeatedByName : archipelagoDataInstance.miniBossesDefeatedByName).add(boss.name.toLowerCase());
             }
         }
-        return null;
+        for (ArchipelagoRegion region : ArchipelagoRegion.values()) {
+            syncBattlesWon(region, highestChecked(checked, ArchipelagoUtil.getBattleLocationBase(region), slotData.FightLocations) * slotData.FightsPerLocation);
+            syncTownQuestOrInnEventCount(archipelagoDataInstance.getCompletedInnEventsByRegion(region), highestChecked(checked, ArchipelagoUtil.getInnEventLocationBase(region), slotData.EventLocations));
+            syncTownQuestOrInnEventCount(archipelagoDataInstance.getCompletedTownQuestsByRegion(region), highestChecked(checked, ArchipelagoUtil.getTownQuestLocationBase(region), slotData.QuestLocations));
+        }
+        syncCardsEarned("C", highestChecked(checked, ArchipelagoUtil.COMMON_CARD_LOCATION_BASE, slotData.CommonCardLocations) * (long) slotData.CommonCardsPerLocation);
+        syncCardsEarned("U", highestChecked(checked, ArchipelagoUtil.UNCOMMON_CARD_LOCATION_BASE, slotData.UncommonCardLocations) * (long) slotData.UncommonCardsPerLocation);
+        syncCardsEarned("R", highestChecked(checked, ArchipelagoUtil.RARE_CARD_LOCATION_BASE, slotData.RareCardLocations) * (long) slotData.RareCardsPerLocation);
+        syncCardsEarned("M", highestChecked(checked, ArchipelagoUtil.MYTHIC_RARE_CARD_LOCATION_BASE, slotData.MythicRareCardLocations) * (long) slotData.MythicRareCardsPerLocation);
+    }
+
+    // Highest n in 1..count for which the repeatable check base + n is checked (0 if none).
+    private static int highestChecked(Set<Long> checked, long base, int count) {
+        for (int n = count; n > 0; n--) {
+            if (checked.contains(base + n)) {
+                return n;
+            }
+        }
+        return 0;
+    }
+
+    private void syncBattlesWon(ArchipelagoRegion region, int serverBattlesWonCount) {
+        ArchipelagoData data = archipelagoDataInstance;
+        switch (region) {
+            case WHITE -> data.totalBattlesWonWhite = Math.max(data.totalBattlesWonWhite, serverBattlesWonCount);
+            case BLUE -> data.totalBattlesWonBlue = Math.max(data.totalBattlesWonBlue, serverBattlesWonCount);
+            case BLACK -> data.totalBattlesWonBlack = Math.max(data.totalBattlesWonBlack, serverBattlesWonCount);
+            case RED -> data.totalBattlesWonRed = Math.max(data.totalBattlesWonRed, serverBattlesWonCount);
+            case GREEN -> data.totalBattlesWonGreen = Math.max(data.totalBattlesWonGreen, serverBattlesWonCount);
+            case WASTE -> data.totalBattlesWonColorless = Math.max(data.totalBattlesWonColorless, serverBattlesWonCount);
+        }
+    }
+
+    // Raises a region's town quests or inn events per town to the server's total. The server doesn't know
+    // which towns the checks were in, so the missing amount is put under a placeholder town.
+    private static void syncTownQuestOrInnEventCount(Map<String, Long> localTownQuestOrInnEventCount, long serverTotal) {
+        long missing = serverTotal - localTownQuestOrInnEventCount.values().stream().mapToLong(Long::longValue).sum();
+        if (missing > 0) {
+            localTownQuestOrInnEventCount.merge("(Archipelago server)", missing, Long::sum);
+        }
+    }
+
+    private void syncCardsEarned(String rarity, long serverCardsEarned) {
+        Map<String, Long> cardsEarnedByRarity = archipelagoDataInstance.cardsEarnedByRarity;
+        if (serverCardsEarned > cardsEarnedByRarity.getOrDefault(rarity, 0L)) {
+            cardsEarnedByRarity.put(rarity, serverCardsEarned);
+        }
+    }
+
+    // `shopName` is the shop's map name from the game, e.g. "white equipment" or "blue items".
+    public Set<ItemData> getShopItems(String shopName) {
+        return getShopItems(ArchipelagoRegion.fromShopName(shopName), shopName.toLowerCase().contains("items"));
+    }
+
+    // The Wastes have no item shop, so that one is null.
+    public Set<ItemData> getShopItems(ArchipelagoRegion region, boolean itemShop) {
+        return switch (region) {
+            case WASTE -> itemShop ? null : colorlessEquipmentShopList;
+            case WHITE -> itemShop ? whiteItemShopList : whiteEquipmentShopList;
+            case BLUE -> itemShop ? blueItemShopList : blueEquipmentShopList;
+            case BLACK -> itemShop ? blackItemShopList : blackEquipmentShopList;
+            case RED -> itemShop ? redItemShopList : redEquipmentShopList;
+            case GREEN -> itemShop ? greenItemShopList : greenEquipmentShopList;
+        };
     }
 
     public void setSlotData(SlotData slotData) {
