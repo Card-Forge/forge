@@ -1,0 +1,7 @@
+Name:Jurati, Cordial Queen
+ManaCost:1 W U
+Types:Legendary Artifact Creature Borg Scientist
+PT:3/3
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigCopy | TriggerDescription$ Whenever one or more artifact creatures you control deal combat damage to a player, create a token that's a copy of target artifact token you control.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Artifact.token+YouCtrl | ValidTgtsDesc$ artifact token you control
+Oracle:Whenever one or more artifact creatures you control deal combat damage to a player, create a token that's a copy of target artifact token you control.
