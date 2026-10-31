@@ -1,0 +1,12 @@
+Name:Genesis Device
+ManaCost:2 G
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, search your library for a basic land card or Planet card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic,Planet | ChangeNum$ 1
+A:AB$ Sacrifice | Cost$ 3 G G T Sac<1/CARDNAME> | Defined$ You | Amount$ X | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SorcerySpeed$ True | SubAbility$ DBSearch | SpellDescription$ Sacrifice any number of lands you control, then search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle. Activate only as a sorcery.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ Y | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:Remembered$Amount
+DeckHints:Type$Planet
+Oracle:When Genesis Device enters, search your library for a basic land card or Planet card, put it onto the battlefield tapped, then shuffle.\n{3}{G}{G}, {T}, Sacrifice Genesis Device: Sacrifice any number of lands you control, then search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle. Activate only as a sorcery.
