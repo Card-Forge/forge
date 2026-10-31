@@ -328,6 +328,9 @@ public class FDeckStatsView extends FScrollPane {
             }
 
             String footer = stats.landCount + " " + msg("lblLands").toLowerCase() + "     " + stats.nonLandCount + " " + msg("lblNonLand").toLowerCase();
+            if (stats.pointsSummary != null) {
+                footer += "     " + stats.pointsSummary.replace("\n", "     ");
+            }
             g.drawText(footer, FSkinFont.get(11), textMuted(), x, y + h - footerH, w, footerH, false, Align.left, true);
         }
     }
