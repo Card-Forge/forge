@@ -966,10 +966,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (itemExists && description.isEmpty() && item.questItem)
                     description = "Quest Item";
                 Forge.getGraphics().endClip();
-                Forge.getGraphics().end();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
+                // end the shared batch even when drawing failed, otherwise the next begin() throws
+                Forge.getGraphics().end();
                 frameBuffer.end();
                 generatedTooltip = frameBuffer.getColorBufferTexture();
                 generatedTooltip.bind();
