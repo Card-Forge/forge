@@ -88,6 +88,19 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         super.applyChange();
     }
 
+    /** Selects the format, or all formats when it is null, and filters by it. */
+    public void setFormat(final GameFormat format0) {
+        preventHandling = true;
+        if (format0 == null) {
+            cbxFormats.setSelectedIndex(0);
+        } else {
+            cbxFormats.setSelectedItem(format0);
+        }
+        preventHandling = false;
+        format = format0;
+        applyChange();
+    }
+
     @Override
     public void reset() {
         preventHandling = true;
