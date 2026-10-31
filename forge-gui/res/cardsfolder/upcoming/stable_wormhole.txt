@@ -1,7 +1,6 @@
 Name:Stable Wormhole
 ManaCost:2 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
 SVar:TrigToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True
 SVar:PlayMain1:TRUE
