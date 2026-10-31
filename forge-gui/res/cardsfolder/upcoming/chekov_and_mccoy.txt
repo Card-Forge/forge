@@ -2,7 +2,7 @@ Name:Chekov and McCoy
 ManaCost:3 G U
 Types:Legendary Creature Human Pilot Doctor
 PT:3/3
-T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidSource$ You | ValidCard$ Card.Self | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever you put one or more +1/+1 counters on Chekov and McCoy, you may draw that many cards. Do this only once each turn.
+T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidSource$ You | ValidCard$ Card.Self | TriggerZones$ Battlefield | ResolvedLimit$ 1 | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever you put one or more +1/+1 counters on CARDNAME, you may draw that many cards. Do this only once each turn.
 SVar:TrigDraw:DB$ Draw | NumCards$ X
 SVar:X:TriggerCount$Amount
 DeckHints:Ability$Counters
