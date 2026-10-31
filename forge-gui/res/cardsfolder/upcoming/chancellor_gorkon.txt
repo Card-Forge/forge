@@ -4,5 +4,5 @@ Types:Legendary Creature Klingon Noble
 PT:5/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, exile up to two target creatures.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | ValidTgtsDesc$ creature | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile
 Oracle:Vigilance\nWhen Chancellor Gorkon dies, exile up to two target creatures.

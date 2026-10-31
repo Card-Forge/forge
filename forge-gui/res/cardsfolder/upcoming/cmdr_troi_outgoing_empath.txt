@@ -3,7 +3,7 @@ ManaCost:2 U R
 Types:Legendary Creature Betazoid Human Advisor
 PT:3/3
 K:Vigilance
-A:AB$ Play | Cost$ T | ValidTgts$ Player.Opponent+Active | TgtPrompt$ Select target opponent whose turn it is | Controller$ Targeted | Valid$ Card.TargetedPlayerCtrl | ValidZone$ Hand | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | Amount$ 1 | RememberPlayed$ True | SubAbility$ DBCopy | SpellDescription$ Target opponent whose turn it is may cast a spell from their hand without paying its mana cost. If they do, you copy that spell. You may choose new targets for the copy. If they don't, you draw a card.
+A:AB$ Play | Cost$ T | ValidTgts$ Player.Opponent+Active | ValidTgtsDesc$ opponent whose turn it is | Controller$ Targeted | Valid$ Card.TargetedPlayerCtrl | ValidZone$ Hand | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | Amount$ 1 | RememberPlayed$ True | SubAbility$ DBCopy | SpellDescription$ Target opponent whose turn it is may cast a spell from their hand without paying its mana cost. If they do, you copy that spell. You may choose new targets for the copy. If they don't, you draw a card.
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | MayChooseTarget$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
