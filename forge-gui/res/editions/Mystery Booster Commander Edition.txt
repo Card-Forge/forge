@@ -5,9 +5,42 @@ Name=Mystery Booster Commander Edition
 Type=Draft
 DraftType=Commander
 DoublePick=Always
+DraftType=Commander
 DraftImpliedPartnership=MissingIdentity
 MaxMatchPlayers=4
 ScryfallCode=MBC
+BoosterSlots=White,Blue,Black,Red,Green,Wildcard,Reprints,NewCards,AltFrames
+Booster=3 White, 3 Blue, 3 Black, 3 Red, 3 Green, 1 Wildcard, 1 Reprints, 1 NewCards, 1 AltFrames
+
+[White]
+Base=fromSheet("MBC white")
+
+[Blue]
+Base=fromSheet("MBC blue")
+
+[Black]
+Base=fromSheet("MBC black")
+
+[Red]
+Base=fromSheet("MBC red")
+
+[Green]
+Base=fromSheet("MBC green")
+
+[Wildcard]
+Base=fromSheet("MBC wildcard")
+
+[Reprints]
+Base=fromSheet("MBC reprints")
+
+[NewCards]
+Base=fromSheet("MBC cards")
+Replace=0.0475 fromSheet("MBC cards")+
+
+[AltFrames]
+Base=fromSheet("MBC future frame")
+Replace=0.044 fromSheet("MBC future frame")+
+Replace=0.008 fromSheet("MBC promo")+
 
 [cards]
 1 R Ekthi, Contaminator Priest @Fariba Khamseh
@@ -70,6 +103,8 @@ ScryfallCode=MBC
 58 R Zagorka, Mother of Sanctum @Daren Bader
 59 R The Everforger @Chris Seaman
 60 R Valko Indorian @Paolo Parente
+
+[promo]
 61 U Ruby Collector @Cristi Balanescu
 62 U Case of the Lost Witness @Yeong-Hao Han
 63 U Emerald Collector @Andreas Zafiratos
@@ -80,6 +115,8 @@ ScryfallCode=MBC
 68 U Sapphire Collector @Francis Tneh
 69 U Jet Collector @Francis Tneh
 70 U Euru, Acorn Scrounger @Dave Kendall
+
+[future frame]
 71 U Dust to Dust @Doug Keith
 72 R Chaos Warp @Trevor Claxton
 73 R Chromatic Lantern @Jung Park
@@ -90,3 +127,2039 @@ ScryfallCode=MBC
 78 U Thought Vessel @rk post
 79 R Exotic Orchard @Ron Spears
 80 C Path of Ancestry @Alayna Danner
+
+[white]
+Abolish|PCY
+Abzan Battle Priest|KTK
+Accorder Paladin|MBS
+Adamant Will|DOM
+Adanto Vanguard|XLN
+Aerial Responder|E01
+Afterlife|MIR
+Afterlife Insurance|CLU
+Against All Odds|ONE
+Ajani's Pridemate|WAR
+Ajani's Welcome|M19
+Akroan Phalanx|BNG
+Alharu, Solemn Ritualist|CMR
+All That Glitters|ELD
+Alseid of Life's Bounty|THB
+Ancestral Blade|2XM
+Angel of Light|MB2
+Angel of Renewal|BFZ
+Angel of the Ruins|OTC
+Angel of Vitality|M20
+Angelic Exaltation|RNA
+Angelic Favor|NEM
+Angelic Gift|BBD
+Angelic Page|USG
+Angelic Protector|TMP
+Archetype of Courage|BNG
+Archon of Absolution|ELD
+Ardenn, Intrepid Archaeologist|CMR
+Armored Ascension|SHM
+Aven Liberator|SCG
+Aven Mindcensor|TSR
+Aven Squire|CON
+Avian Changeling|LRW
+Azorius Herald|GK2
+Baffling End|RIX
+Baird, Steward of Argive|DOM
+Ballynock Cohort|EMA
+Bane's Invoker|CLB
+Banisher Priest|M14
+Banishing Light|JOU
+Banishing Slash|NEO
+Banishing Stroke|AVR
+Barbed Spike|MH2
+Basri's Acolyte|M21
+Basri's Solidarity|M21
+Battle Screech|JUD
+Belfry Spirit|GK2
+Bellowing Aegisaur|XLN
+Beloved Chaplain|ODY
+Benevolent Ancestor|IMA
+Benevolent Blessing|CMR
+Benevolent Bodyguard|JUD
+Blessed Hippogriff|CLB
+Blessed Spirits|ORI
+Bond of Discipline|WAR
+Boonweaver Giant|M15
+Brave the Sands|CM2
+Breath of Life|POR
+Burrenton Forge-Tender|LRW
+Cast Out|AKH
+Cenn's Enlistment|EVE
+Citadel Gate|CLB
+Clarion Spirit|KHM
+Cleric Class|AFR
+Cloudgoat Ranger|LRW
+Cloudshift|A25
+Coalition Honor Guard|EMA
+Condemn|DIS
+Congregate|M15
+Constricting Sliver|M15
+Consul's Lieutenant|ORI
+Contraband Livestock|CLB
+Crossbow Infantry|MMQ
+Crystal Dragon|CLB
+Custodi Squire|CNS
+Cut a Deal|ONC
+Dalkovan Packbeasts|TDM
+Darksteel Mutation|CMA
+Daru Spiritualist|SCG
+Dauntless Bodyguard|DOM
+Dauntless Cathar|SOI
+Dauntless Dismantler|LCI
+Dawn Charm|UMA
+Dawnbringer Cleric|AFR
+Dawnglare Invoker|C15
+Daxos, Blessed by the Sun|THB
+Daydream|SOS
+Decree of Justice|MH3
+Defensive Formation|USG
+Deftblade Elite|LGN
+Desperate Lunge|WAR
+Destroy Evil|DMU
+Devouring Light|RVR
+Devout Witness|MMQ
+Doomed Traveler|CN2
+Dragon Bell Monk|IMA
+Elite Scaleguard|CM2
+Elspeth's Smite|MOM
+Emerge Unscathed|IMA
+Empty-Shrine Kannushi|BOK
+Encampment Keeper|XLN
+Encircling Fissure|BFZ
+Entangler|PCY
+Ethereal Armor|Q06
+Ethereal Haze|CHK
+Evangel of Heliod|THS
+Exile|VMA
+Expedition Raptor|BBD
+Exultant Skymarcher|RIX
+Faerie Guidemother|ELD
+Fairgrounds Warden|KLD
+Faith Unbroken|EMN
+Faithbearer Paladin|EMN
+Fanatical Devotion|NEM
+Fearless Fledgling|ZNR
+Felidar Guardian|AER
+Felidar Umbra|PC2
+Fencing Ace|A25
+Field of Souls|VOC
+Fiend Hunter|CMA
+Fierce Retribution|VOW
+Flickerwisp|EVE
+Flock Impostor|ECL
+Forsake the Worldly|AKH
+Fortify|MM2
+Fragmentize|KLD
+Geist of the Moors|A25
+Generous Gift|MH1
+Genju of the Fields|BOK
+Ghostly Prison|CHK
+Gideon's Lawkeeper|MM3
+Gideon's Sacrifice|WAR
+Gleam of Resistance|CN2
+Glimmerpoint Stag|SOM
+Gods Willing|UMA
+Goldmeadow Harrier|DDF
+Goldnight Commander|AVR
+Grateful Apparition|WAR
+Griffin Guide|TSR
+Guardian Naga|CLB
+Guided Strike|IMA
+Hammers of Moradin|CLB
+Hand of Honor|SOK
+Healer of the Pride|M13
+Healer's Hawk|GRN
+Heliod's Punishment|THB
+Helpful Hunter|FDN
+Herald of the Host|CM2
+Hope and Glory|ULG
+Humble|EMA
+Imperial Oath|NEO
+Imposing Vantasaur|IKO
+Impostor of the Sixth Pride|MH1
+Inspiring Overseer|SNC
+Intangible Virtue|ISD
+Iona's Judgment|IMA
+Irregular Cohort|MH1
+Jötun Owl Keeper|CSP
+Journey to Nowhere|ZEN
+Jubilant Mascot|BBD
+Kabira Vindicator|DDP
+Kami of False Hope|BOK
+Kangee's Lieutenant|CMR
+Karoo|VIS
+Keleth, Sunmane Familiar|CMM
+Kinsbaile Courier|CMR
+Kitsune Blademaster|CHK
+Knight of Cliffhaven|DDP
+Knight of Meadowgrain|DDG
+Knight of the Holy Nimbus|TSP
+Knight of the Tusk|M19
+Kor Cartographer|DDI
+Kor Celebrant|ZNR
+Kor Firewalker|A25
+Kor Hookmaster|EMA
+Lagonna-Band Trailblazer|JOU
+Lassoed by the Law|OTJ
+Lieutenants of the Guard|CN2
+Lingering Souls|MM3
+Loyal Sentry|A25
+Loyal Unicorn|C18
+Make a Stand|OGW
+Mask of Law and Grace|UDS
+Master Decoy|TMP
+Master of Arms|WTH
+Master Splicer|NPH
+Mentor of the Meek|2X2
+Metastatic Evangel|MH3
+Midnight Guard|BBD
+Militia Bugler|2X2
+Minimus Containment|CLB
+Ministrant of Obligation|RNA
+Miraculous Recovery|VIS
+Mistmeadow Skulk|SHM
+Mistveil Plains|UMA
+Momentary Blink|MM3
+Moon-Blessed Cleric|AFR
+Moonlit Strider|MM2
+Mother of Runes|ULG
+Myth Realized|2X2
+Nahiri's Machinations|SOI
+Nearheath Pilgrim|AVR
+Nightwind Glider|MMQ
+Nikko-Onna|SOK
+Noble Purpose|MMQ
+Nyx-Fleece Ram|J25
+Oathsworn Giant|RAV
+Oblivion Ring|LRW
+Omen of the Sun|THB
+On Serra's Wings|DOM
+Orzhov Advokist|C16
+Ossification|ONE
+Otherworldly Journey|DDC
+Pacifism|M20
+Palace Jailer|CN2
+Palace Sentinels|CN2
+Paladin of the Bloodstained|XLN
+Pegasus Courser|M19
+Pegasus Guardian|CLB
+Pentarch Ward|IMA
+Perimeter Captain|WWK
+Personify|ECL
+Phantom Flock|JUD
+Phyrexian Missionary|DMU
+Pilgrim of the Ages|GN3
+Planar Disruption|ONE
+Plate Armor|AFR
+Porcelain Legionnaire|NPH
+Portal Manipulator|CLU
+Prava of the Steel Legion|ONC
+Pressure Point|FRF
+Prismatic Strands|JUD
+Prison Term|SHM
+Promise of Bunrei|A25
+Radiant's Judgment|ULG
+Raffine's Informant|SNC
+Raise the Alarm|MD1
+Rally the Monastery|TDM
+Rally the Peasants|EMA
+Rambunctious Mutt|M21
+Ramosian Rally|MMQ
+Rebuff the Wicked|PLC
+Reconnaissance|EXO
+Recumbent Bliss|EVE
+Refuse to Yield|SNC
+Release the Dogs|M21
+Renewed Faith|A25
+Reprobation|MH1
+Requisition Raid|OTJ
+Resolute Reinforcements|DMU
+Restoration Specialist|AER
+Retreat to Emeria|BFZ
+Reveille Squad|PCY
+Reverent Hoplite|THB
+Rootborn Defenses|MM3
+Rumor Gatherer|SNC
+Sacred Cat|AKH
+Sage's Reverie|C18
+Samurai of the Pale Curtain|CHK
+Sanctum Gargoyle|C16
+Scars of the Veteran|ALL
+Secret Rendezvous|STX
+Seeker of the Way|KTK
+Sensor Splicer|MM3
+Sentinel of the Eternal Watch|ORI
+Sentinel Sliver|M14
+Seraph of Dawn|AVR
+Seraph of the Suns|AKH
+Settle Beyond Reality|MH1
+Shattered Angel|NPH
+Shelter|ODY
+Sheltered by Ghosts|DSK
+Shepherd of the Flock|ELD
+Shepherd of the Lost|ZEN
+Shieldhide Dragon|DTK
+Shoulder to Shoulder|BBD
+Shrike Force|BLB
+Sigil of the New Dawn|UMA
+Silver Knight|SCG
+Sky Crier|SNC
+Skyhunter Skirmisher|MM2
+Slaughter the Strong|CMR
+Soltari Trooper|TMP
+Soltari Visionary|EXO
+Soul Warden|MM3
+Soul's Attendant|ROE
+Spectral Procession|SHM
+Spirit en-Dal|FUT
+Spirit Link|10E
+Spirit Mantle|M12
+Spirited Companion|NEO
+Splendor Mare|IKO
+Splitskin Doll|DSK
+Standard Bearer|APC
+Starlit Angel|POR
+Stasis Snare|BFZ
+Steadfast Unicorn|CLB
+Stir the Pride|DST
+Stonecloaker|PLC
+Stonehorn Dignitary|M12
+Subjugator Angel|INR
+Sunblade Angel|CMM
+Sunder the Gateway|MOM
+Sunlance|MM2
+Sunscape Familiar|PLS
+Supply Runners|M21
+Surge of Salvation|MOM
+Suture Priest|NPH
+Swell of Courage|MOR
+Swift Justice|RTR
+Syndic of Tithes|GTC
+Syr Alin, the Lion's Claw|ELD
+Tabaxi Toucaneers|CLB
+Take Up the Shield|J25
+Take Vengeance|M19
+Teferi's Honor Guard|VIS
+Temple Acolyte|P02
+Temporal Isolation|TSP
+Tenacity|SOI
+Teyo, the Shieldmage|WAR
+The Birth of Meletis|THB
+Thraben Charm|MH3
+Thraben Watcher|MH2
+Thunderous Orator|STX
+Tireless Tribe|ODY
+To Arms!|GPT
+Tormented Angel|UDS
+Totem-Guide Hartebeest|ROE
+Touch the Spirit Realm|NEO
+Traveling Minister|VOW
+Trostani's Judgment|RTR
+True Love's Kiss|ELD
+Twinblade Paladin|M20
+Twinmaw Stormbrood|TDM
+Unbounded Potential|MH2
+Unquestioned Authority|JUD
+Unwavering Initiate|AKH
+Valor|JUD
+Valorous Stance|CMR
+Valorous Steed|M21
+Vanish into Eternity|ONE
+Veteran Armorer|RAV
+Vizier of Remedies|AKH
+Vow of Duty|C15
+Wakestone Gargoyle|CNS
+Wall of Glare|UDS
+Wall of Omens|EMA
+Wall of Swords|POR
+Wanderer's Strike|WAR
+War Priest of Thune|M11
+Ward Sliver|LGN
+Warrior en-Kor|STH
+Whipcorder|ONS
+Wispweaver Angel|KLD
+You Hear Something on Watch|AFR
+Your Temple Is Under Attack|CLB
+You're Confronted by Robbers|CLB
+Youthful Valkyrie|KHM
+
+[blue]
+Academy Journeymage|DOM
+Acquisition Octopus|NEO
+Aether Tradewinds|KLD
+Aetherize|DDO
+Aethersnipe|MM2
+Alchemist's Retrieval|VOW
+Alirios, Enraptured|THB
+Amoeboid Changeling|J22
+Amphin Pathmage|M15
+An Offer You Can't Refuse|SNC
+Annex|ONS
+Aphetto Alchemist|ONS
+Apprentice Sorcerer|P02
+Apprentice Wizard|DRK
+Aqueous Form|THS
+Arcane Denial|CMA
+Archaeomancer|C17
+Archetype of Imagination|C18
+Augur of Bolas|MM3
+Aven Fisher|ODY
+Azure Fleet Admiral|LCC
+Bastion Inventor|AER
+Battlewing Mystic|DMU
+Behold the Multiverse|KHM
+Belltoll Dragon|DTK
+Bewilder|IMA
+Blink of an Eye|DOM
+Blur|CLB
+Body Double|2X2
+Boomerang|MIR
+Borrowing 100,000 Arrows|A25
+Breakthrough|TOR
+Brilliant Plan|GS1
+Brine Elemental|A25
+Brinelin, the Moon Kraken|CMM
+Broodbirth Viper|C15
+Canal Courier|CN2
+Candlekeep Inspiration|CLB
+Careful Study|ODY
+Cartouche of Knowledge|AKH
+Cephalid Broker|ODY
+Cephalid Illusionist|TOR
+Cerulean Wisps|SHM
+Cerulean Wyvern|MIR
+Chakram Retriever|BBD
+Chemister's Insight|GRN
+Choking Tethers|A25
+Citywatch Sphinx|GRN
+Claustrophobia|DDT
+Clinquant Skymage|FDN
+Cloak of Feathers|POR
+Cloud Djinn|WTH
+Cloud Elemental|MM2
+Cloud Spirit|STH
+Cloudreader Sphinx|DOM
+Coastal Piracy|MMQ
+Code of Constraint|RNA
+Codecracker Hound|EOE
+Cold-Water Snapper|DOM
+Combat Research|DMU
+Complicate|ONS
+Compulsion|TOR
+Concentrate|E02
+Cone of Cold|CLB
+Confound|PLS
+Coralhelm Guide|BBD
+Court Hussar|A25
+Cryogen Relic|EOE
+Curiosity|8ED
+Curious Obsession|RIX
+Curse of Verbosity|C17
+Dakra Mystic|JOU
+Daring Saboteur|NCC
+Deceiver Exarch|NPH
+Deep Analysis|EMA
+Deepchannel Mentor|SHM
+Diminish|IMA
+Diplomatic Escort|MMQ
+Disrupt|WTH
+Distortion Strike|IMA
+Dive Down|XLN
+Divide by Zero|STX
+Divination|M19
+Dream Fracture|CNS
+Dream Thrush|INV
+Dreamscape Artist|PLC
+Dreamtail Heron|IKO
+Drift of Phantasms|RAV
+Echo Tracer|LGN
+Echoing Truth|DMC
+Eel Umbra|C18
+Eldrazi Skyspawner|BFZ
+Emrakul's Messenger|MH3
+Enclave Cryptologist|ROE
+Errant Ephemeron|DD3
+Esior, Wardwing Familiar|CMR
+Essence Scatter|M19
+Exclude|MH1
+Exhaustion|POR
+Expel from Orazca|RIX
+Experimental Augury|ONE
+Fact or Fiction|CM2
+Fade Away|EXO
+Faerie Mechanist|DDU
+Faerie Seer|MH1
+Faerie Swarm|SHM
+Fall from Favor|CMR
+Familiar's Ruse|LRW
+Fatestitcher|ALA
+Flash of Insight|JUD
+Flux|POR
+Flux Channeler|WAR
+Fog Bank|BBD
+Forbid|EXO
+Forbidden Alchemy|MM3
+Force Spike|DDJ
+Freed from the Real|SOK
+Frogify|2XM
+Frost Trickster|STX
+Fumble|BBD
+Ghost Ship|A25
+Ghostly Flicker|KHC
+Gigadrowse|GPT
+Glacial Crasher|M15
+Grip of the Roil|OGW
+Gudul Lurker|DTK
+Guildpact Informant|WAR
+Hada Spy Patrol|CMA
+Halimar Depths|DDM
+Halimar Wavewatch|ROE
+Hard Evidence|MH2
+Helm of the Ghastlord|SHM
+Hieroglyphic Illumination|AKH
+Horizon Scholar|THS
+Horseshoe Crab|A25
+Hulking Metamorph|BRO
+Hydrolash|GNT
+Ideas Unbound|SOK
+Illusory Ambusher|C15
+Impulse|BBD
+Invisible Stalker|ZNR
+Irenicus's Vile Duplication|CLB
+Jace's Phantasm|IMA
+Jwar Isle Avenger|OGW
+Kasmina, Enigmatic Mentor|WAR
+Kelpie Guide|STX
+Killer Whale|EXO
+Kitesail Skirmisher|CMR
+Krovikan Sorcerer|VMA
+Laboratory Maniac|INR
+Lay Claim|AKH
+Lazotep Plating|WAR
+Leap|STH
+Legacy's Allure|TMP
+Legerdemain|TMP
+Looter il-Kor|TSP
+Lore Weaver|BBD
+Loyal Drake|CMM
+Majestic Metamorphosis|SNC
+Mana Leak|DDN
+Man-o'-War|POR
+Meeting of Minds|MOM
+Memory Lapse|EMA
+Mental Note|JUD
+Merfolk Looter|DDT
+Merfolk Seastalkers|ZEN
+Merfolk Thaumaturgist|PLC
+Merfolk Trickster|DOM
+Military Intelligence|M15
+Mind Bend|MIR
+Mirror Image|M19
+Mirrorshell Crab|NEO
+Mischievous Mystic|FDN
+Mistblade Shinobi|PCA
+Mistwalker|KHM
+Moon-Circuit Hacker|NEO
+Mothdust Changeling|MOR
+Muddle the Mixture|RAV
+Mulldrifter|CM2
+Murmuring Mystic|GRN
+Mystic of the Hidden Way|A25
+Mystic Retrieval|INR
+Mystic Speculation|FUT
+Mystic Subdual|IKO
+Mystical Teachings|MM3
+Narcolepsy|ROE
+Negate|RIX
+Nephalia Smuggler|DDQ
+Neutralize|IKO
+Nevermaker|MOR
+Ninja of the Deep Hours|C18
+Omen|POR
+Omen of the Sea|THB
+Omenspeaker|BBD
+Omni-Changeling|ECL
+Oneirophage|MH1
+Ophidian|WTH
+Ophidian Eye|TSP
+Opportunity|C17
+Opt|DOM
+Out of Bounds|BBD
+Owl Familiar|POR
+Paradox Haze|TSP
+Pemmin's Aura|SCG
+Pendrell Drake|USG
+Peregrine Drake|USG
+Perilous Research|MMA
+Phyrexian Ingester|CMM
+Piracy Charm|PLC
+Pirate's Prize|XLN
+Pongify|PLC
+Pore Over the Pages|SOI
+Portent|C18
+Preordain|C15
+Prodigal Sorcerer|EMA
+Propaganda|C16
+Prosperous Pirates|XLN
+Psychic Corrosion|M19
+Rapid Hybridization|C21
+Ravenform|KHM
+Reality Shift|NEO
+Reconnaissance Mission|WOC
+Referee Squad|MOM
+Repulse|CN2
+Rescind|USG
+Retraction Helix|A25
+Rewind|USG
+Ringwarden Owl|ORI
+Rise from the Tides|GN2
+Rishadan Cutpurse|MMQ
+River Serpent|AKH
+Riverwheel Aerialists|IMA
+Roiling Dragonstorm|TDM
+Ruin Crab|ZNR
+Run Away Together|CLB
+Rush of Knowledge|SCG
+Rushing River|PLS
+Sapphire Dragon|CLB
+Saprazzan Skerry|MMQ
+Scholar of the Ages|M20
+Scion of Glaciers|KTK
+Sea Gate|CLB
+Sea Gate Oracle|C17
+Sea Scryer|MIR
+Seal of Removal|NEM
+Sealock Monster|DDO
+Secrets of the Golden City|RIX
+Sejiri Merfolk|WWK
+Serpentine Curve|STX
+Serra Sphinx|2XM
+Serum Visions|C21
+Set Adrift|KTK
+Shadow Rift|TMP
+Shaper Parasite|C14
+Shifting Sliver|LGN
+Shimmering Glasskite|BOK
+Shimmerscale Drake|AKH
+Shipwreck Dowser|M21
+Shoreline Looter|BLB
+Shoreline Ranger|SCG
+Sigil of Sleep|UDS
+Sigiled Starfish|ORI
+Silver Myr|MRD
+Siren Stormtamer|XLN
+Skittering Crustacean|CN2
+Slip Out the Back|MKM
+Slip Through Space|OGW
+Snap|ULG
+Sorcerous Sight|POR
+Specimen Collector|MH2
+Spectral Sailor|M20
+Spellstutter Sprite|LRW
+Spiketail Drake|PCY
+Spin into Myth|ARC
+Spined Megalodon|M21
+Spreading Seas|ZEN
+Sprite Noble|EMA
+Spyglass Siren|LCI
+Squelch|CHK
+Startle|MID
+Steady Progress|MM2
+Steal Enchantment|TMP
+Stinging Barrier|MMQ
+Stitched Drake|DDQ
+Stock Up|DFT
+Storm Sculptor|XLN
+Stormbound Geist|DKA
+Strategic Planning|HOU
+Striped Riverwinder|HOU
+Submerge|NEM
+Supreme Will|HOU
+Surgical Skullbomb|ONE
+Sword Coast Serpent|CLB
+Symbol of Unsummoning|POR
+Talrand's Invocation|M13
+Tandem Lookout|MM3
+Telekinetic Sliver|TSP
+Tempest Caller|XLN
+Temporal Fissure|DDS
+Tetsuko Umezawa, Fugitive|DOM
+Tezzeret's Gambit|NPH
+Thassa's Emissary|THS
+Think Twice|TSP
+Thornwind Faeries|CMA
+Thought Courier|5DN
+Thought Scour|IMA
+Thoughtcast|MM2
+Thrummingbird|CM2
+Thwart|MMQ
+Tidal Wave|EMA
+Tide Skimmer|M21
+Time Ebb|POR
+Time of Ice|DOM
+Tolaria West|FUT
+Tolarian Kraken|M21
+Tolarian Terror|DMU
+Tome Raider|ELD
+Totally Lost|BBD
+Treasure Hunt|C18
+Triton Tactics|DDT
+Tromokratis|CMM
+Trove Tracker|CMR
+Turnabout|VMA
+Turtleshell Changeling|LRW
+Twisted Image|SOM
+Undo|P02
+Unsubstantiate|EMN
+Vapor Snag|MM2
+Vedalken Dismisser|RAV
+Vedalken Mastermind|5DN
+View from Above|CON
+Vigean Graftmage|MM2
+Viral Drake|NPH
+Voidmage Husher|TSP
+Voyager Drake|WWK
+Waker of Waves|M21
+Walker of Secret Ways|PCA
+Wall of Tears|STH
+Wash Away|VOW
+Watcher for Tomorrow|MH1
+Wave-Wing Elemental|BFZ
+Weatherseed Faeries|ULG
+Web of Inertia|JUD
+Whiplash Trap|DDN
+Whirler Rogue|ORI
+Whirlpool Drake|APC
+Whirlwind Denial|THB
+Willbender|DD2
+Windfall|USG
+Windrider Eel|E01
+Windstorm Drake|RNA
+Wing Splicer|NPH
+Witching Well|ELD
+Witness Protection|SNC
+Wizard Class|AFR
+Wonder|JUD
+Words of Wisdom|ODY
+Zephid's Embrace|USG
+
+[black]
+Absorb Vis|CN2
+Accursed Marauder|MH3
+Accursed Spirit|M15
+Altar's Reap|DDR
+Ambition's Cost|C15
+Ancient Craving|P02
+Animate Dead|EMA
+Aphetto Exterminator|LGN
+Aphotic Wisps|SHM
+Apprentice Necromancer|UMA
+Archetype of Finality|BNG
+Archfiend of Sorrows|MH2
+Armix, Filigree Thrasher|BRC
+Arrogant Vampire|POR
+Attempted Murder|UNF
+Augur of Skulls|FUT
+Bad Deal|M21
+Baleful Ammit|AKH
+Balustrade Spy|IMA
+Banshee of the Dread Choir|CMA
+Barter in Blood|MRD
+Bastion of Remembrance|IKO
+Battle-Rage Blessing|DMU
+Batwing Brume|ARC
+Beseech the Queen|SHM
+Betrayal of Flesh|MRD
+Black Cat|M15
+Black Dragon Gate|CLB
+Bladewing's Thrall|SCG
+Blessing of Belzenlok|DOM
+Blessing of Leeches|BOK
+Blightbeetle|M20
+Blightsoil Druid|EMA
+Blood Artist|INR
+Blood Celebrant|LGN
+Blood Curdle|IKO
+Blood Fountain|VOW
+Blood Pact|MID
+Blood Speaker|CHK
+Bloodchief's Thirst|ZNR
+Bloodrite Invoker|DDP
+Bloodthirsty Aerialist|M20
+Bloodthrone Vampire|ROE
+Blot Out|MAT
+Boggart Harbinger|LRW
+Bone Shards|MH2
+Bone Shredder|ULG
+Briarblade Adept|CMR
+Brood of Cockroaches|VIS
+Bubbling Muck|UDS
+Buried Alive|WTH
+Bushmeat Poacher|GN3
+Butcher Ghoul|INR
+Cabal Pit|ODY
+Caligo Skin-Witch|DOM
+Call the Bloodline|SOI
+Carrier Thrall|2X2
+Carrion Feeder|MH1
+Carrion Imp|RNA
+Cartouche of Ambition|AKH
+Cast Down|2XM
+Catacomb Crocodile|RNA
+Chain of Smog|ONS
+Chainer's Edict|DMR
+Changeling Outcast|MH1
+Charcoal Diamond|MIR
+Cling to Dust|THB
+Cloudkill|CLB
+Corpse Augur|C15
+Corpse Connoisseur|ALA
+Corpse Harvester|LGN
+Corrupt|USG
+Corrupted Conviction|MOM
+Costly Plunder|XLN
+Cower in Fear|MM3
+Crippling Fatigue|TOR
+Crypt Rats|VIS
+Curse of Disturbance|SCD
+Curse of Shallow Graves|C13
+Dakmor Plague|P02
+Daring Demolition|AER
+Dark Triumph|NEM
+Dauthi Embrace|TMP
+Dauthi Horror|TMP
+Dauthi Trapper|STH
+Davriel, Rogue Shadowmage|WAR
+Deadly Dispute|AFR
+Death Denied|MM2
+Death Pulse|ONS
+Deathgreeter|DDD
+Deepwood Legate|MMQ
+Destined /// Lead|AKH
+Diabolic Servitude|PD3
+Diabolic Tutor|ODY
+Dimir House Guard|RAV
+Diregraf Horde|MID
+Dirge of Dread|A25
+Disturbed Burial|TMP
+Dockside Chef|NEO
+Dread Drone|MM2
+Dreadhound|MID
+Dreadmalkin|RVR
+Driver of the Dead|CN2
+Dusk Charger|RIX
+Dusk Legion Zealot|RIX
+Dusk Mangler|SNC
+Elspeth's Nightmare|THB
+Endless Scream|TMP
+Epic Downfall|ELD
+Epicure of Blood|M19
+Essence Extraction|KLD
+Eternal Thirst|IMA
+Evil Eye of Urborg|TSP
+Evincar's Justice|CMA
+Executioner's Capsule|C16
+Exhume|USG
+Expunge|USG
+Exquisite Huntmaster|CMR
+Exsanguinate|CMM
+Extinguish All Hope|CMM
+Eyeblight's Ending|EMA
+Falkenrath Noble|VOC
+Fallen Angel|A25
+Falthis, Shadowcat Familiar|CMR
+Fatal Push|AER
+Feast or Famine|DDJ
+Feed the Swarm|SCD
+Feign Death|AFR
+Fell|BLB
+Fell Gravship|EOE
+Fell Specter|M19
+Fell Stinger|VOW
+Feral Abomination|DOM
+Feral Shadow|POR
+Festercreep|CM2
+Filth|JUD
+Fleshbag Marauder|CMD
+Flesh-Eater Imp|MBS
+Footbottom Feast|LRW
+Footsteps of the Goryo|SOK
+Foulmire Knight|MOM
+Fungal Infection|DOM
+Gatekeeper of Malakir|ZEN
+Ghost Lantern|CLB
+Ghost-Lit Stalker|SOK
+Ghostly Changeling|MM2
+Gifted Aetherborn|AER
+Gilt-Leaf Winnower|CMR
+Gloom Sower|M21
+Gloomfang Mauler|MOM
+Go Blank|STX
+Go for the Throat|C17
+Gonti, Lord of Luxury|CMM
+Gravedigger|CM2
+Graveshifter|MOC
+Gray Merchant of Asphodel|C14
+Grim Affliction|MM2
+Grim Bounty|AFR
+Grimclaw Bats|DST
+Grimdancer|IKO
+Gruesome Encore|MBS
+Gruesome Fate|RIX
+Gurmag Angler|UMA
+Hand of Death|P02
+Havoc Demon|EMA
+Heartless Act|IKO
+Hero's Downfall|VOW
+Hollow Marauder|OTJ
+Hopeless Nightmare|WOE
+Ill-Gotten Inheritance|RNA
+Incremental Blight|HOP
+Indulgent Tormentor|IMA
+Infernal Vessel|FDN
+Injector Crocodile|MOM
+Inner Demon|BBD
+Innocent Blood|EMA
+Kaya's Ghostform|WAR
+Keeper of the Dead|EXO
+Killing Wave|INR
+Lampad of Death's Vigil|THB
+Leech Collector|SOS
+Lethal Sting|HOU
+Liliana's Caress|M11
+Liliana's Devotee|M21
+Liliana's Specter|M11
+Lively Dirge|OTJ
+Lord of the Accursed|AKH
+Loyal Subordinate|SCD
+Mad Auntie|MMA
+Marchesa's Decree|CN2
+Marionette Apprentice|MH3
+Markov Baron|MAT
+Marsh Flitter|LRW
+Massacre|NEM
+Merciless Executioner|FRF
+Mesmeric Fiend|TOR
+Mindwrack Harpy|THB
+Mischievous Poltergeist|WTH
+Moan of the Unhallowed|UMA
+Mogis's Favor|THB
+Moment of Defiance|BRO
+Moonglove Changeling|MOR
+Morbid Opportunist|MID
+Nadier's Nightblade|BLC
+Nameless Inversion|MM2
+Necrologia|7ED
+Nekrataal|DDM
+Nezumi Graverobber|CHK
+Nezumi Prowler|NEO
+Nightfire Giant|M15
+Night's Whisper|EMA
+Nirkana Cutthroat|ROE
+Novice Occultist|MID
+Noxious Dragon|FRF
+Noxious Ghoul|LGN
+Oblivion Strike|OGW
+Okiba-Gang Shinobi|PCA
+Olivia's Bloodsworn|SOI
+Order of Midnight|ELD
+Order of Yawgmoth|USG
+Orzhov Enforcer|RNA
+Osseous Sticktwister|DSK
+Oubliette|2XM
+Painful Lesson|AKH
+Paragon of Open Graves|M15
+Parasitic Impetus|CLU
+Pawn of Ulamog|ROE
+Peat Bog|MMQ
+Phyrexian Gargantua|APC
+Phyrexian Rager|CMA
+Phyrexian Reclamation|C15
+Pit Keeper|MM3
+Plague Spitter|INV
+Plagued Rusalka|MM2
+Power Word Kill|AFR
+Prakhata Pillar-Bug|KLD
+Predatory Nightstalker|VMA
+Price of Fame|ZNC
+Priest of Gix|DDE
+Public Execution|M13
+Puppet Conjurer|ALA
+Queen's Agent|XLN
+Quest for the Gravelord|BBD
+Rabid Bloodsucker|ORI
+Raiders' Wake|XLN
+Rain of Filth|USG
+Ravenous Chupacabra|RIX
+Read the Bones|MOC
+Reanimate|TMP
+Reaper's Talisman|AFR
+Reaping the Graves|SCG
+Reckoner's Bargain|NEO
+Recover|MM3
+Regicide|CN2
+Revenge of Ravens|ELD
+Rite of Consumption|SHM
+Rotfeaster Maggot|M15
+Rush of Vitality|KLD
+Ruthless Knave|XLN
+Sadistic Glee|TMP
+Savage Gorger|M20
+Scrapwork Rager|BRO
+Seal of Doom|C15
+Send in the Pest|SOS
+Sengir Autocrat|EMA
+Sever Soul|MMQ
+Severed Strands|GRN
+Shade's Form|TOR
+Shadow Prophecy|DMU
+Shadowcloak Vampire|M15
+Shambling Ghast|AFR
+Sheoldred's Edict|ONE
+Shepherd of Rot|ONS
+Shimmercreep|ECL
+Shoreline Salvager|WWK
+Sign in Blood|M10
+Skeletal Changeling|LRW
+Skeletal Scrying|C14
+Skeletal Wurm|ROE
+Skinthinner|LGN
+Skirge Familiar|USG
+Skull Snatcher|BOK
+Skullport Merchant|AFR
+Smiting Helix|MH1
+Snarling Gorehound|MKM
+Sneering Shadewriter|SOS
+Songs of the Damned|UMA
+Soul Snuffers|EVE
+Souldrinker|TMP
+Spark Reaper|WAR
+Spectral Sliver|LGN
+Stir the Sands|AKH
+Stitch Together|CMD
+Strands of Night|WTH
+Street Wraith|A25
+Stromgald Crusader|CSP
+Stronghold Rats|FUT
+Suffocating Fumes|IKO
+Summon Undead|CLB
+Supernatural Stamina|GN3
+Syphon Flesh|CM2
+Syphon Mind|ONS
+Syr Konrad, the Grim|ELD
+Tainted Strike|SOM
+Tavern Swindler|BBD
+Tendrils of Corruption|C14
+Terror|10E
+Thirsting Bloodlord|M20
+Thorn of the Black Rose|CN2
+Thrull Parasite|GTC
+Tidy Conclusion|KLD
+Tortured Existence|STH
+Tragic Slip|C14
+Treasure Dredger|OTJ
+Trespasser's Curse|AKH
+Trial of Ambition|AKH
+Twisted Abomination|SCG
+Typhoid Rats|M15
+Ultimate Price|GK2
+Unburial Rites|ISD
+Undead Augur|MH1
+Undercity Informer|GTC
+Underworld Hermit|MH2
+Unexpected Fangs|IKO
+Unseal the Necropolis|MOM
+Unspeakable Symbol|SCG
+Urborg Repossession|DMU
+Urborg Uprising|EMA
+Vampire Gourmand|FDN
+Vampire Hexmage|C14
+Vampire of the Dire Moon|M20
+Vampiric Link|PLC
+Vat of Rebirth|ONE
+Vendetta|MMQ
+Vengeful Reaper|KHM
+Victimize|MOC
+Vile Requiem|USG
+Village Rites|INR
+Vindictive Vampire|RNA
+Virtue's Ruin|POR
+Virus Beetle|NEO
+Void Beckoner|IKO
+Vow of Malice|CM2
+Wake of Vultures|EMA
+Wall of Blood|MRD
+Wall of Corpses|MIR
+Wander in Death|AKH
+Weaponcraft Enthusiast|KLD
+Wicked Pact|MB2
+Wight of Precinct Six|C16
+Will-o'-the-Wisp|A25
+Windgrace Acolyte|DOM
+Withered Wretch|LGN
+You Are Already Dead|NEO
+Young Necromancer|MH2
+Zombie Cutthroat|SCG
+Zulaport Cutthroat|GNT
+Zulaport Enforcer|ROE
+
+[red]
+About Face|ULG
+Abrade|2XM
+Acidic Soil|USG
+Act on Impulse|M15
+Aftershock|TMP
+Ainok Tracker|KTK
+Alena, Kessig Trapper|CMR
+Anarchist|ODY
+Anax, Hardened in the Forge|THB
+Ancient Grudge|MM3
+Ancient Hydra|NEM
+Anger|JUD
+Arc Lightning|USG
+Arc Trail|PCA
+Ardent Elementalist|MID
+Armed // Dangerous|DGM
+Arms Dealer|J22
+Arrow Storm|KTK
+Artistic Process|SOS
+Axgard Cavalry|KHM
+Azra Bladeseeker|BBD
+Balduvian Horde|A25
+Balduvian Warlord|CSP
+Barbed Batterfist|ONE
+Barrage of Boulders|KTK
+Battle Cry Goblin|AFR
+Battle Squadron|EMA
+Beetleback Chief|TDC
+Bhaal's Invoker|CLB
+Big Score|SNC
+Bitter Reunion|BRO
+Blade Sliver|LGN
+Blastfire Bolt|M15
+Blaze|POR
+Blazing Crescendo|ONE
+Blazing Volley|AKH
+Blindblast|WAR
+Blood Frenzy|MB2
+Blood Knight|PLC
+Blood Ogre|E01
+Bloodfire Expert|KTK
+Bloodlust Inciter|AKH
+Bloodmark Mentor|DPA
+Boarding Party|CMR
+Boldwyr Intimidator|MOR
+Bolt Bend|WAR
+Bombard|GNT
+Boots of Speed|AFR
+Brazen Wolves|EMN
+Breath of Darigaaz|INV
+Breath Weapon|CLB
+Bronzeplate Boar|NEO
+Brute Force|PLC
+Brute Strength|DDT
+Bulk Up|FDN
+Burning Palm Efreet|MIR
+Burning Prophet|WAR
+Burst Lightning|MM2
+Cathartic Pyre|MID
+Chakram Slinger|BBD
+Chandra, Novice Pyromancer|M20
+Chandra's Pyrohelix|WAR
+Changeling Berserker|LRW
+Chaos Channeler|AFR
+Charging Monstrosaur|XLN
+Charging Tuskodon|RIX
+Cheering Fanatic|BBD
+Cinder Cloud|MIR
+Cliffgate|CLB
+Coastline Marauders|CMR
+Cone of Flame|WTH
+Convulsing Licid|STH
+Coronation of Chaos|CLB
+Coruscation Mage|BLB
+Cragsmasher Yeti|MOM
+Crimson Fleet Commodore|CMR
+Crimson Wisps|SHM
+Crowd's Favor|M15
+Crown-Hunter Hireling|CN2
+Curse of Opulence|C17
+Dark-Dweller Oracle|2X2
+Dead // Gone|PLC
+Demand Answers|MKM
+Desert of the Fervent|C21
+Destructive Tampering|AER
+Diamond Pick-Axe|LCI
+Direct Current|GRN
+Dragon Fodder|GNT
+Dragon Mage|M20
+Dwarven Blastminer|ONS
+Dwarven Hammer|KHM
+Dwarven Miner|MIR
+Dynacharge|MM3
+Electric Revelation|J22
+Electrickery|GK1
+Electrostatic Field|GRN
+Embereth Shieldbreaker|ELD
+Empty the Warrens|DMR
+End the Festivities|VOW
+Expedite|BBD
+Experimental Synthesizer|NEO
+Explosive Welcome|STX
+Exuberant Fuseling|ONE
+Faithless Salvaging|MH2
+Falkenrath Celebrants|VOW
+Falter|USG
+Fanatic of Mogis|THS
+Fanning the Flames|STH
+Fathom Fleet Swordjack|CMR
+Fearless Skald|MOM
+Fiery Impulse|ORI
+Fire Servant|PD2
+Fireball|IMA
+Fire-Belly Changeling|LRW
+Fireblast|VIS
+Firecat Blitz|JUD
+Fireslinger|TMP
+Firewing Phoenix|UMA
+First Day of Class|STX
+Fists of Flame|CMR
+Flame Elemental|MIR
+Flame Jab|EMA
+Flame Javelin|DD2
+Flame Slash|DDK
+Flame Wave|STH
+Flametongue Kavu|PLS
+Flaring Pain|JUD
+Flowstone Hellion|STH
+Footfall Crater|IKO
+Forge Devil|M15
+Forked Lightning|MB2
+Frenzied Fugue|C16
+Frenzied Saddlebrute|CMR
+Furious Rise|THB
+Furnace Punisher|ONE
+Furnace Whelp|IMA
+Fury Sliver|TSP
+Galvanic Blast|DDU
+Ganax, Astral Hunter|CLB
+Gathan Raiders|FUT
+Geistblast|SOI
+Gempalm Incinerator|DMR
+Genasi Enforcers|CLB
+General Kreat, the Boltbringer|J25
+Generator Servant|M15
+Geomancer's Gambit|MH1
+Ghitu Slinger|ULG
+Giant Cindermaw|BRO
+Glarewielder|LRW
+Glimpse the Impossible|MH3
+Gnoll War Band|CLB
+Go for Blood|J22
+Goblin Assault|MM3
+Goblin Bombardment|DDN
+Goblin Taskmaster|ONS
+Goblin War Party|MH1
+Goblin Wardriver|MBS
+Goblin Wizardry|M21
+Goblinslide|KTK
+Gorehorn Minotaurs|E01
+Gorilla Shaman|MH2
+Grab the Reins|MRD
+Granitic Titan|HOU
+Grapeshot|DDS
+Gravitic Punch|GRN
+Ground Rift|TSP
+Guttersnipe|TDC
+Hardened Berserker|DTK
+Hatchet Bully|EVE
+Havoc Jester|M21
+Haze of Rage|FUT
+Hellspark Elemental|DDK
+Hematite Golem|MRD
+Hoarding Dragon|IMA
+Hoarding Ogre|AFR
+Honor the God-Pharaoh|WAR
+Hordeling Outburst|A25
+Humble Defector|FRF
+Immolating Souleater|NPH
+Imodane's Recruiter|WOE
+Impact Tremors|DTK
+Impulsive Pilferer|OTJ
+Incinerate|MIR
+Inferno Fist|M15
+Inferno Jet|HOU
+Ingot Chewer|CM2
+Inspired Tinkering|CLB
+Invigorated Rampage|AER
+Ire Shaman|A25
+Jaya, Venerated Firemage|WAR
+Kediss, Emberclaw Familiar|CMR
+Keldon Halberdier|IMA
+Keldon Strike Team|DMU
+Kessig Flamebreather|VOW
+Kiln Fiend|IMA
+Kyren Negotiations|MMQ
+Lava Dart|JUD
+Lava Hounds|WTH
+Light Up the Stage|RNA
+Lightning Bolt|CLB
+Lightning Mauler|AVR
+Loyal Apprentice|TDC
+Lunar Frenzy|MID
+Mad Ratter|ELD
+Madcap Skills|MM3
+Magmatic Insight|ORI
+Magmaw|UMA
+Mana Geyser|5DN
+Mardu Warshrieker|KTK
+Mercadia's Downfall|MMQ
+Merchant of the Vale|ELD
+Meria's Outrider|DMU
+Mindclaw Shaman|M13
+Miner's Bane|M15
+Mogg Maniac|STH
+Mogg Raider|TMP
+Molten Birth|M14
+Monastery Swiftspear|IMA
+Needle Drop|LRW
+Needletooth Raptor|RIX
+Nimble Birdsticker|M20
+Ogre Arsonist|P02
+Ondu Champion|BFZ
+Onslaught|EXO
+Orcish Lumberjack|DDL
+Orcish Settlers|WTH
+Outmaneuver|USG
+Outnumber|BFZ
+Painter's Studio // Defaced Gallery|DSK
+Pardic Collaborator|TOR
+Pillaging Horde|POR
+Pitchstone Wall|TOR
+Plundering Barbarian|AFR
+Price of Glory|ODY
+Price of Progress|EXO
+Punishing Fire|DDG
+Purifying Dragon|MID
+Pyreheart Wolf|DKA
+Pyrite Spellbomb|DDU
+Pyrohemia|PLC
+Pyrokinesis|DDL
+Pyrotechnics|FRF
+Quakefoot Cyclops|MH1
+Quest for Pure Flame|ZEN
+Rabbit Battery|NEO
+Ramunap Ruins|HOU
+Rapacious Dragon|2XM
+Rapacious One|ROE
+Reckless Abandon|UDS
+Reckless Barbarian|CLB
+Reckless Bushwhacker|OGW
+Reckless Charge|ODY
+Reckless Fireweaver|KLD
+Reckless Impulse|VOW
+Reckless Rage|RIX
+Reckless Wurm|UMA
+Rending Volley|DTK
+Renegade Warlord|TMP
+Return the Favor|OTJ
+Ricochet Trap|WWK
+Rite of the Raging Storm|CM2
+Rites of Initiation|ODY
+Rivals' Duel|PCA
+Rock Slide|VIS
+Rograkh, Son of Rohgahh|CMR
+Ruinous Gremlin|KLD
+Rupture|NEM
+Sabertooth Wyvern|EXO
+Samut's Sprint|WAR
+Sandstone Needle|MMQ
+Sarkhan's Rage|DTK
+Sarkhan's Whelp|M19
+Scoria Cat|PCY
+Scourge Devil|MM3
+Scrapwork Mutt|BRO
+Seal of Fire|NEM
+Searing Blaze|WWK
+Searing Spear|M13
+Seething Anger|STH
+Seize the Spoils|FDN
+Shattering Spree|GK1
+Shenanigans|MH1
+Shiny Impetus|TDC
+Shivan Raptor|USG
+Shiv's Embrace|USG
+Shower of Coals|ODY
+Shredded Sails|IKO
+Skewer the Critics|RNA
+Skyline Despot|CMM
+Slavering Nulls|DDH
+Smash to Dust|DMU
+Solar Blast|ONS
+Sparkmage Apprentice|DDN
+Spellshock|EXO
+Spitebellows|MOR
+Spiteful Prankster|JMP
+Spitting Earth|P02
+Staggershock|IMA
+Sticky Fingers|SNC
+Stingscourger|PLC
+Sting-Slinger|ECL
+Stoke the Flames|M15
+Storm Caller|M21
+Storm-Kiln Artist|STX
+Strafe|PLS
+Strike It Rich|MH3
+Sunset Strikemaster|TDM
+Sunshot Militia|LCI
+Sure Strike|GRN
+Swarming Goblins|AFR
+Swelter|JUD
+Taunting Kobold|CLB
+Tectonic Rift|M19
+Temur Battle Rage|FRF
+Thermo-Alchemist|EMN
+Thermopod|CSP
+Thopter Engineer|ORI
+Thrill of Possibility|ELD
+Thunderclap|MMQ
+Thunderdrum Soloist|SOS
+Thunderwave|CLB
+Tiamat's Fanatics|CLB
+Tibalt, Rakish Instigator|WAR
+Tibalt's Rager|WAR
+Titan's Strength|THS
+Toggo, Goblin Weaponsmith|CMR
+Torch Breath|SNC
+Torrent of Fire|SCG
+Treasonous Ogre|CNS
+Twinferno|DMU
+Two-Handed Axe|CLB
+Unchained Berserker|M20
+Unexpected Windfall|AFR
+Untimely Malfunction|DSK
+Valakut Invoker|BFZ
+Valakut Predator|BFZ
+Vampires' Vengeance|VOW
+Vandalize|DTK
+Volatile Claws|MH1
+Volcanic Dragon|M19
+Volcanic Geyser|MIR
+Volcanic Hammer|8ED
+Volcanic Rush|DTK
+Volcanic Spite|MOM
+Volcanic Torrent|OTJ
+Voldaren Epicure|VOW
+Vow of Lightning|GN3
+Wall of Fire|M15
+Warchief Giant|CM2
+Wayward Giant|KLD
+Wild Magic Surge|CLB
+Witch's Mark|WOE
+Wrenn's Resolve|MOM
+You Find Some Prisoners|AFR
+You See a Pair of Goblins|AFR
+Young Pyromancer|TDC
+Young Red Dragon|CLB
+Zada, Hedron Grinder|A25
+
+[green]
+A Killer Among Us|MKM
+Abundant Growth|EMA
+Abzan Beastmaster|FRF
+Acidic Slime|C18
+Adventurous Impulse|DOM
+Aerie Bowmasters|DTK
+Aggressive Urge|RIX
+Ainok Survivalist|DTK
+Ambassador Oak|A25
+Anara, Wolvid Familiar|CMR
+Ancestral Mask|EMA
+Ancient Silverback|M15
+Annoyed Altisaur|2X2
+Arbor Elf|A25
+Argothian Elder|USG
+Argothian Opportunist|BRO
+Armorcraft Judge|KLD
+Arrogant Wurm|TOR
+Assault Formation|IMA
+Atraxa's Fall|MOM
+Aura Gnarlid|C18
+Avacyn's Pilgrim|MM3
+Avenging Druid|EXO
+Axebane Guardian|RTR
+Baloth Gorger|DOM
+Baloth Woodcrasher|ZEN
+Basking Broodscale|MH3
+Bassara Tower Archer|JOU
+Beanstalk Giant|CLB
+Beast Attack|ODY
+Beast Within|BBD
+Bellowing Tanglewurm|SOM
+Beneath the Sands|HOU
+Bestial Menace|MM2
+Biogenic Upgrade|FDN
+Birchlore Rangers|ONS
+Bitterbow Sharpshooters|HOU
+Blanchwood Prowler|BRO
+Blight Mamba|SOM
+Blightwidow|MBS
+Bloom Hulk|WAR
+Blossom Dryad|XLN
+Blossoming Defense|KLD
+Bookwurm|STX
+Borderland Ranger|E02
+Briar Patch|MMQ
+Bristling Boar|M19
+Broken Wings|KHM
+Brood Monitor|BFZ
+Broodhatch Nantuko|ONS
+Bushwhack|BRO
+Call of the Herd|DMR
+Caller of the Pack|CMA
+Cankerbloom|ONE
+Canopy Cover|WWK
+Canopy Surge|INV
+Cartouche of Strength|AKH
+Caustic Caterpillar|ORI
+Chain of Acid|ONS
+Challenger Troll|WAR
+Changeling Titan|LRW
+Changeling Wayfinder|ECL
+Charge Through|STX
+Chomping Changeling|ECL
+Citanul Woodreaders|DDR
+Clip Wings|SOI
+Collective Resistance|MH3
+Colossal Dreadmaw|XLN
+Combo Attack|BBD
+Commune with Nature|MM2
+Commune with the Gods|EMA
+Compost|UDS
+Conifer Strider|DTK
+Contagious Vorrac|ONE
+Crashing Boars|EXO
+Crop Rotation|DDR
+Crowned Ceratok|IMA
+Cudgel Troll|M10
+Cultivate|C18
+Curse of Predation|C13
+Cytoplast Root-Kin|MM2
+Daggerback Basilisk|M19
+Dance of the Tumbleweeds|OTJ
+Dawn's Reflection|C18
+Dawntreader Elk|DKA
+Death-Hood Cobra|MM3
+Deglamer|MOR
+Destiny Spinner|THB
+Devoted Druid|SHM
+Diligent Farmhand|ODY
+Disruptive Stormbrood|TDM
+Dissenter's Deliverance|AKH
+Dragon Sniper|TDM
+Dread Linnorm|CLB
+Dreampod Druid|PC2
+Druid's Familiar|AVR
+Drumhunter|ALA
+Earthen Arms|BFZ
+Elemental Bond|ORI
+Elite Cat Warrior|POR
+Elven Bow|KHM
+Elven Riders|ONS
+Elvish Harbinger|EVG
+Elvish Visionary|BBD
+Ember Weaver|A25
+Enlarge|M14
+Entourage of Trest|CN2
+Epic Confrontation|DTK
+Evolution Charm|PLC
+Evolution Sage|WAR
+Evolutionary Escalation|C16
+Experiment One|C15
+Explore|DDO
+Explosive Vegetation|C18
+Ezuri's Archers|DDU
+Fa'adiyah Seer|DMR
+Fae Offering|MH2
+Fangren Marauder|MBS
+Fangs of Kalonia|MH3
+Far Wanderings|TOR
+Farseek|C17
+Feral Hydra|BBD
+Ferocious Zheng|GS1
+Fertile Ground|C18
+Fin-Clade Fugitives|CMR
+Fog|EMA
+Frog Tongue|TMP
+Fyndhorn Elder|8ED
+Fyndhorn Elves|CMR
+Fynn, the Fangbearer|KHM
+Gaea's Anthem|MM3
+Gaea's Embrace|USG
+Gaea's Gift|BRO
+Gamekeeper|UDS
+Garruk's Packleader|M11
+Garruk's Uprising|M21
+Gelatinous Genesis|2XM
+Gemhide Sliver|TSP
+Giant Ankheg|CLB
+Giant Spider|AKH
+Gift of the Viper|MH3
+Gilanra, Caller of Wirewood|CMR
+Glacier Godmaw|EOE
+Gnarlid Pack|MM2
+Grazing Gladehart|DDP
+Great Oak Guardian|C19
+Grizzly Fate|JUD
+Harmonize|C17
+Harrow|C18
+Harvester Druid|JUD
+Haywire Mite|BRO
+Heart Warden|UDS
+Hedge Troll|PLC
+Heroes' Bane|IMA
+Hickory Woodlot|MMQ
+Horned Sliver|TMP
+Hunger of the Howlpack|DKA
+Hunted Wumpus|MMQ
+Hunter's Ambush|M15
+Hunter's Edge|M21
+Hunter's Mark|AFR
+Hunter's Talent|BLB
+Hunting Pack|SCG
+Hydra's Growth|THB
+Imperious Perfect|CMA
+Incremental Growth|LRW
+Indrik Stomphowler|DIS
+Insidious Fungus|DSK
+Invigorate|MMQ
+Invigorating Surge|M21
+Ivy Lane Denizen|DDU
+Iwamori of the Open Fist|A25
+Jaspera Sentinel|KHM
+Jewel Thief|SNC
+Joraga Treespeaker|ROE
+Kappa Tech-Wrecker|NEO
+Kavu Climber|A25
+Kavu Predator|PLC
+Kavu Primarch|MM2
+Keen Sense|PLC
+Kenrith's Transformation|AFC
+Khalni Garden|DDR
+Kozilek's Predator|MM2
+Kraul Harpooner|GRN
+Krosan Tusker|DDU
+Krosan Vorine|LGN
+Land Grant|MMQ
+Larger than Life|KLD
+Leatherback Baloth|WWK
+Ley Weaver|BBD
+Llanowar Visionary|M21
+Longshot Squad|KTK
+Loyal Guardian|NEO
+Lure|MMQ
+Manglehorn|AKH
+Manor Gate|CLB
+Masked Admirers|MMA
+Masked Vandal|KHM
+Massive Might|VOW
+Master's Rebuke|NEO
+Might of the Masses|ORI
+Mobilize|POR
+Moment's Peace|MB2
+Muscle Burst|ODY
+Muscle Sliver|TMP
+Mutagenic Growth|NPH
+Mwonvuli Acid-Moss|TSP
+Nantuko Elder|ODY
+Nantuko Vigilante|LGN
+Nature's Claim|IMA
+Nature's Way|KLD
+Night Soil|C13
+Nissa's Judgment|DDU
+Noose Constrictor|EMN
+Nylea's Presence|THS
+Nyxborn Hydra|MH3
+Oakgnarl Warrior|DDR
+Oakhame Adversary|ELD
+One with Nature|SCG
+Orochi Eggwatcher|CHK
+Outmuscle|ELD
+Overgrown Battlement|IMA
+Overgrowth|9ED
+Overprotect|BLB
+Overrun|CMA
+Overwhelming Encounter|CLB
+Patagia Viper|DIS
+Path of Annihilation|MH3
+Peema Outrider|KLD
+Peerless Recycling|BLB
+Pelakka Wurm|MM2
+Penumbra Kavu|APC
+Penumbra Wurm|UMA
+Phantom Centaur|JUD
+Phantom Tiger|JUD
+Pick Your Poison|MKM
+Plaguemaw Beast|TD2
+Plated Crusher|BFZ
+Poison Dart Frog|M3C
+Pollenbright Druid|WAR
+Predator's Howl|CNS
+Predator's Strike|MRD
+Presence of Gond|SHM
+Priest of Titania|C14
+Primal Growth|PLS
+Primal Rage|STH
+Prizefight|SNC
+Prosperous Innkeeper|AFR
+Quirion Dryad|M21
+Quirion Elves|MIR
+Quirion Ranger|VIS
+Rain of Thorns|C17
+Ram Through|IKO
+Rampaging Brontodon|CMM
+Rampant Growth|MIR
+Rancor|A25
+Reap|TMP
+Reclamation Sage|2XM
+Recross the Paths|MOR
+Regrowth|A25
+Relic Crush|CM2
+Restock|M15
+Rhonas's Monument|GNT
+Rise of the Ants|MID
+River Bear|P02
+Roar of Challenge|J22
+Roots|EMA
+Rust Goliath|BRO
+Saber Ants|MMQ
+Salvage|P02
+Sarulf's Packmate|KHM
+Scale Up|MH1
+Scatter the Seeds|GK1
+Scragnoth|TMP
+Scurry Oak|MH2
+Season of Growth|M20
+Seedguide Ash|LRW
+Seton's Scout|TOR
+Sheltering Word|AVR
+Shinen of Life's Roar|ARC
+Silverglade Elemental|MMQ
+Silverglade Pathfinder|MMQ
+Skullmulcher|2XM
+Skullwinder|CLB
+Skyshroud Claim|NEM
+Skysnare Spider|ORI
+Slurrk, All-Ingesting|CMR
+Snake Pit|MMQ
+Song of Freyalise|DOM
+Spidersilk Armor|MMQ
+Spike Colony|STH
+Spinewoods Armadillo|OTJ
+Spore Frog|PCY
+Spore Swarm|DOM
+Sporemound|M14
+Squirrel Nest|ODY
+Stand Together|DST
+Stingerfling Spider|M12
+Stinging Shot|AKH
+Storm the Seedcore|MOM
+Stormkeld Vanguard|WOE
+Strangleroot Geist|DKA
+Streetwise Negotiator|MOM
+Struggle for Skemfar|KHM
+Sudden Spinnerets|IKO
+Sumala Rumblers|CLU
+Symbiosis|USG
+Symbiotic Beast|ONS
+Tail Swipe|DMU
+Tajuru Warcaller|BFZ
+Tangle|INV
+Tear Asunder|DMU
+Tempting Licid|STH
+Temur Sabertooth|FRF
+The Crowd Goes Wild|BBD
+Thornscape Battlemage|MM3
+Thrashing Brontodon|RIX
+Timberland Ancient|MOM
+Tireless Provisioner|MH2
+Titanoth Rex|IKO
+Tower Above|SHM
+Travel Preparations|ISD
+Treetop Village|ULG
+Trollbred Guardian|RNA
+Trumpeting Herd|MH1
+Twin-Silk Spider|MH1
+Tyvar's Stand|ONE
+Up the Beanstalk|WOE
+Utopia Sprawl|DIS
+Vastwood Surge|ZNR
+Venom Sliver|M15
+Venomspout Brackus|ONS
+Vine Mare|M19
+Vines of Vastwood|ZEN
+Viridian Joiner|MRD
+Viridian Shaman|MRD
+Vivien's Grizzly|WAR
+Wall of Blossoms|STH
+Wall of Mulch|ONS
+Wall of Roots|NCC
+Warbriar Blessing|THB
+Wasteland Viper|GK2
+Werebear|ODY
+Whip Silk|INV
+Wickerbough Elder|EVE
+Wild Hunger|DKA
+Wildheart Invoker|DDU
+Wilt|IKO
+Winding Way|MH1
+Wirewood Channeler|LGN
+Wirewood Guardian|SCG
+Wood Elves|EXO
+Woodland Changeling|LRW
+Woodland Mystic|M20
+Wrap in Vigor|FUT
+Yavimaya Elder|UDS
+Yavimaya Granger|ULG
+Young Wolf|DKA
+
+[wildcard]
+Aboleth Spawn|CLB
+Agate Instigator|BLC
+Akroma's Will|CMR
+Angel of Indemnity|OTC
+Arabella, Abandoned Doll|DSK
+Araumi of the Dead Tide|CMR
+Avatar of Growth|GNT
+Azra Oddsmaker|BBD
+Baleful Strix|E01
+Balmor, Battlemage Captain|DMU
+Barrowgoyf|M3C
+Battle Angels of Tyr|CLB
+Binding the Old Gods|EOC
+Biomechan Engineer|EOE
+Birds of Paradise|GK2
+Blade of Selves|C15
+Blade of the Bloodchief|C17
+Blasting Station|5DN
+Bloodthirsty Blade|C21
+Bothersome Quasit|CLB
+Brainstealer Dragon|OTC
+Breaker of Armies|BFZ
+Buried in the Garden|MKM
+Cadira, Caller of the Small|CLB
+Caltrops|UDS
+Campfire|CMM
+Cave-In|MMQ
+Claws of Gix|USG
+Clown Car|UNF
+Coercive Portal|CNS
+Colossal Skyturtle|NEO
+Commander Liara Portyr|CLB
+Commander's Sphere|BRC
+Component Pouch|AFC
+Conclave Evangelist|CLU
+Court of Ambition|CMR
+Court of Embereth|WOC
+Court of Garenbrig|WOC
+Court of Grace|ONC
+Court of Vantress|WOC
+Crashing Drawbridge|CMM
+Deathreap Ritual|DSC
+Debt to the Deathless|RVR
+Descent into Avernus|CLB
+Earthquake|P02
+Ebony Fly|AFC
+Elas il-Kor, Sadistic Pilgrim|DMU
+Ertha Jo, Frontier Mentor|OTJ
+Escape Tunnel|EOC
+Everflowing Chalice|WWK
+Extract from Darkness|2X2
+General Marhault Elsdragon|DMC
+Geode Golem|CLB
+Ghoulish Impetus|CMM
+Gold-Forged Thopteryx|MAT
+Goldlust Triad|TDC
+Grafted Exoskeleton|ONC
+Green Slime|CLB
+Guardian of Faith|AFR
+Herald of Secret Streams|XLN
+Hero's Blade|C17
+Idol of Oblivion|M3C
+Imoti, Celebrant of Bounty|CMR
+Ink-Treader Nephilim|GPT
+Keeper of Keys|CN2
+Knights of the Black Rose|MOC
+Kutzil, Malamet Exemplar|LCI
+Life of the Party|NCC
+Loxodon Warhammer|C17
+Mage Slayer|HOP
+Manifold Key|M20
+Meteor Golem|CMM
+Mikokoro, Center of the Sea|SOK
+Mindcrank|CLB
+Misleading Signpost|WOC
+Mortuary|STH
+Myriad Landscape|C14
+Nemesis Mask|DST
+New Frontiers|ODY
+Patriar's Seal|CLB
+Perch Protection|BLC
+Phyrexian Triniform|CMM
+Raff, Weatherlight Stalwart|DMU
+Rakdos Charm|GK2
+Ravenous Slime|C18
+Relic of Legends|DMU
+Reverent Mantra|MMQ
+Rogue's Passage|MIC
+Scurry of Squirrels|BLC
+Shadow of the Second Sun|MH3
+Share the Spoils|AFC
+Siege-Gang Lieutenant|M3C
+Sire of Stagnation|M3C
+Spiritmonger|DMR
+Stonespeaker Crystal|CLB
+Stormcatch Mentor|BLB
+Subterranean Tremors|CN2
+Su-Chi Cave Guard|BRO
+Sunscorch Regent|DTK
+Tempt with Bunnies|BLC
+The Eternal Wanderer|ONE
+Third Path Iconoclast|OTC
+Thunderfoot Baloth|NCC
+Tor Wauki the Younger|DMC
+Trailblazer's Boots|ONC
+Tura Kennerüd, Skyknight|DMU
+Ulamog's Crusher|UMA
+Vile Consumption|INV
+Wheel and Deal|ONS
+Whispersilk Cloak|DST
+Writhing Chrysalis|MH3
+
+[reprints]
+Adeline, Resplendent Cathar|MID
+Akroma, Vision of Ixidor|CMR
+Anim Pakal, Thousandth Moon|LCI
+Anzrag, the Quake-Mole|MKM
+Ashaya, Soul of the Wild|DSC
+Ashling, Flame Dancer|MH3
+Athreos, God of Passage|JOU
+Baba Lysaga, Night Witch|CLB
+Baeloth Barrityl, Entertainer|CLB
+Baldin, Century Herdmaster|SLX
+Braids, Arisen Nightmare|DMU
+Brallin, Skyshark Rider|C20
+Bria, Riptide Rogue|BLB
+Commander Eesha|JUD
+Cromat|APC
+Deekah, Fractal Theorist|C21
+Delina, Wild Mage|AFR
+Dragonhawk, Fate's Tempest|BLB
+Edric, Spymaster of Trest|CMD
+Elesh Norn, Mother of Machines|ONE
+Emiel the Blessed|J22
+Endrek Sahr, Master Breeder|CMM
+Ezuri, Claw of Progress|C15
+Fain, the Broker|C21
+Ghoulcaller Gisa|CMM
+Gisa, Glorious Resurrector|MID
+Glarb, Calamity's Augur|BLB
+Gluntch, the Bestower|CLB
+God-Eternal Kefnet|WAR
+God-Eternal Oketra|DRC
+Gorm the Great|BBD
+Gornog, the Red Reaper|J25
+Graaz, Unstoppable Juggernaut|ONE
+Grazilaxx, Illithid Scholar|AFR
+Greensleeves, Maro-Sorcerer|DMU
+Greymond, Avacyn's Stalwart|SLX
+Gwenna, Eyes of Gaea|BRO
+Jaheira, Friend of the Forest|CLB
+Jarad, Golgari Lich Lord|DDJ
+Jeska, Warrior Adept|JUD
+Jetmir, Nexus of Revels|SNC
+Jolene, the Plunder Queen|NCC
+Kamahl, Heart of Krosa|CMR
+Kami of the Crescent Moon|SOK
+Karazikar, the Eye Tyrant|AFC
+Karlach, Fury of Avernus|CLB
+Kess, Dissident Mage|NCC
+Kethis, the Hidden Hand|M20
+Kiki-Jiki, Mirror Breaker|MM2
+Kira, Great Glass-Spinner|M21
+Kitsa, Otterball Elite|BLB
+Kokusho, the Evening Star|DRB
+Konda, Lord of Eiganjo|CHK
+Korvold, Fae-Cursed King|EOC
+Krark, the Thumbless|CMR
+Lae'zel, Vlaakith's Champion|CLB
+Lim-Dûl the Necromancer|TSP
+Linvala, the Preserver|OGW
+Loot, Exuberant Explorer|FDN
+Maeve, Insidious Singer|GN3
+Mangara, the Diplomat|TDC
+Mannichi, the Fevered Dream|BOK
+Masako the Humorless|CHK
+Massacre Girl, Known Killer|MKM
+Mikaeus, the Unhallowed|DKA
+Mr. Foxglove|BLC
+Narset, Enlightened Exile|MAT
+Neheb, the Eternal|CMM
+Nezahal, Primal Tide|RIX
+Nils, Discipline Enforcer|C21
+Odric, Lunarch Marshal|INR
+Omnath, Locus of Creation|ZNR
+Orthion, Hero of Lavabrink|MOM
+Orvar, the All-Form|KHM
+Otharri, Suns' Glory|ONC
+Phelia, Exuberant Shepherd|MH3
+Pir, Imaginative Rascal|BBD
+Plagon, Lord of the Beach|J25
+Plargg and Nassari|MAT
+Rakdos, Patron of Chaos|MKM
+Ramos, Dragon Engine|C17
+Rankle, Master of Pranks|WOC
+Ratadrabik of Urborg|DMU
+Rev, Tithe Extractor|J25
+Reya Dawnbringer|INV
+Rionya, Fire Dancer|C21
+Runadi, Behemoth Caller|J22
+Sakashima of a Thousand Faces|CMR
+Saryth, the Viper's Fang|MKC
+Selvala, Heart of the Wilds|M3C
+Shabraz, the Skyshark|C20
+Shanid, Sleepers' Scourge|DMC
+Sheoldred, Whispering One|JMP
+Shroofus Sproutsire|J25
+Six|MH3
+Surrak and Goreclaw|MOM
+Sygg, River Cutthroat|ZNC
+Talrand, Sky Summoner|DDS
+Tevesh Szat, Doom of Fools|CMR
+Thassa, Deep-Dwelling|THB
+The Mindskinner|DSK
+The Reality Chip|NEO
+The Scarab God|HOU
+Tinybones, the Pickpocket|OTJ
+Tivit, Seller of Secrets|NCC
+Toby, Beastie Befriender|DSK
+Toothy, Imaginary Friend|BBD
+Torbran, Thane of Red Fell|ELD
+Toski, Bearer of Secrets|BLC
+Tyvar, the Pummeler|DSK
+Ulamog, the Ceaseless Hunger|BFZ
+Varchild, Betrayer of Kjeldor|C18
+Virtus the Veiled|BBD
+Visara the Dreadful|ONS
+Volo, Itinerant Scholar|CLB
+Xyris, the Writhing Storm|C20
+Yahenni, Undying Partisan|2X2
+Yidris, Maelstrom Wielder|C16
+Zara, Renegade Recruiter|LCC
+Zellix, Sanity Flayer|CLB
+Zopandrel, Hunger Dominus|ONE

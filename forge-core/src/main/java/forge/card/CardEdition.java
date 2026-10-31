@@ -145,6 +145,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
         RETRO_FRAME("retro frame"),
+        FUTURE_FRAME("future frame"),
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
         PRERELEASE_PROMO("prerelease promo"),
