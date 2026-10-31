@@ -279,6 +279,7 @@
    <properties>
     <property name="Type" value="FEM Orcish Spy vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 23}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;I spy with my little eye - An adventurer!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Orcish Spy" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Orcish Spy|FEM|[61c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Orcish Spy vs Dwarves" />
@@ -301,6 +302,7 @@
    <properties>
     <property name="Type" value="FEM Warren Goblins vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 23}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;We put down blanket first. This nook is ours. You, go, go.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Warren Goblins" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Goblin Warrens|FEM&quot;, &quot;Goblin Mountaineer|PO2&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Warren Goblins vs Dwarves" />
@@ -323,6 +325,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Pyro Medic vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 23}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Step one: fire. Step two: ointment.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Pyro Medic" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Goblin Chirurgeon|FEM|[54a]&quot;, &quot;Heat Stroke|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Goblin Pyro Medic vs Dwarves" />
@@ -345,6 +348,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Grenade Runner vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 23}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Make room! These grenades are not for carrying forever!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Grenade Runner" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Raging Goblin|POR&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Goblin Grenade Runner vs Dwarves" />
@@ -369,6 +373,7 @@
    <properties>
     <property name="Type" value="FEM Brassclaw Orc vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 23}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Dwarf-friend, eh? Your bones will make a fine trophy for my claws!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Brassclaw Orc" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Brassclaw Orcs|FEM|[49c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Brassclaw Orc vs Dwarves" />
@@ -391,6 +396,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ye'll no' pass this tunnel while I still draw breath!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Soldier" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Soldier" />
@@ -413,6 +419,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Demolition Team" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: 9301}, {&quot;deleteMapObject&quot;: 9302}, {&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_WallBlown&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Goblin-lover! We've powder enough tae bring this whole tunnel doon on yer heid!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Demolition Team" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Aeolipile|FEM&quot;, &quot;Dwarven Demolition Team|2ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Demolition Team" />
@@ -436,6 +443,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Miner" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ugh, rutabagas fer breakfast, lunch, and dinner. I wish we'd had mair time tae stock the pantry afore these orcs and goblins arrived.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Miner" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Miner|MIR&quot;, &quot;Limited Resources|EXO&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Miner" />
@@ -460,6 +468,7 @@
    <properties>
     <property name="Type" value="FEM Goblin Digging Team vs Dwarves" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 23}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Dig. Dig. Dig. Dig. Dig. Dig. - Now how goes the second verse?\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Goblin Digging Team" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Goblin Digging Team|7ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Goblin Digging Team vs Dwarves" />
@@ -616,6 +625,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Miner" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ugh, rutabagas fer breakfast, lunch, and dinner. I wish we'd had mair time tae stock the pantry afore these orcs and goblins arrived.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Miner" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Miner|MIR&quot;, &quot;Limited Resources|EXO&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Miner" />

@@ -104431,8 +104431,8 @@
   },
   {
     "name": "FEM Orgg vs Dwarves",
-    "sprite": "sprites/enemy/monstrosity/umber_hulk.atlas",
-    "scale": 0.5,
+    "sprite": "sprites/enemy/fallen_empires/dwarven_hold/orgg.atlas",
+    "scale": 0.65,
     "deck": [
       "decks/standard/fallen_empires_dwarven_hold_orgg.dck"
     ],

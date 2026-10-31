@@ -276,6 +276,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Soldier" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
     <property name="displayNameOverride" value="Dwarven Soldier" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Soldier|FEM|[53c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Soldier" />
@@ -298,6 +299,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Berserker" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;-- Sings dwarven battle song --&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
     <property name="displayNameOverride" value="Dwarven Berserker" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Berserker|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Berserker" />
@@ -329,6 +331,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Lieutenant" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;We'll never give up our home here in the Crimson Peaks. Just need tae hold this gate till our reinforcements arrive from Gurn Keep. Any day now.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}]}]" />
     <property name="displayNameOverride" value="Dwarven Lieutenant" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Heartstone|STH&quot;, &quot;Dwarven Lieutenant|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Lieutenant" />
@@ -367,6 +370,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Trader" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Ye'd sell us oot tae the orcs? Then ye'll no' be buyin' anythin' here!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Trader" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Trader|HML|[72b]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Trader" />
@@ -390,6 +394,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Armorer" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Few of us left, now. We'd best hide here with the weapons.\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Armorer" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Armory|ICE&quot;, &quot;Anvil of Bogardan|VIS&quot;, &quot;Dwarven Armorer|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Armorer" />
@@ -412,6 +417,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Weaponsmith" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;\&quot;Work with zeal as hammers peal! Melt, anneal, and pound the steel!\&quot;&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Weaponsmith" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Iron Star|3ED&quot;, &quot;Scalding Tongs|TMP&quot;, &quot;Dwarven Weaponsmith|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Weaponsmith" />
@@ -434,6 +440,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Lieutenant" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Rally the troops an' boost the morale. Hmm... nae easy when everyone's seen the kitchen.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Lieutenant" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Heartstone|STH&quot;, &quot;Dwarven Lieutenant|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Lieutenant" />
@@ -456,6 +463,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Berserker" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Let them come! There's plenty o' fight left in this hauld.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Berserker" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Berserker|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Berserker" />
@@ -503,6 +511,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Thaumaturgist" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;Transmutation is nae exclusively a blue or black magic art. Here, let me gie ye a wee taste o' distilled chaos tae show ye what I mean.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Thaumaturgist" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Red Mana Battery|LEG&quot;, &quot;Jayemdae Tome|3ED&quot;, &quot;Chaos Orb|2ED&quot;, &quot;Dwarven Thaumaturgist|WTH&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Thaumaturgist" />
@@ -525,6 +534,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Warrior" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;I wis amang the first tae get here. Nae chance I'm leavin' now.&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Warrior" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Ruins|FEM&quot;, &quot;Dwarven Warriors|3ED&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Warrior" />
@@ -549,6 +559,7 @@
    <properties>
     <property name="Type" value="FEM Dwarven Recruiter" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceQuestFlag&quot;: &quot;FE_DwarvenHold_Defeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}, {&quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Defeated&quot;, &quot;op&quot;: &quot;&gt;=&quot;, &quot;val&quot;: 18}}, {&quot;checkQuestFlag&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;not&quot;: true}], &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;FE_DwarvenHold_Victory&quot;, &quot;val&quot;: 1}}]}]" />
+    <property name="dialog" value="[{&quot;text&quot;: &quot;The sanctity o' this shrine must be respected!&quot;, &quot;options&quot;: [{&quot;name&quot;: &quot;(Fight)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;: -1}]}, {&quot;name&quot;: &quot;(Withdraw)&quot;}]}]" />
     <property name="displayNameOverride" value="Dwarven Recruiter" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dwarven Hold|FEM&quot;, &quot;Dwarven Shrine|ODY&quot;, &quot;Dwarven Recruiter|ODY&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Dwarven Recruiter" />
