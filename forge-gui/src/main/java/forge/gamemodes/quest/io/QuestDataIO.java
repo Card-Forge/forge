@@ -33,6 +33,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestMode;
@@ -97,6 +98,7 @@ public class QuestDataIO {
         xStream.allowTypeHierarchy(DeckGroup.class);
         xStream.allowTypeHierarchy(EnumMap.class);
         xStream.allowTypeHierarchy(QuestItemType.class);
+        xStream.allowTypeHierarchy(GameType.class);
         // allow any type from the same package
         xStream.allowTypesByWildcard(new String[] {
                 QuestDataIO.class.getPackage().getName()+".*",

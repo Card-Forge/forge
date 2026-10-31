@@ -9,6 +9,7 @@ import java.util.Set;
 
 import forge.deck.Deck;
 import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.QuestUtil;
@@ -242,13 +243,21 @@ public enum CSubmenuQuestStart implements ICDoc {
         //Apply the appropriate deck construction rules for this quest
         DeckConstructionRules dcr = DeckConstructionRules.Default;
 
-        if(VSubmenuQuestStart.SINGLETON_INSTANCE.isCommander()){
+        if (VSubmenuQuestStart.SINGLETON_INSTANCE.isCommander()) {
             dcr = DeckConstructionRules.Commander;
         }
 
         final QuestController qc = FModel.getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs, dcr);
+        Set<GameType> subTypes = new HashSet<GameType>();
+        if (VSubmenuQuestStart.SINGLETON_INSTANCE.isPlanechase()) {
+            subTypes.add(GameType.Planechase);
+        }
+        if (VSubmenuQuestStart.SINGLETON_INSTANCE.isArchenemyRumble()) {
+            subTypes.add(GameType.ArchenemyRumble);
+        }
+
+        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs, dcr, subTypes);
         FModel.getQuest().save();
 
         // Save in preferences.
