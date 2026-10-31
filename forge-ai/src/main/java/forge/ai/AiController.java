@@ -32,6 +32,7 @@ import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SimAudit;
 import forge.ai.simulation.SpellAbilityPicker;
+import forge.ai.simulation.TutorPlan;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -982,6 +983,9 @@ public class AiController {
         if (deckPlan(player).combos.outletMustWait(player, sa)) {
             return AiPlayDecision.AnotherTime; // a madness card would be thrown away at the wrong moment
         }
+        if (deckPlan(player).combos.payoffMustWait(player, sa)) {
+            return AiPlayDecision.AnotherTime; // Replenish on a graveyard without its enchantments is a wasted card
+        }
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
@@ -1886,14 +1890,14 @@ public class AiController {
 
         // pieces of the deck's combos stay in the list even when the script says AI:RemoveDeck:All:
         // Flat MC compares them with rollouts, the heuristics still decide for every other card
-        final ComboPlan comboPlan = flatMonteCarloActive()
-            ? deckPlan(player).combos : ComboPlan.EMPTY;
+        // Every other card marked AI:RemoveDeck:All stays in the list too, for Flat MC alone: see isFlatMcOnlyPlay
+        final boolean flatMc = flatMonteCarloActive();
         saList.removeIf(spellAbility -> {
             if (spellAbility.isLandAbility()) {
                 return true;
             }
             final Card h = spellAbility.getHostCard();
-            return h != null && ComputerUtilCard.isCardRemAIDeck(h) && !comboPlan.isKeyCard(h);
+            return h != null && ComputerUtilCard.isCardRemAIDeck(h) && !flatMc;
         });
         //removed skipped SA
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
@@ -2391,6 +2395,17 @@ public class AiController {
      * be cast or activated right now (timing, restrictions and cost), so the only thing against it is the heuristics'
      * rule of thumb. Nothing is decided here; rollouts judge it against the alternatives.
      */
+    /**
+     * A play of a card marked AI:RemoveDeck:All that is not a piece of the deck's combos or a tutor with a find: the
+     * heuristics cannot play it well, so they never approve it, but with rollouts to check what it really does it may
+     * be offered as a discovered play (Parallax Wave's exile ability, the Wave itself). Only while Flat MC is on.
+     */
+    public boolean isFlatMcOnlyPlay(final SpellAbility sa) {
+        final Card h = sa == null ? null : sa.getHostCard();
+        return h != null && ComputerUtilCard.isCardRemAIDeck(h) && flatMonteCarloActive()
+                && !deckPlan(player).combos.isKeyCard(h) && !TutorPlan.hasPlanTarget(player, sa);
+    }
+
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
         if (GuardedAbilities.isNeverLogic(sa) && !GuardedAbilities.mayConsider(player, sa, true)) {
             return false; // the script says the AI never plays it, and nothing makes an exception
@@ -2405,8 +2420,9 @@ public class AiController {
         final ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
                 && !combos.isFuelPlay(sa)
-                && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))) {
-            return false;
+                && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
+                && !TutorPlan.hasUse(player, sa)) {
+            return false; // a tutor with something to find is a play for the rollouts to weigh, in every mode
         }
         try {
             return sa.canPlay() && ComputerUtilCost.canPayCost(sa, player, false);
@@ -2564,6 +2580,13 @@ public class AiController {
                     // PhaseHandler ph = game.getPhaseHandler();
                     // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getInstance().getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
+                    if (isFlatMcOnlyPlay(sa)) {
+                        // never approved by the heuristics: only a play for the rollouts to weigh, and only with discovery
+                        if (extrasOut != null && isLegalDiscovery(sa, opinion)) {
+                            extrasOut.add(sa);
+                        }
+                        continue;
+                    }
                     if (opinion != AiPlayDecision.WillPlay) {
                         if (maxResults > 1) {
                             FlatMonteCarloStats.noteRejected(opinion.name());

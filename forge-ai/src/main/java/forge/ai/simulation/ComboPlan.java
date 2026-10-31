@@ -47,6 +47,8 @@ import forge.game.zone.ZoneType;
  *   <li>{@link Kind#CASCADE_PAYOFF}: cascade spells whose only possible hit is the payoff;</li>
  *   <li>{@link Kind#CHEAT_FATTY}: Show and Tell, Sneak Attack, Through the Breach and the like, with huge creatures
  *       that are worth far more put into play than cast;</li>
+ *   <li>{@link Kind#REPLENISH}: Replenish and the like. Enchantments are put into the graveyard on purpose (Intuition,
+ *       Attunement, looting) and come back all at once, so the payoff waits until the graveyard is worth it;</li>
  *   <li>{@link Kind#GO_WIDE}: token and cheap creature decks with an overrun finisher (Craterhoof Behemoth, Overrun,
  *       Triumph of the Hordes): the finisher waits in hand until the board makes it lethal.</li>
  * </ul>
@@ -56,7 +58,7 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE, MADNESS, ATOG }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -214,6 +216,7 @@ public final class ComboPlan {
         addIfFound(found, dredge(spells));
         addIfFound(found, madness(spells));
         addIfFound(found, atog(spells));
+        addIfFound(found, replenish(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -423,6 +426,9 @@ public final class ComboPlan {
                     break;
                 case ATOG:
                     sum += atogTerm(ai, combo);
+                    break;
+                case REPLENISH:
+                    sum += replenishTerm(ai, combo);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -1054,6 +1060,191 @@ public final class ComboPlan {
         return Math.min(250, sum);
     }
 
+    // ---------------------------------------------------------------------------------------- Replenish decks
+
+    /** The graveyard has to hold about two good enchantments before the payoff is cast (Opalescence and a Parallax Wave). */
+    static final int REPLENISH_WORTH_MIN = 300;
+    /** Share (percent) of what the graveyard's enchantments are worth, while the payoff can be cast or only drawn. */
+    private static final int REPLENISH_SHARE_ACCESS = 65;
+    private static final int REPLENISH_SHARE_NO_ACCESS = 25;
+
+    /** What an enchantment is worth on the battlefield; 0 for anything else (an Aura stays in the graveyard). */
+    static int enchantmentValue(final Card c) {
+        return c.isEnchantment() && !c.isAura() && !c.isLand() ? 50 + 30 * c.getCMC() : 0;
+    }
+
+    private static int graveyardEnchantmentValue(final Player ai) {
+        int sum = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            sum += enchantmentValue(c);
+        }
+        return sum;
+    }
+
+    /** Return all enchantment cards of the graveyard to the battlefield (Replenish, and the like). */
+    static boolean isEnchantmentRecursion(final Card c) {
+        if (c.isLand() || c.isCreature()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if ((a.getApi() == ApiType.ChangeZoneAll || a.getApi() == ApiType.ChangeZone)
+                        && a.getParamOrDefault("Origin", "").contains("Graveyard")
+                        && "Battlefield".equals(a.getParamOrDefault("Destination", ""))
+                        && a.getParamOrDefault("ChangeType", "").contains("Enchantment")
+                        && !a.getParamOrDefault("ChangeType", "").contains("Aura")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A way to fill the graveyard: discarding or milling yourself, cycling, or a library search that puts the cards it
+     * does not take there (Intuition). Activated abilities count (Attunement draws three and discards four).
+     */
+    private static boolean isGraveyardFiller(final Card c) {
+        if (c.isLand()) {
+            return false;
+        }
+        if (hasCycling(c)) {
+            return true;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if ("Intuition".equals(sa.getParam("AILogic"))) {
+                return true;
+            }
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                final ApiType api = a.getApi();
+                final String who = a.getParamOrDefault("Defined", "You");
+                if (api == ApiType.Discard && !a.usesTargeting() && who.contains("You")
+                        || api == ApiType.Mill && !a.usesTargeting() && who.contains("You")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Combo replenish(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int payoffCopies = 0;
+        int enchantments = 0;
+        int fillers = 0;
+        for (final Card c : spells) {
+            if (isEnchantmentRecursion(c)) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+                continue;
+            }
+            if (enchantmentValue(c) > 0) {
+                enchantments++;
+            }
+            if (isGraveyardFiller(c)) {
+                enablers.add(c.getName());
+                fillers++;
+            }
+        }
+        if (payoffCopies < 2 || enchantments < 8 || fillers < 4) {
+            return null;
+        }
+        return new Combo(Kind.REPLENISH, 30 + 4 * Math.min(payoffCopies, 4) + 2 * Math.min(enchantments, 16)
+                + 2 * Math.min(fillers, 10), payoffs, enablers, Collections.<String>emptySet(), false,
+                "payoff=" + payoffs + ", enchantments=" + enchantments + ", fillers=" + fillers);
+    }
+
+    /** The enchantments in the graveyard are worth part of what Replenish makes of them, more while it is in hand. */
+    private int replenishTerm(final Player ai, final Combo combo) {
+        final boolean access = anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs);
+        if (!access && !anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs)) {
+            return 0; // every copy is used up: nothing left to prepare
+        }
+        return Math.min(350, graveyardEnchantmentValue(ai) * (access ? REPLENISH_SHARE_ACCESS : REPLENISH_SHARE_NO_ACCESS) / 100);
+    }
+
+    /** Whether the payoff is held back: cast on a graveyard without its enchantments it would be a wasted card. */
+    public boolean payoffMustWait(final Player ai, final SpellAbility sa) {
+        final Combo rep = find(Kind.REPLENISH);
+        if (rep == null || ai == null || sa == null || !sa.isSpell() || sa.getHostCard() == null
+                || !rep.payoffs.contains(sa.getHostCard().getName())) {
+            return false;
+        }
+        return graveyardEnchantmentValue(ai) < REPLENISH_WORTH_MIN;
+    }
+
+    /**
+     * What to search for in a Replenish deck. Alone (a tutor that takes one card) the payoff first, then the best
+     * enchantment. For Intuition, where the card the opponent leaves goes into the hand and the rest into the
+     * graveyard, three different enchantments, the best first: whichever one is given, the other two are in the
+     * graveyard for the payoff.
+     */
+    private CardCollection replenishPicks(final Player ai, final Iterable<Card> pool, final int n, final Combo combo) {
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final List<Card> enchantments = new ArrayList<>();
+        Card payoff = null;
+        for (final Card c : pool) {
+            if (combo.payoffs.contains(c.getName())) {
+                payoff = payoff == null ? c : payoff;
+            } else if (enchantmentValue(c) > 0) {
+                enchantments.add(c);
+            }
+        }
+        enchantments.sort((a, b) -> Integer.compare(enchantmentValue(b), enchantmentValue(a)));
+        final CardCollection picks = new CardCollection();
+        if (n == 1) {
+            if (payoff != null && !anyNamed(hand, combo.payoffs)) {
+                picks.add(payoff);
+            } else if (!enchantments.isEmpty()) {
+                picks.add(enchantments.get(0));
+            }
+            return picks.size() == 1 ? picks : null;
+        }
+        final Set<String> names = new LinkedHashSet<>();
+        for (final Card c : enchantments) {
+            if (picks.size() < n && names.add(c.getName())) {
+                picks.add(c);
+            }
+        }
+        for (final Card c : enchantments) {
+            if (picks.size() < n && !picks.contains(c)) {
+                picks.add(c);
+            }
+        }
+        if (picks.size() < n && payoff != null && !picks.contains(payoff)) {
+            picks.add(payoff); // fewer than n enchantments are left: the payoff makes up the number
+        }
+        return picks.size() == n ? picks : null;
+    }
+
+    /**
+     * What a search that sends all but one of the cards to the graveyard (Intuition) is worth to a Replenish deck, in
+     * evaluator points: the opponent gives the AI the card that is worth least, so the others are what is gained. Not
+     * limited by how full the graveyard already is, which the progress term is (it stops counting at a point):
+     * every enchantment that is added comes back with the payoff.
+     */
+    public int graveyardGain(final Player ai, final Iterable<Card> picks) {
+        final Combo rep = find(Kind.REPLENISH);
+        if (rep == null || ai == null || picks == null) {
+            return 0;
+        }
+        int sum = 0;
+        int least = Integer.MAX_VALUE;
+        int count = 0;
+        for (final Card c : picks) {
+            final int v = enchantmentValue(c);
+            sum += v;
+            least = Math.min(least, v);
+            count++;
+        }
+        if (count < 2) {
+            return 0;
+        }
+        final boolean access = anyNamed(ai.getCardsIn(ZoneType.Hand), rep.payoffs);
+        return Math.min(300, (sum - least) * (access ? REPLENISH_SHARE_ACCESS : REPLENISH_SHARE_NO_ACCESS) / 100);
+    }
+
     // ------------------------------------------------------------------------------------------------- tutors
 
     /**
@@ -1071,6 +1262,13 @@ public final class ComboPlan {
         final Combo atog = find(Kind.ATOG);
         if (combos.isEmpty() || ai == null || pool == null || n <= 0) {
             return null;
+        }
+        final Combo rep = find(Kind.REPLENISH);
+        if (rep != null) {
+            final CardCollection forReplenish = replenishPicks(ai, pool, n, rep);
+            if (forReplenish != null) {
+                return forReplenish;
+            }
         }
         final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
         final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
@@ -1115,7 +1313,7 @@ public final class ComboPlan {
             return 0;
         }
         if (graveyardRest && (combo.kind == Kind.MASS_REANIMATION || combo.kind == Kind.REANIMATOR
-                || combo.kind == Kind.DREDGE || combo.kind == Kind.MILL)) {
+                || combo.kind == Kind.DREDGE || combo.kind == Kind.MILL || combo.kind == Kind.REPLENISH)) {
             return 0; // what is left over goes to the graveyard, which is where these decks want cards
         }
         boolean havePayoff = false;
@@ -1521,7 +1719,7 @@ public final class ComboPlan {
     }
 
     private boolean wantsGraveyardFuel() {
-        return find(Kind.MASS_REANIMATION) != null || find(Kind.REANIMATOR) != null;
+        return find(Kind.MASS_REANIMATION) != null || find(Kind.REANIMATOR) != null || find(Kind.REPLENISH) != null;
     }
 
     /**
@@ -1603,6 +1801,9 @@ public final class ComboPlan {
                 }
             }
             return lands >= 5 ? 15 : -200;
+        }
+        if (find(Kind.REPLENISH) != null && enchantmentValue(c) > 0) {
+            return 100 + enchantmentValue(c); // it comes back with the payoff, and does more there than in the hand
         }
         if (c.isCreature()) {
             if (find(Kind.REANIMATOR) != null && isBigTarget(c)) {

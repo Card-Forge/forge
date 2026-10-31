@@ -843,7 +843,11 @@ public final class FlatMonteCarloPicker {
             }
             GameObject target = null;
             final SpellAbility targeting = singleTargetingAbility(sa);
-            if (targeting != null && targeting.getApi() == ApiType.Counter) {
+            if (targeting != null && TutorPlan.isLibraryTutor(sa)) {
+                if (!aimAtOpponent(player, targeting)) {
+                    continue;
+                }
+            } else if (targeting != null && targeting.getApi() == ApiType.Counter) {
                 // aimed at the spell on the stack by the caller, which no GameEntity target can express
                 if (targeting.getTargets().isEmpty()) {
                     continue;
@@ -971,6 +975,20 @@ public final class FlatMonteCarloPicker {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
             if (a.usesTargeting()) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /** Intuition and the like: "target opponent chooses". Sets the first opponent that can be targeted. */
+    static boolean aimAtOpponent(final Player player, final SpellAbility targeting) {
+        if (targeting.isTargetNumberValid() && !targeting.getTargets().isEmpty()) {
+            return true;
+        }
+        targeting.resetTargets();
+        for (final Player opp : player.getOpponents()) {
+            if (targeting.canTarget(opp) && targeting.getTargets().add(opp)) {
+                return targeting.isTargetNumberValid();
             }
         }
         return false;
@@ -1521,7 +1539,7 @@ public final class FlatMonteCarloPicker {
             value += holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
         }
         if (cand != null && cand.sa != null) {
-            value += StrategicEvaluator.selectionBonus(cand.sa, cfg);
+            value += StrategicEvaluator.selectionBonus(cand.sa, cfg) + TutorPlan.bonus(cand.sa, cfg);
         }
         return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
     }
