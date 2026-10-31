@@ -1538,6 +1538,11 @@ public final class ComboPlan {
                 && (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName()));
     }
 
+    /** A card the kill is built from: the finisher, a tutor, the engine, fast mana. */
+    public static boolean isTutorStormPiece(final Card c) {
+        return isStormFinisher(c) || isLibraryTutor(c) || isRecursionEngine(c) || isFastMana(c);
+    }
+
     /** A ritual, a mox, Lotus Petal, Lion's Eye Diamond: a cheap spell that is worth mana. */
     private static boolean isFastMana(final Card c) {
         return !c.isLand() && !c.isCreature() && c.getCMC() <= 2
@@ -1714,6 +1719,40 @@ public final class ComboPlan {
             }
         }
         return sum;
+    }
+
+    /**
+     * How ready a tutor storm deck is to kill on a later turn, when it cannot this turn: the finisher and the engine in
+     * the hand, tutors to find them, fast mana still unspent in the hand, mana that stays in play (moxen, lands). The
+     * storm count is worth nothing here, it is gone at the end of the turn: a ritual cast without a kill loses points.
+     */
+    public int setupScore(final Player ai) {
+        if (find(Kind.TUTOR_STORM) == null || ai == null) {
+            return 0;
+        }
+        boolean finisher = false;
+        boolean engine = false;
+        int tutors = 0;
+        int fast = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (isStormFinisher(c)) {
+                finisher = true;
+            } else if (isRecursionEngine(c)) {
+                engine = true;
+            } else if (isLibraryTutor(c)) {
+                tutors++;
+            } else if (isFastMana(c)) {
+                fast++;
+            }
+        }
+        int permanents = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isLand() && !c.getManaAbilities().isEmpty() && !sacrificesForMana(c)) {
+                permanents++;
+            }
+        }
+        return (finisher ? 120 : 0) + (engine ? 80 : 0) + 40 * Math.min(tutors, 3) + 25 * Math.min(fast, 6)
+                + 35 * Math.min(permanents, 4) + 15 * Math.min(ai.getLandsInPlay().size(), 5);
     }
 
     /** The progress of a tutor storm deck in evaluator points (0 for any other deck); the solver ranks its states by it. */
@@ -1997,6 +2036,43 @@ public final class ComboPlan {
         return best;
     }
 
+    /**
+     * The card to put back from the hand (Brainstorm). The generic "worst card" is the cheapest one, which for this deck
+     * is exactly the rituals and Lotus Petal that the kill is made of. Lands beyond what is needed come first, then the
+     * cards that do not help the kill (discard, Veil of Summer), and the finisher, the engine, tutors and fast mana last.
+     */
+    private static Card tutorStormPutBack(final Player ai, final CardCollectionView options) {
+        int lands = ai.getLandsInPlay().size();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c.isLand()) {
+                lands++;
+            }
+        }
+        Card worst = null;
+        int worstValue = Integer.MAX_VALUE;
+        for (final Card c : options) {
+            final int v;
+            if (isStormFinisher(c)) {
+                v = 100;
+            } else if (isRecursionEngine(c)) {
+                v = 90;
+            } else if (isLibraryTutor(c)) {
+                v = 80;
+            } else if (isFastMana(c)) {
+                v = 70;
+            } else if (c.isLand()) {
+                v = lands > 3 ? 20 : 60; // the third or fourth land is needed, the fifth is not
+            } else {
+                v = 10;
+            }
+            if (v < worstValue) {
+                worstValue = v;
+                worst = c;
+            }
+        }
+        return worst;
+    }
+
     private static Combo creatureCopy(final List<Card> spells) {
         final Set<String> engines = new LinkedHashSet<>();
         final Set<String> targets = new LinkedHashSet<>();
@@ -2144,6 +2220,9 @@ public final class ComboPlan {
             if (pick != null) {
                 return pick;
             }
+        }
+        if (tutorStorm != null && destination == ZoneType.Library && origin.contains(ZoneType.Hand)) {
+            return tutorStormPutBack(ai, options); // Brainstorm: what goes back is what the kill needs least
         }
         Card best = null;
         int bestValue = Integer.MIN_VALUE;

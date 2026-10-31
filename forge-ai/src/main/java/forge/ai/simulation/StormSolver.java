@@ -12,6 +12,7 @@ import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.AITimeoutTracker;
 
 /**
  * Finds a line that wins a tutor storm deck (Beseech the Mirror, Infernal Tutor, Gaea's Will, Tendrils of Agony) this
@@ -62,15 +63,24 @@ public final class StormSolver {
         }
     }
 
+    /**
+     * A state of the search. It remembers the plays that lead to it, not the game: only a few nodes hold their game
+     * ({@link #remember}), the others are played again from their parent when they are needed ({@link #materialize}).
+     * That keeps the memory at a handful of copies of the game instead of one per state.
+     */
     private static final class Node implements Comparable<Node> {
-        final GameSimulator sim;
+        GameSimulator sim; // null when evicted
+        final Node parent;
         final List<Step> steps;
+        final int added; // how many plays of steps this node added to its parent's: 1, or 2 for the tutor and the Diamond
         final int score;
         final Set<Integer> gyCast; // ids of graveyard cards already cast in this line
 
-        Node(final GameSimulator sim, final List<Step> steps, final int score, final Set<Integer> gyCast) {
+        Node(final GameSimulator sim, final Node parent, final List<Step> steps, final int added, final int score, final Set<Integer> gyCast) {
             this.sim = sim;
+            this.parent = parent;
             this.steps = steps;
+            this.added = added;
             this.score = score;
             this.gyCast = gyCast;
         }
@@ -84,17 +94,32 @@ public final class StormSolver {
     public static final int DEFAULT_MAX_NODES = 400;
     public static final long DEFAULT_BUDGET_NANOS = 4_000_000_000L;
     private static final int MAX_SOLVES_PER_TURN = 4;
-    /** Size of the frontier: every entry holds a whole copy of the game, so an unbounded queue runs out of heap. */
-    private static final int MAX_OPEN = 64;
+    /** However many lines were found and left again, a turn is searched at most this often. */
+    private static final int MAX_TOTAL_SOLVES = 16;
     /** The search stops (and the AI falls back to Flat Monte Carlo) when this share of the heap is in use. */
-    private static final double MEMORY_LIMIT = 0.85;
+    private static final double MEMORY_LIMIT = 0.90;
+    private static final boolean TRACE = Boolean.getBoolean("storm.trace");
+    /** The plays that make the hand better when no kill was found (null: nothing worth doing). */
+    static List<Step> lastSetup() {
+        return lastSetup;
+    }
+
     /** What the last search that found no line saw: the start, the best state and why it stopped. */
     private static String lastDiagnostic = "";
+    /** The plays of the best state to end the turn in when no kill was found (see {@link ComboPlan#setupScore}), or null. */
+    private static volatile List<Step> lastSetup;
+    /** A setup play has to make the hand this much better, or the AI does what it always did. */
+    private static final int SETUP_MIN_GAIN = 30;
 
+    /** Set after an OutOfMemoryError: the AI plays without the solver for the rest of the game. */
+    private boolean disabled;
     private Line line;
     private int index;
     private int turnKey = -1;
     private int solves;
+    private int totalSolves;
+    /** States of this turn the search found nothing in: the same state is not searched again (the AI asks many times). */
+    private final Set<String> failed = new HashSet<>();
     /** What the last call did, for tests and traces. */
     public String lastNote = "";
 
@@ -103,7 +128,21 @@ public final class StormSolver {
      * {@code combos} is the plan of the AI; this does nothing for a deck that is not a tutor storm deck.
      */
     public SpellAbility next(final Player ai, final ComboPlan combos) {
-        final SpellAbility sa = nextImpl(ai, combos);
+        SpellAbility sa;
+        try {
+            sa = nextImpl(ai, combos);
+        } catch (final AITimeoutTracker.Expired e) {
+            throw e;
+        } catch (final RuntimeException e) {
+            // a failure in the search must not end the turn or switch Flat Monte Carlo off: play on without the solver
+            disabled = true;
+            line = null;
+            lastNote = "solver error, solver off: " + e;
+            if (TRACE) {
+                e.printStackTrace(System.out);
+            }
+            sa = null;
+        }
         if (Boolean.getBoolean("storm.trace") && lastNote != null && !lastNote.isEmpty()) {
             System.out.println("STORM-SOLVER " + lastNote);
         }
@@ -112,7 +151,7 @@ public final class StormSolver {
 
     private SpellAbility nextImpl(final Player ai, final ComboPlan combos) {
         lastNote = "";
-        if (ai == null || combos == null || !combos.has(ComboPlan.Kind.TUTOR_STORM)) {
+        if (ai == null || combos == null || disabled || !combos.has(ComboPlan.Kind.TUTOR_STORM)) {
             return null;
         }
         final Game game = ai.getGame();
@@ -144,6 +183,8 @@ public final class StormSolver {
             line = null;
             index = 0;
             solves = 0;
+            totalSolves = 0;
+            failed.clear();
         }
         final List<SpellAbility> moves = movesOf(ai);
         if (line != null && index < line.steps.size()) {
@@ -156,19 +197,59 @@ public final class StormSolver {
                     return sa;
                 }
             }
+            final StringBuilder seen = new StringBuilder();
+            for (int i = 0; i < moves.size() && i < 8; i++) {
+                seen.append(" | ").append(new Step(moves.get(i)));
+            }
             line = null; // the game went another way: find a line from here
+            lastNote = "line left at step " + index + ", expected " + step + "; plays were" + seen;
+            if (TRACE) {
+                System.out.println("STORM-SOLVER " + lastNote);
+            }
         }
-        if (solves >= MAX_SOLVES_PER_TURN) {
+        // a line that is being played and went another way is searched again whatever happened before in this turn
+        final String stateNow = stateKey(ai);
+        if (failed.contains(stateNow)) {
+            lastNote = "same state, no winning line";
+            return null;
+        }
+        if (solves >= MAX_SOLVES_PER_TURN || totalSolves >= MAX_TOTAL_SOLVES) {
             lastNote = "solve limit";
             return null;
         }
         solves++;
-        line = solve(ai, combos, DEFAULT_MAX_NODES, DEFAULT_BUDGET_NANOS);
+        totalSolves++;
+        try {
+            line = solve(ai, combos, DEFAULT_MAX_NODES, budgetNanos());
+        } catch (final OutOfMemoryError e) {
+            line = null; // the search is local and garbage now; Flat Monte Carlo plays on
+            disabled = true;
+            lastNote = "out of memory: solver off";
+            return null;
+        }
         index = 0;
         if (line == null) {
+            failed.add(stateNow);
+            final List<Step> setup = lastSetup();
+            if (setup != null && !setup.isEmpty()) {
+                // no kill this turn: play what makes the next turn's kill likelier (the finisher or the engine found,
+                // mana put in play), and keep the rest. The plays are followed like a line, and checked after each.
+                line = new Line(setup, 0, 0L);
+                index = 0;
+                for (final SpellAbility sa : moves) {
+                    if (setup.get(0).matches(sa)) {
+                        index = 1;
+                        lastNote = "setup " + setup;
+                        aimAt(ai, sa);
+                        return sa;
+                    }
+                }
+                line = null;
+            }
             lastNote = "no winning line: " + lastDiagnostic;
             return null;
         }
+        solves = 0; // a line was found: what was searched in vain before does not count against playing it
         final Step step = line.steps.get(0);
         for (final SpellAbility sa : moves) {
             if (step.matches(sa)) {
@@ -269,9 +350,10 @@ public final class StormSolver {
      */
     public static Line solve(final Player ai, final ComboPlan combos, final int maxNodes, final long budgetNanos) {
         final long start = System.nanoTime();
-        final long each = budgetNanos / SHUFFLES;
+        final int shuffles = shuffles();
+        final long each = budgetNanos / shuffles;
         Line found = null;
-        for (int i = 0; i < SHUFFLES && found == null; i++) {
+        for (int i = 0; i < shuffles && found == null; i++) {
             final long left = budgetNanos - (System.nanoTime() - start);
             if (left <= 0) {
                 break;
@@ -285,25 +367,44 @@ public final class StormSolver {
         final long start = System.nanoTime();
         final Game game = ai.getGame();
         final GameSimulator root = new GameSimulator(game, ai);
-        HiddenInfoShuffler.shuffle(root.getSimulatedGameState(), root.getGameCopier(), ai, new Random(game.getPhaseHandler().getTurn() + 7919L * variant));
+        HiddenInfoShuffler.shuffle(root.getSimulatedGameState(), root.getGameCopier(), ai, new Random(game.getPhaseHandler().getTurn() + 7919L * variant),
+                ComboPlan::isTutorStormPiece);
         setStorm(root.getSimulatedGameState(), root.getSimulatedAiPlayer(), ComboPlan.stormCount(ai));
+        root.releaseCopier(); // the shuffle above was the last use of the link to the real game
 
+        lastSetup = null;
+        int setupBest = combos.setupScore(root.getSimulatedAiPlayer());
+        final int setupStart = setupBest;
+        List<Step> setupSteps = null;
+        final int cap = cacheSize();
+        final List<Node> live = new ArrayList<>(cap + 2); // the nodes that hold their game, oldest first
         final PriorityQueue<Node> open = new PriorityQueue<>();
-        final Set<String> seen = new HashSet<>();
-        open.add(new Node(root, new ArrayList<Step>(), combos.solverScore(root.getSimulatedAiPlayer()), new HashSet<Integer>()));
-        seen.add(stateKey(root.getSimulatedAiPlayer()));
+        final Set<Long> seen = new HashSet<>();
+        final Node first = new Node(root, null, new ArrayList<Step>(), 0, combos.solverScore(root.getSimulatedAiPlayer()), new HashSet<Integer>());
+        open.add(first); // the root keeps its game for good: every replay starts from it at the latest
+        seen.add(hash(stateKey(root.getSimulatedAiPlayer())));
         int nodes = 0;
-        Node best = open.peek();
-        final String startState = describe(root.getSimulatedAiPlayer());
+        int bestScore = first.score;
+        List<Step> bestSteps = first.steps;
+        String bestState = describe(root.getSimulatedAiPlayer()); // only text is kept, never a simulation
+        final String startState = bestState;
         final StringBuilder trail = new StringBuilder();
-        trail.append(" | picker: ").append(new SpellAbilityPicker(ai).explainCandidates());
+        if (TRACE) {
+            trail.append(" | picker: ").append(new SpellAbilityPicker(ai).explainCandidates());
+        }
         while (!open.isEmpty() && nodes < maxNodes && System.nanoTime() - start < budgetNanos && !lowMemory()) {
             final Node node = open.poll();
-            nodes++;
-            if (node.score > best.score) {
-                best = node;
+            final GameSimulator nodeSim = materialize(node, live, cap);
+            if (nodeSim == null) {
+                continue; // the plays that lead here cannot be played again
             }
-            final Player simAi = node.sim.getSimulatedAiPlayer();
+            nodes++;
+            if (node.score > bestScore) {
+                bestScore = node.score;
+                bestSteps = node.steps;
+                bestState = describe(nodeSim.getSimulatedAiPlayer());
+            }
+            final Player simAi = nodeSim.getSimulatedAiPlayer();
             final List<SpellAbility> moves = movesOf(simAi);
             // the winning cast first: if it is a move at all, the line is complete
             for (final SpellAbility sa : moves) {
@@ -323,36 +424,40 @@ public final class StormSolver {
                 if (fromGy && node.gyCast.contains(host.getId())) {
                     continue; // Gaea's Will exiles it after the first cast
                 }
-                if (System.nanoTime() - start >= budgetNanos) {
+                if (System.nanoTime() - start >= budgetNanos || lowMemory()) {
                     break;
                 }
-                final int stormBefore = ComboPlan.stormCount(simAi);
-                final GameSimulator child = new GameSimulator(node.sim.getSimulatedGameState(), simAi);
-                setStorm(child.getSimulatedGameState(), child.getSimulatedAiPlayer(), stormBefore);
-                if (!child.applySpellAbility(sa)) {
-                    if (trail.length() < 3000) {
+                final GameSimulator child = playOn(nodeSim, sa);
+                if (child == null) {
+                    if (TRACE && trail.length() < 3000) {
                         trail.append(" | could not play ").append(new Step(sa));
                     }
                     continue;
                 }
                 final Player childAi = child.getSimulatedAiPlayer();
-                final Game childGame = child.getSimulatedGameState();
-                if (childGame.isGameOver()) {
+                if (child.getSimulatedGameState().isGameOver()) {
                     continue;
                 }
                 final Set<Integer> gy = new HashSet<>(node.gyCast);
                 if (fromGy) {
                     gy.add(host.getId());
                 }
-                if (!seen.add(stateKey(childAi) + new TreeSet<>(gy))) {
+                if (!seen.add(hash(stateKey(childAi) + new TreeSet<>(gy)))) {
                     continue;
                 }
                 final List<Step> steps = new ArrayList<>(node.steps);
                 steps.add(new Step(sa));
-                if (trail.length() < 3000) {
+                final int setupNow = combos.setupScore(childAi);
+                if (setupNow > setupBest) {
+                    setupBest = setupNow;
+                    setupSteps = steps;
+                }
+                if (TRACE && trail.length() < 3000) {
                     trail.append(" | ").append(steps.get(steps.size() - 1).host).append(" -> {").append(describe(childAi)).append('}');
                 }
-                open.add(new Node(child, steps, combos.solverScore(childAi) + steps.size(), gy));
+                final Node childNode = new Node(child, node, steps, 1, combos.solverScore(childAi) + steps.size(), gy);
+                remember(live, childNode, cap);
+                open.add(childNode);
             }
             // Infernal Tutor with the Diamond cracked in response: the hand is empty when the Tutor resolves (Hellbent)
             SpellAbility discardMana = null;
@@ -366,32 +471,112 @@ public final class StormSolver {
                 for (final SpellAbility sa : moves) {
                     final Card host = sa.getHostCard();
                     if (host == null || !sa.isSpell() || !ComboPlan.isHellbentTutor(host)
-                            || System.nanoTime() - start >= budgetNanos) {
+                            || System.nanoTime() - start >= budgetNanos || lowMemory()) {
                         continue;
                     }
-                    final GameSimulator child = tutorWithDiscardMana(node.sim, sa, discardMana);
+                    final GameSimulator child = tutorWithDiscardMana(nodeSim, sa, discardMana);
                     if (child == null) {
                         continue;
                     }
                     final Player childAi = child.getSimulatedAiPlayer();
-                    if (child.getSimulatedGameState().isGameOver() || !seen.add(stateKey(childAi) + new TreeSet<>(node.gyCast))) {
+                    if (child.getSimulatedGameState().isGameOver() || !seen.add(hash(stateKey(childAi) + new TreeSet<>(node.gyCast)))) {
                         continue;
                     }
                     final List<Step> steps = new ArrayList<>(node.steps);
                     steps.add(new Step(sa));
                     steps.add(new Step(discardMana, true));
-                    if (trail.length() < 3000) {
+                    final int setupNow = combos.setupScore(childAi);
+                    if (setupNow > setupBest) {
+                        setupBest = setupNow;
+                        setupSteps = steps;
+                    }
+                    if (TRACE && trail.length() < 3000) {
                         trail.append(" | ").append(host.getName()).append("+").append(discardMana.getHostCard().getName())
                                 .append(" -> {").append(describe(childAi)).append('}');
                     }
-                    open.add(new Node(child, steps, combos.solverScore(childAi) + steps.size(), new HashSet<>(node.gyCast)));
+                    final Node childNode = new Node(child, node, steps, 2, combos.solverScore(childAi) + steps.size(), new HashSet<>(node.gyCast));
+                    remember(live, childNode, cap);
+                    open.add(childNode);
                 }
             }
-            trim(open);
+        }
+        if (setupSteps != null && setupBest - setupStart >= SETUP_MIN_GAIN) {
+            lastSetup = Collections.unmodifiableList(setupSteps);
         }
         lastDiagnostic = "start {" + startState + "} searched " + nodes + " states in " + (System.nanoTime() - start) / 1_000_000
-                + " ms (" + (open.isEmpty() ? "all explored" : nodes >= maxNodes ? "state limit" : lowMemory() ? "memory limit" : "time limit") + "); best score "
-                + best.score + " after " + best.steps + " {" + describe(best.sim.getSimulatedAiPlayer()) + "}" + trail;
+                + " ms (" + (open.isEmpty() ? "all explored" : nodes >= maxNodes ? "state limit" : lowMemory() ? "memory limit" : "time limit")
+                + ", games kept " + cap + ", heap " + heap() + "); best score " + bestScore + " after " + bestSteps + " {" + bestState + "}" + trail;
+        return null;
+    }
+
+    /** The game after one play of {@code from}: a copy, with the storm count of the parent; null when it cannot be played. */
+    private static GameSimulator playOn(final GameSimulator from, final SpellAbility sa) {
+        final Player simAi = from.getSimulatedAiPlayer();
+        final int stormBefore = ComboPlan.stormCount(simAi);
+        final GameSimulator child = new GameSimulator(from.getSimulatedGameState(), simAi);
+        setStorm(child.getSimulatedGameState(), child.getSimulatedAiPlayer(), stormBefore);
+        if (!child.applySpellAbility(sa)) {
+            return null;
+        }
+        child.releaseCopier(); // the play is applied: the child no longer needs its parent
+        return child;
+    }
+
+    /** Lets the node keep its game; the node that has kept it longest lets go of its game when there are too many. */
+    private static void remember(final List<Node> live, final Node n, final int cap) {
+        live.remove(n);
+        live.add(n);
+        while (live.size() > cap) {
+            final Node old = live.remove(0);
+            if (old.parent != null) { // the root keeps its game: it has no parent to be played again from
+                old.sim = null;
+            }
+        }
+    }
+
+    /**
+     * The game of a node: the one it kept, or the plays that lead to it played again from the nearest ancestor that
+     * kept its game. Null when a play cannot be repeated.
+     */
+    private static GameSimulator materialize(final Node n, final List<Node> live, final int cap) {
+        if (n.sim != null) {
+            remember(live, n, cap);
+            return n.sim;
+        }
+        if (n.parent == null) {
+            return null;
+        }
+        final GameSimulator parentSim = materialize(n.parent, live, cap);
+        if (parentSim == null) {
+            return null;
+        }
+        final List<SpellAbility> moves = movesOf(parentSim.getSimulatedAiPlayer());
+        final int k = n.steps.size() - n.added;
+        final SpellAbility sa = find(moves, n.steps.get(k));
+        if (sa == null) {
+            return null;
+        }
+        GameSimulator g;
+        if (n.added == 1) {
+            g = playOn(parentSim, sa);
+        } else {
+            final SpellAbility discardMana = find(moves, n.steps.get(k + 1));
+            g = discardMana == null ? null : tutorWithDiscardMana(parentSim, sa, discardMana);
+        }
+        if (g == null) {
+            return null;
+        }
+        n.sim = g;
+        remember(live, n, cap);
+        return g;
+    }
+
+    private static SpellAbility find(final List<SpellAbility> moves, final Step step) {
+        for (final SpellAbility sa : moves) {
+            if (step.matches(sa)) {
+                return sa;
+            }
+        }
         return null;
     }
 
@@ -426,23 +611,63 @@ public final class StormSolver {
             return null;
         }
         GameSimulator.resolveStack(child.getSimulatedGameState(), childAi.getWeakestOpponent());
+        child.releaseCopier(); // the lookup of the Diamond above was the last use of the link to the parent
         return child;
     }
 
-    /** Beam search: keeps the best {@link #MAX_OPEN} states, the rest become garbage at once. */
-    private static void trim(final PriorityQueue<Node> open) {
-        if (open.size() <= MAX_OPEN) {
-            return;
-        }
-        final List<Node> all = new ArrayList<>(open);
-        Collections.sort(all); // compareTo is best first
-        open.clear();
-        open.addAll(all.subList(0, MAX_OPEN));
+    /** A phone or tablet gives the app a few hundred MB: search less there. */
+    private static boolean constrained() {
+        return Runtime.getRuntime().maxMemory() <= (768L << 20);
     }
 
+
+    /** How many states keep their game while the search runs: the others are played again when needed. */
+    private static int cacheSize() {
+        return constrained() ? 4 : 10;
+    }
+
+    private static int shuffles() {
+        return 1; // the pieces of the deck are at the bottom of the library: one order is the pessimistic one, more is luck
+    }
+
+    private static long budgetNanos() {
+        return constrained() ? DEFAULT_BUDGET_NANOS / 2 : DEFAULT_BUDGET_NANOS;
+    }
+
+    /** 64 bit hash of a state description: the set of seen states then holds numbers, not long strings. */
+    private static long hash(final String s) {
+        long h = 1125899906842597L;
+        for (int i = 0; i < s.length(); i++) {
+            h = 31 * h + s.charAt(i);
+        }
+        return h;
+    }
+
+
+
+    /** When the collector was last asked for: the used heap is mostly garbage that is not collected yet. */
+    private static long lastGc;
+
+    /**
+     * The heap is nearly full of live data. The used memory of a search is mostly garbage, so the first time it looks
+     * full the collector runs (at most once a second) and the heap is measured again; only what survives counts.
+     */
     private static boolean lowMemory() {
         final Runtime rt = Runtime.getRuntime();
+        if (rt.totalMemory() - rt.freeMemory() <= rt.maxMemory() * MEMORY_LIMIT) {
+            return false;
+        }
+        final long now = System.nanoTime();
+        if (now - lastGc > 1_000_000_000L) {
+            System.gc();
+            lastGc = System.nanoTime();
+        }
         return rt.totalMemory() - rt.freeMemory() > rt.maxMemory() * MEMORY_LIMIT;
+    }
+
+    private static String heap() {
+        final Runtime rt = Runtime.getRuntime();
+        return (rt.totalMemory() - rt.freeMemory() >> 20) + "/" + (rt.maxMemory() >> 20) + " MB";
     }
 
     private static String describe(final Player ai) {

@@ -23,16 +23,7 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
-import forge.ai.simulation.ComboGuard;
-import forge.ai.simulation.ComboPlan;
-import forge.ai.simulation.DeckPlan;
-import forge.ai.simulation.FlatMonteCarloPicker;
-import forge.ai.simulation.FlatMonteCarloStats;
-import forge.ai.simulation.GameStateEvaluator;
-import forge.ai.simulation.OnePlaySafetyChecker;
-import forge.ai.simulation.SimAudit;
-import forge.ai.simulation.SpellAbilityPicker;
-import forge.ai.simulation.TutorPlan;
+import forge.ai.simulation.*;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -200,9 +191,9 @@ public class AiController {
         return memory;
     }
 
-    /** Whether Flat Monte Carlo is switched on for this player. */
-    private forge.ai.simulation.StormSolver stormSolver;
+    private StormSolver stormSolver;
 
+    /** Whether Flat Monte Carlo is switched on for this player. */
     public boolean flatMonteCarloActive() {
         return (flatMcOverride != null ? flatMcOverride : game.getAIFlatMonteCarlo()) && !flatMcOff()
                 && simMode == null && getBoolProperty(AiProps.FLAT_MC_ENABLED);
@@ -1927,7 +1918,7 @@ public class AiController {
 
         if (flatMonteCarloActive() && game.getStack().isEmpty() && deckPlan(player).combos.has(ComboPlan.Kind.TUTOR_STORM)) {
             if (stormSolver == null) {
-                stormSolver = new forge.ai.simulation.StormSolver();
+                stormSolver = new StormSolver();
             }
             final SpellAbility solved = stormSolver.next(player, deckPlan(player).combos);
             if (solved != null) {
