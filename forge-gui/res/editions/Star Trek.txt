@@ -21,7 +21,6 @@ Replace=0.04F fromSheet("SDS cards")
 Base=Common:fromSheet("TRK cards")
 Replace=0.029F Common:fromSheet("TRK klingon cards")
 
-
 [Uncommon]
 Base=Uncommon:fromSheet("TRK cards")
 Replace=0.0263F Uncommon:fromSheet("TRK scene cards")
@@ -683,35 +682,6 @@ Replace=.0167F fromSheet("TRK away team basic")+
 1705 M Seven of Nine, Unassimilated @Jack Hughes
 1706 M Lt. Cmdr. Geordi La Forge @Tyler Jacobson
 
-[tokens]
-1 w_0_1_human_nophasingin @David Álvarez
-2 b_2_2_romulan @Ariel Orea
-3 r_2_1_klingon_warrior_haste @Ariel Orea
-4 r_2_1_klingon_warrior_haste @Carlos C Diaz
-5 r_2_1_klingon_warrior_haste @Henry Peters
-6 r_1_1_officer @Arthur Yuan
-7 r_1_1_officer @Nia Kovalevski
-8 r_1_1_officer @Nathaniel Himawan
-9 r_1_1_officer @Carlos Dattoli
-10 r_1_1_officer @Benjamin Ee
-11 r_1_1_officer @Charles Chaisson
-12 r_1_1_officer @Mushk Rizvi
-13 r_1_1_officer @Gregg Schigiel
-14 r_1_1_officer @Mushk Rizvi
-15 r_1_1_officer @Carlos Dattoli
-16 murf @Leesha Hannigan
-17 porthos @Brooklyn Smith
-18 rg_2_2_worm_noblock @Leesha Hannigan
-19 c_1_1_a_borg @Edouard
-20 c_1_1_a_borg @Henry Peters
-21 c_a_clue_draw @Joel Chaim Holtzman
-22 c_a_clue_draw @Flavio Greco Paglia
-23 c_a_food_sac @Flavio Greco Paglia
-24 c_3_3_a_illusion @Flavio Greco Paglia
-25 neuroflux_heirloom @David Frasheski
-26 c_a_treasure_sac @David Frasheski
-27 new_planet @David Frasheski
-
 [scene cards]
 1 Resistance Is Futile|TRK|[338]
 1 Test of Courage|TRK|[339]
@@ -865,3 +835,32 @@ Replace=.0167F fromSheet("TRK away team basic")+
 1 Mountain|TRK|[324]
 1 Forest|TRK|[325]
 1 Forest|TRK|[326]
+
+[tokens]
+1 w_0_1_human_nophasingin @David Álvarez
+2 b_2_2_romulan @Ariel Orea
+3 r_2_1_klingon_warrior_haste @Ariel Orea
+4 r_2_1_klingon_warrior_haste @Carlos C Diaz
+5 r_2_1_klingon_warrior_haste @Henry Peters
+6 r_1_1_officer @Arthur Yuan
+7 r_1_1_officer @Nia Kovalevski
+8 r_1_1_officer @Nathaniel Himawan
+9 r_1_1_officer @Carlos Dattoli
+10 r_1_1_officer @Benjamin Ee
+11 r_1_1_officer @Charles Chaisson
+12 r_1_1_officer @Mushk Rizvi
+13 r_1_1_officer @Gregg Schigiel
+14 r_1_1_officer @Mushk Rizvi
+15 r_1_1_officer @Carlos Dattoli
+16 murf @Leesha Hannigan
+17 porthos @Brooklyn Smith
+18 rg_2_2_worm_noblock @Leesha Hannigan
+19 c_1_1_a_borg @Edouard
+20 c_1_1_a_borg @Henry Peters
+21 c_a_clue_draw @Joel Chaim Holtzman
+22 c_a_clue_draw @Flavio Greco Paglia
+23 c_a_food_sac @Flavio Greco Paglia
+24 c_3_3_a_illusion @Flavio Greco Paglia
+25 neuroflux_heirloom @David Frasheski
+26 c_a_treasure_sac @David Frasheski
+27 new_planet @David Frasheski
