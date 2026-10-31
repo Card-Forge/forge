@@ -38,7 +38,11 @@ public final class TutorPlan {
 
     /** A spell that searches its controller's library for a card (or cards) to take or to put on top. */
     public static boolean isLibraryTutor(final SpellAbility sa) {
-        if (sa == null || !sa.isSpell() || sa.getApi() != ApiType.ChangeZone || !sa.isHidden() || !sa.hasParam("Origin")) {
+        // Intuition's root spell ability is not hidden. Its selection is handled
+        // by a separate hidden sub-ability, so recognize it by its AILogic.
+        final boolean intuition = sa != null && "Intuition".equals(sa.getParam("AILogic"));
+        if (sa == null || !sa.isSpell() || sa.getApi() != ApiType.ChangeZone
+                || (!sa.isHidden() && !intuition) || !sa.hasParam("Origin")) {
             return false;
         }
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
