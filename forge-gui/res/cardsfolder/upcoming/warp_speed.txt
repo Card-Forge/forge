@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Enchantment
 R:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBUntapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Lands you control enter untapped.
 SVar:ETBUntapped:DB$ Untap | ETB$ True | Defined$ ReplacedCard
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this enchantment enters, search your library for a basic land card or Planet card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Planet
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When this enchantment enters, search your library for a basic land card or Planet card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Planet
 A:AB$ Draw | PrecostDesc$ Strange new worlds — | Cost$ 7 U U Sac<1/CARDNAME/this enchantment> | ReduceCost$ X | NumCards$ 2 | SpellDescription$ Draw two cards. This ability costs {X} less to activate, where X is the number of differently named lands you control.
 SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
 DeckHints:Type$Planet
