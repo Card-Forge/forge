@@ -1,0 +1,12 @@
+Name:Jett Reno, Problem Solver
+ManaCost:1 U
+Types:Legendary Creature Human Artificer
+PT:1/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ Whenever NICKNAME becomes tapped, surveil 1. If her power is 4 or greater, instead draw a card.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT4 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4
+T:Mode$ FacesDilemma | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you face a dilemma, put a +1/1 counter on NICKNAME. (You face a dilemma as you choose one or more modes for a spell or ability.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:Whenever Jett Reno becomes tapped, surveil 1. If her power is 4 or greater, instead draw a card.\nWhenever you face a dilemma, put a +1/1 counter on Jett Reno. (You face a dilemma as you choose one or more modes for a spell or ability.)

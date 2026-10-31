@@ -1,0 +1,8 @@
+Name:Subspace Anomaly
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ 4 W T Sac<1/CARDNAME/this land> | TokenAmount$ 2 | TokenScript$ r_1_1_officer | TokenOwner$ You | SubAbility$ DBToken | SpellDescription$ Create two 1/1 red Officer creature tokens. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
+SVar:DBToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True
+DeckHas:Ability$Sacrifice
+Oracle:{T}: Add {C}.\n{4}{W}, {T}, Sacrifice this land: Create two 1/1 red Officer creature tokens. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
