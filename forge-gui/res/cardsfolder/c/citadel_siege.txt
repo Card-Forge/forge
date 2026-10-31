@@ -10,6 +10,6 @@ S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.ChosenModeDragons | 
 SVar:KhansTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Boost | Secondary$ True | TriggerDescription$ At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
 SVar:Boost:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
 SVar:DragonsTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TapCreature | Secondary$ True | TriggerDescription$ At the beginning of combat on each opponent's turn, tap target creature that player controls.
-SVar:TapCreature:DB$ Tap | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Choose target creature the active player controls.
+SVar:TapCreature:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredPlayer | TgtPrompt$ Choose target creature that player controls.
 DeckHas:Ability$Counters
 Oracle:As Citadel Siege enters, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.
