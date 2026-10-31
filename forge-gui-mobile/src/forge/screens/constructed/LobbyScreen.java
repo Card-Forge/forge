@@ -174,8 +174,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 updateVariantSelection();
             }
             else {
+                // Clearing the old variant resets this list to (None), so read the choice first
+                final GameType variant = (GameType) cbVariants.getSelectedItem();
                 clearStackableVariants();
-                lobby.applyVariant((GameType)cbVariants.getSelectedItem());
+                lobby.applyVariant(variant);
                 updateLayoutForVariants();
                 saveAppliedVariants();
             }
