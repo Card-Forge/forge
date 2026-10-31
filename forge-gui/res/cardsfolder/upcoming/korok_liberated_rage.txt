@@ -4,5 +4,5 @@ Types:Legendary Artifact Creature Klingon Borg
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Battlefront — Whenever NICKNAME attacks, creatures you control get +X/+X until end of turn, where X is the number of opponents you attacked this turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X
-SVar:X:TriggeredCardController$OpponentsAttackedThisTurn
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisTurn
 Oracle:Battlefront — Whenever Korok attacks, creatures you control get +X/+X until end of turn, where X is the number of opponents you attacked this turn.
