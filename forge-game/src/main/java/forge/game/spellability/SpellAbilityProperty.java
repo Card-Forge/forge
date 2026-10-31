@@ -210,6 +210,11 @@ public class SpellAbilityProperty {
                 return false;
             }
             return source.equals(m.getHostCard());
+        } else if (property.equals("KeywordSource")) {
+            if (sa.getKeyword() == null || sa.getKeyword().getStatic() == null) {
+                return false;
+            }
+            return source.equals(sa.getKeyword().getStatic().getHostCard());
         } else if (property.startsWith("singleTarget")) {
             // this doesn't allow a second target, even if same object
             int num = 0;

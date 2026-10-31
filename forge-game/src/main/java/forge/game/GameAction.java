@@ -360,6 +360,7 @@ public class GameAction {
                     }
                 } else if (toBattlefield && !c.isInPlay()) {
                     // was replaced with another Zone Change
+                    cleanStaticEffect(staticEff, copied);
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
@@ -1094,6 +1095,9 @@ public class GameAction {
         checkStaticAbilities(runEvents, Sets.newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
+        checkStaticAbilities(runEvents, affectedCards, preList, null);
+    }
+    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList, final Set<Card> enteringWith) {
         if (isCheckingStaticAbilitiesOnHold()) {
             return;
         }
@@ -1156,7 +1160,7 @@ public class GameAction {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
                 if (previouslyAffected == null) {
-                    affectedHere = stAb.applyContinuousAbilityBefore(layer, preList);
+                    affectedHere = stAb.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(stAb.getHostCard()) ? CardCollection.EMPTY : preList);
                     if (affectedHere != null) {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
@@ -1173,7 +1177,7 @@ public class GameAction {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
                             if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
                                 toAdd.add(st2);
-                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, preList);
+                                CardCollectionView newAffected = st2.applyContinuousAbilityBefore(layer, enteringWith != null && enteringWith.contains(st2.getHostCard()) ? CardCollection.EMPTY : preList);
                                 if (newAffected != null) {
                                     affectedPerLayer.computeIfAbsent(layer, l -> Sets.newHashSet()).addAll(newAffected);
                                 }
@@ -1589,7 +1593,6 @@ public class GameAction {
                 orderedNoRegCreats = true;
             }
             for (Card c : noRegCreats) {
-                c.updateWasDestroyed(true);
                 sacrificeDestroy(c, null, mapParams);
             }
 
@@ -2132,8 +2135,6 @@ public class GameAction {
             c.getController().addSacrificedThisTurn(lkiCopy, source);
             lki.put(c.getController(), lkiCopy);
 
-            c.updateWasDestroyed(true);
-
             Card changed = sacrificeDestroy(c, source, params);
             if (changed != null) {
                 result.add(changed);
@@ -2172,8 +2173,6 @@ public class GameAction {
             activator = sa.getActivatingPlayer();
         }
 
-        //for animation
-        c.updateWasDestroyed(true);
         // Play the Destroy sound
         game.fireEvent(new GameEventCardDestroyed());
 
@@ -2435,7 +2434,6 @@ public class GameAction {
 
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
-            game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for (Player p : game.getPlayers()) {
@@ -2450,6 +2448,10 @@ public class GameAction {
             // This happens in hotseat matches when 2 equal lobbyplayers play.
             // No one of them has lost, so cannot decide who goes first .
             goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
+        }
+
+        if (isFirstGame) {
+            game.fireEvent(new GameEventFlipCoin(goesFirst.getView(), true, true));
         }
 
         for (Player p : game.getPlayers()) {
@@ -2587,6 +2589,7 @@ public class GameAction {
 
             if (p.hasLost()) { // the person who should take initiative is gone, it goes to next player
                 takeInitiative(game.getNextPlayerAfter(p), set);
+                return;
             }
 
             game.setHasInitiative(p);
@@ -2616,10 +2619,9 @@ public class GameAction {
             switch (game.getReplacementHandler().run(ReplacementType.Scry, repParams)) {
                 case NotReplaced:
                     break;
-                case Updated: {
+                case Updated:
                     playerScry = (int) repParams.get(AbilityKey.Num);
                     break;
-                }
                 default:
                     continue;
             }

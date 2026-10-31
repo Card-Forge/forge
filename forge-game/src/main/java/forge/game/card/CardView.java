@@ -348,7 +348,6 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         super.updateCounters(c);
-        updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
         state.updateToughness(c);
@@ -983,30 +982,6 @@ public class CardView extends GameEntityView {
         return alternate0 ? getAlternateState() : getCurrentState();
     }
 
-    public boolean wasDestroyed() {
-        return get(TrackableProperty.WasDestroyed);
-    }
-    void updateWasDestroyed(boolean value) {
-        set(TrackableProperty.WasDestroyed, value);
-    }
-    public boolean needsUntapAnimation() {
-        return get(TrackableProperty.NeedsUntapAnimation);
-    }
-    public void updateNeedsUntapAnimation(boolean value) {
-        set(TrackableProperty.NeedsUntapAnimation, value);
-    }
-    public boolean needsTapAnimation() {
-        return get(TrackableProperty.NeedsTapAnimation);
-    }
-    public void updateNeedsTapAnimation(boolean value) {
-        set(TrackableProperty.NeedsTapAnimation, value);
-    }
-    public boolean needsTransformAnimation() {
-        return get(TrackableProperty.NeedsTransformAnimation);
-    }
-    public void updateNeedsTransformAnimation(boolean value) {
-        set(TrackableProperty.NeedsTransformAnimation, value);
-    }
     public boolean useCardArt() {
         // prevent NPE
         if (getCurrentState() == null)
@@ -1431,6 +1406,8 @@ public class CardView extends GameEntityView {
                 num = num - c.getBasePower() + c.getAlternateState().getBasePower();
             }
             set(TrackableProperty.Power, num);
+            // isLethalDamageByPower() cards use power. so this needs update too for VAssignCombatDamage dialog -> auto
+            CardView.this.updateLethalDamage(c);
         }
         void updatePower(CardState c) {
             Card card = c.getCard();
@@ -1456,6 +1433,7 @@ public class CardView extends GameEntityView {
                 num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
             set(TrackableProperty.Toughness, num);
+            CardView.this.updateLethalDamage(c);
         }
         void updateToughness(CardState c) {
             Card card = c.getCard();

@@ -1,6 +1,6 @@
 Name:Samwise Gamgee
 ManaCost:G W
-Types:Legendary Creature Halfling Citizen
+Types:Legendary Creature Halfling Peasant
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.!token+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigFood | TriggerDescription$ Whenever another nontoken creature you control enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
 SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You

@@ -203,7 +203,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             CardCollectionView oppControlled = CardLists.filterControlledBy(options, ai.getOpponents());
             if (!oppControlled.isEmpty()) {
                 choice = ComputerUtilCard.getBestAI(oppControlled);
-            } else {
+            } else if (!isOptional) {
                 CardCollectionView aiControlled = CardLists.filterControlledBy(options, ai);
                 choice = ComputerUtilCard.getWorstAI(aiControlled);
             }

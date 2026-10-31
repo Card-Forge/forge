@@ -430,7 +430,7 @@ RZ08b R Koma and Toski, Compleated @
 RZ08c R Riven Turnbull and Princess Lucrezia @
 RZ08d R Simic, Value Engine @
 RA09 R Wurmcoil Broodmother @
-RC09 R Everyone's an Imposter @
+RC09 R Everyone's an Impostor @
 RZ09 R Daxiver, Izzet Electromancer @
 RG10 R Emrakul and Chatterfang @
 RR10 R The Crimson Avenger @

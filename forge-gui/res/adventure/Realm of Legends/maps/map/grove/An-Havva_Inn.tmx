@@ -56,12 +56,18 @@
   </object>
   <object id="60" template="../../../../common/maps/obj/enemy.tx" x="271.026" y="156.291">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Faerie Noble&quot;, &quot;Willow Faerie&quot;]
+}
+</property>
     <property name="enemy" value="Autumn Willow"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="120.74" y="157.369">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Feroz's Ban&quot;]
+}
+</property>
     <property name="enemy" value="Feroz"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

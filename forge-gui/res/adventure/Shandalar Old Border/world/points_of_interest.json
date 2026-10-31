@@ -4411,7 +4411,7 @@
 		"displayName": "Svyelunite Temple",
 		"type": "dungeon",
 		"count": 1,
-		"spriteAtlas": "sprites/buildingsbosses.atlas",
+		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "SvyeluniteTemple",
 		"map": "../Shandalar Old Border/maps/map/fallen_empires/svyelunite_temple.tmx",
 		"radiusFactor": 0.6,

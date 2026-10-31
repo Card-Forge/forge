@@ -1020,17 +1020,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                     searchedLibrary = true;
 
-                    if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
-                        fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                        final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                        if (fetchNum == 0) {
-                            searchedLibrary = false;
-                        } else {
-                            fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
-                        }
-                    }
-                    if (!decider.canSearchLibraryWith(sa, player)) {
-                        fetchList.removeAll(player.getCardsIn(ZoneType.Library));
+                    final CardCollectionView searchable = decider.getSearchableLibrary(sa, player);
+                    fetchList.removeIf(c -> c.isInZone(ZoneType.Library) && (searchable == null || !searchable.contains(c)));
+
+                    if (searchable == null) {
                         // "if you do/sb does, shuffle" is not mandatory (usually a triggered ability), should has this param.
                         // "then shuffle" is mandatory
                         shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
@@ -1045,9 +1038,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Set<ZoneType> revealZones = Sets.newHashSet();
                 Iterable<Card> toReveal = null;
                 if (origin.contains(ZoneType.Library) && searchedLibrary) {
-                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                     // Look at whole library before moving onto choosing a card
-                    toReveal = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
+                    toReveal = decider.getSearchableLibrary(sa, player);
                     revealZones.add(ZoneType.Library);
                 }
                 if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
@@ -1064,9 +1056,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             Long controlTimestamp = null;
-            if (!searchedLibrary && sa.hasParam("Searched")) {
-                searchedLibrary = true;
-            }
             if (searchedLibrary) {
                 if (decider.equals(player)) {
                     Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
@@ -1080,15 +1069,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     handleCastWhileSearching(fetchList, decider);
                 }
-                if (sa.hasParam("RememberSearched")) {
+                if (sa.hasParam("RememberSearcher")) {
                     source.addRemembered(player);
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, player);
                 game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
-            }
-            if (searchedLibrary && sa.hasParam("Searched")) {
-                searchedLibrary = false;
             }
 
             if (!defined && !changeType.isEmpty() && !changeType.startsWith("EACH")) {
@@ -1116,7 +1102,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             int totCardTypes = AbilityUtils.calculateAmount(source, totalCardTypes, sa);
 
             CardCollection chosenCards = new CardCollection();
-            if (changeType.startsWith("EACH")) {
+            if (sa.hasParam("SameNameAsEach")) {
+                // one search, one card per named card: "for each ..., search for a card with the same name"
+                boolean shouldReveal = true; // the reveal dialog only the first time through, as below
+                for (final Card named : AbilityUtils.getDefinedCards(source, sa.getParam("SameNameAsEach"), sa)) {
+                    CardCollection thisList = CardLists.filter(fetchList, CardPredicates.sharesNameWith(named));
+                    thisList.removeAll(chosenCards);
+                    if (thisList.isEmpty() && !shouldReveal) {
+                        continue;
+                    }
+                    Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
+                            thisList, shouldReveal ? delayedReveal : null, selectPrompt + " (" + named.getName() + ")", !mandatory, decider);
+                    shouldReveal = false;
+                    if (c != null) {
+                        chosenCards.add(c);
+                        if (delayedReveal != null) {
+                            delayedReveal.remove(CardView.get(c));
+                        }
+                    }
+                }
+            } else if (changeType.startsWith("EACH")) {
                 String[] eachTypes = changeType.substring(5).split(" & ");
                 for (String thisType : eachTypes) {
                     for (int i = 0; i < changeNum; i++) {

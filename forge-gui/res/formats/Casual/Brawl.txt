@@ -3,5 +3,5 @@ Name:Brawl
 Order:101
 Type:Casual
 Subtype:Commander
-Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM, OM1, TLA, ECL, TMT, SOS, MSH, HOB, FRA
-Additional:Arcane Signet; Command Tower
+Sets:KTK, XLN, RIX, DOM, M19, ANA, XANA, OANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, HA6, EA1, DMU, YDMU, BRO, BRR, YBRO, EA2, ONE, YONE, SIR, SIS, MOM, MUL, MAT, LTR, HA7, EA3, WOE, WOT, YWOE, LCI, YLCI, MKM, YMKM, OTJ, OTP, BIG, YOTJ, MH3, BLB, YBLB, DSK, YDSK, FDN, J25, PIO, DFT, YDFT, TDM, YTDM, PA1, FIN, FCA, EOE, EOS, YEOE, AA1, AA2, SPM, MAR, OM1, OMB, AA3, AA4, TLA, TLE, ECL, YECL, TMT, PZA, SOS, SOA, YSOS, MSH, HOB, FRA, YFRA
+Banned:Agent of Treachery; Ancient Tomb; Chalice of the Void; Channel; Chrome Mox; Deadly Rollick; Deflecting Swat; Demonic Tutor; Disruptor Flute; Drannith Magistrate; Eye of Ugin; Field of the Dead; Fierce Guardianship; Flawless Maneuver; Force of Will; Gideon's Intervention; Iona, Shield of Emeria; Lutri, the Spellchaser; Mana Drain; Meddling Mage; Nadu, Winged Wisdom; Natural Order; Nexus of Fate; Obscuring Haze; Oko, Thief of Crowns; Phyrexian Revoker; Pithing Needle; Runed Halo; Sorcerous Spyglass; Strip Mine; Subtlety; Tainted Pact; Temporal Manipulation; Time Warp; Ugin's Labyrinth; Ugin, the Spirit Dragon; Wash Away

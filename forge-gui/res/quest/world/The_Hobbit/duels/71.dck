@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Hard
+Description=./Modern/The_Hobbit/Eyelash_-_Hammer_Time_(Modern,_#885767).dck
+Deck Type=constructed
+
+[Main]
+3 Flooded Strand
+3 Memnite
+4 Marsh Flats
+1 Shadowspear
+4 Colossus Hammer
+4 Mox Opal
+3 Silent Clearing
+4 Urza's Saga
+4 Puresteel Paladin
+1 Shadowy Backstreet
+4 Ornithopter
+2 Godless Shrine
+4 Kíli the Resourceful
+3 Sigarda's Aid
+3 Plains
+1 Sword of Light and Shadow
+3 Steelshaper's Gift
+4 Stoneforge Mystic
+1 Lavaspur Boots
+4 Leyline Axe
+[Sideboard]
+4 Sanctifier en-Vec
+3 Hushbringer
+1 Pithing Needle
+4 Thoughtseize
+3 Fatal Push

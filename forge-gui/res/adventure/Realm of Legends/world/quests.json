@@ -7343,7 +7343,7 @@
 			],
 			"objective": "Travel",
 			"prologue": {
-				"text": "Locations are either towns or dungeons, which have three ranks: the lowest (cave icon on overworld map), middle (dungeon icon) and the hardest (castle icon).",
+				"text": "Locations are either towns or dungeons, which have three ranks, represented by one to three skulls on the mini map. Castle icons indicate the very hard main quest dungeons.",
 				"options": [
 					{
 						"name": "(Continue)",

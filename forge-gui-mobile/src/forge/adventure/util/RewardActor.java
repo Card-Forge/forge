@@ -183,9 +183,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             image = replacement;
             loaded = true;
             if (toolTipImage != null) {
-                if (toolTipImage.getDrawable() instanceof TextureRegionDrawable) {
-                    ((TextureRegionDrawable) toolTipImage.getDrawable()).getRegion().getTexture().dispose();
-                }
                 toolTipImage.remove();
                 toolTipImage = new RewardImage(processDrawable(image));
                 tooltip.setActor(new ComplexTooltip(toolTipImage));
@@ -422,7 +419,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Sprite item = reward.getItem().sprite();
                 setItemTooltips(item, backSprite, false);
                 boolean isQuestItemLoot = RewardScene.Type.Loot.equals(type) && reward.getItem().questItem;
-                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%200]" + reward.getItem().name) : null, 0, isQuestItemLoot ? -10 : 0, false);
+                processSprite(backSprite, item, isQuestItemLoot ? Controls.newTextraLabel("[%200]" + reward.getItem().getDisplayName()) : null, 0, isQuestItemLoot ? -10 : 0, false);
                 needsToBeDisposed = true;
                 break;
             }
@@ -837,8 +834,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Forge.getGraphics().setProjectionMatrix(m);
         Forge.getGraphics().startClip();
         CardImageRenderer.drawCardImage(Forge.getGraphics(), CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt, true);
-        Forge.getGraphics().end();
         Forge.getGraphics().endClip();
+        Forge.getGraphics().end();
         frameBuffer.end();
         // Rendering ends here. Grab the rendered framebuffer and bind to texture (faster method than initializing new texture)
         Texture result = frameBuffer.getColorBufferTexture();
@@ -887,8 +884,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             itemText.setY(itemText.getY() + (modY * 8));
             itemText.draw(Forge.getGraphics().getBatch(), 1);
         }
-        Forge.getGraphics().end();
         Forge.getGraphics().endClip();
+        Forge.getGraphics().end();
         frameBuffer.end();
         image = frameBuffer.getColorBufferTexture();
         image.bind();
@@ -899,6 +896,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         if (tooltip != null) {
             removeListener(tooltip);
+            hideTooltip(tooltip);
             tooltip = null;
         }
         if (toolTipImage != null) {
@@ -954,7 +952,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             Align.center, true);
                 }
                 else
-                    layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
+                    layout.setText(font, itemExists ? item.getDisplayName() : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 Forge.getGraphics().drawText(font, layout, 32, preview_h - 70);
                 align = itemExists ? Align.topLeft : Align.top;
                 if (itemExists) {
@@ -967,8 +965,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 if (itemExists && description.isEmpty() && item.questItem)
                     description = "Quest Item";
-                Forge.getGraphics().end();
                 Forge.getGraphics().endClip();
+                Forge.getGraphics().end();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -1000,11 +998,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return (clicked && flipProcess >= 1);
     }
 
+    private void hideTooltip(ImageToolTip t) {
+        if (t == null)
+            return;
+        RewardTooltipManager.getInstance().hide(t);
+        if (t.getContainer() != null)
+            t.getContainer().remove();
+    }
+
     public void removeTooltip() {
-        if (tooltip != null) {
-            if (tooltip.getActor() != null)
-                tooltip.getActor().remove();
-        }
+        hideTooltip(tooltip);
         dispose();
     }
 
@@ -1067,6 +1070,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (tooltip != null && !hover && tooltip.getContainer() != null && tooltip.getContainer().hasParent())
+            hideTooltip(tooltip);
         if (Forge.getAssets() != null && Forge.getAssets().manager() != null) {
             Forge.getAssets().manager().update(16);
         }
@@ -1168,7 +1173,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 display = reward.type.toString();
                 break;
             case Item:
-                display = reward.getItem() != null ? reward.getItem().name : "";
+                display = reward.getItem() != null ? reward.getItem().getDisplayName() : "";
                 break;
             case CardPack:
                 display = reward.getDeck() != null ? "Card Pack (" + reward.getDeck().getComment() + ")" : "";

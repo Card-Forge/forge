@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ai.*;
+import forge.ai.simulation.ComboPlan;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -138,6 +139,12 @@ public class DiscardAi extends SpellAbilityAi {
     }
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
+        final ComboPlan combos = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos;
+        if (combos.selfDiscardWanted(ai) && sa.canTarget(ai)) {
+            sa.resetTargets();
+            sa.getTargets().add(ai);
+            return true;
+        }
         final PlayerCollection opps = ai.getOpponents();
         Collections.shuffle(opps, MyRandom.getRandom());
         for (Player opp : opps) {

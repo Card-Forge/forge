@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="101">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Volatile Rift&quot;, &quot;Chromatic Lantern&quot; ], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Chromatic Lantern&quot; ]}}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyr42RgqBvFo3gUj+JRPIpH8YjAAOMFDQI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJylVVEOwjAIxe2n26/Z9NsjeB/1En54FfVgRrObqIklk4xUoHS+hEQLfQ9WaAHmoWsBtjDaMv4+Nnb8PYxx/wJ5SPcW8vF9O+UoAetA364C2Ec7VJOPrxGPRzPNdQi//MiH/mf8/4r2ZrrpGmlLeW0Wet0aP+JcA1yiXWt7jetyLtKVvpvGJQF5yKT8Uy6K0+ryQtOV/DxOq8vb2zndUlBvS/qkMUcT5wJN63c8m9X3jLSYUt0uM2MWTzoTHm2+Z93qPouD9yHmnbvnsEatd1FHmjEJ3vny7EGd1Gdp90ZflEA6J+0+KUEph3UmEh5hejcG9h1KOKjXvefI39v0PZPuRw2nZtz/Ae4KWQU=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VVtugzAQJJ/58CV6g0r569mQH3DBFCSS25SVPGUyLNAmykgW3vV69uE1TqH5RTvP+3mkeeR5lDrvHF1b9bnKpo8kd1WGjSGFxQ8AW0MkvSc/g75yFOJCPLr2RfuG+v04LTpeB0aacy3Y3nTGw1zvgtYMfm1grSObUWSPg7mAi7Oe6KzZr6Hd4fxPXZiH9xXpMYPmxXF6MSrXESbh29o3OTr4nUg+QgprOTs6YO8cNfcod0LBfRLD471FDlv1NgyOX805yr3R+HNY68fm71B/Jt8l9iz9ZSNJb2nNX8UgMvx2YX1vuO6w9YC69E7NFFfxa/hulhiAPY5b/W7dc5wpcorh8TyTU3fOLTn96fV+Cdv9pbYActR96OtCbyDeNV73/nlqG8Vf7+SrcTG0Rmrr5dpSzT7PSy627wfiHVkk
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="-7.28846" y="-17.1692" width="494.333" height="16"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="-0.621792" y="271.809" width="481" height="16"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="479.742" y="-18.0058" width="16" height="305.468"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="-16.5776" y="-18.4495" width="16" height="305.468"/>
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" x="180.04" y="230.25" width="75.9209" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The sky overhead is dark, lit only by rare stars and the ragged edges of an eclipse that does not move. Patches of night seem to have seemed down to the Earth, as if they leaked from the heavens themselves. A massive spiritual entity looms before you, and does not seem to welcome your presence here.
+
+Your manasight stone glows, sensing the power of the legend here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="214.667" y="129.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Glister Bairn&quot;, &quot;Path of Ancestry&quot;]}"/>
+    <property name="enemy" value="Providence of Night"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/scroll.tx" x="14.6667" y="254.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Godhead of Awe&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="108.667" y="191.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Oversoul of Dusk&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="14.6667" y="76.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ghastlord of Fugue&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/scroll.tx" x="112" y="63.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Deus of Calamity&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/scroll.tx" x="191.333" y="62.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Demigod of Revenge&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/scroll.tx" x="320" y="78.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Deity of Scars&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="398" y="94.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Divinity of Pride&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/scroll.tx" x="432" y="190.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dominus of Fealty&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/scroll.tx" x="320.667" y="191.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Nobilis of War&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="284.667" y="254">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Overbeing of Myth&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="216.667" y="132.667">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Mischievous Sneakling&quot;, &quot;Path of Ancestry&quot;]}"/>
+    <property name="enemy" value="Providence of Night"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

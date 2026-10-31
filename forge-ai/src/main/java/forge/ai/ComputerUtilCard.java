@@ -1941,6 +1941,19 @@ public class ComputerUtilCard {
     }
 
     /**
+     * Predicts whether a creature card would have 0 or less toughness after static continuous P/T effects
+     * if it entered the battlefield now (e.g. under Elesh Norn, Grand Cenobite).
+     */
+    public static boolean wouldDieToStaticPT(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        final Card copy = CardCopyService.getLKICopy(c);
+        applyStaticContPT(c.getGame(), copy, null);
+        return copy.getNetToughness() <= 0;
+    }
+
+    /**
      * Applies static continuous Power/Toughness effects to a (virtual) creature.
      *
      * @param game    game instance to work with

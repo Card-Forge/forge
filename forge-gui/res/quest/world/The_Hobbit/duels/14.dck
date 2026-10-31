@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Andrew_Ross_-_Elves_(Standard,_#885363).dck
+Deck Type=constructed
+
+[Main]
+1 Wildborn Preserver
+1 Dwynen's Elite
+1 Tyvar, the Pummeler
+1 Selfless Safewright
+2 Shang-Chi, Master of Kung Fu
+3 Lys Alana Dignitary
+3 Champions of the Perfect
+3 Elvish Archdruid
+4 Virulent Emissary
+4 Llanowar Elves
+4 Woodland Weavemaster
+4 Formidable Speaker
+4 Cantankerous Keepers
+4 Dawnhand Dissident
+1 Swamp
+2 Secluded Courtyard
+4 Cavern of Souls
+4 Elven Passage
+4 Eclipsed Realms
+6 Forest
+[Sideboard]
+1 Reclamation Sage
+2 Agatha's Soul Cauldron
+4 Nameless Inversion
+1 Sentinel of Lost Lore
+2 Pawpatch Formation
+1 Feral Encounter
+1 Mutable Explorer
+1 Chomping Changeling
+2 Selfless Safewright

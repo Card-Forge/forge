@@ -24,4 +24,9 @@ public class LobbyUpdateEvent implements NetEvent {
     public int getSlot() {
         return slot;
     }
+
+    @Override
+    public String toString() {
+        return "LobbyUpdate for slot " + slot + ": " + state;
+    }
 }

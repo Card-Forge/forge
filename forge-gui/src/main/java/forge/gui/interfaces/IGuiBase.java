@@ -24,13 +24,14 @@ public interface IGuiBase {
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();
+    String getUserAgent();
 
     void invokeInEdtNow(Runnable runnable);
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(Runnable proc);
     void runBackgroundTask(String message, Runnable task);
     boolean isGuiThread();
-
+    default boolean isMatchInProgress() { return false; }
     String getAssetsDir();
     ImageFetcher getImageFetcher();
     ISkinImage getSkinIcon(FSkinProp skinProp);

@@ -1,0 +1,51 @@
+# Card roles read by the AI (Flat Monte Carlo combo plan and combo guard).
+# Format:  role | Card Name | Card Name | ...   A role may appear on several lines; names are matched case-insensitively.
+# Lines starting with # are comments. Add new cards here as they are released: no code change needed.
+
+# Mass reanimation payoffs cast from the library by cascade or suspend (Living End and kin)
+mass_payoff | Living End | Living Death | Rise of the Dark Realms | Pyrrhic Revival | Patriarch's Bidding | Twilight's Call
+
+# Spells that bring a creature back from a graveyard
+reanimation_spell | Reanimate | Animate Dead | Exhume | Necromancy | Unburial Rites | Dance of the Dead
+reanimation_spell | Dance of the Manse | Goryo's Vengeance | Shallow Grave | Zombify | Rise from the Grave | Persist
+reanimation_spell | Footsteps of the Goryo | Priest of Gix
+
+# Creatures worth far more reanimated than cast (never discarded for value)
+big_target | Griselbrand | Sheoldred, the Apocalypse | Archon of Cruelty | Atraxa, Grand Unifier | Bringer of the Last Gift | Elesh Norn, Grand Cenobite
+
+# Storm and storm-like payoffs
+storm_payoff | Grapeshot | Tendrils of Agony | Brain Freeze | Empty the Warrens | Mind's Desire | Hellkite Tyrant
+
+# Spells and permanents that put creatures from hand onto the battlefield for free
+cheat_spell | Show and Tell | Sneak Attack | Through the Breach | Natural Order | Elvish Piper | Hypergenesis
+cheat_spell | Eureka | Tooth and Nail | Quicksilver Amulet | Primeval Titan | Dream Halls | Emergence Zone
+cheat_spell | Neoform
+
+# Huge creatures worth cheating into play
+cheat_target | Emrakul, the Aeons Torn | Griselbrand | Inferno Titan | Ulamog, the Ceaseless Hunger | Ulamog, the Infinite Gyre | Kozilek, Butcher of Truth
+cheat_target | Archon of Cruelty | Elesh Norn, Grand Cenobite | Atraxa, Grand Unifier | Craterhoof Behemoth | Terastodon | Woodfall Primus
+cheat_target | Blightsteel Colossus | Sundering Titan | Void Winnower
+
+# Overrun style finishers that wait in hand until the board makes them lethal
+overrun | Craterhoof Behemoth | Overrun | Triumph of the Hordes | Tooth and Claw | Rally the Ranks | Coat of Arms
+overrun | Mutagenic Growth | Finale of Devastation | Warstorm Surge | Hall of Triumph
+
+# Engines that copy a creature (with a copy_target)
+copy_engine | Splinter Twin | Kiki-Jiki, Mirror Breaker
+
+# Creatures that pair with a copy_engine
+copy_target | Pestermite | Deceiver Exarch | Zealous Conscripts | Restoration Angel | Felidar Guardian | Village Bell-Ringer
+
+# Cards that make a mill deck win
+mill_payoff | Hedron Crab | Ruin Crab | Fractured Sanity | Bruvac the Grandiloquent | Maddening Cacophony | Mind Funeral
+mill_payoff | Traumatize | Glimpse the Unthinkable | Tome Scour | Magus of the Mind | Increasing Confusion
+
+# Payoffs of a dredge deck
+dredge_payoff | Bridge from Below | Narcomoeba | Prized Amalgam | Ichorid | Dread Return | Creeping Chill
+
+# Permanents of which a second copy does nothing (do not stack, or the first one is already the combo)
+combo_engine | Omniscience | Dream Halls | Sneak Attack | Quicksilver Amulet | Aluren | Splinter Twin
+combo_engine | Food Chain
+
+# Spells that put cards from hand onto the battlefield when they resolve (not the engines: casting those is only setup)
+hand_cheat | Show and Tell | Through the Breach | Eureka | Hypergenesis

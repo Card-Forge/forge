@@ -61,21 +61,16 @@ public class DigAi extends SpellAbilityAi {
 
         final String num = sa.getParam("DigNum");
         final boolean payXLogic = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayX");
-        if (num != null && (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) || payXLogic) {
-            // By default, set PayX here to maximum value.
-            SpellAbility root = sa.getRootAbility();
-            if (root.getXManaCostPaid() == null) {
-                int manaToSave = 0;
+        if (("X".equals(num) && sa.getSVar(num).equals("Count$xPaid")) || payXLogic) {
+            int manaToSave = 0;
+            // Special logic that asks the AI to conserve a certain amount of mana when paying X
+            if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
+                manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
+            }
 
-                // Special logic that asks the AI to conserve a certain amount of mana when paying X
-                if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
-                    manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
-                }
-
-                int numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
-                if (numCards <= 0) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+            int numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
+            if (numCards <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 

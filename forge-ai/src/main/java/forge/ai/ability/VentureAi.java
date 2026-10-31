@@ -59,8 +59,7 @@ public class VentureAi extends SpellAbilityAi {
         for (SpellAbility room : spells) {
             if (player.getController().isAI()) {
                 room.setActivatingPlayer(player);
-                AiPlayDecision playDecision = ((PlayerControllerAi)player.getController()).getAi().canPlaySa(room);
-                if (playDecision == AiPlayDecision.WillPlay) {
+                if (((PlayerControllerAi)player.getController()).getAi().doTrigger(room, false)) {
                     viableRooms.add(room);
                 }
             }

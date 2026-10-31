@@ -30,13 +30,16 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
+import forge.deck.FormatChoices;
 import forge.deck.io.DeckPreferences;
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
+import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
@@ -67,6 +70,7 @@ public enum CDeckEditorUI implements ICDoc {
 
     private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
     private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
+    private GameFormat editorFormat;
     private final CDetailPicture cDetailPicture;
     private final VAllDecks vAllDecks;
     private final VCommanderDecks vCommanderDecks;
@@ -145,6 +149,21 @@ public enum CDeckEditorUI implements ICDoc {
         }
     }
 
+    /** Applies a Format dropdown entry. A GameFormat opens the Constructed editor with the catalogue limited to that format. */
+    public void selectFormat(final Object choice) {
+        editorFormat = choice instanceof GameFormat format ? format : null;
+        changeFormat(choice instanceof GameType type ? type : GameType.Constructed);
+        syncFormatDropdown();
+    }
+
+    /** A deck file does not record a format, so an opened deck starts with every card in the catalogue. */
+    public void clearEditorFormat() {
+        if (editorFormat == null) { return; }
+
+        editorFormat = null;
+        syncFormatDropdown();
+    }
+
     public void changeFormat(final GameType target) {
         if (!isFormatDropdownGameType(target)) { return; }
         if (childController == null) { return; }
@@ -168,20 +187,25 @@ public enum CDeckEditorUI implements ICDoc {
     }
 
     static boolean isFormatDropdownGameType(final GameType gt) {
-        return gt == GameType.Constructed || gt == GameType.Commander
-                || gt == GameType.Oathbreaker || gt == GameType.Brawl
-                || gt == GameType.TinyLeaders;
+        return gt == GameType.Constructed || FormatChoices.COMMANDER_GAME_TYPES.contains(gt);
     }
 
     private void syncFormatDropdown() {
         if (childController == null) { return; }
-        final FComboBox<GameType> cb = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat();
+        final FComboBox<Object> cb = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat();
         final GameType gt = childController.getGameType();
         if (isFormatDropdownGameType(gt)) {
-            if (cb.getSelectedItem() != gt) {
-                cb.setSelectedItem(gt);
+            if (gt != GameType.Constructed) {
+                editorFormat = null;
+            }
+            final Object choice = editorFormat != null ? editorFormat : gt;
+            if (cb.getSelectedItem() != choice) {
+                cb.setSelectedItem(choice);
             }
             cb.setEnabled(true);
+            if (childController.getCatalogManager() instanceof CardManager catalog) {
+                catalog.setRequiredFormat(editorFormat);
+            }
         } else {
             cb.setEnabled(false);
         }

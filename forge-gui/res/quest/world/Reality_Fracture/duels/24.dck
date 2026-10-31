@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=NanaBuruku
+Title=NanaBuruku
+Icon=NanaBuruku.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/HouseOfManaMTG_-_Orzhov_Aggro_(Standard,_#900688).dck
+Deck Type=constructed
+
+[Main]
+2 Voice of Victory
+4 Amalia Benavides Aguirre
+4 Case of the Uneaten Feast
+1 Dalkovan Encampment
+1 Raise the Past
+2 Liliana the Faultless
+3 Erode
+2 Bleachbone Verge
+3 Haliya, Guided by Light
+4 Hinterland Sanctifier
+1 Shattered Sanctum
+3 Moseo, Vein's New Dean
+4 Godless Shrine
+1 Starscape Cleric
+4 Starting Town
+3 Concealed Courtyard
+3 Plains
+1 Swamp
+2 Seam Rip
+3 Lunar Convocation
+2 Ajani Resolute
+3 Enlightened Confidant
+4 Multiversal Passage
+[Sideboard]
+1 Raise the Past
+1 Starscape Cleric
+2 Curious Farm Animals
+1 Decorum Dissertation
+3 Duress
+2 Shoot the Sheriff
+1 Clarion Conqueror
+2 Strategic Betrayal
+1 Elspeth, Storm Slayer
+1 Kutzil's Flanker

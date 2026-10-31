@@ -981,6 +981,15 @@ public class SpecialCardAi {
                     CardPredicates.nameNotEquals(sa.getHostCard().getName()));
             lib.sort(CardLists.CmcComparatorInv);
 
+            if (ai.getController() instanceof PlayerControllerAi) {
+                // A deck built around a combo (madness, Psychatog, storm...) knows what it is missing: ask for that, whatever the profile says.
+                final CardCollection planned = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai)
+                        .tutorPicks(ai, lib, changeNum);
+                if (planned != null) {
+                    return planned;
+                }
+            }
+
             // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
             List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge", "Take Inventory");
 

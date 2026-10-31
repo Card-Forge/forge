@@ -3,7 +3,6 @@ Name=Traxos
 [Commander]
 1 Traxos, Scourge of Kroog|dom
 [Main]
-1 Ash Barrens|2xm
 1 Barbed Battlegear|som
 1 Blackblade Reforged|ss2
 1 Blight Sickle|shm
@@ -13,7 +12,7 @@ Name=Traxos
 1 Commander's Sphere|c20
 1 Cradle of the Accursed|akh
 1 Cultivator's Caravan|kld
-1 Damping Sphere|dom
+1 Traxos, Scourge Eternal|fra
 1 Darksteel Citadel|2xm
 1 Darksteel Forge|2xm
 1 Darksteel Ingot|cm2
@@ -52,7 +51,6 @@ Name=Traxos
 1 Manifold Key|m20
 1 Mask of Avacyn|isd
 1 Mycosynth Golem|5dn
-1 Painted Bluffs|akh
 1 Palladium Myr|m21
 1 Phyrexia's Core|cm2
 1 Plague Myr|td2
@@ -66,18 +64,14 @@ Name=Traxos
 1 Scrap Trawler|aer
 1 Sequestered Stash|kld
 1 Shadowspear|thb
-1 Shimmering Grotto|ima
 1 Shrine of the Forsaken Gods|c19
 1 Sigiled Sword of Valeron|m19
 1 Sol Ring|c20
-1 Spire of Industry|aer
-1 Survivors' Encampment|hou
 1 Swiftfoot Boots|c20
 1 Sword of the Animist|ori
 1 Temple of the False God|c20
 1 That Which Was Taken|bok
 1 Thran Temporal Gateway|dom
-1 Unclaimed Territory|c20
 1 Unwinding Clock|c18
 1 Ur-Golem's Eye|c14
 1 Urza's Mine|2xm
@@ -88,8 +82,7 @@ Name=Traxos
 1 Voltaic Servant|dom
 1 Vulshok Gauntlets|2xm
 1 Walking Ballista|2xm
-1 Wasteland|ema
-9 Wastes|ogw
+16 Wastes|ogw
 1 Weatherlight|dom
 1 Whispersilk Cloak|m10
 1 Zhalfirin Void|dom

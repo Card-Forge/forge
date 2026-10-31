@@ -137,10 +137,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         SpellAbility pickSA = pickSI.getSpellAbility();
                         GameObject choice = pick.getValue();
                         TargetChoices oldTarget = pickSA.getTargets();
+                        int div = pickSA.getTotalDividedValue();
                         pickSA.resetTargets();
                         pickSA.getTargets().add(choice);
                         if (pickSA.isDividedAsYouChoose()) {
-                            pickSA.addDividedAllocation(choice, pickSA.getTotalDividedValue());
+                            pickSA.addDividedAllocation(choice, div);
                         }
                         pickSI.updateTarget(oldTarget, distinctObjects);
                     }
