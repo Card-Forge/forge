@@ -1,0 +1,7 @@
+Name:Astute Terraformer
+ManaCost:1 G
+Types:Creature Vulcan Scientist
+PT:2/2
+A:AB$ Pump | Cost$ 6 | NumAtt$ +2 | NumDef$ +2 | ReduceCost$ X | ActivationLimit$ 1 | SpellDescription$ Strange new worlds — This creature gets +2/+2 until end of turn. This ability costs {X} less to activate, where X is the number of differently named lands you control. Activate only once each turn.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:Strange new worlds — {6}: This creature gets +2/+2 until end of turn. This ability costs {X} less to activate, where X is the number of differently named lands you control. Activate only once each turn.

@@ -56,6 +56,7 @@ Bird:Birds
 Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
+Bolian:Bolians
 Borg:Borg
 Bringer:Bringers
 Brushwagg:Brushwaggs
@@ -101,6 +102,7 @@ Druid:Druids
 Dryad:Dryads
 Dwarf:Dwarves
 Echidna:Echidnas
+Edosian:Edosians
 Efreet:Efreets
 Egg:Eggs
 Elder:Elders
@@ -165,6 +167,7 @@ Inquisitor:Inquisitors
 Insect:Insects
 Jackal:Jackals
 Jellyfish:Jellyfishes
+Jem'Hadar:Jem'Hadar
 Juggernaut:Juggernauts
 Kangaroo:Kangaroos
 Kavu:Kavu
@@ -190,6 +193,7 @@ Llama:Llamas
 Lobster:Lobsters
 Manticore:Manticores
 Masticore:Masticores
+Melkotian:Melkotians
 Mercenary:Mercenaries
 Merfolk:Merfolk
 Metathran:Metathrans
@@ -219,6 +223,7 @@ Noble:Nobles
 Noggle:Noggles
 Nomad:Nomads
 Nymph:Nymphs
+Ocampa:Ocampa
 Octopus:Octopi
 Officer:Officers
 Ogre:Ogres
@@ -316,6 +321,7 @@ Surrakar:Surrakars
 Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
+Talaxian:Talaxians
 Talosian:Talosians
 Tellarite:Tellarites
 Tentacle:Tentacles
