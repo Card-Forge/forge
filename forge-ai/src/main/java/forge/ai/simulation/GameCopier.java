@@ -10,11 +10,7 @@ import forge.card.CardType;
 import forge.card.CardStateName;
 import forge.game.*;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCloneStates;
-import forge.game.card.CardCopyService;
-import forge.game.card.CardFactory;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.mana.Mana;
@@ -32,6 +28,7 @@ import forge.item.PaperCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +50,7 @@ public class GameCopier {
     private GameSnapshot snapshot = null;
     /** Copy the spells on the stack too (see {@link GameSimulator#COPY_STACK}); decided per copier. */
     private boolean copyStack = GameSimulator.COPY_STACK;
-    private final java.util.Map<SpellAbility, SpellAbility> stackMap = new java.util.HashMap<>();
+    private final Map<SpellAbility, SpellAbility> stackMap = new HashMap<>();
 
     public GameCopier(Game origGame) {
         this.origGame = origGame;
@@ -182,8 +179,15 @@ public class GameCopier {
         }
 
         // Undo effects first before calculating them below, to avoid them applying twice.
+        // The effects hold the card they came from as it was when the state was last checked, and GameAction checks
+        // with the copies a zone change made ("TODO filter out old copies from zone change"): such a source is a
+        // different object than the card in the zone, with the same id. Find it by id too, and skip an effect whose
+        // card is no longer in the game at all, there is nothing to undo for it in the copy.
+        final IEntityMap lenient = lenientMap(newGame);
         for (StaticEffect effect : origGame.getStaticEffects().getEffects()) {
-            effect.removeMapped(gameObjectMap);
+            if (lenient.map(effect.getSource()) != null) {
+                effect.removeMapped(lenient);
+            }
         }
 
         if (origPhaseHandler.getCombat() != null) {
@@ -577,6 +581,61 @@ public class GameCopier {
         public GameObject map(GameObject o) {
             return find(o);
         }
+    }
+
+    /**
+     * Maps what a static effect refers to, as far as the copy has it: a card is looked up by identity, then by id (a
+     * card that changed zones is a new object with the same id), and what is not there is left out instead of throwing.
+     * Only for undoing effects; {@link #find} stays strict for everything that must exist in the copy.
+     */
+    private IEntityMap lenientMap(final Game newGame) {
+        final Map<Integer, Card> byId = new HashMap<>();
+        for (final Card c : newGame.getCardsInGame()) {
+            byId.put(c.getId(), c);
+        }
+        return new IEntityMap() {
+            @Override
+            public Game getGame() {
+                return newGame;
+            }
+
+            @Override
+            public GameObject map(final GameObject o) {
+                if (o instanceof Card) {
+                    final Card found = cardMap.get(o);
+                    return found != null ? found : byId.get(((Card) o).getId());
+                }
+                if (o instanceof Player) {
+                    return playerMap.get(o);
+                }
+                return null;
+            }
+
+            @Override
+            public CardCollection mapCollection(final CardCollectionView cards) {
+                final CardCollection out = new CardCollection();
+                for (final Card c : cards) {
+                    final Card m = map(c);
+                    if (m != null) {
+                        out.add(m);
+                    }
+                }
+                return out;
+            }
+
+            @Override
+            @SuppressWarnings("unchecked")
+            public <T extends GameObject> List<T> mapList(final List<T> objects) {
+                final List<T> out = new ArrayList<>();
+                for (final T o : objects) {
+                    final GameObject m = map(o);
+                    if (m != null) {
+                        out.add((T) m);
+                    }
+                }
+                return out;
+            }
+        };
     }
 
     public <T extends GameObject> T find(T o) {
