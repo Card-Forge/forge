@@ -1,0 +1,10 @@
+Name:Culbert and Stamets, Star-Crossed
+ManaCost:3 G
+Types:Legendary Creature Human Doctor Artificer
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enter, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBMana
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBMana:DB$ Mana | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
+DeckHas:Ability$Counters
+Oracle:When Culber and Stamets enter, choose one —\n• Put a +1/+1 counter on target creature.\n• Add two mana of any one color.
