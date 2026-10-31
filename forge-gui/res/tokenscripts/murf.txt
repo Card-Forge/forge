@@ -1,0 +1,7 @@
+Name:Murf
+ManaCost:no cost
+Colors:green
+Types:Legendary Creature Ooze Slug
+PT:0/1
+K:Indestructible
+Oracle:Indestructible

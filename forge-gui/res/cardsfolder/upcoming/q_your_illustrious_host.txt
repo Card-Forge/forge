@@ -1,0 +1,9 @@
+Name:Q, Your Illustrious Host
+ManaCost:W U B R G
+Types:Legendary Creature Q
+PT:2/4
+A:AB$ DigUntil | Cost$ tapXType<3/Faerie> | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay | NoPutDesc$ True | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | DefinedDesc$ that card | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Faerie
+Oracle:Tap three untapped Faeries you control: Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost.
