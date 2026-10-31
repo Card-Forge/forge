@@ -3524,6 +3524,13 @@ public class AbilityUtils {
             return doXMath(countCardTypesFromList(player.getSacrificedThisTurn(), true), m, source, ctb);
         }
 
+        //LandsPlayed <type>
+        if (l[0].startsWith("LandsPlayed ")) {
+            String restrictions = l[0].substring("LandsPlayed ".length());
+            List<Card> list = CardLists.getValidCardsAsList(player.getPlayedLandsThisTurn(), restrictions, player, source, ctb);
+            return doXMath(list.size(), m, source, ctb);
+        }
+
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
