@@ -1,0 +1,10 @@
+Name:Ensign Harry Kim, Operations
+ManaCost:1 W
+Types:Legendary Creature Human Officer
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+powerGTY | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control enters, if it has greater power than NICKNAME, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X
+A:AB$ Draw | Cost$ 2 RemoveAnyCounter<2/P1P1/Creature> | SpellDescription$ Draw a card.
+SVar:X:TriggeredCard$Valid Creature.powerGTY
+SVar:Y:Count$CardPower
+Oracle:Whenever another creature you control enters, if it has greater power than Ensign Kim, put a +1/+1 counter on Ensign Kim.\n{2}, Remove two +1/+1 counters from among creatures you control: Draw a card.

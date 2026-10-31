@@ -1,0 +1,12 @@
+Name:Seven of Nine, Tertiary Adjunct
+ManaCost:2 U
+Types:Legendary Artifact Creature Borg
+PT:1/4
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. When you discard a nonland card this way, put two charge counters on up to one target artifact.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBimmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | Execute$ TrigPutCounter | SubAbility$ DBCleanup | TriggerDescription$ When you discard a nonland card this way, put two charge counters on up to one target artifact.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ 1 | CounterType$ CHARGE | CounterNum$ 2
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Discard|Counters
+DeckHints:Type$Artifact
+Oracle:That Is Irrelevant — {T}: Draw a card, then discard a card. When you discard a nonland card this way, put two charge counters on up to one target artifact.

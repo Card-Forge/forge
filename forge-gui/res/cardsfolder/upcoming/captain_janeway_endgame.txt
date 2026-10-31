@@ -1,0 +1,11 @@
+Name:Captain Janeway, Endgame
+ManaCost:1 U R W
+Types:Legendary Creature Human Officer
+PT:3/3
+T:Mode$ DamageDoneOnce | ValidSource$ Officer.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Officers you control deal combat damage to a player, you draw a card and create a 1/1 red Officer creature token.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ r_1_1_officer
+A:AB$ Effect | Cost$ 2 tapXType<1/Creature> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ NICKNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHas:Ability$Token
+Oracle:Whenever one or more Officers you control deal combat damage to a player, you draw a card and create a 1/1 red Officer creature token.\n{2}, Tap an untapped creature you control: Captain Janeway can't be blocked this turn.
