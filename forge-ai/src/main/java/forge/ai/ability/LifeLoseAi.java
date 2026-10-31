@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -115,8 +116,11 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
          // TODO: check against the amount we could obtain when multiple activations are possible
+        // a storm spell is copied once for every spell cast before it this turn, and every copy takes life
+        final int totalAmount = source.hasKeyword(Keyword.STORM) && sa.isSpell()
+                ? amount * (ai.getGame().getStack().getSpellsCastThisTurn().size() + 1) : amount;
         PlayerCollection filteredPlayer = tgtPlayers
-                .filter(PlayerPredicates.isOpponentOf(ai).and(PlayerPredicates.lifeLessOrEqualTo(amount)));
+                .filter(PlayerPredicates.isOpponentOf(ai).and(PlayerPredicates.lifeLessOrEqualTo(totalAmount)));
         // killing opponents asap
         if (!filteredPlayer.isEmpty()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

@@ -1,11 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -17,6 +12,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordWithCost;
 import forge.game.keyword.Keyword;
@@ -43,6 +39,9 @@ import forge.game.zone.ZoneType;
  *       is worth it;</li>
  *   <li>{@link Kind#REANIMATOR}: reanimation spells and big creatures that are better in the graveyard than in hand;</li>
  *   <li>{@link Kind#STORM}: a storm payoff and the rituals and cantrips that feed it;</li>
+ *   <li>{@link Kind#TUTOR_STORM}: a storm finisher that is found by tutors (Infernal Tutor, Beseech the Mirror,
+ *       Wishes, Wishclaw Talisman) and cast with fast mana (rituals, moxen, Lotus Petal, Lion's Eye Diamond); the finisher
+ *       is held until the storm count makes it lethal;</li>
  *   <li>{@link Kind#CREATURE_COPY}: Splinter Twin or Kiki-Jiki with a creature that untaps or copies;</li>
  *   <li>{@link Kind#CASCADE_PAYOFF}: cascade spells whose only possible hit is the payoff;</li>
  *   <li>{@link Kind#CHEAT_FATTY}: Show and Tell, Sneak Attack, Through the Breach and the like, with huge creatures
@@ -58,7 +57,7 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -207,6 +206,7 @@ public final class ComboPlan {
         addIfFound(found, massReanimation(spells));
         addIfFound(found, reanimator(spells));
         addIfFound(found, storm(spells));
+        addIfFound(found, tutorStorm(spells));
         addIfFound(found, creatureCopy(spells));
         addIfFound(found, cascadePayoff(spells));
         addIfFound(found, cheatFatty(spells));
@@ -429,6 +429,9 @@ public final class ComboPlan {
                     break;
                 case REPLENISH:
                     sum += replenishTerm(ai, combo);
+                    break;
+                case TUTOR_STORM:
+                    sum += tutorStormTerm(ai, combo);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -1527,6 +1530,473 @@ public final class ComboPlan {
                 "payoff=" + payoffs + ", rituals=" + rituals + ", cantrips=" + cantrips);
     }
 
+    // ----------------------------------------------------------------------------------- tutor storm
+
+    /** A storm card that wins the game: Tendrils of Agony, Grapeshot, Brain Freeze, Empty the Warrens. */
+    public static boolean isStormFinisher(final Card c) {
+        return !c.isLand() && !c.isCreature()
+                && (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName()));
+    }
+
+    /** A ritual, a mox, Lotus Petal, Lion's Eye Diamond: a cheap spell that is worth mana. */
+    private static boolean isFastMana(final Card c) {
+        return !c.isLand() && !c.isCreature() && c.getCMC() <= 2
+                && (hasApi(c, ApiType.Mana) || hasApi(c, ApiType.ManaReflected));
+    }
+
+    /**
+     * A spell or ability that finds any card (or a card of a broad type) in the library or the sideboard and puts it
+     * into the hand, or exiles it to be cast: Infernal Tutor, Beseech the Mirror, Wishclaw Talisman, the Wishes.
+     */
+    private static boolean isLibraryTutor(final Card c) {
+        if (c.isLand() || c.isCreature()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if (a.getApi() != ApiType.ChangeZone) {
+                    continue;
+                }
+                final String origin = a.getParamOrDefault("Origin", "");
+                final boolean fromSideboard = origin.contains("Sideboard");
+                if (!origin.contains("Library") && !fromSideboard) {
+                    continue;
+                }
+                final String dest = a.getParamOrDefault("Destination", "");
+                if (!dest.equals("Hand") && !dest.equals("Exile")) {
+                    continue;
+                }
+                final String type = a.getParamOrDefault("ChangeType", "");
+                if (type.startsWith("Card") || fromSideboard && !type.isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Infernal Tutor: finds any card, but only with an empty hand ("Hellbent"); otherwise it finds a copy of a card of the hand. */
+    public static boolean isHellbentTutor(final Card c) {
+        return isLibraryTutor(c) && c.getOracleText() != null && c.getOracleText().contains("Hellbent");
+    }
+
+    /** Gaea's Will, Yawgmoth's Will: cast the spells of the graveyard again. */
+    private static boolean isRecursionEngine(final Card c) {
+        if (c.isLand() || c.isCreature()) {
+            return false;
+        }
+        return isRecursionAbility(c.getSpellAbilities());
+    }
+
+    public static boolean isRecursionAbility(final Collection<SpellAbility> abilities) {
+        for (final SpellAbility sa : abilities) {
+            if ("YawgmothsWill".equals(sa.getParamOrDefault("AILogic", ""))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static Combo tutorStorm(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int finishers = 0;
+        int mana = 0;
+        int tutors = 0;
+        int engines = 0;
+        for (final Card c : spells) {
+            if (isStormFinisher(c)) {
+                payoffs.add(c.getName());
+                finishers++;
+            } else if (isLibraryTutor(c)) {
+                enablers.add(c.getName());
+                tutors++;
+            } else if (isRecursionEngine(c)) {
+                enablers.add(c.getName());
+                engines++;
+            } else if (isFastMana(c)) {
+                enablers.add(c.getName());
+                mana++;
+            }
+        }
+        if (finishers < 1 || tutors < 3 || mana < 8) {
+            return null;
+        }
+        final int strength = 25 + 4 * Math.min(mana, 8) + 3 * Math.min(tutors, 6) + 8 * Math.min(finishers, 3)
+                + (engines > 0 ? 6 : 0);
+        return new Combo(Kind.TUTOR_STORM, strength, payoffs, enablers, Collections.<String>emptySet(), false,
+                "finishers=" + payoffs + ", tutors=" + tutors + ", fast mana=" + mana + ", engines=" + engines);
+    }
+
+    /** How much one copy of a storm finisher takes from the opponent: 2 for Tendrils of Agony, 1 for Grapeshot, else 0. */
+    static int perCopyDamage(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                final ApiType api = a.getApi();
+                final String amount = api == ApiType.LoseLife ? a.getParam("LifeAmount")
+                        : api == ApiType.DealDamage ? a.getParam("NumDmg") : null;
+                if (amount != null) {
+                    try {
+                        return Integer.parseInt(amount.trim());
+                    } catch (final NumberFormatException e) {
+                        return 0;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    /** The number of spells cast this turn by everybody: the storm count the next storm spell would copy itself that often for. */
+    static int stormCount(final Player ai) {
+        return ai.getGame().getStack().getSpellsCastThisTurn().size();
+    }
+
+    /**
+     * Whether casting the storm card now takes the last life of the only opponent: the spell and its copies (one for
+     * every spell cast before it this turn) each take {@link #perCopyDamage} life. False when the card does not
+     * simply take life, or when there is more than one opponent.
+     */
+    public static boolean stormIsLethal(final Player ai, final Card finisher) {
+        if (ai == null || finisher == null || !finisher.hasKeyword(Keyword.STORM)) {
+            return false;
+        }
+        final int per = perCopyDamage(finisher);
+        if (per <= 0 || ai.getOpponents().size() != 1) {
+            return false;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        return opp != null && (long) per * (stormCount(ai) + 1) >= opp.getLife();
+    }
+
+    /** A cheap guess at the mana the player can spend this turn: what floats in the pool and the untapped mana sources. */
+    private static int potentialMana(final Player ai) {
+        int mana = ai.getManaPool().totalMana();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!c.isTapped() && !c.getManaAbilities().isEmpty()) {
+                mana++;
+            }
+        }
+        return mana;
+    }
+
+    /**
+     * Progress of a tutor storm deck, in evaluator points: the finisher (or a tutor that finds it) in the hand, mana to
+     * cast it, a storm count to make it lethal; most of it only while the finisher can still be found.
+     */
+    private int tutorStormTerm(final Player ai, final Combo combo) {
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        Card finisher = null;
+        for (final Card c : hand) {
+            if (combo.payoffs.contains(c.getName())) {
+                finisher = c;
+                break;
+            }
+        }
+        final boolean inLibrary = anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs);
+        final boolean tutorInHand = handHasTutor(hand);
+        if (finisher == null && !(inLibrary && tutorInHand)) {
+            return 0; // the finisher is out of reach, or it is not in the library and not in the hand: nothing to prepare
+        }
+        int sum = finisher != null ? 120 : 40;
+        final int mana = potentialMana(ai);
+        final int storm = stormCount(ai);
+        sum += Math.min(mana, 10) * 10;
+        sum += Math.min(storm, 12) * 12;
+        if (finisher != null) {
+            final Player opp = ai.getWeakestOpponent();
+            final int per = perCopyDamage(finisher);
+            if (opp != null && per > 0 && opp.getLife() > 0) {
+                final long damage = (long) per * (storm + 1);
+                sum += (int) Math.min(100L, damage * 100 / opp.getLife()) * 2;
+                if (mana >= finisher.getCMC() && damage >= opp.getLife()) {
+                    sum += 300; // castable, and lethal: only the cast is missing
+                }
+            }
+        }
+        return sum;
+    }
+
+    /** The progress of a tutor storm deck in evaluator points (0 for any other deck); the solver ranks its states by it. */
+    public int stormProgress(final Player ai) {
+        final Combo combo = find(Kind.TUTOR_STORM);
+        return combo == null || ai == null ? 0 : tutorStormTerm(ai, combo);
+    }
+
+    /** Whether the storm card simply takes life per copy (Tendrils, Grapeshot): only then is "lethal" something to compute. */
+    public static boolean takesLifePerCopy(final Card c) {
+        return c != null && perCopyDamage(c) > 0;
+    }
+
+    /**
+     * A play a tutor storm deck keeps until the solver has found the kill: the fast mana (rituals, moxen, Lotus Petal,
+     * Lion's Eye Diamond) only builds the storm count and the mana of one turn, and spent without a kill it is gone.
+     * The solver plays these itself, whatever this says.
+     */
+    public boolean holdsForKill(final SpellAbility sa) {
+        if (find(Kind.TUTOR_STORM) == null || sa == null || sa.isLandAbility() || sa.getHostCard() == null) {
+            return false;
+        }
+        final Card c = sa.getHostCard();
+        if (!isFastMana(c)) {
+            return false;
+        }
+        if (c.isPermanent() && !sacrificesForMana(c)) {
+            return false; // Moxen stay on the battlefield: playing them early costs nothing and builds mana
+        }
+        if (c.isPermanent() && sa.getActivatingPlayer() != null) {
+            // set the Bargain up: a permanent to sacrifice (Lotus Petal, a Mox) is played ahead while a Bargain tutor
+            // (Beseech the Mirror) waits in the hand and there is nothing to sacrifice yet
+            final Player ai = sa.getActivatingPlayer();
+            boolean bargainTutor = false;
+            for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+                if (isLibraryTutor(h) && h.hasKeyword(Keyword.BARGAIN)) {
+                    bargainTutor = true;
+                    break;
+                }
+            }
+            boolean fodder = false;
+            for (final Card b : ai.getCardsIn(ZoneType.Battlefield)) {
+                if (!b.isLand() && b.isPermanent()) {
+                    fodder = true;
+                    break;
+                }
+            }
+            if (bargainTutor && !fodder) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A cheap permanent that is Bargain fodder and one more storm count on the kill turn, but costs a card or does
+     * nothing on any other turn (Giant's Boulder, Skateboard, Chrome Mox that imprints a card): the solver plays them
+     * in a line, the AI does not play them for nothing. One is let through while a Bargain tutor waits in the hand and
+     * there is nothing to sacrifice yet.
+     */
+    public boolean wastesFodder(final SpellAbility sa) {
+        if (find(Kind.TUTOR_STORM) == null || sa == null || !sa.isSpell() || sa.getHostCard() == null) {
+            return false;
+        }
+        final Card c = sa.getHostCard();
+        if (c.isLand() || c.isCreature() || !c.isPermanent() || c.getCMC() > 1 || isStormFinisher(c)) {
+            return false;
+        }
+        final boolean imprint = c.getOracleText() != null && c.getOracleText().contains("Imprint");
+        if (producesFreeMana(c) && !imprint) {
+            return false; // a Mox that costs nothing is mana for the rest of the game: holdsForKill decides about those
+        }
+        final Player ai = sa.getActivatingPlayer();
+        if (ai != null) {
+            boolean bargainTutor = false;
+            for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+                if (isLibraryTutor(h) && h.hasKeyword(Keyword.BARGAIN)) {
+                    bargainTutor = true;
+                    break;
+                }
+            }
+            boolean fodder = false;
+            for (final Card b : ai.getCardsIn(ZoneType.Battlefield)) {
+                if (!b.isLand() && b.isPermanent()) {
+                    fodder = true;
+                    break;
+                }
+            }
+            if (bargainTutor && !fodder) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** A mana ability that costs no mana (Chrome Mox, Mox Opal, Lotus Petal), unlike Giant's Boulder's {1},{T}. */
+    private static boolean producesFreeMana(final Card c) {
+        for (final SpellAbility m : c.getManaAbilities()) {
+            if (m.getPayCosts() != null && m.getPayCosts().getCostMana() == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The mulligan rule of a tutor storm deck: keep a hand that can act, not a slow one. It needs a land (checked by the
+     * caller) and either two tutors, or a tutor with mana to cast it (fast mana, or the engine), or plenty of fast mana
+     * for the tutors it will draw. Disruption alone (Thoughtseize, Duress, Veil of Summer) is not a hand unless it is so
+     * small that going lower is worse.
+     */
+    public boolean keepsTutorStormHand(final CardCollectionView kept, final int size) {
+        if (size <= 5) {
+            return true;
+        }
+        int tutors = 0;
+        int mana = 0;
+        int engines = 0;
+        int lands = 0;
+        for (final Card c : kept) {
+            if (c.isLand()) {
+                lands++;
+            } else if (isLibraryTutor(c)) {
+                tutors++;
+            } else if (isRecursionEngine(c)) {
+                engines++;
+            } else if (isFastMana(c)) {
+                mana++;
+            }
+        }
+        if (tutors >= 2) {
+            return true;
+        }
+        if (tutors == 1 && (mana >= 1 || engines >= 1 || lands >= 2)) {
+            return true;
+        }
+        return mana + lands >= 4 && (tutors + engines >= 1 || mana >= 3);
+    }
+
+    /** Infernal Tutor with other cards in hand only finds a copy of the revealed card: keep it for Hellbent. */
+    public boolean wastesTutor(final SpellAbility sa) {
+        if (find(Kind.TUTOR_STORM) == null || sa == null || sa.getHostCard() == null || !sa.isSpell()
+                || !"Infernal Tutor".equals(sa.getHostCard().getName())) {
+            return false;
+        }
+        final Player ai = sa.getActivatingPlayer();
+        return ai != null && ai.getCardsIn(ZoneType.Hand).size() > 1;
+    }
+
+    /**
+     * How far a state is along the pattern of the deck, for the solver: the Bargain is set up, the free spell found the
+     * engine (Gaea's Will), the engine cast, the graveyard it can cast again (rituals, tutors), mana and storm count.
+     * The storm card comes last, so it is worth nothing here until it is lethal (the solver casts it as the last play).
+     */
+    public int solverScore(final Player ai) {
+        int sum = stormProgress(ai);
+        boolean bargainTutor = false;
+        boolean engineInHand = false;
+        for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+            if (isLibraryTutor(h) && h.hasKeyword(Keyword.BARGAIN)) {
+                bargainTutor = true;
+            }
+            if (isRecursionEngine(h)) {
+                engineInHand = true;
+            }
+        }
+        boolean fodder = false;
+        for (final Card b : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (!b.isLand() && b.isPermanent()) {
+                fodder = true;
+            }
+        }
+        if (bargainTutor && fodder) {
+            sum += 60; // the first line is ready
+        }
+        if (engineInHand) {
+            sum += 80; // found by the free spell: now it needs spells in the graveyard and the mana to cast it
+        }
+        boolean engineSpent = false;
+        for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (isRecursionEngine(g)) {
+                engineSpent = true;
+            }
+        }
+        if (engineSpent) {
+            int replayable = 0;
+            for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+                if (!g.isLand() && !isRecursionEngine(g)) {
+                    replayable++;
+                }
+            }
+            sum += 200 + 25 * Math.min(replayable, 8); // the engine is working: the graveyard is the storm count to come
+        }
+        return sum;
+    }
+
+    private static boolean handHasTutor(final CardCollectionView hand) {
+        for (final Card c : hand) {
+            if (isLibraryTutor(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int fastManaInHand(final CardCollectionView hand) {
+        int n = 0;
+        for (final Card h : hand) {
+            if (isFastMana(h)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** Lotus Petal, Lion's Eye Diamond: the mana is gone with the permanent, so they are kept for the kill. */
+    private static boolean sacrificesForMana(final Card c) {
+        for (final SpellAbility m : c.getManaAbilities()) {
+            if (m.getPayCosts() != null && m.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What a tutor of a tutor storm deck should find. The finisher when the mana for it is there (or it is the only
+     * way to get it), otherwise what makes the mana and the storm count: with a free cast (Beseech the Mirror) the
+     * engine that casts the graveyard again when there is something to cast, else a ritual; with a card for the hand
+     * mana first, then the finisher. Null when nothing in the list is a piece of the deck.
+     */
+    private Card tutorStormPick(final Player ai, final Combo combo, final CardCollectionView options,
+                                final ZoneType destination) {
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        final boolean finisherInHand = anyNamed(hand, combo.payoffs);
+        final int mana = potentialMana(ai);
+        final boolean freeCast = destination == ZoneType.Exile;
+        int pieces = 0; // spells in the graveyard that an engine can cast again
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (isFastMana(c) || combo.enablers.contains(c.getName())) {
+                pieces++;
+            }
+        }
+        Card best = null;
+        int bestValue = 0;
+        for (final Card c : options) {
+            int v;
+            if (freeCast && (c.isLand() || c.getCMC() > 4)) {
+                continue; // cannot be cast for free (Beseech the Mirror: mana value 4 or less)
+            }
+            if (combo.payoffs.contains(c.getName())) {
+                if (freeCast && !stormIsLethal(ai, c)) {
+                    continue; // cast free below lethal it is wasted: leave it in the library
+                }
+                if (finisherInHand) {
+                    v = 5; // a second one is a spare at best
+                } else {
+                    // fast mana already in hand is cast first, the tutor after it
+                    v = mana + fastManaInHand(hand) >= c.getCMC() - 1 ? 500 : 150;
+                }
+            } else if (isRecursionEngine(c)) {
+                // the free cast of Beseech the Mirror is the engine's turn: Gaea's Will casts the graveyard again, and the
+                // Beseech itself is in that graveyard by then. Found into the hand it is only worth it with pieces to cast
+                v = freeCast ? (pieces >= 1 ? 300 : 150) : (pieces >= 2 ? 260 : 60);
+            } else if (isFastMana(c)) {
+                v = mana < 5 ? 200 : 90;
+            } else if (isLibraryTutor(c)) {
+                v = 110;
+            } else if (c.isLand()) {
+                v = 1;
+            } else if (combo.enablers.contains(c.getName())) {
+                v = 40;
+            } else {
+                v = 0;
+            }
+            if (v > bestValue) {
+                bestValue = v;
+                best = c;
+            }
+        }
+        return best;
+    }
+
     private static Combo creatureCopy(final List<Card> spells) {
         final Set<String> engines = new LinkedHashSet<>();
         final Set<String> targets = new LinkedHashSet<>();
@@ -1666,6 +2136,14 @@ public final class ComboPlan {
                        final CardCollectionView options) {
         if (combos.isEmpty() || options == null || options.isEmpty()) {
             return null;
+        }
+        final Combo tutorStorm = find(Kind.TUTOR_STORM);
+        if (tutorStorm != null && (destination == ZoneType.Hand || destination == ZoneType.Exile)
+                && (origin.contains(ZoneType.Library) || origin.contains(ZoneType.Sideboard))) {
+            final Card pick = tutorStormPick(ai, tutorStorm, options, destination);
+            if (pick != null) {
+                return pick;
+            }
         }
         Card best = null;
         int bestValue = Integer.MIN_VALUE;
