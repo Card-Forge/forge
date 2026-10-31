@@ -772,7 +772,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("SurvivalOfTheFittest")) {
-            return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+            return ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;
         } else if (aiLogic.equals("BeforeCombat")) {
@@ -1071,7 +1071,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
                     return false;
                 }
-                if (!immediately && (!game.getPhaseHandler().getNextTurn().equals(ai)
+                if (!immediately && (!game.getPhaseHandler().isPlayerNextTurn(ai)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                         && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                         && !ComputerUtil.activateForCost(sa, ai)) {

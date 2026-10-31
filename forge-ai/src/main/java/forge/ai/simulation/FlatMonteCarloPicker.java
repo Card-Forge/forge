@@ -1524,7 +1524,7 @@ public final class FlatMonteCarloPicker {
         if (simGame.isGameOver() || !simAi.isInGame()) {
             later = simAi.hasWon() ? own + LOOKAHEAD_LOSS_PENALTY : own - LOOKAHEAD_LOSS_PENALTY;
         } else {
-            if (ph.getPlayerTurn() == simOpp) {
+            if (ph.isPlayerTurn(simOpp)) {
                 playOut(simGame, simOpp, playoutPlays);
                 if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                     ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simAi));
@@ -1622,7 +1622,7 @@ public final class FlatMonteCarloPicker {
             lastRolloutProblem = "advance";
             return null;
         }
-        if (!simGame.isGameOver() && ph.getPlayerTurn() == simAi) {
+        if (!simGame.isGameOver() && ph.isPlayerTurn(simAi)) {
             playOut(simGame, simAi, playoutPlays);
             if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));

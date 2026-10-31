@@ -49,7 +49,7 @@ public class SpellAbilityPicker {
 
     private void printPhaseInfo() {
         String phaseStr = game.getPhaseHandler().getPhase().toString();
-        if (game.getPhaseHandler().getPlayerTurn() != player) {
+        if (!game.getPhaseHandler().isPlayerTurn(player)) {
             phaseStr = "opponent " + phaseStr;
         }
         print("---- choose ability  (phase = " + phaseStr + ")");

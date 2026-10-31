@@ -31,7 +31,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             if (source.isPermanent() && !sa.getRestrictions().isSorcerySpeed()
                     && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
                 // If it has an associated cost, try to only do this before own turn
-                if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
+                if (!(ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(aiPlayer))) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
