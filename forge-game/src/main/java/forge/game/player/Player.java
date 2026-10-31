@@ -104,6 +104,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int landsPlayedLastTurn;
     private int numPowerSurgeLands;
     private int spellsCastThisGame;
+    private int spellsCastThisGameNotFromYourStartingLibrary;
     private int spellsCastLastTurn;
     private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
     private int investigatedThisTurn;
@@ -161,6 +162,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
     private final Set<Long> adjustLandPlaysInfinite = Sets.newHashSet();
     private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
+    private List<Integer> cardsFromStartingDeck;
 
     private CardCollection currentPlanes = new CardCollection();
     private CardCollection planeswalkedToThisTurn = new CardCollection();
@@ -1764,6 +1766,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         return maingameCardsMap.get(subgameCard);
     }
 
+    public final void setCardsFromStartingDeck(List<Integer> ids) { this.cardsFromStartingDeck = ids; }
+    public final List<Integer> getCardsFromStartingDeck() { return cardsFromStartingDeck; }
+
     public final ManaPool getManaPool() {
         return manaPool;
     }
@@ -2327,6 +2332,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getSpellsCastLastTurn() {
         return spellsCastLastTurn;
     }
+    public final void addSpellCastThisTurn(SpellAbility sp) {
+        if (!cardsFromStartingDeck.contains(sp.getHostCard().getId())) {
+            spellsCastThisGameNotFromYourStartingLibrary++;
+        }
+        addSpellCastThisTurn();
+    }
     public final void addSpellCastThisTurn() {
         spellsCastThisGame++;
         achievementTracker.spellsCast++;
@@ -2338,8 +2349,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getSpellsCastThisGame() {
         return spellsCastThisGame;
     }
+    public final int getSpellsCastThisGameNotFromYourStartingLibrary() {
+        return spellsCastThisGameNotFromYourStartingLibrary;
+    }
     public final void resetSpellCastThisGame() {
         spellsCastThisGame = 0;
+        spellsCastThisGameNotFromYourStartingLibrary = 0;
     }
 
     public final int getLifeGainedByTeamThisTurn() {
@@ -3010,6 +3025,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 cmd.setCollectible(true);
                 com.add(cmd);
                 this.addCommander(cmd);
+                this.cardsFromStartingDeck.add(cmd.getId());
             }
         }
         else if (addCommanders && registeredPlayer.getPlaneswalker() != null) { // Planeswalker
@@ -3018,6 +3034,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             cmd.setCommander(true);
             com.add(cmd);
             this.addCommander(cmd);
+            this.cardsFromStartingDeck.add(cmd.getId());
         }
 
         // Conspiracies
