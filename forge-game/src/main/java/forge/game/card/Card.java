@@ -2981,7 +2981,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 if (type.isDungeon()) {
                     disabled = !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom());
                 } else {
-                    disabled = getGame() != null && !trig.requirementsCheck(getGame());
+                    // a condition on "that player" is shown for the active player
+                    disabled = game != null && !trig.checkWith(AbilityKey.mapFromPlayer(game.getPhaseHandler().getPlayerTurn()),
+                            () -> trig.requirementsCheck(game));
                 }
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
                 if (disabled) sb.append(grayTag);

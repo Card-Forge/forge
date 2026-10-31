@@ -42,6 +42,8 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Strings;
 
 import java.util.*;
+import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -74,6 +76,9 @@ public abstract class Trigger extends TriggerReplacementBase {
     private Set<PhaseType> validPhases;
 
     private SpellAbility spawningAbility;
+
+    // set only while checkWith runs
+    private Map<AbilityKey, Object> checkedTriggeringObjects;
 
     /**
      * <p>
@@ -287,6 +292,38 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         return true;
     }
+
+    /** Runs a check with these as the triggering objects, so the trigger's conditions and tests can refer to them, as in "that player" (CR 603.4). */
+    public final boolean checkWith(final Map<AbilityKey, Object> triggeringObjects, final BooleanSupplier check) {
+        final Map<AbilityKey, Object> previous = checkedTriggeringObjects;
+        checkedTriggeringObjects = triggeringObjects;
+        try {
+            return check.getAsBoolean();
+        } finally {
+            checkedTriggeringObjects = previous;
+        }
+    }
+
+    @Override
+    public Object getTriggeringObject(final AbilityKey type) {
+        return checkedTriggeringObjects == null ? null : checkedTriggeringObjects.get(type);
+    }
+
+    /** True if the trigger's condition or effect names this triggering object, as in "that player", so it applies to each one separately (CR 805.4d, 805.10c). */
+    protected final boolean refersToTriggering(final AbilityKey key) {
+        final String name = "Triggered" + key;
+        final Predicate<String> names = v -> v.contains(name) || getHostCard().hasSVar(v) && getHostCard().getSVar(v).contains(name);
+        if (getMapParams().values().stream().anyMatch(names)) {
+            return true;
+        }
+        for (SpellAbility sa = ensureAbility(); sa != null; sa = sa.getSubAbility()) {
+            if (sa.getMapParams().values().stream().anyMatch(names)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * <p>
      * requirementsCheck.

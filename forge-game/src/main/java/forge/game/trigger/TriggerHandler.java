@@ -410,16 +410,9 @@ public class TriggerHandler {
             return false;
         }
 
-        if (!regtrig.requirementsCheck(game)) {
-            return false; // Conditions aren't right.
-        }
-
-        if (!regtrig.meetsRequirementsOnTriggeredObjects(game, runParams)) {
-            return false; // Conditions aren't right.
-        }
-
-        if (!regtrig.performTest(runParams)) {
-            return false; // Test failed.
+        if (!regtrig.checkWith(runParams, () -> regtrig.requirementsCheck(game)
+                && regtrig.meetsRequirementsOnTriggeredObjects(game, runParams) && regtrig.performTest(runParams))) {
+            return false;
         }
 
         if (TriggerType.Always.equals(regtrig.getMode()) && game.getStack().hasStateTrigger(regtrig.getId())) {

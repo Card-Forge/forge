@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -388,9 +389,6 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if (player.equals("OpponentGreatest")) {
                 life = hostController.getOpponentsGreatestLifeTotal();
             }
-            if (player.equals("ActivePlayer")) {
-                life = game.getPhaseHandler().getPlayerTurn().getLife();
-            }
 
             final String rightString = lifeCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -552,6 +550,11 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
     }
     protected Optional<IHasSVars> findSVar(final String name) {
         return getSVarFallback(name).stream().filter(f -> f.hasSVar(name)).findFirst();
+    }
+
+    /** The object a reference such as TriggeredPlayer names, if this trait has triggering objects. */
+    public Object getTriggeringObject(final AbilityKey type) {
+        return null;
     }
 
     @Override

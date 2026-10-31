@@ -39,7 +39,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
 
-        for (final Player p : getTargetPlayers(sa)) {
+        for (final Player p : getTargetPlayersOnePerTeam(sa)) {
             if (!p.isInGame()) {
                 continue;
             }
