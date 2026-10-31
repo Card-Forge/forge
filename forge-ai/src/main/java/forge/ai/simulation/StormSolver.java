@@ -84,6 +84,10 @@ public final class StormSolver {
     public static final int DEFAULT_MAX_NODES = 400;
     public static final long DEFAULT_BUDGET_NANOS = 4_000_000_000L;
     private static final int MAX_SOLVES_PER_TURN = 4;
+    /** Size of the frontier: every entry holds a whole copy of the game, so an unbounded queue runs out of heap. */
+    private static final int MAX_OPEN = 64;
+    /** The search stops (and the AI falls back to Flat Monte Carlo) when this share of the heap is in use. */
+    private static final double MEMORY_LIMIT = 0.85;
     /** What the last search that found no line saw: the start, the best state and why it stopped. */
     private static String lastDiagnostic = "";
 
@@ -254,12 +258,34 @@ public final class StormSolver {
         return lastDiagnostic;
     }
 
-    /** Searches for a line that wins this turn; null when none was found within the limits. */
+    /** How many different orders of the unseen library are tried: Ad Nauseam, Infernal Tutor and the like draw or find cards at random. */
+    private static final int SHUFFLES = 3;
+
+    /**
+     * Searches for a line that wins this turn; null when none was found within the limits. The library is only a guess,
+     * so a few different shuffles are searched, and the first line that wins in one of them is the plan. It is checked
+     * against the real game after every play ({@link #next}), and when the draws went another way a new line is looked for.
+     * That is how a hand with Ad Nauseam plays: the cast is made when some order of the library wins, then it is re-solved.
+     */
     public static Line solve(final Player ai, final ComboPlan combos, final int maxNodes, final long budgetNanos) {
+        final long start = System.nanoTime();
+        final long each = budgetNanos / SHUFFLES;
+        Line found = null;
+        for (int i = 0; i < SHUFFLES && found == null; i++) {
+            final long left = budgetNanos - (System.nanoTime() - start);
+            if (left <= 0) {
+                break;
+            }
+            found = solveShuffle(ai, combos, maxNodes, Math.min(left, each), i);
+        }
+        return found == null ? null : new Line(found.steps, found.nodes, System.nanoTime() - start);
+    }
+
+    private static Line solveShuffle(final Player ai, final ComboPlan combos, final int maxNodes, final long budgetNanos, final int variant) {
         final long start = System.nanoTime();
         final Game game = ai.getGame();
         final GameSimulator root = new GameSimulator(game, ai);
-        HiddenInfoShuffler.shuffle(root.getSimulatedGameState(), root.getGameCopier(), ai, new Random(game.getPhaseHandler().getTurn()));
+        HiddenInfoShuffler.shuffle(root.getSimulatedGameState(), root.getGameCopier(), ai, new Random(game.getPhaseHandler().getTurn() + 7919L * variant));
         setStorm(root.getSimulatedGameState(), root.getSimulatedAiPlayer(), ComboPlan.stormCount(ai));
 
         final PriorityQueue<Node> open = new PriorityQueue<>();
@@ -271,7 +297,7 @@ public final class StormSolver {
         final String startState = describe(root.getSimulatedAiPlayer());
         final StringBuilder trail = new StringBuilder();
         trail.append(" | picker: ").append(new SpellAbilityPicker(ai).explainCandidates());
-        while (!open.isEmpty() && nodes < maxNodes && System.nanoTime() - start < budgetNanos) {
+        while (!open.isEmpty() && nodes < maxNodes && System.nanoTime() - start < budgetNanos && !lowMemory()) {
             final Node node = open.poll();
             nodes++;
             if (node.score > best.score) {
@@ -361,9 +387,10 @@ public final class StormSolver {
                     open.add(new Node(child, steps, combos.solverScore(childAi) + steps.size(), new HashSet<>(node.gyCast)));
                 }
             }
+            trim(open);
         }
         lastDiagnostic = "start {" + startState + "} searched " + nodes + " states in " + (System.nanoTime() - start) / 1_000_000
-                + " ms (" + (open.isEmpty() ? "all explored" : nodes >= maxNodes ? "state limit" : "time limit") + "); best score "
+                + " ms (" + (open.isEmpty() ? "all explored" : nodes >= maxNodes ? "state limit" : lowMemory() ? "memory limit" : "time limit") + "); best score "
                 + best.score + " after " + best.steps + " {" + describe(best.sim.getSimulatedAiPlayer()) + "}" + trail;
         return null;
     }
@@ -400,6 +427,22 @@ public final class StormSolver {
         }
         GameSimulator.resolveStack(child.getSimulatedGameState(), childAi.getWeakestOpponent());
         return child;
+    }
+
+    /** Beam search: keeps the best {@link #MAX_OPEN} states, the rest become garbage at once. */
+    private static void trim(final PriorityQueue<Node> open) {
+        if (open.size() <= MAX_OPEN) {
+            return;
+        }
+        final List<Node> all = new ArrayList<>(open);
+        Collections.sort(all); // compareTo is best first
+        open.clear();
+        open.addAll(all.subList(0, MAX_OPEN));
+    }
+
+    private static boolean lowMemory() {
+        final Runtime rt = Runtime.getRuntime();
+        return rt.totalMemory() - rt.freeMemory() > rt.maxMemory() * MEMORY_LIMIT;
     }
 
     private static String describe(final Player ai) {

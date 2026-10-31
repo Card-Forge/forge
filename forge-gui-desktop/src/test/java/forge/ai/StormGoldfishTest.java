@@ -49,15 +49,16 @@ import forge.util.MyRandom;
 public class StormGoldfishTest extends AITest {
 
     private static final Object[] MAIN = {
-            "Ad Nauseam", 1, "Beseech the Mirror", 2, "Burning Wish", 2, "Chrome Mox", 4, "City of Traitors", 1,
-            "Dark Ritual", 4, "Duress", 2, "Gaea's Will", 1, "Giant's Boulder", 4, "Infernal Tutor", 4,
-            "Lion's Eye Diamond", 4, "Lotus Petal", 4, "Mox Opal", 4, "Skateboard", 1, "Song of Creation", 1,
-            "Spire of Industry", 3, "Tendrils of Agony", 1, "Thoughtseize", 4, "Urza's Saga", 4, "Vault of Whispers", 4,
-            "Veil of Summer", 2, "Wishclaw Talisman", 3 };
+            "Lion's Eye Diamond", 4, "Chrome Mox", 1, "Lotus Petal", 4, "Wishclaw Talisman", 1, "Ad Nauseam", 1,
+            "Dark Ritual", 4, "Urza's Saga", 4, "Brainstorm", 4, "Veil of Summer", 2, "Beseech the Mirror", 1,
+            "Burning Wish", 1, "Thoughtseize", 2, "Gaea's Will", 1, "Ponder", 3, "Giant's Boulder", 4, "Duress", 2,
+            "Infernal Tutor", 4, "Tendrils of Agony", 1, "Underground Sea", 1, "Tropical Island", 1, "Swamp", 1,
+            "Island", 1, "Misty Rainforest", 1, "Polluted Delta", 4, "Hedge Maze", 1, "Verdant Catacombs", 3,
+            "Badlands", 1, "Bayou", 1, "Volcanic Island", 1 };
     private static final Object[] SIDE = {
-            "Beseech the Mirror", 1, "Boseiju, Who Endures", 2, "Consign // Oblivion", 1, "Debt to the Deathless", 1,
-            "Echo of Eons", 1, "Grafdigger's Cage", 1, "Haywire Mite", 1, "Hexing Squelcher", 1,
-            "Peer into the Abyss", 1, "Surgical Extraction", 2, "Talon Gates of Madara", 2, "Tendrils of Agony", 1 };
+            "Beseech the Mirror", 1, "Snow-Covered Forest", 1, "Carpet of Flowers", 2, "Crash", 1, "Dress Down", 2,
+            "Elemental Eruption", 1, "Thoughtseize", 1, "Mind's Desire", 1, "Peer into the Abyss", 1,
+            "Boseiju, Who Endures", 1, "Molten Collapse", 1, "Chain of Vapor", 1, "Tendrils of Agony", 1 };
 
     private static void fill(final forge.deck.CardPool pool, final Object[] list) {
         for (int i = 0; i < list.length; i += 2) {
