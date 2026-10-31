@@ -1,4 +1,4 @@
-Name:Suus Mahna Practicioner
+Name:Suus Mahna Practitioner
 ManaCost:2 U
 Types:Creature Vulcan Officer
 PT:3/2
