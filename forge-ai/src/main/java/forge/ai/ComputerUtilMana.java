@@ -1211,6 +1211,14 @@ public class ComputerUtilMana {
             return false;
         }
 
+        // a mana ability that discards the hand (Lion's Eye Diamond) is not for paying a spell while the hand holds the
+        // finisher or the engine of a storm deck: it was cracked with Tendrils of Agony in hand and the kill was gone
+        if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
+                && ai.getController() instanceof PlayerControllerAi
+                && forge.ai.simulation.ComboPlan.holdsKillPiece(ai)) {
+            return false;
+        }
+
         if (toPay.isSnow() && !sourceCard.isSnow()) {
             return false;
         }
