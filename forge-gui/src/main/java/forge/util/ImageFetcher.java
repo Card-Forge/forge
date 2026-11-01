@@ -95,6 +95,42 @@ public abstract class ImageFetcher {
         if (!downloadUrls.contains(primaryUrl)) downloadUrls.add(primaryUrl);
     }
 
+    public static void addScryfallTokenUrl(CardEdition edition, String collectorNumber, String face, List<String> downloadUrls) {
+        String tokenCode = edition.getTokensCode();
+        String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
+        String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, collectorNumber, edition.getCardsLangCode());
+
+        String cdnUrl = CdnUuidCache.getCdnUrlIfCached(tokenCode, collectorNumber, langCode, face, "normal");
+        if (cdnUrl != null && !downloadUrls.contains(cdnUrl)) downloadUrls.add(cdnUrl);
+
+        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(collectorNumber, tokenCode, langCode, face));
+    }
+
+    /** Cache file name, relative to the token pics dir, of a token image key. */
+    public static String getTokenFilename(String imageKey) {
+        String tmp = imageKey;
+        String face = "";
+        if (tmp.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
+            face = "back";
+            tmp = tmp.substring(0, tmp.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        }
+        String[] tempdata = tmp.substring(2).split("\\|");
+
+        StringBuilder sb = new StringBuilder();
+        if (tempdata.length > 1) {
+            sb.append(tempdata[1]).append("/");
+        }
+        if (tempdata.length > 2) {
+            sb.append(tempdata[2]).append("_");
+        }
+        sb.append(tempdata[0]);
+        if (tempdata.length <= 2 && !face.isEmpty()) {
+            sb.append("_").append(face);
+        }
+        sb.append(".jpg");
+        return sb.toString();
+    }
+
     protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
         return true;
     }
@@ -288,20 +324,7 @@ public abstract class ImageFetcher {
             String tokenName = tempdata[0];
             String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
 
-            StringBuilder sb = new StringBuilder();
-            if (tempdata.length > 1) {
-                sb.append(setCode).append("/");
-            }
-            if (tempdata.length > 2) {
-                sb.append(tempdata[2]).append("_");
-            }
-            sb.append(tokenName);
-            if (tempdata.length <= 2 && !face.isEmpty()) {
-                sb.append("_").append(face);
-            }
-            sb.append(".jpg");
-
-            final String filename = sb.toString();
+            final String filename = getTokenFilename(imageKey);
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
             if (ImageKeys.missingCards.contains(filename)
                     || filename.equalsIgnoreCase("null.jpg")
@@ -337,11 +360,8 @@ public abstract class ImageFetcher {
             Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 
             if (tempdata.length > 2) {
-                String tokenCode = edition.getTokensCode();
-                String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
-                String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tempdata[2], edition.getCardsLangCode());
                 // Just assume the CNr from the token image is valid
-                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
+                addScryfallTokenUrl(edition, tempdata[2], face, downloadUrls);
             } else if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
                 // This is a bit wrong since it _should_ just be trying to get the one with the appropriate collector number
@@ -353,14 +373,10 @@ public abstract class ImageFetcher {
                 CardEdition.EditionEntry tis;
                 while (it.hasNext()) {
                     tis = it.next();
-                    String tokenCode = edition.getTokensCode();
                     if (tis.collectorNumber() == null || tis.collectorNumber().isEmpty()) {
                         continue;
                     }
-                    String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
-                    String langCode = CdnUuidCache.resolvePreferredLangCode(preferredLang, tokenCode, tis.collectorNumber(), edition.getCardsLangCode());
-
-                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face));
+                    addScryfallTokenUrl(edition, tis.collectorNumber(), face, downloadUrls);
                 }
             }
 
