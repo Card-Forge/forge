@@ -3,5 +3,5 @@ ManaCost:R
 Types:Creature Orc
 PT:2/2
 S:Mode$ AttackRestrict | ValidCard$ Card.Self | OthersCompare$ GE2 | Description$ CARDNAME can't attack unless at least two other creatures attack.
-K:CARDNAME can't block unless at least two other creatures block.
+S:Mode$ BlockRestrict | ValidCard$ Card.Self | OthersCompare$ GE2 | Description$ CARDNAME can't block unless at least two other creatures block.
 Oracle:Orcish Conscripts can't attack unless at least two other creatures attack.\nOrcish Conscripts can't block unless at least two other creatures block.

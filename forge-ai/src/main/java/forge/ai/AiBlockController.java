@@ -39,6 +39,7 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
+import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.Trigger;
@@ -86,7 +87,7 @@ public class AiBlockController {
         for (final Card blocker : blockersLeft) {
             // if the blocker can block a creature with lure it can't block a creature without
             if (CombatUtil.canBlock(attacker, blocker, combat)) {
-                boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
+                boolean cantBlockAlone = !StaticAbilityAttackBlockRestrict.blockRestrict(blocker, Collections.emptyList()).isEmpty();
                 if (solo && cantBlockAlone) {
                     continue;
                 }
