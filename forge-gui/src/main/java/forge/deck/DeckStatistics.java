@@ -7,7 +7,10 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.game.GameFormat;
 import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.util.Localizer;
 
 /**
  * Immutable-ish snapshot of the numbers shown on the mobile deck statistics screen.
@@ -36,6 +39,8 @@ public class DeckStatistics {
 
     public int totalPips;
     public int totalLandSources;
+    /** One line per format with a points list that the cards use points in, or null when there is none. */
+    public String pointsSummary;
 
     /** Builds statistics from the main deck (plus commander section, if any). */
     public static DeckStatistics fromDeck(Deck deck) {
@@ -48,7 +53,30 @@ public class DeckStatistics {
             stats.add(deck.get(DeckSection.Commander));
         }
         stats.finish();
+        stats.pointsSummary = pointsSummary(deck);
         return stats;
+    }
+
+    /**
+     * For example "Canadian Highlander points: 7 / 10". Counts every section of the deck, as the format's
+     * legality check does.
+     */
+    public static String pointsSummary(final Deck deck) {
+        final CardPool cards = deck.getAllCardsInASinglePool();
+        final StringBuilder sb = new StringBuilder();
+        for (final GameFormat format : FModel.getFormats()) {
+            if (format.getMaxPoints() == 0) {
+                continue;
+            }
+            final int points = format.getDeckPoints(cards);
+            if (points > 0) {
+                if (sb.length() > 0) {
+                    sb.append("\n");
+                }
+                sb.append(Localizer.getInstance().getMessage("lblFormatPoints", format.getName(), points, format.getMaxPoints()));
+            }
+        }
+        return sb.length() == 0 ? null : sb.toString();
     }
 
     public static DeckStatistics fromPool(Iterable<Entry<PaperCard, Integer>> pool) {
