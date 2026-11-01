@@ -72,6 +72,8 @@ public final class OpeningHand {
                 return new Want(4, 5, 4, 2, 2);
             case RAMP:
                 return new Want(3, 3, 4, 2, 2);
+            case LANDS:
+                return new Want(4, 4, 3, 1, 1); // the lands are the deck: more of them, and a single engine card is enough
             case COMBO:
                 return new Want(3, 4, 3, 1, 2);
             default:
@@ -192,6 +194,7 @@ public final class OpeningHand {
     static byte producedColors(final Card land) {
         byte colors = 0;
         for (final SpellAbility sa : land.getManaAbilities()) {
+            ManaConversion.withActivator(sa);
             for (final byte col : MagicColor.WUBRG) {
                 if (sa.canProduce(MagicColor.toLongString(col))) {
                     colors |= col;
@@ -251,7 +254,8 @@ public final class OpeningHand {
         }
         if (size >= 5 && lands >= size - 1) {
             score -= 35; // flooded: nothing to spend the mana on
-        } else if (size >= 6 && lands >= size - 2 && spells.size() <= 2 && arch != DeckPlan.Archetype.RAMP) {
+        } else if (size >= 6 && lands >= size - 2 && spells.size() <= 2 && arch != DeckPlan.Archetype.RAMP
+                && arch != DeckPlan.Archetype.LANDS) {
             score -= 15;
         }
         return Math.max(0, Math.min(100, score));
@@ -298,6 +302,8 @@ public final class OpeningHand {
                         || hasApi(c, ApiType.Sacrifice) || hasApi(c, ApiType.Fight));
             case RAMP:
                 return cmc <= 3 && (hasApi(c, ApiType.Mana) && !c.isInstant() && !c.isSorcery() || fetchesLand(c));
+            case LANDS:
+                return cmc <= 3 && !c.isLand() && (DeckPlan.isLandMatters(c) || fetchesLand(c));
             case COMBO:
                 return c.hasKeyword(Keyword.STORM) || cmc <= 2 && (hasApi(c, ApiType.Mana) || hasApi(c, ApiType.Draw))
                         || fetchesToHand(c);

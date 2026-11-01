@@ -9,8 +9,12 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPayLife;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.KeywordInterface;
@@ -20,7 +24,10 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 
 /**
@@ -49,7 +56,14 @@ import forge.game.zone.ZoneType;
  *   <li>{@link Kind#REPLENISH}: Replenish and the like. Enchantments are put into the graveyard on purpose (Intuition,
  *       Attunement, looting) and come back all at once, so the payoff waits until the graveyard is worth it;</li>
  *   <li>{@link Kind#GO_WIDE}: token and cheap creature decks with an overrun finisher (Craterhoof Behemoth, Overrun,
- *       Triumph of the Hordes): the finisher waits in hand until the board makes it lethal.</li>
+ *       Triumph of the Hordes): the finisher waits in hand until the board makes it lethal;</li>
+ *   <li>{@link Kind#DREDGE}: Golgari Grave-Troll, Stinkweed Imp and kin with the cards that work from the graveyard
+ *       (Bridge from Below, Ichorid, Prized Amalgam). The graveyard is the resource of the deck: the dredgers and the
+ *       cards that work from there are thrown away on purpose (looting, Careful Study), the right dredger is picked
+ *       for the size of the library, and Narcomoeba, which only works from the library, is kept;</li>
+ *   <li>{@link Kind#DARK_DEPTHS}: Dark Depths with Vampire Hexmage or Thespian's Stage. A Dark Depths on the table
+ *       that has lost its ice counters is a 20/20 flying indestructible Marit Lage, so the deck plays the land first
+ *       and then the piece that removes the counters. Lands are read for this one, the other kinds only read spells.</li>
  * </ul>
  * Every number in here is a small evaluator bonus (a 2/2 creature is worth about 150) that is only given while the
  * combo is still alive, so a deck that merely contains one stray combo card is never taken for a combo deck: each
@@ -57,7 +71,7 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -191,10 +205,15 @@ public final class ComboPlan {
      */
     public static ComboPlan scan(final Iterable<Card> cards) {
         final List<Card> spells = new ArrayList<>();
+        final List<Card> lands = new ArrayList<>();
         int scanned = 0;
         for (final Card c : cards) {
             scanned++;
-            if (c.isLand() || c.isToken() || c.isImmutable()) {
+            if (c.isToken() || c.isImmutable()) {
+                continue;
+            }
+            if (c.isLand()) {
+                lands.add(c); // only Dark Depths and Thespian's Stage need them
                 continue;
             }
             spells.add(c);
@@ -217,6 +236,7 @@ public final class ComboPlan {
         addIfFound(found, madness(spells));
         addIfFound(found, atog(spells));
         addIfFound(found, replenish(spells));
+        addIfFound(found, darkDepths(spells, lands));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -278,6 +298,11 @@ public final class ComboPlan {
         return find(kind) != null;
     }
 
+    /** Whether this is the only combo the deck was found to be built around. */
+    public boolean onlyHas(final Kind kind) {
+        return combos.size() == 1 && combos.get(0).kind == kind;
+    }
+
     private Combo find(final Kind kind) {
         for (final Combo c : combos) {
             if (c.kind == kind) {
@@ -307,6 +332,85 @@ public final class ComboPlan {
         return mass != null && anyNamed(player.getCardsIn(ZoneType.Library), mass.payoffs);
     }
 
+    /**
+     * Whether this player is playing a Living End style deck: Living End itself is still in the library (found by name,
+     * so that the deck is played right even when no deck plan was read), or the scan found a mass reanimation whose
+     * payoff is waiting in the library ({@link #wantsCyclingPriority}).
+     */
+    public boolean isMassReanimationDeck(final Player ai) {
+        if (ai == null) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            if (c.getName().equals("Living End")) {
+                return true;
+            }
+        }
+        return wantsCyclingPriority(ai);
+    }
+
+    /** What a Living End style deck thinks of a play, ahead of the normal heuristics ({@link #massReanimationRuling}). */
+    public enum Ruling {
+        /** The deck has nothing to say: the normal heuristics decide. */
+        NO_OPINION,
+        /** Do not even look at the play: it would waste the payoff (a cascade spell before the graveyard is ready). */
+        SKIP,
+        /** Play it: cycling and fuel while the library can afford it, the cascade spell once the swap is worth it. */
+        PLAY
+    }
+
+    /**
+     * The plays of a Living End style deck ({@link #isMassReanimationDeck}), decided here and not by the general play
+     * loop: cycling and the fuel plays go first while the library has 10 cards or more (and the life they cost can
+     * be spared), and a cascade spell waits until the swap pays (more than four creatures in the graveyard, or
+     * {@link #swapIsWorthIt}) and the board is not already full (four creatures), or the AI is in danger and has room
+     * for a blocker. Only {@link Ruling#PLAY} overrides the heuristics; a cost that cannot be paid or spared is no
+     * opinion, not a refusal.
+     *
+     * @param lifeInDanger whether {@code ComputerUtil.aiLifeInDanger} says so: slow, so asked once per decision by the
+     *                     caller and not per play
+     */
+    public Ruling massReanimationRuling(final Player ai, final SpellAbility sa, final boolean lifeInDanger) {
+        if (ai == null || sa == null || sa.getHostCard() == null) {
+            return Ruling.NO_OPINION;
+        }
+        if ((sa.isCycling() || isFuelPlay(sa)) && sa.canCastTiming(ai)
+                && ai.getCardsIn(ZoneType.Library).size() >= MASS_FUEL_MIN_LIBRARY) {
+            if (!ComputerUtilCost.canPayCost(sa, ai, sa.isTrigger())) {
+                return Ruling.NO_OPINION;
+            }
+            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                    && !ai.cantLoseForZeroOrLessLife()
+                    && ai.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                return Ruling.NO_OPINION; // the life is needed more than the card
+            }
+            return Ruling.PLAY;
+        }
+        if (!sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
+            return Ruling.NO_OPINION;
+        }
+        final int creatures = ai.getCreaturesInPlay().size();
+        if (lifeInDanger) {
+            return creatures >= MASS_FULL_BOARD ? Ruling.NO_OPINION : Ruling.PLAY;
+        }
+        if (CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES).size() > MASS_CREATURES_READY
+                || swapIsWorthIt(ai)) {
+            if (creatures >= MASS_FULL_BOARD) {
+                return Ruling.SKIP;
+            }
+            return !sa.getHostCard().isPermanent() && sa.canCastTiming(ai)
+                    && ComputerUtilCost.canPayCost(sa, ai, sa.isTrigger()) ? Ruling.PLAY : Ruling.NO_OPINION;
+        }
+        return Ruling.SKIP;
+    }
+
+    /** Cycling and fuel are only played while the library has this many cards: the deck must not deck itself. */
+    private static final int MASS_FUEL_MIN_LIBRARY = 10;
+    /** More creatures than this in the graveyard make a cascade into the swap worth it. */
+    private static final int MASS_CREATURES_READY = 4;
+    /** With this many creatures in play the swap would cost the AI its own board. */
+    private static final int MASS_FULL_BOARD = 4;
+
     /** Whether the cascade spells of a mass reanimation or cascade deck can only find the payoff. */
     public boolean isCascadeSafe() {
         final Combo mass = find(Kind.MASS_REANIMATION);
@@ -333,11 +437,15 @@ public final class ComboPlan {
             }
         }
         final boolean mass = find(Kind.MASS_REANIMATION) != null;
-        if (!mass && find(Kind.REANIMATOR) == null) {
+        final boolean dredge = find(Kind.DREDGE) != null;
+        if (!mass && !dredge && find(Kind.REANIMATOR) == null) {
             return false;
         }
         if (mass && isCyclingLike(sa)) {
             return true;
+        }
+        if (dredge && sa.isSpell() && isDiscardCostSpell(sa)) {
+            return true; // Cathartic Reunion and the like: the discard is the point, what is drawn is the bonus
         }
         final Card host = sa.getHostCard();
         if (host == null || !sa.isSpell() || !(host.isInstant() || host.isSorcery())) {
@@ -363,6 +471,10 @@ public final class ComboPlan {
         if (mad != null && madnessReady(player, mad) && player.getGame().getPhaseHandler().isPlayerTurn(player)
                 && player.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             return true; // only the Main 2 outlets are brought forward
+        }
+        final Combo dredge = find(Kind.DREDGE);
+        if (dredge != null && dredgeWantsFuel(player, dredge)) {
+            return true; // a dredger or a card that works from the graveyard is in hand and no engine is running yet
         }
         if (find(Kind.MASS_REANIMATION) != null) {
             return wantsCyclingPriority(player);
@@ -432,6 +544,9 @@ public final class ComboPlan {
                     break;
                 case TUTOR_STORM:
                     sum += tutorStormTerm(ai, combo);
+                    break;
+                case DARK_DEPTHS:
+                    sum += darkDepthsTerm(ai);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -744,20 +859,433 @@ public final class ComboPlan {
                 Collections.<String>emptySet(), false, "dredge=" + dredgers + ", fuel=" + fuel + ", payoffs=" + payoffs);
     }
 
+    /** Dredging with fewer cards than this left in the library costs the deck more than the cards it mills are worth. */
+    static final int DREDGE_SAFE_LIBRARY = 12;
+    private static final int DREDGE_CARD_VALUE = 12;
+    private static final int DREDGE_SHORT_PENALTY = 25;
+    /** Below this many cards in the library everything in the graveyard is worth less, in proportion. */
+    private static final int DREDGE_FULL_VALUE_LIBRARY = 16;
+
+    /**
+     * Progress of a dredge deck, in evaluator points. One dredger in the graveyard keeps the engine running, a second
+     * and a third are only back-ups (a draw can only be replaced once), while every card that works from the
+     * graveyard (Bridge from Below, Ichorid, Prized Amalgam, Dread Return) is worth its full share. A payoff that only
+     * works from the library (Narcomoeba) is worth nothing in the graveyard: it cannot flip from there. A short
+     * library makes the whole graveyard worth less, and 8 cards or fewer is a deck about to dredge itself out.
+     */
     private int dredgeTerm(final Player ai, final Combo combo) {
         final int lib = ai.getCardsIn(ZoneType.Library).size();
         if (lib <= 8) {
             return -200; // the deck must not dredge itself out
         }
-        int sum = 0;
+        int dredgers = 0;
+        int natives = 0;
         for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
             if (c.hasKeyword(Keyword.DREDGE)) {
-                sum += 30;
-            } else if (combo.payoffs.contains(c.getName())) {
-                sum += 60;
+                dredgers++;
+            } else if (combo.payoffs.contains(c.getName()) && worksFromGraveyard(c)) {
+                natives++;
             }
         }
+        int sum = Math.min(dredgers, 1) * 40 + Math.max(0, Math.min(dredgers, 3) - 1) * 15 + Math.min(natives, 4) * 55;
+        if (lib < DREDGE_FULL_VALUE_LIBRARY) {
+            sum = sum * lib / DREDGE_FULL_VALUE_LIBRARY;
+        }
         return Math.min(250, sum);
+    }
+
+    /**
+     * Whether the card does its work from the graveyard: a dredge, flashback, unearth or escape card, or one with a
+     * trigger, replacement effect, static ability or activated ability that is live there (Bridge from Below, Ichorid
+     * and Prized Amalgam trigger from the graveyard). Read from the card, not from a list of names.
+     */
+    public static boolean worksFromGraveyard(final Card c) {
+        if (c == null || c.isLand()) {
+            return false;
+        }
+        if (c.hasKeyword(Keyword.DREDGE) || c.hasKeyword(Keyword.FLASHBACK) || c.hasKeyword(Keyword.UNEARTH)
+                || c.hasKeyword(Keyword.ESCAPE)) {
+            return true;
+        }
+        for (final Trigger t : c.getTriggers()) {
+            if (t.getActiveZone() != null && t.getActiveZone().contains(ZoneType.Graveyard)) {
+                return true;
+            }
+        }
+        for (final ReplacementEffect r : c.getReplacementEffects()) {
+            if (r.getActiveZone() != null && r.getActiveZone().contains(ZoneType.Graveyard)) {
+                return true;
+            }
+        }
+        for (final StaticAbility s : c.getStaticAbilities()) {
+            if (s.getActiveZone() != null && s.getActiveZone().contains(ZoneType.Graveyard)) {
+                return true;
+            }
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && sa.getRestrictions() != null
+                    && sa.getRestrictions().getZone() == ZoneType.Graveyard) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A card a dredge deck would rather have in the graveyard than in the hand: a dredger, or a card that works from there. */
+    private static boolean belongsInGraveyard(final Card c, final Combo dredge) {
+        return c.hasKeyword(Keyword.DREDGE) || dredge.payoffs.contains(c.getName()) && worksFromGraveyard(c);
+    }
+
+    /** Whether a dredge deck has a reason to put cards into its graveyard before anything else this turn. */
+    private boolean dredgeWantsFuel(final Player player, final Combo dredge) {
+        if (player.getCardsIn(ZoneType.Library).size() <= DREDGE_SAFE_LIBRARY) {
+            return false; // the library is the limit now, not the graveyard
+        }
+        int dredgersAway = 0;
+        for (final Card c : player.getCardsIn(ZoneType.Graveyard)) {
+            dredgersAway += c.hasKeyword(Keyword.DREDGE) ? 1 : 0;
+        }
+        if (dredgersAway >= 2) {
+            return false; // the engine is running
+        }
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            if (belongsInGraveyard(c, dredge)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Which dredge card to use when several are in the graveyard. The game asks for one replacement effect and, with
+     * no opinion, takes the first of the list, whatever the library holds. The bigger the dredge the more fuel it
+     * mills, but every card it leaves the library short of {@link #DREDGE_SAFE_LIBRARY} costs more than that card is
+     * worth, so a deep library takes Golgari Grave-Troll and a thin one Life from the Loam. Null (no opinion) for a
+     * deck that is not a dredge deck and when something other than dredge is among the options.
+     */
+    public ReplacementEffect chooseDredge(final Player ai, final List<ReplacementEffect> options) {
+        if (ai == null || options == null || options.size() < 2 || find(Kind.DREDGE) == null) {
+            return null;
+        }
+        final int lib = ai.getCardsIn(ZoneType.Library).size();
+        ReplacementEffect best = null;
+        int bestScore = Integer.MIN_VALUE;
+        for (final ReplacementEffect re : options) {
+            if (!re.isKeyword(Keyword.DREDGE) || re.getHostCard() == null) {
+                return null; // some other replacement effect is among them: the normal rules choose
+            }
+            final int score = dredgeChoiceScore(re.getHostCard().getKeywordMagnitude(Keyword.DREDGE), lib);
+            if (score > bestScore) {
+                bestScore = score;
+                best = re;
+            }
+        }
+        return best;
+    }
+
+    /** What dredging this many cards is worth with this many cards in the library; hopeless when there are too few. */
+    public static int dredgeChoiceScore(final int amount, final int library) {
+        if (amount <= 0 || amount > library) {
+            return Integer.MIN_VALUE / 2;
+        }
+        final int shortfall = Math.max(0, DREDGE_SAFE_LIBRARY - (library - amount));
+        return DREDGE_CARD_VALUE * amount - DREDGE_SHORT_PENALTY * shortfall;
+    }
+
+    // ------------------------------------------------------------------------------------------------ Dark Depths
+
+    private static final String DARK_DEPTHS_NAME = "Dark Depths";
+    private static final String THESPIANS_STAGE = "Thespian's Stage";
+    private static final String MARIT_LAGE = "Marit Lage";
+    /** A Dark Depths and the piece that removes its counters are on the table: the next play is a 20/20. */
+    private static final int DEPTHS_READY = 300;
+
+    /**
+     * A spell or creature that removes every counter from a permanent (Vampire Hexmage), read from its ability.
+     * Thespian's Stage is the other way to a Dark Depths with no counters, but it is a land and is named where it is
+     * needed.
+     */
+    static boolean isCounterWiper(final Card c) {
+        if (c == null || c.isLand()) {
+            return false;
+        }
+        if (c.getName().equals("Vampire Hexmage")) {
+            return true;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getApi() == ApiType.RemoveCounter && "All".equals(sa.getParamOrDefault("CounterNum", ""))
+                    && "All".equals(sa.getParamOrDefault("CounterType", ""))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A spell that puts a land from the library onto the battlefield and sacrifices a land to do it (Crop Rotation,
+     * Sylvan Scrying is not one: it goes to the hand). Read from the ability, not from a name.
+     */
+    static boolean isLandTutor(final Card c) {
+        if (c == null || c.isLand() || !(c.isInstant() || c.isSorcery())) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isSpell() && sa.getApi() == ApiType.ChangeZone && "Library".equals(sa.getParamOrDefault("Origin", ""))
+                    && "Battlefield".equals(sa.getParamOrDefault("Destination", ""))
+                    && sa.getParamOrDefault("ChangeType", "").contains("Land")
+                    && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasIceCounters(final Card c) {
+        return c.getName().equals(DARK_DEPTHS_NAME) && c.getCounters(CounterType.getType("ICE")) > 0;
+    }
+
+    private static boolean isNamed(final Iterable<Card> cards, final String name) {
+        for (final Card c : cards) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Whether one of the pieces that take the counters off is in play or in hand (a Hexmage, Thespian's Stage). */
+    private static boolean haveWiper(final CardCollectionView board, final CardCollectionView hand) {
+        for (final CardCollectionView zone : new CardCollectionView[] { board, hand }) {
+            for (final Card c : zone) {
+                if (c.getName().equals(THESPIANS_STAGE) || isCounterWiper(c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What a land search should fetch for a Dark Depths deck: Dark Depths while there is none on the table or in hand
+     * (it is the card the deck is built around), then Thespian's Stage once a Dark Depths with its counters is out and
+     * nothing takes them off yet. Null for no opinion: the normal choice is made.
+     */
+    private Card depthsSearchPick(final Player ai, final CardCollectionView options) {
+        if (find(Kind.DARK_DEPTHS) == null) {
+            return null;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        boolean depthsOut = false;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE)) {
+                return null;
+            }
+            depthsOut |= hasIceCounters(c);
+        }
+        Card depths = null;
+        Card stage = null;
+        for (final Card c : options) {
+            if (c.getName().equals(DARK_DEPTHS_NAME) && depths == null) {
+                depths = c;
+            } else if (c.getName().equals(THESPIANS_STAGE) && stage == null) {
+                stage = c;
+            }
+        }
+        if (!depthsOut && depths != null && !isNamed(hand, DARK_DEPTHS_NAME)) {
+            return depths;
+        }
+        if (depthsOut && stage != null && !haveWiper(board, hand)) {
+            return stage;
+        }
+        return null;
+    }
+
+    /**
+     * Which land a Dark Depths deck plays first. The general rule scores a land by the mana it makes, so a Dark Depths
+     * (no mana) waits in the hand until nothing else is left, and the Stage is played as just another colorless land.
+     * Here the mana comes first (two sources, enough for a Hexmage or the Stage's own ability), then Dark Depths once a
+     * piece that takes the counters off is in play or in hand, then the Stage once Dark Depths is out. Null for no
+     * opinion; never for a lone land, there is nothing to choose then.
+     */
+    public Card chooseLand(final Player ai, final CardCollection playable) {
+        if (find(Kind.DARK_DEPTHS) == null || ai == null || playable == null || playable.size() < 2) {
+            return null;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        int mana = 0;
+        boolean depthsOut = false;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE)) {
+                return null;
+            }
+            depthsOut |= hasIceCounters(c);
+            if (c.isLand() && !c.getName().equals(THESPIANS_STAGE) && !c.getManaAbilities().isEmpty()) {
+                mana++;
+            }
+        }
+        if (mana < 2) {
+            return null; // the mana first: the normal rule picks the best source
+        }
+        Card depths = null;
+        Card stage = null;
+        for (final Card c : playable) {
+            if (c.getName().equals(DARK_DEPTHS_NAME) && depths == null) {
+                depths = c;
+            } else if (c.getName().equals(THESPIANS_STAGE) && stage == null) {
+                stage = c;
+            }
+        }
+        if (!depthsOut && depths != null && haveWiper(board, hand)) {
+            return depths;
+        }
+        if (depthsOut && stage != null && !isNamed(board, THESPIANS_STAGE)) {
+            return stage;
+        }
+        return null;
+    }
+
+    /**
+     * What a Dark Depths deck thinks of the activated abilities that take the counters off, ahead of the normal
+     * heuristics. The ability of Dark Depths itself (3 mana for one of ten counters) is ordinary as far as the general
+     * rules can tell, so they pay for it while Thespian's Stage or a Hexmage sits there doing nothing: with a piece
+     * that takes all of them off in play or in hand it is {@link Ruling#SKIP}. The piece itself is {@link Ruling#PLAY}
+     * once a Dark Depths with its counters is out and the cost can be paid, aimed at that Dark Depths (the general
+     * rules would pick any land for the Stage, or find no use for it at all: copying a legend the AI already has).
+     * Everything else, and every other deck, is {@link Ruling#NO_OPINION}.
+     */
+    public Ruling darkDepthsRuling(final Player ai, final SpellAbility sa) {
+        if (ai == null || sa == null || sa.getHostCard() == null || !sa.isActivatedAbility()
+                || find(Kind.DARK_DEPTHS) == null) {
+            return Ruling.NO_OPINION;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        Card depths = null;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE)) {
+                return Ruling.NO_OPINION; // done
+            }
+            if (depths == null && hasIceCounters(c)) {
+                depths = c;
+            }
+        }
+        if (depths == null) {
+            return Ruling.NO_OPINION;
+        }
+        final Card host = sa.getHostCard();
+        final String api = sa.getApi() == null ? "" : sa.getApi().name();
+        if (host.getName().equals(DARK_DEPTHS_NAME)) {
+            return api.equals("RemoveCounter") && haveWiper(board, ai.getCardsIn(ZoneType.Hand))
+                    ? Ruling.SKIP : Ruling.NO_OPINION;
+        }
+        final boolean stage = host.getName().equals(THESPIANS_STAGE) && api.equals("Clone");
+        final boolean hexmage = isCounterWiper(host) && api.startsWith("RemoveCounter");
+        if (!(stage || hexmage) || !host.isInZone(ZoneType.Battlefield) || !sa.usesTargeting() || !sa.canTarget(depths)
+                || !ComputerUtilCost.canPayCost(sa, ai, false)) {
+            return Ruling.NO_OPINION;
+        }
+        sa.resetTargets();
+        sa.getTargets().add(depths);
+        return Ruling.PLAY;
+    }
+
+    private static Combo darkDepths(final List<Card> spells, final List<Card> lands) {
+        int depths = 0;
+        int stages = 0;
+        int wipers = 0;
+        final Set<String> enablers = new LinkedHashSet<>();
+        for (final Card c : lands) {
+            if (c.getName().equals(DARK_DEPTHS_NAME)) {
+                depths++;
+            } else if (c.getName().equals(THESPIANS_STAGE)) {
+                stages++;
+                enablers.add(c.getName());
+            }
+        }
+        int tutors = 0;
+        for (final Card c : spells) {
+            if (isCounterWiper(c)) {
+                wipers++;
+                enablers.add(c.getName());
+            } else if (isLandTutor(c)) {
+                tutors++;
+                enablers.add(c.getName()); // Crop Rotation puts Dark Depths onto the battlefield at instant speed
+            }
+        }
+        // a deck built around it plays a few of each: one stray Hexmage next to a lone Dark Depths is not a combo deck
+        if (depths < 2 || wipers + stages < 3) {
+            return null;
+        }
+        final Set<String> payoffs = new LinkedHashSet<>();
+        payoffs.add(DARK_DEPTHS_NAME);
+        return new Combo(Kind.DARK_DEPTHS, 30 + 6 * Math.min(depths, 4) + 5 * Math.min(wipers + stages, 8)
+                + 2 * Math.min(tutors, 4), payoffs, enablers, Collections.<String>emptySet(), false,
+                "depths=" + depths + ", hexmage=" + wipers + ", stage=" + stages + ", tutor=" + tutors);
+    }
+
+    /**
+     * Progress towards Marit Lage, in evaluator points. The land comes first (it makes no mana and does nothing by
+     * itself, which is why the rollouts would never see a reason to play it); then the piece that takes the counters
+     * off, which is a creature that can be sacrificed at once, or Thespian's Stage with the mana to use it. When the
+     * token is on the table the evaluator counts the 20/20 itself, so there is nothing left to add. The ready board
+     * is worth less than the token it turns into, which is why the rollouts still go and make it.
+     */
+    private int darkDepthsTerm(final Player ai) {
+        final CounterType ice = CounterType.getType("ICE");
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        boolean depthsOut = false;
+        boolean wiperOut = false;
+        boolean stageOut = false;
+        int mana = 0;
+        for (final Card c : board) {
+            final String n = c.getName();
+            if (n.equals(MARIT_LAGE)) {
+                return 0;
+            }
+            if (n.equals(DARK_DEPTHS_NAME) && c.getCounters(ice) > 0) {
+                depthsOut = true;
+            } else if (n.equals(THESPIANS_STAGE)) {
+                stageOut = true;
+            } else if (isCounterWiper(c)) {
+                wiperOut = true;
+            } else if (c.isLand() && !c.getManaAbilities().isEmpty()) {
+                mana++; // what pays for Hexmage or the Stage; the Stage taps for its own ability
+            }
+        }
+        boolean wiperInHand = false;
+        boolean stageInHand = false;
+        boolean depthsInHand = false;
+        for (final Card c : hand) {
+            wiperInHand |= isCounterWiper(c);
+            stageInHand |= c.getName().equals(THESPIANS_STAGE);
+            depthsInHand |= c.getName().equals(DARK_DEPTHS_NAME);
+        }
+        if (depthsOut) {
+            if (wiperOut) {
+                return DEPTHS_READY;
+            }
+            if (stageOut && mana >= 2) {
+                return DEPTHS_READY - 20;
+            }
+            if (wiperInHand && mana >= 2) {
+                return 220;
+            }
+            return stageInHand || stageOut ? 120 : ONE_PIECE_BONUS;
+        }
+        if (depthsInHand) {
+            return wiperOut || wiperInHand || stageOut || stageInHand ? 90 : 30;
+        }
+        boolean tutorInHand = false;
+        for (final Card c : hand) {
+            tutorInHand |= isLandTutor(c);
+        }
+        if (tutorInHand && isNamed(ai.getCardsIn(ZoneType.Library), DARK_DEPTHS_NAME)) {
+            // Crop Rotation can put Dark Depths onto the table, so the piece that takes its counters off is worth more
+            return wiperOut || wiperInHand || stageOut || stageInHand ? 110 : 50;
+        }
+        return wiperOut ? 25 : 0;
     }
 
     // ------------------------------------------------------------------------------------------------- madness
@@ -1356,7 +1884,14 @@ public final class ComboPlan {
             lands += x.isLand() ? 1 : 0;
         }
         if (c.isLand()) {
-            return lands < 4 ? 45 : -40;
+            // Crop Rotation and the like: the land that is a piece of the deck (Dark Depths, Thespian's Stage) first
+            int piece = 0;
+            for (final Combo combo : combos) {
+                if (combo.kind == Kind.DARK_DEPTHS) {
+                    piece += pieceScore(c, combo, hand, board, graveyardRest);
+                }
+            }
+            return piece > 0 ? piece : lands < 4 ? 45 : -40;
         }
         int s = 0;
         for (final Combo combo : combos) {
@@ -2331,6 +2866,9 @@ public final class ComboPlan {
             }
             return best != null ? best : land;
         }
+        if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)) {
+            return depthsSearchPick(ai, options); // Crop Rotation: the land the deck is built around, or no opinion
+        }
         if (destination == ZoneType.Graveyard && origin.contains(ZoneType.Library) && wantsGraveyardFuel()) {
             for (final Card c : options) {
                 if (!c.isCreature()) {
@@ -2338,6 +2876,7 @@ public final class ComboPlan {
                 }
                 // a legend that is already in play and working is no use in the graveyard either
                 final int v = (isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c) ? 1000 : 0)
+                        + (find(Kind.DREDGE) != null && c.hasKeyword(Keyword.DREDGE) ? 400 : 0)
                         + ComputerUtilCard.evaluateCreature(c);
                 if (v > bestValue) {
                     bestValue = v;
@@ -2363,7 +2902,8 @@ public final class ComboPlan {
     }
 
     private boolean wantsGraveyardFuel() {
-        return find(Kind.MASS_REANIMATION) != null || find(Kind.REANIMATOR) != null || find(Kind.REPLENISH) != null;
+        return find(Kind.MASS_REANIMATION) != null || find(Kind.REANIMATOR) != null || find(Kind.REPLENISH) != null
+                || find(Kind.DREDGE) != null;
     }
 
     /**
@@ -2425,6 +2965,9 @@ public final class ComboPlan {
             if (combo.kind == Kind.MADNESS || combo.kind == Kind.ATOG) {
                 continue; // a madness card is meant to be discarded; the atog's fuel is its hand
             }
+            if (combo.kind == Kind.DREDGE && belongsInGraveyard(c, combo)) {
+                continue; // Bridge from Below, Ichorid, a dredger: worth more in the graveyard than in the hand
+            }
             if (combo.payoffs.contains(n) && !(c.isCreature() && isBigTarget(c)) || combo.cascaders.contains(n)
                     || combo.kind == Kind.REANIMATOR && combo.enablers.contains(n) && isReanimationSpell(c)) {
                 return true;
@@ -2436,6 +2979,15 @@ public final class ComboPlan {
     private int discardScore(final Player ai, final Card c) {
         if (isProtected(c)) {
             return -1000; // the payoff, a reanimation spell or a cascade spell: the deck needs it in hand
+        }
+        final Combo dredge = find(Kind.DREDGE);
+        if (dredge != null && belongsInGraveyard(c, dredge)) {
+            // a dredger first while none is in the graveyard (it is the engine), then the cards that work from there
+            int dredgersAway = 0;
+            for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+                dredgersAway += g.hasKeyword(Keyword.DREDGE) ? 1 : 0;
+            }
+            return 300 + (c.hasKeyword(Keyword.DREDGE) ? (dredgersAway < 2 ? 60 : -40) + c.getKeywordMagnitude(Keyword.DREDGE) : 0);
         }
         if (c.isLand()) {
             int lands = 0;
@@ -2575,6 +3127,15 @@ public final class ComboPlan {
             }
         }
         return false;
+    }
+
+    /** A spell whose extra cost is to discard other cards from the hand (Cathartic Reunion, Tormenting Voice). */
+    private static boolean isDiscardCostSpell(final SpellAbility sa) {
+        if (sa.getPayCosts() == null || !sa.getPayCosts().hasSpecificCostType(CostDiscard.class)) {
+            return false;
+        }
+        final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+        return d != null && !d.payCostFromSource();
     }
 
     private static boolean isSelfFuelSpell(final SpellAbility sa) {
