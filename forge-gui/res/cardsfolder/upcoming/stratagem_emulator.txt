@@ -1,0 +1,9 @@
+Name:Stratagem Emulator
+ManaCost:2 W
+Types:Artifact Creature Borg
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create X 1/1 colorless Borg artifact creature tokens, where X is its power.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_borg | TokenOwner$ You
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Token
+Oracle:When this creature dies, create X 1/1 colorless Borg artifact creature tokens, where X is its power.
