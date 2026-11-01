@@ -309,14 +309,16 @@ public class PlayerDetailsPanel extends JPanel {
         @Override
         public void onContentUpdate() {
             FThreads.assertExecutedByEdt(true);
-            for(ZoneType zone : supportedZones) {
-                int count = player.getZoneSize(zone);
-                if(!featuredZones.containsKey(zone)) {
-                    if(count == 0)
-                        continue;
-                    this.addZone(zone);
+            if (zoneActionFactory != null) {
+                for (ZoneType zone : supportedZones) {
+                    int count = player.getZoneSize(zone);
+                    if (!featuredZones.containsKey(zone)) {
+                        if (count == 0)
+                            continue;
+                        this.addZone(zone);
+                    }
+                    featuredZones.get(zone).setText(getZoneLabelText(zone));
                 }
-                featuredZones.get(zone).setText(getZoneLabelText(zone));
             }
             if(supportedZones.isEmpty()) {
                 setEnabled(false);
