@@ -105,13 +105,14 @@ public final class CardFacePredicates {
                         int i = Integer.parseInt(m.substring(5));
                         if (!hasCMC(input, i)) return false;
                     } else if (m.startsWith("set")) {
-                         String setCode = m.substring(3);
-                         CardEdition edition = StaticData.instance().getCardEdition(setCode);
-                         if (edition != null) {
-                             if (edition.getCardInSet(input.getName()).isEmpty()) {
-                                 return false;
-                             }
-                         }
+                        String setCode = m.substring(3);
+                        CardEdition edition = StaticData.instance().getCardEdition(setCode);
+                        if (edition == null) {
+                            return false;
+                        }
+                        if (edition.getCardInSet(input.getName()).isEmpty()) {
+                            return false;
+                        }
                     } else if (!hasProperty(input, m)) {
                         return false;
                     }
