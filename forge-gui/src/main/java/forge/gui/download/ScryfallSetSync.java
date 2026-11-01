@@ -138,8 +138,9 @@ final class ScryfallSetSync {
         String query = (preferredLang != null && !preferredLang.isEmpty() && !"en".equalsIgnoreCase(preferredLang))
                 ? "set:" + setCode + " (lang:en or lang:" + preferredLang + ")"
                 : "set:" + setCode + " lang:en";
+        // include_extras so that token sets (e.g. TNEO) return their tokens as well
         // Fix encode for Android 12 and below
-        return base + "?unique=prints&q=" + URLEncoder.encode(query, "UTF-8");
+        return base + "?unique=prints&include_extras=true&q=" + URLEncoder.encode(query, "UTF-8");
     }
 
     /** Shared with {@link ScryfallBulkDataSync}. */

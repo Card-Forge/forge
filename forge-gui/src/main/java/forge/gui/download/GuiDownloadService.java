@@ -35,9 +35,16 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
 import java.net.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,10 +77,12 @@ public abstract class GuiDownloadService implements Runnable {
 
     // Progress variables
     private Map<String, String> files; // local path -> url
-    protected boolean cancel;
+    protected volatile boolean cancel;
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
     private int skipped = 0;
+    private int completed = 0;
+    private final AtomicInteger started = new AtomicInteger();
     private long lTime = System.currentTimeMillis();
 
     protected GuiDownloadService() {
@@ -222,19 +231,57 @@ public abstract class GuiDownloadService implements Runnable {
         btnStart.requestFocusInWindow();
     }
 
+    /** How many files are downloaded at once. Only services that fetch from a host without rate limits should raise this. */
+    protected int getThreadCount() {
+        return 1;
+    }
+
     @Override
     public void run() {
         GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while downloading
 
-        Proxy p = getProxy();
+        final Proxy p = getProxy();
+        final Iterator<Entry<String, String>> queue = files.entrySet().iterator();
+        final int threads = Math.min(getThreadCount(), files.size());
 
+        if (threads > 1) {
+            // sized by the request, not by the CPU count: these threads spend their time waiting on the network
+            final ExecutorService pool = Executors.newFixedThreadPool(threads, r -> {
+                Thread t = new Thread(r);
+                t.setDaemon(true);
+                return t;
+            });
+            for (int i = 0; i < threads; i++) {
+                pool.execute(() -> downloadQueued(queue, p));
+            }
+            pool.shutdown();
+            try {
+                pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            } catch (InterruptedException e) {
+                pool.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        } else {
+            downloadQueued(queue, p);
+        }
+
+        GuiBase.getInterface().preventSystemSleep(false);
+    }
+
+    /** Downloads files taken from the shared queue until it is empty or the download is cancelled. */
+    private void downloadQueued(final Iterator<Entry<String, String>> queue, final Proxy p) {
         boolean cardSkipped;
         int bufferLength;
-        int count = 0;
-        int totalCount = files.size();
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[8192];
 
-        for (Entry<String, String> kv : files.entrySet()) {
+        while (true) {
+            final Entry<String, String> kv;
+            synchronized (queue) {
+                if (!queue.hasNext()) {
+                    break;
+                }
+                kv = queue.next();
+            }
             boolean isJPG = true;
             boolean isLogged = false;
             boolean fullborder = false;
@@ -242,7 +289,7 @@ public abstract class GuiDownloadService implements Runnable {
                 GuiBase.getInterface().preventSystemSleep(false);
                 break; }
 
-            count++;
+            final int index = started.incrementAndGet();
             cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
 
@@ -251,9 +298,10 @@ public abstract class GuiDownloadService implements Runnable {
             final String filePath = fileDest.getPath();
             final String subLastIndex = filePath.contains("pics") ? "\\pics\\" : filePath.contains("skins") ? "\\"+FileUtil.getParent(filePath)+"\\" : "\\db\\";
 
-            System.out.println(count + "/" + totalCount + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
+            System.out.println(index + "/" + files.size() + " - .." + filePath.substring(filePath.lastIndexOf(subLastIndex)+1));
 
             FileOutputStream fos = null;
+            File tmpDest = null;
             try {
                 final File base = fileDest.getParentFile();
                 if (ScryfallRateLimiter.isApiUrl(url)) {
@@ -313,11 +361,21 @@ public abstract class GuiDownloadService implements Runnable {
 
                     switch (conn.getResponseCode()) {
                     case HttpURLConnection.HTTP_OK:
-                        fos = new FileOutputStream(fileDest);
+                        tmpDest = new File(fileDest.getPath() + ".tmp");
+                        fos = new FileOutputStream(tmpDest);
                         InputStream inputStream = conn.getInputStream();
+                        long received = 0;
                         while ((bufferLength = inputStream.read(buffer)) > 0) {
                             fos.write(buffer, 0, bufferLength);
+                            received += bufferLength;
                         }
+                        fos.close();
+                        fos = null;
+                        // a dropped connection ends the stream like a finished one, so compare with what the server promised
+                        if (conn.getContentLengthLong() >= 0 && received != conn.getContentLengthLong()) {
+                            throw new IOException("Incomplete download: got " + received + " of " + conn.getContentLengthLong() + " bytes");
+                        }
+                        Files.move(tmpDest.toPath(), fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         cardSkipped = false;
                         break;
                     case HttpURLConnection.HTTP_NOT_FOUND:
@@ -360,15 +418,20 @@ public abstract class GuiDownloadService implements Runnable {
                         System.out.println("  Error closing output stream");
                     }
                 }
+                if (tmpDest != null) {
+                    tmpDest.delete(); //only still there if the transfer failed
+                }
             }
 
-            update(count);
-            if (cardSkipped) {
-                skipped++;
-            }
+            finishItem(cardSkipped);
         }
+    }
 
-        GuiBase.getInterface().preventSystemSleep(false);
+    private synchronized void finishItem(final boolean cardSkipped) {
+        if (cardSkipped) {
+            skipped++;
+        }
+        update(++completed); //posted while holding the lock so progress reaches the EDT in order
     }
 
     @SuppressWarnings("deprecation")

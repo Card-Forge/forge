@@ -339,6 +339,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void clearImageCache() {
         ImageCache.getInstance().clear();
+        ImageCache.getInstance().disposeTextures();
         ImageKeys.clearMissingCards();
     }
 
