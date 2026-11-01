@@ -7056,11 +7056,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
+    public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA, Map<AbilityKey, Object> params) {
         if (isPhasedOut() && !attach.isPhasedOut()) {
             return getDisplayName() + " is phased out";
         }
-        return super.cantBeAttachedMsg(attach, sa, checkSBA);
+        return super.cantBeAttachedMsg(attach, sa, checkSBA, params);
     }
 
     public final boolean canBeSacrificedBy(final SpellAbility source, final boolean effect) {

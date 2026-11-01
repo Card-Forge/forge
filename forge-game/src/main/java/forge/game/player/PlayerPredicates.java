@@ -1,10 +1,12 @@
 package forge.game.player;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -63,6 +65,9 @@ public final class PlayerPredicates {
 
     public static Predicate<Player> canBeAttached(final Card aura, SpellAbility sa) {
         return p -> p.canBeAttached(aura, sa);
+    }
+    public static Predicate<Player> canBeAttached(final Card aura, final SpellAbility sa, final Map<AbilityKey, Object> params) {
+        return p -> p.canBeAttached(aura, sa, false, params);
     }
 
     public static Predicate<Player> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
