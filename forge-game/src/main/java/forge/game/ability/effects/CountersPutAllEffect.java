@@ -27,15 +27,27 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         sb.append(Lang.nounWithNumeralExceptOne(amount, cType.getName().toLowerCase() + " counter"));
         sb.append(" on each ");
         if (sa.hasParam("ValidCardsDesc")) {
-            sb.append(sa.getParam("ValidCardsDesc")).append(".");
+            sb.append(sa.getParam("ValidCardsDesc"));
         } else {
             sb.append("valid ");
             if (zone.matches("Battlefield")) {
-                sb.append("permanent.");
+                sb.append("permanent");
             } else {
-                sb.append("card in ").append(zone).append(".");
+                sb.append("card in ").append(zone);
             }
         }
+        if (sa.hasParam("ValidCardsDesc2")) {
+            final CounterType cType2 = CounterType.getType(sa.getParam("CounterType2"));
+            final int amount2 = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("CounterNum2", "1"), sa);
+
+            sb.append(" and put ");
+            sb.append(Lang.nounWithNumeralExceptOne(amount2, cType2.getName().toLowerCase() + " counter"));
+            sb.append(" on each ");
+
+            sb.append(sa.getParam("ValidCardsDesc2"));
+        }
+
+        sb.append(".");
 
         return sb.toString();
     }

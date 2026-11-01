@@ -64,6 +64,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
             .add("Description", "SpellDescription", "StackDescription", "TriggerDescription")
             .add("ChangeTypeDesc", "ValidTgtsDesc")
+            .add("ValidCardsDesc", "ValidCardsDesc2") // CountersPutAllEffect
             .build();
 
     /**
