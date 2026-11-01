@@ -720,6 +720,11 @@ public class CombatUtil {
             }
         }
 
+        final int maxBlockers = StaticAbilityBlockRestrict.blockRestrictNum(defending);
+        if (blockers.size() > maxBlockers) {
+            return TextUtil.concatWithSpace("No more than", String.valueOf(maxBlockers), "creatures can block each combat.");
+        }
+
         for (final Card attacker : attackers) {
             int cntBlockers = combat.getBlockers(attacker).size();
             // don't accept blocker amount for attackers with keyword defining valid blockers amount
@@ -767,7 +772,6 @@ public class CombatUtil {
 
                 if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
                     final List<Card> blockers = defendingPlayer.getCreaturesInPlay();
-                    blockers.remove(blocker);
                     if (!canBeBlocked(attacker, blockers, combat)) {
                         canBe = false;
                     }
@@ -805,11 +809,21 @@ public class CombatUtil {
             return false;
         }
 
+        // a creature that can't block alone is not required to block if no other creature can block with it
+        if ((blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone."))
+                && blocker.getController().getCreaturesInPlay().stream().noneMatch(c -> c != blocker && canBlockAtLeastOne(c, attackers))) {
+            return false;
+        }
+
         if (combat.getAttackersBlockedBy(blocker).containsAll(requirementCards)) {
             return false;
         }
 
         if (!canBlock(blocker, combat)) {
+            // the maximum number of blockers is already reached by others
+            if (combat.getAttackersBlockedBy(blocker).isEmpty()) {
+                return false;
+            }
             // the blocker can't block more but is he even part of another requirement?
             for (final Card attacker : attackers) {
                 final boolean requirementSatisfied = attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker));
