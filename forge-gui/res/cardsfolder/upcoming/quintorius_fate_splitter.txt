@@ -1,0 +1,15 @@
+Name:Quintorius, Fate Splitter
+ManaCost:3 W U
+Types:Legendary Planeswalker Quintorius
+Loyalty:5
+S:Mode$ NumLoyaltyAct | CheckSVar$ X | ValidCard$ Planeswalker.YouCtrl | Twice$ True | Description$ As long as NICKNAME entered this turn, you may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.Self
+A:AB$ Proliferate | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True |SubAbility$ DBGainLife | SpellDescription$ Proliferate. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+A:AB$ Seek |  Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Type$ Planeswalker.nonQuintorius | SpellDescription$ Seek a non-Quintorius planeswalker card.
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | TokenScript$ cadet | TokenOwner$ You | Planeswalker$ True | SubAbility$ DBPutCounterAll | SpellDescription$ Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then put a +1/+1 counter on each creature you control.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 
+DeckHas:Ability$Token|Counters
+DeckHints:Type$Planeswalker & Ability$Counters
+SVar:PlayMain1:TRUE
+Oracle:As long as Quintorius entered this turn, you may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.\n[0]: Proliferate. You gain 3 life.\n[−1]: Seek a non-Quintorius planeswalker card.\[n−3]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Then put a +1/+1 counter on each creature you control.

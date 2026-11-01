@@ -1,0 +1,11 @@
+Name:Paradox Kraken
+ManaCost:4 U U
+Types:Creature Kraken
+PT:7/7
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Graveyard | Execute$ TrigConjure | TriggerDescription$ When this card is put into your graveyard from anywhere, conjure a card named Kraken Hatchling into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Kraken Hatchling | Zone$ Hand
+A:AB$ ChangeZone | Cost$ 1 U  | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | CheckSVar$ X | SVarCompare$ LTY | SpellDescription$ Return this card from your graveyard to the battlefield. Activate only if there are more cards in your graveyard than your library and only as a sorcery.
+DeckHints:Ability$Mill
+SVar:X:Count$ValidLibrary Card.YouOwn
+SVar:Y:Count$ValidGraveyard Card.YouOwn
+Oracle:When this card is put into your graveyard from anywhere, conjure a card named Kraken Hatchling into your hand.\n{1}{U}: Return this card from your graveyard to the battlefield. Activate only if there are more cards in your graveyard than your library and only as a sorcery.

@@ -1,0 +1,19 @@
+Name:Rootha, Ardent Artisan
+ManaCost:R G
+Types:Legendary Creature Orc Artificer
+PT:2/3
+A:AB$ AlterAttribute | Cost$ Sac<1/Artifact> | Attributes$ Prepared | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ NICKNAME becomes prepared. Activate only as a sorcery and only once each turn.
+AlternateMode:Prepare
+Oracle:Sacrifice an artifact: Rootha becomes prepared. Activate only as a sorcery and only once each turn.
+
+ALTERNATE
+
+Name:Next Iteration
+ManaCost:X R
+Types:Sorcery
+A:SP$ NameCard | AtRandom$ True | ValidCards$ Artifact.cmcEQY | SubAbility$ DBConjure | SpellDescription$ Conjure a random artifact card with mana value X plus 1 onto the battlefield.
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Battlefield | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True
+SVar:Y:SVar$X/Plus.1
+SVar:X:Count$xPaid
+Oracle:Conjure a random artifact card with mana value X plus 1 onto the battlefield.

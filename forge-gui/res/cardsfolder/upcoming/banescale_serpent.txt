@@ -1,0 +1,12 @@
+Name:Banescale Serpent
+ManaCost:3 U R
+Types:Creature Serpent
+PT:5/5
+K:Vigilance
+K:Haste
+K:Protection:Instant:instants
+K:ETBReplacement:Other:RepeatOpp
+SVar:RepeatOpp:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChooseType | SpellDescription$ As this creature enters, for each opponent, note the most prevalent creature type in their library.
+SVar:DBChooseType:DB$ ChooseType | Type$ Creature | MostPrevalentInDefinedZone$ RememberedPlayer_Library | Note$ True
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Protection:Creature.NotedType| Description$ This creature has protection from each of the noted creature types.
+Oracle:Vigilance\nHaste\nProtection from instants\nAs this creature enters, for each opponent, note the most prevalent creature type in their library.\nThis creature has protection from each of the noted creature types.
