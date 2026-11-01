@@ -92,6 +92,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
 
         if (validAmount <= 0) {
+            // Choosing nothing must clear any prior choice; otherwise a following
+            // SubAbility (e.g. RepeatEach over ChosenCard) can reuse a stale card
+            // after the last legal choice left the battlefield (Magnetic Mountain et al.).
+            host.setChosenCards(allChosen);
             return;
         }
 
