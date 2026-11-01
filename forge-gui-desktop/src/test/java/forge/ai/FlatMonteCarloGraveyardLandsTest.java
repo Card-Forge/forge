@@ -274,6 +274,70 @@ public class FlatMonteCarloGraveyardLandsTest extends AITest {
         AssertJUnit.assertEquals(ComboPlan.Ruling.NO_OPINION, plan.combos.darkDepthsRuling(p, copy));
     }
 
+    // ------------------------------------------------------------------ the Legacy Lands hand and Crop Rotation
+
+    private CardCollection handOf(final Player p, final String... names) {
+        final CardCollection hand = new CardCollection();
+        for (final String n : names) {
+            hand.add(addCardToZone(n, p, ZoneType.Hand));
+        }
+        return hand;
+    }
+
+    @Test
+    public void aHandWithDarkDepthsTheStageAndTwoSourcesIsKept() {
+        final Game game = initAndCreateGame();
+        final Player p = legacyLands(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final CardCollection hand = handOf(p, "Dark Depths", "Thespian's Stage", "Forest", "Forest", "Wasteland",
+                "Exploration", "Crop Rotation");
+        AssertJUnit.assertTrue(OpeningHand.keep(p, hand, 0, true, plan, 4));
+    }
+
+    @Test
+    public void theLondonMulliganKeepsDarkDepthsAndTheStage() {
+        final Game game = initAndCreateGame();
+        final Player p = legacyLands(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final CardCollection hand = handOf(p, "Dark Depths", "Thespian's Stage", "Forest", "Forest", "Wasteland",
+                "Karakas", "Maze of Ith", "Exploration");
+        final CardCollection bottom = OpeningHand.toBottom(p, hand, 1, true, plan);
+        AssertJUnit.assertEquals(1, bottom.size());
+        AssertJUnit.assertFalse(bottom.get(0).getName().equals("Dark Depths"));
+        AssertJUnit.assertFalse(bottom.get(0).getName().equals("Thespian's Stage"));
+    }
+
+    @Test
+    public void cropRotationWaitsForSomethingToTakeTheCountersOff() {
+        final Game game = initAndCreateGame();
+        final Player p = legacyLands(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        final SpellAbility crop = addCardToZone("Crop Rotation", p, ZoneType.Hand).getFirstSpellAbility();
+        crop.setActivatingPlayer(p);
+        AssertJUnit.assertEquals(ComboPlan.Ruling.SKIP, plan.combos.darkDepthsRuling(p, crop));
+
+        // the Stage in hand and mana for G and its 2: the normal rules decide
+        addCardToZone("Thespian's Stage", p, ZoneType.Hand);
+        addCard("Forest", p);
+        AssertJUnit.assertEquals(ComboPlan.Ruling.NO_OPINION, plan.combos.darkDepthsRuling(p, crop));
+    }
+
+    @Test
+    public void cropRotationWaitsWhenTheStageCouldNotBePaidForAfterwards() {
+        final Game game = initAndCreateGame();
+        final Player p = legacyLands(game);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Thespian's Stage", p);
+        final SpellAbility crop = addCardToZone("Crop Rotation", p, ZoneType.Hand).getFirstSpellAbility();
+        crop.setActivatingPlayer(p);
+        AssertJUnit.assertEquals(ComboPlan.Ruling.SKIP, plan.combos.darkDepthsRuling(p, crop));
+    }
+
     // ------------------------------------------------------------------------------------------------- lands
 
     private Player landsDeck(final Game game) {

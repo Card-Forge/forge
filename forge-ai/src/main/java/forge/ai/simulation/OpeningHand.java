@@ -31,6 +31,9 @@ public final class OpeningHand {
     private OpeningHand() {
     }
 
+    /** A hand that can make Marit Lage by turn two or three is worth keeping whatever else it holds. */
+    private static final int DEPTHS_READY_HAND = 25;
+
     /** Score a kept hand of this size must reach: smaller hands are judged less strictly, 4 or fewer are always kept. */
     static int keepBar(final int handSize) {
         if (handSize >= 7) {
@@ -211,13 +214,26 @@ public final class OpeningHand {
         final int size = hand.size();
         int lands = 0;
         int rocks = 0;
+        int landKeys = 0;
+        boolean access = false;
+        boolean quickWiper = false;
+        boolean stage = false;
+        final boolean depths = plan != null && plan.combos.has(ComboPlan.Kind.DARK_DEPTHS);
         byte colors = 0;
         final List<Card> spells = new ArrayList<>();
         for (final Card c : hand) {
+            if (depths) {
+                access |= ComboPlan.isDepthsAccess(c);
+                stage |= ComboPlan.isStage(c);
+                quickWiper |= ComboPlan.isCounterWiper(c);
+            }
             if (c.isLand()) {
                 if (CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
                     lands++;
                     colors |= producedColors(c);
+                }
+                if (depths && ComboPlan.isDepthsPiece(c)) {
+                    landKeys++; // Dark Depths and the Stage are lands, and the pieces the deck is built around
                 }
             } else {
                 spells.add(c);
@@ -226,7 +242,7 @@ public final class OpeningHand {
                 }
             }
         }
-        if (spells.isEmpty()) {
+        if (spells.isEmpty() && landKeys == 0) {
             return 0;
         }
         // a ramp deck counts its cheap mana sources as lands once there are two lands to cast them
@@ -235,7 +251,7 @@ public final class OpeningHand {
         final double hit = atLeast(w.lands - sources, draws, lib.size, lib.lands);
 
         double early = 0;
-        int keys = 0;
+        int keys = landKeys;
         for (final Card c : spells) {
             if (c.getCMC() <= w.playCmc) {
                 early += colorCredit(c, colors, lib);
@@ -257,6 +273,14 @@ public final class OpeningHand {
         } else if (size >= 6 && lands >= size - 2 && spells.size() <= 2 && arch != DeckPlan.Archetype.RAMP
                 && arch != DeckPlan.Archetype.LANDS) {
             score -= 15;
+        }
+        if (depths && access && (quickWiper || stage)) {
+            // Dark Depths (or the spell that fetches it), a piece that takes the counters off, and the two mana that
+            // pays for it (the Stage taps itself for its own ability, so it is no source for it)
+            final int others = (quickWiper ? lands : lands - 1) + (lands >= 2 ? Math.min(rocks, 1) : 0);
+            if (others >= 2) {
+                score += DEPTHS_READY_HAND;
+            }
         }
         return Math.max(0, Math.min(100, score));
     }

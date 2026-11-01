@@ -1044,6 +1044,52 @@ public final class ComboPlan {
         return c.getName().equals(DARK_DEPTHS_NAME) && c.getCounters(CounterType.getType("ICE")) > 0;
     }
 
+    /** Dark Depths itself, or the spell that puts it onto the battlefield (Crop Rotation). */
+    static boolean isDepthsAccess(final Card c) {
+        return c != null && (c.getName().equals(DARK_DEPTHS_NAME) || isLandTutor(c));
+    }
+
+    static boolean isStage(final Card c) {
+        return c != null && c.getName().equals(THESPIANS_STAGE);
+    }
+
+    /** Dark Depths, Thespian's Stage, a Hexmage or Crop Rotation: what a Dark Depths hand is made of. */
+    static boolean isDepthsPiece(final Card c) {
+        return isDepthsAccess(c) || isStage(c) || isCounterWiper(c);
+    }
+
+    /**
+     * Crop Rotation (a land tutor that costs a land) in a Dark Depths deck: only a block, never a push. Fetching Dark
+     * Depths with nothing to take its counters off only costs a land, and a Stage or Hexmage on the table is no use
+     * when the mana left after the spell (G, and the land it sacrifices may be an untapped one) cannot pay for it.
+     * With Dark Depths already out, in hand or not in the library, the normal rules decide.
+     */
+    private static Ruling cropRotationRuling(final Player ai) {
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
+        if (!isNamed(ai.getCardsIn(ZoneType.Library), DARK_DEPTHS_NAME) || isNamed(hand, DARK_DEPTHS_NAME)) {
+            return Ruling.NO_OPINION;
+        }
+        boolean hexmageOut = false;
+        int spare = 0;
+        for (final Card c : board) {
+            if (c.getName().equals(MARIT_LAGE) || hasIceCounters(c)) {
+                return Ruling.NO_OPINION; // the token is made, or Dark Depths is out and the search picks the Stage
+            }
+            if (isCounterWiper(c)) {
+                hexmageOut = true;
+            } else if (c.isLand() && !c.getName().equals(THESPIANS_STAGE) && !c.isTapped()
+                    && !c.getManaAbilities().isEmpty()) {
+                spare++;
+            }
+        }
+        if (!haveWiper(board, hand)) {
+            return Ruling.SKIP;
+        }
+        final int need = hexmageOut ? 0 : 2; // the Stage's ability or a Hexmage out of the hand
+        return spare - 1 >= need ? Ruling.NO_OPINION : Ruling.SKIP;
+    }
+
     private static boolean isNamed(final Iterable<Card> cards, final String name) {
         for (final Card c : cards) {
             if (c.getName().equals(name)) {
@@ -1156,8 +1202,13 @@ public final class ComboPlan {
      * Everything else, and every other deck, is {@link Ruling#NO_OPINION}.
      */
     public Ruling darkDepthsRuling(final Player ai, final SpellAbility sa) {
-        if (ai == null || sa == null || sa.getHostCard() == null || !sa.isActivatedAbility()
-                || find(Kind.DARK_DEPTHS) == null) {
+        if (ai == null || sa == null || sa.getHostCard() == null || find(Kind.DARK_DEPTHS) == null) {
+            return Ruling.NO_OPINION;
+        }
+        if (sa.isSpell() && isLandTutor(sa.getHostCard())) {
+            return cropRotationRuling(ai);
+        }
+        if (!sa.isActivatedAbility()) {
             return Ruling.NO_OPINION;
         }
         final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
