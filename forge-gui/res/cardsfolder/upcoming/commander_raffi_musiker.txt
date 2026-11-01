@@ -1,0 +1,11 @@
+Name:Commander Raffi Musiker
+ManaCost:2 B
+Types:Legendary Creature Human Officer
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBExile,DBInvestigate
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | ValidTgtsDesc$ card in a graveyard. | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBGainLife | SpellDescription$ Exile up to one target card from a graveyard. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBInvestigate:DB$ Investigate | SubAbility$ DBLoseLife | SpellDescription$ Investigate. You lose 2 life. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:When Commander Musiker enters, choose one —\n• Exile up to one target card from a graveyard. You gain 2 life.\n• Investigate. You lose 2 life. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

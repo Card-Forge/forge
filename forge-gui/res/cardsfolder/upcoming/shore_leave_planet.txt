@@ -1,0 +1,8 @@
+Name:Shore Leave Planet
+ManaCost:no cost
+Types:Land Planet
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Clone | Cost$ 4 U | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NonLegendary$ True | AddTypes$ Robot,Artifact | Duration$ UntilEndOfTurn | SpellDescription$ This land becomes a copy of target creature you control until end of turn, except it isn't legendary and it's a Robot artifact in addition to its other types.
+Oracle:This land enters tapped.\n{T}: Add {U}.\n{4}{U}: This land becomes a copy of target creature you control until end of turn, except it isn't legendary and it's a Robot artifact in addition to its other types.
