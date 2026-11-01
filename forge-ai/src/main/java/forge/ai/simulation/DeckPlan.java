@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -19,11 +20,12 @@ import forge.game.spellability.SpellAbility;
  * <p>
  * The rollouts are deck independent; the plan only tilts what they value: an aggro or burn deck counts damage to the
  * opponent more and its own life less, a control deck the opposite, a combo deck is given long playouts, a ramp deck
- * values mana development. The tilt is small (a few evaluator points per life point) so that the rollouts can still
- * disagree with it when the position says otherwise.
+ * values mana development, and a lands deck (Exploration, Life from the Loam, Crucible of Worlds, Wasteland, creature
+ * lands) values every land it gets onto the table and plays the long game. The tilt is small (a few evaluator points
+ * per life point) so that the rollouts can still disagree with it when the position says otherwise.
  */
 public final class DeckPlan {
-    public enum Archetype { AGGRO, BURN, CONTROL, COMBO, RAMP, MIDRANGE }
+    public enum Archetype { AGGRO, BURN, CONTROL, COMBO, RAMP, LANDS, MIDRANGE }
 
     public final Archetype archetype;
     /** Extra evaluator points for each point of life the opponent has lost (from 20). */
@@ -100,6 +102,9 @@ public final class DeckPlan {
                 return new DeckPlan(a, 1, 1, 100, 0, true, ComboPlan.EMPTY);
             case RAMP:
                 return new DeckPlan(a, 0, 1, 100, 8, false, ComboPlan.EMPTY);
+            case LANDS:
+                // a grinding deck: its own life matters a little more than the opponent's, and every land counts
+                return new DeckPlan(a, 1, 2, 100, 6, false, ComboPlan.EMPTY);
             default:
                 return NONE;
         }
@@ -163,6 +168,11 @@ public final class DeckPlan {
         final ComboPlan combos = ComboPlan.scan(player);
         final CommanderPlan cmd = CommanderPlan.scan(player);
         Archetype arch = combos.isEmpty() ? classify(player) : Archetype.COMBO;
+        if (combos.has(ComboPlan.Kind.DARK_DEPTHS) && classify(player) == Archetype.LANDS) {
+            // Legacy Lands: Dark Depths with Thespian's Stage is its win condition, but the deck is still about its
+            // lands (the long playouts of a combo plan stay: the plan keeps the combo)
+            arch = Archetype.LANDS;
+        }
         if (arch == Archetype.MIDRANGE && cmd.archetypeHint() != null) {
             // 99 singleton cards never look like aggro or control to the counters of classify: the commander says
             arch = cmd.archetypeHint();
@@ -181,9 +191,22 @@ public final class DeckPlan {
         int bigSpells = 0;
         int reactive = 0;
         int counters = 0;
+        int lands = 0;
+        int landMatters = 0;
+        int utilityLands = 0;
         for (final Card c : player.getAllCards()) {
-            if (c.isLand() || c.isToken() || c.isImmutable()) {
+            if (c.isToken() || c.isImmutable()) {
                 continue;
+            }
+            if (c.isLand()) {
+                lands++;
+                if (isUtilityLand(c)) {
+                    utilityLands++;
+                }
+                continue;
+            }
+            if (isLandMatters(c)) {
+                landMatters++;
             }
             spells++;
             cmcSum += c.getCMC();
@@ -227,6 +250,10 @@ public final class DeckPlan {
         if (burn * 100 / spells >= 25 && creatures * 100 / spells <= 35) {
             return Archetype.BURN;
         }
+        if (lands >= LANDS_MIN_LANDS && lands * 100 >= LANDS_MIN_SHARE * (lands + spells)
+                && landMatters + utilityLands >= LANDS_MIN_PAYOFFS) {
+            return Archetype.LANDS; // before RAMP: a lands deck with a Titan is still about its lands
+        }
         if (counters >= 3 || reactive * 100 / spells >= 30 && creatures * 100 / spells <= 40) {
             return Archetype.CONTROL;
         }
@@ -237,6 +264,46 @@ public final class DeckPlan {
             return Archetype.AGGRO;
         }
         return Archetype.MIDRANGE;
+    }
+
+    /** A lands deck plays this many lands or more (a normal 60 card deck plays 24 or fewer) ... */
+    static final int LANDS_MIN_LANDS = 26;
+    /**
+     * ... and at least this share of the deck (percent), so that a 99 card Commander deck, which plays 36 lands or
+     * more as a matter of course, is not taken for one ...
+     */
+    static final int LANDS_MIN_SHARE = 45;
+    /** ... and this many cards that care about them: land-matters spells and lands that do more than make mana. */
+    static final int LANDS_MIN_PAYOFFS = 10;
+
+    /**
+     * What a land-matters spell says: landfall and the cards that play an extra land, take lands back from the
+     * graveyard (Crucible of Worlds, Life from the Loam), count or sacrifice lands, or destroy them.
+     */
+    private static final Pattern LAND_TEXT = Pattern.compile(
+            "landfall|whenever a land|whenever a (forest|island|swamp|mountain|plains)|additional land"
+                    + "|lands? cards? from your graveyard|play lands from|lands? you control"
+                    + "|sacrifice (a|any number of) lands?|destroy target (nonbasic )?land");
+
+    /** A spell that cares about lands: read from the card's text. */
+    static boolean isLandMatters(final Card c) {
+        final String text = c.getOracleText();
+        return text != null && LAND_TEXT.matcher(text.toLowerCase(Locale.ROOT)).find();
+    }
+
+    /**
+     * A land that does more than make mana: a creature land, a land that destroys or copies another land, or one that
+     * untaps. Fetch lands and the like do not count, they are in every deck.
+     */
+    static boolean isUtilityLand(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            final ApiType api = sa.getApi();
+            if (sa.isActivatedAbility() && (api == ApiType.Animate || api == ApiType.Destroy || api == ApiType.Clone
+                    || api == ApiType.Untap)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Archetype and combos, for statistics and the game log ("COMBO[MASS_REANIMATION(52: ...)]"). */
