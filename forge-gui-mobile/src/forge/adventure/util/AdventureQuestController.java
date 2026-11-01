@@ -198,6 +198,7 @@ public class AdventureQuestController implements Serializable {
                 dialogQueue.add(epilogue);
             }
             finishedQuests.add(quest);
+            Current.player().recordQuestCompletion(quest);
             updateQuestComplete(quest);
         }
 
@@ -328,7 +329,7 @@ public class AdventureQuestController implements Serializable {
         FileHandle handle = Config.instance().getFile(Paths.QUESTS);
         if (handle.exists())
         {
-            allQuests =json.fromJson(Array.class, AdventureQuestData.class, handle);
+            allQuests = json.fromJson(Array.class, AdventureQuestData.class, handle);
         }
 
         for (AdventureQuestData q : allQuests){
@@ -520,13 +521,21 @@ public class AdventureQuestController implements Serializable {
     public AdventureQuestData generateQuest(int id){
         AdventureQuestData generated = null;
         for (AdventureQuestData template: allQuests) {
-            if (template.isTemplate && template.getID() == id){
+            if (template.isTemplate && template.getID() == id && isQuestAvailable(template)) {
                 generated = new AdventureQuestData(template);
                 generated.initialize();
                 break;
             }
         }
         return generated;
+    }
+
+    public boolean isQuestAvailable(AdventureQuestData quest) {
+        if (!Current.player().canAcceptQuest(quest)) return false;
+        for (AdventureQuestStage stage : quest.stages) {
+            if (stage.hasRequiredEnemy() && stage.getAvailablePOIs().isEmpty()) return false;
+        }
+        return true;
     }
 
     public void addQuestSprites(AdventureQuestStage stage){
@@ -613,23 +622,25 @@ public class AdventureQuestController implements Serializable {
             return ret;
         }
         //todo - Should quest availability be weighted instead of uniform?
-        nextQuestDate.put(pointID, LocalDate.now().toEpochDay());
-
         Array<AdventureQuestData> validSideQuests = new Array<>();
-        for (AdventureQuestData option : allSideQuests){
-            if (option.questSourceTags.length == 0)
-                validSideQuests.add(option);
-            for (int i = 0; i < option.questSourceTags.length; i++){
-                if (option.questSourceTags[i] != null && option.questSourceTags[i].equals(questOrigin)){
-                    validSideQuests.add(option);
-                    break;
-                }
+        for (AdventureQuestData quest : allSideQuests) {
+            if ((quest.questSourceTags.length == 0 || Arrays.asList(quest.questSourceTags).contains(questOrigin))
+                    && isQuestAvailable(quest)) {
+                validSideQuests.add(quest);
             }
         }
-        if (validSideQuests.size > 0)
-            ret = new AdventureQuestData(Aggregates.random(validSideQuests));
-        else
-            ret = new AdventureQuestData(Aggregates.random(allSideQuests));
+        if (validSideQuests.isEmpty()) {
+            DialogData response = new DialogData();
+            response.text = localizer.getMessage("advQuestComeBackTomorrow");
+            DialogData dismiss = new DialogData();
+            dismiss.name = localizer.getMessage("advOkayLeave");
+            response.options = new DialogData[]{dismiss};
+            ret = new AdventureQuestData();
+            ret.offerDialog = response;
+            return ret;
+        }
+        nextQuestDate.put(pointID, LocalDate.now().toEpochDay());
+        ret = new AdventureQuestData(Aggregates.random(validSideQuests));
         ret.sourceID = pointID;
         ret.initialize();
         return ret;

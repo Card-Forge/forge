@@ -1517,12 +1517,33 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 break;
             }
         }
+        if (!AdventureQuestController.instance().isQuestAvailable(q)) {
+            return;
+        }
         quests.add(q);
         if (noTrackedQuests || q.autoTrack)
             AdventureQuestController.trackQuest(q);
         q.activateNextStages();
         if (!isNewGame)
             AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+    }
+
+    /** Repeatable templates may coexist, but the same acceptance callback is always idempotent. */
+    public boolean canAcceptQuest(AdventureQuestData quest) {
+        if (quests.contains(quest)) return false;
+        if (!quest.oneTime) return true;
+        if (checkQuestFlag("questCompleted:" + quest.getID())) return false;
+        for (AdventureQuestData active : quests) {
+            if (active.getID() == quest.getID() && !active.failed) return false;
+        }
+        return true;
+    }
+
+    public void recordQuestCompletion(AdventureQuestData quest) {
+        if (quest.oneTime && quest.completed && !quest.failed) {
+            // Engine bookkeeping, not a scripted flag event (which could re-enter quest updates).
+            questFlags.put("questCompleted:" + quest.getID(), (byte) 1);
+        }
     }
 
     public List<AdventureQuestData> getQuests() {
