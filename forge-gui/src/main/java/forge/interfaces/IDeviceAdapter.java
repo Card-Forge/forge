@@ -32,6 +32,12 @@ public interface IDeviceAdapter {
     UpnpServiceConfiguration getUpnpPlatformService();
     boolean needFileAccess();
     void requestFileAcces();
+    default boolean isFoldable() {
+        return false;
+    }
+    default boolean isFoldableUnfolded() {
+        return false;
+    }
 
     /** Confine the mouse cursor to the window (desktop LibGDX only). Default no-op. */
     default void setMouseConfined(boolean confined) {

@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 import forge.FrameRate;
+import forge.gui.error.BugReporter;
 
 import java.nio.ByteBuffer;
 
@@ -43,6 +44,23 @@ public class ScreenUtil implements Disposable {
         isInitialized = true;
     }
 
+    public void resize(int newWidth, int newHeight) {
+        if (newWidth <= 0 || newHeight <= 0) return;
+        if (width == newWidth && height == newHeight) return;
+        width = newWidth;
+        height = newHeight;
+        bufferSize = width * height * 4;
+        pixels = BufferUtils.newByteBuffer(bufferSize);
+        if (isInitialized) {
+            if (screenshotTexture != null) {
+                screenshotTexture.dispose();
+                screenshotTexture = null;
+            }
+            isInitialized = false;
+            initScreenshotBuffer();
+        }
+    }
+
     public TextureRegion takeScreenshot() {
         if (!isInitialized) {
             initScreenshotBuffer();
@@ -57,11 +75,22 @@ public class ScreenUtil implements Disposable {
         // Only copy when hideFPSCountdown has reached 0 (FPS is hidden) or firstCapture
         if (firstCapture || FrameRate.hideFPSCountdown <= 0) {
             Gdx.app.postRunnable(() -> {
-                Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, screenshotTexture.getTextureObjectHandle());
-                Gdx.gl20.glCopyTexSubImage2D(GL20.GL_TEXTURE_2D, 0, 0, 0, 0, 0, width, height);
-                Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, 0);
-                pendingScreenshot = false;
-                firstCapture = false;
+                try {
+                    if (screenshotTexture != null && isInitialized) {
+                        Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, screenshotTexture.getTextureObjectHandle());
+                        int copyW = Math.min(width, Gdx.graphics.getWidth());
+                        int copyH = Math.min(height, Gdx.graphics.getHeight());
+                        Gdx.gl20.glCopyTexSubImage2D(GL20.GL_TEXTURE_2D, 0, 0, 0, 0, 0, copyW, copyH);
+                        Gdx.gl.glBindTexture(GL20.GL_TEXTURE_2D, 0);
+                    }
+                } catch (Exception ex) {
+                    if (BugReporter.isSentryEnabled()) {
+                        BugReporter.reportException(ex);
+                    }
+                } finally {
+                    pendingScreenshot = false;
+                    firstCapture = false;
+                }
             });
         }
     }

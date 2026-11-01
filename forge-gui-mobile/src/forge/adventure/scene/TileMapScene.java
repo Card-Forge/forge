@@ -93,17 +93,24 @@ public class TileMapScene extends HudScene {
 
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
+        if (stage != null && stage.getViewport() != null) {
+            stage.getViewport().apply();
+        }
+
         float camX = stage.getCamera().position.x;
         float camY = stage.getCamera().position.y;
-        float intWidth = Scene.getIntendedWidth();
-        float intHeight = Scene.getIntendedHeight();
+        float viewWidth = stage.getViewport() != null ? stage.getViewport().getWorldWidth() : Scene.getIntendedWidth();
+        float viewHeight = stage.getViewport() != null ? stage.getViewport().getWorldHeight() : Scene.getIntendedHeight();
 
-        getTiledMapRenderer().setView(stage.getCamera().combined, camX - intWidth / 2.0f, camY - intHeight / 2.0f, intWidth, intHeight);
+        getTiledMapRenderer().setView(stage.getCamera().combined, camX - viewWidth / 2.0f, camY - viewHeight / 2.0f, viewWidth, viewHeight);
         if (!Forge.isLandscapeMode()) {
             stage.getCamera().position.x = stage.getPlayerSprite().getX();
         }
         getTiledMapRenderer().updateCamera();
         getTiledMapRenderer().render();
+        if (hud != null && hud.getViewport() != null) {
+            hud.getViewport().apply(true);
+        }
         hud.draw();
     }
 
