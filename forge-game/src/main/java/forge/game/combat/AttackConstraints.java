@@ -380,7 +380,7 @@ public class AttackConstraints {
         }
         for (final Entry<Card, GameEntity> attacker : attackers.entrySet()) {
             final AttackRestriction restriction = restrictions.get(attacker.getKey());
-            if (restriction != null && !restriction.canAttack(attacker.getKey(), attackers)) {
+            if (restriction != null && !restriction.canAttack(attacker.getValue(), attackers)) {
                 // Violating a restriction!
                 return -1;
             }
