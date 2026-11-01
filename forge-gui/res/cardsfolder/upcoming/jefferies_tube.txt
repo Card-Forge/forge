@@ -1,0 +1,9 @@
+Name:Jefferies Tube
+ManaCost:1
+Types:Artifact
+A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Artifact | ValidTgtsDesc$ artifact | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on target artifact.
+A:AB$ Effect | Cost$ 3 T | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | SpellDescription$ Target creature you control can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+A:AB$ Draw | Cost$ 4 T | SubAbility$ DBChangeZone | SpellDescription$ Draw a card. You may put a land card from your hand onto the battlefield tapped.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True | Optional$ True | Hidden$ True
+Oracle:{2}, {T}: Put two charge counters on target artifact.\n{3}, {T}: Target creature you control can't be blocked this turn.\n{4}, {T}: Draw a card. You may put a land card from your hand onto the battlefield tapped.

@@ -1,0 +1,10 @@
+Name:Glory to the Empire!
+ManaCost:5 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a number of 2/1 red Klingon Warrior creature tokens with haste equal to the number of opponents you have.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_2_1_klingon_warrior_haste | TokenOwner$ You
+SVar:X:PlayerCountOpponents$Amount
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Melee | Description$ Creatures you control have melee. (Whenever a creature with melee attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:When this enchantment enters, create a number of 2/1 red Klingon Warrior creature tokens with haste equal to the number of opponents you have.\nCreatures you control have melee. (Whenever a creature with melee attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)

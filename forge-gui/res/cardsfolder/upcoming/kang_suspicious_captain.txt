@@ -1,0 +1,11 @@
+Name:Kang, Suspicious Captain
+ManaCost:3 R
+Types:Legendary Creature Klingon Warrior Officer
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGoad | TriggerDescription$ When NICKNAME enters, choose target creature an opponent controls. NICKNAME and that creature are goaded for as long as you control NICKNAME. (They attack each combat if able and attack a player other than you if able.)
+SVar:TrigGoad:DB$ Effect | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | StaticAbilities$ IsGoaded | RememberObjects$ Targeted & Self | ForgetOnMoved$ Battlefield | Duration$ AsLongAsControl
+SVar:IsGoaded:Mode$ Continuous | Affected$ Card.IsRemembered | Goad$ True | Description$ NICKNAME and that creature are goaded for as long as you control NICKNAME.
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.IsGoaded | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more goaded creatures attack, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:When Kang enters, choose target creature an opponent controls. Kang and that creature are goaded for as long as you control Kang. (They attack each combat if able and attack a player other than you if able.)\nWhenever one or more goaded creatures attack, put a +1/+1 counter on target creature you control.
