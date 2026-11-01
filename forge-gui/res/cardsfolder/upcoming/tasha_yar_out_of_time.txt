@@ -1,0 +1,12 @@
+Name:Tasha Yar, Out of Time
+ManaCost:1 R
+Types:Legendary Creature Human Officer
+PT:2/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME dies, exile the top card of your library. Until the end of your next turn, you may play that card.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ CopyPermanent | Cost$ 2 R ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | Defined$ Self | AtEOT$ Sacrifice | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of this card. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.
+Oracle:Haste\nWhen Tasha Yar dies, exile the top card of your library. Until the end of your next turn, you may play that card.\n{2}{R}, Exile this card from your graveyard: Create a token that's a copy of this card. Sacrifice it at the beginning of the next end step. Activate only as a sorcery.

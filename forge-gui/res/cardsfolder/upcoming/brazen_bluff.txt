@@ -1,0 +1,8 @@
+Name:Brazen Bluff
+ManaCost:R R
+Types:Instant
+A:SP$ Pump | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card.nonCreature+OppCtrl | ValidTgtsDesc$ noncreature spell an opponent controls | SubAbility$ DBExile | Choose target noncreature spell an opponent controls. That player may exile it. If they don't, you may cast a noncreature spell from your hand without paying its mana cost.
+SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Origin$ Stack | Destination$ Exile | RememberChanged$ True | DefinedPlayer$ TargetedController | Optional$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card | ValidZone$ Hand | ValidSA$ Spell.nonCreature+YouOwn | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose target noncreature spell an opponent controls. That player may exile it. If they don't, you may cast a noncreature spell from your hand without paying its mana cost.
