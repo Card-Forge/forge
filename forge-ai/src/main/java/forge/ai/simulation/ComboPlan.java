@@ -2488,6 +2488,83 @@ public final class ComboPlan {
     }
 
     /**
+     * What a hand is worth for the combos of the deck, in score points (negative for a dead hand): the pieces the
+     * hand needs to act in the first turns, read from the pieces of the combo. The best combo of the deck counts.
+     * Dredge, Dark Depths and the tutor storm deck are judged by their own rules in {@link OpeningHand}.
+     */
+    public int handBonus(final CardCollectionView hand) {
+        int lands = 0;
+        for (final Card c : hand) {
+            lands += c.isLand() ? 1 : 0;
+        }
+        int best = Integer.MIN_VALUE;
+        for (final Combo combo : combos) {
+            best = Math.max(best, handBonus(combo, hand, lands));
+        }
+        return best == Integer.MIN_VALUE ? 0 : best; // no combo: nothing to say
+    }
+
+    private static int handBonus(final Combo combo, final CardCollectionView hand, final int lands) {
+        int payoffs = 0;
+        int enablers = 0;
+        int cascaders = 0;
+        int reanimation = 0;
+        for (final Card c : hand) {
+            if (c.isLand()) {
+                continue;
+            }
+            final String n = c.getName();
+            payoffs += combo.payoffs.contains(n) ? 1 : 0;
+            enablers += combo.enablers.contains(n) ? 1 : 0;
+            cascaders += combo.cascaders.contains(n) ? 1 : 0;
+            reanimation += isReanimationSpell(c) ? 1 : 0;
+        }
+        switch (combo.kind) {
+            case REANIMATOR: {
+                final int fuel = Math.max(0, enablers - reanimation);
+                if (reanimation >= 1 && payoffs >= 1 && lands >= 1) {
+                    return 25; // the spell and the creature: it can happen this turn
+                }
+                if (reanimation >= 1 && fuel >= 1 && lands >= 1) {
+                    return 18; // loot or discard first
+                }
+                // big creatures and nothing that puts them anywhere, nothing that digs for it: a dead hand
+                return payoffs >= 1 && reanimation == 0 && fuel == 0 ? -60 : 0;
+            }
+            case MASS_REANIMATION:
+                return enablers >= 2 && lands >= 2 ? 20 + (cascaders + payoffs >= 1 ? 8 : 0) : 0;
+            case MILL:
+                return enablers + payoffs >= 3 && lands >= 2 ? 15 : 0;
+            case CHEAT_FATTY:
+                if (enablers >= 1 && payoffs >= 1 && lands >= 2) {
+                    return 25;
+                }
+                if (enablers >= 1 && lands >= 3) {
+                    return 8;
+                }
+                return payoffs >= 1 && enablers == 0 ? -30 : 0; // the fatty without a way to cheat it in
+            case AFFINITY:
+                return enablers >= 3 && lands >= 1 ? 15 + (payoffs >= 1 ? 8 : 0) : 0;
+            case GO_WIDE:
+                return enablers >= 3 && lands >= 2 ? 12 : 0;
+            case STORM:
+                return enablers >= 3 && lands >= 1 ? 20 + (payoffs >= 1 ? 5 : 0) : 0;
+            case CREATURE_COPY:
+                return payoffs >= 1 && enablers >= 1 && lands >= 3 ? 25 : 0;
+            case CASCADE_PAYOFF:
+                return cascaders >= 1 && lands >= 3 ? 12 : 0;
+            case REPLENISH:
+                return payoffs >= 1 && enablers >= 2 ? 15 : 0;
+            case MADNESS:
+                return payoffs >= 1 && enablers >= 1 && lands >= 2 ? 20 : 0;
+            case ATOG:
+                return payoffs >= 1 && lands >= 3 ? 15 : 0;
+            default:
+                return 0; // DREDGE, DARK_DEPTHS and TUTOR_STORM have their own rules
+        }
+    }
+
+    /**
      * The mulligan rule of a tutor storm deck: keep a hand that can act, not a slow one. It needs a land (checked by the
      * caller) and either two tutors, or a tutor with mana to cast it (fast mana, or the engine), or plenty of fast mana
      * for the tutors it will draw. Disruption alone (Thoughtseize, Duress, Veil of Summer) is not a hand unless it is so

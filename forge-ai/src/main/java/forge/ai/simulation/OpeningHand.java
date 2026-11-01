@@ -38,6 +38,24 @@ public final class OpeningHand {
     /** An outlet plus something to throw away: the engine runs from turn one or two. */
     private static final int DREDGE_READY_HAND = 20;
 
+    /** What the main combo of the deck wants from its first turns; null: the archetype decides. */
+    private static Want comboWant(final DeckPlan plan) {
+        final ComboPlan.Combo primary = plan == null ? null : plan.combos.primary();
+        if (primary == null) {
+            return null;
+        }
+        switch (primary.kind) {
+            case REANIMATOR:       return new Want(2, 3, 2, 1, 2);
+            case MASS_REANIMATION: return new Want(2, 3, 2, 2, 2);
+            case MILL:             return new Want(3, 4, 3, 2, 2);
+            case CHEAT_FATTY:      return new Want(3, 4, 3, 1, 2);
+            case AFFINITY:         return new Want(2, 2, 2, 3, 2);
+            case GO_WIDE:          return new Want(2, 3, 2, 3, 2);
+            case STORM:            return new Want(2, 3, 2, 1, 2);
+            default:               return null;
+        }
+    }
+
     /** Score a kept hand of this size must reach: smaller hands are judged less strictly, 4 or fewer are always kept. */
     static int keepBar(final int handSize) {
         if (handSize >= 7) {
@@ -143,7 +161,7 @@ public final class OpeningHand {
         int cheapSources = 0;
         for (final Card c : kept) {
             if (c.isLand()) {
-                if (CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
+                if (isManaLand(c)) {
                     lands++;
                 }
             } else if (isCheapManaSource(c)) {
@@ -223,7 +241,7 @@ public final class OpeningHand {
             final CardCollectionView lib = ai.getCardsIn(ZoneType.Library);
             int l = 0;
             for (final Card c : lib) {
-                if (CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
+                if (isManaLand(c)) {
                     l++;
                     final byte colors = producedColors(c);
                     for (int i = 0; i < MagicColor.WUBRG.length; i++) {
@@ -264,7 +282,8 @@ public final class OpeningHand {
     private static double rawScore(final CardCollectionView hand, final Library lib, final boolean onPlay, final DeckPlan plan) {
         final DeckPlan.Archetype arch = plan == null ? DeckPlan.Archetype.MIDRANGE : plan.archetype;
         final boolean dredge = plan != null && plan.combos.has(ComboPlan.Kind.DREDGE);
-        final Want w = dredge ? DREDGE_WANT : want(arch);
+        final Want forCombo = dredge ? DREDGE_WANT : comboWant(plan);
+        final Want w = forCombo != null ? forCombo : want(arch);
         final int size = hand.size();
         int lands = 0;
         int rocks = 0;
@@ -284,9 +303,10 @@ public final class OpeningHand {
                 quickWiper |= ComboPlan.isCounterWiper(c);
             }
             if (c.isLand()) {
-                if (CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
+                if (isManaLand(c)) {
                     lands++;
-                    colors |= producedColors(c);
+                    final byte own = producedColors(c);
+                    colors |= own != 0 ? own : libraryColors(lib);
                 }
                 if (depths && ComboPlan.isDepthsPiece(c)) {
                     landKeys++; // Dark Depths and the Stage are lands, and the pieces the deck is built around
@@ -345,6 +365,9 @@ public final class OpeningHand {
         }
         if (dredge && lands >= 1 && outlets >= 1 && pieces >= 1) {
             score += DREDGE_READY_HAND;
+        }
+        if (plan != null) {
+            score += plan.combos.handBonus(hand);
         }
         return score;
     }
@@ -417,6 +440,22 @@ public final class OpeningHand {
             }
         }
         return false;
+    }
+
+    /** A land that makes mana, or one that finds a land (a fetch land is a land drop that gets the colour needed). */
+    static boolean isManaLand(final Card c) {
+        return c.isLand() && (CardPredicates.LANDS_PRODUCING_MANA.test(c) || fetchesLand(c));
+    }
+
+    /** The colours the rest of the library can make: what a fetch land in the hand can turn into. */
+    private static byte libraryColors(final Library lib) {
+        byte colors = 0;
+        for (final byte col : MagicColor.WUBRG) {
+            if (lib.producersOf(col) >= 1) {
+                colors |= col;
+            }
+        }
+        return colors;
     }
 
     private static boolean fetchesToHand(final Card c) {

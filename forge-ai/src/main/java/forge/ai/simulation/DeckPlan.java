@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -279,7 +280,7 @@ public final class DeckPlan {
      * What a land-matters spell says: landfall and the cards that play an extra land, take lands back from the
      * graveyard (Crucible of Worlds, Life from the Loam), count or sacrifice lands, or destroy them.
      */
-    private static final java.util.regex.Pattern LAND_TEXT = java.util.regex.Pattern.compile(
+    private static final Pattern LAND_TEXT = Pattern.compile(
             "landfall|whenever a land|whenever a (forest|island|swamp|mountain|plains)|additional land"
                     + "|lands? cards? from your graveyard|play lands from|lands? you control"
                     + "|sacrifice (a|any number of) lands?|destroy target (nonbasic )?land");
