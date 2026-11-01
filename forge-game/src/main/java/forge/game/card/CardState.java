@@ -695,6 +695,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final FCollectionView<Trigger> getTriggers() {
+        if (triggers.isEmpty() && cachedKeywords.isEmpty() && card.getChangedCardTraits().isEmpty()
+                && card.getChangedCardTraitsByText().isEmpty() && !card.hasState(CardStateName.LeftSplit)) {
+            return FCollection.getEmpty();
+        }
         FCollection<Trigger> result = new FCollection<>(triggers);
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit))
@@ -731,6 +735,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      * (land type changes), and the keyword collection.
      */
     public final FCollectionView<StaticAbility> getStaticAbilities() {
+        if (staticAbilities.isEmpty() && cachedKeywords.isEmpty() && card.getChangedCardTraits().isEmpty()
+                && card.getChangedCardTraitsByText().isEmpty() && !card.hasState(CardStateName.LeftSplit)) {
+            return FCollection.getEmpty();
+        }
         final Object traits = FSnapshotTable.versionOf(card.getChangedCardTraits());
         final Object traitsByText = FSnapshotTable.versionOf(card.getChangedCardTraitsByText());
         if (traits == null || traitsByText == null) {
