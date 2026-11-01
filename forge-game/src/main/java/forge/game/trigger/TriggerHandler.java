@@ -28,6 +28,7 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -57,6 +58,32 @@ public class TriggerHandler {
 
     public final void registerDelayedTrigger(final Trigger trig) {
         delayedTriggers.add(trig);
+    }
+
+    public final boolean isCardScheduledToReturnToBattlefield(final Card card) {
+        final Zone zone = game.getZoneOf(card);
+        if (zone == null) {
+            return false;
+        }
+
+        for (final Trigger trigger : delayedTriggers) {
+            if (!trigger.getTriggerRemembered().contains(card)) {
+                continue;
+            }
+
+            final SpellAbility execute = trigger.ensureAbility();
+            if (execute == null || execute.getApi() != ApiType.ChangeZone
+                    || !ZoneType.Battlefield.name().equals(execute.getParam("Destination"))) {
+                continue;
+            }
+
+            final String defined = execute.getParamOrDefault("Defined", "");
+            if (execute.hasParam("Origin") && defined.contains("Remembered")
+                    && ZoneType.listValueOf(execute.getParam("Origin")).contains(zone.getZoneType())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public final void clearDelayedTrigger() {
