@@ -914,19 +914,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         //TO-maybe-DO: Share logic between this and identical method in desktop.
-        final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
+        final Predicate<? super T> filter = filterPredicate;
+        final boolean useFilter = filter != null;
 
         if (useFilter || this.wantUnique || forceFilter) {
             this.model.clear();
         }
 
         if (useFilter && this.wantUnique) {
-            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
+            final Predicate<Entry<T, Integer>> filterForPool = x -> filter.test(x.getKey());
             final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
+            final Predicate<Entry<T, Integer>> pred = x -> filter.test(x.getKey());
             this.model.addItems(IterableUtil.filter(this.pool, pred));
         }
         else if (this.wantUnique) {
