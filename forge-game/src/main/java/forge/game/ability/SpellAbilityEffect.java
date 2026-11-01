@@ -794,7 +794,7 @@ public abstract class SpellAbilityEffect {
         }
         if (sa.hasParam(blockingParam)) {
             final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
-            if (attacker != null && combat.getDefenderPlayerByAttacker(attacker).equals(c.getController())) {
+            if (attacker != null && c.getController().equals(combat.getDefenderPlayerByAttacker(attacker))) {
                 final boolean wasBlocked = combat.isBlocked(attacker);
                 combat.addBlocker(attacker, c);
                 combat.orderAttackersForDamageAssignment(c);

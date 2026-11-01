@@ -529,7 +529,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         Player chooser = activator;
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa).get(0);
+            final List<Player> choosers = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa);
+            if (choosers.isEmpty()) {
+                return;
+            }
+            chooser = choosers.get(0);
         }
 
         // CR 401.4
