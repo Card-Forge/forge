@@ -1,0 +1,10 @@
+Name:Change the Narrative
+ManaCost:1 W U
+Types:Enchantment
+S:Mode$ ReduceCost | ValidCard$ Planeswalker | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Planeswalker spells you cast cost {1} less to cast.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigName | TriggerDescription$ At the beginning of your upkeep, conjure a random planeswalker card into your hand. It perpetually gains prismatic.
+SVar:TrigName:DB$ NameCard | Defined$ You | ValidCards$ Planeswalker | AtRandom$ True | SubAbility$ DBMake
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Keywords$ Prismatic | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains prismatic.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
+Oracle:Planeswalker spells you cast cost {1} less to cast.\nAt the beginning of your upkeep, conjure a random planeswalker card into your hand. It perpetually gains prismatic.
