@@ -103,8 +103,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int landsPlayedThisTurn;
     private int landsPlayedLastTurn;
     private int numPowerSurgeLands;
-    private int spellsCastThisGame;
-    private int spellsCastLastTurn;
     private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
     private int investigatedThisTurn;
     private int scryThisTurn;
@@ -2143,7 +2141,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean hasSurge() {
         PlayerCollection team = getYourTeam();
-        return game.getStack().getSpellsCastThisTurn().stream().anyMatch(sp -> team.contains(sp.getActivatingPlayer()));
+        return game.getStack().getSpellsCastThisTurn().keys().stream().anyMatch(team::contains);
     }
 
     public final boolean hasBloodthirst() {
@@ -2330,24 +2328,17 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getSpellsCastThisTurn() {
-        return (int) getGame().getStack().getSpellsCastThisTurn().stream().filter(sp -> this.equals(sp.getActivatingPlayer())).count();
+        return getGame().getStack().getSpellsCastThisTurn().get(this).size();
     }
     public final int getSpellsCastLastTurn() {
-        return spellsCastLastTurn;
+        return getGame().getStack().getSpellsCastLastTurn().get(this).size();
     }
     public final void addSpellCastThisTurn() {
-        spellsCastThisGame++;
         achievementTracker.spellsCast++;
         achievementTracker.maxStormCount = Math.max(achievementTracker.maxStormCount, getSpellsCastThisTurn());
     }
-    public final void setSpellsCastLastTurn(int num) {
-        spellsCastLastTurn = num;
-    }
     public final int getSpellsCastThisGame() {
-        return spellsCastThisGame;
-    }
-    public final void resetSpellCastThisGame() {
-        spellsCastThisGame = 0;
+        return getGame().getStack().getSpellsCastThisGame().get(this).size();
     }
 
     public final int getLifeGainedByTeamThisTurn() {
@@ -2516,7 +2507,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
         setDescended(0);
-        setSpellsCastLastTurn(getSpellsCastThisTurn());
         setLifeLostLastTurn(getLifeLostThisTurn());
         setLifeLostThisTurn(0);
         setLifeGainedThisTurn(0);
