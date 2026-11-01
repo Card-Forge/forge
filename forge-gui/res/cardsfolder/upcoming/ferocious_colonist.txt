@@ -1,0 +1,7 @@
+Name:Ferocious Colonist
+ManaCost:1 R
+Types:Creature Klingon Citizen
+PT:0/1
+K:Double Strike
+K:Melee
+Oracle:Double strike\nMelee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)

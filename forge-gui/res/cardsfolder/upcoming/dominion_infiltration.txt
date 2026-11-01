@@ -1,0 +1,6 @@
+Name:Dominion Infiltration
+ManaCost:X R R R
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | TargetMin$ X | TargetMax$ X | AddKeywords$ Changeling | PumpKeywords$ Haste | AtEOT$ Exile | SpellDescription$ Choose X target creatures your opponents control. For each of them, create a token that's a copy of that creature, except it has changeling. Those tokens gain haste. Exile those tokens at the beginning of the next end step. (They're every creature type.)
+SVar:X:Count$xPaid
+Oracle:Choose X target creatures your opponents control. For each of them, create a token that's a copy of that creature, except it has changeling. Those tokens gain haste. Exile those tokens at the beginning of the next end step. (They're every creature type.)
