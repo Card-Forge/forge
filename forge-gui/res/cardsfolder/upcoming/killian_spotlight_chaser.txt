@@ -3,7 +3,7 @@ ManaCost:B R
 Types:Legendary Creature Human Bard
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a source you control deals noncombat damage to an opponent, seek a card with mana value equal to the damage dealt. Discard that card at the beginning of the next end step.
-SVar:DBSeek:DB$ Seek | Num$ 1 | Type$ Card.cmcEQX | RememberFound$ True | SubAbility$ DBDelayTrig
+SVar:TrigConjure:DB$ Seek | Num$ 1 | Type$ Card.cmcEQX | RememberFound$ True | SubAbility$ DBDelayTrig
 SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Discard that card at the beginning of the next end step.
 SVar:TrigDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -2,7 +2,7 @@ Name:Rootha, Ardent Artisan
 ManaCost:R G
 Types:Legendary Creature Orc Artificer
 PT:2/3
-A:AB$ AlterAttribute | Cost$ Sac<1/Artifact> | ValidTgts$ Creature | Attributes$ Prepared | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ NICKNAME becomes prepared. Activate only as a sorcery and only once each turn.
+A:AB$ AlterAttribute | Cost$ Sac<1/Artifact> | Attributes$ Prepared | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ NICKNAME becomes prepared. Activate only as a sorcery and only once each turn.
 AlternateMode:Prepare
 Oracle:Sacrifice an artifact: Rootha becomes prepared. Activate only as a sorcery and only once each turn.
 

@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Legendary Planeswalker Oko
 Loyalty:3
 S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ Planeswalker.YouCtrl | Cost$ 1 | Description$ Creatures can't attack planeswalkers you control unless their controller pays {1} for each of those creatures.
-A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Artifact | TgtPrompt$ Select up to one target artifact or creature | TargetMin$ 0 | TargetMax$ 1 | RemoveAllAbilities$ True | SpellDescription$ Up to one target artifact or creature loses all abilities until your next turn.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Duration$ UntilYourNextTurn | Planeswalker$ True | IsCurse$ True | ValidTgts$ Creature,Artifact | TgtPrompt$ Select up to one target artifact or creature | TargetMin$ 0 | TargetMax$ 1 | RemoveAllAbilities$ True | SpellDescription$ Up to one target artifact or creature loses all abilities until your next turn.
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ w_2_2_ox | SpellDescription$ Create a 2/2 white Ox creature token.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Oko Lord of the Fae | Image$ emblem_oko_lord_of_the_fae | Duration$ Permanent | Triggers$ Upkeep | SpellDescription$ You get an emblem with "At the beginning of your upkeep, conjure a random planeswalker card into exile. You may cast that card this turn without paying its mana cost."
 SVar:Upkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigNameCard | TriggerDescription$ At the beginning of your upkeep, conjure a random planeswalker card into exile. You may cast that card this turn without paying its mana cost.

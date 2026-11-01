@@ -2,7 +2,6 @@ Name:Selfless Germinator
 ManaCost:G
 Types:Creature Treefolk Druid
 PT:2/1
-Exhaust — {1}: 
-AB$ MakeCard | Cost$ 1 | Conjure$ True | Name$ Seed of Hope | Zone$ Battlefield | Exhaust$ True | SpellDescription$ Conjure a card named Seed of Hope into your hand.
+A:AB$ MakeCard | Cost$ 1 | Conjure$ True | Name$ Seed of Hope | Zone$ Hand | Exhaust$ True | SpellDescription$ Conjure a card named Seed of Hope into your hand.
 DeckHas:Ability$Mill|LifeGain
 Oracle:Exhaust — {1}: Conjure a card named Seed of Hope into your hand.

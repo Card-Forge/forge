@@ -2,7 +2,7 @@ Name:Bend Mortal Limits
 ManaCost:B
 Types:Sorcery
 A:SP$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl | SubAbility$ DBExile | SpellDescription$ Look at all creature and planeswalker cards in target player's hand. You may exile one of those cards. If you do, conjure a duplicate of that card into your graveyard.
-SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl | Imprint$ True | Mandatory$ True | SubAbility$ DBConjure
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | AlreadyRevealed$ True | ChangeType$ Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl | Imprint$ True | Mandatory$ True | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | DefinedName$ Imprinted | Conjure$ True | Zone$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 Oracle:Look at all creature and planeswalker cards in target player's hand. You may exile one of those cards. If you do, conjure a duplicate of that card into your graveyard.
