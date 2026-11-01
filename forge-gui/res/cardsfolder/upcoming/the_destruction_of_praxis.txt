@@ -1,0 +1,8 @@
+Name:The Destruction of Praxis
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | SubAbility$ DBToken | SpellDescription$ Strange new worlds — All creatures get -X/-X until end of turn, where X is the number of differently named lands you control. If X is 6 or more, create two 2/1 red Klingon Warrior creature tokens with haste.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_2_1_klingon_warrior_haste | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+DeckHas:Ability$Token
+Oracle:Strange new worlds — All creatures get -X/-X until end of turn, where X is the number of differently named lands you control. If X is 6 or more, create two 2/1 red Klingon Warrior creature tokens with haste.
