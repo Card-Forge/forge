@@ -67,6 +67,20 @@ public class CardProperty {
             if (!card.sharesNameWith(name)) {
                 return false;
             }
+        } else if (property.equals("NameStartsWithChosenLetter") || property.equals("NameContainsChosenLetter")) {
+            final String letters = (source.getChosenType() + source.getChosenType2()).toUpperCase();
+            // Spy Kit: each English letter begins some nonlegendary creature name
+            if (card.hasNonLegendaryCreatureNames()) {
+                return StringUtils.containsAny(letters, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            }
+            final String name = card.getName().toUpperCase().replaceAll("[^\\p{L}\\p{N}]", "");
+            if (property.startsWith("NameStartsWith")) {
+                if (name.isEmpty() || letters.indexOf(name.charAt(0)) < 0) {
+                    return false;
+                }
+            } else if (!StringUtils.containsAny(name, letters)) {
+                return false;
+            }
         } else if (property.equals("NamedCard")) {
             boolean found = false;
             for (String name : source.getNamedCards()) {

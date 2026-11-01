@@ -1,0 +1,7 @@
+Name:Disemvowel
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. That creature's controller loses 1 life for each unique vowel in the creature's name. (The vowels are A, E, I, O, U, and Y.)
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ X
+SVar:X:Targeted$CardNameUniqueVowels
+Oracle:Destroy target creature. That creature's controller loses 1 life for each unique vowel in the creature's name. (The vowels are A, E, I, O, U, and Y.)
