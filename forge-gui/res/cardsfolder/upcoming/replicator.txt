@@ -1,0 +1,7 @@
+Name:Replicator
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this artifact enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You
+A:AB$ CopyPermanent | Cost$ 2 T | ValidTgts$ Permanent.token | ValidTgtsDesc$ token | TokenTapped$ True | SpellDescription$ Create a tapped token that's a copy of target token you control.
+Oracle:When this artifact enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\n{2}, {T}: Create a tapped token that's a copy of target token you control.

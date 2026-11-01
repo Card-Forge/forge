@@ -1,0 +1,11 @@
+Name:D-7 Battle Cruiser
+ManaCost:1 R
+Types:Artifact Spacecraft
+PT:3/3
+K:Station:8
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE3_CHARGE | AddTrigger$ CombatTrig | Description$ STATION 3+ At the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.
+SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$At the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_1_klingon_warrior_haste | AtEOT$ Sacrifice
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 8+ Flying
+SVar:PlayMain1:TRUE
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 3+\nAt the beginning of combat on your turn, create a 2/1 red Klingon Warrior creature token with haste. Sacrifice it at the beginning of the next end step.\nSTATION 8+\nFlying
