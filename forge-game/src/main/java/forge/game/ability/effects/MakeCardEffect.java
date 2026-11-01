@@ -152,8 +152,11 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         if (pack != null) {
                             pc = pack.stream().filter(p -> p.getRules().getMainPart().getName().equals(name)).findAny().get();
                         } else {
-                            // Try to get the card in the sa host's current edition
-                            String editionCode = sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE;
+                            String editionCode = sa.getParamOrDefault("PreferredEdition", null);
+                            if (editionCode == null) {
+                                // Try to get the card in the sa host's current edition
+                                editionCode = sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE;
+                            }
                             pc = StaticData.instance().getCommonCards().getCard(name, editionCode);
                         }
                         Card card = Card.fromPaperCard(pc, player);
