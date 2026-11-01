@@ -1,0 +1,10 @@
+Name:Academy Instructor
+ManaCost:2 R
+Types:Creature Bolian Officer
+PT:0/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each Officer token you control.
+SVar:X:Count$Valid Officer.token+YouCtrl
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 red Officer creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_officer
+DeckHas:Ability$Token & Type$Officer
+Oracle:This creature gets +1/+0 for each Officer token you control.\nWhenever you cast a noncreature spell, create a 1/1 red Officer creature token.

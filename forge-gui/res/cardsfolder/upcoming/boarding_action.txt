@@ -1,0 +1,7 @@
+Name:Boarding Action
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Token | TokenScript$ r_2_1_klingon_warrior_haste | SpellDescription$ Create a 2/1 red Klingon Warrior creature token with haste.
+K:Beam me up:2 R
+DeckHas:Ability$Token
+Oracle:Create a 2/1 red Klingon Warrior creature token with haste.\nBeam me up {2}{R} (You may cast this card from your graveyard for {2}{R} if you also return a creature you control to its owner's hand. Then exile this spell.)

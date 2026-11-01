@@ -1,0 +1,13 @@
+Name:Alexander, Ship's Fool
+ManaCost:3 R W
+Types:Legendary Creature Klingon Human
+PT:3/5
+K:Vigilance
+K:Haste
+A:AB$ PeekAndReveal | Cost$ T | Defined$ Player | RememberRevealed$ True | SubAbility$ DBDraw | SpellDescription$ Each player reveals the top card of their library, then draws a card. CARDNAME deals X damage to a random opponent, where X is the greatest mana value among cards revealed this way.
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True
+SVar:X:Remembered$GreatestCardManaCost
+Oracle:Vigilance, haste\n{T}: Each player reveals the top card of their library, then draws a card. Alexander deals X damage to a random opponent, where X is the greatest mana value among cards revealed this way.

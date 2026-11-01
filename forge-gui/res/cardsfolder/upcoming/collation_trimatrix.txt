@@ -1,0 +1,7 @@
+Name:Collation Trimatrix
+ManaCost:B
+Types:Artifact Creature Borg
+PT:1/1
+A:AB$ Draw | Cost$ tapXType<3/Artifact.Creature/artifact creature> | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Tap three untapped artifact creatures you control: You draw a card and lose 1 life.
