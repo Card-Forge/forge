@@ -1065,11 +1065,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
                 // this needs to come after chosenSa so it sees you conceding on own turn
-                if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
-                    // If the active player has lost, and they have priority, set the next player to have priority
+                if (pFirstPriority.hasLost()) {
+                    // CR 800.4a If the player who left the game had priority at the time they left,
+                    // priority passes to the next player in turn order who's still in the game.
                     System.out.println("Active player is no longer in the game...");
-                    pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
-                    pFirstPriority = pPlayerPriority;
+                    pFirstPriority = game.getNextPlayerAfter(pFirstPriority);
                 }
 
                 if (chosenSa == null) {
