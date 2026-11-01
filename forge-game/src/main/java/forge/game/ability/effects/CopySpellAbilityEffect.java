@@ -94,6 +94,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
 
             for (SpellAbility chosenSA : copySpells) {
+                List<SpellAbility> chosenCopies = Lists.newArrayList();
                 if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", chosenSA.getHostCard().getTranslatedName()), null)) {
                     continue;
                 }
@@ -113,14 +114,14 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         if (choice != null) {
                             SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                             if (changeToLegalTarget(copy, choice, targetedSA)) {
-                                copies.add(copy);
+                                chosenCopies.add(copy);
                             }
                         }
                     } else {
                         for (final GameEntity ge : all) {
                             SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                             resetFirstTargetOnCopy(copy, ge, targetedSA);
-                            copies.add(copy);
+                            chosenCopies.add(copy);
                         }
                     }
                 } else if (sa.hasParam("DefinedTarget")) { // CR 707.10e
@@ -147,7 +148,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     for (GameEntity e : newTgts) {
                         SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                         if (changeToLegalTarget(copy, e, targetedSA)) {
-                            copies.add(copy);
+                            chosenCopies.add(copy);
                         }
                     }
                 } else {
@@ -165,15 +166,16 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             copy.getHostCard().removeIntrinsicKeyword(Keyword.EPIC);
                         }
 
-                        copies.add(copy);
+                        chosenCopies.add(copy);
                     }
                 }
 
-                if (copies.isEmpty()) {
+                if (chosenCopies.isEmpty()) {
                     continue;
                 }
+                copies.addAll(chosenCopies);
 
-                int addAmount = copies.size();
+                int addAmount = chosenCopies.size();
                 final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(controller);
                 repParams.put(AbilityKey.SpellAbility, chosenSA);
                 repParams.put(AbilityKey.Amount, addAmount);
@@ -192,7 +194,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (addAmount <= 0) {
                     continue;
                 }
-                int extraAmount = addAmount - copies.size();
+                int extraAmount = addAmount - chosenCopies.size();
                 for (int i = 0; i < extraAmount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                     // extra copies added with CopySpellReplacenment currently always has new choose targets
