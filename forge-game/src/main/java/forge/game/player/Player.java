@@ -3239,7 +3239,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
         String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
-        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Companion - Put CARDNAME in to your hand";
+        String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | SorcerySpeed$ True | ActivationZone$ Command | AILogic$ Main2 | AIActivateLast$ True | SpellDescription$ Companion - Put CARDNAME in to your hand";
 
         StaticAbility stAb = StaticAbility.create(addToHandAbility, eff, eff.getCurrentState(), true);
         stAb.setSVar("MoveToHand", moveToHand);
