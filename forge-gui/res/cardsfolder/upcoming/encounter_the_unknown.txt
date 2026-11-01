@@ -1,0 +1,10 @@
+Name:Encounter the Unknown
+ManaCost:1 R R
+Types:Instant
+A:SP$ Charm | Choices$ DBExile,DBDamage
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Come in Peace — Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play those cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 2 | ValidDescription$ each creature and each player. | SpellDescription$ Shoot to Kill — CARDNAME deals 2 damage to each creature and each player.
+Oracle:Choose one —\n• Come in Peace — Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Shoot to Kill — Encounter the Unknown deals 2 damage to each creature and each player.

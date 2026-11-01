@@ -1,0 +1,7 @@
+Name:Fleet Captain Christopher Pike
+ManaCost:2 U
+Types:Legendary Creature Human Officer
+PT:0/6
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature.Other | TargetMin$ 2 | TargetMax$ 2 | ValidTgtsDesc$ another creature | SpellDescription$ Yes — Untap two other target creatures.
+A:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature.Other | TargetMin$ 2 | TargetMax$ 2 | ValidTgtsDesc$ another creature | SpellDescription$ No — Tap two other target creatures.
+Oracle:Yes — {1}, {T}: Untap two other target creatures.\nNo — {2}, {T}: Tap two other target creatures.

@@ -1,0 +1,10 @@
+Name:Kurn, Son of Mogh
+ManaCost:2 B
+Types:Legendary Creature Klingon Warrior Officer
+PT:2/3
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Battlefront — Whenever CARDNAME attacks, you draw X cards and lose X life, where X is the number of opponents you attacked this turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisTurn
+Oracle:Deathtouch\nBattlefront — Whenever Kurn attacks, you draw X cards and lose X life, where X is the number of opponents you attacked this turn.

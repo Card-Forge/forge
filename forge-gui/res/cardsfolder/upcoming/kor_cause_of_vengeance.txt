@@ -1,0 +1,11 @@
+Name:Kor, Cause of Vengeance
+ManaCost:1 R W B
+Types:Legendary Creature Klingon Warrior Officer
+PT:4/4
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you attack, you may sacrifice another creature. If you do, draw a card, then Klingons and Warriors you control get +2/+2 until end of turn.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | Defined$ You | NumCards$ 1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Klingon.YouCtrl,Warrior.YouCtrl | NumAtt$ +2 | NumDef$ +2
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Klingon|Warrior
+Oracle:Whenever you attack, you may sacrifice another creature. If you do, draw a card, then Klingons and Warriors you control get +2/+2 until end of turn.
