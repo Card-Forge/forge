@@ -183,15 +183,7 @@ public class RewardData implements Serializable {
                     HashSet<PaperCard> pool = new HashSet<>();
                     for (RewardData r : cardUnion) {
                         if (r.cardName != null && !r.cardName.isEmpty() ) {
-                            PaperCard pc;
-                            if (allCardVariants) {
-                                CardDb.CardRequest req = CardDb.CardRequest.fromString(r.cardName);
-                                pc = (req.edition != null)
-                                    ? CardUtil.getCardByNameAndEdition(req.cardName, req.edition)
-                                    : CardUtil.getCardByName(req.cardName);
-                            } else {
-                                pc = StaticData.instance().getCommonCards().getCard(r.cardName);
-                            }
+                            PaperCard pc = resolveNamedCard(r.cardName, r.editions, rewardRandom, allCardVariants);
                             if (pc != null)
                                 pool.add(pc);
                         } else if (r.sourceDeck != null && !r.sourceDeck.isEmpty() ) {
@@ -207,7 +199,8 @@ public class RewardData implements Serializable {
                             if (allCardVariants) {
                                 PaperCard cardTemplate = finalPool.get(rewardRandom.nextInt(finalPool.size()));
                                 if (cardTemplate != null) {
-                                    PaperCard finalCard = CardUtil.getCardByName(cardTemplate.getCardName());
+                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(
+                                            cardTemplate.getCardName(), cardTemplate.getEdition());
                                     if (finalCard != null)
                                         ret.add(new Reward(finalCard, isNoSell));
                                 }
@@ -222,25 +215,18 @@ public class RewardData implements Serializable {
                 case "card":
                 case "randomCard":
                     if (cardName != null && !cardName.isEmpty()) {
-                        if (allCardVariants) {
-                            CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
-                            PaperCard card = (request.edition != null)
-                                ? CardUtil.getCardByNameAndEdition(request.cardName, request.edition)
-                                : CardUtil.getCardByName(request.cardName);
-                            if (card != null) {
-                                for (int i = 0; i < count + addedCount; i++) {
-                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(request.cardName, card.getEdition());
-                                    if (finalCard != null)
-                                        ret.add(new Reward(finalCard, isNoSell));
-                                }
-                            }
+                        CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
+                        PaperCard template = resolveNamedCard(cardName, editions, rewardRandom, allCardVariants);
+                        if (template == null) {
+                            System.err.println("Missing card: " + cardName);
                         } else {
+                            String editionToUse = template.getEdition();
                             for (int i = 0; i < count + addedCount; i++) {
-                                PaperCard card = StaticData.instance().getCommonCards().getCard(cardName);
+                                PaperCard card = allCardVariants
+                                        ? CardUtil.getCardByNameAndEdition(request.cardName, editionToUse)
+                                        : template;
                                 if (card != null)
                                     ret.add(new Reward(card, isNoSell));
-                                else
-                                    System.err.println("Missing card: " + cardName);
                             }
                         }
                     } else if (sourceDeck != null && !sourceDeck.isEmpty()) {
@@ -389,5 +375,25 @@ public class RewardData implements Serializable {
             }
         }
         return ret;
+    }
+
+    /**
+     * Resolve a named card reward, honoring an edition embedded in {@code cardName}
+     * (e.g. {@code "Mox Pearl|VMA"}) or an explicit {@code editions} filter.
+     */
+    private static PaperCard resolveNamedCard(String cardName, String[] editions, Random rewardRandom,
+                                              boolean allCardVariants) {
+        CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
+        String edition = request.edition;
+        if (edition == null && editions != null && editions.length > 0) {
+            edition = editions[rewardRandom.nextInt(editions.length)];
+        }
+        if (edition != null) {
+            return CardUtil.getCardByNameAndEdition(request.cardName, edition);
+        }
+        if (allCardVariants) {
+            return CardUtil.getCardByName(request.cardName);
+        }
+        return StaticData.instance().getCommonCards().getCard(cardName);
     }
 }
