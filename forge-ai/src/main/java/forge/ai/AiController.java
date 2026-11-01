@@ -440,6 +440,10 @@ public class AiController {
             // These checks only work if the Executing SpellAbility is an Ability_Sub.
             if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
                 // AI would not run this trigger if given the chance
+                if (api == null && card.isCreature() && isHarmlessEmptySearch(exSA)) {
+                    // Nothing to find is a lost bonus, not a drawback of casting the creature.
+                    continue;
+                }
                 if (api == null && card.isCreature() && !ComputerUtilAbility.isFullyTargetable(exSA) &&
                         (ComputerUtil.aiLifeInDanger(activator, true, 0) || "BadETB".equals(tr.getParam("AILogic")))) {
                     // trigger will not run due to lack of targets and we 1. desperately need a creature or 2. are happy about that
@@ -473,6 +477,19 @@ public class AiController {
         }
 
         return rightapi;
+    }
+
+    private boolean isHarmlessEmptySearch(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.ChangeZone || !"Library".equals(sa.getParam("Origin"))
+                || !"Hand".equals(sa.getParam("Destination"))
+                || !"You".equals(sa.getParamOrDefault("Defined", "You"))
+                || sa.usesTargeting() || sa.isCurse() || sa.getSubAbility() != null
+                || sa.hasParam("UnlessCost") || (sa.getPayCosts() != null && !sa.getPayCosts().isFree())) {
+            return false;
+        }
+        // Preserve other reasons to reject a trigger, including costs and harmful effects.
+        return SpellApiToAi.Converter.get(sa).doTriggerNoCostWithSubs(player, sa, false).decision()
+                == AiPlayDecision.MissingNeededCards;
     }
 
     private static List<SpellAbility> getPlayableCounters(final CardCollection all) {
