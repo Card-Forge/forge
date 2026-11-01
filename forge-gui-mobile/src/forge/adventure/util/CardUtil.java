@@ -981,10 +981,7 @@ public class CardUtil {
                 return getCardByName(cardName);
             }
         }
-        List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
-                ? FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName)
-                : List.of(FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt(cardName));
-        List<PaperCard> validCards = cardPool.stream()
+        List<PaperCard> validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName).stream()
                 .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
 
         if (validCards.isEmpty()) {
