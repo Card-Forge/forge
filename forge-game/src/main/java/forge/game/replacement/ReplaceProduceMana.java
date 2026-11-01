@@ -51,7 +51,14 @@ public class ReplaceProduceMana extends ReplacementEffect {
 
             int intoperand = AbilityUtils.calculateAmount(getHostCard(), operand, this);
 
-            int manaAmount = StringUtils.countMatches((String) runParams.get(AbilityKey.Mana), " ") + 1;
+            String mana = (String) runParams.get(AbilityKey.Mana);
+            int manaAmount;
+            // before a color is chosen (e.g. when predicting a payment), combination mana is still "Combo W U"
+            if (mana.startsWith("Combo ") && runParams.get(AbilityKey.AbilityMana) instanceof SpellAbility ma) {
+                manaAmount = ma.amountOfManaGenerated(false);
+            } else {
+                manaAmount = StringUtils.countMatches(mana, " ") + 1;
+            }
             if (!Expressions.compare(manaAmount, operator, intoperand)) {
                 return false;
             }
