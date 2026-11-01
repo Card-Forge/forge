@@ -18,6 +18,7 @@
 package forge.game.replacement;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 import forge.game.card.*;
 import forge.game.phase.PhaseType;
@@ -49,7 +50,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 import forge.util.Visitor;
 
 public class ReplacementHandler {
@@ -88,7 +88,7 @@ public class ReplacementHandler {
             // CR 614.12 ETB replacements look at what the card would be on the battlefield
             affectedCard = (Card) runParams.get(AbilityKey.Affected);
             // must force cache the CardState ETB replacements so the LKI copies them
-            affectedCard.getReplacementEffects();
+            affectedCard.streamReplacementEffects();
             affectedLKI = CardCopyService.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
 
@@ -117,11 +117,8 @@ public class ReplacementHandler {
             // only when not prelist
             boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
 
-            // most cards have no replacement effects: skip them before the zone lookup and iterator creation.
-            // The collection is fetched once and reused below (it can be rebuilt on every call).
-            final Card firstCard = c;
-            final FCollectionView<ReplacementEffect> firstEffects = c.getReplacementEffects();
-            if (noLKIstate && firstEffects.isEmpty()) {
+            // most cards have no replacement effects: skip them before the zone lookup
+            if (noLKIstate && !c.hasReplacementEffects()) {
                 return true;
             }
 
@@ -153,37 +150,41 @@ public class ReplacementHandler {
                 }
             }
 
-            // the collection is a cached FCollection (a List): index it to avoid allocating an Iterator per card
-            final FCollectionView<ReplacementEffect> effects = c == firstCard ? firstEffects : c.getReplacementEffects();
-            if (effects instanceof List<?>) {
-                @SuppressWarnings("unchecked")
-                final List<ReplacementEffect> list = (List<ReplacementEffect>) effects;
-                for (int i = 0; i < list.size(); i++) {
-                    if (!collectReplacer(list.get(i), event, runParams, layer, cardZone, possibleReplacers)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            for (final ReplacementEffect replacementEffect : effects) {
-                if (!collectReplacer(replacementEffect, event, runParams, layer, cardZone, possibleReplacers)) {
+            final Zone finalCardZone = cardZone;
+            Stream<ReplacementEffect> filteredStream = c.streamReplacementEffects().filter(replacementEffect -> {
+                return !replacementEffect.hasRun()
+                        && (layer == null || replacementEffect.getLayer() == layer)
+                        && replacementEffect.modeCheck(event, runParams)
+                        && (hasRun.isEmpty() || !hasRun.contains(replacementEffect))
+                        //&& !possibleReplacers.contains(replacementEffect)
+                        && replacementEffect.zonesCheck(finalCardZone)
+                        && replacementEffect.requirementsCheck(game)
+                        && replacementEffect.canReplace(runParams);
+            });
+
+            if (layer == ReplacementLayer.CantHappen) {
+                Optional<ReplacementEffect> find = filteredStream.findFirst();
+                if (find.isPresent()) {
+                    possibleReplacers.add(find.get());
                     return false;
                 }
+            } else {
+                filteredStream.forEach(possibleReplacers::add);
             }
+
             return true;
         }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (affectedLKI != null) {
             // need to set the Host Card there so it is not connected to LKI anymore?
             // need to be done after canReplace check
-            for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
-                re.setHostCard(affectedCard);
-            }
-            // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
+            final Card finalAffectedCard = affectedCard;
+            affectedLKI.streamReplacementEffects().forEach(re -> re.setHostCard(finalAffectedCard));
+            // need to copy stored keywords from LKI into real object to prevent the replacement effect from making new ones
             affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
             affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
             if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
-                // need to readd the CastSA Keyword into the Card
+                // need to re-add the CastSA Keyword into the Card
                 affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
             }
             runParams.put(AbilityKey.Affected, affectedCard);
@@ -193,29 +194,6 @@ public class ReplacementHandler {
         }
 
         return possibleReplacers;
-    }
-
-    /**
-     * Adds the replacement effect to possibleReplacers if it applies.
-     * @return false if the scan must stop (a CantHappen effect was found), true to continue
-     */
-    private boolean collectReplacer(final ReplacementEffect replacementEffect, final ReplacementType event,
-        final Map<AbilityKey, Object> runParams, final ReplacementLayer layer, final Zone cardZone,
-        final List<ReplacementEffect> possibleReplacers) {
-        if (!replacementEffect.hasRun()
-                && (layer == null || replacementEffect.getLayer() == layer)
-                && replacementEffect.modeCheck(event, runParams)
-                && (hasRun.isEmpty() || !hasRun.contains(replacementEffect))
-                && !possibleReplacers.contains(replacementEffect)
-                && replacementEffect.zonesCheck(cardZone)
-                && replacementEffect.requirementsCheck(game)
-                && replacementEffect.canReplace(runParams)) {
-            possibleReplacers.add(replacementEffect);
-            if (layer == ReplacementLayer.CantHappen) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public boolean cantHappenCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
@@ -934,17 +912,15 @@ public class ReplacementHandler {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public boolean visit(Card c) {
-                for (final ReplacementEffect re : c.getReplacementEffects()) {
-                    if (re.getMode() == ReplacementType.DamageDone
+                c.streamReplacementEffects().filter(re -> {
+                    return re.getMode() == ReplacementType.DamageDone
                             && re.getLayer() == ReplacementLayer.Other
                             && re.hasParam("PreventionEffect")
                             && re.zonesCheck(game.getZoneOf(c))
                             && re.getOverridingAbility() != null
                             && re.getOverridingAbility().getApi() == ApiType.ReplaceDamage
-                            && re.matchesValidParam("ValidTarget", o)) {
-                        list.add(re);
-                    }
-                }
+                            && re.matchesValidParam("ValidTarget", o);
+                }).forEach(list::add);
                 return true;
             }
 
@@ -976,15 +952,15 @@ public class ReplacementHandler {
         // a fog effect can only be active from a zone in STATIC_ABILITIES_SOURCE_ZONES
         // (zonesCheck below rejects other zones), so don't scan libraries and hands
         for (final Card c : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final ReplacementEffect re : c.getReplacementEffects()) {
-                if (re.getMode() == ReplacementType.DamageDone
+            if (c.streamReplacementEffects().anyMatch(re -> {
+                return re.getMode() == ReplacementType.DamageDone
                         && re.getLayer() == ReplacementLayer.Other
                         && "True".equals(re.getParam("Prevent"))
                         && "True".equals(re.getParam("IsCombat"))
                         && !re.hasParam("ValidSource") && !re.hasParam("ValidTarget")
-                        && re.zonesCheck(game.getZoneOf(c))) {
-                    return true;
-                }
+                        && re.zonesCheck(game.getZoneOf(c));
+            })) {
+                return true;
             }
         }
         return false;

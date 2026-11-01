@@ -78,7 +78,7 @@ public class PerfPatchFollowUpRulesTest extends GameSimulationTest {
         }
         for (boolean rulesHost : new boolean[]{true, false}) {
             if (buildRepl != null) {
-                Assert.assertEquals(sig(s.getReplacementEffects(rulesHost)),
+                Assert.assertEquals(sig(s.getReplacementEffects()),
                         sig((Iterable<? extends CardTraitBase>) buildRepl.invoke(s, rulesHost)),
                         "STALE replacement-effect cache (rulesHost=" + rulesHost + ") " + ctx);
             }
@@ -119,8 +119,8 @@ public class PerfPatchFollowUpRulesTest extends GameSimulationTest {
         FCollection<ReplacementEffect> rawReplacements = (FCollection<ReplacementEffect>) replacementField.get(st);
 
         int statics0 = st.getStaticAbilities().size();                        // fills the caches
-        int replacements0 = st.getReplacementEffects(true).size();
-        st.getReplacementEffects(false);
+        int replacements0 = st.getReplacementEffects().size();
+        st.getReplacementEffects();
         assertCoherent(st, "primed");
 
         StaticAbility sa = newStatic(bears, st);
@@ -133,10 +133,10 @@ public class PerfPatchFollowUpRulesTest extends GameSimulationTest {
 
         ReplacementEffect re = newReplacement(bears, st);
         rawReplacements.add(re);
-        Assert.assertEquals(st.getReplacementEffects(true).size(), replacements0 + 1, "replacement added behind the counter's back");
+        Assert.assertEquals(st.getReplacementEffects().size(), replacements0 + 1, "replacement added behind the counter's back");
         assertCoherent(st, "after raw replacement add");
         rawReplacements.remove(re);
-        Assert.assertEquals(st.getReplacementEffects(true).size(), replacements0, "replacement removed behind the counter's back");
+        Assert.assertEquals(st.getReplacementEffects().size(), replacements0, "replacement removed behind the counter's back");
         assertCoherent(st, "after raw replacement remove");
     }
 
