@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Klingon Warrior
 PT:3/2
 S:Mode$ ReduceCost | ValidCard$ Klingon,Warrior | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Klingon spells and Warrior spells you cast cost {1} less to cast.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Klingon.Other+YouCtrl,Warrior.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another Klingon or Warrior you control enters, CARDNAME deals 1 damage to each opponent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Klingon.Other+YouCtrl,Warrior.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another Klingon or Warrior you control enters, this creature deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
 DeckHints:Type$Klingon|Warrior
 Oracle:Klingon spells and Warrior spells you cast cost {1} less to cast.\nWhenever another Klingon or Warrior you control enters, this creature deals 1 damage to each opponent.
