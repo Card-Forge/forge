@@ -431,4 +431,12 @@ public class GameSimulator {
     public GameCopier getGameCopier() {
         return copier;
     }
+
+    /**
+     * For search nodes: once the plays that need {@link #getGameCopier()} are applied, drops the link to the game this
+     * one was copied from, so a long-lived node keeps one game alive instead of its whole chain of ancestors.
+     */
+    public void releaseCopier() {
+        copier.release();
+    }
 }

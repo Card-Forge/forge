@@ -36,8 +36,11 @@ public final class UndoManager {
     private long lastObjects;
     /** Rough peak bytes per captured object while a capture runs (an estimate; tune from real logs). */
     private static final long BYTES_PER_OBJECT = 220;
-    /** Objects the human undo history may hold in total (a few tens of MB of arrays). */
-    private static final long MAX_RETAINED_OBJECTS = 6_000_000L;
+    /**
+     * Objects the human undo history may hold in total: at most 6 million, and on a small heap about one per KB of
+     * the maximum heap (roughly a seventh of it), so a phone does not fill up with undo history.
+     */
+    private static final long MAX_RETAINED_OBJECTS = Math.min(6_000_000L, Runtime.getRuntime().maxMemory() / 1000);
 
     /** False when the heap is too full to take another snapshot safely. */
     private boolean heapAllows() {

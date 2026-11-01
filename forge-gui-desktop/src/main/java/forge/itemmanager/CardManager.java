@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 public class CardManager extends ItemManager<PaperCard> {
     
     private boolean QuestMode;
+    private GameFormat requiredFormat;
 
     public CardManager(final CDetailPicture cDetailPicture, final boolean wantUnique0, final boolean qm, boolean sr) {
         super(PaperCard.class, cDetailPicture, wantUnique0, sr);
@@ -42,6 +43,36 @@ public class CardManager extends ItemManager<PaperCard> {
     @Override
     protected void addDefaultFilters() {
         addDefaultFilters(this);
+        if (requiredFormat != null) {
+            addFilter(new CardFormatFilter(this, requiredFormat));
+        }
+    }
+
+    /** Shows only cards legal in the format, or every card when it is null. Restoring or resetting the filters keeps it. */
+    public void setRequiredFormat(final GameFormat format) {
+        if (format == requiredFormat) { return; }
+
+        requiredFormat = format;
+        applyRequiredFormat();
+    }
+
+    private void applyRequiredFormat() {
+        final CardFormatFilter current = getFilter(CardFormatFilter.class);
+        if (current != null) {
+            removeFilter(current);
+        }
+        if (requiredFormat != null) {
+            addFilter(new CardFormatFilter(this, requiredFormat));
+        }
+    }
+
+    @Override
+    public void resetFilters() {
+        super.resetFilters();
+        if (requiredFormat != null) {
+            applyRequiredFormat();
+            applyFilters();
+        }
     }
 
     @Override

@@ -143,6 +143,24 @@ public final class FlatMonteCarloPicker {
     private FlatMonteCarloPicker() {
     }
 
+    /** A phone or tablet gives the app a few hundred MB: search less there. */
+    static boolean constrainedHeap() {
+        return Runtime.getRuntime().maxMemory() <= (768L << 20);
+    }
+
+    /**
+     * Every rollout copies the whole game. On a small heap, stop sampling before the garbage collector thrashes and
+     * keep the heuristic choice. Only checked on small heaps: elsewhere the used memory is mostly garbage that has not
+     * been collected yet, and an OutOfMemoryError in a rollout is already caught.
+     */
+    static boolean lowMemory() {
+        if (!constrainedHeap()) {
+            return false;
+        }
+        final Runtime rt = Runtime.getRuntime();
+        return rt.totalMemory() - rt.freeMemory() > rt.maxMemory() * 0.85;
+    }
+
     /** Tunable parameters, normally read from the AI profile with {@link #fromProfile}. */
     public static final class Config implements Cloneable {
         /** How many of the heuristic-approved plays are compared (the hold option comes on top). */
@@ -266,6 +284,9 @@ public final class FlatMonteCarloPicker {
          * circuit breaker still switches Monte Carlo off if it errors or cannot keep up.
          */
         public Config maximized() {
+            if (constrainedHeap()) {
+                return mobileLite(); // the desktop strength needs desktop memory
+            }
             maxCandidates = Math.max(maxCandidates, MAX_CANDIDATES_DESKTOP);
             rolloutsPerCandidate = Math.max(rolloutsPerCandidate, MAX_ROLLOUTS_DESKTOP);
             extraRounds = Math.max(extraRounds, MAX_EXTRA_ROUNDS_DESKTOP);
@@ -510,6 +531,9 @@ public final class FlatMonteCarloPicker {
         if (cands.size() < 2) {
             return Result.keepHeuristic(heuristicChoice, "single-candidate");
         }
+        if (lowMemory()) {
+            return Result.keepHeuristic(heuristicChoice, "low-memory");
+        }
 
         final long budget = Math.min(cfg.budgetNanos, AITimeoutTracker.remainingNanos() / 2);
         if (budget <= 0) {
@@ -570,6 +594,10 @@ public final class FlatMonteCarloPicker {
                         tooSlow = r == 0 && c < 2;
                         break rounds;
                     }
+                }
+                if (lowMemory()) {
+                    tooSlow = r == 0 && c < 2;
+                    break rounds;
                 }
                 final long t0 = System.nanoTime();
                 final Candidate cand = cands.get(c);
@@ -843,7 +871,11 @@ public final class FlatMonteCarloPicker {
             }
             GameObject target = null;
             final SpellAbility targeting = singleTargetingAbility(sa);
-            if (targeting != null && targeting.getApi() == ApiType.Counter) {
+            if (targeting != null && TutorPlan.isLibraryTutor(sa)) {
+                if (!aimAtOpponent(player, targeting)) {
+                    continue;
+                }
+            } else if (targeting != null && targeting.getApi() == ApiType.Counter) {
                 // aimed at the spell on the stack by the caller, which no GameEntity target can express
                 if (targeting.getTargets().isEmpty()) {
                     continue;
@@ -971,6 +1003,20 @@ public final class FlatMonteCarloPicker {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
             if (a.usesTargeting()) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /** Intuition and the like: "target opponent chooses". Sets the first opponent that can be targeted. */
+    static boolean aimAtOpponent(final Player player, final SpellAbility targeting) {
+        if (targeting.isTargetNumberValid() && !targeting.getTargets().isEmpty()) {
+            return true;
+        }
+        targeting.resetTargets();
+        for (final Player opp : player.getOpponents()) {
+            if (targeting.canTarget(opp) && targeting.getTargets().add(opp)) {
+                return targeting.isTargetNumberValid();
             }
         }
         return false;
@@ -1521,7 +1567,7 @@ public final class FlatMonteCarloPicker {
             value += holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
         }
         if (cand != null && cand.sa != null) {
-            value += StrategicEvaluator.selectionBonus(cand.sa, cfg);
+            value += StrategicEvaluator.selectionBonus(cand.sa, cfg) + TutorPlan.bonus(cand.sa, cfg);
         }
         return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
     }

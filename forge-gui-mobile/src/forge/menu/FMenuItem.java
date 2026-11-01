@@ -77,6 +77,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
         return text;
     }
 
+    public float getItemHeight() {
+        return HEIGHT;
+    }
+
     public boolean hasIcon() {
         return icon != null;
     }

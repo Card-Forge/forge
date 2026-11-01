@@ -508,13 +508,18 @@ public class ComputerUtilMana {
         return manaProduced.toString();
     }
 
+    // no color is chosen yet for combination mana, so "Combo W U" would count as three mana for ManaAmount
+    private static String manaForReplacementCheck(String produced, SpellAbility ma) {
+        return produced.startsWith("Combo ") ? StringUtils.repeat("C", " ", ma.amountOfManaGenerated(false)) : produced;
+    }
+
     private static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
         Game game = hostCard.getGame();
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(hostCard);
-        repParams.put(AbilityKey.Mana, manaProduced);
+        repParams.put(AbilityKey.Mana, manaForReplacementCheck(manaProduced, saPayment));
         repParams.put(AbilityKey.Activator, ai);
         repParams.put(AbilityKey.AbilityMana, saPayment); // RootAbility
 
@@ -1211,6 +1216,14 @@ public class ComputerUtilMana {
             return false;
         }
 
+        // a mana ability that discards the hand (Lion's Eye Diamond) is not for paying a spell while the hand holds the
+        // finisher or the engine of a storm deck: it was cracked with Tendrils of Agony in hand and the kill was gone
+        if (ma != sa && ma.getPayCosts() != null && ma.getPayCosts().hasSpecificCostType(forge.game.cost.CostDiscard.class)
+                && ai.getController() instanceof PlayerControllerAi
+                && forge.ai.simulation.ComboPlan.holdsKillPiece(ai)) {
+            return false;
+        }
+
         if (toPay.isSnow() && !sourceCard.isSnow()) {
             return false;
         }
@@ -1827,7 +1840,7 @@ public class ComputerUtilMana {
                         // setup produce mana replacement effects
                         String origin = mp.getOrigProduced();
                         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(sourceCard);
-                        repParams.put(AbilityKey.Mana, origin);
+                        repParams.put(AbilityKey.Mana, manaForReplacementCheck(origin, tail));
                         repParams.put(AbilityKey.Activator, ai);
                         repParams.put(AbilityKey.AbilityMana, m); // RootAbility
 

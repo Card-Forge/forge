@@ -4,7 +4,7 @@ Types:Creature Giant Wizard
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | TgtPrompt$ Select target creature an opponent controls
-SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ STUN | CounterNum$ 1
 DeckHas:Ability$Counters|Discard
 AlternateMode:Adventure
 Oracle:Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.

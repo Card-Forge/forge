@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
 
 import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gamemodes.match.GameLobby;
@@ -87,19 +88,8 @@ public class VLobby implements ILobbyView {
     private final ImmutableList<VariantCheckBox> vntBoxes  =
             ImmutableList.of(vntPlanechase, vntArchenemy, vntArchenemyRumble, vntVanguard);
 
-    /**
-     * The mutually exclusive game types, in the order the deck editor's own format
-     * dropdown lists them. GameLobby.applyVariant already treats these as a radio
-     * group; the dropdown just makes that visible. Momir Basic and MoJhoSto sit at
-     * the end because they replace the deck outright rather than constrain it.
-     */
-    private static final ImmutableList<GameType> GAME_FORMATS = ImmutableList.of(
-            GameType.Constructed, GameType.Commander, GameType.Oathbreaker,
-            GameType.Brawl, GameType.TinyLeaders,
-            GameType.MomirBasic, GameType.MoJhoSto);
-
-    private final FComboBoxPanel<GameType> cboFormatPanel =
-            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblGameFormat") + ":", GAME_FORMATS);
+    private final FComboBoxPanel<Object> cboFormatPanel =
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblFormat") + ":", FormatChoices.get(true));
     private boolean suppressFormatListener = false;
 
     // Player frame elements
@@ -1009,6 +999,7 @@ public class VLobby implements ILobbyView {
 
     void setVariantsVisible(boolean visible) {
         cboFormatPanel.setVisible(visible);
+        applyDeckListFormat();
         Container scrollPane = variantsPanel.getParent();
         while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
             scrollPane = scrollPane.getParent();
@@ -1229,49 +1220,25 @@ public class VLobby implements ILobbyView {
 
     /////////////////////////////////////////////
 
-    /**
-     * Write the chosen format into the lobby. applyVariant's own exclusion switch
-     * clears the other game formats, so this only has to handle Constructed, which
-     * is the absence of all of them rather than a variant of its own.
-     */
     private void onGameFormatChanged() {
         if (suppressFormatListener) { return; }
 
-        final GameType selected = cboFormatPanel.getSelectedItem();
+        final Object selected = cboFormatPanel.getSelectedItem();
         if (selected == null) { return; }
 
         if (!lobby.hasControl()) { // not ours to change; put the combo back
             syncGameFormatCombo();
             return;
         }
-        if (selected == currentGameFormat()) { return; }
+        if (selected == lobby.getFormatChoice()) { return; }
 
-        if (selected == GameType.Constructed) {
-            for (final GameType gt : GAME_FORMATS) {
-                if (gt != GameType.Constructed) {
-                    lobby.removeVariant(gt);
-                }
-            }
-        } else {
-            lobby.applyVariant(selected);
-        }
-
+        lobby.setFormatChoice(selected);
         update(false);
         updateActionButtons();
     }
 
-    /** The applied game format, or Constructed when none of them is applied. */
-    private GameType currentGameFormat() {
-        for (final GameType gt : GAME_FORMATS) {
-            if (gt != GameType.Constructed && hasVariant(gt)) {
-                return gt;
-            }
-        }
-        return GameType.Constructed;
-    }
-
     private void syncGameFormatCombo() {
-        final GameType applied = currentGameFormat();
+        final Object applied = lobby.getFormatChoice();
         if (cboFormatPanel.getSelectedItem() != applied) {
             suppressFormatListener = true;
             try {
@@ -1281,6 +1248,19 @@ public class VLobby implements ILobbyView {
             }
         }
         cboFormatPanel.setEnabled(lobby.hasControl());
+        applyDeckListFormat();
+    }
+
+    /** The format the deck lists show. Limited mode lists event pools, which the Constructed format does not apply to. */
+    private GameFormat deckListFormat() {
+        return controller.isLimitedMode() ? null : lobby.getFormat();
+    }
+
+    private void applyDeckListFormat() {
+        final GameFormat format = deckListFormat();
+        for (final FDeckChooser chooser : cachedDeckChoosers.values()) {
+            chooser.getLstDecks().setRequiredFormat(format);
+        }
     }
 
     //========== Various listeners in build order
@@ -1339,6 +1319,7 @@ public class VLobby implements ILobbyView {
             final GameType gameType = forCommander ? type : GameType.Constructed;
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
             fdc.initialize(prefKey, deckType);
+            fdc.getLstDecks().setRequiredFormat(deckListFormat());
             fdc.setDeckSelectionCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
             return fdc;
         });

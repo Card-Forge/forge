@@ -4,6 +4,94 @@ Date=2026-11-13
 Name=Star Trek
 Type=Expansion
 ScryfallCode=TRK
+#https://magic.wizards.com/en/news/feature/collecting-star-trek
+BoosterSlots=Common,Common-SDS,Common-Klingon,Uncommon,RareMythic,Land,Wildcard,WildcardFoil,EchoedPair
+Booster=5 Common, 1 Common-SDS, 1 Common-Klingon, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("TRK cards")
+
+[Common-SDS]
+Base=Common:fromSheet("TRK cards")
+Replace=0.04F fromSheet("SDS cards")
+
+[Common-Klingon]
+Base=Common:fromSheet("TRK cards")
+Replace=0.029F Common:fromSheet("TRK klingon cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TRK cards")
+Replace=0.0263F Uncommon:fromSheet("TRK scene cards")
+Replace=0.0155F Uncommon:fromSheet("TRK LCARS cards")
+Replace=0.0155F Uncommon:fromSheet("TRK classic enterprise cards")
+Replace=0.0169F Uncommon:fromSheet("TRK klingon cards")
+#These are per card odds. For 3 uncommon slots it works out to 7.7%, 4.6%, 4.6% and 5.0% respectively
+
+[Wildcard]
+Base=Common:fromSheet("TRK cards")
+Replace=0.541F Uncommon:fromSheet("TRK cards")
+Replace=0.167F Rare:fromSheet("TRK cards")
+Replace=0.026F Mythic:fromSheet("TRK cards")
+Replace=0.0011F Common:fromSheet("TRK klingon cards")
+Replace=0.01F Uncommon:fromSheet("TRK klingon cards")
+Replace=0.0011F Rare:fromSheet("TRK klingon cards")
+Replace=0.015F Uncommon:fromSheet("TRK scene cards")
+Replace=0.0027F Rare:fromSheet("TRK scene cards")
+Replace=0.00129F Mythic:fromSheet("TRK scene cards")
+Replace=0.01F Uncommon:fromSheet("TRK LCARS cards")
+Replace=0.0046F Rare:fromSheet("TRK LCARS cards")
+Replace=0.00145F Mythic:fromSheet("TRK LCARS cards")
+Replace=0.0042F Rare:fromSheet("TRK classic enterprise cards")
+Replace=0.00114F Mythic:fromSheet("TRK classic enterprise cards")
+Replace=0.00176F Rare:fromSheet("TRK borderless lands")
+Replace=0.00036F Mythic:fromSheet("TRK borderless lands")
+Replace=0.0033F Rare:fromSheet("TRK LCARS shocklands")
+
+[RareMythic]
+Base=Rare:fromSheet("TRK cards")
+Replace=0.124F Mythic:fromSheet("TRK cards")
+Replace=0.003F Rare:fromSheet("TRK klingon cards")
+Replace=0.008F Rare:fromSheet("TRK scene cards")
+Replace=0.0035F Mythic:fromSheet("TRK scene cards")
+Replace=0.0176F Rare:fromSheet("TRK LCARS cards")
+Replace=0.00506F Mythic:fromSheet("TRK LCARS cards")
+Replace=0.0146F Rare:fromSheet("TRK classic enterprise cards")
+Replace=0.0039F Mythic:fromSheet("TRK classic enterprise cards")
+Replace=0.0055F Rare:fromSheet("TRK borderless lands")
+Replace=0.00055F Mythic:fromSheet("TRK borderless lands")
+Replace=0.0137F Rare:fromSheet("TRK LCARS shocklands")
+
+[WildcardFoil]
+Base=Common:fromSheet("TRK cards")
+Replace=0.347F Uncommon:fromSheet("TRK cards")
+Replace=0.063F Rare:fromSheet("TRK cards")
+Replace=0.01F Mythic:fromSheet("TRK cards")
+Replace=0.00516F Common:fromSheet("TRK klingon cards")
+Replace=0.01F Uncommon:fromSheet("TRK klingon cards")
+Replace=0.00126F Rare:fromSheet("TRK klingon cards")
+Replace=0.016F Uncommon:fromSheet("TRK scene cards")
+Replace=0.00321F Rare:fromSheet("TRK scene cards")
+Replace=0.00156F Mythic:fromSheet("TRK scene cards")
+Replace=0.011F Uncommon:fromSheet("TRK LCARS cards")
+Replace=0.00554F Rare:fromSheet("TRK LCARS cards")
+Replace=0.00165F Mythic:fromSheet("TRK LCARS cards")
+Replace=0.00515F Rare:fromSheet("TRK classic enterprise cards")
+Replace=0.00126F Mythic:fromSheet("TRK classic enterprise cards")
+Replace=0.00204F Rare:fromSheet("TRK borderless lands")
+Replace=0.000287F Mythic:fromSheet("TRK borderless lands")
+Replace=0.00399F Rare:fromSheet("TRK LCARS shocklands")
+
+[Land]
+Base=BasicLand:fromSheet("TRK dual basic")
+Replace=.10F BasicLand:fromSheet("TRK dual basic")+
+Replace=.2666F BasicLand:fromSheet("TRK basic frame")
+Replace=.0666F BasicLand:fromSheet("TRK basic frame")+
+Replace=.0667F fromSheet("TRK holodeck basic")
+Replace=.0167F fromSheet("TRK holodeck basic")+
+Replace=.0667F fromSheet("TRK away team basic")
+Replace=.0167F fromSheet("TRK away team basic")+
 
 [cards]
 1 U 70,000 Light-Years from Home @Ariel Orea
@@ -332,6 +420,8 @@ ScryfallCode=TRK
 324 L Mountain @Leon Tukker
 325 L Forest @Bastien Grivet
 326 L Forest @Leon Tukker
+
+[borderless]
 332 R Federation Outpost @Paulius Daščioras
 333 R Ni'Var Science Academy @Rimas Valeikis
 334 R Q Continuum @Vlad Petruchik
@@ -446,6 +536,8 @@ ScryfallCode=TRK
 443 R Gowron, Eager for Battle @Gintas Galvanauskas
 444 U L'Rell, Fierce Visionary @Julia Vasilyeva
 445 U Worf, Honor-Bound Warrior @Rimas Valeikis
+
+[extended art]
 446 R Antagonist Incorporator @Miklós Ligeti
 447 R Miles O'Brien, Transporter Ops @John Tyler Christopher
 448 M U.S.S. Enterprise-A, Free Spirit @Evan Shipard
@@ -580,6 +672,8 @@ ScryfallCode=TRK
 577 L Earth, Sector 001 @Colin Searle
 578 L Risa @Colin Searle
 579 L Vulcan @John Di Giovanni
+
+[showcase]
 1701 M Captain James T. Kirk @Chris Rallis
 1701D M Captain Jean-Luc Picard @Irvin Rodriguez
 1702 M Mr. Spock, Science Officer @Gal Or
@@ -587,6 +681,160 @@ ScryfallCode=TRK
 1704 M Captain Kathryn Janeway @Lie Setiawan
 1705 M Seven of Nine, Unassimilated @Jack Hughes
 1706 M Lt. Cmdr. Geordi La Forge @Tyler Jacobson
+
+[scene cards]
+1 Resistance Is Futile|TRK|[338]
+1 Test of Courage|TRK|[339]
+1 Captain Kathryn Janeway|TRK|[340]
+1 Command Subadjunct|TRK|[341]
+1 Conquest Mission|TRK|[342]
+1 Seven of Nine|TRK|[343]
+1 Captain Benjamin Sisko|TRK|[344]
+1 Dominion Saboteur|TRK|[345]
+1 The Holodeck|TRK|[346]
+1 Quark, Humble Proprietor|TRK|[347]
+1 Constable Odo|TRK|[348]
+1 Dominion Infiltration |TRK|[349]
+1 Quark's Bar|TRK|[350]
+1 Nog, Ambitious Cadet|TRK|[351]
+1 Jadzia Dax, Living Legacy|TRK|[352]
+1 Mr. Spock, Science Officer|TRK|[353]
+1 Mirror Universe Intrusion|TRK|[354]
+1 Kirk, Commanding Officer|TRK|[355]
+1 Sulu, Space Swashbuckler|TRK|[356]
+1 Transporter Malfunction |TRK|[357]
+1 Nyota Uhura, Communications|TRK|[358]
+1 Lieutenant Commander Data|TRK|[359]
+1 Locutus, the One Who Speaks|TRK|[360]
+1 Infinite Diversity |TRK|[361]
+1 Death Is Irrelevant|TRK|[362]
+
+[classic enterprise cards]
+1 Dr. McCoy, Surly Surgeon|TRK|[402]
+1 Excalbian Gamemaster|TRK|[403]
+1 Federation Resupply|TRK|[404]
+1 The Needs of the Many|TRK|[405]
+1 Saavik, Stoic Student|TRK|[406]
+1 Sulu, Space Swashbuckler|TRK|[407]
+1 Troubling Tribbles|TRK|[408]
+1 Ensign Pavel Chekov|TRK|[409]
+1 Kobayashi Maru Scenario|TRK|[410]
+1 Mr. Spock, Science Officer|TRK|[411]
+1 Nyota Uhura, Communications|TRK|[412]
+1 Scotty, Miracle Worker|TRK|[413]
+1 The Destruction of Praxis|TRK|[414]
+1 General Chang, Cold Warrior|TRK|[415]
+1 Khan, Vengeful Heart|TRK|[416]
+1 Salt Vampire|TRK|[417]
+1 Captain James T. Kirk|TRK|[418]
+1 Khan, Despot by Design|TRK|[419]
+1 David and Carol Marcus, Creators|TRK|[420]
+1 Dr. Leonard "Bones" McCoy|TRK|[421]
+1 Genesis Device|TRK|[422]
+1 Live Long and Prosper|TRK|[423]
+1 Mirror Universe Intrusion|TRK|[424]
+1 Sarek, Federation Ambassador |TRK|[425]
+
+[LCARS cards]
+1 Captain Jean-Luc Picard|TRK|[363]
+1 Command Subadjunct|TRK|[364]
+1 Deanna Troi, Psychic Counsel|TRK|[365]
+1 Dr. Beverly Crusher|TRK|[366]
+1 Peace in Our Time|TRK|[367]
+1 Primary Unimatrix Adjunct|TRK|[368]
+1 There's Coffee in that Nebula|TRK|[369]
+1 Deep Space Scan|TRK|[370]
+1 Lieutenant Commander Data|TRK|[371]
+1 Lt. Cmdr. Geordi La Forge|TRK|[372]
+1 Seven of Nine, Unassimilated|TRK|[373]
+1 Wesley Crusher, Starfleet Cadet |TRK|[374]
+1 Death Is Irrelevant|TRK|[375]
+1 Organic Avulsion Unit|TRK|[376]
+1 Overflow Submatrix|TRK|[377]
+1 Resistance Is Futile|TRK|[378]
+1 Sela, Tal Shiar Paradox|TRK|[379]
+1 Dominion Infiltration |TRK|[380]
+1 Encounter the Unknown |TRK|[381]
+1 Infinite Diversity |TRK|[382]
+1 Q, Stacking the Deck|TRK|[383]
+1 Tasha Yar, Out of Time|TRK|[384]
+1 Will Riker, First in the Field|TRK|[385]
+1 Captain Kathryn Janeway|TRK|[386]
+1 Warp Speed|TRK|[387]
+1 Dathon, His Heart Open|TRK|[388]
+1 Locutus, the One Who Speaks|TRK|[389]
+1 Worf, Honor-Bound Warrior|TRK|[390]
+1 Replicator|TRK|[391]
+
+[borderless lands]
+1 Federation Outpost|TRK|[332]
+1 Ni'Var Science Academy|TRK|[333]
+1 Q Continuum|TRK|[334]
+1 Quark's Bar|TRK|[335]
+1 Starfleet Academy|TRK|[336]
+1 The Unicomplex|TRK|[337]
+
+[klingon cards]
+1 Bat'leth|TRK|[426]
+1 General Chang, Cold Warrior|TRK|[427]
+1 A Good Day to Die|TRK|[428]
+1 Storied Veteran|TRK|[429]
+1 Vengeance Mission|TRK|[430]
+1 Worf, Intelligence Contractor|TRK|[431]
+1 The Duras Sisters|TRK|[432]
+1 Gowron, Eager for Battle|TRK|[433]
+1 L'Rell, Fierce Visionary|TRK|[434]
+1 Worf, Honor-Bound Warrior|TRK|[435]
+
+[LCARS shocklands]
+1 Hallowed Fountain|TRK|[392]
+1 Watery Grave|TRK|[393]
+1 Blood Crypt|TRK|[394]
+1 Stomping Ground|TRK|[395]
+1 Temple Garden|TRK|[396]
+1 Godless Shrine|TRK|[397]
+1 Steam Vents|TRK|[398]
+1 Overgrown Tomb|TRK|[399]
+1 Sacred Foundry|TRK|[400]
+1 Breeding Pool|TRK|[401]
+
+[dual basic]
+1 Andoria|TRK
+1 Bajor|TRK
+1 Cardassia Prime|TRK
+1 Earth, Sector 001|TRK
+1 Ferenginar|TRK
+1 Orion|TRK
+1 Qo'noS|TRK
+1 Risa|TRK
+1 Romulus|TRK
+1 Vulcan|TRK
+
+[away team basic]
+1 Plains|TRK|[307]
+1 Island|TRK|[308]
+1 Swamp|TRK|[309]
+1 Mountain|TRK|[310]
+1 Forest|TRK|[311]
+
+[holodeck basic]
+1 Plains|TRK|[312]
+1 Island|TRK|[313]
+1 Swamp|TRK|[314]
+1 Mountain|TRK|[315]
+1 Forest|TRK|[316]
+
+[basic frame]
+1 Plains|TRK|[317]
+1 Plains|TRK|[318]
+1 Island|TRK|[319]
+1 Island|TRK|[320]
+1 Swamp|TRK|[321]
+1 Swamp|TRK|[322]
+1 Mountain|TRK|[323]
+1 Mountain|TRK|[324]
+1 Forest|TRK|[325]
+1 Forest|TRK|[326]
 
 [tokens]
 1 w_0_1_human_nophasingin @David Álvarez
