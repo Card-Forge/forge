@@ -1,0 +1,7 @@
+Name:Arcanum Things
+ManaCost:1 W
+Types:Artifact Equipment
+K:Equip:2
+K:Equipment swap:2 W
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
+Oracle:Equipped creature has flying.\nEquip {2}\nEquipment swap {2}{W} ({2}{W}: Exchange this Equipment with an Equipment card in your hand. If this Equipment was attached to a creature, attach the new Equipment to that creature.)
