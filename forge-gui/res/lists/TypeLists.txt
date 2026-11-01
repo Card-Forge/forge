@@ -52,6 +52,7 @@ Beaver:Beavers
 Beeble:Beebles
 Beholder:Beholders
 Berserker:Berserkers
+Betazoid:Betazoids
 Bird:Birds
 Bison:Bisons
 Blinkmoth:Blinkmoths
