@@ -7,4 +7,4 @@ SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Keywords$ Prismatic | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-Oracle:When this creature enters, conjure a duplicate of a random creature card from an opponent’s library into your hand. It perpetually gains prismatic.
+Oracle:When this creature enters, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains prismatic.

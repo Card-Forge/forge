@@ -7,4 +7,4 @@ SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ValidLibrary Card.Top
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Keywords$ Prismatic | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains prismatic.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExileTop
 SVar:DBExileTop:DB$ Dig | Defined$ TargetedPlayer | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | StackDescription$ REP they exile_{p:Targeted} exiles | SpellDescription$ Then they exile the top card of their library face down.
-Oracle:, {T}: Choose target opponent. Conjure a duplicate of the top card of their library into your hand. It perpetually gains prismatic. Then they exile the top card of their library face down.
+Oracle:{2}, {T}: Choose target opponent. Conjure a duplicate of the top card of their library into your hand. It perpetually gains prismatic. Then they exile the top card of their library face down.
