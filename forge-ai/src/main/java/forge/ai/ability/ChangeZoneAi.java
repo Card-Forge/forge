@@ -1852,7 +1852,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>)sa.getReplacingObject(AbilityKey.OriginalParams);
         SpellAbility causeSa = (SpellAbility)originalParams.get(AbilityKey.Cause);
-        SpellAbility causeSub = null;
         ZoneType destination = (ZoneType)originalParams.get(AbilityKey.Destination);
 
         if (destination == ZoneType.Hand) {
@@ -1866,27 +1865,65 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (causeSa != null && (causeSub = causeSa.getSubAbility()) != null) {
-            ApiType subApi = causeSub.getApi();
+        // Blink, including a delayed trigger that puts the exiled commander back on the battlefield.
+        // The return may be the cause itself (the delayed trigger's execute ability) or a sub-ability
+        // of the effect that exiled it. Origin can list more than Exile (Norin uses Exile,Command)
+        // and the return can be ChangeZoneAll (Portcullis).
+        if (blinksCommanderBack(causeSa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
 
-            if (subApi == ApiType.ChangeZone
-                    && "Exile".equals(causeSub.getParam("Origin")) && "Battlefield".equals(causeSub.getParam("Destination"))) {
-                // A blink effect implemented using ChangeZone API
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (subApi == ApiType.DelayedTrigger) {
-                SpellAbility exec = causeSub.getAdditionalAbility("Execute");
-                if (exec != null && exec.getApi() == ApiType.ChangeZone
-                        && "Exile".equals(exec.getParam("Origin")) && "Battlefield".equals(exec.getParam("Destination"))) {
-                    // A blink effect implemented using a delayed trigger
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-            } else if (sa.getReplacingObject(AbilityKey.Card).equals(causeSa.getHostCard()) && causeSa.getActivatingPlayer().equals(ai)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
+        SpellAbility causeSub = causeSa == null ? null : causeSa.getSubAbility();
+        // A delayed trigger whose execute is not a battlefield return is not a blink, so it must not
+        // take the self-replacement shortcut below.
+        if (causeSub != null && causeSub.getApi() != ApiType.DelayedTrigger
+                && sa.getReplacingObject(AbilityKey.Card).equals(causeSa.getHostCard()) && causeSa.getActivatingPlayer().equals(ai)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // Normally we want the commander back in Command zone to recast it later
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    /** True when {@code cause} exiles a card only to put it back onto the battlefield. */
+    private static boolean blinksCommanderBack(SpellAbility cause) {
+        if (cause == null) {
+            return false;
+        }
+        if (isExileToBattlefieldReturn(cause) || isDelayedBattlefieldReturn(cause)) {
+            return true;
+        }
+        SpellAbility sub = cause.getSubAbility();
+        return isExileToBattlefieldReturn(sub) || isDelayedBattlefieldReturn(sub);
+    }
+
+    /** A DelayedTrigger whose execute ability (or that ability's sub-ability) returns from exile. */
+    private static boolean isDelayedBattlefieldReturn(SpellAbility sa) {
+        if (sa == null || sa.getApi() != ApiType.DelayedTrigger) {
+            return false;
+        }
+        SpellAbility exec = sa.getAdditionalAbility("Execute");
+        if (isExileToBattlefieldReturn(exec)) {
+            return true;
+        }
+        return exec != null && isExileToBattlefieldReturn(exec.getSubAbility());
+    }
+
+    /** ChangeZone or ChangeZoneAll from exile (origin may also list Command) onto the battlefield. */
+    private static boolean isExileToBattlefieldReturn(SpellAbility sa) {
+        if (sa == null) {
+            return false;
+        }
+        ApiType api = sa.getApi();
+        if (api != ApiType.ChangeZone && api != ApiType.ChangeZoneAll) {
+            return false;
+        }
+        if (!"Battlefield".equals(sa.getParam("Destination"))) {
+            return false;
+        }
+        String origin = sa.getParam("Origin");
+        return origin != null && origin.length() <= 128
+                && ZoneType.listValueOf(origin).contains(ZoneType.Exile);
     }
 
     public static AiAbilityDecision doExileCombatThreatLogic(final Player aiPlayer, final SpellAbility sa) {
