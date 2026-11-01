@@ -83,6 +83,18 @@ public class VStack extends FDropDown {
         return COMPACT_SLIDE_ANIMATED && VPlayerPanel.isCompactLayout();
     }
 
+    /** Screen y of the stack list's bottom edge while it is showing, else 0; the tutorial note sits below it. */
+    public float getShownBottom() {
+        return isVisible() ? getTop() + getHeight() : 0f;
+    }
+
+    @Override
+    public void setVisible(final boolean visible0) {
+        final boolean changed = isVisible() != visible0;
+        super.setVisible(visible0);
+        if (changed) { notifyCoach(); } // now visible and positioned (or hidden), whoever opened or closed it
+    }
+
     @Override
     public void show() {
         if (!slides()) {
@@ -109,6 +121,12 @@ public class VStack extends FDropDown {
         }
         compactSlideTarget = 0f;
         startCompactSlide();
+    }
+
+    private void notifyCoach() {
+        if (MatchController.getView() != null) {
+            MatchController.getView().layoutCoach();
+        }
     }
 
     private void startCompactSlide() {
@@ -280,6 +298,7 @@ public class VStack extends FDropDown {
                 compactRestX = getLeft();
                 applyCompactSlide();
             }
+            if (isVisible()) { notifyCoach(); }   // new
             return;
         }
         

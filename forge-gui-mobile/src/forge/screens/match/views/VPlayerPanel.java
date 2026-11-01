@@ -634,6 +634,59 @@ public class VPlayerPanel extends FContainer {
         return phaseIndicator;
     }
 
+    /**
+     * Screen rectangles the "How to Play" tutorial outlines for this panel. Each method adds nothing when the part is
+     * not on screen (a folded-away column, a hidden tab), so the tutorial simply shows no outline for it.
+     */
+    public void addTutorialBadgeBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        addVisibleBounds(out, avatar, lblLife);
+    }
+
+    /** The zone tabs, including the mana pool, as one rectangle. */
+    public void addTutorialTabBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        final com.badlogic.gdx.math.Rectangle union = new com.badlogic.gdx.math.Rectangle();
+        boolean any = false;
+        for (InfoTab tab : tabs) {
+            if (!tab.isVisible() || tab.getWidth() <= 0 || tab.getHeight() <= 0 || !tab.isTabShown()) { continue; }
+            if (!any) { union.set(tab.screenPos); any = true; }
+            else { union.merge(tab.screenPos); }
+        }
+        if (any) { out.add(union); }
+    }
+
+    /** The phase button and the phase stops, as far as they are showing. */
+    public void addTutorialPhaseBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        addVisibleBounds(out, phaseButton, phaseIndicator);
+    }
+
+    /** The open zone display of the hand, or nothing when the hand is not the open zone. */
+    public void addTutorialHandBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out) {
+        final InfoTabZone hand = zoneTabs.get(ZoneType.Hand);
+        if (hand != null && selectedTab == hand) {
+            addVisibleBounds(out, hand.getDisplayArea());
+        }
+    }
+
+    /** Opens the hand if another zone is open, so it can be pointed at. */
+    public void showHandForTutorial() {
+        final InfoTabZone hand = zoneTabs.get(ZoneType.Hand);
+        if (hand != null && selectedTab != hand) {
+            setSelectedTab(hand);
+        }
+    }
+
+    private static void addVisibleBounds(final java.util.List<com.badlogic.gdx.math.Rectangle> out,
+                                         final forge.toolbox.FDisplayObject... objects) {
+        final com.badlogic.gdx.math.Rectangle union = new com.badlogic.gdx.math.Rectangle();
+        boolean any = false;
+        for (forge.toolbox.FDisplayObject o : objects) {
+            if (o == null || !o.isVisible() || o.getWidth() <= 0 || o.getHeight() <= 0) { continue; }
+            if (!any) { union.set(o.screenPos); any = true; }
+            else { union.merge(o.screenPos); }
+        }
+        if (any) { out.add(union); }
+    }
+
     public VAvatar getAvatar() {
         return avatar;
     }

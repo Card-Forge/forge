@@ -17,6 +17,7 @@ import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.game.GameView;
+import forge.gamemodes.tutorial.HowToPlay;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IWinLoseView;
@@ -121,11 +122,16 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         lblStats.setFont(FSkin.getRelativeFont(26));
 
         final Localizer localizer = Localizer.getInstance();
+        // A puzzle is one fixed game: there is no "next game" and no new match to start, only trying it again.
+        final boolean puzzle = !replay && game0.getGameType() == GameType.Puzzle;
+        final boolean tutorial = !replay && HowToPlay.isTutorialGame(game0);
         btnContinue.setText(localizer.getMessage("btnNextGame"));
         btnContinue.setFont(FSkin.getRelativeFont(22));
-        btnRestart.setText(localizer.getMessage("btnStartNewMatch"));
+        btnRestart.setText(tutorial ? HowToPlay.restartLabel()
+            : puzzle ? localizer.getMessage("lblRestartPuzzle") : localizer.getMessage("btnStartNewMatch"));
         btnRestart.setFont(FSkin.getRelativeFont(22));
-        btnQuit.setText(replay ? "Close replay" : localizer.getMessage("btnQuitMatch"));
+        btnQuit.setText(replay ? "Close replay" : tutorial ? HowToPlay.quitLabel()
+            : puzzle ? localizer.getMessage("lblQuitPuzzle") : localizer.getMessage("btnQuitMatch"));
         btnQuit.setFont(FSkin.getRelativeFont(22));
         btnContinue.setEnabled(!game0.isMatchOver());
 
@@ -170,7 +176,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         final String constraints = "w 300px!, h 50px!, gap 0 0 20px 0";
         if (!replay) {
-            pnlButtons.add(btnContinue, constraints);
+            if (!puzzle) {
+                pnlButtons.add(btnContinue, constraints);
+            }
             pnlButtons.add(btnRestart, constraints);
         }
         pnlButtons.add(btnQuit, constraints);
