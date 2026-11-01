@@ -931,6 +931,36 @@ public final class ComboPlan {
         return false;
     }
 
+    /**
+     * A card that throws cards away for the dredge deck: a spell or ability that discards other cards from the hand
+     * as its cost (Cathartic Reunion, Putrid Imp) or as its effect (Faithless Looting, Careful Study). Read from the
+     * card, not from a list of names.
+     */
+    public static boolean isDredgeOutlet(final Card c) {
+        if (c == null || c.isLand()) {
+            return false;
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostDiscard.class)) {
+                final CostDiscard d = sa.getPayCosts().getCostPartByType(CostDiscard.class);
+                if (d != null && !d.payCostFromSource()) {
+                    return true;
+                }
+            }
+            for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+                if (a.getApi() == ApiType.Discard && "You".equals(a.getParamOrDefault("Defined", ""))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** What a dredge hand is made of: a dredger or a card that works from the graveyard. */
+    public static boolean isDredgeHandPiece(final Card c) {
+        return c != null && !c.isLand() && (c.hasKeyword(Keyword.DREDGE) || worksFromGraveyard(c));
+    }
+
     /** A card a dredge deck would rather have in the graveyard than in the hand: a dredger, or a card that works from there. */
     private static boolean belongsInGraveyard(final Card c, final Combo dredge) {
         return c.hasKeyword(Keyword.DREDGE) || dredge.payoffs.contains(c.getName()) && worksFromGraveyard(c);

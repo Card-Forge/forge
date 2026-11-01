@@ -303,8 +303,9 @@ public class FlatMonteCarloGraveyardLandsTest extends AITest {
                 "Karakas", "Maze of Ith", "Exploration");
         final CardCollection bottom = OpeningHand.toBottom(p, hand, 1, true, plan);
         AssertJUnit.assertEquals(1, bottom.size());
-        AssertJUnit.assertFalse(bottom.get(0).getName().equals("Dark Depths"));
-        AssertJUnit.assertFalse(bottom.get(0).getName().equals("Thespian's Stage"));
+        final String out = bottom.get(0).getName();
+        AssertJUnit.assertFalse("bottomed: " + out, out.equals("Dark Depths"));
+        AssertJUnit.assertFalse("bottomed: " + out, out.equals("Thespian's Stage"));
     }
 
     @Test
@@ -520,5 +521,46 @@ public class FlatMonteCarloGraveyardLandsTest extends AITest {
         final int without = plan.combos.term(p);
         addCardToZone("Crop Rotation", p, ZoneType.Hand);
         AssertJUnit.assertTrue(plan.combos.term(p) > without);
+    }
+
+    @Test
+    public void dredgeOutletsAreReadFromTheCard() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(1);
+        AssertJUnit.assertTrue(ComboPlan.isDredgeOutlet(addCardToZone("Faithless Looting", p, ZoneType.Hand)));
+        AssertJUnit.assertTrue(ComboPlan.isDredgeOutlet(addCardToZone("Cathartic Reunion", p, ZoneType.Hand)));
+        AssertJUnit.assertFalse(ComboPlan.isDredgeOutlet(addCardToZone("Swamp", p, ZoneType.Hand)));
+        AssertJUnit.assertFalse(ComboPlan.isDredgeOutlet(addCardToZone("Narcomoeba", p, ZoneType.Hand)));
+    }
+
+    @Test
+    public void aDredgeHandWithAnOutletAndSomethingToThrowAwayIsKept() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, DREDGE_DECK);
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        final CardCollection hand = handOf(p, "Swamp", "Swamp", "Faithless Looting", "Golgari Grave-Troll",
+                "Bridge from Below", "Ichorid", "Narcomoeba");
+        AssertJUnit.assertTrue(OpeningHand.keep(p, hand, 0, true, plan, 4));
+    }
+
+    @Test
+    public void aDredgeOneLanderWithACastableLootingIsKeptButNotWithoutOne() {
+        final Game game = initAndCreateGame();
+        final Player p = deal(game, DREDGE_DECK);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Mountain", p, ZoneType.Library); // the red the Looting needs
+        }
+        final DeckPlan plan = DeckPlan.forSetting("auto", p);
+        // the Mountain pays for the Looting
+        final CardCollection loot = handOf(p, "Mountain", "Faithless Looting", "Stinkweed Imp",
+                "Bridge from Below", "Ichorid", "Narcomoeba", "Golgari Grave-Troll");
+        AssertJUnit.assertTrue(OpeningHand.explain(p, loot, true, plan),
+                OpeningHand.keep(p, loot, 0, true, plan, 4));
+        // a Swamp does not: the one outlet cannot be cast
+        AssertJUnit.assertFalse(OpeningHand.keep(p, handOf(p, "Swamp", "Faithless Looting", "Stinkweed Imp",
+                "Bridge from Below", "Ichorid", "Narcomoeba", "Golgari Grave-Troll"), 0, true, plan, 4));
+        // no outlet at all
+        AssertJUnit.assertFalse(OpeningHand.keep(p, handOf(p, "Swamp", "Stinkweed Imp", "Bridge from Below",
+                "Ichorid", "Narcomoeba", "Golgari Grave-Troll", "Prized Amalgam"), 0, true, plan, 4));
     }
 }

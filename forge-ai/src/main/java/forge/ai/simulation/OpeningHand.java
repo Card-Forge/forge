@@ -33,6 +33,10 @@ public final class OpeningHand {
 
     /** A hand that can make Marit Lage by turn two or three is worth keeping whatever else it holds. */
     private static final int DEPTHS_READY_HAND = 25;
+    /** A dredge deck plays about 12 lands: two by turn three, and a cheap outlet counts as a play. */
+    private static final Want DREDGE_WANT = new Want(2, 3, 2, 2, 2);
+    /** An outlet plus something to throw away: the engine runs from turn one or two. */
+    private static final int DREDGE_READY_HAND = 20;
 
     /** Score a kept hand of this size must reach: smaller hands are judged less strictly, 4 or fewer are always kept. */
     static int keepBar(final int handSize) {
@@ -97,7 +101,7 @@ public final class OpeningHand {
         }
         final CardCollection kept = new CardCollection(hand);
         kept.removeAll(bottom(ai, hand, cardsToReturn, onPlay, plan, lib));
-        if (!playable(kept, finalSize)) {
+        if (!playable(kept, finalSize) && !dredgeOneLander(kept, plan)) {
             return false; // no key card, combo piece or good score makes up for a hand that cannot cast anything
         }
         if (plan != null && plan.combos.has(ComboPlan.Kind.TUTOR_STORM)) {
@@ -105,6 +109,29 @@ public final class OpeningHand {
         }
         final double score = score(kept, lib, onPlay, plan);
         return score >= keepBar(finalSize);
+    }
+
+    /** For tests and the game log: why a hand is kept or not. */
+    public static String explain(final Player ai, final CardCollectionView hand, final boolean onPlay,
+                                 final DeckPlan plan) {
+        final Library lib = new Library(ai);
+        return "dredgePlan=" + (plan != null && plan.combos.has(ComboPlan.Kind.DREDGE))
+                + ", playable=" + playable(hand, hand.size())
+                + ", oneLander=" + dredgeOneLander(hand, plan)
+                + ", score=" + score(hand, lib, onPlay, plan)
+                + ", bar=" + keepBar(hand.size())
+                + ", libLands=" + lib.lands + "/" + lib.size
+                + ", handColors=" + handColors(hand);
+    }
+
+    private static int handColors(final CardCollectionView hand) {
+        byte colors = 0;
+        for (final Card c : hand) {
+            if (c.isLand()) {
+                colors |= producedColors(c);
+            }
+        }
+        return colors;
     }
 
     /**
@@ -132,6 +159,32 @@ public final class OpeningHand {
         return !(size >= 6 && lands >= size - 1);
     }
 
+    /** One land and a 1 mana outlet in a dredge deck: Faithless Looting on turn one is a normal keep. */
+    /** One land and a 1 mana outlet that land can pay for in a dredge deck: Faithless Looting on turn one is a keep. */
+    private static boolean dredgeOneLander(final CardCollectionView kept, final DeckPlan plan) {
+        if (plan == null || !plan.combos.has(ComboPlan.Kind.DREDGE)) {
+            return false;
+        }
+        int lands = 0;
+        byte colors = 0;
+        for (final Card c : kept) {
+            if (c.isLand() && CardPredicates.LANDS_PRODUCING_MANA.test(c)) {
+                lands++;
+                colors |= producedColors(c);
+            }
+        }
+        if (lands != 1) {
+            return false;
+        }
+        for (final Card c : kept) {
+            if (!c.isLand() && c.getCMC() <= 1 && ComboPlan.isDredgeOutlet(c)
+                    && (c.getManaCost().getColorProfile() & ~colors) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** The cards to put on the bottom so that the rest scores best (London mulligan). */
     public static CardCollection toBottom(final Player ai, final CardCollectionView hand, final int count,
                                           final boolean onPlay, final DeckPlan plan) {
@@ -148,7 +201,7 @@ public final class OpeningHand {
             for (final Card c : remaining) {
                 final CardCollection rest = new CardCollection(remaining);
                 rest.remove(c);
-                final double s = score(rest, lib, onPlay, plan);
+                final double s = rawScore(rest, lib, onPlay, plan);
                 if (s > best) { // ties keep the earlier card, so equal lands are bottomed in hand order
                     best = s;
                     worst = c;
@@ -197,20 +250,21 @@ public final class OpeningHand {
     static byte producedColors(final Card land) {
         byte colors = 0;
         for (final SpellAbility sa : land.getManaAbilities()) {
-            ManaConversion.withActivator(sa);
-            for (final byte col : MagicColor.WUBRG) {
-                if (sa.canProduce(MagicColor.toLongString(col))) {
-                    colors |= col;
-                }
-            }
+            colors |= ManaConversion.producedColors(sa); // short letters ("R"), and it sets the activator itself
         }
         return colors;
     }
 
     /** 0..100: how good the hand is for the plan. */
     static double score(final CardCollectionView hand, final Library lib, final boolean onPlay, final DeckPlan plan) {
+        return Math.max(0, Math.min(100, rawScore(hand, lib, onPlay, plan)));
+    }
+
+    /** The same before it is clamped: what the bottoming compares, so that strong hands do not tie at 100. */
+    private static double rawScore(final CardCollectionView hand, final Library lib, final boolean onPlay, final DeckPlan plan) {
         final DeckPlan.Archetype arch = plan == null ? DeckPlan.Archetype.MIDRANGE : plan.archetype;
-        final Want w = want(arch);
+        final boolean dredge = plan != null && plan.combos.has(ComboPlan.Kind.DREDGE);
+        final Want w = dredge ? DREDGE_WANT : want(arch);
         final int size = hand.size();
         int lands = 0;
         int rocks = 0;
@@ -221,6 +275,8 @@ public final class OpeningHand {
         final boolean depths = plan != null && plan.combos.has(ComboPlan.Kind.DARK_DEPTHS);
         byte colors = 0;
         final List<Card> spells = new ArrayList<>();
+        int outlets = 0;
+        int pieces = 0;
         for (final Card c : hand) {
             if (depths) {
                 access |= ComboPlan.isDepthsAccess(c);
@@ -237,6 +293,10 @@ public final class OpeningHand {
                 }
             } else {
                 spells.add(c);
+                if (dredge) {
+                    outlets += ComboPlan.isDredgeOutlet(c) ? 1 : 0;
+                    pieces += ComboPlan.isDredgeHandPiece(c) ? 1 : 0;
+                }
                 if (isCheapManaSource(c)) {
                     rocks++;
                 }
@@ -256,7 +316,8 @@ public final class OpeningHand {
             if (c.getCMC() <= w.playCmc) {
                 early += colorCredit(c, colors, lib);
             }
-            if (isKeyCard(c, arch) || plan != null && (plan.combos.isKeyCard(c) || plan.commander.isKeyCard(c))) {
+            if (isKeyCard(c, arch) || plan != null && (plan.combos.isKeyCard(c) || plan.commander.isKeyCard(c))
+                || dredge && (ComboPlan.isDredgeOutlet(c) || ComboPlan.isDredgeHandPiece(c))) {
                 keys++;
             }
         }
@@ -282,7 +343,10 @@ public final class OpeningHand {
                 score += DEPTHS_READY_HAND;
             }
         }
-        return Math.max(0, Math.min(100, score));
+        if (dredge && lands >= 1 && outlets >= 1 && pieces >= 1) {
+            score += DREDGE_READY_HAND;
+        }
+        return score;
     }
 
     /** 1 when the lands in hand make the colours of the spell, less when a missing colour may still be drawn. */
