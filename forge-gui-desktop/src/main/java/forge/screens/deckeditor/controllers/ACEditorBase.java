@@ -672,7 +672,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
             if (currentDeck == null) { return; }
 
-            for (final DeckRule rule : DeckRule.parseAll(existingCard)) {
+            for (final DeckRule rule : existingCard.getDeckRuleList()) {
                 if (!(rule instanceof DeckRuleColorIdentity) || !rule.isActiveFor(DeckSection.Commander)) {
                     continue;
                 }
