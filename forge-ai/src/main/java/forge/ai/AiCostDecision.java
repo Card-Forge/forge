@@ -597,6 +597,57 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return removed;
     }
 
+    // loyalty from a planeswalker that can win it back, then the source's own +1/+1, then other planeswalkers
+    private int removeSpareCounters(GameEntityCounterTable table, CardCollectionView typeList, int stillToRemove) {
+        final List<Card> walkers = CardLists.filter(typeList, CardPredicates.PLANESWALKERS);
+        final List<Card> order = Lists.newArrayList(CardLists.filter(walkers, AiCostDecision::canRegainLoyalty));
+        if (typeList.contains(source) && !order.contains(source)) {
+            order.add(source);
+        }
+        for (final Card walker : walkers) {
+            if (!order.contains(walker)) {
+                order.add(walker);
+            }
+        }
+
+        int removed = 0;
+        for (final Card card : order) {
+            if (removed >= stillToRemove) {
+                break;
+            }
+            final CounterEnumType type = card.isPlaneswalker() ? CounterEnumType.LOYALTY : CounterEnumType.P1P1;
+            if (!card.canRemoveCounters(type)) {
+                continue;
+            }
+            int spare = table.filterToRemove(card).count(type);
+            if (card.isPlaneswalker()) {
+                spare -= 1;
+            } else if (card.isCreature() && !card.hasKeyword(Keyword.UNDYING)) {
+                spare = Math.min(spare, card.getLethalDamage() - 1);
+            }
+            final int thisRemove = Math.min(spare, stillToRemove - removed);
+            if (thisRemove > 0) {
+                removed += thisRemove;
+                table.put(null, card, type, thisRemove);
+            }
+        }
+        return removed;
+    }
+
+    private static boolean canRegainLoyalty(final Card walker) {
+        for (final SpellAbility sa : walker.getSpellAbilities()) {
+            if (!sa.isPwAbility() || sa.getPayCosts() == null) {
+                continue;
+            }
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostPutCounter put && put.getCounter().is(CounterEnumType.LOYALTY) && put.getAbilityAmount(sa) >= 2) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
         final int c = cost.getAbilityAmount(ability);
@@ -775,6 +826,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     table.put(null, card, cost.counter, thisRemove);
                 }
             }
+        }
+
+        // nothing the AI is glad to lose: spend counters that can be spared without losing the permanent
+        if (c > toRemove && cost.counter == null && !originalHost.hasSVar("AIRemoveCounterCostPriority")) {
+            toRemove += removeSpareCounters(table, typeList, c - toRemove);
         }
 
         // Used to not return null
