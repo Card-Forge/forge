@@ -1,0 +1,11 @@
+Name:Dr. McCoy, Surly Surgeon
+ManaCost:2 W W
+Types:Legendary Creature Human Doctor
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When NICKNAME enters, put a +1/+1 counter on another target creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | CounterType$ P1P1 | CounterNum$ 1
+R:Event$ Destroy | ValidCard$ Creature.Other+YouCtrl+counters_GE1_P1P1 | ReplaceWith$ DBRemoveCounter | Description$ If another creature you control with a +1/+1 counter on it would be destroyed, instead remove all +1/+1 counters from it and all damage already dealt to it is healed.
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ All | SubAbility$ DBHeal
+SVar:DBHeal:DB$ HealDamage | Defined$ ReplacedCard
+DeckHints:Ability$Counters
+Oracle:When Dr. McCoy enters, put a +1/+1 counter on another target creature you control.\nIf another creature you control with a +1/+1 counter on it would be destroyed, instead remove all +1/+1 counters from it and all damage already dealt to it is healed.

@@ -1,0 +1,11 @@
+Name:Georgiou, Terran Emperor
+ManaCost:4 B B
+Types:Legendary Creature Human Rogue Noble
+PT:4/6
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ValidLoseReason$ LifeReachedZero | Layer$ CantHappen | Description$ You don't lose the game for having 0 or less life.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 3 life and draw a card. Then if your life total is 0 or less, create ten 1/1 red Officer creature tokens.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 10 | TokenScript$ r_1_1_officer | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0
+SVar:X:Count$YourLifeTotal
+Oracle:You don't lose the game for having 0 or less life.\nAt the beginning of your end step, you lose 3 life and draw a card. Then if your life total is 0 or less, create ten 1/1 red Officer creature tokens.

@@ -103,6 +103,7 @@ Dwarf:Dwarves
 Echidna:Echidnas
 Efreet:Efreets
 Egg:Eggs
+El-Aurian:El-Aurians
 Elder:Elders
 Eldrazi:Eldrazi
 Elemental:Elementals
@@ -149,6 +150,7 @@ Hellion:Hellions
 Hero:Heroes
 Hippo:Hippos
 Hippogriff:Hippogriffs
+Hirogen:Hirogens
 Homarid:Homarids
 Homunculus:Homunculi
 Horror:Horrors
@@ -209,6 +211,7 @@ Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
+Na'kuhl:Na'kuhl
 Nautilus:Nautili
 Necron:Necrons
 Nephilim:Nephilims
