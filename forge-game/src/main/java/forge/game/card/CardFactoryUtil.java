@@ -43,6 +43,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbilityForetell;
 import forge.game.staticability.StaticAbilityPlotZone;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -2969,7 +2970,7 @@ public class CardFactoryUtil {
                     Player activator = this.getActivatingPlayer();
                     final Game game = activator.getGame();
 
-                    if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
+                    if (!game.getPhaseHandler().isPlayerTurn(activator) && !StaticAbilityForetell.canForetellAnyTurn(activator, getHostCard())) {
                         return false;
                     }
 
