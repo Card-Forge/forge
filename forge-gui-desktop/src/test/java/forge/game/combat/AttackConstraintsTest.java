@@ -337,6 +337,46 @@ public class AttackConstraintsTest extends SimulationTest {
     }
 
     @Test
+    public void goadedCreatureMayAttackGoaderWhenOthersHaveAttackCost() {
+        game = initAndCreateThreePlayerGame();
+        attacking = game.getPlayers().get(1);
+        defending = game.getPlayers().get(0);
+        Player taxer = game.getPlayers().get(2);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, attacking);
+        addCard("Propaganda", taxer);
+        Card walker = addCard("Jace Beleren", taxer);
+        walker.setCounters(CounterEnumType.LOYALTY, 3);
+        Card bears = goaded("Grizzly Bears");
+        startCombat();
+
+        assertIllegal();
+        assertLegal(bears);
+        combat.clearAttackers();
+        combat.addAttacker(bears, walker);
+        AssertJUnit.assertTrue(CombatUtil.validateAttackers(combat));
+        combat.clearAttackers();
+        combat.addAttacker(bears, taxer);
+        AssertJUnit.assertTrue(CombatUtil.validateAttackers(combat));
+    }
+
+    @Test
+    public void goadedCreatureCantAttackGoaderWhenAnotherPlayerIsFree() {
+        game = initAndCreateThreePlayerGame();
+        attacking = game.getPlayers().get(1);
+        defending = game.getPlayers().get(0);
+        Player other = game.getPlayers().get(2);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, attacking);
+        Card bears = goaded("Grizzly Bears");
+        startCombat();
+
+        assertIllegal();
+        assertIllegal(bears);
+        combat.clearAttackers();
+        combat.addAttacker(bears, other);
+        AssertJUnit.assertTrue(CombatUtil.validateAttackers(combat));
+    }
+
+    @Test
     public void restrictionThatDependsOnCounters() {
         setUp();
         Card pipsqueak = goaded("Pipsqueak, Rebel Strongarm");

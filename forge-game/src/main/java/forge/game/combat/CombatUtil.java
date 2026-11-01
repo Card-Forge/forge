@@ -224,7 +224,8 @@ public class CombatUtil {
                     if (!ge.equals(defender) && ge instanceof Player) {
                         // found a player which does not goad that creature
                         // and creature can attack this player or planeswalker
-                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge)) {
+                        // without a cost, which nobody is required to pay (CR 508.1d)
+                        if (!attacker.isGoadedBy((Player) ge) && canAttack(attacker, ge) && getAttackCost(game, attacker, ge) == null) {
                             return false;
                         }
                     }
