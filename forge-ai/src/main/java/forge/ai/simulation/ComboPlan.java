@@ -1902,6 +1902,67 @@ public final class ComboPlan {
         return ai != null && ai.getCardsIn(ZoneType.Hand).size() > 1;
     }
 
+    /** Spells in the graveyard that an engine (Gaea's Will) can cast again. */
+    private static int replayable(final Player ai) {
+        int n = 0;
+        for (final Card g : ai.getCardsIn(ZoneType.Graveyard)) {
+            if (!g.isLand() && !isRecursionEngine(g)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** What one copy of the finisher of this deck takes: Tendrils 2, Grapeshot 1 (0 when unknown). */
+    private static int finisherPer(final Player ai, final Combo combo) {
+        for (final ZoneType z : new ZoneType[] { ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile }) {
+            for (final Card c : ai.getCardsIn(z)) {
+                if (combo.payoffs.contains(c.getName()) && perCopyDamage(c) > 0) {
+                    return perCopyDamage(c);
+                }
+            }
+        }
+        return 0;
+    }
+
+    /** Whether a storm count of this size (plus the finisher itself) takes the last life of the opponent. */
+    private static boolean lethalAt(final Player ai, final Combo combo, final int storm) {
+        final int per = finisherPer(ai, combo);
+        final Player opp = ai.getWeakestOpponent();
+        return per > 0 && opp != null && ai.getOpponents().size() == 1 && (long) per * (storm + 1) >= opp.getLife();
+    }
+
+    /**
+     * Gaea's Will cast from the hand before it can make the kill: the graveyard it replays plus the storm count must
+     * reach lethal. The free cast of Beseech the Mirror is not a play of the AI, so it is never held by this.
+     */
+    public boolean wastesEngine(final SpellAbility sa) {
+        final Combo combo = find(Kind.TUTOR_STORM);
+        if (combo == null || sa == null || !sa.isSpell() || sa.getHostCard() == null
+                || !isRecursionEngine(sa.getHostCard()) || !sa.getHostCard().isInZone(ZoneType.Hand)) {
+            return false;
+        }
+        final Player ai = sa.getActivatingPlayer();
+        if (ai == null) {
+            return false;
+        }
+        // the engine itself, every replay, and the finisher are all spells that count
+        return !lethalAt(ai, combo, stormCount(ai) + 1 + replayable(ai));
+    }
+
+    /** Whether the setup is complete: the storm count, the fast mana left in hand and a working engine reach lethal. */
+    private boolean setupComplete(final Player ai, final Combo combo, final CardCollectionView hand) {
+        boolean engine = false;
+        for (final Card c : hand) {
+            engine |= isRecursionEngine(c);
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            engine |= isRecursionEngine(c);
+        }
+        final int replay = engine ? replayable(ai) + 1 : 0;
+        return lethalAt(ai, combo, stormCount(ai) + fastManaInHand(hand) + replay + 1);
+    }
+
     /**
      * How far a state is along the pattern of the deck, for the solver: the Bargain is set up, the free spell found the
      * engine (Gaea's Will), the engine cast, the graveyard it can cast again (rituals, tutors), mana and storm count.
@@ -1998,6 +2059,11 @@ public final class ComboPlan {
         }
         Card best = null;
         int bestValue = 0;
+        boolean engineFound = false; // Gaea's Will is still among the choices (library)
+        for (final Card c : options) {
+            engineFound |= isRecursionEngine(c);
+        }
+        final boolean ready = setupComplete(ai, combo, hand);
         for (final Card c : options) {
             int v;
             if (freeCast && (c.isLand() || c.getCMC() > 4)) {
@@ -2010,15 +2076,20 @@ public final class ComboPlan {
                 if (finisherInHand) {
                     v = 5; // a second one is a spare at best
                 } else {
-                    // fast mana already in hand is cast first, the tutor after it
-                    v = mana + fastManaInHand(hand) >= c.getCMC() - 1 ? 500 : 150;
+                    // fetch the finisher once the kill is reachable and castable; before that the engine and mana come first
+                    v = mana + fastManaInHand(hand) >= c.getCMC() - 1 && ready ? 500 : 150;
                 }
             } else if (isRecursionEngine(c)) {
                 // the free cast of Beseech the Mirror is the engine's turn: Gaea's Will casts the graveyard again, and the
                 // Beseech itself is in that graveyard by then. Found into the hand it is only worth it with pieces to cast
-                v = freeCast ? (pieces >= 1 ? 300 : 150) : (pieces >= 2 ? 260 : 60);
+                v = freeCast ? (pieces >= 1 ? 300 : 150) : (lethalAt(ai, combo, stormCount(ai) + 1 + replayable(ai)) ? 260 : 60);
+            } else if (freeCast && isLibraryTutor(c) && c.hasKeyword(Keyword.BARGAIN)) {
+                // a second Beseech: cast free it is not bargained, so it puts its find in the hand (the finisher, once the
+                // setup is complete), and it is one more spell for the storm count
+                v = engineFound ? 120 : 280;
             } else if (isFastMana(c)) {
-                v = mana < 5 ? 200 : 90;
+                // before the kill is reachable, mana and storm count come first, whatever is already in play
+                v = (!ready || mana < 5) ? 200 : 90;
             } else if (isLibraryTutor(c)) {
                 v = 110;
             } else if (c.isLand()) {

@@ -174,12 +174,29 @@ public class FlatMonteCarloStormTest extends AITest {
     }
 
     @Test
+    public void aTutorDoesNotFetchTheFinisherBeforeTheSetupIsComplete() {
+        final Game game = newGame();
+        final Player p = dealBeseechStorm(game);
+        final ComboPlan combos = DeckPlan.forSetting("auto", p).combos;
+        addCards("Swamp", 5, p);
+        game.getAction().checkStateEffects(true);
+        final CardCollection options = new CardCollection();
+        for (final String n : new String[] { "Tendrils of Agony", "Dark Ritual", "Thoughtseize" }) {
+            options.add(fromLibrary(p, n));
+        }
+        final Card pick = combos.choose(p, ZoneType.Hand, Arrays.asList(ZoneType.Library), options);
+        AssertJUnit.assertEquals("Dark Ritual", pick.getName());
+    }
+
+    @Test
     public void aTutorFindsTheFinisherWhenThereIsManaForIt() {
         final Game game = newGame();
         final Player p = dealBeseechStorm(game);
         final ComboPlan combos = DeckPlan.forSetting("auto", p).combos;
         addCards("Swamp", 5, p); // five untapped sources
         game.getAction().checkStateEffects(true);
+        game.getPlayers().get(0).setLife(20, null);
+        setStormCount(game, fromLibrary(p, "Duress"), 9);
         final CardCollection options = new CardCollection();
         for (final String n : new String[] { "Gaea's Will", "Tendrils of Agony", "Dark Ritual", "Thoughtseize" }) {
             options.add(fromLibrary(p, n));

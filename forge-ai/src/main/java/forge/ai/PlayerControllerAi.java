@@ -1549,7 +1549,9 @@ public class PlayerControllerAi extends PlayerController {
             }
             // Beseech the Mirror -> Gaea's Will / Yawgmoth's Will: the generic check declines the engine, but
             // PlayAi.chooseSingleCard already picked it on purpose, and a free cast beats it going to the hand
-            if (noManaCost && "YawgmothsWill".equals(tgtSA.getParamOrDefault("AILogic", ""))) {
+            final CardState realState = tgtSA.getHostCard().getState(CardStateName.Original);
+            if (noManaCost && ("YawgmothsWill".equals(tgtSA.getParamOrDefault("AILogic", ""))
+                || realState != null && realState.hasKeyword(Keyword.BARGAIN))) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
             }
             // TODO if mandatory AI is only forced to use mana when it's already in the pool

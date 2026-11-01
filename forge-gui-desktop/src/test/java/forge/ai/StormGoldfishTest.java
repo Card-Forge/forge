@@ -49,16 +49,14 @@ import forge.util.MyRandom;
 public class StormGoldfishTest extends AITest {
 
     private static final Object[] MAIN = {
-            "Lion's Eye Diamond", 4, "Chrome Mox", 1, "Lotus Petal", 4, "Wishclaw Talisman", 1, "Ad Nauseam", 1,
-            "Dark Ritual", 4, "Urza's Saga", 4, "Brainstorm", 4, "Veil of Summer", 2, "Beseech the Mirror", 1,
-            "Burning Wish", 1, "Thoughtseize", 2, "Gaea's Will", 1, "Ponder", 3, "Giant's Boulder", 4, "Duress", 2,
-            "Infernal Tutor", 4, "Tendrils of Agony", 1, "Underground Sea", 1, "Tropical Island", 1, "Swamp", 1,
-            "Island", 1, "Misty Rainforest", 1, "Polluted Delta", 4, "Hedge Maze", 1, "Verdant Catacombs", 3,
-            "Badlands", 1, "Bayou", 1, "Volcanic Island", 1 };
+        "Dark Ritual", 4, "Lion's Eye Diamond", 4, "Lotus Petal", 4, "Chrome Mox", 4, "Mox Opal", 4,
+        "Giant's Boulder", 2, "Infernal Tutor", 4, "Beseech the Mirror", 2, "Burning Wish", 3, "Thoughtseize", 4,
+        "Duress", 3, "Hexing Squelcher", 2, "Gaea's Will", 1, "Tendrils of Agony", 1, "Wishclaw Talisman", 1,
+        "Urza's Saga", 4, "Vault of Whispers", 4, "Spire of Industry", 3, "City of Traitors", 2, "Swamp", 4 };
     private static final Object[] SIDE = {
-            "Beseech the Mirror", 1, "Snow-Covered Forest", 1, "Carpet of Flowers", 2, "Crash", 1, "Dress Down", 2,
-            "Elemental Eruption", 1, "Thoughtseize", 1, "Mind's Desire", 1, "Peer into the Abyss", 1,
-            "Boseiju, Who Endures", 1, "Molten Collapse", 1, "Chain of Vapor", 1, "Tendrils of Agony", 1 };
+        "Beseech the Mirror", 1, "Tendrils of Agony", 1, "Peer into the Abyss", 1, "Assassin's Trophy", 3,
+        "Nihil Spellbomb", 2, "Hexing Squelcher", 2, "Pithing Needle", 1, "Haywire Mite", 1, "Boomerang Basics", 1,
+        "Duress", 1, "Debt to the Deathless", 1 };
 
     private static void fill(final forge.deck.CardPool pool, final Object[] list) {
         for (int i = 0; i < list.length; i += 2) {

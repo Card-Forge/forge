@@ -177,6 +177,9 @@ public class PlayAi extends SpellAbilityAi {
                 if (real.hasKeyword(Keyword.STORM)) {
                     return c; // only found for a free cast when it is lethal (see ComboPlan.tutorStormPick)
                 }
+                if (real.hasKeyword(Keyword.BARGAIN)) {
+                    return c; // a second Beseech the Mirror found by the first
+                }
                 if (ComboPlan.isRecursionAbility(real.getSpellAbilities()))
                     return c;
             }
