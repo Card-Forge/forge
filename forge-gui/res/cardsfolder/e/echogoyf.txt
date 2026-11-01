@@ -1,0 +1,9 @@
+Name:Echogoyfs
+ManaCost:U
+Types:Creature Lhurgoyf
+PT:*/1+*
+K:Double team
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ Actualize — CARDNAME’s power is equal to the number of spells you’ve cast this game that weren’t from your starting deck and its toughness is equal to that number plus 1.
+SVar:X:Count$YouCastThisGameNotInStartingLibrary
+SVar:Y:SVar$X/Plus.1
+Oracle:Double team\nActualize — Echogoyfs’s power is equal to the number of spells you’ve cast this game that weren’t from your starting deck and its toughness is equal to that number plus 1.

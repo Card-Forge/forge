@@ -1,0 +1,20 @@
+Name:Ursine Guide
+ManaCost:2 G
+Types:Creature Bear Druid
+PT:3/3
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+T:Mode$ SpellCast | ValidCard$ Card.!FromStartingDeck | ValidActivatingPlayer$ You | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell that isn’t from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Bear Cub | Zone$ Battlefield | SubAbility$ DBPrepare2 | SpellDescription$ Conjure a card named Bear Cub onto the battlefield.
+SVar:DBPrepare2:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature becomes prepared.
+AlternateMode:Prepare
+Oracle:This creature enters prepared. Whenever you cast a spell that isn’t from your starting deck, conjure a card named Bear Cub onto the battlefield. This creature becomes prepared.
+
+ALTERNATE
+
+Name:Ranger's Merit
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ PutCounterAll | ValidCards$ Creature.Bear+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each Bear you control.
+SVar:DBPumpAll:DB$ PumpAll | KW$ Trample | ValidCards$ Creature.Bear+YouCtrl | SpellDescription$ They gain trample until end of turn.
+Oracle:Put a +1/+1 counter on each Bear you control. They gain trample until end of turn.
