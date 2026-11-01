@@ -1538,6 +1538,19 @@ public final class ComboPlan {
                 && (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName()));
     }
 
+    /**
+     * Whether the hand holds what the kill is made of and cannot be given up: the storm finisher, or the engine that
+     * casts the graveyard again. Lion's Eye Diamond and the like discard the hand: not to pay for another spell then.
+     */
+    public static boolean holdsKillPiece(final Player ai) {
+        for (final Card h : ai.getCardsIn(ZoneType.Hand)) {
+            if (isStormFinisher(h) || (!h.isLand() && !h.isCreature() && isRecursionAbility(h.getSpellAbilities()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** A card the kill is built from: the finisher, a tutor, the engine, fast mana. */
     public static boolean isTutorStormPiece(final Card c) {
         return isStormFinisher(c) || isLibraryTutor(c) || isRecursionEngine(c) || isFastMana(c);
@@ -2291,6 +2304,9 @@ public final class ComboPlan {
             if (pick != null) {
                 return pick;
             }
+        }
+        if (tutorStorm != null && destination == ZoneType.Exile && origin.contains(ZoneType.Hand)) {
+            return tutorStormPutBack(ai, options); // Chrome Mox imprints the card the kill needs least
         }
         if (tutorStorm != null && destination == ZoneType.Library && origin.contains(ZoneType.Hand)) {
             return tutorStormPutBack(ai, options); // Brainstorm: what goes back is what the kill needs least
