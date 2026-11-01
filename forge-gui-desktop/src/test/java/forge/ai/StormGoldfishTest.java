@@ -1,15 +1,14 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.testng.annotations.Test;
 
@@ -131,6 +130,7 @@ public class StormGoldfishTest extends AITest {
     }
 
     private static int payFails;
+    private static final Map<String, Integer> PAYFAIL_BY_CARD = new TreeMap<>();
 
     @Test(timeOut = 24L * 3_600_000)
     public void goldfish() throws Exception {
@@ -141,6 +141,7 @@ public class StormGoldfishTest extends AITest {
         // drop those lines so that the STORM-* lines can be found; -Dstorm.noise=true keeps them
         final java.io.PrintStream realOut = System.out;
         payFails = 0;
+        PAYFAIL_BY_CARD.clear();
         if (!Boolean.getBoolean("storm.noise")) {
             System.setOut(new java.io.PrintStream(new java.io.FilterOutputStream(realOut) {
                 private final StringBuilder line = new StringBuilder();
@@ -164,7 +165,14 @@ public class StormGoldfishTest extends AITest {
                     final String text = line.toString();
                     line.setLength(0);
                     if (text.contains("payManaCost() cost was not paid") || text.contains("AI failed to play")) {
-                        if (payFails++ < 8) {
+                        if (text.contains("AI failed to play")) {
+                            final Matcher m = Pattern.compile("AI failed to play (.+?) \\(").matcher(text);
+                            if (m.find()) {
+                                PAYFAIL_BY_CARD.merge(m.group(1), 1, Integer::sum);
+                            }
+                            payFails++; // one failure prints two lines: count it once
+                        }
+                        if (payFails <= 8) {
                             out.write(("STORM-PAYFAIL " + text).getBytes());
                         }
                     } else if (!text.contains("Did not have activator set") && !text.startsWith("Default player choice logic")
@@ -260,6 +268,7 @@ public class StormGoldfishTest extends AITest {
         }
         sb.append(" avgWinTurn=").append(wins == 0 ? "-" : String.format("%.2f", ownTurnsTotal / (double) wins));
         sb.append(" payFailures=").append(payFails).append(" (plays the AI chose but could not pay for)");
+        sb.append(" payFailByCard=").append(PAYFAIL_BY_CARD);
         System.out.println(sb);
         System.out.println(FlatMonteCarloStats.summary());
     }

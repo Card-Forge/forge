@@ -7,6 +7,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
@@ -334,6 +335,45 @@ public final class StormSolver {
         }
     }
 
+    /**
+     * Burning Wish and the other Wishes fetch from outside the game, which the copy does not have: the simulation
+     * could not cast them, or took another card instead. The sorceries of the real sideboard are put at the bottom of
+     * the copy's library, and the Wishes of the copy search the library, where the pick of the deck finds them.
+     */
+    private static void addWishTargets(final Player ai, final GameSimulator root) {
+        final Player simAi = root.getSimulatedAiPlayer();
+        final Game simGame = root.getSimulatedGameState();
+        boolean wish = false;
+        for (final Card c : simAi.getCardsIn(ZoneType.Hand)) {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getParamOrDefault("Origin", "").contains("Sideboard")) {
+                    sa.putParam("Origin", "Library");
+                    wish = true;
+                }
+            }
+        }
+        if (!wish) {
+            return;
+        }
+        for (final Card sb : ai.getCardsIn(ZoneType.Sideboard)) {
+            if (sb.isSorcery() && sb.getPaperCard() != null) {
+                simAi.getZone(ZoneType.Library).add(CardFactory.getCard(sb.getPaperCard(), simAi, simGame));
+            }
+        }
+    }
+
+    /** A setup only prepares the next turn: it must not spend the hand, a sacrifice mana source or the Talisman. */
+    private static boolean safeSetup(final List<Step> steps) {
+        for (final Step s : steps) {
+            final boolean spends = s.response || s.host.equals("Lion's Eye Diamond") || s.host.equals("Lotus Petal")
+                    || s.host.equals("Dark Ritual") || (s.host.equals("Wishclaw Talisman") && s.sa.contains("wish counter"));
+            if (spends) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /** What the last search that found no line saw (see {@link #solve}). */
     public static String lastDiagnostic() {
         return lastDiagnostic;
@@ -370,6 +410,7 @@ public final class StormSolver {
         HiddenInfoShuffler.shuffle(root.getSimulatedGameState(), root.getGameCopier(), ai, new Random(game.getPhaseHandler().getTurn() + 7919L * variant),
                 ComboPlan::isTutorStormPiece);
         setStorm(root.getSimulatedGameState(), root.getSimulatedAiPlayer(), ComboPlan.stormCount(ai));
+        addWishTargets(ai, root);
         root.releaseCopier(); // the shuffle above was the last use of the link to the real game
 
         lastSetup = null;
@@ -448,7 +489,7 @@ public final class StormSolver {
                 final List<Step> steps = new ArrayList<>(node.steps);
                 steps.add(new Step(sa));
                 final int setupNow = combos.setupScore(childAi);
-                if (setupNow > setupBest) {
+                if (setupNow > setupBest && safeSetup(steps)) {
                     setupBest = setupNow;
                     setupSteps = steps;
                 }
@@ -486,7 +527,7 @@ public final class StormSolver {
                     steps.add(new Step(sa));
                     steps.add(new Step(discardMana, true));
                     final int setupNow = combos.setupScore(childAi);
-                    if (setupNow > setupBest) {
+                    if (setupNow > setupBest && safeSetup(steps)) {
                         setupBest = setupNow;
                         setupSteps = steps;
                     }
