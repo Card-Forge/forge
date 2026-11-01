@@ -41,6 +41,7 @@ public enum DeckType {
     NET_ARCHIVE_LEGACY_DECK("lblNetArchiveLegacyDecks"),
     NET_ARCHIVE_VINTAGE_DECK("lblNetArchiveVintageDecks"),
     NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks"),
+    NET_ARCHIVE_COMMANDER_DECK("lblNetArchiveCommanderDecks"),
     NET_EVENT_DECK("lblNetEventDecks"),
     PROVIDED_DECK_URL("lblProvideDeckUrl");
 
