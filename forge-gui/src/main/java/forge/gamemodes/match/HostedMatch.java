@@ -219,7 +219,6 @@ public class HostedMatch {
             if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
-                gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
@@ -265,7 +264,6 @@ public class HostedMatch {
 
         if (humanCount == 0) { //watch game but do not participate
             final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-            gui.setGameView(null); //clear the view so when the game restarts again, it updates correctly
             gui.setGameView(gameView);
             registerSpectator(gui, new WatchLocalGame(game, new LobbyPlayerHuman("Spectator"), gui));
         }
@@ -475,11 +473,9 @@ public class HostedMatch {
                     if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         humanController.setGui(gui);
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.setOriginalGameController(p.getView(), humanController);
                         gui.openView(new TrackableCollection<>(p.getView()));
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         event.subgame().subscribeToEvents(new FControlGameEventHandler(humanController));
                         event.subgame().subscribeToEvents(humanController.getYieldController());
@@ -507,11 +503,9 @@ public class HostedMatch {
                 for (final Player p : event.maingame().getPlayers()) {
                     if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.setOriginalGameController(p.getView(), humanController);
                         gui.openView(new TrackableCollection<>(p.getView()));
-                        gui.setGameView(null);
                         gui.setGameView(gameView);
                         gui.handleGameEvent(new GameEventTurnPhase(
                                 gameView.getPlayerTurn(), gameView.getPhase(), ""));
