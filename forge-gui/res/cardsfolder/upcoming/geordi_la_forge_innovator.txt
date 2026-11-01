@@ -1,0 +1,9 @@
+Name:Geordi La Forge, Innovator
+ManaCost:2 U
+Types:Legendary Creature Human Artificer
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | IsPresent$ Spacecraft.YouCtrl | Description$ NICKNAME can't be blocked if you control a Spacecraft.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Spacecraft
+Oracle:Geordi La Forge can't be blocked if you control a Spacecraft.\nWhenever Geordi La Forge deals combat damage to a player, draw a card.
