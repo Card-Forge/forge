@@ -369,6 +369,7 @@ public final class OpeningHand {
         if (plan != null) {
             score += plan.combos.handBonus(hand);
         }
+        score += StifleCombo.handBonus(hand);
         return score;
     }
 
