@@ -115,7 +115,7 @@ public final class ComboPlan {
     }
 
     /** Hand attack aimed at yourself is fuel only when it throws away a big creature that a reanimation spell can use. */
-    public boolean selfDiscardWanted(final Player ai) {
+    public boolean bigDiscardWanted(final Player ai) {
         final Combo re = find(Kind.REANIMATOR);
         if (re == null || ai == null || ai.getLife() <= 4) {
             return false; // Thoughtseize costs 2 life
@@ -125,6 +125,100 @@ public final class ComboPlan {
             big |= c.isCreature() && isBigTarget(c);
         }
         return big && reanimationReady(ai, re);
+    }
+
+    /** Whether the hand holds something worth throwing away with a hand attack aimed at the AI itself. */
+    public boolean selfDiscardWanted(final Player ai) {
+        return selfDiscardName(ai, null) != null;
+    }
+
+    public String selfDiscardName(final Player ai) {
+        return selfDiscardName(ai, null);
+    }
+
+    /**
+     * The name to give a hand attack aimed at the AI itself: the card (all copies together) that gains the most from
+     * being in the graveyard. {@code host} is the spell being cast; it is still in hand while the AI decides, and
+     * naming it would discard nothing. Null when nothing is worth it.
+     */
+    public String selfDiscardName(final Player ai, final Card host) {
+        final boolean big = bigDiscardWanted(ai);
+        final Map<String, Integer> total = new HashMap<>();
+        final Map<String, Integer> tiebreak = new HashMap<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c == host || c.isLand()) {
+                continue;
+            }
+            int v = graveyardValue(c);
+            int tie = 0;
+            if (big && c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
+                v += 5;
+                tie = ComputerUtilCard.evaluateCreature(c);
+            }
+            if (v <= 0) {
+                continue;
+            }
+            total.merge(c.getName(), v, Integer::sum);
+            tiebreak.merge(c.getName(), tie, Math::max);
+        }
+        String best = null;
+        int bestTotal = 1; // anything below 2 is not worth a card
+        int bestTie = -1;
+        for (final Map.Entry<String, Integer> e : total.entrySet()) {
+            final int t = e.getValue();
+            final int tie = tiebreak.get(e.getKey());
+            if (t > bestTotal || (t == bestTotal && best != null && tie > bestTie)) {
+                best = e.getKey();
+                bestTotal = t;
+                bestTie = tie;
+            }
+        }
+        return best;
+    }
+
+    /**
+     * How much a card wants to be in the graveyard instead of the hand: the DiscardMe SVar of its script, a graveyard
+     * trigger / ability / static (Bridge from Below), and the keywords that work from the graveyard.
+     */
+    static int graveyardValue(final Card c) {
+        int v = 0;
+        if (c.hasSVar("DiscardMe")) {
+            try {
+                v += Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
+            } catch (final NumberFormatException e) {
+                v += 1;
+            }
+        }
+        boolean fromGraveyard = false;
+        for (final Trigger t : c.getTriggers()) {
+            if (zoneParamHasGraveyard(t.getParam("TriggerZones"))) {
+                fromGraveyard = true;
+            }
+        }
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (zoneParamHasGraveyard(st.getParam("EffectZone"))) {
+                fromGraveyard = true;
+            }
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && zoneParamHasGraveyard(sa.getParam("ActivationZone"))) {
+                fromGraveyard = true;
+            }
+        }
+        if (fromGraveyard) {
+            v += 4;
+        }
+        if (c.hasKeyword(Keyword.DREDGE)) {
+            v += 3;
+        }
+        if (c.hasKeyword(Keyword.FLASHBACK) || c.hasKeyword(Keyword.UNEARTH) || c.hasKeyword(Keyword.ESCAPE)) {
+            v += 3;
+        }
+        return v;
+    }
+
+    private static boolean zoneParamHasGraveyard(final String zones) {
+        return zones != null && zones.contains("Graveyard");
     }
 
     static boolean isTargetedDiscard(final SpellAbility sa) {

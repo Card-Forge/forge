@@ -7,13 +7,16 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -90,6 +93,10 @@ public final class ComboGuard {
         if (host == null) {
             return null;
         }
+        // a sacrifice cost must not throw away a piece of the deck's combos (Wight of the Reliquary, a flashback)
+        if (sacrificesKeyCard(ai, sa, plan)) {
+            return "sacrifice-key";
+        }
         // a cheating spell with nothing worth putting in: Show and Tell would only feed the opponent
         if (isHandCheat(sa) && !hasUsefulPermanentInHand(ai, host, plan)) {
             return "cheat-redundant";
@@ -102,6 +109,32 @@ public final class ComboGuard {
         return null;
     }
 
+    /**
+     * Whether paying the sacrifice cost of the play (Wight of the Reliquary, the flashback of Cabal Therapy) would
+     * give up a piece of the combos of the deck or one of its win cards, going by the creature the AI picks for such
+     * a cost. A deck without a combo plan and a cost that sacrifices the card itself are never a problem.
+     */
+    static boolean sacrificesKeyCard(final Player ai, final SpellAbility sa, final ComboPlan plan) {
+        if (plan == null || plan.isEmpty() || sa.getPayCosts() == null
+                || !sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            return false;
+        }
+        final CostSacrifice cost = sa.getPayCosts().getCostPartByType(CostSacrifice.class);
+        if (cost == null || cost.payCostFromSource()) {
+            return false;
+        }
+        final CardCollectionView chosen = ComputerUtil.chooseSacrificeType(ai, cost.getType(), sa, sa.getTargetCard(),
+                false, Math.max(1, cost.getAbilityAmount(sa)), CardCollection.EMPTY);
+        if (chosen == null) {
+            return false;
+        }
+        for (final Card c : chosen) {
+            if (plan.isKeyCard(c) || plan.isWinCard(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
     // ------------------------------------------------------------------------------------------ the legend rule
 
     /** Whether the ability puts a card from a graveyard onto the battlefield (Animate Dead is an aura that does it). */
