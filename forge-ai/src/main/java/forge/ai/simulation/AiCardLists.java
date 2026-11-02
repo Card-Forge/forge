@@ -54,7 +54,17 @@ public final class AiCardLists {
         /** Permanents of which a second copy does nothing (ComboGuard). */
         COMBO_ENGINE,
         /** Spells that put cards from hand onto the battlefield when they resolve (ComboGuard). */
-        HAND_CHEAT
+        HAND_CHEAT,
+        /** Permanents that let creatures (or every spell) be cast for free: Aluren, Omniscience. */
+        FREE_CAST_ENGINE,
+        /** Cheap creatures that loop or win once a free_cast_engine is in play (Acererak, Cavern Harpy...). */
+        FREE_CAST_TARGET,
+        /** Artifacts that chain artifacts: cast them from the library, untap them, tutor them (Mystic Forge...). */
+        ARTIFACT_ENGINE,
+        /** What an artifact engine deck wins or swings the game with (Karn, The One Ring, Kozilek's Command...). */
+        ARTIFACT_PAYOFF,
+        /** Spells that fetch an overrun finisher from the library (Green Sun's Zenith, Natural Order...). */
+        FINISHER_TUTOR
     }
 
     /** A two card combo, with the names as they are written in the file. */

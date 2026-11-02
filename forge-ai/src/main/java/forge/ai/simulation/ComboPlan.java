@@ -63,7 +63,13 @@ import forge.game.zone.ZoneType;
  *       for the size of the library, and Narcomoeba, which only works from the library, is kept;</li>
  *   <li>{@link Kind#DARK_DEPTHS}: Dark Depths with Vampire Hexmage or Thespian's Stage. A Dark Depths on the table
  *       that has lost its ice counters is a 20/20 flying indestructible Marit Lage, so the deck plays the land first
- *       and then the piece that removes the counters. Lands are read for this one, the other kinds only read spells.</li>
+ *       and then the piece that removes the counters. Lands are read for this one, the other kinds only read spells;</li>
+ *   <li>{@link Kind#FREE_CAST}: Aluren and Omniscience with the cheap creatures that loop under them (Acererak the
+ *       Archlich bounces itself and ventures, Cavern Harpy and Raven Familiar return each other). The engine is
+ *       worth most once it is in play with a creature to cast, and the creatures are never discarded;</li>
+ *   <li>{@link Kind#ARTIFACT_ENGINE}: Mystic Forge, Paradox Engine, Manifold Key, Grim Monolith and the artifacts that
+ *       chain off them, with payoffs such as Karn, The One Ring and Kozilek's Command. The engines are worth points
+ *       while they sit in play, because every artifact they cast or untap pays for the next one.</li>
  * </ul>
  * Every number in here is a small evaluator bonus (a 2/2 creature is worth about 150) that is only given while the
  * combo is still alive, so a deck that merely contains one stray combo card is never taken for a combo deck: each
@@ -71,7 +77,7 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -237,6 +243,8 @@ public final class ComboPlan {
         addIfFound(found, atog(spells));
         addIfFound(found, replenish(spells));
         addIfFound(found, darkDepths(spells, lands));
+        addIfFound(found, freeCast(spells));
+        addIfFound(found, artifactEngine(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -548,6 +556,12 @@ public final class ComboPlan {
                 case DARK_DEPTHS:
                     sum += darkDepthsTerm(ai);
                     break;
+                case FREE_CAST:
+                    sum += freeCastTerm(ai, combo);
+                    break;
+                case ARTIFACT_ENGINE:
+                    sum += artifactEngineTerm(ai, combo);
+                    break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
             }
@@ -679,16 +693,16 @@ public final class ComboPlan {
         return spell && fatty ? ASSEMBLED_BONUS : spell || fatty ? ONE_PIECE_BONUS / 2 : 0;
     }
 
-    /** An overrun finisher is worth holding until the board makes it count: each creature it can pump is points. */
+    /**
+     * An overrun finisher is worth holding until the board makes it count: each creature it can pump is points. A
+     * finisher that is still in the library counts for three quarters while a tutor for it (Green Sun's Zenith,
+     * Natural Order: the {@code cascaders} of this combo) waits in hand.
+     */
     private int goWideTerm(final Player ai, final Combo combo) {
-        boolean finisher = false;
-        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
-            if (combo.payoffs.contains(c.getName())) {
-                finisher = true;
-                break;
-            }
-        }
-        if (!finisher) {
+        final boolean finisher = anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs);
+        final boolean tutored = !finisher && anyNamed(ai.getCardsIn(ZoneType.Hand), combo.cascaders)
+                && anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs);
+        if (!finisher && !tutored) {
             return 0;
         }
         int creatures = 0;
@@ -697,7 +711,65 @@ public final class ComboPlan {
                 creatures++;
             }
         }
-        return Math.min(160, 25 * creatures);
+        final int points = Math.min(160, 25 * creatures);
+        return tutored ? points * 3 / 4 : points;
+    }
+
+    /**
+     * Aluren and Omniscience: the engine in play with a creature to cast is the combo (Acererak the Archlich bounces
+     * itself and ventures for nothing, over and over); one turn before it, the engine in hand with the mana for it and
+     * a creature to go with it. Only the hand and the battlefield count for the creature, because Omniscience, unlike
+     * Aluren, does not cast from the library or the graveyard.
+     */
+    private int freeCastTerm(final Player ai, final Combo combo) {
+        int lands = 0;
+        boolean engineInPlay = false;
+        boolean targetInPlay = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand()) {
+                lands++;
+            }
+            engineInPlay |= combo.enablers.contains(c.getName());
+            targetInPlay |= combo.payoffs.contains(c.getName());
+        }
+        boolean engineInHand = false;
+        boolean targetInHand = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (combo.enablers.contains(c.getName())) {
+                engineInHand |= c.getCMC() <= lands + 1; // one more land drop
+            } else if (combo.payoffs.contains(c.getName())) {
+                targetInHand = true;
+            }
+        }
+        if (engineInPlay) {
+            return targetInPlay || targetInHand ? 2 * ASSEMBLED_BONUS : ASSEMBLED_BONUS / 2;
+        }
+        final boolean target = targetInPlay || targetInHand;
+        return engineInHand && target ? ASSEMBLED_BONUS : engineInHand || target ? ONE_PIECE_BONUS : 0;
+    }
+
+    /**
+     * Mystic Forge, Paradox Engine, Manifold Key, Grim Monolith and their kin: every one of them in play makes the
+     * next artifact cheaper or free, and the artifacts they keep in play are the mana for the payoff (Karn, The One
+     * Ring, Kozilek's Command), which is worth a little more while it is in hand. The top card of the library is not
+     * read: Mystic Forge shows it to the player, but a rollout must not use what the AI cannot know.
+     */
+    private int artifactEngineTerm(final Player ai, final Combo combo) {
+        int engines = 0;
+        int artifacts = 0;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (combo.enablers.contains(c.getName())) {
+                engines++;
+            }
+            if (c.isArtifact()) {
+                artifacts++;
+            }
+        }
+        int sum = 60 * Math.min(engines, 3) + 15 * Math.min(artifacts, 8);
+        if (engines > 0 && anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs)) {
+            sum += ONE_PIECE_BONUS;
+        }
+        return Math.min(300, sum);
     }
 
     private static int creatureValue(final CardCollectionView cards) {
@@ -811,7 +883,8 @@ public final class ComboPlan {
         int payoffCopies = 0;
         int cheapArtifacts = 0;
         for (final Card c : spells) {
-            if (c.hasKeyword(Keyword.AFFINITY)) {
+            // Improvise is the modern Affinity: Kappa Cannoneer pays for itself with the artifacts the deck is full of
+            if (c.hasKeyword(Keyword.AFFINITY) || c.hasKeyword(Keyword.IMPROVISE)) {
                 payoffs.add(c.getName());
                 payoffCopies++;
             } else if (c.isArtifact() && c.getCMC() <= 2) {
@@ -2944,22 +3017,87 @@ public final class ComboPlan {
     private static Combo goWide(final List<Card> spells) {
         final Set<String> finishers = new LinkedHashSet<>();
         final Set<String> bodies = new LinkedHashSet<>();
+        final Set<String> tutors = new LinkedHashSet<>();
         int finisherCopies = 0;
         int cheapBodies = 0;
+        int tutorCopies = 0;
         for (final Card c : spells) {
             if (AiCardLists.has(AiCardLists.Role.OVERRUN, c.getName()) || isOverrun(c)) {
                 finishers.add(c.getName());
                 finisherCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.FINISHER_TUTOR, c.getName())) {
+                tutors.add(c.getName());
+                tutorCopies++;
             } else if (c.getCMC() <= 3 && (c.isCreature() || hasApi(c, ApiType.Token))) {
                 bodies.add(c.getName());
                 cheapBodies++;
             }
         }
-        if (finisherCopies < 2 || cheapBodies < 16) {
+        // a single Craterhoof Behemoth is a plan when four or more spells (Green Sun's Zenith, Natural Order) find it
+        final boolean found = finisherCopies >= 2 || finisherCopies >= 1 && tutorCopies >= 4;
+        if (!found || cheapBodies < 16) {
             return null;
         }
-        return new Combo(Kind.GO_WIDE, 20 + 5 * Math.min(finisherCopies, 6) + Math.min(cheapBodies, 24), finishers,
-                bodies, Collections.<String>emptySet(), false, "finisher=" + finishers + ", bodies=" + cheapBodies);
+        return new Combo(Kind.GO_WIDE, 20 + 5 * Math.min(finisherCopies, 6) + Math.min(cheapBodies, 24)
+                + 2 * Math.min(tutorCopies, 6), finishers, bodies, tutors, false,
+                "finisher=" + finishers + ", bodies=" + cheapBodies + (tutors.isEmpty() ? "" : ", tutors=" + tutors));
+    }
+
+    /**
+     * Aluren or Omniscience together with cheap creatures that loop or win under it. Needs three copies of each: one
+     * Aluren and a stray Cavern Harpy is no combo deck.
+     */
+    private static Combo freeCast(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> targets = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int targetCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.FREE_CAST_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.FREE_CAST_TARGET, c.getName())) {
+                targets.add(c.getName());
+                targetCopies++;
+            }
+        }
+        if (engineCopies < 3 || targetCopies < 3) {
+            return null;
+        }
+        return new Combo(Kind.FREE_CAST, 30 + 5 * Math.min(engineCopies, 8) + 5 * Math.min(targetCopies, 8), targets,
+                engines, Collections.<String>emptySet(), false, "engines=" + engines + ", targets=" + targets);
+    }
+
+    /**
+     * An artifact deck built around engines that chain artifacts (Mystic Forge, Paradox Engine, Manifold Key, Grim
+     * Monolith, Transmute Artifact) with payoffs that need the mana. A deck with a few artifacts and one engine is no
+     * engine deck: six engine cards, three payoff cards and sixteen artifacts are needed. The artifacts of the deck
+     * that are neither (Affinity decks) are {@link Kind#AFFINITY}, which this does not replace.
+     */
+    private static Combo artifactEngine(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> payoffs = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int payoffCopies = 0;
+        int artifacts = 0;
+        for (final Card c : spells) {
+            if (c.isArtifact()) {
+                artifacts++;
+            }
+            if (AiCardLists.has(AiCardLists.Role.ARTIFACT_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.ARTIFACT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+            }
+        }
+        if (engineCopies < 6 || payoffCopies < 3 || artifacts < 16) {
+            return null;
+        }
+        return new Combo(Kind.ARTIFACT_ENGINE, 25 + 2 * Math.min(engineCopies, 12) + 3 * Math.min(payoffCopies, 8)
+                + Math.min(artifacts, 24) / 2, payoffs, engines, Collections.<String>emptySet(), false,
+                "engines=" + engines + ", payoffs=" + payoffs + ", artifacts=" + artifacts);
     }
 
     /** A spell that gives every creature of its controller a big bonus. */
