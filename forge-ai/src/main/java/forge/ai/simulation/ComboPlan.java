@@ -138,6 +138,15 @@ public final class ComboPlan {
         return selfDiscardName(ai, null) != null;
     }
 
+    /**
+     * Whether a hand attack aimed at the AI itself is worth it, not counting the spell that makes it: Cabal Therapy
+     * has flashback, so in the hand it looks like a card that wants to be in the graveyard, and naming it discards
+     * nothing.
+     */
+    public boolean selfDiscardWanted(final Player ai, final Card host) {
+        return selfDiscardName(ai, host) != null;
+    }
+
     public String selfDiscardName(final Player ai) {
         return selfDiscardName(ai, null);
     }
@@ -568,7 +577,7 @@ public final class ComboPlan {
         if (who == null) {
             who = host.getController();
         }
-        return isTargetedDiscard(sa) && selfDiscardWanted(who);
+        return isTargetedDiscard(sa) && selfDiscardWanted(who, host);
     }
 
     /**

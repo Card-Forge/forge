@@ -34,7 +34,7 @@ public final class NamedDiscard {
     /**
      * The player the discard part of the spell is aimed at, or null when no target has been chosen yet.
      */
-    static Player discardTarget(final SpellAbility sa) {
+    public static Player discardTarget(final SpellAbility sa) {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
             if (a.getApi() == ApiType.Discard && a.usesTargeting() && a.getTargets() != null) {
                 for (final GameEntity e : a.getTargets().getTargetEntities()) {
@@ -112,7 +112,49 @@ public final class NamedDiscard {
         if (valid != null && !valid.isEmpty() && source != null) {
             library = CardLists.getValidCards(library, valid, source.getController(), source, sa);
         }
-        return ComputerUtilCard.getMostProminentCardName(library);
+        return bestGuess(target, library);
+    }
+
+    /**
+     * A blind guess at what the opponent holds: the card of their deck that matters most to it. Pieces of its combos
+     * and its win cards come first, then the names it has the most copies of, then the most expensive.
+     */
+    static String bestGuess(final Player opp, final CardCollectionView pool) {
+        final CardCollection cards = new CardCollection();
+        for (final Card c : pool) {
+            if (!c.isLand()) {
+                cards.add(c);
+            }
+        }
+        if (cards.isEmpty()) {
+            return ComputerUtilCard.getMostProminentCardName(pool);
+        }
+        ComboPlan plan = ComboPlan.EMPTY;
+        try {
+            plan = forge.ai.simulation.DeckPlan.forSetting("auto", opp).combos;
+        } catch (final RuntimeException e) {
+            // no plan for this deck: the copies and the cost decide
+        }
+        final Map<String, Integer> score = new HashMap<>();
+        for (final Card c : cards) {
+            int v = 10 + c.getCMC();
+            if (plan.isWinCard(c)) {
+                v += 60;
+            }
+            if (plan.isKeyCard(c)) {
+                v += 40;
+            }
+            score.merge(c.getName(), v, Integer::sum);
+        }
+        String best = "";
+        int bestScore = -1;
+        for (final Map.Entry<String, Integer> e : score.entrySet()) {
+            if (e.getValue() > bestScore) {
+                bestScore = e.getValue();
+                best = e.getKey();
+            }
+        }
+        return best;
     }
 
     /**

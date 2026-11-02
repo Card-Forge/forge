@@ -148,4 +148,49 @@ public class FlatMonteCarloNamedDiscardTest extends AITest {
         }
         AssertJUnit.assertTrue("the chosen name must be in the Medium log", logged);
     }
+
+    @Test
+    public void cabalTherapyInHandDoesNotMakeTheAiAimItAtItself() {
+        // flashback makes the Therapy in hand look like a card that wants to be in the graveyard; naming it discards nothing
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final SpellAbility sa = setUp(game, ai);
+        addCardToZone("Lightning Bolt", ai, ZoneType.Hand);
+        final forge.ai.simulation.ComboPlan plan = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos;
+        AssertJUnit.assertFalse(plan.selfDiscardWanted(ai, sa.getHostCard()));
+        AssertJUnit.assertNull(plan.selfDiscardName(ai, sa.getHostCard()));
+    }
+
+    @Test
+    public void aBlindGuessNamesAnImportantNonlandCardOfTheOpponent() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        final SpellAbility sa = setUp(game, ai);
+        for (int i = 0; i < 6; i++) {
+            addCardToZone("Island", opp, ZoneType.Library);
+        }
+        addCardToZone("Thassa's Oracle", opp, ZoneType.Library);
+        addCardToZone("Balustrade Spy", opp, ZoneType.Library);
+        addCardToZone("Balustrade Spy", opp, ZoneType.Library);
+        addCardToZone("Island", opp, ZoneType.Hand);
+        addCardToZone("Island", opp, ZoneType.Hand);
+        aimDiscardAt(sa, opp);
+        final String name = NamedDiscard.chooseName(ai, sa, "Card.nonLand");
+        AssertJUnit.assertTrue("named '" + name + "'", name.equals("Thassa's Oracle") || name.equals("Balustrade Spy"));
+    }
+
+    @Test
+    public void theGuardRefusesTherapyAimedAtTheAiWithNothingToNameButNotAtTheOpponent() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final Player opp = game.getPlayers().get(0);
+        final SpellAbility sa = setUp(game, ai);
+        addCardToZone("Lightning Bolt", ai, ZoneType.Hand);
+        final forge.ai.simulation.ComboPlan plan = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos;
+        aimDiscardAt(sa, ai);
+        AssertJUnit.assertEquals("named-discard-self", forge.ai.simulation.ComboGuard.problem(ai, sa, null, plan));
+        aimDiscardAt(sa, opp);
+        AssertJUnit.assertNull(forge.ai.simulation.ComboGuard.problem(ai, sa, null, plan));
+    }
 }

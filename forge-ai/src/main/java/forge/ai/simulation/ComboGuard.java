@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.ai.ComputerUtil;
+import forge.ai.NamedDiscard;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -16,6 +19,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostDiscard;
 import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -93,6 +97,17 @@ public final class ComboGuard {
         if (host == null) {
             return null;
         }
+        // a Pact: the cost at the next upkeep must be payable, or the game is lost, unless this turn wins the game
+        if (pactUnpayable(ai, sa, plan)) {
+            return "pact-unpayable";
+        }
+        // Cabal Therapy aimed at the AI itself, with nothing of its own worth naming, discards nothing
+        if (isNamedDiscard(sa)) {
+            final Player target = aim instanceof Player ? (Player) aim : NamedDiscard.discardTarget(sa);
+            if (target == ai && plan != null && !plan.selfDiscardWanted(ai, host)) {
+                return "named-discard-self";
+            }
+        }
         // a sacrifice cost must not throw away a piece of the deck's combos (Wight of the Reliquary, a flashback)
         if (sacrificesKeyCard(ai, sa, plan)) {
             return "sacrifice-key";
@@ -114,6 +129,163 @@ public final class ComboGuard {
      * give up a piece of the combos of the deck or one of its win cards, going by the creature the AI picks for such
      * a cost. A deck without a combo plan and a cost that sacrifices the card itself are never a problem.
      */
+    private static final Pattern PACT_COST = Pattern.compile("UnlessCost\\$\\s*([^|]+)");
+
+    /**
+     * The mana cost of the "at the beginning of your next upkeep, pay {cost}, if you don't, you lose the game" part
+     * of a Pact (Pact of Negation, Summoner's Pact, Slaughter Pact, Intervention Pact, Pact of the Titan), written as
+     * in the card script ("3 U U"), or null for any other spell.
+     */
+    public static String pactCost(final SpellAbility sa) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        if (host == null) {
+            return null;
+        }
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (a.getApi() != ApiType.DelayedTrigger || !"Upkeep".equals(a.getParam("Phase"))) {
+                continue;
+            }
+            final String exec = a.getParam("Execute");
+            final String svar = exec == null ? "" : host.getSVar(exec);
+            if (svar.contains("LosesGame")) {
+                final Matcher m = PACT_COST.matcher(svar);
+                if (m.find()) {
+                    return m.group(1).trim();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Whether casting the Pact would lose the game: the AI would not be able to pay the cost at its next upkeep (with
+     * the costs of the Pacts it already cast this turn), and this turn is not the one that wins. The mana counted is
+     * what its permanents make again after they untap (not Lotus Petal or Lion's Eye Diamond), and a land that can
+     * still be played this turn.
+     */
+    static boolean pactUnpayable(final Player ai, final SpellAbility sa, final ComboPlan plan) {
+        final String cost = pactCost(sa);
+        if (cost == null) {
+            return false;
+        }
+        final int[] colors = new int[5];
+        int owed = addPactCost(cost, colors);
+        for (final SpellAbility cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            if (ai.equals(cast.getActivatingPlayer()) && cast != sa && pactCost(cast) != null) {
+                owed += addPactCost(pactCost(cast), colors);
+            }
+        }
+        int total = 0;
+        final int[] canMake = new int[5];
+        final List<Card> sources = toList(ai.getCardsIn(ZoneType.Battlefield));
+        final boolean ownTurn = ai.getGame().getPhaseHandler().getPlayerTurn() == ai;
+        if (ownTurn && ai.getLandsPlayedThisTurn() < ai.getMaxLandPlays()) {
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                if (c.isLand()) {
+                    sources.add(c); // the land drop still to come
+                    break;
+                }
+            }
+        }
+        for (final Card c : sources) {
+            int best = 0;
+            final boolean[] makes = new boolean[5];
+            for (final SpellAbility ma : c.getManaAbilities()) {
+                if (ma.getPayCosts() != null && (ma.getPayCosts().hasSpecificCostType(CostSacrifice.class)
+                        || ma.getPayCosts().hasSpecificCostType(CostDiscard.class))) {
+                    continue; // used up by making the mana
+                }
+                best = Math.max(best, Math.max(1, ma.amountOfManaGenerated(false)));
+                for (int i = 0; i < 5; i++) {
+                    makes[i] |= ma.canProduce(String.valueOf("WUBRG".charAt(i)));
+                }
+            }
+            total += best;
+            for (int i = 0; i < 5; i++) {
+                if (makes[i] && best > 0) {
+                    canMake[i]++;
+                }
+            }
+        }
+        boolean payable = total >= owed;
+        for (int i = 0; i < 5 && payable; i++) {
+            payable = canMake[i] >= colors[i];
+        }
+        if (payable) {
+            return false;
+        }
+        return !winsThisTurn(ai, plan);
+    }
+
+    private static List<Card> toList(final CardCollectionView cards) {
+        final List<Card> list = new ArrayList<>();
+        for (final Card c : cards) {
+            list.add(c);
+        }
+        return list;
+    }
+
+    /** Adds one Pact cost ("2 G G") to the colored counts (WUBRG) and returns its total mana. */
+    private static int addPactCost(final String cost, final int[] colors) {
+        int total = 0;
+        for (final String token : cost.trim().split("\\s+")) {
+            final int at = "WUBRG".indexOf(token);
+            if (at >= 0 && token.length() == 1) {
+                colors[at]++;
+                total++;
+            } else if (token.matches("\\d+")) {
+                total += Integer.parseInt(token);
+            } else if (!token.isEmpty()) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Whether the game is won this turn, so that a Pact that cannot be paid does not matter: a lethal attack is
+     * still to come, or the library of a library-out deck (Oops! All Spells) is nearly gone on its own turn.
+     */
+    static boolean winsThisTurn(final Player ai, final ComboPlan plan) {
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.getPlayerTurn() != ai) {
+            return false;
+        }
+        if (plan != null && plan.has(ComboPlan.Kind.LIBRARY_OUT)
+                && ai.getCardsIn(ZoneType.Library).size() <= PACT_LIBRARY_OUT_LEFT) {
+            return true;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        if (opp == null || ai.getOpponents().size() != 1 || !ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return false;
+        }
+        final List<Card> attackers = new ArrayList<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isCreature() && CombatUtil.canAttack(c, opp)) {
+                attackers.add(c);
+            }
+        }
+        final List<Card> blockers = new ArrayList<>();
+        for (final Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isCreature() && !c.isTapped()) {
+                blockers.add(c);
+            }
+        }
+        return opp.getLife() > 0 && unblockedDamage(attackers, blockers) >= opp.getLife();
+    }
+
+    /** With this few cards left in the library the library-out deck is taken to win the turn it is cast in. */
+    private static final int PACT_LIBRARY_OUT_LEFT = 3;
+
+    private static boolean isNamedDiscard(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            if (NamedDiscard.LOGIC.equals(a.getParam("AILogic"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     static boolean sacrificesKeyCard(final Player ai, final SpellAbility sa, final ComboPlan plan) {
         if (plan == null || plan.isEmpty() || sa.getPayCosts() == null
                 || !sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
