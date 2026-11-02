@@ -85,6 +85,12 @@ You can find cards of a specific mana value with `manavalue`, `mv`, or `cmc`, co
 *Exemples:*
 `c:u mv=5` - Blue cards with mana value 5
 
+#### Keyword(s): `is:hybrid`
+Find cards with hybrid mana symbols in their cost.
+
+#### Keyword(s): `is:phyrexian`
+Find cards with Phyrexian mana symbols in their cost.
+
 ### Power, Toughness, and Loyalty
 
 #### Keyword(s): `power`, `pow`

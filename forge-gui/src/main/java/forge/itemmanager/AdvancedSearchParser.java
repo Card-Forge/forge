@@ -314,6 +314,14 @@ public abstract class AdvancedSearchParser {
                             predicate = CardRulesPredicates.isVanilla();
                             break;
 
+                        case "hybrid":
+                            predicate = CardRulesPredicates.costsHybridMana();
+                            break;
+
+                        case "phyrexian":
+                            predicate = CardRulesPredicates.costsPhyrexianMana();
+                            break;
+
                         case "custom":
                             predicate = card -> card.isCustom();
                             break;

@@ -226,6 +226,20 @@ public final class CardRulesPredicates {
     }
 
     /**
+     * @return a Predicate that matches cards with hybrid mana symbols in their cost.
+     */
+    public static Predicate<CardRules> costsHybridMana() {
+        return card -> card.getManaCost().hasHybrid();
+    }
+
+    /**
+     * @return a Predicate that matches cards with Phyrexian mana symbols in their cost.
+     */
+    public static Predicate<CardRules> costsPhyrexianMana() {
+        return card -> card.getManaCost().hasPhyrexian();
+    }
+
+    /**
      * Checks for color.
      *
      * @param thatColor
