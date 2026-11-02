@@ -1230,9 +1230,18 @@ public class VLobby implements ILobbyView {
             syncGameFormatCombo();
             return;
         }
+        if (selected == FormatChoices.ARCHIVED) {
+            syncGameFormatCombo();
+            ArchivedFormatMenu.show(cboFormatPanel.getComboBox(), this::applyFormatChoice);
+            return;
+        }
         if (selected == lobby.getFormatChoice()) { return; }
 
-        lobby.setFormatChoice(selected);
+        applyFormatChoice(selected);
+    }
+
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
         update(false);
         updateActionButtons();
     }
@@ -1242,7 +1251,8 @@ public class VLobby implements ILobbyView {
         if (cboFormatPanel.getSelectedItem() != applied) {
             suppressFormatListener = true;
             try {
-                cboFormatPanel.setSelectedItem(applied);
+                // The model takes an archived format, which the list does not hold
+                cboFormatPanel.getComboBox().getModel().setSelectedItem(applied);
             } finally {
                 suppressFormatListener = false;
             }

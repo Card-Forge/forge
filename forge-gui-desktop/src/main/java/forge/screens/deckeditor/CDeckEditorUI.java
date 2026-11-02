@@ -52,6 +52,7 @@ import forge.screens.deckeditor.controllers.CStatistics;
 import forge.screens.deckeditor.controllers.DeckController;
 import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.ArchivedFormatMenu;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 import forge.util.Localizer;
@@ -151,6 +152,11 @@ public enum CDeckEditorUI implements ICDoc {
 
     /** Applies a Format dropdown entry. A GameFormat opens the Constructed editor with the catalogue limited to that format. */
     public void selectFormat(final Object choice) {
+        if (choice == FormatChoices.ARCHIVED) {
+            syncFormatDropdown();
+            ArchivedFormatMenu.show(VCurrentDeck.SINGLETON_INSTANCE.getCbFormat(), this::selectFormat);
+            return;
+        }
         editorFormat = choice instanceof GameFormat format ? format : null;
         changeFormat(choice instanceof GameType type ? type : GameType.Constructed);
         syncFormatDropdown();
@@ -200,7 +206,8 @@ public enum CDeckEditorUI implements ICDoc {
             }
             final Object choice = editorFormat != null ? editorFormat : gt;
             if (cb.getSelectedItem() != choice) {
-                cb.setSelectedItem(choice);
+                // The model takes an archived format, which the list does not hold
+                cb.getModel().setSelectedItem(choice);
             }
             cb.setEnabled(true);
             if (childController.getCatalogManager() instanceof CardManager catalog) {
