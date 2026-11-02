@@ -132,4 +132,20 @@ public class FlatMonteCarloNamedDiscardTest extends AITest {
         final AiController ctrl = ((PlayerControllerAi) ai.getController()).getAi();
         AssertJUnit.assertEquals(AiPlayDecision.WillPlay, ctrl.canPlaySa(sa));
     }
+
+    @Test
+    public void theNameTheAiChoseIsInTheLogAtTheDefaultVerbosity() {
+        final Game game = initAndCreateGame();
+        final Player ai = game.getPlayers().get(1);
+        final SpellAbility sa = setUp(game, ai);
+        addCardToZone("Bridge from Below", ai, ZoneType.Hand);
+        addCardToZone("Lightning Bolt", ai, ZoneType.Hand);
+        aimDiscardAt(sa, ai);
+        sa.getApi().getSpellEffect().resolve(sa); // the NameCard part of Cabal Therapy
+        boolean logged = false;
+        for (final forge.game.GameLogEntry e : game.getGameLog().getLogEntriesForVerbosity(forge.game.GameLogVerbosity.MEDIUM)) {
+            logged |= e.message().contains("names Bridge from Below");
+        }
+        AssertJUnit.assertTrue("the chosen name must be in the Medium log", logged);
+    }
 }

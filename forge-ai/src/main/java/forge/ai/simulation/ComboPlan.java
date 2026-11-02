@@ -69,7 +69,12 @@ import forge.game.zone.ZoneType;
  *       worth most once it is in play with a creature to cast, and the creatures are never discarded;</li>
  *   <li>{@link Kind#ARTIFACT_ENGINE}: Mystic Forge, Paradox Engine, Manifold Key, Grim Monolith and the artifacts that
  *       chain off them, with payoffs such as Karn, The One Ring and Kozilek's Command. The engines are worth points
- *       while they sit in play, because every artifact they cast or untap pays for the next one.</li>
+ *       while they sit in play, because every artifact they cast or untap pays for the next one;</li>
+ *   <li>{@link Kind#LIBRARY_OUT}: Balustrade Spy, Cephalid Illusionist (with Shuko and Nomads en-Kor to target it)
+ *       empty the AI's own library and Thassa's Oracle or Laboratory Maniac wins. The library is only worth
+ *       emptying while the winner is in hand, and when it is not the deck must not mill itself out;</li>
+ *   <li>{@link Kind#PAIR}: two card kills that are not a copy engine (Painter's Servant with Grindstone): both
+ *       halves in hand or in play are worth far more than the cards apart.</li>
  * </ul>
  * Every number in here is a small evaluator bonus (a 2/2 creature is worth about 150) that is only given while the
  * combo is still alive, so a deck that merely contains one stray combo card is never taken for a combo deck: each
@@ -77,7 +82,8 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE,
+        LIBRARY_OUT, PAIR }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -339,6 +345,8 @@ public final class ComboPlan {
         addIfFound(found, darkDepths(spells, lands));
         addIfFound(found, freeCast(spells));
         addIfFound(found, artifactEngine(spells));
+        addIfFound(found, libraryOut(spells));
+        addIfFound(found, pair(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -655,6 +663,12 @@ public final class ComboPlan {
                     break;
                 case ARTIFACT_ENGINE:
                     sum += artifactEngineTerm(ai, combo);
+                    break;
+                case LIBRARY_OUT:
+                    sum += libraryOutTerm(ai, combo);
+                    break;
+                case PAIR:
+                    sum += pairTerm(ai, combo);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -1058,6 +1072,7 @@ public final class ComboPlan {
         if (lib < DREDGE_FULL_VALUE_LIBRARY) {
             sum = sum * lib / DREDGE_FULL_VALUE_LIBRARY;
         }
+        sum += DredgeLine.setupBonus(ai); // Breakthrough with Lion's Eye Diamond: see DredgeLine
         return Math.min(250, sum);
     }
 
@@ -1462,7 +1477,8 @@ public final class ComboPlan {
             }
         }
         // a deck built around it plays a few of each: one stray Hexmage next to a lone Dark Depths is not a combo deck
-        if (depths < 2 || wipers + stages < 3) {
+        // (Selesnya Depths has no Hexmage: two Thespian's Stage and four Crop Rotation are the same plan)
+        if (depths < 2 || wipers + stages < 3 && !(wipers + stages >= 2 && tutors >= 4)) {
             return null;
         }
         final Set<String> payoffs = new LinkedHashSet<>();
@@ -3078,7 +3094,8 @@ public final class ComboPlan {
                 fattyCopies++;
             }
         }
-        if (cheatCopies < 3 || fattyCopies < 3) {
+        // Omniscience and Show and Tell together are six or more cheaters: two huge creatures are then enough (Omni-Tell)
+        if (cheatCopies < 3 || fattyCopies < 3 && !(fattyCopies >= 2 && cheatCopies >= 6)) {
             return null;
         }
         return new Combo(Kind.CHEAT_FATTY, 25 + 6 * Math.min(cheatCopies, 8) + 4 * Math.min(fattyCopies, 6), fatties,
@@ -3192,6 +3209,110 @@ public final class ComboPlan {
         return new Combo(Kind.ARTIFACT_ENGINE, 25 + 2 * Math.min(engineCopies, 12) + 3 * Math.min(payoffCopies, 8)
                 + Math.min(artifacts, 24) / 2, payoffs, engines, Collections.<String>emptySet(), false,
                 "engines=" + engines + ", payoffs=" + payoffs + ", artifacts=" + artifacts);
+    }
+
+    /**
+     * A deck that empties its own library and wins with Thassa's Oracle or Laboratory Maniac. At least one winner and
+     * four outlets (Balustrade Spy, or Cephalid Illusionist with the cards that target it); Doomsday is not an outlet,
+     * because the pile it builds has to be chosen card by card.
+     */
+    private static Combo libraryOut(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> outlets = new LinkedHashSet<>();
+        int payoffCopies = 0;
+        int outletCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.SELF_MILL_OUTLET, c.getName())) {
+                outlets.add(c.getName());
+                outletCopies++;
+            }
+        }
+        if (payoffCopies < 1 || outletCopies < 4) {
+            return null;
+        }
+        return new Combo(Kind.LIBRARY_OUT, 25 + 4 * Math.min(outletCopies, 8) + 10 * Math.min(payoffCopies, 3), payoffs,
+                outlets, Collections.<String>emptySet(), false, "winners=" + payoffs + ", outlets=" + outlets);
+    }
+
+    /** Library this small or smaller with the winner in hand is the win (Thassa's Oracle counts two for itself). */
+    private static final int LIBRARY_OUT_READY = 2;
+    /** Without a winner in hand a library this small is a deck about to lose to its own outlets. */
+    private static final int LIBRARY_OUT_DANGER = 6;
+    /** With the winner in hand every card missing from this many is worth a little. */
+    private static final int LIBRARY_OUT_SPAN = 25;
+
+    /** Dread Return's flashback sacrifices this many creatures. */
+    private static final int LIBRARY_OUT_FODDER = 3;
+
+    /**
+     * Whether the winner can still be put into play: it is in the hand, or it is in the graveyard (the main Oops line
+     * mills the whole library, the Oracle with it) with a reanimation spell in hand, or Dread Return in the graveyard
+     * and three creatures in play to pay for its flashback (Narcomoeba and Bridge from Below tokens count).
+     */
+    private boolean libraryOutWinnerReachable(final Player ai, final Combo combo) {
+        if (anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs)) {
+            return true;
+        }
+        if (!anyNamed(ai.getCardsIn(ZoneType.Graveyard), combo.payoffs)) {
+            return false;
+        }
+        boolean recursion = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            recursion |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName());
+        }
+        boolean flashback = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+        }
+        if (recursion) {
+            return true;
+        }
+        return flashback && ai.getCreaturesInPlay().size() >= LIBRARY_OUT_FODDER;
+    }
+
+    /**
+     * The library is the resource of this deck, but only while the winner can be cast: with Thassa's Oracle in hand an
+     * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
+     * win with, so milling itself out is a penalty (the same guard as the dredge deck).
+     */
+    private int libraryOutTerm(final Player ai, final Combo combo) {
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        if (!libraryOutWinnerReachable(ai, combo)) {
+            return library <= LIBRARY_OUT_DANGER ? -200 : 0;
+        }
+        if (library <= LIBRARY_OUT_READY) {
+            return TERM_MAX;
+        }
+        return Math.max(0, Math.min(300, (LIBRARY_OUT_SPAN - library) * 12));
+    }
+
+    /**
+     * A two card kill: an engine and the card it needs (Grindstone with Painter's Servant). Both halves are needed,
+     * three copies of the partner and two of the engine, or a lone Grindstone in a deck of artifacts would count.
+     */
+    private static Combo pair(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> partners = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int partnerCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.PAIR_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.PAIR_PARTNER, c.getName())) {
+                partners.add(c.getName());
+                partnerCopies++;
+            }
+        }
+        if (engineCopies < 2 || partnerCopies < 3) {
+            return null;
+        }
+        return new Combo(Kind.PAIR, 30 + 6 * Math.min(engineCopies, 4) + 6 * Math.min(partnerCopies, 6), engines,
+                partners, Collections.<String>emptySet(), false, "engine=" + engines + ", partner=" + partners);
     }
 
     /** A spell that gives every creature of its controller a big bonus. */
