@@ -67,9 +67,32 @@ public class StartScene extends UIScene {
     }
 
     public static StartScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            if (object != null) {
+                object.dispose();
+                object = null;
+            }
             object = new StartScene();
+        }
         return object;
+    }
+
+    public static void reload() {
+        clearInstance();
+        object = new StartScene();
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        reload();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
     public boolean NewGame() {

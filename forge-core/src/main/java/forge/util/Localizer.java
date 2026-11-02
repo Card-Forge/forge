@@ -102,15 +102,19 @@ public class Localizer {
             if (english || forcedEnglish) {
                 return "INVALID PROPERTY: '" + key + "' -- Translation missing from English?";
             }
-            try {
-                formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
-                forcedEnglish = true;
-                rawValue = englishBundle.getString(key);
-            } catch (final IllegalArgumentException | MissingResourceException e) {
-                if (!silent) {
-                    e.printStackTrace();
+            if (englishBundle != null) {
+                try {
+                    formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
+                    forcedEnglish = true;
+                    rawValue = englishBundle.getString(key);
+                } catch (final IllegalArgumentException | MissingResourceException e) {
+                    if (!silent) {
+                        e.printStackTrace();
+                    }
+                    return "INVALID PROPERTY: '" + key + "' -- Translation missing from English locale?";
                 }
-                return "INVALID PROPERTY: '" + key + "' -- Translation missing from English locale?";
+            } else {
+                return "INVALID PROPERTY: '" + key + "' -- Translation missing (no English bundle)";
             }
         }
 
@@ -163,6 +167,7 @@ public class Localizer {
 
             ClassLoader loader = new URLClassLoader(urls);
             currentLanguageRegionID = languageRegionID;
+            adventureBundle = null;
 
             try {
                 englishBundle = ResourceBundle.getBundle("en-US", new Locale("en", "US"), loader);
@@ -173,12 +178,20 @@ public class Localizer {
                 e.printStackTrace();
             }
 
-            adventureBundle = null;
-
-            System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
+            if (resourceBundle != null) {
+                System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
+            }
 
             notifyObservers();
         }
+    }
+
+    void setBundlesForTesting(ResourceBundle activeBundle, ResourceBundle fallbackEnglishBundle, ResourceBundle advBundle) {
+        this.resourceBundle = activeBundle;
+        this.englishBundle = fallbackEnglishBundle;
+        this.adventureBundle = advBundle;
+        this.locale = Locale.ENGLISH;
+        this.silent = true;
     }
 
     public void loadAdventureBundle(final String languagesDirectory) {
@@ -201,7 +214,14 @@ public class Localizer {
                 return adventureBundle.getString(key);
             } catch (final MissingResourceException ignored) {}
         }
-        return (forceEnglish ? englishBundle : resourceBundle).getString(key);
+        final ResourceBundle bundle = forceEnglish ? englishBundle : resourceBundle;
+        if (bundle != null) {
+            return bundle.getString(key);
+        }
+        if (englishBundle != null) {
+            return englishBundle.getString(key);
+        }
+        throw new MissingResourceException("Can't find resource for bundle " + Localizer.class.getName() + ", key " + key, Localizer.class.getName(), key);
     }
 
     public void registerObserver(LocalizationChangeObserver observer) {

@@ -18,9 +18,19 @@ public class ShardTraderScene extends UIScene {
     public static final String sprite = "ShardTrader";
 
     public static ShardTraderScene instance() {
-        if(object==null)
-            object=new ShardTraderScene();
+        if (object == null || object.isLandscape != Forge.isLandscapeMode())
+            object = new ShardTraderScene();
         return object;
+    }
+
+    public static void clearInstance() {
+        object = null;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        clearInstance();
+        Forge.replaceCurrentScene(instance());
     }
 
     TextraButton buyShardsCost, sellShardsQuantity, leave;

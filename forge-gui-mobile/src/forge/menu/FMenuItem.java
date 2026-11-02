@@ -24,10 +24,17 @@ import forge.toolbox.Frost;
 import forge.util.Utils;
 
 public class FMenuItem extends FDisplayObject implements IButton {
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
-    protected static final float DIVOT_WIDTH = HEIGHT / 6;
-    protected static final float GAP_X = HEIGHT * 0.1f;
-    private static final float ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20; //round down to nearest multiple of 20
+    public static float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+    protected static float DIVOT_WIDTH = HEIGHT / 6;
+    protected static float GAP_X = HEIGHT * 0.1f;
+    private static float ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20; //round down to nearest multiple of 20
+
+    public static void updateDimensions() {
+        HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+        DIVOT_WIDTH = HEIGHT / 6;
+        GAP_X = HEIGHT * 0.1f;
+        ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20;
+    }
 
     private static final FSkinFont FONT = FSkinFont.get(12);
     protected static FSkinColor getForeColor() {

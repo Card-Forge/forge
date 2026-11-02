@@ -65,7 +65,13 @@ public class GameScene extends HudScene {
     @Override
     public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (stage != null && stage.getViewport() != null) {
+            stage.getViewport().apply();
+        }
         stage.draw();
+        if (hud != null && hud.getViewport() != null) {
+            hud.getViewport().apply(true);
+        }
         hud.draw();
     }
 

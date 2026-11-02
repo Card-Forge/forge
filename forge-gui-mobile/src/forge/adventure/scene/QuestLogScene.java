@@ -90,6 +90,10 @@ public class QuestLogScene extends UIScene {
         return object;
     }
 
+    public static void clearInstance() {
+        object = null;
+    }
+
     @Override
     public void dispose() { }
 

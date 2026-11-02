@@ -108,15 +108,31 @@ public class GameHUD extends Stage {
     private final Vector2 touchDraggedDirection = new Vector2();
     private int viewWidth = 150;
     private int viewHeight = 150;
+    public boolean isLandscape;
+
+    private float miniMapBaseY, mapborderBaseY, openMapBaseY;
+    private float gamehudBaseX, gamehudBaseY;
+    private float avatarBaseX, avatarBaseY;
+    private float blankBaseX, blankBaseY;
+    private float avatarborderBaseX, avatarborderBaseY;
+    private float keyCollectionBaseX, keyCollectionBaseY;
+    private float lifePointsBaseX, lifePointsBaseY;
+    private float shardsBaseX, shardsBaseY;
+    private float moneyBaseX, moneyBaseY;
+    private float baseWidth, baseHeight;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), Forge.getGraphics().getBatch());
+        super(new ScalingViewport(Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight()), Forge.getGraphics().getBatch());
         instance = this;
         this.gameStage = gameStage;
+        this.isLandscape = Forge.isLandscapeMode();
 
         ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid()
                 ? Forge.isLandscapeMode() ? "ui/hud_landscape.json" : "ui/hud_portrait.json"
                 : Forge.isLandscapeMode() ? "ui/hud.json" : "ui/hud_portrait.json"));
+        if (ui.getWidth() > 0 && ui.getHeight() > 0) {
+            getViewport().setWorldSize(ui.getWidth(), ui.getHeight());
+        }
 
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
@@ -214,6 +230,56 @@ public class GameHUD extends Stage {
         avatarborder.addListener(new ConsoleToggleListener());
         gamehud.addListener(new ConsoleToggleListener());
         WorldSave.getCurrentSave().onLoad(this::enter);
+        if (WorldSave.getCurrentSave() != null && WorldSave.getCurrentSave().getWorld() != null && WorldSave.getCurrentSave().getWorld().getBiomeImage() != null) {
+            enter();
+        }
+
+        baseWidth = ui.getWidth() > 0 ? ui.getWidth() : Scene.getIntendedWidth();
+        baseHeight = ui.getHeight() > 0 ? ui.getHeight() : Scene.getIntendedHeight();
+        if (miniMap != null) miniMapBaseY = miniMap.getY();
+        if (mapborder != null) mapborderBaseY = mapborder.getY();
+        if (openMapActor != null) openMapBaseY = openMapActor.getY();
+        if (gamehud != null) {
+            gamehudBaseX = gamehud.getX();
+            gamehudBaseY = gamehud.getY();
+        }
+        if (avatar != null) {
+            avatarBaseX = avatar.getX();
+            avatarBaseY = avatar.getY();
+        }
+        if (blank != null) {
+            blankBaseX = blank.getX();
+            blankBaseY = blank.getY();
+        }
+        if (avatarborder != null) {
+            avatarborderBaseX = avatarborder.getX();
+            avatarborderBaseY = avatarborder.getY();
+        }
+        if (keyCollection != null) {
+            keyCollectionBaseX = keyCollection.getX();
+            keyCollectionBaseY = keyCollection.getY();
+        }
+        if (lifePoints != null) {
+            lifePointsBaseX = lifePoints.getX();
+            lifePointsBaseY = lifePoints.getY();
+        }
+        if (shards != null) {
+            shardsBaseX = shards.getX();
+            shardsBaseY = shards.getY();
+        }
+        if (money != null) {
+            moneyBaseX = money.getX();
+            moneyBaseY = money.getY();
+        }
+
+        if (Forge.getScreenWidth() > 0 && Forge.getScreenHeight() > 0) {
+            int sw = Forge.getScreenWidth();
+            int sh = Forge.getScreenHeight();
+            float worldW = Scene.getWorldWidth(sw, sh);
+            float worldH = Scene.getWorldHeight(sw, sh);
+            getViewport().setWorldSize(worldW, worldH);
+            layoutHud(worldW, worldH);
+        }
 
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
@@ -258,6 +324,8 @@ public class GameHUD extends Stage {
         avatarGroup.addActor(avatar);
         avatarGroup.addActor(avatarborder);
         ui.addActor(avatarGroup);
+
+        showHideMap(!MapStage.getInstance().isInMap());
     }
 
     private void openMap() {
@@ -276,8 +344,84 @@ public class GameHUD extends Stage {
         Forge.switchScene(QuestLogScene.instance(Forge.getCurrentScene()));
     }
 
+    public void layoutHud(float worldW, float worldH) {
+        if (ui == null || baseWidth <= 0 || baseHeight <= 0) {
+            return;
+        }
+        float dx = worldW - baseWidth;
+        float dy = worldH - baseHeight;
+
+        if (miniMap != null) miniMap.setPosition(0, miniMapBaseY + dy);
+        if (mapborder != null) mapborder.setPosition(0, mapborderBaseY + dy);
+        if (openMapActor != null) openMapActor.setPosition(0, openMapBaseY + dy);
+
+        if (gamehud != null) gamehud.setPosition(gamehudBaseX + dx, gamehudBaseY + dy);
+        if (avatar != null) avatar.setPosition(avatarBaseX + dx, avatarBaseY + dy);
+        if (blank != null) blank.setPosition(blankBaseX + dx, blankBaseY + dy);
+        if (avatarborder != null) avatarborder.setPosition(avatarborderBaseX + dx, avatarborderBaseY + dy);
+        if (keyCollection != null) keyCollection.setPosition(keyCollectionBaseX + dx, keyCollectionBaseY + dy);
+        if (lifePoints != null) lifePoints.setPosition(lifePointsBaseX + dx, lifePointsBaseY + dy);
+        if (shards != null) shards.setPosition(shardsBaseX + dx, shardsBaseY + dy);
+        if (money != null) money.setPosition(moneyBaseX + dx, moneyBaseY + dy);
+
+        if (menuActor != null) {
+            float btnW = menuActor.getWidth();
+            float totalBtnsW = btnW * 6f;
+            float startX = (worldW - totalBtnsW) / 2f;
+            menuActor.setPosition(startX, menuActor.getY());
+            if (bookmarkActor != null) bookmarkActor.setPosition(startX + btnW, bookmarkActor.getY());
+            if (deckActor != null) deckActor.setPosition(startX + 2 * btnW, deckActor.getY());
+            if (inventoryActor != null) inventoryActor.setPosition(startX + 3 * btnW, inventoryActor.getY());
+            if (logbookActor != null) logbookActor.setPosition(startX + 4 * btnW, logbookActor.getY());
+            if (exitToWorldMapActor != null) exitToWorldMapActor.setPosition(startX + 5 * btnW, exitToWorldMapActor.getY());
+        }
+
+        ui.setSize(worldW, worldH);
+        updateAbility();
+        if (miniMapPlayer != null && miniMap != null) {
+            miniMapPlayer.setPosition(miniMap.getX(1), miniMap.getY(1), 1);
+        }
+        if (console != null) {
+            console.setBounds(0, GuiBase.isAndroid() ? worldH : 0, worldW, worldH / 2);
+        }
+    }
+
     public static GameHUD getInstance() {
-        return instance == null ? instance = new GameHUD(WorldStage.getInstance()) : instance;
+        if (instance == null || instance.isLandscape != Forge.isLandscapeMode()) {
+            if (instance != null) {
+                instance.dispose();
+                instance = null;
+            }
+            instance = new GameHUD(WorldStage.getInstance());
+            if (instance.getViewport() != null && Forge.getScreenWidth() > 0 && Forge.getScreenHeight() > 0) {
+                int sw = Forge.getScreenWidth();
+                int sh = Forge.getScreenHeight();
+                float worldW = Scene.getWorldWidth(sw, sh);
+                float worldH = Scene.getWorldHeight(sw, sh);
+                instance.getViewport().setWorldSize(worldW, worldH);
+                instance.getViewport().update(sw, sh, true);
+                instance.layoutHud(worldW, worldH);
+            }
+        }
+        return instance;
+    }
+
+    public static GameHUD reload(GameStage gameStage) {
+        if (instance != null) {
+            instance.dispose();
+            instance = null;
+        }
+        instance = new GameHUD(gameStage);
+        if (instance.getViewport() != null && Forge.getScreenWidth() > 0 && Forge.getScreenHeight() > 0) {
+            int sw = Forge.getScreenWidth();
+            int sh = Forge.getScreenHeight();
+            float worldW = Scene.getWorldWidth(sw, sh);
+            float worldH = Scene.getWorldHeight(sw, sh);
+            instance.getViewport().setWorldSize(worldW, worldH);
+            instance.getViewport().update(sw, sh, true);
+            instance.layoutHud(worldW, worldH);
+        }
+        return instance;
     }
 
     public Touchpad getTouchpad() {
@@ -371,12 +515,20 @@ public class GameHUD extends Stage {
 
     public void enter() {
         updateKeys();
-        Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
-        miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
-        miniMapRegion = new TextureRegion(miniMapTexture, 0, 0, viewWidth, viewHeight);
-        miniMap.setDrawable(new TextureRegionDrawable(miniMapRegion));
-        avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
-        Deck deck = AdventurePlayer.current().getSelectedDeck();
+        if (WorldSave.getCurrentSave() != null && WorldSave.getCurrentSave().getWorld() != null) {
+            Pixmap biomeImage = WorldSave.getCurrentSave().getWorld().getBiomeImage();
+            if (biomeImage != null) {
+                miniMapTexture = Forge.getAssets().getNewMiniMapTexture(biomeImage);
+                if (miniMapTexture != null) {
+                    miniMapRegion = new TextureRegion(miniMapTexture, 0, 0, viewWidth, viewHeight);
+                    miniMap.setDrawable(new TextureRegionDrawable(miniMapRegion));
+                }
+            }
+        }
+        if (Current.player() != null && Current.player().avatar() != null) {
+            avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
+        }
+        Deck deck = AdventurePlayer.current() != null ? AdventurePlayer.current().getSelectedDeck() : null;
 
         switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
             case "capital":
@@ -547,7 +699,7 @@ public class GameHUD extends Stage {
         clearAbility();
         setAbilityButton(AdventurePlayer.current().getEquippedAbility1());
         setAbilityButton(AdventurePlayer.current().getEquippedAbility2());
-        float x = Forge.isLandscapeMode() ? 426f : 216f;
+        float x = getWidth() > 0 ? getWidth() - 54f : (Forge.isLandscapeMode() ? 426f : 216f);
         float y = Forge.isLandscapeMode() ? 10f : 60f;
         float w = 45f;
         float h = 35f;
@@ -680,25 +832,27 @@ public class GameHUD extends Stage {
                 && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
                 || !console.isVisible())); // prevent drawing on top of console or notifications
 
-        if (isDebugMap()) {
-            // Full size map for debugging
-            miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
-            miniMapRegion.setRegion(0, 0, miniMapTexture.getWidth(), miniMapTexture.getHeight());
-            ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
-        } else {
-            // Radar Map
-            miniMapPlayer.setPosition(miniMap.getX(1), miniMap.getY(1), 1);
-            float percentX = gameStage.player.getX() / WorldSave.getCurrentSave().getWorld().getWidthInPixels();
-            float percentY = gameStage.player.getY() / WorldSave.getCurrentSave().getWorld().getHeightInPixels();
-            int pixelX = (int) (percentX * miniMapTexture.getWidth());
-            int pixelY = (int) (percentY * miniMapTexture.getHeight());
-            pixelY = miniMapTexture.getHeight() - pixelY;
-            int sourceX = pixelX - (viewWidth / 2);
-            int sourceY = pixelY - (viewHeight / 2);
-            sourceX = MathUtils.clamp(sourceX, 0, miniMapTexture.getWidth() - viewWidth);
-            sourceY = MathUtils.clamp(sourceY, 0, miniMapTexture.getHeight() - viewHeight);
-            miniMapRegion.setRegion(sourceX, sourceY, viewWidth, viewHeight);
-            ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+        if (miniMapTexture != null && miniMapRegion != null && miniMap.getDrawable() instanceof TextureRegionDrawable) {
+            if (isDebugMap()) {
+                // Full size map for debugging
+                miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
+                miniMapRegion.setRegion(0, 0, miniMapTexture.getWidth(), miniMapTexture.getHeight());
+                ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+            } else if (WorldSave.getCurrentSave() != null && WorldSave.getCurrentSave().getWorld() != null && WorldSave.getCurrentSave().getWorld().getWidthInPixels() > 0 && WorldSave.getCurrentSave().getWorld().getHeightInPixels() > 0) {
+                // Radar Map
+                miniMapPlayer.setPosition(miniMap.getX(1), miniMap.getY(1), 1);
+                float percentX = gameStage.player.getX() / WorldSave.getCurrentSave().getWorld().getWidthInPixels();
+                float percentY = gameStage.player.getY() / WorldSave.getCurrentSave().getWorld().getHeightInPixels();
+                int pixelX = (int) (percentX * miniMapTexture.getWidth());
+                int pixelY = (int) (percentY * miniMapTexture.getHeight());
+                pixelY = miniMapTexture.getHeight() - pixelY;
+                int sourceX = pixelX - (viewWidth / 2);
+                int sourceY = pixelY - (viewHeight / 2);
+                sourceX = MathUtils.clamp(sourceX, 0, miniMapTexture.getWidth() - viewWidth);
+                sourceY = MathUtils.clamp(sourceY, 0, miniMapTexture.getHeight() - viewHeight);
+                miniMapRegion.setRegion(sourceX, sourceY, viewWidth, viewHeight);
+                ((TextureRegionDrawable) miniMap.getDrawable()).setRegion(miniMapRegion);
+            }
         }
     }
 
@@ -853,6 +1007,9 @@ public class GameHUD extends Stage {
         transluscent = !visible;
         setAlpha(mapGroup, visible);
         mapGroup.setVisible(visible);
+        if (!visible) {
+            mapGroup.getColor().a = 0f;
+        }
         setAlpha(hudGroup, visible);
         setAlpha(menuGroup, visible);
         setAlpha(avatarGroup, visible);

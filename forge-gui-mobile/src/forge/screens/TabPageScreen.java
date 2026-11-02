@@ -24,6 +24,12 @@ import java.util.List;
 public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     public static boolean COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
 
+    public static void updateDimensions() {
+        TabHeader.HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
+        TabHeader.COMPACT_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+        TabHeader.BACK_BUTTON_WIDTH = Math.round(TabHeader.HEIGHT / 2);
+    }
+
     protected final TabHeader<T> tabHeader;
     protected final List<TabPage<T>> tabPages;
     private TabPage<T> selectedPage;
@@ -146,9 +152,9 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     }
 
     protected static class TabHeader<T extends TabPageScreen<T>> extends Header {
-        private static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
-        private static final float COMPACT_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
-        private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
+        static float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
+        static float COMPACT_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+        static float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
         private static final FSkinColor SEPARATOR_COLOR = getBackColor().stepColor(-40);
 
         private final List<TabPage<T>> tabPages = new ArrayList<>();

@@ -212,9 +212,24 @@ public class InventoryScene extends UIScene {
     private static InventoryScene object;
 
     public static InventoryScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            clearInstance();
             object = new InventoryScene();
+        }
         return object;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        clearInstance();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
 

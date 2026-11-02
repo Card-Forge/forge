@@ -166,9 +166,33 @@ public class SaveLoadScene extends UIScene {
     private static SaveLoadScene object;
 
     public static SaveLoadScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            Modes currentMode = object != null ? object.mode : Modes.Load;
+            clearInstance();
             object = new SaveLoadScene();
+            object.setMode(currentMode);
+        }
         return object;
+    }
+
+    public static void reload() {
+        Modes currentMode = object != null ? object.mode : Modes.Load;
+        clearInstance();
+        object = new SaveLoadScene();
+        object.setMode(currentMode);
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        reload();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
     public class SaveSlot extends Selectable<TextraButton> {

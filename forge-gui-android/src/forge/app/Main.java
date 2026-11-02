@@ -20,6 +20,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.hardware.SensorManager;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -47,8 +48,10 @@ import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -287,6 +290,52 @@ public class Main extends AndroidApplication {
         animatorSet.start();
     }
 
+    public static boolean isFoldableDevice(Context context) {
+        if (context == null) return false;
+        try {
+            PackageManager pm = context.getPackageManager();
+            if (pm != null && pm.hasSystemFeature("android.hardware.sensor.hinge_angle")) {
+                return true;
+            }
+        } catch (Exception ignored) {
+        }
+        try {
+            SensorManager sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            if (sm != null && sm.getDefaultSensor(36) != null) { // Sensor.TYPE_HINGE_ANGLE = 36
+                return true;
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
+
+    public static boolean isUnfoldedScreen(Context context) {
+        if (context == null) return false;
+        try {
+            return isUnfoldedScreen(context, context.getResources().getConfiguration());
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public static boolean isUnfoldedScreen(Context context, Configuration config) {
+        if (context == null || config == null) return false;
+        try {
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            float width = config.screenWidthDp > 0 ? config.screenWidthDp : metrics.widthPixels;
+            float height = config.screenHeightDp > 0 ? config.screenHeightDp : metrics.heightPixels;
+            if (width <= 0 || height <= 0) return false;
+
+            float aspect = Math.max(width, height) / Math.min(width, height);
+            boolean isLargeScreen = (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE
+                    || config.smallestScreenWidthDp >= 600;
+
+            return isLargeScreen && aspect < 1.45f;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     private static boolean isTabletDevice(Context activityContext) {
         Display display = ((Activity) activityContext).getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
@@ -295,15 +344,20 @@ public class Main extends AndroidApplication {
         float widthInches = metrics.widthPixels / metrics.xdpi;
         float heightInches = metrics.heightPixels / metrics.ydpi;
         double diagonalInches = Math.sqrt(Math.pow(widthInches, 2) + Math.pow(heightInches, 2));
-        return diagonalInches >= 7.0;
+        return diagonalInches >= 7.0 || isUnfoldedScreen(activityContext);
     }
 
     private void displayMessage(View previousView, AndroidAdapter adapter, boolean ex, String msg, boolean manageApp) {
         TableLayout TL = new TableLayout(this);
         TL.setBackgroundResource(android.R.color.black);
+        int pad = (int) (24 * getResources().getDisplayMetrics().density);
+        TL.setPadding(pad, pad, pad, pad);
+        TL.setShrinkAllColumns(true);
+        TL.setStretchAllColumns(true);
         TableRow row = new TableRow(this);
         TableRow row2 = new TableRow(this);
         TextView text = new TextView(this);
+        text.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
@@ -377,8 +431,13 @@ public class Main extends AndroidApplication {
         TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.setGravity(Gravity.CENTER);
-        TL.setOnClickListener(v -> adapter.restart());
-        crossfade(TL, previousView);
+
+        ScrollView sv = new ScrollView(this);
+        sv.setFillViewport(true);
+        sv.setBackgroundResource(android.R.color.black);
+        sv.addView(TL, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        sv.setOnClickListener(v -> adapter.restart());
+        crossfade(sv, previousView);
     }
 
     private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
@@ -398,7 +457,9 @@ public class Main extends AndroidApplication {
                         if (!permissiongranted || exception) {
                             displayMessage(forgeLogo, adapter, exception, msg, false);
                         } else if (title.isEmpty() && steps.isEmpty()) {
-                            if (isLandscape) {
+                            if (adapter != null && (adapter.isFoldable() || adapter.isFoldableUnfolded())) {
+                                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                            } else if (isLandscape) {
                                 Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
                                         ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
                                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -413,10 +474,15 @@ public class Main extends AndroidApplication {
                             }
                             TableLayout TL = new TableLayout(getContext());
                             TL.setBackgroundResource(android.R.color.black);
+                            int pad = (int) (24 * getResources().getDisplayMetrics().density);
+                            TL.setPadding(pad, pad, pad, pad);
+                            TL.setShrinkAllColumns(true);
+                            TL.setStretchAllColumns(true);
                             TableRow messageRow = new TableRow(getContext());
                             TableRow checkboxRow = new TableRow(getContext());
                             TableRow buttonRow = new TableRow(getContext());
                             TextView text = new TextView(getContext());
+                            text.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f));
                             text.setGravity(Gravity.LEFT);
                             text.setTypeface(Typeface.SERIF);
 
@@ -465,9 +531,14 @@ public class Main extends AndroidApplication {
                             button.setBackground(states);
 
                             button.setTextColor(Color.RED);
+
+                            ScrollView sv = new ScrollView(getContext());
+                            sv.setFillViewport(true);
+                            sv.setBackgroundResource(android.R.color.black);
+
                             button.setOnClickListener(v -> {
                                 button.setClickable(false);
-                                crossfade(forgeView, TL);
+                                crossfade(forgeView, sv);
                             });
 
                             buttonRow.addView(button);
@@ -477,7 +548,9 @@ public class Main extends AndroidApplication {
                             TL.addView(checkboxRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             TL.addView(buttonRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             TL.setGravity(Gravity.CENTER);
-                            crossfade(TL, forgeLogo);
+
+                            sv.addView(TL, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+                            crossfade(sv, forgeLogo);
                         }
                     }, 600);
                 }
@@ -561,7 +634,7 @@ public class Main extends AndroidApplication {
         }
         //enforce orientation based on whether device is a tablet and user preference
         adapter.switchOrientationFile = ASSETS_DIR + "switch_orientation.ini";
-        boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
+        boolean landscapeMode = adapter.isTablet() == !FileUtil.doesFileExist(adapter.switchOrientationFile);
 
         String info = totalRAM < 3500 || Build.VERSION.SDK_INT < Build.VERSION_CODES.R ? "Device Specification Check\n" + getDeviceName()
                 + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB\n\nRecommended API:" : "";
@@ -569,7 +642,9 @@ public class Main extends AndroidApplication {
         String lowV = Build.VERSION.SDK_INT < Build.VERSION_CODES.R ? "\nAPI: Android 11 or higher" : "";
         // also show minimum Device RAM
         String lowM = totalRAM < 3500 ? "\nRAM: 4GB RAM or higher" : "";
-        if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
+        if (adapter.isFoldable() || adapter.isFoldableUnfolded()) {
+            Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        } else if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
         loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, isTabletDevice, config, false, "");
@@ -593,6 +668,18 @@ public class Main extends AndroidApplication {
     protected void onStop() {
         netLog.info("[lifecycle] onStop");
         super.onStop();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        boolean isUnfolded = isUnfoldedScreen(this, newConfig);
+        if (Gadapter != null) {
+            Gadapter.setFoldableUnfolded(isUnfolded);
+            if (Gadapter.isFoldable() || isUnfolded) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            }
+        }
     }
 
     @Override
@@ -673,6 +760,8 @@ public class Main extends AndroidApplication {
 
     private class AndroidAdapter implements IDeviceAdapter {
         private final boolean isTablet;
+        private boolean isFoldable;
+        private boolean isFoldableUnfolded;
         private final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         private String switchOrientationFile;
         private final Context context;
@@ -683,6 +772,8 @@ public class Main extends AndroidApplication {
             isTablet = (context.getResources().getConfiguration().screenLayout
                     & Configuration.SCREENLAYOUT_SIZE_MASK)
                     >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+            isFoldable = isFoldableDevice(context) || isUnfoldedScreen(context);
+            isFoldableUnfolded = isFoldable && isUnfoldedScreen(context);
             try {
                 if (connManager != null) {
                     connManager.registerDefaultNetworkCallback(
@@ -838,13 +929,33 @@ public class Main extends AndroidApplication {
 
         @Override
         public boolean isTablet() {
+            if (isFoldable) {
+                return isFoldableUnfolded;
+            }
             return isTablet;
+        }
+
+        @Override
+        public boolean isFoldable() {
+            return isFoldable;
+        }
+
+        @Override
+        public boolean isFoldableUnfolded() {
+            return isFoldableUnfolded;
+        }
+
+        public void setFoldableUnfolded(boolean unfolded) {
+            if (unfolded) {
+                this.isFoldable = true;
+            }
+            this.isFoldableUnfolded = unfolded;
         }
 
         @Override
         public void setLandscapeMode(boolean landscapeMode) {
             //create file to indicate that portrait mode should be used for tablet or landscape should be used for phone
-            if (landscapeMode != isTablet) {
+            if (landscapeMode != isTablet()) {
                 FileUtil.writeFile(switchOrientationFile, "1");
             } else {
                 FileUtil.deleteFile(switchOrientationFile);

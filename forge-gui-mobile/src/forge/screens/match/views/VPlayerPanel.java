@@ -1217,7 +1217,7 @@ public class VPlayerPanel extends FContainer {
         float x = tabColWidth + avatar.getWidth() * 0.6f; //where the phase indicator ends
 
         float fieldWidth = width - x - commonTabWidth;
-        float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
+        float displayAreaWidth = Math.min(height / FCardPanel.ASPECT_RATIO, fieldWidth * 0.45f);
         //the field changes size once when a zone opens or closes, not every frame of the slide: cards re-flowing into new
         //rows while the display slides was the flicker. With compact zone tabs it keeps its size and the display covers it.
         final float shrunkWidth = selectedTab == null ? fieldWidth : fieldWidth - displayAreaWidth;
@@ -1248,7 +1248,7 @@ public class VPlayerPanel extends FContainer {
         final boolean box = selectedTab != null && isBoxDisplay(selectedTab.getDisplayArea());
         final float shown = selectedTab == null ? 0f : 1f; //the field resizes once, not every frame of the slide
         final boolean overlay = isZoneOverlay();
-        final float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
+        final float displayAreaWidth = Math.min(height / FCardPanel.ASPECT_RATIO, regionWidth * 0.45f);
 
         final float boxHeight = Math.round(height * ALT_ZONE_HEIGHT_RATIO);
         final float boxWidth = getBoxWidth(regionWidth * ALT_ZONE_MAX_WIDTH_RATIO, boxHeight);

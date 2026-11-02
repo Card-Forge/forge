@@ -3,30 +3,84 @@ package forge.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import forge.Forge;
+import forge.assets.FSkin;
+import forge.deck.FDeckEditor;
+import forge.menu.FMenuItem;
+import forge.screens.FScreen;
+import forge.screens.TabPageScreen;
+import forge.screens.match.views.VAvatar;
+import forge.screens.match.views.VPrompt;
+import forge.screens.settings.SettingsScreen;
 
 public class Utils {
     public static final float BASE_WIDTH = 320f;
     public static final float BASE_HEIGHT = 480f;
-    private static final float SCREEN_WIDTH = (float)Gdx.graphics.getWidth();
-    private static final float SCREEN_HEIGHT = (float)Gdx.graphics.getHeight();
-    private static final float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
+    public static float SCREEN_WIDTH = (Gdx.graphics != null) ? (float)Gdx.graphics.getWidth() : BASE_WIDTH;
+    public static float SCREEN_HEIGHT = (Gdx.graphics != null) ? (float)Gdx.graphics.getHeight() : BASE_HEIGHT;
+    public static float HEIGHT_RATIO = SCREEN_HEIGHT / BASE_HEIGHT;
 
     private static final float AVG_FINGER_SIZE_CM = 1.1f;
 
     //Swap commented out line below to specify average finger size
-    private static final float ppcX = Gdx.graphics.getPpcX(), ppcY = Gdx.graphics.getPpcY();
+    private static float ppcX = (Gdx.graphics != null) ? Gdx.graphics.getPpcX() : 160f / 2.54f;
+    private static float ppcY = (Gdx.graphics != null) ? Gdx.graphics.getPpcY() : 160f / 2.54f;
     //private static final float ppcX = 169f / AVG_FINGER_SIZE_CM, ppcY = 237f / AVG_FINGER_SIZE_CM;
     //private static final float scaleX = 1.41f, scaleY = 1.25f;
     //private static final float ppcX = Gdx.graphics.getPpcX() * scaleX, ppcY = Gdx.graphics.getPpcY() * scaleY;
 
     //round to nearest int to reduce floating point display issues
     //reduce if either would take up too large a percentage of the screen to prevent layouts not working
-    private static final float MIN_FINGER_SIZE = scale(40); //scaled value of 40 is approximately how tall the Prompt buttons would need to be to fit their text
+    private static float MIN_FINGER_SIZE = scale(40); //scaled value of 40 is approximately how tall the Prompt buttons would need to be to fit their text
     private static final float MIN_FINGERS_WIDE = 5; //ensure screen considered to be at least 5 "fingers" wide
     private static final float MIN_FINGERS_TALL = MIN_FINGERS_WIDE * BASE_HEIGHT / BASE_WIDTH; //ensure screen tall enough based on fingers wide and base ratio
 
-    public static final float AVG_FINGER_WIDTH = Math.round(Math.min(Math.max(cmToPixelsX(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_WIDTH / MIN_FINGERS_WIDE));
-    public static final float AVG_FINGER_HEIGHT = Math.round(Math.min(Math.max(cmToPixelsY(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_HEIGHT / MIN_FINGERS_TALL));
+    public static float AVG_FINGER_WIDTH = Math.round(Math.min(Math.max(cmToPixelsX(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_WIDTH / MIN_FINGERS_WIDE));
+    public static float AVG_FINGER_HEIGHT = Math.round(Math.min(Math.max(cmToPixelsY(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_HEIGHT / MIN_FINGERS_TALL));
+
+    public static void updateScreenDimensions(float width, float height) {
+        if (width <= 0 || height <= 0) {
+            return;
+        }
+
+        SCREEN_WIDTH = width;
+        SCREEN_HEIGHT = height;
+        if (Gdx.graphics != null) {
+            ppcX = Gdx.graphics.getPpcX();
+            ppcY = Gdx.graphics.getPpcY();
+        }
+
+        float aspectRatio = Math.max(width, height) / Math.min(width, height);
+        boolean isLandscape = width > height;
+
+        // On squarish unfolded screens (aspect ratio < 1.35), standard height-based scaling
+        // causes horizontal crowding because width is narrow relative to height.
+        // Scale proportionally to reference aspect ratio so elements don't bloat.
+        if (aspectRatio < 1.35f) {
+            float refHeight = isLandscape ? (width / 1.6f) : (width / 1.35f);
+            HEIGHT_RATIO = Math.min(height, refHeight) / BASE_HEIGHT;
+        } else {
+            HEIGHT_RATIO = height / BASE_HEIGHT;
+        }
+
+        MIN_FINGER_SIZE = scale(40);
+        AVG_FINGER_WIDTH = Math.round(Math.min(Math.max(cmToPixelsX(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_WIDTH / MIN_FINGERS_WIDE));
+        AVG_FINGER_HEIGHT = Math.round(Math.min(Math.max(cmToPixelsY(AVG_FINGER_SIZE_CM), MIN_FINGER_SIZE), SCREEN_HEIGHT / MIN_FINGERS_TALL));
+
+        // Update dimension-dependent components only after database and skin are loaded
+        if (Forge.afterDBloaded && FSkin.isLoaded()) {
+            try {
+                VAvatar.updateDimensions();
+                VPrompt.updateDimensions();
+                FScreen.updateDimensions();
+                TabPageScreen.updateDimensions();
+                FMenuItem.updateDimensions();
+                FDeckEditor.updateDimensions();
+                SettingsScreen.updateDimensions();
+            } catch (Throwable ignored) {
+            }
+        }
+    }
 
     public static float cmToPixelsX(float cm) {
         return ppcX * cm;

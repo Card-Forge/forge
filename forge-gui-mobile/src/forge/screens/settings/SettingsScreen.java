@@ -11,11 +11,20 @@ import forge.util.Utils;
 
 public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     public static final FSkinFont DESC_FONT = FSkinFont.get(11);
-    public static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
-    public static final float SETTING_HEIGHT = Utils.AVG_FINGER_HEIGHT + Utils.scale(12);
-    public static final float SETTING_PADDING = Utils.scale(5);
+    public static FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT) != null ? FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f) : null;
+    public static float SETTING_HEIGHT = Utils.AVG_FINGER_HEIGHT + Utils.scale(12);
+    public static float SETTING_PADDING = Utils.scale(5);
     private static final float INSETS_FACTOR = 0.025f;
-    private static final float MAX_INSETS = SETTING_HEIGHT * 0.15f;
+    private static float MAX_INSETS = SETTING_HEIGHT * 0.15f;
+
+    public static void updateDimensions() {
+        if (DESC_COLOR == null && FSkinColor.get(Colors.CLR_TEXT) != null) {
+            DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
+        }
+        SETTING_HEIGHT = Utils.AVG_FINGER_HEIGHT + Utils.scale(12);
+        SETTING_PADDING = Utils.scale(5);
+        MAX_INSETS = SETTING_HEIGHT * 0.15f;
+    }
 
     private static boolean fromHomeScreen;
     private static SettingsScreen settingsScreen; //keep settings screen around so scroll positions maintained

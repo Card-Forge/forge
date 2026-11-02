@@ -42,14 +42,13 @@ public class HomeScreen extends FScreen {
 
     private final FLabel lblLogo = add(new FLabel.Builder().icon(
             new FImage() {
-                final float size = Forge.getScreenWidth() * 0.6f;
                 @Override
                 public float getWidth() {
-                    return size;
+                    return lblLogo != null ? lblLogo.getWidth() : 0;
                 }
                 @Override
                 public float getHeight() {
-                    return size;
+                    return lblLogo != null ? lblLogo.getHeight() : 0;
                 }
                 @Override
                 public void draw(Graphics g, float x, float y, float w, float h) {
@@ -202,9 +201,10 @@ public class HomeScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float buttonWidth = width - 2 * PADDING;
+        float maxButtonWidth = Utils.scale(320);
+        float buttonWidth = Math.min(width - 2 * PADDING, maxButtonWidth);
         float buttonHeight = buttons.get(0).getFont().getCapHeight() * 3.5f;
-        float x = PADDING;
+        float x = (width - buttonWidth) / 2f;
         float dy = buttonHeight + PADDING;
         float y = height - buttons.size() * dy;
 
@@ -212,19 +212,15 @@ public class HomeScreen extends FScreen {
         buttonScroller.padding = PADDING;
         buttonScroller.setBounds(x, y, buttonWidth, height - y);
 
-        float logoSize = y - 2 * PADDING;
-        y = PADDING;
-        if (logoSize > buttonWidth) {
-            y += (logoSize - buttonWidth) / 2;
-            logoSize = buttonWidth;
-        }
-        x = (width - logoSize) / 2;
+        float logoSize = Math.min(y - 2 * PADDING, buttonWidth);
+        y = PADDING + Math.max(0, (y - 2 * PADDING - logoSize) / 2f);
+        x = (width - logoSize) / 2f;
         lblLogo.setBounds(x, y, logoSize, logoSize);
     }
 
     @Override
     protected float doLandscapeLayout(float width, float height) {
-        float mainMenuWidth = height * MAIN_MENU_WIDTH_FACTOR;
+        float mainMenuWidth = Math.min(height * MAIN_MENU_WIDTH_FACTOR, width * 0.26f);
         float logoSize = mainMenuWidth - 2 * PADDING;
         lblLogo.setBounds(PADDING, PADDING, logoSize, logoSize);
 
@@ -253,7 +249,7 @@ public class HomeScreen extends FScreen {
         float w = getWidth();
         float h = getHeight();
         if (w > h) {
-            w = h * MAIN_MENU_WIDTH_FACTOR;
+            w = Math.min(h * MAIN_MENU_WIDTH_FACTOR, getWidth() * 0.26f);
 
             float y1 = 0;
             float h1 = h;

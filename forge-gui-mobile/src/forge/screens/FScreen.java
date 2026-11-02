@@ -34,6 +34,11 @@ public abstract class FScreen extends FContainer {
         return FSkinColor.get(Colors.CLR_THEME);
     }
 
+    public static void updateDimensions() {
+        Header.LINE_THICKNESS = Utils.scale(1);
+        DefaultHeader.HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    }
+
     private final Header header;
 
     protected FScreen(String headerCaption) {
@@ -197,7 +202,7 @@ public abstract class FScreen extends FContainer {
         public static FSkinColor getBackColor() {
             return getBtnPressedColor().stepColor(-80);
         }
-        public static final float LINE_THICKNESS = Utils.scale(1);
+        public static float LINE_THICKNESS = Utils.scale(1);
 
         public abstract float getPreferredHeight();
 
@@ -209,7 +214,7 @@ public abstract class FScreen extends FContainer {
         public abstract float doLandscapeLayout(float screenWidth, float screenHeight);
     }
     private static class DefaultHeader extends Header {
-        protected static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+        protected static float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         protected static final FSkinFont FONT = FSkinFont.get(16);
 
         protected final FLabel btnBack, lblCaption;

@@ -35,9 +35,9 @@ import forge.assets.FImage;
 import forge.assets.FTextureRegionImage;
 
 public class VPrompt extends FContainer {
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
-    public static final float BTN_WIDTH = HEIGHT * 1.5f;
-    public static final float PADDING = Utils.scale(2);
+    public static float HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    public static float BTN_WIDTH = HEIGHT * 1.5f;
+    public static float PADDING = Utils.scale(2);
     private static final Color COMPACT_SCRIM = new Color(30 / 255f, 35 / 255f, 40 / 255f, 0.62f);
     private static final Color MENU_BTN_ON = new Color(1f, 1f, 1f, 0.28f);
     private static final Color MENU_BTN_OFF = new Color(1f, 1f, 1f, 0.14f);
@@ -46,6 +46,14 @@ public class VPrompt extends FContainer {
     private float frostedW, frostedH;
     private FSkinFont frostedFont;
     public static final FSkinFont FONT = FSkinFont.get(14);
+
+    public static void updateDimensions() {
+        HEIGHT = Utils.AVG_FINGER_HEIGHT;
+        BTN_WIDTH = HEIGHT * 1.5f;
+        PADDING = Utils.scale(2);
+        UNDO_SIZE = HEIGHT * 0.62f;
+        UNDO_GAP = Utils.scale(10);
+    }
     public static FSkinColor getBackColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_THEME2);
@@ -62,8 +70,8 @@ public class VPrompt extends FContainer {
     private String message;
     private CardView card;
 
-    private static final float UNDO_SIZE = HEIGHT * 0.62f;
-    private static final float UNDO_GAP = Utils.scale(10);
+    private static float UNDO_SIZE = HEIGHT * 0.62f;
+    private static float UNDO_GAP = Utils.scale(10);
     private final UndoButton btnUndo;
     private final MenuButton btnMenu;
     private boolean menuShown;       //the compact layout hides the top menu, so this prompt carries the button that shows it
@@ -347,6 +355,9 @@ public class VPrompt extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+        btnOk.setSize(BTN_WIDTH, height);
+        btnCancel.setSize(BTN_WIDTH, height);
+        lblMessage.setHeight(height);
         boolean showUndo = undoShown;
         btnUndo.setVisible(showUndo);
         float undoSpace = showUndo ? UNDO_SIZE + 2 * UNDO_GAP : 0;

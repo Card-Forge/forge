@@ -35,9 +35,24 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private final TextraButton startButton;
 
     public static ArenaScene instance() {
-        if (object == null)
+        if (object == null || object.isLandscape != Forge.isLandscapeMode()) {
+            clearInstance();
             object = new ArenaScene();
+        }
         return object;
+    }
+
+    @Override
+    public void onOrientationChanged() {
+        clearInstance();
+        Forge.replaceCurrentScene(instance());
+    }
+
+    public static void clearInstance() {
+        if (object != null) {
+            object.dispose();
+            object = null;
+        }
     }
 
     private final TextraButton doneButton;
