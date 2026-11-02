@@ -339,7 +339,7 @@ public class MatchScreen extends FScreen {
     @Override
     public void onActivate() {
         //update dev menu visibility here so returning from Settings screen allows update
-        if (topPlayerPrompt == null) {
+        if (topPlayerPrompt == null && devMenu.getMenuTab() != null) {
             devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
         }
         revalidate(); //the compact layout and unified phase settings may have changed in Settings

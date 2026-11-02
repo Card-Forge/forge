@@ -218,8 +218,9 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         GameOutcome lastOutcome = brains.getGame().getMatch().getLastOutcome();
-        if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())
-            && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
+        final boolean weWon = lastOutcome != null && lastOutcome.getWinningPlayer() != null
+            && lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer());
+        if (weWon && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
             return null;
         }
 
