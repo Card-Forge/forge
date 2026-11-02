@@ -1,0 +1,9 @@
+{
+"name":"Any",
+  "mainDeck": [
+    {
+      "count":90,
+      "cardTypes": ["Creature","Instant","Sorcery","Enchantment","Artifact","Planeswalker","Battle"]
+    }
+    ]
+}

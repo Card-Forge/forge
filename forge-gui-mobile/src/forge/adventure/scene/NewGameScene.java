@@ -37,7 +37,6 @@ import java.util.Random;
  * NewGame scene that contains the character creation
  */
 public class NewGameScene extends MenuScene {
-
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -69,6 +68,7 @@ public class NewGameScene extends MenuScene {
     private DialogData archipelagoSummary;
     private final Random rand = new Random();
     private String originalEditionLabelText;
+    private static final String ANY_PILE_COLORS = "WUBRG";
     private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
@@ -117,7 +117,10 @@ public class NewGameScene extends MenuScene {
             if (diff.pileDecks != null) {
                 modes.add(AdventureModes.Pile);
                 AdventureModes.Pile.setSelectionName(colorIdLabel);
-                AdventureModes.Pile.setModes(colorNames);
+                Array<String> pileNames = new Array<>(colorNames);
+                if (diff.pileDecks.containsKey(ANY_PILE_COLORS))
+                    pileNames.add("[+W][+U][+B][+R][+G]");
+                AdventureModes.Pile.setModes(pileNames);
             }
             if (diff.commanderDecks != null) {
                 modes.add(AdventureModes.Commander);
@@ -380,6 +383,8 @@ public class NewGameScene extends MenuScene {
             return colorIds[0];
         }
         int idx = colorId.getCurrentIndex();
+        if (currentMode == AdventureModes.Pile && idx == colorIds.length)
+            return ColorSet.fromNames(ANY_PILE_COLORS.toCharArray());
         return colorIds[idx < colorIds.length ? idx : 0];
     }
 
@@ -627,6 +632,10 @@ public class NewGameScene extends MenuScene {
                 break;
             case Pile:
                 summaryText.append(localizer.getMessage("advModePileSummary"));
+                if (colorId.getCurrentIndex() == colorIds.length) { // The random cards pile is the same on every difficulty
+                    summaryText.append(localizer.getMessage("advPileAnySummary"));
+                    break;
+                }
                 switch (selectedDifficulty.name) {
                     case "Easy":
                         summaryText.append(localizer.getMessage("advDiffEasyPile"));

@@ -4,14 +4,27 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.RewardData;
+import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Reward;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.card.CardEdition;
+import forge.card.ColorSet;
+import forge.card.GamePieceType;
+import forge.game.Game;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerHandler;
+import forge.gamemodes.match.HostedMatch;
 import forge.model.CardBlock;
+import forge.player.PlayerControllerHuman;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -196,6 +209,48 @@ public class ArchipelagoUtil {
     private static TextureRegion getRegionRune(String biomeName) {
         ArchipelagoRegion region = ArchipelagoRegion.fromBiomeName(biomeName);
         return region != null && region.runeSpriteName != null ? Config.instance().getItemSprite(region.runeSpriteName) : null;
+    }
+
+    /**
+     * Death link during a duel: a "Death Link" effect appears in the human player's command zone with a triggered ability
+     * "You lose N life", N being their life total right now. It goes on the stack the next time a player would get
+     * priority, so players can respond to it (gaining life in response can save them, it can be countered). It doesn't
+     * force a loss, the state-based actions decide. The effect is exiled once the ability resolves, or at the end of the
+     * turn if it was countered.
+     * Returns false when no duel is running.
+     */
+    public static boolean putDeathLinkOnStack(String source) {
+        if (!(Forge.getCurrentScene() instanceof DuelScene)) return false;
+        HostedMatch match = DuelScene.instance().getHostedMatch();
+        if (match == null || match.getGame() == null || match.getGame().isGameOver()) return false;
+        Game game = match.getGame();
+        // "|" and "$" separate the parts of an ability script
+        String from = source == null ? "another player" : source.replaceAll("[|$]", "");
+        game.getAction().invoke(() -> {
+            for (Player player : game.getPlayers()) {
+                if (!(player.getController() instanceof PlayerControllerHuman)) continue;
+                int life = Math.max(player.getLife(), 0);
+                Card effect = new Card(game.nextCardId(), game);
+                effect.setGameTimestamp(game.getNextTimestamp());
+                effect.setName("Death Link");
+                effect.setOwner(player);
+                effect.setColor(ColorSet.C);
+                effect.setGamePieceType(GamePieceType.EFFECT);
+                effect.setSVar("DBLoseLife", "DB$ LoseLife | Defined$ You | LifeAmount$ " + life + " | SubAbility$ DBExileEffect");
+                effect.setSVar("DBExileEffect", "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile");
+                // If the Death Link trigger is countered it never exiles the effect, so it also exiles itself at the end of the turn.
+                effect.addTrigger(TriggerHandler.parseTrigger("Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True"
+                        + " | Execute$ DBExileEffect | TriggerDescription$ At the end of this turn, exile this effect.", effect, true));
+                game.getAction().moveToCommand(effect, null);
+
+                SpellAbility trigger = AbilityFactory.getAbility("DB$ ImmediateTrigger | Execute$ DBLoseLife | TriggerDescription$ Death Link from "
+                        + from + ": you lose " + life + " life.", effect);
+                trigger.setActivatingPlayer(player);
+                AbilityUtils.resolve(trigger); // registers the reflexive trigger
+            }
+            game.getAction().checkStateEffects(true); // fires it, it goes on the stack before the next priority
+        });
+        return true;
     }
 
     public static void updateLastTraversedRegionOnTeleport(String command) {

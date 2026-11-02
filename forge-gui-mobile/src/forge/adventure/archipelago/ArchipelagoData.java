@@ -4,7 +4,11 @@ import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.data.WorldData;
 import forge.adventure.scene.TileMapScene;
+import forge.Forge;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.GameStage;
+import forge.adventure.stage.MapStage;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -62,6 +66,8 @@ public class ArchipelagoData implements SaveFileContent {
     protected int totalBattlesWonGreen = 0;
     protected int totalBattlesWonColorless = 0;
     private ArchipelagoRegion lastTraversedRegion = ArchipelagoRegion.WASTE;
+    private boolean pendingIncomingDeathLink = false;
+    private boolean deathLinkTriggeredThisDuel = false;
 
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
@@ -296,6 +302,16 @@ public class ArchipelagoData implements SaveFileContent {
     // Todo: Make sure the functions below trigger all related checks in `updatePlayerChecks` when applicable.
 
     /**
+     * Whether beating a miniboss in an inn event, tournament or arena battle should give the respective miniboss check,
+     * off by default.
+     */
+    public boolean countEventMinibosses() {
+        if (archipelagoMode != ArchipelagoMode.networked_archipelago) return false;
+        SlotData slotData = ArchipelagoRandomizer.getInstance().getSlotData();
+        return slotData != null && slotData.EventMinibossChecks == 1;
+    }
+
+    /**
      * Records a miniboss defeat and sends its check.
      * Returns true if this boss wasn't defeated before.
      */
@@ -323,8 +339,63 @@ public class ArchipelagoData implements SaveFileContent {
         if (isGoalReached()) {
             updatePlayerChecks(ArchipelagoCheckTypes.WIN_CONDITION_CLEARED, notificationMessage);
         }
+        // Only triggers on the first defeat of this boss, so beating it again never sells the active deck.
+        if (result && archipelagoMode == ArchipelagoMode.networked_archipelago) {
+            SlotData slotData = ArchipelagoRandomizer.getInstance().getSlotData();
+            if (slotData != null && slotData.AutoSellDeck == 1) {
+                ArchipelagoRandomizer.getInstance().sellActiveDeck();
+            }
+        }
 
         return result;
+    }
+
+    // Called when a duel ends. A lost duel sends a death link, unless a death link triggered that loss.
+    public void onBattleEnded(boolean won, String enemyName) {
+        boolean lostToDeathLink = deathLinkTriggeredThisDuel;
+        deathLinkTriggeredThisDuel = false;
+        if (won || archipelagoMode != ArchipelagoMode.networked_archipelago) return;
+        if (!lostToDeathLink) {
+            Archipelago.getInstance().sendDeathLink(Current.player().getName() + " lost a battle against " + enemyName);
+        }
+    }
+
+    /**
+     * A death link from another player. During a duel a Death Link trigger goes on the stack that makes the player lose
+     * their current life total; players can respond to it and the game's state-based actions decide whether they lose
+     * (see ArchipelagoUtil.putDeathLinkOnStack). Outside a duel it's a regular battle loss: they lose gold and life,
+     * and are moved like after a normal defeat, see resolvePendingDeathLinkDefeat. Must run on the game thread.
+     */
+    public void applyDeathLink(String source, String cause) {
+        if (archipelagoMode != ArchipelagoMode.networked_archipelago) return;
+        String from = String.format("%sForge AP:{RESET}\nDeath Link from %s%s{RESET}%s", ArchipelagoColors.Salmon,
+                ArchipelagoColors.Cyan, source, cause != null && !cause.isEmpty() ? "\n" + cause : "");
+        if (ArchipelagoUtil.putDeathLinkOnStack(source)) {
+            deathLinkTriggeredThisDuel = true;
+            generateGameNotification(from + "\nA Death Link trigger goes on the stack.");
+            return;
+        }
+        boolean defeated = Current.player().defeated();
+        generateGameNotification(from);
+        // A lost battle in a dungeon always ends the dungeon run, on the world map only reaching 0 life moves the player.
+        if (defeated || MapStage.getInstance().isInMap()) {
+            pendingIncomingDeathLink = true;
+        }
+    }
+
+    // Called every frame by the HUD of the world and dungeon maps (never during a duel): once the player is free to move
+    // (no dialog or animation), moves them like a lost battle would: out of a dungeon, and back to spawn if their life is 0.
+    public void resolvePendingDeathLinkDefeat() {
+        if (!pendingIncomingDeathLink || Forge.advFreezePlayerControls) return;
+        GameStage stage = MapStage.getInstance().isInMap() ? MapStage.getInstance() : WorldStage.getInstance();
+        if (stage.isPaused() || stage.isDialogOnlyInput()) return;
+        pendingIncomingDeathLink = false;
+        boolean defeated = Current.player().getLife() < 1;
+        if (MapStage.getInstance().isInMap()) {
+            MapStage.getInstance().exitDungeon(defeated, false); // also sends them back to spawn when defeated
+        } else if (defeated) {
+            WorldStage.getInstance().resetPlayerLocation();
+        }
     }
 
     // Returns true if this save has defeated the given (mini)boss.

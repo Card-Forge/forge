@@ -67,6 +67,13 @@ public class Archipelago {
         if (APClient != null) APClient.setGameState(ClientStatus.CLIENT_GOAL);
     }
 
+    // Not queued: a death while disconnected isn't sent.
+    public void sendDeathLink(String cause) {
+        if (APClient != null && APClient.isConnected() && APClient.getSlotData() != null && APClient.getSlotData().DeathLink == 1) {
+            APClient.sendDeathlink(APClient.getMyName(), cause);
+        }
+    }
+
     public int getRandomItemPrice() {
         int min = 500;
         int max = 1000;

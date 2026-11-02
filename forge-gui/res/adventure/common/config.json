@@ -132,7 +132,8 @@
         "B":"decks/starter/pile_black_e.json",
         "U":"decks/starter/pile_blue_e.json",
         "R":"decks/starter/pile_red_e.json",
-        "G":"decks/starter/pile_green_e.json"
+        "G":"decks/starter/pile_green_e.json",
+        "WUBRG":"decks/starter/pile_any.json"
       },
       "commanderDecks": {
         "W":"decks/starter/commander/white_01.dck",
@@ -177,7 +178,8 @@
         "B":"decks/starter/pile_black_n.json",
         "U":"decks/starter/pile_blue_n.json",
         "R":"decks/starter/pile_red_n.json",
-        "G":"decks/starter/pile_green_n.json"
+        "G":"decks/starter/pile_green_n.json",
+        "WUBRG":"decks/starter/pile_any.json"
       },
       "commanderDecks": {
         "W":"decks/starter/commander/white_01.dck",
@@ -220,7 +222,8 @@
         "B":"decks/starter/pile_black_h.json",
         "U":"decks/starter/pile_blue_h.json",
         "R":"decks/starter/pile_red_h.json",
-        "G":"decks/starter/pile_green_h.json"
+        "G":"decks/starter/pile_green_h.json",
+        "WUBRG":"decks/starter/pile_any.json"
       },
       "commanderDecks": {
         "W":"decks/starter/commander/white_01.dck",
@@ -260,7 +263,8 @@
         "B":"decks/starter/pile_black_h.json",
         "U":"decks/starter/pile_blue_h.json",
         "R":"decks/starter/pile_red_h.json",
-        "G":"decks/starter/pile_green_h.json"
+        "G":"decks/starter/pile_green_h.json",
+        "WUBRG":"decks/starter/pile_any.json"
       },
       "commanderDecks": {
         "W":"decks/starter/commander/white_01.dck",

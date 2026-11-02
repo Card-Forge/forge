@@ -663,6 +663,8 @@ public class GameHUD extends Stage {
 
         updateAudioFades(delta);
 
+        forge.adventure.archipelago.ArchipelagoData.getInstance().resolvePendingDeathLinkDefeat();
+
         if (!mapGroup.isVisible())
             return;
         // player position

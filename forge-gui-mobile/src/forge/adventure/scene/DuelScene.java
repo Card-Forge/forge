@@ -72,6 +72,11 @@ public class DuelScene extends ForgeScene {
         return object;
     }
 
+    // Used to determine if a game is currently being hosted in this scene.
+    public HostedMatch getHostedMatch() {
+        return hostedMatch;
+    }
+
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -197,15 +202,19 @@ public class DuelScene extends ForgeScene {
         Current.player().clearBlessing();
 
         boolean finalWinner = winner;
+        ArchipelagoData.getInstance().onBattleEnded(finalWinner, enemyName);
         boolean isBossLoss = (chaosBattle || showMessages) && !finalWinner;
         boolean hasAnteResults = !anteWonCards.isEmpty() || !anteLostCards.isEmpty();
 
         if (!isBossLoss) {
             if (enemy.getData().boss && ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+                // Inn events, tournaments and arena battles don't give boss checks, except minibosses if the slot allows it.
+                boolean eventBattle = eventData != null || isArena;
                 // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
                 if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
-                    ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
-                } else {
+                    if (!eventBattle || ArchipelagoData.getInstance().countEventMinibosses())
+                        ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
+                } else if (!eventBattle) {
                     ArchipelagoData.getInstance().addBossDefeated(enemyName);
                 }
             }

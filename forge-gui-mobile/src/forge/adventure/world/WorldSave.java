@@ -165,6 +165,9 @@ public class WorldSave {
 
         Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
         currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, mode, archipelagoMode);
+        // The any-color pile is a sealed-style pool: its cards stay in the collection and the player builds their own deck.
+        if (mode == AdventureModes.Pile && startingColorIdentity.isAllColors())
+            starterDeck.getMain().clear();
 
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));

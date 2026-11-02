@@ -3,8 +3,14 @@ package forge.adventure.archipelago;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SlotData implements Serializable {
+    // Saves store this class serialized. This is the id it had before fields were added in 0.2.0, keep it so older saves
+    // still load (fields missing from an older save are left at null/0).
+    private static final long serialVersionUID = -8304315340413927436L;
+
     @SerializedName("castles_required")
     public int CastlesRequired;
     @SerializedName("color_sanity")
@@ -49,6 +55,21 @@ public class SlotData implements Serializable {
     public int DeathLink;
     @SerializedName("set_unlock_count")
     public int SetUnlockCount;
+    @SerializedName("no_starting_deck")
+    public int NoStartingDeck;
+    @SerializedName("auto_sell_deck")
+    public int AutoSellDeck;
+    @SerializedName("event_miniboss_checks")
+    public int EventMinibossChecks;
+    // Starting inventory (null for slots generated before APWorld 0.2.0)
+    @SerializedName("starting_cards")
+    public HashMap<String, Integer> StartingCards; // card name -> amount
+    @SerializedName("starting_sets")
+    public ArrayList<String> StartingSets; // set codes
+    @SerializedName("starting_boosters")
+    public HashMap<String, Integer> StartingBoosters; // set code -> amount
+    @SerializedName("starting_equipment")
+    public ArrayList<Long> StartingEquipment; // item ids, see ItemRegistry
     @SerializedName("seed")
     public String Seed;
 }

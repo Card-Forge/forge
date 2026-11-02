@@ -1,5 +1,6 @@
 package forge.adventure.archipelago.events;
 
+import com.badlogic.gdx.Gdx;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.archipelago.Archipelago;
 import forge.adventure.archipelago.ArchipelagoData;
@@ -50,10 +51,18 @@ public class ConnectResult {
                     ArrayList<Long> locations = new ArrayList<>(APClient.getLocationManager().getMissingLocations());
                     locations.addAll(APClient.getLocationManager().getCheckedLocations());
                     APClient.scoutLocations(locations);
+                    // The save was created before the slot options were known, so the starting inventory is given now.
+                    SlotData slotData = APClient.slotData;
+                    if (slotData != null) {
+                        APRandomizer.applyStartingSets(slotData);
+                        Gdx.app.postRunnable(() -> APRandomizer.applyStartingInventory(slotData));
+                    }
                 }
                 // Must be known before the received items are processed, which happens right after this event: set unlocks
                 // are split over this many checks. Also repairs saves whose set unlocks were split over the default of 100.
-                ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(APClient.slotData.SetUnlockCount);
+                if (APClient.slotData != null) {
+                    ArchipelagoData.getInstance().setTotalAmountOfSetUnlockChecks(APClient.slotData.SetUnlockCount);
+                }
                 ArchipelagoData.getInstance().unlockRemainingSetsIfAllReceived();
                 APRandomizer.sendQueuedLocations();
                 // Take over what the server already knows was checked for our slot (other saves/devices, release on goal).
@@ -62,16 +71,13 @@ public class ConnectResult {
                 if (ArchipelagoData.getInstance().isGoalReached()) {
                     Archipelago.getInstance().goal();
                 }
-                // Starting items currently not supported, commenting this out for now.
-//                APClient.slotData.parseStartingItems(registries);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            // deathlink currently not supported, commenting this out for now.
-//            if (APClient.slotData.DeathLink == 1) {
-//                APClient.setDeathLinkEnabled(true);
-//            }
+            if (APClient.slotData != null) {
+                APClient.setDeathLinkEnabled(APClient.slotData.DeathLink == 1);
+            }
         } else if (event.getResult() == ConnectionResult.InvalidPassword) {
             connectStatusLabel.setText("");
             connectStatusLabel.setText("{FADE=RED;RED;0.1}Invalid Password");

@@ -1,8 +1,15 @@
 package forge.adventure.archipelago;
 import com.badlogic.gdx.Gdx;
+import forge.StaticData;
 import forge.adventure.data.ItemData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.ArchipelagoSettingsScene;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.item.PaperCard;
 import io.github.archipelagomw.parts.NetworkItem;
 
 import java.util.*;
@@ -216,6 +223,119 @@ public class ArchipelagoRandomizer {
         Current.player().addItem(itemName);
         System.out.println(String.format("%s%s{RESET}%s%s%s{RESET}", ArchipelagoColors.Salmon, "Forge AP:\n", "Item Reward: ", ArchipelagoColors.Cyan, itemName));
         archipelagoDataInstance.addItem(itemName);
+    }
+
+    /**
+     * Unlocks the starting sets from the slot options. Only called on the first connect of a save, before the received
+     * items are processed so set unlocks never pick a starting set.
+     */
+    public void applyStartingSets(SlotData slotData) {
+        if (slotData.StartingSets == null) return;
+        List<String> unlocked = new ArrayList<>();
+        for (String setCode : slotData.StartingSets) {
+            String code = setCode.trim().toUpperCase();
+            if (archipelagoDataInstance.allCardSets.contains(code)) {
+                archipelagoDataInstance.addSetUnlockedByCode(code);
+                unlocked.add(code);
+            } else {
+                System.out.println("Forge AP: Skipped unknown starting set " + setCode);
+            }
+        }
+        if (!unlocked.isEmpty()) {
+            archipelagoDataInstance.generateGameNotification(String.format("%sForge AP:{RESET}\nStarting Sets: %s%s{RESET}", ArchipelagoColors.Salmon, ArchipelagoColors.Cyan, String.join(", ", unlocked)));
+        }
+    }
+
+    /**
+     * Gives a new save the starting cards, boosters and equipment from the slot options and takes the starter deck away
+     * if the slot has no_starting_deck. Only called on the first connect of a save: the save (with its starter deck) is
+     * created before the slot data is known. Must run on the game thread.
+     */
+    public void applyStartingInventory(SlotData slotData) {
+        AdventurePlayer player = Current.player();
+        Deck deck = player.getSelectedDeck();
+        boolean noStartingDeck = slotData.NoStartingDeck == 1;
+        if (noStartingDeck) {
+            // Remove the entire collection on first connect and lock those cards.
+            // Due to the staring cave not letting the player leave without connecting to the multiworld server,
+            // this happens before any cards can be earned so it will only delete the starting cards.
+            for (PaperCard card : player.getCards().toFlatList()) {
+                if (!card.getRules().getType().isBasicLand()) archipelagoDataInstance.cardsUnlockedByName.remove(card.getCardName());
+            }
+            player.getCards().clear();
+            player.newCards.clear();
+            for (int i = 0; i < player.getDeckCount(); i++) {
+                for (DeckSection section : List.of(DeckSection.Main, DeckSection.Sideboard)) {
+                    CardPool cards = player.getDeck(i).get(section);
+                    if (cards != null) cards.clear();
+                }
+            }
+        }
+
+        int cardCount = 0;
+        if (slotData.StartingCards != null) {
+            for (Map.Entry<String, Integer> entry : slotData.StartingCards.entrySet()) {
+                PaperCard card = StaticData.instance().getCommonCards().getCard(entry.getKey());
+                if (card == null) {
+                    System.out.println("Forge AP: Skipped unknown starting card " + entry.getKey());
+                    continue;
+                }
+                player.addCard(card, entry.getValue());
+                // Starting cards are always playable, even when their set is still locked.
+                archipelagoDataInstance.addCardUnlockedByName(card.getName());
+                if (noStartingDeck) deck.getMain().add(card, entry.getValue());
+                cardCount += entry.getValue();
+            }
+        }
+
+        int boosterCount = 0;
+        if (slotData.StartingBoosters != null) {
+            for (Map.Entry<String, Integer> entry : slotData.StartingBoosters.entrySet()) {
+                String code = entry.getKey().trim().toUpperCase();
+                if (StaticData.instance().getEditions().get(code) == null || StaticData.instance().getBoosters().get(code) == null) {
+                    System.out.println("Forge AP: Skipped starting booster without booster packs " + entry.getKey());
+                    continue;
+                }
+                for (int i = 0; i < entry.getValue(); i++) {
+                    player.addBooster(AdventureEventController.instance().generateBooster(code));
+                }
+                boosterCount += entry.getValue();
+            }
+        }
+
+        int equipmentCount = 0;
+        if (slotData.StartingEquipment != null) {
+            for (Long itemId : slotData.StartingEquipment) {
+                String itemName = ItemRegistry.getItem(itemId);
+                if (itemName == null) continue;
+                unlockItemReward(itemName);
+                equipmentCount++;
+            }
+        }
+
+        if (noStartingDeck || cardCount + boosterCount + equipmentCount > 0) {
+            archipelagoDataInstance.generateGameNotification(String.format("%sForge AP:{RESET}\nStarting Inventory: %s%d{RESET} Cards, %s%d{RESET} Boosters, %s%d{RESET} Equipment%s",
+                    ArchipelagoColors.Salmon, ArchipelagoColors.Cyan, cardCount, ArchipelagoColors.Cyan, boosterCount, ArchipelagoColors.Cyan, equipmentCount,
+                    noStartingDeck ? "\nNo starter deck, your starting cards are your deck" : ""));
+        }
+    }
+
+    // Sells every card in the active deck (auto_sell_deck option), which leaves that deck empty.
+    public void sellActiveDeck() {
+        AdventurePlayer player = Current.player();
+        Deck deck = player.getSelectedDeck();
+        int goldBefore = player.getGold();
+        int cardsSold = 0;
+        for (DeckSection section : List.of(DeckSection.Main, DeckSection.Sideboard)) {
+            CardPool cards = deck.get(section);
+            if (cards == null) continue;
+            cardsSold += cards.countAll();
+            player.doBulkSell(cards); // removes them from the collection and empties the pool
+        }
+        if (cardsSold > 0) {
+            archipelagoDataInstance.generateGameNotification(String.format("%sForge AP:{RESET}\nDeck Auto-sold: %s%d{RESET} Cards for %s%d{RESET} Gold",
+                    ArchipelagoColors.Salmon, ArchipelagoColors.Cyan, cardsSold, ArchipelagoColors.Cyan, player.getGold() - goldBefore));
+        }
     }
 
     public void unlockManaCrystalReward(Integer amount) {
