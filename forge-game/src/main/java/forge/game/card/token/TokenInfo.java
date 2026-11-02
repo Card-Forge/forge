@@ -13,6 +13,7 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.keyword.KeywordInterface;
@@ -21,10 +22,7 @@ import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.WeakHashMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TokenInfo {
@@ -289,6 +287,12 @@ public class TokenInfo {
 
         final Card result = CardFactory.getCard(token, owner, game);
 
+        if (sa.hasParam("TokenName")) {
+            CardCollection cards = AbilityUtils.getDefinedCards(host, sa.getParam("TokenName"), sa);
+            if (!cards.isEmpty()) {
+                result.setName(cards.getFirst().getDisplayName());
+            }
+        }
         if (sa.hasParam("TokenPower")) {
             String str = sa.getParam("TokenPower");
             result.setBasePowerString(str);
@@ -315,8 +319,17 @@ public class TokenInfo {
 
         if (sa.hasParam("TokenColors")) {
             String colors = sa.getParam("TokenColors");
-            colors = colors.replace("ChosenColor", host.getChosenColor());
-            result.setColor(colors.split(","));
+            if (colors.contains("ChosenColor")) {
+                colors = colors.replace("ChosenColor", host.getChosenColor());
+                result.setColor(colors.split(","));
+            } else {
+                CardCollection cards = AbilityUtils.getDefinedCards(host, sa.getParam("TokenColors"), sa);
+                List<ColorSet> colorSets = new ArrayList<>();
+                for (Card c: cards) {
+                    colorSets.add(c.getColor());
+                }
+                result.setColor(ColorSet.combine(colorSets.toArray(new ColorSet[0])));
+            }
         }
 
         return result;

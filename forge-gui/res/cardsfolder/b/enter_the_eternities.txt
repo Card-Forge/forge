@@ -1,0 +1,39 @@
+Name:Enter the Eternities
+ManaCost:G U
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberChanged$ True | SubAbility$ DraftPlus1Ability | SpellDescription$ Exile target creature you control. Draft a [+1] ability, a [−2] ability, and a [−8] ability. Create a legendary planeswalker token with the exiled creature's name and colors and the drafted abilities. Put a number of loyalty counters on it equal to the exiled creature's power.
+SVar:DraftPlus1Ability:DB$ DraftAbility | Abilities$ Plus1AB1,Plus1AB2,Plus1AB3 | ResultSVar$ ability1 | SubAbility$ DraftMinus2Ability
+SVar:DraftMinus2Ability:DB$ DraftAbility | Abilities$ Minus2AB1,Minus2AB2,Minus2AB3 | ResultSVar$ ability2 | SubAbility$ DraftMinus8Ability
+SVar:DraftMinus8Ability:DB$ DraftAbility | Abilities$ Minus8AB1,Minus8AB2,Minus8AB3 | ResultSVar$ ability3 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ planeswalker | TokenOwner$ You | WithCountersType$ LOYALTY | WithCountersAmount$ exiledPower | TokenName$ Remembered | TokenColors$ Remembered | ImprintTokens$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Abilities$ ability1,ability2,ability3 | Duration$ Permanent
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:exiledPower:Remembered$CardPower
+# Possible +1 Abilities
+# Ability 1
+SVar:Plus1AB1:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_1_1_elf_druid_g | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Druid creature token with "{T}: Add {G}."
+# Ability 2
+SVar:Plus1AB2:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Untap up to two target lands.
+# Ability 3
+SVar:Plus1AB3:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SpellDescription$ Draw a Card.
+# Possible -2 Abilities
+# Ability 1
+SVar:Minus2AB1:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Choose target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
+# Ability 2
+SVar:Minus2AB2:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ u_2_2_bird_flying | SubAbility$ DBDraw | SpellDescription$ Create a 2/2 blue Bird creature token with flying. Draw a card, then discard a card.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+# Ability 3
+SVar:Minus2AB3:AB$ Branch | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | BranchConditionSVar$ GreatestPower | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBDraw2 | FalseSubAbility$ DBDraw1 | SpellDescription$ Draw two cards if you control a creature with the greatest power. Otherwise, draw a card.
+SVar:DBDraw1:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:DBDraw2:DB$ Draw | Defined$ You | NumCards$ 2
+SVar:GreatestPower:Count$Valid Creature.greatestPower+YouCtrl
+# Possible -8 Abilities
+# Ability 1
+SVar:Minus8AB1:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ CreatureCount | SpellDescription$ Draw a card for each creature you control.
+SVar:CreatureCount:Count$Valid Creature.YouCtrl
+# Ability 2
+SVar:Minus8AB2:AB$ Pump | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
+# Ability 3
+SVar:Minus8AB3:AB$ GainControl | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Permanent.!Self | SpellDescription$ Gain control of another target permanent.
+Oracle:Exile target creature you control. Draft a [+1] ability, a [−2] ability, and a [−8] ability. Create a legendary planeswalker token with the exiled creature's name and colors and the drafted abilities. Put a number of loyalty counters on it equal to the exiled creature's power.
