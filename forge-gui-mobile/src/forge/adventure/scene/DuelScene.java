@@ -212,7 +212,7 @@ public class DuelScene extends ForgeScene {
                 boolean eventBattle = eventData != null || isArena;
                 // Check if the enemy's deck is stored in a path containing "miniboss" or just "boss".
                 if (enemy.getData().deck[0].toLowerCase().contains("miniboss")) {
-                    if (!eventBattle || ArchipelagoData.getInstance().countsEventMinibosses())
+                    if (!eventBattle || ArchipelagoData.getInstance().countEventMinibosses())
                         ArchipelagoData.getInstance().addMiniBossDefeated(enemyName);
                 } else if (!eventBattle) {
                     ArchipelagoData.getInstance().addBossDefeated(enemyName);

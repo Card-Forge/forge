@@ -71,8 +71,6 @@ public class ConnectResult {
                 if (ArchipelagoData.getInstance().isGoalReached()) {
                     Archipelago.getInstance().goal();
                 }
-                // Starting items currently not supported, commenting this out for now.
-//                APClient.slotData.parseStartingItems(registries);
             } catch (Exception e) {
                 e.printStackTrace();
             }

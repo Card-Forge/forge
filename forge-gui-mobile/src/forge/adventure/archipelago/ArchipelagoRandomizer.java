@@ -258,7 +258,8 @@ public class ArchipelagoRandomizer {
         boolean noStartingDeck = slotData.NoStartingDeck == 1;
         if (noStartingDeck) {
             // Remove the entire collection on first connect and lock those cards.
-            // Happens before any cards can be earned so it will only delete the starting cards.
+            // Due to the staring cave not letting the player leave without connecting to the multiworld server,
+            // this happens before any cards can be earned so it will only delete the starting cards.
             for (PaperCard card : player.getCards().toFlatList()) {
                 if (!card.getRules().getType().isBasicLand()) archipelagoDataInstance.cardsUnlockedByName.remove(card.getCardName());
             }

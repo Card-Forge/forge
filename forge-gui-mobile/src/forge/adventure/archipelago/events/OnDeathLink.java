@@ -14,7 +14,7 @@ public class OnDeathLink {
         this.APClient = APClient;
     }
 
-    // The client already ignores the death links we sent ourselves.
+    // The client already ignores the death links it sends itself.
     @ArchipelagoEventListener
     public void onDeath(DeathLinkEvent event) {
         SlotData slotData = APClient.getSlotData();
