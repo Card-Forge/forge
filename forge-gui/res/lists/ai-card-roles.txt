@@ -49,3 +49,22 @@ combo_engine | Food Chain
 
 # Spells that put cards from hand onto the battlefield when they resolve (not the engines: casting those is only setup)
 hand_cheat | Show and Tell | Through the Breach | Eureka | Hypergenesis
+
+# Free cast engines (a creature with mana value 3 or less costs nothing under Aluren, every spell under Omniscience)
+free_cast_engine | Aluren | Omniscience
+
+# Cheap creatures that loop or win under a free cast engine (Acererak bounces itself and ventures; Cavern Harpy and
+# Raven Familiar return each other; the others are the classic Aluren pieces)
+free_cast_target | Acererak the Archlich | Cavern Harpy | Raven Familiar | Dream Stalker | Imperial Recruiter
+free_cast_target | Maggot Carrier | Wirewood Savage
+
+# Artifacts that chain artifacts: cast from the top of the library, untap them, copy their mana, tutor for them
+artifact_engine | Mystic Forge | Paradox Engine | Manifold Key | Voltaic Key | Grim Monolith | Basalt Monolith
+artifact_engine | Transmute Artifact
+
+# What an artifact engine deck wins or swings the game with
+artifact_payoff | Karn, the Great Creator | The One Ring | Tezzeret, Cruel Captain | Kozilek's Command
+artifact_payoff | Ugin, Eye of the Storms | Extinguisher Battleship | Mycosynth Lattice
+
+# Spells that fetch an overrun finisher from the library (the finisher itself stays in the overrun role)
+finisher_tutor | Green Sun's Zenith | Natural Order | Chord of Calling | Eldritch Evolution
