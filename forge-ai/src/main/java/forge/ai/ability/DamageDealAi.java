@@ -12,8 +12,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -92,6 +94,52 @@ public class DamageDealAi extends DamageAiBase {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+    }
+
+    /**
+     * "Sacrifice a creature: N damage to any target" (Goblin Bombardment). The creatures we can sacrifice
+     * kill the weakest opponent, or a persist creature comes back endlessly (Melira, Sylvok Outcast): target that
+     * opponent. Sacrifice choice stays with ComputerUtil.chooseSacrificeType (SacMe first, then the worst creature).
+     */
+    private static boolean sacOutletIsLethal(final Player ai, final SpellAbility sa, final Cost abCost, final Card source, final int dmg) {
+        if (abCost == null || !sa.usesTargeting() || !sa.getTargetRestrictions().canTgtPlayer()) {
+            return false;
+        }
+        CostSacrifice sac = null;
+        boolean mana = false;
+        for (final CostPart part : abCost.getCostParts()) {
+            if (part instanceof CostSacrifice cs && !cs.payCostFromSource() && "1".equals(cs.getAmount())) {
+                sac = cs;
+            } else if (part instanceof forge.game.cost.CostPartMana && sa.isSpell()) {
+                mana = true; // burn spell with an additional sacrifice (Shrapnel Blast): one shot
+            } else {
+                return false; // only the plain sacrifice cost, nothing else to pay
+            }
+        }
+        if (sac == null) {
+            return false;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        if (opp == null || !opp.canLoseLife() || opp.cantLoseForZeroOrLessLife() || !sa.canTarget(opp)) {
+            return false;
+        }
+        final int perShot = ComputerUtilCombat.predictDamageTo(opp, dmg, source, false);
+        if (perShot <= 0) {
+            return false;
+        }
+        CardCollection fodder = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), sac.getType().split(";"), ai, source, sa);
+        fodder = CardLists.filter(fodder, CardPredicates.canBeSacrificedBy(sa, false));
+        if (fodder.isEmpty()) {
+            return false;
+        }
+        final boolean endless = fodder.anyMatch(c -> c.hasKeyword(Keyword.PERSIST) && !c.isToken()
+                && c.getCounters(CounterEnumType.M1M1) == 0 && !c.canReceiveCounters(CounterEnumType.M1M1));
+        if (mana ? perShot < opp.getLife() : !endless && (long) perShot * fodder.size() < opp.getLife()) {
+            return false;
+        }
+        sa.resetTargets();
+        sa.getTargets().add(opp);
+        return true;
     }
 
     @Override
@@ -227,6 +275,11 @@ public class DamageDealAi extends DamageAiBase {
 
         if (dmg <= 0) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        // sacrifice outlet dealing damage (Goblin Bombardment): fire at the opponent when it is lethal
+        if (sacOutletIsLethal(ai, sa, abCost, source, dmg)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // temporarily disabled until better AI

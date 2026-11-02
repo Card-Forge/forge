@@ -621,6 +621,15 @@ public class ComputerUtil {
         final CardCollection sacList = new CardCollection();
         int count = 0;
 
+        // keep a winning persist / undying loop going (Melira + Murderous Redcap + free sacrifice outlet)
+        if (!effect && amount == 1) {
+            final Card loop = PersistLoopAi.anyLoopCard(ai, ability);
+            if (loop != null && typeList.contains(loop)) {
+                sacList.add(loop);
+                return sacList;
+            }
+        }
+
         while (count < amount) {
             Card prefCard = getCardPreference(ai, source, "SacCost", typeList, ability);
             if (prefCard == null && ability.isManaAbility()) {
