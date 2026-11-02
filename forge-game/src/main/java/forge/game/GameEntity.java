@@ -227,13 +227,19 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
         return canBeAttached(attach, sa, false);
     }
     public boolean canBeAttached(final Card attach, SpellAbility sa, boolean checkSBA) {
-        return cantBeAttachedMsg(attach, sa, checkSBA) == null;
+        return canBeAttached(attach, sa, checkSBA, null);
+    }
+    public boolean canBeAttached(final Card attach, SpellAbility sa, boolean checkSBA, Map<AbilityKey, Object> params) {
+        return cantBeAttachedMsg(attach, sa, checkSBA, params) == null;
     }
 
     public String cantBeAttachedMsg(final Card attach, SpellAbility sa) {
         return cantBeAttachedMsg(attach, sa, false);
     }
     public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
+        return cantBeAttachedMsg(attach, sa, checkSBA, null);
+    }
+    public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA, Map<AbilityKey, Object> params) {
         if (!attach.isAttachment()) {
             return attach.getDisplayName() + " is not an attachment";
         }
@@ -268,7 +274,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
             }
         }
 
-        StaticAbility stAb = StaticAbilityCantAttach.cantAttach(this, attach, checkSBA);
+        StaticAbility stAb = StaticAbilityCantAttach.cantAttach(this, attach, checkSBA, params);
         if (stAb != null) {
             return stAb.toString();
         }

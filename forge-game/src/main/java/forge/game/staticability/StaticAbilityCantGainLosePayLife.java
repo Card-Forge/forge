@@ -2,15 +2,19 @@ package forge.game.staticability;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantGainLosePayLife {
 
-    public static boolean anyCantGainLife(final Player player) {
+    public static boolean anyCantGainLife(final Player player, final SpellAbility cause) {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (CardZoneTable.isEntering(ca, cause)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!(stAb.checkMode(StaticAbilityMode.CantGainLife) || stAb.checkMode(StaticAbilityMode.CantChangeLife))) {
                     continue;
@@ -28,9 +32,12 @@ public class StaticAbilityCantGainLosePayLife {
         return false;
     }
 
-    public static boolean anyCantLoseLife(final Player player)  {
+    public static boolean anyCantLoseLife(final Player player, final SpellAbility cause)  {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (CardZoneTable.isEntering(ca, cause)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!(stAb.checkMode(StaticAbilityMode.CantLoseLife) || stAb.checkMode(StaticAbilityMode.CantChangeLife))) {
                     continue;
@@ -52,6 +59,9 @@ public class StaticAbilityCantGainLosePayLife {
     public static boolean anyCantPayLife(final Player player, final boolean effect, final SpellAbility cause)  {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            if (CardZoneTable.isEntering(ca, cause)) {
+                continue;
+            }
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!(stAb.checkMode(StaticAbilityMode.CantPayLife) || stAb.checkMode(StaticAbilityMode.CantLoseLife) || stAb.checkMode(StaticAbilityMode.CantChangeLife))) {
                     continue;

@@ -280,18 +280,18 @@ public class GameAction {
         // need to check before it enters
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
+            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null, params))) {
                 found = true;
             }
 
             if (!found) {
-                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null, params))) {
                     found = true;
                 }
             }
 
             if (!found) {
-                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null, params))) {
                     found = true;
                 }
             }
@@ -2847,7 +2847,7 @@ public class GameAction {
         }
         Player p = source.getController();
         if (canTargetPlayer) {
-            final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, null));
+            final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, null, params));
 
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
                     Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", source.getTranslatedName()), null);
@@ -2869,7 +2869,7 @@ public class GameAction {
             }
             list.addAll(game.getCardsIn(zones));
 
-            list = CardLists.filter(list, CardPredicates.canBeAttached(source, null));
+            list = CardLists.filter(list, CardPredicates.canBeAttached(source, null, params));
             if (list.isEmpty()) {
                 return false;
             }

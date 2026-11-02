@@ -91,13 +91,23 @@ public class CloneEffect extends SpellAbilityEffect {
                 choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
             } else {
                 // CR 614.12a what it can copy is decided by how they looked before the event
-                choices.retainAll(CardLists.getValidCards(lastState, sa.getParam("Choices"), activator, host, sa));
+                CardCollection valid = CardLists.getValidCards(lastState, sa.getParam("Choices"), activator, host, sa);
+                choices.retainAll(valid);
+                // one that left as part of the same event can still be copied
+                for (Card lki : valid) {
+                    if (!choices.contains(lki)) {
+                        choices.add(lki);
+                    }
+                }
             }
             boolean choiceOpt = sa.hasParam("ChoiceOptional");
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
                     Localizer.getInstance().getMessage("lblChooseaCard") + " ";
             cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, choiceOpt, null);
+            if (lastState != null && cardToCopy != null && !cardToCopy.isInZone(choiceZone)) {
+                cardToCopy = lastState.get(cardToCopy);
+            }
         } else if (sa.hasParam("Defined")) {
             List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {

@@ -19,6 +19,7 @@ package forge.game.card;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityKey;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -31,6 +32,7 @@ import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Predicate;
 
 
@@ -154,6 +156,9 @@ public final class CardPredicates {
 
     public static Predicate<Card> canBeAttached(final Card aura, final SpellAbility sa) {
         return c -> c.canBeAttached(aura, sa);
+    }
+    public static Predicate<Card> canBeAttached(final Card aura, final SpellAbility sa, final Map<AbilityKey, Object> params) {
+        return c -> c.canBeAttached(aura, sa, false, params);
     }
 
     public static Predicate<Card> isColor(final byte color) {
