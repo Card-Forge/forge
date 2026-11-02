@@ -3,7 +3,7 @@ ManaCost:2 U R W
 Types:Legendary Creature Human Officer
 PT:5/3
 K:Flying
-R:Event$ Moved | ValidCard$ Faerie.YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ ExtraCounter | ReplacementResult$ Updated | PrecostDesc$ Federation — | Description$ Federation — Faeries you control enter with an additional +1/+1 counter on them for each creature type among non-Borg creatures you already control.
+R:Event$ Moved | ValidCard$ Faerie.YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ ExtraCounter | ReplacementResult$ Updated | Description$ Federation — Faeries you control enter with an additional +1/+1 counter on them for each creature type among non-Borg creatures you already control.
 SVar:ExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$Valid Creature.nonBorg+YouCtrl$CreatureType
 DeckHas:Ability$Counters
