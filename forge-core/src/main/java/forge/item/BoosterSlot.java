@@ -1,5 +1,6 @@
 package forge.item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -10,6 +11,7 @@ public class BoosterSlot {
     private String baseRarity;
     private float startRange = 0.0f;
     private final TreeMap<Float, String> slotPercentages = new TreeMap<>();
+    private final List<String> excludeNamesDrawnBy = new ArrayList<>();
 
     public BoosterSlot(final String slotName, final List<String> contents) {
         this.slotName = slotName;
@@ -19,6 +21,13 @@ public class BoosterSlot {
 
     public final String getSlotName() {
         return slotName;
+    }
+
+    /**
+     * Slots whose cards from the same booster are never drawn again by this slot, matched by card name
+     */
+    public final List<String> getExcludeNamesDrawnBy() {
+        return excludeNamesDrawnBy;
     }
 
     public static BoosterSlot parseSlot(final String slotName, final List<String> contents) {
@@ -42,6 +51,10 @@ public class BoosterSlot {
                 float pct = Float.parseFloat(replaceParts[0]);
                 startRange += pct;
                 slotPercentages.put(startRange, replaceParts[1]);
+            } else if (key.equalsIgnoreCase("ExcludeNamesDrawnBy")) {
+                for (String drawnBy : value.split(",")) {
+                    excludeNamesDrawnBy.add(drawnBy.trim());
+                }
             }
         }
     }
