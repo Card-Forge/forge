@@ -42,6 +42,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Strings;
 
 import java.util.*;
+import java.util.function.BooleanSupplier;
 
 /**
  * <p>
@@ -74,6 +75,10 @@ public abstract class Trigger extends TriggerReplacementBase {
     private Set<PhaseType> validPhases;
 
     private SpellAbility spawningAbility;
+
+    // the event being checked, so its conditions can name the triggering objects
+    private TriggerWaiting checkedEvent;
+    private Map<AbilityKey, Object> checkedObjects;
 
     /**
      * <p>
@@ -459,6 +464,34 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
         
         return true;
+    }
+
+    /** Runs a check against this event, so conditions can name its triggering objects, as in "that player" (CR 603.4) */
+    public final boolean checkWith(final TriggerWaiting event, final BooleanSupplier check) {
+        checkedEvent = event;
+        try {
+            return check.getAsBoolean();
+        } finally {
+            checkedEvent = null;
+        }
+    }
+
+    /** Runs a check against the triggering objects of the fired ability */
+    public final boolean checkWith(final SpellAbility fired, final BooleanSupplier check) {
+        checkedObjects = fired.getTriggeringObjects();
+        try {
+            return check.getAsBoolean();
+        } finally {
+            checkedObjects = null;
+        }
+    }
+
+    @Override
+    public Object getTriggeringObject(final AbilityKey type) {
+        if (checkedObjects != null) {
+            return checkedObjects.get(type);
+        }
+        return checkedEvent == null ? null : checkedEvent.getTriggeringObjects(this).get(type);
     }
 
     /** {@inheritDoc} */

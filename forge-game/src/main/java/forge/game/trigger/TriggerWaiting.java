@@ -18,6 +18,7 @@ public class TriggerWaiting {
     private Map<Trigger, Player> triggers;
     // only the ones that trigger additional times
     private Map<Trigger, Integer> additionalTriggers;
+    private Map<Trigger, Map<AbilityKey, Object>> triggeringObjects;
 
     public TriggerWaiting(TriggerType m, Map<AbilityKey, Object> p) {
         mode = m;
@@ -73,6 +74,14 @@ public class TriggerWaiting {
             }
             additionalTriggers.put(t, amount);
         }
+    }
+
+    /** The trigger's triggering objects for this event, built once and shared by its condition check and its firing */
+    public Map<AbilityKey, Object> getTriggeringObjects(Trigger t) {
+        if (triggeringObjects == null) {
+            triggeringObjects = Maps.newHashMap();
+        }
+        return triggeringObjects.computeIfAbsent(t, k -> k.getHostCard().getGame().getTriggerHandler().buildTriggeringObjects(k, params));
     }
 
     @Override
