@@ -3224,6 +3224,12 @@ public class AiController {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
 
+        if (destination == null && sa.getApi() != ApiType.Learn) {
+            // no destination: the cards are only picked and remembered (Extrapolate the Impossible reveals two from
+            // outside the game and the opponent chooses between them in the next step), nothing moves yet
+            return fetchList == null || fetchList.isEmpty() ? null : ComputerUtilCard.getBestAI(fetchList);
+        }
+
         if (decider == player && sa.getApi() != ApiType.Learn) {
             // the win card of a cheating spell, the creature to put into the graveyard: what the deck is built for
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
