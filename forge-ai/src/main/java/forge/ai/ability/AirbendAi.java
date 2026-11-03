@@ -13,6 +13,23 @@ import forge.game.spellability.SpellAbility;
 public class AirbendAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
+        // the free cast loop: with Doc Aurlock in play an airbent creature is cast again for nothing
+        if (aiPlayer.getController() instanceof PlayerControllerAi) {
+            final java.util.List<Card> loop = ((PlayerControllerAi) aiPlayer.getController()).getAi()
+                    .deckPlan(aiPlayer).combos.airbendLoopTargets(aiPlayer, sa.getHostCard());
+            if (!loop.isEmpty() && sa.usesTargeting()) {
+                final int max = sa.getTargetRestrictions().getMaxTargets(sa.getHostCard(), sa);
+                sa.resetTargets();
+                for (final Card c : loop) {
+                    if (sa.getTargets().size() < max && sa.canTarget(c)) {
+                        sa.getTargets().add(c);
+                    }
+                }
+                if (!sa.getTargets().isEmpty()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
         // Check own cards that need saving, non-token, above CMC 2 so that it's hopefully worth saving this one
         final Combat combat = aiPlayer.getGame().getCombat();
         final CardCollection threatenedTgts = CardLists.filter(CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa),

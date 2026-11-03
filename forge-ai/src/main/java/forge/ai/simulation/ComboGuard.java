@@ -97,6 +97,14 @@ public final class ComboGuard {
         if (host == null) {
             return null;
         }
+        // Doomsday Excruciator, or Superior Spider-Man with nothing else to copy: the cut loses without a finisher
+        if (cutsTheLibraries(ai, sa, plan)) {
+            return "library-cut-unsafe";
+        }
+        // Aang's waterbend transform taps the loop's Ally tokens and ends the airbend loop: not while it is running
+        if (endsAirbendLoop(ai, sa, plan)) {
+            return "airbend-loop-transform";
+        }
         // a Pact: the cost at the next upkeep must be payable, or the game is lost, unless this turn wins the game
         if (pactUnpayable(ai, sa, plan)) {
             return "pact-unpayable";
@@ -276,6 +284,53 @@ public final class ComboGuard {
 
     /** With this few cards left in the library the library-out deck is taken to win the turn it is cast in. */
     private static final int PACT_LIBRARY_OUT_LEFT = 3;
+
+    /**
+     * Whether the spell would cut both libraries (Doomsday Excruciator cast, or Superior Spider-Man whose only creature
+     * to copy in the graveyards is such a card) while the AI has nothing to empty the opponent's library faster.
+     */
+    static boolean cutsTheLibraries(final Player ai, final SpellAbility sa, final ComboPlan plan) {
+        final Card host = sa.getHostCard();
+        if (plan == null || !plan.has(ComboPlan.Kind.LIBRARY_CUT) || host == null || !sa.isSpell() || host.isLand()) {
+            return false;
+        }
+        if (plan.libraryCutSafe(ai)) {
+            return false;
+        }
+        if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT, host.getName())) {
+            return true;
+        }
+        if (!host.isCreature() || !AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, host.getName())) {
+            return false;
+        }
+        boolean cut = false;
+        for (final Player p : ai.getGame().getPlayers()) {
+            for (final Card c : p.getCardsIn(ZoneType.Graveyard)) {
+                if (!c.isCreature()) {
+                    continue;
+                }
+                if (!AiCardLists.has(AiCardLists.Role.LIBRARY_CUT, c.getName())) {
+                    return false; // something else to copy: the choice avoids the cut
+                }
+                cut = true;
+            }
+        }
+        return cut;
+    }
+
+    /**
+     * Whether the ability transforms a creature of the airbend loop (Aang, Swift Savior: Waterbend {8}) while the loop
+     * still has a creature to airbend and has not reached its cap. The transformed side airbends nothing, so the loop
+     * would end there (and the Ally tokens that paid for it are tapped). After the cap, or without Doc Aurlock, it is fine.
+     */
+    static boolean endsAirbendLoop(final Player ai, final SpellAbility sa, final ComboPlan plan) {
+        final Card host = sa.getHostCard();
+        if (plan == null || host == null || sa.isSpell() || !ApiType.SetState.equals(sa.getApi())
+                || !"Transform".equals(sa.getParam("Mode"))) {
+            return false;
+        }
+        return plan.airbendLoopLive(ai, host);
+    }
 
     private static boolean isNamedDiscard(final SpellAbility sa) {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
