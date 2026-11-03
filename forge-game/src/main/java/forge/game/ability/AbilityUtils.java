@@ -582,6 +582,29 @@ public class AbilityUtils {
             val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
         }
 
+        else if (ability != null && calcX[0].startsWith("TriggerCount")) {
+            // TriggerCount is similar to a regular Count, but just
+            // pulls Integer Values from Trigger objects
+            final CardTraitBase root = ability instanceof SpellAbility sa ? sa.getRootAbility() : ability;
+            final String[] l = calcX[1].split("/");
+            final String m = CardFactoryUtil.extractOperators(calcX[1]);
+            final Object to = root.getTriggeringObject(AbilityKey.fromString(l[0]));
+            Integer count = null;
+            if (to instanceof Iterable<?>) {
+                @SuppressWarnings("unchecked")
+                Iterable<Integer> numbers = (Iterable<Integer>) to;
+                if (calcX[0].endsWith("Max")) {
+                    count = Aggregates.max(numbers);
+                } else {
+                    count = Aggregates.sum(numbers);
+                }
+            } else {
+                count = (Integer) to;
+            }
+
+            val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
+        }
+
         // All the following only work for SpellAbilities
         else if (ability instanceof SpellAbility sa) {
             // Player attribute counting
@@ -638,28 +661,6 @@ public class AbilityUtils {
             else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("SpellTargeted")) {
                 final SpellAbility sat = Iterables.getFirst(getDefinedSpellAbilities(card, calcX[0], sa), null);
                 val = sat == null ? 0 : xCount(sat.getHostCard(), calcX[1], sat);
-            }
-            else if (calcX[0].startsWith("TriggerCount")) {
-                // TriggerCount is similar to a regular Count, but just
-                // pulls Integer Values from Trigger objects
-                final SpellAbility root = sa.getRootAbility();
-                final String[] l = calcX[1].split("/");
-                final String m = CardFactoryUtil.extractOperators(calcX[1]);
-                final Object to = root.getTriggeringObject(AbilityKey.fromString(l[0]));
-                Integer count = null;
-                if (to instanceof Iterable<?>) {
-                    @SuppressWarnings("unchecked")
-                    Iterable<Integer> numbers = (Iterable<Integer>) to;
-                    if (calcX[0].endsWith("Max")) {
-                        count = Aggregates.max(numbers);
-                    } else {
-                        count = Aggregates.sum(numbers);
-                    }
-                } else {
-                    count = (Integer) to;
-                }
-
-                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {
                 // ReplaceCount is similar to a regular Count, but just
