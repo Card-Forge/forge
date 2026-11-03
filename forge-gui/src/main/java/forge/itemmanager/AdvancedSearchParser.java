@@ -8,6 +8,7 @@ import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.itemmanager.advancedsearchparsers.InParser;
+import forge.itemmanager.advancedsearchparsers.ManaCostSearchParser;
 import forge.itemmanager.advancedsearchparsers.RarityParser;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
@@ -136,6 +137,11 @@ public abstract class AdvancedSearchParser {
                     predicate = CardRulesPredicates.cmc(op, cmcValue);
                 }
                 catch (NumberFormatException ignored) {}
+                break;
+
+            case "m":
+            case "mana":
+                predicate = ManaCostSearchParser.handle(opUsed, valueStr);
                 break;
 
             case "t":

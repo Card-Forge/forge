@@ -85,6 +85,23 @@ You can find cards of a specific mana value with `manavalue`, `mv`, or `cmc`, co
 *Exemples:*
 `c:u mv=5` - Blue cards with mana value 5
 
+#### Keyword(s): `m:`, `mana:`
+Find cards by mana symbols in their cost (Comprehensive Rules notation). Shorthand is allowed for non-split symbols (`G` is the same as `{G}`); wrap complex symbols in braces (e.g. `{R/P}`, `{2/W}`).
+
+Operators compare symbol multisets:
+- `:` or `>=` — cost contains at least these symbols
+- `=` — exact cost
+- `>` / `<` — strict superset / subset
+- `<=` — cost is a subset of the query
+- `!=` — not an exact match
+
+*Exemples:*
+`m:{R/P}` - Cards with Phyrexian red mana in their cost
+`mana:{G}{U}` - Cards with at least one green and one blue mana in their cost
+`m:2WW` - Cards with at least two generic and two white mana in their cost
+`m>3WU` - Cards that cost more than three generic, one white, and one blue
+`m={R}` - Cards that cost exactly `{R}`
+
 #### Keyword(s): `is:hybrid`
 Find cards with hybrid mana symbols in their cost.
 

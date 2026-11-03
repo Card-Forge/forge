@@ -1,5 +1,6 @@
 package forge.card;
 
+import forge.card.mana.ManaCost;
 import forge.util.CardTranslation;
 import forge.util.ComparableOp;
 import forge.util.IterableUtil;
@@ -237,6 +238,45 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> costsPhyrexianMana() {
         return card -> card.getManaCost().hasPhyrexian();
+    }
+
+    /**
+     * Predicate comparing a card's mana cost to {@code query} using multiset
+     * symbol semantics. {@code :} and {@code >=} mean "contains at least";
+     * {@code =} means exact match.
+     *
+     * @param opUsed the operator string from the search token
+     * @param query  the parsed query mana cost
+     * @return the predicate, or null if the operator is unsupported
+     */
+    public static Predicate<CardRules> manaCost(final String opUsed, final ManaCost query) {
+        if (query == null || opUsed == null) {
+            return null;
+        }
+        switch (opUsed) {
+            case ":":
+            case ">=":
+                return card -> card.getManaCost().containsAtLeast(query);
+            case "=":
+            case "!":
+                return card -> card.getManaCost().isSameManaCost(query);
+            case ">":
+                return card -> {
+                    final ManaCost cost = card.getManaCost();
+                    return cost.containsAtLeast(query) && !cost.isSameManaCost(query);
+                };
+            case "<":
+                return card -> {
+                    final ManaCost cost = card.getManaCost();
+                    return query.containsAtLeast(cost) && !cost.isSameManaCost(query);
+                };
+            case "<=":
+                return card -> query.containsAtLeast(card.getManaCost());
+            case "!=":
+                return card -> !card.getManaCost().isSameManaCost(query);
+            default:
+                return null;
+        }
     }
 
     /**
