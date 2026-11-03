@@ -2,6 +2,7 @@ package forge.adventure.archipelago;
 
 import com.github.tommyettinger.textra.TypingLabel;
 import io.github.archipelagomw.ClientStatus;
+import io.github.archipelagomw.network.client.BouncePacket;
 
 import java.net.URISyntaxException;
 import java.util.*;
@@ -70,7 +71,14 @@ public class Archipelago {
     // Not queued: a death while disconnected isn't sent.
     public void sendDeathLink(String cause) {
         if (APClient != null && APClient.isConnected() && APClient.getSlotData() != null && APClient.getSlotData().DeathLink == 1) {
-            APClient.sendDeathlink(APClient.getMyName(), cause);
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("time", System.currentTimeMillis() / 1000.0);
+            data.put("source", APClient.getMyName());
+            data.put("cause", cause);
+            BouncePacket deathLink = new BouncePacket();
+            deathLink.tags = new String[]{"DeathLink"};
+            deathLink.setData(data);
+            APClient.sendBounce(deathLink);
         }
     }
 
