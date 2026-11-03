@@ -3260,7 +3260,7 @@ public class AbilityUtils {
             return num;
         }
 
-        final String[] s = operators.split("\\.");
+        final String[] s = operators.split("\\.", 2);
         int secondaryNum = 0;
 
         try {
