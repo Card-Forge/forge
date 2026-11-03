@@ -34,6 +34,7 @@ import forge.deck.FormatChoices;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gui.GuiChoose;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -52,7 +53,6 @@ import forge.screens.deckeditor.controllers.CStatistics;
 import forge.screens.deckeditor.controllers.DeckController;
 import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.ArchivedFormatMenu;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 import forge.util.Localizer;
@@ -154,7 +154,10 @@ public enum CDeckEditorUI implements ICDoc {
     public void selectFormat(final Object choice) {
         if (choice == FormatChoices.ARCHIVED) {
             syncFormatDropdown();
-            ArchivedFormatMenu.show(VCurrentDeck.SINGLETON_INSTANCE.getCbFormat(), this::selectFormat);
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                selectFormat(archived);
+            }
             return;
         }
         editorFormat = choice instanceof GameFormat format ? format : null;

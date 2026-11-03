@@ -27,6 +27,7 @@ import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.CommanderChooser;
 import forge.gui.FThreads;
+import forge.gui.GuiChoose;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
@@ -1232,7 +1233,10 @@ public class VLobby implements ILobbyView {
         }
         if (selected == FormatChoices.ARCHIVED) {
             syncGameFormatCombo();
-            ArchivedFormatMenu.show(cboFormatPanel.getComboBox(), this::applyFormatChoice);
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                applyFormatChoice(archived);
+            }
             return;
         }
         if (selected == lobby.getFormatChoice()) { return; }

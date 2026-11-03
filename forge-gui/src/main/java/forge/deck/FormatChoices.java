@@ -33,13 +33,6 @@ public final class FormatChoices {
         }
     };
 
-    /** A folder of archived format files: its subfolders by name, and its formats newest first. */
-    public record ArchivedFolder(Map<String, ArchivedFolder> folders, List<GameFormat> formats) {
-        private ArchivedFolder() {
-            this(new TreeMap<>(), new ArrayList<>());
-        }
-    }
-
     private FormatChoices() {
     }
 
@@ -84,18 +77,28 @@ public final class FormatChoices {
         return choices;
     }
 
-    /** The archived formats by the folders their files are in. */
-    public static ArchivedFolder getArchivedFolders() {
-        final ArchivedFolder root = new ArchivedFolder();
+    /**
+     * The archived formats under a heading for each folder their files are in, newest first in each folder. Formats
+     * in no folder follow under Other.
+     */
+    public static List<Object> getArchivedChoices() {
+        final Map<String, List<GameFormat>> folders = new TreeMap<>();
         for (final GameFormat format : FModel.getFormats().getArchivedList()) {
-            ArchivedFolder folder = root;
-            for (final String name : folderPath(format)) {
-                folder = folder.folders().computeIfAbsent(name, k -> new ArchivedFolder());
-            }
-            folder.formats().add(format);
+            folders.computeIfAbsent(String.join(" / ", folderPath(format)), k -> new ArrayList<>()).add(format);
         }
-        sortNewestFirst(root);
-        return root;
+        final List<GameFormat> unfiled = folders.remove("");
+        final List<Object> choices = new ArrayList<>();
+        folders.forEach((folder, formats) -> addFolder(choices, folder, formats));
+        if (unfiled != null) {
+            addFolder(choices, Localizer.getInstance().getMessage("lblOther"), unfiled);
+        }
+        return choices;
+    }
+
+    private static void addFolder(final List<Object> choices, final String heading, final List<GameFormat> formats) {
+        choices.add(new ListHeading(heading));
+        formats.sort(Comparator.comparing(GameFormat::getEffectiveDate).reversed());
+        choices.addAll(formats);
     }
 
     /** The format's folders, without a top folder named after a format type, such as Archived or Casual. */
@@ -106,10 +109,5 @@ public final class FormatChoices {
             path.remove(0);
         }
         return path;
-    }
-
-    private static void sortNewestFirst(final ArchivedFolder folder) {
-        folder.formats().sort(Comparator.comparing(GameFormat::getEffectiveDate).reversed());
-        folder.folders().values().forEach(FormatChoices::sortNewestFirst);
     }
 }

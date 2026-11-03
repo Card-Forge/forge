@@ -54,6 +54,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.GuiChoose;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -192,7 +193,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbFormat.setChangedHandler(event -> {
             if (cbFormat.getSelectedItem() == FormatChoices.ARCHIVED) {
                 updateFormatSelection();
-                Forge.openScreen(new ArchivedFormatScreen(this::applyFormatChoice));
+                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices(), archived -> {
+                    if (archived != null) {
+                        applyFormatChoice(archived);
+                    }
+                });
                 return;
             }
             if (lobby.hasControl() && cbFormat.getSelectedItem() != lobby.getFormatChoice()) {
