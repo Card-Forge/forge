@@ -89,6 +89,19 @@ pair_partner | Painter's Servant
 # with Lion's Eye Diamond cracked in response the dredgers are in the graveyard before the first draw
 dredge_refill | Breakthrough
 
+# ------------------------------------------------------------------------------------------------ Vintage metagame
+# Oath of Druids: a second Oath does nothing (Atraxa, the creature it fetches, is already a cheat_target, and Show and
+# Tell with four Atraxa is read as the cheat deck by the cheat lists above)
+combo_engine | Oath of Druids
+
+# Time Vault wins an extra turn per untap (Manifold Key, Voltaic Key): it counts with the artifact payoffs
+artifact_payoff | Time Vault
+
+# Lurrus Vault Key: Goblin Engineer puts Time Vault in the graveyard and returns it (as does Goblin Welder against an
+# artifact), Manifold Key untaps it: the two vault pieces and the two goblins are held together as one pair
+pair_engine | Time Vault | Manifold Key
+pair_partner | Goblin Engineer | Goblin Welder
+
 # ------------------------------------------------------------------------------------------------ Standard metagame
 # Superior Spider-Man enters as a copy of any creature card in a graveyard and "if you cast it" triggers still work:
 # discard or mill Bringer of the Last Gift (or Uldaros Theorix) and cast Spider-Man for four mana

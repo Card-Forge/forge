@@ -3661,6 +3661,12 @@ public final class ComboPlan {
         if (tutorStorm != null && destination == ZoneType.Library && origin.contains(ZoneType.Hand)) {
             return tutorStormPutBack(ai, options); // Brainstorm: what goes back is what the kill needs least
         }
+        if (destination == ZoneType.Graveyard && origin.contains(ZoneType.Library) && has(Kind.PAIR)) {
+            final Card piece = VaultLoop.pick(ai, options); // Goblin Engineer: the vault, then what untaps it
+            if (piece != null) {
+                return piece;
+            }
+        }
         Card best = null;
         int bestValue = Integer.MIN_VALUE;
         if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Hand)) {

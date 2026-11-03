@@ -1931,6 +1931,12 @@ public class AiController {
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
+        if (flatMonteCarloActive()) {
+            final SpellAbility vault = VaultLoop.sureCast(player, saList);
+            if (vault != null) {
+                return vault; // Time Vault and what untaps it: an extra turn every turn, no rollouts needed
+            }
+        }
         // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
         final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
         if (sureStifle != null) {
