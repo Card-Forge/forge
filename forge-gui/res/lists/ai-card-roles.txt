@@ -88,3 +88,37 @@ pair_partner | Painter's Servant
 # Draw spells that throw the rest of the hand away (X=0): with dredgers in the graveyard every draw is a dredge, and
 # with Lion's Eye Diamond cracked in response the dredgers are in the graveyard before the first draw
 dredge_refill | Breakthrough
+
+# ------------------------------------------------------------------------------------------------ Standard metagame
+# Superior Spider-Man enters as a copy of any creature card in a graveyard and "if you cast it" triggers still work:
+# discard or mill Bringer of the Last Gift (or Uldaros Theorix) and cast Spider-Man for four mana
+reanimation_spell | Superior Spider-Man
+big_target | Uldaros Theorix
+
+# Doc Aurlock makes spells cast from exile cost {2} less, and airbend (Aang, Swift Savior; Appa, Steadfast Guardian;
+# Airbender Ascension) lets the owner cast the exiled card for {2}: every airbent creature is recast for free and
+# airbends the next one (Appa makes an Ally token for each). Under Omniscience (4c Kona) the same cards, the wish
+# creature and the tutor are free; Kona and Formidable Speaker (untaps Kona) put Omniscience in from the hand
+free_cast_engine | Doc Aurlock, Grizzled Genius | Semblance Anvil
+free_cast_target | Aang, Swift Savior | Appa, Steadfast Guardian | Marang River Regent | North Wind Avatar
+free_cast_target | Formidable Speaker | Kona, Rescue Beastie
+free_cast_target | Aang, Airbending Master | Aang, the Last Airbender | Appa, Loyal Sky Bison
+
+# Devastating Onslaught makes X hasty copies of a creature: with Temur Battlecrier and a power 4 creature it is cheap, and
+# the enter triggers of Marang River Regent, Dragonhawk and Quantum Riddler happen X times
+copy_engine | Devastating Onslaught
+copy_target | Marang River Regent | Dragonhawk, Fate's Tempest | Quantum Riddler | Outcaster Trailblazer
+
+# Dimir Excruciator: Doomsday Excruciator (cast, or copied by Superior Spider-Man) leaves both players six cards in the
+# library; Restless Reef (mills four whenever it attacks) and Insatiable Avarice (the opponent draws three) then empty the
+# opponent's library first. The AI never cuts the libraries without one of them
+library_cut | Doomsday Excruciator
+library_cut_finisher | Restless Reef | Insatiable Avarice
+
+# The airbend loop: every airbend (Aang, Appa) exiles a creature that its owner may cast for {2}, which a reducer of two
+# makes free (Semblance Anvil counts only with a creature imprinted). Each recast airbends the other one again, so the loop
+# never ends by itself; the AI stops it after a number of casts (see ComboPlan.airbendLoopCap) unless a payoff drains the
+# opponent for every cast or creature that enters: Bontu's Monument (each creature spell), Kalastria Healer (each Ally,
+# and Appa makes an Ally token for every spell cast from exile), the other drain creatures
+airbend_reducer | Doc Aurlock, Grizzled Genius | Semblance Anvil
+airbend_payoff | Bontu's Monument | Kalastria Healer | Zulaport Cutthroat | Cruel Celebrant | Blood Artist
