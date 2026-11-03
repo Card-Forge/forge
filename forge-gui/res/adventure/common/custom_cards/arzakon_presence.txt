@@ -1,0 +1,6 @@
+Name:Arzakon's Presence
+ManaCost:no cost
+Colors:white,blue,black,red,green
+Types:Enchantment
+Text:Arzakon begins the game on the battlefield.
+Oracle:Arzakon begins the game on the battlefield.
