@@ -1233,6 +1233,7 @@ public class VLobby implements ILobbyView {
         if (selected == lobby.getFormatChoice()) { return; }
 
         lobby.setFormatChoice(selected);
+        lobby.saveSetup();
         update(false);
         updateActionButtons();
     }
@@ -1278,6 +1279,7 @@ public class VLobby implements ILobbyView {
                 } else {
                     lobby.removeVariant(variantType);
                 }
+                lobby.saveSetup();
                 VLobby.this.update(false);
                 VLobby.this.updateActionButtons();
             });
