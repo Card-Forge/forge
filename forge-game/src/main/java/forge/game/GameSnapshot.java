@@ -492,6 +492,8 @@ public class GameSnapshot {
         newCard.setGameTimestamp(fromCard.getGameTimestamp());
         newCard.setLayerTimestamp(fromCard.getLayerTimestamp());
         newCard.setTapped(fromCard.isTapped());
+        newCard.setCounters(HashMultiset.create(fromCard.getCounters()));
+        newCard.setDamage(fromCard.getDamage());
         newCard.setFaceDown(fromCard.isFaceDown());
         newCard.setManifested(fromCard.getManifestedSA());
         newCard.setSickness(fromCard.hasSickness());
