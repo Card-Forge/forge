@@ -19,7 +19,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
@@ -46,21 +48,24 @@ final class ScryfallSetSync {
      */
     static boolean sync(String setCode) throws UnsupportedEncodingException {
         Map<String, Map<String, String[]>> byCn = new HashMap<>();
-        String url = searchUrl(setCode);
         try {
-            while (url != null) {
-                if (ScryfallRateLimiter.isCoolingDown()) break; // back off; a later sync retries
+            for (String firstPage : searchUrls(setCode)) {
+                String url = firstPage;
+                while (url != null) {
+                    if (ScryfallRateLimiter.isCoolingDown()) break; // back off; a later sync retries
 
-                JsonObject page = fetchJson(url);
-                if (page == null) break; // 404: no such set / no matching cards
+                    JsonObject page = fetchJson(url);
+                    if (page == null) break; // 404: no such set / no matching cards
 
-                JsonArray data = page.has("data") ? page.getAsJsonArray("data") : new JsonArray();
-                for (JsonElement el : data) {
-                    addCard(byCn, el.getAsJsonObject());
+                    JsonArray data = page.has("data") ? page.getAsJsonArray("data") : new JsonArray();
+                    for (JsonElement el : data) {
+                        addCard(byCn, el.getAsJsonObject());
+                    }
+
+                    boolean hasMore = page.has("has_more") && page.get("has_more").getAsBoolean();
+                    url = hasMore && page.has("next_page") ? page.get("next_page").getAsString() : null;
                 }
-
-                boolean hasMore = page.has("has_more") && page.get("has_more").getAsBoolean();
-                url = hasMore && page.has("next_page") ? page.get("next_page").getAsString() : null;
+                if (ScryfallRateLimiter.isCoolingDown()) break;
             }
         } catch (Exception e) {
             Logger.debug("ScryfallSetSync: could not build set '{}' from Scryfall: {}", setCode, e.getMessage());
@@ -127,20 +132,28 @@ final class ScryfallSetSync {
         return dot >= 0 ? filename.substring(0, dot) : filename;
     }
 
-    private static String searchUrl(String setCode) throws UnsupportedEncodingException {
+    /**
+     * The searches that build a set: its default-language listing, then the user's language if that is not English.
+     * Scryfall's default listing has every print in English, or in the one language it exists in when there is
+     * no English version (Neon Dynasty 293 is Japanese, 428 Phyrexian); "lang:en" would drop those, so it is not
+     * used. "lang:any" fetched ~10x more pages (every printed language) than needed and was tripping Scryfall's
+     * rate limit before finishing a set, so the preferred language is the only other one that is asked for.
+     */
+    static List<String> searchUrls(String setCode) throws UnsupportedEncodingException {
         String base = searchBaseUrlOverride != null ? searchBaseUrlOverride : DEFAULT_SEARCH_URL;
-        // Always fetch English: CdnUuidCache.getCdnUrl() falls back to it, and virtually every
-        // edition's cards are English. "lang:any" fetched ~10x more pages (every printed
-        // language) than needed and was tripping Scryfall's rate limit before finishing a set --
-        // so if the user has a non-English language preference, add just that one language too,
-        // instead of every language.
+        List<String> queries = new ArrayList<>();
+        queries.add("set:" + setCode);
         String preferredLang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_DOWNLOAD_LANG);
-        String query = (preferredLang != null && !preferredLang.isEmpty() && !"en".equalsIgnoreCase(preferredLang))
-                ? "set:" + setCode + " (lang:en or lang:" + preferredLang + ")"
-                : "set:" + setCode + " lang:en";
-        // include_extras so that token sets (e.g. TNEO) return their tokens as well
-        // Fix encode for Android 12 and below
-        return base + "?unique=prints&include_extras=true&q=" + URLEncoder.encode(query, "UTF-8");
+        if (preferredLang != null && !preferredLang.isEmpty() && !"en".equalsIgnoreCase(preferredLang)) {
+            queries.add("set:" + setCode + " lang:" + preferredLang);
+        }
+        List<String> urls = new ArrayList<>();
+        for (String query : queries) {
+            // include_extras so that token sets (e.g. TNEO) return their tokens as well
+            // Fix encode for Android 12 and below
+            urls.add(base + "?unique=prints&include_extras=true&q=" + URLEncoder.encode(query, "UTF-8"));
+        }
+        return urls;
     }
 
     /** Shared with {@link ScryfallBulkDataSync}. */

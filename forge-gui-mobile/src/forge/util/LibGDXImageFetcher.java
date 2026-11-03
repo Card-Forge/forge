@@ -5,6 +5,7 @@ import forge.Forge;
 import forge.adventure.data.ConfigData;
 import forge.adventure.util.Config;
 import forge.gui.GuiBase;
+import forge.gui.download.GuiDownloadService;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import io.sentry.Sentry;
@@ -16,9 +17,35 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class LibGDXImageFetcher extends ImageFetcher {
+    /**
+     * Scrolling asks for many images at once, and the shared service pool only has as many threads as the device
+     * has cores although a download mostly waits for the network. Give the downloads as many workers as the bulk
+     * downloader uses; the ones that are idle for a while end.
+     */
+    private static final ExecutorService DOWNLOAD_POOL = newDownloadPool();
+
+    private static ExecutorService newDownloadPool() {
+        final ThreadPoolExecutor pool = new ThreadPoolExecutor(GuiDownloadService.PARALLEL_DOWNLOADS, GuiDownloadService.PARALLEL_DOWNLOADS,
+                30, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), r -> {
+            Thread t = new Thread(r, "image-download");
+            t.setDaemon(true);
+            return t;
+        });
+        pool.allowCoreThreadTimeOut(true);
+        return pool;
+    }
+
+    @Override
+    protected ExecutorService getDownloadPool() {
+        return DOWNLOAD_POOL;
+    }
+
     @Override
     protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
         if (!Forge.isMobileAdventureMode) {
@@ -50,7 +77,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
         }
 
         private boolean doFetch(String urlToDownload) throws IOException {
-            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE)) {
+            if (isHostedDownloadDisabled(urlToDownload)) {
                 // Don't try to download card images from cardforge servers
                 return false;
             }
@@ -84,8 +111,8 @@ public class LibGDXImageFetcher extends ImageFetcher {
 
                 if (responseCode == 429 && ScryfallRateLimiter.isApiUrl(urlToDownload)) {
                     Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
-                    ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
                 }
+                ScryfallRateLimiter.noteIfRateLimited(responseCode, urlToDownload, c.getHeaderField("Retry-After"));
 
                 c.disconnect();
                 return false;

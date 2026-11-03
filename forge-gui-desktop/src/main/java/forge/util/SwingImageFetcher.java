@@ -32,7 +32,7 @@ public class SwingImageFetcher extends ImageFetcher {
         }
 
         private boolean doFetch(String urlToDownload) throws IOException {
-            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE)) {
+            if (isHostedDownloadDisabled(urlToDownload)) {
                 // Don't try to download card images from cardforge servers
                 return false;
             }

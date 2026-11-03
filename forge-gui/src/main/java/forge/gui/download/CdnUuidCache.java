@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -62,6 +63,34 @@ public final class CdnUuidCache {
             "zhs", // Chinese Simplified
             "zht"  // Chinese Traditional
     };
+
+    /**
+     * Order in which Scryfall lists its languages. When a print has neither the preferred language nor English
+     * (Neon Dynasty 293 only exists in Japanese, 428 in Phyrexian) the first of these the cache knows is used.
+     */
+    private static final String[] LANGUAGE_PRIORITY = {
+            "en", "es", "fr", "de", "it", "pt", "ja", "ko", "ru", "zhs", "zht", "he", "la", "grc", "ar", "sa", "ph", "qya", "dw"
+    };
+
+    /** Forge writes the back face of a collector number as "14☇"; Scryfall numbers that card "14" and calls it the back face. */
+    private static final char BACK_FACE_MARK = '\u2607';
+
+    /** Position of {@code lang} in {@link #LANGUAGE_PRIORITY}; languages it does not list come last. */
+    static int languageRank(String lang) {
+        for (int i = 0; i < LANGUAGE_PRIORITY.length; i++) {
+            if (LANGUAGE_PRIORITY[i].equals(lang)) return i;
+        }
+        return LANGUAGE_PRIORITY.length;
+    }
+
+    private static String withoutBackFaceMark(String collectorNum) {
+        return collectorNum.charAt(collectorNum.length() - 1) == BACK_FACE_MARK
+                ? collectorNum.substring(0, collectorNum.length() - 1) : collectorNum;
+    }
+
+    private static boolean hasBackFaceMark(String collectorNum) {
+        return !collectorNum.isEmpty() && collectorNum.charAt(collectorNum.length() - 1) == BACK_FACE_MARK;
+    }
 
     /** Used when set was looked up and no data exists. */
     private static final Map<String, Map<String, LangUuids>> MISSING_SET = Collections.emptyMap();
@@ -200,6 +229,7 @@ public final class CdnUuidCache {
     public static boolean isAvailableInLanguage(String scryfallCode, String collectorNum, String lang) {
         if (scryfallCode == null || collectorNum == null || lang == null) return false;
         String setCode = scryfallCode.toLowerCase();
+        if (!collectorNum.isEmpty()) collectorNum = withoutBackFaceMark(collectorNum);
 
         Map<String, Map<String, LangUuids>> cardMap = ensureSetLoadedReadOnly(setCode);
         if (cardMap == MISSING_SET) return false;
@@ -229,6 +259,10 @@ public final class CdnUuidCache {
                                            String lang, String face, String size) {
         if (scryfallCode == null || collectorNum == null) return null;
         String setCode = scryfallCode.toLowerCase();
+        if (hasBackFaceMark(collectorNum)) {
+            collectorNum = withoutBackFaceMark(collectorNum);
+            face = "back";
+        }
 
         Map<String, Map<String, LangUuids>> cardMap = ensureSetLoadedReadOnly(setCode);
         if (cardMap == MISSING_SET) return null;
@@ -281,7 +315,8 @@ public final class CdnUuidCache {
      *
      * @param scryfallCode lowercase Scryfall set code
      * @param collectorNum collector number
-     * @param lang preferred language code
+     * @param lang preferred language code; when the print has no image in it, English is used, and
+     *             when it has no English either, the language it does exist in (see {@link #resolveWithFallback})
      * @param face {@code ""}/{@code "front"} or {@code "back"}
      * @param size {@code "normal"} or {@code "art_crop"}
      */
@@ -289,6 +324,10 @@ public final class CdnUuidCache {
                                    String lang, String face, String size) {
         if (scryfallCode == null || collectorNum == null) return null;
         String setCode = scryfallCode.toLowerCase();
+        if (hasBackFaceMark(collectorNum)) {
+            collectorNum = withoutBackFaceMark(collectorNum);
+            face = "back";
+        }
         boolean wantBack = "back".equals(face);
 
         Map<String, Map<String, LangUuids>> cardMap = ensureSetLoaded(setCode);
@@ -305,7 +344,11 @@ public final class CdnUuidCache {
         return cdnUrl(uuid, side, size);
     }
 
-    /** The real (non-miss) entry for {@code lang}, or its English fallback, if either has real data. */
+    /**
+     * The real (non-miss) entry for {@code lang}; else the English one; else, for a print that exists in no English
+     * version, the one it does have. Only when the cache knows nothing about the print does this return null, which
+     * is the one case where the caller should go to Scryfall's API.
+     */
     private static LangUuids resolveWithFallback(Map<String, Map<String, LangUuids>> cardMap, String cn, String lang) {
         Map<String, LangUuids> langMap = cardMap.get(cn);
         if (langMap == null) return null;
@@ -316,6 +359,15 @@ public final class CdnUuidCache {
         if (!FALLBACK_LANG.equals(lang)) {
             LangUuids fallback = langMap.get(FALLBACK_LANG);
             if (fallback != null && !fallback.isMiss()) return fallback;
+        }
+
+        for (String code : LANGUAGE_PRIORITY) {
+            LangUuids other = langMap.get(code);
+            if (other != null && !other.isMiss()) return other;
+        }
+        // a language that is not in the list above
+        for (Map.Entry<String, LangUuids> entry : new TreeMap<>(langMap).entrySet()) {
+            if (!entry.getValue().isMiss()) return entry.getValue();
         }
         return null;
     }

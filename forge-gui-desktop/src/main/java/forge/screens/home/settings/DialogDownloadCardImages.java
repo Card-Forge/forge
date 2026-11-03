@@ -191,6 +191,7 @@ public class DialogDownloadCardImages {
         lblMissing.setText(localizer.getMessage("lblMissing") + ": ...");
 
         final Predicate<PaperCard> combined = buildCurrentFilter();
+        final Predicate<CardEdition> editionFilter = buildCurrentEditionFilter();
         final boolean withTokens = cbIncludeTokens.isSelected();
 
         FThreads.invokeInBackgroundThread(() -> {
@@ -209,6 +210,7 @@ public class DialogDownloadCardImages {
                 }
             }
             if (withTokens) {
+                GuiDownloadFilteredCardImages.addTokenOnlyEditions(tokenEditions, editionFilter);
                 final int[] tokens = GuiDownloadFilteredCardImages.countTokenImages(tokenEditions);
                 total += tokens[0];
                 downloaded += tokens[1];
@@ -226,6 +228,16 @@ public class DialogDownloadCardImages {
         });
     }
 
+    /**
+     * Whether an edition is selected, for the editions that have no cards of their own (Old Border Custom, Duelist
+     * Magazine): there is no search text and the edition is in the chosen format or sets.
+     */
+    private Predicate<CardEdition> buildCurrentEditionFilter() {
+        final boolean noSearch = txtSearch.getText().trim().isEmpty();
+        final GameFormat format = selectedFormat;
+        return edition -> noSearch && (format == null || format.isSetLegal(edition.getCode()));
+    }
+
     /** Builds the combined card predicate from the current search field and format selection. */
     private Predicate<PaperCard> buildCurrentFilter() {
         Predicate<PaperCard> textPred = SFilterUtil.buildTextFilter(
@@ -241,7 +253,7 @@ public class DialogDownloadCardImages {
     // =========================================================================
 
     private void startDownload() {
-        new GuiDownloader(new GuiDownloadFilteredCardImages(buildCurrentFilter(), cbIncludeTokens.isSelected(), cbOverwrite.isSelected())).show();
+        new GuiDownloader(new GuiDownloadFilteredCardImages(buildCurrentFilter(), buildCurrentEditionFilter(), cbIncludeTokens.isSelected(), cbOverwrite.isSelected())).show();
     }
 
     private void clearCdnCache() {
