@@ -45,7 +45,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;ArzakonDefeated&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arzakon&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arzakon&quot;], &quot;startBattleWithCardInCommandZone&quot;: [&quot;Arzakon's Presence&quot;]}"/>
     <property name="enemy" value="Arzakon"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
@@ -85,7 +85,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;: &quot;ArzakonDefeated&quot;, &quot;val&quot;: 1}}, {&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arzakon&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arzakon&quot;], &quot;startBattleWithCardInCommandZone&quot;: [&quot;Arzakon's Presence&quot;]}"/>
     <property name="enemy" value="Arzakon"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
