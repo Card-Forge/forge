@@ -36,7 +36,7 @@ public class PumpAllAi extends PumpAiBase {
         if (logic.equals("UntapCombatTrick")) {
             PhaseHandler ph = ai.getGame().getPhaseHandler();
             if (!(ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai)
-                    || (!ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)))) {
+                    || (!ph.isPlayerTurn(ai) && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }

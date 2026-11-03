@@ -115,7 +115,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     public final boolean isPlayerTurn(final Player player) {
-        return player.equals(playerTurn);
+        return playerTurn != null && playerTurn.equals(player);
     }
 
     public final Player getPlayerTurn() {
@@ -126,6 +126,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
         resetPriority();
+    }
+
+    /** True if the next turn is this player's, or under shared team turns their team's (CR 805.4). */
+    public final boolean isPlayerNextTurn(final Player player) {
+        return getNextTurn().equals(player);
     }
 
     public final Player getPreviousPlayerTurn() {
@@ -900,7 +905,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     public final synchronized boolean is(final PhaseType phase0, final Player player0) {
-        return phase == phase0 && playerTurn.equals(player0);
+        return phase == phase0 && isPlayerTurn(player0);
     }
     public final synchronized boolean is(final PhaseType phase0) {
         return phase == phase0;

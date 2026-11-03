@@ -75,7 +75,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         }
         if (duration == null) {
             sb.append(".");
-        } else if (game.getPhaseHandler().getPlayerTurn().equals(player)) {
+        } else if (game.getPhaseHandler().isPlayerTurn(player)) {
             sb.append(" of this turn.");
         } else {
             sb.append(" of your next turn.");

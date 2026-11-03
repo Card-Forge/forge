@@ -184,7 +184,7 @@ public class AttachAi extends SpellAbilityAi {
         boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
         boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
         boolean willCastAtEOT = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && game.getPhaseHandler().getNextTurn().equals(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
+                && game.getPhaseHandler().isPlayerNextTurn(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
 
         boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willDieNow || willRespondToStack || willCastAtEOT || willCastEarly;
 

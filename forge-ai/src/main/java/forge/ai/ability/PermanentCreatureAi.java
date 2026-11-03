@@ -92,10 +92,10 @@ public class PermanentCreatureAi extends PermanentAi {
 
         boolean isOppTurn = ph.getPlayerTurn().isOpponentOf(ai);
         boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
-        boolean isEOTBeforeMyTurn = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        boolean isEOTBeforeMyTurn = ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai);
         boolean isMyDeclareBlockers = ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai) && ph.inCombat();
         boolean isOppDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && isOppTurn && ph.inCombat();
-        boolean isMyMain1OrLater = ph.is(PhaseType.MAIN1, ai) || (ph.getPhase().isAfter(PhaseType.MAIN1) && ph.getPlayerTurn().equals(ai));
+        boolean isMyMain1OrLater = ph.is(PhaseType.MAIN1, ai) || (ph.getPhase().isAfter(PhaseType.MAIN1) && ph.isPlayerTurn(ai));
         boolean canRespondToStack = false;
         if (!game.getStack().isEmpty()) {
             SpellAbility peekSa = game.getStack().peekAbility();
@@ -168,7 +168,7 @@ public class PermanentCreatureAi extends PermanentAi {
         } else if (hasETBTrigger && canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack)) {
             // Try to do something meaningful in response to an opposing effect on stack. Note that this is currently
             // too random to likely be meaningful, serious improvement might be needed.
-            return canCastAtOppTurn || ph.getPlayerTurn().equals(ai);
+            return canCastAtOppTurn || ph.isPlayerTurn(ai);
         } else {
             // Doesn't have a ETB trigger and doesn't seem to be good as an ambusher, try to surprise the opp before my turn
             // TODO: maybe implement a way to reserve mana for this
