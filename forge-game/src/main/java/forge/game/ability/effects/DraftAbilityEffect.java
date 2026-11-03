@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -10,7 +9,12 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class DraftAbilityEffect extends SpellAbilityEffect {
 
@@ -38,7 +42,7 @@ public class DraftAbilityEffect extends SpellAbilityEffect {
         for (String sVar : abilities.subList(0, 3)) {
             draftOptions.put(AbilityFactory.getAbility(source, sVar), sVar);
         }
-        final String title = Localizer.getInstance().getMessage("lblChooseRoom");
+        final String title = Localizer.getInstance().getMessage("lblChooseAbilityToDraft");
         SpellAbility chosen = player.getController().chooseSingleSpellForEffect(List.copyOf(draftOptions.keySet()), sa, title, null);
         source.setSVar(sa.getParamOrDefault("ResultSVar", "ChosenAbility"),source.getSVar(draftOptions.get(chosen)));
     }

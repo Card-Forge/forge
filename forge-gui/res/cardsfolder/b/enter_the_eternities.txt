@@ -2,9 +2,9 @@ Name:Enter the Eternities
 ManaCost:G U
 Types:Sorcery
 A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberChanged$ True | SubAbility$ DraftPlus1Ability | SpellDescription$ Exile target creature you control. Draft a [+1] ability, a [−2] ability, and a [−8] ability. Create a legendary planeswalker token with the exiled creature's name and colors and the drafted abilities. Put a number of loyalty counters on it equal to the exiled creature's power.
-SVar:DraftPlus1Ability:DB$ DraftAbility | Abilities$ Plus1AB1,Plus1AB2,Plus1AB3,Plus1AB4,Plus1AB5,Plus1AB6,Plus1AB7,Plus1AB8,Plus1AB9,Plus1AB10 | ResultSVar$ ability1 | SubAbility$ DraftMinus2Ability
-SVar:DraftMinus2Ability:DB$ DraftAbility | Abilities$ Minus2AB1,Minus2AB2,Minus2AB3,Minus2AB4,Minus2AB5,Minus2AB6,Minus2AB7,Minus2AB8,Minus2AB9,Minus2AB10 | ResultSVar$ ability2 | SubAbility$ DraftMinus8Ability
-SVar:DraftMinus8Ability:DB$ DraftAbility | Abilities$ Minus8AB1,Minus8AB2,Minus8AB3,Minus8AB4,Minus8AB5,Minus8AB7,Minus8AB8,Minus8AB9,Minus8AB10 | ResultSVar$ ability3 | SubAbility$ DBToken
+SVar:DraftPlus1Ability:DB$ DraftAbility | Abilities$ Plus1AB1,Plus1AB2,Plus1AB3,Plus1AB4,Plus1AB5,Plus1AB6,Plus1AB7,Plus1AB8,Plus1AB9,Plus1AB10 | ResultSVar$ ability1 | AILogic$ Random | SubAbility$ DraftMinus2Ability
+SVar:DraftMinus2Ability:DB$ DraftAbility | Abilities$ Minus2AB1,Minus2AB2,Minus2AB3,Minus2AB4,Minus2AB5,Minus2AB6,Minus2AB7,Minus2AB8,Minus2AB9,Minus2AB10 | ResultSVar$ ability2 | AILogic$ Random | SubAbility$ DraftMinus8Ability
+SVar:DraftMinus8Ability:DB$ DraftAbility | Abilities$ Minus8AB1,Minus8AB2,Minus8AB3,Minus8AB4,Minus8AB5,Minus8AB7,Minus8AB8,Minus8AB9,Minus8AB10 | ResultSVar$ ability3 | AILogic$ Random | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ planeswalker | TokenOwner$ You | WithCountersType$ LOYALTY | WithCountersAmount$ exiledPower | TokenName$ Remembered | TokenColors$ Remembered | ImprintTokens$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Abilities$ ability1,ability2,ability3 | Duration$ Permanent
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
@@ -17,7 +17,7 @@ SVar:Plus1AB2:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Val
 # Ability 3
 SVar:Plus1AB3:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SpellDescription$ Draw a Card.
 # Ability 4
-SVar:Plus1AB4:AB$ A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -4 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Until your next turn, up to one target creature gets -4/-0
+SVar:Plus1AB4:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -4 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Until your next turn, up to one target creature gets -4/-0
 # Ability 5
 SVar:Plus1AB5:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures.
 # Ability 6
@@ -89,5 +89,5 @@ SVar:Minus8AB9:AB$ AddTurn | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | 
 SVar:Minus8AB10:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Triggers$ CastTrig10 | SpellDescription$ Until end of turn, whenever you cast a spell, copy it. You may choose new targets for the copy.
 SVar:CastTrig10:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCopySpell10 | TriggerZones$ Command | TriggerDescription$ Whenever you cast a spell, copy it. You may choose new targets for the copy.
 SVar:TrigCopySpell10:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
-AI:RemoveDeck:Random
+AI:RemoveDeck:All
 Oracle:Exile target creature you control. Draft a [+1] ability, a [−2] ability, and a [−8] ability. Create a legendary planeswalker token with the exiled creature's name and colors and the drafted abilities. Put a number of loyalty counters on it equal to the exiled creature's power.

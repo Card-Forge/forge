@@ -22,7 +22,11 @@ import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TokenInfo {
