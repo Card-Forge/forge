@@ -52,6 +52,7 @@ import forge.interfaces.IGameController;
 import forge.player.AutoYieldStore.TriggerDecision;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.controllers.CStack;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
@@ -194,8 +195,12 @@ public class VStack implements IVDoc<CStack> {
         public StackInstanceTextArea(final StackItemView item0) {
             item = item0;
 
-            final String txt = (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())
+            String txt = (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())
                     ? "(OPTIONAL) " : "") + item.getText();
+            if (ArenaTheme.isMatchBoard()) {
+                // the "[Card: ..., Activator: ...]" list of what set a trigger off; the focus card shows that card instead
+                txt = txt.replaceAll("\\s*\\[[^\\[\\]]*\\]\\s*$", "");
+            }
 
             setText(txt);
             setOpaque(true);

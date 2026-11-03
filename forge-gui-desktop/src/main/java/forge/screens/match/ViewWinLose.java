@@ -18,6 +18,7 @@ import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.game.GameView;
 import forge.gamemodes.tutorial.HowToPlay;
+import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IWinLoseView;
@@ -25,6 +26,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
@@ -197,6 +199,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLeft.add(pnlLog, "w 100%!");
 
         lblTitle.setText((replay ? "Replay: " : "") + composeTitle(game0));
+        if (ArenaTheme.isMatchBoard() && !replay) {
+            // Arena ends on one word in gold; who won stays in the outcome lines beneath
+            lblTitle.setForeground(ArenaTheme.GOLD_BRIGHT);
+            lblTitle.setFont(FSkin.getRelativeBoldFont(44));
+            lblTitle.setText(composeArenaTitle(game0, matchUI));
+        }
     }
 
     public final void show() {
@@ -230,6 +238,19 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         } else {
             return localizer.getMessage("lblWinnerWon").replace("%s", winner);
         }
+    }
+
+    /** "Victory" or "Defeat" for the player at this screen; the usual title for draws, team games and other people's games. */
+    private static String composeArenaTitle(final GameView game, final CMatchUI matchUI) {
+        final String winner = game.getWinningPlayerName();
+        if (winner == null || winner.isEmpty() || game.getWinningTeam() != -1 || !matchUI.hasLocalPlayers()) {
+            return composeTitle(game);
+        }
+        boolean won = false;
+        for (final PlayerView p : matchUI.getLocalPlayers()) {
+            won |= winner.equals(p.getName());
+        }
+        return Localizer.getInstance().getMessage(won ? "lblArenaVictory" : "lblArenaDefeat");
     }
 
     /**

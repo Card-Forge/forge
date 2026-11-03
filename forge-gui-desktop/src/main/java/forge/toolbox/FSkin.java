@@ -473,6 +473,12 @@ public class FSkin {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            if (ArenaTheme.isEnabled()) {
+                final Color arenaColor = ArenaTheme.getSkinColor(skinProp);
+                if (arenaColor != null) {
+                    color = arenaColor;
+                }
+            }
         }
     }
 
@@ -1343,6 +1349,12 @@ public class FSkin {
         //daynight bg
         SkinIcon.setIcon(FSkinProp.BG_DAY, defaultDir + ForgeConstants.MATCH_BG_DAY_FILE);
         SkinIcon.setIcon(FSkinProp.BG_NIGHT, defaultDir + ForgeConstants.MATCH_BG_NIGHT_FILE);
+        if (ArenaTheme.isEnabled()) {
+            SkinIcon.setIcon(FSkinProp.BG_TEXTURE, ArenaTheme.createTexture());
+            SkinIcon.setIcon(FSkinProp.BG_MATCH, ArenaTheme.createBoardImage(ArenaTheme.BoardVariant.DEFAULT));
+            SkinIcon.setIcon(FSkinProp.BG_DAY, ArenaTheme.createBoardImage(ArenaTheme.BoardVariant.DAY));
+            SkinIcon.setIcon(FSkinProp.BG_NIGHT, ArenaTheme.createBoardImage(ArenaTheme.BoardVariant.NIGHT));
+        }
 
         // Run through enums and load their coords.
         Colors.updateAll();

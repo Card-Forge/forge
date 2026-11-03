@@ -57,6 +57,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     private boolean allImagesPresent = false;
     private boolean toggle = false;
     private boolean hovered = false;
+    private boolean primary = false;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
     private KeyAdapter klEnter;
 
@@ -209,6 +210,12 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         repaintSelf();
     }
 
+    /** Marks this as the main action button; the Arena theme paints it amber. */
+    public void setPrimary(final boolean b0) {
+        this.primary = b0;
+        repaintSelf();
+    }
+
     public int getAutoSizeWidth() {
         int width = 0;
         if (this.getText() != null && !this.getText().isEmpty()) {
@@ -227,6 +234,10 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
 
     @Override
     protected void paintComponent(final Graphics g) {
+        if (ArenaTheme.isEnabled()) {
+            paintArena(g);
+            return;
+        }
         if (!allImagesPresent) {
             return;
         }
@@ -249,6 +260,23 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         FSkin.drawImage(g2d, imgR, this.w - this.h, 0, this.h, this.h);
 
         super.paintComponent(g);
+    }
+
+    private void paintArena(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g.create();
+        try {
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+            if (!isEnabled()) {
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.45f));
+            }
+            final boolean pressed = getModel().isPressed() && getModel().isArmed();
+            ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, hovered && isEnabled(), pressed,
+                    isFocusOwner(), toggle, isEnabled());
+            super.paintComponent(g2d);
+        } finally {
+            g2d.dispose();
+        }
     }
 
     @Override

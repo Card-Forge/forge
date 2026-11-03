@@ -118,7 +118,20 @@ public final class LayoutMenu {
             menuItem.addActionListener(changeSkin);
             menu.add(menuItem);
         }
+        menu.addSeparator();
+        menu.add(getMenuItem_ArenaLook());
         return menu;
+    }
+
+    private static JMenuItem getMenuItem_ArenaLook() {
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblArenaLook"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ARENA_THEME));
+        menuItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ARENA_THEME, menuItem.getState());
+            prefs.save();
+            FOptionPane.showMessageDialog(localizer.getMessage("lblArenaLookRestart"), localizer.getMessage("lblArenaLook"));
+        });
+        return menuItem;
     }
 
     private static final ActionListener changeSkin = e -> {

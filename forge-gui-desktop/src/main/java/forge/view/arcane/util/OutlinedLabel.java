@@ -56,7 +56,10 @@ public class OutlinedLabel extends JLabel {
     private static final long serialVersionUID = -2868833097364223352L;
     private Color outlineColor;
     private final static int outlineSize = 1; 
+    private final static int BADGE_PAD_X = 5;
     private boolean wrap;
+    private Color badgeFill;
+    private Color badgeRim;
 
     /**
      * <p>
@@ -86,6 +89,12 @@ public class OutlinedLabel extends JLabel {
         this.wrap = wrap;
     }
 
+    /** Draws the text on a rounded badge, e.g. the Arena power/toughness box; null fill turns it off. */
+    public final void setBadge(final Color fill, final Color rim) {
+        this.badgeFill = fill;
+        this.badgeRim = rim;
+    }
+
     /**
      * <p>
      * getPreferredSize.
@@ -98,6 +107,10 @@ public class OutlinedLabel extends JLabel {
         Dimension size = super.getPreferredSize();
         size.width += outlineSize * 2;
         size.height += outlineSize * 2;
+        if (badgeFill != null) {
+            size.width += BADGE_PAD_X * 2;
+            size.height += 2;
+        }
         return size;
     }
 
@@ -128,6 +141,17 @@ public class OutlinedLabel extends JLabel {
 
         int textX = outlineSize, textY = 0;
         int wrapWidth = Math.max(0, wrap ? size.width - outlineSize * 2 : Integer.MAX_VALUE);
+        if (badgeFill != null) {
+            final int arc = Math.max(6, size.height / 2);
+            g2d.setColor(badgeFill);
+            g2d.fillRoundRect(0, 0, size.width - 1, size.height - 1, arc, arc);
+            if (badgeRim != null) {
+                g2d.setColor(badgeRim);
+                g2d.drawRoundRect(0, 0, size.width - 1, size.height - 1, arc, arc);
+            }
+            textX += BADGE_PAD_X;
+            textY += 1;
+        }
 
         final String text = getText();
         AttributedString attributedString = new AttributedString(text);

@@ -40,6 +40,22 @@ public class PhaseIndicator extends JPanel {
         add(lbl, CONSTRAINTS);
     }
 
+    /**
+     * Arena player bar: the phase ladder flanks the portrait, so the chips are moved into
+     * two rows, beginning of turn through declare blockers, then the rest of the turn.
+     */
+    public JPanel[] createArenaLadder() {
+        final JPanel first = new JPanel(new MigLayout("insets 0, gap 3, ay center, ax right"));
+        final JPanel second = new JPanel(new MigLayout("insets 0, gap 3, ay center"));
+        first.setOpaque(false);
+        second.setOpaque(false);
+        int i = 0;
+        for (final PhaseLabel lbl : phaseLabels.values()) {
+            (i++ < phaseLabels.size() / 2 ? first : second).add(lbl, "w 30!, h 22!");
+        }
+        return new JPanel[] {first, second};
+    }
+
     public PhaseLabel getLabelFor(final PhaseType phaseType) {
         return phaseLabels.get(phaseType);
     }

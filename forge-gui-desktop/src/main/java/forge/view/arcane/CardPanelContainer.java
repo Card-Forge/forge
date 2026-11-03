@@ -29,6 +29,7 @@ import javax.swing.SwingUtilities;
 
 import forge.game.card.CardView;
 import forge.gui.FThreads;
+import forge.screens.match.ArenaCardPreview;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -244,6 +245,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                     hoveredPanel = hitPanel;
                     hoveredPanel.setSelected(true);
                     mouseOver(hitPanel, evt);
+                    ArenaCardPreview.showFor(matchUI, hitPanel);
                 }
 
                 // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
@@ -260,6 +262,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         this.hoveredPanel.setSelected(false);
         this.mouseOut(this.hoveredPanel, evt);
         this.hoveredPanel = null;
+        ArenaCardPreview.dismiss();
     }
 
     protected abstract CardPanel getCardPanel(int x, int y);
@@ -416,12 +419,13 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     public void mouseDragStart(final CardPanel dragPanel, final MouseEvent evt) {
+        ArenaCardPreview.dismiss();
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseDragStart(this.getMouseDragPanel(), evt);
         }
     }
 
-    public final void mouseOut(final CardPanel panel, final MouseEvent evt) {
+    public void mouseOut(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOut(this.hoveredPanel, evt);
         }

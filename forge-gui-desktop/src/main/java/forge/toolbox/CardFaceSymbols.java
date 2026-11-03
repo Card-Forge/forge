@@ -207,6 +207,11 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
+    /** Whether there is a symbol image for a key such as "W", "2" or "WU". */
+    public static boolean hasSymbol(final String imageName) {
+        return MANA_IMAGES.containsKey(imageName);
+    }
+
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }

@@ -192,8 +192,10 @@ public class VAssignGenericAmount {
 
         dlg.setUndecorated(true);
         dlg.setContentPane(pnlMain);
-        dlg.setSize(new Dimension(wDlg, hDlg));
-        dlg.setLocation((overlay.getWidth() - wDlg) / 2, (overlay.getHeight() - hDlg) / 2);
+        // wide enough for the help text beside the card (card 175px, gap 20px, a margin either side)
+        final int w = Math.min(Math.max(wDlg, 215 + pnlInfo.getPreferredSize().width + 40), Math.max(wDlg, overlay.getWidth() - 40));
+        dlg.setSize(new Dimension(w, hDlg));
+        dlg.setLocation((overlay.getWidth() - w) / 2, (overlay.getHeight() - hDlg) / 2);
         dlg.setModalityType(ModalityType.APPLICATION_MODAL);
         dlg.setVisible(true);
     }

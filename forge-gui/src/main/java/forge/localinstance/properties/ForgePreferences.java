@@ -112,6 +112,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_DETAILED_SPELLDESC_IN_PROMPT ("true"),
         UI_GRAY_INACTIVE_TEXT ("true"),
         UI_SKIN ("Default"),
+        UI_ARENA_THEME ("true"),
         UI_CJK_FONT (""),
         UI_TARGETING_OVERLAY ("2"),
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),

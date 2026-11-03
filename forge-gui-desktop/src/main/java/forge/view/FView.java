@@ -46,6 +46,7 @@ import forge.screens.home.VHomeUI;
 import forge.screens.home.settings.DialogDownloadCardImages;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.FButton;
@@ -79,7 +80,13 @@ public enum FView {
 	// The status bar to display at the bottom of the frame
 	private FNavigationBar navigationBar;
 	// The content panel is placed in the layered pane.
-	private final JPanel pnlContent = new JPanel();
+	private final JPanel pnlContent = new JPanel() {
+		@Override
+		public boolean isOptimizedDrawingEnabled() {
+			// the Arena board floats cells over one another; a cell repainting alone would paint over those above it
+			return !ArenaTheme.isEnabled();
+		}
+	};
 	// An insets panel neatly maintains a space from the edges of the window and
 	// whatever layout is happening, without having to explicitly define a margin each time.
 	private FPanel pnlInsets;

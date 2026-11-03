@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
 
@@ -52,11 +53,12 @@ public class HandArea extends CardArea {
         this.setVertical(true);
         this.setMaxCardsPerRow(FModel.getPreferences().getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW));
         this.setNoOverlap(FModel.getPreferences().getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));
+        this.setFanLayout(ArenaTheme.isEnabled());
     }
 
     @Override
     protected boolean cardPanelDraggable(final CardPanel panel) {
-        return panel.getCard() != null;
+        return panel.getCard() != null && !isFanExtra(panel);
     }
 
     /** {@inheritDoc} */
@@ -64,6 +66,17 @@ public class HandArea extends CardArea {
     public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
         getMatchUI().setCard(panel.getCard(), evt.isShiftDown());
         super.mouseOver(panel, evt);
+        if (ArenaTheme.isEnabled()) {
+            revalidate(); // raise the hovered card
+        }
+    }
+
+    @Override
+    public void mouseOut(final CardPanel panel, final MouseEvent evt) {
+        super.mouseOut(panel, evt);
+        if (ArenaTheme.isEnabled()) {
+            revalidate();
+        }
     }
 
     /** {@inheritDoc} */

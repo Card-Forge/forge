@@ -16,6 +16,7 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.workshop.CWorkshopUI;
 import forge.screens.workshop.VWorkshopUI;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
@@ -176,7 +177,7 @@ public class FScreen {
                 FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
                 true,
                 "lblConcedeGame",
-                ForgeConstants.MATCH_LAYOUT_FILE,
+                ArenaTheme.isEnabled() ? ForgeConstants.MATCH_ARENA_LAYOUT_FILE : ForgeConstants.MATCH_LAYOUT_FILE,
                 true);
     }
 

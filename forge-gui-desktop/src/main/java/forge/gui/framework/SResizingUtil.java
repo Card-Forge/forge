@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.swing.JPanel;
 
 import forge.gui.MouseUtil;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.FOverlay;
 import forge.view.FDialog;
@@ -53,6 +54,7 @@ public final class SResizingUtil {
     private static final MouseListener MAD_RESIZE_X = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             MouseUtil.setCursor(Cursor.E_RESIZE_CURSOR);
         }
 
@@ -63,11 +65,13 @@ public final class SResizingUtil {
 
         @Override
         public void mousePressed(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             SResizingUtil.startResizeX(e);
         }
 
         @Override
         public void mouseReleased(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             SResizingUtil.endResize();
         }
     };
@@ -75,6 +79,7 @@ public final class SResizingUtil {
     private static final MouseListener MAD_RESIZE_Y = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             MouseUtil.setCursor(Cursor.N_RESIZE_CURSOR);
         }
 
@@ -85,11 +90,13 @@ public final class SResizingUtil {
 
         @Override
         public void mousePressed(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             SResizingUtil.startResizeY(e);
         }
 
         @Override
         public void mouseReleased(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             SResizingUtil.endResize();
         }
     };
@@ -97,6 +104,7 @@ public final class SResizingUtil {
     private static final MouseMotionListener MMA_DRAG_X = new MouseMotionAdapter() {
         @Override
         public void mouseDragged(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             SResizingUtil.resizeX(e);
         }
     };
@@ -104,6 +112,7 @@ public final class SResizingUtil {
     private static final MouseMotionListener MMA_DRAG_Y = new MouseMotionAdapter() {
         @Override
         public void mouseDragged(final MouseEvent e) {
+            if (ArenaTheme.isMatchBoard()) { return; }
             SResizingUtil.resizeY(e);
         }
     };

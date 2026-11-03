@@ -24,6 +24,7 @@ import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
 import forge.view.FView;
 
@@ -176,8 +177,9 @@ public class VMatchUI implements IVTopLevelUI {
             getBtnCancel().requestFocusInWindow();
         }
 
+        // The Arena board always lays opponents out side by side along the top
         final boolean sortFieldsEnabled = lstFields.size() > 2
-                && !"OFF".equals(FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
+                && (ArenaTheme.isEnabled() || !"OFF".equals(FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT)));
 
         // Clean up any existing dynamic split cells before re-assigning.
         if (sortFieldsEnabled) {
@@ -289,11 +291,12 @@ public class VMatchUI implements IVTopLevelUI {
             return;
         }
         final ForgePreferences preferences = FModel.getPreferences();
-        final String layout = preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+        final boolean arena = ArenaTheme.isEnabled();
+        final String layout = arena ? "ROWS" : preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
         // OFF disables all field layout features — use vanilla i%2 tabbed behavior.
         final boolean rowsMode = "ROWS".equals(layout);
-        final boolean splitMode = !"OFF".equals(layout)
-                && "SPLIT".equals(preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_PANELS));
+        final boolean splitMode = arena || (!"OFF".equals(layout)
+                && "SPLIT".equals(preferences.getPref(FPref.UI_MULTIPLAYER_FIELD_PANELS)));
 
         // When ROWS mode is active and c0/c1 share the same row (e.g.
         // side-by-side layout after gap-fill), rearrange them vertically

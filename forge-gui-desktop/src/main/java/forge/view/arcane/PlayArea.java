@@ -42,8 +42,11 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.util.Localizer;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.views.VField;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
+import forge.view.FView;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -236,6 +239,89 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private void sortCombatantsByOpponentPosition(final CardStackRow row) {
         row.sort(Comparator.comparingDouble(this::getCombatOpponentPositionSortKey));
+    }
+
+    /**
+     * Arena board: attackers line up in the order of what they attack and blockers in the
+     * order of the attackers they block, so the combat arrows do not cross. Keying attackers
+     * on their defender rather than their blockers keeps the two sides from chasing each other.
+     */
+    private void sortCombatantsForArena(final CardStackRow row) {
+        row.sort(Comparator.comparingDouble(this::getArenaCombatSortKey));
+    }
+
+    private double getArenaCombatSortKey(final CardStack stack) {
+        final GameView gameView = getMatchUI().getGameView();
+        final CombatView combat = gameView == null ? null : gameView.getCombat();
+        if (stack.isEmpty() || combat == null) {
+            return Double.MAX_VALUE;
+        }
+        final CardView card = stack.get(0).getCard();
+        if (combat.isAttacking(card)) {
+            final GameEntityView defender = combat.getDefender(card);
+            if (defender instanceof PlayerView player) {
+                final VField field = getMatchUI().getFieldViewFor(player);
+                return field == null ? Double.MAX_VALUE : getScreenCenterX(field.getAvatarArea());
+            }
+            if (defender instanceof CardView defendingCard) {
+                final CardPanel panel = findPanelOnAnyField(defendingCard);
+                return panel == null ? Double.MAX_VALUE : getScreenX(panel);
+            }
+            return Double.MAX_VALUE;
+        }
+        final Iterable<CardView> attackers = getCombatOpponentsForLayout(card);
+        int count = 0;
+        double total = 0;
+        if (attackers != null) {
+            for (final CardView attacker : attackers) {
+                final CardPanel panel = findPanelOnAnyField(attacker);
+                if (panel != null) {
+                    total += getScreenX(panel);
+                    count++;
+                }
+            }
+        }
+        return count == 0 ? getArenaBystanderSortKey(combat) : total / count;
+    }
+
+    /**
+     * A creature out of the fight: on the defending side it sits under the unblocked
+     * attackers, whose arrows pass over it on their way to the player instead of crossing
+     * a block; on the attacking side it goes after the attackers.
+     */
+    private double getArenaBystanderSortKey(final CombatView combat) {
+        double total = 0;
+        int count = 0;
+        for (final CardView attacker : combat.getAttackers()) {
+            if (model.equals(attacker.getController())) {
+                return Double.MAX_VALUE;
+            }
+            if (hasAny(combat.getBlockers(attacker)) || hasAny(combat.getPlannedBlockers(attacker))) {
+                continue;
+            }
+            final CardPanel panel = findPanelOnAnyField(attacker);
+            if (panel != null) {
+                total += getScreenX(panel);
+                count++;
+            }
+        }
+        return count == 0 ? Double.MAX_VALUE : total / count;
+    }
+
+    private CardPanel findPanelOnAnyField(final CardView card) {
+        return getMatchUI().getFieldViews().stream()
+                .map(field -> field.getTabletop().getCardPanel(card.getId()))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private static double getScreenCenterX(final java.awt.Component c) {
+        try {
+            return c.getLocationOnScreen().getX() + c.getWidth() / 2.0;
+        } catch (final IllegalComponentStateException ex) {
+            return Double.MAX_VALUE;
+        }
     }
 
     private double getCombatOpponentPositionSortKey(final CardStack stack) {
@@ -456,7 +542,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             tokens.clear();
         }
 
-        if (shouldSeparateCombatStacks() || grouping) {
+        if (ArenaTheme.isEnabled()) {
+            sortCombatantsForArena(tokens);
+            sortCombatantsForArena(creatures);
+        } else if (shouldSeparateCombatStacks() || grouping) {
             sortCombatantsByOpponentPosition(tokens);
             sortCombatantsByOpponentPosition(creatures);
         }
@@ -469,6 +558,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         // should find an appropriate width of card
         int maxCardWidth = this.getCardWidthMax();
+        final int windowHeight = FView.SINGLETON_INSTANCE.getPnlContent().getHeight();
+        if (ArenaTheme.isEnabled() && windowHeight > 0) {
+            // Arena keeps cards one size; a sparse battlefield does not blow them up
+            maxCardWidth = Math.max(this.getCardWidthMin(), Math.min(maxCardWidth, Math.round(windowHeight * 0.15f / CardPanel.ASPECT_RATIO)));
+        }
         setCardWidth(maxCardWidth);
         int minCardWidth = this.getCardWidthMin();
         int lastGoodCardWidth = minCardWidth;
@@ -525,13 +619,22 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int y = PlayArea.GUTTER_Y;
 
         //System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight);
+        // Arena board: every row is centred as one group, other permanents following on from the rest
+        final boolean arenaRows = ArenaTheme.isEnabled();
         for (final CardStackRow row : template) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
+            if (arenaRows) {
+                int rowWidth = -this.extraCardSpacingX;
+                for (final CardStack stack : row) {
+                    rowWidth += stack.getWidth();
+                }
+                x = Math.max(PlayArea.GUTTER_X, (this.playAreaWidth - rowWidth) / 2);
+            }
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (stack.alignRight) {
+                if (stack.alignRight && !arenaRows) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++) {
                         CardStack r = row.get(i);

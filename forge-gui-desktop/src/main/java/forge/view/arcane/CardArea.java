@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.Lists;
 
 import forge.screens.match.CMatchUI;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FScrollPane;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
@@ -55,10 +56,24 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     private static final float VERT_CARD_SPACING_X = 0.06f;
     private static final float VERT_CARD_SPACING_Y = 0.10f;
 
+    // Fan layout (Arena hand): one centred, overlapping row with a shallow arc, sunk below the bottom edge
+    private static final float FAN_STEP = 0.78f;     // card spacing while there is room, in card widths
+    private static final float FAN_MIN_STEP = 0.3f;  // tightest overlap before the cards shrink
+    private static final float FAN_ARC = 0.06f;      // how far the outermost cards dip, in card heights
+    private static final float FAN_LIFT = 0.08f;     // how far the hovered card rises, in card heights
+    private static final float FAN_SINK = 0.5f;      // how much of a resting card is below the bottom edge
+    private static final float FAN_COST_ROW = 0.13f; // strip above the cards for their mana costs, in area heights
+    private static final float FAN_EXTRAS_GAP = 0.3f;  // space between the hand and the cards castable from elsewhere
+    private static final float FAN_EXTRAS_STEP = 0.62f; // spacing of those cards, in card widths
+    private static final float FAN_LEFT = 0.17f;     // Arena board: the button dock covers the hand row's left corner
+    private static final float FAN_RIGHT = 0.18f;    // and the log its right one
+
     private float maxCoverage = 0.5f;
     private int maxRows = 0;
     private int maxCardsPerRow = 0; // 0 = unlimited
     private boolean noOverlap = false;
+    private boolean fanLayout = false;
+    private int fanExtras = 0;
 
     // Computed in layout.
     private float cardSpacingX;
@@ -73,8 +88,30 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         this.setBackground(Color.white);
     }
 
+    /** In a fan the hovered card is lifted above its neighbours. */
+    private CardPanel getRaisedPanel() {
+        if (!fanLayout) {
+            return null;
+        }
+        for (final CardPanel panel : getCardPanels()) {
+            if (panel.isSelected() && panel != getMouseDragPanel()) {
+                return panel;
+            }
+        }
+        return null;
+    }
+
     @Override
     public final CardPanel getCardPanel(final int x, final int y) {
+        final CardPanel raised = getRaisedPanel();
+        if (raised != null && raised.isDisplayEnabled()) {
+            // include the strip it rose out of, so the card does not drop back under a still cursor
+            final int lift = Math.round(raised.getCardHeight() * FAN_LIFT);
+            if (x > raised.getCardX() && x < raised.getCardX() + raised.getCardWidth()
+                    && y > raised.getCardY() && y < raised.getCardY() + raised.getCardHeight() + lift) {
+                return raised;
+            }
+        }
         final List<CardPanel> panels = isVertical ? Lists.reverse(getCardPanels()) : getCardPanels();
         for (final CardPanel panel : panels) {
             final int panelX = panel == this.getMouseDragPanel() ? this.mouseDragStartX : panel.getCardX();
@@ -112,6 +149,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
         final int cardAreaWidth = rect.width;
         final int cardAreaHeight = rect.height;
+        if (this.fanLayout) {
+            doFanLayout(cardAreaWidth, cardAreaHeight);
+            super.doLayout();
+            return;
+        }
         int cardWidth = this.getCardWidthMax();
         int cardHeight;
         int cardSpacingY;
@@ -252,6 +294,105 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         super.doLayout();
     }
 
+    private void doFanLayout(final int areaWidth, final int areaHeight) {
+        final List<CardPanel> panels = this.getCardPanels();
+        final int extras = Math.max(0, Math.min(fanExtras, panels.size()));
+        final int count = panels.size() - extras;
+        // on the Arena board the button dock and the log sit over the hand row's corners
+        final int left = ArenaTheme.isMatchBoard() ? Math.round(areaWidth * FAN_LEFT) : CardArea.GUTTER_X;
+        final int right = areaWidth - (ArenaTheme.isMatchBoard() ? Math.round(areaWidth * FAN_RIGHT) : CardArea.GUTTER_X);
+        final int availableWidth = right - left;
+        // a strip above the cards for their mana costs, which the sunk cards would otherwise hide
+        final int costRow = Math.round(areaHeight * FAN_COST_ROW);
+        final int availableHeight = areaHeight - CardArea.GUTTER_Y * 2 - costRow;
+
+        int cardHeight = Math.round(availableHeight / (1f + FAN_LIFT - FAN_SINK));
+        int cardWidth = Math.round(cardHeight / CardPanel.ASPECT_RATIO);
+        cardWidth = Math.max(this.getCardWidthMin(), Math.min(this.getCardWidthMax(), cardWidth));
+        while (cardWidth > this.getCardWidthMin()
+                && Math.max(0, count - 1) * cardWidth * FAN_MIN_STEP + (count > 0 ? cardWidth : 0) + extrasWidth(extras, cardWidth) > availableWidth) {
+            cardWidth--;
+        }
+        cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
+
+        final int extrasW = extrasWidth(extras, cardWidth);
+        final int handRoom = availableWidth - extrasW;
+        float step = cardWidth * FAN_STEP;
+        if (count > 1) {
+            step = Math.max(1f, Math.min(step, (handRoom - cardWidth) / (float) (count - 1)));
+        }
+        final float rowWidth = count == 0 ? 0f : (count - 1) * step + cardWidth;
+        final int lift = Math.round(cardHeight * FAN_LIFT);
+        final int arc = Math.round(cardHeight * FAN_ARC);
+        final int baseY = CardArea.GUTTER_Y + costRow + lift;
+        // the hand stays centred on the window; cards castable from elsewhere follow on its right
+        float x = count == 0 ? (left + right) / 2f - (extrasW - cardWidth * FAN_EXTRAS_GAP) / 2f
+                : Math.max(left, (left + right) / 2f - rowWidth / 2f);
+        final float overflow = x + rowWidth + extrasW - right;
+        if (overflow > 0) {
+            x = Math.max(left, x - overflow);
+        }
+
+        final CardPanel raised = getRaisedPanel();
+        final int maxZOrder = this.getComponentCount() - 1;
+        for (int i = 0; i < count; i++) {
+            final CardPanel panel = panels.get(i);
+            final float t = count == 1 ? 0f : (i / (count - 1f)) * 2f - 1f;
+            int y = baseY + Math.round(arc * t * t);
+            if (panel == raised) {
+                y -= lift;
+            }
+            if (panel != this.getMouseDragPanel()) {
+                panel.setCardBounds(Math.round(x), y, cardWidth, cardHeight);
+            }
+            // the cost sits over the part of the card its right-hand neighbour leaves showing
+            panel.setArenaCostWidth(i == count - 1 ? cardWidth : Math.round(step));
+            // later cards overlap earlier ones
+            this.setComponentZOrder(panel, Math.max(0, Math.min(panels.size() - 1 - i, maxZOrder)));
+            x += step;
+        }
+        if (extras > 0) {
+            x = count == 0 ? x : x - step + cardWidth + cardWidth * FAN_EXTRAS_GAP;
+            final float extraStep = cardWidth * FAN_EXTRAS_STEP;
+            for (int i = 0; i < extras; i++) {
+                final CardPanel panel = panels.get(count + i);
+                panel.setCardBounds(Math.round(x), panel == raised ? baseY - lift : baseY, cardWidth, cardHeight);
+                panel.setArenaCostWidth(i == extras - 1 ? cardWidth : Math.round(extraStep));
+                this.setComponentZOrder(panel, Math.max(0, Math.min(extras - 1 - i, maxZOrder)));
+                x += extraStep;
+            }
+        }
+        if (raised != null) {
+            this.setComponentZOrder(raised, 0);
+        }
+
+        final Dimension oldPreferredSize = this.getPreferredSize();
+        if (oldPreferredSize.width != areaWidth || oldPreferredSize.height != areaHeight) {
+            this.setPreferredSize(new Dimension(areaWidth, areaHeight));
+            this.getParent().invalidate();
+            this.getParent().validate();
+        }
+    }
+
+    /** Room the cards after the hand take: a gap, then a tighter overlapping row. */
+    private static int extrasWidth(final int extras, final int cardWidth) {
+        return extras == 0 ? 0 : Math.round(cardWidth * FAN_EXTRAS_GAP + (extras - 1) * cardWidth * FAN_EXTRAS_STEP + cardWidth);
+    }
+
+    /**
+     * In a fan, the last {@code extras} panels are not hand cards but cards the player can
+     * cast from elsewhere (a commander, a flashback spell...); they sit apart on the right
+     * and cannot be dragged into the hand.
+     */
+    public final void setFanExtras(final int extras) {
+        this.fanExtras = extras;
+    }
+
+    public final boolean isFanExtra(final CardPanel panel) {
+        final int index = getCardPanels().indexOf(panel);
+        return index >= 0 && index >= getCardPanels().size() - fanExtras;
+    }
+
     @Override
     public final void paint(final Graphics g) {
         final boolean hasScrollbars = this.getScrollPane().getVerticalScrollBar().isVisible();
@@ -295,8 +436,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         CardPanel.getDragAnimationPanel().setLocation(p.x, p.y);
 
         final CardPanel panel = this.getCardPanel(mouseX, mouseY);
-        if ((panel == null) || (panel == dragPanel)) {
-            return;
+        if ((panel == null) || (panel == dragPanel) || !cardPanelDraggable(panel)) {
+            return; // nothing to swap with, or a card that is not part of the reorderable row
         }
         int index = this.getCardPanels().size();
         while (--index >= 0) {
@@ -353,6 +494,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
     public final void setVertical(final boolean isVertical) {
         this.isVertical = isVertical;
+    }
+
+    /** Lays cards out as an Arena-style fan: one centred row, overlapping as needed, the hovered card raised. */
+    public final void setFanLayout(final boolean fanLayout) {
+        this.fanLayout = fanLayout;
     }
 
     public final boolean isNoOverlap() {

@@ -18,18 +18,27 @@
 package forge.screens.match.views;
 
 import java.awt.Color;
+import java.awt.BasicStroke;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.WeakHashMap;
+import java.util.function.Supplier;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -42,6 +51,7 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.card.CounterEnumType;
 import forge.game.GameView;
+import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -51,6 +61,7 @@ import forge.gui.framework.IVDoc;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
@@ -59,6 +70,7 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.AITimeoutTracker;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.view.arcane.PlayArea;
 import net.miginfocom.swing.MigLayout;
@@ -87,13 +99,28 @@ public class VField implements IVDoc<CField> {
     // Top-level containers
     private final FScrollPane scroller = new FScrollPane(false);
     private final PlayArea tabletop;
+    private final boolean mirror;
+    private boolean avatarHovered;
+    private JPanel[] arenaLadder;
     private final SkinnedPanel avatarArea = new SkinnedPanel() {
+        @Override
+        protected void paintComponent(final Graphics g) {
+            super.paintComponent(g);
+            if (ArenaTheme.isEnabled()) {
+                paintArenaAvatarFrame((Graphics2D) g);
+            }
+        }
+
         @Override
         protected void paintChildren(final Graphics g) {
             super.paintChildren(g);
+            if (ArenaTheme.isEnabled()) {
+                paintArenaLifeDisc((Graphics2D) g);
+            }
             paintAITimeoutBar(g);
         }
     };
+    private final JPanel arenaCommanderDamage = new JPanel(new MigLayout("insets 0, gap 3, hidemode 3"));
 
     // ---- AI "thinking" timer bar over the avatar (shrinks to 0 at the AI timeout) ----
     private static final Color BAR_BG = new Color(0, 0, 0, 165);
@@ -129,10 +156,64 @@ public class VField implements IVDoc<CField> {
         aiTimeoutBarShown = show;
     }
 
+    /** Square the circular portrait occupies inside the avatar label (the icon is scaled to the label height). */
+    private Rectangle getAvatarCircleBounds() {
+        final Rectangle r = lblAvatar.getBounds();
+        final int d = Math.min(r.width, r.height);
+        return new Rectangle(r.x + (r.width - d) / 2, r.y + (r.height - d) / 2, d, d);
+    }
+
+    /** Arena portrait frame: a glow for target, hover and active-turn states. */
+    private void paintArenaAvatarFrame(final Graphics2D g) {
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        final Rectangle c = getAvatarCircleBounds();
+        Color glow = null;
+        if (isHighlighted()) {
+            glow = ArenaTheme.CHOSEN;
+        } else if (control.getMatchUI().isSelectable(player)) {
+            glow = ArenaTheme.SELECTABLE;
+        } else if (avatarHovered) {
+            glow = ArenaTheme.HOVER;
+        } else if (matchUI.getGameView() != null && matchUI.getGameView().getPlayerTurn() == player) {
+            glow = ArenaTheme.PLAYABLE;
+        }
+        if (glow != null && c.width > 0) {
+            ArenaTheme.paintGlow(g, c.x, c.y, c.width, c.height, c.width, glow, Math.max(5, c.width / 7), 240);
+        }
+    }
+
+    /** The life total in a dark disc overlapping the bottom of the portrait. */
+    private void paintArenaLifeDisc(final Graphics2D g) {
+        final Rectangle c = getAvatarCircleBounds();
+        if (c.width <= 0) {
+            return;
+        }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        final int d = Math.max(26, Math.round(c.width * 0.46f));
+        final int dx = c.x + (c.width - d) / 2;
+        final int dy = Math.min(avatarArea.getHeight() - d - 1, c.y + c.height - d * 2 / 3);
+        final Ellipse2D disc = new Ellipse2D.Float(dx, dy, d, d);
+        g.setPaint(new GradientPaint(0, dy, new Color(0x1E2633), 0, dy + d, new Color(0x07090E)));
+        g.fill(disc);
+        g.setStroke(new BasicStroke(Math.max(1.5f, d / 18f)));
+        g.setColor(ArenaTheme.GOLD);
+        g.draw(disc);
+        final String life = lblLife.getText();
+        g.setFont(FSkin.getBoldFont(Math.max(12, Math.round(d * 0.5f))).getBaseFont());
+        final FontMetrics fm = g.getFontMetrics();
+        g.setColor(player.getLife() > LIFE_CRITICAL ? Color.WHITE : new Color(0xFF6B6B));
+        g.drawString(life, dx + (d - fm.stringWidth(life)) / 2, dy + (d + fm.getAscent() - fm.getDescent()) / 2);
+    }
+
     private void paintAITimeoutBar(final Graphics g) {
         if (player == null) { return; }
         final float f = AITimeoutTracker.getRemainingFraction(aiTimeoutKey());
         if (f < 0f) { return; }
+        if (ArenaTheme.isEnabled()) {
+            paintThinkingBubble((Graphics2D) g);
+            return;
+        }
         final Rectangle r = lblAvatar.getBounds();
         final int barH = Math.max(4, r.height / 10);
         final int y = r.y + r.height - barH;
@@ -140,6 +221,22 @@ public class VField implements IVDoc<CField> {
         g.fillRect(r.x, y, r.width, barH);
         g.setColor(f > 0.5f ? Color.GREEN : f > 0.25f ? BAR_AMBER : Color.RED);
         g.fillRect(r.x, y, Math.round(r.width * f), barH);
+    }
+
+    /** Arena shows an opponent who is deciding as a speech bubble with an ellipsis beside the portrait. */
+    private void paintThinkingBubble(final Graphics2D g) {
+        final Rectangle c = getAvatarCircleBounds();
+        final int bh = Math.max(16, c.height / 4), bw = bh * 2;
+        final int bx = Math.min(avatarArea.getWidth() - bw - 1, c.x + c.width - bw / 3);
+        final int by = Math.max(0, c.y);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(new Color(10, 12, 18, 225));
+        g.fill(new RoundRectangle2D.Float(bx, by, bw, bh, bh, bh));
+        g.setColor(Color.WHITE);
+        final int dot = Math.max(3, bh / 5);
+        for (int i = 0; i < 3; i++) {
+            g.fillOval(bx + bw / 2 - dot * 2 + i * dot * 3 / 2, by + (bh - dot) / 2, dot, dot);
+        }
     }
 
     private final PlayerDetailsPanel detailsPanel;
@@ -175,6 +272,7 @@ public class VField implements IVDoc<CField> {
 
         this.matchUI = matchUI;
         this.player = p;
+        this.mirror = mirror;
         LIVE_FIELDS.add(this);
         if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
         else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
@@ -198,13 +296,24 @@ public class VField implements IVDoc<CField> {
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
-        avatarArea.add(lblAvatar, "w 100%-6px!, h 100%-23px!, wrap, gap 3 3 3 0");
+        if (ArenaTheme.isEnabled()) {
+            avatarArea.setLayout(new MigLayout("insets 0, gap 0, hidemode 3"));
+            lblLife.setVisible(false); // painted as a disc over the portrait
+            avatarArea.add(lblAvatar, "w 100%!, h 100%-20px!, wrap, gaptop 2px");
+        } else {
+            avatarArea.add(lblAvatar, "w 100%-6px!, h 100%-23px!, wrap, gap 3 3 3 0");
+        }
         avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
 
         // Player area hover effect
         avatarArea.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
+                if (ArenaTheme.isEnabled()) {
+                    avatarHovered = true;
+                    avatarArea.repaint();
+                    return;
+                }
                 avatarArea.setOpaque(true);
                 if (!isHighlighted()) {
                     avatarArea.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
@@ -213,6 +322,11 @@ public class VField implements IVDoc<CField> {
 
             @Override
             public void mouseExited(final MouseEvent e) {
+                if (ArenaTheme.isEnabled()) {
+                    avatarHovered = false;
+                    avatarArea.repaint();
+                    return;
+                }
                 avatarArea.setOpaque(false);
                 if (!isHighlighted()) {
                     avatarArea.setBorder(control.getMatchUI().isSelectable(player) ? borderAvatarSelectable : borderAvatarSimple);
@@ -220,7 +334,9 @@ public class VField implements IVDoc<CField> {
             }
         });
 
-        tabletop.setBorder(new FSkin.MatteSkinBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        if (!ArenaTheme.isEnabled()) {
+            tabletop.setBorder(new FSkin.MatteSkinBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        }
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -231,12 +347,72 @@ public class VField implements IVDoc<CField> {
     @Override
     public void populate() {
         final JPanel pnl = parentCell.getBody();
+        if (ArenaTheme.isEnabled()) {
+            populateArena(pnl);
+            return;
+        }
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
         pnl.add(avatarArea, "w 10%!, h 35%!");
         pnl.add(phaseIndicator, "w 5%!, h 100%!, span 1 2");
         pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
         pnl.add(detailsPanel, "w 10%!, h 64%!, gapleft 1px");
+    }
+
+    /**
+     * Arena layout: the battlefield fills the cell and a player bar runs along the outer
+     * edge (top for opponents, bottom for the local player). The portrait sits in the
+     * middle of the bar between the two halves of the phase ladder, the library,
+     * graveyard and exile piles are on the left, and floating mana (plus an opponent's
+     * hand of card backs) is on the right.
+     */
+    private void populateArena(final JPanel pnl) {
+        final Supplier<Iterable<PlayerView>> viewers = () -> matchUI.getLocalPlayers();
+        final GameView gameView = matchUI.getGameView();
+        final boolean commander = (gameView != null && gameView.isCommander())
+                || (player.getCommanders() != null && !player.getCommanders().isEmpty());
+        // opponents in a multiplayer game share the top of the board, so their bars drop the phase ladder
+        final boolean compact = mirror && gameView != null && gameView.getPlayers().size() > 2;
+        if (arenaLadder == null) {
+            arenaLadder = phaseIndicator.createArenaLadder();
+        }
+
+        final JPanel center = new JPanel(new MigLayout("insets 0, gap 8, ay center"));
+        center.setOpaque(false);
+        if (!compact) {
+            center.add(arenaLadder[0]);
+        }
+        center.add(avatarArea, compact ? "w 92!, h 100%!" : "w 112!, h 100%!");
+        if (!compact) {
+            center.add(arenaLadder[1]);
+        }
+
+        arenaCommanderDamage.setOpaque(false);
+        final JPanel right = new JPanel(new MigLayout("insets 0, gap 6, ax right, ay center, hidemode 3"));
+        right.setOpaque(false);
+        right.add(arenaCommanderDamage);
+        right.add(detailsPanel.createArenaManaPool());
+        if (mirror) {
+            right.add(detailsPanel.createArenaHandFan(viewers), compact ? "w 96!, h 100%!" : "w 150!, h 100%!");
+        }
+
+        final String columns = compact ? "[40%][grow, center][34%]" : "[30%][grow, center][30%]";
+        final JPanel bar = new JPanel(new MigLayout("insets 2 8 2 8, gap 0", columns, "[grow, fill]"));
+        bar.setOpaque(false);
+        bar.add(detailsPanel.createArenaZones(viewers, commander, compact), "al left, h 100%!");
+        bar.add(center, "h 100%!");
+        bar.add(right, "al right, h 100%!");
+        updateArenaCommanderDamage();
+
+        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap 1"));
+        if (mirror) {
+            pnl.add(bar, "w 100%!, h 27%!");
+            pnl.add(scroller, "w 100%!, h 73%!");
+        } else {
+            // the local battlefield is taller, so the same bar height sits lower on screen
+            pnl.add(scroller, "w 100%!, h 76%!");
+            pnl.add(bar, "w 100%!, h 24%!");
+        }
     }
 
     @Override
@@ -286,6 +462,12 @@ public class VField implements IVDoc<CField> {
 
     /** Solid red frame once the player is picked, dashed frame while the player can be picked, none otherwise. */
     public void updateAvatarBorder() {
+        if (ArenaTheme.isEnabled()) {
+            // the glow is painted with the portrait frame
+            avatarArea.setBorder(borderAvatarSimple);
+            avatarArea.repaint();
+            return;
+        }
         final boolean highlighted = isHighlighted();
         avatarArea.setBorder(highlighted ? borderAvatarHighlighted
                 : control.getMatchUI().isSelectable(player) ? borderAvatarSelectable : borderAvatarSimple);
@@ -293,6 +475,11 @@ public class VField implements IVDoc<CField> {
     }
 
     public void setAvatar(final SkinImage avatar) {
+        if (ArenaTheme.isEnabled() && avatar != null && avatar.getIcon() != null) {
+            lblAvatar.setIcon(new FSkin.UnskinnedIcon(ArenaTheme.createCircleAvatar(avatar.getIcon().getImage(), 256)));
+            lblAvatar.getResizeTimer().start();
+            return;
+        }
         lblAvatar.setIcon(avatar);
         lblAvatar.getResizeTimer().start();
     }
@@ -487,7 +674,50 @@ public class VField implements IVDoc<CField> {
         }
 
         updateAvatarBorder();
+        updateArenaCommanderDamage();
         this.avatarArea.setToolTipText(getPlayerDetailsHtml());
+    }
+
+    /** One chip per opposing commander that has dealt this player combat damage (21 is lethal). */
+    private void updateArenaCommanderDamage() {
+        if (!ArenaTheme.isEnabled()) {
+            return;
+        }
+        arenaCommanderDamage.removeAll();
+        final GameView gameView = matchUI == null ? null : matchUI.getGameView();
+        if (gameView != null && gameView.isCommander()) {
+            for (final PlayerView opponent : gameView.getPlayers()) {
+                if (opponent == player || opponent.getCommanders() == null) {
+                    continue;
+                }
+                for (final CardView commander : opponent.getCommanders()) {
+                    final int damage = player.getCommanderDamage(commander);
+                    if (damage <= 0) {
+                        continue;
+                    }
+                    final JLabel chip = new JLabel(Localizer.getInstance().getMessage("lblArenaCommanderDamage", damage)) {
+                        @Override
+                        protected void paintComponent(final Graphics g) {
+                            final Graphics2D g2 = (Graphics2D) g;
+                            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                            g2.setColor(new Color(10, 12, 18, 220));
+                            g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, getHeight(), getHeight());
+                            g2.setColor(damage >= 15 ? ArenaTheme.DANGER : ArenaTheme.GOLD_DIM);
+                            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, getHeight(), getHeight());
+                            super.paintComponent(g);
+                        }
+                    };
+                    chip.setFont(FSkin.getBoldFont(12).getBaseFont());
+                    chip.setForeground(damage >= 15 ? new Color(0xFF8A8A) : ArenaTheme.TEXT);
+                    chip.setHorizontalAlignment(SwingConstants.CENTER);
+                    chip.setToolTipText(Localizer.getInstance().getMessage("lblArenaCommanderDamageTooltip",
+                            CardTranslation.getTranslatedName(commander.getName()), damage));
+                    arenaCommanderDamage.add(chip, "h 24!, w pref+16!");
+                }
+            }
+        }
+        arenaCommanderDamage.revalidate();
+        arenaCommanderDamage.repaint();
     }
 
     private String getPlayerDetailsHtml() {

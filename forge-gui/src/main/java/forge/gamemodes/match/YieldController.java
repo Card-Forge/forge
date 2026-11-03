@@ -98,6 +98,9 @@ public class YieldController {
         return override != null ? override : FModel.getPreferences().getPref(pref);
     }
     public boolean getBoolPref(FPref pref) {
+        if (pref == FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS && Boolean.parseBoolean(getStringPref(FPref.UI_ARENA_THEME))) {
+            return true; // the Arena look always marks what can be played, as Arena does
+        }
         return Boolean.parseBoolean(getStringPref(pref));
     }
     public synchronized void setPref(FPref pref, String value) {

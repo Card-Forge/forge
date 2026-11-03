@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import forge.gui.MouseUtil;
 import forge.localinstance.skin.FSkinProp;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinCursor;
 import forge.toolbox.FSkin.SkinnedLayeredPane;
@@ -119,6 +120,10 @@ public final class SRearrangingUtil {
      *  @param e &emsp; {@link java.awt.event.MouseEvent}
      */
     private static void rearrange(final MouseEvent e) {
+        // The Arena match board is fixed; tabs can still be clicked, just not dragged.
+        if (ArenaTheme.isMatchBoard()) {
+            return;
+        }
         // nestingMargin controls the thickness of the "zones" bordering
         // the center body.
         final int nestingMargin = 30;

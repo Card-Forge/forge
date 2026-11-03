@@ -38,6 +38,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.screens.match.ArenaFocusCard;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
@@ -147,6 +148,9 @@ public class CPrompt implements ICDoc {
     public void setMessage(final String s0, final CardView card) {
         view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
         view.setCardView(card);
+        ArenaFocusCard.refresh(matchUI);
+        // the viewer sets its text on a later turn of the event queue; measure after it
+        javax.swing.SwingUtilities.invokeLater(view::placeArena);
     }
 
     /**

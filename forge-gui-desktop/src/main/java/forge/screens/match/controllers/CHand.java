@@ -31,8 +31,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -40,6 +42,7 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
+import forge.toolbox.ArenaTheme;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
@@ -127,6 +130,19 @@ public class CHand implements ICDoc {
             cardPanels.add(cardPanel);
         }
 
+        // Arena: the commander and anything castable from another zone sit to the right of the hand
+        final List<CardView> extras = getArenaCastables(cards);
+        for (final CardView card : extras) {
+            CardPanel cardPanel = p.getCardPanel(card.getId());
+            if (cardPanel == null) {
+                cardPanel = new CardPanel(matchUI, card);
+            } else {
+                cardPanel.setCard(card);
+            }
+            cardPanels.add(cardPanel);
+        }
+        p.setFanExtras(extras.size());
+
         p.setCardPanels(cardPanels);
         view.updateTabLabel(ordering.size());
 
@@ -181,6 +197,45 @@ public class CHand implements ICDoc {
             }
         }
     }
+
+    /**
+     * Arena: the player's commanders while they wait in the command zone, then every other card
+     * outside the hand the game says can be played right now (flashback, cards exiled to be
+     * played, a companion...). Empty off the Arena board.
+     */
+    private List<CardView> getArenaCastables(final List<CardView> hand) {
+        final List<CardView> extras = new ArrayList<>();
+        if (!ArenaTheme.isMatchBoard() || !matchUI.isLocalPlayer(player)) {
+            return extras;
+        }
+        if (player.getCommanders() != null) {
+            for (final CardView commander : player.getCommanders()) {
+                if (ZoneType.Command.equals(commander.getZone()) && !extras.contains(commander)) {
+                    extras.add(commander);
+                }
+            }
+        }
+        final GameView game = matchUI.getGameView();
+        if (game == null) {
+            return extras;
+        }
+        for (final PlayerView p : game.getPlayers()) {
+            for (final ZoneType zone : ARENA_CASTABLE_ZONES) {
+                final Iterable<CardView> cards = p.getCards(zone);
+                if (cards == null) {
+                    continue;
+                }
+                for (final CardView card : cards) {
+                    if (matchUI.isActionable(card) && !hand.contains(card) && !extras.contains(card)) {
+                        extras.add(card);
+                    }
+                }
+            }
+        }
+        return extras;
+    }
+
+    private static final ZoneType[] ARENA_CASTABLE_ZONES = {ZoneType.Command, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Library};
 
     private void revealPlaceholders(final List<CardPanel> placeholders) {
         for (final CardPanel placeholder : placeholders) {

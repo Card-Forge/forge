@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -19,6 +21,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
@@ -53,6 +56,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     private final JLabel lblHandle = new DragHandle();
     private final JLabel lblOverflow = new JLabel();
     private IVDoc<? extends ICDoc> docSelected = null;
+    private boolean arenaGlass = false;
+    private boolean arenaDock = false; // the button dock: its glass stops below the buttons
 
     public DragCell() {
         super(new MigLayout("insets 0, gap 0, wrap 2"));
@@ -93,6 +98,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      */
     public void doCellLayout(final boolean showTabs) {
         this.removeAll();
+        applyArenaChrome();
         final int borderT = SLayoutConstants.BORDER_T;
         final int headH = ((showTabs || allDocs.size() > 1) ? SLayoutConstants.HEAD_H : 0);
         this.add(pnlHead,
@@ -109,9 +115,55 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     }
 
     /**
+     * On the Arena board, battlefield and hand cells are see-through so the board art
+     * shows behind the cards; every other cell sits on a glass panel.
+     */
+    private void applyArenaChrome() {
+        arenaGlass = false;
+        if (!ArenaTheme.isMatchBoard()) {
+            return;
+        }
+        boolean boardCell = false;
+        for (final IVDoc<? extends ICDoc> doc : allDocs) {
+            final EDocID id = doc.getDocumentID();
+            // the prompt floats over the portrait with no panel of its own
+            if (Arrays.asList(EDocID.Fields).contains(id) || Arrays.asList(EDocID.Hands).contains(id) || id == EDocID.REPORT_MESSAGE) {
+                boardCell = true;
+                break;
+            }
+        }
+        arenaGlass = !boardCell;
+        arenaDock = allDocs.size() == 1 && allDocs.get(0).getDocumentID() == EDocID.BUTTON_DOCK;
+        pnlBody.setBackground(new Color(0, 0, 0, 0));
+        pnlBody.setBorderToggle(false);
+    }
+
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+        if (arenaGlass) {
+            final int border = SLayoutConstants.BORDER_T;
+            int h = getHeight() - border;
+            if (arenaDock) {
+                int bottom = 0;
+                for (final java.awt.Component c : pnlBody.getComponents()) {
+                    bottom = Math.max(bottom, c.getY() + c.getHeight());
+                }
+                if (bottom > 0) {
+                    h = Math.min(h, pnlBody.getY() + bottom + 10);
+                }
+            }
+            ArenaTheme.paintGlassPanel((Graphics2D) g, 0, 0, getWidth() - border, h);
+        }
+    }
+
+    /**
      * Determines visibility of tabs on game screen.
      */
     private static boolean showGameTabs() {
+        if (ArenaTheme.isMatchBoard()) {
+            return false;
+        }
         final ForgePreferences prefs = FModel.getPreferences();
         return !prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS);
     }

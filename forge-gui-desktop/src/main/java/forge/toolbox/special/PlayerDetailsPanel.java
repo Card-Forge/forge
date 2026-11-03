@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.swing.*;
 
@@ -36,6 +37,12 @@ public class PlayerDetailsPanel extends JPanel {
     private final Map<ZoneType, DetailLabelZone> zoneLabels = new EnumMap<>(ZoneType.class);
     private final List<DetailLabelMana> manaLabels = new ArrayList<>();
     private final DetailLabelExtra extraLabel;
+
+    // Arena board: zones drawn as card piles, created on first use
+    private final Map<ZoneType, ArenaZonePile> arenaPiles = new EnumMap<>(ZoneType.class);
+    private boolean arenaMode;
+    private Function<ZoneType, Runnable> zoneActionFactory;
+    private BiConsumer<ZoneType, MouseEvent> zoneRightClick;
 
     public PlayerDetailsPanel(final PlayerView player, final EnumSet<ZoneType> supportedZones) {
         this.player = player;
@@ -124,6 +131,68 @@ public class PlayerDetailsPanel extends JPanel {
         add(row7, constraintsRow);
     }
 
+    /**
+     * Arena board: library, graveyard and exile (and the command zone in Commander) as
+     * card piles, with slim chips beside them for the hand count and the less common
+     * zones, shown only when not empty. Compact bars leave the chips out.
+     */
+    public JPanel createArenaZones(final Supplier<Iterable<PlayerView>> viewers, final boolean withCommand, final boolean compact) {
+        arenaMode = true;
+        final JPanel pnl = new JPanel(new MigLayout("insets 0, gap 4, hidemode 3"));
+        pnl.setOpaque(false);
+        final String pileSize = compact ? "w 58!, h 100%!" : "w 74!, h 100%!";
+        if (withCommand) {
+            pnl.add(getArenaPile(ZoneType.Command, viewers), pileSize + ", gapright 6");
+        }
+        for (final ZoneType zone : new ZoneType[] {ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile}) {
+            pnl.add(getArenaPile(zone, viewers), pileSize);
+        }
+        if (compact) {
+            updateZones();
+            return pnl;
+        }
+        final JPanel chips = new JPanel(new MigLayout("insets 0, gap 2, wrap 2, hidemode 3"));
+        chips.setOpaque(false);
+        for (final ZoneType zone : new ZoneType[] {ZoneType.Hand, ZoneType.Flashback, ZoneType.Command, ZoneType.Sideboard}) {
+            chips.add(zoneLabels.get(zone), "w 54!, h 24!");
+        }
+        chips.add(extraLabel, "w 54!, h 24!");
+        pnl.add(chips, "aligny center");
+        updateZones();
+        return pnl;
+    }
+
+    /** An opponent's hand as a fan of card backs. */
+    public JComponent createArenaHandFan(final Supplier<Iterable<PlayerView>> viewers) {
+        arenaMode = true;
+        return getArenaPile(ZoneType.Hand, viewers);
+    }
+
+    /** Floating mana: one chip per colour, visible only while that colour is in the pool. */
+    public JPanel createArenaManaPool() {
+        arenaMode = true;
+        final JPanel pnl = new JPanel(new MigLayout("insets 0, gap 3, hidemode 3"));
+        pnl.setOpaque(false);
+        for (final DetailLabelMana label : manaLabels) {
+            pnl.add(label, "w 48!, h 28!");
+        }
+        updateManaPool();
+        return pnl;
+    }
+
+    private ArenaZonePile getArenaPile(final ZoneType zone, final Supplier<Iterable<PlayerView>> viewers) {
+        ArenaZonePile pile = arenaPiles.get(zone);
+        if (pile == null) {
+            pile = new ArenaZonePile(player, zone, viewers);
+            arenaPiles.put(zone, pile);
+            if (zoneActionFactory != null) {
+                addZoneMouseActions(pile, zone);
+            }
+        }
+        pile.update();
+        return pile;
+    }
+
     public Component getLblLibrary() {
         return zoneLabels.get(ZoneType.Library);
     }
@@ -135,37 +204,40 @@ public class PlayerDetailsPanel extends JPanel {
         for(DetailLabelZone zone : this.zoneLabels.values())
             zone.onContentUpdate();
         extraLabel.onContentUpdate();
+        if (arenaMode) {
+            for (final Map.Entry<ZoneType, DetailLabelZone> e : zoneLabels.entrySet()) {
+                e.getValue().setVisible(e.getKey() == ZoneType.Hand || player.getZoneSize(e.getKey()) > 0);
+            }
+            for (final ArenaZonePile pile : arenaPiles.values()) {
+                pile.update();
+            }
+        }
     }
 
     /**
      * Handles observer update of the mana pool.
      */
     public void updateManaPool() {
-        for (final DetailLabel label : manaLabels) {
+        for (final DetailLabelMana label : manaLabels) {
             label.onContentUpdate();
+            if (arenaMode) {
+                label.setVisible(player.getMana(ManaAtom.fromName(label.color)) > 0);
+            }
         }
     }
 
     public void setupMouseActions(Function<ZoneType, Runnable> zoneActionFactory,
                                    BiConsumer<ZoneType, MouseEvent> zoneRightClick,
                                    Function<Byte, Boolean> manaAction) {
+        this.zoneActionFactory = zoneActionFactory;
+        this.zoneRightClick = zoneRightClick;
 
         // Detail label listeners
         for(Map.Entry<ZoneType, DetailLabelZone> zoneEntry : zoneLabels.entrySet()) {
-            final ZoneType zone = zoneEntry.getKey();
-            Runnable action = zoneActionFactory.apply(zone);
-            zoneEntry.getValue().addMouseListener(new FMouseAdapter() {
-                @Override
-                public void onLeftClick(MouseEvent e) {
-                    action.run();
-                }
-                @Override
-                public void onRightClick(MouseEvent e) {
-                    if (zoneRightClick != null) {
-                        zoneRightClick.accept(zone, e);
-                    }
-                }
-            });
+            addZoneMouseActions(zoneEntry.getValue(), zoneEntry.getKey());
+        }
+        for (final Map.Entry<ZoneType, ArenaZonePile> pileEntry : arenaPiles.entrySet()) {
+            addZoneMouseActions(pileEntry.getValue(), pileEntry.getKey());
         }
 
         for (final DetailLabelMana label : manaLabels) {
@@ -181,6 +253,22 @@ public class PlayerDetailsPanel extends JPanel {
         }
 
         this.extraLabel.setupMouseActions(zoneActionFactory);
+    }
+
+    private void addZoneMouseActions(final Component target, final ZoneType zone) {
+        final Runnable action = zoneActionFactory.apply(zone);
+        target.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                action.run();
+            }
+            @Override
+            public void onRightClick(MouseEvent e) {
+                if (zoneRightClick != null) {
+                    zoneRightClick.accept(zone, e);
+                }
+            }
+        });
     }
 
     private static abstract class DetailLabel extends FLabel {

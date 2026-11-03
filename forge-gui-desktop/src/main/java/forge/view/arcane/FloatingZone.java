@@ -55,9 +55,11 @@ import forge.gui.framework.SRearrangingUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.screens.match.ArenaCardBrowser;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VHand;
 import forge.screens.match.views.VZone;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
@@ -119,6 +121,11 @@ public class FloatingZone extends FloatingCardArea {
     // ========== Floating zone API ==========
 
     public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        // the Arena board looks through zones in its card browser rather than a floating window
+        if (ArenaTheme.isMatchBoard() && zone != ZoneType.Hand) {
+            ArenaCardBrowser.browseZone(matchUI, player, zone);
+            return;
+        }
         // If a VHand tab already exists for this player (default layout) and tab mode
         // is active, just select the existing tab instead of creating a duplicate.
         if (zone == ZoneType.Hand && isTabMode(zone, matchUI.isLocalPlayer(player))) {

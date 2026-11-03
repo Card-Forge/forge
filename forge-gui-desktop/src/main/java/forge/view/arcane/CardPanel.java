@@ -17,7 +17,9 @@
  */
 package forge.view.arcane;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -67,6 +69,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -127,8 +130,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private boolean isSelected;
     private boolean hasFlash;
     private String zoneBannerText;
+    private int arenaCostWidth; // Arena hand: the uncovered width the cost above the card lines up with; 0 outside a fan
     private Color zoneBannerColor;
     private CachedCardImage cachedImage;
+    // Arena tiles: a larger copy of the card image and the art cropped from it
+    private CachedCardImage tileSource;
+    private int tileSourceHeight;
+    private BufferedImage tileArt;
+    private BufferedImage tileArtSource;
     private int groupCount;
     private int hotkeyDigit; // 1..9 paints a numbered badge for Ctrl+digit selection; 0 hides
     private Font badgeFont;
@@ -224,6 +233,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         damageText.setForeground(new Color(160,0,0));
         damageText.setGlow(Color.white);
         add(damageText);
+
+        if (ArenaTheme.isEnabled()) {
+            ptText.setFont(getFont().deriveFont(Font.BOLD, 14f));
+            ptText.setForeground(ArenaTheme.TEXT);
+            ptText.setBadge(new Color(8, 13, 25, 230), ArenaTheme.GOLD_DIM);
+            damageText.setFont(getFont().deriveFont(Font.BOLD, 13f));
+            damageText.setForeground(Color.white);
+            damageText.setGlow(new Color(90, 0, 0));
+            damageText.setBadge(new Color(170, 30, 36, 235), new Color(255, 140, 140));
+        }
     }
 
     private void createCardIdOverlay() {
@@ -236,6 +255,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void updateImage() {
         FThreads.assertExecutedByEdt(true);
+        tileSource = null;
+        tileArt = null;
 
         if (card == null)  {
             cachedImage = null;
@@ -321,6 +342,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // if we are rendering borderless and the card has no alpha channel, use square corners to avoid visual glitches with highlight frames.
         final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
+
+        if (ArenaTheme.isEnabled()) {
+            paintArenaFrame(g2d, cornerSize, offset);
+            return;
+        }
 
         // Yellow glow for cards that Auto would tap to pay (actionable strength >= 2)
         if (isPreferenceEnabled(FPref.UI_SHOW_AUTOTAP_PREVIEW) && matchUI.getActionableStrength(getCard()) >= 2) {
@@ -410,6 +436,328 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
     }
 
+    /**
+     * Arena card frame: a soft drop shadow, then one glow for the most important state
+     * (chosen, targetable, attacking/blocking, hovered, playable) with a crisp rim on top.
+     */
+    private void paintArenaFrame(final Graphics2D g2d, final int cornerSize, final int offset) {
+        final int x = cardXOffset;
+        final int y = cardYOffset + offset;
+        final int arc = Math.max(cornerSize, Math.max(8, Math.round(cardWidth * 0.11f)));
+        final int spread = Math.max(3, Math.round(cardWidth * 0.06f));
+        final CardView cv = getCard();
+
+        // Shadow beneath the card
+        if (!isAnimationPanel) {
+            ArenaTheme.paintGlow(g2d, x, y + Math.max(2, cardWidth / 30), cardWidth, cardHeight, arc,
+                    Color.BLACK, Math.max(2, spread / 2 + 1), 150);
+        }
+
+        Color glow = null;
+        int strength = 230;
+        if (cv != null) {
+            final boolean actionable = matchUI.isActionable(cv);
+            if (matchUI.isHighlighted(cv)) {
+                glow = ArenaTheme.CHOSEN;
+            } else if (matchUI.isSelectable(cv)) {
+                glow = ArenaTheme.SELECTABLE;
+            } else if (cv.isAttacking()) {
+                glow = ArenaTheme.DANGER;
+            } else if (cv.isBlocking()) {
+                glow = ArenaTheme.PLAYABLE.darker();
+            } else if (actionable) {
+                glow = ArenaTheme.PLAYABLE;
+                strength = isSelected ? 255 : 210;
+            } else if (isSelected) {
+                glow = ArenaTheme.HOVER;
+                strength = 150;
+            } else if (isPreferenceEnabled(FPref.UI_SHOW_AUTOTAP_PREVIEW) && matchUI.getActionableStrength(cv) >= 2) {
+                glow = new Color(255, 236, 120);
+                strength = 170;
+            } else if (hasFlash && matchUI.mayView(cv)) {
+                glow = new Color(110, 230, 255);
+                strength = 150;
+            }
+        }
+        if (glow != null) {
+            ArenaTheme.paintGlow(g2d, x, y, cardWidth, cardHeight, arc, glow, spread + (isSelected ? 2 : 0), strength);
+        }
+
+        // Card body; white-bordered and gold-bordered printings keep their border colour
+        Color body = Color.black;
+        if (cv != null && matchUI.mayView(cv)) {
+            final CardStateView state = cv.getCurrentState();
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
+            if (cv.isImmutable()) {
+                body = ArenaTheme.GOLD_DIM;
+            } else if (ed != null && state.getFoilIndex() == 0) {
+                switch (ed.getBorderColor()) {
+                    case WHITE: body = Color.WHITE; break;
+                    case GOLD: body = Color.ORANGE; break;
+                    case SILVER: body = Color.GRAY; break;
+                    default: break;
+                }
+            }
+        }
+        if (isArenaTile()) {
+            paintArenaTile(g2d, x, y, cardWidth, cardHeight, arc);
+        } else {
+            g2d.setColor(body);
+            g2d.fillRoundRect(x, y, cardWidth, cardHeight, cornerSize, cornerSize);
+        }
+
+        if (glow != null) {
+            g2d.setColor(glow);
+            g2d.setStroke(new BasicStroke(Math.max(1.5f, cardWidth / 70f)));
+            g2d.drawRoundRect(x - 1, y - 1, cardWidth + 1, cardHeight + 1, cornerSize + 2, cornerSize + 2);
+        }
+    }
+
+    /** On the Arena board, visible battlefield cards are drawn as compact art tiles rather than full cards. */
+    private boolean isArenaTile() {
+        return ArenaTheme.isEnabled() && !isAnimationPanel && card != null && !card.isFaceDown()
+                && ZoneType.Battlefield.equals(card.getZone()) && matchUI.mayView(card);
+    }
+
+    /** Bold Roboto (bundled with Forge) at the given size, for the text drawn on Arena tiles. */
+    private static Font arenaFont(final float size) {
+        return smallCounterFont != null ? smallCounterFont.deriveFont(size) : new Font(Font.SANS_SERIF, Font.BOLD, Math.round(size));
+    }
+
+    /** Text in the bottom box of a tile: power/toughness, or loyalty; null when the card has neither. */
+    private String getArenaTileStats() {
+        final CardStateView state = card.getCurrentState();
+        if (state.isCreature() || state.isVehicle()) {
+            return state.getPower() + "/" + state.getToughness();
+        }
+        return state.isPlaneswalker() ? state.getLoyalty() : null;
+    }
+
+    /**
+     * Where the parts of a tile go: margin, name bar, the art window below it, the row
+     * height used for the stats box and icons, and the stats box over the art's bottom-right corner.
+     */
+    private record TileLayout(int m, int nameH, int row, Rectangle art, Rectangle stats) { }
+
+    private TileLayout layoutArenaTile(final Graphics g) {
+        final int x = cardXOffset, y = cardYOffset, w = cardWidth, h = cardHeight;
+        final String stats = getArenaTileStats();
+        final int m = Math.max(2, Math.round(w * 0.03f));
+        final int nameH = Math.max(11, Math.round(h * 0.1f));
+        final int row = Math.max(13, Math.round(h * 0.13f));
+        final Rectangle art = new Rectangle(x + m, y + m + nameH, w - 2 * m, h - 2 * m - nameH);
+        Rectangle statsBox = null;
+        if (stats != null) {
+            final int bw = g.getFontMetrics(arenaFont(Math.max(10f, row * 0.78f))).stringWidth(stats) + 12;
+            statsBox = new Rectangle(x + w - m - bw - 1, y + h - m - row - 1, bw, row);
+        }
+        return new TileLayout(m, nameH, row, art, statsBox);
+    }
+
+    /**
+     * The art crop for a tile, at the art window's size in device pixels. It is cut from
+     * a copy of the card image fetched large enough that the art box needs no upscaling.
+     */
+    private BufferedImage getArenaTileArt(final int width, final int height) {
+        final float screenScale = GuiBase.getInterface().getScreenScale();
+        final int pw = Math.max(1, Math.round(width * screenScale)), ph = Math.max(1, Math.round(height * screenScale));
+        // the art box is about 45% of a card's height
+        final int srcH = Math.min(1040, Math.max(Math.round(cardHeight * screenScale), Math.round(ph / 0.45f)));
+        if (tileSource == null || tileSourceHeight != srcH) {
+            tileSourceHeight = srcH;
+            tileSource = new CachedCardImage(card, matchUI.getLocalPlayers(), Math.round(srcH / ASPECT_RATIO), srcH) {
+                @Override
+                public void onImageFetched() {
+                    tileArt = null;
+                    repaint();
+                }
+            };
+            tileArt = null;
+        }
+        final BufferedImage src = tileSource.getImage();
+        if (src == null) {
+            return null;
+        }
+        if (tileArt == null || tileArtSource != src || tileArt.getWidth() != pw || tileArt.getHeight() != ph) {
+            // the art box of a standard frame: about 10% in from the sides, 11% to 56% down; cover-fit it
+            final float sx = src.getWidth() * 0.1f, sy = src.getHeight() * 0.11f;
+            final float sw = src.getWidth() * 0.8f, sh = src.getHeight() * 0.45f;
+            final float fit = Math.max(pw / sw, ph / sh);
+            final float cw = pw / fit, ch = ph / fit;
+            final float cx = sx + (sw - cw) / 2f, cy = sy + (sh - ch) / 2f;
+            final BufferedImage art = new BufferedImage(pw, ph, BufferedImage.TYPE_INT_RGB);
+            final Graphics2D ag = art.createGraphics();
+            ag.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            ag.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            ag.drawImage(src, 0, 0, pw, ph, Math.round(cx), Math.round(cy), Math.round(cx + cw), Math.round(cy + ch), null);
+            ag.dispose();
+            tileArt = art;
+            tileArtSource = src;
+        }
+        return tileArt;
+    }
+
+    /**
+     * Arena battlefield tile: a frame in the card's colour, the name on a dark bar, the
+     * card art, and the power/toughness (or loyalty) in a box centred on the bottom edge.
+     */
+    private void paintArenaTile(final Graphics2D g, final int x, final int y, final int w, final int h, final int arc) {
+        final CardStateView state = card.getCurrentState();
+        final TileLayout tl = layoutArenaTile(g);
+        final Rectangle a = tl.art();
+        final RoundRectangle2D outer = new RoundRectangle2D.Float(x, y, w, h, arc, arc);
+        final Color frame = ArenaTheme.frameColor(state.getColors(), state.isLand(), state.isArtifact());
+        g.setPaint(new GradientPaint(0, y, frame.brighter(), 0, y + h, frame.darker()));
+        g.fill(outer);
+        g.setColor(new Color(0, 0, 0, 170));
+        g.setStroke(new BasicStroke(1f));
+        g.draw(new RoundRectangle2D.Float(x + 0.5f, y + 0.5f, w - 1, h - 1, arc, arc));
+
+        if (a.width > 0 && a.height > 0) {
+            final BufferedImage art = getArenaTileArt(a.width, a.height);
+            if (art != null) {
+                g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                g.drawImage(art, a.x, a.y, a.width, a.height, null);
+            } else {
+                g.setColor(ArenaTheme.NAVY);
+                g.fill(a);
+            }
+            g.setColor(new Color(0, 0, 0, 140));
+            g.drawRect(a.x, a.y, a.width - 1, a.height - 1);
+            if (isTapped()) {
+                g.setColor(new Color(20, 22, 28, 70)); // a tapped card is turned sideways and slightly dimmed
+                g.fill(a);
+            }
+        }
+
+        // Name bar
+        final int m = tl.m(), nameH = tl.nameH();
+        g.setColor(new Color(12, 14, 20, 215));
+        g.fillRect(x + m, y + m, w - 2 * m, nameH);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+        g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g.setFont(arenaFont(Math.max(9f, nameH * 0.7f)));
+        final FontMetrics fm = g.getFontMetrics();
+        String name = CardTranslation.getTranslatedName(state.getName());
+        final int maxNameW = w - 2 * m - 6;
+        if (fm.stringWidth(name) > maxNameW) {
+            while (name.length() > 1 && fm.stringWidth(name + "\u2026") > maxNameW) {
+                name = name.substring(0, name.length() - 1);
+            }
+            name = name + "\u2026";
+        }
+        g.setColor(ArenaTheme.TEXT);
+        g.drawString(name, x + m + 3, y + m + (nameH + fm.getAscent() - fm.getDescent()) / 2);
+
+        // Power/toughness box on the bottom edge
+        final Rectangle sb = tl.stats();
+        if (sb != null) {
+            final String stats = getArenaTileStats();
+            final RoundRectangle2D box = new RoundRectangle2D.Float(sb.x, sb.y, sb.width, sb.height, 6, 6);
+            g.setColor(new Color(0xF4EFE2));
+            g.fill(box);
+            g.setColor(new Color(40, 34, 26));
+            g.draw(box);
+            g.setFont(arenaFont(Math.max(10f, sb.height * 0.78f)));
+            final FontMetrics sfm = g.getFontMetrics();
+            g.setColor(card.getDamage() > 0 ? new Color(0xB3261E) : new Color(24, 22, 20));
+            g.drawString(stats, sb.x + (sb.width - sfm.stringWidth(stats)) / 2, sb.y + (sb.height + sfm.getAscent() - sfm.getDescent()) / 2);
+        }
+    }
+
+    /**
+     * Everything else on a tile, kept to its bottom edge as on the Arena board. Filling
+     * leftwards from the stats box: counters and markers as chips ("1x +1/+1"), then
+     * summoning sickness and phasing; keyword icons fill in from the left edge. Chips
+     * that do not fit on that row stack up above the stats box. Damage is a red badge.
+     */
+    private void drawArenaTileOverlays(final Graphics2D g) {
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        final TileLayout tl = layoutArenaTile(g);
+        final Rectangle a = tl.art(), sb = tl.stats();
+        final int m = tl.m();
+        final int row = tl.row();
+        final int rowY = cardYOffset + cardHeight - m - row - 1;
+        int rx = (sb != null ? sb.x : cardXOffset + cardWidth - m) - 2; // next free x, moving left
+
+        final List<String> chips = new ArrayList<>();
+        final List<Color> chipColors = new ArrayList<>();
+        if (card.getCounters() != null) {
+            for (final Multiset.Entry<CounterType> e : card.getCounters().entrySet()) {
+                final CounterType counter = e.getElement();
+                chips.add(e.getCount() + "x " + counter.getCounterOnCardDisplayName());
+                chipColors.add(new Color(counter.getRed(), counter.getGreen(), counter.getBlue()));
+            }
+        }
+        if (card.getMarkerText() != null) {
+            for (final String marker : card.getMarkerText()) {
+                chips.add(marker);
+                chipColors.add(ArenaTheme.TEXT_DIM);
+            }
+        }
+        g.setFont(arenaFont(Math.max(9f, row * 0.6f)));
+        final FontMetrics fm = g.getFontMetrics();
+        final int stackRight = sb != null ? sb.x + sb.width : a.x + a.width - 1;
+        int overflowY = rowY;
+        for (int i = 0; i < chips.size(); i++) {
+            final int cw = fm.stringWidth(chips.get(i)) + 12;
+            final int chipX, chipY;
+            if (rx - cw >= a.x + 1) {
+                chipX = rx - cw;
+                chipY = rowY;
+                rx -= cw + 3;
+            } else {
+                // no room on the bottom row: stack above the stats box
+                overflowY -= row + 2;
+                if (overflowY < a.y) {
+                    break;
+                }
+                chipX = Math.max(a.x + 1, stackRight - cw);
+                chipY = overflowY;
+            }
+            final RoundRectangle2D chip = new RoundRectangle2D.Float(chipX, chipY, cw, row, row, row);
+            g.setColor(new Color(8, 10, 16, 230));
+            g.fill(chip);
+            g.setColor(chipColors.get(i));
+            g.draw(chip);
+            g.drawString(chips.get(i), chipX + 6, chipY + (row + fm.getAscent() - fm.getDescent()) / 2);
+        }
+
+        for (final String symbol : new String[] {card.isSick() ? "summonsick" : null, card.isPhasedOut() ? "phasing" : null}) {
+            if (symbol != null && rx - row >= a.x) {
+                rx -= row + 1;
+                CardFaceSymbols.drawSymbol(symbol, g, rx, rowY, row);
+            }
+        }
+        if (showAbilityIcons()) {
+            int ix = a.x + 1;
+            for (final FSkinProp prop : FSkinProp.iconsFromCardState(card.getCurrentState())) {
+                if (ix + row > rx - 1) {
+                    break;
+                }
+                g.setColor(new Color(10, 12, 18, 210));
+                g.fillRoundRect(ix, rowY, row, row, 4, 4);
+                FSkin.drawImage(g, FSkin.getImage(prop), ix + 1, rowY + 1, row - 2, row - 2);
+                ix += row + 2;
+            }
+        }
+
+        if (card.getDamage() > 0) {
+            final String dmg = String.valueOf(card.getDamage());
+            g.setFont(arenaFont(Math.max(10f, row * 0.75f)));
+            final FontMetrics dfm = g.getFontMetrics();
+            final int d = Math.max(row, dfm.stringWidth(dmg) + 8);
+            final int dx = a.x + a.width - d - 1, dy = a.y + 2;
+            g.setColor(new Color(178, 30, 36, 240));
+            g.fillOval(dx, dy, d, d);
+            g.setColor(new Color(255, 170, 170));
+            g.drawOval(dx, dy, d, d);
+            g.setColor(Color.WHITE);
+            g.drawString(dmg, dx + (d - dfm.stringWidth(dmg)) / 2, dy + (d + dfm.getAscent() - dfm.getDescent()) / 2);
+        }
+    }
+
     /** Pref is normalized to 6 hex chars on the write side; this just parses,
      *  falling back to the FPref default if the stored value is malformed. */
     private static Color parseActionableHighlightColor() {
@@ -429,7 +777,19 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     protected final void paintChildren(final Graphics g) {
-        super.paintChildren(g);
+        if (ArenaTheme.isEnabled() && !isArenaTile()) {
+            // Arena cards have rounded corners all the way through, image included
+            final Graphics2D cg = (Graphics2D) g.create();
+            final int border = calculateBorderSize();
+            final int arc = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE)) - border;
+            cg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            cg.clip(new RoundRectangle2D.Float(cardXOffset + border, cardYOffset + border,
+                    cardWidth - 2 * border, cardHeight - 2 * border, arc, arc));
+            super.paintChildren(cg);
+            cg.dispose();
+        } else {
+            super.paintChildren(g);
+        }
 
         if (isAnimationPanel || card == null) {
             return;
@@ -460,6 +820,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
         if (zoneBannerText != null) {
             drawZoneBanner(g);
+        }
+        if (arenaCostWidth > 0 && ArenaTheme.isEnabled() && canShow) {
+            drawArenaCostRow((Graphics2D) g);
         }
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
@@ -497,16 +860,24 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         imagePanel.setLocation(imgPos);
         imagePanel.setSize(imgSize);
+        final boolean tile = isArenaTile();
+        imagePanel.setVisible(!tile);
 
         final boolean canShow = matchUI.mayView(card);
         final boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
 
-        displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
-        displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
-        displayCardIdOverlay(showText && canShow && showCardIdOverlay(), imgSize, imgPos);
+        // Arena cards carry no text over the card image; tiles draw their own name and stats
+        final boolean arena = ArenaTheme.isEnabled();
+        displayCardNameOverlay(showText && canShow && showCardNameOverlay() && !arena, imgSize, imgPos);
+        displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay() && !arena, imgSize, imgPos);
+        // Arena shows no card numbers, in hand or on the battlefield
+        displayCardIdOverlay(showText && canShow && showCardIdOverlay() && !ArenaTheme.isEnabled(), imgSize, imgPos);
     }
 
     private int calculateBorderSize() {
+        if (ArenaTheme.isEnabled()) {
+            return Math.max(1, Math.round(cardWidth * 0.02f));
+        }
         // Determine whether to render border from properties
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
 
@@ -543,7 +914,19 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void displayPTOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
-        if (isVisible) {
+        if (isVisible && ArenaTheme.isEnabled()) {
+            // Arena: badges tucked into the bottom-right corner, damage stacked above P/T
+            final int inset = Math.max(2, imgSize.width / 40);
+            final Dimension ptSize = ptText.getPreferredSize();
+            ptText.setSize(ptSize);
+            final int ptX = imgSize.width - ptSize.width - inset;
+            final int ptY = imgSize.height - ptSize.height - inset;
+            ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
+            final Dimension dmgSize = damageText.getPreferredSize();
+            damageText.setSize(dmgSize);
+            damageText.setLocation(imgPos.x + imgSize.width - dmgSize.width - inset, imgPos.y + ptY - dmgSize.height - 2);
+        }
+        else if (isVisible) {
             final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
             // Power
             final Dimension ptSize = ptText.getPreferredSize();
@@ -663,6 +1046,20 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
+        if (ArenaTheme.isEnabled()) {
+            hasFlash = computeHasFlash();
+            if (isArenaTile()) {
+                drawArenaTileOverlays((Graphics2D) g);
+            }
+            if (matchUI.isHighlighted(card)) {
+                CardFaceSymbols.drawSymbol("sacrifice", g, (cardXOffset + (cardWidth / 2)) - 20,
+                        (cardYOffset + (cardHeight / 2)) - 20);
+            }
+            if (ghost) {
+                drawGhostOverlay(g);
+            }
+            return;
+        }
         if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard() && card.getZone() != ZoneType.Battlefield;
             boolean showPerpetualManaCost = showPerpetualManaCost();
@@ -744,19 +1141,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 abiY += abiSpace;
             }
         } else {
-            String abilityText = card.getCurrentState().getAbilityText();
-            if (card.getCurrentState().hasKeyword(Keyword.FLASH)
-                    || ((abilityText.contains("May be played by"))
-                            && (abilityText.contains("and as though it has flash")))) {
-                    hasFlash = !card.isFaceDown() && ((!ZoneType.Library.equals(card.getZone()) && !ZoneType.Hand.equals(card.getZone())) || matchUI.mayView(card));
-                    if (hasFlash) {
-                        FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_ABILITY_FLASH), cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
-                }
+            hasFlash = computeHasFlash();
+            if (hasFlash) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_ABILITY_FLASH), cardXOffset + (cardWidth / 2) + (cardWidth / 3), cardWidth < 200 ? cardYOffset + 25 : cardYOffset + 50, cardWidth / 7, cardWidth / 7);
             }
         }
         if (ghost) {
             drawGhostOverlay(g);
         }
+    }
+
+    /** Whether a card off the battlefield can be cast at instant speed (drives the flash highlight). */
+    private boolean computeHasFlash() {
+        if (ZoneType.Battlefield.equals(card.getZone())) {
+            return false;
+        }
+        final String abilityText = card.getCurrentState().getAbilityText();
+        if (card.getCurrentState().hasKeyword(Keyword.FLASH)
+                || ((abilityText.contains("May be played by"))
+                        && (abilityText.contains("and as though it has flash")))) {
+            return !card.isFaceDown() && ((!ZoneType.Library.equals(card.getZone()) && !ZoneType.Hand.equals(card.getZone())) || matchUI.mayView(card));
+        }
+        return false;
     }
 
     private void drawGhostOverlay(final Graphics g) {
@@ -765,6 +1171,54 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         g2d.setColor(GHOST_TINT);
         g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
+    }
+
+    /** Arena hand: lines the cost up with the part of the card its neighbour leaves uncovered. */
+    public final void setArenaCostWidth(final int width) {
+        if (arenaCostWidth != width) {
+            arenaCostWidth = width;
+            repaint();
+        }
+    }
+
+    /**
+     * Arena hand: the mana cost in a dark pill on the card's top edge, readable while the card
+     * is sunk into the hand row; a card castable from another zone names that zone on the left.
+     */
+    private void drawArenaCostRow(final Graphics2D g) {
+        final Graphics2D g2 = (Graphics2D) g.create();
+        try {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            final int size = Math.max(15, Math.min(26, Math.round(cardWidth * 0.15f)));
+            final int pillH = size + 4;
+            final int pillY = Math.max(0, cardYOffset + Math.round(size * 0.3f) - pillH);
+            final ManaCost cost = card.getCurrentState().getManaCost();
+            if (cost != null && !cost.isNoCost()) {
+                final int pillW = cost.getGlyphCount() * (size + 1) + 7;
+                final int pillX = cardXOffset + Math.max(2, Math.min(cardWidth, arenaCostWidth) - pillW - 3);
+                g2.setColor(new Color(8, 10, 16, 230));
+                g2.fillRoundRect(pillX, pillY, pillW, pillH, pillH, pillH);
+                g2.setColor(ArenaTheme.GOLD_DIM);
+                g2.drawRoundRect(pillX, pillY, pillW, pillH, pillH, pillH);
+                CardFaceSymbols.draw(g2, cost, pillX + 4, pillY + 2, size);
+            }
+            final ZoneType zone = card.getZone();
+            if (zone != null && zone != ZoneType.Hand) {
+                g2.setFont(FSkin.getBoldFont(Math.max(9, size - 6)).getBaseFont());
+                final FontMetrics fm = g2.getFontMetrics();
+                final String tag = org.apache.commons.lang3.StringUtils.capitalize(zone.getTranslatedName());
+                final int tagW = fm.stringWidth(tag) + 12;
+                final int tagX = cardXOffset + 3;
+                g2.setColor(new Color(8, 10, 16, 230));
+                g2.fillRoundRect(tagX, pillY, tagW, pillH, pillH, pillH);
+                g2.setColor(ArenaTheme.GOLD);
+                g2.drawRoundRect(tagX, pillY, tagW, pillH, pillH, pillH);
+                g2.drawString(tag, tagX + 6, pillY + (pillH + fm.getAscent() - fm.getDescent()) / 2);
+            }
+        } finally {
+            g2.dispose();
+        }
     }
 
     private void drawZoneBanner(final Graphics g) {

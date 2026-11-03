@@ -112,6 +112,7 @@ import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VDrawOfferDialog;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -128,6 +129,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -628,6 +630,12 @@ public final class CMatchUI
                 // update Cards in Hand
                 vField.updateDetails();
             }
+            if (updateZones && !updateHand && ArenaTheme.isMatchBoard()) {
+                final VHand vHand = getHandFor(owner);
+                if (vHand != null) {
+                    vHand.getLayoutControl().updateHand(); // the cards castable from other zones sit beside the hand
+                }
+            }
             if (updateZones) {
                 vField.updateZones();
             }
@@ -726,17 +734,31 @@ public final class CMatchUI
                     updateCardsNetSafe(p.getCards(ZoneType.Battlefield));
                     updateCardsNetSafe(p.getCards(ZoneType.Hand));
                 }
+                if (actionableChanged && ArenaTheme.isMatchBoard()) {
+                    for (final PlayerView p : getLocalPlayers()) {
+                        final VHand vHand = getHandFor(p);
+                        if (vHand != null) {
+                            vHand.getLayoutControl().updateHand(); // what can be cast from other zones has changed
+                        }
+                    }
+                }
             }
             if (cardsChanged) {
                 if (selection.cards().isEmpty()) {
+                    ArenaCardBrowser.closeSelection();
                     hideZones(selectionZonesShown);
                     selectionZonesShown.clear();
                     FloatingZone.clearAllHotkeyAffordance();
                 } else if (!zones.isEmpty()) {
                     updateZones(zones);
-                    selectionZonesShown.addAll(tempShowZones(zones));
+                    if (ArenaTheme.isMatchBoard()) {
+                        showArenaSelection(selection);
+                    } else {
+                        selectionZonesShown.addAll(tempShowZones(zones));
+                    }
                 }
             }
+            ArenaCardBrowser.refreshSelection();
             if (cardsChanged || actionableChanged) {
                 FloatingZone.refreshAll();
             }
@@ -929,6 +951,8 @@ public final class CMatchUI
             btn2.setEnabled(actualEnable2);
             btn1.setFocusable(actualEnable1 && actualFocus1);
             btn2.setFocusable(actualEnable2 && !actualFocus1);
+            getCPrompt().getView().updateArenaMode();
+            ArenaCardBrowser.refreshSelection();
             // ensure we don't steal focus from an overlay
             if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
                 toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
@@ -984,6 +1008,9 @@ public final class CMatchUI
         SDisplayUtil.showTab(nextField);
         cPrompt.updateText();
         repaintCardOverlays();
+        for (final VField field : view.getFieldViews()) {
+            field.getAvatarArea().repaint(); // turn glow on the portrait
+        }
     }
 
     @Override
@@ -1029,7 +1056,10 @@ public final class CMatchUI
 
     @Override
     public void updateStack() {
-        FThreads.invokeInEdtNowOrLater(() -> getCStack().update());
+        FThreads.invokeInEdtNowOrLater(() -> {
+            getCStack().update();
+            ArenaFocusCard.refresh(this);
+        });
     }
 
     /**
@@ -1071,6 +1101,12 @@ public final class CMatchUI
             }
             if (abilities.size() == 1) {
                 return abilities.get(0);
+            }
+            if (ArenaTheme.isMatchBoard() && abilities.size() <= ArenaOptionsOverlay.MAX_OPTIONS) {
+                final Localizer localizer = Localizer.getInstance();
+                final List<SpellAbilityView> picked = ArenaOptionsOverlay.choose(this, localizer.getMessage("lblArenaChooseAbility"),
+                        localizer.getMessage("lblChooseAbilityToPlay"), 0, 1, abilities, null, null, hostCard);
+                return picked.isEmpty() ? null : picked.get(0);
             }
             return GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAbilityToPlay"), abilities);
         }
@@ -1258,7 +1294,8 @@ public final class CMatchUI
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
         // Multiplayer: sort by turn order with local player first
-        final String layout = FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+        // The Arena board always puts the local player alone at the bottom and the opponents in turn order along the top
+        final String layout = ArenaTheme.isEnabled() ? "ROWS" : FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
         if (players.size() > 2 && myPlayers != null && myPlayers.size() >= 1
                 && !"OFF".equals(layout)) {
             players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0), "ROWS".equals(layout)));
@@ -1348,6 +1385,9 @@ public final class CMatchUI
 
     @Override
     public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
+        if (ArenaTheme.isMatchBoard() && options != null && !options.isEmpty() && options.size() <= ArenaOptionsOverlay.MAX_OPTIONS) {
+            return ArenaOptionsOverlay.ask(this, getArenaDialogTitle(title, "lblArenaQuestion"), message, options, defaultOption, null);
+        }
         return FOptionPane.showOptionDialog(message, title, icon == null ? null : FSkin.getImage(icon), options, defaultOption);
     }
 
@@ -1357,7 +1397,20 @@ public final class CMatchUI
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
+        if (ArenaTheme.isMatchBoard() && isAllCards(choices)) {
+            if (max < 0) { // nothing to choose: the cards are only being revealed
+                ArenaCardBrowser.reveal(this, message, (List<CardView>) choices);
+                return new ArrayList<>();
+            }
+            return (List<T>) ArenaCardBrowser.choose(this, getArenaChooseTitle(min, max, choices.size()), message, min, max,
+                    (List<CardView>) choices, (List<CardView>) selected);
+        }
+        if (ArenaTheme.isMatchBoard() && max > 0 && fitsArenaOptions(choices)) {
+            return ArenaOptionsOverlay.choose(this, getArenaOptionsTitle(min, max, choices), message, Math.max(0, min), max,
+                    choices, selected, display, null);
+        }
         /*if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof GameObject) || selected instanceof GameObject) {
             System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
@@ -1365,10 +1418,133 @@ public final class CMatchUI
         return GuiChoose.getChoices(message, min, max, choices, selected, display, this);
     }
 
+    /** Arena: cards to pick from hidden zones (a library's top cards, a graveyard...) open in the card browser. */
+    private void showArenaSelection(final Selection selection) {
+        final List<CardView> cards = new ArrayList<>();
+        for (final CardView card : selection.cards()) {
+            if (card.getZone() != null && FLOATING_ZONE_TYPES.contains(card.getZone())) {
+                cards.add(card);
+            }
+        }
+        if (cards.isEmpty()) {
+            ArenaCardBrowser.closeSelection();
+            return;
+        }
+        ArenaCardBrowser.showSelection(this, getArenaChooseTitle(selection.min(), selection.max(), cards.size()), cards);
+    }
+
+    private static boolean isAllCards(final Collection<?> items) {
+        if (items == null || items.isEmpty()) {
+            return false;
+        }
+        for (final Object o : items) {
+            if (!(o instanceof CardView)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** Few enough options for the Arena overlay; numbers (with "Other..." after them) fit a grid of up to a hundred. */
+    private static boolean fitsArenaOptions(final List<?> choices) {
+        if (choices == null || choices.isEmpty()) {
+            return false;
+        }
+        return choices.size() <= (isNumberList(choices) ? ArenaOptionsOverlay.MAX_NUMBERS : ArenaOptionsOverlay.MAX_OPTIONS);
+    }
+
+    /** Numbers, maybe followed by one "Other..." to type a bigger one, as getInteger offers them. */
+    private static boolean isNumberList(final List<?> choices) {
+        for (int i = 0; i < choices.size(); i++) {
+            if (!(choices.get(i) instanceof Integer) && !(i == choices.size() - 1 && i > 0 && choices.get(i) instanceof String)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static String getArenaOptionsTitle(final int min, final int max, final List<?> choices) {
+        final Localizer localizer = Localizer.getInstance();
+        if (max == 1 && isNumberList(choices)) {
+            return localizer.getMessage("lblArenaChooseNumber");
+        }
+        if (max == 1 && choices.get(0) instanceof SpellAbilityView) {
+            return localizer.getMessage("lblArenaChooseAbility");
+        }
+        if (max == 1) {
+            return localizer.getMessage("lblArenaChooseOne");
+        }
+        return min == max ? localizer.getMessage("lblArenaChooseN", max) : localizer.getMessage("lblArenaChooseUpTo", max);
+    }
+
+    /** The dialog's own title unless it is just the program's name. */
+    private static String getArenaDialogTitle(final String title, final String fallbackKey) {
+        return title == null || title.isBlank() || "Forge".equals(title) ? Localizer.getInstance().getMessage(fallbackKey) : title;
+    }
+
+    private static String getArenaChooseTitle(final int min, final int max, final int count) {
+        final Localizer localizer = Localizer.getInstance();
+        if (max == 1) {
+            return localizer.getMessage("lblArenaChooseOne");
+        }
+        if (max >= count && min == 0) {
+            return localizer.getMessage("lblArenaChooseCards");
+        }
+        return min == max ? localizer.getMessage("lblArenaChooseN", max) : localizer.getMessage("lblArenaChooseUpTo", max);
+    }
+
     @Override
     public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        if (ArenaTheme.isMatchBoard() && !sideboardingMode) {
+            final OrderResult<T> result = arenaOrder(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, showRememberCheckbox);
+            if (result != null) {
+                return result;
+            }
+        }
         return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox, this);
+    }
+
+    /**
+     * Arena: putting everything in order drags cards along a row or options down a list; taking
+     * some of them picks them in order. Null when the classic dual list is the better fit.
+     */
+    @SuppressWarnings("unchecked")
+    private <T> OrderResult<T> arenaOrder(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean showRememberCheckbox) {
+        final List<T> all = new ArrayList<>();
+        if (destChoices != null) {
+            all.addAll(destChoices);
+        }
+        if (sourceChoices != null) {
+            all.addAll(sourceChoices);
+        }
+        if (all.isEmpty()) {
+            return null;
+        }
+        final boolean cards = isAllCards(all);
+        if (!cards && all.size() > ArenaOptionsOverlay.MAX_OPTIONS) {
+            return null;
+        }
+        if (remainingObjectsMax == 0) { // every one of them goes into the order
+            if (all.size() == 1) {
+                return new OrderResult<>(all, false);
+            }
+            if (cards && !showRememberCheckbox) {
+                return new OrderResult<>((List<T>) ArenaCardBrowser.order(this, title, top, (List<CardView>) all), false);
+            }
+            final ArenaOptionsOverlay.Ordered<T> ordered = ArenaOptionsOverlay.order(this, title, top, all, referenceCard, showRememberCheckbox);
+            return new OrderResult<>(ordered.items(), ordered.remember());
+        }
+        // some of them are taken, in the order picked
+        final int pickMin = remainingObjectsMax < 0 ? 0 : Math.max(0, all.size() - remainingObjectsMax);
+        final int pickMax = remainingObjectsMin < 0 ? all.size() : Math.max(pickMin, all.size() - remainingObjectsMin);
+        if (cards) {
+            return new OrderResult<>((List<T>) ArenaCardBrowser.choose(this, getArenaChooseTitle(pickMin, pickMax, all.size()), title,
+                    pickMin, pickMax, (List<CardView>) all, (List<CardView>) destChoices), false);
+        }
+        return new OrderResult<>(ArenaOptionsOverlay.choose(this, getArenaOptionsTitle(pickMin, pickMax, all), title, pickMin, pickMax,
+                all, destChoices, null, referenceCard), false);
     }
 
     @Override
@@ -1392,11 +1568,31 @@ public final class CMatchUI
         if (delayedReveal != null) {
             reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
+        if (ArenaTheme.isMatchBoard() && isAllCards(optionList)) {
+            final List<CardView> cards = new ArrayList<>();
+            for (final GameEntityView option : optionList) {
+                cards.add((CardView) option);
+            }
+            return new ArrayList<>(ArenaCardBrowser.choose(this, getArenaChooseTitle(min, max, cards.size()), title, min, max, cards, null));
+        }
         return (List<GameEntityView>) order(title,Localizer.getInstance().getMessage("lblSelected"), optionList.size() - max, optionList.size() - min, optionList, null, null, false);
     }
 
     @Override
     public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+        if (ArenaTheme.isMatchBoard() && !toAnywhere && (toTop || toBottom)) {
+            // the whole list comes back reordered: cards for the top first, the rest as they were, cards for the bottom last
+            final List<CardView> movable = Lists.newArrayList(manipulable);
+            final List<List<CardView>> sides = ArenaCardBrowser.arrange(this, title, movable, toTop, toBottom);
+            final List<CardView> result = new ArrayList<>(sides.get(0));
+            for (final CardView card : cards) {
+                if (!movable.contains(card)) {
+                    result.add(card);
+                }
+            }
+            result.addAll(sides.get(1));
+            return result;
+        }
         return GuiChoose.manipulateCardList(this, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
@@ -1483,21 +1679,44 @@ public final class CMatchUI
 
     @Override
     public void message(final String message, final String title) {
+        if (ArenaTheme.isMatchBoard()) {
+            ArenaOptionsOverlay.ask(this, getArenaDialogTitle(title, "lblArenaNotice"), message,
+                    ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, null);
+            return;
+        }
         SOptionPane.showMessageDialog(message, title);
     }
 
     @Override
     public void showErrorDialog(final String message, final String title) {
+        if (ArenaTheme.isMatchBoard()) {
+            ArenaOptionsOverlay.ask(this, getArenaDialogTitle(title, "lblArenaNotice"), message,
+                    ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, null);
+            return;
+        }
         SOptionPane.showErrorDialog(message, title);
     }
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
+        if (ArenaTheme.isMatchBoard()) {
+            final Localizer localizer = Localizer.getInstance();
+            final List<String> buttons = options == null || options.isEmpty()
+                    ? ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")) : options;
+            final String title = c == null ? localizer.getMessage("lblArenaQuestion") : CardTranslation.getTranslatedName(c.getCurrentState().getName());
+            final String text = question == null || question.isBlank() ? "Activate card's ability?" : question;
+            final CardView card = c != null ? c : getCPrompt().getView().getCardView();
+            return ArenaOptionsOverlay.ask(this, title, text, buttons, defaultIsYes ? 0 : Math.min(1, buttons.size() - 1), card) == 0;
+        }
         return GuiDialog.confirm(c, question, defaultIsYes, options, this);
     }
 
     @Override
     public boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
+        if (ArenaTheme.isMatchBoard()) {
+            return ArenaOptionsOverlay.ask(this, getArenaDialogTitle(title, "lblArenaQuestion"), message,
+                    ImmutableList.of(yesButtonText, noButtonText), defaultYes ? 0 : 1, null) == 0;
+        }
         final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
         final int reply = SOptionPane.showOptionDialog(message, title, SOptionPane.QUESTION_ICON, options, defaultYes ? 0 : 1);
         return reply == 0;

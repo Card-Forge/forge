@@ -6,6 +6,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.FileLocation;
 import forge.localinstance.properties.ForgeConstants;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
@@ -265,7 +266,7 @@ public final class SLayoutIO {
         FileLocation file = Singletons.getControl().getCurrentScreen().getLayoutFile();
 
         if (f0 == null) {
-            if (file == null) {
+            if (file == null || isFixedLayout(file)) {
                 return;
             }
             fWriteTo = file.userPrefLoc;
@@ -319,6 +320,11 @@ public final class SLayoutIO {
             if ( writer != null )
                 try { writer.close(); } catch (XMLStreamException e) {}
         }
+    }
+
+    /** The Arena match board is fixed: always read from defaults and never written back. */
+    private static boolean isFixedLayout(final FileLocation file) {
+        return file == ForgeConstants.MATCH_ARENA_LAYOUT_FILE;
     }
 
     private static String getLayoutSerial(String layoutFileName) {
@@ -395,6 +401,9 @@ public final class SLayoutIO {
             try {
                 if (f != null && f.exists()) {
                     fis = new FileInputStream(f);
+                }
+                else if (isFixedLayout(file)) {
+                    fis = new FileInputStream(file.defaultLoc);
                 }
                 else {
                     File userSetting = new File(file.userPrefLoc);
@@ -481,6 +490,17 @@ public final class SLayoutIO {
                 }
                 if (layoutInfo.selectedId() != null) {
                     cell.setSelected(layoutInfo.selectedId().getDoc());
+                }
+            }
+            if (isFixedLayout(file)) {
+                // floating cells go on top of the board they overlap
+                for (final DragCell cell : FView.SINGLETON_INSTANCE.getDragCells()) {
+                    for (final IVDoc<? extends ICDoc> doc : cell.getDocs()) {
+                        if (ArenaTheme.isFloatingDoc(doc.getDocumentID())) {
+                            FView.SINGLETON_INSTANCE.getPnlContent().setComponentZOrder(cell, 0);
+                            break;
+                        }
+                    }
                 }
             }
         }
