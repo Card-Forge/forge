@@ -140,7 +140,7 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final ComboPlan combos = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos;
-        if (combos.selfDiscardWanted(ai) && sa.canTarget(ai)) {
+        if (combos.selfDiscardWanted(ai, sa.getHostCard()) && sa.canTarget(ai)) {
             sa.resetTargets();
             sa.getTargets().add(ai);
             return true;
