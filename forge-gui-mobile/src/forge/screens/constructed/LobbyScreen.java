@@ -52,6 +52,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.GuiChoose;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -194,10 +195,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             cbFormat.addItem(choice);
         }
         cbFormat.setChangedHandler(event -> {
+            if (cbFormat.getSelectedItem() == FormatChoices.ARCHIVED) {
+                updateFormatSelection();
+                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices(), archived -> {
+                    if (archived != null) {
+                        applyFormatChoice(archived);
+                    }
+                });
+                return;
+            }
             if (lobby.hasControl() && cbFormat.getSelectedItem() != lobby.getFormatChoice()) {
-                lobby.setFormatChoice(cbFormat.getSelectedItem());
-                updateLayoutForVariants();
-                lobby.saveSetup();
+                applyFormatChoice(cbFormat.getSelectedItem());
             }
         });
 
@@ -263,8 +271,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
+        updateLayoutForVariants();
+        lobby.saveSetup();
+    }
+
     private void updateFormatSelection() {
-        cbFormat.setSelectedItem(lobby.getFormatChoice());
+        if (lobby.getFormatChoice() instanceof GameFormat format && format.getFormatType() == GameFormat.FormatType.ARCHIVED) {
+            // The list holds no archived formats, so the combo shows the name alone
+            cbFormat.setText(format.getName());
+        } else {
+            cbFormat.setSelectedItem(lobby.getFormatChoice());
+        }
         lblFormat.setEnabled(lobby.hasControl());
         cbFormat.setEnabled(lobby.hasControl());
         // Limited mode lists event pools, which the Constructed format does not apply to

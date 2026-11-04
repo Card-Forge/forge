@@ -27,6 +27,7 @@ import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.CommanderChooser;
 import forge.gui.FThreads;
+import forge.gui.GuiChoose;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
@@ -1230,9 +1231,21 @@ public class VLobby implements ILobbyView {
             syncGameFormatCombo();
             return;
         }
+        if (selected == FormatChoices.ARCHIVED) {
+            syncGameFormatCombo();
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                applyFormatChoice(archived);
+            }
+            return;
+        }
         if (selected == lobby.getFormatChoice()) { return; }
 
-        lobby.setFormatChoice(selected);
+        applyFormatChoice(selected);
+    }
+
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
         lobby.saveSetup();
         update(false);
         updateActionButtons();
@@ -1243,7 +1256,8 @@ public class VLobby implements ILobbyView {
         if (cboFormatPanel.getSelectedItem() != applied) {
             suppressFormatListener = true;
             try {
-                cboFormatPanel.setSelectedItem(applied);
+                // The model takes an archived format, which the list does not hold
+                cboFormatPanel.getComboBox().getModel().setSelectedItem(applied);
             } finally {
                 suppressFormatListener = false;
             }

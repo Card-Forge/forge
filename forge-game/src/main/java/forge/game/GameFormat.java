@@ -73,6 +73,7 @@ public class GameFormat implements Comparable<GameFormat> {
     // contains allowed sets, when empty allows all sets
     private FormatType formatType;
     private FormatSubType formatSubType;
+    private String folder;
 
     protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks
     protected final List<CardRarity> allowedRarities;
@@ -209,6 +210,9 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public Date getEffectiveDate() { return effectiveDate;  }
+
+    /** The folder of the format's file, relative to the formats or user formats folder, with / between names. Null for a format built in code. */
+    public String getFolder() { return folder; }
 
     public FormatType getFormatType() {
         return this.formatType;
@@ -451,7 +455,7 @@ public class GameFormat implements Comparable<GameFormat> {
         /** A format file read before the format whose card pool it takes, kept until readAll can build it. */
         private record CardPoolFormat(String cardPool, String title, Date date, List<String> bannedCards,
                 List<String> restrictedCards, boolean restrictedLegendary, List<String> additionalCards, int index,
-                FormatType formatType, FormatSubType formatSubType, DeckRules deckRules) {
+                FormatType formatType, FormatSubType formatSubType, DeckRules deckRules, String folder) {
         }
         private final List<CardPoolFormat> cardPoolFormats = new ArrayList<>();
         
@@ -538,13 +542,16 @@ public class GameFormat implements Comparable<GameFormat> {
             }
 
             final DeckRules deckRules = readDeckRules(section, title);
+            final File root = file.toPath().startsWith(directory.toPath()) ? directory : userDirectory;
+            final String folder = root.toPath().relativize(file.getParentFile().toPath()).toString().replace(File.separatorChar, '/');
             final String cardPool = section.get("cardpool");
             if (cardPool != null) {
                 cardPoolFormats.add(new CardPoolFormat(cardPool, title, date, listOrEmpty(bannedCards), restrictedCards,
-                        restrictedLegendary, listOrEmpty(additionalCards), idx, formatType, formatsubType, deckRules));
+                        restrictedLegendary, listOrEmpty(additionalCards), idx, formatType, formatsubType, deckRules, folder));
                 return null;
             }
             GameFormat result = new GameFormat(title, date, sets, bannedCards, restrictedCards, restrictedLegendary, additionalCards, rarities, idx, formatType, formatsubType, deckRules);
+            result.folder = folder;
             naturallyOrdered.add(result);
             return result;
         }
@@ -605,9 +612,11 @@ public class GameFormat implements Comparable<GameFormat> {
             banned.addAll(format.bannedCards());
             final List<String> additional = new ArrayList<>(base.getAdditionalCards());
             additional.addAll(format.additionalCards());
-            return new GameFormat(format.title(), format.date(), base.getAllowedSetCodes(), banned,
+            final GameFormat result = new GameFormat(format.title(), format.date(), base.getAllowedSetCodes(), banned,
                     format.restrictedCards(), format.restrictedLegendary(), additional, base.getAllowedRarities(),
                     format.index(), format.formatType(), format.formatSubType(), format.deckRules());
+            result.folder = format.folder();
+            return result;
         }
 
         @Override

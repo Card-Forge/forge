@@ -157,7 +157,7 @@ public abstract class GameLobby implements IHasGameType {
 
     /**
      * Applies the variants and format that {@link #saveSetup()} saved. Any the lobby no longer offers are skipped,
-     * for example a format archived since it was saved.
+     * for example an archived format once archived formats are turned off.
      */
     public void restoreSetup() {
         final List<Object> choices = FormatChoices.get(true);
@@ -177,7 +177,8 @@ public abstract class GameLobby implements IHasGameType {
                     // A hand-edited value can hold a broken escape
                     continue;
                 }
-                if (choices.contains(format)) {
+                if (choices.contains(format)
+                        || choices.contains(FormatChoices.ARCHIVED) && FormatChoices.getArchivedChoices().contains(format)) {
                     setFormat(format);
                 }
             }
