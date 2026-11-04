@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigPut:DB$ ChangeZone | Hidden$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBHaste
 SVar:DBHaste:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ Permanent | SubAbility$ DBDelay
 SVar:DBDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Remembered | Execute$ TrigBottom | TriggerDescription$ At the beginning of the next end step, put it on the bottom of your library. When you do, draw a card. | SubAbility$ DBCleanup
-SVar:TrigBottom:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | SubAbility$ DBDraw
+SVar:TrigBottom:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup2
 SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

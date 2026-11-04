@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Legendary Artifact Spacecraft
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | Description$ Other creatures you control get +1/+0.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | IsPresent$ Card.Self+nonCreature | Execute$ TrigCharge | TriggerDescription$ Whenever a creature dies, if CARDNAME isn't a creature, put a charge counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | IsPresent$ Card.Self+nonCreature | Execute$ TrigCharge | TriggerDescription$ Whenever a creature dies, if NICKNAME isn't a creature, put a charge counter on it.
 SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 K:Station:10
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE10_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 10+ Flying
