@@ -46,7 +46,7 @@ public class AirbendAi extends SpellAbilityAi {
         // Check opponent's cards that need bouncing (only in the AI's own turn, main phase 1, or at the end of opponent's
         // turn, to get rid of potential blockers)
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
-        if (ph.is(PhaseType.MAIN1, aiPlayer) || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
+        if (ph.is(PhaseType.MAIN1, aiPlayer) || (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(aiPlayer) )) {
             final CardCollection opposingThreats = CardLists.getTargetableCards(aiPlayer.getOpponents().getCreaturesInPlay(), sa);
             if (!opposingThreats.isEmpty()) {
                 sa.resetTargets();
