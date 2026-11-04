@@ -83,6 +83,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> thisTurnActivated = Lists.newArrayList();
 
     private Card curResolvingCard = null;
+    private SpellAbility curResolvingSA = null;
     private final Map<Integer, Integer> triggerRepeats = new HashMap<>();
     /** Card id -> how often it could not be added to the stack this turn because its targets were not legal. */
     private final Map<Integer, Integer> illegalAdditions = new HashMap<>();
@@ -112,6 +113,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         thisTurnCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
+        curResolvingSA = null;
         triggerRepeats.clear();
         illegalAdditions.clear();
         frozenStack.clear();
@@ -195,6 +197,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
         return c.equals(curResolvingCard);
+    }
+
+    public final SpellAbility getResolvingAbility() {
+        return isResolving() ? curResolvingSA : null;
     }
 
     public final void add(SpellAbility sp) {
@@ -676,6 +682,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         final Card source = sa.getHostCard();
         curResolvingCard = source;
+        curResolvingSA = sa;
 
         boolean thisHasFizzled = hasFizzled(sa, null);
 
@@ -759,6 +766,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         curResolvingCard = null;
+        curResolvingSA = null;
     }
 
     private void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
