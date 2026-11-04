@@ -402,6 +402,10 @@ public class ComputerUtilAbility {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
                 if (cost instanceof CostRemoveCounter) {
                     p += cost.convertAmount() == null ? 1 : cost.convertAmount();
+                    // try the abilities that keep the planeswalker alive first, except for ultimates: use those while we can
+                    if (source != null && !sa.hasParam("Ultimate") && cost.convertAmount() != null && cost.convertAmount() >= source.getCurrentLoyalty()) {
+                        p -= 20;
+                    }
                 } else if (cost instanceof CostPutCounter) {
                     p -= cost.convertAmount();
                 }
