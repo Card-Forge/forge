@@ -4,6 +4,6 @@ Types:Legendary Creature Human Pilot
 PT:3/3
 T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExplore | TriggerDescription$ Whenever CARDNAME becomes tapped, he explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
 SVar:TrigExplore:DB$ Explore
-A:AB$ Effect | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | SpellDescription$ Target creature can't be blocked this turn.
+A:AB$ Effect | Cost$ 2 U | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | SpellDescription$ Target creature can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 Oracle:Whenever Lieutenant Sulu becomes tapped, he explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)\n{2}{U}: Target creature can't be blocked this turn.
