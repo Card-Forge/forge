@@ -117,8 +117,8 @@ public class FlatMonteCarloVintageMetaTest extends AITest {
     public void aiDecksKeepTheRemoveDeckCardsFlatMcPlays() {
         final Player p = deal(OATH);
         final String[] kept = { "Gitaxian Probe", "Mishra's Bauble", "Urza's Bauble", "Vampiric Tutor",
-                "Demonic Consultation", "Merchant Scroll", "Manifold Key", "Goblin Welder" };
-        final String[] left = { "Doomsday", "Prismatic Ending", "Mindbreak Trap", "Commandeer", "Flash", "Nethergoyf" };
+                "Demonic Consultation", "Merchant Scroll", "Manifold Key", "Goblin Welder", "Doomsday" };
+        final String[] left = { "Prismatic Ending", "Mindbreak Trap", "Commandeer", "Flash", "Nethergoyf" };
         try {
             forge.card.CardAiHints.setKeptForFlatMc(AiCardLists::isFlatMcPlayable);
             for (final String name : kept) {

@@ -3582,11 +3582,6 @@ public final class ComboPlan {
         return flashback && ai.getCreaturesInPlay().size() >= LIBRARY_OUT_FODDER;
     }
 
-    /**
-     * The library is the resource of this deck, but only while the winner can be cast: with Thassa's Oracle in hand an
-     * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
-     * win with, so milling itself out is a penalty (the same guard as the dredge deck).
-     */
     /** Doomsday with the Oracle: two copies of Doomsday, a winner and eight cards that draw or make mana for the pile. */
     private static Combo doomsday(final List<Card> spells) {
         final Set<String> payoffs = new LinkedHashSet<>();
@@ -3614,6 +3609,62 @@ public final class ComboPlan {
                 "doomsday=" + doomsdays + ", winners=" + payoffs + ", pile cards=" + pile);
     }
 
+    /**
+     * Whether milling its own library out can be followed by the win: the winner (Thassa's Oracle) is in hand or in play,
+     * or it is in the library or graveyard with a way back that is certain: a reanimation spell in hand, or Dread Return
+     * in the graveyard or the library (it is milled with the rest) and three creatures to pay its flashback (the
+     * creatures in play and the Narcomoebas of the library, which come into play as they are milled). True for a deck
+     * that is not a library-out deck: there is nothing to say about it.
+     */
+    public boolean libraryOutSelfMillSafe(final Player ai) {
+        final Combo combo = find(Kind.LIBRARY_OUT);
+        if (combo == null) {
+            return true;
+        }
+        if (anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs) || anyNamed(ai.getCardsIn(ZoneType.Battlefield), combo.payoffs)) {
+            return true;
+        }
+        if (!anyNamed(ai.getCardsIn(ZoneType.Graveyard), combo.payoffs) && !anyNamed(ai.getCardsIn(ZoneType.Library), combo.payoffs)) {
+            return false; // exiled, or gone: nothing left to win with
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName())) {
+                return true;
+            }
+        }
+        boolean flashback = false;
+        int fodder = ai.getCreaturesInPlay().size();
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Library)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+            if (entersFromMill(c)) {
+                fodder++;
+            }
+        }
+        return flashback && fodder >= LIBRARY_OUT_FODDER;
+    }
+
+    /** Narcomoeba: a creature that comes into play when it is put into the graveyard from the library. */
+    private static boolean entersFromMill(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+            if ("Library".equals(t.getParam("Origin")) && "Graveyard".equals(t.getParam("Destination"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The library is the resource of this deck, but only while the winner can be cast: with Thassa's Oracle in hand an
+     * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
+     * win with, so milling itself out is a penalty (the same guard as the dredge deck).
+     */
     private int libraryOutTerm(final Player ai, final Combo combo) {
         final int library = ai.getCardsIn(ZoneType.Library).size();
         if (!libraryOutWinnerReachable(ai, combo)) {

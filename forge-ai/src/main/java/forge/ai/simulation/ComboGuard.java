@@ -97,6 +97,17 @@ public final class ComboGuard {
         if (host == null) {
             return null;
         }
+        // Balustrade Spy and Undercity Informer milling their own controller without the Oracle to follow it
+        if (plan != null && plan.has(ComboPlan.Kind.LIBRARY_OUT)
+                && AiCardLists.has(AiCardLists.Role.SELF_MILL_OUTLET, host.getName()) && !plan.libraryOutSelfMillSafe(ai)) {
+            boolean self = ai.equals(aim);
+            for (SpellAbility a = sa; a != null && !self; a = a.getSubAbility()) {
+                self = a.usesTargeting() && a.getTargets() != null && a.getTargets().contains(ai);
+            }
+            if (self) {
+                return "self-mill-no-winner";
+            }
+        }
         // Doomsday without the Oracle in hand (or the life, or a library to cut) only throws the deck away
         if (sa.isSpell() && DoomsdayPile.isDoomsday(host) && !DoomsdayPile.ready(ai)) {
             return "doomsday-not-ready";
