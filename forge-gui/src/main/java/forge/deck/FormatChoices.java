@@ -19,6 +19,9 @@ public final class FormatChoices {
     /** Game types that replace Constructed's deck rules. Only one of them can be applied at a time. */
     public static final List<GameType> FORMAT_GAME_TYPES = Stream.concat(
             COMMANDER_GAME_TYPES.stream(), GENERATED_GAME_TYPES.stream()).collect(Collectors.toList());
+    /** Game types the lobby's Variants list applies on top of the format. Several can be applied at once. */
+    public static final List<GameType> STACKED_GAME_TYPES = List.of(
+            GameType.Vanguard, GameType.Planechase, GameType.Archenemy, GameType.ArchenemyRumble);
 
     private FormatChoices() {
     }
