@@ -97,6 +97,9 @@ combo_engine | Oath of Druids
 # Time Vault wins an extra turn per untap (Manifold Key, Voltaic Key): it counts with the artifact payoffs
 artifact_payoff | Time Vault
 
+# Sphere Shops: Smelting Vat sacrifices one artifact for the better ones in the top eight cards, chaining the deck's artifacts
+artifact_engine | Smelting Vat
+
 # Lurrus Vault Key: Goblin Engineer puts Time Vault in the graveyard and returns it (as does Goblin Welder against an
 # artifact), Manifold Key untaps it: the two vault pieces and the two goblins are held together as one pair
 pair_engine | Time Vault | Manifold Key

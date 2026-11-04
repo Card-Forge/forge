@@ -152,12 +152,45 @@ public final class VaultLoop {
                 sa.resetTargets();
             }
         }
+        final SpellAbility ring = untapRing(ai, candidates);
+        if (ring != null) {
+            return ring;
+        }
         final SpellAbility forge = forgeLoop(ai, candidates);
         if (forge != null) {
             return forge;
         }
         final SpellAbility cauldron = cauldronStep(ai, candidates);
         return cauldron != null ? cauldron : bringBack(ai, candidates);
+    }
+
+    /**
+     * The One Ring with something to untap it (Tezzeret, Cruel Captain, Manifold Key): every untap is one more burden
+     * counter and one more card than the last time, paid for with life at each upkeep. Only while the library and the
+     * life total can carry it, and never in place of the vault, which is worth more.
+     */
+    private static SpellAbility untapRing(final Player ai, final List<SpellAbility> candidates) {
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final Card ring = named(board, "The One Ring");
+        final Card vault = first(board, true);
+        if (ring == null || !ring.isTapped() || vault != null && vault.isTapped()
+                || ai.getCardsIn(ZoneType.Library).size() <= LIBRARY_FLOOR + ring.getCounters(forge.game.card.CounterEnumType.BURDEN)
+                || ai.getLife() <= 2 * (ring.getCounters(forge.game.card.CounterEnumType.BURDEN) + 3)) {
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || sa.getApi() != ApiType.Untap || !sa.usesTargeting() || sa.getHostCard() == null
+                    || !ai.equals(sa.getHostCard().getController()) || !isUntapper(sa.getHostCard())) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            sa.resetTargets();
+            if (sa.canTarget(ring) && sa.getTargets().add(ring) && playable(ai, sa)) {
+                return sa;
+            }
+            sa.resetTargets();
+        }
+        return null;
     }
 
     private static Card named(final CardCollectionView cards, final String name) {

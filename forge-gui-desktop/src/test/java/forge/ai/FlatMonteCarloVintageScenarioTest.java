@@ -234,4 +234,99 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
         game.getPlayers().get(0).setLife(40, null);
         AssertJUnit.assertNull("20 cards against 40 life", VaultLoop.sureCast(ai, abilitiesOf(top)));
     }
+
+    // ------------------------------------------------------------------------------ the One Ring, and the loop pieces
+
+    @Test
+    public void aTappedRingIsUntappedWithTheKey() {
+        setUp(PhaseType.MAIN1);
+        final Card ring = addCard("The One Ring", ai);
+        ring.setTapped(true);
+        final Card key = addCard("Manifold Key", ai);
+        key.setTapped(false);
+        key.setSickness(false);
+        final SpellAbility sa = VaultLoop.sureCast(ai, abilitiesOf(ring, key));
+        AssertJUnit.assertNotNull("a tapped One Ring with an untapper should be untapped\n" + gameStateToString(game), sa);
+        AssertJUnit.assertEquals(ApiType.Untap, sa.getApi());
+        AssertJUnit.assertTrue("the ring is the target", sa.getTargets().contains(ring));
+    }
+
+    @Test
+    public void theRingIsNotUntappedWithAFewCardsLeftOrALowLifeTotal() {
+        setUp(PhaseType.MAIN1);
+        final Card ring = addCard("The One Ring", ai);
+        ring.setTapped(true);
+        final Card key = addCard("Manifold Key", ai);
+        key.setTapped(false);
+        key.setSickness(false);
+        ai.setLife(4, null);
+        AssertJUnit.assertNull("4 life is too little for another burden counter", VaultLoop.sureCast(ai, abilitiesOf(ring, key)));
+    }
+
+    @Test
+    public void theVaultComesBeforeTheRing() {
+        setUp(PhaseType.MAIN1);
+        final Card vault = addCard("Time Vault", ai);
+        vault.setTapped(true);
+        final Card ring = addCard("The One Ring", ai);
+        ring.setTapped(true);
+        final Card key = addCard("Manifold Key", ai);
+        key.setTapped(false);
+        key.setSickness(false);
+        final SpellAbility sa = VaultLoop.sureCast(ai, abilitiesOf(vault, ring, key));
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertTrue("the key untaps the vault first", sa.getTargets().contains(vault));
+    }
+
+    /** The Engineer's sacrifice is chosen by the game: while a piece of the loop is in play, the Engineer is not used. */
+    @Test
+    public void theEngineerIsNotUsedWhileAPieceCouldBeSacrificed() {
+        setUp(PhaseType.MAIN1);
+        addCardToZone("Time Vault", ai, ZoneType.Graveyard);
+        final Card key = addCard("Manifold Key", ai);
+        key.setTapped(true);
+        final Card spare = addCard("Mishra's Bauble", ai);
+        final Card engineer = addCard("Goblin Engineer", ai);
+        engineer.setSickness(false);
+        final SpellAbility sa = VaultLoop.sureCast(ai, abilitiesOf(engineer, spare));
+        AssertJUnit.assertTrue("the Engineer sacrifices what the game picks, possibly the key: "
+                + (sa == null ? null : sa.getHostCard()), sa == null || !"Goblin Engineer".equals(sa.getHostCard().getName()));
+    }
+
+    // ------------------------------------------------------------------------------ Beseech Storm
+
+    /** The storm finisher is cast when it is lethal: Tendrils of Agony with enough spells before it. */
+    @Test(timeOut = 60000)
+    public void tendrilsIsCastWhenTheStormIsLethal() {
+        setUp(PhaseType.MAIN1);
+        final Player opp = game.getPlayers().get(0);
+        opp.setLife(8, null);
+        // the real Beseech Storm list is the library: without it the deck is not read as a storm deck and no plan casts the finisher
+        for (final Card c : new ArrayList<>(ai.getCardsIn(ZoneType.Library))) {
+            ai.getZone(ZoneType.Library).remove(c);
+        }
+        for (final String line : FlatMonteCarloVintageDecksTest.BESEECH_STORM_DECK.split("\n")) {
+            final int space = line.indexOf(' ');
+            if (space > 0) {
+                for (int n = Integer.parseInt(line.substring(0, space)); n > 0; n--) {
+                    addCardToZone(line.substring(space + 1).trim(), ai, ZoneType.Library);
+                }
+            }
+        }
+        addCards("Swamp", 4, ai);
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Dark Ritual", ai, ZoneType.Hand);
+        }
+        addCardToZone("Tendrils of Agony", ai, ZoneType.Hand);
+        game.AI_FLAT_MONTE_CARLO = true;
+        game.AI_TIMEOUT = 10;
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        for (int i = 0; i < 600 && !game.isGameOver() && !game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().getPlayerTurn() == ai; i++) {
+            game.getPhaseHandler().mainLoopStep();
+        }
+        AssertJUnit.assertTrue("Tendrils with three rituals before it is lethal against 8 life, the opponent has "
+                + opp.getLife() + "\n" + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
 }
