@@ -1915,8 +1915,11 @@ public class SpecialCardAi {
                 }
             }
 
+            // a hand with nothing worth casting is as good as an empty one, check in main 2 when we'd have cast it already
+            boolean deadHand = ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai) && isDeadHand(ai, sa);
+
             // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
-            if (aiHandSize < lowHandSize || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
+            if (deadHand || aiHandSize < lowHandSize || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
                 // if the AI has less than 3 cards in hand or the opponent has more than 3 cards in hand than the AI
                 // then the AI is willing to play this ability
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1924,6 +1927,31 @@ public class SpecialCardAi {
                 // otherwise, don't play this ability
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+        }
+
+        // We could afford all other spells in hand together, but don't want to cast any of them
+        private static boolean isDeadHand(final Player ai, final SpellAbility sa) {
+            Map<Card, Integer> cheapestAffordable = new HashMap<>();
+            Set<Card> spells = new HashSet<>();
+            List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
+            for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
+                // skip ourselves and other wheels, those would ask the same question back
+                if (!testSa.isSpell() || testSa.getHostCard().equals(sa.getHostCard())
+                        || "Timetwister".equals(testSa.getParam("AILogic"))) {
+                    continue;
+                }
+                testSa.setActivatingPlayer(ai);
+                spells.add(testSa.getHostCard());
+                if (ComputerUtilCost.canPayCost(testSa, ai, false)) {
+                    cheapestAffordable.merge(testSa.getHostCard(), testSa.getPayCosts().getTotalMana().getCMC(), Math::min);
+                    if (((PlayerControllerAi) ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
+                        return false;
+                    }
+                }
+            }
+            // keep a hand we just don't have the mana for yet
+            int totalCost = cheapestAffordable.values().stream().mapToInt(Integer::intValue).sum();
+            return cheapestAffordable.size() == spells.size() && totalCost <= ComputerUtilMana.getAvailableManaEstimate(ai);
         }
     }
 

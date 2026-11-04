@@ -76,6 +76,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<SpellAbility> thisTurnActivated = Lists.newArrayList();
 
     private Card curResolvingCard = null;
+    private SpellAbility curResolvingSA = null;
 
     private final Game game;
 
@@ -103,6 +104,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         thisTurnCast.clear();
         thisTurnActivated.clear();
         curResolvingCard = null;
+        curResolvingSA = null;
         frozenStack.clear();
         clearUndoStack();
         game.updateStackForView();
@@ -184,6 +186,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
         return c.equals(curResolvingCard);
+    }
+
+    public final SpellAbility getResolvingAbility() {
+        return isResolving() ? curResolvingSA : null;
     }
 
     public int getUndoStackSize() {
@@ -584,6 +590,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         final Card source = sa.getHostCard();
         curResolvingCard = source;
+        curResolvingSA = sa;
 
         boolean thisHasFizzled = hasFizzled(sa, null);
 
@@ -665,6 +672,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.getPhaseHandler().onStackResolved();
 
         curResolvingCard = null;
+        curResolvingSA = null;
     }
 
     private void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {

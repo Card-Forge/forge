@@ -520,7 +520,10 @@ public class ComputerUtilCost {
 
     // Rough estimate whether the opponents' creatures could attack the planeswalker for its loyalty next turn,
     // when our untapped creatures block the strongest attackers they can while accounting for menace & trample.
-    private static boolean isPlaneswalkerThreatened(final Player ai, final Card pw) {
+    public static boolean isPlaneswalkerThreatened(final Player ai, final Card pw) {
+        return isPlaneswalkerThreatened(ai, pw, pw.getCurrentLoyalty());
+    }
+    public static boolean isPlaneswalkerThreatened(final Player ai, final Card pw, final int loyalty) {
         List<Card> attackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> ComputerUtilCombat.canAttackNextTurn(c, pw));
         attackers.sort(Comparator.comparingInt(c -> -ComputerUtilCombat.damageIfUnblocked(c, pw, null, false)));
         List<Card> blockers = CardLists.filter(ai.getCreaturesInPlay(), Card::isUntapped);
@@ -541,7 +544,7 @@ public class ComputerUtilCost {
             }
             blockers.removeAll(chosen);
         }
-        return damage >= pw.getCurrentLoyalty();
+        return damage >= loyalty;
     }
 
     /**
@@ -602,8 +605,8 @@ public class ComputerUtilCost {
                 }
             }
 
-            // Try not to lose Planeswalker if not threatened, ultimates are worth considering
-            if (sa.isPwAbility() && !sa.hasParam("Ultimate")) {
+            // Try not to lose Planeswalker if not threatened, ultimates and game winning abilities are worth considering
+            if (sa.isPwAbility() && !sa.hasParam("Ultimate") && !ComputerUtilAbility.saComparator.couldWinGame(payer, sa)) {
                 for (final CostPart part : cost.getCostParts()) {
                     if (part instanceof CostRemoveCounter) {
                         if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
