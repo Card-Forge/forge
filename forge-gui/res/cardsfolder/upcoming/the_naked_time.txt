@@ -8,4 +8,5 @@ SVar:CreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Va
 SVar:TrigBoost:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBHaste
 SVar:DBHaste:DB$ Pump | Defined$ TriggeredCard | KW$ Haste
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Land | Defined$ You | SpellDescription$ Sacrifice a land.
+DeckHas:Ability$Counters|Sacrifice
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle.\nII — Whenever a creature you control enters this turn, put a +1/+1 counter on it and it gains haste until end of turn.\nIII — Sacrifice a land.
