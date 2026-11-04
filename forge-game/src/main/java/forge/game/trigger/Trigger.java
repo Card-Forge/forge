@@ -479,15 +479,15 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public abstract boolean performTest(Map<AbilityKey, Object> runParams);
 
-    /**
-     * <p>
-     * setTriggeringObjects.
-     * </p>
-     *
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public abstract void setTriggeringObjects(SpellAbility sa, final Map<AbilityKey, Object> runParams);
+    /** Fills in the triggering objects its ability gets from this event */
+    public abstract void setTriggeringObjects(Map<AbilityKey, Object> objects, final Map<AbilityKey, Object> runParams);
+
+    /** The triggering objects its ability would get for this event */
+    public final Map<AbilityKey, Object> buildTriggeringObjects(final Map<AbilityKey, Object> runParams) {
+        final Map<AbilityKey, Object> objects = AbilityKey.newMap();
+        setTriggeringObjects(objects, runParams);
+        return objects;
+    }
 
     /**
      * Gets the id.

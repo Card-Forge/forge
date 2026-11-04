@@ -50,7 +50,6 @@ public class TriggerHandler {
     private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = ArrayListMultimap.create();
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<>();
     private final Game game;
-    private SpellAbility triggeringObjectsSink;
 
     public TriggerHandler(final Game gameState) {
         game = gameState;
@@ -446,12 +445,12 @@ public class TriggerHandler {
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
-                runSingleTriggerInternal(regtrig, newParams, buildTriggeringObjects(regtrig, newParams), controller);
+                runSingleTriggerInternal(regtrig, newParams, regtrig.buildTriggeringObjects(newParams), controller);
             } else {
                 // Else, trigger for each merged components
                 for (final Card c : mergedCards) {
                     newParams.put(AbilityKey.Card, c);
-                    runSingleTriggerInternal(regtrig, newParams, buildTriggeringObjects(regtrig, newParams), controller);
+                    runSingleTriggerInternal(regtrig, newParams, regtrig.buildTriggeringObjects(newParams), controller);
                 }
             }
         } else {
@@ -600,17 +599,6 @@ public class TriggerHandler {
             }
         }
         return trigger;
-    }
-
-    /** The triggering objects the trigger's ability would get for this event */
-    Map<AbilityKey, Object> buildTriggeringObjects(final Trigger t, final Map<AbilityKey, Object> runParams) {
-        if (triggeringObjectsSink == null) {
-            // only a sink for setTriggeringObjects, so its host does not matter
-            triggeringObjectsSink = new SpellAbility.EmptySa(t.getHostCard());
-        }
-        triggeringObjectsSink.resetTriggeringObjects();
-        t.setTriggeringObjects(triggeringObjectsSink, runParams);
-        return triggeringObjectsSink.getTriggeringObjects();
     }
 
     public void onPlayerLost(Player p) {

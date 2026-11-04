@@ -81,7 +81,7 @@ public class TriggerWaiting {
         if (triggeringObjects == null) {
             triggeringObjects = Maps.newHashMap();
         }
-        return triggeringObjects.computeIfAbsent(t, k -> k.getHostCard().getGame().getTriggerHandler().buildTriggeringObjects(k, params));
+        return triggeringObjects.computeIfAbsent(t, k -> k.buildTriggeringObjects(params));
     }
 
     @Override
