@@ -1872,7 +1872,7 @@ public class SpecialCardAi {
             }
             int oppLossPerDraw = 0;
             int aiLossPerDraw = 0;
-            // Looks for value when opponents draw cards e.g. (Underworld Dreams, Scrawling Crawler, ...)
+            // Looks for value when opponents draw cards. Only damage and life loss effects are counted.
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
                 for (Trigger t : c.getTriggers()) {
                     if (t.getMode() != TriggerType.Drawn || !t.requirementsCheck(ai.getGame())) {
@@ -1895,11 +1895,11 @@ public class SpecialCardAi {
                 }
             }
             int oppLoss = oppLossPerDraw * numDraw;
-            // Win even through symmetrical damage: our triggers hurting opponents are ordered to resolve first
+            // Win despite symmetrical damage, our triggers hurting opponents are ordered to resolve first
             if (oppLossPerDraw > 0 && ai.getOpponents().allMatch(p -> p.canLoseLife() && p.getLife() <= oppLoss)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else if (aiLossPerDraw * numDraw >= ai.getLife() && ai.canLoseLife()) {
-                // Don't kill ourselves with symmetrical damage
+                // Don't lose the game due to symmetrical damage
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (oppLossPerDraw > 0) {
                 // Go for it if the draws are lethal for an opponent
@@ -1914,7 +1914,7 @@ public class SpecialCardAi {
             int maxOppHandSize = 0;
 
             final int HAND_SIZE_THRESHOLD = 3;
-            // The more the opponents lose per draw, the more cards in hand we're willing to give up for it
+            // the more the opponents lose per draw, the more cards in hand we're willing to give up for it
             final int lowHandSize = HAND_SIZE_THRESHOLD + Math.max(0, oppLossPerDraw - aiLossPerDraw);
 
             for (Player p : ai.getOpponents()) {
