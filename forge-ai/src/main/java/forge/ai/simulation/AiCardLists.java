@@ -34,6 +34,12 @@ import forge.game.card.Card;
 public final class AiCardLists {
     /** What a card is for. The key in the file is the lower case name of the constant. */
     public enum Role {
+        /** Doomsday itself: it keeps five cards of the library and graveyard (see DoomsdayPile). */
+        DOOMSDAY,
+        /** Cards that draw for next to nothing, the pile Doomsday keeps (Gitaxian Probe, Street Wraith, Gush...). */
+        DOOMSDAY_DRAW,
+        /** Free or cheap mana the pile can hold (Dark Ritual, Lotus Petal, the Moxen). */
+        DOOMSDAY_MANA,
         /**
          * Cards marked AI:RemoveDeck:All that Flat MC plays by itself (free cantrips, mana permanents) and that are in
          * no other role: decks built for the AI keep them (see {@link #isFlatMcPlayable}).

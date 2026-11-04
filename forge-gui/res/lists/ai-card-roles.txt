@@ -103,6 +103,11 @@ flat_mc_plays | Gitaxian Probe | Mishra's Bauble | Urza's Bauble | Vampiric Tuto
 flat_mc_plays | Mana Crypt | Mana Vault | Lotus Petal | Mox Opal | Ancient Tomb | Mishra's Workshop | Tolarian Academy | Eldrazi Temple
 flat_mc_plays | Demonic Tutor | Mystical Tutor | Tinker | Lion's Eye Diamond | Bazaar of Baghdad
 
+# Doomsday: kept with Thassa's Oracle in hand; the pile is cards that draw (the most for the least), then mana
+doomsday | Doomsday
+doomsday_draw | Gitaxian Probe | Street Wraith | Gush | Ancestral Recall | Preordain
+doomsday_mana | Dark Ritual | Lotus Petal | Black Lotus | Mox Jet | Mox Sapphire | Mox Opal
+
 # Sphere Shops: Smelting Vat sacrifices one artifact for the better ones in the top eight cards, chaining the deck's artifacts
 artifact_engine | Smelting Vat
 

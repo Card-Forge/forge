@@ -97,6 +97,10 @@ public final class ComboGuard {
         if (host == null) {
             return null;
         }
+        // Doomsday without the Oracle in hand (or the life, or a library to cut) only throws the deck away
+        if (sa.isSpell() && DoomsdayPile.isDoomsday(host) && !DoomsdayPile.ready(ai)) {
+            return "doomsday-not-ready";
+        }
         // Doomsday Excruciator, or Superior Spider-Man with nothing else to copy: the cut loses without a finisher
         if (cutsTheLibraries(ai, sa, plan)) {
             return "library-cut-unsafe";

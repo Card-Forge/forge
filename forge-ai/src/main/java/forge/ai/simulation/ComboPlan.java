@@ -83,7 +83,7 @@ import forge.game.zone.ZoneType;
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
         MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE,
-        LIBRARY_OUT, PAIR, LIBRARY_CUT }
+        LIBRARY_OUT, PAIR, LIBRARY_CUT, DOOMSDAY }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -480,6 +480,7 @@ public final class ComboPlan {
         addIfFound(found, libraryOut(spells));
         addIfFound(found, pair(spells));
         addIfFound(found, libraryCut(spells, lands));
+        addIfFound(found, doomsday(spells));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -805,6 +806,9 @@ public final class ComboPlan {
                     break;
                 case LIBRARY_CUT:
                     sum += libraryCutTerm(ai, combo);
+                    break;
+                case DOOMSDAY:
+                    sum += DoomsdayPile.term(ai);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -3583,6 +3587,33 @@ public final class ComboPlan {
      * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
      * win with, so milling itself out is a penalty (the same guard as the dredge deck).
      */
+    /** Doomsday with the Oracle: two copies of Doomsday, a winner and eight cards that draw or make mana for the pile. */
+    private static Combo doomsday(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> enablers = new LinkedHashSet<>();
+        int doomsdays = 0;
+        int winners = 0;
+        int pile = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.DOOMSDAY, c.getName())) {
+                enablers.add(c.getName());
+                doomsdays++;
+            } else if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                winners++;
+            } else if (AiCardLists.has(AiCardLists.Role.DOOMSDAY_DRAW, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.DOOMSDAY_MANA, c.getName())) {
+                pile++;
+            }
+        }
+        if (doomsdays < 2 || winners < 1 || pile < 8) {
+            return null;
+        }
+        return new Combo(Kind.DOOMSDAY, 30 + 4 * Math.min(doomsdays, 4) + 8 * Math.min(winners, 3) + Math.min(pile, 16), payoffs,
+                enablers, Collections.<String>emptySet(), false,
+                "doomsday=" + doomsdays + ", winners=" + payoffs + ", pile cards=" + pile);
+    }
+
     private int libraryOutTerm(final Player ai, final Combo combo) {
         final int library = ai.getCardsIn(ZoneType.Library).size();
         if (!libraryOutWinnerReachable(ai, combo)) {
@@ -3646,6 +3677,13 @@ public final class ComboPlan {
                        final CardCollectionView options) {
         if (combos.isEmpty() || options == null || options.isEmpty()) {
             return null;
+        }
+        if (has(Kind.DOOMSDAY) && destination == ZoneType.Library && origin.contains(ZoneType.Graveyard)
+                && origin.contains(ZoneType.Library)) {
+            final Card kept = DoomsdayPile.pick(ai, options); // Doomsday: the five cards of the pile
+            if (kept != null) {
+                return kept;
+            }
         }
         final Combo tutorStorm = find(Kind.TUTOR_STORM);
         if (tutorStorm != null && (destination == ZoneType.Hand || destination == ZoneType.Exile)

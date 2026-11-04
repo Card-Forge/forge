@@ -197,7 +197,7 @@ public class FlatMonteCarloVintageDecksTest extends AITest {
             + "1 Demonic Tutor\n"
             + "2 Reanimate\n";
 
-    private static final String DOOMSDAY = "2 Flooded Strand\n"
+    static final String DOOMSDAY = "2 Flooded Strand\n"
             + "3 Misty Rainforest\n"
             + "2 Scalding Tarn\n"
             + "4 Underground Sea\n"
