@@ -3,5 +3,5 @@ ManaCost:2 U R
 Types:Legendary Creature Human Artificer
 PT:1/5
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Seek out — Whenever you draw your second card each turn, create a token that's a copy of another target creature you control, except it isn't legendary, it's an Illusion artifact in addition to its other types, and it has haste. Exile that token at the beginning of the next end step.
-SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | NonLegendary$ True | AddTypes$ Illusion & Artifact | AddKeywords$ Haste | AtEOT$ Exile
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl+Other | ValidTgtsDesc$ another creature you control | NonLegendary$ True | AddTypes$ Illusion & Artifact | AddKeywords$ Haste | AtEOT$ Exile
 Oracle:Seek out — Whenever you draw your second card each turn, create a token that's a copy of another target creature you control, except it isn't legendary, it's an Illusion artifact in addition to its other types, and it has haste. Exile that token at the beginning of the next end step.
