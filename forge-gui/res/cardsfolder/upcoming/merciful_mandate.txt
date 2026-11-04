@@ -1,0 +1,6 @@
+Name:Merciful Mandate
+ManaCost:1 W
+Types:Instant
+A:SP$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBEndCombat | SpellDescription$ Untap all creatures you control. If it's a combat phase, you may end the combat phase. (Remove all attackers and blockers from combat. Exile all spells and abilities from the stack, including this spell.)
+SVar:DBEndCombat:DB$ EndCombatPhase | ConditionPhases$ BeginCombat->EndCombat | Optional$ True
+Oracle:Untap all creatures you control. If it's a combat phase, you may end the combat phase. (Remove all attackers and blockers from combat. Exile all spells and abilities from the stack, including this spell.)
