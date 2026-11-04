@@ -5,7 +5,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigCharm | TriggerDescription$ When this land enters untapped, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBSurveil
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance | SpellDescription$ Target creature gets +1/+1 and gains vigilance until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance | SpellDescription$ Target creature gets +1/+1 and gains vigilance until end of turn.
 SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 Oracle:This land enters tapped unless you control two or more other lands.\nWhen this land enters untapped, choose one —\n• Target creature gets +1/+1 and gains vigilance until end of turn.\n• Surveil 1.\n{T}: Add {G}.
