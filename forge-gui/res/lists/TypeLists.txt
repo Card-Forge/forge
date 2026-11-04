@@ -219,7 +219,7 @@ Noble:Nobles
 Noggle:Noggles
 Nomad:Nomads
 Nymph:Nymphs
-Ocampa:Ocampas
+Ocampa:Ocampa
 Octopus:Octopi
 Officer:Officers
 Ogre:Ogres
