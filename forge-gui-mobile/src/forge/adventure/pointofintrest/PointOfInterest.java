@@ -129,6 +129,8 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     }
 
     public boolean getActive() {
+        if (forge.adventure.archipelago.ArchipelagoData.getInstance().isCastleOpenEarly(data))
+            return true;
         for (DialogData.ActionData.QuestFlag flag : questFlagsToActivate) {
             if (Current.player().getQuestFlag(flag.key) < flag.val){
                 return false;

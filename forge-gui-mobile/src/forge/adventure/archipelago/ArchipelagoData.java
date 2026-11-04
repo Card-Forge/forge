@@ -2,6 +2,7 @@ package forge.adventure.archipelago;
 
 import forge.StaticData;
 import forge.adventure.data.ItemData;
+import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.WorldData;
 import forge.adventure.scene.TileMapScene;
 import forge.Forge;
@@ -167,6 +168,13 @@ public class ArchipelagoData implements SaveFileContent {
         if (region == null) return true;
         lastTraversedRegion = region;
         return !lockedWorldRegions.contains(region);
+    }
+
+    // The Archipelago logic needs the castles reachable from the start, so they skip the Chapter 1 story gate (mainQuest).
+    // Castles revealed by their own quest flag (Arzakon's) stay hidden until then.
+    public boolean isCastleOpenEarly(PointOfInterestData poi) {
+        return archipelagoMode == ArchipelagoMode.networked_archipelago && "castle".equals(poi.type)
+                && Arrays.stream(poi.questFlagsToActivate).allMatch(flag -> "mainQuest".equals(flag.key));
     }
 
     public ArchipelagoMode getArchipelagoMode() {
