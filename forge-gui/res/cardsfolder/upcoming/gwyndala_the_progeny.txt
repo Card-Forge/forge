@@ -1,7 +1,7 @@
 Name:Gwyndala, the Progeny
 ManaCost:1 U
 Types:Legendary Creature Vau-N'Akat Advisor
-PT:3/2
+PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a colorless Equipment artifact token named Neuroflux Heirloom with "Equipped creature gets +1/+1" and equip {2}. Attach it to NICKNAME.
 SVar:TrigToken:DB$ Token | TokenScript$ neuroflux_heirloom | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Remembered | Defined$ Self | SubAbility$ DBCleanup
