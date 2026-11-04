@@ -3,7 +3,8 @@ ManaCost:1 R
 Types:Enchantment Saga
 K:Chapter:3:DBSearch,DBTrigger,DBSacrifice
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Mountain.Basic | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle.
-SVar:DBTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | ThisTurn$ True | Execute$ TrigBoost | SpellDescription$ Whenever a creature you control enters this turn, put a +1/+1 counter on it and it gains haste until end of turn. | TriggerDescription$ Whenever a creature you control enters this turn, put a +1/+1 counter on it and it gains haste until end of turn.
+SVar:DBTrigger:DB$ Effect | Triggers$ CreatureETB | SpellDescription$ Whenever a creature you control enters this turn, put a +1/+1 counter on it and it gains haste until end of turn.
+SVar:CreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ TrigBoost | TriggerDescription$ Whenever a creature you control enters this turn, put a +1/+1 counter on it and it gains haste until end of turn.
 SVar:TrigBoost:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBHaste
 SVar:DBHaste:DB$ Pump | Defined$ TriggeredCard | KW$ Haste
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Land | Defined$ You | SpellDescription$ Sacrifice a land.
