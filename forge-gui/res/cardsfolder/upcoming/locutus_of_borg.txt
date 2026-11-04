@@ -1,6 +1,6 @@
 Name:Locutus of Borg
 ManaCost:1 W U B
-Types:Legendary Creature Borg
+Types:Legendary Artifact Creature Borg
 PT:3/3
 K:Lifelink
 S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddTrigger$ DamageTrig | Description$ Artifact creatures you control have "Whenever this creature deals combat damage to a player, create a 1/1 colorless Borg artifact creature token."
