@@ -9,4 +9,5 @@ SVar:X:Count$Valid Creature.nonBorg+YouCtrl$CreatureType
 SVar:Y:SVar$X/DivideEvenlyDown.5
 SVar:Z:Count$RememberedSize
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
 Oracle:Federation — At the beginning of combat on your turn, draw a card for every five creature types among non-Borg creatures you control. If you draw three or more cards this way, put two +1/+1 counters on each creature you control.
