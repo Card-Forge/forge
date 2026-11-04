@@ -987,6 +987,9 @@ public class AiController {
         if (deckPlan(player).combos.payoffMustWait(player, sa)) {
             return AiPlayDecision.AnotherTime; // Replenish on a graveyard without its enchantments is a wasted card
         }
+        if (DredgeLine.mustWait(player, deckPlan(player).combos, sa)) {
+            return AiPlayDecision.AnotherTime; // Breakthrough without the Diamond and a dredger only empties the hand
+        }
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
@@ -1874,6 +1877,14 @@ public class AiController {
             }
         }
 
+        if (topOwnedByAI && flatMonteCarloActive()) {
+            // Breakthrough on the stack: Lion's Eye Diamond puts the dredgers into the graveyard before the four draws
+            final SpellAbility diamond = DredgeLine.response(player, deckPlan(player).combos);
+            if (diamond != null) {
+                return diamond;
+            }
+        }
+
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
             // in a scripted timed fashion.
@@ -1929,6 +1940,12 @@ public class AiController {
             final SpellAbility sure = deckPlan(player).combos.sureMadnessPlay(player, saList);
             if (sure != null) {
                 return sure; // safe and sure: no rollouts needed
+            }
+        }
+        if (flatMonteCarloActive() && game.getStack().isEmpty()) {
+            final SpellAbility cut = deckPlan(player).combos.sureCutPlay(player, saList);
+            if (cut != null) {
+                return cut; // the library cut with a finisher in place: no rollouts needed
             }
         }
 
@@ -2433,6 +2450,16 @@ public class AiController {
                 && !deckPlan(player).combos.isKeyCard(h) && !TutorPlan.hasPlanTarget(player, sa);
     }
 
+    /**
+     * A mana rock or mana creature marked AI:RemoveDeck:All (Springleaf Drum): the heuristics never cast it, and
+     * without broad discovery nothing else would either, so it is always offered to the rollouts, which decide.
+     */
+    private boolean isRemoveDeckManaPermanent(final SpellAbility sa) {
+        final Card h = sa.getHostCard();
+        return h != null && sa.isSpell() && h.isPermanent() && !h.isLand() && ComputerUtilCard.isCardRemAIDeck(h)
+                && !h.getManaAbilities().isEmpty();
+    }
+
     private boolean isLegalDiscovery(final SpellAbility sa, final AiPlayDecision opinion) {
         if (sa == null) {
             return false;
@@ -2456,6 +2483,7 @@ public class AiController {
         final Card host = sa.getHostCard();
         final ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
+                && !isRemoveDeckManaPermanent(sa)
                 && !combos.isFuelPlay(sa)
                 && !(host != null && ComputerUtilCard.isCardRemAIDeck(host) && combos.isKeyCard(host))
                 && !TutorPlan.hasUse(player, sa)) {
@@ -3201,14 +3229,6 @@ public class AiController {
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
             if (forCombo != null) {
                 return forCombo;
-            }
-            if (destination == ZoneType.Battlefield && origin.contains(ZoneType.Hand)
-                    && !sa.hasParam("AILogic") && !fetchList.isEmpty()) {
-                // whatever the deck, a cheating spell is not for a land when anything else can be put onto the battlefield
-                final CardCollection nonLands = CardLists.filter(fetchList, c -> !c.isLand());
-                if (!nonLands.isEmpty() && nonLands.size() < fetchList.size()) {
-                    return ComputerUtilCard.getBestAI(nonLands);
-                }
             }
         }
 

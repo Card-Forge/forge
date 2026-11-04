@@ -62,6 +62,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                         : sa.getParam("DiscardValid");
                 if (validD.equals("Card.nonLand")) {
                     validD = "nonland";
+                } else if (validD.equals("Card.NamedCard")) {
+                    validD = "named"; // Cabal Therapy: the name is in the game log, not in the script text
                 } else if (CardType.CoreType.isValidEnum(validD)) {
                     validD = validD.toLowerCase();
                 }

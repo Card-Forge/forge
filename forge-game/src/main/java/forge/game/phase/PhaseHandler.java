@@ -1058,19 +1058,16 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     // state-based effects check could lead to game over
                     return;
                 }
+                if (pPlayerPriority.hasLost()) {
+                    // CR 800.4a If the player who left the game had priority at the time they left,
+                    // priority passes to the next player in turn order who's still in the game.
+                    break;
+                }
                 // CR 117.3 A player receives priority once state-based actions are done, and again after each thing they do
                 game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
                 game.stashGameState();
 
                 chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
-
-                // this needs to come after chosenSa so it sees you conceding on own turn
-                if (pFirstPriority.hasLost()) {
-                    // CR 800.4a If the player who left the game had priority at the time they left,
-                    // priority passes to the next player in turn order who's still in the game.
-                    System.out.println("Active player is no longer in the game...");
-                    pFirstPriority = game.getNextPlayerAfter(pFirstPriority);
-                }
 
                 if (chosenSa == null) {
                     break; // that means 'I pass'
@@ -1141,7 +1138,14 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         if (DEBUG_PHASES) {
             System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
         }
-        if (pFirstPriority == nextPlayer) {
+        boolean nobodyPassed = false;
+        if (pFirstPriority.hasLost()) {
+            // a player who left never receives priority again, so their successor takes their place as first
+            pFirstPriority = game.getNextPlayerAfter(pFirstPriority);
+            // if the holder left too and nobody between them remains, no player still in the game has passed
+            nobodyPassed = pPlayerPriority.hasLost() && pFirstPriority == nextPlayer;
+        }
+        if (pFirstPriority == nextPlayer && !nobodyPassed) {
             if (game.getStack().isEmpty()) {
                 if (playerTurn.hasLost()) {
                     setPriority(game.getNextPlayerAfter(playerTurn));

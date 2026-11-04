@@ -1246,6 +1246,7 @@ public class VLobby implements ILobbyView {
 
     private void applyFormatChoice(final Object choice) {
         lobby.setFormatChoice(choice);
+        lobby.saveSetup();
         update(false);
         updateActionButtons();
     }
@@ -1292,6 +1293,7 @@ public class VLobby implements ILobbyView {
                 } else {
                     lobby.removeVariant(variantType);
                 }
+                lobby.saveSetup();
                 VLobby.this.update(false);
                 VLobby.this.updateActionButtons();
             });

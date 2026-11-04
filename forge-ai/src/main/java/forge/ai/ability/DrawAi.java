@@ -278,6 +278,12 @@ public class DrawAi extends SpellAbilityAi {
             numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
         }
 
+        if (sa.costHasManaX() && sa.getRootAbility().getXManaCostPaid() == null && source != null
+                && forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.DREDGE_REFILL, source)) {
+            // Breakthrough for the dredge line: X=0 draws four and throws the hand away, which is the point.
+            sa.getRootAbility().setXManaCostPaid(0);
+        }
+
         boolean xPaid = false;
         final String num = sa.getParam("NumCards");
         if (num != null && num.equals("X")) {

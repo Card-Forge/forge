@@ -31,6 +31,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final GameLobby lobby = new LocalLobby();
     private final VLobby vLobby = new VLobby(lobby);
     VSubmenuConstructed() {
+        lobby.restoreSetup();
         lobby.setListener(vLobby);
 
         vLobby.setPlayerChangeListener(lobby::applyToSlot);

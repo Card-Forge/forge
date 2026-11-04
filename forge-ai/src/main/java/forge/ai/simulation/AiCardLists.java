@@ -64,7 +64,27 @@ public final class AiCardLists {
         /** What an artifact engine deck wins or swings the game with (Karn, The One Ring, Kozilek's Command...). */
         ARTIFACT_PAYOFF,
         /** Spells that fetch an overrun finisher from the library (Green Sun's Zenith, Natural Order...). */
-        FINISHER_TUTOR
+        FINISHER_TUTOR,
+        /** Cards that win when the library is (nearly) empty: Thassa's Oracle, Laboratory Maniac. */
+        LIBRARY_OUT_PAYOFF,
+        /** Cards that empty the AI's own library on purpose: Balustrade Spy, Cephalid Illusionist and what targets it. */
+        SELF_MILL_OUTLET,
+        /** Cards that bring the winner back from the graveyard once the library is gone (Dread Return). */
+        LIBRARY_OUT_RECURSION,
+        /** The engine half of a two card kill (Grindstone). */
+        PAIR_ENGINE,
+        /** The other half of a two card kill (Painter's Servant). */
+        PAIR_PARTNER,
+        /** Draw spells that throw the rest of the hand away, whose draws a dredger replaces (Breakthrough). */
+        DREDGE_REFILL,
+        /** Cards that cut both libraries down to a few cards when they enter (Doomsday Excruciator). */
+        LIBRARY_CUT,
+        /** What wins after the cut: Restless Reef mills four a turn, Insatiable Avarice makes the opponent draw three. */
+        LIBRARY_CUT_FINISHER,
+        /** Permanents that make an airbent (exiled) creature cost nothing to cast again: Doc Aurlock, Semblance Anvil. */
+        AIRBEND_REDUCER,
+        /** Cards that drain the opponent for every creature cast or entering under the airbend loop: Bontu's Monument. */
+        AIRBEND_PAYOFF
     }
 
     /** A two card combo, with the names as they are written in the file. */
