@@ -6,6 +6,7 @@ import java.util.List;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import forge.ai.simulation.ParadoxOutcome;
 import forge.ai.simulation.VaultLoop;
 import forge.game.Game;
 import forge.game.ability.ApiType;
@@ -328,5 +329,57 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
         }
         AssertJUnit.assertTrue("Tendrils with three rituals before it is lethal against 8 life, the opponent has "
                 + opp.getLife() + "\n" + gameStateToString(game), game.isGameOver() || opp.getLife() <= 0);
+    }
+
+    // ------------------------------------------------------------------------------ Paradoxical Outcome
+
+    private SpellAbility paradoxWith(final String... permanents) {
+        setUp(PhaseType.MAIN1);
+        addCards("Island", 2, ai);
+        for (final String name : permanents) {
+            addCard(name, ai);
+        }
+        final Card outcome = addCardToZone("Paradoxical Outcome", ai, ZoneType.Hand);
+        return ParadoxOutcome.sureCast(ai, abilitiesOf(outcome));
+    }
+
+    @Test
+    public void paradoxicalOutcomeReturnsAllTheCheapArtifacts() {
+        final SpellAbility sa = paradoxWith("Sol Ring", "Mox Pearl", "Mox Jet", "Mox Ruby", "Mox Emerald");
+        AssertJUnit.assertNotNull("five artifacts are five cards for one spell\n" + gameStateToString(game), sa);
+        AssertJUnit.assertEquals("every artifact is a target", 5, sa.getTargets().getTargetCards().size());
+        for (final Card c : sa.getTargets().getTargetCards()) {
+            AssertJUnit.assertFalse("no land is returned: " + c, c.isLand());
+        }
+    }
+
+    @Test
+    public void paradoxicalOutcomeKeepsTheVaultTheRingAndTezzeret() {
+        final SpellAbility sa = paradoxWith("Time Vault", "The One Ring", "Tezzeret, Cruel Captain", "Sol Ring", "Mox Pearl",
+                "Mox Jet", "Mox Ruby", "Mox Emerald");
+        AssertJUnit.assertNotNull(gameStateToString(game), sa);
+        for (final Card c : sa.getTargets().getTargetCards()) {
+            AssertJUnit.assertTrue(c + " should stay in play", ParadoxOutcome.returnable(c));
+        }
+        AssertJUnit.assertEquals(5, sa.getTargets().getTargetCards().size());
+    }
+
+    @Test
+    public void paradoxicalOutcomeWaitsForEnoughPermanents() {
+        AssertJUnit.assertNull("two artifacts are not worth the spell", paradoxWith("Sol Ring", "Mox Pearl"));
+    }
+
+    @Test
+    public void paradoxicalOutcomeDoesNotDeckTheAi() {
+        setUp(PhaseType.MAIN1);
+        addCards("Island", 2, ai);
+        for (final String name : new String[] { "Sol Ring", "Mox Pearl", "Mox Jet", "Mox Ruby", "Mox Emerald" }) {
+            addCard(name, ai);
+        }
+        while (ai.getCardsIn(ZoneType.Library).size() > 8) {
+            ai.getZone(ZoneType.Library).remove(ai.getCardsIn(ZoneType.Library).get(0));
+        }
+        final Card outcome = addCardToZone("Paradoxical Outcome", ai, ZoneType.Hand);
+        AssertJUnit.assertNull("8 cards left against a draw of 5", ParadoxOutcome.sureCast(ai, abilitiesOf(outcome)));
     }
 }

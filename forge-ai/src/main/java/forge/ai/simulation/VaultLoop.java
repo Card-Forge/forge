@@ -161,7 +161,11 @@ public final class VaultLoop {
             return forge;
         }
         final SpellAbility cauldron = cauldronStep(ai, candidates);
-        return cauldron != null ? cauldron : bringBack(ai, candidates);
+        if (cauldron != null) {
+            return cauldron;
+        }
+        final SpellAbility paradox = ParadoxOutcome.sureCast(ai, candidates);
+        return paradox != null ? paradox : bringBack(ai, candidates);
     }
 
     /**
