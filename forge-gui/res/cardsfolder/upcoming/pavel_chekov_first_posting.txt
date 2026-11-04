@@ -1,0 +1,10 @@
+Name:Pavel Chekov, First Posting
+ManaCost:2 G U
+Types:Legendary Creature Human Pilot
+PT:1/4
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ChekovChoice | Optional$ True | Description$ If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in a random order.
+SVar:ChekovChoice:DB$ GenericChoice | Choices$ DigLand,DigNonland | Defined$ You
+SVar:DigLand:DB$ DigUntil | Valid$ Card.Land | ValidDescription$ land | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SpellDescription$ Land
+SVar:DigNonland:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SpellDescription$ Nonland
+SVar:NonStackingEffect:True
+Oracle:If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in a random order.
