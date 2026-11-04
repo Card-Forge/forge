@@ -2,7 +2,7 @@ Name:Unification
 ManaCost:3 W U
 Types:Enchantment Saga
 K:Chapter:3:DBPump,DBChangeZone,DBDraw2
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw1
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw1 | SpellDescription$ The owner of up to one target creature draws two cards, then shuffles that creature into their library.
 SVar:DBDraw1:DB$ Draw | Defined$ TargetedOwner | NumCards$ 2 | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Spacecraft | ChangeNum$ 1 | SpellDescription$ You may put a Spacecraft card from your hand or graveyard onto the battlefield.
