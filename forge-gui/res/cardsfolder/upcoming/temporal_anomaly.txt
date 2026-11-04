@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mill | Cost$ 3 G T Sac<1/CARDNAME/this land> | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBReturn | SpellDescription$ Mill four cards. You may put a permanent card from among them into your hand. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
-SVar:DBReturn:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard | Destination$ Hand | ChangeType$ Permanent.IsRemembered | ChangeNum$ 1 | SelectPrompt$ You may select a permanent card | SubAbility$ DBToken
+SVar:DBReturn:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Permanent.IsRemembered | ChangeNum$ 1 | SelectPrompt$ You may select a permanent card | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Mill four cards. You may put a permanent card from among them into your hand. Create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."

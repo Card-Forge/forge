@@ -3,6 +3,6 @@ ManaCost:3
 Types:Legendary Artifact Creature Construct
 PT:0/6
 K:Defender
-A:AB$ DelayedTrigger | Cost$ 4 Sac<1/Creature.Other+nonToken/another nontoken creature> | Mode$ Phase | Phase$ End of Turn | RememberObjects$ SacrificedCards | Execute$ TrigReturn | TriggerDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. | SpellDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard,Exile,Library,Hand | Destination$ Battlefield
+A:AB$ DelayedTrigger | Cost$ 4 Sac<1/Creature.Other+!token/another nontoken creature> | Mode$ Phase | Phase$ End of Turn | RememberObjects$ SacrificedCards | Execute$ TrigReturn | TriggerDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. | SpellDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard,Exile | Destination$ Battlefield
 Oracle:Defender\n{4}, Sacrifice another nontoken creature: Return that card to the battlefield under its owner's control at the beginning of the next end step.
