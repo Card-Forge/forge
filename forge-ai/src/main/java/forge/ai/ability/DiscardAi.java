@@ -41,6 +41,8 @@ public class DiscardAi extends SpellAbilityAi {
 
         if (aiLogic.equals("VolrathsShapeshifter")) {
             return SpecialCardAi.VolrathsShapeshifter.consider(ai, sa);
+        } else if (aiLogic.equals("Timetwister")) {
+            return SpecialCardAi.Timetwister.consider(ai, sa);
         }
 
         final boolean humanHasHand = !ai.getWeakestOpponent().getCardsIn(ZoneType.Hand).isEmpty();

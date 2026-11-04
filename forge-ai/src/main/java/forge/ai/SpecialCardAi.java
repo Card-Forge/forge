@@ -45,6 +45,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -1854,10 +1855,58 @@ public class SpecialCardAi {
     // Timetwister
     public static class Timetwister {
         public static AiAbilityDecision consider(final Player ai, final SpellAbility sa) {
+            int numDraw = 7;
+            for (SpellAbility sub = sa.getSubAbility(); sub != null; sub = sub.getSubAbility()) {
+                if (sub.getApi() == ApiType.Draw && sub.hasParam("NumCards")) {
+                    numDraw = AbilityUtils.calculateAmount(sa.getHostCard(), sub.getParam("NumCards"), sub);
+                }
+            }
+            int oppLossPerDraw = 0;
+            int aiLossPerDraw = 0;
+            // Looks for value when opponents draw cards e.g. (Underworld Dreams, Scrawling Crawler, ...)
+            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                for (Trigger t : c.getTriggers()) {
+                    if (t.getMode() != TriggerType.Drawn || !t.requirementsCheck(ai.getGame())) {
+                        continue;
+                    }
+                    SpellAbility trigSa = t.ensureAbility();
+                    String amount = trigSa == null ? null : trigSa.getApi() == ApiType.DealDamage ? trigSa.getParam("NumDmg")
+                            : trigSa.getApi() == ApiType.LoseLife ? trigSa.getParam("LifeAmount") : null;
+                    if (amount == null) {
+                        continue;
+                    }
+                    int loss = AbilityUtils.calculateAmount(c, amount, trigSa);
+                    String validCard = t.getParamOrDefault("ValidCard", "Card");
+                    if (validCard.contains("OppOwn")) {
+                        oppLossPerDraw += loss;
+                    } else if (validCard.equals("Card")) {
+                        oppLossPerDraw += loss;
+                        aiLossPerDraw += loss;
+                    }
+                }
+            }
+            int oppLoss = oppLossPerDraw * numDraw;
+            // Win even through symmetrical damage: our triggers hurting opponents are ordered to resolve first
+            if (oppLossPerDraw > 0 && ai.getOpponents().allMatch(p -> p.canLoseLife() && p.getLife() <= oppLoss)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else if (aiLossPerDraw * numDraw >= ai.getLife() && ai.canLoseLife()) {
+                // Don't kill ourselves with symmetrical damage
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            } else if (oppLossPerDraw > 0) {
+                // Go for it if the draws are lethal for an opponent
+                for (Player p : ai.getOpponents()) {
+                    if (p.canLoseLife() && p.getLife() <= oppLoss) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                }
+            }
+
             final int aiHandSize = ai.getCardsIn(ZoneType.Hand).size();
             int maxOppHandSize = 0;
 
             final int HAND_SIZE_THRESHOLD = 3;
+            // The more the opponents lose per draw, the more cards in hand we're willing to give up for it
+            final int lowHandSize = HAND_SIZE_THRESHOLD + Math.max(0, oppLossPerDraw - aiLossPerDraw);
 
             for (Player p : ai.getOpponents()) {
                 int handSize = p.getCardsIn(ZoneType.Hand).size();
@@ -1867,7 +1916,7 @@ public class SpecialCardAi {
             }
 
             // use in case we're getting low on cards or if we're significantly behind our opponent in cards in hand
-            if (aiHandSize < HAND_SIZE_THRESHOLD || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
+            if (aiHandSize < lowHandSize || maxOppHandSize - aiHandSize > HAND_SIZE_THRESHOLD) {
                 // if the AI has less than 3 cards in hand or the opponent has more than 3 cards in hand than the AI
                 // then the AI is willing to play this ability
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
