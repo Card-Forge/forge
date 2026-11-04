@@ -3,7 +3,7 @@ ManaCost:5 G U
 Types:Legendary Creature Edosian Officer
 PT:*/*
 K:Trample
-S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Strange new worlds — Lt. Arex's power and toughness are each equal to the number of differently named lands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Strange new worlds — NICKNAME's power and toughness are each equal to the number of differently named lands you control.
 SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw three cards. You may put up to three land cards from your hand onto the battlefield tapped.
 SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBPut

@@ -5,6 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPick | OptionalDecider$ You | TriggerDescription$ Kal-if-fee — When NICKNAME enters, choose another target creature you control and target creature an opponent controls. You may have the chosen creatures fight each other. Whenever a creature that fought this way dies this turn, you draw a card.
 SVar:TrigPick:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBDelay
-SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsTriggerRemembered | ThisTurn$ True | RememberObjects$ Targeted & ParentTarget | Execute$ TrigDraw | TriggerDescription$ Whenever a creature that fought this way dies this turn, you draw a card.
+SVar:DBDelay:DB$ Effect | Triggers$ FoughtDies | RememberObjects$ Targeted & ParentTarget
+SVar:FoughtDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever a creature that fought this way dies this turn, you draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Kal-if-fee — When T'Pring enters, choose another target creature you control and target creature an opponent controls. You may have the chosen creatures fight each other. Whenever a creature that fought this way dies this turn, you draw a card.

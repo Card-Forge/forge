@@ -3,5 +3,5 @@ ManaCost:2 U
 Types:Legendary Creature Vulcan Human Scientist
 PT:3/2
 A:AB$ Draw | Cost$ 2 T | NumCards$ X | SpellDescription$ Draw a card for each nontoken permanent you control that entered this turn.
-SVar:X:Count$ThisTurnEntered_Battlefield_Permanent.nonToken+YouCtrl
+SVar:X:Count$Valid Permanent.YouCtrl+!token+ThisTurnEntered
 Oracle:{2}, {T}: Draw a card for each nontoken permanent you control that entered this turn.
