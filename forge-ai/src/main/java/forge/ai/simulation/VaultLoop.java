@@ -2,13 +2,16 @@ package forge.ai.simulation;
 
 import java.util.List;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -165,7 +168,11 @@ public final class VaultLoop {
             return cauldron;
         }
         final SpellAbility paradox = ParadoxOutcome.sureCast(ai, candidates);
-        return paradox != null ? paradox : bringBack(ai, candidates);
+        if (paradox != null) {
+            return paradox;
+        }
+        final SpellAbility tinker = tinkerStep(ai, candidates);
+        return tinker != null ? tinker : bringBack(ai, candidates);
     }
 
     /**
@@ -282,6 +289,71 @@ public final class VaultLoop {
         }
         return null;
     }
+
+    /**
+     * What a spell that searches the library for an artifact and puts it onto the battlefield (Tinker) should take: the
+     * vault when a key is in play or in hand, the key when the vault is in play. Null when it has no opinion.
+     */
+    public static Card tinkerPick(final Player ai, final CardCollectionView options) {
+        if (ai == null || options == null) {
+            return null;
+        }
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final Card vaultOption = first(options, true);
+        final Card keyOption = first(options, false);
+        if (vaultOption != null && first(board, true) == null
+                && (first(board, false) != null || first(ai.getCardsIn(ZoneType.Hand), false) != null)) {
+            return vaultOption;
+        }
+        if (keyOption != null && first(board, true) != null && first(board, false) == null) {
+            return keyOption;
+        }
+        return null;
+    }
+
+    /**
+     * Tinker: cast it when it completes the loop (the vault with the key in play or in hand, the key with the vault in
+     * play) and the artifact it would sacrifice is neither piece of the loop.
+     */
+    private static SpellAbility tinkerStep(final Player ai, final List<SpellAbility> candidates) {
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
+        final boolean needVault = first(board, true) == null && first(library, true) != null
+                && (first(board, false) != null || first(ai.getCardsIn(ZoneType.Hand), false) != null);
+        final boolean needKey = first(board, true) != null && first(board, false) == null && first(library, false) != null;
+        if (!needVault && !needKey) {
+            return null;
+        }
+        for (final SpellAbility sa : candidates) {
+            if (sa == null || !sa.isSpell() || sa.getApi() != ApiType.ChangeZone || sa.getHostCard() == null
+                    || !ai.equals(sa.getHostCard().getController()) || !sa.getHostCard().isInZone(ZoneType.Hand)
+                    || !"Library".equals(sa.getParamOrDefault("Origin", ""))
+                    || !"Battlefield".equals(sa.getParamOrDefault("Destination", ""))
+                    || !sa.getParamOrDefault("ChangeType", "").contains("Artifact")
+                    || sa.getPayCosts() == null || !sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            final CostSacrifice cost = sa.getPayCosts().getCostPartByType(CostSacrifice.class);
+            if (cost == null || cost.payCostFromSource()) {
+                continue;
+            }
+            final CardCollectionView chosen = ComputerUtil.chooseSacrificeType(ai, cost.getType(), sa, sa.getTargetCard(),
+                    false, Math.max(1, cost.getAbilityAmount(sa)), CardCollection.EMPTY);
+            if (chosen == null || chosen.isEmpty()) {
+                continue;
+            }
+            boolean safe = true;
+            for (final Card c : chosen) {
+                safe &= !isPiece(c);
+            }
+            if (safe && playable(ai, sa)) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
 
     /** Goblin Welder or Goblin Engineer: a piece of the loop from the graveyard onto the battlefield. */
     private static SpellAbility bringBack(final Player ai, final List<SpellAbility> candidates) {

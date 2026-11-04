@@ -18,7 +18,10 @@ import forge.game.zone.ZoneType;
 /**
  * Oops! All Spells: Balustrade Spy and Undercity Informer empty the AI's own library only while the win can follow:
  * Thassa's Oracle in hand, or in the library with Dread Return and three creatures to pay for its flashback. Without
- * it they aim at the opponent, as their scripts have them.
+ * it the activated outlets aim at the opponent, as their scripts have them, and the creatures are not even cast: the
+ * cast of Balustrade Spy has no target (its trigger picks one), so the guard has to refuse the cast itself. An Oracle
+ * in hand only counts when the mana to cast it after the Spy is there too: the library is empty for good by then,
+ * and the next draw would lose the game.
  */
 public class FlatMonteCarloOopsSpyTest extends AITest {
     private static final Object[] OOPS_DECK = { "Balustrade Spy", 4, "Undercity Informer", 1, "Thassa's Oracle", 1,
@@ -120,9 +123,76 @@ public class FlatMonteCarloOopsSpyTest extends AITest {
         final SpellAbility cast = spy.getFirstSpellAbility();
         cast.setActivatingPlayer(ai);
         AssertJUnit.assertEquals("self-mill-no-winner", ComboGuard.problem(ai, cast, ai, combos));
-        AssertJUnit.assertNull("aimed at the opponent nothing is against it", ComboGuard.problem(ai, cast, opp, combos));
+        AssertJUnit.assertEquals("the cast is refused whatever it is aimed at: its trigger picks the target on entering",
+                "self-mill-no-winner", ComboGuard.problem(ai, cast, opp, combos));
+        giveMana();
         addCardToZone("Thassa's Oracle", ai, ZoneType.Hand);
         AssertJUnit.assertNull("with the Oracle in hand the self-mill is allowed", ComboGuard.problem(ai, cast, ai, combos));
+    }
+
+    /** What the AI really asks the guard: the cast of the Spy, with no target and nothing aimed (aim is null). */
+    @Test
+    public void theCastOfTheSpyIsRefusedWithoutAWinner() {
+        setUp();
+        final ComboPlan combos = plan();
+        exileFromLibrary("Thassa's Oracle");
+        final Card spy = addCardToZone("Balustrade Spy", ai, ZoneType.Hand);
+        final SpellAbility cast = spy.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        AssertJUnit.assertEquals("no Oracle anywhere: casting the Spy only wastes it", "self-mill-no-winner",
+                ComboGuard.problem(ai, cast, null, combos));
+        giveMana();
+        addCardToZone("Thassa's Oracle", ai, ZoneType.Hand);
+        AssertJUnit.assertNull("with the Oracle in hand and the mana for both the Spy is cast", ComboGuard.problem(ai, cast, null, combos));
+    }
+
+    /** The Spy that is cast is the third creature the flashback of Dread Return needs: that cast must not be refused. */
+    @Test
+    public void theSpyBeingCastCountsAmongTheCreaturesTheFlashbackSacrifices() {
+        setUp();
+        final ComboPlan combos = plan();
+        exileFromLibrary("Narcomoeba");
+        addCard("Grizzly Bears", ai);
+        addCard("Grizzly Bears", ai);
+        final Card spy = addCardToZone("Balustrade Spy", ai, ZoneType.Hand);
+        final SpellAbility cast = spy.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        AssertJUnit.assertFalse("two creatures are not three", combos.libraryOutSelfMillSafe(ai));
+        AssertJUnit.assertTrue("with the Spy that is cast there are three", combos.libraryOutSelfMillSafe(ai, 1));
+        AssertJUnit.assertNull("the cast completes the line", ComboGuard.problem(ai, cast, null, combos));
+    }
+
+    /**
+     * The Oracle in hand is no winner when it cannot be cast after the Spy: the library is empty for good, and the next
+     * draw loses. Six Swamps pay for the Spy but make no {U}{U}; two Islands complete it.
+     */
+    @Test
+    public void theSpyIsRefusedWhenTheOracleCannotBeCastAfterIt() {
+        setUp();
+        final ComboPlan combos = plan();
+        exileFromLibrary("Thassa's Oracle");
+        final Card spy = addCardToZone("Balustrade Spy", ai, ZoneType.Hand);
+        final SpellAbility cast = spy.getFirstSpellAbility();
+        cast.setActivatingPlayer(ai);
+        addCardToZone("Thassa's Oracle", ai, ZoneType.Hand);
+        for (int i = 0; i < 6; i++) {
+            addCard("Swamp", ai);
+        }
+        AssertJUnit.assertEquals("no blue: the Oracle cannot follow the Spy", "self-mill-no-winner",
+                ComboGuard.problem(ai, cast, null, combos));
+        addCard("Island", ai);
+        addCard("Island", ai);
+        AssertJUnit.assertNull("with {U}{U} left after the Spy the win is certain", ComboGuard.problem(ai, cast, null, combos));
+    }
+
+    /** Enough untapped lands for the Spy ({3}{B}) and the Oracle ({U}{U}) in the same turn. */
+    private void giveMana() {
+        for (int i = 0; i < 4; i++) {
+            addCard("Swamp", ai);
+        }
+        for (int i = 0; i < 2; i++) {
+            addCard("Island", ai);
+        }
     }
 
     @Test

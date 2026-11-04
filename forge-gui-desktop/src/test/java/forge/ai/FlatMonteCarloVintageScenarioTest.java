@@ -382,4 +382,58 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
         final Card outcome = addCardToZone("Paradoxical Outcome", ai, ZoneType.Hand);
         AssertJUnit.assertNull("8 cards left against a draw of 5", ParadoxOutcome.sureCast(ai, abilitiesOf(outcome)));
     }
+
+    /** Tinker with the key in play and the vault in the library; the spare artifact is the sacrifice. */
+    private SpellAbility tinkerWith(final boolean spare) {
+        setUp(PhaseType.MAIN1);
+        addCardToZone("Time Vault", ai, ZoneType.Library);
+        addCards("Island", 1, ai);
+        addCard("Manifold Key", ai);
+        if (spare) {
+            addCard("Mishra's Bauble", ai);
+        }
+        final Card tinker = addCardToZone("Tinker", ai, ZoneType.Hand);
+        game.getAction().checkStateEffects(true);
+        return VaultLoop.sureCast(ai, abilitiesOf(tinker));
+    }
+
+    @Test
+    public void tinkerIsCastForTheVaultWhenTheKeyIsInPlay() {
+        final SpellAbility sa = tinkerWith(true);
+        AssertJUnit.assertNotNull("Tinker should be cast: the key is in play, the vault in the library, a spare artifact"
+                + " to sacrifice (look at VaultLoop.tinkerStep)\n" + gameStateToString(game), sa);
+        AssertJUnit.assertEquals("Tinker", sa.getHostCard().getName());
+    }
+
+    @Test
+    public void tinkerIsNotCastWhenItWouldSacrificeTheKey() {
+        AssertJUnit.assertNull("the key is the only artifact: Tinker would sacrifice a piece of the loop", tinkerWith(false));
+    }
+
+    @Test
+    public void tinkerTakesTheVaultWhenTheKeyIsInPlayAndTheKeyWhenTheVaultIs() {
+        setUp(PhaseType.MAIN1);
+        final Card vault = addCardToZone("Time Vault", ai, ZoneType.Library);
+        final Card key = addCardToZone("Manifold Key", ai, ZoneType.Library);
+        final Card sol = addCardToZone("Sol Ring", ai, ZoneType.Library);
+        final forge.game.card.CardCollection options = new forge.game.card.CardCollection();
+        options.add(sol);
+        options.add(key);
+        options.add(vault);
+        AssertJUnit.assertNull("nothing in play: no opinion", VaultLoop.tinkerPick(ai, options));
+        addCard("Manifold Key", ai);
+        AssertJUnit.assertEquals("the key is in play: the vault", "Time Vault", VaultLoop.tinkerPick(ai, options).getName());
+    }
+
+    @Test
+    public void tinkerTakesTheKeyWhenTheVaultIsInPlay() {
+        setUp(PhaseType.MAIN1);
+        final Card key = addCardToZone("Manifold Key", ai, ZoneType.Library);
+        final Card sol = addCardToZone("Sol Ring", ai, ZoneType.Library);
+        addCard("Time Vault", ai);
+        final forge.game.card.CardCollection options = new forge.game.card.CardCollection();
+        options.add(sol);
+        options.add(key);
+        AssertJUnit.assertEquals("the vault is in play: its key", "Manifold Key", VaultLoop.tinkerPick(ai, options).getName());
+    }
 }

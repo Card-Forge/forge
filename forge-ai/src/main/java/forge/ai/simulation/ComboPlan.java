@@ -3618,6 +3618,15 @@ public final class ComboPlan {
      * that is not a library-out deck: there is nothing to say about it.
      */
     public boolean libraryOutSelfMillSafe(final Player ai) {
+        return libraryOutSelfMillSafe(ai, 0);
+    }
+
+    /**
+     * Like {@link #libraryOutSelfMillSafe(Player)} with {@code extraCreatures} more creatures than the ones in play to
+     * pay the flashback of Dread Return with: the Balustrade Spy that is about to be cast is one of them, and its
+     * trigger is what mills the library.
+     */
+    public boolean libraryOutSelfMillSafe(final Player ai, final int extraCreatures) {
         final Combo combo = find(Kind.LIBRARY_OUT);
         if (combo == null) {
             return true;
@@ -3635,7 +3644,7 @@ public final class ComboPlan {
             }
         }
         boolean flashback = false;
-        int fodder = ai.getCreaturesInPlay().size();
+        int fodder = ai.getCreaturesInPlay().size() + extraCreatures;
         for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
             flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
         }

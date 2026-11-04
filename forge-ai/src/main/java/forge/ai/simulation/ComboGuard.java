@@ -99,14 +99,41 @@ public final class ComboGuard {
         }
         // Balustrade Spy and Undercity Informer milling their own controller without the Oracle to follow it
         if (plan != null && plan.has(ComboPlan.Kind.LIBRARY_OUT)
-                && AiCardLists.has(AiCardLists.Role.SELF_MILL_OUTLET, host.getName()) && !plan.libraryOutSelfMillSafe(ai)) {
-            boolean self = ai.equals(aim);
-            for (SpellAbility a = sa; a != null && !self; a = a.getSubAbility()) {
-                self = a.usesTargeting() && a.getTargets() != null && a.getTargets().contains(ai);
-            }
-            if (self) {
+                && AiCardLists.has(AiCardLists.Role.SELF_MILL_OUTLET, host.getName())) {
+            // The cast of the creature has no target: its trigger picks one when it enters. What is refused is therefore
+            // the cast itself, with the creature counted among those the flashback of Dread Return can sacrifice, and
+            // an Oracle in hand only counts when the mana for it is there after the Spy (the library is then empty for
+            // good: the next draw would lose the game).
+            if (sa.isSpell() && host.isCreature()
+                    && (!plan.libraryOutSelfMillSafe(ai, 1) || !LibraryOutWin.castable(ai, plan, sa, 1))) {
                 return "self-mill-no-winner";
             }
+            if (!plan.libraryOutSelfMillSafe(ai)) {
+                boolean self = ai.equals(aim);
+                for (SpellAbility a = sa; a != null && !self; a = a.getSubAbility()) {
+                    self = a.usesTargeting() && a.getTargets() != null && a.getTargets().contains(ai);
+                }
+                if (self) {
+                    return "self-mill-no-winner";
+                }
+            }
+        }
+        // Breakthrough without a dredger, a card for the graveyard and Lion's Eye Diamond in play only empties the hand.
+        // Not left to AiController.canPlaySa: it answers AnotherTime, and a fuel play (a sorcery that discards) with that
+        // answer is still offered to the rollouts as a discovered play, which the rollouts like (the graveyard fills).
+        if (plan != null && DredgeLine.mustWait(ai, plan, sa)) {
+            return "dredge-line-incomplete";
+        }
+        // Breakthrough without a dredger, a card for the graveyard and Lion's Eye Diamond in play only empties the hand.
+        // Not left to AiController.canPlaySa: it answers AnotherTime, and a fuel play (a sorcery that discards) with that
+        // answer is still offered to the rollouts as a discovered play, which the rollouts like (the graveyard fills).
+        if (plan != null && DredgeLine.mustWait(ai, plan, sa)) {
+            return "dredge-line-incomplete";
+        }
+        // Griselbrand: pay life, draw cards. Offered to the rollouts as a discovered play whatever the heuristics think,
+        // and the rollouts like the cards; the guard stops it when the life or the library cannot take it.
+        if (LifeDrawGuard.reckless(ai, sa, plan)) {
+            return "life-draw-reckless";
         }
         // Doomsday without the Oracle in hand (or the life, or a library to cut) only throws the deck away
         if (sa.isSpell() && DoomsdayPile.isDoomsday(host) && !DoomsdayPile.ready(ai)) {
