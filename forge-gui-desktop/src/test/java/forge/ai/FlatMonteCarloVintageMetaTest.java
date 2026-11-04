@@ -108,4 +108,41 @@ public class FlatMonteCarloVintageMetaTest extends AITest {
         final ComboPlan combos = plan(deal(BESEECH_STORM + "1 Time Vault\n1 Manifold Key\n"));
         AssertJUnit.assertFalse(combos.summary(), combos.has(ComboPlan.Kind.PAIR));
     }
+
+    /**
+     * Decks built for the AI keep the AI:RemoveDeck:All cards Flat MC plays (free cantrips, the combo pieces) and still
+     * leave out the others; with Flat MC off nothing is kept.
+     */
+    @Test
+    public void aiDecksKeepTheRemoveDeckCardsFlatMcPlays() {
+        final Player p = deal(OATH);
+        final String[] kept = { "Gitaxian Probe", "Mishra's Bauble", "Urza's Bauble", "Vampiric Tutor",
+                "Demonic Consultation", "Merchant Scroll", "Manifold Key", "Goblin Welder" };
+        final String[] left = { "Doomsday", "Prismatic Ending", "Mindbreak Trap", "Commandeer", "Flash", "Nethergoyf" };
+        try {
+            forge.card.CardAiHints.setKeptForFlatMc(AiCardLists::isFlatMcPlayable);
+            for (final String name : kept) {
+                AssertJUnit.assertTrue(name + " should be kept in AI decks while Flat MC is on",
+                        forge.card.CardRulesPredicates.IS_KEPT_IN_AI_DECKS.test(addCardToZone(name, p, ZoneType.Hand).getRules()));
+            }
+            for (final String name : left) {
+                AssertJUnit.assertFalse(name + " is not played by Flat MC and stays out of AI decks",
+                        forge.card.CardRulesPredicates.IS_KEPT_IN_AI_DECKS.test(addCardToZone(name, p, ZoneType.Hand).getRules()));
+            }
+            // AI:RemoveDeck:Random: the fast mana, tutors and combo pieces Flat MC plays are kept, the prison pieces are not
+            for (final String name : new String[] { "Mana Crypt", "Mox Opal", "Time Vault", "Demonic Tutor", "Tinker" }) {
+                AssertJUnit.assertTrue(name + " should be kept in random decks while Flat MC is on",
+                        forge.card.CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS.test(addCardToZone(name, p, ZoneType.Hand).getRules()));
+            }
+            for (final String name : new String[] { "Chalice of the Void", "Null Rod", "Sphere of Resistance" }) {
+                AssertJUnit.assertFalse(name + " is not played by Flat MC and stays out of random decks",
+                        forge.card.CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS.test(addCardToZone(name, p, ZoneType.Hand).getRules()));
+            }
+            forge.card.CardAiHints.setKeptForFlatMc(null); // Flat MC off
+            AssertJUnit.assertFalse("with Flat MC off nothing is kept", forge.card.CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+                    .test(addCardToZone("Gitaxian Probe", p, ZoneType.Hand).getRules()));
+        } finally {
+            forge.card.CardAiHints.setKeptForFlatMc(null);
+        }
+    }
 }

@@ -97,6 +97,12 @@ combo_engine | Oath of Druids
 # Time Vault wins an extra turn per untap (Manifold Key, Voltaic Key): it counts with the artifact payoffs
 artifact_payoff | Time Vault
 
+# AI:RemoveDeck:All and AI:RemoveDeck:Random cards Flat MC plays on its own: free cantrips and tutors, the fast mana and
+# the lands of the combo decks. Decks built for the AI keep them (the combo pieces are kept through their own roles)
+flat_mc_plays | Gitaxian Probe | Mishra's Bauble | Urza's Bauble | Vampiric Tutor | Demonic Consultation | Merchant Scroll | Springleaf Drum
+flat_mc_plays | Mana Crypt | Mana Vault | Lotus Petal | Mox Opal | Ancient Tomb | Mishra's Workshop | Tolarian Academy | Eldrazi Temple
+flat_mc_plays | Demonic Tutor | Mystical Tutor | Tinker | Lion's Eye Diamond | Bazaar of Baghdad
+
 # Sphere Shops: Smelting Vat sacrifices one artifact for the better ones in the top eight cards, chaining the deck's artifacts
 artifact_engine | Smelting Vat
 

@@ -34,6 +34,11 @@ import forge.game.card.Card;
 public final class AiCardLists {
     /** What a card is for. The key in the file is the lower case name of the constant. */
     public enum Role {
+        /**
+         * Cards marked AI:RemoveDeck:All that Flat MC plays by itself (free cantrips, mana permanents) and that are in
+         * no other role: decks built for the AI keep them (see {@link #isFlatMcPlayable}).
+         */
+        FLAT_MC_PLAYS,
         /** Living End and kin: cast from the library by cascade or suspend once the swap is worth it. */
         MASS_PAYOFF,
         /** Spells that bring a creature back from a graveyard. */
@@ -162,6 +167,22 @@ public final class AiCardLists {
     /** Whether the card with this name has the role. */
     public static boolean has(final Role role, final String cardName) {
         return cardName != null && names(role).contains(normalize(cardName));
+    }
+
+    /**
+     * Whether Flat MC plays this card although its script says AI:RemoveDeck:All: it is listed as one it plays, or is a
+     * piece of a combo or loop that has a role.
+     */
+    public static boolean isFlatMcPlayable(final String cardName) {
+        if (cardName == null) {
+            return false;
+        }
+        for (final Role role : Role.values()) {
+            if (has(role, cardName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean has(final Role role, final Card card) {
