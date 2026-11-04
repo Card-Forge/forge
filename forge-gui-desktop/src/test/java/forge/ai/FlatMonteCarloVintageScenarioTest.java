@@ -436,4 +436,31 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
         options.add(key);
         AssertJUnit.assertEquals("the vault is in play: its key", "Manifold Key", VaultLoop.tinkerPick(ai, options).getName());
     }
+
+    /** Oath of Druids in play, the opponent with a creature and the AI with none: the upkeep trigger puts the fatty in. */
+    @Test(timeOut = 120000)
+    public void oathOfDruidsPutsTheFattyOntoTheBattlefieldAtUpkeep() {
+        game = initAndCreateGame();
+        ai = game.getPlayers().get(1);
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Island", ai, ZoneType.Library);
+        }
+        addCardToZone("Atraxa, Grand Unifier", ai, ZoneType.Library);
+        for (int i = 0; i < 10; i++) {
+            addCardToZone("Island", ai, ZoneType.Library);
+        }
+        addCard("Oath of Druids", ai);
+        addCard("Grizzly Bears", game.getPlayers().get(0));
+        game.AI_FLAT_MONTE_CARLO = true;
+        game.AI_TIMEOUT = 10;
+        // from the untap step: setting the upkeep directly does not begin it, so its triggers would never fire
+        game.getPhaseHandler().devModeSet(PhaseType.UNTAP, ai);
+        game.getAction().checkStateEffects(true);
+        for (int i = 0; i < 300 && !game.isGameOver() && !game.getPhaseHandler().is(PhaseType.MAIN1); i++) {
+            game.getPhaseHandler().mainLoopStep();
+        }
+        AssertJUnit.assertEquals("Oath of Druids should have put Atraxa onto the battlefield (the trigger is optional:"
+                + " DigUntilAi with AILogic OathOfDruids decides)\n" + gameStateToString(game), 1,
+                countCardsWithName(game, "Atraxa, Grand Unifier", ZoneType.Battlefield));
+    }
 }

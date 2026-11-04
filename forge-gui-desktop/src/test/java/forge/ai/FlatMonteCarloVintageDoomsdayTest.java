@@ -168,4 +168,39 @@ public class FlatMonteCarloVintageDoomsdayTest extends AITest {
                 + "; if it was cast but did not win look at DoomsdayPile.term, if not cast at ComboGuard)\n"
                 + gameStateToString(game), game.isGameOver() || countCardsWithName(game, "Thassa's Oracle", ZoneType.Battlefield) > 0);
     }
+
+    /**
+     * The whole spell resolved by the AI: the five cards it keeps must come from the pile hook (the draw cards and the
+     * mana, not lands and not the filler), and the rest of the library is exiled.
+     */
+    @Test(timeOut = 120000)
+    public void theAiKeepsAUsefulPileWhenDoomsdayResolves() {
+        setUp();
+        addCards("Swamp", 3, ai);
+        addCards("Island", 2, ai);
+        addCardToZone("Thassa's Oracle", ai, ZoneType.Hand);
+        addCardToZone("Doomsday", ai, ZoneType.Hand);
+        game.AI_FLAT_MONTE_CARLO = true;
+        game.AI_TIMEOUT = 10;
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        for (int i = 0; i < 600 && !game.isGameOver() && countCardsWithName(game, "Doomsday", ZoneType.Graveyard) == 0
+                && game.getPhaseHandler().getPlayerTurn() == ai; i++) {
+            game.getPhaseHandler().mainLoopStep();
+        }
+        AssertJUnit.assertEquals("Doomsday should have resolved\n" + gameStateToString(game), 1,
+                countCardsWithName(game, "Doomsday", ZoneType.Graveyard));
+        final CardCollection pile = new CardCollection(ai.getCardsIn(ZoneType.Library));
+        int useful = 0;
+        for (final Card c : pile) {
+            if (forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.DOOMSDAY_DRAW, c.getName())
+                    || forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.DOOMSDAY_MANA, c.getName())) {
+                useful++;
+            }
+        }
+        AssertJUnit.assertEquals("the pile is five cards\n" + gameStateToString(game), 5, pile.size());
+        AssertJUnit.assertTrue("at least three of the five should be draw or mana cards, the pile was " + pile
+                + " (the choice goes through ComboPlan.choose: look at the DOOMSDAY hook and at AiController"
+                + ".chooseCardToHiddenOriginChangeZone)", useful >= 3);
+    }
 }
