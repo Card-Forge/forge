@@ -2,6 +2,6 @@ Name:MACO Strike Team
 ManaCost:G
 Types:Creature Human Soldier
 PT:2/1
-T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control becomes the target of a spell or ability an opponent controls, create a tapped 1/1 red Officer creature token.
+T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl+inZoneBattlefield | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control becomes the target of a spell or ability an opponent controls, create a tapped 1/1 red Officer creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_officer | TokenOwner$ You | TokenTapped$ True
 Oracle:Whenever a creature you control becomes the target of a spell or ability an opponent controls, create a tapped 1/1 red Officer creature token.
