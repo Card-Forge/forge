@@ -2451,7 +2451,7 @@ public final class ComboPlan {
         int rituals = 0;
         int cantrips = 0;
         for (final Card c : spells) {
-            if (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName())) {
+            if (isStormFinisher(c)) {
                 payoffs.add(c.getName());
                 payoffCopies++;
             } else if (c.getCMC() <= 2 && !c.isCreature() && hasApi(c, ApiType.Mana)) {
@@ -2474,7 +2474,8 @@ public final class ComboPlan {
 
     /** A storm card that wins the game: Tendrils of Agony, Grapeshot, Brain Freeze, Empty the Warrens. */
     public static boolean isStormFinisher(final Card c) {
-        return !c.isLand() && !c.isCreature()
+        // a counterspell with storm (Flusterstorm) copies itself, it does not win the game
+        return !c.isLand() && !c.isCreature() && !hasApi(c, ApiType.Counter)
                 && (c.hasKeyword(Keyword.STORM) || AiCardLists.has(AiCardLists.Role.STORM_PAYOFF, c.getName()));
     }
 

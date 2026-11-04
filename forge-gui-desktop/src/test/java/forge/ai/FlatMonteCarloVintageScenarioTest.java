@@ -306,7 +306,7 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
         for (final Card c : new ArrayList<>(ai.getCardsIn(ZoneType.Library))) {
             ai.getZone(ZoneType.Library).remove(c);
         }
-        for (final String line : FlatMonteCarloVintageDecksTest.BESEECH_STORM_DECK.split("\n")) {
+        for (final String line : FlatMonteCarloVintageMetaTest.BESEECH_STORM_DECK.split("\n")) {
             final int space = line.indexOf(' ');
             if (space > 0) {
                 for (int n = Integer.parseInt(line.substring(0, space)); n > 0; n--) {

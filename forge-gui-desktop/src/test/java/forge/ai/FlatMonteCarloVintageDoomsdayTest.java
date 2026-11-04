@@ -26,7 +26,7 @@ public class FlatMonteCarloVintageDoomsdayTest extends AITest {
     private void setUp() {
         game = initAndCreateGame();
         ai = game.getPlayers().get(1);
-        for (final String line : FlatMonteCarloVintageDecksTest.DOOMSDAY.split("\n")) {
+        for (final String line : FlatMonteCarloVintageMetaTest.DOOMSDAY.split("\n")) {
             final int space = line.indexOf(' ');
             if (space > 0) {
                 for (int n = Integer.parseInt(line.substring(0, space)); n > 0; n--) {
@@ -144,5 +144,28 @@ public class FlatMonteCarloVintageDoomsdayTest extends AITest {
         }
         AssertJUnit.assertEquals("Doomsday should have been cast\n" + gameStateToString(game), 0,
                 countCardsWithName(game, "Doomsday", ZoneType.Hand));
+    }
+
+    /** After Doomsday: two cards left and the Oracle in hand, the AI must cast it and win. */
+    @Test(timeOut = 120000)
+    public void theAiCastsTheOracleWithTheLibraryCut() {
+        setUp();
+        final ComboPlan combos = plan();
+        while (ai.getCardsIn(ZoneType.Library).size() > 2) {
+            ai.getZone(ZoneType.Library).remove(ai.getCardsIn(ZoneType.Library).get(0));
+        }
+        addCards("Island", 2, ai);
+        addCardToZone("Thassa's Oracle", ai, ZoneType.Hand);
+        game.AI_FLAT_MONTE_CARLO = true;
+        game.AI_TIMEOUT = 10;
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getAction().checkStateEffects(true);
+        for (int i = 0; i < 600 && !game.isGameOver() && !game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().getPlayerTurn() == ai; i++) {
+            game.getPhaseHandler().mainLoopStep();
+        }
+        AssertJUnit.assertTrue("the Oracle should have been cast and won (plan: " + combos.summary()
+                + "; if it was cast but did not win look at DoomsdayPile.term, if not cast at ComboGuard)\n"
+                + gameStateToString(game), game.isGameOver() || countCardsWithName(game, "Thassa's Oracle", ZoneType.Battlefield) > 0);
     }
 }
