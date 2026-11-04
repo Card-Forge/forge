@@ -11,7 +11,7 @@ import forge.game.zone.ZoneType;
 /**
  * The real lists of the Vintage decks that are not built around a combo (Red Prison, Goblins, Eldrazi, Scam, the Psychic
  * Frog and Initiative decks), played for one turn by the Flat MC AI with a hand drawn from the list: the turn must run
- * to its end without an exception and the AI must do something with it (play a land or a spell). The deck, the hand and
+ * to its end without an exception and the AI must do something with it (play a land or a spell) when the hand has a land or a free spell. The deck, the hand and
  * the board are printed when it does not.
  */
 public class FlatMonteCarloVintageSmokeTest extends AITest {
@@ -41,6 +41,10 @@ public class FlatMonteCarloVintageSmokeTest extends AITest {
             }
             ai.shuffle(null);
             ai.drawCards(7);
+            boolean landInHand = false; // a hand without a land (or a free spell) can do nothing: not a failure of the AI
+            for (final forge.game.card.Card c : ai.getCardsIn(ZoneType.Hand)) {
+                landInHand |= c.isLand() || c.getCMC() == 0;
+            }
             game.AI_FLAT_MONTE_CARLO = true;
             game.AI_TIMEOUT = 2;
             game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
@@ -54,7 +58,7 @@ public class FlatMonteCarloVintageSmokeTest extends AITest {
                 failures.append(deck[0]).append(" threw ").append(e).append('\n');
                 continue;
             }
-            if (ai.getCardsIn(ZoneType.Battlefield).isEmpty() && ai.getCardsIn(ZoneType.Graveyard).isEmpty()
+            if (landInHand && ai.getCardsIn(ZoneType.Battlefield).isEmpty() && ai.getCardsIn(ZoneType.Graveyard).isEmpty()
                     && ai.getCardsIn(ZoneType.Hand).size() >= 7) {
                 failures.append(deck[0]).append(" did nothing with its turn (no land, no spell; look at what the guards"
                         + " refuse or at the discovered plays)\n").append(gameStateToString(game)).append('\n');
