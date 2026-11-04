@@ -2,7 +2,7 @@ Name:Tal Shiar Analyst
 ManaCost:2 R
 Types:Creature Romulan Scientist
 PT:3/2
-A:AB$ DealDamage | Cost$ T | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to each opponent.
+A:AB$ DealDamage | Cost$ T | Defined$ Opponent | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to each opponent.
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a noncreature spell, untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 Oracle:{T}: This creature deals 1 damage to each opponent.\nWhenever you cast a noncreature spell, untap this creature.
