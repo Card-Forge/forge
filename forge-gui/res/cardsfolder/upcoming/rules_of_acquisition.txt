@@ -1,0 +1,11 @@
+Name:Rules of Acquisition
+ManaCost:3 U U
+Types:Sorcery
+A:SP$ Charm | Choices$ DBThird,DBNinetyEighth
+SVar:DBThird:DB$ Draw | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Defined$ TargetedController | NumCards$ 3 | SubAbility$ DBGainThird | SpellDescription$ Follow the 3rd Rule — Gain control of target nonland permanent an opponent controls. That opponent draws three cards.
+SVar:DBGainThird:DB$ GainControl | Defined$ Targeted | NewController$ You
+SVar:DBNinetyEighth:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGive | SpellDescription$ Follow the 98th Rule — Target opponent gains control of target nonland permanent you control. If they do, you draw three cards.
+SVar:DBGive:DB$ GainControl | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | Defined$ Targeted | NewController$ ParentTarget | RememberControlled$ True | SubAbility$ DBDrawNinetyEighth
+SVar:DBDrawNinetyEighth:DB$ Draw | Defined$ You | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose one —\n• Follow the 3rd Rule — Gain control of target nonland permanent an opponent controls. That opponent draws three cards.\n• Follow the 98th Rule — Target opponent gains control of target nonland permanent you control. If they do, you draw three cards.
