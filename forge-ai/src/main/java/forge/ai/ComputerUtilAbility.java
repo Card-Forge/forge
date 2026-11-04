@@ -5,6 +5,8 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -14,6 +16,7 @@ import com.google.common.collect.Multimap;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -244,6 +247,26 @@ public class ComputerUtilAbility {
         return true;
     }
 
+    // Could the damage or life loss of this ability be lethal for an opponent
+    public static boolean couldWinGame(final Player ai, final SpellAbility sa) {
+        for (SpellAbility s = sa; s != null; s = s.getSubAbility()) {
+            String amount = s.getApi() == ApiType.DealDamage ? s.getParam("NumDmg")
+                    : s.getApi() == ApiType.LoseLife ? s.getParam("LifeAmount") : null;
+            if (amount == null) {
+                continue;
+            }
+            int loss = AbilityUtils.calculateAmount(s.getHostCard(), amount, s);
+            for (Player opp : ai.getOpponents()) {
+                boolean affected = s.usesTargeting() ? s.canTarget(opp)
+                        : s.hasParam("Defined") && AbilityUtils.getDefinedPlayers(s.getHostCard(), s.getParam("Defined"), s).contains(opp);
+                if (affected && opp.canLoseLife() && opp.getLife() <= loss) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public final static Comparator<SpellAbility> saEvaluator = Comparator.comparing(sa -> new SortKey(sa, false));
 
     /**
@@ -320,6 +343,12 @@ public class ComputerUtilAbility {
                 return amount == null ? 0 : amount;
             }
             return 0;
+        }
+
+        // 50% of the time, prefer working towards the ultimate. Rolled per planeswalker and turn instead of per call,
+        // so the priority stays the same while sorting.
+        private static boolean prefersPlusThisTurn(final Card pw) {
+            return new Random(Objects.hash(pw.getId(), pw.getGame().getPhaseHandler().getTurn())).nextInt(2) < 1;
         }
 
         private static int getSpellAbilityPriority(SpellAbility sa) {
@@ -402,9 +431,16 @@ public class ComputerUtilAbility {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
                 if (cost instanceof CostRemoveCounter) {
                     p += cost.convertAmount() == null ? 1 : cost.convertAmount();
-                    // try the abilities that keep the planeswalker alive first, except for ultimates: use those while we can
-                    if (source != null && !sa.hasParam("Ultimate") && cost.convertAmount() != null && cost.convertAmount() >= source.getCurrentLoyalty()) {
-                        p -= 20;
+                    // Prefer ultimates and abilities that win the game.
+                    // Lower priorities of abilities that would cause the planeswalker to be destroyed.
+                    // 50% of the time, "+" abilities are favored if the planeswalker has an ultimate ability.
+                    if (source != null && !sa.hasParam("Ultimate") && cost.convertAmount() != null && !couldWinGame(ai, sa)) {
+                        int loyaltyLeft = source.getCurrentLoyalty() - cost.convertAmount();
+                        boolean hasUltimate = IterableUtil.any(source.getSpellAbilities(), s -> s.isPwAbility() && s.hasParam("Ultimate"));
+                        if (loyaltyLeft <= 0 || (hasUltimate && (prefersPlusThisTurn(source)
+                                || ComputerUtilCost.isPlaneswalkerThreatened(ai, source, loyaltyLeft)))) {
+                            p -= 20;
+                        }
                     }
                 } else if (cost instanceof CostPutCounter) {
                     p -= cost.convertAmount();
