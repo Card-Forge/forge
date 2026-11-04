@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.card.ColorSet;
@@ -243,7 +242,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             sa.setTriggeringObject(AbilityKey.SpellAbilityTargets, saTargets);
         }
         sa.setTriggeringObject(AbilityKey.LifeAmount, cause.getAmountLifePaid());
-        sa.setTriggeringObject(AbilityKey.SacrificedAmount, Iterables.size(cause.getPaidList("Sacrificed")));
         sa.setTriggeringObjectsFrom(
                 runParams,
                 AbilityKey.CardLKI,

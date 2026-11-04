@@ -119,7 +119,6 @@ public enum AbilityKey {
     Result("Result"),
     RolledToVisitAttractions("RolledToVisitAttractions"),
     RoomName("RoomName"),
-    SacrificedAmount("SacrificedAmount"),
     Scheme("Scheme"),
     ScryBottom("ScryBottom"),
     ScryNum("ScryNum"),
