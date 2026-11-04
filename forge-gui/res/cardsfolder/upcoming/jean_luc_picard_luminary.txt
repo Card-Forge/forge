@@ -1,7 +1,7 @@
 Name:Jean-Luc Picard, Luminary
 ManaCost:1 U R W
 Types:Legendary Creature Human Officer
-PT:2/2
+PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Permanent.Other+Historic+YouCtrl+cmcGE3 | Execute$ TrigDraw | TriggerDescription$ Whenever another historic permanent you control with mana value 3 or greater enters, draw a card. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigDraw:DB$ Draw
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Seek out — Whenever you draw your second card each turn, put a +1/+1 counter on up to one other target creature and two charge counters on up to one target Spacecraft.
