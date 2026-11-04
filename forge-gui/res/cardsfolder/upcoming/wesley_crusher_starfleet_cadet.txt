@@ -1,0 +1,14 @@
+Name:Wesley Crusher, Starfleet Cadet
+ManaCost:2 U U
+Types:Legendary Creature Human Officer
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, choose two —
+SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBBounce,DBUnblockable,DBLoot | CharmNum$ 2
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
+SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcLE2 | TgtPrompt$ Select target creature with mana value 2 or less | SpellDescription$ Return target creature with mana value 2 or less to its owner's hand.
+SVar:DBUnblockable:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ MakeUnblockable | SpellDescription$ Target creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:DBLoot:DB$ Draw | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Target player draws two cards, then discards two cards.
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
+Oracle:Flash\nWhen Wesley Crusher enters, choose two —\n• Counter target noncreature spell unless its controller pays {2}.\n• Return target creature with mana value 2 or less to its owner's hand.\n• Target creature can't be blocked this turn.\n• Target player draws two cards, then discards two cards.
