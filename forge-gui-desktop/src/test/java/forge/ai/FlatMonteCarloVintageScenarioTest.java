@@ -11,6 +11,7 @@ import forge.ai.simulation.VaultLoop;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -177,6 +178,57 @@ public class FlatMonteCarloVintageScenarioTest extends AITest {
         final SpellAbility sa = VaultLoop.sureCast(ai, abilitiesOf(cauldron));
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertTrue(sa.getTargets().contains(welder));
+    }
+
+    /** A bear with or without a +1/+1 counter, the Welder exiled with the Cauldron, and a Vault in the graveyard. */
+    private Card bearWithCauldronWelder(final boolean counter) {
+        setUp(PhaseType.MAIN1);
+        final Card cauldron = addCard("Agatha's Soul Cauldron", ai);
+        final Card welder = addCardToZone("Goblin Welder", ai, ZoneType.Exile);
+        welder.setExiledWith(cauldron);
+        cauldron.addExiledCard(welder); // "ExiledWithSource" needs both: what the cauldron exiled and who exiled it
+        final Card bear = addCard("Grizzly Bears", ai);
+        bear.setSickness(false);
+        if (counter) {
+            bear.addCounterInternal(CounterType.getType("P1P1"), 1, ai, false, null, null);
+        }
+        game.getAction().checkStateEffects(true);
+        return bear;
+    }
+
+    private static boolean hasWelderAbility(final Card c) {
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility() && sa.getApi() == ApiType.Pump && sa.getSubAbility() != null
+                    && sa.getSubAbility().getApi() == ApiType.Pump) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Test
+    public void aCreatureWithACounterHasTheWelderAbilityFromTheCauldron() {
+        final Card bear = bearWithCauldronWelder(true);
+        AssertJUnit.assertTrue("the bear with a +1/+1 counter should have the Welder ability (Soul Cauldron's static)\n"
+                + gameStateToString(game), hasWelderAbility(bear));
+    }
+
+    @Test
+    public void aCreatureWithoutACounterHasNot() {
+        final Card bear = bearWithCauldronWelder(false);
+        AssertJUnit.assertFalse("no counter, no ability: the Welder step must not count on it", hasWelderAbility(bear));
+    }
+
+    @Test
+    public void theVaultStepUsesTheWelderAbilityOfTheCreatureWithTheCounter() {
+        final Card bear = bearWithCauldronWelder(true);
+        final Card vault = addCardToZone("Time Vault", ai, ZoneType.Graveyard);
+        final Card spare = addCard("Mishra's Bauble", ai);
+        final SpellAbility sa = VaultLoop.sureCast(ai, abilitiesOf(bear, spare));
+        AssertJUnit.assertNotNull("the bear's Welder ability should swap the spare for the vault (VaultLoop.bringBack"
+                + " takes the ability of any creature)\n" + gameStateToString(game), sa);
+        AssertJUnit.assertEquals(bear, sa.getHostCard());
+        AssertJUnit.assertEquals(vault, sa.getSubAbility().getTargets().getFirstTargetedCard());
     }
 
     // ------------------------------------------------------------------------------ the weak spots
