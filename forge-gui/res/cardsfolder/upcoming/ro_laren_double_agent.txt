@@ -1,0 +1,8 @@
+Name:Ro Laren, Double Agent
+ManaCost:2 R
+Types:Legendary Creature Bajoran Rogue Officer
+PT:3/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Seek out — Whenever you draw your second card each turn, NICKNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+A:AB$ Draw | Cost$ 1 T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Seek out — Whenever you draw your second card each turn, Ro Laren deals 2 damage to each opponent.\n{1}, {T}, Discard a card: Draw a card.
