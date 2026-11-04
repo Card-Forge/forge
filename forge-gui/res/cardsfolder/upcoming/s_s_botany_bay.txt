@@ -2,7 +2,7 @@ Name:S.S. Botany Bay
 ManaCost:3
 Types:Legendary Artifact Spacecraft
 PT:3/5
-A:AB$ ChangeZone | Cost$ T | Hidden$ True | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ Player.Opponent | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBExileYours | SpellDescription$ Each opponent exiles a card from their graveyard. You may exile a card from your graveyard.
+A:AB$ ChangeZone | Cost$ T | Hidden$ True | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ Opponent | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBExileYours | SpellDescription$ Each opponent exiles a card from their graveyard. You may exile a card from your graveyard.
 SVar:DBExileYours:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ You | Chooser$ You | ChangeType$ Card.YouOwn | ChangeNum$ 1
 K:Station:8
 S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ DamageTrig | Description$ STATION 8+ Flying,,,Whenever CARDNAME deals combat damage to a player, return each creature card you own exiled with it to the battlefield.
