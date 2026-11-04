@@ -1,0 +1,11 @@
+Name:Vulcan Mind-Meld
+ManaCost:U
+Types:Sorcery
+A:SP$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | Choser$ Targeted | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffectOpp | SpellDescription$ Target opponent looks at the top card of your library, then exiles it face down. You look at the top two cards of their library, then exile them face down. For each card exiled this way, the player who exiled it may play it for as long as it remains exiled. Mana of any type can be spent to cast spells this way.
+SVar:DBEffectOpp:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | EffectOwner$ Targeted | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDigTheirs
+SVar:DBDigTheirs:DB$ Dig | Defined$ Targeted | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffectMe
+SVar:DBEffectMe:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | EffectOwner$ You | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup2
+SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ The player who exiled each card may play it for as long as it remains exiled. Mana of any type can be spent to cast spells this way.
+Oracle:Target opponent looks at the top card of your library, then exiles it face down. You look at the top two cards of their library, then exile them face down. For each card exiled this way, the player who exiled it may play it for as long as it remains exiled. Mana of any type can be spent to cast spells this way.
