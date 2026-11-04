@@ -1,0 +1,6 @@
+Name:Spacecraft Illusion Token
+ManaCost:no cost
+Types:Artifact Creature Spacecraft Illusion
+PT:4/3
+K:Flying
+Oracle:Flying
