@@ -2662,10 +2662,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
-    public boolean isSkippingCombat() {
-        return !isInGame();
-    }
-
     public final List<Card> getPlaneswalkedToThisTurn() {
         return planeswalkedToThisTurn;
     }

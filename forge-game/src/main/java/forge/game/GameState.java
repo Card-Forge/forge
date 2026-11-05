@@ -1230,9 +1230,12 @@ public class GameState {
         updateManaPool(p, state.manaPool, true, false);
         updateManaPool(p, state.persistentMana, false, true);
 
-        if (!state.counters.isEmpty()) {
+        if (state.counters.isEmpty()) {
+            p.clearCounters();
+        } else {
             applyCountersToGameEntity(p, state.counters);
         }
+
         if (state.numRingTemptedYou > 0) {
             //setup all levels
             for (int i = 1; i <= state.numRingTemptedYou; i++) {
