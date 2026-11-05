@@ -476,6 +476,8 @@ public class DeckImportController {
                 continue;  // nothing to do here.
             boolean isExpansionTheMajorityInThePool = (cardArtReferencePool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
             boolean isPoolModernFramed = cardArtReferencePool.isModern();
+            CardEdition.BorderColor poolBorder = this.artPreference.blackBorderOnly
+                    ? CardEdition.BorderColor.BLACK : cardArtReferencePool.getDominantBorderColor();
             CardEdition pivotEdition = cardArtReferencePool.getPivotCardEdition(isCardArtPreferenceLatestArt);
             if (pivotEdition == null)
                 continue;
@@ -488,7 +490,7 @@ public class DeckImportController {
                                                                                 isCardArtPreferenceLatestArt,
                                                                                 cardArtPreferenceHasFilter,
                                                                                 isExpansionTheMajorityInThePool,
-                                                                                isPoolModernFramed, allowedSetCodes);
+                                                                                isPoolModernFramed, allowedSetCodes, poolBorder);
                 if (alternativeCardPrint != null)
                     t.replaceTokenCard(alternativeCardPrint);
             }

@@ -21,12 +21,12 @@ import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
+import forge.interfaces.IMacroSystem;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -78,10 +78,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameControllers.containsKey(player);
     }
 
-    public final PlayerView getCurrentPlayer() {
-        return currentPlayer;
-    }
-
     @Override
     public String getDayTime() {
         return daytime;
@@ -89,6 +85,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void updateDayTime(String daytime) {
         this.daytime = daytime;
+    }
+
+    public final PlayerView getCurrentPlayer() {
+        return currentPlayer;
     }
 
     @Override
@@ -256,19 +256,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         originalGameControllers.clear();
         spectator = null;
         currentPlayer = null;
-        selectablePlayers.clear();
-        selectableStackItems.clear();
-        highlighted.clear();
-    }
-
-    @Override
-    public void updateRevealedCards(TrackableCollection<CardView> collection) {
-        if (gameView != null) {
-            TrackableCollection<CardView> existing = gameView.getRevealedCollection();
-            if (existing != null)
-                collection.addAll(existing);
-            gameView.updateRevealedCards(collection);
-        }
+        selection = Selection.NONE;
     }
 
     @Override
@@ -321,15 +309,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<TrackableObject> highlighted = Sets.newHashSet();
+    private volatile Selection selection = Selection.NONE;
 
     @Override
-    public void setHighlighted(final Iterable<? extends TrackableObject> objects, final boolean b) {
+    public void setSelection(final Selection next) {
+        final Selection prev = selection;
+        selection = next;
         // updateSingleCard reaches the widgets directly, and callers include the game thread
         FThreads.invokeInEdtNowOrLater(() -> {
-            for (final TrackableObject object : objects) {
-                final boolean hasChanged = b ? highlighted.add(object) : highlighted.remove(object);
-                if (!hasChanged) continue;
+            for (final TrackableObject object : Sets.symmetricDifference(new HashSet<>(prev.chosen()), new HashSet<>(next.chosen()))) {
                 if (object instanceof PlayerView pv) {
                     updateLives(Collections.singleton(pv));
                 } else if (object instanceof CardView cv) {
@@ -339,52 +327,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         });
     }
 
+    public Selection getSelection() {
+        return selection;
+    }
+
     public boolean isHighlighted(final TrackableObject object) {
-        return highlighted.contains(object);
-    }
-
-    private final Set<CardView> selectableCards = Sets.newHashSet();
-    private int selectionMin = 0;
-    private int selectionMax = 0;
-
-    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        for (CardView cv : cards) {
-            selectableCards.add(cv);
-        }
-        selectionMin = min;
-        selectionMax = max;
-    }
-
-    private final Set<PlayerView> selectablePlayers = Sets.newConcurrentHashSet();
-    private final Set<Integer> selectableStackItems = Sets.newConcurrentHashSet();
-
-    /**
-     * Marks the players and stack items the active prompt can pick (cards go through {@link #setSelectables}), replacing
-     * earlier marks. {@link #clearSelectables()} removes them.
-     */
-    @Override
-    public void setSelectableTargets(final Iterable<? extends TrackableObject> targets) {
-        selectablePlayers.clear();
-        selectableStackItems.clear();
-        for (final TrackableObject t : targets) {
-            if (t instanceof PlayerView pv) {
-                selectablePlayers.add(pv);
-            } else if (t instanceof StackItemView si) {
-                selectableStackItems.add(si.getId());
-            }
-        }
+        return selection.chosen().contains(object);
     }
 
     public boolean isSelectable(final PlayerView player) {
-        return player != null && selectablePlayers.contains(player);
+        return player != null && selection.targets().contains(player);
     }
 
     public boolean isSelectable(final StackItemView item) {
-        return item != null && !selectableStackItems.isEmpty() && selectableStackItems.contains(item.getId());
-    }
-
-    public boolean isSelectingStackItems() {
-        return !selectableStackItems.isEmpty();
+        return item != null && selection.targets().contains(item);
     }
 
     /** A stack entry was picked in this GUI's stack view while stack targets are being chosen. */
@@ -393,15 +349,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (controller != null && item != null) {
             controller.selectStackItem(item);
         }
-    }
-
-    @Override
-    public void clearSelectables() {
-        selectableCards.clear();
-        selectablePlayers.clear();
-        selectableStackItems.clear();
-        selectionMin = 0;
-        selectionMax = 0;
     }
 
     protected static PlayerZoneUpdates getZonesHolding(final Iterable<CardView> cards) {
@@ -418,42 +365,31 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     public boolean isSelectable(final CardView card) {
-        return selectableCards.contains(card);
+        return selection.cards().contains(card);
     }
 
     /** Number of selectable cards currently highlighted — i.e. picked so far in the active selection prompt. */
     public int countPickedSelectables() {
         int n = 0;
-        for (CardView cv : selectableCards) {
-            if (highlighted.contains(cv)) n++;
+        for (CardView cv : selection.cards()) {
+            if (selection.chosen().contains(cv)) n++;
         }
         return n;
     }
 
     public boolean isSelecting() {
-        return !selectableCards.isEmpty();
+        return !selection.cards().isEmpty();
     }
 
     public int getSelectionMin() {
-        return selectionMin;
+        return selection.min();
     }
     public int getSelectionMax() {
-        return selectionMax;
+        return selection.max();
     }
 
-    /** Weighted membership: duplicates in the pushed iterable accumulate counts, so a card's
-     *  count expresses how "strong" its selectability is (1 = actionable, 2 = Auto would tap it). */
-    private final Multiset<CardView> weaklySelectableCards = HashMultiset.create();
-
-    public void setWeaklySelectable(final Iterable<CardView> cards) {
-        weaklySelectableCards.clear();
-        for (CardView cv : cards) {
-            weaklySelectableCards.add(cv);
-        }
-    }
-
-    public void clearWeaklySelectable() {
-        weaklySelectableCards.clear();
+    public boolean isActionable(final CardView card) {
+        return selection.actionable().contains(card);
     }
 
     private final Map<PlayerView, PriorityPrompt> prompts = new ConcurrentHashMap<>();
@@ -516,12 +452,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    public boolean isWeaklySelectable(final CardView card) {
-        return weaklySelectableCards.contains(card);
-    }
-
-    public int getWeakSelectableStrength(final CardView card) {
-        return weaklySelectableCards.count(card);
+    /** How strongly a card is marked: 1 = actionable, 2 = Auto would tap it. */
+    public int getActionableStrength(final CardView card) {
+        return Collections.frequency(selection.actionable(), card);
     }
 
     public boolean isGamePaused() {
@@ -849,6 +782,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
         refreshYieldUi(pv);
+    }
+
+    @Override
+    public void applyMacroState(final IMacroSystem.State state) {
+        final IGameController c = getGameController();
+        if (c != null) c.macros().applyState(state);
     }
 
     /** Toggle the auto-pass marker for {@code phase} on {@code phaseOwner}'s turn. The

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
-
 import com.google.common.collect.Maps;
+
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -89,35 +89,16 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
 
-        final boolean bUntap = sa.hasParam("Untap");
+        final boolean optional = sa.hasParam("Optional");
         final boolean remember = sa.hasParam("RememberControlled");
         final boolean forget = sa.hasParam("ForgetControlled");
+        final boolean untap = sa.hasParam("Untap");
         final List<String> keywords = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
-
-        final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
-
-        final Player newController = controllers.isEmpty() ? activator : controllers.get(0);
-        final Game game = newController.getGame();
-
-        CardCollectionView tgtCards;
-        if (sa.hasParam("Choices")) {
-            Player chooser = sa.hasParam("Chooser") ? AbilityUtils.getDefinedPlayers(source,
-                    sa.getParam("Chooser"), sa).get(0) : activator;
-            CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
-                    sa.getParam("Choices"), activator, source, sa);
-            if (choices.isEmpty()) {
-                return;
-            }
-            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
-                Localizer.getInstance().getMessage("lblChooseaCard") +" ";
-            tgtCards = chooser.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
-        } else {
-            tgtCards = getDefinedCards(sa);
-        }
 
         // check for lose control criteria right away
         if (lose != null && lose.contains("LeavesPlay") && !source.isInPlay()) {
@@ -130,6 +111,25 @@ public class ControlGainEffect extends SpellAbilityEffect {
             return;
         }
 
+        final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
+        final Player newController = controllers.isEmpty() ? activator : controllers.get(0);
+
+        CardCollectionView tgtCards;
+        if (sa.hasParam("Choices")) {
+            Player chooser = sa.hasParam("Chooser") ? AbilityUtils.getDefinedPlayers(source,
+                    sa.getParam("Chooser"), sa).get(0) : activator;
+            CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                    sa.getParam("Choices"), activator, source, sa);
+            if (choices.isEmpty()) {
+                return;
+            }
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+            tgtCards = chooser.getController().chooseCardsForEffect(choices, sa, title, 1, 1, optional, null);
+        } else {
+            tgtCards = getDefinedCards(sa);
+        }
+
         CardCollection untapped = new CardCollection();
         for (Card tgtC : tgtCards) {
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
@@ -139,7 +139,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null,
+            if (!sa.hasParam("Choices") && optional && !activator.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblGainControlConfirm", newController,
                             tgtC.getTranslatedName()), null)) {
                 continue;
@@ -152,8 +152,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
             long tStamp = game.getNextTimestamp();
             tgtC.addTempController(newController, tStamp);
 
-            if (bUntap) {
-                if (tgtC.untap()) untapped.add(tgtC);
+            if (untap && tgtC.untap()) {
+                untapped.add(tgtC);
             }
 
             if (keywords != null) {

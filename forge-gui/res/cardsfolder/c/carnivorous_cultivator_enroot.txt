@@ -15,6 +15,6 @@ ALTERNATE
 
 Name:Enroot
 ManaCost:G
-Types:Instant
+Types:Sorcery
 A:SP$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put it into your graveyard, then shuffle.
 Oracle:Search your library for a land card, put it into your graveyard, then shuffle.

@@ -28,7 +28,6 @@ import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.JXButtonPanel;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
@@ -109,16 +108,13 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         pnlStart.setOpaque(false);
         pnlStart.add(grpPanel, "cell 0 0 1 3, growy, gapright 20");
 
-        String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
-        if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
-            defaultGamesInMatch = "3";
-        }
         gamesInMatchFrame.add(lblGamesInMatch, "w 150px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
         pnlStart.add(gamesInMatchFrame, "cell 1 0, alignx center, aligny top");
 
         pnlStart.add(btnStart, "cell 1 2, alignx center, aligny bottom");
+        gamesInMatchBinder.bind();                          // loads stored pref, then listens
     }
 
     /* (non-Javadoc)

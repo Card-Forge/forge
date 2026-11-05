@@ -23,6 +23,7 @@ import com.google.common.collect.Maps;
 import forge.*;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ai.AiProfileUtil;
+import forge.ai.simulation.AiCardLists;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -186,22 +187,40 @@ public final class FModel {
         Lang.createInstance(getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
+        //the card, token and custom readers each report 0..total on their own, which made the bar fill up and start over.
+        //Every restart is treated as the next stage of one overall run, weighted by its usual share of the work, and the bar only moves forward.
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
+            private final float[] stageWeights = {0.8f, 0.1f, 0.05f, 0.05f}; //cards, tokens, custom cards, custom tokens
+            private int stage = 0;
+            private float lastFraction = 0f, shown = 0f;
+            private int lastPosted = -1; //the bar has few steps, so most reports change nothing and are not posted to the UI thread
+
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
                 FThreads.invokeInEdtLater(() -> {
                     progressBar.setDescription(name);
-                    progressBar.setPercentMode(usePercents);
+                    progressBar.setPercentMode(true);
                 });
             }
 
             @Override
-            public void report(final int current, final int total) {
-                FThreads.invokeInEdtLater(() -> {
-                    progressBar.setMaximum(total);
-                    progressBar.setValue(current);
-                });
+            public synchronized void report(final int current, final int total) {
+                final float fraction = total <= 0 ? 0f : Math.min(1f, (float) current / total);
+                if (fraction < lastFraction - 0.5f && stage < stageWeights.length - 1) {
+                    stage++; //a new reader started counting again from the beginning
+                }
+                lastFraction = fraction;
+                float base = 0f;
+                for (int i = 0; i < stage; i++) {
+                    base += stageWeights[i];
+                }
+                shown = Math.max(shown, base + stageWeights[stage] * fraction);
+                final int value = Math.round(shown * progressCeiling);
+                if (value != lastPosted) { //tens of thousands of cards report, only a few hundred bar steps are worth a UI post
+                    lastPosted = value;
+                    updateProgressBar(progressBar, value);
+                }
             }
         };
 
@@ -274,6 +293,12 @@ public final class FModel {
 
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+
+        // Card lists of the AI's combo logic: roles of cards, and the two card combos of Commander (the bracket list first)
+        AiCardLists.configure(
+                () -> forge.util.FileUtil.readFile(ForgeConstants.AI_CARD_ROLES_FILE),
+                () -> forge.util.FileUtil.readFile(ForgeConstants.COMMANDER_BRACKET_COMBOS_FILE),
+                () -> forge.util.FileUtil.readFile(ForgeConstants.AI_COMMANDER_COMBOS_FILE));
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         // Generate Deck Gen matrix
@@ -284,6 +309,16 @@ public final class FModel {
                 deckGenMatrixLoaded=false;
             }
         }
+    }
+
+    //mobile lowers this to leave room on the bar for its own startup steps after the card databases are loaded
+    public static volatile int progressCeiling = 1000;
+
+    private static void updateProgressBar(IProgressBar progressBar, int value) {
+        FThreads.invokeInEdtLater(() -> {
+            progressBar.setMaximum(1000);
+            progressBar.setValue(value);
+        });
     }
 
     private static boolean deckGenMatrixLoaded = false;

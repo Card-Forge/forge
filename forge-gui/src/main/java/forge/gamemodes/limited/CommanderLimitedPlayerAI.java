@@ -42,17 +42,11 @@ import java.util.stream.Collectors;
  * </ol>
  *
  * <p>Deck construction uses {@link CardThemedCommanderDeckBuilder} with
- *  (60-card-minimum, non-singleton, color
- * identity enforced). If no commander was drafted the AI falls back to the
- * edition's free-commander name, then to "The Prismatic Piper" / "Faceless
- * One" as colorless commanders.</p>
+ *  (60-card-minimum, non-singleton, color identity enforced).
+ * If no commander was drafted the AI falls back to the
+ * edition's free-commander name from CR 903.13e.
  */
 public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
-
-    /** Ordered list of universal fallback commander names (colorless). */
-    private static final String[] FALLBACK_FREE_COMMANDERS = {
-            "The Prismatic Piper", "Faceless One"
-    };
 
     private PaperCard commander = null;
     private PaperCard partner = null;
@@ -72,7 +66,7 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
     public CommanderLimitedPlayerAI(final int seatingOrder, final BoosterDraft draft,
                                     final String freeCommanderName, String impliedPartner) {
         super(seatingOrder, draft);
-        this.freeCommanderName = (freeCommanderName != null && !freeCommanderName.isEmpty())
+        this.freeCommanderName = freeCommanderName != null && !freeCommanderName.isEmpty()
                 ? freeCommanderName : null;
         this.impliedPartner = (impliedPartner != null && !impliedPartner.isEmpty())
                 ? impliedPartner : null;
@@ -144,9 +138,8 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             }
             return Double.compare(CardRanker.getRawScore(b), CardRanker.getRawScore(a));
         });
-        final PaperCard picked = candidates.get(0);
 
-        commander = picked;
+        commander = candidates.get(0);
         final ColorSet identity = commander.getRules().getColorIdentity();
         ((CommanderDeckColors) deckCols).lockToColorIdentity(identity);
 
@@ -161,7 +154,7 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
                     + " identity=" + identity
                     + " partnerEligible=" + partnerEligible);
         }
-        return picked;
+        return commander;
     }
 
     /**
@@ -221,7 +214,7 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
 
         final Deck result = new CommanderDraftDeckBuilder(
                 draftedCards,
-                (CommanderDeckColors) deckCols,
+                deckCols,
                 resolvedCommander,
                 partner)
                 .buildDeck(landSetCode);
@@ -260,17 +253,12 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             }
         }
 
-
         if (impliedPartner != null) {
             // For MBC, we can use fake color mana identities. FIgure out how that works
         }
 
         return null;
     }
-
-    // -------------------------------------------------------------------------
-    // Accessors
-    // -------------------------------------------------------------------------
 
     /** @return the drafted commander card, or {@code null} if not yet chosen. */
     public PaperCard getCommander() {

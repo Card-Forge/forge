@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/Abe_Kenichi_-_Boros_Aggro_(Standard,_#887720).dck
+Deck Type=constructed
+
+[Main]
+4 Inspiring Vantage
+4 Mountain
+4 Sunbillow Verge
+4 Sacred Foundry
+1 Erode
+3 Torch the Tower
+4 Frontline Rush
+4 The Last Ronin's Technique
+4 Song of Totentanz
+4 Warleader's Call
+4 Political Triumph
+2 Catharsis
+4 Stadium Headliner
+4 Belladonna Took
+4 Voice of Victory
+2 Plains
+2 Dalkovan Encampment
+2 Fountainport
+[Sideboard]
+3 Seam Rip
+2 Dawn's Truce
+2 Requisition Raid
+4 Rest in Peace
+3 Erode
+1 Torch the Tower

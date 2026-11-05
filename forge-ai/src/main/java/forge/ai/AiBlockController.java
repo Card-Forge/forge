@@ -175,11 +175,10 @@ public class AiBlockController {
             }
         }
 
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (!sortedAttackers.isEmpty() && !firstAttacker.isEmpty() && ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // add creatures attacking the Player to the front of the list
             sortedAttackers.addAll(0, firstAttacker);
         } else {
-            // add creatures attacking the Player to the back of the list
             sortedAttackers.addAll(firstAttacker);
         }
         return sortedAttackers;

@@ -83,7 +83,7 @@ public enum DeckFormat {
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
-    Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
+    Brawl      ( Range.is(99), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
     TinyLeaders    ( Range.is(49),                         Range.of(0, 10), 1, new Predicate<>() {
@@ -227,16 +227,15 @@ public enum DeckFormat {
     public int getMaxCardCopies(PaperCard card) {
         if(canHaveSpecificNumberInDeck(card) != null)
             return canHaveSpecificNumberInDeck(card);
-        else if (canHaveAnyNumberOf(card))
+        if (canHaveAnyNumberOf(card))
             return Integer.MAX_VALUE;
-        else if (card.getRules().isVariant()) {
+        if (card.getRules().isVariant()) {
             DeckSection section = DeckSection.matchingSection(card);
             if(section == DeckSection.Planes && card.getRules().getType().isPhenomenon())
                 return 2; //These are two-of.
             return getExtraSectionMaxCopies(section);
         }
-        else
-            return this.getMaxCardCopies();
+        return this.getMaxCardCopies();
     }
 
     public int getExtraSectionMaxCopies(DeckSection section) {

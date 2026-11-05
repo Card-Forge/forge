@@ -67,6 +67,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     private volatile Map<SpellAbilityView, SpellAbility> published;
     private volatile Map<CardView, List<SpellAbilityView>> abilitiesByCard;
     private volatile Question.Priority question;
+    /** A yield suggestion holds back the highlights until it is declined. */
+    private volatile boolean suggesting;
 
     public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
@@ -85,7 +87,6 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-        getController().clearActionableCards();
         getController().getInputProxy().withdrawQuestion();
     }
 
@@ -104,10 +105,9 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         chosenSa = null;
         final SuggestionType suggestion = chooseSuggestion();
-        if (suggestion != null) {
+        suggesting = suggestion != null;
+        if (suggesting) {
             getController().getGui().applyYieldUpdate(new YieldUpdate.Suggest(getOwner(), suggestion));
-        } else {
-            getController().pushActionableCards(false);
         }
         final Game game = getController().getGame();
         final Player player = getController().getPlayer();
@@ -124,6 +124,17 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (isFinished()) return;
         chosenSa = new ArrayList<>();   // non-null: no end-turn auto-pass, no awaitNextInput
         stop();
+    }
+
+    @Override
+    protected List<CardView> getActionable() {
+        return suggesting ? List.of() : getController().getActionableCards(false, null);
+    }
+
+    /** The plain prompt the player returns to after declining a suggestion shows the highlights. */
+    public void suggestionDeclined() {
+        suggesting = false;
+        showSelection();
     }
 
     private SuggestionType chooseSuggestion() {

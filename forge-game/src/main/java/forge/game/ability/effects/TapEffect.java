@@ -69,7 +69,7 @@ public class TapEffect extends SpellAbilityEffect {
                 if (gameCard.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(gameCard);
                 }
-                if (gameCard.tap(true, sa, tapper)) tapped.add(gameCard);
+                if (gameCard.tap(sa, tapper)) tapped.add(gameCard);
             }
             if (sa.hasParam("ETB")) {
                 // do not fire Taps triggers

@@ -27,6 +27,9 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             }
 
             String logic = sa.getParam("AILogic");
+            if (logic.equals(NamedDiscard.LOGIC)) {
+                return NamedDiscard.consider(ai, sa);
+            }
             if (logic.equals("CursedScroll")) {
                 if (SpecialCardAi.CursedScroll.consider(ai, sa)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -72,7 +75,8 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (mandatory) {
+        // like canPlay, a naming AILogic means the AI knows what to name (e.g. as a permanent with a naming ETB replacement enters)
+        if (mandatory || !aiLogic.isEmpty()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

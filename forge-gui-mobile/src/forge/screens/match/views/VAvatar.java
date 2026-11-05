@@ -32,6 +32,7 @@ public class VAvatar extends FDisplayObject {
     private final PlayerView player;
     private final FImage image;
     private final AvatarAnimation avatarAnimation;
+    private int lifeDifference;
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
     private static final Color BAR_BG    = new Color(0f, 0f, 0f, 0.65f);
     private static final Color BAR_GREEN = Color.LIME;
@@ -68,6 +69,10 @@ public class VAvatar extends FDisplayObject {
         setSize(size, size);
         avatarAnimation = new AvatarAnimation();
     }
+
+    public void addLifeDifference(int delta) {
+        lifeDifference += delta;
+    }
     private class AvatarAnimation extends ForgeAnimation {
         private static final float DURATION = 1.2f;
         private float progress = 0;
@@ -81,7 +86,7 @@ public class VAvatar extends FDisplayObject {
                 percentage = 1;
             }
             float mod = w/2f;
-            int amount = player.getAvatarLifeDifference();
+            int amount = lifeDifference;
             float oldAlpha = g.getfloatAlphaComposite();
             float fade = 1-(percentage*1);
             if (amount > 0) {
@@ -118,7 +123,7 @@ public class VAvatar extends FDisplayObject {
         @Override
         protected void onEnd(boolean endingAll) {
             progress = 0;
-            player.setAvatarLifeDifference(0);
+            lifeDifference = 0;
         }
     }
 
@@ -149,7 +154,7 @@ public class VAvatar extends FDisplayObject {
         float h = isHovered() ? getWidth()/16f+getHeight() : getHeight();
 
         if (avatarAnimation != null && MatchController.instance.getGameView() != null && !MatchController.instance.getGameView().isMatchOver()) {
-            if (player.getAvatarLifeDifference() != 0) {
+            if (lifeDifference != 0) {
                 avatarAnimation.start();
                 avatarAnimation.drawAvatar(g, image, 0, 0, w, h);
             } else {
@@ -188,11 +193,11 @@ public class VAvatar extends FDisplayObject {
             float alpha = displayPriority ? 1f : 0.8f;
             if (alphaModifier < 1)
                 alpha = alphaModifier;
-            g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.CYAN).alphaColor(alpha), 0, 0, w, h);
+            g.drawRect(ringWidth(w), FSkinColor.getStandardColor(Color.CYAN).alphaColor(alpha), 0, 0, w, h);
         }
         //priority indicator
         if (displayPriority && player.getHasPriority() && alphaModifier == 1) {
-            g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.LIME).alphaColor(0.6f), 0, 0, w, h);
+            g.drawRect(ringWidth(w), FSkinColor.getStandardColor(Color.LIME).alphaColor(0.6f), 0, 0, w, h);
         }
         //highlighted (chosen) or valid to choose
         if (MatchController.instance.isHighlighted(player)) {
@@ -208,6 +213,11 @@ public class VAvatar extends FDisplayObject {
                 }
             }
         }
+    }
+
+    //compact layout: a thin ring, so it does not swallow a small avatar
+    private static float ringWidth(float w) {
+        return VPlayerPanel.isCompactLayout() ? Math.max(Utils.scale(1.5f), w / 32f) : w / 16f;
     }
 
     @Override

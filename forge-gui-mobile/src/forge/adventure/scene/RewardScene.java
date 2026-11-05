@@ -623,11 +623,20 @@ public class RewardScene extends UIScene {
         boolean isSold;
 
         void update() {
-            setDisabled(WorldSave.getCurrentSave().getPlayer().getGold() < price);
+            boolean uniqueOwned = isUniqueItemOwned();
+            setDisabled(isSold || uniqueOwned || WorldSave.getCurrentSave().getPlayer().getGold() < price);
             if (isSold)
                 setText("SOLD");
+            else if (uniqueOwned)
+                setText(Forge.getLocalizer().getMessage("lblOwned"));
             else
                 updateOwned();
+        }
+
+        boolean isUniqueItemOwned() {
+            return Reward.Type.Item.equals(reward.getType())
+                && reward.getItem() != null
+                && !AdventurePlayer.current().canObtainItem(reward.getItem());
         }
 
         void updateOwned() {
@@ -657,6 +666,8 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (isSold || isUniqueItemOwned())
+                        return;
                     if (Current.player().getGold() >= price) {
                         if (!shopActor.isUnlimited())
                             changes.buyCard(objectID, index);
@@ -689,11 +700,20 @@ public class RewardScene extends UIScene {
         boolean isSold;
 
         void update() {
-            setDisabled(remainingSelections <= 0);
+            boolean uniqueOwned = isUniqueItemOwned();
+            setDisabled(isSold || uniqueOwned || remainingSelections <= 0);
             if (isSold)
                 setText("SELECTED");
+            else if (uniqueOwned)
+                setText(Forge.getLocalizer().getMessage("lblOwned"));
             else
                 updateOwned();
+        }
+
+        boolean isUniqueItemOwned() {
+            return Reward.Type.Item.equals(reward.getType())
+                && reward.getItem() != null
+                && !AdventurePlayer.current().canObtainItem(reward.getItem());
         }
 
         void updateOwned() {
@@ -720,6 +740,8 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    if (isSold || isUniqueItemOwned())
+                        return;
                     if (remainingSelections >= 1) {
 
                         remainingSelections--;

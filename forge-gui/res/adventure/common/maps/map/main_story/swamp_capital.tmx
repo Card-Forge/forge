@@ -150,7 +150,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="66" template="../../obj/shop.tx" x="424" y="274">
@@ -159,7 +159,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="67" template="../../obj/shop.tx" x="424" y="322">
@@ -169,7 +169,7 @@
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signXOffset" type="float" value="18"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="68" template="../../obj/shop.tx" x="472" y="274">
@@ -178,7 +178,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="69" template="../../obj/shop.tx" x="472" y="322">
@@ -187,7 +187,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="70" template="../../obj/shop.tx" x="520" y="274">
@@ -196,7 +196,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="71" template="../../obj/shop.tx" x="520" y="322">
@@ -205,7 +205,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="77" template="../../obj/shop.tx" x="376" y="274">
@@ -214,7 +214,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="81" template="../../obj/quest.tx" type="quest" x="248" y="306">
@@ -228,7 +228,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="84" template="../../obj/shop.tx" x="456" y="194">
@@ -237,7 +237,7 @@
     <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
     <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
     <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black,Faerie,Ninja"/>
    </properties>
   </object>
   <object id="90" template="../../obj/RotatingShop.tx" type="RotatingShop" x="200" y="402">

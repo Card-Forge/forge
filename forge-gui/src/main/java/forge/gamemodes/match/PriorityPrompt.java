@@ -46,7 +46,7 @@ public final class PriorityPrompt {
             final String cancel = question.canUndo()
                     ? localizer.getMessage("lblUndo") + (question.undosLeft() > 0 ? " (" + question.undosLeft() + ")" : "")
                     : localizer.getMessage("lblEndTurn");
-            gui.updateButtons(player, localizer.getMessage("lblOK"), cancel, true, true, true);
+            gui.updateButtons(player, localizer.getMessage("lblOK"), cancel, true, true, true, question.canUndo());
         }
         gui.alertUser();
     }

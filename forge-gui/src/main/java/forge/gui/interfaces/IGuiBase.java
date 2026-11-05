@@ -24,6 +24,7 @@ public interface IGuiBase {
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();
+    String getUserAgent();
 
     void invokeInEdtNow(Runnable runnable);
     void invokeInEdtLater(Runnable runnable);

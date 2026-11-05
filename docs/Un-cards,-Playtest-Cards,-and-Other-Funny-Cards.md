@@ -285,6 +285,21 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Noble Ox
 1. (P) Pinchy McStingbutt
 1. (HTR) Mr. Monopoly, On the Go
+1. Fluros of Myra's Marvels
+1. Goblin Blastronauts
+1. Svega, the Unconventional
+1. Gallery of Legends - (Attraction)
+1. (P) Jund 'Em Out
+1. (P) (Uk) Who's That Praetor?
+1. (Uk) The Covert Blue Mage
+1. (Uk) The Disciple of Nissa
+1. (Uk) The Disciple of Vess
+1. (Uk) Form of the Stax Player
+1. (Uk) The Ash Lizard
+1. (Uk) The Crab Queen
+1. (Uk) The Scholar of Seas
+1. (Uk) The Wise Sable
+
 
 #### Functional Variants
 1. Sly Spy F
@@ -378,6 +393,24 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Contraption Cannon
 1. Steamflogger Boss - (Not an Un-card)
 
+### Planes
+1. (Uk) Black Lotus Lounge
+1. (Uk) City Hall
+1. (Uk) Shy Town
+1. (Uk) Sky Deck
+1. (Uk) Bicycle Rack
+1. (Uk) The Food Court
+1. (Uk) Oteclán
+1. (Uk) Tarnation
+1. (Uk) Jalira's Show
+1. (Uk) Mojave Desert
+1. (Uk) No Way Out
+1. (Uk) Pursued by Something
+1. (Uk) Raiders' Allegiance
+1. (Uk) That's Enough Slices - (Phenomenon)
+1. (Uk) Ghirapur Grand Prix
+1. (Uk) Preston's Stage
+1. (Uk) Circus of the Sun (returns card to its owners hand instead of yours)
 
 ### Tier 0.5: Done*
 
@@ -419,6 +452,14 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Labro Bot
 1. Voracious Vacuum
 
+#### Planes
+(These have significant chances between their printings and might be worth to implement them as a variant)
+1. (Uk) The Bean (version from MagicCon Chicago 2025)
+1. (Uk) The Windy City (version from MagicCon Chicago 2025)
+1. (Uk) Asmoranomardicadaistinaculdacar's Kitchen (version from MagicCon Vegas 2024)
+1. (Uk) Elvish Impersonation Contest (version from MagicCon Vegas 2024)
+1. (Uk) Omenpath Instability - (Phenomenon) (version from MagicCon Vegas 2024)
+
 #### Keyword or Mechanic Recreated via Card Script
 (These cards have unique un-keywords or mechanics which haven't been implemented within the engine, but have been scripted such that they should work the same way for the most part. Edge case interactions may exist however, and a "keyword-matters" un-effect wouldn't be able to include them.)
 1. Earl of Squirrel - Squirrellink; Uses a static trigger instead.
@@ -436,19 +477,16 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. GO TO JAIL
 1. The Big Idea
 1. Krark's Other Thumb
-1. Fluros of Myra's Marvels
 1. (P) Baneslayer Aspirant
 1. (P) Priority Avenger
 1. (P) Innocuous Insect
 1. (P) Truth or Dare
 1. (P) A Good Thing
 1. Gifts Given
-1. Svega, the Unconventional
 1. (P) Chatzuk, Mighty Guitarist
 1. (P) Fludge, Gunk Guardian
 1. (P) Hish of the Snake Cult
 1. (P) Jeskai Baller
-1. (P) Jund 'Em Out
 1. (P) Lazotep Archway
 1. (P) Microscope
 1. (P) Meandered Towershell
@@ -540,7 +578,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Rat of God
 1. (Uk) Drop Bear
 1. Jester's Sombrero - May be able to do this with RemoveFromMatch?
-1. Gallery of Legends - (Attraction) Similar to Killer Cosplay?
 1. (P) Gunk Slug - Similar to Time Sidewalk and Bone Rattler?
 1. (P) Buried Ogre - Optionally starts in graveyard. Likely do-able via `MayEffectFromOpeningDeck`?
 1. (P) Problematic Volcano - Similar to Raging River?
@@ -569,26 +606,13 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Land Station - Should probably come with better support for wishing for basic lands in limited.
 1. (Uk) The Ancient Dingus - Wishing for a random card from a stack of "visible unsleeved cards" probably has to be adapted to just wishing for a random sideboard card.
 1. (Uk) Colorless Ultimatum - No idea if multiple generic costs works, but could be converted to {4} if not.
-
+1. (Uk) The Goblin Mastermind - Gives all your cards Kindred Goblin?
 
 #### Black Lotus Lounge Planes
 (Not mechanically distinct, but a huge number of these have landed in tier 1. They aren't all on Scryfall.)
-1. (Uk) Black Lotus Lounge - (Plane)
-1. (Uk) City Hall - (Plane)
-1. (Uk) Shy Town - (Plane)
-1. (Uk) Sky Deck - (Plane)
-1. (Uk) Bicycle Rack - (Plane)
 1. (Uk) Event Horizon - (Plane)
-1. (Uk) The Food Court - (Plane)
-1. (Uk) Oteclán - (Plane)
 1. (Uk) Probability Flux - (Plane)
-1. (Uk) Tarnation - (Plane)
 1. (Uk) High and Dry Black Market - (Plane)
-1. (Uk) Jalira's Show - (Plane)
-1. (Uk) Mojave Desert - (Plane)
-1. (Uk) No Way Out - (Plane)
-1. (Uk) Pursued by Something - (Plane)
-1. (Uk) Raiders' Allegiance - (Plane)
 1. (Uk) Flamekin Village Square - (Plane)
 1. (Uk) Alesha's Arena - (Plane)
 1. (Uk) Jalira's Showroom - (Plane)
@@ -600,14 +624,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Neon Graveyard - (Plane)
 1. (Uk) Pizza Parlor - (Plane)
 1. (Uk) Fleem-for-All - (Plane)
-1. (Uk) The Bean - (Plane) Altered for second printing. May be worth a variant print?
-1. (Uk) The Windy City - (Plane) Significantly altered for second printing. May be worth a variant print?
-1. (Uk) Asmoranomardicadaistinaculdacar's Kitchen - (Plane) Altered for second printing. May be worth a variant print?
-1. (Uk) Elvish Impersonation Contest - (Plane) and then (Phenomenon). Completely different in second printing. Might function as a variant since legality and game piece type are the same?
-1. (Uk) Omenpath Instability - (Phenomenon) - Significantly altered for second printing. May be worth a variant print?
-1. (Uk) That's Enough Slices - (Phenomenon) Or rather, "Phenome-nom". Could potentially add support for "flavor type-lines". Functionally it's fine.
 1. (Uk) Ikori-All-You-Can-Eat - (Plane) Perpetually granting Mutate
-
 
 
 
@@ -641,18 +658,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 (Urzatron lands have special support, but could probably be scripted without it.)
 1. (Uk) Command Mine
 1. (Uk) Command Power Plant
-
-#### Choose and create random card from a list
-(ChooseCardNameEffect should be able to do this, and CopyPermanent with "DefinedName$ NamedCard" looks like it will work.)
-1. (P) (Uk) Who's That Praetor?
-1. (Uk) Form of the Stax Player
-1. (Uk) The Crab Queen
-1. (Uk) The Disciple of Vess
-1. (Uk) The Scholar of Seas
-1. (Uk) The Disciple of Nissa
-1. (Uk) The Ash Lizard
-1. (Uk) The Wise Sable
-1. (Uk) The Goblin Mastermind - Also gives all your cards Kindred Goblin?
 
 
 ### Tier 2
@@ -740,7 +745,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Second City - "Spend this mana only to cast your second spell in a turn."
 1. (Uk) Htbr, Racetrack Referee - Can't cast spells using alternative costs. Might be doable through CantBeCast.
 1. (Uk) Gomif, Fast Racer - Allow increasing speed beyond 4.
-1. (Uk) Ghirapur Grand Prix - (Plane) "All players start their engines!" as a keyword action.
 1. (Uk) Yet Another Night in Vegas - Reset chosen charm modes.
 1. (Uk) You and Ooze Army? - Count creature types across all non-changelings. Similar to Embiggen?
 1. (Uk) New Magic Game Plus - Needs a way to leave itself in exile after restarting the game. (Currently can only ignore cards in one zone at a time.)
@@ -791,7 +795,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) You're Toast - "Manifest Bread", like Manifest Dread except the manifested card becomes a food and can't be turned face up.
 1. (Uk) Auntie Ant, Ant Auntie - "Multiblight", Blight that can be distributed.
 1. (Uk) Cola Bottling Plant - (Plane) Can probably just use a custom counter for the "Bottled" designation.
-1. (Uk) Preston's Stage - (Plane) "Performs a magic trick", casting an instant-speed spell or turning a face down creature face up.
 1. (Uk) Mysterious Planet - (Plane) Station on a Plane(t).
 
 ##### Mono-Eminence Cycle
@@ -918,7 +921,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) All-Star Kicker - Via "Pass the Ball". Also Assist Kicker.
 1. (Uk) Trash Panda - Also "Opponent dredge".
 1. (Uk) X, Mystery Racer
-1. (Uk) Circus of the Sun - (Plane) Seems like a mistake, but it does tell you to return a creature you control to your hand.
 
 #### Other Un-Games
 (It would be fun to include concurrent games running in other tabs. Aside from that, seeing only the current game misses the spirit of the card but technically works fine, and these would otherwise be in Tier 6 or 7.)
@@ -1084,8 +1086,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Gleemax - Control all targets.
 1. Magic Word - Choose arbitrary word, whisper it as cost. Could make it another zero cost but loses spirit of card.
 1. The Grand Calcutron - Hands are all public, ordered, have to be played in order, and cards added to hand are put at a position chosen by the player.
-1. Infernius Spawnington III, Esq. - Number of cards "revealed" this turn. 
-1. Goblin Blastronauts - "Copy the spell, ability, or Attraction visit that caused you to roll that die." Might be possible to get this in RollDiceEffect and pass it on?
+1. Infernius Spawnington III, Esq. - Number of cards "revealed" this turn.
 1. Sole Performer - Taps for {T}{T}, a resource used to pay {T} costs. 
 1. (P) Metagamer - Could just hard-code the list since the errata promised in the rulings is still forthcoming. If/when it does happen though, would need to be maintained, or a solution for auto-updating it would need to be implemented.
 1. (P) Do-Over - Restart the turn. Possible with Undo Restore logic?
@@ -1262,7 +1263,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Hadran, Naya Sunseeder
 1. (Uk) Valko Indorian, Researcher
 1. (Uk) The Paradise Bird
-1. (Uk) The Covert Blue Mage
 1. (Uk) Mister Cheddar, Cheese Sliver - Exempts Slivers from singleton rules. Also "Ratmanship" keyword.
 1. (See also: "The Waffle Restaurant", tier 4)
 

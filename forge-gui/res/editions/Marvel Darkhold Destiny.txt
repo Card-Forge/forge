@@ -18,3 +18,11 @@ ScryfallCode=MDD
 296 L Swamp @Maojin Lee
 298 L Mountain @VEN
 301 L Forest @Samuele Bandini
+
+[tokens]
+3 w_3_3_angel_flying_vigilance @Tehani Farr
+8 u_3_3_e_spirit_sorcerer_flying @RIFU
+9 b_3_1_mindless_one @Maxime Minard
+10 b_2_2_zombie @Jasper Dolauta
+11 g_1_1_elf_warrior @A.K. Venrinn
+12 ur_4_4_giant @Tulio Brito

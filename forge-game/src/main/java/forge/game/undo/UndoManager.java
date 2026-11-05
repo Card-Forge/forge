@@ -32,6 +32,42 @@ public final class UndoManager {
     private Player owner;
     private int undosLeft = UNDOS_PER_PHASE;
     private long budgetPhase = -1;
+    /** Set when undo is switched off: the recorder is emptied by the game thread at the next checkpoint. */
+    private boolean resetRecorder;
+    /** Objects captured by the last snapshot: predicts the peak heap use of the next capture. */
+    private long lastObjects;
+    /** Rough peak bytes per captured object while a capture runs (an estimate; tune from real logs). */
+    private static final long BYTES_PER_OBJECT = 220;
+    /**
+     * Heap the undo history may pin in total: the recorder's copy of the current state plus every reverse delta, as
+     * counted by the memento classes. About a seventh of the maximum heap (at most 1 GB), so a phone never fills up
+     * with undo history; the oldest steps are dropped first.
+     */
+    private static final long MAX_RETAINED_BYTES = Math.min(1L << 30, Runtime.getRuntime().maxMemory() / 7);
+
+    /** False when the heap is too full to take another snapshot safely. */
+    private boolean heapAllows() {
+        if (lastObjects == 0) { return true; }
+        final Runtime rt = Runtime.getRuntime();
+        final long free = rt.maxMemory() - (rt.totalMemory() - rt.freeMemory());
+        return free > lastObjects * BYTES_PER_OBJECT;
+    }
+
+    /** Game thread. Frees the undo history and the recorder's registry. */
+    private synchronized void dropHistory(String why) {
+        stack.clear();
+        barrierReason = why;
+        justRestored = false;
+        recorder.reset();
+    }
+
+    /** Estimated heap pinned by the history: the recorder's current state plus the delta of every step. */
+    private synchronized long retainedBytes() {
+        long n = recorder.liveBytes();
+        for (Entry e : stack) { n += e.memento().retainedBytes(); }
+        return n;
+    }
+
     public synchronized Mode mode() { return mode; }
 
     /** Game thread; safe to call every prompt. Turning undo off drops the history. */
@@ -41,6 +77,7 @@ public final class UndoManager {
         stack.clear();
         justRestored = false;
         barrierReason = m == Mode.OFF ? "Undo is off" : null;
+        if (m == Mode.OFF) { resetRecorder = true; }   // the game thread frees the registry at its next checkpoint
     }
     public synchronized int depth() { return Math.max(0, stack.size() - 1); }
 
@@ -51,6 +88,7 @@ public final class UndoManager {
     public void checkpoint(Game game, Player who) {
         synchronized (this) {
             requested = false;
+            if (resetRecorder) { resetRecorder = false; recorder.reset(); }
             if (mode == Mode.OFF) { return; }
             if (owner != null && owner != who) {      // another human is now acting: their history is not ours to rewind
                 stack.clear();
@@ -65,16 +103,102 @@ public final class UndoManager {
             long phaseKey = ph.getTurn() * 100L + (ph.getPhase() == null ? 0 : ph.getPhase().ordinal());
             if (phaseKey > budgetPhase) { budgetPhase = phaseKey; undosLeft = UNDOS_PER_PHASE; }
             final int cap = mode == Mode.SINGLE_STEP ? 2 : MAX;
-            while (stack.size() >= cap) stack.removeLast();
+            while (stack.size() >= cap
+                    || (stack.size() > 1 && retainedBytes() + recorder.lastDeltaBytes() > MAX_RETAINED_BYTES)) {
+                stack.removeLast();
+            }
+            // The new memento must follow the newest one on the stack. If it does not (the history was cleared, or
+            // something is out of step), start a fresh chain instead of attaching a delta to a memento nobody can use.
+            if (!stack.isEmpty() && !recorder.isLatest(stack.peek().memento())) {
+                stack.clear();
+                barrierReason = "Undo history was reset";
+            }
+            if (stack.isEmpty()) { recorder.detach(); }
         }
 
-        final Entry entry = new Entry(recorder.capture(game), game.getGameLog().size());   // slow part, no lock held
+        if (!heapAllows()) {
+            dropHistory("Low memory");
+            if (!heapAllows()) { return; }
+        }
+        final Entry entry;
+        try {
+            final GameMemento m = recorder.capture(game);   // slow part, no lock held
+            lastObjects = m.objectCount();
+            entry = new Entry(m, game.getGameLog().size());
+        } catch (final RuntimeException | OutOfMemoryError ex) {
+            dropHistory("Low memory");
+            return;
+        }
 
         synchronized (this) {
             stack.push(entry);
-            //System.out.println("[undo] objects=" + entry.memento().objectCount() + " new=" + recorder.lastAllocated + " reused=" + recorder.lastReused);
+            //System.out.println("[undo] objects=" + entry.memento().objectCount() + " delta=" + recorder.lastDeltaEntries() + " retained=" + retainedBytes());
             if (stack.size() >= 2) barrierReason = null;
         }
+    }
+
+    /**
+     * A snapshot taken just before an action of a player whose actions are not on the undo stack (the AI), so that the
+     * action can be taken back if it turns out to be illegal. It is not part of the human undo history.
+     */
+    public record Mark(GameMemento memento, int logSize) {}
+
+    /**
+     * Game thread. Takes a snapshot to roll one action back to with {@link #rollbackTo}, or null when undo is off or
+     * the snapshot could not be taken (the caller then has no safety net and must not count on one). The snapshot is
+     * self-contained: it shares nothing with the human history and keeps nothing alive once the mark is dropped,
+     * which matters on phones. Take it only for actions that can fail, it reads the whole game.
+     */
+    public Mark markForRollback(final Game game) {
+        if (mode() == Mode.OFF) {
+            return null;
+        }
+        if (!heapAllows()) {
+            dropHistory("Low memory");   // the human history is the big freeable chunk
+            if (!heapAllows()) {
+                return null;
+            }
+        }
+        try {
+            final GameMemento m = GameMemento.capture(game);
+            lastObjects = m.objectCount();
+            return new Mark(m, game.getGameLog().size());
+        } catch (final RuntimeException | OutOfMemoryError ex) {
+            dropHistory("Low memory");
+            System.err.println("Could not take a rollback snapshot: " + ex);
+            return null;
+        }
+    }
+
+    /**
+     * Game thread. Puts the game back as it was at {@code mark}. Returns false when nothing was restored or the
+     * restore reported problems (the game may then be only partly restored).
+     */
+    public boolean rollbackTo(final Game game, final Mark mark) {
+        if (mark == null) {
+            return false;
+        }
+        boolean clean;
+        try {
+            game.fireEvent(new GameEventSnapshotRestored(true));
+            final boolean restored = mark.memento().restore();
+            game.getGameLog().truncateTo(mark.logSize());
+            clean = restored && mark.memento().problems.isEmpty();
+            if (!clean) {
+                System.err.println("Rollback problems: " + mark.memento().problems);
+            }
+            refreshViews(game);
+            game.fireEvent(new GameEventSnapshotRestored(false));
+        } catch (final RuntimeException ex) {
+            System.err.println("Rollback failed: " + ex);
+            return false;
+        }
+        synchronized (this) {
+            randomMark = MyRandom.callCount();
+            stack.clear();                       // whatever a human could undo to is older than this now
+            barrierReason = "An action was taken back";
+        }
+        return clean;
     }
 
     /** Anything that reveals hidden info or makes the opponent act. */
@@ -105,7 +229,16 @@ public final class UndoManager {
             }
         }
         game.fireEvent(new GameEventSnapshotRestored(true));
-        target.memento().restore();
+        if (!target.memento().restore()) {            // refused, nothing was written: the history is unusable
+            synchronized (this) {
+                stack.clear();
+                barrierReason = "Undo history was lost";
+                justRestored = false;
+            }
+            recorder.reset();
+            game.fireEvent(new GameEventSnapshotRestored(false));
+            return false;
+        }
         game.getGameLog().truncateTo(target.logSize());   // drop log lines written after the checkpoint
         if (!target.memento().problems.isEmpty()) System.err.println("Undo problems: " + target.memento().problems);
         refreshViews(game);
