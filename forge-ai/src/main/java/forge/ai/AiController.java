@@ -1878,6 +1878,14 @@ public class AiController {
         }
 
         if (topOwnedByAI && flatMonteCarloActive()) {
+            // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
+            final SpellAbility consultation = ConsultationWin.response(player);
+            if (consultation != null) {
+                return consultation;
+            }
+        }
+
+        if (topOwnedByAI && flatMonteCarloActive()) {
             // Breakthrough on the stack: Lion's Eye Diamond puts the dredgers into the graveyard before the four draws
             final SpellAbility diamond = DredgeLine.response(player, deckPlan(player).combos);
             if (diamond != null) {
@@ -1931,6 +1939,30 @@ public class AiController {
         skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
+        if (flatMonteCarloActive()) {
+            final SpellAbility vault = VaultLoop.sureCast(player, saList);
+            if (vault != null) {
+                return vault; // Time Vault and what untaps it: an extra turn every turn, no rollouts needed
+            }
+        }
+        if (flatMonteCarloActive()) {
+            final SpellAbility oracle = ConsultationWin.sureCast(player, saList);
+            if (oracle != null) {
+                return oracle; // Thassa's Oracle with Demonic Consultation in hand: cast it, the Consultation answers its trigger
+            }
+            final SpellAbility will = WillReplay.sureCast(player, saList);
+            if (will != null) {
+                return will; // Yawgmoth's Will with Time Walk, a Mox or Black Lotus in the graveyard
+            }
+            final SpellAbility orchard = OathTiming.sureCast(player);
+            if (orchard != null) {
+                return orchard; // Oath of Druids: the opponent is given a creature at its end step so that the upkeep trigger works
+            }
+            final SpellAbility dreadReturn = DreadReturnWin.sureCast(player, saList);
+            if (dreadReturn != null) {
+                return dreadReturn; // Oops! All Spells: the flashback of Dread Return brings the Oracle back to an empty library
+            }
+        }
         // Stiflenought: the Dreadnought is cast as soon as its Stifle can be paid for as well, without rollouts
         final SpellAbility sureStifle = StifleCombo.sureCast(player, saList);
         if (sureStifle != null) {
@@ -3226,6 +3258,11 @@ public class AiController {
 
         if (decider == player && sa.getApi() != ApiType.Learn) {
             // the win card of a cheating spell, the creature to put into the graveyard: what the deck is built for
+            final Card tinkered = flatMonteCarloActive() && destination == ZoneType.Battlefield && origin.contains(ZoneType.Library)
+                    ? VaultLoop.tinkerPick(player, fetchList) : null; // Tinker: the vault or its key, whatever the deck's plan
+            if (tinkered != null) {
+                return tinkered;
+            }
             final Card forCombo = deckPlan(player).combos.choose(player, destination, origin, fetchList);
             if (forCombo != null) {
                 return forCombo;

@@ -137,7 +137,7 @@ public class RewardData implements Serializable {
         //Filter AI cards for enemies.
         allEnemyCards = IterableUtil.filter(allCards, input -> {
             if (input == null) return false;
-            return !input.getRules().getAiHints().getRemAIDecks();
+            return !forge.card.CardAiHints.isRemovedFromAiDecks(input.getRules());
         });
     }
 

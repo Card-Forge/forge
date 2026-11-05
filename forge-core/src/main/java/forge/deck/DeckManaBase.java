@@ -182,7 +182,7 @@ public final class DeckManaBase {
      * cards), so a copy in an AI deck is a dead card for the whole game.
      */
     static boolean isUnplayableByAi(final CardRules rules) {
-        return rules.getAiHints().getRemAIDecks();
+        return forge.card.CardAiHints.isRemovedFromAiDecks(rules);
     }
 
     private static boolean isFetchLand(final CardRules rules) {

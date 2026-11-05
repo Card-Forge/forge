@@ -331,3 +331,32 @@ SIDEBOARDING_PLANESWALKER_EQ_CREATURE=true
 # -- different name if necessary --
 
 # <-- there are no experimental options here at the moment -->
+
+# Flat Monte Carlo, experimental: every optional part of the search on (attack sets compared by rollouts, broad
+# discovery of plays, more target variants and extra candidates, a look at the opponent's turn). Meant for testing what
+# the layer can do; slower than the other profiles.
+FLAT_MC_ENABLED=true
+FLAT_MC_MAX_CANDIDATES=6
+FLAT_MC_ROLLOUTS_PER_CANDIDATE=4
+FLAT_MC_MAX_PLAYOUT_PLAYS=8
+FLAT_MC_COMBO_PLAYOUT_PLAYS=16
+FLAT_MC_DECISION_BUDGET_MS=700
+FLAT_MC_TURN_BUDGET_MS=3000
+FLAT_MC_HEURISTIC_BONUS=60
+FLAT_MC_CONSIDER_HOLDING=true
+FLAT_MC_HOLD_MANA_WEIGHT=100
+FLAT_MC_RISK_WEIGHT=100
+FLAT_MC_OVERRIDE_MAJORITY=45
+FLAT_MC_EXTRA_ROUNDS=3
+FLAT_MC_PRUNING=true
+FLAT_MC_CATEGORY_HOLD=true
+FLAT_MC_ADAPTIVE_PLAYOUT=true
+FLAT_MC_TARGET_VARIANTS=3
+FLAT_MC_STRATEGIC_WEIGHT=130
+FLAT_MC_DISCOVERY=true
+FLAT_MC_EXTRA_CANDIDATES=5
+FLAT_MC_BROAD_DISCOVERY=true
+FLAT_MC_ATTACK=true
+FLAT_MC_OPPONENT_LOOKAHEAD=25
+FLAT_MC_LAND_CHOICE=true
+FLAT_MC_REACTIVE=true
