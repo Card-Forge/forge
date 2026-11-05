@@ -3287,7 +3287,18 @@ public class AiController {
 
         result.addAll(mandatoryDiscard);
 
+        // damage and life loss for opponents resolves first, so they might lose before other triggers hurt us
+        result.addAll(filterList(result, this::onlyHurtsOpponents));
+
         return result;
+    }
+
+    private boolean onlyHurtsOpponents(SpellAbility sa) {
+        if ((sa.getApi() != ApiType.DealDamage && sa.getApi() != ApiType.LoseLife) || !sa.hasParam("Defined")) {
+            return false;
+        }
+        List<Player> hurt = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+        return !hurt.isEmpty() && hurt.stream().allMatch(p -> p.isOpponentOf(player));
     }
 
     // TODO move to more common place

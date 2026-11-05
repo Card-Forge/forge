@@ -1699,7 +1699,7 @@ public class ComputerUtil {
         // currently confirming optional threat ability:
         // need to ignore it so AI doesn't think some of its objects are already taken care of
         if (stack.isResolving() && sa == null) {
-            sa = stack.getResolvingAbility() != null ? stack.getResolvingAbility() : stack.peekAbility();
+            sa = stack.getResolvingAbility();
             saviour = null;
         }
 
