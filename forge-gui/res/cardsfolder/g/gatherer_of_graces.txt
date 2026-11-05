@@ -2,7 +2,7 @@ Name:Gatherer of Graces
 ManaCost:1 G
 Types:Creature Human Druid
 PT:1/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Aura attached to it.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Aura attached to it.
 A:AB$ Regenerate | Cost$ Sac<1/Aura> | SpellDescription$ Regenerate CARDNAME.
 SVar:X:Count$Valid Aura.Attached
 SVar:EnchantMe:Multiple

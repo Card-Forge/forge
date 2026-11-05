@@ -1,0 +1,7 @@
+Name:Pia, Aether Ascetic
+ManaCost:2 G
+Types:Legendary Creature Human Druid
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1
+Oracle:When Pia enters, you may discard a card. If you do, search your library for an enchantment card, reveal it, put it into your hand, then shuffle.

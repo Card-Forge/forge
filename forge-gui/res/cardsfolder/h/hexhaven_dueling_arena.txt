@@ -1,0 +1,7 @@
+Name:Hexhaven Dueling Arena
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ AlterAttribute | Cost$ 2 T | ValidTgts$ Creature.attackedThisTurn  | Attributes$ Prepared | SorcerySpeed$ True | SpellDescription$ Target creature that attacked this turn becomes prepared. Activate only as a sorcery. (Only creatures with prepare spells can become prepared.)
+A:AB$ AlterAttribute | Cost$ 4 T | ValidTgts$ Creature | Attributes$ Prepared | SpellDescription$ Target creature becomes prepared.
+Oracle:{T}: Add {C}.\n{2}, {T}: Target creature that attacked this turn becomes prepared. Activate only as a sorcery. (Only creatures with prepare spells can become prepared.)\n{4}, {T}: Target creature becomes prepared.

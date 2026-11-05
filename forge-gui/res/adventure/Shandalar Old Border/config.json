@@ -1,5 +1,6 @@
 {
   "screenWidth": 480,
+  "enableExtraBattleBackgroundsByDefault": true,
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
   "playerBaseSpeed": 45,

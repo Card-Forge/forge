@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
 
 import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.gamemodes.match.GameLobby;
@@ -24,7 +25,9 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.*;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
+import forge.gui.CommanderChooser;
 import forge.gui.FThreads;
+import forge.gui.GuiChoose;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.IDraftEventHandler;
 import forge.gui.interfaces.ILobbyView;
@@ -79,18 +82,16 @@ public class VLobby implements ILobbyView {
 
     // Variants frame and variables
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
-    private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
-    private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
-    private final VariantCheckBox vntMoJhoSto = new VariantCheckBox(GameType.MoJhoSto);
-    private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
-    private final VariantCheckBox vntOathbreaker = new VariantCheckBox(GameType.Oathbreaker);
-    private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
-    private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
+    private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
     private final ImmutableList<VariantCheckBox> vntBoxes  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntPlanechase, vntArchenemy, vntArchenemyRumble, vntVanguard);
+
+    private final FComboBoxPanel<Object> cboFormatPanel =
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblFormat") + ":", FormatChoices.get(true));
+    private boolean suppressFormatListener = false;
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -106,6 +107,11 @@ public class VLobby implements ILobbyView {
     private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
     private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final Deck[] decks = new Deck[MAX_PLAYERS];
+    // Commander variant: each deck as picked in the deck chooser, who may lead it, and the
+    // commander(s) the player picked instead of the default. Picks are never saved to the deck.
+    private final Deck[] baseDecks = new Deck[MAX_PLAYERS];
+    private final Map<Integer, List<CommanderOptions.Option>> commanderOptions = new HashMap<>();
+    private final Map<Integer, List<PaperCard>> commanderPicks = new HashMap<>();
 
     // Variants
     private final List<FList<Object>> schemeDeckLists = new ArrayList<>();
@@ -123,10 +129,10 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> humanListData = new Vector<>();
     private final Vector<Object> aiListData = new Vector<>();
 
-    // Mode selector (network only). Mode state lives in CLobby; this combo is the widget.
-    private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblMode"),
-            ImmutableList.of(Localizer.getInstance().getMessage("lblConstructed"),
-                    Localizer.getInstance().getMessage("lblLimited")));
+    // Play Type selector (network only). Mode state lives in CLobby; this combo is the widget.
+    private final FComboBoxPanel<CLobby.LobbyMode> cboModePanel =
+            new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblPlayMode") + ":",
+                    ImmutableList.copyOf(CLobby.LobbyMode.values()));
 
     // Event config panel (top of right panel in Draft/Sealed mode)
     private final FPanel eventConfigPanel = new FPanel(new MigLayout("insets 5 10 15 10, gap 2, wrap"));
@@ -229,6 +235,14 @@ public class VLobby implements ILobbyView {
         }
 
         ////////////////////////////////////////////////////////
+        //////////////////// Game Format ///////////////////////
+        cboFormatPanel.addActionListener(e -> onGameFormatChanged());
+        for (final Component c : cboFormatPanel.getComponents()) {
+            c.setFont(FSkin.getBoldFont(14).getBaseFont());
+        }
+        constructedFrame.add(cboFormatPanel, "w 100%, h 28px!, gapbottom 10px, spanx 2, wrap");
+
+        ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
@@ -294,14 +308,11 @@ public class VLobby implements ILobbyView {
             btnNewEvent.setFont(FSkin.getRelativeFont(18));
             btnNewEvent.addActionListener(e -> controller.openEventConfigDialog());
         }
-        String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
-        if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
-            defaultGamesInMatch = "3";
-        }
 
         gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w " + START_ROW_LABEL_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w " + START_ROW_COMBO_WIDTH + "px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
+        gamesInMatchBinder.bind();                          // loads stored pref, then listens
     }
 
     private void addConstructedStartControls() {
@@ -376,9 +387,21 @@ public class VLobby implements ILobbyView {
         controller.syncModeFromHost();
         controller.onLobbyDataChanged();
 
+        syncGameFormatCombo();
+
         for (final VariantCheckBox vcb : vntBoxes) {
             vcb.setSelected(hasVariant(vcb.variant));
             vcb.setEnabled(lobby.hasControl());
+        }
+
+        // Momir Basic and MoJhoSto write the Avatar section themselves, so Vanguard
+        // cannot be layered on top. applyVariant already unticks it; say why.
+        final boolean avatarSetByFormat = hasVariant(GameType.MomirBasic) || hasVariant(GameType.MoJhoSto);
+        if (avatarSetByFormat) {
+            vntVanguard.setEnabled(false);
+            vntVanguard.setToolTipText(localizer.getMessage("ttVanguardSetByFormat"));
+        } else {
+            vntVanguard.setToolTipText(GameType.Vanguard.getDescription());
         }
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -475,15 +498,11 @@ public class VLobby implements ILobbyView {
         return lobby;
     }
 
-    String getCurrentModeSelection() {
+    CLobby.LobbyMode getCurrentMode() {
         return cboModePanel.getSelectedItem();
     }
-
-    int getCurrentModeIndex() {
-        return cboModePanel.getSelectedIndex();
-    }
-    void setCurrentModeIndex(int idx) {
-        cboModePanel.setSelectedIndex(idx);
+    void setCurrentMode(final CLobby.LobbyMode mode) {
+        cboModePanel.setSelectedItem(mode);
     }
 
     void refreshConstructedFrame() {
@@ -556,7 +575,7 @@ public class VLobby implements ILobbyView {
     }
     private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
         final Deck deck = decks[index];
-        final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
+        final Deck copy = deck == null ? new Deck() : new Deck(deck);
         copy.putSection(section, cards);
         decks[index] = copy;
         if (playerChangeListener != null) {
@@ -570,6 +589,11 @@ public class VLobby implements ILobbyView {
 
     boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
+    }
+
+    /** True when the selected game format builds the deck itself, as Momir Basic and MoJhoSto do. */
+    boolean hasAutoGeneratedVariant() {
+        return lobby.hasAutoGeneratedVariant();
     }
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
@@ -643,9 +667,108 @@ public class VLobby implements ILobbyView {
             } else {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
             }
-            fireDeckChangeListener(playerIndex, deck);
+            fireDeckChangeListener(playerIndex, prepareCommanderPick(playerIndex, deck));
         }
         mainChooser.saveState();
+    }
+
+    /**
+     * Records the newly selected deck and works out who may lead it. Returns the deck to use:
+     * the deck itself, or a copy led by the player's earlier pick when a lobby refresh
+     * reselects the same deck.
+     */
+    private Deck prepareCommanderPick(final int index, final Deck deck) {
+        final Deck previousBase = baseDecks[index];
+        final List<PaperCard> previousPick = commanderPicks.remove(index);
+        baseDecks[index] = deck;
+        commanderOptions.remove(index);
+        if (deck == null || !hasVariant(GameType.Commander)) {
+            updateCommanderPickButton(index);
+            return deck;
+        }
+        commanderOptions.put(index, CommanderOptions.getOptions(deck, DeckFormat.Commander));
+
+        Deck result = deck;
+        if (previousPick != null && previousBase != null
+                && deck.getName().equals(previousBase.getName())
+                && CommanderPicks.isValidPick(deck, previousPick, DeckFormat.Commander)) {
+            result = CommanderOptions.withCommanders(deck, previousPick);
+            commanderPicks.put(index, previousPick);
+        }
+        updateCommanderPickButton(index);
+        return result;
+    }
+
+    /** Opens the commander picker for a player and applies their choice to the lobby deck. */
+    void chooseCommander(final int index) {
+        final List<CommanderOptions.Option> options = commanderOptions.get(index);
+        final Deck base = baseDecks[index];
+        if (options == null || options.isEmpty() || base == null || decks[index] == null) {
+            return;
+        }
+
+        final List<PaperCard> current = commanderPicks.getOrDefault(index, base.getCommanders());
+        final String playerName = getPlayerPanel(index).getPlayerName();
+        final CommanderOptions.Option option = CommanderChooser.choose(
+                localizer.getMessage("lblChooseCommanderFor", playerName),
+                localizer.getMessage("lblChooseCommanderHint"),
+                options, CommanderPicks.indexOfCurrent(options, current), CommanderPicks::describe, o -> o.getCommanders().get(0));
+        if (option == null) {
+            return;
+        }
+
+        List<PaperCard> picked = option.getCommanders();
+        if (picked.size() == 1) {
+            final PaperCard commander = picked.get(0);
+            final List<PaperCard> partners = CommanderOptions.getPartnerOptions(base, commander, DeckFormat.Commander);
+            if (!partners.isEmpty()) {
+                // Optional.empty() stands for "No partner"; null means the dialog was cancelled
+                final List<Optional<PaperCard>> partnerChoices = new ArrayList<>();
+                if (CommanderPicks.allowsNoPartner(base, option, DeckFormat.Commander)) {
+                    partnerChoices.add(Optional.empty());
+                }
+                final int currentPartner = CommanderPicks.indexOfCurrentPartner(partners, commander, current);
+                final int selectedPartner = currentPartner < 0 ? 0 : partnerChoices.size() + currentPartner;
+                for (final PaperCard partner : partners) {
+                    partnerChoices.add(Optional.of(partner));
+                }
+                final Optional<PaperCard> partner = CommanderChooser.choose(
+                        localizer.getMessage("lblChoosePartnerFor", CardTranslation.getTranslatedName(commander.getName())),
+                        localizer.getMessage("lblChooseCommanderHint"),
+                        partnerChoices, selectedPartner,
+                        p -> p.map(c -> CardTranslation.getTranslatedName(c.getName())).orElse(localizer.getMessage("lblNoPartner")),
+                        p -> p.orElse(null));
+                if (partner == null) {
+                    return;
+                }
+                if (partner.isPresent()) {
+                    picked = Arrays.asList(commander, partner.get());
+                }
+            }
+        }
+
+        if (CommanderPicks.isSame(picked, base.getCommanders())) {
+            commanderPicks.remove(index);
+        } else {
+            commanderPicks.put(index, picked);
+        }
+        fireDeckChangeListener(index, CommanderOptions.withCommanders(decks[index], picked));
+        updateCommanderPickButton(index);
+    }
+
+    private void updateCommanderPickButton(final int index) {
+        if (index >= playerPanels.size()) {
+            return;
+        }
+        final PlayerPanel panel = getPlayerPanel(index);
+        final List<CommanderOptions.Option> options = commanderOptions.get(index);
+        final Deck base = baseDecks[index];
+        if (options == null || options.isEmpty() || base == null) {
+            panel.setCommanderPick("", false);
+            return;
+        }
+        panel.setCommanderPick(CommanderPicks.describeCurrent(base, commanderPicks.get(index)),
+                CommanderPicks.hasChoices(base, options, DeckFormat.Commander));
     }
 
     private void selectSchemeDeck(final int playerIndex) {
@@ -659,7 +782,9 @@ public class VLobby implements ILobbyView {
         if (selected instanceof String) {
             String sel = (String) selected;
             if (sel.contains("Use deck's scheme section")) {
-                if (deck.has(DeckSection.Schemes)) {
+                // deck is null until the player has a deck for the current game format,
+                // so a format with no decks yet falls through to Random rather than NPE.
+                if (deck != null && deck.has(DeckSection.Schemes)) {
                     schemePool = deck.get(DeckSection.Schemes);
                 } else {
                     sel = "Random";
@@ -690,7 +815,8 @@ public class VLobby implements ILobbyView {
         if (selected instanceof String) {
             String sel = (String) selected;
             if (sel.contains("Use deck's planes section")) {
-                if (deck.has(DeckSection.Planes)) {
+                // Same null case as selectSchemeDeck: no deck yet for this game format.
+                if (deck != null && deck.has(DeckSection.Planes)) {
                     planePool = deck.get(DeckSection.Planes);
                 } else {
                     sel = "Random";
@@ -739,9 +865,9 @@ public class VLobby implements ILobbyView {
             if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
                 vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
             } else { //Only other string is "Random"
-                if (isPlayerAI(playerIndex)) { //AI
+                if (isPlayerAI(playerIndex)) {
                     vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                } else { //Human
+                } else {
                     vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
                 }
             }
@@ -873,6 +999,8 @@ public class VLobby implements ILobbyView {
     }
 
     void setVariantsVisible(boolean visible) {
+        cboFormatPanel.setVisible(visible);
+        applyDeckListFormat();
         Container scrollPane = variantsPanel.getParent();
         while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
             scrollPane = scrollPane.getParent();
@@ -1092,6 +1220,64 @@ public class VLobby implements ILobbyView {
     }
 
     /////////////////////////////////////////////
+
+    private void onGameFormatChanged() {
+        if (suppressFormatListener) { return; }
+
+        final Object selected = cboFormatPanel.getSelectedItem();
+        if (selected == null) { return; }
+
+        if (!lobby.hasControl()) { // not ours to change; put the combo back
+            syncGameFormatCombo();
+            return;
+        }
+        if (selected == FormatChoices.ARCHIVED) {
+            syncGameFormatCombo();
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                applyFormatChoice(archived);
+            }
+            return;
+        }
+        if (selected == lobby.getFormatChoice()) { return; }
+
+        applyFormatChoice(selected);
+    }
+
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
+        lobby.saveSetup();
+        update(false);
+        updateActionButtons();
+    }
+
+    private void syncGameFormatCombo() {
+        final Object applied = lobby.getFormatChoice();
+        if (cboFormatPanel.getSelectedItem() != applied) {
+            suppressFormatListener = true;
+            try {
+                // The model takes an archived format, which the list does not hold
+                cboFormatPanel.getComboBox().getModel().setSelectedItem(applied);
+            } finally {
+                suppressFormatListener = false;
+            }
+        }
+        cboFormatPanel.setEnabled(lobby.hasControl());
+        applyDeckListFormat();
+    }
+
+    /** The format the deck lists show. Limited mode lists event pools, which the Constructed format does not apply to. */
+    private GameFormat deckListFormat() {
+        return controller.isLimitedMode() ? null : lobby.getFormat();
+    }
+
+    private void applyDeckListFormat() {
+        final GameFormat format = deckListFormat();
+        for (final FDeckChooser chooser : cachedDeckChoosers.values()) {
+            chooser.getLstDecks().setRequiredFormat(format);
+        }
+    }
+
     //========== Various listeners in build order
 
     @SuppressWarnings("serial") private class VariantCheckBox extends FCheckBox {
@@ -1107,6 +1293,7 @@ public class VLobby implements ILobbyView {
                 } else {
                     lobby.removeVariant(variantType);
                 }
+                lobby.saveSetup();
                 VLobby.this.update(false);
                 VLobby.this.updateActionButtons();
             });
@@ -1148,6 +1335,7 @@ public class VLobby implements ILobbyView {
             final GameType gameType = forCommander ? type : GameType.Constructed;
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
             fdc.initialize(prefKey, deckType);
+            fdc.getLstDecks().setRequiredFormat(deckListFormat());
             fdc.setDeckSelectionCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
             return fdc;
         });

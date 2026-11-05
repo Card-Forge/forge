@@ -1,0 +1,11 @@
+Name:Rise of the Deathbringer
+ManaCost:4 B
+Types:Instant
+A:SP$ Charm | Choices$ DBDraw,DBPumpAll
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | RememberDrawn$ AllReplaced | SubAbility$ DBLoseLife | SpellDescription$ Draw cards equal to the greatest power among creatures you control. You lose life equal to the number of cards drawn this way.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3 |  IsCurse$ True | SpellDescription$ All creatures get -3/-3 until end of turn.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCardPower
+SVar:Y:Remembered$Amount
+Oracle:Choose one —\n• Draw cards equal to the greatest power among creatures you control. You lose life equal to the number of cards drawn this way.\n• All creatures get -3/-3 until end of turn.

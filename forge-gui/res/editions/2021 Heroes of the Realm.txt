@@ -10,3 +10,6 @@ ScryfallCode=PH21
 2 M Arteeoh, Dread Scavenger @Zoltan Boros
 3 M Byode, Inverse Sun @Dominik Mayer
 4 M Ersta, Friend to All @Winona Nelson
+
+[WalkerTypes]
+Ersta

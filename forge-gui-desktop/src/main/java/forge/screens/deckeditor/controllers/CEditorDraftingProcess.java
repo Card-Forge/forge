@@ -66,6 +66,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private DragCell draftLogParent = null;
     private boolean saved = false;
     private final Localizer localizer = Localizer.getInstance();
+    private final DraftPicksSections picksSections;
 
     /**
      * Updates the deck editor UI as necessary draft selection mode.
@@ -86,6 +87,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
+        picksSections = new DraftPicksSections(deckManager);
     }
 
     /**
@@ -96,6 +98,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
+        picksSections.setDraft(inBoosterDraft);
         this.boosterDraft.setLogEntry(this);
         VEditorLog.SINGLETON_INSTANCE.resetNewDraft();
 
@@ -116,22 +119,14 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) { return; }
-
         // can only draft one at a time, regardless of the requested quantity
-        draftCard(items.iterator().next().getKey(), null);
+        draftCard(items.iterator().next().getKey(), DraftPicksSections.getPickSection(toAlternate), null);
     }
 
-    private void draftCard(PaperCard card, DraftAction variant) {
-        this.boosterDraft.setChoice(card, DeckSection.Sideboard, variant);
-        applyPoolDelta();
+    private void draftCard(PaperCard card, DeckSection section, DraftAction variant) {
+        this.boosterDraft.setChoice(card, section, variant);
+        picksSections.refresh();
         showPackToDraft();
-    }
-
-    private void applyPoolDelta() {
-        LimitedPlayer.PoolDelta delta = boosterDraft.getHumanPlayer().drainPoolDelta();
-        delta.added().forEach(c -> getDeckManager().addItem(c, 1));
-        delta.removed().forEach(c -> getDeckManager().removeItem(c, 1));
     }
 
     protected void showPackToDraft() {
@@ -148,7 +143,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             return;
         }
         boosterDraft.postDraftActions();
-        applyPoolDelta();
         this.saveDraft();
     }
 
@@ -157,18 +151,26 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
      */
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (!toAlternate) {
+            picksSections.move(items);
+        }
     }
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(localizer.getMessage("lblDraft"), null);
-        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), action));
+        cmb.addMoveAlternateItems(localizer.getMessage("lblDraft"), localizer.getMessage("lbltosideboard"));
+        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), DraftPicksSections.getPickSection(false), action));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
+        cmb.addMoveItems(localizer.getMessage("lblMove"),
+                localizer.getMessage(picksSections.getDestination() == DeckSection.Main
+                        ? "lblToMainDeck" : "lbltosideboard"));
         cmb.addDraftActionItems(currentActions(), action -> {
             boosterDraft.getHumanPlayer().activate(action);
+            picksSections.refresh();
             // The activated card turns face down, so its marker and the hints change
             this.showChoices(this.getCatalogManager().getPool());
         });
@@ -209,22 +211,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             pool.add(PaperCard.FAKE_CARD);
         }
         return pool;
-    }
-
-    /**
-     * <p>
-     * getPlayersDeck.
-     * </p>
-     *
-     * @return a {@link forge.deck.Deck} object.
-     */
-    private Deck getPlayersDeck() {
-        final Deck deck = new Deck();
-
-        // add sideboard to deck
-        deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
-
-        return deck;
     }
 
     /**
@@ -276,9 +262,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         final DeckGroup finishedDraft = new DeckGroup(s);
         final LimitedPlayer player = this.boosterDraft.getHumanPlayer();
 
-        Deck humanDeck = (Deck) this.getPlayersDeck().copyTo(s);
+        Deck humanDeck = (Deck) player.getDeck().copyTo(s);
 
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
+        if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
+            humanDeck.getTags().add("CommanderDraft");
+        }
         finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
@@ -290,8 +279,18 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         FScreen.DRAFTING_PROCESS.close();
 
         //open draft pool in Draft Deck Editor right away
-        Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
+        if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                    new CEditorCommanderDraftLimited(FModel.getDecks().getDraft(),
+                            FScreen.DECK_EDITOR_DRAFT, getCDetailPicture(),
+                            ((BoosterDraft) boosterDraft).getFreeCommanderName()));
+        } else {
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited<>(FModel.getDecks().getDraft(), DeckGroup::new, FScreen.DECK_EDITOR_DRAFT, getCDetailPicture()));
+        }
+
+
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
     }
 
@@ -339,13 +338,13 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         ccAddLabel = this.getBtnAdd().getText();
 
-        if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
+        if (this.getCatalogManager().getPool() == null) { //avoid showing next choice again when switching back to Draft screen
             this.showChoices(this.boosterDraft.nextChoice());
-            this.getDeckManager().setPool((Iterable<PaperCard>) null);
         }
         else {
             this.showChoices(this.getCatalogManager().getPool());
         }
+        picksSections.refresh();
 
         //Remove buttons
         this.getBtnAdd().setVisible(false);
@@ -353,7 +352,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.getBtnRemove().setVisible(false);
         this.getBtnRemove4().setVisible(false);
 
-        this.getCbxSection().setVisible(false);
+        this.getCbxSection().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -390,6 +389,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     public void resetUIChanges() {
         //Re-rename buttons
         this.getBtnAdd().setText(ccAddLabel);
+        this.getCbxSection().setVisible(false);
 
         //Re-add buttons
         this.getBtnAdd4().setVisible(true);

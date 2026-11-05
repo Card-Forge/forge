@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Medium
+Description=./Standard/The_Hobbit/SpockVidaLoka_-_Jund_Sacrifice_(Standard,_#896876).dck
+Deck Type=constructed
+
+[Main]
+4 Biotech Specialist
+4 Blazemire Verge
+1 Blood Crypt
+4 Blooming Marsh
+4 Callous Inspector
+3 Deadly Precision
+2 Fanatical Offering
+1 Umbral Collar Zealot
+4 Gene Pollinator
+4 Greedy Freebooter
+3 Lively Dirge
+1 Mutagen Man, Living Ooze
+4 Obsessive Pursuit
+4 Stomping Ground
+2 Wastewood Verge
+1 Starting Town
+1 Swamp
+4 The Sackville-Bagginses
+1 Forest
+4 Overgrown Tomb
+4 Rottenmouth Viper
+[Sideboard]
+2 Professor Dellian Fel
+1 Maelstrom Pulse
+2 The Ooze
+2 Shoot the Sheriff
+3 Strategic Betrayal
+2 Tragic Trajectory
+3 Duress

@@ -173,7 +173,7 @@ public class LimitedPlayer {
     }
 
     public List<PaperCard> getPoolCards() {
-        return deck.getOrCreate(DeckSection.Sideboard).toFlatList();
+        return deck.getAllCardsInASinglePool().toFlatList();
     }
 
     public boolean hasStateChanged() {
@@ -798,7 +798,7 @@ public class LimitedPlayer {
     }
 
     protected void chooseExchangeCard(PaperCard offer, Consumer<PaperCard> then) {
-        List<PaperCard> pool = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
+        List<PaperCard> pool = deck.getAllCardsInASinglePool().toFlatList();
         String message = offer == null ? "Choose a card to reveal for Deal Broker"
                 : "Choose a card to offer for " + offer.getDisplayName();
         ask(DraftPrompt.cards(order, message, pool, true), false, null,
@@ -948,7 +948,7 @@ public class LimitedPlayer {
 
     private void swapPoolCard(PaperCard given, PaperCard received) {
         PaperCard removed = deck.removeCardName(given.getName());
-        deck.get(DeckSection.Sideboard).add(received);
+        deck.getOrCreate(DeckSection.Sideboard).add(received);
         if (removed != null) {
             poolRemoved.add(removed);
         }

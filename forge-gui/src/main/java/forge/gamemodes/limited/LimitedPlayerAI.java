@@ -29,7 +29,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         deckCols = new DeckColors();
     }
 
-    private PaperCard chooseCard() {
+    protected PaperCard chooseCard() {
         if (packQueue.isEmpty()) {
             return null;
         }

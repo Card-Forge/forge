@@ -4,6 +4,7 @@ Date=2026-02-03
 Name=Alchemy: Lorwyn Eclipsed
 Type=Online
 ScryfallCode=YECL
+Booster=1 UncommonRareMythic:fromsheet("YECL cards"), 8 Common:fromsheet("ECL cards"), 3 Uncommon:fromSheet("ECL cards"), 1 UncommonRareMythic:fromSheet("ECL cards"), 1 RareMythic:fromSheet("ECL cards"), 1 BasicLand:fromSheet("ECL cards")
 
 [cards]
 1 R Adaptive Armorer @Edgar Sánchez Hidalgo
@@ -36,3 +37,8 @@ ScryfallCode=YECL
 28 U Volatile Rift @Raoul Vitale
 29 U Adherent's Heirloom @Chris Seaman
 30 R Echoing Cavern @Justin Gerard
+
+[conjured]
+31 C Stonybrook Schoolmaster @Quinton Hoover & Val Mayerik
+32 U Blowfly Infestation @Caio Monteiro
+33 C Rite of Flame @Dany Orizio

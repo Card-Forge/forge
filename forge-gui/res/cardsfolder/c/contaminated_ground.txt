@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:ChangeType
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveLandTypes$ True | Description$ Enchanted land is a Swamp.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | AddType$ Swamp | RemoveLandTypes$ True | Description$ Enchanted land is a Swamp.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
 SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
 Oracle:Enchant land\nEnchanted land is a Swamp.\nWhenever enchanted land becomes tapped, its controller loses 2 life.

@@ -3,5 +3,5 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.MultiColor:multicolored | Description$ Enchanted creature has protection from multicolored.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Protection:Card.MultiColor:multicolored | Description$ Enchanted creature has protection from multicolored.
 Oracle:Enchant creature\nEnchanted creature has protection from multicolored.

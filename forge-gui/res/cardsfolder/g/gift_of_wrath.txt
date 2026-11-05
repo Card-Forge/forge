@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact,Creature:artifact or creature
 SVar:AttachAITgts:Creature,Vehicle
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ As long as enchanted permanent is a creature, it gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ As long as enchanted permanent is a creature, it gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME leaves the battlefield, create a 2/2 red Spirit creature token with menace.
 SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_spirit_menace
 DeckHas:Ability$Token & Type$Spirit & Keyword$Menace

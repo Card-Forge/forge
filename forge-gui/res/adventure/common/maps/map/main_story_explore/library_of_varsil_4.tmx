@@ -42,15 +42,19 @@
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.27.x.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.27.x.n2.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
@@ -67,15 +71,19 @@
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.28.x.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.28.x.n2.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
@@ -94,15 +102,19 @@
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.29.x.n0.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.29.x.n2.text&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
@@ -120,9 +132,11 @@
     <property name="dialog">[
 {
    &quot;text&quot;: &quot;If there is any information to be gathered from the shredded pages piled across this floor, it will be up to the scholars who might have some memory of what they had been. But as you approach, the portal here opens providing a quick route back to the entrance.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.33.d.n0.text&quot;,
       &quot;options&quot;: [{
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;completedLibraryOfVarsil&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 34, &quot;deleteMapObject&quot;:-1}],
-      &quot;name&quot;: &quot;(Continue)&quot;
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;
       }]
 }
 ]</property>
@@ -142,14 +156,20 @@
     <property name="dialog">[
 {
    &quot;text&quot;: &quot;In front of you stands one of the largest constructs you've ever seen. In contrast to the golems below, its shape seems to be less modeled after other humanoids and more a unique form of its own.&quot;,
+   &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.35.d.n0.text&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
       &quot;text&quot;: &quot;Behind the machine you see the remnants of many books pulled from the shelves below, now torn asunder.&quot;,
+      &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.35.d.n1.text&quot;,
       &quot;options&quot;: [{
          &quot;name&quot;: &quot;(Continue)&quot;,
+         &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
          &quot;text&quot;: &quot;(Note: This encounter is difficult and optional)&quot;,
+         &quot;loctext&quot;: &quot;adv.main_story_explore_library_of_varsil_4.35.d.n3.text&quot;,
          &quot;options&quot;: [{
             &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;locname&quot;: &quot;adv.shared.continue_paren&quot;,
             &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
       }]
    }]

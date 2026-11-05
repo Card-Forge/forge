@@ -1,0 +1,10 @@
+Name:Darklight Phoenix
+ManaCost:3 B
+Types:Creature Phoenix
+PT:3/2
+K:Flying
+K:Haste
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigReturn | TriggerDescription$ At the beginning of combat on your turn, if two or more creatures died this turn, return this card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:Flying, haste\nAt the beginning of combat on your turn, if two or more creatures died this turn, return this card from your graveyard to the battlefield.

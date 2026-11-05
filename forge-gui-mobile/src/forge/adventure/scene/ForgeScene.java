@@ -15,6 +15,8 @@ import java.util.List;
  */
 public abstract class ForgeScene extends Scene implements IUpdateable {
 
+    private static Boolean lastAppliedEnglishState = null;
+
     @Override
     public void dispose() {
     }
@@ -27,42 +29,49 @@ public abstract class ForgeScene extends Scene implements IUpdateable {
     public void act(float delta) {
     }
 
-
     @Override
     public void enter() {
         FOverlay.hideAll();
-        if (getScreen() != null)
-            getScreen().setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
-        //update language for ForgeScene
-        Forge.getLocalizer().setEnglish(Forge.forcedEnglishonCJKMissing);
-        Forge.openScreen(getScreen());
+
+        final FScreen activeScreen = getScreen();
+        if (activeScreen != null) {
+            activeScreen.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
+        }
+
+        final boolean currentForcedState = Forge.forcedEnglishonCJKMissing;
+        if (lastAppliedEnglishState == null || lastAppliedEnglishState != currentForcedState) {
+            lastAppliedEnglishState = currentForcedState;
+            Forge.getLocalizer().setEnglish(currentForcedState);
+        }
+
+        Forge.openScreen(activeScreen);
         Gdx.input.setInputProcessor(Forge.getInputProcessor());
     }
 
     public abstract FScreen getScreen();
 
     public void buildTouchListeners(int x, int y, List<FDisplayObject> potentialListeners) {
-        if (getScreen() != null)
-            getScreen().buildTouchListeners(x, y, potentialListeners);
+        final FScreen activeScreen = getScreen();
+        if (activeScreen != null) {
+            activeScreen.buildTouchListeners(x, y, potentialListeners);
+        }
     }
-
 
     @Override
     public boolean leave() {
-        //non ForgeScene is english atm...
-        Forge.getLocalizer().setEnglish(Forge.forcedEnglishonCJKMissing);
+        final boolean currentForcedState = Forge.forcedEnglishonCJKMissing;
+        if (lastAppliedEnglishState == null || lastAppliedEnglishState != currentForcedState) {
+            lastAppliedEnglishState = currentForcedState;
+            Forge.getLocalizer().setEnglish(currentForcedState);
+        }
         return super.leave();
     }
 
     @Override
     public void update(boolean fullUpdate) {
-
     }
 
     @Override
     public void update(int slot, LobbySlotType type) {
-
     }
-
-
 }

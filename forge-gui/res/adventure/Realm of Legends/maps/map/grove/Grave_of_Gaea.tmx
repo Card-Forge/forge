@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="124">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxL42RgSBvFo3gE40woHmh3DDb3DeYwGcWjeBSP4lE8iknFtSwD7wZKMQDlu0Vj
+  </data>
+ </layer>
+ <layer id="7" name="ClutterSubGround" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAJMsEt8oF0wvMFnIH4vAMGwsN4tDsGjYBSMglEwCkYBNgAAsfEGOA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlUtOw0AMhmcZZrJtSbgQj4Owo0JsoCgXQsBF2FRCbAoJOwTiFNhqfsU482TBqpaspGPPfONXasxeUrK1xrySvtk837be+efu8e3l5xHpjTPm1sX9pC+0Ge05TL1XntHWYUZMU9JlnlOqsTi5FguK4d3+Dxe55TyCvRx1sNP7svBOvZ32x+rJfocen5zaax6zYmddC3/dr5KX6qNe5EXyMIMhrox1K+ZO5yOUZ8yLVHlXLeijtbB17netwWoKZyfVVwuVG8wS8g42cjmIfkn1WR/oK58g9zIH+m5yfRD5l3VO9ZYU1DOnt9t66oOF4mh7TqwxJvoTdV67MjvL+cF8Dfn02XAv3cccE/uz6u9d44kZvj6BTds1FzFtqp3vczVn65hDZ2NtVcCF3BHv3jN/PmYOF2u+/yvMGzO/6f3LzdkxLj8rO+dKBVd+89GDx7R+QvpA658jqxt9U9xVgCf7Biz4Xo77P4jxKJgseu5D56I+ITvUkc8L9dBTZZKyET4hJtfn1MXrXyoXYn+IyfU5c39jhvZc0e8fuJDcqw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytVsluE0EQbTyyHZThwJVrQmAIgQPbhYgTYRGEGz8A4ge4IgJC4ICcRMiEXWyfgh0SMD6B+AAEAoE45URYRD11Fa6p6RmPIE96mnZ3db/auuXGsHPPY+d2EceI44oJ8TWxo74vmR3zHWX7TmA8omzlHNEUXbHB+isi8IW+TfJvftj/ntjsUsB6l9iL/bjNYwDzS8RVY6/jHGGbBTp/jnXEvq38CGE1MGf90xhn3USdu8IxLxXo2PPflDP9C4l3m8ppnr+hmP4VUmeJbUHVMYTWkP/eGsq3Ef+0TUuNTwf2DKrjegHxXVfx/U8uL2zKzj3bErbdQbHtjNN1BXSOsHYmce5s4n/bul80erJX7xFgL/I8QWfuDuS1Zeo3Q/svJVm7IhTteaHurPTTevZtHpZjr7cS6KcGzd8s6G2Bzs0gn6WX2+oONY2O7m2bdyBUPwvpNbu/wW8ierqrdKzf0iu6/6R+Re9hHpDf7aq3cG6Z/J4fzfohKOMH+gm9hTrPctxbc3pcgFw0zb0H9N0bVAPJbZffy16cznfIzzn2tVfgm71D8CnUI8D3qnNRzY834Fvrr52sOHeqkvZPI/RWhXpb5nD+Guvtqzt3qO7nH9LvPXWvjXpdjpy7SjxR8euHK/2xIC8eC9hB6z6d/Yj4u9qPEfO3WRs+HSeNo8SPrAU/rkTldPJwh869V/Pfpyq3k6S5n3PwmfQ+EWdLapV587Qu4pY7ovGVNI9xjS3KvB8W74iPOU7Rl/lzG/t2yOt70pyJstrSu6jFNPGIWkft1pg/qul96KFfNPez6uOFnvCtigfaN6JsrqE3xfX/QPzGurgfe6lGizVfrwP19D7Ee5f4gHjQrOl48nCN/WkwxS/E80TlEJD/f38Aofm5gQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="304.49" y="112.991">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Look at what remains of a once abundant and sacred shrine to Gaea. Something must be done to revitalize the land.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I have gathered the prayerbooks for your ritual.&quot;,
+                    &quot;text&quot;: &quot;'Thanks to you, Gaea is saved! The whole world thanks you.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Necklace of Flourishing&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gwenna, Eyes of Gaea&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gaea's Will&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gaea's Revenge&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gaea's Anthem&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gaea's Touch&quot;}              
+                      ] } ]
+                    ,
+					&quot;condition&quot;: [{&quot;item&quot;: &quot;Prayerbook of Fertility&quot;}, {&quot;item&quot;: &quot;Prayerbook of Fortunes&quot;}, {&quot;item&quot;: &quot;Prayerbook of Ire&quot;}, {&quot;item&quot;: &quot;Prayerbook of Return&quot;}, {&quot;item&quot;: &quot;Prayerbook of Vigor&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What can I do to help?&quot;,
+					&quot;text&quot;: &quot;'Gaea, the worldsoul, is dying. This place that was once a spring of life has run dry. She can be revived, but it will take power only the gods possess to do it.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;So you want me to kill gods then?&quot;,
+					&quot;text&quot;: &quot;'Exactly. In each biome of this world is a tower of worship. Kill the head god of each tower, and show me their prayerbooks. With all five, I can restore life to Gaea, and give some of her flourishing power to you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;A tall order, but I'll do my best.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Feels like this is a lost cause.&quot;,
+					&quot;text&quot;: &quot;'Perhaps. But I will be here if you regain hope.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Gwenna"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/collision.tx" x="-18.2508" y="-16.4141" width="518.021" height="16"/>
+  <object id="92" template="../../../../common/maps/obj/collision.tx" x="-14.9827" y="-16.9607" width="16" height="422.164"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="479" y="-17.082" width="16" height="422.164"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="-16.0105" y="401" width="518.021" height="16"/>
+  <object id="119" template="../../../../common/maps/obj/entry_up.tx" x="214.533" y="398.667" width="65.6" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/dialog.tx" x="217" y="367.394" width="85.3333" height="13.2122" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;While some greenery remains, this once lush and verdant clearing is withered and scarred. It seems that whatever blighted the land is still spreading.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/scroll.tx" x="144.667" y="94">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Nature's Ruin&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/scroll.tx" x="418" y="69.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Perish&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/scroll.tx" x="359.333" y="362">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gaea's Blessing&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

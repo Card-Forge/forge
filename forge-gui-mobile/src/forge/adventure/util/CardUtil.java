@@ -22,7 +22,10 @@ import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
+import forge.item.generation.BoosterGenerator;
+import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
+import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -32,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -42,6 +46,9 @@ import static forge.adventure.data.RewardData.generateAllCards;
  * Utility class to deck generation and card filtering
  */
 public class CardUtil {
+    private static final HashMap<String, Pattern> patternMap = new HashMap<>(256);
+    private static final ArrayList<PaperCard> filteredCardList = new ArrayList<>(512);
+
     public static final class CardPredicate implements Predicate<PaperCard> {
         enum ColorType {
             Any,
@@ -209,17 +216,23 @@ public class CardUtil {
 
             if (!this.deckNeeds.isEmpty()) {
                 boolean found = false;
-                for (String need : this.deckNeeds) {
-                    // FormatExpected: X$Y, where X is DeckHints.Type and Y is a string descriptor
-                    String[] parts = need.split("\\$");
+                int needsSize = this.deckNeeds.size();
+                for (int i = 0; i < needsSize; i++) {
+                    String need = this.deckNeeds.get(i);
+                    if (need == null) continue;
 
-                    if (parts.length != 2) {
+                    int dollarIdx = need.indexOf('$');
+                    if (dollarIdx == -1 || dollarIdx == 0 || dollarIdx == need.length() - 1) {
                         continue;
                     }
-                    DeckHints.Type t = DeckHints.Type.valueOf(parts[0].toUpperCase());
+
+                    String part0 = need.substring(0, dollarIdx);
+                    String part1 = need.substring(dollarIdx + 1);
+
+                    DeckHints.Type t = DeckHints.Type.valueOf(part0.toUpperCase());
 
                     DeckHints hints = card.getRules().getAiHints().getDeckHints();
-                    if (hints != null && hints.contains(t, parts[1])) {
+                    if (hints != null && hints.contains(t, part1)) {
                         found = true;
                         break;
                     }
@@ -234,8 +247,16 @@ public class CardUtil {
         private Pattern getPattern(RewardData type) {
             if (type.cardText == null || type.cardText.isEmpty())
                 return null;
+
+            Pattern cachedPattern = patternMap.get(type.cardText);
+            if (cachedPattern != null) {
+                return cachedPattern;
+            }
+
             try {
-                return Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+                Pattern compiled = Pattern.compile(type.cardText, Pattern.CASE_INSENSITIVE);
+                patternMap.put(type.cardText, compiled);
+                return compiled;
             } catch (Exception e) {
                 System.err.println("[" + type.cardName + "|" + type.itemName + "]\n" + e);
                 return null;
@@ -323,7 +344,11 @@ public class CardUtil {
                     if (allCardVariants) {
                         // Get a random variant, preserving edition when specified
                         PaperCard finalCandidate = CardUtil.getCardByNameAndEdition(candidate.getCardName(), candidate.getEdition());
-                        result.add(finalCandidate);
+                        if (finalCandidate.getRules().equals(candidate.getRules())) {
+                            result.add(finalCandidate);
+                        } else { // something went wrong use previous candidate instead
+                            result.add(candidate);
+                        }
                     } else {
                         result.add(candidate);
                     }
@@ -340,6 +365,7 @@ public class CardUtil {
      */
     public static void clearPriceCache() {
         priceData = null;
+        AdventureReadPriceList.clearPriceDataInstance();
     }
 
     private static AdventureReadPriceList.PriceData getPriceData() {
@@ -457,7 +483,7 @@ public class CardUtil {
                 for (SealedTemplate template : StaticData.instance().getSpecialBoosters()) {
                     if (!editionCodes.contains(template.getEdition().split("\\s", 2)[0]))
                         continue;
-                    List<PaperCard> packContents = new UnOpenedProduct(template).get();
+                    List<PaperCard> packContents = createRestrictedAwareBooster(template).get();
                     if (packContents.size() < 18 | packContents.size() > 25)
                         continue;
                     if (packContents.stream().filter(x -> x.getName().equals(targetName)).count() >= 3)
@@ -773,6 +799,57 @@ public class CardUtil {
     private static final Predicate<CardEdition> filterVintage = formats.getVintage().editionLegalPredicate;
     private static final Predicate<CardEdition> filterStandard = formats.getStandard().editionLegalPredicate;
 
+    /**
+     * Names from the plane's {@code restrictedCards} list. Empty when unset.
+     * Used so Adventure boosters can omit restricted cards without banning the pack.
+     */
+    public static Set<String> getRestrictedCardNames() {
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.restrictedCards == null || configData.restrictedCards.length == 0) {
+            return Collections.emptySet();
+        }
+        return new HashSet<>(Arrays.asList(configData.restrictedCards));
+    }
+
+    /**
+     * Open a sealed template while excluding the plane's restricted card names.
+     */
+    public static UnOpenedProduct createRestrictedAwareBooster(SealedTemplate template) {
+        return new UnOpenedProduct(template, getRestrictedCardNames());
+    }
+
+    /**
+     * Roll a booster pack while excluding the plane's restricted card names.
+     */
+    public static List<PaperCard> generateRestrictedAwareBoosterPack(SealedTemplate template) {
+        return BoosterGenerator.getBoosterPack(template, getRestrictedCardNames());
+    }
+
+    /**
+     * Temporarily install a booster resolver on {@code block} that excludes
+     * restricted card names, run {@code action}, then restore the previous resolver.
+     */
+    public static void withRestrictedAwareBoosterResolver(CardBlock block, Runnable action) {
+        if (block == null) {
+            action.run();
+            return;
+        }
+        Function<String, IUnOpenedProduct> previous = block.getBoosterResolver();
+        Set<String> excluded = getRestrictedCardNames();
+        block.setBoosterResolver(code -> {
+            SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(code);
+            if (template == null) {
+                return null;
+            }
+            return new UnOpenedProduct(template, excluded);
+        });
+        try {
+            action.run();
+        } finally {
+            block.setBoosterResolver(previous);
+        }
+    }
+
     public static Deck generateStandardBoosterAsDeck() {
         return generateRandomBoosterPackAsDeck(filterStandard);
     }
@@ -804,14 +881,21 @@ public class CardUtil {
             System.err.println("Set code '" + code + "' not found.");
             return new Deck();
         }
-        BoosterPack cards = BoosterPack.fromSet(edition);
         return generateBoosterPackAsDeck(edition);
     }
 
     public static Deck generateBoosterPackAsDeck(CardEdition edition) {
         Deck d = new Deck("Booster pack");
         d.setComment(edition.getCode());
-        d.getMain().add(BoosterPack.fromSet(edition).getCards());
+        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(edition.getCode());
+        if (template == null) {
+            BoosterPack pack = BoosterPack.fromSet(edition);
+            if (pack == null) {
+                return d;
+            }
+            template = pack.getSealedTemplate();
+        }
+        d.getMain().add(generateRestrictedAwareBoosterPack(template));
         return d;
     }
 
@@ -854,15 +938,29 @@ public class CardUtil {
             // Filter to allowed editions to prevent showing printings from wrong sets.
             if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
                 Set<String> allowed = new HashSet<>(Arrays.asList(configData.allowedEditions));
-                validCards = validCards.stream()
-                    .filter(card -> allowed.contains(card.getEdition()))
-                    .collect(Collectors.toList());
-                if (validCards.isEmpty()) {
-                    // Card was from a non-allowed edition, find any printing from an allowed one.
-                    validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName).stream()
-                        .filter(card -> allowed.contains(card.getEdition()))
-                        .collect(Collectors.toList());
+
+                filteredCardList.clear();
+                int cardsSize = validCards.size();
+                for (int i = 0; i < cardsSize; i++) {
+                    PaperCard card = validCards.get(i);
+                    if (card != null && allowed.contains(card.getEdition())) {
+                        filteredCardList.add(card);
+                    }
                 }
+
+                // Unify results
+                if (filteredCardList.isEmpty()) {
+                    List<PaperCard> fallbackCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName);
+                    int fallbackSize = fallbackCards.size();
+                    for (int i = 0; i < fallbackSize; i++) {
+                        PaperCard card = fallbackCards.get(i);
+                        if (card != null && allowed.contains(card.getEdition())) {
+                            filteredCardList.add(card);
+                        }
+                    }
+                }
+
+                validCards = new ArrayList<>(filteredCardList);
             }
         }
         if (validCards.isEmpty()) {
@@ -883,10 +981,7 @@ public class CardUtil {
                 return getCardByName(cardName);
             }
         }
-        List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
-                ? FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName)
-                : List.of(FModel.getMagicDb().getCommonCards().getUniqueByNameNoAlt(cardName));
-        List<PaperCard> validCards = cardPool.stream()
+        List<PaperCard> validCards = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(cardName).stream()
                 .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
 
         if (validCards.isEmpty()) {

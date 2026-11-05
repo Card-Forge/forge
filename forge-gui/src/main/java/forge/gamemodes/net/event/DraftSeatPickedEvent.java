@@ -1,5 +1,6 @@
 package forge.gamemodes.net.event;
 
+import java.util.Arrays;
 import forge.gamemodes.net.server.RemoteClient;
 import forge.item.PaperCard;
 
@@ -29,4 +30,9 @@ public final class DraftSeatPickedEvent implements NetEvent {
 
     @Override
     public void updateForClient(RemoteClient client) { }
+
+    @Override
+    public String toString() {
+        return String.format("DraftSeatPicked: seat %d, queues %s", seatIndex, Arrays.toString(seatQueueDepths));
+    }
 }

@@ -1,0 +1,16 @@
+Name:Last Voyage of the _____
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.StrictlySelf | Execute$ TrigSticker | TriggerDescription$ When this enchantment enters, you may put a name sticker on it, then it becomes an Aura with enchant creature. Return a creature card from your graveyard to the battlefield and attach this Aura to it. When this Aura leaves the battlefield, sacrifice enchanted creature.
+SVar:TrigSticker:DB$ PutSticker | Kind$ Name | Defined$ Self | Optional$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SelectPrompt$ Choose a creature card to return to the battlefield | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Aura | Keywords$ Enchant:Creature.IsRemembered:creature put onto the battlefield with CARDNAME | Duration$ Permanent | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBDelay
+SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigSacrifice | RememberObjects$ RememberedLKI | TriggerDescription$ When this Aura leaves the battlefield, sacrifice enchanted creature.
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ X | Description$ Enchanted creature gets +2/+0 for each name sticker on CARDNAME with seven or fewer letters.
+SVar:X:Count$CardStickers.NameMaxLetters.7/Twice
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:When this enchantment enters, you may put a name sticker on it, then it becomes an Aura with enchant creature. Return a creature card from your graveyard to the battlefield and attach this Aura to it.\nEnchanted creature gets +2/+0 for each name sticker on this Aura with seven or fewer letters.\nWhen this Aura leaves the battlefield, sacrifice enchanted creature.

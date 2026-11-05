@@ -49,6 +49,9 @@ public class World implements Disposable, SaveFileContent {
     private final Random random = new Random();
     private boolean worldDataLoaded = false;
     private Texture globalTexture = null;
+    private final ArrayList<DrawingInformation> drawingInfoCache = new ArrayList<>(32);
+    private Pixmap globalTileDrawing = null;
+    private Pixmap emptyTile = null;
 
     public Random getRandom() {
         return random;
@@ -160,36 +163,42 @@ public class World implements Disposable, SaveFileContent {
     }
 
     public Pixmap getBiomeSprite(int x, int y) {
-        if (x < 0 || y <= 0 || x >= width || y > height)
-            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+        if (x < 0 || y <= 0 || x >= width || y > height) {
+            if (emptyTile == null) {
+                emptyTile = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+                emptyTile.setColor(0, 0, 0, 0);
+                emptyTile.fill();
+            }
+            return emptyTile;
+        }
+
+        // init exactly once on demand
+        if (globalTileDrawing == null) {
+            globalTileDrawing = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+        } else {
+            // Clean the existing alpha pixels instead of instantiating a new object
+            globalTileDrawing.setColor(0, 0, 0, 0);
+            globalTileDrawing.fill();
+        }
 
         long biomeIndex = getBiome(x, y);
         int biomeTerrain = getTerrainIndex(x, y);
-        Pixmap drawingPixmap = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
-        ArrayList<DrawingInformation> information = new ArrayList<>();
+
+        drawingInfoCache.clear();
+
         for (int i = 0; i < biomeTexture.length; i++) {
-            if ((biomeIndex & 1L << i) == 0) {
-                continue;
-            }
+            if ((biomeIndex & 1L << i) == 0) continue;
             BiomeTexture regions = biomeTexture[i];
-            if (x <= 0 || y <= 1 || x >= width - 1 || y >= height)//edge
-            {
+            if (x <= 0 || y <= 1 || x >= width - 1 || y >= height) {
                 return regions.getPixmap(biomeTerrain);
             }
 
-
             int neighbors = 0b000_000_000;
-
             int bitIndex = 8;
             for (int ny = 1; ny > -2; ny--) {
                 for (int nx = -1; nx < 2; nx++) {
-                    long otherBiome = getBiome(x + nx, y + ny);
-                    int otherTerrain = getTerrainIndex(x + nx, y + ny);
-
-
-                    if ((otherBiome & 1L << i) != 0 && (biomeTerrain == otherTerrain) | biomeTerrain == 0)
+                    if ((getBiome(x + nx, y + ny) & 1L << i) != 0 && (biomeTerrain == getTerrainIndex(x + nx, y + ny) || biomeTerrain == 0))
                         neighbors |= (1 << bitIndex);
-
                     bitIndex--;
                 }
             }
@@ -203,32 +212,32 @@ public class World implements Disposable, SaveFileContent {
                         bitIndex--;
                     }
                 }
-                information.add(new DrawingInformation(baseNeighbors, regions, 0));
+                drawingInfoCache.add(new DrawingInformation(baseNeighbors, regions, 0));
             }
-            information.add(new DrawingInformation(neighbors, regions, biomeTerrain));
-
+            drawingInfoCache.add(new DrawingInformation(neighbors, regions, biomeTerrain));
         }
+
         int lastFullNeighbour = -1;
         int counter = 0;
-        for (DrawingInformation info : information) {
-            if (info.neighbors == 0b111_111_111)
-                lastFullNeighbour = counter;
+        for (DrawingInformation info : drawingInfoCache) {
+            if (info.neighbors == 0b111_111_111) lastFullNeighbour = counter;
             counter++;
-
         }
         counter = 0;
-        if (lastFullNeighbour < 0 && information.size() != 0)
-            information.get(0).neighbors = 0b111_111_111;
-        for (DrawingInformation info : information) {
+        if (lastFullNeighbour < 0 && !drawingInfoCache.isEmpty()) {
+            drawingInfoCache.get(0).neighbors = 0b111_111_111;
+        }
+        for (DrawingInformation info : drawingInfoCache) {
             if (counter < lastFullNeighbour) {
                 counter++;
                 continue;
             }
-            info.draw(drawingPixmap);
+            info.draw(globalTileDrawing);
         }
-        return drawingPixmap;
 
+        return globalTileDrawing;
     }
+
 
     public int getTerrainIndex(int x, int y) {
         try {
@@ -943,7 +952,8 @@ public class World implements Disposable, SaveFileContent {
     }
 
     public void dispose() {
-        Forge.safeDispose(biomeImage);
+        drawingInfoCache.clear();
+        Forge.safeDispose(biomeImage, globalTileDrawing, globalTexture, emptyTile);
     }
 
     public void setSeed(long seedOffset) {
@@ -956,5 +966,68 @@ public class World implements Disposable, SaveFileContent {
             System.out.print("Loading auxiliary sprites.\n");
         }
         return globalTexture;
+    }
+
+    public static final class AsyncSaveSnapshot implements Disposable {
+        private final SaveFileData data;
+        private Pixmap biomeImage;
+
+        private AsyncSaveSnapshot(SaveFileData data, Pixmap biomeImage) {
+            this.data = data;
+            this.biomeImage = biomeImage;
+        }
+
+        public SaveFileData encode() {
+            Pixmap image = biomeImage;
+            if (image == null) {
+                throw new IllegalStateException("Snapshot already consumed");
+            }
+
+            try {
+                data.store("biomeImage", image);
+                return data;
+            } finally {
+                image.dispose();
+                biomeImage = null;
+            }
+        }
+
+        @Override
+        public void dispose() {
+            if (biomeImage != null) {
+                biomeImage.dispose();
+                biomeImage = null;
+            }
+        }
+    }
+
+    public AsyncSaveSnapshot snapshotForAsyncSave() {
+        if (biomeImage == null) {
+            throw new IllegalStateException("World biome image is unavailable");
+        }
+
+        // Capture the image while still on the calling thread.
+        Pixmap imageCopy = new Pixmap(
+                biomeImage.getWidth(),
+                biomeImage.getHeight(),
+                biomeImage.getFormat());
+
+        try {
+            imageCopy.drawPixmap(biomeImage, 0, 0);
+
+            SaveFileData saveData = new SaveFileData();
+            saveData.storeObject("biomeMap", biomeMap);
+            saveData.storeObject("terrainMap", terrainMap);
+            saveData.store("width", width);
+            saveData.store("height", height);
+            saveData.store("mapObjectIds", mapObjectIds.save());
+            saveData.store("mapPoiIds", mapPoiIds.save());
+            saveData.store("seed", seed);
+
+            return new AsyncSaveSnapshot(saveData, imageCopy);
+        } catch (RuntimeException | Error e) {
+            imageCopy.dispose();
+            throw e;
+        }
     }
 }

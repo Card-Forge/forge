@@ -64,7 +64,7 @@ public class CostDraw extends CostPart {
         int c = this.getAbilityAmount(ability);
 
         for (Player p : payer.getGame().getPlayers()) {
-            if (p.isValid(type, payer, source, ability) && p.canDrawAmount(c)) {
+            if (p.isValid(type, payer, source, ability) && p.canDraw(c)) {
                 res.add(p);
             }
         }

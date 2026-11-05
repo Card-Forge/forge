@@ -1,0 +1,8 @@
+Name:Who's That Praetor?
+ManaCost:6
+Types:Sorcery
+A:SP$ NameCard | Defined$ You | AtRandom$ True | ChooseFromList$ Elesh Norn; Mother of Machines,Jin-Gitaxias; Progress Tyrant,Sheoldred; the Apocalypse,Urabrask; Heretic Praetor,Vorinclex; Monstrous Raider,Ebon Praetor | SubAbility$ DBMake | StackDescription$ SpellDescription | SpellDescription$ Choose one at random. Create a token that’s a copy of the chosen card.\n• Elesh Norn, Mother of Machines\n• Jin-Gitaxias, Progress Tyrant\n• Sheoldred, the Apocalypse\n• Urabrask, Heretic Praetor\n• Vorinclex, Monstrous Raider\n• Ebon Praetor
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+Oracle:Choose one at random. Create a token that’s a copy of the chosen card.\n• Elesh Norn, Mother of Machines\n• Jin-Gitaxias, Progress Tyrant\n• Sheoldred, the Apocalypse\n• Urabrask, Heretic Praetor\n• Vorinclex, Monstrous Raider\n• Ebon Praetor

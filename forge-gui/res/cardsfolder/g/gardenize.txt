@@ -1,0 +1,9 @@
+Name:Gardenize
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies, put a charge counter on this enchantment.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your first main phase, add {G} for each charge counter on this enchantment.
+SVar:TrigGetMana:DB$ Mana | Produced$ G | Amount$ X
+SVar:X:Count$CardCounters.CHARGE
+Oracle:Whenever a creature you control dies, put a charge counter on this enchantment.\nAt the beginning of your first main phase, add {G} for each charge counter on this enchantment.

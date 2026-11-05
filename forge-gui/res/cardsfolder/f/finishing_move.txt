@@ -1,0 +1,9 @@
+Name:Finishing Move
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ PowerDmg | StackDescription$ None | SubAbility$ DBTicket | SpellDescription$ You get {TK}{TK}, then you may put a sticker on a nonland permanent you own. Target creature you control deals damage equal to its power to target creature you don't control.
+SVar:DBTicket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 2 | SubAbility$ DBSticker
+SVar:DBSticker:DB$ PutSticker | Choices$ Permanent.nonLand+YouOwn | ChoiceTitle$ Choose a nonland permanent you own | Optional$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+Oracle:You get {TK}{TK}, then you may put a sticker on a nonland permanent you own. Target creature you control deals damage equal to its power to target creature you don't control.

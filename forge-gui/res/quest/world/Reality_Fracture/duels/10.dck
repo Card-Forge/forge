@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Medium
+Description=./Standard/Reality_Fracture/CardGameAddict_-_Orzhov_Aggro_(Standard,_#898279).dck
+Deck Type=constructed
+
+[Main]
+1 Bleachbone Verge
+2 Deep-Cavern Bat
+1 Emptiness
+3 Enlightened Confidant
+3 Haliya, Guided by Light
+4 Hinterland Sanctifier
+3 Liliana the Faultless
+3 Moseo, Vein's New Dean
+2 Starscape Cleric
+1 Zoraline, Cosmos Caller
+4 Case of the Uneaten Feast
+3 Lunar Convocation
+2 Erode
+4 Amalia Benavides Aguirre
+3 Concealed Courtyard
+1 Dalkovan Encampment
+4 Godless Shrine
+3 Plains
+4 Shattered Sanctum
+4 Starting Town
+2 Swamp
+3 Ajani Resolute
+[Sideboard]
+1 Starscape Cleric
+1 Lunar Convocation
+2 Curious Farm Animals
+3 Duress
+1 Decorum Dissertation
+1 Requisition Raid
+1 Seam Rip
+2 Shoot the Sheriff
+3 Strategic Betrayal

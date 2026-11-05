@@ -67,6 +67,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
+    private final DraftPicksSections picksSections;
 
     //========== Constructor
 
@@ -91,6 +92,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
         setCatalogManager(catalogManager);
         setDeckManager(deckManager);
+        picksSections = new DraftPicksSections(deckManager);
     }
 
     /**
@@ -101,6 +103,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         boosterDraft = inBoosterDraft;
+        picksSections.setDraft(inBoosterDraft);
     }
 
     /* (non-Javadoc)
@@ -108,23 +111,15 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) { return; }
-
         // can only draft one at a time, regardless of the requested quantity
-        draftCard(items.iterator().next().getKey(), null);
+        draftCard(items.iterator().next().getKey(), DraftPicksSections.getPickSection(toAlternate), null);
     }
 
     // The pick flow and ability menus mirror CEditorDraftingProcess; the editors differ in how they show packs and save
-    private void draftCard(PaperCard card, DraftAction variant) {
-        boosterDraft.setChoice(card, DeckSection.Sideboard, variant);
-        applyPoolDelta();
+    private void draftCard(PaperCard card, DeckSection section, DraftAction variant) {
+        boosterDraft.setChoice(card, section, variant);
+        picksSections.refresh();
         showPackToDraft();
-    }
-
-    private void applyPoolDelta() {
-        LimitedPlayer.PoolDelta delta = boosterDraft.getHumanPlayer().drainPoolDelta();
-        delta.added().forEach(c -> getDeckManager().addItem(c, 1));
-        delta.removed().forEach(c -> getDeckManager().removeItem(c, 1));
     }
 
     private void showPackToDraft() {
@@ -141,7 +136,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
             return;
         }
         boosterDraft.postDraftActions();
-        applyPoolDelta();
         saveDraft();
     }
 
@@ -150,18 +144,27 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      */
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (!toAlternate) {
+            picksSections.move(items);
+        }
     }
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(Localizer.getInstance().getMessage("lblDraft"), null);
-        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), action));
+        cmb.addMoveAlternateItems(Localizer.getInstance().getMessage("lblDraft"),
+                Localizer.getInstance().getMessage("lbltosideboard"));
+        cmb.addDraftActionItems(currentActions(), action -> draftCard(action.target(), DraftPicksSections.getPickSection(false), action));
     }
 
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
+        cmb.addMoveItems(Localizer.getInstance().getMessage("lblMove"),
+                Localizer.getInstance().getMessage(picksSections.getDestination() == DeckSection.Main
+                        ? "lblToMainDeck" : "lbltosideboard"));
         cmb.addDraftActionItems(currentActions(), action -> {
             boosterDraft.getHumanPlayer().activate(action);
+            picksSections.refresh();
             // The activated card turns face down, so its marker and the hints change
             showChoices(getCatalogManager().getPool());
         });
@@ -196,44 +199,6 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
     /**
      * <p>
-     * getPlayersDeck.
-     * </p>
-     *
-     * @return a {@link forge.deck.Deck} object.
-     */
-    public Deck getPlayersDeck() {
-        final Deck deck = new Deck();
-
-        // add sideboard to deck
-        deck.getOrCreate(DeckSection.Sideboard).addAll(getDeckManager().getPool());
-
-        // No need to add basic lands now that Add Basic Lands button exists
-        /*final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
-        final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
-        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
-
-        final int landsCount = 10;
-
-        for(String landName : MagicColor.Constant.BASIC_LANDS) {
-            int numArt = FModel.getMagicDb().getCommonCards().getArtCount(landName, landSet);
-            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
-            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
-
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = minArtIndex; i <= maxArtIndex; i++) {
-                    deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
-                }
-            } else {
-                deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
-            }
-        }
-        */
-
-        return deck;
-    } // getPlayersDeck()
-
-    /**
-     * <p>
      * saveDraft.
      * </p>
      */
@@ -246,7 +211,9 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         final Deck[] computer = boosterDraft.getComputerDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(QuestEventDraft.DECK_NAME);
-        finishedDraft.setHumanDeck((Deck) getPlayersDeck().copyTo(QuestEventDraft.DECK_NAME));
+        Deck humanDeck = (Deck) boosterDraft.getHumanPlayer().getDeck().copyTo(QuestEventDraft.DECK_NAME);
+        humanDeck.setDraftNotes(boosterDraft.getHumanPlayer().getSerializedDraftNotes());
+        finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
@@ -294,13 +261,13 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
 
         ccAddLabel = getBtnAdd().getText();
 
-        if (getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
+        if (getCatalogManager().getPool() == null) { //avoid showing next choice again when switching back to Draft screen
             showChoices(boosterDraft.nextChoice());
-            getDeckManager().setPool((Iterable<PaperCard>) null);
         }
         else {
             showChoices(getCatalogManager().getPool());
         }
+        picksSections.refresh();
 
         //Remove buttons
         getBtnAdd().setVisible(false);
@@ -308,7 +275,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         getBtnRemove().setVisible(false);
         getBtnRemove4().setVisible(false);
 
-        getCbxSection().setVisible(false);
+        getCbxSection().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -349,6 +316,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     public void resetUIChanges() {
         //Re-rename buttons
         getBtnAdd().setText(ccAddLabel);
+        getCbxSection().setVisible(false);
 
         //Re-add buttons
         getBtnAdd4().setVisible(true);

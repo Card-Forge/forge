@@ -361,7 +361,6 @@ public class SealedCardPoolGenerator {
                     if (!chooseNumberOfBoosters(importedProduct)) {
                         return;
                     }
-                    this.product.add(importedProduct);
 
                 } catch (Exception e) {
                     SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblErrorImportingCube") + ": " + e.getMessage());

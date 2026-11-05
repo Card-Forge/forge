@@ -1,0 +1,10 @@
+Name:_____-o-saurus
+ManaCost:4 G G
+Types:Creature Alien Dinosaur
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it. Put a +1/+1 counter on it for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ StickerUniqueVowels
+DeckHas:Ability$Counters
+Oracle:Trample\nWhen this creature enters, you may put a name sticker on it. Put a +1/+1 counter on it for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)

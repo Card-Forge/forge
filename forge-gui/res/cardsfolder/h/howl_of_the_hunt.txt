@@ -6,6 +6,6 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.EnchantedBy+Wolf,Creature.EnchantedBy+Werewolf | PresentCompare$ EQ1 | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, if enchanted creature is a Wolf or Werewolf, untap that creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Enchanted
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2 and has vigilance.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2 and has vigilance.
 DeckHints:Type$Wolf|Werewolf
 Oracle:Flash\nEnchant creature\nWhen Howl of the Hunt enters, if enchanted creature is a Wolf or Werewolf, untap that creature.\nEnchanted creature gets +2/+2 and has vigilance.

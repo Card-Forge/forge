@@ -11,7 +11,6 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.gamesimulationtests.util.CardDatabaseHelper;
 import forge.item.PaperCard;
-import forge.model.FModel;
 
 /**
  * Test Case for CardDb forcing No Image for all the cards. Check that
@@ -43,7 +42,7 @@ public class CardDbWithNoImageCardDbMockTestCase extends CardDbCardMockTestCase 
     @Override
     protected void initializeStaticData() {
         StaticData data = CardDatabaseHelper.createStaticData("CardDbWithNoImageCardDbMockTestCase", false);
-        fModelMock.when(FModel::getMagicDb).thenReturn(data);
+        useStaticData(data);
     }
 
     @Test

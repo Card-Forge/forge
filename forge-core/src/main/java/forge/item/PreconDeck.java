@@ -31,7 +31,6 @@ import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 
-
 public class PreconDeck implements InventoryItemFromSet {
     private final Deck deck;
     private final String set;

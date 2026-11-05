@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Artifact Creature Equipment Ogre
 PT:2/2
 K:Reconfigure:3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
 T:Mode$ DamageDone | ValidSource$ Card.Self,Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME or equipped creature deals combat damage to a player, you may sacrifice it. If you do, discard your hand, then draw three cards.
 SVar:TrigDiscard:AB$ Discard | Cost$ Sac<1/Card.TriggeredSource> | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 3

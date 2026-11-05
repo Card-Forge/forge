@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Hobbit/Nathan_Fouarge_-_Hammer_Time_(Modern,_#880287).dck
+Deck Type=constructed
+
+[Main]
+4 Kíli the Resourceful
+4 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+4 Leyline Axe
+4 Mox Opal
+1 Lavaspur Boots
+1 My Precious
+1 Shadowspear
+4 Metallic Rebuke
+4 Urza's Saga
+1 Super-Soldier Serum
+3 Plains
+2 Arid Mesa
+2 Flooded Strand
+2 Hallowed Fountain
+2 Inkmoth Nexus
+2 Windswept Heath
+1 Godless Shrine
+1 Marsh Flats
+1 Meticulous Archive
+[Sideboard]
+3 Consign to Memory
+3 Grafdigger's Cage
+2 Surge of Salvation
+1 Pithing Needle
+1 Teferi, Time Raveler
+1 Tormod's Crypt
+1 Vexing Bauble
+3 Erode

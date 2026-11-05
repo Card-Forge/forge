@@ -1,0 +1,10 @@
+Name:Koth, the Geomancer
+ManaCost:2 R
+Types:Legendary Creature Human Warrior
+PT:3/2
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land you control enters, NICKNAME deals 1 damage to each opponent. If that land is a Mountain, add {R}.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ R | ConditionDefined$ TriggeredCard | ConditionPresent$ Mountain
+SVar:BuffedBy:Land
+Oracle:Reach\nLandfall — Whenever a land you control enters, Koth deals 1 damage to each opponent. If that land is a Mountain, add {R}.

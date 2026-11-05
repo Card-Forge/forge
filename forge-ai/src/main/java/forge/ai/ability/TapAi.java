@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -22,11 +23,10 @@ public class TapAi extends TapAiBase {
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
-        final Player turn = phase.getPlayerTurn();
 
-        if (turn.isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (phase.getPlayerTurn().isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
-        } else if (turn.equals(ai)) {
+        } else if (phase.isPlayerTurn(ai)) {
             if (isSorcerySpeed(sa, ai) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                 // Cast it if it's a sorcery.
             } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
@@ -96,15 +96,19 @@ public class TapAi extends TapAiBase {
                     Integer amount = lifeCost.convertAmount();
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
-                        for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                            // Check if the AI has enough lands to play the card
-                            if (landsize != c.getCMC()) {
-                                continue;
-                            }
-                            // Check if the AI intends to play the card and if it can pay for it with the mana it has
-                            boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(payer, source)).getColor());
-                            if (canPay && willPlay) {
+                        // Check if the AI has enough lands to play the card
+                        final CardCollection playable = CardLists.filter(
+                                payer.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(landsize));
+                        if (playable.isEmpty()) {
+                            return false;
+                        }
+                        // the same sources answer this for every card in hand, so ask once
+                        final byte availableColors = ColorSet.fromNames(
+                                ComputerUtilCost.getAvailableManaColors(payer, source)).getColor();
+                        for (Card c : playable) {
+                            // Check if the AI can pay for the card with the mana it has and intends to play it
+                            if (c.getManaCost().canBePaidWithAvailable(availableColors)
+                                    && ComputerUtil.hasReasonToPlayCardThisTurn(payer, c)) {
                                 return true;
                             }
                         }

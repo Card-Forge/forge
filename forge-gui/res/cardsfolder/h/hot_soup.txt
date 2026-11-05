@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact Equipment
 K:Equip:3
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Description$ Equipped creature can't be blocked.
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ HotSoupDestroy
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddSVar$ HotSoupDestroy
 SVar:HotSoupDestroy:SVar:DestroyWhenDamaged:True
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EquippedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When equipped creature is dealt damage, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy

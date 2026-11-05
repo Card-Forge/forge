@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - The Hobbit #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/08/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has an enduring story. You don't. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Ball Lightning;Samurai's Katana;Goatnap;Crumb and Get It;Dwarven Mauler
+p0battlefield=Bifur, Melodic Rider;Balin, Loremaster|Counters:P1P1=1;Plains;Plains;Mountain;Mountain;Mountain;Mountain
+p1life=12
+p1battlefield=Bifur, Melodic Rider|Counters:P1P1=2;Thorin Oakenshield;Weather Maker|Counters:CHARGE=3

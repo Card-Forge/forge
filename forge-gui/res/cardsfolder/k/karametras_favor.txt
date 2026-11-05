@@ -5,7 +5,7 @@ K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AnyMana | Description$ Enchanted creature has "{T}: Add one mana of any color."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddAbility$ AnyMana | Description$ Enchanted creature has "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\nWhen Karametra's Favor enters, draw a card.\nEnchanted creature has "{T}: Add one mana of any color."

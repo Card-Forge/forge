@@ -19,7 +19,7 @@ public class DayTimeAi extends SpellAbilityAi {
         if ((sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) || sa.getPayCosts().hasManaCost()) {
             // If it involves a cost that may put us at a disadvantage, better activate before own turn if possible
             if (!isSorcerySpeed(sa, aiPlayer)) {
-                if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer) {
+                if (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(aiPlayer)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 } else {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);

@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Knight
 PT:2/2
 K:First Strike
-A:AB$ Animate | Cost$ W U B R G | Defined$ Self | Types$ Angel | Keywords$ Flying & Lifelink | SubAbility$ DBPump | SpellDescription$ Until end of turn, CARDNAME becomes an Angel, gets +3/+3, and gains flying and lifelink.
+A:AB$ Animate | Cost$ W U B R G | Defined$ Self | Types$ Angel | RemoveCreatureTypes$ True | Keywords$ Flying & Lifelink | SubAbility$ DBPump | SpellDescription$ Until end of turn, this creature becomes an Angel, gets +3/+3, and gains flying and lifelink.
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +3 | NumDef$ +3
 SVar:PlayMain1:TRUE
-Oracle:First strike\n{W}{U}{B}{R}{G}: Until end of turn, Paragon of the Amesha becomes an Angel, gets +3/+3, and gains flying and lifelink.
+Oracle:First strike\n{W}{U}{B}{R}{G}: Until end of turn, this creature becomes an Angel, gets +3/+3, and gains flying and lifelink.

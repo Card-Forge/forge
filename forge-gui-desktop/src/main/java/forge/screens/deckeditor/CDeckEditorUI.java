@@ -30,13 +30,17 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
+import forge.deck.FormatChoices;
 import forge.deck.io.DeckPreferences;
+import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gui.GuiChoose;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
+import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
@@ -51,6 +55,7 @@ import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -66,6 +71,7 @@ public enum CDeckEditorUI implements ICDoc {
 
     private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
     private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
+    private GameFormat editorFormat;
     private final CDetailPicture cDetailPicture;
     private final VAllDecks vAllDecks;
     private final VCommanderDecks vCommanderDecks;
@@ -144,6 +150,29 @@ public enum CDeckEditorUI implements ICDoc {
         }
     }
 
+    /** Applies a Format dropdown entry. A GameFormat opens the Constructed editor with the catalogue limited to that format. */
+    public void selectFormat(final Object choice) {
+        if (choice == FormatChoices.ARCHIVED) {
+            syncFormatDropdown();
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                selectFormat(archived);
+            }
+            return;
+        }
+        editorFormat = choice instanceof GameFormat format ? format : null;
+        changeFormat(choice instanceof GameType type ? type : GameType.Constructed);
+        syncFormatDropdown();
+    }
+
+    /** A deck file does not record a format, so an opened deck starts with every card in the catalogue. */
+    public void clearEditorFormat() {
+        if (editorFormat == null) { return; }
+
+        editorFormat = null;
+        syncFormatDropdown();
+    }
+
     public void changeFormat(final GameType target) {
         if (!isFormatDropdownGameType(target)) { return; }
         if (childController == null) { return; }
@@ -167,22 +196,52 @@ public enum CDeckEditorUI implements ICDoc {
     }
 
     static boolean isFormatDropdownGameType(final GameType gt) {
-        return gt == GameType.Constructed || gt == GameType.Commander
-                || gt == GameType.Oathbreaker || gt == GameType.Brawl
-                || gt == GameType.TinyLeaders;
+        return gt == GameType.Constructed || FormatChoices.COMMANDER_GAME_TYPES.contains(gt);
     }
 
     private void syncFormatDropdown() {
         if (childController == null) { return; }
-        final FComboBox<GameType> cb = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat();
+        final FComboBox<Object> cb = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat();
         final GameType gt = childController.getGameType();
         if (isFormatDropdownGameType(gt)) {
-            if (cb.getSelectedItem() != gt) {
-                cb.setSelectedItem(gt);
+            if (gt != GameType.Constructed) {
+                editorFormat = null;
+            }
+            final Object choice = editorFormat != null ? editorFormat : gt;
+            if (cb.getSelectedItem() != choice) {
+                // The model takes an archived format, which the list does not hold
+                cb.getModel().setSelectedItem(choice);
             }
             cb.setEnabled(true);
+            if (childController.getCatalogManager() instanceof CardManager catalog) {
+                catalog.setRequiredFormat(editorFormat);
+            }
         } else {
             cb.setEnabled(false);
+        }
+        syncTabCaption(gt);
+    }
+
+    /**
+     * The format dropdown lives inside the deck panel, so the navigation bar alone
+     * gives no clue which format the open editor is building for. Mirror the
+     * selected format in the tab caption. Only the Constructed screen hosts the
+     * dropdown; every other editor keeps the caption it was built with.
+     */
+    private void syncTabCaption(final GameType gt) {
+        if (childController.getScreen() != FScreen.DECK_EDITOR_CONSTRUCTED) { return; }
+        FScreen.DECK_EDITOR_CONSTRUCTED.setTabCaption(
+                Localizer.getInstance().getMessage(formatTabCaptionKey(gt)));
+    }
+
+    private static String formatTabCaptionKey(final GameType gt) {
+        if (gt == null) { return "lblDeckEditorWithSpaces"; }
+        switch (gt) {
+            case Commander:   return "lblCommanderDeckEditor";
+            case Oathbreaker: return "lblOathbreakerDeckEditor";
+            case Brawl:       return "lblBrawlDeckEditor";
+            case TinyLeaders: return "lblTinyLeadersDeckEditor";
+            default:          return "lblDeckEditorWithSpaces";
         }
     }
 

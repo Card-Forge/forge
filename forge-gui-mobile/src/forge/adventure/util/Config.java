@@ -27,6 +27,7 @@ import forge.util.FileUtil;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -51,6 +52,9 @@ public class Config {
 
     private final FolderDeckCatalog preconDeckCatalog = new FolderDeckCatalog("decks/starter/precon/");
     private final FolderDeckCatalog commanderPreconDeckCatalog = new FolderDeckCatalog("decks/starter/commanderprecon/");
+    private static final StringBuilder stringBuilder = new StringBuilder(256);
+    private static final HashMap<String, String> langPathsMap = new HashMap<>(512);
+
 
     static public Config instance() {
         if (currentConfig == null)
@@ -195,12 +199,113 @@ public class Config {
         return prefix;
     }
 
+    public String getLang() {
+        return Lang;
+    }
+
+    public boolean isExtraBattleBackgroundsEnabled() {
+        Boolean enabled = settingsData.extraBattleBackgroundsByPlane == null ? null
+                : settingsData.extraBattleBackgroundsByPlane.get(plane);
+        if (enabled != null) {
+            return enabled;
+        }
+        if (settingsData.enableExtraBattleBackgrounds != null) {
+            return settingsData.enableExtraBattleBackgrounds;
+        }
+        return !GuiBase.isMobile() && configData.enableExtraBattleBackgroundsByDefault;
+    }
+
+    public void setExtraBattleBackgroundsEnabled(boolean enabled) {
+        if (settingsData.extraBattleBackgroundsByPlane == null) {
+            settingsData.extraBattleBackgroundsByPlane = new HashMap<>();
+        }
+        settingsData.extraBattleBackgroundsByPlane.put(plane, enabled);
+    }
+
+    public String getCachePrefix() {
+        String safePlane = getPlane().replaceAll("[^A-Za-z0-9._-]", "_");
+        String planeKey = safePlane + "-" + UUID.nameUUIDFromBytes(
+                plane.getBytes(StandardCharsets.UTF_8));
+        String source = getBattleBackgroundSource();
+        String sourceKey = source == null ? "plane-default" : source;
+        return ForgeConstants.CACHE_DIR + "adventure" + ForgeConstants.PATH_SEPARATOR
+                + planeKey + ForgeConstants.PATH_SEPARATOR
+                + UUID.nameUUIDFromBytes(sourceKey.getBytes(StandardCharsets.UTF_8))
+                + ForgeConstants.PATH_SEPARATOR;
+    }
+
+    public String getBattleBackgroundSource() {
+        if (!isUsingCustomBattleBackgroundSource()) {
+            return null;
+        }
+        String source = getCustomBattleBackgroundSource();
+        return source == null ? "" : source;
+    }
+
+    public String getCustomBattleBackgroundSource() {
+        return settingsData.battleBackgroundSources == null ? null
+                : settingsData.battleBackgroundSources.get(plane);
+    }
+
+    public void setBattleBackgroundSource(String source) {
+        if (settingsData.battleBackgroundSources == null) {
+            settingsData.battleBackgroundSources = new HashMap<>();
+        }
+        settingsData.battleBackgroundSources.put(plane, source == null ? "" : source.trim());
+    }
+
+    public boolean isUsingCustomBattleBackgroundSource() {
+        return settingsData.useCustomBattleBackgroundSources != null
+                && Boolean.TRUE.equals(settingsData.useCustomBattleBackgroundSources.get(plane));
+    }
+
+    public void setUseCustomBattleBackgroundSource(boolean useCustomSource) {
+        if (settingsData.useCustomBattleBackgroundSources == null) {
+            settingsData.useCustomBattleBackgroundSources = new HashMap<>();
+        }
+        settingsData.useCustomBattleBackgroundSources.put(plane, useCustomSource);
+    }
+
     public String getFilePath(String path) {
         return prefix + path;
     }
 
     public String getCommonFilePath(String path) {
         return commonPrefix + path;
+    }
+
+    private String langFilePath(String fullPath, String rootPrefix) {
+        if (fullPath == null || rootPrefix == null) return "";
+
+        // return compiled path locations if available
+        stringBuilder.setLength(0);
+        String cacheKey = stringBuilder.append(rootPrefix).append("|").append(fullPath).toString();
+
+        String cachedPath = langPathsMap.get(cacheKey);
+        if (cachedPath != null) {
+            return cachedPath;
+        }
+
+        // before it uses regex parsing that continually allocate short-lived character arrays so we use this and cache the result
+        int lastSlash = fullPath.lastIndexOf('/');
+        String baseName = lastSlash != -1 ? fullPath.substring(lastSlash + 1) : fullPath;
+
+        int lastDot = baseName.lastIndexOf('.');
+        String nameNoExt = lastDot != -1 ? baseName.substring(0, lastDot) : baseName;
+        String ext = lastDot != -1 ? baseName.substring(lastDot) : "";
+
+        stringBuilder.setLength(0);
+        String compiledPath = stringBuilder.append(rootPrefix)
+            .append("languages/")
+            .append(nameNoExt)
+            .append("-")
+            .append(Lang)
+            .append(ext)
+            .toString()
+            .replace("//", "/");
+
+        langPathsMap.put(cacheKey, compiledPath);
+        return compiledPath;
     }
 
     public FileHandle getFile(String path) {
@@ -211,12 +316,11 @@ public class Config {
         //not cached, look for resource
         System.out.print("Looking for resource " + path + "... ");
         String fullPath = (prefix + path).replace("//", "/");
-        String fileName = fullPath.replaceFirst("[.][^.]+$", "");
-        String ext = fullPath.substring(fullPath.lastIndexOf('.'));
-        String langFile = fileName + "-" + Lang + ext;
+        String langFile = langFilePath(fullPath, prefix);
+        boolean isUI = path.startsWith("ui/");
 
         for (int iter = 1; iter <= 2; iter++) {
-            if (Files.exists(Paths.get(langFile))) {
+            if (!isUI && Files.exists(Paths.get(langFile))) {
                 System.out.println("Found!");
                 Cache.put(path, new FileHandle(langFile));
                 break;
@@ -227,8 +331,7 @@ public class Config {
             }
             //no local resource, check common resources
             fullPath = (commonPrefix + path).replace("//", "/");
-            fileName = fullPath.replaceFirst("[.][^.]+$", "");
-            langFile = fileName + "-" + Lang + ext;
+            langFile = langFilePath(fullPath, commonPrefix);
         }
         return Cache.get(path);
     }
@@ -461,8 +564,10 @@ public class Config {
                 } else {
                     deckName = nameNoExt;
                 }
+                stringBuilder.setLength(0);
+                String deckValuePath = stringBuilder.append(folderPath).append(filename).toString();
                 setMap.computeIfAbsent(setDisplayName, k -> new ArrayList<>())
-                        .add(new String[]{deckName, folderPath + filename});
+                    .add(new String[]{deckName, deckValuePath});
             }
             for (List<String[]> decks : setMap.values()) {
                 decks.sort(Comparator.comparing(a -> a[0]));

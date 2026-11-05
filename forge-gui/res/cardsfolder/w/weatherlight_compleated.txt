@@ -3,7 +3,7 @@ ManaCost:2
 Types:Legendary Artifact Vehicle
 PT:5/5
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE4_PHYRESIS | AddType$ Creature & Phyrexian | Description$ As long as CARDNAME has four or more phyresis counters on it, it's a Phyrexian creature in addition to its other types.
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE4_PHYRESIS | AddType$ Creature & Phyrexian | Description$ As long as CARDNAME has four or more phyresis counters on it, it's a Phyrexian creature in addition to its other types.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies, put a phyresis counter on CARDNAME. Then draw a card if it has seven or more phyresis counters on it. If it doesn't, scry 1.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PHYRESIS | CounterNum$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Self | ConditionPresent$ Card.Self+counters_GE7_PHYRESIS | SubAbility$ DBScry

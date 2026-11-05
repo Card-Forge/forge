@@ -6,5 +6,5 @@ SVar:TrigManifest:DB$ Manifest | RememberManifested$ True | SubAbility$ Aurify
 SVar:Aurify:DB$ Animate | Types$ Aura | Keywords$ Enchant:Creature | Duration$ Permanent | SubAbility$ RageformAttach
 SVar:RageformAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike.
 Oracle:When Rageform enters, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Rageform to it. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nEnchanted creature has double strike. (It deals both first-strike and regular combat damage.)

@@ -623,7 +623,7 @@ public class CountersPutAi extends CountersAi {
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
                 // e.g. Power-Up abilities: use it to survive or win combat
-                if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())
+                if (!hasSacCost && !(ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())
                         && !ComputerUtilCard.shouldPumpCard(ai, sa, cards.get(0), amount, amount, Lists.newArrayList())) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
@@ -673,9 +673,6 @@ public class CountersPutAi extends CountersAi {
         final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
-        final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger())
-                || (sa.getRootAbility().isTrigger() && !sa.getRootAbility().isOptionalTrigger());
-
         if (sa.usesTargeting()) {
             CardCollection list;
             if (sa.isCurse()) {
@@ -685,17 +682,16 @@ public class CountersPutAi extends CountersAi {
             }
             list = CardLists.getTargetableCards(list, sa);
 
-            if (list.isEmpty() && isMandatoryTrigger) {
+            if (list.isEmpty() && sa.isTrigger() && !sa.getRootAbility().isOptionalTrigger()) {
                 // broaden the scope of possible targets if we are resolving a mandatory trigger
                 list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
             }
 
             sa.resetTargets();
-            // target loop
+
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if (!sa.isTargetNumberValid()
-                            || sa.getTargets().isEmpty()) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
@@ -1119,7 +1115,7 @@ public class CountersPutAi extends CountersAi {
                 || (combat != null && (((combat.isBlocked(source) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, source, combat)) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))
                 || (combat.isBlocking(source) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, source, combat) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))));
 
-        if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
+        if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(ai)))) {
             return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
         }
 

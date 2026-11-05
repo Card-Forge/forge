@@ -63,11 +63,16 @@ public class CardDatabaseHelper {
         } catch (Exception e) {
             customReader = null;
         }
-        return new StaticData(reader, customReader, ForgeConstants.EDITIONS_DIR,
-                ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR,
+        // The constructor without a token reader leaves StaticData.getAllTokens() null, and it
+        // also sets the process-wide StaticData.instance(): any test that resolves a token after
+        // one of these is built dies on a null TokenDb.
+        final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR,
+                null, false);
+        return new StaticData(reader, tokenReader, customReader, null, ForgeConstants.EDITIONS_DIR,
+                ForgeConstants.USER_CUSTOM_EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, "",
                 "Latest Art All Editions",
                 true,
-                false);
+                false, false, false);
     }
 
     private static boolean hasBeenInitialized() {

@@ -3,6 +3,6 @@ ManaCost:5 U U
 Types:Enchantment Aura
 K:Enchant:Permanent
 SVar:AttachAILogic:GainControl
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Permanent | GainControl$ You | Description$ You control enchanted permanent.
 K:Cycling:2
 Oracle:Enchant permanent\nYou control enchanted permanent.\nCycling {2} ({2}, Discard this card: Draw a card.)

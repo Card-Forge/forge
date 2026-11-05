@@ -1,0 +1,8 @@
+Name:Codie, Ravenous Codex
+ManaCost:3
+Types:Legendary Artifact Creature Book Construct
+PT:1/4
+T:Mode$ SpellCast | ValidCard$ Card.prepared | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a prepared spell, copy it. You may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+A:AB$ AlterAttribute | Cost$ W U B R G T | Defined$ Valid Creature.YouCtrl | Attributes$ Prepared | SpellDescription$ Each creature you control becomes prepared. (Only creatures with prepare spells can become prepared.)
+Oracle:Whenever you cast a prepared spell, copy it. You may choose new targets for the copy.\n{W}{U}{B}{R}{G}, {T}: Each creature you control becomes prepared. (Only creatures with prepare spells can become prepared.)

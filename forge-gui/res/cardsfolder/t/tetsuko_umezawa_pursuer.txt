@@ -1,0 +1,9 @@
+Name:Tetsuko Umezawa, Pursuer
+ManaCost:3 R
+Types:Legendary Creature Human Mercenary
+PT:2/4
+K:Double Strike
+K:Prowess
+T:Mode$ Blocks | ValidCard$ Creature.OppCtrl+powerLE1,Creature.OppCtrl+toughnessLE1 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature an opponent controls with power or toughness 1 or less blocks, NICKNAME deals 1 damage to that creature's controller.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredBlockerController | NumDmg$ 1
+Oracle:Double strike\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature's controller.

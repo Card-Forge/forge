@@ -3,6 +3,6 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ -1 | Description$ Enchanted creature gets +1/-1 and attacks each combat if able.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ 1 | AddToughness$ -1 | Description$ Enchanted creature gets +1/-1 and attacks each combat if able.
 S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy | Secondary$ True
 Oracle:Enchant creature\nEnchanted creature gets +1/-1 and attacks each combat if able.

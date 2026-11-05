@@ -2,7 +2,7 @@ Name:Atomic Microsizer
 ManaCost:U
 Types:Artifact Equipment
 K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigUnblockable | TriggerDescription$ Whenever equipped creature attacks, choose up to one target creature. That creature can't be blocked this turn and has base power and toughness 1/1 until end of turn.
 SVar:TrigUnblockable:DB$ Effect | TgtPrompt$ Select up to one target creature | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | SubAbility$ DBAnimate
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
