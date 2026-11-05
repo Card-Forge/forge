@@ -18,7 +18,6 @@
 package forge.game.mana;
 
 import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.Sets;
@@ -92,11 +91,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     /**
-     * <p>
      * willManaBeLostAtEndOfPhase.
      *
      * @return - whether floating mana will be lost if the current phase ended right now
-     * </p>
      */
     public final boolean willManaBeLostAtEndOfPhase() {
         if (floatingMana.isEmpty()) {
@@ -126,9 +123,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         floatingMana.clear();
     }
 
-    public final List<Mana> clearPool(boolean isEndOfPhase) {
+    public final Multiset<Mana> clearPool(boolean isEndOfPhase) {
         // isEndOfPhase parameter: true = end of phase, false = mana drain effect
-        List<Mana> cleared = Lists.newArrayList();
+        Multiset<Mana> cleared = HashMultiset.create();
         if (floatingMana.isEmpty()) { return cleared; }
 
         Byte convertTo = null;
@@ -178,9 +175,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 convertedMana.add(e.getElement().convertColor(convertTo), e.getCount());
             }
         } else {
-            cleared.addAll(filteredMana);
+            cleared = HashMultiset.create(filteredMana);
         }
-        floatingMana.removeIf(Predicate.not(retain)::test);
+        Multisets.removeOccurrences(floatingMana, cleared);
         if (convertedMana != null) {
             floatingMana.addAll(convertedMana);
         }
