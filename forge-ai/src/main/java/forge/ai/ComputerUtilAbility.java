@@ -346,8 +346,7 @@ public class ComputerUtilAbility {
         }
 
         // 50% of the time, prefer working towards the ultimate. Rolled per planeswalker and turn instead of per call,
-        // so the priority stays the same while sorting. SplittableRandom mixes its seed, unlike Random which gives
-        // nearly the same first roll for consecutive seeds.
+        // so the priority stays the same while sorting.
         private static boolean prefersPlusThisTurn(final Card pw) {
             final Game game = pw.getGame();
             return new SplittableRandom(Objects.hash(game.getId(), pw.getId(), game.getPhaseHandler().getTurn())).nextInt(2) < 1;
