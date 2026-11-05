@@ -7603,16 +7603,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
-        for (final SpellAbility sa : abilities) {
+        abilities.removeIf(sa -> {
             sa.setActivatingPlayer(player);
             // fix things like retrace
             // check only if SA can't be cast normally
-            if (!sa.canPlay(true) && (removeUnplayable || !sa.isPossible())) {
-                toRemove.add(sa);
-            }
-        }
-        abilities.removeAll(toRemove);
+            return !sa.canPlay(true) && (removeUnplayable || !sa.isPossible());
+        });
 
         return abilities;
     }

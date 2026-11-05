@@ -62,8 +62,7 @@ import java.util.*;
  * @author Forge
  * @version $Id: PhaseHandler.java 13001 2012-01-08 12:25:25Z Sloth $
  */
-public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
-    private static final long serialVersionUID = 5207222278370963197L;
+public class PhaseHandler implements IHasForgeLog {
 
     // used for debugging phase timing
     private final StopWatch sw = new StopWatch();
@@ -72,8 +71,8 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private PhaseType phase = null;
     private int turn = 0;
 
-    private final transient Stack<ExtraTurn> extraTurns = new Stack<>();
-    private final transient Map<PhaseType, Stack<ExtraPhase>> extraPhases = Maps.newEnumMap(PhaseType.class);
+    private final Stack<ExtraTurn> extraTurns = new Stack<>();
+    private final Map<PhaseType, Stack<ExtraPhase>> extraPhases = Maps.newEnumMap(PhaseType.class);
 
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
@@ -82,21 +81,21 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private int nEndOfTurnsThisTurn = 0;
     private int planarDiceSpecialActionThisTurn = 0;
 
-    private transient Player playerTurn = null;
-    private transient Player playerPreviousTurn = null;
+    private Player playerTurn = null;
+    private Player playerPreviousTurn = null;
 
     // priority player
 
-    private transient Player pPlayerPriority = null;
-    private transient Player pFirstPriority = null;
-    private transient Combat combat = null;
+    private Player pPlayerPriority = null;
+    private Player pFirstPriority = null;
+    private Combat combat = null;
     private boolean skipDamageSteps = false;
     private boolean bRepeatCleanup = false;
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
 
-    private final transient Game game;
+    private final Game game;
 
 
     public PhaseHandler(final Game game0) {
@@ -260,7 +259,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
             case COMBAT_BEGIN:
             case COMBAT_DECLARE_ATTACKERS:
-                return getActivePlayers().anyMatch(Player::isSkippingCombat);
+                return getActivePlayers().allMatch(Player::isInGame);
 
             case COMBAT_DECLARE_BLOCKERS:
                 skipDamageSteps = !inCombat() || combat.getAttackers().isEmpty();
@@ -690,7 +689,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             return;
         }
 
-        // Reset all active Triggers
         game.getTriggerHandler().resetActiveTriggers();
 
         // Prepare and fire event 'attackers declared'
@@ -1016,10 +1014,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         return nextPlayer;
     }
 
-    public final synchronized boolean is(final PhaseType phase0, final Player player0) {
+    public final boolean is(final PhaseType phase0, final Player player0) {
         return phase == phase0 && isPlayerTurn(player0);
     }
-    public final synchronized boolean is(final PhaseType phase0) {
+    public final boolean is(final PhaseType phase0) {
         return phase == phase0;
     }
 

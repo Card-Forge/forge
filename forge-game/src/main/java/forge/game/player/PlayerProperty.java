@@ -59,10 +59,6 @@ public class PlayerProperty {
             if (!game.getPhaseHandler().isPlayerTurn(player)) {
                 return false;
             }
-        } else if (property.equals("NonActive")) {
-            if (game.getPhaseHandler().isPlayerTurn(player)) {
-                return false;
-            }
         } else if (property.equals("Other")) {
             if (player.equals(sourceController)) {
                 return false;
