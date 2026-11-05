@@ -164,8 +164,8 @@ public class AbilityUtils {
             if (parent != null) {
                 parent.getTargets().getTargetCards().forEach(cards::add);
             }
-        }  else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
-            final SpellAbility root = ((SpellAbility)sa).getRootAbility();
+        }  else if (defined.startsWith("Triggered") && sa != null) {
+            final CardTraitBase root = sa instanceof SpellAbility ? ((SpellAbility)sa).getRootAbility() : sa;
             if (defined.contains("LKICopy")) { //Triggered*LKICopy
                 int lkiPosition = defined.indexOf("LKICopy");
                 AbilityKey type = AbilityKey.fromString(defined.substring(9, lkiPosition));
@@ -568,6 +568,43 @@ public class AbilityUtils {
             val = handlePaid(list, calcX[1], card, ability);
         }
 
+        else if (ability != null && (calcX[0].startsWith("TriggeredPlayers") || calcX[0].equals("TriggeredCardController"))) {
+            String key = calcX[0];
+            if (calcX[0].startsWith("TriggeredPlayers")) {
+                key = "Triggered" + key.substring(16);
+            }
+            val = playerXCount(getDefinedPlayers(card, key, ability), calcX[1], card, ability);
+        }
+        else if (ability != null && (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")
+                || calcX[0].startsWith("TriggeredDefendingPlayer") || calcX[0].startsWith("TriggeredActivator"))) {
+            final CardTraitBase root = ability instanceof SpellAbility sa ? sa.getRootAbility() : ability;
+            Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
+            val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
+        }
+
+        else if (ability != null && calcX[0].startsWith("TriggerCount")) {
+            // TriggerCount is similar to a regular Count, but just
+            // pulls Integer Values from Trigger objects
+            final CardTraitBase root = ability instanceof SpellAbility sa ? sa.getRootAbility() : ability;
+            final String[] l = calcX[1].split("/");
+            final String m = CardFactoryUtil.extractOperators(calcX[1]);
+            final Object to = root.getTriggeringObject(AbilityKey.fromString(l[0]));
+            Integer count = null;
+            if (to instanceof Iterable<?>) {
+                @SuppressWarnings("unchecked")
+                Iterable<Integer> numbers = (Iterable<Integer>) to;
+                if (calcX[0].endsWith("Max")) {
+                    count = Aggregates.max(numbers);
+                } else {
+                    count = Aggregates.sum(numbers);
+                }
+            } else {
+                count = (Integer) to;
+            }
+
+            val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
+        }
+
         // All the following only work for SpellAbilities
         else if (ability instanceof SpellAbility sa) {
             // Player attribute counting
@@ -621,44 +658,9 @@ public class AbilityUtils {
                 }
                 val = handlePaid(tgtList, calcX[1], card, ability);
             }
-            else if (calcX[0].startsWith("TriggeredPlayers") || calcX[0].equals("TriggeredCardController")) {
-                String key = calcX[0];
-                if (calcX[0].startsWith("TriggeredPlayers")) {
-                    key = "Triggered" + key.substring(16);
-                }
-                val = playerXCount(getDefinedPlayers(card, key, sa), calcX[1], card, ability);
-            }
-            else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")
-                    || calcX[0].startsWith("TriggeredDefendingPlayer") || calcX[0].startsWith("TriggeredActivator")) {
-                final SpellAbility root = sa.getRootAbility();
-                Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
-                val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
-            }
             else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("SpellTargeted")) {
                 final SpellAbility sat = Iterables.getFirst(getDefinedSpellAbilities(card, calcX[0], sa), null);
                 val = sat == null ? 0 : xCount(sat.getHostCard(), calcX[1], sat);
-            }
-            else if (calcX[0].startsWith("TriggerCount")) {
-                // TriggerCount is similar to a regular Count, but just
-                // pulls Integer Values from Trigger objects
-                final SpellAbility root = sa.getRootAbility();
-                final String[] l = calcX[1].split("/");
-                final String m = CardFactoryUtil.extractOperators(calcX[1]);
-                final Object to = root.getTriggeringObject(AbilityKey.fromString(l[0]));
-                Integer count = null;
-                if (to instanceof Iterable<?>) {
-                    @SuppressWarnings("unchecked")
-                    Iterable<Integer> numbers = (Iterable<Integer>) to;
-                    if (calcX[0].endsWith("Max")) {
-                        count = Aggregates.max(numbers);
-                    } else {
-                        count = Aggregates.sum(numbers);
-                    }
-                } else {
-                    count = (Integer) to;
-                }
-
-                val = doXMath(Objects.requireNonNullElse(count, 0), m, card, ability);
             }
             else if (calcX[0].startsWith("ReplaceCount")) {
                 // ReplaceCount is similar to a regular Count, but just
@@ -1010,12 +1012,12 @@ public class AbilityUtils {
             }
         } else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
             addPlayer(sa.getTriggerRemembered(), defined, players);
-        } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
+        } else if (defined.startsWith("Triggered") && sa != null) {
             String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
             if (defined.endsWith("AndYou")) {
-                players.add(((SpellAbility)sa).getActivatingPlayer());
+                players.add(player);
             }
-            final SpellAbility root = ((SpellAbility)sa).getRootAbility();
+            final CardTraitBase root = sa instanceof SpellAbility ? ((SpellAbility)sa).getRootAbility() : sa;
             Object o = null;
             if (defParsed.endsWith("Controller")) {
                 final boolean orCont = defParsed.endsWith("OrController") || defParsed.endsWith("OriginalController");
@@ -1253,8 +1255,8 @@ public class AbilityUtils {
             if (spell != null) {
                 sas.add(spell);
             }
-        } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
-            final SpellAbility root = ((SpellAbility)sa).getRootAbility();
+        } else if (defined.startsWith("Triggered") && sa != null) {
+            final CardTraitBase root = sa instanceof SpellAbility ? ((SpellAbility)sa).getRootAbility() : sa;
 
             final String triggeringType = defined.substring(9);
             final Object o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
