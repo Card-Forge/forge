@@ -154,4 +154,29 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
         AssertJUnit.assertNotNull("the Will is cast with 5 mana and a Time Walk to replay",
                 forge.ai.simulation.WillReplay.sureCast(ai, candidates));
     }
+
+    /** Chalice of the Void is cast for the X that hits none of the AI's own spells, not for all the mana. */
+    @Test
+    public void chaliceTakesTheXThatDoesNotHitTheOwnSpells() {
+        setUp();
+        for (int i = 0; i < 3; i++) {
+            addCardToZone("Runeclaw Bear", ai, ZoneType.Hand); // mana value 2
+        }
+        final Card chalice = addCardToZone("Chalice of the Void", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("X = 1 with a hand of two drops, not the 4 that could be paid", 1,
+                forge.ai.simulation.XChoice.adjust(ai, chalice.getFirstSpellAbility(), 4));
+        AssertJUnit.assertEquals("with no mana for more than 0", 0, forge.ai.simulation.XChoice.adjust(ai, chalice.getFirstSpellAbility(), 0));
+    }
+
+    /** X damage is not paid beyond what kills: the life of the opponent. */
+    @Test
+    public void xDamageIsNotPaidBeyondLethal() {
+        setUp();
+        opp.setLife(5, null);
+        final Card fireball = addCardToZone("Fireball", ai, ZoneType.Hand);
+        AssertJUnit.assertEquals("5 damage kills, the other mana is kept", 5,
+                forge.ai.simulation.XChoice.adjust(ai, fireball.getFirstSpellAbility(), 9));
+        AssertJUnit.assertEquals("never more than can be paid", 3,
+                forge.ai.simulation.XChoice.adjust(ai, fireball.getFirstSpellAbility(), 3));
+    }
 }

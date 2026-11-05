@@ -37,7 +37,8 @@ public final class AntiCombo {
     static final int RANK_BONUS = 10000;
 
     public static boolean isKey(final Card c) {
-        return c != null && AiCardLists.has(AiCardLists.Role.ANTI_COMBO_KEY, c.getName());
+        return c != null && (AiCardLists.has(AiCardLists.Role.ANTI_COMBO_KEY, c.getName())
+                || AiCardLists.has(AiCardLists.Role.ANTI_COMBO_SEEN, c.getName()));
     }
 
     /** The weight of a card: a key, a piece or nothing. */

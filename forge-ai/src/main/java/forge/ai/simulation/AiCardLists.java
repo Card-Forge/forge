@@ -38,6 +38,8 @@ public final class AiCardLists {
         ANTI_COMBO_KEY,
         /** What a combo deck needs around its keys: rituals, cheap tutors and draw (half the weight of a key). */
         ANTI_COMBO_PIECE,
+        /** More cards the opponents' combos are made of: counted as keys by AntiCombo, but not a card Flat MC plays. */
+        ANTI_COMBO_SEEN,
         /** Permanents that give an opponent a creature on demand: Forbidden Orchard's tokens set Oath of Druids off (see OathTiming). */
         GIVES_OPPONENT_CREATURE,
         /** Doomsday itself: it keeps five cards of the library and graveyard (see DoomsdayPile). */
@@ -190,7 +192,7 @@ public final class AiCardLists {
             return false;
         }
         for (final Role role : Role.values()) {
-            if (has(role, cardName)) {
+            if (role != Role.ANTI_COMBO_SEEN && has(role, cardName)) {
                 return true;
             }
         }
