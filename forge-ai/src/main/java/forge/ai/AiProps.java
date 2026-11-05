@@ -188,7 +188,8 @@ public enum AiProps {
     FLAT_MC_LAND_CHOICE("true"),
     /** Plan the next land drops against the colours and costs of the hand and the commander (see LandPlanner). */
     LAND_PLANNER("true"),
-    FLAT_MC_REACTIVE("true");
+    FLAT_MC_REACTIVE("true"),
+    SHORTCUT_MIN_CREATURES("10");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

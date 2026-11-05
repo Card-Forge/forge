@@ -1448,7 +1448,7 @@ public class AiController {
         Object limit = null;
         try {
             // constructed before arming and inside the try: a throwing constructor can no longer leak begin()/arm()
-            final AiBlockController block = new AiBlockController(defender, defender != player);
+            final AiBlockController block = new AiBlockController(defender, player);
             limit = AITimeoutTracker.arm(AITimeoutTracker.deadlineNanos(id, timeoutNanos), false);
             try {
                 // When player != defender, AI should declare blockers for its benefit.
@@ -1675,7 +1675,7 @@ public class AiController {
     }
 
     private List<SpellAbility> chooseSpellAbilityToPlayImpl() {
-        AiCache.clear();
+        AiCache.clear(AiCache.Scope.PRIORITY);
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;

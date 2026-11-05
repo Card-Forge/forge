@@ -44,7 +44,7 @@ public class AITimeoutBlockValidityTest extends SimulationTest {
         final Combat combat = attack(game, attacker, ai, brute);
         combat.addBlocker(brute, bear); // illegal on its own: menace needs two blockers
 
-        new AiBlockController(ai, false).completeRequiredBlocks(combat);
+        new AiBlockController(ai, ai).completeRequiredBlocks(combat);
 
         Assert.assertTrue(combat.getBlockers(brute).isEmpty(), "single block on a menace attacker must be removed");
         assertNoIllegalBlocks(combat);
@@ -63,7 +63,7 @@ public class AITimeoutBlockValidityTest extends SimulationTest {
         combat.addBlocker(brute, bear1);
         combat.addBlocker(brute, bear2);
 
-        new AiBlockController(ai, false).completeRequiredBlocks(combat);
+        new AiBlockController(ai, ai).completeRequiredBlocks(combat);
 
         Assert.assertEquals(combat.getBlockers(brute).size(), 2, "a legal gang block must survive the validity pass");
     }
