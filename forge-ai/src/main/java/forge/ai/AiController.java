@@ -1878,6 +1878,14 @@ public class AiController {
         }
 
         if (topOwnedByAI && flatMonteCarloActive()) {
+            // Thassa's Oracle trigger on the stack: Demonic Consultation exiles the library in response, the Oracle wins
+            final SpellAbility consultation = ConsultationWin.response(player);
+            if (consultation != null) {
+                return consultation;
+            }
+        }
+
+        if (topOwnedByAI && flatMonteCarloActive()) {
             // Breakthrough on the stack: Lion's Eye Diamond puts the dredgers into the graveyard before the four draws
             final SpellAbility diamond = DredgeLine.response(player, deckPlan(player).combos);
             if (diamond != null) {
@@ -1938,6 +1946,18 @@ public class AiController {
             }
         }
         if (flatMonteCarloActive()) {
+            final SpellAbility oracle = ConsultationWin.sureCast(player, saList);
+            if (oracle != null) {
+                return oracle; // Thassa's Oracle with Demonic Consultation in hand: cast it, the Consultation answers its trigger
+            }
+            final SpellAbility will = WillReplay.sureCast(player, saList);
+            if (will != null) {
+                return will; // Yawgmoth's Will with Time Walk, a Mox or Black Lotus in the graveyard
+            }
+            final SpellAbility orchard = OathTiming.sureCast(player);
+            if (orchard != null) {
+                return orchard; // Oath of Druids: the opponent is given a creature at its end step so that the upkeep trigger works
+            }
             final SpellAbility dreadReturn = DreadReturnWin.sureCast(player, saList);
             if (dreadReturn != null) {
                 return dreadReturn; // Oops! All Spells: the flashback of Dread Return brings the Oracle back to an empty library

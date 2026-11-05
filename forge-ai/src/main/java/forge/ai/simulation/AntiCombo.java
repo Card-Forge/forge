@@ -48,7 +48,7 @@ public final class AntiCombo {
         if (isKey(c)) {
             return KEY_WEIGHT;
         }
-        return AiCardLists.has(AiCardLists.Role.ANTI_COMBO_PIECE, c.getName()) ? PIECE_WEIGHT : 0;
+        return AiCardLists.has(AiCardLists.Role.ANTI_COMBO_PIECE, c.getName()) || ComboCatalog.isPiece(c) ? PIECE_WEIGHT : 0;
     }
 
     /** The rank a target gets for being dangerous: only a card the opponents of the AI control. */
@@ -56,7 +56,8 @@ public final class AntiCombo {
         if (ai == null || c == null || c.getController() == null || !c.getController().isOpponentOf(ai)) {
             return 0;
         }
-        return weight(c) * RANK_BONUS / KEY_WEIGHT;
+        // a card that fills a slot of a known combo (ComboCatalog) is aimed at as well, more so when it completes one
+        return Math.max(weight(c) * RANK_BONUS / KEY_WEIGHT, ComboCatalog.rankPercent(ai, c) * RANK_BONUS / 100);
     }
 
     /** The visible threat of the opponents, 0 when none. */
@@ -85,6 +86,7 @@ public final class AntiCombo {
         if (keys >= 2) {
             total = total * SYNERGY_PERCENT / 100;
         }
+        total += ComboCatalog.visibleThreat(ai); // every slot of a known combo in view
         return Math.min(total, CAP);
     }
 
@@ -111,6 +113,6 @@ public final class AntiCombo {
 
     /** For a failure message: what the AI sees of the opponents' combos. */
     public static String describe(final Player ai) {
-        return "threat " + threat(ai) + " from " + threats(ai);
+        return "threat " + threat(ai) + " from " + threats(ai) + ", combos in view " + ComboCatalog.visibleCombos(ai);
     }
 }

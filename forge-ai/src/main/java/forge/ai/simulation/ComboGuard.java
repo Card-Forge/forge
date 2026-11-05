@@ -140,6 +140,14 @@ public final class ComboGuard {
         if (walled != null) {
             return walled;
         }
+        // a creature land (Mutavault) animated with nothing to attack or block with it only wastes the mana
+        if (wastedManland(ai, sa, host)) {
+            return "manland-wasted";
+        }
+        // Demonic Consultation exiles the library: only to win, with the Oracle's trigger on the stack (ConsultationWin)
+        if (ConsultationWin.isConsultation(sa) && !ConsultationWin.winnerOnStack(ai.getGame(), ai)) {
+            return "consultation-no-winner";
+        }
         // Doomsday without the Oracle in hand (or the life, or a library to cut) only throws the deck away
         if (sa.isSpell() && DoomsdayPile.isDoomsday(host) && !DoomsdayPile.ready(ai)) {
             return "doomsday-not-ready";
@@ -184,6 +192,38 @@ public final class ComboGuard {
      * give up a piece of the combos of the deck or one of its win cards, going by the creature the AI picks for such
      * a cost. A deck without a combo plan and a cost that sacrifices the card itself are never a problem.
      */
+    /**
+     * A land that animates itself until end of turn (Mutavault, Stirring Wildwood): worth the mana only in the
+     * AI's main phase or beginning of combat when it can attack (untapped, not summoning sick, not a creature yet), or
+     * on the opponent's turn once attackers are declared, to block. Anything else, and a second animation, is waste.
+     */
+    static boolean wastedManland(final Player ai, final SpellAbility sa, final Card host) {
+        if (sa == null || !sa.isAbility() || sa.getApi() != ApiType.Animate || host == null || !host.isLand()
+                || !ai.equals(host.getController()) || !"Self".equals(sa.getParamOrDefault("Defined", ""))
+                || !host.isInZone(forge.game.zone.ZoneType.Battlefield)) {
+            return false;
+        }
+        if (host.isCreature()) {
+            return true; // already a creature this turn
+        }
+        final forge.game.phase.PhaseHandler ph = ai.getGame().getPhaseHandler();
+        if (ph.isPlayerTurn(ai)) {
+            final boolean timing = ph.is(forge.game.phase.PhaseType.MAIN1) || ph.is(forge.game.phase.PhaseType.COMBAT_BEGIN);
+            if (!timing || host.isTapped() || host.hasSickness()) {
+                return true;
+            }
+            for (final Player opp : ai.getOpponents()) {
+                if (opp.getLife() > 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        final forge.game.combat.Combat combat = ph.getCombat();
+        return !ph.is(forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS) || combat == null
+                || combat.getAttackers().isEmpty() || host.isTapped();
+    }
+
     private static final Pattern PACT_COST = Pattern.compile("UnlessCost\\$\\s*([^|]+)");
 
     /**

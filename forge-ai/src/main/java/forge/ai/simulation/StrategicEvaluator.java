@@ -61,6 +61,7 @@ final class StrategicEvaluator {
             adj += answerTerm(simAi);
             adj += threatQualityTerm(simAi);
             adj += planTerm(simAi, cfg.plan);
+            adj += ComboCatalog.term(simAi); // a known combo assembled in the hand and on the battlefield
             adj += AntiCombo.term(simAi); // the combo pieces the opponents have in play, on the stack or to bring back
         } catch (final RuntimeException e) {
             return 0; // a refinement only: never let it break a rollout

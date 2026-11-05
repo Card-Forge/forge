@@ -38,6 +38,8 @@ public final class AiCardLists {
         ANTI_COMBO_KEY,
         /** What a combo deck needs around its keys: rituals, cheap tutors and draw (half the weight of a key). */
         ANTI_COMBO_PIECE,
+        /** Permanents that give an opponent a creature on demand: Forbidden Orchard's tokens set Oath of Druids off (see OathTiming). */
+        GIVES_OPPONENT_CREATURE,
         /** Doomsday itself: it keeps five cards of the library and graveyard (see DoomsdayPile). */
         DOOMSDAY,
         /** Cards that draw for next to nothing, the pile Doomsday keeps (Gitaxian Probe, Street Wraith, Gush...). */

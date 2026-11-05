@@ -64,6 +64,16 @@ public final class VaultLoop {
         return null;
     }
 
+    /** The first card that untaps an artifact, of any type: Tezzeret, Cruel Captain is a planeswalker, not an artifact. */
+    private static Card untapper(final CardCollectionView cards) {
+        for (final Card c : cards) {
+            if (isUntapper(c)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
     private static boolean isPiece(final Card c) {
         return isVault(c) || c.isArtifact() && isUntapper(c);
     }
@@ -172,7 +182,11 @@ public final class VaultLoop {
             return paradox;
         }
         final SpellAbility tinker = tinkerStep(ai, candidates);
-        return tinker != null ? tinker : bringBack(ai, candidates);
+        if (tinker != null) {
+            return tinker;
+        }
+        final SpellAbility oswald = oswaldStep(ai, candidates);
+        return oswald != null ? oswald : bringBack(ai, candidates);
     }
 
     /**
@@ -301,14 +315,36 @@ public final class VaultLoop {
         final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
         final Card vaultOption = first(options, true);
         final Card keyOption = first(options, false);
-        if (vaultOption != null && first(board, true) == null
-                && (first(board, false) != null || first(ai.getCardsIn(ZoneType.Hand), false) != null)) {
-            return vaultOption;
+        final boolean vaultInPlay = first(board, true) != null;
+        if (vaultOption != null && !vaultInPlay
+                && (untapper(board) != null || untapper(ai.getCardsIn(ZoneType.Hand)) != null)) {
+            return vaultOption; // the key (Manifold Key, or Tezzeret in play or in hand) is there: the vault, never The One Ring
         }
-        if (keyOption != null && first(board, true) != null && first(board, false) == null) {
+        if (keyOption != null && vaultInPlay && untapper(board) == null) {
             return keyOption;
         }
+        if (vaultOption == null && !vaultInPlay && inDeck(ai)) {
+            return stepToVault(options); // Oswald Fiddlebender: a stepping stone toward the vault, not a piece
+        }
         return null;
+    }
+
+    /** An artifact that is neither the vault nor what untaps it and costs 1 or more: the next sacrifice of Oswald Fiddlebender. */
+    private static Card stepToVault(final CardCollectionView options) {
+        Card best = null;
+        for (final Card c : options) {
+            if (c.isArtifact() && !isPiece(c) && !isUntapper(c) && !isProtected(c) && c.getCMC() >= 1
+                    && (best == null || c.getCMC() < best.getCMC())) {
+                best = c;
+            }
+        }
+        return best;
+    }
+
+    /** The mana that wins games by itself is not thrown away as the fodder of a sacrifice. */
+    private static boolean isProtected(final Card c) {
+        final String n = c.getName();
+        return "Black Lotus".equals(n) || "Mana Crypt".equals(n);
     }
 
     /**
@@ -319,8 +355,8 @@ public final class VaultLoop {
         final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
         final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
         final boolean needVault = first(board, true) == null && first(library, true) != null
-                && (first(board, false) != null || first(ai.getCardsIn(ZoneType.Hand), false) != null);
-        final boolean needKey = first(board, true) != null && first(board, false) == null && first(library, false) != null;
+                && (untapper(board) != null || untapper(ai.getCardsIn(ZoneType.Hand)) != null);
+        final boolean needKey = first(board, true) != null && untapper(board) == null && first(library, false) != null;
         if (!needVault && !needKey) {
             return null;
         }
@@ -354,6 +390,89 @@ public final class VaultLoop {
         return null;
     }
 
+
+    /** Oswald Fiddlebender: tap and sacrifice an artifact to fetch one that costs exactly one more. */
+    private static boolean isOswald(final SpellAbility sa, final Player ai) {
+        final Card host = sa == null ? null : sa.getHostCard();
+        return host != null && host.isCreature() && host.isInZone(ZoneType.Battlefield) && ai.equals(host.getController())
+                && sa.isAbility() && sa.getApi() == ApiType.ChangeZone
+                && "Library".equals(sa.getParamOrDefault("Origin", "")) && "Battlefield".equals(sa.getParamOrDefault("Destination", ""))
+                && sa.getParamOrDefault("ChangeType", "").contains("cmcEQX")
+                && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)
+                && sa.getPayCosts().hasTapCost();
+    }
+
+    /** An artifact of the AI that may be sacrificed for the loop: not the vault, not what untaps, not the fast mana. */
+    private static boolean isFodder(final Card c) {
+        return c.isArtifact() && !isPiece(c) && !isUntapper(c) && !isProtected(c);
+    }
+
+    /**
+     * Oswald Fiddlebender (Magical Tinkering): the sacrifice decides what comes: an artifact that costs one less than the
+     * vault brings the vault, one that costs one less than the key brings the key. Without such an artifact the
+     * cheapest one is traded up toward it (a Moxen for a one drop, the one drop for the vault). The sacrifice is
+     * chosen through the AIPreferenceOverride of the card, which the cost payment reads (never a piece of the loop).
+     */
+    private static SpellAbility oswaldStep(final Player ai, final List<SpellAbility> candidates) {
+        final CardCollectionView board = ai.getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
+        Card goal = null;
+        if (first(board, true) == null) {
+            goal = first(library, true);
+        } else if (untapper(board) == null) {
+            goal = first(library, false);
+        }
+        for (final SpellAbility sa : candidates) {
+            if (!isOswald(sa, ai)) {
+                continue;
+            }
+            final Card host = sa.getHostCard();
+            host.removeSVar("AIPreferenceOverride"); // a choice of an earlier turn must not stay
+            if (goal == null || host.isTapped()) {
+                continue;
+            }
+            // the sacrifices on offer, by mana value
+            int sacCmc = -1;
+            final int want = goal.getCMC() - 1;
+            Card lowest = null;
+            for (final Card c : board) {
+                if (!isFodder(c)) {
+                    continue;
+                }
+                if (c.getCMC() == want) {
+                    sacCmc = want;
+                    break;
+                }
+                if (c.getCMC() < want && (lowest == null || c.getCMC() < lowest.getCMC())) {
+                    lowest = c;
+                }
+            }
+            if (sacCmc < 0 && lowest != null) {
+                // a stepping stone: the library must have an artifact that costs one more than the cheapest fodder
+                for (final Card c : library) {
+                    if (c.isArtifact() && !isPiece(c) && !isUntapper(c) && !isProtected(c) && c.getCMC() == lowest.getCMC() + 1) {
+                        sacCmc = lowest.getCMC();
+                        break;
+                    }
+                }
+            }
+            if (sacCmc < 0) {
+                continue;
+            }
+            final StringBuilder valid = new StringBuilder("Artifact.cmcEQ").append(sacCmc);
+            for (final Card c : board) {
+                if (c.isArtifact() && !isFodder(c)) {
+                    valid.append("+!named").append(c.getName());
+                }
+            }
+            host.setSVar("AIPreferenceOverride", valid.toString());
+            if (playable(ai, sa)) {
+                return sa;
+            }
+            host.removeSVar("AIPreferenceOverride");
+        }
+        return null;
+    }
 
     /** Goblin Welder or Goblin Engineer: a piece of the loop from the graveyard onto the battlefield. */
     private static SpellAbility bringBack(final Player ai, final List<SpellAbility> candidates) {
