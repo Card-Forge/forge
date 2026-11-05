@@ -26,13 +26,13 @@ public class TriggerDamageAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         CardDamageTable table = (CardDamageTable) runParams.get(AbilityKey.DamageMap);
         table = table.filteredMap(getParam("ValidSource"), getParam("ValidTarget"), getHostCard(), this);
 
-        sa.setTriggeringObject(AbilityKey.DamageAmount, table.totalAmount());
-        sa.setTriggeringObject(AbilityKey.Sources, table.rowKeySet());
-        sa.setTriggeringObject(AbilityKey.Targets, table.columnKeySet());
+        objects.put(AbilityKey.DamageAmount, table.totalAmount());
+        objects.put(AbilityKey.Sources, table.rowKeySet());
+        objects.put(AbilityKey.Targets, table.columnKeySet());
     }
 
     @Override

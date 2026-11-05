@@ -32,7 +32,7 @@ public class TriggerConjureAll extends Trigger {
     }
 
     @Override
-    public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public void setTriggeringObjects(Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         CardCollection cards = (CardCollection) runParams.get(AbilityKey.Cards);
 
         if (hasParam("ValidCard")) {
@@ -40,9 +40,9 @@ public class TriggerConjureAll extends Trigger {
                     getHostCard(), this);
         }
 
-        sa.setTriggeringObject(AbilityKey.Cards, cards);
-        //sa.setTriggeringObject(AbilityKey.Amount, cards.size()) -- currently don't need
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Cause);
+        objects.put(AbilityKey.Cards, cards);
+        //objects.put(AbilityKey.Amount, cards.size()) -- currently don't need
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player, AbilityKey.Cause);
     }
 
     @Override
