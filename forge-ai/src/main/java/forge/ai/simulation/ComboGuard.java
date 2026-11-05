@@ -603,7 +603,7 @@ public final class ComboGuard {
         }
         final List<Card> attackNow = new ArrayList<>();
         final List<Card> attackLater = new ArrayList<>();
-        final boolean combatToCome = ph.getPlayerTurn() == ai && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS);
+        final boolean combatToCome = ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS);
         for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isCreature()) {
                 continue;

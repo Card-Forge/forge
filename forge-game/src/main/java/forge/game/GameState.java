@@ -62,7 +62,6 @@ public class GameState {
         private String manaPool = "";
         private String persistentMana = "";
         private int landsPlayed = 0;
-        private int landsPlayedLastTurn = 0;
         private int numRingTemptedYou = 0;
         private int speed = 0;
         private String precast = null;
@@ -137,7 +136,6 @@ public class GameState {
             String prefix = "p" + playerIndex++;
             sb.append(TextUtil.concatNoSpace(prefix + "life=", String.valueOf(p.life), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "landsplayed=", String.valueOf(p.landsPlayed), "\n"));
-            sb.append(TextUtil.concatNoSpace(prefix + "landsplayedlastturn=", String.valueOf(p.landsPlayedLastTurn), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "numringtemptedyou=", String.valueOf(p.numRingTemptedYou), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "speed=", String.valueOf(p.speed), "\n"));
             if (!p.counters.isEmpty()) {
@@ -166,7 +164,6 @@ public class GameState {
             PlayerState p = new PlayerState();
             p.life = player.getLife();
             p.landsPlayed = player.getLandsPlayedThisTurn();
-            p.landsPlayedLastTurn = player.getLandsPlayedLastTurn();
             p.counters = countersToString(player.getCounters());
             p.manaPool = processManaPool(player.getManaPool());
             p.numRingTemptedYou = player.getNumRingTemptedYou();
@@ -573,8 +570,6 @@ public class GameState {
             getPlayerState(categoryName).counters = categoryValue;
         } else if (categoryName.endsWith("landsplayed")) {
             getPlayerState(categoryName).landsPlayed = Integer.parseInt(categoryValue);
-        } else if (categoryName.endsWith("landsplayedlastturn")) {
-            getPlayerState(categoryName).landsPlayedLastTurn = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("numringtemptedyou")) {
             getPlayerState(categoryName).numRingTemptedYou = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("speed")) {
@@ -1182,7 +1177,6 @@ public class GameState {
 
         if (state.life >= 0) p.setLife(state.life, null);
         p.setLandsPlayedThisTurn(state.landsPlayed);
-        p.setLandsPlayedLastTurn(state.landsPlayedLastTurn);
         p.setNumRingTemptedYou(state.numRingTemptedYou);
         p.setSpeed(state.speed);
 
@@ -1236,9 +1230,12 @@ public class GameState {
         updateManaPool(p, state.manaPool, true, false);
         updateManaPool(p, state.persistentMana, false, true);
 
-        if (!state.counters.isEmpty()) {
+        if (state.counters.isEmpty()) {
+            p.clearCounters();
+        } else {
             applyCountersToGameEntity(p, state.counters);
         }
+
         if (state.numRingTemptedYou > 0) {
             //setup all levels
             for (int i = 1; i <= state.numRingTemptedYou; i++) {
