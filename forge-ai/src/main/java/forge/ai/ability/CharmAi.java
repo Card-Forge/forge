@@ -359,4 +359,13 @@ public class CharmAi extends SpellAbilityAi {
         return super.chkDrawbackWithSubs(aiPlayer, ab);
     }
 
+    @Override
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        // trying to retarget a copied spell, so leave the modes alone
+        if (sa.isCopied()) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
+    }
+
 }
