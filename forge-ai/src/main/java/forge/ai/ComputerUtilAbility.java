@@ -4,8 +4,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 import java.util.Set;
+import java.util.SplittableRandom;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
@@ -351,7 +351,8 @@ public class ComputerUtilAbility {
         // 50% of the time, prefer working towards the ultimate. Rolled per planeswalker and turn instead of per call,
         // so the priority stays the same while sorting.
         private static boolean prefersPlusThisTurn(final Card pw) {
-            return new Random(Objects.hash(pw.getId(), pw.getGame().getPhaseHandler().getTurn())).nextInt(2) < 1;
+            final Game game = pw.getGame();
+            return new SplittableRandom(Objects.hash(game.getId(), pw.getId(), game.getPhaseHandler().getTurn())).nextInt(2) < 1;
         }
 
         // Could the damage or life loss of this ability be lethal for an opponent
