@@ -346,10 +346,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
                 // get a mana of this type from floating, bail if none available
                 final Mana mana = CostPayment.getMana(owner, part, sa, hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
-                if (mana != null) {
-                    if (tryPayCostWithMana(sa, cost, mana, test)) {
-                        manaSpentToPay.add(mana);
-                    }
+                if (mana != null && tryPayCostWithMana(sa, cost, mana, test)) {
+                    manaSpentToPay.add(mana);
                 }
             }
         }

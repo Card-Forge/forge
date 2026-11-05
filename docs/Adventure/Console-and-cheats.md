@@ -12,7 +12,7 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 
 | Command Example | Description |
 | -- | -- |
-| clearnosell | Removes all 'no sell value' cards you own, that are not used in a deck, from your inventory |
+| clearnosell | Removes all 'no sell value' cards you own from your inventory |
 | crack | Cracks a random item you have equipped |
 | fly &lt;duration&gt; | Allows you to walk over obstacles in the overworld or POI map for a number of seconds (currently useless in POIs, in which there will only be a visual effect on the player sprite) |
 | give boosters &lt;edition code&gt; \[amount\] | Adds a booster of a set (case-insensitive; for example, the edition code for "Limited Edition Beta" is LEB) |
@@ -32,6 +32,7 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 | remove enemy all | Removes all the enemies from the POI map or the overworld |
 | remove enemy nearest | Removes the nearest overworld enemy |
 | remove enemy &lt;object id&gt; | Removes a specific enemy from the current POI map (enemy object ids are defined in the POI's *.tmx file) |
+| rename &lt;name&gt; | Renames the current player (use quotes for names with spaces) |
 | set event &lt;block name or edition code&gt; \[event format\] | Sets the competitive event at the current town POI with an inn (format is case-insensitive, such as Draft, Jumpstart, or Sealed; an omitted format will default to Draft, or Jumpstart for a Jumpstart block like "Dominaria United Jumpstart"; blocks are defined in blocks.txt; Constructed events are not currently implemented) |
 | setColorID &lt;color letters&gt; | Sets the player color identity (one or more of WUBRGC, one word, case-insensitive); probably used for testing and shops |
 | spawn enemy &lt;name&gt; | Spawns an enemy nearby in the overworld (not in a POI map; use a name or nameOverride defined in enemies.json, case-sensitive, as seen in-game) |

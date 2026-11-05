@@ -1,0 +1,11 @@
+Name:The Wasp, Winsome Avenger
+ManaCost:1 U
+Types:Legendary Creature Human Hero
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When NICKNAME enters, target Hero gains hexproof until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Hero | KW$ Hexproof
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever NICKNAME attacks, tap target creature defending player controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls
+Oracle:Flash\nFlying\nWhen The Wasp enters, target Hero gains hexproof until end of turn.\nWhenever The Wasp attacks, tap target creature defending player controls.

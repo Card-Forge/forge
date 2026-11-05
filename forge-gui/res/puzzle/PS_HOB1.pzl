@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - The Hobbit #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/08/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Start at the beginning of your upkeep and win this turn! Assume any cards you could draw are not relevant to the solution. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=UPKEEP
+p0life=20
+p0hand=Go Nuts!;Gollum the Abandoned;Lifecraft Engine;Bilbo's Deadly Slice;Chief of the Wilds;My Precious
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Rhovanion Rampager;Wargling|Counters:P1P1=1;Dependable Quinjet;Swamp;Swamp;Forest;Forest;Forest
+p1life=10
+p1battlefield=Beorn, Reluctant Host;Bombur, Gentle Dreamer

@@ -1,5 +1,6 @@
 package forge.ai.controller;
 
+import forge.ai.ComputerUtilMana;
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.Plan;
 import forge.ai.simulation.SimulationTest;
@@ -39,7 +40,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(mindstone.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -69,7 +70,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(dragon.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -103,7 +104,7 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(p);
         int score = sim.simulateSpellAbility(bears.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
@@ -135,12 +136,32 @@ public class AutoPaymentTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertTrue(sa.getHostCard().isCreature());
 
         // AI able to cast both creatures
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(2, plan.getDecisions().size());
+    }
+
+    @Test
+    public void useRequiredMultiManaSourceFirst() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card ring = addCard("Sol Ring", p);
+        addCard("Chromatic Orrery", p);
+        Card golem = addCardToZone("Steel Golem", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = golem.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertTrue(ComputerUtilMana.payManaCost(sa.getPayCosts(), p, sa, false));
+
+        // the Orrery is needed either way and covers the cost alone, so the Ring stays untapped
+        AssertJUnit.assertTrue(ring.isUntapped());
     }
 }

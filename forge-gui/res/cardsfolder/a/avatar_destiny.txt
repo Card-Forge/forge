@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Enchantment Aura
 K:Enchant:Creature.YouCtrl:creature you control
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddType$ Avatar | Description$ Enchanted creature gets +1/+1 for each creature card in your graveyard and is an Avatar in addition to its other types.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddPower$ X | AddToughness$ X | AddType$ Avatar | Description$ Enchanted creature gets +1/+1 for each creature card in your graveyard and is an Avatar in addition to its other types.
 T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigMill | TriggerDescription$ When enchanted creature dies, mill cards equal to its power. Return this card to its owner's hand and up to one creature card milled this way to the battlefield under your control.
 SVar:TrigMill:DB$ Mill | NumCards$ Y | RememberMilled$ True | SubAbility$ DBReturnAura
 SVar:DBReturnAura:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self | SubAbility$ DBReturnCreature

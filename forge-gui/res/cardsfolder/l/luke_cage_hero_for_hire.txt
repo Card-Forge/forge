@@ -1,0 +1,10 @@
+Name:Luke Cage, Hero for Hire
+ManaCost:2 R R
+Types:Legendary Creature Human Mercenary Hero
+PT:4/4
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:Trample\nAt the beginning of combat on your turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

@@ -1,0 +1,7 @@
+Name:Castle Doom
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Artifact | SpellDescription$ Add one mana of any color. Spend this mana only to cast an artifact spell.
+A:AB$ Token | Cost$ 3 T Sac<1/Artifact> | TokenOwner$ You | TokenScript$ doombot | SorcerySpeed$ True | SpellDescription$ Create a 3/3 colorless Robot Villain artifact creature token named Doombot. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast an artifact spell.\n{3}, {T}, Sacrifice an artifact: Create a 3/3 colorless Robot Villain artifact creature token named Doombot. Activate only as a sorcery.

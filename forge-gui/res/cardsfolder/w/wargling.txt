@@ -1,0 +1,9 @@
+Name:Wargling
+ManaCost:1 G
+Types:Creature Wolf
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+powerGE4 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, until end of turn, this creature gets +1/+0 and creatures you control gain trample.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample
+SVar:HasAttackEffect:TRUE
+Oracle:Ferocious — Whenever this creature attacks while you control a creature with power 4 or greater, until end of turn, this creature gets +1/+0 and creatures you control gain trample.

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - The Hobbit #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/09/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You don't have an enduring story. Remember that your solution must satisfy all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=The Lord of the Eagles;Assimilation Aegis;Lotus Ring;Skateboard
+p0battlefield=Kíli the Resourceful;Mischievous Mystic;T:u_1_1_faerie_flying;Plains;Plains;Island;Island;Island
+p1life=11
+p1battlefield=Kellan, the Fae-Blooded;Twining Twins

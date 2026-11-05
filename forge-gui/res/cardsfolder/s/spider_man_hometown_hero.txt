@@ -1,0 +1,9 @@
+Name:Spider-Man, Hometown Hero
+ManaCost:4 R
+Types:Legendary Creature Spider Human Hero
+PT:5/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ When NICKNAME enters, target creature with power 2 or less can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Reach (This creature can block creatures with flying.)\nWhen Spider-Man enters, target creature with power 2 or less can't be blocked this turn.

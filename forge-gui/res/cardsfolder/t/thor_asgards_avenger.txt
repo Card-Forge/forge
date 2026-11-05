@@ -1,0 +1,9 @@
+Name:Thor, Asgard's Avenger
+ManaCost:2 R R
+Types:Legendary Creature God Warrior Hero
+PT:4/4
+K:Flying
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Other+YouCtrl | ValidTarget$ Player.Opponent,Permanent.OppCtrl | ReplaceWith$ DmgPlus2 | Description$ If another source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
+SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+Oracle:Flying\nIf another source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.

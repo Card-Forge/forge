@@ -21,9 +21,14 @@ public class TriggerRolledDieOnce extends Trigger {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
+
         if (hasParam("RolledToVisitAttractions")) {
             if (!(boolean) runParams.getOrDefault(AbilityKey.RolledToVisitAttractions, false))
                 return false;
+        }
+
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.SourceSA))) {
+            return false;
         }
         return true;
     }
@@ -31,7 +36,7 @@ public class TriggerRolledDieOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Result, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Result, AbilityKey.Player, AbilityKey.SourceSA);
     }
 
     @Override

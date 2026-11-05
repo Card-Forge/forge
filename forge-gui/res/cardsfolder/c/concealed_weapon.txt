@@ -2,7 +2,7 @@ Name:Concealed Weapon
 ManaCost:1 R
 Types:Artifact Equipment
 K:Disguise:2 R
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, attach it to target creature you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
 K:Equip:1 R

@@ -1,7 +1,0 @@
-Name:Super Intelligence
-ManaCost:U
-Types:Enchantment Aura
-K:Enchant:Creature
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player draws a card.
-SVar:TrigDraw:DB$ Draw | Defined$ Player.EnchantedController
-Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player draws a card.

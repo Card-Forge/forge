@@ -1,0 +1,14 @@
+Name:Dragon's Smile
+ManaCost:5 R R
+Types:Legendary Artifact Vehicle
+PT:4/5
+K:Flying
+S:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayLimit$ 1 | Condition$ PlayerTurn | MayPlayDontGrantZonePermissions$ True | Affected$ Card.nonLand | AffectedZone$ Exile | Description$ Once during each of your turns, you may pay {0} rather than pay the mana cost for a spell you cast from exile.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles that many cards from the top of their library. You may play those cards this turn.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Crew:3
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nOnce during each of your turns, you may pay {0} rather than pay the mana cost for a spell you cast from exile.\nWhenever Dragon's Smile deals combat damage to a player, that player exiles that many cards from the top of their library. You may play those cards this turn.\nCrew 3

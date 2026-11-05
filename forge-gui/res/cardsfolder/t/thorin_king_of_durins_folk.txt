@@ -1,0 +1,9 @@
+Name:Thorin, King of Durin's Folk
+ManaCost:3 R W
+Types:Legendary Creature Dwarf Noble
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Dwarf.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME or another Dwarf you control enters, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Dwarf.YouCtrl+Other | AddPower$ X | Description$ Other Dwarves you control get +1/+0 for each artifact token you control.
+SVar:X:Count$Valid Artifact.token+YouCtrl
+Oracle:Whenever Thorin or another Dwarf you control enters, create a Treasure token.\nOther Dwarves you control get +1/+0 for each artifact token you control.

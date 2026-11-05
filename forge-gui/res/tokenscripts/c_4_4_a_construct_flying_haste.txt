@@ -1,0 +1,7 @@
+Name:Construct Token
+ManaCost:no cost
+Types:Artifact Creature Construct
+PT:4/4
+K:Flying
+K:Haste
+Oracle:Flying, haste

@@ -14,7 +14,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else if ("MostProminentComputerControlsOrOwns".equals(aiLogic)) {
-            return !chooseType(sa, aiPlayer.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))).isEmpty()
+            return !chooseType(sa, aiPlayer.getCardsIn(ZoneType.Hand, ZoneType.Battlefield)).isEmpty()
                     ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
                     : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("MostProminentOppControls".equals(aiLogic)) {

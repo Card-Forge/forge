@@ -1,0 +1,9 @@
+Name:Tactical Officer
+ManaCost:1 W
+Types:Creature Human Officer
+PT:2/1
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | CheckSVar$ X | SVarCompare$ GE8 | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on this creature. Untap it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Self
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
+Oracle:Whenever you attack while creatures you control have total power 8 or greater, put a +1/+1 counter on this creature. Untap it.

@@ -176,7 +176,7 @@
 {
    &quot;text&quot;: &quot;A demonic sphinx gives you a disdainful look as you approach. 
 
-'All the Obscura's knowledge of New Capenna, useless in this forsaken world. Well, if all we have left is crass violence, let me at least demonstrate out skill at that.'&quot;,
+'All the Obscura's knowledge of New Capenna, useless in this forsaken world. Well, if all we have left is crass violence, let me at least demonstrate our skill at that.'&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }

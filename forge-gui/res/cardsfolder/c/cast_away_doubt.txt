@@ -1,0 +1,6 @@
+Name:Cast Away Doubt
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDamage | SpellDescription$ Draw two cards. CARDNAME deals 2 damage to each player.
+SVar:DBDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 2
+Oracle:Draw two cards. Cast Away Doubt deals 2 damage to each player.

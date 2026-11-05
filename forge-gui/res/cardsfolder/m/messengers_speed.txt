@@ -3,5 +3,5 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample & Haste | Description$ Enchanted creature has trample and haste.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Trample & Haste | Description$ Enchanted creature has trample and haste.
 Oracle:Enchant creature\nEnchanted creature has trample and haste.

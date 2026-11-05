@@ -1,0 +1,8 @@
+Name:Queen Mother Ramonda
+ManaCost:3 W W
+Types:Legendary Creature Human Noble
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch
+S:Mode$ CantAttack | ValidCard$ Creature.powerLE2 | Condition$ Monarch | Target$ You | Description$ As long as you're the monarch, creatures with power 2 or less can't attack you.
+Oracle:When Queen Mother Ramonda enters, you become the monarch.\nAs long as you're the monarch, creatures with power 2 or less can't attack you.

@@ -1,0 +1,10 @@
+Name:Stilt-Man, Towering Terror
+ManaCost:2 R
+Types:Legendary Creature Human Rogue Villain
+PT:4/2
+K:Reach
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Villain.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever one or more Villains you control deal combat damage to a player, gain control of target noncreature, nonland permanent that player controls until the end of your next turn. It gains "This permanent can't be sacrificed" until the end of your next turn.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Permanent.nonLand+nonCreature+ControlledBy TriggeredTarget | TgtPrompt$ Select target noncreature, nonland permanent that player controls | LoseControl$ UntilTheEndOfYourNextTurn | SubAbility$ DBDisableSacing
+SVar:DBDisableSacing:DB$ Animate | Defined$ Targeted | staticAbilities$ SCantSac | Duration$ UntilTheEndOfYourNextTurn
+SVar:SCantSac:Mode$ CantSacrifice | ValidCard$ Card.Self | Description$ This permanent can't be sacrificed.
+Oracle:Reach\nWhenever one or more Villains you control deal combat damage to a player, gain control of target noncreature, nonland permanent that player controls until the end of your next turn. It gains "This permanent can't be sacrificed" until the end of your next turn.

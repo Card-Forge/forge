@@ -1,0 +1,8 @@
+Name:Red Room Recruit
+ManaCost:1 B
+Types:Creature Human Spy Villain
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When this creature enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+DeckHas:Ability$Discard|Counters
+Oracle:When this creature enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

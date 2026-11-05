@@ -5,13 +5,14 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.sound.AudioClip;
+import forge.sound.IAudioClip;
 
 public enum AbilityEffect {
     LIGHTNING("lightning.gif", "lightning.wav");
 
     private final String gif, wav;
     private GifAnimation animation;
-    private AudioClip soundClip;
+    private IAudioClip soundClip;
 
     AbilityEffect(String gif0, String wav0) {
         gif = gif0;

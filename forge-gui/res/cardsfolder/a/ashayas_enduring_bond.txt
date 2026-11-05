@@ -1,0 +1,7 @@
+Name:Ashaya's Enduring Bond
+ManaCost:1 R G
+Types:Legendary Sorcery
+A:SP$ Discover | Num$ X | SpellDescription$ Discover X, where X is the amount of mana spent to cast this spell. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+Text:CARDNAME can be your commander.
+SVar:X:Count$CastTotalManaSpent
+Oracle:(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nDiscover X, where X is the amount of mana spent to cast this spell. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)\nAshaya's Enduring Bond can be your commander.

@@ -1,0 +1,11 @@
+Name:Shang-Chi and the Ten Rings
+ManaCost:1 W U
+Types:Legendary Creature Human Warrior Hero
+PT:2/2
+K:First Strike
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | CounterAmount$ EQ10 | Execute$ TrigDraw | TriggerDescription$ When the tenth +1/+1 counter is put on NICKNAME, you draw five cards and gain 5 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 5 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
+Oracle:First strike\nWhenever you draw a card, put a +1/+1 counter on Shang-Chi.\nWhen the tenth +1/+1 counter is put on Shang-Chi, you draw five cards and gain 5 life.

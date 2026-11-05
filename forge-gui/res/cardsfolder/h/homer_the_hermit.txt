@@ -1,0 +1,9 @@
+Name:Homer, the Hermit
+ManaCost:B G U
+Types:Legendary Creature Crab Druid
+PT:0/9
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Landfall — Whenever a land you control enters, any number of target players each mill X cards, where X is twice the number of Crabs, Lobsters, Nautiluses, Starfish, and/or Trilobites you control.
+SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxTgt | NumCards$ X
+SVar:X:Count$Valid Crab.YouCtrl,Lobster.YouCtrl,Nautilus.YouCtrl,Starfish.YouCtrl,Trilobite.YouCtrl/Twice
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:Landfall — Whenever a land you control enters, any number of target players each mill X cards, where X is twice the number of Crabs, Lobsters, Nautiluses, Starfish, and/or Trilobites you control.

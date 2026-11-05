@@ -1,0 +1,13 @@
+Name:Damocles Base, Sword of Kang
+ManaCost:4 B
+Types:Legendary Artifact Vehicle
+PT:5/5
+K:Flying
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigVillainousChoice | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, that player faces a villainous choice — They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards.
+SVar:TrigVillainousChoice:DB$ VillainousChoice | Defined$ TriggeredTarget | Choices$ DBSac,DBLoseLife
+SVar:DBSac:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature.!token | Defined$ Remembered | SpellDescription$ That player sacrifices a nontoken creature.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player.IsRemembered | SubAbility$ DBDraw | SpellDescription$ That player loses 2 life and you draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+K:Crew:3
+Oracle:Flying, deathtouch\nWhenever Damocles Base deals combat damage to a player, that player faces a villainous choice — They sacrifice a nontoken creature of their choice, or they lose 2 life and you draw two cards.\nCrew 3

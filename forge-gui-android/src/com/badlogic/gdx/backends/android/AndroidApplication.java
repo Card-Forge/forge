@@ -119,8 +119,7 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 		}
 		config.nativeLoader.load();
 		setApplicationLogger(new AndroidApplicationLogger());
-		graphics = new AndroidGraphics(this, config,
-				config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
+		graphics = createGraphics(config);
 		input = createInput(this, this, graphics.view, config);
 		audio = createAudio(this, config);
 		files = createFiles();
@@ -180,6 +179,7 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 
 		setLayoutInDisplayCutoutMode(this.renderUnderCutout);
 
+		// The docs say it should work below android 30, but it just doesn't
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			keyboardHeightProvider = new AndroidRKeyboardHeightProvider(this);
 		} else {
@@ -202,9 +202,16 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 
 	@TargetApi(Build.VERSION_CODES.P)
 	private void setLayoutInDisplayCutoutMode (boolean render) {
-		if (render && getVersion() >= Build.VERSION_CODES.P) {
-			WindowManager.LayoutParams lp = getWindow().getAttributes();
+		if (!render || Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+			return;
+		}
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+			// Use SHORT_EDGES only for Android 9 (API 28) and 10 (API 29)
 			lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+		} else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+			// Use ALWAYS for Android 11 through 14 (it's already default on 15+ and not recommended to be set).
+			lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
 		}
 	}
 
@@ -289,7 +296,7 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 		}
 		super.onResume();
 		keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
-		((AndroidGraphics)getGraphics()).getView().post(() -> keyboardHeightProvider.start());
+		((AndroidGraphics)getGraphics()).getView().post(keyboardHeightProvider::start);
 	}
 
 	@Override
@@ -515,6 +522,11 @@ public class AndroidApplication extends Activity implements AndroidApplicationBa
 	protected AndroidFiles createFiles () {
 		this.getFilesDir(); // workaround for Android bug #10515463
 		return new DefaultAndroidFiles(this.getAssets(), this, true);
+	}
+
+	protected AndroidGraphics createGraphics (AndroidApplicationConfiguration config) {
+		return new AndroidGraphics(this, config,
+				config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
 	}
 
 	public KeyboardHeightProvider getKeyboardHeightProvider () {

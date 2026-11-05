@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Battle Siege
 Defense:7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters, search your library, graveyard, and/or outside the game for an instant or sorcery card you own, reveal it, and put it into your hand. If you search your library this way, shuffle.
-SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | Destination$ Hand | ShuffleNonMandatory$ True | OriginAlternative$ Graveyard,Sideboard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled | ChangeType$ Sorcery.YouOwn,Instant.YouOwn
+SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | Destination$ Hand | ShuffleNonMandatory$ True | OriginAlternative$ Graveyard,Sideboard | ChangeType$ Sorcery.YouOwn,Instant.YouOwn
 DeckHas:Ability$Graveyard
 DeckNeeds:Type$Instant|Sorcery
 AlternateMode:DoubleFaced

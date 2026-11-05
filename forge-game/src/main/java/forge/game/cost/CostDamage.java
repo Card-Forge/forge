@@ -19,7 +19,7 @@ package forge.game.cost;
 
 import forge.game.GameEntityCounterTable;
 import forge.game.card.Card;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -63,12 +63,12 @@ public class CostDamage extends CostPart {
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         return true;
     }
-    
+
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa, final boolean effect) {
         final Card source = sa.getHostCard();
-        CardDamageMap damageMap = new CardDamageMap();
-        CardDamageMap preventMap = new CardDamageMap();
+        CardDamageTable damageMap = new CardDamageTable();
+        CardDamageTable preventMap = new CardDamageTable();
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         damageMap.put(source, payer, decision.c);

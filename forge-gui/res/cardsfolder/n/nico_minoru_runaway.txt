@@ -1,0 +1,10 @@
+Name:Nico Minoru, Runaway
+ManaCost:3 R
+Types:Legendary Creature Human Warlock Hero
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.!wasCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a spell from anywhere other than your hand, NICKNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+A:AB$ DigUntil | Cost$ 2 R T Discard<1/Card> | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay | NoPutDesc$ True | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | DefinedDesc$ that card | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you cast a spell from anywhere other than your hand, Nico Minoru deals 2 damage to each opponent.\n{2}{R}, {T}, Discard a card: Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost.

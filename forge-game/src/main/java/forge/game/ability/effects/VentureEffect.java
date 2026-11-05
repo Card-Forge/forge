@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
+import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCardCounters;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -68,7 +69,7 @@ public class VentureEffect extends SpellAbilityEffect {
         Card editionHost = sa.getOriginalHost();
 
         String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
-        edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        edition = TokenInfo.tokenSetFor(edition, script);
 
         final Card dungeon = CardFactory.getCard(StaticData.instance().getAllTokens().getToken(script, edition), player, game);
         dungeon.setGamePieceType(GamePieceType.DUNGEON);

@@ -3,6 +3,7 @@ package forge.screens.deckeditor.views;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import forge.deck.FormatChoices;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -12,6 +13,7 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.controllers.CCurrentDeck;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
@@ -93,6 +95,16 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle")).fontSize(14).build();
 
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblFormat") + ":").fontSize(12).build();
+
+    private final FComboBox<Object> cbFormat = createFormatCombo();
+
+    private static FComboBox<Object> createFormatCombo() {
+        FComboBox<Object> cb = new FComboBox<>(FormatChoices.get(false));
+        cb.setFont(FSkin.getRelativeFont(12));
+        return cb;
+    }
+
     private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;
 
@@ -111,7 +123,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlHeader.add(btnLoad, "w 26px!, h 26px!");
         pnlHeader.add(btnSaveAs, "w 26px!, h 26px!");
         pnlHeader.add(btnCopyToClipboard, "w 26px!, h 26px!");
-        pnlHeader.add(btnImport, "w 61px!, h 26px!");
+        pnlHeader.add(btnImport, "w 61px!, h 26px!, wrap");
+
+        pnlHeader.add(lblFormat, "h 26px!");
+        pnlHeader.add(cbFormat, "h 26px!");
     }
 
     //========== Overridden from IVDoc
@@ -226,5 +241,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
      */
     public FLabel getBtnImport() {
         return btnImport;
+    }
+
+    public FComboBox<Object> getCbFormat() {
+        return cbFormat;
     }
 }

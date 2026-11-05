@@ -1,0 +1,6 @@
+Name:Warriors of Wakanda
+ManaCost:3 G
+Types:Creature Human Warrior
+PT:4/4
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player it's attacking.)

@@ -12,8 +12,10 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.GameOutcome.AnteResult;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
+import forge.game.card.sticker.Sticker;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.keyword.KeywordInterface;
@@ -62,7 +64,7 @@ public abstract class PlayerController {
     public enum FullControlFlag {
         ChooseCostOrder,
         ChooseCostReductionOrderAndVariableAmount,
-        ChooseManaPoolShard, // select shard with special properties //TODO: UI option to enable this one
+        ChooseManaPoolShard, // select shard with special properties
         NoPaymentFromManaAbility,
         NoFreeCombatCostHandling,
         AllowPaymentStartWithMissingResources,
@@ -104,6 +106,22 @@ public abstract class PlayerController {
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
 
     public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType, String message);
+
+    /**
+     * Whether this controller plans its own sideboarding well enough that nobody needs to do it for it (an AI that
+     * reads the deck of its opponent). The match then does not hand its sideboard to a human.
+     */
+    public boolean sideboardsByItself() {
+        return false;
+    }
+
+    /**
+     * What this controller decided the last time it sideboarded by itself, one line each, for the game log: who it
+     * studied, and every card that came in or went out and why. Empty when it did nothing worth showing.
+     */
+    public List<String> getSideboardingReport() {
+        return java.util.Collections.emptyList();
+    }
     public abstract List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses);
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, CardCollectionView remaining, int damageDealt, GameEntity defender, boolean overrideOrder);
@@ -201,6 +219,28 @@ public abstract class PlayerController {
      */
     public abstract CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source);
 
+    protected boolean orderedMoveToTopOfLibrary(ZoneType destinationZone, SpellAbility source) {
+        if (!destinationZone.isDeck()) {
+            return false;
+        }
+
+        if (source == null) {
+            return true;
+        }
+
+        // Check all the possible LibraryPosition param names
+        String positionName;
+        if (source.hasParam("LibraryPosition")) {
+            positionName = "LibraryPosition";
+        } else if (source.hasParam("RevealedLibraryPosition")) {
+            positionName = "RevealedLibraryPosition";
+        } else {
+            return true;
+        }
+
+        return AbilityUtils.calculateAmount(source.getHostCard(), source.getParam(positionName), source) >= 0;
+    }
+
     /** p = target player, validCards - possible discards, min cards to discard. */
     public CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max) {
         return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, validCards);
@@ -210,7 +250,7 @@ public abstract class PlayerController {
      *  when an effect has revealed extra cards, e.g. Reveal/Look modes). */
     public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser);
     public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
-    public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
+    public abstract CardCollectionView chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 
     public abstract CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave);
     public abstract Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction);
@@ -228,6 +268,14 @@ public abstract class PlayerController {
     }
 
     public abstract String chooseSector(Card assignee, String ai, List<String> sectors);
+
+    public abstract Sticker chooseSticker(List<Sticker> options, Card target, SpellAbility sa,
+            boolean isOptional);
+
+    // CR 123.6b - how many of the object's words precede the sticker's word
+    public abstract int chooseStickerNamePosition(Sticker sticker, Card target);
+    // CR 123.5c
+    public abstract Card chooseCardToKeepStickers(CardCollectionView options);
     public final String chooseSector(Card assignee, String ai) {
         final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
         return chooseSector(assignee, ai, sectors);

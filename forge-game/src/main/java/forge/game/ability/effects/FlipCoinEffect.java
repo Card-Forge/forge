@@ -160,6 +160,11 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     }
                 }
             }
+
+            if (amount > 0) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(flipper);
+                flipper.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoinOnce, runParams, false);
+            }
         }
     }
 
@@ -222,7 +227,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             outcome = wonOrHeads ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose");
         }
 
-        flipper.getGame().fireEvent(new GameEventFlipCoin());
+        flipper.getGame().fireEvent(new GameEventFlipCoin(flipper.getView(), result, false));
         flipper.getGame().getAction().notifyOfValue(sa, flipper, outcome, null);
 
         flipper.flip();

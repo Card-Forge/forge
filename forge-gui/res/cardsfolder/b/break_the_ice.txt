@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Destroy | ValidTgts$ Land.Snow,Land.canProduceManaColor Colorless | TgtPrompt$ Select target land that is snow or could produce {C} | SpellDescription$ Destroy target land that is snow or could produce {C}.
 K:Overload:4 B B
 AI:RemoveDeck:Random
-Oracle:Destroy target land that is snow or could produce {C}.\nOverload {4}{B}{B} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:Destroy target land that is snow or could produce {C}.\nOverload {4}{B}{B} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

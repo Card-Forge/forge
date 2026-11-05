@@ -1,0 +1,9 @@
+Name:Chief Warg's Company
+ManaCost:1 B G
+Types:Creature Wolf
+PT:5/3
+K:Trample
+S:Mode$ CantAttack | ValidCard$ Card.Self | IsPresent$ Wolf.YouCtrl+Other | PresentCompare$ LE1 | Description$ This creature can't attack unless you control two or more other Wolves.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf
+Oracle:Trample\nThis creature can't attack unless you control two or more other Wolves.\nAt the beginning of your upkeep, create a 2/2 green Wolf creature token.

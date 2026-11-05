@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
+import com.google.common.collect.Multiset;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -61,8 +61,8 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
             if (counterType != null) {
                 ge.addCounter(counterType, ge.getCounters(counterType) * n, player, table);
             } else {
-                for (Map.Entry<CounterType, Integer> e : ge.getCounters().entrySet()) {
-                    ge.addCounter(e.getKey(), e.getValue() * n, player, table);
+                for (Multiset.Entry<CounterType> e : ge.getCounters().entrySet()) {
+                    ge.addCounter(e.getElement(), e.getCount() * n, player, table);
                 }
             }
         }

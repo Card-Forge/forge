@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multiset;
+
 import forge.ai.*;
 import forge.game.GameEntity;
 import forge.game.card.*;
@@ -46,8 +48,8 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 }
 
                 // iterate only over existing counters
-                for (final Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                    if (e.getValue() >= 1 && !ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                for (final Multiset.Entry<CounterType> e : crd.getCounters().entrySet()) {
+                    if (e.getCount() >= 1 && !ComputerUtil.isNegativeCounter(e.getElement(), crd)) {
                         return true;
                     }
                 }
@@ -75,8 +77,8 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 }
 
                 // iterate only over existing counters
-                for (final Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                    if (e.getValue() >= 1 && ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                for (final Multiset.Entry<CounterType> e : crd.getCounters().entrySet()) {
+                    if (e.getCount() >= 1 && ComputerUtil.isNegativeCounter(e.getElement(), crd)) {
                         return true;
                     }
                 }
@@ -168,7 +170,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
             final Card lki = CardCopyService.getLKICopy(c);
             // update all the counters there
             boolean hasNegative = false;
-            for (final CounterType ct : c.getCounters().keySet()) {
+            for (final CounterType ct : c.getCounters().elementSet()) {
                 hasNegative = hasNegative || ComputerUtil.isNegativeCounter(ct, c);
                 lki.setCounters(ct, lki.getCounters(ct) + 1);
             }

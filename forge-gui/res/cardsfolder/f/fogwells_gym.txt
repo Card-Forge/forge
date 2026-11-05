@@ -1,0 +1,7 @@
+Name:Fogwell's Gym
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBDamage | SpellDescription$ Add {R}. This land deals 1 damage to you.
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+A:AB$ Draw | Cost$ 2 R T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+Oracle:{T}: Add {R}. This land deals 1 damage to you.\n{2}{R}, {T}, Discard a card: Draw a card.

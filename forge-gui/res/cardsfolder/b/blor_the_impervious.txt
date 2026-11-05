@@ -1,0 +1,8 @@
+Name:Blor the Impervious
+ManaCost:3 G G
+Types:Legendary Creature Frog Warrior
+PT:3/3
+K:Trample
+K:Hexproof
+K:Indestructible
+Oracle:Trample, hexproof, indestructible

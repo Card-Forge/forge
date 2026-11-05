@@ -10,8 +10,6 @@ import java.util.Collections;
 //Temporary lobby instance to use for OnlineLobby before connecting to a server
 public final class OfflineLobby extends GameLobby {
     public OfflineLobby() {
-        super(true);
-
         final String humanName = localName();
         final int[] avatarIndices = localAvatarIndices();
         final int[] sleeveIndices = localSleeveIndices();
@@ -19,7 +17,7 @@ public final class OfflineLobby extends GameLobby {
         final LobbySlot slot0 = new LobbySlot(LobbySlotType.LOCAL, humanName, avatarIndices[0], sleeveIndices[0], 0, true, false, Collections.emptySet());
         addSlot(slot0);
 
-        final LobbySlot slot1 = new LobbySlot(LobbySlotType.OPEN, null, -1, -1,-1, false, false, Collections.emptySet());
+        final LobbySlot slot1 = new LobbySlot(LobbySlotType.OPEN, null, avatarIndices[1], sleeveIndices[1],-1, false, false, Collections.emptySet());
         addSlot(slot1);
     }
 

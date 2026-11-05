@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Okumura_Takaaki_-_Mono_Green_Aggro_(Standard,_#892747).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Mossborn Hydra
+1 Surrak, Elusive Hunter
+4 Sazh's Chocobo
+4 Icetill Explorer
+4 Mightform Harmonizer
+2 Lumbering Worldwagon
+2 Royal Treatment
+4 Glimpse the Core
+2 Meltstrider's Resolve
+4 Earthbender Ascension
+14 Forest
+4 Fabled Passage
+4 Escape Tunnel
+3 Ba Sing Se
+[Sideboard]
+1 Surrak, Elusive Hunter
+2 Meltstrider's Resolve
+2 Torpor Orb
+2 Keen-Eyed Curator
+2 Scrapshooter
+4 Sapling Nursery
+2 Warg Tactics

@@ -1,0 +1,9 @@
+Name:Captain Marvel, Earth's Protector
+ManaCost:3 W W
+Types:Legendary Creature Human Kree Hero
+PT:5/4
+K:Flash
+K:Flying
+K:Lifelink
+A:AB$ PutCounter | Cost$ 5 W W | Defined$ Self | CounterTypes$ P1P1,Indestructible | PowerUp$ True | SpellDescription$ Put a +1/+1 counter and an indestructible counter on NICKNAME. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)
+Oracle:Flash\nFlying, lifelink\nPower-up — {5}{W}{W}: Put a +1/+1 counter and an indestructible counter on Captain Marvel. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)

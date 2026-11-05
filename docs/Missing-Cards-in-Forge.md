@@ -1,20 +1,31 @@
 ## Missing tournament legal cards
 
-Total number of unique cards in Forge (as of the release of Final Fantasy): 30,331
+Total number of unique cards in Forge (as of the release of Mystery Booster Commander Edition): 32,479
 **For the latest updates during spoiler season** check out the "Projects" tab on Github for information which cards have been added. It takes some time to implement cards, and WotC doesn't send us spoilers ahead of time, so we barely have any time to implement new cards. Please be patient, and don't ask when cards will be ready. 
 
 | Format  | Total Cards  | Missing Cards | % Completed |
 | --------------- | --------------- | --------------- | --------------- |
-| Standard | 4,088 | 0 | 100 % |
-| Modern |  20,584  | 0 | 100 % |
-| Historic (including Alchemy cards) | 12,921 | 0 | 100 % |
-| Vintage/Legacy/Commander (including banned & restricted cards)| 29,185 | 46 | 99.8 % |
+| Standard | 5,434 | 0 | 100 % |
+| Modern |  22,988  | 0 | 100 % |
+| Historic (including Alchemy cards) | 15,948  | 8 | 99.9 % |
+| Vintage/Legacy/Commander (including banned & restricted cards)| 32,479 | 46 | 99.9 % |
 
+### Missing Alchemy cards [8 Cards]
 
-### Stickers [46 Cards]
+These cards were released exclusively on the Magic Arena program and use mechanics that could (mostly) only work on a digital client. These cards are not tournament legal outside some Magic Arena exclusive formats like Brawl and Historic. WOTC has discontinued making new Alchemy sets, with Alchemy Reality Fracture being the final Alchemy release. 
+
+1. [Summitfest Closing Ceremony](https://scryfall.com/card/ysos/28/summitfest-closing-ceremony) - Alchemy: Secrets of Strixhaven (YSOS) -  [PR]
+1. [The Mystical Archive](https://scryfall.com/card/ysos/30/the-mystical-archive) - Alchemy: Secrets of Strixhaven (YSOS) -  [PR]
+1. [Ursine Guide // Ranger's Merit](https://scryfall.com/card/ysos/11/ursine-guide-rangers-merit) - Alchemy: Secrets of Strixhaven (YSOS) -  [PR]
+2. [Aquatic Subtlety](https://scryfall.com/card/yecl/4/aquatic-subtlety) - Alchemy: Lorwyn Eclipsed (YECL) - [PR](https://github.com/Card-Forge/forge/pull/9638)
+1. [Limitless Rekindling](https://scryfall.com/card/yecl/12/limitless-rekindling) - Alchemy: Lorwyn Eclipsed (YECL) - [PR](https://github.com/Card-Forge/forge/pull/9633)
+1. [Opulent Clomper](https://scryfall.com/card/yecl/15/opulent-clomper) - Alchemy: Lorwyn Eclipsed (YECL) - [PR](https://github.com/Card-Forge/forge/pull/9663)
+1. [Cloudsculpt Armorer](https://scryfall.com/card/yeoe/5/cloudsculpt-armorer) - Alchemy: Edge of Eternities (YEOE) [PR](https://github.com/Card-Forge/forge/pull/11229)
+1. [Runeblade Raiser](https://scryfall.com/card/ytdm/8/runeblade-raiser) - Alchemy: Tarkir (YTDM) - [PR](https://github.com/Card-Forge/forge/pull/7994) 
+
+### Stickers [46 Cards] [Currently in PR](https://github.com/Card-Forge/forge/pull/12047)
 
 Introduces an entirely new type of game piece to track, which comes in four different varieties - name, ability, art, and stats. They were not widely used and are currently banned in all official formats except commander.
-
 
 1. [Baaallerina](https://scryfall.com/card/unf/35/baaallerina)
 1. [Bioluminary](https://scryfall.com/card/unf/38/bioluminary)
@@ -77,4 +88,4 @@ The Teenage Mutant Ninja Turtles "Turtle Team-Up" box set featured a PvE variant
 
 ## Missing nonlegal and funny cards
 
-Complete support for Un-cards and other non-legal cards is a non-goal of Forge, but individual cards may be implemented when they work within the scope of the project. For a complete list, see [Un-cards, Playtest Cards, and Other Funny Cards](https://github.com/Card-Forge/forge/wiki/Un%E2%80%90cards,-Playtest-Cards,-and-Other-Funny-Cards).
+Complete support for Un-cards and other non-legal cards is a non-goal of Forge, but individual cards may be implemented when they work within the scope of the project. For a complete list, see [Un-cards, Playtest Cards, and Other Funny Cards](Un-cards,-Playtest-Cards,-and-Other-Funny-Cards.md).

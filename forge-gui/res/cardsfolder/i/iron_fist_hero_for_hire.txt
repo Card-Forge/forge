@@ -1,0 +1,9 @@
+Name:Iron Fist, Hero for Hire
+ManaCost:1 R
+Types:Legendary Creature Human Mercenary Hero
+PT:2/2
+K:Trample
+K:Prowess
+A:AB$ DealDamage | Cost$ 7 R | ValidTgts$ Any | NumDmg$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5 | PowerUp$ True | SubAbility$ DBPutCounter | SpellDescription$ NICKNAME deals 5 damage divided as you choose among up to five targets. Put five +1/+1 counters on NICKNAME. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 5
+Oracle:Trample\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nPower-up — {7}{R}: Iron Fist deals 5 damage divided as you choose among up to five targets. Put five +1/+1 counters on Iron Fist. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

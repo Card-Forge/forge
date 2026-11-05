@@ -112,8 +112,12 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
             sb.append("=".repeat(80)).append("\n");
             sb.append("Network Debug Log Started\n");
             sb.append("Log file key: ").append(key).append("\n");
-            if (!GuiBase.isAndroid()) {
-                sb.append("PID: ").append(ProcessHandle.current().pid()).append("\n");
+            if (!GuiBase.isMobile()) {
+                try {
+                    sb.append("PID: ").append(ProcessHandle.current().pid()).append("\n");
+                } catch (Exception e) {
+                    sb.append("PID: (unavailable)\n");
+                }
             }
             try {
                 String hwInfo = GuiBase.getHWInfo()
@@ -125,8 +129,11 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
             sb.append("=".repeat(80)).append("\n");
             writer.write(sb.toString());
             writer.flush();
-        } catch (IOException e) {
-            // Non-critical
+        } catch (LinkageError | Exception e) {
+            // Non-critical: the network log header is diagnostic; never let it
+            // break hosting (e.g. a MobiVM-unsupported API in a downgrade stub —
+            // NoClassDefFoundError/NoSuchMethodError are LinkageErrors). Genuinely
+            // fatal Errors (OutOfMemoryError etc.) still propagate.
         }
     }
 }

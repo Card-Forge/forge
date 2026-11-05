@@ -85,6 +85,12 @@ public enum CCurrentDeck implements ICDoc {
                 }
             }
         });
+        VCurrentDeck.SINGLETON_INSTANCE.getCbFormat().addActionListener(e -> {
+            final Object selected = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat().getSelectedItem();
+            if (selected != null) {
+                CDeckEditorUI.SINGLETON_INSTANCE.selectFormat(selected);
+            }
+        });
     }
 
     /**

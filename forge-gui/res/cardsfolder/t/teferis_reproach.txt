@@ -1,0 +1,9 @@
+Name:Teferi's Reproach
+ManaCost:2 W
+Types:Instant
+A:SP$ Effect | ValidTgts$ Opponent | EffectOwner$ Targeted | Duration$ UntilYourNextTurn | StaticAbilities$ STCantChange,STProtection | SubAbility$ DBPhases | SpellDescription$ Choose target opponent. Until that player's next turn, they gain protection from everything and their life total can't change.
+SVar:STCantChange:Mode$ CantChangeLife | ValidPlayer$ You | Description$ Your life total can't change.
+SVar:STProtection:Mode$ Continuous | Affected$ You | AddKeyword$ Protection from everything | Description$ You have protection from everything.
+SVar:DBPhases:DB$ Phases | Defined$ Valid Permanent.nonLand+TargetedPlayerCtrl | SubAbility$ DBChange | SpellDescription$ All nonland permanents they control phase out. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+Oracle:Choose target opponent. Until that player's next turn, they gain protection from everything and their life total can't change. All nonland permanents they control phase out. (While they’re phased out, they’re treated as though they don't exist. They phase in before that player untaps during their next untap step.)\nExile Teferi's Reproach.

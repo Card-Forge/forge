@@ -1,0 +1,8 @@
+Name:Klaw, Sonic Subjugator
+ManaCost:2 B
+Types:Legendary Creature Human Rogue Villain
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Sonic Attack — When NICKNAME enters, target player reveals a number of cards from their hand equal to one plus the number of creature cards in your graveyard. You choose one of them. That player discards that card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ X | NumCards$ 1
+SVar:X:Count$ValidGraveyard Creature.YouOwn/Plus.1
+Oracle:Sonic Attack — When Klaw enters, target player reveals a number of cards from their hand equal to one plus the number of creature cards in your graveyard. You choose one of them. That player discards that card.

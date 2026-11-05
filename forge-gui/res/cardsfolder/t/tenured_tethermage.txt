@@ -1,0 +1,9 @@
+Name:Tenured Tethermage
+ManaCost:1 R G
+Types:Creature Human Artificer
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, you may sacrifice a land. If you do, create two tapped Heartwood tokens. (They're red and green artifacts with "{T}: Add {R} or {G}.")
+SVar:TrigToken:AB$ Token | Cost$ Sac<1/Land> | TokenAmount$ 2 | TokenScript$ rg_a_heartwood | TokenOwner$ You | TokenTapped$ True
+A:AB$ PutCounter | Cost$ tapXType<2/Artifact> | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on this creature.
+DeckHas:Ability$Token
+Oracle:When this creature enters, you may sacrifice a land. If you do, create two tapped Heartwood tokens. (They're red and green artifacts with "{T}: Add {R} or {G}.")\nTap two untapped artifacts you control: Put two +1/+1 counters on this creature.

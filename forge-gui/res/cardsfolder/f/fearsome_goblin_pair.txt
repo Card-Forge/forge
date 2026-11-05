@@ -1,0 +1,8 @@
+Name:Fearsome Goblin Pair
+ManaCost:2 BR
+Types:Creature Goblin Soldier
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAmass | TriggerDescription$ When this creature dies, amass Goblins 4. (Put four +1/+1 counters on an Army you control. It's also a Goblin. If you don’t control an Army, create a 0/0 black Goblin Army creature token first.)
+SVar:TrigAmass:DB$ Amass | Type$ Goblin | Num$ 4
+DeckHas:Ability$Token|Counters
+Oracle:When this creature dies, amass Goblins 4. (Put four +1/+1 counters on an Army you control. It's also a Goblin. If you don’t control an Army, create a 0/0 black Goblin Army creature token first.)

@@ -1,0 +1,19 @@
+Name:Uldaros Theorix
+ManaCost:3 U B B
+Types:Legendary Creature Elder Sphinx
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigArtifact | TriggerDescription$ When CARDNAME enters, if you cast him, exile up to one target nonland card of each card type from your graveyard. Copy those cards. You may cast any number of spells with total mana value 6 or less from among the copies without paying their mana costs. (Permanent spells cast this way become tokens.)
+SVar:TrigArtifact:DB$ Pump | ValidTgts$ Artifact.nonLand+YouOwn | ValidTgtsDesc$ nonland artifact card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | SubAbility$ DBBattle
+SVar:DBBattle:DB$ Pump | ValidTgts$ Battle.nonLand+YouOwn | ValidTgtsDesc$ nonland battle card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBCreature
+SVar:DBCreature:DB$ Pump | ValidTgts$ Creature.nonLand+YouOwn | ValidTgtsDesc$ nonland creature card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBEnchantment
+SVar:DBEnchantment:DB$ Pump | ValidTgts$ Enchantment.nonLand+YouOwn | ValidTgtsDesc$ nonland enchantment card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBInstant
+SVar:DBInstant:DB$ Pump | ValidTgts$ Instant.YouOwn | ValidTgtsDesc$ instant card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBKindred
+SVar:DBKindred:DB$ Pump | ValidTgts$ Kindred.nonLand+YouOwn | ValidTgtsDesc$ nonland kindred card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBPlaneswalker
+SVar:DBPlaneswalker:DB$ Pump | ValidTgts$ Planeswalker.nonLand+YouOwn | ValidTgtsDesc$ nonland planeswalker card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBSorcery
+SVar:DBSorcery:DB$ Pump | ValidTgts$ Sorcery.YouOwn | ValidTgtsDesc$ sorcery card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TargetUnique$ True | SubAbility$ DBExile
+#Must be amended if they add more card types
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Targeted | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsRemembered | ValidZone$ Exile | Amount$ All | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | CopyCard$ True | WithTotalCMC$ 6 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhen Uldaros Theorix enters, if you cast him, exile up to one target nonland card of each card type from your graveyard. Copy those cards. You may cast any number of spells with total mana value 6 or less from among the copies without paying their mana costs. (Permanent spells cast this way become tokens.)

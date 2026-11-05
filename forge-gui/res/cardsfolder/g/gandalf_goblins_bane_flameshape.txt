@@ -1,0 +1,22 @@
+Name:Gandalf, Goblins' Bane
+ManaCost:2 R
+Types:Legendary Creature Avatar Wizard
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME gets +1/+1 until end of turn and deals 1 damage to each opponent.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1
+AlternateMode:Adventure
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Whenever you cast a noncreature spell, Gandalf gets +1/+1 until end of turn and deals 1 damage to each opponent.
+
+ALTERNATE
+
+Name:Flameshape
+ManaCost:1 R
+Types:Sorcery Adventure
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | WithMayLook$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Look at the top two cards of your library and exile them face down. For as long as they remain exiled, you may play them if you control a Wizard.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ RememberedCard | ForgetOnMoved$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | CheckSVar$ X | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as those cards remain exiled, you may play them if you control a Wizard.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Wizard.YouCtrl
+Oracle:Look at the top two cards of your library and exile them face down. For as long as they remain exiled, you may play them if you control a Wizard.

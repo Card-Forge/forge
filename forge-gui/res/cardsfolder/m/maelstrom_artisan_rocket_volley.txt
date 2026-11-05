@@ -13,5 +13,5 @@ ALTERNATE
 Name:Rocket Volley
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Destroy | ValidTgts$ Land.nonBasic | ValidTgtDesc$ nonbasic land | SpellDescription$ Destroy target nonbasic land.
+A:SP$ Destroy | ValidTgts$ Land.nonBasic | ValidTgtsDesc$ nonbasic land | SpellDescription$ Destroy target nonbasic land.
 Oracle:Destroy target nonbasic land.

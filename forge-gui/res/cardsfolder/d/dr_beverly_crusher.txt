@@ -1,0 +1,10 @@
+Name:Dr. Beverly Crusher
+ManaCost:2 W
+Types:Legendary Creature Human Doctor
+PT:2/2
+S:Mode$ Panharmonicon | ValidMode$ LifeGained | ValidPlayer$ You | ValidCard$ Permanent.YouCtrl | Description$ If you gaining life causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:If you gaining life causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nWhenever you gain life, put a +1/+1 counter on Dr. Crusher.

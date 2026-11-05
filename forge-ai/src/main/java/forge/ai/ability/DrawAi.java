@@ -42,6 +42,10 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        Card hostCard = sa.getHostCard();
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean aboutToBeMyTurn = ph.isPlayerNextTurn(ai) && ph.is(PhaseType.END_OF_TURN);
+
         if (!targetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
@@ -68,11 +72,39 @@ public class DrawAi extends SpellAbilityAi {
 
         if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
             // Canopy lands and other cards that sacrifice themselves to draw cards
-            if (ai.getCardsIn(ZoneType.Hand).isEmpty()
-                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5)) {
-                // TODO: make this configurable in the AI profile
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
+            if (hostCard.isLand()) {
+                if (aboutToBeMyTurn && ai.getLandsInPlay().size() >= 5) {
+                    return new AiAbilityDecision(80, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
+
+            if (hostCard.isToken() && (hostCard.getType().hasSubtype("Clue") || hostCard.getType().hasSubtype("Blood"))) {
+                if (ph.isPlayerTurn(ai)) {
+                    if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {
+                        return new AiAbilityDecision(90, AiPlayDecision.WillPlay);
+                    }
+                } else {
+                    if (aboutToBeMyTurn) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                    // TODO: Other reasons to draw a card is searching for answers
+                }
+
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+            }
+
+            if (ph.isPlayerTurn(ai)) {
+                if (ph.getPhase().isAfter(PhaseType.DRAW) && ai.getCardsIn(ZoneType.Hand).isEmpty()) {
+                    return new AiAbilityDecision(60, AiPlayDecision.WillPlay);
+                }
+            } else {
+                if (aboutToBeMyTurn) {
+                    return new AiAbilityDecision(80, AiPlayDecision.WillPlay);
+                }
+            }
+
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
@@ -161,7 +193,7 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("RespondToOwnActivation")) {
             return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
-        } else if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+        } else if ((!ph.isPlayerNextTurn(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
                 && !"YawgmothsBargain".equals(logic)) {
@@ -244,6 +276,12 @@ public class DrawAi extends SpellAbilityAi {
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
             numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
+        }
+
+        if (sa.costHasManaX() && sa.getRootAbility().getXManaCostPaid() == null && source != null
+                && forge.ai.simulation.AiCardLists.has(forge.ai.simulation.AiCardLists.Role.DREDGE_REFILL, source)) {
+            // Breakthrough for the dredge line: X=0 draws four and throws the hand away, which is the point.
+            sa.getRootAbility().setXManaCostPaid(0);
         }
 
         boolean xPaid = false;
@@ -530,10 +568,6 @@ public class DrawAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
         if (targetAI(ai, sa, mandatory)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

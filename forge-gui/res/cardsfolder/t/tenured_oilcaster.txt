@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Phyrexian Wizard
 PT:2/4
 K:Menace
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE8 | Description$ CARDNAME gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE8 | Description$ CARDNAME gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
 SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, each player mills a card.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, each player mills a card.

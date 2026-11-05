@@ -41,4 +41,27 @@ public enum ComparableOp {
     public String toString() {
         return caption;
     }
+
+    public boolean apply(final Integer op1, final Integer op2) {
+        if (op1 == null || op2 == null) {
+            return false;
+        }
+
+        switch (this) {
+            case EQUALS:
+                return op1 == op2;
+            case GREATER_THAN:
+                return op1 > op2;
+            case GT_OR_EQUAL:
+                return op1 >= op2;
+            case LESS_THAN:
+                return op1 < op2;
+            case LT_OR_EQUAL:
+                return op1 <= op2;
+            case NOT_EQUALS:
+                return op1 != op2;
+            default:
+                return false;
+        }
+    }
 }

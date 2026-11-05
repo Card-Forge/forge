@@ -1,0 +1,8 @@
+Name:Arvad of the Weatherlight
+ManaCost:2 W B
+Types:Legendary Creature Human Knight
+PT:3/4
+DeckRule:ColorIdentity:Exempt$ Permanent.Legendary | ActiveSection$ Commander | Description$ Rulebreaker — If CARDNAME is your commander, you may include legendary permanents of any color in your deck regardless of color identity.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player.Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever NICKNAME deals combat damage to an opponent, you may put a legendary permanent card from your hand onto the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Legendary | ChangeNum$ 1
+Oracle:Rulebreaker — If Arvad of the Weatherlight is your commander, you may include legendary permanents of any color in your deck regardless of color identity.\nWhenever Arvad deals combat damage to an opponent, you may put a legendary permanent card from your hand onto the battlefield.

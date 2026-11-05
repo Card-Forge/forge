@@ -14,7 +14,6 @@ import forge.game.zone.ZoneType;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class CountersMultiplyAi extends SpellAbilityAi {
 
@@ -41,9 +40,9 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                     return false;
                 }
             } else {
-                for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
+                for (CounterType e : c.getCounters().elementSet()) {
                     // has negative counter it would double
-                    if (ComputerUtil.isNegativeCounter(e.getKey(), c)) {
+                    if (ComputerUtil.isNegativeCounter(e, c)) {
                         return false;
                     }
                 }

@@ -8,11 +8,11 @@ import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.AdventureOverrides;
+import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.card.CardEdition;
-import forge.card.PrintSheet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -23,11 +23,11 @@ import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedDeckBuilder;
 import forge.item.SealedTemplate;
 import forge.item.generation.IUnOpenedProduct;
-import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.StreamUtil;
 
@@ -158,9 +158,12 @@ public class AdventureEventData implements Serializable {
         Random placeholder = MyRandom.getRandom();
         MyRandom.setRandom(getEventRandom());
         if (draft == null && (eventStatus == AdventureEventController.EventStatus.Available || eventStatus == AdventureEventController.EventStatus.Entered)) {
-            draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration, participants.length);
-            registeredDeck = draft.getHumanPlayer().getDeck();
-            assignPlayerNames(draft);
+            CardBlock block = getCardBlock();
+            CardUtil.withRestrictedAwareBoosterResolver(block, () -> {
+                draft = BoosterDraft.createDraft(LimitedPoolType.Block, block, packConfiguration, participants.length);
+                registeredDeck = draft.getHumanPlayer().getDeck();
+                assignPlayerNames(draft);
+            });
         }
         if (packConfiguration == null) {
             packConfiguration = getBoosterConfiguration(getCardBlock());
@@ -201,8 +204,6 @@ public class AdventureEventData implements Serializable {
         }
         return rolledFilter;
     }
-
-    private static final Set<String> POWER_NINE = Set.of("Black Lotus", "Mox Emerald", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Mox Jet", "Ancestral Recall", "Timetwister", "Time Walk");
 
     private static CardBlock pickWeightedCardBlock() {
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
@@ -267,11 +268,6 @@ public class AdventureEventData implements Serializable {
                 return false;
             if(c.getBoosterTemplate().getNumberOfCardsExpected() <= 7)
                 return false;
-            for (PrintSheet ps : c.getPrintSheetsBySection()) {
-                //exclude block with sets containing P9 cards.
-                if(!Collections.disjoint(ps.toNameLookup().keySet(), POWER_NINE))
-                    return false;
-            }
         }
         return true;
     }
@@ -316,27 +312,14 @@ public class AdventureEventData implements Serializable {
         if (cardBlock == null) return;
 
         try {
-            // Open all boosters
+            // Open all boosters; restricted cards are excluded from non-meta packs.
             CardPool humanPool = new CardPool();
 
             for (String setCode : packConfiguration) {
-                boolean isMetaSet = false;
-                for (String metaSetName : cardBlock.getMetaSetNames()) {
-                    if (metaSetName.equals(setCode)) {
-                        isMetaSet = true;
-                        break;
-                    }
+                IUnOpenedProduct booster = openSealedBooster(setCode);
+                if (booster == null) {
+                    continue;
                 }
-
-                IUnOpenedProduct booster;
-                if (isMetaSet) {
-                    booster = cardBlock.getBooster(setCode);
-                } else {
-                    SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
-                    if (template == null) continue;
-                    booster = new UnOpenedProduct(template);
-                }
-
                 humanPool.addAllFlat(booster.get());
             }
 
@@ -358,23 +341,10 @@ public class AdventureEventData implements Serializable {
 
                 CardPool aiPool = new CardPool();
                 for (String setCode : packConfiguration) {
-                    boolean isMetaSet = false;
-                    for (String metaSetName : cardBlock.getMetaSetNames()) {
-                        if (metaSetName.equals(setCode)) {
-                            isMetaSet = true;
-                            break;
-                        }
+                    IUnOpenedProduct booster = openSealedBooster(setCode);
+                    if (booster == null) {
+                        continue;
                     }
-
-                    IUnOpenedProduct booster;
-                    if (isMetaSet) {
-                        booster = cardBlock.getBooster(setCode);
-                    } else {
-                        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
-                        if (template == null) continue;
-                        booster = new UnOpenedProduct(template);
-                    }
-
                     aiPool.addAllFlat(booster.get());
                 }
 
@@ -391,6 +361,19 @@ public class AdventureEventData implements Serializable {
         } catch (Exception e) {
             System.err.println("Error generating Sealed pool: " + e.getMessage());
         }
+    }
+
+    private IUnOpenedProduct openSealedBooster(String setCode) {
+        for (String metaSetName : cardBlock.getMetaSetNames()) {
+            if (metaSetName.equals(setCode)) {
+                return cardBlock.getBooster(setCode);
+            }
+        }
+        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
+        if (template == null) {
+            return null;
+        }
+        return CardUtil.createRestrictedAwareBooster(template);
     }
 
     private void setupDraftRewards() {
@@ -742,7 +725,7 @@ public class AdventureEventData implements Serializable {
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
             rewardDeck.setName("Drafted Deck");
-            rewardDeck.setComment("Prize for placing 1st overall in draft event");
+            rewardDeck.setComment(Forge.getLocalizer().getMessage("advPrizeDraftFirst"));
             rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Sealed) {
@@ -751,7 +734,7 @@ public class AdventureEventData implements Serializable {
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
             rewardDeck.setName("Sealed Card Pool");
-            rewardDeck.setComment("Prize for placing 1st overall in sealed event");
+            rewardDeck.setComment(Forge.getLocalizer().getMessage("advPrizeSealedFirst"));
             rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
@@ -790,7 +773,7 @@ public class AdventureEventData implements Serializable {
             }
         }
         if (ret.size > 0) {
-            RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
+            RewardScene.instance().loadRewards(ret, RewardScene.Type.EventReward, null);
             Forge.switchScene(RewardScene.instance());
         }
 
@@ -852,9 +835,10 @@ public class AdventureEventData implements Serializable {
     }
 
     public String getDescription(PointOfInterestChanges changes) {
+        Localizer localizer = Forge.getLocalizer();
         float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         if (format == AdventureEventController.EventFormat.Draft) {
-            description = "Event Type: Booster Draft\n";
+            description = localizer.getMessage("advEventTypeBoosterDraft");
             description += "Block: " + getCardBlock() + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (eventRules.getPairingDescription()) + "\n\n";
@@ -886,8 +870,8 @@ public class AdventureEventData implements Serializable {
             } else {
                 description += "\n";
             }
-            description += "Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n";
-            description += "Participating in this event will award a valueless copy of each card in your Jumpstart deck.";
+            description += localizer.getMessage("advDraftPrizesDesc");
+            description += localizer.getMessage("advJumpstartParticipationPrize");
         } else if (format == AdventureEventController.EventFormat.Sealed) {
             description = "Event Type: Sealed Deck\n";
             description += "Block: " + getCardBlock() + "\n";
@@ -909,7 +893,7 @@ public class AdventureEventData implements Serializable {
             }
 
             description += "Prizes\n";
-            description += "Champion (3 wins): Keep your Sealed pool (all " + packConfiguration.length + " boosters)\n";
+            description += localizer.getMessage("advSealedChampionPrize", packConfiguration.length);
             description += "2+ wins: Silver Challenge Coin\n";
             description += String.format("1+ wins: %s Booster, %s Booster\n", rewardPacks[1].getComment(), rewardPacks[2].getComment());
             description += String.format("0 wins: %s Booster", rewardPacks[0].getComment());
@@ -949,7 +933,7 @@ public class AdventureEventData implements Serializable {
         public String getName() {
             EnemyData enemyData = WorldData.getEnemy(enemyDataName);
             if (enemyData != null)
-                return enemyData.getName();
+                return enemyData.getDisplayName();
             return "";
         }
 

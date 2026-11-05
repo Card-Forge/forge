@@ -2,7 +2,7 @@ Name:Vorpal Sword
 ManaCost:B
 Types:Artifact Equipment
 K:Equip:B B
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Deathtouch | Description$ Equipped creature gets +2/+0 and has deathtouch.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 2 | AddKeyword$ Deathtouch | Description$ Equipped creature gets +2/+0 and has deathtouch.
 A:AB$ Animate | Cost$ 5 B B B | Defined$ Self | Triggers$ TrigDamageDone | SubAbility$ DBAddSVar | SpellDescription$ Until end of turn, CARDNAME gains "Whenever equipped creature deals combat damage to a player, that player loses the game."
 SVar:DBAddSVar:DB$ Animate | Defined$ Equipped | sVars$ MustBeBlocked
 SVar:MustBeBlocked:True

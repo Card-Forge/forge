@@ -1,0 +1,5 @@
+Name:Sanctum
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add one mana of any color.

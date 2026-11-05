@@ -28,7 +28,7 @@ public class SetStateEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
-        boolean specialize = sa.getParam("Mode").equals("Specialize");
+        boolean specialize = "Specialize".equals(sa.getParam("Mode"));
 
         if (sa.hasParam("Flip")) {
             sb.append("Flip ");
@@ -121,7 +121,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                         game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
                         continue;
                     }
-                } else if (!gameCard.getState(CardStateName.Original).getType().isPermanent()) {
+                } else if (!gameCard.getRules().getType().isPermanent()) {
                     Card lki = CardCopyService.getLKICopy(gameCard);
                     lki.forceTurnFaceUp();
                     game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
@@ -166,7 +166,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
             }
 
-            boolean hasTransformed = false;
+            boolean hasTransformed;
             if (sa.isTurnFaceUp()) {
                 hasTransformed = gameCard.turnFaceUp(sa);
             } else if ("Specialize".equals(mode)) {

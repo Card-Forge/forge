@@ -1,0 +1,12 @@
+Name:Frostbite Pyromental
+ManaCost:U R R
+Types:Creature Elemental
+PT:4/4
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+Oracle:Trample, haste\nWhenever this creature deals combat damage to a player, draw two cards.\nAt the beginning of the end step, sacrifice this creature.

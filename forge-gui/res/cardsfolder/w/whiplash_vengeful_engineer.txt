@@ -1,0 +1,14 @@
+Name:Whiplash, Vengeful Engineer
+ManaCost:B
+Types:Legendary Creature Human Artificer Villain
+PT:2/2
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ NICKNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Card.Self+equipped | Execute$ TrigLoseLife | TriggerDescription$ Whenever NICKNAME attacks, if he's equipped, each opponent loses X life and you gain X life, where X is the number of Equipment attached to him.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Equipment.Attached
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+DeckHints:Type$Equipment
+Oracle:Whiplash enters tapped.\nWhenever Whiplash attacks, if he's equipped, each opponent loses X life and you gain X life, where X is the number of Equipment attached to him.

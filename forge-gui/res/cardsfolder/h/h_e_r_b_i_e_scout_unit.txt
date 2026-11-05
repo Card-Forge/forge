@@ -1,0 +1,9 @@
+Name:H.E.R.B.I.E. Scout Unit
+ManaCost:4
+Types:Artifact Creature Robot Scout
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card, then you may put a land card from your hand onto the battlefield tapped.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouOwn
+Oracle:Flying\nWhen this creature enters, draw a card, then you may put a land card from your hand onto the battlefield tapped.

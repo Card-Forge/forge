@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=./Modern/The_Hobbit/DeepDisherino_-_Hammer_Time_(Modern,_#893422).dck
+Deck Type=constructed
+
+[Main]
+4 Colossus Hammer
+2 Meticulous Archive
+1 Cryptic Coat
+1 Lavaspur Boots
+4 Leyline Axe
+4 Stoneforge Mystic
+4 Esper Sentinel
+2 Hallowed Fountain
+4 Puresteel Paladin
+2 Inkmoth Nexus
+4 Mox Opal
+4 Metallic Rebuke
+1 Shadowspear
+3 Marsh Flats
+4 Urza's Saga
+4 Ornithopter
+4 Flooded Strand
+3 Plains
+1 Paradise Mantle
+3 Kíli the Resourceful
+1 Super-Soldier Serum
+[Sideboard]
+4 Consign to Memory
+1 Vexing Bauble
+1 Grafdigger's Cage
+2 Surge of Salvation
+2 Erode
+1 Pithing Needle
+1 Tormod's Crypt
+3 Hushbringer

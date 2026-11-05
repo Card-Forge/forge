@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Artifact Creature Robot Artificer
 PT:0/4
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +1/+0 for each artifact you control.
+S:Mode$ Continuous | AffectedDefined$ Self | AddPower$ X | Description$ This creature gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:Flying\nThis creature gets +1/+0 for each artifact you control.

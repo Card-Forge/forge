@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import static org.testng.Assert.assertEquals;
 
@@ -39,25 +38,27 @@ public class FCollectionTest {
             i++;
         }
         assertEquals(cc.size(), 1);
-    }*/// Commented out since we use synchronized collection and it doesn't support modification while iteration
+    }*/// Commented out since the collection doesn't support modification while iterating over it directly
 
+    /**
+     * {@link forge.util.collect.FCollection#threadSafeIterable()} hands out a snapshot, so removing
+     * from the collection while looping over it neither throws nor skips an element.
+     */
     @Test
-    void testCompletableFuture() {
+    void testRemoveWhileIterating() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i < 5; i++)
             cards.add(new Card(i, null));
         CardCollection cc = new CardCollection(cards);
-        List<CompletableFuture<Integer>> futures = new ArrayList<>();
+        int seen = 0;
         for (Card c : cc.threadSafeIterable()) {
-            futures.add(CompletableFuture.supplyAsync(() -> {
-                if (c.getId() % 2 > 0)
-                    cc.remove(c);
-                return 0;
-            }));
+            seen++;
+            if (c.getId() % 2 > 0)
+                cc.remove(c);
         }
-        CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-        CompletableFuture.allOf(futuresArray).join();
-        futures.clear();
+        assertEquals(seen, 4);
         assertEquals(cc.size(), 2);
+        for (Card c : cc)
+            assertEquals(c.getId() % 2, 0);
     }
 }

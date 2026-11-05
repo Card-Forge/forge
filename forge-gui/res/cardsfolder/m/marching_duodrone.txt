@@ -2,7 +2,7 @@ Name:Marching Duodrone
 ManaCost:2
 Types:Artifact Creature Construct
 PT:2/2
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBTreasure | TriggerDescription$ Whenever CARDNAME attacks, each player creates a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBTreasure | TriggerDescription$ Whenever CARDNAME attacks, each player creates a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ Player
 DeckHas:Ability$Token|Sacrifice
-Oracle:Whenever Marching Duodrone attacks, each player creates a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+Oracle:Whenever Marching Duodrone attacks, each player creates a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

@@ -311,7 +311,6 @@ public class StaticEffect {
                     affectedCard.removeHiddenExtrinsicKeywords(timestamp, ability.getId());
                 }
 
-                // remove may look at
                 if (hasParam("MayLookAt")) {
                     affectedCard.removeMayLookAt(getTimestamp());
                 }
@@ -328,6 +327,9 @@ public class StaticEffect {
                 }
                 if (hasParam("CanBlockAmount")) {
                     affectedCard.removeCanBlockAdditional(getTimestamp());
+                }
+                if (hasParam("LethalDamageByPower")) {
+                    affectedCard.removeLethalDamageByPower(getTimestamp());
                 }
                 addCard(affectedPerLayer, StaticAbilityLayer.RULES, affectedCard);
             }

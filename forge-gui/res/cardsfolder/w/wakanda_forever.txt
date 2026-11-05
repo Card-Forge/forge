@@ -1,0 +1,9 @@
+Name:Wakanda Forever!
+ManaCost:4 G G
+Types:Sorcery
+A:SP$ PeekAndReveal | PeekAmount$ 6 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBChangeField | StackDescription$ REP Reveal_{p:You} reveals & your_their | SpellDescription$ Reveal the top six cards of your library.
+SVar:DBChangeField:DB$ ChangeZone | ChangeType$ Permanent.IsRemembered | ChangeNum$ 1 | SelectPrompt$ You may select a permanent card to put on the battlefield with an indestructible counter on it | Origin$ Library | Destination$ Battlefield | WithCountersType$ Indestructible | WithCountersAmount$ 1 | ForgetChanged$ True | Shuffle$ False | SubAbility$ DBChangeHand | StackDescription$ REP You_{p:You} | SpellDescription$ You may put a permanent card from among them onto the battlefield with an indestructible counter on it.
+SVar:DBChangeHand:DB$ ChangeZone | ChangeType$ Permanent.IsRemembered | ChangeNum$ 1 | SelectPrompt$ You may select a permanent card to put into your hand | Origin$ Library | Destination$ Hand | ForgetChanged$ True | Shuffle$ False | SubAbility$ DBRestGrave | StackDescription$ REP You_{p:You} & your_their | SpellDescription$ You may put a permanent card from among them into your hand.
+SVar:DBRestGrave:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | Shuffle$ False | SubAbility$ DBCleanup | StackDescription$ REP Put_{p:You} puts & your_their | SpellDescription$ Put the rest into your graveyard.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reveal the top six cards of your library. You may put a permanent card from among them onto the battlefield with an indestructible counter on it. You may put a permanent card from among them into your hand. Put the rest into your graveyard.

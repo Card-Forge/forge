@@ -1,0 +1,9 @@
+Name:Secure Detention
+ManaCost:3 W
+Types:Enchantment Aura
+K:Enchant:Artifact,Creature:artifact or creature
+SVar:AttachAILogic:Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Aura enters, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated.
+Oracle:Enchant artifact or creature\nWhen this Aura enters, create a 1/1 white Soldier creature token.\nEnchanted permanent can't attack or block, and its activated abilities can't be activated.

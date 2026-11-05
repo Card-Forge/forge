@@ -825,6 +825,53 @@
 		
 		},
   {
+    "name":"ThievesItems",
+    "description":"Thieves Guild Gear",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"ItemShop",
+    "rewards": [
+      { "type": "item","count":1, "itemName": "Vectis Boots"  },
+      { "type": "item","count":1, "itemName": "Bane Alley Boots"  },
+      { "type": "item","count":1, "itemName": "Swindler Shoes"  },
+      { "type": "item","count":1, "itemName": "High Merchant's Shirt"},
+      { "type": "item","count":1, "itemName": "Throwing Knife"  },
+      { "type": "item","count":1, "itemName": "Whispersteel Dagger"  },
+      { "type": "item","count":1, "itemName": "Thought Dissector"  },
+      { "type": "item","count":1, "itemName": "Skulker's Hood"  }
+    ]
+
+  },
+  {
+    "name":"JandorItems1",
+    "description":"Exotic Silks for Sale",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"ItemShop",
+    "rewards": [
+      { "type": "item","count":1, "itemName": "Armor of Wak-Wak"  },
+      { "type": "item","count":1, "itemName": "Gladiator Armor"  },
+      { "type": "item","count":1, "itemName": "Armor of Safety"  },
+      { "type": "item","count":1, "itemName": "Armor of Sorrow"},
+      { "type": "item","count":1, "itemName": "Icy Armor"  },
+      { "type": "item","count":1, "itemName": "Oasis Outfit"  }
+    ]
+
+  },
+  {
+    "name":"JandorItems2",
+    "description":"Banding is the New Black",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"ItemShop",
+    "rewards": [
+      { "type": "item","count":1, "itemName": "Rainbow Armor"  },
+      { "type": "item","count":1, "itemName": "Adventurer's Outfit"  },
+      { "type": "item","count":1, "itemName": "Armor of Serra"  },
+      { "type": "item","count":1, "itemName": "Unholy Armor"},
+      { "type": "item","count":1, "itemName": "Seafarer's Outfit"  },
+      { "type": "item","count":1, "itemName": "Stronghold Armor"  }
+    ]
+
+  },
+  {
     "name":"BloomburrowBoosters",
     "description":"Bumbleflower's Boosters",
     "spriteAtlas":"maps/tileset/buildings.atlas",
@@ -948,8 +995,8 @@
       {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
       {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
       {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
-      {"type": "cardPackShop", "count": 1, "editions": ["CON"] },
-      {"type": "cardPackShop", "count": 1, "editions": ["CON"] }
+      {"type": "cardPackShop", "count": 1, "editions": ["CFX"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CFX"] }
     ]
   },
   {
@@ -999,6 +1046,251 @@
       {"type": "cardPackShop", "count": 1, "editions": ["SOS"] },
       {"type": "cardPackShop", "count": 1, "editions": ["SOS"] }
     ]
+  },
+  {
+    "name":"40KShop",
+    "description":"Grimdark Armory",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"SpaceMarineShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["40K"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["40K"]
+      }]
+  },
+  {
+    "name":"WHOShop",
+    "description":"TARDIS Overstock",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["WHO"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["WHO"]
+      }]
+  },
+  {
+    "name":"LTRShop",
+    "description":"Treasures of Middle Earth",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["LTR", "LTC"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["LTR", "LTC"]
+      }]
+  },
+  {
+    "name":"PIPShop",
+    "description":"Wasteland Junk",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["PIP"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["PIP"]
+      }]
+  },
+  {
+    "name":"ACRShop",
+    "description":"Brotherhood Arsenal",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"RogueShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["ACR"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["ACR"]
+      }]
+  },
+  {
+    "name":"FINShop",
+    "description":"Chocobo Cards",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["FIN", "FIC"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["FIN", "FIC"]
+      }]
+  },
+  {
+    "name":"SPMShop",
+    "description":"Friendly Neighborhood Cards",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"InsectSpiderShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["SPM"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["SPM"]
+      }]
+  },
+  {
+    "name":"TLAShop",
+    "description":"Bent Cards for Sale",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["TLA", "TLE"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["TLA", "TLE"]
+      }]
+  },
+  {
+    "name":"TMTShop",
+    "description":"Cards in a Half-Shell",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["TMT", "TMC"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["TMT", "TMC"]
+      }]
+  },
+  {
+    "name":"MSHShop",
+    "description":"Marvel At These Cards",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["MSH", "MSC"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["MSH", "MSC"]
+      }]
+  },
+  {
+    "name":"HOBShop",
+    "description":"Smaug's Hoard",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["HOB", "HOC"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["HOB", "HOC"]
+      }]
+  },
+  {
+    "name":"TRKShop",
+    "description":"Federation Cards",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["TRK", "TRC"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["TRK", "TRC"]
+      }]
+  },
+  {
+    "name":"CLBShop",
+    "description":"Baldur's Gate Deals",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"DnDShop",
+    "rewards": [
+      {
+        "count":4,
+        "rarity": ["rare", "mythic rare"],
+        "editions": ["CLB", "HBG"]
+      },
+      {
+        "count":4,
+        "rarity": ["common", "uncommon"],
+        "editions": ["CLB", "HBG"]
+      }]
+  },
+  {
+    "name":"UBSLDShop",
+    "description":"Straight from the Secret Lair",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"UBShop",
+    "rewards": [
+      {
+        "count":8,
+        "sourceDeck": "decks/rewards/SLD_Exclusives.dck"
+      }]
+
+  },
+  {
+    "name":"AlchemyShop",
+    "description":"Wonders of Alchemy",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"WandShop",
+    "rewards": [
+      {
+        "count":8,
+        "sourceDeck": "decks/rewards/digital_exclusives.dck"
+      }]
+
   },
 {                                      
 "name":"Swamp",    

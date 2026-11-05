@@ -1,0 +1,10 @@
+Name:The Kingpin of Crime
+ManaCost:1 W B
+Types:Legendary Creature Human Villain
+PT:1/5
+K:Extort
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay 2 life. If you do, until end of turn, creatures you control with toughness greater than their power assign combat damage equal to their toughness rather than their power.
+SVar:TrigEffect:AB$ Effect | Cost$ PayLife<2> | StaticAbilities$ CombatDamageToughness
+SVar:CombatDamageToughness:Mode$ CombatDamageToughness | ValidCard$ Creature.YouCtrl+powerLTtoughness | Description$ Until end of turn, creatures you control with toughness greater than their power assign combat damage equal to their toughness rather than their power.
+AI:RemoveDeck:All
+Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever you attack, you may pay 2 life. If you do, until end of turn, creatures you control with toughness greater than their power assign combat damage equal to their toughness rather than their power.

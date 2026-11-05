@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class Match {
-    private static List<PaperCard> removedCards = Lists.newArrayList();
+    private List<PaperCard> removedCards = Lists.newArrayList();
     private final List<RegisteredPlayer> players;
     private final GameRules rules;
     private final String title;
@@ -101,6 +101,18 @@ public class Match {
 
         //run GC after game is finished
         System.gc();
+    }
+
+    /**
+     * The main decks as they were played in the game before this one, taken before anyone sideboards for the next
+     * game: what a player knows about the deck of its opponent. Empty before the second game.
+     */
+    private final Map<RegisteredPlayer, List<PaperCard>> playedMains = new IdentityHashMap<>();
+
+    /** The main deck {@code player} played last game (null if unknown), as everyone at the table has seen it. */
+    public List<PaperCard> getPlayedMain(final RegisteredPlayer player) {
+        final List<PaperCard> main = playedMains.get(player);
+        return main == null ? null : Collections.unmodifiableList(main);
     }
 
     public GameOutcome getOutcomeById(int id) {
@@ -191,7 +203,7 @@ public class Match {
         return myRemovedAnteCards;
     }
 
-    public static List<PaperCard> getRemovedCards() { return removedCards; }
+    public List<PaperCard> getRemovedCards() { return removedCards; }
 
     public void removeCard(PaperCard c) {
         removedCards.add(c);
@@ -235,6 +247,14 @@ public class Match {
         // Only allow this if feature flag is on AND for certain match types
         boolean sideboardForAIs = rules.getSideboardForAI() &&
             rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
+        playedMains.clear();
+        if (canSideBoard) {
+            for (final RegisteredPlayer rp : playersConditions) {
+                if (rp.getDeck() != null) {
+                    playedMains.put(rp, new ArrayList<>(rp.getDeck().getMain().toFlatList()));
+                }
+            }
+        }
         PlayerController sideboardProxy = null;
         if (canSideBoard && sideboardForAIs) {
             for (int i = 0; i < players.size(); i++) {
@@ -253,7 +273,9 @@ public class Match {
             PlayerController person = player.getController();
 
             if (canSideBoard) {
-                if (sideboardProxy != null && person.isAI()) {
+                // an AI that reads the deck of its opponent sideboards for itself; the human only does it for the others
+                final boolean byItself = person.isAI() && person.sideboardsByItself();
+                if (sideboardProxy != null && person.isAI() && !byItself) {
                     person = sideboardProxy;
                 }
 
@@ -276,6 +298,12 @@ public class Match {
                     toChange.get(DeckSection.Sideboard).addAll(sideboard);
                 }
                 List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), player.getName());
+                if (byItself && toChange.has(DeckSection.Sideboard)) {
+                    // show what the AI did with its sideboard, so that nobody has to guess what changed between games
+                    for (final String line : person.getSideboardingReport()) {
+                        game.fireEvent(new GameEventAddLog(GameLogEntryType.SIDEBOARD, player.getName() + " " + line));
+                    }
+                }
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
@@ -404,7 +432,7 @@ public class Match {
             Deck losersDeck = players.get(i).getDeck();
             List<PaperCard> personalLosses = new ArrayList<>();
             for (Card c : gamePlayer.getCardsIn(ZoneType.Ante)) {
-                if(!c.isCollectible())
+                if (!c.isCollectible())
                     continue;
                 PaperCard toRemove = (PaperCard) c.getPaperCard();
                 // this could miss the cards by returning instances that are not equal to cards found in deck

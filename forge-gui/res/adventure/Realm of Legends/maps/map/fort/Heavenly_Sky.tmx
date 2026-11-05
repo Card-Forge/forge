@@ -44,7 +44,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="217.333" y="408.833" width="48" height="25.1667">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="224.833" y="423.083" width="30.25" height="17.1667">
    <properties>
     <property name="direction" value="left"/>
     <property name="teleport" value=""/>
@@ -58,7 +58,7 @@
     &quot;cardTypes&quot;: [&quot;Creature&quot;],
     &quot;subTypes&quot;: [&quot;Angel&quot;],
     &quot;rarity&quot;:[ &quot;rare&quot;, &quot;mythic rare&quot;],
-    &quot;count&quot;: 3,
+    &quot;count&quot;: 3
   }
 ]
 </property>
@@ -153,7 +153,7 @@ I'm sure you think I'll be easy since I look young. But I think you'll find my p
     &quot;cardTypes&quot;: [&quot;Creature&quot;],
     &quot;subTypes&quot;: [&quot;Angel&quot;],
     &quot;rarity&quot;:[ &quot;rare&quot;, &quot;mythic rare&quot;],
-    &quot;count&quot;: 3,
+    &quot;count&quot;: 3
   }
 ]
 </property>
@@ -168,7 +168,7 @@ I'm sure you think I'll be easy since I look young. But I think you'll find my p
     &quot;cardTypes&quot;: [&quot;Creature&quot;],
     &quot;subTypes&quot;: [&quot;Angel&quot;],
     &quot;rarity&quot;:[ &quot;rare&quot;, &quot;mythic rare&quot;],
-    &quot;count&quot;: 3,
+    &quot;count&quot;: 3
   }
 ]
 </property>

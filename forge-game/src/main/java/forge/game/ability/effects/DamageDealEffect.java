@@ -15,7 +15,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardDamageMap;
+import forge.game.card.CardDamageTable;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.keyword.Keyword;
@@ -144,7 +144,6 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         int dmg = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumDmg"), sa);
 
-        final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
         List<GameEntity> tgts = Lists.newArrayList();
@@ -197,14 +196,14 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         //Remember params from this effect have been moved to dealDamage in GameAction
         boolean usedDamageMap = true;
-        CardDamageMap damageMap = sa.getDamageMap();
-        CardDamageMap preventMap = sa.getPreventMap();
+        CardDamageTable damageMap = sa.getDamageMap();
+        CardDamageTable preventMap = sa.getPreventMap();
         GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
-            damageMap = new CardDamageMap();
-            preventMap = new CardDamageMap();
+            damageMap = new CardDamageTable();
+            preventMap = new CardDamageTable();
             counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }
@@ -246,11 +245,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
 
             for (final GameEntity o : tgts) {
-                if (!removeDamage) {
-                    dmg = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : dmg;
-                    if (dmg <= 0) {
-                        continue;
-                    }
+                dmg = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : dmg;
+                if (dmg <= 0) {
+                    continue;
                 }
                 if (o instanceof Card c) {
                     final Card gc = game.getCardState(c, null);
@@ -275,7 +272,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         replaceDying(sa);
     }
 
-    protected void internalDamageDeal(SpellAbility sa, Card sourceLKI, Card c, int dmg, CardDamageMap damageMap) {
+    protected void internalDamageDeal(SpellAbility sa, Card sourceLKI, Card c, int dmg, CardDamageTable damageMap) {
         final Card hostCard = sa.getHostCard();
         final Player activationPlayer = sa.getActivatingPlayer();
         int excess = 0;
@@ -286,11 +283,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             excess = dmg - dmgToTarget;
         }
 
-        if (sa.hasParam("Remove")) {
-            c.setDamage(0);
-            c.setHasBeenDealtDeathtouchDamage(false);
-            c.clearAssignedDamage();
-        } else if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
+        if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                 sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
             damageMap.put(sourceLKI, c, dmgToTarget);
 

@@ -1,0 +1,8 @@
+Name:Wonder Man, Hollywood Hero
+ManaCost:3 R R
+Types:Legendary Creature Human Performer Hero
+PT:4/4
+K:Flying
+S:Mode$ Activations | ValidCard$ Permanent.YouCtrl | ValidSA$ Activated.PowerUp | MinLimit$ 2 | Description$ Each power-up ability of permanents you control can be activated an additional time.
+A:AB$ PutCounter | Cost$ 5 R R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | PowerUp$ True | SpellDescription$ Put two +1/+1 counters on NICKNAME. (Activate each power-up ability only . . . once? Reduce the cost by his mana cost if he entered this turn.)
+Oracle:Flying\nEach power-up ability of permanents you control can be activated an additional time.\nPower-up — {5}{R}{R}: Put two +1/+1 counters on Wonder Man. (Activate each power-up ability only . . . once? Reduce the cost by his mana cost if he entered this turn.)

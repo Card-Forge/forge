@@ -1,0 +1,15 @@
+Name:Itazura, Lingering Wick
+ManaCost:2 U R
+Types:Legendary Creature Spirit
+PT:1/5
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top three cards of your library. Each opponent secretly chooses a number 0 or greater. Then those numbers are revealed. Choose an opponent with the highest number. NICKNAME deals that much damage to them, then they may cast a spell from among those cards without paying its mana cost. You put a card from among them that wasn't cast this way into your hand.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ DBChooseNumber
+SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ Opponent | Secretly$ True | Highest$ DBPump | AILogic$ HighestLoseLife | SubAbility$ DBChoosePlayer
+SVar:DBPump:DB$ Pump | Defined$ RememberedPlayer | NoteCards$ Self | NoteCardsFor$ Highest
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Choices$ Player.NotedForHighest | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ Count$ChosenNumber | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Card.IsImprinted+nonLand | Controller$ ChosenPlayer | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Hidden$ True | ChangeType$ Card.IsImprinted+!IsRemembered | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Token|Sacrifice
+Oracle:At the beginning of your upkeep, exile the top three cards of your library. Each opponent secretly chooses a number 0 or greater. Then those numbers are revealed. Choose an opponent with the highest number. Itazura deals that much damage to them, then they may cast a spell from among those cards without paying its mana cost. You put a card from among them that wasn't cast this way into your hand.

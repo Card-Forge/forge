@@ -1,0 +1,10 @@
+Name:Pharaoh Rama-Tut
+ManaCost:4 U
+Types:Legendary Creature Human Noble Villain
+PT:4/4
+K:Ward:2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigConnive | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+SVar:BuffedBy:Card.nonCreature
+DeckHas:Ability$Discard|Counters
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhenever you cast a noncreature spell, Pharaoh Rama-Tut connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

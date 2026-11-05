@@ -1,0 +1,6 @@
+Name:Bilbo's Burglaring
+ManaCost:4 U U
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ For each opponent, select up to one target artifact that player controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, gain control of up to one target artifact that player controls.
+SVar:OneEach:PlayerCountOpponents$Amount
+Oracle:For each opponent, gain control of up to one target artifact that player controls.

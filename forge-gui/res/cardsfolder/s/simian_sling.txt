@@ -2,7 +2,7 @@ Name:Simian Sling
 ManaCost:R
 Types:Artifact Creature Equipment Monkey
 PT:1/1
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+S:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self,Creature.EquippedBy | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or equipped creature becomes blocked, it deals 1 damage to defending player.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ 1
 K:Reconfigure:2

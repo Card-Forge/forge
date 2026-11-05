@@ -1,9 +1,0 @@
-Name:Super Villain Lockup
-ManaCost:1 W
-Types:Enchantment
-K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this enchantment enters, exile target tapped creature an opponent controls until this enchantment leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.tapped+OppCtrl | ValidTgtDesc$ tapped creature an opponent controls | Duration$ UntilHostLeavesPlay
-SVar:PlayMain1:TRUE
-SVar:OblivionRing:TRUE
-Oracle:Flash\nWhen this enchantment enters, exile target tapped creature an opponent controls until this enchantment leaves the battlefield.

@@ -1,0 +1,11 @@
+Name:Mjölnir, Hammer of Thor
+ManaCost:3 R
+Types:Legendary Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When NICKNAME enters, it deals 4 damage to up to one target creature.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | NumDmg$ 4
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.EquippedBy | ReplaceWith$ DmgTwice | Description$ Double all damage equipped creature would deal.
+K:Equip:1:Creature.YouCtrl+Worthy:worthy creature you control
+A:AB$ DamageAll | Cost$ 2 R Discard<1/NICKNAME> | ActivationZone$ Hand | ValidCards$ Creature | NumDmg$ 2 | ValidDescription$ each creature | SpellDescription$ It deals 2 damage to each creature.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:When Mjölnir enters, it deals 4 damage to up to one target creature.\nDouble all damage equipped creature would deal.\nEquip worthy {1} (A creature is worthy if it's a legendary non-Villain that's red and/or white.)\n{2}{R}, Discard this card: It deals 2 damage to each creature.

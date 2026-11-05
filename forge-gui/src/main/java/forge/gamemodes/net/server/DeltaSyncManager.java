@@ -5,6 +5,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CombatData;
@@ -23,12 +24,14 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,9 +49,7 @@ public class DeltaSyncManager implements IHasForgeLog {
     private static final int MIN_CHECKSUM_INTERVAL = 5;
     private static final int CLEAN_STREAK_TO_RESTORE = 10;
     private static final int SAMPLE_SIZE = 15;
-
-    // Sentinel for properties that should be skipped in network transport
-    static final Object SKIP_MARKER = new Object();
+    private static final int MAX_WALK_ATTEMPTS = 3;
 
     // Zone collection properties on PlayerView — the authoritative source for
     // CardView instances. Cross-reference properties (Commander, AttachedCards,
@@ -81,6 +82,9 @@ public class DeltaSyncManager implements IHasForgeLog {
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
     // Used to block stale cross-reference replacements
     private final Map<Integer, CardView> authoritativeInstances = new HashMap<>();
+    private final Set<TrackableObject> walkedInstances = Collections.newSetFromMap(new IdentityHashMap<>());
+    // Per-object detail of the current collectDeltas call, logged as one line
+    private final StringBuilder walkTrace = new StringBuilder();
 
     // Not atomic: only accessed from game thread
     // Defer the first checksum until the game state stabilizes — seq=1 races
@@ -101,27 +105,49 @@ public class DeltaSyncManager implements IHasForgeLog {
      * New objects are registered with this consumer and sent in full.
      * Existing objects only send properties dirty for THIS consumer.
      *
-     * <p>Must be called on the game thread. All delta collection and checksum
-     * computation runs single-threaded — no locks, snapshots, or volatile
-     * barriers needed.
+     * <p>Another thread can change the graph while this runs, so a walk that throws is tried
+     * again. If none of the attempts get through, the packet ships with whatever was collected
+     * rather than letting the exception reach the caller — on the game thread that would end
+     * the game loop and leave the match unable to continue.
      */
     public DeltaPacket collectDeltas(GameView gameView) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
         // need parent-before-child insertion order
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();
-        Set<Integer> currentObjectIds = new HashSet<>();
+        Set<Integer> currentObjectIds = null;
+        walkTrace.setLength(0);
 
-        authoritativeInstances.clear();
-        preScanZoneCollections(gameView);
-        walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
+        // A fresh visited set per attempt: reusing it would make walkAndCollect return at the
+        // root and collect nothing. Deltas already gathered are kept, because the dirty flags
+        // behind them have been cleared and no later walk would find them again.
+        for (int attempt = 1; attempt <= MAX_WALK_ATTEMPTS; attempt++) {
+            Set<Integer> visited = new HashSet<>();
+            try {
+                authoritativeInstances.clear();
+                walkedInstances.clear();
+                preScanZoneCollections(gameView);
+                walkAndCollect(gameView, objectDeltas, newObjects, visited);
+                currentObjectIds = visited;
+                break;
+            } catch (ConcurrentModificationException e) {
+                netLog.warn(e, "[DeltaSync] Walk attempt {} of {} failed", attempt, MAX_WALK_ATTEMPTS);
+            }
+        }
+        if (currentObjectIds == null) {
+            netLog.error("[DeltaSync] Walk failed {} times, shipping what was collected", MAX_WALK_ATTEMPTS);
+        }
 
-        // Prune registrations for objects no longer in the graph
-        Iterator<Map.Entry<Integer, TrackableObject>> regIt = registeredByKey.entrySet().iterator();
-        while (regIt.hasNext()) {
-            Map.Entry<Integer, TrackableObject> entry = regIt.next();
-            if (!currentObjectIds.contains(entry.getKey())) {
-                entry.getValue().unregisterConsumer(consumerId);
-                regIt.remove();
+        // Only after a complete walk: an unfinished one never reached every object, so its
+        // visited set would unregister objects that are still in the graph
+        if (currentObjectIds != null) {
+            // Prune registrations for objects no longer in the graph
+            Iterator<Map.Entry<Integer, TrackableObject>> regIt = registeredByKey.entrySet().iterator();
+            while (regIt.hasNext()) {
+                Map.Entry<Integer, TrackableObject> entry = regIt.next();
+                if (!currentObjectIds.contains(entry.getKey())) {
+                    entry.getValue().unregisterConsumer(consumerId);
+                    regIt.remove();
+                }
             }
         }
 
@@ -133,13 +159,18 @@ public class DeltaSyncManager implements IHasForgeLog {
         if (!newObjects.isEmpty()) {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
         }
+        if (walkTrace.length() > 0) {
+            // e.g. 0x30000001[Phase] +0x20000007(8) ~0x00000046(14): changed props, new object (+), replaced instance (~)
+            netLog.trace("[DeltaSync] Collected:{}", walkTrace);
+        }
 
         sequenceNumber++;
 
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
         packetsSinceLastChecksum++;
-        if (packetsSinceLastChecksum >= checksumInterval) {
+        // Skipped after an unfinished walk: the client cannot match a checksum over state the packet did not carry
+        if (currentObjectIds != null && packetsSinceLastChecksum >= checksumInterval) {
             checksumPropertyOrdinals = selectChecksumProperties();
             List<String> detail = new ArrayList<>();
             checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, detail);
@@ -187,16 +218,14 @@ public class DeltaSyncManager implements IHasForgeLog {
         TrackableObject auth = authoritativeInstances.get(deltaKey);
         if (auth != null && auth != obj) return;
 
-        // Dedup: skip if same instance already processed this pass
-        if (!currentObjectIds.add(deltaKey)) {
-            if (registeredByKey.get(deltaKey) == obj) return;
-            // Different instance at same key — replacement (zone change)
-        }
+        // By instance, not key: two copies of a card can share a key and hold each other in a collection
+        if (!walkedInstances.add(obj)) return;
+        currentObjectIds.add(deltaKey);
 
         collectObjectDelta(obj, objectDeltas, newObjects);
 
         boolean parentIsGameEntityView = obj instanceof GameEntityView;
-        for (Map.Entry<TrackableProperty, Object> entry : ((Map<TrackableProperty, Object>) obj.getProps()).entrySet()) {
+        for (Map.Entry<TrackableProperty, Object> entry : obj.getProps().entrySet()) {
             Object value = entry.getValue();
             if (value instanceof TrackableObject to) {
                 // Skip GameEntityView→GameEntityView scalar cross-references
@@ -228,17 +257,31 @@ public class DeltaSyncManager implements IHasForgeLog {
         if (old == obj) {
             // Existing object — dirty props only
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
+            // identical to mergeDelayedProps' own early-out: only a frozen tracker can add to an empty
+            // dirty set, so with no dirty props and no freeze the delta below would always come out empty
+            Tracker tracker = obj.getTracker();
+            if (dirtyProps.isEmpty() && (tracker == null || !tracker.isFrozen())) {
+                return;
+            }
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
             if (!delta.isEmpty()) {
-                objectDeltas.put(deltaKey, delta);
-                netLog.trace("[DeltaSync] Delta: key={} id={}, props={}",
-                        String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
+                // Merged, not replaced: a retried walk must not drop props an earlier attempt took
+                Map<TrackableProperty, Object> collected = objectDeltas.get(deltaKey);
+                if (collected != null) {
+                    collected.putAll(delta);
+                } else {
+                    objectDeltas.put(deltaKey, delta);
+                }
+                walkTrace.append(String.format(" 0x%08X", deltaKey)).append(delta.keySet());
             }
             return;
         }
 
         // New or replacement — send full state via newObjects so the client
         // clears stale properties before applying
+        // Built before registering: if this throws, the object stays unregistered and a later
+        // walk retries it, instead of being on the books as sent when it never was
+        Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
         if (old != null) {
             old.unregisterConsumer(consumerId);
             objectDeltas.remove(deltaKey);
@@ -246,24 +289,23 @@ public class DeltaSyncManager implements IHasForgeLog {
         obj.registerConsumer(consumerId);
         obj.getAndClearDirtyProps(consumerId);
         registeredByKey.put(deltaKey, obj);
-        Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
         if (!allProps.isEmpty()) {
             newObjects.put(deltaKey, allProps);
-            netLog.trace("[DeltaSync] {}: key={} id={}, {} props",
-                    old != null ? "Replaced instance" : "New object",
-                    String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
+            walkTrace.append(String.format(" %s0x%08X(%d)", old != null ? "~" : "+", deltaKey, allProps.size()));
         }
     }
 
     /**
      * Pre-scan zone collections across all players to seed authoritativeInstances.
      * Provides cross-player coverage for stale Commander references.
+     * A spell's card is in no zone collection while it is on the stack, so its stack item's source is seeded after them.
+     * Any other instance at that key, such as the one the reveal history or the commander list keeps, is stale.
      */
     private void preScanZoneCollections(GameView gameView) {
         if (gameView == null || gameView.getPlayers() == null) return;
         for (PlayerView player : gameView.getPlayers()) {
             for (TrackableProperty zoneProp : ZONE_COLLECTIONS) {
-                if (((Map<TrackableProperty, Object>) player.getProps()).get(zoneProp) instanceof TrackableCollection<?> tc) {
+                if (player.getProps().get(zoneProp) instanceof TrackableCollection<?> tc) {
                     for (Object item : tc) {
                         if (item instanceof CardView cv) {
                             authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
@@ -272,15 +314,20 @@ public class DeltaSyncManager implements IHasForgeLog {
                 }
             }
         }
+        for (StackItemView si : gameView.getStack()) {
+            CardView source = si.getSourceCard();
+            if (source != null) {
+                authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(source), source);
+            }
+        }
     }
 
     /**
      * Build a property map for a subset of dirty properties.
      */
     private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj, Set<TrackableProperty> dirtyProps) {
-        Map<TrackableProperty, Object> props = obj.getProps();
         // Copy props — mergeDelayedProps may add entries, and we iterate later
-        Map<TrackableProperty, Object> snapshot = new EnumMap<>(props);
+        Map<TrackableProperty, Object> snapshot = new EnumMap<>(obj.getProps());
         mergeDelayedProps(obj, snapshot, dirtyProps);
         if (dirtyProps == null) {
             // additional delayed props will be included from fresh object
@@ -288,10 +335,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         }
         Map<TrackableProperty, Object> delta = new EnumMap<>(TrackableProperty.class);
         for (TrackableProperty prop : dirtyProps) {
-            Object netValue = toNetworkValue(prop, snapshot.get(prop));
-            if (netValue != SKIP_MARKER) {
-                delta.put(prop, netValue);
-            }
+            delta.put(prop, toNetworkValue(prop, snapshot.get(prop)));
         }
         return delta;
     }
@@ -327,7 +371,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         TrackableType<?> type = prop.getType();
 
         // Object references → Integer ID
-        if (type == TrackableTypes.CardViewType || type == TrackableTypes.PlayerViewType)
+        if (type == TrackableTypes.CardViewType || type == TrackableTypes.PlayerViewType || type == TrackableTypes.StackItemViewType)
             return ((TrackableObject) value).getId();
 
         // Polymorphic reference → int[]{typeMarker, id}
@@ -337,7 +381,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         }
 
         // Collections of objects → List<Integer> of IDs
-        if (type == TrackableTypes.CardViewCollectionType || type == TrackableTypes.PlayerViewCollectionType) {
+        if (type == TrackableTypes.CardViewCollectionType || type == TrackableTypes.PlayerViewCollectionType || type == TrackableTypes.StackItemViewListType) {
             TrackableCollection<?> coll = (TrackableCollection<?>) value;
             List<Integer> ids = new ArrayList<>(coll.size());
             for (TrackableObject obj : coll) ids.add(obj == null ? -1 : obj.getId());
@@ -352,17 +396,6 @@ public class DeltaSyncManager implements IHasForgeLog {
 
         if (type == TrackableTypes.CombatViewType) {
             return combatViewToCombatData((CombatView) value);
-        }
-
-        if (type == TrackableTypes.StackItemViewType) {
-            return ((TrackableObject) value).getId();
-        }
-
-        if (type == TrackableTypes.StackItemViewListType) {
-            TrackableCollection<?> coll = (TrackableCollection<?>) value;
-            List<Integer> ids = new ArrayList<>(coll.size());
-            for (TrackableObject obj : coll) ids.add(obj == null ? -1 : obj.getId());
-            return ids;
         }
 
         return value;
@@ -467,7 +500,7 @@ public class DeltaSyncManager implements IHasForgeLog {
         // walkAndRegister only registers consumers (no data sent), and the
         // first collectDeltas corrects any stale registrations.
         boolean parentIsGameEntityView = obj instanceof GameEntityView;
-        for (Object value : ((Map<TrackableProperty, Object>) obj.getProps()).values()) {
+        for (Object value : obj.getProps().values()) {
             if (value instanceof TrackableObject to) {
                 if (parentIsGameEntityView && to instanceof GameEntityView) {
                     continue;

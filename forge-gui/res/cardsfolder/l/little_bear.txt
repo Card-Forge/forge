@@ -1,0 +1,11 @@
+Name:Little Bear
+ManaCost:2 G
+Types:Creature Bear
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When this creature enters, untap another target creature you control. If that creature is a Bear, put a +1/+1 counter on it.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.Other+YouCtrl | ValidTgtsDesc$ another creature you control | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Bear
+SVar:AmbushAI:True
+DeckHints:Type$Bear
+Oracle:Flash\nWhen this creature enters, untap another target creature you control. If that creature is a Bear, put a +1/+1 counter on it.

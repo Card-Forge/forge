@@ -1,0 +1,9 @@
+Name:Kid Loki
+ManaCost:U
+Types:Legendary Creature God Hero Villain
+PT:1/1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+countersReceivedThisTurn_GE1_P1P1_You | AddKeyword$ Hexproof | Description$ Each creature you control that you've put one or more +1/+1 counters on this turn has hexproof.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:Each creature you control that you've put one or more +1/+1 counters on this turn has hexproof.\nWhenever you draw your second card each turn, put a +1/+1 counter on Kid Loki.

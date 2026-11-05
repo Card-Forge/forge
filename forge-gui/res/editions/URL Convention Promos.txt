@@ -22,3 +22,5 @@ ScryfallCode=PURL
 2025-4 M Behold the Sinister Six! @Jonas De Ro
 2025-5 R Unbreakable Formation @Xavier Ribeiro
 2026-1 R Tom, Bert, and William @Narendra Bintara Adi
+2026-2 M Kirk, Enterprising Captain @Nathaniel Himawan
+2026-3 M Borg Queen, Perfection Manifest @PINDURSKI

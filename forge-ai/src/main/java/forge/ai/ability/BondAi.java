@@ -24,10 +24,11 @@ import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
-import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -65,9 +66,9 @@ public final class BondAi extends SpellAbilityAi {
                 if (params.get("Partner") instanceof Card partner && !partner.isValid(restriction, ai, host, sa)) {
                     return null;
                 }
-                candidates = StreamSupport.stream(options.spliterator(), false)
+                candidates = StreamUtil.stream(options)
                         .filter(c -> c.isValid(restriction, ai, host, sa))
-                        .toList();
+                        .collect(Collectors.toList());
             }
         }
         return ComputerUtilCard.getBestCreatureAI(candidates);

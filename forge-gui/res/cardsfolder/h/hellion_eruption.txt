@@ -2,6 +2,7 @@ Name:Hellion Eruption
 ManaCost:5 R
 Types:Sorcery
 A:SP$ SacrificeAll | ValidCards$ Creature.YouCtrl | RememberSacrificed$ True | SubAbility$ DBToken | AILogic$ HellionEruption | SpellDescription$ Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens.
-SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_4_4_hellion | TokenOwner$ You
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_4_4_hellion | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 Oracle:Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens.

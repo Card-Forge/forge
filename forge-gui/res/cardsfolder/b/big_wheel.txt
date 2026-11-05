@@ -1,0 +1,10 @@
+Name:Big Wheel
+ManaCost:2 R
+Types:Artifact Vehicle
+PT:4/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this Vehicle enters, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card>
+K:Crew:2
+DeckHas:Ability$Discard
+Oracle:Trample\nWhen this Vehicle enters, you may discard a card. If you do, draw a card.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

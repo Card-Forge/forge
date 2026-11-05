@@ -288,6 +288,7 @@ public class FloatingZone extends FloatingCardArea {
     public static void closeAll() {
         for (final FloatingZone cardArea : floatingAreas.values()) {
             cardArea.window.setVisible(false);
+            cardArea.window.dispose(); // release the native window; on macOS setVisible(false) alone can leave it lingering behind the main frame
         }
         floatingAreas.clear();
 
@@ -421,17 +422,6 @@ public class FloatingZone extends FloatingCardArea {
             }
             break; // Only the first local player's zones
         }
-    }
-
-    /** Deregister all zone docs. Called on game end before closeAll. */
-    public static void deregisterZoneDocs() {
-        for (final VZone vZone : dockedZones.values()) {
-            final EDocID docID = vZone.getDocumentID();
-            if (docID != null) {
-                docID.setDoc(null);
-            }
-        }
-        // Don't clear dockedZones here — closeAll() handles that
     }
 
     /** Remove dockedZones entries that weren't placed into cells by loadLayout. */
@@ -798,8 +788,8 @@ public class FloatingZone extends FloatingCardArea {
         if (digit == 0) {
             // Ctrl+0: auto-pick the first N selectables that haven't been picked yet.
             // Selection progress is tracked client-side via the highlighted set — both
-            // InputSelectTargets and InputSelectManyBase call setHighlighted(true/false)
-            // on add/remove, so highlighted ∩ selectable == cards picked so far.
+            // InputSelectTargets and InputSelectManyBase mark each pick as chosen in their
+            // selection, so highlighted ∩ selectable == cards picked so far.
             // Batched into one selectCard so the server processes atomically — separate
             // messages race (a thread spawned per message).
             for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {

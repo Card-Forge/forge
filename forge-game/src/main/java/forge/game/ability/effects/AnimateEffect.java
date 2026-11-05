@@ -35,11 +35,9 @@ public class AnimateEffect extends AnimateEffectBase {
             return;
         }
 
-        // Remember Objects
         if (sa.hasParam("RememberObjects")) {
             animateRemembered = sa.getParam("RememberObjects");
         }
-        // Imprint Cards
         if (sa.hasParam("ImprintCards")) {
             animateImprinted = sa.getParam("ImprintCards");
         }

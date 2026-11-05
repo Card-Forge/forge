@@ -1,0 +1,9 @@
+Name:The Falcon, Sam Wilson
+ManaCost:4 W
+Types:Legendary Creature Human Hero
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When NICKNAME enters, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.StrictlyOther+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen The Falcon enters, put a +1/+1 counter on each other creature you control.

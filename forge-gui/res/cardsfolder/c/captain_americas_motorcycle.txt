@@ -1,0 +1,9 @@
+Name:Captain America's Motorcycle
+ManaCost:1 R
+Types:Artifact Vehicle
+PT:3/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this Vehicle enters, target creature or Vehicle gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature,Vehicle | ValidTgtsDesc$ creature or Vehicle | NumAtt$ +2
+K:Crew:1
+Oracle:Flash\nWhen this Vehicle enters, target creature or Vehicle gets +2/+0 until end of turn.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

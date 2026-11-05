@@ -1,0 +1,9 @@
+Name:Vulture, Feathered Fiend
+ManaCost:2 U U
+Types:Legendary Creature Human Artificer Villain
+PT:2/4
+K:Flying
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.withFlying+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more creatures you control with flying deal combat damage to a player, put a +1/+1 counter on each of those creatures and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSources | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Flying\nWhenever one or more creatures you control with flying deal combat damage to a player, put a +1/+1 counter on each of those creatures and draw a card.

@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (YFRA)
+Type:Archived
+Subtype:Arena
+Effective:2026-10-13
+Sets:ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, SPM, OM1, TLA, ECL, YECL, TMT, SOS, YSOS, MSH, HOB, FRA, YFRA
+Banned:Sewer-veillance Cam

@@ -1,0 +1,7 @@
+Name:Songbird, Sonic Screamer
+ManaCost:1 B
+Types:Legendary Creature Human Villain
+PT:2/1
+K:Lifelink
+A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Flying | Defined$ Self | SpellDescription$ NICKNAME gains flying until end of turn. (She can't be blocked except by creatures with flying or reach.)
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nDiscard a card: Songbird gains flying until end of turn. (She can't be blocked except by creatures with flying or reach.)

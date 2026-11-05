@@ -10,7 +10,7 @@
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFVVEOwiAM5R92AubF9CzTc23DuxmizWrTBxRmfEkTRguvLQ/m3P9wm5zbArbrVI4hH4rL8xou4RjP4W3yu2YZseJHvIs/4h4e5yLXjvKi2DyODbwIpbW0P+eSvDKvrVIP+ay8M5uPSg+089W0cgbvs9DT+PHf/bclI+/eUW/PPbKcb2L7yj7LnFr6LGug8RrwuzGq55Vx7iAXy/1srZfH9sCqZ02DyOgdWxRfMuq59E+QuqR6kHaRjYD3Ufb0lziT9wW1dFro
+   eJzFVVEOwiAMxe+xE7BdTM8yPdc2vIwnMUSb1drHKMz4kiaEFl77KODc/3DpnVs8tnOfjyEfikvzGka/jR+nlxEGX2YJYcePeKdui7t139xobSsvik3jUMCLkFtL+3MuySvzWnbqIZ+Vd2DzQdFAO99RiTmC957RNLz91+7TopF3rai35h5ZzjeyfaXOMqcSnWUNNJ49fjda+3lmnCvIxXI/S+vlsTWw9rPWg8joHZsUXzT2c+5PkH1J9aDeRdYCrqPU9Jc4kvcJ4YRcXg==
   </data>
  </layer>
  <layer id="7" name="Floor" width="30" height="17">

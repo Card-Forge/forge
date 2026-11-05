@@ -1,0 +1,9 @@
+Name:Wall Off
+ManaCost:3 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature your opponents control.
+A:SP$ Token | TokenScript$ c_0_4_wall_defender | TokenOwner$ You | SubAbility$ DBGainLife | SpellDescription$ Create a 0/4 colorless Wall creature token with defender. You gain 4 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+SVar:X:Count$Valid Creature.OppCtrl
+DeckHas:Ability$Token|LifeGain
+Oracle:This spell costs {1} less to cast for each creature your opponents control.\nCreate a 0/4 colorless Wall creature token with defender. You gain 4 life.

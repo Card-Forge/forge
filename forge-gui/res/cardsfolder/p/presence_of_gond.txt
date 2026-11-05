@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted creature has "{T}: Create a 1/1 green Elf Warrior creature token."
+S:Mode$ Continuous | AffectedDefined$ AttachedBy Self | AddAbility$ Token | Description$ Enchanted creature has "{T}: Create a 1/1 green Elf Warrior creature token."
 SVar:Token:AB$ Token | Cost$ T | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Warrior creature token.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\nEnchanted creature has "{T}: Create a 1/1 green Elf Warrior creature token."

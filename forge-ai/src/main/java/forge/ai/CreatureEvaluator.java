@@ -8,14 +8,19 @@ import forge.game.card.CounterEnumType;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 
 import java.util.List;
 import java.util.function.Function;
+
+// the evaluator focuses on common abilities that can have impact on their own (or only need very likely conditions)
+// a negative example would be the "CountersRemain" static since it's just not worth the overhead in such a heavily used engine part
 
 public class CreatureEvaluator implements Function<Card, Integer> {
     @Override
@@ -137,8 +142,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasKeyword(Keyword.REACH) && !c.hasKeyword(Keyword.FLYING)) {
             value += addValue(5, "reach");
         }
-        if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
-            value += addValue(3, "shadow-block");
+        for (final StaticAbility stAb : c.getStaticAbilities()) {
+            if (stAb.checkConditions(StaticAbilityMode.CanBlockIfShadow)) {
+                value += addValue(3, "shadow-block");
+                break;
+            }
         }
 
         // Protection
@@ -242,6 +250,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(50, "eot-leaves");
         } else {
             for (Trigger t : c.getTriggers()) {
+                if (t.getParamOrDefault("TriggerDescription", "").startsWith("Landfall")) {
+                    value += addValue(10, "landfall");
+                }
+
                 if (!TriggerType.Phase.equals(t.getMode())) {
                     continue;
                 }
@@ -290,7 +302,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     }
 
     private int evaluateSpellAbility(SpellAbility sa) {
-        // Pump abilities
         if (sa.getApi() == ApiType.Pump) {
             // Pump abilities that grant +X/+X to the card
             if ("+X".equals(sa.getParam("NumAtt"))

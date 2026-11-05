@@ -1,0 +1,8 @@
+Name:Warrior Token
+ManaCost:no cost
+Colors:red
+Types:Creature Warrior
+PT:2/2
+K:Haste
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Coward | ValidAttacker$ Creature.Warrior | Description$ Cowards can't block Warriors.
+Oracle:Haste\nCowards can't block Warriors.

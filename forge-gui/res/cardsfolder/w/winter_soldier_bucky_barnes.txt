@@ -1,0 +1,7 @@
+Name:Winter Soldier, Bucky Barnes
+ManaCost:W
+Types:Legendary Creature Human Soldier Hero
+PT:2/2
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ NICKNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Winter Soldier enters tapped.

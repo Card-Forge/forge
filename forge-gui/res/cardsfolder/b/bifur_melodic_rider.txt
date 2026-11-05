@@ -1,0 +1,10 @@
+Name:Bifur, Melodic Rider
+ManaCost:4 RW RW
+Types:Legendary Creature Dwarf Bard
+PT:4/5
+K:Storied
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME enters or attacks, put a +1/+1 counter on target creature.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME enters or attacks, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Panharmonicon | ValidCard$ Dwarf.YouCtrl | Condition$ EnduringStory | Description$ As long as you have an enduring story, if an ability of a Dwarf you control triggers, that ability triggers an additional time.
+Oracle:Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nWhenever Bifur enters or attacks, put a +1/+1 counter on target creature.\nAs long as you have an enduring story, if an ability of a Dwarf you control triggers, that ability triggers an additional time.

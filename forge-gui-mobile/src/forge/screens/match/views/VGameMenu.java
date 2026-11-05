@@ -21,6 +21,12 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
+        if (MatchController.instance.isReplay()) {
+            // a recording has nothing to concede, undo, yield or cheat with: only a way out
+            addItem(new FMenuItem("Close replay", FSkinImage.CONCEDE, e ->
+                    forge.gamemodes.net.client.ReplayPlayer.stopFor(MatchController.instance, true)));
+            return;
+        }
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, e ->
                 ThreadUtil.invokeInGameThread(MatchController.instance::concede)
         ));
@@ -51,20 +57,13 @@ public class VGameMenu extends FDropDownMenu {
                     @Override
                     public void setVisible(boolean b0) {
                         super.setVisible(b0);
-                        if (!b0) {
-                            if (autoYieldsDisabled && !MatchController.instance.getGameController().getYieldController().getDisableAutoYields()) {
-                                //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
-                                if (MatchController.instance.getGameView().peekStack() != null) {
-                                    final String key = MatchController.instance.getGameView().peekStack().getKey();
-                                    final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
-                                    boolean abilityScope = MatchController.instance.getGameController().getYieldController().isAbilityScope();
-                                    MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
-                                    if (!autoYield && MatchController.instance.getGameController().shouldAutoYield(key)) {
-                                        //auto-pass priority if ability is on top of stack
-                                        MatchController.instance.getGameController().passPriority();
-                                    }
-                                }
-                            }
+                        if (!b0 && MatchController.instance.getGameView().peekStack() != null
+                                && autoYieldsDisabled && !MatchController.instance.getGameController().getYieldController().getDisableAutoYields()) {
+                            //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
+                            final String key = MatchController.instance.getGameView().peekStack().getKey();
+                            final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
+                            boolean abilityScope = MatchController.instance.getGameController().getYieldController().isAbilityScope();
+                            MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
                         }
                     }
                 };

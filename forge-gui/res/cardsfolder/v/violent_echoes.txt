@@ -1,0 +1,6 @@
+Name:Violent Echoes
+ManaCost:2 R R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | ValidTgtsDesc$ creature or planeswalker | NumDmg$ 6 | ExcessSVar$ Excess | ExcessSVarCondition$ Card.targetedBy | SubAbility$ DBEmpower | SpellDescription$ CARDNAME deals 6 damage to target creature or planeswalker. If excess damage was dealt to that permanent this way, empower Jace X, where X is that excess damage. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBEmpower:DB$ Empower | Type$ Jace | Num$ Excess | ConditionCheckSVar$ Excess
+Oracle:Violent Echoes deals 6 damage to target creature or planeswalker. If excess damage was dealt to that permanent this way, empower Jace X, where X is that excess damage. (Put that many loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")

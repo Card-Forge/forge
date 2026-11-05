@@ -1,0 +1,14 @@
+Name:Killmonger, Ruthless Usurper
+ManaCost:2 R
+Types:Legendary Creature Human Villain
+PT:3/3
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, he gets +1/+0 until end of turn for each artifact defending player controls.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, that player sacrifices an artifact of their choice and you create a Treasure token.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Artifact | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:Count$Valid Artifact.DefenderCtrl
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Trample\nWhenever Killmonger attacks, he gets +1/+0 until end of turn for each artifact defending player controls.\nWhenever Killmonger deals combat damage to a player, that player sacrifices an artifact of their choice and you create a Treasure token.

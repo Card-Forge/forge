@@ -1,0 +1,7 @@
+Name:Panther Pounce
+ManaCost:W
+Types:Instant
+A:SP$ Investigate | ValidTgts$ Player | SubAbility$ DBPump | SpellDescription$ Target player investigates. Target creature gets +1/+0 and gains flying until end of turn. Untap it. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | KW$ Flying | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ ParentTarget
+Oracle:Target player investigates. Target creature gets +1/+0 and gains flying until end of turn. Untap it. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

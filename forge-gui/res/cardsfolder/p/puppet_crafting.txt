@@ -1,0 +1,10 @@
+Name:Puppet Crafting
+ManaCost:1 G
+Types:Enchantment Aura
+K:Enchant:Artifact,Enchantment.nonAura:artifact or non-Aura enchantment
+SVar:AttachAITgts:Card.nonCreature
+SVar:AttachAILogic:Animate
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | SetPower$ 5 | SetToughness$ 5 | AddType$ Creature & Construct | Description$ Enchanted permanent is a Construct creature with base power and toughness 5/5 in addition to its other types.
+A:AB$ ChangeZone | Cost$ 4 G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to your hand.
+DeckNeeds:Type$Artifact|Enchantment
+Oracle:Enchant artifact or non-Aura enchantment\nEnchanted permanent is a Construct creature with base power and toughness 5/5 in addition to its other types.\n{4}{G}: Return this card from your graveyard to your hand.

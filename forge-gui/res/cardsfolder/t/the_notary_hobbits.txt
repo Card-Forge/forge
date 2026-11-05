@@ -1,0 +1,11 @@
+Name:The Notary Hobbits
+ManaCost:3 G G
+Types:Legendary Creature Halfling Advisor
+PT:1/1
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+!token | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enter, if they're not a token, create two tokens that are copies of them, except the tokens aren't legendary.
+SVar:TrigToken:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 2 | NonLegendary$ True
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each Halfling you control.
+SVar:X:Count$Valid Halfling.YouCtrl
+DeckHas:Ability$Token
+DeckHints:Type$Halfling
+Oracle:When The Notary Hobbits enter, if they're not a token, create two tokens that are copies of them, except the tokens aren't legendary.\n{T}: Add {C} for each Halfling you control.

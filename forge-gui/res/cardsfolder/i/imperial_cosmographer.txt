@@ -1,0 +1,9 @@
+Name:Imperial Cosmographer
+ManaCost:2 U
+Types:Creature Kree Scientist
+PT:2/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Ante,Command,Exile,Hand,Library | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control leaves the battlefield without dying, put two +1/+1 counters on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters
+Oracle:Vigilance\nWhenever another creature you control leaves the battlefield without dying, put two +1/+1 counters on this creature.

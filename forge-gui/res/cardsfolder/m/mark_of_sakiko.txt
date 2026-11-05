@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ SakikoTrig | AddSVar$ SakuraManaSingle & SakuraX | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as phases and steps end."
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddTrigger$ SakikoTrig | AddSVar$ SakuraManaSingle & SakuraX | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as phases and steps end."
 SVar:SakikoTrig:Mode$ DamageDone | ValidSource$ Creature.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ SakuraManaSingle | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:SakuraManaSingle:DB$ Mana | Produced$ G | Amount$ SakuraX | PersistentMana$ True
 SVar:SakuraX:TriggerCount$DamageAmount

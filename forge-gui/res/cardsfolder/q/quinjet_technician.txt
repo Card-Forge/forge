@@ -1,0 +1,7 @@
+Name:Quinjet Technician
+ManaCost:1 R
+Types:Creature Human Artificer
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ R R | RestrictValid$ Activated.PowerUp | SpellDescription$ Add {R}{R}. Spend this mana only to activate power-up abilities.
+Oracle:{T}: Add {R}.\n{T}: Add {R}{R}. Spend this mana only to activate power-up abilities.

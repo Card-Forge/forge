@@ -1,0 +1,6 @@
+Name:Loki, Lord of Misrule
+ManaCost:3 U
+Types:Legendary Creature God Sorcerer Villain
+PT:3/4
+A:AB$ Clone | Cost$ U T | Defined$ Targeted | CloneTarget$ Valid Creature.YouCtrl+NotDefinedTargeted | Duration$ UntilEndOfTurn | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NonLegendary$ True | SorcerySpeed$ True | SpellDescription$ Choose target creature you control. Each creature you control other than the chosen creature becomes a copy of that creature until end of turn, except it isn't legendary. Activate only as a sorcery.
+Oracle:{U}, {T}: Choose target creature you control. Each creature you control other than the chosen creature becomes a copy of that creature until end of turn, except it isn't legendary. Activate only as a sorcery.

@@ -65,7 +65,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     private static OutputStream logFileStream;
     private static File activeLogFile;
     private static FileChannel logChannel;
-    private static FileLock logLock;
 
     /** The log file this JVM is writing to, null until {@link #registerErrorHandling()} has run */
     public static File getActiveLogFile() {
@@ -105,6 +104,15 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      * static initializer has run.
      */
     public static void registerErrorHandling() {
+        if (logChannel != null) {
+            // Already holding our slot lock in this JVM (e.g. Forge.create() re-entered
+            // after Android recreates the GL surface/context). Re-running the logic below
+            // would tryLock() our own activeLogFile via a second channel, which throws
+            // OverlappingFileLockException (not an IOException, so it wouldn't be caught
+            // by the archive-probe loop) and would also claim a second log slot.
+            return;
+        }
+
         File parent = new File(ForgeConstants.LOG_FILE).getParentFile();
         parent.mkdirs();
 
@@ -140,7 +148,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
                 FileLock lock = ch.tryLock();
                 if (lock != null) {
                     logChannel = ch;
-                    logLock = lock;
                     logFileStream = Channels.newOutputStream(ch);
                     activeLogFile = slot;
                     break;
@@ -211,7 +218,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
                 logChannel = null;
             }
             // lock is auto-released when its channel closes
-            logLock = null;
         }
     }
 

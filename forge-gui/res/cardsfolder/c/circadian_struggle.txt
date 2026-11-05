@@ -8,6 +8,6 @@ SVar:DBAnimateB:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ 
 SVar:DBAnimateR:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Red | LockInText$ True | SubAbility$ DBAnimateG
 SVar:DBAnimateG:DB$ AnimateAll | Zone$ Hand | Duration$ Perpetual | ValidCards$ Card.IsRemembered | staticAbilities$ ReduceCost | ConditionPresent$ Permanent.YouCtrl+Green | LockInText$ True | SubAbility$ DBCleanup
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBEffect
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.YouCtrl$Colors
 Oracle:Vivid — Seek X cards that each share a color with one or more permanents you control, where X is the number of colors among permanents you control. For each color among permanents you control, those cards perpetually gain "This spell costs {1} less to cast."

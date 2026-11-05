@@ -1,0 +1,9 @@
+Name:Liliana the Repentant
+ManaCost:1 B
+Types:Legendary Creature Human Warlock
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl,Planeswalker.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever another creature or planeswalker you control enters, mill two cards.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2
+A:AB$ ChangeZone | Cost$ 5 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn,Planeswalker.YouOwn | ValidTgtsDesc$ creature or planeswalker card in your graveyard | Exhaust$ True | SorcerySpeed$ True | SubAbility$ DBPutCounter | SpellDescription$ Return target creature or planeswalker card from your graveyard to the battlefield. Put a +1/+1 counter on NICKNAME. Activate only as a sorcery. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever another creature or planeswalker you control enters, mill two cards.\nExhaust - {5}{B}: Return target creature or planeswalker card from your graveyard to the battlefield. Put a +1/+1 counter on Liliana. Activate only as a sorcery. (Activate each exhaust ability only once.)

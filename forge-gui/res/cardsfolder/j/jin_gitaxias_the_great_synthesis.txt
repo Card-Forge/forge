@@ -30,4 +30,4 @@ SVar:DBExileSelf:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Sub
 SVar:DBReturnSelf:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$ValidHand Card.YouOwn
-Oracle:(As this saga enters and after your draw step, add a lore counter.)\nI — Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you control The Great Synthesis.\nII — Return all non-Phyrexian creatures to their owners' hands.\nIII — You may cast any number of spells from your hand without paying their mana cost. Exile The Great Synthesis, then return it to the battlefield (front face up).
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you control The Great Synthesis.\nII — Return all non-Phyrexian creatures to their owners' hands.\nIII — You may cast any number of spells from your hand without paying their mana cost. Exile The Great Synthesis, then return it to the battlefield (front face up).

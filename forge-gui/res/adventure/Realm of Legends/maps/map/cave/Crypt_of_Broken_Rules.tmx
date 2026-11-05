@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="131">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Chaos Orb&quot;, &quot;Mana Crypt&quot; ], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Mana Crypt&quot; ]}}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="1" name="Background" width="27" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztkzEKgDAMRbuJ4CZurl65s6fxXJKhUMJPU9tEOjTwEEHymuYb1xBiJ+cmg77T+mgu5NTOIXEtAVZLLw2pPFzIdx9+rtxHnpwRXTxPPIOonl3fm5TXUp5rSuvT4qJ5+EzeLnSHvS5e9E9LWLh4T8nv4cp96Z1yb+kqeS1cBNpL7b19Be3f05U/Jb+VK+0KZZ/Kcy5v/nRNJpNxeQEhvnMQ
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="27" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlV0OwiAMx3lTAzvB8NFL6aPnYF7HK8yPu5lmIalY1haB+CBJswzK/7e1pXhnjBfYYWPMzb0bzEn2ag10KdNoSEeO1WL0ZFG81qMXpwaLq51cntJ3SR2ehs+zcxzWWRQb/DmtPVH7Y+a/0limLE5Lw8rxvmHNqA9xsYsD/O8FrGCNmSxdczkm+F+snoXXpawa+aL04xx+ciywp1v+H9tD0OOpfs9pld4npXdLL9baWccsnLc0j1ItLp+wft3lDbMkWtr1mlozigHVCzS+HCugmqV6gcb3l2LYisWddbweYxQEviV9wxPfPRbu/7OWfJy3ZTl4AdpSgMg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="27" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzlVF0OgjAM7jvj0SfhyQeOoefQs4hvnMUr+HcOTYh3kQYaYOnKOoFE/JKGjW3f13ZdAfxwiAHOq77tY8/DSqSm5t9E9RzHa/P7Wo+K9xS182M1vk+kRXpz6BAwl1Plbm4trPerqe1W2cW0c7Qxaz8diAPjTBSxFs1369B6ZgCvrP+f/nE5LS1ebo2DT1wcOL+ldbojDuQf3Z9Gg3LS3ZtH/TfMaeF7y609XM5tPRt456E5dHEWjnXS0tRG9zxXGxwS831cWixZS/uWJUh9Q8IOZC3f2pAw5FMp7KF3KXFIfUzjh6tvhCKkb0hnh/hcnK6+0cXbkyukb/wbxqidJeEDkXlFEw==
+  </data>
+ </layer>
+ <layer id="7" name="Blood" width="27" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIKDMPdAuoA2oH6b+GgWjYBSMglEwCkbBKBgFwxsAAPOLALk=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="194.811" y="475.246" width="48" height="16">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="199.454" y="91.1591">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Suspicious Bookcase&quot;, &quot;Haunted Library&quot;]}"/>
+    <property name="enemy" value="Whtz"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/enemy.tx" x="204.829" y="350.518">
+   <properties>
+    <property name="enemy" value="Tolabow"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/enemy.tx" x="118.316" y="361.114">
+   <properties>
+    <property name="enemy" value="Seluma"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/enemy.tx" x="118.296" y="202.371">
+   <properties>
+    <property name="enemy" value="Valko Indorian"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="293.796" y="200.005">
+   <properties>
+    <property name="enemy" value="The Everforger"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/enemy.tx" x="295.056" y="360.692">
+   <properties>
+    <property name="enemy" value="The Unluckiest"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/enemy.tx" x="204" y="272">
+   <properties>
+    <property name="enemy" value="Maular"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="204.5" y="198">
+   <properties>
+    <property name="enemy" value="Grizzlegom"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/dialog.tx" x="178" y="412.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You step into a musty crypt. Immediately, you sense that despite its somber appearance, the air is electric with pulsing mana. As you enter, a booming voice rings out from nowhere.
+
+'YOU ENTER THE CRYPT WHICH IMPRISONS THOSE WHO BROKE THE RULES OF BOTH MAGIC AND DEATH! TURN BACK!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/dialog.tx" x="170" y="131.75" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A skittering little homunculus stands ahead, frantically speed-reading from a mountain of notes it has clearly looked over a great many times before.
+
+'Where is it! WHERE IS IT?!' it cries out. Then, upon seeing you it yells 'TELL ME YOUR SECRETS!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/treasure.tx" x="56" y="346">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Maelstrom Archangel&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Iridescent Angel&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Cleaving Reaper&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Akroma, Angel of Fury&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Selenia, the Cursed Heart&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Lightning Angel&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="126" template="../../obj/treasure.tx" x="54.5" y="186">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Essence of Orthodoxy&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Quicksilver Servitor&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Darksteel Hydra&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Gyox, Brutal Carnivora&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Ekthi, Contaminator Priest&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Quicksilver Lapidary&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Innovative Metatect&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Davvol, Evincar of Rath&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="127" template="../../obj/treasure.tx" x="359.5" y="184.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Quickbeast Amulet&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Bladehold Cleaver&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Foundry Beetle&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Forgeborn Phoenix&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Inchblade Companion&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Tome of Gadwick&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="128" template="../../obj/treasure.tx" x="358.5" y="347">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Curse of Bounty&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Curse of Opulence&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Curse of Disturbance&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Curse of Verbosity&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Curse of Vitality&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Curse of Misfortunes&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="129" template="../../obj/treasure.tx" x="199.591" y="44.9545">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Arvad of the Weatherlight&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Hadran, Naya Sunseeder&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Valko Indorian, Researcher&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Daxiver, Izzet Electromancer&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Chaos Orb&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Invincible Hymn&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Homunculus Horde&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Oglor, Devoted Assistant&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Idyllic Tutor&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Moon-Blessed Cleric&quot;
+},
+{
+  &quot;type&quot;: &quot;card&quot;,
+  &quot;count&quot;: 1,
+  &quot;cardName&quot;: &quot;Long-Term Plans&quot;
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

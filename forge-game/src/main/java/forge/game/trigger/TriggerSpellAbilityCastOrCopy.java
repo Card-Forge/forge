@@ -145,7 +145,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         }
 
         if (hasParam("CanTargetOtherCondition")) {
-            final CardCollection candidates = new CardCollection();
             SpellAbility targetedSA = spellAbility;
             while (targetedSA != null) {
                 if (targetedSA.usesTargeting() && targetedSA.getTargets().size() != 0) {
@@ -156,15 +155,15 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             if (targetedSA == null) {
                 return false;
             }
-            final List<GameEntity> candidateTargets = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+            final CardCollection candidates = new CardCollection();
+            final List<GameEntity> candidateTargets = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA);
             for (GameEntity card : candidateTargets) {
-                if (card instanceof Card) {
-                    candidates.add((Card) card);
+                if (card instanceof Card c) {
+                    candidates.add(c);
                 }
             }
             candidates.removeAll(targetedSA.getTargets().getTargetCards());
-            String valid = getParam("CanTargetOtherCondition");
-            if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard(), spellAbility).isEmpty()) {
+            if (CardLists.getValidCards(candidates, getParam("CanTargetOtherCondition"), spellAbility.getActivatingPlayer(), spellAbility.getHostCard(), spellAbility).isEmpty()) {
                 return false;
             }
         }

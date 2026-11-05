@@ -1,0 +1,13 @@
+Name:Divining Duelist
+ManaCost:2 U
+Types:Creature Merfolk Wizard
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTap,DBUntap,DBDraw
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Flash\nWhen this creature enters, choose one —\n• Tap target creature.\n• Untap target creature.\n• Draw a card, then discard a card.

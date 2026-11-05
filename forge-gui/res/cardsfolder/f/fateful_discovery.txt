@@ -1,0 +1,6 @@
+Name:Fateful Discovery
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an artifact you control enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever an artifact you control enters, draw a card.

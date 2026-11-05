@@ -1,0 +1,9 @@
+Name:Radioactive Man
+ManaCost:4 B
+Types:Legendary Creature Human Scientist Villain
+PT:3/5
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses half their life, rounded up.
+SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X
+SVar:X:TriggeredTarget$LifeTotal/HalfUp
+Oracle:Deathtouch\nWhenever Radioactive Man deals combat damage to a player, that player loses half their life, rounded up.

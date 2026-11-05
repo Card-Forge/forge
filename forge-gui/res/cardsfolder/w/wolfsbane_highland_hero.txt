@@ -1,0 +1,7 @@
+Name:Wolfsbane, Highland Hero
+ManaCost:1 G
+Types:Legendary Creature Mutant Werewolf Hero
+PT:2/2
+K:Trample
+A:AB$ Pump | Cost$ 2 G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ NICKNAME gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:Trample (This creature can deal excess combat damage to the player she's attacking.)\n{2}{G}: Wolfsbane gets +2/+2 until end of turn. Activate only once each turn.

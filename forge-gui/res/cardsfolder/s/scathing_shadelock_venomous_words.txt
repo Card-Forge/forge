@@ -12,5 +12,5 @@ ALTERNATE
 Name:Venomous Words
 ManaCost:B
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | NumAtt$ +2 | KW$ Deathtouch | SpellDescription$ Target creature you control gets +2/+0 and gains deathtouch until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | NumAtt$ +2 | KW$ Deathtouch | SpellDescription$ Target creature you control gets +2/+0 and gains deathtouch until end of turn.
 Oracle:Target creature you control gets +2/+0 and gains deathtouch until end of turn.

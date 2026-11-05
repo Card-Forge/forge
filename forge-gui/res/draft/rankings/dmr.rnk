@@ -8,9 +8,9 @@
 #7|Tatyova, Benthic Druid|U|DMR
 #8|Confiscate|U|DMR
 #9|Fact or Fiction|U|DMR
-#10|Siege-Gang Commander|R|DMR
-#11|Serra Angel|U|DMR
-#12|Swords to Plowshares|U|DMR
+#10|Serra Angel|U|DMR
+#11|Swords to Plowshares|U|DMR
+#12|Siege-Gang Commander|R|DMR
 #13|Sylvan Library|M|DMR
 #14|Rith, the Awakener|R|DMR
 #15|Icy Manipulator|U|DMR
@@ -24,16 +24,16 @@
 #23|Man-o'-War|C|DMR
 #24|Jolrael, Mwonvuli Recluse|R|DMR
 #25|Triskelion|R|DMR
-#26|Shivan Dragon|R|DMR
-#27|Birds of Paradise|R|DMR
-#28|Sevinne's Reclamation|R|DMR
-#29|Counterspell|C|DMR
-#30|Thieving Magpie|U|DMR
-#31|Vexing Sphinx|R|DMR
-#32|Royal Assassin|R|DMR
-#33|Grim Lavamancer|R|DMR
-#34|Lightning Rift|U|DMR
-#35|Sulfuric Vortex|R|DMR
+#26|Sevinne's Reclamation|R|DMR
+#27|Counterspell|C|DMR
+#28|Thieving Magpie|U|DMR
+#29|Vexing Sphinx|R|DMR
+#30|Royal Assassin|R|DMR
+#31|Grim Lavamancer|R|DMR
+#32|Lightning Rift|U|DMR
+#33|Shivan Dragon|R|DMR
+#34|Sulfuric Vortex|R|DMR
+#35|Birds of Paradise|R|DMR
 #36|Maze of Ith|R|DMR
 #37|Spectral Lynx|U|DMR
 #38|Windborn Muse|R|DMR
@@ -86,29 +86,29 @@
 #85|Nantuko Monastery|U|DMR
 #86|Polluted Mire|C|DMR
 #87|Remote Isle|C|DMR
-#88|Valduk, Keeper of the Flame|U|DMR
-#89|Divine Sacrament|R|DMR
-#90|Glory|R|DMR
-#91|Nomad Decoy|C|DMR
-#92|Pacifism|C|DMR
-#93|Renewed Faith|C|DMR
-#94|Savannah Lions|C|DMR
-#95|Aquamoeba|C|DMR
-#96|Aven Fisher|C|DMR
-#97|Impulse|C|DMR
-#98|Obsessive Search|C|DMR
-#99|Cackling Fiend|C|DMR
-#100|Ichor Slick|C|DMR
-#101|Nightscape Familiar|C|DMR
-#102|Phyrexian Ghoul|C|DMR
-#103|Street Wraith|C|DMR
-#104|Urborg Syphon-Mage|C|DMR
-#105|Avarax|C|DMR
-#106|Coal Stoker|C|DMR
-#107|Goblin Matron|C|DMR
-#108|Mogg War Marshal|C|DMR
-#109|Solar Blast|C|DMR
-#110|Spark Spray|C|DMR
+#88|Divine Sacrament|R|DMR
+#89|Glory|R|DMR
+#90|Nomad Decoy|C|DMR
+#91|Pacifism|C|DMR
+#92|Renewed Faith|C|DMR
+#93|Savannah Lions|C|DMR
+#94|Aquamoeba|C|DMR
+#95|Aven Fisher|C|DMR
+#96|Impulse|C|DMR
+#97|Obsessive Search|C|DMR
+#98|Cackling Fiend|C|DMR
+#99|Ichor Slick|C|DMR
+#100|Nightscape Familiar|C|DMR
+#101|Phyrexian Ghoul|C|DMR
+#102|Street Wraith|C|DMR
+#103|Urborg Syphon-Mage|C|DMR
+#104|Avarax|C|DMR
+#105|Coal Stoker|C|DMR
+#106|Goblin Matron|C|DMR
+#107|Mogg War Marshal|C|DMR
+#108|Solar Blast|C|DMR
+#109|Spark Spray|C|DMR
+#110|Valduk, Keeper of the Flame|U|DMR
 #111|Deadwood Treefolk|U|DMR
 #112|Gamekeeper|U|DMR
 #113|Kavu Primarch|C|DMR
@@ -260,13 +260,3 @@
 #259|Dark Depths|M|DMR
 #260|Damping Sphere|U|DMR
 #261|Jester's Cap|R|DMR
-#262|Plains 1|C|DMR
-#263|Plains 2|C|DMR
-#264|Island 1|C|DMR
-#265|Island 2|C|DMR
-#266|Swamp 1|C|DMR
-#267|Swamp 2|C|DMR
-#268|Mountain 1|C|DMR
-#269|Mountain 2|C|DMR
-#270|Forest 1|C|DMR
-#271|Forest 2|C|DMR

@@ -1,7 +1,6 @@
 package forge.screens.deckeditor.menus;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
@@ -65,12 +64,8 @@ public final class DeckFileMenu {
         SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblNewDeck"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_NEW) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_N));
-        menuItem.addActionListener(getNewAction());
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().getCommand().run());
         return menuItem;
-    }
-
-    private static ActionListener getNewAction() {
-        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Open() {
@@ -78,24 +73,16 @@ public final class DeckFileMenu {
         SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblOpenDeck"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_OPEN) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_O));
-        menuItem.addActionListener(getOpenAction());
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().getCommand().run());
         return menuItem;
-    }
-
-    private static ActionListener getOpenAction() {
-        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Import() {
         final Localizer localizer = Localizer.getInstance();
         SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblImportDeck"));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_I));
-        menuItem.addActionListener(getImportAction());
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().getCommand().run());
         return menuItem;
-    }
-
-    private static ActionListener getImportAction() {
-        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Save() {
@@ -103,13 +90,9 @@ public final class DeckFileMenu {
         SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblSaveDeck"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SAVE) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_S));
-        menuItem.addActionListener(getSaveAction());
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().getCommand().run());
         menuItem_Save = menuItem;
         return menuItem;
-    }
-
-    private static ActionListener getSaveAction() {
-        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_SaveAs() {
@@ -117,13 +100,9 @@ public final class DeckFileMenu {
         SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblSaveDeckAs"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SAVEAS) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
-        menuItem.addActionListener(getSaveAsAction());
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().getCommand().run());
         menuItem_SaveAs = menuItem;
         return menuItem;
-    }
-
-    private static ActionListener getSaveAsAction() {
-        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Print() {
@@ -131,12 +110,8 @@ public final class DeckFileMenu {
         SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblPrinttoHTMLfile"));
         menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_PRINT) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_P));
-        menuItem.addActionListener(getPrintAction());
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().getCommand().run());
         return menuItem;
-    }
-
-    private static ActionListener getPrintAction() {
-        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_CopyToClipboard() {

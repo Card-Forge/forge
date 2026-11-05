@@ -1,0 +1,6 @@
+Name:Goblin Army Token
+ManaCost:no cost
+Colors:black
+Types:Creature Goblin Army
+PT:0/0
+Oracle:

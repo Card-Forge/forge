@@ -10,4 +10,4 @@ SVar:DBDrawEffect:DB$ NameCard | Defined$ You | SubAbility$ DBEffect | SpellDesc
 SVar:DBEffect:DB$ Effect | Triggers$ TrigDamage
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.NamedCard | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever a creature with the chosen name deals combat damage to a player this turn, draw a card.
 SVar:TrigDraw:DB$ Draw
-Oracle:(As this Saga enters step, add a lore counter. Sacrifice after III.)\nI — Surveil 3.\nII — When you next cast a creature spell this turn, copy it, except the copy isn't legendary.\nIII — Choose a card name. Whenever a creature with the chosen name deals combat damage to a player this turn, draw a card.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Surveil 3.\nII — When you next cast a creature spell this turn, copy it, except the copy isn't legendary.\nIII — Choose a card name. Whenever a creature with the chosen name deals combat damage to a player this turn, draw a card.

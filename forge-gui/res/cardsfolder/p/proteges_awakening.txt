@@ -1,0 +1,7 @@
+Name:Protege's Awakening
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Empower | Type$ Jace | Num$ 6 | SubAbility$ DBDraw | SpellDescription$ Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Empower Jace 6. (Put six loyalty counters on a Jace token you control. If you don't control one, first create a blue Jace planeswalker token with "[-1]: Surveil 1" and "[-3]: Draw a card.")\nDraw a card.

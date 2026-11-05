@@ -1,0 +1,7 @@
+Name:Guardian of the Halls
+ManaCost:1 G
+Types:Creature Elf Soldier
+PT:2/2
+K:Trample
+A:AB$ PutCounter | Cost$ 5 G G | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on this creature.
+Oracle:Trample\n{5}{G}{G}: Put three +1/+1 counters on this creature.

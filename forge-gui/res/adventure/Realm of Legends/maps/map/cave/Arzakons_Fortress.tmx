@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Sol Ring&quot;, &quot;Black Lotus&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Black Lotus|LEA&quot;, &quot;Sol Ring|LEA&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -148,7 +148,7 @@ Your manasight stone blazes with power, near-blindingly bright.
   <object id="86" template="../../../../common/maps/obj/manashards.tx" x="474.333" y="252.667"/>
   <object id="87" template="../../../../common/maps/obj/gold.tx" x="369.333" y="233"/>
   <object id="88" template="../../../../common/maps/obj/gold.tx" x="417" y="234.333"/>
-  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="391.25" y="332.25">
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="394.583" y="334.583">
    <properties>
     <property name="defeatDialog">[
 	{

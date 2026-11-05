@@ -5,7 +5,7 @@ K:Enchant:Permanent:permanent
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ As long as enchanted permanent is a creature, it has flying.
-S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | AddStaticAbility$ RuneFlightST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature has flying."
-SVar:RuneFlightST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Creature | AddKeyword$ Flying | Description$ As long as enchanted permanent is a creature, it has flying.
+S:Mode$ Continuous | AffectedDefined$ Enchanted | Affected$ Equipment | AddStaticAbility$ RuneFlightST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature has flying."
+SVar:RuneFlightST:Mode$ Continuous | AffectedDefined$ Equipped | Affected$ Creature | AddKeyword$ Flying | Description$ Equipped creature has flying.
 Oracle:Enchant permanent\nWhen Rune of Flight enters, draw a card.\nAs long as enchanted permanent is a creature, it has flying.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature has flying."

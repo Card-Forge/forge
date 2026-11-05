@@ -23,6 +23,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.BasicStroke;
+import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -75,6 +77,9 @@ public class VStack implements IVDoc<CStack> {
 
     // Other fields
     private final AbilityMenu abilityMenu = new AbilityMenu();
+
+    // dashed outline of a stack entry that can be picked as a target; a picked entry gets a solid red one
+    private static final Color SELECTABLE_COLOR = new Color(255, 215, 0);
 
     private StackInstanceTextArea hoveredItem;
 
@@ -153,6 +158,11 @@ public class VStack implements IVDoc<CStack> {
         scroller.repaint();
 
         SwingUtilities.invokeLater(scroller::scrollToTop);
+    }
+
+    /** Repaints the entries, for when a stack target was marked, picked or unmarked (the outline is painted per entry). */
+    public void repaintSelection() {
+        scroller.repaint();
     }
 
     @SuppressWarnings("serial")
@@ -242,6 +252,10 @@ public class VStack implements IVDoc<CStack> {
             addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftClick(final MouseEvent e) {
+                    if (controller.getMatchUI().isSelectable(item)) { // a stack target is being chosen: a click picks (or unpicks) it
+                        controller.getMatchUI().pickStackItem(item);
+                        return;
+                    }
                     onClick(e);
                 }
                 @Override
@@ -290,6 +304,17 @@ public class VStack implements IVDoc<CStack> {
             if (img != null) {
                 g2d.drawImage(img, null, PADDING, PADDING);
             }
+
+            //outline the entry while it can be picked as a target, and once it is picked
+            final boolean picked = controller.getMatchUI().isHighlighted(item);
+            if (picked || controller.getMatchUI().isSelectable(item)) {
+                final Stroke oldStroke = g2d.getStroke();
+                g2d.setColor(picked ? Color.RED : SELECTABLE_COLOR);
+                g2d.setStroke(picked ? new BasicStroke(3f)
+                        : new BasicStroke(3f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10f, new float[] {8f, 6f}, 0f));
+                g2d.drawRect(1, 1, getWidth() - 3, getHeight() - 3);
+                g2d.setStroke(oldStroke);
+            }
         }
     }
 
@@ -302,8 +327,6 @@ public class VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAlwaysNo;
         private final JMenuItem jmiYieldToStack;
         private final JMenuItem jmiYieldToEntireStack;
-        private StackItemView item;
-
         private String yieldKey = "";
         private boolean abilityScope;
 
@@ -312,10 +335,6 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield.addActionListener(arg0 -> {
                 final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(yieldKey);
                 controller.getMatchUI().getGameController().setShouldAutoYield(yieldKey, !autoYield, abilityScope);
-                if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
-                    //auto-pass priority if ability is on top of stack
-                    controller.getMatchUI().getGameController().passPriority();
-                }
             });
             add(jmiAutoYield);
 
@@ -342,7 +361,6 @@ public class VStack implements IVDoc<CStack> {
                 final PlayerView local = controller.getMatchUI().getCurrentPlayer();
                 if (local == null) return;
                 controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, true));
-                controller.getMatchUI().getGameController().passPriority();
             });
             add(jmiYieldToStack);
 
@@ -351,21 +369,19 @@ public class VStack implements IVDoc<CStack> {
                 final PlayerView local = controller.getMatchUI().getCurrentPlayer();
                 if (local == null) return;
                 controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, false));
-                controller.getMatchUI().getGameController().passPriority();
             });
             add(jmiYieldToEntireStack);
         }
 
         public void setStackInstance(final StackItemView item0) {
-            item = item0;
-            yieldKey = item.getKey();
+            yieldKey = item0.getKey();
             abilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
 
-            jmiAutoYield.setVisible(item.isAbility());
-            jmiAutoYield.setSelected(item.isAbility()
+            jmiAutoYield.setVisible(item0.isAbility());
+            jmiAutoYield.setSelected(item0.isAbility()
                     && controller.getMatchUI().getGameController().shouldAutoYield(yieldKey));
 
-            if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !yieldKey.isEmpty()) {
+            if (item0.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item0.getActivatingPlayer()) && !yieldKey.isEmpty()) {
                 TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(yieldKey);
                 jmiAlwaysYes.setSelected(decision == TriggerDecision.ACCEPT);
                 jmiAlwaysNo.setSelected(decision == TriggerDecision.DECLINE);

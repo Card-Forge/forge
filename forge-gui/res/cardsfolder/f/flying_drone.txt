@@ -1,0 +1,12 @@
+Name:Flying Drone
+ManaCost:1 U
+Types:Artifact Creature Robot Scout
+PT:1/2
+K:Flying
+K:Vigilance
+A:AB$ Draw | Cost$ 1 U T | ReduceCost$ 1 U | ReduceAmount$ X | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. This ability costs {1}{U} less to activate if another creature with flying entered under your control this turn.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:X:Count$Compare Y GE1.1.0
+SVar:Y:Count$ThisTurnEntered_Battlefield_Creature.Other+withFlying+YouCtrl
+DeckHas:Ability$Discard
+Oracle:Flying, vigilance\n{1}{U}, {T}: Draw a card, then discard a card. This ability costs {1}{U} less to activate if another creature with flying entered under your control this turn.

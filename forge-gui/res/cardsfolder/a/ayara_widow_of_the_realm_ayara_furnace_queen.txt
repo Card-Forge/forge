@@ -8,7 +8,7 @@ SVar:X:Sacrificed$CardManaCost
 A:AB$ SetState | Cost$ 5 RP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery.
 DeckHas:Ability$Sacrifice|LifeGain
 AlternateMode:DoubleFaced
-Oracle:{T}, Sacrifice another creature or artifact: Ayara, Widow of the Realm deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.\n{5}{R/P}: Transform Ayara. Activate only as a sorcery. ({R/P} can be paid with {R} or 2 life.)
+Oracle:{T}, Sacrifice another creature or artifact: Ayara, Widow of the Realm deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.\n{5}{R/P}: Transform Ayara. Activate only as a sorcery. ({R/P} can be paid with either {R} or 2 life.)
 
 ALTERNATE
 

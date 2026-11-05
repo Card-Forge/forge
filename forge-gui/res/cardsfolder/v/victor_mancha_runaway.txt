@@ -1,0 +1,10 @@
+Name:Victor Mancha, Runaway
+ManaCost:5
+Types:Legendary Artifact Creature Human Hero
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile target card from your graveyard. You may play it for as long as you control NICKNAME.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | Duration$ AsLongAsControl | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as you control EFFECTSOURCE, you may play the exiled card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Victor Mancha enters, exile target card from your graveyard. You may play it for as long as you control Victor Mancha.

@@ -35,6 +35,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final boolean curse = sa.isCurse();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
+        // TODO support ValidCards2 directly instead
         if ("OwnCreatsAndOtherPWs".equals(logic)) {
             hList = CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
             cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
@@ -90,7 +91,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts().hasTapCost()
                     && sa instanceof AbilitySub
-                    && (!phase.getNextTurn().equals(ai)
+                    && (!phase.isPlayerNextTurn(ai)
                     || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
                 boolean combatants = false;
                 for (Card c : hList) {

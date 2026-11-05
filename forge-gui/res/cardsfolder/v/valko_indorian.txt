@@ -1,0 +1,7 @@
+Name:Valko Indorian
+ManaCost:3 B
+Types:Legendary Creature Human Wizard
+PT:2/4
+DeckRule:ColorIdentity:Exempt$ Phyrexian,Basic.Land | ActiveSection$ Commander | Description$ Rulebreaker — A deck with this commander can have Phyrexian cards of any color identity and any basic land cards.
+S:Mode$ Continuous | Affected$ Creature.Phyrexian+YouCtrl | AddKeyword$ Menace & Lifelink | Description$ Phyrexian creatures you control have menace and lifelink.
+Oracle:Rulebreaker — A deck with this commander can have Phyrexian cards of any color identity and any basic land cards.\nPhyrexian creatures you control have menace and lifelink.

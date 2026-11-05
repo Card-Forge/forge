@@ -1,0 +1,10 @@
+Name:Sting, Bilbo's Sword
+ManaCost:2
+Types:Legendary Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When NICKNAME enters, put a hone counter on NICKNAME for each creature target opponent controls. Attach NICKNAME to up to one target creature you control. (Each hone counter on an Equipment grants +1/+0 to equipped creature.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Opponent | Defined$ Self | CounterType$ HONE | CounterNum$ X | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control
+SVar:X:ThisTargetedPlayer$Valid Creature.YouCtrl
+K:Equip:3
+Oracle:Flash\nWhen Sting enters, put a hone counter on Sting for each creature target opponent controls. Attach Sting to up to one target creature you control. (Each hone counter on an Equipment grants +1/+0 to equipped creature.)\nEquip {3}

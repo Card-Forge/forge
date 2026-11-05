@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,7 +25,6 @@ import forge.game.spellability.StackItemView;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.MagicStack;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollection;
@@ -65,7 +65,6 @@ public class GameView extends TrackableObject {
     public FCollectionView<PlayerView> getPlayers() {
         return get(TrackableProperty.Players);
     }
-
     public void updatePlayers(final Game game) {
         set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
     }
@@ -93,7 +92,6 @@ public class GameView extends TrackableObject {
     public int getTurn() {
         return get(TrackableProperty.Turn);
     }
-
     void updateTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.Turn, phaseHandler.getTurn());
     }
@@ -101,7 +99,6 @@ public class GameView extends TrackableObject {
     public PhaseType getPhase() {
         return get(TrackableProperty.Phase);
     }
-
     void updatePhase(PhaseHandler phaseHandler) {
         set(TrackableProperty.Phase, phaseHandler.getPhase());
     }
@@ -141,20 +138,18 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.NumPlayedGamesInMatch);
     }
 
-    public boolean isGameOver() {
-        return get(TrackableProperty.GameOver);
-    }
-
-    public boolean isMatchOver() {
-        return get(TrackableProperty.MatchOver);
-    }
-
     public boolean isMulligan() {
         return get(TrackableProperty.Mulligan);
     }
-
     public void updateIsMulligan(boolean value) {
         set(TrackableProperty.Mulligan, value);
+    }
+
+    public boolean isGameOver() {
+        return get(TrackableProperty.GameOver);
+    }
+    public boolean isMatchOver() {
+        return get(TrackableProperty.MatchOver);
     }
 
     public String getWinningPlayerName() {
@@ -181,13 +176,6 @@ public class GameView extends TrackableObject {
     /** Initialize the game log for network-deserialized GameViews (transient field is null after deserialization). */
     public void initGameLog() {
         this.gameLog = new GameLog();
-    }
-
-    public TrackableCollection<CardView> getRevealedCollection() {
-        return get(TrackableProperty.RevealedCardsCollection);
-    }
-    public void updateRevealedCards(TrackableCollection<CardView> collection) {
-        set(TrackableProperty.RevealedCardsCollection, collection);
     }
 
     public String getDependencies() {
@@ -225,9 +213,11 @@ public class GameView extends TrackableObject {
         }
 
         final CombatView combatView = new CombatView(combat.getAttackingPlayer().getGame().getTracker());
+        // one pass over the combat instead of a scan per band: this runs on every addAttacker
+        final Map<AttackingBand, GameEntity> defenders = combat.getDefenderByBand();
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
-            final GameEntity defender = combat.getDefenderByAttacker(b);
+            final GameEntity defender = defenders.get(b);
             final List<Card> blockers = combat.getBlockers(b);
             final boolean isBlocked = b.isBlocked() == Boolean.TRUE;
             combatView.addAttackingBand(
@@ -258,6 +248,9 @@ public class GameView extends TrackableObject {
     }
 
     public Deck getDeck(final PlayerView pv) {
+        if (getMatch() == null) { // transient, null on network clients after deserialization
+            return null;
+        }
         for (final RegisteredPlayer rp : getMatch().getPlayers()) {
             if (pv.isLobbyPlayer(rp.getPlayer())) {
                 return rp.getDeck();

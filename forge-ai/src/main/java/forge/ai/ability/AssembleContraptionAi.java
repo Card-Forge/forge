@@ -47,7 +47,7 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     }
 
     private Card getGoodReassembleTarget(Player ai, SpellAbility sa) {
-        List<GameEntity> targets = sa.getTargetRestrictions().getAllCandidates(sa, true);
+        List<GameEntity> targets = sa.getTargetRestrictions().getAllCandidates(sa);
         int nextSprocket = (ai.getCrankCounter() % 3) + 1;
         return targets.stream()
                 .filter(e -> {

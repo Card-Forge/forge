@@ -51,6 +51,7 @@ public class VAutoYieldsAndTriggers extends FDialog {
 
         filterField = add(new FTextField());
         filterField.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
+        filterField.setLiveChangeEvents(true); //filter as characters are typed
         filterField.setChangedHandler(e -> applyFilter());
 
         lstEntries = add(new FChoiceList<String>(allEntries) {

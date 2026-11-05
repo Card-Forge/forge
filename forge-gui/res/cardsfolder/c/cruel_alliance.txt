@@ -1,0 +1,10 @@
+Name:Cruel Alliance
+ManaCost:2 B
+Types:Sorcery
+K:Teamwork:2
+A:SP$ ChangeZone | ValidTgts$ Creature.cmcLE3 | ValidTgtsDesc$ creature with mana value 3 or less | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBExile | SpellDescription$ Exile target creature with mana value 3 or less. If this spell was cast using teamwork, instead exile target creature and you gain 3 life.
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature | TargetMin$ Y | TargetMax$ Y | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | ConditionZone$ Stack | ConditionPresent$ Card.Self+Teamwork
+SVar:X:Count$Teamwork.0.1
+SVar:Y:Count$Teamwork.1.0
+Oracle:Teamwork 2 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 2 or more.)\nExile target creature with mana value 3 or less. If this spell was cast using teamwork, instead exile target creature and you gain 3 life.

@@ -3,7 +3,7 @@ ManaCost:R R
 Types:Creature Wolf Horror
 PT:2/2
 K:First Strike
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Delirium | Description$ Delirium — CARDNAME has double strike as long as there are four or more card types among cards in your graveyard.
+S:Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Double Strike | Condition$ Delirium | Description$ Delirium — CARDNAME has double strike as long as there are four or more card types among cards in your graveyard.
 DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
 Oracle:First strike\nDelirium — Scourge Wolf has double strike as long as there are four or more card types among cards in your graveyard.

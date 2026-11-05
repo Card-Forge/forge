@@ -1,0 +1,7 @@
+Name:Uncover the Moon-Letters
+ManaCost:3 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever you cast a noncreature spell, you may draw X cards, where X is the amount of mana spent to cast that spell. If you do, discard two cards.
+SVar:TrigDiscard:AB$ Discard | Cost$ Draw<X/You> | Defined$ You | Mode$ TgtChoose | NumCards$ 2
+SVar:X:TriggeredCard$CastTotalManaSpent
+Oracle:Whenever you cast a noncreature spell, you may draw X cards, where X is the amount of mana spent to cast that spell. If you do, discard two cards.

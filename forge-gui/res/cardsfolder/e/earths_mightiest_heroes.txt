@@ -1,0 +1,7 @@
+Name:Earth's Mightiest Heroes
+ManaCost:4 G G
+Types:Sorcery
+K:Teamwork:5
+A:SP$ Dig | DigNum$ 8 | Reveal$ True | ChangeNum$ X | ChangeValid$ Creature | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. If this spell was cast using teamwork, put any number of creature cards from among them onto the battlefield instead. Put the rest into your graveyard.
+SVar:X:Count$Teamwork.8.1
+Oracle:Teamwork 5 (As an additional cost to cast this spell, you may tap any number of creatures you control with total power 5 or more.)\nReveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. If this spell was cast using teamwork, put any number of creature cards from among them onto the battlefield instead. Put the rest into your graveyard.

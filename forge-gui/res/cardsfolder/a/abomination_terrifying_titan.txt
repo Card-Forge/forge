@@ -1,0 +1,8 @@
+Name:Abomination, Terrifying Titan
+ManaCost:3 RG
+Types:Legendary Creature Gamma Villain
+PT:4/4
+K:Trample
+A:AB$ PutCounter | Cost$ 5 RG RG | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | PowerUp$ True | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on NICKNAME. He fights up to one target creature an opponent controls. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)
+SVar:DBFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.OppCtrl | ValidTgtsDesc$ creature an opponent controls | TargetMin$ 0 | TargetMax$ 1
+Oracle:Trample\nPower-up — {5}{R/G}{R/G}: Put a +1/+1 counter on Abomination. He fights up to one target creature an opponent controls. (Activate each power-up ability only once. Reduce the cost by his mana cost if he entered this turn.)

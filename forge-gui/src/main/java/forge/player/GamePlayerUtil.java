@@ -57,8 +57,11 @@ public final class GamePlayerUtil {
         return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount), sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, profileOverride);
     }
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex) {
+        return createAiPlayer(name, avatarIndex, "");
+    }
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final String profileOverride) {
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
-        return createAiPlayer(name, avatarIndex, sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, "");
+        return createAiPlayer(name, avatarIndex, sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, profileOverride);
     }
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
         return createAiPlayer(name, avatarIndex, sleeveIndex, null, "");

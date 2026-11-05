@@ -38,6 +38,7 @@ public final class DisplayMenu {
         menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_SeparateCombatStacks());
         menu.add(getMenuItem_ActionableHighlights());
+        menu.add(getMenuItem_AutoTapPreview());
         menu.add(getMenuItem_LinkedExileCards());
         return menu;
     }
@@ -121,6 +122,20 @@ public final class DisplayMenu {
         menuItem.addActionListener(e -> {
             final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
             prefs.setPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS, enabled);
+            prefs.save();
+            matchUI.repaintCardOverlays();
+        });
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_AutoTapPreview() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = MenuUtil.createStayOpenSkinnedCheckBox(localizer.getMessage("cbShowAutoTapPreview"));
+        menuItem.setToolTipText(localizer.getMessage("nlShowAutoTapPreview"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW);
+            prefs.setPref(FPref.UI_SHOW_AUTOTAP_PREVIEW, enabled);
             prefs.save();
             matchUI.repaintCardOverlays();
         });

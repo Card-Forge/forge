@@ -1,0 +1,11 @@
+Name:Archive Arbiter
+ManaCost:6
+Types:Artifact Creature Sphinx
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDestroy,DBGainLife
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature+nonLand | ValidTgtsDesc$ noncreature, nonland permanent | SpellDescription$ Destroy target noncreature, nonland permanent.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+DeckHas:Ability$Lifegain
+Oracle:Flying\nWhen this creature enters, choose one —\n• Destroy target noncreature, nonland permanent.\n• You gain 4 life.

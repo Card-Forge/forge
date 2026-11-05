@@ -1,0 +1,6 @@
+Name:Organic Avulsion Unit
+ManaCost:2 B
+Types:Artifact Creature Borg
+PT:2/3
+A:AB$ PumpAll | Cost$ 2 | ValidCards$ Creature.Artifact+YouCtrl | KW$ Menace | SpellDescription$ Artifact creatures you control gain menace until end of turn.
+Oracle:{2}: Artifact creatures you control gain menace until end of turn. (A creature with menace can’t be blocked except by two or more creatures.)

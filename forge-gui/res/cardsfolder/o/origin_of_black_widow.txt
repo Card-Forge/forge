@@ -1,0 +1,10 @@
+Name:Origin of Black Widow
+ManaCost:2 B
+Types:Enchantment Saga
+K:Chapter:3:DBSac,DBPumpAll,DBRepeatEach
+SVar:DBSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SpellDescription$ Each opponent sacrifices a creature of their choice.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SpellDescription$ Creatures you control gain deathtouch until end of turn.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBLoseLife | SpellDescription$ Each opponent loses 1 life for each creature card in their graveyard.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
+SVar:X:Count$ValidGraveyard Creature.RememberedPlayerCtrl
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a creature of their choice.\nII — Creatures you control gain deathtouch until end of turn.\nIII — Each opponent loses 1 life for each creature card in their graveyard.

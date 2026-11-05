@@ -1,0 +1,5 @@
+Name:Bag End|Art:Revive the Shire|Colors:W
+Name:The Shire|Art:The Shire|Colors:G
+Name:Rivendell|Art:Rivendell|Colors:U
+Name:Mines of Moria|Art:Mines of Moria|Colors:R
+Name:Mount Doom|Art:Mount Doom|Colors:B

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Magnetic Mountain&quot;, &quot;Eyes of the Wisent&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Windreaper Falcon&quot;, &quot;Windreaper Falcon&quot;, &quot;Sphere of Reason&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>

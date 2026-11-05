@@ -1,0 +1,9 @@
+Name:The Lord of the Eagles
+ManaCost:7 U U
+Types:Legendary Creature Bird Noble
+PT:8/8
+K:Flash
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total power of creatures you control with flying.
+K:Flying
+SVar:X:Count$Valid Creature.YouCtrl+withFlying$CardPower
+Oracle:Flash\nThis spell costs {X} less to cast, where X is the total power of creatures you control with flying.\nFlying

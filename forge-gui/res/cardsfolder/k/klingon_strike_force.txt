@@ -1,0 +1,9 @@
+Name:Klingon Strike Force
+ManaCost:3 R R
+Types:Creature Klingon Warrior
+PT:5/5
+K:Trample
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this creature dies, it deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2
+Oracle:Trample (This creature can deal excess combat damage to the player it's attacking.)\nHaste (This creature can attack and {T} as soon as it comes under your control.)\nWhen this creature dies, it deals 2 damage to each opponent.

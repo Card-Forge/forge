@@ -83,7 +83,8 @@
    <properties>
     <property name="dialog">[{
   &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
-  &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ],
+  &quot;loctext&quot;: &quot;adv.towns_plains_town.53.d.n0.text&quot;,
+  &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot;, &quot;locname&quot;: &quot;adv.towns_plains_town.53.d.n1.name&quot; } ],
   &quot;action&quot;: [ { &quot;setMapFlag&quot;: {&quot;key&quot;: &quot;gate&quot;, &quot;val&quot;: 1} } ]
 }]</property>
     <property name="enemy" value="Apprentice White Wizard"/>

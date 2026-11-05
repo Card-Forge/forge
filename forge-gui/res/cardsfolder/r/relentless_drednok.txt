@@ -1,0 +1,8 @@
+Name:Relentless Drednok
+ManaCost:B
+Types:Artifact Creature Robot
+PT:1/1
+K:Lifelink
+A:AB$ Draw | Cost$ 2 B ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Lifelink\n{2}{B}, Exile this card from your graveyard: You draw a card and lose 1 life.

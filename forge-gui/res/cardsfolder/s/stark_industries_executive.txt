@@ -1,0 +1,7 @@
+Name:Stark Industries Executive
+ManaCost:R
+Types:Creature Human Advisor
+PT:1/2
+A:AB$ Token | Cost$ 2 T | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+DeckHas:Ability$Sacrifice|Token
+Oracle:{2}, {T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

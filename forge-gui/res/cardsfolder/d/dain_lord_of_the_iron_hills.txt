@@ -1,0 +1,8 @@
+Name:Dáin, Lord of the Iron Hills
+ManaCost:1 W
+Types:Legendary Creature Dwarf Noble
+PT:2/2
+K:Vigilance
+K:Storied
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You | Cost$ 1 | Condition$ EnduringStory | Description$ As long as you have an enduring story, creatures can't attack you unless their controller pays {1} for each of those creatures.
+Oracle:Vigilance\nStoried (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)\nAs long as you have an enduring story, creatures can't attack you unless their controller pays {1} for each of those creatures.

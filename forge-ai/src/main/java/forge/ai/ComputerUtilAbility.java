@@ -1,8 +1,10 @@
 package forge.ai;
 
 import java.util.Comparator;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -28,11 +30,14 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.ComparatorUtil;
+import forge.util.IterableUtil;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -73,7 +78,7 @@ public class ComputerUtilAbility {
                 all.add(p.getCardsIn(ZoneType.Library).get(0));
             }
         }
-        all.addAll(game.getCardsIn(ZoneType.Command));
+        all.addAll(IterableUtil.filter(player.getCardsIn(ZoneType.Command), c -> !c.isImmutable() || c.isEmblem()));
         all.addAll(game.getCardsIn(ZoneType.Exile));
         all.addAll(game.getCardsIn(ZoneType.Battlefield));
         return all;
@@ -211,13 +216,15 @@ public class ComputerUtilAbility {
             }
         }
         for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
-            SpellAbility ab = si.getSpellAbility();
-            if (ab != null && ab.getApi() == api && si.getTargetChoices() != null) {
-                for (Card c : cardList) {
-                    // TODO: somehow ensure that the detected SA won't be countered
-                    if (si.getTargetChoices().getTargetCards().contains(c)) {
-                        // Was already targeted by a spell ability instance on stack
-                        targeted.add(c);
+            for (SpellAbility ab = si.getSpellAbility(); ab != null; ab = ab.getSubAbility()) {
+                TargetChoices tc = ab == si.getSpellAbility() ? si.getTargetChoices() : ab.getTargets();
+                if (ab.getApi() == api && tc != null) {
+                    for (Card c : cardList) {
+                        // TODO: somehow ensure that the detected SA won't be countered
+                        if (tc.getTargetCards().contains(c)) {
+                            // Was already targeted by a spell ability instance on stack
+                            targeted.add(c);
+                        }
                     }
                 }
             }
@@ -229,7 +236,7 @@ public class ComputerUtilAbility {
     public static boolean isFullyTargetable(SpellAbility sa) {
         SpellAbility sub = sa;
         while (sub != null) {
-            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub, true) < sub.getMinTargets()) {
+            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub) < sub.getMinTargets()) {
                 return false;
             }
             sub = sub.getSubAbility();
@@ -237,105 +244,82 @@ public class ComputerUtilAbility {
         return true;
     }
 
-    public final static saComparator saEvaluator = new saComparator();
+    public final static Comparator<SpellAbility> saEvaluator = Comparator.comparing(sa -> new SortKey(sa, false));
 
-    // not sure "playing biggest spell" matters?
-    public final static class saComparator implements Comparator<SpellAbility> {
-        @Override
-        public int compare(final SpellAbility a, final SpellAbility b) {
-            return compareEvaluator(a, b, false);
-        }
-        public int compareEvaluator(final SpellAbility a, final SpellAbility b, boolean safeToEvaluateCreatures) {
-            // sort from highest cost to lowest
+    /**
+     * Everything the evaluator order depends on, computed once per SpellAbility. Keys are compared
+     * lexicographically, so the order is always a valid total preorder (antisymmetric and transitive), which
+     * strict sorts such as Android's TimSort require. The previous version returned early from pairwise rules
+     * (e.g. "FreeSpellAI" returned -1 in both directions) and so could contradict itself.
+     */
+    public static final class SortKey implements Comparable<SortKey> {
+        private final int activateLast, lowPriorityDie, energyPump, zeroCmcFirst, freeSpellFirst, score;
+
+        private SortKey(SpellAbility sa, boolean safeToEvaluateCreatures) {
             // we want the highest costs first
-            int a1 = a.getPayCosts().getTotalMana().getCMC();
-            int b1 = b.getPayCosts().getTotalMana().getCMC();
+            // TODO support alternative strategies like going wide with attackers
+            final int cmc = sa.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
-            if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
-                return 1;
-            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
-                return -1;
-            }
-
+            activateLast = sa.hasParam("AIActivateLast") ? 1 : 0;
             // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
-            if (ApiType.RollPlanarDice == a.getApi() || ApiType.RollPlanarDice == b.getApi()) {
-                Card hostCardForGame = a.getHostCard();
-                if (hostCardForGame == null) {
-                    if (b.getHostCard() != null) {
-                        hostCardForGame = b.getHostCard();
-                    } else {
-                        return 0; // fallback if neither SA have a host card somehow
-                    }
-                }
-                Game game = hostCardForGame.getGame();
-                if (game.getActivePlanes() != null) {
-                    for (Card c : game.getActivePlanes()) {
-                        if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                            if (ApiType.RollPlanarDice == a.getApi()) {
-                                return 1;
-                            } else {
-                                return -1;
-                            }
-                        }
-                    }
-                }
-            }
-
+            lowPriorityDie = isLowPriorityPlanarDieRoll(sa) ? 1 : 0;
             // deprioritize pump spells with pure energy cost (can be activated last,
             // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
-            int a2 = 0, b2 = 0;
-            if (a.getApi() == ApiType.Pump && a.getPayCosts().getCostEnergy() != null) {
-                if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    a2 = a.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (b.getApi() == ApiType.Pump && b.getPayCosts().getCostEnergy() != null) {
-                if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    b2 = b.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (a2 == 0 && b2 > 0) {
-                return -1;
-            } else if (b2 == 0 && a2 > 0) {
-                return 1;
-            }
+            energyPump = pureEnergyPumpAmount(sa) > 0 ? 1 : 0;
+            // use 0 cmc abilities first (might be a Mox)
+            zeroCmcFirst = cmc == 0 && ApiType.Mana != sa.getApi() ? 0 : 1;
+            final Card host = sa.getHostCard();
+            freeSpellFirst = host != null && host.hasSVar("FreeSpellAI") ? 0 : 1;
 
-            // cast 0 mana cost spells first (might be a Mox)
-            if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
-                return -1;
-            } else if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
-                return 1;
-            }
-
-            if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
-                return -1;
-            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
-                return 1;
-            }
-
-            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()) {
-                // Cheaper Spectacle costs should be preferred
-                // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
-                // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
-                if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
-                    return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
-                    return 1;
-                }
-            }
-
-            a1 += getSpellAbilityPriority(a);
-            b1 += getSpellAbilityPriority(b);
-
+            int s = cmc + getSpellAbilityPriority(sa);
             // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
                 // try to align the scales: if priority swings in either direction extra evaluation matters less
-                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / (10.5f + Math.abs(a1)));
-                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / (10.5f + Math.abs(b1)));
+                s += Math.round(ComputerUtilCard.evaluateCreature(sa) / (10.5f + Math.abs(s)));
             }
+            score = s;
+        }
 
-            return b1 - a1;
+        @Override
+        public int compareTo(SortKey o) {
+            int r = Integer.compare(activateLast, o.activateLast);
+            if (r != 0) return r;
+            r = Integer.compare(lowPriorityDie, o.lowPriorityDie);
+            if (r != 0) return r;
+            r = Integer.compare(energyPump, o.energyPump);
+            if (r != 0) return r;
+            r = Integer.compare(zeroCmcFirst, o.zeroCmcFirst);
+            if (r != 0) return r;
+            r = Integer.compare(freeSpellFirst, o.freeSpellFirst);
+            if (r != 0) return r;
+            // higher score first
+            return Integer.compare(o.score, score);
+        }
+
+        private static boolean isLowPriorityPlanarDieRoll(SpellAbility sa) {
+            if (ApiType.RollPlanarDice != sa.getApi() || sa.getHostCard() == null) {
+                return false;
+            }
+            final Game game = sa.getHostCard().getGame();
+            if (game.getActivePlanes() == null) {
+                return false;
+            }
+            for (Card c : game.getActivePlanes()) {
+                if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static int pureEnergyPumpAmount(SpellAbility sa) {
+            if (sa.getApi() == ApiType.Pump && sa.getPayCosts().getCostEnergy() != null
+                    && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                final Integer amount = sa.getPayCosts().getCostEnergy().convertAmount();
+                return amount == null ? 0 : amount;
+            }
+            return 0;
         }
 
         private static int getSpellAbilityPriority(SpellAbility sa) {
@@ -346,12 +330,14 @@ public class ComputerUtilAbility {
                 System.err.println("Error: couldn't figure out the activating player and host card for SA: " + sa);
                 return 0;
             }
-            final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
 
             if (source != null) {
                 // puts creatures in front of spells
                 if (source.isCreature()) {
                     p += 1;
+                }
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
+                    p -= 10;
                 }
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
@@ -360,11 +346,12 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
-                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
-                    p -= 10;
+                // prefer spells from hand when it can lower risk of discarding
+                if (source.isInZone(ZoneType.Hand) && !ai.isUnlimitedHandSize()) {
+                    p += Math.max(0, CardLists.count(ai.getCardsIn(ZoneType.Hand), c -> !c.hasSVar("DiscardMe")) - ai.getMaxHandSize());
                 }
                 // don't play equipment before having any creatures
-                if (source.isEquipment() && noCreatures) {
+                if (source.isEquipment() && ai.getCreaturesInPlay().isEmpty()) {
                     p -= 9;
                 }
                 // don't equip stuff in main 2 if there's more stuff to cast at the moment
@@ -405,10 +392,11 @@ public class ComputerUtilAbility {
                 }
             }
 
-            // use Surge and Prowl costs when able to
-            if (sa.isSurged() || sa.isProwl()) {
+            // positive and/or cheaper altcosts, try to take advantage while they're enabled
+            if (sa.isSurged() || sa.isProwl() || sa.isSpectacle()) {
                 p += 9;
             }
+
             // sort planeswalker abilities with most costly first
             if (sa.isPwAbility()) {
                 final CostPart cost = sa.getPayCosts().getCostParts().get(0);
@@ -425,28 +413,54 @@ public class ComputerUtilAbility {
             if (ApiType.DestroyAll == sa.getApi()) {
                 // check boardwipe earlier
                 p += 4;
-            } else if (ApiType.Mana == sa.getApi()) {
+            } else if (sa.isManaAbility()) {
                 // keep mana abilities for paying
                 p -= 9;
             }
 
-            // try to cast mana ritual spells before casting spells to maximize potential mana
+            // try to use mana ritual before casting spells to maximize potential mana
             if ("ManaRitual".equals(sa.getParam("AILogic"))) {
                 p += 9;
+            }
+
+            if ((sa.isPlotting() || sa.isForetelling() || sa.isKeyword(Keyword.SUSPEND)) && ai.getTurn() > 10) {
+                // less time in late game, prefer something that affects board right away
+                p -= 1;
             }
 
             return p;
         }
     }
 
-    public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all) {
+    /**
+     * A comparator for a single sort run: each SpellAbility's key is computed once and reused, which is both
+     * faster (creature evaluation is expensive) and guarantees every comparison sees the same values.
+     */
+    public static Comparator<SpellAbility> cachedEvaluator(final boolean safeToEvaluateCreatures) {
+        final Map<SpellAbility, SortKey> cache = new IdentityHashMap<>();
+        return (a, b) -> cache.computeIfAbsent(a, sa -> new SortKey(sa, safeToEvaluateCreatures))
+                .compareTo(cache.computeIfAbsent(b, sa -> new SortKey(sa, safeToEvaluateCreatures)));
+    }
+
+    /**
+     * Puts the best spells first, then orders the creature spells among themselves. Falls back to a stable sort
+     * instead of throwing if the ordering is ever inconsistent.
+     *
+     * @return true if the fallback sort was needed (the evaluator is inconsistent and should be reported)
+     */
+    public static boolean sortSpellAbilities(final List<SpellAbility> all) {
+        final boolean fellBack = ComparatorUtil.safeSort(all, cachedEvaluator(false));
+        return sortCreatureSpells(all) || fellBack;
+    }
+
+    private static boolean sortCreatureSpells(final List<SpellAbility> all) {
         // try to smoothen power creep by making CMC less of a factor
         final List<SpellAbility> creatures = AiController.filterListByApi(Lists.newArrayList(all), ApiType.PermanentCreature);
         if (creatures.size() <= 1) {
-            return all;
+            return false;
         }
         // TODO this doesn't account for nearly identical creatures where one is a newer but more cost efficient variant
-        creatures.sort(ComputerUtilCard.EvaluateCreatureSpellComparator);
+        final boolean fellBack = ComparatorUtil.safeSort(creatures, cachedEvaluator(true));
         int idx = 0;
         for (int i = 0; i < all.size(); i++) {
             if (all.get(i).getApi() == ApiType.PermanentCreature) {
@@ -454,6 +468,6 @@ public class ComputerUtilAbility {
                 idx++;
             }
         }
-        return all;
+        return fellBack;
     }
 }

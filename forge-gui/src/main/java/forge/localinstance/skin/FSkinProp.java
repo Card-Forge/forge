@@ -350,6 +350,7 @@ public enum FSkinProp {
     ICO_MENU_SEALED       (new int[] {320, 1520, 80, 80}, PropType.ICON),
     ICO_MENU_DRAFT        (new int[] {400, 1520, 80, 80}, PropType.ICON),
     ICO_MENU_CONSTRUCTED  (new int[] {480, 1520, 80, 80}, PropType.ICON),
+    ICO_DECKSTATS         (new int[] {408, 1850, 70, 70}, PropType.ICON),
 
     //interface icons
     ICO_QUESTION        (new int[] {560, 800, 32, 32}, PropType.ICON),
@@ -771,6 +772,7 @@ public enum FSkinProp {
             case ContraptionDeck -> IMG_ZONE_CONTRAPTION;
             case Ante -> IMG_ZONE_ANTE;
             case Junkyard ->IMG_ZONE_JUNKYARD;
+            case StickerSheets -> IMG_ZONE_STICKER;
             default -> IMG_HDZONE_LIBRARY;
         };
     }
@@ -786,6 +788,7 @@ public enum FSkinProp {
             case Schemes -> IMG_ZONE_SCHEME;
             case Attractions -> IMG_ZONE_ATTRACTION;
             case Contraptions -> IMG_ZONE_CONTRAPTION;
+            case Stickers -> IMG_ZONE_STICKER;
             default -> IMG_HDZONE_SIDEBOARD;
         };
     }

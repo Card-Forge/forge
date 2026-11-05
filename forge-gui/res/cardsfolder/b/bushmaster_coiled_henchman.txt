@@ -1,0 +1,9 @@
+Name:Bushmaster, Coiled Henchman
+ManaCost:1 G
+Types:Legendary Creature Snake Human Villain
+PT:2/1
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+counters_GE1_P1P1 | AddKeyword$ Deathtouch | Description$ Each other creature you control with a +1/+1 counter on it has deathtouch.
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Counters
+Oracle:Deathtouch\nEach other creature you control with a +1/+1 counter on it has deathtouch.

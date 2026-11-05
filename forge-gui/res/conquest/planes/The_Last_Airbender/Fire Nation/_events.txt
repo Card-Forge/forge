@@ -1,0 +1,9 @@
+Name:Zuko, Avatar Hunter|Deck:Zuko, Avatar Hunter.dck|Variant:Commander|Avatar:Zuko, Avatar Hunter|Desc:
+Name:Avatar Roku, Firebender|Deck:Avatar Roku, Firebender.dck|Variant:Commander|Avatar:Avatar Roku, Firebender|Desc:
+Name:Fire Lord Zuko|Deck:Fire Lord Zuko.dck|Variant:Commander|Avatar:Fire Lord Zuko|Desc:
+Name:Jet, Freedom Fighter|Deck:Jet, Freedom Fighter.dck|Variant:Commander|Avatar:Jet, Freedom Fighter|Desc:
+Name:Ashling the Pilgrim Avatar|Deck:Ashling the Pilgrim Avatar.dck|Variant:Vanguard|Avatar:Ashling the Pilgrim Avatar|Desc:
+Name:Fang, Roku's Companion|Deck:Fang, Roku's Companion.dck|Variant:Commander|Avatar:Fang, Roku's Companion|Desc:
+Name:Ran and Shaw|Deck:Ran and Shaw.dck|Variant:Commander|Avatar:Ran and Shaw|Desc:
+Name:Zhao, Ruthless Admiral|Deck:Zhao, Ruthless Admiral.dck|Variant:Commander|Avatar:Zhao, Ruthless Admiral|Desc:
+Name:Iroh, Grand Lotus|Deck:Iroh, Grand Lotus.dck|Variant:Commander|Avatar:Iroh, Grand Lotus|Desc:

@@ -435,7 +435,10 @@ public class UntapAi extends SpellAbilityAi {
         // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
         if (ph.is(PhaseType.MAIN2, ai)) {
             for (Card c : playable) {
-                for (SpellAbility ab : c.getBasicSpells()) {
+                for (SpellAbility ab : c.getAllPossibleAbilities(ai, true)) {
+                    if (!ab.isBasicSpell()) {
+                        continue;
+                    }
                     if (!ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
                         // TODO: Currently limited to predicting something that can be paid with any color,
                         // can ideally be improved to work by color.
@@ -475,7 +478,7 @@ public class UntapAi extends SpellAbilityAi {
 
         // no harm in doing this past declare blockers during the opponent's turn and right before our turn,
         // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
-        return ph.getNextTurn() == ai
+        return ph.isPlayerNextTurn(ai)
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
     }
 

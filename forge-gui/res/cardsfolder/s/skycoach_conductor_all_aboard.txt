@@ -15,7 +15,7 @@ ALTERNATE
 Name:All Aboard
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | ValidTgts$ Creature.nonPilot+YouCtrl | Origin$ Battlefield | Destination$ Exile | ValidTgtDesc$ non-Pilot creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target non-Pilot creature you control, then return that card to the battlefield under its owner's control.
+A:SP$ ChangeZone | ValidTgts$ Creature.nonPilot+YouCtrl | Origin$ Battlefield | Destination$ Exile | ValidTgtsDesc$ non-Pilot creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target non-Pilot creature you control, then return that card to the battlefield under its owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile target non-Pilot creature you control, then return that card to the battlefield under its owner's control.

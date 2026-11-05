@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import forge.ai.*;
+import forge.ai.ability.AnimateAi;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -31,8 +32,8 @@ public class SpellAbilityPicker {
     private Plan plan;
     private int numSimulations;
 
-    public SpellAbilityPicker(Game game, Player player) {
-        this.game = game;
+    public SpellAbilityPicker(Player player) {
+        this.game = player.getGame();
         this.player = player;
     }
 
@@ -78,6 +79,24 @@ public class SpellAbilityPicker {
         }
         candidateSAs.subList(writeIndex, candidateSAs.size()).clear();
         return candidateSAs;
+    }
+
+    /** For diagnostics: what the picker thinks of every ability it looked at, including those it left out. */
+    public List<String> explainCandidates() {
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        cards = ComputerUtilCard.dedupeCards(cards);
+        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
+        List<String> out = new java.util.ArrayList<>();
+        for (SpellAbility sa : candidateSAs) {
+            if (sa.isManaAbility()) {
+                continue;
+            }
+            sa.setActivatingPlayer(player);
+            out.add(sa.getHostCard() + " [" + sa.getHostCard().getZone() + "] " + canPlayAndPayForSim(sa)
+                    + (sa.isOptionalCostPaid(forge.game.spellability.OptionalCost.Bargain) ? " (bargained)" : ""));
+        }
+        return out;
     }
 
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
@@ -176,17 +195,17 @@ public class SpellAbilityPicker {
             }
         }
 
-        // To make the AI hold-off on playing creatures in MAIN1 if they give no other benefits,
-        // check the score for the bestSA while counting summon sick creatures for 0.
+        // To make the AI hold off on plays that only add unavailable resources, check the score
+        // while excluding phased-out permanents and summon sick creatures before MAIN2.
         // Do it here on the best SA, rather than for all evaluations, so that if the best SA
         // is indeed a creature spell, we don't pick something else to play now and then have
         // no mana to play the truly best SA post-combat.
-        if (bestSa != null && bestSaValue.summonSickValue <= origGameScore.summonSickValue) {
+        if (bestSa != null && bestSaValue.availableValue <= origGameScore.availableValue) {
             bestSa = null;
         }
 
         long execTime = System.currentTimeMillis() - startTime;
-        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.summonSickValue + " TIME: " + execTime);
+        print("BEST: " + abilityToString(bestSa) + " SCORE: " + bestSaValue.availableValue + " TIME: " + execTime);
         this.bestScore = bestSaValue;
         return bestSa;
     }
@@ -330,6 +349,10 @@ public class SpellAbilityPicker {
         }
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
+        }
+        // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
+        if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
+            return AiPlayDecision.DoesntImpactCombat;
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;

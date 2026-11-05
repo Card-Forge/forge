@@ -1,0 +1,10 @@
+Name:Falcon and Redwing
+ManaCost:2 W
+Types:Legendary Creature Human Bird Hero
+PT:1/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on CARDNAME.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nWhenever Falcon and Redwing deal combat damage to a player, create that many 1/1 white Bird creature tokens with flying, then put a +1/+1 counter on Falcon and Redwing.

@@ -1,0 +1,11 @@
+Name:Tiger Shark, Abyssal Hunter
+ManaCost:2 UB UB
+Types:Legendary Creature Shark Human Villain
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ Whenever NICKNAME enters or attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConnive | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+A:AB$ Effect | Cost$ 4 UB | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ NICKNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Tiger Shark enters or attacks, he connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\n{4}{U/B}: Tiger Shark can't be blocked this turn.

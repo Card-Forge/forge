@@ -1,0 +1,7 @@
+Name:The Muckslinger Gang
+ManaCost:1 B R G
+Types:Legendary Creature Goblin Lizard Beast
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+!attacking+!blocking | AddPower$ 3 | AddToughness$ 3 | Description$ Each other creature you control gets +3/+3 as long as it's not attacking or blocking.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+inZoneStack,Creature.YouOwn+!inZoneBattlefield+!inZoneStack | AffectedZone$ All | AddPower$ 3 | AddToughness$ 3 | Description$ Creature spells you control and creature cards you own in any zone other than the battlefield or the stack get +3/+3.
+Oracle:Each other creature you control gets +3/+3 as long as it's not attacking or blocking.\nCreature spells you control and creature cards you own in any zone other than the battlefield or the stack get +3/+3.

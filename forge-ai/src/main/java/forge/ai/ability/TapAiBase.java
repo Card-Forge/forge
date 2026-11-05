@@ -44,7 +44,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
         }
 
         while (sa.canAddMoreTarget()) {
-            Card choice = null;
+            Card choice;
 
             if (tapList.isEmpty()) {
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
@@ -77,7 +77,9 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
 
             tapList.remove(choice);
-            sa.getTargets().add(choice);
+            if (sa.canTarget(choice)) {
+                sa.getTargets().add(choice);
+            }
         }
 
         return true;
@@ -90,8 +92,6 @@ public abstract class TapAiBase extends SpellAbilityAi {
      * 
      * @param source
      *            a {@link forge.game.card.Card} object.
-     * @param tgt
-     *            a {@link forge.game.spellability.TargetRestrictions} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -194,11 +194,13 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
 
             tapList.remove(choice);
-            sa.getTargets().add(choice);
+            if (sa.canTarget(choice)) {
+                sa.getTargets().add(choice);
+            }
         }
 
         // Nothing was ever targeted, so we need to bail.
-        return sa.getTargets().size() != 0;
+        return !sa.getTargets().isEmpty();
     }
 
     /**
@@ -257,7 +259,16 @@ public abstract class TapAiBase extends SpellAbilityAi {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
-        if (!sa.usesTargeting()) {
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            if (tapPrefTargeting(ai, source, sa, mandatory)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            if (mandatory && tapUnpreferredTargeting(ai, sa, mandatory)) {
+                // not enough preferred targets, but mandatory so keep going:
+                return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+            }
+        } else {
             if (mandatory) {
                 return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
             }
@@ -266,18 +277,6 @@ public abstract class TapAiBase extends SpellAbilityAi {
             // might be from ETBreplacement
             if (pDefined.isEmpty() || !pDefined.get(0).isInPlay() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            sa.resetTargets();
-            if (tapPrefTargeting(ai, source, sa, mandatory)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else if (mandatory) {
-                // not enough preferred targets, but mandatory so keep going:
-                if (tapUnpreferredTargeting(ai, sa, mandatory)) {
-                    return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-                }
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -297,8 +296,6 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-
-        boolean randomReturn = true;
 
         if (sa.usesTargeting()) {
             // target section, maybe pull this out?

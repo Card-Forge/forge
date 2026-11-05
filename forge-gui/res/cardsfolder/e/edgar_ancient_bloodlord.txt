@@ -1,0 +1,10 @@
+Name:Edgar, Ancient Bloodlord
+ManaCost:W B
+Types:Legendary Creature Vampire Noble
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl,Planeswalker.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature or planeswalker you control dies, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ PutCounter | Cost$ 2 Sac<1/Creature.Other;Planeswalker.Other/another creature or planeswalker> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on NICKNAME. He gains menace until end of turn. (He can't be blocked except by two or more creatures.)
+SVar:DBPump:DB$ Pump | KW$ Menace | Defined$ Self
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:Whenever another creature or planeswalker you control dies, you gain 1 life.\n{2}, Sacrifice another creature or planeswalker: Put a +1/+1 counter on Edgar. He gains menace until end of turn. (He can't be blocked except by two or more creatures.)

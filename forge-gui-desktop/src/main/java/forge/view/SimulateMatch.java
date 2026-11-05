@@ -8,6 +8,8 @@ import java.util.concurrent.TimeoutException;
 import org.apache.commons.lang3.time.StopWatch;
 
 import forge.LobbyPlayer;
+import forge.ai.AiProfileUtil;
+import forge.ai.simulation.FlatMonteCarloStats;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
@@ -29,11 +31,16 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Lang;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.WordUtil;
 import forge.util.storage.IStorage;
 
 public class SimulateMatch {
+    /** Set by -mc: null leaves the game default (off, as the GUI's preference is only applied by HostedMatch). */
+    private static Boolean flatMonteCarlo = null;
+    private static Boolean flatMonteCarloMax = null;
+
     public static void simulate(String[] args) {
         FModel.initialize(null, null);
 
@@ -67,6 +74,11 @@ public class SimulateMatch {
             }
         }
 
+        String deckDir = null;
+        if (params.containsKey("D")) {
+            deckDir = params.get("D").get(0);
+        }
+
         int nGames = 1;
         if (params.containsKey("n")) {
             // Number of games should only be a single string
@@ -80,6 +92,33 @@ public class SimulateMatch {
         }
 
         boolean outputGamelog = !params.containsKey("q");
+
+        // Flat Monte Carlo is a match preference that only the GUI applies (HostedMatch); without this switch a
+        // simulation always runs the plain heuristic AI, whatever the preference says.
+        flatMonteCarlo = null;
+        flatMonteCarloMax = null;
+        if (params.containsKey("mc")) {
+            final List<String> mcValues = params.get("mc");
+            final String mcValue = mcValues.isEmpty() ? "on" : mcValues.get(0);
+            if ("on".equalsIgnoreCase(mcValue) || "true".equalsIgnoreCase(mcValue)) {
+                flatMonteCarlo = Boolean.TRUE;
+            } else if ("max".equalsIgnoreCase(mcValue)) {
+                flatMonteCarlo = Boolean.TRUE;
+                flatMonteCarloMax = Boolean.TRUE; // the strength a desktop match gets automatically
+            } else if ("off".equalsIgnoreCase(mcValue) || "false".equalsIgnoreCase(mcValue)) {
+                flatMonteCarlo = Boolean.FALSE;
+            } else {
+                System.out.println("Unknown value for -mc (use on, max or off): " + mcValue);
+                return;
+            }
+        }
+        FlatMonteCarloStats.reset();
+
+        Long seed = null;
+        if (params.containsKey("s")) {
+            seed = Long.parseLong(params.get("s").get(0));
+            MyRandom.setRandom(new Random(seed));
+        }
 
         GameType type = GameType.Constructed;
         if (params.containsKey("f")) {
@@ -104,9 +143,23 @@ public class SimulateMatch {
 
         int i = 1;
 
+        // Optional AI profile per player, in the same order as the decks. Lets a run pit one set of
+        // AI settings against another, which is the only way to tell from the results whether an AI
+        // change actually helped.
+        List<String> aiProfiles = params.get("a");
+        if (aiProfiles != null) {
+            for (String profile : aiProfiles) {
+                if (!AiProfileUtil.getProfilesDisplayList().contains(profile)) {
+                    System.out.println(TextUtil.concatNoSpace("Unknown AI profile - ", profile,
+                            ". Available profiles: ", String.join(", ", AiProfileUtil.getProfilesDisplayList())));
+                    return;
+                }
+            }
+        }
+
         if (params.containsKey("d")) {
             for (String deck : params.get("d")) {
-                Deck d = deckFromCommandLineParameter(deck, type);
+                Deck d = deckFromCommandLineParameter(deck, type, deckDir);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
@@ -114,8 +167,12 @@ public class SimulateMatch {
                 if (i > 1) {
                     sb.append(" vs ");
                 }
+                String profile = aiProfiles != null && aiProfiles.size() >= i ? aiProfiles.get(i - 1) : "";
                 String name = TextUtil.concatNoSpace("Ai(", String.valueOf(i), ")-", d.getName());
                 sb.append(name);
+                if (!profile.isEmpty()) {
+                    sb.append(" [").append(profile).append("]");
+                }
 
                 RegisteredPlayer rp;
 
@@ -124,7 +181,7 @@ public class SimulateMatch {
                 } else {
                     rp = new RegisteredPlayer(d);
                 }
-                rp.setPlayer(GamePlayerUtil.createAiPlayer(name, i - 1));
+                rp.setPlayer(GamePlayerUtil.createAiPlayer(name, i - 1, profile));
                 pp.add(rp);
                 i++;
             }
@@ -135,8 +192,11 @@ public class SimulateMatch {
         }
 
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
+        if (seed != null) {
+            sb.append(" seed ").append(seed);
+        }
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
 
         Match mc = new Match(rules, pp, "Test");
 
@@ -153,11 +213,14 @@ public class SimulateMatch {
             }
         }
 
+        if (Boolean.TRUE.equals(flatMonteCarlo)) {
+            System.out.println(FlatMonteCarloStats.summary());
+        }
         System.out.flush();
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -s [S] -a [A] -mc [on|off] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
@@ -167,7 +230,10 @@ public class SimulateMatch {
         System.out.println("\tT - Type of tournament to run with all provided decks (Bracket, RoundRobin, Swiss)");
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
+        System.out.println("\tS - RNG seed for simulation");
+        System.out.println("\tA - AI profile per player, in the same order as the decks (e.g. -a Default Experimental)");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
+        System.out.println("\tmc - Flat Monte Carlo AI refinement for this run, on, max or off (default off in simulations; max = desktop strength). Prints timing statistics at the end when on.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
@@ -176,6 +242,11 @@ public class SimulateMatch {
         sw.start();
 
         final Game g1 = mc.createGame();
+        g1.setNoGUIUser();
+        if (flatMonteCarlo != null) {
+            g1.AI_FLAT_MONTE_CARLO = flatMonteCarlo;
+            g1.AI_FLAT_MONTE_CARLO_MAX = Boolean.TRUE.equals(flatMonteCarloMax);
+        }
         // will run match in the same thread
         try {
             TimeLimitedCodeBlock.runWithTimeout(() -> {
@@ -222,7 +293,7 @@ public class SimulateMatch {
         int numPlayers = 0;
         if (params.containsKey("d")) {
             for (String deck : params.get("d")) {
-                Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
+                Deck d = deckFromCommandLineParameter(deck, rules.getGameType(), null);
                 if (d == null) {
                     System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
@@ -235,7 +306,7 @@ public class SimulateMatch {
         }
 
         if (params.containsKey("D")) {
-            // Direc
+            // Load decks from the specified directory
             String foldName = params.get("D").get(0);
             File folder = new File(foldName);
             if (!folder.isDirectory()) {
@@ -343,11 +414,15 @@ public class SimulateMatch {
         return null;
     }
 
-    private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
+    private static Deck deckFromCommandLineParameter(String deckname, GameType type, String deckDir) {
         int dotpos = deckname.lastIndexOf('.');
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
-            String baseDir = type.equals(GameType.Commander) ?
-                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
+            String baseDir = deckDir != null ? deckDir : (type.equals(GameType.Commander) ?
+                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR);
+
+            if (!baseDir.endsWith(File.separator)) {
+                baseDir += File.separator;
+            }
 
             File f = new File(baseDir + deckname);
             if (!f.exists()) {

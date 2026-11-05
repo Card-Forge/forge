@@ -93,7 +93,7 @@ public class CostTapType extends CostPartWithList {
         if (type.contains("+withTotalPowerGE")) {
             String num = type.split("\\+withTotalPowerGE")[1];
             sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power ");
-            sb.append(num).append("or greater");
+            sb.append(num).append(" or greater");
             return sb.toString();
         }
 
@@ -193,7 +193,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.tap(true, ability, payer);
+        targetCard.tap(ability, payer);
         return targetCard;
     }
 
@@ -206,7 +206,7 @@ public class CostTapType extends CostPartWithList {
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
         CardCollection tapped = new CardCollection();
         for (Card c : targetCards) {
-            if (c.tap(true, ability, payer)) tapped.add(c);
+            if (c.tap(ability, payer)) tapped.add(c);
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

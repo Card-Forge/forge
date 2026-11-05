@@ -1,0 +1,8 @@
+Name:White Widow, Yelena Belova
+ManaCost:1 B
+Types:Legendary Creature Human Assassin Villain
+PT:1/2
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+withDeathtouch | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control with deathtouch deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Deathtouch\nWhenever a creature you control with deathtouch deals combat damage to a player, put a +1/+1 counter on it.

@@ -83,6 +83,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             topCopy.clearManaPaid();
             topCopy.resetTargets();
 
+            // TODO: the AI has been seen copying an opponent's targeted removal when the copy has no other legal target,
+            //       so the copy keeps the original target, which is the AI's own permanent
             if (top.canBeTargetedBy(sa)) {
                 AiPlayDecision decision = AiPlayDecision.CantPlaySa;
                 if (top instanceof Spell) {

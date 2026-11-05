@@ -1,0 +1,8 @@
+Name:W'Kabi, Shield of the Nation
+ManaCost:1 G
+Types:Legendary Creature Human Warrior Hero
+PT:2/3
+K:Vigilance
+T:Mode$ AttackersDeclared | Execute$ TrigToken | ValidAttackers$ Card.IsCommander+YouOwn | IsPresent$ Artifact.YouCtrl+cmcGE4 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with your commander, if you control an artifact with mana value 4 or greater, create a 4/4 green Rhino creature token with trample.
+SVar:TrigToken:DB$ Token | TokenScript$ g_4_4_rhino_trample
+Oracle:Vigilance\nWhenever you attack with your commander, if you control an artifact with mana value 4 or greater, create a 4/4 green Rhino creature token with trample.

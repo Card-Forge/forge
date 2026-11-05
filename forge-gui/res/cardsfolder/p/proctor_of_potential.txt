@@ -1,0 +1,10 @@
+Name:Proctor of Potential
+ManaCost:W U
+Types:Creature Human Cleric
+PT:3/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature or another creature you control enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ ChangeZone | Cost$ W U | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ActivationZone$ Graveyard | CheckSVar$ X | SpellDescription$ Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if you've scried or surveilled this turn. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:X:Count$YouScryThisTurn/Plus.Y
+SVar:Y:Count$YouSurveilThisTurn
+Oracle:Whenever this creature or another creature you control enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{W}{U}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if you've scried or surveilled this turn. (If a creature with a finality counter on it would die, exile it instead.)
