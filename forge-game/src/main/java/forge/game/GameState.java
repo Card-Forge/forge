@@ -1317,7 +1317,7 @@ public class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap(false, null, null);
+                    c.tap(null, null);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
                 } else if (info.startsWith("Solved")) {

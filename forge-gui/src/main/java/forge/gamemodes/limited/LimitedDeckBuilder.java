@@ -44,8 +44,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         return 0.23f;
     }
 
-    private final int numSpellsNeeded = 22;
-    private int landsNeeded = 18;
+    protected int numSpellsNeeded = 22;
+    protected int landsNeeded = 18;
 
     protected final DeckColors deckColors;
     protected Predicate<CardRules> hasColor;
@@ -57,7 +57,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     protected final List<PaperCard> draftedConspiracies;
 
     // Views for aiPlayable
-    private Iterable<PaperCard> onColorCreatures;
+    protected Iterable<PaperCard> onColorCreatures;
     protected Iterable<PaperCard> onColorNonCreatures;
 
     protected Map<Integer,Integer> targetCMCs;
@@ -230,11 +230,19 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     }
 
     /**
+     * Returns the total target deck size (main deck including lands).
+     * Override in subclasses to change the target (e.g. 58–59 for Commander Draft).
+     */
+    protected int getDeckSizeTarget() {
+        return 40;
+    }
+
+    /**
      * Generate a descriptive name.
      *
      * @return name
      */
-    private String generateName() {
+    protected String generateName() {
         return deckColors.toString();
     }
 
@@ -345,7 +353,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * @param landSetCode
      *             the set to take basic lands from (pass 'null' for random).
      */
-    private void addLands(final int[] clrCnts, final String landSetCode) {
+    protected void addLands(final int[] clrCnts, final String landSetCode) {
         // basic lands that are available in the deck
         final Iterable<PaperCard> basicLands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_BASIC_LAND);
         final Set<PaperCard> snowLands = new HashSet<>();
@@ -373,7 +381,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         }
         
         for (int i = 0; i < 5; i++) {
-        	int slotsRemaining = 40-deckList.size(); // How many to still distribute
+        	int slotsRemaining = getDeckSizeTarget()-deckList.size(); // How many to still distribute
             if (clrCnts[i] > 0) {
                 // calculate proportion of mana symbols for each remaining color
                 float p = (float) clrCnts[i] / (float) totalColor;
@@ -413,7 +421,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *             the set to take basic lands from (pass 'null' for random).
      * @return card
      */
-    private PaperCard getBasicLand(final int basicLand, final String landSetCode) {
+    protected PaperCard getBasicLand(final int basicLand, final String landSetCode) {
         String set;
         if (landSetCode == null) {
             if (setsWithBasicLands.size() > 1) {
@@ -435,7 +443,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *
      * @return CCnt
      */
-    private int[] calculateLandNeeds() {
+    protected int[] calculateLandNeeds() {
         final int[] clrCnts = { 0,0,0,0,0 };
 
         // count each card color using mana costs
@@ -458,7 +466,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     /**
      * Add non-basic lands to the deck.
      */
-    private void addNonBasicLands() {
+    protected void addNonBasicLands() {
         final Iterable<PaperCard> lands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NONBASIC_LAND);
         List<PaperCard> landsToAdd = new ArrayList<>();
         for (final PaperCard card : lands) {
@@ -484,7 +492,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * @param num
      *           number to add
      */
-    private void addThirdColorCards(int num) {
+    protected void addThirdColorCards(int num) {
         if (num > 0) {
             final Iterable<PaperCard> others = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
             // We haven't yet ranked the off-color cards.
@@ -555,7 +563,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * @param num
      *            number to add
      */
-    private void addNonCreatures(final Iterable<PaperCard> nonCreatures, int num) {
+    protected void addNonCreatures(final Iterable<PaperCard> nonCreatures, int num) {
         List<PaperCard> toAdd = new ArrayList<>();
         for (final PaperCard card : nonCreatures) {
             if (num > 0) {
@@ -582,7 +590,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * DeckNeeds or DeckHints are not met. Replace the removed cards with new
      * cards.
      */
-    private void checkRemRandomDeckCards() {
+    protected void checkRemRandomDeckCards() {
         int numCreatures = 0;
         int numOthers = 0;
         for (final ListIterator<PaperCard> it = deckList.listIterator(); it.hasNext();) {
@@ -638,7 +646,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * @param num
      *            number to add
      */
-    private void addCreatures(final Iterable<PaperCard> creatures, int num) {
+    protected void addCreatures(final Iterable<PaperCard> creatures, int num) {
         List<PaperCard> creaturesToAdd = new ArrayList<>();
         for (final PaperCard card : creatures) {
             if (num > 0) {
@@ -666,7 +674,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * @param num
      *            number to add
      */
-    private void addManaCurveCreatures(final Iterable<PaperCard> creatures, int num) {
+    protected void addManaCurveCreatures(final Iterable<PaperCard> creatures, int num) {
 
         final Map<Integer, Long> creatureCosts = deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
             .collect(Collectors.groupingBy(c -> Ints.constrainToRange(c.getRules().getManaCost().getCMC(), 1, 6), Collectors.counting()));
@@ -703,7 +711,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *            cards to choose from
      * @return the average
      */
-    private static double getAverageCMC(final List<PaperCard> cards) {
+    protected static double getAverageCMC(final List<PaperCard> cards) {
         double sum = 0.0;
         for (final IPaperCard cardPrinted : cards) {
             sum += cardPrinted.getRules().getManaCost().getCMC();

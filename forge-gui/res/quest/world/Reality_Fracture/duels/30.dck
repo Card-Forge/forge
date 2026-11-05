@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Boromir
+Title=Boromir
+Icon=Boromir.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/Adres_Anthony_-_Abzan_Aggro_(Standard,_#898293).dck
+Deck Type=constructed
+
+[Main]
+1 Ajani, Caller of the Pride
+2 Erode
+2 Lunar Convocation
+2 Professor Dellian Fel
+2 Ajani Resolute
+3 Case of the Uneaten Feast
+3 Way of the Mentor
+3 Ajani, Outland Chaperone
+3 Ral Zarek, Guest Lecturer
+2 Amalia Benavides Aguirre
+2 Leonardo, Cutting Edge
+3 Virulent Emissary
+3 Haliya, Guided by Light
+3 Essence Channeler
+4 Liliana the Faultless
+1 Concealed Courtyard
+1 Underground Mortuary
+1 Fountainport
+1 Dalkovan Encampment
+2 Plains
+2 Temple Garden
+2 Overgrown Tomb
+4 Starting Town
+4 Godless Shrine
+4 Bleachbone Verge
+[Sideboard]
+2 Dawn's Truce
+3 Duress
+2 Authority of the Consuls
+2 Day of Judgment
+2 Rest in Peace
+2 Requisition Raid
+1 Pest Control
+1 Erode

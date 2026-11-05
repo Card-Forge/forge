@@ -765,10 +765,6 @@ public class ComputerUtilCard {
         Map<Card, Integer> cache = new IdentityHashMap<>();
         return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
     }
-    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
-        // TODO ideally we could reuse the value from the previous pass with false
-        return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();

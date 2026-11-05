@@ -13,6 +13,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
+import forge.game.GameType;
 import forge.game.GameView;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IWinLoseView;
@@ -21,6 +22,7 @@ import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMagnifyView;
+import forge.screens.match.MatchController;
 import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -80,11 +82,18 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable()
                 .command(e -> hide()).build()
         );
-        lblTitle.setText(composeTitle(game0));
+        lblTitle.setText((MatchController.instance.isReplay() ? "Replay: " : "") + composeTitle(game0));
+        if (MatchController.instance.isReplay()) {
+            btnQuit.setText("Close replay");
+            btnContinue.setEnabled(false); // disabled buttons are left out of the layout
+            btnRestart.setEnabled(false);
+        }
 
         // Control of the win/lose is handled differently for various game modes
         ControlWinLose control = null;
-        switch (game0.getGameType()) {
+        // a recording only shows what happened: no rewards, no saving results, no next game
+        final boolean replay = MatchController.instance.isReplay();
+        switch (replay ? GameType.Constructed : game0.getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
             break;

@@ -330,6 +330,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckGroup::new, DeckPreferences::setDraftDeck);
     public static DeckEditorConfig EditorConfigDraft = new GameTypeDeckEditorConfig(GameType.Draft, DECK_CONTROLLER_DRAFT);
 
+    public static DeckEditorConfig EditorConfigCommanderDraft = new GameTypeDeckEditorConfig(GameType.CommanderDraft, DECK_CONTROLLER_DRAFT);
+
     public static DeckEditorConfig EditorConfigSealed = new GameTypeDeckEditorConfig(GameType.Sealed,
             new FileDeckGroupController(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
             .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
@@ -900,12 +902,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         DeckFormat format = this.editorConfig.getDeckFormat();
         if(card == null)
             return 0;
-        else if (!shouldEnforceConformity())
+        if (!shouldEnforceConformity())
             return Integer.MAX_VALUE;
-        else if(format != null)
+        if(format != null)
             return format.getMaxCardCopies(card);
-        else
-            return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+        return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
     }
 
     protected DeckSectionPage showExtraSectionTab(DeckSection section) {
@@ -1301,7 +1302,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private final FDeckStatsView statsView = add(new FDeckStatsView());
 
         protected DeckStatsPage() {
-            super(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.MENU_STATS);
+            super(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.DECKSTATS);
         }
 
         @Override

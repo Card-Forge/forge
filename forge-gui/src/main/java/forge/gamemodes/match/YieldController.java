@@ -1,9 +1,13 @@
 package forge.gamemodes.match;
 
+import com.google.common.eventbus.Subscribe;
 import forge.game.GameView;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -20,10 +24,12 @@ import forge.player.PersistentAutoDecisionStore;
 import forge.player.PlayerControllerHuman;
 import forge.util.collect.FCollectionView;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -164,12 +170,17 @@ public class YieldController {
     }
 
     public boolean shouldAutoYield() {
+        // A client's controller has no owner, so the host reports when a yield ends
+        if (owner == null) return isYieldActive();
         if (autoPassUntilEOT) return true;
-        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+        GameView gv = owner.getGui() != null ? owner.getGui().getGameView() : null;
         if (autoPassUntilStackEmpty) {
             if (gv != null && gv.peekStack() != null) return true;
             autoPassUntilStackEmpty = false;
             stackYieldRespectsInterrupts = false;
+            PlayerView local = owner.getLocalPlayerView();
+            // Remote only. A local GUI reads this controller directly, and the update would re-enter tryAutoPassNow
+            if (owner.isRemoteClient() && local != null) owner.getGui().applyYieldUpdate(new YieldUpdate.StackYield(local, false, false));
         }
         if (autoPassUntilMarker != null && gv != null) {
             PlayerView turnPlayer = gv.getPlayerTurn();
@@ -436,6 +447,15 @@ public class YieldController {
         if (local != null && gui != null) gui.applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
     }
 
+    /** Active yields as updates, to refill a client's empty cache after reconnect. */
+    public synchronized List<YieldUpdate> activeYieldUpdates(PlayerView local) {
+        List<YieldUpdate> updates = new ArrayList<>();
+        if (autoPassUntilEOT) updates.add(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, true));
+        if (autoPassUntilStackEmpty) updates.add(new YieldUpdate.StackYield(local, true, stackYieldRespectsInterrupts));
+        if (autoPassUntilMarker != null) updates.add(new YieldUpdate.SetMarker(autoPassUntilMarker.getPhaseOwner(), autoPassUntilMarker.getPhase(), false));
+        return updates;
+    }
+
     /** Toggle APINA: flip pref, persist, push to controller. Returns new value. */
     public static boolean toggleAutoPassNoActions(IGameController ctrl) {
         if (ctrl == null) return false;
@@ -474,6 +494,23 @@ public class YieldController {
     public void maybeInterruptOnReveal() {
         if (!getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return;
         applyInterrupt();
+    }
+
+    /** Also runs with no yield active, so APINA with respects-interrupts can set autoPassInterrupted. */
+    @Subscribe
+    public void receiveGameEvent(final GameEvent ev) {
+        if (ev instanceof GameEventSpellAbilityCast cast) {
+            if (!shouldEvaluateInterrupts()) return;
+            for (SpellAbilityStackInstance si : owner.getGame().getStack()) {
+                if (si.getId() == cast.si().getId()) {
+                    onSpellAbilityCast(si);
+                    return;
+                }
+            }
+        } else if (ev instanceof GameEventAttackersDeclared) {
+            final CombatView combat = owner.getGame().getView().getCombat();
+            if (combat != null) onAttackersDeclared(combat);
+        }
     }
 
     public void onSpellAbilityCast(SpellAbilityStackInstance si) {

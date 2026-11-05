@@ -16,6 +16,7 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.text.JTextComponent;
 
 import forge.Singletons;
+import forge.gamemodes.replay.ReplayLauncher;
 import forge.gui.GuiUtils;
 import forge.screens.home.online.OnlineMenu;
 import forge.screens.match.menus.DisplayMenu;
@@ -79,6 +80,7 @@ public final class ForgeMenu {
         add(HelpMenu.getMenu());
         addSeparator();
         add(OnlineMenu.getMenu());
+        add(getMenuItem_Replays());
         addSeparator();
         add(getMenuItem_Restart());
         add(getMenuItem_Exit());
@@ -129,6 +131,12 @@ public final class ForgeMenu {
     private static boolean isTypingText(KeyEvent e) {
         return (e.getModifiersEx() & ~InputEvent.SHIFT_DOWN_MASK) == 0 && !e.isActionKey()
                 && KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() instanceof JTextComponent;
+    }
+
+    private static JMenuItem getMenuItem_Replays() {
+        final JMenuItem menuItem = new JMenuItem("Replays...");
+        menuItem.addActionListener(e -> ReplayLauncher.chooseAndPlay());
+        return menuItem;
     }
 
     private static JMenuItem getMenuItem_Restart() {

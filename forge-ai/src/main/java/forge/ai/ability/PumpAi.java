@@ -72,7 +72,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
 
-            return isSorcerySpeed(sa, ai) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
+            return isSorcerySpeed(sa, ai) || (ph.isPlayerNextTurn(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {

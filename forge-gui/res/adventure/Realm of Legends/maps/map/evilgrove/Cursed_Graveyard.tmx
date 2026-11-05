@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="104">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="34" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlEsOgjAQhrsQiix9XcBo4tYDeBnvYHTjDbyADwyXcc3O6GFERpkAYzt94JI/+UOE4v8xM20mhMhqnsRC7PruPvSEUvh8KZqmGsZNjmfkxwHmOExr4R6y6BjgWzd9s23yOQ7O+9K67PVIz0HXzqSeYx7YsdT/LyHWvYfZeOU4boEdiyuHqhYcR1o8O0k7FheresjNB3BcZFWXe4v9omKo3+M4IP9YcqRlLweeZwjNp9kmDjRwjFsy6H6bOLAnYJiTheec0ExXDlgLLK+w4nGdWVWmqke6Mw858oLhTOqCM/uwmFubs5ZyUeVhc0bqLKCtYz84Pq4vV6nmAKNsatKWA/oxLTJX0deJ/F0D+sc+Nu3bRPIz9JH0r4vNfunUqVMnX70BbH/7jQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="34" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlj0OwjAMhVNaRMsBGPgTEhsLMCFGBAsXYmTiHByBQ7ADJ0DQGXEANmoFC8ekSRNg65OelKRq/MlxnQqhqlMXXrrE+vVdIMQ5lgbRcZ5MDKvEbpf3XNXL2LqMb5tIHyIhji/zvX2YQa0s1rzyng8DuUaVxmoMiN9f2DnWzC75GETSlGWdqPlA8zhFbBLkYxrI8awmjblCDtzDJ7ZPPpADDSzfxHbJRx4H6p8cm6g42z85bqE6H2nqw5djHLmfC/TDlPS5X5zLyYEDY0Md0n76a45hNh4Rc/FeSQUMXdY/vvGR9F+d9lX9eliT72POdHtjXy1SHzaOZajWRl7OXDl4fdg47qH5fFCmnKeNzzlw0LvQxoHiOYFv6Jr5MXnfgfxbRkGd478FGObtuvq86flvU6pUqVImPQHkDrNW
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="34" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj6YL4oA8NRYQheKIpdzTkWBC7jRLCp7Y5jONyBbD+t3AEyD4RtxSD8s0Bz7cWwu6OOE+EGGKZ2eMDAWTzm1iHZj+w+egOYO+oGiTuQ0wal7uhjI98dIACyfwXbwIUHDIDsPzuA8TIY3IEM2IBxwjVA8YIMqJVORzo4xjrw9iNjfOAkO4R+iFa/oPPJBbu4qGMOLQCoXPzGjYrL0OoxatpFCGPTQymo5ERgapk5lEEdJ3mYnu6ixO30AgNhJz0AACOIVPw=
+  </data>
+ </layer>
+ <layer id="8" name="AboveSprites" width="34" height="25">
+  <data encoding="base64" compression="zlib">
+   eJytlkFOhEAQRctJgwILTYxL40bXOp7JnXsSN3gCPcccQleKO0evoJeYuJMK/FDUVNMN4SeVGeju+Y+q6maIltO3EQ9ZXMSK5yaHw2D9HhDVp+13PY450NoRXeREP0fLcpRZyxDLwaqaNY8L56Ps1q/O/Bzsu3XtXP6epkTn+TwOycC/Z4XmwHXVjZUdg/zNqRyWD7wkh5bk4E/OQ5a2+dEcH0kcR5kN6y1zY+nL9RzWHIsjxCI5wLJJ+zFLWzfMB9j5PjieXBuoyxQO6D6wRnPIvrU46pl1wX14jnHo/VNl+xxvDcdlMl4fcDyn4X1i7VuIrz89dQFLDIeUdZbokM+vZXFcRfYH/C0eH4dPmiPEYHGsRT9cu+Ec2TNjHJq5DtTEWqP9cG5PyYfsVblvOe6aPjxZER2v9jl8fQiFxi0OGeB4T/p6cTDLX9HH2Nkt33mxKlU+OAfMcEvDkEzI80tuv8ssDut59T0Er4Uv9g57vXah670rxs8Kyefz1O8VuW/RJ+y9K4b9MNYbobA4IPiG6hnrxXvlxtljyKMvN6jJ1N6Kke+/oM+/VHmakhPtMVdWvUKKORPm+E/lWEq+PvkH6cq2pw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="34" height="25">
+  <data encoding="base64" compression="zlib">
+   eJytlr9KA0EQxieSf5czgoWChS9gJSSFtdroGwg+QbQOWBgba8F3UNHSXn0DhSiWEX2KtO6wDjuZzOztXfzgI8ve3O7vZmc3O2kDTJyldlj7vOt/P0XM9V8c9g/mh4DjHOC+5v1QC2306yrAm/NZBjDMPIPGIXWzBnArfJEHHmzL53es3XMxfQj9nAOdqt31+b7NZTdWPbQPtgAOmffZO2Pnd/Dx2E8cxMK1t5TG0WiFuVHDbNbEg3rp+Lm5JQeaJNeeC3mRQ85XZGKWLBZHvyAfGgfPw+NKiB2KHI8yb6zZlHyQNupxDi7JJZ9V5RgruaB5qq4LcaBpfVLyYX2r3C9VOKhWLI6PChwpLBoHsRTlo2/MgxxXzcXWhTjQGkdPycdXe5ZFywfukzIcnIWfp7H6QA4yrcuidapxWOvCawXP4UkCB45blkOLjQnzcdn933xYsSjt7OD6dhw/wly8BskYIzlGEeaYaP8c5fH3tXOf8kF3kxOI565IT26/T/MQL2tD9qWOi+rUvOkeot1Fnjve00guiINUloO0XdfdaqaNLTl4fFUmrrxpM3JTTcaeV5VW4yPxXfKOZdnikDmz5kSfNnRbzLyviI3Mv2vRPGnGOaz/OM1lRd8dWzNN1tzU/gXBvRJM
+  </data>
+ </layer>
+ <layer id="9" name="Clutter Above" width="34" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFlr9Lw0AUx5+1TU0CLqVdnHUoCNLFSVy6JIN/gaPtpGshi0N3f/wHLiI6OmsFqVZEcPIfEP8G0W7ecXnk5Xl3uWDAL3xJml7effLe3UsA9HpsAMyEn4SP6spjH+CQeKENUEu92NbHSfws1swQc+QbIBjHX9QTnlo4VgKAjyU3DjleatAFiIjPRA5mrfx9cTc773dUPnQsa4QF43OtkvEPhCNiHFsddV3WZVucD7vKyNNP/5csMgZluWcsLrlI0vodewAnzOvN39ekTz3F8Rmqe3E+HUvPMRdjP58PrM/1MsBzUx2jNBfyGKdHzIfUXWDPSxED5YhJTYYajsjCgfUxsUi9QX4NUYZb8RxfobkuLwV14aIsdD9TUQY5/yRlwP09YM9bpi6cxcZB9/W3mP8mUAwjtj5sdaG1M3HshIplauDgzJSlqrpI7YZZfaYOHMgyD7N80F5my8fAkg/KgSw28X7H+5hpv5TlSCzvFyne76qqi+xtkyDvIiGLaz5ih/1C39noIrVqGcc7iYvnkgN/c+s4dAw2Drl29rysn8w39eOQg39DmOYry2ES9hP0f3JQIYerquLgsnGUydFrXW9XXYg1tGEZ3/Tc4uw39L70zIxlWMOUs8gmnXtmRhfbdKWJXXZNu65523McaDjL7q+qzPUD8iUuaQ==
+  </data>
+ </layer>
+ <layer id="10" name="House" width="34" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VktOxDAM9QVYtJWGE4AEmw5iYAPSnICDQIcrADtG4nMxWhCoK67AAo6AI2r1yYozSTo8yVI/dvziX9IWRJcl0bz4kyMWxDHLguKwjNQTdOzrdfDfsKxY2uHbG/DoE9cNQfaDa4pvJ/rbdZkWg1i8s3woTg5nLOdb9mUBffWKU0j3v3HCcppoczHRJ9Yu7jUm96jzNZFH7elBh1BusJaR++1OPo9mqH3BPT+vS1vfhwfWf0y08QFzs1cR7VfjuzUbMGcHrH9YGYoJcPH8nhH9zOJtfDm7m5AXwdMu0TPLDayFPZA6i6fAcUAe2AObZoZV7ymw1vDNLGu26HrPgV4jJwdWj+dA4lIX9vkuWNDYMz1NP+9q8NcNZ/wVy0sxnqsx0PH4NPR8dea+dXCfkGd9vxCEzmCM4XxDPOtiFPmP9wkXB+SxaU4jlwbuSE6seLoZIz6FC/LGXLRDfhxXK74I0cF7k/gP9Tvqrzy2TZlWG4g6kI8cvVxgvW1Dz4LOp94PxjI0Y6fEHO1993bN09Wc9T8lH9oGz1O9H1+t+vabGoelsvkFjZt11Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="243.021" y="396.963" width="43" height="16"/>
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="256.5" y="123.5" visible="1">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;, &quot;Butcher Ghoul&quot;, &quot;Sightless Ghoul&quot;, &quot;Maalfeld Twins&quot;], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Wall of Tombstones&quot;, &quot;Wall of Tombstones&quot;, &quot;Wall of Tombstones&quot;, &quot;Wall of Tombstones&quot; ]}
+}</property>
+    <property name="enemy" value="Vogar"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="90"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="float" value="100"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/collision.tx" x="-1.73" y="-17.5" width="544.96" height="16"/>
+  <object id="64" template="../../../../common/maps/obj/collision.tx" x="0.02" y="400.5" width="544.96" height="16"/>
+  <object id="65" template="../../../../common/maps/obj/collision.tx" x="545.5" y="-17.472" width="16" height="433.944"/>
+  <object id="66" template="../../../../common/maps/obj/collision.tx" x="-16" y="-21.972" width="16" height="433.944"/>
+  <object id="93" template="../../../../common/maps/obj/dialog.tx" x="220.75" y="367.25" width="87.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Towering above the graveyard ahead is a giant zombie, seemingly formed from corpses and pieces of the graveyard itself. It commands an army of its fellow undead, all in guardianship of some mausoleum in the back of the graveyard.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="221.75" y="260.25" width="87.5" height="11" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The horrific giant has spotted you. You think you can use the tombstones as cover during your battle. Hopefully it'll be enough help to hold it and its seemingly endless allies off.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../obj/treasure.tx" x="264" y="41">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/scroll.tx" x="352.5" y="224">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/scroll.tx" x="351" y="178">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/scroll.tx" x="352.5" y="126">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/scroll.tx" x="353" y="79.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/scroll.tx" x="175.5" y="80">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/scroll.tx" x="175.5" y="127">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/scroll.tx" x="176" y="175.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/scroll.tx" x="175.5" y="224">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Zombie&quot; ],
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

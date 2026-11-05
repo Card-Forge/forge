@@ -22,6 +22,7 @@ public class FPrefsBinder<C, V> implements ModelBinder<ForgePreferences.FPref, C
   /** conversions between pref store value and component value */
   private final Function<V, String> toString;
   private final Function<String, V> fromString;
+  private boolean loading;
 
   public FPrefsBinder(ForgePreferences.FPref prefKey,
                     C component,
@@ -42,19 +43,24 @@ public class FPrefsBinder<C, V> implements ModelBinder<ForgePreferences.FPref, C
   }
 
   public void load() {
-    ForgePreferences prefs = FModel.getPreferences();
-    String prefValue = prefs.getPref(prefKey);
+    String prefValue = FModel.getPreferences().getPref(prefKey);
     if (prefValue != null) {
-      V value = fromString.apply(prefValue);
-      applier.accept(component, value);
+      loading = true;
+      try {
+        applier.accept(component, fromString.apply(prefValue));
+      } finally {
+        loading = false;
+      }
     }
   }
 
   public void save() {
+    if (loading) return;   // ignore events caused by load()
     ForgePreferences prefs = FModel.getPreferences();
-    V value = extractor.apply(component);
-    String prefValue = toString.apply(value);
-    prefs.setPref(prefKey, prefValue);
+    prefs.setPref(prefKey, toString.apply(extractor.apply(component)));
     prefs.save();
   }
+
+  /** Subclasses attach their component listener here. */
+  public void bind() { }
 }

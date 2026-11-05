@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="110">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8QJaHgUGaB8KWRmLTCpjwQTA2e2FytARRvAwM0bwIe2FsWoOdQLt282CyhxNAjz8Yn5Zxis2OUXtH7R0IsGMY5unhDnbxIDAx4sQAAKmkFSk=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8YDInYTwQdlLbblLspJbd5NhJqd2U2EmJ3aP2jto7nOyl1G5KwUDYSY7d1AYDYSc+N1ACALeAhNk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzF000KgCAQBWD3VtuC8mJ1Futa9rfpZAkyJFHGvCYaeAhC8zmSLlPKJdIwkurDCfXrcqWm7D5tLmfH5uzXVI1CNseUshFTwkbNK5vrmsjcqhBO1eC8BpyVqiz+cb+a9+nu/7pn1F19Bo2Z1n+3vHjDiP3GRG0Jk2tLmme71yF0BquPPWkztin0r9enfW7PHXDw4ks=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8IEWSMKYFYJIijKkN5jEzMHxgR+AsqN9A9Dt2BAapoyawYaGuusEMDkkwMOQBwzNfElUMhtFBuBYDQ4QW5fb+A9rHA0wzvFKoYjCMDMT5GBiKgXaWALE0D2X2KksgMD4xmL2m2hBMKcAWpiB2AdCvhVj8Sy17sYUpiM0HDHd+tDwLspdagNRwBgEjJurZTwygpn+Hgr2jAD8AAEznKBY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="280.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/booster.tx" x="229.466" y="125.184">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DTK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DTK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DTK&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="207.503" y="67.3349">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Say, you look like a capable mage. I can sense a great ability for violence within you. Perhaps I can interest you in a job...?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The five families have fallen.&quot;,
+                    &quot;text&quot;: &quot;'Your actions will bring a new dawn of justice to my people. I thank you.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Scroll of the Masters&quot;},
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 500},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Taigam, Master Opportunist&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Taigam, Ojutai Master&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Taigam, Sidisi's Hand&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Taigam's Scheming&quot;}              
+                      ] } ]
+                    ,
+					&quot;condition&quot;: [{&quot;item&quot;: &quot;Abzan Gauntlet&quot;}, {&quot;item&quot;: &quot;Jeskai Gauntlet&quot;}, {&quot;item&quot;: &quot;Mardu Gauntlet&quot;}, {&quot;item&quot;: &quot;Sultai Gauntlet&quot;}, {&quot;item&quot;: &quot;Temur Gauntlet&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What kind of job?&quot;,
+					&quot;text&quot;: &quot;'Quite simply, the khans of Tarkir's five clans have arrived on this blasted world, bereft of most of their defenses. I would like them all dead.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;What's in it for me?&quot;,
+					&quot;text&quot;: &quot;'A chunk of gold and a powerful ancient scroll with the magical might of the ancient masters. Take the gauntlet from each khan's corpse and show me them for your reward.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I don't work for the world's sketchiest people.&quot;,
+					&quot;text&quot;: &quot;'Begone, then. I have no use for those with an overdeveloped sense of morals.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Taigam"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/booster.tx" x="107.273" y="172.99">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/dialog.tx" x="177.169" y="250.807" width="77.6667" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You enter a spacious private study. Books and alchemical devices are scattered about. Off to one side, there's a suspiciously snakelike shrine. The study's presumed owner stands in the back, waving you over.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/scroll.tx" x="311" y="150">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Altar of the Brood&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

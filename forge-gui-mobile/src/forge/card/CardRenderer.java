@@ -51,6 +51,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
+import forge.toolbox.FSelectionBox;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
 
@@ -818,16 +819,19 @@ public class CardRenderer {
         if (unselectable) {
             g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.6f), cx, cy, cw, ch);
         }
-        //Magenta outline when card is chosen
+        //Solid outline when card is chosen, moving dashes when it can be chosen
         if (MatchController.instance.isHighlighted(card)) {
-            g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+            FSelectionBox.drawChosen(g, BORDER_THICKNESS, cx, cy, cw, ch);
         } else {
+            if (MatchController.instance.isSelectable(card)) {
+                FSelectionBox.draw(g, cx, cy, cw, ch);
+            }
             if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
-                    && MatchController.instance.isWeaklySelectable(card)) {
+                    && MatchController.instance.isActionable(card)) {
                 g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
             }
             if (FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_AUTOTAP_PREVIEW)
-                    && MatchController.instance.getWeakSelectableStrength(card) >= 2) {
+                    && MatchController.instance.getActionableStrength(card) >= 2) {
                 drawAutoTapGlow(g, cx, cy, cw, ch);
             }
         }
@@ -1023,7 +1027,32 @@ public class CardRenderer {
 
     private static final int GL_BLEND = GL20.GL_BLEND;
 
+    // libGDX crashes with index -1 when the string is non-empty but none of its characters exist in the font
+    // and the font has no missing-glyph fallback. Likely source is the counter name from getCounterOnCardDisplayName(),
+    // for example a translated name or odd characters in a font that can’t draw them
+    private static String drawable(BitmapFont font, String text) {
+        final BitmapFont.BitmapFontData data = font.getData();
+        StringBuilder sb = null;
+        for (int i = 0; i < text.length(); i++) {
+            final char c = text.charAt(i);
+            if (data.hasGlyph(c)) {
+                if (sb != null)
+                    sb.append(c);
+            }
+            else if (sb == null) {
+                sb = new StringBuilder(text.length());
+                sb.append(text, 0, i);
+            }
+        }
+        return sb == null ? text : sb.toString();
+    }
+
     private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, int horizontalAlignment) {
+        if (font == null || text == null)
+            return;
+        text = drawable(font, text);
+        if (text.isEmpty())
+            return;
         if (color.a < 1) { // enable blending so alpha colored shapes work properly
             Gdx.gl.glEnable(GL_BLEND);
         }
@@ -1037,7 +1066,9 @@ public class CardRenderer {
             }
 
             font.setColor(color);
-            font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, true);
+            // no wrapping: counter names and values are short and already sized to their box, and
+            // GlyphLayout.wrap throws IndexOutOfBoundsException on runs it cannot break
+            font.draw(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment, false);
 
             if (color.a < 1) {
                 Gdx.gl.glDisable(GL_BLEND);

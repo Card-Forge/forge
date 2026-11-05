@@ -1,5 +1,6 @@
 sprite_transform.png
 size:1024,512
+filter: MipMapLinearLinear,Linear
 repeat:none
 flip
 bounds:2,2,256,256

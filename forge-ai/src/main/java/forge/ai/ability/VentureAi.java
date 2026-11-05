@@ -29,7 +29,7 @@ public class VentureAi extends SpellAbilityAi {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer) {
+            } else if (ph.is(PhaseType.END_OF_TURN) && ph.isPlayerNextTurn(aiPlayer)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -59,8 +59,7 @@ public class VentureAi extends SpellAbilityAi {
         for (SpellAbility room : spells) {
             if (player.getController().isAI()) {
                 room.setActivatingPlayer(player);
-                AiPlayDecision playDecision = ((PlayerControllerAi)player.getController()).getAi().canPlaySa(room);
-                if (playDecision == AiPlayDecision.WillPlay) {
+                if (((PlayerControllerAi)player.getController()).getAi().doTrigger(room, false)) {
                     viableRooms.add(room);
                 }
             }

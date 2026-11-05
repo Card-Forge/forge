@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -94,7 +95,10 @@ public class CloneAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
             }
             if (sa.hasParam("Choices")) {
-                CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
+                // the cards to copy may be somewhere else than the battlefield (Superior Spider-Man: a graveyard)
+                final ZoneType choiceZone = sa.hasParam("ChoiceZone")
+                        ? ZoneType.smartValueOf(sa.getParam("ChoiceZone")) : ZoneType.Battlefield;
+                CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(choiceZone),
                         sa.getParam("Choices"), host.getController(), host, sa);
 
                 chance = !choices.isEmpty();
@@ -215,6 +219,15 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         Card choice = isOpp ? ComputerUtilCard.getWorstAI(options) : ComputerUtilCard.getBestAI(options);
+
+        // Superior Spider-Man: copy Doomsday Excruciator only when emptying the libraries wins (see ComboPlan.cloneChoice)
+        if (!isOpp && ai.getController() instanceof PlayerControllerAi) {
+            final Card steered = ((PlayerControllerAi) ai.getController()).getAi().deckPlan(ai).combos
+                    .cloneChoice(ai, options);
+            if (steered != null) {
+                choice = steered;
+            }
+        }
 
         return choice;
     }

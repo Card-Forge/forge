@@ -4,7 +4,7 @@
   <export format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Sliver Hive&quot;, &quot;Sliver Construct&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Sliver Hive&quot;, &quot;Prismatic Omen&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="150.89" y="176.957">
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="152.074" y="178.734">
    <properties>
     <property name="defeatDialog">[
 	{
@@ -48,7 +48,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;First Sliver's Chosen&quot;, &quot;Lavabelly Sliver&quot;, &quot;Heirloom Blade&quot;]}"/>
     <property name="enemy" value="The First Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="false"/>
@@ -58,9 +58,9 @@
     <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
-  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="244.004" y="253.825">
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="246.966" y="255.01">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Victual Sliver|STH&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Shapers' Sanctuary&quot;, &quot;Hibernation Sliver|STH&quot;, &quot;Victual Sliver|STH&quot;]}"/>
     <property name="enemy" value="Sliver Queen"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
@@ -143,9 +143,9 @@
   <object id="95" template="../../../../common/maps/obj/manashards.tx" x="83.9167" y="153.333"/>
   <object id="96" template="../../../../common/maps/obj/manashards.tx" x="82" y="130"/>
   <object id="97" template="../../../../common/maps/obj/manashards.tx" x="69.3333" y="108.917"/>
-  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="192" y="368">
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="186.669" y="380.439">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Venser's Sliver|TSP&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Shapers' Sanctuary&quot;, &quot;Venser's Sliver&quot;, &quot;Birthing Boughs&quot;]}"/>
     <property name="enemy" value="Rukarumel"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
@@ -158,7 +158,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Hivestone&quot;, &quot;editions&quot;: [ &quot;TSR&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="180.988" y="393.926" width="53.4917" height="58.2022" rotation="359.294" visible="1">
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="167.957" y="383.264" width="53.4917" height="58.2022" rotation="359.294" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -197,7 +197,7 @@
   <object id="124" template="../../../../common/maps/obj/collision.tx" x="79.2917" y="176.534" width="32.75" height="32.9323"/>
   <object id="125" template="../../../../common/maps/obj/enemy.tx" x="244.746" y="253.696">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Victual Sliver|STH&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hibernation Sliver|STH&quot;, &quot;Victual Sliver|STH&quot;]}"/>
     <property name="enemy" value="Sliver Queen"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
@@ -205,9 +205,9 @@
     <property name="threatRange" type="int" value="150"/>
    </properties>
   </object>
-  <object id="126" template="../../../../common/maps/obj/enemy.tx" x="190.727" y="368.727">
+  <object id="126" template="../../../../common/maps/obj/enemy.tx" x="188.358" y="375.835">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Venser's Sliver|TSP&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venser's Sliver&quot;, &quot;Birthing Boughs&quot;]}"/>
     <property name="enemy" value="Rukarumel"/>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Insane" type="bool" value="false"/>
@@ -224,7 +224,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Shapers' Sanctuary&quot;, &quot;First Sliver's Chosen&quot;, &quot;Lavabelly Sliver&quot;, &quot;Heirloom Blade&quot;]}"/>
     <property name="enemy" value="The First Sliver"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>

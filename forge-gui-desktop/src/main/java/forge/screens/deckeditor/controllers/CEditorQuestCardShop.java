@@ -22,6 +22,7 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import forge.deck.DeckBase;
 import forge.game.GameType;
@@ -99,7 +100,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         super(FScreen.QUEST_CARD_SHOP, cDetailPicture0, GameType.Quest);
 
         this.questData = qd;
-        this.fullCatalogCards = ItemPool.createFrom(this.questData.getAllAllowedCards().toList(), InventoryItem.class);
+        this.fullCatalogCards = ItemPool.createFrom(this.questData.getAllAllowedCards().collect(Collectors.toList()), InventoryItem.class);
 
         final SpellShopManager catalogManager = new SpellShopManager(cDetailPicture0, false);
         final SpellShopManager deckManager = new SpellShopManager(cDetailPicture0, false);
