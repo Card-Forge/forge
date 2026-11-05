@@ -488,19 +488,27 @@ public class UntapAi extends SpellAbilityAi {
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
             final Game game = host.getGame();
-            for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
-                final Card gameCard = game.getCardState(card, null);
-                if (gameCard == null
-                        || !gameCard.isInPlay() // not in play
-                        || gameCard.isUntapped() // already untapped
-                        ) {
+            if ("Enchanted".equals(sa.getParam("Defined"))) {
+                // e.g. Paralyze
+                Card paralyzed = host.getAttachedTo();
+                if (paralyzed != null && paralyzed.isUntapped()) {
                     return false;
                 }
+            } else {
+                for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
+                    final Card gameCard = game.getCardState(card, null);
+                    if (gameCard == null
+                            || !gameCard.isInPlay() // not in play
+                            || gameCard.isUntapped() // already untapped
+                    ) {
+                        return false;
+                    }
 
-                // if the ManaCost would cost more than the creatures CMC, it is not worth it
-                CostPartMana mana = cost.getCostMana();
-                if (mana != null && mana.getManaCostFor(sa).getCMC() > card.getCMC()) {
-                    return false;
+                    // if the ManaCost would cost more than the creatures CMC, it is not worth it
+                    CostPartMana mana = cost.getCostMana();
+                    if (mana != null && mana.getManaCostFor(sa).getCMC() > card.getCMC()) {
+                        return false;
+                    }
                 }
             }
         }
