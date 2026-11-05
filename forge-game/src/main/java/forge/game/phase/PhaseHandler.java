@@ -259,7 +259,7 @@ public class PhaseHandler implements IHasForgeLog {
 
             case COMBAT_BEGIN:
             case COMBAT_DECLARE_ATTACKERS:
-                return getActivePlayers().allMatch(Player::isInGame);
+                return !getActivePlayers().allMatch(Player::isInGame);
 
             case COMBAT_DECLARE_BLOCKERS:
                 skipDamageSteps = !inCombat() || combat.getAttackers().isEmpty();
