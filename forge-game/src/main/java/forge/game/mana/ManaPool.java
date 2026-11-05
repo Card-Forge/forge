@@ -159,7 +159,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         Predicate<Mana> retain = m -> safeKeys.contains(m.getColor());
 
         if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
-            retain.or(m -> {
+            retain = retain.or(m -> {
                 if (m.isPersistentMana()) {
                     return true;
                 }
@@ -171,11 +171,14 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         Multiset<Mana> convertedMana = null;
+        Multiset<Mana> filteredMana = Multisets.filter(floatingMana, Predicate.not(retain)::test);
         if (convertTo != null) {
             convertedMana = HashMultiset.create();
-            for (Multiset.Entry<Mana> e : Multisets.filter(floatingMana, Predicate.not(retain)::test).entrySet()) {
+            for (Multiset.Entry<Mana> e : filteredMana.entrySet()) {
                 convertedMana.add(e.getElement().convertColor(convertTo), e.getCount());
             }
+        } else {
+            cleared.addAll(filteredMana);
         }
         floatingMana.removeIf(Predicate.not(retain)::test);
         if (convertedMana != null) {
