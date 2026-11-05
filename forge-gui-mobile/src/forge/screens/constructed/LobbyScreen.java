@@ -773,7 +773,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getCommanderDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblCommanderDeck") + ": "
-                        + playerPanel.getCommanderDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
         else if (hasVariant(GameType.Oathbreaker)) {
@@ -781,7 +781,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getOathbreakerDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblOathbreakerDeck") + ": "
-                        + playerPanel.getOathbreakerDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
         else if (hasVariant(GameType.TinyLeaders)) {
@@ -789,7 +789,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getTinyLeadersDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblTinyLeadersDeck") + ": "
-                        + playerPanel.getTinyLeadersDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
         else if (hasVariant(GameType.Brawl)) {
@@ -797,14 +797,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (deck != null) {
                 playerPanel.getBrawlDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblBrawlDeck") + ": "
-                        + playerPanel.getBrawlDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }else {
             deck = playerPanel.getDeck();
             if (deck != null) {
                 playerPanel.getDeckChooser().saveState();
                 deckName =  playerPanel.getDeckChooser().getSelectedDeckType().toString() + ": "
-                        + playerPanel.getDeckChooser().getDeck().getName();
+                        + deck.getName();
             }
         }
 
