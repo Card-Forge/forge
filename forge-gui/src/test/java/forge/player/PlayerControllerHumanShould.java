@@ -1,5 +1,7 @@
 package forge.player;
 
+import forge.ai.LobbyPlayerAi;
+import forge.game.GameEndReason;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
@@ -149,5 +151,26 @@ public class PlayerControllerHumanShould {
                 attacker, new CardCollection(blocker), null, 5, g.opponent, false);
 
         assertThat(damage).isNull();
+    }
+
+    // --- concede ---
+
+    @Test
+    public void endTheGameWhenAConcedeLeavesOnlyAiPlayers() {
+        HumanControlledGame g = new HumanControlledGame(new LobbyPlayerAi("AI 1", null), new LobbyPlayerAi("AI 2", null));
+
+        g.controller.concede();
+
+        assertThat(g.game.isGameOver()).isTrue();
+        assertThat(g.game.getOutcome().getWinCondition()).isEqualTo(GameEndReason.AllHumansLost);
+    }
+
+    @Test
+    public void notEndTheGameWhenAConcedeLeavesAnotherHumanPlaying() {
+        HumanControlledGame g = new HumanControlledGame(HumanControlledGame.lobbyPlayer("Human 2"), new LobbyPlayerAi("AI", null));
+
+        g.controller.concede();
+
+        assertThat(g.game.isGameOver()).isFalse();
     }
 }
