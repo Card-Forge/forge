@@ -74,6 +74,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox(localizer.getMessage("cbAnteMatchRarity"));
     private final JCheckBox cbAnteIncludeBasicLands = new OptionsCheckBox(localizer.getMessage("cbAnteIncludeBasicLands"));
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox(localizer.getMessage("cbEnableAICheats"));
+    private final JCheckBox cbAiFlatMonteCarlo = new OptionsCheckBox(localizer.getMessage("cbAiFlatMonteCarlo"));
     private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
     private final JCheckBox cbOrderCombatants = new OptionsCheckBox(localizer.getMessage("cbOrderCombatants"));
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
@@ -244,6 +245,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnableAICheats, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
+
+        pnlPrefs.add(cbAiFlatMonteCarlo, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAiFlatMonteCarlo")), descriptionConstraints);
 
         pnlPrefs.add(cbManaBurn, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaBurn")), descriptionConstraints);
@@ -778,6 +782,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbAiFlatMonteCarlo() {
+        return cbAiFlatMonteCarlo;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -26,7 +26,6 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
@@ -258,16 +257,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public void updateRevealedCards(TrackableCollection<CardView> collection) {
-        if (gameView != null) {
-            TrackableCollection<CardView> existing = gameView.getRevealedCollection();
-            if (existing != null)
-                collection.addAll(existing);
-            gameView.updateRevealedCards(collection);
-        }
-    }
-
-    @Override
     public boolean mayView(final CardView c) {
         if (!hasLocalPlayers()) {
             return true; //if not in game, card can be shown
@@ -396,27 +385,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return selection.max();
     }
 
-    /** Weighted membership: duplicates in the pushed iterable accumulate counts, so a card's
-     *  count expresses how "strong" its selectability is (1 = actionable, 2 = Auto would tap it). */
-    private final Multiset<CardView> weaklySelectableCards = HashMultiset.create();
-
-    public void setWeaklySelectable(final Iterable<CardView> cards) {
-        weaklySelectableCards.clear();
-        for (CardView cv : cards) {
-            weaklySelectableCards.add(cv);
-        }
+    public boolean isActionable(final CardView card) {
+        return selection.actionable().contains(card);
     }
 
-    public void clearWeaklySelectable() {
-        weaklySelectableCards.clear();
-    }
-
-    public boolean isWeaklySelectable(final CardView card) {
-        return weaklySelectableCards.contains(card);
-    }
-
-    public int getWeakSelectableStrength(final CardView card) {
-        return weaklySelectableCards.count(card);
+    /** How strongly a card is marked: 1 = actionable, 2 = Auto would tap it. */
+    public int getActionableStrength(final CardView card) {
+        return Collections.frequency(selection.actionable(), card);
     }
 
     public boolean isGamePaused() {

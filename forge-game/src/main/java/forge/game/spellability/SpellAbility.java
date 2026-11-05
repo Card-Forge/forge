@@ -218,9 +218,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final int getId() {
         return id;
     }
+    private static final int CLASS_HASH = SpellAbility.class.hashCode();
     @Override
     public int hashCode() {
-        return Objects.hash(SpellAbility.class, getId());
+        return 31 * (31 + CLASS_HASH) + getId();
     }
     @Override
     public boolean equals(final Object obj) {
@@ -2157,6 +2158,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                             candidates, currentAbility, "Choose the targeting player", null);
                 } else {
                     targetingPlayer = getActivatingPlayer();
+                }
+                if (targetingPlayer == null) {
+                    // nobody to choose the targets, so they cannot be chosen
+                    return false;
                 }
                 // don't set targeting player when forceful target,
                 // "targeting player controls" should not be reset when the spell is copied

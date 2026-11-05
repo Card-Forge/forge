@@ -81,6 +81,13 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         ObjectOutputStream objectOut = null;
 
         boolean replace = shouldReplaceTrackables(msg);
+        // A host message's args resolve on the client only once the deltas sent before it are applied
+        if (replace && consumerId >= 0 && msg instanceof GuiGameEvent event && event.getMethod() != ProtocolMethod.applyDelta) {
+            byte[] encodedObjects = TrackableSerializer.encodeArgs(event.getObjects(), tracker, consumerId);
+            if (encodedObjects != null) {
+                msg = event.withEncodedObjects(encodedObjects);
+            }
+        }
 
         try {
             byteOut.write(LENGTH_PLACEHOLDER);
@@ -124,7 +131,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
     private static boolean shouldReplaceTrackables(Serializable msg) {
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
-            return event.replaceTrackables() && method != ProtocolMethod.setGameView
+            return method != ProtocolMethod.setGameView
                     && method != ProtocolMethod.openView;
         }
         return true;

@@ -45,6 +45,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         // Mobile only
         UI_LANDSCAPE_MODE ("false"),
         UI_FULLSCREEN_MODE ("false"),
+        UI_KEEP_MOUSE_IN_FULLSCREEN ("false"),
         UI_VIDEO_MODE ("720p"),
         UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
@@ -64,7 +65,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         MATCH_HOT_SEAT_MODE("false"),
 
         UI_MATCHES_PER_GAME("3"),
-        UI_APPLIED_VARIANTS(""),
+        UI_LOBBY_SETUP(""),
         UI_RANDOM_FOIL ("false"),
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
@@ -138,6 +139,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_COMPACT_ZONE_TABS ("true"),
         UI_COMPACT_HIDE_MENU ("false"),
         UI_UNIFIED_PHASE_LABEL ("true"),
+        UI_COMPACT_DOUBLE_TABS ("true"),
         YIELD_INTERRUPT_ON_ATTACKERS ("true"),
         YIELD_INTERRUPT_ON_OPPONENT_SPELL ("true"),
         YIELD_INTERRUPT_ON_TARGETING ("false"),
@@ -214,6 +216,7 @@ public class ForgePreferences extends AbstractPreferences<ForgePreferences.FPref
         UI_CURRENT_AI_PROFILE ("Default"),
         MATCH_AI_SIDEBOARDING_MODE("Human For AI"),
         MATCH_AI_TIMEOUT("5"),
+        MATCH_AI_FLAT_MONTE_CARLO("true"),
         UI_ENABLE_AI_CHEATS ("false"),
         //MATCH_EXPERIMENTAL_RESTORE("false"),
 

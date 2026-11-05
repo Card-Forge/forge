@@ -98,12 +98,6 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     @Override
-    protected void onStop() {
-        // Clear so highlights don't survive autopass.
-        getController().clearActionableCards();
-    }
-
-    @Override
     protected final void onOk() {
         // Propaganda costs could have been paid here.
         stop();
@@ -194,10 +188,10 @@ public class InputAttack extends InputSyncronizedBase {
             if (potentialBanding) {
                 // Activate band by selecting/deselecting a band member
                 if (activeBand == null) {
-                    activateBand(combat.getBandOfAttacker(card));
+                    activeBand = combat.getBandOfAttacker(card);
                 }
                 else if (activeBand.getAttackers().contains(card)) {
-                    activateBand(null);
+                    activeBand = null;
                 }
                 else if (activeBand.canJoinBand(card)) {
                     // Join a band by selecting a non-active band member after activating a band
@@ -237,7 +231,7 @@ public class InputAttack extends InputSyncronizedBase {
 
         if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender)) {
             if (activeBand != null && !activeBand.canJoinBand(card)) {
-                activateBand(null);
+                activeBand = null;
                 updateMessage();
                 return false;
             }
@@ -282,7 +276,6 @@ public class InputAttack extends InputSyncronizedBase {
     private void declareAttacker(final Card card) {
         combat.removeFromCombat(card);
         combat.addAttacker(card, currentDefender, activeBand);
-        activateBand(activeBand);
 
         card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(CardView.get(card), GameEntityView.get(currentDefender)));
     }
@@ -290,7 +283,7 @@ public class InputAttack extends InputSyncronizedBase {
     private boolean undeclareAttacker(final Card card) {
         combat.removeFromCombat(card);
         // When removing an attacker clear the attacking band
-        activateBand(null);
+        activeBand = null;
 
         card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(CardView.get(card), null));
         return true;
@@ -298,17 +291,11 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
-        showSelection();
         if (def != null) {
             potentialBanding = isBandingPossible();
         }
 
         updateMessage();
-    }
-
-    private void activateBand(final AttackingBand band) {
-        activeBand = band;
-        showSelection();
     }
 
     /** The defender being attacked and the band being formed. */
@@ -322,6 +309,11 @@ public class InputAttack extends InputSyncronizedBase {
             for (final Card card : activeBand.getAttackers()) chosen.add(CardView.get(card));
         }
         return Selection.ofChosen(chosen);
+    }
+
+    @Override
+    protected List<CardView> getActionable() {
+        return getController().getAttackerCandidates(playerAttacks, combat);
     }
 
     //only enable banding message and actions if a creature that can attack has banding
@@ -346,9 +338,9 @@ public class InputAttack extends InputSyncronizedBase {
 
         updatePrompt();
 
-        // Re-push after each click so declared attackers stop glowing.
+        // Resent after each click so declared attackers stop glowing.
         // Can't reuse showMessage() — it also resets currentDefender.
-        getController().pushAttackerCandidates(playerAttacks, combat);
+        showSelection();
 
         if (combat != null)
             getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));

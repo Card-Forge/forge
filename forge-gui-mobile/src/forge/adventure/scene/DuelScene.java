@@ -141,6 +141,10 @@ public class DuelScene extends ForgeScene {
         return callbackExit;
     }
 
+    public EnemySprite getEnemy() {
+        return enemy;
+    }
+
     public void GameEnd() {
         //TODO: Progress towards applicable Adventure quests also needs to be reported here.
         if (eventData != null)
@@ -489,7 +493,7 @@ public class DuelScene extends ForgeScene {
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
-            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai));
+            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai, bossBattle && eventData == null));
             enemyPlayer.setName(enemy.getDisplayName()); //Override name if defined in the map.(only supported for 1 enemy atm)
             TextureRegion enemyAvatar = enemy.getAvatar(i);
             enemyAvatar.flip(true, false); //flip facing left
@@ -813,7 +817,12 @@ public class DuelScene extends ForgeScene {
         this.playerExtras.clear();
     }
 
-    private String selectAI(String ai) { //Decide opponent AI.
+    /**
+     * Decide the opponent's AI profile. An enemy that names a profile in its data gets that one. Otherwise bosses
+     * (and the minions that fight next to them) always use the hardest profile, whatever the player has chosen for
+     * regular games, and everybody else follows the user's AI setting.
+     */
+    private String selectAI(String ai, boolean boss) {
         String AI = ""; //Use user settings if it's null.
         if (ai != null) {
             AI = switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
@@ -822,8 +831,13 @@ public class DuelScene extends ForgeScene {
                 case "reckless" -> "Reckless";
                 case "cautious" -> "Cautious";
                 case "experimental" -> "Experimental";
+                case "hard" -> "Hard";
+                case "hardest" -> "Hardest";
                 default -> ""; //User settings.
             };
+        }
+        if (AI.isEmpty() && boss) {
+            AI = "Hardest";
         }
         return AI;
     }

@@ -337,7 +337,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
         @Override
         protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
             ObjectStreamClass resultClassDescriptor = super.readClassDescriptor(); // initially streams descriptor
-            Class localClass; // the class in the local JVM that this descriptor represents.
+            Class<?> localClass; // the class in the local JVM that this descriptor represents.
             try {
                 localClass = Class.forName(resultClassDescriptor.getName());
             } catch (ClassNotFoundException e) {
@@ -349,14 +349,37 @@ public class SaveFileData extends HashMap<String, byte[]> {
                 final long localSUID = localClassDescriptor.getSerialVersionUID();
                 final long streamSUID = resultClassDescriptor.getSerialVersionUID();
                 if (streamSUID != localSUID) { // check for serialVersionUID mismatch.
-                    String s = "Overriding serialized class version mismatch: " + "local serialVersionUID = " + localSUID +
-                            " stream serialVersionUID = " + streamSUID;
-
-                    System.err.println("[Invalid Class Exception]\n" + s);
-                    resultClassDescriptor = localClassDescriptor; // Use local class descriptor for deserialization
+                    if (hasSameFields(resultClassDescriptor, localClassDescriptor)) {
+                        Logger.warn("Accepting serialVersionUID mismatch for compatible class "
+                                + resultClassDescriptor.getName() + ": stream=" + streamSUID
+                                + ", local=" + localSUID);
+                        resultClassDescriptor = localClassDescriptor;
+                    } else {
+                        Logger.warn("Keeping serialized descriptor for incompatible class "
+                                + resultClassDescriptor.getName() + ": stream=" + streamSUID
+                                + ", local=" + localSUID);
+                    }
                 }
             }
             return resultClassDescriptor;
+        }
+
+        private static boolean hasSameFields(ObjectStreamClass stream, ObjectStreamClass local) {
+            ObjectStreamField[] streamFields = stream.getFields();
+            ObjectStreamField[] localFields = local.getFields();
+            if (streamFields.length != localFields.length) {
+                return false;
+            }
+            for (int i = 0; i < streamFields.length; i++) {
+                ObjectStreamField streamField = streamFields[i];
+                ObjectStreamField localField = localFields[i];
+                if (!streamField.getName().equals(localField.getName())
+                        || streamField.getTypeCode() != localField.getTypeCode()
+                        || !java.util.Objects.equals(streamField.getTypeString(), localField.getTypeString())) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

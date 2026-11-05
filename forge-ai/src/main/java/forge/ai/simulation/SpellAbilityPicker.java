@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import forge.ai.*;
+import forge.ai.ability.AnimateAi;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -78,6 +79,24 @@ public class SpellAbilityPicker {
         }
         candidateSAs.subList(writeIndex, candidateSAs.size()).clear();
         return candidateSAs;
+    }
+
+    /** For diagnostics: what the picker thinks of every ability it looked at, including those it left out. */
+    public List<String> explainCandidates() {
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        cards = ComputerUtilCard.dedupeCards(cards);
+        List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
+        List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
+        List<String> out = new java.util.ArrayList<>();
+        for (SpellAbility sa : candidateSAs) {
+            if (sa.isManaAbility()) {
+                continue;
+            }
+            sa.setActivatingPlayer(player);
+            out.add(sa.getHostCard() + " [" + sa.getHostCard().getZone() + "] " + canPlayAndPayForSim(sa)
+                    + (sa.isOptionalCostPaid(forge.game.spellability.OptionalCost.Bargain) ? " (bargained)" : ""));
+        }
+        return out;
     }
 
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
@@ -330,6 +349,10 @@ public class SpellAbilityPicker {
         }
         if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
+        }
+        // the board evaluation can't tell that e.g. animating a tapped manland does nothing useful
+        if (AnimateAi.isPointlessSelfAnimate(player, sa)) {
+            return AiPlayDecision.DoesntImpactCombat;
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;

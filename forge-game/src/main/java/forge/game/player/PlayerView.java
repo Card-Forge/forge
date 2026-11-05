@@ -223,13 +223,6 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.HasAvailableActions, value);
     }
 
-    public int getAvatarLifeDifference() {
-        return get(TrackableProperty.AvatarLifeDifference);
-    }
-    public void setAvatarLifeDifference(final int val) {
-        set(TrackableProperty.AvatarLifeDifference, val);
-    }
-
     public boolean getHasPriority() {
         return get(TrackableProperty.HasPriority);
     }

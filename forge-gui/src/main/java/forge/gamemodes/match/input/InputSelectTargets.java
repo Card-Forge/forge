@@ -93,7 +93,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 chosen.add(si.getView());
             }
         }
-        return new Selection(new ArrayList<>(CardView.getCollection(choices)), initialMin, initialMax, offered, chosen);
+        return new Selection(new ArrayList<>(CardView.getCollection(choices)), initialMin, initialMax, offered, chosen, List.of());
     }
 
     @Override

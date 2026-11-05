@@ -180,12 +180,12 @@ public class TargetingOverlay {
                     final GameEntityView defender = combat.getDefender(c);
                     // if c is attacking a planeswalker or battle
                     if (defender instanceof CardView) {
-                        queueArrow(endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking, false);
+                        queueArrow(endpoints.get(c.getId()), endpoints.get(defender.getId()), ArcConnection.FoesAttacking, false);
                     }
                     // if c is a planeswalker that's being attacked
-                    for (final CardView pwAttacker : combat.getAttackersOf(c)) {
+                    /*for (final CardView pwAttacker : combat.getAttackersOf(c)) {
                         queueArrow(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking, false);
-                    }
+                    }*/
                     // blocker -> attacker arrows that involve this card
                     final List<CardView> pairs = blockPairs.get(c);
                     if (pairs != null) {

@@ -247,16 +247,17 @@ public class CountersPutEffect extends SpellAbilityEffect {
         int counterRemain = counterAmount;
         if (sa.hasParam("DividedRandomly")) {
             CardCollection targets = new CardCollection();
-            for (final GameEntity obj : tgtObjects) { // check if each target is still OK
+            for (final Iterator<GameEntity> it = tgtObjects.iterator(); it.hasNext();) { // check if each target is still OK
+                final GameEntity obj = it.next();
                 if (obj instanceof Card tgtCard) {
                     Card gameCard = game.getCardState(tgtCard, null);
                     if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
-                        tgtObjects.remove(obj);
+                        it.remove();
                     } else {
                         targets.add(gameCard);
                     }
                 } else { // for now, we can remove non-card objects if they somehow got targeted
-                    tgtObjects.remove(obj);
+                    it.remove();
                 }
             }
             if (tgtObjects.size() == 0) {
