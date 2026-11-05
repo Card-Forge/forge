@@ -1,18 +1,13 @@
 package forge.screens.match;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.SecondaryLoop;
-import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -20,7 +15,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,17 +24,16 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 import javax.swing.AbstractAction;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import org.apache.commons.text.WordUtils;
 
@@ -50,23 +43,37 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
-import forge.toolbox.FSkin;
 import forge.toolbox.MouseTriggerEvent;
 import forge.util.Localizer;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 
 /**
- * Arena-style card browser: the board dims behind a title, one row of large cards that
- * scrolls sideways, the prompt's card on the right, and a Submit button just above the
- * local portrait. "View Battlefield" shrinks it to that one button until pressed again.
- * It is drawn inside the match window and takes every click while it covers the board.
+ * Arena-style card browser: the scene dims behind a title, the cards fan out in one overlapping
+ * row, the prompt's card sits on the right, and Submit waits in the shared slot. A row too long
+ * to fit closes up until 60% of each card shows and then scrolls with the wheel, its edges fading away. "View Battlefield"
+ * shrinks the browser to that one button until pressed again. It is drawn inside the match
+ * window and takes every click while it covers the board.
  */
 @SuppressWarnings("serial")
 public final class ArenaCardBrowser extends JPanel {
-    private static final float CARD_HEIGHT = 0.36f; // of the window
-    private static final int GLOW = 14;
-    private static final int LIFT = 18;
+    private static final float CARD_HEIGHT = 0.38f; // of the window
+    /** The furthest a row of cards reaches across the window before it scrolls instead. */
+    private static final float FAN_CAP = 0.91f;
+    private static final float MIN_CARD_HEIGHT = 0.34f;
+    /** The least of a card that stays in view in a row, as a share of its width. */
+    private static final float MIN_SHOWN = 0.6f;
+    /** The same beside the prompt's card, where there is less room. */
+    private static final float MIN_SHOWN_SOURCE = 0.4f;
+    /** Cards side by side on either side of the divider are all this high. */
+    private static final float ARRANGE_HEIGHT = 0.38f;
+    /** From the heading to what lies under it, when a row is split by the divider. */
+    private static final float ARRANGE_HEADING_GAP = 0.025f;
+    private static final float FAN_ANGLE = 4f;
+    private static final float FAN_ARC = 0.02f;
+    private static final float HOVER_LIFT = 0.045f;
+    private static final float CHOSEN_SCALE = 1.05f;
+    private static final float HOVER_SCALE = 1.05f;
 
     /** What the browser is for. */
     private enum Mode {
@@ -78,7 +85,7 @@ public final class ArenaCardBrowser extends JPanel {
         ZONE,
         /** the game's current input is picking cards from hidden zones; clicks and Submit go to it */
         SELECTION,
-        /** put cards on the top and/or bottom of a library by dragging them either side of a gap */
+        /** put cards on the top and/or bottom of a library by dragging them either side of a divider */
         ARRANGE
     }
 
@@ -93,14 +100,26 @@ public final class ArenaCardBrowser extends JPanel {
     private final List<CardView> cards;
     private final List<CardView> chosen = new ArrayList<>();
     private final List<CardItem> items = new ArrayList<>();
-    private final JPanel strip = new JPanel(null);
+    private final ArenaDialogKit.FadeStrip strip = new ArenaDialogKit.FadeStrip(true, this::paintRaised);
     private final JScrollPane scroller;
-    private final FButton btnSubmit = new FButton();
-    private final FButton btnSecondary = new FButton();
-    private final FButton btnView = new FButton();
+    private final ArenaDialogKit.Chevron chevLeft = new ArenaDialogKit.Chevron(-1, 0, () -> scrollRow(-1));
+    private final ArenaDialogKit.Chevron chevRight = new ArenaDialogKit.Chevron(1, 0, () -> scrollRow(1));
+    private final FButton btnSubmit = new ArenaDialogKit.Pill();
+    private final FButton btnSecondary = new ArenaDialogKit.Pill();
+    private final FButton btnView = new ArenaDialogKit.Pill();
+    private final ArenaDialogKit.TabBarDim tabBarDim = new ArenaDialogKit.TabBarDim();
+    private final Timer animation = new Timer(15, e -> stepAnimation());
     private final CardView focusCard;
     private CachedCardImage focusImage;
+    private BufferedImage focusSource;
+    private BufferedImage focusFace;
+    private BufferedImage backdrop;
     private boolean viewingBattlefield;
+    private int rowStep;
+    private boolean rowScrolls;
+    private int fanLeft;
+    private int fanRight;
+    private int fanFoot;
     private CardView played;
     private MouseEvent playedEvent;
     private Runnable onClose;
@@ -113,7 +132,11 @@ public final class ArenaCardBrowser extends JPanel {
     private Rectangle topArea;
     private Rectangle bottomArea;
     private int gapCenterX;
-    private int itemStep;
+    private int slotW;
+    private int slotH;
+    private int slotCentreY;
+    private int labelY;
+    private int cardGap;
     private CardItem dragItem;
     private Point dragGrab;
     private boolean dragMoved;
@@ -181,6 +204,8 @@ public final class ArenaCardBrowser extends JPanel {
     public static void refreshSelection() {
         if (selectionBrowser != null) {
             selectionBrowser.updateButtons();
+            SwingUtilities.invokeLater(selectionBrowser::restack);
+            selectionBrowser.startAnimation();
             selectionBrowser.repaint();
         }
     }
@@ -195,8 +220,8 @@ public final class ArenaCardBrowser extends JPanel {
 
     /**
      * Lets the player put {@code cards} on the top and/or bottom of their library by dragging
-     * them either side of a gap: left of it is the top (leftmost on top), right of it the
-     * bottom (rightmost at the very bottom). A click moves a card across. Returns {top, bottom}.
+     * them across a divider: on its left the leftmost goes on top, on its right the rightmost
+     * goes at the very bottom. A click moves a card across. Returns {top, bottom}.
      */
     public static List<List<CardView>> arrange(final CMatchUI matchUI, final String subtitle, final List<CardView> cards,
             final boolean toTop, final boolean toBottom) {
@@ -220,11 +245,11 @@ public final class ArenaCardBrowser extends JPanel {
      * {@code caption} ("Damaged first", "Closest to top"...). Returns them left to right.
      */
     public static List<CardView> order(final CMatchUI matchUI, final String title, final String caption, final List<CardView> cards) {
-        final String subtitle = Localizer.getInstance().getMessage("lblArenaDragToOrder", caption);
+        final String subtitle = Localizer.getInstance().getMessage("lblArenaDragToReorder");
         final ArenaCardBrowser browser = showAndWait(() -> {
             final ArenaCardBrowser b = new ArenaCardBrowser(matchUI, Mode.ARRANGE, title, subtitle, cards, 0, 0, null);
             b.allowTop = true;
-            b.topLabel = Localizer.getInstance().getMessage("lblArenaFirstLeft", caption);
+            b.topLabel = caption;
             b.topSide.addAll(cards);
             return b;
         });
@@ -273,51 +298,45 @@ public final class ArenaCardBrowser extends JPanel {
             chosen.addAll(selected);
         }
 
-        setOpaque(false);
+        setOpaque(true);
         // the board underneath must not react while the browser covers it
         addMouseListener(new MouseAdapter() { });
         addMouseMotionListener(new MouseAdapter() { });
         addMouseWheelListener(e -> { });
 
-        strip.setOpaque(false);
+        // the top card of the fan is the rightmost, and comes first among the children
         for (final CardView card : cards) {
             final CardItem item = new CardItem(card);
             items.add(item);
             if (mode == Mode.ARRANGE) {
                 add(item);
             } else {
-                strip.add(item);
+                strip.add(item, 0);
             }
         }
-        scroller = new JScrollPane(strip, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroller = new JScrollPane(strip, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
+        scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE); // a faded view cannot be blitted
         scroller.setBorder(new EmptyBorder(0, 0, 0, 0));
-        final JScrollBar rowBar = scroller.getHorizontalScrollBar();
-        rowBar.setUI(new ThinScrollBarUI());
-        rowBar.setOpaque(false);
-        rowBar.setPreferredSize(new Dimension(0, 10));
-        rowBar.setUnitIncrement(40);
         // the wheel scrolls the row sideways
         scroller.setWheelScrollingEnabled(false);
-        scroller.addMouseWheelListener(e -> {
-            final JScrollBar bar = scroller.getHorizontalScrollBar();
-            bar.setValue(bar.getValue() + e.getUnitsToScroll() * 25);
-        });
+        scroller.addMouseWheelListener(e -> scrollRowBy(e.getUnitsToScroll() * Math.max(8, rowStep / 3)));
         scroller.setVisible(mode != Mode.ARRANGE);
+        chevLeft.setVisible(false);
+        chevRight.setVisible(false);
+        add(chevLeft);
+        add(chevRight);
         add(scroller);
 
         btnSubmit.setPrimary(true);
-        btnSubmit.setFont(FSkin.getBoldFont(18));
         btnSubmit.addActionListener(e -> submit());
         add(btnSubmit);
 
-        btnSecondary.setFont(FSkin.getBoldFont(14));
         btnSecondary.addActionListener(e -> matchUI.getGameController().selectButtonCancel());
         btnSecondary.setVisible(mode == Mode.SELECTION);
         add(btnSecondary);
 
-        btnView.setFont(FSkin.getBoldFont(14));
         btnView.addActionListener(e -> toggleBattlefield());
         add(btnView);
 
@@ -344,7 +363,33 @@ public final class ArenaCardBrowser extends JPanel {
 
     @Override
     protected void paintComponent(final Graphics g) {
-        paintBackdrop((Graphics2D) g, getWidth(), getHeight());
+        if (!viewingBattlefield) {
+            paintScene((Graphics2D) g, getWidth(), getHeight());
+        }
+    }
+
+    @Override
+    protected void paintChildren(final Graphics g) {
+        super.paintChildren(g);
+        if (mode == Mode.ARRANGE && !viewingBattlefield) {
+            final Graphics2D g2 = (Graphics2D) g;
+            if (railed()) {
+                final int left = railLeft();
+                ArenaDialogKit.paintRail(g2, left, left + railWidth(), slotCentreY + slotH / 2 + ArenaDialogKit.railDrop(getHeight()), getHeight());
+            }
+            paintRaised(g2);
+            if (railed()) {
+                for (final CardItem item : items) {
+                    final Graphics2D c = (Graphics2D) g2.create(item.getX(), item.getY(), item.getWidth(), item.getHeight());
+                    try {
+                        item.drawBadge(c);
+                    } finally {
+                        c.dispose();
+                    }
+                }
+            }
+            paintDropMarker(g2);
+        }
     }
 
     @Override
@@ -354,15 +399,26 @@ public final class ArenaCardBrowser extends JPanel {
 
     private void open() {
         ArenaCardPreview.dismiss(); // a card still previewed from the hand would sit over the browser's dimming
+        backdrop = ArenaDialogKit.captureBackdrop(null);
         final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
+        setBounds(0, 0, lpn.getWidth(), lpn.getHeight());
         lpn.add(this, FView.OVERLAY_LAYER);
         lpn.moveToFront(this);
         lpn.addComponentListener(followWindow);
+        tabBarDim.attach();
+        if (mode == Mode.ARRANGE) {
+            stackArranged();
+        } else {
+            restack();
+            startAnimation(); // cards chosen beforehand make their room too
+        }
         fitToWindow();
         requestFocusInWindow();
     }
 
     private void close() {
+        animation.stop();
+        tabBarDim.detach();
         final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
         lpn.removeComponentListener(followWindow);
         lpn.remove(this);
@@ -376,9 +432,12 @@ public final class ArenaCardBrowser extends JPanel {
     private void fitToWindow() {
         final JLayeredPane lpn = FView.SINGLETON_INSTANCE.getLpnDocument();
         if (viewingBattlefield) {
-            setBounds(lpn.getWidth() - 220, 40, 210, 52);
+            final Rectangle r = ArenaDialogKit.viewButtonBounds(lpn.getWidth(), lpn.getHeight());
+            r.grow(6, 6);
+            setBounds(r);
         } else {
             setBounds(0, 0, lpn.getWidth(), lpn.getHeight());
+            tabBarDim.attach();
         }
         revalidate();
         repaint();
@@ -386,7 +445,7 @@ public final class ArenaCardBrowser extends JPanel {
     }
 
     private void submit() {
-        if (!btnSubmit.isEnabled()) {
+        if (!btnSubmit.isEnabled() || viewingBattlefield) {
             return;
         }
         if (mode == Mode.SELECTION) {
@@ -398,9 +457,24 @@ public final class ArenaCardBrowser extends JPanel {
 
     private void toggleBattlefield() {
         viewingBattlefield = !viewingBattlefield;
-        scroller.setVisible(!viewingBattlefield);
+        setOpaque(!viewingBattlefield);
+        if (viewingBattlefield) {
+            tabBarDim.detach();
+        } else {
+            backdrop = ArenaDialogKit.captureBackdrop(this); // the game may have moved on
+        }
+        scroller.setVisible(!viewingBattlefield && mode != Mode.ARRANGE);
         btnSubmit.setVisible(!viewingBattlefield);
         btnSecondary.setVisible(!viewingBattlefield && mode == Mode.SELECTION);
+        if (viewingBattlefield) {
+            chevLeft.setVisible(false);
+            chevRight.setVisible(false);
+        }
+        if (mode == Mode.ARRANGE) {
+            for (final CardItem item : items) {
+                item.setVisible(!viewingBattlefield);
+            }
+        }
         updateButtons();
         fitToWindow();
     }
@@ -471,55 +545,190 @@ public final class ArenaCardBrowser extends JPanel {
             chosen.add(item.card);
         }
         updateButtons();
+        restack();
+        startAnimation();
         strip.repaint();
+    }
+
+    /** The rightmost card lies on top, with what has been chosen above the rest. */
+    private void restack() {
+        if (mode == Mode.ARRANGE) {
+            return;
+        }
+        int z = 0;
+        for (int i = items.size() - 1; i >= 0; i--) {
+            if (isChosen(items.get(i).card)) {
+                strip.setComponentZOrder(items.get(i), z++);
+            }
+        }
+        for (int i = items.size() - 1; i >= 0; i--) {
+            if (!isChosen(items.get(i).card)) {
+                strip.setComponentZOrder(items.get(i), z++);
+            }
+        }
     }
 
     private boolean isChosen(final CardView card) {
         return mode == Mode.SELECTION ? matchUI.isHighlighted(card) : chosen.contains(card);
     }
 
-    private int cardHeight() {
-        return Math.round(getHeight() * CARD_HEIGHT);
-    }
-
-    private int focusWidth() {
-        return focusCard == null ? 0 : Math.round(getHeight() * 0.4f / CardPanel.ASPECT_RATIO);
-    }
-
     private void layoutContents(final int w, final int h) {
         if (viewingBattlefield) {
-            btnView.setBounds(10, 8, 190, 36);
+            btnView.setBounds(6, 6, w - 12, h - 12);
             return;
         }
+        btnView.setBounds(ArenaDialogKit.viewButtonBounds(w, h));
+        ArenaDialogKit.placeButtons(w, h, btnSubmit, btnSecondary);
         if (mode == Mode.ARRANGE) {
             layoutArrange(w, h);
-            btnSubmit.setBounds((w - 220) / 2, Math.round(h * 0.68f), 220, 48);
-            btnView.setBounds(w - 210, 48, 190, 36);
-            return;
-        }
-        final int ch = cardHeight(), cw = Math.round(ch / CardPanel.ASPECT_RATIO);
-        final int itemW = cw + 2 * GLOW, itemH = ch + 2 * GLOW + LIFT;
-        final int step = itemW - 4;
-        for (int i = 0; i < items.size(); i++) {
-            items.get(i).setBounds(i * step, 0, itemW, itemH);
-        }
-        final int stripW = items.isEmpty() ? 0 : (items.size() - 1) * step + itemW;
-        strip.setPreferredSize(new Dimension(stripW, itemH));
-        final int reserved = focusCard == null ? 0 : focusWidth() + 80;
-        final int available = Math.max(itemW, w - 80 - 2 * reserved);
-        final int viewW = Math.min(stripW, available);
-        final boolean scrolls = stripW > available;
-        scroller.setBounds((w - viewW) / 2, Math.round(h * 0.2f), viewW, itemH + (scrolls ? 12 : 0));
-        scroller.revalidate();
-
-        final int buttonsY = Math.round(h * 0.68f);
-        if (btnSecondary.isVisible()) {
-            btnSubmit.setBounds(w / 2 - 230, buttonsY, 220, 48);
-            btnSecondary.setBounds(w / 2 + 10, buttonsY + 6, 170, 38);
         } else {
-            btnSubmit.setBounds((w - 220) / 2, buttonsY, 220, 48);
+            layoutRow(w, h);
         }
-        btnView.setBounds(w - 210, 48, 190, 36); // clear of the window's title bar
+    }
+
+    /** How much of each card the next one covers when there is room to spare. */
+    private static float overlapFor(final int n) {
+        // a long row spreads out while there is room, so that titles stay readable
+        return n <= 3 ? 0.35f : n == 4 ? 0.42f : n <= 6 ? 0.5f : 0.38f;
+    }
+
+    /**
+     * The fan: rightmost on top, a few degrees of tilt and a slight arc, centred on the window while
+     * that keeps it clear of the prompt's card and else in the space left of that card. It closes up
+     * until 60% of each card shows (40% beside the prompt's card) and shrinks the cards a little; when
+     * even that is not enough it lies flat at that overlap and scrolls with the wheel or the arrows.
+     * A chosen card lies whole on top, in its own place in the arc and at its own angle, and pushes
+     * its neighbours aside to make room.
+     */
+    private void layoutRow(final int w, final int h) {
+        final int n = items.size();
+        final boolean source = focusCard != null;
+        final int margin = Math.round(w * 0.03f);
+        final float shown = source ? MIN_SHOWN_SOURCE : MIN_SHOWN;
+        final int room = Math.min(ArenaDialogKit.rowRoom(w, h, source), source ? Integer.MAX_VALUE : Math.round(w * FAN_CAP));
+        final float tilt = n <= 1 ? 0f : Math.min(FAN_ANGLE, 1.2f * (n - 1));
+
+        final float size = fitRow(n, h, tilt, room, shown);
+        final boolean scrolls = size < 0f;
+        final int ch = Math.round(h * (scrolls ? MIN_CARD_HEIGHT : size)), cw = Math.round(ch / CardPanel.ASPECT_RATIO);
+        final int step = scrolls ? Math.round(cw * shown) : rowStepFor(n, cw, ch, tilt, room);
+        final float maxAngle = scrolls ? 0f : tilt;
+        final float arcH = scrolls ? 0f : h * FAN_ARC * Math.min(1f, (n - 1) / 4f);
+        final int rowW = cw + Math.max(0, n - 1) * step;
+        final int areaY = Math.round(h * ArenaDialogKit.ROW_AREA_TOP), areaH = Math.round(h * ArenaDialogKit.ROW_AREA_BOTTOM) - areaY;
+        // the outer corner of a tilted card reaches past its middle by this much, its light with it
+        final int rightEdge = ArenaDialogKit.rowRight(w, h, source) - Math.round(ch * (float) Math.sin(Math.toRadians(maxAngle)) / 2f);
+        final int rowCx = ArenaDialogKit.rowCentre(w, h, scrolls ? room : rowW, source);
+
+        // what the chosen cards ask of the row, in as far as there is room for it
+        final float[] push = pushes(n, cw, step, shown, scrolls ? Integer.MAX_VALUE : rightEdge - margin - rowW);
+        final float before = push[n], total = push[n + 1];
+
+        // a row that fits has the whole window, so nothing cuts its glow; one that scrolls fades at its ends
+        final int viewX = scrolls ? rowCx - room / 2 : 0, viewW = scrolls ? room : w;
+        final int left;
+        if (scrolls) {
+            left = Math.round(viewW * 0.06f) + Math.round(h * 0.03f);
+        } else {
+            // a chosen card stays where it was unless the row would run into what lies beside it
+            int at = rowCx - rowW / 2 - Math.round(before);
+            at -= Math.max(0, at + rowW + Math.round(total) - rightEdge);
+            left = Math.max(margin, at);
+        }
+        final Dimension stripSize = new Dimension(scrolls ? rowW + Math.round(total) + 2 * left : w, areaH);
+        rowStep = step;
+        rowScrolls = scrolls;
+        final int rowCy = Math.round(h * ArenaDialogKit.ROW_CENTRE_Y) - areaY;
+        for (int i = 0; i < n; i++) {
+            final float at = n <= 1 ? 0f : 2f * i / (n - 1) - 1f;
+            items.get(i).place(left + cw / 2 + i * step + Math.round(push[i]), rowCy + Math.round(arcH * at * at), cw, ch, maxAngle * at);
+        }
+        // the shards lie along the feet of what shows: below the lowest corner of the fan
+        fanLeft = scrolls ? viewX : left;
+        fanRight = scrolls ? viewX + viewW : left + rowW + Math.round(total);
+        fanFoot = areaY + rowCy + Math.round(arcH) + ch / 2 + Math.round(cw / 2f * (float) Math.sin(Math.toRadians(maxAngle)));
+        scroller.setBounds(viewX, areaY, viewW, areaH);
+        strip.setFade(0.06f);
+        if (!stripSize.equals(strip.getPreferredSize())) {
+            strip.setPreferredSize(stripSize);
+            strip.setSize(stripSize);
+            scroller.revalidate();
+        }
+        final int d = Math.round(h * 0.06f) + 2;
+        chevLeft.setBounds(viewX + Math.round(h * 0.004f), areaY + rowCy - d / 2, d, d);
+        chevRight.setBounds(viewX + viewW - Math.round(h * 0.004f) - d, areaY + rowCy - d / 2, d, d);
+        clampRow();
+    }
+
+    /**
+     * How far each card moves along the row to let the chosen ones lie whole, followed by what the
+     * row grows on the left of them and what it grows in all. A chosen card lies over the one after
+     * it and that one is covered from the other side too, so the cards after it go along until that
+     * one shows as much as any other; the card before it only has to clear its slightly larger size.
+     */
+    private float[] pushes(final int n, final int cw, final int step, final float shown, final int slack) {
+        final float aside = cw * (CHOSEN_SCALE - 1f) / 2f;
+        final float through = Math.max(0f, cw + cw * shown - 2f * step);
+        float wanted = 0f;
+        for (int i = 0; i < n; i++) {
+            wanted += items.get(i).riseT * (2f * aside + (i <= n - 3 ? through : 0f));
+        }
+        final float fit = wanted <= slack ? 1f : Math.max(0f, slack) / wanted;
+        final float[] out = new float[n + 2];
+        float run = 0f, before = 0f;
+        for (int i = 0; i < n; i++) {
+            final float t = items.get(i).riseT * fit;
+            before += aside * t;
+            out[i] = run + aside * t;
+            run += t * (2f * aside + (i <= n - 3 ? through : 0f));
+        }
+        out[n] = before;
+        out[n + 1] = run;
+        return out;
+    }
+
+    /** The largest card height at which this share of each card shows in this room, or -1 if there is none. */
+    private static float fitRow(final int n, final int h, final float tilt, final int room, final float shown) {
+        for (float size = CARD_HEIGHT; size > MIN_CARD_HEIGHT - 0.001f; size -= 0.02f) {
+            final int ch = Math.round(h * size), cw = Math.round(ch / CardPanel.ASPECT_RATIO);
+            if (n <= 1 || rowStepFor(n, cw, ch, tilt, room) >= Math.round(cw * shown)) {
+                return size;
+            }
+        }
+        return -1f;
+    }
+
+    private static int rowStepFor(final int n, final int cw, final int ch, final float tilt, final int room) {
+        if (n <= 1) {
+            return 0;
+        }
+        final int pad = Math.round(ch * (float) Math.sin(Math.toRadians(tilt)) / 2f);
+        return Math.min(Math.round(cw * (1f - overlapFor(n))), (room - 2 * pad - cw) / (n - 1));
+    }
+
+    private void scrollRow(final int direction) {
+        scrollRowBy(direction * Math.round(scroller.getWidth() * 0.6f));
+    }
+
+    private void scrollRowBy(final int dx) {
+        if (rowScrolls) {
+            final JViewport viewport = scroller.getViewport();
+            viewport.setViewPosition(new Point(viewport.getViewPosition().x + dx, 0));
+            clampRow();
+            strip.repaint();
+        }
+    }
+
+    /** Keeps the view on the row and shows the chevrons on the sides that have more. */
+    private void clampRow() {
+        final JViewport viewport = scroller.getViewport();
+        final int most = Math.max(0, strip.getPreferredSize().width - scroller.getWidth());
+        final int x = rowScrolls ? Math.max(0, Math.min(most, viewport.getViewPosition().x)) : 0;
+        if (viewport.getViewPosition().x != x) {
+            viewport.setViewPosition(new Point(x, 0));
+        }
+        chevLeft.setVisible(rowScrolls && x > 0);
+        chevRight.setVisible(rowScrolls && x < most);
     }
 
     private CardItem itemFor(final CardView card) {
@@ -531,49 +740,106 @@ public final class ArenaCardBrowser extends JPanel {
         return null;
     }
 
-    /** One row: the top side, a gap with a divider, then the bottom side; an empty side keeps one slot to drop into. */
+    /** How wide a side of {@code n} cards is when they lie apart. */
+    private int naturalWidth(final int n, final int cw) {
+        return n <= 1 ? cw : n * cw + (n - 1) * cardGap;
+    }
+
+    /**
+     * One open row of cards all of one size on one baseline. Two sides are one group, centred as a
+     * whole, and the divider lies between them wherever that puts it, with the same gutter on either
+     * side of it: each side's cards start from the divider, and close up only if the whole would not fit.
+     */
     private void layoutArrange(final int w, final int h) {
-        final boolean both = allowTop && allowBottom;
-        int ch = cardHeight();
-        int itemW, itemH, gapW, rowW;
-        while (true) {
-            final int cw = Math.round(ch / CardPanel.ASPECT_RATIO);
-            itemW = cw + 2 * GLOW;
-            itemH = ch + 2 * GLOW + LIFT;
-            itemStep = itemW - 4;
-            gapW = both ? Math.max(90, cw / 2) : 0;
-            final int slots = (allowTop ? Math.max(1, topSide.size()) : 0) + (allowBottom ? Math.max(1, bottomSide.size()) : 0);
-            rowW = slots * itemStep + gapW;
-            if (rowW <= w - 120 || ch <= 90) {
-                break;
+        final boolean both = allowTop && allowBottom, source = focusCard != null;
+        final int room = ArenaDialogKit.rowRoom(w, h, source);
+        final int ch = Math.round(h * ARRANGE_HEIGHT), cw = Math.round(ch / CardPanel.ASPECT_RATIO);
+        cardGap = Math.round(w * 0.02f); // wider than two glows, so that they never meet
+        slotW = cw;
+        slotH = ch;
+        if (both) {
+            final int gutter = Math.round(w * 0.03f), inner = room - 2 * gutter;
+            final int wantTop = naturalWidth(topSide.size(), cw), wantBottom = naturalWidth(bottomSide.size(), cw);
+            int topW = wantTop, bottomW = wantBottom;
+            if (wantTop + wantBottom > inner) {
+                topW = Math.max(cw, Math.min(inner - cw, Math.round(inner * (float) wantTop / (wantTop + wantBottom))));
+                bottomW = inner - topW;
             }
-            ch -= 8;
-        }
-        int x = (w - rowW) / 2;
-        final int y = Math.round(h * 0.24f);
-        if (allowTop) {
-            topArea = new Rectangle(x, y, Math.max(1, topSide.size()) * itemStep, itemH);
-            for (final CardView card : topSide) {
-                placeArranged(card, x, y, itemW, itemH);
-                x += itemStep;
-            }
-            x = topArea.x + topArea.width;
-        }
-        gapCenterX = x + gapW / 2;
-        x += gapW;
-        if (allowBottom) {
-            bottomArea = new Rectangle(x, y, Math.max(1, bottomSide.size()) * itemStep, itemH);
-            for (final CardView card : bottomSide) {
-                placeArranged(card, x, y, itemW, itemH);
-                x += itemStep;
-            }
+            final int whole = topW + 2 * gutter + bottomW;
+            final int groupLeft = ArenaDialogKit.rowCentre(w, h, whole, source) - whole / 2;
+            labelY = ArenaDialogKit.headingBottom(title, headingLine(), fallbackTitle(), w, h) + Math.round(h * (ARRANGE_HEADING_GAP + 0.017f));
+            final int top = labelY + Math.round(h * 0.014f);
+            final int cy = top + ch / 2;
+            slotCentreY = cy;
+            gapCenterX = groupLeft + topW + gutter;
+            topArea = new Rectangle(groupLeft, top, topW, ch);
+            bottomArea = new Rectangle(gapCenterX + gutter, top, bottomW, ch);
+            placeInArea(topSide, topArea, cw, ch, cy, 1);
+            placeInArea(bottomSide, bottomArea, cw, ch, cy, -1);
+        } else {
+            final int cy = Math.round(h * 0.485f);
+            final int top = cy - ch / 2;
+            slotCentreY = cy;
+            labelY = top - Math.round(h * 0.026f);
+            final List<CardView> side = allowTop ? topSide : bottomSide;
+            final int areaW = Math.min(room, naturalWidth(side.size(), cw));
+            gapCenterX = ArenaDialogKit.rowCentre(w, h, areaW, source);
+            final Rectangle area = new Rectangle(gapCenterX - areaW / 2, top, areaW, ch);
+            topArea = allowTop ? area : null;
+            bottomArea = allowBottom ? area : null;
+            placeInArea(side, area, cw, ch, cy, 0);
         }
     }
 
-    private void placeArranged(final CardView card, final int x, final int y, final int itemW, final int itemH) {
-        final CardItem item = itemFor(card);
-        if (item != null && item != dragItem) {
-            item.setBounds(x, y, itemW, itemH);
+    /** Lays a side's cards out in its area: against its left edge if {@code align} is below zero, its right edge if above, else in its middle. */
+    private void placeInArea(final List<CardView> side, final Rectangle area, final int cw, final int ch, final int cy, final int align) {
+        final int n = side.size();
+        final int step = sideStep(n, area);
+        final int rowW = cw + Math.max(0, n - 1) * step;
+        int cx = (align < 0 ? area.x : align > 0 ? area.x + area.width - rowW : area.x + (area.width - rowW) / 2) + cw / 2;
+        for (final CardView card : side) {
+            final CardItem item = itemFor(card);
+            if (item != null) {
+                item.overlapped = n > 1 && step < cw;
+                if (item != dragItem) {
+                    item.place(cx, cy, cw, ch, 0f);
+                }
+            }
+            cx += step;
+        }
+    }
+
+    /** From one card to the next in a side of {@code n} cards: side by side while they fit, then overlapping. */
+    private int sideStep(final int n, final Rectangle area) {
+        return n <= 1 ? 0 : Math.min(slotW + cardGap, (area.width - slotW) / (n - 1));
+    }
+
+    /** The middle of a side's cards, beside the divider when there is one. */
+    private int sideCx(final List<CardView> side, final Rectangle area) {
+        final int n = side.size(), rowW = slotW + Math.max(0, n - 1) * sideStep(n, area);
+        if (!allowTop || !allowBottom) {
+            return area.x + area.width / 2;
+        }
+        return area == topArea ? area.x + area.width - rowW / 2 : area.x + rowW / 2;
+    }
+
+    /** Where the first card of an empty side would lie: beside the divider when there is one. */
+    private int slotCx(final Rectangle area) {
+        if (!allowTop || !allowBottom) {
+            return area.x + area.width / 2;
+        }
+        return area == topArea ? area.x + area.width - slotW / 2 : area.x + slotW / 2;
+    }
+
+    /** The rightmost card of each side lies on top. */
+    private void stackArranged() {
+        for (final List<CardView> side : List.of(topSide, bottomSide)) {
+            for (final CardView card : side) {
+                final CardItem item = itemFor(card);
+                if (item != null) {
+                    setComponentZOrder(item, 0);
+                }
+            }
         }
     }
 
@@ -598,6 +864,7 @@ public final class ArenaCardBrowser extends JPanel {
         dragGrab = e.getPoint();
         dragMoved = false;
         setComponentZOrder(item, 0);
+        startAnimation();
     }
 
     private void drag(final CardItem item, final MouseEvent e) {
@@ -615,20 +882,29 @@ public final class ArenaCardBrowser extends JPanel {
         final List<CardView> side = dropsOnTop(cx) ? topSide : bottomSide;
         final Rectangle area = dropsOnTop(cx) ? topArea : bottomArea;
         final int index = dropIndex(side, cx);
-        int marker = area.x;
+        CardItem before = null, after = null;
         int seen = 0;
         for (final CardView card : side) {
             final CardItem other = itemFor(card);
             if (other == null || other == item) {
                 continue;
             }
-            if (seen == index) {
-                break;
+            if (seen == index - 1) {
+                before = other;
+            } else if (seen == index) {
+                after = other;
             }
-            marker = other.getX() + other.getWidth();
             seen++;
         }
-        dropMarkerX = marker;
+        if (before != null && after != null) {
+            dropMarkerX = (before.getX() + before.getWidth() / 2 + slotW / 2 + after.getX() + after.getWidth() / 2 - slotW / 2) / 2;
+        } else if (before != null) {
+            dropMarkerX = before.getX() + before.getWidth() / 2 + slotW / 2 + Math.round(getWidth() * 0.005f);
+        } else if (after != null) {
+            dropMarkerX = after.getX() + after.getWidth() / 2 - slotW / 2 - Math.round(getWidth() * 0.005f);
+        } else {
+            dropMarkerX = slotCx(area);
+        }
         repaint();
     }
 
@@ -646,7 +922,7 @@ public final class ArenaCardBrowser extends JPanel {
             bottomSide.remove(item.card);
             target.add(Math.min(index, target.size()), item.card);
         } else if (allowTop && allowBottom) {
-            // a click sends the card across the gap, next to it
+            // a click sends the card across to the other well, next to it
             if (wasOnTop) {
                 topSide.remove(item.card);
                 bottomSide.add(0, item.card);
@@ -657,179 +933,218 @@ public final class ArenaCardBrowser extends JPanel {
         }
         dragItem = null;
         dropMarkerX = -1;
+        stackArranged();
+        startAnimation();
         revalidate();
         repaint();
     }
 
-    private void paintArrangeGuides(final Graphics2D g) {
+    private void paintDropMarker(final Graphics2D g) {
+        if (dropMarkerX < 0) {
+            return;
+        }
+        ArenaDialogKit.quality(g);
+        final int half = slotH / 2 + 6;
+        final int bar = Math.max(3, Math.round(getHeight() * 0.004f));
+        g.setColor(ArenaTheme.alpha(ArenaDialogKit.PICKED, 70));
+        g.fillRoundRect(dropMarkerX - bar * 2, slotCentreY - half, bar * 4, half * 2, bar * 4, bar * 4);
+        g.setColor(ArenaDialogKit.PICKED);
+        g.fillRoundRect(dropMarkerX - bar / 2, slotCentreY - half, bar, half * 2, bar, bar);
+    }
+
+    /** Whether this is one row in order, its numbers on a rail with its two ends named under it. */
+    private boolean railed() {
+        return topLabel != null && topArea != null;
+    }
+
+    private int railWidth() {
+        final int n = topSide.size();
+        return slotW + Math.max(0, n - 1) * sideStep(n, topArea);
+    }
+
+    private int railLeft() {
+        return topArea.x + (topArea.width - railWidth()) / 2;
+    }
+
+    /** What each side means and the divider between the two, and a hollow where a side has no cards. */
+    private void paintArrangeGuides(final Graphics2D g, final int w, final int h) {
         final Localizer localizer = Localizer.getInstance();
-        g.setFont(FSkin.getBoldFont(16).getBaseFont());
-        final FontMetrics fm = g.getFontMetrics();
-        final Rectangle[] areas = {allowTop ? topArea : null, allowBottom ? bottomArea : null};
-        final String[] labels = {topLabel != null ? topLabel : localizer.getMessage("lblArenaTop"), localizer.getMessage("lblArenaBottom")};
-        final List<?>[] sides = {topSide, bottomSide};
-        for (int i = 0; i < 2; i++) {
-            final Rectangle area = areas[i];
-            if (area == null) {
-                continue;
-            }
-            g.setColor(ArenaTheme.GOLD);
-            g.drawString(labels[i], area.x + (area.width - fm.stringWidth(labels[i])) / 2, area.y - 10);
-            if (sides[i].isEmpty() || (sides[i].size() == 1 && dragItem != null && sides[i].contains(dragItem.card))) {
-                g.setColor(ArenaTheme.alpha(ArenaTheme.GOLD, 90));
-                g.setStroke(new BasicStroke(1.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1f, new float[] {6f, 6f}, 0f));
-                g.drawRoundRect(area.x + GLOW, area.y + GLOW + LIFT, area.width - 2 * GLOW - 4, area.height - 2 * GLOW - LIFT, 14, 14);
+        ArenaDialogKit.quality(g);
+        final boolean both = allowTop && allowBottom;
+        final int rowTop = slotCentreY - slotH / 2, rowBottom = slotCentreY + slotH / 2;
+        if (railed()) {
+            // a row in order says what each of its ends means, under the number at that end
+            final int left = railLeft(), right = left + railWidth(), n = topSide.size();
+            final boolean overlapped = n > 1 && sideStep(n, topArea) < slotW;
+            final int inset = overlapped ? Math.round(ArenaDialogKit.badgeSize(h) * 0.8f) : slotW / 2;
+            ArenaDialogKit.paintRailEnds(g, topLabel, ArenaDialogKit.lastCaption(topLabel), left + inset, right - slotW + inset, rowBottom + ArenaDialogKit.orderRowDrop(h), h);
+            return;
+        }
+        if (allowTop && topArea != null) {
+            ArenaDialogKit.paintRowLabel(g, localizer.getMessage("lblArenaTop"), sideCx(topSide, topArea), labelY, h);
+            if (isEmptyAsShown(topSide)) {
+                ArenaDialogKit.paintSlot(g, slotCx(topArea), slotCentreY, slotW, slotH);
             }
         }
-        if (allowTop && allowBottom) {
-            g.setColor(ArenaTheme.alpha(ArenaTheme.GOLD, 120));
-            g.setStroke(new BasicStroke(2f));
-            g.drawLine(gapCenterX, topArea.y + GLOW, gapCenterX, topArea.y + topArea.height - GLOW);
+        if (allowBottom && bottomArea != null) {
+            ArenaDialogKit.paintRowLabel(g, localizer.getMessage("lblArenaBottom"), sideCx(bottomSide, bottomArea), labelY, h);
+            if (isEmptyAsShown(bottomSide)) {
+                ArenaDialogKit.paintSlot(g, slotCx(bottomArea), slotCentreY, slotW, slotH);
+            }
         }
-        if (dropMarkerX >= 0) {
-            g.setColor(ArenaTheme.GOLD_BRIGHT);
-            g.setStroke(new BasicStroke(4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            g.drawLine(dropMarkerX + 2, topArea != null ? topArea.y + GLOW : bottomArea.y + GLOW,
-                    dropMarkerX + 2, (topArea != null ? topArea : bottomArea).y + (topArea != null ? topArea : bottomArea).height - GLOW);
+        if (both) {
+            // a line of 2px between the two groups, from their labels to below their numbers, fading out only at its very ends
+            final int y0 = labelY - Math.round(h * 0.022f), y1 = rowBottom + ArenaDialogKit.badgeSize(h) + Math.round(h * 0.016f);
+            g.setPaint(new LinearGradientPaint(0, y0, 0, y1, new float[] {0f, 0.1f, 0.9f, 1f},
+                    new Color[] {new Color(255, 255, 255, 0), new Color(255, 255, 255, 215), new Color(255, 255, 255, 215), new Color(255, 255, 255, 0)}));
+            g.fillRect(gapCenterX - 1, y0, 2, y1 - y0);
         }
     }
 
-    private void paintBackdrop(final Graphics2D g, final int w, final int h) {
-        if (viewingBattlefield) {
-            return;
-        }
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g.setColor(new Color(4, 6, 11, 205));
-        g.fillRect(0, 0, w, h);
+    private boolean isEmptyAsShown(final List<CardView> side) {
+        return side.isEmpty() || (side.size() == 1 && dragMoved && dragItem != null && side.contains(dragItem.card));
+    }
 
-        // title, a fading rule beneath it, and the instruction
-        g.setFont(FSkin.getBoldFont(40).getBaseFont());
-        FontMetrics fm = g.getFontMetrics();
-        final int titleY = Math.round(h * 0.075f) + fm.getAscent();
-        g.setColor(ArenaTheme.TEXT);
-        g.drawString(title, (w - fm.stringWidth(title)) / 2, titleY);
-        final int ruleY = titleY + 12, ruleW = Math.min(w / 2, 640);
-        g.setPaint(new GradientPaint((w - ruleW) / 2f, 0, ArenaTheme.alpha(ArenaTheme.GOLD, 0), w / 2f, 0, ArenaTheme.GOLD, true));
-        g.setStroke(new BasicStroke(1.5f));
-        g.drawLine((w - ruleW) / 2, ruleY, (w + ruleW) / 2, ruleY);
-        // a live selection takes its instruction from the prompt, which the input keeps current
+    /** The line under the title; a live selection takes it from the prompt, which the input keeps current. */
+    private String headingLine() {
         final String instruction = mode == Mode.SELECTION ? matchUI.getCPrompt().getView().getTarMessage().getText() : subtitle;
-        if (instruction != null && !instruction.isEmpty()) {
-            g.setFont(FSkin.getFont(17).getBaseFont());
-            fm = g.getFontMetrics();
-            String line = instruction.replaceAll("(?s)<head>.*?</head>", "").replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim();
-            while (line.length() > 1 && fm.stringWidth(line) > w - 120) {
-                line = line.substring(0, line.length() - 2) + "…";
-            }
-            g.setColor(ArenaTheme.TEXT_DIM);
-            g.drawString(line, (w - fm.stringWidth(line)) / 2, ruleY + 10 + fm.getAscent());
-        }
+        final String line = instruction == null ? null : ArenaDialogKit.plainText(instruction);
+        return line == null || line.isEmpty() || ArenaDialogKit.sameWords(line, title) ? null : line;
+    }
 
+    /** What stands in for a title too long to be one. */
+    private String fallbackTitle() {
+        return Localizer.getInstance().getMessage(mode == Mode.ARRANGE ? "lblArenaChooseOrder" : "lblArenaChooseCards");
+    }
+
+    private void paintScene(final Graphics2D g, final int w, final int h) {
+        ArenaDialogKit.paintBackdrop(g, backdrop, w, h);
+        ArenaDialogKit.paintHeading(g, title, headingLine(), fallbackTitle(), w, h);
         if (mode == Mode.ARRANGE) {
-            paintArrangeGuides(g);
+            paintArrangeGuides(g, w, h);
+        } else if (anySelectable() && fanRight > fanLeft) {
+            ArenaDialogKit.paintRowShards(g, fanLeft, fanRight, fanFoot, h, this::lightAt);
         }
-
         // the card the prompt is about, large on the right
         if (focusCard != null) {
-            final int fh = Math.round(h * 0.4f), fw = focusWidth();
-            if (focusImage == null) {
-                focusImage = new CachedCardImage(focusCard, matchUI.getLocalPlayers(), fw, fh) {
+            final Rectangle r = ArenaDialogKit.sourceBounds(w, h);
+            if (focusImage == null || focusImage.getImage() == null) {
+                focusImage = new CachedCardImage(focusCard, matchUI.getLocalPlayers(), r.width, r.height) {
                     @Override
                     public void onImageFetched() {
                         ArenaCardBrowser.this.repaint();
                     }
                 };
             }
-            paintCard(g, focusImage.getImage(), w - fw - 48, Math.round(h * 0.18f), fw, fh, ArenaTheme.PLAYABLE, 220);
+            final BufferedImage src = focusImage.getImage();
+            if (focusFace == null || src != focusSource || focusFace.getWidth() != r.width + 2 * ArenaDialogKit.FACE_PAD) {
+                focusFace = ArenaDialogKit.cardFace(src, r.width, r.height);
+                focusSource = src;
+            }
+            ArenaDialogKit.paintSource(g, focusFace, r, true);
         }
     }
 
-    static void paintCard(final Graphics2D g, final BufferedImage img, final int x, final int y, final int w, final int h,
-            final Color glow, final int glowStrength) {
-        final int arc = Math.round(w * 0.07f);
-        if (glow != null) {
-            ArenaTheme.paintGlow(g, x, y, w, h, arc, glow, GLOW - 2, glowStrength);
+    private boolean anySelectable() {
+        if (mode == Mode.CHOOSE) {
+            return true;
         }
-        final RoundRectangle2D shape = new RoundRectangle2D.Float(x, y, w, h, arc, arc);
-        final Shape oldClip = g.getClip();
-        g.clip(shape);
-        g.setColor(ArenaTheme.NAVY);
-        g.fill(shape);
-        if (img != null) {
-            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-            final float scale = Math.min(w / (float) img.getWidth(), h / (float) img.getHeight());
-            final int iw = Math.round(img.getWidth() * scale), ih = Math.round(img.getHeight() * scale);
-            g.drawImage(img, x + (w - iw) / 2, y + (h - ih) / 2, iw, ih, null);
-        }
-        g.setClip(oldClip);
-        if (glow != null) {
-            g.setColor(glow);
-            g.setStroke(new BasicStroke(2f));
-            g.draw(shape);
-        }
-    }
-
-    /** A gold disc with a number, centred on {@code cx, cy}. */
-    private static void paintPlace(final Graphics2D g, final int place, final int cx, final int cy) {
-        final int d = 26;
-        g.setColor(ArenaTheme.NIGHT);
-        g.fillOval(cx - d / 2, cy - d / 2, d, d);
-        g.setColor(ArenaTheme.GOLD_BRIGHT);
-        g.setStroke(new BasicStroke(2f));
-        g.drawOval(cx - d / 2, cy - d / 2, d, d);
-        g.setFont(FSkin.getBoldFont(15).getBaseFont());
-        final FontMetrics fm = g.getFontMetrics();
-        final String n = String.valueOf(place);
-        g.drawString(n, cx - fm.stringWidth(n) / 2, cy + (fm.getAscent() - fm.getDescent()) / 2);
-    }
-
-    /** A slim gold thumb on a faint track, with no arrow buttons. */
-    static final class ThinScrollBarUI extends BasicScrollBarUI {
-        @Override
-        protected JButton createDecreaseButton(final int orientation) {
-            return createZeroButton();
-        }
-
-        @Override
-        protected JButton createIncreaseButton(final int orientation) {
-            return createZeroButton();
-        }
-
-        private static JButton createZeroButton() {
-            final JButton button = new JButton();
-            button.setPreferredSize(new Dimension(0, 0));
-            return button;
-        }
-
-        @Override
-        protected void paintTrack(final Graphics g, final JComponent c, final Rectangle r) {
-            g.setColor(new Color(255, 255, 255, 28));
-            if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
-                g.fillRoundRect(r.x + r.width / 2 - 2, r.y, 4, r.height, 4, 4);
-            } else {
-                g.fillRoundRect(r.x, r.y + r.height / 2 - 2, r.width, 4, 4, 4);
+        if (mode == Mode.SELECTION) {
+            for (final CardView card : cards) {
+                if (matchUI.isSelectable(card)) {
+                    return true;
+                }
             }
         }
+        return false;
+    }
 
-        @Override
-        protected void paintThumb(final Graphics g, final JComponent c, final Rectangle r) {
-            final Graphics2D g2 = (Graphics2D) g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(ArenaTheme.GOLD);
-            if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
-                g2.fillRoundRect(r.x + 1, r.y, r.width - 2, r.height, r.width, r.width);
-            } else {
-                g2.fillRoundRect(r.x, r.y + 1, r.width, r.height - 2, r.height, r.height);
+    /** The colour of the rim of the card that stands over this x of the window. */
+    private Color lightAt(final int x) {
+        CardItem nearest = null;
+        int best = Integer.MAX_VALUE;
+        final int view = scroller.getX() - scroller.getViewport().getViewPosition().x;
+        for (final CardItem item : items) {
+            final int away = Math.abs(view + item.getX() + item.getWidth() / 2 - x);
+            if (away < best) {
+                best = away;
+                nearest = item;
             }
+        }
+        return nearest != null && isChosen(nearest.card) ? ArenaDialogKit.PICKED : ArenaDialogKit.CYAN;
+    }
+
+    private static int itemSpread(final int h) {
+        return Math.max(14, Math.round(h * 0.029f));
+    }
+
+    private void startAnimation() {
+        if (!animation.isRunning()) {
+            animation.start();
         }
     }
 
-    /** One card in the row: raised with a gold glow once chosen, blue while it can be picked. */
+    private void stepAnimation() {
+        boolean moving = false;
+        for (final CardItem item : items) {
+            moving |= item.step();
+        }
+        if (mode == Mode.ARRANGE) {
+            repaint();
+        } else {
+            if (moving && !viewingBattlefield && getWidth() > 0) {
+                layoutRow(getWidth(), getHeight()); // the neighbours of a chosen card move aside
+            }
+            strip.repaint();
+        }
+        if (!moving) {
+            animation.stop();
+        }
+    }
+
+    /** Cards raised by the mouse lie above the whole row, the one under the mouse above them all. */
+    private void paintRaised(final Graphics2D g) {
+        CardItem top = null;
+        for (final CardItem item : items) {
+            if (item.isRaised()) {
+                if (item.hover || item == dragItem) {
+                    top = item;
+                } else {
+                    paintItemOnTop(g, item);
+                }
+            }
+        }
+        if (top != null) {
+            paintItemOnTop(g, top);
+        }
+    }
+
+    private static void paintItemOnTop(final Graphics2D g, final CardItem item) {
+        final Graphics2D c = (Graphics2D) g.create(item.getX(), item.getY(), item.getWidth(), item.getHeight());
+        try {
+            item.draw(c);
+        } finally {
+            c.dispose();
+        }
+    }
+
+    /** One card in the row: a cyan rim while it can be picked, a gold one once chosen. */
     private final class CardItem extends JComponent {
         private final CardView card;
+        private final ArenaDialogKit.Sprite sprite = new ArenaDialogKit.Sprite();
         private CachedCardImage image;
+        private BufferedImage face;
+        private BufferedImage faceSource;
+        private int faceQ;
         private boolean hover;
+        private float hoverT;
+        private float riseT;
+        private int cw;
+        private int ch;
+        private int restX;
+        private int restY;
+        private float angle;
+        private boolean overlapped;
 
         CardItem(final CardView card) {
             this.card = card;
@@ -838,13 +1153,13 @@ public final class ArenaCardBrowser extends JPanel {
                 public void mouseEntered(final MouseEvent e) {
                     hover = true;
                     matchUI.setCard(card);
-                    repaint();
+                    startAnimation();
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
                     hover = false;
-                    repaint();
+                    startAnimation();
                 }
 
                 @Override
@@ -873,50 +1188,149 @@ public final class ArenaCardBrowser extends JPanel {
             });
         }
 
+        /** Rests the card with its centre on {@code cx, cy}; the bounds leave room to lift, tilt and glow. */
+        void place(final int cx, final int cy, final int cw0, final int ch0, final float angle0) {
+            if (cw0 != cw || ch0 != ch) {
+                image = null;
+                face = null;
+                cw = cw0;
+                ch = ch0;
+            }
+            angle = angle0;
+            // enough for the largest it can get: tilted, scaled, lifted and glowing
+            final int reach = Math.round(itemSpread(ArenaCardBrowser.this.getHeight()) * 1.5f) + 6;
+            final int lift = Math.round(ArenaCardBrowser.this.getHeight() * HOVER_LIFT);
+            final int mx = Math.round(ch * 0.04f) + Math.round(cw * 0.05f) + reach;
+            final int my = Math.round(cw * 0.04f) + Math.round(ch * 0.05f) + reach;
+            restX = mx + cw / 2;
+            restY = my + lift + ch / 2;
+            setBounds(cx - restX, cy - restY, cw + 2 * mx, ch + 2 * my + lift);
+        }
+
+        boolean isRaised() {
+            return hoverT > 0f || hover || this == dragItem;
+        }
+
+        /** Moves towards where the card should be; true while it is still on its way. */
+        boolean step() {
+            final float hoverGoal = hover || this == dragItem ? 1f : 0f, riseGoal = isChosen(card) ? 1f : 0f;
+            final float h0 = hoverT, r0 = riseT;
+            hoverT = approach(hoverT, hoverGoal, 0.2f);
+            riseT = approach(riseT, riseGoal, 0.2f);
+            return h0 != hoverT || r0 != riseT;
+        }
+
+        private float approach(final float from, final float to, final float by) {
+            return from < to ? Math.min(to, from + by) : Math.max(to, from - by);
+        }
+
+        /** How far the mouse has raised this card; a chosen card stays in its place in the arc even under the mouse. */
+        private float raised() {
+            return hoverT * (1f - riseT);
+        }
+
+        private float lift() {
+            if (mode == Mode.ARRANGE) {
+                return 0f; // a row split by a divider stays on its one baseline
+            }
+            return ArenaCardBrowser.this.getHeight() * HOVER_LIFT * raised();
+        }
+
+        private float scale() {
+            return mode == Mode.ARRANGE ? 1f : Math.max(1f + (HOVER_SCALE - 1f) * raised(), 1f + (CHOSEN_SCALE - 1f) * riseT);
+        }
+
+        private float tilt() {
+            return angle * (1f - raised());
+        }
+
+        @Override
+        public boolean contains(final int x, final int y) {
+            if (cw == 0) {
+                return false;
+            }
+            if (ArenaDialogKit.inRotated(x, y, restX, restY, cw / 2f, ch / 2f, angle)) {
+                return true;
+            }
+            // what is raised can be grabbed where it now is, too
+            final float lift = lift(), scale = scale();
+            return lift > 0f && ArenaDialogKit.inRotated(x, y, restX, restY - lift, scale * cw / 2f, scale * ch / 2f, tilt());
+        }
+
         @Override
         protected void paintComponent(final Graphics g0) {
-            final Graphics2D g = (Graphics2D) g0.create();
-            try {
-                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                final int cw = getWidth() - 2 * GLOW, ch = getHeight() - 2 * GLOW - LIFT;
-                if (image == null) {
-                    image = new CachedCardImage(card, matchUI.getLocalPlayers(), cw, ch) {
-                        @Override
-                        public void onImageFetched() {
-                            repaint();
-                        }
-                    };
+            if (!isRaised()) {
+                final Graphics2D g = (Graphics2D) g0.create();
+                try {
+                    draw(g);
+                } finally {
+                    g.dispose();
                 }
-                final boolean isChosen = isChosen(card);
-                final Color glow;
-                if (isChosen) {
-                    glow = ArenaTheme.GOLD_BRIGHT;
-                } else if (this == dragItem) {
-                    glow = ArenaTheme.GOLD;
-                } else if (mode == Mode.CHOOSE || mode == Mode.ARRANGE || (mode == Mode.SELECTION && matchUI.isSelectable(card))) {
-                    glow = ArenaTheme.PLAYABLE;
-                } else {
-                    glow = hover ? ArenaTheme.HOVER : null;
-                }
-                final int y = isChosen || hover ? GLOW : GLOW + LIFT;
-                if (mode == Mode.CHOOSE && !isChosen && chosen.size() >= max && max > 1) {
-                    // the limit is reached; the rest wait dimmed
-                    g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.55f));
-                }
-                paintCard(g, image.getImage(), GLOW, y, cw, ch, glow, hover || isChosen ? 255 : 170);
-                // the order matters: number the picks, or the places along a one-sided row
-                int place = 0;
-                if (mode == Mode.CHOOSE && max > 1 && isChosen) {
-                    place = chosen.indexOf(card) + 1;
-                } else if (mode == Mode.ARRANGE && allowTop != allowBottom) {
-                    place = (allowTop ? topSide : bottomSide).indexOf(card) + 1;
-                }
-                if (place > 0) {
-                    paintPlace(g, place, GLOW + cw / 2, y + ch);
-                }
-            } finally {
-                g.dispose();
             }
+        }
+
+        void draw(final Graphics2D g) {
+            ArenaDialogKit.quality(g);
+            // a row that lies flat and scrolls can be long; every other card may be rotated, so it comes from twice the pixels
+            final int q = rowScrolls ? 1 : 2;
+            if (q != faceQ) {
+                faceQ = q;
+                image = null;
+                face = null;
+            }
+            if (image == null) {
+                image = new CachedCardImage(card, matchUI.getLocalPlayers(), cw * q, ch * q) {
+                    @Override
+                    public void onImageFetched() {
+                        ArenaCardBrowser.this.repaint();
+                    }
+                };
+            }
+            final BufferedImage src = image.getImage();
+            if (face == null || src != faceSource) {
+                face = ArenaDialogKit.cardFace(src, cw, ch, q);
+                faceSource = src;
+            }
+            final boolean picked = isChosen(card);
+            final int bh = ArenaCardBrowser.this.getHeight();
+            final ArenaDialogKit.Glow glow;
+            if (picked || this == dragItem) {
+                glow = ArenaDialogKit.chosenGlow(bh);
+            } else if (mode == Mode.CHOOSE || mode == Mode.ARRANGE || (mode == Mode.SELECTION && matchUI.isSelectable(card))) {
+                glow = ArenaDialogKit.selectableGlow(bh, hover ? 1.3f : 1f);
+            } else {
+                glow = hover ? ArenaDialogKit.plainGlow(bh) : null;
+            }
+            // the limit is reached; the rest wait dimmed
+            final boolean dimmed = mode == Mode.CHOOSE && !picked && chosen.size() >= max && max > 1;
+            sprite.draw(g, face, q, restX, Math.round(restY - lift()), tilt(), scale(), dimmed ? null : glow, dimmed);
+            if (!railed()) {
+                drawBadge(g);
+            }
+        }
+
+        /** The order matters: the number of a pick straddling the card's bottom edge, or of a place in the row below the card or on its rail. */
+        void drawBadge(final Graphics2D g) {
+            int place = 0;
+            if (mode == Mode.CHOOSE && max > 1 && isChosen(card)) {
+                place = chosen.indexOf(card) + 1;
+            } else if (mode == Mode.ARRANGE) {
+                place = (topSide.contains(card) ? topSide : bottomSide).indexOf(card) + 1;
+            }
+            if (place <= 0) {
+                return;
+            }
+            final int bh = ArenaCardBrowser.this.getHeight();
+            final int d = ArenaDialogKit.badgeSize(bh);
+            final float scale = scale();
+            final double rad = Math.toRadians(tilt());
+            final boolean inRow = mode == Mode.CHOOSE || overlapped;
+            final double bx = inRow ? -scale * cw / 2d + d * 0.8 : 0d;
+            final int below = railed() ? ArenaDialogKit.railDrop(bh) : mode == Mode.ARRANGE ? d / 2 + Math.round(bh * 0.006f) : 0;
+            final double by = scale * ch / 2d + below;
+            final int px = restX + (int) Math.round(bx * Math.cos(rad) - by * Math.sin(rad));
+            final int py = Math.round(restY - lift()) + (int) Math.round(bx * Math.sin(rad) + by * Math.cos(rad));
+            ArenaDialogKit.paintBadge(g, place, px, py, d);
         }
     }
 }

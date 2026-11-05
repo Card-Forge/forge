@@ -287,8 +287,15 @@ public class VStack implements IVDoc<CStack> {
             final CardStateView curState = item.getSourceCard().getCurrentState();
             final boolean isFaceDown = item.getSourceCard().isFaceDown();
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(curState, true); // otherwise doesn't work correctly for face down Morphs
-            setBackground(new Color(color.r, color.g, color.b));
-            setForeground(FSkin.getHighContrastColor(getBackground()));
+            if (ArenaTheme.isMatchBoard()) {
+                setBackground(new Color(14, 16, 22));
+                setForeground(ArenaTheme.TEXT);
+                setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                        javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new Color(color.r, color.g, color.b)), getBorder()));
+            } else {
+                setBackground(new Color(color.r, color.g, color.b));
+                setForeground(FSkin.getHighContrastColor(getBackground()));
+            }
             
             this.cachedImage = new CachedCardImage(item.getSourceCard(), controller.getMatchUI().getLocalPlayers(), CARD_WIDTH, CARD_HEIGHT) {
                 @Override

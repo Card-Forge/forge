@@ -45,13 +45,22 @@ public class PhaseIndicator extends JPanel {
      * two rows, beginning of turn through declare blockers, then the rest of the turn.
      */
     public JPanel[] createArenaLadder() {
-        final JPanel first = new JPanel(new MigLayout("insets 0, gap 3, ay center, ax right"));
-        final JPanel second = new JPanel(new MigLayout("insets 0, gap 3, ay center"));
+        final JPanel first = new JPanel(new MigLayout("insets 0, gap 1, ay center, ax right"));
+        final JPanel second = new JPanel(new MigLayout("insets 0, gap 1, ay center"));
         first.setOpaque(false);
         second.setOpaque(false);
         int i = 0;
-        for (final PhaseLabel lbl : phaseLabels.values()) {
-            (i++ < phaseLabels.size() / 2 ? first : second).add(lbl, "w 30!, h 22!");
+        for (final Map.Entry<PhaseType, PhaseLabel> e : phaseLabels.entrySet()) {
+            final int kind = switch (e.getKey()) {
+                case MAIN1, MAIN2 -> PhaseLabel.ARENA_MAIN;
+                case COMBAT_DECLARE_ATTACKERS -> PhaseLabel.ARENA_ATTACK;
+                case COMBAT_DECLARE_BLOCKERS -> PhaseLabel.ARENA_BLOCK;
+                default -> PhaseLabel.ARENA_STEP;
+            };
+            e.getValue().setArenaKind(kind);
+            // the same spacing either side of the portrait: the step between main and attack takes up what the three between block and main do
+            final String size = e.getKey() == PhaseType.COMBAT_BEGIN ? "w 29!, h 34!" : kind == PhaseLabel.ARENA_STEP ? "w 9!, h 34!" : "w 34!, h 34!";
+            (i++ < phaseLabels.size() / 2 ? first : second).add(e.getValue(), size);
         }
         return new JPanel[] {first, second};
     }

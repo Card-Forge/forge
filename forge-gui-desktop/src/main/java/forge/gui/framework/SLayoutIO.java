@@ -388,7 +388,9 @@ public final class SLayoutIO {
         view.getPnlInsets().removeAll();
         view.getPnlInsets().setLayout(new BorderLayout());
         view.getPnlInsets().add(view.getPnlContent(), BorderLayout.CENTER);
-        view.getPnlInsets().setBorder(new EmptyBorder(SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
+        // the Arena board runs right to the window's edges
+        final int edge = forge.toolbox.ArenaTheme.isMatchBoard() ? 0 : SLayoutConstants.BORDER_T;
+        view.getPnlInsets().setBorder(new EmptyBorder(edge, edge, 0, 0));
         view.removeAllDragCells();
 
         FileLocation file = screen.getLayoutFile();

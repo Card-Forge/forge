@@ -18,17 +18,19 @@
 package forge.screens.match.views;
 
 import java.awt.Color;
-import java.awt.BasicStroke;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.LayoutManager;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +40,7 @@ import java.util.WeakHashMap;
 import java.util.function.Supplier;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -61,6 +64,7 @@ import forge.gui.framework.IVDoc;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
+import forge.toolbox.ArenaArt;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -72,6 +76,7 @@ import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.AITimeoutTracker;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import forge.view.FView;
 import forge.view.arcane.PlayArea;
 import net.miginfocom.swing.MigLayout;
 
@@ -102,7 +107,33 @@ public class VField implements IVDoc<CField> {
     private final boolean mirror;
     private boolean avatarHovered;
     private JPanel[] arenaLadder;
+    private JPanel arenaZones;
+    private JPanel arenaExtras;
+    private JComponent arenaHandFan;
+    private boolean arenaSeat;
+    private final Rectangle arenaPortrait = new Rectangle(); // where the portrait goes inside its area
     private final SkinnedPanel avatarArea = new SkinnedPanel() {
+        @Override
+        public void paint(final Graphics g) {
+            // a dialog's button sits where the local portrait is: it is left out of the dialog's backdrop
+            if (ArenaTheme.snapshotting && !mirror) {
+                return;
+            }
+            super.paint(g);
+        }
+
+        @Override
+        public boolean contains(final int x, final int y) {
+            if (!ArenaTheme.isEnabled() || arenaPortrait.isEmpty()) {
+                return super.contains(x, y);
+            }
+            // only the portrait and its plate take the mouse; the frame's glow leaves the cards around it clickable
+            final int cx = arenaPortrait.x + arenaPortrait.width / 2, cy = arenaPortrait.y + arenaPortrait.height / 2;
+            final int r = arenaPortrait.width * 3 / 5;
+            return (x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r
+                    || (Math.abs(x - cx) < r && y >= cy && y <= cy + arenaPortrait.height * 3 / 4);
+        }
+
         @Override
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
@@ -163,26 +194,34 @@ public class VField implements IVDoc<CField> {
         return new Rectangle(r.x + (r.width - d) / 2, r.y + (r.height - d) / 2, d, d);
     }
 
-    /** Arena portrait frame: a glow for target, hover and active-turn states. */
+    /** Behind the portrait: its sculpted plinth, with a sunburst while it is this player's turn. */
     private void paintArenaAvatarFrame(final Graphics2D g) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         final Rectangle c = getAvatarCircleBounds();
-        Color glow = null;
-        if (isHighlighted()) {
-            glow = ArenaTheme.CHOSEN;
-        } else if (control.getMatchUI().isSelectable(player)) {
-            glow = ArenaTheme.SELECTABLE;
-        } else if (avatarHovered) {
-            glow = ArenaTheme.HOVER;
-        } else if (matchUI.getGameView() != null && matchUI.getGameView().getPlayerTurn() == player) {
-            glow = ArenaTheme.PLAYABLE;
-        }
-        if (glow != null && c.width > 0) {
-            ArenaTheme.paintGlow(g, c.x, c.y, c.width, c.height, c.width, glow, Math.max(5, c.width / 7), 240);
+        if (c.width > 0) {
+            final boolean active = !ArenaTheme.snapshotting && matchUI.getGameView() != null && matchUI.getGameView().getPlayerTurn() == player;
+            ArenaArt.paintPortraitFrame(g, c.x + c.width / 2, c.y + c.height / 2, c.width, active, mirror);
         }
     }
 
-    /** The life total in a dark disc overlapping the bottom of the portrait. */
+    /** Whether what is on top of the stack is aimed at this player. */
+    private boolean isArenaStackTarget() {
+        final GameView game = matchUI.getGameView();
+        forge.game.spellability.StackItemView item = game == null ? null : game.peekStack();
+        while (item != null) {
+            if (item.getTargetPlayers() != null) {
+                for (final PlayerView target : item.getTargetPlayers()) {
+                    if (player.equals(target)) {
+                        return true;
+                    }
+                }
+            }
+            item = item.getSubInstance();
+        }
+        return false;
+    }
+
+    /** Over the portrait: its ring, glowing when it can be targeted or is under the mouse, and the life total on its plate. */
     private void paintArenaLifeDisc(final Graphics2D g) {
         final Rectangle c = getAvatarCircleBounds();
         if (c.width <= 0) {
@@ -190,20 +229,21 @@ public class VField implements IVDoc<CField> {
         }
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        final int d = Math.max(26, Math.round(c.width * 0.46f));
-        final int dx = c.x + (c.width - d) / 2;
-        final int dy = Math.min(avatarArea.getHeight() - d - 1, c.y + c.height - d * 2 / 3);
-        final Ellipse2D disc = new Ellipse2D.Float(dx, dy, d, d);
-        g.setPaint(new GradientPaint(0, dy, new Color(0x1E2633), 0, dy + d, new Color(0x07090E)));
-        g.fill(disc);
-        g.setStroke(new BasicStroke(Math.max(1.5f, d / 18f)));
-        g.setColor(ArenaTheme.GOLD);
-        g.draw(disc);
-        final String life = lblLife.getText();
-        g.setFont(FSkin.getBoldFont(Math.max(12, Math.round(d * 0.5f))).getBaseFont());
-        final FontMetrics fm = g.getFontMetrics();
-        g.setColor(player.getLife() > LIFE_CRITICAL ? Color.WHITE : new Color(0xFF6B6B));
-        g.drawString(life, dx + (d - fm.stringWidth(life)) / 2, dy + (d + fm.getAscent() - fm.getDescent()) / 2);
+        Color accent = null;
+        if (isHighlighted()) {
+            accent = ArenaTheme.CHOSEN;
+        } else if (control.getMatchUI().isSelectable(player)) {
+            accent = ArenaTheme.SELECTABLE;
+        } else if (isArenaStackTarget()) {
+            accent = new Color(0xBFEFFF);
+        } else if (avatarHovered) {
+            accent = ArenaTheme.HOVER;
+        }
+        final int cx = c.x + c.width / 2, cy = c.y + c.height / 2;
+        ArenaArt.paintPortraitRing(g, cx, cy, c.width, accent);
+        // a seat's portrait is small, and its life is what matters most about it
+        final int plate = Math.max(22, Math.round(c.width * (arenaSeat ? 0.58f : 0.42f)));
+        ArenaArt.paintLifePlate(g, cx, cy + c.width / 2, plate, lblLife.getText(), ArenaTheme.numeralFont(Font.BOLD, plate * 0.74f));
     }
 
     private void paintAITimeoutBar(final Graphics g) {
@@ -360,59 +400,248 @@ public class VField implements IVDoc<CField> {
     }
 
     /**
-     * Arena layout: the battlefield fills the cell and a player bar runs along the outer
-     * edge (top for opponents, bottom for the local player). The portrait sits in the
-     * middle of the bar between the two halves of the phase ladder, the library,
-     * graveyard and exile piles are on the left, and floating mana (plus an opponent's
-     * hand of card backs) is on the right.
+     * Arena layout: the battlefield fills the cell and everything about the player floats over
+     * it. The portrait with its phase glyphs sits centred on the outer edge, with the back row of
+     * permanents either side of it; the library and graveyard are in the corner of the window,
+     * bottom left for the local player and top right for an opponent, whose hand hangs beside them.
      */
     private void populateArena(final JPanel pnl) {
         final Supplier<Iterable<PlayerView>> viewers = () -> matchUI.getLocalPlayers();
         final GameView gameView = matchUI.getGameView();
         final boolean commander = (gameView != null && gameView.isCommander())
                 || (player.getCommanders() != null && !player.getCommanders().isEmpty());
-        // opponents in a multiplayer game share the top of the board, so their bars drop the phase ladder
-        final boolean compact = mirror && gameView != null && gameView.getPlayers().size() > 2;
+        // opponents in a multiplayer game share the top of the board, each in a seat of their own
+        arenaSeat = mirror && gameView != null && gameView.getPlayers().size() > 2;
         if (arenaLadder == null) {
             arenaLadder = phaseIndicator.createArenaLadder();
         }
-
-        final JPanel center = new JPanel(new MigLayout("insets 0, gap 8, ay center"));
-        center.setOpaque(false);
-        if (!compact) {
-            center.add(arenaLadder[0]);
-        }
-        center.add(avatarArea, compact ? "w 92!, h 100%!" : "w 112!, h 100%!");
-        if (!compact) {
-            center.add(arenaLadder[1]);
-        }
-
+        arenaZones = detailsPanel.createArenaZones(viewers, commander, arenaSeat, mirror);
         arenaCommanderDamage.setOpaque(false);
-        final JPanel right = new JPanel(new MigLayout("insets 0, gap 6, ax right, ay center, hidemode 3"));
-        right.setOpaque(false);
-        right.add(arenaCommanderDamage);
-        right.add(detailsPanel.createArenaManaPool());
-        if (mirror) {
-            right.add(detailsPanel.createArenaHandFan(viewers), compact ? "w 96!, h 100%!" : "w 150!, h 100%!");
-        }
-
-        final String columns = compact ? "[40%][grow, center][34%]" : "[30%][grow, center][30%]";
-        final JPanel bar = new JPanel(new MigLayout("insets 2 8 2 8, gap 0", columns, "[grow, fill]"));
-        bar.setOpaque(false);
-        bar.add(detailsPanel.createArenaZones(viewers, commander, compact), "al left, h 100%!");
-        bar.add(center, "h 100%!");
-        bar.add(right, "al right, h 100%!");
+        arenaExtras = new JPanel(new MigLayout("insets 0, gap 6, ax center, ay center, hidemode 3"));
+        arenaExtras.setOpaque(false);
+        arenaExtras.add(arenaCommanderDamage);
+        arenaExtras.add(detailsPanel.createArenaManaPool());
         updateArenaCommanderDamage();
 
-        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap 1"));
+        // the board fits itself to the window: no part of it ever scrolls
+        scroller.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scroller.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        avatarArea.setLayout(new ArenaAvatarLayout());
+        pnl.setLayout(new ArenaFieldLayout());
+        // what is added first is in front
+        pnl.add(arenaName);
+        pnl.add(arenaExtras);
+        pnl.add(arenaZones);
         if (mirror) {
-            pnl.add(bar, "w 100%!, h 27%!");
-            pnl.add(scroller, "w 100%!, h 73%!");
-        } else {
-            // the local battlefield is taller, so the same bar height sits lower on screen
-            pnl.add(scroller, "w 100%!, h 76%!");
-            pnl.add(bar, "w 100%!, h 24%!");
+            arenaHandFan = detailsPanel.createArenaHandFan(viewers);
+            pnl.add(arenaHandFan);
         }
+        if (!arenaSeat) {
+            pnl.add(arenaLadder[0]);
+            pnl.add(arenaLadder[1]);
+        }
+        pnl.add(avatarArea);
+        pnl.add(scroller);
+        if (arenaSeat) {
+            pnl.add(arenaSeatBack);
+        }
+    }
+
+    /** Puts the floating parts of the player's area where they belong, sized from the window's height. */
+    private final class ArenaFieldLayout implements LayoutManager {
+        @Override
+        public void addLayoutComponent(final String name, final Component comp) { }
+
+        @Override
+        public void removeLayoutComponent(final Component comp) { }
+
+        @Override
+        public Dimension preferredLayoutSize(final Container c) {
+            return c.getSize();
+        }
+
+        @Override
+        public Dimension minimumLayoutSize(final Container c) {
+            return new Dimension(0, 0);
+        }
+
+        @Override
+        public void layoutContainer(final Container c) {
+            final JPanel content = FView.SINGLETON_INSTANCE.getPnlContent();
+            final int w = c.getWidth(), h = c.getHeight();
+            final int wh = Math.max(1, content.getHeight());
+            final int top = SwingUtilities.isDescendingFrom(c, content) ? SwingUtilities.convertPoint(c, 0, 0, content).y : 0;
+            final int cx = w / 2;
+            scroller.setBounds(0, 0, w, h);
+            // a gutter between neighbouring seats
+            final int gutter = Math.round(content.getWidth() * 0.0075f);
+            arenaSeatBack.setBounds(gutter, 2, Math.max(0, w - 2 * gutter), Math.round(wh * 0.345f));
+
+            final int d = Math.round(wh * (arenaSeat ? 0.066f : 0.125f));
+            final int portraitY;
+            if (!mirror) {
+                portraitY = Math.round(wh * 0.778f) - top;
+            } else if (arenaSeat) {
+                portraitY = Math.round(wh * 0.008f) + d / 2 - top;
+            } else {
+                portraitY = Math.round(d * 0.62f) - top; // hangs from the top of the window
+            }
+            // big enough for the frame's sunburst; contains() keeps the mouse to the portrait itself
+            final int areaW = Math.round(d * 4.5f);
+            final int areaTop = portraitY - Math.round(d * 1.2f);
+            arenaPortrait.setBounds(areaW / 2 - d / 2, portraitY - areaTop - d / 2, d, d);
+            avatarArea.setBounds(cx - areaW / 2, areaTop, areaW, Math.round(d * 2.4f));
+            avatarArea.revalidate();
+
+            if (!arenaSeat) {
+                final Dimension left = arenaLadder[0].getPreferredSize(), right = arenaLadder[1].getPreferredSize();
+                arenaLadder[0].setBounds(cx - Math.round(d * 0.62f) - left.width, portraitY - left.height / 2, left.width, left.height);
+                arenaLadder[1].setBounds(cx + Math.round(d * 0.62f), portraitY - right.height / 2, right.width, right.height);
+            }
+
+            final int cog = Math.round(wh * 0.075f); // the settings buttons keep the very corner
+            final int nameH = Math.round(wh * 0.03f);
+            if (!mirror) {
+                final int zonesH = Math.round(wh * 0.135f);
+                arenaZones.setBounds(Math.round(wh * 0.012f), Math.round(wh * 0.822f) - top, Math.round(w * 0.16f), zonesH);
+                arenaName.setBounds(Math.round(wh * 0.014f), Math.round(wh * 0.962f) - top, Math.round(w * 0.16f), nameH);
+            } else if (arenaSeat) {
+                final int zonesH = Math.round(wh * 0.076f);
+                final int zonesX = cx + Math.round(d * 0.7f);
+                // the seat under the corner buttons stops short of them
+                final int cellRight = SwingUtilities.isDescendingFrom(c, content) ? SwingUtilities.convertPoint(c, w, 0, content).x : w;
+                final int reserve = cellRight >= content.getWidth() - 4 ? Math.max(Math.round(wh * 0.075f), Math.round(content.getWidth() * 0.06f)) : 14;
+                arenaZones.setBounds(zonesX, Math.round(wh * 0.008f), Math.max(0, w - zonesX - reserve), zonesH);
+                final int fanW = Math.round(wh * 0.1f);
+                arenaHandFan.setBounds(cx - Math.round(d * 0.7f) - fanW, Math.round(wh * -0.012f), fanW, Math.round(wh * 0.085f));
+                arenaName.setBounds(Math.round(content.getWidth() * 0.0075f) + 10, 8, Math.max(40, cx - Math.round(d * 0.7f) - fanW - 16), nameH);
+            } else {
+                // piles alone in the corner, clear of the settings buttons; the hand hangs beside the portrait
+                final int zonesH = Math.round(wh * 0.118f);
+                final int zonesW = Math.round(w * 0.15f);
+                final int zonesRight = w - Math.max(cog, Math.round(w * 0.06f));
+                arenaZones.setBounds(zonesRight - zonesW, Math.round(wh * 0.006f), zonesW, zonesH);
+                final int fanW = Math.round(wh * 0.26f);
+                arenaHandFan.setBounds(cx - Math.round(d * 1.6f) - Math.round(content.getWidth() * 0.015f) - fanW, Math.round(wh * -0.045f), fanW, Math.round(wh * 0.105f));
+                arenaName.setBounds(Math.round(wh * 0.014f), Math.round(wh * 0.008f), Math.round(w * 0.2f), nameH);
+            }
+
+            final Dimension extras = arenaExtras.getPreferredSize();
+            if (arenaSeat) {
+                arenaExtras.setBounds(cx - extras.width / 2, Math.round(wh * 0.178f), extras.width, extras.height);
+            } else {
+                arenaExtras.setBounds(cx + Math.round(d * 1.7f), portraitY - extras.height / 2, extras.width, extras.height);
+            }
+        }
+    }
+
+    /** Inside the portrait's area: the portrait where the field put it, and any poison or energy chips beside its life plate. */
+    private final class ArenaAvatarLayout implements LayoutManager {
+        @Override
+        public void addLayoutComponent(final String name, final Component comp) { }
+
+        @Override
+        public void removeLayoutComponent(final Component comp) { }
+
+        @Override
+        public Dimension preferredLayoutSize(final Container c) {
+            return c.getSize();
+        }
+
+        @Override
+        public Dimension minimumLayoutSize(final Container c) {
+            return new Dimension(0, 0);
+        }
+
+        @Override
+        public void layoutContainer(final Container c) {
+            final Rectangle r = arenaPortrait;
+            lblAvatar.setBounds(r);
+            int x = r.x + r.width + 4;
+            final int y = r.y + r.height / 2;
+            for (final Component comp : c.getComponents()) {
+                if (comp == lblAvatar) {
+                    continue;
+                }
+                if (comp == lblLife) {
+                    comp.setBounds(0, 0, 0, 0); // the life total is painted on its plate
+                } else {
+                    comp.setBounds(x, y, 46, 22);
+                    x += 48;
+                }
+            }
+        }
+    }
+
+    /** The player's name in the corner on a dark plate, whatever the board behind it is doing. */
+    private final JComponent arenaName = new JComponent() {
+        @Override
+        protected void paintComponent(final Graphics g0) {
+            final Graphics2D g = (Graphics2D) g0.create();
+            try {
+                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                g.setFont(ArenaTheme.displayFont(Font.BOLD, Math.max(13f, getHeight() * 0.62f)));
+                final FontMetrics fm = g.getFontMetrics();
+                final String name = player.getName();
+                final int h = getHeight() - 2, d = Math.max(6, h / 3);
+                final int textX = 12 + d + 8;
+                g.setColor(new Color(6, 7, 11, 150));
+                g.fillRoundRect(0, 0, Math.min(getWidth() - 1, textX + fm.stringWidth(name) + 14), h, h, h);
+                g.setColor(ArenaTheme.GOLD);
+                final int mx = 12 + d / 2, my = h / 2;
+                g.fillPolygon(new int[] {mx - d / 2, mx, mx + d / 2, mx}, new int[] {my, my - d / 2 - 1, my, my + d / 2 + 1}, 4);
+                g.setColor(Color.WHITE);
+                g.drawString(name, textX, (h + fm.getAscent() - fm.getDescent()) / 2);
+            } finally {
+                g.dispose();
+            }
+        }
+    };
+
+    /**
+     * Each seat is a pane of its own: dark glass that fades out towards the middle of the board, so it
+     * has sides and a top but no hard bottom edge. The seat whose turn it is has a gold rim and a pool of light.
+     */
+    private final JComponent arenaSeatBack = new JComponent() {
+        @Override
+        protected void paintComponent(final Graphics g0) {
+            final int w = getWidth(), h = getHeight();
+            if (w <= 0 || h <= 0) {
+                return;
+            }
+            final boolean active = matchUI.getGameView() != null && matchUI.getGameView().getPlayerTurn() == player;
+            final Graphics2D g = (Graphics2D) g0.create();
+            try {
+                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                final int arc = Math.max(12, h / 14);
+                final Color glass = new Color(6, 8, 13);
+                g.setPaint(new java.awt.GradientPaint(0, 0, ArenaTheme.alpha(glass, 85), 0, h, ArenaTheme.alpha(glass, 0)));
+                g.fillRoundRect(0, 0, w, h + arc, arc, arc);
+                if (active) {
+                    g.setPaint(new java.awt.RadialGradientPaint(w / 2f, 0f, w * 0.62f, new float[] {0f, 1f},
+                            new Color[] {ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, 80), ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, 0)}));
+                    g.fillRect(0, 0, w, h);
+                }
+                if (active) {
+                    final Color rim = new Color(0xFFC85A);
+                    g.setPaint(new java.awt.GradientPaint(0, 0, ArenaTheme.alpha(rim, 245), 0, h * 0.86f, ArenaTheme.alpha(rim, 0)));
+                    g.setStroke(new java.awt.BasicStroke(2.6f));
+                    g.drawRoundRect(1, 1, w - 3, h + arc, arc, arc);
+                }
+            } finally {
+                g.dispose();
+            }
+        }
+    };
+
+    /** Arena: where an arc aimed at this player ends, on screen: the rim of the portrait facing the board. */
+    public Point getArenaTargetPoint() {
+        final Point p = avatarArea.getLocationOnScreen();
+        final int d = arenaPortrait.width;
+        p.translate(arenaPortrait.x + d / 2, arenaPortrait.y + d / 2 + (mirror ? Math.round(d * 0.82f) : -Math.round(d * 0.56f)));
+        return p;
     }
 
     @Override

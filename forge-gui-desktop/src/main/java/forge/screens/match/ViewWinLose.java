@@ -3,10 +3,12 @@ package forge.screens.match;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
@@ -62,6 +64,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private static final String CONSTRAINTS_CARDS_LARGE = "w 95%!, h 600px!, gap 0 0 0 20px";
 
     private final GameView game;
+    private final ArenaEndScreen arenaScreen;
 
     @SuppressWarnings("serial")
     public ViewWinLose(final GameView game0, final CMatchUI matchUI) {
@@ -74,9 +77,11 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         final FScrollPane scrCustom = new FScrollPane(false);
         pnlCustom = new SkinnedPanel();
 
-        btnContinue = new FButton();
-        btnRestart = new FButton();
-        btnQuit = new FButton();
+        // the Arena look is its own full-screen moment; recordings keep the plain screen
+        final boolean arena = ArenaTheme.isMatchBoard() && !matchUI.isReplay();
+        btnContinue = arena ? new ArenaDialogKit.Pill() : new FButton();
+        btnRestart = arena ? new ArenaDialogKit.Pill() : new FButton();
+        btnQuit = arena ? new ArenaDialogKit.Pill() : new FButton();
 
         // Control of the win/lose is handled differently for various game
         // modes.
@@ -159,6 +164,29 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlCustom.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
 
         final boolean customIsPopulated = control.populateCustomPanel();
+        if (arena) {
+            scrLog = new FScrollPane(txtLog, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            scrLog.setOpaque(false);
+            scrLog.getViewport().setOpaque(false);
+            scrLog.getVerticalScrollBar().setUI(new ArenaDialogKit.ThinScrollBarUI());
+            scrLog.getVerticalScrollBar().setOpaque(false);
+            scrLog.getVerticalScrollBar().setPreferredSize(new Dimension(12, 0));
+            txtLog.setOpaque(false);
+            txtLog.setFont(ArenaTheme.displayFont(Font.PLAIN, 16f));
+            final String copyText = localizer.getMessage("btnCopyToClipboard");
+            final Runnable copyLog = () -> {
+                try {
+                    GuiBase.getInterface().copyToClipboard(txtLog.getText());
+                } catch (final IllegalStateException ex) {
+                    // ignore; may be unavailable on some platforms
+                }
+            };
+            arenaScreen = new ArenaEndScreen(arenaOutcome(game0, matchUI), composeArenaTitle(game0, matchUI), arenaAvatar(matchUI),
+                    btnContinue, btnRestart, btnQuit, customIsPopulated ? scrCustom : null, scrLog, copyLog, copyText);
+            overlay.add(arenaScreen, "w 100%!, h 100%!");
+            return;
+        }
+        arenaScreen = null;
         if (customIsPopulated) {
             overlay.add(pnlLeft, "w 40%!, h 100%!");
             overlay.add(pnlRight, "w 60%!, h 100%!");
@@ -199,26 +227,29 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         pnlLeft.add(pnlLog, "w 100%!");
 
         lblTitle.setText((replay ? "Replay: " : "") + composeTitle(game0));
-        if (ArenaTheme.isMatchBoard() && !replay) {
-            // Arena ends on one word in gold; who won stays in the outcome lines beneath
-            lblTitle.setForeground(ArenaTheme.GOLD_BRIGHT);
-            lblTitle.setFont(FSkin.getRelativeBoldFont(44));
-            lblTitle.setText(composeArenaTitle(game0, matchUI));
-        }
     }
 
     public final void show() {
         SwingUtilities.invokeLater(() -> {
             scrLog.getViewport().setViewPosition(new Point(0, 0));
+            if (arenaScreen != null) {
+                arenaScreen.revalidate(); // the controller may have changed the buttons by now
+            }
             // populateCustomPanel may have changed which buttons are
             // enabled; focus on the 'best' one
             if (btnContinue.isEnabled()) {
                 btnContinue.requestFocusInWindow();
+            } else if (arenaScreen != null && btnRestart.isVisible() && btnRestart.isEnabled()) {
+                btnRestart.requestFocusInWindow(); // where the orange pill is
             } else {
                 btnQuit.requestFocusInWindow();
             }
         });
 
+        if (arenaScreen != null) {
+            arenaScreen.setScore(composeArenaScore());
+            return;
+        }
         showGameOutcomeSummary();
         showPlayerScores();
     }
@@ -251,6 +282,39 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             won |= winner.equals(p.getName());
         }
         return Localizer.getInstance().getMessage(won ? "lblArenaVictory" : "lblArenaDefeat");
+    }
+
+    private static ArenaEndScreen.Outcome arenaOutcome(final GameView game, final CMatchUI matchUI) {
+        final String winner = game.getWinningPlayerName();
+        if (winner == null || winner.isEmpty() || game.getWinningTeam() != -1 || !matchUI.hasLocalPlayers()) {
+            return ArenaEndScreen.Outcome.NEUTRAL;
+        }
+        for (final PlayerView p : matchUI.getLocalPlayers()) {
+            if (winner.equals(p.getName())) {
+                return ArenaEndScreen.Outcome.VICTORY;
+            }
+        }
+        return ArenaEndScreen.Outcome.DEFEAT;
+    }
+
+    /** The portrait of the player at this screen, when there is one. */
+    private static Image arenaAvatar(final CMatchUI matchUI) {
+        if (!matchUI.hasLocalPlayers()) {
+            return null;
+        }
+        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        final FSkin.SkinImage avatar = matchUI.getPlayerAvatar(matchUI.getLocalPlayers().iterator().next(), Integer.parseInt(indices[0]));
+        return avatar == null || avatar.getIcon() == null ? null : avatar.getIcon().getImage();
+    }
+
+    /** "James 1 - 0 Opponent" for two players; any other match result as the log words it. */
+    private String composeArenaScore() {
+        String score = "";
+        for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
+            score = removePlayerTypeFromLogMessage(o.message()).trim();
+        }
+        final java.util.regex.Matcher two = java.util.regex.Pattern.compile("^(.+?):\\s*(\\d+)\\s+(.+?):\\s*(\\d+)$").matcher(score);
+        return two.matches() ? two.group(1) + "  " + two.group(2) + " – " + two.group(4) + "  " + two.group(3) : score;
     }
 
     /**

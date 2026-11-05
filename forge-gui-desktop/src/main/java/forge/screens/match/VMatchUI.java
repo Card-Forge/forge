@@ -170,6 +170,8 @@ public class VMatchUI implements IVTopLevelUI {
             getControl().getCPrompt().getView().getParentCell().addDoc(vDev);
         }
 
+        ArenaCornerMenu.install();
+
         //focus first enabled Prompt button if returning to match screen
         if (getBtnOK().isEnabled()) {
             getBtnOK().requestFocusInWindow();

@@ -59,6 +59,7 @@ import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
 import forge.screens.deckeditor.CDeckEditorUI;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.BuildInfo;
@@ -337,6 +338,7 @@ public enum FControl implements KeyEventDispatcher {
         ImageCache.clear(); //reduce memory usage by clearing image cache when switching screens
 
         currentScreen = screen;
+        Singletons.getView().getFrame().setBoardMode(ArenaTheme.isEnabled() && screen.isMatchScreen());
 
         //load layout for new current screen
         screen.getController().register();

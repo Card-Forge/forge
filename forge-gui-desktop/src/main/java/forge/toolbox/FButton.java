@@ -57,6 +57,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     private boolean allImagesPresent = false;
     private boolean toggle = false;
     private boolean hovered = false;
+    private String arenaLabel;
     private boolean primary = false;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
     private KeyAdapter klEnter;
@@ -210,6 +211,12 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         repaintSelf();
     }
 
+    /** Arena: the word shown on the button in place of its text, which the game logic keeps reading ("Next" for "OK"). */
+    public void setArenaLabel(final String label) {
+        this.arenaLabel = label;
+        repaintSelf();
+    }
+
     /** Marks this as the main action button; the Arena theme paints it amber. */
     public void setPrimary(final boolean b0) {
         this.primary = b0;
@@ -262,18 +269,58 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         super.paintComponent(g);
     }
 
+    /** Two chevrons, drawn so that they sit dead centre whatever the font would have done. */
+    private void paintArenaChevrons(final Graphics2D g) {
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        final float s = getHeight() * 0.19f, cx = getWidth() / 2f, cy = getHeight() / 2f;
+        g.setStroke(new java.awt.BasicStroke(Math.max(2f, getHeight() * 0.075f), java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND));
+        for (int pass = 0; pass < 2; pass++) {
+            g.setColor(pass == 0 ? new Color(0, 0, 0, 110) : Color.WHITE);
+            final float dy = pass == 0 ? 1f : 0f;
+            for (final float off : new float[] {-s * 0.62f, s * 0.62f}) {
+                final java.awt.geom.Path2D.Float p = new java.awt.geom.Path2D.Float();
+                p.moveTo(cx + off - s * 0.5f, cy - s + dy);
+                p.lineTo(cx + off + s * 0.5f, cy + dy);
+                p.lineTo(cx + off - s * 0.5f, cy + s + dy);
+                g.draw(p);
+            }
+        }
+    }
+
     private void paintArena(final Graphics g) {
         final Graphics2D g2d = (Graphics2D) g.create();
         try {
             g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-            if (!isEnabled()) {
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.45f));
-            }
             final boolean pressed = getModel().isPressed() && getModel().isArmed();
             ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, hovered && isEnabled(), pressed,
                     isFocusOwner(), toggle, isEnabled());
-            super.paintComponent(g2d);
+            final String text = arenaLabel != null ? arenaLabel : getText();
+            if ("\u00BB".equals(text)) {
+                paintArenaChevrons(g2d);
+            } else if (text != null && !text.isEmpty()) {
+                // one voice on every button: the display face, sized to the button and shrunk to fit
+                float size = Math.max(12f, Math.min(getHeight() * 0.54f, 34f));
+                while (size > 10f && ArenaTheme.paintLabel(g2d, text, size, 0f, 0f, false) > getWidth() - getHeight() * 0.7f) {
+                    size -= 1f;
+                }
+                g2d.setFont(ArenaTheme.displayFont(java.awt.Font.BOLD, size));
+                final FontMetrics fm = g2d.getFontMetrics();
+                final float tx = (getWidth() - ArenaTheme.paintLabel(g2d, text, size, 0f, 0f, false)) / 2f;
+                // centred on the capitals, not on the line box
+                final int ty = Math.round((getHeight() + fm.getAscent() * 0.72f) / 2f);
+                if (isEnabled()) {
+                    g2d.setColor(new Color(60, 22, 0, primary ? 200 : 150));
+                    ArenaTheme.paintLabel(g2d, text, size, tx, ty + 1, true);
+                    if (primary) {
+                        ArenaTheme.paintLabel(g2d, text, size, tx, ty + 2, true);
+                    }
+                    g2d.setColor(Color.WHITE);
+                } else {
+                    g2d.setColor(new Color(255, 255, 255, 178));
+                }
+                ArenaTheme.paintLabel(g2d, text, size, tx, ty, true);
+            }
         } finally {
             g2d.dispose();
         }

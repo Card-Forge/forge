@@ -41,6 +41,7 @@ import forge.model.FModel;
 import forge.screens.match.ArenaFocusCard;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 
 /**
@@ -146,11 +147,29 @@ public class CPrompt implements ICDoc {
     }
 
     public void setMessage(final String s0, final CardView card) {
-        view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
+        view.getTarMessage().setText(ArenaTheme.isMatchBoard() ? arenaMessage(s0) : FSkin.encodeSymbols(s0, false));
         view.setCardView(card);
         ArenaFocusCard.refresh(matchUI);
         // the viewer sets its text on a later turn of the event queue; measure after it
         javax.swing.SwingUtilities.invokeLater(view::placeArena);
+    }
+
+    /**
+     * Arena prompts are short and centred: where the message opens with the source card's whole
+     * rules text ("Name (12) - ..."), only what is being asked for stays, since the card itself is on show.
+     */
+    private static String arenaMessage(final String message) {
+        String text = message == null ? "" : message;
+        final int lastBreak = text.lastIndexOf('\n');
+        if (lastBreak > 0 && text.substring(0, lastBreak).matches("(?s).*\\(\\d+\\)\\s*-\\s.*")) {
+            text = text.substring(lastBreak + 1);
+        }
+        // the encoder wraps its result in an html tag, which the centring has to go inside
+        // a running count stays with its label ("Selected: 0") if the line has to break
+        final String encoded = FSkin.encodeSymbols(text.trim().replaceAll(": (\\d+)$", ":\u00A0$1"), false);
+        return encoded.startsWith("<html>")
+                ? "<html><center>" + encoded.substring(6, encoded.length() - 7) + "</center></html>"
+                : encoded;
     }
 
     /**

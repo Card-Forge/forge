@@ -42,6 +42,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private int resizeCursor;
     private FTitleBarBase titleBar;
     private boolean minimized, maximized, fullScreen, hideBorder, lockTitleBar, hideTitleBar, isMainFrame, paused;
+    private boolean boardMode; // the Arena match board runs edge to edge: no border, and the title bar slides in from the top on demand
     private Rectangle normalBounds;
 
     public FFrame() {
@@ -130,13 +131,21 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         updateTitleBar();
     }
 
+    /** The Arena match board runs edge to edge; call when the screen changes. */
+    public void setBoardMode(final boolean boardMode0) {
+        if (this.boardMode == boardMode0) { return; }
+        this.boardMode = boardMode0;
+        updateBorder();
+        updateTitleBar();
+    }
+
     public boolean isTitleBarHidden() {
         return this.hideTitleBar;
     }
 
     private void updateTitleBar() {
         this.titleBar.updateButtons();
-        if (this.hideTitleBar == (this.fullScreen && !this.lockTitleBar)) {
+        if (this.hideTitleBar == ((this.fullScreen && !this.lockTitleBar) || this.boardMode)) {
             return;
         }
         this.hideTitleBar = !this.hideTitleBar;
@@ -289,7 +298,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     }
 
     private void updateBorder() {
-        if (this.minimized || this.hideBorder == (this.maximized || this.fullScreen)) {
+        if (this.minimized || this.hideBorder == (this.maximized || this.fullScreen || this.boardMode)) {
             return; //don't update border if minimized or border visibility wouldn't change
         }
         this.hideBorder = !this.hideBorder;

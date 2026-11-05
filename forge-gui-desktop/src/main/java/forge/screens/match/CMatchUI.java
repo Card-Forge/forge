@@ -763,6 +763,7 @@ public final class CMatchUI
                 FloatingZone.refreshAll();
             }
             if (stackOffered) { // stack entries are picked in the stack panel, so bring it up
+                ArenaCornerMenu.showInfo();
                 SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
             }
             refreshStackTargetMarks();

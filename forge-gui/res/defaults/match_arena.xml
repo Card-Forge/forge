@@ -1,23 +1,24 @@
 <?xml version="1.0"?>
 <!-- Fixed Arena-style match board. Keep in sync with the board geometry in forge.toolbox.ArenaTheme.
-     The battlefields and hand tile the window; the prompt, the dock and the info tabs float over them. -->
+     The two battlefields tile the whole window; the hand, the prompt, the dock and the info tabs float over them.
+     The dock and the info tabs start hidden and open from the settings buttons in the top-right corner. -->
 <layout>
-	<cell x="0.0" y="0.0" w="1.0" h="0.39">
+	<cell x="0.0" y="0.0" w="1.0" h="0.38">
 		<doc>FIELD_1</doc>
 	</cell>
-	<cell x="0.0" y="0.39" w="1.0" h="0.46">
+	<cell x="0.0" y="0.38" w="1.0" h="0.62">
 		<doc>FIELD_0</doc>
 	</cell>
-	<cell x="0.0" y="0.85" w="1.0" h="0.15">
+	<cell x="0.14" y="0.835" w="0.72" h="0.165">
 		<doc>HAND_0</doc>
 	</cell>
-	<cell x="0.34" y="0.695" w="0.32" h="0.095">
+	<cell x="0.39" y="0.6" w="0.22" h="0.11">
 		<doc>REPORT_MESSAGE</doc>
 	</cell>
-	<cell x="0.004" y="0.875" w="0.16" h="0.12">
+	<cell x="0.8" y="0.06" w="0.19" h="0.1">
 		<doc>BUTTON_DOCK</doc>
 	</cell>
-	<cell x="0.832" y="0.84" w="0.164" h="0.155">
+	<cell x="0.8" y="0.17" w="0.19" h="0.42">
 		<doc>REPORT_LOG</doc>
 		<doc>REPORT_STACK</doc>
 		<doc>CARD_DETAIL</doc>

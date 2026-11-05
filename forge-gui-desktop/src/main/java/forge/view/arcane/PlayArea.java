@@ -26,6 +26,9 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.function.BiPredicate;
 
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import com.google.common.collect.Lists;
 
 import forge.game.GameEntityView;
@@ -67,6 +70,20 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private static final float CARD_SPACING_Y = 0.06f;
     private static final float STACK_SPACING_X = 0.12f;
     private static final float STACK_SPACING_Y = 0.12f;
+
+    // Arena board, as fractions of the window's height
+    private static final float ARENA_TILE_H = 0.145f;
+    private static final float ARENA_TILE_H_SEAT = 0.11f;
+    private static final float ARENA_TILE_H_MIN = 0.07f;
+    private static final float ARENA_CLEAR = 0.205f;      // half the gap the back row leaves for the portrait
+    private static final float ARENA_CLEAR_SEAT = 0.008f;
+    private static final float ARENA_COMBAT_STEP = 0.015f;
+    // the board recedes from the camera: each row's size against the local player's creatures
+    private static final float ARENA_OWN_BACK = 0.85f;
+    private static final float ARENA_FOE_FRONT = 0.92f;
+    private static final float ARENA_FOE_BACK = 0.64f;
+    private static final float ARENA_SEAT_BACK = 0.74f;
+    private static final float ARENA_COMBAT_SCALE = 1.05f;
 
     // Read from FPref.UI_MAX_STACK_DEPTH in updateGroupScope(),
     // bounded to [MIN_STACK_DEPTH, MAX_STACK_DEPTH].
@@ -121,6 +138,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.grouping = groupTokensAndCreatures || groupAll;
         int prefDepth = FModel.getPreferences().getPrefInt(FPref.UI_MAX_STACK_DEPTH);
         this.maxStackDepth = Math.max(MIN_STACK_DEPTH, Math.min(MAX_STACK_DEPTH, prefDepth));
+        if (ArenaTheme.isEnabled()) {
+            // identical permanents make one pile with a count, three cards deep at most
+            this.stackCreatures = false;
+            this.groupTokensAndCreatures = true;
+            this.groupAll = true;
+            this.grouping = true;
+            this.maxStackDepth = 3;
+        }
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
@@ -543,9 +568,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         if (ArenaTheme.isEnabled()) {
-            sortCombatantsForArena(tokens);
-            sortCombatantsForArena(creatures);
-        } else if (shouldSeparateCombatStacks() || grouping) {
+            layoutArenaBoard(lands, tokens, creatures, contraptions, others);
+            super.doLayout();
+            return;
+        }
+        if (shouldSeparateCombatStacks() || grouping) {
             sortCombatantsByOpponentPosition(tokens);
             sortCombatantsByOpponentPosition(creatures);
         }
@@ -558,11 +585,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         // should find an appropriate width of card
         int maxCardWidth = this.getCardWidthMax();
-        final int windowHeight = FView.SINGLETON_INSTANCE.getPnlContent().getHeight();
-        if (ArenaTheme.isEnabled() && windowHeight > 0) {
-            // Arena keeps cards one size; a sparse battlefield does not blow them up
-            maxCardWidth = Math.max(this.getCardWidthMin(), Math.min(maxCardWidth, Math.round(windowHeight * 0.15f / CardPanel.ASPECT_RATIO)));
-        }
         setCardWidth(maxCardWidth);
         int minCardWidth = this.getCardWidthMin();
         int lastGoodCardWidth = minCardWidth;
@@ -613,28 +635,272 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         super.doLayout();
     }
 
+    /**
+     * The Arena board's arrangement. Creatures make a front row facing the other army; lands
+     * and other permanents make a back row in two wings either side of the portrait, lands on
+     * the left and everything else on the right. Tiles keep one size for as long as they fit.
+     */
+    private void layoutArenaBoard(final CardStackRow lands, final CardStackRow tokens, final CardStackRow creatures,
+            final CardStackRow contraptions, final CardStackRow others) {
+        final JPanel content = FView.SINGLETON_INSTANCE.getPnlContent();
+        final int windowH = Math.max(1, content.getHeight());
+        final int windowW = Math.max(1, content.getWidth());
+        final boolean seat = this.playAreaWidth < windowW * 0.6f; // one of several opponents sharing the top of the board
+
+        final CardStackRow front = new CardStackRow();
+        final CardStackRow right = new CardStackRow();
+        for (final CardStack s : creatures) {
+            front.add(s);
+        }
+        for (final CardStack s : tokens) {
+            if (!s.isEmpty() && RowType.Creature.isGoodFor(s.get(0).getCard().getCurrentState())) {
+                front.add(s);
+            } else {
+                right.add(s);
+            }
+        }
+        right.addAll(others);
+        right.addAll(contraptions);
+        sortCombatantsForArena(front);
+
+        // one size while it fits; only a crowded front row shrinks the tiles
+        final float tileH = seat ? ARENA_TILE_H_SEAT : this.mirror ? ARENA_TILE_H * ARENA_FOE_FRONT : ARENA_TILE_H;
+        int height = Math.round(windowH * tileH);
+        final int minHeight = Math.round(windowH * ARENA_TILE_H_MIN);
+        setCardHeightForTile(height);
+        while (height > minHeight && front.getWidth() > this.playAreaWidth - 2 * PlayArea.GUTTER_X) {
+            height -= 2;
+            setCardHeightForTile(height);
+        }
+        final int frontHeight = height;
+        final float backShare = seat ? ARENA_SEAT_BACK : this.mirror ? ARENA_FOE_BACK / ARENA_FOE_FRONT : ARENA_OWN_BACK;
+        int backHeight = Math.max(minHeight, Math.round(frontHeight * backShare));
+        setCardHeightForTile(backHeight);
+
+        final int cx = this.playAreaWidth / 2;
+        // the wings stop short of the portrait; a seat's narrower portrait needs less room
+        final int clear = Math.round(windowH * (seat ? ARENA_CLEAR_SEAT : ARENA_CLEAR));
+        // a long row of lands may run out over the wall; an opponent's other wing stops short of their piles
+        final int margin = Math.round(windowW * (seat ? 0.016f : 0.024f));
+        final int rightLimit = seat ? this.playAreaWidth - margin - Math.round(this.playAreaWidth * 0.02f)
+                : this.playAreaWidth - (this.mirror ? Math.round(this.playAreaWidth * 0.172f) : margin);
+
+        final int frontY, backY;
+        if (seat) {
+            backY = Math.round(windowH * 0.1f);
+            frontY = Math.round(windowH * 0.205f);
+        } else if (this.mirror) {
+            backY = Math.round(windowH * 0.08f);
+            frontY = Math.round(windowH * 0.205f);
+        } else {
+            // the back row flanks the portrait, which leaves the column above the portrait free for a decision
+            frontY = Math.round(windowH * (0.425f - ArenaTheme.FIELD_SPLIT));
+            backY = Math.round(windowH * (0.605f - ArenaTheme.FIELD_SPLIT));
+        }
+
+        if (seat) {
+            // a seat's portrait is above its rows, so its back row can use the whole width
+            final CardStackRow back = new CardStackRow();
+            back.addAll(lands);
+            back.addAll(right);
+            placeArenaRow(back, margin, this.playAreaWidth - margin, backY, false, true);
+        } else {
+            // lands stay together on the left, overlapping a little sooner than crossing the portrait
+            final int leftRoom = cx - clear - margin;
+            // different lands keep apart: the whole back row gets smaller before any of them overlap
+            final int smallest = Math.round(windowH * ARENA_TILE_H * ARENA_FOE_BACK);
+            int landsWidth = -this.cardSpacingX;
+            for (final CardStack stack : lands) {
+                landsWidth += stack.getWidth();
+            }
+            while (backHeight > smallest && landsWidth > leftRoom) {
+                backHeight -= 2;
+                setCardHeightForTile(backHeight);
+                landsWidth = -this.cardSpacingX;
+                for (final CardStack stack : lands) {
+                    landsWidth += stack.getWidth();
+                }
+            }
+            final int mostOverlap = Math.round(this.cardWidth * 0.35f);
+            final CardStackRow leftWing = new CardStackRow();
+            final CardStackRow rightWing = new CardStackRow();
+            int used = 0;
+            for (final CardStack stack : lands) {
+                if (used + stack.getWidth() - this.cardSpacingX - leftWing.size() * mostOverlap <= leftRoom || leftWing.isEmpty()) {
+                    leftWing.add(stack);
+                    used += stack.getWidth();
+                } else {
+                    rightWing.add(stack);
+                }
+            }
+            rightWing.addAll(right);
+            placeArenaRow(leftWing, margin, cx - clear, backY, true, false);
+            placeArenaRow(rightWing, cx + clear, rightLimit, backY, false, false);
+        }
+        setCardHeightForTile(frontHeight);
+        placeArenaFront(front, frontY, windowH);
+
+        final List<CardStackRow> placed = new ArrayList<>();
+        placed.add(front);
+        placed.add(lands);
+        placed.add(right);
+        this.rows = placed;
+        this.setPreferredSize(new Dimension(this.playAreaWidth, this.playAreaHeight));
+        this.revalidate();
+        repaint();
+    }
+
+    /** One wing of the back row between two x positions, pressed against the portrait; overlaps its piles if it must. */
+    private void placeArenaRow(final CardStackRow row, final int left, final int right, final int y, final boolean alignRight, final boolean centre) {
+        if (row.isEmpty()) {
+            return;
+        }
+        int total = -this.cardSpacingX;
+        for (final CardStack stack : row) {
+            total += stack.getWidth();
+        }
+        final int room = Math.max(this.cardWidth, right - left);
+        final float squeeze = total <= room || row.size() < 2 ? 0f : (total - room) / (float) (row.size() - 1);
+        float x = alignRight ? Math.max(left, right - total) : centre ? Math.max(left, left + (room - total) / 2f) : left;
+        for (final CardStack stack : row) {
+            placeArenaStack(stack, Math.round(x), y);
+            x += stack.getWidth() - squeeze;
+        }
+    }
+
+    /**
+     * The front row, centred. In combat attackers step out towards the other army, and blockers
+     * step up directly opposite what they block, so their position says who fights whom.
+     */
+    private void placeArenaFront(final CardStackRow row, final int y, final int windowH) {
+        if (row.isEmpty()) {
+            return;
+        }
+        final int count = row.size();
+        final int[] widths = new int[count];
+        int total = -this.cardSpacingX;
+        // what is fighting stands larger, so the whole row spreads out to keep its glows apart
+        final GameView gameNow = getMatchUI().getGameView();
+        final boolean inCombat = gameNow != null && gameNow.getCombat() != null && gameNow.getCombat().getNumAttackers() > 0;
+        final int spreadOut = inCombat ? Math.round(this.cardWidth * 0.1f) : 0;
+        for (int i = 0; i < count; i++) {
+            widths[i] = row.get(i).getWidth() + spreadOut;
+            total += widths[i];
+        }
+        final int room = this.playAreaWidth - 2 * PlayArea.GUTTER_X;
+        final int squeeze = total <= room || count < 2 ? 0 : (total - room + count - 2) / (count - 1);
+        final int[] xs = new int[count];
+        int x = Math.max(PlayArea.GUTTER_X, (this.playAreaWidth - total) / 2);
+        for (int i = 0; i < count; i++) {
+            xs[i] = x;
+            x += widths[i] - squeeze;
+        }
+
+        final GameView gameView = getMatchUI().getGameView();
+        final CombatView combat = gameView == null ? null : gameView.getCombat();
+        final boolean[] fighting = new boolean[count];
+        if (combat != null) {
+            boolean anyAligned = false;
+            for (int i = 0; i < count; i++) {
+                final CardView card = row.get(i).get(0).getCard();
+                fighting[i] = combat.isAttacking(card);
+                if (fighting[i]) {
+                    continue;
+                }
+                final Iterable<CardView> attackers = getCombatOpponentsForLayout(card);
+                if (attackers == null) {
+                    continue;
+                }
+                for (final CardView attacker : attackers) {
+                    final CardPanel panel = findPanelOnAnyField(attacker);
+                    if (panel != null && panel.getParent() != null) {
+                        fighting[i] = true;
+                        final Point c = SwingUtilities.convertPoint(panel.getParent(), panel.getCardX() + panel.getCardWidth() / 2, 0, this);
+                        xs[i] = c.x - (widths[i] - spreadOut - this.cardSpacingX) / 2;
+                        anyAligned = true;
+                        break;
+                    }
+                }
+            }
+            if (anyAligned && squeeze == 0) {
+                // blockers keep their spot; the rest make room, spreading out from the left
+                final Integer[] order = new Integer[count];
+                for (int i = 0; i < count; i++) {
+                    order[i] = i;
+                }
+                Arrays.sort(order, Comparator.comparingInt(i -> xs[i]));
+                int next = PlayArea.GUTTER_X;
+                for (final int i : order) {
+                    xs[i] = Math.max(next, xs[i]);
+                    next = xs[i] + widths[i];
+                }
+                int limit = this.playAreaWidth - PlayArea.GUTTER_X + this.cardSpacingX;
+                for (int k = count - 1; k >= 0; k--) {
+                    final int i = order[k];
+                    xs[i] = Math.min(xs[i], limit - widths[i]);
+                    limit = xs[i];
+                }
+            }
+        }
+
+        final int step = Math.round(windowH * ARENA_COMBAT_STEP) * (this.mirror ? 1 : -1);
+        for (int i = 0; i < count; i++) {
+            placeArenaStack(row.get(i), xs[i], fighting[i] ? y + step : y, fighting[i] ? ARENA_COMBAT_SCALE : 1f);
+        }
+    }
+
+    private void placeArenaStack(final CardStack stack, final int x, final int y) {
+        placeArenaStack(stack, x, y, 1f);
+    }
+
+    /** {@code scale} grows the stack about its own centre: what is fighting stands a little larger than the rest. */
+    private void placeArenaStack(final CardStack stack, final int x, final int y, final float scale) {
+        final int w = Math.round(this.cardWidth * scale), h = Math.round(this.cardHeight * scale);
+        final int dx = (w - this.cardWidth) / 2, dy = (h - this.cardHeight) / 2;
+        for (final CardPanel p : stack) {
+            p.setGroupCount(0);
+        }
+        final int panelCount = stack.size();
+        for (int panelIndex = 0; panelIndex < panelCount; panelIndex++) {
+            final CardPanel panel = stack.get(panelIndex);
+            this.setComponentZOrder(panel, panelIndex);
+            final boolean hidden = panelCount > this.maxStackDepth && panelIndex >= this.maxStackDepth;
+            final int visualPos = panelCount > this.maxStackDepth
+                    ? (hidden ? 0 : this.maxStackDepth - 1 - panelIndex)
+                    : panelCount - panelIndex - 1;
+            panel.setArenaStackBack(panelIndex > 0);
+            panel.setCardBounds(x + visualPos * this.stackSpacingX - dx, y - dy, w, h);
+            panel.setDisplayEnabled(!hidden);
+        }
+        final int groupCount = (int) stack.stream().filter(p -> p.getAttachedToPanel() == null).count();
+        if (groupCount > 1) {
+            stack.get(0).setGroupCount(groupCount);
+        }
+    }
+
+    private void setCardHeightForTile(final int tileHeight) {
+        this.cardHeight = Math.max(20, tileHeight);
+        this.cardWidth = Math.round(this.cardHeight * CardPanel.ARENA_TILE_RATIO);
+        this.extraCardSpacingX = Math.round(this.cardWidth * 0.085f);
+        this.cardSpacingX = this.extraCardSpacingX;
+        this.cardSpacingY = Math.round(this.cardHeight * 0.06f);
+        this.stackSpacingX = Math.round(this.cardWidth * 0.1f);
+        this.stackSpacingY = 0;
+    }
+
     // Position all card panels
     private void positionAllCards(List<CardStackRow> template)  {
         int x = 0;
         int y = PlayArea.GUTTER_Y;
 
         //System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight);
-        // Arena board: every row is centred as one group, other permanents following on from the rest
-        final boolean arenaRows = ArenaTheme.isEnabled();
         for (final CardStackRow row : template) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
-            if (arenaRows) {
-                int rowWidth = -this.extraCardSpacingX;
-                for (final CardStack stack : row) {
-                    rowWidth += stack.getWidth();
-                }
-                x = Math.max(PlayArea.GUTTER_X, (this.playAreaWidth - rowWidth) / 2);
-            }
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (stack.alignRight && !arenaRows) {
+                if (stack.alignRight) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++) {
                         CardStack r = row.get(i);
@@ -818,7 +1084,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     final int panelX = panel.getCardX();
                     int panelY = panel.getCardY();
                     int panelWidth, panelHeight;
-                    if (panel.isTapped()) {
+                    if (panel.isTapped() && !ArenaTheme.isEnabled()) {
                         panelWidth = panel.getCardHeight();
                         panelHeight = panel.getCardWidth();
                         panelY += panelWidth - panelHeight;
@@ -875,7 +1141,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 splitCardIds.remove(panel.getCard().getId());
                 selectCard(panel, new MouseTriggerEvent(evt), false);
                 doLayout();
-                if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+                if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.tappedAngle())) {
                     return;
                 }
                 super.mouseLeftClicked(panel, evt);
@@ -890,7 +1156,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 splitCardIds.add(panel.getCard().getId());
                 if (getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
                     doLayout();
-                    if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+                    if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.tappedAngle())) {
                         return;
                     }
                     super.mouseLeftClicked(panel, evt);
@@ -908,7 +1174,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             splitCardIds.add(panel.getCard().getId());
         }
         doLayout();
-        if (panel.getTappedAngle() != 0 && panel.getTappedAngle() != CardPanel.TAPPED_ANGLE) {
+        if (panel.getTappedAngle() != 0 && panel.getTappedAngle() != CardPanel.tappedAngle()) {
             return;
         }
         super.mouseLeftClicked(panel, evt);
@@ -1152,7 +1418,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         if (card.isTapped()) {
             toPanel.setTapped(true);
-            toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
+            toPanel.setTappedAngle(forge.view.arcane.CardPanel.tappedAngle());
         } else {
             toPanel.setTapped(false);
             toPanel.setTappedAngle(0);

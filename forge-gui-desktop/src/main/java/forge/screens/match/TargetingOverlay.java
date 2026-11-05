@@ -17,6 +17,8 @@
  */
 package forge.screens.match;
 
+import java.awt.BasicStroke;
+import java.awt.RadialGradientPaint;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -48,6 +50,7 @@ import forge.model.FModel;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VStack.StackInstanceTextArea;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.FView;
@@ -318,9 +321,11 @@ public class TargetingOverlay {
         for (CardPanel c : cardPanels) {
             if (c.isShowing()) {
 	            cardLocOnScreen = c.getCardLocationOnScreen();
+	            final float originX = ArenaTheme.isEnabled() ? c.getCardWidth() * 0.5f : c.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X;
+	            final float originY = ArenaTheme.isEnabled() ? c.getCardHeight() * 0.5f : c.getHeight() * CardPanel.TARGET_ORIGIN_FACTOR_Y;
 	            endpoints.put(c.getCard().getId(), new Point(
-	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + (float)c.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X),
-	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + (float)c.getHeight() * CardPanel.TARGET_ORIGIN_FACTOR_Y)
+	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + originX),
+	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + originY)
 	            ));
             }
         }
@@ -396,6 +401,11 @@ public class TargetingOverlay {
             return null;
         }
 
+        if (ArenaTheme.isEnabled()) {
+            final Point rim = matchUI.getFieldViewFor(p).getArenaTargetPoint();
+            rim.translate(-locOnScreen.x, -locOnScreen.y);
+            return rim;
+        }
         final Point point = avatarArea.getLocationOnScreen();
         point.x += avatarArea.getWidth() / 2 - locOnScreen.x;
         point.y += avatarArea.getHeight() / 2 - locOnScreen.y;
@@ -463,7 +473,9 @@ public class TargetingOverlay {
                 addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
             }
             // if c is attacking a player
-            if (defender instanceof PlayerView) {
+            final boolean blockedOnBoard = ArenaTheme.isMatchBoard()
+                    && (hasAny(combat.getBlockers(c)) || hasAny(combat.getPlannedBlockers(c)));
+            if (defender instanceof PlayerView && !blockedOnBoard) {
                 final JPanel avatarArea = matchUI.getFieldViewFor((PlayerView)defender).getAvatarArea();
                 if(avatarArea.isShowing()) {
                     Point locOnScreen = this.getPanel().getLocationOnScreen();
@@ -477,7 +489,7 @@ public class TargetingOverlay {
             }
             for (final CardView attackingCard : combat.getAttackers()) {
                 final Iterable<CardView> cards = combat.getPlannedBlockers(attackingCard);
-                if (cards == null) continue;
+                if (cards == null || ArenaTheme.isMatchBoard()) continue; // a blocker stands opposite its attacker
                 for (final CardView blockingCard : cards) {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
                     addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
@@ -485,6 +497,46 @@ public class TargetingOverlay {
                     cardsVisualized.add(attackingCard);
                 }
             }
+        }
+    }
+
+    private static boolean hasAny(final Iterable<CardView> cards) {
+        return cards != null && cards.iterator().hasNext();
+    }
+
+    /** Arena: what is on top of the stack reaches out from the large card to its targets. */
+    private void addArenaStackArcs() {
+        if (!ArenaTheme.isMatchBoard() || !this.getPanel().isShowing()) {
+            return;
+        }
+        final GameView gameView = matchUI.getGameView();
+        final StackItemView top = gameView == null ? null : gameView.peekStack();
+        final Point locOnScreen = this.getPanel().getLocationOnScreen();
+        final Point from = top == null ? null : ArenaFocusCard.getArcOrigin();
+        if (from == null) {
+            return;
+        }
+        from.translate(-locOnScreen.x, -locOnScreen.y);
+        if (cardPanels.isEmpty()) {
+            for (final VField f : matchUI.getFieldViews()) {
+                cardPanels.addAll(f.getTabletop().getCardPanels());
+            }
+        }
+        final Map<Integer, Point> endpoints = getCardEndpoints();
+        final PlayerView activator = top.getActivatingPlayer();
+        StackItemView instance = top;
+        while (instance != null) {
+            if (instance.getTargetCards() != null) {
+                for (final CardView c : instance.getTargetCards()) {
+                    addArc(endpoints.get(c.getId()), from, ArcConnection.FriendsStackTargeting);
+                }
+            }
+            if (instance.getTargetPlayers() != null) {
+                for (final PlayerView p : instance.getTargetPlayers()) {
+                    addArc(getPlayerTargetingArrowPoint(p, locOnScreen), from, ArcConnection.FriendsStackTargeting);
+                }
+            }
+            instance = instance.getSubInstance();
         }
     }
 
@@ -558,8 +610,130 @@ public class TargetingOverlay {
 
         private void drawArcs(Graphics2D g2d, Color color, List<Arc> arcs) {
             for (Arc arc : arcs) {
-                drawArrow(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
+                if (ArenaTheme.isEnabled()) {
+                    drawArenaArc(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
+                } else {
+                    drawArrow(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
+                }
             }
+        }
+
+        /** A curved ribbon of light that narrows as it goes: wide faint layers round a bright core, a head, and a ring on what it reaches. */
+        private void drawArenaArc(final Graphics2D g2d, final int x10, final int y10, final int x2, final int y2, final Color color) {
+            final float dx0 = x2 - x10, dy0 = y2 - y10;
+            final float length0 = (float) Math.hypot(dx0, dy0);
+            if (length0 < 2f) {
+                return;
+            }
+            // starts from the edge of what it comes from rather than the middle of its art
+            final float skip = Math.min(70f, length0 * 0.3f);
+            final int x1 = Math.round(x10 + dx0 / length0 * skip), y1 = Math.round(y10 + dy0 / length0 * skip);
+            final float dx = x2 - x1, dy = y2 - y1;
+            final float length = (float) Math.hypot(dx, dy);
+            // bows upwards, away from the row of cards it crosses
+            final float bow = length * 0.16f * (dx >= 0 ? -1f : 1f);
+            final float cx = (x1 + x2) / 2f - dy / length * bow, cy = (y1 + y2) / 2f + dx / length * bow;
+            // thin where it leaves, full where it lands, in a soft body of light
+            final float start = 6f, end = 17f;
+            final int steps = 9;
+            for (int i = steps; i >= 1; i--) {
+                final float grow = 1f + i * 0.42f;
+                g2d.setColor(ArenaTheme.alpha(color, Math.round(6f + 2.4f * (steps - i))));
+                g2d.fill(ribbon(x1, y1, cx, cy, x2, y2, start * grow, end * grow));
+            }
+            g2d.setColor(ArenaTheme.alpha(color, 235));
+            g2d.fill(ribbon(x1, y1, cx, cy, x2, y2, start, end));
+            g2d.setColor(new Color(255, 255, 255, 240));
+            g2d.fill(ribbon(x1, y1, cx, cy, x2, y2, start * 0.36f, end * 0.42f));
+            // it lands in a burst of its own light rather than ending square
+            final float burst = end * 3.2f;
+            g2d.setPaint(new RadialGradientPaint(x2, y2, burst, new float[] {0f, 0.3f, 1f},
+                    new Color[] {new Color(255, 255, 255, 245), ArenaTheme.alpha(color, 205), ArenaTheme.alpha(color, 0)}));
+            g2d.fillOval(Math.round(x2 - burst), Math.round(y2 - burst), Math.round(2 * burst), Math.round(2 * burst));
+        }
+
+        /** Between an attacker and whatever blocks it: a pair of chevrons pointing at the blocker. */
+        private void drawArenaCombatLinks(final Graphics2D g2d, final CombatView combat) {
+            if (combat == null || !TargetingOverlay.this.getPanel().isShowing() || combat.getAttackers() == null) {
+                return;
+            }
+            if (cardPanels.isEmpty()) {
+                for (final VField f : matchUI.getFieldViews()) {
+                    cardPanels.addAll(f.getTabletop().getCardPanels());
+                }
+            }
+            final Map<Integer, Point> endpoints = getCardEndpoints();
+            for (final CardView attacker : combat.getAttackers()) {
+                final Point from = endpoints.get(attacker.getId());
+                if (from == null) {
+                    continue;
+                }
+                final Set<CardView> blockers = new HashSet<>();
+                if (combat.getBlockers(attacker) != null) {
+                    blockers.addAll(combat.getBlockers(attacker));
+                }
+                if (combat.getPlannedBlockers(attacker) != null) {
+                    blockers.addAll(combat.getPlannedBlockers(attacker));
+                }
+                for (final CardView blocker : blockers) {
+                    final Point to = endpoints.get(blocker.getId());
+                    if (to != null) {
+                        drawArenaChevrons(g2d, from, to);
+                    }
+                }
+            }
+        }
+
+        private void drawArenaChevrons(final Graphics2D g2d, final Point from, final Point to) {
+            final float dx = to.x - from.x, dy = to.y - from.y;
+            final float length = Math.max(1f, (float) Math.hypot(dx, dy));
+            final float ux = dx / length, uy = dy / length;
+            final float mx = (from.x + to.x) / 2f, my = (from.y + to.y) / 2f;
+            final float s = 13f;
+            for (int pass = 0; pass < 2; pass++) {
+                g2d.setStroke(new BasicStroke(pass == 0 ? 8.5f : 4f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g2d.setColor(pass == 0 ? new Color(10, 6, 2, 200) : new Color(0xFFB067));
+                for (final float offset : new float[] {-s * 0.55f, s * 0.55f}) {
+                    final float cx = mx + ux * offset, cy = my + uy * offset;
+                    final GeneralPath chevron = new GeneralPath();
+                    chevron.moveTo(cx - ux * s * 0.5f - uy * s, cy - uy * s * 0.5f + ux * s);
+                    chevron.lineTo(cx + ux * s * 0.5f, cy + uy * s * 0.5f);
+                    chevron.lineTo(cx - ux * s * 0.5f + uy * s, cy - uy * s * 0.5f - ux * s);
+                    g2d.draw(chevron);
+                }
+            }
+            g2d.setStroke(new BasicStroke(1f));
+        }
+
+        /** The outline of a quadratic curve thickened to a width that changes along it. */
+        private GeneralPath ribbon(final float x1, final float y1, final float cx, final float cy, final float x2, final float y2, final float w1, final float w2) {
+            final int steps = 36;
+            final float[] lx = new float[steps + 1], ly = new float[steps + 1], rx = new float[steps + 1], ry = new float[steps + 1];
+            for (int i = 0; i <= steps; i++) {
+                final float t = i / (float) steps, m = 1f - t;
+                final float px = m * m * x1 + 2 * m * t * cx + t * t * x2;
+                final float py = m * m * y1 + 2 * m * t * cy + t * t * y2;
+                float dx = 2 * m * (cx - x1) + 2 * t * (x2 - cx);
+                float dy = 2 * m * (cy - y1) + 2 * t * (y2 - cy);
+                final float len = Math.max(0.001f, (float) Math.hypot(dx, dy));
+                dx /= len;
+                dy /= len;
+                final float half = (w1 + (w2 - w1) * t) / 2f;
+                lx[i] = px - dy * half;
+                ly[i] = py + dx * half;
+                rx[i] = px + dy * half;
+                ry[i] = py - dx * half;
+            }
+            final GeneralPath path = new GeneralPath();
+            path.moveTo(lx[0], ly[0]);
+            for (int i = 1; i <= steps; i++) {
+                path.lineTo(lx[i], ly[i]);
+            }
+            for (int i = steps; i >= 0; i--) {
+                path.lineTo(rx[i], ry[i]);
+            }
+            path.closePath();
+            return path;
         }
 
         /**
@@ -596,6 +770,13 @@ public class TargetingOverlay {
                 }
             }
 
+            addArenaStackArcs();
+            if (ArenaTheme.isEnabled() && gameView != null) {
+                final Graphics2D links = (Graphics2D) g.create();
+                links.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                drawArenaCombatLinks(links, gameView.getCombat());
+                links.dispose();
+            }
             if (arcsFoeAtk.isEmpty() && arcsFoeDef.isEmpty() && arcsFriend.isEmpty()) {
                 if (assembled) {
                     // We still need to repaint to get rid of visual artifacts
@@ -622,6 +803,12 @@ public class TargetingOverlay {
                 colorCombatAtk = new Color(255,138,1,153);
             }
 
+            if (ArenaTheme.isEnabled()) {
+                // attacks burn orange; anything aimed from the stack is cool blue
+                colorOther = new Color(120, 205, 255);
+                colorCombatAtk = new Color(255, 130, 60);
+                colorCombat = colorOther;
+            }
             drawArcs(g2d, colorOther, arcsFriend);
             drawArcs(g2d, colorCombatAtk, arcsFoeAtk);
             drawArcs(g2d, colorCombat, arcsFoeDef);

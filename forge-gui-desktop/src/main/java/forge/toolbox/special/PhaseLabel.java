@@ -17,6 +17,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import forge.gui.MouseUtil;
+import forge.toolbox.ArenaArt;
+import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 
 /**
@@ -28,6 +30,10 @@ import forge.toolbox.FSkin;
 public class PhaseLabel extends JLabel {
     /** Tint used when a yield marker is targeted at this (player, phase) cell. */
     private static final Color YIELD_MARKER_COLOR = new Color(0xFFA528);
+
+    /** What this phase looks like on the Arena board: a small diamond, or a card, swords or a shield for the major ones. */
+    public static final int ARENA_STEP = 0, ARENA_MAIN = 1, ARENA_ATTACK = 2, ARENA_BLOCK = 3;
+    private int arenaKind = -1;
 
     private boolean enabled = true;
     private boolean active = false;
@@ -161,6 +167,26 @@ public class PhaseLabel extends JLabel {
         final int w = this.getWidth();
         final int h = this.getHeight();
 
+        if (arenaKind >= 0 && ArenaTheme.isEnabled()) {
+            // a minor step shows only while it matters: reached, pointed at, or switched off
+            if (ArenaTheme.snapshotting || arenaKind == ARENA_STEP && !this.active && !this.hover && this.enabled && !this.yieldMarked) {
+                return;
+            }
+            final int size = arenaKind == ARENA_STEP ? Math.min(11, Math.min(w, h)) : Math.min(w, h);
+            final Graphics2D g2 = (Graphics2D) g.create();
+            try {
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                ArenaArt.paintPhaseGlyph(g2, (w - size) / 2, (h - size) / 2, size, arenaKind, this.active, this.enabled, this.hover);
+                if (this.yieldMarked) {
+                    g2.setColor(YIELD_MARKER_COLOR);
+                    g2.drawOval((w - size) / 2, (h - size) / 2, size - 1, size - 1);
+                }
+            } finally {
+                g2.dispose();
+            }
+            return;
+        }
+
         // Precedence: hover > yieldMarked > active/enabled combinations.
         if (this.hover) {
             FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_HOVER));
@@ -199,6 +225,12 @@ public class PhaseLabel extends JLabel {
         } else {
             super.paintComponent(g);
         }
+    }
+
+    /** Draws this phase as a glyph on the Arena board rather than a lettered chip. */
+    public void setArenaKind(final int kind) {
+        this.arenaKind = kind;
+        this.setText("");
     }
 
     /** Darkens the chip briefly while it is pressed, so a click reads as a physical push before the new state settles. */

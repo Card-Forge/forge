@@ -22,18 +22,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.HierarchyBoundsAdapter;
-import java.awt.event.HierarchyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
@@ -41,7 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import forge.game.card.CardView;
-import forge.game.player.PlayerView;
+import forge.game.GameView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -50,7 +45,6 @@ import forge.gui.framework.RectangleOfDouble;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FButton;
@@ -179,48 +173,95 @@ public class VPrompt implements IVDoc<CPrompt> {
     }
 
     /**
-     * Arena layout: the prompt floats over the local portrait as a slim message pill with
-     * the action buttons side by side beneath it; there is no panel behind it.
+     * Arena layout. Passing priority is the action button in the bottom-right corner, its caption
+     * under it and the end-turn button small beside that. A decision sits just above the local
+     * portrait, between the wings of the back row: a few lines of centred text on a soft shadow
+     * with two equal buttons beneath.
      */
     private void populateArena(final JPanel container, final ForgePreferences prefs) {
         btnOK.setPrimary(true);
+        final int buttonH = arenaButtonHeight();
         if (arenaPriorityOnly) {
-            // just passing priority: a compact pair of buttons, no message
-            container.setLayout(new MigLayout("insets 0, gap 8, ax right, ay center"));
-            btnOK.setFont(FSkin.getBoldFont(16));
-            btnCancel.setFont(FSkin.getBoldFont(13));
-            container.add(btnOK, "w 52%!, h 40!");
-            container.add(btnCancel, "w 42%!, h 34!");
+            final int windowH = FView.SINGLETON_INSTANCE.getPnlContent().getHeight();
+            container.setLayout(new MigLayout("wrap 1, insets 0, gap 0, ax center", "[100%!]"));
+            container.add(arenaStrip, "w 100%!, h " + Math.round(windowH * 0.032f) + "!");
+            container.add(btnOK, "w 100%!, h " + Math.round(windowH * 0.07f) + "!");
+            arenaCaption.setFont(ArenaTheme.displayFont(Font.PLAIN, Math.max(13f, windowH * 0.0165f)));
+            container.add(arenaCaption, "w 100%!, h " + Math.round(windowH * 0.026f) + "!");
+            container.add(btnCancel, "w " + Math.round(windowH * 0.062f) + "!, h " + Math.round(windowH * 0.038f) + "!, al right");
             return;
         }
-        container.setLayout(new MigLayout("wrap 1, gap 0, insets 0, ax center, hidemode 3", "[center]", "[grow, fill]6[" + ARENA_BUTTON_ROW + "!]"));
-        tarMessage.setFont(FSkin.getRelativeFont(13));
+        container.setLayout(new MigLayout("wrap 1, gap 0, insets 0, ax center, hidemode 3", "[center]", "[grow, fill]6[" + buttonH + "!]"));
+        tarMessage.setFont(ArenaTheme.displayFont(Font.BOLD, Math.max(13f, buttonH * 0.34f)));
+        tarMessage.setForeground(java.awt.Color.WHITE);
         tarMessage.setOpaque(false);
         messageScroller.setOpaque(false);
         messageScroller.getViewport().setOpaque(false);
-        final JPanel pill = new JPanel(new MigLayout("insets 2 12 2 12, gap 0, fill")) {
+        final JPanel pill = new JPanel(new MigLayout("insets 9 14 9 14, gap 0, fill")) {
             @Override
             protected void paintComponent(final Graphics g) {
+                // a soft shadow behind the words, fading out on every side
                 final Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(new Color(8, 10, 16, 205));
-                g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 18, 18);
-                g2.setColor(ArenaTheme.GLASS_EDGE);
-                g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 18, 18);
+                final int soft = Math.min(20, getHeight() / 2 - 1);
+                ArenaTheme.paintGlow(g2, soft, soft, getWidth() - 2 * soft, getHeight() - 2 * soft, soft * 2, Color.BLACK, soft, 95);
+                g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(new Color(0, 0, 0, 92));
+                g2.fillRoundRect(soft, soft, getWidth() - 2 * soft, getHeight() - 2 * soft, soft * 2, soft * 2);
             }
         };
         pill.setOpaque(false);
-        arenaPill = pill;
         pill.add(messageScroller, "grow");
-        container.add(pill, "w 96%!, growy");
+        arenaPill = pill;
+        container.add(pill, "w 100%!, growy");
 
-        final JPanel buttons = new JPanel(new MigLayout("insets 0, gap 10, ax center"));
+        final JPanel buttons = new JPanel(new MigLayout("insets 0, gap 8, ax center", "[50%!][50%!]", "[grow, fill]"));
         buttons.setOpaque(false);
-        btnOK.setFont(FSkin.getBoldFont(17));
-        btnCancel.setFont(FSkin.getBoldFont(14));
-        buttons.add(btnOK, "w 48%!, h 42!");
-        buttons.add(btnCancel, "w 34%!, h 34!");
-        container.add(buttons, "w 100%!");
+        buttons.add(btnOK, "growx, h " + buttonH + "!");
+        buttons.add(btnCancel, "growx, h " + buttonH + "!");
+        container.add(buttons, "w 100%!, h " + buttonH + "!");
+    }
+
+    private static int arenaButtonHeight() {
+        return Math.max(30, Math.round(FView.SINGLETON_INSTANCE.getPnlContent().getHeight() * 0.058f));
+    }
+
+    /** "Next" with what it leads to, or "Resolve" while something waits on the stack; the game logic keeps reading OK and End Turn. */
+    private void updateArenaLabels(final boolean priorityOnly) {
+        if (!priorityOnly) {
+            btnOK.setArenaLabel(null);
+            btnCancel.setArenaLabel(null);
+            btnCancel.setToolTipText(null);
+            btnCancel.setPrimary(false);
+            return;
+        }
+        arenaStrip.repaint();
+        final GameView game = controller.getMatchUI().getGameView();
+        final boolean mine = game != null && game.getPlayerTurn() != null && controller.getMatchUI().isLocalPlayer(game.getPlayerTurn());
+        final boolean stackEmpty = game == null || game.getStack() == null || game.getStack().isEmpty();
+        String label = localizer.getMessage(mine ? "lblArenaNext" : "lblArenaPass");
+        String caption = "";
+        if (!stackEmpty) {
+            label = localizer.getMessage("lblArenaResolve");
+        } else if (mine && game.getPhase() != null) {
+            caption = switch (game.getPhase()) {
+                case UNTAP, UPKEEP, DRAW -> localizer.getMessage("lblArenaToMain");
+                case MAIN1 -> localizer.getMessage("lblArenaToCombat");
+                case COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_BLOCKERS, COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END -> localizer.getMessage("lblArenaToMain2");
+                default -> localizer.getMessage("lblArenaToEnd");
+            };
+        }
+        btnOK.setArenaLabel(label);
+        arenaCaption.setText(caption);
+        final String cancel = btnCancel.getText();
+        if (cancel != null && cancel.equals(localizer.getMessage("lblEndTurn"))) {
+            btnCancel.setArenaLabel("\u00BB");
+            btnCancel.setToolTipText(cancel);
+            btnCancel.setPrimary(true);
+        } else {
+            btnCancel.setArenaLabel(null);
+            btnCancel.setToolTipText(null);
+            btnCancel.setPrimary(false);
+        }
     }
 
     /**
@@ -237,6 +278,7 @@ public class VPrompt implements IVDoc<CPrompt> {
                 && (cancel.equals(localizer.getMessage("lblEndTurn")) || cancel.startsWith(localizer.getMessage("lblUndo")));
         final ArenaPromptMode mode = !btnOK.isEnabled() && !btnCancel.isEnabled() ? ArenaPromptMode.HIDDEN
                 : priorityOnly ? ArenaPromptMode.PRIORITY : ArenaPromptMode.DECISION;
+        updateArenaLabels(priorityOnly);
         if (mode == arenaMode) {
             return;
         }
@@ -255,9 +297,9 @@ public class VPrompt implements IVDoc<CPrompt> {
     }
 
     /**
-     * Arena: puts the prompt where it belongs. Priority-only buttons sit beside the hand; a
-     * decision is as tall as its whole message (scrolling only past a third of the window) and
-     * sits centred just above the local portrait, never over it.
+     * Arena: puts the prompt where it belongs. Priority-only buttons go in the corner. A decision
+     * is as tall as its whole message (scrolling only past a third of the window) and stays
+     * within the gap the back row leaves above the portrait, sitting on top of the portrait.
      */
     public void placeArena() {
         if (arenaMode == null) {
@@ -272,46 +314,45 @@ public class VPrompt implements IVDoc<CPrompt> {
         if (cw <= 0 || ch <= 0) {
             return;
         }
+        final int buttonH = arenaButtonHeight();
+        if (buttonH != arenaLaidOutButtonH) {
+            // the window's size has changed, and the fixed sizes in the layout with it
+            arenaLaidOutButtonH = buttonH;
+            final JPanel container = parentCell.getBody();
+            container.removeAll();
+            populateArena(container, FModel.getPreferences());
+        }
         int x, y, w, h;
         if (arenaMode == ArenaPromptMode.PRIORITY) {
-            final RectangleOfDouble r = ARENA_PRIORITY_BOUNDS;
-            x = (int) Math.round(r.getX() * cw);
-            y = (int) Math.round(r.getY() * ch);
-            w = (int) Math.round(r.getW() * cw);
-            h = (int) Math.round(r.getH() * ch);
+            w = Math.round(cw * 0.125f);
+            h = Math.round(ch * 0.032f) + Math.round(ch * 0.07f) + Math.round(ch * 0.026f) + Math.round(ch * 0.038f) + 2;
+            x = cw - w - Math.round(cw * 0.012f);
+            y = Math.round(ch * 0.985f) - h;
         } else {
-            w = Math.min(cw - 16, Math.max(440, (int) Math.round(ARENA_DECISION_WIDTH * cw)));
-            // the viewer's own wrapped height at the width it will get (pill insets 12+12, viewer margin 3+3)
-            final int textW = Math.round(w * 0.96f) - 44;
+            w = Math.max(340, Math.round(ch * 0.4f));
+            // the viewer's own wrapped height at the width it will get (pill insets 6+6, viewer margin 3+3, a little to spare)
+            final int textW = w - 40;
             tarMessage.setSize(textW, Short.MAX_VALUE);
             final int textH = tarMessage.getPreferredSize().height;
-            final int pillH = Math.max(30, Math.min(textH + 16, ch / 3));
-            // no message yet (the game is still setting up): just the buttons, not an empty bar
+            final int pillH = Math.min(textH + 24, ch / 3);
+            // a scrollbar only when the message really is that long
+            messageScroller.setVerticalScrollBarPolicy(textH + 24 > ch / 3 ? ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED : ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+            // no message yet (the game is still setting up): just the buttons, not an empty shadow
             final boolean blank = isMessageBlank();
             if (arenaPill != null) {
                 arenaPill.setVisible(!blank);
             }
-            h = (blank ? 0 : pillH + 6) + ARENA_BUTTON_ROW;
-            int centreX = cw / 2;
-            int bottom = (int) Math.round((ARENA_DECISION_BOUNDS.getY() + ARENA_DECISION_BOUNDS.getH()) * ch);
-            final JComponent avatar = localAvatar();
-            followAvatar(avatar);
-            // laid out is enough: the board may be placed before the match screen is on show
-            if (avatar != null && avatar.getHeight() > 0 && SwingUtilities.isDescendingFrom(avatar, content)) {
-                final Point top = SwingUtilities.convertPoint(avatar, avatar.getWidth() / 2, 0, content);
-                centreX = top.x;
-                bottom = top.y - 6;
-            }
-            x = Math.max(8, Math.min(cw - w - 8, centreX - w / 2));
-            y = Math.max(8, bottom - h);
+            h = (blank ? 0 : pillH + 6) + buttonH;
+            x = (cw - w) / 2;
+            y = Math.max(8, Math.round(ch * ARENA_FRAME_TOP) - h);
         }
         if (followedCell != parentCell) {
             // a layout reload (4-player boards do one) puts the cell back where the layout file has it
             if (followedCell != null) {
-                followedCell.removeComponentListener(avatarMoved);
+                followedCell.removeComponentListener(cellMoved);
             }
             followedCell = parentCell;
-            parentCell.addComponentListener(avatarMoved);
+            parentCell.addComponentListener(cellMoved);
         }
         parentCell.setRoughBounds(new RectangleOfDouble(x / (double) cw, y / (double) ch, w / (double) cw, h / (double) ch));
         parentCell.setBounds(x, y, w, h);
@@ -319,34 +360,63 @@ public class VPrompt implements IVDoc<CPrompt> {
         content.repaint();
     }
 
-    /** The board lays out after the prompt is first placed, and again on every resize; the prompt moves with the portrait. */
-    private void followAvatar(final JComponent avatar) {
-        if (avatar == trackedAvatar) {
-            return;
-        }
-        if (trackedAvatar != null) {
-            trackedAvatar.removeComponentListener(avatarMoved);
-            trackedAvatar.removeHierarchyBoundsListener(avatarAncestorMoved);
-        }
-        trackedAvatar = avatar;
-        if (avatar != null) {
-            avatar.addComponentListener(avatarMoved);
-            avatar.addHierarchyBoundsListener(avatarAncestorMoved);
-        }
-    }
-
-    private JComponent trackedAvatar;
-    private JPanel arenaPill;
-
-    private boolean isMessageBlank() {
-        try {
-            return tarMessage.getDocument().getText(0, tarMessage.getDocument().getLength()).trim().isEmpty();
-        } catch (final javax.swing.text.BadLocationException e) {
-            return false;
-        }
-    }
     private DragCell followedCell;
-    private final ComponentAdapter avatarMoved = new ComponentAdapter() {
+    private JPanel arenaPill;
+    private int arenaLaidOutButtonH;
+    private final JLabel arenaCaption = new JLabel() {
+        @Override
+        protected void paintComponent(final Graphics g) {
+            // white words with a dark edge, readable over whatever the corner of the board is doing
+            final Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(java.awt.RenderingHints.KEY_TEXT_ANTIALIASING, java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2.setFont(getFont());
+            final java.awt.FontMetrics fm = g2.getFontMetrics();
+            final int x = (getWidth() - fm.stringWidth(getText())) / 2, y = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
+            g2.setColor(new Color(0, 0, 0, 220));
+            g2.drawString(getText(), x + 1, y + 1);
+            g2.drawString(getText(), x - 1, y + 1);
+            g2.drawString(getText(), x, y - 1);
+            g2.setColor(new Color(218, 222, 230));
+            g2.drawString(getText(), x, y);
+            g2.dispose();
+        }
+    };
+    private static final float ARENA_FRAME_TOP = 0.71f; // where the local portrait's frame starts, as a fraction of the window's height
+
+    /** The turn at a glance above the action button: a step, main, combat, main, a step, with the current one alight. */
+    private final javax.swing.JComponent arenaStrip = new javax.swing.JComponent() {
+        @Override
+        protected void paintComponent(final Graphics g0) {
+            final Graphics2D g = (Graphics2D) g0.create();
+            try {
+                g.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+                final GameView game = controller.getMatchUI().getGameView();
+                int lit = -1;
+                if (game != null && game.getPhase() != null) {
+                    lit = switch (game.getPhase()) {
+                        case UNTAP, UPKEEP, DRAW -> 0;
+                        case MAIN1 -> 1;
+                        case MAIN2 -> 3;
+                        case END_OF_TURN, CLEANUP -> 4;
+                        default -> 2;
+                    };
+                }
+                final int[] kinds = {0, 1, 2, 1, 0};
+                final int size = getHeight();
+                final int gap = size / 4;
+                final int total = kinds.length * size + (kinds.length - 1) * gap;
+                int x = (getWidth() - total) / 2;
+                for (int i = 0; i < kinds.length; i++) {
+                    forge.toolbox.ArenaArt.paintPhaseGlyph(g, x, 0, size, kinds[i], i == lit, true, false);
+                    x += size + gap;
+                }
+            } finally {
+                g.dispose();
+            }
+        }
+    };
+
+    private final ComponentAdapter cellMoved = new ComponentAdapter() {
         @Override
         public void componentMoved(final ComponentEvent e) {
             SwingUtilities.invokeLater(VPrompt.this::placeArena);
@@ -362,28 +432,13 @@ public class VPrompt implements IVDoc<CPrompt> {
             SwingUtilities.invokeLater(VPrompt.this::placeArena);
         }
     };
-    private final HierarchyBoundsAdapter avatarAncestorMoved = new HierarchyBoundsAdapter() {
-        @Override
-        public void ancestorMoved(final HierarchyEvent e) {
-            SwingUtilities.invokeLater(VPrompt.this::placeArena);
-        }
 
-        @Override
-        public void ancestorResized(final HierarchyEvent e) {
-            SwingUtilities.invokeLater(VPrompt.this::placeArena);
+    private boolean isMessageBlank() {
+        try {
+            return tarMessage.getDocument().getText(0, tarMessage.getDocument().getLength()).trim().isEmpty();
+        } catch (final javax.swing.text.BadLocationException e) {
+            return false;
         }
-    };
-
-    /** The portrait of the player at this screen. */
-    private JComponent localAvatar() {
-        final CMatchUI matchUI = controller.getMatchUI();
-        for (final PlayerView p : matchUI.getLocalPlayers()) {
-            final VField field = matchUI.getFieldViewFor(p);
-            if (field != null) {
-                return field.getAvatarArea();
-            }
-        }
-        return null;
     }
 
     /* (non-Javadoc)

@@ -99,7 +99,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     public void doCellLayout(final boolean showTabs) {
         this.removeAll();
         applyArenaChrome();
-        final int borderT = SLayoutConstants.BORDER_T;
+        final int borderT = ArenaTheme.isMatchBoard() ? 0 : SLayoutConstants.BORDER_T;
         final int headH = ((showTabs || allDocs.size() > 1) ? SLayoutConstants.HEAD_H : 0);
         this.add(pnlHead,
                 "w 100% - " + borderT + "px!" + ", " + "h " + headH + "px!");
@@ -142,7 +142,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
         if (arenaGlass) {
-            final int border = SLayoutConstants.BORDER_T;
+            final int border = ArenaTheme.isMatchBoard() ? 0 : SLayoutConstants.BORDER_T;
             int h = getHeight() - border;
             if (arenaDock) {
                 int bottom = 0;

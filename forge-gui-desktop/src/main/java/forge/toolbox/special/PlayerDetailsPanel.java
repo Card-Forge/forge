@@ -1,6 +1,9 @@
 package forge.toolbox.special;
 
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -132,34 +135,79 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     /**
-     * Arena board: library, graveyard and exile (and the command zone in Commander) as
-     * card piles, with slim chips beside them for the hand count and the less common
-     * zones, shown only when not empty. Compact bars leave the chips out.
+     * Arena board: library, graveyard and exile (and the command zone in Commander) as card
+     * piles side by side, an empty pile taking no room. Opponents' piles line up from the right.
+     * The local player's commander waits beside the hand, so only an emblem or the like shows here.
      */
-    public JPanel createArenaZones(final Supplier<Iterable<PlayerView>> viewers, final boolean withCommand, final boolean compact) {
+    public JPanel createArenaZones(final Supplier<Iterable<PlayerView>> viewers, final boolean withCommand, final boolean compact, final boolean mirror) {
         arenaMode = true;
-        final JPanel pnl = new JPanel(new MigLayout("insets 0, gap 4, hidemode 3"));
+        final JPanel pnl = new JPanel(new ArenaPileLayout(mirror && !compact));
         pnl.setOpaque(false);
-        final String pileSize = compact ? "w 58!, h 100%!" : "w 74!, h 100%!";
-        if (withCommand) {
-            pnl.add(getArenaPile(ZoneType.Command, viewers), pileSize + ", gapright 6");
-        }
         for (final ZoneType zone : new ZoneType[] {ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile}) {
-            pnl.add(getArenaPile(zone, viewers), pileSize);
+            pnl.add(getArenaPile(zone, viewers));
         }
-        if (compact) {
-            updateZones();
-            return pnl;
+        if (withCommand) {
+            final ArenaZonePile command = getArenaPile(ZoneType.Command, viewers);
+            command.setOmitCommanders(!mirror);
+            pnl.add(command);
         }
-        final JPanel chips = new JPanel(new MigLayout("insets 0, gap 2, wrap 2, hidemode 3"));
-        chips.setOpaque(false);
-        for (final ZoneType zone : new ZoneType[] {ZoneType.Hand, ZoneType.Flashback, ZoneType.Command, ZoneType.Sideboard}) {
-            chips.add(zoneLabels.get(zone), "w 54!, h 24!");
-        }
-        chips.add(extraLabel, "w 54!, h 24!");
-        pnl.add(chips, "aligny center");
         updateZones();
         return pnl;
+    }
+
+    /** Card-shaped piles in a row at the panel's height; hidden ones take no room. */
+    private static final class ArenaPileLayout implements LayoutManager {
+        private final boolean fromRight;
+
+        ArenaPileLayout(final boolean fromRight0) {
+            this.fromRight = fromRight0;
+        }
+
+        @Override
+        public void addLayoutComponent(final String name, final Component comp) { }
+
+        @Override
+        public void removeLayoutComponent(final Component comp) { }
+
+        private static int pileWidth(final Container c) {
+            // as wide as they like, until there are too many for the room: then all a little narrower, none cut off
+            final int natural = Math.round(c.getHeight() * 0.78f);
+            int shown = 0;
+            for (final Component comp : c.getComponents()) {
+                if (comp.isVisible()) {
+                    shown++;
+                }
+            }
+            return shown < 2 || c.getWidth() <= 0 ? natural : Math.min(natural, (c.getWidth() - 4 * (shown - 1)) / shown);
+        }
+
+        @Override
+        public Dimension preferredLayoutSize(final Container c) {
+            int w = 0;
+            for (final Component comp : c.getComponents()) {
+                if (comp.isVisible()) {
+                    w += pileWidth(c) + 4;
+                }
+            }
+            return new Dimension(w, c.getHeight());
+        }
+
+        @Override
+        public Dimension minimumLayoutSize(final Container c) {
+            return new Dimension(0, 0);
+        }
+
+        @Override
+        public void layoutContainer(final Container c) {
+            final int pw = pileWidth(c);
+            int x = fromRight ? c.getWidth() - pw : 0;
+            for (final Component comp : c.getComponents()) {
+                if (comp.isVisible()) {
+                    comp.setBounds(x, 0, pw, c.getHeight());
+                    x += fromRight ? -(pw + 4) : pw + 4;
+                }
+            }
+        }
     }
 
     /** An opponent's hand as a fan of card backs. */
@@ -194,7 +242,8 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public Component getLblLibrary() {
-        return zoneLabels.get(ZoneType.Library);
+        final ArenaZonePile pile = arenaPiles.get(ZoneType.Library);
+        return arenaMode && pile != null ? pile : zoneLabels.get(ZoneType.Library);
     }
 
     /**

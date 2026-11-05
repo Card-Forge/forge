@@ -37,6 +37,7 @@ public class ArenaZonePile extends JComponent {
     private final PlayerView player;
     private final ZoneType zone;
     private final Supplier<Iterable<PlayerView>> viewers;
+    private boolean omitCommanders;
     private CardView shownCard;
     private CachedCardImage shownImage;
 
@@ -50,6 +51,24 @@ public class ArenaZonePile extends JComponent {
 
     public ZoneType getZone() {
         return zone;
+    }
+
+    /** The local player's commanders wait beside the hand, so this pile only counts what else is in the zone. */
+    public void setOmitCommanders(final boolean omit) {
+        this.omitCommanders = omit;
+        update();
+    }
+
+    private int shownCount() {
+        int count = player.getZoneSize(zone);
+        if (omitCommanders && player.getCards(zone) != null && player.getCommanders() != null) {
+            for (final CardView c : player.getCards(zone)) {
+                if (player.getCommanders().contains(c)) {
+                    count--;
+                }
+            }
+        }
+        return count;
     }
 
     /** Refreshes the count and, for face-up piles, the top card. */
@@ -66,9 +85,28 @@ public class ArenaZonePile extends JComponent {
                     }
                 }
             }
+            if (omitCommanders && cards != null && player.getCommanders() != null) {
+                top = null;
+                for (final CardView c : cards) {
+                    if (!player.getCommanders().contains(c)) {
+                        top = c;
+                    }
+                }
+            }
             if (top != shownCard) {
                 shownCard = top;
                 shownImage = null;
+            }
+        }
+        if (zone == ZoneType.Hand) {
+            setToolTipText(zone.getTranslatedName() + ": " + shownCount());
+        }
+        // an empty pile takes no room; only the library is always there
+        final boolean show = zone == ZoneType.Library || zone == ZoneType.Hand || shownCount() > 0;
+        if (show != isVisible()) {
+            setVisible(show);
+            if (getParent() != null) {
+                getParent().revalidate();
             }
         }
         repaint();
@@ -96,7 +134,7 @@ public class ArenaZonePile extends JComponent {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            final int count = player.getZoneSize(zone);
+            final int count = shownCount();
             if (zone == ZoneType.Hand) {
                 paintHandFan(g, count);
             } else {
@@ -108,18 +146,19 @@ public class ArenaZonePile extends JComponent {
     }
 
     private void paintPile(final Graphics2D g, final int count) {
-        final int pad = 3;
-        int ch = getHeight() - 2 * pad - 4;
+        final int pad = 2;
+        final int depth = zone == ZoneType.Library ? Math.min(5, 1 + count / 15) : Math.min(2, 1 + count / 6);
+        int ch = getHeight() - 2 * pad - 3 - depth * 2;
         int cw = Math.round(ch * CARD_RATIO);
-        if (cw > getWidth() - 2 * pad - 4) {
-            cw = getWidth() - 2 * pad - 4;
+        if (cw > getWidth() - 2 * pad - depth * 2) {
+            cw = getWidth() - 2 * pad - depth * 2;
             ch = Math.round(cw / CARD_RATIO);
         }
         if (cw <= 0 || ch <= 0) {
             return;
         }
-        final int x = (getWidth() - cw) / 2;
-        final int y = (getHeight() - ch) / 2;
+        final int x = (getWidth() - cw - depth * 2) / 2;
+        final int y = getHeight() - ch - pad;
         final int arc = Math.max(4, cw / 9);
 
         if (count == 0) {
@@ -131,13 +170,13 @@ public class ArenaZonePile extends JComponent {
             return;
         }
 
-        // thickness: a few offset layers behind the top card
-        final int layers = Math.min(4, 1 + count / 12);
-        for (int i = layers; i >= 1; i--) {
-            final int o = i * 2;
-            paintCardBack(g, x + o, y - o, cw, ch, arc, true);
+        // thickness: the pile's edges rising up behind the top card
+        ArenaTheme.paintGlow(g, x, y + 2, cw + depth * 2, ch, arc, Color.BLACK, 9, 210);
+        // one solid block of page edges, lit along its far edge
+        for (int o = depth * 2; o >= 1; o--) {
+            g.setColor(o == depth * 2 ? new Color(150, 142, 124) : new Color(70, 66, 58));
+            g.fill(new RoundRectangle2D.Float(x + o, y - o, cw, ch, arc, arc));
         }
-        ArenaTheme.paintGlow(g, x, y + 2, cw, ch, arc, Color.BLACK, 3, 120);
 
         final BufferedImage face = zone == ZoneType.Library ? null : getTopCardImage(cw, ch);
         if (face != null) {
@@ -152,7 +191,7 @@ public class ArenaZonePile extends JComponent {
         } else {
             paintCardBack(g, x, y, cw, ch, arc, false);
         }
-        g.setColor(ArenaTheme.alpha(ArenaTheme.GOLD, 120));
+        g.setColor(new Color(0, 0, 0, 200));
         g.setStroke(new BasicStroke(1f));
         g.draw(new RoundRectangle2D.Float(x + 0.5f, y + 0.5f, cw - 1, ch - 1, arc, arc));
 
@@ -176,23 +215,31 @@ public class ArenaZonePile extends JComponent {
         final int cw = Math.round(ch * CARD_RATIO);
         final int arc = Math.max(4, cw / 9);
         final int shown = Math.min(count, 10);
-        final double spread = Math.toRadians(Math.min(40, 6 * shown));
+        // spread sideways as well as turned, so it reads as a held hand and not a stack
+        final int stepX = shown < 2 ? 0 : Math.min(cw * 55 / 100, (getWidth() - cw) / (shown - 1));
+        final double turn = Math.toRadians(4.5);
         final int cx = getWidth() / 2;
-        final int pivotY = getHeight() + ch; // fan pivots far below so the backs splay gently
         for (int i = 0; i < shown; i++) {
-            final double a = shown == 1 ? 0 : -spread / 2 + spread * i / (shown - 1);
+            final float place = i - (shown - 1) / 2f;
+            final int cardX = Math.round(cx + place * stepX);
             final AffineTransform old = g.getTransform();
-            g.rotate(a, cx, pivotY);
-            paintCardBack(g, cx - cw / 2, getHeight() - ch - 2, cw, ch, arc, false);
+            g.rotate(place * turn, cardX, getHeight() + ch / 5);
+            paintCardBack(g, cardX - cw / 2, getHeight() - ch - 2, cw, ch, arc, true); // dimmed: it must not outshine the board
             g.setTransform(old);
         }
-        paintCountBadge(g, String.valueOf(count), cx, getHeight() - ch / 3);
+        // the fan is the count; only a hand too big to draw needs saying
+        if (count > shown) {
+            paintCountBadge(g, String.valueOf(count), cx, getHeight() - ch / 3);
+        }
     }
 
     private void paintCardBack(final Graphics2D g, final int x, final int y, final int w, final int h, final int arc, final boolean dim) {
         final BufferedImage sleeve = FSkin.getSleeveImage(player.getSleeveIndex());
         final RoundRectangle2D r = new RoundRectangle2D.Float(x, y, w, h, arc, arc);
-        if (sleeve != null) {
+        if (player.getSleeveIndex() == 0) {
+            // the default sleeve is a small logo sprite that does not survive enlarging
+            forge.toolbox.ArenaArt.paintCardBack(g, x, y, w, h, arc);
+        } else if (sleeve != null) {
             final Shape oldClip = g.getClip();
             g.clip(r);
             g.drawImage(sleeve, x, y, w, h, null);
@@ -216,18 +263,18 @@ public class ArenaZonePile extends JComponent {
     }
 
     private void paintCountBadge(final Graphics2D g, final String text, final int centerX, final int centerY) {
-        g.setFont(getFont().deriveFont(Font.BOLD, 12f));
+        g.setFont(ArenaTheme.numeralFont(Font.BOLD, Math.max(15f, getHeight() * 0.15f)));
         final FontMetrics fm = g.getFontMetrics();
-        final int bh = fm.getAscent() + 6;
+        final int bh = fm.getAscent() + 5;
         final int bw = Math.max(bh, fm.stringWidth(text) + 12);
         int bx = centerX - bw / 2;
         int by = Math.min(getHeight() - bh, centerY - bh / 2);
         bx = Math.max(0, Math.min(getWidth() - bw, bx));
         by = Math.max(0, by);
         final RoundRectangle2D badge = new RoundRectangle2D.Float(bx, by, bw, bh, bh, bh);
-        g.setColor(new Color(8, 13, 25, 235));
+        g.setColor(new Color(6, 6, 8, 235));
         g.fill(badge);
-        g.setColor(ArenaTheme.GOLD);
+        g.setColor(new Color(255, 255, 255, 120));
         g.draw(badge);
         g.setColor(ArenaTheme.TEXT);
         g.drawString(text, bx + (bw - fm.stringWidth(text)) / 2, by + bh - 4 - fm.getDescent() / 2);

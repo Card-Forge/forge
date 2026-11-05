@@ -61,12 +61,12 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     private static final float FAN_MIN_STEP = 0.3f;  // tightest overlap before the cards shrink
     private static final float FAN_ARC = 0.06f;      // how far the outermost cards dip, in card heights
     private static final float FAN_LIFT = 0.08f;     // how far the hovered card rises, in card heights
-    private static final float FAN_SINK = 0.5f;      // how much of a resting card is below the bottom edge
-    private static final float FAN_COST_ROW = 0.13f; // strip above the cards for their mana costs, in area heights
-    private static final float FAN_EXTRAS_GAP = 0.3f;  // space between the hand and the cards castable from elsewhere
+    private static final float FAN_SINK = 0.52f;     // how much of a resting card is below the bottom edge
+    private static final float FAN_COST_ROW = 0.09f; // strip above the cards for their mana costs, in area heights
+    private static final double FAN_LEAN = Math.toRadians(2.2); // lean per place away from the middle of the hand
+    private static final double FAN_MAX_LEAN = Math.toRadians(9);
+    private static final float FAN_EXTRAS_GAP = 0.42f;  // space between the hand and the cards castable from elsewhere
     private static final float FAN_EXTRAS_STEP = 0.62f; // spacing of those cards, in card widths
-    private static final float FAN_LEFT = 0.17f;     // Arena board: the button dock covers the hand row's left corner
-    private static final float FAN_RIGHT = 0.18f;    // and the log its right one
 
     private float maxCoverage = 0.5f;
     private int maxRows = 0;
@@ -118,7 +118,16 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             final int panelY = panel == this.getMouseDragPanel() ? this.mouseDragStartY : panel.getCardY();
             final int panelWidth = panel.getCardWidth();
             final int panelHeight = panel.getCardHeight();
-            if ((x > panelX) && (x < (panelX + panelWidth)) && (y > panelY) && (y < (panelY + panelHeight))) {
+            // a leaning card is hit where it is drawn
+            int hx = x, hy = y;
+            final double lean = panel.getArenaFanAngle();
+            if (lean != 0d) {
+                final double px = panelX + panelWidth / 2d, py = panelY + panelHeight;
+                final double cos = Math.cos(-lean), sin = Math.sin(-lean);
+                hx = (int) Math.round(cos * (x - px) - sin * (y - py) + px);
+                hy = (int) Math.round(sin * (x - px) + cos * (y - py) + py);
+            }
+            if ((hx > panelX) && (hx < (panelX + panelWidth)) && (hy > panelY) && (hy < (panelY + panelHeight))) {
                 if (!panel.isDisplayEnabled()) {
                     return null;
                 }
@@ -298,9 +307,10 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         final List<CardPanel> panels = this.getCardPanels();
         final int extras = Math.max(0, Math.min(fanExtras, panels.size()));
         final int count = panels.size() - extras;
-        // on the Arena board the button dock and the log sit over the hand row's corners
-        final int left = ArenaTheme.isMatchBoard() ? Math.round(areaWidth * FAN_LEFT) : CardArea.GUTTER_X;
-        final int right = areaWidth - (ArenaTheme.isMatchBoard() ? Math.round(areaWidth * FAN_RIGHT) : CardArea.GUTTER_X);
+        // room at the sides for leaning cards and for the neighbours of a lifted card to part into
+        final int sideRoom = Math.round(areaHeight * 0.3f) + Math.round(areaWidth * 0.055f);
+        final int left = CardArea.GUTTER_X + sideRoom;
+        final int right = areaWidth - CardArea.GUTTER_X - sideRoom;
         final int availableWidth = right - left;
         // a strip above the cards for their mana costs, which the sunk cards would otherwise hide
         final int costRow = Math.round(areaHeight * FAN_COST_ROW);
@@ -334,6 +344,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         final CardPanel raised = getRaisedPanel();
+        final int raisedIndex = raised == null ? -1 : panels.indexOf(raised);
+        final int spread = raised == null ? 0 : Math.round(cardWidth * 0.42f);
         final int maxZOrder = this.getComponentCount() - 1;
         for (int i = 0; i < count; i++) {
             final CardPanel panel = panels.get(i);
@@ -342,11 +354,15 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             if (panel == raised) {
                 y -= lift;
             }
+            // leans out from the middle of the hand, and straightens when lifted; the cost sits over the part its neighbour leaves showing
+            final double lean = panel == raised || count < 2 ? 0d
+                    : Math.max(-FAN_MAX_LEAN, Math.min(FAN_MAX_LEAN, (i - (count - 1) / 2d) * FAN_LEAN));
+            panel.setArenaFan(lean, i == count - 1 ? cardWidth : Math.round(step));
             if (panel != this.getMouseDragPanel()) {
-                panel.setCardBounds(Math.round(x), y, cardWidth, cardHeight);
+                // the neighbours part to let the lifted card be seen
+                final int part = raisedIndex < 0 || i == raisedIndex ? 0 : i < raisedIndex ? -spread : spread;
+                panel.setCardBounds(Math.round(x) + part, y, cardWidth, cardHeight);
             }
-            // the cost sits over the part of the card its right-hand neighbour leaves showing
-            panel.setArenaCostWidth(i == count - 1 ? cardWidth : Math.round(step));
             // later cards overlap earlier ones
             this.setComponentZOrder(panel, Math.max(0, Math.min(panels.size() - 1 - i, maxZOrder)));
             x += step;
@@ -356,8 +372,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
             final float extraStep = cardWidth * FAN_EXTRAS_STEP;
             for (int i = 0; i < extras; i++) {
                 final CardPanel panel = panels.get(count + i);
-                panel.setCardBounds(Math.round(x), panel == raised ? baseY - lift : baseY, cardWidth, cardHeight);
-                panel.setArenaCostWidth(i == extras - 1 ? cardWidth : Math.round(extraStep));
+                // the arc carries on through them
+                panel.setArenaFan(panel == raised ? 0d : Math.min(FAN_MAX_LEAN, FAN_LEAN * (count / 2d + i + 1)), i == extras - 1 ? cardWidth : Math.round(extraStep));
+                // the arc carries on through them, in height too
+                final int aside = raisedIndex >= 0 && raisedIndex < count ? spread : 0;
+                panel.setCardBounds(Math.round(x) + aside, (panel == raised ? baseY - lift : baseY) + arc, cardWidth, cardHeight);
                 this.setComponentZOrder(panel, Math.max(0, Math.min(extras - 1 - i, maxZOrder)));
                 x += extraStep;
             }
