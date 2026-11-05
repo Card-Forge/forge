@@ -210,14 +210,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         });
 
         update(false);
-        // Restored before the background load below, so the saved format's deck lists load first
-        lobby.restoreSetup();
 
         add(playersScroll);
 
         updatePlayersFromPrefs();
 
-        FThreads.invokeInBackgroundThread(() -> {
+        // Blocks input until the decks load and the setup is restored, as saving a seat's deck before it loads throws
+        LoadingOverlay.runBackgroundTask(Forge.getLocalizer().getMessage("lblLoadingEllipsis"), true, loader -> {
             playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
             playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
             try {
@@ -235,6 +234,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
             FThreads.invokeInEdtLater(() -> {
                 btnStart.setEnabled(lobby.hasControl());
+                lobby.restoreSetup();
+                updateLayoutForVariants();
             });
         });
 
