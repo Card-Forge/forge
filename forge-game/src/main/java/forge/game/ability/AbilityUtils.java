@@ -156,13 +156,11 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
-            if (((SpellAbility)sa).getTargets() != null) {
-                ((SpellAbility)sa).getTargets().getTargetCards().forEach(cards::add);
-            }
+            cards.addAll(((SpellAbility)sa).getTargets().getTargetCards());
         } else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
             final SpellAbility parent = ((SpellAbility)sa).getParentTargetingCard();
             if (parent != null) {
-                parent.getTargets().getTargetCards().forEach(cards::add);
+                cards.addAll(parent.getTargets().getTargetCards());
             }
         }  else if (defined.startsWith("Triggered") && sa != null) {
             final CardTraitBase root = sa instanceof SpellAbility ? ((SpellAbility)sa).getRootAbility() : sa;
@@ -952,9 +950,7 @@ public class AbilityUtils {
                 players.addAll(parent.getTargets().getTargetPlayers());
             }
         } else if (defined.equals("ThisTargetedPlayer") && sa instanceof SpellAbility) { // do not add parent targeted
-            if (((SpellAbility)sa).getTargets() != null) {
-                ((SpellAbility)sa).getTargets().getTargetPlayers().forEach(players::add);
-            }
+            players.addAll(((SpellAbility)sa).getTargets().getTargetPlayers());
         } else if (defined.equals("TargetedController")) {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
                 players.add(c.getController());
@@ -3968,7 +3964,7 @@ public class AbilityUtils {
     public static int countCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
-            c1.getType().getCoreTypes().forEach(types::add);
+            types.addAll(c1.getType().getCoreTypes());
         }
         if (permanentTypes)
             return (int) types.stream().filter(type -> type.isPermanent).count();
