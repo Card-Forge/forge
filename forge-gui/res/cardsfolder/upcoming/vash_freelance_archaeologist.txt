@@ -1,0 +1,10 @@
+Name:Vash, Freelance Archaeologist
+ManaCost:1 B G
+Types:Legendary Creature Human Rogue Scientist
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | ValidCard$ Card.YouOwn | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever a card leaves your graveyard, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Ability$Graveyard
+Oracle:At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nWhenever a card leaves your graveyard, draw a card. This ability triggers only once each turn.

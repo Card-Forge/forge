@@ -11,6 +11,7 @@
     "Glacial Chasm",
     "Void Mirror",
     "Hall of Gemstone",
+    "Humility",
     "Drannith Magistrate",
     "Back to Basics",
     "Limited Resources",
@@ -69,6 +70,7 @@
     "The Raven's Warning",
     "Turtles Forever",
     "North Wind Avatar",
+    "Extrapolate the Impossible",
     "Vivien, Arkbow Ranger",
     "Invasion of Arcavios",
     "Spawnsire of Ulamog",
@@ -78,6 +80,7 @@
     "Demonic Tutor",
     "Vampiric Tutor",
     "Wishclaw Talisman",
+    "Natural Order",
     "The One Ring",
     "Necropotence",
     "Academy Rector",
@@ -105,14 +108,16 @@
     "Tainted Pact",
     "Defense of the Heart",
     "Oath of Druids",
+    "Harbinger of the Seas",
+    "Magus of the Moon",
+    "Blood Moon",
     "Time Vault",
     "Tinker",
     "Flash",
     "Thassa's Oracle",
     "Yawgmoth's Will",
     "Underworld Breach",
-    "Grindstone",
-    "Nadu, Winged Wisdom"
+    "Grindstone"
   ],
   "restrictedEditions": [
     "HTR",
@@ -154,7 +159,7 @@
       "startingLife": 35,
       "startingShards": 50,
       "startingMoney": 5000,
-      "enemyLifeFactor": 0.8,
+      "enemyLifeFactor": 1.0,
       "spawnRank": 0,          
       "goldLoss": 0,          
       "lifeLoss": 0.1,
@@ -178,7 +183,8 @@
         "Steel Boots",
         "Chromatic Sphere",
         "Echo Shield",
-        "Cloak of the Wastes"
+        "Cloak of the Wastes",
+        "Commander's Sphere"
       ]
     }
     ,{

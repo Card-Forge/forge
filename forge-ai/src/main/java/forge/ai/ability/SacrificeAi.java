@@ -218,6 +218,13 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         }
 
+        // don't keep paying for an "exile until leaves" permanent that no longer exiles anything (e.g. Static Prison)
+        final Card source = sa.getHostCard();
+        if (source.hasSVar("OblivionRing") && "Self".equals(sa.getParamOrDefault("SacValid", "Self"))
+                && source.getUntilLeavesBattlefield().isEmpty()) {
+            return false;
+        }
+
         return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

@@ -1,0 +1,10 @@
+Name:Wolf in _____ Clothing
+ManaCost:3 B
+Types:Creature Wolf Guest
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSticker | TriggerDescription$ When this creature enters, you may put a name sticker on it. When you do, up to X target creatures each get -1/-1 until end of turn, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)
+SVar:TrigSticker:DB$ PutSticker | Kind$ Name | Defined$ Self | Optional$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPump | RememberSVarAmount$ StickerUniqueVowels | ConditionCheckSVar$ StickersPlaced | ConditionSVarCompare$ GE1 | TriggerDescription$ When you do, up to X target creatures each get -1/-1 until end of turn, where X is the number of unique vowels on that sticker.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select up to X target creatures | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+SVar:X:Count$TriggerRememberAmount
+Oracle:When this creature enters, you may put a name sticker on it. When you do, up to X target creatures each get -1/-1 until end of turn, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)

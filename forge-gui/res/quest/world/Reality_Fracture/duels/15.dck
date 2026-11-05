@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Leprechaun
+Title=Leprechaun
+Icon=Leprechaun.jpg
+Difficulty=Easy
+Description=./Standard/Reality_Fracture/ATmagic_-_UR_Aggro_(Standard,_#901328).dck
+Deck Type=constructed
+
+[Main]
+1 Spell Snare
+1 Vibrant Outburst
+1 Wild Ride
+1 Stock Up
+2 Impractical Joke
+2 Secret Identity
+2 Bounce Off
+4 Sleight of Hand
+4 Burst Lightning
+4 Flow State
+4 Opt
+2 Eddymurk Crab
+4 Elusive Otter
+4 Slickshot Show-Off
+4 Pompous Battlemage
+1 Starting Town
+1 Mountain
+2 Multiversal Passage
+4 Island
+4 Steam Vents
+4 Riverpyre Verge
+4 Spirebluff Canal
+[Sideboard]
+1 Disdainful Stroke
+1 Broadside Barrage
+3 Colorstorm Stallion
+2 Sunspine Lynx
+2 Fire Magic
+1 Sear
+2 Spell Pierce
+2 Soul-Guide Lantern
+1 Spell Snare

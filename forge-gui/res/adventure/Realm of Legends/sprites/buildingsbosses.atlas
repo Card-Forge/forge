@@ -39,6 +39,9 @@ Tibalt
 CrumblingNaktamun
   xy: 329,1
   size: 64, 48
+RealityOverlay
+  xy: 393, 5
+  size: 52, 48
 AncientCaverns
   xy: 265,51
   size: 64, 40
@@ -69,6 +72,9 @@ MageTower
 Skep
   xy: 110,281
   size: 37, 33
+Siren
+  xy: 61, 278
+  size: 41, 41
 MageTowerBlue
   xy: 2,327
   size: 32, 32
@@ -82,8 +88,11 @@ MageTowerGreen
   xy: 92,328
   size: 32, 32
 MageTowerWhite
-  xy: 121,328
-  size: 16, 32
+  xy: 127,328
+  size: 18, 32
+HexhavenTower
+  xy: 109, 157
+  size: 30, 46
 LavaForge
   xy: 149,169
   size: 32, 32

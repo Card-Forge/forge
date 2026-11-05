@@ -1,0 +1,22 @@
+name: Mtg Card Fetch Bot
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened]
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  fetch-card-references:
+    if: github.repository_owner == 'Card-Forge'
+    name: Fetch MTG Card
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: ldeluigi/mtg-fetch-action@v1

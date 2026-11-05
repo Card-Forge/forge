@@ -108,7 +108,7 @@ public class QuestRewardCardChooser extends QuestRewardCard {
         } else if (type == poolType.predicateFilter) {
             List<PaperCard> cardChoices = new ArrayList<>();
 
-            FModel.getMagicDb().getCommonCards().streamAllCards().filter(predicates)
+            FModel.getQuest().getAllAllowedCards().filter(predicates)
                     .sorted().forEach(cardChoices::add); //TODO: Once java is at 10+, can use Collectors.toUnmodifiableList
 
             return Collections.unmodifiableList(cardChoices);

@@ -74,16 +74,19 @@
   },
   {
 	  "name": "Landscape Sketchbook - Mirage",
+	  "unique": true,
 	  "description": "A leather bound notebook containing sketches of tropical locations",
 	  "iconName": "LandscapeSketchbook"
   },
   {
 	  "name": "Landscape Sketchbook - Urza's Saga",
+	  "unique": true,
 	  "description": "A leather bound notebook containing many different angles of the same terrain features",
 	  "iconName": "LandscapeSketchbook"
   },
   {
 	  "name": "Landscape Sketchbook - Coldsnap",
+	  "unique": true,
 	  "description": "A leather bound notebook containing sketches of frost covered vistas",
 	  "iconName": "LandscapeSketchbook"
   },

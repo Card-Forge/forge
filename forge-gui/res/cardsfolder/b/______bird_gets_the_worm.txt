@@ -1,0 +1,10 @@
+Name:_____ Bird Gets the Worm
+ManaCost:3 W W
+Types:Creature Bird Guest
+PT:2/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigSticker | TriggerDescription$ When CARDNAME enters, you may put a name sticker on it. You gain X life, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)
+SVar:TrigSticker:DB$ PutSticker | Defined$ Self | Kind$ Name | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ StickerUniqueVowels
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhen this creature enters, you may put a name sticker on it. You gain X life, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)

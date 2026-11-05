@@ -765,10 +765,6 @@ public class ComputerUtilCard {
         Map<Card, Integer> cache = new IdentityHashMap<>();
         return Comparator.comparing(c -> cache.computeIfAbsent(c, creatureEvaluator));
     }
-    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
-        // TODO ideally we could reuse the value from the previous pass with false
-        return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-    };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
     private static final LandEvaluator landEvaluator = new LandEvaluator();
@@ -1939,6 +1935,19 @@ public class ComputerUtilCard {
         pumped.updateKeywordsCache();
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
+    }
+
+    /**
+     * Predicts whether a creature card would have 0 or less toughness after static continuous P/T effects
+     * if it entered the battlefield now (e.g. under Elesh Norn, Grand Cenobite).
+     */
+    public static boolean wouldDieToStaticPT(final Card c) {
+        if (!c.isCreature()) {
+            return false;
+        }
+        final Card copy = CardCopyService.getLKICopy(c);
+        applyStaticContPT(c.getGame(), copy, null);
+        return copy.getNetToughness() <= 0;
     }
 
     /**

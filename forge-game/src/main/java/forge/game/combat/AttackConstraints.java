@@ -326,8 +326,9 @@ public class AttackConstraints {
         while (!playerReqs.isEmpty()) {
             Map.Entry<GameEntity, Collection<StaticAbility>> playerReq = playerReqs.asMap().entrySet().stream()
                     .max(Comparator.comparing(e -> e.getValue().size())).orElse(null);
-            // find best attack to also fulfill the additional requirements
-            Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())).findFirst().orElse(null);
+            // find best attack to also fulfill the additional requirements, one with a cost would be skipped later
+            Attack bestMatch = result.stream().filter(att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getKey())
+                    && CombatUtil.getAttackCost(att.attacker.getGame(), att.attacker, att.defender) == null).findFirst().orElse(null);
             if (bestMatch != null) {
                 bestMatch.requirements += playerReq.getValue().size();
                 usedAttackers.add(bestMatch.attacker);
@@ -379,7 +380,7 @@ public class AttackConstraints {
         }
         for (final Entry<Card, GameEntity> attacker : attackers.entrySet()) {
             final AttackRestriction restriction = restrictions.get(attacker.getKey());
-            if (restriction != null && !restriction.canAttack(attacker.getKey(), attackers)) {
+            if (restriction != null && !restriction.canAttack(attacker.getValue(), attackers)) {
                 // Violating a restriction!
                 return -1;
             }

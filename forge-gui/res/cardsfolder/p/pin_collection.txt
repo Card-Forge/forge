@@ -1,0 +1,9 @@
+Name:Pin Collection
+ManaCost:X W
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSticker | TriggerDescription$ When this Equipment enters, you may put an ability sticker with ticket cost X or less on it without paying that sticker's ticket cost.
+SVar:TrigSticker:DB$ PutSticker | Kind$ Ability | Defined$ Self | Optional$ True | MaxTickets$ X | NoTicketCost$ True
+SVar:X:Count$xPaid
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | GainsStickerAbilitiesOfDefined$ Self | Description$ Equipped creature gets +1/+1 and has all abilities of ability stickers on CARDNAME.
+K:Equip:2
+Oracle:When this Equipment enters, you may put an ability sticker with ticket cost X or less on it without paying that sticker's ticket cost.\nEquipped creature gets +1/+1 and has all abilities of ability stickers on this Equipment.\nEquip {2}

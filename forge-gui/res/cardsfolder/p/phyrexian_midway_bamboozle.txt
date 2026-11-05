@@ -1,0 +1,17 @@
+Name:Phyrexian Midway Bamboozle
+ManaCost:no cost
+Types:Stickers
+K:StickerSheet:STK1,STK2,STK3,STK4,STK5,STK6,STK7,STK8,STK9,STK10
+SVar:STK1:Kind$ Name | Word$ Phyrexian
+SVar:STK2:Kind$ Name | Word$ Midway
+SVar:STK3:Kind$ Name | Word$ Bamboozle
+SVar:STK4:Kind$ Art
+SVar:STK5:Kind$ Art
+SVar:STK6:Kind$ Art
+SVar:STK7:Kind$ Ability | Tickets$ 2 | Text$ Whenever this creature attacks, you get {TK}. | Triggers$ STK7Attacks
+SVar:STK8:Kind$ Ability | Tickets$ 3 | Text$ Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.) | Keywords$ Undying
+SVar:STK9:Kind$ PT | Tickets$ 2 | Power$ 4 | Toughness$ 2
+SVar:STK10:Kind$ PT | Tickets$ 5 | Power$ 6 | Toughness$ 9
+SVar:STK7Attacks:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ STK7Ticket | TriggerDescription$ Whenever this creature attacks, you get {TK}.
+SVar:STK7Ticket:DB$ PutCounter | Defined$ You | CounterType$ TICKET | CounterNum$ 1
+Oracle:{TK}{TK} — Whenever this creature attacks, you get {TK}.\n{TK}{TK}{TK} — Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\n{TK}{TK} — 4/2\n{TK}{TK}{TK}{TK}{TK} — 6/9

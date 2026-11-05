@@ -49,6 +49,7 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -366,10 +367,23 @@ public class ComputerUtilCombat {
 
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = Lists.newArrayList();
-        for (Card c : combat.getAttackers()) {
-            if (c.isCommander() && combat.isAttacking(c, ai)) {
+        for (Card c : combat.getAttackersOf(ai)) {
+            if (c.isCommander()) {
+                CardCollection blockers = combat.getBlockers(c);
                 int currentCommanderDamage = ai.getCommanderDamage(c);
-                if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= 21) {
+                if (currentCommanderDamage >= 21) {
+                    // if a loss gets delayed there's no point to check for more
+                    return Collections.emptyList();
+                }
+                if (c.hasKeyword(Keyword.TRAMPLE)) {
+                    int dmgAfterShielding = getAttack(c) - totalShieldDamage(c, blockers);
+                    if (dmgAfterShielding > 0) {
+                        currentCommanderDamage += dmgAfterShielding;
+                    }
+                } else if (blockers.isEmpty()) {
+                    currentCommanderDamage += damageIfUnblocked(c, ai, combat, false);
+                }
+                if (currentCommanderDamage >= 21) {
                     res.add(c);
                 }
             }

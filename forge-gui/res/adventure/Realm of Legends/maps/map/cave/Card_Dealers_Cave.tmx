@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr42RgaBvFo3gUj+JRPIpH8YjAAIblHPI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAxrOOhvrwcQP+akr90gvz4F0iAAsns1jf0Osm811E5RBgRgY6Ct3z04EXbV8ULoKCT7vWjk32dA/ByIV3IwYAW0shfZfpDdy6H21QD9vhzIf0GHtAWzGwToZScMu0Pj25WOdiKnM1rHK63sBQB/oaSI
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0BOEGTAwhANxhAF97S0C2lcMxCV0trcPaF8/EE+gs72rgPatBuI1dLZ3FIyCwQ4AwwoITQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/dialog.tx" x="187.67" y="238.583" width="59.3257" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;You scurry down into this small, sandy cave. A giant stands before you, ancient-looking spell scrolls tucked into his large coat. 
+
+'Got something real special for sale, small one.' he calls out.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/dialog.tx" x="178.532" y="183.25" width="43.6023" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'I happen to have come across some extremely rare items. Spell packs of a most ancient kind - Beta. Contained within are many spells the smiths of today can't make - sixteen of them in total. This is the only place to find most of them, and those you can get elsewhere are fiercely guarded indeed. There are also many other powerful spells within. Who knows what treasures you'll find? Care to test your luck?'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 25,000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 25000 }
+        ],
+        &quot;text&quot;: &quot;'Come back soon - I have more for sale!'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -25000,
+            &quot;grantRewards&quot;: [
+  {
+       &quot;count&quot;:1,
+       &quot;type&quot;:&quot;Union&quot;,
+       &quot;cardUnion&quot;: [
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Balance&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Wrath of God&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Animate Wall&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Armageddon&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Island Sanctuary&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Personal Incarnation&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Purelace&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mox Pearl&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Ancestral Recall&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Timetwister&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Vesuvan Doppelganger&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Time Walk&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Stasis&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Copy Artifact&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Thoughtlace&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mox Sapphire&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Demonic Tutor&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Contract from Below&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Lord of the Pit&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mind Twist&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Deathlace&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Lich&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Word of Command&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mox Jet&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Fork&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Chaoslace&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Wheel of Fortune&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Smoke&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Shivan Dragon&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Raging River&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Gauntlet of Might&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mox Ruby&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Cockatrice&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Birds of Paradise&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Channel&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Lifelace&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Fastbond&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Natural Selection&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Force of Nature&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mox Emerald&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Black Lotus&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Forcefield&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Chaos Orb&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Time Vault&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Mana Vault&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Winter Orb&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Meekstone&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Nevinyrral's Disk&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Illusory Mask&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Helm of Chatzuk&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Tundra&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Underground Sea&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Badlands&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Taiga&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Savannah&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Scrubland&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Volcanic Island&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Bayou&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Tropical Island&quot;
+       },
+       {
+          &quot;count&quot;:1,
+          &quot;editions&quot;: [&quot;LEB&quot;],
+          &quot;cardName&quot;: &quot;Plateau&quot;
+       }
+       ]
+    },
+    {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;count&quot;:14,   
+      &quot;rarity&quot;: [&quot;common&quot;, &quot;uncommon&quot;],
+      &quot;editions&quot;: [&quot;LEB&quot;]
+    }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I'm feeling lucky. (Spend 25,000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 25000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;'Afraid power like this is out of your price range for now.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;Doesn't seem worth it.&quot;,
+					&quot;text&quot;: &quot;'Suit yourself. Someone else will come looking for a Black Lotus if you're too poor or foolish to want one.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

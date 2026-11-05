@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Easy
+Description=./Standard/The_Hobbit/Ari_Aye_-_UR_Aggro_(Standard,_#883759).dck
+Deck Type=constructed
+
+[Main]
+4 Spirebluff Canal
+4 Starting Town
+4 Riverpyre Verge
+4 Steam Vents
+3 Multiversal Passage
+1 Island
+4 Elusive Otter
+4 Drake Hatcher
+4 Slickshot Show-Off
+3 Callous Sell-Sword
+2 Gandalf, Goblins' Bane
+4 Ancestral Anger
+4 Wild Ride
+4 Sleight of Hand
+3 Shore Up
+3 Full Bore
+3 Opt
+2 Secret Identity
+[Sideboard]
+1 Great Hall of the Biblioplex
+2 Flow State
+2 Quantum Riddler
+2 Soul-Guide Lantern
+1 Ghost Vacuum
+3 Spell Pierce
+2 Burst Lightning
+2 Fire Magic

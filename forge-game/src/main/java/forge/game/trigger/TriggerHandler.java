@@ -172,13 +172,29 @@ public class TriggerHandler {
     }
 
     public void collectTriggerForWaiting() {
+        collectTriggerForWaiting(false);
+    }
+    public void collectTriggerForWaiting(final boolean exceptEntering) {
         for (final TriggerWaiting wt : waitingTriggers) {
             if (wt.getTriggers() != null)
                 continue;
 
+            // CR 603.6a what sees a permanent enter is decided once everything entering with it has
+            if (exceptEntering && wt.getMode() == TriggerType.ChangesZone
+                    && ZoneType.Battlefield.name().equals(wt.getParams().get(AbilityKey.Destination))) {
+                continue;
+            }
+
             // TODO we don't seem to handle Static ones from this,
             // so they shouldn't be checked for performance in the first place
             wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
+
+            // how often they trigger has to be determined now as well, not only when they are put on the stack
+            for (final Trigger t : wt.getTriggers()) {
+                if (!t.isStatic()) {
+                    wt.setAdditionalTriggers(t, StaticAbilityPanharmonicon.countPanharmonicon(game, t, wt.getParams()));
+                }
+            }
         }
     }
 
@@ -327,10 +343,9 @@ public class TriggerHandler {
         // the trigger will be ordered later in MagicStack
         for (final Trigger t : triggers) {
             if (!t.isStatic() && (wasCollected || canRunTrigger(t, mode, runParams))) {
-                if (wasCollected && !t.checkActivationLimit()) {
-                    continue;
-                }
-                int trigAmt = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+                // collected ones already know how often they trigger, it can't change until they are put on the stack
+                int additional = wasCollected ? wt.getAdditionalTriggers(t) : StaticAbilityPanharmonicon.countPanharmonicon(game, t, runParams);
+                int trigAmt = t.limitByActivations(1 + additional);
                 for (int i = 0; i < trigAmt; ++i) {
                     runSingleTrigger(t, runParams, wt.getController(t));
                 }
@@ -391,7 +406,7 @@ public class TriggerHandler {
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (!regtrig.checkActivationLimit()) {
+        if (regtrig.limitByActivations(1) == 0) {
             return false;
         }
 

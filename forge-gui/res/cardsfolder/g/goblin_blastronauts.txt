@@ -1,0 +1,11 @@
+Name:Goblin Blastronauts
+ManaCost:3 R R
+Types:Creature Goblin Employee
+PT:5/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
+T:Mode$ RolledDie | TriggerZones$ Battlefield | ValidPlayer$ You | ValidSA$ Spell,Activated.!ManaAbility,Triggered.!ManaAbility | ValidResult$ 6 | Execute$ TrigCopyTarget | OptionalDecider$ You | TriggerDescription$ Whenever you roll a 6, you may copy the spell, ability, or Attraction visit that caused you to roll that die. You may choose new targets for the copy.
+T:Mode$ RolledDie | TriggerZones$ Battlefield | ValidPlayer$ You | ValidSA$ SpellAbility | InvertValidSA$ True | ValidResult$ 6 | RolledToVisitAttractions$ True | OptionalDecider$ You | Execute$ TrigRevisit | Secondary$ True | TriggerDescription$ Whenever you roll a 6, you may copy the spell, ability, or Attraction visit that caused you to roll that die. You may choose new targets for the copy.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+SVar:TrigCopyTarget:DB$ CopySpellAbility | Defined$ TriggeredSourceSA | MayChooseTarget$ True | AILogic$ Always
+SVar:TrigRevisit:DB$ RollDice | Sides$ 6 | ToVisitYourAttractions$ True
+Oracle:When this creature enters, open an Attraction.\nWhenever you roll a 6, you may copy the spell, ability, or Attraction visit that caused you to roll that die. You may choose new targets for the copy.
