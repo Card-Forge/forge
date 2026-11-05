@@ -75,8 +75,8 @@ public class TriggerPhase extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Player);
     }
 
     @Override

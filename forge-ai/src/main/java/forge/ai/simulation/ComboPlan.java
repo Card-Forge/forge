@@ -69,7 +69,12 @@ import forge.game.zone.ZoneType;
  *       worth most once it is in play with a creature to cast, and the creatures are never discarded;</li>
  *   <li>{@link Kind#ARTIFACT_ENGINE}: Mystic Forge, Paradox Engine, Manifold Key, Grim Monolith and the artifacts that
  *       chain off them, with payoffs such as Karn, The One Ring and Kozilek's Command. The engines are worth points
- *       while they sit in play, because every artifact they cast or untap pays for the next one.</li>
+ *       while they sit in play, because every artifact they cast or untap pays for the next one;</li>
+ *   <li>{@link Kind#LIBRARY_OUT}: Balustrade Spy, Cephalid Illusionist (with Shuko and Nomads en-Kor to target it)
+ *       empty the AI's own library and Thassa's Oracle or Laboratory Maniac wins. The library is only worth
+ *       emptying while the winner is in hand, and when it is not the deck must not mill itself out;</li>
+ *   <li>{@link Kind#PAIR}: two card kills that are not a copy engine (Painter's Servant with Grindstone): both
+ *       halves in hand or in play are worth far more than the cards apart.</li>
  * </ul>
  * Every number in here is a small evaluator bonus (a 2/2 creature is worth about 150) that is only given while the
  * combo is still alive, so a deck that merely contains one stray combo card is never taken for a combo deck: each
@@ -77,7 +82,8 @@ import forge.game.zone.ZoneType;
  */
 public final class ComboPlan {
     public enum Kind { MASS_REANIMATION, REANIMATOR, STORM, CREATURE_COPY, CASCADE_PAYOFF, CHEAT_FATTY, GO_WIDE,
-        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE }
+        MILL, AFFINITY, DREDGE, MADNESS, ATOG, REPLENISH, TUTOR_STORM, DARK_DEPTHS, FREE_CAST, ARTIFACT_ENGINE,
+        LIBRARY_OUT, PAIR, LIBRARY_CUT }
 
     /** A deck is built around at most this many combos. */
     public static final int MAX_COMBOS = 3;
@@ -114,8 +120,131 @@ public final class ComboPlan {
         return false;
     }
 
+    /**
+     * The creatures of the AI that an airbend (Aang, Swift Savior, Appa, Airbender Ascension) should exile so that they
+     * can be cast again: only while a free cast engine that makes the exile cost nothing is in play (Doc Aurlock), and
+     * only the creatures of the free cast combo, never the one that makes the trigger.
+     */
+    public List<Card> airbendLoopTargets(final Player ai, final Card source) {
+        final List<Card> result = new ArrayList<>();
+        final Combo free = find(Kind.FREE_CAST);
+        if (free == null || ai == null) {
+            return result;
+        }
+        boolean engine = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            engine |= airbendReducerWorks(c);
+        }
+        if (!engine || airbendLoopCasts(ai, free) >= airbendLoopCap(ai)) {
+            return result; // no free recast, or the loop has gone on long enough: the pieces stay in play
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c != source && c.isCreature() && isAirbendLoopCreature(free, c.getName())) {
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * A creature that the airbend loop may exile and cast again: one of the free cast combo of the deck, or one of the
+     * well known loop creatures of the lists whether or not this deck plays it (the other Aangs, Kalastria Healer and
+     * the other drain creatures are in the lists, not necessarily in the 75 cards the plan was read from).
+     */
+    private static boolean isAirbendLoopCreature(final Combo free, final String name) {
+        return free.payoffs.contains(name)
+                || AiCardLists.has(AiCardLists.Role.FREE_CAST_TARGET, name)
+                || AiCardLists.has(AiCardLists.Role.AIRBEND_PAYOFF, name);
+    }
+
+    /**
+     * Whether the airbend loop is running and {@code host} is one of its creatures: a free recast is in play, the loop
+     * has not reached its cap, and there is another creature of the loop for it to airbend. Used to keep the AI from
+     * spending the loop's creatures (or tapping its tokens) on something that ends it, such as transforming Aang.
+     */
+    public boolean airbendLoopLive(final Player ai, final Card host) {
+        final Combo free = find(Kind.FREE_CAST);
+        if (free == null || ai == null || host == null || !host.isCreature()
+                || !isAirbendLoopCreature(free, host.getName())) {
+            return false;
+        }
+        boolean engine = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            engine |= airbendReducerWorks(c);
+        }
+        if (!engine || airbendLoopCasts(ai, free) >= airbendLoopCap(ai)) {
+            return false;
+        }
+        // the other creature of the loop may be on the battlefield or still in exile waiting to be cast for nothing
+        for (final ZoneType z : new ZoneType[] { ZoneType.Battlefield, ZoneType.Exile }) {
+            for (final Card c : ai.getCardsIn(z)) {
+                if (c != host && c.isCreature() && isAirbendLoopCreature(free, c.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Doc Aurlock, or Semblance Anvil with a creature imprinted. */
+    private static boolean airbendReducerWorks(final Card c) {
+        if (!AiCardLists.has(AiCardLists.Role.AIRBEND_REDUCER, c.getName())) {
+            return false;
+        }
+        if (!c.getName().equals("Semblance Anvil")) {
+            return true;
+        }
+        for (final Card imprinted : c.getImprintedCards()) {
+            if (imprinted.isCreature()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** The loop is cut off after this many casts from exile in one turn, unless a payoff drains the opponent. */
+    static final int AIRBEND_LOOP_CAP = 12;
+
+    /** The most casts a loop with a payoff may make: a payoff that does not really drain must not make a draw. */
+    static final int AIRBEND_LOOP_HARD_CAP = 150;
+
+    /**
+     * How many casts from exile the airbend loop may make this turn. Without a payoff it can only grow the board (an
+     * Ally token for every cast), so it stops early and leaves the pieces in play for the attack of the next turn:
+     * a loop that never ends is a draw. With a payoff in play (Bontu's Monument, Kalastria Healer) every cast is a point
+     * of life, so it runs until the opponent is dead.
+     */
+    public int airbendLoopCap(final Player ai) {
+        boolean payoff = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            payoff |= AiCardLists.has(AiCardLists.Role.AIRBEND_PAYOFF, c.getName());
+        }
+        if (!payoff) {
+            return AIRBEND_LOOP_CAP;
+        }
+        final Combo free = find(Kind.FREE_CAST);
+        final int casts = free == null ? 0 : airbendLoopCasts(ai, free);
+        final Player opp = ai.getWeakestOpponent();
+        final int life = opp == null ? 0 : Math.max(0, opp.getLife());
+        // every cast drains a point: casts + life stays put, so the cap stays out of reach until the opponent is dead
+        return Math.min(AIRBEND_LOOP_HARD_CAP, Math.max(AIRBEND_LOOP_CAP, casts + life + 10));
+    }
+
+    /** How many creatures of the loop the AI has cast from exile this turn. */
+    int airbendLoopCasts(final Player ai, final Combo free) {
+        int casts = 0;
+        for (final SpellAbility sa : ai.getGame().getStack().getSpellsCastThisTurn()) {
+            final Card host = sa.getHostCard();
+            if (ai.equals(sa.getActivatingPlayer()) && host != null && isAirbendLoopCreature(free, host.getName())
+                    && host.getCastFrom() != null && host.getCastFrom().is(ZoneType.Exile)) {
+                casts++;
+            }
+        }
+        return casts;
+    }
+
     /** Hand attack aimed at yourself is fuel only when it throws away a big creature that a reanimation spell can use. */
-    public boolean selfDiscardWanted(final Player ai) {
+    public boolean bigDiscardWanted(final Player ai) {
         final Combo re = find(Kind.REANIMATOR);
         if (re == null || ai == null || ai.getLife() <= 4) {
             return false; // Thoughtseize costs 2 life
@@ -125,6 +254,109 @@ public final class ComboPlan {
             big |= c.isCreature() && isBigTarget(c);
         }
         return big && reanimationReady(ai, re);
+    }
+
+    /** Whether the hand holds something worth throwing away with a hand attack aimed at the AI itself. */
+    public boolean selfDiscardWanted(final Player ai) {
+        return selfDiscardName(ai, null) != null;
+    }
+
+    /**
+     * Whether a hand attack aimed at the AI itself is worth it, not counting the spell that makes it: Cabal Therapy
+     * has flashback, so in the hand it looks like a card that wants to be in the graveyard, and naming it discards
+     * nothing.
+     */
+    public boolean selfDiscardWanted(final Player ai, final Card host) {
+        return selfDiscardName(ai, host) != null;
+    }
+
+    public String selfDiscardName(final Player ai) {
+        return selfDiscardName(ai, null);
+    }
+
+    /**
+     * The name to give a hand attack aimed at the AI itself: the card (all copies together) that gains the most from
+     * being in the graveyard. {@code host} is the spell being cast; it is still in hand while the AI decides, and
+     * naming it would discard nothing. Null when nothing is worth it.
+     */
+    public String selfDiscardName(final Player ai, final Card host) {
+        final boolean big = bigDiscardWanted(ai);
+        final Map<String, Integer> total = new HashMap<>();
+        final Map<String, Integer> tiebreak = new HashMap<>();
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (c == host || c.isLand()) {
+                continue;
+            }
+            int v = graveyardValue(c);
+            int tie = 0;
+            if (big && c.isCreature() && isBigTarget(c) && !ComboGuard.duplicatesWorkingLegend(ai, c)) {
+                v += 5;
+                tie = ComputerUtilCard.evaluateCreature(c);
+            }
+            if (v <= 0) {
+                continue;
+            }
+            total.merge(c.getName(), v, Integer::sum);
+            tiebreak.merge(c.getName(), tie, Math::max);
+        }
+        String best = null;
+        int bestTotal = 1; // anything below 2 is not worth a card
+        int bestTie = -1;
+        for (final Map.Entry<String, Integer> e : total.entrySet()) {
+            final int t = e.getValue();
+            final int tie = tiebreak.get(e.getKey());
+            if (t > bestTotal || (t == bestTotal && best != null && tie > bestTie)) {
+                best = e.getKey();
+                bestTotal = t;
+                bestTie = tie;
+            }
+        }
+        return best;
+    }
+
+    /**
+     * How much a card wants to be in the graveyard instead of the hand: the DiscardMe SVar of its script, a graveyard
+     * trigger / ability / static (Bridge from Below), and the keywords that work from the graveyard.
+     */
+    static int graveyardValue(final Card c) {
+        int v = 0;
+        if (c.hasSVar("DiscardMe")) {
+            try {
+                v += Math.max(1, Integer.parseInt(c.getSVar("DiscardMe").trim()));
+            } catch (final NumberFormatException e) {
+                v += 1;
+            }
+        }
+        boolean fromGraveyard = false;
+        for (final Trigger t : c.getTriggers()) {
+            if (zoneParamHasGraveyard(t.getParam("TriggerZones"))) {
+                fromGraveyard = true;
+            }
+        }
+        for (final StaticAbility st : c.getStaticAbilities()) {
+            if (zoneParamHasGraveyard(st.getParam("EffectZone"))) {
+                fromGraveyard = true;
+            }
+        }
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isActivatedAbility() && zoneParamHasGraveyard(sa.getParam("ActivationZone"))) {
+                fromGraveyard = true;
+            }
+        }
+        if (fromGraveyard) {
+            v += 4;
+        }
+        if (c.hasKeyword(Keyword.DREDGE)) {
+            v += 3;
+        }
+        if (c.hasKeyword(Keyword.FLASHBACK) || c.hasKeyword(Keyword.UNEARTH) || c.hasKeyword(Keyword.ESCAPE)) {
+            v += 3;
+        }
+        return v;
+    }
+
+    private static boolean zoneParamHasGraveyard(final String zones) {
+        return zones != null && zones.contains("Graveyard");
     }
 
     static boolean isTargetedDiscard(final SpellAbility sa) {
@@ -245,6 +477,9 @@ public final class ComboPlan {
         addIfFound(found, darkDepths(spells, lands));
         addIfFound(found, freeCast(spells));
         addIfFound(found, artifactEngine(spells));
+        addIfFound(found, libraryOut(spells));
+        addIfFound(found, pair(spells));
+        addIfFound(found, libraryCut(spells, lands));
         // a cascade deck that finds a mass reanimation spell is that combo, not a second one
         boolean hasMass = false;
         for (final Combo c : found) {
@@ -466,7 +701,7 @@ public final class ComboPlan {
         if (who == null) {
             who = host.getController();
         }
-        return isTargetedDiscard(sa) && selfDiscardWanted(who);
+        return isTargetedDiscard(sa) && selfDiscardWanted(who, host);
     }
 
     /**
@@ -561,6 +796,15 @@ public final class ComboPlan {
                     break;
                 case ARTIFACT_ENGINE:
                     sum += artifactEngineTerm(ai, combo);
+                    break;
+                case LIBRARY_OUT:
+                    sum += libraryOutTerm(ai, combo);
+                    break;
+                case PAIR:
+                    sum += pairTerm(ai, combo);
+                    break;
+                case LIBRARY_CUT:
+                    sum += libraryCutTerm(ai, combo);
                     break;
                 default:
                     break; // storm and cascade are carried out by the playout itself, see DeckPlan.longPlayouts
@@ -964,6 +1208,7 @@ public final class ComboPlan {
         if (lib < DREDGE_FULL_VALUE_LIBRARY) {
             sum = sum * lib / DREDGE_FULL_VALUE_LIBRARY;
         }
+        sum += DredgeLine.setupBonus(ai); // Breakthrough with Lion's Eye Diamond: see DredgeLine
         return Math.min(250, sum);
     }
 
@@ -1368,7 +1613,8 @@ public final class ComboPlan {
             }
         }
         // a deck built around it plays a few of each: one stray Hexmage next to a lone Dark Depths is not a combo deck
-        if (depths < 2 || wipers + stages < 3) {
+        // (Selesnya Depths has no Hexmage: two Thespian's Stage and four Crop Rotation are the same plan)
+        if (depths < 2 || wipers + stages < 3 && !(wipers + stages >= 2 && tutors >= 4)) {
             return null;
         }
         final Set<String> payoffs = new LinkedHashSet<>();
@@ -2185,7 +2431,8 @@ public final class ComboPlan {
                 enablers.add(c.getName());
             }
         }
-        if (reanimation < 3 || big < 3) {
+        // four reanimation cards (Superior Spider-Man) make two big creatures enough
+        if (reanimation < 3 || big < 3 && !(reanimation >= 4 && big >= 2)) {
             return null;
         }
         final int strength = 25 + 6 * Math.min(reanimation, 8) + 4 * Math.min(big, 6) + 3 * Math.min(fuelCards, 8);
@@ -2984,7 +3231,8 @@ public final class ComboPlan {
                 fattyCopies++;
             }
         }
-        if (cheatCopies < 3 || fattyCopies < 3) {
+        // Omniscience and Show and Tell together are six or more cheaters: two huge creatures are then enough (Omni-Tell)
+        if (cheatCopies < 3 || fattyCopies < 3 && !(fattyCopies >= 2 && cheatCopies >= 6)) {
             return null;
         }
         return new Combo(Kind.CHEAT_FATTY, 25 + 6 * Math.min(cheatCopies, 8) + 4 * Math.min(fattyCopies, 6), fatties,
@@ -3056,7 +3304,8 @@ public final class ComboPlan {
             if (AiCardLists.has(AiCardLists.Role.FREE_CAST_ENGINE, c.getName())) {
                 engines.add(c.getName());
                 engineCopies++;
-            } else if (AiCardLists.has(AiCardLists.Role.FREE_CAST_TARGET, c.getName())) {
+            } else if (AiCardLists.has(AiCardLists.Role.FREE_CAST_TARGET, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.AIRBEND_PAYOFF, c.getName())) {
                 targets.add(c.getName());
                 targetCopies++;
             }
@@ -3098,6 +3347,276 @@ public final class ComboPlan {
         return new Combo(Kind.ARTIFACT_ENGINE, 25 + 2 * Math.min(engineCopies, 12) + 3 * Math.min(payoffCopies, 8)
                 + Math.min(artifacts, 24) / 2, payoffs, engines, Collections.<String>emptySet(), false,
                 "engines=" + engines + ", payoffs=" + payoffs + ", artifacts=" + artifacts);
+    }
+
+    /**
+     * A deck that empties its own library and wins with Thassa's Oracle or Laboratory Maniac. At least one winner and
+     * four outlets (Balustrade Spy, or Cephalid Illusionist with the cards that target it); Doomsday is not an outlet,
+     * because the pile it builds has to be chosen card by card.
+     */
+    private static Combo libraryOut(final List<Card> spells) {
+        final Set<String> payoffs = new LinkedHashSet<>();
+        final Set<String> outlets = new LinkedHashSet<>();
+        int payoffCopies = 0;
+        int outletCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_PAYOFF, c.getName())) {
+                payoffs.add(c.getName());
+                payoffCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.SELF_MILL_OUTLET, c.getName())) {
+                outlets.add(c.getName());
+                outletCopies++;
+            }
+        }
+        if (payoffCopies < 1 || outletCopies < 4) {
+            return null;
+        }
+        return new Combo(Kind.LIBRARY_OUT, 25 + 4 * Math.min(outletCopies, 8) + 10 * Math.min(payoffCopies, 3), payoffs,
+                outlets, Collections.<String>emptySet(), false, "winners=" + payoffs + ", outlets=" + outlets);
+    }
+
+
+    // ------------------------------------------------------------------------------------------- library cut
+
+    /**
+     * Dimir Excruciator: Doomsday Excruciator exiles all but the bottom six cards of both libraries when it is cast,
+     * and Superior Spider-Man copying it from the graveyard counts as casting it. Both players then draw from six cards
+     * (the AI one more with the upkeep draw), so the cut only wins with something that empties the opponent's library
+     * faster: Restless Reef (four a turn) or Insatiable Avarice. Without one it loses the game for the AI.
+     */
+    private static Combo libraryCut(final List<Card> spells, final List<Card> lands) {
+        final Set<String> cuts = new LinkedHashSet<>();
+        final Set<String> others = new LinkedHashSet<>();
+        int cutCopies = 0;
+        int copiers = 0;
+        int finishers = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT, c.getName())) {
+                cuts.add(c.getName());
+                cutCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                others.add(c.getName());
+                finishers++;
+            } else if (c.isCreature() && isReanimationSpell(c)) {
+                others.add(c.getName());
+                copiers++;
+            }
+        }
+        for (final Card c : lands) {
+            if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                others.add(c.getName());
+                finishers++;
+            }
+        }
+        if (cutCopies < 2 || copiers < 3 && cutCopies < 4 || finishers < 3) {
+            return null;
+        }
+        return new Combo(Kind.LIBRARY_CUT, 30 + 5 * Math.min(cutCopies, 4) + 4 * Math.min(copiers, 4)
+                + 3 * Math.min(finishers, 6), cuts, others, Collections.<String>emptySet(), false,
+                "cut=" + cuts + ", copiers/finishers=" + others);
+    }
+
+    /** After the cut each library holds this many cards. */
+    static final int LIBRARY_CUT_LEFT = 6;
+
+    /** What the cut with a finisher in play is worth by itself, before the race is counted. */
+    private static final int LIBRARY_CUT_DONE = 300;
+
+    /**
+     * Whether cutting the libraries is safe now: the AI has what empties the opponent's library before its own (a
+     * Restless Reef in play, to be animated and attack, or Insatiable Avarice in hand). Without it the cut loses.
+     */
+    public boolean libraryCutSafe(final Player ai) {
+        if (ai == null) {
+            return false;
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                return true;
+            }
+        }
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            if (!c.isLand() && AiCardLists.has(AiCardLists.Role.LIBRARY_CUT_FINISHER, c.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * What Superior Spider-Man copies: the cutting card while the cut is safe and has not happened yet, any other
+     * creature otherwise (never the cutting card when it would lose the game). Null leaves the usual choice alone.
+     */
+    public Card cloneChoice(final Player ai, final Iterable<Card> options) {
+        final Combo cut = find(Kind.LIBRARY_CUT);
+        if (cut == null || ai == null) {
+            return null;
+        }
+        final List<Card> cuts = new ArrayList<>();
+        final List<Card> rest = new ArrayList<>();
+        for (final Card c : options) {
+            (cut.payoffs.contains(c.getName()) ? cuts : rest).add(c);
+        }
+        if (cuts.isEmpty()) {
+            return null;
+        }
+        if (libraryCutSafe(ai) && ai.getCardsIn(ZoneType.Library).size() > LIBRARY_CUT_LEFT) {
+            return cuts.get(0);
+        }
+        return rest.isEmpty() ? null : ComputerUtilCard.getBestAI(rest);
+    }
+
+    /**
+     * The cut that is safe and sure right now: the cutting card cast from the hand, or a copier (Superior Spider-Man)
+     * with a cutting creature in a graveyard, while a finisher is in play (or in hand) and neither library is cut yet.
+     * The AI plays it without asking Monte Carlo, whose rollouts cannot see far enough to find the finisher's clock.
+     */
+    public SpellAbility sureCutPlay(final Player ai, final List<SpellAbility> candidates) {
+        final Combo cut = find(Kind.LIBRARY_CUT);
+        if (cut == null || ai == null || candidates == null || !libraryCutSafe(ai)
+                || ai.getCardsIn(ZoneType.Library).size() <= LIBRARY_CUT_LEFT) {
+            return null;
+        }
+        final Player opp = ai.getWeakestOpponent();
+        if (opp == null || opp.getCardsIn(ZoneType.Library).size() <= LIBRARY_CUT_LEFT) {
+            return null;
+        }
+        boolean cutInGraveyard = false;
+        for (final Player p : ai.getGame().getPlayers()) {
+            for (final Card c : p.getCardsIn(ZoneType.Graveyard)) {
+                cutInGraveyard |= c.isCreature() && cut.payoffs.contains(c.getName());
+            }
+        }
+        for (final SpellAbility sa : candidates) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            if (host == null || !sa.isSpell() || host.isLand() || !host.isInZone(ZoneType.Hand)) {
+                continue;
+            }
+            final boolean cuts = cut.payoffs.contains(host.getName());
+            if (!cuts && !(cutInGraveyard && host.isCreature() && isReanimationSpell(host))) {
+                continue;
+            }
+            sa.setActivatingPlayer(ai);
+            if (sa.canPlay() && ComputerUtilCost.canPayCost(sa, ai, false)) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
+    private int libraryCutTerm(final Player ai, final Combo combo) {
+        final Player opp = ai.getWeakestOpponent();
+        final int mine = ai.getCardsIn(ZoneType.Library).size();
+        final int theirs = opp == null ? 99 : opp.getCardsIn(ZoneType.Library).size();
+        final boolean safe = libraryCutSafe(ai);
+        if (mine > LIBRARY_CUT_LEFT) {
+            // before the cut: ready when the cutting card is in the graveyard with a copier in hand (or in hand itself)
+            // and the finisher is there; without the finisher nothing is gained
+            boolean cutReady = false;
+            boolean copier = false;
+            for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+                cutReady |= combo.payoffs.contains(c.getName());
+            }
+            for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+                cutReady |= combo.payoffs.contains(c.getName());
+                copier |= c.isCreature() && isReanimationSpell(c);
+            }
+            return safe ? (cutReady && copier ? ASSEMBLED_BONUS : cutReady ? ONE_PIECE_BONUS : 0) : 0;
+        }
+        // after the cut: the race. The opponent's library is the clock the finisher runs down
+        int sum = 0;
+        if (theirs <= 0) {
+            return TERM_MAX;
+        }
+        if (safe) {
+            // worth clearly more than the setup before the cut was (ASSEMBLED_BONUS): the cut is the combo, the finisher
+            // then runs the clock, and the rollouts must see casting the copier as a gain over holding it
+            sum += LIBRARY_CUT_DONE + (LIBRARY_CUT_LEFT + 1 - Math.min(theirs, LIBRARY_CUT_LEFT + 1)) * 40;
+        } else if (mine <= theirs) {
+            sum -= 150;
+        }
+        if (mine <= 1) {
+            sum -= 100;
+        }
+        return sum;
+    }
+
+    /** Library this small or smaller with the winner in hand is the win (Thassa's Oracle counts two for itself). */
+    private static final int LIBRARY_OUT_READY = 2;
+    /** Without a winner in hand a library this small is a deck about to lose to its own outlets. */
+    private static final int LIBRARY_OUT_DANGER = 6;
+    /** With the winner in hand every card missing from this many is worth a little. */
+    private static final int LIBRARY_OUT_SPAN = 25;
+
+    /** Dread Return's flashback sacrifices this many creatures. */
+    private static final int LIBRARY_OUT_FODDER = 3;
+
+    /**
+     * Whether the winner can still be put into play: it is in the hand, or it is in the graveyard (the main Oops line
+     * mills the whole library, the Oracle with it) with a reanimation spell in hand, or Dread Return in the graveyard
+     * and three creatures in play to pay for its flashback (Narcomoeba and Bridge from Below tokens count).
+     */
+    private boolean libraryOutWinnerReachable(final Player ai, final Combo combo) {
+        if (anyNamed(ai.getCardsIn(ZoneType.Hand), combo.payoffs)) {
+            return true;
+        }
+        if (!anyNamed(ai.getCardsIn(ZoneType.Graveyard), combo.payoffs)) {
+            return false;
+        }
+        boolean recursion = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Hand)) {
+            recursion |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName())
+                    || AiCardLists.has(AiCardLists.Role.REANIMATION_SPELL, c.getName());
+        }
+        boolean flashback = false;
+        for (final Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+            flashback |= AiCardLists.has(AiCardLists.Role.LIBRARY_OUT_RECURSION, c.getName());
+        }
+        if (recursion) {
+            return true;
+        }
+        return flashback && ai.getCreaturesInPlay().size() >= LIBRARY_OUT_FODDER;
+    }
+
+    /**
+     * The library is the resource of this deck, but only while the winner can be cast: with Thassa's Oracle in hand an
+     * emptier library is worth more and more, and an empty enough one is the win; without it the deck has nothing to
+     * win with, so milling itself out is a penalty (the same guard as the dredge deck).
+     */
+    private int libraryOutTerm(final Player ai, final Combo combo) {
+        final int library = ai.getCardsIn(ZoneType.Library).size();
+        if (!libraryOutWinnerReachable(ai, combo)) {
+            return library <= LIBRARY_OUT_DANGER ? -200 : 0;
+        }
+        if (library <= LIBRARY_OUT_READY) {
+            return TERM_MAX;
+        }
+        return Math.max(0, Math.min(300, (LIBRARY_OUT_SPAN - library) * 12));
+    }
+
+    /**
+     * A two card kill: an engine and the card it needs (Grindstone with Painter's Servant). Both halves are needed,
+     * three copies of the partner and two of the engine, or a lone Grindstone in a deck of artifacts would count.
+     */
+    private static Combo pair(final List<Card> spells) {
+        final Set<String> engines = new LinkedHashSet<>();
+        final Set<String> partners = new LinkedHashSet<>();
+        int engineCopies = 0;
+        int partnerCopies = 0;
+        for (final Card c : spells) {
+            if (AiCardLists.has(AiCardLists.Role.PAIR_ENGINE, c.getName())) {
+                engines.add(c.getName());
+                engineCopies++;
+            } else if (AiCardLists.has(AiCardLists.Role.PAIR_PARTNER, c.getName())) {
+                partners.add(c.getName());
+                partnerCopies++;
+            }
+        }
+        if (engineCopies < 2 || partnerCopies < 3) {
+            return null;
+        }
+        return new Combo(Kind.PAIR, 30 + 6 * Math.min(engineCopies, 4) + 6 * Math.min(partnerCopies, 6), engines,
+                partners, Collections.<String>emptySet(), false, "engine=" + engines + ", partner=" + partners);
     }
 
     /** A spell that gives every creature of its controller a big bonus. */
@@ -3368,7 +3887,16 @@ public final class ComboPlan {
 
     /** A creature that is worth more brought back than cast: a big one, or one of the well known targets. */
     static boolean isBigTarget(final Card c) {
-        return AiCardLists.has(AiCardLists.Role.BIG_TARGET, c.getName()) || c.getCMC() >= 6 || c.getNetPower() >= 6;
+        if (AiCardLists.has(AiCardLists.Role.LIBRARY_CUT, c.getName())) {
+            return false; // Doomsday Excruciator is a way to cut the libraries, not a creature to bring back for its size
+        }
+        if (AiCardLists.has(AiCardLists.Role.BIG_TARGET, c.getName())) {
+            return true;
+        }
+        if (c.hasKeyword(Keyword.EVOKE)) {
+            return false; // Deceit and the other Incarnations cost six but are cast for two: no reason to bring them back
+        }
+        return c.getCMC() >= 6 || c.getNetPower() >= 6;
     }
 
     private static boolean hasCycling(final Card c) {

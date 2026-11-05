@@ -1502,6 +1502,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
+        if (destination == null) {
+            return fetchList.isEmpty() ? null : ComputerUtilCard.getBestAI(fetchList);
+        }
+        // an opponent choosing between cards revealed from outside the game (Extrapolate the Impossible, Wish-like
+        // effects with a chooser) hands over the worse one
+        if (player.isOpponentOf(decider) && ZoneType.Hand.equals(destination) && origin.contains(ZoneType.Sideboard)) {
+            return ComputerUtilCard.getWorstAI(fetchList);
+        }
         List<String> keyCards = player.getRegisteredPlayer().getDeck().getKeyCards();
         String position = sa.getParamOrDefault("LibraryPosition", null);
         // Focus on the keycards I don't already have access to

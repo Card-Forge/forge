@@ -3,11 +3,9 @@ package forge.screens.constructed;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.gamemodes.net.server.HostingServer;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -54,6 +52,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.GuiChoose;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -165,10 +164,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.TwoHeadedGiant);
         cbVariants.addItem(Forge.getLocalizer().getMessage("lblMore"));
         cbVariants.setChangedHandler(event -> {
+            final List<GameType> applied = Lists.newArrayList(Iterables.filter(lobby.getAppliedVariants(),
+                    variant -> !FormatChoices.FORMAT_GAME_TYPES.contains(variant)));
+            // updateVariantSelection moves this list to match the lobby, which needs no change
+            if (cbVariants.getSelectedIndex() <= 0 ? applied.isEmpty() : applied.equals(List.of(cbVariants.getSelectedItem()))) {
+                return;
+            }
             if (cbVariants.getSelectedIndex() <= 0) {
                 clearStackableVariants();
                 updateLayoutForVariants();
-                saveAppliedVariants();
+                lobby.saveSetup();
             }
             else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
                 Forge.openScreen(new MultiVariantSelect());
@@ -180,7 +185,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 clearStackableVariants();
                 lobby.applyVariant(variant);
                 updateLayoutForVariants();
-                saveAppliedVariants();
+                lobby.saveSetup();
             }
         });
 
@@ -191,10 +196,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             cbFormat.addItem(choice);
         }
         cbFormat.setChangedHandler(event -> {
+            if (cbFormat.getSelectedItem() == FormatChoices.ARCHIVED) {
+                updateFormatSelection();
+                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices(), archived -> {
+                    if (archived != null) {
+                        applyFormatChoice(archived);
+                    }
+                });
+                return;
+            }
             if (lobby.hasControl() && cbFormat.getSelectedItem() != lobby.getFormatChoice()) {
-                lobby.setFormatChoice(cbFormat.getSelectedItem());
-                updateLayoutForVariants();
-                saveAppliedVariants();
+                applyFormatChoice(cbFormat.getSelectedItem());
             }
         });
 
@@ -204,7 +216,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         updatePlayersFromPrefs();
 
-        FThreads.invokeInBackgroundThread(() -> {
+        // Blocks input until the decks load and the setup is restored, as saving a seat's deck before it loads throws
+        LoadingOverlay.runBackgroundTask(Forge.getLocalizer().getMessage("lblLoadingEllipsis"), true, loader -> {
             playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
             playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
             try {
@@ -212,7 +225,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
                 }
                 if (getNumPlayers() > 3) {
-                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                 }
             } catch (Exception e) {}
             /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
@@ -222,15 +235,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
             FThreads.invokeInEdtLater(() -> {
                 btnStart.setEnabled(lobby.hasControl());
-
-                Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
-                if (!gameTypes.isEmpty()) {
-                    for (GameType gameType : gameTypes) {
-                        lobby.applyVariant(gameType);
-                    }
-                    updateVariantSelection();
-                    updateLayoutForVariants();
-                }
+                lobby.restoreSetup();
+                updateLayoutForVariants();
             });
         });
 
@@ -267,8 +273,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
     }
 
+    private void applyFormatChoice(final Object choice) {
+        lobby.setFormatChoice(choice);
+        updateLayoutForVariants();
+        lobby.saveSetup();
+    }
+
     private void updateFormatSelection() {
-        cbFormat.setSelectedItem(lobby.getFormatChoice());
+        if (lobby.getFormatChoice() instanceof GameFormat format && format.getFormatType() == GameFormat.FormatType.ARCHIVED) {
+            // The list holds no archived formats, so the combo shows the name alone
+            cbFormat.setText(format.getName());
+        } else {
+            cbFormat.setSelectedItem(lobby.getFormatChoice());
+        }
         lblFormat.setEnabled(lobby.hasControl());
         cbFormat.setEnabled(lobby.hasControl());
         // Limited mode lists event pools, which the Constructed format does not apply to
@@ -276,11 +293,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         for (final PlayerPanel panel : playerPanels) {
             panel.getDeckChooser().getLstDecks().setRequiredFormat(format);
         }
-    }
-
-    private void saveAppliedVariants() {
-        FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, Sets.newHashSet(lobby.getAppliedVariants()));
-        FModel.getPreferences().save();
     }
 
     private void updateVariantSelection() {
@@ -541,7 +553,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 updateVariantSelection();
                 updateLayoutForVariants();
-                saveAppliedVariants();
+                lobby.saveSetup();
             }
         }
 

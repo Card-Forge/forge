@@ -552,7 +552,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         return getSVarFallback(name).stream().filter(f -> f.hasSVar(name)).findFirst();
     }
 
-    /** The object a reference such as TriggeredPlayer names, if this trait has triggering objects. */
+    /** The object a reference such as TriggeredPlayer names, if this trait has triggering objects */
     public Object getTriggeringObject(final AbilityKey type) {
         return null;
     }

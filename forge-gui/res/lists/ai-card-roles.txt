@@ -19,7 +19,7 @@ storm_payoff | Grapeshot | Tendrils of Agony | Brain Freeze | Empty the Warrens 
 # Spells and permanents that put creatures from hand onto the battlefield for free
 cheat_spell | Show and Tell | Sneak Attack | Through the Breach | Natural Order | Elvish Piper | Hypergenesis
 cheat_spell | Eureka | Tooth and Nail | Quicksilver Amulet | Primeval Titan | Dream Halls | Emergence Zone
-cheat_spell | Neoform
+cheat_spell | Neoform | Omniscience
 
 # Huge creatures worth cheating into play
 cheat_target | Emrakul, the Aeons Torn | Griselbrand | Inferno Titan | Ulamog, the Ceaseless Hunger | Ulamog, the Infinite Gyre | Kozilek, Butcher of Truth
@@ -68,3 +68,57 @@ artifact_payoff | Ugin, Eye of the Storms | Extinguisher Battleship | Mycosynth 
 
 # Spells that fetch an overrun finisher from the library (the finisher itself stays in the overrun role)
 finisher_tutor | Green Sun's Zenith | Natural Order | Chord of Calling | Eldritch Evolution
+
+# Cards that win when the library is (nearly) empty
+library_out_payoff | Thassa's Oracle | Laboratory Maniac | Jace, Wielder of Mysteries
+
+# Cards that empty the AI's own library on purpose. Cephalid Illusionist mills three every time it is targeted, and
+# Shuko (equip {0}) and Nomads en-Kor ({0}) target it as often as the player likes. Balustrade Spy and Undercity
+# Informer reveal until a land: a deck without lands (Oops! All Spells) mills everything
+self_mill_outlet | Balustrade Spy | Undercity Informer | Cephalid Illusionist | Shuko | Nomads en-Kor
+
+# Cards that bring the winner back from the graveyard once the library is gone (Oops! All Spells: Dread Return, from
+# the graveyard for three sacrificed creatures, onto Thassa's Oracle). Reanimation spells count too, from the hand
+library_out_recursion | Dread Return
+
+# Two card kills: Painter's Servant makes every card share a color, so Grindstone mills the whole library
+pair_engine | Grindstone
+pair_partner | Painter's Servant
+
+# Draw spells that throw the rest of the hand away (X=0): with dredgers in the graveyard every draw is a dredge, and
+# with Lion's Eye Diamond cracked in response the dredgers are in the graveyard before the first draw
+dredge_refill | Breakthrough
+
+# ------------------------------------------------------------------------------------------------ Standard metagame
+# Superior Spider-Man enters as a copy of any creature card in a graveyard and "if you cast it" triggers still work:
+# discard or mill Bringer of the Last Gift (or Uldaros Theorix) and cast Spider-Man for four mana
+reanimation_spell | Superior Spider-Man
+big_target | Uldaros Theorix
+
+# Doc Aurlock makes spells cast from exile cost {2} less, and airbend (Aang, Swift Savior; Appa, Steadfast Guardian;
+# Airbender Ascension) lets the owner cast the exiled card for {2}: every airbent creature is recast for free and
+# airbends the next one (Appa makes an Ally token for each). Under Omniscience (4c Kona) the same cards, the wish
+# creature and the tutor are free; Kona and Formidable Speaker (untaps Kona) put Omniscience in from the hand
+free_cast_engine | Doc Aurlock, Grizzled Genius | Semblance Anvil
+free_cast_target | Aang, Swift Savior | Appa, Steadfast Guardian | Marang River Regent | North Wind Avatar
+free_cast_target | Formidable Speaker | Kona, Rescue Beastie
+free_cast_target | Aang, Airbending Master | Aang, the Last Airbender | Appa, Loyal Sky Bison
+
+# Devastating Onslaught makes X hasty copies of a creature: with Temur Battlecrier and a power 4 creature it is cheap, and
+# the enter triggers of Marang River Regent, Dragonhawk and Quantum Riddler happen X times
+copy_engine | Devastating Onslaught
+copy_target | Marang River Regent | Dragonhawk, Fate's Tempest | Quantum Riddler | Outcaster Trailblazer
+
+# Dimir Excruciator: Doomsday Excruciator (cast, or copied by Superior Spider-Man) leaves both players six cards in the
+# library; Restless Reef (mills four whenever it attacks) and Insatiable Avarice (the opponent draws three) then empty the
+# opponent's library first. The AI never cuts the libraries without one of them
+library_cut | Doomsday Excruciator
+library_cut_finisher | Restless Reef | Insatiable Avarice
+
+# The airbend loop: every airbend (Aang, Appa) exiles a creature that its owner may cast for {2}, which a reducer of two
+# makes free (Semblance Anvil counts only with a creature imprinted). Each recast airbends the other one again, so the loop
+# never ends by itself; the AI stops it after a number of casts (see ComboPlan.airbendLoopCap) unless a payoff drains the
+# opponent for every cast or creature that enters: Bontu's Monument (each creature spell), Kalastria Healer (each Ally,
+# and Appa makes an Ally token for every spell cast from exile), the other drain creatures
+airbend_reducer | Doc Aurlock, Grizzled Genius | Semblance Anvil
+airbend_payoff | Bontu's Monument | Kalastria Healer | Zulaport Cutthroat | Cruel Celebrant | Blood Artist

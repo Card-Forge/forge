@@ -179,6 +179,15 @@ public enum AbilityKey {
         return new EnumMap<>(map);
     }
 
+    /** Copies the given keys that are present in from */
+    public static void copyKeys(final Map<AbilityKey, Object> from, final Map<AbilityKey, Object> to, final AbilityKey... keys) {
+        for (AbilityKey key : keys) {
+            if (from.containsKey(key)) {
+                to.put(key, from.get(key));
+            }
+        }
+    }
+
     public static Map<AbilityKey, Object> mapFromCard(Card card) {
         final Map<AbilityKey, Object> runParams = newMap();
 

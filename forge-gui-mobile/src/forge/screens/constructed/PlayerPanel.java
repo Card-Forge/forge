@@ -31,6 +31,7 @@ import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.deck.FVanguardChooser;
 import forge.game.GameType;
+import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
@@ -312,26 +313,26 @@ public class PlayerPanel extends FContainer {
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
         //order by last variant..
-        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
-        if (gameTypes.contains(GameType.Commander)) {
+        final GameLobby lobby = screen.getLobby();
+        if (lobby.hasVariant(GameType.Commander)) {
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
-        } else if (gameTypes.contains(GameType.Oathbreaker)) {
+        } else if (lobby.hasVariant(GameType.Oathbreaker)) {
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
-        } else if (gameTypes.contains(GameType.TinyLeaders)) {
+        } else if (lobby.hasVariant(GameType.TinyLeaders)) {
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             deckChooser.initialize(savedStateSetting, defaultDeckType);
-        } else if (gameTypes.contains(GameType.Brawl)) {
+        } else if (lobby.hasVariant(GameType.Brawl)) {
             lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
             lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);

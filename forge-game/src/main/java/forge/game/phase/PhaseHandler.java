@@ -120,11 +120,6 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         return playerTurn != null && playerTurn.sharesTeamWith(player);
     }
 
-    /** True if the next turn is this player's, or under shared team turns their team's (CR 805.4). */
-    public final boolean isPlayerNextTurn(final Player player) {
-        return player.sharesTeamWith(getNextTurn());
-    }
-
     /** The players taking the current turn: the active player, or the whole active team under shared team turns (CR 805.4). */
     public final PlayerCollection getActivePlayers() {
         return playerTurn.getSharedTeam();
@@ -154,6 +149,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
         resetPriority();
+    }
+
+    /** True if the next turn is this player's, or under shared team turns their team's (CR 805.4). */
+    public final boolean isPlayerNextTurn(final Player player) {
+        return player.sharesTeamWith(getNextTurn());
     }
 
     public final Player getPreviousPlayerTurn() {
