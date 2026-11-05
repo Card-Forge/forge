@@ -3,11 +3,13 @@ package forge.ai;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 import forge.ai.AiCardMemory.MemorySet;
 
@@ -17,7 +19,7 @@ import forge.ai.AiCardMemory.MemorySet;
  * <p>
  * The payment code can already use them as a last resort, but it never asked whether the trade is worth it: any spell
  * that could be paid for this way was paid for this way, with whatever creature the generic "worst permanent" rule
- * picked, even for a spell worth far less than the creature. This class answers three questions:
+ * picked, even for a spell worth far less than the creature. This class answers four questions:
  * <ul>
  *   <li>{@link #worthIt}: is the spell (or ability) that is being paid for worth more than what is sacrificed? Fodder
  *       (a token, a creature that is useless, about to die anyway, or that comes back) is always fine; a real creature
@@ -25,6 +27,7 @@ import forge.ai.AiCardMemory.MemorySet;
  *   <li>{@link #chooseFodder}: which permanent to give up, by what it would still be worth to the AI: a token before a
  *       real creature, a creature with undying or persist before one without.</li>
  *   <li>{@link #hasExpendableFodder}: whether the mana of such an ability may be counted on when planning a turn.</li>
+ *   <li>{@link #canUseAgainInTest}: whether a test payment may use such an ability again.</li>
  * </ul>
  * Values are in the evaluator's points (a 2/2 creature is worth about 150).
  */
@@ -114,6 +117,34 @@ public final class ManaSacrifice {
         } catch (final RuntimeException e) {
             return true;
         }
+    }
+
+    /**
+     * Whether a test payment may use this mana ability again. A test sacrifices nothing, so the fodder of each use is
+     * set aside in the memory of an AI controller instead, and the ability can be used again while enough fodder is
+     * left. An AI's fodder is already set aside by {@link ComputerUtilCost#checkForManaSacrificeCost}. That method skips
+     * a human, because the Auto button also pays under a temporary AI controller, so a human's fodder is set aside here.
+     */
+    public static boolean canUseAgainInTest(final Player p, final SpellAbility ma) {
+        final CostSacrifice part = sacrificePart(ma);
+        // without an AI controller nothing can be set aside, as when the AI tests an opponent's payment
+        if (part == null || ma.getPayCosts().hasTapCost() || !p.getController().isAI()) {
+            return false;
+        }
+        final int amount = part.getAbilityAmount(ma);
+        if (amount <= 0) {
+            return false;
+        }
+        final CardCollection fodder = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, ma.getHostCard(), ma);
+        fodder.removeIf(c -> !c.canBeSacrificedBy(ma, false) || AiCardMemory.isRememberedCard(p, c, MemorySet.PAYS_SAC_COST));
+        if (!p.isAI()) {
+            // a human's own sacrifice for mana (Blood Pet) is not set aside, so such a card can't count as fodder too
+            fodder.removeIf(c -> c.getManaAbilities().anyMatch(m -> ComputerUtilCost.isSacrificeSelfCost(m.getPayCosts())));
+            for (int i = 0; i < amount && !fodder.isEmpty(); i++) {
+                AiCardMemory.rememberCard(p, fodder.remove(0), MemorySet.PAYS_SAC_COST);
+            }
+        }
+        return fodder.size() >= amount;
     }
 
     private static CardCollection chosen(final Player ai, final CostSacrifice part, final SpellAbility ma) {

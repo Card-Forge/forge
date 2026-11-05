@@ -143,6 +143,24 @@ public final class FlatMonteCarloPicker {
     private FlatMonteCarloPicker() {
     }
 
+    /** A phone or tablet gives the app a few hundred MB: search less there. */
+    static boolean constrainedHeap() {
+        return Runtime.getRuntime().maxMemory() <= (768L << 20);
+    }
+
+    /**
+     * Every rollout copies the whole game. On a small heap, stop sampling before the garbage collector thrashes and
+     * keep the heuristic choice. Only checked on small heaps: elsewhere the used memory is mostly garbage that has not
+     * been collected yet, and an OutOfMemoryError in a rollout is already caught.
+     */
+    static boolean lowMemory() {
+        if (!constrainedHeap()) {
+            return false;
+        }
+        final Runtime rt = Runtime.getRuntime();
+        return rt.totalMemory() - rt.freeMemory() > rt.maxMemory() * 0.85;
+    }
+
     /** Tunable parameters, normally read from the AI profile with {@link #fromProfile}. */
     public static final class Config implements Cloneable {
         /** How many of the heuristic-approved plays are compared (the hold option comes on top). */
@@ -266,6 +284,9 @@ public final class FlatMonteCarloPicker {
          * circuit breaker still switches Monte Carlo off if it errors or cannot keep up.
          */
         public Config maximized() {
+            if (constrainedHeap()) {
+                return mobileLite(); // the desktop strength needs desktop memory
+            }
             maxCandidates = Math.max(maxCandidates, MAX_CANDIDATES_DESKTOP);
             rolloutsPerCandidate = Math.max(rolloutsPerCandidate, MAX_ROLLOUTS_DESKTOP);
             extraRounds = Math.max(extraRounds, MAX_EXTRA_ROUNDS_DESKTOP);
@@ -510,6 +531,9 @@ public final class FlatMonteCarloPicker {
         if (cands.size() < 2) {
             return Result.keepHeuristic(heuristicChoice, "single-candidate");
         }
+        if (lowMemory()) {
+            return Result.keepHeuristic(heuristicChoice, "low-memory");
+        }
 
         final long budget = Math.min(cfg.budgetNanos, AITimeoutTracker.remainingNanos() / 2);
         if (budget <= 0) {
@@ -570,6 +594,10 @@ public final class FlatMonteCarloPicker {
                         tooSlow = r == 0 && c < 2;
                         break rounds;
                     }
+                }
+                if (lowMemory()) {
+                    tooSlow = r == 0 && c < 2;
+                    break rounds;
                 }
                 final long t0 = System.nanoTime();
                 final Candidate cand = cands.get(c);
@@ -843,7 +871,11 @@ public final class FlatMonteCarloPicker {
             }
             GameObject target = null;
             final SpellAbility targeting = singleTargetingAbility(sa);
-            if (targeting != null && targeting.getApi() == ApiType.Counter) {
+            if (targeting != null && TutorPlan.isLibraryTutor(sa)) {
+                if (!aimAtOpponent(player, targeting)) {
+                    continue;
+                }
+            } else if (targeting != null && targeting.getApi() == ApiType.Counter) {
                 // aimed at the spell on the stack by the caller, which no GameEntity target can express
                 if (targeting.getTargets().isEmpty()) {
                     continue;
@@ -929,6 +961,9 @@ public final class FlatMonteCarloPicker {
         if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
             return false;
         }
+        if (isRemoveDeckCantrip(sa)) {
+            return true;
+        }
         final PlayKind kind = playKind(sa);
         if (kind == PlayKind.STRATEGIC) {
             return singleTargetingAbility(sa) == null && !hasTargeting(sa);
@@ -942,6 +977,42 @@ public final class FlatMonteCarloPicker {
             return api == ApiType.ChangeZone || api == ApiType.Destroy || api == ApiType.Tap;
         }
         return broad && isDevelopment(sa);
+    }
+
+    /**
+     * The free and nearly free cantrips and tutors the heuristics drop with AI:RemoveDeck:All (Gitaxian Probe, Mishra's
+     * Bauble, Vampiric Tutor, Demonic Consultation, Merchant Scroll): they target the opponent only to look, or search for
+     * a card, so no other rule offers them, yet a vintage deck is built around them. The rollouts decide when to cast them.
+     */
+    static boolean isRemoveDeckCantrip(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || host.isLand() || host.getCMC() > 2 || !ComputerUtilCard.isCardRemAIDeck(host)) {
+            return false;
+        }
+        if (cantripChain(sa)) {
+            return true;
+        }
+        if (sa.isSpell() && host.isPermanent()) { // Mishra's Bauble: casting it is the way to its ability
+            for (final SpellAbility ab : host.getSpellAbilities()) {
+                if (cantripChain(ab)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean cantripChain(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api == ApiType.Draw || api == ApiType.RevealHand || api == ApiType.Reveal || api == ApiType.PeekAndReveal
+                    || api == ApiType.Dig
+                    || api == ApiType.DigUntil || api == ApiType.NameCard
+                    || api == ApiType.ChangeZone && "Library".equals(a.getParamOrDefault("Origin", ""))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isDevelopment(final SpellAbility sa) {
@@ -971,6 +1042,20 @@ public final class FlatMonteCarloPicker {
         for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
             if (a.usesTargeting()) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /** Intuition and the like: "target opponent chooses". Sets the first opponent that can be targeted. */
+    static boolean aimAtOpponent(final Player player, final SpellAbility targeting) {
+        if (targeting.isTargetNumberValid() && !targeting.getTargets().isEmpty()) {
+            return true;
+        }
+        targeting.resetTargets();
+        for (final Player opp : player.getOpponents()) {
+            if (targeting.canTarget(opp) && targeting.getTargets().add(opp)) {
+                return targeting.isTargetNumberValid();
             }
         }
         return false;
@@ -1112,10 +1197,11 @@ public final class FlatMonteCarloPicker {
             return 100000; // the face first: damage and drain are often best aimed there
         }
         final Card c = (Card) e;
+        final int danger = AntiCombo.rank(player, c); // an opponent's key combo piece is the first target
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c);
+            return ComputerUtilCard.evaluateCreature(c) + danger;
         }
-        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0);
+        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0) + danger;
     }
 
     /**
@@ -1243,7 +1329,7 @@ public final class FlatMonteCarloPicker {
             // MyRandom is global state; this is safe because the game thread is waiting for this AI decision.
             MyRandom.setRandom(new Random(seed));
 
-            final GameSimulator sim = new GameSimulator(player.getGame(), player, mode == Mode.RESPOND);
+            final GameSimulator sim = GameSimulator.forRollout(player.getGame(), player, mode == Mode.RESPOND);
             final Game simGame = sim.getSimulatedGameState();
             final Player simAi = sim.getSimulatedAiPlayer();
             simGame.AI_TIMEOUT = Math.min(simGame.AI_TIMEOUT, ROLLOUT_AI_TIMEOUT_SECONDS);
@@ -1478,7 +1564,7 @@ public final class FlatMonteCarloPicker {
         if (simGame.isGameOver() || !simAi.isInGame()) {
             later = simAi.hasWon() ? own + LOOKAHEAD_LOSS_PENALTY : own - LOOKAHEAD_LOSS_PENALTY;
         } else {
-            if (ph.getPlayerTurn() == simOpp) {
+            if (ph.isPlayerTurn(simOpp)) {
                 playOut(simGame, simOpp, playoutPlays);
                 if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                     ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simAi));
@@ -1521,7 +1607,7 @@ public final class FlatMonteCarloPicker {
             value += holdUpBonus(simAi, cfg) + riskAdjustment(simAi, cfg);
         }
         if (cand != null && cand.sa != null) {
-            value += StrategicEvaluator.selectionBonus(cand.sa, cfg);
+            value += StrategicEvaluator.selectionBonus(cand.sa, cfg) + TutorPlan.bonus(cand.sa, cfg);
         }
         return Math.max(LOSS_VALUE + 1, Math.min(WIN_VALUE - 1, value));
     }
@@ -1576,7 +1662,7 @@ public final class FlatMonteCarloPicker {
             lastRolloutProblem = "advance";
             return null;
         }
-        if (!simGame.isGameOver() && ph.getPlayerTurn() == simAi) {
+        if (!simGame.isGameOver() && ph.isPlayerTurn(simAi)) {
             playOut(simGame, simAi, playoutPlays);
             if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));

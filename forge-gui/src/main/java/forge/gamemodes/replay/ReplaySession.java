@@ -43,8 +43,7 @@ public final class ReplaySession implements IHasForgeLog {
      */
     public static ReplaySession begin(final Game game, final List<PlayerControllerHuman> humans) {
         try {
-            final boolean wanted = FModel.getPreferences() != null
-                    && FModel.getPreferences().getPrefBoolean(FPref.UI_RECORD_REPLAYS);
+            final boolean wanted = FModel.getPreferences().getPrefBoolean(FPref.UI_RECORD_REPLAYS);
             final GameType type = game.getRules().getGameType();
             if (!wanted || humans.isEmpty() || type == GameType.Adventure || type == GameType.AdventureEvent) {
                 return null;

@@ -83,7 +83,7 @@ public enum DeckFormat {
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
-    Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
+    Brawl      ( Range.is(99), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
     TinyLeaders    ( Range.is(49),                         Range.of(0, 10), 1, new Predicate<>() {

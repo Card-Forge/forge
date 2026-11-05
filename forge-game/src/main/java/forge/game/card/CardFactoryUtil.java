@@ -43,6 +43,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbilityForetell;
 import forge.game.staticability.StaticAbilityPlotZone;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -2969,7 +2970,7 @@ public class CardFactoryUtil {
                     Player activator = this.getActivatingPlayer();
                     final Game game = activator.getGame();
 
-                    if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
+                    if (!game.getPhaseHandler().isPlayerTurn(activator) && !StaticAbilityForetell.canForetellAnyTurn(activator, getHostCard())) {
                         return false;
                     }
 
@@ -3949,6 +3950,9 @@ public class CardFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Nightbound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Prismatic")) {
+            String effect = "Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Protection")) {
             String valid = Protection.getProtectionValid(keyword, false);

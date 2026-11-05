@@ -101,7 +101,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
     private int landsPlayedThisTurn;
-    private int landsPlayedLastTurn;
+    private int landsPlayedMyLastTurn;
     private int numPowerSurgeLands;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
@@ -126,6 +126,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private List<Card> discardedThisTurn = new ArrayList<>();
     private List<Card> sacrificedThisTurn = new ArrayList<>();
+    private List<Card> playedLandsThisTurn = new ArrayList<>();
 
     private int simultaneousDamage = 0;
 
@@ -1659,10 +1660,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
         runParams.put(AbilityKey.Origin, land.getZone().getZoneType().name());
+        // LKI from before the move remembers the zone the land is played from
+        final Card playedLKI = CardCopyService.getLKICopy(land);
 
         game.copyLastState();
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
         game.updateLastStateForCard(c);
+        playedLandsThisTurn.add(playedLKI);
 
         // Run triggers
         runParams.put(AbilityKey.SpellAbility, cause);
@@ -2252,8 +2256,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
-    public final int getLandsPlayedLastTurn() {
-        return landsPlayedLastTurn;
+    public final List<Card> getPlayedLandsThisTurn() {
+        return playedLandsThisTurn;
+    }
+    public final int getLandsPlayedMyLastTurn() {
+        return landsPlayedMyLastTurn;
     }
     public final void addLandPlayedThisTurn() {
         landsPlayedThisTurn++;
@@ -2262,6 +2269,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetLandsPlayedThisTurn() {
         landsPlayedThisTurn = 0;
+        playedLandsThisTurn.clear();
         view.updateNumLandThisTurn(this);
     }
     public final void setLandsPlayedThisTurn(int num) {
@@ -2270,11 +2278,11 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         view.updateNumLandThisTurn(this);
     }
-    public final void setLandsPlayedLastTurn(int num) {
-        landsPlayedLastTurn = num;
+    public final void setLandsPlayedMyLastTurn(int num) {
+        landsPlayedMyLastTurn = num;
     }
     public final void setNumDrawnLastTurn(int num) {
-        numDrawnLastTurn= num;
+        numDrawnLastTurn = num;
     }
 
     public final int getInvestigateNumThisTurn() {
@@ -2498,8 +2506,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
         setTappedLandForManaThisTurn(false);
-        setLandsPlayedLastTurn(getLandsPlayedThisTurn());
-        resetLandsPlayedThisTurn();
         investigatedThisTurn = 0;
         scryThisTurn = 0;
         surveilThisTurn = 0;
@@ -2533,9 +2539,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (game.getPhaseHandler().isPlayerTurn(this)) {
             setBeenDealtCombatDamageSinceLastTurn(false);
             setAttackedPlayersMyLastTurn(getAttackedPlayersMyTurn());
+            setLandsPlayedMyLastTurn(getLandsPlayedThisTurn());
             clearAttackedMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
         }
+        resetLandsPlayedThisTurn();
     }
 
     public boolean canCastSorcery() {
@@ -2652,10 +2660,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         } finally {
             removeController(ts, false);
         }
-    }
-
-    public boolean isSkippingCombat() {
-        return !isInGame();
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {

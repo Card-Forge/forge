@@ -51,8 +51,8 @@ public class TriggerStickerPlaced extends Trigger {
     }
 
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.StickerKind);
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
+        AbilityKey.copyKeys(runParams, objects, AbilityKey.Card, AbilityKey.Player, AbilityKey.StickerKind);
     }
 
     @Override
