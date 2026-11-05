@@ -149,3 +149,9 @@ library_cut_finisher | Restless Reef | Insatiable Avarice
 # and Appa makes an Ally token for every spell cast from exile), the other drain creatures
 airbend_reducer | Doc Aurlock, Grizzled Genius | Semblance Anvil
 airbend_payoff | Bontu's Monument | Kalastria Healer | Zulaport Cutthroat | Cruel Celebrant | Blood Artist
+
+# AntiCombo (see forge.ai.simulation.AntiCombo): what the AI must not let an opponent keep or cast. KEY cards win or
+# are the heart of a combo (counted at full weight when an opponent has them on the battlefield, on the stack or in the
+# graveyard as something to bring back), PIECE cards are what a combo deck needs around the keys (half the weight).
+anti_combo_key | Time Vault | Doomsday | Thassa's Oracle | Laboratory Maniac | Jace, Wielder of Mysteries | Underworld Breach | Brain Freeze | Tendrils of Agony | Grapeshot | Past in Flames | Yawgmoth's Will | Oath of Druids | Show and Tell | Sneak Attack | Tinker | Reanimate | Animate Dead | Exhume | Necromancy | Entomb | Griselbrand | Archon of Cruelty | Atraxa, Grand Unifier | Blightsteel Colossus | Emrakul, the Aeons Torn | Bolas's Citadel | Hullbreaker Horror | Kiki-Jiki, Mirror Breaker | Splinter Twin | Narcomoeba | Dread Return | Balustrade Spy | Painter's Servant | Grindstone | Hypergenesis | Through the Breach | Natural Order | Food Chain | Omniscience | Dream Halls | Basalt Monolith | Isochron Scepter | Dramatic Reversal | Demonic Consultation | Tainted Pact | Mind's Desire | Empty the Warrens | Living End | Goblin Welder | Goblin Engineer | Manifold Key
+anti_combo_piece | Dark Ritual | Cabal Ritual | Lotus Petal | Mox Opal | Gitaxian Probe | Street Wraith | Gush | Preordain | Ponder | Brainstorm | Vampiric Tutor | Mystical Tutor | Demonic Tutor | Imperial Seal | Grim Tutor | Burning Wish | Soul-Guide Lantern

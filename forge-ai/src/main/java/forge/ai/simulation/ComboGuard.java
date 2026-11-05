@@ -135,6 +135,11 @@ public final class ComboGuard {
         if (LifeDrawGuard.reckless(ai, sa, plan)) {
             return "life-draw-reckless";
         }
+        // Void Mirror and Chalice of the Void (anyone's) counter spells: a free spell is countered by either of them
+        final String walled = counterWall(ai, sa, host);
+        if (walled != null) {
+            return walled;
+        }
         // Doomsday without the Oracle in hand (or the life, or a library to cut) only throws the deck away
         if (sa.isSpell() && DoomsdayPile.isDoomsday(host) && !DoomsdayPile.ready(ai)) {
             return "doomsday-not-ready";
@@ -711,5 +716,40 @@ public final class ComboGuard {
 
     private static Set<String> names(final String... names) {
         return Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(names)));
+    }
+
+    /**
+     * The spell is countered by a permanent in play: Void Mirror counters any spell cast without colored mana, so a spell
+     * that costs nothing always is (the first playtest cast Black Lotus and Mox Emerald into its own); Chalice of the Void
+     * counters the spells whose mana value equals its charge counters, with none on it that is every free spell.
+     *
+     * @return the refusal code, or null
+     */
+    static String counterWall(final Player ai, final SpellAbility sa, final Card host) {
+        if (!sa.isSpell() || host.isLand() || sa.getPayCosts() == null) {
+            return null;
+        }
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if ("Chalice of the Void".equals(c.getName()) && host.getCMC() == c.getCounters(forge.game.card.CounterEnumType.CHARGE)) {
+                return "chalice-counters-spell";
+            }
+        }
+        if (sa.getPayCosts().getTotalMana() != null && sa.getPayCosts().getTotalMana().isZero()
+                && !sa.getPayCosts().hasXInAnyCostPart() && coloredManaCountersSpells(ai)) {
+            return "void-mirror-counters-free-spell";
+        }
+        return null;
+    }
+
+    /** Whether a permanent in play counters spells cast without colored mana (Void Mirror). */
+    static boolean coloredManaCountersSpells(final Player ai) {
+        for (final Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final forge.game.trigger.Trigger t : c.getTriggers()) {
+                if ("True".equals(t.getParam("NoColoredMana")) && forge.game.trigger.TriggerType.SpellCast.equals(t.getMode())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

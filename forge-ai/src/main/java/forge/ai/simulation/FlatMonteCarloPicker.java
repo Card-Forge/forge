@@ -1197,10 +1197,11 @@ public final class FlatMonteCarloPicker {
             return 100000; // the face first: damage and drain are often best aimed there
         }
         final Card c = (Card) e;
+        final int danger = AntiCombo.rank(player, c); // an opponent's key combo piece is the first target
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c);
+            return ComputerUtilCard.evaluateCreature(c) + danger;
         }
-        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0);
+        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0) + danger;
     }
 
     /**

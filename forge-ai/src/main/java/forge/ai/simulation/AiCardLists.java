@@ -34,6 +34,10 @@ import forge.game.card.Card;
 public final class AiCardLists {
     /** What a card is for. The key in the file is the lower case name of the constant. */
     public enum Role {
+        /** Cards an opponent must not be left with: they win a game or are the heart of a combo (see {@link AntiCombo}). */
+        ANTI_COMBO_KEY,
+        /** What a combo deck needs around its keys: rituals, cheap tutors and draw (half the weight of a key). */
+        ANTI_COMBO_PIECE,
         /** Doomsday itself: it keeps five cards of the library and graveyard (see DoomsdayPile). */
         DOOMSDAY,
         /** Cards that draw for next to nothing, the pile Doomsday keeps (Gitaxian Probe, Street Wraith, Gush...). */
