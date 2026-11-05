@@ -5,9 +5,7 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-import java.util.SplittableRandom;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
@@ -41,6 +39,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.ComparatorUtil;
 import forge.util.IterableUtil;
+import forge.util.MyRandom;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -345,13 +344,6 @@ public class ComputerUtilAbility {
             return 0;
         }
 
-        // 50% of the time, prefer working towards the ultimate. Rolled per planeswalker and turn instead of per call,
-        // so the priority stays the same while sorting.
-        private static boolean prefersPlusThisTurn(final Card pw) {
-            final Game game = pw.getGame();
-            return new SplittableRandom(Objects.hash(game.getId(), pw.getId(), game.getPhaseHandler().getTurn())).nextInt(2) < 1;
-        }
-
         private static int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
             Card source = sa.getHostCard();
@@ -438,7 +430,7 @@ public class ComputerUtilAbility {
                     if (source != null && !sa.hasParam("Ultimate") && cost.convertAmount() != null && !couldWinGame(ai, sa)) {
                         int loyaltyLeft = source.getCurrentLoyalty() - cost.convertAmount();
                         boolean hasUltimate = IterableUtil.any(source.getSpellAbilities(), s -> s.isPwAbility() && s.hasParam("Ultimate"));
-                        if (loyaltyLeft <= 0 || (hasUltimate && (prefersPlusThisTurn(source)
+                        if (loyaltyLeft <= 0 || (hasUltimate && (MyRandom.getRandom().nextBoolean()
                                 || ComputerUtilCost.isPlaneswalkerThreatened(ai, source, loyaltyLeft)))) {
                             p -= 20;
                         }
