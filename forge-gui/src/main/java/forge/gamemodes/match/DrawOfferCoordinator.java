@@ -107,7 +107,7 @@ public final class DrawOfferCoordinator {
     }
 
     /** Mirror concede: remote-client controllers have no event handler, so release their input queues. */
-    private static void releaseInputQueues(final Game game) {
+    static void releaseInputQueues(final Game game) {
         if (!game.isGameOver()) {
             return;
         }

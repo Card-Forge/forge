@@ -3780,10 +3780,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (player != null) {
             player.concede();
             getGame().getAction().checkGameOverCondition();
-            if (!getGame().isGameOver() && Iterables.all(getGame().getPlayers(), Player::isAI)) {
-                // AI players would finish the game with no human left to see it
-                getGame().setGameOver(GameEndReason.AllHumansLost);
-            }
             // Remote-client controllers on the server have no FControlGameEventHandler,
             // so their input queues won't be released by the normal event path.
             // Iterate registered players (not getPlayers(), which excludes the
