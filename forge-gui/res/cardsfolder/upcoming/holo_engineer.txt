@@ -1,0 +1,11 @@
+Name:Holo-Engineer
+ManaCost:2 G G
+Types:Creature Human Artificer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 3/3 colorless Illusion artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_illusion | TokenOwner$ You
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Permanent.YouCtrl | ReplaceWith$ TokenReplace | Description$ If one or more tokens would be created under your control, that many 3/3 colorless Illusion artifact creature tokens are created instead.
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ c_3_3_a_illusion
+DeckHas:Ability$Token
+DeckHints:Ability$Token
+Oracle:When this creature enters, create a 3/3 colorless Illusion artifact creature token.\nIf one or more tokens would be created under your control, that many 3/3 colorless Illusion artifact creature tokens are created instead.

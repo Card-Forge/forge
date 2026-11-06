@@ -329,6 +329,7 @@ Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
 Talosian:Talosians
+Tamarian:Tamarians
 Tellarite:Tellarites
 Tentacle:Tentacles
 Tetravite:Tetravites
@@ -352,6 +353,7 @@ Unicorn:Unicorns
 Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
+Vau-N'Akat:Vau-N'Akat
 Vedalken:Vedalkens
 Villain:Villains
 Volver:Volvers
