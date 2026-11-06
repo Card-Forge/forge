@@ -166,6 +166,15 @@ public final class ComboGuard {
         if (sa.isSpell() && DoomsdayPile.isDoomsday(host) && !DoomsdayPile.ready(ai)) {
             return "doomsday-not-ready";
         }
+        // with a winning Doomsday in hand, a creature cast or a cycling first only spends what Doomsday needs
+        if (DoomsdayPile.mustWaitForDoomsday(ai, sa)) {
+            return "doomsday-first";
+        }
+        // Illusions of Grandeur without the Donate that makes it a combo, Donate with nothing to give
+        final String donate = DonateCombo.problem(ai, sa);
+        if (donate != null) {
+            return donate;
+        }
         // Doomsday Excruciator, or Superior Spider-Man with nothing else to copy: the cut loses without a finisher
         if (cutsTheLibraries(ai, sa, plan)) {
             return "library-cut-unsafe";
