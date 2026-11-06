@@ -688,6 +688,14 @@ public enum DeckFormat {
         return rules.canBeCommander();
     }
 
+    /** Without legality checks any creature or planeswalker may command, except in signature spell formats. */
+    public boolean isAllowedCommander(CardRules rules, boolean enforceLegality) {
+        if (isLegalCommander(rules)) {
+            return true;
+        }
+        return !enforceLegality && !hasSignatureSpell() && (rules.canBeCreature() || rules.getType().isPlaneswalker());
+    }
+
     public Predicate<Deck> isLegalDeckPredicate() {
         return deck -> getDeckConformanceProblem(deck) == null;
     }
