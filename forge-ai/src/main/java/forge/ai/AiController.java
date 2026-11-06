@@ -1950,6 +1950,10 @@ public class AiController {
             if (oracle != null) {
                 return oracle; // Thassa's Oracle with Demonic Consultation in hand: cast it, the Consultation answers its trigger
             }
+            final SpellAbility pileDraw = DoomsdayPile.sureDraw(player, saList);
+            if (pileDraw != null && !hasFailedToCast(pileDraw)) {
+                return pileDraw; // Doomsday has cut the library: draw through the pile to the Oracle
+            }
             final SpellAbility will = WillReplay.sureCast(player, saList);
             if (will != null) {
                 return will; // Yawgmoth's Will with Time Walk, a Mox or Black Lotus in the graveyard

@@ -40,6 +40,12 @@ final class LifeDrawGuard {
             return false;
         }
         final int after = ai.getLife() - pay;
+        // A Doomsday deck with its library cut to the pile draws through it on purpose, with life paid for the free
+        // draws (Street Wraith's cycling, Gitaxian Probe): the pile is the whole point and the Oracle ends the game
+        if (plan != null && plan.has(ComboPlan.Kind.DOOMSDAY)
+                && ai.getCardsIn(ZoneType.Library).size() <= 2 * DoomsdayPile.PILE && after > 0) {
+            return false;
+        }
         int threat = 0;
         for (final Card c : ai.getOpponents().getCreaturesInPlay()) {
             threat += Math.max(0, c.getNetPower());

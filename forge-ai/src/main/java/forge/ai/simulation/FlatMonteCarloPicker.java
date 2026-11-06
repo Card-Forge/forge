@@ -964,6 +964,9 @@ public final class FlatMonteCarloPicker {
         if (isRemoveDeckCantrip(sa)) {
             return true;
         }
+        if (isManaGrantingEffect(sa)) {
+            return true;
+        }
         final PlayKind kind = playKind(sa);
         if (kind == PlayKind.STRATEGIC) {
             return singleTargetingAbility(sa) == null && !hasTargeting(sa);
@@ -977,6 +980,28 @@ public final class FlatMonteCarloPicker {
             return api == ApiType.ChangeZone || api == ApiType.Destroy || api == ApiType.Tap;
         }
         return broad && isDevelopment(sa);
+    }
+
+    /**
+     * An effect spell that grants a mana ability is useful to discovery even though EffectAi has no generic
+     * heuristic for deciding when to play it. The rollout can judge the effect by what it lets the player cast.
+     * Keep this narrow: only effects that actually grant a mana ability are added.
+     */
+    private static boolean isManaGrantingEffect(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.Effect || !sa.hasParam("Abilities")) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        for (final String name : sa.getParam("Abilities").split(",")) {
+            final String sVar = name.trim();
+            if (host.hasSVar(sVar)) {
+                final String script = host.getSVar(sVar);
+                if (script != null && script.trim().startsWith("AB$ Mana")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

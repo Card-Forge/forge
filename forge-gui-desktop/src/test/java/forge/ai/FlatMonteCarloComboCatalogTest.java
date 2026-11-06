@@ -9,9 +9,12 @@ import org.testng.annotations.Test;
 import forge.ai.simulation.AntiCombo;
 import forge.ai.simulation.ComboCatalog;
 import forge.ai.simulation.ComboGuard;
+import forge.ai.simulation.FlatMonteCarloPicker;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 /**
@@ -179,6 +182,43 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
                 forge.ai.simulation.XChoice.adjust(ai, fireball.getFirstSpellAbility(), 9));
         AssertJUnit.assertEquals("never more than can be paid", 3,
                 forge.ai.simulation.XChoice.adjust(ai, fireball.getFirstSpellAbility(), 3));
+    }
+
+    /** Channel is an Effect spell granting a Command-zone mana ability, not an ordinary land or mana rock. */
+    @Test
+    public void channelIsDiscoverableAndItsGrantedManaAbilityCanBeRepeated() {
+        setUp();
+        ai.setLife(20, null);
+
+        final Card channelSpell = addCardToZone("Channel", ai, ZoneType.Hand);
+        final SpellAbility effect = channelSpell.getFirstSpellAbility();
+        effect.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("FlatMC discovery must offer Channel's mana-granting Effect", FlatMonteCarloPicker.isDiscoverable(effect));
+
+        // EffectEffect grants this same SVar to an effect card in the Command zone.
+        final Card channelEffect = addCardToZone("Channel", ai, ZoneType.Command);
+        final SpellAbility channelMana = AbilityFactory.getAbility(channelEffect, "ABMana");
+        channelEffect.addSpellAbility(channelMana);
+        channelMana.setActivatingPlayer(ai);
+        addCard("Mountain", ai);
+
+        AssertJUnit.assertTrue("the Command-zone effect must be found as a mana source",
+                forge.ai.ComputerUtilMana.getAvailableManaSources(ai, true).contains(channelEffect));
+        AssertJUnit.assertEquals("one Mountain plus 19 Channel activations, leaving one life", 20,
+                forge.ai.ComputerUtilMana.getAvailableManaEstimate(ai, true));
+
+        final Card banefire = addCardToZone("Banefire", ai, ZoneType.Hand);
+        final SpellAbility banefireSpell = banefire.getFirstSpellAbility();
+        banefireSpell.setActivatingPlayer(ai);
+        banefireSpell.setXManaCostPaid(19);
+        AssertJUnit.assertTrue("Channel must pay the generic X repeatedly, with the Mountain paying R",
+                forge.ai.ComputerUtilMana.canPayManaCost(banefireSpell, ai, 0, false));
+        AssertJUnit.assertEquals("test payment must not change the real life total", 20, ai.getLife());
+
+        banefireSpell.setXManaCostPaid(20);
+        AssertJUnit.assertFalse("the AI must not spend its last life to generate one more mana",
+                forge.ai.ComputerUtilMana.canPayManaCost(banefireSpell, ai, 0, false));
+        AssertJUnit.assertEquals("failed test payment must not change the real life total", 20, ai.getLife());
     }
 
     /**
