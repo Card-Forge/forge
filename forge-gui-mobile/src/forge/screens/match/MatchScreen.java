@@ -470,11 +470,15 @@ public class MatchScreen extends FScreen {
     private final List<Rectangle> coachObstacles = new ArrayList<>();
     private boolean tutorialOpenedPhaseList, tutorialHoldsMenuBar;
 
-    /** The overlay goes in before the coach, so the note is drawn above the dimming. */
+    /**
+     * Both views are made together, overlay first: whichever of them is needed first, the note must end up above the
+     * dimming. (Made one at a time, a note shown before the first outline was created would be dimmed by it.)
+     */
     private void ensureTutorialViews() {
         if (tutorialOverlay == null) {
             tutorialOverlay = add(new TutorialOverlay(this));
             tutorialOverlay.setBounds(0, 0, getWidth(), getHeight());
+            tutorialOverlay.setVisible(false); // shown only while something is outlined
         }
         if (coach == null) {
             coach = add(new CoachPanel(this::layoutCoach));
@@ -678,12 +682,15 @@ public class MatchScreen extends FScreen {
     public void showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
         ensureTutorialViews();
         coach.show(title, text, nextLabel, onNext);
+        layoutCoach();
+        Gdx.graphics.requestRendering();
     }
 
     /** Removes the tutorial note, if shown. Call on the UI thread. */
     public void hideCoach() {
         if (coach != null) {
             coach.hidePanel();
+            Gdx.graphics.requestRendering();
         }
     }
 

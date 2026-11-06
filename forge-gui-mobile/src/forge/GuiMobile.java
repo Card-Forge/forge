@@ -134,10 +134,22 @@ public class GuiMobile implements IGuiBase {
         return gv != null && !mc.isReplay() && !gv.isGameOver();
     }
 
+    /**
+     * A match is hosted before its screen is on show: Forge.openScreen switches screens asynchronously (the old screen
+     * is asked first), so for a moment the current screen is still the home screen. A tutorial note sent in that gap
+     * has nowhere to go, so the tutorial waits for this to be true before it starts talking.
+     */
+    @Override
+    public boolean isTutorialBoardReady() {
+        return Forge.getCurrentScreen() instanceof MatchScreen screen
+                && screen.getWidth() > 0 && screen.getHeight() > 0
+                && MatchController.instance.getGameView() != null;
+    }
+
     @Override
     public boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
-        if (!(Forge.getCurrentScreen() instanceof MatchScreen)) {
-            return false; // nothing to draw on; the caller shows a dialog instead
+        if (!isTutorialBoardReady()) {
+            return false; // nothing to draw on yet; the caller tries again shortly, then shows a dialog instead
         }
         FThreads.invokeInEdtNowOrLater(() -> {
             if (Forge.getCurrentScreen() instanceof MatchScreen screen) {

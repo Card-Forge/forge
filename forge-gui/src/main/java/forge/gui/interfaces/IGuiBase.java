@@ -46,6 +46,12 @@ public interface IGuiBase {
     /** Removes the note shown by {@link #showCoach}, if any. Safe to call from any thread. */
     default void hideCoach() { }
     /**
+     * Whether the match screen is on screen and laid out, so a tutorial note can be drawn on it. A match starts before
+     * its screen is showing (mobile switches screens a moment later), and a note sent too early would otherwise fall
+     * back to a blocking dialog or be dropped. Safe to call from any thread.
+     */
+    default boolean isTutorialBoardReady() { return true; }
+    /**
      * Which match screen layout is on screen now, so the tutorial can say where things are on this player's screen
      * (desktop, mobile upright, mobile sideways, the compact layouts).
      */

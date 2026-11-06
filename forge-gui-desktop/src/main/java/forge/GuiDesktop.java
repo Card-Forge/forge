@@ -399,11 +399,17 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+    public boolean isTutorialBoardReady() {
         final CMatchUI matchUI = currentMatchUI;
-        if (matchUI == null || matchUI.getGameView() == null) {
-            return false; // nothing to draw on; the caller shows a dialog instead
+        return matchUI != null && matchUI.getGameView() != null;
+    }
+
+    @Override
+    public boolean showCoach(final String title, final String text, final String nextLabel, final Runnable onNext) {
+        if (!isTutorialBoardReady()) {
+            return false; // nothing to draw on yet; the caller tries again shortly, then shows a dialog instead
         }
+        final CMatchUI matchUI = currentMatchUI;
         FThreads.invokeInEdtNowOrLater(() -> matchUI.showTutorialCoach(title, text, nextLabel, onNext));
         return true;
     }

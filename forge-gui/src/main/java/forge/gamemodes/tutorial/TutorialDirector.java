@@ -65,11 +65,15 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     private static final long NUDGE_MS = 40_000;
     private static final long POLL_MS = 120;
     /** How long the spotlight is shown before the demo clicks, so the player can see what is about to be used. */
-    private static final long BEAT_MS = 2000;
+    private static final long BEAT_MS = 1400;
     /** How long the result stays on screen after a demo move, before the next explanation. */
-    private static final long AFTER_MS = 1500;
+    private static final long AFTER_MS = 1100;
     /** Pause between presses of OK while the demo passes priority. */
-    private static final long PASS_MS = 1500;
+    private static final long PASS_MS = 1000;
+    /** How long to wait for the match screen to be on show before the tutorial starts talking. */
+    private static final long BOARD_WAIT_MS = 20_000;
+    /** How long a note keeps trying to reach the match screen before it falls back to a dialog. */
+    private static final long COACH_RETRY_MS = 5_000;
     private static final long TRY_MAX_WAIT_MS = 600_000;
     private static final int STARTING_LIFE = 20;
 
@@ -186,12 +190,26 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         if (!waitUntil(this::inMain1, 40_000)) {
             return;
         }
+        // The game is up before its screen is (mobile switches screens a moment later); a note sent in that gap
+        // would be dropped or shown as a blocking dialog, which is what made some steps seem to hang.
+        if (!waitUntil(() -> GuiBase.getInterface().isTutorialBoardReady(), BOARD_WAIT_MS)) {
+            if (alive()) {
+                netLog.warn("The tutorial's match screen did not appear in time; using dialogs");
+            }
+        }
+        if (!alive()) {
+            return;
+        }
         if (watch) {
             final PlayerView pv = me.getView();
             FThreads.invokeInEdtNowOrLater(() -> human.getGui().setGameController(pv, gate));
         }
         // First the screen itself (where things are, what the controls do), then the practice game that uses them.
         tour();
+        if (!alive()) {
+            return;
+        }
+        goalIntro();
         if (!alive()) {
             return;
         }
@@ -223,13 +241,19 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     private static final List<TourStop> TOUR = List.of(
             TourStop.of("Players", TutorialTarget.YOUR_PLAYER, TutorialTarget.OPPONENT),
             TourStop.of("Hand", TutorialTarget.HAND),
+            TourStop.of("Cards", TutorialTarget.HAND, TutorialTarget.CARD_INFO),
             TourStop.of("Battlefield", TutorialTarget.BATTLEFIELD),
             TourStop.of("Zones", TutorialTarget.ZONES),
+            TourStop.of("Mana", TutorialTarget.ZONES),
             TourStop.of("Stack", TutorialTarget.STACK),
+            TourStop.of("Turn", TutorialTarget.PHASES),
             TourStop.of("Phases", TutorialTarget.PHASES),
             TourStop.of("Prompt", TutorialTarget.PROMPT, TutorialTarget.BUTTONS),
+            TourStop.of("Targets", TutorialTarget.PROMPT, TutorialTarget.BATTLEFIELD),
+            TourStop.of("Yield", TutorialTarget.BUTTONS, TutorialTarget.PHASES),
             TourStop.of("Menu", TutorialTarget.MENU),
-            TourStop.of("CardInfo", TutorialTarget.CARD_INFO));
+            TourStop.of("CardInfo", TutorialTarget.CARD_INFO),
+            TourStop.of("Combat", TutorialTarget.BATTLEFIELD, TutorialTarget.PHASES));
 
     /**
      * Welcomes the player and walks round the screen: each part is outlined while its note explains what it is for
@@ -243,6 +267,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
 
         say(t("lblTutWelcome"), t("msgTutWelcome") + "\n\n" + t(watch ? "msgTutWelcomeWatch" : "msgTutWelcomeTry"));
+        say(t("lblTutGlossary"), t("msgTutGlossary"));
 
         final int total = TOUR.size();
         for (int i = 0; i < total && alive(); i++) {
@@ -260,7 +285,11 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
     /** A tour text plus, where this layout has one, the extra line about where that part is and how to use it here. */
     private String guiText(final String key) {
         final String base = t(key);
-        final String extra = Localizer.getInstance().getMessageorUseDefault(key + layout().suffix(), "");
+        final TutorialLayout layout = layout();
+        String extra = Localizer.getInstance().getMessageorUseDefault(key + layout.suffix(), "");
+        if (extra.isEmpty() && layout.isMobile()) {
+            extra = Localizer.getInstance().getMessageorUseDefault(key + "Mobile", ""); // one line for every phone layout
+        }
         return extra.isEmpty() ? base : base + "\n\n" + extra;
     }
 
@@ -272,6 +301,12 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         } finally {
             GuiBase.getInterface().highlightGui(Collections.emptySet());
         }
+    }
+
+    /** Sets out what the practice game is, what each side has, and the plan, so the lessons that follow make sense. */
+    private void goalIntro() {
+        final EnumSet<TutorialTarget> players = EnumSet.of(TutorialTarget.YOUR_PLAYER, TutorialTarget.OPPONENT);
+        pointAndSay(players, t("lblTutGoal"), t("msgTutGoal", me.getLife(), opp.getLife()));
     }
 
     private boolean landLesson() throws InterruptedException {
@@ -301,12 +336,17 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         }
 
         if (waitUntil(() -> !game.getStack().isEmpty() && myPriority(), 5_000)) {
-            step(t("lblTutStack"), t("msgTutStack"), t("msgTutStackTry"), t("msgTutStackWatch"),
-                    NOTHING,
-                    this::ok,
-                    () -> has(me, ZoneType.Battlefield, GOBLIN),
-                    () -> false,
-                    10_000);
+            GuiBase.getInterface().highlightGui(EnumSet.of(TutorialTarget.STACK, TutorialTarget.BUTTONS));
+            try {
+                step(t("lblTutStack"), t("msgTutStack"), t("msgTutStackTry"), t("msgTutStackWatch"),
+                        NOTHING,
+                        this::ok,
+                        () -> has(me, ZoneType.Battlefield, GOBLIN),
+                        () -> false,
+                        10_000);
+            } finally {
+                GuiBase.getInterface().highlightGui(Collections.emptySet());
+            }
             if (stopped) {
                 return false;
             }
@@ -317,10 +357,20 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
 
     private void attackLesson() throws InterruptedException {
         passStep(t("lblTutAttack"), t("msgTutAttack"), t("msgTutToCombatTry"), t("msgTutToCombatWatch"),
+                EnumSet.of(TutorialTarget.BUTTONS, TutorialTarget.PHASES),
                 () -> attackPrompt() || !myTurn(),
                 20_000);
         if (!alive() || !attackPrompt()) {
             return;
+        }
+
+        // Look at what can block before choosing attackers: the habit this lesson is really teaching.
+        final Card blocker = find(opp, ZoneType.Battlefield, BRIGAND);
+        if (blocker != null) {
+            spotlightAndSay(cards(blocker), t("lblTutScout"), t("msgTutScout"));
+            if (!alive() || !attackPrompt()) {
+                return;
+            }
         }
 
         step(t("lblTutDeclare"), t("msgTutDeclare"), t("msgTutDeclareTry"), t("msgTutDeclareWatch"),
@@ -366,12 +416,13 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
 
     private void passLesson() throws InterruptedException {
         passStep(t("lblTutPass"), t("msgTutPass"), t("msgTutPassTry"), t("msgTutPassWatch"),
+                EnumSet.of(TutorialTarget.BUTTONS, TutorialTarget.PHASES),
                 () -> !myTurn(),
                 25_000);
         if (!alive()) {
             return;
         }
-        say(t("lblTutOppTurn"), t(phaseKey("msgTutOppTurn")));
+        pointAndSay(EnumSet.of(TutorialTarget.PHASES), t("lblTutOppTurn"), t(phaseKey("msgTutOppTurn")));
     }
 
     private void blockLesson() throws InterruptedException {
@@ -383,6 +434,14 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         if (!blockPrompt()) {
             say(t("lblTutNoAttack"), t("msgTutNoAttack"));
             return;
+        }
+
+        final Card attacker = find(opp, ZoneType.Battlefield, BRIGAND);
+        if (attacker != null) {
+            spotlightAndSay(cards(attacker), t("lblTutIncoming"), t("msgTutIncoming"));
+            if (!alive() || !blockPrompt()) {
+                return;
+            }
         }
 
         step(t("lblTutBlock"), t("msgTutBlock"), t("msgTutBlockTry"), t("msgTutBlockWatch"),
@@ -412,6 +471,7 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
         for (int round = 0; round < 3 && alive(); round++) {
             final int oppLife = opp.getLife();
             passStep(t("lblTutWin"), t("msgTutWin", oppLife), t("msgTutToCombatTry"), t("msgTutToCombatWatch"),
+                    EnumSet.of(TutorialTarget.OPPONENT, TutorialTarget.BUTTONS),
                     () -> attackPrompt() || !myTurn(),
                     20_000);
             if (!alive()) {
@@ -546,11 +606,17 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
      * reminds them (TRY). Each new phase on the way is explained.
      */
     private boolean passStep(final String title, final String body, final String tryLine, final String watchLine,
-                             final BooleanSupplier done, final long watchTimeoutMs) throws InterruptedException {
-        if (watch) {
-            say(title, body + "\n\n" + watchLine);
-        } else {
-            say(title, body + "\n\n" + tryLine, t("btnTutGotIt"), done);
+                             final EnumSet<TutorialTarget> point, final BooleanSupplier done,
+                             final long watchTimeoutMs) throws InterruptedException {
+        GuiBase.getInterface().highlightGui(point); // the buttons and phases the note talks about
+        try {
+            if (watch) {
+                say(title, body + "\n\n" + watchLine);
+            } else {
+                say(title, body + "\n\n" + tryLine, t("btnTutGotIt"), done);
+            }
+        } finally {
+            GuiBase.getInterface().highlightGui(Collections.emptySet());
         }
         if (!alive()) {
             return false;
@@ -626,8 +692,20 @@ final class TutorialDirector implements Runnable, IHasForgeLog {
             return;
         }
         final CountDownLatch pressed = new CountDownLatch(1);
-        if (!GuiBase.getInterface().showCoach(title, text, label, pressed::countDown)) {
-            SOptionPane.showMessageDialog(text, title, SOptionPane.INFORMATION_ICON);
+        try {
+            // The match screen may still be coming up: try for a few seconds before settling for a dialog.
+            final long giveUp = System.currentTimeMillis() + COACH_RETRY_MS;
+            while (!GuiBase.getInterface().showCoach(title, text, label, pressed::countDown)) {
+                if (stopped || game.isGameOver() || System.currentTimeMillis() > giveUp) {
+                    if (!stopped && !game.isGameOver()) {
+                        SOptionPane.showMessageDialog(text, title, SOptionPane.INFORMATION_ICON);
+                    }
+                    return;
+                }
+                Thread.sleep(100);
+            }
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
             return;
         }
         try {

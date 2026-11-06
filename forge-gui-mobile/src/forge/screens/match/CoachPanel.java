@@ -1,5 +1,6 @@
 package forge.screens.match;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
@@ -68,16 +69,19 @@ public class CoachPanel extends FContainer {
         onNext = onNext0;
         collapsed = false;
         body.setText(text == null ? "" : text);
+        body.scrollToTop(); // a long note that was scrolled must not leave the next one starting halfway down
         btnNext.setText(nextLabel == null || nextLabel.isEmpty() ? msg("btnTutNext") : nextLabel);
         btnNext.setEnabled(true);
         updateButtons();
         setVisible(true);
         relayout.run();
+        Gdx.graphics.requestRendering(); // the screen only redraws on demand; the note must appear without a touch
     }
 
     public void hidePanel() {
         onNext = null;
         setVisible(false);
+        Gdx.graphics.requestRendering();
     }
 
     public boolean isCollapsed() {
