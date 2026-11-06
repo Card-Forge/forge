@@ -6,6 +6,8 @@
 # combo whole in view is a threat, and the card that would complete it is the first target of removal.
 
 win | Channel + Fireball | Channel | Fireball
+win | Channel + Banefire | Channel | Banefire
+win | Channel + Ulamog, the Ceaseless Hunger | Channel | Ulamog, the Ceaseless Hunger
 win | Time Vault + Voltaic Key | Time Vault | Voltaic Key / Manifold Key
 win | Flash + Protean Hulk | Flash | Protean Hulk
 win | Melira + Murderous Redcap + Viscera Seer | Melira, Sylvok Outcast | Murderous Redcap | Viscera Seer
