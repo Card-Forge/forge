@@ -1,0 +1,7 @@
+Name:David and Carol Marcus, Creators
+ManaCost:2 G
+Types:Legendary Creature Human Scientist
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enter, create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
+SVar:TrigToken:DB$ Token | TokenScript$ new_planet | TokenOwner$ You | TokenTapped$ True
+Oracle:When David and Carol Marcus enter, create a tapped Planet land token named New Planet with "{T}: Add one mana of any color."
