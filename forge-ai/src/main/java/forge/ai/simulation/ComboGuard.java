@@ -140,9 +140,11 @@ public final class ComboGuard {
         if (walled != null) {
             return walled;
         }
-        // a creature land (Mutavault) animated with nothing to attack or block with it only wastes the mana
-        if (wastedManland(ai, sa, host)) {
-            return "manland-wasted";
+        // a creature land (Mutavault), a crew, a saddle or a station at a moment it cannot do anything: only wastes the mana
+        // and the creatures tapped for it (see TimedAbilityGuard)
+        final String untimely = TimedAbilityGuard.problem(ai, sa);
+        if (untimely != null) {
+            return untimely;
         }
         // Demonic Consultation exiles the library: only to win, with the Oracle's trigger on the stack (ConsultationWin)
         if (ConsultationWin.isConsultation(sa) && !ConsultationWin.winnerOnStack(ai.getGame(), ai)) {
@@ -193,35 +195,11 @@ public final class ComboGuard {
      * a cost. A deck without a combo plan and a cost that sacrifices the card itself are never a problem.
      */
     /**
-     * A land that animates itself until end of turn (Mutavault, Stirring Wildwood): worth the mana only in the
-     * AI's main phase or beginning of combat when it can attack (untapped, not summoning sick, not a creature yet), or
-     * on the opponent's turn once attackers are declared, to block. Anything else, and a second animation, is waste.
+     * A land that animates itself until end of turn (Mutavault, Stirring Wildwood) at a moment it is worth nothing:
+     * see {@link TimedAbilityGuard}, which also covers Vehicles, Mounts and Spacecraft.
      */
     static boolean wastedManland(final Player ai, final SpellAbility sa, final Card host) {
-        if (sa == null || !sa.isAbility() || sa.getApi() != ApiType.Animate || host == null || !host.isLand()
-                || !ai.equals(host.getController()) || !"Self".equals(sa.getParamOrDefault("Defined", ""))
-                || !host.isInZone(forge.game.zone.ZoneType.Battlefield)) {
-            return false;
-        }
-        if (host.isCreature()) {
-            return true; // already a creature this turn
-        }
-        final forge.game.phase.PhaseHandler ph = ai.getGame().getPhaseHandler();
-        if (ph.isPlayerTurn(ai)) {
-            final boolean timing = ph.is(forge.game.phase.PhaseType.MAIN1) || ph.is(forge.game.phase.PhaseType.COMBAT_BEGIN);
-            if (!timing || host.isTapped() || host.hasSickness()) {
-                return true;
-            }
-            for (final Player opp : ai.getOpponents()) {
-                if (opp.getLife() > 0) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        final forge.game.combat.Combat combat = ph.getCombat();
-        return !ph.is(forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS) || combat == null
-                || combat.getAttackers().isEmpty() || host.isTapped();
+        return sa != null && host != null && host.isLand() && "manland-wasted".equals(TimedAbilityGuard.problem(ai, sa));
     }
 
     private static final Pattern PACT_COST = Pattern.compile("UnlessCost\\$\\s*([^|]+)");

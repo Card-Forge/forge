@@ -2512,6 +2512,11 @@ public class AiController {
             default:
                 break;
         }
+        if (TimedAbilityGuard.isTimed(sa) && !opinion.willingToPlay()) {
+            // a manland, crew, saddle or station is only worth its cost at one moment of the turn, and the heuristics
+            // know which: their "not now" is final, and the rollouts cannot see the waste (nothing in the score)
+            return false;
+        }
         final Card host = sa.getHostCard();
         final ComboPlan combos = deckPlan(player).combos;
         if (!FlatMonteCarloPicker.isDiscoverable(sa, getBoolProperty(AiProps.FLAT_MC_BROAD_DISCOVERY) || isFlatMonteCarloMax())
