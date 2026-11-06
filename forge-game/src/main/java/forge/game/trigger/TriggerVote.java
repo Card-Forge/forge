@@ -64,21 +64,21 @@ public class TriggerVote extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public final void setTriggeringObjects(final Map<AbilityKey, Object> objects, Map<AbilityKey, Object> runParams) {
         @SuppressWarnings("unchecked")
         FCollection<Player> oppVotedDiff = getVoters(
             this.getHostCard().getController(),
             (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
             true, true
         );
-        sa.setTriggeringObject(AbilityKey.OpponentVotedDiff, oppVotedDiff);
+        objects.put(AbilityKey.OpponentVotedDiff, oppVotedDiff);
 
         FCollection<Player> oppVotedSame = getVoters(
                 this.getHostCard().getController(),
                 (ListMultimap<Object, Player>) runParams.get(AbilityKey.AllVotes),
                 true, false
         );
-        sa.setTriggeringObject(AbilityKey.OpponentVotedSame, oppVotedSame);
+        objects.put(AbilityKey.OpponentVotedSame, oppVotedSame);
     }
 
     @Override

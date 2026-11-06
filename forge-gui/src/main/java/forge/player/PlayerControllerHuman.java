@@ -3780,17 +3780,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (player != null) {
             player.concede();
             getGame().getAction().checkGameOverCondition();
-            if (getGame().isGameOver()) {
-                // Remote-client controllers on the server have no FControlGameEventHandler,
-                // so their input queues won't be released by the normal event path.
-                // Iterate registered players (not getPlayers(), which excludes the
-                // conceding player after onPlayerLost removes them from ingamePlayers).
-                for (Player p : getGame().getRegisteredPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman pch) {
-                        pch.getInputQueue().onGameOver(true);
-                    }
-                }
-            }
+            DrawOfferCoordinator.releaseInputQueues(getGame());
         }
     }
 

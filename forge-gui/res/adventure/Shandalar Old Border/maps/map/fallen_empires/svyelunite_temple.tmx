@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="65" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="50083">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="65" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="50085">
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
@@ -379,13 +379,13 @@
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="40019" template="../../../../../../common/maps/obj/enemy.tx" x="343.75" y="71.5">
+  <object id="40019" template="../../../../../../common/maps/obj/enemy.tx" x="335.659" y="60.0455">
    <properties>
     <property name="Type" value="FEM Vodalian Mage C" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Coral Atoll|VIS&quot;, &quot;Vodalian Mage|FEM|[30c]&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Mage C" />
     <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="108,109" />
+    <property name="waypoints" value="50084,109" />
     <property name="displayNameOverride" value="Vodalian Mage" />
     <property name="inactive" value="true" type="bool" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
@@ -441,13 +441,13 @@
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
    </properties>
   </object>
-  <object id="40022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
+  <object id="40022" template="../../../../../../common/maps/obj/enemy.tx" x="415.75" y="127.364">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svyelunite Temple|FEM&quot;, &quot;Island|3ED&quot;, &quot;Coral Reef|HML&quot;, &quot;Vodalian Knights|FEM&quot;], &quot;startBattleWithCardInCommandZone&quot;: []}" />
     <property name="enemy" value="FEM Vodalian Knight" />
     <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="108,110" />
+    <property name="waypoints" value="50083,110" />
     <property name="displayNameOverride" value="Vodalian Knight" />
     <property name="inactive" value="true" type="bool" />
     <property name="defeatDialog" value="[{&quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;FE_Svyelunite_OpponentsDefeated&quot;}, {&quot;deleteMapObject&quot;: -1}]}]" />
@@ -747,9 +747,9 @@
   <object id="103" template="../../../../../../common/maps/obj/waypoint.tx" x="30.25" y="308" />
   <object id="104" template="../../../../../../common/maps/obj/waypoint.tx" x="97.5" y="358.75" />
   <object id="105" template="../../../../../../common/maps/obj/waypoint.tx" x="33.5" y="384.75" />
-  <object id="108" template="../../../../../../common/maps/obj/waypoint.tx" x="399.75" y="79.25" />
-  <object id="109" template="../../../../../../common/maps/obj/waypoint.tx" x="352.159" y="48" />
-  <object id="110" template="../../../../../../common/maps/obj/waypoint.tx" x="352.136" y="128.5" />
+  <object id="108" template="../../../../../../common/maps/obj/waypoint.tx" x="399.205" y="79.1591" />
+  <object id="109" template="../../../../../../common/maps/obj/waypoint.tx" x="352.341" y="42.2727" />
+  <object id="110" template="../../../../../../common/maps/obj/waypoint.tx" x="415.954" y="144.591" />
   <object id="111" template="../../../../../../common/maps/obj/waypoint.tx" x="432.25" y="64.75" />
   <object id="112" template="../../../../../../common/maps/obj/waypoint.tx" x="593.5" y="386.25" />
   <object id="113" template="../../../../../../common/maps/obj/waypoint.tx" x="592.75" y="295.5" />
@@ -887,7 +887,7 @@
     <property name="pursueRange" value="0" type="int" />
    </properties>
   </object>
-  <object id="50019" template="../../../../../../common/maps/obj/enemy.tx" x="343.75" y="71.5">
+  <object id="50019" template="../../../../../../common/maps/obj/enemy.tx" x="335.659" y="60.1364">
    <properties>
     <property name="Type" value="FEM Ally Vodalian Mage C" />
     <property name="enemy" value="FEM Ally Vodalian Mage C" />
@@ -896,7 +896,7 @@
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
-    <property name="waypoints" value="108,109" />
+    <property name="waypoints" value="50084,109" />
    </properties>
   </object>
   <object id="50020" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="415.25">
@@ -946,7 +946,7 @@
     <property name="waypoints" value="" />
    </properties>
   </object>
-  <object id="50022" template="../../../../../../common/maps/obj/enemy.tx" x="356.75" y="106">
+  <object id="50022" template="../../../../../../common/maps/obj/enemy.tx" x="415.841" y="127.727">
    <properties>
     <property name="Type" value="FEM Vodalian Knight" />
     <property name="enemy" value="FEM Vodalian Knight" />
@@ -955,7 +955,7 @@
     <property name="defeatDialog" value="[{&quot;action&quot;: [{}]}]" />
     <property name="threatRange" value="0" type="int" />
     <property name="pursueRange" value="0" type="int" />
-    <property name="waypoints" value="108,110" />
+    <property name="waypoints" value="50083,110" />
    </properties>
   </object>
   <object id="50023" template="../../../../../../common/maps/obj/enemy.tx" x="79.5" y="256">
@@ -1240,6 +1240,8 @@
   <object id="50075" template="../../../../../../common/maps/obj/waypoint.tx" x="736" y="600.818" />
   <object id="50076" template="../../../../../../common/maps/obj/waypoint.tx" x="816.455" y="536.909" />
   <object id="50082" template="../../../../../../common/maps/obj/waypoint.tx" x="832.545" y="578" />
+  <object id="50083" template="../../../../../../common/maps/obj/waypoint.tx" x="414.636" y="105.636" />
+  <object id="50084" template="../../../../../../common/maps/obj/waypoint.tx" x="384.364" y="58.5455" />
   <object id="50078" template="../../../../../../common/maps/obj/collision.tx" x="960.5" y="548.932" width="6.86364" height="3.92424" />
   <object id="50079" template="../../../../../../common/maps/obj/collision.tx" x="965.114" y="544.356" width="6.31819" height="4.37879" />
   <object id="50080" template="../../../../../../common/maps/obj/collision.tx" x="960.023" y="552.129" width="4.22728" height="3.92424" />

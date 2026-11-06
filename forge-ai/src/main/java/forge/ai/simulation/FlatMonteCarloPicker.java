@@ -17,6 +17,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.ai.ComputerUtilCard;
 import forge.game.zone.ZoneType;
 import forge.util.AITimeoutTracker;
@@ -143,6 +145,24 @@ public final class FlatMonteCarloPicker {
     private FlatMonteCarloPicker() {
     }
 
+    /** A phone or tablet gives the app a few hundred MB: search less there. */
+    static boolean constrainedHeap() {
+        return Runtime.getRuntime().maxMemory() <= (768L << 20);
+    }
+
+    /**
+     * Every rollout copies the whole game. On a small heap, stop sampling before the garbage collector thrashes and
+     * keep the heuristic choice. Only checked on small heaps: elsewhere the used memory is mostly garbage that has not
+     * been collected yet, and an OutOfMemoryError in a rollout is already caught.
+     */
+    static boolean lowMemory() {
+        if (!constrainedHeap()) {
+            return false;
+        }
+        final Runtime rt = Runtime.getRuntime();
+        return rt.totalMemory() - rt.freeMemory() > rt.maxMemory() * 0.85;
+    }
+
     /** Tunable parameters, normally read from the AI profile with {@link #fromProfile}. */
     public static final class Config implements Cloneable {
         /** How many of the heuristic-approved plays are compared (the hold option comes on top). */
@@ -266,6 +286,9 @@ public final class FlatMonteCarloPicker {
          * circuit breaker still switches Monte Carlo off if it errors or cannot keep up.
          */
         public Config maximized() {
+            if (constrainedHeap()) {
+                return mobileLite(); // the desktop strength needs desktop memory
+            }
             maxCandidates = Math.max(maxCandidates, MAX_CANDIDATES_DESKTOP);
             rolloutsPerCandidate = Math.max(rolloutsPerCandidate, MAX_ROLLOUTS_DESKTOP);
             extraRounds = Math.max(extraRounds, MAX_EXTRA_ROUNDS_DESKTOP);
@@ -510,6 +533,9 @@ public final class FlatMonteCarloPicker {
         if (cands.size() < 2) {
             return Result.keepHeuristic(heuristicChoice, "single-candidate");
         }
+        if (lowMemory()) {
+            return Result.keepHeuristic(heuristicChoice, "low-memory");
+        }
 
         final long budget = Math.min(cfg.budgetNanos, AITimeoutTracker.remainingNanos() / 2);
         if (budget <= 0) {
@@ -570,6 +596,10 @@ public final class FlatMonteCarloPicker {
                         tooSlow = r == 0 && c < 2;
                         break rounds;
                     }
+                }
+                if (lowMemory()) {
+                    tooSlow = r == 0 && c < 2;
+                    break rounds;
                 }
                 final long t0 = System.nanoTime();
                 final Candidate cand = cands.get(c);
@@ -933,6 +963,12 @@ public final class FlatMonteCarloPicker {
         if (sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
             return false;
         }
+        if (isRemoveDeckCantrip(sa)) {
+            return true;
+        }
+        if (isManaGrantingEffect(sa)) {
+            return true;
+        }
         final PlayKind kind = playKind(sa);
         if (kind == PlayKind.STRATEGIC) {
             return singleTargetingAbility(sa) == null && !hasTargeting(sa);
@@ -946,6 +982,64 @@ public final class FlatMonteCarloPicker {
             return api == ApiType.ChangeZone || api == ApiType.Destroy || api == ApiType.Tap;
         }
         return broad && isDevelopment(sa);
+    }
+
+    /**
+     * An effect spell that grants a mana ability is useful to discovery even though EffectAi has no generic
+     * heuristic for deciding when to play it. The rollout can judge the effect by what it lets the player cast.
+     * Keep this narrow: only effects that actually grant a mana ability are added.
+     */
+    private static boolean isManaGrantingEffect(final SpellAbility sa) {
+        if (sa.getApi() != ApiType.Effect || !sa.hasParam("Abilities")) {
+            return false;
+        }
+        final Card host = sa.getHostCard();
+        for (final String name : sa.getParam("Abilities").split(",")) {
+            final String sVar = name.trim();
+            if (host.hasSVar(sVar)) {
+                final String script = host.getSVar(sVar);
+                if (script != null && script.trim().startsWith("AB$ Mana")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The free and nearly free cantrips and tutors the heuristics drop with AI:RemoveDeck:All (Gitaxian Probe, Mishra's
+     * Bauble, Vampiric Tutor, Demonic Consultation, Merchant Scroll): they target the opponent only to look, or search for
+     * a card, so no other rule offers them, yet a vintage deck is built around them. The rollouts decide when to cast them.
+     */
+    static boolean isRemoveDeckCantrip(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || host.isLand() || host.getCMC() > 2 || !ComputerUtilCard.isCardRemAIDeck(host)) {
+            return false;
+        }
+        if (cantripChain(sa)) {
+            return true;
+        }
+        if (sa.isSpell() && host.isPermanent()) { // Mishra's Bauble: casting it is the way to its ability
+            for (final SpellAbility ab : host.getSpellAbilities()) {
+                if (cantripChain(ab)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean cantripChain(final SpellAbility sa) {
+        for (SpellAbility a = sa; a != null; a = a.getSubAbility()) {
+            final ApiType api = a.getApi();
+            if (api == ApiType.Draw || api == ApiType.RevealHand || api == ApiType.Reveal || api == ApiType.PeekAndReveal
+                    || api == ApiType.Dig
+                    || api == ApiType.DigUntil || api == ApiType.NameCard
+                    || api == ApiType.ChangeZone && "Library".equals(a.getParamOrDefault("Origin", ""))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isDevelopment(final SpellAbility sa) {
@@ -1130,10 +1224,11 @@ public final class FlatMonteCarloPicker {
             return 100000; // the face first: damage and drain are often best aimed there
         }
         final Card c = (Card) e;
+        final int danger = AntiCombo.rank(player, c); // an opponent's key combo piece is the first target
         if (c.isCreature()) {
-            return ComputerUtilCard.evaluateCreature(c);
+            return ComputerUtilCard.evaluateCreature(c) + danger;
         }
-        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0);
+        return 150 + c.getCMC() * 10 + (c.isPlaneswalker() ? 100 : 0) + danger;
     }
 
     /**
@@ -1496,7 +1591,7 @@ public final class FlatMonteCarloPicker {
         if (simGame.isGameOver() || !simAi.isInGame()) {
             later = simAi.hasWon() ? own + LOOKAHEAD_LOSS_PENALTY : own - LOOKAHEAD_LOSS_PENALTY;
         } else {
-            if (ph.getPlayerTurn() == simOpp) {
+            if (ph.isPlayerTurn(simOpp)) {
                 playOut(simGame, simOpp, playoutPlays);
                 if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                     ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simAi));
@@ -1594,7 +1689,7 @@ public final class FlatMonteCarloPicker {
             lastRolloutProblem = "advance";
             return null;
         }
-        if (!simGame.isGameOver() && ph.getPlayerTurn() == simAi) {
+        if (!simGame.isGameOver() && ph.isPlayerTurn(simAi)) {
             playOut(simGame, simAi, playoutPlays);
             if (!simGame.isGameOver() && ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 ph.devAdvanceToPhase(PhaseType.MAIN2, () -> GameSimulator.resolveStack(simGame, simOpp));
@@ -1643,13 +1738,19 @@ public final class FlatMonteCarloPicker {
     }
 
     /** What a held-up instant-speed card is for. Decides how much it is worth to keep the mana open for it. */
-    enum HoldKind { COUNTER, REMOVAL, TRICK, FLASH_CREATURE, OTHER }
+    enum HoldKind { COUNTER, REMOVAL, TRICK, FLASH_ETB_INTERACTION, FLASH_CREATURE, OTHER }
 
     /** Per mana value, in evaluator points. Removal and tricks only matter when there is something to use them on. */
     private static final int HOLD_REMOVAL_PER_CMC = 16;
     private static final int HOLD_TRICK_PER_CMC = 10;
     private static final int HOLD_FLASH_CREATURE_PER_CMC = 12;
+    /** A relevant flash ETB can prevent an opposing stack action, so holding it can be better than deploying the body. */
+    private static final int HOLD_FLASH_ETB_INTERACTION_PER_CMC = 100;
+    private static final int HOLD_FLASH_ETB_INTERACTION_CAP = 300;
     private static final int HOLD_OTHER_PER_CMC = 7;
+
+    private static final int ETB_STACK_SPELL = 1;
+    private static final int ETB_STACK_ABILITY = 2;
 
     /**
      * Classifies an instant-speed card by looking at its abilities, not its name, so that it works for any card of any
@@ -1705,7 +1806,119 @@ public final class FlatMonteCarloPicker {
         if (trick) {
             return HoldKind.TRICK;
         }
+        if (c.isCreature() && c.hasKeyword(Keyword.FLASH) && etbStackInteractionTargets(c) != 0) {
+            return HoldKind.FLASH_ETB_INTERACTION;
+        }
         return c.isCreature() ? HoldKind.FLASH_CREATURE : HoldKind.OTHER;
+    }
+
+    /**
+     * The stack object types that this creature can interact with when its ETB trigger resolves.
+     * The effect is read from the actual trigger script, not the card name, so new cards inherit the behaviour.
+     */
+    private static int etbStackInteractionTargets(final Card card) {
+        int targets = 0;
+        for (final Trigger trigger : card.getTriggers()) {
+            if (trigger.getMode() != TriggerType.ChangesZone
+                    || !ZoneType.Battlefield.toString().equals(trigger.getParam("Destination"))
+                    || trigger.hasParam("ValidCard") && !trigger.getParam("ValidCard").contains("Self")) {
+                continue;
+            }
+            final SpellAbility ability = trigger.ensureAbility();
+            if (ability != null) {
+                targets |= stackInteractionTargets(ability, card);
+            }
+        }
+        return targets;
+    }
+
+    private static int stackInteractionTargets(final SpellAbility ability, final Card host) {
+        int targets = 0;
+        for (SpellAbility current = ability; current != null; current = current.getSubAbility()) {
+            final ApiType api = current.getApi();
+            if (api == ApiType.Counter) {
+                targets |= stackTargetsForCounter(current.getParamOrDefault("TargetType", "Spell"));
+            } else if (api == ApiType.ChangeZone || api == ApiType.ChangeZoneAll) {
+                if (targetsStackObject(current.getParamOrDefault("Origin", ""))
+                        || targetsStackObject(current.getParamOrDefault("TgtZone", ""))
+                        || current.getParamOrDefault("ValidTgts", "").contains("inZoneStack")) {
+                    targets |= ETB_STACK_SPELL;
+                }
+            } else if (api == ApiType.Charm && current.hasParam("Choices")) {
+                // Modal ETBs (for example Ertai Resurrected) keep the selected effects in card SVars.
+                for (final String choice : current.getParam("Choices").split(",")) {
+                    final String script = host.getSVar(choice.trim());
+                    if (script == null) {
+                        continue;
+                    }
+                    final String effect = script.trim();
+                    if (effect.startsWith("DB$ Counter")) {
+                        targets |= stackTargetsForCounter(scriptParam(script, "TargetType$"));
+                    } else if (effect.startsWith("DB$ ChangeZone")
+                            && (targetsStackObject(scriptParam(script, "Origin$"))
+                            || targetsStackObject(scriptParam(script, "TgtZone$"))
+                            || scriptParam(script, "ValidTgts$").contains("inZoneStack"))) {
+                        targets |= ETB_STACK_SPELL;
+                    }
+                }
+            }
+        }
+        return targets;
+    }
+
+    private static int stackTargetsForCounter(final String targetTypes) {
+        if (targetTypes == null || targetTypes.trim().isEmpty()) {
+            return ETB_STACK_SPELL;
+        }
+        int targets = 0;
+        for (final String targetType : targetTypes.split(",")) {
+            final String type = targetType.trim();
+            if (type.startsWith("Spell")) {
+                targets |= ETB_STACK_SPELL;
+            } else if ("Activated".equals(type) || "Triggered".equals(type)) {
+                targets |= ETB_STACK_ABILITY;
+            }
+        }
+        return targets;
+    }
+
+    private static boolean targetsStackObject(final String zones) {
+        return zones.contains("Stack");
+    }
+
+    /** Reads one pipe-delimited key from a card SVar effect script. */
+    private static String scriptParam(final String script, final String key) {
+        for (final String part : script.split("\\|")) {
+            final String value = part.trim();
+            if (value.startsWith(key)) {
+                return value.substring(key.length()).trim();
+            }
+        }
+        return "";
+    }
+
+    /** Whether the opponent controls a non-mana activated or triggered ability Tidebinder-style ETBs can target. */
+    private static boolean hasOpponentAbilityTarget(final Player opponent) {
+        if (opponent == null) {
+            return false;
+        }
+        for (final Card permanent : opponent.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility ability : permanent.getSpellAbilities()) {
+                if (ability.isActivatedAbility() && !ability.isManaAbility()) {
+                    return true;
+                }
+            }
+            for (final Trigger trigger : permanent.getTriggers()) {
+                if (trigger.getMode() == TriggerType.TapsForMana || trigger.getMode() == TriggerType.ManaAdded) {
+                    continue;
+                }
+                final SpellAbility ability = trigger.ensureAbility();
+                if (ability != null && !ability.isManaAbility()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1734,6 +1947,14 @@ public final class FlatMonteCarloPicker {
                 return HOLD_REMOVAL_PER_CMC * cmc / (opponentHasCreatures ? 1 : 2);
             case TRICK:
                 return aiHasCreatures ? HOLD_TRICK_PER_CMC * cmc : HOLD_TRICK_PER_CMC * cmc / 3;
+            case FLASH_ETB_INTERACTION: {
+                final int targets = etbStackInteractionTargets(c);
+                final boolean canInteractWithSpell = (targets & ETB_STACK_SPELL) != 0 && opponentCards > 0;
+                final boolean canInteractWithAbility = (targets & ETB_STACK_ABILITY) != 0
+                        && hasOpponentAbilityTarget(opponent);
+                return canInteractWithSpell || canInteractWithAbility
+                        ? HOLD_FLASH_ETB_INTERACTION_PER_CMC * cmc : HOLD_FLASH_CREATURE_PER_CMC * cmc;
+            }
             case FLASH_CREATURE:
                 return HOLD_FLASH_CREATURE_PER_CMC * cmc;
             default:
@@ -1759,7 +1980,7 @@ public final class FlatMonteCarloPicker {
         final int opponentCards = opponent == null ? 1 : opponent.getCardsIn(ZoneType.Hand).size();
 
         // Worth of each instant-speed card that can be cast, best first...
-        final List<int[]> options = new ArrayList<>(); // {value, cmc}
+        final List<int[]> options = new ArrayList<>(); // {value, cmc, per-card cap, ETB-interaction flag}
         for (final Card c : simAi.getCardsIn(ZoneType.Hand)) {
             if (!isInstantSpeedSpell(c) || c.getCMC() > mana) {
                 continue;
@@ -1768,7 +1989,11 @@ public final class FlatMonteCarloPicker {
             if (value <= 0) {
                 continue;
             }
-            options.add(new int[] { value, Math.max(1, c.getCMC()) });
+            final HoldKind kind = holdKind(c);
+            final int cap = kind == HoldKind.FLASH_ETB_INTERACTION
+                    ? HOLD_FLASH_ETB_INTERACTION_CAP : HOLD_VALUE_CAP;
+            options.add(new int[] { value, Math.max(1, c.getCMC()), cap,
+                    kind == HoldKind.FLASH_ETB_INTERACTION ? 1 : 0 });
         }
         options.sort((a, b) -> Integer.compare(b[0], a[0]));
 
@@ -1776,20 +2001,25 @@ public final class FlatMonteCarloPicker {
         // than one. The first card is capped on its own, the extra ones share a second, smaller cap.
         int total = 0;
         boolean first = true;
+        boolean holdingEtbStackInteraction = false;
         for (final int[] option : options) {
             if (option[1] > mana) {
                 continue;
             }
             mana -= option[1];
+            holdingEtbStackInteraction |= option[3] != 0;
             if (first) {
-                total += Math.min(option[0], HOLD_VALUE_CAP);
+                total += Math.min(option[0], option[2]);
                 first = false;
             } else {
-                total += Math.min(option[0], HOLD_VALUE_CAP) / 2;
+                total += Math.min(option[0], option[2]) / 2;
             }
         }
-        total = Math.min(total, HOLD_TOTAL_CAP);
-        return (int) Math.round(total * (cfg.holdManaWeightPercent / 100.0) * cfg.controlFactor);
+        // Keep the ordinary hold cap unchanged; only a relevant flash ETB gets the higher cap.
+        total = Math.min(total, holdingEtbStackInteraction ? HOLD_FLASH_ETB_INTERACTION_CAP : HOLD_TOTAL_CAP);
+        // A live ETB answer is not generic unused-mana value; do not halve it for an aggro deck.
+        final double factor = holdingEtbStackInteraction ? Math.max(1.0, cfg.controlFactor) : cfg.controlFactor;
+        return (int) Math.round(total * (cfg.holdManaWeightPercent / 100.0) * factor);
     }
 
     /**

@@ -1,0 +1,8 @@
+Name:Hugh, First of Many
+ManaCost:1 W U B
+Types:Legendary Artifact Creature Borg
+PT:3/4
+S:Mode$ Continuous | AddKeyword$ Replicate:2 U | Affected$ Artifact.YouCtrl+wasCast | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Artifact spells you cast have replicate {2}{U}. (Whenever you cast an artifact spell, copy it for each time you paid its replicate cost. Each copy becomes a token.)
+DeckHas:Ability$Token
+DeckNeeds:Type$Artifact
+Oracle:Artifact spells you cast have replicate {2}{U}. (Whenever you cast an artifact spell, copy it for each time you paid its replicate cost. Each copy becomes a token.)

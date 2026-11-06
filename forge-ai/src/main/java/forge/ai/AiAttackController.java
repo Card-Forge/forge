@@ -341,7 +341,7 @@ public class AiAttackController {
     public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
         AITimeoutTracker.check();
         // check for time walks
-        if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
+        if (ai.getGame().getPhaseHandler().isPlayerNextTurn(ai)) {
             return potentialAttackers;
         }
         // no need to block (already holding mana to cast fog next turn)

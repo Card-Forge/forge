@@ -99,6 +99,8 @@ public class MatchScreen extends FScreen {
     private final Map<Integer, Vector2> endpoints;
     private final Set<CardView> cardsonBattlefield;
     private final Set<PlayerView> playerViewSet;
+    //the dropdowns that open over the field: arrows to anything under them are not drawn (see updateArrowVisibility)
+    private final FDropDown[] arrowOccluders;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -162,6 +164,7 @@ public class MatchScreen extends FScreen {
         devMenu.setDropDownContainer(this);
         stack = new VStack();
         stack.setDropDownContainer(this);
+        arrowOccluders = new FDropDown[] { stack, gameMenu, players, revealed, log, chat, devMenu }; //chat is null outside network games
 
         FMenuBar menuBar = (FMenuBar) getHeader();
         if (topPlayerPrompt == null) {
@@ -339,7 +342,7 @@ public class MatchScreen extends FScreen {
     @Override
     public void onActivate() {
         //update dev menu visibility here so returning from Settings screen allows update
-        if (topPlayerPrompt == null) {
+        if (topPlayerPrompt == null && devMenu.getMenuTab() != null) {
             devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
         }
         revalidate(); //the compact layout and unified phase settings may have changed in Settings
@@ -659,11 +662,35 @@ public class MatchScreen extends FScreen {
         return moved >= left ? moved : x;
     }
 
+    //Tells the targeting overlay what can be seen: an arrow to or from anything off the field area, or under the stack or an
+    //open menu, is not drawn. Called once per frame; plain float compares and no allocation, so it is cheap on Android.
+    private void updateArrowVisibility() {
+        final Rectangle area = scroller.screenPos;
+        TargetingOverlay.setVisibleArea(area.x, area.y, area.width, area.height);
+        TargetingOverlay.clearOccluders();
+        if (topPlayerPrompt != null) { return; } //two players on one device: the stack is rotated, so its rect would be wrong
+        for (final FDropDown dropDown : arrowOccluders) {
+            if (dropDown != null && dropDown.isVisible()) {
+                final Rectangle r = dropDown.screenPos;
+                TargetingOverlay.addOccluder(r.x, r.y, r.width, r.height);
+            }
+        }
+        if (unifiedPhase.getMenu().isOpen()) {
+            final Rectangle r = unifiedPhase.getMenu().screenPos;
+            TargetingOverlay.addOccluder(r.x, r.y, r.width, r.height);
+        }
+        if (menuBarShown) { //the top menu bar slides over the field
+            final Rectangle r = getHeader().screenPos;
+            TargetingOverlay.addOccluder(r.x, r.y, r.width, r.height);
+        }
+    }
+
     void drawArcs(Graphics g) {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) {
             return;
         }
+        updateArrowVisibility();
         //get all card targeting arrow origins on the battlefield
         endpoints.clear();
         cardsonBattlefield.clear();
@@ -715,7 +742,7 @@ public class MatchScreen extends FScreen {
         final CardAreaPanel panel = CardAreaPanel.get(c);
         if (panel == null) return;
         final Vector2 origin = panel.getTargetingArrowOrigin();
-        if (origin == null || origin.x < left || origin.x > right) return;
+        if (origin == null || origin.x < left || origin.x > right || !TargetingOverlay.isVisible(origin.x, origin.y)) return;
         endpoints.put(c.getId(), origin);
         cardsonBattlefield.add(c);
     }

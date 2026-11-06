@@ -355,6 +355,12 @@ public class VStack extends FDropDown {
         }
     }
 
+    //skips a target that is hidden: off screen, or behind this stack or another open menu (see TargetingOverlay.isVisible)
+    private static void drawTargetArrow(final Graphics g, final Vector2 from, final Vector2 to, final TargetingOverlay.ArcConnection connects) {
+        if (to == null || !TargetingOverlay.isVisible(to.x, to.y)) { return; }
+        TargetingOverlay.drawArrow(g, from, to, connects);
+    }
+
     @Override
     protected void drawOnContainer(Graphics g) {
         //draw target arrows immediately above stack for active item only
@@ -375,11 +381,12 @@ public class VStack extends FDropDown {
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(c.getController()) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, VCardDisplayArea.CardAreaPanel.get(c).getTargetingArrowOrigin(), conn);
+                    drawTargetArrow(g, arrowOrigin, VCardDisplayArea.CardAreaPanel.get(c).getTargetingArrowOrigin(), conn);
                 }
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator != null && activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
+                    final VPlayerPanel panel = MatchScreen.getPlayerPanel(p);
+                    if (panel != null) { drawTargetArrow(g, arrowOrigin, panel.getAvatar().getTargetingArrowOrigin(), conn); }
                 }
 
                 // Stack items aimed at other stack items (counterspells and the like) point at that item's entry in this view.

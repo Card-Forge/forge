@@ -1,0 +1,5 @@
+Name:The Holodeck
+ManaCost:7
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Permanent.YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Sideboard,Graveyard | Description$ Once during each of your turns, you may play a permanent card you own from outside the game or from your graveyard.
+Oracle:Once during each of your turns, you may play a permanent card you own from outside the game or from your graveyard.

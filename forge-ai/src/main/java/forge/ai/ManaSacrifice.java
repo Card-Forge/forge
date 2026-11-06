@@ -7,6 +7,7 @@ import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostPayLife;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -124,11 +125,27 @@ public final class ManaSacrifice {
      * set aside in the memory of an AI controller instead, and the ability can be used again while enough fodder is
      * left. An AI's fodder is already set aside by {@link ComputerUtilCost#checkForManaSacrificeCost}. That method skips
      * a human, because the Auto button also pays under a temporary AI controller, so a human's fodder is set aside here.
+     * A mana ability paid for only with life can also be used more than once during a test payment; the payment
+     * routine tracks the life committed by earlier uses.
      */
     public static boolean canUseAgainInTest(final Player p, final SpellAbility ma) {
         final CostSacrifice part = sacrificePart(ma);
+        if (part == null) {
+            if (ma == null || ma.getPayCosts() == null || ma.getPayCosts().hasTapCost()) {
+                return false;
+            }
+            boolean paysLife = false;
+            for (final CostPart costPart : ma.getPayCosts().getCostParts()) {
+                if (costPart instanceof CostPayLife) {
+                    paysLife = true;
+                } else if (!costPart.isReusable()) {
+                    return false;
+                }
+            }
+            return paysLife;
+        }
         // without an AI controller nothing can be set aside, as when the AI tests an opponent's payment
-        if (part == null || ma.getPayCosts().hasTapCost() || !p.getController().isAI()) {
+        if (ma.getPayCosts().hasTapCost() || !p.getController().isAI()) {
             return false;
         }
         final int amount = part.getAbilityAmount(ma);

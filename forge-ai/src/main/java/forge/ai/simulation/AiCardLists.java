@@ -34,6 +34,25 @@ import forge.game.card.Card;
 public final class AiCardLists {
     /** What a card is for. The key in the file is the lower case name of the constant. */
     public enum Role {
+        /** Cards an opponent must not be left with: they win a game or are the heart of a combo (see {@link AntiCombo}). */
+        ANTI_COMBO_KEY,
+        /** What a combo deck needs around its keys: rituals, cheap tutors and draw (half the weight of a key). */
+        ANTI_COMBO_PIECE,
+        /** More cards the opponents' combos are made of: counted as keys by AntiCombo, but not a card Flat MC plays. */
+        ANTI_COMBO_SEEN,
+        /** Permanents that give an opponent a creature on demand: Forbidden Orchard's tokens set Oath of Druids off (see OathTiming). */
+        GIVES_OPPONENT_CREATURE,
+        /** Doomsday itself: it keeps five cards of the library and graveyard (see DoomsdayPile). */
+        DOOMSDAY,
+        /** Cards that draw for next to nothing, the pile Doomsday keeps (Gitaxian Probe, Street Wraith, Gush...). */
+        DOOMSDAY_DRAW,
+        /** Free or cheap mana the pile can hold (Dark Ritual, Lotus Petal, the Moxen). */
+        DOOMSDAY_MANA,
+        /**
+         * Cards marked AI:RemoveDeck:All that Flat MC plays by itself (free cantrips, mana permanents) and that are in
+         * no other role: decks built for the AI keep them (see {@link #isFlatMcPlayable}).
+         */
+        FLAT_MC_PLAYS,
         /** Living End and kin: cast from the library by cascade or suspend once the swap is worth it. */
         MASS_PAYOFF,
         /** Spells that bring a creature back from a graveyard. */
@@ -54,7 +73,37 @@ public final class AiCardLists {
         /** Permanents of which a second copy does nothing (ComboGuard). */
         COMBO_ENGINE,
         /** Spells that put cards from hand onto the battlefield when they resolve (ComboGuard). */
-        HAND_CHEAT
+        HAND_CHEAT,
+        /** Permanents that let creatures (or every spell) be cast for free: Aluren, Omniscience. */
+        FREE_CAST_ENGINE,
+        /** Cheap creatures that loop or win once a free_cast_engine is in play (Acererak, Cavern Harpy...). */
+        FREE_CAST_TARGET,
+        /** Artifacts that chain artifacts: cast them from the library, untap them, tutor them (Mystic Forge...). */
+        ARTIFACT_ENGINE,
+        /** What an artifact engine deck wins or swings the game with (Karn, The One Ring, Kozilek's Command...). */
+        ARTIFACT_PAYOFF,
+        /** Spells that fetch an overrun finisher from the library (Green Sun's Zenith, Natural Order...). */
+        FINISHER_TUTOR,
+        /** Cards that win when the library is (nearly) empty: Thassa's Oracle, Laboratory Maniac. */
+        LIBRARY_OUT_PAYOFF,
+        /** Cards that empty the AI's own library on purpose: Balustrade Spy, Cephalid Illusionist and what targets it. */
+        SELF_MILL_OUTLET,
+        /** Cards that bring the winner back from the graveyard once the library is gone (Dread Return). */
+        LIBRARY_OUT_RECURSION,
+        /** The engine half of a two card kill (Grindstone). */
+        PAIR_ENGINE,
+        /** The other half of a two card kill (Painter's Servant). */
+        PAIR_PARTNER,
+        /** Draw spells that throw the rest of the hand away, whose draws a dredger replaces (Breakthrough). */
+        DREDGE_REFILL,
+        /** Cards that cut both libraries down to a few cards when they enter (Doomsday Excruciator). */
+        LIBRARY_CUT,
+        /** What wins after the cut: Restless Reef mills four a turn, Insatiable Avarice makes the opponent draw three. */
+        LIBRARY_CUT_FINISHER,
+        /** Permanents that make an airbent (exiled) creature cost nothing to cast again: Doc Aurlock, Semblance Anvil. */
+        AIRBEND_REDUCER,
+        /** Cards that drain the opponent for every creature cast or entering under the airbend loop: Bontu's Monument. */
+        AIRBEND_PAYOFF
     }
 
     /** A two card combo, with the names as they are written in the file. */
@@ -132,6 +181,22 @@ public final class AiCardLists {
     /** Whether the card with this name has the role. */
     public static boolean has(final Role role, final String cardName) {
         return cardName != null && names(role).contains(normalize(cardName));
+    }
+
+    /**
+     * Whether Flat MC plays this card although its script says AI:RemoveDeck:All: it is listed as one it plays, or is a
+     * piece of a combo or loop that has a role.
+     */
+    public static boolean isFlatMcPlayable(final String cardName) {
+        if (cardName == null) {
+            return false;
+        }
+        for (final Role role : Role.values()) {
+            if (role != Role.ANTI_COMBO_SEEN && has(role, cardName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean has(final Role role, final Card card) {

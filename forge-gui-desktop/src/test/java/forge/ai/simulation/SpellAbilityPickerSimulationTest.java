@@ -20,6 +20,28 @@ import forge.game.zone.ZoneType;
 
 public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @Test
+    public void doesNotAnimateTappedManland() {
+        // a tapped Mutavault can't attack or block, even though being a Rat makes Pack Rat bigger
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        game.getPlayers().get(0).setTeam(1);
+
+        addCard("Pack Rat", p);
+        addCard("Swamp", p);
+        addCard("Swamp", p);
+        Card mutavault = addCard("Mutavault", p);
+        mutavault.setTapped(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertTrue(sa == null || !mutavault.equals(sa.getHostCard()));
+    }
+
+    @Test
     public void testPickingLethalDamage() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);

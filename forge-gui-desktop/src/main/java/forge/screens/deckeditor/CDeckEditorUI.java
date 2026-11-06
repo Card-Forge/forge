@@ -34,6 +34,7 @@ import forge.deck.FormatChoices;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gui.GuiChoose;
 import forge.gui.UiCommand;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -151,6 +152,14 @@ public enum CDeckEditorUI implements ICDoc {
 
     /** Applies a Format dropdown entry. A GameFormat opens the Constructed editor with the catalogue limited to that format. */
     public void selectFormat(final Object choice) {
+        if (choice == FormatChoices.ARCHIVED) {
+            syncFormatDropdown();
+            final Object archived = GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblArchivedFormats"), FormatChoices.getArchivedChoices());
+            if (archived != null) {
+                selectFormat(archived);
+            }
+            return;
+        }
         editorFormat = choice instanceof GameFormat format ? format : null;
         changeFormat(choice instanceof GameType type ? type : GameType.Constructed);
         syncFormatDropdown();
@@ -200,7 +209,8 @@ public enum CDeckEditorUI implements ICDoc {
             }
             final Object choice = editorFormat != null ? editorFormat : gt;
             if (cb.getSelectedItem() != choice) {
-                cb.setSelectedItem(choice);
+                // The model takes an archived format, which the list does not hold
+                cb.getModel().setSelectedItem(choice);
             }
             cb.setEnabled(true);
             if (childController.getCatalogManager() instanceof CardManager catalog) {
