@@ -1,0 +1,10 @@
+Name:U.S.S. Defiant, Mirror Migrant
+ManaCost:2
+Types:Legendary Artifact Spacecraft
+PT:5/5
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPhaseOut | TriggerDescription$ When NICKNAME enters, it and up to one target creature you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)
+SVar:TrigPhaseOut:DB$ Phases | ValidTgts$ Creature.YouCtrl | ValidTgtsDesc$ creature you control | TargetMin$ 0 | TargetMax$ 1 | Defined$ Self & Targeted
+K:Station:8
+S:Mode$ Continuous | AffectedDefined$ Self | Affected$ Card.counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 8+ Flying
+Oracle:Flash\nWhen U.S.S. Defiant enters, it and up to one target creature you control phase out. (Treat them and anything attached to them as though they don't exist until your next turn.)\nStation\nSTATION 8+\nFlying
