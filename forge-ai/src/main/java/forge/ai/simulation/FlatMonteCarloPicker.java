@@ -16,6 +16,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.spellability.TargetRestrictions;
 import forge.ai.ComputerUtilCard;
 import forge.game.zone.ZoneType;
@@ -89,7 +91,7 @@ public final class FlatMonteCarloPicker {
     private static final int HOLD_VALUE_PER_CMC = 14;
     private static final int HOLD_COUNTER_VALUE_PER_CMC = 22;
     private static final int HOLD_VALUE_CAP = 90;
-    private static final int HOLD_TOTAL_CAP = 140;
+    private static final int HOLD_TOTAL_CAP = HOLD_FLASH_ETB_INTERACTION_CAP;
     /** Decks that look like control decks value holding up instants more. */
     private static final double CONTROL_HOLD_FACTOR = 1.75;
 
@@ -1736,18 +1738,25 @@ public final class FlatMonteCarloPicker {
     }
 
     /** What a held-up instant-speed card is for. Decides how much it is worth to keep the mana open for it. */
-    enum HoldKind { COUNTER, REMOVAL, TRICK, FLASH_CREATURE, OTHER }
+    enum HoldKind { COUNTER, REMOVAL, TRICK, FLASH_ETB_INTERACTION, FLASH_CREATURE, OTHER }
 
     /** Per mana value, in evaluator points. Removal and tricks only matter when there is something to use them on. */
     private static final int HOLD_REMOVAL_PER_CMC = 16;
     private static final int HOLD_TRICK_PER_CMC = 10;
     private static final int HOLD_FLASH_CREATURE_PER_CMC = 12;
+    /** A relevant flash ETB can prevent an opposing stack action, so holding it can be better than deploying the body. */
+    private static final int HOLD_FLASH_ETB_INTERACTION_PER_CMC = 100;
+    private static final int HOLD_FLASH_ETB_INTERACTION_CAP = 300;
     private static final int HOLD_OTHER_PER_CMC = 7;
+
+    private static final int ETB_STACK_SPELL = 1;
+    private static final int ETB_STACK_ABILITY = 2;
 
     /**
      * Classifies an instant-speed card by looking at its abilities, not its name, so that it works for any card of any
      * deck: counterspells, removal (destroy, damage, fight, edict, bounce or exile from the battlefield, shrink),
-     * tricks (pump, protection), flash creatures, and everything else (draw spells, utility).
+     * tricks (pump, protection), flash creatures, and flash creatures whose ETB interacts with a spell or ability on
+     * the stack. ETB detection follows the card's trigger and effect scripts, including modal choices.
      */
     static HoldKind holdKind(final Card c) {
         boolean removal = false;
@@ -1798,7 +1807,119 @@ public final class FlatMonteCarloPicker {
         if (trick) {
             return HoldKind.TRICK;
         }
+        if (c.isCreature() && c.hasKeyword(Keyword.FLASH) && etbStackInteractionTargets(c) != 0) {
+            return HoldKind.FLASH_ETB_INTERACTION;
+        }
         return c.isCreature() ? HoldKind.FLASH_CREATURE : HoldKind.OTHER;
+    }
+
+    /**
+     * The stack object types that this creature can interact with when its ETB trigger resolves.
+     * The effect is read from the actual trigger script, not the card name, so new cards inherit the behaviour.
+     */
+    private static int etbStackInteractionTargets(final Card card) {
+        int targets = 0;
+        for (final Trigger trigger : card.getTriggers()) {
+            if (trigger.getMode() != TriggerType.ChangesZone
+                    || !ZoneType.Battlefield.toString().equals(trigger.getParam("Destination"))
+                    || trigger.hasParam("ValidCard") && !trigger.getParam("ValidCard").contains("Self")) {
+                continue;
+            }
+            final SpellAbility ability = trigger.ensureAbility();
+            if (ability != null) {
+                targets |= stackInteractionTargets(ability, card);
+            }
+        }
+        return targets;
+    }
+
+    private static int stackInteractionTargets(final SpellAbility ability, final Card host) {
+        int targets = 0;
+        for (SpellAbility current = ability; current != null; current = current.getSubAbility()) {
+            final ApiType api = current.getApi();
+            if (api == ApiType.Counter) {
+                targets |= stackTargetsForCounter(current.getParamOrDefault("TargetType", "Spell"));
+            } else if (api == ApiType.ChangeZone || api == ApiType.ChangeZoneAll) {
+                if (targetsStackObject(current.getParamOrDefault("Origin", ""))
+                        || targetsStackObject(current.getParamOrDefault("TgtZone", ""))
+                        || current.getParamOrDefault("ValidTgts", "").contains("inZoneStack")) {
+                    targets |= ETB_STACK_SPELL;
+                }
+            } else if (api == ApiType.Charm && current.hasParam("Choices")) {
+                // Modal ETBs (for example Ertai Resurrected) keep the selected effects in card SVars.
+                for (final String choice : current.getParam("Choices").split(",")) {
+                    final String script = host.getSVar(choice.trim());
+                    if (script == null) {
+                        continue;
+                    }
+                    final String effect = script.trim();
+                    if (effect.startsWith("DB$ Counter")) {
+                        targets |= stackTargetsForCounter(scriptParam(script, "TargetType$"));
+                    } else if (effect.startsWith("DB$ ChangeZone")
+                            && (targetsStackObject(scriptParam(script, "Origin$"))
+                            || targetsStackObject(scriptParam(script, "TgtZone$"))
+                            || scriptParam(script, "ValidTgts$").contains("inZoneStack"))) {
+                        targets |= ETB_STACK_SPELL;
+                    }
+                }
+            }
+        }
+        return targets;
+    }
+
+    private static int stackTargetsForCounter(final String targetTypes) {
+        if (targetTypes == null || targetTypes.trim().isEmpty()) {
+            return ETB_STACK_SPELL;
+        }
+        int targets = 0;
+        for (final String targetType : targetTypes.split(",")) {
+            final String type = targetType.trim();
+            if (type.startsWith("Spell")) {
+                targets |= ETB_STACK_SPELL;
+            } else if ("Activated".equals(type) || "Triggered".equals(type)) {
+                targets |= ETB_STACK_ABILITY;
+            }
+        }
+        return targets;
+    }
+
+    private static boolean targetsStackObject(final String zones) {
+        return zones.contains("Stack");
+    }
+
+    /** Reads one pipe-delimited key from a card SVar effect script. */
+    private static String scriptParam(final String script, final String key) {
+        for (final String part : script.split("\\|")) {
+            final String value = part.trim();
+            if (value.startsWith(key)) {
+                return value.substring(key.length()).trim();
+            }
+        }
+        return "";
+    }
+
+    /** Whether the opponent controls a non-mana activated or triggered ability Tidebinder-style ETBs can target. */
+    private static boolean hasOpponentAbilityTarget(final Player opponent) {
+        if (opponent == null) {
+            return false;
+        }
+        for (final Card permanent : opponent.getCardsIn(ZoneType.Battlefield)) {
+            for (final SpellAbility ability : permanent.getSpellAbilities()) {
+                if (ability.isActivatedAbility() && !ability.isManaAbility()) {
+                    return true;
+                }
+            }
+            for (final Trigger trigger : permanent.getTriggers()) {
+                if (trigger.getMode() == TriggerType.TapsForMana || trigger.getMode() == TriggerType.ManaAdded) {
+                    continue;
+                }
+                final SpellAbility ability = trigger.ensureAbility();
+                if (ability != null && !ability.isManaAbility()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1827,6 +1948,14 @@ public final class FlatMonteCarloPicker {
                 return HOLD_REMOVAL_PER_CMC * cmc / (opponentHasCreatures ? 1 : 2);
             case TRICK:
                 return aiHasCreatures ? HOLD_TRICK_PER_CMC * cmc : HOLD_TRICK_PER_CMC * cmc / 3;
+            case FLASH_ETB_INTERACTION: {
+                final int targets = etbStackInteractionTargets(c);
+                final boolean canInteractWithSpell = (targets & ETB_STACK_SPELL) != 0 && opponentCards > 0;
+                final boolean canInteractWithAbility = (targets & ETB_STACK_ABILITY) != 0
+                        && hasOpponentAbilityTarget(opponent);
+                return canInteractWithSpell || canInteractWithAbility
+                        ? HOLD_FLASH_ETB_INTERACTION_PER_CMC * cmc : HOLD_FLASH_CREATURE_PER_CMC * cmc;
+            }
             case FLASH_CREATURE:
                 return HOLD_FLASH_CREATURE_PER_CMC * cmc;
             default:
@@ -1837,8 +1966,8 @@ public final class FlatMonteCarloPicker {
     /**
      * What the mana and instants still unused at the end of the AI's turn are worth. The evaluator only looks at
      * what is on the table, which would always favour tapping out; this makes holding up a counterspell or a
-     * removal spell comparable to the small plays that would use the mana instead. Only the best single card counts
-     * (there is only so much mana) and it is capped well below the value of a real creature.
+     * removal spell comparable to the small plays that would use the mana instead. Ordinary held-up cards stay
+     * below creature value; a relevant flash ETB answer can justify passing instead of deploying its body.
      */
     static int holdUpBonus(final Player simAi, final Config cfg) {
         if (cfg.holdManaWeightPercent <= 0) {
@@ -1852,7 +1981,7 @@ public final class FlatMonteCarloPicker {
         final int opponentCards = opponent == null ? 1 : opponent.getCardsIn(ZoneType.Hand).size();
 
         // Worth of each instant-speed card that can be cast, best first...
-        final List<int[]> options = new ArrayList<>(); // {value, cmc}
+        final List<int[]> options = new ArrayList<>(); // {value, cmc, per-card cap, ETB-interaction flag}
         for (final Card c : simAi.getCardsIn(ZoneType.Hand)) {
             if (!isInstantSpeedSpell(c) || c.getCMC() > mana) {
                 continue;
@@ -1861,7 +1990,11 @@ public final class FlatMonteCarloPicker {
             if (value <= 0) {
                 continue;
             }
-            options.add(new int[] { value, Math.max(1, c.getCMC()) });
+            final HoldKind kind = holdKind(c);
+            final int cap = kind == HoldKind.FLASH_ETB_INTERACTION
+                    ? HOLD_FLASH_ETB_INTERACTION_CAP : HOLD_VALUE_CAP;
+            options.add(new int[] { value, Math.max(1, c.getCMC()), cap,
+                    kind == HoldKind.FLASH_ETB_INTERACTION ? 1 : 0 });
         }
         options.sort((a, b) -> Integer.compare(b[0], a[0]));
 
@@ -1869,20 +2002,24 @@ public final class FlatMonteCarloPicker {
         // than one. The first card is capped on its own, the extra ones share a second, smaller cap.
         int total = 0;
         boolean first = true;
+        boolean holdingEtbStackInteraction = false;
         for (final int[] option : options) {
             if (option[1] > mana) {
                 continue;
             }
             mana -= option[1];
+            holdingEtbStackInteraction |= option[3] != 0;
             if (first) {
-                total += Math.min(option[0], HOLD_VALUE_CAP);
+                total += Math.min(option[0], option[2]);
                 first = false;
             } else {
-                total += Math.min(option[0], HOLD_VALUE_CAP) / 2;
+                total += Math.min(option[0], option[2]) / 2;
             }
         }
         total = Math.min(total, HOLD_TOTAL_CAP);
-        return (int) Math.round(total * (cfg.holdManaWeightPercent / 100.0) * cfg.controlFactor);
+        // A live ETB answer is not just generic value for unused mana; do not halve it for an aggro deck.
+        final double factor = holdingEtbStackInteraction ? Math.max(1.0, cfg.controlFactor) : cfg.controlFactor;
+        return (int) Math.round(total * (cfg.holdManaWeightPercent / 100.0) * factor);
     }
 
     /**
