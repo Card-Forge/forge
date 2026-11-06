@@ -3,6 +3,7 @@ package forge.gamemodes.match;
 import com.google.common.collect.*;
 
 import forge.deck.Deck;
+import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
 import forge.game.GameView;
@@ -44,7 +45,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private boolean gamePause = false;
     private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
     private String daytime = null;
-    private boolean ignoreConcedeChain = false;
     private boolean networkGame = false;
 
     private Timer waitingTimer;
@@ -421,7 +421,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     /**
-     * Concede game, bring up WinLose UI.
+     * Concedes the local players, or ends the game once they have all lost. Returns true only when the caller may
+     * close the screen.
      */
     public boolean concede() {
         if (replay) {
@@ -433,55 +434,29 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return true;
         }
         if (hasLocalPlayers()) {
-            boolean concedeNeeded = false;
-            // check if anyone still needs to concede
+            if (!hasLocalPlayerStillPlaying()) {
+                if (showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveEndsGame"), Localizer.getInstance().getMessage("btnQuitMatch"), Localizer.getInstance().getMessage("btnQuitMatch"), Localizer.getInstance().getMessage("lblCancel"))) {
+                    // Leaving after losing ends the game for everyone still in it
+                    final Game game = gameView.getGame();
+                    game.getAction().invoke(() -> {
+                        game.setGameOver(GameEndReason.AllHumansLost);
+                        DrawOfferCoordinator.releaseInputQueues(game);
+                    });
+                }
+                return false;
+            }
+            if (gameView.isMulligan()) { //prevent UI freezing when conceding while the game is waiting for inputs/action
+                showErrorDialog(Localizer.getInstance().getMessage("lblWaitingforActions"));
+                return false;
+            }
+            if (!showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
+                return false;
+            }
             for (final IGameController c : getOriginalGameControllers()) {
-                if (c instanceof PlayerControllerHuman pch) {
-                    if (pch.getPlayer().getOutcome() == null) {
-                        concedeNeeded = true;
-                    }
-                } else {
-                    // Network client — no access to Player outcome, but game
-                    // is still in progress (isGameOver checked above)
-                    concedeNeeded = true;
-                }
+                // Concede each player on this Gui (except mind-controlled players)
+                c.concede();
             }
-            if (concedeNeeded) {
-                if (gameView.isMulligan()) { //prevent UI freezing when conceding while the game is waiting for inputs/action
-                    showErrorDialog(Localizer.getInstance().getMessage("lblWaitingforActions"));
-                    return false;
-                }
-                if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
-                    for (final IGameController c : getOriginalGameControllers()) {
-                        // Concede each player on this Gui (except mind-controlled players)
-                        c.concede();
-                    }
-                } else {
-                    return false;
-                }
-            } else {
-                if (!ignoreConcedeChain && !isNetGame() && forceEndGameForRemainingAIs()) {
-                    return false;
-                }
-                return !ignoreConcedeChain;
-            }
-            if (isNetGame()) {
-                // Network: concede was sent to server asynchronously.
-                // Let the server drive game-end flow — don't send nextGameDecision here.
-                return false;
-            }
-            if (gameView.isGameOver()) {
-                // Don't immediately close, wait for win/lose screen
-                return false;
-            }
-            // since the nextGameDecision might come from somewhere else it will try and concede too
-            ignoreConcedeChain = true;
-            for (PlayerView player : getLocalPlayers()) {
-                if (!player.isAI()) {
-                    getGameController(player).nextGameDecision(NextGameDecision.QUIT);
-                }
-            }
-            ignoreConcedeChain = false;
+            // Never close here: a finished game shows its win/lose screen, and a running one stays open to watch
             return false;
         } else if (spectator == null) {
             return true; //if no local players or spectator, just quit
@@ -495,25 +470,21 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return false; //let logic above handle closing current screen
     }
 
-    private boolean forceEndGameForRemainingAIs() {
-        boolean hasRemainingAi = false;
-        for (PlayerView player : gameView.getPlayers()) {
-            if (!player.getHasLost() && player.isAI()) {
-                hasRemainingAi = true;
-                break;
+    private boolean hasLocalPlayerStillPlaying() {
+        for (final IGameController c : getOriginalGameControllers()) {
+            // A network client has no Player outcome, so its players count as still in the game
+            if (!(c instanceof PlayerControllerHuman pch) || pch.getPlayer().getOutcome() == null) {
+                return true;
             }
         }
-
-        if (!hasRemainingAi) {
-            return false;
-        }
-
-        gameView.getGame().getAction().invoke(() -> gameView.getGame().setGameOver(GameEndReason.AllHumansLost));
-        return true;
+        return false;
     }
 
     public String getConcedeCaption() {
         if (hasLocalPlayers()) {
+            if (!hasLocalPlayerStillPlaying()) {
+                return Localizer.getInstance().getMessage("btnQuitMatch");
+            }
             return Localizer.getInstance().getMessage("lblConcede");
         }
         return Localizer.getInstance().getMessage("lblStopWatching");
