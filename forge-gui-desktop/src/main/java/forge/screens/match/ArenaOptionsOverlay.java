@@ -145,6 +145,7 @@ public final class ArenaOptionsOverlay extends JPanel {
     private final ArenaDialogKit.CheckBox chkRemember;
     private final ArenaDialogKit.TabBarDim tabBarDim = new ArenaDialogKit.TabBarDim();
     private final Timer animation = new Timer(15, e -> stepAnimation());
+    private final ArenaDialogKit.Entrance entrance = new ArenaDialogKit.Entrance(this, () -> !this.viewingBattlefield);
     private final CardView focusCard;
     private CachedCardImage focusImage;
     private BufferedImage focusSource;
@@ -509,6 +510,7 @@ public final class ArenaOptionsOverlay extends JPanel {
         tabBarDim.attach();
         fitToWindow();
         requestFocusInWindow();
+        entrance.begin(320);
     }
 
     private void close() {
@@ -644,8 +646,17 @@ public final class ArenaOptionsOverlay extends JPanel {
     @Override
     protected void paintComponent(final Graphics g) {
         if (!viewingBattlefield) {
-            paintScene((Graphics2D) g, getWidth(), getHeight());
+            final Graphics2D c = entrance.sceneGraphics(g);
+            paintScene(c, getWidth(), getHeight());
+            c.dispose();
         }
+    }
+
+    @Override
+    protected void paintChildren(final Graphics g) {
+        final Graphics2D c = entrance.contentGraphics(g);
+        super.paintChildren(c);
+        c.dispose();
     }
 
     @Override

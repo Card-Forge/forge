@@ -55,6 +55,9 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     private int cardWidthMax = 300;
 
     private CardPanel hoveredPanel;
+    private int layoutRoomW = -1;
+    private int layoutRoomH = -1;
+    private boolean layoutSnapping;
     private CardPanel mouseDownPanel;
     private CardPanel mouseDragPanel;
 
@@ -452,6 +455,17 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     @Override 
     public void doLayout() {
         doingLayout();
+    }
+
+    /** For a layout to say how much room it has: when that has changed, the window is being resized and cards go straight to their places. */
+    protected final void noteLayoutRoom(final int width, final int height) {
+        layoutSnapping = width != layoutRoomW || height != layoutRoomH;
+        layoutRoomW = width;
+        layoutRoomH = height;
+    }
+
+    public final boolean isLayoutSnapping() {
+        return layoutSnapping;
     }
 
     private void doingLayout() {

@@ -1012,6 +1012,12 @@ public final class CMatchUI
         for (final VField field : view.getFieldViews()) {
             field.getAvatarArea().repaint(); // turn glow on the portrait
         }
+        if (ArenaTheme.isMatchBoard()) {
+            final boolean mine = isLocalPlayer(player);
+            final Localizer words = Localizer.getInstance();
+            ArenaFx.turnBanner(mine ? words.getMessage("lblArenaYourTurn") : words.getMessage("lblArenaPlayersTurn", player.getName()),
+                    mine ? ArenaTheme.GOLD_BRIGHT : new Color(0xFF8A5C));
+        }
     }
 
     @Override

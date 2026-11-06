@@ -39,6 +39,7 @@ import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.screens.match.ArenaFx;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -141,10 +142,26 @@ public class CHand implements ICDoc {
             }
             cardPanels.add(cardPanel);
         }
+        if (ArenaTheme.isMatchBoard()) {
+            for (final CardPanel going : p.getCardPanels()) {
+                if (!cardPanels.contains(going)) {
+                    ArenaFx.noteLeaving(going);
+                }
+            }
+        }
         p.setFanExtras(extras.size());
 
         p.setCardPanels(cardPanels);
         view.updateTabLabel(ordering.size());
+
+        if (ArenaTheme.isMatchBoard()) {
+            // how these cards got here is worked out with everything else that moved
+            for (final CardPanel placeholder : placeholders) {
+                ArenaFx.noteArriving(placeholder);
+            }
+            revealPlaceholders(placeholders);
+            return;
+        }
 
         final VField vf = matchUI.getFieldViewFor(player);
         if (vf == null) {

@@ -18,6 +18,7 @@ import javax.swing.Timer;
 
 import forge.gui.MouseUtil;
 import forge.toolbox.ArenaArt;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 
@@ -41,6 +42,7 @@ public class PhaseLabel extends JLabel {
     private boolean yieldMarked = false;
     private boolean pressed = false;
     private final Timer pressTimer;
+    private final ArenaMotion.Fade litFade = new ArenaMotion.Fade(this::repaintOnlyThisLabel, 0f);
     private Runnable onToggled;
     private Runnable onRightClick;
 
@@ -144,6 +146,10 @@ public class PhaseLabel extends JLabel {
      */
     public void setActive(final boolean b) {
         this.active = b;
+        if (this.arenaKind >= 0) {
+            // the light passes along the row: what is reached comes up quickly, what is left dies away more slowly
+            this.litFade.to(b ? 1f : 0f, b ? 150 : 420);
+        }
         this.repaintOnlyThisLabel();
     }
 
@@ -169,14 +175,24 @@ public class PhaseLabel extends JLabel {
 
         if (arenaKind >= 0 && ArenaTheme.isEnabled()) {
             // a minor step shows only while it matters: reached, pointed at, or switched off
-            if (ArenaTheme.snapshotting || arenaKind == ARENA_STEP && !this.active && !this.hover && this.enabled && !this.yieldMarked) {
+            final float lit = this.litFade.get();
+            final boolean restsHidden = arenaKind == ARENA_STEP && !this.hover && this.enabled && !this.yieldMarked;
+            if (ArenaTheme.snapshotting || restsHidden && !this.active && lit <= 0f) {
                 return;
             }
             final int size = arenaKind == ARENA_STEP ? Math.min(11, Math.min(w, h)) : Math.min(w, h);
             final Graphics2D g2 = (Graphics2D) g.create();
             try {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                ArenaArt.paintPhaseGlyph(g2, (w - size) / 2, (h - size) / 2, size, arenaKind, this.active, this.enabled, this.hover);
+                if (lit < 1f && !restsHidden) {
+                    ArenaArt.paintPhaseGlyph(g2, (w - size) / 2, (h - size) / 2, size, arenaKind, false, this.enabled, this.hover);
+                }
+                if (lit > 0f) {
+                    final java.awt.Composite solid = g2.getComposite();
+                    g2.setComposite(java.awt.AlphaComposite.SrcOver.derive(lit));
+                    ArenaArt.paintPhaseGlyph(g2, (w - size) / 2, (h - size) / 2, size, arenaKind, true, this.enabled, this.hover);
+                    g2.setComposite(solid);
+                }
                 if (this.yieldMarked) {
                     g2.setColor(YIELD_MARKER_COLOR);
                     g2.drawOval((w - size) / 2, (h - size) / 2, size - 1, size - 1);

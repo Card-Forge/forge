@@ -62,9 +62,11 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.match.ArenaFx;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CField;
 import forge.toolbox.ArenaArt;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -194,13 +196,27 @@ public class VField implements IVDoc<CField> {
         return new Rectangle(r.x + (r.width - d) / 2, r.y + (r.height - d) / 2, d, d);
     }
 
-    /** Behind the portrait: its sculpted plinth, with a sunburst while it is this player's turn. */
+    /** Behind the portrait: its sculpted plinth, with a sunburst that comes up and breathes while it is this player's turn. */
     private void paintArenaAvatarFrame(final Graphics2D g) {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         final Rectangle c = getAvatarCircleBounds();
         if (c.width > 0) {
+            final int cx = c.x + c.width / 2, cy = c.y + c.height / 2;
             final boolean active = !ArenaTheme.snapshotting && matchUI.getGameView() != null && matchUI.getGameView().getPlayerTurn() == player;
-            ArenaArt.paintPortraitFrame(g, c.x + c.width / 2, c.y + c.height / 2, c.width, active, mirror);
+            if (ArenaTheme.snapshotting) {
+                ArenaArt.paintPortraitFrame(g, cx, cy, c.width, false, mirror);
+                return;
+            }
+            turnLight.to(active ? 1f : 0f, active ? 420 : 300);
+            final float light = turnLight.get();
+            ArenaArt.paintPortraitFrame(g, cx, cy, c.width, false, mirror);
+            if (light > 0f) {
+                final float breath = active && !turnLight.isMoving() ? 0.82f + 0.18f * ArenaMotion.pulse(avatarArea, 3f) : 1f;
+                final java.awt.Composite solid = g.getComposite();
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(light * breath));
+                ArenaArt.paintPortraitFrame(g, cx, cy, c.width, true, mirror);
+                g.setComposite(solid);
+            }
         }
     }
 
@@ -240,10 +256,75 @@ public class VField implements IVDoc<CField> {
             accent = ArenaTheme.HOVER;
         }
         final int cx = c.x + c.width / 2, cy = c.y + c.height / 2;
-        ArenaArt.paintPortraitRing(g, cx, cy, c.width, accent);
+        final java.awt.Composite solid = g.getComposite();
+        if (ArenaTheme.snapshotting) {
+            ArenaArt.paintPortraitRing(g, cx, cy, c.width, accent);
+        } else {
+            // the ring's light comes up rather than being switched, and breathes while the player can be picked
+            final boolean changed = accent == null ? ringAccent != null : !accent.equals(ringAccent);
+            if (changed) {
+                ringAccentWas = ringAccent;
+                ringAccent = accent;
+                ringMix.set(0f);
+                ringMix.to(1f, 180);
+            }
+            final float mix = ringMix.get();
+            final float breath = accent == ArenaTheme.SELECTABLE ? 0.6f + 0.4f * ArenaMotion.pulse(avatarArea, 1.5f) : 1f;
+            if (mix < 1f || breath < 1f || accent == null) {
+                ArenaArt.paintPortraitRing(g, cx, cy, c.width, mix < 1f ? ringAccentWas : null);
+            }
+            if (accent != null) {
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(mix * breath));
+                ArenaArt.paintPortraitRing(g, cx, cy, c.width, accent);
+                g.setComposite(solid);
+            }
+            final float flash = lifeFlash.get();
+            if (flash > 0f) {
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(flash));
+                ArenaArt.paintPortraitRing(g, cx, cy, c.width, lifeFlashColour);
+                g.setComposite(solid);
+            }
+        }
         // a seat's portrait is small, and its life is what matters most about it
         final int plate = Math.max(22, Math.round(c.width * (arenaSeat ? 0.58f : 0.42f)));
-        ArenaArt.paintLifePlate(g, cx, cy + c.width / 2, plate, lblLife.getText(), ArenaTheme.numeralFont(Font.BOLD, plate * 0.74f));
+        final int plateY = cy + c.width / 2;
+        final java.awt.geom.AffineTransform flat = g.getTransform();
+        final float popped = ArenaTheme.snapshotting ? 0f : lifePop.get();
+        if (popped > 0f) {
+            final float grow = 1f + 0.22f * popped;
+            g.translate(cx, plateY);
+            g.scale(grow, grow);
+            g.translate(-cx, -plateY);
+        }
+        final String shownLife = arenaLifeSeen == Integer.MIN_VALUE ? lblLife.getText() : String.valueOf(arenaLifeShown);
+        ArenaArt.paintLifePlate(g, cx, plateY, plate, shownLife, ArenaTheme.numeralFont(Font.BOLD, plate * 0.74f));
+        g.setTransform(flat);
+    }
+
+    /** The life total counts its way to the new figure, the plate jumps, the ring flashes and the difference floats off. */
+    private void noticeArenaLife(final int life) {
+        if (arenaLifeSeen != Integer.MIN_VALUE && life != arenaLifeSeen && avatarArea.isShowing()) {
+            final int delta = life - arenaLifeSeen;
+            final int from = arenaLifeShown;
+            if (lifeRoll != null) {
+                lifeRoll.cancel();
+            }
+            lifeRoll = ArenaMotion.play(Math.min(800, 320 + Math.abs(delta) * 40), ArenaMotion.OUT, t -> {
+                arenaLifeShown = Math.round(ArenaMotion.lerp(from, life, t));
+                avatarArea.repaint();
+            });
+            lifePop.set(1f);
+            lifePop.to(0f, 460);
+            lifeFlashColour = delta < 0 ? LIFE_LOST : LIFE_GAINED;
+            lifeFlash.set(1f);
+            lifeFlash.to(0f, 560);
+            final Rectangle c = getAvatarCircleBounds();
+            ArenaFx.floatingNumber(avatarArea, new Rectangle(c.x, c.y, c.width, c.height), (delta > 0 ? "+" : "") + delta,
+                    delta < 0 ? new Color(0xFF6A5C) : new Color(0x7BEA8B), Math.max(26f, c.width * 0.3f));
+        } else if (lifeRoll == null || lifeRoll.isOver()) {
+            arenaLifeShown = life;
+        }
+        arenaLifeSeen = life;
     }
 
     private void paintAITimeoutBar(final Graphics g) {
@@ -274,10 +355,27 @@ public class VField implements IVDoc<CField> {
         g.fill(new RoundRectangle2D.Float(bx, by, bw, bh, bh, bh));
         g.setColor(Color.WHITE);
         final int dot = Math.max(3, bh / 5);
+        // the dots ripple along, one after the other, while the opponent thinks
+        final double beat = System.nanoTime() / 1e9d * 2d * Math.PI / 0.9d;
         for (int i = 0; i < 3; i++) {
-            g.fillOval(bx + bw / 2 - dot * 2 + i * dot * 3 / 2, by + (bh - dot) / 2, dot, dot);
+            final int hop = (int) Math.round(Math.max(0d, Math.sin(beat - i * 0.9d)) * dot * 0.8d);
+            g.fillOval(bx + bw / 2 - dot * 2 + i * dot * 3 / 2, by + (bh - dot) / 2 - hop, dot, dot);
         }
     }
+
+    private static final Color LIFE_LOST = new Color(0xFF4A3C);
+    private static final Color LIFE_GAINED = new Color(0x58E06C);
+    private final ArenaMotion.Fade turnLight = new ArenaMotion.Fade(() -> avatarArea.repaint(), 0f);
+    private final ArenaMotion.Fade seatLight = new ArenaMotion.Fade(() -> this.arenaSeatBack.repaint(), 0f);
+    private final ArenaMotion.Fade ringMix = new ArenaMotion.Fade(() -> avatarArea.repaint(), 1f);
+    private final ArenaMotion.Fade lifePop = new ArenaMotion.Fade(() -> avatarArea.repaint(), 0f);
+    private final ArenaMotion.Fade lifeFlash = new ArenaMotion.Fade(() -> avatarArea.repaint(), 0f);
+    private Color ringAccent;
+    private Color ringAccentWas;
+    private Color lifeFlashColour = LIFE_LOST;
+    private int arenaLifeSeen = Integer.MIN_VALUE;
+    private int arenaLifeShown;
+    private ArenaMotion.Tween lifeRoll;
 
     private final PlayerDetailsPanel detailsPanel;
 
@@ -612,6 +710,8 @@ public class VField implements IVDoc<CField> {
                 return;
             }
             final boolean active = matchUI.getGameView() != null && matchUI.getGameView().getPlayerTurn() == player;
+            seatLight.to(active ? 1f : 0f, active ? 420 : 300);
+            final float light = seatLight.get();
             final Graphics2D g = (Graphics2D) g0.create();
             try {
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -619,14 +719,14 @@ public class VField implements IVDoc<CField> {
                 final Color glass = new Color(6, 8, 13);
                 g.setPaint(new java.awt.GradientPaint(0, 0, ArenaTheme.alpha(glass, 85), 0, h, ArenaTheme.alpha(glass, 0)));
                 g.fillRoundRect(0, 0, w, h + arc, arc, arc);
-                if (active) {
+                if (light > 0f) {
                     g.setPaint(new java.awt.RadialGradientPaint(w / 2f, 0f, w * 0.62f, new float[] {0f, 1f},
-                            new Color[] {ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, 80), ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, 0)}));
+                            new Color[] {ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, Math.round(80 * light)), ArenaTheme.alpha(ArenaTheme.GOLD_BRIGHT, 0)}));
                     g.fillRect(0, 0, w, h);
                 }
-                if (active) {
+                if (light > 0f) {
                     final Color rim = new Color(0xFFC85A);
-                    g.setPaint(new java.awt.GradientPaint(0, 0, ArenaTheme.alpha(rim, 245), 0, h * 0.86f, ArenaTheme.alpha(rim, 0)));
+                    g.setPaint(new java.awt.GradientPaint(0, 0, ArenaTheme.alpha(rim, Math.round(245 * light)), 0, h * 0.86f, ArenaTheme.alpha(rim, 0)));
                     g.setStroke(new java.awt.BasicStroke(2.6f));
                     g.drawRoundRect(1, 1, w - 3, h + arc, arc, arc);
                 }
@@ -831,6 +931,9 @@ public class VField implements IVDoc<CField> {
         // Update life total
         final int life = player.getLife();
         lblLife.setText(String.valueOf(life));
+        if (ArenaTheme.isEnabled()) {
+            noticeArenaLife(life);
+        }
         if (life > LIFE_CRITICAL) {
             lblLife.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         } else {

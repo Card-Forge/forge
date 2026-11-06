@@ -21,6 +21,7 @@ import forge.CachedCardImage;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 import forge.util.collect.FCollectionView;
@@ -40,6 +41,8 @@ public class ArenaZonePile extends JComponent {
     private boolean omitCommanders;
     private CardView shownCard;
     private CachedCardImage shownImage;
+    private int countSeen = -1;
+    private final ArenaMotion.Fade bump = new ArenaMotion.Fade(this::repaint, 0f);
 
     public ArenaZonePile(final PlayerView player, final ZoneType zone, final Supplier<Iterable<PlayerView>> viewers) {
         this.player = player;
@@ -71,8 +74,19 @@ public class ArenaZonePile extends JComponent {
         return count;
     }
 
+    /** The count jumps as a card lands on the pile. */
+    public void bump() {
+        bump.set(1f);
+        bump.to(0f, 380);
+    }
+
     /** Refreshes the count and, for face-up piles, the top card. */
     public void update() {
+        final int counted = shownCount();
+        if (countSeen >= 0 && counted != countSeen && isShowing()) {
+            bump();
+        }
+        countSeen = counted;
         if (zone == ZoneType.Graveyard || zone == ZoneType.Exile || zone == ZoneType.Command) {
             final FCollectionView<CardView> cards = player.getCards(zone);
             CardView top = cards == null || cards.isEmpty() ? null : cards.getLast();
@@ -263,6 +277,21 @@ public class ArenaZonePile extends JComponent {
     }
 
     private void paintCountBadge(final Graphics2D g, final String text, final int centerX, final int centerY) {
+        final float bumped = bump.get();
+        if (bumped <= 0f) {
+            paintBadgeShape(g, text, centerX, centerY);
+            return;
+        }
+        final java.awt.geom.AffineTransform flat = g.getTransform();
+        final float grow = 1f + 0.38f * bumped;
+        g.translate(centerX, centerY);
+        g.scale(grow, grow);
+        g.translate(-centerX, -centerY);
+        paintBadgeShape(g, text, centerX, centerY);
+        g.setTransform(flat);
+    }
+
+    private void paintBadgeShape(final Graphics2D g, final String text, final int centerX, final int centerY) {
         g.setFont(ArenaTheme.numeralFont(Font.BOLD, Math.max(15f, getHeight() * 0.15f)));
         final FontMetrics fm = g.getFontMetrics();
         final int bh = fm.getAscent() + 5;

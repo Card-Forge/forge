@@ -69,8 +69,10 @@ import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.screens.match.ArenaFx;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.ArenaArt;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin;
@@ -95,6 +97,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     /** Arena tiles are wider than tall and tap with a slight clockwise tilt. */
     public static final float ARENA_TILE_RATIO = 1.27f;
     private static final double ARENA_TAPPED_ANGLE = Math.toRadians(8);
+    private static final float ARENA_HOVER_GROWTH = 0.035f;
+    private static final float ARENA_MOST_SCALE = 1.3f; // more of a change of size than this just happens
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float TARGET_ORIGIN_FACTOR_X = 0.25f;
     public static final float TARGET_ORIGIN_FACTOR_Y = 0.5f;
@@ -149,6 +153,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private BufferedImage tileArtSource;
     private int groupCount;
     private int hotkeyDigit; // 1..9 paints a numbered badge for Ctrl+digit selection; 0 hides
+
+    // Arena motion. The layout says where a card belongs at once; the panel takes a moment to get there
+    private ArenaMotion.Tween glide;
+    private int glideToX, glideToY;
+    private float glideScale = 1f;
+    private ArenaMotion.Tween tapTween;
+    private ArenaMotion.Tween arrival;
+    private boolean arenaHidden; // on its way here as a picture: nothing to paint yet
+    private float arrivalAlpha = 1f, arrivalScale = 1f, arrivalDrop;
+    private final ArenaMotion.Fade fanLean = new ArenaMotion.Fade(this::repaint, 0f);
+    private final ArenaMotion.Fade hoverLift = new ArenaMotion.Fade(this::repaint, 0f);
+    private final ArenaMotion.Fade glowMix = new ArenaMotion.Fade(this::repaint, 1f);
+    private final ArenaMotion.Fade statsPop = new ArenaMotion.Fade(this::repaint, 0f);
+    private final ArenaMotion.Fade hitFlash = new ArenaMotion.Fade(this::repaint, 0f);
+    private ArenaMotion.Tween hitTween;
+    private float hitShake;
+    private boolean glowSeen;
+    private Color glowNow, glowWas;
+    private int glowNowStrength, glowWasStrength;
+    private int seenCardId = -1;
+    private int seenDamage;
+    private String seenStats;
     private Font badgeFont;
     private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
 
@@ -319,6 +345,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
     public final void setSelected(final boolean isSelected0) {
         isSelected = isSelected0;
+        if (isArenaTile()) {
+            hoverLift.to(isSelected ? 1f : 0f, isSelected ? 110 : 170);
+        } else {
+            hoverLift.set(0f);
+        }
         repaint();
     }
 
@@ -333,13 +364,25 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      */
     private void paintArenaTurned(final Graphics2D g) {
         final double base = Math.max(1d, Math.abs(g.getTransform().getScaleX()));
-        final double scale = base * (base >= 1.5d ? 1 : 2);
+        // while it moves nobody can see the difference, and it costs a good deal: the clean picture comes as it stops
+        final double scale = base * (base >= 1.5d || isArenaInMotion() ? 1 : 2);
         final java.awt.geom.AffineTransform turn = new java.awt.geom.AffineTransform();
-        if (getTappedAngle() > 0) {
-            turn.rotate(getTappedAngle(), cardXOffset + cardWidth / 2f, cardYOffset + cardHeight / 2f);
+        final float scaled = arenaMotionScale();
+        final float cx = cardXOffset + cardWidth / 2f, cy = cardYOffset + cardHeight / 2f;
+        if (hitShake != 0f || arrivalDrop != 0f) {
+            turn.translate(hitShake, arrivalDrop);
         }
-        if (arenaFanAngle != 0) {
-            turn.rotate(arenaFanAngle, cardXOffset + cardWidth / 2f, cardYOffset + cardHeight);
+        if (scaled != 1f) {
+            turn.translate(cx, cy);
+            turn.scale(scaled, scaled);
+            turn.translate(-cx, -cy);
+        }
+        if (getTappedAngle() > 0) {
+            turn.rotate(getTappedAngle(), cx, cy);
+        }
+        final double lean = fanLean.get();
+        if (lean != 0) {
+            turn.rotate(lean, cx, cardYOffset + cardHeight);
         }
         // the panel's margins leave room for the turn; the picture itself only reaches as far as the glow and badges
         final boolean tile = isArenaTile();
@@ -388,6 +431,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 turned.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 turned.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 turned.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                if (arrivalAlpha < 1f) {
+                    turned.setComposite(java.awt.AlphaComposite.SrcOver.derive(arrivalAlpha));
+                }
                 turned.transform(turn);
                 turned.translate(needed.x, needed.y);
                 turned.scale(1d / scale, 1d / scale);
@@ -400,6 +446,181 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 arenaScratchInUse = false;
             }
         }
+    }
+
+    /** Whether this card is turned, moved or fading at the moment, and so cannot just be painted where it stands. */
+    private boolean isArenaMoved() {
+        return getTappedAngle() > 0 || fanLean.get() != 0f || arenaMotionScale() != 1f || arrivalAlpha < 1f || arrivalDrop != 0f || hitShake != 0f;
+    }
+
+    /** Whether this card will be painted again in a moment anyway. */
+    private boolean isArenaInMotion() {
+        return running(glide) || running(tapTween) || running(arrival) || running(hitTween) || fanLean.isMoving() || hoverLift.isMoving();
+    }
+
+    private static boolean running(final ArenaMotion.Tween tween) {
+        return tween != null && !tween.isOver();
+    }
+
+    /** How much larger than its size in the layout the card is showing right now. */
+    private float arenaMotionScale() {
+        return glideScale * arrivalScale * (1f + ARENA_HOVER_GROWTH * hoverLift.get());
+    }
+
+    /** How far from untapped this card is showing: 1 at rest once tapped. */
+    private float arenaTapAmount() {
+        return ArenaMotion.clamp01((float) (getTappedAngle() / ARENA_TAPPED_ANGLE));
+    }
+
+    /** Taps or untaps the card with a swing, if it can be seen doing it. */
+    public final void animateTapped(final boolean tapped0) {
+        final double goal = tapped0 ? tappedAngle() : 0d;
+        if (tapped == tapped0 && (tapTween != null && !tapTween.isOver() || tappedAngle == goal)) {
+            return;
+        }
+        tapped = tapped0;
+        if (tapTween != null) {
+            tapTween.cancel();
+            tapTween = null;
+        }
+        if (!isShowing() || !displayEnabled || arenaHidden || !ArenaTheme.isEnabled()) {
+            tappedAngle = goal;
+            repaint();
+            return;
+        }
+        final double from = tappedAngle;
+        // it swings over a little past the tilt, and just settles back when untapped
+        tapTween = ArenaMotion.play(tapped0 ? 240 : 190, tapped0 ? ArenaMotion.BACK : ArenaMotion.OUT, t -> {
+            tappedAngle = Math.max(0d, from + (goal - from) * t);
+            repaint();
+        }, () -> {
+            tappedAngle = goal;
+            tapTween = null;
+            repaint();
+        });
+    }
+
+    /** Not to be painted, while a picture of this card is on its way here; showing it again stops any arrival that was to come. */
+    public final void setArenaHidden(final boolean hidden) {
+        if (arrival != null) {
+            arrival.cancel();
+            arrival = null;
+        }
+        arenaHidden = hidden;
+        arrivalAlpha = 1f;
+        arrivalScale = 1f;
+        arrivalDrop = 0f;
+        repaint();
+    }
+
+    /** Fades in where it stands, under a picture of it that has just come flying here. */
+    public final void arenaRevealAfter(final int delay, final int millis) {
+        if (arrival != null) {
+            arrival.cancel();
+        }
+        arrivalAlpha = 0f;
+        arenaHidden = false;
+        arrival = ArenaMotion.play(millis, delay, ArenaMotion.OUT, t -> {
+            arrivalAlpha = t;
+            repaint();
+        }, () -> {
+            arrivalAlpha = 1f;
+            arrival = null;
+            repaint();
+            if (isArenaTile()) {
+                ArenaFx.ripple(this, arenaLandingColor());
+            }
+        });
+    }
+
+    /** Comes down onto the board from nowhere in particular: a token, or a permanent that was not seen coming. */
+    public final void arenaEnter() {
+        if (arrival != null) {
+            arrival.cancel();
+        }
+        arenaHidden = false;
+        arrivalAlpha = 0f;
+        arrivalScale = 1.16f;
+        final float drop = -Math.max(10f, cardHeight * 0.14f);
+        arrivalDrop = drop;
+        arrival = ArenaMotion.play(280, ArenaMotion.OUT, t -> {
+            arrivalAlpha = ArenaMotion.clamp01(t * 1.6f);
+            arrivalScale = ArenaMotion.lerp(1.16f, 1f, t);
+            arrivalDrop = drop * (1f - t);
+            repaint();
+        }, () -> {
+            arrivalAlpha = 1f;
+            arrivalScale = 1f;
+            arrivalDrop = 0f;
+            arrival = null;
+            repaint();
+            if (isArenaTile()) {
+                ArenaFx.ripple(this, arenaLandingColor());
+            }
+        });
+    }
+
+    private Color arenaLandingColor() {
+        if (card == null || !matchUI.mayView(card)) {
+            return ArenaTheme.GOLD_BRIGHT;
+        }
+        return ArenaTheme.frameLine(ArenaTheme.tileTint(card.getCurrentState()));
+    }
+
+    /** A picture of this panel as it stands, margins and all. */
+    public final BufferedImage arenaSnapshot() {
+        final float scale = Math.max(1f, GuiBase.getInterface().getScreenScale());
+        final BufferedImage out = new BufferedImage(Math.max(1, Math.round(getWidth() * scale)), Math.max(1, Math.round(getHeight() * scale)), BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g = out.createGraphics();
+        try {
+            g.scale(scale, scale);
+            paint(g);
+        } finally {
+            g.dispose();
+        }
+        return out;
+    }
+
+    /** Notices what has changed about a tile since it was last told, to show it happening. */
+    private void noticeArenaChanges() {
+        if (card == null) {
+            return;
+        }
+        final boolean same = card.getId() == seenCardId;
+        final boolean tile = isArenaTile();
+        final int damage = card.getDamage();
+        final String stats = tile && matchUI.mayView(card) ? getArenaTileStats() : null;
+        if (same && tile && isShowing() && displayEnabled && !arenaHidden) {
+            if (damage > seenDamage) {
+                arenaHit(damage - seenDamage);
+            }
+            if (stats != null && seenStats != null && !stats.equals(seenStats)) {
+                statsPop.set(1f);
+                statsPop.to(0f, 420);
+            }
+        }
+        seenCardId = card.getId();
+        seenDamage = damage;
+        seenStats = stats;
+    }
+
+    /** A tile taking damage: it jolts, flashes, and the number comes off it. */
+    private void arenaHit(final int amount) {
+        hitFlash.set(1f);
+        hitFlash.to(0f, 380);
+        if (hitTween != null) {
+            hitTween.cancel();
+        }
+        final float reach = Math.max(3f, cardWidth * 0.028f);
+        hitTween = ArenaMotion.play(300, ArenaMotion.LINEAR, t -> {
+            hitShake = (float) Math.sin(t * Math.PI * 5d) * reach * (1f - t);
+            repaint();
+        }, () -> {
+            hitShake = 0f;
+            hitTween = null;
+            repaint();
+        });
+        ArenaFx.floatingNumber(this, new Rectangle(cardXOffset, cardYOffset, cardWidth, cardHeight / 2), "-" + amount, new Color(0xFF6A5C), Math.max(20f, cardHeight * 0.22f));
     }
 
     /** How far a tapped card turns: a slight tilt on the Arena board, a quarter turn otherwise. */
@@ -416,7 +637,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             super.validate();
         }
         Graphics2D g2d = (Graphics2D) g;
-        if (ArenaTheme.isEnabled() && (getTappedAngle() > 0 || arenaFanAngle != 0) && getWidth() > 0 && getHeight() > 0) {
+        if (arenaHidden && !ArenaTheme.snapshotting) {
+            return;
+        }
+        if (ArenaTheme.isEnabled() && isArenaMoved() && getWidth() > 0 && getHeight() > 0) {
             paintArenaTurned(g2d);
             return;
         }
@@ -597,14 +821,41 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (ArenaTheme.snapshotting) {
             glow = null; // the backdrop of a dialog stays unlit
         }
-        final boolean fighting = glow == ARENA_ATTACKER || glow == ARENA_BLOCKER;
-        if (glow != null) {
-            final int reach = (isArenaTile() ? spread : Math.max(5, Math.round(cardWidth * 0.05f))) + (isSelected ? 2 : 0) + (fighting ? 4 : 0);
-            if (arched) {
-                paintTokenGlow(g2d, x, y, cardWidth, tall, arc, glow, reach, strength);
-            } else {
-                ArenaTheme.paintGlowAround(g2d, x, y, cardWidth, tall, arc, glow, reach, strength, arc);
+        if (!ArenaTheme.snapshotting) {
+            // the light on a card comes up and goes down rather than being switched
+            final boolean changed = glow == null ? glowNow != null : !glow.equals(glowNow);
+            if (changed) {
+                if (glowSeen) {
+                    glowWas = glowNow;
+                    glowWasStrength = glowNowStrength;
+                    glowMix.set(0f);
+                    glowMix.to(1f, 170);
+                }
+                glowNow = glow;
             }
+            glowNowStrength = strength;
+            glowSeen = true;
+        }
+        final float mix = ArenaTheme.snapshotting ? 1f : glowMix.get();
+        final Color fading = mix < 1f && !ArenaTheme.snapshotting ? glowWas : null;
+        // what can be picked now breathes, and so does what can be played from the hand, so as to be noticed
+        float breath = 1f;
+        if (glow == ArenaTheme.SELECTABLE && !ArenaTheme.snapshotting) {
+            breath = 0.72f + 0.28f * ArenaMotion.pulse(this, 1.5f);
+        } else if (glow == ArenaTheme.PLAYABLE && !isSelected && arenaCostWidth > 0 && !ArenaTheme.snapshotting) {
+            breath = 0.8f + 0.2f * ArenaMotion.pulse(this, 2.4f);
+        }
+        final float glowAlpha = mix * breath;
+        final java.awt.Composite solid = g2d.getComposite();
+        if (fading != null) {
+            g2d.setComposite(java.awt.AlphaComposite.SrcOver.derive(1f - mix));
+            paintArenaBloom(g2d, fading, glowWasStrength, x, y, tall, arc, spread, arched);
+            g2d.setComposite(solid);
+        }
+        if (glow != null && glowAlpha > 0f) {
+            g2d.setComposite(java.awt.AlphaComposite.SrcOver.derive(glowAlpha));
+            paintArenaBloom(g2d, glow, strength, x, y, tall, arc, spread, arched);
+            g2d.setComposite(solid);
         }
 
         // Card body; white-bordered and gold-bordered printings keep their border colour
@@ -630,20 +881,43 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.fillRoundRect(x, y, cardWidth, cardHeight, cornerSize, cornerSize);
         }
 
-        if (glow != null) {
-            // a solid rim in the bloom's own colour, with a fine bright line along its inside
-            final float out = fighting ? 1.6f : 1.2f;
-            final Shape rim = arched ? arenaTokenShape(x - out, y - out, cardWidth + 2 * out, tall + 2 * out, arc + 2 * out)
-                    : new RoundRectangle2D.Float(x - out, y - out, cardWidth + 2 * out, tall + 2 * out, arc + 2 * out, arc + 2 * out);
-            g2d.setColor(new Color(glow.getRed(), glow.getGreen(), glow.getBlue(), 250));
-            g2d.setStroke(new BasicStroke(fighting ? 3.2f : 3f));
-            g2d.draw(rim);
-            final Shape line = arched ? arenaTokenShape(x - 0.5f, y - 0.5f, cardWidth + 1, tall + 1, arc + 1)
-                    : new RoundRectangle2D.Float(x - 0.5f, y - 0.5f, cardWidth + 1, tall + 1, arc + 1, arc + 1);
-            g2d.setColor(new Color((glow.getRed() + 255) / 2, (glow.getGreen() + 255) / 2, (glow.getBlue() + 255) / 2, 235));
-            g2d.setStroke(new BasicStroke(1f));
-            g2d.draw(line);
+        if (fading != null) {
+            g2d.setComposite(java.awt.AlphaComposite.SrcOver.derive(1f - mix));
+            paintArenaRim(g2d, fading, x, y, tall, arc, arched);
+            g2d.setComposite(solid);
         }
+        if (glow != null && glowAlpha > 0f) {
+            // the rim only breathes a little: it has to stay readable as the mark of what can be picked
+            g2d.setComposite(java.awt.AlphaComposite.SrcOver.derive(mix * (0.5f + 0.5f * breath)));
+            paintArenaRim(g2d, glow, x, y, tall, arc, arched);
+            g2d.setComposite(solid);
+        }
+    }
+
+    private void paintArenaBloom(final Graphics2D g2d, final Color glow, final int strength, final int x, final int y, final int tall, final int arc, final int spread, final boolean arched) {
+        final boolean fighting = glow == ARENA_ATTACKER || glow == ARENA_BLOCKER;
+        final int reach = (isArenaTile() ? spread : Math.max(5, Math.round(cardWidth * 0.05f))) + (isSelected ? 2 : 0) + (fighting ? 4 : 0);
+        if (arched) {
+            paintTokenGlow(g2d, x, y, cardWidth, tall, arc, glow, reach, strength);
+        } else {
+            ArenaTheme.paintGlowAround(g2d, x, y, cardWidth, tall, arc, glow, reach, strength, arc);
+        }
+    }
+
+    /** A solid rim in the bloom's own colour, with a fine bright line along its inside. */
+    private void paintArenaRim(final Graphics2D g2d, final Color glow, final int x, final int y, final int tall, final int arc, final boolean arched) {
+        final boolean fighting = glow == ARENA_ATTACKER || glow == ARENA_BLOCKER;
+        final float out = fighting ? 1.6f : 1.2f;
+        final Shape rim = arched ? arenaTokenShape(x - out, y - out, cardWidth + 2 * out, tall + 2 * out, arc + 2 * out)
+                : new RoundRectangle2D.Float(x - out, y - out, cardWidth + 2 * out, tall + 2 * out, arc + 2 * out, arc + 2 * out);
+        g2d.setColor(new Color(glow.getRed(), glow.getGreen(), glow.getBlue(), 250));
+        g2d.setStroke(new BasicStroke(fighting ? 3.2f : 3f));
+        g2d.draw(rim);
+        final Shape line = arched ? arenaTokenShape(x - 0.5f, y - 0.5f, cardWidth + 1, tall + 1, arc + 1)
+                : new RoundRectangle2D.Float(x - 0.5f, y - 0.5f, cardWidth + 1, tall + 1, arc + 1, arc + 1);
+        g2d.setColor(new Color((glow.getRed() + 255) / 2, (glow.getGreen() + 255) / 2, (glow.getBlue() + 255) / 2, 235));
+        g2d.setStroke(new BasicStroke(1f));
+        g2d.draw(line);
     }
 
     private static final Color ARENA_ATTACKER = new Color(0xFF6A1F);
@@ -712,7 +986,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     /** On the Arena board, visible battlefield cards are drawn as compact art tiles rather than full cards. */
     private boolean isArenaTile() {
-        return ArenaTheme.isEnabled() && !isAnimationPanel && card != null && ZoneType.Battlefield.equals(card.getZone());
+        if (!ArenaTheme.isEnabled() || isAnimationPanel || card == null) {
+            return false;
+        }
+        // what it looks like goes by where this panel is: the card may have moved on already, and its old
+        // zone not have heard yet, and a picture of the panel as it stood is wanted for its flight to the new one
+        final java.awt.Container parent = getParent();
+        if (parent instanceof HandArea) {
+            return false;
+        }
+        return parent instanceof PlayArea && !ghost || ZoneType.Battlefield.equals(card.getZone());
     }
 
     /** Text in the bottom box of a tile: power/toughness, or loyalty; null when the card has neither. */
@@ -809,7 +1092,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final TileLayout tl = layoutArenaTile(g);
         final Rectangle a = tl.art(), f = tl.frame(), b = tl.bar();
         final Color tint = known ? ArenaTheme.frameLine(ArenaTheme.tileTint(state)) : new Color(0x8A8F98);
-        final boolean tapped = isTapped();
+        final float tapAmount = arenaTapAmount();
+        final boolean tapped = tapAmount >= 1f;
         final boolean token = known && card.isToken();
         final Shape outline = token ? arenaTokenShape(x, y, w, h, arc) : new RoundRectangle2D.Float(x, y, w, h, arc, arc);
 
@@ -827,7 +1111,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g.draw(outline);
 
         // the thin frame in the card's colour; it is the frame's colour that shows round the art and behind the name
-        final Color line = tapped ? arenaMix(ArenaTheme.fade(tint), new Color(0x4A4A4E), 0.55f) : tint;
+        final Color line = tapAmount > 0f ? arenaMix(tint, arenaMix(ArenaTheme.fade(tint), new Color(0x4A4A4E), 0.55f), tapAmount) : tint;
         final float frameArc = Math.max(5f, arc * 0.7f);
         final Shape frame = token ? arenaTokenShape(f.x, f.y, f.width, f.height, frameArc) : new RoundRectangle2D.Float(f.x, f.y, f.width, f.height, frameArc, frameArc);
         g.setPaint(new GradientPaint(0, f.y, ArenaTheme.lift(line), 0, f.y + f.height, line.darker()));
@@ -840,11 +1124,20 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final Shape artShape = token ? arenaTokenShape(a.x, a.y, a.width, a.height, artArc) : new RoundRectangle2D.Float(a.x, a.y, a.width, a.height, artArc, artArc);
             g.clip(artShape);
             if (art != null) {
-                if (tapped) {
-                    art = getTappedTileArt(art);
-                }
                 g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-                g.drawImage(art, a.x, a.y, a.width, a.height, null);
+                if (tapAmount < 1f) {
+                    g.drawImage(art, a.x, a.y, a.width, a.height, null);
+                }
+                if (tapAmount > 0f) {
+                    // the colour drains out as it swings over
+                    final BufferedImage grey = getTappedTileArt(art);
+                    final java.awt.Composite whole = g.getComposite();
+                    if (tapAmount < 1f) {
+                        g.setComposite(java.awt.AlphaComposite.SrcOver.derive(tapAmount));
+                    }
+                    g.drawImage(grey, a.x, a.y, a.width, a.height, null);
+                    g.setComposite(whole);
+                }
             } else {
                 g.setColor(ArenaTheme.NAVY);
                 g.fill(a);
@@ -859,7 +1152,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // the name, small and dark, on a pale lozenge in a cast of the card's colour
         if (tl.nameH() > 0) {
-            final Color pale = tapped ? new Color(0x87878B) : arenaMix(tint, Color.WHITE, 0.64f);
+            final Color pale = arenaMix(arenaMix(tint, Color.WHITE, 0.64f), new Color(0x87878B), tapAmount);
             final float barArc = b.height * 0.62f;
             final RoundRectangle2D lozenge = new RoundRectangle2D.Float(b.x, b.y, b.width, b.height, barArc, barArc);
             g.setPaint(new GradientPaint(0, b.y, pale, 0, b.y + b.height, arenaMix(pale, Color.BLACK, 0.1f)));
@@ -892,9 +1185,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-        if (tapped && a.width > 0) {
+        if (tapAmount > 0f && a.width > 0) {
             final java.awt.Composite solid = g.getComposite();
-            g.setComposite(java.awt.AlphaComposite.SrcOver.derive(0.72f));
+            g.setComposite(java.awt.AlphaComposite.SrcOver.derive(0.72f * tapAmount));
             ArenaArt.paintTapArrow(g, a.x + a.width / 2, a.y + a.height / 2, Math.round(Math.min(a.width, a.height) * 0.88f));
             g.setComposite(solid);
         }
@@ -905,12 +1198,21 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final String stats = getArenaTileStats();
             final float pa = sb.height * 0.5f;
             final int rim = Math.max(2, Math.round(sb.height * 0.09f));
+            final java.awt.geom.AffineTransform flat = g.getTransform();
+            final float popped = statsPop.get();
+            if (popped > 0f) {
+                // the plate jumps when what it says changes
+                final float grow = 1f + 0.3f * popped;
+                g.translate(sb.getCenterX(), sb.getCenterY());
+                g.scale(grow, grow);
+                g.translate(-sb.getCenterX(), -sb.getCenterY());
+            }
             g.setColor(new Color(4, 4, 6));
             g.fill(new RoundRectangle2D.Float(sb.x - 1.5f, sb.y - 1.5f, sb.width + 3f, sb.height + 3f, pa + 2, pa + 2));
-            g.setPaint(new GradientPaint(0, sb.y, tapped ? new Color(0xB4B4B4) : Color.WHITE, 0, sb.y + sb.height, tapped ? new Color(0x707070) : new Color(0xA8A49A)));
+            g.setPaint(new GradientPaint(0, sb.y, arenaMix(Color.WHITE, new Color(0xB4B4B4), tapAmount), 0, sb.y + sb.height, arenaMix(new Color(0xA8A49A), new Color(0x707070), tapAmount)));
             g.fill(new RoundRectangle2D.Float(sb.x, sb.y, sb.width, sb.height, pa, pa));
-            final Color top = tapped ? new Color(0xA6A6A6) : arenaMix(new Color(0xFBF8EF), tint, 0.17f);
-            final Color bottom = tapped ? new Color(0x868686) : arenaMix(new Color(0xE0DACC), tint, 0.27f);
+            final Color top = arenaMix(arenaMix(new Color(0xFBF8EF), tint, 0.17f), new Color(0xA6A6A6), tapAmount);
+            final Color bottom = arenaMix(arenaMix(new Color(0xE0DACC), tint, 0.27f), new Color(0x868686), tapAmount);
             final RoundRectangle2D plate = new RoundRectangle2D.Float(sb.x + rim, sb.y + rim, sb.width - 2f * rim, sb.height - 2f * rim, pa - rim, pa - rim);
             g.setPaint(new GradientPaint(0, sb.y + rim, top, 0, sb.y + sb.height - rim, bottom));
             g.fill(plate);
@@ -920,10 +1222,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final FontMetrics sfm = g.getFontMetrics();
             g.setColor(tapped ? new Color(16, 16, 18) : getArenaStatsColor(state));
             g.drawString(stats, sb.x + (sb.width - sfm.stringWidth(stats)) / 2f, sb.y + (sb.height + sfm.getAscent() - sfm.getDescent()) / 2f);
+            g.setTransform(flat);
         }
 
         if (isArenaSidelined()) {
             g.setColor(new Color(0, 0, 0, 64));
+            g.fill(outline);
+        }
+        final float flash = hitFlash.get();
+        if (flash > 0f) {
+            g.setColor(new Color(255, 70, 50, Math.round(150 * flash)));
             g.fill(outline);
         }
     }
@@ -1540,8 +1848,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * uncovered, which its cost lines up with. Call before setCardBounds, which makes room for both.
      */
     public final void setArenaFan(final double angle, final int costWidth) {
-        arenaFanAngle = angle;
         arenaCostWidth = costWidth;
+        if (angle != arenaFanAngle) {
+            arenaFanAngle = angle;
+            if (cardWidth > 0 && displayEnabled && !arenaHidden && isShowing()) {
+                fanLean.to((float) angle, 140);
+            } else {
+                fanLean.set((float) angle);
+            }
+        }
     }
 
     /** Arena board: this card is tucked behind another in its pile. */
@@ -1799,6 +2114,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     static final int ZONE_BANNER_HEIGHT = 16;
 
     public final void setCardBounds(final int x, final int y, int width, int height) {
+        final int oldWidth = cardWidth, oldCentreX = getX() + cardXOffset + cardWidth / 2, oldCentreY = getY() + cardYOffset + cardHeight / 2;
         cardWidth = width;
         cardHeight = height;
         if (isArenaTile() || (arenaCostWidth > 0 && ArenaTheme.isEnabled())) {
@@ -1809,9 +2125,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final int bottom = Math.round(tile ? height * 0.28f : width * 0.14f);
             cardXOffset = mx;
             cardYOffset = top;
-            setBounds(x - mx, y - top, width + 2 * mx, height + top + bottom);
+            placeArena(x - mx, y - top, width + 2 * mx, height + top + bottom, oldWidth, oldCentreX, oldCentreY);
             return;
         }
+        cancelGlide();
         final int rotCenterX = Math.round(width / 2f);
         final int rotCenterY = height - rotCenterX;
         final int rotCenterToTopCorner = Math.round(width * CardPanel.ROT_CENTER_TO_TOP_CORNER);
@@ -1841,12 +2158,69 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         rootPane.repaint(p.x, p.y, b.width, b.height);
     }
 
+    /**
+     * Puts the panel where the layout wants it, by way of where the card is showing now: the panel takes its new
+     * size at once (a resize means a new image, too dear for every frame), scaled to look like its old one, and
+     * glides over. A layout repeating what it asked for last time leaves a glide in progress alone.
+     */
+    private void placeArena(final int bx, final int by, final int bw, final int bh, final int oldWidth, final int oldCentreX, final int oldCentreY) {
+        final boolean gliding = glide != null && !glide.isOver();
+        if (gliding && bx == glideToX && by == glideToY && bw == getWidth() && bh == getHeight()) {
+            return;
+        }
+        final int dx = oldCentreX - (bx + cardXOffset + cardWidth / 2), dy = oldCentreY - (by + cardYOffset + cardHeight / 2);
+        final float startScale = oldWidth > 0 ? glideScale * oldWidth / (float) cardWidth : 1f;
+        final boolean snap = oldWidth <= 0 || isAnimationPanel || !displayEnabled || arenaHidden || !isShowing()
+                || getParent() instanceof CardPanelContainer container && container.isLayoutSnapping()
+                || startScale > ARENA_MOST_SCALE || startScale < 1f / ARENA_MOST_SCALE;
+        cancelGlide();
+        if (snap || dx == 0 && dy == 0 && startScale == 1f) {
+            setBounds(bx, by, bw, bh);
+            return;
+        }
+        glideToX = bx;
+        glideToY = by;
+        glideScale = startScale;
+        setBounds(bx + dx, by + dy, bw, bh);
+        final int distance = Math.abs(dx) + Math.abs(dy);
+        final int millis = Math.min(320, 120 + Math.round(distance * 0.35f));
+        glide = ArenaMotion.play(millis, ArenaMotion.OUT, t -> {
+            setLocation(bx + Math.round(dx * (1f - t)), by + Math.round(dy * (1f - t)));
+            if (startScale != 1f) {
+                glideScale = ArenaMotion.lerp(startScale, 1f, t);
+                repaint();
+            }
+        }, () -> {
+            glide = null;
+            glideScale = 1f;
+            setLocation(bx, by);
+            repaint();
+        });
+    }
+
+    private void cancelGlide() {
+        if (glide != null) {
+            glide.cancel();
+            glide = null;
+        }
+        glideScale = 1f;
+    }
+
+    /** Where the layout has this panel, which is where it is unless it is still getting there. */
+    private int laidOutX() {
+        return glide != null && !glide.isOver() ? glideToX : getX();
+    }
+
+    private int laidOutY() {
+        return glide != null && !glide.isOver() ? glideToY : getY();
+    }
+
     public final int getCardX() {
-        return getX() + cardXOffset;
+        return laidOutX() + cardXOffset;
     }
 
     public final int getCardY() {
-        return getY() + cardYOffset;
+        return laidOutY() + cardYOffset;
     }
 
     public final int getCardWidth() {
@@ -1867,16 +2241,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     public final Point getCardLocation() {
-        final Point p = getLocation();
-        p.x += cardXOffset;
-        p.y += cardYOffset;
-        return p;
+        return new Point(getCardX(), getCardY());
     }
 
+    /** Where it stands in the layout: an arc does not chase a card across the board, repainting the window as it goes. */
     public final Point getCardLocationOnScreen() {
         final Point p = getLocationOnScreen();
-        p.x += cardXOffset;
-        p.y += cardYOffset;
+        p.x += getCardX() - getX();
+        p.y += getCardY() - getY();
         return p;
     }
 
@@ -1940,6 +2312,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return; //prevent unnecessary update logic for animation panel
         }
 
+        noticeArenaChanges();
         updateText();
         updatePTOverlay();
         updateImage();
@@ -1948,6 +2321,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public void dispose() {
+        cancelGlide();
+        if (tapTween != null) {
+            tapTween.cancel();
+        }
+        if (arrival != null) {
+            arrival.cancel();
+        }
+        if (hitTween != null) {
+            hitTween.cancel();
+        }
         attachedToPanel = null;
         attachedPanels = null;
         stack = null;

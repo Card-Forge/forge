@@ -50,6 +50,7 @@ import forge.view.FView;
  */
 @SuppressWarnings("serial")
 final class ArenaEndScreen extends JPanel {
+    private final ArenaDialogKit.Entrance entrance = new ArenaDialogKit.Entrance(this, () -> true);
     enum Outcome { VICTORY, DEFEAT, NEUTRAL }
 
     /** Where the trophy has its middle, and so where the rays' light comes from, as a share of the height. */
@@ -257,8 +258,31 @@ final class ArenaEndScreen extends JPanel {
         btnCopy.setBounds(logPanel.x + logPanel.width - pad - copyW, logPanel.y + logPanel.height - pad - copyH, copyW, copyH);
     }
 
+    /** The end of the game takes its time coming in. */
     @Override
-    protected void paintComponent(final Graphics g0) {
+    public void addNotify() {
+        super.addNotify();
+        entrance.begin(560);
+    }
+
+    @Override
+    protected void paintChildren(final Graphics g) {
+        final Graphics2D c = entrance.contentGraphics(g);
+        super.paintChildren(c);
+        c.dispose();
+    }
+
+    @Override
+    protected void paintComponent(final Graphics g1) {
+        final Graphics2D g0 = entrance.sceneGraphics(g1);
+        try {
+            paintEndScene(g0);
+        } finally {
+            g0.dispose();
+        }
+    }
+
+    private void paintEndScene(final Graphics2D g0) {
         final int w = getWidth(), h = getHeight();
         if (scene == null || scene.getWidth() != w || scene.getHeight() != h || sceneCustom != hasCustom()) {
             sceneCustom = hasCustom();

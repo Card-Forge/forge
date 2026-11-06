@@ -241,6 +241,11 @@ public class PlayerDetailsPanel extends JPanel {
         return pile;
     }
 
+    /** The pile showing this zone on the Arena board, if there is one. */
+    public ArenaZonePile getArenaPile(final ZoneType zone) {
+        return arenaPiles.get(zone);
+    }
+
     public Component getLblLibrary() {
         final ArenaZonePile pile = arenaPiles.get(ZoneType.Library);
         return arenaMode && pile != null ? pile : zoneLabels.get(ZoneType.Library);

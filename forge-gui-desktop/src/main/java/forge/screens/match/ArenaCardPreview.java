@@ -26,6 +26,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.gui.card.CardDetailUtil;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.ArenaText;
 import forge.toolbox.FSkin;
@@ -58,6 +59,7 @@ public final class ArenaCardPreview extends JComponent {
     private int panelX;
     private int imageW;
     private int imageH;
+    private final ArenaMotion.Fade shown = new ArenaMotion.Fade(this::repaint, 0f);
 
     /** The status panel's content, worked out once per hover. */
     private record Status(List<String> chips, String body) { }
@@ -137,15 +139,20 @@ public final class ArenaCardPreview extends JComponent {
         // leave room around everything for the shadow
         preview.setBounds(x - GAP, y - GAP, blockW + 2 * GAP, h + 2 * GAP);
         preview.setVisible(true);
+        preview.shown.to(1f, 120);
         preview.repaint();
     }
 
     public static void dismiss() {
-        if (instance != null && instance.isVisible()) {
-            instance.setVisible(false);
-            instance.card = null;
-            instance.image = null;
-            instance.status = null;
+        if (instance != null && instance.isVisible() && instance.shown.goal() > 0f) {
+            final ArenaCardPreview preview = instance;
+            // it goes with a quick fade, unless the mouse has gone straight to another card
+            preview.shown.to(0f, 90, () -> {
+                preview.setVisible(false);
+                preview.card = null;
+                preview.image = null;
+                preview.status = null;
+            });
         }
     }
 
@@ -192,6 +199,11 @@ public final class ArenaCardPreview extends JComponent {
         final BufferedImage img = image == null ? null : image.getImage();
         final Graphics2D g = (Graphics2D) g0.create();
         try {
+            final float visible = shown.get();
+            if (visible < 1f) {
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(visible));
+                g.translate(0, Math.round((1f - visible) * (GAP - 2)));
+            }
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);

@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +27,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.toolbox.ArenaText;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 import forge.util.CardTranslation;
@@ -67,7 +71,14 @@ public final class ArenaFocusCard extends JComponent {
         }
     }
 
+    /** Where a card was just showing, for it to fly from there as it goes into play. */
+    public record Shown(Rectangle at, BufferedImage image, long when) { }
+
+    private static final long SHOWN_LASTS_MILLIS = 1500L;
+    private static final Map<Integer, Shown> justShown = new HashMap<>();
+
     private final List<Entry> entries = new ArrayList<>();
+    private final ArenaMotion.Fade appear = new ArenaMotion.Fade(this::repaint, 0f);
     private int cardW;
     private int cardH;
 
@@ -83,9 +94,15 @@ public final class ArenaFocusCard extends JComponent {
 
     private static void update(final CMatchUI matchUI) {
         final List<Entry> next = ArenaTheme.isMatchBoard() ? collectEntries(matchUI) : new ArrayList<>();
+        if (instance != null) {
+            instance.rememberGoing(next);
+        }
         if (next.isEmpty()) {
-            if (instance != null) {
-                instance.setVisible(false);
+            if (instance != null && instance.isVisible()) {
+                instance.appear.to(0f, 140, () -> {
+                    instance.setVisible(false);
+                    instance.entries.clear();
+                });
             }
             return;
         }
@@ -118,6 +135,8 @@ public final class ArenaFocusCard extends JComponent {
                 noteLines = Math.max(noteLines, e.notes.size()); // a minor card's label goes above it
             }
         }
+        // a new card rises into view; a card that stays is left alone
+        final boolean newTop = instance.entries.isEmpty() || !instance.entries.get(0).card.equals(next.get(0).card);
         instance.entries.clear();
         instance.entries.addAll(next);
         instance.cardW = w;
@@ -131,7 +150,64 @@ public final class ArenaFocusCard extends JComponent {
         final int height = h + 2 * PAD + (noteLines == 0 ? 0 : 8 + noteLines * NOTE_LINE);
         instance.setBounds(lpn.getWidth() - width - 2, Math.round(lpn.getHeight() * 0.125f), width, height);
         instance.setVisible(true);
+        if (newTop) {
+            instance.appear.set(0f);
+            instance.appear.to(1f, 240, 70, null);
+        } else {
+            instance.appear.to(1f, 120);
+        }
         instance.repaint();
+    }
+
+    /** The cards about to stop showing, and where they were. */
+    private void rememberGoing(final List<Entry> next) {
+        final long now = System.currentTimeMillis();
+        justShown.values().removeIf(s -> now - s.when() > SHOWN_LASTS_MILLIS);
+        for (int i = 0; i < entries.size(); i++) {
+            final Entry e = entries.get(i);
+            final boolean stays = next.stream().anyMatch(n -> n.card.equals(e.card));
+            if (!stays) {
+                justShown.put(e.card.getId(), new Shown(entryBounds(i), e.image == null ? null : e.image.getImage(), now));
+            }
+        }
+    }
+
+    /** Where this entry's card is, in the layered pane. */
+    private Rectangle entryBounds(final int index) {
+        int x = PAD;
+        for (int i = 0; i < index; i++) {
+            x += (entries.get(i).minor ? Math.round(cardW * MINOR_SCALE) : cardW) + GAP;
+        }
+        final Entry e = entries.get(index);
+        return new Rectangle(getX() + x, getY() + (e.minor ? PAD + NOTE_LINE : PAD),
+                e.minor ? Math.round(cardW * MINOR_SCALE) : cardW, e.minor ? Math.round(cardH * MINOR_SCALE) : cardH);
+    }
+
+    /** Where this card is showing as the large card now, in the layered pane. Null if it is not. */
+    public static Rectangle getCardBounds(final CardView card) {
+        if (instance == null || !instance.isVisible()) {
+            return null;
+        }
+        for (int i = 0; i < instance.entries.size(); i++) {
+            if (instance.entries.get(i).card.equals(card)) {
+                return instance.entryBounds(i);
+            }
+        }
+        return null;
+    }
+
+    /** Where this card is showing as the large card, or was a moment ago. Null if nowhere. */
+    public static Shown lastShown(final CardView card) {
+        final Rectangle live = getCardBounds(card);
+        if (live != null) {
+            for (final Entry e : instance.entries) {
+                if (e.card.equals(card)) {
+                    return new Shown(live, e.image == null ? null : e.image.getImage(), System.currentTimeMillis());
+                }
+            }
+        }
+        final Shown shown = justShown.get(card.getId());
+        return shown == null || System.currentTimeMillis() - shown.when() > SHOWN_LASTS_MILLIS ? null : shown;
     }
 
     /** Where arcs to the stack's targets start: the left edge of the large card, on screen. Null if it is not showing. */
@@ -346,6 +422,14 @@ public final class ArenaFocusCard extends JComponent {
         }
         final Graphics2D g = (Graphics2D) g0.create();
         try {
+            final float visible = appear.get();
+            if (visible <= 0f) {
+                return;
+            }
+            if (visible < 1f) {
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(visible));
+                g.translate(0, Math.round((1f - visible) * (PAD - 4)));
+            }
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);

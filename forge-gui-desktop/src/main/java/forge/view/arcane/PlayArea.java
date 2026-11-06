@@ -44,6 +44,7 @@ import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.util.Localizer;
 import forge.model.FModel;
+import forge.screens.match.ArenaFx;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.toolbox.ArenaTheme;
@@ -541,6 +542,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         this.playAreaWidth = rect.width;
         this.playAreaHeight = rect.height;
+        noteLayoutRoom(rect.width, rect.height);
 
         List<CardPanel> unsorted = new LinkedList<>(this.getCardPanels());
         unsorted.removeIf(p -> p.getAttachedToPanel() != null);
@@ -1354,6 +1356,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toDelete.removeAll(notToDelete);
 
+        for (final CardView card : toDelete) {
+            final CardPanel going = getCardPanel(card.getId());
+            if (going != null) {
+                ArenaFx.noteLeaving(going);
+            }
+        }
         if (toDelete.size() == getCardPanels().size()) {
             clear(false);
         } else {
@@ -1394,6 +1402,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 if ( --i == 0 ) { // only scroll to last panel to be added
                     scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
                 }
+                ArenaFx.noteArriving(toPanel);
                 Animation.moveCard(toPanel);
             }
         }
@@ -1403,7 +1412,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public boolean updateCard(final CardView card, boolean fromRefresh) {
         FThreads.assertExecutedByEdt(true);
         boolean result = doUpdateCard(card, fromRefresh);
-        repaint();
+        if (!ArenaTheme.isEnabled()) {
+            repaint(); // on the Arena board the card repaints itself, and all of the board for each card is more than a frame can spare
+        }
         return result;
     }
 
@@ -1416,7 +1427,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (tappedStateChanged) {
             splitCardIds.remove(card.getId());
         }
-        if (card.isTapped()) {
+        if (ArenaTheme.isEnabled()) {
+            toPanel.animateTapped(card.isTapped());
+        } else if (card.isTapped()) {
             toPanel.setTapped(true);
             toPanel.setTappedAngle(forge.view.arcane.CardPanel.tappedAngle());
         } else {

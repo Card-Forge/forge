@@ -109,6 +109,7 @@ public final class ArenaCardBrowser extends JPanel {
     private final FButton btnView = new ArenaDialogKit.Pill();
     private final ArenaDialogKit.TabBarDim tabBarDim = new ArenaDialogKit.TabBarDim();
     private final Timer animation = new Timer(15, e -> stepAnimation());
+    private final ArenaDialogKit.Entrance entrance = new ArenaDialogKit.Entrance(this, () -> !this.viewingBattlefield);
     private final CardView focusCard;
     private CachedCardImage focusImage;
     private BufferedImage focusSource;
@@ -364,15 +365,26 @@ public final class ArenaCardBrowser extends JPanel {
     @Override
     protected void paintComponent(final Graphics g) {
         if (!viewingBattlefield) {
-            paintScene((Graphics2D) g, getWidth(), getHeight());
+            final Graphics2D c = entrance.sceneGraphics(g);
+            paintScene(c, getWidth(), getHeight());
+            c.dispose();
         }
     }
 
     @Override
-    protected void paintChildren(final Graphics g) {
+    protected void paintChildren(final Graphics g0) {
+        final Graphics2D g = entrance.contentGraphics(g0);
+        try {
+            paintContents(g);
+        } finally {
+            g.dispose();
+        }
+    }
+
+    private void paintContents(final Graphics2D g) {
         super.paintChildren(g);
         if (mode == Mode.ARRANGE && !viewingBattlefield) {
-            final Graphics2D g2 = (Graphics2D) g;
+            final Graphics2D g2 = g;
             if (railed()) {
                 final int left = railLeft();
                 ArenaDialogKit.paintRail(g2, left, left + railWidth(), slotCentreY + slotH / 2 + ArenaDialogKit.railDrop(getHeight()), getHeight());
@@ -414,6 +426,7 @@ public final class ArenaCardBrowser extends JPanel {
         }
         fitToWindow();
         requestFocusInWindow();
+        entrance.begin(340);
     }
 
     private void close() {
@@ -1303,7 +1316,16 @@ public final class ArenaCardBrowser extends JPanel {
             }
             // the limit is reached; the rest wait dimmed
             final boolean dimmed = mode == Mode.CHOOSE && !picked && chosen.size() >= max && max > 1;
-            sprite.draw(g, face, q, restX, Math.round(restY - lift()), tilt(), scale(), dimmed ? null : glow, dimmed);
+            // the cards are dealt in, one after the other
+            final float dealt = entrance.isOver() ? 1f : entrance.inTurn(items.indexOf(this), items.size());
+            if (dealt <= 0f) {
+                return;
+            }
+            if (dealt < 1f) {
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(dealt));
+            }
+            final int dealRise = Math.round((1f - dealt) * bh * 0.05f);
+            sprite.draw(g, face, q, restX, Math.round(restY - lift()) + dealRise, tilt(), scale(), dimmed ? null : glow, dimmed);
             if (!railed()) {
                 drawBadge(g);
             }

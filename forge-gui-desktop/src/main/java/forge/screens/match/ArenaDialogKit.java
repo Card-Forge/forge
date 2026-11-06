@@ -48,6 +48,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.toolbox.ArenaArt;
 import forge.toolbox.ArenaText;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FButton;
@@ -215,6 +216,73 @@ final class ArenaDialogKit {
         return new Rectangle(w - sw - Math.round(w * 0.014f), Math.round(h * ROW_CENTRE_Y) - sh / 2, sw, sh);
     }
 
+    // ---- coming into view
+
+    /**
+     * A dialog's way in: its backdrop fades over the board, then what it holds rises into place. While the
+     * backdrop is fading the board has to be painted underneath it, so only then is the dialog not opaque.
+     */
+    static final class Entrance {
+        private final JComponent owner;
+        private final java.util.function.BooleanSupplier opaqueAfter;
+        private final ArenaMotion.Fade fade;
+
+        Entrance(final JComponent owner, final java.util.function.BooleanSupplier opaqueAfter) {
+            this.owner = owner;
+            this.opaqueAfter = opaqueAfter;
+            this.fade = new ArenaMotion.Fade(owner::repaint, 1f);
+        }
+
+        void begin(final int millis) {
+            owner.setOpaque(false);
+            fade.set(0f);
+            fade.to(1f, millis, () -> {
+                owner.setOpaque(opaqueAfter.getAsBoolean());
+                owner.repaint();
+            });
+        }
+
+        boolean isOver() {
+            return fade.get() >= 1f;
+        }
+
+        /** How far the backdrop and heading are in. */
+        float scene() {
+            return ArenaMotion.clamp01(fade.get() / 0.55f);
+        }
+
+        /** How far what the dialog holds is in. */
+        float content() {
+            return ArenaMotion.clamp01((fade.get() - 0.2f) / 0.8f);
+        }
+
+        /** The same for one of a row of things, each a little behind the one before. */
+        float inTurn(final int index, final int count) {
+            final float lag = count <= 1 ? 0f : Math.min(0.5f / (count - 1), 0.08f);
+            return ArenaMotion.OUT.at(ArenaMotion.clamp01((content() - index * lag) / Math.max(0.1f, 1f - lag * Math.max(0, count - 1))));
+        }
+
+        /** Painting for the backdrop: the caller disposes of what it gets. */
+        Graphics2D sceneGraphics(final Graphics g) {
+            final Graphics2D c = (Graphics2D) g.create();
+            if (scene() < 1f) {
+                c.setComposite(java.awt.AlphaComposite.SrcOver.derive(scene()));
+            }
+            return c;
+        }
+
+        /** Painting for the contents: the caller disposes of what it gets. */
+        Graphics2D contentGraphics(final Graphics g) {
+            final Graphics2D c = (Graphics2D) g.create();
+            final float in = content();
+            if (in < 1f) {
+                c.setComposite(java.awt.AlphaComposite.SrcOver.derive(in));
+                c.translate(0, Math.round((1f - in) * owner.getHeight() * 0.025f));
+            }
+            return c;
+        }
+    }
+
     // ---- backdrop
 
     /** The window as it is, without the focus card (a dialog shows its own) or the board's action cluster (what the dialog asks comes first). */
@@ -228,7 +296,8 @@ final class ArenaDialogKit {
         final Graphics2D sg = out.createGraphics();
         final List<Component> hidden = new ArrayList<>();
         for (final Component c : lpn.getComponents()) {
-            if (c.isVisible() && (c == hide || c instanceof ArenaFocusCard)) {
+            // a card preview may still be fading out, having just been dismissed for this dialog
+            if (c.isVisible() && (c == hide || c instanceof ArenaFocusCard || c instanceof ArenaCardPreview)) {
                 hidden.add(c);
             }
         }

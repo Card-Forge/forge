@@ -158,6 +158,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
         final int cardAreaWidth = rect.width;
         final int cardAreaHeight = rect.height;
+        noteLayoutRoom(cardAreaWidth, cardAreaHeight);
         if (this.fanLayout) {
             doFanLayout(cardAreaWidth, cardAreaHeight);
             super.doLayout();

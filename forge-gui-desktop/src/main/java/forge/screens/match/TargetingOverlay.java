@@ -50,6 +50,7 @@ import forge.model.FModel;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VStack.StackInstanceTextArea;
+import forge.toolbox.ArenaMotion;
 import forge.toolbox.ArenaTheme;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -99,6 +100,9 @@ public class TargetingOverlay {
     private List<List<Arc>> paintedArcs = List.of(); // Arena: what the window last showed, see arcsChanged
     private final List<Arc> arenaLinks = new ArrayList<>(); // Arena: the chevrons between attackers and blockers
     private final int MAX_CONSECUTIVE_UPDATES = 1;
+    // Arena: arcs that have just appeared reach out to what they are aimed at
+    private final List<Arc> arcsReaching = new ArrayList<>();
+    private final ArenaMotion.Fade arcReach = new ArenaMotion.Fade(this::repaintReachingArcs, 1f);
 
     private enum ArcConnection {
         Friends,
@@ -519,6 +523,39 @@ public class TargetingOverlay {
         return true;
     }
 
+    private void repaintReachingArcs() {
+        if (arcsReaching.isEmpty()) {
+            return;
+        }
+        final java.awt.Rectangle area = new java.awt.Rectangle(arcsReaching.get(0).x1, arcsReaching.get(0).y1, 0, 0);
+        for (final Arc arc : arcsReaching) {
+            area.add(arc.x1, arc.y1);
+            area.add(arc.x2, arc.y2);
+        }
+        // the arc bows out of the line between its ends, and lands in a burst
+        area.grow(Math.max(90, Math.max(area.width, area.height) / 5), Math.max(90, Math.max(area.width, area.height) / 5));
+        getPanel().repaint(area);
+    }
+
+    /** Arcs that were not there before and do not just replace ones that moved. */
+    private void noticeNewArcs(final List<List<Arc>> before) {
+        final List<Arc> now = new ArrayList<>(arcsFoeAtk);
+        now.addAll(arcsFoeDef);
+        now.addAll(arcsFriend);
+        final List<Arc> was = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, before.size()); i++) {
+            was.addAll(before.get(i));
+        }
+        if (now.size() <= was.size()) {
+            return;
+        }
+        now.removeAll(was);
+        arcsReaching.clear();
+        arcsReaching.addAll(now);
+        arcReach.set(0f);
+        arcReach.to(1f, 320);
+    }
+
     /** Arena: what is on top of the stack reaches out from the large card to its targets. */
     private void addArenaStackArcs() {
         if (!ArenaTheme.isMatchBoard() || !this.getPanel().isShowing()) {
@@ -567,6 +604,9 @@ public class TargetingOverlay {
             final java.awt.Rectangle clip = g.getClipBounds();
             if (clip != null && clip.width >= getWidth() && clip.height >= getHeight()) {
                 return; // this is the whole window being painted, so there is nothing left to settle
+            }
+            if (ArenaMotion.isAmbientPaint(this, clip)) {
+                return; // something breathing does not need the window repainted once a second to go with it
             }
             settled.setRepeats(false);
             final long now = System.currentTimeMillis();
@@ -646,7 +686,7 @@ public class TargetingOverlay {
         private void drawArcs(Graphics2D g2d, Color color, List<Arc> arcs) {
             for (Arc arc : arcs) {
                 if (ArenaTheme.isEnabled()) {
-                    drawArenaArc(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
+                    drawArenaArc(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color, arcsReaching.contains(arc) ? arcReach.get() : 1f);
                 } else {
                     drawArrow(g2d, arc.x1, arc.y1, arc.x2, arc.y2, color);
                 }
@@ -654,8 +694,8 @@ public class TargetingOverlay {
         }
 
         /** A curved ribbon of light that narrows as it goes: wide faint layers round a bright core, a head, and a ring on what it reaches. */
-        private void drawArenaArc(final Graphics2D g2d, final int x10, final int y10, final int x2, final int y2, final Color color) {
-            final float dx0 = x2 - x10, dy0 = y2 - y10;
+        private void drawArenaArc(final Graphics2D g2d, final int x10, final int y10, final int x20, final int y20, final Color color, final float reached) {
+            final float dx0 = x20 - x10, dy0 = y20 - y10;
             final float length0 = (float) Math.hypot(dx0, dy0);
             if (length0 < 2f) {
                 return;
@@ -663,13 +703,18 @@ public class TargetingOverlay {
             // starts from the edge of what it comes from rather than the middle of its art
             final float skip = Math.min(70f, length0 * 0.3f);
             final int x1 = Math.round(x10 + dx0 / length0 * skip), y1 = Math.round(y10 + dy0 / length0 * skip);
-            final float dx = x2 - x1, dy = y2 - y1;
+            final float dx = x20 - x1, dy = y20 - y1;
             final float length = (float) Math.hypot(dx, dy);
             // bows upwards, away from the row of cards it crosses
             final float bow = length * 0.16f * (dx >= 0 ? -1f : 1f);
-            final float cx = (x1 + x2) / 2f - dy / length * bow, cy = (y1 + y2) / 2f + dx / length * bow;
+            final float wholeCx = (x1 + x20) / 2f - dy / length * bow, wholeCy = (y1 + y20) / 2f + dx / length * bow;
+            // so far as it has reached yet: the same curve, cut off short
+            final float left = 1f - reached;
+            final float cx = x1 + (wholeCx - x1) * reached, cy = y1 + (wholeCy - y1) * reached;
+            final float x2 = left * left * x1 + 2f * left * reached * wholeCx + reached * reached * x20;
+            final float y2 = left * left * y1 + 2f * left * reached * wholeCy + reached * reached * y20;
             // thin where it leaves, full where it lands, in a soft body of light
-            final float start = 6f, end = 17f;
+            final float start = 6f, end = 6f + 11f * reached;
             final int steps = 9;
             for (int i = steps; i >= 1; i--) {
                 final float grow = 1f + i * 0.42f;
@@ -818,7 +863,11 @@ public class TargetingOverlay {
                 drawArenaCombatLinks(links, gameView.getCombat());
                 links.dispose();
             }
+            final List<List<Arc>> arcsBefore = paintedArcs;
             final boolean changed = arena && arcsChanged();
+            if (changed) {
+                noticeNewArcs(arcsBefore);
+            }
             if (arcsFoeAtk.isEmpty() && arcsFoeDef.isEmpty() && arcsFriend.isEmpty()) {
                 if (arena ? changed : assembled) {
                     // We still need to repaint to get rid of visual artifacts
@@ -881,7 +930,12 @@ public class TargetingOverlay {
         }
         @Override
         public void doingLayout() {
-            assembleAndRepaint();
+            // Arena: cards see to their own repainting as they move, so the window only needs it if the arcs changed
+            if (ArenaTheme.isEnabled()) {
+                assembleOnHover();
+            } else {
+                assembleAndRepaint();
+            }
         }
         @Override
         public void mouseOver(CardPanel panel, MouseEvent evt) {

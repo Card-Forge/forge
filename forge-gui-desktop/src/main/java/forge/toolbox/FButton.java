@@ -60,6 +60,9 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     private String arenaLabel;
     private boolean primary = false;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
+    private final ArenaMotion.Fade hoverFade = new ArenaMotion.Fade(this::repaintSelf, 0f);
+    private final ArenaMotion.Fade pressFade = new ArenaMotion.Fade(this::repaintSelf, 0f);
+    private final ArenaMotion.Fade appearFade = new ArenaMotion.Fade(this::repaintSelf, 1f);
     private KeyAdapter klEnter;
 
     /**
@@ -101,6 +104,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             @Override
             public void mouseEntered(final MouseEvent evt) {
                 hovered = true;
+                if (ArenaTheme.isEnabled()) { hoverFade.to(1f, 110); }
                 if (isToggled() || !isEnabled()) { return; }
                 resetImg();
                 repaintSelf();
@@ -109,6 +113,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             @Override
             public void mouseExited(final MouseEvent evt) {
                 hovered = false;
+                if (ArenaTheme.isEnabled()) { hoverFade.to(0f, 180); }
                 if (isToggled() || !isEnabled()) { return; }
                 resetImg();
                 repaintSelf();
@@ -117,6 +122,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             @Override
             public void mousePressed(final MouseEvent evt) {
                 if (isToggled() || !isEnabled()) { return; }
+                if (ArenaTheme.isEnabled()) { pressFade.to(1f, 70); }
                 imgL = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_LEFT);
                 imgM = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_CENTER);
                 imgR = FSkin.getIcon(FSkinProp.IMG_BTN_DOWN_RIGHT);
@@ -125,6 +131,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
 
             @Override
             public void mouseReleased(final MouseEvent evt) {
+                if (ArenaTheme.isEnabled()) { pressFade.to(0f, 150); }
                 if (isToggled() || !isEnabled()) { return; }
                 resetImg();
                 repaintSelf();
@@ -217,6 +224,12 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         repaintSelf();
     }
 
+    /** Arena: the button has just come into view, and grows into place. */
+    public void arenaAppear() {
+        appearFade.set(0f);
+        appearFade.to(1f, 200);
+    }
+
     /** Marks this as the main action button; the Arena theme paints it amber. */
     public void setPrimary(final boolean b0) {
         this.primary = b0;
@@ -293,8 +306,34 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
             g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
             final boolean pressed = getModel().isPressed() && getModel().isArmed();
-            ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, hovered && isEnabled(), pressed,
-                    isFocusOwner(), toggle, isEnabled());
+            final float show = appearFade.get(), press = pressFade.get();
+            if (show <= 0f) {
+                return;
+            }
+            final float scale = (0.9f + 0.1f * show) * (1f - 0.04f * press);
+            if (scale != 1f) {
+                g2d.translate(getWidth() / 2d, getHeight() / 2d);
+                g2d.scale(scale, scale);
+                g2d.translate(-getWidth() / 2d, -getHeight() / 2d);
+            }
+            if (show < 1f) {
+                g2d.setComposite(AlphaComposite.SrcOver.derive(show));
+            }
+            final java.awt.Composite whole = g2d.getComposite();
+            final float wholeAlpha = whole instanceof AlphaComposite a ? a.getAlpha() : 1f;
+            float light = isEnabled() ? hoverFade.get() : 0f;
+            // the button to press next keeps asking to be pressed, the light on it rising and falling
+            if (primary && arenaLabel != null && isEnabled() && !toggle && light < 1f && !ArenaTheme.snapshotting) {
+                light = Math.max(light, 0.55f * ArenaMotion.pulse(this, 2.2f));
+            }
+            if (light < 1f) {
+                ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, false, pressed, isFocusOwner(), toggle, isEnabled());
+            }
+            if (light > 0f) {
+                g2d.setComposite(AlphaComposite.SrcOver.derive(wholeAlpha * light));
+                ArenaTheme.paintButton(g2d, getWidth(), getHeight(), primary, true, pressed, isFocusOwner(), toggle, isEnabled());
+                g2d.setComposite(whole);
+            }
             final String text = arenaLabel != null ? arenaLabel : getText();
             if ("\u00BB".equals(text)) {
                 paintArenaChevrons(g2d);

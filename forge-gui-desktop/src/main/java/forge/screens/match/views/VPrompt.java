@@ -199,6 +199,19 @@ public class VPrompt implements IVDoc<CPrompt> {
         messageScroller.getViewport().setOpaque(false);
         final JPanel pill = new JPanel(new MigLayout("insets 9 14 9 14, gap 0, fill")) {
             @Override
+            public void paint(final Graphics g) {
+                final float shown = arenaFade.get();
+                if (shown >= 1f) {
+                    super.paint(g);
+                    return;
+                }
+                final Graphics2D c = (Graphics2D) g.create();
+                c.setComposite(java.awt.AlphaComposite.SrcOver.derive(shown));
+                super.paint(c);
+                c.dispose();
+            }
+
+            @Override
             protected void paintComponent(final Graphics g) {
                 // a soft shadow behind the words, fading out on every side
                 final Graphics2D g2 = (Graphics2D) g;
@@ -294,6 +307,10 @@ public class VPrompt implements IVDoc<CPrompt> {
         container.revalidate();
         container.repaint();
         placeArena();
+        arenaFade.set(0f);
+        arenaFade.to(1f, 220);
+        btnOK.arenaAppear();
+        btnCancel.arenaAppear();
     }
 
     /**
@@ -362,12 +379,26 @@ public class VPrompt implements IVDoc<CPrompt> {
 
     private DragCell followedCell;
     private JPanel arenaPill;
+    /** How far the prompt has come into view since it last changed kind. */
+    private final forge.toolbox.ArenaMotion.Fade arenaFade = new forge.toolbox.ArenaMotion.Fade(this::repaintArenaWords, 1f);
+    private final forge.toolbox.ArenaMotion.Fade arenaStripMix = new forge.toolbox.ArenaMotion.Fade(this::repaintArenaWords, 1f);
+    private int arenaStripLit = -1;
+    private int arenaStripWas = -1;
     private int arenaLaidOutButtonH;
+    private void repaintArenaWords() {
+        if (arenaPill != null) {
+            arenaPill.repaint();
+        }
+        arenaCaption.repaint();
+        arenaStrip.repaint();
+    }
+
     private final JLabel arenaCaption = new JLabel() {
         @Override
         protected void paintComponent(final Graphics g) {
             // white words with a dark edge, readable over whatever the corner of the board is doing
             final Graphics2D g2 = (Graphics2D) g.create();
+            g2.setComposite(java.awt.AlphaComposite.SrcOver.derive(arenaFade.get()));
             g2.setRenderingHint(java.awt.RenderingHints.KEY_TEXT_ANTIALIASING, java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g2.setFont(getFont());
             final java.awt.FontMetrics fm = g2.getFontMetrics();
@@ -401,13 +432,32 @@ public class VPrompt implements IVDoc<CPrompt> {
                         default -> 2;
                     };
                 }
+                if (lit != arenaStripLit) {
+                    // the light moves along from the part of the turn just left
+                    arenaStripWas = arenaStripLit;
+                    arenaStripLit = lit;
+                    arenaStripMix.set(0f);
+                    arenaStripMix.to(1f, 300);
+                }
+                final float mix = arenaStripMix.get();
+                g.setComposite(java.awt.AlphaComposite.SrcOver.derive(arenaFade.get()));
+                final java.awt.Composite whole = g.getComposite();
+                final float wholeAlpha = arenaFade.get();
                 final int[] kinds = {0, 1, 2, 1, 0};
                 final int size = getHeight();
                 final int gap = size / 4;
                 final int total = kinds.length * size + (kinds.length - 1) * gap;
                 int x = (getWidth() - total) / 2;
                 for (int i = 0; i < kinds.length; i++) {
-                    forge.toolbox.ArenaArt.paintPhaseGlyph(g, x, 0, size, kinds[i], i == lit, true, false);
+                    final float light = i == arenaStripLit ? mix : i == arenaStripWas ? 1f - mix : 0f;
+                    if (light < 1f) {
+                        forge.toolbox.ArenaArt.paintPhaseGlyph(g, x, 0, size, kinds[i], false, true, false);
+                    }
+                    if (light > 0f) {
+                        g.setComposite(java.awt.AlphaComposite.SrcOver.derive(wholeAlpha * light));
+                        forge.toolbox.ArenaArt.paintPhaseGlyph(g, x, 0, size, kinds[i], true, true, false);
+                        g.setComposite(whole);
+                    }
                     x += size + gap;
                 }
             } finally {
