@@ -64,6 +64,7 @@ C'tan:C'tan
 Caitian:Caitians
 Camel:Camels
 Capybara:Capybaras
+Cardassian:Cardassians
 Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
@@ -113,6 +114,7 @@ Elf:Elves
 Elk:Elks
 Employee:Employees
 Eternal:Eternals
+Excalbian:Excalbians
 Eye:Eyes
 Faerie:Faeries
 Ferengi:Ferengi
@@ -161,6 +163,7 @@ Human:Humans
 Hydra:Hydras
 Hyena:Hyenas
 Illusion:Illusions
+Illyrian:Illyrians
 Imp:Imps
 Incarnation:Incarnations
 Inhuman:Inhumans
@@ -181,6 +184,7 @@ Kobold:Kobolds
 Kor:Kors
 Kraken:Krakens
 Kree:Kree
+Kwejian:Kwejians
 Lamia:Lamias
 Lammasu:Lammasus
 Lanthanite:Lanthanites
@@ -194,6 +198,7 @@ Llama:Llamas
 Lobster:Lobsters
 Manticore:Manticores
 Masticore:Masticores
+Medusan:Medusans
 Mercenary:Mercenaries
 Merfolk:Merfolk
 Metathran:Metathrans
