@@ -221,6 +221,33 @@ public class FlatMonteCarloComboCatalogTest extends AITest {
         AssertJUnit.assertEquals("failed test payment must not change the real life total", 20, ai.getLife());
     }
 
+    /** Channel's Command-zone mana is dedicated to the payoff listed in a WIN combo, not general-purpose ramp. */
+    @Test
+    public void channelManaOnlyPaysForCataloguedWinComboPayoffs() {
+        setUp();
+        ai.setLife(20, null);
+        final Card channelEffect = addCardToZone("Channel", ai, ZoneType.Command);
+        final SpellAbility channelMana = AbilityFactory.getAbility(channelEffect, "ABMana");
+        channelEffect.addSpellAbility(channelMana);
+        channelMana.setActivatingPlayer(ai);
+
+        final Card banefire = addCardToZone("Banefire", ai, ZoneType.Hand);
+        final Card fireball = addCardToZone("Fireball", ai, ZoneType.Hand);
+        final Card ulamog = addCardToZone("Ulamog, the Ceaseless Hunger", ai, ZoneType.Hand);
+        AssertJUnit.assertTrue("Banefire is a registered Channel payoff",
+                ComboCatalog.canUseCommandManaSourceFor(ai, channelEffect, banefire.getFirstSpellAbility()));
+        AssertJUnit.assertTrue("Fireball is a registered Channel payoff",
+                ComboCatalog.canUseCommandManaSourceFor(ai, channelEffect, fireball.getFirstSpellAbility()));
+        AssertJUnit.assertTrue("Ulamog is a registered Channel payoff",
+                ComboCatalog.canUseCommandManaSourceFor(ai, channelEffect, ulamog.getFirstSpellAbility()));
+
+        final Card expeditionMap = addCardToZone("Expedition Map", ai, ZoneType.Hand);
+        final SpellAbility mapSpell = expeditionMap.getFirstSpellAbility();
+        mapSpell.setActivatingPlayer(ai);
+        AssertJUnit.assertFalse("Channel must not spend life to cast an unrelated card, even with a payoff in hand",
+                forge.ai.ComputerUtilMana.canPayManaCost(mapSpell, ai, 0, false));
+    }
+
     /**
      * Every combo of ai-combos.txt, a new line included: with all its cards on an opponent's battlefield the AI sees the
      * combo, counts it as a threat and aims removal at its cards; with its permanents on the AI's own battlefield the

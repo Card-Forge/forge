@@ -1219,6 +1219,14 @@ public class ComputerUtilMana {
     private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, ManaCostBeingPaid cost, boolean checkCosts, Map<String, Integer> xManaCostPaidByColor) {
         final Card sourceCard = ma.getHostCard();
 
+        // A Command-zone mana effect that is a piece of a known win combo is reserved for that combo's payoff.
+        // Other Command-zone mana abilities (including unrelated commanders) keep their normal payment behavior.
+        if (ai.isAI() && sourceCard.isInZone(ZoneType.Command)
+                && forge.ai.simulation.ComboCatalog.isWinComboPiece(sourceCard)
+                && !forge.ai.simulation.ComboCatalog.canUseCommandManaSourceFor(ai, sourceCard, sa)) {
+            return false;
+        }
+
         if (isManaSourceReserved(ai, sourceCard)) {
             return false;
         }

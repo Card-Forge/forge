@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 
@@ -230,6 +231,89 @@ public final class ComboCatalog {
             for (final Set<String> slot : e.slots) {
                 if (slot.contains(n)) {
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Whether this card is a piece of a catalogued winning combo. */
+    public static boolean isWinComboPiece(final Card c) {
+        if (c == null) {
+            return false;
+        }
+        for (final Entry e : load()) {
+            if (e.type == Type.WIN && e.fillsSomeSlot(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether a temporary mana source in the Command zone may pay for this spell. The source and the spell must fill
+     * different slots of the same WIN entry, and every other slot must already be represented by a card the AI owns
+     * in its hand, on the battlefield, or in the Command zone. This keeps Channel's life-to-mana ability for its
+     * catalogued payoff instead of spending life to cast unrelated cards.
+     */
+    public static boolean canUseCommandManaSourceFor(final Player ai, final Card source, final SpellAbility spell) {
+        if (ai == null || source == null || spell == null || spell.getHostCard() == null) {
+            return false;
+        }
+        final Card payoff = spell.getHostCard();
+        if (source == payoff) {
+            return false;
+        }
+
+        final String sourceName = AiCardLists.normalize(source.getName());
+        final String payoffName = AiCardLists.normalize(payoff.getName());
+        final List<Card> available = own(ai, false);
+        available.addAll(ai.getCardsIn(ZoneType.Command));
+        if (!available.contains(source)) {
+            available.add(source);
+        }
+        if (!available.contains(payoff)) {
+            available.add(payoff);
+        }
+
+        for (final Entry e : load()) {
+            if (e.type != Type.WIN) {
+                continue;
+            }
+            for (int sourceSlot = 0; sourceSlot < e.slots.size(); sourceSlot++) {
+                if (!e.slots.get(sourceSlot).contains(sourceName)) {
+                    continue;
+                }
+                for (int payoffSlot = 0; payoffSlot < e.slots.size(); payoffSlot++) {
+                    if (payoffSlot == sourceSlot || !e.slots.get(payoffSlot).contains(payoffName)) {
+                        continue;
+                    }
+
+                    final List<Card> used = new ArrayList<>();
+                    used.add(source);
+                    used.add(payoff);
+                    boolean complete = true;
+                    for (int slot = 0; slot < e.slots.size(); slot++) {
+                        if (slot == sourceSlot || slot == payoffSlot) {
+                            continue;
+                        }
+                        Card filler = null;
+                        for (final Card candidate : available) {
+                            if (!used.contains(candidate)
+                                    && e.slots.get(slot).contains(AiCardLists.normalize(candidate.getName()))) {
+                                filler = candidate;
+                                break;
+                            }
+                        }
+                        if (filler == null) {
+                            complete = false;
+                            break;
+                        }
+                        used.add(filler);
+                    }
+                    if (complete) {
+                        return true;
+                    }
                 }
             }
         }
