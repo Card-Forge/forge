@@ -67,6 +67,18 @@ public final class ComboGuard {
         if (ai == null || sa == null) {
             return null;
         }
+        // A Pact first and on its own: another guard failing (a card with an odd mana ability, an unreadable script) must
+        // not let a Pact through that cannot be paid, which loses the game at the next upkeep. If it cannot be told,
+        // the Pact waits.
+        try {
+            if (pactUnpayable(ai, sa, plan)) {
+                return "pact-unpayable";
+            }
+        } catch (final RuntimeException e) {
+            if (isPact(sa)) {
+                return "pact-unpayable";
+            }
+        }
         try {
             return problemImpl(ai, sa, aim, plan);
         } catch (final RuntimeException e) {
@@ -202,6 +214,17 @@ public final class ComboGuard {
         return sa != null && host != null && host.isLand() && "manland-wasted".equals(TimedAbilityGuard.problem(ai, sa));
     }
 
+    /** Whether the spell is a Pact, also when its script cannot be read any further. */
+    static boolean isPact(final SpellAbility sa) {
+        try {
+            return pactCost(sa) != null;
+        } catch (final RuntimeException e) {
+            final Card host = sa == null ? null : sa.getHostCard();
+            return host != null && host.getName() != null && host.getName().endsWith(" Pact") || host != null
+                    && host.getName() != null && host.getName().startsWith("Pact of ");
+        }
+    }
+
     private static final Pattern PACT_COST = Pattern.compile("UnlessCost\\$\\s*([^|]+)");
 
     /**
@@ -268,9 +291,13 @@ public final class ComboGuard {
                         || ma.getPayCosts().hasSpecificCostType(CostDiscard.class))) {
                     continue; // used up by making the mana
                 }
-                best = Math.max(best, Math.max(1, ma.amountOfManaGenerated(false)));
-                for (int i = 0; i < 5; i++) {
-                    makes[i] |= ma.canProduce(String.valueOf("WUBRG".charAt(i)));
+                try {
+                    best = Math.max(best, Math.max(1, ma.amountOfManaGenerated(false)));
+                    for (int i = 0; i < 5; i++) {
+                        makes[i] |= ma.canProduce(String.valueOf("WUBRG".charAt(i)));
+                    }
+                } catch (final RuntimeException e) {
+                    best = Math.max(best, 1); // an odd mana ability (Chrome Mox, Gemstone Mine): one mana, of no color we can name
                 }
             }
             total += best;
