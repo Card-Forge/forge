@@ -172,14 +172,108 @@ public final class ArenaTheme {
         if (spread <= 0) {
             return;
         }
-        final Object aa = g.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        for (int i = spread; i >= 1; i--) {
-            final float t = 1f - (i - 1f) / spread;
-            g.setColor(alpha(c, Math.round(maxAlpha * t * t / 2.2f)));
-            g.fill(new RoundRectangle2D.Float(x - i, y - i, w + 2f * i, h + 2f * i, arc + 2f * i, arc + 2f * i));
+        paintSprite(g, x - spread, y - spread, w + 2 * spread, h + 2 * spread, glowKey(w, h, arc, c, spread, maxAlpha), glowPainter(w, h, arc, c, spread, maxAlpha));
+    }
+
+    /**
+     * The same glow round something opaque that is about to be drawn over it: {@code hollow} is how far in from
+     * the edge of {@code x, y, w, h} that thing is sure to cover, and nothing is copied inside that.
+     */
+    public static void paintGlowAround(final Graphics2D g, final int x, final int y, final int w, final int h,
+            final int arc, final Color c, final int spread, final int maxAlpha, final int hollow) {
+        if (spread <= 0) {
+            return;
         }
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, aa);
+        final int margin = spread + hollow, outerW = w + 2 * spread, outerH = h + 2 * spread;
+        final double scale = uprightScale(g);
+        final BufferedImage sprite = scale <= 0d || outerW <= 2 * margin || outerH <= 2 * margin ? null
+                : sprite(scale, outerW, outerH, glowKey(w, h, arc, c, spread, maxAlpha), glowPainter(w, h, arc, c, spread, maxAlpha));
+        if (sprite == null) {
+            paintGlow(g, x, y, w, h, arc, c, spread, maxAlpha);
+            return;
+        }
+        final int left = x - spread, top = y - spread, sw = sprite.getWidth(), sh = sprite.getHeight(), sm = (int) Math.round(margin * scale);
+        g.drawImage(sprite, left, top, left + outerW, top + margin, 0, 0, sw, sm, null);
+        g.drawImage(sprite, left, top + outerH - margin, left + outerW, top + outerH, 0, sh - sm, sw, sh, null);
+        g.drawImage(sprite, left, top + margin, left + margin, top + outerH - margin, 0, sm, sm, sh - sm, null);
+        g.drawImage(sprite, left + outerW - margin, top + margin, left + outerW, top + outerH - margin, sw - sm, sm, sw, sh - sm, null);
+    }
+
+    private static String glowKey(final int w, final int h, final int arc, final Color c, final int spread, final int maxAlpha) {
+        return "glow|" + w + "|" + h + "|" + arc + "|" + c.getRGB() + "|" + spread + "|" + maxAlpha;
+    }
+
+    private static java.util.function.Consumer<Graphics2D> glowPainter(final int w, final int h, final int arc, final Color c, final int spread, final int maxAlpha) {
+        return s -> {
+            s.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            for (int i = spread; i >= 1; i--) {
+                final float t = 1f - (i - 1f) / spread;
+                s.setColor(alpha(c, Math.round(maxAlpha * t * t / 2.2f)));
+                s.fill(new RoundRectangle2D.Float(spread - i, spread - i, w + 2f * i, h + 2f * i, arc + 2f * i, arc + 2f * i));
+            }
+        };
+    }
+
+    /** Soft shapes already drawn, by what they are and the scale they were drawn at; the longest unused go first. */
+    private static final java.util.LinkedHashMap<String, BufferedImage> SPRITES = new java.util.LinkedHashMap<>(64, 0.75f, true);
+    private static final long SPRITE_BUDGET = 12_000_000L; // pixels in all, about 48MB
+    private static final long SPRITE_LARGEST = 4_000_000L; // anything larger is drawn directly each time
+    private static long spritePixels;
+
+    /**
+     * Something slow to draw and always the same, such as a glow of many soft layers: it is drawn once into a
+     * picture and that picture is copied from then on. {@code key} has to name everything the painter's result
+     * depends on; the painter draws from (0, 0) within {@code w} by {@code h}, which land at {@code x, y}.
+     */
+    public static void paintSprite(final Graphics2D g, final int x, final int y, final int w, final int h, final String key,
+            final java.util.function.Consumer<Graphics2D> painter) {
+        final double scale = uprightScale(g);
+        final BufferedImage sprite = scale <= 0d ? null : sprite(scale, w, h, key, painter);
+        if (sprite == null) {
+            // being turned, or too big to be worth keeping
+            final Graphics2D direct = (Graphics2D) g.create();
+            direct.translate(x, y);
+            painter.accept(direct);
+            direct.dispose();
+            return;
+        }
+        g.drawImage(sprite, x, y, x + w, y + h, 0, 0, sprite.getWidth(), sprite.getHeight(), null);
+    }
+
+    /** The scale a picture has to be drawn at to land pixel for pixel, or 0 if this is being turned or skewed. */
+    private static double uprightScale(final Graphics2D g) {
+        final java.awt.geom.AffineTransform t = g.getTransform();
+        final boolean upright = (t.getType() & (java.awt.geom.AffineTransform.TYPE_MASK_ROTATION | java.awt.geom.AffineTransform.TYPE_FLIP
+                | java.awt.geom.AffineTransform.TYPE_GENERAL_TRANSFORM)) == 0 && t.getScaleX() == t.getScaleY();
+        return upright ? t.getScaleX() : 0d;
+    }
+
+    /** The kept picture of this at this scale, drawn now if need be; null if it is too big to keep. */
+    private static BufferedImage sprite(final double scale, final int w, final int h, final String key, final java.util.function.Consumer<Graphics2D> painter) {
+        final int pw = (int) Math.ceil(w * scale), ph = (int) Math.ceil(h * scale);
+        if (pw <= 0 || ph <= 0 || (long) pw * ph > SPRITE_LARGEST) {
+            return null;
+        }
+        final String scaled = key + "@" + Math.round(scale * 100);
+        synchronized (SPRITES) {
+            BufferedImage sprite = SPRITES.get(scaled);
+            if (sprite == null) {
+                sprite = new BufferedImage(pw, ph, BufferedImage.TYPE_INT_ARGB_PRE);
+                final Graphics2D s = sprite.createGraphics();
+                s.scale(scale, scale);
+                painter.accept(s);
+                s.dispose();
+                SPRITES.put(scaled, sprite);
+                spritePixels += (long) pw * ph;
+                final java.util.Iterator<BufferedImage> oldest = SPRITES.values().iterator();
+                while (spritePixels > SPRITE_BUDGET && SPRITES.size() > 1) {
+                    final BufferedImage gone = oldest.next();
+                    spritePixels -= (long) gone.getWidth() * gone.getHeight();
+                    oldest.remove();
+                }
+            }
+            return sprite;
+        }
     }
 
     /** Translucent dark panel with a thin gold rim, used behind the side-rail views. */

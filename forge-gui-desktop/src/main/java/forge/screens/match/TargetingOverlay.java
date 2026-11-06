@@ -96,6 +96,8 @@ public class TargetingOverlay {
 
     //private long lastUpdated = System.currentTimeMillis(); // TODO: determine if timer is needed (see below)
     private int allowedUpdates = 0;
+    private List<List<Arc>> paintedArcs = List.of(); // Arena: what the window last showed, see arcsChanged
+    private final List<Arc> arenaLinks = new ArrayList<>(); // Arena: the chevrons between attackers and blockers
     private final int MAX_CONSECUTIVE_UPDATES = 1;
 
     private enum ArcConnection {
@@ -504,6 +506,19 @@ public class TargetingOverlay {
         return cards != null && cards.iterator().hasNext();
     }
 
+    /**
+     * Arena: whether the arcs differ from what the window last showed. The whole window needs repainting only
+     * when they do, to clear the old ones away; a full repaint of the Arena board is too dear to do otherwise.
+     */
+    private boolean arcsChanged() {
+        final List<List<Arc>> now = List.of(new ArrayList<>(arcsFoeAtk), new ArrayList<>(arcsFoeDef), new ArrayList<>(arcsFriend), new ArrayList<>(arenaLinks));
+        if (now.equals(paintedArcs)) {
+            return false;
+        }
+        paintedArcs = now;
+        return true;
+    }
+
     /** Arena: what is on top of the stack reaches out from the large card to its targets. */
     private void addArenaStackArcs() {
         if (!ArenaTheme.isMatchBoard() || !this.getPanel().isShowing()) {
@@ -542,6 +557,26 @@ public class TargetingOverlay {
 
     private class OverlayPanel extends SkinnedPanel {
         private final boolean useThrottling = FModel.getPreferences().getPrefBoolean(FPref.UI_TIMED_TARGETING_OVERLAY_UPDATES);
+
+        // Arena: one full repaint once things settle, so that anything which changed without asking to be
+        // repainted still comes right, without every small repaint costing a whole window as it otherwise did
+        private final javax.swing.Timer settled = new javax.swing.Timer(150, e -> FView.SINGLETON_INSTANCE.getFrame().repaint());
+        private long settlingSince;
+
+        private void repaintOnceSettled(final Graphics g) {
+            final java.awt.Rectangle clip = g.getClipBounds();
+            if (clip != null && clip.width >= getWidth() && clip.height >= getHeight()) {
+                return; // this is the whole window being painted, so there is nothing left to settle
+            }
+            settled.setRepeats(false);
+            final long now = System.currentTimeMillis();
+            if (!settled.isRunning()) {
+                settlingSince = now;
+                settled.start();
+            } else if (now - settlingSince < 1000) {
+                settled.restart(); // still busy; but not put off for ever, while say an AI's timer ticks away
+            }
+        }
 
         // Arrow drawing code by the XMage team, used with permission.
         private Area getArrow(float length, float bendPercent) {
@@ -678,6 +713,7 @@ public class TargetingOverlay {
                 for (final CardView blocker : blockers) {
                     final Point to = endpoints.get(blocker.getId());
                     if (to != null) {
+                        arenaLinks.add(new Arc(to, from));
                         drawArenaChevrons(g2d, from, to);
                     }
                 }
@@ -752,6 +788,9 @@ public class TargetingOverlay {
             }
 
             super.paintComponent(g);
+            if (ArenaTheme.isEnabled()) {
+                repaintOnceSettled(g);
+            }
 
             final ArcState overlaystate = matchUI.getCDock().getArcState();
 
@@ -771,14 +810,17 @@ public class TargetingOverlay {
             }
 
             addArenaStackArcs();
-            if (ArenaTheme.isEnabled() && gameView != null) {
+            final boolean arena = ArenaTheme.isEnabled();
+            arenaLinks.clear();
+            if (arena && gameView != null) {
                 final Graphics2D links = (Graphics2D) g.create();
                 links.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 drawArenaCombatLinks(links, gameView.getCombat());
                 links.dispose();
             }
+            final boolean changed = arena && arcsChanged();
             if (arcsFoeAtk.isEmpty() && arcsFoeDef.isEmpty() && arcsFriend.isEmpty()) {
-                if (assembled) {
+                if (arena ? changed : assembled) {
                     // We still need to repaint to get rid of visual artifacts
                     // The original (non-throttled) code did not do this repaint.
                     FView.SINGLETON_INSTANCE.getFrame().repaint();
@@ -813,7 +855,7 @@ public class TargetingOverlay {
             drawArcs(g2d, colorCombatAtk, arcsFoeAtk);
             drawArcs(g2d, colorCombat, arcsFoeDef);
 
-            if (assembled || !useThrottling) {
+            if (arena ? changed : assembled || !useThrottling) {
                 FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
             }
         }
@@ -843,11 +885,28 @@ public class TargetingOverlay {
         }
         @Override
         public void mouseOver(CardPanel panel, MouseEvent evt) {
-            assembleAndRepaint();
+            assembleOnHover();
         }
         @Override
         public void mouseOut(CardPanel panel, MouseEvent evt) {
-            assembleAndRepaint();
+            assembleOnHover();
+        }
+
+        /** Arena: the mouse going over a card is no reason to repaint the window, unless that changes the arcs. */
+        private void assembleOnHover() {
+            if (!ArenaTheme.isEnabled()) {
+                assembleAndRepaint();
+                return;
+            }
+            final GameView gameView = matchUI.getGameView();
+            if (isDragged || gameView == null) {
+                return;
+            }
+            assembleArcs(gameView.getCombat(), true);
+            addArenaStackArcs();
+            if (arcsChanged()) {
+                FView.SINGLETON_INSTANCE.getFrame().repaint();
+            }
         }
 
         // Do not aggressively assemble/repaint when dragging around card panels

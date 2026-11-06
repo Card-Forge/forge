@@ -322,34 +322,83 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         repaint();
     }
 
+    /** Every turned card is painted in this one picture in its turn, rather than a frame allocating one per card. */
+    private static BufferedImage arenaScratch;
+    private static boolean arenaScratchInUse;
+
     /**
-     * A leaning or tilted Arena card: painted flat at twice the size into a picture with a clear
-     * margin, then that picture is turned and scaled down with filtering, so edges and frame lines stay clean.
+     * A leaning or tilted Arena card: painted flat at twice the size, then turned and scaled down with
+     * filtering, so edges and frame lines stay clean. Only the part that can land in the area being repainted
+     * is painted at all, since most of a hand card is below the window or under its neighbour.
      */
     private void paintArenaTurned(final Graphics2D g) {
         final double base = Math.max(1d, Math.abs(g.getTransform().getScaleX()));
-        final int factor = base >= 1.5d ? 1 : 2;
-        final double scale = base * factor;
-        final BufferedImage flat = new BufferedImage((int) Math.ceil(getWidth() * scale), (int) Math.ceil(getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D fg = flat.createGraphics();
-        fg.scale(scale, scale);
-        fg.setClip(0, 0, getWidth(), getHeight());
-        super.paint(fg);
-        fg.dispose();
-        final Graphics2D turned = (Graphics2D) g.create();
+        final double scale = base * (base >= 1.5d ? 1 : 2);
+        final java.awt.geom.AffineTransform turn = new java.awt.geom.AffineTransform();
+        if (getTappedAngle() > 0) {
+            turn.rotate(getTappedAngle(), cardXOffset + cardWidth / 2f, cardYOffset + cardHeight / 2f);
+        }
+        if (arenaFanAngle != 0) {
+            turn.rotate(arenaFanAngle, cardXOffset + cardWidth / 2f, cardYOffset + cardHeight);
+        }
+        // the panel's margins leave room for the turn; the picture itself only reaches as far as the glow and badges
+        final boolean tile = isArenaTile();
+        final int reach = Math.round(cardWidth * (tile ? 0.13f : 0.2f));
+        final Rectangle whole = new Rectangle(0, 0, getWidth(), getHeight()).intersection(new Rectangle(cardXOffset - reach, cardYOffset - reach,
+                cardWidth + 2 * reach, cardHeight + 2 * reach + cardHeight / 12));
+        Rectangle needed = whole;
+        final Rectangle clip = g.getClipBounds();
+        if (clip != null) {
+            try {
+                final Rectangle back = turn.createInverse().createTransformedShape(clip).getBounds();
+                back.grow(3, 3); // the filter reaches a little beyond what it lands on
+                needed = whole.intersection(back);
+            } catch (final java.awt.geom.NoninvertibleTransformException e) {
+                needed = whole; // not for a rotation
+            }
+        }
+        if (needed.isEmpty()) {
+            return;
+        }
+        final int pw = (int) Math.ceil(needed.width * scale), ph = (int) Math.ceil(needed.height * scale);
+        final boolean shared = !arenaScratchInUse;
+        final BufferedImage flat;
+        if (shared) {
+            if (arenaScratch == null || arenaScratch.getWidth() < pw || arenaScratch.getHeight() < ph) {
+                arenaScratch = new BufferedImage(arenaScratch == null ? pw : Math.max(pw, arenaScratch.getWidth()),
+                        arenaScratch == null ? ph : Math.max(ph, arenaScratch.getHeight()), BufferedImage.TYPE_INT_ARGB_PRE);
+            }
+            flat = arenaScratch;
+            arenaScratchInUse = true;
+        } else {
+            flat = new BufferedImage(pw, ph, BufferedImage.TYPE_INT_ARGB_PRE);
+        }
         try {
-            turned.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-            turned.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            turned.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            if (getTappedAngle() > 0) {
-                turned.rotate(getTappedAngle(), cardXOffset + cardWidth / 2f, cardYOffset + cardHeight / 2f);
+            final Graphics2D fg = flat.createGraphics();
+            fg.setComposite(java.awt.AlphaComposite.Clear);
+            fg.fillRect(0, 0, pw, ph);
+            fg.setComposite(java.awt.AlphaComposite.SrcOver);
+            fg.scale(scale, scale);
+            fg.translate(-needed.x, -needed.y);
+            fg.setClip(needed);
+            super.paint(fg);
+            fg.dispose();
+            final Graphics2D turned = (Graphics2D) g.create();
+            try {
+                turned.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                turned.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                turned.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                turned.transform(turn);
+                turned.translate(needed.x, needed.y);
+                turned.scale(1d / scale, 1d / scale);
+                turned.drawImage(flat.getSubimage(0, 0, pw, ph), 0, 0, null);
+            } finally {
+                turned.dispose();
             }
-            if (arenaFanAngle != 0) {
-                turned.rotate(arenaFanAngle, cardXOffset + cardWidth / 2f, cardYOffset + cardHeight);
-            }
-            turned.drawImage(flat, 0, 0, getWidth(), getHeight(), null);
         } finally {
-            turned.dispose();
+            if (shared) {
+                arenaScratchInUse = false;
+            }
         }
     }
 
@@ -506,9 +555,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final int drop = isArenaTile() ? Math.max(4, cardHeight / 24) : Math.max(2, cardWidth / 30);
             final int blur = isArenaTile() ? spread : Math.max(2, spread / 2 + 1);
             if (arched) {
-                paintShapeGlow(g2d, arenaTokenShape(x, y + drop, cardWidth, tall, arc), Color.BLACK, blur, 190);
+                paintTokenGlow(g2d, x, y + drop, cardWidth, tall, arc, Color.BLACK, blur, 190);
             } else {
-                ArenaTheme.paintGlow(g2d, x, y + drop, cardWidth, tall, arc, Color.BLACK, blur, 190);
+                ArenaTheme.paintGlowAround(g2d, x, y + drop, cardWidth, tall, arc, Color.BLACK, blur, 190, arc + drop);
             }
         }
 
@@ -552,9 +601,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (glow != null) {
             final int reach = (isArenaTile() ? spread : Math.max(5, Math.round(cardWidth * 0.05f))) + (isSelected ? 2 : 0) + (fighting ? 4 : 0);
             if (arched) {
-                paintShapeGlow(g2d, arenaTokenShape(x, y, cardWidth, tall, arc), glow, reach, strength);
+                paintTokenGlow(g2d, x, y, cardWidth, tall, arc, glow, reach, strength);
             } else {
-                ArenaTheme.paintGlow(g2d, x, y, cardWidth, tall, arc, glow, reach, strength);
+                ArenaTheme.paintGlowAround(g2d, x, y, cardWidth, tall, arc, glow, reach, strength, arc);
             }
         }
 
@@ -618,27 +667,20 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return false;
     }
 
-    private static java.awt.TexturePaint arenaGrainPaint;
-
-    /** A very faint speckle, so frames read as a material and not a flat fill. */
-    private static java.awt.TexturePaint arenaGrain() {
-        if (arenaGrainPaint == null) {
-            final BufferedImage noise = new BufferedImage(96, 96, BufferedImage.TYPE_INT_ARGB);
-            final java.util.Random random = new java.util.Random(7);
-            for (int py = 0; py < 96; py++) {
-                for (int px = 0; px < 96; px++) {
-                    final int shade = random.nextBoolean() ? 255 : 0;
-                    noise.setRGB(px, py, (random.nextInt(13) << 24) | (shade << 16) | (shade << 8) | shade);
-                }
-            }
-            arenaGrainPaint = new java.awt.TexturePaint(noise, new Rectangle(0, 0, 96, 96));
-        }
-        return arenaGrainPaint;
-    }
-
     private static Color arenaMix(final Color a, final Color b, final float t) {
         return new Color(Math.round(a.getRed() + (b.getRed() - a.getRed()) * t), Math.round(a.getGreen() + (b.getGreen() - a.getGreen()) * t),
                 Math.round(a.getBlue() + (b.getBlue() - a.getBlue()) * t));
+    }
+
+    /** A token's arched glow, drawn once for each size and colour and kept. */
+    private static void paintTokenGlow(final Graphics2D g, final int x, final int y, final int w, final int h, final int arc,
+            final Color colour, final int spread, final int strength) {
+        final int pad = spread + 1;
+        ArenaTheme.paintSprite(g, x - pad, y - pad, w + 2 * pad, h + 2 * pad,
+                "token|" + w + "|" + h + "|" + arc + "|" + colour.getRGB() + "|" + spread + "|" + strength, s -> {
+                    s.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    paintShapeGlow(s, arenaTokenShape(pad, pad, w, h, arc), colour, spread, strength);
+                });
     }
 
     /** A glow that follows any outline: nested strokes, faint and wide to strong and narrow. */

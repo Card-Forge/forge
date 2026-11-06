@@ -197,9 +197,9 @@ public final class ArenaCardPreview extends JComponent {
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             if (img != null) {
                 final int w = imageW, h = imageH, arc = Math.round(w * 0.07f);
-                ArenaTheme.paintGlow(g, imageX, GAP + 6, w, h, arc, Color.BLACK, GAP - 1, 240);
+                ArenaTheme.paintGlowAround(g, imageX, GAP + 6, w, h, arc, Color.BLACK, GAP - 1, 240, arc + 6);
                 if (playable) {
-                    ArenaTheme.paintGlow(g, imageX, GAP, w, h, arc, ArenaTheme.PLAYABLE, GAP - 2, 230);
+                    ArenaTheme.paintGlowAround(g, imageX, GAP, w, h, arc, ArenaTheme.PLAYABLE, GAP - 2, 230, arc);
                 }
                 final RoundRectangle2D shape = new RoundRectangle2D.Float(imageX, GAP, w, h, arc, arc);
                 final Shape oldClip = g.getClip();
